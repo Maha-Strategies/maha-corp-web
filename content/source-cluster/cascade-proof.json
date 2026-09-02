@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "maha-source-cascade-proof/1.0",
+  "provedAt": "2026-09-02",
+  "target": "10.1038/s41580-020-00313-x",
+  "targetRoute": "/knowledge/sources/10-1038-s41580-020-00313-x",
+  "method": "Every assertion re-runs evaluateSourcePage over the whole inventory under a hypothetical release set. Nothing is estimated and the gate is not modified.",
+  "boundRecords": 5,
+  "alreadyReleased": 1,
+  "jointlyRequiredRemainderRecords": [
+    "urn:maha:record:longevity-metabolism-nampt-rate-limiting-step",
+    "urn:maha:record:longevity-metabolism-nmnat-compartmentalization",
+    "urn:maha:record:longevity-metabolism-nmn-and-nr-precursors",
+    "urn:maha:record:longevity-metabolism-nad-consumption-by-parps"
+  ],
+  "proofs": {
+    "zeroThroughThreeLeavesUnavailable": {
+      "result": true,
+      "method": "Checked the empty set, and exhaustively every 3-subset formed by dropping each of the four in turn. The route is absent in all of them.",
+      "observed": "0:false 1:false 2:false 3:false, and 4 of 4 three-subsets false"
+    },
+    "allFourMakesItEligible": { "result": true },
+    "pageCarriesOnlyActiveReleasedClaims": {
+      "result": true,
+      "detail": "All 5 bound claims hold active releases in that state: 1 already released plus the 4 remainder records. The gate refuses the page outright while any bound claim is unreleased, so a partial page cannot exist."
+    },
+    "withdrawingAnyOneMakesItUnavailable": {
+      "result": true,
+      "method": "Withdrew each of the four in turn; the route disappeared in all four cases."
+    },
+    "contributesOneRouteNotFour": { "result": true, "delta": 1, "note": "Four record releases, one source route. The source page is an aggregate, not a per-record page." },
+    "notCountedInCanaryResult": { "result": true, "canaryDelta": 0, "note": "None of the four is in the five-record canary, so the canary moves the source-page count from 8 to 8." }
+  },
+  "baselineSourcePages": 8,
+  "afterFullSet": 9,
+  "boundary": "A private proof over a prepared release set. No release has occurred and no page described here is live."
+}
