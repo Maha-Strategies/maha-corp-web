@@ -114,11 +114,16 @@ export function parseMarkdownBlocks(markdown: string, options?: { skipFirstH1?: 
 
   for (const raw of markdown.split(/\r?\n/)) {
     const line = raw.replace(/\s+$/, '')
+    const isPrintPageBreak = /^\\newpage$/.test(line.trim())
     const heading = /^(#{1,6})\s+(.+)$/.exec(line)
     const listItem = /^\s*[-*]\s+(.+)$/.exec(line)
     const isRule = /^(-{3,}|\*{3,}|_{3,})$/.test(line.trim())
 
-    if (heading) {
+    if (isPrintPageBreak) {
+      // LaTeX page breaks belong to print/PDF layout and should not become
+      // visible paragraphs in the web edition.
+      flush()
+    } else if (heading) {
       flush()
       const level = heading[1].length
       if (options?.skipFirstH1 && level === 1 && !skippedFirstH1) { skippedFirstH1 = true; continue }

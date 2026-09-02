@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 
 import { chunkMarkdown, parseMarkdownBlocks, readBookAst, readBookMarkdown } from '../lib/content.ts'
+import { openBookEditions, readOpenBookManuscript } from '../lib/open-book-editions.ts'
 
 test('chunkMarkdown splits at H1/H2 boundaries and captures bodies', () => {
   const markdown = [
@@ -65,6 +66,33 @@ test('parseMarkdownBlocks can skip the leading H1 (page header shows the title)'
   const blocks = parseMarkdownBlocks('# Duplicate Title\n\nBody.', { skipFirstH1: true })
   assert.equal(blocks.find((b) => b.type === 'heading' && b.text === 'Duplicate Title'), undefined)
   assert.deepEqual(blocks[0], { type: 'paragraph', text: 'Body.' })
+})
+
+test('parseMarkdownBlocks suppresses standalone print page breaks', () => {
+  const blocks = parseMarkdownBlocks([
+    'Before the break.',
+    '',
+    '\\newpage',
+    '',
+    'After the break.',
+    '',
+    'Keep an inline \\newpage reference.',
+  ].join('\n'))
+
+  assert.deepEqual(blocks, [
+    { type: 'paragraph', text: 'Before the break.' },
+    { type: 'paragraph', text: 'After the break.' },
+    { type: 'paragraph', text: 'Keep an inline \\newpage reference.' },
+  ])
+})
+
+test('The Cosmic Recursion renders without visible print page breaks', () => {
+  const md = readOpenBookManuscript(openBookEditions['the-cosmic-recursion'])
+  const blocks = parseMarkdownBlocks(md, { skipFirstH1: true })
+  assert.ok(!blocks.some((block) => (
+    (block.type === 'paragraph' || block.type === 'heading')
+    && block.text === '\\newpage'
+  )))
 })
 
 test('parseMarkdownBlocks on the real book yields many blocks with no raw heading markers', () => {
