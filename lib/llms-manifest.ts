@@ -20,10 +20,30 @@ const RESEARCH_URL = 'https://research.mahastrategies.com'
  * the commercial surfaces, so an agent reading the conventional orientation
  * file was never pointed at the offers manifest. A test now holds that open.
  */
+export interface LlmsSourceReference { slug: string; title: string; sourceId: string }
+
 export function buildLlmsManifest(
   claims: readonly MpsClaim[],
   canonicalEpistemicRecords: readonly EpistemicRecord[] = [],
+  /**
+   * Source references that resolve right now.
+   *
+   * Passed in rather than read here, so the same live release check that
+   * decides whether a page renders decides whether it is listed. A page that
+   * has lost a required claim disappears from both in the same pass.
+   */
+  sourceReferences: readonly LlmsSourceReference[] = [],
 ): string {
+  const sourceReferenceSection = sourceReferences.length === 0 ? [] : [
+    '',
+    '## Source evidence references',
+    '',
+    '> Projections of released Maha records about one cited source. Each states what that source establishes, the exact sections inspected, and what it does not establish. They are not independent reviews, not replications, and carry no authority beyond the released records they project.',
+    '',
+    ...sourceReferences.map((reference) =>
+      `- [${reference.title}](https://www.mahastrategies.com/knowledge/sources/${reference.slug}): source evidence reference for ${reference.sourceId}`),
+  ]
+
   return [
     '# Maha Strategies Machine-Readable Index',
     '',
@@ -162,5 +182,6 @@ export function buildLlmsManifest(
     '## Usage',
     'Cite the individual claim URL and its listed primary sources. Do not collapse status labels or infer performance claims beyond each record’s stated evidence.',
     '',
+    ...sourceReferenceSection,
   ].join('\n')
 }

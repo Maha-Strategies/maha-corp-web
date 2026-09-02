@@ -24,6 +24,7 @@ import { getActiveEpistemicCanonicalReleases } from '@/lib/public-epistemic-rele
 import { EPISTEMIC_PHASE4_PILOT_DATE } from '@/lib/epistemic-pilot-corpus'
 import { PUBLIC_AUTHORITY_CONFORMANCE_DATE } from '@/lib/celestial-public-authority-conformance'
 import { getPublishedSubstantialPage, SUBSTANTIAL_PUBLICATION_DATE } from '@/lib/substantial-page-public'
+import { eligibleSourceSlugs, SOURCE_ROUTE_PREFIX } from '@/lib/source-reference-projection'
 import { EXACTZK_EVIDENCE_PATH, EXACTZK_RELEASE_DATE, KNOWLEDGE_INTEGRATIONS_PATH } from '@/lib/knowledge-integration-evidence'
 
 /*
@@ -38,6 +39,12 @@ export const dynamic = 'force-dynamic'
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = MAHA_SITE_URL
   
+  // Source references are listed only while they still resolve. The same live
+  // release read that renders them decides whether they are listed, so a
+  // withdrawal removes the entry in the same pass that removes the page.
+  const sourceReferencePages: MetadataRoute.Sitemap = (await eligibleSourceSlugs())
+    .map((slug) => ({ url: `${baseUrl}${SOURCE_ROUTE_PREFIX}/${slug}` }))
+
   const staticPages: MetadataRoute.Sitemap = [
     // EXISTING CORE NODES
     { url: `${baseUrl}` },
@@ -476,5 +483,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     !url.startsWith(`${baseUrl}/intelligence/briefs/`) || publicIntelligenceBriefUrls.has(url),
   )
 
-  return [...publicStaticPages, ...knowledgePages, ...astronomyKnowledgePages, ...astrologyTraditionPages, ...knowledgeSupplierPages, ...unfinishedSpeciesReader, ...otherOpenBookReaders, ...canonicalReleasePages, ...published.map((publication) => ({ url: `${baseUrl}/insights/${publication.slug}`, lastModified: new Date(publication.updated_at) }))]
+  return [...publicStaticPages, ...sourceReferencePages, ...knowledgePages, ...astronomyKnowledgePages, ...astrologyTraditionPages, ...knowledgeSupplierPages, ...unfinishedSpeciesReader, ...otherOpenBookReaders, ...canonicalReleasePages, ...published.map((publication) => ({ url: `${baseUrl}/insights/${publication.slug}`, lastModified: new Date(publication.updated_at) }))]
 }

@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "maha-release-canary/1.0",
+  "released": false,
+  "executed": false,
+  "tier": {
+    "reviewerKind": "automated-internal-editorial",
+    "independent": false,
+    "expertEndorsement": false,
+    "externallyReviewed": false,
+    "humanReviewed": false,
+    "releaseAuthority": "separate",
+    "verifies": "deterministic evidence-policy compliance",
+    "doesNotEstablish": [
+      "scientific truth",
+      "independent reproduction",
+      "expert consensus",
+      "external endorsement",
+      "fitness for any decision the reader may make"
+    ],
+    "publicStatement": "This tier verifies deterministic evidence-policy compliance. It does not establish scientific truth, independent reproduction or expert consensus, and no decision in it was made by a person."
+  },
+  "releaseAuthority": "separate, required for activation and not held by the reviewer",
+  "cohortSize": 5,
+  "domains": [
+    "agentic-systems-mcp",
+    "biomolecular-engineering",
+    "longevity-metabolism"
+  ],
+  "directRoutes": 5,
+  "sourcePagesUnlocked": 0,
+  "canary": [
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-session-lifecycle",
+      "domainSlug": "agentic-systems-mcp",
+      "revisionSha256": "sha256:110f2b0ddb37abd4acd9e4463e60c3bbd565d2dac8eefaa57cee2738d52ad80d",
+      "auditSha256": "sha256:7e50cd02c098692f4f74cf7097c2abb6c5335c70f647698e2da4a077c03ca867",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:4cc72c910e3039933366619cd8fc5ab269aa95b7fc671d2fc9806976fb1e2e7d",
+      "releaseClassification": "initial",
+      "directRouteUnlocked": 1,
+      "completesSourceAggregate": false,
+      "additionalSourcePagesUnlocked": 0,
+      "sourceSetRemaining": 1,
+      "sourceSlug": "https-modelcontextprotocol-io-specification-2024-11-05-index",
+      "bridgeEndpoints": 1,
+      "alignmentClear": true,
+      "staleOrSupersedingRisk": "none",
+      "components": {
+        "directRoute": 10,
+        "completesSourceAggregate": 0,
+        "advancesSourceAggregate": 5,
+        "bridgeEndpoints": 2,
+        "domainConnectivity": 5,
+        "alignmentCurrent": 5
+      },
+      "total": 27
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-cellular-senescence-markers",
+      "domainSlug": "longevity-metabolism",
+      "revisionSha256": "sha256:32f84190547d8cff7fab09573847957046e817bea41f479c57eaf48d9d5fcd37",
+      "auditSha256": "sha256:d1cad7aaa4a7aefe1104ae56ed3e12c71dc2e33da70408be62c8dfde74ef5acc",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:989cc66083ccfd5617b2ed01d789029be53dd2c0274043e6081e28a407e8befe",
+      "releaseClassification": "initial",
+      "directRouteUnlocked": 1,
+      "completesSourceAggregate": false,
+      "additionalSourcePagesUnlocked": 0,
+      "sourceSetRemaining": 3,
+      "sourceSlug": "10-1111-acel-12344",
+      "bridgeEndpoints": 2,
+      "alignmentClear": true,
+      "staleOrSupersedingRisk": "none",
+      "components": {
+        "directRoute": 10,
+        "completesSourceAggregate": 0,
+        "advancesSourceAggregate": 3,
+        "bridgeEndpoints": 4,
+        "domainConnectivity": 5,
+        "alignmentCurrent": 5
+      },
+      "total": 27
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-translational-control-circuits",
+      "domainSlug": "biomolecular-engineering",
+      "revisionSha256": "sha256:1f877ffe9cc1fe0a02ae70fee8bcdbb697add8846b90a1c42671c25f6c7a88bb",
+      "auditSha256": "sha256:a58c7bc32e2838b67e3b037836dc93af1e5549e9352e6589151fd815fab2f136",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:ed8c08b312910046aca955fae5f4d313fe8219c6b9513d8accb5306cc530b3b0",
+      "releaseClassification": "initial",
+      "directRouteUnlocked": 1,
+      "completesSourceAggregate": false,
+      "additionalSourcePagesUnlocked": 0,
+      "sourceSetRemaining": 4,
+      "sourceSlug": "10-1016-j-cell-2014-10-004",
+      "bridgeEndpoints": 2,
+      "alignmentClear": true,
+      "staleOrSupersedingRisk": "none",
+      "components": {
+        "directRoute": 10,
+        "completesSourceAggregate": 0,
+        "advancesSourceAggregate": 2,
+        "bridgeEndpoints": 4,
+        "domainConnectivity": 5,
+        "alignmentCurrent": 5
+      },
+      "total": 26
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-oxygen-consumption-rate",
+      "domainSlug": "longevity-metabolism",
+      "revisionSha256": "sha256:9ae12b356c0faf01b473266d67fded5ffe49f2a3f1652e3b17af62de1336974d",
+      "auditSha256": "sha256:2b5adae213732d059940cf0d056d6789ef5024ea27b6058c05a7f77e5dba914e",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:1c85843515ff3e7219a35ab18831adf153e03bc7d0952d9510abe4a5230b8a5b",
+      "releaseClassification": "initial",
+      "directRouteUnlocked": 1,
+      "completesSourceAggregate": false,
+      "additionalSourcePagesUnlocked": 0,
+      "sourceSetRemaining": 4,
+      "sourceSlug": "10-1016-b978-0-12-801415-8-00016-3",
+      "bridgeEndpoints": 2,
+      "alignmentClear": true,
+      "staleOrSupersedingRisk": "none",
+      "components": {
+        "directRoute": 10,
+        "completesSourceAggregate": 0,
+        "advancesSourceAggregate": 2,
+        "bridgeEndpoints": 4,
+        "domainConnectivity": 5,
+        "alignmentCurrent": 5
+      },
+      "total": 26
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-sirtuin-nad-dependence",
+      "domainSlug": "longevity-metabolism",
+      "revisionSha256": "sha256:3774dec2e51ced47caa4a9f83ae6490bf4617f2afe90e96422fec90a3f7ec080",
+      "auditSha256": "sha256:13d0e3dd7bf5946301ac54a2fbc703b77a7bb0fd05b4219289498b979f550cef",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:933a4020d24fb00e0ecaee4c5a1e1a19e2afc5f9eff4b0af7ca346ae6d5506e7",
+      "releaseClassification": "initial",
+      "directRouteUnlocked": 1,
+      "completesSourceAggregate": false,
+      "additionalSourcePagesUnlocked": 0,
+      "sourceSetRemaining": 4,
+      "sourceSlug": "10-1016-j-cell-2022-11-001",
+      "bridgeEndpoints": 2,
+      "alignmentClear": true,
+      "staleOrSupersedingRisk": "none",
+      "components": {
+        "directRoute": 10,
+        "completesSourceAggregate": 0,
+        "advancesSourceAggregate": 2,
+        "bridgeEndpoints": 4,
+        "domainConnectivity": 5,
+        "alignmentCurrent": 5
+      },
+      "total": 26
+    }
+  ],
+  "boundary": "A prepared cohort. Nothing here is released, dispatched or public."
+}

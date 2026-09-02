@@ -45,7 +45,11 @@ function contrast(foreground: string, background: string): number {
 
 test('all Knowledge pages inherit one bounded cyber-light layout', () => {
   const routes = pageFiles(new URL('../app/knowledge', import.meta.url).pathname)
-  assert.equal(routes.length, 46)
+  // 47 since the source evidence reference route was added. The count is a
+  // tripwire for unreviewed Knowledge routes, so it is re-pinned rather than
+  // relaxed: /knowledge/sources/[slug] inherits this same bounded layout and
+  // adds no visual system of its own.
+  assert.equal(routes.length, 47)
   assert.match(layout, /data-visual-system="cyber-light"/)
   assert.match(layout, /data-visual-scope="knowledge"/)
   assert.match(layout, /knowledge-cyber-light\.module\.css/)

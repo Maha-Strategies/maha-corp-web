@@ -147,5 +147,20 @@
     },
     "note": "A narrowed claim rebinds an existing record and adds no route, so legacy adoption is counted as reviewed rather than as new routes. Only currentProductionRoutes is public."
   },
-  "capacityDigest": "sha256:0318e8322197a415b39c2bf4a274536e3fedab3785ae44e175192d5df6437afa"
+  "cascade": {
+    "currentProductionRoutes": 764,
+    "sourcePagesImplemented": 8,
+    "routesAfterSourcePagesDeploy": 772,
+    "canaryDirectRoutes": 5,
+    "canarySourcePagesUnlocked": 0,
+    "remainderDirectRoutes": 28,
+    "remainderSourcePagesUnlocked": 0,
+    "privateSourceFirstCandidates": 7,
+    "privateCandidatesExcludedFromPublicTotals": true,
+    "reachableAfterAllKnownWork": 805,
+    "remainingGapToTarget": 195,
+    "sourcePagesUnlockedByAll33": 0,
+    "note": "Source pages become reachable only on deployment; nothing here is deployed. Private candidates are excluded from every public total."
+  },
+  "capacityDigest": "sha256:fd4296f77f5a29641427ed99987dbe05049140fd740403959917fa5c3227f73d"
 }
