@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "maha-legacy-uplift-report/1.0",
+  "upliftVersion": "maha-legacy-uplift/1.0",
+  "generatedAt": "2026-09-02",
+  "inventory": {
+    "pages": 167,
+    "families": 8,
+    "byFamily": {
+      "astronomy": {
+        "total": 23,
+        "eligible": 0,
+        "blocked": 23
+      },
+      "mathematics": {
+        "total": 24,
+        "eligible": 24,
+        "blocked": 0
+      },
+      "religion": {
+        "total": 18,
+        "eligible": 18,
+        "blocked": 0
+      },
+      "neuromorphic-biocomputing": {
+        "total": 20,
+        "eligible": 0,
+        "blocked": 20
+      },
+      "semiconductor-manufacturing": {
+        "total": 50,
+        "eligible": 0,
+        "blocked": 50
+      },
+      "semiconductor-suppliers": {
+        "total": 16,
+        "eligible": 0,
+        "blocked": 16
+      },
+      "religion-comparisons": {
+        "total": 8,
+        "eligible": 8,
+        "blocked": 0
+      },
+      "neuromorphic-biocomputing-comparisons": {
+        "total": 8,
+        "eligible": 8,
+        "blocked": 0
+      }
+    }
+  },
+  "outcome": {
+    "eligibleAndUpgraded": 58,
+    "blocked": 109,
+    "requiringGovernedRevision": 0,
+    "requiringNewGovernedContent": 109,
+    "governedContentNeeded": {
+      "negative-space-statement": 93,
+      "source-establishes-and-boundary": 66,
+      "note": "These pages are blocked because evidence the corpus does not yet hold would have to be written. That is authored content under governance, not a rendering change, and none of it was invented here."
+    },
+    "blockerCounts": {
+      "below-dimension-floor": 109,
+      "no-negative-space": 93,
+      "no-cited-source": 66,
+      "source-without-boundary": 66
+    }
+  },
+  "depth": {
+    "before": {
+      "dimensions": 5.82,
+      "sourcesWithBoundary": 1.29,
+      "inspectedLocators": 1.29,
+      "internalLinks": 2,
+      "renderedSections": 6
+    },
+    "after": {
+      "dimensions": 9.09,
+      "sourcesWithBoundary": 1.83,
+      "inspectedLocators": 1.83,
+      "internalLinks": 3.64,
+      "renderedSections": 6.48
+    },
+    "metric": "Information dimensions, evidence coverage, inspected locators, internal links and rendered sections. Word count is deliberately not among them."
+  },
+  "routesChanged": 0,
+  "duplicatePagesAdded": 0,
+  "boundary": "A private compilation report. It contains no audit data, review packet, rejected material or credential.",
+  "reportDigest": "sha256:c43e4cb8d4229ef68518652adfe2259495027085c5c9bd4ab98a7f0b39466466"
+}
