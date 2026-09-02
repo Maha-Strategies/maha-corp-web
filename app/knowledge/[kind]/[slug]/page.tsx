@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+
+import { UpliftSections } from '@/components/UpliftSections'
 import { SITE_URL, getBriefBySlug } from '@/lib/briefs-data'
 import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 import {
@@ -323,6 +325,6 @@ export default async function KnowledgeArticlePage({ params }: PageProps) {
           </section>
         )}
       </div>
-    </main>
+    <UpliftSections route={path} /></main>
   )
 }

@@ -8,8 +8,8 @@
     "byFamily": {
       "astronomy": {
         "total": 23,
-        "eligible": 0,
-        "blocked": 23
+        "eligible": 23,
+        "blocked": 0
       },
       "mathematics": {
         "total": 24,
@@ -23,18 +23,18 @@
       },
       "neuromorphic-biocomputing": {
         "total": 20,
-        "eligible": 0,
-        "blocked": 20
+        "eligible": 20,
+        "blocked": 0
       },
       "semiconductor-manufacturing": {
         "total": 50,
-        "eligible": 0,
-        "blocked": 50
+        "eligible": 15,
+        "blocked": 35
       },
       "semiconductor-suppliers": {
         "total": 16,
-        "eligible": 0,
-        "blocked": 16
+        "eligible": 3,
+        "blocked": 13
       },
       "religion-comparisons": {
         "total": 8,
@@ -49,41 +49,45 @@
     }
   },
   "outcome": {
-    "eligibleAndUpgraded": 58,
-    "blocked": 109,
+    "eligibleAndUpgraded": 119,
+    "blocked": 48,
     "requiringGovernedRevision": 0,
-    "requiringNewGovernedContent": 109,
+    "requiringNewGovernedContent": 48,
     "governedContentNeeded": {
-      "negative-space-statement": 93,
-      "source-establishes-and-boundary": 66,
+      "negative-space-statement": 35,
+      "source-establishes-and-boundary": 0,
       "note": "These pages are blocked because evidence the corpus does not yet hold would have to be written. That is authored content under governance, not a rendering change, and none of it was invented here."
     },
     "blockerCounts": {
-      "below-dimension-floor": 109,
-      "no-negative-space": 93,
-      "no-cited-source": 66,
-      "source-without-boundary": 66
+      "below-dimension-floor": 48,
+      "no-cited-source": 48,
+      "no-negative-space": 35
     }
   },
   "depth": {
     "before": {
-      "dimensions": 5.82,
-      "sourcesWithBoundary": 1.29,
-      "inspectedLocators": 1.29,
+      "dimensions": 6.49,
+      "sourcesWithBoundary": 1.4,
+      "declaredLocators": 1.4,
+      "contentInspectedLocators": 0.11,
+      "explanatorySources": 0.11,
       "internalLinks": 2,
       "renderedSections": 6
     },
     "after": {
-      "dimensions": 9.09,
-      "sourcesWithBoundary": 1.83,
-      "inspectedLocators": 1.83,
-      "internalLinks": 3.64,
-      "renderedSections": 6.48
+      "dimensions": 8.44,
+      "sourcesWithBoundary": 1.97,
+      "declaredLocators": 1.97,
+      "contentInspectedLocators": 0.16,
+      "explanatorySources": 0.16,
+      "internalLinks": 2.5,
+      "renderedSections": 5.95
     },
-    "metric": "Information dimensions, evidence coverage, inspected locators, internal links and rendered sections. Word count is deliberately not among them."
+    "metric": "Information dimensions, evidence coverage, declared versus content-inspected locators, internal links and rendered sections. Word count is deliberately not among them.",
+    "locatorNote": "A declared locator is a URL. A content-inspected locator requires an independent attestation recording the passage that was read. The first pass conflated them and reported declared locators as inspected."
   },
   "routesChanged": 0,
   "duplicatePagesAdded": 0,
   "boundary": "A private compilation report. It contains no audit data, review packet, rejected material or credential.",
-  "reportDigest": "sha256:c43e4cb8d4229ef68518652adfe2259495027085c5c9bd4ab98a7f0b39466466"
+  "reportDigest": "sha256:8015b02ce9d454dc86cb4c2f35f044350f7a5542c03a611e25585e1c3053442f"
 }

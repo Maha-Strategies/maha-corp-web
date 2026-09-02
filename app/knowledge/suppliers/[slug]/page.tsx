@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { UpliftSections } from '@/components/UpliftSections'
+
 import { SITE_URL, getBriefBySlug } from '@/lib/briefs-data'
 import { getKnowledgeArticle, getKnowledgeSource, knowledgeArticlePath } from '@/lib/knowledge-data'
 import {
@@ -30,6 +32,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function SupplierProfilePage({ params }: PageProps) {
   const supplier = getKnowledgeSupplierBySlug((await params).slug)
   if (!supplier) notFound()
+  const upliftRoute = knowledgeSupplierPath(supplier)
   const processes = supplier.processIds.map(getKnowledgeArticle).filter((article) => article !== undefined)
   const sources = supplier.sourceIds.map(getKnowledgeSource).filter((source) => source !== undefined)
   const relatedBriefs = getIntelligenceBriefSlugsForKnowledgeObject(supplier.id).map(getBriefBySlug).filter((brief) => brief !== undefined)
@@ -112,6 +115,6 @@ export default async function SupplierProfilePage({ params }: PageProps) {
           </ol>
         </section>
       </div>
-    </main>
+    <UpliftSections route={upliftRoute} /></main>
   )
 }

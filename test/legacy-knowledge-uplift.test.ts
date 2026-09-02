@@ -23,12 +23,26 @@ const page = (over: Partial<LegacyPageInput> = {}): LegacyPageInput => ({
 
 /* ------------------------------------------------------------ fail closed --- */
 
-test('a page missing negative space is refused however complete it looks', () => {
-  const result = compileUplift(page({ doesNotEstablish: [] }))
+test('a page with neither its own negative space nor a source boundary is refused', () => {
+  // No doesNotEstablish, and the only source declares no boundary either, so
+  // there is nothing to derive from.
+  const result = compileUplift(page({
+    doesNotEstablish: [],
+    sources: [{ id: 's1', title: 'A source', url: 'https://example.org/doc#p4' }],
+  }))
   assert.equal(result.eligible, false)
   assert.ok(result.refusals.includes('no-negative-space'))
   assert.ok(result.refusals.includes('below-dimension-floor'))
   assert.deepEqual(result.sections, [], 'a refused page renders nothing')
+})
+
+test('a page without its own negative space may borrow its sources declared boundaries', () => {
+  const result = compileUplift(page({ doesNotEstablish: [] }))
+  assert.equal(result.eligible, true)
+  const negative = result.sections.find((section) => section.dimension === 'not-established')
+  assert.ok(negative, 'the derived boundary must render')
+  assert.match(negative.heading, /Boundaries declared by the cited sources/)
+  assert.match(negative.items[0], /boundary declared by/, 'each borrowed limit names its source')
 })
 
 test('a source without a stated boundary cannot be cited as fact', () => {

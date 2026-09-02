@@ -1,6 +1,10 @@
 import { createHash } from 'node:crypto'
 
 import { canonicalJson } from './evidence-dossier/digest.ts'
+import {
+  EVIDENCE_LEVELS, gradeEvidence,
+  type EvidenceLevel, type EvidenceProfile, type InspectionAttestation, type InspectionDepth,
+} from './legacy-evidence-levels.ts'
 
 /**
  * Uplift for the legacy /knowledge corpus.
@@ -107,6 +111,8 @@ export interface LegacyPageInput {
   calculationOutputs?: readonly string[]
   /** Release state, supplied by the caller. Never inferred from page shape. */
   canonicalRelease?: { released: boolean; revisionMatches: boolean } | null
+  /** Independent inspection records, keyed by source id. Absent means uninspected. */
+  attestations?: Readonly<Record<string, InspectionAttestation>>
 }
 
 export interface UpliftBaseline {
@@ -116,7 +122,12 @@ export interface UpliftBaseline {
   dimensionCount: number
   sourceCount: number
   sourcesWithBoundary: number
-  sourcesWithLocator: number
+  referenceOnlySources: number
+  /** A URL exists. Says nothing about whether anyone opened it. */
+  declaredLocators: number
+  /** An independent attestation records the passage that was actually read. */
+  contentInspectedLocators: number
+  explanatorySources: number
   bridgeCount: number
   relatedRouteCount: number
   renderedSections: number
@@ -158,9 +169,34 @@ export function citableSources(sources: readonly LegacySource[]): readonly Legac
   return sources.filter((source) => meaningful(source.establishes, 12) && meaningful(source.boundary, 12))
 }
 
+export function gradeAll(input: LegacyPageInput): readonly EvidenceProfile[] {
+  return input.sources.map((source) => gradeEvidence({
+    sourceId: source.id,
+    declaredUrl: source.url,
+    establishes: source.establishes,
+    boundary: source.boundary,
+    attestation: input.attestations?.[source.id] ?? null,
+    releaseMatched: input.canonicalRelease ? input.canonicalRelease.revisionMatches : true,
+  }))
+}
+
+/**
+ * Negative space taken from the boundaries the page's own sources declare.
+ *
+ * A source `boundary` says what that source cannot support. Collecting them is
+ * not a substitution: it uses the field for exactly what it means, and every
+ * sentence is attributed to the source that wrote it. This is why it is
+ * allowed where `assumptions` and `failureModes` are not.
+ */
+export function boundaryDerivedNegativeSpace(input: LegacyPageInput): readonly string[] {
+  return citableSources(input.sources)
+    .map((source) => `${source.boundary!.trim()} (boundary declared by ${source.title})`)
+}
+
 export function measure(input: LegacyPageInput, sections: readonly UpliftSection[]): UpliftBaseline {
   const present = new Set<UpliftDimension>()
   const citable = citableSources(input.sources)
+  const graded = gradeAll(input)
   if (meaningful(input.definition, 40)) present.add('direct-answer')
   if (list(input.mechanism).length > 0) present.add('mechanism-or-method')
   if (input.comparisons.length > 0) present.add('bounded-comparison')
@@ -168,12 +204,18 @@ export function measure(input: LegacyPageInput, sections: readonly UpliftSection
     present.add('deterministic-calculation')
   }
   if (list(input.limitations).length > 0) present.add('limitations')
-  if (list(input.doesNotEstablish).length > 0) present.add('not-established')
+  // Either the page's own statement, or the boundaries its sources declare.
+  if (list(input.doesNotEstablish).length > 0 || boundaryDerivedNegativeSpace(input).length > 0) {
+    present.add('not-established')
+  }
   if (input.relatedRoutes.length > 0) present.add('related-records')
   if (input.bridges.length > 0) present.add('typed-bridges')
   if (citable.length > 0) present.add('claim-level-citation')
   if (citable.some((s) => meaningful(s.url, 8))) present.add('exact-locator')
-  if (citable.length === input.sources.length && input.sources.length > 0) present.add('source-boundary')
+  // Satisfied when every source used as fact declares its boundary, which is
+  // what citableSources selects for. Sources that cannot be used are excluded
+  // from the evidence sections entirely, so they neither help nor block.
+  if (citable.length > 0) present.add('source-boundary')
   if (input.canonicalRelease) present.add('provenance-and-review-state')
 
   return {
@@ -183,7 +225,10 @@ export function measure(input: LegacyPageInput, sections: readonly UpliftSection
     dimensionCount: present.size,
     sourceCount: input.sources.length,
     sourcesWithBoundary: citable.length,
-    sourcesWithLocator: citable.filter((s) => meaningful(s.url, 8)).length,
+    referenceOnlySources: input.sources.length - citable.length,
+    declaredLocators: citable.filter((s) => meaningful(s.url, 8)).length,
+    contentInspectedLocators: graded.filter((g) => g.levels['content-inspected-locator']).length,
+    explanatorySources: graded.filter((g) => g.explanatory).length,
     bridgeCount: input.bridges.length,
     relatedRouteCount: input.relatedRoutes.length,
     renderedSections: sections.length,
@@ -248,9 +293,21 @@ export function compileUplift(input: LegacyPageInput, baselineSections = 0): Upl
   if (limitations.length === 0) refusals.push('no-limitations')
   else sections.push({ dimension: 'limitations', heading: 'Limitations', items: limitations, sourceIds })
 
-  const negative = list(input.doesNotEstablish)
+  const declared = list(input.doesNotEstablish)
+  // A page's own statement is preferred. Where it has none, the boundaries its
+  // sources declare are used instead, each attributed to the source that wrote
+  // it, so the reader can see whose limit it is.
+  const derived = declared.length > 0 ? [] : boundaryDerivedNegativeSpace(input)
+  const negative = declared.length > 0 ? declared : derived
   if (negative.length === 0) refusals.push('no-negative-space')
-  else sections.push({ dimension: 'not-established', heading: 'What this does not establish', items: negative, sourceIds })
+  else {
+    sections.push({
+      dimension: 'not-established',
+      heading: declared.length > 0 ? 'What this does not establish' : 'Boundaries declared by the cited sources',
+      items: negative,
+      sourceIds,
+    })
+  }
 
   for (const bridge of input.bridges) {
     const items = [
@@ -264,8 +321,10 @@ export function compileUplift(input: LegacyPageInput, baselineSections = 0): Upl
     }
   }
 
+  // At least one usable source is required. Sources that cannot be used are
+  // not a blocker: they are excluded from every evidence section and listed as
+  // reference only, which is what "non-explanatory" has to mean in practice.
   if (citable.length === 0) refusals.push('no-cited-source')
-  if (citable.length < input.sources.length) refusals.push('source-without-boundary')
 
   const after = measure(input, sections)
   // Evidence coverage, not length. A short page with every required dimension

@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { UpliftSections } from '@/components/UpliftSections'
+
 import { SITE_URL } from '@/lib/briefs-data'
 import { CELESTIAL_FACT_PATH, CELESTIAL_FACT_SCHEMA_PATH } from '@/lib/celestial-facts'
 import { CLAIM_PROVENANCE_META } from '@/lib/claim-evidence'
@@ -93,6 +95,6 @@ export default async function AstronomyArticlePage({ params }: PageProps) {
 
         <section className="mt-16 border-t border-zinc-800 pt-10"><h2 className="font-mono text-xs uppercase tracking-widest text-zinc-500">Continue through the Astronomy graph</h2><div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{related.map((item) => <Link key={item.id} href={astronomyArticlePath(item)} className="border border-zinc-800 p-5 hover:border-sky-500/50"><p className="font-mono text-[9px] uppercase tracking-widest text-sky-300">{ASTRONOMY_TRACK_META[item.track].label}</p><p className="mt-3 text-sm font-semibold text-white">{item.shortTitle}</p></Link>)}</div></section>
       </div>
-    </main>
+    <UpliftSections route={path} /></main>
   )
 }

@@ -10,6 +10,7 @@ import { NEUROMORPHIC_COMPARISONS, NEUROMORPHIC_CONCEPTS, NEUROMORPHIC_MATHEMATI
 import { SEMICONDUCTOR_EQUIPMENT_ARTICLES } from '../lib/semiconductor-equipment.ts'
 import { KNOWLEDGE_ARTICLES, KNOWLEDGE_SOURCES } from '../lib/knowledge-data.ts'
 import { KNOWLEDGE_SUPPLIERS } from '../lib/knowledge-process-profiles.ts'
+import attestationFile from '../content/legacy-uplift/inspection-attestations.json' with { type: 'json' }
 
 /**
  * Inventories the legacy corpus, baselines it, and compiles the uplift.
@@ -34,6 +35,22 @@ const asSource = (s: Any): LegacySource => ({
   url: str(s.url), establishes: str(s.establishes), boundary: str(s.boundary),
   accessed: str(s.accessed), authorityTier: str(s.authorityTier),
 })
+
+/**
+ * Inspection results, applied to the sources they describe.
+ *
+ * A source only gains `establishes` and `boundary` here because someone read
+ * it and wrote down what it says and where it stops. Sources that could not be
+ * retrieved gain nothing and stay reference-only.
+ */
+type Attestation = { sourceId: string; establishes: string; boundary: string; depth: string; exactLocator: string; observedContent: string; identityVerified: boolean; subjectAligned: boolean; retrievedFrom: string; retrievedOn: string; versionRelationship: string; rightsBasis: string }
+const attested = new Map<string, Attestation>(
+  (attestationFile.attestations as Attestation[]).map((a) => [a.sourceId, a]))
+
+const withAttestation = (s: LegacySource): LegacySource => {
+  const a = attested.get(s.id)
+  return a ? { ...s, establishes: a.establishes, boundary: a.boundary } : s
+}
 
 const inputs: LegacyPageInput[] = []
 
@@ -150,7 +167,7 @@ for (const a of [...(SEMICONDUCTOR_EQUIPMENT_ARTICLES as unknown as Any[]), ...(
     limitations: arr(a.failureModes),
     // Failure modes describe how a process fails, not what the page does not establish.
     doesNotEstablish: [],
-    sources: (pick(KNOWLEDGE_SOURCES as unknown as Any[], arr(a.sourceIds)) as Any[]).map(asSource),
+    sources: (pick(KNOWLEDGE_SOURCES as unknown as Any[], arr(a.sourceIds)) as Any[]).map(asSource).map(withAttestation),
     bridges: [], comparisons: [],
     relatedRoutes: [...arr(a.inputs), ...arr(a.outputs)].length > 0 ? [] : [],
     canonicalRelease: null,
@@ -168,7 +185,7 @@ for (const sup of KNOWLEDGE_SUPPLIERS as unknown as Any[]) {
     // A supplier profile records a capability boundary, which is a genuine
     // statement of what the evidence does not reach.
     doesNotEstablish: arr(sup.boundary),
-    sources: (pick(KNOWLEDGE_SOURCES as unknown as Any[], arr(sup.sourceIds)) as Any[]).map(asSource),
+    sources: (pick(KNOWLEDGE_SOURCES as unknown as Any[], arr(sup.sourceIds)) as Any[]).map(asSource).map(withAttestation),
     bridges: [], comparisons: [],
     relatedRoutes: arr(sup.processIds).map((id) => `/knowledge/processes/${id}`),
     canonicalRelease: null,
@@ -207,7 +224,15 @@ for (const group of comparisonFamilies) {
 
 /* ------------------------------------------------------------------ compile --- */
 
-const results = inputs.map((input) => compileUplift(input, 6))
+const attestationsByPage = Object.fromEntries(
+  [...attested.entries()].map(([id, a]) => [id, {
+    sourceId: id, retrievedFrom: a.retrievedFrom, retrievedOn: a.retrievedOn,
+    depth: a.depth as never, exactLocator: a.exactLocator, observedContent: a.observedContent,
+    identityVerified: a.identityVerified, identityBasis: 'recorded at inspection',
+    subjectAligned: a.subjectAligned, subjectBasis: 'recorded at inspection',
+    versionRelationship: a.versionRelationship, rightsBasis: a.rightsBasis,
+  }]))
+const results = inputs.map((input) => compileUplift({ ...input, attestations: attestationsByPage }, 6))
 const eligible = results.filter((r) => r.eligible)
 const blocked = results.filter((r) => !r.eligible)
 const governed = results.filter((r) => r.requiresGovernedRevision)
@@ -228,18 +253,23 @@ const depth = {
   before: {
     dimensions: avg(results.map((r) => r.before.dimensionCount)),
     sourcesWithBoundary: avg(results.map((r) => r.before.sourcesWithBoundary)),
-    inspectedLocators: avg(results.map((r) => r.before.sourcesWithLocator)),
+    declaredLocators: avg(results.map((r) => r.before.declaredLocators)),
+    contentInspectedLocators: avg(results.map((r) => r.before.contentInspectedLocators)),
+    explanatorySources: avg(results.map((r) => r.before.explanatorySources)),
     internalLinks: avg(results.map((r) => r.before.relatedRouteCount + r.before.bridgeCount)),
     renderedSections: avg(results.map((r) => r.before.renderedSections)),
   },
   after: {
     dimensions: avg(eligible.map((r) => r.after!.dimensionCount)),
     sourcesWithBoundary: avg(eligible.map((r) => r.after!.sourcesWithBoundary)),
-    inspectedLocators: avg(eligible.map((r) => r.after!.sourcesWithLocator)),
+    declaredLocators: avg(eligible.map((r) => r.after!.declaredLocators)),
+    contentInspectedLocators: avg(eligible.map((r) => r.after!.contentInspectedLocators)),
+    explanatorySources: avg(eligible.map((r) => r.after!.explanatorySources)),
     internalLinks: avg(eligible.map((r) => r.after!.relatedRouteCount + r.after!.bridgeCount)),
     renderedSections: avg(eligible.map((r) => r.after!.renderedSections)),
   },
-  metric: 'Information dimensions, evidence coverage, inspected locators, internal links and rendered sections. Word count is deliberately not among them.',
+  metric: 'Information dimensions, evidence coverage, declared versus content-inspected locators, internal links and rendered sections. Word count is deliberately not among them.',
+  locatorNote: 'A declared locator is a URL. A content-inspected locator requires an independent attestation recording the passage that was read. The first pass conflated them and reported declared locators as inspected.',
 }
 
 const report = {
