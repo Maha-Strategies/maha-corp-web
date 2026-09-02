@@ -41,7 +41,7 @@ test('the edition is discoverable as web reading without publishing the source E
   assert.match(hub, /not medical advice/i)
   assert.doesNotMatch(hub, /\.epub|download/i)
   assert.match(index, /The Maha Principle/)
-  assert.match(index, /Seven works/)
+  assert.match(index, /Eight works/)
   assert.match(sitemap, /books\/the-maha-principle/)
   assert.match(llms, /The Maha Principle — complete free web edition/)
   assert.equal(existsSync(new URL('public/books/the-maha-principle/The-Maha-Principle-Free-Edition.epub', root)), false)
