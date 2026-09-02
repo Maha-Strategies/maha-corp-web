@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "maha-workspace-readiness-report/1.0",
+  "evidence": "measured",
+  "source": "read-only probe run 33605574533 against the live release workspace",
+  "productionMutations": 0,
+  "totals": {
+    "candidates": 423,
+    "ready": 0,
+    "withDeclaredBlockers": 423,
+    "withApprovals": 113,
+    "withActiveRelease": 114
+  },
+  "categories": {
+    "required-review-missing": 310,
+    "active-release-already-present": 113,
+    "malformed-candidate": 0,
+    "revision-or-target-mismatch": 0,
+    "stale-review": 0,
+    "audit-digest-mismatch": 0,
+    "source-alignment-blocked": 0,
+    "unsupported-record-class": 0,
+    "lineage-conflict": 0,
+    "withdrawn-or-superseded-predecessor": 0,
+    "policy-tier-mismatch": 0,
+    "unknown-or-unobservable": 0
+  },
+  "partition": {
+    "explanation": "Every candidate falls in exactly one of two buckets, and they sum to the whole workspace.",
+    "awaiting-expert-review": 310,
+    "already-released-at-this-target": 113,
+    "sum": 423,
+    "total": 423,
+    "exhaustive": true
+  },
+  "theActualFailedPredicate": {
+    "finding": "The workspace is not unready for 423 different reasons. 310 candidates lack the four scoped expert review decisions the readiness predicate requires, and the remaining 113 are already released at the target on offer.",
+    "requiredScopes": [
+      "source-fidelity",
+      "domain-fidelity",
+      "boundary-adequacy",
+      "rights-and-locator"
+    ],
+    "eachScopeMissingOn": 310,
+    "predicate": "lib/epistemic-release.ts releaseReadiness collects, per required scope, the latest review bound to targetSha256 whose decision is approve. With none recorded, approvals is empty and evaluatePublicationGate refuses."
+  },
+  "secondaryFindings": {
+    "legacySourceMetadataBlockers": 50,
+    "note": "A handful of legacy records additionally lack a source publication date or locator. These are extra blockers on candidates already blocked by missing review, not a separate unready population."
+  },
+  "digestRoleFinding": {
+    "localRecordsPresent": 288,
+    "localTargetMatches": 288,
+    "conclusion": "Every candidate whose record exists locally reproduces the workspace target exactly. Nothing in the workspace has drifted from the local corpus."
+  },
+  "boundary": "Read-only. No candidate ingested, no review created, no release issued.",
+  "reportDigest": "sha256:b415653234607cb9eabd4cabf81f1f790345781e2cbd11e1b89da50e7613178e"
+}

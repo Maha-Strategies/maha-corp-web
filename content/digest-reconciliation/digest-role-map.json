@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "maha-digest-role-map/1.0",
+  "generatedAt": "2026-09-02",
+  "roles": [
+    {
+      "role": "record-revision",
+      "schemaVersion": "maha-digest-role/1.0",
+      "canonicalInput": "The complete EpistemicRecord object, publication envelope included.",
+      "canonicalSerialization": "canonicalJson, sorted keys, UTF-8",
+      "hashAlgorithm": "sha256, prefixed \"sha256:\"",
+      "producer": "scripts/generate-source-inventory.ts digest(record); lib/digest-roles.ts recordRevisionDigest",
+      "storage": "content/source-first/source-inventory.json boundRecords[].revisionSha256 (local artifact, not a Production table)",
+      "consumers": [
+        "source inventory",
+        "source-page eligibility",
+        "the frozen 33-record package"
+      ],
+      "identifies": "revision",
+      "note": "Changes whenever publication bookkeeping changes, even when no reviewed content changed."
+    },
+    {
+      "role": "candidate-target",
+      "schemaVersion": "maha-digest-role/1.0",
+      "canonicalInput": "The EpistemicRecord with the publication key removed.",
+      "canonicalSerialization": "canonicalJson, sorted keys, UTF-8",
+      "hashAlgorithm": "sha256, prefixed \"sha256:\"",
+      "producer": "lib/epistemic-publication.ts epistemicReviewTargetHash",
+      "storage": "Production release workspace candidates[].targetSha256",
+      "consumers": [
+        "release workspace projection",
+        "releaseReadiness",
+        "scoped review binding",
+        "canonical release rows"
+      ],
+      "identifies": "review target",
+      "note": "The quantity every review decision and release row binds to. Deliberately excludes publication so release bookkeeping cannot invalidate a review."
+    },
+    {
+      "role": "audit",
+      "schemaVersion": "maha-digest-role/1.0",
+      "canonicalInput": "An alignment audit object.",
+      "canonicalSerialization": "canonicalJson",
+      "hashAlgorithm": "sha256",
+      "producer": "alignment audit generators",
+      "storage": "content/release-cascade/cascade-model.json auditSha256",
+      "consumers": [
+        "release preflight",
+        "lineage checks"
+      ],
+      "identifies": "review",
+      "note": "Describes an audit of a record, not the record."
+    },
+    {
+      "role": "review-bundle",
+      "schemaVersion": "maha-digest-role/1.0",
+      "canonicalInput": "A bundle of scoped review decisions.",
+      "canonicalSerialization": "canonicalJson",
+      "hashAlgorithm": "sha256",
+      "producer": "review bundle generators",
+      "storage": "content/release-cascade/cascade-model.json reviewBundleDigest",
+      "consumers": [
+        "release preflight"
+      ],
+      "identifies": "review",
+      "note": "Proves a bundle exists locally. It never proves Production holds approvals for the target."
+    },
+    {
+      "role": "release-target",
+      "schemaVersion": "maha-digest-role/1.0",
+      "canonicalInput": "The candidate target that was released.",
+      "canonicalSerialization": "inherited from candidate-target",
+      "hashAlgorithm": "sha256",
+      "producer": "canonical release path",
+      "storage": "Production release rows targetSha256",
+      "consumers": [
+        "public projection",
+        "withdrawal and supersession"
+      ],
+      "identifies": "release target",
+      "note": "By construction equal to the candidate target it released. The only legitimate cross-role equality."
+    },
+    {
+      "role": "publication",
+      "schemaVersion": "maha-digest-role/1.0",
+      "canonicalInput": "A rendered public projection body.",
+      "canonicalSerialization": "canonicalJson",
+      "hashAlgorithm": "sha256",
+      "producer": "lib/source-reference-projection.ts provenanceDigest",
+      "storage": "served page body",
+      "consumers": [
+        "public provenance"
+      ],
+      "identifies": "content",
+      "note": "Describes what was served, and carries no release authority."
+    }
+  ],
+  "permittedEqualities": [
+    {
+      "left": "candidate-target",
+      "right": "release-target",
+      "mayBeEqual": true
+    }
+  ],
+  "forbiddenEqualities": [
+    {
+      "left": "record-revision",
+      "right": "review-bundle",
+      "mayBeEqual": false
+    },
+    {
+      "left": "record-revision",
+      "right": "release-target",
+      "mayBeEqual": false
+    },
+    {
+      "left": "candidate-target",
+      "right": "record-revision",
+      "mayBeEqual": false
+    },
+    {
+      "left": "candidate-target",
+      "right": "review-bundle",
+      "mayBeEqual": false
+    },
+    {
+      "left": "candidate-target",
+      "right": "publication",
+      "mayBeEqual": false
+    },
+    {
+      "left": "audit",
+      "right": "record-revision",
+      "mayBeEqual": false
+    },
+    {
+      "left": "audit",
+      "right": "candidate-target",
+      "mayBeEqual": false
+    },
+    {
+      "left": "audit",
+      "right": "review-bundle",
+      "mayBeEqual": false
+    },
+    {
+      "left": "audit",
+      "right": "release-target",
+      "mayBeEqual": false
+    },
+    {
+      "left": "audit",
+      "right": "publication",
+      "mayBeEqual": false
+    },
+    {
+      "left": "release-target",
+      "right": "review-bundle",
+      "mayBeEqual": false
+    },
+    {
+      "left": "publication",
+      "right": "record-revision",
+      "mayBeEqual": false
+    },
+    {
+      "left": "publication",
+      "right": "review-bundle",
+      "mayBeEqual": false
+    },
+    {
+      "left": "publication",
+      "right": "release-target",
+      "mayBeEqual": false
+    }
+  ],
+  "conversions": [
+    {
+      "from": "record-revision",
+      "to": "candidate-target",
+      "permitted": true,
+      "requires": "the EpistemicRecord itself, so both digests can be recomputed",
+      "derivation": "drop the publication key, canonically serialize, sha256",
+      "provenOverCohort": {
+        "records": 33,
+        "reproduced": 33,
+        "failed": 0
+      },
+      "note": "Not an equality. Given only the digest, neither yields the other."
+    }
+  ],
+  "antiPattern": {
+    "observed": "The 33-record package froze record-revision digests and offered them where candidate-target was expected.",
+    "consequence": "Zero of 33 matched, and the package could not name a single candidate in the workspace.",
+    "guard": "lib/digest-roles.ts brands each role and permits crossing only through a recomputing conversion."
+  },
+  "boundary": "A private specification of internal digest roles. It contains no digest of any private corpus.",
+  "mapDigest": "sha256:c402f1230bb79108b4550e0f9c3d2624b94e9ca5744f5fb2bc44668ddaf12d78"
+}
