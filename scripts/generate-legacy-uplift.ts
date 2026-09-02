@@ -11,6 +11,7 @@ import { SEMICONDUCTOR_EQUIPMENT_ARTICLES } from '../lib/semiconductor-equipment
 import { KNOWLEDGE_ARTICLES, KNOWLEDGE_SOURCES } from '../lib/knowledge-data.ts'
 import { KNOWLEDGE_SUPPLIERS } from '../lib/knowledge-process-profiles.ts'
 import attestationFile from '../content/legacy-uplift/inspection-attestations.json' with { type: 'json' }
+import batch1 from '../content/semiconductor-evidence/batch-1.json' with { type: 'json' }
 
 /**
  * Inventories the legacy corpus, baselines it, and compiles the uplift.
@@ -50,6 +51,21 @@ const attested = new Map<string, Attestation>(
 const withAttestation = (s: LegacySource): LegacySource => {
   const a = attested.get(s.id)
   return a ? { ...s, establishes: a.establishes, boundary: a.boundary } : s
+}
+
+/**
+ * Batch 1 evidence, applied only to the routes each source was checked against.
+ *
+ * A source supports a page because someone read it and judged it to be about
+ * that page's subject. Routes are named per source rather than matched by
+ * keyword, so a metrology paper cannot drift onto a packaging page.
+ */
+type Batch1 = { sourceId: string; title: string; retrievedFrom: string; retrievedOn: string; depth: string; exactLocators: string[]; observedContent: string; establishes: string; boundary: string; identityVerified: boolean; versionRelationship: string; rightsBasis: string; supportsRoutes: string[] }
+const batch1ByRoute = new Map<string, Batch1[]>()
+for (const entry of batch1.inspected as Batch1[]) {
+  for (const route of entry.supportsRoutes) {
+    batch1ByRoute.set(route, [...(batch1ByRoute.get(route) ?? []), entry])
+  }
 }
 
 const inputs: LegacyPageInput[] = []
@@ -232,7 +248,27 @@ const attestationsByPage = Object.fromEntries(
     subjectAligned: a.subjectAligned, subjectBasis: 'recorded at inspection',
     versionRelationship: a.versionRelationship, rightsBasis: a.rightsBasis,
   }]))
-const results = inputs.map((input) => compileUplift({ ...input, attestations: attestationsByPage }, 6))
+const withBatch1 = inputs.map((input) => {
+  const added = batch1ByRoute.get(input.route)
+  if (!added) return input
+  return {
+    ...input,
+    sources: [...input.sources, ...added.map((entry) => ({
+      id: entry.sourceId, title: entry.title, url: entry.retrievedFrom,
+      establishes: entry.establishes, boundary: entry.boundary, accessed: entry.retrievedOn,
+    }))],
+  }
+})
+const batch1Attestations = Object.fromEntries((batch1.inspected as Batch1[]).map((entry) => [entry.sourceId, {
+  sourceId: entry.sourceId, retrievedFrom: entry.retrievedFrom, retrievedOn: entry.retrievedOn,
+  depth: entry.depth as never, exactLocator: entry.exactLocators.join('; '),
+  observedContent: entry.observedContent, identityVerified: entry.identityVerified,
+  identityBasis: 'recorded at inspection', subjectAligned: true,
+  subjectBasis: 'route-scoped: the source was checked against this page subject',
+  versionRelationship: entry.versionRelationship, rightsBasis: entry.rightsBasis,
+}]))
+const results = withBatch1.map((input) => compileUplift(
+  { ...input, attestations: { ...attestationsByPage, ...batch1Attestations } }, 6))
 const eligible = results.filter((r) => r.eligible)
 const blocked = results.filter((r) => !r.eligible)
 const governed = results.filter((r) => r.requiresGovernedRevision)
@@ -279,6 +315,13 @@ const report = {
   inventory: { pages: results.length, families: Object.keys(byFamily).length, byFamily },
   outcome: {
     eligibleAndUpgraded: eligible.length,
+    // The distinction that matters most. A page can carry every required
+    // dimension and still rest entirely on sources nobody has opened.
+    upgradeQuality: {
+      sourceSupported: eligible.filter((r) => (r.after?.explanatorySources ?? 0) > 0).length,
+      structuralOnly: eligible.filter((r) => (r.after?.explanatorySources ?? 0) === 0).length,
+      note: 'Structural means the page now carries the substantial shape, composed from evidence its family already stored. It does not mean any source was independently inspected. Only the source-supported count reflects inspected evidence.',
+    },
     blocked: blocked.length,
     requiringGovernedRevision: governed.length,
     requiringNewGovernedContent: blocked.length,

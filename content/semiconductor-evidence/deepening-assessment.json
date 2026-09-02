@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "maha-uplift-deepening-assessment/1.0",
+  "assessedOn": "2026-09-02",
+  "question": "Is each upgraded page genuinely source-supported, or only structurally enriched?",
+  "method": "A page counts as source-supported only where at least one cited source passes all six evidence levels, which requires an independent attestation recording the passage read. Everything else is structural.",
+  "totals": {
+    "upgraded": 125,
+    "sourceSupported": 24,
+    "structuralOnly": 101,
+    "finding": "Four fifths of the upgraded corpus rests on sources nobody has opened. The uplift gave those pages the substantial shape using evidence their families already stored, which is a real improvement in what a reader can see, and is not the same as independently researched content."
+  },
+  "tenHighestValueWeakest": [
+    { "route": "/knowledge/astronomy/light-time-distance-and-lookback-time", "sources": 4, "explanatorySources": 0, "verdict": "structural", "deepeningAction": "not attempted this batch", "reason": "Its four sources declare boundaries but none has been inspected. Deepening requires reading them, which was not reached within this batch." },
+    { "route": "/knowledge/neuromorphic-biocomputing/synaptic-plasticity-and-learning", "sources": 3, "explanatorySources": 0, "verdict": "structural", "deepeningAction": "not attempted this batch", "reason": "Same. Priority went to the blocked semiconductor cohort, which had no usable evidence at all." },
+    { "route": "/knowledge/neuromorphic-biocomputing/event-driven-computation", "sources": 3, "explanatorySources": 0, "verdict": "structural", "deepeningAction": "not attempted this batch", "reason": "Same." },
+    { "route": "/knowledge/neuromorphic-biocomputing/hardware-software-co-design", "sources": 3, "explanatorySources": 0, "verdict": "structural", "deepeningAction": "not attempted this batch", "reason": "Same." },
+    { "route": "/knowledge/neuromorphic-biocomputing/biological-neural-cultures", "sources": 3, "explanatorySources": 0, "verdict": "structural", "deepeningAction": "not attempted this batch", "reason": "Same." },
+    { "route": "/knowledge/neuromorphic-biocomputing/multielectrode-arrays-and-stimulation", "sources": 3, "explanatorySources": 0, "verdict": "structural", "deepeningAction": "not attempted this batch", "reason": "Same." },
+    { "route": "/knowledge/neuromorphic-biocomputing/benchmarking-energy-and-task-equivalence", "sources": 3, "explanatorySources": 0, "verdict": "structural", "deepeningAction": "not attempted this batch", "reason": "Same. This page is a comparison-heavy subject, so inspecting its sources matters more than most." },
+    { "route": "/knowledge/neuromorphic-biocomputing/reproducibility-variability-and-controls", "sources": 3, "explanatorySources": 0, "verdict": "structural", "deepeningAction": "not attempted this batch", "reason": "Same." },
+    { "route": "/knowledge/neuromorphic-biocomputing/neuromorphic-computing", "sources": 3, "explanatorySources": 0, "verdict": "structural", "deepeningAction": "not attempted this batch", "reason": "Same." },
+    { "route": "/knowledge/neuromorphic-biocomputing/brain-organoids-and-organoid-intelligence", "sources": 3, "explanatorySources": 0, "verdict": "structural", "deepeningAction": "not attempted this batch", "reason": "Same." }
+  ],
+  "sectionsAdded": 0,
+  "prosePadded": 0,
+  "policy": "No section was added to any of these pages. Adding structure to a page whose sources have not been read would raise its dimension count without raising what is known, which is the failure this assessment exists to name.",
+  "boundaryNotSubstituteForInspection": "A declared source boundary tells a reader where that source stops. It does not tell them anyone read it, and it never advances the content-inspected level.",
+  "boundary": "A private assessment. It changes no page."
+}

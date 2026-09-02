@@ -28,8 +28,8 @@
       },
       "semiconductor-manufacturing": {
         "total": 50,
-        "eligible": 15,
-        "blocked": 35
+        "eligible": 21,
+        "blocked": 29
       },
       "semiconductor-suppliers": {
         "total": 16,
@@ -49,39 +49,44 @@
     }
   },
   "outcome": {
-    "eligibleAndUpgraded": 119,
-    "blocked": 48,
+    "eligibleAndUpgraded": 125,
+    "upgradeQuality": {
+      "sourceSupported": 24,
+      "structuralOnly": 101,
+      "note": "Structural means the page now carries the substantial shape, composed from evidence its family already stored. It does not mean any source was independently inspected. Only the source-supported count reflects inspected evidence."
+    },
+    "blocked": 42,
     "requiringGovernedRevision": 0,
-    "requiringNewGovernedContent": 48,
+    "requiringNewGovernedContent": 42,
     "governedContentNeeded": {
-      "negative-space-statement": 35,
+      "negative-space-statement": 29,
       "source-establishes-and-boundary": 0,
       "note": "These pages are blocked because evidence the corpus does not yet hold would have to be written. That is authored content under governance, not a rendering change, and none of it was invented here."
     },
     "blockerCounts": {
-      "below-dimension-floor": 48,
-      "no-cited-source": 48,
-      "no-negative-space": 35
+      "below-dimension-floor": 42,
+      "no-cited-source": 42,
+      "no-negative-space": 29
     }
   },
   "depth": {
     "before": {
-      "dimensions": 6.49,
-      "sourcesWithBoundary": 1.4,
-      "declaredLocators": 1.4,
-      "contentInspectedLocators": 0.11,
-      "explanatorySources": 0.11,
+      "dimensions": 6.63,
+      "sourcesWithBoundary": 1.44,
+      "declaredLocators": 1.44,
+      "contentInspectedLocators": 0.16,
+      "explanatorySources": 0.16,
       "internalLinks": 2,
       "renderedSections": 6
     },
     "after": {
-      "dimensions": 8.44,
-      "sourcesWithBoundary": 1.97,
-      "declaredLocators": 1.97,
-      "contentInspectedLocators": 0.16,
-      "explanatorySources": 0.16,
-      "internalLinks": 2.5,
-      "renderedSections": 5.95
+      "dimensions": 8.37,
+      "sourcesWithBoundary": 1.93,
+      "declaredLocators": 1.93,
+      "contentInspectedLocators": 0.21,
+      "explanatorySources": 0.21,
+      "internalLinks": 2.38,
+      "renderedSections": 5.9
     },
     "metric": "Information dimensions, evidence coverage, declared versus content-inspected locators, internal links and rendered sections. Word count is deliberately not among them.",
     "locatorNote": "A declared locator is a URL. A content-inspected locator requires an independent attestation recording the passage that was read. The first pass conflated them and reported declared locators as inspected."
@@ -89,5 +94,5 @@
   "routesChanged": 0,
   "duplicatePagesAdded": 0,
   "boundary": "A private compilation report. It contains no audit data, review packet, rejected material or credential.",
-  "reportDigest": "sha256:8015b02ce9d454dc86cb4c2f35f044350f7a5542c03a611e25585e1c3053442f"
+  "reportDigest": "sha256:3e3a3c3f7df76c6b0b9100729cec7de5c163262b1008fc6851c43a4991718b99"
 }
