@@ -23,6 +23,8 @@ const CONFIRM_CANARY = 'RELEASE_5_SOURCE_CLUSTER_CANARY'
 const CONFIRM_REMAINDER = 'RELEASE_28_SOURCE_CLUSTER_REMAINDER'
 const CASCADE_ROUTE = proof.targetRoute
 
+let workspaceShape: Record<string, unknown> = {}
+
 const object = (value: unknown, label: string): Json => {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error(`${label} must be an object.`)
   return value as Json
@@ -74,6 +76,12 @@ function authority() {
 async function readiness(origin: string, releaseToken: string, entries: Entry[]) {
   const workspace = object((await request(origin, releaseToken, '/api/admin/epistemic-releases')).body, 'release workspace')
   const candidates = array(workspace.candidates, 'release candidates')
+  workspaceShape = {
+    candidateCount: candidates.length,
+    workspaceKeys: Object.keys(workspace),
+    sampleCandidateKeys: candidates[0] ? Object.keys(candidates[0]) : [],
+    readyCandidates: candidates.filter((c) => c.ready === true).length,
+  }
   return entries.map((entry) => {
     const candidate = candidates.find((c) => c.recordId === entry.recordId && c.targetSha256 === entry.revisionSha256)
     const anyRevision = candidates.filter((c) => c.recordId === entry.recordId)
@@ -82,6 +90,8 @@ async function readiness(origin: string, releaseToken: string, entries: Entry[])
       recordId: entry.recordId,
       presentAtExactRevision: Boolean(candidate),
       revisionsPresentForRecord: anyRevision.length,
+      revisionsOffered: anyRevision.map((c) => String(c.targetSha256)).slice(0, 3),
+      expectedRevision: entry.revisionSha256,
       ready: candidate?.ready === true,
       blockers: (candidate?.blockers as unknown[]) ?? null,
       alreadyCurrent: active?.targetSha256 === entry.revisionSha256,
@@ -169,9 +179,13 @@ export async function runSourceClusterProductionRelease(environment = process.en
     const summarise = (rows: Awaited<ReturnType<typeof readiness>>) => ({
       total: rows.length, presentAtExactRevision: rows.filter((r) => r.presentAtExactRevision).length,
       ready: rows.filter((r) => r.ready).length, alreadyCurrent: rows.filter((r) => r.alreadyCurrent).length,
-      notReady: rows.filter((r) => !r.ready && !r.alreadyCurrent).map((r) => ({ recordId: r.recordId, present: r.presentAtExactRevision, blockers: r.blockers })),
+      inWorkspaceAtAnyRevision: rows.filter((r) => r.revisionsPresentForRecord > 0).length,
+      notReady: rows.filter((r) => !r.ready && !r.alreadyCurrent).slice(0, 3).map((r) => ({
+        recordId: r.recordId, present: r.presentAtExactRevision,
+        revisionsPresentForRecord: r.revisionsPresentForRecord,
+        expectedRevision: r.expectedRevision, revisionsOffered: r.revisionsOffered, blockers: r.blockers })),
     })
-    console.log(JSON.stringify({ mode, mutations: 0, phaseA: summarise(a), phaseB: summarise(b) }, null, 2))
+    console.log(JSON.stringify({ mode, mutations: 0, workspace: workspaceShape, phaseA: summarise(a), phaseB: summarise(b) }, null, 2))
     return
   }
 
