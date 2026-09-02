@@ -1,0 +1,227 @@
+{
+  "schemaVersion": "maha-source-cluster-cohort/1.0",
+  "batch": "source-cluster-closure-batch-1",
+  "frozenAt": "2026-09-02",
+  "selectionRule": "smallest minimumGovernedActions, ties broken by fewest unreleased records then source id",
+  "frozenBeforeResearch": true,
+  "clusters": [
+    {
+      "sourceId": "https://www.iter.org/machine/supporting-systems",
+      "title": "Supporting systems",
+      "inspectionDepth": "section-or-full-text",
+      "rightsBasis": "citation-with-paraphrase",
+      "boundRecordCount": 5,
+      "releasedRecords": 4,
+      "minimumGovernedActions": 3,
+      "openRecords": [
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-vacuum-vessel-boundary",
+          "revisionSha256": "sha256:4c42435cbd38fb9fe55c916cee671fa1098da815f0e63d0e54b52cf171afdf3e",
+          "alignmentClear": false,
+          "reviewState": "not-projected",
+          "blockers": [
+            "source-assignment-positional-legacy",
+            "source-subject-partially-supported"
+          ],
+          "claim": null,
+          "requiredAction": "inspect-then-review-then-release"
+        }
+      ]
+    },
+    {
+      "sourceId": "https://modelcontextprotocol.io/specification/2024-11-05/index",
+      "title": "Model Context Protocol specification",
+      "inspectionDepth": "section-or-full-text",
+      "rightsBasis": "citation-with-paraphrase",
+      "boundRecordCount": 5,
+      "releasedRecords": 4,
+      "minimumGovernedActions": 4,
+      "openRecords": [
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-mcp-session-lifecycle",
+          "revisionSha256": "sha256:110f2b0ddb37abd4acd9e4463e60c3bbd565d2dac8eefaa57cee2738d52ad80d",
+          "alignmentClear": true,
+          "reviewState": "release-ready",
+          "blockers": [],
+          "claim": null,
+          "requiredAction": "release"
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+          "revisionSha256": "sha256:adcf82aed5f0fa3b468f494e98eb4c420ba22a53bebd17422202c939c4b214b8",
+          "alignmentClear": false,
+          "reviewState": "not-projected",
+          "blockers": [
+            "source-assignment-positional-legacy",
+            "source-subject-partially-supported"
+          ],
+          "claim": null,
+          "requiredAction": "inspect-then-review-then-release"
+        }
+      ]
+    },
+    {
+      "sourceId": "10.1038/s41580-020-00313-x",
+      "title": "NAD+ metabolism and its roles in cellular processes during ageing",
+      "inspectionDepth": "section-or-full-text",
+      "rightsBasis": "citation-with-paraphrase",
+      "boundRecordCount": 5,
+      "releasedRecords": 1,
+      "minimumGovernedActions": 4,
+      "openRecords": [
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-nampt-rate-limiting-step",
+          "revisionSha256": "sha256:bf7d09a9215d20978d902db07001f60efd91b79282fc94cf20ffb62a3727cbaa",
+          "alignmentClear": true,
+          "reviewState": "release-ready",
+          "blockers": [],
+          "claim": null,
+          "requiredAction": "release"
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-nmnat-compartmentalization",
+          "revisionSha256": "sha256:4faf2fae6b61dd689323efef0694188699b458ec10f9b6edef4c7d3de75f7796",
+          "alignmentClear": true,
+          "reviewState": "release-ready",
+          "blockers": [],
+          "claim": null,
+          "requiredAction": "release"
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-nmn-and-nr-precursors",
+          "revisionSha256": "sha256:191557d52bd9efab7dcd9dba21d964223963a9c86e33e57f1aa5b0f07dec0c54",
+          "alignmentClear": true,
+          "reviewState": "release-ready",
+          "blockers": [],
+          "claim": null,
+          "requiredAction": "release"
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-nad-consumption-by-parps",
+          "revisionSha256": "sha256:412e98d79a88bc725711c9c75b372870f59ae37e41e8ff99ade5b0fbc097fe80",
+          "alignmentClear": true,
+          "reviewState": "release-ready",
+          "blockers": [],
+          "claim": null,
+          "requiredAction": "release"
+        }
+      ]
+    },
+    {
+      "sourceId": "https://transformer-circuits.pub/2022/in-context-learning-and-induction-heads/index.html",
+      "title": "In-context Learning and Induction Heads",
+      "inspectionDepth": "section-or-full-text",
+      "rightsBasis": "citation-with-paraphrase",
+      "boundRecordCount": 5,
+      "releasedRecords": 3,
+      "minimumGovernedActions": 6,
+      "openRecords": [
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-previous-token-heads",
+          "revisionSha256": "sha256:f625abc2cd12338322ef9b8e12ff33585aff6fb0d430de39607a16b52a003c7b",
+          "alignmentClear": false,
+          "reviewState": "not-projected",
+          "blockers": [
+            "source-assignment-positional-legacy",
+            "source-subject-partially-supported"
+          ],
+          "claim": null,
+          "requiredAction": "inspect-then-review-then-release"
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-io-identification-circuit",
+          "revisionSha256": "sha256:423d3d8385569d7166a1f5e4a595935f02f05834f537c17c8c382cbe408aff41",
+          "alignmentClear": false,
+          "reviewState": "not-projected",
+          "blockers": [
+            "source-assignment-positional-legacy",
+            "source-subject-mismatched"
+          ],
+          "claim": null,
+          "requiredAction": "inspect-then-review-then-release"
+        }
+      ]
+    },
+    {
+      "sourceId": "10.1111/acel.12344",
+      "title": "The Achilles’ heel of senescent cells: from transcriptome to senolytic drugs",
+      "inspectionDepth": "section-or-full-text",
+      "rightsBasis": "citation-with-paraphrase",
+      "boundRecordCount": 5,
+      "releasedRecords": 1,
+      "minimumGovernedActions": 6,
+      "openRecords": [
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-cellular-senescence-markers",
+          "revisionSha256": "sha256:32f84190547d8cff7fab09573847957046e817bea41f479c57eaf48d9d5fcd37",
+          "alignmentClear": true,
+          "reviewState": "release-ready",
+          "blockers": [],
+          "claim": null,
+          "requiredAction": "release"
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-senescence-associated-secretory-phenotype",
+          "revisionSha256": "sha256:952678480a011c4b89b3a081b903fa76b0d4a06d4b10f99cd6c16f39320aa91c",
+          "alignmentClear": false,
+          "reviewState": "not-projected",
+          "blockers": [
+            "source-assignment-positional-legacy",
+            "source-subject-partially-supported"
+          ],
+          "claim": null,
+          "requiredAction": "inspect-then-review-then-release"
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-apoptosis-in-senescent-cells",
+          "revisionSha256": "sha256:b8f9ca4f249f6628e1f2812f62cdbe132683e4d0d1355e09844d0d76c8d5ed88",
+          "alignmentClear": true,
+          "reviewState": "release-ready",
+          "blockers": [],
+          "claim": null,
+          "requiredAction": "release"
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-senescent-cell-clearance",
+          "revisionSha256": "sha256:f208ae5ebd530d273ae1e30c924ebc41eabe84efaa38aa731de42fee86645808",
+          "alignmentClear": true,
+          "reviewState": "release-ready",
+          "blockers": [],
+          "claim": null,
+          "requiredAction": "release"
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "clusters": 5,
+    "openRecords": 13,
+    "needingInspection": 5,
+    "needingReleaseOnly": 8,
+    "governedActions": 23
+  },
+  "deliberatelyExcluded": [
+    {
+      "sourceId": "10.1016/j.synbio.2017.02.003",
+      "actions": 8,
+      "unreleased": 4
+    },
+    {
+      "sourceId": "10.1038/nature09929",
+      "actions": 8,
+      "unreleased": 4
+    },
+    {
+      "sourceId": "10.1038/nn.2973",
+      "actions": 8,
+      "unreleased": 4
+    }
+  ],
+  "largestClusterExcluded": {
+    "sourceId": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
+    "unreleasedRecords": 20,
+    "minimumGovernedActions": 52,
+    "reason": "Largest theoretical yield, worst honest deficit. Excluded by rule, not by preference."
+  },
+  "cohortDigest": "sha256:493b9d2cb3858a0cb2809cfc951f8a73171e8cdf25f6f6a508b453dcded6d020"
+}

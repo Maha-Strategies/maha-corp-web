@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "maha-source-cluster-yield/1.0",
+  "measuredWith": "lib/source-evidence-reference.ts evaluateSourcePage, the same function the served route calls",
+  "baselineEligiblePages": 8,
+  "clustersFrozen": 5,
+  "clustersSurvivingInspection": 1,
+  "clustersLostToInspection": 4,
+  "recordsRemovedFromClusters": 5,
+  "yield": [
+    {
+      "scenario": "package-33",
+      "label": "The 33-record Production package released",
+      "governedActions": 33,
+      "eligiblePages": 9,
+      "newPages": 1,
+      "pagesPerGovernedAction": 0.0303,
+      "newRoutes": [
+        "/knowledge/sources/10-1038-s41580-020-00313-x"
+      ]
+    },
+    {
+      "scenario": "cluster-batch-1",
+      "label": "Source-Cluster Closure Batch 1 as it survived inspection",
+      "governedActions": 4,
+      "eligiblePages": 9,
+      "newPages": 1,
+      "pagesPerGovernedAction": 0.25,
+      "newRoutes": [
+        "/knowledge/sources/10-1038-s41580-020-00313-x"
+      ]
+    },
+    {
+      "scenario": "both",
+      "label": "Package and cluster batch together",
+      "governedActions": 37,
+      "eligiblePages": 9,
+      "newPages": 1,
+      "pagesPerGovernedAction": 0.027,
+      "newRoutes": [
+        "/knowledge/sources/10-1038-s41580-020-00313-x"
+      ]
+    }
+  ],
+  "interpretation": [
+    "The 33-record package is a release of records. It adds records to sources that still hold unreleased siblings, so it moves no source across the page gate.",
+    "Batch 1 was chosen for the smallest honest deficit, and four of its five clusters still failed, because deficit counts distance in governed actions and cannot see whether the source actually supports the record until the source is read.",
+    "The surviving yield is real but small. It is reported as measured rather than adjusted upward."
+  ],
+  "reportDigest": "sha256:5d4e4347d9e4c41b1e32369ad9cded91a5ef2e539c286d79373c8bf86b09da42"
+}

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "maha-cluster-release-canary/1.0",
+  "preparedAt": "2026-09-02",
+  "executed": false,
+  "released": false,
+  "authorization": "not-granted",
+  "separateCanaryAvailable": false,
+  "whyNot": "Source-Cluster Closure Batch 1 has one surviving cluster, 10.1038/s41580-020-00313-x, and all four of its open records are already members of the frozen 33-record Production package. A separate cluster canary would re-release the same four records under a second operation id, which is exactly the double-execution the replay-safe ids exist to prevent. The cluster is therefore canaried as part of the package, not beside it.",
+  "sequencing": {
+    "observation": "None of the four cluster records is in the package canary. All four are in the 28-record remainder.",
+    "consequence": "The five-record canary unlocks zero source pages. The source page for 10.1038/s41580-020-00313-x appears only once the remainder completes, because the aggregate gate refuses a page while any bound claim is unreleased.",
+    "implication": "Anyone checking for the new source route immediately after the canary will correctly find nothing. That is the gate working, not a failed release.",
+    "verificationPoint": "Check /knowledge/sources/10-1038-s41580-020-00313-x after the remainder, not after the canary."
+  },
+  "coveringOperation": {
+    "package": "maha-production-release-package/1.0",
+    "clusterRecordsCoveredInRemainder": 4,
+    "clusterRecordsCoveredInCanary": 0
+  },
+  "expectedEffectWhenEventuallyExecuted": {
+    "newSourcePages": 1,
+    "route": "/knowledge/sources/10-1038-s41580-020-00313-x",
+    "precondition": "All five records bound to that source hold active releases. One already does; the remaining four are in the remainder."
+  },
+  "boundary": "A prepared plan. Nothing here has been executed and no release credential was used in producing it."
+}
