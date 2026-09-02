@@ -2,17 +2,17 @@
   "schemaVersion": "maha-legacy-uplift-report/2.0",
   "pageStates": {
     "legacyUnchanged": 0,
-    "structurallyUplifted": 98,
-    "sourceSupportedUplift": 32,
+    "structurallyUplifted": 95,
+    "sourceSupportedUplift": 35,
     "blocked": 37,
     "total": 167,
     "neverCombined": "structurallyUplifted and sourceSupportedUplift are reported separately and must not be added into a single quality figure."
   },
   "informationValue": {
-    "inspectedClaimsPerPage": 0.26,
-    "inspectedLocatorsPerPage": 0.26,
-    "declaredLocatorsPerPage": 1.92,
-    "independentlySourcedExplanatorySections": 32,
+    "inspectedClaimsPerPage": 0.28,
+    "inspectedLocatorsPerPage": 0.28,
+    "declaredLocatorsPerPage": 1.94,
+    "independentlySourcedExplanatorySections": 35,
     "informationDimensionsPerPage": 8.32,
     "limitationsPerPage": 1,
     "typedInternalLinksPerPage": 2.29,
@@ -71,8 +71,8 @@
   "outcome": {
     "eligibleAndUpgraded": 130,
     "upgradeQuality": {
-      "sourceSupported": 32,
-      "structuralOnly": 98,
+      "sourceSupported": 35,
+      "structuralOnly": 95,
       "note": "Structural means the page now carries the substantial shape, composed from evidence its family already stored. It does not mean any source was independently inspected. Only the source-supported count reflects inspected evidence."
     },
     "blocked": 37,
@@ -92,19 +92,19 @@
   "depth": {
     "before": {
       "dimensions": 6.75,
-      "sourcesWithBoundary": 1.49,
-      "declaredLocators": 1.49,
-      "contentInspectedLocators": 0.2,
-      "explanatorySources": 0.2,
+      "sourcesWithBoundary": 1.51,
+      "declaredLocators": 1.51,
+      "contentInspectedLocators": 0.22,
+      "explanatorySources": 0.22,
       "internalLinks": 2,
       "renderedSections": 6
     },
     "after": {
       "dimensions": 8.32,
-      "sourcesWithBoundary": 1.92,
-      "declaredLocators": 1.92,
-      "contentInspectedLocators": 0.26,
-      "explanatorySources": 0.26,
+      "sourcesWithBoundary": 1.94,
+      "declaredLocators": 1.94,
+      "contentInspectedLocators": 0.28,
+      "explanatorySources": 0.28,
       "internalLinks": 2.29,
       "renderedSections": 5.87
     },
@@ -114,5 +114,5 @@
   "routesChanged": 0,
   "duplicatePagesAdded": 0,
   "boundary": "A private compilation report. It contains no audit data, review packet, rejected material or credential.",
-  "reportDigest": "sha256:2a66d339687091444fe7d3cc4e80cd86d908e40f75f4bbf947cc332e54c85c77"
+  "reportDigest": "sha256:1f2b3842e78be3abb2d4b45c596c5f12ba4c5db799bdd526ebc689786380a0ea"
 }

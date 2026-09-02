@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "maha-evidence-batch-3-inspections/1.0",
+  "batch": "evidence-recovery-3",
+  "conductedOn": "2026-09-02",
+  "appendOnly": true,
+  "writtenToProduction": false,
+  "cohortDigest": "sha256:66cf351131b7c4093a116879c066949089050711b9a2787d396e26d17b372aa0",
+  "frozenBeforeSearching": true,
+  "inspected": [
+    {
+      "sourceId": "nist-tn1297-uncertainty",
+      "tier": "government-publication",
+      "title": "Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results",
+      "authors": "Barry N. Taylor and Chris E. Kuyatt",
+      "venue": "NIST Technical Note 1297, 1994 edition",
+      "identifier": "NIST TN 1297",
+      "retrievedFrom": "https://nvlpubs.nist.gov/nistpubs/Legacy/TN/nbstechnicalnote1297.pdf",
+      "retrievedOn": "2026-09-02",
+      "depth": "section-or-full-text",
+      "retrievalNote": "Automated extraction returned binary, so the PDF was read page by page.",
+      "identityVerified": true,
+      "identityBasis": "Served from nvlpubs.nist.gov; running head and title page state the title, both authors and the Technical Note number.",
+      "versionRelationship": "1994 edition, superseding the 1993 edition.",
+      "rightsBasis": "US government work, citation-with-paraphrase",
+      "exactLocators": [
+        "Section 2.7 correlations and covariances",
+        "Section 3 Type A Evaluation of Standard Uncertainty",
+        "Section 4 Type B Evaluation of Standard Uncertainty",
+        "Sections 4.2 to 4.6 distribution conversions",
+        "Section 4.7",
+        "Section 5.1 Combined Standard Uncertainty",
+        "Section 5.4 level of confidence",
+        "Section 6.1 and 6.2 Expanded Uncertainty and coverage factor",
+        "Appendix A Law of Propagation of Uncertainty, Eq. (A-3)"
+      ],
+      "observedContent": "Section 3 records that a Type A evaluation may rest on any valid statistical method, giving the standard deviation of the mean of independent observations, least squares and analysis of variance as examples. Section 4 records that a Type B evaluation rests on scientific judgment using previous data, general knowledge of instruments, manufacturer specifications, calibration reports and handbook reference data, and Sections 4.2 to 4.6 give the conversions for rectangular and triangular models, with u equal to a over the square root of three and a over the square root of six respectively. Section 4.7 states that Type A evaluations based on limited data are not necessarily more reliable than soundly based Type B evaluations. Section 5.1 states that the combined standard uncertainty is obtained by combining the individual standard uncertainties and covariances by the method summarized in Appendix A Equation A-3, called the law of propagation of uncertainty and commonly the root-sum-of-squares method. Section 6.1 defines expanded uncertainty as the coverage factor times the combined standard uncertainty, and Section 6.2 records that the coverage factor is typically between two and three, with a factor of two giving approximately ninety-five percent level of confidence.",
+      "establishes": "The standard method for combining measurement uncertainties: the distinction between Type A and Type B evaluation, the law of propagation of uncertainty as the root-sum-of-squares combination including covariances, and the meaning of a coverage factor and expanded uncertainty.",
+      "boundary": "Section 3 states outright that the Note does not attempt to give detailed statistical techniques for carrying out Type A evaluations and refers the reader elsewhere. It prescribes no calibration procedure for any instrument, no industry-specific protocol and no compliance requirement, so it cannot support a claim about how any particular measurement was performed.",
+      "supportsRoutes": ["/knowledge/mathematics/uncertainty-propagation"],
+      "routesConsideredAndRejected": [
+        { "route": "/knowledge/astronomy/astrometry-parallax-and-proper-motion", "reason": "The Note is about uncertainty methodology, not astrometry. Using it here would be subject drift, however naturally the topics sit together." }
+      ],
+      "unsupportedPropositionBefore": "That measurement uncertainties combine by a stated rule and that coverage factors express confidence, asserted with no inspected source for either."
+    },
+    {
+      "sourceId": "obien-2015-mea-recordings",
+      "tier": "peer-reviewed-open-access",
+      "title": "Revealing neuronal function through microelectrode array recordings",
+      "authors": "Marie Engelene J. Obien, Kosmas Deligkaris, Torsten Bullmann, Douglas J. Bakkum, Urs Frey",
+      "venue": "Frontiers in Neuroscience, 2015",
+      "identifier": "10.3389/fnins.2014.00423",
+      "retrievedFrom": "https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2014.00423/full",
+      "retrievedOn": "2026-09-02",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Article page states the title, five authors, journal, year and DOI, matching the citation.",
+      "versionRelationship": "Open-access version of record.",
+      "rightsBasis": "Frontiers open access, citation-with-paraphrase",
+      "exactLocators": ["Introduction", "Understanding MEA Signals", "MEA Signal Processing", "Neuron-Electrode Interface"],
+      "observedContent": "The Introduction records that microelectrode arrays permit simultaneous long-term recording of local field potentials and extracellular action potentials from a population of neurons at millisecond timescale. Understanding MEA Signals records that extracellular action potentials are tens to hundreds of microvolts in amplitude and under two milliseconds in duration, against tens of millivolts for intracellular potentials. MEA Signal Processing records a typical band-pass filter of 300 to 3000 hertz. Neuron-Electrode Interface records that electrodes detect signals from all sources around each sensor rather than resolving single cells as intracellular methods do.",
+      "establishes": "What a microelectrode array actually measures: the two signal classes and their bands, the amplitude and duration of extracellular action potentials against intracellular ones, the standard filter band, and the fact that an extracellular electrode integrates over nearby sources rather than isolating one cell.",
+      "boundary": "A review of the recording method. It establishes no comparative efficacy against optical methods, no clinical diagnostic validity, and no long-term biocompatibility beyond what manufacturers test. It cannot support a claim that any cultured network performs computation, nor any claim about neuromorphic hardware.",
+      "supportsRoutes": [
+        "/knowledge/neuromorphic-biocomputing/multielectrode-arrays-and-stimulation",
+        "/knowledge/neuromorphic-biocomputing/biological-neural-cultures"
+      ],
+      "routesConsideredAndRejected": [
+        { "route": "/knowledge/neuromorphic-biocomputing/reproducibility-variability-and-controls", "reason": "The review covers recording method, not reproducibility methodology or control design. Adjacent family membership is not support." }
+      ],
+      "unsupportedPropositionBefore": "That multielectrode arrays record and stimulate cultured neurons, and what those recordings can resolve, asserted with no inspected source."
+    }
+  ],
+  "notInspected": [
+    {
+      "sourceId": "cmp-mechanism-institutional-repository",
+      "routesAttempted": [
+        { "route": "arXiv subject search for CMP removal-rate mechanism", "outcome": "no subject-matched result" },
+        { "route": "institutional repository search across MIT DSpace, eScholarship, DiVA and CORE", "outcome": "only USPTO patents returned" }
+      ],
+      "outcome": "no-lawful-inspectable-source-found",
+      "depth": "not-inspected",
+      "disposition": "Blocker preserved. Patents are excluded as evidence by rule, and nothing subject-matched to copper-interconnect CMP surfaced through a lawful route.",
+      "affectedRoutes": ["/knowledge/processes/copper-interconnects-and-cmp", "/knowledge/equipment/chemical-mechanical-planarization-polisher"]
+    },
+    {
+      "sourceId": "nist-optical-defect-author-manuscript",
+      "routesAttempted": [
+        { "route": "NIST publication identifier guessed for an author manuscript copy", "outcome": "no content returned; the identifier does not resolve" }
+      ],
+      "outcome": "identifier-does-not-resolve",
+      "depth": "not-inspected",
+      "disposition": "Blocker preserved. The SPIE full text remains the only known location and requires subscription access.",
+      "note": "A guessed identifier is not a discovery route. Recorded as a failure rather than presented as a search."
+    }
+  ],
+  "paywallAndDeadSourceStatus": [
+    { "sourceId": "nist-silver-optical-defect-limits", "previousOutcome": "abstract-only via NIST landing page", "newRouteTried": "guessed NIST author-manuscript identifier", "newOutcome": "does not resolve", "stillBlocked": true, "requires": "SPIE Digital Library access" },
+    { "sourceId": "amkor-rdl-pop", "previousOutcome": "dead vendor PDF; IEEE version of record identified", "newRouteTried": "none this batch", "newOutcome": "not re-attempted; availability has not materially changed", "stillBlocked": true, "requires": "IEEE Xplore access" },
+    { "sourceId": "cmp-citrate-slurry-mechanisms", "previousOutcome": "reCAPTCHA", "newRouteTried": "institutional repository search for an equivalent subject-matched source", "newOutcome": "no subject-matched result", "stillBlocked": true, "requires": "a lawful route not behind a bot check" },
+    { "sourceId": "cryogenic-sio2-dry-etch", "previousOutcome": "reCAPTCHA", "newRouteTried": "none this batch", "newOutcome": "not re-attempted; availability has not materially changed", "stillBlocked": true },
+    { "sourceId": "applied-product-portfolio", "previousOutcome": "HTTP 403", "newRouteTried": "none this batch", "newOutcome": "not re-attempted", "stillBlocked": true, "note": "Vendor material; usable only for bounded first-party claims even if reachable." },
+    { "sourceId": "tsmc-3dfabric", "previousOutcome": "HTTP 403", "newRouteTried": "none this batch", "newOutcome": "not re-attempted", "stillBlocked": true, "note": "Same." },
+    { "sourceId": "advantest-test-briefing", "previousOutcome": "dead link", "newRouteTried": "none this batch", "newOutcome": "not re-attempted", "stillBlocked": true }
+  ],
+  "summary": {
+    "cohortSize": 30,
+    "retrievalAttempts": 6,
+    "inspectedSectionOrFullText": 2,
+    "abstractOnly": 0,
+    "noSourceFound": 2,
+    "wrongDocumentRejected": 0,
+    "routesSupported": 3,
+    "routesConsideredAndRejectedForSubjectDrift": 2,
+    "vendorSourcesUsedForIndependentClaims": 0,
+    "activeBindingsChanged": 0
+  },
+  "boundary": "A private inspection record. No passage is reproduced beyond what states what a source establishes and where it stops."
+}

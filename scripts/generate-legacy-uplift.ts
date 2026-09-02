@@ -13,6 +13,7 @@ import { KNOWLEDGE_SUPPLIERS } from '../lib/knowledge-process-profiles.ts'
 import attestationFile from '../content/legacy-uplift/inspection-attestations.json' with { type: 'json' }
 import batch1 from '../content/semiconductor-evidence/batch-1.json' with { type: 'json' }
 import batch2 from '../content/evidence-batch-2/inspections.json' with { type: 'json' }
+import batch3 from '../content/evidence-batch-3/inspections.json' with { type: 'json' }
 
 /**
  * Inventories the legacy corpus, baselines it, and compiles the uplift.
@@ -63,7 +64,7 @@ const withAttestation = (s: LegacySource): LegacySource => {
  */
 type Batch1 = { sourceId: string; title: string; retrievedFrom: string; retrievedOn: string; depth: string; exactLocators: string[]; observedContent: string; establishes: string; boundary: string; identityVerified: boolean; versionRelationship: string; rightsBasis: string; supportsRoutes: string[] }
 const batch1ByRoute = new Map<string, Batch1[]>()
-for (const entry of [...(batch1.inspected as Batch1[]), ...(batch2.inspected as unknown as Batch1[])]) {
+for (const entry of [...(batch1.inspected as Batch1[]), ...(batch2.inspected as unknown as Batch1[]), ...(batch3.inspected as unknown as Batch1[])]) {
   for (const route of entry.supportsRoutes) {
     batch1ByRoute.set(route, [...(batch1ByRoute.get(route) ?? []), entry])
   }
@@ -260,7 +261,7 @@ const withBatch1 = inputs.map((input) => {
     }))],
   }
 })
-const batch1Attestations = Object.fromEntries([...(batch1.inspected as Batch1[]), ...(batch2.inspected as unknown as Batch1[])].map((entry) => [entry.sourceId, {
+const batch1Attestations = Object.fromEntries([...(batch1.inspected as Batch1[]), ...(batch2.inspected as unknown as Batch1[]), ...(batch3.inspected as unknown as Batch1[])].map((entry) => [entry.sourceId, {
   sourceId: entry.sourceId, retrievedFrom: entry.retrievedFrom, retrievedOn: entry.retrievedOn,
   depth: entry.depth as never, exactLocator: entry.exactLocators.join('; '),
   observedContent: entry.observedContent, identityVerified: entry.identityVerified,
