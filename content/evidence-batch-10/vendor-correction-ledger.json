@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "maha-vendor-correction-ledger/1.0",
+  "correctedAt": "2026-09-03",
+  "vendorAuthoredSources": [
+    "amkor-3d-stack",
+    "asml-lithography",
+    "tel-process-equipment"
+  ],
+  "mechanism": {
+    "scope": "source-level",
+    "hardcodedRouteExclusions": 0,
+    "propagation": "A source carries its evidence class to every page citing it, so a page added later inherits the class without being listed anywhere.",
+    "mixedSourceRule": "A page citing both a vendor document and an independent source keeps independent status through the independent source only."
+  },
+  "pagesCitingVendorSources": 15,
+  "correctedToStructural": 14,
+  "retainedIndependentViaOtherSource": 1,
+  "pages": [
+    {
+      "route": "/knowledge/equipment/chip-to-wafer-and-wafer-to-wafer-bonding-system",
+      "vendorSourcesCited": [
+        "amkor-3d-stack"
+      ],
+      "otherSourcesCited": 2,
+      "before": "independently-source-supported",
+      "after": "structurally-uplifted",
+      "changed": true,
+      "reason": "Its only inspected source was the vendor’s own documentation, which is first-party evidence wherever it is cited."
+    },
+    {
+      "route": "/knowledge/equipment/die-attach-flip-chip-and-thermocompression-bonder",
+      "vendorSourcesCited": [
+        "amkor-3d-stack"
+      ],
+      "otherSourcesCited": 2,
+      "before": "independently-source-supported",
+      "after": "structurally-uplifted",
+      "changed": true,
+      "reason": "Its only inspected source was the vendor’s own documentation, which is first-party evidence wherever it is cited."
+    },
+    {
+      "route": "/knowledge/equipment/diffusion-furnace-and-rapid-thermal-processor",
+      "vendorSourcesCited": [
+        "tel-process-equipment"
+      ],
+      "otherSourcesCited": 1,
+      "before": "independently-source-supported",
+      "after": "structurally-uplifted",
+      "changed": true,
+      "reason": "Its only inspected source was the vendor’s own documentation, which is first-party evidence wherever it is cited."
+    },
+    {
+      "route": "/knowledge/equipment/duv-immersion-lithography-scanner",
+      "vendorSourcesCited": [
+        "asml-lithography"
+      ],
+      "otherSourcesCited": 2,
+      "before": "independently-source-supported",
+      "after": "structurally-uplifted",
+      "changed": true,
+      "reason": "Its only inspected source was the vendor’s own documentation, which is first-party evidence wherever it is cited."
+    },
+    {
+      "route": "/knowledge/equipment/euv-and-high-na-euv-lithography-scanner",
+      "vendorSourcesCited": [
+        "asml-lithography"
+      ],
+      "otherSourcesCited": 2,
+      "before": "independently-source-supported",
+      "after": "structurally-uplifted",
+      "changed": true,
+      "reason": "Its only inspected source was the vendor’s own documentation, which is first-party evidence wherever it is cited."
+    },
+    {
+      "route": "/knowledge/equipment/photoresist-coat-and-develop-track",
+      "vendorSourcesCited": [
+        "tel-process-equipment",
+        "asml-lithography"
+      ],
+      "otherSourcesCited": 0,
+      "before": "independently-source-supported",
+      "after": "structurally-uplifted",
+      "changed": true,
+      "reason": "Its only inspected source was the vendor’s own documentation, which is first-party evidence wherever it is cited."
+    },
+    {
+      "route": "/knowledge/equipment/plasma-etch-and-atomic-layer-etch-system",
+      "vendorSourcesCited": [
+        "tel-process-equipment"
+      ],
+      "otherSourcesCited": 2,
+      "before": "independently-source-supported",
+      "after": "independently-source-supported",
+      "changed": false,
+      "reason": "Mixed-source page. It keeps independent status through a separate inspected source, and the vendor document contributes nothing to that status."
+    },
+    {
+      "route": "/knowledge/equipment/semiconductor-encapsulation-and-molding-system",
+      "vendorSourcesCited": [
+        "amkor-3d-stack"
+      ],
+      "otherSourcesCited": 1,
+      "before": "independently-source-supported",
+      "after": "structurally-uplifted",
+      "changed": true,
+      "reason": "Its only inspected source was the vendor’s own documentation, which is first-party evidence wherever it is cited."
+    },
+    {
+      "route": "/knowledge/equipment/semiconductor-wafer-prober",
+      "vendorSourcesCited": [
+        "tel-process-equipment"
+      ],
+      "otherSourcesCited": 1,
+      "before": "independently-source-supported",
+      "after": "structurally-uplifted",
+      "changed": true,
+      "reason": "Its only inspected source was the vendor’s own documentation, which is first-party evidence wherever it is cited."
+    },
+    {
+      "route": "/knowledge/equipment/single-wafer-wet-clean-and-surface-preparation-system",
+      "vendorSourcesCited": [
+        "tel-process-equipment"
+      ],
+      "otherSourcesCited": 2,
+      "before": "independently-source-supported",
+      "after": "structurally-uplifted",
+      "changed": true,
+      "reason": "Its only inspected source was the vendor’s own documentation, which is first-party evidence wherever it is cited."
+    },
+    {
+      "route": "/knowledge/processes/mask-data-preparation-and-reticle-fabrication",
+      "vendorSourcesCited": [
+        "asml-lithography"
+      ],
+      "otherSourcesCited": 2,
+      "before": "independently-source-supported",
+      "after": "structurally-uplifted",
+      "changed": true,
+      "reason": "Its only inspected source was the vendor’s own documentation, which is first-party evidence wherever it is cited."
+    },
+    {
+      "route": "/knowledge/processes/photolithography",
+      "vendorSourcesCited": [
+        "asml-lithography"
+      ],
+      "otherSourcesCited": 2,
+      "before": "independently-source-supported",
+      "after": "structurally-uplifted",
+      "changed": true,
+      "reason": "Its only inspected source was the vendor’s own documentation, which is first-party evidence wherever it is cited."
+    },
+    {
+      "route": "/knowledge/processes/thermal-oxidation-diffusion-and-furnace-processing",
+      "vendorSourcesCited": [
+        "tel-process-equipment"
+      ],
+      "otherSourcesCited": 1,
+      "before": "independently-source-supported",
+      "after": "structurally-uplifted",
+      "changed": true,
+      "reason": "Its only inspected source was the vendor’s own documentation, which is first-party evidence wherever it is cited."
+    },
+    {
+      "route": "/knowledge/processes/wafer-cleaning-and-surface-preparation",
+      "vendorSourcesCited": [
+        "tel-process-equipment"
+      ],
+      "otherSourcesCited": 1,
+      "before": "independently-source-supported",
+      "after": "structurally-uplifted",
+      "changed": true,
+      "reason": "Its only inspected source was the vendor’s own documentation, which is first-party evidence wherever it is cited."
+    },
+    {
+      "route": "/knowledge/processes/wire-bonding-and-flip-chip-interconnect",
+      "vendorSourcesCited": [
+        "amkor-3d-stack"
+      ],
+      "otherSourcesCited": 1,
+      "before": "independently-source-supported",
+      "after": "structurally-uplifted",
+      "changed": true,
+      "reason": "Its only inspected source was the vendor’s own documentation, which is first-party evidence wherever it is cited."
+    }
+  ],
+  "boundary": "A public-safe ledger of status changes. It carries no inspection rationale and no passage.",
+  "ledgerDigest": "sha256:54ec539b2441c4df47b9e4f209d31344c2795157198c1f310fc0fbf6aa5039db"
+}

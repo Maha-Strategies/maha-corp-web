@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto'
 import { mkdirSync, writeFileSync } from 'node:fs'
 
 import { canonicalJson } from '../lib/evidence-dossier/digest.ts'
-import { auditDepth, type DepthMeasures } from '../lib/page-depth-audit.ts'
+import { assertDenominatorEnumerated, auditDepth, type DepthMeasures } from '../lib/page-depth-audit.ts'
 import compiled from '../content/legacy-uplift/uplift-compiled.json' with { type: 'json' }
 import supplier from '../content/evidence-batch-5/supplier-first-party.json' with { type: 'json' }
 import reuse from '../content/evidence-batch-7/reuse-audit.json' with { type: 'json' }
@@ -11,6 +11,7 @@ import batch1 from '../content/semiconductor-evidence/batch-1.json' with { type:
 import batch2 from '../content/evidence-batch-2/inspections.json' with { type: 'json' }
 import batch3 from '../content/evidence-batch-3/inspections.json' with { type: 'json' }
 import batch4 from '../content/evidence-batch-4/inspections.json' with { type: 'json' }
+import batch9 from '../content/evidence-batch-9/inspections.json' with { type: 'json' }
 
 const sha = (v: unknown) => `sha256:${createHash('sha256').update(canonicalJson(v), 'utf8').digest('hex')}`
 
@@ -24,7 +25,7 @@ const add = (route: string, locators: number) => {
 for (const s of [...(batch1.inspected as Record<string, unknown>[]), ...(batch2.inspected as Record<string, unknown>[]), ...(batch3.inspected as Record<string, unknown>[])]) {
   for (const r of (s.supportsRoutes as string[] | undefined) ?? []) add(r, ((s.exactLocators as string[] | undefined) ?? []).length)
 }
-for (const s of [...(batch4.inspected as Record<string, unknown>[]), ...(batch8.inspected as Record<string, unknown>[])]) {
+for (const s of [...(batch4.inspected as Record<string, unknown>[]), ...(batch8.inspected as Record<string, unknown>[]), ...(batch9.inspected as Record<string, unknown>[])]) {
   for (const c of (s.claimByClaimSupport as { route: string }[] | undefined) ?? []) add(c.route, 1)
 }
 for (const e of reuse.accepted as { route: string }[]) add(e.route, 1)
@@ -72,15 +73,15 @@ const classify = (page: Page): 'independent' | 'first-party' | 'structural' | 'b
   return (page.after?.explanatorySources ?? 0) > 0 ? 'independent' : 'structural'
 }
 
+// Every detail page, not a sample. Batch 9 audited 59 and reported against
+// 167; the fix is to audit all of them rather than to reword the claim.
 const independent = pages.filter((p) => classify(p) === 'independent')
 const firstParty = pages.filter((p) => classify(p) === 'first-party')
 const structuralAll = pages.filter((p) => classify(p) === 'structural')
-// A deterministic sample: every fourth structural page by sorted route.
-const sample = [...structuralAll].sort((a, b) => a.route.localeCompare(b.route))
-  .filter((_, i) => i % Math.ceil(structuralAll.length / 20) === 0).slice(0, 20)
+const blockedAll = pages.filter((p) => classify(p) === 'blocked')
 
-const audited = [...independent, ...firstParty, ...sample]
-  .map((page) => auditDepth(page.route, measure(page), classify(page)))
+const audited = pages.map((page) => auditDepth(page.route, measure(page), classify(page)))
+assertDenominatorEnumerated('full-corpus depth audit', pages.length, audited)
 
 const tally = (group: typeof audited) => group.reduce((m: Record<string, number>, v) => {
   m[v.state] = (m[v.state] ?? 0) + 1; return m
@@ -89,7 +90,8 @@ const tally = (group: typeof audited) => group.reduce((m: Record<string, number>
 const byGroup = {
   independentlySupported: { audited: independent.length, states: tally(audited.filter((a) => independent.some((p) => p.route === a.route))) },
   firstPartyDocumented: { audited: firstParty.length, states: tally(audited.filter((a) => firstParty.some((p) => p.route === a.route))) },
-  structuralSample: { sampledFrom: structuralAll.length, audited: sample.length, states: tally(audited.filter((a) => sample.some((p) => p.route === a.route))) },
+  structuralOnly: { audited: structuralAll.length, states: tally(audited.filter((a) => structuralAll.some((p) => p.route === a.route))) },
+  blocked: { audited: blockedAll.length, states: tally(audited.filter((a) => blockedAll.some((p) => p.route === a.route))) },
 }
 
 const report = {
@@ -98,6 +100,10 @@ const report = {
   finding: 'Classification and substance are different measurements. A page can carry an inspected source and explain almost nothing, and a structural page can be richly written and cite nothing checkable.',
   wordCountUsedAsGate: false,
   totalAudited: audited.length,
+  corpusSize: pages.length,
+  denominatorEqualsCorpus: audited.length === pages.length,
+  supersedesBatch9Audit: 'Batch 9 audited 59 pages and stated a result against 167. This audits all 167.',
+  depthDistribution: tally(audited),
   byGroup,
   substantialAndEvidenceBacked: audited.filter((a) => a.state === 'substantial-and-evidence-backed').length,
   thinnestSupported: audited.filter((a) => a.state === 'evidence-backed-but-thin')
