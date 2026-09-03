@@ -130,6 +130,14 @@ export interface UpliftBaseline {
   explanatorySources: number
   bridgeCount: number
   relatedRouteCount: number
+  /**
+   * The routes themselves, not only how many.
+   *
+   * The shape recorded a count alone, so sixteen supplier pages linked to
+   * routes that did not exist and nothing could notice. A count cannot be
+   * checked against the corpus; a list can.
+   */
+  relatedRoutes: readonly string[]
   renderedSections: number
 }
 
@@ -231,6 +239,7 @@ export function measure(input: LegacyPageInput, sections: readonly UpliftSection
     explanatorySources: graded.filter((g) => g.explanatory).length,
     bridgeCount: input.bridges.length,
     relatedRouteCount: input.relatedRoutes.length,
+    relatedRoutes: input.relatedRoutes,
     renderedSections: sections.length,
   }
 }
@@ -319,6 +328,19 @@ export function compileUplift(input: LegacyPageInput, baselineSections = 0): Upl
     if (items.length > 0) {
       sections.push({ dimension: 'typed-bridges', heading: `Bridge: ${bridge.title}`, items, sourceIds })
     }
+  }
+
+  // Related records counted towards the dimension total without rendering
+  // anything, so a page could gain a dimension the reader never saw. The
+  // routes are listed here, and carry no sourceIds: a link to a related record
+  // is navigation, not a claim, and nothing supports it but the corpus itself.
+  if (input.relatedRoutes.length > 0) {
+    sections.push({
+      dimension: 'related-records',
+      heading: 'Related records',
+      items: [...input.relatedRoutes],
+      sourceIds: [],
+    })
   }
 
   // At least one usable source is required. Sources that cannot be used are

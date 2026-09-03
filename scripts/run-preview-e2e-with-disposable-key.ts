@@ -35,35 +35,70 @@ async function run(script: string, apiKey: string): Promise<number> {
   })
 }
 
-const generated = await fetch(`${baseUrl}/api/v1/keys/generate`, {
-  method: 'POST',
-  headers: protectedHeaders({ 'content-type': 'application/json' }),
-  body: JSON.stringify({ email: `preview-canary+${Date.now()}@mahastrategies.com` }),
-})
-if (!generated.ok) {
-  throw new Error(`Disposable Preview key provisioning failed with HTTP ${generated.status}: ${(await generated.text()).slice(0, 300)}`)
+/**
+ * Provision one disposable tenant.
+ *
+ * Each gate gets its own. The two gates previously shared a single key, so the
+ * integration gate spent the tenant's rate-limit budget and the attribution
+ * gate's unattributed control call -- which asserts that an ordinary call
+ * succeeds -- then received a 429 from the limiter rather than a success. The
+ * assertion was right and the identity was wrong: the limiter is per tenant, so
+ * two tenants give the second gate the fresh budget its assertion assumes.
+ */
+async function provision(label: string): Promise<string> {
+  const generated = await fetch(`${baseUrl}/api/v1/keys/generate`, {
+    method: 'POST',
+    headers: protectedHeaders({ 'content-type': 'application/json' }),
+    body: JSON.stringify({ email: `preview-canary+${label}-${Date.now()}@mahastrategies.com` }),
+  })
+  if (!generated.ok) {
+    throw new Error(`Disposable Preview key provisioning failed for ${label} with HTTP ${generated.status}: ${(await generated.text()).slice(0, 300)}`)
+  }
+  const payload = await generated.json() as { apiKey?: string; balanceCredits?: number }
+  if (!payload.apiKey) throw new Error(`Disposable Preview key response for ${label} did not contain a key.`)
+  console.log(`Provisioned an isolated Preview canary tenant for ${label} with ${payload.balanceCredits ?? 'starter'} credits.`)
+  return payload.apiKey
 }
-const payload = await generated.json() as { apiKey?: string; balanceCredits?: number }
-if (!payload.apiKey) throw new Error('Disposable Preview key response did not contain a key.')
-console.log(`Provisioned an isolated Preview canary tenant with ${payload.balanceCredits ?? 'starter'} credits.`)
 
+/** Revoke every tenant, reporting failures without masking a gate result. */
+async function revokeAll(keys: { label: string; apiKey: string }[]): Promise<string[]> {
+  const failures: string[] = []
+  for (const { label, apiKey } of keys) {
+    const revoked = await fetch(`${baseUrl}/api/v1/keys/revoke`, {
+      method: 'POST',
+      headers: protectedHeaders({ authorization: `Bearer ${apiKey}` }),
+    })
+    if (!revoked.ok) failures.push(`${label} (HTTP ${revoked.status})`)
+    else console.log(`Revoked the disposable Preview canary key for ${label}.`)
+  }
+  return failures
+}
+
+const provisioned: { label: string; apiKey: string }[] = []
 let e2eStatus = 1
 let attributionStatus = 1
+let revocationFailures: string[] = []
+
 try {
-  e2eStatus = await run('scripts/test-e2e.ts', payload.apiKey)
+  const integrationKey = await provision('integration')
+  provisioned.push({ label: 'integration', apiKey: integrationKey })
+  e2eStatus = await run('scripts/test-e2e.ts', integrationKey)
+
   // Attribution proves a different write/read path and must still run when an
   // upstream integration gate fails. A failed product test must not suppress
   // the database evidence needed to diagnose an unrelated billing regression.
-  attributionStatus = await run('scripts/probe-preview-attribution.ts', payload.apiKey)
+  const attributionKey = await provision('attribution')
+  provisioned.push({ label: 'attribution', apiKey: attributionKey })
+  attributionStatus = await run('scripts/probe-preview-attribution.ts', attributionKey)
 } finally {
-  const revoked = await fetch(`${baseUrl}/api/v1/keys/revoke`, {
-    method: 'POST',
-    headers: protectedHeaders({ authorization: `Bearer ${payload.apiKey}` }),
-  })
-  if (!revoked.ok) throw new Error(`Disposable Preview key revocation failed with HTTP ${revoked.status}.`)
-  console.log('Revoked the disposable Preview canary key.')
+  revocationFailures = await revokeAll(provisioned)
 }
 
 if (e2eStatus !== 0 || attributionStatus !== 0) {
   throw new Error(`Preview gates failed (integration=${e2eStatus}, attribution=${attributionStatus}).`)
+}
+// Reported after the gate result so a cleanup problem cannot be mistaken for a
+// product failure, and cannot hide one either.
+if (revocationFailures.length > 0) {
+  throw new Error(`Disposable Preview key revocation failed for: ${revocationFailures.join(', ')}.`)
 }

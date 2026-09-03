@@ -1,0 +1,227 @@
+{
+  "schemaVersion": "maha-evidence-basis-ledger/1.0",
+  "batch": "substantial-evidence-conversion-batch-11",
+  "derivedOn": "2026-09-03",
+  "appendOnly": true,
+  "writtenToProduction": false,
+  "method": "Derived from the publisher of each already-inspected source. No source was reopened and no page changed state as a result.",
+  "migrationSafety": {
+    "priorLabel": "independently-source-supported",
+    "priorCount": 12,
+    "newCountUnderSameLabel": 12,
+    "pagesChangingState": 0,
+    "note": "The five public page states are preserved. One new state, textually-source-supported, exists for primary-textual and secondary-historical evidence; no source carries it yet, so no page moves."
+  },
+  "finding": "The single label \"independently supported\" was covering three distinct bases: independent scientific reports, government and standards publications, and formal mathematical references. They are now named separately.",
+  "distributionByBasis": {
+    "independent-scientific-or-technical": 6,
+    "government-or-standards-authority": 4,
+    "first-party-documentation": 3,
+    "primary-textual": 0,
+    "secondary-historical-scholarship": 0,
+    "formal-mathematical": 2,
+    "metadata-only": 0,
+    "inaccessible-or-unsupported": 0
+  },
+  "assignments": [
+    {
+      "sourceId": "amkor-3d-stack",
+      "title": "amkor-3d-stack",
+      "retrievedFrom": "https://amkor.com/technology/3d-stacked-die/",
+      "basis": "first-party-documentation",
+      "because": "The vendor describing its own equipment; corrected out of independent support in Batch 10.",
+      "publicState": "first-party-documented",
+      "countsAsIndependentSupport": false,
+      "cannotEstablish": [
+        "superiority",
+        "independent reliability",
+        "measured yield",
+        "industry adoption",
+        "comparative advantage"
+      ]
+    },
+    {
+      "sourceId": "asml-lithography",
+      "title": "asml-lithography",
+      "retrievedFrom": "https://www.asml.com/en/technology/lithography-principles",
+      "basis": "first-party-documentation",
+      "because": "The vendor describing its own equipment; corrected out of independent support in Batch 10.",
+      "publicState": "first-party-documented",
+      "countsAsIndependentSupport": false,
+      "cannotEstablish": [
+        "superiority",
+        "independent reliability",
+        "measured yield",
+        "industry adoption",
+        "comparative advantage"
+      ]
+    },
+    {
+      "sourceId": "dey-2022-sem-defect-detection",
+      "title": "Deep Learning-Based Defect Classification and Detection in SEM Images",
+      "retrievedFrom": "https://arxiv.org/pdf/2206.13505",
+      "basis": "independent-scientific-or-technical",
+      "because": "A research report by authors other than the subject, who could have reported otherwise.",
+      "publicState": "independently-source-supported",
+      "countsAsIndependentSupport": true,
+      "cannotEstablish": [
+        "anything outside the study stated scope"
+      ]
+    },
+    {
+      "sourceId": "doe-2022-microelectronics-capabilities",
+      "title": "Microelectronics at the Department of Energy: Capabilities and Opportunities for Driving U.S. Competitiveness",
+      "retrievedFrom": "https://science.osti.gov/-/media/bes/pdf/reports/2022/Microelectronics-at-the-Department-of-Energy-May-2022.pdf",
+      "basis": "government-or-standards-authority",
+      "because": "Published by a government body defining method or reporting programme capability, not an independently reviewed experimental finding.",
+      "publicState": "independently-source-supported",
+      "countsAsIndependentSupport": true,
+      "cannotEstablish": [
+        "that any particular implementation conforms",
+        "measured performance of any product"
+      ]
+    },
+    {
+      "sourceId": "doe-2023-plasma-microelectronics",
+      "title": "Plasma Science for Microelectronics Nanofabrication (workshop report)",
+      "retrievedFrom": "https://science.osti.gov/-/media/fes/pdf/2023/DOE_FES_PlasmaScience_Semiconductors_Final.pdf",
+      "basis": "government-or-standards-authority",
+      "because": "Published by a government body defining method or reporting programme capability, not an independently reviewed experimental finding.",
+      "publicState": "independently-source-supported",
+      "countsAsIndependentSupport": true,
+      "cannotEstablish": [
+        "that any particular implementation conforms",
+        "measured performance of any product"
+      ]
+    },
+    {
+      "sourceId": "graves-2024-plasma-microelectronics",
+      "title": "Science Challenges and Research Opportunities for Plasma Applications in Microelectronics",
+      "retrievedFrom": "https://www.osti.gov/servlets/purl/2349231",
+      "basis": "government-or-standards-authority",
+      "because": "Published by a government body defining method or reporting programme capability, not an independently reviewed experimental finding.",
+      "publicState": "independently-source-supported",
+      "countsAsIndependentSupport": true,
+      "cannotEstablish": [
+        "that any particular implementation conforms",
+        "measured performance of any product"
+      ]
+    },
+    {
+      "sourceId": "khan-2024-cleanroom-crds",
+      "title": "Open-Path Cavity Ring-Down Spectroscopy for Simultaneous Detection of Hydrogen Chloride and Particles in Cleanroom Environment",
+      "retrievedFrom": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11398013/",
+      "basis": "independent-scientific-or-technical",
+      "because": "A research report by authors other than the subject, who could have reported otherwise.",
+      "publicState": "independently-source-supported",
+      "countsAsIndependentSupport": true,
+      "cannotEstablish": [
+        "anything outside the study stated scope"
+      ]
+    },
+    {
+      "sourceId": "ligo-2016-gw150914",
+      "title": "Observation of Gravitational Waves from a Binary Black Hole Merger",
+      "retrievedFrom": "https://arxiv.org/pdf/1602.03837",
+      "basis": "independent-scientific-or-technical",
+      "because": "A research report by authors other than the subject, who could have reported otherwise.",
+      "publicState": "independently-source-supported",
+      "countsAsIndependentSupport": true,
+      "cannotEstablish": [
+        "anything outside the study stated scope"
+      ]
+    },
+    {
+      "sourceId": "nist-dlmf-3-8",
+      "title": "NIST Digital Library of Mathematical Functions, Chapter 3 Numerical Methods, §3.8 Nonlinear Equations",
+      "retrievedFrom": "https://dlmf.nist.gov/3.8",
+      "basis": "formal-mathematical",
+      "because": "A reference library of proved identities; each entry holds at its stated scope by derivation, not by measurement.",
+      "publicState": "independently-source-supported",
+      "countsAsIndependentSupport": true,
+      "cannotEstablish": [
+        "any empirical claim",
+        "a prose claim broader than the theorem"
+      ]
+    },
+    {
+      "sourceId": "nist-dlmf-4-14",
+      "title": "NIST Digital Library of Mathematical Functions, Chapter 4 Elementary Functions, §4.14 Definitions and Periodicity",
+      "retrievedFrom": "https://dlmf.nist.gov/4.14",
+      "basis": "formal-mathematical",
+      "because": "A reference library of proved identities; each entry holds at its stated scope by derivation, not by measurement.",
+      "publicState": "independently-source-supported",
+      "countsAsIndependentSupport": true,
+      "cannotEstablish": [
+        "any empirical claim",
+        "a prose claim broader than the theorem"
+      ]
+    },
+    {
+      "sourceId": "nist-tn1297-uncertainty",
+      "title": "Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results",
+      "retrievedFrom": "https://nvlpubs.nist.gov/nistpubs/Legacy/TN/nbstechnicalnote1297.pdf",
+      "basis": "government-or-standards-authority",
+      "because": "Published by a government body defining method or reporting programme capability, not an independently reviewed experimental finding.",
+      "publicState": "independently-source-supported",
+      "countsAsIndependentSupport": true,
+      "cannotEstablish": [
+        "that any particular implementation conforms",
+        "measured performance of any product"
+      ]
+    },
+    {
+      "sourceId": "obien-2015-mea-recordings",
+      "title": "Revealing neuronal function through microelectrode array recordings",
+      "retrievedFrom": "https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2014.00423/full",
+      "basis": "independent-scientific-or-technical",
+      "because": "A research report by authors other than the subject, who could have reported otherwise.",
+      "publicState": "independently-source-supported",
+      "countsAsIndependentSupport": true,
+      "cannotEstablish": [
+        "anything outside the study stated scope"
+      ]
+    },
+    {
+      "sourceId": "ostrau-2022-neuromorphic-benchmarking",
+      "title": "Benchmarking Neuromorphic Hardware and Its Energy Expenditure",
+      "retrievedFrom": "https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2022.873935/full",
+      "basis": "independent-scientific-or-technical",
+      "because": "A research report by authors other than the subject, who could have reported otherwise.",
+      "publicState": "independently-source-supported",
+      "countsAsIndependentSupport": true,
+      "cannotEstablish": [
+        "anything outside the study stated scope"
+      ]
+    },
+    {
+      "sourceId": "tabata-2021-uvla-spr-activation",
+      "title": "Solid Phase Recrystallization and Dopant Activation in Arsenic Ion-Implanted Silicon-On-Insulator by UV Laser Annealing",
+      "retrievedFrom": "https://arxiv.org/pdf/2111.07577",
+      "basis": "independent-scientific-or-technical",
+      "because": "A research report by authors other than the subject, who could have reported otherwise.",
+      "publicState": "independently-source-supported",
+      "countsAsIndependentSupport": true,
+      "cannotEstablish": [
+        "anything outside the study stated scope"
+      ]
+    },
+    {
+      "sourceId": "tel-process-equipment",
+      "title": "tel-process-equipment",
+      "retrievedFrom": "https://www.tel.com/product/index.html",
+      "basis": "first-party-documentation",
+      "because": "The vendor describing its own equipment; corrected out of independent support in Batch 10.",
+      "publicState": "first-party-documented",
+      "countsAsIndependentSupport": false,
+      "cannotEstablish": [
+        "superiority",
+        "independent reliability",
+        "measured yield",
+        "industry adoption",
+        "comparative advantage"
+      ]
+    }
+  ],
+  "boundary": "This ledger records what kind of authority each source carries. It does not assert that any page is deeper, and it does not add or remove support from any page."
+}

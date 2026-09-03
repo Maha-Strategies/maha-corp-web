@@ -8,19 +8,19 @@
   "denominatorEqualsCorpus": true,
   "supersedesBatch9Audit": "Batch 9 audited 59 pages and stated a result against 167. This audits all 167.",
   "depthDistribution": {
-    "structurally-thin": 49,
-    "evidence-backed-but-thin": 18,
-    "substantial-and-evidence-backed": 11,
-    "structurally-substantial-but-unsupported": 51,
+    "structurally-substantial-but-unsupported": 86,
+    "substantial-and-evidence-backed": 27,
     "blocked": 28,
-    "first-party-documented-but-thin": 10
+    "first-party-documented-but-thin": 10,
+    "structurally-thin": 14,
+    "evidence-backed-but-thin": 2
   },
   "byGroup": {
     "independentlySupported": {
       "audited": 29,
       "states": {
-        "evidence-backed-but-thin": 18,
-        "substantial-and-evidence-backed": 11
+        "substantial-and-evidence-backed": 27,
+        "evidence-backed-but-thin": 2
       }
     },
     "firstPartyDocumented": {
@@ -32,8 +32,8 @@
     "structuralOnly": {
       "audited": 100,
       "states": {
-        "structurally-thin": 49,
-        "structurally-substantial-but-unsupported": 51
+        "structurally-substantial-but-unsupported": 86,
+        "structurally-thin": 14
       }
     },
     "blocked": {
@@ -43,7 +43,7 @@
       }
     }
   },
-  "substantialAndEvidenceBacked": 11,
+  "substantialAndEvidenceBacked": 27,
   "thinnestSupported": [
     {
       "route": "/knowledge/neuromorphic-biocomputing/comparisons/silicon-energy-and-biological-metabolic-cost",
@@ -53,87 +53,17 @@
       ]
     },
     {
-      "route": "/knowledge/astronomy/black-hole-observation-and-relativistic-inference",
-      "score": 12.6,
-      "reasons": [
-        "fewer than two typed links"
-      ]
-    },
-    {
-      "route": "/knowledge/astronomy/gravitational-waves-and-compact-mergers",
-      "score": 12.6,
-      "reasons": [
-        "fewer than two typed links"
-      ]
-    },
-    {
       "route": "/knowledge/neuromorphic-biocomputing/comparisons/digital-and-mixed-signal-neuromorphic-hardware",
       "score": 12.7,
       "reasons": [
         "direct answer too short to answer anything"
-      ]
-    },
-    {
-      "route": "/knowledge/concepts/cleanrooms-fab-utilities-and-contamination-control",
-      "score": 13.88,
-      "reasons": [
-        "fewer than two typed links"
-      ]
-    },
-    {
-      "route": "/knowledge/processes/plasma-etch-and-pattern-transfer",
-      "score": 14.06,
-      "reasons": [
-        "fewer than two typed links"
-      ]
-    },
-    {
-      "route": "/knowledge/equipment/atomic-layer-deposition-reactor",
-      "score": 14.3,
-      "reasons": [
-        "fewer than two typed links"
-      ]
-    },
-    {
-      "route": "/knowledge/equipment/plasma-etch-and-atomic-layer-etch-system",
-      "score": 14.3,
-      "reasons": [
-        "fewer than two typed links"
-      ]
-    },
-    {
-      "route": "/knowledge/processes/thin-film-deposition",
-      "score": 14.83,
-      "reasons": [
-        "fewer than two typed links"
-      ]
-    },
-    {
-      "route": "/knowledge/concepts/yield-learning-and-statistical-process-control",
-      "score": 15.44,
-      "reasons": [
-        "fewer than two typed links"
-      ]
-    },
-    {
-      "route": "/knowledge/equipment/semiconductor-ion-implantation-system",
-      "score": 15.8,
-      "reasons": [
-        "fewer than two typed links"
-      ]
-    },
-    {
-      "route": "/knowledge/equipment/optical-patterned-wafer-inspection-system",
-      "score": 15.8,
-      "reasons": [
-        "fewer than two typed links"
       ]
     }
   ],
   "verdicts": [
     {
       "route": "/knowledge/astronomy/coordinates-reference-frames-and-sky-position",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 265,
         "hasMechanismOrDerivation": true,
@@ -145,21 +75,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 13,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 214
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 227
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:6e9568e91cd5d23bea56092d2fa82ae8cc0aaf28138c458f5fe7fd9d7cc380cf"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:ecfe7e41c4a0c7bd9a126ebe8462f4a62e496b76e1437cc2230d867557ac0c31"
     },
     {
       "route": "/knowledge/astronomy/light-time-distance-and-lookback-time",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 244,
         "hasMechanismOrDerivation": true,
@@ -171,21 +99,19 @@
         "unresolvedQuestions": 4,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 17,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 247
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 264
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:8fba857af885407476e842a71a951d1306444dbf3e95dae78ac6d52f34dc8e1a"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:f070a878794a188711af8887f75bc050ebe3fc2cd585615746ee2cf68bd7050a"
     },
     {
       "route": "/knowledge/astronomy/evidence-uncertainty-and-model-comparison",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 298,
         "hasMechanismOrDerivation": true,
@@ -197,21 +123,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 223
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 230
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:0e2aa0dda7be95afe12d3edd74b9263ff0c156760d3db0ef24b16de5278ebd09"
+      "substantialityScore": 12.9,
+      "reasons": [],
+      "verdictDigest": "sha256:b46099058754531979827fd9707f5a0804d68e2176a957205b84666b89fa7ece"
     },
     {
       "route": "/knowledge/astronomy/electromagnetic-spectrum",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 280,
         "hasMechanismOrDerivation": true,
@@ -223,21 +147,19 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 8,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 177
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 185
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:f6cdb0c1166fafa75b9458427f9bebef064035a5193630d53fa02aa0c7c27acc"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:82b9adcf9a085d19a8f2e2309f8233d27997639f55d0cdcb0f9713050eb3cde8"
     },
     {
       "route": "/knowledge/astronomy/telescopes-detectors-and-angular-resolution",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 277,
         "hasMechanismOrDerivation": true,
@@ -249,21 +171,19 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 8,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 194
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 202
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:8797294b1a0b844e2d4304ea9027a757ac1d08cb724588f7eeb53dec90ca134e"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:7846d6169c2b40b3b5a9a4da78eb91291d5f1b6a808d5bcf3c7f76e246f50802"
     },
     {
       "route": "/knowledge/astronomy/photometry-flux-and-magnitude",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 269,
         "hasMechanismOrDerivation": true,
@@ -275,21 +195,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 14,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 204
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 218
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:ff02d6e95fc9258447dfb1ecadd1bb42eb2c161bfe54b5d9be5572782d13777d"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:90d03c54b904e98ec327d69484485645553156f981f13244fe0498da7db2d3c0"
     },
     {
       "route": "/knowledge/astronomy/spectroscopy-lines-and-redshift",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 287,
         "hasMechanismOrDerivation": true,
@@ -301,21 +219,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 15,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 224
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 239
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:2f23b0f8350ae140f2c645f7ad0b505a127b28c9601027c6dd50c92945890c48"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:01ea3197f2fe955bf87a5ec76d2f57cf31757acc4962c28bc7aa8450561f0910"
     },
     {
       "route": "/knowledge/astronomy/astrometry-parallax-and-proper-motion",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 301,
         "hasMechanismOrDerivation": true,
@@ -327,21 +243,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 13,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 216
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 229
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:f32c73f9eac0189d0a663c0ada3e0f94f1a9715db74a19bad8314eae04e75f4f"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:08991f1de2e6159d1e45a13001fad16343817e596def5f4987dd835f2d0a2160"
     },
     {
       "route": "/knowledge/astronomy/time-domain-and-multimessenger-astronomy",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 339,
         "hasMechanismOrDerivation": true,
@@ -353,21 +267,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 11,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 217
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 228
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:3f6f863d8b93a15eee84ae74bc1e2b4f71b3df6c9264c9ae3be0f8fdc42ca6b9"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:77fc85f0016921afb04642b6f15ec00dceb3f79c5330a833541c67c7d0bebda1"
     },
     {
       "route": "/knowledge/astronomy/orbits-gravity-and-ephemerides",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 321,
         "hasMechanismOrDerivation": true,
@@ -379,21 +291,19 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 11,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 193
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 204
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:b854151761a56f9065b3305c50baff5a23da125c424c2cd9f7d87fe1fea61b7f"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:96dd8dbf6dcc1316ef598d9e927ce6698c002d2981c6c745191923114f0d8e4c"
     },
     {
       "route": "/knowledge/astronomy/solar-system-architecture",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 301,
         "hasMechanismOrDerivation": true,
@@ -405,21 +315,19 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 186
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 193
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:bca3e5902c44f5196cdc2ec753c55d33f6efaff85075386511b13e3ab2b3a426"
+      "substantialityScore": 12.9,
+      "reasons": [],
+      "verdictDigest": "sha256:4953f99537c221a7a03bc6639c479117b84ca32f851bedd4ff43b47d936298e7"
     },
     {
       "route": "/knowledge/astronomy/exoplanet-detection-and-confirmation",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 309,
         "hasMechanismOrDerivation": true,
@@ -431,21 +339,19 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 180
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 187
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:a7987569c543f87dc86230f0e5704642989d3b619cdc23c75ba74eaa443ebacd"
+      "substantialityScore": 12.9,
+      "reasons": [],
+      "verdictDigest": "sha256:3ee30f8b400b7d684db44a1537882682022b1be9b66d0dc17449213d32b12934"
     },
     {
       "route": "/knowledge/astronomy/star-formation-and-nuclear-fusion",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 283,
         "hasMechanismOrDerivation": true,
@@ -457,21 +363,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 10,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 221
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 231
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:22aece1e47b78e958b53077aeb2e83a75a46f9dd20ebe98ba66f72bf0be84430"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:f711c922571914fb776e8978cdd04124552b3eab44c9d2acd982f11331e73019"
     },
     {
       "route": "/knowledge/astronomy/stellar-classification-and-evolution",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 284,
         "hasMechanismOrDerivation": true,
@@ -483,21 +387,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 9,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 211
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 220
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:467df5761b5ac178019a0f7f63b41d756cd7c76bcb75b6e677d1a781eba52cfc"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:6aea512aa1b7b7c9ceadb2aa8523ba825cf85899c06892f677044b59d6219d85"
     },
     {
       "route": "/knowledge/astronomy/stellar-remnants-and-black-holes",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 298,
         "hasMechanismOrDerivation": true,
@@ -509,21 +411,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 6,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 220
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 226
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:4ee16c0307bb92ae9c59bdac8d7d97ee707403a40fe4bdd9f0a7ae5dc22dacd5"
+      "substantialityScore": 12.6,
+      "reasons": [],
+      "verdictDigest": "sha256:2cf9defbb04b9a60406769e2d47177084f3992b1b45c543c48ea0e07ce9284e2"
     },
     {
       "route": "/knowledge/astronomy/interstellar-medium-and-nebulae",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 266,
         "hasMechanismOrDerivation": true,
@@ -535,21 +435,19 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 8,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 191
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 199
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:6272f67f289c3554205501afb4dd5276eff7828e7bbbb028a46864a7856d43f9"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:592af6fcce337093d98130f3187b94eebdd6ab44c622bb467c88b9106f62e230"
     },
     {
       "route": "/knowledge/astronomy/galaxies-structure-and-evolution",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 320,
         "hasMechanismOrDerivation": true,
@@ -561,21 +459,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 212
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 219
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:3d727fc8cf760cbbb22fd66d09d96074871d5a62a0a2ede5938af29c648b3ee6"
+      "substantialityScore": 12.9,
+      "reasons": [],
+      "verdictDigest": "sha256:0c59af539cbb099e3322f1b00880ebbaa3eb0989c56124c77d2bdb950c1321ca"
     },
     {
       "route": "/knowledge/astronomy/active-galactic-nuclei",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 280,
         "hasMechanismOrDerivation": true,
@@ -587,21 +483,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 13,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 230
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 243
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:9dc9a60fbefef79d1e3851da35fa1c8ab1d44be17c641d69d34de8b3b4727b8c"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:9dca026dda078028f958f908f3a6d1778ef58f8aa791c920e5b990c928587b5e"
     },
     {
       "route": "/knowledge/astronomy/black-hole-observation-and-relativistic-inference",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 310,
         "hasMechanismOrDerivation": true,
@@ -613,21 +507,19 @@
         "unresolvedQuestions": 4,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 6,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 275
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 281
       },
-      "substantialityScore": 12.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:3d01681c1b56555d19c682b40ee15c236fbcf6459de1e8dcc7f44972db81d2d7"
+      "substantialityScore": 14.6,
+      "reasons": [],
+      "verdictDigest": "sha256:fe429c3f43d0ff984d21253c6a39947e47efd57e3b6a6944fed136e21d9410d0"
     },
     {
       "route": "/knowledge/astronomy/gravitational-waves-and-compact-mergers",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 298,
         "hasMechanismOrDerivation": true,
@@ -639,21 +531,19 @@
         "unresolvedQuestions": 4,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 4,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 259
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 263
       },
-      "substantialityScore": 12.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:690bdf1d3b86c225c0313b96813034399cf8cc6fe31d21767ae5c9f21cba3337"
+      "substantialityScore": 14,
+      "reasons": [],
+      "verdictDigest": "sha256:23ca9ce7f2d50ff9936b38269425bc51a9f338372e0a9f7c8c40bcd6d3d31473"
     },
     {
       "route": "/knowledge/astronomy/gravitational-lensing-and-mass-mapping",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 317,
         "hasMechanismOrDerivation": true,
@@ -665,21 +555,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 200
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 207
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:87e42f70b46ee9f1a86d0033ea6b38fc4122905871ffb93b06399d9546e7e61c"
+      "substantialityScore": 12.9,
+      "reasons": [],
+      "verdictDigest": "sha256:e1d65dc6f8fbed8de528c8297b3bd9f747574207e3582732af32e91c2557d750"
     },
     {
       "route": "/knowledge/astronomy/redshift-expansion-and-the-distance-ladder",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 310,
         "hasMechanismOrDerivation": true,
@@ -691,21 +579,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 13,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 220
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 233
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:3757508264c927b2150a81183b9cb12f047591f367163e9d40c2c1055aacca6e"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:4b2e6bd01113857969623f9eecf9abc542fed7bcb4d138e039f28681dec9d413"
     },
     {
       "route": "/knowledge/astronomy/cosmic-microwave-background-and-lambda-cdm",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 305,
         "hasMechanismOrDerivation": true,
@@ -717,17 +603,15 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 5,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 186
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 191
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:58279d6d843e5a9908d22136ecbe1732153722ed1c41befba5cfde50c6bc8c0f"
+      "substantialityScore": 12.3,
+      "reasons": [],
+      "verdictDigest": "sha256:1166d0f52bca883136d6b7cb97d5c50b6ec7bf57ef715dc0a4defe4aed0d7b53"
     },
     {
       "route": "/knowledge/mathematics/angle-normalization",
@@ -747,11 +631,11 @@
         "typedBridges": 2,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 241
+        "wordCountDiagnostic": 244
       },
       "substantialityScore": 14.7,
       "reasons": [],
-      "verdictDigest": "sha256:2a26b3b9d5009dabd203b219093d4f8558a1b314a5d853d9a438fbd980c6e718"
+      "verdictDigest": "sha256:37bc57b1dea3e34f9f239651751127e90fb4fd37483ec03b939d1dc3610c5514"
     },
     {
       "route": "/knowledge/mathematics/spherical-coordinates",
@@ -771,11 +655,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 169
+        "wordCountDiagnostic": 171
       },
       "substantialityScore": 12.1,
       "reasons": [],
-      "verdictDigest": "sha256:7a3a3b5bd09b4aca458946887b2853fbed6bb9ac571f3b28c499cdbeff0e82d1"
+      "verdictDigest": "sha256:71f0dcae0b805474b1a67f5dea471b33aa7ac37e219f774e892330bc56ba4066"
     },
     {
       "route": "/knowledge/mathematics/reference-frame-transformations",
@@ -795,11 +679,11 @@
         "typedBridges": 3,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 271
+        "wordCountDiagnostic": 274
       },
       "substantialityScore": 13,
       "reasons": [],
-      "verdictDigest": "sha256:56b879347525a6604fa23f96f93bce8dab9b901659c1f97b11e28041e1bf271a"
+      "verdictDigest": "sha256:4798fb66b125e4c95c44641e36779c2089d41a2b9265b7257114148ce9585b5c"
     },
     {
       "route": "/knowledge/mathematics/modular-arithmetic",
@@ -819,11 +703,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 204
+        "wordCountDiagnostic": 207
       },
       "substantialityScore": 12.4,
       "reasons": [],
-      "verdictDigest": "sha256:ccc4e58b65a40a10db520456d29df50a2e60ce314a987a97d45322c08a7ebae9"
+      "verdictDigest": "sha256:148a2d465cf13872185f685dea406a7f1702bf86146197d9610ee37b1ebfc4f2"
     },
     {
       "route": "/knowledge/mathematics/periodic-functions-and-phase",
@@ -843,11 +727,11 @@
         "typedBridges": 2,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 226
+        "wordCountDiagnostic": 229
       },
       "substantialityScore": 14.7,
       "reasons": [],
-      "verdictDigest": "sha256:43305a15726b30a4357c58023626ceef7683b44b342f7c7d4f8a60c3fcd4a7d6"
+      "verdictDigest": "sha256:57b3d84bdc14002c1f3d20f7a3a33c260743d98037842126568412473a87e594"
     },
     {
       "route": "/knowledge/mathematics/calendar-and-timescale-mappings",
@@ -867,11 +751,11 @@
         "typedBridges": 2,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 240
+        "wordCountDiagnostic": 243
       },
       "substantialityScore": 12.7,
       "reasons": [],
-      "verdictDigest": "sha256:e16e204d35613a48982aa7744edb24ac2b207dd04ad950e4de0f3608d07ba79b"
+      "verdictDigest": "sha256:3bd70904b87a5ea40a27fb35deac9f9b6fe4a0b584146e3a859c48144420e1a1"
     },
     {
       "route": "/knowledge/mathematics/interpolation",
@@ -891,11 +775,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 160
+        "wordCountDiagnostic": 163
       },
       "substantialityScore": 12.4,
       "reasons": [],
-      "verdictDigest": "sha256:a8f9e67497baa8eaa231378e61ce7157ece60e10a145acea5b27337347e43976"
+      "verdictDigest": "sha256:bdd3bcb166b3fde332726444a7a509cc34ad48c7c102ebe11c25fa47c77d8810"
     },
     {
       "route": "/knowledge/mathematics/root-finding",
@@ -915,11 +799,11 @@
         "typedBridges": 2,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 234
+        "wordCountDiagnostic": 237
       },
       "substantialityScore": 14.7,
       "reasons": [],
-      "verdictDigest": "sha256:9eebb0daf66f9f127efd62740b9cc315c1fb89968bbd72ad61f467bc1ac3ea3f"
+      "verdictDigest": "sha256:a32994434721d69f90d5a42622cb31c48936ffad75fccc443f2f9dd44b472582"
     },
     {
       "route": "/knowledge/mathematics/numerical-integration",
@@ -939,11 +823,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 167
+        "wordCountDiagnostic": 170
       },
       "substantialityScore": 12.4,
       "reasons": [],
-      "verdictDigest": "sha256:0d560ffdc63d1fed98615ae7c622c20ebfb8765614388dd539cec21bc404a7e1"
+      "verdictDigest": "sha256:0b55d26042031e18184bbe720a0cb911f91590a41bda3409639afd5cb26a7dda"
     },
     {
       "route": "/knowledge/mathematics/convergence-precision-and-error",
@@ -963,11 +847,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 179
+        "wordCountDiagnostic": 182
       },
       "substantialityScore": 14.4,
       "reasons": [],
-      "verdictDigest": "sha256:8927c86ecde5e6c295c3670b18111e975e59fd950b9114337af6c8747abbef63"
+      "verdictDigest": "sha256:3db8a52a65fe14149700d5bcfd8cc2037aa34f62dfb43b00125aa221275f695f"
     },
     {
       "route": "/knowledge/mathematics/uncertainty-propagation",
@@ -987,11 +871,11 @@
         "typedBridges": 3,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 249
+        "wordCountDiagnostic": 252
       },
       "substantialityScore": 17.5,
       "reasons": [],
-      "verdictDigest": "sha256:620f38115b3bd0a923dc4e1d578623f6eb317cbae784582eb86ecb6a8d2655b7"
+      "verdictDigest": "sha256:914bda2aa4a22049727c02fc187fbd7481b71208edf97c4f53fa4d757f2a73ba"
     },
     {
       "route": "/knowledge/mathematics/bayesian-updating",
@@ -1011,11 +895,11 @@
         "typedBridges": 2,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 215
+        "wordCountDiagnostic": 218
       },
       "substantialityScore": 12.7,
       "reasons": [],
-      "verdictDigest": "sha256:34b427b59eb9e70dd4119ef1d78048a1def889a0956f6d14f7ec2f3b25b906f7"
+      "verdictDigest": "sha256:fe7d258e33fc87c76e84064619b5ead2c8492cd602428fe5444818978cc499a0"
     },
     {
       "route": "/knowledge/mathematics/calibration-and-reliability",
@@ -1035,11 +919,11 @@
         "typedBridges": 2,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 225
+        "wordCountDiagnostic": 228
       },
       "substantialityScore": 12.7,
       "reasons": [],
-      "verdictDigest": "sha256:ae6ffdeafdf749611112197d5a9f3960d016a8391fff3c3c6dee56ec461042d1"
+      "verdictDigest": "sha256:40cd0ffeb44c43cdaef4492d03d798758b0ff094b69d8cb49bb38551b2e3ee6b"
     },
     {
       "route": "/knowledge/mathematics/proper-scoring-rules",
@@ -1059,11 +943,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 198
+        "wordCountDiagnostic": 201
       },
       "substantialityScore": 12.4,
       "reasons": [],
-      "verdictDigest": "sha256:6297edb594c4123ba69cb59bb3326c7599d1fa6a5aea26079c1ab32700ef466a"
+      "verdictDigest": "sha256:f41c47e093776c13a24bb63c230062e1cce89f8ab1cd408cf9d6a05c08db19e5"
     },
     {
       "route": "/knowledge/mathematics/graph-theory",
@@ -1083,11 +967,11 @@
         "typedBridges": 3,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 261
+        "wordCountDiagnostic": 264
       },
       "substantialityScore": 13,
       "reasons": [],
-      "verdictDigest": "sha256:f161f01753b7bb2ed4d5e8383724cbcdb1c2b954a00fe8265cd217fe207d2e63"
+      "verdictDigest": "sha256:304378cdfd196dd82585bf748fdfd3cef4417ac26c469bc6f95ffcbe77a95057"
     },
     {
       "route": "/knowledge/mathematics/dynamical-systems",
@@ -1107,11 +991,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 175
+        "wordCountDiagnostic": 178
       },
       "substantialityScore": 12.4,
       "reasons": [],
-      "verdictDigest": "sha256:c54bbe0b6a3dc62a2f3f820c647d97d3336a97893bbcb57293a856b65db0a062"
+      "verdictDigest": "sha256:728b9025b8c6083041c3587f33a63dda9db46622dc7a7a28d2671b73cce9521d"
     },
     {
       "route": "/knowledge/mathematics/time-series-models",
@@ -1131,11 +1015,11 @@
         "typedBridges": 2,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 218
+        "wordCountDiagnostic": 221
       },
       "substantialityScore": 12.7,
       "reasons": [],
-      "verdictDigest": "sha256:d8cae53c504e1d575ab968c2abb86381fbd1b79a973de0e3f3ea597eae3fd08b"
+      "verdictDigest": "sha256:cb54ce9dd079fcd585e48999d2cea8462bd7f456a8f0f83a3000d7026c300231"
     },
     {
       "route": "/knowledge/mathematics/change-point-detection",
@@ -1155,11 +1039,11 @@
         "typedBridges": 2,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 227
+        "wordCountDiagnostic": 230
       },
       "substantialityScore": 12.7,
       "reasons": [],
-      "verdictDigest": "sha256:4d786844f87676764da2bf62c2f04134b7eabd60ef596937eb0f25f8d530eb47"
+      "verdictDigest": "sha256:bca68806365ee290f367f8c38eb1409ad623f9cf4611df6c11c2f50e8f481a0b"
     },
     {
       "route": "/knowledge/mathematics/optimization",
@@ -1179,11 +1063,11 @@
         "typedBridges": 3,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 282
+        "wordCountDiagnostic": 285
       },
       "substantialityScore": 13,
       "reasons": [],
-      "verdictDigest": "sha256:eea52dd1962906dc79fe644fb14d44d2f3cdddbb4a1d72f314bc6644342c4b2a"
+      "verdictDigest": "sha256:a1dba27fc7babf77408197415177bf5b6457986f193c9b125ed2ad60e783c72f"
     },
     {
       "route": "/knowledge/mathematics/constraint-satisfaction",
@@ -1203,11 +1087,11 @@
         "typedBridges": 2,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 208
+        "wordCountDiagnostic": 211
       },
       "substantialityScore": 12.7,
       "reasons": [],
-      "verdictDigest": "sha256:115a90a70bc192b3806b03a6bab27d5530e974d2f363b3294284d11f1053e3c7"
+      "verdictDigest": "sha256:cf12ef504fdab29ee830e82950fa15a10be5813e4bad8a3a490bc6a11cc1a8b3"
     },
     {
       "route": "/knowledge/mathematics/information-theory",
@@ -1227,11 +1111,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 157
+        "wordCountDiagnostic": 160
       },
       "substantialityScore": 12.4,
       "reasons": [],
-      "verdictDigest": "sha256:1f39b7885b1bccba50f94c38897864f10ee299eda8631ac003f372bedc18baf5"
+      "verdictDigest": "sha256:eafd16a6c463abc3ef92c494a96baddfd76596f872f74d85000a7765e36cef41"
     },
     {
       "route": "/knowledge/mathematics/cryptographic-commitments",
@@ -1251,11 +1135,11 @@
         "typedBridges": 2,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 234
+        "wordCountDiagnostic": 237
       },
       "substantialityScore": 12.7,
       "reasons": [],
-      "verdictDigest": "sha256:19611225f74a138f2d23f23dba8e62fcae1124824914cd392af190800a073a75"
+      "verdictDigest": "sha256:dba2242037c3076a4cab36e5a8f871744843217b244df90bce1a82dbc43e049e"
     },
     {
       "route": "/knowledge/mathematics/formal-logic-and-rule-compilation",
@@ -1275,11 +1159,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 178
+        "wordCountDiagnostic": 181
       },
       "substantialityScore": 12.4,
       "reasons": [],
-      "verdictDigest": "sha256:7b3a4c83bc0e423a9e91b4ee681c5cf54670fe091f8366df90914db8cfd05705"
+      "verdictDigest": "sha256:3cbdd4c5c32ec9bbaf8a7cdea6c2b829e49a9b3877e61d8539153fdcc44c67f1"
     },
     {
       "route": "/knowledge/mathematics/causal-inference",
@@ -1299,11 +1183,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 181
+        "wordCountDiagnostic": 184
       },
       "substantialityScore": 12.4,
       "reasons": [],
-      "verdictDigest": "sha256:6d418e59d4af4071b973afc5f9677f57595a0cc1d9880221e1059ed91c1beb3f"
+      "verdictDigest": "sha256:bc3d566941d8dce6a53155872b82b438e9813dc4bc7ae9d5c125f344cdee5367"
     },
     {
       "route": "/knowledge/religion/textual-authority",
@@ -1323,11 +1207,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 10,
-        "wordCountDiagnostic": 182
+        "wordCountDiagnostic": 185
       },
       "substantialityScore": 12.8,
       "reasons": [],
-      "verdictDigest": "sha256:66cd9dd090dbffd3a00ee4a206d3de1a29f67390e63e232868ba8b1ea5350c61"
+      "verdictDigest": "sha256:ff893895a226b5975c964290b01fc67ba77b32153e0f467a8bc66678f600abca"
     },
     {
       "route": "/knowledge/religion/canon-and-boundaries",
@@ -1347,11 +1231,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 133
+        "wordCountDiagnostic": 136
       },
       "substantialityScore": 10.8,
       "reasons": [],
-      "verdictDigest": "sha256:3c9c94e4df019e6f40a69669f6bb8e859f1cf01c3a04e6df0945cbc2410e7b57"
+      "verdictDigest": "sha256:3cc3d30ef36441f000864f4e09108e06f9425d7e436e9a320ab002a41b549c51"
     },
     {
       "route": "/knowledge/religion/oral-and-performative-transmission",
@@ -1371,11 +1255,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 138
+        "wordCountDiagnostic": 141
       },
       "substantialityScore": 10.8,
       "reasons": [],
-      "verdictDigest": "sha256:06f099accff22ae35d1cef545961fa9888a044ffbac68474054879ebabafa963"
+      "verdictDigest": "sha256:11951babbb38eaeac6b226b1f2a596cfed6636b4cce91952f3ed600566550b60"
     },
     {
       "route": "/knowledge/religion/hermeneutics-and-interpretive-communities",
@@ -1395,11 +1279,11 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 78
+        "wordCountDiagnostic": 81
       },
       "substantialityScore": 10.3,
       "reasons": [],
-      "verdictDigest": "sha256:efcf08bdfa5d7ef1dfad4f479d9f38e832fa77c982d3e94c2d7b3840d69ff77f"
+      "verdictDigest": "sha256:167eaf2177193f0df3f85d002552cd9ae962267b5f252d5de3061d3f57052c3b"
     },
     {
       "route": "/knowledge/religion/manuscript-transmission",
@@ -1419,11 +1303,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 126
+        "wordCountDiagnostic": 129
       },
       "substantialityScore": 10.8,
       "reasons": [],
-      "verdictDigest": "sha256:9a5f821af2fff4cb50016846eb73430f826d630cc707eaa8d036ce8bf187625a"
+      "verdictDigest": "sha256:c3d611b2a814ca14fa3bc83efabbd851ec4976956cad7ed4997711f2645de864"
     },
     {
       "route": "/knowledge/religion/textual-criticism",
@@ -1443,11 +1327,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 10,
-        "wordCountDiagnostic": 167
+        "wordCountDiagnostic": 170
       },
       "substantialityScore": 12.8,
       "reasons": [],
-      "verdictDigest": "sha256:eaff5f12503af779315dd98584a36a411a163733d6fa32fdaabddc9a91936784"
+      "verdictDigest": "sha256:760aed79acead8174a924494460a4ce6791498cb76b685939ebdbbb9422c1dab"
     },
     {
       "route": "/knowledge/religion/translation-and-semantic-range",
@@ -1467,11 +1351,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 10,
-        "wordCountDiagnostic": 168
+        "wordCountDiagnostic": 171
       },
       "substantialityScore": 12.8,
       "reasons": [],
-      "verdictDigest": "sha256:814c511a6b3bfd900786f4dea3a30e7ca333ef808d80db4a4eb34ff7fd4f8eaa"
+      "verdictDigest": "sha256:06e5d352c8499812a0cf07aa3e51f0d04c98b1332595b5e7b50c753ef9010056"
     },
     {
       "route": "/knowledge/religion/genre-rhetoric-and-context",
@@ -1491,11 +1375,11 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 83
+        "wordCountDiagnostic": 86
       },
       "substantialityScore": 10.3,
       "reasons": [],
-      "verdictDigest": "sha256:e97bc66d9caef76577fa9004cb256c34948858543e7a5cae54b646057b6e952f"
+      "verdictDigest": "sha256:a431b0883b0a8b9786f9ae6349b4a73d0103095191ce18ec86ae4af7ca4b70f0"
     },
     {
       "route": "/knowledge/religion/historical-evidence",
@@ -1515,11 +1399,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 10,
-        "wordCountDiagnostic": 208
+        "wordCountDiagnostic": 211
       },
       "substantialityScore": 13.6,
       "reasons": [],
-      "verdictDigest": "sha256:606f9b9e0544a9d3e58cc28ae1d2878f1e0c0f58199729a4ba8c54b80b0db716"
+      "verdictDigest": "sha256:f83f3e9615ae697873d2e90112253ed0872c372aad5c14ce4045c4ae46858fb3"
     },
     {
       "route": "/knowledge/religion/archaeology-and-material-religion",
@@ -1539,11 +1423,11 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 84
+        "wordCountDiagnostic": 87
       },
       "substantialityScore": 10.3,
       "reasons": [],
-      "verdictDigest": "sha256:8914ccc45eb97b7d028937c8a32c9042e13d09c6022163b233a0da835f15519a"
+      "verdictDigest": "sha256:d4cfd328b829b1cf7143412eccc261f772c2c487196edcfecd0f80ebb56a83e5"
     },
     {
       "route": "/knowledge/religion/institutions-lineages-and-power",
@@ -1563,11 +1447,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 139
+        "wordCountDiagnostic": 142
       },
       "substantialityScore": 10.8,
       "reasons": [],
-      "verdictDigest": "sha256:57c7520b752cb7dfe06e29722dfa3405be1a4621d68b4fa1d96d4e80a619b5ec"
+      "verdictDigest": "sha256:eb3627f8d0cd14a5cfc89b2f9c8884741647c483ec48fc165b4e7b6bcb06be99"
     },
     {
       "route": "/knowledge/religion/lived-religion",
@@ -1587,11 +1471,11 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 151
+        "wordCountDiagnostic": 154
       },
       "substantialityScore": 13.1,
       "reasons": [],
-      "verdictDigest": "sha256:d692c4102e81cd90dd7805f94336244af0f6bf089ebeea021d4af4ac7a0a9a16"
+      "verdictDigest": "sha256:bca0335c4f30e6a73a32c1a515bb9e96f27d0bc77f7e76f487e87df8457be99c"
     },
     {
       "route": "/knowledge/religion/theology-and-tradition-relative-reasoning",
@@ -1611,11 +1495,11 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 129
+        "wordCountDiagnostic": 132
       },
       "substantialityScore": 12.3,
       "reasons": [],
-      "verdictDigest": "sha256:4bd4eaa3322bea12c3f35525b7db8e3a162535f0bc714c9469f44c5c3fe64017"
+      "verdictDigest": "sha256:675e1074668d3900bc40e0b1e1e66580bc49fcec277a35ebd8923e6edb2f7fea"
     },
     {
       "route": "/knowledge/religion/doctrine-and-doctrinal-development",
@@ -1635,11 +1519,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 10,
-        "wordCountDiagnostic": 165
+        "wordCountDiagnostic": 168
       },
       "substantialityScore": 12.8,
       "reasons": [],
-      "verdictDigest": "sha256:8f0decc976d62e858c31758e7c0ea81318903d6ee2281174bf5470ebfccb734c"
+      "verdictDigest": "sha256:a4e2375d27b70493f4bd9656f08bb5c90a6b0c040cc0a2b371e3c745545e5fa9"
     },
     {
       "route": "/knowledge/religion/comparative-categories-and-non-equivalence",
@@ -1659,11 +1543,11 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 142
+        "wordCountDiagnostic": 145
       },
       "substantialityScore": 13.1,
       "reasons": [],
-      "verdictDigest": "sha256:e6c7b8bfabc79b6bd70e62d6ce1b4707cc95645c4a358e100a55dfaa8348352c"
+      "verdictDigest": "sha256:4f389db20ee0c105ed4886b2070a451a3daf133cdd2675bd6fe6f6da1bf0efa2"
     },
     {
       "route": "/knowledge/religion/ritual-and-practice",
@@ -1683,11 +1567,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 10,
-        "wordCountDiagnostic": 177
+        "wordCountDiagnostic": 180
       },
       "substantialityScore": 12.8,
       "reasons": [],
-      "verdictDigest": "sha256:8fe1d4f11f501ecc562ab540460cd9f5fa076c526ae05b44476cb353df614c63"
+      "verdictDigest": "sha256:2a0a6de550c2ba10373427b73c5a0d7d5d9015d49dc35f6193ea84cced91f595"
     },
     {
       "route": "/knowledge/religion/contemplative-practice-and-first-person-experience",
@@ -1707,11 +1591,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 10,
-        "wordCountDiagnostic": 175
+        "wordCountDiagnostic": 178
       },
       "substantialityScore": 12.8,
       "reasons": [],
-      "verdictDigest": "sha256:447fcf44cdd2c325f6e77bb3b07e55ae7fb4a20566144086e88c44cf7d392ce2"
+      "verdictDigest": "sha256:c26d2f777f05ec4765476d3f1ec1c95352e2bf073f77e3065cc9b10b9f1eebe6"
     },
     {
       "route": "/knowledge/religion/empirical-claims-and-study-design",
@@ -1731,11 +1615,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 10,
-        "wordCountDiagnostic": 255
+        "wordCountDiagnostic": 258
       },
       "substantialityScore": 14.4,
       "reasons": [],
-      "verdictDigest": "sha256:e60fa0c2d3285835417703689e7640b374cecc8d7adecb802890d56c13ca6561"
+      "verdictDigest": "sha256:cb0812c726e7f0337cf669a89fd37409a7a529b83032e61f18a78624be190319"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/neuromorphic-computing",
@@ -1755,11 +1639,11 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 254
+        "wordCountDiagnostic": 257
       },
       "substantialityScore": 12.3,
       "reasons": [],
-      "verdictDigest": "sha256:5648cc2bbc9b927fd7ed03ded8abd9c686aa62d7714b1381a447182dae30fdeb"
+      "verdictDigest": "sha256:1ba13217457de57b4ae22a94357f4d7372263354961e32e49c110be3a98efd2e"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/spiking-neural-networks",
@@ -1779,11 +1663,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 10,
-        "wordCountDiagnostic": 275
+        "wordCountDiagnostic": 278
       },
       "substantialityScore": 12.8,
       "reasons": [],
-      "verdictDigest": "sha256:4dfd9d7d611c830716443faa9bb3d8808eb4b2c30601f15f5d84f775fce3b8b8"
+      "verdictDigest": "sha256:01968040bdc8b50450fe68c531f5ea0de79162f3263125f65ccf7fc5a1e8d4ac"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/neural-coding-and-time",
@@ -1803,11 +1687,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 10,
-        "wordCountDiagnostic": 272
+        "wordCountDiagnostic": 275
       },
       "substantialityScore": 12.8,
       "reasons": [],
-      "verdictDigest": "sha256:cc895091332fb668ad615803fe3be632a6157ce9ff50bf9ad6b8b3e609e2d182"
+      "verdictDigest": "sha256:7bf71b67341eb9db008d3a6e7cde0836bff07b4c9044454e9efcee321df4175f"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/synaptic-plasticity-and-learning",
@@ -1827,11 +1711,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 10,
-        "wordCountDiagnostic": 317
+        "wordCountDiagnostic": 320
       },
       "substantialityScore": 12.8,
       "reasons": [],
-      "verdictDigest": "sha256:bcade3bc4fc1065549a100ea0507ca2fd7d6c3a029f2c72ac688ad40c44cfd82"
+      "verdictDigest": "sha256:7e2a214006357df911f08da2e251d4b40b73a226ef27f533ceca536f8649bcbd"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/event-driven-computation",
@@ -1851,11 +1735,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 309
+        "wordCountDiagnostic": 312
       },
       "substantialityScore": 13.3,
       "reasons": [],
-      "verdictDigest": "sha256:fc6b0296be027b6f85fcc506c6629cc294851c54e44d20c003f8a5aeb3e7d357"
+      "verdictDigest": "sha256:0d32817b5096d83a23b691f61a0ba78ac68b1673d766f0b92a5da3369ef23ced"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/mixed-signal-neuromorphic-hardware",
@@ -1875,11 +1759,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 10,
-        "wordCountDiagnostic": 264
+        "wordCountDiagnostic": 267
       },
       "substantialityScore": 12.8,
       "reasons": [],
-      "verdictDigest": "sha256:3964bcb97d7cbdfb166d469f6e8d5faeb1b4f69698bbabb7f11f03845308ad29"
+      "verdictDigest": "sha256:6d861570f311b69dc0c6ea0a1118432c4aeedcb9b459621b33e6d65ef88d98f8"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/in-memory-and-memristive-computing",
@@ -1899,11 +1783,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 185
+        "wordCountDiagnostic": 188
       },
       "substantialityScore": 10.8,
       "reasons": [],
-      "verdictDigest": "sha256:e2af355ecac08dd55b855348dae4da0475f68881d728daf47280625943bdfabb"
+      "verdictDigest": "sha256:2c7d9e602581a4f0e771ee959cd7eebaf906abcedb3d8f699f913c0b040122d9"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/neuromorphic-sensors",
@@ -1923,11 +1807,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 188
+        "wordCountDiagnostic": 191
       },
       "substantialityScore": 10.8,
       "reasons": [],
-      "verdictDigest": "sha256:412e38e1a7cccd9eec80c8be9cd6719aa4acf8c3fe7a97514a0f098532cc6382"
+      "verdictDigest": "sha256:b4598f124989304db671f666826633fa5c4d2b4e325cf7e4b5676ed139ec59f1"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/hardware-software-co-design",
@@ -1947,11 +1831,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 10,
-        "wordCountDiagnostic": 396
+        "wordCountDiagnostic": 399
       },
       "substantialityScore": 16.1,
       "reasons": [],
-      "verdictDigest": "sha256:52b302c6a032211097e546dd70df255a014f7f7ac8a7b5cda5ea721b735602b6"
+      "verdictDigest": "sha256:8f663144f0d1ab49d477e2f8e6418297592f2742c8b78c85d074d27061f30cd9"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/physical-reservoir-computing",
@@ -1971,11 +1855,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 183
+        "wordCountDiagnostic": 185
       },
       "substantialityScore": 10.5,
       "reasons": [],
-      "verdictDigest": "sha256:023a3a774e5d2a77fb857fde10936a50655aa7c91e0ceecf85d55bae99c8e42e"
+      "verdictDigest": "sha256:a1a6da3c4302c8682187228e1c7bd6c693339b8e615e3d2e1c8c38186c294a71"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/biological-neural-cultures",
@@ -1995,11 +1879,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 10,
-        "wordCountDiagnostic": 365
+        "wordCountDiagnostic": 368
       },
       "substantialityScore": 16.3,
       "reasons": [],
-      "verdictDigest": "sha256:b1e5a4ae5e4323f3ef06412f0e13cedf4c8fd14309032333b5f875a8fd974781"
+      "verdictDigest": "sha256:37e33d9416cc8e91434c838b2749989457e598edacb134802c57ea66e4769d1b"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/brain-organoids-and-organoid-intelligence",
@@ -2019,11 +1903,11 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 258
+        "wordCountDiagnostic": 261
       },
       "substantialityScore": 12.3,
       "reasons": [],
-      "verdictDigest": "sha256:d121a7374a30c4011be9c9f9463e4013f091dcb8ada6523d577e3dd1c23962a8"
+      "verdictDigest": "sha256:4178064a9943971734350f19c9640b458a76e73a737f5b4b02363e7502dfaa3d"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/molecular-and-dna-computing",
@@ -2043,11 +1927,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 180
+        "wordCountDiagnostic": 183
       },
       "substantialityScore": 10.8,
       "reasons": [],
-      "verdictDigest": "sha256:ed90226e8281af31d433d0cf248563c39d8645cc7ead058a26d5d8471c284466"
+      "verdictDigest": "sha256:997a7f7e2401d14ea524e479787018f4793a83cc403653ba813e4861c887e20f"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/synthetic-biological-circuits",
@@ -2067,11 +1951,11 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 122
+        "wordCountDiagnostic": 125
       },
       "substantialityScore": 10.3,
       "reasons": [],
-      "verdictDigest": "sha256:4370ee204874d33623c33bbd59084a2553025011ccf6c962dd14b5ce5b404a01"
+      "verdictDigest": "sha256:71d18d812a51441d178b27e9c90d389e4b68681c07ee379d636a38c80a907aea"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/bioelectronic-interfaces",
@@ -2091,11 +1975,11 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 267
+        "wordCountDiagnostic": 270
       },
       "substantialityScore": 14.3,
       "reasons": [],
-      "verdictDigest": "sha256:7b86d606839eb03169e06fbb390577a9aa3e21038631635d121c1027865a3b3c"
+      "verdictDigest": "sha256:f7c54d157b46a7f0b25efa6c98bf457159da93cf11798b4af535103b55f3785a"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/multielectrode-arrays-and-stimulation",
@@ -2115,11 +1999,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 316
+        "wordCountDiagnostic": 319
       },
       "substantialityScore": 14.3,
       "reasons": [],
-      "verdictDigest": "sha256:a1bc9941da59b031243f21e47ba3fa2f47b54d224c0e0b61b43e26594cdb623d"
+      "verdictDigest": "sha256:dcabe308c5055c1d88b815ff059dc7bea37726e4f63e9ff68f7aacd85bd6387a"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/hybrid-bioelectronic-systems",
@@ -2139,11 +2023,11 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 269
+        "wordCountDiagnostic": 272
       },
       "substantialityScore": 12.3,
       "reasons": [],
-      "verdictDigest": "sha256:3f09ae5c5c1d997902b60a7906475c6907a314e0fdb4d6aeb273f492dbc64bca"
+      "verdictDigest": "sha256:1eb0bc56994abd3aab89d4b67a6dabf680646b2ba291ca081a18d554833e322a"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/benchmarking-energy-and-task-equivalence",
@@ -2163,11 +2047,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 10,
-        "wordCountDiagnostic": 442
+        "wordCountDiagnostic": 445
       },
       "substantialityScore": 16.9,
       "reasons": [],
-      "verdictDigest": "sha256:571a5b2907dac822c44e25cdfb3b52e66d896df40f0771b497782e6035d6ae7f"
+      "verdictDigest": "sha256:9783c3fd454163e39a71555357c484533bbef4fdaa58f59b2730a6651e2c5da7"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/reproducibility-variability-and-controls",
@@ -2187,11 +2071,11 @@
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 10,
-        "wordCountDiagnostic": 304
+        "wordCountDiagnostic": 307
       },
       "substantialityScore": 12.8,
       "reasons": [],
-      "verdictDigest": "sha256:188d03c47ddbb4082cf10ae2707fe371c3d2913f18644314f62b97bf6cb34806"
+      "verdictDigest": "sha256:866546e97c270a531f6a3774673e04e41bb7e392a09d12cadb1c0789633324b7"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/biosafety-ethics-and-governance",
@@ -2211,11 +2095,11 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 266
+        "wordCountDiagnostic": 269
       },
       "substantialityScore": 12.3,
       "reasons": [],
-      "verdictDigest": "sha256:8a061c17a0159fcc08739b7a63857db888f9577464fc71d8c35337f6edde02c3"
+      "verdictDigest": "sha256:c459d3c622ac98bd9d273264ec4917196525ee6922e51ffcc8e03afd71e33979"
     },
     {
       "route": "/knowledge/equipment/eda-compute-and-signoff-environment",
@@ -2231,17 +2115,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:666bf26a7b7c72c74063f8b8a49ae666b992b6bd4a5529a7d96b48010534d1fc"
+      "verdictDigest": "sha256:c1a530ca85033d2ca560a67665ed955eb7bbc149a0172e3f45c23f1e92356838"
     },
     {
       "route": "/knowledge/equipment/electron-beam-mask-writer",
@@ -2257,21 +2141,21 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:8e3c9cf79061c2217a68fbdec21dc15a250df989dc23e497a3306e63bb6f65b0"
+      "verdictDigest": "sha256:24f853192e3b00564259fec46a7b89d8ed0aef35cbd104b20cab5933a59e1f00"
     },
     {
       "route": "/knowledge/equipment/reticle-and-photomask-inspection-system",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 253,
         "hasMechanismOrDerivation": true,
@@ -2283,21 +2167,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 142
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 149
       },
-      "substantialityScore": 16.3,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:3ae8019966c7b6956acf18bfefd948be3622e5e5c9bb5f37bed0321a2a5d7cad"
+      "substantialityScore": 18.6,
+      "reasons": [],
+      "verdictDigest": "sha256:43a3e026b05a038cc6ac3a4df0dfd4300dedd06e69cb826861355e82bc55f283"
     },
     {
       "route": "/knowledge/equipment/duv-immersion-lithography-scanner",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 238,
         "hasMechanismOrDerivation": true,
@@ -2309,21 +2191,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 5,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 128
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 133
       },
-      "substantialityScore": 11.78,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:1dabb019bebee9fc82942c0db9a9aee47c349e0349458dad1a4f1bbf737c0118"
+      "substantialityScore": 13.48,
+      "reasons": [],
+      "verdictDigest": "sha256:baba69c2130c5cd021a715b330b5e3f5c9e67c6fbf8b2b20f75d2427958f1158"
     },
     {
       "route": "/knowledge/equipment/euv-and-high-na-euv-lithography-scanner",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 256,
         "hasMechanismOrDerivation": true,
@@ -2335,21 +2215,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 5,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 143
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 148
       },
-      "substantialityScore": 11.8,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:dbcfb03c30d5ca5e207112c9ecdd3f85eef52d414779380d4fe04e5de67e9b8e"
+      "substantialityScore": 13.5,
+      "reasons": [],
+      "verdictDigest": "sha256:1f6ad1fe9e3dcdd499f3626cd6d5b02314d06eb3f061979a8563b2b222ea7c35"
     },
     {
       "route": "/knowledge/equipment/photoresist-coat-and-develop-track",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 255,
         "hasMechanismOrDerivation": true,
@@ -2361,17 +2239,15 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 12,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 176
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 188
       },
-      "substantialityScore": 11.8,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:497c6cca50e24ab91b2b9c89e3bafe2bf51fc93b5c9bf180a57dd3ddb806af7a"
+      "substantialityScore": 14.4,
+      "reasons": [],
+      "verdictDigest": "sha256:ddef1e62632c98fc5fee67d81cd09e491b6fe1176842db065df1cd8bc1f12f1e"
     },
     {
       "route": "/knowledge/equipment/pvd-sputter-and-metal-deposition-system",
@@ -2387,17 +2263,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:bcee88b2de766af340c3c4830202f52069dcef142ca756ca8bafdb0a64e7e645"
+      "verdictDigest": "sha256:6fb95f9434300c358466f6fe960ac2033f4423de7f25161ada9629362feeb4c2"
     },
     {
       "route": "/knowledge/equipment/chemical-vapor-deposition-reactor",
@@ -2413,21 +2289,21 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 9,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:efa012efd683c10c0d37572d813f4028c896c394feadbc652677b96fbc68e6ba"
+      "verdictDigest": "sha256:8bb444a42ce556f0131dcfaf51e90cfb52a636ed4d4e697ae12add7a904cad67"
     },
     {
       "route": "/knowledge/equipment/atomic-layer-deposition-reactor",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 250,
         "hasMechanismOrDerivation": true,
@@ -2439,21 +2315,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 8,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 138
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 146
       },
-      "substantialityScore": 14.3,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:eb15d5ec0657554d7bd896a84bd9dcd240cadf78f8fcc924ae1fd35fbcca1802"
+      "substantialityScore": 16.9,
+      "reasons": [],
+      "verdictDigest": "sha256:8df2de187612e2726f981f349289777621a5f9bcf3d3aa0643c84f50d0e20bfb"
     },
     {
       "route": "/knowledge/equipment/plasma-etch-and-atomic-layer-etch-system",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 261,
         "hasMechanismOrDerivation": true,
@@ -2465,21 +2339,19 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 11,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 207
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 218
       },
-      "substantialityScore": 14.3,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:bbb33df0fa1aa73b6bca31700e76ec35f5e5bc9bc1b1763e6c4ee76d892cce42"
+      "substantialityScore": 16.9,
+      "reasons": [],
+      "verdictDigest": "sha256:faa55d7032f1fbd5e3521e31d77d224b1e4322c5520615469ff4b702e24dca66"
     },
     {
       "route": "/knowledge/equipment/single-wafer-wet-clean-and-surface-preparation-system",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 224,
         "hasMechanismOrDerivation": true,
@@ -2491,21 +2363,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 10,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 126
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 136
       },
-      "substantialityScore": 11.67,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:9c77da8463a3542c8e6100a1bcdb13f3009cda2020ebc6eca678d4f7df9e002a"
+      "substantialityScore": 14.27,
+      "reasons": [],
+      "verdictDigest": "sha256:f59fbe9c39f4e7fe6e09e4c8d8e45a2fb12d941b54d3bfcc5367fc452e88c055"
     },
     {
       "route": "/knowledge/equipment/semiconductor-ion-implantation-system",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 240,
         "hasMechanismOrDerivation": true,
@@ -2517,21 +2387,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 4,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 154
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 158
       },
-      "substantialityScore": 15.8,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:098e362dc3c3ca0606b4f481de04f4d05304cfa44fb97749cb45e25d07aa84f2"
+      "substantialityScore": 17.2,
+      "reasons": [],
+      "verdictDigest": "sha256:4453ffea4960e908e5a0122545a0f6eb7e74f317c1befa54a37bbc3acf7ea35e"
     },
     {
       "route": "/knowledge/equipment/diffusion-furnace-and-rapid-thermal-processor",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 234,
         "hasMechanismOrDerivation": true,
@@ -2543,17 +2411,15 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 11,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 133
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 144
       },
-      "substantialityScore": 11.75,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:3b6647e0ed638cd81374b2af338b0c14362e4fc57d58b1576c9e06d6ff39c907"
+      "substantialityScore": 14.35,
+      "reasons": [],
+      "verdictDigest": "sha256:e69db1e18aabb0341523e22b83d71c058be00e9cd79e1ba3cea06f14a81f98bc"
     },
     {
       "route": "/knowledge/equipment/chemical-mechanical-planarization-polisher",
@@ -2569,21 +2435,21 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 6,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:ce51f655d7cd535a26bfa21b500e4a0667691c05e183d50896cb6c8217159749"
+      "verdictDigest": "sha256:1de595e4ccb97f75712361f45c4c54ff770dd6c9c9d7aaaf7c651fe2bceff966"
     },
     {
       "route": "/knowledge/equipment/optical-patterned-wafer-inspection-system",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 249,
         "hasMechanismOrDerivation": true,
@@ -2595,21 +2461,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 138
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 145
       },
-      "substantialityScore": 15.8,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:504a9a9b054da19ca322339ce6d8da4ef2bb7b65d09b5bef374c205207bfd51f"
+      "substantialityScore": 18.1,
+      "reasons": [],
+      "verdictDigest": "sha256:e98993a4f4e79dfff94e270227dd2b9d6df6112058e8ea78be313c1f3a96d7c3"
     },
     {
       "route": "/knowledge/equipment/electron-beam-defect-review-and-inspection-system",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 257,
         "hasMechanismOrDerivation": true,
@@ -2621,21 +2485,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 143
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 150
       },
-      "substantialityScore": 15.8,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:ba0cf69c58a7187fc526ad19ed0e1193664895a0c691f69911564d99f3623c60"
+      "substantialityScore": 18.1,
+      "reasons": [],
+      "verdictDigest": "sha256:836247595100706304f441f00d82c00248cded0c2eaf039a6194323443351036"
     },
     {
       "route": "/knowledge/equipment/overlay-critical-dimension-and-film-metrology-system",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 238,
         "hasMechanismOrDerivation": true,
@@ -2647,21 +2509,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 137
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 144
       },
-      "substantialityScore": 16.28,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:a33783729bb1d2c25b2c6366edf6eeeb812fbeaa161ab6aae8a374b2e69a9de4"
+      "substantialityScore": 18.58,
+      "reasons": [],
+      "verdictDigest": "sha256:0706b2c432c1b77c6ab324d2c294aa6319d37308304d722a872805cb930aa560"
     },
     {
       "route": "/knowledge/equipment/semiconductor-wafer-prober",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 227,
         "hasMechanismOrDerivation": true,
@@ -2673,17 +2533,15 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 12,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 134
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 146
       },
-      "substantialityScore": 11.69,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:c5294b7999820509b35268a6f550fbc630723d3e8c780aca5721a82d916d5e6d"
+      "substantialityScore": 14.29,
+      "reasons": [],
+      "verdictDigest": "sha256:4ecef82668e7e395b75ba96e94c1e4d5d31788cc50d472afa9488750eae89842"
     },
     {
       "route": "/knowledge/equipment/semiconductor-automatic-test-equipment",
@@ -2699,17 +2557,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 5,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:17c1abfb077ecc5c159f77b97f8cf0ee82ba8a056026a4a604d7d2961cbf2164"
+      "verdictDigest": "sha256:ef67395a78f629d1b339682b93e353f88c9b6d89745e57400ea51031483ac2cb"
     },
     {
       "route": "/knowledge/equipment/wafer-backgrinder-and-polisher",
@@ -2725,17 +2583,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:4f817947ab9a8e57179e9a184f6990b2ec24270e7759cca69357d850c55146ee"
+      "verdictDigest": "sha256:cfd20d30620e69a4d7dd1394fb53f4ddbc784dcce1997058fe82630ef75feb74"
     },
     {
       "route": "/knowledge/equipment/blade-and-laser-dicing-singulation-system",
@@ -2751,21 +2609,21 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 4,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:79fe8c636b915925022d6bb413e6d41373f78ea1b0a6c492ae315795e4fcaf48"
+      "verdictDigest": "sha256:b7b324361b31c1925b9652ac5077784e46abfea680315e5f2cc3832c0e18a3c2"
     },
     {
       "route": "/knowledge/equipment/die-attach-flip-chip-and-thermocompression-bonder",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 243,
         "hasMechanismOrDerivation": true,
@@ -2777,21 +2635,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 6,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 136
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 142
       },
-      "substantialityScore": 11.8,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:b38ab171985cab2dc7448ddb4ec9d8d0ab5024f26fdc7894432e899a91b4ba6c"
+      "substantialityScore": 13.8,
+      "reasons": [],
+      "verdictDigest": "sha256:009bec2077a951b78a19eb8c9700ab0c31942f440ef2a8acead2f5338f232b21"
     },
     {
       "route": "/knowledge/equipment/semiconductor-encapsulation-and-molding-system",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 236,
         "hasMechanismOrDerivation": true,
@@ -2803,21 +2659,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 4,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 137
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 141
       },
-      "substantialityScore": 11.77,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:41d6b8355e790f41d613539fa3d970ce37313750c4e612e361bb2a6bb2c161c0"
+      "substantialityScore": 13.17,
+      "reasons": [],
+      "verdictDigest": "sha256:8c0ea1dedca1f2544c222d13a4d3eea32be868c0ec2195577540c551d67419b5"
     },
     {
       "route": "/knowledge/equipment/chip-to-wafer-and-wafer-to-wafer-bonding-system",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 223,
         "hasMechanismOrDerivation": true,
@@ -2829,17 +2683,15 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 6,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 138
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 144
       },
-      "substantialityScore": 11.66,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:1ea2bac63eb6e38505829ee268dc7310cdffdeea5463350a7214687a53f7c21a"
+      "substantialityScore": 13.66,
+      "reasons": [],
+      "verdictDigest": "sha256:6d03736e977185c2fb17d328132b12003dbf03b14bd666c0eac0d14d81e2ace6"
     },
     {
       "route": "/knowledge/equipment/burn-in-and-system-level-test-equipment",
@@ -2855,21 +2707,21 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:006fdcc92d5896926dfca9bafae452489d554204b13ae04cb72ef402836edccd"
+      "verdictDigest": "sha256:abe24a922aacdbac561ae13ffec1ada29ca1449452c58ab7d0b1e0c00e971e21"
     },
     {
       "route": "/knowledge/domains/semiconductor-manufacturing",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 196,
         "hasMechanismOrDerivation": true,
@@ -2881,21 +2733,19 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 259
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 266
       },
-      "substantialityScore": 16.23,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:4f49efb23fde7d4a1cb9e4a20129fcf136a8ca1e050b047c3e21836355e4ef90"
+      "substantialityScore": 18.53,
+      "reasons": [],
+      "verdictDigest": "sha256:08f436c926f078f719757907a16c0728d1f6d5efad505f0249ed133d23c61770"
     },
     {
       "route": "/knowledge/processes/photolithography",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 170,
         "hasMechanismOrDerivation": true,
@@ -2907,21 +2757,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 154
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 161
       },
-      "substantialityScore": 11.62,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:0f1f86264f5337af2d836632514e00d719a8a706129dbf6a5e0c1988d5f22477"
+      "substantialityScore": 13.92,
+      "reasons": [],
+      "verdictDigest": "sha256:2a70e2da7656a94773fdac8800b9cd7ba98f481f8696fcb0830c39b28b19e231"
     },
     {
       "route": "/knowledge/processes/thin-film-deposition",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 208,
         "hasMechanismOrDerivation": true,
@@ -2933,21 +2781,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 5,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 159
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 164
       },
-      "substantialityScore": 14.83,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:21e9200f2c8f7ead6e7e34756e1a5adc0b9699aac3bdc77d18d563a8c5975f76"
+      "substantialityScore": 16.53,
+      "reasons": [],
+      "verdictDigest": "sha256:7e90bc794d5bc62ee5592c5fd3d6b8198dddfb1ab0d7fcff5a91c44ff0305f0e"
     },
     {
       "route": "/knowledge/processes/plasma-etch-and-pattern-transfer",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 163,
         "hasMechanismOrDerivation": true,
@@ -2959,21 +2805,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 2,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 176
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 178
       },
-      "substantialityScore": 14.06,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:e594403682ffae05a0c9bd4257533ebbdb66844bcef9ae91c22d4d97100ffd26"
+      "substantialityScore": 14.86,
+      "reasons": [],
+      "verdictDigest": "sha256:d8c466063aa9bf5d89276710f2af42d6be9f23bab0e37dd9441b7eb7aecf365f"
     },
     {
       "route": "/knowledge/processes/ion-implantation-and-annealing",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 198,
         "hasMechanismOrDerivation": true,
@@ -2985,17 +2829,15 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 172
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 175
       },
-      "substantialityScore": 16.25,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:07029e819b80bacad261dd53adbba924a30f3167e94665f36a1cd1ff374bb242"
+      "substantialityScore": 17.35,
+      "reasons": [],
+      "verdictDigest": "sha256:060017987ba07f16b82799c35d5bcdad740f405ff4200666b810885907d8cb1f"
     },
     {
       "route": "/knowledge/processes/copper-interconnects-and-cmp",
@@ -3011,17 +2853,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 6,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:f4bab9d522faa8556b18b737559c9a6fb2c35e8c9734fb90f233da054d75d2f1"
+      "verdictDigest": "sha256:cb9faba22d0b84d8a974db3a8b5322e3802e1c6481b0bedc6dc9979b3e481936"
     },
     {
       "route": "/knowledge/processes/advanced-packaging-and-heterogeneous-integration",
@@ -3037,17 +2879,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 4,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:75df5aeb544101307e31c3097c72fe4fd1aad0160cd7178ba9b501fc4b1ddcb2"
+      "verdictDigest": "sha256:e3d504e6484e5cfbcbeac8d31db2d1418141e7764c6fbc63dea6566b147e0bd5"
     },
     {
       "route": "/knowledge/concepts/direct-to-silicon-liquid-cooling",
@@ -3089,17 +2931,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 2,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:a14b1269688e5291488623d7c46aab5b8c675ebd816b948fdaf59a53b53c5422"
+      "verdictDigest": "sha256:24aaebac059176e1bb6832020e6d62db4771fb48ddc3bf2878122bc0807702f4"
     },
     {
       "route": "/knowledge/processes/ic-design-to-tapeout",
@@ -3115,17 +2957,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:fa9d902d48ac6b604c1b59b1c3a42e72f6a69e1ab4f38118de05712ee3d779f7"
+      "verdictDigest": "sha256:92bbfea1310c9b21115a82590205e64ce9240517cc328ded59f6eb3869531b00"
     },
     {
       "route": "/knowledge/processes/rtl-verification-synthesis-physical-design",
@@ -3141,21 +2983,21 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:e2ccde95621b0889020e581aa30b15d693d1a78750310e4f8ac741bc0a4a9f88"
+      "verdictDigest": "sha256:247bc69fb6262e57d9208903af224a6dae1a13d2e68e4780336fe7145a393193"
     },
     {
       "route": "/knowledge/processes/mask-data-preparation-and-reticle-fabrication",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 177,
         "hasMechanismOrDerivation": true,
@@ -3167,17 +3009,15 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 12,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 128
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 140
       },
-      "substantialityScore": 11.28,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:5c26849cca0141655ae8d34f0d62d4b609b7231e7eeb73f252b0dfebac93b1e5"
+      "substantialityScore": 13.88,
+      "reasons": [],
+      "verdictDigest": "sha256:49f07da2c4e2a04b4819e0805fa886e2f671c2599bfbe3a45cea6722f975724c"
     },
     {
       "route": "/knowledge/processes/silicon-crystal-growth-and-wafer-preparation",
@@ -3193,21 +3033,21 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:7c81947a3f95de5e0f6b962b371949499714bdb43d0616ef45b42b875d900872"
+      "verdictDigest": "sha256:86befd483a98827889af6ce34c7b999421e529c5d39ab7eeef23dfe5403ab81a"
     },
     {
       "route": "/knowledge/processes/wafer-cleaning-and-surface-preparation",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 157,
         "hasMechanismOrDerivation": true,
@@ -3219,21 +3059,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 8,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 133
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 141
       },
-      "substantialityScore": 11.51,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:03eada6c6076d22499cc0e9e58b38be2d7ffe063abf508c171e695d53f2eb9f3"
+      "substantialityScore": 14.11,
+      "reasons": [],
+      "verdictDigest": "sha256:2768087508ed5bd027ec72d08536c02e8ee65d8dd82c98c6cdda7caf0dc3de7c"
     },
     {
       "route": "/knowledge/processes/thermal-oxidation-diffusion-and-furnace-processing",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 147,
         "hasMechanismOrDerivation": true,
@@ -3245,21 +3083,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 10,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 133
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 143
       },
-      "substantialityScore": 11.43,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:7b09f135eb6f04f4bc2c015d33ce99cc98a748937897e1de1474e51da2ccc307"
+      "substantialityScore": 14.03,
+      "reasons": [],
+      "verdictDigest": "sha256:004825433133c7892b198e7fc6d6336f7fc5d19cc699bb3d8b826908782b076e"
     },
     {
       "route": "/knowledge/concepts/semiconductor-metrology-and-defect-inspection",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 193,
         "hasMechanismOrDerivation": true,
@@ -3271,21 +3107,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 146
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 153
       },
-      "substantialityScore": 16.31,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:65f442ab9b4d7dee013d03f751ce4e6b271b0cae319bd7ff8c6ec6b182de056d"
+      "substantialityScore": 18.61,
+      "reasons": [],
+      "verdictDigest": "sha256:5fe82e30a7f576537e5121a2597a37c12900ec7c92f96b98c84f2b0736d63999"
     },
     {
       "route": "/knowledge/concepts/yield-learning-and-statistical-process-control",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 197,
         "hasMechanismOrDerivation": true,
@@ -3297,21 +3131,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 9,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 160
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 169
       },
-      "substantialityScore": 15.44,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:bb2139115fbea482f7b68ab0c14a2edb8d449fe8d8bf8394ccf0ca57dbd56b0c"
+      "substantialityScore": 18.04,
+      "reasons": [],
+      "verdictDigest": "sha256:5086b69d45837da1ecb3cbff758608664d7524a202103beda0ac69d6b12926b5"
     },
     {
       "route": "/knowledge/concepts/cleanrooms-fab-utilities-and-contamination-control",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 202,
         "hasMechanismOrDerivation": true,
@@ -3323,17 +3155,15 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 2,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 191
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 193
       },
-      "substantialityScore": 13.88,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:827c4d076a8aeaa1f8440c4e6f3249bb41aa6fe0c57c27186659fd30436ba8ca"
+      "substantialityScore": 14.68,
+      "reasons": [],
+      "verdictDigest": "sha256:da80adf3b02d1b517d988e67591fdc85b21a92b4adf8f94bcd6b6fe0ef74a76c"
     },
     {
       "route": "/knowledge/processes/wafer-acceptance-test-and-wafer-sort",
@@ -3349,17 +3179,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:5696dc9f1c411489eab167bef208a587f3cc912dd0b4a677ffd7bc669b6f235a"
+      "verdictDigest": "sha256:5945c3e5306f6185d9208448bd2d323e633682f317469824e4034d1cfaf13be6"
     },
     {
       "route": "/knowledge/processes/wafer-thinning-dicing-and-die-handling",
@@ -3375,17 +3205,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 4,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:7a57b34e0d7e169b553b4f5d45cd20a482653ef1b5b1cdc18e66fc60f2e5e72c"
+      "verdictDigest": "sha256:5bc433508d130783a2f871440a100c5755683f070b86599c6f6fbfe4a7136a5c"
     },
     {
       "route": "/knowledge/processes/package-substrates-and-redistribution-layers",
@@ -3401,21 +3231,21 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 8,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:9d8301d4feafa2411e5c492bb808c5499090ff5c0b7b816e50b865a832edb337"
+      "verdictDigest": "sha256:c31cf6da7a655bbffefabd043e6e786d4d8f1d0c470f8df4c2cb4ffa76dd24da"
     },
     {
       "route": "/knowledge/processes/wire-bonding-and-flip-chip-interconnect",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 195,
         "hasMechanismOrDerivation": true,
@@ -3427,17 +3257,15 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 6,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
-        "wordCountDiagnostic": 158
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 164
       },
-      "substantialityScore": 11.83,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:76f7dd0e29837a2ecd72d0e66be78ff52c4cdf7fecda706a9f93c8c7dbfd80ff"
+      "substantialityScore": 13.83,
+      "reasons": [],
+      "verdictDigest": "sha256:343521c8ef96c7a000425674f1bce76f5e29e0ddf627962008c94a715f2f7bfd"
     },
     {
       "route": "/knowledge/processes/underfill-molding-and-package-encapsulation",
@@ -3453,17 +3281,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 8,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:fc6dd5a347d211bd761f8ca00b9a4433074f5f1dfe5b47bb698498cd842b51c9"
+      "verdictDigest": "sha256:748547c2c4298cd66ec40297fa53627232bfc3d2d81f3658bc971e5f3ff382ed"
     },
     {
       "route": "/knowledge/processes/final-test-burn-in-and-system-level-test",
@@ -3479,17 +3307,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:fab6581496bb8d5c8b7656cb05b8d25df2283b7830d8afb5a371d18f9e55788c"
+      "verdictDigest": "sha256:c5968cf3a94ceee7f6542cd89a845fc5771f117566b8bf11af8dd1c84f67066b"
     },
     {
       "route": "/knowledge/concepts/semiconductor-qualification-reliability-and-failure-analysis",
@@ -3505,17 +3333,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 1,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:35b439158e40e4b309cac43744765bae61fc8b1f2b451e9db91f90baf8027915"
+      "verdictDigest": "sha256:a21576148d70434f8a1afe3ad7c547255871e8834add3e07b1c7ec8155d17487"
     },
     {
       "route": "/knowledge/suppliers/synopsys",
@@ -3591,14 +3419,14 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 61
+        "wordCountDiagnostic": 63
       },
       "substantialityScore": 6.04,
       "reasons": [
         "direct answer too short to answer anything",
         "fewer than three explanatory claims"
       ],
-      "verdictDigest": "sha256:ab9ef14f0a86e796fb309f8ef4469880d6deb741cebc0804d5a75c16f91e3191"
+      "verdictDigest": "sha256:29e2a87cf54efcbc522dab92c539ea4f72b0515619cb45464ceef4f297414fc3"
     },
     {
       "route": "/knowledge/suppliers/kla",
@@ -3700,14 +3528,14 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 60
+        "wordCountDiagnostic": 65
       },
       "substantialityScore": 6.91,
       "reasons": [
         "direct answer too short to answer anything",
         "fewer than three explanatory claims"
       ],
-      "verdictDigest": "sha256:3454d8bf7535b9deb8cd7fca9555eee17650e75ec681557cf93f946a4cb0cf50"
+      "verdictDigest": "sha256:5e2b0e31920412ba5856420d9e69e78a561397f7a5180b6f70f339242e1e4733"
     },
     {
       "route": "/knowledge/suppliers/axcelis-technologies",
@@ -3926,13 +3754,13 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 68
+        "wordCountDiagnostic": 75
       },
       "substantialityScore": 7.7,
       "reasons": [
         "fewer than three explanatory claims"
       ],
-      "verdictDigest": "sha256:2a0b73c7179d5718875a41a83b59d526c1a66f5d3c03922ddda0a45618742fe0"
+      "verdictDigest": "sha256:e4cb9e0e4bff23b8a7eb59b599867bc9074924b58474aa4cba86ea2b26cbf45b"
     },
     {
       "route": "/knowledge/suppliers/advantest",
@@ -3982,13 +3810,13 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 98
+        "wordCountDiagnostic": 100
       },
       "substantialityScore": 10.76,
       "reasons": [
         "direct answer too short to answer anything"
       ],
-      "verdictDigest": "sha256:8ee8b3eaf86fece01a7c154dcdf0b3963e7f3658c35fc56cdd6b0821818e91d5"
+      "verdictDigest": "sha256:2320b1747c16feed0b866dd77b0fa1ddd7a02609683543169fb33ef82cabb026"
     },
     {
       "route": "/knowledge/religion/comparisons/source-text-and-translation",
@@ -4008,13 +3836,13 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 90
+        "wordCountDiagnostic": 92
       },
       "substantialityScore": 10.83,
       "reasons": [
         "direct answer too short to answer anything"
       ],
-      "verdictDigest": "sha256:269efcb773658768193ec12f7457b4b22fd2990be16d1a742fc54294efd7850d"
+      "verdictDigest": "sha256:5b2c3913784cfc050b2086b4d761bc79e56faf6558ff9d5943cbf4e6b3b6f175"
     },
     {
       "route": "/knowledge/religion/comparisons/doctrine-and-lived-practice",
@@ -4034,13 +3862,13 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 98
+        "wordCountDiagnostic": 100
       },
       "substantialityScore": 10.86,
       "reasons": [
         "direct answer too short to answer anything"
       ],
-      "verdictDigest": "sha256:959d0688e8c4691d771d4555d11541d008f2e3cc492e765a82ed2a474be3a06b"
+      "verdictDigest": "sha256:18d33704c686a045643908a0d3ec86668a74b58f4e63381c7092353028315394"
     },
     {
       "route": "/knowledge/religion/comparisons/theological-truth-and-empirical-claim",
@@ -4060,13 +3888,13 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 102
+        "wordCountDiagnostic": 104
       },
       "substantialityScore": 10.72,
       "reasons": [
         "direct answer too short to answer anything"
       ],
-      "verdictDigest": "sha256:9589775ba93ed462c14457ecce6c0d9750efd2cd7d9ed01d5a6ea85534aedfca"
+      "verdictDigest": "sha256:049a2ad1a30dff34b435810ffb218729d3329493455d9470ce3b9b0d9d8958bf"
     },
     {
       "route": "/knowledge/religion/comparisons/first-person-experience-and-clinical-outcome",
@@ -4086,13 +3914,13 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 91
+        "wordCountDiagnostic": 93
       },
       "substantialityScore": 10.72,
       "reasons": [
         "direct answer too short to answer anything"
       ],
-      "verdictDigest": "sha256:9fef14eabeecbd5053d00c2736ba01d320b6dba80d67da88caf138facc598340"
+      "verdictDigest": "sha256:8a07d23a3babb0b51a8716569a7ad92de36125c04a056e477b7fadbc4f25cadb"
     },
     {
       "route": "/knowledge/religion/comparisons/structural-similarity-and-historical-genealogy",
@@ -4112,13 +3940,13 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 82
+        "wordCountDiagnostic": 84
       },
       "substantialityScore": 10.88,
       "reasons": [
         "direct answer too short to answer anything"
       ],
-      "verdictDigest": "sha256:99577a474ae40d5c91813613ab2ea374db3ab90b8e204523f47aff40c5845f84"
+      "verdictDigest": "sha256:22edba66e90dc580472ed8fa58e1490af0908d4ba8abaf5f33e29f4d4eb55eee"
     },
     {
       "route": "/knowledge/religion/comparisons/ritual-efficacy-and-observed-effects",
@@ -4138,13 +3966,13 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 105
+        "wordCountDiagnostic": 107
       },
       "substantialityScore": 10.88,
       "reasons": [
         "direct answer too short to answer anything"
       ],
-      "verdictDigest": "sha256:35ced215fa8717c9850bd4b3a3ac934cb291834e73b7febdb18e0cfb79244c83"
+      "verdictDigest": "sha256:9d8130608ed0ef2aaa0862369dfa5a497ddf92e2fe19e8e3806ea00b8af85fad"
     },
     {
       "route": "/knowledge/religion/comparisons/insider-and-outsider-categories",
@@ -4164,13 +3992,13 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 90
+        "wordCountDiagnostic": 92
       },
       "substantialityScore": 10.85,
       "reasons": [
         "direct answer too short to answer anything"
       ],
-      "verdictDigest": "sha256:31ea19be407f1ab63a7dd9abd683fe5dfaad325001afdf5c6c284656479d8b9b"
+      "verdictDigest": "sha256:0939a5a5c7d6e6f2decd60b26fe6121e8b72bc6e761a83f79b2d57396fe4b0a0"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/comparisons/artificial-neural-networks-and-spiking-neural-networks",
@@ -4190,13 +4018,13 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 109
+        "wordCountDiagnostic": 111
       },
       "substantialityScore": 10.72,
       "reasons": [
         "direct answer too short to answer anything"
       ],
-      "verdictDigest": "sha256:659008d2fbf9036f2abfbed8f3d01a8a7d8d60eeec339c2505d0fd003519846c"
+      "verdictDigest": "sha256:d8decc366dfab12be15edfe97320933858917742c00df2980847c145e6bfc303"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/comparisons/digital-and-mixed-signal-neuromorphic-hardware",
@@ -4216,13 +4044,13 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 114
+        "wordCountDiagnostic": 116
       },
       "substantialityScore": 12.7,
       "reasons": [
         "direct answer too short to answer anything"
       ],
-      "verdictDigest": "sha256:e1a55767fcf3743a4fbd010f9ca76e2400c4429c8e25845f235102371fbd8c83"
+      "verdictDigest": "sha256:ea8cd3637380c5c1ba01c544e66f37257bd261199bd62d47fc13ae411ce83cb9"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/comparisons/simulation-and-physical-substrate",
@@ -4242,13 +4070,13 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 114
+        "wordCountDiagnostic": 116
       },
       "substantialityScore": 10.72,
       "reasons": [
         "direct answer too short to answer anything"
       ],
-      "verdictDigest": "sha256:69e107b8290e370a2e0fbdcb7ecd6376c7738583bac831c00d77dbbb8b5e47c5"
+      "verdictDigest": "sha256:7a057af0432610319c820f5a9e3843f9c1f0e5ded5d5d7bb0d7820305ed05eaf"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/comparisons/dissociated-neural-culture-and-brain-organoid",
@@ -4268,13 +4096,13 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 108
+        "wordCountDiagnostic": 110
       },
       "substantialityScore": 10.83,
       "reasons": [
         "direct answer too short to answer anything"
       ],
-      "verdictDigest": "sha256:f34755324c5a775b5d5f121a2e31145dafe51a10d4f3a5531134dfd250852481"
+      "verdictDigest": "sha256:5eaa79ba903a6c68f13b495f339253956490246415bc5be080ae22f1c9405c88"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/comparisons/silicon-energy-and-biological-metabolic-cost",
@@ -4294,13 +4122,13 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 110
+        "wordCountDiagnostic": 112
       },
       "substantialityScore": 12.59,
       "reasons": [
         "direct answer too short to answer anything"
       ],
-      "verdictDigest": "sha256:f6eaa54d958e24ddfd9c113d9d0cc1d6e022632b60ba18a84c20786807c1ca91"
+      "verdictDigest": "sha256:6b9fc367700515feb43b20539faa6818c8110103e8bc239658cb01aa9e9c6e56"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/comparisons/offline-training-and-online-adaptation",
@@ -4320,13 +4148,13 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 105
+        "wordCountDiagnostic": 107
       },
       "substantialityScore": 10.82,
       "reasons": [
         "direct answer too short to answer anything"
       ],
-      "verdictDigest": "sha256:9e1f033f9f3bf2c305179a303ac7633b82988b6deb37a838ddf58a222062869a"
+      "verdictDigest": "sha256:5d823c1048e740896528197c6194687e13cfbaddb724c90cae6be49a4dd316e9"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/comparisons/benchmark-performance-and-biological-plausibility",
@@ -4346,13 +4174,13 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 105
+        "wordCountDiagnostic": 107
       },
       "substantialityScore": 10.61,
       "reasons": [
         "direct answer too short to answer anything"
       ],
-      "verdictDigest": "sha256:9de06ddb67f0c49b1125ae72126ae1314511e04aceac7428bc3a614b5cbc6ff8"
+      "verdictDigest": "sha256:fb8d46fb164eaab92ed4e18bb62435862a5de2412297129c3cabe45c00aea118"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/comparisons/research-demonstration-and-deployable-system",
@@ -4372,15 +4200,15 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 111
+        "wordCountDiagnostic": 113
       },
       "substantialityScore": 10.58,
       "reasons": [
         "direct answer too short to answer anything"
       ],
-      "verdictDigest": "sha256:a23fbf544364c914ae42b2c53d7c8c8839397a56bb530b1a3b9992186648438c"
+      "verdictDigest": "sha256:edbaaa9c2c331340e26961e93ddfe7a27542f2ebe3baed076b244c602967a4bf"
     }
   ],
   "boundary": "A private audit. It changes no page.",
-  "auditDigest": "sha256:afbab013f04d0c0bc430728f39b2c00a709b4da844cee3c6b6e02ef99b9c7205"
+  "auditDigest": "sha256:9ef5bb41306683a54936471ee8c63727f113c144fa83c588318b1caf08c608a8"
 }
