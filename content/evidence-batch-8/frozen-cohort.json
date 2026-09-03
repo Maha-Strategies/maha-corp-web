@@ -1,0 +1,307 @@
+{
+  "schemaVersion": "maha-evidence-batch-8-cohort/1.0",
+  "batch": "open-literature-depth-8",
+  "frozenAt": "2026-09-03",
+  "frozenBeforeSearching": true,
+  "domainShift": "Away from semiconductor process engineering, where six batches established the open-access ceiling, toward domains whose literature is genuinely open.",
+  "exhaustedRoutesNotRetried": [
+    "IEEE Xplore",
+    "SPIE",
+    "ECTC proceedings",
+    "CMP mechanism searches",
+    "vendor 403 paths",
+    "reCAPTCHA-walled PMC articles"
+  ],
+  "poolSize": 91,
+  "scoringModel": {
+    "factors": [
+      "lawful open literature for the domain",
+      "stable identifiers",
+      "typed internal links",
+      "existing source count",
+      "information dimensions"
+    ],
+    "familySizeUsed": false,
+    "domainCap": 9
+  },
+  "selected": 30,
+  "byDomain": {
+    "astronomy": 9,
+    "mathematics": 9,
+    "neuromorphic": 9,
+    "religion": 3
+  },
+  "targets": [
+    {
+      "route": "/knowledge/mathematics/optimization",
+      "domain": "mathematics",
+      "isComparison": false,
+      "currentSources": 2,
+      "typedInternalLinks": 6,
+      "dimensions": 9,
+      "score": 30.4
+    },
+    {
+      "route": "/knowledge/mathematics/reference-frame-transformations",
+      "domain": "mathematics",
+      "isComparison": false,
+      "currentSources": 2,
+      "typedInternalLinks": 6,
+      "dimensions": 9,
+      "score": 30.4
+    },
+    {
+      "route": "/knowledge/mathematics/graph-theory",
+      "domain": "mathematics",
+      "isComparison": false,
+      "currentSources": 1,
+      "typedInternalLinks": 6,
+      "dimensions": 9,
+      "score": 29.9
+    },
+    {
+      "route": "/knowledge/mathematics/angle-normalization",
+      "domain": "mathematics",
+      "isComparison": false,
+      "currentSources": 2,
+      "typedInternalLinks": 5,
+      "dimensions": 9,
+      "score": 29.7
+    },
+    {
+      "route": "/knowledge/mathematics/calendar-and-timescale-mappings",
+      "domain": "mathematics",
+      "isComparison": false,
+      "currentSources": 2,
+      "typedInternalLinks": 5,
+      "dimensions": 9,
+      "score": 29.7
+    },
+    {
+      "route": "/knowledge/mathematics/cryptographic-commitments",
+      "domain": "mathematics",
+      "isComparison": false,
+      "currentSources": 2,
+      "typedInternalLinks": 5,
+      "dimensions": 9,
+      "score": 29.7
+    },
+    {
+      "route": "/knowledge/mathematics/periodic-functions-and-phase",
+      "domain": "mathematics",
+      "isComparison": false,
+      "currentSources": 2,
+      "typedInternalLinks": 5,
+      "dimensions": 9,
+      "score": 29.7
+    },
+    {
+      "route": "/knowledge/mathematics/root-finding",
+      "domain": "mathematics",
+      "isComparison": false,
+      "currentSources": 2,
+      "typedInternalLinks": 5,
+      "dimensions": 9,
+      "score": 29.7
+    },
+    {
+      "route": "/knowledge/mathematics/bayesian-updating",
+      "domain": "mathematics",
+      "isComparison": false,
+      "currentSources": 1,
+      "typedInternalLinks": 5,
+      "dimensions": 9,
+      "score": 29.2
+    },
+    {
+      "route": "/knowledge/astronomy/light-time-distance-and-lookback-time",
+      "domain": "astronomy",
+      "isComparison": false,
+      "currentSources": 4,
+      "typedInternalLinks": 0,
+      "dimensions": 7,
+      "score": 29.1
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/reproducibility-variability-and-controls",
+      "domain": "neuromorphic",
+      "isComparison": false,
+      "currentSources": 3,
+      "typedInternalLinks": 4,
+      "dimensions": 10,
+      "score": 28.8
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/synaptic-plasticity-and-learning",
+      "domain": "neuromorphic",
+      "isComparison": false,
+      "currentSources": 3,
+      "typedInternalLinks": 4,
+      "dimensions": 10,
+      "score": 28.8
+    },
+    {
+      "route": "/knowledge/astronomy/active-galactic-nuclei",
+      "domain": "astronomy",
+      "isComparison": false,
+      "currentSources": 3,
+      "typedInternalLinks": 0,
+      "dimensions": 7,
+      "score": 28.6
+    },
+    {
+      "route": "/knowledge/astronomy/astrometry-parallax-and-proper-motion",
+      "domain": "astronomy",
+      "isComparison": false,
+      "currentSources": 3,
+      "typedInternalLinks": 0,
+      "dimensions": 7,
+      "score": 28.6
+    },
+    {
+      "route": "/knowledge/astronomy/black-hole-observation-and-relativistic-inference",
+      "domain": "astronomy",
+      "isComparison": false,
+      "currentSources": 3,
+      "typedInternalLinks": 0,
+      "dimensions": 7,
+      "score": 28.6
+    },
+    {
+      "route": "/knowledge/astronomy/coordinates-reference-frames-and-sky-position",
+      "domain": "astronomy",
+      "isComparison": false,
+      "currentSources": 3,
+      "typedInternalLinks": 0,
+      "dimensions": 7,
+      "score": 28.6
+    },
+    {
+      "route": "/knowledge/astronomy/evidence-uncertainty-and-model-comparison",
+      "domain": "astronomy",
+      "isComparison": false,
+      "currentSources": 3,
+      "typedInternalLinks": 0,
+      "dimensions": 7,
+      "score": 28.6
+    },
+    {
+      "route": "/knowledge/astronomy/galaxies-structure-and-evolution",
+      "domain": "astronomy",
+      "isComparison": false,
+      "currentSources": 3,
+      "typedInternalLinks": 0,
+      "dimensions": 7,
+      "score": 28.6
+    },
+    {
+      "route": "/knowledge/astronomy/gravitational-lensing-and-mass-mapping",
+      "domain": "astronomy",
+      "isComparison": false,
+      "currentSources": 3,
+      "typedInternalLinks": 0,
+      "dimensions": 7,
+      "score": 28.6
+    },
+    {
+      "route": "/knowledge/astronomy/gravitational-waves-and-compact-mergers",
+      "domain": "astronomy",
+      "isComparison": false,
+      "currentSources": 3,
+      "typedInternalLinks": 0,
+      "dimensions": 7,
+      "score": 28.6
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/mixed-signal-neuromorphic-hardware",
+      "domain": "neuromorphic",
+      "isComparison": false,
+      "currentSources": 2,
+      "typedInternalLinks": 4,
+      "dimensions": 10,
+      "score": 28.3
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/neural-coding-and-time",
+      "domain": "neuromorphic",
+      "isComparison": false,
+      "currentSources": 2,
+      "typedInternalLinks": 4,
+      "dimensions": 10,
+      "score": 28.3
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/spiking-neural-networks",
+      "domain": "neuromorphic",
+      "isComparison": false,
+      "currentSources": 2,
+      "typedInternalLinks": 4,
+      "dimensions": 10,
+      "score": 28.3
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/biosafety-ethics-and-governance",
+      "domain": "neuromorphic",
+      "isComparison": false,
+      "currentSources": 3,
+      "typedInternalLinks": 3,
+      "dimensions": 9,
+      "score": 27.8
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/brain-organoids-and-organoid-intelligence",
+      "domain": "neuromorphic",
+      "isComparison": false,
+      "currentSources": 3,
+      "typedInternalLinks": 3,
+      "dimensions": 9,
+      "score": 27.8
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/hybrid-bioelectronic-systems",
+      "domain": "neuromorphic",
+      "isComparison": false,
+      "currentSources": 3,
+      "typedInternalLinks": 3,
+      "dimensions": 9,
+      "score": 27.8
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/neuromorphic-computing",
+      "domain": "neuromorphic",
+      "isComparison": false,
+      "currentSources": 3,
+      "typedInternalLinks": 3,
+      "dimensions": 9,
+      "score": 27.8
+    },
+    {
+      "route": "/knowledge/religion/contemplative-practice-and-first-person-experience",
+      "domain": "religion",
+      "isComparison": false,
+      "currentSources": 2,
+      "typedInternalLinks": 4,
+      "dimensions": 10,
+      "score": 23.3
+    },
+    {
+      "route": "/knowledge/religion/doctrine-and-doctrinal-development",
+      "domain": "religion",
+      "isComparison": false,
+      "currentSources": 2,
+      "typedInternalLinks": 4,
+      "dimensions": 10,
+      "score": 23.3
+    },
+    {
+      "route": "/knowledge/religion/empirical-claims-and-study-design",
+      "domain": "religion",
+      "isComparison": false,
+      "currentSources": 2,
+      "typedInternalLinks": 4,
+      "dimensions": 10,
+      "score": 23.3
+    }
+  ],
+  "cohortDigest": "sha256:649881b5fc92f0be3aa8dc5e5c8ff790f3d517dd9f9819f77224fc44d086e6f0"
+}
