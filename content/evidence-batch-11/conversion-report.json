@@ -32,6 +32,11 @@
       "defect": "The compiled shape recorded only a count of related routes, so a link to a nonexistent route could not be detected.",
       "affected": "every page",
       "fix": "The routes themselves are now emitted and a test asserts each one resolves."
+    },
+    {
+      "defect": "related-records counted towards the dimension total but emitted no section, so the audit credited a dimension the reader never saw.",
+      "affected": "every page with related records",
+      "fix": "The compiler now emits a related-records section and the component renders each route as a link. Verified against a production build: the thin-film deposition page shows the heading and three working equipment links."
     }
   ],
   "linkDerivation": {
@@ -47,5 +52,12 @@
     "structurally-thin": 14,
     "evidence-backed-but-thin": 2
   },
-  "boundary": "Sixteen pages became substantial because a generator defect was fixed, not because new evidence was acquired. No page gained a source, a passage or a claim in this batch beyond the religion pilot."
+  "boundary": "Sixteen pages became substantial because a generator defect was fixed, not because new evidence was acquired. No page gained a source, a passage or a claim in this batch beyond the religion pilot.",
+  "renderVerification": {
+    "method": "Checked against a served production build rather than the dev server, which was serving a stale cached JSON import and showed no uplift sections at all.",
+    "thinFilmDepositionRendersRelatedRecords": true,
+    "brokenProcessRoutesInBuiltOutput": 0,
+    "mobileOverflowAt375": false,
+    "controlPageMeasuredFirst": "/knowledge"
+  }
 }

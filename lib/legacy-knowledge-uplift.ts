@@ -330,6 +330,19 @@ export function compileUplift(input: LegacyPageInput, baselineSections = 0): Upl
     }
   }
 
+  // Related records counted towards the dimension total without rendering
+  // anything, so a page could gain a dimension the reader never saw. The
+  // routes are listed here, and carry no sourceIds: a link to a related record
+  // is navigation, not a claim, and nothing supports it but the corpus itself.
+  if (input.relatedRoutes.length > 0) {
+    sections.push({
+      dimension: 'related-records',
+      heading: 'Related records',
+      items: [...input.relatedRoutes],
+      sourceIds: [],
+    })
+  }
+
   // At least one usable source is required. Sources that cannot be used are
   // not a blocker: they are excluded from every evidence section and listed as
   // reference only, which is what "non-explanatory" has to mean in practice.

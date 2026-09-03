@@ -18,7 +18,13 @@ export function UpliftSections({ route }: { route: string }) {
           <h2 className="font-mono text-[10px] uppercase tracking-widest text-teal-300">{section.heading}</h2>
           <ul className="mt-4 space-y-3">
             {section.items.map((item) => (
-              <li key={item} className="border-l border-zinc-700 pl-3 text-sm leading-6 text-zinc-400">{item}</li>
+              <li key={item} className="border-l border-zinc-700 pl-3 text-sm leading-6 text-zinc-400">
+                {/* Related records are routes. Rendering the raw path would
+                    show the reader a string they have to retype. */}
+                {section.dimension === 'related-records'
+                  ? <a href={item} className="text-teal-300 underline-offset-4 hover:underline">{item}</a>
+                  : item}
+              </li>
             ))}
           </ul>
         </section>
