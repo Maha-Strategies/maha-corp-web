@@ -5,8 +5,10 @@ import { createPublicClient, formatUnits, http, parseAbi, type Address } from 'v
 import { privateKeyToAccount } from 'viem/accounts'
 import { base } from 'viem/chains'
 
+import { confirmSettlement, rpcUrlFor } from '../lib/x402/chain.ts'
 import { createPaidFetch, type PaymentRequirement, type TypedDataRequest } from '../lib/x402/client.ts'
 import { assertRecoverableSignature } from '../lib/x402/canary-evidence.ts'
+import { confirmCanarySettlement, settlementEvidence } from '../lib/x402/canary-settlement-confirmation.ts'
 import {
   captureResponseBody,
   parseCapturedJson,
@@ -17,6 +19,7 @@ import { BASE_USDC, CANARY_BUYER } from '../lib/x402/discovery-payment-recipe.ts
 
 const SUBJECT = '0xec84c1cd6602bbe387bc8e6f0d3c062f2762de28'
 const ENDPOINT = `https://x402.nsgoods.org/preflight?address=${SUBJECT}&chain=eip155:8453&role=payee`
+const EXPECTED_NETWORK = 'eip155:8453'
 const EXPECTED_AMOUNT = '15000'
 const EXPECTED_PAYEE = '0xc87a06DEE4c0E85912296002617120BBfd5EF990'
 const EXPECTED_ASSET = BASE_USDC
@@ -102,13 +105,39 @@ const body = parseCapturedJson(captured)
 if (typeof body.request !== 'object' || body.request === null) {
   throw new Error(`The paid response carries no request envelope; its received bytes are preserved at ${captured.path}.`)
 }
-const afterBalance = await balanceOf(account.address)
-const debited = beforeBalance - afterBalance
-if (debited !== BigInt(EXPECTED_AMOUNT)) throw new Error(`Expected a 15000 base-unit debit; observed ${debited}.`)
-if (!settlement || settlement.success !== true || !settlement.transaction) throw new Error('The endpoint returned no successful x402 settlement receipt.')
+
+// Settlement is asynchronous. Reading the balance the instant the response
+// arrives is what rejected a good run on 2026-09-02: Base had not produced the
+// block yet, so the debit read as zero. The confirmation below waits for the
+// declared transaction instead of racing it, and never reports a settlement it
+// merely failed to observe as one that did not happen.
+const rpcUrl = rpcUrlFor(EXPECTED_NETWORK, process.env.BASE_RPC_URL)
+if (!rpcUrl) throw new Error(`No RPC endpoint is configured for ${EXPECTED_NETWORK}.`)
+const confirmation = await confirmCanarySettlement({
+  receipt: settlement,
+  expected: { amountBaseUnits: EXPECTED_AMOUNT },
+  balanceBefore: beforeBalance,
+  // One attempt per call: the bounded window below owns the waiting, so the
+  // shared helper stays the single judge of what a transaction proves.
+  confirmTransaction: (transaction) => confirmSettlement({
+    rpcUrl, caip2Network: EXPECTED_NETWORK, transaction,
+    asset: EXPECTED_ASSET, payer: account.address, payTo: EXPECTED_PAYEE,
+    minAmount: EXPECTED_AMOUNT, attempts: 1,
+  }),
+  readBalance: () => balanceOf(account.address),
+  now: () => Date.now(),
+  delay: (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
+})
+
+// Written before the throw: on a timeout or an unreachable node this is the
+// only machine-readable record of what the run did and did not establish.
+await writeCaptureRecord(captured, capturePath, ENDPOINT, confirmation)
+console.log(`Settlement ${confirmation.state} (${confirmation.reason}) after ${confirmation.elapsedMs}ms.`)
+if (!confirmation.passed) throw new Error(`${confirmation.state}: ${confirmation.interpretation}`)
+const afterBalance = beforeBalance - BigInt(confirmation.debitedBaseUnits ?? '0')
 
 const evidence = {
-  schemaVersion: 'maha-nsgoods-preflight-live-canary/1.0',
+  schemaVersion: 'maha-nsgoods-preflight-live-canary/1.1',
   checkedAt: new Date().toISOString(),
   endpoint: ENDPOINT,
   subject: { address: SUBJECT, chain: 'eip155:8453', role: 'payee' },
@@ -116,11 +145,13 @@ const evidence = {
     network: 'eip155:8453', asset: EXPECTED_ASSET, payTo: EXPECTED_PAYEE,
     amountBaseUnits: EXPECTED_AMOUNT, amountUsdc: '0.015',
     buyer: account.address, balanceBeforeBaseUnits: beforeBalance.toString(),
-    balanceAfterBaseUnits: afterBalance.toString(), debitedBaseUnits: debited.toString(),
-    transaction: settlement.transaction,
+    balanceAfterBaseUnits: afterBalance.toString(),
+    debitedBaseUnits: confirmation.debitedBaseUnits as string,
+    transaction: confirmation.transaction as string,
   },
   execution: { challengeCount, signatureCount, paidHttpStatus: captured.status },
+  settlement: settlementEvidence(confirmation),
   responseSha256: captured.sha256,
 }
 await writeFile(evidencePath, `${JSON.stringify(evidence, null, 2)}\n`, { mode: 0o600 })
-console.log(`Settled exactly 0.015 USDC in transaction ${settlement.transaction}.`)
+console.log(`Settled exactly 0.015 USDC in confirmed transaction ${confirmation.transaction}.`)

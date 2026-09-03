@@ -22,6 +22,8 @@ import { createHash } from 'node:crypto'
 import { mkdir, writeFile } from 'node:fs/promises'
 import { basename, dirname } from 'node:path'
 
+import { settlementEvidence, type SettlementConfirmation } from './canary-settlement-confirmation.ts'
+
 /** Everything a later reader needs, all of it derived from bytes on disk. */
 export type CapturedResponse = {
   /** Exactly what the provider sent, and exactly what was written. */
@@ -86,20 +88,31 @@ export function parseCapturedJson(captured: CapturedResponse): Record<string, un
  *
  * The payment evidence file is only written once every check has passed, so
  * on a failing run this is the only machine-readable record that a response
- * existed at all -- what status it carried, how long it was, and the digest
- * of the file next to it. It is built from a fixed set of fields rather than
- * from anything observed, which is what keeps a header, a signature, a nonce
- * or a credential from ever reaching it.
+ * existed at all -- what status it carried, how long it was, the digest of the
+ * file next to it, and, once the settlement window closes, what could and
+ * could not be established about the payment. It is built from a fixed set of
+ * fields rather than from anything observed, which is what keeps a header, a
+ * signature, a nonce or a credential from ever reaching it.
+ *
+ * Written twice on a normal run: once the instant the bytes land, so a crash
+ * during confirmation still leaves a record, and again with the settlement
+ * outcome attached.
  */
-export async function writeCaptureRecord(captured: CapturedResponse, path: string, endpoint: string): Promise<void> {
+export async function writeCaptureRecord(
+  captured: CapturedResponse,
+  path: string,
+  endpoint: string,
+  settlement?: SettlementConfirmation,
+): Promise<void> {
   const record = {
-    schemaVersion: 'maha-nsgoods-preflight-response-capture/1.0',
+    schemaVersion: 'maha-nsgoods-preflight-response-capture/1.1',
     capturedAt: new Date().toISOString(),
     endpoint,
     httpStatus: captured.status,
     byteLength: captured.bytes.byteLength,
     responseSha256: captured.sha256,
     responseFile: basename(captured.path),
+    ...(settlement ? { settlement: settlementEvidence(settlement) } : {}),
   }
   await mkdir(dirname(path), { recursive: true })
   await writeFile(path, `${JSON.stringify(record, null, 2)}\n`, { mode: 0o600 })
