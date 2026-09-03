@@ -1,0 +1,1645 @@
+{
+  "schemaVersion": "maha-page-depth-audit/1.0",
+  "auditedAt": "2026-09-03",
+  "finding": "Classification and substance are different measurements. A page can carry an inspected source and explain almost nothing, and a structural page can be richly written and cite nothing checkable.",
+  "wordCountUsedAsGate": false,
+  "totalAudited": 59,
+  "byGroup": {
+    "independentlySupported": {
+      "audited": 29,
+      "states": {
+        "evidence-backed-but-thin": 18,
+        "substantial-and-evidence-backed": 10,
+        "structurally-substantial-but-unsupported": 1
+      }
+    },
+    "firstPartyDocumented": {
+      "audited": 10,
+      "states": {
+        "structurally-thin": 10
+      }
+    },
+    "structuralSample": {
+      "sampledFrom": 100,
+      "audited": 20,
+      "states": {
+        "structurally-thin": 9,
+        "structurally-substantial-but-unsupported": 11
+      }
+    }
+  },
+  "substantialAndEvidenceBacked": 10,
+  "thinnestSupported": [
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/comparisons/silicon-energy-and-biological-metabolic-cost",
+      "score": 12.59,
+      "reasons": [
+        "direct answer too short to answer anything"
+      ]
+    },
+    {
+      "route": "/knowledge/astronomy/black-hole-observation-and-relativistic-inference",
+      "score": 12.6,
+      "reasons": [
+        "fewer than two typed links"
+      ]
+    },
+    {
+      "route": "/knowledge/astronomy/gravitational-waves-and-compact-mergers",
+      "score": 12.6,
+      "reasons": [
+        "fewer than two typed links"
+      ]
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/comparisons/digital-and-mixed-signal-neuromorphic-hardware",
+      "score": 12.7,
+      "reasons": [
+        "direct answer too short to answer anything"
+      ]
+    },
+    {
+      "route": "/knowledge/concepts/cleanrooms-fab-utilities-and-contamination-control",
+      "score": 13.88,
+      "reasons": [
+        "fewer than two typed links"
+      ]
+    },
+    {
+      "route": "/knowledge/processes/plasma-etch-and-pattern-transfer",
+      "score": 14.06,
+      "reasons": [
+        "fewer than two typed links"
+      ]
+    },
+    {
+      "route": "/knowledge/equipment/atomic-layer-deposition-reactor",
+      "score": 14.3,
+      "reasons": [
+        "fewer than two typed links"
+      ]
+    },
+    {
+      "route": "/knowledge/equipment/plasma-etch-and-atomic-layer-etch-system",
+      "score": 14.3,
+      "reasons": [
+        "fewer than two typed links"
+      ]
+    },
+    {
+      "route": "/knowledge/processes/thin-film-deposition",
+      "score": 14.83,
+      "reasons": [
+        "fewer than two typed links"
+      ]
+    },
+    {
+      "route": "/knowledge/concepts/yield-learning-and-statistical-process-control",
+      "score": 15.44,
+      "reasons": [
+        "fewer than two typed links"
+      ]
+    },
+    {
+      "route": "/knowledge/equipment/semiconductor-ion-implantation-system",
+      "score": 15.8,
+      "reasons": [
+        "fewer than two typed links"
+      ]
+    },
+    {
+      "route": "/knowledge/equipment/optical-patterned-wafer-inspection-system",
+      "score": 15.8,
+      "reasons": [
+        "fewer than two typed links"
+      ]
+    }
+  ],
+  "verdicts": [
+    {
+      "route": "/knowledge/astronomy/black-hole-observation-and-relativistic-inference",
+      "state": "evidence-backed-but-thin",
+      "measures": {
+        "directAnswerChars": 310,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 9,
+        "claimsWithPassage": 1,
+        "exactLocators": 1,
+        "limitations": 3,
+        "unresolvedQuestions": 4,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 0,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 7,
+        "wordCountDiagnostic": 275
+      },
+      "substantialityScore": 12.6,
+      "reasons": [
+        "fewer than two typed links"
+      ],
+      "verdictDigest": "sha256:3d01681c1b56555d19c682b40ee15c236fbcf6459de1e8dcc7f44972db81d2d7"
+    },
+    {
+      "route": "/knowledge/astronomy/gravitational-waves-and-compact-mergers",
+      "state": "evidence-backed-but-thin",
+      "measures": {
+        "directAnswerChars": 298,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 9,
+        "claimsWithPassage": 1,
+        "exactLocators": 1,
+        "limitations": 3,
+        "unresolvedQuestions": 4,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 0,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 7,
+        "wordCountDiagnostic": 259
+      },
+      "substantialityScore": 12.6,
+      "reasons": [
+        "fewer than two typed links"
+      ],
+      "verdictDigest": "sha256:690bdf1d3b86c225c0313b96813034399cf8cc6fe31d21767ae5c9f21cba3337"
+    },
+    {
+      "route": "/knowledge/mathematics/angle-normalization",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 314,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 1,
+        "exactLocators": 1,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 2,
+        "structuredDataFields": 9,
+        "renderedDimensions": 9,
+        "wordCountDiagnostic": 241
+      },
+      "substantialityScore": 14.7,
+      "reasons": [],
+      "verdictDigest": "sha256:2a26b3b9d5009dabd203b219093d4f8558a1b314a5d853d9a438fbd980c6e718"
+    },
+    {
+      "route": "/knowledge/mathematics/periodic-functions-and-phase",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 315,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 1,
+        "exactLocators": 1,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 2,
+        "structuredDataFields": 9,
+        "renderedDimensions": 9,
+        "wordCountDiagnostic": 226
+      },
+      "substantialityScore": 14.7,
+      "reasons": [],
+      "verdictDigest": "sha256:43305a15726b30a4357c58023626ceef7683b44b342f7c7d4f8a60c3fcd4a7d6"
+    },
+    {
+      "route": "/knowledge/mathematics/root-finding",
+      "state": "structurally-substantial-but-unsupported",
+      "measures": {
+        "directAnswerChars": 240,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 2,
+        "structuredDataFields": 9,
+        "renderedDimensions": 9,
+        "wordCountDiagnostic": 234
+      },
+      "substantialityScore": 12.7,
+      "reasons": [
+        "classified independent but no claim maps to a passage"
+      ],
+      "verdictDigest": "sha256:fef80e71b27cc9d73ce9ce0c19ecfbd7da64dd6e81a9d0693a3b8c69208fb32a"
+    },
+    {
+      "route": "/knowledge/mathematics/convergence-precision-and-error",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 351,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 1,
+        "exactLocators": 1,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 1,
+        "structuredDataFields": 9,
+        "renderedDimensions": 9,
+        "wordCountDiagnostic": 179
+      },
+      "substantialityScore": 14.4,
+      "reasons": [],
+      "verdictDigest": "sha256:8927c86ecde5e6c295c3670b18111e975e59fd950b9114337af6c8747abbef63"
+    },
+    {
+      "route": "/knowledge/mathematics/uncertainty-propagation",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 295,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 1,
+        "exactLocators": 9,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 3,
+        "structuredDataFields": 9,
+        "renderedDimensions": 9,
+        "wordCountDiagnostic": 249
+      },
+      "substantialityScore": 17.5,
+      "reasons": [],
+      "verdictDigest": "sha256:620f38115b3bd0a923dc4e1d578623f6eb317cbae784582eb86ecb6a8d2655b7"
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/event-driven-computation",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 381,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 1,
+        "exactLocators": 2,
+        "limitations": 2,
+        "unresolvedQuestions": 4,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 1,
+        "structuredDataFields": 9,
+        "renderedDimensions": 9,
+        "wordCountDiagnostic": 309
+      },
+      "substantialityScore": 13.3,
+      "reasons": [],
+      "verdictDigest": "sha256:fc6b0296be027b6f85fcc506c6629cc294851c54e44d20c003f8a5aeb3e7d357"
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/hardware-software-co-design",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 369,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 12,
+        "claimsWithPassage": 1,
+        "exactLocators": 2,
+        "limitations": 2,
+        "unresolvedQuestions": 4,
+        "supportedComparisons": 2,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 1,
+        "structuredDataFields": 9,
+        "renderedDimensions": 10,
+        "wordCountDiagnostic": 396
+      },
+      "substantialityScore": 16.1,
+      "reasons": [],
+      "verdictDigest": "sha256:52b302c6a032211097e546dd70df255a014f7f7ac8a7b5cda5ea721b735602b6"
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/biological-neural-cultures",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 413,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 9,
+        "claimsWithPassage": 1,
+        "exactLocators": 4,
+        "limitations": 2,
+        "unresolvedQuestions": 4,
+        "supportedComparisons": 1,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 1,
+        "structuredDataFields": 9,
+        "renderedDimensions": 10,
+        "wordCountDiagnostic": 365
+      },
+      "substantialityScore": 16.3,
+      "reasons": [],
+      "verdictDigest": "sha256:b1e5a4ae5e4323f3ef06412f0e13cedf4c8fd14309032333b5f875a8fd974781"
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/bioelectronic-interfaces",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 393,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 9,
+        "claimsWithPassage": 1,
+        "exactLocators": 1,
+        "limitations": 2,
+        "unresolvedQuestions": 3,
+        "supportedComparisons": 1,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 9,
+        "wordCountDiagnostic": 267
+      },
+      "substantialityScore": 14.3,
+      "reasons": [],
+      "verdictDigest": "sha256:7b86d606839eb03169e06fbb390577a9aa3e21038631635d121c1027865a3b3c"
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/multielectrode-arrays-and-stimulation",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 365,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 1,
+        "exactLocators": 4,
+        "limitations": 2,
+        "unresolvedQuestions": 4,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 1,
+        "structuredDataFields": 9,
+        "renderedDimensions": 9,
+        "wordCountDiagnostic": 316
+      },
+      "substantialityScore": 14.3,
+      "reasons": [],
+      "verdictDigest": "sha256:a1bc9941da59b031243f21e47ba3fa2f47b54d224c0e0b61b43e26594cdb623d"
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/benchmarking-energy-and-task-equivalence",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 405,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 15,
+        "claimsWithPassage": 1,
+        "exactLocators": 2,
+        "limitations": 2,
+        "unresolvedQuestions": 4,
+        "supportedComparisons": 3,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 1,
+        "structuredDataFields": 9,
+        "renderedDimensions": 10,
+        "wordCountDiagnostic": 442
+      },
+      "substantialityScore": 16.9,
+      "reasons": [],
+      "verdictDigest": "sha256:571a5b2907dac822c44e25cdfb3b52e66d896df40f0771b497782e6035d6ae7f"
+    },
+    {
+      "route": "/knowledge/equipment/reticle-and-photomask-inspection-system",
+      "state": "evidence-backed-but-thin",
+      "measures": {
+        "directAnswerChars": 253,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 16,
+        "claimsWithPassage": 1,
+        "exactLocators": 6,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 0,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 7,
+        "wordCountDiagnostic": 142
+      },
+      "substantialityScore": 16.3,
+      "reasons": [
+        "fewer than two typed links"
+      ],
+      "verdictDigest": "sha256:3ae8019966c7b6956acf18bfefd948be3622e5e5c9bb5f37bed0321a2a5d7cad"
+    },
+    {
+      "route": "/knowledge/equipment/atomic-layer-deposition-reactor",
+      "state": "evidence-backed-but-thin",
+      "measures": {
+        "directAnswerChars": 250,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 16,
+        "claimsWithPassage": 1,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 0,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 7,
+        "wordCountDiagnostic": 138
+      },
+      "substantialityScore": 14.3,
+      "reasons": [
+        "fewer than two typed links"
+      ],
+      "verdictDigest": "sha256:eb15d5ec0657554d7bd896a84bd9dcd240cadf78f8fcc924ae1fd35fbcca1802"
+    },
+    {
+      "route": "/knowledge/equipment/plasma-etch-and-atomic-layer-etch-system",
+      "state": "evidence-backed-but-thin",
+      "measures": {
+        "directAnswerChars": 261,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 16,
+        "claimsWithPassage": 1,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 2,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 0,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 7,
+        "wordCountDiagnostic": 207
+      },
+      "substantialityScore": 14.3,
+      "reasons": [
+        "fewer than two typed links"
+      ],
+      "verdictDigest": "sha256:bbb33df0fa1aa73b6bca31700e76ec35f5e5bc9bc1b1763e6c4ee76d892cce42"
+    },
+    {
+      "route": "/knowledge/equipment/semiconductor-ion-implantation-system",
+      "state": "evidence-backed-but-thin",
+      "measures": {
+        "directAnswerChars": 240,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 16,
+        "claimsWithPassage": 1,
+        "exactLocators": 5,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 0,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 7,
+        "wordCountDiagnostic": 154
+      },
+      "substantialityScore": 15.8,
+      "reasons": [
+        "fewer than two typed links"
+      ],
+      "verdictDigest": "sha256:098e362dc3c3ca0606b4f481de04f4d05304cfa44fb97749cb45e25d07aa84f2"
+    },
+    {
+      "route": "/knowledge/equipment/optical-patterned-wafer-inspection-system",
+      "state": "evidence-backed-but-thin",
+      "measures": {
+        "directAnswerChars": 249,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 16,
+        "claimsWithPassage": 1,
+        "exactLocators": 5,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 0,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 7,
+        "wordCountDiagnostic": 138
+      },
+      "substantialityScore": 15.8,
+      "reasons": [
+        "fewer than two typed links"
+      ],
+      "verdictDigest": "sha256:504a9a9b054da19ca322339ce6d8da4ef2bb7b65d09b5bef374c205207bfd51f"
+    },
+    {
+      "route": "/knowledge/equipment/electron-beam-defect-review-and-inspection-system",
+      "state": "evidence-backed-but-thin",
+      "measures": {
+        "directAnswerChars": 257,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 16,
+        "claimsWithPassage": 1,
+        "exactLocators": 5,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 0,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 7,
+        "wordCountDiagnostic": 143
+      },
+      "substantialityScore": 15.8,
+      "reasons": [
+        "fewer than two typed links"
+      ],
+      "verdictDigest": "sha256:ba0cf69c58a7187fc526ad19ed0e1193664895a0c691f69911564d99f3623c60"
+    },
+    {
+      "route": "/knowledge/equipment/overlay-critical-dimension-and-film-metrology-system",
+      "state": "evidence-backed-but-thin",
+      "measures": {
+        "directAnswerChars": 238,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 16,
+        "claimsWithPassage": 1,
+        "exactLocators": 6,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 0,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 7,
+        "wordCountDiagnostic": 137
+      },
+      "substantialityScore": 16.28,
+      "reasons": [
+        "fewer than two typed links"
+      ],
+      "verdictDigest": "sha256:a33783729bb1d2c25b2c6366edf6eeeb812fbeaa161ab6aae8a374b2e69a9de4"
+    },
+    {
+      "route": "/knowledge/domains/semiconductor-manufacturing",
+      "state": "evidence-backed-but-thin",
+      "measures": {
+        "directAnswerChars": 196,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 22,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 8,
+        "unresolvedQuestions": 2,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 0,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 7,
+        "wordCountDiagnostic": 259
+      },
+      "substantialityScore": 16.23,
+      "reasons": [
+        "fewer than two typed links"
+      ],
+      "verdictDigest": "sha256:4f49efb23fde7d4a1cb9e4a20129fcf136a8ca1e050b047c3e21836355e4ef90"
+    },
+    {
+      "route": "/knowledge/processes/thin-film-deposition",
+      "state": "evidence-backed-but-thin",
+      "measures": {
+        "directAnswerChars": 208,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 21,
+        "claimsWithPassage": 1,
+        "exactLocators": 2,
+        "limitations": 8,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 0,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 7,
+        "wordCountDiagnostic": 159
+      },
+      "substantialityScore": 14.83,
+      "reasons": [
+        "fewer than two typed links"
+      ],
+      "verdictDigest": "sha256:21e9200f2c8f7ead6e7e34756e1a5adc0b9699aac3bdc77d18d563a8c5975f76"
+    },
+    {
+      "route": "/knowledge/processes/plasma-etch-and-pattern-transfer",
+      "state": "evidence-backed-but-thin",
+      "measures": {
+        "directAnswerChars": 163,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 20,
+        "claimsWithPassage": 1,
+        "exactLocators": 2,
+        "limitations": 7,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 0,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 7,
+        "wordCountDiagnostic": 176
+      },
+      "substantialityScore": 14.06,
+      "reasons": [
+        "fewer than two typed links"
+      ],
+      "verdictDigest": "sha256:e594403682ffae05a0c9bd4257533ebbdb66844bcef9ae91c22d4d97100ffd26"
+    },
+    {
+      "route": "/knowledge/processes/ion-implantation-and-annealing",
+      "state": "evidence-backed-but-thin",
+      "measures": {
+        "directAnswerChars": 198,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 21,
+        "claimsWithPassage": 1,
+        "exactLocators": 5,
+        "limitations": 8,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 0,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 7,
+        "wordCountDiagnostic": 172
+      },
+      "substantialityScore": 16.25,
+      "reasons": [
+        "fewer than two typed links"
+      ],
+      "verdictDigest": "sha256:07029e819b80bacad261dd53adbba924a30f3167e94665f36a1cd1ff374bb242"
+    },
+    {
+      "route": "/knowledge/concepts/semiconductor-metrology-and-defect-inspection",
+      "state": "evidence-backed-but-thin",
+      "measures": {
+        "directAnswerChars": 193,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 19,
+        "claimsWithPassage": 1,
+        "exactLocators": 6,
+        "limitations": 7,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 0,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 7,
+        "wordCountDiagnostic": 146
+      },
+      "substantialityScore": 16.31,
+      "reasons": [
+        "fewer than two typed links"
+      ],
+      "verdictDigest": "sha256:65f442ab9b4d7dee013d03f751ce4e6b271b0cae319bd7ff8c6ec6b182de056d"
+    },
+    {
+      "route": "/knowledge/concepts/yield-learning-and-statistical-process-control",
+      "state": "evidence-backed-but-thin",
+      "measures": {
+        "directAnswerChars": 197,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 18,
+        "claimsWithPassage": 1,
+        "exactLocators": 5,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 0,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 7,
+        "wordCountDiagnostic": 160
+      },
+      "substantialityScore": 15.44,
+      "reasons": [
+        "fewer than two typed links"
+      ],
+      "verdictDigest": "sha256:bb2139115fbea482f7b68ab0c14a2edb8d449fe8d8bf8394ccf0ca57dbd56b0c"
+    },
+    {
+      "route": "/knowledge/concepts/cleanrooms-fab-utilities-and-contamination-control",
+      "state": "evidence-backed-but-thin",
+      "measures": {
+        "directAnswerChars": 202,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 19,
+        "claimsWithPassage": 1,
+        "exactLocators": 1,
+        "limitations": 7,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 0,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 7,
+        "wordCountDiagnostic": 191
+      },
+      "substantialityScore": 13.88,
+      "reasons": [
+        "fewer than two typed links"
+      ],
+      "verdictDigest": "sha256:827c4d076a8aeaa1f8440c4e6f3249bb41aa6fe0c57c27186659fd30436ba8ca"
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/comparisons/digital-and-mixed-signal-neuromorphic-hardware",
+      "state": "evidence-backed-but-thin",
+      "measures": {
+        "directAnswerChars": 84,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 9,
+        "claimsWithPassage": 1,
+        "exactLocators": 1,
+        "limitations": 2,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 1,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 2,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 9,
+        "wordCountDiagnostic": 114
+      },
+      "substantialityScore": 12.7,
+      "reasons": [
+        "direct answer too short to answer anything"
+      ],
+      "verdictDigest": "sha256:e1a55767fcf3743a4fbd010f9ca76e2400c4429c8e25845f235102371fbd8c83"
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/comparisons/silicon-energy-and-biological-metabolic-cost",
+      "state": "evidence-backed-but-thin",
+      "measures": {
+        "directAnswerChars": 71,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 9,
+        "claimsWithPassage": 1,
+        "exactLocators": 1,
+        "limitations": 2,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 1,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 2,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 9,
+        "wordCountDiagnostic": 110
+      },
+      "substantialityScore": 12.59,
+      "reasons": [
+        "direct answer too short to answer anything"
+      ],
+      "verdictDigest": "sha256:f6eaa54d958e24ddfd9c113d9d0cc1d6e022632b60ba18a84c20786807c1ca91"
+    },
+    {
+      "route": "/knowledge/suppliers/synopsys",
+      "state": "structurally-thin",
+      "measures": {
+        "directAnswerChars": 0,
+        "hasMechanismOrDerivation": false,
+        "hasTechnicalContext": false,
+        "explanatoryClaims": 0,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 0,
+        "unresolvedQuestions": 0,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 2,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 5,
+        "wordCountDiagnostic": 0
+      },
+      "substantialityScore": 1.6,
+      "reasons": [
+        "direct answer too short to answer anything",
+        "no mechanism or derivation",
+        "fewer than three explanatory claims",
+        "no stated limitation",
+        "fewer than six rendered dimensions"
+      ],
+      "verdictDigest": "sha256:78677d928399c57e23e015e6f5550a47d87e25b0088c2e2e0fd34a545106d9e7"
+    },
+    {
+      "route": "/knowledge/suppliers/asml",
+      "state": "structurally-thin",
+      "measures": {
+        "directAnswerChars": 113,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": false,
+        "explanatoryClaims": 1,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 1,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 2,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 61
+      },
+      "substantialityScore": 6.04,
+      "reasons": [
+        "direct answer too short to answer anything",
+        "fewer than three explanatory claims"
+      ],
+      "verdictDigest": "sha256:e3510c359afe15f5fca11cbe8f90cefccaefa6a4187df11d7a815bedc3535f18"
+    },
+    {
+      "route": "/knowledge/suppliers/lam-research",
+      "state": "structurally-thin",
+      "measures": {
+        "directAnswerChars": 0,
+        "hasMechanismOrDerivation": false,
+        "hasTechnicalContext": false,
+        "explanatoryClaims": 0,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 0,
+        "unresolvedQuestions": 0,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 2,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 5,
+        "wordCountDiagnostic": 0
+      },
+      "substantialityScore": 1.6,
+      "reasons": [
+        "direct answer too short to answer anything",
+        "no mechanism or derivation",
+        "fewer than three explanatory claims",
+        "no stated limitation",
+        "fewer than six rendered dimensions"
+      ],
+      "verdictDigest": "sha256:0bdebd37ae88370f8cdf1c81dc92fbfa690a3eba8d90b88b1320cd1b99936c63"
+    },
+    {
+      "route": "/knowledge/suppliers/tokyo-electron",
+      "state": "structurally-thin",
+      "measures": {
+        "directAnswerChars": 109,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": false,
+        "explanatoryClaims": 1,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 1,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 5,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 60
+      },
+      "substantialityScore": 6.91,
+      "reasons": [
+        "direct answer too short to answer anything",
+        "fewer than three explanatory claims"
+      ],
+      "verdictDigest": "sha256:d74759370bede683237298b4885e660528db9945dcc3f633993967fea2b63c9c"
+    },
+    {
+      "route": "/knowledge/suppliers/axcelis-technologies",
+      "state": "structurally-thin",
+      "measures": {
+        "directAnswerChars": 0,
+        "hasMechanismOrDerivation": false,
+        "hasTechnicalContext": false,
+        "explanatoryClaims": 0,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 0,
+        "unresolvedQuestions": 0,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 1,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 5,
+        "wordCountDiagnostic": 0
+      },
+      "substantialityScore": 1.3,
+      "reasons": [
+        "direct answer too short to answer anything",
+        "no mechanism or derivation",
+        "fewer than three explanatory claims",
+        "no stated limitation",
+        "fewer than two typed links",
+        "fewer than six rendered dimensions"
+      ],
+      "verdictDigest": "sha256:13d5713148d37273bd48020b01e1573f8eff2300b39f3a35a9814cc79354349b"
+    },
+    {
+      "route": "/knowledge/suppliers/disco",
+      "state": "structurally-thin",
+      "measures": {
+        "directAnswerChars": 0,
+        "hasMechanismOrDerivation": false,
+        "hasTechnicalContext": false,
+        "explanatoryClaims": 0,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 0,
+        "unresolvedQuestions": 0,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 2,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 5,
+        "wordCountDiagnostic": 0
+      },
+      "substantialityScore": 1.6,
+      "reasons": [
+        "direct answer too short to answer anything",
+        "no mechanism or derivation",
+        "fewer than three explanatory claims",
+        "no stated limitation",
+        "fewer than six rendered dimensions"
+      ],
+      "verdictDigest": "sha256:76720d07642d6bd8d9e7bd182a1e9f2c54754ff2f5a737ea24ce8264e70e3172"
+    },
+    {
+      "route": "/knowledge/suppliers/dow",
+      "state": "structurally-thin",
+      "measures": {
+        "directAnswerChars": 0,
+        "hasMechanismOrDerivation": false,
+        "hasTechnicalContext": false,
+        "explanatoryClaims": 0,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 0,
+        "unresolvedQuestions": 0,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 5,
+        "wordCountDiagnostic": 0
+      },
+      "substantialityScore": 1.9,
+      "reasons": [
+        "direct answer too short to answer anything",
+        "no mechanism or derivation",
+        "fewer than three explanatory claims",
+        "no stated limitation",
+        "fewer than six rendered dimensions"
+      ],
+      "verdictDigest": "sha256:135002866aab721be25a4c7bca515ce95bec39729698f9d736b8e4593b7e7fa0"
+    },
+    {
+      "route": "/knowledge/suppliers/tsmc",
+      "state": "structurally-thin",
+      "measures": {
+        "directAnswerChars": 0,
+        "hasMechanismOrDerivation": false,
+        "hasTechnicalContext": false,
+        "explanatoryClaims": 0,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 0,
+        "unresolvedQuestions": 0,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 5,
+        "wordCountDiagnostic": 0
+      },
+      "substantialityScore": 1.9,
+      "reasons": [
+        "direct answer too short to answer anything",
+        "no mechanism or derivation",
+        "fewer than three explanatory claims",
+        "no stated limitation",
+        "fewer than six rendered dimensions"
+      ],
+      "verdictDigest": "sha256:4b2440e5844b201d2af3fe9dc7ed8d8e9131a6e6409c72387ef447e29cad4af2"
+    },
+    {
+      "route": "/knowledge/suppliers/amkor-technology",
+      "state": "structurally-thin",
+      "measures": {
+        "directAnswerChars": 132,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": false,
+        "explanatoryClaims": 1,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 1,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 7,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 68
+      },
+      "substantialityScore": 7.7,
+      "reasons": [
+        "fewer than three explanatory claims"
+      ],
+      "verdictDigest": "sha256:15aa5873bc7e3fc02db4f62275062481d7a300c95ea9c487c9e259965ad5b7e2"
+    },
+    {
+      "route": "/knowledge/suppliers/advantest",
+      "state": "structurally-thin",
+      "measures": {
+        "directAnswerChars": 0,
+        "hasMechanismOrDerivation": false,
+        "hasTechnicalContext": false,
+        "explanatoryClaims": 0,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 0,
+        "unresolvedQuestions": 0,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 2,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 5,
+        "wordCountDiagnostic": 0
+      },
+      "substantialityScore": 1.6,
+      "reasons": [
+        "direct answer too short to answer anything",
+        "no mechanism or derivation",
+        "fewer than three explanatory claims",
+        "no stated limitation",
+        "fewer than six rendered dimensions"
+      ],
+      "verdictDigest": "sha256:edd4cb5e36df9c981fce39220f97ce8eefbce996d549f0bf2cf620a1ac8cb47f"
+    },
+    {
+      "route": "/knowledge/astronomy/active-galactic-nuclei",
+      "state": "structurally-thin",
+      "measures": {
+        "directAnswerChars": 280,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 9,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 3,
+        "unresolvedQuestions": 3,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 0,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 7,
+        "wordCountDiagnostic": 230
+      },
+      "substantialityScore": 10.6,
+      "reasons": [
+        "fewer than two typed links"
+      ],
+      "verdictDigest": "sha256:9dc9a60fbefef79d1e3851da35fa1c8ab1d44be17c641d69d34de8b3b4727b8c"
+    },
+    {
+      "route": "/knowledge/astronomy/evidence-uncertainty-and-model-comparison",
+      "state": "structurally-thin",
+      "measures": {
+        "directAnswerChars": 298,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 9,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 3,
+        "unresolvedQuestions": 3,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 0,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 7,
+        "wordCountDiagnostic": 223
+      },
+      "substantialityScore": 10.6,
+      "reasons": [
+        "fewer than two typed links"
+      ],
+      "verdictDigest": "sha256:0e2aa0dda7be95afe12d3edd74b9263ff0c156760d3db0ef24b16de5278ebd09"
+    },
+    {
+      "route": "/knowledge/astronomy/light-time-distance-and-lookback-time",
+      "state": "structurally-thin",
+      "measures": {
+        "directAnswerChars": 244,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 9,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 3,
+        "unresolvedQuestions": 4,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 0,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 7,
+        "wordCountDiagnostic": 247
+      },
+      "substantialityScore": 10.6,
+      "reasons": [
+        "fewer than two typed links"
+      ],
+      "verdictDigest": "sha256:8fba857af885407476e842a71a951d1306444dbf3e95dae78ac6d52f34dc8e1a"
+    },
+    {
+      "route": "/knowledge/astronomy/spectroscopy-lines-and-redshift",
+      "state": "structurally-thin",
+      "measures": {
+        "directAnswerChars": 287,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 9,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 3,
+        "unresolvedQuestions": 3,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 0,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 7,
+        "wordCountDiagnostic": 224
+      },
+      "substantialityScore": 10.6,
+      "reasons": [
+        "fewer than two typed links"
+      ],
+      "verdictDigest": "sha256:2f23b0f8350ae140f2c645f7ad0b505a127b28c9601027c6dd50c92945890c48"
+    },
+    {
+      "route": "/knowledge/astronomy/time-domain-and-multimessenger-astronomy",
+      "state": "structurally-thin",
+      "measures": {
+        "directAnswerChars": 339,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 9,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 3,
+        "unresolvedQuestions": 3,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 0,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 7,
+        "wordCountDiagnostic": 217
+      },
+      "substantialityScore": 10.6,
+      "reasons": [
+        "fewer than two typed links"
+      ],
+      "verdictDigest": "sha256:3f6f863d8b93a15eee84ae74bc1e2b4f71b3df6c9264c9ae3be0f8fdc42ca6b9"
+    },
+    {
+      "route": "/knowledge/equipment/euv-and-high-na-euv-lithography-scanner",
+      "state": "structurally-thin",
+      "measures": {
+        "directAnswerChars": 256,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 16,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 0,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 7,
+        "wordCountDiagnostic": 143
+      },
+      "substantialityScore": 11.8,
+      "reasons": [
+        "fewer than two typed links"
+      ],
+      "verdictDigest": "sha256:dbcfb03c30d5ca5e207112c9ecdd3f85eef52d414779380d4fe04e5de67e9b8e"
+    },
+    {
+      "route": "/knowledge/mathematics/bayesian-updating",
+      "state": "structurally-substantial-but-unsupported",
+      "measures": {
+        "directAnswerChars": 279,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 2,
+        "structuredDataFields": 9,
+        "renderedDimensions": 9,
+        "wordCountDiagnostic": 215
+      },
+      "substantialityScore": 12.7,
+      "reasons": [],
+      "verdictDigest": "sha256:34b427b59eb9e70dd4119ef1d78048a1def889a0956f6d14f7ec2f3b25b906f7"
+    },
+    {
+      "route": "/knowledge/mathematics/constraint-satisfaction",
+      "state": "structurally-substantial-but-unsupported",
+      "measures": {
+        "directAnswerChars": 278,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 2,
+        "structuredDataFields": 9,
+        "renderedDimensions": 9,
+        "wordCountDiagnostic": 208
+      },
+      "substantialityScore": 12.7,
+      "reasons": [],
+      "verdictDigest": "sha256:115a90a70bc192b3806b03a6bab27d5530e974d2f363b3294284d11f1053e3c7"
+    },
+    {
+      "route": "/knowledge/mathematics/information-theory",
+      "state": "structurally-substantial-but-unsupported",
+      "measures": {
+        "directAnswerChars": 273,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 1,
+        "structuredDataFields": 9,
+        "renderedDimensions": 9,
+        "wordCountDiagnostic": 157
+      },
+      "substantialityScore": 12.4,
+      "reasons": [],
+      "verdictDigest": "sha256:1f39b7885b1bccba50f94c38897864f10ee299eda8631ac003f372bedc18baf5"
+    },
+    {
+      "route": "/knowledge/mathematics/proper-scoring-rules",
+      "state": "structurally-substantial-but-unsupported",
+      "measures": {
+        "directAnswerChars": 332,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 1,
+        "structuredDataFields": 9,
+        "renderedDimensions": 9,
+        "wordCountDiagnostic": 198
+      },
+      "substantialityScore": 12.4,
+      "reasons": [],
+      "verdictDigest": "sha256:6297edb594c4123ba69cb59bb3326c7599d1fa6a5aea26079c1ab32700ef466a"
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/brain-organoids-and-organoid-intelligence",
+      "state": "structurally-substantial-but-unsupported",
+      "measures": {
+        "directAnswerChars": 414,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 9,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 2,
+        "unresolvedQuestions": 3,
+        "supportedComparisons": 1,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 9,
+        "wordCountDiagnostic": 258
+      },
+      "substantialityScore": 12.3,
+      "reasons": [],
+      "verdictDigest": "sha256:d121a7374a30c4011be9c9f9463e4013f091dcb8ada6523d577e3dd1c23962a8"
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/comparisons/research-demonstration-and-deployable-system",
+      "state": "structurally-thin",
+      "measures": {
+        "directAnswerChars": 69,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 9,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 2,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 1,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 2,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 9,
+        "wordCountDiagnostic": 111
+      },
+      "substantialityScore": 10.58,
+      "reasons": [
+        "direct answer too short to answer anything"
+      ],
+      "verdictDigest": "sha256:a23fbf544364c914ae42b2c53d7c8c8839397a56bb530b1a3b9992186648438c"
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/molecular-and-dna-computing",
+      "state": "structurally-substantial-but-unsupported",
+      "measures": {
+        "directAnswerChars": 405,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 2,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 1,
+        "structuredDataFields": 9,
+        "renderedDimensions": 9,
+        "wordCountDiagnostic": 180
+      },
+      "substantialityScore": 10.8,
+      "reasons": [],
+      "verdictDigest": "sha256:ed90226e8281af31d433d0cf248563c39d8645cc7ead058a26d5d8471c284466"
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/reproducibility-variability-and-controls",
+      "state": "structurally-substantial-but-unsupported",
+      "measures": {
+        "directAnswerChars": 362,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 9,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 2,
+        "unresolvedQuestions": 3,
+        "supportedComparisons": 1,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 1,
+        "structuredDataFields": 9,
+        "renderedDimensions": 10,
+        "wordCountDiagnostic": 304
+      },
+      "substantialityScore": 12.8,
+      "reasons": [],
+      "verdictDigest": "sha256:188d03c47ddbb4082cf10ae2707fe371c3d2913f18644314f62b97bf6cb34806"
+    },
+    {
+      "route": "/knowledge/processes/photolithography",
+      "state": "structurally-thin",
+      "measures": {
+        "directAnswerChars": 170,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 20,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 7,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 0,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 7,
+        "wordCountDiagnostic": 154
+      },
+      "substantialityScore": 11.62,
+      "reasons": [
+        "fewer than two typed links"
+      ],
+      "verdictDigest": "sha256:0f1f86264f5337af2d836632514e00d719a8a706129dbf6a5e0c1988d5f22477"
+    },
+    {
+      "route": "/knowledge/religion/canon-and-boundaries",
+      "state": "structurally-substantial-but-unsupported",
+      "measures": {
+        "directAnswerChars": 293,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 2,
+        "unresolvedQuestions": 2,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 1,
+        "structuredDataFields": 9,
+        "renderedDimensions": 9,
+        "wordCountDiagnostic": 133
+      },
+      "substantialityScore": 10.8,
+      "reasons": [],
+      "verdictDigest": "sha256:3c9c94e4df019e6f40a69669f6bb8e859f1cf01c3a04e6df0945cbc2410e7b57"
+    },
+    {
+      "route": "/knowledge/religion/comparisons/insider-and-outsider-categories",
+      "state": "structurally-thin",
+      "measures": {
+        "directAnswerChars": 102,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 9,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 2,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 1,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 2,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 9,
+        "wordCountDiagnostic": 90
+      },
+      "substantialityScore": 10.85,
+      "reasons": [
+        "direct answer too short to answer anything"
+      ],
+      "verdictDigest": "sha256:31ea19be407f1ab63a7dd9abd683fe5dfaad325001afdf5c6c284656479d8b9b"
+    },
+    {
+      "route": "/knowledge/religion/contemplative-practice-and-first-person-experience",
+      "state": "structurally-substantial-but-unsupported",
+      "measures": {
+        "directAnswerChars": 357,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 9,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 2,
+        "unresolvedQuestions": 2,
+        "supportedComparisons": 1,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 1,
+        "structuredDataFields": 9,
+        "renderedDimensions": 10,
+        "wordCountDiagnostic": 175
+      },
+      "substantialityScore": 12.8,
+      "reasons": [],
+      "verdictDigest": "sha256:447fcf44cdd2c325f6e77bb3b07e55ae7fb4a20566144086e88c44cf7d392ce2"
+    },
+    {
+      "route": "/knowledge/religion/historical-evidence",
+      "state": "structurally-substantial-but-unsupported",
+      "measures": {
+        "directAnswerChars": 349,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 12,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 2,
+        "unresolvedQuestions": 2,
+        "supportedComparisons": 2,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 1,
+        "structuredDataFields": 9,
+        "renderedDimensions": 10,
+        "wordCountDiagnostic": 208
+      },
+      "substantialityScore": 13.6,
+      "reasons": [],
+      "verdictDigest": "sha256:606f9b9e0544a9d3e58cc28ae1d2878f1e0c0f58199729a4ba8c54b80b0db716"
+    },
+    {
+      "route": "/knowledge/religion/ritual-and-practice",
+      "state": "structurally-substantial-but-unsupported",
+      "measures": {
+        "directAnswerChars": 325,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 9,
+        "claimsWithPassage": 0,
+        "exactLocators": 0,
+        "limitations": 2,
+        "unresolvedQuestions": 2,
+        "supportedComparisons": 1,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 1,
+        "structuredDataFields": 9,
+        "renderedDimensions": 10,
+        "wordCountDiagnostic": 177
+      },
+      "substantialityScore": 12.8,
+      "reasons": [],
+      "verdictDigest": "sha256:8fe1d4f11f501ecc562ab540460cd9f5fa076c526ae05b44476cb353df614c63"
+    }
+  ],
+  "boundary": "A private audit. It changes no page.",
+  "auditDigest": "sha256:9546e16c4c5bd72135b50b29853ec455cacae9cec5152814ffad2b7c0fdbd097"
+}

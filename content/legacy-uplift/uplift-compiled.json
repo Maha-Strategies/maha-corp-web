@@ -4040,12 +4040,12 @@
           "source-boundary"
         ],
         "dimensionCount": 8,
-        "sourceCount": 2,
-        "sourcesWithBoundary": 2,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
         "referenceOnlySources": 0,
-        "declaredLocators": 2,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 2,
         "relatedRouteCount": 3,
         "renderedSections": 6
@@ -4065,12 +4065,12 @@
           "typed-bridges"
         ],
         "dimensionCount": 9,
-        "sourceCount": 2,
-        "sourcesWithBoundary": 2,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
         "referenceOnlySources": 0,
-        "declaredLocators": 2,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 2,
         "relatedRouteCount": 3,
         "renderedSections": 7
@@ -4084,7 +4084,8 @@
           ],
           "sourceIds": [
             "nist-dlmf-numerical",
-            "jpl-horizons"
+            "jpl-horizons",
+            "nist-dlmf-3-8"
           ]
         },
         {
@@ -4097,7 +4098,8 @@
           ],
           "sourceIds": [
             "nist-dlmf-numerical",
-            "jpl-horizons"
+            "jpl-horizons",
+            "nist-dlmf-3-8"
           ]
         },
         {
@@ -4110,7 +4112,8 @@
           ],
           "sourceIds": [
             "nist-dlmf-numerical",
-            "jpl-horizons"
+            "jpl-horizons",
+            "nist-dlmf-3-8"
           ]
         },
         {
@@ -4126,7 +4129,8 @@
           ],
           "sourceIds": [
             "nist-dlmf-numerical",
-            "jpl-horizons"
+            "jpl-horizons",
+            "nist-dlmf-3-8"
           ]
         },
         {
@@ -4137,7 +4141,8 @@
           ],
           "sourceIds": [
             "nist-dlmf-numerical",
-            "jpl-horizons"
+            "jpl-horizons",
+            "nist-dlmf-3-8"
           ]
         },
         {
@@ -4155,7 +4160,8 @@
           ],
           "sourceIds": [
             "nist-dlmf-numerical",
-            "jpl-horizons"
+            "jpl-horizons",
+            "nist-dlmf-3-8"
           ]
         },
         {
@@ -4173,12 +4179,13 @@
           ],
           "sourceIds": [
             "nist-dlmf-numerical",
-            "jpl-horizons"
+            "jpl-horizons",
+            "nist-dlmf-3-8"
           ]
         }
       ],
       "sectionCount": 7,
-      "upliftDigest": "sha256:472e301bc163d9ab8af61e790c8042a4e42a10376cf884b78461a5f65539da8f"
+      "upliftDigest": "sha256:cad604ac722e04b280cb37404eef3c0284c2378a706cae4367212bc6f8f7d7ee"
     },
     {
       "route": "/knowledge/mathematics/numerical-integration",
@@ -12406,8 +12413,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
@@ -12429,8 +12436,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 5
@@ -12507,7 +12514,7 @@
         }
       ],
       "sectionCount": 5,
-      "upliftDigest": "sha256:e86ad416d1beb3496935291c5a5217527f170d23e4ad44a701f832cd0c7c1e10"
+      "upliftDigest": "sha256:b0d90f2af16350b2176e78416dea63018880090a3fadbff8cff058c03c0a7cd2"
     },
     {
       "route": "/knowledge/equipment/euv-and-high-na-euv-lithography-scanner",
@@ -12532,8 +12539,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
@@ -12555,8 +12562,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 5
@@ -12633,7 +12640,7 @@
         }
       ],
       "sectionCount": 5,
-      "upliftDigest": "sha256:9acc0dd7a83b5dca2038a3c32e2f6012330431072851576eaca8dbdc90e909ff"
+      "upliftDigest": "sha256:373f65a6b24337e82ebf8bf48e5101ddca0c23b345b3110b9504e19a08a97940"
     },
     {
       "route": "/knowledge/equipment/photoresist-coat-and-develop-track",
@@ -12658,8 +12665,8 @@
         "sourcesWithBoundary": 2,
         "referenceOnlySources": 0,
         "declaredLocators": 2,
-        "contentInspectedLocators": 2,
-        "explanatorySources": 2,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
@@ -12681,8 +12688,8 @@
         "sourcesWithBoundary": 2,
         "referenceOnlySources": 0,
         "declaredLocators": 2,
-        "contentInspectedLocators": 2,
-        "explanatorySources": 2,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 5
@@ -12765,7 +12772,7 @@
         }
       ],
       "sectionCount": 5,
-      "upliftDigest": "sha256:84f1f3435281d531ba52e1a654d5cd38a2e7b013d0cd6877049d21a014e418f3"
+      "upliftDigest": "sha256:ef54e7df7dd9cc1ccf4b9defc1ebfd202c91693f34449f34922d13f019b5b728"
     },
     {
       "route": "/knowledge/equipment/pvd-sputter-and-metal-deposition-system",
@@ -12984,8 +12991,8 @@
         "sourcesWithBoundary": 2,
         "referenceOnlySources": 2,
         "declaredLocators": 2,
-        "contentInspectedLocators": 2,
-        "explanatorySources": 2,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
@@ -13007,8 +13014,8 @@
         "sourcesWithBoundary": 2,
         "referenceOnlySources": 2,
         "declaredLocators": 2,
-        "contentInspectedLocators": 2,
-        "explanatorySources": 2,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 5
@@ -13091,7 +13098,7 @@
         }
       ],
       "sectionCount": 5,
-      "upliftDigest": "sha256:d021feaf1d60c377168315686eeb2449997ba37f46eeb18295c791005a7812e6"
+      "upliftDigest": "sha256:13c0c37cf64010e7aaa3bee4692b5c19091e742f0a72366559b96a5caabff8ce"
     },
     {
       "route": "/knowledge/equipment/single-wafer-wet-clean-and-surface-preparation-system",
@@ -13116,8 +13123,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
@@ -13139,8 +13146,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 5
@@ -13217,7 +13224,7 @@
         }
       ],
       "sectionCount": 5,
-      "upliftDigest": "sha256:c46dc955dda11890fab00fef6d4548c383aca58b087d7cd2bf204b2b28953d47"
+      "upliftDigest": "sha256:4148d791787e205361818bb72052ae51ab5bac2640e8060657639c5e23653f6a"
     },
     {
       "route": "/knowledge/equipment/semiconductor-ion-implantation-system",
@@ -13368,8 +13375,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 1,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
@@ -13391,8 +13398,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 1,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 5
@@ -13469,7 +13476,7 @@
         }
       ],
       "sectionCount": 5,
-      "upliftDigest": "sha256:66d09a9f1ac8d39319570466b3a4192b2362e741dc83b558fb50a4c5073f39a3"
+      "upliftDigest": "sha256:9bd8883bd60cadabb69812a7b9b6c2a1c5e0c84217292744b263f36ed4180bc9"
     },
     {
       "route": "/knowledge/equipment/chemical-mechanical-planarization-polisher",
@@ -13906,8 +13913,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 1,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
@@ -13929,8 +13936,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 1,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 5
@@ -14007,7 +14014,7 @@
         }
       ],
       "sectionCount": 5,
-      "upliftDigest": "sha256:989eb4f436d974af149c525d8c50a250568dd8d2254ef6482b45f882cb6afa77"
+      "upliftDigest": "sha256:83ed0b7d5230d23cb3b6014471c8fff34702d54d8fd820fa6fd2dce076802407"
     },
     {
       "route": "/knowledge/equipment/semiconductor-automatic-test-equipment",
@@ -14134,8 +14141,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
@@ -14157,8 +14164,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 5
@@ -14235,7 +14242,7 @@
         }
       ],
       "sectionCount": 5,
-      "upliftDigest": "sha256:8152f2b3c609ce3bdcd339dd861e5a4fe2bbc48f51c5c78022a8d0df05528da3"
+      "upliftDigest": "sha256:782d1480e3a7daa660824dafce56e95653067cd0f83eca59881be129715c2666"
     },
     {
       "route": "/knowledge/equipment/semiconductor-encapsulation-and-molding-system",
@@ -14260,8 +14267,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 1,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
@@ -14283,8 +14290,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 1,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 5
@@ -14361,7 +14368,7 @@
         }
       ],
       "sectionCount": 5,
-      "upliftDigest": "sha256:5aa9da1ff0bd797779a8a5bacf3a7f3f6079d6f84df4b306bcaf4648fbec43de"
+      "upliftDigest": "sha256:488790ebe347e2c49a07e22acb44b249ba71b146749ce2acb3c0e76efe4193a2"
     },
     {
       "route": "/knowledge/equipment/chip-to-wafer-and-wafer-to-wafer-bonding-system",
@@ -14386,8 +14393,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
@@ -14409,8 +14416,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 5
@@ -14487,7 +14494,7 @@
         }
       ],
       "sectionCount": 5,
-      "upliftDigest": "sha256:f7b9ec793781a255d14959ac7ec6d66ec937ddffb8936a7a70954fbcae2fadad"
+      "upliftDigest": "sha256:f747ecca45db386bc4182d8a3c4388e3386f6a86627eb62e567fa836f42a5e15"
     },
     {
       "route": "/knowledge/equipment/burn-in-and-system-level-test-equipment",
@@ -14686,8 +14693,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
@@ -14709,8 +14716,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 5
@@ -14792,7 +14799,7 @@
         }
       ],
       "sectionCount": 5,
-      "upliftDigest": "sha256:95f887eae479f9835c1941fe3172340c6aa566071b1368f51fa99e5e544f632c"
+      "upliftDigest": "sha256:76c99bbf03c052cec38b42ea42e688dc82ea940bd7ef600c493d1423f6d08b1c"
     },
     {
       "route": "/knowledge/processes/thin-film-deposition",
@@ -15418,8 +15425,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
@@ -15441,8 +15448,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 5
@@ -15521,7 +15528,7 @@
         }
       ],
       "sectionCount": 5,
-      "upliftDigest": "sha256:6d5a5b5aa5ac9d6442998933bb2d5750065737477ee38a2f26d493fb301f19de"
+      "upliftDigest": "sha256:d9b9d68e7ab398d6babacc7257e582042758c70f4a0e2f556e1dd916055af6e4"
     },
     {
       "route": "/knowledge/processes/silicon-crystal-growth-and-wafer-preparation",
@@ -15580,8 +15587,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 1,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
@@ -15603,8 +15610,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 1,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 5
@@ -15684,7 +15691,7 @@
         }
       ],
       "sectionCount": 5,
-      "upliftDigest": "sha256:85547a980c29018ae0a72965f18a38e307fb40ab7bfb0e50df30193bd2c4bfa9"
+      "upliftDigest": "sha256:4c3e2cdb949af4d8571713ae78d4965a15c871d454ac17629db6e85ae56aeeeb"
     },
     {
       "route": "/knowledge/processes/thermal-oxidation-diffusion-and-furnace-processing",
@@ -15709,8 +15716,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 1,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
@@ -15732,8 +15739,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 1,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 5
@@ -15813,7 +15820,7 @@
         }
       ],
       "sectionCount": 5,
-      "upliftDigest": "sha256:56aefaa4384118db34fc00872850d39090e59d3fd2015f8723903458fd216a6d"
+      "upliftDigest": "sha256:1f151160df0d19bb5402eef868603d9c1b26a22e19de05d321e1f372f6192237"
     },
     {
       "route": "/knowledge/concepts/semiconductor-metrology-and-defect-inspection",
@@ -16328,8 +16335,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 1,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
@@ -16351,8 +16358,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 1,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 5
@@ -16432,7 +16439,7 @@
         }
       ],
       "sectionCount": 5,
-      "upliftDigest": "sha256:d647ff7c4363c71e339c806716e3003dbc25fca843ed57077159d2548f34a2e2"
+      "upliftDigest": "sha256:226e4e3bb607188bb793123de12f8d6bb0d6ce54ef502ed1a8f40ad2a4d89ac6"
     },
     {
       "route": "/knowledge/processes/underfill-molding-and-package-encapsulation",
@@ -16630,8 +16637,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 2,
         "renderedSections": 6
@@ -16654,8 +16661,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 2,
         "renderedSections": 4
@@ -16703,7 +16710,7 @@
         }
       ],
       "sectionCount": 4,
-      "upliftDigest": "sha256:02271b4d5b136fd03f42d2d7e205b6aeac6fafe398c748d94c8c7fb658ad16ca"
+      "upliftDigest": "sha256:a23517a4a178637f56f00898e0ffed1957fc4889dd5e8131cf9e2828b0a23474"
     },
     {
       "route": "/knowledge/suppliers/kla",
@@ -16834,8 +16841,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 0,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 5,
         "renderedSections": 6
@@ -16858,8 +16865,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 0,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 5,
         "renderedSections": 4
@@ -16907,7 +16914,7 @@
         }
       ],
       "sectionCount": 4,
-      "upliftDigest": "sha256:297c73a0b2e23778c91a8dbec36051e5e8d284b2129550aeead61c37a569c68f"
+      "upliftDigest": "sha256:48df0d912d2ebd044d307c8982ffe6c9db7e50b585b0dc1f156d07929aa89cf7"
     },
     {
       "route": "/knowledge/suppliers/axcelis-technologies",
@@ -17178,8 +17185,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 7,
         "renderedSections": 6
@@ -17202,8 +17209,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
         "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
         "bridgeCount": 0,
         "relatedRouteCount": 7,
         "renderedSections": 4
@@ -17251,7 +17258,7 @@
         }
       ],
       "sectionCount": 4,
-      "upliftDigest": "sha256:c8c26ca82b36a0c5d0b0e3fb1f8a1192959824c4cc34e1ec383c32f4833ea9f8"
+      "upliftDigest": "sha256:2a6dbb6a7bf03bc2080e0415ef1cfcf6f9df3272efa72b76c23efd22747219f0"
     },
     {
       "route": "/knowledge/suppliers/advantest",

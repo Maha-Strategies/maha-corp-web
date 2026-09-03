@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "maha-evidence-batch-9-inspections/1.0",
+  "batch": "content-depth-9",
+  "conductedOn": "2026-09-03",
+  "appendOnly": true,
+  "writtenToProduction": false,
+  "cohortDigest": "sha256:f44772899e7e6627cdf0e6a145f76c6d7756bb6ce5438bdbe318cda4625fe2da",
+  "cohortNote": "Twelve astronomy, twelve mathematics, twelve neuromorphic. Religion received none: the scoring ranked it lowest on lawful open-source availability, and the prompt directs redistribution on that basis rather than on family size. Religion has 26 structural pages still awaiting a batch that starts from its primary texts.",
+  "exhaustedRoutesNotRetried": ["IEEE Xplore", "SPIE", "ECTC", "CMP searches", "vendor 403 paths", "reCAPTCHA-walled PMC"],
+  "inspected": [
+    {
+      "sourceId": "nist-dlmf-3-8",
+      "domain": "mathematics",
+      "class": "government-authoritative-reference",
+      "title": "NIST Digital Library of Mathematical Functions, Chapter 3 Numerical Methods, §3.8 Nonlinear Equations",
+      "venue": "NIST DLMF",
+      "identifier": "https://dlmf.nist.gov/3.8 with permanent equation identifiers",
+      "retrievedFrom": "https://dlmf.nist.gov/3.8",
+      "retrievedOn": "2026-09-03",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Served from dlmf.nist.gov at the cited section; chapter, section and equation numbering match the citation.",
+      "versionRelationship": "DLMF assigns permanent identifiers to individual equations, so a citation resolves to the same numbered statement over time.",
+      "rightsBasis": "US government work, citation-with-paraphrase",
+      "exactLocators": ["3.8.3", "3.8.4", "3.8.6", "3.8.7", "3.8.12", "3.8(ii)", "3.8(iii)"],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/root-finding",
+          "locator": "3.8.4 with the convergence statement at 3.8(ii); 3.8.3 for order of convergence; 3.8.6, 3.8.7 and 3.8.12 for alternatives",
+          "claim": "Root-finding proceeds by iteration schemes whose convergence order and conditions are stated properties, not incidental behaviour.",
+          "supportingPassage": "3.8.4 states Newton's rule as z(n+1) equals z(n) minus f(z(n)) over f prime of z(n). Section 3.8(ii) states that when the zero is simple the iteration converges locally and quadratically, and that for multiple zeros convergence becomes linear unless the multiplicity is known and applied as a correction. 3.8.3 defines p-th order convergence. 3.8.6 gives regula falsi, 3.8.7 Steffensen's method and 3.8.12 Halley's rule, with bisection described at 3.8(iii).",
+          "distinctPassage": true
+        }
+      ],
+      "establishes": "The standard iteration schemes for nonlinear equations, their stated order of convergence, and the condition on the zero's multiplicity under which Newton's rule is quadratic.",
+      "boundary": "A reference section of methods and their convergence properties. It gives no floating-point error analysis, no stopping criterion for a particular problem and no guidance on choosing a starting value, so it cannot support a claim about how any implementation behaves in practice.",
+      "routesConsideredAndRejected": [
+        { "route": "/knowledge/mathematics/optimization", "reason": "Root-finding and optimization are related through stationarity, but this section states no optimization method and no objective-function condition. A mathematical relationship between two topics is not evidence for one of them." },
+        { "route": "/knowledge/mathematics/numerical-integration", "reason": "A different section of the same chapter covers quadrature. Chapter adjacency is not support, as it was not in Batch 8." }
+      ],
+      "batch8RefusalResolved": "Batch 8 refused root-finding for DLMF §4.14 because that section defines elementary functions and states no algorithm. §3.8 is the section that does. The refusal was about the wrong chapter, not the wrong page."
+    }
+  ],
+  "notInspected": [
+    {
+      "sourceId": "gaia-mission-description",
+      "route": "https://www.aanda.org/articles/aa/full_html/2016/11/aa29272-16/aa29272-16.html",
+      "outcome": "HTTP 403",
+      "depth": "not-inspected",
+      "disposition": "Blocker recorded. The astrometry page remains structural.",
+      "affectedRoutes": ["/knowledge/astronomy/astrometry-parallax-and-proper-motion"]
+    }
+  ],
+  "summary": {
+    "cohortSize": 36,
+    "retrievalAttempts": 2,
+    "inspectedSectionOrFullText": 1,
+    "failed": 1,
+    "pagesConverted": 1,
+    "calculationsEmitted": 1,
+    "calculationsRefused": 4,
+    "routesConsideredAndRejected": 2,
+    "exhaustedRoutesRetried": 0,
+    "activeBindingsChanged": 0
+  },
+  "boundary": "A private inspection record."
+}
