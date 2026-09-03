@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "maha-deterministic-calculations/1.0",
+  "emitted": 1,
+  "refused": [
+    {
+      "attempted": "signal-to-noise example from the LIGO paper",
+      "reason": "The paper reports a combined signal-to-noise of 24 but does not state the per-detector noise spectral density in a form that would let a reader recompute it. Reporting a number is not supplying inputs."
+    },
+    {
+      "attempted": "orbital or coordinate calculation",
+      "reason": "No inspected astronomy source supplies a worked coordinate transform with stated units and epoch."
+    },
+    {
+      "attempted": "neuromorphic timing or rate calculation",
+      "reason": "The inspected neuromorphic sources report benchmark outcomes, not the per-spike energy and timing parameters a calculation would need."
+    },
+    {
+      "attempted": "uncertainty propagation worked example",
+      "reason": "NIST TN 1297 gives the combination rule but the pages needing it supply no measured component uncertainties, so any numbers would be invented."
+    }
+  ],
+  "calculations": [
+    {
+      "id": "newton-sqrt-two",
+      "methodSource": {
+        "sourceId": "nist-dlmf-3-8",
+        "exactLocator": "DLMF 3.8.4, with the convergence statement at 3.8(ii)",
+        "statedMethod": "Newton’s rule, z(n+1) = z(n) − f(z(n))/f′(z(n)), which the section states converges locally and quadratically when the zero is simple."
+      },
+      "functionUnderStudy": "f(x) = x^2 − 2, with f′(x) = 2x. Its positive zero is the square root of two.",
+      "inputs": [
+        {
+          "symbol": "x0",
+          "value": 1,
+          "unit": "dimensionless",
+          "meaning": "starting value"
+        },
+        {
+          "symbol": "n",
+          "value": 5,
+          "unit": "iterations",
+          "meaning": "number of Newton steps taken"
+        }
+      ],
+      "assumptions": [
+        "The zero is simple, which is the condition the section attaches to quadratic convergence.",
+        "The starting value lies in the basin of the positive root.",
+        "Arithmetic is IEEE 754 double precision, and every step is rounded to twelve decimal places so the receipt is identical on any machine."
+      ],
+      "uncertaintyTreatment": "No measurement uncertainty applies: the inputs are exact rational numbers and the only error is the truncation of the iteration at five steps, shown by the step values converging.",
+      "steps": [
+        {
+          "n": 0,
+          "value": 1
+        },
+        {
+          "n": 1,
+          "value": 1.5
+        },
+        {
+          "n": 2,
+          "value": 1.416666666667
+        },
+        {
+          "n": 3,
+          "value": 1.414215686275
+        },
+        {
+          "n": 4,
+          "value": 1.414213562375
+        },
+        {
+          "n": 5,
+          "value": 1.414213562373
+        }
+      ],
+      "result": {
+        "value": 1.414213562373,
+        "unit": "dimensionless"
+      },
+      "receipt": "sha256:454baeb7bcff4f105b360c09135e60c77314ee615fbff45add47d3217bb6126e"
+    }
+  ],
+  "boundary": "The method is the source’s. The arithmetic is deterministic and the receipt recomputes from the inputs alone."
+}

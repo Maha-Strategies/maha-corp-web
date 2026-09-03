@@ -18,6 +18,7 @@ import batch4 from '../content/evidence-batch-4/inspections.json' with { type: '
 import supplierFirstParty from '../content/evidence-batch-5/supplier-first-party.json' with { type: 'json' }
 import reuse from '../content/evidence-batch-7/reuse-audit.json' with { type: 'json' }
 import batch8 from '../content/evidence-batch-8/inspections.json' with { type: 'json' }
+import batch9 from '../content/evidence-batch-9/inspections.json' with { type: 'json' }
 
 /**
  * Reuse of already-inspected evidence, applied per route.
@@ -27,7 +28,7 @@ import batch8 from '../content/evidence-batch-8/inspections.json' with { type: '
  */
 const reuseByRoute = new Map<string, { sourceId: string; exactLocator: string; supportingPassage: string; limitationsCarried: string; rightsBasis: string; sourceTitle: string; version: string }[]>()
 // Batch 8 names support per claim, so each route carries its own passage.
-for (const source of batch8.inspected as unknown as { sourceId: string; title: string; versionRelationship: string; rightsBasis: string; boundary: string; claimByClaimSupport: { route: string; locator: string; supportingPassage: string }[] }[]) {
+for (const source of [...batch8.inspected, ...batch9.inspected] as unknown as { sourceId: string; title: string; versionRelationship: string; rightsBasis: string; boundary: string; claimByClaimSupport: { route: string; locator: string; supportingPassage: string }[] }[]) {
   for (const claim of source.claimByClaimSupport) {
     reuseByRoute.set(claim.route, [...(reuseByRoute.get(claim.route) ?? []), {
       sourceId: source.sourceId, exactLocator: claim.locator,
@@ -88,6 +89,17 @@ const asSource = (s: Any): LegacySource => ({
 type Attestation = { sourceId: string; establishes: string; boundary: string; depth: string; exactLocator: string; observedContent: string; identityVerified: boolean; subjectAligned: boolean; retrievedFrom: string; retrievedOn: string; versionRelationship: string; rightsBasis: string }
 const attested = new Map<string, Attestation>(
   (attestationFile.attestations as Attestation[]).map((a) => [a.sourceId, a]))
+
+/**
+ * Vendor-authored sources documented in Batch 1, before the first-party tier.
+ *
+ * Batch 7 stopped these conferring independent support on the three supplier
+ * profiles. It missed the fourteen equipment and process pages that cite the
+ * same documents. A company describing its own products is first-party
+ * evidence wherever it is cited, so the exclusion belongs to the source rather
+ * than to a list of routes.
+ */
+const VENDOR_AUTHORED_SOURCES = new Set(['asml-lithography', 'tel-process-equipment', 'amkor-3d-stack'])
 
 const withAttestation = (s: LegacySource): LegacySource => {
   const a = attested.get(s.id)
@@ -282,7 +294,7 @@ for (const group of comparisonFamilies) {
 /* ------------------------------------------------------------------ compile --- */
 
 const attestationsByPage = Object.fromEntries(
-  [...attested.entries()].map(([id, a]) => [id, {
+  [...attested.entries()].filter(([id]) => !VENDOR_AUTHORED_SOURCES.has(id)).map(([id, a]) => [id, {
     sourceId: id, retrievedFrom: a.retrievedFrom, retrievedOn: a.retrievedOn,
     depth: a.depth as never, exactLocator: a.exactLocator, observedContent: a.observedContent,
     identityVerified: a.identityVerified, identityBasis: 'recorded at inspection',
@@ -319,13 +331,18 @@ const batch1Attestations = Object.fromEntries([...(batch1.inspected as Batch1[])
   subjectBasis: 'route-scoped: the source was checked against this page subject',
   versionRelationship: entry.versionRelationship, rightsBasis: entry.rightsBasis,
 }]))
-const batch8Attestations = Object.fromEntries((batch8.inspected as unknown as { sourceId: string; exactLocators: string[]; establishes: string; retrievedFrom: string; retrievedOn: string; versionRelationship: string; rightsBasis: string }[]).map((s) => [s.sourceId, {
-  sourceId: s.sourceId, retrievedFrom: s.retrievedFrom, retrievedOn: s.retrievedOn,
-  depth: 'section-or-full-text' as never, exactLocator: s.exactLocators.join('; '),
-  observedContent: s.establishes, identityVerified: true,
+type InspectedSource = {
+  sourceId: string; exactLocators: string[]; establishes: string
+  retrievedFrom: string; retrievedOn: string; versionRelationship: string; rightsBasis: string
+}
+const inspectedSources = [...batch8.inspected, ...batch9.inspected] as unknown as InspectedSource[]
+const batch8Attestations = Object.fromEntries(inspectedSources.map((entry) => [entry.sourceId, {
+  sourceId: entry.sourceId, retrievedFrom: entry.retrievedFrom, retrievedOn: entry.retrievedOn,
+  depth: 'section-or-full-text' as never, exactLocator: entry.exactLocators.join('; '),
+  observedContent: entry.establishes, identityVerified: true,
   identityBasis: 'verified at inspection against the cited identifier',
   subjectAligned: true, subjectBasis: 'route-scoped per claim',
-  versionRelationship: s.versionRelationship, rightsBasis: s.rightsBasis,
+  versionRelationship: entry.versionRelationship, rightsBasis: entry.rightsBasis,
 }]))
 const reuseAttestations = Object.fromEntries((reuse.accepted as Record<string, string>[]).map((entry) => [entry.sourceId, {
   sourceId: entry.sourceId, retrievedFrom: `locator:${entry.exactLocator}`, retrievedOn: '2026-09-03',
