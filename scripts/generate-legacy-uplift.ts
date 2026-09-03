@@ -238,9 +238,47 @@ for (const a of [...(SEMICONDUCTOR_EQUIPMENT_ARTICLES as unknown as Any[]), ...(
     doesNotEstablish: [],
     sources: (pick(KNOWLEDGE_SOURCES as unknown as Any[], arr(a.sourceIds)) as Any[]).map(asSource).map(withAttestation),
     bridges: [], comparisons: [],
-    relatedRoutes: [...arr(a.inputs), ...arr(a.outputs)].length > 0 ? [] : [],
+    relatedRoutes: [],
     canonicalRelease: null,
   })
+}
+
+/**
+ * Supplier profiles declare the processes they serve as `process-*` identifiers,
+ * which are a different naming scheme from the process articles' own slugs. The
+ * generator previously pasted the identifier straight into a route, so sixteen
+ * supplier pages linked to `/knowledge/processes/process-plasma-etch` and
+ * similar, none of which exist. Only two of the eighteen happened to line up.
+ *
+ * The correspondence is an identity between two names for the same process, not
+ * a claim about either. An identifier with no article resolves to no link
+ * rather than to a guess.
+ */
+const PROCESS_ID_TO_SLUG: Record<string, string> = {
+  'process-photolithography': 'photolithography',
+  'process-thin-film-deposition': 'thin-film-deposition',
+  'process-plasma-etch': 'plasma-etch-and-pattern-transfer',
+  'process-ion-implantation-annealing': 'ion-implantation-and-annealing',
+  'process-copper-interconnect-cmp': 'copper-interconnects-and-cmp',
+  'process-advanced-packaging': 'advanced-packaging-and-heterogeneous-integration',
+  'process-ic-design-tapeout': 'ic-design-to-tapeout',
+  'process-rtl-to-physical-design': 'rtl-verification-synthesis-physical-design',
+  'process-mask-data-reticle-fabrication': 'mask-data-preparation-and-reticle-fabrication',
+  'process-silicon-wafer-preparation': 'silicon-crystal-growth-and-wafer-preparation',
+  'process-wafer-cleaning-surface-preparation': 'wafer-cleaning-and-surface-preparation',
+  'process-thermal-oxidation-diffusion': 'thermal-oxidation-diffusion-and-furnace-processing',
+  'process-wafer-sort': 'wafer-acceptance-test-and-wafer-sort',
+  'process-wafer-thinning-dicing': 'wafer-thinning-dicing-and-die-handling',
+  'process-package-substrates-rdl': 'package-substrates-and-redistribution-layers',
+  'process-wire-bond-flip-chip': 'wire-bonding-and-flip-chip-interconnect',
+  'process-encapsulation-underfill-molding': 'underfill-molding-and-package-encapsulation',
+  'process-final-burn-in-system-test': 'final-test-burn-in-and-system-level-test',
+}
+
+/** Resolve one declared process identifier to a route, or to nothing. */
+function processRoute(processId: string): string[] {
+  const slug = PROCESS_ID_TO_SLUG[processId]
+  return slug ? [`/knowledge/processes/${slug}`] : []
 }
 
 /* ---------------------------------------------------------------- suppliers --- */
@@ -256,7 +294,7 @@ for (const sup of KNOWLEDGE_SUPPLIERS as unknown as Any[]) {
     doesNotEstablish: arr(sup.boundary),
     sources: (pick(KNOWLEDGE_SOURCES as unknown as Any[], arr(sup.sourceIds)) as Any[]).map(asSource).map(withAttestation),
     bridges: [], comparisons: [],
-    relatedRoutes: arr(sup.processIds).map((id) => `/knowledge/processes/${id}`),
+    relatedRoutes: arr(sup.processIds).flatMap(processRoute),
     canonicalRelease: null,
   })
 }
@@ -301,6 +339,38 @@ const attestationsByPage = Object.fromEntries(
     subjectAligned: a.subjectAligned, subjectBasis: 'recorded at inspection',
     versionRelationship: a.versionRelationship, rightsBasis: a.rightsBasis,
   }]))
+/**
+ * Fill in typed related records by co-citation.
+ *
+ * Two pages that draw on the same inspected source are related, and that is a
+ * fact about the corpus rather than a judgement about the subject: the link is
+ * derived from the inspection records, so it cannot be authored to make a page
+ * look connected. Pages that share no source get no link.
+ *
+ * This is deliberately not a similarity heuristic. The audit counts typed links
+ * towards substantiality, and a heuristic would let a page earn that count from
+ * a resemblance nobody checked.
+ */
+const routesBySource = new Map<string, string[]>()
+for (const input of inputs) {
+  for (const source of input.sources as unknown as { id: string }[]) {
+    const routes = routesBySource.get(source.id) ?? []
+    routes.push(input.route)
+    routesBySource.set(source.id, routes)
+  }
+}
+for (const input of inputs) {
+  if (input.relatedRoutes.length > 0) continue
+  const shared = new Set<string>()
+  for (const source of input.sources as unknown as { id: string }[]) {
+    for (const route of routesBySource.get(source.id) ?? []) {
+      if (route !== input.route) shared.add(route)
+    }
+  }
+  // Sorted so a regeneration produces byte-identical output.
+  input.relatedRoutes = [...shared].sort()
+}
+
 const withBatch1 = inputs.map((input) => {
   const reused = reuseByRoute.get(input.route)
   if (reused) {

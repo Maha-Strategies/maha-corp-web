@@ -130,6 +130,14 @@ export interface UpliftBaseline {
   explanatorySources: number
   bridgeCount: number
   relatedRouteCount: number
+  /**
+   * The routes themselves, not only how many.
+   *
+   * The shape recorded a count alone, so sixteen supplier pages linked to
+   * routes that did not exist and nothing could notice. A count cannot be
+   * checked against the corpus; a list can.
+   */
+  relatedRoutes: readonly string[]
   renderedSections: number
 }
 
@@ -231,6 +239,7 @@ export function measure(input: LegacyPageInput, sections: readonly UpliftSection
     explanatorySources: graded.filter((g) => g.explanatory).length,
     bridgeCount: input.bridges.length,
     relatedRouteCount: input.relatedRoutes.length,
+    relatedRoutes: input.relatedRoutes,
     renderedSections: sections.length,
   }
 }

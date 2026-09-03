@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "maha-religion-primary-text-pilot/2.0",
+  "batch": "substantial-evidence-conversion-11",
+  "continuesCohortFrom": "content/evidence-batch-10/religion-pilot.json",
+  "cohortUnchanged": true,
+  "inspectedOn": "2026-09-03",
+  "appendOnly": true,
+  "writtenToProduction": false,
+  "evidenceBasis": "primary-textual",
+  "inspected": [
+    {
+      "sourceId": "douay-rheims-challoner-genesis",
+      "title": "The Holy Bible, Translated from the Latin Vulgate: Douay-Rheims Version",
+      "edition": "Challoner revision, 1749-1752, of the Douay-Rheims translation made by Gregory Martin and colleagues at the English College at Douay and Rheims",
+      "translator": "Richard Challoner (reviser); Gregory Martin and colleagues (original translators)",
+      "sourceLanguageOfTranslation": "Latin Vulgate",
+      "retrievedFrom": "https://www.gutenberg.org/files/8300/8300-h/8300-h.htm",
+      "retrievedOn": "2026-09-03",
+      "rightsBasis": "Public domain; Project Gutenberg eBook 8300. Retrieved without circumventing any access control.",
+      "identityVerified": true,
+      "depth": "section-or-full-text",
+      "locators": ["Genesis 1:1", "Genesis 3:15", "Genesis 22:12"],
+      "establishes": "What the Challoner Douay-Rheims edition prints at these three locators.",
+      "boundary": "Establishes the wording of this edition only. It does not establish what any underlying Hebrew or Greek text read, which rendering is more accurate, whether the events described occurred, or what any tradition holds the passages to mean."
+    },
+    {
+      "sourceId": "kjv-1611-genesis",
+      "title": "The King James Version of the Bible",
+      "edition": "King James Version; Project Gutenberg eBook 10, text updated 2024-10-29",
+      "translator": "The translators appointed under James I",
+      "sourceLanguageOfTranslation": "Hebrew and Greek",
+      "retrievedFrom": "https://www.gutenberg.org/cache/epub/10/pg10.txt",
+      "retrievedOn": "2026-09-03",
+      "rightsBasis": "Public domain; Project Gutenberg eBook 10. Retrieved without circumventing any access control.",
+      "identityVerified": true,
+      "depth": "section-or-full-text",
+      "locators": ["Genesis 1:1", "Genesis 3:15", "Genesis 22:12"],
+      "establishes": "What the King James Version prints at these three locators.",
+      "boundary": "Establishes the wording of this edition only. Same limitations as the Douay-Rheims record."
+    }
+  ],
+  "textualComparison": {
+    "route": "/knowledge/religion/translation-and-semantic-drift",
+    "method": "Two named public-domain editions were read at three identical locators. Nothing was paraphrased; the divergences below are differences in the printed wording.",
+    "whyThesePairing": "The two editions descend from different source languages: the Douay-Rheims renders the Latin Vulgate, the King James renders Hebrew and Greek. A divergence between them is therefore evidence about translation lineage rather than about scribal error.",
+    "divergences": [
+      {
+        "locator": "Genesis 1:1",
+        "douayRheims": "In the beginning God created heaven, and earth.",
+        "kingJames": "In the beginning God created the heaven and the earth.",
+        "observedDifference": "The King James renders both nouns with the definite article; the Douay-Rheims renders neither.",
+        "establishes": "That the two editions differ in article usage at this locator.",
+        "doesNotEstablish": "Which rendering better reflects any underlying text, or any cosmological claim."
+      },
+      {
+        "locator": "Genesis 3:15",
+        "douayRheims": "I will put enmities between thee and the woman, and thy seed and her seed",
+        "kingJames": "And I will put enmity between thee and the woman, and between thy seed and her seed",
+        "observedDifference": "The Douay-Rheims uses the plural 'enmities'; the King James uses the singular 'enmity'.",
+        "establishes": "That the two editions differ in grammatical number on this noun at this locator.",
+        "doesNotEstablish": "Any doctrinal reading that has historically been attached to this verse in either tradition."
+      },
+      {
+        "locator": "Genesis 22:12",
+        "douayRheims": "now I know that thou fearest God, and hast not spared thy only begotten son",
+        "kingJames": "for now I know that thou fearest God, seeing thou hast not withheld thy son, thine only son from me",
+        "observedDifference": "The Douay-Rheims reads 'spared' and 'only begotten son'; the King James reads 'withheld' and 'thy son, thine only son'. The phrase 'only begotten' appears in one edition and not the other.",
+        "establishes": "That the two editions differ in both verb choice and in the presence of the phrase 'only begotten' at this locator.",
+        "doesNotEstablish": "That either phrasing is the older reading, or any claim about how the phrase functions in later doctrine."
+      }
+    ]
+  },
+  "refusedCertifications": [
+    "Whether any described event occurred. No text establishes this about itself, and no historical source was inspected for this pilot.",
+    "Whether either translation is more faithful. That is a judgement requiring the Hebrew, Greek and Latin witnesses, none of which were inspected.",
+    "Any theological or metaphysical proposition. The primary-textual basis carries no theological claim, and the basis vocabulary refuses the transfer rather than grading it weakly.",
+    "Any empirical claim about contemplative practice. The contemplative page remains uninspected; a first-person report would establish the report, not its content."
+  ],
+  "pilotOutcome": {
+    "cohortSize": 6,
+    "pagesNowTextuallySupported": 1,
+    "pagesStillUninspected": 5,
+    "uninspectedRoutes": [
+      "/knowledge/religion/canon-formation-and-textual-transmission",
+      "/knowledge/religion/manuscript-evidence-and-textual-criticism",
+      "/knowledge/religion/genre-rhetoric-and-context",
+      "/knowledge/religion/doctrine-and-doctrinal-development",
+      "/knowledge/religion/contemplative-practice-and-first-person-experience"
+    ],
+    "whyNotCompleted": "Canon formation, manuscript evidence and doctrinal development make historical claims, which a primary text cannot carry. They need secondary historical scholarship, which was not acquired in this batch. The contemplative page makes first-person and empirical claims and remains out of scope for a primary-text pilot. One page was completed rather than six, and the pilot is reported at one."
+  },
+  "boundary": "This record establishes the wording of two named editions at three locators and the differences between them. It certifies nothing historical, empirical, theological or metaphysical."
+}

@@ -8,19 +8,19 @@
   "denominatorEqualsCorpus": true,
   "supersedesBatch9Audit": "Batch 9 audited 59 pages and stated a result against 167. This audits all 167.",
   "depthDistribution": {
-    "structurally-thin": 49,
-    "evidence-backed-but-thin": 18,
-    "substantial-and-evidence-backed": 11,
-    "structurally-substantial-but-unsupported": 51,
+    "structurally-substantial-but-unsupported": 86,
+    "substantial-and-evidence-backed": 27,
     "blocked": 28,
-    "first-party-documented-but-thin": 10
+    "first-party-documented-but-thin": 10,
+    "structurally-thin": 14,
+    "evidence-backed-but-thin": 2
   },
   "byGroup": {
     "independentlySupported": {
       "audited": 29,
       "states": {
-        "evidence-backed-but-thin": 18,
-        "substantial-and-evidence-backed": 11
+        "substantial-and-evidence-backed": 27,
+        "evidence-backed-but-thin": 2
       }
     },
     "firstPartyDocumented": {
@@ -32,8 +32,8 @@
     "structuralOnly": {
       "audited": 100,
       "states": {
-        "structurally-thin": 49,
-        "structurally-substantial-but-unsupported": 51
+        "structurally-substantial-but-unsupported": 86,
+        "structurally-thin": 14
       }
     },
     "blocked": {
@@ -43,7 +43,7 @@
       }
     }
   },
-  "substantialAndEvidenceBacked": 11,
+  "substantialAndEvidenceBacked": 27,
   "thinnestSupported": [
     {
       "route": "/knowledge/neuromorphic-biocomputing/comparisons/silicon-energy-and-biological-metabolic-cost",
@@ -53,87 +53,17 @@
       ]
     },
     {
-      "route": "/knowledge/astronomy/black-hole-observation-and-relativistic-inference",
-      "score": 12.6,
-      "reasons": [
-        "fewer than two typed links"
-      ]
-    },
-    {
-      "route": "/knowledge/astronomy/gravitational-waves-and-compact-mergers",
-      "score": 12.6,
-      "reasons": [
-        "fewer than two typed links"
-      ]
-    },
-    {
       "route": "/knowledge/neuromorphic-biocomputing/comparisons/digital-and-mixed-signal-neuromorphic-hardware",
       "score": 12.7,
       "reasons": [
         "direct answer too short to answer anything"
-      ]
-    },
-    {
-      "route": "/knowledge/concepts/cleanrooms-fab-utilities-and-contamination-control",
-      "score": 13.88,
-      "reasons": [
-        "fewer than two typed links"
-      ]
-    },
-    {
-      "route": "/knowledge/processes/plasma-etch-and-pattern-transfer",
-      "score": 14.06,
-      "reasons": [
-        "fewer than two typed links"
-      ]
-    },
-    {
-      "route": "/knowledge/equipment/atomic-layer-deposition-reactor",
-      "score": 14.3,
-      "reasons": [
-        "fewer than two typed links"
-      ]
-    },
-    {
-      "route": "/knowledge/equipment/plasma-etch-and-atomic-layer-etch-system",
-      "score": 14.3,
-      "reasons": [
-        "fewer than two typed links"
-      ]
-    },
-    {
-      "route": "/knowledge/processes/thin-film-deposition",
-      "score": 14.83,
-      "reasons": [
-        "fewer than two typed links"
-      ]
-    },
-    {
-      "route": "/knowledge/concepts/yield-learning-and-statistical-process-control",
-      "score": 15.44,
-      "reasons": [
-        "fewer than two typed links"
-      ]
-    },
-    {
-      "route": "/knowledge/equipment/semiconductor-ion-implantation-system",
-      "score": 15.8,
-      "reasons": [
-        "fewer than two typed links"
-      ]
-    },
-    {
-      "route": "/knowledge/equipment/optical-patterned-wafer-inspection-system",
-      "score": 15.8,
-      "reasons": [
-        "fewer than two typed links"
       ]
     }
   ],
   "verdicts": [
     {
       "route": "/knowledge/astronomy/coordinates-reference-frames-and-sky-position",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 265,
         "hasMechanismOrDerivation": true,
@@ -145,21 +75,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 13,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 214
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:6e9568e91cd5d23bea56092d2fa82ae8cc0aaf28138c458f5fe7fd9d7cc380cf"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:473a0f71b10a22e5fc3c11e5d8a304805a8948d27fd77f7e1518a1ff6f042fb3"
     },
     {
       "route": "/knowledge/astronomy/light-time-distance-and-lookback-time",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 244,
         "hasMechanismOrDerivation": true,
@@ -171,21 +99,19 @@
         "unresolvedQuestions": 4,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 17,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 247
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:8fba857af885407476e842a71a951d1306444dbf3e95dae78ac6d52f34dc8e1a"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:e9f6f9cb627942f2dd0e0a19cefdd54beac49cb254189e9d08932a7d0cb40b2b"
     },
     {
       "route": "/knowledge/astronomy/evidence-uncertainty-and-model-comparison",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 298,
         "hasMechanismOrDerivation": true,
@@ -197,21 +123,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 223
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:0e2aa0dda7be95afe12d3edd74b9263ff0c156760d3db0ef24b16de5278ebd09"
+      "substantialityScore": 12.9,
+      "reasons": [],
+      "verdictDigest": "sha256:6c374bbedc47b9525b15460d94b687471f8f3deaa5d44dd687ac9c7054dba480"
     },
     {
       "route": "/knowledge/astronomy/electromagnetic-spectrum",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 280,
         "hasMechanismOrDerivation": true,
@@ -223,21 +147,19 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 8,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 177
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:f6cdb0c1166fafa75b9458427f9bebef064035a5193630d53fa02aa0c7c27acc"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:f7991abe770abd806af2a4702b196bb8b25aeb27bb7cec55fe3274ce5cebd628"
     },
     {
       "route": "/knowledge/astronomy/telescopes-detectors-and-angular-resolution",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 277,
         "hasMechanismOrDerivation": true,
@@ -249,21 +171,19 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 8,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 194
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:8797294b1a0b844e2d4304ea9027a757ac1d08cb724588f7eeb53dec90ca134e"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:a076efdca117a74a887369def6f4d6c181dd3de95dde76037eab6ac776fba749"
     },
     {
       "route": "/knowledge/astronomy/photometry-flux-and-magnitude",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 269,
         "hasMechanismOrDerivation": true,
@@ -275,21 +195,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 14,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 204
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:ff02d6e95fc9258447dfb1ecadd1bb42eb2c161bfe54b5d9be5572782d13777d"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:20756a11f54d37cebdac35e8cf1678bcac04cac781e7d88b29bf9c5c5bee4f68"
     },
     {
       "route": "/knowledge/astronomy/spectroscopy-lines-and-redshift",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 287,
         "hasMechanismOrDerivation": true,
@@ -301,21 +219,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 15,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 224
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:2f23b0f8350ae140f2c645f7ad0b505a127b28c9601027c6dd50c92945890c48"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:7c2c73da49f5a0f2db4f11ff3d27dbdc8d2abaa116cf024ef793472b1cfb7a00"
     },
     {
       "route": "/knowledge/astronomy/astrometry-parallax-and-proper-motion",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 301,
         "hasMechanismOrDerivation": true,
@@ -327,21 +243,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 13,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 216
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:f32c73f9eac0189d0a663c0ada3e0f94f1a9715db74a19bad8314eae04e75f4f"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:cc79966bb6b72e9036d8b262ae24848cb9abf8f5370d1f09667b795e310657fe"
     },
     {
       "route": "/knowledge/astronomy/time-domain-and-multimessenger-astronomy",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 339,
         "hasMechanismOrDerivation": true,
@@ -353,21 +267,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 11,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 217
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:3f6f863d8b93a15eee84ae74bc1e2b4f71b3df6c9264c9ae3be0f8fdc42ca6b9"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:32290cec92eb3bb737e3acb2031f8df05e0aaa75091ca296e10e0f57d502fdb1"
     },
     {
       "route": "/knowledge/astronomy/orbits-gravity-and-ephemerides",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 321,
         "hasMechanismOrDerivation": true,
@@ -379,21 +291,19 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 11,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 193
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:b854151761a56f9065b3305c50baff5a23da125c424c2cd9f7d87fe1fea61b7f"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:c2f3923081d9944aa9f993d477b06bff0d6763bbff4e98a0bb94279726ecbd80"
     },
     {
       "route": "/knowledge/astronomy/solar-system-architecture",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 301,
         "hasMechanismOrDerivation": true,
@@ -405,21 +315,19 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 186
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:bca3e5902c44f5196cdc2ec753c55d33f6efaff85075386511b13e3ab2b3a426"
+      "substantialityScore": 12.9,
+      "reasons": [],
+      "verdictDigest": "sha256:640d96f3016c96ce55dc8a3cbcd99e8002f5c22d64629ee366e36d74ea86195a"
     },
     {
       "route": "/knowledge/astronomy/exoplanet-detection-and-confirmation",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 309,
         "hasMechanismOrDerivation": true,
@@ -431,21 +339,19 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 180
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:a7987569c543f87dc86230f0e5704642989d3b619cdc23c75ba74eaa443ebacd"
+      "substantialityScore": 12.9,
+      "reasons": [],
+      "verdictDigest": "sha256:5b61db5475dfc7cd6dc611c449ca72b0c3cc69094db9b5e5baea1fc62593d010"
     },
     {
       "route": "/knowledge/astronomy/star-formation-and-nuclear-fusion",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 283,
         "hasMechanismOrDerivation": true,
@@ -457,21 +363,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 10,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 221
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:22aece1e47b78e958b53077aeb2e83a75a46f9dd20ebe98ba66f72bf0be84430"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:cb142ffea0889ca80ab52fdefdaf27e130530f4c18682aef09b318fe5d750083"
     },
     {
       "route": "/knowledge/astronomy/stellar-classification-and-evolution",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 284,
         "hasMechanismOrDerivation": true,
@@ -483,21 +387,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 9,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 211
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:467df5761b5ac178019a0f7f63b41d756cd7c76bcb75b6e677d1a781eba52cfc"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:d412df17a3a04f7125fd8449380c5f15edaf7983d9abc5cffb353767df6dd668"
     },
     {
       "route": "/knowledge/astronomy/stellar-remnants-and-black-holes",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 298,
         "hasMechanismOrDerivation": true,
@@ -509,21 +411,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 6,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 220
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:4ee16c0307bb92ae9c59bdac8d7d97ee707403a40fe4bdd9f0a7ae5dc22dacd5"
+      "substantialityScore": 12.6,
+      "reasons": [],
+      "verdictDigest": "sha256:7a699b986091f25c10d6f1782ec37d72f3e0dc477fa0c97ac693b25e55f59bc3"
     },
     {
       "route": "/knowledge/astronomy/interstellar-medium-and-nebulae",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 266,
         "hasMechanismOrDerivation": true,
@@ -535,21 +435,19 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 8,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 191
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:6272f67f289c3554205501afb4dd5276eff7828e7bbbb028a46864a7856d43f9"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:03bf0e0b7cb312bbea27da0f792b422e80451bdc9449d02e7323e645d6351603"
     },
     {
       "route": "/knowledge/astronomy/galaxies-structure-and-evolution",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 320,
         "hasMechanismOrDerivation": true,
@@ -561,21 +459,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 212
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:3d727fc8cf760cbbb22fd66d09d96074871d5a62a0a2ede5938af29c648b3ee6"
+      "substantialityScore": 12.9,
+      "reasons": [],
+      "verdictDigest": "sha256:8e3754b5629ce75943b8ff556716f7d84e483ece4360aa662db54cf71408a057"
     },
     {
       "route": "/knowledge/astronomy/active-galactic-nuclei",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 280,
         "hasMechanismOrDerivation": true,
@@ -587,21 +483,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 13,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 230
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:9dc9a60fbefef79d1e3851da35fa1c8ab1d44be17c641d69d34de8b3b4727b8c"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:7794c8002f37e4a338e4f52bafa5448b15a1a174c164c3327e4111315ea88eb8"
     },
     {
       "route": "/knowledge/astronomy/black-hole-observation-and-relativistic-inference",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 310,
         "hasMechanismOrDerivation": true,
@@ -613,21 +507,19 @@
         "unresolvedQuestions": 4,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 6,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 275
       },
-      "substantialityScore": 12.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:3d01681c1b56555d19c682b40ee15c236fbcf6459de1e8dcc7f44972db81d2d7"
+      "substantialityScore": 14.6,
+      "reasons": [],
+      "verdictDigest": "sha256:4c79a2cb4c6a895990c486cf59e8a1b4171a6eeb110789ae714ff8e7dc5b8496"
     },
     {
       "route": "/knowledge/astronomy/gravitational-waves-and-compact-mergers",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 298,
         "hasMechanismOrDerivation": true,
@@ -639,21 +531,19 @@
         "unresolvedQuestions": 4,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 4,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 259
       },
-      "substantialityScore": 12.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:690bdf1d3b86c225c0313b96813034399cf8cc6fe31d21767ae5c9f21cba3337"
+      "substantialityScore": 14,
+      "reasons": [],
+      "verdictDigest": "sha256:fea69e47e469959aa5ab2f65ca7cb44bf1f415f9037876e842e0d27e2b33b0cf"
     },
     {
       "route": "/knowledge/astronomy/gravitational-lensing-and-mass-mapping",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 317,
         "hasMechanismOrDerivation": true,
@@ -665,21 +555,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 200
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:87e42f70b46ee9f1a86d0033ea6b38fc4122905871ffb93b06399d9546e7e61c"
+      "substantialityScore": 12.9,
+      "reasons": [],
+      "verdictDigest": "sha256:491f579dd4a16a22e49375de7efa9a9c1ab75a9235d5cb1f65295bf4be9abc80"
     },
     {
       "route": "/knowledge/astronomy/redshift-expansion-and-the-distance-ladder",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 310,
         "hasMechanismOrDerivation": true,
@@ -691,21 +579,19 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 13,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 220
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:3757508264c927b2150a81183b9cb12f047591f367163e9d40c2c1055aacca6e"
+      "substantialityScore": 13.2,
+      "reasons": [],
+      "verdictDigest": "sha256:a1e1c29f3a6c1a55105ed6addcc49f69669f86b04f22573bcdd4f8d55c2df89b"
     },
     {
       "route": "/knowledge/astronomy/cosmic-microwave-background-and-lambda-cdm",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 305,
         "hasMechanismOrDerivation": true,
@@ -717,17 +603,15 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 5,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 186
       },
-      "substantialityScore": 10.6,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:58279d6d843e5a9908d22136ecbe1732153722ed1c41befba5cfde50c6bc8c0f"
+      "substantialityScore": 12.3,
+      "reasons": [],
+      "verdictDigest": "sha256:a7af29f109a8fd754f418114d364942d66f6ac346c0b63dc37785db1634e7981"
     },
     {
       "route": "/knowledge/mathematics/angle-normalization",
@@ -2231,17 +2115,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:666bf26a7b7c72c74063f8b8a49ae666b992b6bd4a5529a7d96b48010534d1fc"
+      "verdictDigest": "sha256:c1a530ca85033d2ca560a67665ed955eb7bbc149a0172e3f45c23f1e92356838"
     },
     {
       "route": "/knowledge/equipment/electron-beam-mask-writer",
@@ -2257,21 +2141,21 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:8e3c9cf79061c2217a68fbdec21dc15a250df989dc23e497a3306e63bb6f65b0"
+      "verdictDigest": "sha256:24f853192e3b00564259fec46a7b89d8ed0aef35cbd104b20cab5933a59e1f00"
     },
     {
       "route": "/knowledge/equipment/reticle-and-photomask-inspection-system",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 253,
         "hasMechanismOrDerivation": true,
@@ -2283,21 +2167,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 142
       },
-      "substantialityScore": 16.3,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:3ae8019966c7b6956acf18bfefd948be3622e5e5c9bb5f37bed0321a2a5d7cad"
+      "substantialityScore": 18.6,
+      "reasons": [],
+      "verdictDigest": "sha256:197c16c745955e332a0ab09bce99af6249e4fd11b71422cb4aa48f237dd8489f"
     },
     {
       "route": "/knowledge/equipment/duv-immersion-lithography-scanner",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 238,
         "hasMechanismOrDerivation": true,
@@ -2309,21 +2191,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 5,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 128
       },
-      "substantialityScore": 11.78,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:1dabb019bebee9fc82942c0db9a9aee47c349e0349458dad1a4f1bbf737c0118"
+      "substantialityScore": 13.48,
+      "reasons": [],
+      "verdictDigest": "sha256:04ec6edc2f706e07b31ba865743ca960a6fb5dc09aba8095e834a1b0ccfa53de"
     },
     {
       "route": "/knowledge/equipment/euv-and-high-na-euv-lithography-scanner",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 256,
         "hasMechanismOrDerivation": true,
@@ -2335,21 +2215,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 5,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 143
       },
-      "substantialityScore": 11.8,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:dbcfb03c30d5ca5e207112c9ecdd3f85eef52d414779380d4fe04e5de67e9b8e"
+      "substantialityScore": 13.5,
+      "reasons": [],
+      "verdictDigest": "sha256:4e2fe7188fc1d22b8b5eee1ee3055ec351f01a6a66c18135109390b12eac7730"
     },
     {
       "route": "/knowledge/equipment/photoresist-coat-and-develop-track",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 255,
         "hasMechanismOrDerivation": true,
@@ -2361,17 +2239,15 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 12,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 176
       },
-      "substantialityScore": 11.8,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:497c6cca50e24ab91b2b9c89e3bafe2bf51fc93b5c9bf180a57dd3ddb806af7a"
+      "substantialityScore": 14.4,
+      "reasons": [],
+      "verdictDigest": "sha256:a010b2b6fee5381a193f99351d11b5b09d39c057fdf1af8d7613758d6eb4f098"
     },
     {
       "route": "/knowledge/equipment/pvd-sputter-and-metal-deposition-system",
@@ -2387,17 +2263,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:bcee88b2de766af340c3c4830202f52069dcef142ca756ca8bafdb0a64e7e645"
+      "verdictDigest": "sha256:6fb95f9434300c358466f6fe960ac2033f4423de7f25161ada9629362feeb4c2"
     },
     {
       "route": "/knowledge/equipment/chemical-vapor-deposition-reactor",
@@ -2413,21 +2289,21 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 9,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:efa012efd683c10c0d37572d813f4028c896c394feadbc652677b96fbc68e6ba"
+      "verdictDigest": "sha256:8bb444a42ce556f0131dcfaf51e90cfb52a636ed4d4e697ae12add7a904cad67"
     },
     {
       "route": "/knowledge/equipment/atomic-layer-deposition-reactor",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 250,
         "hasMechanismOrDerivation": true,
@@ -2439,21 +2315,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 8,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 138
       },
-      "substantialityScore": 14.3,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:eb15d5ec0657554d7bd896a84bd9dcd240cadf78f8fcc924ae1fd35fbcca1802"
+      "substantialityScore": 16.9,
+      "reasons": [],
+      "verdictDigest": "sha256:fff4dacaa2945de375cb2fe034d524067eacdfda30dd8afb7caebecffd10bd60"
     },
     {
       "route": "/knowledge/equipment/plasma-etch-and-atomic-layer-etch-system",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 261,
         "hasMechanismOrDerivation": true,
@@ -2465,21 +2339,19 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 11,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 207
       },
-      "substantialityScore": 14.3,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:bbb33df0fa1aa73b6bca31700e76ec35f5e5bc9bc1b1763e6c4ee76d892cce42"
+      "substantialityScore": 16.9,
+      "reasons": [],
+      "verdictDigest": "sha256:17309489a8946a05faa2d99324ec0de0043d271b1055bd25019376342128cf62"
     },
     {
       "route": "/knowledge/equipment/single-wafer-wet-clean-and-surface-preparation-system",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 224,
         "hasMechanismOrDerivation": true,
@@ -2491,21 +2363,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 10,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 126
       },
-      "substantialityScore": 11.67,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:9c77da8463a3542c8e6100a1bcdb13f3009cda2020ebc6eca678d4f7df9e002a"
+      "substantialityScore": 14.27,
+      "reasons": [],
+      "verdictDigest": "sha256:d85e9f52e212ab8070b472e55d0c7ee5bd2dfda20f5d873c3cf9d15a2b3fb0ae"
     },
     {
       "route": "/knowledge/equipment/semiconductor-ion-implantation-system",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 240,
         "hasMechanismOrDerivation": true,
@@ -2517,21 +2387,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 4,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 154
       },
-      "substantialityScore": 15.8,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:098e362dc3c3ca0606b4f481de04f4d05304cfa44fb97749cb45e25d07aa84f2"
+      "substantialityScore": 17.2,
+      "reasons": [],
+      "verdictDigest": "sha256:c3bd42d6bdf50ff62e40d5f24be749cc7d3240516f0cafc5ada329d600e9c400"
     },
     {
       "route": "/knowledge/equipment/diffusion-furnace-and-rapid-thermal-processor",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 234,
         "hasMechanismOrDerivation": true,
@@ -2543,17 +2411,15 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 11,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 133
       },
-      "substantialityScore": 11.75,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:3b6647e0ed638cd81374b2af338b0c14362e4fc57d58b1576c9e06d6ff39c907"
+      "substantialityScore": 14.35,
+      "reasons": [],
+      "verdictDigest": "sha256:4beea095961ca14690d11f038c9eec8cf2a0ccb8097f2c5a788f64e68501190f"
     },
     {
       "route": "/knowledge/equipment/chemical-mechanical-planarization-polisher",
@@ -2569,21 +2435,21 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 6,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:ce51f655d7cd535a26bfa21b500e4a0667691c05e183d50896cb6c8217159749"
+      "verdictDigest": "sha256:1de595e4ccb97f75712361f45c4c54ff770dd6c9c9d7aaaf7c651fe2bceff966"
     },
     {
       "route": "/knowledge/equipment/optical-patterned-wafer-inspection-system",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 249,
         "hasMechanismOrDerivation": true,
@@ -2595,21 +2461,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 138
       },
-      "substantialityScore": 15.8,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:504a9a9b054da19ca322339ce6d8da4ef2bb7b65d09b5bef374c205207bfd51f"
+      "substantialityScore": 18.1,
+      "reasons": [],
+      "verdictDigest": "sha256:be5bf2414c62f7bf78583b0f23eb5c98eb7b97f026baf133acfd4f5470354671"
     },
     {
       "route": "/knowledge/equipment/electron-beam-defect-review-and-inspection-system",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 257,
         "hasMechanismOrDerivation": true,
@@ -2621,21 +2485,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 143
       },
-      "substantialityScore": 15.8,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:ba0cf69c58a7187fc526ad19ed0e1193664895a0c691f69911564d99f3623c60"
+      "substantialityScore": 18.1,
+      "reasons": [],
+      "verdictDigest": "sha256:519a406e38331f252ceaa312cff4b8611acb0962a2ef5a7701cb5f509412079d"
     },
     {
       "route": "/knowledge/equipment/overlay-critical-dimension-and-film-metrology-system",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 238,
         "hasMechanismOrDerivation": true,
@@ -2647,21 +2509,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 137
       },
-      "substantialityScore": 16.28,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:a33783729bb1d2c25b2c6366edf6eeeb812fbeaa161ab6aae8a374b2e69a9de4"
+      "substantialityScore": 18.58,
+      "reasons": [],
+      "verdictDigest": "sha256:fbb6ed782b4ba1d1005ca0a3dd53ff7e029c55b5b8a0b7583243962bcc0c6350"
     },
     {
       "route": "/knowledge/equipment/semiconductor-wafer-prober",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 227,
         "hasMechanismOrDerivation": true,
@@ -2673,17 +2533,15 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 12,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 134
       },
-      "substantialityScore": 11.69,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:c5294b7999820509b35268a6f550fbc630723d3e8c780aca5721a82d916d5e6d"
+      "substantialityScore": 14.29,
+      "reasons": [],
+      "verdictDigest": "sha256:dc6e97cc7282cb1126b99dba1184f70526bb9b6c5a9ea8e655becee24fd00149"
     },
     {
       "route": "/knowledge/equipment/semiconductor-automatic-test-equipment",
@@ -2699,17 +2557,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 5,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:17c1abfb077ecc5c159f77b97f8cf0ee82ba8a056026a4a604d7d2961cbf2164"
+      "verdictDigest": "sha256:ef67395a78f629d1b339682b93e353f88c9b6d89745e57400ea51031483ac2cb"
     },
     {
       "route": "/knowledge/equipment/wafer-backgrinder-and-polisher",
@@ -2725,17 +2583,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:4f817947ab9a8e57179e9a184f6990b2ec24270e7759cca69357d850c55146ee"
+      "verdictDigest": "sha256:cfd20d30620e69a4d7dd1394fb53f4ddbc784dcce1997058fe82630ef75feb74"
     },
     {
       "route": "/knowledge/equipment/blade-and-laser-dicing-singulation-system",
@@ -2751,21 +2609,21 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 4,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:79fe8c636b915925022d6bb413e6d41373f78ea1b0a6c492ae315795e4fcaf48"
+      "verdictDigest": "sha256:b7b324361b31c1925b9652ac5077784e46abfea680315e5f2cc3832c0e18a3c2"
     },
     {
       "route": "/knowledge/equipment/die-attach-flip-chip-and-thermocompression-bonder",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 243,
         "hasMechanismOrDerivation": true,
@@ -2777,21 +2635,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 6,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 136
       },
-      "substantialityScore": 11.8,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:b38ab171985cab2dc7448ddb4ec9d8d0ab5024f26fdc7894432e899a91b4ba6c"
+      "substantialityScore": 13.8,
+      "reasons": [],
+      "verdictDigest": "sha256:52d2b590f985179d2fe96841574fe5f56bc8a5268979bc07154a28b2aba9c359"
     },
     {
       "route": "/knowledge/equipment/semiconductor-encapsulation-and-molding-system",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 236,
         "hasMechanismOrDerivation": true,
@@ -2803,21 +2659,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 4,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 137
       },
-      "substantialityScore": 11.77,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:41d6b8355e790f41d613539fa3d970ce37313750c4e612e361bb2a6bb2c161c0"
+      "substantialityScore": 13.17,
+      "reasons": [],
+      "verdictDigest": "sha256:646b9026d8281b914b4c809a2aa34b955481fea5a63c530e3f7dd136ba4ebcd9"
     },
     {
       "route": "/knowledge/equipment/chip-to-wafer-and-wafer-to-wafer-bonding-system",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 223,
         "hasMechanismOrDerivation": true,
@@ -2829,17 +2683,15 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 6,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 138
       },
-      "substantialityScore": 11.66,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:1ea2bac63eb6e38505829ee268dc7310cdffdeea5463350a7214687a53f7c21a"
+      "substantialityScore": 13.66,
+      "reasons": [],
+      "verdictDigest": "sha256:b7be82a1234c566b73f4c1e3b5a439a92ed9a829671abd4d556629cf6a9e07bd"
     },
     {
       "route": "/knowledge/equipment/burn-in-and-system-level-test-equipment",
@@ -2855,21 +2707,21 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:006fdcc92d5896926dfca9bafae452489d554204b13ae04cb72ef402836edccd"
+      "verdictDigest": "sha256:abe24a922aacdbac561ae13ffec1ada29ca1449452c58ab7d0b1e0c00e971e21"
     },
     {
       "route": "/knowledge/domains/semiconductor-manufacturing",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 196,
         "hasMechanismOrDerivation": true,
@@ -2881,21 +2733,19 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 259
       },
-      "substantialityScore": 16.23,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:4f49efb23fde7d4a1cb9e4a20129fcf136a8ca1e050b047c3e21836355e4ef90"
+      "substantialityScore": 18.53,
+      "reasons": [],
+      "verdictDigest": "sha256:29c166205f54e36e049730c8ba15fabb4f1e1ecf5a5cbaa5ec5f02426b690325"
     },
     {
       "route": "/knowledge/processes/photolithography",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 170,
         "hasMechanismOrDerivation": true,
@@ -2907,21 +2757,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 154
       },
-      "substantialityScore": 11.62,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:0f1f86264f5337af2d836632514e00d719a8a706129dbf6a5e0c1988d5f22477"
+      "substantialityScore": 13.92,
+      "reasons": [],
+      "verdictDigest": "sha256:79651208ef7b3cf4207d376a915bd5a8285be7c781af731e7b4c56a06a39592f"
     },
     {
       "route": "/knowledge/processes/thin-film-deposition",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 208,
         "hasMechanismOrDerivation": true,
@@ -2933,21 +2781,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 5,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 159
       },
-      "substantialityScore": 14.83,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:21e9200f2c8f7ead6e7e34756e1a5adc0b9699aac3bdc77d18d563a8c5975f76"
+      "substantialityScore": 16.53,
+      "reasons": [],
+      "verdictDigest": "sha256:d007bcac6929ba5d0683dfef3cb50e2b7a5a0a63c92cf64b2fe9f9d61a37d7f4"
     },
     {
       "route": "/knowledge/processes/plasma-etch-and-pattern-transfer",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 163,
         "hasMechanismOrDerivation": true,
@@ -2959,21 +2805,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 2,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 176
       },
-      "substantialityScore": 14.06,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:e594403682ffae05a0c9bd4257533ebbdb66844bcef9ae91c22d4d97100ffd26"
+      "substantialityScore": 14.86,
+      "reasons": [],
+      "verdictDigest": "sha256:d9210c0d5720191699606813d64c5cc9837ed5fcb9307c1785d529841b1b97d5"
     },
     {
       "route": "/knowledge/processes/ion-implantation-and-annealing",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 198,
         "hasMechanismOrDerivation": true,
@@ -2985,17 +2829,15 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 172
       },
-      "substantialityScore": 16.25,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:07029e819b80bacad261dd53adbba924a30f3167e94665f36a1cd1ff374bb242"
+      "substantialityScore": 17.35,
+      "reasons": [],
+      "verdictDigest": "sha256:7d2a5f1cfc4cae9ffd3ab00fe2082280a208087d04e1fc6cf48ac7c3ae4536c5"
     },
     {
       "route": "/knowledge/processes/copper-interconnects-and-cmp",
@@ -3011,17 +2853,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 6,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:f4bab9d522faa8556b18b737559c9a6fb2c35e8c9734fb90f233da054d75d2f1"
+      "verdictDigest": "sha256:cb9faba22d0b84d8a974db3a8b5322e3802e1c6481b0bedc6dc9979b3e481936"
     },
     {
       "route": "/knowledge/processes/advanced-packaging-and-heterogeneous-integration",
@@ -3037,17 +2879,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 4,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:75df5aeb544101307e31c3097c72fe4fd1aad0160cd7178ba9b501fc4b1ddcb2"
+      "verdictDigest": "sha256:e3d504e6484e5cfbcbeac8d31db2d1418141e7764c6fbc63dea6566b147e0bd5"
     },
     {
       "route": "/knowledge/concepts/direct-to-silicon-liquid-cooling",
@@ -3089,17 +2931,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 2,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:a14b1269688e5291488623d7c46aab5b8c675ebd816b948fdaf59a53b53c5422"
+      "verdictDigest": "sha256:24aaebac059176e1bb6832020e6d62db4771fb48ddc3bf2878122bc0807702f4"
     },
     {
       "route": "/knowledge/processes/ic-design-to-tapeout",
@@ -3115,17 +2957,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:fa9d902d48ac6b604c1b59b1c3a42e72f6a69e1ab4f38118de05712ee3d779f7"
+      "verdictDigest": "sha256:92bbfea1310c9b21115a82590205e64ce9240517cc328ded59f6eb3869531b00"
     },
     {
       "route": "/knowledge/processes/rtl-verification-synthesis-physical-design",
@@ -3141,21 +2983,21 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:e2ccde95621b0889020e581aa30b15d693d1a78750310e4f8ac741bc0a4a9f88"
+      "verdictDigest": "sha256:247bc69fb6262e57d9208903af224a6dae1a13d2e68e4780336fe7145a393193"
     },
     {
       "route": "/knowledge/processes/mask-data-preparation-and-reticle-fabrication",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 177,
         "hasMechanismOrDerivation": true,
@@ -3167,17 +3009,15 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 12,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 128
       },
-      "substantialityScore": 11.28,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:5c26849cca0141655ae8d34f0d62d4b609b7231e7eeb73f252b0dfebac93b1e5"
+      "substantialityScore": 13.88,
+      "reasons": [],
+      "verdictDigest": "sha256:21589104a6ae9d6079a39caf8488fec5309a40478cc09d5513535188898f69f6"
     },
     {
       "route": "/knowledge/processes/silicon-crystal-growth-and-wafer-preparation",
@@ -3193,21 +3033,21 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:7c81947a3f95de5e0f6b962b371949499714bdb43d0616ef45b42b875d900872"
+      "verdictDigest": "sha256:86befd483a98827889af6ce34c7b999421e529c5d39ab7eeef23dfe5403ab81a"
     },
     {
       "route": "/knowledge/processes/wafer-cleaning-and-surface-preparation",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 157,
         "hasMechanismOrDerivation": true,
@@ -3219,21 +3059,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 8,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 133
       },
-      "substantialityScore": 11.51,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:03eada6c6076d22499cc0e9e58b38be2d7ffe063abf508c171e695d53f2eb9f3"
+      "substantialityScore": 14.11,
+      "reasons": [],
+      "verdictDigest": "sha256:15be548de7cb3bef1eba8ae27eb6bca30ee4929d57151497042b67ab992f730b"
     },
     {
       "route": "/knowledge/processes/thermal-oxidation-diffusion-and-furnace-processing",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 147,
         "hasMechanismOrDerivation": true,
@@ -3245,21 +3083,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 10,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 133
       },
-      "substantialityScore": 11.43,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:7b09f135eb6f04f4bc2c015d33ce99cc98a748937897e1de1474e51da2ccc307"
+      "substantialityScore": 14.03,
+      "reasons": [],
+      "verdictDigest": "sha256:b521c0110bc3caac22a0e5ad88537158b69c010d122c27461198f29e85471c31"
     },
     {
       "route": "/knowledge/concepts/semiconductor-metrology-and-defect-inspection",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 193,
         "hasMechanismOrDerivation": true,
@@ -3271,21 +3107,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 146
       },
-      "substantialityScore": 16.31,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:65f442ab9b4d7dee013d03f751ce4e6b271b0cae319bd7ff8c6ec6b182de056d"
+      "substantialityScore": 18.61,
+      "reasons": [],
+      "verdictDigest": "sha256:05f1dd489f8c4e0fb982fa0efa3485830a5941cc6bef45550f303323f4211651"
     },
     {
       "route": "/knowledge/concepts/yield-learning-and-statistical-process-control",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 197,
         "hasMechanismOrDerivation": true,
@@ -3297,21 +3131,19 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 9,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 160
       },
-      "substantialityScore": 15.44,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:bb2139115fbea482f7b68ab0c14a2edb8d449fe8d8bf8394ccf0ca57dbd56b0c"
+      "substantialityScore": 18.04,
+      "reasons": [],
+      "verdictDigest": "sha256:983fcf17956d400a779b37e92c018c7fd92aa0b52cb98307d2786695e4d3c6c7"
     },
     {
       "route": "/knowledge/concepts/cleanrooms-fab-utilities-and-contamination-control",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 202,
         "hasMechanismOrDerivation": true,
@@ -3323,17 +3155,15 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 2,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 191
       },
-      "substantialityScore": 13.88,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:827c4d076a8aeaa1f8440c4e6f3249bb41aa6fe0c57c27186659fd30436ba8ca"
+      "substantialityScore": 14.68,
+      "reasons": [],
+      "verdictDigest": "sha256:1224412d517bc24990d330a3f0afd66ff3b423346d4832d1d98bf563626e94ba"
     },
     {
       "route": "/knowledge/processes/wafer-acceptance-test-and-wafer-sort",
@@ -3349,17 +3179,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:5696dc9f1c411489eab167bef208a587f3cc912dd0b4a677ffd7bc669b6f235a"
+      "verdictDigest": "sha256:5945c3e5306f6185d9208448bd2d323e633682f317469824e4034d1cfaf13be6"
     },
     {
       "route": "/knowledge/processes/wafer-thinning-dicing-and-die-handling",
@@ -3375,17 +3205,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 4,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:7a57b34e0d7e169b553b4f5d45cd20a482653ef1b5b1cdc18e66fc60f2e5e72c"
+      "verdictDigest": "sha256:5bc433508d130783a2f871440a100c5755683f070b86599c6f6fbfe4a7136a5c"
     },
     {
       "route": "/knowledge/processes/package-substrates-and-redistribution-layers",
@@ -3401,21 +3231,21 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 8,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:9d8301d4feafa2411e5c492bb808c5499090ff5c0b7b816e50b865a832edb337"
+      "verdictDigest": "sha256:c31cf6da7a655bbffefabd043e6e786d4d8f1d0c470f8df4c2cb4ffa76dd24da"
     },
     {
       "route": "/knowledge/processes/wire-bonding-and-flip-chip-interconnect",
-      "state": "structurally-thin",
+      "state": "structurally-substantial-but-unsupported",
       "measures": {
         "directAnswerChars": 195,
         "hasMechanismOrDerivation": true,
@@ -3427,17 +3257,15 @@
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 6,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 7,
+        "renderedDimensions": 8,
         "wordCountDiagnostic": 158
       },
-      "substantialityScore": 11.83,
-      "reasons": [
-        "fewer than two typed links"
-      ],
-      "verdictDigest": "sha256:76f7dd0e29837a2ecd72d0e66be78ff52c4cdf7fecda706a9f93c8c7dbfd80ff"
+      "substantialityScore": 13.83,
+      "reasons": [],
+      "verdictDigest": "sha256:1c25932396951c80e6f47a66a47c272a007b177e5b66f1348c8464b4a69e0871"
     },
     {
       "route": "/knowledge/processes/underfill-molding-and-package-encapsulation",
@@ -3453,17 +3281,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 8,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:fc6dd5a347d211bd761f8ca00b9a4433074f5f1dfe5b47bb698498cd842b51c9"
+      "verdictDigest": "sha256:748547c2c4298cd66ec40297fa53627232bfc3d2d81f3658bc971e5f3ff382ed"
     },
     {
       "route": "/knowledge/processes/final-test-burn-in-and-system-level-test",
@@ -3479,17 +3307,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 7,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:fab6581496bb8d5c8b7656cb05b8d25df2283b7830d8afb5a371d18f9e55788c"
+      "verdictDigest": "sha256:c5968cf3a94ceee7f6542cd89a845fc5771f117566b8bf11af8dd1c84f67066b"
     },
     {
       "route": "/knowledge/concepts/semiconductor-qualification-reliability-and-failure-analysis",
@@ -3505,17 +3333,17 @@
         "unresolvedQuestions": 0,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 0,
+        "typedRelatedRecords": 1,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 3,
+        "renderedDimensions": 4,
         "wordCountDiagnostic": 0
       },
       "substantialityScore": 0,
       "reasons": [
         "page is blocked and carries no explanatory uplift"
       ],
-      "verdictDigest": "sha256:35b439158e40e4b309cac43744765bae61fc8b1f2b451e9db91f90baf8027915"
+      "verdictDigest": "sha256:a21576148d70434f8a1afe3ad7c547255871e8834add3e07b1c7ec8155d17487"
     },
     {
       "route": "/knowledge/suppliers/synopsys",
@@ -4382,5 +4210,5 @@
     }
   ],
   "boundary": "A private audit. It changes no page.",
-  "auditDigest": "sha256:afbab013f04d0c0bc430728f39b2c00a709b4da844cee3c6b6e02ef99b9c7205"
+  "auditDigest": "sha256:4f991071a919a4562e29a579553f707022dbbaaa91356884c97edbf4721e1c18"
 }
