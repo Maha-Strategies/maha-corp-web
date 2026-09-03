@@ -1,0 +1,129 @@
+{
+  "schemaVersion": "maha-evidence-batch-8-inspections/1.0",
+  "batch": "open-literature-depth-8",
+  "conductedOn": "2026-09-03",
+  "appendOnly": true,
+  "writtenToProduction": false,
+  "cohortDigest": "sha256:649881b5fc92f0be3aa8dc5e5c8ff790f3d517dd9f9819f77224fc44d086e6f0",
+  "exhaustedRoutesNotRetried": ["IEEE Xplore", "SPIE", "ECTC", "CMP searches", "vendor 403 paths", "reCAPTCHA-walled PMC"],
+  "inspected": [
+    {
+      "sourceId": "ligo-2016-gw150914",
+      "domain": "astronomy",
+      "class": "peer-reviewed-open-access",
+      "title": "Observation of Gravitational Waves from a Binary Black Hole Merger",
+      "authors": "B. P. Abbott et al., LIGO Scientific Collaboration and Virgo Collaboration",
+      "venue": "Physical Review Letters 116, 061102 (2016)",
+      "identifier": "10.1103/PhysRevLett.116.061102; arXiv:1602.03837",
+      "retrievedFrom": "https://arxiv.org/pdf/1602.03837",
+      "retrievedOn": "2026-09-03",
+      "depth": "section-or-full-text",
+      "retrievalNote": "The abstract page was fetched first and was insufficient. The PDF returned binary from automated extraction, so it was read page by page.",
+      "identityVerified": true,
+      "identityBasis": "Title page carries the PRL volume, article number and publication date, the collaboration authorship and the DOI, all matching the citation.",
+      "versionRelationship": "arXiv copy of the published version of record; the PDF carries the PRL masthead and DOI.",
+      "rightsBasis": "Creative Commons Attribution 3.0, stated on the title page",
+      "exactLocators": ["Section II OBSERVATION", "Figure 1", "Figure 2", "Section III DETECTORS"],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/astronomy/gravitational-waves-and-compact-mergers",
+          "locator": "Section II OBSERVATION and Figure 1",
+          "claim": "A compact binary merger produces a gravitational-wave signal that sweeps upward in frequency and amplitude and is recovered from detector strain by matched filtering against relativistic waveform models.",
+          "supportingPassage": "Section II records the coincident detection at LIGO Hanford and Livingston on 14 September 2015, an initial low-latency detection of a generic transient reported within three minutes, and matched-filter analyses using relativistic models of compact binary waveforms recovering the event at combined signal-to-noise 24. It records the signal rising through about eight cycles from 35 to 150 hertz over 0.2 seconds. Figure 1 shows the filtered strain against a numerical relativity waveform and the residual.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/astronomy/black-hole-observation-and-relativistic-inference",
+          "locator": "Section II OBSERVATION, chirp-mass argument",
+          "claim": "The identification of a source as a black hole binary is an inference from measured waveform parameters and compactness bounds, not a direct image.",
+          "supportingPassage": "Section II derives a chirp mass of about 30 solar masses from the observed frequency and its derivative, giving a total mass of at least about 70 solar masses and a summed Schwarzschild radius of at least about 210 kilometres, then argues that equal Newtonian point masses orbiting at 75 hertz would be only about 350 kilometres apart, that neutron stars could not supply the mass and a black-hole-neutron-star binary would merge at lower frequency, leaving black holes as the only known objects compact enough.",
+          "distinctPassage": true
+        }
+      ],
+      "establishes": "How a compact binary coalescence is detected and characterised from strain data, and how the black-hole identification follows from measured chirp mass and compactness rather than from imaging.",
+      "boundary": "A single event observed by two detectors. Sky localisation was only about 600 square degrees, Virgo was not observing, and all uncertainties are 90 percent credible intervals. It establishes nothing about merger rates, about any other source, or about black hole populations.",
+      "routesConsideredAndRejected": [
+        { "route": "/knowledge/astronomy/gravitational-lensing-and-mass-mapping", "reason": "The paper concerns gravitational waves, not lensing. Both are consequences of general relativity, which is a shared theory rather than a shared subject." }
+      ]
+    },
+    {
+      "sourceId": "nist-dlmf-4-14",
+      "domain": "mathematics",
+      "class": "government-authoritative-reference",
+      "title": "NIST Digital Library of Mathematical Functions, Chapter 4 Elementary Functions, §4.14 Definitions and Periodicity",
+      "authors": "NIST Digital Library of Mathematical Functions",
+      "venue": "NIST DLMF",
+      "identifier": "https://dlmf.nist.gov/4.14 with permanent equation identifiers such as 4.14.E1",
+      "retrievedFrom": "https://dlmf.nist.gov/4.14",
+      "retrievedOn": "2026-09-03",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Served from dlmf.nist.gov at the cited section; the section number, title and equation numbering match the citation.",
+      "versionRelationship": "The DLMF assigns permanent identifiers to individual equations, so a citation resolves to the same numbered statement over time.",
+      "rightsBasis": "US government work, citation-with-paraphrase",
+      "exactLocators": ["4.14.1", "4.14.2", "4.14.4", "4.14.8", "4.14.9", "4.14.10"],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/periodic-functions-and-phase",
+          "locator": "4.14.8, 4.14.9 and 4.14.10",
+          "claim": "The circular functions are periodic, and their periods are exact constants rather than conventions.",
+          "supportingPassage": "4.14.8 and 4.14.9 state that sine and cosine have period two pi, and 4.14.10 states that tangent has period pi. 4.14.1 and 4.14.2 give the definitions in terms of complex exponentials from which those periods follow.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/angle-normalization",
+          "locator": "4.14.8 and 4.14.9",
+          "claim": "Reducing an angle to a canonical interval is well defined because the circular functions repeat exactly on a fixed period.",
+          "supportingPassage": "4.14.8 and 4.14.9 state the exact period of sine and cosine as two pi, which is the fact that makes reduction modulo two pi preserve the value of those functions.",
+          "distinctPassage": true
+        }
+      ],
+      "establishes": "The definitions of the circular functions in terms of complex exponentials, and their exact periods, at equation-level granularity with permanent identifiers.",
+      "boundary": "A reference chapter of definitions and identities. It states no numerical method, no error bound for any implementation, and nothing about floating-point behaviour, so it cannot support a claim about how any particular routine normalises an angle in practice.",
+      "routesConsideredAndRejected": [
+        { "route": "/knowledge/mathematics/root-finding", "reason": "The section defines elementary functions and their periods. It gives no root-finding method, and sharing the chapter on elementary functions is not support for a numerical algorithm." }
+      ]
+    }
+  ],
+  "notInspected": [
+    {
+      "sourceId": "basu-2022-snn-integrated-circuits",
+      "title": "Spiking Neural Network Integrated Circuits: A Review of Trends and Future Directions",
+      "route": "https://arxiv.org/abs/2203.07006",
+      "outcome": "abstract-only",
+      "depth": "abstract-only",
+      "identityVerified": true,
+      "disposition": "Refused for the detailed explanatory claim it was sought for. The abstract states only that three design categories were surveyed and gives no account of event-driven operation, neuron or synapse circuits, or energy per spike. An abstract cannot support a section-level claim.",
+      "affectedRoutes": ["/knowledge/neuromorphic-biocomputing/spiking-neural-networks", "/knowledge/neuromorphic-biocomputing/mixed-signal-neuromorphic-hardware"]
+    },
+    {
+      "sourceId": "eht-2019-m87-paper-i",
+      "title": "First M87 Event Horizon Telescope Results. I. The Shadow of the Supermassive Black Hole",
+      "route": "https://iopscience.iop.org/article/10.3847/2041-8213/ab0ec7",
+      "outcome": "metadata-and-author-list-only",
+      "depth": "not-inspected",
+      "identityVerified": true,
+      "disposition": "The publisher page returned title, authorship and metadata without the body. Identity is confirmed and the content is not, so it supports nothing.",
+      "affectedRoutes": ["/knowledge/astronomy/black-hole-observation-and-relativistic-inference"]
+    }
+  ],
+  "evidentiaryFrames": {
+    "declared": ["textual", "historical", "theological", "empirical", "first-person"],
+    "transfersMade": 0,
+    "note": "No religion page was converted this batch, so no frame boundary was crossed. The frames are declared here so a later batch inherits the constraint rather than rediscovering it."
+  },
+  "summary": {
+    "cohortSize": 30,
+    "domainsSearched": ["astronomy", "mathematics", "neuromorphic", "religion"],
+    "retrievalAttempts": 5,
+    "inspectedSectionOrFullText": 2,
+    "abstractOnlyRefused": 1,
+    "metadataOnlyRefused": 1,
+    "pagesConverted": 4,
+    "routesConsideredAndRejected": 2,
+    "exhaustedRoutesRetried": 0,
+    "activeBindingsChanged": 0,
+    "finding": "Two sources, four pages. Both are landmark open references with exact locators: a CC-BY physics paper with numbered sections and figures, and a government mathematics reference with permanent equation identifiers. The domain shift worked where six batches of semiconductor search had not."
+  },
+  "boundary": "A private inspection record."
+}
