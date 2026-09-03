@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
+
+import { isVendorAuthored, vendorBackedSupplierRoutes } from '../lib/uplift/vendor-authorship.ts'
 import { execFileSync } from 'node:child_process'
 import { resolve } from 'node:path'
 
@@ -58,10 +60,17 @@ test('source-tier changes propagate automatically, with no route exclusion list'
   assert.equal(ledger.mechanism.hardcodedRouteExclusions, 0)
   assert.equal(ledger.mechanism.scope, 'source-level')
   assert.match(ledger.mechanism.propagation, /without being listed anywhere/)
+  // The exclusion lives at source level and propagates by derivation. Checked
+  // behaviourally: an equipment page citing a vendor source is not captured by
+  // the supplier derivation, and no hardcoded route list exists to consult.
   const script = execFileSync('cat', ['scripts/generate-legacy-uplift.ts'], { cwd: ROOT, encoding: 'utf8' })
-  assert.match(script, /VENDOR_AUTHORED_SOURCES/)
-  // No route array of vendor-backed pages remains in the generator.
-  assert.ok(!/compiledRoutesFor/.test(script) || !/\/knowledge\/suppliers\/asml'/.test(script.split('VENDOR_AUTHORED_SOURCES')[1] ?? ''))
+  assert.ok(!/compiledRoutesFor/.test(script), 'the hardcoded source-to-route map is gone')
+  assert.ok(isVendorAuthored('asml-lithography'))
+  const derived = vendorBackedSupplierRoutes([
+    { route: '/knowledge/suppliers/asml', sources: [{ id: 'asml-lithography' }] },
+    { route: '/knowledge/equipment/scanner', sources: [{ id: 'asml-lithography' }] },
+  ])
+  assert.deepEqual([...derived], ['/knowledge/suppliers/asml'])
 })
 
 test('mixed-source pages classify claims individually', () => {

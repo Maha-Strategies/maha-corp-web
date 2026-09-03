@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
+
+import { VENDOR_AUTHORED_SOURCES, isVendorAuthored, vendorBackedSupplierRoutes } from '../lib/uplift/vendor-authorship.ts'
 import { execFileSync } from 'node:child_process'
 import { resolve } from 'node:path'
 
@@ -137,10 +139,14 @@ test('the five states remain disjoint and total 167', () => {
 })
 
 test('the vendor correction removed independent status from every citing page', () => {
-  // Not just the three supplier profiles: any page citing a vendor-authored source.
-  const script = execFileSync('cat', ['scripts/generate-legacy-uplift.ts'], { cwd: ROOT, encoding: 'utf8' })
-  assert.match(script, /VENDOR_AUTHORED_SOURCES/)
-  assert.match(script, /exclusion belongs to the source rather/)
+  // Not just the three supplier profiles: any page citing a vendor-authored
+  // source. Asserted through the module rather than by grepping the generator,
+  // so the check survives the code moving and fails if the logic breaks.
+  assert.ok(VENDOR_AUTHORED_SOURCES.size >= 3)
+  assert.equal(isVendorAuthored('asml-lithography'), true)
+  assert.ok(vendorBackedSupplierRoutes([
+    { route: '/knowledge/suppliers/any', sources: [{ id: 'asml-lithography' }] },
+  ]).has('/knowledge/suppliers/any'))
   assert.ok(report.pageStates.independentlySourceSupported < 42,
     'the corrected count must be below the previously reported 42')
 })

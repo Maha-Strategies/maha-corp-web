@@ -10,51 +10,10 @@ import { NEUROMORPHIC_COMPARISONS, NEUROMORPHIC_CONCEPTS, NEUROMORPHIC_MATHEMATI
 import { SEMICONDUCTOR_EQUIPMENT_ARTICLES } from '../lib/semiconductor-equipment.ts'
 import { KNOWLEDGE_ARTICLES, KNOWLEDGE_SOURCES } from '../lib/knowledge-data.ts'
 import { KNOWLEDGE_SUPPLIERS } from '../lib/knowledge-process-profiles.ts'
-import attestationFile from '../content/legacy-uplift/inspection-attestations.json' with { type: 'json' }
-import batch1 from '../content/semiconductor-evidence/batch-1.json' with { type: 'json' }
-import batch2 from '../content/evidence-batch-2/inspections.json' with { type: 'json' }
-import batch3 from '../content/evidence-batch-3/inspections.json' with { type: 'json' }
-import batch4 from '../content/evidence-batch-4/inspections.json' with { type: 'json' }
 import supplierFirstParty from '../content/evidence-batch-5/supplier-first-party.json' with { type: 'json' }
-import reuse from '../content/evidence-batch-7/reuse-audit.json' with { type: 'json' }
-import batch8 from '../content/evidence-batch-8/inspections.json' with { type: 'json' }
-import batch9 from '../content/evidence-batch-9/inspections.json' with { type: 'json' }
-import batch12 from '../content/evidence-batch-12/inspections.json' with { type: 'json' }
-
-/**
- * Reuse of already-inspected evidence, applied per route.
- *
- * Each accepted entry names one route, one source and the exact passage that
- * reaches that route's claim. Nothing is inferred from a source's other routes.
- */
-const reuseByRoute = new Map<string, { sourceId: string; exactLocator: string; supportingPassage: string; limitationsCarried: string; rightsBasis: string; sourceTitle: string; version: string }[]>()
-// Batch 8 names support per claim, so each route carries its own passage.
-for (const source of [...batch8.inspected, ...batch9.inspected, ...batch12.inspected] as unknown as { sourceId: string; title: string; versionRelationship: string; rightsBasis: string; boundary: string; claimByClaimSupport: { route: string; locator: string; supportingPassage: string }[] }[]) {
-  for (const claim of source.claimByClaimSupport) {
-    reuseByRoute.set(claim.route, [...(reuseByRoute.get(claim.route) ?? []), {
-      sourceId: source.sourceId, exactLocator: claim.locator,
-      supportingPassage: claim.supportingPassage, limitationsCarried: source.boundary,
-      rightsBasis: source.rightsBasis, sourceTitle: source.title, version: source.versionRelationship,
-    }])
-  }
-}
-for (const entry of reuse.accepted as Record<string, string>[]) {
-  reuseByRoute.set(entry.route, [...(reuseByRoute.get(entry.route) ?? []), {
-    sourceId: entry.sourceId, exactLocator: entry.exactLocator,
-    supportingPassage: entry.supportingPassage, limitationsCarried: entry.limitationsCarried,
-    rightsBasis: entry.rightsBasis, sourceTitle: entry.sourceTitle, version: entry.version,
-  }])
-}
-
-/**
- * Batch 4 names supported routes per claim rather than per source, so a source
- * reaches a page only where a distinct inspected passage backs that page's own
- * claim. The shape is flattened here into the same supportsRoutes contract.
- */
-const batch4Flattened = (batch4.inspected as unknown as { claimByClaimSupport: { route: string }[] }[]).map((entry) => ({
-  ...entry,
-  supportsRoutes: entry.claimByClaimSupport.map((c) => c.route),
-}))
+import { attested, buildAttestations, reuseByRoute, routeScopedByRoute } from '../lib/uplift/evidence-intake.ts'
+import { vendorBackedSupplierRoutes } from '../lib/uplift/vendor-authorship.ts'
+import { processRoute } from '../lib/uplift/process-routes.ts'
 
 /**
  * Inventories the legacy corpus, baselines it, and compiles the uplift.
@@ -80,46 +39,9 @@ const asSource = (s: Any): LegacySource => ({
   accessed: str(s.accessed), authorityTier: str(s.authorityTier),
 })
 
-/**
- * Inspection results, applied to the sources they describe.
- *
- * A source only gains `establishes` and `boundary` here because someone read
- * it and wrote down what it says and where it stops. Sources that could not be
- * retrieved gain nothing and stay reference-only.
- */
-type Attestation = { sourceId: string; establishes: string; boundary: string; depth: string; exactLocator: string; observedContent: string; identityVerified: boolean; subjectAligned: boolean; retrievedFrom: string; retrievedOn: string; versionRelationship: string; rightsBasis: string }
-const attested = new Map<string, Attestation>(
-  (attestationFile.attestations as Attestation[]).map((a) => [a.sourceId, a]))
-
-/**
- * Vendor-authored sources documented in Batch 1, before the first-party tier.
- *
- * Batch 7 stopped these conferring independent support on the three supplier
- * profiles. It missed the fourteen equipment and process pages that cite the
- * same documents. A company describing its own products is first-party
- * evidence wherever it is cited, so the exclusion belongs to the source rather
- * than to a list of routes.
- */
-const VENDOR_AUTHORED_SOURCES = new Set(['asml-lithography', 'tel-process-equipment', 'amkor-3d-stack', 'advantest-products-overview'])
-
 const withAttestation = (s: LegacySource): LegacySource => {
   const a = attested.get(s.id)
   return a ? { ...s, establishes: a.establishes, boundary: a.boundary } : s
-}
-
-/**
- * Batch 1 evidence, applied only to the routes each source was checked against.
- *
- * A source supports a page because someone read it and judged it to be about
- * that page's subject. Routes are named per source rather than matched by
- * keyword, so a metrology paper cannot drift onto a packaging page.
- */
-type Batch1 = { sourceId: string; title: string; retrievedFrom: string; retrievedOn: string; depth: string; exactLocators: string[]; observedContent: string; establishes: string; boundary: string; identityVerified: boolean; versionRelationship: string; rightsBasis: string; supportsRoutes: string[] }
-const batch1ByRoute = new Map<string, Batch1[]>()
-for (const entry of [...(batch1.inspected as Batch1[]), ...(batch2.inspected as unknown as Batch1[]), ...(batch3.inspected as unknown as Batch1[]), ...(batch4Flattened as unknown as Batch1[])]) {
-  for (const route of entry.supportsRoutes) {
-    batch1ByRoute.set(route, [...(batch1ByRoute.get(route) ?? []), entry])
-  }
 }
 
 const inputs: LegacyPageInput[] = []
@@ -244,44 +166,6 @@ for (const a of [...(SEMICONDUCTOR_EQUIPMENT_ARTICLES as unknown as Any[]), ...(
   })
 }
 
-/**
- * Supplier profiles declare the processes they serve as `process-*` identifiers,
- * which are a different naming scheme from the process articles' own slugs. The
- * generator previously pasted the identifier straight into a route, so sixteen
- * supplier pages linked to `/knowledge/processes/process-plasma-etch` and
- * similar, none of which exist. Only two of the eighteen happened to line up.
- *
- * The correspondence is an identity between two names for the same process, not
- * a claim about either. An identifier with no article resolves to no link
- * rather than to a guess.
- */
-const PROCESS_ID_TO_SLUG: Record<string, string> = {
-  'process-photolithography': 'photolithography',
-  'process-thin-film-deposition': 'thin-film-deposition',
-  'process-plasma-etch': 'plasma-etch-and-pattern-transfer',
-  'process-ion-implantation-annealing': 'ion-implantation-and-annealing',
-  'process-copper-interconnect-cmp': 'copper-interconnects-and-cmp',
-  'process-advanced-packaging': 'advanced-packaging-and-heterogeneous-integration',
-  'process-ic-design-tapeout': 'ic-design-to-tapeout',
-  'process-rtl-to-physical-design': 'rtl-verification-synthesis-physical-design',
-  'process-mask-data-reticle-fabrication': 'mask-data-preparation-and-reticle-fabrication',
-  'process-silicon-wafer-preparation': 'silicon-crystal-growth-and-wafer-preparation',
-  'process-wafer-cleaning-surface-preparation': 'wafer-cleaning-and-surface-preparation',
-  'process-thermal-oxidation-diffusion': 'thermal-oxidation-diffusion-and-furnace-processing',
-  'process-wafer-sort': 'wafer-acceptance-test-and-wafer-sort',
-  'process-wafer-thinning-dicing': 'wafer-thinning-dicing-and-die-handling',
-  'process-package-substrates-rdl': 'package-substrates-and-redistribution-layers',
-  'process-wire-bond-flip-chip': 'wire-bonding-and-flip-chip-interconnect',
-  'process-encapsulation-underfill-molding': 'underfill-molding-and-package-encapsulation',
-  'process-final-burn-in-system-test': 'final-test-burn-in-and-system-level-test',
-}
-
-/** Resolve one declared process identifier to a route, or to nothing. */
-function processRoute(processId: string): string[] {
-  const slug = PROCESS_ID_TO_SLUG[processId]
-  return slug ? [`/knowledge/processes/${slug}`] : []
-}
-
 /* ---------------------------------------------------------------- suppliers --- */
 for (const sup of KNOWLEDGE_SUPPLIERS as unknown as Any[]) {
   inputs.push({
@@ -340,14 +224,6 @@ for (const group of comparisonFamilies) {
 
 /* ------------------------------------------------------------------ compile --- */
 
-const attestationsByPage = Object.fromEntries(
-  [...attested.entries()].filter(([id]) => !VENDOR_AUTHORED_SOURCES.has(id)).map(([id, a]) => [id, {
-    sourceId: id, retrievedFrom: a.retrievedFrom, retrievedOn: a.retrievedOn,
-    depth: a.depth as never, exactLocator: a.exactLocator, observedContent: a.observedContent,
-    identityVerified: a.identityVerified, identityBasis: 'recorded at inspection',
-    subjectAligned: a.subjectAligned, subjectBasis: 'recorded at inspection',
-    versionRelationship: a.versionRelationship, rightsBasis: a.rightsBasis,
-  }]))
 /**
  * Fill in typed related records by co-citation.
  *
@@ -392,7 +268,7 @@ const withBatch1 = inputs.map((input) => {
       }))],
     }
   }
-  const added = batch1ByRoute.get(input.route)
+  const added = routeScopedByRoute.get(input.route)
   if (!added) return input
   return {
     ...input,
@@ -402,41 +278,8 @@ const withBatch1 = inputs.map((input) => {
     }))],
   }
 })
-const batch1Attestations = Object.fromEntries([...(batch1.inspected as Batch1[]), ...(batch2.inspected as unknown as Batch1[]), ...(batch3.inspected as unknown as Batch1[]), ...(batch4Flattened as unknown as Batch1[])].map((entry) => [entry.sourceId, {
-  sourceId: entry.sourceId, retrievedFrom: entry.retrievedFrom, retrievedOn: entry.retrievedOn,
-  depth: entry.depth as never, exactLocator: entry.exactLocators.join('; '),
-  observedContent: entry.observedContent, identityVerified: entry.identityVerified,
-  identityBasis: 'recorded at inspection', subjectAligned: true,
-  subjectBasis: 'route-scoped: the source was checked against this page subject',
-  versionRelationship: entry.versionRelationship, rightsBasis: entry.rightsBasis,
-}]))
-type InspectedSource = {
-  sourceId: string; exactLocators: string[]; establishes: string
-  retrievedFrom: string; retrievedOn: string; versionRelationship: string; rightsBasis: string
-}
-// Batch 12 joins the attestation map. A source with no claimByClaimSupport
-// attaches to no route, so an inspected source that supports nothing here --
-// NARA's document-analysis method -- stays inspected and unused rather than
-// being stretched onto claims it does not state.
-const inspectedSources = [...batch8.inspected, ...batch9.inspected, ...batch12.inspected] as unknown as InspectedSource[]
-const batch8Attestations = Object.fromEntries(inspectedSources.map((entry) => [entry.sourceId, {
-  sourceId: entry.sourceId, retrievedFrom: entry.retrievedFrom, retrievedOn: entry.retrievedOn,
-  depth: 'section-or-full-text' as never, exactLocator: entry.exactLocators.join('; '),
-  observedContent: entry.establishes, identityVerified: true,
-  identityBasis: 'verified at inspection against the cited identifier',
-  subjectAligned: true, subjectBasis: 'route-scoped per claim',
-  versionRelationship: entry.versionRelationship, rightsBasis: entry.rightsBasis,
-}]))
-const reuseAttestations = Object.fromEntries((reuse.accepted as Record<string, string>[]).map((entry) => [entry.sourceId, {
-  sourceId: entry.sourceId, retrievedFrom: `locator:${entry.exactLocator}`, retrievedOn: '2026-09-03',
-  depth: 'section-or-full-text' as never, exactLocator: entry.exactLocator,
-  observedContent: entry.supportingPassage, identityVerified: true,
-  identityBasis: 'inspected in an earlier batch; identity and version carried forward unchanged',
-  subjectAligned: true, subjectBasis: entry.whyItMatches,
-  versionRelationship: entry.version, rightsBasis: entry.rightsBasis,
-}]))
 const results = withBatch1.map((input) => compileUplift(
-  { ...input, attestations: { ...attestationsByPage, ...batch1Attestations, ...reuseAttestations, ...batch8Attestations } }, 6))
+  { ...input, attestations: buildAttestations() }, 6))
 const eligible = results.filter((r) => r.eligible)
 const blocked = results.filter((r) => !r.eligible)
 const governed = results.filter((r) => r.requiresGovernedRevision)
@@ -482,59 +325,19 @@ const depth = {
  * Structural and source-supported are never summed into one quality headline,
  * because a page that gained shape and a page that gained evidence are not the
  * same achievement and the difference is the whole point of measuring.
- */
-/**
- * First-party pages are counted in their own state and nowhere else.
  *
- * They are deliberately not added to eligible, because eligibility here means
- * the uplift gate passed on independent evidence. A supplier profile carrying
- * its own company's documentation is useful and is not that.
+ * First-party pages are counted in their own state and nowhere else. They are
+ * deliberately not added to eligible, because eligibility here means the uplift
+ * gate passed on independent evidence. A supplier profile carrying its own
+ * company's documentation is useful and is not that.
  */
-/**
- * Vendor-authored sources, which can never confer independent support.
- *
- * These three were inspected in Batch 1, before the first-party tier existed,
- * and their pages were counted as independently supported ever since. A company
- * describing its own products is first-party evidence whenever it was read.
- */
-const VENDOR_AUTHORED = new Set(['asml-lithography', 'tel-process-equipment', 'amkor-3d-stack', 'advantest-products-overview'])
-
-const vendorBackedRoutes = new Set(
-  (attestationFile.attestations as { sourceId: string }[])
-    .filter((a) => VENDOR_AUTHORED.has(a.sourceId))
-    .flatMap((a) => (compiledRoutesFor(a.sourceId))))
-
-function compiledRoutesFor(sourceId: string): string[] {
-  const map: Record<string, string[]> = {
-    'asml-lithography': ['/knowledge/suppliers/asml'],
-    'tel-process-equipment': ['/knowledge/suppliers/tokyo-electron'],
-    'amkor-3d-stack': ['/knowledge/suppliers/amkor-technology'],
-    // Batch 13. Giving this catalogue a declared scope made the page eligible,
-    // which would otherwise have moved it out of the first-party state and
-    // dropped its disclosure. A vendor describing its own catalogue confers no
-    // independent support however well scoped it is.
-    'advantest-products-overview': ['/knowledge/suppliers/advantest'],
-  }
-  return map[sourceId] ?? []
-}
+const vendorBackedRoutes = vendorBackedSupplierRoutes(
+  withBatch1 as unknown as { route: string; sources: { id: string }[] }[])
 
 const firstPartyRoutes = new Set(
   (supplierFirstParty.inspected as { route: string; eligible: boolean }[])
     .filter((entry) => entry.eligible).map((entry) => entry.route))
 for (const route of vendorBackedRoutes) firstPartyRoutes.add(route)
-// A supplier page citing the vendor's own documentation is first-party whether
-// or not that source carries an attestation. Without this, giving a vendor
-// catalogue a declared scope moves the page out of the first-party state and
-// drops its disclosure -- the page becomes more documented and less labelled.
-// Scoped to supplier routes so it cannot capture an equipment or process page.
-for (const input of withBatch1) {
-  if (!input.route.startsWith('/knowledge/suppliers/')) continue
-  const ids = (input.sources as unknown as { id: string }[]).map((x) => x.id)
-  if (ids.some((id) => VENDOR_AUTHORED.has(id))) {
-    vendorBackedRoutes.add(input.route)
-    firstPartyRoutes.add(input.route)
-  }
-}
 
 const sourceSupportedPages = eligible.filter((r) =>
   (r.after?.explanatorySources ?? 0) > 0 && !vendorBackedRoutes.has(r.route))
