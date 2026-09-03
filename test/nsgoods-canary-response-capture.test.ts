@@ -273,9 +273,8 @@ test('the canary persists the paid response before it judges anything', () => {
     'if (challengeCount !== 1 || signatureCount !== 1)',
     'if (captured.status !== 200)',
     'const body = parseCapturedJson(captured)',
-    'const afterBalance = await balanceOf(account.address)',
-    'if (debited !== BigInt(EXPECTED_AMOUNT))',
-    'settlement.success !== true',
+    'await confirmCanarySettlement(',
+    'if (!confirmation.passed)',
     'await writeFile(evidencePath',
   ]) {
     assert.ok(capture < at(laterCheck), `${laterCheck} must run only after the bytes are persisted`)

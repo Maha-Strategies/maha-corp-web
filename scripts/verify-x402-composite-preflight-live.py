@@ -21,6 +21,12 @@ spec.loader.exec_module(v3)
 
 SUBJECT = {"address": "0xec84c1cd6602bbe387bc8e6f0d3c062f2762de28", "chain": "eip155:8453", "role": "payee"}
 
+# Bumped with the canary's settlement evidence. A 1.0 file carries only the
+# racing one-shot balance delta, which could reject a good asynchronous
+# settlement and could not bind a debit to a transaction, so it is refused here
+# rather than silently accepted as if it proved the same thing.
+PAYMENT_EVIDENCE_SCHEMA = "maha-nsgoods-preflight-live-canary/1.1"
+
 
 def load(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
@@ -63,9 +69,24 @@ def main() -> int:
 
     response_bytes = args.response.read_bytes()
     v3.expect(hashlib.sha256(response_bytes).hexdigest() == payment["responseSha256"], "response digest differs from payment evidence")
+    v3.expect(payment.get("schemaVersion") == PAYMENT_EVIDENCE_SCHEMA, "payment evidence schema version is not the confirmed-settlement one")
     paid = payment["payment"]
     v3.expect(paid["amountBaseUnits"] == "15000" and paid["debitedBaseUnits"] == "15000", "settlement amount mismatch")
     v3.expect(payment["execution"] == {"challengeCount": 1, "signatureCount": 1, "paidHttpStatus": 200}, "execution cardinality mismatch")
+
+    # The settlement is only established when the chain agrees, bound to the
+    # transaction the receipt declared. A receipt saying "success", a balance
+    # that moved, or a run that simply could not reach a node are each refused:
+    # "unconfirmed" and "unknown" are honest states, not passing ones.
+    settlement = payment["settlement"]
+    v3.expect(settlement["state"] == "confirmed", f"settlement state is {settlement['state']}, not confirmed")
+    v3.expect(settlement["evidence"] == "transaction", "settlement was not bound to an on-chain transaction")
+    v3.expect(settlement["confirmedOnChain"] is True, "settlement was not confirmed on chain")
+    v3.expect(settlement["reason"] == "settlement_confirmed", "settlement reason is not a confirmation")
+    v3.expect(settlement["amountBaseUnits"] == "15000", "confirmed transfer amount is not the authorized price")
+    v3.expect(settlement["debitedBaseUnits"] == "15000", "reconciled wallet debit is not the authorized price")
+    v3.expect(settlement["transaction"] == paid["transaction"], "confirmed transaction differs from the recorded settlement")
+    v3.expect(settlement["elapsedMs"] <= settlement["window"]["timeoutMs"], "settlement confirmation exceeded its own window")
 
     report = {
         "auditKind": "paid-live-implementation-canary",
@@ -80,6 +101,14 @@ def main() -> int:
             "network": paid["network"], "asset": paid["asset"], "payTo": paid["payTo"],
             "amountBaseUnits": paid["amountBaseUnits"], "amountUsdc": paid["amountUsdc"],
             "buyer": paid["buyer"], "transaction": paid["transaction"],
+            "onChainConfirmation": {
+                "state": settlement["state"],
+                "evidence": settlement["evidence"],
+                "amountBaseUnits": settlement["amountBaseUnits"],
+                "blockNumber": settlement.get("blockNumber"),
+                "elapsedMs": settlement["elapsedMs"],
+                "windowTimeoutMs": settlement["window"]["timeoutMs"],
+            },
         },
         "verification": {
             **signature_counts,
@@ -92,6 +121,8 @@ def main() -> int:
             "responseDigestMatched": True,
             "exactlyOneChallengeAndSignature": True,
             "exactDebitVerified": True,
+            "onChainTransferConfirmed": True,
+            "settlementBoundToTransaction": True,
             "pinnedOfflineFixtureAuditPassed": True,
         },
         "boundary": {
