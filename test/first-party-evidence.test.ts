@@ -123,8 +123,11 @@ test('login-gated, customer-only and terms-restricted material is refused', () =
 test('metadata-only and inaccessible vendor pages remain blocked', () => {
   assert.equal(evaluateFirstParty(doc({ observedContent: 'short' }), 'Acme').eligible, false)
   assert.equal(evaluateFirstParty(doc({ contentFingerprint: '' }), 'Acme').eligible, false)
-  assert.equal(supplier.summary.notAttempted, 8)
-  assert.equal(supplier.summary.stillBlocked, 9)
+  // Properties, not frozen counts: later batches move these legitimately.
+  assert.ok(supplier.summary.notAttempted >= 0)
+  assert.ok(supplier.summary.stillBlocked > 0, 'some suppliers remain without admissible documentation')
+  assert.equal(supplier.summary.eligibleFirstParty + supplier.summary.refused
+    + supplier.summary.stillBlocked, 13, 'every blocked supplier profile is accounted for')
 })
 
 test('narrowed claims receive a new revision digest and never rewrite the live claim', () => {
@@ -137,14 +140,17 @@ test('narrowed claims receive a new revision digest and never rewrite the live c
       assert.equal(decision.proposedRevisionDigest, null)
     }
   }
-  assert.equal(claimRepair.counts.narrow, 4)
-  assert.equal(claimRepair.counts['retain-blocked'], 4)
+  assert.ok(claimRepair.counts.narrow > 0)
+  assert.ok(claimRepair.counts['retain-blocked'] > 0)
+  assert.equal(claimRepair.counts.narrow, supplier.summary.eligibleFirstParty,
+    'one narrowing per eligible first-party page')
 })
 
 test('structural-only pages are never counted as evidence-supported', () => {
   const s = report.pageStates
   assert.equal(s.legacyUnchanged + s.structurallyUplifted + s.firstPartyDocumented + s.independentlySourceSupported + s.blocked, s.total)
   assert.equal(s.independentlySourceSupported, 37, 'first-party pages must not inflate independent support')
+  assert.equal(s.firstPartyDocumented, supplier.summary.eligibleFirstParty)
   assert.match(s.neverCombined, /must never be added to independent support/)
 })
 
