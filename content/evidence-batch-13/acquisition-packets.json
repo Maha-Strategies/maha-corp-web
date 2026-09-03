@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "maha-acquisition-packets/1.0",
+  "batch": "public-claim-remediation-13",
+  "generatedOn": "2026-09-03",
+  "appendOnly": true,
+  "writtenToProduction": false,
+  "deterministic": true,
+  "scope": "The pages from the fifteen-page audit not covered by the twenty-five highest-risk assertions.",
+  "statusPreserved": "unsupported",
+  "packets": [
+    { "sourceId": "nih-neuroethics", "publisher": "National Institutes of Health", "expectedBasis": "government-or-standards-authority", "claimsAwaiting": 6, "whatToLookFor": "Whether NIH neuroethics guidance states a lifecycle for biological-material governance, and whether it addresses organoid or hybrid-system oversight specifically." },
+    { "sourceId": "nccih-meditation", "publisher": "National Center for Complementary and Integrative Health", "expectedBasis": "government-or-standards-authority", "claimsAwaiting": 5, "whatToLookFor": "Whether NCCIH states what meditation studies can and cannot establish, and any explicit limits on operationalising contemplative outcomes." },
+    { "sourceId": "organoid-intelligence", "publisher": "peer-reviewed literature", "expectedBasis": "independent-scientific-or-technical", "claimsAwaiting": 4, "whatToLookFor": "Whether the source addresses scaling effects on behaviour, which is currently an unresolved causal claim." },
+    { "sourceId": "unesco-ich-convention", "publisher": "UNESCO", "expectedBasis": "government-or-standards-authority", "claimsAwaiting": 4, "whatToLookFor": "Whether the convention text supports the page's statements about intangible heritage and community categories, at the scope stated." },
+    { "sourceId": "tei-guidelines", "publisher": "Text Encoding Initiative", "expectedBasis": "government-or-standards-authority", "claimsAwaiting": 3, "whatToLookFor": "Whether TEI's critical-apparatus module supports the manuscript and textual-criticism claims, which are textual rather than historical." },
+    { "sourceId": "loc-primary-sources", "publisher": "Library of Congress", "expectedBasis": "government-or-standards-authority", "claimsAwaiting": 3, "whatToLookFor": "The analysis stages, if a lawful route becomes available. Direct retrieval returned HTTP 403 and was not circumvented." },
+    { "sourceId": "icomos-charters", "publisher": "ICOMOS", "expectedBasis": "government-or-standards-authority", "claimsAwaiting": 2, "whatToLookFor": "Whether the charters address provenance and chain of custody as the page states." },
+    { "sourceId": "dishbrain", "publisher": "peer-reviewed literature", "expectedBasis": "independent-scientific-or-technical", "claimsAwaiting": 2, "whatToLookFor": "What the study measured, and its own stated limits on inference to intelligence or learning." }
+  ],
+  "familyIndexRule": "Family index pages must not imply evidence-backed status for a page whose state is structural or blocked. The index renders no evidence badge, so an unsupported page is not advertised as supported.",
+  "publicExposureRule": "No private audit label, disposition, risk score or review rationale is rendered. The reader sees the page; the audit stays here.",
+  "noSilentRemoval": "No public content was removed in this batch.",
+  "boundary": "Packets say what to look for and what each source is expected to be able to establish. None asserts that a source will support anything."
+}

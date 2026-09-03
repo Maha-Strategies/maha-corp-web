@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "maha-first-party-outcomes/1.0",
+  "batch": "public-claim-remediation-13",
+  "inspectedOn": "2026-09-03",
+  "appendOnly": true,
+  "writtenToProduction": false,
+  "cohortDigest": "sha256:869a161097c43b36",
+  "rule": "Deepen only where the additional document supplies distinct technical information. Otherwise leave the page thin.",
+  "outcomes": [
+    {
+      "route": "/knowledge/suppliers/advantest",
+      "outcome": "deepened",
+      "documentInspected": "Products and Solutions, Advantest, retrieved 2026-09-03",
+      "distinctTechnicalInformation": [
+        "Four named product families: V93000 EXA Scale, T5801, ACS Gemini, SiConic.",
+        "Named device coverage: system-on-chip devices, and DRAM including GDDR7, LPDDR6 and DDR5.",
+        "Named test stages already on the page: wafer test, final test, burn-in, system-level test."
+      ],
+      "excludedAndWhy": [
+        "The descriptor 'Ultra-High-Speed' applied to the T5801 was excluded as a superlative.",
+        "'next-generation' was kept only inside an explicitly attributed sentence, never as a page assertion.",
+        "No market-position or leadership wording was carried over.",
+        "No reliability, yield or comparative-performance statement was drawn from a vendor catalogue."
+      ],
+      "numericalStatements": "None. The catalogue publishes no numerical specifications, and the page now says so rather than leaving the absence unremarked.",
+      "beforeAfter": { "claimsBefore": 0, "claimsAfter": 5, "stateBefore": "first-party-documented-but-thin", "stateAfter": "first-party-documented-and-substantial" },
+      "disclosurePreserved": true
+    },
+    {
+      "route": "/knowledge/suppliers/lam-research",
+      "outcome": "left-thin",
+      "documentInspected": "Products, Lam Research, retrieved 2026-09-03",
+      "reason": "The page is a navigation hub. It lists product and process names and links onward, and states no process step, material, configuration or specification. Nothing distinct was available to add, so the page was left thin rather than filled with a list of link labels.",
+      "disclosurePreserved": true
+    },
+    { "route": "/knowledge/suppliers/asml", "outcome": "not-reached", "reason": "Not inspected in this batch." },
+    { "route": "/knowledge/suppliers/tsmc", "outcome": "not-reached", "reason": "Not inspected in this batch." },
+    { "route": "/knowledge/suppliers/tokyo-electron", "outcome": "not-reached", "reason": "Not inspected in this batch." }
+  ],
+  "summary": { "cohort": 5, "deepened": 1, "leftThin": 1, "notReached": 3 },
+  "boundary": "One page of five was deepened. First-party documentation establishes what a company publishes about its own products and never independent measurement, reliability, yield or comparison."
+}

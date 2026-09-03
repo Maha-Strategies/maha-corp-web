@@ -30,6 +30,15 @@ export interface KnowledgeSource {
   year?: number
   sourceType: 'official-technical' | 'official-overview' | 'research-paper' | 'standard'
   accessed: string
+  /**
+   * What an inspected source establishes, and what it cannot.
+   *
+   * Optional because most entries here are declared citations nobody has read.
+   * A source without these is not citable as explanatory support, which is the
+   * correct default: an unread source establishes nothing.
+   */
+  establishes?: string
+  boundary?: string
 }
 
 export interface KnowledgeClaim extends ClaimEvidence {
@@ -93,6 +102,7 @@ export const SEMICONDUCTOR_STAGE_META: Record<SemiconductorStageId, { order: num
 }
 
 export const KNOWLEDGE_SOURCES: KnowledgeSource[] = [
+  { id: 'advantest-products-overview', title: 'Products and Solutions', publisher: 'Advantest', url: 'https://www.advantest.com/en/products/', sourceType: 'official-technical', accessed: '2026-09-03', establishes: 'Which test systems Advantest names in its own catalogue and which device types the company states each addresses.', boundary: 'A vendor catalogue. It establishes what Advantest publishes about its own products and nothing about measured performance, reliability, yield, adoption or comparison with any other supplier. The page carries no numerical specifications.' },
   { id: 'synopsys-chip-design', title: 'Chip Design', publisher: 'Synopsys', url: 'https://www.synopsys.com/implementation-and-signoff.html', sourceType: 'official-technical', accessed: '2026-08-13' },
   { id: 'synopsys-ic-design', title: 'What Is IC Design?', publisher: 'Synopsys', url: 'https://www.synopsys.com/glossary/what-is-ic-design.html', sourceType: 'official-overview', accessed: '2026-08-13' },
   { id: 'synopsys-rtl-design', title: 'What Is Register-Transfer-Level Design?', publisher: 'Synopsys', url: 'https://www.synopsys.com/glossary/what-is-register-transfer-level-design.html', sourceType: 'official-technical', accessed: '2026-08-13' },
