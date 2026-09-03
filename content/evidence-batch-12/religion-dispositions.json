@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "maha-religion-dispositions/1.0",
+  "batch": "unsupported-remediation-12",
+  "decidedOn": "2026-09-03",
+  "appendOnly": true,
+  "writtenToProduction": false,
+  "proposedRevisionsActive": false,
+  "context": "The Batch 11 pilot supported one page, /knowledge/religion/translation-and-semantic-drift, on primary-textual evidence. These are the five that remained.",
+  "rule": "No evidence basis carries a theological truth claim, and a textual passage cannot establish historical occurrence or empirical effect. Where a page mixes frames, the claim is split rather than graded down as a whole.",
+  "dispositions": [
+    {
+      "route": "/knowledge/religion/canon-formation-and-textual-transmission",
+      "evidenceRequired": ["historical", "textual"],
+      "disposition": "locate-frame-appropriate-scholarship",
+      "reasoning": "Which texts entered a canon, and when, is a historical question about councils, lists and manuscript circulation. A primary text cannot report its own canonisation. This needs secondary historical scholarship, which was not acquired in this batch.",
+      "outcome": "Remains structurally uplifted and unsupported. Not blocked: the evidence exists in the literature and was not sought here."
+    },
+    {
+      "route": "/knowledge/religion/manuscript-evidence-and-textual-criticism",
+      "evidenceRequired": ["textual", "historical"],
+      "disposition": "split-mixed-frame-claims",
+      "reasoning": "Two different claims sit together. What a given manuscript reads at a folio is textual and could be established from a digitised manuscript. Which reading is earlier is a historical argument requiring scholarship. Presenting both under one heading lets the second borrow the first's certainty.",
+      "outcome": "Proposed split recorded and inactive. The textual half is the tractable one and is the best next target."
+    },
+    {
+      "route": "/knowledge/religion/doctrine-and-doctrinal-development",
+      "evidenceRequired": ["historical", "theological"],
+      "disposition": "narrow-the-claim",
+      "reasoning": "How a doctrine changed over time is historical. Whether the doctrine is true is theological, and no basis carries it. The page can describe formulations and their sequence; it cannot adjudicate them.",
+      "outcome": "Proposed narrowing recorded and inactive: describe formulations as attested, never as correct."
+    },
+    {
+      "route": "/knowledge/religion/contemplative-practice-and-first-person-experience",
+      "evidenceRequired": ["first-person", "empirical"],
+      "disposition": "narrow-the-claim",
+      "reasoning": "A first-person report establishes that the report was made, not that its content is accurate. Any claim about physiological or psychological effect is empirical and needs a study. The page currently reads as though practice descriptions carry effects.",
+      "outcome": "Proposed narrowing recorded and inactive. Also in the Part 2 audit cohort with 5 unsupported claims."
+    },
+    {
+      "route": "/knowledge/religion/genre-rhetoric-and-context",
+      "evidenceRequired": ["textual", "interpretive"],
+      "disposition": "retain-structural-only",
+      "reasoning": "Genre classification is an interpretive scholarly operation. It is not false, but it is not the kind of thing a passage makes true, and dressing it as textual support would misdescribe it.",
+      "outcome": "Retained as structural. Honest and correctly labelled."
+    }
+  ],
+  "refusedCertifications": [
+    "That any doctrine is true or false. No basis carries a theological claim.",
+    "That any described event occurred, on the strength of a text describing it.",
+    "That contemplative practice produces any measured effect, absent a study."
+  ],
+  "summary": {
+    "locateScholarship": 1,
+    "splitMixedFrame": 1,
+    "narrowTheClaim": 2,
+    "retainStructural": 1,
+    "retainBlocked": 0,
+    "rejectUnsupportable": 0,
+    "convertedThisBatch": 0
+  },
+  "boundary": "Five dispositions and zero conversions. Each records what evidence the page would need; none claims the page now has it."
+}

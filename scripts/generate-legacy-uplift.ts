@@ -19,6 +19,7 @@ import supplierFirstParty from '../content/evidence-batch-5/supplier-first-party
 import reuse from '../content/evidence-batch-7/reuse-audit.json' with { type: 'json' }
 import batch8 from '../content/evidence-batch-8/inspections.json' with { type: 'json' }
 import batch9 from '../content/evidence-batch-9/inspections.json' with { type: 'json' }
+import batch12 from '../content/evidence-batch-12/inspections.json' with { type: 'json' }
 
 /**
  * Reuse of already-inspected evidence, applied per route.
@@ -28,7 +29,7 @@ import batch9 from '../content/evidence-batch-9/inspections.json' with { type: '
  */
 const reuseByRoute = new Map<string, { sourceId: string; exactLocator: string; supportingPassage: string; limitationsCarried: string; rightsBasis: string; sourceTitle: string; version: string }[]>()
 // Batch 8 names support per claim, so each route carries its own passage.
-for (const source of [...batch8.inspected, ...batch9.inspected] as unknown as { sourceId: string; title: string; versionRelationship: string; rightsBasis: string; boundary: string; claimByClaimSupport: { route: string; locator: string; supportingPassage: string }[] }[]) {
+for (const source of [...batch8.inspected, ...batch9.inspected, ...batch12.inspected] as unknown as { sourceId: string; title: string; versionRelationship: string; rightsBasis: string; boundary: string; claimByClaimSupport: { route: string; locator: string; supportingPassage: string }[] }[]) {
   for (const claim of source.claimByClaimSupport) {
     reuseByRoute.set(claim.route, [...(reuseByRoute.get(claim.route) ?? []), {
       sourceId: source.sourceId, exactLocator: claim.locator,
@@ -310,7 +311,10 @@ for (const group of comparisonFamilies) {
     inputs.push({
       family: `${group.family}-comparisons`, slug: String(cmp.slug),
       route: `${group.base}/${String(cmp.slug)}`,
-      title: String(cmp.title), definition: str(cmp.question), description: str(cmp.question),
+      title: String(cmp.title),
+      // The question stood in for the answer, so these pages asked something
+      // and answered nothing. Prefer a written answer where one exists.
+      definition: str(cmp.answer) ?? str(cmp.question), description: str(cmp.question),
       mechanism: [...arr(cmp.comparisonMethod), ...arr(cmp.procedure)],
       measurements: arr(cmp.sharedAxes).length > 0 ? arr(cmp.sharedAxes) : arr(cmp.comparableAxes),
       limitations: arr(cmp.nonEquivalences),
@@ -405,7 +409,11 @@ type InspectedSource = {
   sourceId: string; exactLocators: string[]; establishes: string
   retrievedFrom: string; retrievedOn: string; versionRelationship: string; rightsBasis: string
 }
-const inspectedSources = [...batch8.inspected, ...batch9.inspected] as unknown as InspectedSource[]
+// Batch 12 joins the attestation map. A source with no claimByClaimSupport
+// attaches to no route, so an inspected source that supports nothing here --
+// NARA's document-analysis method -- stays inspected and unused rather than
+// being stretched onto claims it does not state.
+const inspectedSources = [...batch8.inspected, ...batch9.inspected, ...batch12.inspected] as unknown as InspectedSource[]
 const batch8Attestations = Object.fromEntries(inspectedSources.map((entry) => [entry.sourceId, {
   sourceId: entry.sourceId, retrievedFrom: entry.retrievedFrom, retrievedOn: entry.retrievedOn,
   depth: 'section-or-full-text' as never, exactLocator: entry.exactLocators.join('; '),

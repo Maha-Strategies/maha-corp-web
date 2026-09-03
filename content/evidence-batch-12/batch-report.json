@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "maha-batch-12-report/1.0",
+  "batch": "unsupported-remediation-12",
+  "completedOn": "2026-09-03",
+  "appendOnly": true,
+  "writtenToProduction": false,
+  "primaryTarget": {
+    "metric": "substantial-and-evidence-backed",
+    "before": 27,
+    "after": 31,
+    "evidenceDriven": 4,
+    "defectDriven": 0,
+    "breakdown": [
+      {
+        "route": "/knowledge/neuromorphic-biocomputing/spiking-neural-networks",
+        "cause": "newly-inspected-evidence",
+        "source": "neurobench-2304-04640"
+      },
+      {
+        "route": "/knowledge/neuromorphic-biocomputing/neuromorphic-computing",
+        "cause": "newly-inspected-evidence",
+        "source": "neurobench-2304-04640"
+      },
+      {
+        "route": "/knowledge/neuromorphic-biocomputing/comparisons/digital-and-mixed-signal-neuromorphic-hardware",
+        "cause": "improved-source-bound-explanation",
+        "source": "the page's own bounded-comparison passages"
+      },
+      {
+        "route": "/knowledge/neuromorphic-biocomputing/comparisons/silicon-energy-and-biological-metabolic-cost",
+        "cause": "improved-source-bound-explanation",
+        "source": "the page's own bounded-comparison passages"
+      }
+    ]
+  },
+  "depthDistribution": {
+    "structurally-substantial-but-unsupported": 84,
+    "substantial-and-evidence-backed": 31,
+    "blocked": 28,
+    "first-party-documented-but-thin": 10,
+    "structurally-thin": 14
+  },
+  "claimAudit": {
+    "pagesAudited": 15,
+    "totalClaims": 165,
+    "statuses": {
+      "supported-as-written": 0,
+      "supportable-after-narrowing": 0,
+      "unsupported": 67,
+      "contradicted": 0,
+      "interpretive": 53,
+      "navigation-or-non-factual": 45
+    },
+    "correction": "A first pass classified 120 claims unsupported by treating every line as an assertion. Statements such as 'Similarity is not descent.' and 'Must not be read as: ...' limit what may be inferred rather than asserting anything; counting the corpus's own carefulness as a defect overstated the problem by 53 claims. The honest figure is 67."
+  },
+  "evidenceAcquisition": {
+    "sourcesInspected": 2,
+    "supportingClaims": 1,
+    "supportedAsWritten": 4,
+    "requiringNarrowing": 1,
+    "refusedRoutes": 1
+  },
+  "boundary": "Two sources were inspected against claims frozen before searching. Four pages converted, all through evidence or an improved source-bound explanation, and none through a defect fix."
+}

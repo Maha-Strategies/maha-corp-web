@@ -2,19 +2,19 @@
   "schemaVersion": "maha-legacy-uplift-report/2.0",
   "pageStates": {
     "legacyUnchanged": 0,
-    "structurallyUplifted": 100,
+    "structurallyUplifted": 98,
     "firstPartyDocumented": 10,
-    "independentlySourceSupported": 29,
+    "independentlySourceSupported": 31,
     "blocked": 28,
     "total": 167,
     "neverCombined": "structurallyUplifted, firstPartyDocumented and independentlySourceSupported are reported separately. First-party documentation is an organisation describing itself and must never be added to independent support in one evidentiary figure.",
-    "sourceSupportedUplift": 29
+    "sourceSupportedUplift": 31
   },
   "informationValue": {
-    "inspectedClaimsPerPage": 0.23,
-    "inspectedLocatorsPerPage": 0.23,
-    "declaredLocatorsPerPage": 2,
-    "independentlySourcedExplanatorySections": 29,
+    "inspectedClaimsPerPage": 0.25,
+    "inspectedLocatorsPerPage": 0.25,
+    "declaredLocatorsPerPage": 2.02,
+    "independentlySourcedExplanatorySections": 31,
     "informationDimensionsPerPage": 8.68,
     "limitationsPerPage": 1,
     "typedInternalLinksPerPage": 5.43,
@@ -73,8 +73,8 @@
   "outcome": {
     "eligibleAndUpgraded": 132,
     "upgradeQuality": {
-      "sourceSupported": 29,
-      "structuralOnly": 103,
+      "sourceSupported": 31,
+      "structuralOnly": 101,
       "note": "Structural means the page now carries the substantial shape, composed from evidence its family already stored. It does not mean any source was independently inspected. Only the source-supported count reflects inspected evidence."
     },
     "blocked": 35,
@@ -94,19 +94,19 @@
   "depth": {
     "before": {
       "dimensions": 7.23,
-      "sourcesWithBoundary": 1.58,
-      "declaredLocators": 1.58,
-      "contentInspectedLocators": 0.18,
-      "explanatorySources": 0.18,
+      "sourcesWithBoundary": 1.6,
+      "declaredLocators": 1.6,
+      "contentInspectedLocators": 0.2,
+      "explanatorySources": 0.2,
       "internalLinks": 5.13,
       "renderedSections": 6
     },
     "after": {
       "dimensions": 8.68,
-      "sourcesWithBoundary": 2,
-      "declaredLocators": 2,
-      "contentInspectedLocators": 0.23,
-      "explanatorySources": 0.23,
+      "sourcesWithBoundary": 2.02,
+      "declaredLocators": 2.02,
+      "contentInspectedLocators": 0.25,
+      "explanatorySources": 0.25,
       "internalLinks": 5.43,
       "renderedSections": 6.86
     },
@@ -116,5 +116,5 @@
   "routesChanged": 0,
   "duplicatePagesAdded": 0,
   "boundary": "A private compilation report. It contains no audit data, review packet, rejected material or credential.",
-  "reportDigest": "sha256:f1b2cd773849b2891414ba5a28dc3b5230a95e5a2e3b6f159f0a89440eac0588"
+  "reportDigest": "sha256:6f6acbfd9c48b8e533ec0da1c96e30749fd35f22b7d68676fcd37ef3832dcfef"
 }

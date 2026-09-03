@@ -8,19 +8,17 @@
   "denominatorEqualsCorpus": true,
   "supersedesBatch9Audit": "Batch 9 audited 59 pages and stated a result against 167. This audits all 167.",
   "depthDistribution": {
-    "structurally-substantial-but-unsupported": 86,
-    "substantial-and-evidence-backed": 27,
+    "structurally-substantial-but-unsupported": 84,
+    "substantial-and-evidence-backed": 31,
     "blocked": 28,
     "first-party-documented-but-thin": 10,
-    "structurally-thin": 14,
-    "evidence-backed-but-thin": 2
+    "structurally-thin": 14
   },
   "byGroup": {
     "independentlySupported": {
-      "audited": 29,
+      "audited": 31,
       "states": {
-        "substantial-and-evidence-backed": 27,
-        "evidence-backed-but-thin": 2
+        "substantial-and-evidence-backed": 31
       }
     },
     "firstPartyDocumented": {
@@ -30,9 +28,9 @@
       }
     },
     "structuralOnly": {
-      "audited": 100,
+      "audited": 98,
       "states": {
-        "structurally-substantial-but-unsupported": 86,
+        "structurally-substantial-but-unsupported": 84,
         "structurally-thin": 14
       }
     },
@@ -43,23 +41,8 @@
       }
     }
   },
-  "substantialAndEvidenceBacked": 27,
-  "thinnestSupported": [
-    {
-      "route": "/knowledge/neuromorphic-biocomputing/comparisons/silicon-energy-and-biological-metabolic-cost",
-      "score": 12.59,
-      "reasons": [
-        "direct answer too short to answer anything"
-      ]
-    },
-    {
-      "route": "/knowledge/neuromorphic-biocomputing/comparisons/digital-and-mixed-signal-neuromorphic-hardware",
-      "score": 12.7,
-      "reasons": [
-        "direct answer too short to answer anything"
-      ]
-    }
-  ],
+  "substantialAndEvidenceBacked": 31,
+  "thinnestSupported": [],
   "verdicts": [
     {
       "route": "/knowledge/astronomy/coordinates-reference-frames-and-sky-position",
@@ -1623,51 +1606,51 @@
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/neuromorphic-computing",
-      "state": "structurally-substantial-but-unsupported",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 397,
         "hasMechanismOrDerivation": true,
         "hasTechnicalContext": true,
         "explanatoryClaims": 9,
-        "claimsWithPassage": 0,
-        "exactLocators": 0,
+        "claimsWithPassage": 1,
+        "exactLocators": 1,
         "limitations": 2,
-        "unresolvedQuestions": 3,
+        "unresolvedQuestions": 4,
         "supportedComparisons": 1,
         "reproducibleCalculations": 0,
         "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 257
+        "wordCountDiagnostic": 302
       },
-      "substantialityScore": 12.3,
+      "substantialityScore": 14.3,
       "reasons": [],
-      "verdictDigest": "sha256:1ba13217457de57b4ae22a94357f4d7372263354961e32e49c110be3a98efd2e"
+      "verdictDigest": "sha256:571aacff23e6ff278ffaa0804e06c147c16e9b6ae21f611dc3b12c7eca0ff052"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/spiking-neural-networks",
-      "state": "structurally-substantial-but-unsupported",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 399,
         "hasMechanismOrDerivation": true,
         "hasTechnicalContext": true,
         "explanatoryClaims": 9,
-        "claimsWithPassage": 0,
-        "exactLocators": 0,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
         "limitations": 2,
-        "unresolvedQuestions": 2,
+        "unresolvedQuestions": 4,
         "supportedComparisons": 1,
         "reproducibleCalculations": 0,
         "typedRelatedRecords": 3,
         "typedBridges": 1,
         "structuredDataFields": 9,
         "renderedDimensions": 10,
-        "wordCountDiagnostic": 278
+        "wordCountDiagnostic": 368
       },
-      "substantialityScore": 12.8,
+      "substantialityScore": 16.8,
       "reasons": [],
-      "verdictDigest": "sha256:01968040bdc8b50450fe68c531f5ea0de79162f3263125f65ccf7fc5a1e8d4ac"
+      "verdictDigest": "sha256:7b1454a1b50394d0691df743e3d9c6c31fb65945cc645827a66f173b88202da8"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/neural-coding-and-time",
@@ -4028,9 +4011,9 @@
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/comparisons/digital-and-mixed-signal-neuromorphic-hardware",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
-        "directAnswerChars": 84,
+        "directAnswerChars": 263,
         "hasMechanismOrDerivation": true,
         "hasTechnicalContext": true,
         "explanatoryClaims": 9,
@@ -4044,13 +4027,11 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 116
+        "wordCountDiagnostic": 144
       },
-      "substantialityScore": 12.7,
-      "reasons": [
-        "direct answer too short to answer anything"
-      ],
-      "verdictDigest": "sha256:ea8cd3637380c5c1ba01c544e66f37257bd261199bd62d47fc13ae411ce83cb9"
+      "substantialityScore": 14,
+      "reasons": [],
+      "verdictDigest": "sha256:6fc8af6cd15cb05f555ce42c178246614a409efd2894e8a634ad1f1e8c0c4653"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/comparisons/simulation-and-physical-substrate",
@@ -4106,9 +4087,9 @@
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/comparisons/silicon-energy-and-biological-metabolic-cost",
-      "state": "evidence-backed-but-thin",
+      "state": "substantial-and-evidence-backed",
       "measures": {
-        "directAnswerChars": 71,
+        "directAnswerChars": 199,
         "hasMechanismOrDerivation": true,
         "hasTechnicalContext": true,
         "explanatoryClaims": 9,
@@ -4122,13 +4103,11 @@
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 9,
-        "wordCountDiagnostic": 112
+        "wordCountDiagnostic": 133
       },
-      "substantialityScore": 12.59,
-      "reasons": [
-        "direct answer too short to answer anything"
-      ],
-      "verdictDigest": "sha256:6b9fc367700515feb43b20539faa6818c8110103e8bc239658cb01aa9e9c6e56"
+      "substantialityScore": 13.66,
+      "reasons": [],
+      "verdictDigest": "sha256:48cad2a876bedf42bd7ef973f1d831e2a3f73026c7543a4deaa96381cf6be892"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/comparisons/offline-training-and-online-adaptation",
@@ -4210,5 +4189,5 @@
     }
   ],
   "boundary": "A private audit. It changes no page.",
-  "auditDigest": "sha256:9ef5bb41306683a54936471ee8c63727f113c144fa83c588318b1caf08c608a8"
+  "auditDigest": "sha256:d2425cd9ffc1250e518937925ef7bfc54495df162b0a1930df918c639b80ce3b"
 }
