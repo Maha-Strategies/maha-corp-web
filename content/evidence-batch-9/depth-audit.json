@@ -11,7 +11,8 @@
     "structurally-substantial-but-unsupported": 84,
     "substantial-and-evidence-backed": 31,
     "blocked": 28,
-    "first-party-documented-but-thin": 10,
+    "first-party-documented-but-thin": 9,
+    "first-party-documented-and-substantial": 1,
     "structurally-thin": 14
   },
   "byGroup": {
@@ -24,7 +25,8 @@
     "firstPartyDocumented": {
       "audited": 10,
       "states": {
-        "first-party-documented-but-thin": 10
+        "first-party-documented-but-thin": 9,
+        "first-party-documented-and-substantial": 1
       }
     },
     "structuralOnly": {
@@ -3747,33 +3749,27 @@
     },
     {
       "route": "/knowledge/suppliers/advantest",
-      "state": "first-party-documented-but-thin",
+      "state": "first-party-documented-and-substantial",
       "measures": {
-        "directAnswerChars": 0,
-        "hasMechanismOrDerivation": false,
+        "directAnswerChars": 380,
+        "hasMechanismOrDerivation": true,
         "hasTechnicalContext": false,
-        "explanatoryClaims": 0,
+        "explanatoryClaims": 5,
         "claimsWithPassage": 0,
         "exactLocators": 0,
-        "limitations": 0,
-        "unresolvedQuestions": 0,
+        "limitations": 1,
+        "unresolvedQuestions": 1,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
         "typedRelatedRecords": 2,
         "typedBridges": 0,
         "structuredDataFields": 9,
-        "renderedDimensions": 5,
-        "wordCountDiagnostic": 0
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 159
       },
-      "substantialityScore": 1.6,
-      "reasons": [
-        "direct answer too short to answer anything",
-        "no mechanism or derivation",
-        "fewer than three explanatory claims",
-        "no stated limitation",
-        "fewer than six rendered dimensions"
-      ],
-      "verdictDigest": "sha256:8945f33e85b58413bfbe326a6eecbfd0d189681e5a7f0374725f19d972ab2e13"
+      "substantialityScore": 9.1,
+      "reasons": [],
+      "verdictDigest": "sha256:d6ace578bbf1ab20f937a09fd9d90a459396a87fb0ac031c3c7ed3ae2fcff8d2"
     },
     {
       "route": "/knowledge/religion/comparisons/canonical-authority-and-historical-evidence",
@@ -4189,5 +4185,5 @@
     }
   ],
   "boundary": "A private audit. It changes no page.",
-  "auditDigest": "sha256:d2425cd9ffc1250e518937925ef7bfc54495df162b0a1930df918c639b80ce3b"
+  "auditDigest": "sha256:722c592ebbae8647801bd4eb7e6cca0d97d9c2f18a528f8eaadc608eba5cbc53"
 }

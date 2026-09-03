@@ -20738,26 +20738,26 @@
       "route": "/knowledge/suppliers/advantest",
       "family": "semiconductor-suppliers",
       "slug": "advantest",
-      "eligible": false,
-      "refusals": [
-        "below-dimension-floor",
-        "no-cited-source"
-      ],
+      "eligible": true,
+      "refusals": [],
       "before": {
         "route": "/knowledge/suppliers/advantest",
         "family": "semiconductor-suppliers",
         "dimensionsPresent": [
+          "claim-level-citation",
           "direct-answer",
+          "exact-locator",
           "limitations",
           "mechanism-or-method",
           "not-established",
-          "related-records"
+          "related-records",
+          "source-boundary"
         ],
-        "dimensionCount": 5,
-        "sourceCount": 1,
-        "sourcesWithBoundary": 0,
+        "dimensionCount": 8,
+        "sourceCount": 2,
+        "sourcesWithBoundary": 1,
         "referenceOnlySources": 1,
-        "declaredLocators": 0,
+        "declaredLocators": 1,
         "contentInspectedLocators": 0,
         "explanatorySources": 0,
         "bridgeCount": 0,
@@ -20768,10 +20768,91 @@
         ],
         "renderedSections": 6
       },
-      "after": null,
-      "sections": [],
-      "sectionCount": 0,
-      "upliftDigest": "sha256:866d4596a1735308b125162cc0a4b00efcfb53ec49bc53c50b9f740ed306ae2e"
+      "after": {
+        "route": "/knowledge/suppliers/advantest",
+        "family": "semiconductor-suppliers",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 2,
+        "sourcesWithBoundary": 1,
+        "referenceOnlySources": 1,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 0,
+        "explanatorySources": 0,
+        "bridgeCount": 0,
+        "relatedRouteCount": 2,
+        "relatedRoutes": [
+          "/knowledge/processes/wafer-acceptance-test-and-wafer-sort",
+          "/knowledge/processes/final-test-burn-in-and-system-level-test"
+        ],
+        "renderedSections": 5
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "Advantest supplies automatic test equipment for wafer sort, final test and burn-in, with separate company-published system families for system-on-chip devices and for DRAM memory including GDDR7, LPDDR6 and DDR5. These are catalogue statements and must be read as company-published scope rather than measured performance, since the catalogue publishes no numerical specifications."
+          ],
+          "sourceIds": [
+            "advantest-products-overview"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Advantest technical material distinguishes wafer test, final test, burn-in, and system-level test and describes test interfaces.",
+            "V93000 EXA Scale: Advantest states this system targets next-generation system-on-chip devices.",
+            "T5801: Advantest states this memory test system addresses DRAM devices including GDDR7, LPDDR6 and DDR5.",
+            "ACS Gemini: Advantest describes this as digital twin software for developer platform and application development.",
+            "SiConic: Advantest states this addresses design verification, silicon validation and test engineering for system-on-chip devices."
+          ],
+          "sourceIds": [
+            "advantest-products-overview"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "Tester and interface availability does not establish test coverage, correlation, throughput, or cost for a specific device."
+          ],
+          "sourceIds": [
+            "advantest-products-overview"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "What this does not establish",
+          "items": [
+            "Tester and interface availability does not establish test coverage, correlation, throughput, or cost for a specific device."
+          ],
+          "sourceIds": [
+            "advantest-products-overview"
+          ]
+        },
+        {
+          "dimension": "related-records",
+          "heading": "Related records",
+          "items": [
+            "/knowledge/processes/wafer-acceptance-test-and-wafer-sort",
+            "/knowledge/processes/final-test-burn-in-and-system-level-test"
+          ],
+          "sourceIds": []
+        }
+      ],
+      "sectionCount": 5,
+      "upliftDigest": "sha256:3110189502fda5e7903414da8d6d1a1a3079f7d4eeea47dd2c0b2176a4530919"
     },
     {
       "route": "/knowledge/religion/comparisons/canonical-authority-and-historical-evidence",

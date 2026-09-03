@@ -1,0 +1,1628 @@
+{
+  "schemaVersion": "maha-assertion-inventory/1.0",
+  "batch": "public-claim-remediation-13",
+  "frozenAt": "2026-09-03",
+  "immutable": true,
+  "appendOnly": true,
+  "writtenToProduction": false,
+  "privateArtifact": true,
+  "containsFullSourcePassages": false,
+  "note": "Assertion text is stored as a fingerprint plus a short preview. Full source passages and review rationale live only in this private artifact and are never rendered.",
+  "totalAssertions": 67,
+  "byDisposition": {
+    "inspect-current-source": 67
+  },
+  "assertions": [
+    {
+      "assertionId": "a001",
+      "route": "/knowledge/religion/historical-evidence",
+      "pageRevision": "sha256:16e79b269e4fd16a3d884933ee15a772566207f59a65c2adb7f23dc84d0517e9",
+      "textFingerprint": "sha256:d9ad82bab72681028b4450c5a0ea7921730ffe9fdd01f514368f947cbf1f35af",
+      "textPreview": "Historical evidence consists of traces interpreted through e",
+      "assertionType": "definitional",
+      "currentSourceIds": [
+        "loc-primary-sources",
+        "icomos-charters",
+        "tei-guidelines"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "definitional: fixes a term, and needs an authority for whose definition it is",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": true,
+      "removalChangesCentralMeaning": true,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 4,
+      "riskFactors": [
+        "central to the page",
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a002",
+      "route": "/knowledge/religion/historical-evidence",
+      "pageRevision": "sha256:16e79b269e4fd16a3d884933ee15a772566207f59a65c2adb7f23dc84d0517e9",
+      "textFingerprint": "sha256:62d06ea50299c537cfe601a6f00f47aaf18e94375143587a1144f10e645b35ba",
+      "textPreview": "Atomize the claim.",
+      "assertionType": "procedural-step",
+      "currentSourceIds": [
+        "loc-primary-sources",
+        "icomos-charters"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "methodological: prescribes practice, and needs a methodology source",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": true,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a003",
+      "route": "/knowledge/religion/historical-evidence",
+      "pageRevision": "sha256:16e79b269e4fd16a3d884933ee15a772566207f59a65c2adb7f23dc84d0517e9",
+      "textFingerprint": "sha256:0a90f72fcccad35acae077d09e1fa40891196d9177d4ca607c6fc56ff511b5f2",
+      "textPreview": "Assess each source’s relation to the claim.",
+      "assertionType": "procedural-step",
+      "currentSourceIds": [
+        "loc-primary-sources",
+        "icomos-charters"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "methodological: prescribes practice, and needs a methodology source",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": true,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a004",
+      "route": "/knowledge/religion/historical-evidence",
+      "pageRevision": "sha256:16e79b269e4fd16a3d884933ee15a772566207f59a65c2adb7f23dc84d0517e9",
+      "textFingerprint": "sha256:04a483e48c0463481660eb789e50ef93b9ba0a01871ec93df3f62c2678282eb5",
+      "textPreview": "Report confidence and live alternatives.",
+      "assertionType": "procedural-step",
+      "currentSourceIds": [
+        "loc-primary-sources",
+        "icomos-charters"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "methodological: prescribes practice, and needs a methodology source",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": true,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a005",
+      "route": "/knowledge/religion/lived-religion",
+      "pageRevision": "sha256:b1a24ef329f489814c3e68ac6b3a403c8e224ec894120f0a301b8d8613fe3e6d",
+      "textFingerprint": "sha256:948e9bfa1631ee363f3d132e08babecaf66322a27a7d202727d6ff554e503da8",
+      "textPreview": "Lived religion examines everyday practice as enacted by part",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "unesco-ich-convention",
+        "unesco-ich-ethics",
+        "unesco-multilingualism"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": true,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 4,
+      "riskFactors": [
+        "central to the page",
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a006",
+      "route": "/knowledge/religion/lived-religion",
+      "pageRevision": "sha256:b1a24ef329f489814c3e68ac6b3a403c8e224ec894120f0a301b8d8613fe3e6d",
+      "textFingerprint": "sha256:40e2ddca579fd0525de195c2c6c903fb4546be94ee1edbdf8b3220c5ceb41acd",
+      "textPreview": "Define sampling and researcher position.",
+      "assertionType": "procedural-step",
+      "currentSourceIds": [
+        "unesco-ich-convention",
+        "unesco-ich-ethics"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "methodological: prescribes practice, and needs a methodology source",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": true,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a007",
+      "route": "/knowledge/religion/lived-religion",
+      "pageRevision": "sha256:b1a24ef329f489814c3e68ac6b3a403c8e224ec894120f0a301b8d8613fe3e6d",
+      "textFingerprint": "sha256:090c07d89b50c93ea7a870f3f7dabc550a70f5170d2f3f406885337b9239302b",
+      "textPreview": "Preserve participant categories and disagreement.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "unesco-ich-convention",
+        "unesco-ich-ethics"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a008",
+      "route": "/knowledge/religion/lived-religion",
+      "pageRevision": "sha256:b1a24ef329f489814c3e68ac6b3a403c8e224ec894120f0a301b8d8613fe3e6d",
+      "textFingerprint": "sha256:871d8ae05612622be1d475589123792702043b490181c84b5fdf426977bf0e6e",
+      "textPreview": "Avoid generalization beyond the observed setting.",
+      "assertionType": "procedural-step",
+      "currentSourceIds": [
+        "unesco-ich-convention",
+        "unesco-ich-ethics"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "methodological: prescribes practice, and needs a methodology source",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": true,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a009",
+      "route": "/knowledge/religion/doctrine-and-doctrinal-development",
+      "pageRevision": "sha256:3128e9e496a4f9f82f9b5b6c7f4e2b2f7f93a3f29b161d0dc846d2f5771c5587",
+      "textFingerprint": "sha256:e2b7528d61505840d60a5ea7736c32785a8b47841f854f36fad2f3cca5bc1188",
+      "textPreview": "Doctrine is a formulated teaching authorized to some degree ",
+      "assertionType": "definitional",
+      "currentSourceIds": [
+        "tei-critical-apparatus",
+        "loc-primary-sources",
+        "unesco-ich-convention",
+        "unesco-ich-ethics"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "definitional: fixes a term, and needs an authority for whose definition it is",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": true,
+      "removalChangesCentralMeaning": true,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 4,
+      "riskFactors": [
+        "central to the page",
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a010",
+      "route": "/knowledge/religion/doctrine-and-doctrinal-development",
+      "pageRevision": "sha256:3128e9e496a4f9f82f9b5b6c7f4e2b2f7f93a3f29b161d0dc846d2f5771c5587",
+      "textFingerprint": "sha256:53bf010f54340849a78079fb01a7758caf74c2f00114a5eee9d40599f5d57eb2",
+      "textPreview": "Version each formulation.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "tei-critical-apparatus",
+        "loc-primary-sources"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a011",
+      "route": "/knowledge/religion/doctrine-and-doctrinal-development",
+      "pageRevision": "sha256:3128e9e496a4f9f82f9b5b6c7f4e2b2f7f93a3f29b161d0dc846d2f5771c5587",
+      "textFingerprint": "sha256:0d09e7cd434f433614fbf887bbfed348e57ee005583bf6788a252fda7b43ff9d",
+      "textPreview": "Map dependencies and disputes.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "tei-critical-apparatus",
+        "loc-primary-sources"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a012",
+      "route": "/knowledge/religion/doctrine-and-doctrinal-development",
+      "pageRevision": "sha256:3128e9e496a4f9f82f9b5b6c7f4e2b2f7f93a3f29b161d0dc846d2f5771c5587",
+      "textFingerprint": "sha256:a6760215fb0326e2c21e7e3d0fbb0eaf57f3b654dc30f0adc5d7de3b13e1711f",
+      "textPreview": "Distinguish insider continuity claims from historical descri",
+      "assertionType": "procedural-step",
+      "currentSourceIds": [
+        "tei-critical-apparatus",
+        "loc-primary-sources"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "methodological: prescribes practice, and needs a methodology source",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": true,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a013",
+      "route": "/knowledge/religion/comparative-categories-and-non-equivalence",
+      "pageRevision": "sha256:419df3dbc430f4f19d3d4bfb7917c646888e6344a0e87f4ac496a6952366c175",
+      "textFingerprint": "sha256:977e1d68b0868627b4d001a36a94f747b810d1a71b5a7f72fb3a6b8c808a8a86",
+      "textPreview": "Comparison is a researcher-constructed operation, not discov",
+      "assertionType": "definitional",
+      "currentSourceIds": [
+        "unesco-multilingualism",
+        "unesco-ich-ethics",
+        "loc-primary-sources",
+        "icomos-charters"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "definitional: fixes a term, and needs an authority for whose definition it is",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": true,
+      "removalChangesCentralMeaning": true,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 7,
+      "riskFactors": [
+        "scientific-certainty wording",
+        "central to the page",
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a014",
+      "route": "/knowledge/religion/comparative-categories-and-non-equivalence",
+      "pageRevision": "sha256:419df3dbc430f4f19d3d4bfb7917c646888e6344a0e87f4ac496a6952366c175",
+      "textFingerprint": "sha256:084b3d09d400618fbf8917f2390a9e22a9430e01dd9b1cffbdd05dc775442ce4",
+      "textPreview": "Declare the comparative purpose.",
+      "assertionType": "procedural-step",
+      "currentSourceIds": [
+        "unesco-multilingualism",
+        "unesco-ich-ethics"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "methodological: prescribes practice, and needs a methodology source",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": true,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a015",
+      "route": "/knowledge/religion/comparative-categories-and-non-equivalence",
+      "pageRevision": "sha256:419df3dbc430f4f19d3d4bfb7917c646888e6344a0e87f4ac496a6952366c175",
+      "textFingerprint": "sha256:60f3800e0c2d5191caa5d856a7e08f5f9315e959b24c967a6e4b7057cb285017",
+      "textPreview": "Compare one bounded axis at a time.",
+      "assertionType": "procedural-step",
+      "currentSourceIds": [
+        "unesco-multilingualism",
+        "unesco-ich-ethics"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "methodological: prescribes practice, and needs a methodology source",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": true,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a016",
+      "route": "/knowledge/religion/comparative-categories-and-non-equivalence",
+      "pageRevision": "sha256:419df3dbc430f4f19d3d4bfb7917c646888e6344a0e87f4ac496a6952366c175",
+      "textFingerprint": "sha256:07fb1770c0903c0ddbd8950f07b6ec8c9f2e014e78857378f060c671679787ed",
+      "textPreview": "Publish asymmetries and category failures.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "unesco-multilingualism",
+        "unesco-ich-ethics"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a017",
+      "route": "/knowledge/religion/contemplative-practice-and-first-person-experience",
+      "pageRevision": "sha256:d35a5a4cd5be64c116a806383030a1746644746f0ffb94b3861973d1216944f6",
+      "textFingerprint": "sha256:61e5d17d68c67eb73e04816804099c39735872108169b7b815691401e62e9cf7",
+      "textPreview": "Contemplative practices are heterogeneous disciplines embedd",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "nccih-meditation",
+        "unesco-ich-ethics"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": true,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 8,
+      "riskFactors": [
+        "safety or commercial consequence",
+        "central to the page",
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a018",
+      "route": "/knowledge/religion/contemplative-practice-and-first-person-experience",
+      "pageRevision": "sha256:d35a5a4cd5be64c116a806383030a1746644746f0ffb94b3861973d1216944f6",
+      "textFingerprint": "sha256:736c45031f7aa06c65b20fe19851494b9e40db13e6c6a24dddb00f2d7bc4e97e",
+      "textPreview": "Define the practice rather than using a broad label.",
+      "assertionType": "procedural-step",
+      "currentSourceIds": [
+        "nccih-meditation",
+        "unesco-ich-ethics"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "methodological: prescribes practice, and needs a methodology source",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": true,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a019",
+      "route": "/knowledge/religion/contemplative-practice-and-first-person-experience",
+      "pageRevision": "sha256:d35a5a4cd5be64c116a806383030a1746644746f0ffb94b3861973d1216944f6",
+      "textFingerprint": "sha256:c2aaa8c5a5bfbb0f7f2b9a6838be4edb3a0b70c9f9f0e7ef01d3389af2fe5ed3",
+      "textPreview": "Keep report, coding, and interpretation distinct.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "nccih-meditation",
+        "unesco-ich-ethics"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a020",
+      "route": "/knowledge/religion/contemplative-practice-and-first-person-experience",
+      "pageRevision": "sha256:d35a5a4cd5be64c116a806383030a1746644746f0ffb94b3861973d1216944f6",
+      "textFingerprint": "sha256:8c3608123251bc3d2da608ede96f5e612f5ae701082bad178831ffa41121d068",
+      "textPreview": "Monitor adverse experiences and consent.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "nccih-meditation",
+        "unesco-ich-ethics"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a021",
+      "route": "/knowledge/religion/contemplative-practice-and-first-person-experience",
+      "pageRevision": "sha256:d35a5a4cd5be64c116a806383030a1746644746f0ffb94b3861973d1216944f6",
+      "textFingerprint": "sha256:a66d5843c3d07f4289d1d7975a3b8829f5eef6b32057ae015343d3f717d77719",
+      "textPreview": "A scale score does not exhaust contemplative meaning.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "nccih-meditation",
+        "unesco-ich-ethics"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a022",
+      "route": "/knowledge/religion/empirical-claims-and-study-design",
+      "pageRevision": "sha256:5b60c67096a4732f8a59250a59625cc355475b0ff51d289370235cb0343e47a5",
+      "textFingerprint": "sha256:2bb5c445d00f85966ccc9199fd44e8e597d6deb8a022bc09639ee7cf964d9ca2",
+      "textPreview": "An empirical claim predicts observable differences under spe",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "nccih-meditation",
+        "prisma-2020",
+        "unesco-ich-ethics",
+        "unesco-ich-convention"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": true,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 8,
+      "riskFactors": [
+        "safety or commercial consequence",
+        "central to the page",
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a023",
+      "route": "/knowledge/religion/empirical-claims-and-study-design",
+      "pageRevision": "sha256:5b60c67096a4732f8a59250a59625cc355475b0ff51d289370235cb0343e47a5",
+      "textFingerprint": "sha256:d19f9ad979c08325bf8f962f3be3f9ada10e8c83d014734a2a35e27fd75fb70c",
+      "textPreview": "Separate exploratory from confirmatory hypotheses.",
+      "assertionType": "procedural-step",
+      "currentSourceIds": [
+        "nccih-meditation",
+        "prisma-2020"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "methodological: prescribes practice, and needs a methodology source",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": true,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a024",
+      "route": "/knowledge/religion/empirical-claims-and-study-design",
+      "pageRevision": "sha256:5b60c67096a4732f8a59250a59625cc355475b0ff51d289370235cb0343e47a5",
+      "textFingerprint": "sha256:13b292cfe716b83af3e03b5b24e4ed79ad7e3fc8818e652a7a9fe3cd9c9d09bd",
+      "textPreview": "Use appropriate controls and blinded assessment where possib",
+      "assertionType": "procedural-step",
+      "currentSourceIds": [
+        "nccih-meditation",
+        "prisma-2020"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "methodological: prescribes practice, and needs a methodology source",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": true,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a025",
+      "route": "/knowledge/religion/empirical-claims-and-study-design",
+      "pageRevision": "sha256:5b60c67096a4732f8a59250a59625cc355475b0ff51d289370235cb0343e47a5",
+      "textFingerprint": "sha256:67fd875e99bfd73ae8de84edfdd9bb943b5817067cf717c6dcb034f942b37d51",
+      "textPreview": "Report effect size, uncertainty, null results, and limitatio",
+      "assertionType": "procedural-step",
+      "currentSourceIds": [
+        "nccih-meditation",
+        "prisma-2020"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "methodological: prescribes practice, and needs a methodology source",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": true,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a026",
+      "route": "/knowledge/religion/empirical-claims-and-study-design",
+      "pageRevision": "sha256:5b60c67096a4732f8a59250a59625cc355475b0ff51d289370235cb0343e47a5",
+      "textFingerprint": "sha256:c4a5e2e4a505ee3e702ef71591390d558849c796a506d1496a01abd70c433304",
+      "textPreview": "A scale score does not exhaust contemplative meaning.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "nccih-meditation",
+        "unesco-ich-ethics"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a027",
+      "route": "/knowledge/religion/empirical-claims-and-study-design",
+      "pageRevision": "sha256:5b60c67096a4732f8a59250a59625cc355475b0ff51d289370235cb0343e47a5",
+      "textFingerprint": "sha256:f9ea848172ef9f61499b47b5fc35a1b1742c79be172675f027a3c8f73ecc468a",
+      "textPreview": "Sacred efficacy may not be operationalized by a study.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "unesco-ich-convention",
+        "nccih-meditation"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a028",
+      "route": "/knowledge/religion/empirical-claims-and-study-design",
+      "pageRevision": "sha256:5b60c67096a4732f8a59250a59625cc355475b0ff51d289370235cb0343e47a5",
+      "textFingerprint": "sha256:029b07b0982dd3506e862b08d3995904e68177f67db54cb1fc87f54c5c276b96",
+      "textPreview": "Observed effects do not identify supernatural mechanisms.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "unesco-ich-convention",
+        "nccih-meditation"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a029",
+      "route": "/knowledge/neuromorphic-biocomputing/neuromorphic-computing",
+      "pageRevision": "sha256:80ece98ae4852f45a35dbe76a046e7752ff000e3212fae4c7f116876bbdc92b8",
+      "textFingerprint": "sha256:2456e561ea9de3504aa2be8d961ce824147b9af0aa3997e3ed46c5b089c7f327",
+      "textPreview": "Encode activity as events or locally evolving state.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "intel-loihi2",
+        "spinnaker2",
+        "neurobench",
+        "neurobench-2304-04640"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a030",
+      "route": "/knowledge/neuromorphic-biocomputing/neuromorphic-computing",
+      "pageRevision": "sha256:80ece98ae4852f45a35dbe76a046e7752ff000e3212fae4c7f116876bbdc92b8",
+      "textFingerprint": "sha256:d0fd0e6f760b4938666209becb52a0c886a7ab4ea26c2dd7c80113dd0121c91c",
+      "textPreview": "Route sparse signals among distributed processing elements.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "intel-loihi2",
+        "spinnaker2",
+        "neurobench",
+        "neurobench-2304-04640"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a031",
+      "route": "/knowledge/neuromorphic-biocomputing/neuromorphic-computing",
+      "pageRevision": "sha256:80ece98ae4852f45a35dbe76a046e7752ff000e3212fae4c7f116876bbdc92b8",
+      "textFingerprint": "sha256:e581ad69d58d6345a05188aa3b1e646e2811610af564f04201320659ee5dbd11",
+      "textPreview": "Update state or weights under declared dynamics.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "intel-loihi2",
+        "spinnaker2",
+        "neurobench",
+        "neurobench-2304-04640"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a032",
+      "route": "/knowledge/neuromorphic-biocomputing/spiking-neural-networks",
+      "pageRevision": "sha256:f4912de969dfd37f3c99930be88badd80e9833a67286a316b83cfc39bce3f0c4",
+      "textFingerprint": "sha256:07232b6c03ad3b10000e205c2e2ad3bc127e46ae516c4133088cd01e8943ba2c",
+      "textPreview": "Integrate synaptic inputs into neuron state.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "neurobench",
+        "intel-loihi2",
+        "neurobench-2304-04640",
+        "neurobench-2304-04640"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a033",
+      "route": "/knowledge/neuromorphic-biocomputing/spiking-neural-networks",
+      "pageRevision": "sha256:f4912de969dfd37f3c99930be88badd80e9833a67286a316b83cfc39bce3f0c4",
+      "textFingerprint": "sha256:06a8c187131ebe383bb3bbdfb013e92b0bd98fa96a79ffbc71eeb0de0dc318c7",
+      "textPreview": "Emit a spike when a specified condition is met.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "neurobench",
+        "intel-loihi2",
+        "neurobench-2304-04640",
+        "neurobench-2304-04640"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a034",
+      "route": "/knowledge/neuromorphic-biocomputing/spiking-neural-networks",
+      "pageRevision": "sha256:f4912de969dfd37f3c99930be88badd80e9833a67286a316b83cfc39bce3f0c4",
+      "textFingerprint": "sha256:f10c62198c7b4209dc3ee35d5e4ff758a092d0b1001bbe662a27390c2654fb0f",
+      "textPreview": "Propagate weighted and delayed events through a graph.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "neurobench",
+        "intel-loihi2",
+        "neurobench-2304-04640",
+        "neurobench-2304-04640"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a035",
+      "route": "/knowledge/neuromorphic-biocomputing/spiking-neural-networks",
+      "pageRevision": "sha256:f4912de969dfd37f3c99930be88badd80e9833a67286a316b83cfc39bce3f0c4",
+      "textFingerprint": "sha256:04cc29c6e8f011e20000ede1d83885a91004e4075ca9061f6ab8823daafdbaa3",
+      "textPreview": "Operation counts are architecture-specific.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "neurobench"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a036",
+      "route": "/knowledge/neuromorphic-biocomputing/neural-coding-and-time",
+      "pageRevision": "sha256:7a4e0f9c9037fab4cd28936dca6d2dbbe0bff36ab52d549da4a220cb0c3a8ae5",
+      "textFingerprint": "sha256:74ebce259493f86ea840f4f089ce2c608ab43eec6d9ea3d312d6dd3ae5e3325f",
+      "textPreview": "Define an encoder from observations to events.",
+      "assertionType": "procedural-step",
+      "currentSourceIds": [
+        "neurobench",
+        "dishbrain"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "methodological: prescribes practice, and needs a methodology source",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": true,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a037",
+      "route": "/knowledge/neuromorphic-biocomputing/neural-coding-and-time",
+      "pageRevision": "sha256:7a4e0f9c9037fab4cd28936dca6d2dbbe0bff36ab52d549da4a220cb0c3a8ae5",
+      "textFingerprint": "sha256:58c51bd4b73faf230ab01d6b807e55b5f70df1de407da20be3ccc9f47cf520b0",
+      "textPreview": "Transmit or transform event sequences.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "neurobench",
+        "dishbrain"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a038",
+      "route": "/knowledge/neuromorphic-biocomputing/neural-coding-and-time",
+      "pageRevision": "sha256:7a4e0f9c9037fab4cd28936dca6d2dbbe0bff36ab52d549da4a220cb0c3a8ae5",
+      "textFingerprint": "sha256:df0911bf9ee61c9309906115eb1268870fd764408b001d0c8771ea1185d06527",
+      "textPreview": "Apply a decoder and test its task-relevant information.",
+      "assertionType": "procedural-step",
+      "currentSourceIds": [
+        "neurobench",
+        "dishbrain"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "methodological: prescribes practice, and needs a methodology source",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": true,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a039",
+      "route": "/knowledge/neuromorphic-biocomputing/synaptic-plasticity-and-learning",
+      "pageRevision": "sha256:ec4289696734805be77bcaebd55cfdaef78c9816a3266f0d317bcc66e1675ff6",
+      "textFingerprint": "sha256:19ec08b314b5e0f7c59e2ee1c742f7c187bbd5d62262f30f3cf33bf8c987e148",
+      "textPreview": "Observe activity and an eligibility condition.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "intel-loihi2",
+        "dishbrain",
+        "mea-reproducibility"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a040",
+      "route": "/knowledge/neuromorphic-biocomputing/synaptic-plasticity-and-learning",
+      "pageRevision": "sha256:ec4289696734805be77bcaebd55cfdaef78c9816a3266f0d317bcc66e1675ff6",
+      "textFingerprint": "sha256:a5b9aa6b382dfe610c757e81a56d31cbec31ae478973fd6734843f843ee416e7",
+      "textPreview": "Apply a local, global, engineered, or biological update.",
+      "assertionType": "procedural-step",
+      "currentSourceIds": [
+        "intel-loihi2",
+        "dishbrain",
+        "mea-reproducibility"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "methodological: prescribes practice, and needs a methodology source",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": true,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a041",
+      "route": "/knowledge/neuromorphic-biocomputing/synaptic-plasticity-and-learning",
+      "pageRevision": "sha256:ec4289696734805be77bcaebd55cfdaef78c9816a3266f0d317bcc66e1675ff6",
+      "textFingerprint": "sha256:20d3ee2092fe71092b01c66195affbb037965a46df93534d451199ca57c19d7d",
+      "textPreview": "Test persistence and held-out task consequences.",
+      "assertionType": "procedural-step",
+      "currentSourceIds": [
+        "intel-loihi2",
+        "dishbrain",
+        "mea-reproducibility"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "methodological: prescribes practice, and needs a methodology source",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": true,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a042",
+      "route": "/knowledge/neuromorphic-biocomputing/synaptic-plasticity-and-learning",
+      "pageRevision": "sha256:ec4289696734805be77bcaebd55cfdaef78c9816a3266f0d317bcc66e1675ff6",
+      "textFingerprint": "sha256:9ae8dd4987a61d8788fc5ab803cdb88e10faa8e3a5a0ab9024f080e76046a6e9",
+      "textPreview": "Pretraining cost cannot disappear from lifecycle accounting.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "intel-loihi2",
+        "dishbrain"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 5,
+      "riskFactors": [
+        "safety or commercial consequence",
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a043",
+      "route": "/knowledge/neuromorphic-biocomputing/mixed-signal-neuromorphic-hardware",
+      "pageRevision": "sha256:c3c992936435c1b62af9630917a5a19dfd8ac0efaa18aa07eec41ae39361f66d",
+      "textFingerprint": "sha256:8d1781e9e7936bba8a751a2573baecff400c4950e1632f9413aad441d08ac02a",
+      "textPreview": "Mixed-signal neuromorphic hardware uses analog or subthresho",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "neurobench",
+        "spinnaker2",
+        "intel-loihi2"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": true,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 4,
+      "riskFactors": [
+        "central to the page",
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a044",
+      "route": "/knowledge/neuromorphic-biocomputing/mixed-signal-neuromorphic-hardware",
+      "pageRevision": "sha256:c3c992936435c1b62af9630917a5a19dfd8ac0efaa18aa07eec41ae39361f66d",
+      "textFingerprint": "sha256:38b56c136f25f86585604d762e64e2296b6395e4c23d6bb2fa0454e02f910a72",
+      "textPreview": "Map model state to analog circuit variables.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "neurobench",
+        "spinnaker2"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a045",
+      "route": "/knowledge/neuromorphic-biocomputing/mixed-signal-neuromorphic-hardware",
+      "pageRevision": "sha256:c3c992936435c1b62af9630917a5a19dfd8ac0efaa18aa07eec41ae39361f66d",
+      "textFingerprint": "sha256:957e6800144412bebc1e924c80b406c3f3cee3dbf4f3b66a17ed80610b2a4187",
+      "textPreview": "Exchange events through digital routing.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "neurobench",
+        "spinnaker2"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a046",
+      "route": "/knowledge/neuromorphic-biocomputing/mixed-signal-neuromorphic-hardware",
+      "pageRevision": "sha256:c3c992936435c1b62af9630917a5a19dfd8ac0efaa18aa07eec41ae39361f66d",
+      "textFingerprint": "sha256:ac50c1d8156c22fa4d9290350d3514abb3ce329eee9ac5c13f3f9a184af2aa76",
+      "textPreview": "Calibrate or learn around physical variability.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "neurobench",
+        "spinnaker2"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a047",
+      "route": "/knowledge/neuromorphic-biocomputing/mixed-signal-neuromorphic-hardware",
+      "pageRevision": "sha256:c3c992936435c1b62af9630917a5a19dfd8ac0efaa18aa07eec41ae39361f66d",
+      "textFingerprint": "sha256:85764926a4bbfd2bc0366260517eea8830088bc9df3afb099c3d40fea12659e8",
+      "textPreview": "Bit precision and analog variability are different error mod",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "neurobench",
+        "intel-loihi2"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a048",
+      "route": "/knowledge/neuromorphic-biocomputing/mixed-signal-neuromorphic-hardware",
+      "pageRevision": "sha256:c3c992936435c1b62af9630917a5a19dfd8ac0efaa18aa07eec41ae39361f66d",
+      "textFingerprint": "sha256:d88dc778f2b2e470e177d7259125ddf1c4b7946fb197bf66d1749244948044b1",
+      "textPreview": "Calibration is part of mixed-signal operation.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "neurobench",
+        "intel-loihi2"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a049",
+      "route": "/knowledge/neuromorphic-biocomputing/brain-organoids-and-organoid-intelligence",
+      "pageRevision": "sha256:fd3d8fb70d24ad6217b61f85abb7b315c8fbd956b32f6413816804739415a947",
+      "textFingerprint": "sha256:e9e552621a61ccd2bce654f318bc501cece303c6f31b7544e656d9206580f118",
+      "textPreview": "Brain organoids are three-dimensional stem-cell-derived mode",
+      "assertionType": "definitional",
+      "currentSourceIds": [
+        "organoid-intelligence",
+        "isscr-guidelines",
+        "nih-neuroethics",
+        "dishbrain"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "definitional: fixes a term, and needs an authority for whose definition it is",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": true,
+      "removalChangesCentralMeaning": true,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 4,
+      "riskFactors": [
+        "central to the page",
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a050",
+      "route": "/knowledge/neuromorphic-biocomputing/brain-organoids-and-organoid-intelligence",
+      "pageRevision": "sha256:fd3d8fb70d24ad6217b61f85abb7b315c8fbd956b32f6413816804739415a947",
+      "textFingerprint": "sha256:f70853c525ebcd62fa7d3020a5bc89e123f14103623cd0ed6b6dcce71b201c60",
+      "textPreview": "Differentiate and mature a documented organoid model.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "organoid-intelligence",
+        "isscr-guidelines",
+        "nih-neuroethics"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a051",
+      "route": "/knowledge/neuromorphic-biocomputing/brain-organoids-and-organoid-intelligence",
+      "pageRevision": "sha256:fd3d8fb70d24ad6217b61f85abb7b315c8fbd956b32f6413816804739415a947",
+      "textFingerprint": "sha256:fe2e1fc9f84cb0b6cd5e566b0e03b4f1e85a7e392348f926bae6abe60e8ce841",
+      "textPreview": "Couple activity to a recording and stimulation interface.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "organoid-intelligence",
+        "isscr-guidelines",
+        "nih-neuroethics"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a052",
+      "route": "/knowledge/neuromorphic-biocomputing/brain-organoids-and-organoid-intelligence",
+      "pageRevision": "sha256:fd3d8fb70d24ad6217b61f85abb7b315c8fbd956b32f6413816804739415a947",
+      "textFingerprint": "sha256:429d317a993244551e5527e5cb9f2fc53a94f361359f1956467f1177b3ec93a8",
+      "textPreview": "Test a preregistered, bounded input-output task.",
+      "assertionType": "procedural-step",
+      "currentSourceIds": [
+        "organoid-intelligence",
+        "isscr-guidelines",
+        "nih-neuroethics"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "methodological: prescribes practice, and needs a methodology source",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": true,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a053",
+      "route": "/knowledge/neuromorphic-biocomputing/hybrid-bioelectronic-systems",
+      "pageRevision": "sha256:4fc05ad005427efaa258842facc93079f3c71f4f13e9c97f75f02f55bca812f5",
+      "textFingerprint": "sha256:d051ffb09ec553869f7e77c6b7a3c0c7a8910734778e98d55d35ded46b3004b8",
+      "textPreview": "A hybrid bioelectronic system combines living cells or tissu",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "dishbrain",
+        "organoid-intelligence",
+        "nih-neuroethics",
+        "neurobench"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": true,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 7,
+      "riskFactors": [
+        "scientific-certainty wording",
+        "central to the page",
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a054",
+      "route": "/knowledge/neuromorphic-biocomputing/hybrid-bioelectronic-systems",
+      "pageRevision": "sha256:4fc05ad005427efaa258842facc93079f3c71f4f13e9c97f75f02f55bca812f5",
+      "textFingerprint": "sha256:e6f81dae697b7120b62484c0dbf35d8659f8dd0c53d38d9bf4d8e437c52bbea8",
+      "textPreview": "Measure state from the biological component.",
+      "assertionType": "procedural-step",
+      "currentSourceIds": [
+        "dishbrain",
+        "organoid-intelligence",
+        "nih-neuroethics"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "methodological: prescribes practice, and needs a methodology source",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": true,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a055",
+      "route": "/knowledge/neuromorphic-biocomputing/hybrid-bioelectronic-systems",
+      "pageRevision": "sha256:4fc05ad005427efaa258842facc93079f3c71f4f13e9c97f75f02f55bca812f5",
+      "textFingerprint": "sha256:5561f7ae263803a7a5d1536a65509ef0a7dd8ea13b9ae67b3fba0f82779aba11",
+      "textPreview": "Transform measurements in an electronic controller or enviro",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "dishbrain",
+        "organoid-intelligence",
+        "nih-neuroethics"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a056",
+      "route": "/knowledge/neuromorphic-biocomputing/hybrid-bioelectronic-systems",
+      "pageRevision": "sha256:4fc05ad005427efaa258842facc93079f3c71f4f13e9c97f75f02f55bca812f5",
+      "textFingerprint": "sha256:2934761b8590d361c16f123f8d6a2eab73933623912571345ed813c744987e2d",
+      "textPreview": "Return contingent stimulation or chemical input.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "dishbrain",
+        "organoid-intelligence",
+        "nih-neuroethics"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a057",
+      "route": "/knowledge/neuromorphic-biocomputing/hybrid-bioelectronic-systems",
+      "pageRevision": "sha256:4fc05ad005427efaa258842facc93079f3c71f4f13e9c97f75f02f55bca812f5",
+      "textFingerprint": "sha256:72322d3be9a8c88a507e193cc9ef173d2f827d52d6e6278ef6fd2c664b980af3",
+      "textPreview": "Culture support and readout may dominate.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "neurobench",
+        "organoid-intelligence"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a058",
+      "route": "/knowledge/neuromorphic-biocomputing/reproducibility-variability-and-controls",
+      "pageRevision": "sha256:b004cf38dde57280072a8ccca09a80e49344ea172abba22b446b1bb2e5441376",
+      "textFingerprint": "sha256:d9e16127e3547ca28acdd29e43285aca5bfc1675736c5aa77985b03e8ee29953",
+      "textPreview": "Reproducibility in neuromorphic and biocomputing research re",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "neurobench",
+        "mea-reproducibility",
+        "isscr-guidelines",
+        "intel-loihi2",
+        "dishbrain"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": true,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 8,
+      "riskFactors": [
+        "safety or commercial consequence",
+        "central to the page",
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a059",
+      "route": "/knowledge/neuromorphic-biocomputing/reproducibility-variability-and-controls",
+      "pageRevision": "sha256:b004cf38dde57280072a8ccca09a80e49344ea172abba22b446b1bb2e5441376",
+      "textFingerprint": "sha256:df68d74aa6504194d59ee9237d51c537c62433e1116dc550ddc10c7d2fd8a8b8",
+      "textPreview": "Pre-register the unit of analysis and exclusions.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "neurobench",
+        "mea-reproducibility",
+        "isscr-guidelines"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a060",
+      "route": "/knowledge/neuromorphic-biocomputing/reproducibility-variability-and-controls",
+      "pageRevision": "sha256:b004cf38dde57280072a8ccca09a80e49344ea172abba22b446b1bb2e5441376",
+      "textFingerprint": "sha256:62aa5cd31e2774377ea30d2d1ec2f97e8312ddb3f38ebab2ddf670cd1a425fc8",
+      "textPreview": "Version every transformation from substrate to metric.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "neurobench",
+        "mea-reproducibility",
+        "isscr-guidelines"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a061",
+      "route": "/knowledge/neuromorphic-biocomputing/reproducibility-variability-and-controls",
+      "pageRevision": "sha256:b004cf38dde57280072a8ccca09a80e49344ea172abba22b446b1bb2e5441376",
+      "textFingerprint": "sha256:393822af056e1818444f7ebc91731d047d27d117646941da41f021dee75fbaa4",
+      "textPreview": "Repeat across runs, devices, batches, and sites as appropria",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "neurobench",
+        "mea-reproducibility",
+        "isscr-guidelines"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a062",
+      "route": "/knowledge/neuromorphic-biocomputing/reproducibility-variability-and-controls",
+      "pageRevision": "sha256:b004cf38dde57280072a8ccca09a80e49344ea172abba22b446b1bb2e5441376",
+      "textFingerprint": "sha256:a00071c2230392f976ff9bd2bfec3ac1ce93e6a9d08e7ee6a4a4b124d7c0fb96",
+      "textPreview": "Pretraining cost cannot disappear from lifecycle accounting.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "intel-loihi2",
+        "dishbrain"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 5,
+      "riskFactors": [
+        "safety or commercial consequence",
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a063",
+      "route": "/knowledge/neuromorphic-biocomputing/biosafety-ethics-and-governance",
+      "pageRevision": "sha256:98615959475351bd375cc814fca5fddc3c974c05625702999fbdd82cfda2a51a",
+      "textFingerprint": "sha256:83c6d5e0256fbd15a95994f026eed3b0414fd6e6023928c7f5f800e37d0acd82",
+      "textPreview": "Responsible biocomputing governance begins before acquisitio",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "isscr-guidelines",
+        "nih-neuroethics",
+        "organoid-intelligence",
+        "neurobench"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": true,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 11,
+      "riskFactors": [
+        "safety or commercial consequence",
+        "scientific-certainty wording",
+        "central to the page",
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a064",
+      "route": "/knowledge/neuromorphic-biocomputing/biosafety-ethics-and-governance",
+      "pageRevision": "sha256:98615959475351bd375cc814fca5fddc3c974c05625702999fbdd82cfda2a51a",
+      "textFingerprint": "sha256:5138ccc8a8a8e24af7dd40426d1de9cc30246f3e65c71f22d75de727ff6ec16e",
+      "textPreview": "Classify biological materials, interventions, data, and dual",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "isscr-guidelines",
+        "nih-neuroethics",
+        "organoid-intelligence"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 5,
+      "riskFactors": [
+        "safety or commercial consequence",
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a065",
+      "route": "/knowledge/neuromorphic-biocomputing/biosafety-ethics-and-governance",
+      "pageRevision": "sha256:98615959475351bd375cc814fca5fddc3c974c05625702999fbdd82cfda2a51a",
+      "textFingerprint": "sha256:a00788e689344b6cecbdf99abd3dabf74f95ec5ad792be1bbd260b9a7a753713",
+      "textPreview": "Obtain independent ethics and biosafety review with document",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "isscr-guidelines",
+        "nih-neuroethics",
+        "organoid-intelligence"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 5,
+      "riskFactors": [
+        "safety or commercial consequence",
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a066",
+      "route": "/knowledge/neuromorphic-biocomputing/biosafety-ethics-and-governance",
+      "pageRevision": "sha256:98615959475351bd375cc814fca5fddc3c974c05625702999fbdd82cfda2a51a",
+      "textFingerprint": "sha256:e423732dac617b92487308a864d657a3ad5db6b627a55a4c268642bdba502931",
+      "textPreview": "Monitor, report, stop, retain, share, and dispose under appr",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "isscr-guidelines",
+        "nih-neuroethics",
+        "organoid-intelligence"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 5,
+      "riskFactors": [
+        "safety or commercial consequence",
+        "search visibility"
+      ]
+    },
+    {
+      "assertionId": "a067",
+      "route": "/knowledge/neuromorphic-biocomputing/biosafety-ethics-and-governance",
+      "pageRevision": "sha256:98615959475351bd375cc814fca5fddc3c974c05625702999fbdd82cfda2a51a",
+      "textFingerprint": "sha256:deb3284b3b00e7500fa65d2c8108e533934df52d9ca693784e3dd8be038f59c1",
+      "textPreview": "Scaling samples or devices can change behavior.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "neurobench",
+        "isscr-guidelines",
+        "nih-neuroethics"
+      ],
+      "currentLocator": null,
+      "evidentiaryFrame": "empirical: states how something behaves, and needs a study or measurement",
+      "whySupportIsMissing": "A source is cited but has never been inspected, so nothing establishes the sentence.",
+      "narrowingCouldSupport": false,
+      "removalChangesCentralMeaning": false,
+      "disposition": "inspect-current-source",
+      "dispositionBecause": "The page already cites a source for this. Reading it is the cheapest way to find out whether the sentence is supported, and it has not been done.",
+      "risk": 5,
+      "riskFactors": [
+        "safety or commercial consequence",
+        "search visibility"
+      ]
+    }
+  ],
+  "boundary": "This inventory records what is unsupported and what should be done about it. It changes no page."
+}

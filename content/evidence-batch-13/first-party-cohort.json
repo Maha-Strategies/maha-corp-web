@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "maha-first-party-cohort/1.0",
+  "batch": "public-claim-remediation-13",
+  "frozenAt": "2026-09-03",
+  "frozenBeforeInspection": true,
+  "writtenToProduction": false,
+  "selectionRule": "Five of the ten first-party-documented but thin pages, chosen where the supplier publishes stable official technical documentation likely to contain named products and declared specifications rather than marketing copy.",
+  "exclusions": [
+    "superlatives",
+    "comparative leadership",
+    "implied independent reliability",
+    "implied yield",
+    "stale availability claims",
+    "unsupported performance extrapolation"
+  ],
+  "numericalRule": "Every numerical statement must say it is company-published unless independently corroborated.",
+  "cohort": [
+    {
+      "route": "/knowledge/suppliers/asml",
+      "claimsBefore": 1,
+      "answerCharsBefore": 113
+    },
+    {
+      "route": "/knowledge/suppliers/tsmc",
+      "claimsBefore": 0,
+      "answerCharsBefore": 0
+    },
+    {
+      "route": "/knowledge/suppliers/lam-research",
+      "claimsBefore": 0,
+      "answerCharsBefore": 0
+    },
+    {
+      "route": "/knowledge/suppliers/tokyo-electron",
+      "claimsBefore": 1,
+      "answerCharsBefore": 109
+    },
+    {
+      "route": "/knowledge/suppliers/advantest",
+      "claimsBefore": 0,
+      "answerCharsBefore": 0
+    }
+  ],
+  "notSelected": [
+    "/knowledge/suppliers/synopsys",
+    "/knowledge/suppliers/axcelis-technologies",
+    "/knowledge/suppliers/disco",
+    "/knowledge/suppliers/dow",
+    "/knowledge/suppliers/amkor-technology"
+  ],
+  "cohortDigest": "sha256:869a161097c43b36df544ce92376675b1288eeac7ac4e0f8857b720674866101"
+}

@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "maha-high-risk-inspection/1.0",
+  "batch": "public-claim-remediation-13",
+  "inspectedOn": "2026-09-03",
+  "appendOnly": true,
+  "writtenToProduction": false,
+  "freezeDigest": "sha256:65f7ada0e3076ce5",
+  "cohortFrozenBeforeInspection": true,
+  "rule": "A citation is not support because it is topically related. Each assertion was checked against what the inspected passage actually states, at the scope the source declares for itself.",
+  "sourcesInspected": [
+    {
+      "sourceId": "isscr-guidelines",
+      "title": "Guidelines for Stem Cell Research and Clinical Translation",
+      "publisher": "International Society for Stem Cell Research",
+      "version": "Version 1.2, August 2025",
+      "identityVerifiedBeforeInspection": true,
+      "retrievedFrom": "https://www.isscr.org/guidelines",
+      "retrievedOn": "2026-09-03",
+      "evidenceBasis": "government-or-standards-authority",
+      "rightsBasis": "Published guidance, publicly readable. Retrieved without circumventing any access control.",
+      "depth": "section-or-full-text",
+      "exactLocators": [
+        "The research categories 1A, 1B, 2, 3A and 3B",
+        "Oversight of stem cell-based embryo models"
+      ],
+      "observedContent": "A five-tier categorisation: 1A exempt from specialised oversight; 1B reportable but not normally subject to further review; 2 requiring review and approval through a specialised scientific and ethics review process; 3A currently not permitted; 3B prohibited. States that 3D stem cell-based embryo models should have a clear scientific rationale, a defined endpoint, and an appropriate oversight mechanism.",
+      "boundary": "Sets oversight expectations for stem cell research. It does not address neuromorphic computing, device scaling, or data governance outside that scope."
+    },
+    {
+      "sourceId": "prisma-2020",
+      "title": "The PRISMA 2020 statement: an updated guideline for reporting systematic reviews",
+      "leadAuthor": "Matthew J Page",
+      "venue": "BMJ, 2021",
+      "identifier": "doi:10.1136/bmj.n71",
+      "identityVerifiedBeforeInspection": true,
+      "retrievedFrom": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8005924/",
+      "retrievedOn": "2026-09-03",
+      "evidenceBasis": "independent-scientific-or-technical",
+      "rightsBasis": "Open access on PubMed Central. Retrieved without circumventing any access control.",
+      "depth": "section-or-full-text",
+      "exactLocators": [
+        "Methods, Scope",
+        "The 27-item checklist across seven sections"
+      ],
+      "observedContent": "A 27-item checklist in seven sections: Title, Abstract, Introduction, Methods, Results, Discussion, Other information. The Scope section states that PRISMA 2020 is not intended to guide systematic review conduct, should not be used to assess the conduct or methodological quality of systematic reviews, and is not intended to inform the reporting of review protocols.",
+      "boundary": "A reporting guideline for systematic reviews. By its own Scope statement it does not prescribe how to conduct research and must not be used to judge methodological quality."
+    }
+  ],
+  "determinations": [
+    {
+      "assertionId": "a065",
+      "route": "/knowledge/neuromorphic-biocomputing/biosafety-ethics-and-governance",
+      "preview": "Obtain independent ethics and biosafety review with documented consent scope.",
+      "sourceId": "isscr-guidelines",
+      "locator": "Research category 2",
+      "verdict": "supportable-after-narrowing",
+      "supportedPart": "That a specialised independent scientific and ethics review is required for a defined class of research is stated directly by ISSCR category 2.",
+      "unsupportedPart": "The consent-scope requirement was not located in the inspected sections and is not carried by the categories.",
+      "narrowedForm": "Research in ISSCR category 2 requires review and approval through a specialised scientific and ethics review process."
+    },
+    {
+      "assertionId": "a064",
+      "route": "/knowledge/neuromorphic-biocomputing/biosafety-ethics-and-governance",
+      "preview": "Classify biological materials, interventions, data, and dual-use risks.",
+      "sourceId": "isscr-guidelines",
+      "locator": "Research categories 1A, 1B, 2, 3A, 3B",
+      "verdict": "supportable-after-narrowing",
+      "supportedPart": "ISSCR does prescribe classification, into five named oversight tiers.",
+      "unsupportedPart": "It classifies research activities by required oversight, not materials, data and dual-use risk as four separate axes. The page states a broader taxonomy than the source operates.",
+      "narrowedForm": "Classify research activities by the level of oversight they require, following ISSCR categories 1A to 3B."
+    },
+    {
+      "assertionId": "a066",
+      "route": "/knowledge/neuromorphic-biocomputing/biosafety-ethics-and-governance",
+      "preview": "Monitor, report, stop, retain, share, and dispose under approved protocols.",
+      "sourceId": "isscr-guidelines",
+      "locator": "Oversight of stem cell-based embryo models",
+      "verdict": "supportable-after-narrowing",
+      "supportedPart": "A defined endpoint and an appropriate oversight mechanism are stated requirements, which covers stopping and operating under approved oversight.",
+      "unsupportedPart": "Retention, sharing and disposal were not located in the inspected sections.",
+      "narrowedForm": "Work under an appropriate oversight mechanism with a defined endpoint."
+    },
+    {
+      "assertionId": "a063",
+      "route": "/knowledge/neuromorphic-biocomputing/biosafety-ethics-and-governance",
+      "preview": "Responsible biocomputing governance begins before acquisition of biological material",
+      "sourceId": "isscr-guidelines",
+      "locator": "Research categories",
+      "verdict": "rejected-as-written",
+      "reason": "ISSCR sets oversight expectations for stem cell research. It does not state a biocomputing governance lifecycle running from acquisition through communication, and the page presents that lifecycle as established practice. The framing may be reasonable; it is not what this source says.",
+      "recommendedDisposition": "narrow"
+    },
+    {
+      "assertionId": "a067",
+      "route": "/knowledge/neuromorphic-biocomputing/biosafety-ethics-and-governance",
+      "preview": "Scaling samples or devices can change behavior.",
+      "sourceId": "neurobench, isscr-guidelines, nih-neuroethics",
+      "verdict": "unresolved",
+      "reason": "A causal claim about scaling. None of the inspected sources addresses it: NeuroBench defines reporting metrics, ISSCR addresses oversight. Topical adjacency is not support.",
+      "recommendedDisposition": "locate-replacement-source"
+    },
+    {
+      "assertionId": "a022",
+      "route": "/knowledge/religion/empirical-claims-and-study-design",
+      "preview": "An empirical claim predicts observable differences under specified conditions",
+      "sourceId": "prisma-2020, nccih-meditation",
+      "verdict": "rejected-as-written",
+      "reason": "A definition of what an empirical claim is. PRISMA defines reporting items, not epistemology, and no inspected source states this definition.",
+      "recommendedDisposition": "narrow"
+    }
+  ],
+  "notInspected": [
+    {
+      "sourceId": "nih-neuroethics",
+      "reason": "Not reached in this batch."
+    },
+    {
+      "sourceId": "nccih-meditation",
+      "reason": "Not reached in this batch."
+    },
+    {
+      "sourceId": "organoid-intelligence",
+      "reason": "Not reached in this batch."
+    },
+    {
+      "sourceId": "unesco-ich-convention",
+      "reason": "Not reached in this batch."
+    },
+    {
+      "sourceId": "tei-guidelines",
+      "reason": "Not reached in this batch."
+    }
+  ],
+  "refusedRoutes": [
+    {
+      "url": "https://www.bmj.com/content/372/bmj.n71",
+      "outcome": "HTTP 403",
+      "action": "Not circumvented. The open-access copy on PubMed Central was used instead, which is a different repository rather than a retry."
+    }
+  ],
+  "summary": {
+    "assertionsFrozen": 25,
+    "assertionsDetermined": 6,
+    "supportedAsWritten": 0,
+    "supportableAfterNarrowing": 3,
+    "rejectedAsWritten": 2,
+    "unresolved": 1,
+    "notYetDetermined": 19,
+    "sourcesInspected": 2,
+    "frameMismatchesFound": 2,
+    "determinationsBeyondFrozenCohort": 3
+  },
+  "boundary": "6 of the twenty-five frozen assertions were determined against two inspected sources, and 3 further determinations concern assertions outside the frozen cohort. No assertion was marked supported merely because a cited source was topically related.",
+  "determinationsBeyondFrozenCohort": [
+    {
+      "assertionId": "a025",
+      "route": "/knowledge/religion/empirical-claims-and-study-design",
+      "preview": "Report effect size, uncertainty, null results, and limitations.",
+      "sourceId": "prisma-2020",
+      "locator": "Methods, Scope; Results and Discussion checklist sections",
+      "verdict": "supportable-after-narrowing",
+      "supportedPart": "PRISMA 2020 does require reporting of results and limitations, across its Results and Discussion sections.",
+      "unsupportedPart": "It governs the reporting of systematic reviews, not the reporting of a primary study. The page prescribes study practice generally.",
+      "narrowedForm": "When reporting a systematic review, PRISMA 2020 requires results and limitations to be reported under its Results and Discussion items."
+    },
+    {
+      "assertionId": "a023",
+      "route": "/knowledge/religion/empirical-claims-and-study-design",
+      "preview": "Separate exploratory from confirmatory hypotheses.",
+      "sourceId": "prisma-2020",
+      "locator": "Methods, Scope",
+      "verdict": "rejected-as-written",
+      "reason": "PRISMA 2020 states that it is not intended to guide systematic review conduct. The page cites it behind guidance about how to conduct a study. The source explicitly forbids the use being made of it.",
+      "recommendedDisposition": "locate-replacement-source",
+      "frameMismatch": "reporting-standard cited for research-conduct guidance"
+    },
+    {
+      "assertionId": "a024",
+      "route": "/knowledge/religion/empirical-claims-and-study-design",
+      "preview": "Use appropriate controls and blinded assessment where possible.",
+      "sourceId": "prisma-2020",
+      "locator": "Methods, Scope",
+      "verdict": "rejected-as-written",
+      "reason": "Study-conduct guidance behind a reporting standard that states it should not be used to assess the conduct or methodological quality of reviews. Same mismatch as the preceding assertion.",
+      "recommendedDisposition": "locate-replacement-source",
+      "frameMismatch": "reporting-standard cited for research-conduct guidance"
+    }
+  ],
+  "idCorrection": "A first pass recorded assertion identifiers that did not match the frozen inventory. The identifiers were re-derived by matching each determination to its exact rendered text, and three determinations turned out to concern assertions outside the frozen top-25. They are recorded separately rather than presented as part of the frozen cohort."
+}

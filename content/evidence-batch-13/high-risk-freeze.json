@@ -1,0 +1,444 @@
+{
+  "schemaVersion": "maha-high-risk-freeze/1.0",
+  "batch": "public-claim-remediation-13",
+  "frozenAt": "2026-09-03",
+  "frozenBeforeInspection": true,
+  "immutable": true,
+  "writtenToProduction": false,
+  "rankingCriteria": [
+    "quantitative specificity",
+    "causal strength",
+    "safety or commercial consequence",
+    "scientific-certainty wording",
+    "centrality to the page",
+    "search visibility",
+    "availability of lawful evidence"
+  ],
+  "rankingNote": "Weighted by what a wrong sentence would cost a reader, not by how easy it would be to fix.",
+  "cohortSize": 25,
+  "pagesSpanned": 12,
+  "assertions": [
+    {
+      "assertionId": "a063",
+      "route": "/knowledge/neuromorphic-biocomputing/biosafety-ethics-and-governance",
+      "risk": 11,
+      "riskFactors": [
+        "safety or commercial consequence",
+        "scientific-certainty wording",
+        "central to the page",
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:83c6d5e0256fbd15a95994f026eed3b0414fd6e6023928c7f5f800e37d0acd82",
+      "textPreview": "Responsible biocomputing governance begins before acquisitio",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "isscr-guidelines",
+        "nih-neuroethics",
+        "organoid-intelligence",
+        "neurobench"
+      ]
+    },
+    {
+      "assertionId": "a017",
+      "route": "/knowledge/religion/contemplative-practice-and-first-person-experience",
+      "risk": 8,
+      "riskFactors": [
+        "safety or commercial consequence",
+        "central to the page",
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:61e5d17d68c67eb73e04816804099c39735872108169b7b815691401e62e9cf7",
+      "textPreview": "Contemplative practices are heterogeneous disciplines embedd",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "nccih-meditation",
+        "unesco-ich-ethics"
+      ]
+    },
+    {
+      "assertionId": "a022",
+      "route": "/knowledge/religion/empirical-claims-and-study-design",
+      "risk": 8,
+      "riskFactors": [
+        "safety or commercial consequence",
+        "central to the page",
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:2bb5c445d00f85966ccc9199fd44e8e597d6deb8a022bc09639ee7cf964d9ca2",
+      "textPreview": "An empirical claim predicts observable differences under spe",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "nccih-meditation",
+        "prisma-2020",
+        "unesco-ich-ethics",
+        "unesco-ich-convention"
+      ]
+    },
+    {
+      "assertionId": "a058",
+      "route": "/knowledge/neuromorphic-biocomputing/reproducibility-variability-and-controls",
+      "risk": 8,
+      "riskFactors": [
+        "safety or commercial consequence",
+        "central to the page",
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:d9e16127e3547ca28acdd29e43285aca5bfc1675736c5aa77985b03e8ee29953",
+      "textPreview": "Reproducibility in neuromorphic and biocomputing research re",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "neurobench",
+        "mea-reproducibility",
+        "isscr-guidelines",
+        "intel-loihi2",
+        "dishbrain"
+      ]
+    },
+    {
+      "assertionId": "a013",
+      "route": "/knowledge/religion/comparative-categories-and-non-equivalence",
+      "risk": 7,
+      "riskFactors": [
+        "scientific-certainty wording",
+        "central to the page",
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:977e1d68b0868627b4d001a36a94f747b810d1a71b5a7f72fb3a6b8c808a8a86",
+      "textPreview": "Comparison is a researcher-constructed operation, not discov",
+      "assertionType": "definitional",
+      "currentSourceIds": [
+        "unesco-multilingualism",
+        "unesco-ich-ethics",
+        "loc-primary-sources",
+        "icomos-charters"
+      ]
+    },
+    {
+      "assertionId": "a053",
+      "route": "/knowledge/neuromorphic-biocomputing/hybrid-bioelectronic-systems",
+      "risk": 7,
+      "riskFactors": [
+        "scientific-certainty wording",
+        "central to the page",
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:d051ffb09ec553869f7e77c6b7a3c0c7a8910734778e98d55d35ded46b3004b8",
+      "textPreview": "A hybrid bioelectronic system combines living cells or tissu",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "dishbrain",
+        "organoid-intelligence",
+        "nih-neuroethics",
+        "neurobench"
+      ]
+    },
+    {
+      "assertionId": "a042",
+      "route": "/knowledge/neuromorphic-biocomputing/synaptic-plasticity-and-learning",
+      "risk": 5,
+      "riskFactors": [
+        "safety or commercial consequence",
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:9ae8dd4987a61d8788fc5ab803cdb88e10faa8e3a5a0ab9024f080e76046a6e9",
+      "textPreview": "Pretraining cost cannot disappear from lifecycle accounting.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "intel-loihi2",
+        "dishbrain"
+      ]
+    },
+    {
+      "assertionId": "a062",
+      "route": "/knowledge/neuromorphic-biocomputing/reproducibility-variability-and-controls",
+      "risk": 5,
+      "riskFactors": [
+        "safety or commercial consequence",
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:a00071c2230392f976ff9bd2bfec3ac1ce93e6a9d08e7ee6a4a4b124d7c0fb96",
+      "textPreview": "Pretraining cost cannot disappear from lifecycle accounting.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "intel-loihi2",
+        "dishbrain"
+      ]
+    },
+    {
+      "assertionId": "a064",
+      "route": "/knowledge/neuromorphic-biocomputing/biosafety-ethics-and-governance",
+      "risk": 5,
+      "riskFactors": [
+        "safety or commercial consequence",
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:5138ccc8a8a8e24af7dd40426d1de9cc30246f3e65c71f22d75de727ff6ec16e",
+      "textPreview": "Classify biological materials, interventions, data, and dual",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "isscr-guidelines",
+        "nih-neuroethics",
+        "organoid-intelligence"
+      ]
+    },
+    {
+      "assertionId": "a065",
+      "route": "/knowledge/neuromorphic-biocomputing/biosafety-ethics-and-governance",
+      "risk": 5,
+      "riskFactors": [
+        "safety or commercial consequence",
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:a00788e689344b6cecbdf99abd3dabf74f95ec5ad792be1bbd260b9a7a753713",
+      "textPreview": "Obtain independent ethics and biosafety review with document",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "isscr-guidelines",
+        "nih-neuroethics",
+        "organoid-intelligence"
+      ]
+    },
+    {
+      "assertionId": "a066",
+      "route": "/knowledge/neuromorphic-biocomputing/biosafety-ethics-and-governance",
+      "risk": 5,
+      "riskFactors": [
+        "safety or commercial consequence",
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:e423732dac617b92487308a864d657a3ad5db6b627a55a4c268642bdba502931",
+      "textPreview": "Monitor, report, stop, retain, share, and dispose under appr",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "isscr-guidelines",
+        "nih-neuroethics",
+        "organoid-intelligence"
+      ]
+    },
+    {
+      "assertionId": "a067",
+      "route": "/knowledge/neuromorphic-biocomputing/biosafety-ethics-and-governance",
+      "risk": 5,
+      "riskFactors": [
+        "safety or commercial consequence",
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:deb3284b3b00e7500fa65d2c8108e533934df52d9ca693784e3dd8be038f59c1",
+      "textPreview": "Scaling samples or devices can change behavior.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "neurobench",
+        "isscr-guidelines",
+        "nih-neuroethics"
+      ]
+    },
+    {
+      "assertionId": "a001",
+      "route": "/knowledge/religion/historical-evidence",
+      "risk": 4,
+      "riskFactors": [
+        "central to the page",
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:d9ad82bab72681028b4450c5a0ea7921730ffe9fdd01f514368f947cbf1f35af",
+      "textPreview": "Historical evidence consists of traces interpreted through e",
+      "assertionType": "definitional",
+      "currentSourceIds": [
+        "loc-primary-sources",
+        "icomos-charters",
+        "tei-guidelines"
+      ]
+    },
+    {
+      "assertionId": "a005",
+      "route": "/knowledge/religion/lived-religion",
+      "risk": 4,
+      "riskFactors": [
+        "central to the page",
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:948e9bfa1631ee363f3d132e08babecaf66322a27a7d202727d6ff554e503da8",
+      "textPreview": "Lived religion examines everyday practice as enacted by part",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "unesco-ich-convention",
+        "unesco-ich-ethics",
+        "unesco-multilingualism"
+      ]
+    },
+    {
+      "assertionId": "a009",
+      "route": "/knowledge/religion/doctrine-and-doctrinal-development",
+      "risk": 4,
+      "riskFactors": [
+        "central to the page",
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:e2b7528d61505840d60a5ea7736c32785a8b47841f854f36fad2f3cca5bc1188",
+      "textPreview": "Doctrine is a formulated teaching authorized to some degree ",
+      "assertionType": "definitional",
+      "currentSourceIds": [
+        "tei-critical-apparatus",
+        "loc-primary-sources",
+        "unesco-ich-convention",
+        "unesco-ich-ethics"
+      ]
+    },
+    {
+      "assertionId": "a043",
+      "route": "/knowledge/neuromorphic-biocomputing/mixed-signal-neuromorphic-hardware",
+      "risk": 4,
+      "riskFactors": [
+        "central to the page",
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:8d1781e9e7936bba8a751a2573baecff400c4950e1632f9413aad441d08ac02a",
+      "textPreview": "Mixed-signal neuromorphic hardware uses analog or subthresho",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "neurobench",
+        "spinnaker2",
+        "intel-loihi2"
+      ]
+    },
+    {
+      "assertionId": "a049",
+      "route": "/knowledge/neuromorphic-biocomputing/brain-organoids-and-organoid-intelligence",
+      "risk": 4,
+      "riskFactors": [
+        "central to the page",
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:e9e552621a61ccd2bce654f318bc501cece303c6f31b7544e656d9206580f118",
+      "textPreview": "Brain organoids are three-dimensional stem-cell-derived mode",
+      "assertionType": "definitional",
+      "currentSourceIds": [
+        "organoid-intelligence",
+        "isscr-guidelines",
+        "nih-neuroethics",
+        "dishbrain"
+      ]
+    },
+    {
+      "assertionId": "a002",
+      "route": "/knowledge/religion/historical-evidence",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:62d06ea50299c537cfe601a6f00f47aaf18e94375143587a1144f10e645b35ba",
+      "textPreview": "Atomize the claim.",
+      "assertionType": "procedural-step",
+      "currentSourceIds": [
+        "loc-primary-sources",
+        "icomos-charters"
+      ]
+    },
+    {
+      "assertionId": "a003",
+      "route": "/knowledge/religion/historical-evidence",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:0a90f72fcccad35acae077d09e1fa40891196d9177d4ca607c6fc56ff511b5f2",
+      "textPreview": "Assess each source’s relation to the claim.",
+      "assertionType": "procedural-step",
+      "currentSourceIds": [
+        "loc-primary-sources",
+        "icomos-charters"
+      ]
+    },
+    {
+      "assertionId": "a004",
+      "route": "/knowledge/religion/historical-evidence",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:04a483e48c0463481660eb789e50ef93b9ba0a01871ec93df3f62c2678282eb5",
+      "textPreview": "Report confidence and live alternatives.",
+      "assertionType": "procedural-step",
+      "currentSourceIds": [
+        "loc-primary-sources",
+        "icomos-charters"
+      ]
+    },
+    {
+      "assertionId": "a006",
+      "route": "/knowledge/religion/lived-religion",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:40e2ddca579fd0525de195c2c6c903fb4546be94ee1edbdf8b3220c5ceb41acd",
+      "textPreview": "Define sampling and researcher position.",
+      "assertionType": "procedural-step",
+      "currentSourceIds": [
+        "unesco-ich-convention",
+        "unesco-ich-ethics"
+      ]
+    },
+    {
+      "assertionId": "a007",
+      "route": "/knowledge/religion/lived-religion",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:090c07d89b50c93ea7a870f3f7dabc550a70f5170d2f3f406885337b9239302b",
+      "textPreview": "Preserve participant categories and disagreement.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "unesco-ich-convention",
+        "unesco-ich-ethics"
+      ]
+    },
+    {
+      "assertionId": "a008",
+      "route": "/knowledge/religion/lived-religion",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:871d8ae05612622be1d475589123792702043b490181c84b5fdf426977bf0e6e",
+      "textPreview": "Avoid generalization beyond the observed setting.",
+      "assertionType": "procedural-step",
+      "currentSourceIds": [
+        "unesco-ich-convention",
+        "unesco-ich-ethics"
+      ]
+    },
+    {
+      "assertionId": "a010",
+      "route": "/knowledge/religion/doctrine-and-doctrinal-development",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:53bf010f54340849a78079fb01a7758caf74c2f00114a5eee9d40599f5d57eb2",
+      "textPreview": "Version each formulation.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "tei-critical-apparatus",
+        "loc-primary-sources"
+      ]
+    },
+    {
+      "assertionId": "a011",
+      "route": "/knowledge/religion/doctrine-and-doctrinal-development",
+      "risk": 1,
+      "riskFactors": [
+        "search visibility"
+      ],
+      "textFingerprint": "sha256:0d09e7cd434f433614fbf887bbfed348e57ee005583bf6788a252fda7b43ff9d",
+      "textPreview": "Map dependencies and disputes.",
+      "assertionType": "empirical-assertion",
+      "currentSourceIds": [
+        "tei-critical-apparatus",
+        "loc-primary-sources"
+      ]
+    }
+  ],
+  "freezeDigest": "sha256:65f7ada0e3076ce576b4fa8a95472582445179485b241354f78193c82e605c3c"
+}

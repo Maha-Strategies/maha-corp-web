@@ -1,0 +1,186 @@
+{
+  "schemaVersion": "maha-governed-corrections/1.0",
+  "batch": "public-claim-remediation-13",
+  "generatedOn": "2026-09-03",
+  "appendOnly": true,
+  "writtenToProduction": false,
+  "active": false,
+  "activeRecordsPreserved": true,
+  "proposalCount": 8,
+  "proposals": [
+    {
+      "assertionId": "a065",
+      "route": "/knowledge/neuromorphic-biocomputing/biosafety-ethics-and-governance",
+      "activeRevision": "sha256:98615959475351bd375cc814fca5fddc3c974c05625702999fbdd82cfda2a51a",
+      "activePageRevision": "sha256:98615959475351bd375cc814fca5fddc3c974c05625702999fbdd82cfda2a51a",
+      "correctedText": "Research in ISSCR category 2 requires review and approval through a specialised scientific and ethics review process.",
+      "correctionKind": "narrow",
+      "rationale": "The consent-scope requirement was not located in the inspected sections and is not carried by the categories.",
+      "proposedRevision": "sha256:a32fb665242b0a04fe8dca09db88d936dc8c50d0a10713f1b07db751a27e0e3d",
+      "provenanceDigest": "sha256:cd2218d72db970133e35bb2d580503ecec2ce44cfe442a90eba9bae4b6149377",
+      "active": false,
+      "appliesToRelease": null
+    },
+    {
+      "assertionId": "a064",
+      "route": "/knowledge/neuromorphic-biocomputing/biosafety-ethics-and-governance",
+      "activeRevision": "sha256:98615959475351bd375cc814fca5fddc3c974c05625702999fbdd82cfda2a51a",
+      "activePageRevision": "sha256:98615959475351bd375cc814fca5fddc3c974c05625702999fbdd82cfda2a51a",
+      "correctedText": "Classify research activities by the level of oversight they require, following ISSCR categories 1A to 3B.",
+      "correctionKind": "narrow",
+      "rationale": "It classifies research activities by required oversight, not materials, data and dual-use risk as four separate axes. The page states a broader taxonomy than the source operates.",
+      "proposedRevision": "sha256:d18cb4abefae196df6926ac56851fe4369b1f2b6efb63c0f161f03fb790217b8",
+      "provenanceDigest": "sha256:5c20aa256547fac55df02c5a71022d138ffc6a68a261c1f91fbdfbf26c672d05",
+      "active": false,
+      "appliesToRelease": null
+    },
+    {
+      "assertionId": "a066",
+      "route": "/knowledge/neuromorphic-biocomputing/biosafety-ethics-and-governance",
+      "activeRevision": "sha256:98615959475351bd375cc814fca5fddc3c974c05625702999fbdd82cfda2a51a",
+      "activePageRevision": "sha256:98615959475351bd375cc814fca5fddc3c974c05625702999fbdd82cfda2a51a",
+      "correctedText": "Work under an appropriate oversight mechanism with a defined endpoint.",
+      "correctionKind": "narrow",
+      "rationale": "Retention, sharing and disposal were not located in the inspected sections.",
+      "proposedRevision": "sha256:d23a6a06bf945a6581eabe3151dfbf48814446945eb0e6d936defb9cdd299c0b",
+      "provenanceDigest": "sha256:fae613722dc2f351bb22ea9efcab26164350f928099069759e446b833b585841",
+      "active": false,
+      "appliesToRelease": null
+    },
+    {
+      "assertionId": "a063",
+      "route": "/knowledge/neuromorphic-biocomputing/biosafety-ethics-and-governance",
+      "activeRevision": "sha256:98615959475351bd375cc814fca5fddc3c974c05625702999fbdd82cfda2a51a",
+      "activePageRevision": "sha256:98615959475351bd375cc814fca5fddc3c974c05625702999fbdd82cfda2a51a",
+      "correctedText": "Responsible biocomputing governance begins before acquisitio [Stated as this page's own working formulation; no inspected source establishes it.]",
+      "correctionKind": "reframe-as-limitation",
+      "rationale": "ISSCR sets oversight expectations for stem cell research. It does not state a biocomputing governance lifecycle running from acquisition through communication, and the page presents that lifecycle as established practice. The framing may be reasonable; it is not what this source says.",
+      "proposedRevision": "sha256:db6325e9b1918be3d2b7abf97ee88b58bb277dff08dac3e234713de73aca7898",
+      "provenanceDigest": "sha256:24d6beed921ea9ef0a0d41c677595d4b13a9730b2bf4e7e6ca03101477132c88",
+      "active": false,
+      "appliesToRelease": null
+    },
+    {
+      "assertionId": "a022",
+      "route": "/knowledge/religion/empirical-claims-and-study-design",
+      "activeRevision": "sha256:5b60c67096a4732f8a59250a59625cc355475b0ff51d289370235cb0343e47a5",
+      "activePageRevision": "sha256:5b60c67096a4732f8a59250a59625cc355475b0ff51d289370235cb0343e47a5",
+      "correctedText": "An empirical claim predicts observable differences under spe [Stated as this page's own working formulation; no inspected source establishes it.]",
+      "correctionKind": "reframe-as-limitation",
+      "rationale": "A definition of what an empirical claim is. PRISMA defines reporting items, not epistemology, and no inspected source states this definition.",
+      "proposedRevision": "sha256:ca510cc3e555b50822a78f9f8d78cfec9c2c39b74eba631469166d7198d8b52b",
+      "provenanceDigest": "sha256:0ca44f397bfafc4909cd87b5d1c09d8e04a8f968ce96f75264011a20a7f0bcf7",
+      "active": false,
+      "appliesToRelease": null
+    },
+    {
+      "assertionId": "a025",
+      "route": "/knowledge/religion/empirical-claims-and-study-design",
+      "activeRevision": "sha256:5b60c67096a4732f8a59250a59625cc355475b0ff51d289370235cb0343e47a5",
+      "activePageRevision": "sha256:5b60c67096a4732f8a59250a59625cc355475b0ff51d289370235cb0343e47a5",
+      "correctedText": "When reporting a systematic review, PRISMA 2020 requires results and limitations to be reported under its Results and Discussion items.",
+      "correctionKind": "narrow",
+      "rationale": "It governs the reporting of systematic reviews, not the reporting of a primary study. The page prescribes study practice generally.",
+      "proposedRevision": "sha256:7694fb8a3609c573c3c3ab328bc5d82fbd7a6c6019623b64dfcc05e2432a8361",
+      "provenanceDigest": "sha256:b39f0cae4ea3d4500abba64f94746942e504c16a4b53280e7c3f96f41cf30c96",
+      "active": false,
+      "appliesToRelease": null
+    },
+    {
+      "assertionId": "a023",
+      "route": "/knowledge/religion/empirical-claims-and-study-design",
+      "activeRevision": "sha256:5b60c67096a4732f8a59250a59625cc355475b0ff51d289370235cb0343e47a5",
+      "activePageRevision": "sha256:5b60c67096a4732f8a59250a59625cc355475b0ff51d289370235cb0343e47a5",
+      "correctedText": "Separate exploratory from confirmatory hypotheses. [This page states this as its own working practice. The source cited for it is a reporting standard that states it must not be used to guide research conduct.]",
+      "correctionKind": "reframe-as-limitation",
+      "rationale": "PRISMA 2020 states that it is not intended to guide systematic review conduct. The page cites it behind guidance about how to conduct a study. The source explicitly forbids the use being made of it.",
+      "proposedRevision": "sha256:e23a1e139ae0254c8c87d4952185a2b215dd0d391164265382c1593cf94188cc",
+      "provenanceDigest": "sha256:d4320eebdcafcfa5cb18d2c299fd9452a38f7f53035d8c1733fada80db8dfd78",
+      "active": false,
+      "appliesToRelease": null
+    },
+    {
+      "assertionId": "a024",
+      "route": "/knowledge/religion/empirical-claims-and-study-design",
+      "activeRevision": "sha256:5b60c67096a4732f8a59250a59625cc355475b0ff51d289370235cb0343e47a5",
+      "activePageRevision": "sha256:5b60c67096a4732f8a59250a59625cc355475b0ff51d289370235cb0343e47a5",
+      "correctedText": "Use appropriate controls and blinded assessment where possib [This page states this as its own working practice. The source cited for it is a reporting standard that states it must not be used to guide research conduct.]",
+      "correctionKind": "reframe-as-limitation",
+      "rationale": "Study-conduct guidance behind a reporting standard that states it should not be used to assess the conduct or methodological quality of reviews. Same mismatch as the preceding assertion.",
+      "proposedRevision": "sha256:3741599629c6915bd2bd651838cb783dfc6d852d1d9ea037efc4282e2f20548c",
+      "provenanceDigest": "sha256:3982a043341341bc0fb8e89e9dd5e13b5d9b36e324914ac1098229b25ed19439",
+      "active": false,
+      "appliesToRelease": null
+    }
+  ],
+  "decisions": [
+    {
+      "assertionId": "a065",
+      "boundToRevision": "sha256:a32fb665242b0a04fe8dca09db88d936dc8c50d0a10713f1b07db751a27e0e3d",
+      "decidedBy": "automated-internal-editorial",
+      "decision": "needs-more-evidence",
+      "decidedAt": "2026-09-03"
+    },
+    {
+      "assertionId": "a064",
+      "boundToRevision": "sha256:d18cb4abefae196df6926ac56851fe4369b1f2b6efb63c0f161f03fb790217b8",
+      "decidedBy": "automated-internal-editorial",
+      "decision": "needs-more-evidence",
+      "decidedAt": "2026-09-03"
+    },
+    {
+      "assertionId": "a066",
+      "boundToRevision": "sha256:d23a6a06bf945a6581eabe3151dfbf48814446945eb0e6d936defb9cdd299c0b",
+      "decidedBy": "automated-internal-editorial",
+      "decision": "needs-more-evidence",
+      "decidedAt": "2026-09-03"
+    },
+    {
+      "assertionId": "a063",
+      "boundToRevision": "sha256:db6325e9b1918be3d2b7abf97ee88b58bb277dff08dac3e234713de73aca7898",
+      "decidedBy": "automated-internal-editorial",
+      "decision": "needs-more-evidence",
+      "decidedAt": "2026-09-03"
+    },
+    {
+      "assertionId": "a022",
+      "boundToRevision": "sha256:ca510cc3e555b50822a78f9f8d78cfec9c2c39b74eba631469166d7198d8b52b",
+      "decidedBy": "automated-internal-editorial",
+      "decision": "needs-more-evidence",
+      "decidedAt": "2026-09-03"
+    },
+    {
+      "assertionId": "a025",
+      "boundToRevision": "sha256:7694fb8a3609c573c3c3ab328bc5d82fbd7a6c6019623b64dfcc05e2432a8361",
+      "decidedBy": "automated-internal-editorial",
+      "decision": "needs-more-evidence",
+      "decidedAt": "2026-09-03"
+    },
+    {
+      "assertionId": "a023",
+      "boundToRevision": "sha256:e23a1e139ae0254c8c87d4952185a2b215dd0d391164265382c1593cf94188cc",
+      "decidedBy": "automated-internal-editorial",
+      "decision": "needs-more-evidence",
+      "decidedAt": "2026-09-03"
+    },
+    {
+      "assertionId": "a024",
+      "boundToRevision": "sha256:3741599629c6915bd2bd651838cb783dfc6d852d1d9ea037efc4282e2f20548c",
+      "decidedBy": "automated-internal-editorial",
+      "decision": "needs-more-evidence",
+      "decidedAt": "2026-09-03"
+    }
+  ],
+  "decisionNote": "Every decision is recorded as needs-more-evidence. An automated internal reading is not a completed editorial review, and recording it as one would manufacture the approval the canary requires.",
+  "previewCanary": {
+    "available": false,
+    "reason": "Only 0 proposals carry a completed approval. A smaller cohort was not constructed, as instructed, so no Preview canary is prepared.",
+    "cohortSize": 0
+  },
+  "productionReachability": {
+    "provenUnreachable": true,
+    "attempts": 8,
+    "note": "Each proposal was tested against assertMayReachProduction with an authenticated release authority. All were refused, because no decision is approved. Authority alone is not sufficient."
+  },
+  "boundary": "Proposals only. The active revision of every page is unchanged and every proposal carries active:false with appliesToRelease:null."
+}

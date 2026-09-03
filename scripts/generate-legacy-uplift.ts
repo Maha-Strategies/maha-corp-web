@@ -100,7 +100,7 @@ const attested = new Map<string, Attestation>(
  * evidence wherever it is cited, so the exclusion belongs to the source rather
  * than to a list of routes.
  */
-const VENDOR_AUTHORED_SOURCES = new Set(['asml-lithography', 'tel-process-equipment', 'amkor-3d-stack'])
+const VENDOR_AUTHORED_SOURCES = new Set(['asml-lithography', 'tel-process-equipment', 'amkor-3d-stack', 'advantest-products-overview'])
 
 const withAttestation = (s: LegacySource): LegacySource => {
   const a = attested.get(s.id)
@@ -288,7 +288,12 @@ for (const sup of KNOWLEDGE_SUPPLIERS as unknown as Any[]) {
     family: 'semiconductor-suppliers', slug: String(sup.slug),
     route: `/knowledge/suppliers/${String(sup.slug)}`,
     title: String(sup.name), definition: str(sup.summary), description: str(sup.summary),
-    mechanism: arr(sup.capabilityEvidence), measurements: [],
+    // Named products are mechanism content: what the vendor says each system
+    // addresses. Every line names the company, so a reader is never left to
+    // assume independent measurement.
+    mechanism: [...arr(sup.capabilityEvidence), ...((sup.namedProducts as { name: string; addresses: string }[] | undefined) ?? [])
+      .map((prod) => `${prod.name}: ${prod.addresses}`)],
+    measurements: [],
     limitations: arr(sup.boundary),
     // A supplier profile records a capability boundary, which is a genuine
     // statement of what the evidence does not reach.
@@ -492,7 +497,7 @@ const depth = {
  * and their pages were counted as independently supported ever since. A company
  * describing its own products is first-party evidence whenever it was read.
  */
-const VENDOR_AUTHORED = new Set(['asml-lithography', 'tel-process-equipment', 'amkor-3d-stack'])
+const VENDOR_AUTHORED = new Set(['asml-lithography', 'tel-process-equipment', 'amkor-3d-stack', 'advantest-products-overview'])
 
 const vendorBackedRoutes = new Set(
   (attestationFile.attestations as { sourceId: string }[])
@@ -504,6 +509,11 @@ function compiledRoutesFor(sourceId: string): string[] {
     'asml-lithography': ['/knowledge/suppliers/asml'],
     'tel-process-equipment': ['/knowledge/suppliers/tokyo-electron'],
     'amkor-3d-stack': ['/knowledge/suppliers/amkor-technology'],
+    // Batch 13. Giving this catalogue a declared scope made the page eligible,
+    // which would otherwise have moved it out of the first-party state and
+    // dropped its disclosure. A vendor describing its own catalogue confers no
+    // independent support however well scoped it is.
+    'advantest-products-overview': ['/knowledge/suppliers/advantest'],
   }
   return map[sourceId] ?? []
 }
@@ -512,6 +522,19 @@ const firstPartyRoutes = new Set(
   (supplierFirstParty.inspected as { route: string; eligible: boolean }[])
     .filter((entry) => entry.eligible).map((entry) => entry.route))
 for (const route of vendorBackedRoutes) firstPartyRoutes.add(route)
+// A supplier page citing the vendor's own documentation is first-party whether
+// or not that source carries an attestation. Without this, giving a vendor
+// catalogue a declared scope moves the page out of the first-party state and
+// drops its disclosure -- the page becomes more documented and less labelled.
+// Scoped to supplier routes so it cannot capture an equipment or process page.
+for (const input of withBatch1) {
+  if (!input.route.startsWith('/knowledge/suppliers/')) continue
+  const ids = (input.sources as unknown as { id: string }[]).map((x) => x.id)
+  if (ids.some((id) => VENDOR_AUTHORED.has(id))) {
+    vendorBackedRoutes.add(input.route)
+    firstPartyRoutes.add(input.route)
+  }
+}
 
 const sourceSupportedPages = eligible.filter((r) =>
   (r.after?.explanatorySources ?? 0) > 0 && !vendorBackedRoutes.has(r.route))
