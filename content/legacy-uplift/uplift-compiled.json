@@ -4316,12 +4316,12 @@
           "source-boundary"
         ],
         "dimensionCount": 8,
-        "sourceCount": 2,
-        "sourcesWithBoundary": 2,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
         "referenceOnlySources": 0,
-        "declaredLocators": 2,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 1,
         "relatedRouteCount": 3,
         "renderedSections": 6
@@ -4341,12 +4341,12 @@
           "typed-bridges"
         ],
         "dimensionCount": 9,
-        "sourceCount": 2,
-        "sourcesWithBoundary": 2,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
         "referenceOnlySources": 0,
-        "declaredLocators": 2,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 1,
         "relatedRouteCount": 3,
         "renderedSections": 6
@@ -4360,7 +4360,8 @@
           ],
           "sourceIds": [
             "nist-dlmf-numerical",
-            "nist-gum"
+            "nist-gum",
+            "nist-tn1297-uncertainty"
           ]
         },
         {
@@ -4373,7 +4374,8 @@
           ],
           "sourceIds": [
             "nist-dlmf-numerical",
-            "nist-gum"
+            "nist-gum",
+            "nist-tn1297-uncertainty"
           ]
         },
         {
@@ -4386,7 +4388,8 @@
           ],
           "sourceIds": [
             "nist-dlmf-numerical",
-            "nist-gum"
+            "nist-gum",
+            "nist-tn1297-uncertainty"
           ]
         },
         {
@@ -4402,7 +4405,8 @@
           ],
           "sourceIds": [
             "nist-dlmf-numerical",
-            "nist-gum"
+            "nist-gum",
+            "nist-tn1297-uncertainty"
           ]
         },
         {
@@ -4413,7 +4417,8 @@
           ],
           "sourceIds": [
             "nist-dlmf-numerical",
-            "nist-gum"
+            "nist-gum",
+            "nist-tn1297-uncertainty"
           ]
         },
         {
@@ -4431,12 +4436,13 @@
           ],
           "sourceIds": [
             "nist-dlmf-numerical",
-            "nist-gum"
+            "nist-gum",
+            "nist-tn1297-uncertainty"
           ]
         }
       ],
       "sectionCount": 6,
-      "upliftDigest": "sha256:9836ca7f1b0fc70a1e98030718eaf528b7a57b18707af96f6cb17136265d83a8"
+      "upliftDigest": "sha256:1f2d264b76615638e91b71833f59e868cedf555f7c7d445c90e79cf3b559f377"
     },
     {
       "route": "/knowledge/mathematics/uncertainty-propagation",
@@ -11250,12 +11256,12 @@
           "source-boundary"
         ],
         "dimensionCount": 8,
-        "sourceCount": 2,
-        "sourcesWithBoundary": 2,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
         "referenceOnlySources": 0,
-        "declaredLocators": 2,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 0,
         "relatedRouteCount": 3,
         "renderedSections": 6
@@ -11275,12 +11281,12 @@
           "source-boundary"
         ],
         "dimensionCount": 9,
-        "sourceCount": 2,
-        "sourcesWithBoundary": 2,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
         "referenceOnlySources": 0,
-        "declaredLocators": 2,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 0,
         "relatedRouteCount": 3,
         "renderedSections": 6
@@ -11294,7 +11300,8 @@
           ],
           "sourceIds": [
             "mea-protocol",
-            "dishbrain"
+            "dishbrain",
+            "obien-2015-mea-recordings"
           ]
         },
         {
@@ -11307,7 +11314,8 @@
           ],
           "sourceIds": [
             "mea-protocol",
-            "dishbrain"
+            "dishbrain",
+            "obien-2015-mea-recordings"
           ]
         },
         {
@@ -11320,7 +11328,8 @@
           ],
           "sourceIds": [
             "mea-protocol",
-            "dishbrain"
+            "dishbrain",
+            "obien-2015-mea-recordings"
           ]
         },
         {
@@ -11345,7 +11354,8 @@
           ],
           "sourceIds": [
             "mea-protocol",
-            "dishbrain"
+            "dishbrain",
+            "obien-2015-mea-recordings"
           ]
         },
         {
@@ -11353,16 +11363,18 @@
           "heading": "Boundaries declared by the cited sources",
           "items": [
             "A protocol improves procedural visibility but does not eliminate biological batch variation, electrode-culture differences, contamination, analytic flexibility, or differences among cell sources and laboratories. (boundary declared by A practical guide to culturing and recording from neuronal networks using microelectrode arrays)",
-            "The observed closed-loop behavior is a bounded experimental result. The paper title’s use of sentience is not accepted here as proof of consciousness, subjective experience, general intelligence, or deployable biological computing. (boundary declared by In vitro neurons learn and exhibit sentience when embodied in a simulated game-world)"
+            "The observed closed-loop behavior is a bounded experimental result. The paper title’s use of sentience is not accepted here as proof of consciousness, subjective experience, general intelligence, or deployable biological computing. (boundary declared by In vitro neurons learn and exhibit sentience when embodied in a simulated game-world)",
+            "The review establishes no comparative efficacy against optical methods, no clinical validity and no long-term biocompatibility beyond manufacturer testing. It cannot support a claim that any cultured network performs computation. (boundary declared by Revealing neuronal function through microelectrode array recordings)"
           ],
           "sourceIds": [
             "mea-protocol",
-            "dishbrain"
+            "dishbrain",
+            "obien-2015-mea-recordings"
           ]
         }
       ],
       "sectionCount": 6,
-      "upliftDigest": "sha256:ac763ed147b3466327bd40cb7b6c3acedb4db39c80cb8323e6d5a3b8a0e6425d"
+      "upliftDigest": "sha256:72086e5d2ce1b2bf086505eca9583c3b888a23493382de0380e1e718c9350b1d"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/multielectrode-arrays-and-stimulation",
@@ -18461,12 +18473,12 @@
           "source-boundary"
         ],
         "dimensionCount": 8,
-        "sourceCount": 2,
-        "sourcesWithBoundary": 2,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
         "referenceOnlySources": 0,
-        "declaredLocators": 2,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 0,
         "relatedRouteCount": 2,
         "renderedSections": 6
@@ -18486,12 +18498,12 @@
           "source-boundary"
         ],
         "dimensionCount": 9,
-        "sourceCount": 2,
-        "sourcesWithBoundary": 2,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
         "referenceOnlySources": 0,
-        "declaredLocators": 2,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 0,
         "relatedRouteCount": 2,
         "renderedSections": 6
@@ -18505,7 +18517,8 @@
           ],
           "sourceIds": [
             "neurobench",
-            "intel-loihi2"
+            "intel-loihi2",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         },
         {
@@ -18518,7 +18531,8 @@
           ],
           "sourceIds": [
             "neurobench",
-            "intel-loihi2"
+            "intel-loihi2",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         },
         {
@@ -18531,7 +18545,8 @@
           ],
           "sourceIds": [
             "neurobench",
-            "intel-loihi2"
+            "intel-loihi2",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         },
         {
@@ -18556,7 +18571,8 @@
           ],
           "sourceIds": [
             "neurobench",
-            "intel-loihi2"
+            "intel-loihi2",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         },
         {
@@ -18567,12 +18583,13 @@
           ],
           "sourceIds": [
             "neurobench",
-            "intel-loihi2"
+            "intel-loihi2",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         }
       ],
       "sectionCount": 6,
-      "upliftDigest": "sha256:7388cd2fe831fc1b1466886ccd8cb9e335a3f1b72eb1d04b4f43022450fc90c0"
+      "upliftDigest": "sha256:974198833a91f606839df778a65c4deff36d65acf3ea687959885af6344ac9f8"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/comparisons/simulation-and-physical-substrate",
@@ -18866,12 +18883,12 @@
           "source-boundary"
         ],
         "dimensionCount": 8,
-        "sourceCount": 2,
-        "sourcesWithBoundary": 2,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
         "referenceOnlySources": 0,
-        "declaredLocators": 2,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 0,
         "relatedRouteCount": 2,
         "renderedSections": 6
@@ -18891,12 +18908,12 @@
           "source-boundary"
         ],
         "dimensionCount": 9,
-        "sourceCount": 2,
-        "sourcesWithBoundary": 2,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
         "referenceOnlySources": 0,
-        "declaredLocators": 2,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 0,
         "relatedRouteCount": 2,
         "renderedSections": 6
@@ -18910,7 +18927,8 @@
           ],
           "sourceIds": [
             "neurobench",
-            "organoid-intelligence"
+            "organoid-intelligence",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         },
         {
@@ -18923,7 +18941,8 @@
           ],
           "sourceIds": [
             "neurobench",
-            "organoid-intelligence"
+            "organoid-intelligence",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         },
         {
@@ -18936,7 +18955,8 @@
           ],
           "sourceIds": [
             "neurobench",
-            "organoid-intelligence"
+            "organoid-intelligence",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         },
         {
@@ -18961,7 +18981,8 @@
           ],
           "sourceIds": [
             "neurobench",
-            "organoid-intelligence"
+            "organoid-intelligence",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         },
         {
@@ -18972,12 +18993,13 @@
           ],
           "sourceIds": [
             "neurobench",
-            "organoid-intelligence"
+            "organoid-intelligence",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         }
       ],
       "sectionCount": 6,
-      "upliftDigest": "sha256:6736f685bd1a50a5004bd94417ef0d63ae396c9966d82fcd6ff6e243e9cd4535"
+      "upliftDigest": "sha256:e20261dbba120da0520fa7d517955af7e0a85efe008a87b21bf55cf83dde51b5"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/comparisons/offline-training-and-online-adaptation",

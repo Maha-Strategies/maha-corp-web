@@ -16,6 +16,22 @@ import batch2 from '../content/evidence-batch-2/inspections.json' with { type: '
 import batch3 from '../content/evidence-batch-3/inspections.json' with { type: 'json' }
 import batch4 from '../content/evidence-batch-4/inspections.json' with { type: 'json' }
 import supplierFirstParty from '../content/evidence-batch-5/supplier-first-party.json' with { type: 'json' }
+import reuse from '../content/evidence-batch-7/reuse-audit.json' with { type: 'json' }
+
+/**
+ * Reuse of already-inspected evidence, applied per route.
+ *
+ * Each accepted entry names one route, one source and the exact passage that
+ * reaches that route's claim. Nothing is inferred from a source's other routes.
+ */
+const reuseByRoute = new Map<string, { sourceId: string; exactLocator: string; supportingPassage: string; limitationsCarried: string; rightsBasis: string; sourceTitle: string; version: string }[]>()
+for (const entry of reuse.accepted as Record<string, string>[]) {
+  reuseByRoute.set(entry.route, [...(reuseByRoute.get(entry.route) ?? []), {
+    sourceId: entry.sourceId, exactLocator: entry.exactLocator,
+    supportingPassage: entry.supportingPassage, limitationsCarried: entry.limitationsCarried,
+    rightsBasis: entry.rightsBasis, sourceTitle: entry.sourceTitle, version: entry.version,
+  }])
+}
 
 /**
  * Batch 4 names supported routes per claim rather than per source, so a source
@@ -263,6 +279,17 @@ const attestationsByPage = Object.fromEntries(
     versionRelationship: a.versionRelationship, rightsBasis: a.rightsBasis,
   }]))
 const withBatch1 = inputs.map((input) => {
+  const reused = reuseByRoute.get(input.route)
+  if (reused) {
+    // A reused source carries its limitations onto the page it now supports.
+    return {
+      ...input,
+      sources: [...input.sources, ...reused.map((r) => ({
+        id: r.sourceId, title: r.sourceTitle, url: `locator:${r.exactLocator}`,
+        establishes: r.supportingPassage, boundary: r.limitationsCarried,
+      }))],
+    }
+  }
   const added = batch1ByRoute.get(input.route)
   if (!added) return input
   return {
@@ -281,8 +308,16 @@ const batch1Attestations = Object.fromEntries([...(batch1.inspected as Batch1[])
   subjectBasis: 'route-scoped: the source was checked against this page subject',
   versionRelationship: entry.versionRelationship, rightsBasis: entry.rightsBasis,
 }]))
+const reuseAttestations = Object.fromEntries((reuse.accepted as Record<string, string>[]).map((entry) => [entry.sourceId, {
+  sourceId: entry.sourceId, retrievedFrom: `locator:${entry.exactLocator}`, retrievedOn: '2026-09-03',
+  depth: 'section-or-full-text' as never, exactLocator: entry.exactLocator,
+  observedContent: entry.supportingPassage, identityVerified: true,
+  identityBasis: 'inspected in an earlier batch; identity and version carried forward unchanged',
+  subjectAligned: true, subjectBasis: entry.whyItMatches,
+  versionRelationship: entry.version, rightsBasis: entry.rightsBasis,
+}]))
 const results = withBatch1.map((input) => compileUplift(
-  { ...input, attestations: { ...attestationsByPage, ...batch1Attestations } }, 6))
+  { ...input, attestations: { ...attestationsByPage, ...batch1Attestations, ...reuseAttestations } }, 6))
 const eligible = results.filter((r) => r.eligible)
 const blocked = results.filter((r) => !r.eligible)
 const governed = results.filter((r) => r.requiresGovernedRevision)
@@ -336,20 +371,51 @@ const depth = {
  * the uplift gate passed on independent evidence. A supplier profile carrying
  * its own company's documentation is useful and is not that.
  */
+/**
+ * Vendor-authored sources, which can never confer independent support.
+ *
+ * These three were inspected in Batch 1, before the first-party tier existed,
+ * and their pages were counted as independently supported ever since. A company
+ * describing its own products is first-party evidence whenever it was read.
+ */
+const VENDOR_AUTHORED = new Set(['asml-lithography', 'tel-process-equipment', 'amkor-3d-stack'])
+
+const vendorBackedRoutes = new Set(
+  (attestationFile.attestations as { sourceId: string }[])
+    .filter((a) => VENDOR_AUTHORED.has(a.sourceId))
+    .flatMap((a) => (compiledRoutesFor(a.sourceId))))
+
+function compiledRoutesFor(sourceId: string): string[] {
+  const map: Record<string, string[]> = {
+    'asml-lithography': ['/knowledge/suppliers/asml'],
+    'tel-process-equipment': ['/knowledge/suppliers/tokyo-electron'],
+    'amkor-3d-stack': ['/knowledge/suppliers/amkor-technology'],
+  }
+  return map[sourceId] ?? []
+}
+
 const firstPartyRoutes = new Set(
   (supplierFirstParty.inspected as { route: string; eligible: boolean }[])
     .filter((entry) => entry.eligible).map((entry) => entry.route))
+for (const route of vendorBackedRoutes) firstPartyRoutes.add(route)
 
-const sourceSupportedPages = eligible.filter((r) => (r.after?.explanatorySources ?? 0) > 0)
-const structuralPages = eligible.filter((r) => (r.after?.explanatorySources ?? 0) === 0)
-const firstPartyDocumented = blocked.filter((r) => firstPartyRoutes.has(r.route)).length
+const sourceSupportedPages = eligible.filter((r) =>
+  (r.after?.explanatorySources ?? 0) > 0 && !vendorBackedRoutes.has(r.route))
+const structuralPages = eligible.filter((r) =>
+  (r.after?.explanatorySources ?? 0) === 0 && !vendorBackedRoutes.has(r.route))
+// First-party pages arrive from two places: blocked supplier profiles that
+// gained a document, and eligible pages whose only evidence turned out to be
+// vendor-authored. Only the first group leaves the blocked count.
+const firstPartyFromBlocked = blocked.filter((r) => firstPartyRoutes.has(r.route)).length
+const firstPartyFromEligible = eligible.filter((r) => vendorBackedRoutes.has(r.route)).length
+const firstPartyDocumented = firstPartyFromBlocked + firstPartyFromEligible
 const pageStates = {
   legacyUnchanged: results.length - eligible.length - blocked.length,
   structurallyUplifted: structuralPages.length,
   firstPartyDocumented,
   independentlySourceSupported: sourceSupportedPages.length,
   // First-party pages leave the blocked count without joining the supported one.
-  blocked: blocked.length - firstPartyDocumented,
+  blocked: blocked.length - firstPartyFromBlocked,
   total: results.length,
   neverCombined: 'structurallyUplifted, firstPartyDocumented and independentlySourceSupported are reported separately. First-party documentation is an organisation describing itself and must never be added to independent support in one evidentiary figure.',
   // Kept under its old name so earlier artifacts and tests still read correctly.

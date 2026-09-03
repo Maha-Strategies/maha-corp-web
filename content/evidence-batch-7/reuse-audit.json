@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "maha-evidence-reuse-audit/1.0",
+  "batch": "evidence-reuse-and-access-closure-7",
+  "conductedOn": "2026-09-03",
+  "appendOnly": true,
+  "writtenToProduction": false,
+  "principle": "Reuse requires the inspected passage to support this page's bounded claim. Graph proximity, family membership and a shared word are not support, and no source was reopened or reinterpreted to raise its page count.",
+  "inspectedSourceInventory": {
+    "sources": 15,
+    "allSectionOrFullText": true,
+    "routesSupportedBefore": 21
+  },
+  "accepted": [
+    {
+      "route": "/knowledge/mathematics/convergence-precision-and-error",
+      "sourceId": "nist-tn1297-uncertainty",
+      "sourceTitle": "NIST Technical Note 1297, Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results",
+      "version": "1994 edition",
+      "exactLocator": "Section 2.3 note on error and uncertainty; Section 5.1 Combined Standard Uncertainty; Appendix A Law of Propagation of Uncertainty",
+      "pageClaim": "Error is deviation from a reference quantity, and is distinct from precision and from the uncertainty attached to a result.",
+      "supportingPassage": "The Note states that the difference between error and uncertainty should always be borne in mind, giving the example that a result after correction can unknowably be very close to the unknown value of the measurand and so have negligible error even though it carries a large uncertainty. Section 5.1 gives the combination rule by which component uncertainties propagate.",
+      "whyItMatches": "The page's own subject is the separation of convergence, precision and error. The Note draws exactly that separation between error and uncertainty and supplies the propagation rule, so the passage speaks to the page's claim rather than merely sharing vocabulary with it.",
+      "limitationsCarried": "Section 3 states the Note does not give detailed statistical techniques for Type A evaluations. It prescribes no calibration procedure and no industry protocol, so it cannot support a claim about how any particular quantity was measured.",
+      "rightsBasis": "US government work, citation-with-paraphrase"
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/comparisons/silicon-energy-and-biological-metabolic-cost",
+      "sourceId": "ostrau-2022-neuromorphic-benchmarking",
+      "sourceTitle": "Benchmarking Neuromorphic Hardware and Its Energy Expenditure",
+      "version": "Frontiers in Neuroscience 2022, version of record",
+      "exactLocator": "Section 3.4, energy model and results",
+      "pageClaim": "Whether energy efficiency can be compared across electronic and living systems.",
+      "supportingPassage": "Section 3.4 reports that neuromorphic hardware lags human-brain efficiency by four orders of magnitude even under optimistic scaling assumptions, which is a direct silicon-against-biology energy statement, and that modelled and measured energy agreed within about ten percent on one mixed-signal system.",
+      "whyItMatches": "The page asks whether the comparison can be made at all. The passage makes that comparison explicitly and states the scale of the gap, so it supports the page's own question rather than a neighbouring one.",
+      "limitationsCarried": "The study validates no vendor efficiency claim, declares no platform universally superior, and its results depend on workload and configuration, so it cannot support a general claim that either substrate is more efficient.",
+      "rightsBasis": "Frontiers open access, citation-with-paraphrase"
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/comparisons/digital-and-mixed-signal-neuromorphic-hardware",
+      "sourceId": "ostrau-2022-neuromorphic-benchmarking",
+      "sourceTitle": "Benchmarking Neuromorphic Hardware and Its Energy Expenditure",
+      "version": "Frontiers in Neuroscience 2022, version of record",
+      "exactLocator": "Methods Section 2.1; Section 3.4",
+      "pageClaim": "How deterministic digital state and variable analog dynamics can be compared fairly.",
+      "supportingPassage": "Methods 2.1 records that simulators differ in numerical approach, with one using a closed-form representation assuming fixed input current where another integrates more precisely. Section 3.4 reports predicted and measured energy agreeing within about ten percent for the mixed-signal Spikey system, against separately benchmarked digital platforms.",
+      "whyItMatches": "The page's claim is about fair comparison across digital and mixed-signal substrates. The passage describes how the two classes were actually benchmarked side by side and where the modelling assumptions differ between them.",
+      "limitationsCarried": "Results depend on workload and configuration, no platform is declared universally superior, and conventional accelerators remained competitive for some workloads.",
+      "rightsBasis": "Frontiers open access, citation-with-paraphrase"
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/bioelectronic-interfaces",
+      "sourceId": "obien-2015-mea-recordings",
+      "sourceTitle": "Revealing neuronal function through microelectrode array recordings",
+      "version": "Frontiers in Neuroscience 2015, version of record",
+      "exactLocator": "Neuron-Electrode Interface; Understanding MEA Signals; MEA Signal Processing",
+      "pageClaim": "A bioelectronic interface couples living cells to electrodes and is itself an active measurement system with impedance, noise and selectivity.",
+      "supportingPassage": "The Neuron-Electrode Interface section records that electrodes detect signals from all sources around every sensor rather than resolving single cells as intracellular methods do. Understanding MEA Signals records extracellular action potentials at tens to hundreds of microvolts and under two milliseconds against tens of millivolts intracellularly, and MEA Signal Processing records a typical 300 to 3000 hertz band.",
+      "whyItMatches": "The page's claim is that the interface is a measurement system with its own selectivity and noise characteristics. The passage states precisely that: what the electrode integrates over, at what amplitude, and within what band.",
+      "limitationsCarried": "The review establishes no comparative efficacy against optical methods, no clinical validity and no long-term biocompatibility beyond manufacturer testing. It cannot support a claim that any cultured network performs computation.",
+      "rightsBasis": "Frontiers open access, citation-with-paraphrase"
+    }
+  ],
+  "rejected": [
+    {
+      "route": "/knowledge/mathematics/calibration-and-reliability",
+      "sourceId": "nist-tn1297-uncertainty",
+      "reason": "The page is about probabilistic forecast calibration, where a forecaster is calibrated if events given probability p occur at frequency p. The Note is about instrument and measurement calibration. The two senses of calibration are unrelated, and matching on the word would be the clearest possible case of the substitution this audit exists to prevent.",
+      "rejectionClass": "word-match-not-subject-match"
+    },
+    {
+      "route": "/knowledge/astronomy/evidence-uncertainty-and-model-comparison",
+      "sourceId": "nist-tn1297-uncertainty",
+      "reason": "The page is about astronomical inference with likelihoods, priors and selection functions. The Note is measurement uncertainty methodology and says nothing about model comparison. This route was already refused on the same ground in Batch 3 and the refusal stands.",
+      "rejectionClass": "subject-drift"
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/comparisons/benchmark-performance-and-biological-plausibility",
+      "sourceId": "ostrau-2022-neuromorphic-benchmarking",
+      "reason": "The page's claim is about the tension between task utility and resemblance to biological mechanism. The study benchmarks task performance and energy and does not address biological plausibility, so it covers one side of a two-sided claim.",
+      "rejectionClass": "supports-only-part-of-the-claim"
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/comparisons/dissociated-neural-culture-and-brain-organoid",
+      "sourceId": "obien-2015-mea-recordings",
+      "reason": "The review covers recording from cultures but does not compare dissociated culture against organoid, which is what this page's claim asks. Adjacency in the same family is not support.",
+      "rejectionClass": "positional-family-inference-refused"
+    }
+  ],
+  "summary": {
+    "structuralPagesReviewed": 25,
+    "accepted": 4,
+    "rejected": 4,
+    "sourcesReopened": 0,
+    "newSourcesRequired": 21,
+    "positionalInferencesUsed": 0,
+    "note": "Four conversions from already-inspected evidence. Every accepted reuse names the exact passage and carries the source's limitations with it; every rejection names why the passage does not reach the claim."
+  },
+  "boundary": "A private reuse audit. No source was reopened and no passage is reproduced beyond what states the support and its limits.",
+  "routeCorrectionNote": "Two accepted and two rejected entries were first written against the concept path. Those four pages are comparison pages and live under /comparisons/. The routes were corrected against the compiled inventory rather than left to silently match nothing."
+}
