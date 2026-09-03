@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
+
+import { isVendorAuthored } from '../lib/uplift/vendor-authorship.ts'
 import { execFileSync } from 'node:child_process'
 import { readFileSync, writeFileSync, rmSync } from 'node:fs'
 import { resolve } from 'node:path'
@@ -69,9 +71,12 @@ test('no source was reopened to raise its page count', () => {
 test('vendor-authored sources cannot confer independent support', () => {
   // Batch 9 moved this from a route list to a source-level exclusion, so a
   // vendor-authored source now confers nothing on any page that cites it.
-  const script = readFileSync(resolve(ROOT, 'scripts/generate-legacy-uplift.ts'), 'utf8')
-  assert.match(script, /VENDOR_AUTHORED_SOURCES/)
-  assert.match(script, /exclusion belongs to the source rather/)
+  // Asserted through the module. A source-text grep would pass even if the
+  // exclusion had been deleted, as long as the identifier still appeared.
+  assert.ok(isVendorAuthored('asml-lithography'))
+  assert.ok(isVendorAuthored('tel-process-equipment'))
+  assert.ok(isVendorAuthored('amkor-3d-stack'))
+  assert.equal(isVendorAuthored('nist-dlmf-3-8'), false)
   const supplierPages = compiled.pages.filter((p) => p.route.startsWith('/knowledge/suppliers/'))
   assert.ok(supplierPages.length > 0)
   assert.equal(report.pageStates.firstPartyDocumented, 10)
