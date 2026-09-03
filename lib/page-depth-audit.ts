@@ -17,6 +17,8 @@ import { canonicalJson } from './evidence-dossier/digest.ts'
 export const DEPTH_STATES = [
   'substantial-and-evidence-backed',
   'evidence-backed-but-thin',
+  'first-party-documented-and-substantial',
+  'first-party-documented-but-thin',
   'structurally-substantial-but-unsupported',
   'structurally-thin',
   'blocked',
@@ -103,9 +105,13 @@ export function auditDepth(
     reasons.push('more passage-backed claims than explanatory claims, which cannot be right')
   }
 
-  const state: DepthState = evidenceBacked
-    ? (substantial ? 'substantial-and-evidence-backed' : 'evidence-backed-but-thin')
-    : (substantial ? 'structurally-substantial-but-unsupported' : 'structurally-thin')
+  // First-party pages get their own pair, so a supplier profile is never
+  // described in the same words as an independently supported page.
+  const state: DepthState = classification === 'first-party'
+    ? (substantial ? 'first-party-documented-and-substantial' : 'first-party-documented-but-thin')
+    : evidenceBacked
+      ? (substantial ? 'substantial-and-evidence-backed' : 'evidence-backed-but-thin')
+      : (substantial ? 'structurally-substantial-but-unsupported' : 'structurally-thin')
 
   // A score for ranking only. It never decides the state.
   const score = Number((
@@ -129,6 +135,24 @@ function finish(
 ): DepthVerdict {
   const body = { route, state, measures, substantialityScore, reasons }
   return { ...body, verdictDigest: sha(body) }
+}
+
+/**
+ * A headline denominator must equal the cohort actually behind it.
+ *
+ * Batch 9 audited 59 pages and reported "10 of 167". The categories summed to
+ * 59 and the claim was made against 167, which is how a sampled result becomes
+ * a corpus-wide one by accident. Nothing may state a denominator it did not
+ * enumerate.
+ */
+export function assertDenominatorEnumerated(
+  label: string, denominator: number, enumerated: readonly unknown[],
+): void {
+  if (denominator !== enumerated.length) {
+    throw new Error(
+      `${label}: denominator ${denominator} does not match the ${enumerated.length} records enumerated behind it. State the audited count, not the corpus size.`,
+    )
+  }
 }
 
 /** Length alone must never move a page's state. */

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "maha-religion-primary-text-pilot/1.0",
+  "batch": "baseline-reconciliation-10",
+  "frozenAt": "2026-09-03",
+  "frozenBeforeInspection": true,
+  "cohortSize": 6,
+  "cohort": [
+    "/knowledge/religion/canon-formation-and-textual-transmission",
+    "/knowledge/religion/manuscript-evidence-and-textual-criticism",
+    "/knowledge/religion/translation-and-semantic-drift",
+    "/knowledge/religion/genre-rhetoric-and-context",
+    "/knowledge/religion/doctrine-and-doctrinal-development",
+    "/knowledge/religion/contemplative-practice-and-first-person-experience"
+  ],
+  "selectionBasis": "Pages whose claims are about texts and their transmission, where a primary text in a declared edition can establish what that edition says. Pages whose claims are historical, empirical or metaphysical were deliberately left out of a primary-text pilot.",
+  "evidentiaryFrames": {
+    "textual": "What a named edition or translation says at a named locator. A primary text establishes this and only this.",
+    "historical": "What happened. Requires historical scholarship, not the text's own assertion.",
+    "theological": "What a tradition holds the text to mean. Interpretive, and never established by the text alone.",
+    "empirical": "What a study measured. Requires a study.",
+    "first-person": "What a practitioner reports experiencing. Requires a report, and establishes the report rather than its content.",
+    "transferRule": "Validity never moves between frames. A primary text saying a thing happened is textual evidence that the text says so, and historical evidence of nothing."
+  },
+  "requiredPerSource": ["edition", "translator where applicable", "passage locator", "rights basis", "interpretive limitation", "frame"],
+  "inspected": [],
+  "outcome": {
+    "sourcesInspected": 0,
+    "pagesConverted": 0,
+    "reason": "The cohort is frozen and its frame contract is recorded, and no primary text was inspected within this batch. Recording an uninspected pilot as attempted would misstate it, and inspecting a primary text properly means naming an edition, a translation and a locator, which was not reached here.",
+    "readyForNextBatch": true
+  },
+  "boundary": "A frozen pilot cohort. No claim is made and no text has been read."
+}

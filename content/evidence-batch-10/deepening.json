@@ -1,0 +1,135 @@
+{
+  "schemaVersion": "maha-thin-page-deepening/1.0",
+  "batch": "baseline-reconciliation-10",
+  "conductedOn": "2026-09-03",
+  "appendOnly": true,
+  "writtenToProduction": false,
+  "cohortFrozenBeforeInspection": true,
+  "cohort": [
+    "/knowledge/neuromorphic-biocomputing/comparisons/silicon-energy-and-biological-metabolic-cost",
+    "/knowledge/astronomy/black-hole-observation-and-relativistic-inference",
+    "/knowledge/astronomy/gravitational-waves-and-compact-mergers",
+    "/knowledge/neuromorphic-biocomputing/comparisons/digital-and-mixed-signal-neuromorphic-hardware",
+    "/knowledge/concepts/cleanrooms-fab-utilities-and-contamination-control",
+    "/knowledge/processes/plasma-etch-and-pattern-transfer",
+    "/knowledge/equipment/atomic-layer-deposition-reactor",
+    "/knowledge/equipment/plasma-etch-and-atomic-layer-etch-system",
+    "/knowledge/processes/thin-film-deposition",
+    "/knowledge/concepts/yield-learning-and-statistical-process-control",
+    "/knowledge/equipment/semiconductor-ion-implantation-system",
+    "/knowledge/equipment/optical-patterned-wafer-inspection-system"
+  ],
+  "rule": "A page is deepened only from passages that were actually read, whether at the original inspection or at a fresh one. Restating the same narrow passage in more words is refused, because it raises length without raising what is known.",
+  "deepened": [
+    {
+      "route": "/knowledge/astronomy/gravitational-waves-and-compact-mergers",
+      "sourceId": "ligo-2016-gw150914",
+      "sourceReopened": false,
+      "passageOrigin": "already inspected at the original reading; Section III was read and recorded but not yet bound to a claim",
+      "newAttestationRequired": false,
+      "additionalPassages": [
+        {
+          "locator": "Section III DETECTORS",
+          "claim": "The strain measurement is an interferometric length comparison, and its sensitivity comes from named optical enhancements rather than from raw laser power alone.",
+          "supportingPassage": "Section III records each LIGO site operating a modified Michelson interferometer with two 4 kilometre arms, measuring the difference in arm length as a passing wave alters them. It records a resonant optical cavity in each arm multiplying the wave's effect on the light phase by a factor of 300, a power-recycling mirror taking 20 watts of laser input to 700 watts at the beam splitter and 100 kilowatts circulating in each arm cavity, and a signal-recycling mirror at the output.",
+          "limitationsCarried": "These are the instrument parameters of the two Advanced LIGO detectors at that time. They establish nothing about other detectors, later upgrades, or achievable sensitivity in general."
+        },
+        {
+          "locator": "Figure 2 and its caption",
+          "claim": "The inspiral can be expressed as a physical trajectory, with separation falling and relative velocity rising toward merger.",
+          "supportingPassage": "Figure 2 plots the estimated strain amplitude at full bandwidth against the Keplerian effective black hole separation in units of Schwarzschild radii and the post-Newtonian effective relative velocity in units of the speed of light, with separation falling and velocity rising as the waveform reaches its peak.",
+          "limitationsCarried": "The separation and velocity are model-derived quantities from numerical relativity, not directly measured ones. The caption states the parameterisation used."
+        }
+      ]
+    },
+    {
+      "route": "/knowledge/mathematics/root-finding",
+      "sourceId": "nist-dlmf-3-8",
+      "sourceReopened": false,
+      "passageOrigin": "already inspected at the original reading; the alternative methods were read and recorded but only Newton's rule was bound to a claim",
+      "newAttestationRequired": false,
+      "additionalPassages": [
+        {
+          "locator": "3.8.6, 3.8.7, 3.8.12 and 3.8(iii)",
+          "claim": "Newton's rule is one of several schemes, and the alternatives trade derivative information against convergence order.",
+          "supportingPassage": "3.8.6 gives regula falsi, from which the secant method follows, using two prior points rather than a derivative. 3.8.7 gives Steffensen's method. 3.8.12 gives Halley's rule. 3.8(iii) describes bisection. 3.8.3 defines p-th order convergence, against which these schemes are compared.",
+          "limitationsCarried": "The section states the schemes and their convergence orders. It gives no floating-point error analysis, no stopping criterion and no guidance on choosing a starting value."
+        }
+      ]
+    }
+  ],
+  "remainThin": [
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/comparisons/silicon-energy-and-biological-metabolic-cost",
+      "reason": "Ostrau supplies the four-order-of-magnitude gap and the ten percent model agreement, and nothing further that speaks to this page's question. The evidence is narrow rather than the reading incomplete."
+    },
+    {
+      "route": "/knowledge/astronomy/black-hole-observation-and-relativistic-inference",
+      "reason": "The chirp-mass compactness argument is one passage and the paper offers no second passage on inference method. Deepening would mean restating it."
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/comparisons/digital-and-mixed-signal-neuromorphic-hardware",
+      "reason": "Ostrau states the digital-against-mixed-signal comparison once, in the methods note on differing numerical approaches and the Spikey energy agreement. There is no second passage in the paper addressing how the two substrate classes compare, so a further paragraph would restate the bound one."
+    },
+    {
+      "route": "/knowledge/concepts/cleanrooms-fab-utilities-and-contamination-control",
+      "reason": "Khan and colleagues report detection limits from laboratory chambers and state they did not test in an operating cleanroom. Anything further would exceed what they claim."
+    },
+    {
+      "route": "/knowledge/processes/plasma-etch-and-pattern-transfer",
+      "reason": "The arXiv etch preprint models ions only and states it cannot predict full plasma outcomes. Its two mechanism sections are already bound."
+    },
+    {
+      "route": "/knowledge/equipment/atomic-layer-deposition-reactor",
+      "reason": "Weimer's review is about particle ALD; its wafer-reactor relevance is the mechanism, which is bound. It has no reactor-engineering passage."
+    },
+    {
+      "route": "/knowledge/equipment/plasma-etch-and-atomic-layer-etch-system",
+      "reason": "The An preprint's two mechanism sections, on silicon dioxide and on silicon nitride, are both already bound to this page. The paper models energetic ions only and says so, and it contains no passage about etch equipment or chamber design."
+    },
+    {
+      "route": "/knowledge/processes/thin-film-deposition",
+      "reason": "Weimer's review establishes the self-limiting half-reaction mechanism, which is bound. Its remaining content concerns particle-bed fluidisation and reactor chemistry for powders, which is a different subject from wafer thin-film deposition and cannot be carried across."
+    },
+    {
+      "route": "/knowledge/concepts/yield-learning-and-statistical-process-control",
+      "reason": "The SEM defect preprint covers detection and classification, not yield modelling. A second passage would be about a different subject."
+    },
+    {
+      "route": "/knowledge/equipment/semiconductor-ion-implantation-system",
+      "reason": "Tabata studies one anneal process on one material system and says nothing about implanters as equipment."
+    },
+    {
+      "route": "/knowledge/equipment/optical-patterned-wafer-inspection-system",
+      "reason": "Same SEM preprint; its content is algorithmic rather than instrumental."
+    }
+  ],
+  "paragraphsRefused": [
+    {
+      "route": "/knowledge/astronomy/gravitational-waves-and-compact-mergers",
+      "attempted": "a paragraph on detection rates and the binary black hole population",
+      "reason": "The paper reports one event and explicitly localises it to about 600 square degrees. It supports no rate and no population statement."
+    },
+    {
+      "route": "/knowledge/mathematics/root-finding",
+      "attempted": "a paragraph on choosing a starting value in practice",
+      "reason": "The section states convergence is local and gives no guidance on basin selection. The absence is the source's, and filling it would be invention."
+    },
+    {
+      "route": "/knowledge/equipment/atomic-layer-deposition-reactor",
+      "attempted": "a paragraph on reactor throughput and wafer uniformity",
+      "reason": "Weimer's review states no wafer-scale throughput or uniformity figure. Its subject is particle ALD chemistry."
+    }
+  ],
+  "summary": {
+    "cohortSize": 12,
+    "pagesDeepened": 2,
+    "additionalPassagesBound": 3,
+    "sourcesReopened": 0,
+    "newInspectionsRequired": 0,
+    "remainThinBecauseEvidenceIsNarrow": 11,
+    "paragraphsRefused": 3,
+    "note": "Two pages deepened from passages already read and recorded but not previously bound to a claim. Eleven remain thin because their sources say one thing about them, which is a property of the evidence and not of the reading."
+  },
+  "boundary": "A private deepening record."
+}
