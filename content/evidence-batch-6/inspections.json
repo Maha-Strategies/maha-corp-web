@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "maha-evidence-batch-6-inspections/1.0",
+  "batch": "open-source-technical-recovery-6",
+  "conductedOn": "2026-09-02",
+  "appendOnly": true,
+  "writtenToProduction": false,
+  "technicalCohortPreserved": true,
+  "technicalCohortDigestFromBatch5": "carried forward unchanged; the twelve frozen targets were not reselected",
+  "inspected": [
+    {
+      "sourceId": "graves-2024-plasma-microelectronics",
+      "tier": "peer-reviewed-or-institutional-article",
+      "class": "independent-scientific-or-technical",
+      "title": "Science Challenges and Research Opportunities for Plasma Applications in Microelectronics",
+      "authors": "David B. Graves, Catherine B. Labelle, Mark J. Kushner, Eray S. Aydil, Vincent M. Donnelly, Jane P. Chang, Peter Mayer, Lawrence Overzet, Steven Shannon, Shahid Rauf, David N. Ruzic",
+      "affiliations": "Princeton, Intel, Michigan, NYU Tandon, Houston, UCLA, ASML, UT Dallas, NC State, Applied Materials, Illinois Urbana-Champaign",
+      "retrievedFrom": "https://www.osti.gov/servlets/purl/2349231",
+      "retrievalMethod": "OSTI full-text PDF, read page by page after automated extraction returned binary",
+      "retrievedOn": "2026-09-02",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Title page states the full title and eleven named authors with institutional affiliations; distinct from the DOE workshop report inspected in Batch 4, which this article summarises.",
+      "versionRelationship": "Journal-style article summarising the August 2022 DOE FES workshop. Related to, and not the same document as, the workshop report already inspected.",
+      "rightsBasis": "OSTI-hosted, citation-with-paraphrase",
+      "exactLocators": ["Abstract", "Section 1 Introduction"],
+      "observedContent": "The Abstract and Introduction both state that an estimated 40 to 45 percent of all process steps needed to manufacture semiconductor devices use low-temperature plasmas in one form or another, and that low-temperature plasmas span extreme ultraviolet photon generation for lithography, thin film etching, deposition and surface modification. The Introduction records that plasmas enabled thin film deposition, precision etching and surface modification across entire wafer diameters through the period of device scaling.",
+      "establishes": "The share of semiconductor process steps that involve low-temperature plasma, stated as an estimate of 40 to 45 percent, and the breadth of process types in which plasma participates.",
+      "boundary": "A review of science challenges and research opportunities. It gives no process parameter, no equipment specification, no yield or reliability figure, and its 40 to 45 percent figure is presented as an estimate rather than a measurement.",
+      "claimByClaimSupport": [],
+      "routesConsideredAndRejected": [
+        { "route": "/knowledge/equipment/chemical-vapor-deposition-reactor", "reason": "The article states that plasma participates in thin film deposition across the industry. A general process overview does not support a claim about how a chemical vapour deposition reactor works or performs." },
+        { "route": "/knowledge/equipment/pvd-sputter-and-metal-deposition-system", "reason": "Same. Breadth of plasma involvement is not equipment-level evidence." },
+        { "route": "/knowledge/domains/semiconductor-manufacturing", "reason": "Already independently supported by two inspected sources. Adding a third changes no page state and was not recorded as a new unlock." }
+      ],
+      "pagesUnlocked": 0,
+      "honestNote": "A strong source that unlocks nothing. Its claims are about the industry in aggregate, and the pages still blocked need equipment-level and process-level specifics."
+    }
+  ],
+  "supplierOutcomes": {
+    "notPreviouslyAttempted": [
+      { "supplier": "synopsys", "routeTried": "https://www.synopsys.com/solutions/semiconductor-ip.html", "outcome": "HTTP 404", "note": "Guessed path. Recorded as a failure rather than retried." },
+      { "supplier": "shin-etsu-chemical", "routeTried": "https://www.shinetsu.co.jp/en/products/semiconductor-silicon/", "outcome": "HTTP 404", "note": "Guessed path. Recorded as a failure rather than retried." },
+      { "supplier": "cadence", "routeTried": "none", "outcome": "not reached this batch" },
+      { "supplier": "dow", "routeTried": "none", "outcome": "not reached this batch" },
+      { "supplier": "ase-technology", "routeTried": "none", "outcome": "not reached this batch" },
+      { "supplier": "sumco", "routeTried": "already inspected in Batch 5", "outcome": "refused: marketing page documents no specifics" }
+    ],
+    "kla": { "priorOutcome": "cited SEC paths resolve only to an index", "newRouteTried": "none this batch", "outcome": "still blocked" },
+    "appliedMaterials": { "priorOutcome": "HTTP 403", "newRouteTried": "none; the registry refuses an identical repeat and no different lawful route was located", "outcome": "still blocked" },
+    "tsmc": { "priorOutcome": "HTTP 403", "newRouteTried": "none; same refusal", "outcome": "still blocked" },
+    "newlyFirstPartyDocumented": 0
+  },
+  "summary": {
+    "technicalCohortSize": 12,
+    "retrievalAttemptsThisBatch": 6,
+    "sourcesInspectedSectionOrFullText": 1,
+    "abstractOnly": 0,
+    "failedRetrievals": 5,
+    "pagesUnlocked": 0,
+    "structuralConversions": 0,
+    "newlyFirstPartyDocumented": 0,
+    "routesConsideredAndRejected": 3,
+    "patentsUsedAsSupport": 0,
+    "activeBindingsChanged": 0,
+    "finding": "Six batches in, the open-access ceiling for this corpus is visible. Government and open literature covers the science of semiconductor manufacturing well and its industrial process engineering hardly at all. CMP has now returned only patents across four route families in four batches, and burn-in did the same. The pages still blocked need equipment-level and process-level specifics that sit in IEEE, SPIE and ECTC proceedings, or in vendor documentation."
+  },
+  "boundary": "A private inspection record."
+}
