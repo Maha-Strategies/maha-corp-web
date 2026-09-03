@@ -54,6 +54,36 @@
       "appliedToLiveClaim": false
     },
     {
+      "route": "/knowledge/suppliers/synopsys",
+      "currentClaimScope": "the supplier profile as previously written, which asserted capability without an inspected source",
+      "decision": "narrow",
+      "rationale": "Narrowed to what the organisation documents about itself, with the first-party basis disclosed on the page.",
+      "proposedRevisionRequired": true,
+      "supersedes": "the uninspected supplier claim",
+      "proposedRevisionDigest": "sha256:e8add989090d2bac9440e77986c4a4c6f9d10617a46257c2527abc003af9d822",
+      "appliedToLiveClaim": false
+    },
+    {
+      "route": "/knowledge/suppliers/dow",
+      "currentClaimScope": "the supplier profile as previously written, which asserted capability without an inspected source",
+      "decision": "narrow",
+      "rationale": "Narrowed to what the organisation documents about itself, with the first-party basis disclosed on the page.",
+      "proposedRevisionRequired": true,
+      "supersedes": "the uninspected supplier claim",
+      "proposedRevisionDigest": "sha256:cc1623ee69f034d2b37e971cd4029e417f3994b3c4dcd4322fc997229199e615",
+      "appliedToLiveClaim": false
+    },
+    {
+      "route": "/knowledge/suppliers/tsmc",
+      "currentClaimScope": "the supplier profile as previously written, which asserted capability without an inspected source",
+      "decision": "narrow",
+      "rationale": "Narrowed to what the organisation documents about itself, with the first-party basis disclosed on the page.",
+      "proposedRevisionRequired": true,
+      "supersedes": "the uninspected supplier claim",
+      "proposedRevisionDigest": "sha256:5600b8b9cda4bc2994080358b7dad8408f9a1562675b8fbe862a7ae30834319d",
+      "appliedToLiveClaim": false
+    },
+    {
       "route": "/knowledge/equipment/chemical-mechanical-planarization-polisher",
       "currentClaimScope": "technical claim with no inspected source",
       "decision": "retain-blocked",
@@ -85,9 +115,9 @@
     }
   ],
   "counts": {
-    "narrow": 4,
+    "narrow": 7,
     "retain-blocked": 4
   },
   "liveClaimsRewritten": 0,
-  "repairDigest": "sha256:93fb1bb5eacc430c612b0420f54e898c68a62edfcc1301200092054206a430c9"
+  "repairDigest": "sha256:ecebd6f04ea89828f5b819328d7b302c099f2058838410c005d1307b9391016f"
 }

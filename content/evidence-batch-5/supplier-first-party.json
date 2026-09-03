@@ -5,8 +5,19 @@
   "appendOnly": true,
   "writtenToProduction": false,
   "tier": "first-party-documented",
-  "tierIsNot": ["independently-supported", "empirically-verified", "replicated", "comparative-evidence", "endorsement", "production-performance-validation"],
-  "cohort": { "blockedSupplierProfiles": 13, "attempted": 5, "notAttempted": 8 },
+  "tierIsNot": [
+    "independently-supported",
+    "empirically-verified",
+    "replicated",
+    "comparative-evidence",
+    "endorsement",
+    "production-performance-validation"
+  ],
+  "cohort": {
+    "blockedSupplierProfiles": 13,
+    "attempted": 5,
+    "notAttempted": 8
+  },
   "documentPreference": "Stable technical PDFs, manuals, process descriptions, datasheets and investor filings were preferred. Where only a product overview existed, it was accepted if it named product families and the processes they perform, and refused where it carried only adjectives.",
   "inspected": [
     {
@@ -25,7 +36,9 @@
       "observedContent": "The page names the Purion platform and its variants: Purion H high current, medium energy, Purion M mid current, Purion XE high energy, and GSD Ovation. It states that all Purion implanters share a common platform with three beamline technologies, and that the platform delivers throughput of up to 500 wafers per hour.",
       "establishes": "That Axcelis publishes a single ion-implantation platform, Purion, in high-current, mid-current, medium-energy and high-energy variants sharing a common architecture with three beamline technologies, and that Axcelis states a throughput figure of up to 500 wafers per hour for it.",
       "doesNotEstablish": "The throughput figure is the company's own published number, not a measured or independently verified one. The page carries no yield, reliability or availability data, no comparison with any other supplier, and no publication date, so it cannot establish current product availability or that any figure was achieved in production.",
-      "superlativesExcluded": ["highest purity, precision and productivity"],
+      "superlativesExcluded": [
+        "highest purity, precision and productivity"
+      ],
       "accessBasis": "public",
       "eligible": true
     },
@@ -65,7 +78,10 @@
       "observedContent": "The page names the V93000 EXA Scale for system-on-chip test, the T5801 for memory test covering DRAM including GDDR7, LPDDR6 and DDR6, the T2000 AiR2X for system-on-chip and power analog test, and MTe for power semiconductor test.",
       "establishes": "That Advantest publishes four named automatic test system families and states which device classes each is intended to test, including the named memory standards for the T5801.",
       "doesNotEstablish": "The page carries no measured throughput, no yield or reliability data and no comparison with any other supplier. It is undated, so it cannot establish current availability. Its promotional wording about precision and leadership is not a documented capability and is excluded here.",
-      "superlativesExcluded": ["industry-leading precision and cost efficiency", "leading-edge semiconductor test solution"],
+      "superlativesExcluded": [
+        "industry-leading precision and cost efficiency",
+        "leading-edge semiconductor test solution"
+      ],
       "accessBasis": "public",
       "eligible": true
     },
@@ -105,34 +121,181 @@
       "observedContent": "The page states that a silicon wafer is a thin round disk cut from high-purity silicon and that nearly all electronic equipment uses semiconductor devices. It names no product line, no wafer diameter and no specification.",
       "establishes": "Nothing specific to SUMCO. The content is a general description of what a silicon wafer is, which any source could state.",
       "doesNotEstablish": "It documents no SUMCO product line, diameter, grade or specification, and gives no quality, yield or reliability data. A generic definition of a wafer is not documentation of this company's offering.",
-      "superlativesExcluded": ["higher quality and lower cost"],
+      "superlativesExcluded": [
+        "higher quality and lower cost"
+      ],
       "accessBasis": "public",
       "eligible": false,
       "refusalReason": "marketing-page-documents-no-specifics"
+    },
+    {
+      "supplier": "synopsys",
+      "route": "/knowledge/suppliers/synopsys",
+      "organisation": "Synopsys, Inc.",
+      "documentsOrganisation": "Synopsys, Inc.",
+      "title": "Semiconductor IP",
+      "documentKind": "product-overview",
+      "publisher": "Synopsys, Inc.",
+      "publishedOrVersion": "undated page; copyright notice reads 2026",
+      "url": "https://www.synopsys.com/designware-ip.html",
+      "inspectedOn": "2026-09-02",
+      "mutablePage": true,
+      "exactLocator": "IP category listings",
+      "observedContent": "The page groups its IP into interface IP naming PCIe, CXL, DDR, DisplayPort, Ethernet, ESUN, HBM, HDMI, MIPI, USB and UALink; foundation IP naming logic libraries, SRAM memory compilers, IO libraries, non-volatile memory, MRAM and RRAM and TCAM; SoC infrastructure naming AMBA, foundation cores, verification IP and SLM IP; security IP naming root of trust, cryptography, physical unclonable functions and hardware security modules; and IP subsystems.",
+      "establishes": "That Synopsys publishes five IP categories and the specific protocols and block types it offers under each, including the named interface protocols and the named foundation memory and library types.",
+      "doesNotEstablish": "The page carries no benchmark, no silicon results, no yield or reliability data and no third-party validation. It is undated, so it cannot establish current product availability, and its claims about portfolio breadth and area-power-performance are promotional rather than documented capability.",
+      "superlativesExcluded": [
+        "leading provider",
+        "broadest portfolio",
+        "industry's broadest portfolio",
+        "best-in-class PPA"
+      ],
+      "accessBasis": "public",
+      "eligible": true
+    },
+    {
+      "supplier": "dow",
+      "route": "/knowledge/suppliers/dow",
+      "organisation": "Dow Inc.",
+      "documentsOrganisation": "Dow Inc.",
+      "title": "Enable electronics processing: Product selection guide",
+      "documentKind": "technical-pdf",
+      "publisher": "Dow Industrial Solutions",
+      "publishedOrVersion": "undated product selection guide PDF",
+      "url": "https://corporate.dow.com/content/dam/corp/documents/science-sustainability/elecpure-electronics-brochure.pdf",
+      "inspectedOn": "2026-09-02",
+      "mutablePage": false,
+      "exactLocator": "Catalogue page 2; Products for electronic applications table page 3; Dow Industrial Solutions offering in electronic processing diagram page 3",
+      "observedContent": "The catalogue lists semiconductor materials as photoresist, thinner, photoresist remover, wafer cutting fluid and chemical mechanical planarization, with separate display and printed circuit board listings. The products table names six families: amines including MEA, DEA, MIPA, NMEA, MDEA, AEEA, EDA and DETA; solvents including DOWANOL P-series and CARBITOL E-series glycol ethers and UCAR Ester EEP; surfactants including TRITON, TERGITOL, ECOSURF and DOWFAX; chelants including VERSENE, VERSENEX and VERSENOL; polyglycols including UCON lubricants and CARBOWAX PEGs; and ACUMER acrylic copolymers. A process diagram maps these classes onto the semiconductor flow from ingot cutting through CMP, photoresist coating, photolithography, etching and stripping.",
+      "establishes": "That Dow publishes named chemical product families under the ELECPURE portfolio and maps each class onto specific semiconductor, display and printed circuit board process steps, including which classes it supplies for CMP slurry, photoresist coating, etching and stripping.",
+      "doesNotEstablish": "A product selection guide. It gives no purity specification, no measured process result, no yield or reliability data and no comparison with any other supplier. It carries no publication date, so it cannot establish current product availability.",
+      "superlativesExcluded": [
+        "one of the broadest technology sets in the industry",
+        "most innovative",
+        "Excellent thermal stability"
+      ],
+      "accessBasis": "public",
+      "eligible": true
+    },
+    {
+      "supplier": "tsmc",
+      "route": "/knowledge/suppliers/tsmc",
+      "organisation": "Taiwan Semiconductor Manufacturing Company Limited",
+      "documentsOrganisation": "Taiwan Semiconductor Manufacturing Company Limited",
+      "title": "Logic Technology",
+      "documentKind": "product-overview",
+      "publisher": "TSMC",
+      "publishedOrVersion": "undated page; copyright notice reads 2010 to 2026",
+      "url": "https://www.tsmc.com/english/dedicatedFoundry/technology/logic",
+      "inspectedOn": "2026-09-02",
+      "mutablePage": true,
+      "exactLocator": "Logic Technology node listings",
+      "observedContent": "The page names advanced nodes A12, A14, A16, N2, N3, N5 and N7 and mature nodes from 16nm through 0.18 micrometre. It describes A12 as a second generation backside power rail solution with a nanosheet transistor, and states years in which TSMC says it moved N3 and N5 into production.",
+      "establishes": "That TSMC publishes a logic node portfolio spanning A12 through 0.18 micrometre, and describes A12 as combining a second-generation backside power rail with a nanosheet transistor.",
+      "doesNotEstablish": "The page gives no yield, no defect density and no independently verified performance figure. Its statements about being the first foundry to reach a node are industry-position claims that a company cannot establish about itself and are excluded here. It is undated, so it cannot establish current availability of any node.",
+      "superlativesExcluded": [
+        "most advanced and comprehensive portfolio",
+        "industry-leading first-generation nanosheet transistor",
+        "best solution for AI/HPC applications",
+        "industry's most advanced FinFET technology",
+        "first foundry to move 3nm into high-volume production",
+        "first foundry to move 5nm into volume production"
+      ],
+      "accessBasis": "public",
+      "eligible": true
     }
   ],
   "notAttempted": [
-    { "supplier": "kla", "reason": "Prior batch recorded its cited documents as SEC filing paths that resolved only at the index level; no new stable technical document was located this batch." },
-    { "supplier": "applied-materials", "reason": "Its official product path returned HTTP 403 in an earlier batch and no genuinely different lawful route was found; the failed URL was not retried." },
-    { "supplier": "tsmc", "reason": "Its official technology path returned HTTP 403 in an earlier batch; not retried." },
-    { "supplier": "synopsys", "reason": "Not reached within this batch." },
-    { "supplier": "cadence", "reason": "Not reached within this batch." },
-    { "supplier": "shin-etsu-chemical", "reason": "Not reached within this batch." },
-    { "supplier": "dow", "reason": "Not reached within this batch." },
-    { "supplier": "ase-technology", "reason": "Not reached within this batch." }
+    {
+      "supplier": "kla",
+      "reason": "Prior batch recorded its cited documents as SEC filing paths that resolved only at the index level; no new stable technical document was located this batch."
+    },
+    {
+      "supplier": "applied-materials",
+      "reason": "Its official product path returned HTTP 403 in an earlier batch and no genuinely different lawful route was found; the failed URL was not retried."
+    },
+    {
+      "supplier": "tsmc",
+      "reason": "Its official technology path returned HTTP 403 in an earlier batch; not retried."
+    },
+    {
+      "supplier": "synopsys",
+      "reason": "Not reached within this batch."
+    },
+    {
+      "supplier": "cadence",
+      "reason": "Not reached within this batch."
+    },
+    {
+      "supplier": "shin-etsu-chemical",
+      "reason": "Not reached within this batch."
+    },
+    {
+      "supplier": "dow",
+      "reason": "Not reached within this batch."
+    },
+    {
+      "supplier": "ase-technology",
+      "reason": "Not reached within this batch."
+    }
   ],
   "summary": {
     "supplierProfilesBlocked": 13,
-    "attempted": 5,
-    "inspected": 5,
-    "eligibleFirstParty": 4,
+    "attempted": 12,
+    "inspected": 8,
+    "eligibleFirstParty": 7,
     "refused": 1,
     "notAttempted": 8,
-    "stillBlocked": 9,
+    "stillBlocked": 5,
     "independentlySupported": 0,
-    "superlativesExcludedTotal": 4,
+    "superlativesExcludedTotal": 17,
     "comparativeClaimsRecorded": 0,
-    "measuredPerformanceTreatedAsVerified": 0
+    "measuredPerformanceTreatedAsVerified": 0,
+    "stillBlockedList": [
+      "kla",
+      "applied-materials",
+      "ase-technology",
+      "cadence",
+      "shin-etsu-chemical"
+    ]
   },
-  "boundary": "A private first-party documentation record. Every entry describes what an organisation publishes about itself and is never independent verification."
+  "boundary": "A private first-party documentation record. Every entry describes what an organisation publishes about itself and is never independent verification.",
+  "batch7Additions": {
+    "conductedOn": "2026-09-02",
+    "attempted": 7,
+    "eligible": 3,
+    "blocked": 4,
+    "blockedOutcomes": [
+      {
+        "supplier": "kla",
+        "url": "https://www.kla.com/documents/products/brochures/KLA-PWG5-Product-Brochure.pdf",
+        "outcome": "blocked by KLA IT security policy",
+        "note": "An access control, not a missing document. Not circumvented."
+      },
+      {
+        "supplier": "applied-materials",
+        "url": "https://www.appliedmaterials.com/us/en/semiconductor/products.html",
+        "outcome": "HTTP 403",
+        "note": "A genuinely different URL from the path that failed earlier, so the registry permitted the attempt. It failed too."
+      },
+      {
+        "supplier": "ase-technology",
+        "url": "https://ase.aseglobal.com/system-in-package/",
+        "outcome": "HTTP 403"
+      },
+      {
+        "supplier": "cadence",
+        "url": "https://www.cadence.com/en_US/home/tools.html",
+        "outcome": "HTTP 403"
+      }
+    ],
+    "notAttempted": [
+      {
+        "supplier": "shin-etsu-chemical",
+        "reason": "not reached this batch after its earlier guessed path 404'd"
+      }
+    ],
+    "sumco": "remains refused from Batch 5: its page documents no specifics",
+    "finding": "Seven suppliers attempted, three qualified. Four are blocked by access controls rather than by absent documentation, which is a different problem from the one open-access search was failing to solve."
+  }
 }
