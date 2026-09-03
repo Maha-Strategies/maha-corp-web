@@ -13,6 +13,8 @@ import reuse from '../content/evidence-batch-7/reuse-audit.json' with { type: 'j
 import artifacts from '../content/evidence-batch-7/acquisition-and-governance.json' with { type: 'json' }
 import report from '../content/legacy-uplift/uplift-report.json' with { type: 'json' }
 import compiled from '../content/legacy-uplift/uplift-compiled.json' with { type: 'json' }
+import audit from '../content/evidence-batch-9/depth-audit.json' with { type: 'json' }
+import { assertFirstPartyPartition } from './helpers/uplift-invariants.ts'
 
 const ROOT = resolve(import.meta.dirname, '..')
 const submission = (o: Partial<IntakeSubmission> = {}): IntakeSubmission => ({
@@ -79,7 +81,7 @@ test('vendor-authored sources cannot confer independent support', () => {
   assert.equal(isVendorAuthored('nist-dlmf-3-8'), false)
   const supplierPages = compiled.pages.filter((p) => p.route.startsWith('/knowledge/suppliers/'))
   assert.ok(supplierPages.length > 0)
-  assert.equal(report.pageStates.firstPartyDocumented, 10)
+  assertFirstPartyPartition(audit, report)
 })
 
 test('the five states remain disjoint and sum to 167', () => {

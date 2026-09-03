@@ -13,6 +13,7 @@ import calc from '../content/evidence-batch-9/calculations.json' with { type: 'j
 import insp from '../content/evidence-batch-9/inspections.json' with { type: 'json' }
 import cohort from '../content/evidence-batch-9/frozen-cohort.json' with { type: 'json' }
 import report from '../content/legacy-uplift/uplift-report.json' with { type: 'json' }
+import { assertFirstPartyPartition } from './helpers/uplift-invariants.ts'
 
 const ROOT = resolve(import.meta.dirname, '..')
 const base: DepthMeasures = {
@@ -152,9 +153,10 @@ test('the vendor correction removed independent status from every citing page', 
 })
 
 test('first-party pages retain their disclosure', () => {
-  const fp = audit.byGroup.firstPartyDocumented
-  assert.equal(fp.audited, 10)
-  assert.equal(report.pageStates.firstPartyDocumented, 10)
+  // The count is derived and moves whenever a supplier page gains
+  // documentation. What must hold is that first-party pages stay in their own
+  // state and are never folded into independent support.
+  assertFirstPartyPartition(audit, report)
 })
 
 test('the cohort was frozen and no exhausted route retried', () => {

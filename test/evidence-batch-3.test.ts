@@ -13,6 +13,7 @@ import packets3 from '../content/evidence-batch-3/remediation-packets.json' with
 import cohort2 from '../content/evidence-batch-2/frozen-cohort.json' with { type: 'json' }
 import report from '../content/legacy-uplift/uplift-report.json' with { type: 'json' }
 import compiled from '../content/legacy-uplift/uplift-compiled.json' with { type: 'json' }
+import { assertCalculationsAreReproducible } from './helpers/uplift-invariants.ts'
 
 const ROOT = resolve(import.meta.dirname, '..')
 const att = (o: Partial<InspectionAttestation> = {}): InspectionAttestation => ({
@@ -173,7 +174,7 @@ test('a stale revision cannot inherit uplift prose', () => {
 })
 
 test('unsupported comparisons and calculations remain absent', () => {
-  assert.equal(report.informationValue.reproducibleCalculations, 0)
+  assertCalculationsAreReproducible(report, compiled)
   assert.equal(report.informationValue.wordCountUsed, false)
 })
 

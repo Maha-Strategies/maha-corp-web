@@ -14,6 +14,7 @@ import religion from '../content/evidence-batch-10/religion-pilot.json' with { t
 import calc from '../content/evidence-batch-9/calculations.json' with { type: 'json' }
 import report from '../content/legacy-uplift/uplift-report.json' with { type: 'json' }
 import compiled from '../content/legacy-uplift/uplift-compiled.json' with { type: 'json' }
+import { assertCalculationsAreReproducible, assertFirstPartyPartition } from './helpers/uplift-invariants.ts'
 
 const ROOT = resolve(import.meta.dirname, '..')
 const base: DepthMeasures = {
@@ -53,7 +54,7 @@ test('evidence state and depth state are reported separately', () => {
   assert.ok((DEPTH_STATES as readonly string[]).includes('first-party-documented-but-thin'))
   const fp = auditDepth('/x', base, 'first-party')
   assert.ok(fp.state.startsWith('first-party-documented'))
-  assert.equal(audit.byGroup.firstPartyDocumented.audited, 10)
+  assertFirstPartyPartition(audit, report)
 })
 
 test('source-tier changes propagate automatically, with no route exclusion list', () => {
@@ -143,7 +144,7 @@ test('calculations fail without complete inputs and assumptions', () => {
 })
 
 test('unsupported passages remain absent', () => {
-  assert.equal(report.informationValue.reproducibleCalculations, 0)
+  assertCalculationsAreReproducible(report, compiled)
   assert.equal(report.informationValue.wordCountUsed, false)
   assert.equal(audit.wordCountUsedAsGate, false)
 })

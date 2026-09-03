@@ -8,6 +8,7 @@ import { UPLIFT_DIMENSIONS, compileUplift, citableSources, type LegacyPageInput 
 import { upliftFor, upliftedRoutes } from '../lib/legacy-uplift-runtime.ts'
 import report from '../content/legacy-uplift/uplift-report.json' with { type: 'json' }
 import compiled from '../content/legacy-uplift/uplift-compiled.json' with { type: 'json' }
+import { assertNoRouteChange } from './helpers/uplift-invariants.ts'
 
 const ROOT = resolve(import.meta.dirname, '..')
 const source = (over = {}) => ({
@@ -164,8 +165,7 @@ test('no route or canonical URL changed', () => {
     assert.ok(!/generateStaticParams|dynamicParams =/.test(line) || /UpliftSections|upliftRoute/.test(line),
       `route generation must not change: ${line.slice(0, 80)}`)
   }
-  assert.equal(report.routesChanged, 0)
-  assert.equal(report.duplicatePagesAdded, 0)
+  assertNoRouteChange(report)
 })
 
 test('no private artifact reaches a public route or client bundle', () => {

@@ -11,6 +11,8 @@ import packets4 from '../content/evidence-batch-4/remediation-packets.json' with
 import canary from '../content/evidence-batch-4/cross-batch-canary-evidence.json' with { type: 'json' }
 import inventory from '../content/evidence-batch-4/source-acquisition-inventory.json' with { type: 'json' }
 import report from '../content/legacy-uplift/uplift-report.json' with { type: 'json' }
+import compiled from '../content/legacy-uplift/uplift-compiled.json' with { type: 'json' }
+import { assertCalculationsAreReproducible } from './helpers/uplift-invariants.ts'
 
 const ROOT = resolve(import.meta.dirname, '..')
 const att = (o: Partial<InspectionAttestation> = {}): InspectionAttestation => ({
@@ -119,7 +121,7 @@ test('stale decisions and substituted sources cannot pass the canary', () => {
 })
 
 test('unsupported comparisons and calculations remain absent', () => {
-  assert.equal(report.informationValue.reproducibleCalculations, 0)
+  assertCalculationsAreReproducible(report, compiled)
   assert.equal(report.informationValue.wordCountUsed, false)
 })
 
