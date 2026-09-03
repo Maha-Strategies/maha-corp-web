@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "maha-evidence-acquisition/1.0",
+  "batch": "unsupported-remediation-12",
+  "inspectedOn": "2026-09-03",
+  "appendOnly": true,
+  "writtenToProduction": false,
+  "searchScope": "Only the atomic claims extracted in Part 2. No page was searched for generally.",
+  "inspected": [
+    {
+      "sourceId": "neurobench-2304-04640",
+      "title": "NeuroBench: A Framework for Benchmarking Neuromorphic Computing Algorithms and Systems",
+      "leadAuthors": "Jason Yik, Korneel Van den Berghe, Douwe den Blanken and 97 further authors",
+      "version": "arXiv:2304.04640v5, submitted 2025-01-14",
+      "identityVerifiedBeforeInspection": true,
+      "identityCheck": "Title, arXiv identifier, author list and version confirmed from the abstract page before the full text was read.",
+      "retrievedFrom": "https://arxiv.org/html/2304.04640v5",
+      "retrievedOn": "2026-09-03",
+      "evidenceBasis": "independent-scientific-or-technical",
+      "rightsBasis": "Open access on arXiv. Retrieved without circumventing any access control.",
+      "depth": "section-or-full-text",
+      "exactLocators": [
+        "Algorithm Track Metrics, under Algorithm Track Benchmark Framework",
+        "Algorithm Track Limitations and Further Extensions"
+      ],
+      "observedDefinitions": [
+        { "metric": "Footprint", "verbatim": "Memory footprint, in bytes, required to represent a model" },
+        { "metric": "Connection sparsity", "verbatim": "Number of zero weights divided by the total number of weights" },
+        { "metric": "Activation sparsity", "verbatim": "Average sparsity of neuron activations over all neurons in all model layers" },
+        { "metric": "Synaptic operations, Dense", "verbatim": "All zero and nonzero neuron activations and synaptic connections" },
+        { "metric": "Synaptic operations, Eff_MACs", "verbatim": "Effective multiply-accumulate operations, disregarding zero activations and connections" },
+        { "metric": "Correctness", "verbatim": "Task-specific metrics including accuracy, mean average precision, R-squared and sMAPE" }
+      ],
+      "statedLimitations": [
+        "Metrics are restricted to digital, time-stepped algorithm execution; analog and continuous-time deployment is undefined.",
+        "Synaptic operations does not account for neuron updates.",
+        "Data pre- and post-processing can amount to significant costs not captured by these metrics.",
+        "Model Execution Rate is not well defined for event-based or continuous-time contexts."
+      ],
+      "boundary": "Defines how to report and compare submitted neuromorphic systems. It does not establish that any system is faster, more efficient or more biologically realistic than another, and by its own statement does not capture neuron updates or data processing costs."
+    },
+    {
+      "sourceId": "nara-document-analysis",
+      "title": "Document Analysis",
+      "publisher": "United States National Archives and Records Administration",
+      "identityVerifiedBeforeInspection": true,
+      "identityCheck": "Publisher and page title confirmed on retrieval.",
+      "retrievedFrom": "https://www.archives.gov/education/lessons/worksheets",
+      "retrievedOn": "2026-09-03",
+      "evidenceBasis": "government-or-standards-authority",
+      "rightsBasis": "United States government publication. Retrieved without circumventing any access control.",
+      "depth": "section-or-full-text",
+      "exactLocators": ["Document Analysis, the four named stages"],
+      "observedContent": "Prescribes a four-stage progression: Meet the document. Observe its parts. Try to make sense of it. Use it as historical evidence.",
+      "boundary": "Establishes that a national archive publishes a staged document-analysis method. It does not establish that any other three-step formulation is that method, and it makes no claim about religious texts specifically."
+    }
+  ],
+  "claimLevelSupport": [
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/spiking-neural-networks",
+      "claim": "Memory and operation count",
+      "sourceId": "neurobench-2304-04640",
+      "locator": "Algorithm Track Metrics",
+      "supportingPassage": "Footprint is the memory footprint, in bytes, required to represent a model; synaptic operations are reported as Dense, Eff_MACs and Eff_ACs.",
+      "verdict": "supported-as-written",
+      "scopeNote": "The page names exactly the two quantities the framework defines."
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/spiking-neural-networks",
+      "claim": "Accuracy or task loss",
+      "sourceId": "neurobench-2304-04640",
+      "locator": "Algorithm Track Metrics",
+      "supportingPassage": "Correctness is reported with task-specific metrics including accuracy, mean average precision, R-squared and sMAPE.",
+      "verdict": "supported-as-written"
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/spiking-neural-networks",
+      "claim": "Sparse spikes do not guarantee low end-to-end energy.",
+      "sourceId": "neurobench-2304-04640",
+      "locator": "Algorithm Track Limitations and Further Extensions",
+      "supportingPassage": "Data pre- and post-processing can amount to significant costs not yet captured in the algorithm track metrics, and synaptic operations does not account for neuron updates.",
+      "verdict": "supported-as-written",
+      "scopeNote": "The framework's own limitations state that costs outside the counted operations are real and uncounted, which is what the page's limitation says."
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/neuromorphic-computing",
+      "claim": "Energy under a declared system boundary",
+      "sourceId": "neurobench-2304-04640",
+      "locator": "Algorithm Track Limitations and Further Extensions",
+      "supportingPassage": "Metrics are restricted to digital, time-stepped algorithm execution, and data pre- and post-processing costs are not captured.",
+      "verdict": "supported-as-written",
+      "scopeNote": "The phrase 'under a declared system boundary' is exactly the caveat the framework states about itself."
+    },
+    {
+      "route": "/knowledge/religion/historical-evidence",
+      "claim": "Atomize the claim. / Assess each source's relation to the claim. / Report confidence and live alternatives.",
+      "sourceId": "nara-document-analysis",
+      "locator": "Document Analysis, the four named stages",
+      "supportingPassage": "Meet the document. Observe its parts. Try to make sense of it. Use it as historical evidence.",
+      "verdict": "supportable-after-narrowing",
+      "scopeNote": "NARA establishes that a national archive publishes a staged analysis method. It does not establish that the page's three steps are that method, and the wordings do not correspond step for step. The page may say that staged analysis is standard archival practice, attributed to NARA; it may not present its own three steps as NARA's."
+    }
+  ],
+  "refusedRoutes": [
+    {
+      "url": "https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/",
+      "outcome": "HTTP 403",
+      "action": "Not retried. A publisher restriction was not circumvented, and a different lawful repository was used instead.",
+      "replacement": "nara-document-analysis"
+    }
+  ],
+  "boundary": "Two sources were inspected against claims frozen before the search. Four claims are supported as written and one is supportable only after narrowing; the remaining audited claims gained nothing in this batch."
+}

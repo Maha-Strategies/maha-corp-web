@@ -12,6 +12,7 @@ import batch2 from '../content/evidence-batch-2/inspections.json' with { type: '
 import batch3 from '../content/evidence-batch-3/inspections.json' with { type: 'json' }
 import batch4 from '../content/evidence-batch-4/inspections.json' with { type: 'json' }
 import batch9 from '../content/evidence-batch-9/inspections.json' with { type: 'json' }
+import batch12 from '../content/evidence-batch-12/inspections.json' with { type: 'json' }
 
 const sha = (v: unknown) => `sha256:${createHash('sha256').update(canonicalJson(v), 'utf8').digest('hex')}`
 
@@ -25,7 +26,7 @@ const add = (route: string, locators: number) => {
 for (const s of [...(batch1.inspected as Record<string, unknown>[]), ...(batch2.inspected as Record<string, unknown>[]), ...(batch3.inspected as Record<string, unknown>[])]) {
   for (const r of (s.supportsRoutes as string[] | undefined) ?? []) add(r, ((s.exactLocators as string[] | undefined) ?? []).length)
 }
-for (const s of [...(batch4.inspected as Record<string, unknown>[]), ...(batch8.inspected as Record<string, unknown>[]), ...(batch9.inspected as Record<string, unknown>[])]) {
+for (const s of [...(batch4.inspected as Record<string, unknown>[]), ...(batch8.inspected as Record<string, unknown>[]), ...(batch9.inspected as Record<string, unknown>[]), ...(batch12.inspected as Record<string, unknown>[])]) {
   for (const c of (s.claimByClaimSupport as { route: string }[] | undefined) ?? []) add(c.route, 1)
 }
 for (const e of reuse.accepted as { route: string }[]) add(e.route, 1)

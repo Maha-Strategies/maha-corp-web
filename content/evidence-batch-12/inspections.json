@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "maha-batch-12-inspections/1.0",
+  "batch": "unsupported-remediation-12",
+  "conductedOn": "2026-09-03",
+  "appendOnly": true,
+  "writtenToProduction": false,
+  "cohortDigest": "frozen in content/evidence-batch-12/audit-cohort.json before any search",
+  "inspected": [
+    {
+      "sourceId": "neurobench-2304-04640",
+      "domain": "neuromorphic-biocomputing",
+      "class": "independent-scientific-or-technical",
+      "title": "NeuroBench: A Framework for Benchmarking Neuromorphic Computing Algorithms and Systems",
+      "venue": "arXiv, to appear in a Nature neuromorphic hardware and computing collection",
+      "identifier": "arXiv:2304.04640v5",
+      "retrievedFrom": "https://arxiv.org/html/2304.04640v5",
+      "retrievedOn": "2026-09-03",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Title, arXiv identifier, lead authors and version v5 dated 2025-01-14 confirmed from the abstract record before the full text was read.",
+      "versionRelationship": "v5, submitted 2025-01-14",
+      "rightsBasis": "Open access on arXiv. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "Algorithm Track Metrics, under Algorithm Track Benchmark Framework",
+        "Algorithm Track Limitations and Further Extensions"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/neuromorphic-biocomputing/spiking-neural-networks",
+          "locator": "Algorithm Track Metrics",
+          "claim": "What a spiking network is measured by is a defined set of reported quantities, not an informal impression of efficiency.",
+          "supportingPassage": "The framework defines Footprint as the memory footprint, in bytes, required to represent a model; Connection sparsity as the number of zero weights divided by the total number of weights; Activation sparsity as the average sparsity of neuron activations over all neurons in all model layers; and Synaptic operations reported as Dense, Eff_MACs and Eff_ACs. Correctness is reported with task-specific metrics including accuracy, mean average precision, R-squared and sMAPE.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/neuromorphic-biocomputing/spiking-neural-networks",
+          "locator": "Algorithm Track Limitations and Further Extensions",
+          "claim": "Counting sparse spikes does not settle end-to-end energy, because costs outside the counted operations are real and uncounted.",
+          "supportingPassage": "The framework states that its metrics are restricted to digital, time-stepped algorithm execution, that synaptic operations does not account for neuron updates, that data pre- and post-processing can amount to significant costs not yet captured, and that Model Execution Rate is not well defined for event-based or continuous-time contexts.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/neuromorphic-biocomputing/neuromorphic-computing",
+          "locator": "Algorithm Track Limitations and Further Extensions",
+          "claim": "Energy figures are meaningful only against a declared system boundary.",
+          "supportingPassage": "The framework restricts its metrics to digital, time-stepped algorithm execution and states that data pre- and post-processing can amount to significant costs not yet captured by the algorithm track metrics.",
+          "distinctPassage": true
+        }
+      ],
+      "establishes": "How a community framework defines the quantities used to compare neuromorphic algorithms, and which costs it states it does not capture.",
+      "boundary": "Defines reporting and comparison procedure. It does not establish that any system is faster, more efficient or more biologically realistic, and by its own statement excludes neuron updates and data processing costs."
+    },
+    {
+      "sourceId": "nara-document-analysis",
+      "domain": "religion",
+      "class": "government-or-standards-authority",
+      "title": "Document Analysis",
+      "venue": "United States National Archives and Records Administration",
+      "identifier": "archives.gov/education/lessons/worksheets",
+      "retrievedFrom": "https://www.archives.gov/education/lessons/worksheets",
+      "retrievedOn": "2026-09-03",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Publisher and page title confirmed on retrieval.",
+      "versionRelationship": "Retrieved 2026-09-03",
+      "rightsBasis": "United States government publication. Retrieved without circumventing any access control.",
+      "exactLocators": ["Document Analysis, the four named stages"],
+      "claimByClaimSupport": [],
+      "noClaimSupportReason": "NARA prescribes four stages: meet the document, observe its parts, try to make sense of it, use it as historical evidence. The historical-evidence page prescribes three different steps: atomize the claim, assess each source's relation to the claim, report confidence and live alternatives. These do not correspond step for step. Attaching this source to those steps would present one institution's method as backing another formulation it does not state, so it supports no claim here and the page keeps its unsupported status.",
+      "establishes": "That a national archive publishes a named four-stage document-analysis method.",
+      "boundary": "Establishes the existence and content of NARA's own method. It does not establish any other formulation of historical method, and says nothing about religious texts."
+    }
+  ],
+  "notInspected": [
+    {
+      "url": "https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/",
+      "reason": "HTTP 403. A publisher restriction; not circumvented and not retried.",
+      "substitute": "nara-document-analysis was retrieved instead from a different institution."
+    }
+  ],
+  "summary": {
+    "sourcesInspected": 2,
+    "sourcesSupportingClaims": 1,
+    "claimsSupported": 3,
+    "routesReached": 2
+  },
+  "boundary": "Two sources were inspected against claims frozen before searching. One supports three claims across two routes; the other supports none and is recorded with the reason."
+}

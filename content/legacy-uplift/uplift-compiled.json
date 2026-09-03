@@ -11042,12 +11042,12 @@
           "source-boundary"
         ],
         "dimensionCount": 8,
-        "sourceCount": 3,
-        "sourcesWithBoundary": 3,
+        "sourceCount": 4,
+        "sourcesWithBoundary": 4,
         "referenceOnlySources": 0,
-        "declaredLocators": 3,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 4,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 0,
         "relatedRouteCount": 3,
         "relatedRoutes": [
@@ -11072,12 +11072,12 @@
           "source-boundary"
         ],
         "dimensionCount": 9,
-        "sourceCount": 3,
-        "sourcesWithBoundary": 3,
+        "sourceCount": 4,
+        "sourcesWithBoundary": 4,
         "referenceOnlySources": 0,
-        "declaredLocators": 3,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 4,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 0,
         "relatedRouteCount": 3,
         "relatedRoutes": [
@@ -11097,7 +11097,8 @@
           "sourceIds": [
             "intel-loihi2",
             "spinnaker2",
-            "neurobench"
+            "neurobench",
+            "neurobench-2304-04640"
           ]
         },
         {
@@ -11111,7 +11112,8 @@
           "sourceIds": [
             "intel-loihi2",
             "spinnaker2",
-            "neurobench"
+            "neurobench",
+            "neurobench-2304-04640"
           ]
         },
         {
@@ -11125,7 +11127,8 @@
           "sourceIds": [
             "intel-loihi2",
             "spinnaker2",
-            "neurobench"
+            "neurobench",
+            "neurobench-2304-04640"
           ]
         },
         {
@@ -11150,7 +11153,8 @@
           "sourceIds": [
             "intel-loihi2",
             "spinnaker2",
-            "neurobench"
+            "neurobench",
+            "neurobench-2304-04640"
           ]
         },
         {
@@ -11159,12 +11163,14 @@
           "items": [
             "This is a vendor technical brief about a research platform. Performance and efficiency results remain workload-, configuration-, measurement-boundary-, and comparison-dependent and do not establish equivalence to biological intelligence. (boundary declared by Taking Neuromorphic Computing to the Next Level with Loihi 2)",
             "Architecture documentation establishes available mechanisms, not universal speed, energy, learning, biological plausibility, or production readiness. Claims require a named board, software version, workload, and system boundary. (boundary declared by SpiNNaker2 Developer Portal and Hardware Documentation)",
-            "A benchmark ranks submitted systems on declared tasks and metrics. It does not prove general intelligence, biological equivalence, safety, usefulness outside the benchmark, or superiority under unreported host and data costs. (boundary declared by NeuroBench: Advancing Neuromorphic Computing Through Collaborative, Fair and Representative Benchmarking)"
+            "A benchmark ranks submitted systems on declared tasks and metrics. It does not prove general intelligence, biological equivalence, safety, usefulness outside the benchmark, or superiority under unreported host and data costs. (boundary declared by NeuroBench: Advancing Neuromorphic Computing Through Collaborative, Fair and Representative Benchmarking)",
+            "Defines reporting and comparison procedure. It does not establish that any system is faster, more efficient or more biologically realistic, and by its own statement excludes neuron updates and data processing costs. (boundary declared by NeuroBench: A Framework for Benchmarking Neuromorphic Computing Algorithms and Systems)"
           ],
           "sourceIds": [
             "intel-loihi2",
             "spinnaker2",
-            "neurobench"
+            "neurobench",
+            "neurobench-2304-04640"
           ]
         },
         {
@@ -11179,7 +11185,7 @@
         }
       ],
       "sectionCount": 7,
-      "upliftDigest": "sha256:b88f711c65c53a8f4ab8d753aa81b1dd1c3a5043bbddefda56ee907a9e44e961"
+      "upliftDigest": "sha256:80ece98ae4852f45a35dbe76a046e7752ff000e3212fae4c7f116876bbdc92b8"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/spiking-neural-networks",
@@ -11201,12 +11207,12 @@
           "source-boundary"
         ],
         "dimensionCount": 8,
-        "sourceCount": 2,
-        "sourcesWithBoundary": 2,
+        "sourceCount": 4,
+        "sourcesWithBoundary": 4,
         "referenceOnlySources": 0,
-        "declaredLocators": 2,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 4,
+        "contentInspectedLocators": 2,
+        "explanatorySources": 2,
         "bridgeCount": 1,
         "relatedRouteCount": 3,
         "relatedRoutes": [
@@ -11232,12 +11238,12 @@
           "typed-bridges"
         ],
         "dimensionCount": 10,
-        "sourceCount": 2,
-        "sourcesWithBoundary": 2,
+        "sourceCount": 4,
+        "sourcesWithBoundary": 4,
         "referenceOnlySources": 0,
-        "declaredLocators": 2,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 4,
+        "contentInspectedLocators": 2,
+        "explanatorySources": 2,
         "bridgeCount": 1,
         "relatedRouteCount": 3,
         "relatedRoutes": [
@@ -11256,7 +11262,9 @@
           ],
           "sourceIds": [
             "neurobench",
-            "intel-loihi2"
+            "intel-loihi2",
+            "neurobench-2304-04640",
+            "neurobench-2304-04640"
           ]
         },
         {
@@ -11269,7 +11277,9 @@
           ],
           "sourceIds": [
             "neurobench",
-            "intel-loihi2"
+            "intel-loihi2",
+            "neurobench-2304-04640",
+            "neurobench-2304-04640"
           ]
         },
         {
@@ -11282,7 +11292,9 @@
           ],
           "sourceIds": [
             "neurobench",
-            "intel-loihi2"
+            "intel-loihi2",
+            "neurobench-2304-04640",
+            "neurobench-2304-04640"
           ]
         },
         {
@@ -11306,7 +11318,9 @@
           ],
           "sourceIds": [
             "neurobench",
-            "intel-loihi2"
+            "intel-loihi2",
+            "neurobench-2304-04640",
+            "neurobench-2304-04640"
           ]
         },
         {
@@ -11314,11 +11328,15 @@
           "heading": "Boundaries declared by the cited sources",
           "items": [
             "A benchmark ranks submitted systems on declared tasks and metrics. It does not prove general intelligence, biological equivalence, safety, usefulness outside the benchmark, or superiority under unreported host and data costs. (boundary declared by NeuroBench: Advancing Neuromorphic Computing Through Collaborative, Fair and Representative Benchmarking)",
-            "This is a vendor technical brief about a research platform. Performance and efficiency results remain workload-, configuration-, measurement-boundary-, and comparison-dependent and do not establish equivalence to biological intelligence. (boundary declared by Taking Neuromorphic Computing to the Next Level with Loihi 2)"
+            "This is a vendor technical brief about a research platform. Performance and efficiency results remain workload-, configuration-, measurement-boundary-, and comparison-dependent and do not establish equivalence to biological intelligence. (boundary declared by Taking Neuromorphic Computing to the Next Level with Loihi 2)",
+            "Defines reporting and comparison procedure. It does not establish that any system is faster, more efficient or more biologically realistic, and by its own statement excludes neuron updates and data processing costs. (boundary declared by NeuroBench: A Framework for Benchmarking Neuromorphic Computing Algorithms and Systems)",
+            "Defines reporting and comparison procedure. It does not establish that any system is faster, more efficient or more biologically realistic, and by its own statement excludes neuron updates and data processing costs. (boundary declared by NeuroBench: A Framework for Benchmarking Neuromorphic Computing Algorithms and Systems)"
           ],
           "sourceIds": [
             "neurobench",
-            "intel-loihi2"
+            "intel-loihi2",
+            "neurobench-2304-04640",
+            "neurobench-2304-04640"
           ]
         },
         {
@@ -11336,7 +11354,9 @@
           ],
           "sourceIds": [
             "neurobench",
-            "intel-loihi2"
+            "intel-loihi2",
+            "neurobench-2304-04640",
+            "neurobench-2304-04640"
           ]
         },
         {
@@ -11351,7 +11371,7 @@
         }
       ],
       "sectionCount": 8,
-      "upliftDigest": "sha256:65a3aca9f729a4ef42c79540c977a1730114450e20e517c8f783a25aaf8faa19"
+      "upliftDigest": "sha256:f4912de969dfd37f3c99930be88badd80e9833a67286a316b83cfc39bce3f0c4"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/neural-coding-and-time",
@@ -22165,7 +22185,7 @@
           "dimension": "direct-answer",
           "heading": "Direct answer",
           "items": [
-            "How can deterministic digital state and variable analog dynamics be compared fairly?"
+            "Only under a declared system boundary that includes calibration, and by using each substrate error model on its own terms: bit precision bounds digital error, while analog variability requires calibration counted as part of operation rather than excluded from it."
           ],
           "sourceIds": [
             "neurobench",
@@ -22250,7 +22270,7 @@
         }
       ],
       "sectionCount": 7,
-      "upliftDigest": "sha256:18e2015fc4972b36a697bed5cf9996132679ba421094840637ecb0818d8653f8"
+      "upliftDigest": "sha256:b4992addc357681baad9231bfcc6cef620877e9af21a0f45bac97a057a71ac03"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/comparisons/simulation-and-physical-substrate",
@@ -22626,7 +22646,7 @@
           "dimension": "direct-answer",
           "heading": "Direct answer",
           "items": [
-            "Can energy efficiency be compared across electronic and living systems?"
+            "Only when both sides are measured to the same boundary: metabolic estimates are not wall-plug joules, so a comparison must include culture support and readout, which can dominate the biological side."
           ],
           "sourceIds": [
             "neurobench",
@@ -22711,7 +22731,7 @@
         }
       ],
       "sectionCount": 7,
-      "upliftDigest": "sha256:c432ae029c6a7f4a795c4abee2b896f25ca6233778aeda66d08f9121abe0eb96"
+      "upliftDigest": "sha256:9a11722067dbc0bebf525bcc679443934b0bbf4d6a89e4648fd692a517b9d420"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/comparisons/offline-training-and-online-adaptation",

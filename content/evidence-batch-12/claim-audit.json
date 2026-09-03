@@ -1,0 +1,2482 @@
+{
+  "schemaVersion": "maha-unsupported-claim-audit/1.0",
+  "batch": "unsupported-remediation-12",
+  "auditedOn": "2026-09-03",
+  "appendOnly": true,
+  "writtenToProduction": false,
+  "cohortDigest": "sha256:29550744d9a89a14b4b4f3f42d40c4a871c49b1c9759135cb0fd724a3fdce0f3",
+  "grandfatherExemption": false,
+  "grandfatherNote": "Being already public is not an input to any status. auditClaim takes no `alreadyPublic` parameter, so legacy prose is judged on its evidence like anything else.",
+  "method": "Every rendered explanatory line, including each page's direct answer, was classified by what kind of utterance it is and then by what its cited sources actually establish. A source counts as inspected only if it appears in the Batch 11 basis ledger.",
+  "pagesAudited": 15,
+  "totalClaims": 165,
+  "statusTotals": {
+    "supported-as-written": 0,
+    "supportable-after-narrowing": 0,
+    "unsupported": 67,
+    "contradicted": 0,
+    "interpretive": 53,
+    "navigation-or-non-factual": 45
+  },
+  "finding": "Every page in this cohort cites sources and none of those sources has ever been inspected. The prose is presented beside citations that establish nothing.",
+  "pages": [
+    {
+      "route": "/knowledge/religion/historical-evidence",
+      "declaredSources": 2,
+      "explanatorySources": 0,
+      "claimCount": 13,
+      "statuses": {
+        "supported-as-written": 0,
+        "supportable-after-narrowing": 0,
+        "unsupported": 4,
+        "contradicted": 0,
+        "interpretive": 6,
+        "navigation-or-non-factual": 3
+      },
+      "claims": [
+        {
+          "text": "Historical evidence consists of traces interpreted through explicit arguments about past people, events, institutions, and practices. The method distinguishes the date of an artifact from the date it describes, contemporary testimony from later memory, independent corroboration from copied reports, and absence of evidence from evidence of absence.",
+          "kind": "definitional",
+          "citedSourceIds": [
+            "loc-primary-sources",
+            "icomos-charters",
+            "tei-guidelines"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A definition attributed to no inspected source. A definition still needs an authority; readers cannot tell whose it is."
+        },
+        {
+          "text": "Atomize the claim.",
+          "kind": "procedural-step",
+          "citedSourceIds": [
+            "loc-primary-sources",
+            "icomos-charters"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A procedure attributed to no inspected methodology source. It reads as authoritative practice and is not."
+        },
+        {
+          "text": "Assess each source’s relation to the claim.",
+          "kind": "procedural-step",
+          "citedSourceIds": [
+            "loc-primary-sources",
+            "icomos-charters"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A procedure attributed to no inspected methodology source. It reads as authoritative practice and is not."
+        },
+        {
+          "text": "Report confidence and live alternatives.",
+          "kind": "procedural-step",
+          "citedSourceIds": [
+            "loc-primary-sources",
+            "icomos-charters"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A procedure attributed to no inspected methodology source. It reads as authoritative practice and is not."
+        },
+        {
+          "text": "Dated texts and objects",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "loc-primary-sources",
+            "icomos-charters"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Provenance and chain of custody",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "loc-primary-sources",
+            "icomos-charters"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Independent contextual evidence",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "loc-primary-sources",
+            "icomos-charters"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Normative authority is not source proximity.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "loc-primary-sources",
+            "tei-guidelines"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Historical uncertainty does not erase sacred use.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "loc-primary-sources",
+            "tei-guidelines"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Must not be read as: A text’s sacred authority neither proves nor disproves its empirical and historical propositions.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "loc-primary-sources",
+            "tei-guidelines"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Similarity is not descent.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "loc-primary-sources",
+            "icomos-charters"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Different structures do not preclude contact.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "loc-primary-sources",
+            "icomos-charters"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Must not be read as: Mathematical resemblance alone cannot establish historical influence or common spiritual origin.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "loc-primary-sources",
+            "icomos-charters"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        }
+      ]
+    },
+    {
+      "route": "/knowledge/religion/lived-religion",
+      "declaredSources": 2,
+      "explanatorySources": 0,
+      "claimCount": 13,
+      "statuses": {
+        "supported-as-written": 0,
+        "supportable-after-narrowing": 0,
+        "unsupported": 4,
+        "contradicted": 0,
+        "interpretive": 6,
+        "navigation-or-non-factual": 3
+      },
+      "claims": [
+        {
+          "text": "Lived religion examines everyday practice as enacted by particular people in households, communities, workplaces, media, and institutions. It does not assume that official texts fully determine behavior, or that one participant represents a whole tradition; it records variation, hybridity, circumstance, and change.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "unesco-ich-convention",
+            "unesco-ich-ethics",
+            "unesco-multilingualism"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Define sampling and researcher position.",
+          "kind": "procedural-step",
+          "citedSourceIds": [
+            "unesco-ich-convention",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A procedure attributed to no inspected methodology source. It reads as authoritative practice and is not."
+        },
+        {
+          "text": "Preserve participant categories and disagreement.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "unesco-ich-convention",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Avoid generalization beyond the observed setting.",
+          "kind": "procedural-step",
+          "citedSourceIds": [
+            "unesco-ich-convention",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A procedure attributed to no inspected methodology source. It reads as authoritative practice and is not."
+        },
+        {
+          "text": "Consented interviews and observation",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "unesco-ich-convention",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Community-produced records",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "unesco-ich-convention",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Material and digital traces with context",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "unesco-ich-convention",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Official teaching is not a prevalence estimate.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "unesco-ich-convention",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Observed deviation is not automatically rejection.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "unesco-ich-convention",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Must not be read as: Neither an official document nor a vivid anecdote may represent every member of a tradition.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "unesco-ich-convention",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Self-description is not automatically population consensus.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "unesco-ich-ethics",
+            "unesco-multilingualism"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Analytical convenience is not indigenous ontology.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "unesco-ich-ethics",
+            "unesco-multilingualism"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Must not be read as: Do not overwrite participant categories or exempt either vocabulary from evidence and ethical scrutiny.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "unesco-ich-ethics",
+            "unesco-multilingualism"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        }
+      ]
+    },
+    {
+      "route": "/knowledge/religion/doctrine-and-doctrinal-development",
+      "declaredSources": 2,
+      "explanatorySources": 0,
+      "claimCount": 10,
+      "statuses": {
+        "supported-as-written": 0,
+        "supportable-after-narrowing": 0,
+        "unsupported": 4,
+        "contradicted": 0,
+        "interpretive": 3,
+        "navigation-or-non-factual": 3
+      },
+      "claims": [
+        {
+          "text": "Doctrine is a formulated teaching authorized to some degree within a community. Doctrinal development traces changes in vocabulary, problem framing, councils, commentaries, institutions, and dissent, allowing continuity claims and historical transformation to coexist as separately attributed propositions.",
+          "kind": "definitional",
+          "citedSourceIds": [
+            "tei-critical-apparatus",
+            "loc-primary-sources",
+            "unesco-ich-convention",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A definition attributed to no inspected source. A definition still needs an authority; readers cannot tell whose it is."
+        },
+        {
+          "text": "Version each formulation.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "tei-critical-apparatus",
+            "loc-primary-sources"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Map dependencies and disputes.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "tei-critical-apparatus",
+            "loc-primary-sources"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Distinguish insider continuity claims from historical description.",
+          "kind": "procedural-step",
+          "citedSourceIds": [
+            "tei-critical-apparatus",
+            "loc-primary-sources"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A procedure attributed to no inspected methodology source. It reads as authoritative practice and is not."
+        },
+        {
+          "text": "Dated formulations and decisions",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "tei-critical-apparatus",
+            "loc-primary-sources"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Commentaries and controversy records",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "tei-critical-apparatus",
+            "loc-primary-sources"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Institutional reception and practice",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "tei-critical-apparatus",
+            "loc-primary-sources"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Official teaching is not a prevalence estimate.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "unesco-ich-convention",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Observed deviation is not automatically rejection.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "unesco-ich-convention",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Must not be read as: Neither an official document nor a vivid anecdote may represent every member of a tradition.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "unesco-ich-convention",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        }
+      ]
+    },
+    {
+      "route": "/knowledge/religion/comparative-categories-and-non-equivalence",
+      "declaredSources": 2,
+      "explanatorySources": 0,
+      "claimCount": 13,
+      "statuses": {
+        "supported-as-written": 0,
+        "supportable-after-narrowing": 0,
+        "unsupported": 4,
+        "contradicted": 0,
+        "interpretive": 6,
+        "navigation-or-non-factual": 3
+      },
+      "claims": [
+        {
+          "text": "Comparison is a researcher-constructed operation, not discovery of natural equivalence. Terms such as religion, scripture, prayer, meditation, mysticism, deity, and salvation may organize inquiry but must be tested against emic categories, translation history, scale, function, and documented non-equivalences.",
+          "kind": "definitional",
+          "citedSourceIds": [
+            "unesco-multilingualism",
+            "unesco-ich-ethics",
+            "loc-primary-sources",
+            "icomos-charters"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A definition attributed to no inspected source. A definition still needs an authority; readers cannot tell whose it is."
+        },
+        {
+          "text": "Declare the comparative purpose.",
+          "kind": "procedural-step",
+          "citedSourceIds": [
+            "unesco-multilingualism",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A procedure attributed to no inspected methodology source. It reads as authoritative practice and is not."
+        },
+        {
+          "text": "Compare one bounded axis at a time.",
+          "kind": "procedural-step",
+          "citedSourceIds": [
+            "unesco-multilingualism",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A procedure attributed to no inspected methodology source. It reads as authoritative practice and is not."
+        },
+        {
+          "text": "Publish asymmetries and category failures.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "unesco-multilingualism",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Source-language terms and participant accounts",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "unesco-multilingualism",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Historical and functional context",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "unesco-multilingualism",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Explicit comparison axes",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "unesco-multilingualism",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Similarity is not descent.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "loc-primary-sources",
+            "icomos-charters"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Different structures do not preclude contact.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "loc-primary-sources",
+            "icomos-charters"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Must not be read as: Mathematical resemblance alone cannot establish historical influence or common spiritual origin.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "loc-primary-sources",
+            "icomos-charters"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Self-description is not automatically population consensus.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "unesco-ich-ethics",
+            "unesco-multilingualism"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Analytical convenience is not indigenous ontology.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "unesco-ich-ethics",
+            "unesco-multilingualism"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Must not be read as: Do not overwrite participant categories or exempt either vocabulary from evidence and ethical scrutiny.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "unesco-ich-ethics",
+            "unesco-multilingualism"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        }
+      ]
+    },
+    {
+      "route": "/knowledge/religion/contemplative-practice-and-first-person-experience",
+      "declaredSources": 2,
+      "explanatorySources": 0,
+      "claimCount": 10,
+      "statuses": {
+        "supported-as-written": 0,
+        "supportable-after-narrowing": 0,
+        "unsupported": 5,
+        "contradicted": 0,
+        "interpretive": 2,
+        "navigation-or-non-factual": 3
+      },
+      "claims": [
+        {
+          "text": "Contemplative practices are heterogeneous disciplines embedded in goals, ethics, teachers, communities, and theories of mind. A first-person report is evidence that an experience was reported under specified conditions; interpretation requires vocabulary, training history, expectation, safety context, and corroborating methods appropriate to the question.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "nccih-meditation",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Define the practice rather than using a broad label.",
+          "kind": "procedural-step",
+          "citedSourceIds": [
+            "nccih-meditation",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A procedure attributed to no inspected methodology source. It reads as authoritative practice and is not."
+        },
+        {
+          "text": "Keep report, coding, and interpretation distinct.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "nccih-meditation",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Monitor adverse experiences and consent.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "nccih-meditation",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Practice protocol and training context",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "nccih-meditation",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Time-linked first-person reports",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "nccih-meditation",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Behavioral, clinical, or physiological measures when relevant",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "nccih-meditation",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Intensity is not clinical benefit.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "nccih-meditation",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "A scale score does not exhaust contemplative meaning.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "nccih-meditation",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Must not be read as: Do not diagnose from spiritual vocabulary or claim spiritual attainment from a clinical score.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "nccih-meditation",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        }
+      ]
+    },
+    {
+      "route": "/knowledge/religion/empirical-claims-and-study-design",
+      "declaredSources": 2,
+      "explanatorySources": 0,
+      "claimCount": 16,
+      "statuses": {
+        "supported-as-written": 0,
+        "supportable-after-narrowing": 0,
+        "unsupported": 7,
+        "contradicted": 0,
+        "interpretive": 6,
+        "navigation-or-non-factual": 3
+      },
+      "claims": [
+        {
+          "text": "An empirical claim predicts observable differences under specified conditions. Testing requires an operationalized intervention, population, comparator, outcome, time horizon, analysis plan, missing-data policy, and safety monitoring. The result bears on that measurable claim, not automatically on theology or metaphysics.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "nccih-meditation",
+            "prisma-2020",
+            "unesco-ich-ethics",
+            "unesco-ich-convention"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Separate exploratory from confirmatory hypotheses.",
+          "kind": "procedural-step",
+          "citedSourceIds": [
+            "nccih-meditation",
+            "prisma-2020"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A procedure attributed to no inspected methodology source. It reads as authoritative practice and is not."
+        },
+        {
+          "text": "Use appropriate controls and blinded assessment where possible.",
+          "kind": "procedural-step",
+          "citedSourceIds": [
+            "nccih-meditation",
+            "prisma-2020"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A procedure attributed to no inspected methodology source. It reads as authoritative practice and is not."
+        },
+        {
+          "text": "Report effect size, uncertainty, null results, and limitations.",
+          "kind": "procedural-step",
+          "citedSourceIds": [
+            "nccih-meditation",
+            "prisma-2020"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A procedure attributed to no inspected methodology source. It reads as authoritative practice and is not."
+        },
+        {
+          "text": "Preregistered protocol and analysis plan",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "nccih-meditation",
+            "prisma-2020"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Participant-level or aggregate outcome data",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "nccih-meditation",
+            "prisma-2020"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Comparator, adherence, attrition, and adverse-event records",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "nccih-meditation",
+            "prisma-2020"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Logical coherence is not empirical confirmation.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "nccih-meditation",
+            "prisma-2020"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Failure of one measurable proxy is not disproof of all theology.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "nccih-meditation",
+            "prisma-2020"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Must not be read as: Do not advertise measurable health or behavioral outcomes as proof of divine agency or metaphysical truth.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "nccih-meditation",
+            "prisma-2020"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Intensity is not clinical benefit.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "nccih-meditation",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "A scale score does not exhaust contemplative meaning.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "nccih-meditation",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Must not be read as: Do not diagnose from spiritual vocabulary or claim spiritual attainment from a clinical score.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "nccih-meditation",
+            "unesco-ich-ethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Sacred efficacy may not be operationalized by a study.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "unesco-ich-convention",
+            "nccih-meditation"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Observed effects do not identify supernatural mechanisms.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "unesco-ich-convention",
+            "nccih-meditation"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Must not be read as: Do not market an association as proof that a ritual guarantees sacred, medical, financial, or future outcomes.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "unesco-ich-convention",
+            "nccih-meditation"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        }
+      ]
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/neuromorphic-computing",
+      "declaredSources": 4,
+      "explanatorySources": 1,
+      "claimCount": 10,
+      "statuses": {
+        "supported-as-written": 0,
+        "supportable-after-narrowing": 0,
+        "unsupported": 3,
+        "contradicted": 0,
+        "interpretive": 4,
+        "navigation-or-non-factual": 3
+      },
+      "claims": [
+        {
+          "text": "Neuromorphic computing is a family of hardware and software approaches that borrow selected organizational principles from nervous systems, including event-driven communication, colocated state and computation, distributed parallelism, and local adaptation. “Brain-inspired” identifies design provenance; it does not establish that a system reproduces a brain, cognition, or subjective experience.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "intel-loihi2",
+            "spinnaker2",
+            "neurobench",
+            "neurobench-2304-04640"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Encode activity as events or locally evolving state.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "intel-loihi2",
+            "spinnaker2",
+            "neurobench",
+            "neurobench-2304-04640"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Route sparse signals among distributed processing elements.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "intel-loihi2",
+            "spinnaker2",
+            "neurobench",
+            "neurobench-2304-04640"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Update state or weights under declared dynamics.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "intel-loihi2",
+            "spinnaker2",
+            "neurobench",
+            "neurobench-2304-04640"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Task correctness",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "intel-loihi2",
+            "spinnaker2",
+            "neurobench",
+            "neurobench-2304-04640"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Latency and throughput",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "intel-loihi2",
+            "spinnaker2",
+            "neurobench",
+            "neurobench-2304-04640"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Energy under a declared system boundary",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "intel-loihi2",
+            "spinnaker2",
+            "neurobench",
+            "neurobench-2304-04640"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "High accuracy does not imply brain likeness.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "neurobench"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Biological resemblance does not imply engineering utility.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "neurobench"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Must not be read as: Do not collapse benchmark rank and biological plausibility into one intelligence score or use success on either axis to certify the other.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "neurobench"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        }
+      ]
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/spiking-neural-networks",
+      "declaredSources": 4,
+      "explanatorySources": 2,
+      "claimCount": 10,
+      "statuses": {
+        "supported-as-written": 0,
+        "supportable-after-narrowing": 0,
+        "unsupported": 4,
+        "contradicted": 0,
+        "interpretive": 3,
+        "navigation-or-non-factual": 3
+      },
+      "claims": [
+        {
+          "text": "A spiking neural network is a directed dynamical system whose units integrate inputs, evolve internal state, emit discrete spikes under a defined rule, and influence other units through weighted, delayed connections. Models differ substantially in neuron equations, coding, training, and hardware mapping; use of spikes alone does not make a model biologically realistic or computationally superior.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "neurobench",
+            "intel-loihi2",
+            "neurobench-2304-04640"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Integrate synaptic inputs into neuron state.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "neurobench",
+            "intel-loihi2",
+            "neurobench-2304-04640",
+            "neurobench-2304-04640"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Emit a spike when a specified condition is met.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "neurobench",
+            "intel-loihi2",
+            "neurobench-2304-04640",
+            "neurobench-2304-04640"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Propagate weighted and delayed events through a graph.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "neurobench",
+            "intel-loihi2",
+            "neurobench-2304-04640",
+            "neurobench-2304-04640"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Accuracy or task loss",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "neurobench",
+            "intel-loihi2",
+            "neurobench-2304-04640",
+            "neurobench-2304-04640"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Spike count and temporal latency",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "neurobench",
+            "intel-loihi2",
+            "neurobench-2304-04640",
+            "neurobench-2304-04640"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Memory and operation count",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "neurobench",
+            "intel-loihi2",
+            "neurobench-2304-04640",
+            "neurobench-2304-04640"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "A spike is not automatically a biological action potential.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "neurobench"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Operation counts are architecture-specific.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "neurobench"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Must not be read as: Do not infer biological realism, intelligence, or efficiency from the presence of spikes without matched task evidence and complete resource accounting.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "neurobench"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        }
+      ]
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/neural-coding-and-time",
+      "declaredSources": 2,
+      "explanatorySources": 0,
+      "claimCount": 10,
+      "statuses": {
+        "supported-as-written": 0,
+        "supportable-after-narrowing": 0,
+        "unsupported": 3,
+        "contradicted": 0,
+        "interpretive": 4,
+        "navigation-or-non-factual": 3
+      },
+      "claims": [
+        {
+          "text": "Neural coding describes a declared mapping between signals and spike patterns, such as rates, precise times, ranks, populations, or phases. A coding hypothesis is operational only when its encoder, decoder, time window, noise model, and task are specified; finding decodable information does not prove that a biological system uses that code causally.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "neurobench",
+            "dishbrain"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Define an encoder from observations to events.",
+          "kind": "procedural-step",
+          "citedSourceIds": [
+            "neurobench",
+            "dishbrain"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A procedure attributed to no inspected methodology source. It reads as authoritative practice and is not."
+        },
+        {
+          "text": "Transmit or transform event sequences.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "neurobench",
+            "dishbrain"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Apply a decoder and test its task-relevant information.",
+          "kind": "procedural-step",
+          "citedSourceIds": [
+            "neurobench",
+            "dishbrain"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A procedure attributed to no inspected methodology source. It reads as authoritative practice and is not."
+        },
+        {
+          "text": "Mutual information or decoding error",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "neurobench",
+            "dishbrain"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Temporal precision",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "neurobench",
+            "dishbrain"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Robustness to jitter and missing events",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "neurobench",
+            "dishbrain"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "High accuracy does not imply brain likeness.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "neurobench"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Biological resemblance does not imply engineering utility.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "neurobench"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Must not be read as: Do not collapse benchmark rank and biological plausibility into one intelligence score or use success on either axis to certify the other.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "neurobench"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        }
+      ]
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/synaptic-plasticity-and-learning",
+      "declaredSources": 3,
+      "explanatorySources": 0,
+      "claimCount": 10,
+      "statuses": {
+        "supported-as-written": 0,
+        "supportable-after-narrowing": 0,
+        "unsupported": 4,
+        "contradicted": 0,
+        "interpretive": 3,
+        "navigation-or-non-factual": 3
+      },
+      "claims": [
+        {
+          "text": "Plasticity is a persistent change in connection efficacy or system state caused by activity or intervention; learning is an operational performance change under a defined task and evaluation protocol. The two may be related but are not synonyms. Hardware updates, software optimization, and biological adaptation require different measurements and cannot share one unqualified learning claim.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "intel-loihi2",
+            "dishbrain",
+            "mea-reproducibility"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Observe activity and an eligibility condition.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "intel-loihi2",
+            "dishbrain",
+            "mea-reproducibility"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Apply a local, global, engineered, or biological update.",
+          "kind": "procedural-step",
+          "citedSourceIds": [
+            "intel-loihi2",
+            "dishbrain",
+            "mea-reproducibility"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A procedure attributed to no inspected methodology source. It reads as authoritative practice and is not."
+        },
+        {
+          "text": "Test persistence and held-out task consequences.",
+          "kind": "procedural-step",
+          "citedSourceIds": [
+            "intel-loihi2",
+            "dishbrain",
+            "mea-reproducibility"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A procedure attributed to no inspected methodology source. It reads as authoritative practice and is not."
+        },
+        {
+          "text": "Pre/post performance",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "intel-loihi2",
+            "dishbrain",
+            "mea-reproducibility"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Weight or response change",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "intel-loihi2",
+            "dishbrain",
+            "mea-reproducibility"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Retention and transfer",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "intel-loihi2",
+            "dishbrain",
+            "mea-reproducibility"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Pretraining cost cannot disappear from lifecycle accounting.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "intel-loihi2",
+            "dishbrain"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "State drift is not necessarily learning.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "intel-loihi2",
+            "dishbrain"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Must not be read as: Do not call any online state change learning unless it improves a preregistered held-out outcome beyond drift, damage, repeated exposure, and controller-only controls.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "intel-loihi2",
+            "dishbrain"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        }
+      ]
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/mixed-signal-neuromorphic-hardware",
+      "declaredSources": 2,
+      "explanatorySources": 0,
+      "claimCount": 10,
+      "statuses": {
+        "supported-as-written": 0,
+        "supportable-after-narrowing": 0,
+        "unsupported": 6,
+        "contradicted": 0,
+        "interpretive": 1,
+        "navigation-or-non-factual": 3
+      },
+      "claims": [
+        {
+          "text": "Mixed-signal neuromorphic hardware uses analog or subthreshold circuits for selected neuron, synapse, or memory dynamics and digital logic for routing, configuration, or observation. Device mismatch and noise can be computational resources or error sources depending on the model; calibration, temperature, aging, and fabrication variation are therefore part of the algorithmic contract.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "neurobench",
+            "spinnaker2",
+            "intel-loihi2"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Map model state to analog circuit variables.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "neurobench",
+            "spinnaker2"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Exchange events through digital routing.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "neurobench",
+            "spinnaker2"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Calibrate or learn around physical variability.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "neurobench",
+            "spinnaker2"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Energy per declared operation or event",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "neurobench",
+            "spinnaker2"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Model fidelity and mismatch",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "neurobench",
+            "spinnaker2"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Temperature and run-to-run stability",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "neurobench",
+            "spinnaker2"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Bit precision and analog variability are different error models.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "neurobench",
+            "intel-loihi2"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Calibration is part of mixed-signal operation.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "neurobench",
+            "intel-loihi2"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Must not be read as: Do not compare idealized analog core energy with complete digital system energy or treat physical variability as either free randomness or error without task evidence.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "neurobench",
+            "intel-loihi2"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        }
+      ]
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/brain-organoids-and-organoid-intelligence",
+      "declaredSources": 3,
+      "explanatorySources": 0,
+      "claimCount": 10,
+      "statuses": {
+        "supported-as-written": 0,
+        "supportable-after-narrowing": 0,
+        "unsupported": 4,
+        "contradicted": 0,
+        "interpretive": 3,
+        "navigation-or-non-factual": 3
+      },
+      "claims": [
+        {
+          "text": "Brain organoids are three-dimensional stem-cell-derived models that reproduce selected developmental, cellular, and network features under laboratory conditions. “Organoid intelligence” names an emerging program to combine such models with interfaces and training paradigms for information processing. It is a research agenda, not established scalable computing, general intelligence, or evidence of consciousness.",
+          "kind": "definitional",
+          "citedSourceIds": [
+            "organoid-intelligence",
+            "isscr-guidelines",
+            "nih-neuroethics",
+            "dishbrain"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A definition attributed to no inspected source. A definition still needs an authority; readers cannot tell whose it is."
+        },
+        {
+          "text": "Differentiate and mature a documented organoid model.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "organoid-intelligence",
+            "isscr-guidelines",
+            "nih-neuroethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Couple activity to a recording and stimulation interface.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "organoid-intelligence",
+            "isscr-guidelines",
+            "nih-neuroethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Test a preregistered, bounded input-output task.",
+          "kind": "procedural-step",
+          "citedSourceIds": [
+            "organoid-intelligence",
+            "isscr-guidelines",
+            "nih-neuroethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A procedure attributed to no inspected methodology source. It reads as authoritative practice and is not."
+        },
+        {
+          "text": "Cellular composition and viability",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "organoid-intelligence",
+            "isscr-guidelines",
+            "nih-neuroethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Network activity and interface quality",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "organoid-intelligence",
+            "isscr-guidelines",
+            "nih-neuroethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Task effect with biological replication",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "organoid-intelligence",
+            "isscr-guidelines",
+            "nih-neuroethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Three-dimensional organization is not a complete brain.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "dishbrain",
+            "organoid-intelligence",
+            "isscr-guidelines"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Culture age and organoid age are not interchangeable.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "dishbrain",
+            "organoid-intelligence",
+            "isscr-guidelines"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Must not be read as: Do not rank cognition, consciousness, or moral status from dimensionality, cell count, visual resemblance, activity complexity, or a single task result.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "dishbrain",
+            "organoid-intelligence",
+            "isscr-guidelines"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        }
+      ]
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/hybrid-bioelectronic-systems",
+      "declaredSources": 3,
+      "explanatorySources": 0,
+      "claimCount": 10,
+      "statuses": {
+        "supported-as-written": 0,
+        "supportable-after-narrowing": 0,
+        "unsupported": 5,
+        "contradicted": 0,
+        "interpretive": 2,
+        "navigation-or-non-factual": 3
+      },
+      "claims": [
+        {
+          "text": "A hybrid bioelectronic system combines living cells or tissues, an interface, electronic computation, and a controlled environment into a closed or interactive loop. System claims must identify which component performs each transformation, what is trained, what is fixed, what feedback is available, and how biological health and electronic failure are monitored.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "dishbrain",
+            "organoid-intelligence",
+            "nih-neuroethics",
+            "neurobench"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Measure state from the biological component.",
+          "kind": "procedural-step",
+          "citedSourceIds": [
+            "dishbrain",
+            "organoid-intelligence",
+            "nih-neuroethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A procedure attributed to no inspected methodology source. It reads as authoritative practice and is not."
+        },
+        {
+          "text": "Transform measurements in an electronic controller or environment.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "dishbrain",
+            "organoid-intelligence",
+            "nih-neuroethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Return contingent stimulation or chemical input.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "dishbrain",
+            "organoid-intelligence",
+            "nih-neuroethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Closed-loop task effect",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "dishbrain",
+            "organoid-intelligence",
+            "nih-neuroethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Loop latency and stability",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "dishbrain",
+            "organoid-intelligence",
+            "nih-neuroethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Biological health and electronic uptime",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "dishbrain",
+            "organoid-intelligence",
+            "nih-neuroethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "ATP or metabolic estimates are not wall-plug joules.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "neurobench",
+            "organoid-intelligence"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Culture support and readout may dominate.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "neurobench",
+            "organoid-intelligence"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Must not be read as: Do not claim biological energy superiority by comparing metabolism alone with a complete electronic system, or chip core energy with full laboratory support.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "neurobench",
+            "organoid-intelligence"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        }
+      ]
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/reproducibility-variability-and-controls",
+      "declaredSources": 3,
+      "explanatorySources": 0,
+      "claimCount": 10,
+      "statuses": {
+        "supported-as-written": 0,
+        "supportable-after-narrowing": 0,
+        "unsupported": 5,
+        "contradicted": 0,
+        "interpretive": 2,
+        "navigation-or-non-factual": 3
+      },
+      "claims": [
+        {
+          "text": "Reproducibility in neuromorphic and biocomputing research requires substrate-specific controls plus a shared provenance record. Silicon studies need device, board, compiler, clock, temperature, and power methods; living systems additionally need donor or line, preparation, maturation, batch, health, contamination, nested replication, and intervention controls.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "neurobench",
+            "mea-reproducibility",
+            "isscr-guidelines",
+            "intel-loihi2",
+            "dishbrain"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Pre-register the unit of analysis and exclusions.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "neurobench",
+            "mea-reproducibility",
+            "isscr-guidelines"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Version every transformation from substrate to metric.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "neurobench",
+            "mea-reproducibility",
+            "isscr-guidelines"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Repeat across runs, devices, batches, and sites as appropriate.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "neurobench",
+            "mea-reproducibility",
+            "isscr-guidelines"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Within- and between-unit variance",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "neurobench",
+            "mea-reproducibility",
+            "isscr-guidelines"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Effect size with uncertainty",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "neurobench",
+            "mea-reproducibility",
+            "isscr-guidelines"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Replication and failure rate",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "neurobench",
+            "mea-reproducibility",
+            "isscr-guidelines"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Pretraining cost cannot disappear from lifecycle accounting.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "intel-loihi2",
+            "dishbrain"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "State drift is not necessarily learning.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "intel-loihi2",
+            "dishbrain"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Must not be read as: Do not call any online state change learning unless it improves a preregistered held-out outcome beyond drift, damage, repeated exposure, and controller-only controls.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "intel-loihi2",
+            "dishbrain"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        }
+      ]
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/biosafety-ethics-and-governance",
+      "declaredSources": 3,
+      "explanatorySources": 0,
+      "claimCount": 10,
+      "statuses": {
+        "supported-as-written": 0,
+        "supportable-after-narrowing": 0,
+        "unsupported": 5,
+        "contradicted": 0,
+        "interpretive": 2,
+        "navigation-or-non-factual": 3
+      },
+      "claims": [
+        {
+          "text": "Responsible biocomputing governance begins before acquisition of biological material and continues through culture, interface, experimentation, data use, communication, sharing, storage, and disposal. Oversight must address informed consent and future use, donor privacy, human-cell provenance, biosafety, animal use, dual-use risk, uncertain moral status, commercial incentives, and non-sensational communication.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "isscr-guidelines",
+            "nih-neuroethics",
+            "organoid-intelligence",
+            "neurobench"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Classify biological materials, interventions, data, and dual-use risks.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "isscr-guidelines",
+            "nih-neuroethics",
+            "organoid-intelligence"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Obtain independent ethics and biosafety review with documented consent scope.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "isscr-guidelines",
+            "nih-neuroethics",
+            "organoid-intelligence"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Monitor, report, stop, retain, share, and dispose under approved protocols.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "isscr-guidelines",
+            "nih-neuroethics",
+            "organoid-intelligence"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Protocol and consent compliance",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "isscr-guidelines",
+            "nih-neuroethics",
+            "organoid-intelligence"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Adverse events and deviations",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "isscr-guidelines",
+            "nih-neuroethics",
+            "organoid-intelligence"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "Material and data lineage completeness",
+          "kind": "taxonomic-entry",
+          "citedSourceIds": [
+            "isscr-guidelines",
+            "nih-neuroethics",
+            "organoid-intelligence"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "navigation-or-non-factual",
+          "reason": "A category name in a list. It asserts nothing on its own."
+        },
+        {
+          "text": "A paper result is not an SLA.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "neurobench",
+            "isscr-guidelines",
+            "nih-neuroethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        },
+        {
+          "text": "Scaling samples or devices can change behavior.",
+          "kind": "empirical-assertion",
+          "citedSourceIds": [
+            "neurobench",
+            "isscr-guidelines",
+            "nih-neuroethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "unsupported",
+          "reason": "A source is cited but was never inspected, so nothing establishes this line."
+        },
+        {
+          "text": "Must not be read as: Do not market a simulation, chip prototype, cell culture, organoid, or closed-loop laboratory experiment as deployable computing without reliability, safety, scaling, and lifecycle evidence.",
+          "kind": "epistemic-caution",
+          "citedSourceIds": [
+            "neurobench",
+            "isscr-guidelines",
+            "nih-neuroethics"
+          ],
+          "sourceIdentityVerified": false,
+          "sourceContentInspected": false,
+          "passageSupportsScope": false,
+          "status": "interpretive",
+          "reason": "A limit on what may be inferred, not an assertion. It needs to be logically sound, not sourced."
+        }
+      ]
+    }
+  ]
+}

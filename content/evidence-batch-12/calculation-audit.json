@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "maha-calculation-audit/1.0",
+  "batch": "unsupported-remediation-12",
+  "auditedOn": "2026-09-03",
+  "appendOnly": true,
+  "writtenToProduction": false,
+  "scope": "All 31 substantial-and-evidence-backed pages were checked for a calculation their own inspected evidence could reproduce.",
+  "requirements": ["source-defined variables", "reproducible inputs", "units where applicable", "assumptions", "governing equation or algorithm", "uncertainty treatment", "deterministic receipt", "independent receipt verification"],
+  "accepted": [],
+  "retainedFromEarlierBatch": [
+    {
+      "route": "/knowledge/mathematics/root-finding",
+      "calculation": "Newton iteration converging to the square root of two",
+      "note": "Retained as the positive fixture. Not re-counted as a Batch 12 conversion."
+    }
+  ],
+  "refused": [
+    {
+      "candidate": "NeuroBench synaptic-operation counts on the spiking-neural-networks page",
+      "requirementsMet": ["source-defined variables", "governing equation or algorithm", "units where applicable"],
+      "requirementsMissing": ["reproducible inputs", "uncertainty treatment"],
+      "reason": "The framework defines Dense, Eff_MACs and Eff_ACs precisely, but defines them over a specific model's weights and activations. No model is named on the page, so there are no inputs to compute over. Inventing a model to have something to count would be fabricating the input."
+    },
+    {
+      "candidate": "Energy comparison on the silicon-energy-and-biological-metabolic-cost page",
+      "requirementsMet": ["units where applicable", "assumptions"],
+      "requirementsMissing": ["source-defined variables", "reproducible inputs", "uncertainty treatment"],
+      "reason": "The page's whole point is that metabolic estimates and wall-plug joules are not commensurable without a declared boundary. Producing a number here would enact the error the page warns against."
+    },
+    {
+      "candidate": "Connection-sparsity ratio on the neuromorphic-computing page",
+      "requirementsMet": ["governing equation or algorithm", "source-defined variables"],
+      "requirementsMissing": ["reproducible inputs", "uncertainty treatment"],
+      "reason": "Sparsity is defined as zero weights over total weights. The page names no weight matrix, so the ratio has no operands."
+    },
+    {
+      "candidate": "Douay-Rheims and King James divergence counts",
+      "requirementsMet": ["reproducible inputs"],
+      "requirementsMissing": ["governing equation or algorithm", "units where applicable", "uncertainty treatment"],
+      "reason": "Counting differing words between two editions is arithmetic over a text, not a calculation with a governing equation or an uncertainty. Presenting it as one would dress a word count as a derivation."
+    }
+  ],
+  "summary": { "pagesAudited": 31, "accepted": 0, "refused": 4, "retained": 1 },
+  "boundary": "No calculation was added. Four candidates were examined and each failed on inputs or uncertainty, which are the two requirements that cannot be supplied by wanting a calculation to exist."
+}

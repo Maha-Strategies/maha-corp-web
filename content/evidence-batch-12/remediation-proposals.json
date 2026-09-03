@@ -1,0 +1,225 @@
+{
+  "schemaVersion": "maha-remediation-proposals/1.0",
+  "batch": "unsupported-remediation-12",
+  "generatedOn": "2026-09-03",
+  "appendOnly": true,
+  "writtenToProduction": false,
+  "active": false,
+  "mutatesActiveRelease": false,
+  "governance": "Every proposal carries active:false and appliesToRelease:null. Nothing here changes a served page. Applying one requires a governed revision through the release path, which this batch does not open.",
+  "pagesNeedingRevision": 15,
+  "totalUnsupported": 67,
+  "proposals": [
+    {
+      "route": "/knowledge/religion/historical-evidence",
+      "active": false,
+      "appliesToRelease": null,
+      "unsupportedCount": 4,
+      "definitional": 1,
+      "procedural": 3,
+      "proposal": "Attribute the definition to a named reference and the procedure to a named methodology source, or mark both as this page's own working formulation.",
+      "withholdIfUnresolved": "Present the lines as the page's own formulation rather than as received practice. Nothing is deleted; the attribution is corrected.",
+      "examples": [
+        "Historical evidence consists of traces interpreted through explicit arguments about past p",
+        "Atomize the claim."
+      ]
+    },
+    {
+      "route": "/knowledge/religion/lived-religion",
+      "active": false,
+      "appliesToRelease": null,
+      "unsupportedCount": 4,
+      "definitional": 0,
+      "procedural": 2,
+      "proposal": "Attribute the procedure to a named methodology source, or state that it is this page's own formulation.",
+      "withholdIfUnresolved": "Present the lines as the page's own formulation rather than as received practice. Nothing is deleted; the attribution is corrected.",
+      "examples": [
+        "Lived religion examines everyday practice as enacted by particular people in households, c",
+        "Define sampling and researcher position."
+      ]
+    },
+    {
+      "route": "/knowledge/religion/doctrine-and-doctrinal-development",
+      "active": false,
+      "appliesToRelease": null,
+      "unsupportedCount": 4,
+      "definitional": 1,
+      "procedural": 1,
+      "proposal": "Attribute the definition to a named reference and the procedure to a named methodology source, or mark both as this page's own working formulation.",
+      "withholdIfUnresolved": "Present the lines as the page's own formulation rather than as received practice. Nothing is deleted; the attribution is corrected.",
+      "examples": [
+        "Doctrine is a formulated teaching authorized to some degree within a community. Doctrinal ",
+        "Version each formulation."
+      ]
+    },
+    {
+      "route": "/knowledge/religion/comparative-categories-and-non-equivalence",
+      "active": false,
+      "appliesToRelease": null,
+      "unsupportedCount": 4,
+      "definitional": 1,
+      "procedural": 2,
+      "proposal": "Attribute the definition to a named reference and the procedure to a named methodology source, or mark both as this page's own working formulation.",
+      "withholdIfUnresolved": "Present the lines as the page's own formulation rather than as received practice. Nothing is deleted; the attribution is corrected.",
+      "examples": [
+        "Comparison is a researcher-constructed operation, not discovery of natural equivalence. Te",
+        "Declare the comparative purpose."
+      ]
+    },
+    {
+      "route": "/knowledge/religion/contemplative-practice-and-first-person-experience",
+      "active": false,
+      "appliesToRelease": null,
+      "unsupportedCount": 5,
+      "definitional": 0,
+      "procedural": 1,
+      "proposal": "Attribute the procedure to a named methodology source, or state that it is this page's own formulation.",
+      "withholdIfUnresolved": "Present the lines as the page's own formulation rather than as received practice. Nothing is deleted; the attribution is corrected.",
+      "examples": [
+        "Contemplative practices are heterogeneous disciplines embedded in goals, ethics, teachers,",
+        "Define the practice rather than using a broad label."
+      ]
+    },
+    {
+      "route": "/knowledge/religion/empirical-claims-and-study-design",
+      "active": false,
+      "appliesToRelease": null,
+      "unsupportedCount": 7,
+      "definitional": 0,
+      "procedural": 3,
+      "proposal": "Attribute the procedure to a named methodology source, or state that it is this page's own formulation.",
+      "withholdIfUnresolved": "Present the lines as the page's own formulation rather than as received practice. Nothing is deleted; the attribution is corrected.",
+      "examples": [
+        "An empirical claim predicts observable differences under specified conditions. Testing req",
+        "Separate exploratory from confirmatory hypotheses."
+      ]
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/neuromorphic-computing",
+      "active": false,
+      "appliesToRelease": null,
+      "unsupportedCount": 3,
+      "definitional": 0,
+      "procedural": 0,
+      "proposal": "Attribute the procedure to a named methodology source, or state that it is this page's own formulation.",
+      "withholdIfUnresolved": "Present the lines as the page's own formulation rather than as received practice. Nothing is deleted; the attribution is corrected.",
+      "examples": [
+        "Encode activity as events or locally evolving state.",
+        "Route sparse signals among distributed processing elements."
+      ]
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/spiking-neural-networks",
+      "active": false,
+      "appliesToRelease": null,
+      "unsupportedCount": 4,
+      "definitional": 0,
+      "procedural": 0,
+      "proposal": "Attribute the procedure to a named methodology source, or state that it is this page's own formulation.",
+      "withholdIfUnresolved": "Present the lines as the page's own formulation rather than as received practice. Nothing is deleted; the attribution is corrected.",
+      "examples": [
+        "Integrate synaptic inputs into neuron state.",
+        "Emit a spike when a specified condition is met."
+      ]
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/neural-coding-and-time",
+      "active": false,
+      "appliesToRelease": null,
+      "unsupportedCount": 3,
+      "definitional": 0,
+      "procedural": 2,
+      "proposal": "Attribute the procedure to a named methodology source, or state that it is this page's own formulation.",
+      "withholdIfUnresolved": "Present the lines as the page's own formulation rather than as received practice. Nothing is deleted; the attribution is corrected.",
+      "examples": [
+        "Define an encoder from observations to events.",
+        "Transmit or transform event sequences."
+      ]
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/synaptic-plasticity-and-learning",
+      "active": false,
+      "appliesToRelease": null,
+      "unsupportedCount": 4,
+      "definitional": 0,
+      "procedural": 2,
+      "proposal": "Attribute the procedure to a named methodology source, or state that it is this page's own formulation.",
+      "withholdIfUnresolved": "Present the lines as the page's own formulation rather than as received practice. Nothing is deleted; the attribution is corrected.",
+      "examples": [
+        "Observe activity and an eligibility condition.",
+        "Apply a local, global, engineered, or biological update."
+      ]
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/mixed-signal-neuromorphic-hardware",
+      "active": false,
+      "appliesToRelease": null,
+      "unsupportedCount": 6,
+      "definitional": 0,
+      "procedural": 0,
+      "proposal": "Attribute the procedure to a named methodology source, or state that it is this page's own formulation.",
+      "withholdIfUnresolved": "Present the lines as the page's own formulation rather than as received practice. Nothing is deleted; the attribution is corrected.",
+      "examples": [
+        "Mixed-signal neuromorphic hardware uses analog or subthreshold circuits for selected neuro",
+        "Map model state to analog circuit variables."
+      ]
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/brain-organoids-and-organoid-intelligence",
+      "active": false,
+      "appliesToRelease": null,
+      "unsupportedCount": 4,
+      "definitional": 1,
+      "procedural": 1,
+      "proposal": "Attribute the definition to a named reference and the procedure to a named methodology source, or mark both as this page's own working formulation.",
+      "withholdIfUnresolved": "Present the lines as the page's own formulation rather than as received practice. Nothing is deleted; the attribution is corrected.",
+      "examples": [
+        "Brain organoids are three-dimensional stem-cell-derived models that reproduce selected dev",
+        "Differentiate and mature a documented organoid model."
+      ]
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/hybrid-bioelectronic-systems",
+      "active": false,
+      "appliesToRelease": null,
+      "unsupportedCount": 5,
+      "definitional": 0,
+      "procedural": 1,
+      "proposal": "Attribute the procedure to a named methodology source, or state that it is this page's own formulation.",
+      "withholdIfUnresolved": "Present the lines as the page's own formulation rather than as received practice. Nothing is deleted; the attribution is corrected.",
+      "examples": [
+        "A hybrid bioelectronic system combines living cells or tissues, an interface, electronic c",
+        "Measure state from the biological component."
+      ]
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/reproducibility-variability-and-controls",
+      "active": false,
+      "appliesToRelease": null,
+      "unsupportedCount": 5,
+      "definitional": 0,
+      "procedural": 0,
+      "proposal": "Attribute the procedure to a named methodology source, or state that it is this page's own formulation.",
+      "withholdIfUnresolved": "Present the lines as the page's own formulation rather than as received practice. Nothing is deleted; the attribution is corrected.",
+      "examples": [
+        "Reproducibility in neuromorphic and biocomputing research requires substrate-specific cont",
+        "Pre-register the unit of analysis and exclusions."
+      ]
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/biosafety-ethics-and-governance",
+      "active": false,
+      "appliesToRelease": null,
+      "unsupportedCount": 5,
+      "definitional": 0,
+      "procedural": 0,
+      "proposal": "Attribute the procedure to a named methodology source, or state that it is this page's own formulation.",
+      "withholdIfUnresolved": "Present the lines as the page's own formulation rather than as received practice. Nothing is deleted; the attribution is corrected.",
+      "examples": [
+        "Responsible biocomputing governance begins before acquisition of biological material and c",
+        "Classify biological materials, interventions, data, and dual-use risks."
+      ]
+    }
+  ],
+  "boundary": "These are proposals about attribution, not deletions. The prose is not claimed to be false; it is claimed to be unattributed."
+}
