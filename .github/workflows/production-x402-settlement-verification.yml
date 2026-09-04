@@ -38,7 +38,7 @@ jobs:
       SUPABASE_PROJECT_REF: ${{ vars.SUPABASE_PROJECT_REF }}
       OFFER_ID: ${{ inputs.offer_id }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       # The mirror image of the Preview workflow's guard. That one refuses to
       # touch Production; this one refuses to report on anything else, because

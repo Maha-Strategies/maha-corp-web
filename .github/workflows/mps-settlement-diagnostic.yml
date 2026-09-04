@@ -55,7 +55,7 @@ jobs:
       PAYER: ${{ inputs.payer }}
       EVIDENCE: ${{ github.workspace }}/mps-diagnostic.txt
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       - name: Validate the inputs and the target
         run: |
@@ -174,7 +174,7 @@ jobs:
 
       - name: Upload diagnostic evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: mps-diagnostic-${{ github.run_id }}
           path: ${{ env.EVIDENCE }}

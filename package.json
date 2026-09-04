@@ -143,12 +143,12 @@
     "canary:mcp-evidence:private": "node --experimental-strip-types scripts/run-mcp-evidence-private-canary.ts"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.115.0",
+    "@anthropic-ai/sdk": "^0.122.0",
     "@scalar/api-reference-react": "^0.9.60",
     "@sentry/nextjs": "^10.69.0",
     "@stripe/stripe-js": "^9.12.1",
-    "@supabase/supabase-js": "^2.112.0",
-    "@upstash/redis": "^1.38.1",
+    "@supabase/supabase-js": "^2.114.0",
+    "@upstash/redis": "^1.38.3",
     "@x402/core": "^2.21.0",
     "@x402/extensions": "^2.21.0",
     "adilosjs": "^1.0.0",
@@ -156,7 +156,7 @@
     "canonicalize": "^2.1.0",
     "ecjsonrpc": "^1.0.2",
     "jose": "^6.2.8",
-    "katex": "^0.17.0",
+    "katex": "^0.18.5",
     "next": "^16.2.12",
     "pdf-lib": "^1.17.1",
     "react": "19.2.8",
@@ -174,12 +174,12 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-katex": "^3.0.4",
+    "assemblyscript": "^0.28.8",
     "eslint": "^9",
     "eslint-config-next": "^16.2.12",
     "gpt-tokenizer": "^3.4.0",
     "tailwindcss": "^4",
     "typescript": "^5",
-    "assemblyscript": "^0.28.8",
     "viem": "^2.55.10"
   },
   "overrides": {

@@ -55,7 +55,7 @@ jobs:
       TARGET: ${{ inputs.target }}
       EVIDENCE: ${{ github.workspace }}/mps-object-census.txt
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       # The census is only meaningful if it names which database it looked at,
       # and a green run against the wrong one is worse than no run.
@@ -160,7 +160,7 @@ jobs:
 
       - name: Upload census evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: mps-object-census-${{ inputs.target }}-${{ github.run_id }}
           path: ${{ env.EVIDENCE }}

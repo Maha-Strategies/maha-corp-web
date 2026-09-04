@@ -146,7 +146,7 @@ jobs:
 
       - name: Upload sanitized evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: substantial-scale-migration-${{ github.run_id }}
           path: ${{ env.EVIDENCE }}
