@@ -54,7 +54,7 @@ jobs:
       SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
       EVIDENCE: ${{ github.workspace }}/preview-migration-evidence
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       - name: Require the confirmation phrase
         env:

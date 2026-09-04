@@ -54,7 +54,7 @@ jobs:
           [ "$EPISTEMIC_OPERATIONS_TOKEN" != "$EPISTEMIC_RELEASE_AUTHORITY_TOKEN" ] || { echo '::error::Operations and release-authority tokens must be distinct.'; exit 1; }
           [ "$SUPABASE_PROJECT_REF" != 'uhwuullakihgszxhiygz' ] || { echo '::error::The Production Supabase project is forbidden.'; exit 1; }
 
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       - name: Apply only the dedicated Preview canary migrations
         run: |
