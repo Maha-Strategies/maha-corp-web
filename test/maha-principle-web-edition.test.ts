@@ -29,21 +29,22 @@ test('The Maha Principle is a complete 40-section web edition', () => {
   }
 })
 
-test('the edition is discoverable as web reading without publishing the source EPUB', () => {
-  const hub = readFileSync(new URL('app/books/the-maha-principle/page.tsx', root), 'utf8')
+test('the manuscript is retained while the public web edition is unavailable', () => {
+  const maintenance = readFileSync(new URL('app/books/the-maha-principle/page.tsx', root), 'utf8')
   const index = readFileSync(new URL('app/books/page.tsx', root), 'utf8')
   const sitemap = readFileSync(new URL('app/sitemap.ts', root), 'utf8')
   const llms = readFileSync(new URL('lib/llms-manifest.ts', root), 'utf8')
 
-  assert.match(hub, /Complete free web edition/)
-  assert.match(hub, /Read the complete edition/)
-  assert.match(hub, /Copyright retained/)
-  assert.match(hub, /not medical advice/i)
-  assert.doesNotMatch(hub, /\.epub|download/i)
-  assert.match(index, /The Maha Principle/)
-  assert.match(index, /Eight works/)
-  assert.match(sitemap, /books\/the-maha-principle/)
-  assert.match(llms, /The Maha Principle — complete free web edition/)
+  assert.match(maintenance, /temporarily unavailable/i)
+  assert.match(maintenance, /robots: \{ index: false, follow: false \}/)
+  assert.doesNotMatch(maintenance, /OpenBook|readOpenBook|complete (?:free )?(?:web )?edition/i)
+  assert.equal(existsSync(new URL('app/books/the-maha-principle/read/page.tsx', root)), false)
+  assert.equal(existsSync(new URL('app/books/the-maha-principle/read/[section]/page.tsx', root)), false)
+  assert.doesNotMatch(index, /The Maha Principle/)
+  assert.match(index, /Seven works/)
+  assert.doesNotMatch(sitemap, /books\/the-maha-principle/)
+  assert.doesNotMatch(llms, /books\/the-maha-principle/)
+  assert.equal(existsSync(new URL('content/books/the-maha-principle/The-Maha-Principle.md', root)), true)
   assert.equal(existsSync(new URL('public/books/the-maha-principle/The-Maha-Principle-Free-Edition.epub', root)), false)
   assert.equal(existsSync(new URL('public/books/the-maha-principle/cover.jpg', root)), true)
 })
