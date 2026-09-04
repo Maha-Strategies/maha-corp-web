@@ -110,7 +110,7 @@ jobs:
 
       - name: Upload sanitized Preview evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: source-override-preview-release-${{ github.run_id }}
           path: ${{ env.SOURCE_OVERRIDE_PREVIEW_EVIDENCE_PATH }}
