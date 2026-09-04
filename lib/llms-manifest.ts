@@ -10,6 +10,7 @@ import { epistemicRecordPath } from './epistemic-publication.ts'
 import { EPISTEMIC_DOMAINS } from './epistemic-pilots.ts'
 import { getPublishedSubstantialPage } from './substantial-page-public.ts'
 import { MAYON_ANSWER_REGISTRY_PATH, MAYON_TOPICS, mayonTopicPath } from './mayon-topics.ts'
+import { TAMIL_CLASSICAL_PATH, TAMIL_CLASSICAL_REGISTRY_PATH, TAMIL_CLASSICAL_TOPICS, tamilClassicalTopicPath } from './tamil-classical-traditions.ts'
 
 const RESEARCH_URL = 'https://research.mahastrategies.com'
 
@@ -78,6 +79,9 @@ export function buildLlmsManifest(
     '- Māyōṉ (Mayon), early Tamil sources and typed deity connections: https://www.mahastrategies.com/knowledge/religion/mayon',
     `- Māyōṉ machine-readable answer registry: https://www.mahastrategies.com${MAYON_ANSWER_REGISTRY_PATH}`,
     ...MAYON_TOPICS.map((topic) => `- Māyōṉ source guide — ${topic.shortTitle}: https://www.mahastrategies.com${mayonTopicPath(topic)}`),
+    `- Classical Tamil religion and reception: https://www.mahastrategies.com${TAMIL_CLASSICAL_PATH}`,
+    `- Classical Tamil machine-readable answer registry: https://www.mahastrategies.com${TAMIL_CLASSICAL_REGISTRY_PATH}`,
+    ...TAMIL_CLASSICAL_TOPICS.map((topic) => `- Classical Tamil source guide — ${topic.shortTitle}: https://www.mahastrategies.com${tamilClassicalTopicPath(topic)}`),
     '- Astrology traditions registry: https://www.mahastrategies.com/knowledge/astrology/registry',
     '',
     '## Canonical epistemic records',

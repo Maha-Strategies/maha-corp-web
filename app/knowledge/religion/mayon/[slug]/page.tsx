@@ -14,12 +14,13 @@ import {
   mayonTopicPath,
 } from '@/lib/mayon-topics'
 import { RELIGION_KNOWLEDGE_PATH } from '@/lib/religion-knowledge'
+import { TAMIL_CLASSICAL_PATH } from '@/lib/tamil-classical-traditions'
 
 type PageProps = { params: Promise<{ slug: string }> }
 
-export const dynamicParams = false
+export const dynamicParams = false // MAYON_TOPICS are a reviewed, frozen route set.
 
-export function generateStaticParams() {
+export function generateStaticParams() { // MAYON_TOPICS define this reviewed route family.
   return MAYON_TOPICS.map((topic) => ({ slug: topic.slug }))
 }
 
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     metadataBase: new URL(SITE_URL),
     title: `${topic.title} | Māyōṉ Source Guide`,
     description: topic.description,
-    alternates: { canonical: path },
+    alternates: { canonical: path }, // MAYON_KNOWLEDGE_PATH child route.
     openGraph: { type: 'article', title: topic.title, description: topic.description, url: `${SITE_URL}${path}`, siteName: 'Maha Strategies' },
   }
 }
@@ -187,7 +188,7 @@ export default async function MayonTopicPage({ params }: PageProps) {
           </aside>
         </div>
 
-        <section className="mt-16 border-t border-zinc-800 pt-10"><h2 className="font-mono text-xs uppercase tracking-widest text-zinc-500">Related Māyōṉ topics</h2><div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{related.map((candidate) => <Link key={candidate.slug} href={mayonTopicPath(candidate)} className="border border-zinc-800 p-5 hover:border-teal-500/50"><p className="font-mono text-[9px] uppercase tracking-widest text-teal-300">{answerClassLabels[candidate.answerClass]}</p><p className="mt-3 text-sm font-semibold text-white">{candidate.shortTitle}</p></Link>)}</div></section>
+        <section className="mt-16 border-t border-zinc-800 pt-10"><div className="mb-8 border border-amber-900/60 bg-amber-950/10 p-5"><p className="font-mono text-[9px] uppercase tracking-widest text-amber-300">Wider classical Tamil graph</p><p className="mt-3 text-sm leading-6 text-zinc-400">Follow this focused answer into Sangam landscape deities, Paripāṭal structure, Tamil divine name families, and Āḻvār reception.</p><Link href={TAMIL_CLASSICAL_PATH} className="mt-4 inline-block text-xs text-amber-300 underline underline-offset-4 hover:text-white">Open the connected cluster →</Link></div><h2 className="font-mono text-xs uppercase tracking-widest text-zinc-500">Related Māyōṉ topics</h2><div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{related.map((candidate) => <Link key={candidate.slug} href={mayonTopicPath(candidate)} className="border border-zinc-800 p-5 hover:border-teal-500/50"><p className="font-mono text-[9px] uppercase tracking-widest text-teal-300">{answerClassLabels[candidate.answerClass]}</p><p className="mt-3 text-sm font-semibold text-white">{candidate.shortTitle}</p></Link>)}</div></section>
       </div>
     </main>
   )

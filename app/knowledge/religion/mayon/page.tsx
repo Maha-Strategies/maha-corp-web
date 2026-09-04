@@ -15,6 +15,7 @@ import {
 } from '@/lib/mayon-knowledge'
 import { MAYON_ANSWER_ENTRIES, MAYON_ANSWER_REGISTRY_PATH, MAYON_CORPUS_DEPTH, MAYON_TOPICS, mayonTopicPath } from '@/lib/mayon-topics'
 import { RELIGION_KNOWLEDGE_PATH } from '@/lib/religion-knowledge'
+import { TAMIL_CLASSICAL_PATH } from '@/lib/tamil-classical-traditions'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -75,6 +76,8 @@ export default function MayonPage() {
           <h1 className="mt-6 max-w-5xl text-4xl font-semibold tracking-tight text-white sm:text-6xl">Māyōṉ: begin with the Tamil texts, then type every connection.</h1>
           <p className="mt-6 max-w-3xl font-serif text-lg leading-8 text-zinc-300">Māyōṉ is an early Tamil divine name directly attested in the Tolkāppiyam’s landscape system. Later and denser Tirumāl material shares names, attributes, and narratives with Vishnu, Krishna, Narayana, and Balarama traditions—but those relations must be dated and sourced rather than collapsed into a timeless equation.</p>
         </header>
+
+        <section className="mt-8 border border-amber-900/60 bg-amber-950/10 p-6"><p className="font-mono text-[10px] uppercase tracking-widest text-amber-300">Wider Tamil context</p><p className="mt-3 max-w-4xl text-sm leading-6 text-zinc-400">Continue into the full landscape-deity stanza, Paripāṭal’s Tirumāl, Cevvēḷ and Vaiyai groupings, occurrence-level divine epithets, and later Āḻvār reception.</p><Link href={TAMIL_CLASSICAL_PATH} className="mt-4 inline-block text-xs text-amber-300 underline underline-offset-4 hover:text-white">Explore classical Tamil traditions →</Link></section>
 
         <section className="mt-10 grid gap-4 md:grid-cols-3">
           <div className="border border-teal-900/60 bg-teal-950/10 p-5"><p className="font-mono text-[9px] uppercase tracking-widest text-teal-300">Direct attestation</p><p className="mt-3 text-sm leading-6 text-zinc-400">The inspected Tolkāppiyam text names Māyōṉ and places him with mullai, the forest or pastoral landscape.</p></div>

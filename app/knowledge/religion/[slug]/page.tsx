@@ -8,6 +8,7 @@ import { UpliftSections } from '@/components/UpliftSections'
 import { SITE_URL } from '@/lib/briefs-data'
 import { getMathematicalConcept, mathematicsConceptPath } from '@/lib/mathematics-knowledge'
 import { RELIGION_CONCEPTS, RELIGION_KNOWLEDGE_PATH, RELIGION_KNOWLEDGE_RELEASE_DATE, RELIGION_SOURCES, getReligionConcept, getReligionConceptBridges, religionConceptPath } from '@/lib/religion-knowledge'
+import { TAMIL_CLASSICAL_PATH } from '@/lib/tamil-classical-traditions'
 
 type PageProps = { params: Promise<{ slug: string }> }
 export const dynamicParams = false
@@ -41,6 +42,8 @@ export default async function ReligionConceptPage({ params }: PageProps) {
       <section className="mt-12"><List title="Method" items={item.method} /></section>
       <div className="mt-12 grid gap-8 md:grid-cols-2"><List title="What it can establish" items={item.establishes} /><List title="What it cannot establish" items={item.doesNotEstablish} tone="rose" /></div>
       <section className="mt-12 border border-amber-900/60 bg-amber-950/10 p-6"><List title="Interpretive risks" items={item.interpretiveRisks} tone="amber" /></section>
+
+      {item.slug === 'textual-authority' && <section className="mt-12 border border-teal-900/60 bg-teal-950/10 p-6"><p className="font-mono text-[10px] uppercase tracking-widest text-teal-300">Applied textual-authority case</p><h2 className="mt-3 text-2xl font-semibold text-white">Classical Tamil text, translation, commentary, and reception</h2><p className="mt-4 text-sm leading-6 text-zinc-400">The Tamil classical cluster applies this method to the Tolkāppiyam, Paripāṭal, and Tiruvāymoḻi: direct wording, a named translation, later commentary, and scholarly reconstruction remain separate records.</p><Link href={TAMIL_CLASSICAL_PATH} className="mt-4 inline-block text-xs text-teal-300 underline underline-offset-4 hover:text-white">Open the applied corpus →</Link></section>}
 
       <section className="mt-14 border-t border-zinc-800 pt-8"><p className="font-mono text-[10px] uppercase tracking-widest text-teal-300">Mathematical connection</p><h2 className="mt-3 text-2xl font-semibold text-white">Formal structure without validity transfer</h2>{bridges.length ? <div className="mt-6 space-y-5">{bridges.map((bridge) => { const math = getMathematicalConcept(bridge.mathematicalConceptId); return <div key={bridge.id} className="border border-zinc-800 p-6"><div className="flex flex-wrap justify-between gap-3 font-mono text-[9px] uppercase tracking-widest"><span className="text-teal-300">{bridge.relation.replaceAll('-', ' ')}</span>{math && <Link href={mathematicsConceptPath(math)} className="text-emerald-300 hover:text-white">{math.name} →</Link>}</div><h3 className="mt-3 text-lg font-semibold text-white">{bridge.title}</h3><p className="mt-3 text-sm leading-6 text-zinc-400">{bridge.application}</p><div className="mt-5 grid gap-5 md:grid-cols-2"><List title="Inputs" items={bridge.inputs} tone="amber" /><List title="Outputs" items={bridge.outputs} /></div><p className="mt-5 border-l border-rose-700/60 pl-3 text-xs leading-5 text-zinc-500"><span className="text-rose-300">Limit:</span> {bridge.limitations}</p></div>})}</div> : <p className="mt-5 text-sm leading-6 text-zinc-500">Related mathematical concepts are listed in the contract, but no direct application bridge is asserted in this release.</p>}</section>
 
