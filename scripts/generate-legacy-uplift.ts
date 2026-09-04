@@ -14,6 +14,7 @@ import supplierFirstParty from '../content/evidence-batch-5/supplier-first-party
 import { attested, buildAttestations, reuseByRoute, routeScopedByRoute } from '../lib/uplift/evidence-intake.ts'
 import { vendorBackedSupplierRoutes } from '../lib/uplift/vendor-authorship.ts'
 import { processRoute } from '../lib/uplift/process-routes.ts'
+import { deriveRelatedRoutes } from '../lib/uplift/related-records.ts'
 
 /**
  * Inventories the legacy corpus, baselines it, and compiles the uplift.
@@ -224,37 +225,9 @@ for (const group of comparisonFamilies) {
 
 /* ------------------------------------------------------------------ compile --- */
 
-/**
- * Fill in typed related records by co-citation.
- *
- * Two pages that draw on the same inspected source are related, and that is a
- * fact about the corpus rather than a judgement about the subject: the link is
- * derived from the inspection records, so it cannot be authored to make a page
- * look connected. Pages that share no source get no link.
- *
- * This is deliberately not a similarity heuristic. The audit counts typed links
- * towards substantiality, and a heuristic would let a page earn that count from
- * a resemblance nobody checked.
- */
-const routesBySource = new Map<string, string[]>()
-for (const input of inputs) {
-  for (const source of input.sources as unknown as { id: string }[]) {
-    const routes = routesBySource.get(source.id) ?? []
-    routes.push(input.route)
-    routesBySource.set(source.id, routes)
-  }
-}
-for (const input of inputs) {
-  if (input.relatedRoutes.length > 0) continue
-  const shared = new Set<string>()
-  for (const source of input.sources as unknown as { id: string }[]) {
-    for (const route of routesBySource.get(source.id) ?? []) {
-      if (route !== input.route) shared.add(route)
-    }
-  }
-  // Sorted so a regeneration produces byte-identical output.
-  input.relatedRoutes = [...shared].sort()
-}
+// Related records are derived by co-citation and bounded; see
+// lib/uplift/related-records.ts for why the bound exists and how it chooses.
+deriveRelatedRoutes(inputs as unknown as { route: string; sources: readonly { id: string }[]; relatedRoutes: readonly string[] }[])
 
 const withBatch1 = inputs.map((input) => {
   const reused = reuseByRoute.get(input.route)
