@@ -41,14 +41,38 @@ open-source research throughput.
 | Classical Tamil religion | 16 | 2 | 80 |
 | Tiruvāymoḻi passage atlas | 20 | 2 | 100 |
 | Astrology bounded-answer graph | 36 | 2 | 144 |
-| **Total** | **87** | **8** | **399** |
+| Tamil religion source atlas | 48 | 2 | 192 |
+| **Total** | **135** | **10** | **591** |
 
-The tranche therefore prepares **95 crawlable surfaces** in one local batch.
+The tranche therefore prepares **145 crawlable surfaces** in one local batch.
 The last directly verified Production count was 793. PR 400 subsequently added
 two static mathematics routes, so 795 is a derived—not freshly observed—current
-count. A single clean deployment would project 890 routes and a remaining gap
-of 110. Only a post-deployment crawl may turn that projection into an
+count. A single clean deployment would project 940 routes and a remaining gap
+of 60. Only a post-deployment crawl may turn that projection into an
 observation.
+
+## Tamil religion source-atlas contract
+
+The new atlas adds twenty Paripāṭal passage guides, twelve pairwise or
+methodological landscape/deity relationships, eight occurrence-level divine
+name maps, and eight typed Māyōṉ-to-Āḻvār reception lineages. The forty-eight
+topics, one discovery hub, and one public registry are one indivisible
+fifty-route tranche.
+
+The Project Madurai Paripāṭal page was inspected for its poem boundaries, line
+numbers, headings, authors, music setters, and paṇ labels. It is a Tamil primary
+text, not an English translation. Semantic descriptions therefore either remain
+at the level of visible structure or travel with the exact pages of already
+inspected scholarship. Tolkāppiyam wording, Hart's named Tiruvāymoḻi
+translation, commentary reported by scholarship, and reception history retain
+separate evidence frames. No later divine name, identity, place, or theology is
+back-written into an earlier passage.
+
+Every guide has four bounded machine answers, exact source locators, three
+distinctions, three limitations, two open questions, three within-family links,
+and at least three links into the existing Māyōṉ, classical-Tamil, or
+Tiruvāymoḻi graphs. The public registry is digest-bound and claims no expert
+review.
 
 ## Astrology answer infrastructure
 
@@ -79,9 +103,9 @@ the whole Tiruvāymoḻi.
 
 ## Next tranche after review
 
-The next religion batch should be a Paripāṭal poem atlas built from poem-level
-inspection, followed by the next Tiruvāymoḻi units. In parallel, the next
-astrology batch should begin with a query-to-existing-page coverage audit, then
-compile bounded answer pages only for genuine gaps in the existing 129-item
-footprint. The release should remain batched: no Vercel build or deployment is
-authorized by this report.
+The next tranche should allocate the remaining 60 routes only after Claude's
+mathematics and astronomy work is reconciled, so the final count does not
+duplicate concurrent pages. Likely capacity is the next Tiruvāymoḻi range,
+additional DLMF methods, and uncovered astrology infrastructure questions. The
+release remains batched: no Vercel build or deployment is authorized by this
+report.

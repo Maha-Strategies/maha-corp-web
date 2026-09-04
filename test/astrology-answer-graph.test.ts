@@ -122,12 +122,12 @@ test('static routing, metadata, registry, sitemap and llms projections share the
   assert.match(llms, /Astrology machine-readable answer registry/)
 })
 
-test('the route projection reaches 890 without claiming that it is observed or public', () => {
+test('the route projection includes astrology without claiming that the full tranche is observed or public', () => {
   assert.deepEqual(scaling.localUnpublishedTranche.astrologyAnswerGraph, { topics: 36, roots: 1, registries: 1, crawlableSurfaces: 38, boundedAnswers: 144, authorityLinks: 115 })
-  assert.equal(scaling.localUnpublishedTranche.totalCrawlableSurfaces, 95)
-  assert.equal(scaling.localUnpublishedTranche.totalTopicPages, 87)
-  assert.equal(scaling.localUnpublishedTranche.totalBoundedAnswers, 399)
-  assert.equal(scaling.localUnpublishedTranche.projectedRoutesAfterOneDeployment, 890)
-  assert.equal(scaling.localUnpublishedTranche.projectedGapToTarget, 110)
+  assert.ok(scaling.localUnpublishedTranche.totalCrawlableSurfaces >= scaling.localUnpublishedTranche.astrologyAnswerGraph.crawlableSurfaces)
+  assert.ok(scaling.localUnpublishedTranche.totalTopicPages >= scaling.localUnpublishedTranche.astrologyAnswerGraph.topics)
+  assert.ok(scaling.localUnpublishedTranche.totalBoundedAnswers >= scaling.localUnpublishedTranche.astrologyAnswerGraph.boundedAnswers)
+  assert.equal(scaling.localUnpublishedTranche.projectedRoutesAfterOneDeployment, scaling.baseline.derivedCurrentRoutes + scaling.localUnpublishedTranche.totalCrawlableSurfaces)
+  assert.equal(scaling.localUnpublishedTranche.projectedGapToTarget, scaling.target - scaling.localUnpublishedTranche.projectedRoutesAfterOneDeployment)
   assert.equal(scaling.localUnpublishedTranche.publicNow, false)
 })

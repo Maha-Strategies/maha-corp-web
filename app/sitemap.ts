@@ -22,6 +22,7 @@ import { MAYON_KNOWLEDGE_DATE, MAYON_KNOWLEDGE_PATH } from '@/lib/mayon-knowledg
 import { MAYON_ANSWER_REGISTRY_PATH, MAYON_TOPICS, mayonTopicPath } from '@/lib/mayon-topics'
 import { TAMIL_CLASSICAL_DATE, TAMIL_CLASSICAL_PATH, TAMIL_CLASSICAL_REGISTRY_PATH, TAMIL_CLASSICAL_TOPICS, tamilClassicalTopicPath } from '@/lib/tamil-classical-traditions'
 import { TIRUVAYMOLI_ATLAS_DATE, TIRUVAYMOLI_ATLAS_PATH, TIRUVAYMOLI_ATLAS_REGISTRY_PATH, TIRUVAYMOLI_ATLAS_TOPICS, tiruvaymoliAtlasTopicPath } from '@/lib/tiruvaymoli-passage-atlas'
+import { TAMIL_SOURCE_ATLAS_DATE, TAMIL_SOURCE_ATLAS_PATH, TAMIL_SOURCE_ATLAS_REGISTRY_PATH, TAMIL_SOURCE_ATLAS_TOPICS, tamilSourceAtlasTopicPath } from '@/lib/tamil-source-atlas'
 import { NEUROMORPHIC_COMPARISONS, NEUROMORPHIC_COMPARISONS_PATH, NEUROMORPHIC_CONCEPTS, NEUROMORPHIC_PATH, NEUROMORPHIC_RELEASE_DATE, neuromorphicComparisonPath, neuromorphicConceptPath } from '@/lib/neuromorphic-biocomputing'
 import { EPISTEMIC_DOMAINS, EPISTEMIC_RELEASE_DATE, EPISTEMIC_SYSTEM_PATH, PUBLIC_EPISTEMIC_RECORDS } from '@/lib/epistemic-pilots'
 import { epistemicRecordPath } from '@/lib/epistemic-publication'
@@ -93,6 +94,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...TIRUVAYMOLI_ATLAS_TOPICS.map((topic) => ({
       url: `${baseUrl}${tiruvaymoliAtlasTopicPath(topic)}`,
       lastModified: new Date(TIRUVAYMOLI_ATLAS_DATE),
+    })),
+    { url: `${baseUrl}${TAMIL_SOURCE_ATLAS_PATH}`, lastModified: new Date(TAMIL_SOURCE_ATLAS_DATE) },
+    { url: `${baseUrl}${TAMIL_SOURCE_ATLAS_REGISTRY_PATH}`, lastModified: new Date(TAMIL_SOURCE_ATLAS_DATE) },
+    ...TAMIL_SOURCE_ATLAS_TOPICS.map((topic) => ({
+      url: `${baseUrl}${tamilSourceAtlasTopicPath(topic)}`,
+      lastModified: new Date(TAMIL_SOURCE_ATLAS_DATE),
     })),
     ...RELIGION_CONCEPTS.map((concept) => ({
       url: `${baseUrl}${religionConceptPath(concept)}`,
