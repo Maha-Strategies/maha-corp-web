@@ -128,6 +128,7 @@ test('the route projection includes astrology without claiming that the full tra
   assert.ok(scaling.localUnpublishedTranche.totalTopicPages >= scaling.localUnpublishedTranche.astrologyAnswerGraph.topics)
   assert.ok(scaling.localUnpublishedTranche.totalBoundedAnswers >= scaling.localUnpublishedTranche.astrologyAnswerGraph.boundedAnswers)
   assert.equal(scaling.localUnpublishedTranche.projectedRoutesAfterOneDeployment, scaling.baseline.derivedCurrentRoutes + scaling.localUnpublishedTranche.totalCrawlableSurfaces)
-  assert.equal(scaling.localUnpublishedTranche.projectedGapToTarget, scaling.target - scaling.localUnpublishedTranche.projectedRoutesAfterOneDeployment)
+  assert.equal(scaling.localUnpublishedTranche.projectedGapToTarget, Math.max(0, scaling.target - scaling.localUnpublishedTranche.projectedRoutesAfterOneDeployment))
+  assert.equal(scaling.localUnpublishedTranche.projectedRoutesBeyondTarget, Math.max(0, scaling.localUnpublishedTranche.projectedRoutesAfterOneDeployment - scaling.target))
   assert.equal(scaling.localUnpublishedTranche.publicNow, false)
 })

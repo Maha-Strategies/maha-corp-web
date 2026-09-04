@@ -28,6 +28,6 @@ test('The Maha Principle reader FAQ is public without republishing the manuscrip
   assert.match(faq, /Visit the book page for current edition availability/i)
   assert.doesNotMatch(faq, /Read the complete edition|isAccessibleForFree/)
   assert.match(hub, /the-maha-principle\/reader-faq/)
-  assert.match(hub, /currently offline/i)
+  assert.match(hub, /temporarily unavailable/i)
   assert.match(sitemap, /books\/the-maha-principle\/reader-faq/)
 })

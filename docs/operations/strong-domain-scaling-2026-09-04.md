@@ -44,18 +44,23 @@ open-source research throughput.
 | Tamil religion source atlas | 48 | 2 | 192 |
 | Astrology workflow protocols | 36 | 2 | — |
 | Evidence workflows | 20 | 2 | — |
-| **Total** | **191** | **14** | **591** |
+| Claude mathematics and astronomy | 14 | 0 | — |
+| Book reader FAQs | 2 | 0 | — |
+| **Total** | **207** | **14** | **591** |
 
-The tranche therefore prepares **205 crawlable surfaces** in one local batch.
+The content tranche prepares **221 new crawlable surfaces** in one local batch.
+The KDP exclusivity boundary simultaneously withdraws 42 previously crawlable
+Maha Principle landing and reader URLs while retaining only its separately
+approved reader FAQ. The net sitemap change is therefore **179 surfaces**.
 The last directly verified Production count was 793. PR 400 subsequently added
 two static mathematics routes, so 795 is a derived—not freshly observed—current
-count. A single clean deployment would project **1,000 routes** and a remaining
-prepared gap of zero. This is still a projection: only a post-deployment crawl
-may turn it into an observation.
+count. A single clean deployment would project **974 routes**, leaving a
+26-route gap to the 1,000-route target. This is still a projection: only a
+post-deployment crawl may turn it into an observation.
 
 ## Evidence workflow commercial bridge
 
-The final twenty-two routes comprise eight public Evidence Preflight examples,
+The evidence-workflow twenty-two routes comprise eight public Evidence Preflight examples,
 six Evidence Dossier and calculation-receipt examples, six governed MCP
 retrieval and release-flow guides, one commercial-use hub, and one
 machine-readable registry. All example inputs are synthetic and every route
@@ -142,11 +147,12 @@ attributed scholarship. Nothing in the atlas treats translated wording as the
 untranslated Tamil, devotional theology as an empirical result, or one unit as
 the whole Tiruvāymoḻi.
 
-## Next tranche after review
+## Post-release review
 
-The next tranche should allocate the remaining 22 routes only after Claude's
-mathematics and astronomy work is reconciled, so the final count does not
-duplicate concurrent pages. Likely capacity is one tightly bounded religion,
-mathematics, or astronomy cluster rather than aliases or parameter variants.
-The release remains batched: no Vercel build or deployment is authorized by
-this report.
+The reconciled route set remains 26 below the target because the KDP boundary
+correctly removes the Maha Principle manuscript routes. The next tranche must
+close that gap with question-led, evidence-bounded pages rather than aliases or
+parameter variants. After release, a direct Production sitemap observation
+should precede indexing, crawl-quality, and user-discovery review. Vercel build
+and deployment still require Mayone's explicit authorization outside this
+report.

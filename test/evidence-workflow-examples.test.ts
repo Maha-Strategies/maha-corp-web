@@ -150,15 +150,18 @@ test('the existing commercial surfaces link to the worked examples', () => {
   }
 })
 
-test('the route ledger reaches exactly 1,000 as a prepared projection, not a public count', () => {
+test('the route ledger accounts for the KDP withdrawal in its prepared projection', () => {
   assert.deepEqual(scaling.localUnpublishedTranche.evidenceWorkflows, {
     examples: 20, roots: 1, registries: 1, crawlableSurfaces: 22,
     categories: { evidencePreflight: 8, dossierCalculationReceipt: 6, mcpReleaseFlow: 6 }, syntheticOnly: true, purchaseEnabled: false,
   })
   assert.equal(scaling.baseline.derivedCurrentRoutes, 795)
-  assert.equal(scaling.localUnpublishedTranche.totalCrawlableSurfaces, 205)
-  assert.equal(scaling.localUnpublishedTranche.projectedRoutesAfterOneDeployment, 1000)
-  assert.equal(scaling.localUnpublishedTranche.projectedGapToTarget, 0)
+  assert.equal(scaling.localUnpublishedTranche.grossAddedCrawlableSurfaces, 221)
+  assert.equal(scaling.localUnpublishedTranche.mahaPrincipleKdpBoundary.withdrawnCanonicalSurfaces, 42)
+  assert.equal(scaling.localUnpublishedTranche.totalCrawlableSurfaces, 179)
+  assert.equal(scaling.localUnpublishedTranche.projectedRoutesAfterOneDeployment, 974)
+  assert.equal(scaling.localUnpublishedTranche.projectedGapToTarget, 26)
+  assert.equal(scaling.localUnpublishedTranche.projectedRoutesBeyondTarget, 0)
   assert.equal(scaling.localUnpublishedTranche.publicNow, false)
   assert.equal(scaling.baseline.derivedNotObserved, true)
 })
