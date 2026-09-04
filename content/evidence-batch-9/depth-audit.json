@@ -3,13 +3,13 @@
   "auditedAt": "2026-09-03",
   "finding": "Classification and substance are different measurements. A page can carry an inspected source and explain almost nothing, and a structural page can be richly written and cite nothing checkable.",
   "wordCountUsedAsGate": false,
-  "totalAudited": 180,
-  "corpusSize": 180,
+  "totalAudited": 182,
+  "corpusSize": 182,
   "denominatorEqualsCorpus": true,
   "supersedesBatch9Audit": "Batch 9 audited 59 pages and stated a result against 167. This audits all 167.",
   "depthDistribution": {
     "structurally-substantial-but-unsupported": 84,
-    "substantial-and-evidence-backed": 44,
+    "substantial-and-evidence-backed": 46,
     "blocked": 28,
     "first-party-documented-but-thin": 9,
     "first-party-documented-and-substantial": 1,
@@ -17,9 +17,9 @@
   },
   "byGroup": {
     "independentlySupported": {
-      "audited": 44,
+      "audited": 46,
       "states": {
-        "substantial-and-evidence-backed": 44
+        "substantial-and-evidence-backed": 46
       }
     },
     "firstPartyDocumented": {
@@ -43,7 +43,7 @@
       }
     }
   },
-  "substantialAndEvidenceBacked": 44,
+  "substantialAndEvidenceBacked": 46,
   "thinnestSupported": [],
   "verdicts": [
     {
@@ -645,6 +645,54 @@
       "substantialityScore": 15.4,
       "reasons": [],
       "verdictDigest": "sha256:49ad23f0e66d8487bc977c474a0096aca3ffae0854307dbc1d73e37d60392df5"
+    },
+    {
+      "route": "/knowledge/mathematics/number-theoretic-functions",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 655,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 394
+      },
+      "substantialityScore": 15.9,
+      "reasons": [],
+      "verdictDigest": "sha256:b4c7044ee1e78ced97936b7b9050159f3dc743768bcac9c79153273e89a8ebb5"
+    },
+    {
+      "route": "/knowledge/mathematics/airy-functions",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 729,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 398
+      },
+      "substantialityScore": 15.9,
+      "reasons": [],
+      "verdictDigest": "sha256:962c531413906f7c546cc1562114af25f62190166dcc5c456f7740d86845226e"
     },
     {
       "route": "/knowledge/mathematics/calendrical-reconciliation",
@@ -4497,5 +4545,5 @@
     }
   ],
   "boundary": "A private audit. It changes no page.",
-  "auditDigest": "sha256:6f4c6e915447902cff00dd4e353e6f47851fafa8bf60c27e06a9b4b24b32d4af"
+  "auditDigest": "sha256:2937c1abaac2cb2146411feb249644cd1739cc30491797f2b6bba8bb7d920083"
 }

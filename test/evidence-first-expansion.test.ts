@@ -25,6 +25,8 @@ const NEW_PAGES = [
   '/knowledge/astronomy/very-long-baseline-interferometry',
   '/knowledge/mathematics/elliptic-integrals',
   '/knowledge/mathematics/calendrical-reconciliation',
+  '/knowledge/mathematics/number-theoretic-functions',
+  '/knowledge/mathematics/airy-functions',
 ]
 
 test('new pages are born supported, not added to the unsupported pile', () => {
@@ -41,7 +43,7 @@ test('growth improved the evidence-backed share rather than diluting it', () => 
   // nobody would have made the ratio worse, which is the failure mode.
   const supported = status.counts['independently-supported']
   const uninspected = status.counts['cited-but-uninspected']
-  assert.ok(supported >= 44, `supported fell to ${supported}`)
+  assert.ok(supported >= 46, `supported fell to ${supported}`)
   assert.ok(uninspected <= 98, `uninspected rose to ${uninspected}; expansion added unsupported pages`)
 })
 
@@ -113,8 +115,8 @@ test('the new concepts carry their conditions, not just their formulas', () => {
     'error-function-and-related-integrals', 'bessel-functions', 'bernoulli-and-euler-numbers',
     'asymptotic-approximations', 'orthogonal-polynomials', 'riemann-zeta-function',
     'hypergeometric-function', 'incomplete-gamma-functions', 'elliptic-integrals',
-    'calendrical-reconciliation'].includes(c.slug))
-  assert.equal(added.length, 11)
+    'calendrical-reconciliation', 'number-theoretic-functions', 'airy-functions'].includes(c.slug))
+  assert.equal(added.length, 13)
   for (const c of added) {
     assert.ok(c.assumptions.length > 0, `${c.slug} states no conditions`)
     assert.ok(c.errorBounds.length > 0, `${c.slug} states no error behaviour`)
@@ -128,10 +130,11 @@ test('the new concepts carry their conditions, not just their formulas', () => {
       // A DLMF equation or section where the reference is DLMF, and a named
       // attribution where it is not. What is refused is an invariant with no
       // locator at all, or a fabricated equation number.
-      const dlmf = /DLMF \d+\.\d+(\.\d+)?/.test(inv)
+      // Equations, tables and sections are all real locators in this reference.
+      const dlmf = /DLMF (Table )?\d+\.\d+(\.\d+)?/.test(inv)
       const attributed = /\bper [A-Z][a-z]+/.test(inv)
       assert.ok(dlmf || attributed, `${c.slug}: an invariant with no locator: ${inv}`)
-      if (dlmf && /DLMF \d+\.\d+(?!\.)/.test(inv)) {
+      if (dlmf && /DLMF \d+\.\d+(?!\.)/.test(inv) && !/DLMF Table/.test(inv)) {
         assert.match(inv, /stated in prose/,
           `${c.slug}: a section-level citation must say why it is not an equation number: ${inv}`)
       }
@@ -255,4 +258,24 @@ test('the same numerical device is recognised across two pages, both sourced', (
   assert.match(ig.crossPageNote, /8\.2\.5/)
   const c = MATHEMATICAL_CONCEPTS.find((x) => x.slug === 'incomplete-gamma-functions')!
   assert.match(c.errorBounds.join(' '), /same device appears at 7\.2\.2/)
+})
+
+test('cross-page connections name both sources, never one', () => {
+  // A connection is only recorded when both halves were inspected. Noticing a
+  // link is easy; the discipline is not asserting one where only one side was
+  // read.
+  const noted = insp.inspected.filter((s: { crossPageNote?: string }) => s.crossPageNote)
+  assert.ok(noted.length >= 3, `expected several recorded connections, got ${noted.length}`)
+  for (const s of noted) {
+    const refs = s.crossPageNote.match(/\d+\.\d+(\.\d+)?/g) ?? []
+    assert.ok(refs.length >= 2, `${s.sourceId}: a connection must cite both sides, found ${refs.join(', ')}`)
+  }
+})
+
+test('an asymptotic law is not presented as a formula', () => {
+  // 27.2.3 constrains a ratio in a limit. The temptation is to read it as an
+  // estimate of the prime count with a small error, which it is not.
+  const c = MATHEMATICAL_CONCEPTS.find((x) => x.slug === 'number-theoretic-functions')!
+  assert.match(c.errorBounds.join(' '), /supplies no bound on the difference at any finite/i)
+  assert.match(c.doesNotEstablish, /asymptotic law is not a formula/i)
 })

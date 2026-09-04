@@ -3726,6 +3726,302 @@
       "upliftDigest": "sha256:32be34233b6b9b41e8dd4d16d834612d33c9481ead1bd7bf38b4efc1262771e0"
     },
     {
+      "route": "/knowledge/mathematics/number-theoretic-functions",
+      "family": "mathematics",
+      "slug": "number-theoretic-functions",
+      "eligible": true,
+      "refusals": [],
+      "before": {
+        "route": "/knowledge/mathematics/number-theoretic-functions",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 3,
+        "relatedRoutes": [
+          "/knowledge/mathematics/riemann-zeta-function",
+          "/knowledge/mathematics/asymptotic-approximations",
+          "/knowledge/mathematics/modular-arithmetic"
+        ],
+        "renderedSections": 6
+      },
+      "after": {
+        "route": "/knowledge/mathematics/number-theoretic-functions",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 3,
+        "relatedRoutes": [
+          "/knowledge/mathematics/riemann-zeta-function",
+          "/knowledge/mathematics/asymptotic-approximations",
+          "/knowledge/mathematics/modular-arithmetic"
+        ],
+        "renderedSections": 6
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "DLMF 27.2.1 states the fundamental theorem of arithmetic: every integer greater than one factors uniquely into prime powers. Three functions are defined on that footing. The totient at 27.2.7 counts the integers up to n that are coprime to n. The divisor function at 27.2.9 counts the divisors of n. The Mobius function at 27.2.12 is one at n equal to one, minus one to the number of prime factors when they are all distinct, and zero when any prime is repeated. Separately, 27.2.3 states the prime counting function as asymptotic to x over the natural logarithm of x, which is a statement about a ratio in a limit rather than a count at any particular x."
+          ],
+          "sourceIds": [
+            "nist-dlmf-number-theory",
+            "nist-dlmf-number-theory",
+            "nist-dlmf-number-theory"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Take a factorisation as the starting point, since the totient, divisor and Mobius functions are all read off it.",
+            "Treat 27.2.3 as a limiting ratio and never as an estimate with a stated error at a particular x.",
+            "Check for a repeated prime before using the Mobius function, because that case is zero rather than small."
+          ],
+          "sourceIds": [
+            "nist-dlmf-number-theory",
+            "nist-dlmf-number-theory",
+            "nist-dlmf-number-theory"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "Unique factorisation into prime powers, DLMF 27.2.1",
+            "The prime counting function is asymptotic to x over log x, DLMF 27.2.3",
+            "The Mobius function vanishes exactly when a prime is repeated, DLMF 27.2.12"
+          ],
+          "sourceIds": [
+            "nist-dlmf-number-theory",
+            "nist-dlmf-number-theory",
+            "nist-dlmf-number-theory"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "The asymptotic law at 27.2.3 uses the relation defined at 2.1.1: the ratio tends to one. It supplies no bound on the difference at any finite x, and the difference is not small in the way the ratio suggests.",
+            "Computing the totient or divisor function from a factorisation is only as reliable as the factorisation, which for large n is the hard part rather than the counting.",
+            "The chapter gives definitions, not algorithms, and makes no claim about the cost or stability of obtaining a factorisation.",
+            "Unique factorisation at 27.2.1 is stated for integers greater than one, so the functions defined on it inherit that domain.",
+            "The Mobius function is zero exactly when a prime is repeated, which is a condition on the factorisation rather than on the size of n.",
+            "The prime counting statement at 27.2.3 is asymptotic, so it constrains a ratio as x grows and says nothing at a fixed x."
+          ],
+          "sourceIds": [
+            "nist-dlmf-number-theory",
+            "nist-dlmf-number-theory",
+            "nist-dlmf-number-theory"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "What this does not establish",
+          "items": [
+            "The chapter defines the functions and states one asymptotic law. It settles no open question about how primes are distributed, and an asymptotic law is not a formula for the prime count."
+          ],
+          "sourceIds": [
+            "nist-dlmf-number-theory",
+            "nist-dlmf-number-theory",
+            "nist-dlmf-number-theory"
+          ]
+        },
+        {
+          "dimension": "related-records",
+          "heading": "Related records",
+          "items": [
+            "/knowledge/mathematics/riemann-zeta-function",
+            "/knowledge/mathematics/asymptotic-approximations",
+            "/knowledge/mathematics/modular-arithmetic"
+          ],
+          "sourceIds": []
+        }
+      ],
+      "sectionCount": 6,
+      "upliftDigest": "sha256:e28b7c82c4b9fd49a84ca84ca3de80dc6f1cf7444fbe63c17ab7f614a9824753"
+    },
+    {
+      "route": "/knowledge/mathematics/airy-functions",
+      "family": "mathematics",
+      "slug": "airy-functions",
+      "eligible": true,
+      "refusals": [],
+      "before": {
+        "route": "/knowledge/mathematics/airy-functions",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 3,
+        "relatedRoutes": [
+          "/knowledge/mathematics/gamma-function",
+          "/knowledge/mathematics/bessel-functions",
+          "/knowledge/mathematics/asymptotic-approximations"
+        ],
+        "renderedSections": 6
+      },
+      "after": {
+        "route": "/knowledge/mathematics/airy-functions",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 3,
+        "relatedRoutes": [
+          "/knowledge/mathematics/gamma-function",
+          "/knowledge/mathematics/bessel-functions",
+          "/knowledge/mathematics/asymptotic-approximations"
+        ],
+        "renderedSections": 6
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "DLMF 9.2.1 gives Airy equation as the second derivative of w equal to z times w, and records that all its solutions are entire functions. That is a sharper statement than it looks: the equation changes character at the origin, oscillating on one side and growing or decaying on the other, yet its solutions have no singularity anywhere. The standard solutions are named at 9.2.2, and their values at the origin are given at 9.2.3 through 9.2.6 in terms of the gamma function at one third and two thirds, which is why a chapter on a differential equation depends on one about a factorial. Table 9.2.1 records that Ai and Bi are the numerically satisfactory pair on the whole real line, with other pairs preferred in other sectors."
+          ],
+          "sourceIds": [
+            "nist-dlmf-airy",
+            "nist-dlmf-airy",
+            "nist-dlmf-airy"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Use Ai and Bi on the real line, per Table 9.2.1, and check the table before carrying that choice into the complex plane.",
+            "Take the initial values from 9.2.3 to 9.2.6 in gamma form rather than from rounded decimals, so precision is set by the gamma evaluation and not by the transcription.",
+            "Expect different behaviour either side of the origin, since the equation changes character there even though the solutions do not."
+          ],
+          "sourceIds": [
+            "nist-dlmf-airy",
+            "nist-dlmf-airy",
+            "nist-dlmf-airy"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "Airy equation, DLMF 9.2.1",
+            "The values at the origin in terms of the gamma function, DLMF 9.2.3 to 9.2.6",
+            "Ai and Bi are numerically satisfactory on the real line, DLMF Table 9.2.1"
+          ],
+          "sourceIds": [
+            "nist-dlmf-airy",
+            "nist-dlmf-airy",
+            "nist-dlmf-airy"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "Bi grows rapidly for positive argument while Ai decays, so a scheme that computes one accurately can lose the other entirely to cancellation.",
+            "Numerical satisfactoriness is a property of a pair in a region, not of a solution: the same functions can be a poor basis in a sector where the table names a different pair.",
+            "The chapter defines the solutions and tabulates the choice; it makes no accuracy claim about any evaluation method.",
+            "All solutions are entire, so unlike the Bessel case there is no branch point and no cut to respect.",
+            "Which pair is numerically satisfactory depends on the sector, and Table 9.2.1 gives the real line rather than the whole plane.",
+            "The values at the origin are exact expressions in the gamma function rather than decimal approximations."
+          ],
+          "sourceIds": [
+            "nist-dlmf-airy",
+            "nist-dlmf-airy",
+            "nist-dlmf-airy"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "What this does not establish",
+          "items": [
+            "The chapter gives the equation, its solutions and where each pair is usable. It does not establish that any implementation is accurate, and entirety of the solutions is not stability of a computation."
+          ],
+          "sourceIds": [
+            "nist-dlmf-airy",
+            "nist-dlmf-airy",
+            "nist-dlmf-airy"
+          ]
+        },
+        {
+          "dimension": "related-records",
+          "heading": "Related records",
+          "items": [
+            "/knowledge/mathematics/gamma-function",
+            "/knowledge/mathematics/bessel-functions",
+            "/knowledge/mathematics/asymptotic-approximations"
+          ],
+          "sourceIds": []
+        }
+      ],
+      "sectionCount": 6,
+      "upliftDigest": "sha256:8ce429b95f50fb7c1597b685e32fbb05c93b4106e6f600e6049aa79509b37037"
+    },
+    {
       "route": "/knowledge/mathematics/calendrical-reconciliation",
       "family": "mathematics",
       "slug": "calendrical-reconciliation",

@@ -517,6 +517,85 @@
       "frameNote": "Recorded as secondary historical scholarship, not as formal mathematics and not as religious evidence. It establishes calendar arithmetic and which communities use which family; it establishes nothing about observance, which may be set by sighting rather than computation.",
       "establishes": "The three calendar families, the mean periods behind them, and the reconciliation schemes each uses with their residuals.",
       "boundary": "Calendar arithmetic and history. It determines no observance and predicts no individual month."
+    },
+    {
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "sourceId": "nist-dlmf-number-theory",
+      "title": "DLMF Chapter 27: Functions of Number Theory",
+      "retrievedFrom": "https://dlmf.nist.gov/27.2",
+      "exactLocators": [
+        "27.2.1 unique factorisation",
+        "27.2.3 the prime counting asymptotic",
+        "27.2.7, 27.2.9 and 27.2.12 the arithmetic functions"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/number-theoretic-functions",
+          "locator": "27.2.1, 27.2.7, 27.2.9 and 27.2.12",
+          "claim": "Unique factorisation underpins the standard arithmetic functions, each defined by a condition on the factorisation.",
+          "supportingPassage": "27.2.1 states that every integer greater than one factors uniquely into prime powers. 27.2.7 defines the totient as counting the positive integers up to n that are relatively prime to n. 27.2.9 defines the divisor function as the count of divisors of n. 27.2.12 defines the Mobius function as one at n equal to one, minus one to the number of distinct prime factors when all exponents are one, and zero otherwise.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/number-theoretic-functions",
+          "locator": "27.2.3",
+          "claim": "The statement about how many primes lie below a bound is asymptotic, so it constrains a ratio in a limit rather than a count.",
+          "supportingPassage": "27.2.3 states that pi of x is asymptotic to x over the natural logarithm of x. The relation is the asymptotic one, so what is asserted is that the ratio tends to one as x grows, not that the difference is small at any particular x.",
+          "distinctPassage": true
+        }
+      ],
+      "crossPageNote": "Two connections, both inspected on each side. The asymptotic relation at 27.2.3 is the one defined at 2.1.1 on the asymptotics page, and the Euler product at 25.2.11 on the zeta page is unique factorisation at 27.2.1 written analytically.",
+      "establishes": "Unique factorisation, the arithmetic functions built on it, and the asymptotic law for the prime count.",
+      "boundary": "Definitions and one asymptotic law. It settles nothing about how primes are distributed."
+    },
+    {
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "sourceId": "nist-dlmf-airy",
+      "title": "DLMF Chapter 9: Airy and Related Functions",
+      "retrievedFrom": "https://dlmf.nist.gov/9.2",
+      "exactLocators": [
+        "9.2.1 the equation",
+        "9.2.2 the standard solutions",
+        "9.2.3 to 9.2.6 the values at the origin",
+        "Table 9.2.1 numerically satisfactory pairs"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/airy-functions",
+          "locator": "9.2.1, 9.2.2 and Table 9.2.1",
+          "claim": "The equation has entire solutions, and which pair to use is a question of region.",
+          "supportingPassage": "9.2.1 states Airy equation as the second derivative of w equal to z times w, and records that all solutions are entire functions of z. 9.2.2 names the standard solutions Ai of z, Bi of z, and Ai of z times e to the minus or plus two pi i over three. Table 9.2.1 records that Ai and Bi are the numerically satisfactory pair on the real line, with other pairs named for other sectors.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/airy-functions",
+          "locator": "9.2.3 to 9.2.6",
+          "claim": "The values at the origin are exact expressions in the gamma function rather than decimals.",
+          "supportingPassage": "9.2.3 gives Ai at zero as one over three to the two thirds times the gamma function at two thirds. 9.2.4 gives Ai prime at zero as minus one over three to the one third times the gamma function at one third. 9.2.5 and 9.2.6 give the corresponding values for Bi and Bi prime in the same gamma terms.",
+          "distinctPassage": true
+        }
+      ],
+      "crossPageNote": "A contrast worth keeping, both halves inspected: Airy solutions are entire by 9.2.1, while the Bessel first-kind solution at 10.2.2 has a branch point at the origin when the order is not an integer. Both chapters organise the choice of pair by region.",
+      "establishes": "Airy equation, its solutions, their exact values at the origin, and the region-dependent choice of pair.",
+      "boundary": "Gives solutions and their analytic character. It makes no accuracy claim about any evaluation method."
     }
   ],
   "notInspected": [
@@ -526,10 +605,10 @@
     }
   ],
   "summary": {
-    "sourcesInspected": 14,
-    "sourcesAttached": 13,
-    "routesReached": 13,
-    "claimsSupported": 26,
+    "sourcesInspected": 16,
+    "sourcesAttached": 15,
+    "routesReached": 15,
+    "claimsSupported": 30,
     "heldBack": 1
   },
   "boundary": "Twelve sources inspected at section level; eleven attached across mathematics and astronomy. The twelfth is recorded, inspected and unattached, because attaching it would move a frozen release-governance digest.",
