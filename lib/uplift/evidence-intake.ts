@@ -7,6 +7,7 @@ import reuse from '../../content/evidence-batch-7/reuse-audit.json' with { type:
 import batch8 from '../../content/evidence-batch-8/inspections.json' with { type: 'json' }
 import batch9 from '../../content/evidence-batch-9/inspections.json' with { type: 'json' }
 import batch12 from '../../content/evidence-batch-12/inspections.json' with { type: 'json' }
+import batch14 from '../../content/evidence-batch-14/inspections.json' with { type: 'json' }
 
 import { isVendorAuthored } from './vendor-authorship.ts'
 
@@ -69,6 +70,7 @@ const CLAIM_SCOPED = [
   ...batch8.inspected,
   ...batch9.inspected,
   ...batch12.inspected,
+  ...batch14.inspected,
 ] as unknown as ClaimScopedSource[]
 
 /** Sources read in an earlier batch and reused against a new route. */

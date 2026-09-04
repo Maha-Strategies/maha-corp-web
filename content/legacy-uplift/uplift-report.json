@@ -4,20 +4,20 @@
     "legacyUnchanged": 0,
     "structurallyUplifted": 98,
     "firstPartyDocumented": 10,
-    "independentlySourceSupported": 31,
+    "independentlySourceSupported": 33,
     "blocked": 28,
-    "total": 167,
+    "total": 169,
     "neverCombined": "structurallyUplifted, firstPartyDocumented and independentlySourceSupported are reported separately. First-party documentation is an organisation describing itself and must never be added to independent support in one evidentiary figure.",
-    "sourceSupportedUplift": 31
+    "sourceSupportedUplift": 33
   },
   "informationValue": {
-    "inspectedClaimsPerPage": 0.25,
-    "inspectedLocatorsPerPage": 0.25,
-    "declaredLocatorsPerPage": 2.02,
-    "independentlySourcedExplanatorySections": 31,
-    "informationDimensionsPerPage": 8.68,
+    "inspectedClaimsPerPage": 0.29,
+    "inspectedLocatorsPerPage": 0.29,
+    "declaredLocatorsPerPage": 2.03,
+    "independentlySourcedExplanatorySections": 33,
+    "informationDimensionsPerPage": 8.67,
     "limitationsPerPage": 1,
-    "typedInternalLinksPerPage": 4.85,
+    "typedInternalLinksPerPage": 4.81,
     "supportedComparisons": 48,
     "reproducibleCalculations": 0,
     "wordCountUsed": false
@@ -25,7 +25,7 @@
   "upliftVersion": "maha-legacy-uplift/1.0",
   "generatedAt": "2026-09-02",
   "inventory": {
-    "pages": 167,
+    "pages": 169,
     "families": 8,
     "byFamily": {
       "astronomy": {
@@ -34,8 +34,8 @@
         "blocked": 0
       },
       "mathematics": {
-        "total": 24,
-        "eligible": 24,
+        "total": 26,
+        "eligible": 26,
         "blocked": 0
       },
       "religion": {
@@ -71,9 +71,9 @@
     }
   },
   "outcome": {
-    "eligibleAndUpgraded": 133,
+    "eligibleAndUpgraded": 135,
     "upgradeQuality": {
-      "sourceSupported": 31,
+      "sourceSupported": 33,
       "structuralOnly": 102,
       "note": "Structural means the page now carries the substantial shape, composed from evidence its family already stored. It does not mean any source was independently inspected. Only the source-supported count reflects inspected evidence."
     },
@@ -93,22 +93,22 @@
   },
   "depth": {
     "before": {
-      "dimensions": 7.25,
-      "sourcesWithBoundary": 1.6,
-      "declaredLocators": 1.6,
-      "contentInspectedLocators": 0.2,
-      "explanatorySources": 0.2,
-      "internalLinks": 4.68,
+      "dimensions": 7.26,
+      "sourcesWithBoundary": 1.62,
+      "declaredLocators": 1.62,
+      "contentInspectedLocators": 0.23,
+      "explanatorySources": 0.23,
+      "internalLinks": 4.64,
       "renderedSections": 6
     },
     "after": {
-      "dimensions": 8.68,
-      "sourcesWithBoundary": 2.02,
-      "declaredLocators": 2.02,
-      "contentInspectedLocators": 0.25,
-      "explanatorySources": 0.25,
-      "internalLinks": 4.85,
-      "renderedSections": 6.84
+      "dimensions": 8.67,
+      "sourcesWithBoundary": 2.03,
+      "declaredLocators": 2.03,
+      "contentInspectedLocators": 0.29,
+      "explanatorySources": 0.29,
+      "internalLinks": 4.81,
+      "renderedSections": 6.83
     },
     "metric": "Information dimensions, evidence coverage, declared versus content-inspected locators, internal links and rendered sections. Word count is deliberately not among them.",
     "locatorNote": "A declared locator is a URL. A content-inspected locator requires an independent attestation recording the passage that was read. The first pass conflated them and reported declared locators as inspected."
@@ -116,5 +116,5 @@
   "routesChanged": 0,
   "duplicatePagesAdded": 0,
   "boundary": "A private compilation report. It contains no audit data, review packet, rejected material or credential.",
-  "reportDigest": "sha256:48b5ead9bee1046d6d1f07123e9d2a7ffea4a2b6bae7c33f69123f45ff98dcb9"
+  "reportDigest": "sha256:bdbbbaf1cfccb00163dde336a3be57cb19e4bd4973d8a709466b199e5c92e04f"
 }

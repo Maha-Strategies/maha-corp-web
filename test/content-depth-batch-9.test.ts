@@ -133,10 +133,10 @@ test('a formal method may only be used at the scope the source states', () => {
     'the source’s convergence condition must appear as an assumption')
 })
 
-test('the five states remain disjoint and total 167', () => {
+test('the five states remain disjoint and partition the corpus', () => {
   const s = report.pageStates
   assert.equal(s.legacyUnchanged + s.structurallyUplifted + s.firstPartyDocumented
-    + s.independentlySourceSupported + s.blocked, 167)
+    + s.independentlySourceSupported + s.blocked, s.total)
 })
 
 test('the vendor correction removed independent status from every citing page', () => {

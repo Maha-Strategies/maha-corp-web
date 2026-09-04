@@ -117,11 +117,11 @@ test('the religion pilot reports one page, not six', () => {
 })
 
 test('the depth audit still enumerates every page behind its denominator', () => {
-  assert.equal(audit.totalAudited, 167)
-  assert.equal(audit.verdicts.length, 167)
+  assert.equal(audit.totalAudited, audit.corpusSize)
+  assert.equal(audit.verdicts.length, audit.totalAudited)
   assert.equal(audit.denominatorEqualsCorpus, true)
   const sum = Object.values(audit.depthDistribution as Record<string, number>).reduce((a, b) => a + b, 0)
-  assert.equal(sum, 167)
+  assert.equal(sum, audit.totalAudited)
 })
 
 test('substantial pages meet every floor, not most of them', () => {

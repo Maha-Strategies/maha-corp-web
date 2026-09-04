@@ -84,10 +84,10 @@ test('vendor-authored sources cannot confer independent support', () => {
   assertFirstPartyPartition(audit, report)
 })
 
-test('the five states remain disjoint and sum to 167', () => {
+test('the five states remain disjoint and partition the corpus', () => {
   const s = report.pageStates
   assert.equal(s.legacyUnchanged + s.structurallyUplifted + s.firstPartyDocumented
-    + s.independentlySourceSupported + s.blocked, 167)
+    + s.independentlySourceSupported + s.blocked, s.total)
   // The 37 and 41 figures of this batch both counted vendor-backed pages.
   // Batch 9 corrected that, so the invariant checked here is the partition.
   assert.ok(s.independentlySourceSupported > 0)

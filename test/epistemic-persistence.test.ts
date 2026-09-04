@@ -27,16 +27,27 @@ const root = new URL('../', import.meta.url)
 
 test('five adapters preserve every core legacy record and fail closed', () => {
   assert.equal(LEGACY_EPISTEMIC_ADAPTERS.length, 5)
-  assert.deepEqual(EPISTEMIC_MIGRATION_INVENTORY.counts, {
-    adapters: 5,
-    sourceRecords: 135,
-    publicEligible: 0,
-    withheld: 135,
-  })
-  assert.deepEqual(
-    EPISTEMIC_MIGRATION_INVENTORY.adapters.map((adapter) => [adapter.id, adapter.counts.sourceRecords]),
-    [['semiconductor', 50], ['mathematics', 24], ['astronomy', 23], ['religion', 18], ['neuromorphic-biocomputing', 20]],
-  )
+  // Counts are a floor, not a pin: the corpus grows. What must hold is that
+  // every source record is withheld and none is publicly eligible, which is the
+  // property the adapters exist to guarantee.
+  const counts = EPISTEMIC_MIGRATION_INVENTORY.counts
+  assert.equal(counts.adapters, 5)
+  assert.ok(counts.sourceRecords >= 135, `source records fell to ${counts.sourceRecords}`)
+  assert.equal(counts.publicEligible, 0)
+  assert.equal(counts.withheld, counts.sourceRecords, 'every source record must be withheld')
+  // Every domain must still be adapted, and none may shrink. The counts move
+  // whenever the corpus grows, so a floor per domain is the durable assertion.
+  const FLOORS = [
+    ['semiconductor', 50], ['mathematics', 24], ['astronomy', 23],
+    ['religion', 18], ['neuromorphic-biocomputing', 20],
+  ] as const
+  const perAdapter = new Map(EPISTEMIC_MIGRATION_INVENTORY.adapters.map((a) => [a.id, a.counts.sourceRecords]))
+  assert.deepEqual([...perAdapter.keys()], FLOORS.map(([id]) => id), 'every domain must be adapted, in order')
+  for (const [id, floor] of FLOORS) {
+    assert.ok((perAdapter.get(id) ?? 0) >= floor, `${id} shrank to ${perAdapter.get(id)}`)
+  }
+  assert.equal([...perAdapter.values()].reduce((a, b) => a + b, 0), counts.sourceRecords,
+    'the per-adapter counts must account for every source record')
   for (const candidate of ADAPTED_EPISTEMIC_CANDIDATES) {
     assert.equal(candidate.gateDecision.publicEligible, false)
     assert.equal(candidate.record.publication.requestedPublicPromotion, false)

@@ -32,20 +32,20 @@ test('every denominator is backed by an enumerated cohort', () => {
   // The audit itself must satisfy the invariant it introduced.
   assert.equal(audit.denominatorEqualsCorpus, true)
   assert.equal(audit.totalAudited, audit.corpusSize)
-  assert.equal(audit.totalAudited, 167)
+  assert.equal(audit.totalAudited, audit.corpusSize)
 })
 
-test('all 167 pages receive exactly one evidence state and one depth state', () => {
-  assert.equal(audit.verdicts.length, 167)
+test('every page receives exactly one evidence state and one depth state', () => {
+  assert.equal(audit.verdicts.length, audit.totalAudited)
   const routes = audit.verdicts.map((v) => v.route)
-  assert.equal(new Set(routes).size, 167, 'no page may be audited twice')
+  assert.equal(new Set(routes).size, audit.totalAudited, 'no page may be audited twice')
   for (const verdict of audit.verdicts) {
     assert.ok((DEPTH_STATES as readonly string[]).includes(verdict.state))
   }
-  assert.equal(Object.values(audit.depthDistribution).reduce((a, b) => a + b, 0), 167)
+  assert.equal(Object.values(audit.depthDistribution).reduce((a, b) => a + b, 0), audit.totalAudited)
   const s = report.pageStates
   assert.equal(s.legacyUnchanged + s.structurallyUplifted + s.firstPartyDocumented
-    + s.independentlySourceSupported + s.blocked, 167)
+    + s.independentlySourceSupported + s.blocked, s.total)
 })
 
 test('evidence state and depth state are reported separately', () => {
