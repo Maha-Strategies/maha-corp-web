@@ -4,20 +4,20 @@
     "legacyUnchanged": 0,
     "structurallyUplifted": 98,
     "firstPartyDocumented": 10,
-    "independentlySourceSupported": 49,
+    "independentlySourceSupported": 50,
     "blocked": 28,
-    "total": 185,
+    "total": 186,
     "neverCombined": "structurallyUplifted, firstPartyDocumented and independentlySourceSupported are reported separately. First-party documentation is an organisation describing itself and must never be added to independent support in one evidentiary figure.",
-    "sourceSupportedUplift": 49
+    "sourceSupportedUplift": 50
   },
   "informationValue": {
-    "inspectedClaimsPerPage": 0.58,
-    "inspectedLocatorsPerPage": 0.58,
-    "declaredLocatorsPerPage": 2.13,
-    "independentlySourcedExplanatorySections": 49,
-    "informationDimensionsPerPage": 8.62,
+    "inspectedClaimsPerPage": 0.59,
+    "inspectedLocatorsPerPage": 0.59,
+    "declaredLocatorsPerPage": 2.14,
+    "independentlySourcedExplanatorySections": 50,
+    "informationDimensionsPerPage": 8.61,
     "limitationsPerPage": 1,
-    "typedInternalLinksPerPage": 3.94,
+    "typedInternalLinksPerPage": 3.93,
     "supportedComparisons": 48,
     "reproducibleCalculations": 2,
     "wordCountUsed": false
@@ -25,7 +25,7 @@
   "upliftVersion": "maha-legacy-uplift/1.0",
   "generatedAt": "2026-09-02",
   "inventory": {
-    "pages": 185,
+    "pages": 186,
     "families": 8,
     "byFamily": {
       "astronomy": {
@@ -34,8 +34,8 @@
         "blocked": 0
       },
       "mathematics": {
-        "total": 40,
-        "eligible": 40,
+        "total": 41,
+        "eligible": 41,
         "blocked": 0
       },
       "religion": {
@@ -71,9 +71,9 @@
     }
   },
   "outcome": {
-    "eligibleAndUpgraded": 151,
+    "eligibleAndUpgraded": 152,
     "upgradeQuality": {
-      "sourceSupported": 49,
+      "sourceSupported": 50,
       "structuralOnly": 102,
       "note": "Structural means the page now carries the substantial shape, composed from evidence its family already stored. It does not mean any source was independently inspected. Only the source-supported count reflects inspected evidence."
     },
@@ -93,21 +93,21 @@
   },
   "depth": {
     "before": {
-      "dimensions": 7.32,
-      "sourcesWithBoundary": 1.74,
-      "declaredLocators": 1.74,
-      "contentInspectedLocators": 0.47,
-      "explanatorySources": 0.47,
+      "dimensions": 7.33,
+      "sourcesWithBoundary": 1.75,
+      "declaredLocators": 1.75,
+      "contentInspectedLocators": 0.48,
+      "explanatorySources": 0.48,
       "internalLinks": 3.95,
       "renderedSections": 6
     },
     "after": {
-      "dimensions": 8.62,
-      "sourcesWithBoundary": 2.13,
-      "declaredLocators": 2.13,
-      "contentInspectedLocators": 0.58,
-      "explanatorySources": 0.58,
-      "internalLinks": 3.94,
+      "dimensions": 8.61,
+      "sourcesWithBoundary": 2.14,
+      "declaredLocators": 2.14,
+      "contentInspectedLocators": 0.59,
+      "explanatorySources": 0.59,
+      "internalLinks": 3.93,
       "renderedSections": 6.78
     },
     "metric": "Information dimensions, evidence coverage, declared versus content-inspected locators, internal links and rendered sections. Word count is deliberately not among them.",
@@ -116,5 +116,5 @@
   "routesChanged": 0,
   "duplicatePagesAdded": 0,
   "boundary": "A private compilation report. It contains no audit data, review packet, rejected material or credential.",
-  "reportDigest": "sha256:04dcc55b471fd6e27af6c9acf81361988d7a82caaa4926d7876070d055a5fc20"
+  "reportDigest": "sha256:41441eb081ecfe36414de02172cd27fc796a88d56321ddb5940dc0f2d822e4a3"
 }

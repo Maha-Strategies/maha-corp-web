@@ -3726,6 +3726,154 @@
       "upliftDigest": "sha256:32be34233b6b9b41e8dd4d16d834612d33c9481ead1bd7bf38b4efc1262771e0"
     },
     {
+      "route": "/knowledge/mathematics/jacobian-elliptic-functions",
+      "family": "mathematics",
+      "slug": "jacobian-elliptic-functions",
+      "eligible": true,
+      "refusals": [],
+      "before": {
+        "route": "/knowledge/mathematics/jacobian-elliptic-functions",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 3,
+        "relatedRoutes": [
+          "/knowledge/mathematics/elliptic-integrals",
+          "/knowledge/mathematics/periodic-functions-and-phase",
+          "/knowledge/mathematics/airy-functions"
+        ],
+        "renderedSections": 6
+      },
+      "after": {
+        "route": "/knowledge/mathematics/jacobian-elliptic-functions",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 3,
+        "relatedRoutes": [
+          "/knowledge/mathematics/elliptic-integrals",
+          "/knowledge/mathematics/periodic-functions-and-phase",
+          "/knowledge/mathematics/airy-functions"
+        ],
+        "renderedSections": 6
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "DLMF 22.2.4, 22.2.5 and 22.2.6 define sn, cn and dn as ratios of theta functions. Two quantities carry the modulus into those definitions and both are built from the complete elliptic integral of the first kind: the nome at 22.2.1 is the exponential of minus pi times the complementary complete integral over the complete integral, and the argument scaling at 22.2.3 divides z by twice the complete integral. The chapter records the analytic character directly. Each of the twelve functions is doubly periodic in z at fixed modulus, meromorphic in z, and carries simple poles and simple zeros, and for modulus between zero and one all of them are real when z is real."
+          ],
+          "sourceIds": [
+            "nist-dlmf-jacobian-elliptic",
+            "nist-dlmf-jacobian-elliptic",
+            "nist-dlmf-jacobian-elliptic"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Compute the complete elliptic integral first, since both the nome at 22.2.1 and the scaling at 22.2.3 depend on it.",
+            "Check the modulus against the closed unit interval before relying on real values for real argument.",
+            "Reduce an argument by the periods before evaluating, since double periodicity means a large argument carries no extra information."
+          ],
+          "sourceIds": [
+            "nist-dlmf-jacobian-elliptic",
+            "nist-dlmf-jacobian-elliptic",
+            "nist-dlmf-jacobian-elliptic"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "sn, cn and dn as theta ratios, DLMF 22.2.4 to 22.2.6",
+            "The nome expressed through the complete elliptic integral, DLMF 22.2.1",
+            "Doubly periodic and meromorphic with simple poles and simple zeros, DLMF 22.2 stated in prose rather than as a numbered equation"
+          ],
+          "sourceIds": [
+            "nist-dlmf-jacobian-elliptic",
+            "nist-dlmf-jacobian-elliptic",
+            "nist-dlmf-jacobian-elliptic"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "The functions have simple poles, so accuracy degrades near them and no reduction of the argument avoids a pole that the argument sits on.",
+            "The nome at 22.2.1 involves a ratio of complete integrals inside an exponential, so an error in the modulus is amplified before the functions are evaluated at all.",
+            "The chapter defines the functions and their periodicity and makes no accuracy claim about any evaluation scheme.",
+            "The nome and the argument scaling are defined through the complete elliptic integral, so these functions inherit whatever conditions that integral carries.",
+            "Double periodicity is stated at fixed modulus; the modulus is a parameter rather than a second variable.",
+            "Reality for real argument is stated only for modulus in the closed interval from zero to one."
+          ],
+          "sourceIds": [
+            "nist-dlmf-jacobian-elliptic",
+            "nist-dlmf-jacobian-elliptic",
+            "nist-dlmf-jacobian-elliptic"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "What this does not establish",
+          "items": [
+            "The chapter gives the definitions, the periods and the analytic character. It does not establish that any evaluation scheme is accurate near a pole, and periodicity is not a statement about numerical conditioning."
+          ],
+          "sourceIds": [
+            "nist-dlmf-jacobian-elliptic",
+            "nist-dlmf-jacobian-elliptic",
+            "nist-dlmf-jacobian-elliptic"
+          ]
+        },
+        {
+          "dimension": "related-records",
+          "heading": "Related records",
+          "items": [
+            "/knowledge/mathematics/elliptic-integrals",
+            "/knowledge/mathematics/periodic-functions-and-phase",
+            "/knowledge/mathematics/airy-functions"
+          ],
+          "sourceIds": []
+        }
+      ],
+      "sectionCount": 6,
+      "upliftDigest": "sha256:5012899572b8d1108ceab0657ddc70079110b85bc6f992ff27ad7a45c65ae407"
+    },
+    {
       "route": "/knowledge/mathematics/exponential-and-logarithmic-integrals",
       "family": "mathematics",
       "slug": "exponential-and-logarithmic-integrals",

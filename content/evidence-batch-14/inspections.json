@@ -718,6 +718,46 @@
       "notCovered": "The relation between the logarithmic integral and the prime counting function was not stated in the section read. The number-theory page gives the asymptotic law at 27.2.3 and it is tempting to join them here, so the page explicitly claims no such relation.",
       "establishes": "The exponential, logarithmic and trigonometric integrals, their branch cuts and principal values, and which are entire.",
       "boundary": "Definitions and singular structure. It makes no claim about approximating any counting function."
+    },
+    {
+      "sourceId": "nist-dlmf-jacobian-elliptic",
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "title": "DLMF Chapter 22: Jacobian Elliptic Functions",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedFrom": "https://dlmf.nist.gov/22.2",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "22.2.1 the nome",
+        "22.2.3 the argument scaling",
+        "22.2.4 to 22.2.6 sn, cn and dn",
+        "the statement of periodicity and pole structure"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/jacobian-elliptic-functions",
+          "locator": "22.2.1, 22.2.3, 22.2.4 to 22.2.6",
+          "claim": "The functions are theta ratios whose two modulus-carrying quantities are both built from the complete elliptic integral.",
+          "supportingPassage": "22.2.4, 22.2.5 and 22.2.6 define sn, cn and dn as ratios of theta functions at a scaled argument. 22.2.1 defines the nome q as the exponential of minus pi times K prime of k over K of k, and 22.2.3 defines the scaled argument zeta as pi z over twice K of k. Both quantities are expressed through the complete elliptic integral of the first kind.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/jacobian-elliptic-functions",
+          "locator": "the analytic character stated in 22.2",
+          "claim": "They are doubly periodic and meromorphic with simple poles and simple zeros, and real for real argument only within a stated modulus range.",
+          "supportingPassage": "The chapter states that each of the twelve Jacobian elliptic functions is doubly periodic as a function of z with fixed k, is meromorphic in z for fixed k, and possesses simple poles and simple zeros. It states that for k in the closed interval from zero to one all the functions are real when z is real.",
+          "distinctPassage": true
+        }
+      ],
+      "crossPageNote": "Two things, both sides inspected. The nome at 22.2.1 and the scaling at 22.2.3 are built from the complete elliptic integral defined at 19.2.8 on the elliptic-integrals page. And this completes a three-way contrast in analytic character across pages already here: Airy solutions are entire at 9.2.1, the Bessel first kind has a branch point at 10.2.2, and these are meromorphic with simple poles.",
+      "establishes": "The Jacobian functions as theta ratios, the nome and scaling through the complete elliptic integral, and their periodicity and pole structure.",
+      "boundary": "Definitions and analytic character. It makes no accuracy claim about any evaluation scheme."
     }
   ],
   "notInspected": [
@@ -727,10 +767,10 @@
     }
   ],
   "summary": {
-    "sourcesInspected": 19,
-    "sourcesAttached": 18,
-    "routesReached": 18,
-    "claimsSupported": 36,
+    "sourcesInspected": 20,
+    "sourcesAttached": 19,
+    "routesReached": 19,
+    "claimsSupported": 38,
     "heldBack": 1,
     "sourcesInspectedNotSupporting": 1
   },

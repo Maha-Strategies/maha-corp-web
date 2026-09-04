@@ -30,6 +30,7 @@ const NEW_PAGES = [
   '/knowledge/mathematics/legendre-functions',
   '/knowledge/mathematics/confluent-hypergeometric-functions',
   '/knowledge/mathematics/exponential-and-logarithmic-integrals',
+  '/knowledge/mathematics/jacobian-elliptic-functions',
 ]
 
 test('new pages are born supported, not added to the unsupported pile', () => {
@@ -46,7 +47,7 @@ test('growth improved the evidence-backed share rather than diluting it', () => 
   // nobody would have made the ratio worse, which is the failure mode.
   const supported = status.counts['independently-supported']
   const uninspected = status.counts['cited-but-uninspected']
-  assert.ok(supported >= 49, `supported fell to ${supported}`)
+  assert.ok(supported >= 50, `supported fell to ${supported}`)
   assert.ok(uninspected <= 98, `uninspected rose to ${uninspected}; expansion added unsupported pages`)
 })
 
@@ -120,8 +121,8 @@ test('the new concepts carry their conditions, not just their formulas', () => {
     'hypergeometric-function', 'incomplete-gamma-functions', 'elliptic-integrals',
     'calendrical-reconciliation', 'number-theoretic-functions', 'airy-functions',
     'legendre-functions', 'confluent-hypergeometric-functions',
-    'exponential-and-logarithmic-integrals'].includes(c.slug))
-  assert.equal(added.length, 16)
+    'exponential-and-logarithmic-integrals', 'jacobian-elliptic-functions'].includes(c.slug))
+  assert.equal(added.length, 17)
   for (const c of added) {
     assert.ok(c.assumptions.length > 0, `${c.slug} states no conditions`)
     assert.ok(c.errorBounds.length > 0, `${c.slug} states no error behaviour`)
