@@ -22,10 +22,10 @@ const att = (o: Partial<InspectionAttestation> = {}): InspectionAttestation => (
 })
 const base = { sourceId: 's', declaredUrl: 'https://e.org/d', establishes: 'what it supports', boundary: 'where it stops' }
 
-test('the five states remain disjoint and total 167', () => {
+test('the five states remain disjoint and partition the corpus', () => {
   const s = report.pageStates
   assert.equal(s.legacyUnchanged + s.structurallyUplifted + s.firstPartyDocumented
-    + s.independentlySourceSupported + s.blocked, 167)
+    + s.independentlySourceSupported + s.blocked, s.total)
   // The 38 and 42 figures of this batch counted fourteen pages backed only by
   // vendor self-documentation. Batch 9 removed that at the source level, and
   // the four conversions this batch made remain intact and are asserted below.

@@ -74,13 +74,11 @@ test('the registry digest excludes date buckets so it is stable across days', ()
   assert.notEqual(registryDigest(registry), registryDigest(changed))
 })
 
-test('the five evidence states remain disjoint and sum to 167', () => {
+test('the five evidence states remain disjoint and partition the corpus', () => {
   const s = report.pageStates
-  assert.equal(s.legacyUnchanged + s.structurallyUplifted + s.firstPartyDocumented + s.independentlySourceSupported + s.blocked, 167)
+  assert.equal(s.legacyUnchanged + s.structurallyUplifted + s.firstPartyDocumented + s.independentlySourceSupported + s.blocked, s.total)
   assert.ok(s.independentlySourceSupported > 0)
   assert.ok(s.firstPartyDocumented > 0)
-  assert.equal(s.legacyUnchanged + s.structurallyUplifted + s.firstPartyDocumented
-    + s.independentlySourceSupported + s.blocked, 167, 'the five states partition the corpus')
 })
 
 test('first-party documentation cannot satisfy independent support', () => {

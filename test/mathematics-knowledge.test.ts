@@ -21,10 +21,13 @@ import { TROPICAL_SIDEREAL_COMPARISONS, tropicalSiderealComparisonPath } from '.
 
 const root = new URL('../', import.meta.url)
 
-test('the opening mathematics collection contains exactly 24 substantive concepts', () => {
-  assert.equal(MATHEMATICAL_CONCEPTS.length, 24)
-  assert.equal(new Set(MATHEMATICAL_CONCEPTS.map((concept) => concept.id)).size, 24)
-  assert.equal(new Set(MATHEMATICAL_CONCEPTS.map((concept) => concept.slug)).size, 24)
+test('the mathematics collection keeps its opening concepts and stays unique', () => {
+  // A floor, not an exact count: the collection is meant to grow, and ids and
+  // slugs must stay unique however many there are.
+  const n = MATHEMATICAL_CONCEPTS.length
+  assert.ok(n >= 24, `the collection shrank to ${n}`)
+  assert.equal(new Set(MATHEMATICAL_CONCEPTS.map((concept) => concept.id)).size, n)
+  assert.equal(new Set(MATHEMATICAL_CONCEPTS.map((concept) => concept.slug)).size, n)
   for (const category of MATHEMATICS_CATEGORIES) assert.ok(MATHEMATICAL_CONCEPTS.some((concept) => concept.category === category), `${category} needs coverage`)
 
   const sources = new Set(MATHEMATICS_SOURCES.map((source) => source.id))

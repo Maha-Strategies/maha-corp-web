@@ -3,13 +3,13 @@
   "auditedAt": "2026-09-03",
   "finding": "Classification and substance are different measurements. A page can carry an inspected source and explain almost nothing, and a structural page can be richly written and cite nothing checkable.",
   "wordCountUsedAsGate": false,
-  "totalAudited": 167,
-  "corpusSize": 167,
+  "totalAudited": 169,
+  "corpusSize": 169,
   "denominatorEqualsCorpus": true,
   "supersedesBatch9Audit": "Batch 9 audited 59 pages and stated a result against 167. This audits all 167.",
   "depthDistribution": {
     "structurally-substantial-but-unsupported": 84,
-    "substantial-and-evidence-backed": 31,
+    "substantial-and-evidence-backed": 33,
     "blocked": 28,
     "first-party-documented-but-thin": 9,
     "first-party-documented-and-substantial": 1,
@@ -17,9 +17,9 @@
   },
   "byGroup": {
     "independentlySupported": {
-      "audited": 31,
+      "audited": 33,
       "states": {
-        "substantial-and-evidence-backed": 31
+        "substantial-and-evidence-backed": 33
       }
     },
     "firstPartyDocumented": {
@@ -43,7 +43,7 @@
       }
     }
   },
-  "substantialAndEvidenceBacked": 31,
+  "substantialAndEvidenceBacked": 33,
   "thinnestSupported": [],
   "verdicts": [
     {
@@ -597,6 +597,54 @@
       "substantialityScore": 12.3,
       "reasons": [],
       "verdictDigest": "sha256:1166d0f52bca883136d6b7cb97d5c50b6ec7bf57ef715dc0a4defe4aed0d7b53"
+    },
+    {
+      "route": "/knowledge/mathematics/gamma-function",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 735,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 8,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 2,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 432
+      },
+      "substantialityScore": 16.4,
+      "reasons": [],
+      "verdictDigest": "sha256:fa16cb81d7276b0342481c14640ca02aea3c41ac52b1a308b77838c3f0f9fd55"
+    },
+    {
+      "route": "/knowledge/mathematics/error-function-and-related-integrals",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 613,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 7,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 8,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 2,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 459
+      },
+      "substantialityScore": 16.9,
+      "reasons": [],
+      "verdictDigest": "sha256:5211db04609af3cf80ac9a60f4eea5fa97cb577d551245187c2ef4e965dc3e06"
     },
     {
       "route": "/knowledge/mathematics/angle-normalization",
@@ -4185,5 +4233,5 @@
     }
   ],
   "boundary": "A private audit. It changes no page.",
-  "auditDigest": "sha256:57958e8aec87304833d2e81998c9d8bf5ab29bfbafb0cfbe8a749d7db3abe579"
+  "auditDigest": "sha256:9f11c98a56483550c8e71c4d64a0fb7d76ef4ded30c810a3d3fd20c31278c1d3"
 }

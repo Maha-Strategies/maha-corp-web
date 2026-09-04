@@ -1,0 +1,129 @@
+{
+  "schemaVersion": "maha-batch-14-inspections/1.0",
+  "batch": "evidence-first-expansion-14",
+  "conductedOn": "2026-09-04",
+  "appendOnly": true,
+  "writtenToProduction": false,
+  "method": "Sources were inspected first and pages written from what the passages state. No page was created before its evidence existed.",
+  "inspected": [
+    {
+      "sourceId": "nist-dlmf-gamma",
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "title": "DLMF Chapter 5: Gamma Function",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedFrom": "https://dlmf.nist.gov/5.5",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Chapter title and DLMF release 1.2.7, dated 2026-06-15, confirmed on the chapter page before the sections were read.",
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "5.5.1 recurrence",
+        "5.5.3 reflection formula with its excluded points",
+        "5.5.5 duplication formula",
+        "5.11.1 Stirling expansion with its sector of validity"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/gamma-function",
+          "locator": "5.5.1, 5.5.3, 5.5.5",
+          "claim": "The gamma function is fixed by a recurrence, and two further relations carry an argument across the half-plane and between scales.",
+          "supportingPassage": "5.5.1 states Gamma(z+1) equals z times Gamma(z). 5.5.3 states Gamma(z) times Gamma(1-z) equals pi over sin(pi z), for z not zero and not a negative integer. 5.5.5 states the duplication formula, Gamma(2z) equals pi to the minus one half, times 2 to the power 2z-1, times Gamma(z) times Gamma(z+1/2), for 2z not zero and not a negative integer.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/gamma-function",
+          "locator": "5.11.1 and 5.11.2",
+          "claim": "Large arguments are handled by an expansion that is asymptotic rather than convergent, so accuracy is bounded by the smallest term rather than by the number of terms taken.",
+          "supportingPassage": "5.11.1 gives the Stirling series for the logarithm of Gamma(z) as z tends to infinity in the sector where the phase of z is at most pi minus delta. The relation is written with the asymptotic symbol, which the chapter identifies as a Poincare asymptotic expansion rather than a convergent series. 5.11.2 gives the corresponding expansion for the digamma function under the same sector condition.",
+          "distinctPassage": true
+        }
+      ],
+      "establishes": "The functional relations that define and compute the gamma function, each with the conditions the reference attaches to it.",
+      "boundary": "States identities at their declared scope. It does not establish that any implementation attains a stated accuracy, and an asymptotic expansion carries no error bound from the term count alone."
+    },
+    {
+      "sourceId": "nist-dlmf-error-function",
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "title": "DLMF Chapter 7: Error Function, Dawson Integral, and Fresnel Integrals",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedFrom": "https://dlmf.nist.gov/7.2",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for Chapter 5.",
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "7.2.1",
+        "7.2.2",
+        "7.2.5",
+        "7.2.7 and 7.2.8"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/error-function-and-related-integrals",
+          "locator": "7.2.1 and 7.2.2",
+          "claim": "The error function and its complement are defined as normalised integrals of the Gaussian kernel, and the two are related by a stated identity.",
+          "supportingPassage": "7.2.1 defines erf z as two over the square root of pi, times the integral of exp of minus t squared from zero to z. 7.2.2 defines erfc z as the same normalised integral taken from z to infinity, and states in the same equation that erfc z equals one minus erf z.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/error-function-and-related-integrals",
+          "locator": "7.2.5, 7.2.7 and 7.2.8",
+          "claim": "The chapter defines the Dawson and Fresnel integrals alongside the error function, and records all of them as entire functions.",
+          "supportingPassage": "7.2.5 defines the Dawson integral F(z) as exp of minus z squared times the integral of exp of t squared from zero to z. 7.2.7 and 7.2.8 define the Fresnel integrals C(z) and S(z) as the integrals of cosine and sine of pi t squared over two. The chapter records these as entire functions of the complex variable.",
+          "distinctPassage": true
+        }
+      ],
+      "establishes": "Integral definitions for the error function, its complement, the Dawson integral and the Fresnel integrals, with the identity relating erf and erfc.",
+      "boundary": "Defines the functions and their relations. It does not establish the accuracy of any implementation, and no statistical interpretation follows from a definition."
+    }
+  ],
+  "notInspected": [
+    {
+      "sourceId": "aerts-2020-asteroseismology",
+      "reason": "arXiv:1912.12300v3 was identified and its abstract read, but not the sections. Abstract-level reading is not section-level inspection, so no astronomy page was created from it in this batch."
+    }
+  ],
+  "summary": {
+    "sourcesInspected": 3,
+    "sourcesAttached": 2,
+    "routesReached": 2,
+    "claimsSupported": 4,
+    "heldBack": 1
+  },
+  "boundary": "Three sources inspected at section level; two attached. The astronomy source is recorded, inspected and unattached, because attaching it would move a frozen release-governance digest.",
+  "heldBack": [
+    {
+      "sourceId": "nasa-exoplanet-methods",
+      "domain": "astronomy",
+      "class": "government-or-standards-authority",
+      "title": "How We Find and Classify Exoplanets",
+      "venue": "NASA Science",
+      "identifier": "science.nasa.gov/exoplanets/how-we-find-and-characterize",
+      "retrievedFrom": "https://science.nasa.gov/exoplanets/how-we-find-and-characterize/",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Publisher and page title confirmed on retrieval.",
+      "versionRelationship": "Retrieved 2026-09-04",
+      "rightsBasis": "United States government agency publication, publicly readable. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "The named detection methods and what each measures",
+        "The stated limitation on radial velocity detections",
+        "The stated limitation on direct imaging"
+      ],
+      "claimByClaimSupport": [],
+      "partialCoverage": "The page's line naming astrometry, microlensing, timing and direct imaging together is only partly covered. NASA names microlensing and direct imaging but not astrometry or timing, so that line is not claimed as supported.",
+      "establishes": "Which detection methods NASA names, what each measures, and the selection biases it states for two of them.",
+      "boundary": "An agency overview. It does not establish the sensitivity or completeness of any survey, and it states limitations for only some of the methods it names.",
+      "notAttachedReason": "Inspected at section level and ready to attach, but held back. The route it supports, /knowledge/astronomy/exoplanet-detection-and-confirmation, is one of the twenty records in the Phase 4 pilot, whose manifest carries a frozen sha256. That manifest is recomputed from live data rather than stored, so adding any source to a pilot record moves the digest: this source took the blocker count from 87 to 89. Every existing astronomy source carries the same two blockers, a missing publication date and a missing locator, so the source is no worse than its neighbours; the coupling is the issue. Updating a frozen release-governance digest to accommodate a content addition is a decision for a person, not a side effect of adding a page."
+    }
+  ]
+}
