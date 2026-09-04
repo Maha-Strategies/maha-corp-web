@@ -5455,6 +5455,7 @@
         "family": "mathematics",
         "dimensionsPresent": [
           "claim-level-citation",
+          "deterministic-calculation",
           "direct-answer",
           "exact-locator",
           "limitations",
@@ -5464,7 +5465,7 @@
           "source-boundary",
           "typed-bridges"
         ],
-        "dimensionCount": 9,
+        "dimensionCount": 10,
         "sourceCount": 3,
         "sourcesWithBoundary": 3,
         "referenceOnlySources": 0,
@@ -5478,7 +5479,7 @@
           "/knowledge/mathematics/spherical-coordinates",
           "/knowledge/mathematics/root-finding"
         ],
-        "renderedSections": 8
+        "renderedSections": 9
       },
       "sections": [
         {
@@ -5514,6 +5515,25 @@
             "θ and θ + 360°k represent the same direction.",
             "Normalization is idempotent.",
             "The output remains inside the declared interval."
+          ],
+          "sourceIds": [
+            "iau-sofa",
+            "nist-dlmf-numerical",
+            "nist-dlmf-4-14"
+          ]
+        },
+        {
+          "dimension": "deterministic-calculation",
+          "heading": "Angle normalisation, executed",
+          "items": [
+            "Method: normalize-angle-microdegrees, evaluated in fixed-point microdegrees on signed 64-bit integers. Units: microdegree, shown here in degrees.",
+            "Turn equivalence: 400° → 40°, 760° → 40°, −320° → 40°. Three angles differing by whole turns give one result, which is the page's statement that θ and θ + 360°k are the same direction.",
+            "Idempotence: 400° → 40° → 40°. Applying normalisation to its own output changes nothing.",
+            "The half-open interval: 359.999999° → 359.999999° stays inside, while 360° → 0° rather than 360. That is what makes the upper end open rather than closed.",
+            "Assumptions: Angles are exact in microdegrees; a value that is not a whole number of microdegrees is outside this representation. The kernel avoids floating point entirely, so these results carry no rounding from binary fractions.",
+            "Uncertainty: None from arithmetic: the operation is exact on integers and aborts on overflow rather than wrapping. Any uncertainty belongs to the input measurement, not to this step.",
+            "Executed by kernel sha256:9046cc9127b3992b962e1a1f2be7bcf62c9a8e355bd29a4d58f2fb2a597df7f3. Rebuild the kernel with npm run build:wasm-kernel, which is deterministic, confirm its digest matches kernelSha256, then re-execute each operation on the recorded inputs.",
+            "What the receipt does not establish: That the kernel is correct. A receipt records what it computed, not whether the computation is right. That the operation models anything outside itself. That the page’s claims are true. These cases exhibit stated invariants on specific values, and exhibiting is not proving."
           ],
           "sourceIds": [
             "iau-sofa",
@@ -5599,8 +5619,8 @@
           "sourceIds": []
         }
       ],
-      "sectionCount": 8,
-      "upliftDigest": "sha256:e1c15d0fa5dba74eaa9487c2f389d21ba0a3070929df05abd81e9fbceccc8887"
+      "sectionCount": 9,
+      "upliftDigest": "sha256:b0ae36406adee6d82859ff269bfa1daf0681e3864b9d5d68353a1c252c73c300"
     },
     {
       "route": "/knowledge/mathematics/spherical-coordinates",
