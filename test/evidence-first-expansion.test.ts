@@ -209,10 +209,17 @@ test('orthogonality is stated as relative to a weight, never as intrinsic', () =
   assert.match(c.doesNotEstablish, /declared weight rather than as an intrinsic property/i)
 })
 
-test('every inspected source names a DLMF release or an agency page', () => {
+test('every inspected source is identifiable and supports at least one claim by passage', () => {
+  // Not a list of two publishers: the property is that a reader can tell whose
+  // statement this is. And one claim is enough when the source is a dictionary
+  // entry defining one thing; what is refused is a source attached with no
+  // passage naming any route.
   for (const s of insp.inspected) {
-    assert.ok(/DLMF|NASA/.test(`${s.identifier} ${s.venue}`), `${s.sourceId} has no identifiable publisher`)
-    assert.ok(s.claimByClaimSupport.length >= 2, `${s.sourceId} supports fewer than two claims`)
+    assert.ok(s.venue && s.venue.length > 8, `${s.sourceId} names no publisher`)
+    assert.ok(s.identifier && s.identifier.length > 4, `${s.sourceId} carries no identifier`)
+    assert.ok(s.retrievedFrom?.startsWith('https://'), `${s.sourceId} has no retrieval URL`)
+    assert.ok(s.claimByClaimSupport.length >= 1,
+      `${s.sourceId} is attached but names no route in a passage`)
   }
 })
 

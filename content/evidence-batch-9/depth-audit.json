@@ -8,8 +8,8 @@
   "denominatorEqualsCorpus": true,
   "supersedesBatch9Audit": "Batch 9 audited 59 pages and stated a result against 167. This audits all 167.",
   "depthDistribution": {
-    "structurally-substantial-but-unsupported": 84,
-    "substantial-and-evidence-backed": 50,
+    "structurally-substantial-but-unsupported": 83,
+    "substantial-and-evidence-backed": 51,
     "blocked": 28,
     "first-party-documented-but-thin": 9,
     "first-party-documented-and-substantial": 1,
@@ -17,9 +17,10 @@
   },
   "byGroup": {
     "independentlySupported": {
-      "audited": 50,
+      "audited": 55,
       "states": {
-        "substantial-and-evidence-backed": 50
+        "substantial-and-evidence-backed": 51,
+        "structurally-substantial-but-unsupported": 4
       }
     },
     "firstPartyDocumented": {
@@ -30,9 +31,9 @@
       }
     },
     "structuralOnly": {
-      "audited": 98,
+      "audited": 93,
       "states": {
-        "structurally-substantial-but-unsupported": 84,
+        "structurally-substantial-but-unsupported": 79,
         "structurally-thin": 14
       }
     },
@@ -43,7 +44,7 @@
       }
     }
   },
-  "substantialAndEvidenceBacked": 50,
+  "substantialAndEvidenceBacked": 51,
   "thinnestSupported": [],
   "verdicts": [
     {
@@ -1147,8 +1148,10 @@
         "wordCountDiagnostic": 207
       },
       "substantialityScore": 12.4,
-      "reasons": [],
-      "verdictDigest": "sha256:148a2d465cf13872185f685dea406a7f1702bf86146197d9610ee37b1ebfc4f2"
+      "reasons": [
+        "classified independent but no claim maps to a passage"
+      ],
+      "verdictDigest": "sha256:1ea7e715ca7821b60ccc8dff5ecc8ab118bd2c6a7ab882afc3b89486f6127e9c"
     },
     {
       "route": "/knowledge/mathematics/periodic-functions-and-phase",
@@ -1392,14 +1395,14 @@
     },
     {
       "route": "/knowledge/mathematics/graph-theory",
-      "state": "structurally-substantial-but-unsupported",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 271,
         "hasMechanismOrDerivation": true,
         "hasTechnicalContext": true,
         "explanatoryClaims": 6,
-        "claimsWithPassage": 0,
-        "exactLocators": 0,
+        "claimsWithPassage": 1,
+        "exactLocators": 1,
         "limitations": 6,
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
@@ -1410,9 +1413,9 @@
         "renderedDimensions": 9,
         "wordCountDiagnostic": 264
       },
-      "substantialityScore": 13,
+      "substantialityScore": 15,
       "reasons": [],
-      "verdictDigest": "sha256:304378cdfd196dd82585bf748fdfd3cef4417ac26c469bc6f95ffcbe77a95057"
+      "verdictDigest": "sha256:c7ccaa335d1ac633f4dc066d5e7cdc3343afbd9228391f3e482b01bf31178029"
     },
     {
       "route": "/knowledge/mathematics/dynamical-systems",
@@ -1507,8 +1510,10 @@
         "wordCountDiagnostic": 285
       },
       "substantialityScore": 13,
-      "reasons": [],
-      "verdictDigest": "sha256:a1dba27fc7babf77408197415177bf5b6457986f193c9b125ed2ad60e783c72f"
+      "reasons": [
+        "classified independent but no claim maps to a passage"
+      ],
+      "verdictDigest": "sha256:43290ea4ec334497599d228bc8a66306247dc5570f90de57ea65f409c3eefd4b"
     },
     {
       "route": "/knowledge/mathematics/constraint-satisfaction",
@@ -1531,8 +1536,10 @@
         "wordCountDiagnostic": 211
       },
       "substantialityScore": 12.7,
-      "reasons": [],
-      "verdictDigest": "sha256:cf12ef504fdab29ee830e82950fa15a10be5813e4bad8a3a490bc6a11cc1a8b3"
+      "reasons": [
+        "classified independent but no claim maps to a passage"
+      ],
+      "verdictDigest": "sha256:cd20021b3c8f12aeac620b3cddf37241a65227306c7441b707380cedc6120956"
     },
     {
       "route": "/knowledge/mathematics/information-theory",
@@ -1603,8 +1610,10 @@
         "wordCountDiagnostic": 181
       },
       "substantialityScore": 12.4,
-      "reasons": [],
-      "verdictDigest": "sha256:3cbdd4c5c32ec9bbaf8a7cdea6c2b829e49a9b3877e61d8539153fdcc44c67f1"
+      "reasons": [
+        "classified independent but no claim maps to a passage"
+      ],
+      "verdictDigest": "sha256:5bc06928f452a3ac4fa5e9c9e437ae6e9531df5a27e4362fbb68bdd46894607a"
     },
     {
       "route": "/knowledge/mathematics/causal-inference",
@@ -4641,5 +4650,5 @@
     }
   ],
   "boundary": "A private audit. It changes no page.",
-  "auditDigest": "sha256:b73d1b6e3db45e227be3ae6390541d9cfc5fce0d525c6198b963893269ea8922"
+  "auditDigest": "sha256:50515db5b8db66dda5b6b35655c77056fce4ce84822aabd70bd97998247c1b18"
 }

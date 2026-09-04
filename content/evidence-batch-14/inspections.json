@@ -758,6 +758,38 @@
       "crossPageNote": "Two things, both sides inspected. The nome at 22.2.1 and the scaling at 22.2.3 are built from the complete elliptic integral defined at 19.2.8 on the elliptic-integrals page. And this completes a three-way contrast in analytic character across pages already here: Airy solutions are entire at 9.2.1, the Bessel first kind has a branch point at 10.2.2, and these are meromorphic with simple poles.",
       "establishes": "The Jacobian functions as theta ratios, the nome and scaling through the complete elliptic integral, and their periodicity and pole structure.",
       "boundary": "Definitions and analytic character. It makes no accuracy claim about any evaluation scheme."
+    },
+    {
+      "sourceId": "nist-dads",
+      "domain": "mathematics",
+      "class": "government-or-standards-authority",
+      "title": "Dictionary of Algorithms and Data Structures",
+      "venue": "National Institute of Standards and Technology",
+      "identifier": "xlinux.nist.gov/dads",
+      "retrievedFrom": "https://xlinux.nist.gov/dads/HTML/graph.html",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Publisher and resource title confirmed on retrieval of the entry itself.",
+      "versionRelationship": "Entry retrieved 2026-09-04",
+      "rightsBasis": "United States government publication, publicly readable. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "The entry for graph, its formal definition and its named specializations"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/graph-theory",
+          "locator": "The graph entry",
+          "claim": "A graph is a vertex set with an adjacency relation, and directed and weighted forms are specializations of it rather than separate objects.",
+          "supportingPassage": "The entry defines a graph as a set of items connected by edges, each item called a vertex or node, and formally as a set of vertices with a binary relation between them called adjacency. It gives the pair form G equals V and E, with E a subset of the pairs of vertices. It records that an undirected graph is one whose adjacency relation is symmetric, lists directed and weighted graphs among the specializations, and states that adjacency is irreflexive unless self-loops are specified.",
+          "distinctPassage": true
+        }
+      ],
+      "partialCoverage": "The entry supports the page's definition and its treatment of directed and weighted graphs as variants. It does not cover the page's three invariants: that isomorphic graphs preserve topology, that a directed path encodes reachability under edge semantics, or that graph metrics depend on how the graph was constructed. Those remain the page's own statements and are not claimed as supported.",
+      "addedCondition": "The entry states that adjacency is irreflexive unless self-loops are specified, a condition the page does not currently carry. Recorded here rather than silently written into the page, which would be a content change made on the strength of a source read for a different purpose.",
+      "contrastWithHandbook": "This is the substantive match the statistical handbook was not. Both are NIST resources cited by several unsupported pages; this one defines the subject the page is about, and that one defined a different sense of a shared word.",
+      "establishes": "The formal definition of a graph and the status of directed and weighted graphs as specializations.",
+      "boundary": "A dictionary entry. It defines the object and does not establish any property of algorithms run on it."
     }
   ],
   "notInspected": [
@@ -767,10 +799,10 @@
     }
   ],
   "summary": {
-    "sourcesInspected": 20,
-    "sourcesAttached": 19,
-    "routesReached": 19,
-    "claimsSupported": 38,
+    "sourcesInspected": 21,
+    "sourcesAttached": 20,
+    "routesReached": 20,
+    "claimsSupported": 39,
     "heldBack": 1,
     "sourcesInspectedNotSupporting": 1
   },

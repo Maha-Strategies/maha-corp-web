@@ -3,8 +3,8 @@
   "generatedFrom": "uplift-compiled.json and the depth audit, both regenerated",
   "note": "Public. Rendered on the page it describes. Carries no audit internals.",
   "counts": {
-    "cited-but-uninspected": 98,
-    "independently-supported": 50,
+    "cited-but-uninspected": 97,
+    "independently-supported": 51,
     "first-party-documented": 4
   },
   "entries": [
@@ -538,11 +538,11 @@
     },
     {
       "route": "/knowledge/mathematics/graph-theory",
-      "status": "cited-but-uninspected",
-      "headline": "Cites 1 source, none of which has been read",
-      "detail": "The source is named, but it has been retrieved and read as part of building this page. Nothing here has been matched to a passage, so the citations show where a reader might look rather than what was checked.",
-      "useFor": "Orientation: how the topic is organised, which terms matter, and where to start reading.",
-      "doNotUseFor": "A claim you intend to act on or repeat. Follow the cited material yourself first."
+      "status": "independently-supported",
+      "headline": "Checked against 2 inspected sources",
+      "detail": "2 sources were retrieved, identified and read, and the claims below are tied to specific passages at the scope those passages state. Each source also records what it cannot establish.",
+      "useFor": "The specific claims that carry a cited passage, at the scope that passage states.",
+      "doNotUseFor": null
     },
     {
       "route": "/knowledge/mathematics/hypergeometric-function",

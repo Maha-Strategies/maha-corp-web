@@ -6894,8 +6894,8 @@
         "sourcesWithBoundary": 2,
         "referenceOnlySources": 0,
         "declaredLocators": 2,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 1,
         "relatedRouteCount": 3,
         "relatedRoutes": [
@@ -6924,8 +6924,8 @@
         "sourcesWithBoundary": 2,
         "referenceOnlySources": 0,
         "declaredLocators": 2,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 1,
         "relatedRouteCount": 3,
         "relatedRoutes": [
@@ -7030,7 +7030,7 @@
         }
       ],
       "sectionCount": 7,
-      "upliftDigest": "sha256:82aebfdf3de067aaedd2e35e49859a4f43d75fdd2377c9a9a1c5e8a3c61bce06"
+      "upliftDigest": "sha256:f88697522f332b4a10c7868b57d355c02714ecbe6f2e5fccf4754313e65f945a"
     },
     {
       "route": "/knowledge/mathematics/periodic-functions-and-phase",
@@ -8826,12 +8826,12 @@
           "source-boundary"
         ],
         "dimensionCount": 8,
-        "sourceCount": 1,
-        "sourcesWithBoundary": 1,
+        "sourceCount": 2,
+        "sourcesWithBoundary": 2,
         "referenceOnlySources": 0,
-        "declaredLocators": 1,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 2,
+        "contentInspectedLocators": 2,
+        "explanatorySources": 2,
         "bridgeCount": 3,
         "relatedRouteCount": 3,
         "relatedRoutes": [
@@ -8856,12 +8856,12 @@
           "typed-bridges"
         ],
         "dimensionCount": 9,
-        "sourceCount": 1,
-        "sourcesWithBoundary": 1,
+        "sourceCount": 2,
+        "sourcesWithBoundary": 2,
         "referenceOnlySources": 0,
-        "declaredLocators": 1,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 2,
+        "contentInspectedLocators": 2,
+        "explanatorySources": 2,
         "bridgeCount": 3,
         "relatedRouteCount": 3,
         "relatedRoutes": [
@@ -8879,6 +8879,7 @@
             "A graph consists of vertices connected by edges, optionally directed, weighted, temporal, or typed. Graph algorithms expose reachability, dependency, centrality, paths, and communities, but those structural properties inherit the meaning and quality of the encoded edges."
           ],
           "sourceIds": [
+            "nist-dads",
             "nist-dads"
           ]
         },
@@ -8891,6 +8892,7 @@
             "Run algorithms appropriate to edge meaning and validate sensitivity."
           ],
           "sourceIds": [
+            "nist-dads",
             "nist-dads"
           ]
         },
@@ -8903,6 +8905,7 @@
             "Graph metrics depend on graph construction."
           ],
           "sourceIds": [
+            "nist-dads",
             "nist-dads"
           ]
         },
@@ -8918,6 +8921,7 @@
             "Missing edges are not automatically negative evidence."
           ],
           "sourceIds": [
+            "nist-dads",
             "nist-dads"
           ]
         },
@@ -8928,6 +8932,7 @@
             "A knowledge graph connects claims and methods; visual proximity or centrality does not establish truth, causation, or predictive power."
           ],
           "sourceIds": [
+            "nist-dads",
             "nist-dads"
           ]
         },
@@ -8945,6 +8950,7 @@
             "Limit: Graph centrality is not proof of physical causation or commercial importance."
           ],
           "sourceIds": [
+            "nist-dads",
             "nist-dads"
           ]
         },
@@ -8962,6 +8968,7 @@
             "Limit: Complete lineage improves auditability but does not guarantee a model is correct."
           ],
           "sourceIds": [
+            "nist-dads",
             "nist-dads"
           ]
         },
@@ -8979,6 +8986,7 @@
             "Limit: Historical influence and graph proximity do not prove predictive efficacy."
           ],
           "sourceIds": [
+            "nist-dads",
             "nist-dads"
           ]
         },
@@ -8994,7 +9002,7 @@
         }
       ],
       "sectionCount": 9,
-      "upliftDigest": "sha256:333decd362c77ae911b95ce055170671d1062ba3b39c218d253eb6a2b2c46e15"
+      "upliftDigest": "sha256:d157135c647a18efcd2eb2cb6840a4fe7ba59901bee775050164380c0845dc79"
     },
     {
       "route": "/knowledge/mathematics/dynamical-systems",
@@ -9528,8 +9536,8 @@
         "sourcesWithBoundary": 2,
         "referenceOnlySources": 0,
         "declaredLocators": 2,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 3,
         "relatedRouteCount": 3,
         "relatedRoutes": [
@@ -9558,8 +9566,8 @@
         "sourcesWithBoundary": 2,
         "referenceOnlySources": 0,
         "declaredLocators": 2,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 3,
         "relatedRouteCount": 3,
         "relatedRoutes": [
@@ -9700,7 +9708,7 @@
         }
       ],
       "sectionCount": 9,
-      "upliftDigest": "sha256:85093c6862f741ccea6972637f5e772eed8f05ce6ed11d2b77368f55bc0edcb2"
+      "upliftDigest": "sha256:6c413d7b6d1533603393e3f70b79e843ea23b650eca55754682836934f929eb0"
     },
     {
       "route": "/knowledge/mathematics/constraint-satisfaction",
@@ -9726,8 +9734,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 0,
         "declaredLocators": 1,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 2,
         "relatedRouteCount": 3,
         "relatedRoutes": [
@@ -9756,8 +9764,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 0,
         "declaredLocators": 1,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 2,
         "relatedRouteCount": 3,
         "relatedRoutes": [
@@ -9873,7 +9881,7 @@
         }
       ],
       "sectionCount": 8,
-      "upliftDigest": "sha256:3008872002637da50bacfe51bb863d72e76d9793d9a36a7dda9b8409d627afd9"
+      "upliftDigest": "sha256:232c91ffebc9cad41215a357b0c5e11b8f2b61712cfabeceb8778aedb98e23c1"
     },
     {
       "route": "/knowledge/mathematics/information-theory",
@@ -10235,8 +10243,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 0,
         "declaredLocators": 1,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 1,
         "relatedRouteCount": 3,
         "relatedRoutes": [
@@ -10265,8 +10273,8 @@
         "sourcesWithBoundary": 1,
         "referenceOnlySources": 0,
         "declaredLocators": 1,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 1,
         "relatedRouteCount": 3,
         "relatedRoutes": [
@@ -10365,7 +10373,7 @@
         }
       ],
       "sectionCount": 7,
-      "upliftDigest": "sha256:c7f2b406c026526325b03ea18a81256481ec1681e073bb27af13a01e18082757"
+      "upliftDigest": "sha256:e80e14ec42dc85b696b012b2b1c65c9d14c879f736563c1f390fa0691d93ec32"
     },
     {
       "route": "/knowledge/mathematics/causal-inference",

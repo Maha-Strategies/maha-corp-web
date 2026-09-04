@@ -119,3 +119,46 @@ test('every page template that renders content also renders the status', () => {
       `${t} renders page content without an evidence status`)
   }
 })
+
+test('the label is claim-level, so attesting a source does not check every page citing it', () => {
+  // The defect this pins: the label was computed from explanatorySources, a
+  // property of the source. Attaching the NIST algorithms dictionary after
+  // reading only its entry for "graph" told four other pages they had been
+  // checked. Reading one dictionary entry does not check an optimization page.
+  const byRoute = new Map<string, string>(
+    status.entries.map((e: { route: string; status: string }) => [e.route, e.status]))
+  assert.equal(byRoute.get('/knowledge/mathematics/graph-theory'), 'independently-supported',
+    'the page whose passage was actually inspected must be supported')
+  for (const slug of ['optimization', 'modular-arithmetic', 'constraint-satisfaction', 'formal-logic-and-rule-compilation']) {
+    assert.equal(byRoute.get(`/knowledge/mathematics/${slug}`), 'cited-but-uninspected',
+      `${slug} cites the same source but no passage names it; it must not read as checked`)
+  }
+})
+
+test('every page labelled supported has a passage naming that route', () => {
+  const claimRoutes = new Set<string>()
+  for (const file of ['content/evidence-batch-4/inspections.json', 'content/evidence-batch-8/inspections.json',
+    'content/evidence-batch-9/inspections.json', 'content/evidence-batch-12/inspections.json',
+    'content/evidence-batch-14/inspections.json']) {
+    const batch = JSON.parse(readFileSync(file, 'utf8')) as { inspected?: { claimByClaimSupport?: { route: string }[] }[] }
+    for (const src of batch.inspected ?? []) for (const c of src.claimByClaimSupport ?? []) claimRoutes.add(c.route)
+  }
+  const reuse = JSON.parse(readFileSync('content/evidence-batch-7/reuse-audit.json', 'utf8')) as { accepted?: { route: string }[] }
+  for (const e of reuse.accepted ?? []) claimRoutes.add(e.route)
+  for (const file of ['content/semiconductor-evidence/batch-1.json', 'content/evidence-batch-2/inspections.json',
+    'content/evidence-batch-3/inspections.json']) {
+    const batch = JSON.parse(readFileSync(file, 'utf8')) as { inspected?: { supportsRoutes?: string[] }[] }
+    for (const src of batch.inspected ?? []) for (const r of src.supportsRoutes ?? []) claimRoutes.add(r)
+  }
+  for (const e of status.entries) {
+    if (e.status !== 'independently-supported') continue
+    assert.ok(claimRoutes.has(e.route), `${e.route} is labelled supported with no passage naming it`)
+  }
+})
+
+test('the supported label count matches the audit', () => {
+  // The two are produced by different code paths over the same corpus, so
+  // agreement is a check rather than a restatement.
+  assert.equal(status.counts['independently-supported'],
+    audit.depthDistribution['substantial-and-evidence-backed'] ?? 0)
+})
