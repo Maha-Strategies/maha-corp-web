@@ -3579,6 +3579,299 @@
       "upliftDigest": "sha256:2412bca326bbbd26b2e81d2e82b4780cf4c2297e36edc567ffa744c6a3952b66"
     },
     {
+      "route": "/knowledge/mathematics/riemann-zeta-function",
+      "family": "mathematics",
+      "slug": "riemann-zeta-function",
+      "eligible": true,
+      "refusals": [],
+      "before": {
+        "route": "/knowledge/mathematics/riemann-zeta-function",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 2,
+        "relatedRoutes": [
+          "/knowledge/mathematics/bernoulli-and-euler-numbers",
+          "/knowledge/mathematics/convergence-precision-and-error"
+        ],
+        "renderedSections": 6
+      },
+      "after": {
+        "route": "/knowledge/mathematics/riemann-zeta-function",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 2,
+        "relatedRoutes": [
+          "/knowledge/mathematics/bernoulli-and-euler-numbers",
+          "/knowledge/mathematics/convergence-precision-and-error"
+        ],
+        "renderedSections": 6
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "DLMF 25.2.1 defines the zeta function by the Dirichlet series, the sum of one over n to the s, and states it for real part of s greater than one. 25.2.11 gives the Euler product, the product over all primes of one minus p to the minus s, inverted, under the same condition. Elsewhere the function is defined by analytic continuation, and the chapter records that the continued function is meromorphic with a single singularity in the complex plane: a simple pole at s equals one with residue one. 25.2.4 gives the Laurent expansion about that pole, one over s minus one plus a series in the Stieltjes constants, which are themselves defined as limits at 25.2.5."
+          ],
+          "sourceIds": [
+            "nist-dlmf-zeta",
+            "nist-dlmf-zeta",
+            "nist-dlmf-zeta"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Check the real part of the argument before using either representation, since both stop at one.",
+            "Treat a value at real part below one as a continuation rather than a sum, because the series diverges there.",
+            "Near s equals one, use the Laurent form at 25.2.4 rather than the series, which is where the pole sits."
+          ],
+          "sourceIds": [
+            "nist-dlmf-zeta",
+            "nist-dlmf-zeta",
+            "nist-dlmf-zeta"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "The Dirichlet series in the half-plane, DLMF 25.2.1",
+            "The Euler product over primes in the same half-plane, DLMF 25.2.11",
+            "A single simple pole at s equals one with residue one, DLMF 25.2 stated in prose rather than as a numbered equation"
+          ],
+          "sourceIds": [
+            "nist-dlmf-zeta",
+            "nist-dlmf-zeta",
+            "nist-dlmf-zeta"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "The Dirichlet series converges slowly near the boundary of its half-plane, so truncating it close to real part one gives poor accuracy long before it fails outright.",
+            "The Euler product is over infinitely many primes; truncating it at a finite prime is an approximation the chapter does not bound.",
+            "The Stieltjes constants at 25.2.5 are defined as limits of differences that cancel, so computing them naively loses significance.",
+            "Both the series at 25.2.1 and the product at 25.2.11 are stated only for real part of s greater than one; neither defines the function elsewhere.",
+            "Values outside that half-plane come from analytic continuation, which is a different operation from evaluating the series.",
+            "The Laurent expansion at 25.2.4 is local to the pole at s equals one."
+          ],
+          "sourceIds": [
+            "nist-dlmf-zeta",
+            "nist-dlmf-zeta",
+            "nist-dlmf-zeta"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "What this does not establish",
+          "items": [
+            "The chapter states representations and the pole. It settles no question about the location of the zeros, and neither representation defines the function outside its half-plane."
+          ],
+          "sourceIds": [
+            "nist-dlmf-zeta",
+            "nist-dlmf-zeta",
+            "nist-dlmf-zeta"
+          ]
+        },
+        {
+          "dimension": "related-records",
+          "heading": "Related records",
+          "items": [
+            "/knowledge/mathematics/bernoulli-and-euler-numbers",
+            "/knowledge/mathematics/convergence-precision-and-error"
+          ],
+          "sourceIds": []
+        }
+      ],
+      "sectionCount": 6,
+      "upliftDigest": "sha256:047c2646360fd225022979af4768e73fd6f29700c7a50bf1869dd9e0553b533e"
+    },
+    {
+      "route": "/knowledge/mathematics/hypergeometric-function",
+      "family": "mathematics",
+      "slug": "hypergeometric-function",
+      "eligible": true,
+      "refusals": [],
+      "before": {
+        "route": "/knowledge/mathematics/hypergeometric-function",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 3,
+        "relatedRoutes": [
+          "/knowledge/mathematics/bessel-functions",
+          "/knowledge/mathematics/gamma-function",
+          "/knowledge/mathematics/convergence-precision-and-error"
+        ],
+        "renderedSections": 6
+      },
+      "after": {
+        "route": "/knowledge/mathematics/hypergeometric-function",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 3,
+        "relatedRoutes": [
+          "/knowledge/mathematics/bessel-functions",
+          "/knowledge/mathematics/gamma-function",
+          "/knowledge/mathematics/convergence-precision-and-error"
+        ],
+        "renderedSections": 6
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "DLMF 15.2.1 defines the Gauss hypergeometric function as a series in Pochhammer symbols over the unit disk, extended elsewhere by analytic continuation, with the principal branch taken in the sector where the phase of one minus z is at most pi and a cut running from one to infinity along the real axis. The chapter states plainly that the function does not in general exist when the lower parameter c is zero or a negative integer. The regularized form at 15.2.2 divides by a gamma function instead and is valid for all c, which is why it exists. 15.2.4 records that the series terminates into a polynomial when the upper parameter is a non-positive integer."
+          ],
+          "sourceIds": [
+            "nist-dlmf-hypergeometric",
+            "nist-dlmf-hypergeometric",
+            "nist-dlmf-hypergeometric"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Check c against zero and the negative integers before using the unregularized form.",
+            "On the boundary circle, classify by the real part of c minus a minus b: above zero converges absolutely, between minus one and zero converges conditionally away from z equals one, and at or below minus one diverges.",
+            "Where a parameter makes the series terminate, use the polynomial form rather than summing an infinite series that has already stopped."
+          ],
+          "sourceIds": [
+            "nist-dlmf-hypergeometric",
+            "nist-dlmf-hypergeometric",
+            "nist-dlmf-hypergeometric"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "The Gauss series on the unit disk, DLMF 15.2.1",
+            "The regularized form valid for all c, DLMF 15.2.2",
+            "Termination into a polynomial at non-positive integer upper parameter, DLMF 15.2.4"
+          ],
+          "sourceIds": [
+            "nist-dlmf-hypergeometric",
+            "nist-dlmf-hypergeometric",
+            "nist-dlmf-hypergeometric"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "The three boundary regimes are stated by condition rather than pointwise, so conditional convergence near the circle is slow and the chapter offers no rate.",
+            "Continuation outside the unit disk is an analytic statement, not a numerical method; the chapter does not bound the accuracy of any particular continuation scheme.",
+            "Near c equal to a non-positive integer the unregularized form is ill conditioned even where it is defined, which is the practical reason for 15.2.2.",
+            "The series at 15.2.1 converges on the open unit disk; values outside come from continuation, not summation.",
+            "The function is generally undefined when c is zero or a negative integer, which is the exception the regularized form at 15.2.2 removes.",
+            "A principal branch is declared with a cut from one to infinity, so a value is branch-dependent rather than absolute."
+          ],
+          "sourceIds": [
+            "nist-dlmf-hypergeometric",
+            "nist-dlmf-hypergeometric",
+            "nist-dlmf-hypergeometric"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "What this does not establish",
+          "items": [
+            "The chapter defines the function, its branch and its exceptional parameters. It does not establish the accuracy of any continuation scheme outside the unit disk."
+          ],
+          "sourceIds": [
+            "nist-dlmf-hypergeometric",
+            "nist-dlmf-hypergeometric",
+            "nist-dlmf-hypergeometric"
+          ]
+        },
+        {
+          "dimension": "related-records",
+          "heading": "Related records",
+          "items": [
+            "/knowledge/mathematics/bessel-functions",
+            "/knowledge/mathematics/gamma-function",
+            "/knowledge/mathematics/convergence-precision-and-error"
+          ],
+          "sourceIds": []
+        }
+      ],
+      "sectionCount": 6,
+      "upliftDigest": "sha256:15e4713bdcd3b29a8efda4b48bf52dce6de6460e966d206d17cd38c208922524"
+    },
+    {
       "route": "/knowledge/mathematics/asymptotic-approximations",
       "family": "mathematics",
       "slug": "asymptotic-approximations",

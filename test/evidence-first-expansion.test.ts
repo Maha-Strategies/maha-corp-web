@@ -19,6 +19,8 @@ const NEW_PAGES = [
   '/knowledge/astronomy/asteroseismology-and-stellar-interiors',
   '/knowledge/mathematics/asymptotic-approximations',
   '/knowledge/mathematics/orthogonal-polynomials',
+  '/knowledge/mathematics/riemann-zeta-function',
+  '/knowledge/mathematics/hypergeometric-function',
 ]
 
 test('new pages are born supported, not added to the unsupported pile', () => {
@@ -35,7 +37,7 @@ test('growth improved the evidence-backed share rather than diluting it', () => 
   // nobody would have made the ratio worse, which is the failure mode.
   const supported = status.counts['independently-supported']
   const uninspected = status.counts['cited-but-uninspected']
-  assert.ok(supported >= 38, `supported fell to ${supported}`)
+  assert.ok(supported >= 40, `supported fell to ${supported}`)
   assert.ok(uninspected <= 98, `uninspected rose to ${uninspected}; expansion added unsupported pages`)
 })
 
@@ -105,15 +107,24 @@ test('the new sources declare what they establish and what they do not', () => {
 test('the new concepts carry their conditions, not just their formulas', () => {
   const added = MATHEMATICAL_CONCEPTS.filter((c) => ['gamma-function',
     'error-function-and-related-integrals', 'bessel-functions', 'bernoulli-and-euler-numbers',
-    'asymptotic-approximations', 'orthogonal-polynomials'].includes(c.slug))
-  assert.equal(added.length, 6)
+    'asymptotic-approximations', 'orthogonal-polynomials', 'riemann-zeta-function',
+    'hypergeometric-function'].includes(c.slug))
+  assert.equal(added.length, 8)
   for (const c of added) {
     assert.ok(c.assumptions.length > 0, `${c.slug} states no conditions`)
     assert.ok(c.errorBounds.length > 0, `${c.slug} states no error behaviour`)
     assert.ok(c.doesNotEstablish.length > 60, `${c.slug} does not say what it cannot establish`)
     // Every invariant names the equation it comes from.
     for (const inv of c.invariants) {
-      assert.match(inv, /DLMF \d+\.\d+\.\d+/, `${c.slug}: an invariant with no equation number: ${inv}`)
+      // An equation number where the reference numbers one, and a section
+      // citation where it makes the statement in prose. What is refused is an
+      // invariant with no locator at all, or a fabricated equation number for
+      // something the chapter never numbered.
+      assert.match(inv, /DLMF \d+\.\d+(\.\d+)?/, `${c.slug}: an invariant with no locator: ${inv}`)
+      if (/DLMF \d+\.\d+(?!\.)/.test(inv)) {
+        assert.match(inv, /stated in prose/,
+          `${c.slug}: a section-level citation must say why it is not an equation number: ${inv}`)
+      }
     }
   }
 })
@@ -184,4 +195,31 @@ test('every inspected source names a DLMF release or an agency page', () => {
     assert.ok(/DLMF|NASA/.test(`${s.identifier} ${s.venue}`), `${s.sourceId} has no identifiable publisher`)
     assert.ok(s.claimByClaimSupport.length >= 2, `${s.sourceId} supports fewer than two claims`)
   }
+})
+
+test('a representation is never presented as defining the function everywhere', () => {
+  // Both the Dirichlet series and the Euler product stop at the same line, and
+  // values past it come from continuation rather than from summing.
+  const zeta = MATHEMATICAL_CONCEPTS.find((c) => c.slug === 'riemann-zeta-function')!
+  assert.match(zeta.assumptions.join(' '), /neither defines the function elsewhere/i)
+  assert.match(zeta.procedure.join(' '), /continuation rather than a sum/i)
+})
+
+test('an unreturned relation is recorded as not covered rather than assumed', () => {
+  // The zeta-Bernoulli relation was asked for and not returned. The adjacent
+  // Bernoulli page exists, which makes assuming it especially tempting.
+  const zeta = insp.inspected.find((s: { sourceId: string }) => s.sourceId === 'nist-dlmf-zeta')
+  assert.match(zeta.notCovered, /Bernoulli/)
+  const page = compiled.pages.find((p: { route: string }) =>
+    p.route === '/knowledge/mathematics/riemann-zeta-function')
+  assert.ok(!/Bernoulli/.test(JSON.stringify(page.sections)),
+    'the page must not claim a relation the retrieval did not return')
+})
+
+test('the hypergeometric page carries all three boundary regimes', () => {
+  const h = MATHEMATICAL_CONCEPTS.find((c) => c.slug === 'hypergeometric-function')!
+  const text = h.procedure.join(' ')
+  assert.match(text, /absolutely/i)
+  assert.match(text, /conditionally/i)
+  assert.match(text, /diverges/i)
 })

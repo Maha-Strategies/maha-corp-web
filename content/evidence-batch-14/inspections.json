@@ -279,6 +279,85 @@
       ],
       "establishes": "Orthogonality conditions across the continuous, discrete and measure-theoretic settings, and the recurrences with the positivity that makes the converse hold.",
       "boundary": "States conditions and recurrences. It does not establish numerical stability, and orthogonality is relative to a declared weight."
+    },
+    {
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "sourceId": "nist-dlmf-zeta",
+      "title": "DLMF Chapter 25: Zeta and Related Functions",
+      "retrievedFrom": "https://dlmf.nist.gov/25.2",
+      "exactLocators": [
+        "25.2.1 the Dirichlet series",
+        "25.2.11 the Euler product",
+        "the statement of the pole",
+        "25.2.4 and 25.2.5 the Laurent expansion and Stieltjes constants"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/riemann-zeta-function",
+          "locator": "25.2.1 and 25.2.11",
+          "claim": "Two representations agree in one half-plane and define the function nowhere else.",
+          "supportingPassage": "25.2.1 states that when the real part of s exceeds one, zeta of s is the sum over n of one over n to the s. 25.2.11 states the Euler product, zeta of s equals the product over primes p of one minus p to the minus s, all inverted, under the same condition that the real part of s exceeds one.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/riemann-zeta-function",
+          "locator": "the pole statement, 25.2.4 and 25.2.5",
+          "claim": "Values elsewhere come from continuation, and the continued function has exactly one singularity.",
+          "supportingPassage": "The chapter states that elsewhere zeta is defined by analytic continuation, and that it is a meromorphic function whose only singularity in the complex plane is a simple pole at s equals one with residue one. 25.2.4 gives the Laurent expansion about that pole as one over s minus one plus a series whose coefficients are the Stieltjes constants, and 25.2.5 defines those constants as limits of a difference between a partial sum and a logarithmic term.",
+          "distinctPassage": true
+        }
+      ],
+      "notCovered": "The relation between zeta at even integers and the Bernoulli numbers was asked for and not returned by this retrieval, so no such claim is made on the page despite the adjacent Bernoulli page existing.",
+      "establishes": "The two representations with their shared half-plane, the analytic continuation, and the single pole with its local expansion.",
+      "boundary": "States representations and analytic structure. It settles nothing about the zeros."
+    },
+    {
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "sourceId": "nist-dlmf-hypergeometric",
+      "title": "DLMF Chapter 15: Hypergeometric Function",
+      "retrievedFrom": "https://dlmf.nist.gov/15.2",
+      "exactLocators": [
+        "15.2.1 the Gauss series with its branch and cut",
+        "15.2.2 the regularized form",
+        "15.2.4 termination",
+        "the three boundary convergence regimes"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/hypergeometric-function",
+          "locator": "15.2.1 and 15.2.2",
+          "claim": "The series is defined on the unit disk with a declared branch, is undefined for a family of parameter values, and a regularized form exists to remove that exception.",
+          "supportingPassage": "15.2.1 defines F of a, b; c; z as a series in Pochhammer symbols on the disk where the modulus of z is less than one, and by analytic continuation elsewhere, with the principal branch taken where the phase of one minus z is at most pi and a cut from one to positive infinity along the real axis. The chapter states that in general F does not exist when c is zero or a negative integer. 15.2.2 gives the regularized form, which divides by a gamma function and is stated to be valid for all values of c and analytic at those exceptional points.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/hypergeometric-function",
+          "locator": "15.2.4 and the boundary regimes",
+          "claim": "The series terminates for one family of parameters, and its behaviour on the boundary circle splits into three regimes by a single condition.",
+          "supportingPassage": "15.2.4 states that when the upper parameter a equals minus m for a non-negative integer m, and c is not zero or a negative integer, the function is a polynomial with a finite sum representation. On the circle where the modulus of z equals one, the chapter states that the series converges absolutely when the real part of c minus a minus b exceeds zero, converges conditionally when that real part lies between minus one and zero excluding the point z equals one, and diverges when it is at or below minus one.",
+          "distinctPassage": true
+        }
+      ],
+      "establishes": "The Gauss series with its disk, branch and exceptional parameters, the regularized form, the termination condition, and the three boundary regimes.",
+      "boundary": "A definition with a declared branch. It does not establish the accuracy of any numerical continuation outside the disk."
     }
   ],
   "notInspected": [
@@ -288,13 +367,13 @@
     }
   ],
   "summary": {
-    "sourcesInspected": 8,
-    "sourcesAttached": 7,
-    "routesReached": 7,
-    "claimsSupported": 14,
+    "sourcesInspected": 10,
+    "sourcesAttached": 9,
+    "routesReached": 9,
+    "claimsSupported": 18,
     "heldBack": 1
   },
-  "boundary": "Eight sources inspected at section level; seven attached across mathematics and astronomy. The eighth is recorded, inspected and unattached, because attaching it would move a frozen release-governance digest.",
+  "boundary": "Ten sources inspected at section level; nine attached across mathematics and astronomy. The tenth is recorded, inspected and unattached, because attaching it would move a frozen release-governance digest.",
   "heldBack": [
     {
       "sourceId": "nasa-exoplanet-methods",
