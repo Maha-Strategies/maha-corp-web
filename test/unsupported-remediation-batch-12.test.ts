@@ -70,7 +70,13 @@ test('all generated internal routes resolve', () => {
       assert.ok(routes.has(related), `${page.route} links to ${related}, which does not exist`)
     }
   }
-  assert.ok(checked > 600, `expected the full link set, got ${checked}`)
+  // Not a pinned total: the link set legitimately shrank when the co-citation
+  // fan-out was bounded. What must hold is that every linked page was checked.
+  const linked = compiled.pages.filter((p: { after?: { relatedRoutes?: string[] } }) =>
+    (p.after?.relatedRoutes ?? []).length > 0)
+  assert.equal(checked, linked.reduce((n: number, p: { after: { relatedRoutes: string[] } }) =>
+    n + p.after.relatedRoutes.length, 0), 'every link on every linked page must be checked')
+  assert.ok(linked.length > 100, `only ${linked.length} pages carry links; the corpus is not linked`)
 })
 
 test('a long vague direct answer cannot satisfy completeness', () => {
