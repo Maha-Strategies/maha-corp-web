@@ -635,6 +635,89 @@
       "crossPageNote": "A third instance of one organising principle, all three inspected: Table 10.2.1 for Bessel, Table 9.2.1 for Airy, and the interval-dependent recommendations here. In each, the choice of solution pair is settled by region and parameter conditions rather than by linear independence alone.",
       "establishes": "The Legendre equations, their singular structure, the interval-dependent recommended pairs and the Wronskian relations.",
       "boundary": "Gives equations and recommendations with conditions. It makes no accuracy claim about any implementation."
+    },
+    {
+      "sourceId": "nist-dlmf-confluent",
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "title": "DLMF Chapter 13: Confluent Hypergeometric Functions",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedFrom": "https://dlmf.nist.gov/13.2",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "13.2.1 Kummer equation and its singular structure",
+        "13.2.2 the first solution and its exceptional parameters",
+        "13.2.3 and 13.2.4 the entire form",
+        "13.2.6 the second solution",
+        "13.2.7 and 13.2.8 termination"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/confluent-hypergeometric-functions",
+          "locator": "13.2.1, 13.2.2, 13.2.3 and 13.2.4",
+          "claim": "The first solution converges everywhere yet fails to exist for a family of parameters, and an entire alternative form exists to remove exactly that failure.",
+          "supportingPassage": "13.2.1 gives Kummer equation with a regular singularity at the origin with indices zero and one minus b, and an irregular singularity of rank one at infinity. 13.2.2 gives M of a, b, z as a series converging for all complex z, entire in z and a and meromorphic in b, and states that M does not exist when b is a non-positive integer. 13.2.3 gives Olver bold M, entire in all three parameters, and 13.2.4 relates the two by a factor of the gamma function at b, except at those non-positive integers.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/confluent-hypergeometric-functions",
+          "locator": "13.2.6, 13.2.7 and 13.2.8",
+          "claim": "The second solution is branch-dependent with an asymptotic description in a stated sector, and both solutions terminate into polynomials for particular parameters.",
+          "supportingPassage": "13.2.6 states that U of a, b, z behaves like z to the minus a as z tends to infinity in the sector where the phase of z is at most three halves pi minus delta, that U has a branch point at the origin in general, and that the principal branch follows the principal value of z to the minus a. 13.2.7 states that U of minus m, b, z is a polynomial of degree m for non-negative integer m, and 13.2.8 gives the explicit polynomial form when a minus b plus one is a non-positive integer.",
+          "distinctPassage": true
+        }
+      ],
+      "crossPageNote": "Two patterns, both halves inspected on each. The exceptional-parameter structure at 13.2.2 with an entire form at 13.2.3 to remove it is the same design as the Gauss case at 15.2.1 and 15.2.2. And the singular description at 13.2.1, regular at the origin with an irregular point of rank one at infinity, is word for word the description the Bessel chapter gives at 10.2.1, which is what confluent means here.",
+      "establishes": "Kummer equation, both standard solutions, the parameters where the first fails and the entire form that removes them, and the termination cases.",
+      "boundary": "Defines solutions and structure. Everywhere-convergence is not everywhere-accuracy, and no implementation claim is made."
+    },
+    {
+      "sourceId": "nist-dlmf-exponential-integral",
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "title": "DLMF Chapter 6: Exponential, Logarithmic, Sine, and Cosine Integrals",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedFrom": "https://dlmf.nist.gov/6.2",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "6.2.1 E1 with its branch cut",
+        "6.2.3 the entire companion",
+        "6.2.4 the relation carrying Euler constant",
+        "6.2.5, 6.2.6 and 6.2.8 the principal values",
+        "6.2.9 to 6.2.12 the trigonometric integrals"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/exponential-and-logarithmic-integrals",
+          "locator": "6.2.1, 6.2.3 and 6.2.4",
+          "claim": "An entire companion carries the singular part away, leaving it in a logarithm rather than in the integral.",
+          "supportingPassage": "6.2.1 defines E1 of z as the integral of e to the minus t over t from z to infinity for non-zero z, with the path avoiding the negative real axis and a branch cut along the non-positive reals. 6.2.3 defines Ein of z as the integral of one minus e to the minus t over t from zero to z and records it as entire. 6.2.4 states that E1 of z equals Ein of z minus the logarithm of z minus Euler constant.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/exponential-and-logarithmic-integrals",
+          "locator": "6.2.5, 6.2.6, 6.2.8 and 6.2.9 to 6.2.12",
+          "claim": "Several of these are principal values rather than ordinary integrals, and the chapter marks which of the trigonometric ones are entire.",
+          "supportingPassage": "6.2.5 defines Ei of x as a principal value for positive x, and 6.2.6 states that Ei of minus x equals minus E1 of x. 6.2.8 defines li of x for x greater than one as a principal value equal to Ei of the logarithm of x. 6.2.9 gives Si as an odd entire function and 6.2.12 gives Cin as an even entire function, while 6.2.11 defines Ci as a principal value.",
+          "distinctPassage": true
+        }
+      ],
+      "crossPageNote": "A fifth instance of one design, every side inspected. A companion function exists so a singular or badly conditioned quantity can be computed directly: Ein against E1 here at 6.2.3, erfc against erf at 7.2.2, the normalized pair at 8.2.5, the regularized Gauss form at 15.2.2, and Olver entire form at 13.2.3.",
+      "notCovered": "The relation between the logarithmic integral and the prime counting function was not stated in the section read. The number-theory page gives the asymptotic law at 27.2.3 and it is tempting to join them here, so the page explicitly claims no such relation.",
+      "establishes": "The exponential, logarithmic and trigonometric integrals, their branch cuts and principal values, and which are entire.",
+      "boundary": "Definitions and singular structure. It makes no claim about approximating any counting function."
     }
   ],
   "notInspected": [
@@ -644,10 +727,10 @@
     }
   ],
   "summary": {
-    "sourcesInspected": 17,
-    "sourcesAttached": 16,
-    "routesReached": 16,
-    "claimsSupported": 32,
+    "sourcesInspected": 19,
+    "sourcesAttached": 18,
+    "routesReached": 18,
+    "claimsSupported": 36,
     "heldBack": 1,
     "sourcesInspectedNotSupporting": 1
   },

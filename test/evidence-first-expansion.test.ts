@@ -28,6 +28,8 @@ const NEW_PAGES = [
   '/knowledge/mathematics/number-theoretic-functions',
   '/knowledge/mathematics/airy-functions',
   '/knowledge/mathematics/legendre-functions',
+  '/knowledge/mathematics/confluent-hypergeometric-functions',
+  '/knowledge/mathematics/exponential-and-logarithmic-integrals',
 ]
 
 test('new pages are born supported, not added to the unsupported pile', () => {
@@ -44,7 +46,7 @@ test('growth improved the evidence-backed share rather than diluting it', () => 
   // nobody would have made the ratio worse, which is the failure mode.
   const supported = status.counts['independently-supported']
   const uninspected = status.counts['cited-but-uninspected']
-  assert.ok(supported >= 47, `supported fell to ${supported}`)
+  assert.ok(supported >= 49, `supported fell to ${supported}`)
   assert.ok(uninspected <= 98, `uninspected rose to ${uninspected}; expansion added unsupported pages`)
 })
 
@@ -117,8 +119,9 @@ test('the new concepts carry their conditions, not just their formulas', () => {
     'asymptotic-approximations', 'orthogonal-polynomials', 'riemann-zeta-function',
     'hypergeometric-function', 'incomplete-gamma-functions', 'elliptic-integrals',
     'calendrical-reconciliation', 'number-theoretic-functions', 'airy-functions',
-    'legendre-functions'].includes(c.slug))
-  assert.equal(added.length, 14)
+    'legendre-functions', 'confluent-hypergeometric-functions',
+    'exponential-and-logarithmic-integrals'].includes(c.slug))
+  assert.equal(added.length, 16)
   for (const c of added) {
     assert.ok(c.assumptions.length > 0, `${c.slug} states no conditions`)
     assert.ok(c.errorBounds.length > 0, `${c.slug} states no error behaviour`)
@@ -305,4 +308,17 @@ test('the pages the handbook was cited for are still unsupported', () => {
   assert.ok(cal, 'the page must exist')
   assert.notEqual(cal.state, 'substantial-and-evidence-backed',
     'the page must not have been converted by a source that does not support it')
+})
+
+test('a tempting connection the source did not state is refused', () => {
+  // li(x) and the prime count sit one page apart and the link is real
+  // mathematics, but the section read does not state it.
+  const src = insp.inspected.find((s: { sourceId: string }) => s.sourceId === 'nist-dlmf-exponential-integral')
+  assert.match(src.notCovered, /prime counting function was not stated/i)
+  const c = MATHEMATICAL_CONCEPTS.find((x) => x.slug === 'exponential-and-logarithmic-integrals')!
+  assert.match(c.doesNotEstablish, /states no relation here between the logarithmic integral and the prime counting function/i)
+  const page = compiled.pages.find((p: { route: string }) =>
+    p.route === '/knowledge/mathematics/exponential-and-logarithmic-integrals')
+  assert.ok(!/prime count|pi of x/i.test(JSON.stringify(page.sections).replace(/no relation[^"]*/gi, '')),
+    'the page must not assert the relation it declines to claim')
 })

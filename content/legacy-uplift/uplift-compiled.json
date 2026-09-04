@@ -3726,6 +3726,305 @@
       "upliftDigest": "sha256:32be34233b6b9b41e8dd4d16d834612d33c9481ead1bd7bf38b4efc1262771e0"
     },
     {
+      "route": "/knowledge/mathematics/exponential-and-logarithmic-integrals",
+      "family": "mathematics",
+      "slug": "exponential-and-logarithmic-integrals",
+      "eligible": true,
+      "refusals": [],
+      "before": {
+        "route": "/knowledge/mathematics/exponential-and-logarithmic-integrals",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 3,
+        "relatedRoutes": [
+          "/knowledge/mathematics/incomplete-gamma-functions",
+          "/knowledge/mathematics/number-theoretic-functions",
+          "/knowledge/mathematics/elliptic-integrals"
+        ],
+        "renderedSections": 6
+      },
+      "after": {
+        "route": "/knowledge/mathematics/exponential-and-logarithmic-integrals",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 3,
+        "relatedRoutes": [
+          "/knowledge/mathematics/incomplete-gamma-functions",
+          "/knowledge/mathematics/number-theoretic-functions",
+          "/knowledge/mathematics/elliptic-integrals"
+        ],
+        "renderedSections": 6
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "DLMF 6.2.1 defines the exponential integral E1 as the integral of e to the minus t over t from z to infinity, for non-zero z, with the path avoiding the negative real axis and a branch cut along the non-positive reals. 6.2.3 defines a companion, Ein, as the integral of one minus e to the minus t over t from zero to z, and records it as entire. The two are joined at 6.2.4: E1 equals Ein minus the logarithm of z minus Euler constant, which places the whole singular part in the logarithm rather than in the integral. 6.2.5 defines Ei as a principal value, 6.2.6 relates it to E1 on the negative axis, and 6.2.8 defines the logarithmic integral as a principal value equal to Ei of the logarithm. The sine and cosine integrals follow at 6.2.9 to 6.2.12, where Si and Cin are entire while Ci needs a principal value."
+          ],
+          "sourceIds": [
+            "nist-dlmf-exponential-integral",
+            "nist-dlmf-exponential-integral",
+            "nist-dlmf-exponential-integral"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Choose E1 or Ei by which side of the axis the argument lies on, using the relation at 6.2.6 rather than continuing one across the cut.",
+            "Where the argument is small, work through the entire companion at 6.2.3 and add the logarithmic term from 6.2.4, so the singularity is handled in closed form instead of by the quadrature.",
+            "Treat li and Ci as principal values, and do not hand their integrands to a scheme that assumes an ordinary integral."
+          ],
+          "sourceIds": [
+            "nist-dlmf-exponential-integral",
+            "nist-dlmf-exponential-integral",
+            "nist-dlmf-exponential-integral"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "E1 defined with a branch cut along the non-positive reals, DLMF 6.2.1",
+            "Ein is entire while E1 is not, DLMF 6.2.3",
+            "E1 equals Ein minus log z minus Euler constant, DLMF 6.2.4"
+          ],
+          "sourceIds": [
+            "nist-dlmf-exponential-integral",
+            "nist-dlmf-exponential-integral",
+            "nist-dlmf-exponential-integral"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "The singular behaviour near the origin sits in the logarithm by 6.2.4, so a scheme that integrates E1 directly near zero is fighting a singularity the identity already removes.",
+            "A principal value is not an ordinary integral. A quadrature that ignores the interior pole in 6.2.5 or 6.2.8 returns a number without meaning rather than an inaccurate one, as with the third elliptic kind.",
+            "The chapter gives definitions rather than algorithms and makes no accuracy claim about any evaluation.",
+            "E1 at 6.2.1 is stated for non-zero argument with the path avoiding the negative real axis, so it is branch-dependent rather than single valued.",
+            "Ei at 6.2.5 and li at 6.2.8 are principal values, which are different objects from ordinary integrals.",
+            "The relation at 6.2.4 holds with Euler constant as a stated term, so the constant is part of the definition rather than an approximation."
+          ],
+          "sourceIds": [
+            "nist-dlmf-exponential-integral",
+            "nist-dlmf-exponential-integral",
+            "nist-dlmf-exponential-integral"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "What this does not establish",
+          "items": [
+            "The chapter defines these integrals and their singular structure. It states no relation here between the logarithmic integral and the prime counting function, so none is claimed on this page."
+          ],
+          "sourceIds": [
+            "nist-dlmf-exponential-integral",
+            "nist-dlmf-exponential-integral",
+            "nist-dlmf-exponential-integral"
+          ]
+        },
+        {
+          "dimension": "related-records",
+          "heading": "Related records",
+          "items": [
+            "/knowledge/mathematics/incomplete-gamma-functions",
+            "/knowledge/mathematics/number-theoretic-functions",
+            "/knowledge/mathematics/elliptic-integrals"
+          ],
+          "sourceIds": []
+        }
+      ],
+      "sectionCount": 6,
+      "upliftDigest": "sha256:6bbee253042b8bb71c5b13fe9b22351bbeec7d2199eca57a6feb2a59e5443995"
+    },
+    {
+      "route": "/knowledge/mathematics/confluent-hypergeometric-functions",
+      "family": "mathematics",
+      "slug": "confluent-hypergeometric-functions",
+      "eligible": true,
+      "refusals": [],
+      "before": {
+        "route": "/knowledge/mathematics/confluent-hypergeometric-functions",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 4,
+        "relatedRoutes": [
+          "/knowledge/mathematics/hypergeometric-function",
+          "/knowledge/mathematics/bessel-functions",
+          "/knowledge/mathematics/airy-functions",
+          "/knowledge/mathematics/gamma-function"
+        ],
+        "renderedSections": 6
+      },
+      "after": {
+        "route": "/knowledge/mathematics/confluent-hypergeometric-functions",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 4,
+        "relatedRoutes": [
+          "/knowledge/mathematics/hypergeometric-function",
+          "/knowledge/mathematics/bessel-functions",
+          "/knowledge/mathematics/airy-functions",
+          "/knowledge/mathematics/gamma-function"
+        ],
+        "renderedSections": 6
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "DLMF 13.2.1 gives Kummer equation, with a regular singularity at the origin carrying indices zero and one minus b, and an irregular singularity of rank one at infinity. That is the same structural description the Bessel chapter gives at 10.2.1, which is what it means to call these confluent. The first solution at 13.2.2 is a series converging for all complex argument, entire in the argument and in a, and meromorphic in b, but the chapter states plainly that it does not exist when b is a non-positive integer. Olver form at 13.2.3 divides by a gamma function instead and is entire in all three parameters, with 13.2.4 relating the two by a factor of the gamma function at b. The second solution at 13.2.6 has a branch point at the origin and behaves like z to the minus a at infinity in a stated sector, and 13.2.7 and 13.2.8 give the parameter values at which the solution becomes a polynomial."
+          ],
+          "sourceIds": [
+            "nist-dlmf-confluent",
+            "nist-dlmf-confluent",
+            "nist-dlmf-confluent"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Check b against zero and the negative integers before using the first solution, and take the entire form at 13.2.3 where it fails.",
+            "Read the second solution as branch-dependent, since 13.2.6 declares a principal branch through the principal value of z to the minus a.",
+            "Where a parameter makes the solution a polynomial by 13.2.7 or 13.2.8, use that form rather than summing a series that has already terminated."
+          ],
+          "sourceIds": [
+            "nist-dlmf-confluent",
+            "nist-dlmf-confluent",
+            "nist-dlmf-confluent"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "Kummer equation with a regular singularity at the origin and an irregular one of rank one at infinity, DLMF 13.2.1",
+            "The first solution converges for all complex argument but fails to exist at non-positive integer b, DLMF 13.2.2",
+            "Olver form is entire in all three parameters, DLMF 13.2.3"
+          ],
+          "sourceIds": [
+            "nist-dlmf-confluent",
+            "nist-dlmf-confluent",
+            "nist-dlmf-confluent"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "Convergence for all argument is not accuracy at all argument. The series at 13.2.2 converges everywhere and still loses significance to cancellation for large argument, which is why the second solution carries an asymptotic description instead.",
+            "Near a non-positive integer b the first solution is ill conditioned even where it is defined, which is the practical reason for the entire form at 13.2.3, exactly as the regularized form exists in the Gauss case at 15.2.2.",
+            "The chapter states solutions and their structure and makes no accuracy claim about any implementation.",
+            "The first solution does not exist when b is a non-positive integer, which is the exception 13.2.3 exists to remove.",
+            "The relation at 13.2.4 between the two forms holds except at those same non-positive integers.",
+            "The asymptotic statement for the second solution at 13.2.6 holds in a stated sector rather than everywhere."
+          ],
+          "sourceIds": [
+            "nist-dlmf-confluent",
+            "nist-dlmf-confluent",
+            "nist-dlmf-confluent"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "What this does not establish",
+          "items": [
+            "The chapter defines the solutions, their exceptional parameters and their branch structure. It does not establish that any implementation is accurate, and everywhere-convergence is not everywhere-usable."
+          ],
+          "sourceIds": [
+            "nist-dlmf-confluent",
+            "nist-dlmf-confluent",
+            "nist-dlmf-confluent"
+          ]
+        },
+        {
+          "dimension": "related-records",
+          "heading": "Related records",
+          "items": [
+            "/knowledge/mathematics/hypergeometric-function",
+            "/knowledge/mathematics/bessel-functions",
+            "/knowledge/mathematics/airy-functions",
+            "/knowledge/mathematics/gamma-function"
+          ],
+          "sourceIds": []
+        }
+      ],
+      "sectionCount": 6,
+      "upliftDigest": "sha256:0be22b75835281e91951bb62d99d151967b4e8fca2d36a43f2189b0d135af38d"
+    },
+    {
       "route": "/knowledge/mathematics/legendre-functions",
       "family": "mathematics",
       "slug": "legendre-functions",

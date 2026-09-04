@@ -4,7 +4,7 @@
   "note": "Public. Rendered on the page it describes. Carries no audit internals.",
   "counts": {
     "cited-but-uninspected": 98,
-    "independently-supported": 47,
+    "independently-supported": 49,
     "first-party-documented": 4
   },
   "entries": [
@@ -457,6 +457,14 @@
       "doNotUseFor": "A claim you intend to act on or repeat. Follow the cited material yourself first."
     },
     {
+      "route": "/knowledge/mathematics/confluent-hypergeometric-functions",
+      "status": "independently-supported",
+      "headline": "Checked against 3 inspected sources",
+      "detail": "3 sources were retrieved, identified and read, and the claims below are tied to specific passages at the scope those passages state. Each source also records what it cannot establish.",
+      "useFor": "The specific claims that carry a cited passage, at the scope that passage states.",
+      "doNotUseFor": null
+    },
+    {
       "route": "/knowledge/mathematics/constraint-satisfaction",
       "status": "cited-but-uninspected",
       "headline": "Cites 1 source, none of which has been read",
@@ -498,6 +506,14 @@
     },
     {
       "route": "/knowledge/mathematics/error-function-and-related-integrals",
+      "status": "independently-supported",
+      "headline": "Checked against 3 inspected sources",
+      "detail": "3 sources were retrieved, identified and read, and the claims below are tied to specific passages at the scope those passages state. Each source also records what it cannot establish.",
+      "useFor": "The specific claims that carry a cited passage, at the scope that passage states.",
+      "doNotUseFor": null
+    },
+    {
+      "route": "/knowledge/mathematics/exponential-and-logarithmic-integrals",
       "status": "independently-supported",
       "headline": "Checked against 3 inspected sources",
       "detail": "3 sources were retrieved, identified and read, and the claims below are tied to specific passages at the scope those passages state. Each source also records what it cannot establish.",

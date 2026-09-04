@@ -3,13 +3,13 @@
   "auditedAt": "2026-09-03",
   "finding": "Classification and substance are different measurements. A page can carry an inspected source and explain almost nothing, and a structural page can be richly written and cite nothing checkable.",
   "wordCountUsedAsGate": false,
-  "totalAudited": 183,
-  "corpusSize": 183,
+  "totalAudited": 185,
+  "corpusSize": 185,
   "denominatorEqualsCorpus": true,
   "supersedesBatch9Audit": "Batch 9 audited 59 pages and stated a result against 167. This audits all 167.",
   "depthDistribution": {
     "structurally-substantial-but-unsupported": 84,
-    "substantial-and-evidence-backed": 47,
+    "substantial-and-evidence-backed": 49,
     "blocked": 28,
     "first-party-documented-but-thin": 9,
     "first-party-documented-and-substantial": 1,
@@ -17,9 +17,9 @@
   },
   "byGroup": {
     "independentlySupported": {
-      "audited": 47,
+      "audited": 49,
       "states": {
-        "substantial-and-evidence-backed": 47
+        "substantial-and-evidence-backed": 49
       }
     },
     "firstPartyDocumented": {
@@ -43,7 +43,7 @@
       }
     }
   },
-  "substantialAndEvidenceBacked": 47,
+  "substantialAndEvidenceBacked": 49,
   "thinnestSupported": [],
   "verdicts": [
     {
@@ -645,6 +645,54 @@
       "substantialityScore": 15.4,
       "reasons": [],
       "verdictDigest": "sha256:49ad23f0e66d8487bc977c474a0096aca3ffae0854307dbc1d73e37d60392df5"
+    },
+    {
+      "route": "/knowledge/mathematics/exponential-and-logarithmic-integrals",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 815,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 441
+      },
+      "substantialityScore": 15.9,
+      "reasons": [],
+      "verdictDigest": "sha256:0a2267a446cc12ea128f143ce66c61e3816546372b2e68091bb2efcb67b05a96"
+    },
+    {
+      "route": "/knowledge/mathematics/confluent-hypergeometric-functions",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 899,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 4,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 450
+      },
+      "substantialityScore": 16.2,
+      "reasons": [],
+      "verdictDigest": "sha256:180410bcda44d784fd639611edac22f0d1b2f274c9f0b6716813a8afa663546f"
     },
     {
       "route": "/knowledge/mathematics/legendre-functions",
@@ -4569,5 +4617,5 @@
     }
   ],
   "boundary": "A private audit. It changes no page.",
-  "auditDigest": "sha256:cb05ed0601b91d7dbea2ac36aa700a633fc73f09e215d01e7721cd183fc9904d"
+  "auditDigest": "sha256:ae1001dd480b2b0472bf25e31e012415985a9a689f68a747277215fd1b286550"
 }
