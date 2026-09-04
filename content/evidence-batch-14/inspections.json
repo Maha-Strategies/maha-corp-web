@@ -83,6 +83,124 @@
       ],
       "establishes": "Integral definitions for the error function, its complement, the Dawson integral and the Fresnel integrals, with the identity relating erf and erfc.",
       "boundary": "Defines the functions and their relations. It does not establish the accuracy of any implementation, and no statistical interpretation follows from a definition."
+    },
+    {
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "sourceId": "nist-dlmf-bessel",
+      "title": "DLMF Chapter 10: Bessel Functions",
+      "retrievedFrom": "https://dlmf.nist.gov/10.2",
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for Chapters 5 and 7.",
+      "exactLocators": [
+        "10.2.1 the differential equation and its singularity structure",
+        "10.2.2 the first-kind series",
+        "10.2.3 and 10.2.4 the second-kind solution",
+        "Table 10.2.1 numerically satisfactory pairs"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/bessel-functions",
+          "locator": "10.2.1 and 10.2.2",
+          "claim": "The equation has a stated singularity structure, and its first-kind solution is a series whose coefficients are gamma values.",
+          "supportingPassage": "10.2.1 states the equation as z squared w double prime plus z w prime plus the quantity z squared minus nu squared times w equals zero, and records that it has a regular singularity at z equals zero with indices plus and minus nu and an irregular singularity of rank one at infinity. 10.2.2 gives the first-kind solution as a power series in which the k-th coefficient divides by the gamma function at nu plus k plus one, and notes it is analytic except for a branch point at the origin when nu is not an integer.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/bessel-functions",
+          "locator": "10.2.3, 10.2.4 and Table 10.2.1",
+          "claim": "The second solution is constructed from the first and degenerates at integer order, and choosing a pair is a question of region rather than of independence alone.",
+          "supportingPassage": "10.2.3 builds the second-kind solution from first-kind solutions of order plus and minus nu, divided by sine of nu pi. 10.2.4 supplies the limiting form at integer order where that construction degenerates. The chapter records that the second-kind solution has a branch point at the origin whether or not nu is an integer, with a cut along the negative reals, and Table 10.2.1 tabulates which pairs are numerically satisfactory in which region.",
+          "distinctPassage": true
+        }
+      ],
+      "establishes": "The Bessel equation, its singularity structure, both standard solutions, and which pairs are numerically satisfactory by region.",
+      "boundary": "States the solutions and their analytic structure. It does not select a pair for a given computation, and makes no accuracy claim about any implementation."
+    },
+    {
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "sourceId": "nist-dlmf-bernoulli",
+      "title": "DLMF Chapter 24: Bernoulli and Euler Polynomials",
+      "retrievedFrom": "https://dlmf.nist.gov/24.2",
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for Chapters 5, 7 and 10.",
+      "exactLocators": [
+        "24.2.1 Bernoulli generating function",
+        "24.2.2 vanishing and sign rules",
+        "24.2.3 and 24.2.4 the polynomials",
+        "24.2.6 Euler generating function"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/bernoulli-and-euler-numbers",
+          "locator": "24.2.1, 24.2.3 and 24.2.4",
+          "claim": "The Bernoulli numbers and polynomials are defined by generating functions that converge only inside a stated disk.",
+          "supportingPassage": "24.2.1 defines the Bernoulli numbers by t over the quantity e to the t minus one, expanded as a sum of B sub n times t to the n over n factorial, stated to converge for the modulus of t less than two pi. 24.2.3 gives the polynomials from the same expression multiplied by e to the x t in the same disk, and 24.2.4 records that B sub n equals B sub n of zero.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/bernoulli-and-euler-numbers",
+          "locator": "24.2.2, 24.2.6 and 24.2.7",
+          "claim": "Odd-indexed coefficients vanish apart from one exception, and the Euler generating function converges in a strictly smaller disk than the Bernoulli one.",
+          "supportingPassage": "24.2.2 states that odd-indexed Bernoulli numbers vanish apart from the first, and that the even ones alternate in sign with minus one to the n plus one times B sub two n positive for n at least one. 24.2.6 defines the Euler numbers by two e to the t over the quantity e to the two t plus one, converging only for the modulus of t less than pi over two, and 24.2.7 states that odd-indexed Euler numbers vanish.",
+          "distinctPassage": true
+        }
+      ],
+      "crossPageNote": "The vanishing rule at 24.2.2 explains a feature of the gamma page: the Stirling expansion at 5.11.1 is indexed by even numbers because the odd Bernoulli coefficients are zero. Both halves of that observation are inspected.",
+      "establishes": "Generating-function definitions with their convergence radii, and the vanishing and sign rules for odd and even indices.",
+      "boundary": "Defines the coefficients inside stated disks. It makes no claim about the numerical stability of any recurrence used to generate them."
+    },
+    {
+      "sourceId": "nasa-asteroseismology",
+      "domain": "astronomy",
+      "class": "government-or-standards-authority",
+      "title": "Asteroseismology Using The Galactic Bulge Time Domain Survey",
+      "venue": "NASA Science",
+      "identifier": "science.nasa.gov Roman Space Telescope survey description",
+      "retrievedFrom": "https://science.nasa.gov/mission/roman-space-telescope/asteroseismology-using-the-galactic-bulge-time-domain-survey/",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Publisher and page title confirmed on retrieval.",
+      "versionRelationship": "Retrieved 2026-09-04",
+      "rightsBasis": "United States government agency publication, publicly readable. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "What the survey measures",
+        "Properties measured for tens of thousands of stars",
+        "The saturation constraint"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/astronomy/asteroseismology-and-stellar-interiors",
+          "locator": "What the survey measures",
+          "claim": "The observable is a long, regularly sampled photometric series, from which an oscillation frequency pattern is characterised.",
+          "supportingPassage": "NASA states that the approach relies on precise, regularly sampled, long-duration photometric observations to characterise the oscillation frequency pattern of evolved red giants, which it describes as high-amplitude non-radial oscillators.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/astronomy/asteroseismology-and-stellar-interiors",
+          "locator": "Properties measured; the saturation constraint",
+          "claim": "Masses, radii and ages are inferred only in combination with separately measured metallicity and temperature, and saturation remains an open constraint.",
+          "supportingPassage": "NASA states that masses, radii and ages have been measured for tens of thousands of stars using asteroseismic data combined with stellar metallicity and effective temperature. It also states that saturation will be important for red clump stars in the Galactic bulge, and describes an improved asteroseismic detection model including the effect of saturation as work to be developed.",
+          "distinctPassage": true
+        }
+      ],
+      "notCovered": "The page does not explain why the oscillations occur, and gives no frequencies, amplitudes or precision figures. The page built on it therefore records the driving mechanism as unestablished and makes no numerical accuracy claim.",
+      "establishes": "The asteroseismic observable, the properties inferred from it in combination with other measurements, and the saturation constraint the survey still faces.",
+      "boundary": "A mission survey description. It establishes the method's inputs and outputs, not the physics behind them or any precision figure."
     }
   ],
   "notInspected": [
@@ -92,13 +210,13 @@
     }
   ],
   "summary": {
-    "sourcesInspected": 3,
-    "sourcesAttached": 2,
-    "routesReached": 2,
-    "claimsSupported": 4,
+    "sourcesInspected": 6,
+    "sourcesAttached": 5,
+    "routesReached": 5,
+    "claimsSupported": 10,
     "heldBack": 1
   },
-  "boundary": "Three sources inspected at section level; two attached. The astronomy source is recorded, inspected and unattached, because attaching it would move a frozen release-governance digest.",
+  "boundary": "Six sources inspected at section level; five attached across mathematics and astronomy. The sixth is recorded, inspected and unattached, because attaching it would move a frozen release-governance digest.",
   "heldBack": [
     {
       "sourceId": "nasa-exoplanet-methods",

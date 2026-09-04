@@ -63,7 +63,15 @@ for (const a of ASTRONOMY_ARTICLES as unknown as Any[]) {
     assumptions: arr(a.assumptions),
     sources: (pick(ASTRONOMY_SOURCES as unknown as Any[], arr(a.sourceIds)) as Any[]).map(asSource),
     bridges: [], comparisons: [],
-    relatedRoutes: arr(a.relatedSlugs).map((s) => `/knowledge/astronomy/${s}`),
+    // Astronomy declares its relationships as relatedArticleIds, not
+    // relatedSlugs. Reading the wrong field silently dropped all 71 declared
+    // relationships across all 24 articles, leaving the family to fall back on
+    // co-citation. The ids carry an `astronomy-` prefix; all 71 resolve once it
+    // is stripped, and an id that does not resolve yields no link.
+    relatedRoutes: arr(a.relatedArticleIds)
+      .map((id) => id.replace(/^astronomy-/, ''))
+      .filter((slug) => slug.length > 0)
+      .map((slug) => `/knowledge/astronomy/${slug}`),
     canonicalRelease: null,
   })
 }

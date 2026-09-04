@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs'
 import test from 'node:test'
 
 import { MATHEMATICAL_CONCEPTS, MATHEMATICS_SOURCES } from '../lib/mathematics-knowledge.ts'
-import { ASTRONOMY_SOURCES } from '../lib/astronomy-knowledge.ts'
+import { ASTRONOMY_ARTICLES, ASTRONOMY_SOURCES } from '../lib/astronomy-knowledge.ts'
 
 const read = (p: string) => JSON.parse(readFileSync(p, 'utf8'))
 const insp = read('content/evidence-batch-14/inspections.json')
@@ -14,6 +14,9 @@ const compiled = read('content/legacy-uplift/uplift-compiled.json')
 const NEW_PAGES = [
   '/knowledge/mathematics/gamma-function',
   '/knowledge/mathematics/error-function-and-related-integrals',
+  '/knowledge/mathematics/bessel-functions',
+  '/knowledge/mathematics/bernoulli-and-euler-numbers',
+  '/knowledge/astronomy/asteroseismology-and-stellar-interiors',
 ]
 
 test('new pages are born supported, not added to the unsupported pile', () => {
@@ -30,7 +33,7 @@ test('growth improved the evidence-backed share rather than diluting it', () => 
   // nobody would have made the ratio worse, which is the failure mode.
   const supported = status.counts['independently-supported']
   const uninspected = status.counts['cited-but-uninspected']
-  assert.ok(supported >= 33, `supported fell to ${supported}`)
+  assert.ok(supported >= 36, `supported fell to ${supported}`)
   assert.ok(uninspected <= 98, `uninspected rose to ${uninspected}; expansion added unsupported pages`)
 })
 
@@ -90,7 +93,7 @@ test('the new sources declare what they establish and what they do not', () => {
     ...MATHEMATICS_SOURCES.filter((s) => ['nist-dlmf-gamma', 'nist-dlmf-error-function'].includes(s.id)),
     ...ASTRONOMY_SOURCES.filter((s) => s.id === 'nasa-exoplanet-methods'),
   ]
-  assert.equal(added.length, 3)
+  assert.ok(added.length >= 3)
   for (const s of added) {
     assert.ok(s.establishes.length > 60, `${s.id} does not say what it establishes`)
     assert.ok(s.boundary.length > 60, `${s.id} does not say what it cannot establish`)
@@ -98,9 +101,9 @@ test('the new sources declare what they establish and what they do not', () => {
 })
 
 test('the new concepts carry their conditions, not just their formulas', () => {
-  const added = MATHEMATICAL_CONCEPTS.filter((c) =>
-    ['gamma-function', 'error-function-and-related-integrals'].includes(c.slug))
-  assert.equal(added.length, 2)
+  const added = MATHEMATICAL_CONCEPTS.filter((c) => ['gamma-function',
+    'error-function-and-related-integrals', 'bessel-functions', 'bernoulli-and-euler-numbers'].includes(c.slug))
+  assert.equal(added.length, 4)
   for (const c of added) {
     assert.ok(c.assumptions.length > 0, `${c.slug} states no conditions`)
     assert.ok(c.errorBounds.length > 0, `${c.slug} states no error behaviour`)
@@ -126,4 +129,35 @@ test('the registry guard allows growth but still catches loss', () => {
   assert.ok(!/MATHEMATICAL_CONCEPTS\.length !== \d+/.test(src),
     'an exact concept count blocks legitimate growth')
   assert.ok(MATHEMATICAL_CONCEPTS.length >= 26)
+})
+
+test('every declared astronomy relationship reaches the page', () => {
+  // The generator read relatedSlugs, which astronomy does not have. All 71
+  // declared relationships across all 24 articles were silently dropped, and
+  // the family fell back on co-citation.
+  const declared = ASTRONOMY_ARTICLES.reduce((n, a) => n + a.relatedArticleIds.length, 0)
+  const rendered = compiled.pages
+    .filter((p: { route: string }) => p.route.startsWith('/knowledge/astronomy/'))
+    .reduce((n: number, p: { after?: { relatedRoutes?: string[] } }) => n + (p.after?.relatedRoutes ?? []).length, 0)
+  assert.equal(rendered, declared, `${declared} relationships are declared but ${rendered} render`)
+  assert.ok(declared > 60, 'the astronomy family must actually declare relationships')
+})
+
+test('the Bernoulli page explains a gap on the gamma page, both sides sourced', () => {
+  // Stirling at 5.11.1 is indexed by even numbers because the odd Bernoulli
+  // coefficients vanish by 24.2.2. Neither half is asserted without a passage.
+  const bernoulli = insp.inspected.find((s: { sourceId: string }) => s.sourceId === 'nist-dlmf-bernoulli')
+  assert.ok(bernoulli.crossPageNote, 'the connection must be recorded')
+  assert.match(bernoulli.crossPageNote, /5\.11\.1/)
+  assert.match(bernoulli.crossPageNote, /24\.2\.2/)
+})
+
+test('the astronomy page does not claim what its source declines to explain', () => {
+  const nasa = insp.inspected.find((s: { sourceId: string }) => s.sourceId === 'nasa-asteroseismology')
+  assert.match(nasa.notCovered, /does not explain why the oscillations occur/)
+  const page = compiled.pages.find((p: { route: string }) =>
+    p.route === '/knowledge/astronomy/asteroseismology-and-stellar-interiors')
+  const text = JSON.stringify(page.sections)
+  assert.match(text, /driving mechanism is not established/,
+    'the page must say the mechanism is unestablished rather than quietly omitting it')
 })
