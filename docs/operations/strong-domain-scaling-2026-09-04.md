@@ -42,13 +42,14 @@ open-source research throughput.
 | Tiruvāymoḻi passage atlas | 20 | 2 | 100 |
 | Astrology bounded-answer graph | 36 | 2 | 144 |
 | Tamil religion source atlas | 48 | 2 | 192 |
-| **Total** | **135** | **10** | **591** |
+| Astrology workflow protocols | 36 | 2 | — |
+| **Total** | **171** | **12** | **591** |
 
-The tranche therefore prepares **145 crawlable surfaces** in one local batch.
+The tranche therefore prepares **183 crawlable surfaces** in one local batch.
 The last directly verified Production count was 793. PR 400 subsequently added
 two static mathematics routes, so 795 is a derived—not freshly observed—current
-count. A single clean deployment would project 940 routes and a remaining gap
-of 60. Only a post-deployment crawl may turn that projection into an
+count. A single clean deployment would project 978 routes and a remaining gap
+of 22. Only a post-deployment crawl may turn that projection into an
 observation.
 
 ## Tamil religion source-atlas contract
@@ -88,6 +89,28 @@ Calculation reproducibility, tradition documentation, and empirical validation
 remain separate. The graph provides no personalized prediction, medical or
 legal advice, investment advice, or guarantee.
 
+## Astrology workflow infrastructure
+
+The second astrology tranche adds thirty-six operational routes: twelve input
+and reference-frame workflows, ten deterministic calculation and uncertainty
+workflows, eight prospective evaluation and falsifiability protocols, and six
+tradition-comparison decision maps. The workflow hub and digest-bound registry
+bring the tranche to thirty-eight crawlable surfaces.
+
+These routes do not repeat the explanatory answer graph. Every workflow names
+at least four required inputs, four ordered operations, three outputs, three
+refusal conditions, three completion criteria, and two existing authority
+contracts. The ten calculation workflows additionally publish inputs, units,
+assumptions, outputs, uncertainty, and a receipt digest; the verifier recomputes
+both the result and digest rather than trusting either field.
+
+The evaluation routes define preregistration, fixed outcomes and horizons,
+temporal splits, blinding, ordinary baselines, abstention-aware scoring,
+multiplicity control, and null/adverse/replication reporting. They do not claim
+that any existing astrological rule has passed those protocols. Comparison maps
+preserve parallel definitions and tradition namespaces rather than producing a
+blended chart or post-hoc winner.
+
 ## Tiruvāymoḻi contract
 
 The atlas covers twenty consecutive complete units from pāsurams 2791–3012.
@@ -103,9 +126,9 @@ the whole Tiruvāymoḻi.
 
 ## Next tranche after review
 
-The next tranche should allocate the remaining 60 routes only after Claude's
+The next tranche should allocate the remaining 22 routes only after Claude's
 mathematics and astronomy work is reconciled, so the final count does not
-duplicate concurrent pages. Likely capacity is the next Tiruvāymoḻi range,
-additional DLMF methods, and uncovered astrology infrastructure questions. The
-release remains batched: no Vercel build or deployment is authorized by this
-report.
+duplicate concurrent pages. Likely capacity is one tightly bounded religion,
+mathematics, or astronomy cluster rather than aliases or parameter variants.
+The release remains batched: no Vercel build or deployment is authorized by
+this report.

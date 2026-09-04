@@ -13,6 +13,7 @@ import {
   astrologyAnswerPath,
 } from '@/lib/astrology-answer-graph'
 import { ASTROLOGY_PATH } from '@/lib/astrology-traditions'
+import { ASTROLOGY_WORKFLOW_PATH, ASTROLOGY_WORKFLOW_PROTOCOLS } from '@/lib/astrology-workflow-protocols'
 import { SITE_URL } from '@/lib/briefs-data'
 
 export const metadata: Metadata = {
@@ -69,6 +70,8 @@ export default function AstrologyQuestionsPage() {
           <h2 className="font-mono text-[10px] uppercase tracking-widest text-rose-300">Answer boundary</h2>
           <p className="mt-3 max-w-4xl text-sm leading-7 text-zinc-300">This graph explains methods and records what named traditions hold. It does not provide a personalized reading, medical advice, legal advice, investment advice, or evidence that an astrological interpretation predicts an outcome.</p>
         </section>
+
+        <Link href={ASTROLOGY_WORKFLOW_PATH} className="mt-8 block border border-cyan-800/70 bg-cyan-950/10 p-6 hover:border-cyan-500"><p className="font-mono text-[9px] uppercase tracking-widest text-cyan-300">From answer to operation · {ASTROLOGY_WORKFLOW_PROTOCOLS.length} protocols</p><h2 className="mt-3 text-xl font-semibold text-white">Use a worked workflow when explanation is not enough</h2><p className="mt-2 max-w-4xl text-sm leading-7 text-zinc-400">The protocol layer adds inputs, ordered execution, outputs, refusal conditions, completion tests, and deterministic receipts without repeating these explanatory answers.</p></Link>
 
         {ASTROLOGY_ANSWER_CATEGORIES.map((category) => {
           const answers = ASTROLOGY_ANSWERS.filter((answer) => answer.category === category)

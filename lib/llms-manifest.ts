@@ -14,6 +14,7 @@ import { TAMIL_CLASSICAL_PATH, TAMIL_CLASSICAL_REGISTRY_PATH, TAMIL_CLASSICAL_TO
 import { TIRUVAYMOLI_ATLAS_PATH, TIRUVAYMOLI_ATLAS_REGISTRY_PATH, TIRUVAYMOLI_ATLAS_TOPICS, tiruvaymoliAtlasTopicPath } from './tiruvaymoli-passage-atlas.ts'
 import { TAMIL_SOURCE_ATLAS_PATH, TAMIL_SOURCE_ATLAS_REGISTRY_PATH, TAMIL_SOURCE_ATLAS_TOPICS, tamilSourceAtlasTopicPath } from './tamil-source-atlas.ts'
 import { ASTROLOGY_ANSWER_GRAPH_PATH, ASTROLOGY_ANSWER_GRAPH_REGISTRY_PATH, ASTROLOGY_ANSWERS, astrologyAnswerPath } from './astrology-answer-graph.ts'
+import { ASTROLOGY_WORKFLOW_PATH, ASTROLOGY_WORKFLOW_PROTOCOLS, ASTROLOGY_WORKFLOW_REGISTRY_PATH, astrologyWorkflowPath } from './astrology-workflow-protocols.ts'
 
 const RESEARCH_URL = 'https://research.mahastrategies.com'
 
@@ -95,6 +96,9 @@ export function buildLlmsManifest(
     `- Astrology bounded-answer graph: https://www.mahastrategies.com${ASTROLOGY_ANSWER_GRAPH_PATH}`,
     `- Astrology machine-readable answer registry: https://www.mahastrategies.com${ASTROLOGY_ANSWER_GRAPH_REGISTRY_PATH}`,
     ...ASTROLOGY_ANSWERS.map((answer) => `- Astrology method answer — ${answer.question}: https://www.mahastrategies.com${astrologyAnswerPath(answer)}`),
+    `- Astrology workflow protocols: https://www.mahastrategies.com${ASTROLOGY_WORKFLOW_PATH}`,
+    `- Astrology workflow registry: https://www.mahastrategies.com${ASTROLOGY_WORKFLOW_REGISTRY_PATH}`,
+    ...ASTROLOGY_WORKFLOW_PROTOCOLS.map((workflow) => `- Worked astrology protocol — ${workflow.title}: https://www.mahastrategies.com${astrologyWorkflowPath(workflow)}`),
     '',
     '## Canonical epistemic records',
     ...(canonicalEpistemicRecords.length > 0

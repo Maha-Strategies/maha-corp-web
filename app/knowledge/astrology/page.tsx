@@ -22,6 +22,7 @@ import { CALCULATION_REFERENCE_PATH, CALCULATION_REFERENCES } from '@/lib/celest
 import { TIMING_REFERENCE_PATH, TIMING_REFERENCES } from '@/lib/celestial-timing-references'
 import { CORPORATE_MUNDANE_PATH, CORPORATE_MUNDANE_REFERENCES } from '@/lib/corporate-mundane-references'
 import { ASTROLOGY_ANSWER_GRAPH_PATH, ASTROLOGY_ANSWERS } from '@/lib/astrology-answer-graph'
+import { ASTROLOGY_WORKFLOW_PATH, ASTROLOGY_WORKFLOW_PROTOCOLS } from '@/lib/astrology-workflow-protocols'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -89,6 +90,11 @@ export default function AstrologyTraditionsPage() {
             <p className="font-mono text-[9px] uppercase tracking-widest text-violet-300">Cross-family answer graph · {ASTROLOGY_ANSWERS.length} questions</p>
             <h3 className="mt-3 text-lg font-semibold text-white">Route a question to the right kind of authority</h3>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-400">Practical answers connect calculation, timing, coordinate frames, interpretive traditions, and empirical testing while preserving the boundary between them.</p>
+          </Link>
+          <Link href={ASTROLOGY_WORKFLOW_PATH} className="mt-4 block border border-cyan-800/70 bg-cyan-950/10 p-5 hover:border-cyan-500">
+            <p className="font-mono text-[9px] uppercase tracking-widest text-cyan-300">Operational layer · {ASTROLOGY_WORKFLOW_PROTOCOLS.length} worked protocols</p>
+            <h3 className="mt-3 text-lg font-semibold text-white">Execute inputs, calculations, evaluation, and comparison without hidden defaults</h3>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-400">Each protocol names required inputs, ordered operations, emitted artifacts, refusal conditions, completion tests, and—where applicable—a recomputable calculation receipt.</p>
           </Link>
         </section>
 
