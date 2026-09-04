@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { TrackedLink } from '@/components/ConversionTracker'
 import EvidenceAuditScopeForm from '@/components/EvidenceAuditScopeForm'
+import { EVIDENCE_WORKFLOW_PATH } from '@/lib/evidence-workflow-examples'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 
@@ -122,6 +123,7 @@ export default function EvidenceAuditPage() {
             <Link href="/audit" className="evidence-link">Try the free auditor ↗</Link>
             <Link href="/mps" className="evidence-link">Read MPS/0.1 ↗</Link>
             <Link href="/mps/preflight/example" className="evidence-link">See a sample report ↗</Link>
+            <Link href={EVIDENCE_WORKFLOW_PATH} className="evidence-link">Work through evidence-to-delivery examples ↗</Link>
           </div>
         </section>
       </div>

@@ -17,6 +17,7 @@ import { CORPORATE_MUNDANE_PATH, CORPORATE_MUNDANE_REFERENCES, CORPORATE_MUNDANE
 import { TROPICAL_SIDEREAL_COMPARISON_PATH, TROPICAL_SIDEREAL_COMPARISON_RELEASE_DATE, TROPICAL_SIDEREAL_COMPARISONS, tropicalSiderealComparisonPath } from '@/lib/tropical-sidereal-comparisons'
 import { ASTROLOGY_ANSWER_GRAPH_DATE, ASTROLOGY_ANSWER_GRAPH_PATH, ASTROLOGY_ANSWER_GRAPH_REGISTRY_PATH, ASTROLOGY_ANSWERS, astrologyAnswerPath } from '@/lib/astrology-answer-graph'
 import { ASTROLOGY_WORKFLOW_DATE, ASTROLOGY_WORKFLOW_PATH, ASTROLOGY_WORKFLOW_PROTOCOLS, ASTROLOGY_WORKFLOW_REGISTRY_PATH, astrologyWorkflowPath } from '@/lib/astrology-workflow-protocols'
+import { EVIDENCE_WORKFLOW_DATE, EVIDENCE_WORKFLOW_EXAMPLES, EVIDENCE_WORKFLOW_PATH, EVIDENCE_WORKFLOW_REGISTRY_PATH, evidenceWorkflowPath } from '@/lib/evidence-workflow-examples'
 import { MATHEMATICAL_CONCEPTS, MATHEMATICS_KNOWLEDGE_PATH, MATHEMATICS_KNOWLEDGE_RELEASE_DATE, mathematicsConceptPath } from '@/lib/mathematics-knowledge'
 import { RELIGION_COMPARISONS, RELIGION_COMPARISONS_PATH, RELIGION_CONCEPTS, RELIGION_KNOWLEDGE_PATH, RELIGION_KNOWLEDGE_RELEASE_DATE, religionComparisonPath, religionConceptPath } from '@/lib/religion-knowledge'
 import { MAYON_KNOWLEDGE_DATE, MAYON_KNOWLEDGE_PATH } from '@/lib/mayon-knowledge'
@@ -134,6 +135,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...ASTROLOGY_WORKFLOW_PROTOCOLS.map((workflow) => ({
       url: `${baseUrl}${astrologyWorkflowPath(workflow)}`,
       lastModified: new Date(ASTROLOGY_WORKFLOW_DATE),
+    })),
+    { url: `${baseUrl}${EVIDENCE_WORKFLOW_PATH}`, lastModified: new Date(EVIDENCE_WORKFLOW_DATE) },
+    { url: `${baseUrl}${EVIDENCE_WORKFLOW_REGISTRY_PATH}`, lastModified: new Date(EVIDENCE_WORKFLOW_DATE) },
+    ...EVIDENCE_WORKFLOW_EXAMPLES.map((workflow) => ({
+      url: `${baseUrl}${evidenceWorkflowPath(workflow)}`,
+      lastModified: new Date(EVIDENCE_WORKFLOW_DATE),
     })),
     { url: `${baseUrl}/knowledge/muhurta`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
     { url: `${baseUrl}/knowledge/birth`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },

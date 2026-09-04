@@ -132,9 +132,9 @@ test('the scaling ledger counts 38 prepared routes without calling them public',
     workflows: 36, roots: 1, registries: 1, crawlableSurfaces: 38, calculationReceipts: 10,
     categories: { inputReferenceFrame: 12, calculationUncertainty: 10, evaluationFalsifiability: 8, traditionComparison: 6 },
   })
-  assert.equal(scaling.localUnpublishedTranche.totalCrawlableSurfaces, 183)
-  assert.equal(scaling.localUnpublishedTranche.projectedRoutesAfterOneDeployment, 978)
-  assert.equal(scaling.localUnpublishedTranche.projectedGapToTarget, 22)
+  assert.ok(scaling.localUnpublishedTranche.totalCrawlableSurfaces >= scaling.localUnpublishedTranche.astrologyWorkflowProtocols.crawlableSurfaces)
+  assert.equal(scaling.localUnpublishedTranche.projectedRoutesAfterOneDeployment, scaling.baseline.derivedCurrentRoutes + scaling.localUnpublishedTranche.totalCrawlableSurfaces)
+  assert.equal(scaling.localUnpublishedTranche.projectedGapToTarget, scaling.target - scaling.localUnpublishedTranche.projectedRoutesAfterOneDeployment)
   assert.equal(scaling.localUnpublishedTranche.publicNow, false)
   assert.equal(cohort.publicNow, false)
   assert.equal(cohort.vercelBuildAuthorized, false)

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import EvidencePreflightForm from './EvidencePreflightForm'
+import { EVIDENCE_WORKFLOW_PATH } from '@/lib/evidence-workflow-examples'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 const PATH = '/tools/evidence-preflight'
@@ -69,9 +70,8 @@ export default function EvidencePreflightPage() {
           </div>
         </section>
 
-        <section className="evidence-section"><p className="evidence-copy text-sm">Continue with the <Link href="/mps" className="evidence-link">Maha Provenance Standard</Link>, compare the existing <Link href="/audit" className="evidence-link">AI-assisted passage auditor</Link>, or return to <Link href="/tools" className="evidence-link">all self-service tools</Link>.</p></section>
+        <section className="evidence-section"><p className="evidence-copy text-sm">Continue with the <Link href={EVIDENCE_WORKFLOW_PATH} className="evidence-link">worked evidence workflows</Link>, read the <Link href="/mps" className="evidence-link">Maha Provenance Standard</Link>, compare the existing <Link href="/audit" className="evidence-link">AI-assisted passage auditor</Link>, or return to <Link href="/tools" className="evidence-link">all self-service tools</Link>.</p></section>
       </div>
     </main>
   )
 }
-

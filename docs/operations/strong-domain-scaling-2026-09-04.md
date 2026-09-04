@@ -43,14 +43,32 @@ open-source research throughput.
 | Astrology bounded-answer graph | 36 | 2 | 144 |
 | Tamil religion source atlas | 48 | 2 | 192 |
 | Astrology workflow protocols | 36 | 2 | — |
-| **Total** | **171** | **12** | **591** |
+| Evidence workflows | 20 | 2 | — |
+| **Total** | **191** | **14** | **591** |
 
-The tranche therefore prepares **183 crawlable surfaces** in one local batch.
+The tranche therefore prepares **205 crawlable surfaces** in one local batch.
 The last directly verified Production count was 793. PR 400 subsequently added
 two static mathematics routes, so 795 is a derived—not freshly observed—current
-count. A single clean deployment would project 978 routes and a remaining gap
-of 22. Only a post-deployment crawl may turn that projection into an
-observation.
+count. A single clean deployment would project **1,000 routes** and a remaining
+prepared gap of zero. This is still a projection: only a post-deployment crawl
+may turn it into an observation.
+
+## Evidence workflow commercial bridge
+
+The final twenty-two routes comprise eight public Evidence Preflight examples,
+six Evidence Dossier and calculation-receipt examples, six governed MCP
+retrieval and release-flow guides, one commercial-use hub, and one
+machine-readable registry. All example inputs are synthetic and every route
+names its refusal conditions, verification checks, evidence boundary, and
+actual commercial state.
+
+The commercial ladder remains exact. The deterministic three-claim Evidence
+Preflight is available free. The proposed bounded Evidence Dossier is
+informational at $250 and purchase remains disabled. The $1,250/month developer
+evidence-retrieval plan is a defined contract whose runtime remains private; it
+is available only through a scoped engagement, not as a public callable API.
+No example grants release authority, entitlement, payment authority, or access
+to a private corpus.
 
 ## Tamil religion source-atlas contract
 

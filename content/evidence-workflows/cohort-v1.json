@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "maha-evidence-workflow-cohort/1.0",
+  "preparedOn": "2026-09-04",
+  "frozen": true,
+  "publicNow": false,
+  "vercelBuildAuthorized": false,
+  "syntheticOnly": true,
+  "purchaseEnabled": false,
+  "categories": {
+    "evidence-preflight": 8,
+    "dossier-calculation-receipt": 6,
+    "mcp-release-flow": 6
+  },
+  "exampleSlugs": [
+    "doi-with-exact-locator",
+    "public-url-with-authorized-excerpt",
+    "metadata-only-source",
+    "unsupported-causal-inference",
+    "source-identity-mismatch",
+    "incomplete-locator",
+    "rights-and-access-uncertain",
+    "three-claim-mixed-preflight",
+    "verify-jsonld-evidence-package",
+    "detect-manifest-tampering",
+    "recompute-calculation-receipt",
+    "preserve-absent-calculation",
+    "derive-pdf-after-verification",
+    "bind-runtime-witness-to-dossier",
+    "discover-before-requesting",
+    "bind-machine-identity-to-entitlement",
+    "retrieve-exact-released-revision",
+    "refuse-stale-or-substituted-selector",
+    "meter-and-replay-safely",
+    "acknowledge-digest-bound-delivery"
+  ]
+}

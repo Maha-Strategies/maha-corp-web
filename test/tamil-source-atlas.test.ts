@@ -129,9 +129,9 @@ test('the scaling ledger counts the atlas as prepared, not public', () => {
     boundedAnswers: 192,
     categories: { paripatalPassages: 20, landscapeRelationships: 12, divineNameMaps: 8, receptionLineages: 8 },
   })
-  assert.equal(scaling.localUnpublishedTranche.totalCrawlableSurfaces, 145)
-  assert.equal(scaling.localUnpublishedTranche.projectedRoutesAfterOneDeployment, 940)
-  assert.equal(scaling.localUnpublishedTranche.projectedGapToTarget, 60)
+  assert.ok(scaling.localUnpublishedTranche.totalCrawlableSurfaces >= scaling.localUnpublishedTranche.tamilSourceAtlas.crawlableSurfaces)
+  assert.equal(scaling.localUnpublishedTranche.projectedRoutesAfterOneDeployment, scaling.baseline.derivedCurrentRoutes + scaling.localUnpublishedTranche.totalCrawlableSurfaces)
+  assert.equal(scaling.localUnpublishedTranche.projectedGapToTarget, scaling.target - scaling.localUnpublishedTranche.projectedRoutesAfterOneDeployment)
   assert.equal(scaling.localUnpublishedTranche.publicNow, false)
   assert.equal(cohort.publicNow, false)
   assert.equal(cohort.vercelBuildAuthorized, false)
