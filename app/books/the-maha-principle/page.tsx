@@ -13,7 +13,10 @@ export default function TheMahaPrinciplePage() {
       <p className="mt-4">
         This book edition is currently offline for updates and will return shortly.
       </p>
-      <Link href="/books" className="mt-6 text-sm underline">
+      <Link href="/books/the-maha-principle/reader-faq" className="mt-6 text-sm underline">
+        Read the new reader FAQ →
+      </Link>
+      <Link href="/books" className="mt-4 text-sm underline">
         ← Return to All Books
       </Link>
     </main>

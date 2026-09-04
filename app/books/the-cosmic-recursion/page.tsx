@@ -65,7 +65,10 @@ export default function TheCosmicRecursionHub() {
           <p className="text-base leading-relaxed text-[var(--text-secondary)] sm:text-lg">Across eleven chapters and three appendices, the book follows information through cosmic backgrounds, thermodynamic erasure, stellar foundries, pulsars, black holes, dark matter, galactic mergers, sparse inference, and the far future. Its empirical, inferred, and analogical registers remain explicitly separated.</p>
         </section>
 
-        <Link href="/books/the-cosmic-recursion/read" className="evidence-action evidence-action--primary mt-10 inline-block">Choose a chapter ↗</Link>
+        <div className="mt-10 flex flex-wrap gap-3">
+          <Link href="/books/the-cosmic-recursion/read" className="evidence-action evidence-action--primary">Choose a chapter ↗</Link>
+          <Link href="/books/the-cosmic-recursion/reader-faq" className="evidence-action">New reader FAQ ↗</Link>
+        </div>
         <p className="mt-5 text-sm leading-relaxed text-[var(--text-secondary)]">The complete edition includes a provenance index and chapter-level sources and verification register.</p>
 
         <MarkdownArticle blocks={blocks} />

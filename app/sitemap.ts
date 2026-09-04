@@ -233,6 +233,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/books/the-maha-principle`, lastModified: new Date('2026-08-26') },
     { url: `${baseUrl}/books/the-borrowed-light`, lastModified: new Date('2026-07-28') },
     { url: `${baseUrl}/books/the-borrowed-light/m-theory-faq`, lastModified: new Date('2026-07-28') },
+    { url: `${baseUrl}/books/the-cosmic-recursion/reader-faq`, lastModified: new Date('2026-09-04') },
+    { url: `${baseUrl}/books/the-maha-principle/reader-faq`, lastModified: new Date('2026-09-04') },
     { url: `${baseUrl}/books/the-cosmic-recursion`, lastModified: new Date('2026-09-02') },
     { url: `${baseUrl}/books/the-synthetic-self`, lastModified: new Date('2026-07-16') },
     { url: `${baseUrl}/books/the-synthetic-self/ai-is-a-mirror`, lastModified: new Date('2026-07-16') },
