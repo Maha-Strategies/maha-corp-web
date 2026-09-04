@@ -27,6 +27,7 @@ const NEW_PAGES = [
   '/knowledge/mathematics/calendrical-reconciliation',
   '/knowledge/mathematics/number-theoretic-functions',
   '/knowledge/mathematics/airy-functions',
+  '/knowledge/mathematics/legendre-functions',
 ]
 
 test('new pages are born supported, not added to the unsupported pile', () => {
@@ -43,7 +44,7 @@ test('growth improved the evidence-backed share rather than diluting it', () => 
   // nobody would have made the ratio worse, which is the failure mode.
   const supported = status.counts['independently-supported']
   const uninspected = status.counts['cited-but-uninspected']
-  assert.ok(supported >= 46, `supported fell to ${supported}`)
+  assert.ok(supported >= 47, `supported fell to ${supported}`)
   assert.ok(uninspected <= 98, `uninspected rose to ${uninspected}; expansion added unsupported pages`)
 })
 
@@ -115,8 +116,9 @@ test('the new concepts carry their conditions, not just their formulas', () => {
     'error-function-and-related-integrals', 'bessel-functions', 'bernoulli-and-euler-numbers',
     'asymptotic-approximations', 'orthogonal-polynomials', 'riemann-zeta-function',
     'hypergeometric-function', 'incomplete-gamma-functions', 'elliptic-integrals',
-    'calendrical-reconciliation', 'number-theoretic-functions', 'airy-functions'].includes(c.slug))
-  assert.equal(added.length, 13)
+    'calendrical-reconciliation', 'number-theoretic-functions', 'airy-functions',
+    'legendre-functions'].includes(c.slug))
+  assert.equal(added.length, 14)
   for (const c of added) {
     assert.ok(c.assumptions.length > 0, `${c.slug} states no conditions`)
     assert.ok(c.errorBounds.length > 0, `${c.slug} states no error behaviour`)
@@ -278,4 +280,29 @@ test('an asymptotic law is not presented as a formula', () => {
   const c = MATHEMATICAL_CONCEPTS.find((x) => x.slug === 'number-theoretic-functions')!
   assert.match(c.errorBounds.join(' '), /supplies no bound on the difference at any finite/i)
   assert.match(c.doesNotEstablish, /asymptotic law is not a formula/i)
+})
+
+test('a source cited by many pages is not treated as supporting them', () => {
+  // The statistical handbook is cited by nine pages. The section inspected is
+  // about measurement calibration; the page it was checked against is about
+  // probabilistic forecast calibration. Same word, different concept.
+  const notSupporting = insp.inspectedButNotSupporting ?? []
+  const handbook = notSupporting.find((s: { sourceId: string }) => s.sourceId === 'nist-statistical-handbook')
+  assert.ok(handbook, 'the non-supporting inspection must be recorded rather than dropped')
+  assert.match(handbook.whyItSupportsNothingHere, /two different concepts sharing one word/i)
+  assert.ok(handbook.otherPagesCitingIt.length >= 8, 'the other citing pages must be listed')
+
+  // And it supported nothing: no page gained it as explanatory evidence.
+  const supportingIds = new Set(insp.inspected.map((s: { sourceId: string }) => s.sourceId))
+  assert.ok(!supportingIds.has('nist-statistical-handbook'),
+    'a source that supports nothing must not appear among the supporting inspections')
+})
+
+test('the pages the handbook was cited for are still unsupported', () => {
+  // The honest consequence: inspecting a source does not convert pages that
+  // cite it for a different subject.
+  const cal = audit.verdicts.find((v: { route: string }) => v.route === '/knowledge/mathematics/calibration-and-reliability')
+  assert.ok(cal, 'the page must exist')
+  assert.notEqual(cal.state, 'substantial-and-evidence-backed',
+    'the page must not have been converted by a source that does not support it')
 })

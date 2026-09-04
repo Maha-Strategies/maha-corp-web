@@ -3726,6 +3726,154 @@
       "upliftDigest": "sha256:32be34233b6b9b41e8dd4d16d834612d33c9481ead1bd7bf38b4efc1262771e0"
     },
     {
+      "route": "/knowledge/mathematics/legendre-functions",
+      "family": "mathematics",
+      "slug": "legendre-functions",
+      "eligible": true,
+      "refusals": [],
+      "before": {
+        "route": "/knowledge/mathematics/legendre-functions",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 3,
+        "relatedRoutes": [
+          "/knowledge/mathematics/spherical-coordinates",
+          "/knowledge/mathematics/orthogonal-polynomials",
+          "/knowledge/mathematics/bessel-functions"
+        ],
+        "renderedSections": 6
+      },
+      "after": {
+        "route": "/knowledge/mathematics/legendre-functions",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 3,
+        "relatedRoutes": [
+          "/knowledge/mathematics/spherical-coordinates",
+          "/knowledge/mathematics/orthogonal-polynomials",
+          "/knowledge/mathematics/bessel-functions"
+        ],
+        "renderedSections": 6
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "DLMF 14.2.1 gives Legendre equation, and 14.2.2 the associated form carrying a second parameter. The chapter records the singular structure directly: regular singularities at x equal to one, minus one and infinity, with exponent pairs minus mu over two and mu over two at the finite pair and nu plus one and minus nu at infinity. That structure is why the interval matters. On minus one to one, and when the real part of mu is non-negative, the Ferrers pair at plus and minus x is independent and recessive at the endpoints. On one to infinity, and when the real part of mu is non-negative and the real part of nu is at least minus one half, a different pair is recommended, recessive at one and at infinity respectively. Wronskian relations at 14.2.3 to 14.2.11 tie the pairs together."
+          ],
+          "sourceIds": [
+            "nist-dlmf-legendre",
+            "nist-dlmf-legendre",
+            "nist-dlmf-legendre"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Decide which interval the argument lies in before choosing a pair, since the recommendation changes at the singular points.",
+            "Check the parameter conditions on mu, and on nu outside the cut interval, rather than assuming the recommended pair applies.",
+            "Use a Wronskian from 14.2.3 to 14.2.11 to check an implementation, since it relates the pair rather than testing one solution alone."
+          ],
+          "sourceIds": [
+            "nist-dlmf-legendre",
+            "nist-dlmf-legendre",
+            "nist-dlmf-legendre"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "Legendre equation and its associated form, DLMF 14.2.1 and 14.2.2",
+            "Regular singularities at plus one, minus one and infinity with stated exponent pairs, DLMF 14.2.2",
+            "Numerically satisfactory pairs differ between the cut interval and the outside, DLMF 14.2 stated in prose rather than as a numbered equation"
+          ],
+          "sourceIds": [
+            "nist-dlmf-legendre",
+            "nist-dlmf-legendre",
+            "nist-dlmf-legendre"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "A recessive solution is small near its endpoint, so computing it by a method tuned to the dominant one loses it to cancellation. That is the reason the chapter names pairs by interval.",
+            "The singular points at plus and minus one are where the equation degenerates, and accuracy there is governed by the exponent pairs rather than by the solver.",
+            "The chapter recommends pairs and states conditions; it makes no accuracy claim about any implementation.",
+            "The recommended pairs carry parameter conditions: a non-negative real part of mu throughout, and additionally a real part of nu at least minus one half outside the cut interval.",
+            "The two intervals are treated separately because the singular points at plus and minus one sit at their boundary.",
+            "Recessive behaviour at an endpoint is the reason a pair is recommended, and it is a statement about the endpoint rather than the whole interval."
+          ],
+          "sourceIds": [
+            "nist-dlmf-legendre",
+            "nist-dlmf-legendre",
+            "nist-dlmf-legendre"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "What this does not establish",
+          "items": [
+            "The chapter gives the equations, their singular structure and the recommended pairs. It does not establish that any implementation is accurate, and a recommendation carries conditions rather than holding universally."
+          ],
+          "sourceIds": [
+            "nist-dlmf-legendre",
+            "nist-dlmf-legendre",
+            "nist-dlmf-legendre"
+          ]
+        },
+        {
+          "dimension": "related-records",
+          "heading": "Related records",
+          "items": [
+            "/knowledge/mathematics/spherical-coordinates",
+            "/knowledge/mathematics/orthogonal-polynomials",
+            "/knowledge/mathematics/bessel-functions"
+          ],
+          "sourceIds": []
+        }
+      ],
+      "sectionCount": 6,
+      "upliftDigest": "sha256:ba118429b47cff1f6046f6444d96b145e2b0248117153dae3d827b9c0f3a5257"
+    },
+    {
       "route": "/knowledge/mathematics/number-theoretic-functions",
       "family": "mathematics",
       "slug": "number-theoretic-functions",

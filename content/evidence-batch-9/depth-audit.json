@@ -3,13 +3,13 @@
   "auditedAt": "2026-09-03",
   "finding": "Classification and substance are different measurements. A page can carry an inspected source and explain almost nothing, and a structural page can be richly written and cite nothing checkable.",
   "wordCountUsedAsGate": false,
-  "totalAudited": 182,
-  "corpusSize": 182,
+  "totalAudited": 183,
+  "corpusSize": 183,
   "denominatorEqualsCorpus": true,
   "supersedesBatch9Audit": "Batch 9 audited 59 pages and stated a result against 167. This audits all 167.",
   "depthDistribution": {
     "structurally-substantial-but-unsupported": 84,
-    "substantial-and-evidence-backed": 46,
+    "substantial-and-evidence-backed": 47,
     "blocked": 28,
     "first-party-documented-but-thin": 9,
     "first-party-documented-and-substantial": 1,
@@ -17,9 +17,9 @@
   },
   "byGroup": {
     "independentlySupported": {
-      "audited": 46,
+      "audited": 47,
       "states": {
-        "substantial-and-evidence-backed": 46
+        "substantial-and-evidence-backed": 47
       }
     },
     "firstPartyDocumented": {
@@ -43,7 +43,7 @@
       }
     }
   },
-  "substantialAndEvidenceBacked": 46,
+  "substantialAndEvidenceBacked": 47,
   "thinnestSupported": [],
   "verdicts": [
     {
@@ -645,6 +645,30 @@
       "substantialityScore": 15.4,
       "reasons": [],
       "verdictDigest": "sha256:49ad23f0e66d8487bc977c474a0096aca3ffae0854307dbc1d73e37d60392df5"
+    },
+    {
+      "route": "/knowledge/mathematics/legendre-functions",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 786,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 428
+      },
+      "substantialityScore": 15.9,
+      "reasons": [],
+      "verdictDigest": "sha256:dfe483744f5d15923bd9ccad3112b574752e05553b56e4305da11e9cdacf6d49"
     },
     {
       "route": "/knowledge/mathematics/number-theoretic-functions",
@@ -4545,5 +4569,5 @@
     }
   ],
   "boundary": "A private audit. It changes no page.",
-  "auditDigest": "sha256:2937c1abaac2cb2146411feb249644cd1739cc30491797f2b6bba8bb7d920083"
+  "auditDigest": "sha256:cb05ed0601b91d7dbea2ac36aa700a633fc73f09e215d01e7721cd183fc9904d"
 }

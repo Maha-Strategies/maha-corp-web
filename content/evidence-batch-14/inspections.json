@@ -596,6 +596,45 @@
       "crossPageNote": "A contrast worth keeping, both halves inspected: Airy solutions are entire by 9.2.1, while the Bessel first-kind solution at 10.2.2 has a branch point at the origin when the order is not an integer. Both chapters organise the choice of pair by region.",
       "establishes": "Airy equation, its solutions, their exact values at the origin, and the region-dependent choice of pair.",
       "boundary": "Gives solutions and their analytic character. It makes no accuracy claim about any evaluation method."
+    },
+    {
+      "sourceId": "nist-dlmf-legendre",
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "title": "DLMF Chapter 14: Legendre and Related Functions",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedFrom": "https://dlmf.nist.gov/14.2",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "14.2.1 and 14.2.2 the equations and singular structure",
+        "the recommended pairs by interval",
+        "14.2.3 to 14.2.11 the Wronskians"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/legendre-functions",
+          "locator": "14.2.1 and 14.2.2",
+          "claim": "The equation has three regular singularities with stated exponent pairs, and that structure is what makes the interval matter.",
+          "supportingPassage": "14.2.1 gives Legendre equation and 14.2.2 the associated form carrying the order parameter. The chapter records regular singularities at x equal to one, minus one and infinity, with exponent pairs minus mu over two and mu over two at each finite point and nu plus one and minus nu at infinity.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/legendre-functions",
+          "locator": "the numerically satisfactory pairs and 14.2.3 to 14.2.11",
+          "claim": "Which pair is usable depends on the interval and on parameter conditions, and Wronskians relate the pairs.",
+          "supportingPassage": "On minus one to one, when the real part of mu is non-negative, the Ferrers pair at plus and minus x is linearly independent and recessive at the endpoints. On one to infinity, when the real part of mu is non-negative and the real part of nu is at least minus one half, a different pair is recommended, recessive at one and at infinity respectively. Wronskian formulas at 14.2.3 to 14.2.11 relate the various pairs.",
+          "distinctPassage": true
+        }
+      ],
+      "crossPageNote": "A third instance of one organising principle, all three inspected: Table 10.2.1 for Bessel, Table 9.2.1 for Airy, and the interval-dependent recommendations here. In each, the choice of solution pair is settled by region and parameter conditions rather than by linear independence alone.",
+      "establishes": "The Legendre equations, their singular structure, the interval-dependent recommended pairs and the Wronskian relations.",
+      "boundary": "Gives equations and recommendations with conditions. It makes no accuracy claim about any implementation."
     }
   ],
   "notInspected": [
@@ -605,11 +644,12 @@
     }
   ],
   "summary": {
-    "sourcesInspected": 16,
-    "sourcesAttached": 15,
-    "routesReached": 15,
-    "claimsSupported": 30,
-    "heldBack": 1
+    "sourcesInspected": 17,
+    "sourcesAttached": 16,
+    "routesReached": 16,
+    "claimsSupported": 32,
+    "heldBack": 1,
+    "sourcesInspectedNotSupporting": 1
   },
   "boundary": "Twelve sources inspected at section level; eleven attached across mathematics and astronomy. The twelfth is recorded, inspected and unattached, because attaching it would move a frozen release-governance digest.",
   "heldBack": [
@@ -637,6 +677,35 @@
       "establishes": "Which detection methods NASA names, what each measures, and the selection biases it states for two of them.",
       "boundary": "An agency overview. It does not establish the sensitivity or completeness of any survey, and it states limitations for only some of the methods it names.",
       "notAttachedReason": "Inspected at section level and ready to attach, but held back. The route it supports, /knowledge/astronomy/exoplanet-detection-and-confirmation, is one of the twenty records in the Phase 4 pilot, whose manifest carries a frozen sha256. That manifest is recomputed from live data rather than stored, so adding any source to a pilot record moves the digest: this source took the blocker count from 87 to 89. Every existing astronomy source carries the same two blockers, a missing publication date and a missing locator, so the source is no worse than its neighbours; the coupling is the issue. Updating a frozen release-governance digest to accommodate a content addition is a decision for a person, not a side effect of adding a page."
+    }
+  ],
+  "inspectedButNotSupporting": [
+    {
+      "sourceId": "nist-statistical-handbook",
+      "title": "NIST/SEMATECH e-Handbook of Statistical Methods",
+      "sectionInspected": "2.1.1, What are the issues for characterization?",
+      "retrievedFrom": "https://www.itl.nist.gov/div898/handbook/mpc/section1/mpc11.htm",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "rightsBasis": "United States government publication, publicly readable. Retrieved without circumventing any access control.",
+      "observedContent": "Section 2.1.1 quantifies measurement goodness as bias, short-term variability or instrument precision, long-term variability, and uncertainty, and states that continuation of goodness is guaranteed by a statistical control program controlling both short-term and long-term variability. It states the chapter's techniques are intended primarily for ongoing processes, and that one-time, special and destructive tests are difficult to characterize.",
+      "whyItSupportsNothingHere": "Nine pages cite this source and the one inspected here is calibration-and-reliability, which is about probabilistic forecast calibration: a forecaster is calibrated when events given probability p occur at about frequency p, assessed with reliability diagrams over a reference class. The handbook section is about measurement calibration: instrument bias, instrument precision and statistical control of a measurement process. These are two different concepts sharing one word. Attaching the section would be a topical citation presented as support, which is the defect the corpus refuses.",
+      "otherPagesCitingIt": [
+        "bayesian-updating",
+        "proper-scoring-rules",
+        "dynamical-systems",
+        "time-series-models",
+        "change-point-detection",
+        "optimization",
+        "information-theory",
+        "causal-inference"
+      ],
+      "furtherAttempt": {
+        "url": "https://www.itl.nist.gov/div898/handbook/pmc/section1/pmc11.htm",
+        "outcome": "Section 6.1.1 is a historical account of how statistical quality control began and carries no operational content, so it supports nothing either."
+      },
+      "conclusion": "The citation is not evidence that the handbook covers these pages. Whether any of the nine is supportable depends on finding a section that addresses that page's actual subject, and for forecast calibration this handbook may have none. Recorded so the source is not treated as inspected-and-supporting on the strength of one section that is not about the same thing."
     }
   ]
 }
