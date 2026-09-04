@@ -31,6 +31,7 @@ const books = [
     description: 'A book about information, erasure, physical limits, cosmic structure, and the disciplined losses through which anything persists.',
     href: '/books/the-cosmic-recursion',
     readHref: '/books/the-cosmic-recursion/read',
+    guide: { title: 'What Survives the Compression?', href: '/books/the-cosmic-recursion/reader-faq' },
     chapter: { title: 'The First Forgetting', href: '/books/the-cosmic-recursion/read/the-first-forgetting' },
   },
   {
