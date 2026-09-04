@@ -140,7 +140,7 @@ jobs:
           # A last, independent scan of the artifact that leaves the runner.
           ! grep -qEi 'bearer [A-Za-z0-9._~+/-]{16,}|sbp_[A-Za-z0-9]{16,}|postgres(ql)?://[^ "]*:[^ "@]+@' "$MAHA_B11_EVIDENCE_PATH"
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: batch-11-rehearsal-evidence
@@ -241,7 +241,7 @@ jobs:
             --skip-github --allow-partial
           # The EXIT trap removes raw identifiers even if collection refuses.
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: batch-11-sanitized-teardown-partial

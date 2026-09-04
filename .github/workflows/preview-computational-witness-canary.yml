@@ -49,7 +49,7 @@ jobs:
           fi
           case "$target_host" in *mahastrategies.com) echo '::error::Refusing an apex or custom-domain target.'; exit 1 ;; esac
 
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       - uses: actions/setup-python@v6
         with:
@@ -63,7 +63,7 @@ jobs:
 
       - name: Upload sanitized evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: preview-witness-canary-${{ github.run_id }}
           path: ${{ runner.temp }}/witness-canary/evidence.json

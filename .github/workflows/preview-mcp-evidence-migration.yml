@@ -37,7 +37,7 @@ jobs:
           if [ "$SUPABASE_PROJECT_REF" = "uhwuullakihgszxhiygz" ]; then echo '::error::Production ref refused.'; exit 1; fi
           if [ -z "${SUPABASE_DB_PASSWORD:-}" ]; then echo '::error::Preview database password is missing.'; exit 1; fi
 
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       - name: Apply exactly the private MCP migration
         run: |
@@ -76,7 +76,7 @@ jobs:
 
       - name: Upload sanitized evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: preview-mcp-evidence-migration-${{ github.run_id }}
           path: ${{ env.EVIDENCE }}
