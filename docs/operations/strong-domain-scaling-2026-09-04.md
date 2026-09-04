@@ -136,9 +136,13 @@ blended chart or post-hoc winner.
 
 ## Tiruvāymoḻi contract
 
-The atlas covers twenty consecutive complete units from pāsurams 2791–3012.
+The atlas now covers forty-six consecutive complete units from pāsurams
+2791–3298. The original twenty-unit cohort remains frozen; the continuation is
+a separate immutable cohort of twenty-six eleven-pāsuram units from 3013–3298.
 Each page carries an exact range, poetic voice, name occurrences, passage
-observations, five bounded questions, explicit limitations, and internal links.
+observations, place and devotional context, five bounded questions, explicit
+limitations, and links into the Māyōṉ, Tirumāl, Kaṇṇan, Nārāyaṇa, and Āḻvār
+graphs.
 The exceptional 2967–2979 unit remains at the length printed by the translation
 rather than being forced into an assumed ten-verse pattern.
 
@@ -147,12 +151,16 @@ attributed scholarship. Nothing in the atlas treats translated wording as the
 untranslated Tamil, devotional theology as an empirical result, or one unit as
 the whole Tiruvāymoḻi.
 
-## Post-release review
+## Route reconciliation after the continuation
 
-The reconciled route set remains 26 below the target because the KDP boundary
-correctly removes the Maha Principle manuscript routes. The next tranche must
-close that gap with question-led, evidence-bounded pages rather than aliases or
-parameter variants. After release, a direct Production sitemap observation
-should precede indexing, crawl-quality, and user-discovery review. Vercel build
-and deployment still require Mayone's explicit authorization outside this
-report.
+Before the continuation and the last three completed mathematics pages, the
+reconciled projection was 974 routes after The Maha Principle went offline. The
+continuation contributes exactly 26 topic routes and reuses the existing atlas
+hub and registry; the mathematics work contributes three more canonical topic
+routes. Together they project **1,003 available routes** after an approved build
+and deployment. The continuation's 130 bounded answers are entries within those
+routes and are not counted as additional URLs.
+
+This is a projection, not a deployment observation. The release remains
+batched: Vercel build and deployment require Mayone's explicit authorization
+outside this report.

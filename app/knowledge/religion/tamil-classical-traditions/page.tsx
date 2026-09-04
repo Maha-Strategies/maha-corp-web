@@ -72,7 +72,7 @@ export default function TamilClassicalTraditionsPage() {
 
         <section className="mt-6 border border-fuchsia-800/60 bg-fuchsia-950/10 p-7">
           <p className="font-mono text-[10px] uppercase tracking-widest text-fuchsia-300">Passage-level continuation</p>
-          <div className="mt-3 flex flex-wrap items-end justify-between gap-5"><div className="max-w-3xl"><h2 className="text-3xl font-semibold text-white">Tiruvāymoḻi passage atlas</h2><p className="mt-3 text-sm leading-6 text-zinc-400">Move from the reception overview to twenty complete translated units, each with its speaker, names, themes, exact pāsuram range, and explicit non-inference.</p></div><Link href={TIRUVAYMOLI_ATLAS_PATH} className="font-mono text-[10px] uppercase tracking-widest text-fuchsia-300 hover:text-white">Read unit by unit →</Link></div>
+          <div className="mt-3 flex flex-wrap items-end justify-between gap-5"><div className="max-w-3xl"><h2 className="text-3xl font-semibold text-white">Tiruvāymoḻi passage atlas</h2><p className="mt-3 text-sm leading-6 text-zinc-400">Move from the reception overview to forty-six complete translated units, each with its speaker, names, themes, exact pāsuram range, and explicit non-inference.</p></div><Link href={TIRUVAYMOLI_ATLAS_PATH} className="font-mono text-[10px] uppercase tracking-widest text-fuchsia-300 hover:text-white">Read unit by unit →</Link></div>
         </section>
 
         <section className="mt-6 border border-amber-800/60 bg-amber-950/10 p-7">
