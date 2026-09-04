@@ -61,7 +61,9 @@ test('every route belongs to one declared visual system', () => {
   // 58 -> 60: the astrology workflow hub and its dynamic protocol route.
   // 60 -> 62: the evidence-workflow commercial hub and its dynamic example route.
   // join the Knowledge group and its bounded cyber-light overlay. books 38 -> 41 arrives with the
-  // eighth open book. Every other group is unchanged, which is what this
+  // eighth open book; the KDP maintenance boundary removes two reader routes,
+  // and the two approved reader FAQ routes restore the group to 41. Every other
+  // group is unchanged, which is what this
   // assertion is really guarding.
   assert.deepEqual(groups, { paper: 112, apps: 6, books: 41, docs: 1, knowledge: 62, intelligence: 2, operator: 32, internal: 1 })
 })
