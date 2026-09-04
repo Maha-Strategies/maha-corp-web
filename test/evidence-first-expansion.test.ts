@@ -24,6 +24,7 @@ const NEW_PAGES = [
   '/knowledge/mathematics/incomplete-gamma-functions',
   '/knowledge/astronomy/very-long-baseline-interferometry',
   '/knowledge/mathematics/elliptic-integrals',
+  '/knowledge/mathematics/calendrical-reconciliation',
 ]
 
 test('new pages are born supported, not added to the unsupported pile', () => {
@@ -40,7 +41,7 @@ test('growth improved the evidence-backed share rather than diluting it', () => 
   // nobody would have made the ratio worse, which is the failure mode.
   const supported = status.counts['independently-supported']
   const uninspected = status.counts['cited-but-uninspected']
-  assert.ok(supported >= 43, `supported fell to ${supported}`)
+  assert.ok(supported >= 44, `supported fell to ${supported}`)
   assert.ok(uninspected <= 98, `uninspected rose to ${uninspected}; expansion added unsupported pages`)
 })
 
@@ -111,8 +112,9 @@ test('the new concepts carry their conditions, not just their formulas', () => {
   const added = MATHEMATICAL_CONCEPTS.filter((c) => ['gamma-function',
     'error-function-and-related-integrals', 'bessel-functions', 'bernoulli-and-euler-numbers',
     'asymptotic-approximations', 'orthogonal-polynomials', 'riemann-zeta-function',
-    'hypergeometric-function', 'incomplete-gamma-functions', 'elliptic-integrals'].includes(c.slug))
-  assert.equal(added.length, 10)
+    'hypergeometric-function', 'incomplete-gamma-functions', 'elliptic-integrals',
+    'calendrical-reconciliation'].includes(c.slug))
+  assert.equal(added.length, 11)
   for (const c of added) {
     assert.ok(c.assumptions.length > 0, `${c.slug} states no conditions`)
     assert.ok(c.errorBounds.length > 0, `${c.slug} states no error behaviour`)
@@ -123,8 +125,13 @@ test('the new concepts carry their conditions, not just their formulas', () => {
       // citation where it makes the statement in prose. What is refused is an
       // invariant with no locator at all, or a fabricated equation number for
       // something the chapter never numbered.
-      assert.match(inv, /DLMF \d+\.\d+(\.\d+)?/, `${c.slug}: an invariant with no locator: ${inv}`)
-      if (/DLMF \d+\.\d+(?!\.)/.test(inv)) {
+      // A DLMF equation or section where the reference is DLMF, and a named
+      // attribution where it is not. What is refused is an invariant with no
+      // locator at all, or a fabricated equation number.
+      const dlmf = /DLMF \d+\.\d+(\.\d+)?/.test(inv)
+      const attributed = /\bper [A-Z][a-z]+/.test(inv)
+      assert.ok(dlmf || attributed, `${c.slug}: an invariant with no locator: ${inv}`)
+      if (dlmf && /DLMF \d+\.\d+(?!\.)/.test(inv)) {
         assert.match(inv, /stated in prose/,
           `${c.slug}: a section-level citation must say why it is not an equation number: ${inv}`)
       }

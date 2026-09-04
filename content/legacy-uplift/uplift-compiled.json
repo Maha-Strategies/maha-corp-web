@@ -3726,6 +3726,232 @@
       "upliftDigest": "sha256:32be34233b6b9b41e8dd4d16d834612d33c9481ead1bd7bf38b4efc1262771e0"
     },
     {
+      "route": "/knowledge/mathematics/calendrical-reconciliation",
+      "family": "mathematics",
+      "slug": "calendrical-reconciliation",
+      "eligible": true,
+      "refusals": [],
+      "before": {
+        "route": "/knowledge/mathematics/calendrical-reconciliation",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 4,
+        "relatedRouteCount": 3,
+        "relatedRoutes": [
+          "/knowledge/mathematics/calendar-and-timescale-mappings",
+          "/knowledge/mathematics/modular-arithmetic",
+          "/knowledge/mathematics/periodic-functions-and-phase"
+        ],
+        "renderedSections": 6
+      },
+      "after": {
+        "route": "/knowledge/mathematics/calendrical-reconciliation",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary",
+          "typed-bridges"
+        ],
+        "dimensionCount": 9,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 4,
+        "relatedRouteCount": 3,
+        "relatedRoutes": [
+          "/knowledge/mathematics/calendar-and-timescale-mappings",
+          "/knowledge/mathematics/modular-arithmetic",
+          "/knowledge/mathematics/periodic-functions-and-phase"
+        ],
+        "renderedSections": 10
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "A calendar reconciles two measured periods that share no common multiple. Doggett gives the tropical year as 365.2421896698 days and the mean synodic month as 29.5305888531 days, so twelve lunar months come to 354.36707 days and fall short of the year by about 10.875 days. Three families answer that differently. A solar calendar tracks the tropical year and intercalates days, as the Gregorian does with a 400-year cycle of 146,097 days. A lunar calendar follows the phase cycle and lets the months move through the seasons, as the Islamic calendar does. A lunisolar calendar keeps lunar months but intercalates a whole month every few years, using the Metonic relation that 235 lunations occupy nineteen years, as the Hebrew and Chinese calendars do."
+          ],
+          "sourceIds": [
+            "doggett-calendars",
+            "doggett-calendars",
+            "doggett-calendars"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Decide which period is to be tracked, because no scheme tracks both exactly.",
+            "For a solar scheme, choose an intercalation cycle and state its residual error against the tropical year.",
+            "For a lunisolar scheme, choose an intercalation rule such as the Metonic and state the residual, which is about two hours per nineteen years.",
+            "Treat a computed date as the output of the declared scheme rather than as an astronomical event, since mean periods do not locate an individual new moon."
+          ],
+          "sourceIds": [
+            "doggett-calendars",
+            "doggett-calendars",
+            "doggett-calendars"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "Tropical year 365.2421896698 days and mean synodic month 29.5305888531 days, per Doggett",
+            "Twelve synodic months come to 354.36707 days, per Doggett",
+            "The Metonic relation, 235 lunations in nineteen years, 6939.688 days, per Doggett"
+          ],
+          "sourceIds": [
+            "doggett-calendars",
+            "doggett-calendars",
+            "doggett-calendars"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "Every scheme carries a residual because the two periods are incommensurable. The Metonic relation leaves 235 lunations about 0.087 days, roughly two hours, longer than nineteen tropical years.",
+            "The Gregorian 400-year cycle averages 365.2425 days. Against the tropical year given here that is an excess of about 0.00031 days per year, one day in roughly 3200 years; Doggett states the error as about one day in 2500 years, and the difference reflects which definition of the tropical year is used rather than an arithmetic disagreement.",
+            "Mean periods do not predict an individual month. A scheme built on them fixes a rule, and a rule is not an observation.",
+            "The stated periods are mean values. Doggett records that an individual synodic month departs from the mean, so a mean period fixes a scheme rather than a date.",
+            "The tropical year and synodic month share no common multiple, which is why every scheme is an approximation rather than a fix.",
+            "Which family a calendar belongs to is a design choice about what to keep synchronised, not a fact about the sky."
+          ],
+          "sourceIds": [
+            "doggett-calendars",
+            "doggett-calendars",
+            "doggett-calendars"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "What this does not establish",
+          "items": [
+            "This is the arithmetic of reconciling two periods. It does not determine any religious observance, which is fixed by a community rule that may use observation rather than computation, and it settles nothing about the meaning of any calendar."
+          ],
+          "sourceIds": [
+            "doggett-calendars",
+            "doggett-calendars",
+            "doggett-calendars"
+          ]
+        },
+        {
+          "dimension": "typed-bridges",
+          "heading": "Bridge: Lunisolar intercalation",
+          "items": [
+            "Keep a month sequence built on the lunar phase cycle from drifting out of the tropical year, by inserting a whole month on a declared rule.",
+            "Input: mean synodic month",
+            "Input: tropical year",
+            "Input: a declared intercalation rule such as the Metonic",
+            "Output: an intercalation schedule",
+            "Output: the residual error of the scheme",
+            "Output: a computed month index",
+            "Limit: The arithmetic fixes a schedule, not an observance. A tradition may set its months by sighting rather than by computation, and where it does, the computed date is a prediction about a rule and not about the practice."
+          ],
+          "sourceIds": [
+            "doggett-calendars",
+            "doggett-calendars",
+            "doggett-calendars"
+          ]
+        },
+        {
+          "dimension": "typed-bridges",
+          "heading": "Bridge: Seasonal drift of a lunar year",
+          "items": [
+            "Quantify how far a twelve-month lunar year falls short of the tropical year, and how long a purely lunar calendar takes to return to the same season.",
+            "Input: mean synodic month of 29.5305888531 days",
+            "Input: tropical year of 365.2421896698 days",
+            "Input: a twelve-month lunar year as the scheme under test",
+            "Output: a lunar year of 354.36707 days",
+            "Output: a shortfall of about 10.875 days per year",
+            "Output: a return period of about 33.6 years",
+            "Limit: Mean periods give a mean drift. An individual month departs from the mean, so the figure describes the scheme rather than any particular year, and it carries no claim about what a tradition does with the drift."
+          ],
+          "sourceIds": [
+            "doggett-calendars",
+            "doggett-calendars",
+            "doggett-calendars"
+          ]
+        },
+        {
+          "dimension": "typed-bridges",
+          "heading": "Bridge: Residual of the Metonic relation",
+          "items": [
+            "Show why nineteen years of lunar months nearly close, and by how much the approximation misses.",
+            "Input: 235 mean synodic months",
+            "Input: 19 tropical years",
+            "Input: the mean periods stated by the source",
+            "Output: 6939.688 days for 235 lunations",
+            "Output: 6939.602 days for nineteen tropical years",
+            "Output: a residual near 0.087 days, about two hours, per nineteen years",
+            "Limit: The two periods are incommensurable, so the relation is an approximation that accumulates. The residual is arithmetic and says nothing about which calendars adopted the cycle or why."
+          ],
+          "sourceIds": [
+            "doggett-calendars",
+            "doggett-calendars",
+            "doggett-calendars"
+          ]
+        },
+        {
+          "dimension": "typed-bridges",
+          "heading": "Bridge: What a calendar chooses to track",
+          "items": [
+            "Separate the three calendar families by which period each keeps synchronised, since no scheme keeps both.",
+            "Input: the tropical year",
+            "Input: the lunar phase cycle",
+            "Input: a declared intercalation policy",
+            "Output: solar, lunar or lunisolar classification",
+            "Output: which period the scheme preserves",
+            "Output: the residual error each family carries",
+            "Limit: A classification of arithmetic. Which family a community uses is a historical and religious fact about that community, and this bridge neither explains nor evaluates that choice."
+          ],
+          "sourceIds": [
+            "doggett-calendars",
+            "doggett-calendars",
+            "doggett-calendars"
+          ]
+        },
+        {
+          "dimension": "related-records",
+          "heading": "Related records",
+          "items": [
+            "/knowledge/mathematics/calendar-and-timescale-mappings",
+            "/knowledge/mathematics/modular-arithmetic",
+            "/knowledge/mathematics/periodic-functions-and-phase"
+          ],
+          "sourceIds": []
+        }
+      ],
+      "sectionCount": 10,
+      "upliftDigest": "sha256:5435af028be0233ee3420f02755f673195bdf0bfc1de2474043f923e03e10c5d"
+    },
+    {
       "route": "/knowledge/mathematics/elliptic-integrals",
       "family": "mathematics",
       "slug": "elliptic-integrals",

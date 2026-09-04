@@ -476,6 +476,47 @@
       ],
       "establishes": "The three Legendre kinds with their domain conditions, the principal-value case, and the complete forms.",
       "boundary": "Defines the integrals and where they fail. It makes no accuracy claim about any evaluation scheme."
+    },
+    {
+      "sourceId": "doggett-calendars",
+      "domain": "mathematics",
+      "class": "secondary-historical-scholarship",
+      "title": "Calendars and their History",
+      "venue": "L. E. Doggett, University Science Books, hosted by NASA Goddard Space Flight Center",
+      "identifier": "eclipse.gsfc.nasa.gov/SEhelp/calendars.html",
+      "retrievedFrom": "https://eclipse.gsfc.nasa.gov/SEhelp/calendars.html",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Author, publisher and title confirmed on retrieval. Recorded as Doggett's chapter hosted by NASA rather than as a NASA publication, because the two are different authorities.",
+      "versionRelationship": "Retrieved 2026-09-04",
+      "rightsBasis": "Publicly readable on a United States government host. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "The three calendar families",
+        "The stated mean periods",
+        "The Metonic relation",
+        "The Gregorian 400-year cycle"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/calendrical-reconciliation",
+          "locator": "The stated mean periods and the lunar year",
+          "claim": "Two measured periods are incommensurable, and twelve lunar months fall short of the tropical year by a computable amount.",
+          "supportingPassage": "Doggett gives the tropical year as 365.2421896698 days and the mean synodic month as 29.5305888531 days, and states the lunar year of twelve synodic months as 354.36707 days. Multiplying the stated synodic month by twelve reproduces that figure exactly, and subtracting it from the stated tropical year gives a shortfall of about 10.875 days.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/calendrical-reconciliation",
+          "locator": "The three families, the Metonic relation and the Gregorian cycle",
+          "claim": "Three families of scheme answer the mismatch differently, each carrying a residual.",
+          "supportingPassage": "Doggett describes a solar calendar as maintaining synchrony with the tropical year by intercalating days, naming the Gregorian with its 400-year cycle of 146,097 days averaging 365.2425 days. A lunar calendar follows the phase cycle without regard for the tropical year, named as the Islamic calendar. A lunisolar calendar intercalates a whole month every few years using the Metonic relation that 235 lunations occur in nineteen years, 6939.688 days, named as the Hebrew and Chinese calendars.",
+          "distinctPassage": true
+        }
+      ],
+      "arithmeticCheck": "Both derived figures reproduce the source exactly: twelve synodic months give 354.36707 days as stated, and 235 synodic months give 6939.6884 days against the stated 6939.688. One figure does not reconcile: the Gregorian average of 365.2425 exceeds the stated tropical year by 0.00031 days per year, which is one day in about 3200 years, while Doggett states about one day in 2500. The page reports the derived figure and records the source's, and attributes the gap to which definition of the tropical year is used rather than claiming to resolve it.",
+      "frameNote": "Recorded as secondary historical scholarship, not as formal mathematics and not as religious evidence. It establishes calendar arithmetic and which communities use which family; it establishes nothing about observance, which may be set by sighting rather than computation.",
+      "establishes": "The three calendar families, the mean periods behind them, and the reconciliation schemes each uses with their residuals.",
+      "boundary": "Calendar arithmetic and history. It determines no observance and predicts no individual month."
     }
   ],
   "notInspected": [
@@ -485,10 +526,10 @@
     }
   ],
   "summary": {
-    "sourcesInspected": 13,
-    "sourcesAttached": 12,
-    "routesReached": 12,
-    "claimsSupported": 24,
+    "sourcesInspected": 14,
+    "sourcesAttached": 13,
+    "routesReached": 13,
+    "claimsSupported": 26,
     "heldBack": 1
   },
   "boundary": "Twelve sources inspected at section level; eleven attached across mathematics and astronomy. The twelfth is recorded, inspected and unattached, because attaching it would move a frozen release-governance digest.",

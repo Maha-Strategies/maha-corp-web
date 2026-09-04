@@ -3,13 +3,13 @@
   "auditedAt": "2026-09-03",
   "finding": "Classification and substance are different measurements. A page can carry an inspected source and explain almost nothing, and a structural page can be richly written and cite nothing checkable.",
   "wordCountUsedAsGate": false,
-  "totalAudited": 179,
-  "corpusSize": 179,
+  "totalAudited": 180,
+  "corpusSize": 180,
   "denominatorEqualsCorpus": true,
   "supersedesBatch9Audit": "Batch 9 audited 59 pages and stated a result against 167. This audits all 167.",
   "depthDistribution": {
     "structurally-substantial-but-unsupported": 84,
-    "substantial-and-evidence-backed": 43,
+    "substantial-and-evidence-backed": 44,
     "blocked": 28,
     "first-party-documented-but-thin": 9,
     "first-party-documented-and-substantial": 1,
@@ -17,9 +17,9 @@
   },
   "byGroup": {
     "independentlySupported": {
-      "audited": 43,
+      "audited": 44,
       "states": {
-        "substantial-and-evidence-backed": 43
+        "substantial-and-evidence-backed": 44
       }
     },
     "firstPartyDocumented": {
@@ -43,7 +43,7 @@
       }
     }
   },
-  "substantialAndEvidenceBacked": 43,
+  "substantialAndEvidenceBacked": 44,
   "thinnestSupported": [],
   "verdicts": [
     {
@@ -645,6 +645,30 @@
       "substantialityScore": 15.4,
       "reasons": [],
       "verdictDigest": "sha256:49ad23f0e66d8487bc977c474a0096aca3ffae0854307dbc1d73e37d60392df5"
+    },
+    {
+      "route": "/knowledge/mathematics/calendrical-reconciliation",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 753,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 7,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 4,
+        "structuredDataFields": 9,
+        "renderedDimensions": 9,
+        "wordCountDiagnostic": 830
+      },
+      "substantialityScore": 17.8,
+      "reasons": [],
+      "verdictDigest": "sha256:9957d05d4845c77ea9e1ea3a0f0de69356e1e5e2cbfcc2dd880d0a4e92cdb2d4"
     },
     {
       "route": "/knowledge/mathematics/elliptic-integrals",
@@ -4473,5 +4497,5 @@
     }
   ],
   "boundary": "A private audit. It changes no page.",
-  "auditDigest": "sha256:02c4045b11f31e01d5a343af306104a98b6df636b3a2ae4647a72cd0e03b890c"
+  "auditDigest": "sha256:76d62c86715b5e3018553fec168e399ada3721c78a36b486b3b788ca87277196"
 }
