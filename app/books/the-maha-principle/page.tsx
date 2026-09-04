@@ -1,3 +1,30 @@
+import Link from 'next/link'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Temporarily Unavailable | Maha Strategies',
+  description: 'This book edition is currently offline for maintenance.',
+}
+
+export default function TheMahaPrinciplePage() {
+  return (
+    <main className="evidence-page flex min-h-[60vh] flex-col items-center justify-center p-8 text-center">
+      <h1 className="text-2xl font-bold">Temporarily Unavailable</h1>
+      <p className="mt-4">
+        This book edition is currently offline for updates and will return shortly.
+      </p>
+      <Link href="/books" className="mt-6 text-sm underline">
+        ← Return to All Books
+      </Link>
+    </main>
+  )
+}
+
+/*
+=============================================================================
+ORIGINAL PAGE CONTENT (PRESERVED FOR RESTORATION)
+=============================================================================
+
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Metadata } from 'next'
@@ -120,3 +147,4 @@ export default function TheMahaPrinciplePage() {
     </main>
   )
 }
+*/
