@@ -7059,6 +7059,7 @@
         "family": "mathematics",
         "dimensionsPresent": [
           "claim-level-citation",
+          "deterministic-calculation",
           "direct-answer",
           "exact-locator",
           "limitations",
@@ -7068,7 +7069,7 @@
           "source-boundary",
           "typed-bridges"
         ],
-        "dimensionCount": 9,
+        "dimensionCount": 10,
         "sourceCount": 3,
         "sourcesWithBoundary": 3,
         "referenceOnlySources": 0,
@@ -7082,7 +7083,7 @@
           "/knowledge/mathematics/root-finding",
           "/knowledge/mathematics/uncertainty-propagation"
         ],
-        "renderedSections": 7
+        "renderedSections": 8
       },
       "sections": [
         {
@@ -7118,6 +7119,25 @@
             "More printed digits do not imply lower error.",
             "Convergence to a value does not imply convergence to the correct model.",
             "Tolerance is not identical to uncertainty."
+          ],
+          "sourceIds": [
+            "nist-dlmf-numerical",
+            "nist-gum",
+            "nist-tn1297-uncertainty"
+          ]
+        },
+        {
+          "dimension": "deterministic-calculation",
+          "heading": "Interval addition, executed",
+          "items": [
+            "Method: interval-add, inclusive integer intervals with outward rounding on signed 64-bit integers. Units: nanometre, chosen only because the operation needs a unit; the arithmetic is unitless.",
+            "Widths add: [1000,1010] + [500,505] → [1500,1515]. The inputs are 10 and 5 wide and the result is 15, so the bound on the sum is the sum of the bounds and nothing is hidden.",
+            "Error accumulates: [1500,1515] + [500,505] → [2000,2020], now 20 wide. A second addition widens the interval again, which is the page's point that tolerance is not uncertainty.",
+            "The loosest term dominates: [1000,1001] + [0,500] → [1000,1501], 501 wide. A tightly known quantity added to a poorly known one is poorly known, however many digits the first one had.",
+            "Assumptions: Endpoints are exact integers in the stated unit, and the interval is inclusive of both. Rounding is outward, so a computed interval never claims to be narrower than the true one.",
+            "Uncertainty: The interval is the uncertainty statement. Addition is exact on integers and aborts on overflow rather than wrapping, so no width is lost to the arithmetic itself.",
+            "Executed by kernel sha256:9046cc9127b3992b962e1a1f2be7bcf62c9a8e355bd29a4d58f2fb2a597df7f3. Rebuild the kernel with npm run build:wasm-kernel, which is deterministic, confirm its digest matches kernelSha256, then re-execute each operation on the recorded inputs.",
+            "What the receipt does not establish: That the kernel is correct. A receipt records what it computed, not whether the computation is right. That the operation models anything outside itself. That the page’s claims are true. These cases exhibit stated invariants on specific values, and exhibiting is not proving."
           ],
           "sourceIds": [
             "nist-dlmf-numerical",
@@ -7184,8 +7204,8 @@
           "sourceIds": []
         }
       ],
-      "sectionCount": 7,
-      "upliftDigest": "sha256:dae35cdd7ac9e0e0beddaa40cf444c493ac58e673e55dd808bb88cd19d9322a0"
+      "sectionCount": 8,
+      "upliftDigest": "sha256:cdce77ba4750c25bcba865f6fc8a10b5d47c78419b50e98137ffe51eed597fc7"
     },
     {
       "route": "/knowledge/mathematics/uncertainty-propagation",

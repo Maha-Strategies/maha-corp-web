@@ -54,6 +54,32 @@ const inInterval = [await normalize(359.999999), await normalize(360)]
 
 // Each step shows the derivation rather than only its conclusion, so a reader
 // can see the transformation and not just be told the outcome.
+const nm = (v: number) => String(v)
+
+async function intervalAdd(left: [number, number], right: [number, number]) {
+  const receipt = await createExecutedCalculationReceipt({
+    schemaVersion: 'maha-wasm-execution-request/1.0',
+    operation: 'interval-add',
+    inputs: { leftLower: nm(left[0]), leftUpper: nm(left[1]), rightLower: nm(right[0]), rightUpper: nm(right[1]) },
+    units: { leftLower: 'nm', leftUpper: 'nm', rightLower: 'nm', rightUpper: 'nm', resultLower: 'nm', resultUpper: 'nm' },
+  } as never, artifact)
+  const findings = await verifyExecutedCalculationReceipt(receipt, artifact)
+  if (findings.length) throw new Error(`Receipt failed verification: ${findings.join(', ')}`)
+  const u = receipt.uncertainty as Record<string, string>
+  return { receipt, lower: Number(u.lower), upper: Number(u.upper), width: Number(u.upper) - Number(u.lower) }
+}
+
+/** Interval addition, exhibiting what the convergence page states about error. */
+const narrow = await intervalAdd([1000, 1010], [500, 505])
+const accumulated = await intervalAdd([1500, 1515], [500, 505])
+const dominated = await intervalAdd([1000, 1001], [0, 500])
+
+const intervalSteps = [
+  `Widths add: [1000,1010] + [500,505] → [${narrow.lower},${narrow.upper}]. The inputs are 10 and 5 wide and the result is ${narrow.width}, so the bound on the sum is the sum of the bounds and nothing is hidden.`,
+  `Error accumulates: [1500,1515] + [500,505] → [${accumulated.lower},${accumulated.upper}], now ${accumulated.width} wide. A second addition widens the interval again, which is the page's point that tolerance is not uncertainty.`,
+  `The loosest term dominates: [1000,1001] + [0,500] → [${dominated.lower},${dominated.upper}], ${dominated.width} wide. A tightly known quantity added to a poorly known one is poorly known, however many digits the first one had.`,
+]
+
 const steps = [
   `Turn equivalence: 400° → ${turnEquivalence[0].output}°, 760° → ${turnEquivalence[1].output}°, −320° → ${turnEquivalence[2].output}°. Three angles differing by whole turns give one result, which is the page's statement that θ and θ + 360°k are the same direction.`,
   `Idempotence: 400° → ${turnEquivalence[0].output}° → ${idempotence.output}°. Applying normalisation to its own output changes nothing.`,
@@ -61,6 +87,7 @@ const steps = [
 ]
 
 const receipts = [...turnEquivalence, idempotence, ...inInterval]
+const allReceipts = [...receipts, narrow, accumulated, dominated]
 const payload = {
   schemaVersion: 'maha-kernel-calculations-public/1.0',
   generatedBy: 'scripts/generate-kernel-calculations.ts, at build time',
@@ -75,7 +102,51 @@ const payload = {
     'That the page’s claims are true. These cases exhibit stated invariants on specific values, and exhibiting is not proving.',
   ],
   howToVerify: 'Rebuild the kernel with npm run build:wasm-kernel, which is deterministic, confirm its digest matches kernelSha256, then re-execute each operation on the recorded inputs.',
+  /**
+   * The thermal operations stay unwired, and this records why so the routes are
+   * not retried blindly.
+   *
+   * layer-thermal-resistance and temperature-rise need a thermal conductivity,
+   * a thickness and an area. The first is a material property and must come
+   * from a source, not from me. Two attempts failed: a NIST materials search
+   * returned a figure carried in a paper abstract rather than a reference entry
+   * with a locator, and the NIST cryogenic silicon page gives thermal expansion
+   * rather than conductivity and states nothing near room temperature.
+   *
+   * Supplying a plausible number would produce a calculation that looks like
+   * physics and rests on nothing, which is the failure four calculation
+   * candidates were already refused for. The operations work and are tested;
+   * they are waiting on a sourced material property.
+   */
+  refusedForNow: [
+    {
+      operations: ['layer-thermal-resistance-nanokelvin-per-watt', 'temperature-rise-microkelvin'],
+      missing: 'a thermal conductivity from an inspected source, at a stated locator',
+      attempted: [
+        'NIST materials search: returned a value quoted in a paper abstract, not a reference entry',
+        'https://trc.nist.gov/cryogenics/materials/Silicon/Silicon.htm: gives thermal expansion, not conductivity, and nothing near 300 K',
+      ],
+      note: 'The kernel also bounds the model to one-dimensional steady-state conduction, excluding interfaces, spreading resistance, anisotropy, radiation, convection and temperature dependence. A sourced conductivity would still only support a calculation inside those bounds.',
+    },
+  ],
   calculations: [
+    {
+      route: '/knowledge/mathematics/convergence-precision-and-error',
+      title: 'Interval addition, executed',
+      method: 'interval-add, inclusive integer intervals with outward rounding on signed 64-bit integers',
+      units: 'nanometre, chosen only because the operation needs a unit; the arithmetic is unitless',
+      assumptions: [
+        'Endpoints are exact integers in the stated unit, and the interval is inclusive of both.',
+        'Rounding is outward, so a computed interval never claims to be narrower than the true one.',
+      ],
+      uncertainty: 'The interval is the uncertainty statement. Addition is exact on integers and aborts on overflow rather than wrapping, so no width is lost to the arithmetic itself.',
+      steps: intervalSteps,
+      cases: [narrow, accumulated, dominated].map((r) => ({
+        input: `[${(r.receipt.inputs as Record<string, string>).leftLower},${(r.receipt.inputs as Record<string, string>).leftUpper}] + [${(r.receipt.inputs as Record<string, string>).rightLower},${(r.receipt.inputs as Record<string, string>).rightUpper}]`,
+        output: `[${r.lower},${r.upper}] width ${r.width}`,
+        receiptSha256: r.receipt.receiptSha256,
+      })),
+    },
     {
       route: '/knowledge/mathematics/angle-normalization',
       title: 'Angle normalisation, executed',
@@ -98,5 +169,5 @@ const payload = {
 
 writeFileSync('content/legacy-uplift/kernel-calculations.json', `${JSON.stringify(payload, null, 2)}\n`)
 console.log(`kernel ${payload.kernelSha256.slice(0, 22)}…`)
-console.log(`${receipts.length} receipts, all verified by re-execution`)
+console.log(`${allReceipts.length} receipts, all verified by re-execution`)
 for (const c of payload.calculations) console.log(`  ${c.route}: ${c.cases.length} cases`)

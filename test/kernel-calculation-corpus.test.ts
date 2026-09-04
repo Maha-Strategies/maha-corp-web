@@ -20,8 +20,11 @@ test('every case was verified by re-execution, not asserted', () => {
   // The generator verifies each receipt by rerunning the kernel and throws
   // otherwise, so a case reaching this file has already been checked. Each
   // still carries its own receipt digest so a reader can repeat it.
-  const cases = calcs.calculations[0].cases
+  const angleCalc = calcs.calculations.find((c: { route: string }) =>
+    c.route === '/knowledge/mathematics/angle-normalization')
+  const cases = angleCalc.cases
   assert.ok(cases.length >= 6, `expected the invariant cases, got ${cases.length}`)
+  assert.equal(calcs.calculations.length, 2, 'both wired operations must be present')
   for (const c of cases) {
     assert.match(c.receiptSha256, /^sha256:[0-9a-f]{64}$/, `${c.input} has no receipt digest`)
   }
@@ -78,11 +81,43 @@ test('the calculation artifact carries no kernel bytes', () => {
   assert.ok(raw.length < 20_000, `the artifact is ${raw.length} bytes; it should carry receipts, not a binary`)
 })
 
-test('a page without a kernel calculation renders none', () => {
-  // Optional by design: the corpus renders no unverified number in its place.
-  const others = compiled.pages.filter((p: { route: string; sections?: { dimension: string }[] }) =>
-    p.route !== '/knowledge/mathematics/angle-normalization'
-    && (p.sections ?? []).some((s) => s.dimension === 'deterministic-calculation'))
-  assert.deepEqual(others.map((p: { route: string }) => p.route), [],
-    'only the kernel-executed page may carry a calculation')
+test('every rendered calculation is kernel-executed, and no other page carries one', () => {
+  // Optional by design: a page without a kernel calculation renders none, not
+  // an unverified number in its place.
+  const wired = new Set(calcs.calculations.map((c: { route: string }) => c.route))
+  for (const page of compiled.pages) {
+    const has = (page.sections ?? []).some((s: { dimension: string }) => s.dimension === 'deterministic-calculation')
+    assert.equal(has, wired.has(page.route), `${page.route} disagrees with the wired set`)
+  }
+})
+
+test('interval addition exhibits what the convergence page states', () => {
+  const page = compiled.pages.find((p: { route: string }) =>
+    p.route === '/knowledge/mathematics/convergence-precision-and-error')
+  const s = (page.sections ?? []).find((x: { dimension: string }) => x.dimension === 'deterministic-calculation')
+  assert.ok(s, 'the interval calculation must render')
+  const text = s.items.join(' ')
+  assert.match(text, /\[1000,1010\] \+ \[500,505\] → \[1500,1515\]/, 'widths add')
+  assert.match(text, /→ \[2000,2020\], now 20 wide/, 'error accumulates on a second addition')
+  assert.match(text, /→ \[1000,1501\], 501 wide/, 'the loosest term dominates')
+  assert.match(text, /however many digits the first one had/,
+    'the page states that printed digits do not imply low error; the case must land on it')
+  assert.match(text, /Executed by kernel sha256:[0-9a-f]{64}/)
+})
+
+test('the thermal operations are refused with a recorded reason, not quietly skipped', () => {
+  // The operations work and are tested. They need a material property, and a
+  // plausible number would produce a calculation that looks like physics and
+  // rests on nothing.
+  const refused = calcs.refusedForNow?.[0]
+  assert.ok(refused, 'the refusal must be recorded in the artifact')
+  assert.deepEqual(refused.operations,
+    ['layer-thermal-resistance-nanokelvin-per-watt', 'temperature-rise-microkelvin'])
+  assert.match(refused.missing, /thermal conductivity from an inspected source/)
+  assert.ok(refused.attempted.length >= 2, 'the attempted routes must be recorded so they are not retried blindly')
+  assert.match(refused.note, /one-dimensional steady-state/)
+  // And nothing thermal reached a page.
+  const rendered = JSON.stringify(compiled.pages.map((p: { sections?: unknown }) => p.sections))
+  assert.ok(!/thermal-resistance|temperature-rise/.test(rendered),
+    'a thermal calculation must not render while its inputs are unsourced')
 })

@@ -15,11 +15,11 @@
     "inspectedLocatorsPerPage": 0.49,
     "declaredLocatorsPerPage": 2.1,
     "independentlySourcedExplanatorySections": 44,
-    "informationDimensionsPerPage": 8.63,
+    "informationDimensionsPerPage": 8.64,
     "limitationsPerPage": 1,
     "typedInternalLinksPerPage": 3.97,
     "supportedComparisons": 48,
-    "reproducibleCalculations": 1,
+    "reproducibleCalculations": 2,
     "wordCountUsed": false
   },
   "upliftVersion": "maha-legacy-uplift/1.0",
@@ -102,13 +102,13 @@
       "renderedSections": 6
     },
     "after": {
-      "dimensions": 8.63,
+      "dimensions": 8.64,
       "sourcesWithBoundary": 2.1,
       "declaredLocators": 2.1,
       "contentInspectedLocators": 0.49,
       "explanatorySources": 0.49,
       "internalLinks": 3.97,
-      "renderedSections": 6.8
+      "renderedSections": 6.81
     },
     "metric": "Information dimensions, evidence coverage, declared versus content-inspected locators, internal links and rendered sections. Word count is deliberately not among them.",
     "locatorNote": "A declared locator is a URL. A content-inspected locator requires an independent attestation recording the passage that was read. The first pass conflated them and reported declared locators as inspected."
@@ -116,5 +116,5 @@
   "routesChanged": 0,
   "duplicatePagesAdded": 0,
   "boundary": "A private compilation report. It contains no audit data, review packet, rejected material or credential.",
-  "reportDigest": "sha256:782c414c50c403bd7b4a74cdb407c780de1c4c778755eb83f136cc8a279acfb8"
+  "reportDigest": "sha256:1804ce87ab2d5349deb79297d5d2b762e007c2bf1efb7381e7f7e8662b829c5d"
 }

@@ -24,7 +24,54 @@
     "That the page’s claims are true. These cases exhibit stated invariants on specific values, and exhibiting is not proving."
   ],
   "howToVerify": "Rebuild the kernel with npm run build:wasm-kernel, which is deterministic, confirm its digest matches kernelSha256, then re-execute each operation on the recorded inputs.",
+  "refusedForNow": [
+    {
+      "operations": [
+        "layer-thermal-resistance-nanokelvin-per-watt",
+        "temperature-rise-microkelvin"
+      ],
+      "missing": "a thermal conductivity from an inspected source, at a stated locator",
+      "attempted": [
+        "NIST materials search: returned a value quoted in a paper abstract, not a reference entry",
+        "https://trc.nist.gov/cryogenics/materials/Silicon/Silicon.htm: gives thermal expansion, not conductivity, and nothing near 300 K"
+      ],
+      "note": "The kernel also bounds the model to one-dimensional steady-state conduction, excluding interfaces, spreading resistance, anisotropy, radiation, convection and temperature dependence. A sourced conductivity would still only support a calculation inside those bounds."
+    }
+  ],
   "calculations": [
+    {
+      "route": "/knowledge/mathematics/convergence-precision-and-error",
+      "title": "Interval addition, executed",
+      "method": "interval-add, inclusive integer intervals with outward rounding on signed 64-bit integers",
+      "units": "nanometre, chosen only because the operation needs a unit; the arithmetic is unitless",
+      "assumptions": [
+        "Endpoints are exact integers in the stated unit, and the interval is inclusive of both.",
+        "Rounding is outward, so a computed interval never claims to be narrower than the true one."
+      ],
+      "uncertainty": "The interval is the uncertainty statement. Addition is exact on integers and aborts on overflow rather than wrapping, so no width is lost to the arithmetic itself.",
+      "steps": [
+        "Widths add: [1000,1010] + [500,505] → [1500,1515]. The inputs are 10 and 5 wide and the result is 15, so the bound on the sum is the sum of the bounds and nothing is hidden.",
+        "Error accumulates: [1500,1515] + [500,505] → [2000,2020], now 20 wide. A second addition widens the interval again, which is the page's point that tolerance is not uncertainty.",
+        "The loosest term dominates: [1000,1001] + [0,500] → [1000,1501], 501 wide. A tightly known quantity added to a poorly known one is poorly known, however many digits the first one had."
+      ],
+      "cases": [
+        {
+          "input": "[1000,1010] + [500,505]",
+          "output": "[1500,1515] width 15",
+          "receiptSha256": "sha256:06f52d9f8f531e43eeffd85c841fbf37ab7e3934ba353960adba20394aceb897"
+        },
+        {
+          "input": "[1500,1515] + [500,505]",
+          "output": "[2000,2020] width 20",
+          "receiptSha256": "sha256:299aafea56dca9a13488b0d3aa01e16efa4910bb9e87530e2f6aaa08553782ac"
+        },
+        {
+          "input": "[1000,1001] + [0,500]",
+          "output": "[1000,1501] width 501",
+          "receiptSha256": "sha256:50ea93aee4ed28b07a4dd699d37ac6eb75d9b2a24373c505e7e3e4d2e22619de"
+        }
+      ]
+    },
     {
       "route": "/knowledge/mathematics/angle-normalization",
       "title": "Angle normalisation, executed",
