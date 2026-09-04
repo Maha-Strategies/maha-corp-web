@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { EvidenceStatus } from '@/components/EvidenceStatus'
 import { UpliftSections } from '@/components/UpliftSections'
 
 import { SITE_URL } from '@/lib/briefs-data'
@@ -73,6 +74,7 @@ export default async function AstronomyArticlePage({ params }: PageProps) {
           <h1 className="mt-6 max-w-5xl text-4xl font-semibold tracking-tight text-white sm:text-6xl">{article.title}</h1>
           <p className="mt-6 max-w-3xl font-serif text-lg leading-8 text-zinc-400">{article.description}</p>
         </header>
+        <EvidenceStatus route={path} />
 
         <div className="mt-12 grid gap-14 lg:grid-cols-[minmax(0,1fr)_330px]">
           <article>

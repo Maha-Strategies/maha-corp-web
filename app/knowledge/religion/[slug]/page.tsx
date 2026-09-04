@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { EvidenceStatus } from '@/components/EvidenceStatus'
 import { UpliftSections } from '@/components/UpliftSections'
 
 import { SITE_URL } from '@/lib/briefs-data'
@@ -33,6 +34,7 @@ export default async function ReligionConceptPage({ params }: PageProps) {
   return <main className="min-h-screen bg-[#09090b] px-6 py-16 text-zinc-300 selection:bg-teal-300 selection:text-black sm:px-12"><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} /><div className="mx-auto max-w-6xl">
     <nav aria-label="Breadcrumb" className="font-mono text-[10px] uppercase tracking-widest text-zinc-600"><Link href="/knowledge" className="hover:text-white">Knowledge</Link><span className="px-2">/</span><Link href={RELIGION_KNOWLEDGE_PATH} className="hover:text-white">Religion and contemplative traditions</Link><span className="px-2">/</span><span className="text-zinc-400">{item.name}</span></nav>
     <header className="mt-10 border-b border-zinc-800 pb-10"><p className="font-mono text-[10px] uppercase tracking-widest text-teal-300">{item.category}</p><h1 className="mt-6 max-w-5xl text-4xl font-semibold tracking-tight text-white sm:text-6xl">{item.name}</h1><p className="mt-6 max-w-3xl font-serif text-lg leading-8 text-zinc-300">{item.description}</p></header>
+        <EvidenceStatus route={path} />
     <div className="mt-12 grid gap-14 lg:grid-cols-[minmax(0,1fr)_330px]"><article>
       <section className="border-l-2 border-teal-500 bg-teal-950/10 p-6"><p className="font-mono text-[10px] uppercase tracking-widest text-teal-300">Working definition</p><p className="mt-3 font-serif text-lg leading-8 text-zinc-200">{item.definition}</p></section>
       <div className="mt-10 grid gap-8 md:grid-cols-2"><List title="Questions this method asks" items={item.questions} /><List title="Evidence inputs" items={item.evidenceInputs} tone="amber" /></div>
