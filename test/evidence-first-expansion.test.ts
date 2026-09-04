@@ -21,6 +21,8 @@ const NEW_PAGES = [
   '/knowledge/mathematics/orthogonal-polynomials',
   '/knowledge/mathematics/riemann-zeta-function',
   '/knowledge/mathematics/hypergeometric-function',
+  '/knowledge/mathematics/incomplete-gamma-functions',
+  '/knowledge/astronomy/very-long-baseline-interferometry',
 ]
 
 test('new pages are born supported, not added to the unsupported pile', () => {
@@ -37,7 +39,7 @@ test('growth improved the evidence-backed share rather than diluting it', () => 
   // nobody would have made the ratio worse, which is the failure mode.
   const supported = status.counts['independently-supported']
   const uninspected = status.counts['cited-but-uninspected']
-  assert.ok(supported >= 40, `supported fell to ${supported}`)
+  assert.ok(supported >= 42, `supported fell to ${supported}`)
   assert.ok(uninspected <= 98, `uninspected rose to ${uninspected}; expansion added unsupported pages`)
 })
 
@@ -108,8 +110,8 @@ test('the new concepts carry their conditions, not just their formulas', () => {
   const added = MATHEMATICAL_CONCEPTS.filter((c) => ['gamma-function',
     'error-function-and-related-integrals', 'bessel-functions', 'bernoulli-and-euler-numbers',
     'asymptotic-approximations', 'orthogonal-polynomials', 'riemann-zeta-function',
-    'hypergeometric-function'].includes(c.slug))
-  assert.equal(added.length, 8)
+    'hypergeometric-function', 'incomplete-gamma-functions'].includes(c.slug))
+  assert.equal(added.length, 9)
   for (const c of added) {
     assert.ok(c.assumptions.length > 0, `${c.slug} states no conditions`)
     assert.ok(c.errorBounds.length > 0, `${c.slug} states no error behaviour`)
@@ -222,4 +224,27 @@ test('the hypergeometric page carries all three boundary regimes', () => {
   assert.match(text, /absolutely/i)
   assert.match(text, /conditionally/i)
   assert.match(text, /diverges/i)
+})
+
+test('a company or agency number is always attributed where it renders', () => {
+  // VLBI carries four stated precisions. Each must read as NASA's statement
+  // about the technique, never as a measured result of ours.
+  const page = compiled.pages.find((p: { route: string }) =>
+    p.route === '/knowledge/astronomy/very-long-baseline-interferometry')
+  const text = JSON.stringify(page.sections)
+  for (const figure of ['picoseconds', 'millimetres', 'milliarcsecond']) {
+    assert.ok(text.includes(figure), `the ${figure} figure must render`)
+  }
+  assert.match(text, /stated capabilities rather than a result|stated to be measured|stated to a few/,
+    'the precisions must read as stated capabilities, not as our measurements')
+})
+
+test('the same numerical device is recognised across two pages, both sourced', () => {
+  // erfc = 1 - erf at 7.2.2 and P + Q = 1 at 8.2.5 exist for one reason: so the
+  // small member can be computed without subtracting near-equal numbers.
+  const ig = insp.inspected.find((s: { sourceId: string }) => s.sourceId === 'nist-dlmf-incomplete-gamma')
+  assert.match(ig.crossPageNote, /7\.2\.2/)
+  assert.match(ig.crossPageNote, /8\.2\.5/)
+  const c = MATHEMATICAL_CONCEPTS.find((x) => x.slug === 'incomplete-gamma-functions')!
+  assert.match(c.errorBounds.join(' '), /same device appears at 7\.2\.2/)
 })

@@ -3579,6 +3579,298 @@
       "upliftDigest": "sha256:2412bca326bbbd26b2e81d2e82b4780cf4c2297e36edc567ffa744c6a3952b66"
     },
     {
+      "route": "/knowledge/astronomy/very-long-baseline-interferometry",
+      "family": "astronomy",
+      "slug": "very-long-baseline-interferometry",
+      "eligible": true,
+      "refusals": [],
+      "before": {
+        "route": "/knowledge/astronomy/very-long-baseline-interferometry",
+        "family": "astronomy",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 2,
+        "relatedRoutes": [
+          "/knowledge/astronomy/coordinates-reference-frames-and-sky-position",
+          "/knowledge/astronomy/astrometry-parallax-and-proper-motion"
+        ],
+        "renderedSections": 6
+      },
+      "after": {
+        "route": "/knowledge/astronomy/very-long-baseline-interferometry",
+        "family": "astronomy",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 2,
+        "relatedRoutes": [
+          "/knowledge/astronomy/coordinates-reference-frames-and-sky-position",
+          "/knowledge/astronomy/astrometry-parallax-and-proper-motion"
+        ],
+        "renderedSections": 6
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "VLBI measures the difference in arrival time of a radio wavefront from a distant quasar between two Earth-based antennas. NASA states the timing is precise to a few picoseconds, which yields antenna positions to a few millimetres and quasar positions to fractions of a milliarcsecond. From many such measurements the technique determines three things at once: the terrestrial reference frame of antenna locations, the celestial reference frame of quasar positions, and the orientation of the Earth in space. Its inertial anchor is an assumption with a stated reason, that extragalactic objects are far enough away for their motion across the sky to be undetectable."
+          ],
+          "sourceIds": [
+            "nasa-vlbi",
+            "nasa-vlbi",
+            "nasa-vlbi"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "The arrival-time difference of a quasar radio wavefront between two Earth-based antennas.",
+            "That time difference is stated to be measured to a few picoseconds.",
+            "Many such differences are collected across a global antenna network and many quasars.",
+            "Antenna positions on the Earth, stated to a few millimetres.",
+            "Quasar positions on the sky, stated to fractions of a milliarcsecond.",
+            "The orientation of the Earth with respect to the celestial frame."
+          ],
+          "sourceIds": [
+            "nasa-vlbi",
+            "nasa-vlbi",
+            "nasa-vlbi"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "The arrival-time difference of a quasar radio wavefront between two Earth-based antennas.",
+            "That time difference is stated to be measured to a few picoseconds.",
+            "Many such differences are collected across a global antenna network and many quasars."
+          ],
+          "sourceIds": [
+            "nasa-vlbi",
+            "nasa-vlbi",
+            "nasa-vlbi"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "The stated precisions are capabilities of the technique rather than a result reported for a particular session.",
+            "The source describes what the technique determines without deriving the relation between baseline length and angular resolution, so no resolution formula rests on it here.",
+            "The inertial assumption is an approximation justified by distance, not an exact statement that the sources are motionless."
+          ],
+          "sourceIds": [
+            "nasa-vlbi",
+            "nasa-vlbi",
+            "nasa-vlbi"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "Boundaries declared by the cited sources",
+          "items": [
+            "An agency technique description. The quoted precisions are stated capabilities rather than a result for any particular observation, and the page describes what the technique determines without deriving the relation between baseline length and resolution. (boundary declared by Very Long Baseline Interferometry)",
+            "An agency technique description. The precisions are stated capabilities rather than results for a particular observation. (boundary declared by Very Long Baseline Interferometry)",
+            "An agency technique description. The precisions are stated capabilities rather than results for a particular observation. (boundary declared by Very Long Baseline Interferometry)"
+          ],
+          "sourceIds": [
+            "nasa-vlbi",
+            "nasa-vlbi",
+            "nasa-vlbi"
+          ]
+        },
+        {
+          "dimension": "related-records",
+          "heading": "Related records",
+          "items": [
+            "/knowledge/astronomy/coordinates-reference-frames-and-sky-position",
+            "/knowledge/astronomy/astrometry-parallax-and-proper-motion"
+          ],
+          "sourceIds": []
+        }
+      ],
+      "sectionCount": 6,
+      "upliftDigest": "sha256:32be34233b6b9b41e8dd4d16d834612d33c9481ead1bd7bf38b4efc1262771e0"
+    },
+    {
+      "route": "/knowledge/mathematics/incomplete-gamma-functions",
+      "family": "mathematics",
+      "slug": "incomplete-gamma-functions",
+      "eligible": true,
+      "refusals": [],
+      "before": {
+        "route": "/knowledge/mathematics/incomplete-gamma-functions",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 2,
+        "relatedRoutes": [
+          "/knowledge/mathematics/gamma-function",
+          "/knowledge/mathematics/error-function-and-related-integrals"
+        ],
+        "renderedSections": 6
+      },
+      "after": {
+        "route": "/knowledge/mathematics/incomplete-gamma-functions",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 2,
+        "relatedRoutes": [
+          "/knowledge/mathematics/gamma-function",
+          "/knowledge/mathematics/error-function-and-related-integrals"
+        ],
+        "renderedSections": 6
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "DLMF 8.2.1 defines the lower incomplete gamma as the integral of t to the a minus one times e to the minus t from zero to z, for real part of a greater than zero. 8.2.2 defines the upper form as the same integrand taken from z to infinity. 8.2.3 states the identity that binds them: the lower plus the upper equals the complete gamma at a, for a not zero or a negative integer. The normalized pair at 8.2.4 divides each by the complete gamma, and 8.2.5 states that they sum to one. The two halves are not symmetric in the parameter: the chapter records that the upper form is entire in a when z is non-zero, while the lower form is meromorphic with simple poles at the non-positive integers."
+          ],
+          "sourceIds": [
+            "nist-dlmf-incomplete-gamma",
+            "nist-dlmf-incomplete-gamma",
+            "nist-dlmf-incomplete-gamma"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Choose the half whose value is the smaller of the two, and take the other by subtraction only when precision allows.",
+            "Use the normalized pair from 8.2.4 when comparing across parameters, since the complete gamma has been divided out.",
+            "Check the parameter against zero and the negative integers before relying on 8.2.3, which excludes them."
+          ],
+          "sourceIds": [
+            "nist-dlmf-incomplete-gamma",
+            "nist-dlmf-incomplete-gamma",
+            "nist-dlmf-incomplete-gamma"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "Lower and upper integral definitions, DLMF 8.2.1 and 8.2.2",
+            "The two halves sum to the complete gamma, DLMF 8.2.3",
+            "The normalized pair sums to one, DLMF 8.2.5"
+          ],
+          "sourceIds": [
+            "nist-dlmf-incomplete-gamma",
+            "nist-dlmf-incomplete-gamma",
+            "nist-dlmf-incomplete-gamma"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "The identity at 8.2.5 says the normalized pair sums to one exactly, which is why computing the small member by subtracting the large one from one destroys it. The same device appears at 7.2.2 for the error function, and for the same reason.",
+            "Near the poles of the lower form the value is unbounded, so an algorithm tuned for one half is not automatically usable for the other.",
+            "The chapter gives definitions rather than algorithms and makes no accuracy claim for any evaluation method.",
+            "The lower definition at 8.2.1 is stated for real part of a greater than zero.",
+            "The identity at 8.2.3 excludes a equal to zero and the negative integers, which are exactly the poles of the complete gamma.",
+            "The two halves differ in the parameter: the upper is entire in a for non-zero z while the lower has simple poles at the non-positive integers."
+          ],
+          "sourceIds": [
+            "nist-dlmf-incomplete-gamma",
+            "nist-dlmf-incomplete-gamma",
+            "nist-dlmf-incomplete-gamma"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "What this does not establish",
+          "items": [
+            "The chapter defines the two halves and their exact relation. It does not establish the accuracy of any algorithm, and the exactness of the identity is a mathematical statement rather than a numerical guarantee."
+          ],
+          "sourceIds": [
+            "nist-dlmf-incomplete-gamma",
+            "nist-dlmf-incomplete-gamma",
+            "nist-dlmf-incomplete-gamma"
+          ]
+        },
+        {
+          "dimension": "related-records",
+          "heading": "Related records",
+          "items": [
+            "/knowledge/mathematics/gamma-function",
+            "/knowledge/mathematics/error-function-and-related-integrals"
+          ],
+          "sourceIds": []
+        }
+      ],
+      "sectionCount": 6,
+      "upliftDigest": "sha256:06db38607509189191c82165f02649126467d12d84b59bbc7ec4b2faed296e9c"
+    },
+    {
       "route": "/knowledge/mathematics/riemann-zeta-function",
       "family": "mathematics",
       "slug": "riemann-zeta-function",

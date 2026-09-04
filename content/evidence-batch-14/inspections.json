@@ -358,6 +358,86 @@
       ],
       "establishes": "The Gauss series with its disk, branch and exceptional parameters, the regularized form, the termination condition, and the three boundary regimes.",
       "boundary": "A definition with a declared branch. It does not establish the accuracy of any numerical continuation outside the disk."
+    },
+    {
+      "sourceId": "nist-dlmf-incomplete-gamma",
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "title": "DLMF Chapter 8: Incomplete Gamma and Related Functions",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedFrom": "https://dlmf.nist.gov/8.2",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "8.2.1 and 8.2.2 the two integrals",
+        "8.2.3 the splitting identity",
+        "8.2.4 and 8.2.5 the normalized pair",
+        "the analytic structure note"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/incomplete-gamma-functions",
+          "locator": "8.2.1, 8.2.2 and 8.2.3",
+          "claim": "The gamma integral splits at a point into two halves whose sum is the complete function.",
+          "supportingPassage": "8.2.1 defines the lower incomplete gamma as the integral of t to the a minus one times e to the minus t from zero to z, for real part of a greater than zero. 8.2.2 defines the upper form as the same integrand from z to infinity. 8.2.3 states that the lower plus the upper equals the complete gamma at a, for a not equal to zero or a negative integer.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/incomplete-gamma-functions",
+          "locator": "8.2.4, 8.2.5 and the analytic structure note",
+          "claim": "The normalized pair sums to one exactly, and the two halves differ in their analytic structure in the parameter.",
+          "supportingPassage": "8.2.4 defines P of a, z as the lower form divided by the complete gamma and Q of a, z as the upper form divided by the same, and 8.2.5 states that P plus Q equals one. The chapter records that the upper incomplete gamma is entire in a when z is non-zero, while the lower is meromorphic with simple poles at a equal to the non-positive integers.",
+          "distinctPassage": true
+        }
+      ],
+      "crossPageNote": "The exact identity at 8.2.5 is the same device as 7.2.2 on the error-function page: a complementary form exists so the small member can be computed directly rather than by subtracting the large one from one. Both halves of that observation are inspected.",
+      "establishes": "The two integral halves, the identity binding them to the complete gamma, the normalized pair, and their differing analytic structure.",
+      "boundary": "Defines the functions and their relation. It makes no accuracy claim for any evaluation method."
+    },
+    {
+      "sourceId": "nasa-vlbi",
+      "domain": "astronomy",
+      "class": "government-or-standards-authority",
+      "title": "Very Long Baseline Interferometry",
+      "venue": "NASA Earthdata",
+      "identifier": "earthdata.nasa.gov space geodesy techniques, VLBI",
+      "retrievedFrom": "https://www.earthdata.nasa.gov/data/space-geodesy-techniques/vlbi",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Publisher and page title confirmed on retrieval.",
+      "versionRelationship": "Retrieved 2026-09-04",
+      "rightsBasis": "United States government agency publication, publicly readable. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "What VLBI measures",
+        "The stated precisions",
+        "What the technique determines",
+        "The inertial reference assumption"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/astronomy/very-long-baseline-interferometry",
+          "locator": "What VLBI measures; the stated precisions",
+          "claim": "The observable is an arrival-time difference between two antennas, and the stated precisions carry from time to position to sky angle.",
+          "supportingPassage": "NASA states that VLBI measures the time difference between the arrival at two Earth-based antennas of a radio wavefront emitted by a distant quasar, that the time difference measurements are precise to a few picoseconds, and that this determines the relative positions of the antennas to a few millimetres and the quasar positions to fractions of a milliarcsecond.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/astronomy/very-long-baseline-interferometry",
+          "locator": "What the technique determines; the inertial assumption",
+          "claim": "Three products come out together, and the inertial anchor is an assumption with a stated reason rather than a given.",
+          "supportingPassage": "NASA states that VLBI determines the terrestrial reference frame of antenna locations on the Earth, the celestial reference frame of quasar positions on the sky, and the orientation of the Earth in space, and that it is unique in making rapid accurate measurements of the orientation of one frame with respect to the other. It states that extragalactic objects form a true inertial reference frame because they are at such great distances that their motions across the sky are undetectable.",
+          "distinctPassage": true
+        }
+      ],
+      "notCovered": "The page does not derive the relation between baseline length and angular resolution, so the page built on it states no resolution formula.",
+      "establishes": "The VLBI observable, its stated precisions, the three products of the technique, and the reason given for treating extragalactic sources as inertial.",
+      "boundary": "An agency technique description. The precisions are stated capabilities rather than results for a particular observation."
     }
   ],
   "notInspected": [
@@ -367,13 +447,13 @@
     }
   ],
   "summary": {
-    "sourcesInspected": 10,
-    "sourcesAttached": 9,
-    "routesReached": 9,
-    "claimsSupported": 18,
+    "sourcesInspected": 12,
+    "sourcesAttached": 11,
+    "routesReached": 11,
+    "claimsSupported": 22,
     "heldBack": 1
   },
-  "boundary": "Ten sources inspected at section level; nine attached across mathematics and astronomy. The tenth is recorded, inspected and unattached, because attaching it would move a frozen release-governance digest.",
+  "boundary": "Twelve sources inspected at section level; eleven attached across mathematics and astronomy. The twelfth is recorded, inspected and unattached, because attaching it would move a frozen release-governance digest.",
   "heldBack": [
     {
       "sourceId": "nasa-exoplanet-methods",

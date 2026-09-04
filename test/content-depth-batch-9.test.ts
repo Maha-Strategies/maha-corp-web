@@ -3,6 +3,7 @@ import test from 'node:test'
 
 import { VENDOR_AUTHORED_SOURCES, isVendorAuthored, vendorBackedSupplierRoutes } from '../lib/uplift/vendor-authorship.ts'
 import { execFileSync } from 'node:child_process'
+import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
 import { auditDepth, assertWordCountIsNotAGate, type DepthMeasures } from '../lib/page-depth-audit.ts'
@@ -148,8 +149,24 @@ test('the vendor correction removed independent status from every citing page', 
   assert.ok(vendorBackedSupplierRoutes([
     { route: '/knowledge/suppliers/any', sources: [{ id: 'asml-lithography' }] },
   ]).has('/knowledge/suppliers/any'))
-  assert.ok(report.pageStates.independentlySourceSupported < 42,
-    'the corrected count must be below the previously reported 42')
+  // Not a ceiling of 42. That number was the inflated figure before vendor
+  // sources were excluded, and the count has since passed it honestly by
+  // inspecting new sources. What the correction established is a property, so
+  // the property is what is asserted: no page counted as independently
+  // supported may rest on vendor-authored evidence.
+  const compiled = JSON.parse(readFileSync(resolve(ROOT, 'content/legacy-uplift/uplift-compiled.json'), 'utf8')) as {
+    pages: { route: string; after: { explanatorySources?: number } | null }[] }
+  const vendorBacked = vendorBackedSupplierRoutes(
+    compiled.pages.map((p) => ({ route: p.route, sources: [], relatedRoutes: [] })))
+  for (const route of vendorBacked) {
+    const page = compiled.pages.find((p) => p.route === route)
+    assert.equal(page?.after?.explanatorySources ?? 0, 0,
+      `${route} rests on vendor-authored evidence and must not count as independently supported`)
+  }
+  const audit = JSON.parse(readFileSync(resolve(ROOT, 'content/evidence-batch-9/depth-audit.json'), 'utf8')) as {
+    byGroup: Record<string, { states: Record<string, number> }> }
+  assert.ok(!Object.keys(audit.byGroup.independentlySupported?.states ?? {}).some((s) => s.startsWith('first-party')),
+    'a first-party page is being counted as independently supported')
 })
 
 test('first-party pages retain their disclosure', () => {

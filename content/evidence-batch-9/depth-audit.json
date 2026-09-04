@@ -3,13 +3,13 @@
   "auditedAt": "2026-09-03",
   "finding": "Classification and substance are different measurements. A page can carry an inspected source and explain almost nothing, and a structural page can be richly written and cite nothing checkable.",
   "wordCountUsedAsGate": false,
-  "totalAudited": 176,
-  "corpusSize": 176,
+  "totalAudited": 178,
+  "corpusSize": 178,
   "denominatorEqualsCorpus": true,
   "supersedesBatch9Audit": "Batch 9 audited 59 pages and stated a result against 167. This audits all 167.",
   "depthDistribution": {
     "structurally-substantial-but-unsupported": 84,
-    "substantial-and-evidence-backed": 40,
+    "substantial-and-evidence-backed": 42,
     "blocked": 28,
     "first-party-documented-but-thin": 9,
     "first-party-documented-and-substantial": 1,
@@ -17,9 +17,9 @@
   },
   "byGroup": {
     "independentlySupported": {
-      "audited": 40,
+      "audited": 42,
       "states": {
-        "substantial-and-evidence-backed": 40
+        "substantial-and-evidence-backed": 42
       }
     },
     "firstPartyDocumented": {
@@ -43,7 +43,7 @@
       }
     }
   },
-  "substantialAndEvidenceBacked": 40,
+  "substantialAndEvidenceBacked": 42,
   "thinnestSupported": [],
   "verdicts": [
     {
@@ -621,6 +621,54 @@
       "substantialityScore": 15.8,
       "reasons": [],
       "verdictDigest": "sha256:152035826d0597ab73cf69a90e8a0ff546380effc815d210126e4d5c0a5b8d68"
+    },
+    {
+      "route": "/knowledge/astronomy/very-long-baseline-interferometry",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 665,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 9,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 3,
+        "unresolvedQuestions": 3,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 2,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 360
+      },
+      "substantialityScore": 15.4,
+      "reasons": [],
+      "verdictDigest": "sha256:49ad23f0e66d8487bc977c474a0096aca3ffae0854307dbc1d73e37d60392df5"
+    },
+    {
+      "route": "/knowledge/mathematics/incomplete-gamma-functions",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 691,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 2,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 396
+      },
+      "substantialityScore": 15.6,
+      "reasons": [],
+      "verdictDigest": "sha256:f33354c8c4ab1d6bb7ac2b95487b558581680819d55d2cab31e09e852605b9e1"
     },
     {
       "route": "/knowledge/mathematics/riemann-zeta-function",
@@ -4401,5 +4449,5 @@
     }
   ],
   "boundary": "A private audit. It changes no page.",
-  "auditDigest": "sha256:098d061567b85126a06b80ae9afd491cb28e0e45c5d5ef0082b781b82cebd086"
+  "auditDigest": "sha256:38e2a507d7b40c360392e03f89cde7fc1db3369676f2e6505bb769258e823e69"
 }
