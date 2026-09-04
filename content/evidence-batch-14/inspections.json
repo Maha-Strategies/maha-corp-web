@@ -201,6 +201,84 @@
       "notCovered": "The page does not explain why the oscillations occur, and gives no frequencies, amplitudes or precision figures. The page built on it therefore records the driving mechanism as unestablished and makes no numerical accuracy claim.",
       "establishes": "The asteroseismic observable, the properties inferred from it in combination with other measurements, and the saturation constraint the survey still faces.",
       "boundary": "A mission survey description. It establishes the method's inputs and outputs, not the physics behind them or any precision figure."
+    },
+    {
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "sourceId": "nist-dlmf-asymptotics",
+      "title": "DLMF Chapter 2: Asymptotic Approximations",
+      "retrievedFrom": "https://dlmf.nist.gov/2.1",
+      "exactLocators": [
+        "2.1.1 asymptotic equality",
+        "2.1.2 and 2.1.3 the order symbols",
+        "2.1.13 and 2.1.14 the Poincare expansion",
+        "the null-expansion example"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/asymptotic-approximations",
+          "locator": "2.1.1, 2.1.2 and 2.1.3",
+          "claim": "Asymptotic equality and the order symbols are defined by the behaviour of a ratio in a stated limit, so each is meaningless without that limit.",
+          "supportingPassage": "2.1.1 defines f asymptotic to phi as the ratio of the two tending to one as x tends to c within a point set X. 2.1.2 defines f equals little-o of phi as the ratio tending to zero in the same limit, and 2.1.3 defines f equals big-O of phi as the modulus of the ratio being bounded. Each definition is stated relative to the limit point c and the point set X.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/asymptotic-approximations",
+          "locator": "2.1.13, 2.1.14 and the null-expansion example",
+          "claim": "A Poincare expansion is a condition on every truncation, and it does not determine the function it describes.",
+          "supportingPassage": "2.1.13 requires that for each positive integer n the function equals the sum of the first n terms plus a remainder of order x to the minus n, and 2.1.14 writes the resulting expansion with the tilde. The chapter states that a series converging for all sufficiently large modulus is automatically the asymptotic expansion of its sum, and gives zero, e to the minus z, and e to the minus z cosine z as functions all possessing the null asymptotic expansion in suitable sectors.",
+          "distinctPassage": true
+        }
+      ],
+      "crossPageNote": "Generalises the limitation recorded on the gamma page: Stirling at 5.11.1 is one instance of a Poincare expansion as defined at 2.1.13, which is why adding terms eventually makes it worse.",
+      "establishes": "What an asymptotic statement means, and that an expansion is shared by more than one function.",
+      "boundary": "Defines the notation and the expansion. It makes no accuracy claim at any particular argument."
+    },
+    {
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "sourceId": "nist-dlmf-orthogonal-polynomials",
+      "title": "DLMF Chapter 18: Orthogonal Polynomials",
+      "retrievedFrom": "https://dlmf.nist.gov/18.2",
+      "exactLocators": [
+        "18.2.1 and 18.2.1_5 continuous orthogonality and the weight conditions",
+        "18.2.2 and 18.2.3 the discrete cases",
+        "18.2.8 and 18.2.10 the three-term recurrences"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/orthogonal-polynomials",
+          "locator": "18.2.1, 18.2.1_5, 18.2.2, 18.2.3 and 18.2.4_5",
+          "claim": "Orthogonality is defined against a declared weight or measure that must itself satisfy stated conditions.",
+          "supportingPassage": "18.2.1 states that distinct members of the family integrate to zero against each other over an open interval with weight w. 18.2.1_5 requires w to be non-negative, to have positive total integral, and to have all moments finite. 18.2.2 and 18.2.3 give the discrete analogues over infinite and finite point sets, and 18.2.4_5 gives the general form against a Lebesgue-Stieltjes measure.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/orthogonal-polynomials",
+          "locator": "18.2.8, 18.2.10, 18.2.9_5 and 18.2.11_2",
+          "claim": "Two standard three-term recurrences carry the family, and strict positivity conditions give the converse through Favard theorem.",
+          "supportingPassage": "18.2.8 gives the recurrence in the form p n plus one equals the quantity A n x plus B n times p n, minus C n times p n minus one, for n at least zero. 18.2.10 gives the second form, x times p n equals a n p n plus one plus b n p n plus c n p n minus one. Both are stated with strict positivity conditions at 18.2.9_5 and 18.2.11_2 which ensure orthogonality by Favard theorem.",
+          "distinctPassage": true
+        }
+      ],
+      "establishes": "Orthogonality conditions across the continuous, discrete and measure-theoretic settings, and the recurrences with the positivity that makes the converse hold.",
+      "boundary": "States conditions and recurrences. It does not establish numerical stability, and orthogonality is relative to a declared weight."
     }
   ],
   "notInspected": [
@@ -210,13 +288,13 @@
     }
   ],
   "summary": {
-    "sourcesInspected": 6,
-    "sourcesAttached": 5,
-    "routesReached": 5,
-    "claimsSupported": 10,
+    "sourcesInspected": 8,
+    "sourcesAttached": 7,
+    "routesReached": 7,
+    "claimsSupported": 14,
     "heldBack": 1
   },
-  "boundary": "Six sources inspected at section level; five attached across mathematics and astronomy. The sixth is recorded, inspected and unattached, because attaching it would move a frozen release-governance digest.",
+  "boundary": "Eight sources inspected at section level; seven attached across mathematics and astronomy. The eighth is recorded, inspected and unattached, because attaching it would move a frozen release-governance digest.",
   "heldBack": [
     {
       "sourceId": "nasa-exoplanet-methods",

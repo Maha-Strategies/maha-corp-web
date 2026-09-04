@@ -17,6 +17,8 @@ const NEW_PAGES = [
   '/knowledge/mathematics/bessel-functions',
   '/knowledge/mathematics/bernoulli-and-euler-numbers',
   '/knowledge/astronomy/asteroseismology-and-stellar-interiors',
+  '/knowledge/mathematics/asymptotic-approximations',
+  '/knowledge/mathematics/orthogonal-polynomials',
 ]
 
 test('new pages are born supported, not added to the unsupported pile', () => {
@@ -33,7 +35,7 @@ test('growth improved the evidence-backed share rather than diluting it', () => 
   // nobody would have made the ratio worse, which is the failure mode.
   const supported = status.counts['independently-supported']
   const uninspected = status.counts['cited-but-uninspected']
-  assert.ok(supported >= 36, `supported fell to ${supported}`)
+  assert.ok(supported >= 38, `supported fell to ${supported}`)
   assert.ok(uninspected <= 98, `uninspected rose to ${uninspected}; expansion added unsupported pages`)
 })
 
@@ -102,8 +104,9 @@ test('the new sources declare what they establish and what they do not', () => {
 
 test('the new concepts carry their conditions, not just their formulas', () => {
   const added = MATHEMATICAL_CONCEPTS.filter((c) => ['gamma-function',
-    'error-function-and-related-integrals', 'bessel-functions', 'bernoulli-and-euler-numbers'].includes(c.slug))
-  assert.equal(added.length, 4)
+    'error-function-and-related-integrals', 'bessel-functions', 'bernoulli-and-euler-numbers',
+    'asymptotic-approximations', 'orthogonal-polynomials'].includes(c.slug))
+  assert.equal(added.length, 6)
   for (const c of added) {
     assert.ok(c.assumptions.length > 0, `${c.slug} states no conditions`)
     assert.ok(c.errorBounds.length > 0, `${c.slug} states no error behaviour`)
@@ -160,4 +163,25 @@ test('the astronomy page does not claim what its source declines to explain', ()
   const text = JSON.stringify(page.sections)
   assert.match(text, /driving mechanism is not established/,
     'the page must say the mechanism is unestablished rather than quietly omitting it')
+})
+
+test('the asymptotics page records that an expansion does not identify a function', () => {
+  // The chapter's own example: three different functions share one null
+  // expansion. Agreement of expansions is not agreement of functions.
+  const c = MATHEMATICAL_CONCEPTS.find((x) => x.slug === 'asymptotic-approximations')!
+  assert.match(c.errorBounds.join(' '), /does not determine its function/i)
+  assert.match(c.doesNotEstablish, /shared by more than one function/i)
+})
+
+test('orthogonality is stated as relative to a weight, never as intrinsic', () => {
+  const c = MATHEMATICAL_CONCEPTS.find((x) => x.slug === 'orthogonal-polynomials')!
+  assert.match(c.assumptions.join(' '), /relative to a declared weight/i)
+  assert.match(c.doesNotEstablish, /declared weight rather than as an intrinsic property/i)
+})
+
+test('every inspected source names a DLMF release or an agency page', () => {
+  for (const s of insp.inspected) {
+    assert.ok(/DLMF|NASA/.test(`${s.identifier} ${s.venue}`), `${s.sourceId} has no identifiable publisher`)
+    assert.ok(s.claimByClaimSupport.length >= 2, `${s.sourceId} supports fewer than two claims`)
+  }
 })

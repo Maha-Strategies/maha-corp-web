@@ -4,7 +4,7 @@
   "note": "Public. Rendered on the page it describes. Carries no audit internals.",
   "counts": {
     "cited-but-uninspected": 98,
-    "independently-supported": 36,
+    "independently-supported": 38,
     "first-party-documented": 4
   },
   "entries": [
@@ -369,6 +369,14 @@
       "doNotUseFor": null
     },
     {
+      "route": "/knowledge/mathematics/asymptotic-approximations",
+      "status": "independently-supported",
+      "headline": "Checked against 3 inspected sources",
+      "detail": "3 sources were retrieved, identified and read, and the claims below are tied to specific passages at the scope those passages state. Each source also records what it cannot establish.",
+      "useFor": "The specific claims that carry a cited passage, at the scope that passage states.",
+      "doNotUseFor": null
+    },
+    {
       "route": "/knowledge/mathematics/bayesian-updating",
       "status": "cited-but-uninspected",
       "headline": "Cites 1 source, none of which has been read",
@@ -527,6 +535,14 @@
       "detail": "The sources are named, but none has been retrieved and read as part of building this page. Nothing here has been matched to a passage, so the citations show where a reader might look rather than what was checked.",
       "useFor": "Orientation: how the topic is organised, which terms matter, and where to start reading.",
       "doNotUseFor": "A claim you intend to act on or repeat. Follow the cited material yourself first."
+    },
+    {
+      "route": "/knowledge/mathematics/orthogonal-polynomials",
+      "status": "independently-supported",
+      "headline": "Checked against 3 inspected sources",
+      "detail": "3 sources were retrieved, identified and read, and the claims below are tied to specific passages at the scope those passages state. Each source also records what it cannot establish.",
+      "useFor": "The specific claims that carry a cited passage, at the scope that passage states.",
+      "doNotUseFor": null
     },
     {
       "route": "/knowledge/mathematics/periodic-functions-and-phase",

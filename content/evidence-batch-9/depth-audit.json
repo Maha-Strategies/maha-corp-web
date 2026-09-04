@@ -3,13 +3,13 @@
   "auditedAt": "2026-09-03",
   "finding": "Classification and substance are different measurements. A page can carry an inspected source and explain almost nothing, and a structural page can be richly written and cite nothing checkable.",
   "wordCountUsedAsGate": false,
-  "totalAudited": 172,
-  "corpusSize": 172,
+  "totalAudited": 174,
+  "corpusSize": 174,
   "denominatorEqualsCorpus": true,
   "supersedesBatch9Audit": "Batch 9 audited 59 pages and stated a result against 167. This audits all 167.",
   "depthDistribution": {
     "structurally-substantial-but-unsupported": 84,
-    "substantial-and-evidence-backed": 36,
+    "substantial-and-evidence-backed": 38,
     "blocked": 28,
     "first-party-documented-but-thin": 9,
     "first-party-documented-and-substantial": 1,
@@ -17,9 +17,9 @@
   },
   "byGroup": {
     "independentlySupported": {
-      "audited": 36,
+      "audited": 38,
       "states": {
-        "substantial-and-evidence-backed": 36
+        "substantial-and-evidence-backed": 38
       }
     },
     "firstPartyDocumented": {
@@ -43,7 +43,7 @@
       }
     }
   },
-  "substantialAndEvidenceBacked": 36,
+  "substantialAndEvidenceBacked": 38,
   "thinnestSupported": [],
   "verdicts": [
     {
@@ -621,6 +621,54 @@
       "substantialityScore": 15.8,
       "reasons": [],
       "verdictDigest": "sha256:152035826d0597ab73cf69a90e8a0ff546380effc815d210126e4d5c0a5b8d68"
+    },
+    {
+      "route": "/knowledge/mathematics/asymptotic-approximations",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 723,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 411
+      },
+      "substantialityScore": 15.9,
+      "reasons": [],
+      "verdictDigest": "sha256:bad066fa45a82e0703a349b1345cf835f48b6f57e5ed21af0980ec248d36efc8"
+    },
+    {
+      "route": "/knowledge/mathematics/orthogonal-polynomials",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 693,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 2,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 355
+      },
+      "substantialityScore": 15.6,
+      "reasons": [],
+      "verdictDigest": "sha256:0ab5b2e50bda8ffd02ea0d64232566b3d32bcf049625e52b8047d1883a5dde26"
     },
     {
       "route": "/knowledge/mathematics/bessel-functions",
@@ -4305,5 +4353,5 @@
     }
   ],
   "boundary": "A private audit. It changes no page.",
-  "auditDigest": "sha256:e222a8285be352c0b599abe6cbafaa14dc6e9a468a677d3d527a74591e985ed8"
+  "auditDigest": "sha256:80eaa1361ec6bc286201d895ea27d62b6c2e64ca4e81df6dd54c7be8ec883189"
 }

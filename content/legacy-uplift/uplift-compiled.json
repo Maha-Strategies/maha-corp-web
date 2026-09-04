@@ -3579,6 +3579,299 @@
       "upliftDigest": "sha256:2412bca326bbbd26b2e81d2e82b4780cf4c2297e36edc567ffa744c6a3952b66"
     },
     {
+      "route": "/knowledge/mathematics/asymptotic-approximations",
+      "family": "mathematics",
+      "slug": "asymptotic-approximations",
+      "eligible": true,
+      "refusals": [],
+      "before": {
+        "route": "/knowledge/mathematics/asymptotic-approximations",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 3,
+        "relatedRoutes": [
+          "/knowledge/mathematics/gamma-function",
+          "/knowledge/mathematics/convergence-precision-and-error",
+          "/knowledge/mathematics/bessel-functions"
+        ],
+        "renderedSections": 6
+      },
+      "after": {
+        "route": "/knowledge/mathematics/asymptotic-approximations",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 3,
+        "relatedRoutes": [
+          "/knowledge/mathematics/gamma-function",
+          "/knowledge/mathematics/convergence-precision-and-error",
+          "/knowledge/mathematics/bessel-functions"
+        ],
+        "renderedSections": 6
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "DLMF 2.1.1 defines asymptotic equality by the ratio: f is asymptotically equal to phi when the ratio of the two tends to one in the limit. The order symbols follow, with little-o at 2.1.2 when the ratio tends to zero and big-O at 2.1.3 when the ratio stays bounded. A Poincare asymptotic expansion is defined at 2.1.13 and 2.1.14 by a condition on every truncation: for each n the function equals the first n terms plus a remainder of order x to the minus n. The chapter states that a convergent series is automatically the asymptotic expansion of its sum, but that the converse fails, and it records that the functions zero, e to the minus z, and e to the minus z cosine z all share one null expansion in suitable sectors."
+          ],
+          "sourceIds": [
+            "nist-dlmf-asymptotics",
+            "nist-dlmf-asymptotics",
+            "nist-dlmf-asymptotics"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "State the limit point and the point set before writing an order symbol, since the symbol is meaningless without them.",
+            "Read an expansion as a family of statements about truncations rather than as a series to be summed.",
+            "Where an expansion is used numerically, truncate at the smallest term rather than at as many terms as are available."
+          ],
+          "sourceIds": [
+            "nist-dlmf-asymptotics",
+            "nist-dlmf-asymptotics",
+            "nist-dlmf-asymptotics"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "Asymptotic equality is the ratio tending to one, DLMF 2.1.1",
+            "Big-O is a bounded ratio and little-o a vanishing one, DLMF 2.1.2 and 2.1.3",
+            "A Poincare expansion is a condition on every truncation, DLMF 2.1.13 and 2.1.14"
+          ],
+          "sourceIds": [
+            "nist-dlmf-asymptotics",
+            "nist-dlmf-asymptotics",
+            "nist-dlmf-asymptotics"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "An asymptotic expansion does not determine its function. The chapter gives zero, e to the minus z, and e to the minus z cosine z as three functions sharing one null expansion, so agreement of expansions is not agreement of functions.",
+            "The defining condition bounds the remainder for each fixed truncation as the argument goes to the limit. It says nothing about accuracy at a fixed argument as more terms are taken.",
+            "A divergent expansion has a smallest term, and accuracy past that point degrades however carefully the arithmetic is done.",
+            "Every one of these statements is relative to a limit point and a point set, so an order symbol without a stated limit says nothing.",
+            "The expansion condition at 2.1.13 is imposed on each truncation separately rather than on the infinite series.",
+            "A convergent series is an asymptotic expansion of its sum, but an asymptotic expansion need not converge."
+          ],
+          "sourceIds": [
+            "nist-dlmf-asymptotics",
+            "nist-dlmf-asymptotics",
+            "nist-dlmf-asymptotics"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "What this does not establish",
+          "items": [
+            "The chapter defines what asymptotic statements mean. It does not establish accuracy at any particular argument, and it states explicitly that an expansion is shared by more than one function."
+          ],
+          "sourceIds": [
+            "nist-dlmf-asymptotics",
+            "nist-dlmf-asymptotics",
+            "nist-dlmf-asymptotics"
+          ]
+        },
+        {
+          "dimension": "related-records",
+          "heading": "Related records",
+          "items": [
+            "/knowledge/mathematics/gamma-function",
+            "/knowledge/mathematics/convergence-precision-and-error",
+            "/knowledge/mathematics/bessel-functions"
+          ],
+          "sourceIds": []
+        }
+      ],
+      "sectionCount": 6,
+      "upliftDigest": "sha256:349e9287a056972ca6063c0fba9264a005b478b789b624d70d83cf2d42257634"
+    },
+    {
+      "route": "/knowledge/mathematics/orthogonal-polynomials",
+      "family": "mathematics",
+      "slug": "orthogonal-polynomials",
+      "eligible": true,
+      "refusals": [],
+      "before": {
+        "route": "/knowledge/mathematics/orthogonal-polynomials",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 2,
+        "relatedRoutes": [
+          "/knowledge/mathematics/interpolation",
+          "/knowledge/mathematics/numerical-integration"
+        ],
+        "renderedSections": 6
+      },
+      "after": {
+        "route": "/knowledge/mathematics/orthogonal-polynomials",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 2,
+        "relatedRoutes": [
+          "/knowledge/mathematics/interpolation",
+          "/knowledge/mathematics/numerical-integration"
+        ],
+        "renderedSections": 6
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "DLMF 18.2.1 defines orthogonality on an interval by an integral: the product of two distinct members against a weight function integrates to zero. The weight is constrained at 18.2.1_5, which requires it to be non-negative, to have positive total mass, and to have all moments finite. Discrete analogues replace the integral by a sum over an infinite set at 18.2.2 or a finite one at 18.2.3, and 18.2.4_5 states the general form against a Lebesgue-Stieltjes measure. Two three-term recurrences follow, at 18.2.8 and 18.2.10, each carrying a strict positivity condition under which Favard theorem gives the converse, so that a family satisfying such a recurrence is orthogonal for some measure."
+          ],
+          "sourceIds": [
+            "nist-dlmf-orthogonal-polynomials",
+            "nist-dlmf-orthogonal-polynomials",
+            "nist-dlmf-orthogonal-polynomials"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Name the weight or measure before calling a family orthogonal, because the term is otherwise incomplete.",
+            "Check the weight against the conditions at 18.2.1_5 rather than assuming a positive-looking function qualifies.",
+            "Where a family is generated by recurrence, confirm the positivity conditions if orthogonality is being inferred from the recurrence rather than the other way round."
+          ],
+          "sourceIds": [
+            "nist-dlmf-orthogonal-polynomials",
+            "nist-dlmf-orthogonal-polynomials",
+            "nist-dlmf-orthogonal-polynomials"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "Continuous orthogonality against a weight, DLMF 18.2.1",
+            "The weight must be non-negative with positive mass and finite moments, DLMF 18.2.1_5",
+            "The three-term recurrences, DLMF 18.2.8 and 18.2.10"
+          ],
+          "sourceIds": [
+            "nist-dlmf-orthogonal-polynomials",
+            "nist-dlmf-orthogonal-polynomials",
+            "nist-dlmf-orthogonal-polynomials"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "The chapter states the recurrences without claiming they are numerically stable. Forward recurrence can amplify rounding, and the reference does not settle the direction to use.",
+            "A finite discrete family at 18.2.3 is orthogonal only up to degree N; beyond that the relation does not hold and is not claimed to.",
+            "Orthogonality against a weight says nothing about conditioning of the resulting expansion coefficients for a particular function.",
+            "Orthogonality is relative to a declared weight or measure; the same polynomials are not orthogonal against a different one.",
+            "The weight conditions at 18.2.1_5 require non-negativity, positive total mass and finite moments, so a weight failing any of these defines no such family.",
+            "The converse direction depends on the strict positivity conditions at 18.2.9_5 and 18.2.11_2, not on the recurrence shape alone."
+          ],
+          "sourceIds": [
+            "nist-dlmf-orthogonal-polynomials",
+            "nist-dlmf-orthogonal-polynomials",
+            "nist-dlmf-orthogonal-polynomials"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "What this does not establish",
+          "items": [
+            "The chapter defines orthogonality and its recurrences. It does not establish the numerical stability of evaluating them, and orthogonality holds against a declared weight rather than as an intrinsic property."
+          ],
+          "sourceIds": [
+            "nist-dlmf-orthogonal-polynomials",
+            "nist-dlmf-orthogonal-polynomials",
+            "nist-dlmf-orthogonal-polynomials"
+          ]
+        },
+        {
+          "dimension": "related-records",
+          "heading": "Related records",
+          "items": [
+            "/knowledge/mathematics/interpolation",
+            "/knowledge/mathematics/numerical-integration"
+          ],
+          "sourceIds": []
+        }
+      ],
+      "sectionCount": 6,
+      "upliftDigest": "sha256:4a715bf22329317b4fb99f7ba6560b6cae9736c7b5ca0f484623f976057e3b53"
+    },
+    {
       "route": "/knowledge/mathematics/bessel-functions",
       "family": "mathematics",
       "slug": "bessel-functions",
