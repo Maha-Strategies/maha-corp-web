@@ -15,6 +15,8 @@
  * Production is never skipped, whatever changed.
  */
 
+// CommonJS is required because Vercel executes this file directly via ignoreCommand.
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const { execSync } = require('node:child_process')
 
 const BUILD = 1

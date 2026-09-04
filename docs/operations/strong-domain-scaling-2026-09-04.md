@@ -39,24 +39,24 @@ open-source research throughput.
 |---|---:|---:|---:|
 | Māyōṉ | 15 | 2 | 75 |
 | Classical Tamil religion | 16 | 2 | 80 |
-| Tiruvāymoḻi passage atlas | 20 | 2 | 100 |
+| Tiruvāymoḻi passage atlas | 46 | 2 | 230 |
 | Astrology bounded-answer graph | 36 | 2 | 144 |
 | Tamil religion source atlas | 48 | 2 | 192 |
 | Astrology workflow protocols | 36 | 2 | — |
 | Evidence workflows | 20 | 2 | — |
-| Claude mathematics and astronomy | 14 | 0 | — |
+| Claude mathematics and astronomy | 17 | 0 | — |
 | Book reader FAQs | 2 | 0 | — |
-| **Total** | **207** | **14** | **591** |
+| **Total** | **236** | **14** | **721** |
 
-The content tranche prepares **221 new crawlable surfaces** in one local batch.
+The content tranche prepares **250 new crawlable surfaces** in one local batch.
 The KDP exclusivity boundary simultaneously withdraws 42 previously crawlable
 Maha Principle landing and reader URLs while retaining only its separately
-approved reader FAQ. The net sitemap change is therefore **179 surfaces**.
+approved reader FAQ. The net sitemap change is therefore **208 surfaces**.
 The last directly verified Production count was 793. PR 400 subsequently added
 two static mathematics routes, so 795 is a derived—not freshly observed—current
-count. A single clean deployment would project **974 routes**, leaving a
-26-route gap to the 1,000-route target. This is still a projection: only a
-post-deployment crawl may turn it into an observation.
+count. A single clean deployment would project **1,003 routes**, exceeding the
+1,000-route target by three. This is still a projection: only a post-deployment
+crawl may turn it into an observation.
 
 ## Evidence workflow commercial bridge
 
@@ -162,5 +162,5 @@ and deployment. The continuation's 130 bounded answers are entries within those
 routes and are not counted as additional URLs.
 
 This is a projection, not a deployment observation. The release remains
-batched: Vercel build and deployment require Mayone's explicit authorization
-outside this report.
+batched: no Vercel build or deployment is authorized by this report; Mayone's
+separate explicit authorization governs the release operation.

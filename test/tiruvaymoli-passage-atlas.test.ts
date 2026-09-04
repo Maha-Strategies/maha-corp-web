@@ -152,10 +152,10 @@ test('the historical scaling tranche stays internally consistent after the immut
   const religionTopics = MAYON_TOPICS.length + TAMIL_CLASSICAL_TOPICS.length + cohort.topicSlugs.length
   const religionAnswers = scaling.localUnpublishedTranche.mayon.boundedAnswers
     + scaling.localUnpublishedTranche.classicalTamil.boundedAnswers
-    + scaling.localUnpublishedTranche.tiruvaymoliAtlas.boundedAnswers
+    + scaling.localUnpublishedTranche.tiruvaymoliAtlas.initialBoundedAnswers
   const religionSurfaces = scaling.localUnpublishedTranche.mayon.crawlableSurfaces
     + scaling.localUnpublishedTranche.classicalTamil.crawlableSurfaces
-    + scaling.localUnpublishedTranche.tiruvaymoliAtlas.crawlableSurfaces
+    + scaling.localUnpublishedTranche.tiruvaymoliAtlas.initialCrawlableSurfaces
   assert.equal(religionTopics, 51)
   assert.equal(religionAnswers, 255)
   assert.equal(religionSurfaces, 57)
