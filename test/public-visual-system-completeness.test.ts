@@ -56,10 +56,11 @@ test('every route belongs to one declared visual system', () => {
   // knowledge 48 -> 50: the Māyōṉ source dossier and its dynamic topic route;
   // 50 -> 52: the classical Tamil source cluster and its dynamic topic route;
   // 52 -> 54: the Tiruvāymoḻi atlas and its dynamic topic route.
+  // 54 -> 56: the cross-family astrology answer graph and its dynamic topic route.
   // join the Knowledge group and its bounded cyber-light overlay. books 38 -> 41 arrives with the
   // eighth open book. Every other group is unchanged, which is what this
   // assertion is really guarding.
-  assert.deepEqual(groups, { paper: 112, apps: 6, books: 41, docs: 1, knowledge: 54, intelligence: 2, operator: 32, internal: 1 })
+  assert.deepEqual(groups, { paper: 112, apps: 6, books: 41, docs: 1, knowledge: 56, intelligence: 2, operator: 32, internal: 1 })
 })
 
 test('Apps, Books, Docs, Knowledge, and Intelligence own bounded cyber-light overlays', () => {

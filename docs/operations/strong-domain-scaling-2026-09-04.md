@@ -40,14 +40,29 @@ open-source research throughput.
 | Māyōṉ | 15 | 2 | 75 |
 | Classical Tamil religion | 16 | 2 | 80 |
 | Tiruvāymoḻi passage atlas | 20 | 2 | 100 |
-| **Total** | **51** | **6** | **255** |
+| Astrology bounded-answer graph | 36 | 2 | 144 |
+| **Total** | **87** | **8** | **399** |
 
-The tranche therefore prepares **57 crawlable surfaces** in one local batch.
+The tranche therefore prepares **95 crawlable surfaces** in one local batch.
 The last directly verified Production count was 793. PR 400 subsequently added
 two static mathematics routes, so 795 is a derived—not freshly observed—current
-count. A single clean deployment would project 852 routes and a remaining gap
-of 148. Only a post-deployment crawl may turn that projection into an
+count. A single clean deployment would project 890 routes and a remaining gap
+of 110. Only a post-deployment crawl may turn that projection into an
 observation.
+
+## Astrology answer infrastructure
+
+The first astrology tranche adds 36 synthesis pages, 144 natural-language
+question forms, and 115 links into existing calculation, timing, comparison,
+tradition, guide, and organization-event contracts. Every page must combine at
+least two authority families; a one-reference paraphrase is refused as a
+duplicate rather than counted as growth.
+
+The machine registry preserves one stable identity for equivalent query forms
+and carries each authority path, status, establishes statement, and boundary.
+Calculation reproducibility, tradition documentation, and empirical validation
+remain separate. The graph provides no personalized prediction, medical or
+legal advice, investment advice, or guarantee.
 
 ## Tiruvāymoḻi contract
 

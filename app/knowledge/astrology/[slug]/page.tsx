@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import AuthorityAnswerLinks from '@/app/knowledge/astrology/questions/AuthorityAnswerLinks'
 import {
   ASTROLOGY_PATH,
   ASTROLOGY_PROHIBITED_USES,
@@ -140,6 +141,7 @@ export default async function AstrologyTraditionPage({ params }: PageProps) {
             </div>
           </section>
         )}
+        <AuthorityAnswerLinks authorityId={`tradition:${tradition.id}`} />
       </div>
     </main>
   )

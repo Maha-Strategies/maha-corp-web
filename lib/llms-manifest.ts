@@ -12,6 +12,7 @@ import { getPublishedSubstantialPage } from './substantial-page-public.ts'
 import { MAYON_ANSWER_REGISTRY_PATH, MAYON_TOPICS, mayonTopicPath } from './mayon-topics.ts'
 import { TAMIL_CLASSICAL_PATH, TAMIL_CLASSICAL_REGISTRY_PATH, TAMIL_CLASSICAL_TOPICS, tamilClassicalTopicPath } from './tamil-classical-traditions.ts'
 import { TIRUVAYMOLI_ATLAS_PATH, TIRUVAYMOLI_ATLAS_REGISTRY_PATH, TIRUVAYMOLI_ATLAS_TOPICS, tiruvaymoliAtlasTopicPath } from './tiruvaymoli-passage-atlas.ts'
+import { ASTROLOGY_ANSWER_GRAPH_PATH, ASTROLOGY_ANSWER_GRAPH_REGISTRY_PATH, ASTROLOGY_ANSWERS, astrologyAnswerPath } from './astrology-answer-graph.ts'
 
 const RESEARCH_URL = 'https://research.mahastrategies.com'
 
@@ -87,6 +88,9 @@ export function buildLlmsManifest(
     `- Tiruvāymoḻi machine-readable answer registry: https://www.mahastrategies.com${TIRUVAYMOLI_ATLAS_REGISTRY_PATH}`,
     ...TIRUVAYMOLI_ATLAS_TOPICS.map((topic) => `- Tiruvāymoḻi passage guide — ${topic.shortTitle}: https://www.mahastrategies.com${tiruvaymoliAtlasTopicPath(topic)}`),
     '- Astrology traditions registry: https://www.mahastrategies.com/knowledge/astrology/registry',
+    `- Astrology bounded-answer graph: https://www.mahastrategies.com${ASTROLOGY_ANSWER_GRAPH_PATH}`,
+    `- Astrology machine-readable answer registry: https://www.mahastrategies.com${ASTROLOGY_ANSWER_GRAPH_REGISTRY_PATH}`,
+    ...ASTROLOGY_ANSWERS.map((answer) => `- Astrology method answer — ${answer.question}: https://www.mahastrategies.com${astrologyAnswerPath(answer)}`),
     '',
     '## Canonical epistemic records',
     ...(canonicalEpistemicRecords.length > 0

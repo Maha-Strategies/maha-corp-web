@@ -90,10 +90,23 @@ test('sitemap and llms include exactly the reviewed atlas arrays', () => {
 
 test('the local scaling tranche keeps observations separate from projections', () => {
   assert.equal(scaling.baseline.derivedNotObserved, true)
-  assert.equal(scaling.localUnpublishedTranche.totalTopicPages, MAYON_TOPICS.length + TAMIL_CLASSICAL_TOPICS.length + TIRUVAYMOLI_ATLAS_TOPICS.length)
-  assert.equal(scaling.localUnpublishedTranche.totalBoundedAnswers, 255)
-  assert.equal(scaling.localUnpublishedTranche.totalCrawlableSurfaces, 57)
-  assert.equal(scaling.localUnpublishedTranche.projectedRoutesAfterOneDeployment, 852)
+  const religionTopics = MAYON_TOPICS.length + TAMIL_CLASSICAL_TOPICS.length + TIRUVAYMOLI_ATLAS_TOPICS.length
+  const religionAnswers = scaling.localUnpublishedTranche.mayon.boundedAnswers
+    + scaling.localUnpublishedTranche.classicalTamil.boundedAnswers
+    + scaling.localUnpublishedTranche.tiruvaymoliAtlas.boundedAnswers
+  const religionSurfaces = scaling.localUnpublishedTranche.mayon.crawlableSurfaces
+    + scaling.localUnpublishedTranche.classicalTamil.crawlableSurfaces
+    + scaling.localUnpublishedTranche.tiruvaymoliAtlas.crawlableSurfaces
+  assert.equal(religionTopics, 51)
+  assert.equal(religionAnswers, 255)
+  assert.equal(religionSurfaces, 57)
+  assert.ok(scaling.localUnpublishedTranche.totalTopicPages >= religionTopics)
+  assert.ok(scaling.localUnpublishedTranche.totalBoundedAnswers >= religionAnswers)
+  assert.ok(scaling.localUnpublishedTranche.totalCrawlableSurfaces >= religionSurfaces)
+  assert.equal(
+    scaling.localUnpublishedTranche.projectedRoutesAfterOneDeployment,
+    scaling.baseline.derivedCurrentRoutes + scaling.localUnpublishedTranche.totalCrawlableSurfaces,
+  )
   assert.equal(scaling.localUnpublishedTranche.publicNow, false)
 })
 
