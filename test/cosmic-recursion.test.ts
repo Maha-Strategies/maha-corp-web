@@ -35,7 +35,7 @@ test('The Cosmic Recursion is visible in the catalogue, sitemap and machine mani
 
   assert.equal(existsSync(new URL('content/books/the-cosmic-recursion/THE-COSMIC-RECURSION-manuscript.md', root)), true)
   assert.match(hub, /The complete edition includes a provenance index/)
-  assert.match(index, /Eight works/)
+  assert.match(index, /Seven works/)
   assert.match(index, /The Cosmic Recursion/)
   assert.match(sitemap, /books\/the-cosmic-recursion/)
   assert.match(llms, /The Cosmic Recursion — complete open web edition/)

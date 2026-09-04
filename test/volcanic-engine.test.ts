@@ -47,7 +47,7 @@ test('the book hub, companion articles, sitemap and llms manifest expose the res
   assert.match(hub, /Open research edition/)
   assert.match(hub, /The verification register remains visible/)
   assert.match(hub, /sources-and-further-reading/)
-  assert.match(booksIndex, /Eight works/)
+  assert.match(booksIndex, /Seven works/)
   assert.match(booksIndex, /The Volcanic Engine/)
   assert.match(eruptionGuide, /U\.S\. Geological Survey/)
   assert.match(eruptionGuide, /does not, by itself, predict/)
