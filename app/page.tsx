@@ -96,7 +96,7 @@ export default function CorporateHomepage() {
 
         <section className="evidence-section grid gap-8 md:grid-cols-2">
           <article><p className="evidence-kicker">Independent research</p><h2 className="evidence-card-title mt-4">Systemic sovereignty</h2><p className="evidence-card-copy mt-4 max-w-xl">Maha publishes independent work on semiconductor resilience, edge AI, human autonomy, and the systems connecting them.</p><Link href="/research" className="evidence-link mt-5 inline-block font-mono text-xs uppercase tracking-widest">Browse research ↗</Link></article>
-          <article><p className="evidence-kicker">The Maha Principle</p><h2 className="evidence-card-title mt-4">The architecture of human flourishing</h2><p className="evidence-card-copy mt-4 max-w-xl">Our book examines the biological, cognitive, and relational foundations of independence in an extractive world.</p><a href="https://www.themahaprinciple.com" target="_blank" rel="noopener noreferrer" className="evidence-link mt-5 inline-block font-mono text-xs uppercase tracking-widest">Read the book brief ↗</a></article>
+          <article><p className="evidence-kicker">The Maha Principle</p><h2 className="evidence-card-title mt-4">The architecture of human flourishing</h2><p className="evidence-card-copy mt-4 max-w-xl">Our book examines the biological, cognitive, and relational foundations of independence in an extractive world. The digital edition is currently available through Amazon.</p></article>
         </section>
 
         <section className="evidence-section" aria-labelledby="tools-heading">

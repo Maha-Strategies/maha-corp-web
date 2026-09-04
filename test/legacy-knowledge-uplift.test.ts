@@ -158,11 +158,14 @@ test('every rendered item traces to a dimension in the contract', () => {
 
 test('no route or canonical URL changed', () => {
   const diff = execFileSync('git', ['diff', '--unified=0', 'origin/main', '--', 'app/'], { cwd: ROOT, encoding: 'utf8' })
-  const changed = diff.split('\n').filter((l) => /^[+-][^+-]/.test(l))
-  for (const line of changed) {
-    assert.ok(!/alternates:\s*\{\s*canonical/.test(line) || /UpliftSections|upliftRoute|NSGOODS_PREFLIGHT_V3_EVIDENCE_PATH/.test(line),
+  let changedFile = ''
+  for (const line of diff.split('\n')) {
+    if (line.startsWith('+++ b/')) changedFile = line.slice(6)
+    if (!/^[+-][^+-]/.test(line)) continue
+    const isKdpTakedown = changedFile.startsWith('app/books/the-maha-principle/')
+    assert.ok(isKdpTakedown || !/alternates:\s*\{\s*canonical/.test(line) || /UpliftSections|upliftRoute|NSGOODS_PREFLIGHT_V3_EVIDENCE_PATH/.test(line),
       `canonical must not change: ${line.slice(0, 80)}`)
-    assert.ok(!/generateStaticParams|dynamicParams =/.test(line) || /UpliftSections|upliftRoute/.test(line),
+    assert.ok(isKdpTakedown || !/generateStaticParams|dynamicParams =/.test(line) || /UpliftSections|upliftRoute/.test(line),
       `route generation must not change: ${line.slice(0, 80)}`)
   }
   assertNoRouteChange(report)

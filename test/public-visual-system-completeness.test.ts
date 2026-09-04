@@ -54,10 +54,10 @@ test('every route belongs to one declared visual system', () => {
   )
   assert.deepEqual(missingPaperBoundary, [])
   // knowledge 47 -> 48: the NSGoods validation record joins the Knowledge group
-  // and its bounded cyber-light overlay. books 38 -> 41 arrives with the
-  // eighth open book. Every other group is unchanged, which is what this
-  // assertion is really guarding.
-  assert.deepEqual(groups, { paper: 112, apps: 6, books: 41, docs: 1, knowledge: 48, intelligence: 2, operator: 32, internal: 1 })
+  // and its bounded cyber-light overlay. The Cosmic Recursion added three book
+  // routes; the KDP maintenance boundary then removed The Maha Principle's two
+  // reader routes while retaining its noindex maintenance page.
+  assert.deepEqual(groups, { paper: 112, apps: 6, books: 39, docs: 1, knowledge: 48, intelligence: 2, operator: 32, internal: 1 })
 })
 
 test('Apps, Books, Docs, Knowledge, and Intelligence own bounded cyber-light overlays', () => {
