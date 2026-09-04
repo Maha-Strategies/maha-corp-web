@@ -2,6 +2,38 @@ import { readFileSync, writeFileSync } from 'node:fs'
 
 import { assertNoAuditInternals, disclosureFor } from '../lib/evidence-status-disclosure.ts'
 
+/**
+ * Claim-level support, per route.
+ *
+ * The label was computed from explanatorySources, which is a property of a
+ * source rather than of a page: attesting one source marked every page citing
+ * it as checked. Attaching the NIST algorithms dictionary after reading only
+ * its entry for "graph" told four other pages -- optimization, modular
+ * arithmetic, constraint satisfaction, formal logic -- that they had been
+ * checked against an inspected source. Reading one dictionary entry does not
+ * check an optimization page.
+ *
+ * A page is only described as checked when an inspected passage names that
+ * route, which is the signal the depth audit already uses.
+ */
+const claimLevelRoutes = new Set<string>()
+for (const file of [
+  'content/evidence-batch-4/inspections.json', 'content/evidence-batch-8/inspections.json',
+  'content/evidence-batch-9/inspections.json', 'content/evidence-batch-12/inspections.json',
+  'content/evidence-batch-14/inspections.json',
+]) {
+  const batch = JSON.parse(readFileSync(file, 'utf8')) as { inspected?: { claimByClaimSupport?: { route: string }[] }[] }
+  for (const source of batch.inspected ?? []) {
+    for (const claim of source.claimByClaimSupport ?? []) claimLevelRoutes.add(claim.route)
+  }
+}
+const reuse = JSON.parse(readFileSync('content/evidence-batch-7/reuse-audit.json', 'utf8')) as { accepted?: { route: string }[] }
+for (const entry of reuse.accepted ?? []) claimLevelRoutes.add(entry.route)
+for (const file of ['content/semiconductor-evidence/batch-1.json', 'content/evidence-batch-2/inspections.json', 'content/evidence-batch-3/inspections.json']) {
+  const batch = JSON.parse(readFileSync(file, 'utf8')) as { inspected?: { supportsRoutes?: string[] }[] }
+  for (const source of batch.inspected ?? []) for (const route of source.supportsRoutes ?? []) claimLevelRoutes.add(route)
+}
+
 const compiled = JSON.parse(readFileSync('content/legacy-uplift/uplift-compiled.json', 'utf8'))
 const audit = JSON.parse(readFileSync('content/evidence-batch-9/depth-audit.json', 'utf8'))
 
@@ -22,7 +54,9 @@ for (const page of compiled.pages) {
   const state = stateByRoute.get(page.route) ?? ''
   const disclosure = disclosureFor({
     citedSourceCount: page.after.sourceCount ?? 0,
-    inspectedSourceCount: page.after.explanatorySources ?? 0,
+    // Claim-level, not source-level: a page counts as checked only where an
+    // inspected passage names it.
+    inspectedSourceCount: claimLevelRoutes.has(page.route) ? (page.after.explanatorySources ?? 0) : 0,
     isFirstParty: state.startsWith('first-party-documented'),
   })
   entries.push({ route: page.route, ...disclosure })

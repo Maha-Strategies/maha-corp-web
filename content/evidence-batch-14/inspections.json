@@ -83,6 +83,713 @@
       ],
       "establishes": "Integral definitions for the error function, its complement, the Dawson integral and the Fresnel integrals, with the identity relating erf and erfc.",
       "boundary": "Defines the functions and their relations. It does not establish the accuracy of any implementation, and no statistical interpretation follows from a definition."
+    },
+    {
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "sourceId": "nist-dlmf-bessel",
+      "title": "DLMF Chapter 10: Bessel Functions",
+      "retrievedFrom": "https://dlmf.nist.gov/10.2",
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for Chapters 5 and 7.",
+      "exactLocators": [
+        "10.2.1 the differential equation and its singularity structure",
+        "10.2.2 the first-kind series",
+        "10.2.3 and 10.2.4 the second-kind solution",
+        "Table 10.2.1 numerically satisfactory pairs"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/bessel-functions",
+          "locator": "10.2.1 and 10.2.2",
+          "claim": "The equation has a stated singularity structure, and its first-kind solution is a series whose coefficients are gamma values.",
+          "supportingPassage": "10.2.1 states the equation as z squared w double prime plus z w prime plus the quantity z squared minus nu squared times w equals zero, and records that it has a regular singularity at z equals zero with indices plus and minus nu and an irregular singularity of rank one at infinity. 10.2.2 gives the first-kind solution as a power series in which the k-th coefficient divides by the gamma function at nu plus k plus one, and notes it is analytic except for a branch point at the origin when nu is not an integer.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/bessel-functions",
+          "locator": "10.2.3, 10.2.4 and Table 10.2.1",
+          "claim": "The second solution is constructed from the first and degenerates at integer order, and choosing a pair is a question of region rather than of independence alone.",
+          "supportingPassage": "10.2.3 builds the second-kind solution from first-kind solutions of order plus and minus nu, divided by sine of nu pi. 10.2.4 supplies the limiting form at integer order where that construction degenerates. The chapter records that the second-kind solution has a branch point at the origin whether or not nu is an integer, with a cut along the negative reals, and Table 10.2.1 tabulates which pairs are numerically satisfactory in which region.",
+          "distinctPassage": true
+        }
+      ],
+      "establishes": "The Bessel equation, its singularity structure, both standard solutions, and which pairs are numerically satisfactory by region.",
+      "boundary": "States the solutions and their analytic structure. It does not select a pair for a given computation, and makes no accuracy claim about any implementation."
+    },
+    {
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "sourceId": "nist-dlmf-bernoulli",
+      "title": "DLMF Chapter 24: Bernoulli and Euler Polynomials",
+      "retrievedFrom": "https://dlmf.nist.gov/24.2",
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for Chapters 5, 7 and 10.",
+      "exactLocators": [
+        "24.2.1 Bernoulli generating function",
+        "24.2.2 vanishing and sign rules",
+        "24.2.3 and 24.2.4 the polynomials",
+        "24.2.6 Euler generating function"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/bernoulli-and-euler-numbers",
+          "locator": "24.2.1, 24.2.3 and 24.2.4",
+          "claim": "The Bernoulli numbers and polynomials are defined by generating functions that converge only inside a stated disk.",
+          "supportingPassage": "24.2.1 defines the Bernoulli numbers by t over the quantity e to the t minus one, expanded as a sum of B sub n times t to the n over n factorial, stated to converge for the modulus of t less than two pi. 24.2.3 gives the polynomials from the same expression multiplied by e to the x t in the same disk, and 24.2.4 records that B sub n equals B sub n of zero.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/bernoulli-and-euler-numbers",
+          "locator": "24.2.2, 24.2.6 and 24.2.7",
+          "claim": "Odd-indexed coefficients vanish apart from one exception, and the Euler generating function converges in a strictly smaller disk than the Bernoulli one.",
+          "supportingPassage": "24.2.2 states that odd-indexed Bernoulli numbers vanish apart from the first, and that the even ones alternate in sign with minus one to the n plus one times B sub two n positive for n at least one. 24.2.6 defines the Euler numbers by two e to the t over the quantity e to the two t plus one, converging only for the modulus of t less than pi over two, and 24.2.7 states that odd-indexed Euler numbers vanish.",
+          "distinctPassage": true
+        }
+      ],
+      "crossPageNote": "The vanishing rule at 24.2.2 explains a feature of the gamma page: the Stirling expansion at 5.11.1 is indexed by even numbers because the odd Bernoulli coefficients are zero. Both halves of that observation are inspected.",
+      "establishes": "Generating-function definitions with their convergence radii, and the vanishing and sign rules for odd and even indices.",
+      "boundary": "Defines the coefficients inside stated disks. It makes no claim about the numerical stability of any recurrence used to generate them."
+    },
+    {
+      "sourceId": "nasa-asteroseismology",
+      "domain": "astronomy",
+      "class": "government-or-standards-authority",
+      "title": "Asteroseismology Using The Galactic Bulge Time Domain Survey",
+      "venue": "NASA Science",
+      "identifier": "science.nasa.gov Roman Space Telescope survey description",
+      "retrievedFrom": "https://science.nasa.gov/mission/roman-space-telescope/asteroseismology-using-the-galactic-bulge-time-domain-survey/",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Publisher and page title confirmed on retrieval.",
+      "versionRelationship": "Retrieved 2026-09-04",
+      "rightsBasis": "United States government agency publication, publicly readable. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "What the survey measures",
+        "Properties measured for tens of thousands of stars",
+        "The saturation constraint"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/astronomy/asteroseismology-and-stellar-interiors",
+          "locator": "What the survey measures",
+          "claim": "The observable is a long, regularly sampled photometric series, from which an oscillation frequency pattern is characterised.",
+          "supportingPassage": "NASA states that the approach relies on precise, regularly sampled, long-duration photometric observations to characterise the oscillation frequency pattern of evolved red giants, which it describes as high-amplitude non-radial oscillators.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/astronomy/asteroseismology-and-stellar-interiors",
+          "locator": "Properties measured; the saturation constraint",
+          "claim": "Masses, radii and ages are inferred only in combination with separately measured metallicity and temperature, and saturation remains an open constraint.",
+          "supportingPassage": "NASA states that masses, radii and ages have been measured for tens of thousands of stars using asteroseismic data combined with stellar metallicity and effective temperature. It also states that saturation will be important for red clump stars in the Galactic bulge, and describes an improved asteroseismic detection model including the effect of saturation as work to be developed.",
+          "distinctPassage": true
+        }
+      ],
+      "notCovered": "The page does not explain why the oscillations occur, and gives no frequencies, amplitudes or precision figures. The page built on it therefore records the driving mechanism as unestablished and makes no numerical accuracy claim.",
+      "establishes": "The asteroseismic observable, the properties inferred from it in combination with other measurements, and the saturation constraint the survey still faces.",
+      "boundary": "A mission survey description. It establishes the method's inputs and outputs, not the physics behind them or any precision figure."
+    },
+    {
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "sourceId": "nist-dlmf-asymptotics",
+      "title": "DLMF Chapter 2: Asymptotic Approximations",
+      "retrievedFrom": "https://dlmf.nist.gov/2.1",
+      "exactLocators": [
+        "2.1.1 asymptotic equality",
+        "2.1.2 and 2.1.3 the order symbols",
+        "2.1.13 and 2.1.14 the Poincare expansion",
+        "the null-expansion example"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/asymptotic-approximations",
+          "locator": "2.1.1, 2.1.2 and 2.1.3",
+          "claim": "Asymptotic equality and the order symbols are defined by the behaviour of a ratio in a stated limit, so each is meaningless without that limit.",
+          "supportingPassage": "2.1.1 defines f asymptotic to phi as the ratio of the two tending to one as x tends to c within a point set X. 2.1.2 defines f equals little-o of phi as the ratio tending to zero in the same limit, and 2.1.3 defines f equals big-O of phi as the modulus of the ratio being bounded. Each definition is stated relative to the limit point c and the point set X.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/asymptotic-approximations",
+          "locator": "2.1.13, 2.1.14 and the null-expansion example",
+          "claim": "A Poincare expansion is a condition on every truncation, and it does not determine the function it describes.",
+          "supportingPassage": "2.1.13 requires that for each positive integer n the function equals the sum of the first n terms plus a remainder of order x to the minus n, and 2.1.14 writes the resulting expansion with the tilde. The chapter states that a series converging for all sufficiently large modulus is automatically the asymptotic expansion of its sum, and gives zero, e to the minus z, and e to the minus z cosine z as functions all possessing the null asymptotic expansion in suitable sectors.",
+          "distinctPassage": true
+        }
+      ],
+      "crossPageNote": "Generalises the limitation recorded on the gamma page: Stirling at 5.11.1 is one instance of a Poincare expansion as defined at 2.1.13, which is why adding terms eventually makes it worse.",
+      "establishes": "What an asymptotic statement means, and that an expansion is shared by more than one function.",
+      "boundary": "Defines the notation and the expansion. It makes no accuracy claim at any particular argument."
+    },
+    {
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "sourceId": "nist-dlmf-orthogonal-polynomials",
+      "title": "DLMF Chapter 18: Orthogonal Polynomials",
+      "retrievedFrom": "https://dlmf.nist.gov/18.2",
+      "exactLocators": [
+        "18.2.1 and 18.2.1_5 continuous orthogonality and the weight conditions",
+        "18.2.2 and 18.2.3 the discrete cases",
+        "18.2.8 and 18.2.10 the three-term recurrences"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/orthogonal-polynomials",
+          "locator": "18.2.1, 18.2.1_5, 18.2.2, 18.2.3 and 18.2.4_5",
+          "claim": "Orthogonality is defined against a declared weight or measure that must itself satisfy stated conditions.",
+          "supportingPassage": "18.2.1 states that distinct members of the family integrate to zero against each other over an open interval with weight w. 18.2.1_5 requires w to be non-negative, to have positive total integral, and to have all moments finite. 18.2.2 and 18.2.3 give the discrete analogues over infinite and finite point sets, and 18.2.4_5 gives the general form against a Lebesgue-Stieltjes measure.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/orthogonal-polynomials",
+          "locator": "18.2.8, 18.2.10, 18.2.9_5 and 18.2.11_2",
+          "claim": "Two standard three-term recurrences carry the family, and strict positivity conditions give the converse through Favard theorem.",
+          "supportingPassage": "18.2.8 gives the recurrence in the form p n plus one equals the quantity A n x plus B n times p n, minus C n times p n minus one, for n at least zero. 18.2.10 gives the second form, x times p n equals a n p n plus one plus b n p n plus c n p n minus one. Both are stated with strict positivity conditions at 18.2.9_5 and 18.2.11_2 which ensure orthogonality by Favard theorem.",
+          "distinctPassage": true
+        }
+      ],
+      "establishes": "Orthogonality conditions across the continuous, discrete and measure-theoretic settings, and the recurrences with the positivity that makes the converse hold.",
+      "boundary": "States conditions and recurrences. It does not establish numerical stability, and orthogonality is relative to a declared weight."
+    },
+    {
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "sourceId": "nist-dlmf-zeta",
+      "title": "DLMF Chapter 25: Zeta and Related Functions",
+      "retrievedFrom": "https://dlmf.nist.gov/25.2",
+      "exactLocators": [
+        "25.2.1 the Dirichlet series",
+        "25.2.11 the Euler product",
+        "the statement of the pole",
+        "25.2.4 and 25.2.5 the Laurent expansion and Stieltjes constants"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/riemann-zeta-function",
+          "locator": "25.2.1 and 25.2.11",
+          "claim": "Two representations agree in one half-plane and define the function nowhere else.",
+          "supportingPassage": "25.2.1 states that when the real part of s exceeds one, zeta of s is the sum over n of one over n to the s. 25.2.11 states the Euler product, zeta of s equals the product over primes p of one minus p to the minus s, all inverted, under the same condition that the real part of s exceeds one.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/riemann-zeta-function",
+          "locator": "the pole statement, 25.2.4 and 25.2.5",
+          "claim": "Values elsewhere come from continuation, and the continued function has exactly one singularity.",
+          "supportingPassage": "The chapter states that elsewhere zeta is defined by analytic continuation, and that it is a meromorphic function whose only singularity in the complex plane is a simple pole at s equals one with residue one. 25.2.4 gives the Laurent expansion about that pole as one over s minus one plus a series whose coefficients are the Stieltjes constants, and 25.2.5 defines those constants as limits of a difference between a partial sum and a logarithmic term.",
+          "distinctPassage": true
+        }
+      ],
+      "notCovered": "The relation between zeta at even integers and the Bernoulli numbers was asked for and not returned by this retrieval, so no such claim is made on the page despite the adjacent Bernoulli page existing.",
+      "establishes": "The two representations with their shared half-plane, the analytic continuation, and the single pole with its local expansion.",
+      "boundary": "States representations and analytic structure. It settles nothing about the zeros."
+    },
+    {
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "sourceId": "nist-dlmf-hypergeometric",
+      "title": "DLMF Chapter 15: Hypergeometric Function",
+      "retrievedFrom": "https://dlmf.nist.gov/15.2",
+      "exactLocators": [
+        "15.2.1 the Gauss series with its branch and cut",
+        "15.2.2 the regularized form",
+        "15.2.4 termination",
+        "the three boundary convergence regimes"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/hypergeometric-function",
+          "locator": "15.2.1 and 15.2.2",
+          "claim": "The series is defined on the unit disk with a declared branch, is undefined for a family of parameter values, and a regularized form exists to remove that exception.",
+          "supportingPassage": "15.2.1 defines F of a, b; c; z as a series in Pochhammer symbols on the disk where the modulus of z is less than one, and by analytic continuation elsewhere, with the principal branch taken where the phase of one minus z is at most pi and a cut from one to positive infinity along the real axis. The chapter states that in general F does not exist when c is zero or a negative integer. 15.2.2 gives the regularized form, which divides by a gamma function and is stated to be valid for all values of c and analytic at those exceptional points.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/hypergeometric-function",
+          "locator": "15.2.4 and the boundary regimes",
+          "claim": "The series terminates for one family of parameters, and its behaviour on the boundary circle splits into three regimes by a single condition.",
+          "supportingPassage": "15.2.4 states that when the upper parameter a equals minus m for a non-negative integer m, and c is not zero or a negative integer, the function is a polynomial with a finite sum representation. On the circle where the modulus of z equals one, the chapter states that the series converges absolutely when the real part of c minus a minus b exceeds zero, converges conditionally when that real part lies between minus one and zero excluding the point z equals one, and diverges when it is at or below minus one.",
+          "distinctPassage": true
+        }
+      ],
+      "establishes": "The Gauss series with its disk, branch and exceptional parameters, the regularized form, the termination condition, and the three boundary regimes.",
+      "boundary": "A definition with a declared branch. It does not establish the accuracy of any numerical continuation outside the disk."
+    },
+    {
+      "sourceId": "nist-dlmf-incomplete-gamma",
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "title": "DLMF Chapter 8: Incomplete Gamma and Related Functions",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedFrom": "https://dlmf.nist.gov/8.2",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "8.2.1 and 8.2.2 the two integrals",
+        "8.2.3 the splitting identity",
+        "8.2.4 and 8.2.5 the normalized pair",
+        "the analytic structure note"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/incomplete-gamma-functions",
+          "locator": "8.2.1, 8.2.2 and 8.2.3",
+          "claim": "The gamma integral splits at a point into two halves whose sum is the complete function.",
+          "supportingPassage": "8.2.1 defines the lower incomplete gamma as the integral of t to the a minus one times e to the minus t from zero to z, for real part of a greater than zero. 8.2.2 defines the upper form as the same integrand from z to infinity. 8.2.3 states that the lower plus the upper equals the complete gamma at a, for a not equal to zero or a negative integer.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/incomplete-gamma-functions",
+          "locator": "8.2.4, 8.2.5 and the analytic structure note",
+          "claim": "The normalized pair sums to one exactly, and the two halves differ in their analytic structure in the parameter.",
+          "supportingPassage": "8.2.4 defines P of a, z as the lower form divided by the complete gamma and Q of a, z as the upper form divided by the same, and 8.2.5 states that P plus Q equals one. The chapter records that the upper incomplete gamma is entire in a when z is non-zero, while the lower is meromorphic with simple poles at a equal to the non-positive integers.",
+          "distinctPassage": true
+        }
+      ],
+      "crossPageNote": "The exact identity at 8.2.5 is the same device as 7.2.2 on the error-function page: a complementary form exists so the small member can be computed directly rather than by subtracting the large one from one. Both halves of that observation are inspected.",
+      "establishes": "The two integral halves, the identity binding them to the complete gamma, the normalized pair, and their differing analytic structure.",
+      "boundary": "Defines the functions and their relation. It makes no accuracy claim for any evaluation method."
+    },
+    {
+      "sourceId": "nasa-vlbi",
+      "domain": "astronomy",
+      "class": "government-or-standards-authority",
+      "title": "Very Long Baseline Interferometry",
+      "venue": "NASA Earthdata",
+      "identifier": "earthdata.nasa.gov space geodesy techniques, VLBI",
+      "retrievedFrom": "https://www.earthdata.nasa.gov/data/space-geodesy-techniques/vlbi",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Publisher and page title confirmed on retrieval.",
+      "versionRelationship": "Retrieved 2026-09-04",
+      "rightsBasis": "United States government agency publication, publicly readable. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "What VLBI measures",
+        "The stated precisions",
+        "What the technique determines",
+        "The inertial reference assumption"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/astronomy/very-long-baseline-interferometry",
+          "locator": "What VLBI measures; the stated precisions",
+          "claim": "The observable is an arrival-time difference between two antennas, and the stated precisions carry from time to position to sky angle.",
+          "supportingPassage": "NASA states that VLBI measures the time difference between the arrival at two Earth-based antennas of a radio wavefront emitted by a distant quasar, that the time difference measurements are precise to a few picoseconds, and that this determines the relative positions of the antennas to a few millimetres and the quasar positions to fractions of a milliarcsecond.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/astronomy/very-long-baseline-interferometry",
+          "locator": "What the technique determines; the inertial assumption",
+          "claim": "Three products come out together, and the inertial anchor is an assumption with a stated reason rather than a given.",
+          "supportingPassage": "NASA states that VLBI determines the terrestrial reference frame of antenna locations on the Earth, the celestial reference frame of quasar positions on the sky, and the orientation of the Earth in space, and that it is unique in making rapid accurate measurements of the orientation of one frame with respect to the other. It states that extragalactic objects form a true inertial reference frame because they are at such great distances that their motions across the sky are undetectable.",
+          "distinctPassage": true
+        }
+      ],
+      "notCovered": "The page does not derive the relation between baseline length and angular resolution, so the page built on it states no resolution formula.",
+      "establishes": "The VLBI observable, its stated precisions, the three products of the technique, and the reason given for treating extragalactic sources as inertial.",
+      "boundary": "An agency technique description. The precisions are stated capabilities rather than results for a particular observation."
+    },
+    {
+      "sourceId": "nist-dlmf-elliptic",
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "title": "DLMF Chapter 19: Elliptic Integrals",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedFrom": "https://dlmf.nist.gov/19.2",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "19.2.4 and 19.2.5 first and second kinds",
+        "19.2.7 third kind and its principal value",
+        "19.2.8 the complete integrals"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/elliptic-integrals",
+          "locator": "19.2.4, 19.2.5 and 19.2.8",
+          "claim": "The first two kinds are defined with shared domain conditions, and the complete forms are those integrals at quarter period.",
+          "supportingPassage": "19.2.4 defines F of phi and k as the integral from zero to phi of d theta over the square root of one minus k squared sine squared theta. 19.2.5 defines E of phi and k with that square root in the numerator. Both require one minus sine squared phi and one minus k squared sine squared phi to lie outside the cut along the non-positive reals, with at most one of them equal to zero. 19.2.8 defines K of k, E of k and Pi of alpha squared and k as those integrals evaluated at phi equal to pi over two.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/elliptic-integrals",
+          "locator": "19.2.7 and the branch statement",
+          "claim": "The third kind carries an extra condition and needs a principal value where that condition fails inside the range.",
+          "supportingPassage": "19.2.7 defines Pi of phi, alpha squared and k with an additional factor of one minus alpha squared sine squared theta in the denominator, requiring one minus alpha squared sine squared phi to be non-zero, and states that the Cauchy principal value applies if that expression vanishes at an interior point of integration. The principal branch is declared where the phase of one minus k squared is at most pi, with branch cuts on the reals outside minus one to one.",
+          "distinctPassage": true
+        }
+      ],
+      "establishes": "The three Legendre kinds with their domain conditions, the principal-value case, and the complete forms.",
+      "boundary": "Defines the integrals and where they fail. It makes no accuracy claim about any evaluation scheme."
+    },
+    {
+      "sourceId": "doggett-calendars",
+      "domain": "mathematics",
+      "class": "secondary-historical-scholarship",
+      "title": "Calendars and their History",
+      "venue": "L. E. Doggett, University Science Books, hosted by NASA Goddard Space Flight Center",
+      "identifier": "eclipse.gsfc.nasa.gov/SEhelp/calendars.html",
+      "retrievedFrom": "https://eclipse.gsfc.nasa.gov/SEhelp/calendars.html",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Author, publisher and title confirmed on retrieval. Recorded as Doggett's chapter hosted by NASA rather than as a NASA publication, because the two are different authorities.",
+      "versionRelationship": "Retrieved 2026-09-04",
+      "rightsBasis": "Publicly readable on a United States government host. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "The three calendar families",
+        "The stated mean periods",
+        "The Metonic relation",
+        "The Gregorian 400-year cycle"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/calendrical-reconciliation",
+          "locator": "The stated mean periods and the lunar year",
+          "claim": "Two measured periods are incommensurable, and twelve lunar months fall short of the tropical year by a computable amount.",
+          "supportingPassage": "Doggett gives the tropical year as 365.2421896698 days and the mean synodic month as 29.5305888531 days, and states the lunar year of twelve synodic months as 354.36707 days. Multiplying the stated synodic month by twelve reproduces that figure exactly, and subtracting it from the stated tropical year gives a shortfall of about 10.875 days.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/calendrical-reconciliation",
+          "locator": "The three families, the Metonic relation and the Gregorian cycle",
+          "claim": "Three families of scheme answer the mismatch differently, each carrying a residual.",
+          "supportingPassage": "Doggett describes a solar calendar as maintaining synchrony with the tropical year by intercalating days, naming the Gregorian with its 400-year cycle of 146,097 days averaging 365.2425 days. A lunar calendar follows the phase cycle without regard for the tropical year, named as the Islamic calendar. A lunisolar calendar intercalates a whole month every few years using the Metonic relation that 235 lunations occur in nineteen years, 6939.688 days, named as the Hebrew and Chinese calendars.",
+          "distinctPassage": true
+        }
+      ],
+      "arithmeticCheck": "Both derived figures reproduce the source exactly: twelve synodic months give 354.36707 days as stated, and 235 synodic months give 6939.6884 days against the stated 6939.688. One figure does not reconcile: the Gregorian average of 365.2425 exceeds the stated tropical year by 0.00031 days per year, which is one day in about 3200 years, while Doggett states about one day in 2500. The page reports the derived figure and records the source's, and attributes the gap to which definition of the tropical year is used rather than claiming to resolve it.",
+      "frameNote": "Recorded as secondary historical scholarship, not as formal mathematics and not as religious evidence. It establishes calendar arithmetic and which communities use which family; it establishes nothing about observance, which may be set by sighting rather than computation.",
+      "establishes": "The three calendar families, the mean periods behind them, and the reconciliation schemes each uses with their residuals.",
+      "boundary": "Calendar arithmetic and history. It determines no observance and predicts no individual month."
+    },
+    {
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "sourceId": "nist-dlmf-number-theory",
+      "title": "DLMF Chapter 27: Functions of Number Theory",
+      "retrievedFrom": "https://dlmf.nist.gov/27.2",
+      "exactLocators": [
+        "27.2.1 unique factorisation",
+        "27.2.3 the prime counting asymptotic",
+        "27.2.7, 27.2.9 and 27.2.12 the arithmetic functions"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/number-theoretic-functions",
+          "locator": "27.2.1, 27.2.7, 27.2.9 and 27.2.12",
+          "claim": "Unique factorisation underpins the standard arithmetic functions, each defined by a condition on the factorisation.",
+          "supportingPassage": "27.2.1 states that every integer greater than one factors uniquely into prime powers. 27.2.7 defines the totient as counting the positive integers up to n that are relatively prime to n. 27.2.9 defines the divisor function as the count of divisors of n. 27.2.12 defines the Mobius function as one at n equal to one, minus one to the number of distinct prime factors when all exponents are one, and zero otherwise.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/number-theoretic-functions",
+          "locator": "27.2.3",
+          "claim": "The statement about how many primes lie below a bound is asymptotic, so it constrains a ratio in a limit rather than a count.",
+          "supportingPassage": "27.2.3 states that pi of x is asymptotic to x over the natural logarithm of x. The relation is the asymptotic one, so what is asserted is that the ratio tends to one as x grows, not that the difference is small at any particular x.",
+          "distinctPassage": true
+        }
+      ],
+      "crossPageNote": "Two connections, both inspected on each side. The asymptotic relation at 27.2.3 is the one defined at 2.1.1 on the asymptotics page, and the Euler product at 25.2.11 on the zeta page is unique factorisation at 27.2.1 written analytically.",
+      "establishes": "Unique factorisation, the arithmetic functions built on it, and the asymptotic law for the prime count.",
+      "boundary": "Definitions and one asymptotic law. It settles nothing about how primes are distributed."
+    },
+    {
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "sourceId": "nist-dlmf-airy",
+      "title": "DLMF Chapter 9: Airy and Related Functions",
+      "retrievedFrom": "https://dlmf.nist.gov/9.2",
+      "exactLocators": [
+        "9.2.1 the equation",
+        "9.2.2 the standard solutions",
+        "9.2.3 to 9.2.6 the values at the origin",
+        "Table 9.2.1 numerically satisfactory pairs"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/airy-functions",
+          "locator": "9.2.1, 9.2.2 and Table 9.2.1",
+          "claim": "The equation has entire solutions, and which pair to use is a question of region.",
+          "supportingPassage": "9.2.1 states Airy equation as the second derivative of w equal to z times w, and records that all solutions are entire functions of z. 9.2.2 names the standard solutions Ai of z, Bi of z, and Ai of z times e to the minus or plus two pi i over three. Table 9.2.1 records that Ai and Bi are the numerically satisfactory pair on the real line, with other pairs named for other sectors.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/airy-functions",
+          "locator": "9.2.3 to 9.2.6",
+          "claim": "The values at the origin are exact expressions in the gamma function rather than decimals.",
+          "supportingPassage": "9.2.3 gives Ai at zero as one over three to the two thirds times the gamma function at two thirds. 9.2.4 gives Ai prime at zero as minus one over three to the one third times the gamma function at one third. 9.2.5 and 9.2.6 give the corresponding values for Bi and Bi prime in the same gamma terms.",
+          "distinctPassage": true
+        }
+      ],
+      "crossPageNote": "A contrast worth keeping, both halves inspected: Airy solutions are entire by 9.2.1, while the Bessel first-kind solution at 10.2.2 has a branch point at the origin when the order is not an integer. Both chapters organise the choice of pair by region.",
+      "establishes": "Airy equation, its solutions, their exact values at the origin, and the region-dependent choice of pair.",
+      "boundary": "Gives solutions and their analytic character. It makes no accuracy claim about any evaluation method."
+    },
+    {
+      "sourceId": "nist-dlmf-legendre",
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "title": "DLMF Chapter 14: Legendre and Related Functions",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedFrom": "https://dlmf.nist.gov/14.2",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "14.2.1 and 14.2.2 the equations and singular structure",
+        "the recommended pairs by interval",
+        "14.2.3 to 14.2.11 the Wronskians"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/legendre-functions",
+          "locator": "14.2.1 and 14.2.2",
+          "claim": "The equation has three regular singularities with stated exponent pairs, and that structure is what makes the interval matter.",
+          "supportingPassage": "14.2.1 gives Legendre equation and 14.2.2 the associated form carrying the order parameter. The chapter records regular singularities at x equal to one, minus one and infinity, with exponent pairs minus mu over two and mu over two at each finite point and nu plus one and minus nu at infinity.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/legendre-functions",
+          "locator": "the numerically satisfactory pairs and 14.2.3 to 14.2.11",
+          "claim": "Which pair is usable depends on the interval and on parameter conditions, and Wronskians relate the pairs.",
+          "supportingPassage": "On minus one to one, when the real part of mu is non-negative, the Ferrers pair at plus and minus x is linearly independent and recessive at the endpoints. On one to infinity, when the real part of mu is non-negative and the real part of nu is at least minus one half, a different pair is recommended, recessive at one and at infinity respectively. Wronskian formulas at 14.2.3 to 14.2.11 relate the various pairs.",
+          "distinctPassage": true
+        }
+      ],
+      "crossPageNote": "A third instance of one organising principle, all three inspected: Table 10.2.1 for Bessel, Table 9.2.1 for Airy, and the interval-dependent recommendations here. In each, the choice of solution pair is settled by region and parameter conditions rather than by linear independence alone.",
+      "establishes": "The Legendre equations, their singular structure, the interval-dependent recommended pairs and the Wronskian relations.",
+      "boundary": "Gives equations and recommendations with conditions. It makes no accuracy claim about any implementation."
+    },
+    {
+      "sourceId": "nist-dlmf-confluent",
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "title": "DLMF Chapter 13: Confluent Hypergeometric Functions",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedFrom": "https://dlmf.nist.gov/13.2",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "13.2.1 Kummer equation and its singular structure",
+        "13.2.2 the first solution and its exceptional parameters",
+        "13.2.3 and 13.2.4 the entire form",
+        "13.2.6 the second solution",
+        "13.2.7 and 13.2.8 termination"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/confluent-hypergeometric-functions",
+          "locator": "13.2.1, 13.2.2, 13.2.3 and 13.2.4",
+          "claim": "The first solution converges everywhere yet fails to exist for a family of parameters, and an entire alternative form exists to remove exactly that failure.",
+          "supportingPassage": "13.2.1 gives Kummer equation with a regular singularity at the origin with indices zero and one minus b, and an irregular singularity of rank one at infinity. 13.2.2 gives M of a, b, z as a series converging for all complex z, entire in z and a and meromorphic in b, and states that M does not exist when b is a non-positive integer. 13.2.3 gives Olver bold M, entire in all three parameters, and 13.2.4 relates the two by a factor of the gamma function at b, except at those non-positive integers.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/confluent-hypergeometric-functions",
+          "locator": "13.2.6, 13.2.7 and 13.2.8",
+          "claim": "The second solution is branch-dependent with an asymptotic description in a stated sector, and both solutions terminate into polynomials for particular parameters.",
+          "supportingPassage": "13.2.6 states that U of a, b, z behaves like z to the minus a as z tends to infinity in the sector where the phase of z is at most three halves pi minus delta, that U has a branch point at the origin in general, and that the principal branch follows the principal value of z to the minus a. 13.2.7 states that U of minus m, b, z is a polynomial of degree m for non-negative integer m, and 13.2.8 gives the explicit polynomial form when a minus b plus one is a non-positive integer.",
+          "distinctPassage": true
+        }
+      ],
+      "crossPageNote": "Two patterns, both halves inspected on each. The exceptional-parameter structure at 13.2.2 with an entire form at 13.2.3 to remove it is the same design as the Gauss case at 15.2.1 and 15.2.2. And the singular description at 13.2.1, regular at the origin with an irregular point of rank one at infinity, is word for word the description the Bessel chapter gives at 10.2.1, which is what confluent means here.",
+      "establishes": "Kummer equation, both standard solutions, the parameters where the first fails and the entire form that removes them, and the termination cases.",
+      "boundary": "Defines solutions and structure. Everywhere-convergence is not everywhere-accuracy, and no implementation claim is made."
+    },
+    {
+      "sourceId": "nist-dlmf-exponential-integral",
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "title": "DLMF Chapter 6: Exponential, Logarithmic, Sine, and Cosine Integrals",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedFrom": "https://dlmf.nist.gov/6.2",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "6.2.1 E1 with its branch cut",
+        "6.2.3 the entire companion",
+        "6.2.4 the relation carrying Euler constant",
+        "6.2.5, 6.2.6 and 6.2.8 the principal values",
+        "6.2.9 to 6.2.12 the trigonometric integrals"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/exponential-and-logarithmic-integrals",
+          "locator": "6.2.1, 6.2.3 and 6.2.4",
+          "claim": "An entire companion carries the singular part away, leaving it in a logarithm rather than in the integral.",
+          "supportingPassage": "6.2.1 defines E1 of z as the integral of e to the minus t over t from z to infinity for non-zero z, with the path avoiding the negative real axis and a branch cut along the non-positive reals. 6.2.3 defines Ein of z as the integral of one minus e to the minus t over t from zero to z and records it as entire. 6.2.4 states that E1 of z equals Ein of z minus the logarithm of z minus Euler constant.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/exponential-and-logarithmic-integrals",
+          "locator": "6.2.5, 6.2.6, 6.2.8 and 6.2.9 to 6.2.12",
+          "claim": "Several of these are principal values rather than ordinary integrals, and the chapter marks which of the trigonometric ones are entire.",
+          "supportingPassage": "6.2.5 defines Ei of x as a principal value for positive x, and 6.2.6 states that Ei of minus x equals minus E1 of x. 6.2.8 defines li of x for x greater than one as a principal value equal to Ei of the logarithm of x. 6.2.9 gives Si as an odd entire function and 6.2.12 gives Cin as an even entire function, while 6.2.11 defines Ci as a principal value.",
+          "distinctPassage": true
+        }
+      ],
+      "crossPageNote": "A fifth instance of one design, every side inspected. A companion function exists so a singular or badly conditioned quantity can be computed directly: Ein against E1 here at 6.2.3, erfc against erf at 7.2.2, the normalized pair at 8.2.5, the regularized Gauss form at 15.2.2, and Olver entire form at 13.2.3.",
+      "notCovered": "The relation between the logarithmic integral and the prime counting function was not stated in the section read. The number-theory page gives the asymptotic law at 27.2.3 and it is tempting to join them here, so the page explicitly claims no such relation.",
+      "establishes": "The exponential, logarithmic and trigonometric integrals, their branch cuts and principal values, and which are entire.",
+      "boundary": "Definitions and singular structure. It makes no claim about approximating any counting function."
+    },
+    {
+      "sourceId": "nist-dlmf-jacobian-elliptic",
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "title": "DLMF Chapter 22: Jacobian Elliptic Functions",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedFrom": "https://dlmf.nist.gov/22.2",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "22.2.1 the nome",
+        "22.2.3 the argument scaling",
+        "22.2.4 to 22.2.6 sn, cn and dn",
+        "the statement of periodicity and pole structure"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/jacobian-elliptic-functions",
+          "locator": "22.2.1, 22.2.3, 22.2.4 to 22.2.6",
+          "claim": "The functions are theta ratios whose two modulus-carrying quantities are both built from the complete elliptic integral.",
+          "supportingPassage": "22.2.4, 22.2.5 and 22.2.6 define sn, cn and dn as ratios of theta functions at a scaled argument. 22.2.1 defines the nome q as the exponential of minus pi times K prime of k over K of k, and 22.2.3 defines the scaled argument zeta as pi z over twice K of k. Both quantities are expressed through the complete elliptic integral of the first kind.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/jacobian-elliptic-functions",
+          "locator": "the analytic character stated in 22.2",
+          "claim": "They are doubly periodic and meromorphic with simple poles and simple zeros, and real for real argument only within a stated modulus range.",
+          "supportingPassage": "The chapter states that each of the twelve Jacobian elliptic functions is doubly periodic as a function of z with fixed k, is meromorphic in z for fixed k, and possesses simple poles and simple zeros. It states that for k in the closed interval from zero to one all the functions are real when z is real.",
+          "distinctPassage": true
+        }
+      ],
+      "crossPageNote": "Two things, both sides inspected. The nome at 22.2.1 and the scaling at 22.2.3 are built from the complete elliptic integral defined at 19.2.8 on the elliptic-integrals page. And this completes a three-way contrast in analytic character across pages already here: Airy solutions are entire at 9.2.1, the Bessel first kind has a branch point at 10.2.2, and these are meromorphic with simple poles.",
+      "establishes": "The Jacobian functions as theta ratios, the nome and scaling through the complete elliptic integral, and their periodicity and pole structure.",
+      "boundary": "Definitions and analytic character. It makes no accuracy claim about any evaluation scheme."
+    },
+    {
+      "sourceId": "nist-dads",
+      "domain": "mathematics",
+      "class": "government-or-standards-authority",
+      "title": "Dictionary of Algorithms and Data Structures",
+      "venue": "National Institute of Standards and Technology",
+      "identifier": "xlinux.nist.gov/dads",
+      "retrievedFrom": "https://xlinux.nist.gov/dads/HTML/graph.html",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Publisher and resource title confirmed on retrieval of the entry itself.",
+      "versionRelationship": "Entry retrieved 2026-09-04",
+      "rightsBasis": "United States government publication, publicly readable. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "The entry for graph, its formal definition and its named specializations"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/graph-theory",
+          "locator": "The graph entry",
+          "claim": "A graph is a vertex set with an adjacency relation, and directed and weighted forms are specializations of it rather than separate objects.",
+          "supportingPassage": "The entry defines a graph as a set of items connected by edges, each item called a vertex or node, and formally as a set of vertices with a binary relation between them called adjacency. It gives the pair form G equals V and E, with E a subset of the pairs of vertices. It records that an undirected graph is one whose adjacency relation is symmetric, lists directed and weighted graphs among the specializations, and states that adjacency is irreflexive unless self-loops are specified.",
+          "distinctPassage": true
+        }
+      ],
+      "partialCoverage": "The entry supports the page's definition and its treatment of directed and weighted graphs as variants. It does not cover the page's three invariants: that isomorphic graphs preserve topology, that a directed path encodes reachability under edge semantics, or that graph metrics depend on how the graph was constructed. Those remain the page's own statements and are not claimed as supported.",
+      "addedCondition": "The entry states that adjacency is irreflexive unless self-loops are specified, a condition the page does not currently carry. Recorded here rather than silently written into the page, which would be a content change made on the strength of a source read for a different purpose.",
+      "contrastWithHandbook": "This is the substantive match the statistical handbook was not. Both are NIST resources cited by several unsupported pages; this one defines the subject the page is about, and that one defined a different sense of a shared word.",
+      "establishes": "The formal definition of a graph and the status of directed and weighted graphs as specializations.",
+      "boundary": "A dictionary entry. It defines the object and does not establish any property of algorithms run on it."
     }
   ],
   "notInspected": [
@@ -92,13 +799,14 @@
     }
   ],
   "summary": {
-    "sourcesInspected": 3,
-    "sourcesAttached": 2,
-    "routesReached": 2,
-    "claimsSupported": 4,
-    "heldBack": 1
+    "sourcesInspected": 21,
+    "sourcesAttached": 20,
+    "routesReached": 20,
+    "claimsSupported": 39,
+    "heldBack": 1,
+    "sourcesInspectedNotSupporting": 1
   },
-  "boundary": "Three sources inspected at section level; two attached. The astronomy source is recorded, inspected and unattached, because attaching it would move a frozen release-governance digest.",
+  "boundary": "Twelve sources inspected at section level; eleven attached across mathematics and astronomy. The twelfth is recorded, inspected and unattached, because attaching it would move a frozen release-governance digest.",
   "heldBack": [
     {
       "sourceId": "nasa-exoplanet-methods",
@@ -124,6 +832,35 @@
       "establishes": "Which detection methods NASA names, what each measures, and the selection biases it states for two of them.",
       "boundary": "An agency overview. It does not establish the sensitivity or completeness of any survey, and it states limitations for only some of the methods it names.",
       "notAttachedReason": "Inspected at section level and ready to attach, but held back. The route it supports, /knowledge/astronomy/exoplanet-detection-and-confirmation, is one of the twenty records in the Phase 4 pilot, whose manifest carries a frozen sha256. That manifest is recomputed from live data rather than stored, so adding any source to a pilot record moves the digest: this source took the blocker count from 87 to 89. Every existing astronomy source carries the same two blockers, a missing publication date and a missing locator, so the source is no worse than its neighbours; the coupling is the issue. Updating a frozen release-governance digest to accommodate a content addition is a decision for a person, not a side effect of adding a page."
+    }
+  ],
+  "inspectedButNotSupporting": [
+    {
+      "sourceId": "nist-statistical-handbook",
+      "title": "NIST/SEMATECH e-Handbook of Statistical Methods",
+      "sectionInspected": "2.1.1, What are the issues for characterization?",
+      "retrievedFrom": "https://www.itl.nist.gov/div898/handbook/mpc/section1/mpc11.htm",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "rightsBasis": "United States government publication, publicly readable. Retrieved without circumventing any access control.",
+      "observedContent": "Section 2.1.1 quantifies measurement goodness as bias, short-term variability or instrument precision, long-term variability, and uncertainty, and states that continuation of goodness is guaranteed by a statistical control program controlling both short-term and long-term variability. It states the chapter's techniques are intended primarily for ongoing processes, and that one-time, special and destructive tests are difficult to characterize.",
+      "whyItSupportsNothingHere": "Nine pages cite this source and the one inspected here is calibration-and-reliability, which is about probabilistic forecast calibration: a forecaster is calibrated when events given probability p occur at about frequency p, assessed with reliability diagrams over a reference class. The handbook section is about measurement calibration: instrument bias, instrument precision and statistical control of a measurement process. These are two different concepts sharing one word. Attaching the section would be a topical citation presented as support, which is the defect the corpus refuses.",
+      "otherPagesCitingIt": [
+        "bayesian-updating",
+        "proper-scoring-rules",
+        "dynamical-systems",
+        "time-series-models",
+        "change-point-detection",
+        "optimization",
+        "information-theory",
+        "causal-inference"
+      ],
+      "furtherAttempt": {
+        "url": "https://www.itl.nist.gov/div898/handbook/pmc/section1/pmc11.htm",
+        "outcome": "Section 6.1.1 is a historical account of how statistical quality control began and carries no operational content, so it supports nothing either."
+      },
+      "conclusion": "The citation is not evidence that the handbook covers these pages. Whether any of the nine is supportable depends on finding a section that addresses that page's actual subject, and for forecast calibration this handbook may have none. Recorded so the source is not treated as inspected-and-supporting on the strength of one section that is not about the same thing."
     }
   ]
 }

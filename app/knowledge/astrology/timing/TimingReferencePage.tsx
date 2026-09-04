@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import AuthorityAnswerLinks from '@/app/knowledge/astrology/questions/AuthorityAnswerLinks'
 import { SITE_URL } from '@/lib/briefs-data'
 import {
   TIMING_REFERENCE_PATH,
@@ -88,6 +89,7 @@ export default function TimingReferencePage({ reference }: { reference: TimingRe
         </section>
 
         {related.length > 0 && <section className="mt-12 border border-zinc-800 p-6"><h2 className="text-xl font-semibold text-white">Related timing references</h2><div className="mt-5 flex flex-wrap gap-3">{related.map((entry) => <Link key={entry.slug} href={timingReferencePath(entry)} className="border border-zinc-700 px-4 py-3 text-xs text-zinc-300 hover:border-violet-500 hover:text-violet-200">{entry.title} →</Link>)}</div></section>}
+        <AuthorityAnswerLinks authorityId={`timing:${reference.slug}`} />
       </article>
     </main>
   )

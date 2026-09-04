@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { EVIDENCE_WORKFLOW_PATH } from '@/lib/evidence-workflow-examples'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 const title = 'Enterprise MCP Gateway | Tool Allowlists and Audit Controls'
@@ -90,6 +91,7 @@ export default function EnterpriseMcpGatewayPage() {
             <Link className="evidence-action evidence-action--secondary" href="/guides/mcp-gateway-vs-direct-server">Gateway vs. direct MCP ↗</Link>
             <Link className="evidence-action evidence-action--secondary" href="/guides/enterprise-mcp-governance">Tool allowlists and audit logs ↗</Link>
             <Link className="evidence-action evidence-action--secondary" href="/mcp-bridge">Local MCP Bridge ↗</Link>
+            <Link className="evidence-action evidence-action--secondary" href={EVIDENCE_WORKFLOW_PATH}>Licensed evidence workflows ↗</Link>
           </div>
         </section>
       </div>

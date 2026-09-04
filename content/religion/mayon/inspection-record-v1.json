@@ -1,0 +1,65 @@
+{
+  "version": "mayon-inspection-record/1.0",
+  "cohortVersion": "mayon-research-cohort/1.0",
+  "inspections": [
+    {
+      "sourceId": "tolkappiyam-porul-5",
+      "depth": "exact-passage",
+      "locator": "Akattiṇaiyiyal, nūṟpā 5",
+      "disposition": "explanatory-eligible",
+      "limitation": "One electronic edition was inspected; no manuscript collation was performed."
+    },
+    {
+      "sourceId": "paripatal-project-madurai",
+      "depth": "multiple-located-passages",
+      "locator": "Tirumāl poems 1–4 and 13, with selected passages in poems 2, 3, 13, and 15",
+      "disposition": "explanatory-eligible",
+      "limitation": "The electronic edition is a primary text; historical interpretation remains separately attributed."
+    },
+    {
+      "sourceId": "yamashita-1995-mayon-tirumal",
+      "depth": "section-and-table",
+      "locator": "printed pp. 73–84 and tables I–II",
+      "disposition": "explanatory-eligible",
+      "limitation": "One scholar's literary reconstruction; parallels and influence claims remain interpretations."
+    },
+    {
+      "sourceId": "subbiah-1988-early-south-india",
+      "depth": "section-and-page",
+      "locator": "printed pp. 64–66, 71–74, 98–114, 150–154, and 218–221",
+      "disposition": "explanatory-eligible",
+      "limitation": "A dissertation synthesis, not a manuscript witness, inscriptional corpus, or archaeological report."
+    },
+    {
+      "sourceId": "cict-paripatal-catalogue",
+      "depth": "bibliographic-page-only",
+      "locator": "About Ettuthokai–Paripāṭal and edition table",
+      "disposition": "bibliographic-only",
+      "limitation": "May reconcile catalogue counts and edition scope; may not support historical or theological explanation."
+    }
+  ],
+  "supplementalRoutes": [
+    {
+      "url": "https://www.projectmadurai.org/pm_etexts/pdf/pm0057.pdf",
+      "identity": "Project Madurai Puṟanāṉūṟu edition",
+      "locator": "poems 56–57, PDF pp. 34–35",
+      "disposition": "identity-and-location-confirmed-content-not-used",
+      "reason": "The legacy TSCII extraction was not treated as a verified translation; the explanatory claim remains bound to Subbiah's located discussion."
+    },
+    {
+      "url": "https://www.projectmadurai.org/pm_etexts/utf8/pmuni0221.html",
+      "identity": "Project Madurai Kalittokai edition",
+      "locator": "full electronic text searched",
+      "disposition": "not-added-to-explanatory-set",
+      "reason": "Search results did not yield a securely interpreted Māyōṉ passage for this release."
+    },
+    {
+      "url": "https://www.projectmadurai.org/pm_etexts/utf8/pmuni0229.html",
+      "identity": "Project Madurai Akanāṉūṟu edition",
+      "locator": "full electronic text searched",
+      "disposition": "not-added-to-explanatory-set",
+      "reason": "Surface matches were insufficient to resolve whether each form was a divine name, epithet, or unrelated word."
+    }
+  ],
+  "corpusBoundary": "No source outside the explanatory-eligible set may carry a public explanatory claim. Supplemental retrieval does not change the frozen topic or question cohort."
+}

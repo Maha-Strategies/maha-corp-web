@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "maha-route-reconciliation/1.0",
+  "preparedOn": "2026-09-04",
+  "countingBoundary": "Crawlable canonical URLs; answer entries inside a route do not count as additional routes.",
+  "reportedAvailableRoutesBeforeBatch": 974,
+  "reportedBy": "Mayone",
+  "reasonForPriorReduction": "The Maha Principle routes are offline.",
+  "continuation": {
+    "topicPages": 26,
+    "boundedAnswers": 130,
+    "additionalHubs": 0,
+    "additionalRegistries": 0,
+    "newCrawlableRoutes": 26,
+    "publicNow": false
+  },
+  "projectedAvailableRoutesAfterApprovedBuildAndDeployment": 1000,
+  "buildAuthorized": false,
+  "deploymentAuthorized": false,
+  "note": "This projection reconciles the operator-reported live count with this continuation only. It does not rewrite the earlier historical scaling ledger or treat prepared routes as public."
+}

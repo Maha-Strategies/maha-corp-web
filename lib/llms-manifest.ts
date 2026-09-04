@@ -9,6 +9,13 @@ import type { EpistemicRecord } from './epistemic-schema.ts'
 import { epistemicRecordPath } from './epistemic-publication.ts'
 import { EPISTEMIC_DOMAINS } from './epistemic-pilots.ts'
 import { getPublishedSubstantialPage } from './substantial-page-public.ts'
+import { MAYON_ANSWER_REGISTRY_PATH, MAYON_TOPICS, mayonTopicPath } from './mayon-topics.ts'
+import { TAMIL_CLASSICAL_PATH, TAMIL_CLASSICAL_REGISTRY_PATH, TAMIL_CLASSICAL_TOPICS, tamilClassicalTopicPath } from './tamil-classical-traditions.ts'
+import { TIRUVAYMOLI_ATLAS_PATH, TIRUVAYMOLI_ATLAS_REGISTRY_PATH, TIRUVAYMOLI_ATLAS_TOPICS, tiruvaymoliAtlasTopicPath } from './tiruvaymoli-passage-atlas.ts'
+import { TAMIL_SOURCE_ATLAS_PATH, TAMIL_SOURCE_ATLAS_REGISTRY_PATH, TAMIL_SOURCE_ATLAS_TOPICS, tamilSourceAtlasTopicPath } from './tamil-source-atlas.ts'
+import { ASTROLOGY_ANSWER_GRAPH_PATH, ASTROLOGY_ANSWER_GRAPH_REGISTRY_PATH, ASTROLOGY_ANSWERS, astrologyAnswerPath } from './astrology-answer-graph.ts'
+import { ASTROLOGY_WORKFLOW_PATH, ASTROLOGY_WORKFLOW_PROTOCOLS, ASTROLOGY_WORKFLOW_REGISTRY_PATH, astrologyWorkflowPath } from './astrology-workflow-protocols.ts'
+import { EVIDENCE_WORKFLOW_EXAMPLES, EVIDENCE_WORKFLOW_PATH, EVIDENCE_WORKFLOW_REGISTRY_PATH, evidenceWorkflowPath } from './evidence-workflow-examples.ts'
 
 const RESEARCH_URL = 'https://research.mahastrategies.com'
 
@@ -74,7 +81,28 @@ export function buildLlmsManifest(
     '- Mathematics registry: https://www.mahastrategies.com/knowledge/mathematics/registry',
     '- Neuromorphic and biocomputing registry: https://www.mahastrategies.com/knowledge/neuromorphic-biocomputing/registry',
     '- Religion and contemplative traditions registry: https://www.mahastrategies.com/knowledge/religion/registry',
+    '- Māyōṉ (Mayon), early Tamil sources and typed deity connections: https://www.mahastrategies.com/knowledge/religion/mayon',
+    `- Māyōṉ machine-readable answer registry: https://www.mahastrategies.com${MAYON_ANSWER_REGISTRY_PATH}`,
+    ...MAYON_TOPICS.map((topic) => `- Māyōṉ source guide — ${topic.shortTitle}: https://www.mahastrategies.com${mayonTopicPath(topic)}`),
+    `- Classical Tamil religion and reception: https://www.mahastrategies.com${TAMIL_CLASSICAL_PATH}`,
+    `- Classical Tamil machine-readable answer registry: https://www.mahastrategies.com${TAMIL_CLASSICAL_REGISTRY_PATH}`,
+    ...TAMIL_CLASSICAL_TOPICS.map((topic) => `- Classical Tamil source guide — ${topic.shortTitle}: https://www.mahastrategies.com${tamilClassicalTopicPath(topic)}`),
+    `- Tiruvāymoḻi passage atlas: https://www.mahastrategies.com${TIRUVAYMOLI_ATLAS_PATH}`,
+    `- Tiruvāymoḻi machine-readable answer registry: https://www.mahastrategies.com${TIRUVAYMOLI_ATLAS_REGISTRY_PATH}`,
+    ...TIRUVAYMOLI_ATLAS_TOPICS.map((topic) => `- Tiruvāymoḻi passage guide — ${topic.shortTitle}: https://www.mahastrategies.com${tiruvaymoliAtlasTopicPath(topic)}`),
+    `- Tamil religion source atlas: https://www.mahastrategies.com${TAMIL_SOURCE_ATLAS_PATH}`,
+    `- Tamil religion machine-readable answer registry: https://www.mahastrategies.com${TAMIL_SOURCE_ATLAS_REGISTRY_PATH}`,
+    ...TAMIL_SOURCE_ATLAS_TOPICS.map((topic) => `- Tamil source guide — ${topic.shortTitle}: https://www.mahastrategies.com${tamilSourceAtlasTopicPath(topic)}`),
     '- Astrology traditions registry: https://www.mahastrategies.com/knowledge/astrology/registry',
+    `- Astrology bounded-answer graph: https://www.mahastrategies.com${ASTROLOGY_ANSWER_GRAPH_PATH}`,
+    `- Astrology machine-readable answer registry: https://www.mahastrategies.com${ASTROLOGY_ANSWER_GRAPH_REGISTRY_PATH}`,
+    ...ASTROLOGY_ANSWERS.map((answer) => `- Astrology method answer — ${answer.question}: https://www.mahastrategies.com${astrologyAnswerPath(answer)}`),
+    `- Astrology workflow protocols: https://www.mahastrategies.com${ASTROLOGY_WORKFLOW_PATH}`,
+    `- Astrology workflow registry: https://www.mahastrategies.com${ASTROLOGY_WORKFLOW_REGISTRY_PATH}`,
+    ...ASTROLOGY_WORKFLOW_PROTOCOLS.map((workflow) => `- Worked astrology protocol — ${workflow.title}: https://www.mahastrategies.com${astrologyWorkflowPath(workflow)}`),
+    `- Evidence workflow examples: https://www.mahastrategies.com${EVIDENCE_WORKFLOW_PATH}`,
+    `- Evidence workflow machine registry: https://www.mahastrategies.com${EVIDENCE_WORKFLOW_REGISTRY_PATH}`,
+    ...EVIDENCE_WORKFLOW_EXAMPLES.map((workflow) => `- Worked evidence workflow — ${workflow.title}: https://www.mahastrategies.com${evidenceWorkflowPath(workflow)}`),
     '',
     '## Canonical epistemic records',
     ...(canonicalEpistemicRecords.length > 0
@@ -117,9 +145,6 @@ export function buildLlmsManifest(
     '',
     '## Open research editions',
     '- Books and essays index: https://www.mahastrategies.com/books',
-    '- The Maha Principle — complete free web edition: https://www.mahastrategies.com/books/the-maha-principle',
-    '- The Maha Principle — section reader: https://www.mahastrategies.com/books/the-maha-principle/read',
-    '  - Copyright boundary: free web access does not grant permission to republish, resell, or create derivative editions. Health and self-assessment material is educational and philosophical, not medical advice.',
     '- The Cosmic Recursion — complete open web edition: https://www.mahastrategies.com/books/the-cosmic-recursion',
     '- The Cosmic Recursion — section reader: https://www.mahastrategies.com/books/the-cosmic-recursion/read',
     '- The Cosmic Recursion — sources and verification: https://www.mahastrategies.com/books/the-cosmic-recursion/read/sources-and-verification',

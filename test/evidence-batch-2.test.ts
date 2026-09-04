@@ -129,8 +129,20 @@ test('a stale revision cannot inherit new evidence', () => {
 })
 
 test('unsupported comparisons and calculations remain absent', () => {
-  assert.equal(report.informationValue.reproducibleCalculations, 0,
-    'no calculation was fabricated where inputs and assumptions do not exist')
+  // The rule is that no calculation is fabricated where inputs and assumptions
+  // do not exist, which was zero while nothing could be reproduced. A kernel
+  // calculation carries its inputs, its units and a digest that lets a reader
+  // rerun it, so what is asserted is that every rendered calculation is one.
+  const rendered = compiled.pages.filter((p) =>
+    (p.sections ?? []).some((s) => s.dimension === 'deterministic-calculation'))
+  assert.equal(report.informationValue.reproducibleCalculations, rendered.length,
+    'the reported calculation count must match what renders')
+  for (const page of rendered) {
+    const section = page.sections.find((s) => s.dimension === 'deterministic-calculation')
+    assert.ok(section, `${page.route} was counted but renders no calculation section`)
+    assert.match(section.items.join(' '), /Executed by kernel sha256:[0-9a-f]{64}/,
+      `${page.route} renders a calculation nobody can reproduce`)
+  }
   for (const page of compiled.pages) {
     if (page.eligible) continue
     assert.equal(page.after, null)

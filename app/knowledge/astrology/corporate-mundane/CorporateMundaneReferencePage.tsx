@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import AuthorityAnswerLinks from '@/app/knowledge/astrology/questions/AuthorityAnswerLinks'
 import { SITE_URL } from '@/lib/briefs-data'
 import {
   CORPORATE_MUNDANE_PATH,
@@ -46,6 +47,7 @@ export default function CorporateMundaneReferencePage({ reference }: { reference
 
         <section className="mt-12 border-t border-zinc-800 pt-8"><h2 className="text-2xl font-semibold text-white">Method and calculation sources</h2><p className="mt-3 text-sm leading-6 text-zinc-500">Sources establish a calculation convention or Maha’s declared method. They do not establish predictive meaning.</p><ol className="mt-6 space-y-5">{sources.map((source) => <li key={source.id} className="border-l border-zinc-700 pl-4"><a href={source.url} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-zinc-100 underline decoration-zinc-700 underline-offset-4 hover:text-white">{source.title}</a><p className="mt-1 font-mono text-[9px] uppercase tracking-widest text-zinc-600">{source.authority}</p><p className="mt-2 text-xs leading-5 text-zinc-500">{source.establishes}</p><p className="mt-1 text-xs leading-5 text-zinc-600"><span className="text-amber-400">Boundary:</span> {source.boundary}</p></li>)}</ol></section>
         {related.length > 0 && <section className="mt-12 border border-zinc-800 p-6"><h2 className="text-xl font-semibold text-white">Related corporate references</h2><div className="mt-5 flex flex-wrap gap-3">{related.map((entry) => <Link key={entry.slug} href={corporateMundaneReferencePath(entry)} className="border border-zinc-700 px-4 py-3 text-xs text-zinc-300 hover:border-cyan-500 hover:text-cyan-200">{entry.title} →</Link>)}</div></section>}
+        <AuthorityAnswerLinks authorityId={`corporate:${reference.slug}`} />
       </article>
     </main>
   )

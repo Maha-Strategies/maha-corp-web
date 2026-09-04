@@ -1,0 +1,52 @@
+{
+  "version": "tamil-source-atlas-inspection/1.0",
+  "preparedOn": "2026-09-04",
+  "independentExpertReview": false,
+  "newInspection": {
+    "sourceId": "paripatal-project-madurai",
+    "depth": "exact-poem-and-line-structure",
+    "locator": "Edition header; poem 1 lines 1-68; poem 2 lines 1-73; poem 3 lines 1-94; poem 4 lines 1-73; poem 13 colophon; poem 15 lines 1-66",
+    "finding": "The electronic edition exposes numbered poem boundaries, line numbers, internal headings, author and music-setter fields, and pan labels. It is used as Tamil primary text, not as an English translation.",
+    "rightsBasis": "Project Madurai permits free distribution with its header intact; the public pages paraphrase, attribute, and link rather than reproduce the poems."
+  },
+  "reusedCommittedInspections": [
+    {
+      "sourceId": "tolkappiyam-porul-5",
+      "priorRecord": "tamil-classical-traditions-inspection/1.0",
+      "locator": "Akattinaiyiyal, nurpa 5, complete six-line landscape-deity stanza"
+    },
+    {
+      "sourceId": "yamashita-1995-mayon-tirumal",
+      "priorRecord": "mayon-inspection-record/1.0",
+      "locator": "printed pp. 73-84 and tables I-II"
+    },
+    {
+      "sourceId": "subbiah-1988-early-south-india",
+      "priorRecord": "mayon-inspection-record/1.0 and tamil-classical-traditions-inspection/1.0",
+      "locator": "printed pp. 64-74, 98-114, 150-154, and 218-221"
+    },
+    {
+      "sourceId": "project-madurai-divya-prabandham-part-4",
+      "priorRecord": "tiruvaymoli-passage-atlas inspection corpus",
+      "locator": "edition header and Tiruvaymoli pasurams 2791-3012 plus the named later units already indexed"
+    },
+    {
+      "sourceId": "reddy-2011-tamil-bhakti-context",
+      "priorRecord": "tiruvaymoli-passage-atlas inspection corpus",
+      "locator": "pp. 25-26, 30, 33-46, and 88-93"
+    }
+  ],
+  "failedReinspection": {
+    "sourceId": "yamashita-1995-mayon-tirumal",
+    "route": "University of Tokyo repository PDF",
+    "result": "HTTP 429 during this sprint",
+    "effect": "No new claim was derived. The atlas reuses only the already committed 2026-09-04 inspection and its existing locators."
+  },
+  "prohibitedShortcuts": [
+    "Translate unrendered Tamil silently.",
+    "Treat an editorial heading as independent historical verification.",
+    "Turn a later name occurrence into proof of direct descent from an earlier one.",
+    "Treat commentarial identity as wording in the primary stanza.",
+    "Treat literary place as a modern archaeological identification."
+  ]
+}

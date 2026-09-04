@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "maha-strong-domain-expansion/1.0",
+  "preparedOn": "2026-09-04",
+  "target": 1000,
+  "countingBoundary": "Crawlable canonical URLs. Machine-only endpoints are counted only when intentionally listed in the sitemap; redirects, filters, aliases, and parameter permutations never count.",
+  "baseline": {
+    "lastDirectlyVerifiedProductionRoutes": 793,
+    "lastDirectlyVerifiedAt": "2026-09-04 before PR 400",
+    "mergedStaticRoutesSinceObservation": 2,
+    "derivedCurrentRoutes": 795,
+    "derivedNotObserved": true,
+    "derivation": "PR 400 added two mathematics concepts to the sitemap-driven concept array. A fresh Production observation is deferred until the batched release to avoid consuming deployment resources for counting alone."
+  },
+  "localUnpublishedTranche": {
+    "mayon": { "topics": 15, "roots": 1, "registries": 1, "crawlableSurfaces": 17, "boundedAnswers": 75 },
+    "classicalTamil": { "topics": 16, "roots": 1, "registries": 1, "crawlableSurfaces": 18, "boundedAnswers": 80 },
+    "tiruvaymoliAtlas": { "topics": 46, "roots": 1, "registries": 1, "crawlableSurfaces": 48, "boundedAnswers": 230, "initialTopics": 20, "initialCrawlableSurfaces": 22, "initialBoundedAnswers": 100, "continuationTopics": 26 },
+    "astrologyAnswerGraph": { "topics": 36, "roots": 1, "registries": 1, "crawlableSurfaces": 38, "boundedAnswers": 144, "authorityLinks": 115 },
+    "tamilSourceAtlas": { "topics": 48, "roots": 1, "registries": 1, "crawlableSurfaces": 50, "boundedAnswers": 192, "categories": { "paripatalPassages": 20, "landscapeRelationships": 12, "divineNameMaps": 8, "receptionLineages": 8 } },
+    "astrologyWorkflowProtocols": { "workflows": 36, "roots": 1, "registries": 1, "crawlableSurfaces": 38, "calculationReceipts": 10, "categories": { "inputReferenceFrame": 12, "calculationUncertainty": 10, "evaluationFalsifiability": 8, "traditionComparison": 6 } },
+    "evidenceWorkflows": { "examples": 20, "roots": 1, "registries": 1, "crawlableSurfaces": 22, "categories": { "evidencePreflight": 8, "dossierCalculationReceipt": 6, "mcpReleaseFlow": 6 }, "syntheticOnly": true, "purchaseEnabled": false },
+    "claudeMathematicsAstronomy": { "mathematicsConcepts": 15, "astronomyArticles": 2, "crawlableSurfaces": 17 },
+    "readerFaqs": { "pages": 2, "crawlableSurfaces": 2, "manuscriptRepublished": false },
+    "mahaPrincipleKdpBoundary": { "withdrawnCanonicalSurfaces": 42, "maintenancePageIndexed": false, "readerFaqKeptPublic": true },
+    "grossAddedCrawlableSurfaces": 250,
+    "totalCrawlableSurfaces": 208,
+    "totalTopicPages": 236,
+    "totalBoundedAnswers": 721,
+    "projectedRoutesAfterOneDeployment": 1003,
+    "projectedGapToTarget": 0,
+    "projectedRoutesBeyondTarget": 3,
+    "publicNow": false
+  },
+  "rankedExpansionAreas": [
+    {
+      "rank": 1,
+      "area": "Tamil religion and source-text passage atlases",
+      "reason": "Project Madurai primary texts and open institutional scholarship provide exact passage locators, and textual-authority already shows generative-search discovery.",
+      "nextCapacity": "Paripatal poem atlas and the next Tiruvaymoli passage tranche",
+      "risk": "Translations, primary wording, commentary, theology, and historical inference must remain separate."
+    },
+    {
+      "rank": 2,
+      "area": "Formal mathematics",
+      "reason": "DLMF gives permanent equation identifiers and high evidence-to-page yield; PR 400 proved the source-first path with gamma and error-function pages.",
+      "nextCapacity": "Additional DLMF chapters with calculation receipts where inputs and assumptions are complete",
+      "coordination": "Claude track; avoid duplicate concepts."
+    },
+    {
+      "rank": 3,
+      "area": "Astrology traditions and celestial interpretation",
+      "reason": "Generative-search clicks provide a live demand signal, and the existing corpus already models 4 traditions, 5 celestial guides, 42 calculation references, 36 timing references, 30 mundane/corporate references, and 12 tropical/sidereal comparisons.",
+      "existingFootprint": {
+        "traditions": 4,
+        "celestialGuides": 5,
+        "calculationReferences": 42,
+        "timingReferences": 36,
+        "corporateMundaneReferences": 30,
+        "tropicalSiderealComparisons": 12,
+        "totalModeledItems": 129
+      },
+      "nextCapacity": "Audit observed questions against the 129-item footprint, then add only uncovered question-led guides, tradition comparisons, and reproducible calculation explainers.",
+      "risk": "Astronomical inputs and deterministic calculations, tradition-relative interpretive rules, historical claims, and empirical validation must remain separate; no personalized prediction or scientific validation is implied."
+    },
+    {
+      "rank": 4,
+      "area": "Astronomy and celestial computation",
+      "reason": "NASA, JPL, IAU, LIGO, and open observatory sources are lawful and usually carry stable locators.",
+      "nextCapacity": "Observation-method and measurement-boundary pages",
+      "risk": "Agency summaries cannot substitute for survey-specific sensitivity, completeness, or uncertainty."
+    },
+    {
+      "rank": 5,
+      "area": "Evidence methodology and governance",
+      "reason": "The site already has strong internal authority contracts and product relevance.",
+      "nextCapacity": "Worked examples connecting source identity, locator scope, review, release, and machine retrieval",
+      "risk": "Do not multiply near-duplicate policy pages."
+    }
+  ],
+  "deferred": [
+    {
+      "area": "Semiconductor manufacturing",
+      "reason": "The remaining legacy pages are dominated by IEEE, SPIE, ECTC, CMP, access-control, or first-party-only evidence constraints."
+    },
+    {
+      "area": "Unreleased epistemic records",
+      "reason": "Compilation is not the bottleneck; exact-revision review and canonical release remain mandatory."
+    }
+  ],
+  "releaseRule": "No Vercel build, Preview, PR-triggered deployment, or Production deployment may run without Mayone's explicit approval."
+}

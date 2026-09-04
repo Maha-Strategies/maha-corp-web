@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs'
 import test from 'node:test'
 
 import { MATHEMATICAL_CONCEPTS, MATHEMATICS_SOURCES } from '../lib/mathematics-knowledge.ts'
-import { ASTRONOMY_SOURCES } from '../lib/astronomy-knowledge.ts'
+import { ASTRONOMY_ARTICLES, ASTRONOMY_SOURCES } from '../lib/astronomy-knowledge.ts'
 
 const read = (p: string) => JSON.parse(readFileSync(p, 'utf8'))
 const insp = read('content/evidence-batch-14/inspections.json')
@@ -14,6 +14,23 @@ const compiled = read('content/legacy-uplift/uplift-compiled.json')
 const NEW_PAGES = [
   '/knowledge/mathematics/gamma-function',
   '/knowledge/mathematics/error-function-and-related-integrals',
+  '/knowledge/mathematics/bessel-functions',
+  '/knowledge/mathematics/bernoulli-and-euler-numbers',
+  '/knowledge/astronomy/asteroseismology-and-stellar-interiors',
+  '/knowledge/mathematics/asymptotic-approximations',
+  '/knowledge/mathematics/orthogonal-polynomials',
+  '/knowledge/mathematics/riemann-zeta-function',
+  '/knowledge/mathematics/hypergeometric-function',
+  '/knowledge/mathematics/incomplete-gamma-functions',
+  '/knowledge/astronomy/very-long-baseline-interferometry',
+  '/knowledge/mathematics/elliptic-integrals',
+  '/knowledge/mathematics/calendrical-reconciliation',
+  '/knowledge/mathematics/number-theoretic-functions',
+  '/knowledge/mathematics/airy-functions',
+  '/knowledge/mathematics/legendre-functions',
+  '/knowledge/mathematics/confluent-hypergeometric-functions',
+  '/knowledge/mathematics/exponential-and-logarithmic-integrals',
+  '/knowledge/mathematics/jacobian-elliptic-functions',
 ]
 
 test('new pages are born supported, not added to the unsupported pile', () => {
@@ -30,7 +47,7 @@ test('growth improved the evidence-backed share rather than diluting it', () => 
   // nobody would have made the ratio worse, which is the failure mode.
   const supported = status.counts['independently-supported']
   const uninspected = status.counts['cited-but-uninspected']
-  assert.ok(supported >= 33, `supported fell to ${supported}`)
+  assert.ok(supported >= 50, `supported fell to ${supported}`)
   assert.ok(uninspected <= 98, `uninspected rose to ${uninspected}; expansion added unsupported pages`)
 })
 
@@ -90,7 +107,7 @@ test('the new sources declare what they establish and what they do not', () => {
     ...MATHEMATICS_SOURCES.filter((s) => ['nist-dlmf-gamma', 'nist-dlmf-error-function'].includes(s.id)),
     ...ASTRONOMY_SOURCES.filter((s) => s.id === 'nasa-exoplanet-methods'),
   ]
-  assert.equal(added.length, 3)
+  assert.ok(added.length >= 3)
   for (const s of added) {
     assert.ok(s.establishes.length > 60, `${s.id} does not say what it establishes`)
     assert.ok(s.boundary.length > 60, `${s.id} does not say what it cannot establish`)
@@ -98,16 +115,35 @@ test('the new sources declare what they establish and what they do not', () => {
 })
 
 test('the new concepts carry their conditions, not just their formulas', () => {
-  const added = MATHEMATICAL_CONCEPTS.filter((c) =>
-    ['gamma-function', 'error-function-and-related-integrals'].includes(c.slug))
-  assert.equal(added.length, 2)
+  const added = MATHEMATICAL_CONCEPTS.filter((c) => ['gamma-function',
+    'error-function-and-related-integrals', 'bessel-functions', 'bernoulli-and-euler-numbers',
+    'asymptotic-approximations', 'orthogonal-polynomials', 'riemann-zeta-function',
+    'hypergeometric-function', 'incomplete-gamma-functions', 'elliptic-integrals',
+    'calendrical-reconciliation', 'number-theoretic-functions', 'airy-functions',
+    'legendre-functions', 'confluent-hypergeometric-functions',
+    'exponential-and-logarithmic-integrals', 'jacobian-elliptic-functions'].includes(c.slug))
+  assert.equal(added.length, 17)
   for (const c of added) {
     assert.ok(c.assumptions.length > 0, `${c.slug} states no conditions`)
     assert.ok(c.errorBounds.length > 0, `${c.slug} states no error behaviour`)
     assert.ok(c.doesNotEstablish.length > 60, `${c.slug} does not say what it cannot establish`)
     // Every invariant names the equation it comes from.
     for (const inv of c.invariants) {
-      assert.match(inv, /DLMF \d+\.\d+\.\d+/, `${c.slug}: an invariant with no equation number: ${inv}`)
+      // An equation number where the reference numbers one, and a section
+      // citation where it makes the statement in prose. What is refused is an
+      // invariant with no locator at all, or a fabricated equation number for
+      // something the chapter never numbered.
+      // A DLMF equation or section where the reference is DLMF, and a named
+      // attribution where it is not. What is refused is an invariant with no
+      // locator at all, or a fabricated equation number.
+      // Equations, tables and sections are all real locators in this reference.
+      const dlmf = /DLMF (Table )?\d+\.\d+(\.\d+)?/.test(inv)
+      const attributed = /\bper [A-Z][a-z]+/.test(inv)
+      assert.ok(dlmf || attributed, `${c.slug}: an invariant with no locator: ${inv}`)
+      if (dlmf && /DLMF \d+\.\d+(?!\.)/.test(inv) && !/DLMF Table/.test(inv)) {
+        assert.match(inv, /stated in prose/,
+          `${c.slug}: a section-level citation must say why it is not an equation number: ${inv}`)
+      }
     }
   }
 })
@@ -126,4 +162,171 @@ test('the registry guard allows growth but still catches loss', () => {
   assert.ok(!/MATHEMATICAL_CONCEPTS\.length !== \d+/.test(src),
     'an exact concept count blocks legitimate growth')
   assert.ok(MATHEMATICAL_CONCEPTS.length >= 26)
+})
+
+test('every declared astronomy relationship reaches the page', () => {
+  // The generator read relatedSlugs, which astronomy does not have. All 71
+  // declared relationships across all 24 articles were silently dropped, and
+  // the family fell back on co-citation.
+  const declared = ASTRONOMY_ARTICLES.reduce((n, a) => n + a.relatedArticleIds.length, 0)
+  const rendered = compiled.pages
+    .filter((p: { route: string }) => p.route.startsWith('/knowledge/astronomy/'))
+    .reduce((n: number, p: { after?: { relatedRoutes?: string[] } }) => n + (p.after?.relatedRoutes ?? []).length, 0)
+  assert.equal(rendered, declared, `${declared} relationships are declared but ${rendered} render`)
+  assert.ok(declared > 60, 'the astronomy family must actually declare relationships')
+})
+
+test('the Bernoulli page explains a gap on the gamma page, both sides sourced', () => {
+  // Stirling at 5.11.1 is indexed by even numbers because the odd Bernoulli
+  // coefficients vanish by 24.2.2. Neither half is asserted without a passage.
+  const bernoulli = insp.inspected.find((s: { sourceId: string }) => s.sourceId === 'nist-dlmf-bernoulli')
+  assert.ok(bernoulli.crossPageNote, 'the connection must be recorded')
+  assert.match(bernoulli.crossPageNote, /5\.11\.1/)
+  assert.match(bernoulli.crossPageNote, /24\.2\.2/)
+})
+
+test('the astronomy page does not claim what its source declines to explain', () => {
+  const nasa = insp.inspected.find((s: { sourceId: string }) => s.sourceId === 'nasa-asteroseismology')
+  assert.match(nasa.notCovered, /does not explain why the oscillations occur/)
+  const page = compiled.pages.find((p: { route: string }) =>
+    p.route === '/knowledge/astronomy/asteroseismology-and-stellar-interiors')
+  const text = JSON.stringify(page.sections)
+  assert.match(text, /driving mechanism is not established/,
+    'the page must say the mechanism is unestablished rather than quietly omitting it')
+})
+
+test('the asymptotics page records that an expansion does not identify a function', () => {
+  // The chapter's own example: three different functions share one null
+  // expansion. Agreement of expansions is not agreement of functions.
+  const c = MATHEMATICAL_CONCEPTS.find((x) => x.slug === 'asymptotic-approximations')!
+  assert.match(c.errorBounds.join(' '), /does not determine its function/i)
+  assert.match(c.doesNotEstablish, /shared by more than one function/i)
+})
+
+test('orthogonality is stated as relative to a weight, never as intrinsic', () => {
+  const c = MATHEMATICAL_CONCEPTS.find((x) => x.slug === 'orthogonal-polynomials')!
+  assert.match(c.assumptions.join(' '), /relative to a declared weight/i)
+  assert.match(c.doesNotEstablish, /declared weight rather than as an intrinsic property/i)
+})
+
+test('every inspected source is identifiable and supports at least one claim by passage', () => {
+  // Not a list of two publishers: the property is that a reader can tell whose
+  // statement this is. And one claim is enough when the source is a dictionary
+  // entry defining one thing; what is refused is a source attached with no
+  // passage naming any route.
+  for (const s of insp.inspected) {
+    assert.ok(s.venue && s.venue.length > 8, `${s.sourceId} names no publisher`)
+    assert.ok(s.identifier && s.identifier.length > 4, `${s.sourceId} carries no identifier`)
+    assert.ok(s.retrievedFrom?.startsWith('https://'), `${s.sourceId} has no retrieval URL`)
+    assert.ok(s.claimByClaimSupport.length >= 1,
+      `${s.sourceId} is attached but names no route in a passage`)
+  }
+})
+
+test('a representation is never presented as defining the function everywhere', () => {
+  // Both the Dirichlet series and the Euler product stop at the same line, and
+  // values past it come from continuation rather than from summing.
+  const zeta = MATHEMATICAL_CONCEPTS.find((c) => c.slug === 'riemann-zeta-function')!
+  assert.match(zeta.assumptions.join(' '), /neither defines the function elsewhere/i)
+  assert.match(zeta.procedure.join(' '), /continuation rather than a sum/i)
+})
+
+test('an unreturned relation is recorded as not covered rather than assumed', () => {
+  // The zeta-Bernoulli relation was asked for and not returned. The adjacent
+  // Bernoulli page exists, which makes assuming it especially tempting.
+  const zeta = insp.inspected.find((s: { sourceId: string }) => s.sourceId === 'nist-dlmf-zeta')
+  assert.match(zeta.notCovered, /Bernoulli/)
+  const page = compiled.pages.find((p: { route: string }) =>
+    p.route === '/knowledge/mathematics/riemann-zeta-function')
+  assert.ok(!/Bernoulli/.test(JSON.stringify(page.sections)),
+    'the page must not claim a relation the retrieval did not return')
+})
+
+test('the hypergeometric page carries all three boundary regimes', () => {
+  const h = MATHEMATICAL_CONCEPTS.find((c) => c.slug === 'hypergeometric-function')!
+  const text = h.procedure.join(' ')
+  assert.match(text, /absolutely/i)
+  assert.match(text, /conditionally/i)
+  assert.match(text, /diverges/i)
+})
+
+test('a company or agency number is always attributed where it renders', () => {
+  // VLBI carries four stated precisions. Each must read as NASA's statement
+  // about the technique, never as a measured result of ours.
+  const page = compiled.pages.find((p: { route: string }) =>
+    p.route === '/knowledge/astronomy/very-long-baseline-interferometry')
+  const text = JSON.stringify(page.sections)
+  for (const figure of ['picoseconds', 'millimetres', 'milliarcsecond']) {
+    assert.ok(text.includes(figure), `the ${figure} figure must render`)
+  }
+  assert.match(text, /stated capabilities rather than a result|stated to be measured|stated to a few/,
+    'the precisions must read as stated capabilities, not as our measurements')
+})
+
+test('the same numerical device is recognised across two pages, both sourced', () => {
+  // erfc = 1 - erf at 7.2.2 and P + Q = 1 at 8.2.5 exist for one reason: so the
+  // small member can be computed without subtracting near-equal numbers.
+  const ig = insp.inspected.find((s: { sourceId: string }) => s.sourceId === 'nist-dlmf-incomplete-gamma')
+  assert.match(ig.crossPageNote, /7\.2\.2/)
+  assert.match(ig.crossPageNote, /8\.2\.5/)
+  const c = MATHEMATICAL_CONCEPTS.find((x) => x.slug === 'incomplete-gamma-functions')!
+  assert.match(c.errorBounds.join(' '), /same device appears at 7\.2\.2/)
+})
+
+test('cross-page connections name both sources, never one', () => {
+  // A connection is only recorded when both halves were inspected. Noticing a
+  // link is easy; the discipline is not asserting one where only one side was
+  // read.
+  const noted = insp.inspected.filter((s: { crossPageNote?: string }) => s.crossPageNote)
+  assert.ok(noted.length >= 3, `expected several recorded connections, got ${noted.length}`)
+  for (const s of noted) {
+    const refs = s.crossPageNote.match(/\d+\.\d+(\.\d+)?/g) ?? []
+    assert.ok(refs.length >= 2, `${s.sourceId}: a connection must cite both sides, found ${refs.join(', ')}`)
+  }
+})
+
+test('an asymptotic law is not presented as a formula', () => {
+  // 27.2.3 constrains a ratio in a limit. The temptation is to read it as an
+  // estimate of the prime count with a small error, which it is not.
+  const c = MATHEMATICAL_CONCEPTS.find((x) => x.slug === 'number-theoretic-functions')!
+  assert.match(c.errorBounds.join(' '), /supplies no bound on the difference at any finite/i)
+  assert.match(c.doesNotEstablish, /asymptotic law is not a formula/i)
+})
+
+test('a source cited by many pages is not treated as supporting them', () => {
+  // The statistical handbook is cited by nine pages. The section inspected is
+  // about measurement calibration; the page it was checked against is about
+  // probabilistic forecast calibration. Same word, different concept.
+  const notSupporting = insp.inspectedButNotSupporting ?? []
+  const handbook = notSupporting.find((s: { sourceId: string }) => s.sourceId === 'nist-statistical-handbook')
+  assert.ok(handbook, 'the non-supporting inspection must be recorded rather than dropped')
+  assert.match(handbook.whyItSupportsNothingHere, /two different concepts sharing one word/i)
+  assert.ok(handbook.otherPagesCitingIt.length >= 8, 'the other citing pages must be listed')
+
+  // And it supported nothing: no page gained it as explanatory evidence.
+  const supportingIds = new Set(insp.inspected.map((s: { sourceId: string }) => s.sourceId))
+  assert.ok(!supportingIds.has('nist-statistical-handbook'),
+    'a source that supports nothing must not appear among the supporting inspections')
+})
+
+test('the pages the handbook was cited for are still unsupported', () => {
+  // The honest consequence: inspecting a source does not convert pages that
+  // cite it for a different subject.
+  const cal = audit.verdicts.find((v: { route: string }) => v.route === '/knowledge/mathematics/calibration-and-reliability')
+  assert.ok(cal, 'the page must exist')
+  assert.notEqual(cal.state, 'substantial-and-evidence-backed',
+    'the page must not have been converted by a source that does not support it')
+})
+
+test('a tempting connection the source did not state is refused', () => {
+  // li(x) and the prime count sit one page apart and the link is real
+  // mathematics, but the section read does not state it.
+  const src = insp.inspected.find((s: { sourceId: string }) => s.sourceId === 'nist-dlmf-exponential-integral')
+  assert.match(src.notCovered, /prime counting function was not stated/i)
+  const c = MATHEMATICAL_CONCEPTS.find((x) => x.slug === 'exponential-and-logarithmic-integrals')!
+  assert.match(c.doesNotEstablish, /states no relation here between the logarithmic integral and the prime counting function/i)
+  const page = compiled.pages.find((p: { route: string }) =>
+    p.route === '/knowledge/mathematics/exponential-and-logarithmic-integrals')
+  assert.ok(!/prime count|pi of x/i.test(JSON.stringify(page.sections).replace(/no relation[^"]*/gi, '')),
+    'the page must not assert the relation it declines to claim')
 })

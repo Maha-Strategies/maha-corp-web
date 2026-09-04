@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import AuthorityAnswerLinks from '@/app/knowledge/astrology/questions/AuthorityAnswerLinks'
 import { SITE_URL } from '@/lib/briefs-data'
 import {
   CALCULATION_REFERENCE_PATH,
@@ -109,6 +110,7 @@ export default function CalculationReferencePage({ reference }: { reference: Cal
             </div>
           </section>
         )}
+        <AuthorityAnswerLinks authorityId={`calculation:${reference.slug}`} />
       </article>
     </main>
   )

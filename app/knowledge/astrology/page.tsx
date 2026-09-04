@@ -21,6 +21,8 @@ import { CELESTIAL_GUIDE_LIST } from '@/lib/celestial-guides'
 import { CALCULATION_REFERENCE_PATH, CALCULATION_REFERENCES } from '@/lib/celestial-calculation-references'
 import { TIMING_REFERENCE_PATH, TIMING_REFERENCES } from '@/lib/celestial-timing-references'
 import { CORPORATE_MUNDANE_PATH, CORPORATE_MUNDANE_REFERENCES } from '@/lib/corporate-mundane-references'
+import { ASTROLOGY_ANSWER_GRAPH_PATH, ASTROLOGY_ANSWERS } from '@/lib/astrology-answer-graph'
+import { ASTROLOGY_WORKFLOW_PATH, ASTROLOGY_WORKFLOW_PROTOCOLS } from '@/lib/astrology-workflow-protocols'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -77,6 +79,23 @@ export default function AstrologyTraditionsPage() {
               <li key={use} className="border-l border-rose-900/60 pl-3 text-sm leading-6 text-zinc-400">{use}</li>
             ))}
           </ul>
+        </section>
+
+        <section className="mt-14">
+          <div className="flex flex-wrap items-baseline justify-between gap-4">
+            <h2 className="text-2xl font-semibold text-white">Questions and methods</h2>
+            <Link href={ASTROLOGY_ANSWER_GRAPH_PATH} className="font-mono text-[10px] uppercase tracking-widest text-violet-300 hover:text-violet-100">Browse all {ASTROLOGY_ANSWERS.length} bounded answers →</Link>
+          </div>
+          <Link href={ASTROLOGY_ANSWER_GRAPH_PATH} className="mt-6 block border border-violet-800/70 bg-violet-950/10 p-5 hover:border-violet-500">
+            <p className="font-mono text-[9px] uppercase tracking-widest text-violet-300">Cross-family answer graph · {ASTROLOGY_ANSWERS.length} questions</p>
+            <h3 className="mt-3 text-lg font-semibold text-white">Route a question to the right kind of authority</h3>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-400">Practical answers connect calculation, timing, coordinate frames, interpretive traditions, and empirical testing while preserving the boundary between them.</p>
+          </Link>
+          <Link href={ASTROLOGY_WORKFLOW_PATH} className="mt-4 block border border-cyan-800/70 bg-cyan-950/10 p-5 hover:border-cyan-500">
+            <p className="font-mono text-[9px] uppercase tracking-widest text-cyan-300">Operational layer · {ASTROLOGY_WORKFLOW_PROTOCOLS.length} worked protocols</p>
+            <h3 className="mt-3 text-lg font-semibold text-white">Execute inputs, calculations, evaluation, and comparison without hidden defaults</h3>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-400">Each protocol names required inputs, ordered operations, emitted artifacts, refusal conditions, completion tests, and—where applicable—a recomputable calculation receipt.</p>
+          </Link>
         </section>
 
         <section className="mt-14">

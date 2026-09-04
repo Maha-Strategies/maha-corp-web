@@ -2,6 +2,10 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { SITE_URL } from '@/lib/briefs-data'
+import { MAYON_KNOWLEDGE_PATH } from '@/lib/mayon-knowledge'
+import { TAMIL_CLASSICAL_PATH } from '@/lib/tamil-classical-traditions'
+import { TIRUVAYMOLI_ATLAS_PATH } from '@/lib/tiruvaymoli-passage-atlas'
+import { TAMIL_SOURCE_ATLAS_PATH } from '@/lib/tamil-source-atlas'
 import {
   RELIGION_CATEGORIES,
   RELIGION_COMPARISONS,
@@ -46,6 +50,38 @@ export default function ReligionKnowledgePage() {
           <div className="border border-teal-900/60 bg-teal-950/10 p-5"><p className="font-mono text-[9px] uppercase tracking-widest text-teal-300">Tradition-relative authority</p><p className="mt-3 text-sm leading-6 text-zinc-400">A canon or theology can be authoritative within a community without being mislabeled as a scientific result.</p></div>
           <div className="border border-amber-900/60 bg-amber-950/10 p-5"><p className="font-mono text-[9px] uppercase tracking-widest text-amber-300">Evidence by type</p><p className="mt-3 text-sm leading-6 text-zinc-400">Manuscripts, artifacts, participant testimony, and experiments answer different questions and retain different uncertainty.</p></div>
           <div className="border border-rose-900/60 bg-rose-950/10 p-5"><p className="font-mono text-[9px] uppercase tracking-widest text-rose-300">No metaphysical certification</p><p className="mt-3 text-sm leading-6 text-zinc-400">Mathematics can model transmission or test measurable outcomes. It cannot prove revelation, divine agency, liberation, or sacred worth.</p></div>
+        </section>
+
+        <section className="mt-14 border border-teal-800/60 bg-teal-950/10 p-7">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-teal-300">Focused source dossier</p>
+          <div className="mt-3 flex flex-wrap items-end justify-between gap-5">
+            <div className="max-w-3xl"><h2 className="text-3xl font-semibold text-white">Māyōṉ in early Tamil literature</h2><p className="mt-3 text-sm leading-6 text-zinc-400">Begin with the Tolkāppiyam and Paripāṭal, then follow separately typed connections to Tirumāl, Vishnu, Krishna, Balarama, Cēyōṉ, Vēntaṉ, and Varuṇaṉ.</p></div>
+            <Link href={MAYON_KNOWLEDGE_PATH} className="font-mono text-[10px] uppercase tracking-widest text-teal-300 hover:text-white">Open the dossier →</Link>
+          </div>
+        </section>
+
+        <section className="mt-6 border border-amber-800/60 bg-amber-950/10 p-7">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-amber-300">Connected religion cluster</p>
+          <div className="mt-3 flex flex-wrap items-end justify-between gap-5">
+            <div className="max-w-3xl"><h2 className="text-3xl font-semibold text-white">Classical Tamil religion and reception</h2><p className="mt-3 text-sm leading-6 text-zinc-400">Continue from Māyōṉ into the wider landscape-deity stanza, Paripāṭal subject and music records, occurrence-level divine epithets, and later Āḻvār reception.</p></div>
+            <Link href={TAMIL_CLASSICAL_PATH} className="font-mono text-[10px] uppercase tracking-widest text-amber-300 hover:text-white">Explore the cluster →</Link>
+          </div>
+        </section>
+
+        <section className="mt-6 border border-fuchsia-800/60 bg-fuchsia-950/10 p-7">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-fuchsia-300">Passage-level answer atlas</p>
+          <div className="mt-3 flex flex-wrap items-end justify-between gap-5">
+            <div className="max-w-3xl"><h2 className="text-3xl font-semibold text-white">Tiruvāymoḻi, unit by unit</h2><p className="mt-3 text-sm leading-6 text-zinc-400">Twenty complete units indexed by exact pāsuram range, speaker, name occurrences, themes, and the limits of one named English translation.</p></div>
+            <Link href={TIRUVAYMOLI_ATLAS_PATH} className="font-mono text-[10px] uppercase tracking-widest text-fuchsia-300 hover:text-white">Open the passage atlas →</Link>
+          </div>
+        </section>
+
+        <section className="mt-6 border border-amber-800/60 bg-amber-950/10 p-7">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-amber-300">Cross-corpus source atlas</p>
+          <div className="mt-3 flex flex-wrap items-end justify-between gap-5">
+            <div className="max-w-3xl"><h2 className="text-3xl font-semibold text-white">Paripāṭal, tiṇai, divine names, and reception</h2><p className="mt-3 text-sm leading-6 text-zinc-400">Forty-eight passage and relationship guides connect the existing Tamil clusters while keeping primary wording, named translation, commentary, historical inference, and theology separate.</p></div>
+            <Link href={TAMIL_SOURCE_ATLAS_PATH} className="font-mono text-[10px] uppercase tracking-widest text-amber-300 hover:text-white">Open the source atlas →</Link>
+          </div>
         </section>
 
         <section className="mt-14 border-t border-zinc-800 pt-9">

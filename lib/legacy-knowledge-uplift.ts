@@ -109,6 +109,22 @@ export interface LegacyPageInput {
   /** Deterministic calculation inputs, only where the family records them. */
   calculationInputs?: readonly string[]
   calculationOutputs?: readonly string[]
+  /**
+   * A calculation executed by the WebAssembly kernel and verified by rerunning
+   * it. Optional: a page without one renders no calculation rather than an
+   * unverified number, which is how the corpus has worked until now.
+   */
+  readonly kernelCalculation?: {
+    title: string
+    method: string
+    units: string
+    steps: readonly string[]
+    assumptions: readonly string[]
+    uncertainty: string
+    kernelSha256: string
+    howToVerify: string
+    doesNotEstablish: readonly string[]
+  }
   /** Release state, supplied by the caller. Never inferred from page shape. */
   canonicalRelease?: { released: boolean; revisionMatches: boolean } | null
   /** Independent inspection records, keyed by source id. Absent means uninspected. */
@@ -211,6 +227,7 @@ export function measure(input: LegacyPageInput, sections: readonly UpliftSection
   if (list(input.calculationInputs).length > 0 && list(input.calculationOutputs).length > 0) {
     present.add('deterministic-calculation')
   }
+  if (input.kernelCalculation) present.add('deterministic-calculation')
   if (list(input.limitations).length > 0) present.add('limitations')
   // Either the page's own statement, or the boundaries its sources declare.
   if (list(input.doesNotEstablish).length > 0 || boundaryDerivedNegativeSpace(input).length > 0) {
@@ -283,6 +300,27 @@ export function compileUplift(input: LegacyPageInput, baselineSections = 0): Upl
       heading: `Comparison: ${comparison.title}`,
       items: [...(comparison.nonEquivalences ?? []), `Must not be read as: ${String(comparison.prohibitedInference)}`],
       sourceIds: [...(comparison.sourceIds ?? [])],
+    })
+  }
+
+  // A kernel calculation renders in full, because the point of executing it is
+  // that a reader can repeat the execution. The steps say what was computed,
+  // and the closing lines say what a receipt does and does not settle, so the
+  // digest is never mistaken for a proof that the mathematics is right.
+  if (input.kernelCalculation) {
+    const k = input.kernelCalculation
+    sections.push({
+      dimension: 'deterministic-calculation',
+      heading: k.title,
+      items: [
+        `Method: ${k.method}. Units: ${k.units}.`,
+        ...k.steps,
+        `Assumptions: ${k.assumptions.join(' ')}`,
+        `Uncertainty: ${k.uncertainty}`,
+        `Executed by kernel ${k.kernelSha256}. ${k.howToVerify}`,
+        `What the receipt does not establish: ${k.doesNotEstablish.join(' ')}`,
+      ],
+      sourceIds,
     })
   }
 

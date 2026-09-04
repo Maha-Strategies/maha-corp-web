@@ -15,8 +15,16 @@ import { CALCULATION_REFERENCE_PATH, CALCULATION_REFERENCE_RELEASE_DATE, CALCULA
 import { TIMING_REFERENCE_PATH, TIMING_REFERENCE_RELEASE_DATE, TIMING_REFERENCES, timingReferencePath } from '@/lib/celestial-timing-references'
 import { CORPORATE_MUNDANE_PATH, CORPORATE_MUNDANE_REFERENCES, CORPORATE_MUNDANE_RELEASE_DATE, corporateMundaneReferencePath } from '@/lib/corporate-mundane-references'
 import { TROPICAL_SIDEREAL_COMPARISON_PATH, TROPICAL_SIDEREAL_COMPARISON_RELEASE_DATE, TROPICAL_SIDEREAL_COMPARISONS, tropicalSiderealComparisonPath } from '@/lib/tropical-sidereal-comparisons'
+import { ASTROLOGY_ANSWER_GRAPH_DATE, ASTROLOGY_ANSWER_GRAPH_PATH, ASTROLOGY_ANSWER_GRAPH_REGISTRY_PATH, ASTROLOGY_ANSWERS, astrologyAnswerPath } from '@/lib/astrology-answer-graph'
+import { ASTROLOGY_WORKFLOW_DATE, ASTROLOGY_WORKFLOW_PATH, ASTROLOGY_WORKFLOW_PROTOCOLS, ASTROLOGY_WORKFLOW_REGISTRY_PATH, astrologyWorkflowPath } from '@/lib/astrology-workflow-protocols'
+import { EVIDENCE_WORKFLOW_DATE, EVIDENCE_WORKFLOW_EXAMPLES, EVIDENCE_WORKFLOW_PATH, EVIDENCE_WORKFLOW_REGISTRY_PATH, evidenceWorkflowPath } from '@/lib/evidence-workflow-examples'
 import { MATHEMATICAL_CONCEPTS, MATHEMATICS_KNOWLEDGE_PATH, MATHEMATICS_KNOWLEDGE_RELEASE_DATE, mathematicsConceptPath } from '@/lib/mathematics-knowledge'
 import { RELIGION_COMPARISONS, RELIGION_COMPARISONS_PATH, RELIGION_CONCEPTS, RELIGION_KNOWLEDGE_PATH, RELIGION_KNOWLEDGE_RELEASE_DATE, religionComparisonPath, religionConceptPath } from '@/lib/religion-knowledge'
+import { MAYON_KNOWLEDGE_DATE, MAYON_KNOWLEDGE_PATH } from '@/lib/mayon-knowledge'
+import { MAYON_ANSWER_REGISTRY_PATH, MAYON_TOPICS, mayonTopicPath } from '@/lib/mayon-topics'
+import { TAMIL_CLASSICAL_DATE, TAMIL_CLASSICAL_PATH, TAMIL_CLASSICAL_REGISTRY_PATH, TAMIL_CLASSICAL_TOPICS, tamilClassicalTopicPath } from '@/lib/tamil-classical-traditions'
+import { TIRUVAYMOLI_ATLAS_DATE, TIRUVAYMOLI_ATLAS_PATH, TIRUVAYMOLI_ATLAS_REGISTRY_PATH, TIRUVAYMOLI_ATLAS_TOPICS, tiruvaymoliAtlasTopicPath } from '@/lib/tiruvaymoli-passage-atlas'
+import { TAMIL_SOURCE_ATLAS_DATE, TAMIL_SOURCE_ATLAS_PATH, TAMIL_SOURCE_ATLAS_REGISTRY_PATH, TAMIL_SOURCE_ATLAS_TOPICS, tamilSourceAtlasTopicPath } from '@/lib/tamil-source-atlas'
 import { NEUROMORPHIC_COMPARISONS, NEUROMORPHIC_COMPARISONS_PATH, NEUROMORPHIC_CONCEPTS, NEUROMORPHIC_PATH, NEUROMORPHIC_RELEASE_DATE, neuromorphicComparisonPath, neuromorphicConceptPath } from '@/lib/neuromorphic-biocomputing'
 import { EPISTEMIC_DOMAINS, EPISTEMIC_RELEASE_DATE, EPISTEMIC_SYSTEM_PATH, PUBLIC_EPISTEMIC_RECORDS } from '@/lib/epistemic-pilots'
 import { epistemicRecordPath } from '@/lib/epistemic-publication'
@@ -71,6 +79,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(MATHEMATICS_KNOWLEDGE_RELEASE_DATE),
     })),
     { url: `${baseUrl}${RELIGION_KNOWLEDGE_PATH}`, lastModified: new Date(RELIGION_KNOWLEDGE_RELEASE_DATE) },
+    { url: `${baseUrl}${MAYON_KNOWLEDGE_PATH}`, lastModified: new Date(MAYON_KNOWLEDGE_DATE) },
+    { url: `${baseUrl}${MAYON_ANSWER_REGISTRY_PATH}`, lastModified: new Date(MAYON_KNOWLEDGE_DATE) },
+    ...MAYON_TOPICS.map((topic) => ({
+      url: `${baseUrl}${mayonTopicPath(topic)}`,
+      lastModified: new Date(MAYON_KNOWLEDGE_DATE),
+    })),
+    { url: `${baseUrl}${TAMIL_CLASSICAL_PATH}`, lastModified: new Date(TAMIL_CLASSICAL_DATE) },
+    { url: `${baseUrl}${TAMIL_CLASSICAL_REGISTRY_PATH}`, lastModified: new Date(TAMIL_CLASSICAL_DATE) },
+    ...TAMIL_CLASSICAL_TOPICS.map((topic) => ({
+      url: `${baseUrl}${tamilClassicalTopicPath(topic)}`,
+      lastModified: new Date(TAMIL_CLASSICAL_DATE),
+    })),
+    { url: `${baseUrl}${TIRUVAYMOLI_ATLAS_PATH}`, lastModified: new Date(TIRUVAYMOLI_ATLAS_DATE) },
+    { url: `${baseUrl}${TIRUVAYMOLI_ATLAS_REGISTRY_PATH}`, lastModified: new Date(TIRUVAYMOLI_ATLAS_DATE) },
+    ...TIRUVAYMOLI_ATLAS_TOPICS.map((topic) => ({
+      url: `${baseUrl}${tiruvaymoliAtlasTopicPath(topic)}`,
+      lastModified: new Date(TIRUVAYMOLI_ATLAS_DATE),
+    })),
+    { url: `${baseUrl}${TAMIL_SOURCE_ATLAS_PATH}`, lastModified: new Date(TAMIL_SOURCE_ATLAS_DATE) },
+    { url: `${baseUrl}${TAMIL_SOURCE_ATLAS_REGISTRY_PATH}`, lastModified: new Date(TAMIL_SOURCE_ATLAS_DATE) },
+    ...TAMIL_SOURCE_ATLAS_TOPICS.map((topic) => ({
+      url: `${baseUrl}${tamilSourceAtlasTopicPath(topic)}`,
+      lastModified: new Date(TAMIL_SOURCE_ATLAS_DATE),
+    })),
     ...RELIGION_CONCEPTS.map((concept) => ({
       url: `${baseUrl}${religionConceptPath(concept)}`,
       lastModified: new Date(RELIGION_KNOWLEDGE_RELEASE_DATE),
@@ -92,6 +124,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...EPISTEMIC_DOMAINS.map((domain) => ({ url: `${baseUrl}/knowledge/${domain.slug}`, lastModified: new Date(EPISTEMIC_RELEASE_DATE) })),
     ...PUBLIC_EPISTEMIC_RECORDS.map((record) => ({ url: `${baseUrl}${epistemicRecordPath(record)}`, lastModified: new Date(EPISTEMIC_RELEASE_DATE) })),
     { url: `${baseUrl}${ASTROLOGY_PATH}`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
+    { url: `${baseUrl}${ASTROLOGY_ANSWER_GRAPH_PATH}`, lastModified: new Date(ASTROLOGY_ANSWER_GRAPH_DATE) },
+    { url: `${baseUrl}${ASTROLOGY_ANSWER_GRAPH_REGISTRY_PATH}`, lastModified: new Date(ASTROLOGY_ANSWER_GRAPH_DATE) },
+    ...ASTROLOGY_ANSWERS.map((answer) => ({
+      url: `${baseUrl}${astrologyAnswerPath(answer)}`,
+      lastModified: new Date(ASTROLOGY_ANSWER_GRAPH_DATE),
+    })),
+    { url: `${baseUrl}${ASTROLOGY_WORKFLOW_PATH}`, lastModified: new Date(ASTROLOGY_WORKFLOW_DATE) },
+    { url: `${baseUrl}${ASTROLOGY_WORKFLOW_REGISTRY_PATH}`, lastModified: new Date(ASTROLOGY_WORKFLOW_DATE) },
+    ...ASTROLOGY_WORKFLOW_PROTOCOLS.map((workflow) => ({
+      url: `${baseUrl}${astrologyWorkflowPath(workflow)}`,
+      lastModified: new Date(ASTROLOGY_WORKFLOW_DATE),
+    })),
+    { url: `${baseUrl}${EVIDENCE_WORKFLOW_PATH}`, lastModified: new Date(EVIDENCE_WORKFLOW_DATE) },
+    { url: `${baseUrl}${EVIDENCE_WORKFLOW_REGISTRY_PATH}`, lastModified: new Date(EVIDENCE_WORKFLOW_DATE) },
+    ...EVIDENCE_WORKFLOW_EXAMPLES.map((workflow) => ({
+      url: `${baseUrl}${evidenceWorkflowPath(workflow)}`,
+      lastModified: new Date(EVIDENCE_WORKFLOW_DATE),
+    })),
     { url: `${baseUrl}/knowledge/muhurta`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
     { url: `${baseUrl}/knowledge/birth`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
     { url: `${baseUrl}/knowledge/corporate`, lastModified: new Date(CELESTIAL_GUIDE_RELEASE_DATE) },
@@ -180,9 +230,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/overclock`, lastModified: new Date('2026-07-16') },
     { url: `${baseUrl}/books`, lastModified: new Date('2026-09-02') },
     { url: `${baseUrl}/books/mcp-access`, lastModified: new Date('2026-07-20') },
-    { url: `${baseUrl}/books/the-maha-principle`, lastModified: new Date('2026-08-26') },
     { url: `${baseUrl}/books/the-borrowed-light`, lastModified: new Date('2026-07-28') },
     { url: `${baseUrl}/books/the-borrowed-light/m-theory-faq`, lastModified: new Date('2026-07-28') },
+    { url: `${baseUrl}/books/the-cosmic-recursion/reader-faq`, lastModified: new Date('2026-09-04') },
+    { url: `${baseUrl}/books/the-maha-principle/reader-faq`, lastModified: new Date('2026-09-04') },
     { url: `${baseUrl}/books/the-cosmic-recursion`, lastModified: new Date('2026-09-02') },
     { url: `${baseUrl}/books/the-synthetic-self`, lastModified: new Date('2026-07-16') },
     { url: `${baseUrl}/books/the-synthetic-self/ai-is-a-mirror`, lastModified: new Date('2026-07-16') },
@@ -443,9 +494,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/books/the-unfinished-species/read`, lastModified: new Date('2026-07-22') },
     ...unfinishedSpeciesSections.map((section) => ({ url: `${baseUrl}/books/the-unfinished-species/read/${section.slug}`, lastModified: new Date('2026-07-22') })),
   ]
-  const otherOpenBookReaders = Object.values(openBookEditions).flatMap((book) => {
+  const otherOpenBookReaders = Object.values(openBookEditions).filter((book) => book.slug !== 'the-maha-principle').flatMap((book) => {
     const lastModified = new Date(
-      book.slug === 'the-cosmic-recursion' ? '2026-09-02' : book.slug === 'the-maha-principle' ? '2026-08-26' : book.slug === 'the-volcanic-engine' ? '2026-08-24' : '2026-07-22',
+      book.slug === 'the-cosmic-recursion' ? '2026-09-02' : book.slug === 'the-volcanic-engine' ? '2026-08-24' : '2026-07-22',
     )
     return [
       { url: `${baseUrl}/books/${book.slug}/read`, lastModified },

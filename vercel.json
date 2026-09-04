@@ -6,14 +6,39 @@
       "main": true
     }
   },
+  "ignoreCommand": "node scripts/vercel-should-build.cjs",
   "crons": [
-    { "path": "/api/cron/inbound-digest", "schedule": "0 13 * * *" },
-    { "path": "/api/cron/utility-upload-cleanup", "schedule": "30 3 * * *" },
-    { "path": "/api/cron/market-scout", "schedule": "0 14 * * *" },
-    { "path": "/api/cron/job-reclaim", "schedule": "*/10 * * * *" },
-    { "path": "/api/cron/x402-observatory", "schedule": "47 5 * * *" },
-    { "path": "/api/cron/celestial-webhooks", "schedule": "*/5 * * * *" },
-    { "path": "/api/cron/celestial-retention", "schedule": "15 4 * * *" },
-    { "path": "/api/cron/computational-witness-retention", "schedule": "45 4 * * *" }
+    {
+      "path": "/api/cron/inbound-digest",
+      "schedule": "0 13 * * *"
+    },
+    {
+      "path": "/api/cron/utility-upload-cleanup",
+      "schedule": "30 3 * * *"
+    },
+    {
+      "path": "/api/cron/market-scout",
+      "schedule": "0 14 * * *"
+    },
+    {
+      "path": "/api/cron/job-reclaim",
+      "schedule": "*/10 * * * *"
+    },
+    {
+      "path": "/api/cron/x402-observatory",
+      "schedule": "47 5 * * *"
+    },
+    {
+      "path": "/api/cron/celestial-webhooks",
+      "schedule": "*/5 * * * *"
+    },
+    {
+      "path": "/api/cron/celestial-retention",
+      "schedule": "15 4 * * *"
+    },
+    {
+      "path": "/api/cron/computational-witness-retention",
+      "schedule": "45 4 * * *"
+    }
   ]
 }

@@ -14,6 +14,7 @@ import supplierFirstParty from '../content/evidence-batch-5/supplier-first-party
 import { attested, buildAttestations, reuseByRoute, routeScopedByRoute } from '../lib/uplift/evidence-intake.ts'
 import { vendorBackedSupplierRoutes } from '../lib/uplift/vendor-authorship.ts'
 import { processRoute } from '../lib/uplift/process-routes.ts'
+import kernelCalculations from '../content/legacy-uplift/kernel-calculations.json' with { type: 'json' }
 import { deriveRelatedRoutes } from '../lib/uplift/related-records.ts'
 
 /**
@@ -63,7 +64,15 @@ for (const a of ASTRONOMY_ARTICLES as unknown as Any[]) {
     assumptions: arr(a.assumptions),
     sources: (pick(ASTRONOMY_SOURCES as unknown as Any[], arr(a.sourceIds)) as Any[]).map(asSource),
     bridges: [], comparisons: [],
-    relatedRoutes: arr(a.relatedSlugs).map((s) => `/knowledge/astronomy/${s}`),
+    // Astronomy declares its relationships as relatedArticleIds, not
+    // relatedSlugs. Reading the wrong field silently dropped all 71 declared
+    // relationships across all 24 articles, leaving the family to fall back on
+    // co-citation. The ids carry an `astronomy-` prefix; all 71 resolve once it
+    // is stripped, and an id that does not resolve yields no link.
+    relatedRoutes: arr(a.relatedArticleIds)
+      .map((id) => id.replace(/^astronomy-/, ''))
+      .filter((slug) => slug.length > 0)
+      .map((slug) => `/knowledge/astronomy/${slug}`),
     canonicalRelease: null,
   })
 }
@@ -227,6 +236,24 @@ for (const group of comparisonFamilies) {
 
 // Related records are derived by co-citation and bounded; see
 // lib/uplift/related-records.ts for why the bound exists and how it chooses.
+// Kernel-executed calculations, attached to the routes they were built for.
+// Generated separately by scripts/generate-kernel-calculations.ts so the kernel
+// runs at build time and no WebAssembly reaches a served bundle.
+const kernelByRoute = new Map((kernelCalculations.calculations as Record<string, never>[])
+  .map((c) => [c.route as unknown as string, c]))
+for (const input of inputs) {
+  const calc = kernelByRoute.get(input.route)
+  if (!calc) continue
+  const c = calc as unknown as { title: string; method: string; units: string; steps: string[]; assumptions: string[]; uncertainty: string }
+  input.kernelCalculation = {
+    title: c.title, method: c.method, units: c.units, steps: c.steps,
+    assumptions: c.assumptions, uncertainty: c.uncertainty,
+    kernelSha256: kernelCalculations.kernelSha256 as string,
+    howToVerify: kernelCalculations.howToVerify as string,
+    doesNotEstablish: kernelCalculations.doesNotEstablish as string[],
+  }
+}
+
 deriveRelatedRoutes(inputs as unknown as { route: string; sources: readonly { id: string }[]; relatedRoutes: readonly string[] }[])
 
 const withBatch1 = inputs.map((input) => {

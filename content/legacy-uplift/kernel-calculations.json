@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "maha-kernel-calculations-public/1.0",
+  "generatedBy": "scripts/generate-kernel-calculations.ts, at build time",
+  "kernelVersion": "0.3.0",
+  "kernelSha256": "sha256:9046cc9127b3992b962e1a1f2be7bcf62c9a8e355bd29a4d58f2fb2a597df7f3",
+  "compiler": {
+    "name": "assemblyscript",
+    "version": "0.28.20",
+    "flags": [
+      "--optimize",
+      "--runtime=stub",
+      "--exportRuntime"
+    ]
+  },
+  "arithmetic": {
+    "integerModel": "signed-i64",
+    "rounding": "nearest-ties-to-even",
+    "overflow": "abort"
+  },
+  "establishes": "That the kernel at this digest produced these outputs from these inputs, checked by re-executing it.",
+  "doesNotEstablish": [
+    "That the kernel is correct. A receipt records what it computed, not whether the computation is right.",
+    "That the operation models anything outside itself.",
+    "That the page’s claims are true. These cases exhibit stated invariants on specific values, and exhibiting is not proving."
+  ],
+  "howToVerify": "Rebuild the kernel with npm run build:wasm-kernel, which is deterministic, confirm its digest matches kernelSha256, then re-execute each operation on the recorded inputs.",
+  "refusedForNow": [
+    {
+      "operations": [
+        "layer-thermal-resistance-nanokelvin-per-watt",
+        "temperature-rise-microkelvin"
+      ],
+      "missing": "a thermal conductivity from an inspected source, at a stated locator",
+      "attempted": [
+        "NIST materials search: returned a value quoted in a paper abstract, not a reference entry",
+        "https://trc.nist.gov/cryogenics/materials/Silicon/Silicon.htm: gives thermal expansion, not conductivity, and nothing near 300 K"
+      ],
+      "note": "The kernel also bounds the model to one-dimensional steady-state conduction, excluding interfaces, spreading resistance, anisotropy, radiation, convection and temperature dependence. A sourced conductivity would still only support a calculation inside those bounds."
+    }
+  ],
+  "calculations": [
+    {
+      "route": "/knowledge/mathematics/convergence-precision-and-error",
+      "title": "Interval addition, executed",
+      "method": "interval-add, inclusive integer intervals with outward rounding on signed 64-bit integers",
+      "units": "nanometre, chosen only because the operation needs a unit; the arithmetic is unitless",
+      "assumptions": [
+        "Endpoints are exact integers in the stated unit, and the interval is inclusive of both.",
+        "Rounding is outward, so a computed interval never claims to be narrower than the true one."
+      ],
+      "uncertainty": "The interval is the uncertainty statement. Addition is exact on integers and aborts on overflow rather than wrapping, so no width is lost to the arithmetic itself.",
+      "steps": [
+        "Widths add: [1000,1010] + [500,505] → [1500,1515]. The inputs are 10 and 5 wide and the result is 15, so the bound on the sum is the sum of the bounds and nothing is hidden.",
+        "Error accumulates: [1500,1515] + [500,505] → [2000,2020], now 20 wide. A second addition widens the interval again, which is the page's point that tolerance is not uncertainty.",
+        "The loosest term dominates: [1000,1001] + [0,500] → [1000,1501], 501 wide. A tightly known quantity added to a poorly known one is poorly known, however many digits the first one had."
+      ],
+      "cases": [
+        {
+          "input": "[1000,1010] + [500,505]",
+          "output": "[1500,1515] width 15",
+          "receiptSha256": "sha256:06f52d9f8f531e43eeffd85c841fbf37ab7e3934ba353960adba20394aceb897"
+        },
+        {
+          "input": "[1500,1515] + [500,505]",
+          "output": "[2000,2020] width 20",
+          "receiptSha256": "sha256:299aafea56dca9a13488b0d3aa01e16efa4910bb9e87530e2f6aaa08553782ac"
+        },
+        {
+          "input": "[1000,1001] + [0,500]",
+          "output": "[1000,1501] width 501",
+          "receiptSha256": "sha256:50ea93aee4ed28b07a4dd699d37ac6eb75d9b2a24373c505e7e3e4d2e22619de"
+        }
+      ]
+    },
+    {
+      "route": "/knowledge/mathematics/angle-normalization",
+      "title": "Angle normalisation, executed",
+      "method": "normalize-angle-microdegrees, evaluated in fixed-point microdegrees on signed 64-bit integers",
+      "units": "microdegree, shown here in degrees",
+      "assumptions": [
+        "Angles are exact in microdegrees; a value that is not a whole number of microdegrees is outside this representation.",
+        "The kernel avoids floating point entirely, so these results carry no rounding from binary fractions."
+      ],
+      "uncertainty": "None from arithmetic: the operation is exact on integers and aborts on overflow rather than wrapping. Any uncertainty belongs to the input measurement, not to this step.",
+      "steps": [
+        "Turn equivalence: 400° → 40°, 760° → 40°, −320° → 40°. Three angles differing by whole turns give one result, which is the page's statement that θ and θ + 360°k are the same direction.",
+        "Idempotence: 400° → 40° → 40°. Applying normalisation to its own output changes nothing.",
+        "The half-open interval: 359.999999° → 359.999999° stays inside, while 360° → 0° rather than 360. That is what makes the upper end open rather than closed."
+      ],
+      "cases": [
+        {
+          "input": "400°",
+          "output": "40°",
+          "receiptSha256": "sha256:2969a5ac4bbf6b87e11591cb86a2c71d61283ad206c9f25212169dcd451a4dda"
+        },
+        {
+          "input": "760°",
+          "output": "40°",
+          "receiptSha256": "sha256:eef220e8c8a201a0e01bc9a596bedb2e4b8cfc0a129242ad13b60dc3bc63c2cf"
+        },
+        {
+          "input": "-320°",
+          "output": "40°",
+          "receiptSha256": "sha256:7ba098bcd337455e7d38dfaa1764d520c2fb889211554bb79d540ab558631f08"
+        },
+        {
+          "input": "40°",
+          "output": "40°",
+          "receiptSha256": "sha256:9f12d0feff8c600e722257e3c4e2036b869eee003f08ee19023f0c1ef72579b4"
+        },
+        {
+          "input": "359.999999°",
+          "output": "359.999999°",
+          "receiptSha256": "sha256:55f9a99e494064c76c1fc2c27789c80534922e81caf3ad89dc156fe6afeffa8f"
+        },
+        {
+          "input": "360°",
+          "output": "0°",
+          "receiptSha256": "sha256:91cbb68df87ca5811a388bdce28f87297ec02b5fa1c162fa4fcf291d8d29e317"
+        }
+      ]
+    }
+  ]
+}

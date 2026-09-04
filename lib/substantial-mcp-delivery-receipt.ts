@@ -3,8 +3,9 @@ import {
   buildLicensedEvidenceProjection,
   mcpEvidenceOutputSha256,
 } from './mcp-evidence-licensing.ts'
+import { SUBSTANTIAL_MCP_RECEIPT_VERSION } from './substantial-mcp-delivery-public-contract.ts'
 
-export const SUBSTANTIAL_MCP_RECEIPT_VERSION = 'maha-substantial-mcp-receipt/0.1' as const
+export { SUBSTANTIAL_MCP_RECEIPT_VERSION } from './substantial-mcp-delivery-public-contract.ts'
 
 type LicensedProjection = ReturnType<typeof buildLicensedEvidenceProjection>
 

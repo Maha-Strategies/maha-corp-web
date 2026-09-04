@@ -142,6 +142,17 @@ export async function createExecutedCalculationReceipt(request: KernelExecutionR
   })
 }
 
+/**
+ * A stable rendering of a flat receipt field, independent of key order.
+ *
+ * Receipts pass through canonicalization on their way into a package, which
+ * sorts keys. Comparing raw JSON would therefore reject a packaged receipt for
+ * a difference that is not one.
+ */
+function canonicalFields(value: Record<string, unknown> | undefined): string {
+  return JSON.stringify(Object.entries(value ?? {}).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)))
+}
+
 export async function verifyExecutedCalculationReceipt(receipt: CalculationReceipt, artifact: KernelArtifact): Promise<string[]> {
   const findings = await verifyKernelArtifact(artifact)
   if (receipt.module !== EXECUTABLE_KERNEL_MODULE) findings.push('receipt-module-unsupported')
@@ -150,6 +161,22 @@ export async function verifyExecutedCalculationReceipt(receipt: CalculationRecei
   if (JSON.stringify(receipt.compiler) !== JSON.stringify(artifact.manifest.compiler) || JSON.stringify(receipt.arithmetic) !== JSON.stringify(artifact.manifest.arithmetic)) findings.push('receipt-build-policy-mismatch')
   try {
     const recomputed = await createExecutedCalculationReceipt({ schemaVersion: EXECUTION_REQUEST_SCHEMA, operation: receipt.operation as ExecutableKernelOperation, inputs: receipt.inputs, units: receipt.units, constants: receipt.constants }, artifact)
+    // The result itself, not only the digest over it.
+    //
+    // Recomputation reproduces the receipt the inputs imply, digest included.
+    // Comparing digests alone therefore compares the recomputed receipt with a
+    // number the receipt carries about itself, which a tampered receipt keeps
+    // unchanged while altering the result it reports. Verification passed on a
+    // receipt whose output had been replaced outright.
+    //
+    // Comparing the executed output is what "ignores the claimed result and
+    // reruns the operation" has to mean.
+    // Compared canonically, because a receipt that has been through the dossier
+    // canonicalizer carries the same fields in sorted order. A first pass used
+    // JSON.stringify directly and rejected identical content whose keys had
+    // been reordered, which would have failed every packaged receipt.
+    if (canonicalFields(recomputed.output) !== canonicalFields(receipt.output)) findings.push('receipt-output-mismatch')
+    if (canonicalFields(recomputed.uncertainty) !== canonicalFields(receipt.uncertainty)) findings.push('receipt-uncertainty-mismatch')
     if (recomputed.receiptSha256 !== receipt.receiptSha256) findings.push('receipt-execution-recomputation-mismatch')
   } catch { findings.push('receipt-execution-failed') }
   return [...new Set(findings)]

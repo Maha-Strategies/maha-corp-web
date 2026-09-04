@@ -169,9 +169,18 @@ test('refused calculations remain absent', () => {
   assert.equal(calc.refused.length, 4)
   const text = JSON.stringify(compiled.pages)
   assert.ok(!text.includes('deterministic-calculation-batch-13'), 'no batch 13 calculation may exist')
+  // Not zero any more, and the rule was never zero. What Batch 12 refused was a
+  // calculation without complete reproducibility inputs. A calculation executed
+  // by the kernel and verified by rerunning it satisfies that, so the property
+  // is what is asserted: anything rendered must be kernel-executed.
   const withCalc = compiled.pages.filter((p: { sections?: { dimension: string }[] }) =>
     (p.sections ?? []).some((s) => s.dimension === 'deterministic-calculation'))
-  assert.equal(withCalc.length, 0, 'batch 13 adds no rendered calculation')
+  for (const page of withCalc) {
+    const section = (page.sections as { dimension: string; items: string[] }[])
+      .find((s) => s.dimension === 'deterministic-calculation')!
+    assert.match(section.items.join(' '), /Executed by kernel sha256:[0-9a-f]{64}/,
+      `${(page as { route: string }).route} renders a calculation that was not kernel-executed`)
+  }
   assert.equal(calc.retainedFromEarlierBatch.length, 1)
   assert.match(calc.retainedFromEarlierBatch[0].route, /root-finding/)
 })

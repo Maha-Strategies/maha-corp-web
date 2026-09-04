@@ -3,13 +3,13 @@
   "auditedAt": "2026-09-03",
   "finding": "Classification and substance are different measurements. A page can carry an inspected source and explain almost nothing, and a structural page can be richly written and cite nothing checkable.",
   "wordCountUsedAsGate": false,
-  "totalAudited": 169,
-  "corpusSize": 169,
+  "totalAudited": 186,
+  "corpusSize": 186,
   "denominatorEqualsCorpus": true,
   "supersedesBatch9Audit": "Batch 9 audited 59 pages and stated a result against 167. This audits all 167.",
   "depthDistribution": {
-    "structurally-substantial-but-unsupported": 84,
-    "substantial-and-evidence-backed": 33,
+    "structurally-substantial-but-unsupported": 83,
+    "substantial-and-evidence-backed": 51,
     "blocked": 28,
     "first-party-documented-but-thin": 9,
     "first-party-documented-and-substantial": 1,
@@ -17,9 +17,10 @@
   },
   "byGroup": {
     "independentlySupported": {
-      "audited": 33,
+      "audited": 55,
       "states": {
-        "substantial-and-evidence-backed": 33
+        "substantial-and-evidence-backed": 51,
+        "structurally-substantial-but-unsupported": 4
       }
     },
     "firstPartyDocumented": {
@@ -30,9 +31,9 @@
       }
     },
     "structuralOnly": {
-      "audited": 98,
+      "audited": 93,
       "states": {
-        "structurally-substantial-but-unsupported": 84,
+        "structurally-substantial-but-unsupported": 79,
         "structurally-thin": 14
       }
     },
@@ -43,7 +44,7 @@
       }
     }
   },
-  "substantialAndEvidenceBacked": 33,
+  "substantialAndEvidenceBacked": 51,
   "thinnestSupported": [],
   "verdicts": [
     {
@@ -60,15 +61,15 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 8,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 222
+        "wordCountDiagnostic": 217
       },
-      "substantialityScore": 13.2,
+      "substantialityScore": 11.7,
       "reasons": [],
-      "verdictDigest": "sha256:8b25935e1c076553a0591e45f53474087d5390f206c69e19d60fb4b30d716e27"
+      "verdictDigest": "sha256:39e804ff6456a42ac4432e0eb4943475a1b5284a2967529505dcf3dfb7b3c015"
     },
     {
       "route": "/knowledge/astronomy/light-time-distance-and-lookback-time",
@@ -84,15 +85,15 @@
         "unresolvedQuestions": 4,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 8,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 255
+        "wordCountDiagnostic": 250
       },
-      "substantialityScore": 13.2,
+      "substantialityScore": 11.7,
       "reasons": [],
-      "verdictDigest": "sha256:0774b2bd75919f7a7527587a57e23c885f0d78594ce203f08ee3eb9d553666b1"
+      "verdictDigest": "sha256:0a9d0740ef90f107c344b47ed8c8b1fc338b11829591f13968ba376690a4e7d9"
     },
     {
       "route": "/knowledge/astronomy/evidence-uncertainty-and-model-comparison",
@@ -108,15 +109,15 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 7,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 230
+        "wordCountDiagnostic": 226
       },
-      "substantialityScore": 12.9,
+      "substantialityScore": 11.7,
       "reasons": [],
-      "verdictDigest": "sha256:b46099058754531979827fd9707f5a0804d68e2176a957205b84666b89fa7ece"
+      "verdictDigest": "sha256:e10c9b657966be9fcd562d9a4c80552dc74b2fce6802484319d718ffb467be51"
     },
     {
       "route": "/knowledge/astronomy/electromagnetic-spectrum",
@@ -132,15 +133,15 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 8,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 185
+        "wordCountDiagnostic": 180
       },
-      "substantialityScore": 13.2,
+      "substantialityScore": 11.7,
       "reasons": [],
-      "verdictDigest": "sha256:82b9adcf9a085d19a8f2e2309f8233d27997639f55d0cdcb0f9713050eb3cde8"
+      "verdictDigest": "sha256:e05b0c1886edcc7bdc305ea96a9259db855736cb2ee37f61696511ec7a985bdf"
     },
     {
       "route": "/knowledge/astronomy/telescopes-detectors-and-angular-resolution",
@@ -156,15 +157,15 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 8,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 202
+        "wordCountDiagnostic": 197
       },
-      "substantialityScore": 13.2,
+      "substantialityScore": 11.7,
       "reasons": [],
-      "verdictDigest": "sha256:7846d6169c2b40b3b5a9a4da78eb91291d5f1b6a808d5bcf3c7f76e246f50802"
+      "verdictDigest": "sha256:51bb962d9dcaca5fa137b1194f443e296810a920a87a03165fb97253138217e0"
     },
     {
       "route": "/knowledge/astronomy/photometry-flux-and-magnitude",
@@ -180,15 +181,15 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 8,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 212
+        "wordCountDiagnostic": 207
       },
-      "substantialityScore": 13.2,
+      "substantialityScore": 11.7,
       "reasons": [],
-      "verdictDigest": "sha256:3f031ac441e3fd4b229a4d9d0830d7b229c7ef3fcc034fe7204232d9dbdadcd9"
+      "verdictDigest": "sha256:09458ebd745d6d12a48afd0f94c9048669dad677e8bb4acd17e93b49dd368f42"
     },
     {
       "route": "/knowledge/astronomy/spectroscopy-lines-and-redshift",
@@ -204,15 +205,15 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 8,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 232
+        "wordCountDiagnostic": 227
       },
-      "substantialityScore": 13.2,
+      "substantialityScore": 11.7,
       "reasons": [],
-      "verdictDigest": "sha256:0c249818b6617490a8127fb69b1c87b055a732142eb85f28cd69fab9aac0405b"
+      "verdictDigest": "sha256:bd217d757e3d7fa775519ffd68d87f1fcdc389b3ecbe9cd00c5f4f2133557a95"
     },
     {
       "route": "/knowledge/astronomy/astrometry-parallax-and-proper-motion",
@@ -228,15 +229,15 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 8,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 224
+        "wordCountDiagnostic": 219
       },
-      "substantialityScore": 13.2,
+      "substantialityScore": 11.7,
       "reasons": [],
-      "verdictDigest": "sha256:0606403e0c8d778f5942ddb8f34fb84af22a2f28e08a019f401d2ec6e0c68356"
+      "verdictDigest": "sha256:3bcb4392aa64086e5c22058f300050f4fb1314a1d2247386f3576ce8ce4d4d04"
     },
     {
       "route": "/knowledge/astronomy/time-domain-and-multimessenger-astronomy",
@@ -252,15 +253,15 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 8,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 225
+        "wordCountDiagnostic": 220
       },
-      "substantialityScore": 13.2,
+      "substantialityScore": 11.7,
       "reasons": [],
-      "verdictDigest": "sha256:e27ce816234bbd7da8a4a2e1f9ae74c1061947bcab2220df12d4077bfb2e8910"
+      "verdictDigest": "sha256:e57d536ba79ebc77dc99465914cdc091e039510a90ea85a669cc85992619dc41"
     },
     {
       "route": "/knowledge/astronomy/orbits-gravity-and-ephemerides",
@@ -276,15 +277,15 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 8,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 201
+        "wordCountDiagnostic": 196
       },
-      "substantialityScore": 13.2,
+      "substantialityScore": 11.7,
       "reasons": [],
-      "verdictDigest": "sha256:f1b8ee5d5ae8dbd0848045209bb3cb1ab4a7767f4c3700555f18679cd883aa83"
+      "verdictDigest": "sha256:a8cf3dc0ea42d48f0f88c0ee503d7eee75b71d095031a43bcdd1bd7c3b67adc3"
     },
     {
       "route": "/knowledge/astronomy/solar-system-architecture",
@@ -300,15 +301,15 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 7,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 193
+        "wordCountDiagnostic": 189
       },
-      "substantialityScore": 12.9,
+      "substantialityScore": 11.7,
       "reasons": [],
-      "verdictDigest": "sha256:4953f99537c221a7a03bc6639c479117b84ca32f851bedd4ff43b47d936298e7"
+      "verdictDigest": "sha256:b93e9cbe8413a99261c66be95d972ba2cca2dccfef8537e6250893f621c30f5c"
     },
     {
       "route": "/knowledge/astronomy/exoplanet-detection-and-confirmation",
@@ -324,15 +325,15 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 7,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 187
+        "wordCountDiagnostic": 183
       },
-      "substantialityScore": 12.9,
+      "substantialityScore": 11.7,
       "reasons": [],
-      "verdictDigest": "sha256:3ee30f8b400b7d684db44a1537882682022b1be9b66d0dc17449213d32b12934"
+      "verdictDigest": "sha256:14b57da5d8bbb223e0a0dc00d9302e15df0733196f55d3527afa7be808b70bf7"
     },
     {
       "route": "/knowledge/astronomy/star-formation-and-nuclear-fusion",
@@ -348,15 +349,15 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 8,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 229
+        "wordCountDiagnostic": 224
       },
-      "substantialityScore": 13.2,
+      "substantialityScore": 11.7,
       "reasons": [],
-      "verdictDigest": "sha256:9eace7586e0c653ed7f23a09b2ee2f3ffab4c7a3488df35ff83df0d38ae6934c"
+      "verdictDigest": "sha256:682b5648be5aeee17c8c61a68c9efbb8b2d398c4bcd2ac0640071938216e13b2"
     },
     {
       "route": "/knowledge/astronomy/stellar-classification-and-evolution",
@@ -372,15 +373,15 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 8,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 219
+        "wordCountDiagnostic": 214
       },
-      "substantialityScore": 13.2,
+      "substantialityScore": 11.7,
       "reasons": [],
-      "verdictDigest": "sha256:8620f971b0362cc0e0974d60b34a588f38dfe6a76a774864a730639e3e89168a"
+      "verdictDigest": "sha256:e65635f293f8020de1f99945ad9338816b99ecd523acf36e772d370d3d5d04e8"
     },
     {
       "route": "/knowledge/astronomy/stellar-remnants-and-black-holes",
@@ -396,15 +397,15 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 6,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 226
+        "wordCountDiagnostic": 223
       },
-      "substantialityScore": 12.6,
+      "substantialityScore": 11.7,
       "reasons": [],
-      "verdictDigest": "sha256:2cf9defbb04b9a60406769e2d47177084f3992b1b45c543c48ea0e07ce9284e2"
+      "verdictDigest": "sha256:0745781bd73f359d25188bcf24521bcd8e491afad8b0e791100d489460c1ebd9"
     },
     {
       "route": "/knowledge/astronomy/interstellar-medium-and-nebulae",
@@ -420,15 +421,15 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 8,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 199
+        "wordCountDiagnostic": 194
       },
-      "substantialityScore": 13.2,
+      "substantialityScore": 11.7,
       "reasons": [],
-      "verdictDigest": "sha256:592af6fcce337093d98130f3187b94eebdd6ab44c622bb467c88b9106f62e230"
+      "verdictDigest": "sha256:7f97c7d2170865b49228e2c3641b8286ffed55ea973c480f36918d129b316382"
     },
     {
       "route": "/knowledge/astronomy/galaxies-structure-and-evolution",
@@ -444,15 +445,15 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 7,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 219
+        "wordCountDiagnostic": 215
       },
-      "substantialityScore": 12.9,
+      "substantialityScore": 11.7,
       "reasons": [],
-      "verdictDigest": "sha256:0c59af539cbb099e3322f1b00880ebbaa3eb0989c56124c77d2bdb950c1321ca"
+      "verdictDigest": "sha256:afe734445f61474358f61a52f03af31eda9bcf8e7e93bd5c6810f12e585a2083"
     },
     {
       "route": "/knowledge/astronomy/active-galactic-nuclei",
@@ -468,15 +469,15 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 8,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 238
+        "wordCountDiagnostic": 233
       },
-      "substantialityScore": 13.2,
+      "substantialityScore": 11.7,
       "reasons": [],
-      "verdictDigest": "sha256:6e74bcd88bb243bba0ec61996b7e7d2ad335d1e6d4faa5ea877d24c1e698b575"
+      "verdictDigest": "sha256:1bc563c3a62ae3145f0ee6ec0dcad73ac6d0332c43dddee490111ab5a64fbc6c"
     },
     {
       "route": "/knowledge/astronomy/black-hole-observation-and-relativistic-inference",
@@ -492,15 +493,15 @@
         "unresolvedQuestions": 4,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 6,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 281
+        "wordCountDiagnostic": 278
       },
-      "substantialityScore": 14.6,
+      "substantialityScore": 13.7,
       "reasons": [],
-      "verdictDigest": "sha256:fe429c3f43d0ff984d21253c6a39947e47efd57e3b6a6944fed136e21d9410d0"
+      "verdictDigest": "sha256:5a3a8f7af3ce765225aa791e312409af2cd491734a59a3c34e9dfbbfe95dd6b4"
     },
     {
       "route": "/knowledge/astronomy/gravitational-waves-and-compact-mergers",
@@ -516,15 +517,15 @@
         "unresolvedQuestions": 4,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 4,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 263
+        "wordCountDiagnostic": 262
       },
-      "substantialityScore": 14,
+      "substantialityScore": 13.7,
       "reasons": [],
-      "verdictDigest": "sha256:23ca9ce7f2d50ff9936b38269425bc51a9f338372e0a9f7c8c40bcd6d3d31473"
+      "verdictDigest": "sha256:5a86cf302f70ee20ab3fa83a86e43cd216964300bf2c5d56bc865223fd4500d2"
     },
     {
       "route": "/knowledge/astronomy/gravitational-lensing-and-mass-mapping",
@@ -540,15 +541,15 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 7,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 207
+        "wordCountDiagnostic": 203
       },
-      "substantialityScore": 12.9,
+      "substantialityScore": 11.7,
       "reasons": [],
-      "verdictDigest": "sha256:e1d65dc6f8fbed8de528c8297b3bd9f747574207e3582732af32e91c2557d750"
+      "verdictDigest": "sha256:4ca3e59bd7605ae0117d617e4673366126721115d56782f147eadfbb606fac63"
     },
     {
       "route": "/knowledge/astronomy/redshift-expansion-and-the-distance-ladder",
@@ -564,15 +565,15 @@
         "unresolvedQuestions": 3,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 8,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 228
+        "wordCountDiagnostic": 223
       },
-      "substantialityScore": 13.2,
+      "substantialityScore": 11.7,
       "reasons": [],
-      "verdictDigest": "sha256:e30a2ec59a920502c11d4e67461a5fb5ce1c99f9ffdda6d6895395d3a9a0e4ab"
+      "verdictDigest": "sha256:90214492a0a83f661cfbd1b6b47a993a14504e73c6ff1619c9cc4ef334e6a75d"
     },
     {
       "route": "/knowledge/astronomy/cosmic-microwave-background-and-lambda-cdm",
@@ -588,15 +589,423 @@
         "unresolvedQuestions": 2,
         "supportedComparisons": 0,
         "reproducibleCalculations": 0,
-        "typedRelatedRecords": 5,
+        "typedRelatedRecords": 3,
         "typedBridges": 0,
         "structuredDataFields": 9,
         "renderedDimensions": 8,
-        "wordCountDiagnostic": 191
+        "wordCountDiagnostic": 189
       },
-      "substantialityScore": 12.3,
+      "substantialityScore": 11.7,
       "reasons": [],
-      "verdictDigest": "sha256:1166d0f52bca883136d6b7cb97d5c50b6ec7bf57ef715dc0a4defe4aed0d7b53"
+      "verdictDigest": "sha256:c3f9f756f98c67d20dc9034c6120df4a0c5e59bd77090c5ec2a4b33e7200f217"
+    },
+    {
+      "route": "/knowledge/astronomy/asteroseismology-and-stellar-interiors",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 493,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 11,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 4,
+        "unresolvedQuestions": 3,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 2,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 403
+      },
+      "substantialityScore": 15.8,
+      "reasons": [],
+      "verdictDigest": "sha256:152035826d0597ab73cf69a90e8a0ff546380effc815d210126e4d5c0a5b8d68"
+    },
+    {
+      "route": "/knowledge/astronomy/very-long-baseline-interferometry",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 665,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 9,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 3,
+        "unresolvedQuestions": 3,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 2,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 360
+      },
+      "substantialityScore": 15.4,
+      "reasons": [],
+      "verdictDigest": "sha256:49ad23f0e66d8487bc977c474a0096aca3ffae0854307dbc1d73e37d60392df5"
+    },
+    {
+      "route": "/knowledge/mathematics/jacobian-elliptic-functions",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 667,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 372
+      },
+      "substantialityScore": 15.9,
+      "reasons": [],
+      "verdictDigest": "sha256:b689e1ce133589c454497a6025dbf93d4bf6ab59207acf86770648f64bbecffc"
+    },
+    {
+      "route": "/knowledge/mathematics/exponential-and-logarithmic-integrals",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 815,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 441
+      },
+      "substantialityScore": 15.9,
+      "reasons": [],
+      "verdictDigest": "sha256:0a2267a446cc12ea128f143ce66c61e3816546372b2e68091bb2efcb67b05a96"
+    },
+    {
+      "route": "/knowledge/mathematics/confluent-hypergeometric-functions",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 899,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 4,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 450
+      },
+      "substantialityScore": 16.2,
+      "reasons": [],
+      "verdictDigest": "sha256:180410bcda44d784fd639611edac22f0d1b2f274c9f0b6716813a8afa663546f"
+    },
+    {
+      "route": "/knowledge/mathematics/legendre-functions",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 786,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 428
+      },
+      "substantialityScore": 15.9,
+      "reasons": [],
+      "verdictDigest": "sha256:dfe483744f5d15923bd9ccad3112b574752e05553b56e4305da11e9cdacf6d49"
+    },
+    {
+      "route": "/knowledge/mathematics/number-theoretic-functions",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 655,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 394
+      },
+      "substantialityScore": 15.9,
+      "reasons": [],
+      "verdictDigest": "sha256:b4c7044ee1e78ced97936b7b9050159f3dc743768bcac9c79153273e89a8ebb5"
+    },
+    {
+      "route": "/knowledge/mathematics/airy-functions",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 729,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 398
+      },
+      "substantialityScore": 15.9,
+      "reasons": [],
+      "verdictDigest": "sha256:962c531413906f7c546cc1562114af25f62190166dcc5c456f7740d86845226e"
+    },
+    {
+      "route": "/knowledge/mathematics/calendrical-reconciliation",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 753,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 7,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 4,
+        "structuredDataFields": 9,
+        "renderedDimensions": 9,
+        "wordCountDiagnostic": 830
+      },
+      "substantialityScore": 17.8,
+      "reasons": [],
+      "verdictDigest": "sha256:9957d05d4845c77ea9e1ea3a0f0de69356e1e5e2cbfcc2dd880d0a4e92cdb2d4"
+    },
+    {
+      "route": "/knowledge/mathematics/elliptic-integrals",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 798,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 2,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 429
+      },
+      "substantialityScore": 15.6,
+      "reasons": [],
+      "verdictDigest": "sha256:e2c4c9294585eb7a612d7c5faae54239746b90348503d257a570e95b0f45aa2f"
+    },
+    {
+      "route": "/knowledge/mathematics/incomplete-gamma-functions",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 691,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 2,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 396
+      },
+      "substantialityScore": 15.6,
+      "reasons": [],
+      "verdictDigest": "sha256:f33354c8c4ab1d6bb7ac2b95487b558581680819d55d2cab31e09e852605b9e1"
+    },
+    {
+      "route": "/knowledge/mathematics/riemann-zeta-function",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 661,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 2,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 367
+      },
+      "substantialityScore": 15.6,
+      "reasons": [],
+      "verdictDigest": "sha256:f66a487a9a776d96e3aa5a4921bbac27fdbac34f56f3079f3551660cd3b54f73"
+    },
+    {
+      "route": "/knowledge/mathematics/hypergeometric-function",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 659,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 379
+      },
+      "substantialityScore": 15.9,
+      "reasons": [],
+      "verdictDigest": "sha256:e4abffaab727ed29d1878712b3496042916b7efb4779cbbd7c3d1b0a9de3cb0a"
+    },
+    {
+      "route": "/knowledge/mathematics/asymptotic-approximations",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 723,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 3,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 411
+      },
+      "substantialityScore": 15.9,
+      "reasons": [],
+      "verdictDigest": "sha256:bad066fa45a82e0703a349b1345cf835f48b6f57e5ed21af0980ec248d36efc8"
+    },
+    {
+      "route": "/knowledge/mathematics/orthogonal-polynomials",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 693,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 2,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 355
+      },
+      "substantialityScore": 15.6,
+      "reasons": [],
+      "verdictDigest": "sha256:0ab5b2e50bda8ffd02ea0d64232566b3d32bcf049625e52b8047d1883a5dde26"
+    },
+    {
+      "route": "/knowledge/mathematics/bessel-functions",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 761,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 7,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 7,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 2,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 436
+      },
+      "substantialityScore": 16.5,
+      "reasons": [],
+      "verdictDigest": "sha256:d3680ae8ffea247dcdd47943bc08b3f18cbc4ceb15c59b9e026f752d38a50a55"
+    },
+    {
+      "route": "/knowledge/mathematics/bernoulli-and-euler-numbers",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 715,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 7,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 2,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 435
+      },
+      "substantialityScore": 16,
+      "reasons": [],
+      "verdictDigest": "sha256:d818bbf78fe2521437ad30e20eccb0123d1ee73fdb69a60ed944c28618ecbc4a"
     },
     {
       "route": "/knowledge/mathematics/gamma-function",
@@ -653,22 +1062,22 @@
         "directAnswerChars": 314,
         "hasMechanismOrDerivation": true,
         "hasTechnicalContext": true,
-        "explanatoryClaims": 6,
+        "explanatoryClaims": 14,
         "claimsWithPassage": 1,
         "exactLocators": 1,
         "limitations": 6,
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
-        "reproducibleCalculations": 0,
+        "reproducibleCalculations": 1,
         "typedRelatedRecords": 3,
         "typedBridges": 2,
         "structuredDataFields": 9,
-        "renderedDimensions": 9,
-        "wordCountDiagnostic": 244
+        "renderedDimensions": 10,
+        "wordCountDiagnostic": 474
       },
-      "substantialityScore": 14.7,
+      "substantialityScore": 17.1,
       "reasons": [],
-      "verdictDigest": "sha256:37bc57b1dea3e34f9f239651751127e90fb4fd37483ec03b939d1dc3610c5514"
+      "verdictDigest": "sha256:ff9d6ffec02a28a383b3c5a76c0a44c5b21a01310276dad62172253b39a1abdc"
     },
     {
       "route": "/knowledge/mathematics/spherical-coordinates",
@@ -739,8 +1148,10 @@
         "wordCountDiagnostic": 207
       },
       "substantialityScore": 12.4,
-      "reasons": [],
-      "verdictDigest": "sha256:148a2d465cf13872185f685dea406a7f1702bf86146197d9610ee37b1ebfc4f2"
+      "reasons": [
+        "classified independent but no claim maps to a passage"
+      ],
+      "verdictDigest": "sha256:1ea7e715ca7821b60ccc8dff5ecc8ab118bd2c6a7ab882afc3b89486f6127e9c"
     },
     {
       "route": "/knowledge/mathematics/periodic-functions-and-phase",
@@ -869,22 +1280,22 @@
         "directAnswerChars": 351,
         "hasMechanismOrDerivation": true,
         "hasTechnicalContext": true,
-        "explanatoryClaims": 6,
+        "explanatoryClaims": 14,
         "claimsWithPassage": 1,
         "exactLocators": 1,
         "limitations": 6,
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
-        "reproducibleCalculations": 0,
+        "reproducibleCalculations": 1,
         "typedRelatedRecords": 3,
         "typedBridges": 1,
         "structuredDataFields": 9,
-        "renderedDimensions": 9,
-        "wordCountDiagnostic": 182
+        "renderedDimensions": 10,
+        "wordCountDiagnostic": 437
       },
-      "substantialityScore": 14.4,
+      "substantialityScore": 16.8,
       "reasons": [],
-      "verdictDigest": "sha256:3db8a52a65fe14149700d5bcfd8cc2037aa34f62dfb43b00125aa221275f695f"
+      "verdictDigest": "sha256:34af48f1e236596817e760e5806527c096874fb082d75a8f9e022a95066f385a"
     },
     {
       "route": "/knowledge/mathematics/uncertainty-propagation",
@@ -984,14 +1395,14 @@
     },
     {
       "route": "/knowledge/mathematics/graph-theory",
-      "state": "structurally-substantial-but-unsupported",
+      "state": "substantial-and-evidence-backed",
       "measures": {
         "directAnswerChars": 271,
         "hasMechanismOrDerivation": true,
         "hasTechnicalContext": true,
         "explanatoryClaims": 6,
-        "claimsWithPassage": 0,
-        "exactLocators": 0,
+        "claimsWithPassage": 1,
+        "exactLocators": 1,
         "limitations": 6,
         "unresolvedQuestions": 1,
         "supportedComparisons": 0,
@@ -1002,9 +1413,9 @@
         "renderedDimensions": 9,
         "wordCountDiagnostic": 264
       },
-      "substantialityScore": 13,
+      "substantialityScore": 15,
       "reasons": [],
-      "verdictDigest": "sha256:304378cdfd196dd82585bf748fdfd3cef4417ac26c469bc6f95ffcbe77a95057"
+      "verdictDigest": "sha256:c7ccaa335d1ac633f4dc066d5e7cdc3343afbd9228391f3e482b01bf31178029"
     },
     {
       "route": "/knowledge/mathematics/dynamical-systems",
@@ -1099,8 +1510,10 @@
         "wordCountDiagnostic": 285
       },
       "substantialityScore": 13,
-      "reasons": [],
-      "verdictDigest": "sha256:a1dba27fc7babf77408197415177bf5b6457986f193c9b125ed2ad60e783c72f"
+      "reasons": [
+        "classified independent but no claim maps to a passage"
+      ],
+      "verdictDigest": "sha256:43290ea4ec334497599d228bc8a66306247dc5570f90de57ea65f409c3eefd4b"
     },
     {
       "route": "/knowledge/mathematics/constraint-satisfaction",
@@ -1123,8 +1536,10 @@
         "wordCountDiagnostic": 211
       },
       "substantialityScore": 12.7,
-      "reasons": [],
-      "verdictDigest": "sha256:cf12ef504fdab29ee830e82950fa15a10be5813e4bad8a3a490bc6a11cc1a8b3"
+      "reasons": [
+        "classified independent but no claim maps to a passage"
+      ],
+      "verdictDigest": "sha256:cd20021b3c8f12aeac620b3cddf37241a65227306c7441b707380cedc6120956"
     },
     {
       "route": "/knowledge/mathematics/information-theory",
@@ -1195,8 +1610,10 @@
         "wordCountDiagnostic": 181
       },
       "substantialityScore": 12.4,
-      "reasons": [],
-      "verdictDigest": "sha256:3cbdd4c5c32ec9bbaf8a7cdea6c2b829e49a9b3877e61d8539153fdcc44c67f1"
+      "reasons": [
+        "classified independent but no claim maps to a passage"
+      ],
+      "verdictDigest": "sha256:5bc06928f452a3ac4fa5e9c9e437ae6e9531df5a27e4362fbb68bdd46894607a"
     },
     {
       "route": "/knowledge/mathematics/causal-inference",
@@ -4233,5 +4650,5 @@
     }
   ],
   "boundary": "A private audit. It changes no page.",
-  "auditDigest": "sha256:9f11c98a56483550c8e71c4d64a0fb7d76ef4ded30c810a3d3fd20c31278c1d3"
+  "auditDigest": "sha256:50515db5b8db66dda5b6b35655c77056fce4ce84822aabd70bd97998247c1b18"
 }

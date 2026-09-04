@@ -10,6 +10,7 @@ import {
   calculationReferencePath,
   getCalculationReferencesByCategory,
 } from '@/lib/celestial-calculation-references'
+import { ASTROLOGY_WORKFLOW_PATH } from '@/lib/astrology-workflow-protocols'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -76,6 +77,7 @@ export default function CalculationReferencesIndex() {
         })}
 
         <section className="mt-14 flex flex-wrap gap-4 border-t border-zinc-800 pt-10 font-mono text-[10px] uppercase tracking-widest">
+          <Link href={ASTROLOGY_WORKFLOW_PATH} className="border border-violet-700 px-4 py-3 text-violet-200 hover:bg-violet-300 hover:text-black">Worked protocols and receipts</Link>
           <Link href="/knowledge/celestial" className="border border-zinc-700 px-4 py-3 text-zinc-200 hover:border-cyan-400 hover:text-cyan-300">Celestial fact schema</Link>
           <Link href="/knowledge/astrology/tropical-vs-sidereal" className="border border-zinc-700 px-4 py-3 text-zinc-200 hover:border-cyan-400 hover:text-cyan-300">Compare zodiac frames</Link>
           <Link href="/reports/celestial" className="border border-cyan-700 px-4 py-3 text-cyan-200 hover:bg-cyan-300 hover:text-black">Calculate a report</Link>
