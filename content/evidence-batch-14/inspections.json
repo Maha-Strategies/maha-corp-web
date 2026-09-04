@@ -438,6 +438,44 @@
       "notCovered": "The page does not derive the relation between baseline length and angular resolution, so the page built on it states no resolution formula.",
       "establishes": "The VLBI observable, its stated precisions, the three products of the technique, and the reason given for treating extragalactic sources as inertial.",
       "boundary": "An agency technique description. The precisions are stated capabilities rather than results for a particular observation."
+    },
+    {
+      "sourceId": "nist-dlmf-elliptic",
+      "domain": "mathematics",
+      "class": "formal-mathematical",
+      "title": "DLMF Chapter 19: Elliptic Integrals",
+      "venue": "NIST Digital Library of Mathematical Functions",
+      "identifier": "DLMF Version 1.2.7",
+      "retrievedFrom": "https://dlmf.nist.gov/19.2",
+      "retrievedOn": "2026-09-04",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Chapter and section identified on retrieval against the same DLMF release confirmed for the earlier chapters.",
+      "versionRelationship": "DLMF 1.2.7, released 2026-06-15",
+      "rightsBasis": "United States government reference work, publicly readable. Retrieved without circumventing any access control.",
+      "exactLocators": [
+        "19.2.4 and 19.2.5 first and second kinds",
+        "19.2.7 third kind and its principal value",
+        "19.2.8 the complete integrals"
+      ],
+      "claimByClaimSupport": [
+        {
+          "route": "/knowledge/mathematics/elliptic-integrals",
+          "locator": "19.2.4, 19.2.5 and 19.2.8",
+          "claim": "The first two kinds are defined with shared domain conditions, and the complete forms are those integrals at quarter period.",
+          "supportingPassage": "19.2.4 defines F of phi and k as the integral from zero to phi of d theta over the square root of one minus k squared sine squared theta. 19.2.5 defines E of phi and k with that square root in the numerator. Both require one minus sine squared phi and one minus k squared sine squared phi to lie outside the cut along the non-positive reals, with at most one of them equal to zero. 19.2.8 defines K of k, E of k and Pi of alpha squared and k as those integrals evaluated at phi equal to pi over two.",
+          "distinctPassage": true
+        },
+        {
+          "route": "/knowledge/mathematics/elliptic-integrals",
+          "locator": "19.2.7 and the branch statement",
+          "claim": "The third kind carries an extra condition and needs a principal value where that condition fails inside the range.",
+          "supportingPassage": "19.2.7 defines Pi of phi, alpha squared and k with an additional factor of one minus alpha squared sine squared theta in the denominator, requiring one minus alpha squared sine squared phi to be non-zero, and states that the Cauchy principal value applies if that expression vanishes at an interior point of integration. The principal branch is declared where the phase of one minus k squared is at most pi, with branch cuts on the reals outside minus one to one.",
+          "distinctPassage": true
+        }
+      ],
+      "establishes": "The three Legendre kinds with their domain conditions, the principal-value case, and the complete forms.",
+      "boundary": "Defines the integrals and where they fail. It makes no accuracy claim about any evaluation scheme."
     }
   ],
   "notInspected": [
@@ -447,10 +485,10 @@
     }
   ],
   "summary": {
-    "sourcesInspected": 12,
-    "sourcesAttached": 11,
-    "routesReached": 11,
-    "claimsSupported": 22,
+    "sourcesInspected": 13,
+    "sourcesAttached": 12,
+    "routesReached": 12,
+    "claimsSupported": 24,
     "heldBack": 1
   },
   "boundary": "Twelve sources inspected at section level; eleven attached across mathematics and astronomy. The twelfth is recorded, inspected and unattached, because attaching it would move a frozen release-governance digest.",

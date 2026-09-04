@@ -23,6 +23,7 @@ const NEW_PAGES = [
   '/knowledge/mathematics/hypergeometric-function',
   '/knowledge/mathematics/incomplete-gamma-functions',
   '/knowledge/astronomy/very-long-baseline-interferometry',
+  '/knowledge/mathematics/elliptic-integrals',
 ]
 
 test('new pages are born supported, not added to the unsupported pile', () => {
@@ -39,7 +40,7 @@ test('growth improved the evidence-backed share rather than diluting it', () => 
   // nobody would have made the ratio worse, which is the failure mode.
   const supported = status.counts['independently-supported']
   const uninspected = status.counts['cited-but-uninspected']
-  assert.ok(supported >= 42, `supported fell to ${supported}`)
+  assert.ok(supported >= 43, `supported fell to ${supported}`)
   assert.ok(uninspected <= 98, `uninspected rose to ${uninspected}; expansion added unsupported pages`)
 })
 
@@ -110,8 +111,8 @@ test('the new concepts carry their conditions, not just their formulas', () => {
   const added = MATHEMATICAL_CONCEPTS.filter((c) => ['gamma-function',
     'error-function-and-related-integrals', 'bessel-functions', 'bernoulli-and-euler-numbers',
     'asymptotic-approximations', 'orthogonal-polynomials', 'riemann-zeta-function',
-    'hypergeometric-function', 'incomplete-gamma-functions'].includes(c.slug))
-  assert.equal(added.length, 9)
+    'hypergeometric-function', 'incomplete-gamma-functions', 'elliptic-integrals'].includes(c.slug))
+  assert.equal(added.length, 10)
   for (const c of added) {
     assert.ok(c.assumptions.length > 0, `${c.slug} states no conditions`)
     assert.ok(c.errorBounds.length > 0, `${c.slug} states no error behaviour`)

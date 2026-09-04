@@ -3726,6 +3726,151 @@
       "upliftDigest": "sha256:32be34233b6b9b41e8dd4d16d834612d33c9481ead1bd7bf38b4efc1262771e0"
     },
     {
+      "route": "/knowledge/mathematics/elliptic-integrals",
+      "family": "mathematics",
+      "slug": "elliptic-integrals",
+      "eligible": true,
+      "refusals": [],
+      "before": {
+        "route": "/knowledge/mathematics/elliptic-integrals",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 2,
+        "relatedRoutes": [
+          "/knowledge/mathematics/numerical-integration",
+          "/knowledge/mathematics/hypergeometric-function"
+        ],
+        "renderedSections": 6
+      },
+      "after": {
+        "route": "/knowledge/mathematics/elliptic-integrals",
+        "family": "mathematics",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "related-records",
+          "source-boundary"
+        ],
+        "dimensionCount": 8,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
+        "referenceOnlySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 3,
+        "explanatorySources": 3,
+        "bridgeCount": 0,
+        "relatedRouteCount": 2,
+        "relatedRoutes": [
+          "/knowledge/mathematics/numerical-integration",
+          "/knowledge/mathematics/hypergeometric-function"
+        ],
+        "renderedSections": 6
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "DLMF 19.2.4 defines the incomplete integral of the first kind as the integral from zero to phi of d theta over the square root of one minus k squared sine squared theta. 19.2.5 defines the second kind with that square root in the numerator instead. Both carry the same domain conditions: one minus sine squared phi and one minus k squared sine squared phi must each avoid the cut along the non-positive reals, and at most one may be zero. 19.2.7 defines the third kind with an extra factor of one minus alpha squared sine squared theta in the denominator, requiring that expression to be non-zero, and the chapter states that a Cauchy principal value is taken when it vanishes at an interior point. 19.2.8 defines the complete integrals as the incomplete ones evaluated at phi equal to pi over two."
+          ],
+          "sourceIds": [
+            "nist-dlmf-elliptic",
+            "nist-dlmf-elliptic",
+            "nist-dlmf-elliptic"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Check both domain conditions before evaluating the first or second kind, since the definition excludes the cut rather than merely warning about it.",
+            "For the third kind, test whether the characteristic factor vanishes inside the range, and take a principal value where it does.",
+            "Reach the complete integrals through 19.2.8 rather than by pushing an incomplete evaluation to the endpoint."
+          ],
+          "sourceIds": [
+            "nist-dlmf-elliptic",
+            "nist-dlmf-elliptic",
+            "nist-dlmf-elliptic"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "First and second kinds with their shared domain conditions, DLMF 19.2.4 and 19.2.5",
+            "Third kind with its non-vanishing condition and principal value, DLMF 19.2.7",
+            "Complete integrals are the incomplete ones at quarter period, DLMF 19.2.8"
+          ],
+          "sourceIds": [
+            "nist-dlmf-elliptic",
+            "nist-dlmf-elliptic",
+            "nist-dlmf-elliptic"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "The integrands become singular as the modulus approaches one, so accuracy degrades near that limit however the quadrature is arranged.",
+            "A principal value is not an ordinary integral, and a scheme that ignores the interior singularity in the third kind returns a number without meaning rather than an inaccurate one.",
+            "The chapter defines the integrals and declares a branch; it makes no accuracy claim about any evaluation scheme.",
+            "The first and second kinds require both one minus sine squared phi and one minus k squared sine squared phi to avoid the cut along the non-positive reals, with at most one of them zero.",
+            "The third kind requires one minus alpha squared sine squared phi to be non-zero, and takes a principal value when it vanishes inside the range.",
+            "The principal branch is declared where the phase of one minus k squared is at most pi, with cuts on the reals outside minus one to one."
+          ],
+          "sourceIds": [
+            "nist-dlmf-elliptic",
+            "nist-dlmf-elliptic",
+            "nist-dlmf-elliptic"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "What this does not establish",
+          "items": [
+            "The chapter defines the three kinds and their domains. It does not establish that any quadrature scheme is accurate near the singular limit, and a principal value is a different object from the integral it replaces."
+          ],
+          "sourceIds": [
+            "nist-dlmf-elliptic",
+            "nist-dlmf-elliptic",
+            "nist-dlmf-elliptic"
+          ]
+        },
+        {
+          "dimension": "related-records",
+          "heading": "Related records",
+          "items": [
+            "/knowledge/mathematics/numerical-integration",
+            "/knowledge/mathematics/hypergeometric-function"
+          ],
+          "sourceIds": []
+        }
+      ],
+      "sectionCount": 6,
+      "upliftDigest": "sha256:aff065a9c9fb677a17392ace599faf41a9975464aa70b18d3f94571757547866"
+    },
+    {
       "route": "/knowledge/mathematics/incomplete-gamma-functions",
       "family": "mathematics",
       "slug": "incomplete-gamma-functions",

@@ -3,13 +3,13 @@
   "auditedAt": "2026-09-03",
   "finding": "Classification and substance are different measurements. A page can carry an inspected source and explain almost nothing, and a structural page can be richly written and cite nothing checkable.",
   "wordCountUsedAsGate": false,
-  "totalAudited": 178,
-  "corpusSize": 178,
+  "totalAudited": 179,
+  "corpusSize": 179,
   "denominatorEqualsCorpus": true,
   "supersedesBatch9Audit": "Batch 9 audited 59 pages and stated a result against 167. This audits all 167.",
   "depthDistribution": {
     "structurally-substantial-but-unsupported": 84,
-    "substantial-and-evidence-backed": 42,
+    "substantial-and-evidence-backed": 43,
     "blocked": 28,
     "first-party-documented-but-thin": 9,
     "first-party-documented-and-substantial": 1,
@@ -17,9 +17,9 @@
   },
   "byGroup": {
     "independentlySupported": {
-      "audited": 42,
+      "audited": 43,
       "states": {
-        "substantial-and-evidence-backed": 42
+        "substantial-and-evidence-backed": 43
       }
     },
     "firstPartyDocumented": {
@@ -43,7 +43,7 @@
       }
     }
   },
-  "substantialAndEvidenceBacked": 42,
+  "substantialAndEvidenceBacked": 43,
   "thinnestSupported": [],
   "verdicts": [
     {
@@ -645,6 +645,30 @@
       "substantialityScore": 15.4,
       "reasons": [],
       "verdictDigest": "sha256:49ad23f0e66d8487bc977c474a0096aca3ffae0854307dbc1d73e37d60392df5"
+    },
+    {
+      "route": "/knowledge/mathematics/elliptic-integrals",
+      "state": "substantial-and-evidence-backed",
+      "measures": {
+        "directAnswerChars": 798,
+        "hasMechanismOrDerivation": true,
+        "hasTechnicalContext": true,
+        "explanatoryClaims": 6,
+        "claimsWithPassage": 2,
+        "exactLocators": 2,
+        "limitations": 6,
+        "unresolvedQuestions": 1,
+        "supportedComparisons": 0,
+        "reproducibleCalculations": 0,
+        "typedRelatedRecords": 2,
+        "typedBridges": 0,
+        "structuredDataFields": 9,
+        "renderedDimensions": 8,
+        "wordCountDiagnostic": 429
+      },
+      "substantialityScore": 15.6,
+      "reasons": [],
+      "verdictDigest": "sha256:e2c4c9294585eb7a612d7c5faae54239746b90348503d257a570e95b0f45aa2f"
     },
     {
       "route": "/knowledge/mathematics/incomplete-gamma-functions",
@@ -4449,5 +4473,5 @@
     }
   ],
   "boundary": "A private audit. It changes no page.",
-  "auditDigest": "sha256:38e2a507d7b40c360392e03f89cde7fc1db3369676f2e6505bb769258e823e69"
+  "auditDigest": "sha256:02c4045b11f31e01d5a343af306104a98b6df636b3a2ae4647a72cd0e03b890c"
 }
