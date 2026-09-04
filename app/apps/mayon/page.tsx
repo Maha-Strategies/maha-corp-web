@@ -128,6 +128,7 @@ export default function MayonDocumentationPage() {
             <Link href="/projects/mayon" className="text-[var(--status-sourced)] underline">Maha Strategies project overview</Link>
           </div>
           <p className="mt-5 text-sm leading-relaxed text-[var(--text-muted)]">The related working paper provides broad planetary-volcanism context; it does not validate the Mayon visual model or replace the project&apos;s own source record.</p>
+          <p className="mt-4 text-sm leading-relaxed text-[var(--text-muted)]">Looking for Māyōṉ in early Tamil literature? That is a distinct referent. Read the <Link href="/knowledge/religion/mayon" className="text-[var(--status-sourced)] underline">source-bound Māyōṉ dossier</Link>. The shared spelling does not establish a historical, geographic, or religious relationship with Mayon Volcano.</p>
         </section>
 
         <section className="mt-16 grid gap-10 border-t border-[var(--border-default)] pt-10 md:grid-cols-2">

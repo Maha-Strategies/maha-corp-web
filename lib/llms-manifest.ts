@@ -9,6 +9,7 @@ import type { EpistemicRecord } from './epistemic-schema.ts'
 import { epistemicRecordPath } from './epistemic-publication.ts'
 import { EPISTEMIC_DOMAINS } from './epistemic-pilots.ts'
 import { getPublishedSubstantialPage } from './substantial-page-public.ts'
+import { MAYON_ANSWER_REGISTRY_PATH, MAYON_TOPICS, mayonTopicPath } from './mayon-topics.ts'
 
 const RESEARCH_URL = 'https://research.mahastrategies.com'
 
@@ -74,6 +75,9 @@ export function buildLlmsManifest(
     '- Mathematics registry: https://www.mahastrategies.com/knowledge/mathematics/registry',
     '- Neuromorphic and biocomputing registry: https://www.mahastrategies.com/knowledge/neuromorphic-biocomputing/registry',
     '- Religion and contemplative traditions registry: https://www.mahastrategies.com/knowledge/religion/registry',
+    '- Māyōṉ (Mayon), early Tamil sources and typed deity connections: https://www.mahastrategies.com/knowledge/religion/mayon',
+    `- Māyōṉ machine-readable answer registry: https://www.mahastrategies.com${MAYON_ANSWER_REGISTRY_PATH}`,
+    ...MAYON_TOPICS.map((topic) => `- Māyōṉ source guide — ${topic.shortTitle}: https://www.mahastrategies.com${mayonTopicPath(topic)}`),
     '- Astrology traditions registry: https://www.mahastrategies.com/knowledge/astrology/registry',
     '',
     '## Canonical epistemic records',
