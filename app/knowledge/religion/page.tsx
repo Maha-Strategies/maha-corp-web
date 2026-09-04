@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { SITE_URL } from '@/lib/briefs-data'
 import { MAYON_KNOWLEDGE_PATH } from '@/lib/mayon-knowledge'
 import { TAMIL_CLASSICAL_PATH } from '@/lib/tamil-classical-traditions'
+import { TIRUVAYMOLI_ATLAS_PATH } from '@/lib/tiruvaymoli-passage-atlas'
 import {
   RELIGION_CATEGORIES,
   RELIGION_COMPARISONS,
@@ -63,6 +64,14 @@ export default function ReligionKnowledgePage() {
           <div className="mt-3 flex flex-wrap items-end justify-between gap-5">
             <div className="max-w-3xl"><h2 className="text-3xl font-semibold text-white">Classical Tamil religion and reception</h2><p className="mt-3 text-sm leading-6 text-zinc-400">Continue from Māyōṉ into the wider landscape-deity stanza, Paripāṭal subject and music records, occurrence-level divine epithets, and later Āḻvār reception.</p></div>
             <Link href={TAMIL_CLASSICAL_PATH} className="font-mono text-[10px] uppercase tracking-widest text-amber-300 hover:text-white">Explore the cluster →</Link>
+          </div>
+        </section>
+
+        <section className="mt-6 border border-fuchsia-800/60 bg-fuchsia-950/10 p-7">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-fuchsia-300">Passage-level answer atlas</p>
+          <div className="mt-3 flex flex-wrap items-end justify-between gap-5">
+            <div className="max-w-3xl"><h2 className="text-3xl font-semibold text-white">Tiruvāymoḻi, unit by unit</h2><p className="mt-3 text-sm leading-6 text-zinc-400">Twenty complete units indexed by exact pāsuram range, speaker, name occurrences, themes, and the limits of one named English translation.</p></div>
+            <Link href={TIRUVAYMOLI_ATLAS_PATH} className="font-mono text-[10px] uppercase tracking-widest text-fuchsia-300 hover:text-white">Open the passage atlas →</Link>
           </div>
         </section>
 

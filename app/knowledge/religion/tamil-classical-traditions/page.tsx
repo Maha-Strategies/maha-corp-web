@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { SITE_URL } from '@/lib/briefs-data'
 import { MAYON_KNOWLEDGE_PATH } from '@/lib/mayon-knowledge'
+import { TIRUVAYMOLI_ATLAS_PATH } from '@/lib/tiruvaymoli-passage-atlas'
 import {
   TAMIL_CLASSICAL_ANSWERS,
   TAMIL_CLASSICAL_CLAIMS,
@@ -66,6 +67,11 @@ export default function TamilClassicalTraditionsPage() {
         <section className="mt-14 border border-teal-800/60 bg-teal-950/10 p-7">
           <p className="font-mono text-[10px] uppercase tracking-widest text-teal-300">Connected foundational dossier</p>
           <div className="mt-3 flex flex-wrap items-end justify-between gap-5"><div className="max-w-3xl"><h2 className="text-3xl font-semibold text-white">Māyōṉ in early Tamil literature</h2><p className="mt-3 text-sm leading-6 text-zinc-400">Use the Māyōṉ cluster for the focused questions about mullai, Tirumāl, Vishnu, Krishna, Vāliyoṉ, Cēyōṉ, and the strict Mayon Volcano disambiguation.</p></div><Link href={MAYON_KNOWLEDGE_PATH} className="font-mono text-[10px] uppercase tracking-widest text-teal-300 hover:text-white">Open Māyōṉ dossier →</Link></div>
+        </section>
+
+        <section className="mt-6 border border-fuchsia-800/60 bg-fuchsia-950/10 p-7">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-fuchsia-300">Passage-level continuation</p>
+          <div className="mt-3 flex flex-wrap items-end justify-between gap-5"><div className="max-w-3xl"><h2 className="text-3xl font-semibold text-white">Tiruvāymoḻi passage atlas</h2><p className="mt-3 text-sm leading-6 text-zinc-400">Move from the reception overview to twenty complete translated units, each with its speaker, names, themes, exact pāsuram range, and explicit non-inference.</p></div><Link href={TIRUVAYMOLI_ATLAS_PATH} className="font-mono text-[10px] uppercase tracking-widest text-fuchsia-300 hover:text-white">Read unit by unit →</Link></div>
         </section>
 
         <section className="mt-14"><div className="flex flex-wrap items-end justify-between gap-5"><div><p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">Question-led guides</p><h2 className="mt-3 text-3xl font-semibold text-white">Explore the source graph</h2></div><a href={TAMIL_CLASSICAL_REGISTRY_PATH} className="border border-teal-700 px-4 py-3 font-mono text-[10px] uppercase tracking-widest text-teal-300 hover:bg-teal-300 hover:text-black">Open answer registry →</a></div>
