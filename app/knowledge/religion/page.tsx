@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { SITE_URL } from '@/lib/briefs-data'
 import { MAYON_KNOWLEDGE_PATH } from '@/lib/mayon-knowledge'
+import { TAMIL_CLASSICAL_PATH } from '@/lib/tamil-classical-traditions'
 import {
   RELIGION_CATEGORIES,
   RELIGION_COMPARISONS,
@@ -54,6 +55,14 @@ export default function ReligionKnowledgePage() {
           <div className="mt-3 flex flex-wrap items-end justify-between gap-5">
             <div className="max-w-3xl"><h2 className="text-3xl font-semibold text-white">Māyōṉ in early Tamil literature</h2><p className="mt-3 text-sm leading-6 text-zinc-400">Begin with the Tolkāppiyam and Paripāṭal, then follow separately typed connections to Tirumāl, Vishnu, Krishna, Balarama, Cēyōṉ, Vēntaṉ, and Varuṇaṉ.</p></div>
             <Link href={MAYON_KNOWLEDGE_PATH} className="font-mono text-[10px] uppercase tracking-widest text-teal-300 hover:text-white">Open the dossier →</Link>
+          </div>
+        </section>
+
+        <section className="mt-6 border border-amber-800/60 bg-amber-950/10 p-7">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-amber-300">Connected religion cluster</p>
+          <div className="mt-3 flex flex-wrap items-end justify-between gap-5">
+            <div className="max-w-3xl"><h2 className="text-3xl font-semibold text-white">Classical Tamil religion and reception</h2><p className="mt-3 text-sm leading-6 text-zinc-400">Continue from Māyōṉ into the wider landscape-deity stanza, Paripāṭal subject and music records, occurrence-level divine epithets, and later Āḻvār reception.</p></div>
+            <Link href={TAMIL_CLASSICAL_PATH} className="font-mono text-[10px] uppercase tracking-widest text-amber-300 hover:text-white">Explore the cluster →</Link>
           </div>
         </section>
 

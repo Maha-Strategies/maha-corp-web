@@ -19,6 +19,7 @@ import { MATHEMATICAL_CONCEPTS, MATHEMATICS_KNOWLEDGE_PATH, MATHEMATICS_KNOWLEDG
 import { RELIGION_COMPARISONS, RELIGION_COMPARISONS_PATH, RELIGION_CONCEPTS, RELIGION_KNOWLEDGE_PATH, RELIGION_KNOWLEDGE_RELEASE_DATE, religionComparisonPath, religionConceptPath } from '@/lib/religion-knowledge'
 import { MAYON_KNOWLEDGE_DATE, MAYON_KNOWLEDGE_PATH } from '@/lib/mayon-knowledge'
 import { MAYON_ANSWER_REGISTRY_PATH, MAYON_TOPICS, mayonTopicPath } from '@/lib/mayon-topics'
+import { TAMIL_CLASSICAL_DATE, TAMIL_CLASSICAL_PATH, TAMIL_CLASSICAL_REGISTRY_PATH, TAMIL_CLASSICAL_TOPICS, tamilClassicalTopicPath } from '@/lib/tamil-classical-traditions'
 import { NEUROMORPHIC_COMPARISONS, NEUROMORPHIC_COMPARISONS_PATH, NEUROMORPHIC_CONCEPTS, NEUROMORPHIC_PATH, NEUROMORPHIC_RELEASE_DATE, neuromorphicComparisonPath, neuromorphicConceptPath } from '@/lib/neuromorphic-biocomputing'
 import { EPISTEMIC_DOMAINS, EPISTEMIC_RELEASE_DATE, EPISTEMIC_SYSTEM_PATH, PUBLIC_EPISTEMIC_RECORDS } from '@/lib/epistemic-pilots'
 import { epistemicRecordPath } from '@/lib/epistemic-publication'
@@ -78,6 +79,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...MAYON_TOPICS.map((topic) => ({
       url: `${baseUrl}${mayonTopicPath(topic)}`,
       lastModified: new Date(MAYON_KNOWLEDGE_DATE),
+    })),
+    { url: `${baseUrl}${TAMIL_CLASSICAL_PATH}`, lastModified: new Date(TAMIL_CLASSICAL_DATE) },
+    { url: `${baseUrl}${TAMIL_CLASSICAL_REGISTRY_PATH}`, lastModified: new Date(TAMIL_CLASSICAL_DATE) },
+    ...TAMIL_CLASSICAL_TOPICS.map((topic) => ({
+      url: `${baseUrl}${tamilClassicalTopicPath(topic)}`,
+      lastModified: new Date(TAMIL_CLASSICAL_DATE),
     })),
     ...RELIGION_CONCEPTS.map((concept) => ({
       url: `${baseUrl}${religionConceptPath(concept)}`,
