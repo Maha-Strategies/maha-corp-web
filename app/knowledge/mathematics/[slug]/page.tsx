@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { EvidenceStatus } from '@/components/EvidenceStatus'
 import { UpliftSections } from '@/components/UpliftSections'
 
 import { SITE_URL } from '@/lib/briefs-data'
@@ -44,6 +45,7 @@ export default async function MathematicalConceptPage({ params }: PageProps) {
       <div className="mx-auto max-w-6xl">
         <nav aria-label="Breadcrumb" className="font-mono text-[10px] uppercase tracking-widest text-zinc-600"><Link href="/knowledge" className="hover:text-white">Knowledge</Link><span className="px-2">/</span><Link href={MATHEMATICS_KNOWLEDGE_PATH} className="hover:text-white">Mathematics</Link><span className="px-2">/</span><span className="text-zinc-400">{concept.name}</span></nav>
         <header className="mt-10 border-b border-zinc-800 pb-10"><div className="flex flex-wrap gap-3 font-mono text-[9px] uppercase tracking-widest"><span className="border border-emerald-700/50 px-2 py-1 text-emerald-300">{concept.proofStatus}</span><span className="px-2 py-1 text-zinc-500">{concept.category}</span></div><h1 className="mt-6 max-w-5xl text-4xl font-semibold tracking-tight text-white sm:text-6xl">{concept.name}</h1><p className="mt-6 max-w-3xl font-serif text-lg leading-8 text-zinc-300">{concept.description}</p></header>
+        <EvidenceStatus route={path} />
 
         <div className="mt-12 grid gap-14 lg:grid-cols-[minmax(0,1fr)_330px]">
           <article>

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import { FirstPartyDisclosure } from '@/components/FirstPartyDisclosure'
+import { EvidenceStatus } from '@/components/EvidenceStatus'
 import { UpliftSections } from '@/components/UpliftSections'
 
 import { SITE_URL, getBriefBySlug } from '@/lib/briefs-data'
@@ -60,6 +61,7 @@ export default async function SupplierProfilePage({ params }: PageProps) {
           <p className="mt-4 font-mono text-xs uppercase tracking-widest text-cyan-300">{supplier.supplierType}</p>
           <p className="mt-6 max-w-3xl font-serif text-lg leading-8 text-zinc-400">{supplier.summary}</p>
         </header>
+        <EvidenceStatus route={upliftRoute} />
 
         <section className="mt-10 grid gap-px border border-zinc-800 bg-zinc-800 md:grid-cols-2">
           <div className="bg-zinc-950 p-6">

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { EvidenceStatus } from '@/components/EvidenceStatus'
 import { UpliftSections } from '@/components/UpliftSections'
 import { SITE_URL, getBriefBySlug } from '@/lib/briefs-data'
 import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
@@ -139,6 +140,7 @@ export default async function KnowledgeArticlePage({ params }: PageProps) {
             </Link>
           )}
         </header>
+        <EvidenceStatus route={path} />
 
         <div className="mt-12 grid gap-14 lg:grid-cols-[minmax(0,1fr)_320px]">
           <article>
