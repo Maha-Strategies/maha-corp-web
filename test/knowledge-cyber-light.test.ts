@@ -45,11 +45,12 @@ function contrast(foreground: string, background: string): number {
 
 test('all Knowledge pages inherit one bounded cyber-light layout', () => {
   const routes = pageFiles(new URL('../app/knowledge', import.meta.url).pathname)
-  // 48 since the NSGoods preflight v3 validation record was added. The count is a
+  // 50 since the reviewed Māyōṉ source dossier and its quality-gated dynamic
+  // topic route were added. The count is a
   // tripwire for unreviewed Knowledge routes, so it is re-pinned rather than
   // relaxed: /knowledge/sources/[slug] inherits this same bounded layout and
   // adds no visual system of its own.
-  assert.equal(routes.length, 48)
+  assert.equal(routes.length, 50)
   assert.match(layout, /data-visual-system="cyber-light"/)
   assert.match(layout, /data-visual-scope="knowledge"/)
   assert.match(layout, /knowledge-cyber-light\.module\.css/)

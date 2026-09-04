@@ -17,6 +17,8 @@ import { CORPORATE_MUNDANE_PATH, CORPORATE_MUNDANE_REFERENCES, CORPORATE_MUNDANE
 import { TROPICAL_SIDEREAL_COMPARISON_PATH, TROPICAL_SIDEREAL_COMPARISON_RELEASE_DATE, TROPICAL_SIDEREAL_COMPARISONS, tropicalSiderealComparisonPath } from '@/lib/tropical-sidereal-comparisons'
 import { MATHEMATICAL_CONCEPTS, MATHEMATICS_KNOWLEDGE_PATH, MATHEMATICS_KNOWLEDGE_RELEASE_DATE, mathematicsConceptPath } from '@/lib/mathematics-knowledge'
 import { RELIGION_COMPARISONS, RELIGION_COMPARISONS_PATH, RELIGION_CONCEPTS, RELIGION_KNOWLEDGE_PATH, RELIGION_KNOWLEDGE_RELEASE_DATE, religionComparisonPath, religionConceptPath } from '@/lib/religion-knowledge'
+import { MAYON_KNOWLEDGE_DATE, MAYON_KNOWLEDGE_PATH } from '@/lib/mayon-knowledge'
+import { MAYON_ANSWER_REGISTRY_PATH, MAYON_TOPICS, mayonTopicPath } from '@/lib/mayon-topics'
 import { NEUROMORPHIC_COMPARISONS, NEUROMORPHIC_COMPARISONS_PATH, NEUROMORPHIC_CONCEPTS, NEUROMORPHIC_PATH, NEUROMORPHIC_RELEASE_DATE, neuromorphicComparisonPath, neuromorphicConceptPath } from '@/lib/neuromorphic-biocomputing'
 import { EPISTEMIC_DOMAINS, EPISTEMIC_RELEASE_DATE, EPISTEMIC_SYSTEM_PATH, PUBLIC_EPISTEMIC_RECORDS } from '@/lib/epistemic-pilots'
 import { epistemicRecordPath } from '@/lib/epistemic-publication'
@@ -71,6 +73,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(MATHEMATICS_KNOWLEDGE_RELEASE_DATE),
     })),
     { url: `${baseUrl}${RELIGION_KNOWLEDGE_PATH}`, lastModified: new Date(RELIGION_KNOWLEDGE_RELEASE_DATE) },
+    { url: `${baseUrl}${MAYON_KNOWLEDGE_PATH}`, lastModified: new Date(MAYON_KNOWLEDGE_DATE) },
+    { url: `${baseUrl}${MAYON_ANSWER_REGISTRY_PATH}`, lastModified: new Date(MAYON_KNOWLEDGE_DATE) },
+    ...MAYON_TOPICS.map((topic) => ({
+      url: `${baseUrl}${mayonTopicPath(topic)}`,
+      lastModified: new Date(MAYON_KNOWLEDGE_DATE),
+    })),
     ...RELIGION_CONCEPTS.map((concept) => ({
       url: `${baseUrl}${religionConceptPath(concept)}`,
       lastModified: new Date(RELIGION_KNOWLEDGE_RELEASE_DATE),

@@ -44,6 +44,7 @@ export default function MayonProjectPage() {
         <p className="mt-7 max-w-3xl text-xl leading-relaxed text-[var(--text-secondary)]">A true-scale interactive view of Mayon Volcano, designed to make volcanic processes, historical memory, uncertainty, and public-safety boundaries easier to discuss.</p>
         <p className="mt-5 text-sm text-[var(--text-secondary)]">Looking for classroom use, privacy, accessibility, and app-status information? <Link href="/apps/mayon" className="text-[var(--status-sourced)] underline">Read the Mayon app documentation</Link>.</p>
         <p className="mt-3 text-sm text-[var(--text-secondary)]">For the operator&apos;s public account of what is live and what the project does not claim, see the <Link href="/case-studies#mayon" className="text-[var(--status-sourced)] underline">Mayon case study</Link>.</p>
+        <p className="mt-3 text-sm text-[var(--text-secondary)]">This project concerns Mayon Volcano. The early Tamil divine name Māyōṉ is a separate referent documented in a <Link href="/knowledge/religion/mayon" className="text-[var(--status-sourced)] underline">source-bound religion dossier</Link>; the shared spelling does not establish a historical connection.</p>
 
         <section className="mt-14 border border-amber-900/50 bg-amber-950/10 p-7">
           <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--status-boundary)]">[ Important limit ]</p>
