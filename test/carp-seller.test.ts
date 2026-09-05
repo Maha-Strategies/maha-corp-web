@@ -10,6 +10,7 @@ import {
   BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER,
   BOGAWANTALAWA_LEGEND_TEA_TEST_REF,
   CARP_SELLER_ROLE_URL,
+  MAHA_CARP_DIGITAL_OFFERS,
   SAMLEY_CINNAMON_TEA_RFQ_REF,
   MAHA_CARP_SELLER_URL,
   SAMLEY_CINNAMON_TEA_RFQ_OFFER,
@@ -24,7 +25,11 @@ import {
   verifySignedAgentDescriptor,
 } from '../lib/carp/identity.ts'
 import { pollCarpSeller } from '../scripts/run-carp-seller-worker.ts'
-import { DEEP_CONTEXT_EVALUATION_OFFER } from '../lib/x402/offers.ts'
+import {
+  CONTEXT_COMPRESSION_OFFER,
+  DEEP_CONTEXT_EVALUATION_OFFER,
+  MPS_AUTONOMOUS_AUDIT_OFFER,
+} from '../lib/x402/offers.ts'
 
 const role = JSON.parse(await readFile(new URL('../content/discovery/carp-seller-role.json', import.meta.url), 'utf8'))
 
@@ -36,8 +41,8 @@ test('the public Seller role mirrors the adopted upstream v0.2 contract', () => 
   assert.deepEqual(role.fulfillmentDescriptor.modes, ['physical', 'digital', 'hybrid'])
 })
 
-test('the Maha seller maps Deep Context to the adopted digital offering shape', () => {
-  const offer = mahaCarpSellerProfile.offers[0]
+test('the Maha seller maps all three payable x402 products to the adopted digital offering shape', () => {
+  assert.equal(mahaCarpSellerProfile.schemaVersion, '0.1.3')
   assert.equal(mahaCarpSellerProfile.roleContract, CABEZON_SELLER_ROLE_URL)
   assert.equal(mahaCarpSellerProfile.roleMirror, CARP_SELLER_ROLE_URL)
   assert.equal(mahaCarpSellerProfile.membership.status, 'confirmed_cabezon_seller_directory')
@@ -54,12 +59,23 @@ test('the Maha seller maps Deep Context to the adopted digital offering shape', 
     reciprocalEvidence: 'https://www.mahastrategies.com/artifacts/carp/thrivbe-reciprocal-success-2026-08-28.json',
     enquiryEvidence: 'https://www.mahastrategies.com/artifacts/carp/thrivbe-tea-enquiry-success-2026-08-28.json',
   }])
-  assert.equal(offer.offeringRef, 'maha:deep-context-evaluation:v1')
-  assert.equal(offer.kind, 'digital')
-  assert.equal(offer.price.amount, '0.01')
-  assert.equal(offer.directSettlement.amountBaseUnits, DEEP_CONTEXT_EVALUATION_OFFER.amount)
-  assert.equal(offer.directSettlement.resource, `https://www.mahastrategies.com${DEEP_CONTEXT_EVALUATION_OFFER.path}`)
-  assert.deepEqual(offer.fulfillment.modes, ['digital'])
+  const expected = [
+    ['maha:context-compression:v1', '0.001', CONTEXT_COMPRESSION_OFFER],
+    ['maha:deep-context-evaluation:v1', '0.01', DEEP_CONTEXT_EVALUATION_OFFER],
+    ['maha:mps-autonomous-audit:v1', '0.10', MPS_AUTONOMOUS_AUDIT_OFFER],
+  ] as const
+  assert.equal(MAHA_CARP_DIGITAL_OFFERS.length, 3)
+  for (const [offeringRef, amount, x402] of expected) {
+    const offer = MAHA_CARP_DIGITAL_OFFERS.find((candidate) => candidate.offeringRef === offeringRef)
+    assert.ok(offer)
+    assert.equal(offer.kind, 'digital')
+    assert.equal(offer.status, 'available')
+    assert.equal(offer.price.amount, amount)
+    assert.equal(offer.directSettlement.amountBaseUnits, x402.amount)
+    assert.equal(offer.directSettlement.resource, `https://www.mahastrategies.com${x402.path}`)
+    assert.equal(offer.directSettlement.idempotencyRequired, x402.requiresIdempotency)
+    assert.deepEqual(offer.fulfillment.modes, ['digital'])
+  }
 })
 
 test('the direct CARP allowlist binds Thrivbe to its verified DID key and callback', () => {
@@ -77,7 +93,10 @@ test('enquiry returns the canonical offering array for compatible needs', () => 
     params: { query: 'measure evidence retention in RAG context', tags: ['provenance'], imgtxt: null },
   })
   assert.ok('result' in matched)
-  assert.equal((matched as { result: unknown[] }).result.length, 1)
+  assert.deepEqual(
+    (matched as { result: Array<{ offeringRef: string }> }).result.map((offer) => offer.offeringRef),
+    MAHA_CARP_DIGITAL_OFFERS.map((offer) => offer.offeringRef),
+  )
 
   const unrelated = handleCarpSellerRequest({
     jsonrpc: '2.0', method: 'enquiry', id: 'enquiry-2', params: { query: 'monthly accounting software', tags: [], imgtxt: null },
@@ -151,6 +170,17 @@ test('an exact offeringRef returns only that offer and takes priority over free 
   })
   assert.ok('result' in unknown)
   assert.deepEqual((unknown as { result: unknown[] }).result, [])
+})
+
+test('each digital offeringRef is independently discoverable without widening to sibling products', () => {
+  for (const offer of MAHA_CARP_DIGITAL_OFFERS) {
+    const reply = handleCarpSellerRequest({
+      jsonrpc: '2.0', method: 'enquiry', id: `enquiry-${offer.offeringRef}`,
+      params: { offeringRef: offer.offeringRef, query: 'tea physical shipping' },
+    })
+    assert.ok('result' in reply)
+    assert.deepEqual((reply as { result: Array<{ offeringRef: string }> }).result.map((item) => item.offeringRef), [offer.offeringRef])
+  }
 })
 
 test('free-text enquiry matching uses tokens rather than substrings', () => {
@@ -384,28 +414,31 @@ test('the physical RFQ discloses non-binding economics without presenting freigh
   assert.doesNotMatch(JSON.stringify(offer), /1500/)
 })
 
-test('purchase binds the canonical order to exact x402 instructions', () => {
-  const accepted = handleCarpSellerRequest({
-    jsonrpc: '2.0', method: 'purchase', id: 'purchase-1',
-    params: {
-      clientOrderRef: 'buyer-order-001',
-      offeringRef: 'maha:deep-context-evaluation:v1',
-      quantity: 1,
-      agreedPrice: { amount: '0.01', asset: 'USDC', network: 'eip155:8453' },
-      input: { clientRequestId: 'carp-test' },
-      delivery: { mode: 'digital', destination: null, replyTo: 'carp://buyer/results/buyer-order-001' },
-      specialInstructions: null,
-    },
-  })
-  assert.ok('result' in accepted)
-  const result = (accepted as { result: { status: string; paymentInstructions: { mode: string; amountBaseUnits: string; resource: string } } }).result
-  assert.equal(result.status, 'PAYMENT_REQUIRED')
-  assert.equal(result.paymentInstructions.mode, 'x402_direct')
-  assert.equal(result.paymentInstructions.amountBaseUnits, '10000')
-  assert.match(result.paymentInstructions.resource, /\/api\/v1\/compress\/evaluate$/)
+test('purchase binds each canonical order to its own exact x402 instructions', () => {
+  for (const [index, offer] of MAHA_CARP_DIGITAL_OFFERS.entries()) {
+    const accepted = handleCarpSellerRequest({
+      jsonrpc: '2.0', method: 'purchase', id: `purchase-${index + 1}`,
+      params: {
+        clientOrderRef: `buyer-order-00${index + 1}`,
+        offeringRef: offer.offeringRef,
+        quantity: 1,
+        agreedPrice: offer.price,
+        input: { clientRequestId: `carp-test-${index + 1}` },
+        delivery: { mode: 'digital', destination: null, replyTo: `carp://buyer/results/buyer-order-00${index + 1}` },
+        specialInstructions: null,
+      },
+    })
+    assert.ok('result' in accepted)
+    const result = (accepted as { result: { status: string; paymentInstructions: { mode: string; amount: string; amountBaseUnits: string; resource: string } } }).result
+    assert.equal(result.status, 'PAYMENT_REQUIRED')
+    assert.equal(result.paymentInstructions.mode, 'x402_direct')
+    assert.equal(result.paymentInstructions.amount, offer.price.amount)
+    assert.equal(result.paymentInstructions.amountBaseUnits, offer.directSettlement.amountBaseUnits)
+    assert.equal(result.paymentInstructions.resource, offer.directSettlement.resource)
+  }
 
   const stale = handleCarpSellerRequest({
-    jsonrpc: '2.0', method: 'purchase', id: 'purchase-2',
+    jsonrpc: '2.0', method: 'purchase', id: 'purchase-stale',
     params: {
       clientOrderRef: 'buyer-order-002', offeringRef: 'maha:deep-context-evaluation:v1', quantity: 1,
       agreedPrice: { amount: '0.009', asset: 'USDC', network: 'eip155:8453' },
@@ -414,17 +447,40 @@ test('purchase binds the canonical order to exact x402 instructions', () => {
   })
   assert.ok('error' in stale)
   assert.equal(stale.error.code, -32010)
+
+  const substituted = handleCarpSellerRequest({
+    jsonrpc: '2.0', method: 'purchase', id: 'purchase-substituted-price',
+    params: {
+      clientOrderRef: 'buyer-order-substitution', offeringRef: 'maha:context-compression:v1', quantity: 1,
+      agreedPrice: { amount: '0.10', asset: 'USDC', network: 'eip155:8453' },
+      delivery: { mode: 'digital', destination: null },
+    },
+  })
+  assert.ok('error' in substituted)
+  assert.equal(substituted.error.code, -32010)
+  assert.deepEqual(substituted.error.data, MAHA_CARP_DIGITAL_OFFERS[0].price)
 })
 
 test('legacy purchase arrays remain compatible with base-unit quotes', () => {
-  const offer = mahaCarpSellerProfile.offers.find((candidate) => candidate.offeringRef === 'maha:deep-context-evaluation:v1')
-  assert.ok(offer && offer.directSettlement && offer.price)
-  const accepted = handleCarpSellerRequest({
-    jsonrpc: '2.0', method: 'purchase', id: `0x${'1'.repeat(64)}`,
-    params: [1, offer.offeringRef, { amount: offer.directSettlement.amountBaseUnits, asset: offer.directSettlement.assetContract, network: offer.price.network }, null, ''],
+  for (const [index, offer] of MAHA_CARP_DIGITAL_OFFERS.entries()) {
+    const accepted = handleCarpSellerRequest({
+      jsonrpc: '2.0', method: 'purchase', id: `0x${String(index + 1).repeat(64)}`,
+      params: [1, offer.offeringRef, { amount: offer.directSettlement.amountBaseUnits, asset: offer.directSettlement.assetContract, network: offer.price.network }, null, ''],
+    })
+    assert.ok('result' in accepted)
+    assert.equal((accepted as { result: { paymentInstructions: { amountBaseUnits: string } } }).result.paymentInstructions.amountBaseUnits, offer.directSettlement.amountBaseUnits)
+  }
+
+  const wrongAsset = handleCarpSellerRequest({
+    jsonrpc: '2.0', method: 'purchase', id: `0x${'4'.repeat(64)}`,
+    params: [1, MAHA_CARP_DIGITAL_OFFERS[0].offeringRef, {
+      amount: MAHA_CARP_DIGITAL_OFFERS[0].directSettlement.amountBaseUnits,
+      asset: '0x0000000000000000000000000000000000000000',
+      network: MAHA_CARP_DIGITAL_OFFERS[0].price.network,
+    }, null, ''],
   })
-  assert.ok('result' in accepted)
-  assert.equal((accepted as { result: { paymentInstructions: { amountBaseUnits: string } } }).result.paymentInstructions.amountBaseUnits, '10000')
+  assert.ok('error' in wrongAsset)
+  assert.equal(wrongAsset.error.code, -32010)
 })
 
 test('Maha DID and SAD are derived from and signed by the same secp256k1 identity', () => {
