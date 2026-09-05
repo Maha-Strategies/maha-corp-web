@@ -1,0 +1,2559 @@
+{
+  "schemaVersion": "maha-federation-property-pages/1.0",
+  "siteId": "mayon-rajan",
+  "canonicalHost": "mayonrajan.com",
+  "registryDigest": "sha256:fdec47d7878c317a6442c61b5b1d4d310d5713140e65d2fd4e488ad8d745775d",
+  "status": "local-unreleased",
+  "counts": {
+    "pages": 10,
+    "readyForOwnerIntegration": 10,
+    "blockedOnUnreadyPrerequisite": 0
+  },
+  "pages": [
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_b278a387341dd14ef01c0a2c",
+      "tranche": 1,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/hazard-zones/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+      "title": "Hazard Zones — Definition",
+      "topic": "hazard-zones",
+      "routeRole": "definition",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:hazard-zones",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:hazard-zones"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Hazard Zones, in this definition, is limited to the following inspected scope. Official hazard-map categories and map provenance. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Hazard Zones, in this definition, is limited to the following inspected scope. Official hazard-map categories and map provenance. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Term boundaries and disambiguation",
+          "kind": "role-method",
+          "paragraphs": [
+            "Use the term only for the source-backed scope stated here; keep adjacent concepts separate unless a typed relationship is explicit.",
+            "A useful definition states both inclusion and exclusion conditions so a machine answer cannot silently widen it.",
+            "Applied scope: Official hazard-map categories and map provenance."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Mayon Volcano Hazard Maps — Mayon Volcano Hazard Maps: pyroclastic flow, lahar, lava flow, and ash fall. Establishes: Official hazard-map categories and map provenance."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "A static guide never substitutes for the current PHIVOLCS alert level, bulletin, evacuation order, or local authority.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "localDefinition: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "phivolcs-hazards",
+          "title": "Mayon Volcano Hazard Maps",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "current landing page inspected 2026-09-05",
+          "sourceClass": "official-hazard-source",
+          "url": "https://www.phivolcs.dost.gov.ph/volcano-hazard/",
+          "locator": "Mayon Volcano Hazard Maps: pyroclastic flow, lahar, lava flow, and ash fall",
+          "establishes": "Official hazard-map categories and map provenance.",
+          "doesNotEstablish": "A static guide never substitutes for the current PHIVOLCS alert level, bulletin, evacuation order, or local authority.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "localDefinition",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Hazard Zones mean in this bounded context?",
+          "answer": "Hazard Zones, in this definition, is limited to the following inspected scope. Official hazard-map categories and map provenance. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources establish the definition answer?",
+          "answer": "Mayon Volcano Hazard Maps (current landing page inspected 2026-09-05), at Mayon Volcano Hazard Maps: pyroclastic flow, lahar, lava flow, and ash fall, supports official hazard-map categories and map provenance."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "A static guide never substitutes for the current PHIVOLCS alert level, bulletin, evacuation order, or local authority. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which canonical definition must be read first?",
+          "answer": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What change would require this page to be revised or withdrawn?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition#article",
+        "headline": "Hazard Zones — Definition",
+        "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://www.phivolcs.dost.gov.ph/volcano-hazard/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Hazard Zones mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Hazard Zones, in this definition, is limited to the following inspected scope. Official hazard-map categories and map provenance. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources establish the definition answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mayon Volcano Hazard Maps (current landing page inspected 2026-09-05), at Mayon Volcano Hazard Maps: pyroclastic flow, lahar, lava flow, and ash fall, supports official hazard-map categories and map provenance."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A static guide never substitutes for the current PHIVOLCS alert level, bulletin, evacuation order, or local authority. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which canonical definition must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What change would require this page to be revised or withdrawn?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "decisionManifestDigest": "sha256:56932d33572ce2111374fd0386337d2f0ec7e12bdcc84e10d49ab35669e50868",
+        "decisionDigest": "sha256:20b8e08908c9b8a64352ac5dfe5e8731aeaf8234ea8cb5940e3428286abe3d75",
+        "specificationManifestDigest": "sha256:3221465669604603d9486f0368a10e86a34845d4d4a5e2f01234f15c9ab314d1",
+        "specificationDigest": "sha256:6e2964d0c3209f622626e5f21790a7f97057ad28131990ca39ebe4d8dd50033a",
+        "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
+        "packetDigest": "sha256:c40d9875f187d20df15aab6f50af57459ba0c1db895a31e241ef2f4de6c932a4"
+      },
+      "contentDigest": "sha256:ab0f61cd5a33f484494bca3e68c0af2c7a073b133db4e264d969bfea09a51353"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_60bf213c0188bc6dfa4bf87d",
+      "tranche": 1,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/identity-and-location/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/identity-and-location/definition",
+      "title": "Identity And Location — Definition",
+      "topic": "identity-and-location",
+      "routeRole": "definition",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:identity-and-location",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:identity-and-location"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Identity And Location, in this definition, is limited to the following inspected scope. Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Identity And Location, in this definition, is limited to the following inspected scope. Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Term boundaries and disambiguation",
+          "kind": "role-method",
+          "paragraphs": [
+            "Use the term only for the source-backed scope stated here; keep adjacent concepts separate unless a typed relationship is explicit.",
+            "A useful definition states both inclusion and exclusion conditions so a machine answer cannot silently widen it.",
+            "Applied scope: Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Mayon — Volcanoes of the World — Basic Data; Geological Summary; volcano number 273030. Establishes: Mayon identity, coordinates, morphology, setting, and historical-summary context.",
+            "Mayon Volcano Hazard Maps — Mayon Volcano Hazard Maps and current GIS link. Establishes: Official Philippine hazard sources and route to current maps."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The database is periodically updated and is not the live local alert authority.",
+            "Location and identity do not establish current safety.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "canonical-family-owner-definition-first: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "localDefinition: https://mayonrajan.com/mayon-volcano/identity-and-location/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/preparedness",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/limits",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/official-sources",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "gvp-mayon",
+          "title": "Mayon — Volcanoes of the World",
+          "responsibleBody": "Smithsonian Global Volcanism Program",
+          "versionOrDate": "database v5.4.0, 7 August 2026",
+          "sourceClass": "official-hazard-source",
+          "url": "https://volcano.si.edu/volcano.cfm?vn=273030",
+          "locator": "Basic Data; Geological Summary; volcano number 273030",
+          "establishes": "Mayon identity, coordinates, morphology, setting, and historical-summary context.",
+          "doesNotEstablish": "The database is periodically updated and is not the live local alert authority.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "phivolcs-hazards",
+          "title": "Mayon Volcano Hazard Maps",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "current landing page inspected 2026-09-05",
+          "sourceClass": "official-hazard-source",
+          "url": "https://www.phivolcs.dost.gov.ph/volcano-hazard/",
+          "locator": "Mayon Volcano Hazard Maps and current GIS link",
+          "establishes": "Official Philippine hazard sources and route to current maps.",
+          "doesNotEstablish": "Location and identity do not establish current safety.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "canonical-family-owner-definition-first",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/definition",
+          "relationship": "localDefinition",
+          "candidateId": "cand_60bf213c0188bc6dfa4bf87d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/preparedness",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_014f23f2d6774766bc713860"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_57ec9c027eee2ac1385f192c"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/official-sources",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_836befa63802925d77932866"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Identity And Location mean in this bounded context?",
+          "answer": "Identity And Location, in this definition, is limited to the following inspected scope. Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources establish the definition answer?",
+          "answer": "Mayon — Volcanoes of the World (database v5.4.0, 7 August 2026), at Basic Data; Geological Summary; volcano number 273030, supports mayon identity, coordinates, morphology, setting, and historical-summary context. Mayon Volcano Hazard Maps (current landing page inspected 2026-09-05), at Mayon Volcano Hazard Maps and current GIS link, supports official Philippine hazard sources and route to current maps."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The database is periodically updated and is not the live local alert authority. Location and identity do not establish current safety. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which canonical definition must be read first?",
+          "answer": "Read the mayon-rajan definition at https://mayonrajan.com/mayon-volcano/hazard-zones/definition first. The present page applies that definition through its narrower route role."
+        },
+        {
+          "question": "What change would require this page to be revised or withdrawn?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/identity-and-location/definition#article",
+        "headline": "Identity And Location — Definition",
+        "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/definition",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://volcano.si.edu/volcano.cfm?vn=273030",
+          "https://www.phivolcs.dost.gov.ph/volcano-hazard/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Identity And Location mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Identity And Location, in this definition, is limited to the following inspected scope. Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources establish the definition answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mayon — Volcanoes of the World (database v5.4.0, 7 August 2026), at Basic Data; Geological Summary; volcano number 273030, supports mayon identity, coordinates, morphology, setting, and historical-summary context. Mayon Volcano Hazard Maps (current landing page inspected 2026-09-05), at Mayon Volcano Hazard Maps and current GIS link, supports official Philippine hazard sources and route to current maps."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The database is periodically updated and is not the live local alert authority. Location and identity do not establish current safety. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which canonical definition must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Read the mayon-rajan definition at https://mayonrajan.com/mayon-volcano/hazard-zones/definition first. The present page applies that definition through its narrower route role."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What change would require this page to be revised or withdrawn?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "decisionManifestDigest": "sha256:56932d33572ce2111374fd0386337d2f0ec7e12bdcc84e10d49ab35669e50868",
+        "decisionDigest": "sha256:07434a6a253bfd1ca409e9cb8a807b0969fe908cecdf7209914618c0b2d6b2fc",
+        "specificationManifestDigest": "sha256:3221465669604603d9486f0368a10e86a34845d4d4a5e2f01234f15c9ab314d1",
+        "specificationDigest": "sha256:33c25e31b1018ffbb68dbf9a80db754eb220c60cfe113505ba70cc42e007630c",
+        "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
+        "packetDigest": "sha256:a637dcd784d641cca8a55673aa15903194c12bdbf73355f1b34322e65de7996a"
+      },
+      "contentDigest": "sha256:3dc32c14ede1e2a4d8438ba51d555dc1ad82b102583ce5e152f601d9f18ba66a"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_57ec9c027eee2ac1385f192c",
+      "tranche": 1,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/identity-and-location/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/identity-and-location/limits",
+      "title": "Identity And Location — Limits",
+      "topic": "identity-and-location",
+      "routeRole": "limits",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:identity-and-location",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:identity-and-location"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Identity And Location, in this limits guide, is limited to the following inspected scope. Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Identity And Location, in this limits guide, is limited to the following inspected scope. Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Limits, exclusions, and non-claims",
+          "kind": "role-method",
+          "paragraphs": [
+            "State the strongest supported boundary first and route time-sensitive decisions to the current authority.",
+            "A limits page must not turn a warning into a weaker version of the unsupported claim.",
+            "Applied scope: Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Mayon — Volcanoes of the World — Basic Data; Geological Summary; volcano number 273030. Establishes: Mayon identity, coordinates, morphology, setting, and historical-summary context.",
+            "Mayon Volcano Hazard Maps — Mayon Volcano Hazard Maps and current GIS link. Establishes: Official Philippine hazard sources and route to current maps."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The database is periodically updated and is not the live local alert authority.",
+            "Location and identity do not establish current safety.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "canonical-family-owner-definition-first: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/preparedness",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/official-sources",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "gvp-mayon",
+          "title": "Mayon — Volcanoes of the World",
+          "responsibleBody": "Smithsonian Global Volcanism Program",
+          "versionOrDate": "database v5.4.0, 7 August 2026",
+          "sourceClass": "official-hazard-source",
+          "url": "https://volcano.si.edu/volcano.cfm?vn=273030",
+          "locator": "Basic Data; Geological Summary; volcano number 273030",
+          "establishes": "Mayon identity, coordinates, morphology, setting, and historical-summary context.",
+          "doesNotEstablish": "The database is periodically updated and is not the live local alert authority.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "phivolcs-hazards",
+          "title": "Mayon Volcano Hazard Maps",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "current landing page inspected 2026-09-05",
+          "sourceClass": "official-hazard-source",
+          "url": "https://www.phivolcs.dost.gov.ph/volcano-hazard/",
+          "locator": "Mayon Volcano Hazard Maps and current GIS link",
+          "establishes": "Official Philippine hazard sources and route to current maps.",
+          "doesNotEstablish": "Location and identity do not establish current safety.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "canonical-family-owner-definition-first",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_60bf213c0188bc6dfa4bf87d"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/preparedness",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_014f23f2d6774766bc713860"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/official-sources",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_836befa63802925d77932866"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Identity And Location mean in this bounded context?",
+          "answer": "Identity And Location, in this limits guide, is limited to the following inspected scope. Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources establish the limits answer?",
+          "answer": "Mayon — Volcanoes of the World (database v5.4.0, 7 August 2026), at Basic Data; Geological Summary; volcano number 273030, supports mayon identity, coordinates, morphology, setting, and historical-summary context. Mayon Volcano Hazard Maps (current landing page inspected 2026-09-05), at Mayon Volcano Hazard Maps and current GIS link, supports official Philippine hazard sources and route to current maps."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The database is periodically updated and is not the live local alert authority. Location and identity do not establish current safety. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which canonical definition must be read first?",
+          "answer": "Read the mayon-rajan definition at https://mayonrajan.com/mayon-volcano/hazard-zones/definition first. The present page applies that definition through its narrower route role."
+        },
+        {
+          "question": "What change would require this page to be revised or withdrawn?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/identity-and-location/limits#article",
+        "headline": "Identity And Location — Limits",
+        "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/limits",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://volcano.si.edu/volcano.cfm?vn=273030",
+          "https://www.phivolcs.dost.gov.ph/volcano-hazard/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Identity And Location mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Identity And Location, in this limits guide, is limited to the following inspected scope. Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources establish the limits answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mayon — Volcanoes of the World (database v5.4.0, 7 August 2026), at Basic Data; Geological Summary; volcano number 273030, supports mayon identity, coordinates, morphology, setting, and historical-summary context. Mayon Volcano Hazard Maps (current landing page inspected 2026-09-05), at Mayon Volcano Hazard Maps and current GIS link, supports official Philippine hazard sources and route to current maps."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The database is periodically updated and is not the live local alert authority. Location and identity do not establish current safety. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which canonical definition must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Read the mayon-rajan definition at https://mayonrajan.com/mayon-volcano/hazard-zones/definition first. The present page applies that definition through its narrower route role."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What change would require this page to be revised or withdrawn?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "decisionManifestDigest": "sha256:56932d33572ce2111374fd0386337d2f0ec7e12bdcc84e10d49ab35669e50868",
+        "decisionDigest": "sha256:24383bd8036438cce2a6d25830015c0414164c55fddb4cbb06e5111f7ad21301",
+        "specificationManifestDigest": "sha256:3221465669604603d9486f0368a10e86a34845d4d4a5e2f01234f15c9ab314d1",
+        "specificationDigest": "sha256:109a4fcce08808a95a2b37d36f66a40722baacfe69d7a0111be27e14e20d023b",
+        "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
+        "packetDigest": "sha256:a637dcd784d641cca8a55673aa15903194c12bdbf73355f1b34322e65de7996a"
+      },
+      "contentDigest": "sha256:784f67d2cc769df41a244c41a27d227366b94a426a38225a4f0aff02941229b5"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_836befa63802925d77932866",
+      "tranche": 1,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/identity-and-location/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/identity-and-location/official-sources",
+      "title": "Identity And Location — Official Sources",
+      "topic": "identity-and-location",
+      "routeRole": "official-sources",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:identity-and-location",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:identity-and-location"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Identity And Location, in this official-source guide, is limited to the following inspected scope. Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Identity And Location, in this official-source guide, is limited to the following inspected scope. Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Official source hierarchy and freshness",
+          "kind": "role-method",
+          "paragraphs": [
+            "Identify the operational authority and explain how to find its freshest dated statement.",
+            "This page never substitutes for a current bulletin, evacuation order, or local authority.",
+            "Applied scope: Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Mayon — Volcanoes of the World — Basic Data; Geological Summary; volcano number 273030. Establishes: Mayon identity, coordinates, morphology, setting, and historical-summary context.",
+            "Mayon Volcano Hazard Maps — Mayon Volcano Hazard Maps and current GIS link. Establishes: Official Philippine hazard sources and route to current maps."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The database is periodically updated and is not the live local alert authority.",
+            "Location and identity do not establish current safety.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "canonical-family-owner-definition-first: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/preparedness",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/limits",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "gvp-mayon",
+          "title": "Mayon — Volcanoes of the World",
+          "responsibleBody": "Smithsonian Global Volcanism Program",
+          "versionOrDate": "database v5.4.0, 7 August 2026",
+          "sourceClass": "official-hazard-source",
+          "url": "https://volcano.si.edu/volcano.cfm?vn=273030",
+          "locator": "Basic Data; Geological Summary; volcano number 273030",
+          "establishes": "Mayon identity, coordinates, morphology, setting, and historical-summary context.",
+          "doesNotEstablish": "The database is periodically updated and is not the live local alert authority.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "phivolcs-hazards",
+          "title": "Mayon Volcano Hazard Maps",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "current landing page inspected 2026-09-05",
+          "sourceClass": "official-hazard-source",
+          "url": "https://www.phivolcs.dost.gov.ph/volcano-hazard/",
+          "locator": "Mayon Volcano Hazard Maps and current GIS link",
+          "establishes": "Official Philippine hazard sources and route to current maps.",
+          "doesNotEstablish": "Location and identity do not establish current safety.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "canonical-family-owner-definition-first",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_60bf213c0188bc6dfa4bf87d"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/preparedness",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_014f23f2d6774766bc713860"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_57ec9c027eee2ac1385f192c"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Identity And Location mean in this bounded context?",
+          "answer": "Identity And Location, in this official-source guide, is limited to the following inspected scope. Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources establish the official-sources answer?",
+          "answer": "Mayon — Volcanoes of the World (database v5.4.0, 7 August 2026), at Basic Data; Geological Summary; volcano number 273030, supports mayon identity, coordinates, morphology, setting, and historical-summary context. Mayon Volcano Hazard Maps (current landing page inspected 2026-09-05), at Mayon Volcano Hazard Maps and current GIS link, supports official Philippine hazard sources and route to current maps."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The database is periodically updated and is not the live local alert authority. Location and identity do not establish current safety. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which canonical definition must be read first?",
+          "answer": "Read the mayon-rajan definition at https://mayonrajan.com/mayon-volcano/hazard-zones/definition first. The present page applies that definition through its narrower route role."
+        },
+        {
+          "question": "What change would require this page to be revised or withdrawn?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/identity-and-location/official-sources#article",
+        "headline": "Identity And Location — Official Sources",
+        "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/official-sources",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://volcano.si.edu/volcano.cfm?vn=273030",
+          "https://www.phivolcs.dost.gov.ph/volcano-hazard/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Identity And Location mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Identity And Location, in this official-source guide, is limited to the following inspected scope. Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources establish the official-sources answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mayon — Volcanoes of the World (database v5.4.0, 7 August 2026), at Basic Data; Geological Summary; volcano number 273030, supports mayon identity, coordinates, morphology, setting, and historical-summary context. Mayon Volcano Hazard Maps (current landing page inspected 2026-09-05), at Mayon Volcano Hazard Maps and current GIS link, supports official Philippine hazard sources and route to current maps."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The database is periodically updated and is not the live local alert authority. Location and identity do not establish current safety. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which canonical definition must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Read the mayon-rajan definition at https://mayonrajan.com/mayon-volcano/hazard-zones/definition first. The present page applies that definition through its narrower route role."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What change would require this page to be revised or withdrawn?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "decisionManifestDigest": "sha256:56932d33572ce2111374fd0386337d2f0ec7e12bdcc84e10d49ab35669e50868",
+        "decisionDigest": "sha256:d375e67e2fad278243c6de165e1ca553dee14d6b1485446c16c197e97858b4f5",
+        "specificationManifestDigest": "sha256:3221465669604603d9486f0368a10e86a34845d4d4a5e2f01234f15c9ab314d1",
+        "specificationDigest": "sha256:09d8b97c7ce8e354da328a91085e0a3aacf870ee1ce27379a5085afb4769d475",
+        "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
+        "packetDigest": "sha256:a637dcd784d641cca8a55673aa15903194c12bdbf73355f1b34322e65de7996a"
+      },
+      "contentDigest": "sha256:062a9ced344b22625ae5528a072d89dc87ca12768df690d7ad23006e60c0357b"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_014f23f2d6774766bc713860",
+      "tranche": 1,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/identity-and-location/preparedness",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/identity-and-location/preparedness",
+      "title": "Identity And Location — Preparedness",
+      "topic": "identity-and-location",
+      "routeRole": "preparedness",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:identity-and-location",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:identity-and-location"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Identity And Location, in this preparedness guide, is limited to the following inspected scope. Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Identity And Location, in this preparedness guide, is limited to the following inspected scope. Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Preparedness actions and current-authority handoff",
+          "kind": "role-method",
+          "paragraphs": [
+            "Separate durable preparedness steps from current hazard conditions and operational orders.",
+            "Preparedness education never substitutes for official, current emergency instructions.",
+            "Applied scope: Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Mayon — Volcanoes of the World — Basic Data; Geological Summary; volcano number 273030. Establishes: Mayon identity, coordinates, morphology, setting, and historical-summary context.",
+            "Mayon Volcano Hazard Maps — Mayon Volcano Hazard Maps and current GIS link. Establishes: Official Philippine hazard sources and route to current maps."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The database is periodically updated and is not the live local alert authority.",
+            "Location and identity do not establish current safety.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "canonical-family-owner-definition-first: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/limits",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/official-sources",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "gvp-mayon",
+          "title": "Mayon — Volcanoes of the World",
+          "responsibleBody": "Smithsonian Global Volcanism Program",
+          "versionOrDate": "database v5.4.0, 7 August 2026",
+          "sourceClass": "official-hazard-source",
+          "url": "https://volcano.si.edu/volcano.cfm?vn=273030",
+          "locator": "Basic Data; Geological Summary; volcano number 273030",
+          "establishes": "Mayon identity, coordinates, morphology, setting, and historical-summary context.",
+          "doesNotEstablish": "The database is periodically updated and is not the live local alert authority.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "phivolcs-hazards",
+          "title": "Mayon Volcano Hazard Maps",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "current landing page inspected 2026-09-05",
+          "sourceClass": "official-hazard-source",
+          "url": "https://www.phivolcs.dost.gov.ph/volcano-hazard/",
+          "locator": "Mayon Volcano Hazard Maps and current GIS link",
+          "establishes": "Official Philippine hazard sources and route to current maps.",
+          "doesNotEstablish": "Location and identity do not establish current safety.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "canonical-family-owner-definition-first",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_60bf213c0188bc6dfa4bf87d"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_57ec9c027eee2ac1385f192c"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/official-sources",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_836befa63802925d77932866"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Identity And Location mean in this bounded context?",
+          "answer": "Identity And Location, in this preparedness guide, is limited to the following inspected scope. Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources establish the preparedness answer?",
+          "answer": "Mayon — Volcanoes of the World (database v5.4.0, 7 August 2026), at Basic Data; Geological Summary; volcano number 273030, supports mayon identity, coordinates, morphology, setting, and historical-summary context. Mayon Volcano Hazard Maps (current landing page inspected 2026-09-05), at Mayon Volcano Hazard Maps and current GIS link, supports official Philippine hazard sources and route to current maps."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The database is periodically updated and is not the live local alert authority. Location and identity do not establish current safety. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which canonical definition must be read first?",
+          "answer": "Read the mayon-rajan definition at https://mayonrajan.com/mayon-volcano/hazard-zones/definition first. The present page applies that definition through its narrower route role."
+        },
+        {
+          "question": "What change would require this page to be revised or withdrawn?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/identity-and-location/preparedness#article",
+        "headline": "Identity And Location — Preparedness",
+        "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/preparedness",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://volcano.si.edu/volcano.cfm?vn=273030",
+          "https://www.phivolcs.dost.gov.ph/volcano-hazard/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Identity And Location mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Identity And Location, in this preparedness guide, is limited to the following inspected scope. Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources establish the preparedness answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mayon — Volcanoes of the World (database v5.4.0, 7 August 2026), at Basic Data; Geological Summary; volcano number 273030, supports mayon identity, coordinates, morphology, setting, and historical-summary context. Mayon Volcano Hazard Maps (current landing page inspected 2026-09-05), at Mayon Volcano Hazard Maps and current GIS link, supports official Philippine hazard sources and route to current maps."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The database is periodically updated and is not the live local alert authority. Location and identity do not establish current safety. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which canonical definition must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Read the mayon-rajan definition at https://mayonrajan.com/mayon-volcano/hazard-zones/definition first. The present page applies that definition through its narrower route role."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What change would require this page to be revised or withdrawn?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "decisionManifestDigest": "sha256:56932d33572ce2111374fd0386337d2f0ec7e12bdcc84e10d49ab35669e50868",
+        "decisionDigest": "sha256:e7814d8c9b9d725c23c8f107f7c2f31d183229368a0170a4d884d0d5b7914450",
+        "specificationManifestDigest": "sha256:3221465669604603d9486f0368a10e86a34845d4d4a5e2f01234f15c9ab314d1",
+        "specificationDigest": "sha256:8c821378c7836eb62cd65d4443fffe839164dd11af43e4636aa82128c56da2fc",
+        "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
+        "packetDigest": "sha256:a637dcd784d641cca8a55673aa15903194c12bdbf73355f1b34322e65de7996a"
+      },
+      "contentDigest": "sha256:87caba13b278b905a4f814793d76d7cbd82733ce86b05451f0dd2cdba2eb5581"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_2ff0e71aa26465112036daaa",
+      "tranche": 2,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/infrastructure-resilience/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/definition",
+      "title": "Infrastructure Resilience — Definition",
+      "topic": "infrastructure-resilience",
+      "routeRole": "definition",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:infrastructure-resilience",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:infrastructure-resilience"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Infrastructure Resilience, in this definition, is limited to the following inspected scope. Planning and governance principles for infrastructure resilience and continuity. Meaning and operational role of official Mayon alert levels. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Infrastructure Resilience, in this definition, is limited to the following inspected scope. Planning and governance principles for infrastructure resilience and continuity. Meaning and operational role of official Mayon alert levels. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Term boundaries and disambiguation",
+          "kind": "role-method",
+          "paragraphs": [
+            "Use the term only for the source-backed scope stated here; keep adjacent concepts separate unless a typed relationship is explicit.",
+            "A useful definition states both inclusion and exclusion conditions so a machine answer cannot silently widen it.",
+            "Applied scope: Planning and governance principles for infrastructure resilience and continuity. Meaning and operational role of official Mayon alert levels."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Principles for Resilient Infrastructure — Principles 1–6 and continuity of critical services. Establishes: Planning and governance principles for infrastructure resilience and continuity.",
+            "Volcano Alert Levels — Mayon Volcano alert-level table and linked bulletin hierarchy. Establishes: Meaning and operational role of official Mayon alert levels."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The principles are not a site-specific engineering assessment, building code, hazard map, or evacuation instruction.",
+            "An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "canonical-family-owner-definition-first: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "definition: https://mayonrajan.com/mayon-volcano/infrastructure-resilience/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/infrastructure-resilience/limits",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/infrastructure-resilience/official-sources",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "undrr-resilient-infrastructure",
+          "title": "Principles for Resilient Infrastructure",
+          "responsibleBody": "UNDRR",
+          "versionOrDate": "2022",
+          "sourceClass": "government-guidance",
+          "url": "https://www.undrr.org/publication/principles-resilient-infrastructure",
+          "locator": "Principles 1–6 and continuity of critical services",
+          "establishes": "Planning and governance principles for infrastructure resilience and continuity.",
+          "doesNotEstablish": "The principles are not a site-specific engineering assessment, building code, hazard map, or evacuation instruction.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "phivolcs-alert-levels",
+          "title": "Volcano Alert Levels",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "current official page inspected 2026-09-05",
+          "sourceClass": "official-hazard-source",
+          "url": "https://www2.phivolcs.dost.gov.ph/volcano/volcano-alert-levels/",
+          "locator": "Mayon Volcano alert-level table and linked bulletin hierarchy",
+          "establishes": "Meaning and operational role of official Mayon alert levels.",
+          "doesNotEstablish": "An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "canonical-family-owner-definition-first",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/definition",
+          "relationship": "definition",
+          "candidateId": null,
+          "availability": "observed-existing"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_cc5e3966d5ae31e5565245bb"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/official-sources",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_f189698720a3e4d0dfd92d33"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Infrastructure Resilience mean in this bounded context?",
+          "answer": "Infrastructure Resilience, in this definition, is limited to the following inspected scope. Planning and governance principles for infrastructure resilience and continuity. Meaning and operational role of official Mayon alert levels. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this definition answer?",
+          "answer": "Principles for Resilient Infrastructure (2022), at Principles 1–6 and continuity of critical services, supports planning and governance principles for infrastructure resilience and continuity. Volcano Alert Levels (current official page inspected 2026-09-05), at Mayon Volcano alert-level table and linked bulletin hierarchy, supports meaning and operational role of official Mayon alert levels."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The principles are not a site-specific engineering assessment, building code, hazard map, or evacuation instruction. An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "Read the mayon-rajan definition at https://mayonrajan.com/mayon-volcano/hazard-zones/definition first. The present page applies that definition through its narrower route role."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/definition#article",
+        "headline": "Infrastructure Resilience — Definition",
+        "url": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/definition",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://www.undrr.org/publication/principles-resilient-infrastructure",
+          "https://www2.phivolcs.dost.gov.ph/volcano/volcano-alert-levels/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Infrastructure Resilience mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Infrastructure Resilience, in this definition, is limited to the following inspected scope. Planning and governance principles for infrastructure resilience and continuity. Meaning and operational role of official Mayon alert levels. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this definition answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Principles for Resilient Infrastructure (2022), at Principles 1–6 and continuity of critical services, supports planning and governance principles for infrastructure resilience and continuity. Volcano Alert Levels (current official page inspected 2026-09-05), at Mayon Volcano alert-level table and linked bulletin hierarchy, supports meaning and operational role of official Mayon alert levels."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The principles are not a site-specific engineering assessment, building code, hazard map, or evacuation instruction. An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Read the mayon-rajan definition at https://mayonrajan.com/mayon-volcano/hazard-zones/definition first. The present page applies that definition through its narrower route role."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
+        "decisionDigest": "sha256:6377cc973ded67d101d0fa787e94cebf19f3ae23b2552ab00c98e489c048c9fe",
+        "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
+        "specificationDigest": "sha256:ce03264b205e19aadfc43c42ea0987515e313d038c28765696862d4d5894bc77",
+        "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
+        "packetDigest": "sha256:db256a7509c7252cc98b7da5e5ae87d3ae16edda6638b60bee4ddb72badb39de"
+      },
+      "contentDigest": "sha256:d80ff554b18c6ff3dd8f2133eb3570a7da3f673f5386e1f8389517938d0e1c84"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_cc5e3966d5ae31e5565245bb",
+      "tranche": 2,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/infrastructure-resilience/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/limits",
+      "title": "Infrastructure Resilience — Limits",
+      "topic": "infrastructure-resilience",
+      "routeRole": "limits",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:infrastructure-resilience",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:infrastructure-resilience"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Infrastructure Resilience, in this limits guide, is limited to the following inspected scope. Planning and governance principles for infrastructure resilience and continuity. Meaning and operational role of official Mayon alert levels. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Infrastructure Resilience, in this limits guide, is limited to the following inspected scope. Planning and governance principles for infrastructure resilience and continuity. Meaning and operational role of official Mayon alert levels. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Limits, exclusions, and current-authority handoff",
+          "kind": "role-method",
+          "paragraphs": [
+            "State the strongest supported boundary first and route time-sensitive decisions to the current authority.",
+            "A limits page must not turn a warning into a weaker version of the unsupported claim.",
+            "Applied scope: Planning and governance principles for infrastructure resilience and continuity. Meaning and operational role of official Mayon alert levels."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Principles for Resilient Infrastructure — Principles 1–6 and continuity of critical services. Establishes: Planning and governance principles for infrastructure resilience and continuity.",
+            "Volcano Alert Levels — Mayon Volcano alert-level table and linked bulletin hierarchy. Establishes: Meaning and operational role of official Mayon alert levels."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The principles are not a site-specific engineering assessment, building code, hazard map, or evacuation instruction.",
+            "An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "canonical-family-owner-definition-first: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/infrastructure-resilience/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/infrastructure-resilience/official-sources",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "undrr-resilient-infrastructure",
+          "title": "Principles for Resilient Infrastructure",
+          "responsibleBody": "UNDRR",
+          "versionOrDate": "2022",
+          "sourceClass": "government-guidance",
+          "url": "https://www.undrr.org/publication/principles-resilient-infrastructure",
+          "locator": "Principles 1–6 and continuity of critical services",
+          "establishes": "Planning and governance principles for infrastructure resilience and continuity.",
+          "doesNotEstablish": "The principles are not a site-specific engineering assessment, building code, hazard map, or evacuation instruction.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "phivolcs-alert-levels",
+          "title": "Volcano Alert Levels",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "current official page inspected 2026-09-05",
+          "sourceClass": "official-hazard-source",
+          "url": "https://www2.phivolcs.dost.gov.ph/volcano/volcano-alert-levels/",
+          "locator": "Mayon Volcano alert-level table and linked bulletin hierarchy",
+          "establishes": "Meaning and operational role of official Mayon alert levels.",
+          "doesNotEstablish": "An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "canonical-family-owner-definition-first",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_2ff0e71aa26465112036daaa"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/official-sources",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_f189698720a3e4d0dfd92d33"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Infrastructure Resilience mean in this bounded context?",
+          "answer": "Infrastructure Resilience, in this limits guide, is limited to the following inspected scope. Planning and governance principles for infrastructure resilience and continuity. Meaning and operational role of official Mayon alert levels. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this limits answer?",
+          "answer": "Principles for Resilient Infrastructure (2022), at Principles 1–6 and continuity of critical services, supports planning and governance principles for infrastructure resilience and continuity. Volcano Alert Levels (current official page inspected 2026-09-05), at Mayon Volcano alert-level table and linked bulletin hierarchy, supports meaning and operational role of official Mayon alert levels."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The principles are not a site-specific engineering assessment, building code, hazard map, or evacuation instruction. An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "Read the mayon-rajan definition at https://mayonrajan.com/mayon-volcano/hazard-zones/definition first. The present page applies that definition through its narrower route role."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/limits#article",
+        "headline": "Infrastructure Resilience — Limits",
+        "url": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/limits",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://www.undrr.org/publication/principles-resilient-infrastructure",
+          "https://www2.phivolcs.dost.gov.ph/volcano/volcano-alert-levels/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Infrastructure Resilience mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Infrastructure Resilience, in this limits guide, is limited to the following inspected scope. Planning and governance principles for infrastructure resilience and continuity. Meaning and operational role of official Mayon alert levels. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this limits answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Principles for Resilient Infrastructure (2022), at Principles 1–6 and continuity of critical services, supports planning and governance principles for infrastructure resilience and continuity. Volcano Alert Levels (current official page inspected 2026-09-05), at Mayon Volcano alert-level table and linked bulletin hierarchy, supports meaning and operational role of official Mayon alert levels."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The principles are not a site-specific engineering assessment, building code, hazard map, or evacuation instruction. An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Read the mayon-rajan definition at https://mayonrajan.com/mayon-volcano/hazard-zones/definition first. The present page applies that definition through its narrower route role."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
+        "decisionDigest": "sha256:b172af781abc07576131247a66120aa5c055f215e749fc55a8eccfc0d261543e",
+        "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
+        "specificationDigest": "sha256:ca29d4ca5dbd4f462d421605564df96804e3f60843b64e13cccfc9ee4bc183dd",
+        "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
+        "packetDigest": "sha256:db256a7509c7252cc98b7da5e5ae87d3ae16edda6638b60bee4ddb72badb39de"
+      },
+      "contentDigest": "sha256:236fbd67bb8467cf290826d94ee4ec1a3cb619250e34af768232325503fa2d29"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_f189698720a3e4d0dfd92d33",
+      "tranche": 2,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/infrastructure-resilience/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/official-sources",
+      "title": "Infrastructure Resilience — Official Sources",
+      "topic": "infrastructure-resilience",
+      "routeRole": "official-sources",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:infrastructure-resilience",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:infrastructure-resilience"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Infrastructure Resilience, in this official-source guide, is limited to the following inspected scope. Planning and governance principles for infrastructure resilience and continuity. Meaning and operational role of official Mayon alert levels. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Infrastructure Resilience, in this official-source guide, is limited to the following inspected scope. Planning and governance principles for infrastructure resilience and continuity. Meaning and operational role of official Mayon alert levels. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Official source hierarchy and freshness",
+          "kind": "role-method",
+          "paragraphs": [
+            "Identify the operational authority and explain how to find its freshest dated statement.",
+            "This page never substitutes for a current bulletin, evacuation order, or local authority.",
+            "Applied scope: Planning and governance principles for infrastructure resilience and continuity. Meaning and operational role of official Mayon alert levels."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Principles for Resilient Infrastructure — Principles 1–6 and continuity of critical services. Establishes: Planning and governance principles for infrastructure resilience and continuity.",
+            "Volcano Alert Levels — Mayon Volcano alert-level table and linked bulletin hierarchy. Establishes: Meaning and operational role of official Mayon alert levels."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The principles are not a site-specific engineering assessment, building code, hazard map, or evacuation instruction.",
+            "An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "canonical-family-owner-definition-first: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/infrastructure-resilience/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/infrastructure-resilience/limits",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "undrr-resilient-infrastructure",
+          "title": "Principles for Resilient Infrastructure",
+          "responsibleBody": "UNDRR",
+          "versionOrDate": "2022",
+          "sourceClass": "government-guidance",
+          "url": "https://www.undrr.org/publication/principles-resilient-infrastructure",
+          "locator": "Principles 1–6 and continuity of critical services",
+          "establishes": "Planning and governance principles for infrastructure resilience and continuity.",
+          "doesNotEstablish": "The principles are not a site-specific engineering assessment, building code, hazard map, or evacuation instruction.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "phivolcs-alert-levels",
+          "title": "Volcano Alert Levels",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "current official page inspected 2026-09-05",
+          "sourceClass": "official-hazard-source",
+          "url": "https://www2.phivolcs.dost.gov.ph/volcano/volcano-alert-levels/",
+          "locator": "Mayon Volcano alert-level table and linked bulletin hierarchy",
+          "establishes": "Meaning and operational role of official Mayon alert levels.",
+          "doesNotEstablish": "An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "canonical-family-owner-definition-first",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_2ff0e71aa26465112036daaa"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_cc5e3966d5ae31e5565245bb"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Infrastructure Resilience mean in this bounded context?",
+          "answer": "Infrastructure Resilience, in this official-source guide, is limited to the following inspected scope. Planning and governance principles for infrastructure resilience and continuity. Meaning and operational role of official Mayon alert levels. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this official-sources answer?",
+          "answer": "Principles for Resilient Infrastructure (2022), at Principles 1–6 and continuity of critical services, supports planning and governance principles for infrastructure resilience and continuity. Volcano Alert Levels (current official page inspected 2026-09-05), at Mayon Volcano alert-level table and linked bulletin hierarchy, supports meaning and operational role of official Mayon alert levels."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The principles are not a site-specific engineering assessment, building code, hazard map, or evacuation instruction. An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "Read the mayon-rajan definition at https://mayonrajan.com/mayon-volcano/hazard-zones/definition first. The present page applies that definition through its narrower route role."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/official-sources#article",
+        "headline": "Infrastructure Resilience — Official Sources",
+        "url": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/official-sources",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://www.undrr.org/publication/principles-resilient-infrastructure",
+          "https://www2.phivolcs.dost.gov.ph/volcano/volcano-alert-levels/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Infrastructure Resilience mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Infrastructure Resilience, in this official-source guide, is limited to the following inspected scope. Planning and governance principles for infrastructure resilience and continuity. Meaning and operational role of official Mayon alert levels. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this official-sources answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Principles for Resilient Infrastructure (2022), at Principles 1–6 and continuity of critical services, supports planning and governance principles for infrastructure resilience and continuity. Volcano Alert Levels (current official page inspected 2026-09-05), at Mayon Volcano alert-level table and linked bulletin hierarchy, supports meaning and operational role of official Mayon alert levels."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The principles are not a site-specific engineering assessment, building code, hazard map, or evacuation instruction. An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Read the mayon-rajan definition at https://mayonrajan.com/mayon-volcano/hazard-zones/definition first. The present page applies that definition through its narrower route role."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
+        "decisionDigest": "sha256:0cccbff87e2e0b35a3115f00452bcb74be499f1db56b5efc00700bb3690b9eba",
+        "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
+        "specificationDigest": "sha256:c478213a2db81e431cbdfdea04b03243734a938d11e778aab753bc794b03797e",
+        "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
+        "packetDigest": "sha256:db256a7509c7252cc98b7da5e5ae87d3ae16edda6638b60bee4ddb72badb39de"
+      },
+      "contentDigest": "sha256:2ace3c4e92c195188f9716d5d840958c2947f2d6438359ae35bc01d9daa346e6"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_5eedf7642252330cb10edc4b",
+      "tranche": 2,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/official-alerts/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/official-alerts/definition",
+      "title": "Official Alerts — Definition",
+      "topic": "official-alerts",
+      "routeRole": "definition",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:official-alerts",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:official-alerts"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Official Alerts, in this definition, is limited to the following inspected scope. Meaning and operational role of official Mayon alert levels. Primary route to dated official Mayon volcano bulletins. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Official Alerts, in this definition, is limited to the following inspected scope. Meaning and operational role of official Mayon alert levels. Primary route to dated official Mayon volcano bulletins. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Term boundaries and disambiguation",
+          "kind": "role-method",
+          "paragraphs": [
+            "Use the term only for the source-backed scope stated here; keep adjacent concepts separate unless a typed relationship is explicit.",
+            "A useful definition states both inclusion and exclusion conditions so a machine answer cannot silently widen it.",
+            "Applied scope: Meaning and operational role of official Mayon alert levels. Primary route to dated official Mayon volcano bulletins."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Volcano Alert Levels — Mayon Volcano alert-level table and linked bulletin hierarchy. Establishes: Meaning and operational role of official Mayon alert levels.",
+            "Mayon Volcano Bulletin Archive — Mayon bulletin list, issue dates, and linked bulletin records. Establishes: Primary route to dated official Mayon volcano bulletins."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control.",
+            "An archive entry can become stale immediately; the latest official bulletin and local government instructions control.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "canonical-family-owner-definition-first: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "definition: https://mayonrajan.com/mayon-volcano/official-alerts/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/limits",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "phivolcs-alert-levels",
+          "title": "Volcano Alert Levels",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "current official page inspected 2026-09-05",
+          "sourceClass": "official-hazard-source",
+          "url": "https://www2.phivolcs.dost.gov.ph/volcano/volcano-alert-levels/",
+          "locator": "Mayon Volcano alert-level table and linked bulletin hierarchy",
+          "establishes": "Meaning and operational role of official Mayon alert levels.",
+          "doesNotEstablish": "An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "phivolcs-mayon-bulletins",
+          "title": "Mayon Volcano Bulletin Archive",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "current archive inspected 2026-09-05",
+          "sourceClass": "official-hazard-source",
+          "url": "https://wovodat.phivolcs.dost.gov.ph/bulletin/list-of-bulletin?edate=&sdate=&type=&vdId=574",
+          "locator": "Mayon bulletin list, issue dates, and linked bulletin records",
+          "establishes": "Primary route to dated official Mayon volcano bulletins.",
+          "doesNotEstablish": "An archive entry can become stale immediately; the latest official bulletin and local government instructions control.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "canonical-family-owner-definition-first",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/official-alerts/definition",
+          "relationship": "definition",
+          "candidateId": null,
+          "availability": "observed-existing"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/official-alerts/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_f8e337ad1934c31c65dcea4d"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Official Alerts mean in this bounded context?",
+          "answer": "Official Alerts, in this definition, is limited to the following inspected scope. Meaning and operational role of official Mayon alert levels. Primary route to dated official Mayon volcano bulletins. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this definition answer?",
+          "answer": "Volcano Alert Levels (current official page inspected 2026-09-05), at Mayon Volcano alert-level table and linked bulletin hierarchy, supports meaning and operational role of official Mayon alert levels. Mayon Volcano Bulletin Archive (current archive inspected 2026-09-05), at Mayon bulletin list, issue dates, and linked bulletin records, supports primary route to dated official Mayon volcano bulletins."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control. An archive entry can become stale immediately; the latest official bulletin and local government instructions control. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "Read the mayon-rajan definition at https://mayonrajan.com/mayon-volcano/hazard-zones/definition first. The present page applies that definition through its narrower route role."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/official-alerts/definition#article",
+        "headline": "Official Alerts — Definition",
+        "url": "https://mayonrajan.com/mayon-volcano/official-alerts/definition",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://www2.phivolcs.dost.gov.ph/volcano/volcano-alert-levels/",
+          "https://wovodat.phivolcs.dost.gov.ph/bulletin/list-of-bulletin?edate=&sdate=&type=&vdId=574"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Official Alerts mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Official Alerts, in this definition, is limited to the following inspected scope. Meaning and operational role of official Mayon alert levels. Primary route to dated official Mayon volcano bulletins. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this definition answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Volcano Alert Levels (current official page inspected 2026-09-05), at Mayon Volcano alert-level table and linked bulletin hierarchy, supports meaning and operational role of official Mayon alert levels. Mayon Volcano Bulletin Archive (current archive inspected 2026-09-05), at Mayon bulletin list, issue dates, and linked bulletin records, supports primary route to dated official Mayon volcano bulletins."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control. An archive entry can become stale immediately; the latest official bulletin and local government instructions control. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Read the mayon-rajan definition at https://mayonrajan.com/mayon-volcano/hazard-zones/definition first. The present page applies that definition through its narrower route role."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
+        "decisionDigest": "sha256:8c63ebb63aada77e63b1f1d6a4d8e464b90d49bd0a6230366d16d1d6dacb3eed",
+        "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
+        "specificationDigest": "sha256:bbd71ef654447fbe69b39160cc429576bd0335a25eac7b2812f05ae600b8ced8",
+        "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
+        "packetDigest": "sha256:464ceaaa3dc21933f9e4232e91ea9b3dd0801060aea1edc85646383f3c37d587"
+      },
+      "contentDigest": "sha256:2e9ef7ab57f43597332a03f0cce5f4d05af87bcbd19f0124146f52e98f0bc84a"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_f8e337ad1934c31c65dcea4d",
+      "tranche": 2,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/official-alerts/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/official-alerts/limits",
+      "title": "Official Alerts — Limits",
+      "topic": "official-alerts",
+      "routeRole": "limits",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:official-alerts",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:official-alerts"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Official Alerts, in this limits guide, is limited to the following inspected scope. Meaning and operational role of official Mayon alert levels. Primary route to dated official Mayon volcano bulletins. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Official Alerts, in this limits guide, is limited to the following inspected scope. Meaning and operational role of official Mayon alert levels. Primary route to dated official Mayon volcano bulletins. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Limits, exclusions, and current-authority handoff",
+          "kind": "role-method",
+          "paragraphs": [
+            "State the strongest supported boundary first and route time-sensitive decisions to the current authority.",
+            "A limits page must not turn a warning into a weaker version of the unsupported claim.",
+            "Applied scope: Meaning and operational role of official Mayon alert levels. Primary route to dated official Mayon volcano bulletins."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Volcano Alert Levels — Mayon Volcano alert-level table and linked bulletin hierarchy. Establishes: Meaning and operational role of official Mayon alert levels.",
+            "Mayon Volcano Bulletin Archive — Mayon bulletin list, issue dates, and linked bulletin records. Establishes: Primary route to dated official Mayon volcano bulletins."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control.",
+            "An archive entry can become stale immediately; the latest official bulletin and local government instructions control.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "canonical-family-owner-definition-first: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/definition",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "phivolcs-alert-levels",
+          "title": "Volcano Alert Levels",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "current official page inspected 2026-09-05",
+          "sourceClass": "official-hazard-source",
+          "url": "https://www2.phivolcs.dost.gov.ph/volcano/volcano-alert-levels/",
+          "locator": "Mayon Volcano alert-level table and linked bulletin hierarchy",
+          "establishes": "Meaning and operational role of official Mayon alert levels.",
+          "doesNotEstablish": "An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "phivolcs-mayon-bulletins",
+          "title": "Mayon Volcano Bulletin Archive",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "current archive inspected 2026-09-05",
+          "sourceClass": "official-hazard-source",
+          "url": "https://wovodat.phivolcs.dost.gov.ph/bulletin/list-of-bulletin?edate=&sdate=&type=&vdId=574",
+          "locator": "Mayon bulletin list, issue dates, and linked bulletin records",
+          "establishes": "Primary route to dated official Mayon volcano bulletins.",
+          "doesNotEstablish": "An archive entry can become stale immediately; the latest official bulletin and local government instructions control.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "canonical-family-owner-definition-first",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/official-alerts/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_5eedf7642252330cb10edc4b"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Official Alerts mean in this bounded context?",
+          "answer": "Official Alerts, in this limits guide, is limited to the following inspected scope. Meaning and operational role of official Mayon alert levels. Primary route to dated official Mayon volcano bulletins. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this limits answer?",
+          "answer": "Volcano Alert Levels (current official page inspected 2026-09-05), at Mayon Volcano alert-level table and linked bulletin hierarchy, supports meaning and operational role of official Mayon alert levels. Mayon Volcano Bulletin Archive (current archive inspected 2026-09-05), at Mayon bulletin list, issue dates, and linked bulletin records, supports primary route to dated official Mayon volcano bulletins."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control. An archive entry can become stale immediately; the latest official bulletin and local government instructions control. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "Read the mayon-rajan definition at https://mayonrajan.com/mayon-volcano/hazard-zones/definition first. The present page applies that definition through its narrower route role."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/official-alerts/limits#article",
+        "headline": "Official Alerts — Limits",
+        "url": "https://mayonrajan.com/mayon-volcano/official-alerts/limits",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://www2.phivolcs.dost.gov.ph/volcano/volcano-alert-levels/",
+          "https://wovodat.phivolcs.dost.gov.ph/bulletin/list-of-bulletin?edate=&sdate=&type=&vdId=574"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Official Alerts mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Official Alerts, in this limits guide, is limited to the following inspected scope. Meaning and operational role of official Mayon alert levels. Primary route to dated official Mayon volcano bulletins. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this limits answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Volcano Alert Levels (current official page inspected 2026-09-05), at Mayon Volcano alert-level table and linked bulletin hierarchy, supports meaning and operational role of official Mayon alert levels. Mayon Volcano Bulletin Archive (current archive inspected 2026-09-05), at Mayon bulletin list, issue dates, and linked bulletin records, supports primary route to dated official Mayon volcano bulletins."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control. An archive entry can become stale immediately; the latest official bulletin and local government instructions control. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Read the mayon-rajan definition at https://mayonrajan.com/mayon-volcano/hazard-zones/definition first. The present page applies that definition through its narrower route role."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
+        "decisionDigest": "sha256:9cdf562a6a6b8de1027fe583e646fa2e8242c7fd8de78bef6101e31e5c5111db",
+        "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
+        "specificationDigest": "sha256:9693466506e0eb1d967d4730f39d2c4d434f805b00b8487a87f72850365ac4c6",
+        "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
+        "packetDigest": "sha256:464ceaaa3dc21933f9e4232e91ea9b3dd0801060aea1edc85646383f3c37d587"
+      },
+      "contentDigest": "sha256:3b6a09b9b89601410bac367ceaba16ac64f952c6b41eee0ee77f33a9a3a4a1bd"
+    }
+  ],
+  "provenanceDigest": "sha256:b68f800dc665618a3e206b74958a5b4751721da1a8a670c3c2fcd2d5f6ce9e99"
+}

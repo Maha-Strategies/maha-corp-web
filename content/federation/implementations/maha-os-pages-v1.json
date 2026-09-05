@@ -1,0 +1,2821 @@
+{
+  "schemaVersion": "maha-federation-property-pages/1.0",
+  "siteId": "maha-os",
+  "canonicalHost": "www.maha-os.com",
+  "registryDigest": "sha256:fdec47d7878c317a6442c61b5b1d4d310d5713140e65d2fd4e488ad8d745775d",
+  "status": "local-unreleased",
+  "counts": {
+    "pages": 11,
+    "readyForOwnerIntegration": 0,
+    "blockedOnUnreadyPrerequisite": 11
+  },
+  "pages": [
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_f2e452a99e390ddae8b1001f",
+      "tranche": 2,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/device-identity/definition",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition",
+      "title": "Device Identity — Definition",
+      "topic": "device-identity",
+      "routeRole": "definition",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:device-identity",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:device-identity"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Device Identity, in this definition, is limited to the following inspected scope. Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Device Identity, in this definition, is limited to the following inspected scope. Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Term boundaries and disambiguation",
+          "kind": "role-method",
+          "paragraphs": [
+            "Use the term only for the source-backed scope stated here; keep adjacent concepts separate unless a typed relationship is explicit.",
+            "A useful definition states both inclusion and exclusion conditions so a machine answer cannot silently widen it.",
+            "Applied scope: Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "IoT Device Cybersecurity Capability Core Baseline — Section 2 and Table 1, Device Identification. Establishes: Logical and physical identification of an IoT device for cybersecurity management.",
+            "Agent client credential authorization — credential fingerprint, client binding, status, and authorization checks. Establishes: Current Maha client-credential identity and authorization behavior."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The baseline is a manufacturer-oriented IoT starting point, not universal device identity or proof that a device has not been substituted.",
+            "Repository behavior is implementation evidence, not an independent security certification.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "definition: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/operator-guide",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-ir-8259a",
+          "title": "IoT Device Cybersecurity Capability Core Baseline",
+          "responsibleBody": "NIST",
+          "versionOrDate": "NISTIR 8259A, May 2020",
+          "sourceClass": "government-guidance",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ir/2020/NIST.IR.8259a.pdf",
+          "locator": "Section 2 and Table 1, Device Identification",
+          "establishes": "Logical and physical identification of an IoT device for cybersecurity management.",
+          "doesNotEstablish": "The baseline is a manufacturer-oriented IoT starting point, not universal device identity or proof that a device has not been substituted.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "local-agent-credentials",
+          "title": "Agent client credential authorization",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source inspected 2026-09-05",
+          "sourceClass": "local-implementation",
+          "url": null,
+          "locator": "credential fingerprint, client binding, status, and authorization checks",
+          "establishes": "Current Maha client-credential identity and authorization behavior.",
+          "doesNotEstablish": "Repository behavior is implementation evidence, not an independent security certification.",
+          "rightsBasis": "Maha-controlled repository material; retain only file identity, symbol locator, and content fingerprint. No credential or runtime value is included.",
+          "inspectionDepth": "code-symbol",
+          "contentFingerprint": "sha256:15a41eeb0d4ed74d9134e6982ce367be72888d86636107ce8a31b8bd08dacf7f"
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition",
+          "relationship": "definition",
+          "candidateId": null,
+          "availability": "observed-existing"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_9f41b4ed6746ae6e048f417f"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Device Identity mean in this bounded context?",
+          "answer": "Device Identity, in this definition, is limited to the following inspected scope. Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this definition answer?",
+          "answer": "IoT Device Cybersecurity Capability Core Baseline (NISTIR 8259A, May 2020), at Section 2 and Table 1, Device Identification, supports logical and physical identification of an IoT device for cybersecurity management. Agent client credential authorization (repository source inspected 2026-09-05), at credential fingerprint, client binding, status, and authorization checks, supports current Maha client-credential identity and authorization behavior."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The baseline is a manufacturer-oriented IoT starting point, not universal device identity or proof that a device has not been substituted. Repository behavior is implementation evidence, not an independent security certification. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition first. The present page applies that definition through its narrower route role."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition#article",
+        "headline": "Device Identity — Definition",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://nvlpubs.nist.gov/nistpubs/ir/2020/NIST.IR.8259a.pdf"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Device Identity mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Device Identity, in this definition, is limited to the following inspected scope. Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this definition answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "IoT Device Cybersecurity Capability Core Baseline (NISTIR 8259A, May 2020), at Section 2 and Table 1, Device Identification, supports logical and physical identification of an IoT device for cybersecurity management. Agent client credential authorization (repository source inspected 2026-09-05), at credential fingerprint, client binding, status, and authorization checks, supports current Maha client-credential identity and authorization behavior."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The baseline is a manufacturer-oriented IoT starting point, not universal device identity or proof that a device has not been substituted. Repository behavior is implementation evidence, not an independent security certification. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition first. The present page applies that definition through its narrower route role."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "blocked-on-unready-prerequisite",
+        "blockedDependencies": [
+          {
+            "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "relationship": "canonical-family-owner-definition-first",
+            "candidateId": "cand_671d652918d62414c37d751d",
+            "availability": "unready-candidate"
+          }
+        ],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
+        "decisionDigest": "sha256:ffd2085f46884af13245dc02eacd2a3d2fd86f6784e4d8ffde012e825699a86b",
+        "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
+        "specificationDigest": "sha256:5c63f0e5755e075d81cae119e5ced04082e556f3d02b2fb9b025491a24f392ae",
+        "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
+        "packetDigest": "sha256:2c939fcb210a0eaf5043eb3bca767b611fe659f13b3483426a4d256b8a047783"
+      },
+      "contentDigest": "sha256:22ea8cbeb03262695f5421c93ba9c7a8de1a01a0250987315bbb11a6b1c76dfc"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_9f41b4ed6746ae6e048f417f",
+      "tranche": 2,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/device-identity/operator-guide",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/operator-guide",
+      "title": "Device Identity — Operator Guide",
+      "topic": "device-identity",
+      "routeRole": "operator-guide",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:device-identity",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:device-identity"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Device Identity, in this operator guide, is limited to the following inspected scope. Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Device Identity, in this operator guide, is limited to the following inspected scope. Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Operator checklist, failure states, and rollback",
+          "kind": "role-method",
+          "paragraphs": [
+            "Tell the operator what to check before acting, when to refuse, and how to preserve evidence of the outcome.",
+            "The guide cannot infer that a device, service, source, or credential is healthy when observation is unavailable.",
+            "Applied scope: Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "IoT Device Cybersecurity Capability Core Baseline — Section 2 and Table 1, Device Identification. Establishes: Logical and physical identification of an IoT device for cybersecurity management.",
+            "Agent client credential authorization — credential fingerprint, client binding, status, and authorization checks. Establishes: Current Maha client-credential identity and authorization behavior."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The baseline is a manufacturer-oriented IoT starting point, not universal device identity or proof that a device has not been substituted.",
+            "Repository behavior is implementation evidence, not an independent security certification.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-ir-8259a",
+          "title": "IoT Device Cybersecurity Capability Core Baseline",
+          "responsibleBody": "NIST",
+          "versionOrDate": "NISTIR 8259A, May 2020",
+          "sourceClass": "government-guidance",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ir/2020/NIST.IR.8259a.pdf",
+          "locator": "Section 2 and Table 1, Device Identification",
+          "establishes": "Logical and physical identification of an IoT device for cybersecurity management.",
+          "doesNotEstablish": "The baseline is a manufacturer-oriented IoT starting point, not universal device identity or proof that a device has not been substituted.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "local-agent-credentials",
+          "title": "Agent client credential authorization",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source inspected 2026-09-05",
+          "sourceClass": "local-implementation",
+          "url": null,
+          "locator": "credential fingerprint, client binding, status, and authorization checks",
+          "establishes": "Current Maha client-credential identity and authorization behavior.",
+          "doesNotEstablish": "Repository behavior is implementation evidence, not an independent security certification.",
+          "rightsBasis": "Maha-controlled repository material; retain only file identity, symbol locator, and content fingerprint. No credential or runtime value is included.",
+          "inspectionDepth": "code-symbol",
+          "contentFingerprint": "sha256:15a41eeb0d4ed74d9134e6982ce367be72888d86636107ce8a31b8bd08dacf7f"
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_f2e452a99e390ddae8b1001f"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Device Identity mean in this bounded context?",
+          "answer": "Device Identity, in this operator guide, is limited to the following inspected scope. Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this operator-guide answer?",
+          "answer": "IoT Device Cybersecurity Capability Core Baseline (NISTIR 8259A, May 2020), at Section 2 and Table 1, Device Identification, supports logical and physical identification of an IoT device for cybersecurity management. Agent client credential authorization (repository source inspected 2026-09-05), at credential fingerprint, client binding, status, and authorization checks, supports current Maha client-credential identity and authorization behavior."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The baseline is a manufacturer-oriented IoT starting point, not universal device identity or proof that a device has not been substituted. Repository behavior is implementation evidence, not an independent security certification. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/operator-guide#article",
+        "headline": "Device Identity — Operator Guide",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/operator-guide",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://nvlpubs.nist.gov/nistpubs/ir/2020/NIST.IR.8259a.pdf"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Device Identity mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Device Identity, in this operator guide, is limited to the following inspected scope. Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this operator-guide answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "IoT Device Cybersecurity Capability Core Baseline (NISTIR 8259A, May 2020), at Section 2 and Table 1, Device Identification, supports logical and physical identification of an IoT device for cybersecurity management. Agent client credential authorization (repository source inspected 2026-09-05), at credential fingerprint, client binding, status, and authorization checks, supports current Maha client-credential identity and authorization behavior."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The baseline is a manufacturer-oriented IoT starting point, not universal device identity or proof that a device has not been substituted. Repository behavior is implementation evidence, not an independent security certification. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "blocked-on-unready-prerequisite",
+        "blockedDependencies": [
+          {
+            "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "relationship": "canonical-family-owner-definition-first",
+            "candidateId": "cand_671d652918d62414c37d751d",
+            "availability": "unready-candidate"
+          }
+        ],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
+        "decisionDigest": "sha256:96244eaa98a7c643e8a66e4f0d996df817834d5f854a616e1249220a13b83c87",
+        "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
+        "specificationDigest": "sha256:d1b473e1777239467e20792fb4d5ceaa294418226a97f85d36299d3c97ab53cd",
+        "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
+        "packetDigest": "sha256:2c939fcb210a0eaf5043eb3bca767b611fe659f13b3483426a4d256b8a047783"
+      },
+      "contentDigest": "sha256:153e696f267c10ed7a9733243bb94144c7b4f45129d42c55a1dc3ed717af5cc5"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_6f3eacfcecccd7732583a282",
+      "tranche": 1,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/model-update/definition",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/definition",
+      "title": "Model Update — Definition",
+      "topic": "model-update",
+      "routeRole": "definition",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:model-update",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:model-update"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Model Update, in this definition, is limited to the following inspected scope. Planned update acquisition, testing, deployment, verification, and risk prioritization. Lifecycle change, context, validation, limitations, monitoring, and response. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Model Update, in this definition, is limited to the following inspected scope. Planned update acquisition, testing, deployment, verification, and risk prioritization. Lifecycle change, context, validation, limitations, monitoring, and response. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Term boundaries and disambiguation",
+          "kind": "role-method",
+          "paragraphs": [
+            "Use the term only for the source-backed scope stated here; keep adjacent concepts separate unless a typed relationship is explicit.",
+            "A useful definition states both inclusion and exclusion conditions so a machine answer cannot silently widen it.",
+            "Applied scope: Planned update acquisition, testing, deployment, verification, and risk prioritization. Lifecycle change, context, validation, limitations, monitoring, and response."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Guide to Enterprise Patch Management Planning — Sections 2–4: enterprise patch management strategy and lifecycle. Establishes: Planned update acquisition, testing, deployment, verification, and risk prioritization.",
+            "Artificial Intelligence Risk Management Framework (AI RMF 1.0) — GOVERN 1.5; MAP 1.1; MEASURE 2.5–2.9; MANAGE 4.1. Establishes: Lifecycle change, context, validation, limitations, monitoring, and response."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Patch guidance does not establish the safety or efficacy of a particular model update.",
+            "AI RMF 1.0 is voluntary and currently under revision.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "localDefinition: https://www.maha-os.com/knowledge/private-machine-systems/model-update/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/model-update/failure-mode",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/model-update/operator-guide",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-patching",
+          "title": "Guide to Enterprise Patch Management Planning",
+          "responsibleBody": "NIST",
+          "versionOrDate": "SP 800-40 Rev. 4, April 2022",
+          "sourceClass": "government-guidance",
+          "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
+          "locator": "Sections 2–4: enterprise patch management strategy and lifecycle",
+          "establishes": "Planned update acquisition, testing, deployment, verification, and risk prioritization.",
+          "doesNotEstablish": "Patch guidance does not establish the safety or efficacy of a particular model update.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "nist-ai-rmf",
+          "title": "Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
+          "responsibleBody": "NIST",
+          "versionOrDate": "NIST AI 100-1, January 2023",
+          "sourceClass": "government-guidance",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+          "locator": "GOVERN 1.5; MAP 1.1; MEASURE 2.5–2.9; MANAGE 4.1",
+          "establishes": "Lifecycle change, context, validation, limitations, monitoring, and response.",
+          "doesNotEstablish": "AI RMF 1.0 is voluntary and currently under revision.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/definition",
+          "relationship": "localDefinition",
+          "candidateId": "cand_6f3eacfcecccd7732583a282",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_9f1eaef842514bf1f43b76f5"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_c3808a61cc515e6f5283f08f"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Model Update mean in this bounded context?",
+          "answer": "Model Update, in this definition, is limited to the following inspected scope. Planned update acquisition, testing, deployment, verification, and risk prioritization. Lifecycle change, context, validation, limitations, monitoring, and response. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources establish the definition answer?",
+          "answer": "Guide to Enterprise Patch Management Planning (SP 800-40 Rev. 4, April 2022), at Sections 2–4: enterprise patch management strategy and lifecycle, supports planned update acquisition, testing, deployment, verification, and risk prioritization. Artificial Intelligence Risk Management Framework (AI RMF 1.0) (NIST AI 100-1, January 2023), at GOVERN 1.5; MAP 1.1; MEASURE 2.5–2.9; MANAGE 4.1, supports lifecycle change, context, validation, limitations, monitoring, and response."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Patch guidance does not establish the safety or efficacy of a particular model update. AI RMF 1.0 is voluntary and currently under revision. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which canonical definition must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What change would require this page to be revised or withdrawn?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/definition#article",
+        "headline": "Model Update — Definition",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/definition",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
+          "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Model Update mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Model Update, in this definition, is limited to the following inspected scope. Planned update acquisition, testing, deployment, verification, and risk prioritization. Lifecycle change, context, validation, limitations, monitoring, and response. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources establish the definition answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Guide to Enterprise Patch Management Planning (SP 800-40 Rev. 4, April 2022), at Sections 2–4: enterprise patch management strategy and lifecycle, supports planned update acquisition, testing, deployment, verification, and risk prioritization. Artificial Intelligence Risk Management Framework (AI RMF 1.0) (NIST AI 100-1, January 2023), at GOVERN 1.5; MAP 1.1; MEASURE 2.5–2.9; MANAGE 4.1, supports lifecycle change, context, validation, limitations, monitoring, and response."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Patch guidance does not establish the safety or efficacy of a particular model update. AI RMF 1.0 is voluntary and currently under revision. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which canonical definition must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What change would require this page to be revised or withdrawn?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "blocked-on-unready-prerequisite",
+        "blockedDependencies": [
+          {
+            "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "relationship": "canonical-family-owner-definition-first",
+            "candidateId": "cand_671d652918d62414c37d751d",
+            "availability": "unready-candidate"
+          }
+        ],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "decisionManifestDigest": "sha256:56932d33572ce2111374fd0386337d2f0ec7e12bdcc84e10d49ab35669e50868",
+        "decisionDigest": "sha256:2a74bea1c2b6d1ad8612adc3a14895dcc85675881837e21839d4c2f634a383f0",
+        "specificationManifestDigest": "sha256:3221465669604603d9486f0368a10e86a34845d4d4a5e2f01234f15c9ab314d1",
+        "specificationDigest": "sha256:6b47ead2a5ddccf775faebec17eea6becfb22bfc32d0f6b9de235f39ab73a49c",
+        "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
+        "packetDigest": "sha256:962f82cf6e1e3c1da266b7a3358b1bd4c0ce6b2add444f37a046a1d2528cf7c5"
+      },
+      "contentDigest": "sha256:e87584e95877de3fe17ae68e1358ecdca7701a8636238497e44a639faaf693fd"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_9f1eaef842514bf1f43b76f5",
+      "tranche": 1,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/model-update/failure-mode",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/failure-mode",
+      "title": "Model Update — Failure Mode",
+      "topic": "model-update",
+      "routeRole": "failure-mode",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:model-update",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:model-update"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Model Update, in this failure-mode analysis, is limited to the following inspected scope. Planned update acquisition, testing, deployment, verification, and risk prioritization. Lifecycle change, context, validation, limitations, monitoring, and response. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Model Update, in this failure-mode analysis, is limited to the following inspected scope. Planned update acquisition, testing, deployment, verification, and risk prioritization. Lifecycle change, context, validation, limitations, monitoring, and response. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Role-specific application",
+          "kind": "role-method",
+          "paragraphs": [
+            "Describe the failed invariant, observable signal, safe refusal, and correction or recovery path.",
+            "An absent signal is not proof of success unless the protocol defines and validates that interpretation.",
+            "Applied scope: Planned update acquisition, testing, deployment, verification, and risk prioritization. Lifecycle change, context, validation, limitations, monitoring, and response."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Guide to Enterprise Patch Management Planning — Sections 2–4: enterprise patch management strategy and lifecycle. Establishes: Planned update acquisition, testing, deployment, verification, and risk prioritization.",
+            "Artificial Intelligence Risk Management Framework (AI RMF 1.0) — GOVERN 1.5; MAP 1.1; MEASURE 2.5–2.9; MANAGE 4.1. Establishes: Lifecycle change, context, validation, limitations, monitoring, and response."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Patch guidance does not establish the safety or efficacy of a particular model update.",
+            "AI RMF 1.0 is voluntary and currently under revision.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/model-update/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/model-update/operator-guide",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-patching",
+          "title": "Guide to Enterprise Patch Management Planning",
+          "responsibleBody": "NIST",
+          "versionOrDate": "SP 800-40 Rev. 4, April 2022",
+          "sourceClass": "government-guidance",
+          "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
+          "locator": "Sections 2–4: enterprise patch management strategy and lifecycle",
+          "establishes": "Planned update acquisition, testing, deployment, verification, and risk prioritization.",
+          "doesNotEstablish": "Patch guidance does not establish the safety or efficacy of a particular model update.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "nist-ai-rmf",
+          "title": "Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
+          "responsibleBody": "NIST",
+          "versionOrDate": "NIST AI 100-1, January 2023",
+          "sourceClass": "government-guidance",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+          "locator": "GOVERN 1.5; MAP 1.1; MEASURE 2.5–2.9; MANAGE 4.1",
+          "establishes": "Lifecycle change, context, validation, limitations, monitoring, and response.",
+          "doesNotEstablish": "AI RMF 1.0 is voluntary and currently under revision.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_6f3eacfcecccd7732583a282"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_c3808a61cc515e6f5283f08f"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Model Update mean in this bounded context?",
+          "answer": "Model Update, in this failure-mode analysis, is limited to the following inspected scope. Planned update acquisition, testing, deployment, verification, and risk prioritization. Lifecycle change, context, validation, limitations, monitoring, and response. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources establish the failure-mode answer?",
+          "answer": "Guide to Enterprise Patch Management Planning (SP 800-40 Rev. 4, April 2022), at Sections 2–4: enterprise patch management strategy and lifecycle, supports planned update acquisition, testing, deployment, verification, and risk prioritization. Artificial Intelligence Risk Management Framework (AI RMF 1.0) (NIST AI 100-1, January 2023), at GOVERN 1.5; MAP 1.1; MEASURE 2.5–2.9; MANAGE 4.1, supports lifecycle change, context, validation, limitations, monitoring, and response."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Patch guidance does not establish the safety or efficacy of a particular model update. AI RMF 1.0 is voluntary and currently under revision. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which canonical definition must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What change would require this page to be revised or withdrawn?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/failure-mode#article",
+        "headline": "Model Update — Failure Mode",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/failure-mode",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
+          "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Model Update mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Model Update, in this failure-mode analysis, is limited to the following inspected scope. Planned update acquisition, testing, deployment, verification, and risk prioritization. Lifecycle change, context, validation, limitations, monitoring, and response. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources establish the failure-mode answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Guide to Enterprise Patch Management Planning (SP 800-40 Rev. 4, April 2022), at Sections 2–4: enterprise patch management strategy and lifecycle, supports planned update acquisition, testing, deployment, verification, and risk prioritization. Artificial Intelligence Risk Management Framework (AI RMF 1.0) (NIST AI 100-1, January 2023), at GOVERN 1.5; MAP 1.1; MEASURE 2.5–2.9; MANAGE 4.1, supports lifecycle change, context, validation, limitations, monitoring, and response."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Patch guidance does not establish the safety or efficacy of a particular model update. AI RMF 1.0 is voluntary and currently under revision. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which canonical definition must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What change would require this page to be revised or withdrawn?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "blocked-on-unready-prerequisite",
+        "blockedDependencies": [
+          {
+            "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "relationship": "canonical-family-owner-definition-first",
+            "candidateId": "cand_671d652918d62414c37d751d",
+            "availability": "unready-candidate"
+          }
+        ],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "decisionManifestDigest": "sha256:56932d33572ce2111374fd0386337d2f0ec7e12bdcc84e10d49ab35669e50868",
+        "decisionDigest": "sha256:3e7e192a7ad9947c1fc2aac079baf1563f842d351a58dafc51b3ca128ba3ed90",
+        "specificationManifestDigest": "sha256:3221465669604603d9486f0368a10e86a34845d4d4a5e2f01234f15c9ab314d1",
+        "specificationDigest": "sha256:b306779a152705ffe8c9eb1c868cb16f70a3382ff928b6d2bfea680290b7a2b7",
+        "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
+        "packetDigest": "sha256:962f82cf6e1e3c1da266b7a3358b1bd4c0ce6b2add444f37a046a1d2528cf7c5"
+      },
+      "contentDigest": "sha256:f46c9eef6061e88a55f83c22e5743976da0159310d37347b9ecc892bd31b0f81"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_c3808a61cc515e6f5283f08f",
+      "tranche": 1,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/model-update/operator-guide",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/operator-guide",
+      "title": "Model Update — Operator Guide",
+      "topic": "model-update",
+      "routeRole": "operator-guide",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:model-update",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:model-update"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Model Update, in this operator guide, is limited to the following inspected scope. Planned update acquisition, testing, deployment, verification, and risk prioritization. Lifecycle change, context, validation, limitations, monitoring, and response. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Model Update, in this operator guide, is limited to the following inspected scope. Planned update acquisition, testing, deployment, verification, and risk prioritization. Lifecycle change, context, validation, limitations, monitoring, and response. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Operator checklist and rollback",
+          "kind": "role-method",
+          "paragraphs": [
+            "Tell the operator what to check before acting, when to refuse, and how to preserve evidence of the outcome.",
+            "The guide cannot infer that a device, service, source, or credential is healthy when observation is unavailable.",
+            "Applied scope: Planned update acquisition, testing, deployment, verification, and risk prioritization. Lifecycle change, context, validation, limitations, monitoring, and response."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Guide to Enterprise Patch Management Planning — Sections 2–4: enterprise patch management strategy and lifecycle. Establishes: Planned update acquisition, testing, deployment, verification, and risk prioritization.",
+            "Artificial Intelligence Risk Management Framework (AI RMF 1.0) — GOVERN 1.5; MAP 1.1; MEASURE 2.5–2.9; MANAGE 4.1. Establishes: Lifecycle change, context, validation, limitations, monitoring, and response."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Patch guidance does not establish the safety or efficacy of a particular model update.",
+            "AI RMF 1.0 is voluntary and currently under revision.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/model-update/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/model-update/failure-mode",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-patching",
+          "title": "Guide to Enterprise Patch Management Planning",
+          "responsibleBody": "NIST",
+          "versionOrDate": "SP 800-40 Rev. 4, April 2022",
+          "sourceClass": "government-guidance",
+          "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
+          "locator": "Sections 2–4: enterprise patch management strategy and lifecycle",
+          "establishes": "Planned update acquisition, testing, deployment, verification, and risk prioritization.",
+          "doesNotEstablish": "Patch guidance does not establish the safety or efficacy of a particular model update.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "nist-ai-rmf",
+          "title": "Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
+          "responsibleBody": "NIST",
+          "versionOrDate": "NIST AI 100-1, January 2023",
+          "sourceClass": "government-guidance",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+          "locator": "GOVERN 1.5; MAP 1.1; MEASURE 2.5–2.9; MANAGE 4.1",
+          "establishes": "Lifecycle change, context, validation, limitations, monitoring, and response.",
+          "doesNotEstablish": "AI RMF 1.0 is voluntary and currently under revision.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_6f3eacfcecccd7732583a282"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_9f1eaef842514bf1f43b76f5"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Model Update mean in this bounded context?",
+          "answer": "Model Update, in this operator guide, is limited to the following inspected scope. Planned update acquisition, testing, deployment, verification, and risk prioritization. Lifecycle change, context, validation, limitations, monitoring, and response. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources establish the operator-guide answer?",
+          "answer": "Guide to Enterprise Patch Management Planning (SP 800-40 Rev. 4, April 2022), at Sections 2–4: enterprise patch management strategy and lifecycle, supports planned update acquisition, testing, deployment, verification, and risk prioritization. Artificial Intelligence Risk Management Framework (AI RMF 1.0) (NIST AI 100-1, January 2023), at GOVERN 1.5; MAP 1.1; MEASURE 2.5–2.9; MANAGE 4.1, supports lifecycle change, context, validation, limitations, monitoring, and response."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Patch guidance does not establish the safety or efficacy of a particular model update. AI RMF 1.0 is voluntary and currently under revision. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which canonical definition must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What change would require this page to be revised or withdrawn?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/operator-guide#article",
+        "headline": "Model Update — Operator Guide",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/operator-guide",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
+          "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Model Update mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Model Update, in this operator guide, is limited to the following inspected scope. Planned update acquisition, testing, deployment, verification, and risk prioritization. Lifecycle change, context, validation, limitations, monitoring, and response. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources establish the operator-guide answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Guide to Enterprise Patch Management Planning (SP 800-40 Rev. 4, April 2022), at Sections 2–4: enterprise patch management strategy and lifecycle, supports planned update acquisition, testing, deployment, verification, and risk prioritization. Artificial Intelligence Risk Management Framework (AI RMF 1.0) (NIST AI 100-1, January 2023), at GOVERN 1.5; MAP 1.1; MEASURE 2.5–2.9; MANAGE 4.1, supports lifecycle change, context, validation, limitations, monitoring, and response."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Patch guidance does not establish the safety or efficacy of a particular model update. AI RMF 1.0 is voluntary and currently under revision. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which canonical definition must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What change would require this page to be revised or withdrawn?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "blocked-on-unready-prerequisite",
+        "blockedDependencies": [
+          {
+            "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "relationship": "canonical-family-owner-definition-first",
+            "candidateId": "cand_671d652918d62414c37d751d",
+            "availability": "unready-candidate"
+          }
+        ],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "decisionManifestDigest": "sha256:56932d33572ce2111374fd0386337d2f0ec7e12bdcc84e10d49ab35669e50868",
+        "decisionDigest": "sha256:e3f19877f729b6b366746e3f5f6ede1f504310e47c77577618b497ab75c4d5f7",
+        "specificationManifestDigest": "sha256:3221465669604603d9486f0368a10e86a34845d4d4a5e2f01234f15c9ab314d1",
+        "specificationDigest": "sha256:084229570287ea8a55958d049b259de3ed786f852ba4ecacd1fbbdc1bbd8c14b",
+        "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
+        "packetDigest": "sha256:962f82cf6e1e3c1da266b7a3358b1bd4c0ce6b2add444f37a046a1d2528cf7c5"
+      },
+      "contentDigest": "sha256:d4779a20cc4af565529f61d9712de162e761576396bba1c35cc21e5a869947c4"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_6c7d279e19fcb92f76df94e2",
+      "tranche": 1,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/offline-operation/definition",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition",
+      "title": "Offline Operation — Definition",
+      "topic": "offline-operation",
+      "routeRole": "definition",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:offline-operation",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:offline-operation"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Offline Operation, in this definition, is limited to the following inspected scope. Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Offline Operation, in this definition, is limited to the following inspected scope. Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Term boundaries and disambiguation",
+          "kind": "role-method",
+          "paragraphs": [
+            "Use the term only for the source-backed scope stated here; keep adjacent concepts separate unless a typed relationship is explicit.",
+            "A useful definition states both inclusion and exclusion conditions so a machine answer cannot silently widen it.",
+            "Applied scope: Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Contingency Planning Guide for Federal Information Systems — Sections 3.4–3.6; Table 3-4; Section 5. Establishes: Offline/alternate processing, backups, exercises, recovery, and reconstitution.",
+            "NIST Privacy Framework — Control-P and Protect-P functions. Establishes: User control and safeguards for local processing."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The source does not establish that a specific device can perform every function offline.",
+            "Local processing reduces some data-transfer risks but does not itself guarantee privacy.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "localDefinition: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/operator-guide",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/failure-mode",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-contingency",
+          "title": "Contingency Planning Guide for Federal Information Systems",
+          "responsibleBody": "NIST",
+          "versionOrDate": "SP 800-34 Rev. 1, May 2010",
+          "sourceClass": "government-guidance",
+          "url": "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf",
+          "locator": "Sections 3.4–3.6; Table 3-4; Section 5",
+          "establishes": "Offline/alternate processing, backups, exercises, recovery, and reconstitution.",
+          "doesNotEstablish": "The source does not establish that a specific device can perform every function offline.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "nist-privacy",
+          "title": "NIST Privacy Framework",
+          "responsibleBody": "NIST",
+          "versionOrDate": "version 1.0, January 2020",
+          "sourceClass": "government-guidance",
+          "url": "https://www.nist.gov/privacy-framework/privacy-framework",
+          "locator": "Control-P and Protect-P functions",
+          "establishes": "User control and safeguards for local processing.",
+          "doesNotEstablish": "Local processing reduces some data-transfer risks but does not itself guarantee privacy.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition",
+          "relationship": "localDefinition",
+          "candidateId": "cand_6c7d279e19fcb92f76df94e2",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_64e34cac0ca1f3ac67f6649d"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_784b1995902a5db299a0b086"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Offline Operation mean in this bounded context?",
+          "answer": "Offline Operation, in this definition, is limited to the following inspected scope. Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources establish the definition answer?",
+          "answer": "Contingency Planning Guide for Federal Information Systems (SP 800-34 Rev. 1, May 2010), at Sections 3.4–3.6; Table 3-4; Section 5, supports offline/alternate processing, backups, exercises, recovery, and reconstitution. NIST Privacy Framework (version 1.0, January 2020), at Control-P and Protect-P functions, supports user control and safeguards for local processing."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The source does not establish that a specific device can perform every function offline. Local processing reduces some data-transfer risks but does not itself guarantee privacy. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which canonical definition must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What change would require this page to be revised or withdrawn?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition#article",
+        "headline": "Offline Operation — Definition",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf",
+          "https://www.nist.gov/privacy-framework/privacy-framework"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Offline Operation mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Offline Operation, in this definition, is limited to the following inspected scope. Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources establish the definition answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Contingency Planning Guide for Federal Information Systems (SP 800-34 Rev. 1, May 2010), at Sections 3.4–3.6; Table 3-4; Section 5, supports offline/alternate processing, backups, exercises, recovery, and reconstitution. NIST Privacy Framework (version 1.0, January 2020), at Control-P and Protect-P functions, supports user control and safeguards for local processing."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The source does not establish that a specific device can perform every function offline. Local processing reduces some data-transfer risks but does not itself guarantee privacy. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which canonical definition must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What change would require this page to be revised or withdrawn?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "blocked-on-unready-prerequisite",
+        "blockedDependencies": [
+          {
+            "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "relationship": "canonical-family-owner-definition-first",
+            "candidateId": "cand_671d652918d62414c37d751d",
+            "availability": "unready-candidate"
+          }
+        ],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "decisionManifestDigest": "sha256:56932d33572ce2111374fd0386337d2f0ec7e12bdcc84e10d49ab35669e50868",
+        "decisionDigest": "sha256:d0bd298edc163378e0a0845fe08824f1dd5c4a8813abb283f0f5d37118d006b8",
+        "specificationManifestDigest": "sha256:3221465669604603d9486f0368a10e86a34845d4d4a5e2f01234f15c9ab314d1",
+        "specificationDigest": "sha256:47d231f1ed8c9852269ceb48b196e40616cb3fe4e20c1edc09c2ca6a427912d5",
+        "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
+        "packetDigest": "sha256:e7a5a4cb207a554cb5a8d32edbf7b9e523d6b38378bc2020f54758961c3fed51"
+      },
+      "contentDigest": "sha256:daaa6bdede43734968f21fbaa4bf813bb7b30d1286301b93ad1b480d61303a35"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_784b1995902a5db299a0b086",
+      "tranche": 2,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/offline-operation/failure-mode",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/failure-mode",
+      "title": "Offline Operation — Failure Mode",
+      "topic": "offline-operation",
+      "routeRole": "failure-mode",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:offline-operation",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:offline-operation"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Offline Operation, in this failure-mode analysis, is limited to the following inspected scope. Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Offline Operation, in this failure-mode analysis, is limited to the following inspected scope. Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Failure taxonomy and detection",
+          "kind": "role-method",
+          "paragraphs": [
+            "Describe the failed invariant, observable signal, safe refusal, and correction or recovery path.",
+            "An absent signal is not proof of success unless the protocol defines and validates that interpretation.",
+            "Applied scope: Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Contingency Planning Guide for Federal Information Systems — Sections 3.4–3.6; Table 3-4; Section 5. Establishes: Offline/alternate processing, backups, exercises, recovery, and reconstitution.",
+            "NIST Privacy Framework — Control-P and Protect-P functions. Establishes: User control and safeguards for local processing."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The source does not establish that a specific device can perform every function offline.",
+            "Local processing reduces some data-transfer risks but does not itself guarantee privacy.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/operator-guide",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-contingency",
+          "title": "Contingency Planning Guide for Federal Information Systems",
+          "responsibleBody": "NIST",
+          "versionOrDate": "SP 800-34 Rev. 1, May 2010",
+          "sourceClass": "government-guidance",
+          "url": "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf",
+          "locator": "Sections 3.4–3.6; Table 3-4; Section 5",
+          "establishes": "Offline/alternate processing, backups, exercises, recovery, and reconstitution.",
+          "doesNotEstablish": "The source does not establish that a specific device can perform every function offline.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "nist-privacy",
+          "title": "NIST Privacy Framework",
+          "responsibleBody": "NIST",
+          "versionOrDate": "version 1.0, January 2020",
+          "sourceClass": "government-guidance",
+          "url": "https://www.nist.gov/privacy-framework/privacy-framework",
+          "locator": "Control-P and Protect-P functions",
+          "establishes": "User control and safeguards for local processing.",
+          "doesNotEstablish": "Local processing reduces some data-transfer risks but does not itself guarantee privacy.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_6c7d279e19fcb92f76df94e2"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_64e34cac0ca1f3ac67f6649d"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Offline Operation mean in this bounded context?",
+          "answer": "Offline Operation, in this failure-mode analysis, is limited to the following inspected scope. Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this failure-mode answer?",
+          "answer": "Contingency Planning Guide for Federal Information Systems (SP 800-34 Rev. 1, May 2010), at Sections 3.4–3.6; Table 3-4; Section 5, supports offline/alternate processing, backups, exercises, recovery, and reconstitution. NIST Privacy Framework (version 1.0, January 2020), at Control-P and Protect-P functions, supports user control and safeguards for local processing."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The source does not establish that a specific device can perform every function offline. Local processing reduces some data-transfer risks but does not itself guarantee privacy. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/failure-mode#article",
+        "headline": "Offline Operation — Failure Mode",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/failure-mode",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf",
+          "https://www.nist.gov/privacy-framework/privacy-framework"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Offline Operation mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Offline Operation, in this failure-mode analysis, is limited to the following inspected scope. Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this failure-mode answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Contingency Planning Guide for Federal Information Systems (SP 800-34 Rev. 1, May 2010), at Sections 3.4–3.6; Table 3-4; Section 5, supports offline/alternate processing, backups, exercises, recovery, and reconstitution. NIST Privacy Framework (version 1.0, January 2020), at Control-P and Protect-P functions, supports user control and safeguards for local processing."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The source does not establish that a specific device can perform every function offline. Local processing reduces some data-transfer risks but does not itself guarantee privacy. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "blocked-on-unready-prerequisite",
+        "blockedDependencies": [
+          {
+            "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "relationship": "canonical-family-owner-definition-first",
+            "candidateId": "cand_671d652918d62414c37d751d",
+            "availability": "unready-candidate"
+          }
+        ],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
+        "decisionDigest": "sha256:9cc5ad362dcd8ef9ce32ad532e4194eed993fe324316298ff5cd25800359cd90",
+        "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
+        "specificationDigest": "sha256:1cc550a80c7f9c5d02cc42415ea25ef6a21628df31dd332dd65aea225a96194f",
+        "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
+        "packetDigest": "sha256:e9b3e7597ed7c680397b7ccfe51fa10be5ff47ba50d59ae4bcdde1f52cf21a3a"
+      },
+      "contentDigest": "sha256:84db13b1d1ca14fa685ce09bf3067b286baf009c33e7d4b4b1cf5ee7ecc19b15"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_64e34cac0ca1f3ac67f6649d",
+      "tranche": 1,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/offline-operation/operator-guide",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/operator-guide",
+      "title": "Offline Operation — Operator Guide",
+      "topic": "offline-operation",
+      "routeRole": "operator-guide",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:offline-operation",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:offline-operation"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Offline Operation, in this operator guide, is limited to the following inspected scope. Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Offline Operation, in this operator guide, is limited to the following inspected scope. Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Operator checklist and rollback",
+          "kind": "role-method",
+          "paragraphs": [
+            "Tell the operator what to check before acting, when to refuse, and how to preserve evidence of the outcome.",
+            "The guide cannot infer that a device, service, source, or credential is healthy when observation is unavailable.",
+            "Applied scope: Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Contingency Planning Guide for Federal Information Systems — Sections 3.4–3.6; Table 3-4; Section 5. Establishes: Offline/alternate processing, backups, exercises, recovery, and reconstitution.",
+            "NIST Privacy Framework — Control-P and Protect-P functions. Establishes: User control and safeguards for local processing."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The source does not establish that a specific device can perform every function offline.",
+            "Local processing reduces some data-transfer risks but does not itself guarantee privacy.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/failure-mode",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-contingency",
+          "title": "Contingency Planning Guide for Federal Information Systems",
+          "responsibleBody": "NIST",
+          "versionOrDate": "SP 800-34 Rev. 1, May 2010",
+          "sourceClass": "government-guidance",
+          "url": "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf",
+          "locator": "Sections 3.4–3.6; Table 3-4; Section 5",
+          "establishes": "Offline/alternate processing, backups, exercises, recovery, and reconstitution.",
+          "doesNotEstablish": "The source does not establish that a specific device can perform every function offline.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "nist-privacy",
+          "title": "NIST Privacy Framework",
+          "responsibleBody": "NIST",
+          "versionOrDate": "version 1.0, January 2020",
+          "sourceClass": "government-guidance",
+          "url": "https://www.nist.gov/privacy-framework/privacy-framework",
+          "locator": "Control-P and Protect-P functions",
+          "establishes": "User control and safeguards for local processing.",
+          "doesNotEstablish": "Local processing reduces some data-transfer risks but does not itself guarantee privacy.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_6c7d279e19fcb92f76df94e2"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_784b1995902a5db299a0b086"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Offline Operation mean in this bounded context?",
+          "answer": "Offline Operation, in this operator guide, is limited to the following inspected scope. Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources establish the operator-guide answer?",
+          "answer": "Contingency Planning Guide for Federal Information Systems (SP 800-34 Rev. 1, May 2010), at Sections 3.4–3.6; Table 3-4; Section 5, supports offline/alternate processing, backups, exercises, recovery, and reconstitution. NIST Privacy Framework (version 1.0, January 2020), at Control-P and Protect-P functions, supports user control and safeguards for local processing."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The source does not establish that a specific device can perform every function offline. Local processing reduces some data-transfer risks but does not itself guarantee privacy. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which canonical definition must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What change would require this page to be revised or withdrawn?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/operator-guide#article",
+        "headline": "Offline Operation — Operator Guide",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/operator-guide",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf",
+          "https://www.nist.gov/privacy-framework/privacy-framework"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Offline Operation mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Offline Operation, in this operator guide, is limited to the following inspected scope. Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources establish the operator-guide answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Contingency Planning Guide for Federal Information Systems (SP 800-34 Rev. 1, May 2010), at Sections 3.4–3.6; Table 3-4; Section 5, supports offline/alternate processing, backups, exercises, recovery, and reconstitution. NIST Privacy Framework (version 1.0, January 2020), at Control-P and Protect-P functions, supports user control and safeguards for local processing."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The source does not establish that a specific device can perform every function offline. Local processing reduces some data-transfer risks but does not itself guarantee privacy. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which canonical definition must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What change would require this page to be revised or withdrawn?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "blocked-on-unready-prerequisite",
+        "blockedDependencies": [
+          {
+            "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "relationship": "canonical-family-owner-definition-first",
+            "candidateId": "cand_671d652918d62414c37d751d",
+            "availability": "unready-candidate"
+          }
+        ],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "decisionManifestDigest": "sha256:56932d33572ce2111374fd0386337d2f0ec7e12bdcc84e10d49ab35669e50868",
+        "decisionDigest": "sha256:75ea626329b16f83d474f291df5ce19521cb7e4ad662f5b64ef53b324ac8c825",
+        "specificationManifestDigest": "sha256:3221465669604603d9486f0368a10e86a34845d4d4a5e2f01234f15c9ab314d1",
+        "specificationDigest": "sha256:9747e21ba99b6fb62e1fcf8d3d79a3b1270238add55e94f1ed48d579f4873409",
+        "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
+        "packetDigest": "sha256:e7a5a4cb207a554cb5a8d32edbf7b9e523d6b38378bc2020f54758961c3fed51"
+      },
+      "contentDigest": "sha256:f38f72432e45cb80092da106da9e87c0579fc0c70dad9f9ede2aeb1418798d68"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_263d251a7e65204ce3eae1a7",
+      "tranche": 2,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/on-device-inference/definition",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition",
+      "title": "On Device Inference — Definition",
+      "topic": "on-device-inference",
+      "routeRole": "definition",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:on-device-inference",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:on-device-inference"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "On Device Inference, in this definition, is limited to the following inspected scope. AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. Local processing and selective collection or disclosure as privacy-risk controls. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "On Device Inference, in this definition, is limited to the following inspected scope. AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. Local processing and selective collection or disclosure as privacy-risk controls. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Term boundaries and disambiguation",
+          "kind": "role-method",
+          "paragraphs": [
+            "Use the term only for the source-backed scope stated here; keep adjacent concepts separate unless a typed relationship is explicit.",
+            "A useful definition states both inclusion and exclusion conditions so a machine answer cannot silently widen it.",
+            "Applied scope: AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. Local processing and selective collection or disclosure as privacy-risk controls."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Edge AI — Background and Key Challenges. Establishes: AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints.",
+            "NIST Privacy Framework 1.0 Core — Control-P data-processing policies, especially CT.DP-P1 and CT.DP-P4. Establishes: Local processing and selective collection or disclosure as privacy-risk controls."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Edge execution does not imply offline capability, confidentiality, accuracy, or immunity from model and software updates.",
+            "Local processing can reduce observability or linkability but does not by itself prove privacy, security, correctness, or legal compliance.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "definition: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/operator-guide",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/failure-mode",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-edge-ai",
+          "title": "Edge AI",
+          "responsibleBody": "NIST",
+          "versionOrDate": "program page inspected 2026-09-05",
+          "sourceClass": "government-guidance",
+          "url": "https://www.nist.gov/programs-projects/edge-ai",
+          "locator": "Background and Key Challenges",
+          "establishes": "AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints.",
+          "doesNotEstablish": "Edge execution does not imply offline capability, confidentiality, accuracy, or immunity from model and software updates.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "nist-privacy-core",
+          "title": "NIST Privacy Framework 1.0 Core",
+          "responsibleBody": "NIST",
+          "versionOrDate": "version 1.0, January 2020",
+          "sourceClass": "government-guidance",
+          "url": "https://www.nist.gov/system/files/documents/2021/05/05/NIST-Privacy-Framework-V1.0-Core-PDF.pdf",
+          "locator": "Control-P data-processing policies, especially CT.DP-P1 and CT.DP-P4",
+          "establishes": "Local processing and selective collection or disclosure as privacy-risk controls.",
+          "doesNotEstablish": "Local processing can reduce observability or linkability but does not by itself prove privacy, security, correctness, or legal compliance.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition",
+          "relationship": "definition",
+          "candidateId": null,
+          "availability": "observed-existing"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_0fc2ece30235e82106b7d75d"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_8995fa6b7a13d8d0caaa72db"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does On Device Inference mean in this bounded context?",
+          "answer": "On Device Inference, in this definition, is limited to the following inspected scope. AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. Local processing and selective collection or disclosure as privacy-risk controls. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this definition answer?",
+          "answer": "Edge AI (program page inspected 2026-09-05), at Background and Key Challenges, supports aI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. NIST Privacy Framework 1.0 Core (version 1.0, January 2020), at Control-P data-processing policies, especially CT.DP-P1 and CT.DP-P4, supports local processing and selective collection or disclosure as privacy-risk controls."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Edge execution does not imply offline capability, confidentiality, accuracy, or immunity from model and software updates. Local processing can reduce observability or linkability but does not by itself prove privacy, security, correctness, or legal compliance. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition first. The present page applies that definition through its narrower route role."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition#article",
+        "headline": "On Device Inference — Definition",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://www.nist.gov/programs-projects/edge-ai",
+          "https://www.nist.gov/system/files/documents/2021/05/05/NIST-Privacy-Framework-V1.0-Core-PDF.pdf"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does On Device Inference mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "On Device Inference, in this definition, is limited to the following inspected scope. AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. Local processing and selective collection or disclosure as privacy-risk controls. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this definition answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Edge AI (program page inspected 2026-09-05), at Background and Key Challenges, supports aI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. NIST Privacy Framework 1.0 Core (version 1.0, January 2020), at Control-P data-processing policies, especially CT.DP-P1 and CT.DP-P4, supports local processing and selective collection or disclosure as privacy-risk controls."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Edge execution does not imply offline capability, confidentiality, accuracy, or immunity from model and software updates. Local processing can reduce observability or linkability but does not by itself prove privacy, security, correctness, or legal compliance. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition first. The present page applies that definition through its narrower route role."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "blocked-on-unready-prerequisite",
+        "blockedDependencies": [
+          {
+            "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "relationship": "canonical-family-owner-definition-first",
+            "candidateId": "cand_671d652918d62414c37d751d",
+            "availability": "unready-candidate"
+          }
+        ],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
+        "decisionDigest": "sha256:fddf5669ba76fd55ba2c3fe192b5d67b5bd362464f15840c4a3885fee340df7e",
+        "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
+        "specificationDigest": "sha256:52f85da1c23c4c13224d040e625b91fd15db88b1343b66b9ef48bd9e78a2b677",
+        "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
+        "packetDigest": "sha256:0f78391287d8e5b5fd9805703c978dc28c0822298f67d4916344952bbe398afb"
+      },
+      "contentDigest": "sha256:88fee230f78f89d233385fb87fae40ffea453eb83e752fa816ea979928915a4a"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_8995fa6b7a13d8d0caaa72db",
+      "tranche": 2,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/on-device-inference/failure-mode",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/failure-mode",
+      "title": "On Device Inference — Failure Mode",
+      "topic": "on-device-inference",
+      "routeRole": "failure-mode",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:on-device-inference",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:on-device-inference"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "On Device Inference, in this failure-mode analysis, is limited to the following inspected scope. AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. Local processing and selective collection or disclosure as privacy-risk controls. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "On Device Inference, in this failure-mode analysis, is limited to the following inspected scope. AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. Local processing and selective collection or disclosure as privacy-risk controls. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Failure taxonomy and detection",
+          "kind": "role-method",
+          "paragraphs": [
+            "Describe the failed invariant, observable signal, safe refusal, and correction or recovery path.",
+            "An absent signal is not proof of success unless the protocol defines and validates that interpretation.",
+            "Applied scope: AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. Local processing and selective collection or disclosure as privacy-risk controls."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Edge AI — Background and Key Challenges. Establishes: AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints.",
+            "NIST Privacy Framework 1.0 Core — Control-P data-processing policies, especially CT.DP-P1 and CT.DP-P4. Establishes: Local processing and selective collection or disclosure as privacy-risk controls."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Edge execution does not imply offline capability, confidentiality, accuracy, or immunity from model and software updates.",
+            "Local processing can reduce observability or linkability but does not by itself prove privacy, security, correctness, or legal compliance.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/operator-guide",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-edge-ai",
+          "title": "Edge AI",
+          "responsibleBody": "NIST",
+          "versionOrDate": "program page inspected 2026-09-05",
+          "sourceClass": "government-guidance",
+          "url": "https://www.nist.gov/programs-projects/edge-ai",
+          "locator": "Background and Key Challenges",
+          "establishes": "AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints.",
+          "doesNotEstablish": "Edge execution does not imply offline capability, confidentiality, accuracy, or immunity from model and software updates.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "nist-privacy-core",
+          "title": "NIST Privacy Framework 1.0 Core",
+          "responsibleBody": "NIST",
+          "versionOrDate": "version 1.0, January 2020",
+          "sourceClass": "government-guidance",
+          "url": "https://www.nist.gov/system/files/documents/2021/05/05/NIST-Privacy-Framework-V1.0-Core-PDF.pdf",
+          "locator": "Control-P data-processing policies, especially CT.DP-P1 and CT.DP-P4",
+          "establishes": "Local processing and selective collection or disclosure as privacy-risk controls.",
+          "doesNotEstablish": "Local processing can reduce observability or linkability but does not by itself prove privacy, security, correctness, or legal compliance.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_263d251a7e65204ce3eae1a7"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_0fc2ece30235e82106b7d75d"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does On Device Inference mean in this bounded context?",
+          "answer": "On Device Inference, in this failure-mode analysis, is limited to the following inspected scope. AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. Local processing and selective collection or disclosure as privacy-risk controls. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this failure-mode answer?",
+          "answer": "Edge AI (program page inspected 2026-09-05), at Background and Key Challenges, supports aI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. NIST Privacy Framework 1.0 Core (version 1.0, January 2020), at Control-P data-processing policies, especially CT.DP-P1 and CT.DP-P4, supports local processing and selective collection or disclosure as privacy-risk controls."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Edge execution does not imply offline capability, confidentiality, accuracy, or immunity from model and software updates. Local processing can reduce observability or linkability but does not by itself prove privacy, security, correctness, or legal compliance. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/failure-mode#article",
+        "headline": "On Device Inference — Failure Mode",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/failure-mode",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://www.nist.gov/programs-projects/edge-ai",
+          "https://www.nist.gov/system/files/documents/2021/05/05/NIST-Privacy-Framework-V1.0-Core-PDF.pdf"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does On Device Inference mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "On Device Inference, in this failure-mode analysis, is limited to the following inspected scope. AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. Local processing and selective collection or disclosure as privacy-risk controls. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this failure-mode answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Edge AI (program page inspected 2026-09-05), at Background and Key Challenges, supports aI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. NIST Privacy Framework 1.0 Core (version 1.0, January 2020), at Control-P data-processing policies, especially CT.DP-P1 and CT.DP-P4, supports local processing and selective collection or disclosure as privacy-risk controls."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Edge execution does not imply offline capability, confidentiality, accuracy, or immunity from model and software updates. Local processing can reduce observability or linkability but does not by itself prove privacy, security, correctness, or legal compliance. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "blocked-on-unready-prerequisite",
+        "blockedDependencies": [
+          {
+            "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "relationship": "canonical-family-owner-definition-first",
+            "candidateId": "cand_671d652918d62414c37d751d",
+            "availability": "unready-candidate"
+          }
+        ],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
+        "decisionDigest": "sha256:4590434b4ac360ec5379c3a37eec65a2e719a43b7d0c077a33247c25efb17437",
+        "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
+        "specificationDigest": "sha256:0e10be54dd5dc72b4a819a131a69302f1b4dfd4b288ded51983fc8d800ce40e3",
+        "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
+        "packetDigest": "sha256:0f78391287d8e5b5fd9805703c978dc28c0822298f67d4916344952bbe398afb"
+      },
+      "contentDigest": "sha256:22c7480dbeec331ad14b9cb46373ff243800d6ba7a2c287bcd1018c6998465e9"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_0fc2ece30235e82106b7d75d",
+      "tranche": 2,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/on-device-inference/operator-guide",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/operator-guide",
+      "title": "On Device Inference — Operator Guide",
+      "topic": "on-device-inference",
+      "routeRole": "operator-guide",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:on-device-inference",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:on-device-inference"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "On Device Inference, in this operator guide, is limited to the following inspected scope. AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. Local processing and selective collection or disclosure as privacy-risk controls. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "On Device Inference, in this operator guide, is limited to the following inspected scope. AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. Local processing and selective collection or disclosure as privacy-risk controls. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Operator checklist, failure states, and rollback",
+          "kind": "role-method",
+          "paragraphs": [
+            "Tell the operator what to check before acting, when to refuse, and how to preserve evidence of the outcome.",
+            "The guide cannot infer that a device, service, source, or credential is healthy when observation is unavailable.",
+            "Applied scope: AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. Local processing and selective collection or disclosure as privacy-risk controls."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Edge AI — Background and Key Challenges. Establishes: AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints.",
+            "NIST Privacy Framework 1.0 Core — Control-P data-processing policies, especially CT.DP-P1 and CT.DP-P4. Establishes: Local processing and selective collection or disclosure as privacy-risk controls."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Edge execution does not imply offline capability, confidentiality, accuracy, or immunity from model and software updates.",
+            "Local processing can reduce observability or linkability but does not by itself prove privacy, security, correctness, or legal compliance.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/failure-mode",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-edge-ai",
+          "title": "Edge AI",
+          "responsibleBody": "NIST",
+          "versionOrDate": "program page inspected 2026-09-05",
+          "sourceClass": "government-guidance",
+          "url": "https://www.nist.gov/programs-projects/edge-ai",
+          "locator": "Background and Key Challenges",
+          "establishes": "AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints.",
+          "doesNotEstablish": "Edge execution does not imply offline capability, confidentiality, accuracy, or immunity from model and software updates.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "nist-privacy-core",
+          "title": "NIST Privacy Framework 1.0 Core",
+          "responsibleBody": "NIST",
+          "versionOrDate": "version 1.0, January 2020",
+          "sourceClass": "government-guidance",
+          "url": "https://www.nist.gov/system/files/documents/2021/05/05/NIST-Privacy-Framework-V1.0-Core-PDF.pdf",
+          "locator": "Control-P data-processing policies, especially CT.DP-P1 and CT.DP-P4",
+          "establishes": "Local processing and selective collection or disclosure as privacy-risk controls.",
+          "doesNotEstablish": "Local processing can reduce observability or linkability but does not by itself prove privacy, security, correctness, or legal compliance.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_263d251a7e65204ce3eae1a7"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_8995fa6b7a13d8d0caaa72db"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does On Device Inference mean in this bounded context?",
+          "answer": "On Device Inference, in this operator guide, is limited to the following inspected scope. AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. Local processing and selective collection or disclosure as privacy-risk controls. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this operator-guide answer?",
+          "answer": "Edge AI (program page inspected 2026-09-05), at Background and Key Challenges, supports aI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. NIST Privacy Framework 1.0 Core (version 1.0, January 2020), at Control-P data-processing policies, especially CT.DP-P1 and CT.DP-P4, supports local processing and selective collection or disclosure as privacy-risk controls."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Edge execution does not imply offline capability, confidentiality, accuracy, or immunity from model and software updates. Local processing can reduce observability or linkability but does not by itself prove privacy, security, correctness, or legal compliance. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/operator-guide#article",
+        "headline": "On Device Inference — Operator Guide",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/operator-guide",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://www.nist.gov/programs-projects/edge-ai",
+          "https://www.nist.gov/system/files/documents/2021/05/05/NIST-Privacy-Framework-V1.0-Core-PDF.pdf"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does On Device Inference mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "On Device Inference, in this operator guide, is limited to the following inspected scope. AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. Local processing and selective collection or disclosure as privacy-risk controls. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this operator-guide answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Edge AI (program page inspected 2026-09-05), at Background and Key Challenges, supports aI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. NIST Privacy Framework 1.0 Core (version 1.0, January 2020), at Control-P data-processing policies, especially CT.DP-P1 and CT.DP-P4, supports local processing and selective collection or disclosure as privacy-risk controls."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Edge execution does not imply offline capability, confidentiality, accuracy, or immunity from model and software updates. Local processing can reduce observability or linkability but does not by itself prove privacy, security, correctness, or legal compliance. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "blocked-on-unready-prerequisite",
+        "blockedDependencies": [
+          {
+            "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "relationship": "canonical-family-owner-definition-first",
+            "candidateId": "cand_671d652918d62414c37d751d",
+            "availability": "unready-candidate"
+          }
+        ],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
+        "decisionDigest": "sha256:eda4ec8e51c0169f8a319b30f4a9709f2a4f94759f963f4fb78e6cd4f360e642",
+        "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
+        "specificationDigest": "sha256:e9ca33d309e573faceddae7c7b63ca18906dcfed020f00bc93963539a8f042fb",
+        "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
+        "packetDigest": "sha256:0f78391287d8e5b5fd9805703c978dc28c0822298f67d4916344952bbe398afb"
+      },
+      "contentDigest": "sha256:7265da149033183a2776e627d132994b612f4a96164f7bf569702df5ab61a9f1"
+    }
+  ],
+  "provenanceDigest": "sha256:e7753d5fd9de8b3f5d81fe8373605e69762bfd15b6dd3f379bb9d4823527e3dd"
+}
