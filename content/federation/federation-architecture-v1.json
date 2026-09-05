@@ -1,0 +1,281 @@
+{
+  "schemaVersion": "maha-federation-architecture/1.0",
+  "frozenOn": "2026-09-05",
+  "baselineDigest": "sha256:b7c9dfff2aa8a6da30046d43938b42566b3e3d6f3b51695274642c6b9a6fb357",
+  "targetCanonicalRoutes": 4000,
+  "principles": [
+    "Every route is self-canonical on exactly one host.",
+    "Every broad concept family has exactly one declared canonical owner.",
+    "Other properties publish bounded local applications, not duplicate definitions.",
+    "A typed relationship creates a link; it does not automatically create a page.",
+    "Authority never transfers across a relationship.",
+    "Candidate status never implies inspection, review, release, compilation, or publication."
+  ],
+  "conceptFamilies": [
+    {
+      "conceptFamilyId": "governance",
+      "canonicalOwner": "maha-policy",
+      "canonicalConceptId": "urn:maha:concept:governance"
+    },
+    {
+      "conceptFamilyId": "evidence",
+      "canonicalOwner": "maha-research",
+      "canonicalConceptId": "urn:maha:concept:evidence"
+    },
+    {
+      "conceptFamilyId": "provenance",
+      "canonicalOwner": "maha-research",
+      "canonicalConceptId": "urn:maha:concept:provenance"
+    },
+    {
+      "conceptFamilyId": "authority",
+      "canonicalOwner": "maha-strategies",
+      "canonicalConceptId": "urn:maha:concept:authority"
+    },
+    {
+      "conceptFamilyId": "uncertainty",
+      "canonicalOwner": "maha-research",
+      "canonicalConceptId": "urn:maha:concept:uncertainty"
+    },
+    {
+      "conceptFamilyId": "release",
+      "canonicalOwner": "agentic-publishing",
+      "canonicalConceptId": "urn:maha:concept:release"
+    },
+    {
+      "conceptFamilyId": "identity",
+      "canonicalOwner": "maha-strategies",
+      "canonicalConceptId": "urn:maha:concept:identity"
+    },
+    {
+      "conceptFamilyId": "consent",
+      "canonicalOwner": "maha-os",
+      "canonicalConceptId": "urn:maha:concept:consent"
+    },
+    {
+      "conceptFamilyId": "rights",
+      "canonicalOwner": "agentic-publishing",
+      "canonicalConceptId": "urn:maha:concept:rights"
+    },
+    {
+      "conceptFamilyId": "risk",
+      "canonicalOwner": "mayon-rajan",
+      "canonicalConceptId": "urn:maha:concept:risk"
+    },
+    {
+      "conceptFamilyId": "resilience",
+      "canonicalOwner": "maha-os",
+      "canonicalConceptId": "urn:maha:concept:resilience"
+    },
+    {
+      "conceptFamilyId": "measurement",
+      "canonicalOwner": "maha-research",
+      "canonicalConceptId": "urn:maha:concept:measurement"
+    },
+    {
+      "conceptFamilyId": "interpretation",
+      "canonicalOwner": "maha-strategies",
+      "canonicalConceptId": "urn:maha:concept:interpretation"
+    },
+    {
+      "conceptFamilyId": "translation",
+      "canonicalOwner": "maha-strategies",
+      "canonicalConceptId": "urn:maha:concept:translation"
+    },
+    {
+      "conceptFamilyId": "computation",
+      "canonicalOwner": "maha-research",
+      "canonicalConceptId": "urn:maha:concept:computation"
+    },
+    {
+      "conceptFamilyId": "autonomy",
+      "canonicalOwner": "mayone-maharajan",
+      "canonicalConceptId": "urn:maha:concept:autonomy"
+    },
+    {
+      "conceptFamilyId": "sovereignty",
+      "canonicalOwner": "mayone-maharajan",
+      "canonicalConceptId": "urn:maha:concept:sovereignty"
+    },
+    {
+      "conceptFamilyId": "memory",
+      "canonicalOwner": "agentic-publishing",
+      "canonicalConceptId": "urn:maha:concept:memory"
+    },
+    {
+      "conceptFamilyId": "public-trust",
+      "canonicalOwner": "maha-policy",
+      "canonicalConceptId": "urn:maha:concept:public-trust"
+    },
+    {
+      "conceptFamilyId": "communication",
+      "canonicalOwner": "mayon-rajan",
+      "canonicalConceptId": "urn:maha:concept:communication"
+    }
+  ],
+  "relationshipTypes": [
+    "governed-by",
+    "evidence-for",
+    "implemented-by",
+    "published-as",
+    "derived-from",
+    "contrasts-with",
+    "applies-to",
+    "limits",
+    "commercialized-through"
+  ],
+  "properties": [
+    {
+      "siteId": "maha-strategies",
+      "canonicalHost": "www.mahastrategies.com",
+      "current": 2003,
+      "candidates": 500,
+      "projected": 2503,
+      "role": "Applied epistemic clearing, governed agent operations, bounded answers, and commercial discovery.",
+      "allowed": [
+        "bounded explanations",
+        "operational guides",
+        "commercial entry points"
+      ],
+      "prohibited": [
+        "research-source duplication",
+        "unreleased evidence claims"
+      ]
+    },
+    {
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "current": 291,
+      "candidates": 400,
+      "projected": 691,
+      "role": "Canonical source, claim, method, dataset, calculation, reproduction, and evidence-graph authority.",
+      "allowed": [
+        "research objects",
+        "machine-readable provenance",
+        "reproduction protocols"
+      ],
+      "prohibited": [
+        "sales copy",
+        "unsupported interpretation"
+      ]
+    },
+    {
+      "siteId": "agentic-publishing",
+      "canonicalHost": "publish.mahastrategies.com",
+      "current": 30,
+      "candidates": 160,
+      "projected": 190,
+      "role": "Agentic editorial workflow, rights, context packs, publication releases, and delivery.",
+      "allowed": [
+        "publishing protocols",
+        "editorial templates",
+        "release guidance"
+      ],
+      "prohibited": [
+        "duplicate research records",
+        "unlabelled machine authorship"
+      ]
+    },
+    {
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "current": 13,
+      "candidates": 100,
+      "projected": 113,
+      "role": "On-device and private AI, health-data consent, local memory, and resilient operation.",
+      "allowed": [
+        "private-system architecture",
+        "consent controls",
+        "operator guidance"
+      ],
+      "prohibited": [
+        "medical diagnosis",
+        "cloud-first defaults presented as private"
+      ]
+    },
+    {
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "current": 18,
+      "candidates": 88,
+      "projected": 106,
+      "role": "Canonical authorial concepts, book lineages, intellectual history, and declared thesis.",
+      "allowed": [
+        "authorial interpretation",
+        "concept genealogy",
+        "book relationships"
+      ],
+      "prohibited": [
+        "authorial thesis presented as consensus",
+        "empirical authority transfer"
+      ]
+    },
+    {
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "current": 17,
+      "candidates": 80,
+      "projected": 97,
+      "role": "Mayon Volcano identity, hazard literacy, place, preparedness, and public communication.",
+      "allowed": [
+        "bounded hazard education",
+        "official-source routing",
+        "place interpretation"
+      ],
+      "prohibited": [
+        "real-time alert substitution",
+        "religious-name conflation"
+      ]
+    },
+    {
+      "siteId": "maha-policy",
+      "canonicalHost": "policy.mahastrategies.com",
+      "current": 0,
+      "candidates": 300,
+      "projected": 300,
+      "role": "Policy evidence, governance mechanisms, implementation comparisons, and machine-readable policy rules.",
+      "allowed": [
+        "current-law summaries",
+        "policy evidence",
+        "Maha proposals labelled as proposals"
+      ],
+      "prohibited": [
+        "legal advice",
+        "proposal presented as enacted law"
+      ]
+    }
+  ],
+  "crossPropertyRules": {
+    "copiedBodyTextForbidden": true,
+    "selfCanonicalRequired": true,
+    "oneCanonicalOwnerPerConceptFamily": true,
+    "relationshipDoesNotTransferAuthority": true,
+    "policyFrameSeparation": [
+      "current-law",
+      "observed-evidence",
+      "maha-proposal",
+      "tradeoffs",
+      "uncertainty"
+    ],
+    "hazardSafety": "Educational pages must route readers to current official sources and never replace official alerts.",
+    "authorialBoundary": "Authorial thesis and interpretation must remain distinct from empirical or consensus authority."
+  },
+  "releaseProtocol": {
+    "requiredGates": [
+      "candidate-frozen",
+      "source-identity-verified",
+      "content-and-locator-inspected",
+      "alignment-clear",
+      "exact-revision-reviewed",
+      "active-canonical-release",
+      "compiled-and-verified"
+    ],
+    "vercelBuildRequiresOperatorApproval": true,
+    "remoteBuildAuthorized": false,
+    "previewAuthorized": false,
+    "deploymentAuthorized": false,
+    "dnsMutationAuthorized": false,
+    "productionMutationAuthorized": false
+  },
+  "provenanceDigest": "sha256:2e792b3ac69e28a8e86ce83bdaad6891a9bf91d94cca63ef31fa32bf25d432cb"
+}
