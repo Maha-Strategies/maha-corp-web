@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "maha-federation-tranche-two-readiness/1.0",
+  "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+  "cohortDigest": "sha256:a956626094de36595b250c0f9adb5be0195a52c0597648e64ecd3c7959844ecc",
+  "semanticValidationDigest": "sha256:f59da3645e9453c44854dd8e6a1c5afa1e609320787c56176347da40bc7e085e",
+  "dependencyValidationDigest": "sha256:580da8f09f4ecf78f0283bd0791104bb08cd5599f92b96cf0953516621c452ac",
+  "evidencePacketsDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
+  "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
+  "specificationsDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
+  "status": "local-readiness-complete",
+  "counts": {
+    "selectedCandidates": 100,
+    "semanticCandidatesReviewed": 100,
+    "semanticCorrections": 1,
+    "representedTopics": 44,
+    "priorPacketsReused": 28,
+    "newTopicPacketsInspected": 16,
+    "dependenciesValid": 100,
+    "evidenceReady": 85,
+    "revise": 9,
+    "blocked": 5,
+    "duplicative": 1,
+    "substantialPageSpecifications": 85,
+    "publicRoutesCreated": 0,
+    "nextBuildsRun": 0,
+    "vercelBuildsRun": 0
+  },
+  "implementationBoundary": "Evidence-ready candidates may enter route implementation. Publication still requires implementation, deterministic verification, exact-revision review, canonical release where applicable, and the user’s explicit approval before any Next or Vercel build.",
+  "blockers": [
+    {
+      "candidateId": "cand_48485c2639eca0b2fb4d9852",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/definition",
+      "disposition": "reject-as-duplicative",
+      "reason": "The existing https://publish.mahastrategies.com/docs/machine-readability route is the canonical definition; publishing another generic definition would split one concept across two doorways."
+    },
+    {
+      "candidateId": "cand_5322e19e5c67b1aae32124b0",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/failure-mode",
+      "disposition": "blocked",
+      "reason": "The observed canonical Publish definition route could not be inspected, so its templates and interfaces cannot be checked for semantic or schema agreement."
+    },
+    {
+      "candidateId": "cand_22d9ff199c2b10c0dabf2206",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/commercialization",
+      "disposition": "revise",
+      "reason": "The inspected sources establish implementation and control boundaries, but not current offer terms, availability, price, or customer outcomes."
+    },
+    {
+      "candidateId": "cand_41ee6b7080d2c8416e30adaf",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/commercialization",
+      "disposition": "revise",
+      "reason": "The inspected sources establish implementation and control boundaries, but not current offer terms, availability, price, or customer outcomes."
+    },
+    {
+      "candidateId": "cand_31b7dabe923fc44a99337460",
+      "url": "https://www.mayonemaharajan.com/concepts/public-reason/definition",
+      "disposition": "revise",
+      "reason": "Rawls supplies a primary genealogy for public reason, but no inspected Mayone manuscript passage establishes that the term is part of Mayone’s authorial system or how his use differs."
+    },
+    {
+      "candidateId": "cand_757660327e81854886c9df90",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/commercialization",
+      "disposition": "revise",
+      "reason": "The inspected sources establish implementation and control boundaries, but not current offer terms, availability, price, or customer outcomes."
+    },
+    {
+      "candidateId": "cand_0a1d37ad506fe9b0fdf91a0e",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/commercialization",
+      "disposition": "revise",
+      "reason": "The inspected sources establish implementation and control boundaries, but not current offer terms, availability, price, or customer outcomes."
+    },
+    {
+      "candidateId": "cand_8fce42b97cdeb9ab2446d8aa",
+      "url": "https://www.mayonemaharajan.com/concepts/public-reason/relationship",
+      "disposition": "revise",
+      "reason": "Rawls supplies a primary genealogy for public reason, but no inspected Mayone manuscript passage establishes that the term is part of Mayone’s authorial system or how his use differs."
+    },
+    {
+      "candidateId": "cand_b0625906e210bafb279b7669",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/template",
+      "disposition": "blocked",
+      "reason": "JATS and Schema.org establish external machine-readable article vocabularies, but the existing Publish owner definition could not be inspected; a parallel definition or template would risk semantic conflict."
+    },
+    {
+      "candidateId": "cand_c6513de286daaca52d677bd9",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/agentic-query-letter/machine-interface",
+      "disposition": "revise",
+      "reason": "No inspected authority defines an agentic query letter; the closest editorial source only governs conventional submission responsibilities."
+    },
+    {
+      "candidateId": "cand_c8b98032f22fc91b51dac6be",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/example",
+      "disposition": "blocked",
+      "reason": "JATS and Schema.org establish external machine-readable article vocabularies, but the existing Publish owner definition could not be inspected; a parallel definition or template would risk semantic conflict."
+    },
+    {
+      "candidateId": "cand_ed31a1988d83179a77beec49",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/agentic-query-letter/template",
+      "disposition": "revise",
+      "reason": "No inspected authority defines an agentic query letter; the closest editorial source only governs conventional submission responsibilities."
+    },
+    {
+      "candidateId": "cand_edda69105a975d84215ad8ab",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/policy",
+      "disposition": "blocked",
+      "reason": "The observed canonical Publish definition route could not be inspected, so its templates and interfaces cannot be checked for semantic or schema agreement."
+    },
+    {
+      "candidateId": "cand_f6409ea20cfc51496e3a61d8",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/commercialization",
+      "disposition": "revise",
+      "reason": "The inspected sources establish implementation and control boundaries, but not current offer terms, availability, price, or customer outcomes."
+    },
+    {
+      "candidateId": "cand_f805090b4bbcaa508d1215a0",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/workflow",
+      "disposition": "blocked",
+      "reason": "The observed canonical Publish definition route could not be inspected, so its templates and interfaces cannot be checked for semantic or schema agreement."
+    }
+  ],
+  "provenanceDigest": "sha256:3812cea840cf5d992e12010857563e4b1fbd9e90f98b942d3f5f38e3d7b30703"
+}

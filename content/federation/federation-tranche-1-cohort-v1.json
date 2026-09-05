@@ -1,0 +1,2826 @@
+{
+  "schemaVersion": "maha-federation-tranche-one-cohort/1.0",
+  "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+  "semanticAdjudicationDigest": "sha256:e07e5bb63aaa4daadea589a15d9e162b7b8ca18355e7a2f2f0624727a4fdf8bd",
+  "dependencyGraphDigest": "sha256:26109aad61ef624dccc0f8032ccfcc4dd0424d9f4009cc67a4953461d231100b",
+  "demandCalibrationDigest": "sha256:44875f26a7fd2ae93b9722d9bfee924cd59ddeaa1288bacdf6cd43d341e6ae34",
+  "status": "frozen-for-evidence-intake",
+  "selectionRule": "Family anchors first, then three high-utility candidates per property, then calibrated score within a proportional property cap; every dependency closure must fit inside the 100-record bound.",
+  "propertyLimits": {
+    "maha-strategies": 31,
+    "maha-research": 25,
+    "agentic-publishing": 10,
+    "maha-os": 6,
+    "mayone-maharajan": 5,
+    "mayon-rajan": 5,
+    "maha-policy": 18
+  },
+  "counts": {
+    "selected": 100,
+    "byProperty": {
+      "maha-strategies": 31,
+      "maha-research": 25,
+      "agentic-publishing": 10,
+      "maha-os": 6,
+      "mayone-maharajan": 5,
+      "mayon-rajan": 5,
+      "maha-policy": 18
+    },
+    "inspected": 0,
+    "evidenceReady": 0,
+    "pageSpecs": 0
+  },
+  "entries": [
+    {
+      "cohortOrder": 1,
+      "candidateId": "cand_1937134519716bbd2730b72f",
+      "url": "https://policy.mahastrategies.com/policy/tool-governance/definition",
+      "siteId": "maha-policy",
+      "topic": "tool-governance",
+      "routeRole": "definition",
+      "calibratedScore": 91.06,
+      "demandBasis": "unknown",
+      "dependencies": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "legal advice; proposal presented as enacted law",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ],
+        "additionalFrame": "Separate current law, observed evidence, Maha proposal, tradeoffs, jurisdiction, effective date, and uncertainty."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 2,
+      "candidateId": "cand_3310484656228e54e0023e11",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/definition",
+      "siteId": "agentic-publishing",
+      "topic": "human-review",
+      "routeRole": "definition",
+      "calibratedScore": 86.37,
+      "demandBasis": "unknown",
+      "dependencies": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "duplicate research records; unlabelled machine authorship",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary editorial standard, rights authority, publisher protocol, or versioned technical specification"
+        ],
+        "additionalFrame": "Separate workflow recommendation from binding rights or legal requirements."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 3,
+      "candidateId": "cand_3a7cc1c4dca92c985618384d",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/agentic-query-letter/definition",
+      "siteId": "agentic-publishing",
+      "topic": "agentic-query-letter",
+      "routeRole": "definition",
+      "calibratedScore": 86.37,
+      "demandBasis": "unknown",
+      "dependencies": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "duplicate research records; unlabelled machine authorship",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary editorial standard, rights authority, publisher protocol, or versioned technical specification"
+        ],
+        "additionalFrame": "Separate workflow recommendation from binding rights or legal requirements."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 4,
+      "candidateId": "cand_3dbf6da0286dd76c2ea339a6",
+      "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+      "siteId": "maha-research",
+      "topic": "source-identity",
+      "routeRole": "definition",
+      "calibratedScore": 88.21,
+      "demandBasis": "unknown",
+      "dependencies": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 5,
+      "candidateId": "cand_0145d36c049f02ae159ea987",
+      "url": "https://research.mahastrategies.com/federation/research/theorem-statement/definition",
+      "siteId": "maha-research",
+      "topic": "theorem-statement",
+      "routeRole": "definition",
+      "calibratedScore": 88.21,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 6,
+      "candidateId": "cand_30afc974780ef67ee4b6bb13",
+      "url": "https://research.mahastrategies.com/federation/research/propagation/definition",
+      "siteId": "maha-research",
+      "topic": "propagation",
+      "routeRole": "definition",
+      "calibratedScore": 98.02,
+      "demandBasis": "direct-topic-query-signal",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 7,
+      "candidateId": "cand_14ea59e5260116566dabcc83",
+      "url": "https://research.mahastrategies.com/federation/research/propagation/protocol",
+      "siteId": "maha-research",
+      "topic": "propagation",
+      "routeRole": "protocol",
+      "calibratedScore": 98.2,
+      "demandBasis": "direct-topic-query-signal",
+      "dependencies": [
+        "cand_30afc974780ef67ee4b6bb13",
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the protocol intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 8,
+      "candidateId": "cand_254d830c6a53fb10559391e2",
+      "url": "https://research.mahastrategies.com/federation/research/propagation/relationships",
+      "siteId": "maha-research",
+      "topic": "propagation",
+      "routeRole": "relationships",
+      "calibratedScore": 98.36,
+      "demandBasis": "direct-topic-query-signal",
+      "dependencies": [
+        "cand_30afc974780ef67ee4b6bb13",
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the relationships intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 9,
+      "candidateId": "cand_32d9e5ecc97be740fc8cf103",
+      "url": "https://research.mahastrategies.com/federation/research/section-locator/definition",
+      "siteId": "maha-research",
+      "topic": "section-locator",
+      "routeRole": "definition",
+      "calibratedScore": 88.21,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 10,
+      "candidateId": "cand_37630727dc4cb874fda1ce60",
+      "url": "https://research.mahastrategies.com/federation/research/figure-locator/definition",
+      "siteId": "maha-research",
+      "topic": "figure-locator",
+      "routeRole": "definition",
+      "calibratedScore": 87.85,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 11,
+      "candidateId": "cand_3ba11a4d324fbc9bfa80bbeb",
+      "url": "https://research.mahastrategies.com/federation/research/source-identity/fixture",
+      "siteId": "maha-research",
+      "topic": "source-identity",
+      "routeRole": "fixture",
+      "calibratedScore": 89.07,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the fixture intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 12,
+      "candidateId": "cand_3f1a9f08061713fb8ebe464c",
+      "url": "https://research.mahastrategies.com/federation/research/model-boundary/definition",
+      "siteId": "maha-research",
+      "topic": "model-boundary",
+      "routeRole": "definition",
+      "calibratedScore": 88.21,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 13,
+      "candidateId": "cand_43a69974e1c3c11878b470f9",
+      "url": "https://research.mahastrategies.com/federation/research/uncertainty/definition",
+      "siteId": "maha-research",
+      "topic": "uncertainty",
+      "routeRole": "definition",
+      "calibratedScore": 98.38,
+      "demandBasis": "direct-topic-query-signal",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 14,
+      "candidateId": "cand_451a78ac92d2875a61747627",
+      "url": "https://www.mahastrategies.com/clearing/evidence-workflows/source-identity/failure-modes",
+      "siteId": "maha-strategies",
+      "topic": "source-identity",
+      "routeRole": "failure-modes",
+      "calibratedScore": 91.02,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the failure-modes intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 15,
+      "candidateId": "cand_562ce5387e684220d8107f58",
+      "url": "https://research.mahastrategies.com/federation/research/uncertainty/protocol",
+      "siteId": "maha-research",
+      "topic": "uncertainty",
+      "routeRole": "protocol",
+      "calibratedScore": 98.56,
+      "demandBasis": "direct-topic-query-signal",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_43a69974e1c3c11878b470f9"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the protocol intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 16,
+      "candidateId": "cand_5b5c83330bcb28b072f037d9",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/agentic-query-letter/example",
+      "siteId": "agentic-publishing",
+      "topic": "agentic-query-letter",
+      "routeRole": "example",
+      "calibratedScore": 87.23,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_3a7cc1c4dca92c985618384d"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the example intent without inheriting authority from a related concept or property.",
+        "boundary": "duplicate research records; unlabelled machine authorship",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary editorial standard, rights authority, publisher protocol, or versioned technical specification"
+        ],
+        "additionalFrame": "Separate workflow recommendation from binding rights or legal requirements."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 17,
+      "candidateId": "cand_63800114df58212bf1827623",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition",
+      "siteId": "maha-strategies",
+      "topic": "identity-bound-agents",
+      "routeRole": "definition",
+      "calibratedScore": 88.85,
+      "demandBasis": "unknown",
+      "dependencies": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 18,
+      "candidateId": "cand_03783f0a589f183ebb951043",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/definition",
+      "siteId": "maha-strategies",
+      "topic": "metered-evidence-retrieval",
+      "routeRole": "definition",
+      "calibratedScore": 89.57,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 19,
+      "candidateId": "cand_1730f46729e7507504a87eb7",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/definition",
+      "siteId": "maha-strategies",
+      "topic": "context-budgeting",
+      "routeRole": "definition",
+      "calibratedScore": 89.82,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 20,
+      "candidateId": "cand_20da33096b4bf0cd8817d93d",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/definition",
+      "siteId": "maha-strategies",
+      "topic": "tool-authorization",
+      "routeRole": "definition",
+      "calibratedScore": 89.46,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 21,
+      "candidateId": "cand_5a7c51df1e3223dacf93e9d1",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/threats",
+      "siteId": "maha-strategies",
+      "topic": "tool-authorization",
+      "routeRole": "threats",
+      "calibratedScore": 90.39,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_20da33096b4bf0cd8817d93d",
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the threats intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 22,
+      "candidateId": "cand_65e220fb78705ffad954bb99",
+      "url": "https://research.mahastrategies.com/federation/research/research-release/definition",
+      "siteId": "maha-research",
+      "topic": "research-release",
+      "routeRole": "definition",
+      "calibratedScore": 88.21,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 23,
+      "candidateId": "cand_65e29e233a6650e62ff2565b",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/implementation",
+      "siteId": "maha-strategies",
+      "topic": "tool-authorization",
+      "routeRole": "implementation",
+      "calibratedScore": 90.32,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_20da33096b4bf0cd8817d93d",
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the implementation intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 24,
+      "candidateId": "cand_671d652918d62414c37d751d",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+      "siteId": "maha-os",
+      "topic": "health-data-consent",
+      "routeRole": "definition",
+      "calibratedScore": 84.74,
+      "demandBasis": "unknown",
+      "dependencies": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "medical diagnosis; cloud-first defaults presented as private",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "primary technical specification",
+          "independent privacy, security, safety, or health authority"
+        ],
+        "additionalFrame": "No diagnosis or clinical efficacy claim; state local/cloud data movement and consent revocation explicitly."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 25,
+      "candidateId": "cand_6b83072612c2c6451fd45c19",
+      "url": "https://research.mahastrategies.com/federation/research/research-release/fixture",
+      "siteId": "maha-research",
+      "topic": "research-release",
+      "routeRole": "fixture",
+      "calibratedScore": 89.07,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_65e220fb78705ffad954bb99"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the fixture intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 26,
+      "candidateId": "cand_6c7d279e19fcb92f76df94e2",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition",
+      "siteId": "maha-os",
+      "topic": "offline-operation",
+      "routeRole": "definition",
+      "calibratedScore": 85.91,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_671d652918d62414c37d751d"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "medical diagnosis; cloud-first defaults presented as private",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "primary technical specification",
+          "independent privacy, security, safety, or health authority"
+        ],
+        "additionalFrame": "No diagnosis or clinical efficacy claim; state local/cloud data movement and consent revocation explicitly."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 27,
+      "candidateId": "cand_64e34cac0ca1f3ac67f6649d",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/operator-guide",
+      "siteId": "maha-os",
+      "topic": "offline-operation",
+      "routeRole": "operator-guide",
+      "calibratedScore": 86.77,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_671d652918d62414c37d751d",
+        "cand_6c7d279e19fcb92f76df94e2"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the operator-guide intent without inheriting authority from a related concept or property.",
+        "boundary": "medical diagnosis; cloud-first defaults presented as private",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "primary technical specification",
+          "independent privacy, security, safety, or health authority"
+        ],
+        "additionalFrame": "No diagnosis or clinical efficacy claim; state local/cloud data movement and consent revocation explicitly."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 28,
+      "candidateId": "cand_6e59fad8478a7efbfa9f88af",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/definition",
+      "siteId": "maha-strategies",
+      "topic": "failure-recovery",
+      "routeRole": "definition",
+      "calibratedScore": 89.46,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 29,
+      "candidateId": "cand_49acbaf80c15c406036eb89d",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/threats",
+      "siteId": "maha-strategies",
+      "topic": "failure-recovery",
+      "routeRole": "threats",
+      "calibratedScore": 90.39,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_63800114df58212bf1827623",
+        "cand_6e59fad8478a7efbfa9f88af"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the threats intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 30,
+      "candidateId": "cand_6e5cae25a74731057505dc27",
+      "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+      "siteId": "mayone-maharajan",
+      "topic": "governed-autonomy",
+      "routeRole": "definition",
+      "calibratedScore": 73.55,
+      "demandBasis": "unknown",
+      "dependencies": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "authorial thesis presented as consensus; empirical authority transfer",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "identified book passage or authorial primary source",
+          "independent source only where historical or empirical context is asserted"
+        ],
+        "additionalFrame": "Label authorial thesis, interpretation, historical claim, and empirical claim separately."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 31,
+      "candidateId": "cand_6f3eacfcecccd7732583a282",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/definition",
+      "siteId": "maha-os",
+      "topic": "model-update",
+      "routeRole": "definition",
+      "calibratedScore": 85.91,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_671d652918d62414c37d751d"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "medical diagnosis; cloud-first defaults presented as private",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "primary technical specification",
+          "independent privacy, security, safety, or health authority"
+        ],
+        "additionalFrame": "No diagnosis or clinical efficacy claim; state local/cloud data movement and consent revocation explicitly."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 32,
+      "candidateId": "cand_741125933a6e700841e27c2b",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/example",
+      "siteId": "agentic-publishing",
+      "topic": "human-review",
+      "routeRole": "example",
+      "calibratedScore": 87.23,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_3310484656228e54e0023e11"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the example intent without inheriting authority from a related concept or property.",
+        "boundary": "duplicate research records; unlabelled machine authorship",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary editorial standard, rights authority, publisher protocol, or versioned technical specification"
+        ],
+        "additionalFrame": "Separate workflow recommendation from binding rights or legal requirements."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 33,
+      "candidateId": "cand_75e4bd509bd9951b41590427",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/enterprise-mcp-gateway/implementation",
+      "siteId": "maha-strategies",
+      "topic": "enterprise-mcp-gateway",
+      "routeRole": "implementation",
+      "calibratedScore": 98.1,
+      "demandBasis": "direct-topic-query-signal",
+      "dependencies": [
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the implementation intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 34,
+      "candidateId": "cand_79ca17406668823c29d6f6dd",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/template",
+      "siteId": "agentic-publishing",
+      "topic": "release-manifest",
+      "routeRole": "template",
+      "calibratedScore": 88.52,
+      "demandBasis": "adjacent-existing-page-signal",
+      "dependencies": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the template intent without inheriting authority from a related concept or property.",
+        "boundary": "duplicate research records; unlabelled machine authorship",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary editorial standard, rights authority, publisher protocol, or versioned technical specification"
+        ],
+        "additionalFrame": "Separate workflow recommendation from binding rights or legal requirements."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 35,
+      "candidateId": "cand_7b558066ec71b18a21f4187f",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/definition",
+      "siteId": "maha-strategies",
+      "topic": "credential-rotation",
+      "routeRole": "definition",
+      "calibratedScore": 89.46,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 36,
+      "candidateId": "cand_5ce69812befe6f9cba5bcc3d",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/threats",
+      "siteId": "maha-strategies",
+      "topic": "credential-rotation",
+      "routeRole": "threats",
+      "calibratedScore": 90.39,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_63800114df58212bf1827623",
+        "cand_7b558066ec71b18a21f4187f"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the threats intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 37,
+      "candidateId": "cand_87e00e29d6f2b677865680f5",
+      "url": "https://policy.mahastrategies.com/policy/data-protection/definition",
+      "siteId": "maha-policy",
+      "topic": "data-protection",
+      "routeRole": "definition",
+      "calibratedScore": 91.78,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_1937134519716bbd2730b72f"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "legal advice; proposal presented as enacted law",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ],
+        "additionalFrame": "Separate current law, observed evidence, Maha proposal, tradeoffs, jurisdiction, effective date, and uncertainty."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 38,
+      "candidateId": "cand_7f515000a5bf425fc969d69d",
+      "url": "https://policy.mahastrategies.com/policy/data-protection/sources",
+      "siteId": "maha-policy",
+      "topic": "data-protection",
+      "routeRole": "sources",
+      "calibratedScore": 91.78,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_1937134519716bbd2730b72f",
+        "cand_87e00e29d6f2b677865680f5"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the sources intent without inheriting authority from a related concept or property.",
+        "boundary": "legal advice; proposal presented as enacted law",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ],
+        "additionalFrame": "Separate current law, observed evidence, Maha proposal, tradeoffs, jurisdiction, effective date, and uncertainty."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 39,
+      "candidateId": "cand_887741fcdc5eea77b18bd301",
+      "url": "https://research.mahastrategies.com/federation/research/uncertainty/relationships",
+      "siteId": "maha-research",
+      "topic": "uncertainty",
+      "routeRole": "relationships",
+      "calibratedScore": 98.72,
+      "demandBasis": "direct-topic-query-signal",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_43a69974e1c3c11878b470f9"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the relationships intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 40,
+      "candidateId": "cand_938673c13a86e5b73e5c3e58",
+      "url": "https://www.mahastrategies.com/clearing/evidence-workflows/source-identity/verification",
+      "siteId": "maha-strategies",
+      "topic": "source-identity",
+      "routeRole": "verification",
+      "calibratedScore": 91.34,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the verification intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 41,
+      "candidateId": "cand_9399ecb5994f8ff63f2145f0",
+      "url": "https://www.mahastrategies.com/clearing/evidence-workflows/source-identity/commercial-use",
+      "siteId": "maha-strategies",
+      "topic": "source-identity",
+      "routeRole": "commercial-use",
+      "calibratedScore": 91.72,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the commercial-use intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 42,
+      "candidateId": "cand_94d3da0fbeefa7016d947db9",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/machine-interface",
+      "siteId": "agentic-publishing",
+      "topic": "release-manifest",
+      "routeRole": "machine-interface",
+      "calibratedScore": 88.2,
+      "demandBasis": "adjacent-existing-page-signal",
+      "dependencies": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the machine-interface intent without inheriting authority from a related concept or property.",
+        "boundary": "duplicate research records; unlabelled machine authorship",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary editorial standard, rights authority, publisher protocol, or versioned technical specification"
+        ],
+        "additionalFrame": "Separate workflow recommendation from binding rights or legal requirements."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 43,
+      "candidateId": "cand_94da29ed449b6d273a75e5f7",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/implementation",
+      "siteId": "maha-strategies",
+      "topic": "context-budgeting",
+      "routeRole": "implementation",
+      "calibratedScore": 90.68,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_1730f46729e7507504a87eb7",
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the implementation intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 44,
+      "candidateId": "cand_9f1eaef842514bf1f43b76f5",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/failure-mode",
+      "siteId": "maha-os",
+      "topic": "model-update",
+      "routeRole": "failure-mode",
+      "calibratedScore": 86.69,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_671d652918d62414c37d751d",
+        "cand_6f3eacfcecccd7732583a282"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the failure-mode intent without inheriting authority from a related concept or property.",
+        "boundary": "medical diagnosis; cloud-first defaults presented as private",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "primary technical specification",
+          "independent privacy, security, safety, or health authority"
+        ],
+        "additionalFrame": "No diagnosis or clinical efficacy claim; state local/cloud data movement and consent revocation explicitly."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 45,
+      "candidateId": "cand_a322413e35ee23167a146ced",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/enterprise-mcp-gateway/commercialization",
+      "siteId": "maha-strategies",
+      "topic": "enterprise-mcp-gateway",
+      "routeRole": "commercialization",
+      "calibratedScore": 97.5,
+      "demandBasis": "direct-topic-query-signal",
+      "dependencies": [
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the commercialization intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 46,
+      "candidateId": "cand_a7dc85b082092d763eeea7c2",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/enterprise-mcp-gateway/controls",
+      "siteId": "maha-strategies",
+      "topic": "enterprise-mcp-gateway",
+      "routeRole": "controls",
+      "calibratedScore": 97.4,
+      "demandBasis": "direct-topic-query-signal",
+      "dependencies": [
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the controls intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 47,
+      "candidateId": "cand_ae6d71c78288fa970517965b",
+      "url": "https://policy.mahastrategies.com/policy/public-trust/definition",
+      "siteId": "maha-policy",
+      "topic": "public-trust",
+      "routeRole": "definition",
+      "calibratedScore": 91.78,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_1937134519716bbd2730b72f"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "legal advice; proposal presented as enacted law",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ],
+        "additionalFrame": "Separate current law, observed evidence, Maha proposal, tradeoffs, jurisdiction, effective date, and uncertainty."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 48,
+      "candidateId": "cand_b278a387341dd14ef01c0a2c",
+      "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+      "siteId": "mayon-rajan",
+      "topic": "hazard-zones",
+      "routeRole": "definition",
+      "calibratedScore": 80.12,
+      "demandBasis": "unknown",
+      "dependencies": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "real-time alert substitution; religious-name conflation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "PHIVOLCS or other current official hazard source",
+          "peer-reviewed or government background source where needed"
+        ],
+        "additionalFrame": "Never substitute for live official alerts; include source date and geographic applicability."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 49,
+      "candidateId": "cand_60bf213c0188bc6dfa4bf87d",
+      "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/definition",
+      "siteId": "mayon-rajan",
+      "topic": "identity-and-location",
+      "routeRole": "definition",
+      "calibratedScore": 80.94,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_b278a387341dd14ef01c0a2c"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "real-time alert substitution; religious-name conflation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "PHIVOLCS or other current official hazard source",
+          "peer-reviewed or government background source where needed"
+        ],
+        "additionalFrame": "Never substitute for live official alerts; include source date and geographic applicability."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 50,
+      "candidateId": "cand_014f23f2d6774766bc713860",
+      "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/preparedness",
+      "siteId": "mayon-rajan",
+      "topic": "identity-and-location",
+      "routeRole": "preparedness",
+      "calibratedScore": 81.1,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_60bf213c0188bc6dfa4bf87d",
+        "cand_b278a387341dd14ef01c0a2c"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the preparedness intent without inheriting authority from a related concept or property.",
+        "boundary": "real-time alert substitution; religious-name conflation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "PHIVOLCS or other current official hazard source",
+          "peer-reviewed or government background source where needed"
+        ],
+        "additionalFrame": "Never substitute for live official alerts; include source date and geographic applicability."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 51,
+      "candidateId": "cand_57ec9c027eee2ac1385f192c",
+      "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/limits",
+      "siteId": "mayon-rajan",
+      "topic": "identity-and-location",
+      "routeRole": "limits",
+      "calibratedScore": 81.8,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_60bf213c0188bc6dfa4bf87d",
+        "cand_b278a387341dd14ef01c0a2c"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the limits intent without inheriting authority from a related concept or property.",
+        "boundary": "real-time alert substitution; religious-name conflation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "PHIVOLCS or other current official hazard source",
+          "peer-reviewed or government background source where needed"
+        ],
+        "additionalFrame": "Never substitute for live official alerts; include source date and geographic applicability."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 52,
+      "candidateId": "cand_836befa63802925d77932866",
+      "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/official-sources",
+      "siteId": "mayon-rajan",
+      "topic": "identity-and-location",
+      "routeRole": "official-sources",
+      "calibratedScore": 81.72,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_60bf213c0188bc6dfa4bf87d",
+        "cand_b278a387341dd14ef01c0a2c"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the official-sources intent without inheriting authority from a related concept or property.",
+        "boundary": "real-time alert substitution; religious-name conflation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "PHIVOLCS or other current official hazard source",
+          "peer-reviewed or government background source where needed"
+        ],
+        "additionalFrame": "Never substitute for live official alerts; include source date and geographic applicability."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 53,
+      "candidateId": "cand_b31d497a4a68e5cbe9bdde32",
+      "url": "https://research.mahastrategies.com/federation/research/propagation/fixture",
+      "siteId": "maha-research",
+      "topic": "propagation",
+      "routeRole": "fixture",
+      "calibratedScore": 98.88,
+      "demandBasis": "direct-topic-query-signal",
+      "dependencies": [
+        "cand_30afc974780ef67ee4b6bb13",
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the fixture intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 54,
+      "candidateId": "cand_b95168113fccd6c46a9277b0",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/implementation",
+      "siteId": "maha-strategies",
+      "topic": "credential-rotation",
+      "routeRole": "implementation",
+      "calibratedScore": 90.32,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_63800114df58212bf1827623",
+        "cand_7b558066ec71b18a21f4187f"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the implementation intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 55,
+      "candidateId": "cand_ba025cb22985c559d9c6b86d",
+      "url": "https://www.mahastrategies.com/clearing/evidence-workflows/source-identity/workflow",
+      "siteId": "maha-strategies",
+      "topic": "source-identity",
+      "routeRole": "workflow",
+      "calibratedScore": 90.64,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the workflow intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 56,
+      "candidateId": "cand_ba9e7b00cfa14788760ed790",
+      "url": "https://policy.mahastrategies.com/policy/data-protection/uncertainty",
+      "siteId": "maha-policy",
+      "topic": "data-protection",
+      "routeRole": "uncertainty",
+      "calibratedScore": 91.78,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_1937134519716bbd2730b72f",
+        "cand_87e00e29d6f2b677865680f5"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the uncertainty intent without inheriting authority from a related concept or property.",
+        "boundary": "legal advice; proposal presented as enacted law",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ],
+        "additionalFrame": "Separate current law, observed evidence, Maha proposal, tradeoffs, jurisdiction, effective date, and uncertainty."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 57,
+      "candidateId": "cand_bb584069467fffefe8cae7e4",
+      "url": "https://research.mahastrategies.com/federation/research/section-locator/fixture",
+      "siteId": "maha-research",
+      "topic": "section-locator",
+      "routeRole": "fixture",
+      "calibratedScore": 89.07,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_32d9e5ecc97be740fc8cf103",
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the fixture intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 58,
+      "candidateId": "cand_bb97bc9d7602283a3b8b5a5d",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/threats",
+      "siteId": "maha-strategies",
+      "topic": "context-budgeting",
+      "routeRole": "threats",
+      "calibratedScore": 90.75,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_1730f46729e7507504a87eb7",
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the threats intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 59,
+      "candidateId": "cand_bc2c0a51fccecc34fb24c794",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/implementation",
+      "siteId": "maha-strategies",
+      "topic": "failure-recovery",
+      "routeRole": "implementation",
+      "calibratedScore": 90.32,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_63800114df58212bf1827623",
+        "cand_6e59fad8478a7efbfa9f88af"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the implementation intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 60,
+      "candidateId": "cand_bfdeceed18b88ccc32fcc979",
+      "url": "https://research.mahastrategies.com/federation/research/uncertainty/fixture",
+      "siteId": "maha-research",
+      "topic": "uncertainty",
+      "routeRole": "fixture",
+      "calibratedScore": 99.24,
+      "demandBasis": "direct-topic-query-signal",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_43a69974e1c3c11878b470f9"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the fixture intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 61,
+      "candidateId": "cand_c37c01d3b8d59b6c853e991b",
+      "url": "https://policy.mahastrategies.com/policy/ai-agent-accountability/definition",
+      "siteId": "maha-policy",
+      "topic": "ai-agent-accountability",
+      "routeRole": "definition",
+      "calibratedScore": 91.78,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_1937134519716bbd2730b72f"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "legal advice; proposal presented as enacted law",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ],
+        "additionalFrame": "Separate current law, observed evidence, Maha proposal, tradeoffs, jurisdiction, effective date, and uncertainty."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 62,
+      "candidateId": "cand_147fd85acc93d85b4af0b903",
+      "url": "https://policy.mahastrategies.com/policy/ai-agent-accountability/sources",
+      "siteId": "maha-policy",
+      "topic": "ai-agent-accountability",
+      "routeRole": "sources",
+      "calibratedScore": 91.78,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_1937134519716bbd2730b72f",
+        "cand_c37c01d3b8d59b6c853e991b"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the sources intent without inheriting authority from a related concept or property.",
+        "boundary": "legal advice; proposal presented as enacted law",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ],
+        "additionalFrame": "Separate current law, observed evidence, Maha proposal, tradeoffs, jurisdiction, effective date, and uncertainty."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 63,
+      "candidateId": "cand_94266750c6b4aa180f7e3b71",
+      "url": "https://policy.mahastrategies.com/policy/ai-agent-accountability/mechanisms",
+      "siteId": "maha-policy",
+      "topic": "ai-agent-accountability",
+      "routeRole": "mechanisms",
+      "calibratedScore": 91.78,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_1937134519716bbd2730b72f",
+        "cand_c37c01d3b8d59b6c853e991b"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the mechanisms intent without inheriting authority from a related concept or property.",
+        "boundary": "legal advice; proposal presented as enacted law",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ],
+        "additionalFrame": "Separate current law, observed evidence, Maha proposal, tradeoffs, jurisdiction, effective date, and uncertainty."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 64,
+      "candidateId": "cand_c3808a61cc515e6f5283f08f",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/operator-guide",
+      "siteId": "maha-os",
+      "topic": "model-update",
+      "routeRole": "operator-guide",
+      "calibratedScore": 86.77,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_671d652918d62414c37d751d",
+        "cand_6f3eacfcecccd7732583a282"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the operator-guide intent without inheriting authority from a related concept or property.",
+        "boundary": "medical diagnosis; cloud-first defaults presented as private",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "primary technical specification",
+          "independent privacy, security, safety, or health authority"
+        ],
+        "additionalFrame": "No diagnosis or clinical efficacy claim; state local/cloud data movement and consent revocation explicitly."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 65,
+      "candidateId": "cand_cb21435abc94c118b0073ad9",
+      "url": "https://research.mahastrategies.com/federation/research/calculation-inputs/definition",
+      "siteId": "maha-research",
+      "topic": "calculation-inputs",
+      "routeRole": "definition",
+      "calibratedScore": 88.21,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 66,
+      "candidateId": "cand_1d96c6f07453f3a91c62e985",
+      "url": "https://www.mahastrategies.com/clearing/deterministic-computation/uncertainty-propagation/uncertainty",
+      "siteId": "maha-strategies",
+      "topic": "uncertainty-propagation",
+      "routeRole": "uncertainty",
+      "calibratedScore": 97.6,
+      "demandBasis": "direct-topic-query-signal",
+      "dependencies": [
+        "cand_30afc974780ef67ee4b6bb13",
+        "cand_cb21435abc94c118b0073ad9"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the uncertainty intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 67,
+      "candidateId": "cand_290d11e426d78bbb3e4932c5",
+      "url": "https://www.mahastrategies.com/clearing/deterministic-computation/uncertainty-propagation/reproducibility",
+      "siteId": "maha-strategies",
+      "topic": "uncertainty-propagation",
+      "routeRole": "reproducibility",
+      "calibratedScore": 98.52,
+      "demandBasis": "direct-topic-query-signal",
+      "dependencies": [
+        "cand_30afc974780ef67ee4b6bb13",
+        "cand_cb21435abc94c118b0073ad9"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the reproducibility intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 68,
+      "candidateId": "cand_bca8f8c97482cd3e35d3afc7",
+      "url": "https://research.mahastrategies.com/federation/research/calculation-inputs/fixture",
+      "siteId": "maha-research",
+      "topic": "calculation-inputs",
+      "routeRole": "fixture",
+      "calibratedScore": 89.07,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_cb21435abc94c118b0073ad9"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the fixture intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 69,
+      "candidateId": "cand_c649076b210c5ee56c40921e",
+      "url": "https://www.mahastrategies.com/clearing/deterministic-computation/uncertainty-propagation/worked-example",
+      "siteId": "maha-strategies",
+      "topic": "uncertainty-propagation",
+      "routeRole": "worked-example",
+      "calibratedScore": 96.87,
+      "demandBasis": "direct-topic-query-signal",
+      "dependencies": [
+        "cand_30afc974780ef67ee4b6bb13",
+        "cand_cb21435abc94c118b0073ad9"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the worked-example intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 70,
+      "candidateId": "cand_ccfd0d1e38ae45c195c492a5",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/definition",
+      "siteId": "agentic-publishing",
+      "topic": "structured-abstract",
+      "routeRole": "definition",
+      "calibratedScore": 86.37,
+      "demandBasis": "unknown",
+      "dependencies": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "duplicate research records; unlabelled machine authorship",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary editorial standard, rights authority, publisher protocol, or versioned technical specification"
+        ],
+        "additionalFrame": "Separate workflow recommendation from binding rights or legal requirements."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 71,
+      "candidateId": "cand_cd1e2d9529295cabd6ade110",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/example",
+      "siteId": "agentic-publishing",
+      "topic": "release-manifest",
+      "routeRole": "example",
+      "calibratedScore": 88.6,
+      "demandBasis": "adjacent-existing-page-signal",
+      "dependencies": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the example intent without inheriting authority from a related concept or property.",
+        "boundary": "duplicate research records; unlabelled machine authorship",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary editorial standard, rights authority, publisher protocol, or versioned technical specification"
+        ],
+        "additionalFrame": "Separate workflow recommendation from binding rights or legal requirements."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 72,
+      "candidateId": "cand_cd5f05f97fe7cf9f14b760c9",
+      "url": "https://www.mayonemaharajan.com/concepts/human-agency/definition",
+      "siteId": "mayone-maharajan",
+      "topic": "human-agency",
+      "routeRole": "definition",
+      "calibratedScore": 75.74,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_6e5cae25a74731057505dc27"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "authorial thesis presented as consensus; empirical authority transfer",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "identified book passage or authorial primary source",
+          "independent source only where historical or empirical context is asserted"
+        ],
+        "additionalFrame": "Label authorial thesis, interpretation, historical claim, and empirical claim separately."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 73,
+      "candidateId": "cand_50310cb0a578d0d98844c11c",
+      "url": "https://www.mayonemaharajan.com/concepts/human-agency/limits",
+      "siteId": "mayone-maharajan",
+      "topic": "human-agency",
+      "routeRole": "limits",
+      "calibratedScore": 76.08,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_6e5cae25a74731057505dc27",
+        "cand_cd5f05f97fe7cf9f14b760c9"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the limits intent without inheriting authority from a related concept or property.",
+        "boundary": "authorial thesis presented as consensus; empirical authority transfer",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "identified book passage or authorial primary source",
+          "independent source only where historical or empirical context is asserted"
+        ],
+        "additionalFrame": "Label authorial thesis, interpretation, historical claim, and empirical claim separately."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 74,
+      "candidateId": "cand_52ca34f5d175d915a5aed2c7",
+      "url": "https://www.mayonemaharajan.com/concepts/human-agency/relationship",
+      "siteId": "mayone-maharajan",
+      "topic": "human-agency",
+      "routeRole": "relationship",
+      "calibratedScore": 76.6,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_6e5cae25a74731057505dc27",
+        "cand_cd5f05f97fe7cf9f14b760c9"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the relationship intent without inheriting authority from a related concept or property.",
+        "boundary": "authorial thesis presented as consensus; empirical authority transfer",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "identified book passage or authorial primary source",
+          "independent source only where historical or empirical context is asserted"
+        ],
+        "additionalFrame": "Label authorial thesis, interpretation, historical claim, and empirical claim separately."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 75,
+      "candidateId": "cand_b98c789039b918ee6dcc5efe",
+      "url": "https://www.mayonemaharajan.com/concepts/human-agency/development",
+      "siteId": "mayone-maharajan",
+      "topic": "human-agency",
+      "routeRole": "development",
+      "calibratedScore": 76.52,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_6e5cae25a74731057505dc27",
+        "cand_cd5f05f97fe7cf9f14b760c9"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the development intent without inheriting authority from a related concept or property.",
+        "boundary": "authorial thesis presented as consensus; empirical authority transfer",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "identified book passage or authorial primary source",
+          "independent source only where historical or empirical context is asserted"
+        ],
+        "additionalFrame": "Label authorial thesis, interpretation, historical claim, and empirical claim separately."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 76,
+      "candidateId": "cand_d251f41a252e4b533f1b4eef",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/enterprise-mcp-gateway/threats",
+      "siteId": "maha-strategies",
+      "topic": "enterprise-mcp-gateway",
+      "routeRole": "threats",
+      "calibratedScore": 98.02,
+      "demandBasis": "direct-topic-query-signal",
+      "dependencies": [
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the threats intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 77,
+      "candidateId": "cand_d4b5347acc11d87e36da14c7",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/example",
+      "siteId": "agentic-publishing",
+      "topic": "structured-abstract",
+      "routeRole": "example",
+      "calibratedScore": 87.23,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_ccfd0d1e38ae45c195c492a5"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the example intent without inheriting authority from a related concept or property.",
+        "boundary": "duplicate research records; unlabelled machine authorship",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary editorial standard, rights authority, publisher protocol, or versioned technical specification"
+        ],
+        "additionalFrame": "Separate workflow recommendation from binding rights or legal requirements."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 78,
+      "candidateId": "cand_d62bfb90dfe41abba2796051",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/governance",
+      "siteId": "agentic-publishing",
+      "topic": "release-manifest",
+      "routeRole": "governance",
+      "calibratedScore": 88.08,
+      "demandBasis": "adjacent-existing-page-signal",
+      "dependencies": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the governance intent without inheriting authority from a related concept or property.",
+        "boundary": "duplicate research records; unlabelled machine authorship",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary editorial standard, rights authority, publisher protocol, or versioned technical specification"
+        ],
+        "additionalFrame": "Separate workflow recommendation from binding rights or legal requirements."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 79,
+      "candidateId": "cand_d67f604e3437caadd67f7d37",
+      "url": "https://research.mahastrategies.com/federation/research/model-boundary/fixture",
+      "siteId": "maha-research",
+      "topic": "model-boundary",
+      "routeRole": "fixture",
+      "calibratedScore": 89.07,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_3f1a9f08061713fb8ebe464c"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the fixture intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 80,
+      "candidateId": "cand_d96b1279f09eb2998187b607",
+      "url": "https://research.mahastrategies.com/federation/research/theorem-statement/fixture",
+      "siteId": "maha-research",
+      "topic": "theorem-statement",
+      "routeRole": "fixture",
+      "calibratedScore": 89.07,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_0145d36c049f02ae159ea987",
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the fixture intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 81,
+      "candidateId": "cand_ddd31b53e6436d4628439e3a",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/threats",
+      "siteId": "maha-strategies",
+      "topic": "metered-evidence-retrieval",
+      "routeRole": "threats",
+      "calibratedScore": 90.35,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_03783f0a589f183ebb951043",
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the threats intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 82,
+      "candidateId": "cand_e244e094ea6f604e4a49cefe",
+      "url": "https://policy.mahastrategies.com/policy/copyright-and-training-data/definition",
+      "siteId": "maha-policy",
+      "topic": "copyright-and-training-data",
+      "routeRole": "definition",
+      "calibratedScore": 91.78,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_1937134519716bbd2730b72f"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "legal advice; proposal presented as enacted law",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ],
+        "additionalFrame": "Separate current law, observed evidence, Maha proposal, tradeoffs, jurisdiction, effective date, and uncertainty."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 83,
+      "candidateId": "cand_71a024e6cb4266c48927c2b9",
+      "url": "https://policy.mahastrategies.com/policy/copyright-and-training-data/mechanisms",
+      "siteId": "maha-policy",
+      "topic": "copyright-and-training-data",
+      "routeRole": "mechanisms",
+      "calibratedScore": 91.78,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_1937134519716bbd2730b72f",
+        "cand_e244e094ea6f604e4a49cefe"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the mechanisms intent without inheriting authority from a related concept or property.",
+        "boundary": "legal advice; proposal presented as enacted law",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ],
+        "additionalFrame": "Separate current law, observed evidence, Maha proposal, tradeoffs, jurisdiction, effective date, and uncertainty."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 84,
+      "candidateId": "cand_b2ce8a5f9be5474b02971cd6",
+      "url": "https://policy.mahastrategies.com/policy/copyright-and-training-data/sources",
+      "siteId": "maha-policy",
+      "topic": "copyright-and-training-data",
+      "routeRole": "sources",
+      "calibratedScore": 91.78,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_1937134519716bbd2730b72f",
+        "cand_e244e094ea6f604e4a49cefe"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the sources intent without inheriting authority from a related concept or property.",
+        "boundary": "legal advice; proposal presented as enacted law",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ],
+        "additionalFrame": "Separate current law, observed evidence, Maha proposal, tradeoffs, jurisdiction, effective date, and uncertainty."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 85,
+      "candidateId": "cand_db1a44be4b666342c256e91b",
+      "url": "https://policy.mahastrategies.com/policy/copyright-and-training-data/uncertainty",
+      "siteId": "maha-policy",
+      "topic": "copyright-and-training-data",
+      "routeRole": "uncertainty",
+      "calibratedScore": 91.78,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_1937134519716bbd2730b72f",
+        "cand_e244e094ea6f604e4a49cefe"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the uncertainty intent without inheriting authority from a related concept or property.",
+        "boundary": "legal advice; proposal presented as enacted law",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ],
+        "additionalFrame": "Separate current law, observed evidence, Maha proposal, tradeoffs, jurisdiction, effective date, and uncertainty."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 86,
+      "candidateId": "cand_e4d6a544f2fc9d8d2bbc21af",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/implementation",
+      "siteId": "maha-strategies",
+      "topic": "metered-evidence-retrieval",
+      "routeRole": "implementation",
+      "calibratedScore": 90.43,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_03783f0a589f183ebb951043",
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the implementation intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 87,
+      "candidateId": "cand_e8311d5e4e5e06264006aa68",
+      "url": "https://policy.mahastrategies.com/policy/human-oversight/definition",
+      "siteId": "maha-policy",
+      "topic": "human-oversight",
+      "routeRole": "definition",
+      "calibratedScore": 91.78,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_1937134519716bbd2730b72f"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "legal advice; proposal presented as enacted law",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ],
+        "additionalFrame": "Separate current law, observed evidence, Maha proposal, tradeoffs, jurisdiction, effective date, and uncertainty."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 88,
+      "candidateId": "cand_07ef1f53943854507f63609b",
+      "url": "https://policy.mahastrategies.com/policy/human-oversight/uncertainty",
+      "siteId": "maha-policy",
+      "topic": "human-oversight",
+      "routeRole": "uncertainty",
+      "calibratedScore": 91.78,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_1937134519716bbd2730b72f",
+        "cand_e8311d5e4e5e06264006aa68"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the uncertainty intent without inheriting authority from a related concept or property.",
+        "boundary": "legal advice; proposal presented as enacted law",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ],
+        "additionalFrame": "Separate current law, observed evidence, Maha proposal, tradeoffs, jurisdiction, effective date, and uncertainty."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 89,
+      "candidateId": "cand_4a4bbe3d8bd059d0c31517f5",
+      "url": "https://policy.mahastrategies.com/policy/human-oversight/mechanisms",
+      "siteId": "maha-policy",
+      "topic": "human-oversight",
+      "routeRole": "mechanisms",
+      "calibratedScore": 91.78,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_1937134519716bbd2730b72f",
+        "cand_e8311d5e4e5e06264006aa68"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the mechanisms intent without inheriting authority from a related concept or property.",
+        "boundary": "legal advice; proposal presented as enacted law",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ],
+        "additionalFrame": "Separate current law, observed evidence, Maha proposal, tradeoffs, jurisdiction, effective date, and uncertainty."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 90,
+      "candidateId": "cand_94c18ae783f54ef7812a7dab",
+      "url": "https://policy.mahastrategies.com/policy/human-oversight/sources",
+      "siteId": "maha-policy",
+      "topic": "human-oversight",
+      "routeRole": "sources",
+      "calibratedScore": 91.78,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_1937134519716bbd2730b72f",
+        "cand_e8311d5e4e5e06264006aa68"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the sources intent without inheriting authority from a related concept or property.",
+        "boundary": "legal advice; proposal presented as enacted law",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ],
+        "additionalFrame": "Separate current law, observed evidence, Maha proposal, tradeoffs, jurisdiction, effective date, and uncertainty."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 91,
+      "candidateId": "cand_ecf3f0f97bec3e98308f9cc2",
+      "url": "https://policy.mahastrategies.com/policy/ai-agent-accountability/uncertainty",
+      "siteId": "maha-policy",
+      "topic": "ai-agent-accountability",
+      "routeRole": "uncertainty",
+      "calibratedScore": 91.78,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_1937134519716bbd2730b72f",
+        "cand_c37c01d3b8d59b6c853e991b"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the uncertainty intent without inheriting authority from a related concept or property.",
+        "boundary": "legal advice; proposal presented as enacted law",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ],
+        "additionalFrame": "Separate current law, observed evidence, Maha proposal, tradeoffs, jurisdiction, effective date, and uncertainty."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 92,
+      "candidateId": "cand_ed61e762fa0ec776b64ca043",
+      "url": "https://research.mahastrategies.com/federation/research/literature-conflict/definition",
+      "siteId": "maha-research",
+      "topic": "literature-conflict",
+      "routeRole": "definition",
+      "calibratedScore": 88.21,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 93,
+      "candidateId": "cand_edbd25353f79b43c1924cc54",
+      "url": "https://www.mahastrategies.com/clearing/deterministic-computation/uncertainty-propagation/machine-interface",
+      "siteId": "maha-strategies",
+      "topic": "uncertainty-propagation",
+      "routeRole": "machine-interface",
+      "calibratedScore": 98.8,
+      "demandBasis": "direct-topic-query-signal",
+      "dependencies": [
+        "cand_30afc974780ef67ee4b6bb13",
+        "cand_cb21435abc94c118b0073ad9"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the machine-interface intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 94,
+      "candidateId": "cand_edce8d48e667d38e6f7f20c0",
+      "url": "https://research.mahastrategies.com/federation/research/literature-conflict/fixture",
+      "siteId": "maha-research",
+      "topic": "literature-conflict",
+      "routeRole": "fixture",
+      "calibratedScore": 89.07,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_ed61e762fa0ec776b64ca043"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the fixture intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 95,
+      "candidateId": "cand_edf8039304f42ec19464948d",
+      "url": "https://research.mahastrategies.com/federation/research/figure-locator/fixture",
+      "siteId": "maha-research",
+      "topic": "figure-locator",
+      "routeRole": "fixture",
+      "calibratedScore": 88.71,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_37630727dc4cb874fda1ce60",
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the fixture intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 96,
+      "candidateId": "cand_f2dccc9569f0b8b56b8d10ee",
+      "url": "https://policy.mahastrategies.com/policy/data-protection/mechanisms",
+      "siteId": "maha-policy",
+      "topic": "data-protection",
+      "routeRole": "mechanisms",
+      "calibratedScore": 91.78,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_1937134519716bbd2730b72f",
+        "cand_87e00e29d6f2b677865680f5"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the mechanisms intent without inheriting authority from a related concept or property.",
+        "boundary": "legal advice; proposal presented as enacted law",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ],
+        "additionalFrame": "Separate current law, observed evidence, Maha proposal, tradeoffs, jurisdiction, effective date, and uncertainty."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 97,
+      "candidateId": "cand_f40a8ffd0e5eda5b8f404d14",
+      "url": "https://research.mahastrategies.com/federation/research/rights-basis/definition",
+      "siteId": "maha-research",
+      "topic": "rights-basis",
+      "routeRole": "definition",
+      "calibratedScore": 87.85,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the definition intent without inheriting authority from a related concept or property.",
+        "boundary": "sales copy; unsupported interpretation",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "primary specification, standard, dataset documentation, government publication, or research paper"
+        ],
+        "additionalFrame": "State what the source establishes, what it does not establish, and the reproduction boundary."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 98,
+      "candidateId": "cand_4cc36bf23125318d76871e24",
+      "url": "https://www.mahastrategies.com/clearing/evidence-workflows/rights-basis/verification",
+      "siteId": "maha-strategies",
+      "topic": "rights-basis",
+      "routeRole": "verification",
+      "calibratedScore": 90.9,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_f40a8ffd0e5eda5b8f404d14"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the verification intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 99,
+      "candidateId": "cand_d4e5b2c6ab09d0efb0cf18da",
+      "url": "https://www.mahastrategies.com/clearing/evidence-workflows/rights-basis/commercial-use",
+      "siteId": "maha-strategies",
+      "topic": "rights-basis",
+      "routeRole": "commercial-use",
+      "calibratedScore": 91.13,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_f40a8ffd0e5eda5b8f404d14"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the commercial-use intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 100,
+      "candidateId": "cand_dcd48c0795ff5cb8ebfcc26b",
+      "url": "https://www.mahastrategies.com/clearing/evidence-workflows/rights-basis/failure-modes",
+      "siteId": "maha-strategies",
+      "topic": "rights-basis",
+      "routeRole": "failure-modes",
+      "calibratedScore": 90.43,
+      "demandBasis": "unknown",
+      "dependencies": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_f40a8ffd0e5eda5b8f404d14"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Canonical title, responsible institution or author, version/date, and stable URL or identifier must be verified.",
+        "locator": "Every explanatory assertion requires an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access basis and quotation boundary; store fingerprints and locators rather than redistributing restricted full text.",
+        "scope": "Evidence must support the failure-modes intent without inheriting authority from a related concept or property.",
+        "boundary": "research-source duplication; unreleased evidence claims",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical owner evidence",
+          "operational or empirical source for the local application"
+        ],
+        "additionalFrame": "Keep general definition, bounded application, commercial statement, and observed performance distinct."
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    }
+  ],
+  "provenanceDigest": "sha256:7e79b2585e2634449ef8c7b5d8c5889844b22440f8a071ab01dd5a6190b9529f"
+}
