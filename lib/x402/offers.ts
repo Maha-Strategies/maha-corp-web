@@ -223,9 +223,11 @@ export const MPS_AUTONOMOUS_AUDIT_OFFER: X402Offer = {
   // Withheld until 2026-08-12, because the honest consequence of shipping
   // without the gates below is a settled payment with no job behind it.
   //
-  // Returned to withheld on 2026-08-12, hours after the promotion, by the
-  // first paid Mainnet verification -- which is what that verification was
-  // for.
+  // Returned to withheld on 2026-08-12, hours after the first promotion, by
+  // the first paid Mainnet verification -- which is what that verification
+  // was for. Re-promoted on 2026-09-05 only after the request preimage,
+  // request identity and body became pre-settlement admission checks and the
+  // repaired boundary passed its non-paying Preview suite.
   // The cause was reconstructed: the buyer hashed the complete JSON request,
   // while the route expected the text field alone, and that disagreement was
   // detected only after settlement. The contract now publishes the preimage
@@ -237,16 +239,11 @@ export const MPS_AUTONOMOUS_AUDIT_OFFER: X402Offer = {
   // catalog said `available` while Production had already removed the path
   // from X402_RESOURCES, so discovery was advertising a contract nobody could
   // buy. That gap is the reason this field exists, and leaving it open would
-  // have been worse than never promoting.
-  status: 'withheld',
-  availability: {
-    payableInProduction: false,
-    blockedBy: [
-      'The first Mainnet verification failure on 2026-08-12 is repaired in code: the documented text-field digest, request id and body are now checked before settlement, and paid-job replay remains recoverable without a second charge.',
-      'The repaired contract must pass a non-paying Preview end-to-end exercise, including wrong-hash, malformed-body, replay and recovery cases, before Production promotion is considered.',
-      'A later Mainnet canary requires separate authorization and may occur only after the Preview evidence passes.',
-    ],
-  },
+  // have been worse than never promoting. A later paid verification is a
+  // separately authorized post-deployment observation, not permission to
+  // publish the repaired contract.
+  status: 'available',
+  availability: { payableInProduction: true, blockedBy: [] },
   // This offer creates a job and calls a model. A duplicate is a double
   // charge, not duplicated work.
   requiresIdempotency: true,

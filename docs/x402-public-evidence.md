@@ -58,8 +58,8 @@ design.
 
 **Payment terms appear only on offers whose status is `active`.** A `withheld`
 offer answers 401; publishing terms for it would invite a payment that cannot
-succeed. `mps-autonomous-audit` is withheld today and its `payment` field is
-`null` for exactly that reason.
+succeed. `mps-autonomous-audit` is active only after its body, request identity
+and text-field digest became pre-settlement admission checks.
 
 | Status | Meaning |
 | --- | --- |
