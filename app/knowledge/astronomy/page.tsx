@@ -16,6 +16,10 @@ import {
   ASTRONOMY_TRACK_META,
   astronomyArticlePath,
 } from '@/lib/astronomy-knowledge'
+import { clearingGuidesForLane } from '@/lib/epistemic-clearing-batch-one'
+
+const astronomyClearingGuides = clearingGuidesForLane('mathematics-astronomy')
+  .filter((guide) => guide.path.startsWith('/knowledge/astronomy/clearing/'))
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -85,6 +89,15 @@ export default function AstronomyKnowledgePage() {
           <div className="mt-7 grid gap-px border border-zinc-800 bg-zinc-800 md:grid-cols-2 lg:grid-cols-3">
             {ASTRONOMY_EVIDENCE_STATES.map((state, index) => <article key={state} className="bg-[#07090e] p-5"><p className="font-mono text-[10px] text-sky-300">{String(index + 1).padStart(2, '0')}</p><h3 className="mt-3 font-semibold text-white">{evidenceMeta[state][0]}</h3><p className="mt-2 text-sm leading-6 text-zinc-500">{evidenceMeta[state][1]}</p></article>)}
           </div>
+        </div>
+      </section>
+
+      <section className="border-b border-zinc-900 px-6 py-14 sm:px-12">
+        <div className="mx-auto max-w-6xl">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-violet-300">Inference-boundary guides</p>
+          <h2 className="mt-3 text-3xl font-semibold text-white">Ask what was observed before asking what it means.</h2>
+          <p className="mt-4 max-w-3xl text-sm leading-7 text-zinc-500">These guides define measurement, calibration, observable, uncertainty, and inference checks. They report no new observation or model fit.</p>
+          <div className="mt-7 grid gap-4 md:grid-cols-2">{astronomyClearingGuides.map((guide) => <Link key={guide.path} href={guide.path} className="group border border-zinc-800 bg-zinc-950/50 p-5 hover:border-violet-500/60"><p className="font-mono text-[9px] uppercase tracking-widest text-violet-300">Bounded method</p><h3 className="mt-3 font-semibold text-white group-hover:text-violet-200">{guide.title}</h3><p className="mt-3 text-sm leading-6 text-zinc-500">{guide.question}</p></Link>)}</div>
         </div>
       </section>
 

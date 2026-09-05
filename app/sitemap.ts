@@ -34,6 +34,7 @@ import { PUBLIC_AUTHORITY_CONFORMANCE_DATE } from '@/lib/celestial-public-author
 import { getPublishedSubstantialPage, SUBSTANTIAL_PUBLICATION_DATE } from '@/lib/substantial-page-public'
 import { eligibleSourceSlugs, SOURCE_ROUTE_PREFIX } from '@/lib/source-reference-projection'
 import { EXACTZK_EVIDENCE_PATH, EXACTZK_RELEASE_DATE, KNOWLEDGE_INTEGRATIONS_PATH, NSGOODS_PREFLIGHT_V3_EVIDENCE_PATH, NSGOODS_PREFLIGHT_V3_RELEASE_DATE } from '@/lib/knowledge-integration-evidence'
+import { EPISTEMIC_CLEARING_PAGES } from '@/lib/epistemic-clearing-batch-one'
 
 /*
  * The sitemap reads active canonical releases from the database, so it must be
@@ -141,6 +142,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...EVIDENCE_WORKFLOW_EXAMPLES.map((workflow) => ({
       url: `${baseUrl}${evidenceWorkflowPath(workflow)}`,
       lastModified: new Date(EVIDENCE_WORKFLOW_DATE),
+    })),
+    ...EPISTEMIC_CLEARING_PAGES.map((page) => ({
+      url: `${baseUrl}${page.path}`,
+      lastModified: new Date(page.preparedOn),
     })),
     { url: `${baseUrl}/knowledge/muhurta`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
     { url: `${baseUrl}/knowledge/birth`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },

@@ -18,6 +18,9 @@ import {
   PUBLIC_EPISTEMIC_RECORDS,
 } from '@/lib/epistemic-pilots'
 import { EPISTEMIC_PHASE4_PILOT_MANIFEST } from '@/lib/epistemic-pilot-corpus'
+import { clearingGuidesForLane } from '@/lib/epistemic-clearing-batch-one'
+
+const evidenceClearingGuides = clearingGuidesForLane('evidence-clearing').slice(0, 4)
 
 export const metadata: Metadata = {
   metadataBase: new URL(MAHA_SITE_URL),
@@ -161,6 +164,9 @@ export default function EpistemicSystemPage() {
           <h2 id="factory-heading" className="evidence-section-title mt-3">Automated volume stops before authority.</h2>
           <p className="evidence-copy mt-5 max-w-4xl">The noncanonical factory compiles immutable audits, source/claim matrices, and reviewer-ready packets across bounded batches. Public-authority calculation fixtures run in CI, while candidate packets remain private, noindex, absent from the sitemap, and incapable of satisfying expert review.</p>
           <Link href={`${EPISTEMIC_SYSTEM_PATH}/publishing-factory`} className="evidence-action evidence-action--primary mt-7">Open the publishing factory protocol</Link>
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            {evidenceClearingGuides.map((guide) => <Link key={guide.path} href={guide.path} className="evidence-card group"><p className="evidence-kicker text-[var(--status-sourced)]">Evidence-clearing guide</p><h3 className="evidence-card-title mt-3 group-hover:underline">{guide.title}</h3><p className="evidence-card-copy mt-3">{guide.question}</p></Link>)}
+          </div>
         </section>
 
         <section className="evidence-section" aria-labelledby="axes-heading">

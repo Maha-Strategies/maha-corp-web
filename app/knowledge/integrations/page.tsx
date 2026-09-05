@@ -8,6 +8,9 @@ import {
   NSGOODS_PREFLIGHT_V3_EVIDENCE,
   NSGOODS_PREFLIGHT_V3_EVIDENCE_PATH,
 } from '@/lib/knowledge-integration-evidence'
+import { clearingGuidesForLane } from '@/lib/epistemic-clearing-batch-one'
+
+const crossDomainClearingGuides = clearingGuidesForLane('cross-domain-synthesis').slice(0, 6)
 
 export const metadata: Metadata = {
   title: 'Integration Evidence | Maha Strategies',
@@ -106,6 +109,15 @@ export default function KnowledgeIntegrationsPage() {
             <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-cyan-400">Open evidence record →</p>
           </Link>
           </div>
+        </div>
+      </section>
+
+      <section className="border-t border-zinc-900 px-6 py-14 sm:px-12">
+        <div className="mx-auto max-w-5xl">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-violet-300">Typed bridge contracts</p>
+          <h2 className="mt-3 text-3xl font-semibold text-white">Connect domains without transferring validity by metaphor.</h2>
+          <p className="mt-4 max-w-3xl text-sm leading-7 text-zinc-500">Each guide defines the evidence, terminology, units, uncertainty, and machine selector required on both sides. No bridge is itself evidence that the connected claims are true.</p>
+          <div className="mt-7 grid gap-4 md:grid-cols-2">{crossDomainClearingGuides.map((guide) => <Link key={guide.path} href={guide.path} className="group border border-zinc-800 bg-zinc-950/60 p-5 hover:border-violet-500/60"><p className="font-mono text-[9px] uppercase tracking-widest text-violet-300">Method-only bridge</p><h3 className="mt-3 font-semibold text-white group-hover:text-violet-200">{guide.title}</h3><p className="mt-3 text-sm leading-6 text-zinc-500">{guide.question}</p></Link>)}</div>
         </div>
       </section>
     </main>

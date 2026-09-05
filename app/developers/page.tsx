@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 
 import contextRetention from '@/benchmarks/mcrb-1/results.json'
 import contextRecipe from '@/content/recipes/context-compiler-large-document-result.json'
+import { clearingGuidesForLane } from '@/lib/epistemic-clearing-batch-one'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 const title = 'Developer Infrastructure for Governed AI Systems | Maha Strategies'
@@ -32,6 +33,8 @@ const integrations = [
   { title: 'x402 Buyer Policy', body: 'Open pre-signing budgets, allowlists, approvals, replay controls, and settlement verification for autonomous buyers.', href: '/x402-buyer-policy', action: 'Apply buyer payment controls', external: false },
   { title: 'Compatibility Pack contract', body: 'Exact schemas, fixed price, sample evidence report, limitations, and refund behavior for the bounded A2A + MCP machine product.', href: '/agent-infrastructure-compatibility-pack', action: 'Inspect the published contract', external: false },
 ] as const
+
+const machineClearingGuides = clearingGuidesForLane('machine-integrations').slice(0, 4)
 
 export default function DevelopersPage() {
   const contextBm25 = contextRetention.results.find((result) => result.method === 'maha_bm25')!
@@ -63,6 +66,15 @@ export default function DevelopersPage() {
           <p className="evidence-kicker">SDKs and integration contracts</p><h2 id="sdk-integrations" className="evidence-section-title mt-4">Integrate without adopting another runtime.</h2>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {integrations.map((integration) => <article key={integration.href} className="evidence-card"><h3 className="evidence-card-title text-lg">{integration.title}</h3><p className="evidence-card-copy mt-3 min-h-20">{integration.body}</p>{integration.external ? <a href={integration.href} target="_blank" rel="noopener noreferrer" className="evidence-link mt-5 inline-block font-mono text-[10px] uppercase tracking-widest">{integration.action} ↗</a> : <Link href={integration.href} className="evidence-link mt-5 inline-block font-mono text-[10px] uppercase tracking-widest">{integration.action} ↗</Link>}</article>)}
+          </div>
+        </section>
+
+        <section className="evidence-section" aria-labelledby="machine-clearing-guides">
+          <p className="evidence-kicker">Bounded machine decisions</p>
+          <h2 id="machine-clearing-guides" className="evidence-section-title mt-4">Carry identity, entitlement, quota, and evidence boundaries into each request.</h2>
+          <p className="evidence-copy mt-5 max-w-4xl">These operational guides connect Maha&apos;s implemented contracts to conceptual lenses from the books. The book links frame the problem; they are never treated as evidence that a machine control exists or works.</p>
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            {machineClearingGuides.map((guide) => <Guide key={guide.path} href={guide.path} title={guide.title} detail={guide.question} />)}
           </div>
         </section>
 

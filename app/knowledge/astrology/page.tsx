@@ -23,6 +23,9 @@ import { TIMING_REFERENCE_PATH, TIMING_REFERENCES } from '@/lib/celestial-timing
 import { CORPORATE_MUNDANE_PATH, CORPORATE_MUNDANE_REFERENCES } from '@/lib/corporate-mundane-references'
 import { ASTROLOGY_ANSWER_GRAPH_PATH, ASTROLOGY_ANSWERS } from '@/lib/astrology-answer-graph'
 import { ASTROLOGY_WORKFLOW_PATH, ASTROLOGY_WORKFLOW_PROTOCOLS } from '@/lib/astrology-workflow-protocols'
+import { clearingGuidesForLane } from '@/lib/epistemic-clearing-batch-one'
+
+const astrologyClearingGuides = clearingGuidesForLane('astrology-infrastructure').slice(0, 4)
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -96,6 +99,9 @@ export default function AstrologyTraditionsPage() {
             <h3 className="mt-3 text-lg font-semibold text-white">Execute inputs, calculations, evaluation, and comparison without hidden defaults</h3>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-400">Each protocol names required inputs, ordered operations, emitted artifacts, refusal conditions, completion tests, and—where applicable—a recomputable calculation receipt.</p>
           </Link>
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            {astrologyClearingGuides.map((guide) => <Link key={guide.path} href={guide.path} className="block border border-zinc-800 p-5 hover:border-cyan-500/50"><p className="font-mono text-[9px] uppercase tracking-widest text-cyan-300">Provenance and sensitivity</p><h3 className="mt-3 text-lg font-semibold text-white">{guide.title}</h3><p className="mt-2 text-sm leading-6 text-zinc-400">{guide.question}</p></Link>)}
+          </div>
         </section>
 
         <section className="mt-14">

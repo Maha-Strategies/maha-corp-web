@@ -6,6 +6,7 @@ import { MAYON_KNOWLEDGE_PATH } from '@/lib/mayon-knowledge'
 import { TAMIL_CLASSICAL_PATH } from '@/lib/tamil-classical-traditions'
 import { TIRUVAYMOLI_ATLAS_PATH } from '@/lib/tiruvaymoli-passage-atlas'
 import { TAMIL_SOURCE_ATLAS_PATH } from '@/lib/tamil-source-atlas'
+import { clearingGuidesForLane } from '@/lib/epistemic-clearing-batch-one'
 import {
   RELIGION_CATEGORIES,
   RELIGION_COMPARISONS,
@@ -18,6 +19,8 @@ import {
   RELIGION_REGISTRY_PATH,
   religionConceptPath,
 } from '@/lib/religion-knowledge'
+
+const tamilClearingGuides = clearingGuidesForLane('tamil-religion').slice(0, 6)
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -65,6 +68,16 @@ export default function ReligionKnowledgePage() {
           <div className="mt-3 flex flex-wrap items-end justify-between gap-5">
             <div className="max-w-3xl"><h2 className="text-3xl font-semibold text-white">Classical Tamil religion and reception</h2><p className="mt-3 text-sm leading-6 text-zinc-400">Continue from Māyōṉ into the wider landscape-deity stanza, Paripāṭal subject and music records, occurrence-level divine epithets, and later Āḻvār reception.</p></div>
             <Link href={TAMIL_CLASSICAL_PATH} className="font-mono text-[10px] uppercase tracking-widest text-amber-300 hover:text-white">Explore the cluster →</Link>
+          </div>
+        </section>
+
+        <section className="mt-14 border-t border-zinc-800 pt-9">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div><p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">Evidence-clearing guides</p><h2 className="mt-3 text-3xl font-semibold text-white">Ask bounded questions across text, translation, reception, and theology.</h2></div>
+            <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">200 guides · 1,000 answers</p>
+          </div>
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            {tamilClearingGuides.map((guide) => <Link key={guide.path} href={guide.path} className="group border border-zinc-800 p-5 hover:border-cyan-600/60"><p className="font-mono text-[9px] uppercase tracking-widest text-cyan-300">{guide.family.replaceAll('-', ' ')}</p><h3 className="mt-3 text-lg font-semibold text-white group-hover:text-cyan-200">{guide.title}</h3><p className="mt-2 text-sm leading-6 text-zinc-500">{guide.question}</p></Link>)}
           </div>
         </section>
 
