@@ -25,6 +25,7 @@ import {
   retrievalTokenMatches,
   validRetrievalToken,
 } from '../lib/x402/mps-audit-job.ts'
+import { auditInputHash } from '../lib/mps-audit-engine.ts'
 
 const ROOT = join(import.meta.dirname, '..')
 
@@ -58,8 +59,17 @@ async function signatureFor(path: string, overrides: { accepted?: Record<string,
   })
 }
 
-const post = (path: string, headers: Record<string, string> = {}) =>
-  new Request(`https://www.mahastrategies.com${path}`, { method: 'POST', headers })
+const MPS_TEXT = 'A published report says the pilot reduced manual review time by twenty percent.'
+const MPS_REQUEST_ID = 'req_behaviour_0001'
+
+const post = (path: string, headers: Record<string, string> = {}) => {
+  const isMps = path === '/api/v1/mps/audit'
+  return new Request(`https://www.mahastrategies.com${path}`, {
+    method: 'POST',
+    headers: isMps ? { 'content-type': 'application/json', ...headers } : headers,
+    ...(isMps ? { body: JSON.stringify({ clientRequestId: MPS_REQUEST_ID, text: MPS_TEXT }) } : {}),
+  })
+}
 
 const facilitator = (): PaymentFacilitator => ({
   verify: async () => ({ ok: true, payer: '0xAgent' }),
@@ -77,8 +87,8 @@ const admissionLedger = (decision = 'proceed', transaction: string | null = null
 
 /** Headers a payer must send for an offer that creates a job. */
 const IDEMPOTENT = {
-  'x-maha-idempotency-key': 'req_behaviour_0001',
-  'x-maha-input-hash': `sha256:${'a'.repeat(64)}`,
+  'x-maha-idempotency-key': MPS_REQUEST_ID,
+  'x-maha-input-hash': auditInputHash(MPS_TEXT),
 }
 
 

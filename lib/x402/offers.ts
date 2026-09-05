@@ -226,6 +226,10 @@ export const MPS_AUTONOMOUS_AUDIT_OFFER: X402Offer = {
   // Returned to withheld on 2026-08-12, hours after the promotion, by the
   // first paid Mainnet verification -- which is what that verification was
   // for.
+  // The cause was reconstructed: the buyer hashed the complete JSON request,
+  // while the route expected the text field alone, and that disagreement was
+  // detected only after settlement. The contract now publishes the preimage
+  // and the gateway checks the body on a clone before any payment can move.
   //
   // One settlement of 100000 base units confirmed on chain
   // (0x1c6cf823546de43b33b79974bfe2309d44a11fcf7d15a833b755fc05b4e1b0c4),
@@ -238,9 +242,9 @@ export const MPS_AUTONOMOUS_AUDIT_OFFER: X402Offer = {
   availability: {
     payableInProduction: false,
     blockedBy: [
-      'Paid delivery and recoverability failed during the first Mainnet verification on 2026-08-12: one settlement confirmed on chain, no deliverable response, and the job could not be recovered by its idempotency key.',
-      'The cause is under read-only diagnosis across the payment, settlement, admission, job and telemetry records.',
-      'No further settlement will be attempted until the failure is understood and a non-paying regression test covers it.',
+      'The first Mainnet verification failure on 2026-08-12 is repaired in code: the documented text-field digest, request id and body are now checked before settlement, and paid-job replay remains recoverable without a second charge.',
+      'The repaired contract must pass a non-paying Preview end-to-end exercise, including wrong-hash, malformed-body, replay and recovery cases, before Production promotion is considered.',
+      'A later Mainnet canary requires separate authorization and may occur only after the Preview evidence passes.',
     ],
   },
   // This offer creates a job and calls a model. A duplicate is a double
