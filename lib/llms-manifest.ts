@@ -16,6 +16,7 @@ import { TAMIL_SOURCE_ATLAS_PATH, TAMIL_SOURCE_ATLAS_REGISTRY_PATH, TAMIL_SOURCE
 import { ASTROLOGY_ANSWER_GRAPH_PATH, ASTROLOGY_ANSWER_GRAPH_REGISTRY_PATH, ASTROLOGY_ANSWERS, astrologyAnswerPath } from './astrology-answer-graph.ts'
 import { ASTROLOGY_WORKFLOW_PATH, ASTROLOGY_WORKFLOW_PROTOCOLS, ASTROLOGY_WORKFLOW_REGISTRY_PATH, astrologyWorkflowPath } from './astrology-workflow-protocols.ts'
 import { EVIDENCE_WORKFLOW_EXAMPLES, EVIDENCE_WORKFLOW_PATH, EVIDENCE_WORKFLOW_REGISTRY_PATH, evidenceWorkflowPath } from './evidence-workflow-examples.ts'
+import { EPISTEMIC_CLEARING_PAGES } from './epistemic-clearing-batch-one.ts'
 
 const RESEARCH_URL = 'https://research.mahastrategies.com'
 
@@ -103,6 +104,12 @@ export function buildLlmsManifest(
     `- Evidence workflow examples: https://www.mahastrategies.com${EVIDENCE_WORKFLOW_PATH}`,
     `- Evidence workflow machine registry: https://www.mahastrategies.com${EVIDENCE_WORKFLOW_REGISTRY_PATH}`,
     ...EVIDENCE_WORKFLOW_EXAMPLES.map((workflow) => `- Worked evidence workflow — ${workflow.title}: https://www.mahastrategies.com${evidenceWorkflowPath(workflow)}`),
+    '',
+    '## Epistemic clearing guides',
+    '',
+    '> Bounded question-and-procedure guides over named public material. A guide is not a new canonical scientific release, and a book link is a conceptual lens rather than technical evidence.',
+    '',
+    ...EPISTEMIC_CLEARING_PAGES.map((page) => `- ${page.title}: https://www.mahastrategies.com${page.path}`),
     '',
     '## Canonical epistemic records',
     ...(canonicalEpistemicRecords.length > 0

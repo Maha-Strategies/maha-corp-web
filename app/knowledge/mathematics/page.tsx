@@ -16,6 +16,11 @@ import {
 } from '@/lib/mathematics-knowledge'
 import { RELIGION_KNOWLEDGE_PATH, RELIGION_MATHEMATICS_BRIDGES } from '@/lib/religion-knowledge'
 import { NEUROMORPHIC_MATHEMATICS_BRIDGES, NEUROMORPHIC_PATH } from '@/lib/neuromorphic-biocomputing'
+import { clearingGuidesForLane } from '@/lib/epistemic-clearing-batch-one'
+
+const mathematicsClearingGuides = clearingGuidesForLane('mathematics-astronomy')
+  .filter((guide) => guide.path.startsWith('/knowledge/mathematics/clearing/'))
+  .slice(0, 6)
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -59,6 +64,13 @@ export default function MathematicsKnowledgePage() {
           <p className="font-mono text-[9px] uppercase tracking-widest text-lime-300">New connected technical domain · {NEUROMORPHIC_MATHEMATICS_BRIDGES.length} explicit bridges</p>
           <p className="mt-3 text-sm leading-6 text-zinc-400">See how dynamics, information, uncertainty, graphs, time series, calibration, constraints, and scoring connect models, silicon, living substrates, and hybrid systems without making them equivalent. <span className="text-lime-300">Open the substrate-aware layer →</span></p>
         </Link>
+
+        <section className="mt-14 border-t border-zinc-800 pt-9">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-violet-300">Verification guides</p>
+          <h2 className="mt-3 text-3xl font-semibold text-white">Turn a definition into a checkable implementation boundary.</h2>
+          <p className="mt-4 max-w-3xl text-sm leading-7 text-zinc-500">These method guides specify fixtures, assumptions, uncertainty, and refusal conditions. They do not claim a new theorem proof or numerical result.</p>
+          <div className="mt-7 grid gap-4 md:grid-cols-2 lg:grid-cols-3">{mathematicsClearingGuides.map((guide) => <Link key={guide.path} href={guide.path} className="group border border-zinc-800 p-5 hover:border-violet-600/60"><p className="font-mono text-[9px] uppercase tracking-widest text-violet-300">Bounded method</p><h3 className="mt-3 font-semibold text-white group-hover:text-violet-200">{guide.title}</h3><p className="mt-3 text-sm leading-6 text-zinc-500">{guide.question}</p></Link>)}</div>
+        </section>
 
         <section className="mt-14 border-t border-zinc-800 pt-9">
           <div className="flex flex-wrap items-end justify-between gap-4"><div><p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">Cross-domain bridge matrix</p><h2 className="mt-3 text-3xl font-semibold text-white">Core systems, one inspectable grammar</h2></div><a href={MATHEMATICS_REGISTRY_PATH} className="font-mono text-[10px] uppercase tracking-widest text-emerald-300 hover:text-white">Open JSON registry →</a></div>

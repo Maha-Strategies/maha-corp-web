@@ -44,7 +44,7 @@ test('every route belongs to one declared visual system', () => {
     groups.paper += 1
     const source = readFileSync(path, 'utf8')
     const ownsBoundary = source.includes('evidence-page')
-    const delegatesBoundary = /<(?:ResearchBriefServicePage|EvidenceGuide|ContextCompilerPlayground)\b/.test(source)
+    const delegatesBoundary = /<(?:ResearchBriefServicePage|EvidenceGuide|ContextCompilerPlayground|EpistemicClearingGuidePage)\b/.test(source)
     if (!ownsBoundary && !delegatesBoundary) missingPaperBoundary.push(file)
   }
 
@@ -60,12 +60,16 @@ test('every route belongs to one declared visual system', () => {
   // 56 -> 58: the Tamil source atlas and its dynamic topic route.
   // 58 -> 60: the astrology workflow hub and its dynamic protocol route.
   // 60 -> 62: the evidence-workflow commercial hub and its dynamic example route.
+  // 62 -> 65: the first three finite epistemic-clearing families inherit the Knowledge overlay.
+  // 65 -> 68: Batch 2 adds mathematics, astronomy, and cross-domain clearing families.
+  // The developer clearing family delegates to the shared bounded guide renderer,
+  // moving paper 112 -> 113 without introducing another visual system.
   // join the Knowledge group and its bounded cyber-light overlay. books 38 -> 41 arrives with the
   // eighth open book; the KDP maintenance boundary removes two reader routes,
   // and the two approved reader FAQ routes restore the group to 41. Every other
   // group is unchanged, which is what this
   // assertion is really guarding.
-  assert.deepEqual(groups, { paper: 112, apps: 6, books: 41, docs: 1, knowledge: 62, intelligence: 2, operator: 32, internal: 1 })
+  assert.deepEqual(groups, { paper: 113, apps: 6, books: 41, docs: 1, knowledge: 68, intelligence: 2, operator: 32, internal: 1 })
 })
 
 test('Apps, Books, Docs, Knowledge, and Intelligence own bounded cyber-light overlays', () => {
