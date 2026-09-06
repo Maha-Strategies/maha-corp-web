@@ -3,7 +3,7 @@
   "siteId": "mayone-maharajan",
   "canonicalHost": "www.mayonemaharajan.com",
   "rootPath": "/concepts/",
-  "sourceManifestDigest": "sha256:cfb50d3d36b58912f44dc9bf016a40baa6b27e394744b548746b54c3a2402abb",
+  "sourceManifestDigest": "sha256:8807b749a416e0d452a1979ee034709087c42016e39872194b5625b2e934163b",
   "state": "local-owner-handoff",
   "ownerIntegration": {
     "routeShape": "/concepts/[...segments]",
@@ -16,8 +16,8 @@
     "activeCanonicalReleaseRequired": true
   },
   "counts": {
-    "routes": 28,
-    "boundedAnswers": 140,
+    "routes": 33,
+    "boundedAnswers": 165,
     "publicRoutesCreated": 0,
     "buildsRun": 0
   },
@@ -82,6 +82,16 @@
         "relationship"
       ],
       "contentDigest": "sha256:aceba324828c477b76a38726aa2a658cf78ebbba38b4892ffeb0a912740921e8"
+    },
+    {
+      "candidateId": "cand_a28553843749b495ae93f383",
+      "path": "/concepts/cosmic-recursion/application",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/application",
+      "segments": [
+        "cosmic-recursion",
+        "application"
+      ],
+      "contentDigest": "sha256:2a82a3ad4d9ebd235d615733b75cfb16acf3a83fea87cb2aaf679d683c120ee7"
     },
     {
       "candidateId": "cand_32169681463f2b93a1f0798e",
@@ -152,6 +162,16 @@
         "relationship"
       ],
       "contentDigest": "sha256:9511624986ca4655e73266fc82ebfe31f2a819df0d5c7e5ae2778ea6e693d78a"
+    },
+    {
+      "candidateId": "cand_dff1556d6f55d11bdf873afd",
+      "path": "/concepts/epistemic-infrastructure/argument",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/argument",
+      "segments": [
+        "epistemic-infrastructure",
+        "argument"
+      ],
+      "contentDigest": "sha256:be6d00747acc8ee69969e9ee44303b83c77e1d1b40a65c215f44584c32cc7f4a"
     },
     {
       "candidateId": "cand_f88363aea71ad19c537111d4",
@@ -302,7 +322,37 @@
         "relationship"
       ],
       "contentDigest": "sha256:58ef61dec715c77f0a280ebe50ba49624896d0e7efdd30dd96dfcefa925d33c1"
+    },
+    {
+      "candidateId": "cand_d0c6db73dd5bff24eb348d92",
+      "path": "/concepts/mental-sovereignty/definition",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/definition",
+      "segments": [
+        "mental-sovereignty",
+        "definition"
+      ],
+      "contentDigest": "sha256:6f6a3920d07aca0c7b4c3dd4d1f87cd594e1dc82806997db8e08a6468e824766"
+    },
+    {
+      "candidateId": "cand_315691ce49192667fdb1e58b",
+      "path": "/concepts/mental-sovereignty/development",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/development",
+      "segments": [
+        "mental-sovereignty",
+        "development"
+      ],
+      "contentDigest": "sha256:5180e16a028531e1cf45d1d3d4b8601a1a822b30c85eed5c99482b711afc9714"
+    },
+    {
+      "candidateId": "cand_6f33fc8f47f2ebdc55baef65",
+      "path": "/concepts/mental-sovereignty/relationship",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/relationship",
+      "segments": [
+        "mental-sovereignty",
+        "relationship"
+      ],
+      "contentDigest": "sha256:c9d1922b4365544788aa2b78ad01e8366edeeb4841270d79614d31ac9875d6d8"
     }
   ],
-  "provenanceDigest": "sha256:63942b9d13abeadb97b8075102ee69cf5f80f4189f62c89763f9ffb01ef79bfd"
+  "provenanceDigest": "sha256:0d71fc13ef05f515d919ca0cfaebfae7b4c63b6363f236ccd836990645ec560b"
 }

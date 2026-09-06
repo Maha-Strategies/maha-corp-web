@@ -2,11 +2,11 @@
   "schemaVersion": "maha-federation-property-pages/1.0",
   "siteId": "mayone-maharajan",
   "canonicalHost": "www.mayonemaharajan.com",
-  "registryDigest": "sha256:0d1055d22f83ada2ab63eabe87cf66e4a12fa6c756b39a6142c1a521a78ce569",
+  "registryDigest": "sha256:bd484c37fd8fe7279561a32aa2321d05cd17336b2377fc988da7280126be68bd",
   "status": "local-unreleased",
   "counts": {
-    "pages": 28,
-    "readyForOwnerIntegration": 28,
+    "pages": 33,
+    "readyForOwnerIntegration": 33,
     "blockedOnUnreadyPrerequisite": 0
   },
   "pages": [
@@ -1473,6 +1473,263 @@
         "packetDigest": "sha256:68013a4472a9f80f6c281fa455de33eb89d8e594479a0210efca7bfef697eaed"
       },
       "contentDigest": "sha256:aceba324828c477b76a38726aa2a658cf78ebbba38b4892ffeb0a912740921e8"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_a28553843749b495ae93f383",
+      "tranche": 8,
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "path": "/concepts/cosmic-recursion/application",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/application",
+      "title": "Cosmic Recursion — Application",
+      "topic": "cosmic-recursion",
+      "routeRole": "application",
+      "concept": {
+        "conceptId": "urn:maha:concept:autonomy:cosmic-recursion",
+        "familyId": "autonomy",
+        "canonicalOwner": "mayone-maharajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:autonomy:cosmic-recursion"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:autonomy"
+          }
+        ]
+      },
+      "directAnswer": "Cosmic Recursion, in this Application, is limited to the following inspected scope. Mayone Maharajan’s own definition, conceptual relationships, development, and stated limits. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Cosmic Recursion, in this Application, is limited to the following inspected scope. Mayone Maharajan’s own definition, conceptual relationships, development, and stated limits. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Application",
+          "kind": "role-method",
+          "paragraphs": [
+            "Keep the answer within the inspected source scope and make every operational step or conceptual relation explicit.",
+            "Do not use completeness of presentation as a substitute for evidence, review, or release.",
+            "Applied scope: Mayone Maharajan’s own definition, conceptual relationships, development, and stated limits."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayone-maharajan. This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish authorial interpretation, concept genealogy, book relationships. It must not publish authorial thesis presented as consensus or empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "The Cosmic Recursion — Introduction: “On the word recursion, and what I am refusing”; “The three registers”; “Four slots”; “How this could be wrong”. Establishes: Mayone Maharajan’s own definition, conceptual relationships, development, and stated limits."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "This is an authorial thesis, not scientific consensus, empirical proof, a theological authority, or a claim that metaphor establishes mechanism.",
+            "This route must not claim authorial thesis presented as consensus.",
+            "This route must not claim empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/cosmic-recursion/definition",
+            "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/cosmic-recursion/relationship",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/cosmic-recursion/development",
+            "property-home: https://www.mayonemaharajan.com/",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/cosmic-recursion/argument",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/cosmic-recursion/critique"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "cosmic-recursion-manuscript",
+          "title": "The Cosmic Recursion",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-05",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "Introduction: “On the word recursion, and what I am refusing”; “The three registers”; “Four slots”; “How this could be wrong”",
+          "establishes": "Mayone Maharajan’s own definition, conceptual relationships, development, and stated limits.",
+          "doesNotEstablish": "This is an authorial thesis, not scientific consensus, empirical proof, a theological authority, or a claim that metaphor establishes mechanism.",
+          "rightsBasis": "Maha-controlled authorial manuscript; retain only file identity, section locator, and content fingerprint. Quotation remains governed by the author publication policy.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": "sha256:8666652794dc501bee716658b8e6e3a20c0921f393b28bab1f79c12dfa36c439"
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_a7603f4f4e1f0948c574c52d"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_6e5cae25a74731057505dc27",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/relationship",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_3062f2ecc529be26d6b28874"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/development",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_4f9959397f06dadaa4f00d0f"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/argument",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_32169681463f2b93a1f0798e"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/critique",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_c6b061c4183758c2920b9ec0"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Cosmic Recursion mean in this bounded context?",
+          "answer": "Cosmic Recursion, in this Application, is limited to the following inspected scope. Mayone Maharajan’s own definition, conceptual relationships, development, and stated limits. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this application answer?",
+          "answer": "The Cosmic Recursion (working authorial manuscript inspected 2026-09-05), at Introduction: “On the word recursion, and what I am refusing”; “The three registers”; “Four slots”; “How this could be wrong”, supports mayone Maharajan’s own definition, conceptual relationships, development, and stated limits."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "This is an authorial thesis, not scientific consensus, empirical proof, a theological authority, or a claim that metaphor establishes mechanism. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/application#article",
+        "headline": "Cosmic Recursion — Application",
+        "url": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/application",
+        "isPartOf": "https://www.mayonemaharajan.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Cosmic Recursion mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Cosmic Recursion, in this Application, is limited to the following inspected scope. Mayone Maharajan’s own definition, conceptual relationships, development, and stated limits. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this application answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Cosmic Recursion (working authorial manuscript inspected 2026-09-05), at Introduction: “On the word recursion, and what I am refusing”; “The three registers”; “Four slots”; “How this could be wrong”, supports mayone Maharajan’s own definition, conceptual relationships, development, and stated limits."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This is an authorial thesis, not scientific consensus, empirical proof, a theological authority, or a claim that metaphor establishes mechanism. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-8",
+        "decisionManifestDigest": "sha256:4d4caa603098420ce83407fa693b9a4cc69eb8c104fa793e8d2e84dbf97ec485",
+        "decisionDigest": "sha256:77382b61e520b1c8c6fce972f5ef7c069f1650ec8b1e59c598f5db3464ba887c",
+        "specificationManifestDigest": "sha256:f4778bc9ccb7aa10a403907eccdb96b3f3de19decb1d058a0b5675466f5e549d",
+        "specificationDigest": "sha256:ec641211fa41d84bc723356521df0eaa04794165c82279a3f856f8852f1a72ff",
+        "packetManifestDigest": "sha256:3f3e3e942f087cfd549334a0ea8047d31188b00c12c04eb5bbd3387a929b99ef",
+        "packetDigest": "sha256:97eba641f3a4c80baad181e74b4b8873cb58c3d18f12a0994a44458b511309a9"
+      },
+      "contentDigest": "sha256:2a82a3ad4d9ebd235d615733b75cfb16acf3a83fea87cb2aaf679d683c120ee7"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -3265,6 +3522,256 @@
         "packetDigest": "sha256:36d14c8a1aabcfabe19343aeeebcb2387f7a9b41a3cc8bbe1205675311059722"
       },
       "contentDigest": "sha256:9511624986ca4655e73266fc82ebfe31f2a819df0d5c7e5ae2778ea6e693d78a"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_dff1556d6f55d11bdf873afd",
+      "tranche": 8,
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "path": "/concepts/epistemic-infrastructure/argument",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/argument",
+      "title": "Epistemic Infrastructure — Argument",
+      "topic": "epistemic-infrastructure",
+      "routeRole": "argument",
+      "concept": {
+        "conceptId": "urn:maha:concept:autonomy:epistemic-infrastructure",
+        "familyId": "autonomy",
+        "canonicalOwner": "mayone-maharajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:autonomy:epistemic-infrastructure"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:autonomy"
+          }
+        ]
+      },
+      "directAnswer": "Epistemic Infrastructure, in this Argument, is limited to the following inspected scope. The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Epistemic Infrastructure, in this Argument, is limited to the following inspected scope. The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Argument",
+          "kind": "role-method",
+          "paragraphs": [
+            "Keep the answer within the inspected source scope and make every operational step or conceptual relation explicit.",
+            "Do not use completeness of presentation as a substitute for evidence, review, or release.",
+            "Applied scope: The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayone-maharajan. This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish authorial interpretation, concept genealogy, book relationships. It must not publish authorial thesis presented as consensus or empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "The Maha Principle — The Network and the Feed; Chapter 7 verification framework; Whole-Food Information; Chapter 6 humane governance. Establishes: The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "This is authorial doctrine, not a settled philosophical term, empirical validation, or consensus.",
+            "This route must not claim authorial thesis presented as consensus.",
+            "This route must not claim empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/definition",
+            "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/relationship",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/development",
+            "property-home: https://www.mayonemaharajan.com/",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/critique"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "maha-principle-epistemic",
+          "title": "The Maha Principle",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "The Network and the Feed; Chapter 7 verification framework; Whole-Food Information; Chapter 6 humane governance",
+          "establishes": "The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems.",
+          "doesNotEstablish": "This is authorial doctrine, not a settled philosophical term, empirical validation, or consensus.",
+          "rightsBasis": "Maha-controlled authorial manuscript; section identity and bounded paraphrase only. Authorial claims are not external validation.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_00550cfbe5ae4958c10fcc49"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_6e5cae25a74731057505dc27",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/relationship",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_b90586936a17ca13a038cb62"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/development",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_a3f4072f82d1b2c2b58e733b"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/critique",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_f88363aea71ad19c537111d4"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Epistemic Infrastructure mean in this bounded context?",
+          "answer": "Epistemic Infrastructure, in this Argument, is limited to the following inspected scope. The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this argument answer?",
+          "answer": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Network and the Feed; Chapter 7 verification framework; Whole-Food Information; Chapter 6 humane governance, supports the author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "This is authorial doctrine, not a settled philosophical term, empirical validation, or consensus. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/argument#article",
+        "headline": "Epistemic Infrastructure — Argument",
+        "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/argument",
+        "isPartOf": "https://www.mayonemaharajan.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Epistemic Infrastructure mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Epistemic Infrastructure, in this Argument, is limited to the following inspected scope. The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this argument answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Network and the Feed; Chapter 7 verification framework; Whole-Food Information; Chapter 6 humane governance, supports the author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This is authorial doctrine, not a settled philosophical term, empirical validation, or consensus. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-8",
+        "decisionManifestDigest": "sha256:4d4caa603098420ce83407fa693b9a4cc69eb8c104fa793e8d2e84dbf97ec485",
+        "decisionDigest": "sha256:65f47c3082c6449825988e89c00fd2e7e9218f5fb8ce9dd7f45ff7086c1ce550",
+        "specificationManifestDigest": "sha256:f4778bc9ccb7aa10a403907eccdb96b3f3de19decb1d058a0b5675466f5e549d",
+        "specificationDigest": "sha256:f6283e63e139c9ff3c846fa50c86df49bff7ef66402d4fedcbf75ca89c376835",
+        "packetManifestDigest": "sha256:3f3e3e942f087cfd549334a0ea8047d31188b00c12c04eb5bbd3387a929b99ef",
+        "packetDigest": "sha256:6a02da2893a5bb3c441e7284d0684b6d405858960dd7e4625fa8e3fdcfe714ea"
+      },
+      "contentDigest": "sha256:be6d00747acc8ee69969e9ee44303b83c77e1d1b40a65c215f44584c32cc7f4a"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -7101,7 +7608,715 @@
         "packetDigest": "sha256:dc378def8c23e79beea66602f0cfaa27c973ac6910c116204526d8c7b0ad37ca"
       },
       "contentDigest": "sha256:58ef61dec715c77f0a280ebe50ba49624896d0e7efdd30dd96dfcefa925d33c1"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_d0c6db73dd5bff24eb348d92",
+      "tranche": 8,
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "path": "/concepts/mental-sovereignty/definition",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/definition",
+      "title": "Mental Sovereignty — Definition",
+      "topic": "mental-sovereignty",
+      "routeRole": "definition",
+      "concept": {
+        "conceptId": "urn:maha:concept:autonomy:mental-sovereignty",
+        "familyId": "autonomy",
+        "canonicalOwner": "mayone-maharajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:autonomy:mental-sovereignty"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:autonomy"
+          }
+        ]
+      },
+      "directAnswer": "Mental Sovereignty, in this definition, is limited to the following inspected scope. The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Mental Sovereignty, in this definition, is limited to the following inspected scope. The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Definition",
+          "kind": "role-method",
+          "paragraphs": [
+            "Use the term only for the source-backed scope stated here; keep adjacent concepts separate unless a typed relationship is explicit.",
+            "A useful definition states both inclusion and exclusion conditions so a machine answer cannot silently widen it.",
+            "Applied scope: The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayone-maharajan. This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish authorial interpretation, concept genealogy, book relationships. It must not publish authorial thesis presented as consensus or empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "The Maha Principle — The Biological Basis of Liberty; Chapter 2: The Fractured Mind; The Attentional Veto; The Sovereign Self: Internal Authority Without Domination; The Mind Domain: Attentional Sovereignty. Establishes: The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The term is Mayone Maharajan’s normative synthesis. It is not a diagnosis, legal status, measured neurological construct, proof that the proposed practices work, permission to disregard care, or authority over another person.",
+            "This route must not claim authorial thesis presented as consensus.",
+            "This route must not claim empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/mental-sovereignty/development",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/mental-sovereignty/relationship",
+            "property-home: https://www.mayonemaharajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "maha-principle-mental-sovereignty-t8",
+          "title": "The Maha Principle",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "The Biological Basis of Liberty; Chapter 2: The Fractured Mind; The Attentional Veto; The Sovereign Self: Internal Authority Without Domination; The Mind Domain: Attentional Sovereignty",
+          "establishes": "The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme.",
+          "doesNotEstablish": "The term is Mayone Maharajan’s normative synthesis. It is not a diagnosis, legal status, measured neurological construct, proof that the proposed practices work, permission to disregard care, or authority over another person.",
+          "rightsBasis": "Maha-controlled working authorial manuscript; bounded summary and short attributed quotation only. The packet does not imply publication, peer review, consensus, or empirical validation.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_6e5cae25a74731057505dc27",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/development",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_315691ce49192667fdb1e58b"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/relationship",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_6f33fc8f47f2ebdc55baef65"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Mental Sovereignty mean in this bounded context?",
+          "answer": "Mental Sovereignty, in this definition, is limited to the following inspected scope. The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this definition answer?",
+          "answer": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Biological Basis of Liberty; Chapter 2: The Fractured Mind; The Attentional Veto; The Sovereign Self: Internal Authority Without Domination; The Mind Domain: Attentional Sovereignty, supports the manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The term is Mayone Maharajan’s normative synthesis. It is not a diagnosis, legal status, measured neurological construct, proof that the proposed practices work, permission to disregard care, or authority over another person. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/definition#article",
+        "headline": "Mental Sovereignty — Definition",
+        "url": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/definition",
+        "isPartOf": "https://www.mayonemaharajan.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Mental Sovereignty mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mental Sovereignty, in this definition, is limited to the following inspected scope. The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this definition answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Biological Basis of Liberty; Chapter 2: The Fractured Mind; The Attentional Veto; The Sovereign Self: Internal Authority Without Domination; The Mind Domain: Attentional Sovereignty, supports the manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The term is Mayone Maharajan’s normative synthesis. It is not a diagnosis, legal status, measured neurological construct, proof that the proposed practices work, permission to disregard care, or authority over another person. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-8",
+        "decisionManifestDigest": "sha256:4d4caa603098420ce83407fa693b9a4cc69eb8c104fa793e8d2e84dbf97ec485",
+        "decisionDigest": "sha256:fb5df33a6bbbe6176f3e6b2d6668cd050d4d18a24eefe0d9e722f0158a2c4749",
+        "specificationManifestDigest": "sha256:f4778bc9ccb7aa10a403907eccdb96b3f3de19decb1d058a0b5675466f5e549d",
+        "specificationDigest": "sha256:682a74558203379afe5cd8131c3b421ab9580ba22177852d349b16bdc9fa6f15",
+        "packetManifestDigest": "sha256:3f3e3e942f087cfd549334a0ea8047d31188b00c12c04eb5bbd3387a929b99ef",
+        "packetDigest": "sha256:90dc23aaec67505107f0953e9f5f7a85b51378bfd6d6753e98afde5b8f4ef40c"
+      },
+      "contentDigest": "sha256:6f6a3920d07aca0c7b4c3dd4d1f87cd594e1dc82806997db8e08a6468e824766"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_315691ce49192667fdb1e58b",
+      "tranche": 8,
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "path": "/concepts/mental-sovereignty/development",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/development",
+      "title": "Mental Sovereignty — Development",
+      "topic": "mental-sovereignty",
+      "routeRole": "development",
+      "concept": {
+        "conceptId": "urn:maha:concept:autonomy:mental-sovereignty",
+        "familyId": "autonomy",
+        "canonicalOwner": "mayone-maharajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:autonomy:mental-sovereignty"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:autonomy"
+          }
+        ]
+      },
+      "directAnswer": "Mental Sovereignty, in this development account, is limited to the following inspected scope. The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Mental Sovereignty, in this development account, is limited to the following inspected scope. The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Development account",
+          "kind": "role-method",
+          "paragraphs": [
+            "Trace the concept through dated authorial stages and identify revisions, departures, and unresolved tensions.",
+            "Authorial development is not historical consensus or empirical validation.",
+            "Applied scope: The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayone-maharajan. This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish authorial interpretation, concept genealogy, book relationships. It must not publish authorial thesis presented as consensus or empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "The Maha Principle — The Biological Basis of Liberty; Chapter 2: The Fractured Mind; The Attentional Veto; The Sovereign Self: Internal Authority Without Domination; The Mind Domain: Attentional Sovereignty. Establishes: The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The term is Mayone Maharajan’s normative synthesis. It is not a diagnosis, legal status, measured neurological construct, proof that the proposed practices work, permission to disregard care, or authority over another person.",
+            "This route must not claim authorial thesis presented as consensus.",
+            "This route must not claim empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/mental-sovereignty/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/mental-sovereignty/relationship",
+            "property-home: https://www.mayonemaharajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "maha-principle-mental-sovereignty-t8",
+          "title": "The Maha Principle",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "The Biological Basis of Liberty; Chapter 2: The Fractured Mind; The Attentional Veto; The Sovereign Self: Internal Authority Without Domination; The Mind Domain: Attentional Sovereignty",
+          "establishes": "The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme.",
+          "doesNotEstablish": "The term is Mayone Maharajan’s normative synthesis. It is not a diagnosis, legal status, measured neurological construct, proof that the proposed practices work, permission to disregard care, or authority over another person.",
+          "rightsBasis": "Maha-controlled working authorial manuscript; bounded summary and short attributed quotation only. The packet does not imply publication, peer review, consensus, or empirical validation.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_6e5cae25a74731057505dc27",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_d0c6db73dd5bff24eb348d92"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/relationship",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_6f33fc8f47f2ebdc55baef65"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Mental Sovereignty mean in this bounded context?",
+          "answer": "Mental Sovereignty, in this development account, is limited to the following inspected scope. The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this development answer?",
+          "answer": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Biological Basis of Liberty; Chapter 2: The Fractured Mind; The Attentional Veto; The Sovereign Self: Internal Authority Without Domination; The Mind Domain: Attentional Sovereignty, supports the manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The term is Mayone Maharajan’s normative synthesis. It is not a diagnosis, legal status, measured neurological construct, proof that the proposed practices work, permission to disregard care, or authority over another person. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/development#article",
+        "headline": "Mental Sovereignty — Development",
+        "url": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/development",
+        "isPartOf": "https://www.mayonemaharajan.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Mental Sovereignty mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mental Sovereignty, in this development account, is limited to the following inspected scope. The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this development answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Biological Basis of Liberty; Chapter 2: The Fractured Mind; The Attentional Veto; The Sovereign Self: Internal Authority Without Domination; The Mind Domain: Attentional Sovereignty, supports the manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The term is Mayone Maharajan’s normative synthesis. It is not a diagnosis, legal status, measured neurological construct, proof that the proposed practices work, permission to disregard care, or authority over another person. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-8",
+        "decisionManifestDigest": "sha256:4d4caa603098420ce83407fa693b9a4cc69eb8c104fa793e8d2e84dbf97ec485",
+        "decisionDigest": "sha256:202c6f43b655affb3e9b063c6af0a9bf473926e71f6666703c3fd2fb3dcec1d9",
+        "specificationManifestDigest": "sha256:f4778bc9ccb7aa10a403907eccdb96b3f3de19decb1d058a0b5675466f5e549d",
+        "specificationDigest": "sha256:a12a9689f50deae80206b3ea77d22a424a4d48f36363fc9061710f771620bea4",
+        "packetManifestDigest": "sha256:3f3e3e942f087cfd549334a0ea8047d31188b00c12c04eb5bbd3387a929b99ef",
+        "packetDigest": "sha256:90dc23aaec67505107f0953e9f5f7a85b51378bfd6d6753e98afde5b8f4ef40c"
+      },
+      "contentDigest": "sha256:5180e16a028531e1cf45d1d3d4b8601a1a822b30c85eed5c99482b711afc9714"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_6f33fc8f47f2ebdc55baef65",
+      "tranche": 8,
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "path": "/concepts/mental-sovereignty/relationship",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/relationship",
+      "title": "Mental Sovereignty — Relationship",
+      "topic": "mental-sovereignty",
+      "routeRole": "relationship",
+      "concept": {
+        "conceptId": "urn:maha:concept:autonomy:mental-sovereignty",
+        "familyId": "autonomy",
+        "canonicalOwner": "mayone-maharajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:autonomy:mental-sovereignty"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:autonomy"
+          }
+        ]
+      },
+      "directAnswer": "Mental Sovereignty, in this relationship map, is limited to the following inspected scope. The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Mental Sovereignty, in this relationship map, is limited to the following inspected scope. The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Relationship map",
+          "kind": "role-method",
+          "paragraphs": [
+            "Name the relationship type and direction, then state what does not transfer across the edge.",
+            "A relationship does not make two concepts equivalent or transfer evidence, legal authority, or empirical validity.",
+            "Applied scope: The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayone-maharajan. This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish authorial interpretation, concept genealogy, book relationships. It must not publish authorial thesis presented as consensus or empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "The Maha Principle — The Biological Basis of Liberty; Chapter 2: The Fractured Mind; The Attentional Veto; The Sovereign Self: Internal Authority Without Domination; The Mind Domain: Attentional Sovereignty. Establishes: The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The term is Mayone Maharajan’s normative synthesis. It is not a diagnosis, legal status, measured neurological construct, proof that the proposed practices work, permission to disregard care, or authority over another person.",
+            "This route must not claim authorial thesis presented as consensus.",
+            "This route must not claim empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/mental-sovereignty/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/mental-sovereignty/development",
+            "property-home: https://www.mayonemaharajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "maha-principle-mental-sovereignty-t8",
+          "title": "The Maha Principle",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "The Biological Basis of Liberty; Chapter 2: The Fractured Mind; The Attentional Veto; The Sovereign Self: Internal Authority Without Domination; The Mind Domain: Attentional Sovereignty",
+          "establishes": "The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme.",
+          "doesNotEstablish": "The term is Mayone Maharajan’s normative synthesis. It is not a diagnosis, legal status, measured neurological construct, proof that the proposed practices work, permission to disregard care, or authority over another person.",
+          "rightsBasis": "Maha-controlled working authorial manuscript; bounded summary and short attributed quotation only. The packet does not imply publication, peer review, consensus, or empirical validation.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_6e5cae25a74731057505dc27",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_d0c6db73dd5bff24eb348d92"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/development",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_315691ce49192667fdb1e58b"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Mental Sovereignty mean in this bounded context?",
+          "answer": "Mental Sovereignty, in this relationship map, is limited to the following inspected scope. The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this relationship answer?",
+          "answer": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Biological Basis of Liberty; Chapter 2: The Fractured Mind; The Attentional Veto; The Sovereign Self: Internal Authority Without Domination; The Mind Domain: Attentional Sovereignty, supports the manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The term is Mayone Maharajan’s normative synthesis. It is not a diagnosis, legal status, measured neurological construct, proof that the proposed practices work, permission to disregard care, or authority over another person. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/relationship#article",
+        "headline": "Mental Sovereignty — Relationship",
+        "url": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/relationship",
+        "isPartOf": "https://www.mayonemaharajan.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Mental Sovereignty mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mental Sovereignty, in this relationship map, is limited to the following inspected scope. The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this relationship answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Biological Basis of Liberty; Chapter 2: The Fractured Mind; The Attentional Veto; The Sovereign Self: Internal Authority Without Domination; The Mind Domain: Attentional Sovereignty, supports the manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The term is Mayone Maharajan’s normative synthesis. It is not a diagnosis, legal status, measured neurological construct, proof that the proposed practices work, permission to disregard care, or authority over another person. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-8",
+        "decisionManifestDigest": "sha256:4d4caa603098420ce83407fa693b9a4cc69eb8c104fa793e8d2e84dbf97ec485",
+        "decisionDigest": "sha256:33e5efb29a5a1e14361855e3ef8e110eea0378e2ae5d9521d06cfab64290737a",
+        "specificationManifestDigest": "sha256:f4778bc9ccb7aa10a403907eccdb96b3f3de19decb1d058a0b5675466f5e549d",
+        "specificationDigest": "sha256:7c81a4df28ec25dd6150ec112a659c4013d39cffdd3a904a073e67dead7e6dd4",
+        "packetManifestDigest": "sha256:3f3e3e942f087cfd549334a0ea8047d31188b00c12c04eb5bbd3387a929b99ef",
+        "packetDigest": "sha256:90dc23aaec67505107f0953e9f5f7a85b51378bfd6d6753e98afde5b8f4ef40c"
+      },
+      "contentDigest": "sha256:c9d1922b4365544788aa2b78ad01e8366edeeb4841270d79614d31ac9875d6d8"
     }
   ],
-  "provenanceDigest": "sha256:cfb50d3d36b58912f44dc9bf016a40baa6b27e394744b548746b54c3a2402abb"
+  "provenanceDigest": "sha256:8807b749a416e0d452a1979ee034709087c42016e39872194b5625b2e934163b"
 }

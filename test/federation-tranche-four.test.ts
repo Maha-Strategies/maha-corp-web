@@ -95,12 +95,12 @@ test('the review partitions 93 ready and seven held without manufacturing commer
 
 test('cumulative local implementation and owner adapters remain unreleased and preserve every genuine dependency hold', () => {
   assert.deepEqual(implementationRegistry.counts, {
-    pages: 657,
-    readyForOwnerIntegration: 650,
-    blockedOnUnreadyPrerequisite: 7,
-    byProperty: { 'maha-strategies': 197, 'maha-research': 175, 'agentic-publishing': 54, 'maha-os': 42, 'mayone-maharajan': 28, 'mayon-rajan': 35, 'maha-policy': 126 },
-    boundedAnswers: 3285,
-    sourceBindings: 1133,
+    pages: 757,
+    readyForOwnerIntegration: 748,
+    blockedOnUnreadyPrerequisite: 9,
+    byProperty: { 'maha-strategies': 228, 'maha-research': 200, 'agentic-publishing': 64, 'maha-os': 48, 'mayone-maharajan': 33, 'mayon-rajan': 40, 'maha-policy': 144 },
+    boundedAnswers: 3785,
+    sourceBindings: 1295,
     publicRoutesCreated: 0,
     nextBuildsRun: 0,
     vercelBuildsRun: 0,
@@ -110,12 +110,14 @@ test('cumulative local implementation and owner adapters remain unreleased and p
     'https://publish.mahastrategies.com/agentic-publishing/editorial-review/governance',
     'https://publish.mahastrategies.com/agentic-publishing/editorial-review/machine-interface',
     'https://publish.mahastrategies.com/agentic-publishing/editorial-review/policy',
+    'https://publish.mahastrategies.com/agentic-publishing/editorial-review/workflow',
+    'https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/failure-mode',
     'https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/governance',
     'https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/machine-interface',
     'https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/policy',
     'https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/workflow',
   ])
-  assert.deepEqual(adapterRegistry.counts, { properties: 7, routes: 650, boundedAnswers: 3250, publicRoutesCreated: 0, buildsRun: 0 })
+  assert.deepEqual(adapterRegistry.counts, { properties: 7, routes: 748, boundedAnswers: 3740, publicRoutesCreated: 0, buildsRun: 0 })
   assert.match(adapterRegistry.buildBoundary, /No Next\.js or Vercel build is authorized/)
 })
 

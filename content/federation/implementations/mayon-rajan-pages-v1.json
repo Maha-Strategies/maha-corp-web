@@ -2,14 +2,1040 @@
   "schemaVersion": "maha-federation-property-pages/1.0",
   "siteId": "mayon-rajan",
   "canonicalHost": "mayonrajan.com",
-  "registryDigest": "sha256:0d1055d22f83ada2ab63eabe87cf66e4a12fa6c756b39a6142c1a521a78ce569",
+  "registryDigest": "sha256:bd484c37fd8fe7279561a32aa2321d05cd17336b2377fc988da7280126be68bd",
   "status": "local-unreleased",
   "counts": {
-    "pages": 35,
-    "readyForOwnerIntegration": 35,
+    "pages": 40,
+    "readyForOwnerIntegration": 40,
     "blockedOnUnreadyPrerequisite": 0
   },
   "pages": [
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_427e160b10095096fd72b89a",
+      "tranche": 8,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/ashfall/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/ashfall/definition",
+      "title": "Ashfall — Definition",
+      "topic": "ashfall",
+      "routeRole": "definition",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:ashfall",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:ashfall"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Ashfall, in this definition, is limited to the following inspected scope. Explosive eruptions produce tephra; ash is the finest fraction, can travel far downwind, and can disrupt aviation, buildings, transport, utilities, agriculture, and health under conditions that vary by eruption and receiving environment. PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Ashfall, in this definition, is limited to the following inspected scope. Explosive eruptions produce tephra; ash is the finest fraction, can travel far downwind, and can disrupt aviation, buildings, transport, utilities, agriculture, and health under conditions that vary by eruption and receiving environment. PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Definition",
+          "kind": "role-method",
+          "paragraphs": [
+            "Use the term only for the source-backed scope stated here; keep adjacent concepts separate unless a typed relationship is explicit.",
+            "A useful definition states both inclusion and exclusion conditions so a machine answer cannot silently widen it.",
+            "Applied scope: Explosive eruptions produce tephra; ash is the finest fraction, can travel far downwind, and can disrupt aviation, buildings, transport, utilities, agriculture, and health under conditions that vary by eruption and receiving environment. PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Ashfall is the most widespread and frequent volcanic hazard — Explosive eruptions produce ash; Ash endangers aviation and infrastructure; impact-variability discussion. Establishes: Explosive eruptions produce tephra; ash is the finest fraction, can travel far downwind, and can disrupt aviation, buildings, transport, utilities, agriculture, and health under conditions that vary by eruption and receiving environment.",
+            "PHIVOLCS-LAVA: Local Active Volcanoes Archive — Volcano Status; Bulletins; Monitoring Data; Visualize Data. Establishes: PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "General USGS science does not establish a current Mayon ashfall, forecast its direction or thickness, define a Philippine hazard zone, or replace PHIVOLCS and local instructions.",
+            "The portal is time-sensitive. This packet records no current alert, measurement, forecast, hazard-zone permission, evacuation instruction, or safety assurance.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/ashfall/limits",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "usgs-volcanic-ashfall-t8",
+          "title": "Ashfall is the most widespread and frequent volcanic hazard",
+          "responsibleBody": "U.S. Geological Survey Volcano Hazards Program",
+          "versionOrDate": "living science page inspected 2026-09-06",
+          "sourceClass": "government-volcano-science",
+          "url": "https://www.usgs.gov/programs/VHP/ashfall-most-widespread-and-frequent-volcanic-hazard",
+          "locator": "Explosive eruptions produce ash; Ash endangers aviation and infrastructure; impact-variability discussion",
+          "establishes": "Explosive eruptions produce tephra; ash is the finest fraction, can travel far downwind, and can disrupt aviation, buildings, transport, utilities, agriculture, and health under conditions that vary by eruption and receiving environment.",
+          "doesNotEstablish": "General USGS science does not establish a current Mayon ashfall, forecast its direction or thickness, define a Philippine hazard zone, or replace PHIVOLCS and local instructions.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "phivolcs-mayon-operational-authority-t8",
+          "title": "PHIVOLCS-LAVA: Local Active Volcanoes Archive",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "live official portal inspected 2026-09-06",
+          "sourceClass": "official-hazard-source",
+          "url": "https://volcano.phivolcs.dost.gov.ph/",
+          "locator": "Volcano Status; Bulletins; Monitoring Data; Visualize Data",
+          "establishes": "PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information.",
+          "doesNotEstablish": "The portal is time-sensitive. This packet records no current alert, measurement, forecast, hazard-zone permission, evacuation instruction, or safety assurance.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/ashfall/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_a0f881afd12c8f8af419cf43"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Ashfall mean in this bounded context?",
+          "answer": "Ashfall, in this definition, is limited to the following inspected scope. Explosive eruptions produce tephra; ash is the finest fraction, can travel far downwind, and can disrupt aviation, buildings, transport, utilities, agriculture, and health under conditions that vary by eruption and receiving environment. PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this definition answer?",
+          "answer": "Ashfall is the most widespread and frequent volcanic hazard (living science page inspected 2026-09-06), at Explosive eruptions produce ash; Ash endangers aviation and infrastructure; impact-variability discussion, supports explosive eruptions produce tephra; ash is the finest fraction, can travel far downwind, and can disrupt aviation, buildings, transport, utilities, agriculture, and health under conditions that vary by eruption and receiving environment. PHIVOLCS-LAVA: Local Active Volcanoes Archive (live official portal inspected 2026-09-06), at Volcano Status; Bulletins; Monitoring Data; Visualize Data, supports pHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "General USGS science does not establish a current Mayon ashfall, forecast its direction or thickness, define a Philippine hazard zone, or replace PHIVOLCS and local instructions. The portal is time-sensitive. This packet records no current alert, measurement, forecast, hazard-zone permission, evacuation instruction, or safety assurance. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/ashfall/definition#article",
+        "headline": "Ashfall — Definition",
+        "url": "https://mayonrajan.com/mayon-volcano/ashfall/definition",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://www.usgs.gov/programs/VHP/ashfall-most-widespread-and-frequent-volcanic-hazard",
+          "https://volcano.phivolcs.dost.gov.ph/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Ashfall mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ashfall, in this definition, is limited to the following inspected scope. Explosive eruptions produce tephra; ash is the finest fraction, can travel far downwind, and can disrupt aviation, buildings, transport, utilities, agriculture, and health under conditions that vary by eruption and receiving environment. PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this definition answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ashfall is the most widespread and frequent volcanic hazard (living science page inspected 2026-09-06), at Explosive eruptions produce ash; Ash endangers aviation and infrastructure; impact-variability discussion, supports explosive eruptions produce tephra; ash is the finest fraction, can travel far downwind, and can disrupt aviation, buildings, transport, utilities, agriculture, and health under conditions that vary by eruption and receiving environment. PHIVOLCS-LAVA: Local Active Volcanoes Archive (live official portal inspected 2026-09-06), at Volcano Status; Bulletins; Monitoring Data; Visualize Data, supports pHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "General USGS science does not establish a current Mayon ashfall, forecast its direction or thickness, define a Philippine hazard zone, or replace PHIVOLCS and local instructions. The portal is time-sensitive. This packet records no current alert, measurement, forecast, hazard-zone permission, evacuation instruction, or safety assurance. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-8",
+        "decisionManifestDigest": "sha256:4d4caa603098420ce83407fa693b9a4cc69eb8c104fa793e8d2e84dbf97ec485",
+        "decisionDigest": "sha256:d2d1714bd3532a918a6210f987786af4cd74594b8a1bf9853f426215594d0d14",
+        "specificationManifestDigest": "sha256:f4778bc9ccb7aa10a403907eccdb96b3f3de19decb1d058a0b5675466f5e549d",
+        "specificationDigest": "sha256:e235138b0aaeb12a71d9e5ba2d6b8b233ee67efed336cb7b293881091b702d88",
+        "packetManifestDigest": "sha256:3f3e3e942f087cfd549334a0ea8047d31188b00c12c04eb5bbd3387a929b99ef",
+        "packetDigest": "sha256:d9b614b8ccfbb72f8e2ca976f98c1cbc6bfcbcddbe4408df57f6cddb1c8f6aa7"
+      },
+      "contentDigest": "sha256:d5b53d15677158a267e3cb14e155fd3969a41f37c5b033d1ecb47deec44ac54f"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_a0f881afd12c8f8af419cf43",
+      "tranche": 8,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/ashfall/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/ashfall/limits",
+      "title": "Ashfall — Limits",
+      "topic": "ashfall",
+      "routeRole": "limits",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:ashfall",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:ashfall"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Ashfall, in this limits guide, is limited to the following inspected scope. Explosive eruptions produce tephra; ash is the finest fraction, can travel far downwind, and can disrupt aviation, buildings, transport, utilities, agriculture, and health under conditions that vary by eruption and receiving environment. PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Ashfall, in this limits guide, is limited to the following inspected scope. Explosive eruptions produce tephra; ash is the finest fraction, can travel far downwind, and can disrupt aviation, buildings, transport, utilities, agriculture, and health under conditions that vary by eruption and receiving environment. PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Limits guide",
+          "kind": "role-method",
+          "paragraphs": [
+            "State the strongest supported boundary first and route time-sensitive decisions to the current authority.",
+            "A limits page must not turn a warning into a weaker version of the unsupported claim.",
+            "Applied scope: Explosive eruptions produce tephra; ash is the finest fraction, can travel far downwind, and can disrupt aviation, buildings, transport, utilities, agriculture, and health under conditions that vary by eruption and receiving environment. PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Ashfall is the most widespread and frequent volcanic hazard — Explosive eruptions produce ash; Ash endangers aviation and infrastructure; impact-variability discussion. Establishes: Explosive eruptions produce tephra; ash is the finest fraction, can travel far downwind, and can disrupt aviation, buildings, transport, utilities, agriculture, and health under conditions that vary by eruption and receiving environment.",
+            "PHIVOLCS-LAVA: Local Active Volcanoes Archive — Volcano Status; Bulletins; Monitoring Data; Visualize Data. Establishes: PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "General USGS science does not establish a current Mayon ashfall, forecast its direction or thickness, define a Philippine hazard zone, or replace PHIVOLCS and local instructions.",
+            "The portal is time-sensitive. This packet records no current alert, measurement, forecast, hazard-zone permission, evacuation instruction, or safety assurance.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/ashfall/definition",
+            "graphEdges: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "usgs-volcanic-ashfall-t8",
+          "title": "Ashfall is the most widespread and frequent volcanic hazard",
+          "responsibleBody": "U.S. Geological Survey Volcano Hazards Program",
+          "versionOrDate": "living science page inspected 2026-09-06",
+          "sourceClass": "government-volcano-science",
+          "url": "https://www.usgs.gov/programs/VHP/ashfall-most-widespread-and-frequent-volcanic-hazard",
+          "locator": "Explosive eruptions produce ash; Ash endangers aviation and infrastructure; impact-variability discussion",
+          "establishes": "Explosive eruptions produce tephra; ash is the finest fraction, can travel far downwind, and can disrupt aviation, buildings, transport, utilities, agriculture, and health under conditions that vary by eruption and receiving environment.",
+          "doesNotEstablish": "General USGS science does not establish a current Mayon ashfall, forecast its direction or thickness, define a Philippine hazard zone, or replace PHIVOLCS and local instructions.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "phivolcs-mayon-operational-authority-t8",
+          "title": "PHIVOLCS-LAVA: Local Active Volcanoes Archive",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "live official portal inspected 2026-09-06",
+          "sourceClass": "official-hazard-source",
+          "url": "https://volcano.phivolcs.dost.gov.ph/",
+          "locator": "Volcano Status; Bulletins; Monitoring Data; Visualize Data",
+          "establishes": "PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information.",
+          "doesNotEstablish": "The portal is time-sensitive. This packet records no current alert, measurement, forecast, hazard-zone permission, evacuation instruction, or safety assurance.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/ashfall/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_427e160b10095096fd72b89a"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Ashfall mean in this bounded context?",
+          "answer": "Ashfall, in this limits guide, is limited to the following inspected scope. Explosive eruptions produce tephra; ash is the finest fraction, can travel far downwind, and can disrupt aviation, buildings, transport, utilities, agriculture, and health under conditions that vary by eruption and receiving environment. PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this limits answer?",
+          "answer": "Ashfall is the most widespread and frequent volcanic hazard (living science page inspected 2026-09-06), at Explosive eruptions produce ash; Ash endangers aviation and infrastructure; impact-variability discussion, supports explosive eruptions produce tephra; ash is the finest fraction, can travel far downwind, and can disrupt aviation, buildings, transport, utilities, agriculture, and health under conditions that vary by eruption and receiving environment. PHIVOLCS-LAVA: Local Active Volcanoes Archive (live official portal inspected 2026-09-06), at Volcano Status; Bulletins; Monitoring Data; Visualize Data, supports pHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "General USGS science does not establish a current Mayon ashfall, forecast its direction or thickness, define a Philippine hazard zone, or replace PHIVOLCS and local instructions. The portal is time-sensitive. This packet records no current alert, measurement, forecast, hazard-zone permission, evacuation instruction, or safety assurance. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/ashfall/limits#article",
+        "headline": "Ashfall — Limits",
+        "url": "https://mayonrajan.com/mayon-volcano/ashfall/limits",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://www.usgs.gov/programs/VHP/ashfall-most-widespread-and-frequent-volcanic-hazard",
+          "https://volcano.phivolcs.dost.gov.ph/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Ashfall mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ashfall, in this limits guide, is limited to the following inspected scope. Explosive eruptions produce tephra; ash is the finest fraction, can travel far downwind, and can disrupt aviation, buildings, transport, utilities, agriculture, and health under conditions that vary by eruption and receiving environment. PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this limits answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ashfall is the most widespread and frequent volcanic hazard (living science page inspected 2026-09-06), at Explosive eruptions produce ash; Ash endangers aviation and infrastructure; impact-variability discussion, supports explosive eruptions produce tephra; ash is the finest fraction, can travel far downwind, and can disrupt aviation, buildings, transport, utilities, agriculture, and health under conditions that vary by eruption and receiving environment. PHIVOLCS-LAVA: Local Active Volcanoes Archive (live official portal inspected 2026-09-06), at Volcano Status; Bulletins; Monitoring Data; Visualize Data, supports pHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "General USGS science does not establish a current Mayon ashfall, forecast its direction or thickness, define a Philippine hazard zone, or replace PHIVOLCS and local instructions. The portal is time-sensitive. This packet records no current alert, measurement, forecast, hazard-zone permission, evacuation instruction, or safety assurance. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-8",
+        "decisionManifestDigest": "sha256:4d4caa603098420ce83407fa693b9a4cc69eb8c104fa793e8d2e84dbf97ec485",
+        "decisionDigest": "sha256:85da8b59467813d9eafbdb8ffddac8cc472a2ae3784c017157571c86d9588333",
+        "specificationManifestDigest": "sha256:f4778bc9ccb7aa10a403907eccdb96b3f3de19decb1d058a0b5675466f5e549d",
+        "specificationDigest": "sha256:214630d77fbb39493d15d5a9c1da4b63da4ee0ed72dcfa0d56a9347c1565569c",
+        "packetManifestDigest": "sha256:3f3e3e942f087cfd549334a0ea8047d31188b00c12c04eb5bbd3387a929b99ef",
+        "packetDigest": "sha256:d9b614b8ccfbb72f8e2ca976f98c1cbc6bfcbcddbe4408df57f6cddb1c8f6aa7"
+      },
+      "contentDigest": "sha256:d9cb5623497f88798fccb6fc57422a6fec1bc75069785cd8b4fe11501a1b49dc"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_47c7ec838425303c83835f8f",
+      "tranche": 8,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/deformation/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/deformation/definition",
+      "title": "Deformation — Definition",
+      "topic": "deformation",
+      "routeRole": "definition",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:deformation",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:deformation"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Deformation, in this definition, is limited to the following inspected scope. Repeated positions from one receiver can reveal surface movement; a network can estimate the area, speed, and direction of deformation and inform models of subsurface reservoirs or faults. Volcano assessment combines ground movement with earthquakes, gas, chemistry, visual observations, and satellite analysis, compared against prior behavior. PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Deformation, in this definition, is limited to the following inspected scope. Repeated positions from one receiver can reveal surface movement; a network can estimate the area, speed, and direction of deformation and inform models of subsurface reservoirs or faults. Volcano assessment combines ground movement with earthquakes, gas, chemistry, visual observations, and satellite analysis, compared against prior behavior. PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Definition",
+          "kind": "role-method",
+          "paragraphs": [
+            "Use the term only for the source-backed scope stated here; keep adjacent concepts separate unless a typed relationship is explicit.",
+            "A useful definition states both inclusion and exclusion conditions so a machine answer cannot silently widen it.",
+            "Applied scope: Repeated positions from one receiver can reveal surface movement; a network can estimate the area, speed, and direction of deformation and inform models of subsurface reservoirs or faults. Volcano assessment combines ground movement with earthquakes, gas, chemistry, visual observations, and satellite analysis, compared against prior behavior. PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Networks of GPS receivers track ground movement at volcanoes — GPS network method; deformation inference; measurement-accuracy section. Establishes: Repeated positions from one receiver can reveal surface movement; a network can estimate the area, speed, and direction of deformation and inform models of subsurface reservoirs or faults.",
+            "Comprehensive monitoring provides timely warnings of volcano reawakening — Broad networks of many instruments; monitoring data and forecasting sections. Establishes: Volcano assessment combines ground movement with earthquakes, gas, chemistry, visual observations, and satellite analysis, compared against prior behavior.",
+            "PHIVOLCS-LAVA: Local Active Volcanoes Archive — Volcano Status; Bulletins; Monitoring Data; Visualize Data. Establishes: PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Deformation is not unique to magma, a subsurface model is an inference, and one signal does not determine whether or when Mayon will erupt. General U.S. guidance is not Mayon’s operational authority.",
+            "A multi-signal picture improves assessment but does not make eruption timing deterministic, validate every subsurface model, or supersede local warnings.",
+            "The portal is time-sensitive. This packet records no current alert, measurement, forecast, hazard-zone permission, evacuation instruction, or safety assurance.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/deformation/limits",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "usgs-volcano-gps-deformation-t8",
+          "title": "Networks of GPS receivers track ground movement at volcanoes",
+          "responsibleBody": "U.S. Geological Survey Volcano Hazards Program",
+          "versionOrDate": "living science page inspected 2026-09-06",
+          "sourceClass": "government-volcano-science",
+          "url": "https://www.usgs.gov/programs/VHP/networks-gps-receivers-track-ground-movement-volcanoes",
+          "locator": "GPS network method; deformation inference; measurement-accuracy section",
+          "establishes": "Repeated positions from one receiver can reveal surface movement; a network can estimate the area, speed, and direction of deformation and inform models of subsurface reservoirs or faults.",
+          "doesNotEstablish": "Deformation is not unique to magma, a subsurface model is an inference, and one signal does not determine whether or when Mayon will erupt. General U.S. guidance is not Mayon’s operational authority.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "usgs-comprehensive-volcano-monitoring-t8",
+          "title": "Comprehensive monitoring provides timely warnings of volcano reawakening",
+          "responsibleBody": "U.S. Geological Survey Volcano Hazards Program",
+          "versionOrDate": "living science page inspected 2026-09-06",
+          "sourceClass": "government-volcano-science",
+          "url": "https://www.usgs.gov/programs/VHP/comprehensive-monitoring-provides-timely-warnings-volcano-reawakening",
+          "locator": "Broad networks of many instruments; monitoring data and forecasting sections",
+          "establishes": "Volcano assessment combines ground movement with earthquakes, gas, chemistry, visual observations, and satellite analysis, compared against prior behavior.",
+          "doesNotEstablish": "A multi-signal picture improves assessment but does not make eruption timing deterministic, validate every subsurface model, or supersede local warnings.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "phivolcs-mayon-operational-authority-t8",
+          "title": "PHIVOLCS-LAVA: Local Active Volcanoes Archive",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "live official portal inspected 2026-09-06",
+          "sourceClass": "official-hazard-source",
+          "url": "https://volcano.phivolcs.dost.gov.ph/",
+          "locator": "Volcano Status; Bulletins; Monitoring Data; Visualize Data",
+          "establishes": "PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information.",
+          "doesNotEstablish": "The portal is time-sensitive. This packet records no current alert, measurement, forecast, hazard-zone permission, evacuation instruction, or safety assurance.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/deformation/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_5ffa846d42b23df65d798af2"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Deformation mean in this bounded context?",
+          "answer": "Deformation, in this definition, is limited to the following inspected scope. Repeated positions from one receiver can reveal surface movement; a network can estimate the area, speed, and direction of deformation and inform models of subsurface reservoirs or faults. Volcano assessment combines ground movement with earthquakes, gas, chemistry, visual observations, and satellite analysis, compared against prior behavior. PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this definition answer?",
+          "answer": "Networks of GPS receivers track ground movement at volcanoes (living science page inspected 2026-09-06), at GPS network method; deformation inference; measurement-accuracy section, supports repeated positions from one receiver can reveal surface movement; a network can estimate the area, speed, and direction of deformation and inform models of subsurface reservoirs or faults. Comprehensive monitoring provides timely warnings of volcano reawakening (living science page inspected 2026-09-06), at Broad networks of many instruments; monitoring data and forecasting sections, supports volcano assessment combines ground movement with earthquakes, gas, chemistry, visual observations, and satellite analysis, compared against prior behavior. PHIVOLCS-LAVA: Local Active Volcanoes Archive (live official portal inspected 2026-09-06), at Volcano Status; Bulletins; Monitoring Data; Visualize Data, supports pHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Deformation is not unique to magma, a subsurface model is an inference, and one signal does not determine whether or when Mayon will erupt. General U.S. guidance is not Mayon’s operational authority. A multi-signal picture improves assessment but does not make eruption timing deterministic, validate every subsurface model, or supersede local warnings. The portal is time-sensitive. This packet records no current alert, measurement, forecast, hazard-zone permission, evacuation instruction, or safety assurance. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/deformation/definition#article",
+        "headline": "Deformation — Definition",
+        "url": "https://mayonrajan.com/mayon-volcano/deformation/definition",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://www.usgs.gov/programs/VHP/networks-gps-receivers-track-ground-movement-volcanoes",
+          "https://www.usgs.gov/programs/VHP/comprehensive-monitoring-provides-timely-warnings-volcano-reawakening",
+          "https://volcano.phivolcs.dost.gov.ph/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Deformation mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Deformation, in this definition, is limited to the following inspected scope. Repeated positions from one receiver can reveal surface movement; a network can estimate the area, speed, and direction of deformation and inform models of subsurface reservoirs or faults. Volcano assessment combines ground movement with earthquakes, gas, chemistry, visual observations, and satellite analysis, compared against prior behavior. PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this definition answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Networks of GPS receivers track ground movement at volcanoes (living science page inspected 2026-09-06), at GPS network method; deformation inference; measurement-accuracy section, supports repeated positions from one receiver can reveal surface movement; a network can estimate the area, speed, and direction of deformation and inform models of subsurface reservoirs or faults. Comprehensive monitoring provides timely warnings of volcano reawakening (living science page inspected 2026-09-06), at Broad networks of many instruments; monitoring data and forecasting sections, supports volcano assessment combines ground movement with earthquakes, gas, chemistry, visual observations, and satellite analysis, compared against prior behavior. PHIVOLCS-LAVA: Local Active Volcanoes Archive (live official portal inspected 2026-09-06), at Volcano Status; Bulletins; Monitoring Data; Visualize Data, supports pHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Deformation is not unique to magma, a subsurface model is an inference, and one signal does not determine whether or when Mayon will erupt. General U.S. guidance is not Mayon’s operational authority. A multi-signal picture improves assessment but does not make eruption timing deterministic, validate every subsurface model, or supersede local warnings. The portal is time-sensitive. This packet records no current alert, measurement, forecast, hazard-zone permission, evacuation instruction, or safety assurance. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-8",
+        "decisionManifestDigest": "sha256:4d4caa603098420ce83407fa693b9a4cc69eb8c104fa793e8d2e84dbf97ec485",
+        "decisionDigest": "sha256:73ae1f50905a7dd31d362f6d7a930a9935e91f1a70c6eb744b9bd9ae312c0e6d",
+        "specificationManifestDigest": "sha256:f4778bc9ccb7aa10a403907eccdb96b3f3de19decb1d058a0b5675466f5e549d",
+        "specificationDigest": "sha256:15d55b5f2734d971a1bd0a2850bf267194dd78fc154478da892d0ea057b3381e",
+        "packetManifestDigest": "sha256:3f3e3e942f087cfd549334a0ea8047d31188b00c12c04eb5bbd3387a929b99ef",
+        "packetDigest": "sha256:c978460a9137d5288a9f1d4b56e680e5ff1612f2645b2bca73a97d531b807c9c"
+      },
+      "contentDigest": "sha256:220a02fe27934817d9087013f1d6a627eb350568e8214a559ab16c6c1871e50c"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_5ffa846d42b23df65d798af2",
+      "tranche": 8,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/deformation/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/deformation/limits",
+      "title": "Deformation — Limits",
+      "topic": "deformation",
+      "routeRole": "limits",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:deformation",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:deformation"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Deformation, in this limits guide, is limited to the following inspected scope. Repeated positions from one receiver can reveal surface movement; a network can estimate the area, speed, and direction of deformation and inform models of subsurface reservoirs or faults. Volcano assessment combines ground movement with earthquakes, gas, chemistry, visual observations, and satellite analysis, compared against prior behavior. PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Deformation, in this limits guide, is limited to the following inspected scope. Repeated positions from one receiver can reveal surface movement; a network can estimate the area, speed, and direction of deformation and inform models of subsurface reservoirs or faults. Volcano assessment combines ground movement with earthquakes, gas, chemistry, visual observations, and satellite analysis, compared against prior behavior. PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Limits guide",
+          "kind": "role-method",
+          "paragraphs": [
+            "State the strongest supported boundary first and route time-sensitive decisions to the current authority.",
+            "A limits page must not turn a warning into a weaker version of the unsupported claim.",
+            "Applied scope: Repeated positions from one receiver can reveal surface movement; a network can estimate the area, speed, and direction of deformation and inform models of subsurface reservoirs or faults. Volcano assessment combines ground movement with earthquakes, gas, chemistry, visual observations, and satellite analysis, compared against prior behavior. PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Networks of GPS receivers track ground movement at volcanoes — GPS network method; deformation inference; measurement-accuracy section. Establishes: Repeated positions from one receiver can reveal surface movement; a network can estimate the area, speed, and direction of deformation and inform models of subsurface reservoirs or faults.",
+            "Comprehensive monitoring provides timely warnings of volcano reawakening — Broad networks of many instruments; monitoring data and forecasting sections. Establishes: Volcano assessment combines ground movement with earthquakes, gas, chemistry, visual observations, and satellite analysis, compared against prior behavior.",
+            "PHIVOLCS-LAVA: Local Active Volcanoes Archive — Volcano Status; Bulletins; Monitoring Data; Visualize Data. Establishes: PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Deformation is not unique to magma, a subsurface model is an inference, and one signal does not determine whether or when Mayon will erupt. General U.S. guidance is not Mayon’s operational authority.",
+            "A multi-signal picture improves assessment but does not make eruption timing deterministic, validate every subsurface model, or supersede local warnings.",
+            "The portal is time-sensitive. This packet records no current alert, measurement, forecast, hazard-zone permission, evacuation instruction, or safety assurance.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/deformation/definition",
+            "graphEdges: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "usgs-volcano-gps-deformation-t8",
+          "title": "Networks of GPS receivers track ground movement at volcanoes",
+          "responsibleBody": "U.S. Geological Survey Volcano Hazards Program",
+          "versionOrDate": "living science page inspected 2026-09-06",
+          "sourceClass": "government-volcano-science",
+          "url": "https://www.usgs.gov/programs/VHP/networks-gps-receivers-track-ground-movement-volcanoes",
+          "locator": "GPS network method; deformation inference; measurement-accuracy section",
+          "establishes": "Repeated positions from one receiver can reveal surface movement; a network can estimate the area, speed, and direction of deformation and inform models of subsurface reservoirs or faults.",
+          "doesNotEstablish": "Deformation is not unique to magma, a subsurface model is an inference, and one signal does not determine whether or when Mayon will erupt. General U.S. guidance is not Mayon’s operational authority.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "usgs-comprehensive-volcano-monitoring-t8",
+          "title": "Comprehensive monitoring provides timely warnings of volcano reawakening",
+          "responsibleBody": "U.S. Geological Survey Volcano Hazards Program",
+          "versionOrDate": "living science page inspected 2026-09-06",
+          "sourceClass": "government-volcano-science",
+          "url": "https://www.usgs.gov/programs/VHP/comprehensive-monitoring-provides-timely-warnings-volcano-reawakening",
+          "locator": "Broad networks of many instruments; monitoring data and forecasting sections",
+          "establishes": "Volcano assessment combines ground movement with earthquakes, gas, chemistry, visual observations, and satellite analysis, compared against prior behavior.",
+          "doesNotEstablish": "A multi-signal picture improves assessment but does not make eruption timing deterministic, validate every subsurface model, or supersede local warnings.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "phivolcs-mayon-operational-authority-t8",
+          "title": "PHIVOLCS-LAVA: Local Active Volcanoes Archive",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "live official portal inspected 2026-09-06",
+          "sourceClass": "official-hazard-source",
+          "url": "https://volcano.phivolcs.dost.gov.ph/",
+          "locator": "Volcano Status; Bulletins; Monitoring Data; Visualize Data",
+          "establishes": "PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information.",
+          "doesNotEstablish": "The portal is time-sensitive. This packet records no current alert, measurement, forecast, hazard-zone permission, evacuation instruction, or safety assurance.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/deformation/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_47c7ec838425303c83835f8f"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Deformation mean in this bounded context?",
+          "answer": "Deformation, in this limits guide, is limited to the following inspected scope. Repeated positions from one receiver can reveal surface movement; a network can estimate the area, speed, and direction of deformation and inform models of subsurface reservoirs or faults. Volcano assessment combines ground movement with earthquakes, gas, chemistry, visual observations, and satellite analysis, compared against prior behavior. PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this limits answer?",
+          "answer": "Networks of GPS receivers track ground movement at volcanoes (living science page inspected 2026-09-06), at GPS network method; deformation inference; measurement-accuracy section, supports repeated positions from one receiver can reveal surface movement; a network can estimate the area, speed, and direction of deformation and inform models of subsurface reservoirs or faults. Comprehensive monitoring provides timely warnings of volcano reawakening (living science page inspected 2026-09-06), at Broad networks of many instruments; monitoring data and forecasting sections, supports volcano assessment combines ground movement with earthquakes, gas, chemistry, visual observations, and satellite analysis, compared against prior behavior. PHIVOLCS-LAVA: Local Active Volcanoes Archive (live official portal inspected 2026-09-06), at Volcano Status; Bulletins; Monitoring Data; Visualize Data, supports pHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Deformation is not unique to magma, a subsurface model is an inference, and one signal does not determine whether or when Mayon will erupt. General U.S. guidance is not Mayon’s operational authority. A multi-signal picture improves assessment but does not make eruption timing deterministic, validate every subsurface model, or supersede local warnings. The portal is time-sensitive. This packet records no current alert, measurement, forecast, hazard-zone permission, evacuation instruction, or safety assurance. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/deformation/limits#article",
+        "headline": "Deformation — Limits",
+        "url": "https://mayonrajan.com/mayon-volcano/deformation/limits",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://www.usgs.gov/programs/VHP/networks-gps-receivers-track-ground-movement-volcanoes",
+          "https://www.usgs.gov/programs/VHP/comprehensive-monitoring-provides-timely-warnings-volcano-reawakening",
+          "https://volcano.phivolcs.dost.gov.ph/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Deformation mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Deformation, in this limits guide, is limited to the following inspected scope. Repeated positions from one receiver can reveal surface movement; a network can estimate the area, speed, and direction of deformation and inform models of subsurface reservoirs or faults. Volcano assessment combines ground movement with earthquakes, gas, chemistry, visual observations, and satellite analysis, compared against prior behavior. PHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this limits answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Networks of GPS receivers track ground movement at volcanoes (living science page inspected 2026-09-06), at GPS network method; deformation inference; measurement-accuracy section, supports repeated positions from one receiver can reveal surface movement; a network can estimate the area, speed, and direction of deformation and inform models of subsurface reservoirs or faults. Comprehensive monitoring provides timely warnings of volcano reawakening (living science page inspected 2026-09-06), at Broad networks of many instruments; monitoring data and forecasting sections, supports volcano assessment combines ground movement with earthquakes, gas, chemistry, visual observations, and satellite analysis, compared against prior behavior. PHIVOLCS-LAVA: Local Active Volcanoes Archive (live official portal inspected 2026-09-06), at Volcano Status; Bulletins; Monitoring Data; Visualize Data, supports pHIVOLCS is the Philippine operational source for current Mayon bulletins, observations, alert levels, and public hazard information."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Deformation is not unique to magma, a subsurface model is an inference, and one signal does not determine whether or when Mayon will erupt. General U.S. guidance is not Mayon’s operational authority. A multi-signal picture improves assessment but does not make eruption timing deterministic, validate every subsurface model, or supersede local warnings. The portal is time-sensitive. This packet records no current alert, measurement, forecast, hazard-zone permission, evacuation instruction, or safety assurance. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-8",
+        "decisionManifestDigest": "sha256:4d4caa603098420ce83407fa693b9a4cc69eb8c104fa793e8d2e84dbf97ec485",
+        "decisionDigest": "sha256:f8718adafae0dca456dcd05ccd679db6b770ce152d23bf01673b8fee8e52caa2",
+        "specificationManifestDigest": "sha256:f4778bc9ccb7aa10a403907eccdb96b3f3de19decb1d058a0b5675466f5e549d",
+        "specificationDigest": "sha256:e00cdd7025a14f9a97a6abd5122162edaa32f1a5f54c63b1dc8c3a7ac0851c93",
+        "packetManifestDigest": "sha256:3f3e3e942f087cfd549334a0ea8047d31188b00c12c04eb5bbd3387a929b99ef",
+        "packetDigest": "sha256:c978460a9137d5288a9f1d4b56e680e5ff1612f2645b2bca73a97d531b807c9c"
+      },
+      "contentDigest": "sha256:b4f24033fb1f373e25bde768d501b229543d8b077e0f22b3ae38091f891a5f59"
+    },
     {
       "schemaVersion": "maha-federation-page/1.0",
       "candidateId": "cand_cd6e69bef0bd5d8fe4ebf92d",
@@ -5683,6 +6709,268 @@
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_1b6d64f12a59da80eecf264f",
+      "tranche": 8,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/monitoring/preparedness",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/monitoring/preparedness",
+      "title": "Monitoring — Preparedness",
+      "topic": "monitoring",
+      "routeRole": "preparedness",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:monitoring",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:monitoring"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Monitoring, in this preparedness guide, is limited to the following inspected scope. Current bulletins and monitoring data cover seismicity, ground deformation, gas, visual observations, and other parameters for monitored Philippine volcanoes. Seismic, deformation, gas, thermal, visual, and flow observations provide complementary evidence about volcanic processes. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Monitoring, in this preparedness guide, is limited to the following inspected scope. Current bulletins and monitoring data cover seismicity, ground deformation, gas, visual observations, and other parameters for monitored Philippine volcanoes. Seismic, deformation, gas, thermal, visual, and flow observations provide complementary evidence about volcanic processes. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Preparedness guide",
+          "kind": "role-method",
+          "paragraphs": [
+            "Separate durable preparedness steps from current hazard conditions and operational orders.",
+            "Preparedness education never substitutes for official, current emergency instructions.",
+            "Applied scope: Current bulletins and monitoring data cover seismicity, ground deformation, gas, visual observations, and other parameters for monitored Philippine volcanoes. Seismic, deformation, gas, thermal, visual, and flow observations provide complementary evidence about volcanic processes."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "PHIVOLCS-LAVA: Local Active Volcanoes Archive — Volcano Status; Volcanic Earthquake; Monitoring Data; Visualize Data. Establishes: Current bulletins and monitoring data cover seismicity, ground deformation, gas, visual observations, and other parameters for monitored Philippine volcanoes.",
+            "Monitoring Volcanoes — Earthquakes, deformation, gas, visual and lahar-monitoring sections. Establishes: Seismic, deformation, gas, thermal, visual, and flow observations provide complementary evidence about volcanic processes."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Portal data are time-sensitive; this packet records no alert level or current numerical value and never replaces the latest PHIVOLCS bulletin.",
+            "No single signal deterministically predicts an eruption, and general U.S. guidance is not the operational authority for Mayon.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/monitoring/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/monitoring/limits",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/monitoring/official-sources",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "phivolcs-volcano-monitoring",
+          "title": "PHIVOLCS-LAVA: Local Active Volcanoes Archive",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "live portal inspected 2026-09-06",
+          "sourceClass": "official-hazard-source",
+          "url": "https://volcano.phivolcs.dost.gov.ph/",
+          "locator": "Volcano Status; Volcanic Earthquake; Monitoring Data; Visualize Data",
+          "establishes": "Current bulletins and monitoring data cover seismicity, ground deformation, gas, visual observations, and other parameters for monitored Philippine volcanoes.",
+          "doesNotEstablish": "Portal data are time-sensitive; this packet records no alert level or current numerical value and never replaces the latest PHIVOLCS bulletin.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "usgs-volcano-monitoring",
+          "title": "Monitoring Volcanoes",
+          "responsibleBody": "U.S. Geological Survey",
+          "versionOrDate": "program guidance inspected 2026-09-06",
+          "sourceClass": "government-science",
+          "url": "https://www.usgs.gov/programs/VHP/monitoring",
+          "locator": "Earthquakes, deformation, gas, visual and lahar-monitoring sections",
+          "establishes": "Seismic, deformation, gas, thermal, visual, and flow observations provide complementary evidence about volcanic processes.",
+          "doesNotEstablish": "No single signal deterministically predicts an eruption, and general U.S. guidance is not the operational authority for Mayon.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/monitoring/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_3a0a373f88138f7c3b315691"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/monitoring/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_23876b3a8f7be549e78adebd"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/monitoring/official-sources",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_f730536538c26e00bfa0e4fa"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Monitoring mean in this bounded context?",
+          "answer": "Monitoring, in this preparedness guide, is limited to the following inspected scope. Current bulletins and monitoring data cover seismicity, ground deformation, gas, visual observations, and other parameters for monitored Philippine volcanoes. Seismic, deformation, gas, thermal, visual, and flow observations provide complementary evidence about volcanic processes. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this preparedness answer?",
+          "answer": "PHIVOLCS-LAVA: Local Active Volcanoes Archive (live portal inspected 2026-09-06), at Volcano Status; Volcanic Earthquake; Monitoring Data; Visualize Data, supports current bulletins and monitoring data cover seismicity, ground deformation, gas, visual observations, and other parameters for monitored Philippine volcanoes. Monitoring Volcanoes (program guidance inspected 2026-09-06), at Earthquakes, deformation, gas, visual and lahar-monitoring sections, supports seismic, deformation, gas, thermal, visual, and flow observations provide complementary evidence about volcanic processes."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Portal data are time-sensitive; this packet records no alert level or current numerical value and never replaces the latest PHIVOLCS bulletin. No single signal deterministically predicts an eruption, and general U.S. guidance is not the operational authority for Mayon. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/monitoring/preparedness#article",
+        "headline": "Monitoring — Preparedness",
+        "url": "https://mayonrajan.com/mayon-volcano/monitoring/preparedness",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://volcano.phivolcs.dost.gov.ph/",
+          "https://www.usgs.gov/programs/VHP/monitoring"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Monitoring mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Monitoring, in this preparedness guide, is limited to the following inspected scope. Current bulletins and monitoring data cover seismicity, ground deformation, gas, visual observations, and other parameters for monitored Philippine volcanoes. Seismic, deformation, gas, thermal, visual, and flow observations provide complementary evidence about volcanic processes. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this preparedness answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "PHIVOLCS-LAVA: Local Active Volcanoes Archive (live portal inspected 2026-09-06), at Volcano Status; Volcanic Earthquake; Monitoring Data; Visualize Data, supports current bulletins and monitoring data cover seismicity, ground deformation, gas, visual observations, and other parameters for monitored Philippine volcanoes. Monitoring Volcanoes (program guidance inspected 2026-09-06), at Earthquakes, deformation, gas, visual and lahar-monitoring sections, supports seismic, deformation, gas, thermal, visual, and flow observations provide complementary evidence about volcanic processes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Portal data are time-sensitive; this packet records no alert level or current numerical value and never replaces the latest PHIVOLCS bulletin. No single signal deterministically predicts an eruption, and general U.S. guidance is not the operational authority for Mayon. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-8",
+        "decisionManifestDigest": "sha256:4d4caa603098420ce83407fa693b9a4cc69eb8c104fa793e8d2e84dbf97ec485",
+        "decisionDigest": "sha256:6af86786c5a13066374f4dd4864b4ebda414155c7c364108dd34ac945cfe995c",
+        "specificationManifestDigest": "sha256:f4778bc9ccb7aa10a403907eccdb96b3f3de19decb1d058a0b5675466f5e549d",
+        "specificationDigest": "sha256:c134d4ed660fffb9213bc9b09c0f333243ea434b95480f8af64dd153efab2986",
+        "packetManifestDigest": "sha256:3f3e3e942f087cfd549334a0ea8047d31188b00c12c04eb5bbd3387a929b99ef",
+        "packetDigest": "sha256:305462ddd876fbaef6dd123c2cc33a32f1ed884fd2b062dd9cfc070ae755fcd7"
+      },
+      "contentDigest": "sha256:229dd2b02b5e4d66e78da77d91efbd96025547fec3bb1759c26a749531513123"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
       "candidateId": "cand_ab7cc5b440beea7f5f551c39",
       "tranche": 3,
       "siteId": "mayon-rajan",
@@ -9130,5 +10418,5 @@
       "contentDigest": "sha256:85091f0deb1bc654c1c87abd0caa93f697d9cb118f1b219646806a0e7760e028"
     }
   ],
-  "provenanceDigest": "sha256:1f77761077248885d5c5b47dbd1881ebcc5d6b67674ffbfe64acc1a06a3a1f26"
+  "provenanceDigest": "sha256:24e4a97d1a5c710c3f412efec4c90dcc21716f4cda83eb097a3bbc413c8ec054"
 }

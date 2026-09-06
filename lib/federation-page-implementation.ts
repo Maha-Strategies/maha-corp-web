@@ -67,6 +67,7 @@ type Candidate = {
 
 type Inputs = {
   candidateMap: { provenanceDigest: string; candidates: Candidate[] }
+  priorRelationshipHorizon?: number
   tranches: Array<{
     tranche: 1 | 2
     decisions: { provenanceDigest: string; entries: Decision[] }
@@ -75,7 +76,7 @@ type Inputs = {
   }>
   supplements?: Array<{
     batchId: string
-    tranche: 1 | 2 | 3 | 4 | 5 | 6 | 7
+    tranche: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
     decisions: { provenanceDigest: string; entries: Decision[] }
     specifications: { provenanceDigest: string; specifications: Specification[] }
     packets: { provenanceDigest: string; packets: Packet[] }
@@ -250,6 +251,9 @@ export function compileFederationPages(inputs: Inputs) {
   const readyIds = new Set([...decisionById.values()].filter((entry) => entry.disposition === 'evidence-ready').map((entry) => entry.candidateId))
   const packetBySourceSetAndKey = new Map(sourceSets.flatMap((sourceSet) => sourceSet.packets.packets.map((packet) => [`${sourceSet.batchId}:${packet.topicKey}`, packet] as const)))
   const specs = sourceSets.flatMap((sourceSet) => sourceSet.specifications.specifications.map((specification) => ({ specification, tranche: sourceSet.tranche, batchId: sourceSet.batchId })))
+  const relationshipEligible = (pageTranche: number, siblingTranche: number) => inputs.priorRelationshipHorizon === undefined
+    || pageTranche > inputs.priorRelationshipHorizon
+    || siblingTranche <= inputs.priorRelationshipHorizon
   if (specs.length !== readyIds.size) throw new Error(`Expected one specification for each of ${readyIds.size} evidence-ready decisions; received ${specs.length}.`)
 
   const drafts = specs.map(({ specification, tranche, batchId }) => {
@@ -278,7 +282,7 @@ export function compileFederationPages(inputs: Inputs) {
     const topicSiblings = specs
       .filter((entry) => entry.specification.candidateId !== specification.candidateId)
       .map((entry) => ({ entry, candidate: candidates.get(entry.specification.candidateId) }))
-      .filter(({ candidate: sibling }) => sibling?.siteId === candidate.siteId && decisionById.get(sibling.candidateId)?.topic === decision.topic)
+      .filter(({ entry, candidate: sibling }) => relationshipEligible(tranche, entry.tranche) && sibling?.siteId === candidate.siteId && decisionById.get(sibling.candidateId)?.topic === decision.topic)
       .slice(0, 3)
       .map(({ entry }) => ({ url: entry.specification.url, relationship: 'same-topic-application', availability: 'implemented-in-this-batch' as const, candidateId: entry.specification.candidateId }))
     const relatedLinks = [...new Map([...safeLinks, ...topicSiblings, { url: `https://${candidate.canonicalHost}/`, relationship: 'property-home', availability: 'observed-existing' as const, candidateId: null }].map((entry) => [entry.url, entry])).values()]
@@ -364,7 +368,7 @@ export function compileFederationPages(inputs: Inputs) {
 
   const pages = drafts.map((page) => {
     const pageSiblingLinks = drafts
-      .filter((entry) => entry.candidateId !== page.candidateId && entry.siteId === page.siteId && entry.topic === page.topic)
+      .filter((entry) => relationshipEligible(page.tranche, entry.tranche) && entry.candidateId !== page.candidateId && entry.siteId === page.siteId && entry.topic === page.topic)
       .slice(0, 3)
       .map((entry) => ({ url: entry.canonicalUrl, relationship: 'same-topic-application', availability: 'implemented-in-this-batch' as const, candidateId: entry.candidateId }))
     if (pageSiblingLinks.every((link) => page.relatedLinks.some((existing) => existing.url === link.url))) return page

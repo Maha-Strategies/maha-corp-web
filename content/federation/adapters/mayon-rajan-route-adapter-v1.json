@@ -3,7 +3,7 @@
   "siteId": "mayon-rajan",
   "canonicalHost": "mayonrajan.com",
   "rootPath": "/mayon-volcano/",
-  "sourceManifestDigest": "sha256:1f77761077248885d5c5b47dbd1881ebcc5d6b67674ffbfe64acc1a06a3a1f26",
+  "sourceManifestDigest": "sha256:24e4a97d1a5c710c3f412efec4c90dcc21716f4cda83eb097a3bbc413c8ec054",
   "state": "local-owner-handoff",
   "ownerIntegration": {
     "routeShape": "/mayon-volcano/[...segments]",
@@ -16,13 +16,53 @@
     "activeCanonicalReleaseRequired": true
   },
   "counts": {
-    "routes": 35,
-    "boundedAnswers": 175,
+    "routes": 40,
+    "boundedAnswers": 200,
     "publicRoutesCreated": 0,
     "buildsRun": 0
   },
   "publicationBoundary": "The adapter resolves local content only. The owner route must still bind an exact revision and active canonical release before crawlability; a missing or unready path resolves to null.",
   "entries": [
+    {
+      "candidateId": "cand_427e160b10095096fd72b89a",
+      "path": "/mayon-volcano/ashfall/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/ashfall/definition",
+      "segments": [
+        "ashfall",
+        "definition"
+      ],
+      "contentDigest": "sha256:d5b53d15677158a267e3cb14e155fd3969a41f37c5b033d1ecb47deec44ac54f"
+    },
+    {
+      "candidateId": "cand_a0f881afd12c8f8af419cf43",
+      "path": "/mayon-volcano/ashfall/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/ashfall/limits",
+      "segments": [
+        "ashfall",
+        "limits"
+      ],
+      "contentDigest": "sha256:d9cb5623497f88798fccb6fc57422a6fec1bc75069785cd8b4fe11501a1b49dc"
+    },
+    {
+      "candidateId": "cand_47c7ec838425303c83835f8f",
+      "path": "/mayon-volcano/deformation/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/deformation/definition",
+      "segments": [
+        "deformation",
+        "definition"
+      ],
+      "contentDigest": "sha256:220a02fe27934817d9087013f1d6a627eb350568e8214a559ab16c6c1871e50c"
+    },
+    {
+      "candidateId": "cand_5ffa846d42b23df65d798af2",
+      "path": "/mayon-volcano/deformation/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/deformation/limits",
+      "segments": [
+        "deformation",
+        "limits"
+      ],
+      "contentDigest": "sha256:b4f24033fb1f373e25bde768d501b229543d8b077e0f22b3ae38091f891a5f59"
+    },
     {
       "candidateId": "cand_cd6e69bef0bd5d8fe4ebf92d",
       "path": "/mayon-volcano/eruption-history/definition",
@@ -244,6 +284,16 @@
       "contentDigest": "sha256:0f9fb7a0ad837fae843c39e97ef61a2e76208d8dc0aa70e1ccb50721eb18da34"
     },
     {
+      "candidateId": "cand_1b6d64f12a59da80eecf264f",
+      "path": "/mayon-volcano/monitoring/preparedness",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/monitoring/preparedness",
+      "segments": [
+        "monitoring",
+        "preparedness"
+      ],
+      "contentDigest": "sha256:229dd2b02b5e4d66e78da77d91efbd96025547fec3bb1759c26a749531513123"
+    },
+    {
       "candidateId": "cand_ab7cc5b440beea7f5f551c39",
       "path": "/mayon-volcano/name-disambiguation/definition",
       "canonicalUrl": "https://mayonrajan.com/mayon-volcano/name-disambiguation/definition",
@@ -374,5 +424,5 @@
       "contentDigest": "sha256:85091f0deb1bc654c1c87abd0caa93f697d9cb118f1b219646806a0e7760e028"
     }
   ],
-  "provenanceDigest": "sha256:91a3ce6765c5744b608bc920a5dd1539f8a5a0bb974c01b062894431b011d944"
+  "provenanceDigest": "sha256:d3cad501c73c1f823cc1894efe2f9324e6792406401b53107e92931048075acb"
 }

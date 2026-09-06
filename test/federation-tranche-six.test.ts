@@ -104,19 +104,19 @@ test('ninety-eight candidates are ready and two inherited evidence gaps remain h
 
 test('cumulative contracts remain local and exact-host adapters exclude unresolved prerequisites', () => {
   assert.deepEqual(implementationRegistry.counts, {
-    pages: 657,
-    readyForOwnerIntegration: 650,
-    blockedOnUnreadyPrerequisite: 7,
-    byProperty: { 'maha-strategies': 197, 'maha-research': 175, 'agentic-publishing': 54, 'maha-os': 42, 'mayone-maharajan': 28, 'mayon-rajan': 35, 'maha-policy': 126 },
-    boundedAnswers: 3285,
-    sourceBindings: 1133,
+    pages: 757,
+    readyForOwnerIntegration: 748,
+    blockedOnUnreadyPrerequisite: 9,
+    byProperty: { 'maha-strategies': 228, 'maha-research': 200, 'agentic-publishing': 64, 'maha-os': 48, 'mayone-maharajan': 33, 'mayon-rajan': 40, 'maha-policy': 144 },
+    boundedAnswers: 3785,
+    sourceBindings: 1295,
     publicRoutesCreated: 0,
     nextBuildsRun: 0,
     vercelBuildsRun: 0,
   })
-  assert.deepEqual(adapterRegistry.counts, { properties: 7, routes: 650, boundedAnswers: 3250, publicRoutesCreated: 0, buildsRun: 0 })
-  assert.equal(new Set(implementationRegistry.entries.map((entry) => entry.candidateId)).size, 657)
-  assert.equal(implementationRegistry.entries.filter((entry) => entry.adoptionState === 'blocked-on-unready-prerequisite').length, 7)
+  assert.deepEqual(adapterRegistry.counts, { properties: 7, routes: 748, boundedAnswers: 3740, publicRoutesCreated: 0, buildsRun: 0 })
+  assert.equal(new Set(implementationRegistry.entries.map((entry) => entry.candidateId)).size, 757)
+  assert.equal(implementationRegistry.entries.filter((entry) => entry.adoptionState === 'blocked-on-unready-prerequisite').length, 9)
   assert.match(adapterRegistry.buildBoundary, /No Next\.js or Vercel build is authorized/)
 })
 
