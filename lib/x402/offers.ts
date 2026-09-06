@@ -223,9 +223,15 @@ export const MPS_AUTONOMOUS_AUDIT_OFFER: X402Offer = {
   // Withheld until 2026-08-12, because the honest consequence of shipping
   // without the gates below is a settled payment with no job behind it.
   //
-  // Returned to withheld on 2026-08-12, hours after the promotion, by the
-  // first paid Mainnet verification -- which is what that verification was
-  // for.
+  // Returned to withheld on 2026-08-12, hours after the first promotion, by
+  // the first paid Mainnet verification -- which is what that verification
+  // was for. Re-promoted on 2026-09-05 only after the request preimage,
+  // request identity and body became pre-settlement admission checks and the
+  // repaired boundary passed its non-paying Preview suite.
+  // The cause was reconstructed: the buyer hashed the complete JSON request,
+  // while the route expected the text field alone, and that disagreement was
+  // detected only after settlement. The contract now publishes the preimage
+  // and the gateway checks the body on a clone before any payment can move.
   //
   // One settlement of 100000 base units confirmed on chain
   // (0x1c6cf823546de43b33b79974bfe2309d44a11fcf7d15a833b755fc05b4e1b0c4),
@@ -233,16 +239,11 @@ export const MPS_AUTONOMOUS_AUDIT_OFFER: X402Offer = {
   // catalog said `available` while Production had already removed the path
   // from X402_RESOURCES, so discovery was advertising a contract nobody could
   // buy. That gap is the reason this field exists, and leaving it open would
-  // have been worse than never promoting.
-  status: 'withheld',
-  availability: {
-    payableInProduction: false,
-    blockedBy: [
-      'Paid delivery and recoverability failed during the first Mainnet verification on 2026-08-12: one settlement confirmed on chain, no deliverable response, and the job could not be recovered by its idempotency key.',
-      'The cause is under read-only diagnosis across the payment, settlement, admission, job and telemetry records.',
-      'No further settlement will be attempted until the failure is understood and a non-paying regression test covers it.',
-    ],
-  },
+  // have been worse than never promoting. A later paid verification is a
+  // separately authorized post-deployment observation, not permission to
+  // publish the repaired contract.
+  status: 'available',
+  availability: { payableInProduction: true, blockedBy: [] },
   // This offer creates a job and calls a model. A duplicate is a double
   // charge, not duplicated work.
   requiresIdempotency: true,

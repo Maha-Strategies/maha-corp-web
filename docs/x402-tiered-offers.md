@@ -4,16 +4,16 @@ Operational record for the tiered autonomous offers. The catalog in
 `lib/x402/offers.ts` is the source of truth for everything published; this file
 covers the gates a promotion needs and the numbers behind them.
 
-**Nothing here has been merged, migrated, enabled in Production, or settled on
-Mainnet.** Two of the three offers are deliberately not payable.
+The three offers are independently priced and published. Production liveness
+still requires the canonical endpoint to return its declared 402 challenge.
 
 ## Status
 
 | Offer | Method and path | Amount | Payable today |
 | --- | --- | --- | --- |
 | `context-compression` | `POST /api/v1/compress` | 1000 (`$0.001`) | yes — Production |
-| `deep-context-evaluation` | `POST /api/v1/compress/evaluate` | 10000 (`$0.01`) | **no — preview** |
-| `mps-autonomous-audit` | `POST /api/v1/mps/audit` | 100000 (`$0.10`) | **no — withheld** |
+| `deep-context-evaluation` | `POST /api/v1/compress/evaluate` | 10000 (`$0.01`) | yes — Production |
+| `mps-autonomous-audit` | `POST /api/v1/mps/audit` | 100000 (`$0.10`) | yes — Production |
 
 A published price is not an offer to sell. Only a live `PAYMENT-REQUIRED`
 challenge proves an offer can be bought; `status` and `payableNow` in the

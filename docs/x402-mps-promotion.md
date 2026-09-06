@@ -3,8 +3,8 @@
 Promotes `mps-autonomous-audit` from `withheld` to `available`: `POST
 /api/v1/mps/audit`, 100,000 USDC base units ($0.10), Base Mainnet.
 
-Flipping `status` is the entire promotion: the moment it deploys, an autonomous
-agent can sign for $0.10.
+Flipping `status` and enabling the exact method/path in Production is the
+promotion: once both deploy, an autonomous agent can sign for $0.10.
 
 An earlier draft of this document said *"do not merge until every Production
 gate passes."* That is circular and was wrong. The Production endpoint cannot
@@ -65,14 +65,14 @@ must pass before the deployment approval in Stage 2 is requested.
 | --- | --- | --- |
 | 1.1 | **Preview** database census green — every listed table and function `true` | **PASSED 2026-08-12**: all ten `true` after applying `…000400` (census run 31575178797) |
 | 1.2 | **Production** database census green | **PASSED 2026-08-12**: all ten objects `true` (run 31573419127) |
-| 1.3 | Preview readiness HTTP 200 | **FAILED** — HTTP 401, token mismatch; see below |
+| 1.3 | Preview readiness HTTP 200 | required again for the repaired promotion |
 | 1.4 | Preview unpaid `POST /api/v1/mps/audit` returns **402** — never 401, never 400 | **PASSED 2026-08-12** (run 31581546606) |
 | 1.5 | Challenge amount exactly `100000` | **PASSED** — `100000 eip155:84532 exact` |
 | 1.6 | Crawler probe of the published example returns **402**, never 400 | **PASSED** — HTTP 402 |
 | 1.7 | `x402-doctor` 0 errors | **PASSED** — `ok=true http=402 crawler=402 errors=0` |
 | 1.8 | Anthropic and retrieval-secret runtime checks pass | confirmed via Production readiness |
 | 1.9 | MPS, admission, settlement and telemetry objects present | **PASSED** — via 1.1 and 1.2 |
-| 1.10 | Recovery and idempotency exercised in Preview | **deferred** — no funded Sepolia wallet |
+| 1.10 | Recovery and idempotency exercised in Preview | deterministic fail-closed and replay tests passed; no funded Sepolia wallet created |
 
 **Gate 1.1 passed on the second attempt, after a repair the census exposed.**
 The first Preview census, run
@@ -164,7 +164,7 @@ were mistakes in the *gate* rather than the product:
 2. Readiness aborted the job and hid the other three gates. Each gate now
    reports independently; readiness is deferred, not waived.
 
-### Gate 1.3 outstanding: readiness returns 401
+### Historical Gate 1.3 failure: readiness returned 401
 
 Not a deployment-protection problem any more — the bypass works, and the 302
 became a 401 from the application itself. `authorizeReadiness` compares the

@@ -101,17 +101,14 @@ test('ten cents covers the conservative case that can actually reach the model',
 })
 
 test('pricing is sound, and was never what the offer was waiting on', () => {
-  // Withheld again from 2026-08-12: paid delivery failed, which is an
-  // infrastructure fact and not an economic one. The margin below is unchanged
-  // by that, which is exactly why the two are asserted separately.
   // The offer was withheld on infrastructure, not on economics, and was
   // promoted on 2026-08-12 once the infrastructure gates were observed rather
   // than assumed. The margin is asserted separately from the status precisely
   // so a green margin can never be read as permission to ship.
   assert.equal(CONSERVATIVE_CASE().covered, true)
-  assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.status, 'withheld')
-  assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.availability.payableInProduction, false)
-  assert.ok(MPS_AUTONOMOUS_AUDIT_OFFER.availability.blockedBy.length > 0)
+  assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.status, 'available')
+  assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.availability.payableInProduction, true)
+  assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.availability.blockedBy.length, 0)
 })
 
 test('an available offer must publish no blockers, and a blocked one must not be payable', () => {

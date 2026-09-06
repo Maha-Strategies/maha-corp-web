@@ -7,6 +7,7 @@ import { discoveryExtensionsFor, resourceInfoFor } from '../lib/x402/discovery.t
 import type { PaymentFacilitator } from '../lib/x402/protocol.ts'
 import { MPS_AUTONOMOUS_AUDIT_OFFER } from '../lib/x402/offers.ts'
 import { IDEMPOTENCY_KEY_HEADER, INPUT_HASH_HEADER, readAdmissionClaim } from '../lib/x402/admission.ts'
+import { auditInputHash } from '../lib/mps-audit-engine.ts'
 
 // One logical request must produce at most one settlement.
 //
@@ -28,8 +29,10 @@ const ENV = {
 const config = () => x402Config(ENV) as X402Config
 const PATH = MPS_AUTONOMOUS_AUDIT_OFFER.path
 const URL_ = `https://www.mahastrategies.com${PATH}`
-const INPUT_A = `sha256:${'a'.repeat(64)}`
-const INPUT_B = `sha256:${'b'.repeat(64)}`
+const TEXT_A = 'A published report says the pilot reduced manual review time by twenty percent.'
+const TEXT_B = 'A later report says the pilot reduced manual review time by ten percent.'
+const INPUT_A = auditInputHash(TEXT_A)
+const INPUT_B = auditInputHash(TEXT_B)
 
 /**
  * A facilitator that counts settlements, and mints a distinct transaction for
@@ -110,8 +113,16 @@ async function signature() {
   }), 'utf8').toString('base64')
 }
 
-const request = async (headers: Record<string, string>) =>
-  new Request(URL_, { method: 'POST', headers: { 'PAYMENT-SIGNATURE': await signature(), ...headers } })
+const request = async (headers: Record<string, string>, body?: string) => {
+  const key = headers[IDEMPOTENCY_KEY_HEADER] ?? 'req_default_0001'
+  const inputHash = headers[INPUT_HASH_HEADER]
+  const text = inputHash === INPUT_B ? TEXT_B : TEXT_A
+  return new Request(URL_, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', 'PAYMENT-SIGNATURE': await signature(), ...headers },
+    body: body ?? JSON.stringify({ clientRequestId: key, text }),
+  })
+}
 
 const idempotent = (key: string, inputHash = INPUT_A) => ({ [IDEMPOTENCY_KEY_HEADER]: key, [INPUT_HASH_HEADER]: inputHash })
 const freshLedger = () => ({ rpc: async () => ({ data: 'claimed', error: null }) }) as never
@@ -167,6 +178,76 @@ test('the same key with different input is refused before anything settles', asy
 
   // The refusal cost nothing: still one settlement, from the first request.
   assert.equal(settlements.length, 1)
+})
+
+test('a wrong body hash is refused before settlement', async () => {
+  const { facilitator, settlements } = countingFacilitator()
+  const outcome = await resolveX402(await request(idempotent('req_wrong_hash_01', INPUT_B), JSON.stringify({
+    clientRequestId: 'req_wrong_hash_01',
+    text: TEXT_A,
+  })), {
+    config: config(), facilitator, ledger: freshLedger(), acquire, admissionLedger: admissionStore(),
+  })
+
+  assert.equal(outcome.kind, 'refused')
+  if (outcome.kind !== 'refused') return
+  assert.equal(outcome.status, 409)
+  assert.equal(outcome.code, 'input_hash_mismatch')
+  assert.match(outcome.message, /text field alone/i)
+  assert.equal(settlements.length, 0, 'a deterministic body disagreement must never reach settlement')
+})
+
+test('pre-settlement validation leaves the original body for the route', async () => {
+  const { facilitator } = countingFacilitator()
+  const original = await request(idempotent('req_clone_body_01'))
+  const outcome = await resolveX402(original, {
+    config: config(), facilitator, ledger: freshLedger(), acquire, admissionLedger: admissionStore(),
+  })
+
+  assert.equal(outcome.kind, 'paid')
+  assert.deepEqual(await original.json(), { clientRequestId: 'req_clone_body_01', text: TEXT_A })
+})
+
+test('hashing the complete JSON envelope is rejected without taking money', async () => {
+  const { facilitator, settlements } = countingFacilitator()
+  const clientRequestId = 'req_body_hash_0001'
+  const body = JSON.stringify({ clientRequestId, text: TEXT_A })
+  const outcome = await resolveX402(await request(idempotent(clientRequestId, auditInputHash(body)), body), {
+    config: config(), facilitator, ledger: freshLedger(), acquire, admissionLedger: admissionStore(),
+  })
+
+  assert.equal(outcome.kind, 'refused')
+  if (outcome.kind !== 'refused') return
+  assert.equal(outcome.code, 'input_hash_mismatch')
+  assert.equal(settlements.length, 0)
+})
+
+test('malformed JSON is rejected before settlement', async () => {
+  const { facilitator, settlements } = countingFacilitator()
+  const outcome = await resolveX402(await request(idempotent('req_bad_json_001'), '{'), {
+    config: config(), facilitator, ledger: freshLedger(), acquire, admissionLedger: admissionStore(),
+  })
+
+  assert.equal(outcome.kind, 'refused')
+  if (outcome.kind !== 'refused') return
+  assert.equal(outcome.status, 400)
+  assert.equal(outcome.code, 'invalid_request')
+  assert.equal(settlements.length, 0)
+})
+
+test('a header and body request-id disagreement is rejected before settlement', async () => {
+  const { facilitator, settlements } = countingFacilitator()
+  const outcome = await resolveX402(await request(idempotent('req_header_id_01'), JSON.stringify({
+    clientRequestId: 'req_body_id_0001',
+    text: TEXT_A,
+  })), {
+    config: config(), facilitator, ledger: freshLedger(), acquire, admissionLedger: admissionStore(),
+  })
+
+  assert.equal(outcome.kind, 'refused')
+  if (outcome.kind !== 'refused') return
+  assert.equal(outcome.code, 'idempotency_key_mismatch')
+  assert.equal(settlements.length, 0)
 })
 
 test('concurrent duplicates cannot both settle', async () => {
@@ -232,6 +313,8 @@ test('an idempotent offer refuses a payer that declared no key, before settling'
   if (outcome.kind !== 'refused') return
   assert.equal(outcome.status, 400)
   assert.equal(outcome.code, 'idempotency_key_required')
+  assert.match(outcome.message, /text field alone/i)
+  assert.doesNotMatch(outcome.message, /exact request body/i)
   assert.equal(settlements.length, 0)
 })
 

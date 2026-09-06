@@ -43,8 +43,12 @@ test('payment terms are published only for active offers', () => {
     if (entry.status === 'active') assert.ok(entry.payment, `${entry.id} is active but publishes no terms`)
     else assert.equal(entry.payment, null, `${entry.id} is ${entry.status} but publishes payment terms`)
   }
-  const withheld = (manifest().offers as { id: string; status: string }[]).find((entry) => entry.status === 'withheld')
-  assert.ok(withheld, 'the fixture should include a withheld offer, or this test proves nothing')
+  const syntheticCatalog = X402_OFFERS.map((offer, index) => index === 0
+    ? { ...offer, status: 'withheld' as const, availability: { payableInProduction: false, blockedBy: ['synthetic test gate'] } }
+    : offer)
+  const withheld = buildPublicManifest('2026-09-05', syntheticCatalog).offers[0]!
+  assert.equal(withheld.status, 'withheld')
+  assert.equal(withheld.payment, null, 'a withheld offer must not publish payment terms')
 })
 
 test('the manifest asserts configuration and refuses to assert behaviour', () => {

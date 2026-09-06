@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "configurationAsOf": "2026-08-21",
+  "configurationAsOf": "2026-09-05",
   "provider": {
     "name": "Maha Strategies LLC",
     "url": "https://www.mahastrategies.com"
@@ -100,10 +100,19 @@
     },
     {
       "id": "mps-autonomous-audit",
-      "status": "withheld",
+      "status": "active",
       "canonicalResource": "https://www.mahastrategies.com/api/v1/mps/audit",
       "method": "POST",
-      "payment": null,
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "100000",
+        "displayAmount": "0.100000 USDC"
+      },
       "schemas": {
         "input": "https://www.mahastrategies.com/api/discovery/x402-offers/mps-autonomous-audit#input",
         "output": "https://www.mahastrategies.com/api/discovery/x402-offers/mps-autonomous-audit#output"

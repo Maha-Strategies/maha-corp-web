@@ -21,6 +21,7 @@ import { createAgentInquiryLedger } from '../agent-inquiry-ledger.ts'
 import { SLOT_RESOURCE_HEADER, SLOT_TOKEN_HEADER } from './slot.ts'
 import { discoveryExtensionsFor, resourceInfoFor } from './discovery.ts'
 import { createAdmissionGuard, readAdmissionClaim } from './admission.ts'
+import { validateAdmissionBody } from './admission-body.ts'
 import { offerById } from './offers.ts'
 
 // Decides what happens to a request that carries no API key: a challenge, a
@@ -31,7 +32,7 @@ import { offerById } from './offers.ts'
 export type X402Outcome =
   | { kind: 'not_applicable' }
   | { kind: 'challenge'; status: 402; header: string; body: unknown }
-  | { kind: 'refused'; status: 400 | 402 | 409 | 429 | 502 | 503; code: string; message: string; retryAfterSeconds?: number }
+  | { kind: 'refused'; status: 400 | 402 | 409 | 413 | 415 | 429 | 502 | 503; code: string; message: string; retryAfterSeconds?: number }
   | {
       kind: 'paid'
       /** True when this settled earlier and was not charged again. */
@@ -143,9 +144,15 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
         kind: 'refused',
         status: 400,
         code: claim.reason,
-        message: `${offer.id} requires an ${'x-maha-idempotency-key'} header and an ${'x-maha-input-hash'} header (sha256:<64 hex> of the exact request body) so a retry cannot be charged twice. Neither is read from the body, because the charge is decided before the body is seen.`,
+        message: `${offer.id} requires an ${'x-maha-idempotency-key'} header equal to clientRequestId and an ${'x-maha-input-hash'} header (sha256:<64 lowercase hex> of the text field alone, UTF-8, exactly as sent) so a retry cannot be charged twice. Both are checked against the body before settlement.`,
       }
     }
+    // A declared input hash is not evidence that the body reproduces it. Read
+    // a clone and check every deterministic route rejection now, while no
+    // money has moved; the original body remains untouched for the handler.
+    const bodyDecision = await validateAdmissionBody(request, offer, claim.claim)
+    if (!bodyDecision.ok) return { kind: 'refused', ...bodyDecision }
+
     const guard = createAdmissionGuard(claim.claim, dependencies.admissionLedger)
     if (!guard) {
       return { kind: 'refused', status: 503, code: 'x402_ledger_unavailable', message: 'Idempotency cannot be guaranteed right now, so no payment was taken. Retry shortly.' }

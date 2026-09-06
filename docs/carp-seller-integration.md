@@ -1,6 +1,14 @@
 # Maha CARP/CABEZON Seller Integration
 
-Maha's first CABEZON Seller offering is **Deep Context Evaluation**, a digitally delivered service with a fixed direct-x402 price of **0.01 USDC** on Base Mainnet.
+Maha's CABEZON Seller profile publishes the same three digitally delivered products that are payable through Maha's Production x402 boundary:
+
+| CABEZON `offeringRef` | Product | Fixed direct-x402 price |
+| --- | --- | ---: |
+| `maha:context-compression:v1` | Context Compression | 0.001 USDC |
+| `maha:deep-context-evaluation:v1` | Deep Context Evaluation | 0.01 USDC |
+| `maha:mps-autonomous-audit:v1` | MPS Automated Claim Triage | 0.10 USDC |
+
+The Seller profile derives the amount, resource, status, capability boundaries, retention statement, and idempotency requirement from Maha's authoritative x402 catalog. CABEZON discovery does not create a second price or widen what any product claims to do.
 
 The Seller profile also publishes **Samley Signature Collection Cinnamon Tea — Pallet RFQ** as an enquiry-only physical-goods offer. Maha remains the CABEZON Seller and RFQ coordinator; Samley Teas is named only as the prospective fulfilling exporter, with no CABEZON membership or standing partnership asserted. `purchase` fails closed with `QUOTE_REQUIRED` and returns no payment instructions.
 
@@ -45,7 +53,10 @@ Until every order-specific item is confirmed by the supplier and buyer, the prof
 - Maha DID: `https://www.mahastrategies.com/.well-known/carp/did.json`
 - Maha signed Agent Descriptor (SAD): `https://www.mahastrategies.com/.well-known/carp/sad.json`
 - CARP endpoint: `https://www.mahastrategies.com`
-- Fulfillment resource: `POST https://www.mahastrategies.com/api/v1/compress/evaluate`
+- Fulfillment resources:
+  - `POST https://www.mahastrategies.com/api/v1/compress`
+  - `POST https://www.mahastrategies.com/api/v1/compress/evaluate`
+  - `POST https://www.mahastrategies.com/api/v1/mps/audit`
 
 The public DID is a `did:key` derived from a dedicated secp256k1 key. The SAD is RFC 8785-canonicalized and signed as detached ES256K JWS. The private key is stored only as the sensitive Production environment variable `CARP_AGENT_PRIVATE_KEY`; it must never appear in this repository, logs, artifacts, or discovery responses.
 
@@ -66,26 +77,30 @@ Identity proof uses ADILOS. Seller requests and asynchronous results use `ecjson
 
 The implementation intentionally does not expose the reference host's LAN-only `nextrequest`, `nextanswer`, `result`, `adddid`, or `obrequest` CGI endpoints. Seller replies are handled at the request boundary and delivered asynchronously to El-Cabezon's `encresult` endpoint using Next.js `after()`.
 
-## Deep Context fulfillment model
+## Digital fulfillment model
 
-The enquiry result follows the merged Seller v0.2 shape:
+Each digital enquiry result follows the merged Seller v0.2 shape. The stable references are:
 
+- `offeringRef: maha:context-compression:v1`
 - `offeringRef: maha:deep-context-evaluation:v1`
+- `offeringRef: maha:mps-autonomous-audit:v1`
+
+For every offer the returned record includes:
+
 - `kind: digital`
-- `price: { amount: "0.01", asset: "USDC", network: "eip155:8453" }`
-- digital JSON fulfillment in an estimated 60 seconds with a 120-second deadline
+- the offer's exact decimal USDC price on `eip155:8453`
+- digital JSON fulfillment with an offer-specific estimate and deadline
 - input and output schema links to the public offer contract
 - exact limitations preserved from the authoritative x402 catalog
 
-The purchase method accepts the v0.2 object shape and the legacy array during the compatibility period. It validates the exact offering, quantity, price, network and digital delivery mode before returning an order-bound direct-x402 instruction.
+The purchase method accepts the v0.2 object shape and the legacy array during the compatibility period. It resolves the exact `offeringRef`, then validates quantity, price, network and digital delivery mode before returning an order-bound direct-x402 instruction for that offer. A price copied from one Maha offer cannot authorize either of the others.
 
 CABEZON v0.2 describes escrow as authoritative for its standard order lifecycle. Maha's initial bounded experiment makes the existing direct-x402 settlement explicit instead of inventing an escrower. The purchase response therefore includes `mode: x402_direct`, `service: x402`, the exact resource, Base USDC contract, payee and base-unit amount. It must not be represented as an escrow-backed CABEZON order until a compatible escrower exists and has been tested.
 
 Digital delivery evidence consists of:
 
 - the x402 `PAYMENT-RESPONSE` transaction,
-- Deep Context `evaluationId`,
-- `outputHash`, and
+- the product-specific result identifier and published digests,
 - the returned result bytes when a content digest is published.
 
 A digest proves byte identity, not correctness, quality, buyer acceptance, or entitlement to release escrowed funds. No source text or compiled context is placed in a public fulfillment descriptor.
@@ -108,11 +123,11 @@ A digest proves byte identity, not correctness, quality, buyer acceptance, or en
 
 3. Confirm that El-Cabezon returns Maha's SAD under the Seller directory. This has completed; it does not by itself authorize every CABEZON member as a direct Maha peer.
 
-4. Run one free encrypted `enquiry` for context/evidence retention and verify the canonical offering.
+4. Run one free encrypted `enquiry` for each exact digital `offeringRef` and verify that the Seller returns only the requested canonical offering.
 
-5. Run one `purchase` and verify that it returns exactly 10,000 USDC base units to the existing Deep Context resource. A CARP admission fee, Mall rent, or escrow payment is out of scope unless its real recipient and terms are separately reviewed.
+5. Run local, non-paying `purchase` contract checks for all three offerings and verify that each returns only its own exact amount and resource. A CARP admission fee, Mall rent, or escrow payment is out of scope unless its real recipient and terms are separately reviewed.
 
-6. Only with fresh authorization, make one bounded 10,000-base-unit x402 payment and preserve the resulting transaction, evaluation ID and output hash. Do not repeat a signed payment after an ambiguous response.
+6. Only with fresh, offer-specific authorization, make a bounded x402 payment and preserve the resulting transaction, product result identifier and output digest. Do not treat authorization for one amount or offer as authorization for another, and do not repeat a signed payment after an ambiguous response.
 
 7. Publish the sanitized evidence and ask Bryan to cite the verified integration. Directory confirmation and a completed delivery are facts to prove separately.
 

@@ -113,7 +113,10 @@ function configurationDigestFor(offer: X402Offer): string {
   return `sha256:${createHash('sha256').update(canonical).digest('hex')}`
 }
 
-export function buildPublicManifest(configurationAsOf: string): X402PublicManifest {
+export function buildPublicManifest(
+  configurationAsOf: string,
+  catalog: readonly X402Offer[] = X402_OFFERS,
+): X402PublicManifest {
   return {
     schemaVersion: X402_PUBLIC_MANIFEST_VERSION,
     configurationAsOf,
@@ -129,7 +132,7 @@ export function buildPublicManifest(configurationAsOf: string): X402PublicManife
       proofOfPayability: 'A live HTTP 402 PAYMENT-REQUIRED challenge from the canonical resource is the only proof an offer can be bought.',
       note: 'This manifest describes declared configuration as of configurationAsOf. It does not assert that any endpoint is currently reachable, enabled in a given deployment, indexed by any registry, or has ever settled a payment.',
     },
-    offers: X402_OFFERS.map((offer): PublicManifestOffer => {
+    offers: catalog.map((offer): PublicManifestOffer => {
       const status = publicStatusFor(offer.status)
       return {
         id: offer.id,

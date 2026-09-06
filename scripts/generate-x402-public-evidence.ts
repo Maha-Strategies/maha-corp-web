@@ -24,7 +24,7 @@ const DIMENSIONS_SOURCE = 'content/x402/conformance-dimensions.json'
 // configuration changes, not on every run. A value that moved on each build
 // would be a build timestamp wearing a configuration label, and would make
 // "as of" impossible to reason about.
-const CONFIGURATION_AS_OF = '2026-08-21'
+const CONFIGURATION_AS_OF = '2026-09-05'
 
 const manifest = buildPublicManifest(CONFIGURATION_AS_OF)
 const forbiddenInManifest = findForbiddenInManifest(manifest)

@@ -1,7 +1,14 @@
 import { createHash } from 'node:crypto'
 
 import { BASE_USDC, MAHA_PAYEE } from '../x402/discovery-payment-recipe.ts'
-import { BASE_MAINNET_CAIP2, DEEP_CONTEXT_EVALUATION_OFFER, USDC_DECIMALS } from '../x402/offers.ts'
+import {
+  BASE_MAINNET_CAIP2,
+  CONTEXT_COMPRESSION_OFFER,
+  DEEP_CONTEXT_EVALUATION_OFFER,
+  MPS_AUTONOMOUS_AUDIT_OFFER,
+  USDC_DECIMALS,
+  type X402Offer,
+} from '../x402/offers.ts'
 import { configuredIdentity, MAHA_CARP_DID_URL, MAHA_CARP_SAD_URL, MAHA_CARP_URL } from './identity.ts'
 
 export const CARP_SELLER_ROLE_URL = 'https://www.mahastrategies.com/.well-known/carp/seller-role.json'
@@ -9,8 +16,89 @@ export const MAHA_CARP_SELLER_URL = 'https://www.mahastrategies.com/.well-known/
 export const CABEZON_SELLER_ROLE_URL = 'https://raw.githubusercontent.com/bitsanity/cabezon/master/roles/seller.json'
 
 const SITE_URL = 'https://www.mahastrategies.com'
-const OFFER = DEEP_CONTEXT_EVALUATION_OFFER
 const identity = configuredIdentity()
+
+const DIGITAL_OFFER_SPECS = Object.freeze([
+  {
+    offeringRef: 'maha:context-compression:v1',
+    title: 'Context Compression',
+    amount: '0.001',
+    offer: CONTEXT_COMPRESSION_OFFER,
+    estimatedSeconds: 15,
+    deliveryDeadlineSeconds: 60,
+    termsUrl: `${SITE_URL}/context-compiler`,
+  },
+  {
+    offeringRef: 'maha:deep-context-evaluation:v1',
+    title: 'Deep Context Evaluation',
+    amount: '0.01',
+    offer: DEEP_CONTEXT_EVALUATION_OFFER,
+    estimatedSeconds: 60,
+    deliveryDeadlineSeconds: 120,
+    termsUrl: `${SITE_URL}/deep-context-evaluation`,
+  },
+  {
+    offeringRef: 'maha:mps-autonomous-audit:v1',
+    title: 'MPS Automated Claim Triage',
+    amount: '0.10',
+    offer: MPS_AUTONOMOUS_AUDIT_OFFER,
+    estimatedSeconds: 90,
+    deliveryDeadlineSeconds: 180,
+    termsUrl: `${SITE_URL}/mps`,
+  },
+] as const)
+
+type DigitalOfferSpec = (typeof DIGITAL_OFFER_SPECS)[number]
+
+function digitalOfferForRef(value: unknown): DigitalOfferSpec | null {
+  return DIGITAL_OFFER_SPECS.find((candidate) => candidate.offeringRef === value) ?? null
+}
+
+function digitalOfferForId(value: unknown): DigitalOfferSpec | null {
+  return DIGITAL_OFFER_SPECS.find((candidate) => candidate.offer.id === value) ?? null
+}
+
+function cabezonDigitalOffer(spec: DigitalOfferSpec) {
+  const offer: X402Offer = spec.offer
+  return {
+    offeringRef: spec.offeringRef,
+    kind: 'digital' as const,
+    title: spec.title,
+    descrip: offer.description,
+    tags: [...offer.tags, 'digital-fulfillment', 'x402'],
+    status: offer.status,
+    price: {
+      amount: spec.amount,
+      asset: 'USDC',
+      network: BASE_MAINNET_CAIP2,
+    },
+    directSettlement: {
+      mode: 'x402_direct',
+      amountBaseUnits: offer.amount,
+      assetContract: BASE_USDC,
+      assetDecimals: USDC_DECIMALS,
+      method: offer.method,
+      resource: `${SITE_URL}${offer.path}`,
+      payee: MAHA_PAYEE,
+      idempotencyRequired: offer.requiresIdempotency,
+    },
+    fulfillment: {
+      modes: ['digital'] as const,
+      estimatedSeconds: spec.estimatedSeconds,
+      deliveryDeadlineSeconds: spec.deliveryDeadlineSeconds,
+      shipsFrom: null,
+      resultMediaType: 'application/json',
+    },
+    failurePolicy: { onMissedDeadline: 'seller-defined-remedy', refundAuthority: 'seller', termsUrl: `${SITE_URL}/terms` },
+    inputSchema: `${SITE_URL}/api/discovery/x402-offers/${offer.id}`,
+    outputSchema: `${SITE_URL}/api/discovery/x402-offers/${offer.id}`,
+    capabilityBoundaries: [...offer.capabilityBoundaries],
+    retention: offer.retention,
+    termsUrl: spec.termsUrl,
+  }
+}
+
+export const MAHA_CARP_DIGITAL_OFFERS = Object.freeze(DIGITAL_OFFER_SPECS.map(cabezonDigitalOffer))
 
 export const SAMLEY_CINNAMON_TEA_RFQ_REF = 'maha:samley-cinnamon-tea:rfq-v1'
 export const BOGAWANTALAWA_LEGEND_TEA_TEST_REF = 'maha:bogawantalawa-legend-black-tea:retail-test-v1'
@@ -185,7 +273,7 @@ type NormalizedPurchase = {
 }
 
 export const mahaCarpSellerProfile = Object.freeze({
-  schemaVersion: '0.1.2',
+  schemaVersion: '0.1.3',
   sellerId: 'maha-strategies',
   name: 'Maha Strategies LLC',
   description: 'Governed infrastructure, machine-payable utilities, and bounded agent-commerce pilots.',
@@ -216,42 +304,7 @@ export const mahaCarpSellerProfile = Object.freeze({
   fulfillmentModes: ['digital', 'physical'],
   termsUrl: `${SITE_URL}/terms`,
   offers: [
-    {
-      offeringRef: 'maha:deep-context-evaluation:v1',
-      kind: 'digital',
-      title: 'Deep Context Evaluation',
-      descrip: OFFER.description,
-      tags: [...OFFER.tags, 'digital-fulfillment', 'x402'],
-      status: OFFER.status,
-      price: {
-        amount: (Number(OFFER.amount) / 10 ** USDC_DECIMALS).toFixed(2),
-        asset: 'USDC',
-        network: BASE_MAINNET_CAIP2,
-      },
-      directSettlement: {
-        mode: 'x402_direct',
-        amountBaseUnits: OFFER.amount,
-        assetContract: BASE_USDC,
-        assetDecimals: USDC_DECIMALS,
-        method: OFFER.method,
-        resource: `${SITE_URL}${OFFER.path}`,
-        payee: MAHA_PAYEE,
-        idempotencyRequired: OFFER.requiresIdempotency,
-      },
-      fulfillment: {
-        modes: ['digital'],
-        estimatedSeconds: 60,
-        deliveryDeadlineSeconds: 120,
-        shipsFrom: null,
-        resultMediaType: 'application/json',
-      },
-      failurePolicy: { onMissedDeadline: 'seller-defined-remedy', refundAuthority: 'seller', termsUrl: `${SITE_URL}/terms` },
-      inputSchema: `${SITE_URL}/api/discovery/x402-offers/${OFFER.id}`,
-      outputSchema: `${SITE_URL}/api/discovery/x402-offers/${OFFER.id}`,
-      capabilityBoundaries: [...OFFER.capabilityBoundaries],
-      retention: OFFER.retention,
-      termsUrl: `${SITE_URL}/deep-context-evaluation`,
-    },
+    ...MAHA_CARP_DIGITAL_OFFERS,
     SAMLEY_CINNAMON_TEA_RFQ_OFFER,
     BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER,
   ],
@@ -300,13 +353,15 @@ function normalizePurchase(params: unknown, requestId: string): NormalizedPurcha
   if (Array.isArray(params)) {
     if (params.length < 3 || params.length > 5) return null
     const [quantity, itemref, quotedUnitPrice, destination] = params
+    const digital = digitalOfferForRef(itemref)
     const legacyPrice = asRecord(quotedUnitPrice)
-    const agreedPrice = legacyPrice && legacyPrice.amount === OFFER.amount
-      ? { amount: '0.01', asset: 'USDC', network: legacyPrice.network }
+    const legacyAssetIsUsdc = legacyPrice?.asset === BASE_USDC || legacyPrice?.asset === 'USDC'
+    const agreedPrice = digital && legacyPrice && legacyPrice.amount === digital.offer.amount && legacyAssetIsUsdc
+      ? { amount: digital.amount, asset: 'USDC', network: legacyPrice.network }
       : quotedUnitPrice
     return {
       clientOrderRef: legacyOrderId(requestId, itemref),
-      offerId: itemref === 'maha:deep-context-evaluation:v1' ? OFFER.id : String(itemref),
+      offerId: digital?.offer.id ?? String(itemref),
       quantity: Number(quantity),
       agreedPrice,
       input: null,
@@ -319,9 +374,10 @@ function normalizePurchase(params: unknown, requestId: string): NormalizedPurcha
 
   const record = asRecord(params)
   if (!record) return null
+  const digital = digitalOfferForRef(record.offeringRef)
   return {
     clientOrderRef: typeof record.clientOrderRef === 'string' ? record.clientOrderRef : '',
-    offerId: record.offeringRef === 'maha:deep-context-evaluation:v1' ? OFFER.id : String(record.offeringRef ?? ''),
+    offerId: digital?.offer.id ?? String(record.offeringRef ?? ''),
     quantity: Number(record.quantity),
     agreedPrice: record.agreedPrice,
     input: record.input,
@@ -351,9 +407,16 @@ function containsAnyTokenPhrase(terms: string, candidates: readonly string[]) {
   return candidates.some((candidate) => containsTokenPhrase(terms, candidate))
 }
 
-function enquiryMatchesDigital(terms: string) {
+function enquiryMatchesDigital(offeringRef: string, terms: string) {
   if (!terms) return true
-  return containsAnyTokenPhrase(terms, ['context', 'retention', 'evidence', 'rag', 'provenance', 'evaluation', 'digital', 'ai'])
+  if (containsAnyTokenPhrase(terms, ['digital', 'ai', 'machine payable', 'x402'])) return true
+  if (offeringRef === 'maha:context-compression:v1') {
+    return containsAnyTokenPhrase(terms, ['compression', 'compress', 'token budget', 'context pack', 'deduplicate', 'rag context'])
+  }
+  if (offeringRef === 'maha:deep-context-evaluation:v1') {
+    return containsAnyTokenPhrase(terms, ['retention', 'required evidence', 'evidence span', 'evaluation', 'source coverage'])
+  }
+  return containsAnyTokenPhrase(terms, ['claim', 'citation', 'provenance', 'nonfiction', 'fact status', 'editorial audit'])
 }
 
 function enquiryMatchesSamleyTea(terms: string) {
@@ -377,7 +440,7 @@ function enquiryMatches(params: Record<string, unknown>) {
   return mahaCarpSellerProfile.offers.filter((offer) => {
     if (offer.offeringRef === SAMLEY_CINNAMON_TEA_RFQ_REF) return enquiryMatchesSamleyTea(terms)
     if (offer.offeringRef === BOGAWANTALAWA_LEGEND_TEA_TEST_REF) return enquiryMatchesBogawantalawaTea(terms)
-    return enquiryMatchesDigital(terms)
+    return enquiryMatchesDigital(offer.offeringRef, terms)
   })
 }
 
@@ -433,18 +496,21 @@ export function handleCarpSellerRequest(request: CarpSellerRequest): CarpSellerR
       },
     )
   }
-  if (params.offerId !== OFFER.id) return jsonError(request.id, -32602, 'Unknown offerId or itemref.')
-  if (params.quantity !== 1) return jsonError(request.id, -32602, 'Deep Context Evaluation must be purchased with quantity 1.')
+  const digital = digitalOfferForId(params.offerId)
+  if (!digital) return jsonError(request.id, -32602, 'Unknown offerId or itemref.')
+  const profileOffer = MAHA_CARP_DIGITAL_OFFERS.find((candidate) => candidate.offeringRef === digital.offeringRef)
+  if (!profileOffer) return jsonError(request.id, -32603, 'The Seller catalog is internally inconsistent.')
+  if (params.quantity !== 1) return jsonError(request.id, -32602, `${digital.title} must be purchased with quantity 1.`)
   if (!/^[A-Za-z0-9._:-]{8,120}$/.test(params.clientOrderRef)) {
     return jsonError(request.id, -32602, 'clientOrderRef must be an 8-120 character idempotency key.')
   }
   const price = asRecord(params.agreedPrice)
-  if (price?.amount !== '0.01' || price.asset !== 'USDC' || price.network !== BASE_MAINNET_CAIP2) {
-    return jsonError(request.id, -32010, 'The agreed price does not match the current offer.', mahaCarpSellerProfile.offers[0].price)
+  if (price?.amount !== digital.amount || price.asset !== 'USDC' || price.network !== BASE_MAINNET_CAIP2) {
+    return jsonError(request.id, -32010, 'The agreed price does not match the current offer.', profileOffer.price)
   }
   const delivery = asRecord(params.delivery)
   if (delivery?.mode !== 'digital') {
-    return jsonError(request.id, -32602, 'Deep Context Evaluation supports digital fulfillment only.')
+    return jsonError(request.id, -32602, `${digital.title} supports digital fulfillment only.`)
   }
   if (delivery.destination !== null && delivery.destination !== undefined) {
     return jsonError(request.id, -32602, 'A digital order must not include a postal destination.')
@@ -459,24 +525,24 @@ export function handleCarpSellerRequest(request: CarpSellerRequest): CarpSellerR
       paymentInstructions: {
         mode: 'x402_direct',
         service: 'x402',
-        amount: '0.01',
-        amountBaseUnits: OFFER.amount,
+        amount: digital.amount,
+        amountBaseUnits: digital.offer.amount,
         asset: 'USDC',
         assetContract: BASE_USDC,
         assetDecimals: USDC_DECIMALS,
         network: BASE_MAINNET_CAIP2,
         payee: MAHA_PAYEE,
-        method: OFFER.method,
-        resource: `${SITE_URL}${OFFER.path}`,
+        method: digital.offer.method,
+        resource: `${SITE_URL}${digital.offer.path}`,
         escrower: null,
         escrowOrderId: null,
         expiresAt: null,
       },
-      fulfillmentExpectation: mahaCarpSellerProfile.offers[0].fulfillment,
+      fulfillmentExpectation: profileOffer.fulfillment,
       nextSteps: [
-        'Send the Deep Context Evaluation request to paymentInstructions.resource.',
+        `Send the ${digital.title} request to paymentInstructions.resource.`,
         'Answer its x402 v2 challenge for exactly paymentInstructions.amountBaseUnits on paymentInstructions.network.',
-        'Treat evaluationId, outputHash, and the PAYMENT-RESPONSE transaction as digital delivery evidence.',
+        'Preserve the returned result bytes, their identifiers and digests, and the PAYMENT-RESPONSE transaction as bounded digital-delivery evidence.',
       ],
     },
     id: request.id,

@@ -8,6 +8,7 @@ import { X402_OFFERS } from '../lib/x402/offers.ts'
 import { PAYMENT_HEADER_BUDGET, PAYMENT_HEADER_LIMIT } from '../lib/x402/declaration-compaction.ts'
 import { buildTypedData, createPaidFetch, encodePaymentSignature } from '../lib/x402/client.ts'
 import { parsePaymentHeader, matchesPaymentContext, PAYMENT_REQUIRED_HEADER, PAYMENT_SIGNATURE_HEADER } from '../lib/x402/protocol.ts'
+import { auditInputHash } from '../lib/mps-audit-engine.ts'
 
 // The interoperability regression this file exists to prevent.
 //
@@ -49,9 +50,10 @@ const admissionLedger = (decision = 'proceed', transaction: string | null = null
 })
 
 /** Headers a payer must send for an offer that creates a job. */
+const MPS_TEXT = 'A published report says the pilot reduced manual review time by twenty percent.'
 const IDEMPOTENT = {
   'x-maha-idempotency-key': 'req_behaviour_0001',
-  'x-maha-input-hash': `sha256:${'a'.repeat(64)}`,
+  'x-maha-input-hash': auditInputHash(MPS_TEXT),
 }
 
 
@@ -95,7 +97,7 @@ async function headerFromRealClient(path: string): Promise<string> {
     // header an offer ignores costs nothing -- but it must be counted in the
     // size budget, because a real payer of the MPS offer sends it.
     headers: { 'content-type': 'application/json', ...IDEMPOTENT },
-    body: '{}',
+    body: JSON.stringify({ clientRequestId: IDEMPOTENT['x-maha-idempotency-key'], text: MPS_TEXT }),
   })
   assert.equal(response.status, 201, `${path} must be admitted after paying`)
   assert.ok(capture.header, `${path} produced no PAYMENT-SIGNATURE`)

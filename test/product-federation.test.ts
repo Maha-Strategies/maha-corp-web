@@ -28,7 +28,7 @@ test('product federation is deterministic, unique and preserves five acquisition
 test('federation states are derived from authoritative product contracts rather than widened by CABEZON', () => {
   const products = new Map(buildProductFederation(SELLER).products.map((product) => [product.productId, product]))
   assert.equal(products.get('context-compression')?.state, 'payable')
-  assert.equal(products.get('mps-autonomous-audit')?.state, 'withheld')
+  assert.equal(products.get('mps-autonomous-audit')?.state, 'payable')
   assert.equal(products.get('rapid-intelligence-brief')?.state, 'inquiry_available')
   assert.equal(products.get('book-the-imagined-life')?.state, 'informational')
   assert.equal(products.get('licensed-evidence-mcp')?.state, 'licensed')
