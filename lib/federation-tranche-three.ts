@@ -57,7 +57,7 @@ export function selectFederationTranche(
   graph: DependencyGraph,
   demand: DemandArtifact,
   priorCohorts: readonly PriorCohort[],
-  trancheNumber: 3 | 4,
+  trancheNumber: 3 | 4 | 5,
 ) {
   const candidateById = new Map(candidateMap.candidates.map((candidate) => [candidate.candidateId, candidate]))
   const semanticById = new Map(semantic.entries.map((entry) => [entry.candidateId, entry]))
@@ -143,7 +143,11 @@ export function selectFederationTranche(
       }
     })
   const body = {
-    schemaVersion: trancheNumber === 3 ? 'maha-federation-tranche-three-cohort/1.0' : 'maha-federation-tranche-four-cohort/1.0',
+    schemaVersion: trancheNumber === 3
+      ? 'maha-federation-tranche-three-cohort/1.0'
+      : trancheNumber === 4
+        ? 'maha-federation-tranche-four-cohort/1.0'
+        : 'maha-federation-tranche-five-cohort/1.0',
     candidateMapDigest: candidateMap.provenanceDigest,
     semanticAdjudicationDigest: semantic.provenanceDigest,
     dependencyGraphDigest: graph.provenanceDigest,
@@ -152,7 +156,9 @@ export function selectFederationTranche(
     status: 'frozen-for-evidence-intake',
     selectionRule: trancheNumber === 3
       ? 'Highest calibrated utility after Tranches 1 and 2, with dependency closure, a four-page property/topic cap, proportional property caps, and prior-tranche definitions treated as satisfied prerequisites.'
-      : 'Highest calibrated utility after Tranches 1 through 3, with dependency closure, a four-page property/topic cap, proportional property caps, and prior-tranche definitions treated as satisfied prerequisites.',
+      : trancheNumber === 4
+        ? 'Highest calibrated utility after Tranches 1 through 3, with dependency closure, a four-page property/topic cap, proportional property caps, and prior-tranche definitions treated as satisfied prerequisites.'
+        : 'Highest calibrated utility after Tranches 1 through 4, with dependency closure, a four-page property/topic cap, proportional property caps, and prior-tranche definitions treated as satisfied prerequisites.',
     propertyLimits: PROPERTY_LIMITS,
     counts: {
       selected: entries.length,

@@ -51,8 +51,8 @@ test('health-data consent is narrowed to an operational permission record and cl
   assert.match(JSON.stringify(decision.narrowedScope), /HIPAA authorization/)
   assert.equal(continuation.remediations.review.counts.downstreamMahaOsPagesCleared, 11)
   assert.equal(implementations.pages.filter((entry) => entry.siteId === 'maha-os' && entry.adoption.state === 'blocked-on-unready-prerequisite').length, 0)
-  assert.equal(implementations.registry.counts.blockedOnUnreadyPrerequisite, 1)
-  assert.equal(implementations.registry.counts.readyForOwnerIntegration, 365)
+  assert.equal(implementations.registry.counts.blockedOnUnreadyPrerequisite, 3)
+  assert.equal(implementations.registry.counts.readyForOwnerIntegration, 456)
 })
 
 test('candidates 201–300 partition into 92 ready, seven revise and one semantic duplicate', () => {
@@ -82,20 +82,20 @@ test('all Tranche 3 dependencies resolve to an evidence-ready candidate or an ob
   }
 })
 
-test('the combined publication tranche has 366 unique, source-bound implementations', () => {
-  assert.deepEqual(implementations.registry.counts.byProperty, { 'maha-strategies': 108, 'maha-research': 100, 'agentic-publishing': 26, 'maha-os': 24, 'mayone-maharajan': 16, 'mayon-rajan': 20, 'maha-policy': 72 })
-  assert.equal(implementations.pages.length, 366)
-  assert.equal(new Set(implementations.pages.map((entry) => entry.candidateId)).size, 366)
-  assert.equal(new Set(implementations.pages.map((entry) => entry.canonicalUrl)).size, 366)
+test('the combined publication tranche has 459 unique, source-bound implementations', () => {
+  assert.deepEqual(implementations.registry.counts.byProperty, { 'maha-strategies': 135, 'maha-research': 125, 'agentic-publishing': 35, 'maha-os': 30, 'mayone-maharajan': 19, 'mayon-rajan': 25, 'maha-policy': 90 })
+  assert.equal(implementations.pages.length, 459)
+  assert.equal(new Set(implementations.pages.map((entry) => entry.candidateId)).size, 459)
+  assert.equal(new Set(implementations.pages.map((entry) => entry.canonicalUrl)).size, 459)
   assert.ok(implementations.pages.every((entry) => entry.sources.length > 0 && entry.boundedAnswers.length === 5))
-  assert.equal(implementations.pages.filter((entry) => entry.adoption.state === 'blocked-on-unready-prerequisite').length, 1)
+  assert.equal(implementations.pages.filter((entry) => entry.adoption.state === 'blocked-on-unready-prerequisite').length, 3)
   assert.equal(implementations.registry.counts.publicRoutesCreated, 0)
   assert.equal(implementations.registry.counts.nextBuildsRun, 0)
   assert.equal(implementations.registry.counts.vercelBuildsRun, 0)
 })
 
 test('seven property adapters resolve only exact ready paths and never cross hosts', () => {
-  assert.deepEqual(adapters.registry.counts, { properties: 7, routes: 365, boundedAnswers: 1825, publicRoutesCreated: 0, buildsRun: 0 })
+  assert.deepEqual(adapters.registry.counts, { properties: 7, routes: 456, boundedAnswers: 2280, publicRoutesCreated: 0, buildsRun: 0 })
   for (const contract of adapters.contracts) {
     const manifest = readJson<PropertyManifest>(`content/federation/implementations/${contract.siteId}-pages-v1.json`)
     const adapter = createFederationPropertyAdapter(manifest)

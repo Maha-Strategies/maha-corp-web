@@ -2,14 +2,504 @@
   "schemaVersion": "maha-federation-property-pages/1.0",
   "siteId": "mayone-maharajan",
   "canonicalHost": "www.mayonemaharajan.com",
-  "registryDigest": "sha256:ea4ad1bd93033f7718a76b7701c671201474afd6b07ead32c17d5a127453f328",
+  "registryDigest": "sha256:1aea68733b6703ce13aa75e2cf0562a22b6f68b3ee70a5dc43d81c8c89f0a772",
   "status": "local-unreleased",
   "counts": {
-    "pages": 16,
-    "readyForOwnerIntegration": 16,
+    "pages": 19,
+    "readyForOwnerIntegration": 19,
     "blockedOnUnreadyPrerequisite": 0
   },
   "pages": [
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_9c5aadfaa34b1896f9ee2b36",
+      "tranche": 5,
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "path": "/concepts/authorial-lineage/definition",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/authorial-lineage/definition",
+      "title": "Authorial Lineage — Definition",
+      "topic": "authorial-lineage",
+      "routeRole": "definition",
+      "concept": {
+        "conceptId": "urn:maha:concept:autonomy:authorial-lineage",
+        "familyId": "autonomy",
+        "canonicalOwner": "mayone-maharajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:autonomy:authorial-lineage"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:autonomy"
+          }
+        ]
+      },
+      "directAnswer": "Authorial Lineage, in this definition, is limited to the following inspected scope. One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Authorial Lineage, in this definition, is limited to the following inspected scope. One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Definition",
+          "kind": "role-method",
+          "paragraphs": [
+            "Use the term only for the source-backed scope stated here; keep adjacent concepts separate unless a typed relationship is explicit.",
+            "A useful definition states both inclusion and exclusion conditions so a machine answer cannot silently widen it.",
+            "Applied scope: One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayone-maharajan. This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish authorial interpretation, concept genealogy, book relationships. It must not publish authorial thesis presented as consensus or empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "The Maha Principle — The Network and the Feed; Chapter 6; Chapter 7; Whole-Food Information. Establishes: One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience.",
+            "The Cosmic Recursion — Introduction and closing synthesis; passages distinguishing analogy, recurrence, evidence, and model boundary. Establishes: A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "A manuscript can establish its own wording and internal relationships, not originality, influence, reception, consensus, or empirical truth.",
+            "Textual relationship inside one author’s corpus does not prove chronological influence, priority over other thinkers, public reception, or scientific validity.",
+            "This route must not claim authorial thesis presented as consensus.",
+            "This route must not claim empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/authorial-lineage/relationship",
+            "property-home: https://www.mayonemaharajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "maha-principle-authorial-lineage",
+          "title": "The Maha Principle",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "The Network and the Feed; Chapter 6; Chapter 7; Whole-Food Information",
+          "establishes": "One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience.",
+          "doesNotEstablish": "A manuscript can establish its own wording and internal relationships, not originality, influence, reception, consensus, or empirical truth.",
+          "rightsBasis": "Maha-controlled authorial manuscript; bounded paraphrase and locator only. The packet does not redistribute the manuscript.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "cosmic-recursion-authorial-lineage",
+          "title": "The Cosmic Recursion",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "Introduction and closing synthesis; passages distinguishing analogy, recurrence, evidence, and model boundary",
+          "establishes": "A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification.",
+          "doesNotEstablish": "Textual relationship inside one author’s corpus does not prove chronological influence, priority over other thinkers, public reception, or scientific validity.",
+          "rightsBasis": "Maha-controlled authorial manuscript; bounded paraphrase and locator only. The packet does not redistribute the manuscript.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_6e5cae25a74731057505dc27",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/authorial-lineage/relationship",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_d4b6354f11aedcfbdac48596"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Authorial Lineage mean in this bounded context?",
+          "answer": "Authorial Lineage, in this definition, is limited to the following inspected scope. One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this definition answer?",
+          "answer": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Network and the Feed; Chapter 6; Chapter 7; Whole-Food Information, supports one manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. The Cosmic Recursion (working authorial manuscript inspected 2026-09-06), at Introduction and closing synthesis; passages distinguishing analogy, recurrence, evidence, and model boundary, supports a second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "A manuscript can establish its own wording and internal relationships, not originality, influence, reception, consensus, or empirical truth. Textual relationship inside one author’s corpus does not prove chronological influence, priority over other thinkers, public reception, or scientific validity. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.mayonemaharajan.com/concepts/authorial-lineage/definition#article",
+        "headline": "Authorial Lineage — Definition",
+        "url": "https://www.mayonemaharajan.com/concepts/authorial-lineage/definition",
+        "isPartOf": "https://www.mayonemaharajan.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Authorial Lineage mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Authorial Lineage, in this definition, is limited to the following inspected scope. One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this definition answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Network and the Feed; Chapter 6; Chapter 7; Whole-Food Information, supports one manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. The Cosmic Recursion (working authorial manuscript inspected 2026-09-06), at Introduction and closing synthesis; passages distinguishing analogy, recurrence, evidence, and model boundary, supports a second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A manuscript can establish its own wording and internal relationships, not originality, influence, reception, consensus, or empirical truth. Textual relationship inside one author’s corpus does not prove chronological influence, priority over other thinkers, public reception, or scientific validity. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-5",
+        "decisionManifestDigest": "sha256:5640a0fcbe2c9d848ea65fc05ac63110a5fa2fd80a554d7e99a8fb660732c270",
+        "decisionDigest": "sha256:736da37ac95a99dd95c1a62b1bd4cd0e1a8d4851b6f26a6ac6f35903ab42c4b7",
+        "specificationManifestDigest": "sha256:c596bc9fa2775b2fbe886055d1d83a968da9aa26acd833642d7ad86e1c376e01",
+        "specificationDigest": "sha256:2b7cf55d2a4efbc75a71a5588906579a5806667aedcebfe72fb7dec0a2b1b49d",
+        "packetManifestDigest": "sha256:4971a0090532da8d9ea487ab3205cefc7c82ac3b0a4b208465438148e7431449",
+        "packetDigest": "sha256:b58f999397b272990ef3f621b4eac16bf6db36fda00c5829a7eab1875f048b51"
+      },
+      "contentDigest": "sha256:b08d79f9f5c72910bac91dcd9a4d0aa22b322611cde27db2e92cf1ce88da6ad8"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_d4b6354f11aedcfbdac48596",
+      "tranche": 5,
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "path": "/concepts/authorial-lineage/relationship",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/authorial-lineage/relationship",
+      "title": "Authorial Lineage — Relationship",
+      "topic": "authorial-lineage",
+      "routeRole": "relationship",
+      "concept": {
+        "conceptId": "urn:maha:concept:autonomy:authorial-lineage",
+        "familyId": "autonomy",
+        "canonicalOwner": "mayone-maharajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:autonomy:authorial-lineage"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:autonomy"
+          }
+        ]
+      },
+      "directAnswer": "Authorial Lineage, in this relationship map, is limited to the following inspected scope. One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Authorial Lineage, in this relationship map, is limited to the following inspected scope. One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Relationship map",
+          "kind": "role-method",
+          "paragraphs": [
+            "Name the relationship type and direction, then state what does not transfer across the edge.",
+            "A relationship does not make two concepts equivalent or transfer evidence, legal authority, or empirical validity.",
+            "Applied scope: One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayone-maharajan. This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish authorial interpretation, concept genealogy, book relationships. It must not publish authorial thesis presented as consensus or empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "The Maha Principle — The Network and the Feed; Chapter 6; Chapter 7; Whole-Food Information. Establishes: One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience.",
+            "The Cosmic Recursion — Introduction and closing synthesis; passages distinguishing analogy, recurrence, evidence, and model boundary. Establishes: A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "A manuscript can establish its own wording and internal relationships, not originality, influence, reception, consensus, or empirical truth.",
+            "Textual relationship inside one author’s corpus does not prove chronological influence, priority over other thinkers, public reception, or scientific validity.",
+            "This route must not claim authorial thesis presented as consensus.",
+            "This route must not claim empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/authorial-lineage/definition",
+            "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+            "property-home: https://www.mayonemaharajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "maha-principle-authorial-lineage",
+          "title": "The Maha Principle",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "The Network and the Feed; Chapter 6; Chapter 7; Whole-Food Information",
+          "establishes": "One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience.",
+          "doesNotEstablish": "A manuscript can establish its own wording and internal relationships, not originality, influence, reception, consensus, or empirical truth.",
+          "rightsBasis": "Maha-controlled authorial manuscript; bounded paraphrase and locator only. The packet does not redistribute the manuscript.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "cosmic-recursion-authorial-lineage",
+          "title": "The Cosmic Recursion",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "Introduction and closing synthesis; passages distinguishing analogy, recurrence, evidence, and model boundary",
+          "establishes": "A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification.",
+          "doesNotEstablish": "Textual relationship inside one author’s corpus does not prove chronological influence, priority over other thinkers, public reception, or scientific validity.",
+          "rightsBasis": "Maha-controlled authorial manuscript; bounded paraphrase and locator only. The packet does not redistribute the manuscript.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/authorial-lineage/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_9c5aadfaa34b1896f9ee2b36"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_6e5cae25a74731057505dc27",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Authorial Lineage mean in this bounded context?",
+          "answer": "Authorial Lineage, in this relationship map, is limited to the following inspected scope. One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this relationship answer?",
+          "answer": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Network and the Feed; Chapter 6; Chapter 7; Whole-Food Information, supports one manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. The Cosmic Recursion (working authorial manuscript inspected 2026-09-06), at Introduction and closing synthesis; passages distinguishing analogy, recurrence, evidence, and model boundary, supports a second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "A manuscript can establish its own wording and internal relationships, not originality, influence, reception, consensus, or empirical truth. Textual relationship inside one author’s corpus does not prove chronological influence, priority over other thinkers, public reception, or scientific validity. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.mayonemaharajan.com/concepts/authorial-lineage/relationship#article",
+        "headline": "Authorial Lineage — Relationship",
+        "url": "https://www.mayonemaharajan.com/concepts/authorial-lineage/relationship",
+        "isPartOf": "https://www.mayonemaharajan.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Authorial Lineage mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Authorial Lineage, in this relationship map, is limited to the following inspected scope. One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this relationship answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Network and the Feed; Chapter 6; Chapter 7; Whole-Food Information, supports one manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. The Cosmic Recursion (working authorial manuscript inspected 2026-09-06), at Introduction and closing synthesis; passages distinguishing analogy, recurrence, evidence, and model boundary, supports a second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A manuscript can establish its own wording and internal relationships, not originality, influence, reception, consensus, or empirical truth. Textual relationship inside one author’s corpus does not prove chronological influence, priority over other thinkers, public reception, or scientific validity. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-5",
+        "decisionManifestDigest": "sha256:5640a0fcbe2c9d848ea65fc05ac63110a5fa2fd80a554d7e99a8fb660732c270",
+        "decisionDigest": "sha256:62269b9677fb233629052d5156c91895e272f19410a96c8313444f3c2ee05efc",
+        "specificationManifestDigest": "sha256:c596bc9fa2775b2fbe886055d1d83a968da9aa26acd833642d7ad86e1c376e01",
+        "specificationDigest": "sha256:33d744cbbd4d119cc8ff33b5a0cc190e85bc3642f424dec748fc94812fff8bbc",
+        "packetManifestDigest": "sha256:4971a0090532da8d9ea487ab3205cefc7c82ac3b0a4b208465438148e7431449",
+        "packetDigest": "sha256:b58f999397b272990ef3f621b4eac16bf6db36fda00c5829a7eab1875f048b51"
+      },
+      "contentDigest": "sha256:9c7845a8ed081a4b24627bf4378a769d4682edd727110c64b611d2e81ca4562c"
+    },
     {
       "schemaVersion": "maha-federation-page/1.0",
       "candidateId": "cand_c6b061c4183758c2920b9ec0",
@@ -1016,6 +1506,256 @@
         "packetDigest": "sha256:668ac3aa896c80b0aa3134e77e7379b0f4f9de789e0734d19cf431e63ef7e162"
       },
       "contentDigest": "sha256:e11fc9ba0d5a355887620c751eeb89392ee38c252d474582106307d8dbd57330"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_981e54dc4e399f8dd3400cc3",
+      "tranche": 5,
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "path": "/concepts/cosmic-recursion/origin",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/origin",
+      "title": "Cosmic Recursion — Origin",
+      "topic": "cosmic-recursion",
+      "routeRole": "origin",
+      "concept": {
+        "conceptId": "urn:maha:concept:autonomy:cosmic-recursion",
+        "familyId": "autonomy",
+        "canonicalOwner": "mayone-maharajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:autonomy:cosmic-recursion"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:autonomy"
+          }
+        ]
+      },
+      "directAnswer": "Cosmic Recursion, in this Origin, is limited to the following inspected scope. Mayone Maharajan’s own definition, conceptual relationships, development, and stated limits. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Cosmic Recursion, in this Origin, is limited to the following inspected scope. Mayone Maharajan’s own definition, conceptual relationships, development, and stated limits. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Origin",
+          "kind": "role-method",
+          "paragraphs": [
+            "Keep the answer within the inspected source scope and make every operational step or conceptual relation explicit.",
+            "Do not use completeness of presentation as a substitute for evidence, review, or release.",
+            "Applied scope: Mayone Maharajan’s own definition, conceptual relationships, development, and stated limits."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayone-maharajan. This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish authorial interpretation, concept genealogy, book relationships. It must not publish authorial thesis presented as consensus or empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "The Cosmic Recursion — Introduction: “On the word recursion, and what I am refusing”; “The three registers”; “Four slots”; “How this could be wrong”. Establishes: Mayone Maharajan’s own definition, conceptual relationships, development, and stated limits."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "This is an authorial thesis, not scientific consensus, empirical proof, a theological authority, or a claim that metaphor establishes mechanism.",
+            "This route must not claim authorial thesis presented as consensus.",
+            "This route must not claim empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/cosmic-recursion/definition",
+            "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/cosmic-recursion/relationship",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/cosmic-recursion/development",
+            "property-home: https://www.mayonemaharajan.com/",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/cosmic-recursion/critique"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "cosmic-recursion-manuscript",
+          "title": "The Cosmic Recursion",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-05",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "Introduction: “On the word recursion, and what I am refusing”; “The three registers”; “Four slots”; “How this could be wrong”",
+          "establishes": "Mayone Maharajan’s own definition, conceptual relationships, development, and stated limits.",
+          "doesNotEstablish": "This is an authorial thesis, not scientific consensus, empirical proof, a theological authority, or a claim that metaphor establishes mechanism.",
+          "rightsBasis": "Maha-controlled authorial manuscript; retain only file identity, section locator, and content fingerprint. Quotation remains governed by the author publication policy.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": "sha256:8666652794dc501bee716658b8e6e3a20c0921f393b28bab1f79c12dfa36c439"
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_a7603f4f4e1f0948c574c52d"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_6e5cae25a74731057505dc27",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/relationship",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_3062f2ecc529be26d6b28874"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/development",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_4f9959397f06dadaa4f00d0f"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/critique",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_c6b061c4183758c2920b9ec0"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Cosmic Recursion mean in this bounded context?",
+          "answer": "Cosmic Recursion, in this Origin, is limited to the following inspected scope. Mayone Maharajan’s own definition, conceptual relationships, development, and stated limits. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this origin answer?",
+          "answer": "The Cosmic Recursion (working authorial manuscript inspected 2026-09-05), at Introduction: “On the word recursion, and what I am refusing”; “The three registers”; “Four slots”; “How this could be wrong”, supports mayone Maharajan’s own definition, conceptual relationships, development, and stated limits."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "This is an authorial thesis, not scientific consensus, empirical proof, a theological authority, or a claim that metaphor establishes mechanism. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/origin#article",
+        "headline": "Cosmic Recursion — Origin",
+        "url": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/origin",
+        "isPartOf": "https://www.mayonemaharajan.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Cosmic Recursion mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Cosmic Recursion, in this Origin, is limited to the following inspected scope. Mayone Maharajan’s own definition, conceptual relationships, development, and stated limits. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this origin answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Cosmic Recursion (working authorial manuscript inspected 2026-09-05), at Introduction: “On the word recursion, and what I am refusing”; “The three registers”; “Four slots”; “How this could be wrong”, supports mayone Maharajan’s own definition, conceptual relationships, development, and stated limits."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This is an authorial thesis, not scientific consensus, empirical proof, a theological authority, or a claim that metaphor establishes mechanism. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-5",
+        "decisionManifestDigest": "sha256:5640a0fcbe2c9d848ea65fc05ac63110a5fa2fd80a554d7e99a8fb660732c270",
+        "decisionDigest": "sha256:4407c0c71c70b4c4a1225d80562439eb479263f471dd2f688e63572a33b2a873",
+        "specificationManifestDigest": "sha256:c596bc9fa2775b2fbe886055d1d83a968da9aa26acd833642d7ad86e1c376e01",
+        "specificationDigest": "sha256:db996f437ebd4b8fc100433a61b77230cf6f35a29a42a447ff52b882662c9396",
+        "packetManifestDigest": "sha256:4971a0090532da8d9ea487ab3205cefc7c82ac3b0a4b208465438148e7431449",
+        "packetDigest": "sha256:5a22272255f4c24c6ea8676bc4bc6ca0d50b27086187f6944d7177a4d536ea41"
+      },
+      "contentDigest": "sha256:14e3322e88d49a7f2f626326d915fa8d34523cecca41b43bf31fe68b0ff2d3df"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -4020,5 +4760,5 @@
       "contentDigest": "sha256:8b21599923c81562bdf982ea93ef31cc4a0241f93b9ca643c155557e98abe5e1"
     }
   ],
-  "provenanceDigest": "sha256:67e2608894fc6e074499cb24b8d5c44bf14d774fa9ba70446e4f32fe8ef604f8"
+  "provenanceDigest": "sha256:095ca76aa756faf8d228e09e8680cc4621e80da9af3630e151fe09bf72038022"
 }

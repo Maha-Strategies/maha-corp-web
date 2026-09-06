@@ -18,7 +18,7 @@ type CohortEntry = Candidate & {
   dependenciesSatisfiedByPriorTranches: string[]
 }
 
-type Source = {
+export type FederationReviewSource = {
   sourceId: string
   title: string
   responsibleBody: string
@@ -32,7 +32,7 @@ type Source = {
   boundary: string
 }
 
-type Packet = {
+export type FederationReviewPacket = {
   topicKey: string
   disposition: string
   reason: string
@@ -42,12 +42,12 @@ type Packet = {
   scopeChecked: boolean
   boundaryChecked: boolean
   implementationCondition?: string
-  sources: Source[]
+  sources: FederationReviewSource[]
   provenance?: string
   priorPacketDigest?: string
 }
 
-type PriorPacketManifest = { provenanceDigest: string; packets: Packet[] }
+type PriorPacketManifest = { provenanceDigest: string; packets: FederationReviewPacket[] }
 
 const reviewedOn = '2026-09-06'
 const publicRights = 'Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.'
@@ -66,9 +66,9 @@ const source = (
   boundary: string,
   rightsBasis = publicRights,
   inspectionDepth = 'section',
-): Source => ({ sourceId, title, responsibleBody, versionOrDate, url, sourceClass, rightsBasis, inspectionDepth, locator, scope, boundary })
+): FederationReviewSource => ({ sourceId, title, responsibleBody, versionOrDate, url, sourceClass, rightsBasis, inspectionDepth, locator, scope, boundary })
 
-const packet = (topicKey: string, reason: string, sources: Source[], disposition = 'evidence-ready', implementationCondition?: string): Packet => ({
+const packet = (topicKey: string, reason: string, sources: FederationReviewSource[], disposition = 'evidence-ready', implementationCondition?: string): FederationReviewPacket => ({
   topicKey,
   disposition,
   reason,
@@ -81,7 +81,7 @@ const packet = (topicKey: string, reason: string, sources: Source[], disposition
   sources,
 })
 
-const NEW_PACKETS: Record<string, Packet> = {
+const NEW_PACKETS: Record<string, FederationReviewPacket> = {
   'agentic-publishing:author-identity': packet('agentic-publishing:author-identity', 'ORCID supports authenticated persistent researcher identifiers and CRediT supports explicit contributor roles; neither substitutes for authorship policy or identity proof outside its own workflow.', [
     source('orcid-authenticated-ids', 'Collecting and sharing ORCID iDs', 'ORCID', `living guidance inspected ${reviewedOn}`, 'https://info.orcid.org/documentation/collecting-and-sharing-orcid-ids/', 'scholarly-identity-guidance', 'Why it is important to collect authenticated ORCID iDs; How it works; metadata passed downstream', 'OAuth-authenticated ORCID iDs associate a record holder with a persistent identifier and can be carried in research-output metadata.', 'An ORCID iD does not prove every biographical claim, contribution, affiliation, or authorship decision.'),
     source('credit-taxonomy', 'CRediT — Contributor Role Taxonomy', 'NISO', `ANSI/NISO standard approved 2022; site inspected ${reviewedOn}`, 'https://credit.niso.org/', 'scholarly-contribution-standard', 'CRediT’s 14 Contributor Roles', 'A controlled vocabulary distinguishes fourteen kinds of contribution to research outputs.', 'A contributor role does not by itself determine authorship, responsibility for every claim, identity, or contribution quality.'),
@@ -140,7 +140,7 @@ const NEW_PACKETS: Record<string, Packet> = {
 const topicKey = (entry: { siteId: string; topic: string }) => `${entry.siteId}:${entry.topic}`
 const artifact = <T extends object>(body: T): T & { provenanceDigest: string } => ({ ...body, provenanceDigest: provenanceDigest(body) })
 
-function specification(candidate: Candidate & { topic: string }, packetValue: Packet, dependencies: unknown) {
+function specification(candidate: Candidate & { topic: string }, packetValue: FederationReviewPacket, dependencies: unknown) {
   const role = candidate.routeRole.replaceAll('-', ' ')
   return {
     candidateId: candidate.candidateId,
@@ -168,16 +168,20 @@ function specification(candidate: Candidate & { topic: string }, packetValue: Pa
 
 const COMMERCIAL_REASON = 'Technical or implementation evidence does not establish that this exact capability is currently offered, priced, deliverable, or validated by a customer.'
 
-export function buildTrancheFourReview(input: {
+export function buildFederationTrancheReview(input: {
   cohort: { provenanceDigest: string; entries: CohortEntry[] }
   candidates: { provenanceDigest: string; candidates: Candidate[] }
   priorPacketManifests: PriorPacketManifest[]
+  trancheNumber: 4 | 5
+  additionalPackets?: Record<string, FederationReviewPacket>
 }) {
+  const schemaStem = `maha-federation-tranche-${input.trancheNumber}`
+  const availableNewPackets = input.additionalPackets ?? {}
   const priorPackets = new Map(input.priorPacketManifests.flatMap((manifest) => manifest.packets.map((value) => [value.topicKey, value] as const)))
   const candidateById = new Map(input.candidates.candidates.map((value) => [value.candidateId, value]))
   const usedKeys = [...new Set(input.cohort.entries.map(topicKey))].sort()
   const packets = usedKeys.map((key) => {
-    const fresh = NEW_PACKETS[key]
+    const fresh = availableNewPackets[key]
     if (fresh) return { ...fresh, provenance: 'new-section-inspection' }
     const prior = priorPackets.get(key)
     if (!prior) throw new Error(`No inspected packet exists for ${key}.`)
@@ -185,11 +189,11 @@ export function buildTrancheFourReview(input: {
   })
   const packetMap = new Map(packets.map((value) => [value.topicKey, value]))
   const packetManifest = artifact({
-    schemaVersion: 'maha-federation-tranche-four-evidence-packets/1.0',
+    schemaVersion: `${schemaStem}-evidence-packets/1.0`,
     cohortDigest: input.cohort.provenanceDigest,
     inspectedOn: reviewedOn,
     inspectionMethod: 'Exact-locator inspection of authoritative public sources and named local code; source text is not retained. Prior packets are reused only at the recorded version and scope.',
-    counts: { topics: packets.length, newTopics: usedKeys.filter((key) => Boolean(NEW_PACKETS[key])).length, carriedForwardTopics: usedKeys.filter((key) => !NEW_PACKETS[key]).length, sources: packets.reduce((sum, value) => sum + value.sources.length, 0) },
+    counts: { topics: packets.length, newTopics: usedKeys.filter((key) => Boolean(availableNewPackets[key])).length, carriedForwardTopics: usedKeys.filter((key) => !availableNewPackets[key]).length, sources: packets.reduce((sum, value) => sum + value.sources.length, 0) },
     packets,
   })
 
@@ -201,7 +205,7 @@ export function buildTrancheFourReview(input: {
     })
     return { candidateId: entry.candidateId, url: entry.url, dependencies, allDependenciesResolved: true }
   })
-  const dependencyManifest = artifact({ schemaVersion: 'maha-federation-tranche-four-dependency-validation/1.0', cohortDigest: input.cohort.provenanceDigest, counts: { candidates: 100, resolved: 100, unresolved: 0 }, entries: dependencyEntries })
+  const dependencyManifest = artifact({ schemaVersion: `${schemaStem}-dependency-validation/1.0`, cohortDigest: input.cohort.provenanceDigest, counts: { candidates: 100, resolved: 100, unresolved: 0 }, entries: dependencyEntries })
 
   const semanticEntries = input.cohort.entries.map((entry) => {
     const candidate = candidateById.get(entry.candidateId)!
@@ -211,7 +215,7 @@ export function buildTrancheFourReview(input: {
       : 'Manually retained after topic, role, owner, and dependency review; no existing route answers the same bounded question.'
     return { candidateId: entry.candidateId, url: entry.url, topic: entry.topic, routeRole: entry.routeRole, disposition: 'retain-distinct', reason, nearestObservedUrl: nearest, reviewedOn, reviewerTier: 'internal-editorial' }
   })
-  const semanticManifest = artifact({ schemaVersion: 'maha-federation-tranche-four-semantic-validation/1.0', cohortDigest: input.cohort.provenanceDigest, method: 'Manual review of topic, role, nearest observed route, canonical owner, and answer contract; URL similarity alone never determines identity.', assurance: 'Internal editorial review; not external expert endorsement.', counts: { reviewed: 100, retainDistinct: 100, duplicative: 0 }, entries: semanticEntries })
+  const semanticManifest = artifact({ schemaVersion: `${schemaStem}-semantic-validation/1.0`, cohortDigest: input.cohort.provenanceDigest, method: 'Manual review of topic, role, nearest observed route, canonical owner, and answer contract; URL similarity alone never determines identity.', assurance: 'Internal editorial review; not external expert endorsement.', counts: { reviewed: 100, retainDistinct: 100, duplicative: 0 }, entries: semanticEntries })
 
   const dependencyMap = new Map(dependencyEntries.map((value) => [value.candidateId, value.dependencies]))
   const decisions = input.cohort.entries.map((entry) => {
@@ -238,7 +242,7 @@ export function buildTrancheFourReview(input: {
     }
   })
   const decisionManifest = artifact({
-    schemaVersion: 'maha-federation-tranche-four-decisions/1.0',
+    schemaVersion: `${schemaStem}-decisions/1.0`,
     cohortDigest: input.cohort.provenanceDigest,
     semanticValidationDigest: semanticManifest.provenanceDigest,
     dependencyValidationDigest: dependencyManifest.provenanceDigest,
@@ -252,9 +256,9 @@ export function buildTrancheFourReview(input: {
     packetMap.get(decision.topicPacketKey)!,
     { graphEdges: dependencyMap.get(decision.candidateId) ?? [], canonicalOwner: candidateById.get(decision.candidateId)!.siteId },
   ))
-  const specificationManifest = artifact({ schemaVersion: 'maha-federation-tranche-four-page-specifications/1.0', decisionManifestDigest: decisionManifest.provenanceDigest, rule: 'A substantial-page specification exists only for an evidence-ready exact candidate and carries every packet locator and boundary.', counts: { specifications: specifications.length, excludedNonReady: 100 - specifications.length }, specifications })
+  const specificationManifest = artifact({ schemaVersion: `${schemaStem}-page-specifications/1.0`, decisionManifestDigest: decisionManifest.provenanceDigest, rule: 'A substantial-page specification exists only for an evidence-ready exact candidate and carries every packet locator and boundary.', counts: { specifications: specifications.length, excludedNonReady: 100 - specifications.length }, specifications })
   const readiness = artifact({
-    schemaVersion: 'maha-federation-tranche-four-readiness/1.0',
+    schemaVersion: `${schemaStem}-readiness/1.0`,
     cohortDigest: input.cohort.provenanceDigest,
     decisionManifestDigest: decisionManifest.provenanceDigest,
     specificationManifestDigest: specificationManifest.provenanceDigest,
@@ -263,4 +267,12 @@ export function buildTrancheFourReview(input: {
     boundary: 'No route or public registry entry is created. Owner integration, exact-revision review, canonical release where applicable, completion of the 4,000-route corpus, and explicit build authorization remain required.',
   })
   return { semanticManifest, dependencyManifest, packetManifest, decisionManifest, specificationManifest, readiness }
+}
+
+export function buildTrancheFourReview(input: {
+  cohort: { provenanceDigest: string; entries: CohortEntry[] }
+  candidates: { provenanceDigest: string; candidates: Candidate[] }
+  priorPacketManifests: PriorPacketManifest[]
+}) {
+  return buildFederationTrancheReview({ ...input, trancheNumber: 4, additionalPackets: NEW_PACKETS })
 }

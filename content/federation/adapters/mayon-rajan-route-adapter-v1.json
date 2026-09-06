@@ -3,7 +3,7 @@
   "siteId": "mayon-rajan",
   "canonicalHost": "mayonrajan.com",
   "rootPath": "/mayon-volcano/",
-  "sourceManifestDigest": "sha256:6febe57740e36be0861e09c3f47552977d97631ad4e359a6d48840957f942912",
+  "sourceManifestDigest": "sha256:870f3d1ea0932721c1026df7475efa10c938656da8900a44f3a50530bfaaa139",
   "state": "local-owner-handoff",
   "ownerIntegration": {
     "routeShape": "/mayon-volcano/[...segments]",
@@ -16,8 +16,8 @@
     "activeCanonicalReleaseRequired": true
   },
   "counts": {
-    "routes": 20,
-    "boundedAnswers": 100,
+    "routes": 25,
+    "boundedAnswers": 125,
     "publicRoutesCreated": 0,
     "buildsRun": 0
   },
@@ -31,7 +31,17 @@
         "hazard-zones",
         "definition"
       ],
-      "contentDigest": "sha256:5fdffa65d6437f3ce02532fa4ef79c14f92a4064e43c07d1a3e4269da5c48c89"
+      "contentDigest": "sha256:2df78130790ea91b3588f52fb29649bc7afab6a6fcfce68777cafa904e464188"
+    },
+    {
+      "candidateId": "cand_2f1a3a71e1f98dead537418a",
+      "path": "/mayon-volcano/hazard-zones/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/hazard-zones/limits",
+      "segments": [
+        "hazard-zones",
+        "limits"
+      ],
+      "contentDigest": "sha256:cc0586f97361abf07feba4092dcd509a00171c1fb76d4fe51958b6d489092f08"
     },
     {
       "candidateId": "cand_60bf213c0188bc6dfa4bf87d",
@@ -91,7 +101,17 @@
         "infrastructure-resilience",
         "definition"
       ],
-      "contentDigest": "sha256:e5c88759e4294979f634429561d56e02417b0f5efaee9741113ad4be1a851470"
+      "contentDigest": "sha256:5a7bfaeb3297ab17ef46fbeedd103077f4f45d77d79ba3bcf8624bf352c27ee1"
+    },
+    {
+      "candidateId": "cand_393ccfef4f2c1b704033aab5",
+      "path": "/mayon-volcano/infrastructure-resilience/evidence",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/evidence",
+      "segments": [
+        "infrastructure-resilience",
+        "evidence"
+      ],
+      "contentDigest": "sha256:167286db3803dadff985d624eb0ae7eb48b8f7a8c622d3fc8631fec9e71059cf"
     },
     {
       "candidateId": "cand_cc5e3966d5ae31e5565245bb",
@@ -101,7 +121,7 @@
         "infrastructure-resilience",
         "limits"
       ],
-      "contentDigest": "sha256:fa9e7979a9b947fb28d5c53891b083c5c365248e9173d12aefcfd804e8ddc704"
+      "contentDigest": "sha256:be98fb102b06a60f956b5142a1f243a89c06dc542d16b4082472df62762a20c8"
     },
     {
       "candidateId": "cand_f189698720a3e4d0dfd92d33",
@@ -111,7 +131,17 @@
         "infrastructure-resilience",
         "official-sources"
       ],
-      "contentDigest": "sha256:6831e3ac8066e321330646c180bdef09360692e7c291e2503f535bea7cbc8239"
+      "contentDigest": "sha256:a90653288db9092f7c715ff3d1ef5117078c5edb2b8520b1550746af2fd6b795"
+    },
+    {
+      "candidateId": "cand_d3e682d8e552ec8d8ec8656d",
+      "path": "/mayon-volcano/infrastructure-resilience/preparedness",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/preparedness",
+      "segments": [
+        "infrastructure-resilience",
+        "preparedness"
+      ],
+      "contentDigest": "sha256:2fcd9a1eee16fe37e34373f6549b391f0dc888a7e471b5ca0d809912925b99cc"
     },
     {
       "candidateId": "cand_7a0b81efa6eb66077feee67b",
@@ -121,7 +151,7 @@
         "lahar",
         "definition"
       ],
-      "contentDigest": "sha256:3ce12b6d3ae5e1bfa426c74dc9a4ff8959b66a2b5fc8df69e500038d11e030a3"
+      "contentDigest": "sha256:0e73f4e234eea332df8fd0ff6ca5526a06168a1b0c4a8221f59c0f2e7a17d931"
     },
     {
       "candidateId": "cand_f9753cf9ead17ebb7d1a5c1d",
@@ -131,7 +161,17 @@
         "lahar",
         "limits"
       ],
-      "contentDigest": "sha256:d1b0a009c8195241c38b48ff47b7522c8dd9ff910aebe31e84921bcf9b87c202"
+      "contentDigest": "sha256:cc12d61cc353cdd75cb017b3e8eb9be4231fa09e3bb27d57a54e556e0ff6d83f"
+    },
+    {
+      "candidateId": "cand_1648aaf06460cbdc20f6a869",
+      "path": "/mayon-volcano/lahar/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/lahar/official-sources",
+      "segments": [
+        "lahar",
+        "official-sources"
+      ],
+      "contentDigest": "sha256:1ffbdb6f3e3690c05c07d4a843ad2896d8c7ed871db110473c040c5a1689f754"
     },
     {
       "candidateId": "cand_3a0a373f88138f7c3b315691",
@@ -201,7 +241,7 @@
         "official-alerts",
         "definition"
       ],
-      "contentDigest": "sha256:373c46e8b0941c579fa5e51f44aad7714ef93c1b3a8c32a19d2e4ee382b5de9c"
+      "contentDigest": "sha256:42db0bcbe66d5897de021e13800cca39fbce92068a25d5e12b508fc96271a899"
     },
     {
       "candidateId": "cand_f8e337ad1934c31c65dcea4d",
@@ -211,7 +251,7 @@
         "official-alerts",
         "limits"
       ],
-      "contentDigest": "sha256:f27d31837b6a53c46e2e76f8aa397b715a847c88ccea83233a3d84206575b2bf"
+      "contentDigest": "sha256:ecc37127e5d5504930112d05338298cb94fb75d71edb1db459edc3a3bc1a7708"
     },
     {
       "candidateId": "cand_74e804dbf2febe142c6f4a1f",
@@ -221,8 +261,18 @@
         "official-alerts",
         "official-sources"
       ],
-      "contentDigest": "sha256:bbfd2ccf7e315762d999d33265e91ea7cd4750149ff5328e4736f97d18e3b4fe"
+      "contentDigest": "sha256:ceec662011ea584d0dac6e303e555c8ce48ee0c02d4aa295e412adddf2729da0"
+    },
+    {
+      "candidateId": "cand_a0d920b14da4d21973abceb1",
+      "path": "/mayon-volcano/official-alerts/preparedness",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/official-alerts/preparedness",
+      "segments": [
+        "official-alerts",
+        "preparedness"
+      ],
+      "contentDigest": "sha256:68401565f3e41af0ce4cb381318247f63c63f92938e157a48fa7d4b042d2e662"
     }
   ],
-  "provenanceDigest": "sha256:ee51fca7fcfb9531830f0136da38a27efa402b490b653bb95aac0936fb1cc8e3"
+  "provenanceDigest": "sha256:362afa0826bdfcfddccba0bd00515a4c4919d916b5a88e125973c25ec0364b48"
 }

@@ -75,7 +75,7 @@ type Inputs = {
   }>
   supplements?: Array<{
     batchId: string
-    tranche: 1 | 2 | 3 | 4
+    tranche: 1 | 2 | 3 | 4 | 5
     decisions: { provenanceDigest: string; entries: Decision[] }
     specifications: { provenanceDigest: string; specifications: Specification[] }
     packets: { provenanceDigest: string; packets: Packet[] }

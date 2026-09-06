@@ -3,7 +3,7 @@
   "siteId": "maha-os",
   "canonicalHost": "www.maha-os.com",
   "rootPath": "/knowledge/",
-  "sourceManifestDigest": "sha256:9a070896343656217dfd69214c59ad9cb89a31ce4248ed5de5ca4a2e2c2f1ed2",
+  "sourceManifestDigest": "sha256:27573a3b5b537fdad20b292ebff03dad300fb1f4a1be7170edb5f3c347ec3f66",
   "state": "local-owner-handoff",
   "ownerIntegration": {
     "routeShape": "/knowledge/[...segments]",
@@ -16,13 +16,35 @@
     "activeCanonicalReleaseRequired": true
   },
   "counts": {
-    "routes": 24,
-    "boundedAnswers": 120,
+    "routes": 30,
+    "boundedAnswers": 150,
     "publicRoutesCreated": 0,
     "buildsRun": 0
   },
   "publicationBoundary": "The adapter resolves local content only. The owner route must still bind an exact revision and active canonical release before crawlability; a missing or unready path resolves to null.",
   "entries": [
+    {
+      "candidateId": "cand_330dee492175d4bb7d07b254",
+      "path": "/knowledge/private-machine-systems/biometric-data-boundary/definition",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/definition",
+      "segments": [
+        "private-machine-systems",
+        "biometric-data-boundary",
+        "definition"
+      ],
+      "contentDigest": "sha256:1ca452a36dd0eba3134825703769acfc9e3f21521e30c1c49006d7bbd3b75694"
+    },
+    {
+      "candidateId": "cand_5c6e90c179c29d5cffb39ecf",
+      "path": "/knowledge/private-machine-systems/biometric-data-boundary/operator-guide",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/operator-guide",
+      "segments": [
+        "private-machine-systems",
+        "biometric-data-boundary",
+        "operator-guide"
+      ],
+      "contentDigest": "sha256:70f12d98c51ae0912a0ce642d9d717f48594559d5b0a7e6e2bb2abc20f4f8bab"
+    },
     {
       "candidateId": "cand_f2e452a99e390ddae8b1001f",
       "path": "/knowledge/private-machine-systems/device-identity/definition",
@@ -76,7 +98,18 @@
         "household-agents",
         "definition"
       ],
-      "contentDigest": "sha256:597e7459bdf381cca37bff9427b5cc9bf7d12d8c1b9a2f3f8bbc1d9fca37bd2c"
+      "contentDigest": "sha256:d2f27265c93816de1416e988c3243fd79859f3cadb95e82abd61afe9d133166f"
+    },
+    {
+      "candidateId": "cand_350364d53ff997bd2ea8476f",
+      "path": "/knowledge/private-machine-systems/household-agents/failure-mode",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/household-agents/failure-mode",
+      "segments": [
+        "private-machine-systems",
+        "household-agents",
+        "failure-mode"
+      ],
+      "contentDigest": "sha256:8256a2842f63951588ba20a24a0d79d61853216051be8a661507cb9637c84ae6"
     },
     {
       "candidateId": "cand_44b96b45a1efae66643b0203",
@@ -87,7 +120,7 @@
         "household-agents",
         "operator-guide"
       ],
-      "contentDigest": "sha256:09b1f633a06de01fd986364a88086ca079f370563583f967fc038235e1e1ad04"
+      "contentDigest": "sha256:e61c4fb1858ee720937d4072c95756a59f48646507de569e59c4df32d4348c5c"
     },
     {
       "candidateId": "cand_40dfda6dc02b29b79981cc7f",
@@ -145,6 +178,17 @@
       "contentDigest": "sha256:04bbfb4af479880c05b9ce173215d612f510b792fd0d9a1fe43d55b723a8f57c"
     },
     {
+      "candidateId": "cand_03154525133f888c5cf9f2c3",
+      "path": "/knowledge/private-machine-systems/offline-operation/architecture",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/architecture",
+      "segments": [
+        "private-machine-systems",
+        "offline-operation",
+        "architecture"
+      ],
+      "contentDigest": "sha256:6ff168bf7f07b489ac8f96a353f05349850c67ccb0b306f7e76b0e4f8c57f7d4"
+    },
+    {
       "candidateId": "cand_c39f4de7987d0d289ae4d0eb",
       "path": "/knowledge/private-machine-systems/offline-operation/controls",
       "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/controls",
@@ -153,7 +197,7 @@
         "offline-operation",
         "controls"
       ],
-      "contentDigest": "sha256:9590b7fa7149d8747669d247e6052f23c36a5b454bbc26e5c1c477bd23086576"
+      "contentDigest": "sha256:5374ea6db4d6206adfea70100da65dcbb1f4101a3895b38e7d44e70e54e63e9e"
     },
     {
       "candidateId": "cand_6c7d279e19fcb92f76df94e2",
@@ -164,7 +208,7 @@
         "offline-operation",
         "definition"
       ],
-      "contentDigest": "sha256:335e0c1778b2fd94663be7040eebfe372db0a158f317c5e699e10fd5a172c638"
+      "contentDigest": "sha256:8c86561a568f693d056cd0034d60a286195e63c15db04ef64f35dae47da12f97"
     },
     {
       "candidateId": "cand_784b1995902a5db299a0b086",
@@ -175,7 +219,7 @@
         "offline-operation",
         "failure-mode"
       ],
-      "contentDigest": "sha256:3ad351e1e4966fa31e9c6a27725bf6e77795855a08f263cf59723bcc19c9b379"
+      "contentDigest": "sha256:bc53d04982503142aa421f0c67900228c84cad6c7395d6ea2383503312c87964"
     },
     {
       "candidateId": "cand_64e34cac0ca1f3ac67f6649d",
@@ -186,7 +230,18 @@
         "offline-operation",
         "operator-guide"
       ],
-      "contentDigest": "sha256:d1f57f136499e4941228f7d020c5f2c9564293ad3831f55bae916a1216d110b9"
+      "contentDigest": "sha256:a90173ae1cf25a039177b99da7d446c9a37b51016ec81c26757b23b0bd026828"
+    },
+    {
+      "candidateId": "cand_a3cfd847f6805add4cc97df5",
+      "path": "/knowledge/private-machine-systems/on-device-inference/architecture",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/architecture",
+      "segments": [
+        "private-machine-systems",
+        "on-device-inference",
+        "architecture"
+      ],
+      "contentDigest": "sha256:e538d905884f84253f8907d45932813c91b67257c5a3497a3dc1ac360ddd8829"
     },
     {
       "candidateId": "cand_31e8a982588b5d413833c285",
@@ -197,7 +252,7 @@
         "on-device-inference",
         "controls"
       ],
-      "contentDigest": "sha256:543f58d05914ab8768d2863ac6727c54d50eb7bbcfcf2edb3af13dc91a6f65c4"
+      "contentDigest": "sha256:a61f4412e92c59c017c5dda4e524116ca2b96a44e608c3d07646493dfd7d47ac"
     },
     {
       "candidateId": "cand_263d251a7e65204ce3eae1a7",
@@ -208,7 +263,7 @@
         "on-device-inference",
         "definition"
       ],
-      "contentDigest": "sha256:d08ac185e22e4f5ab1743f2c031bb8add005158c499210c5213fa56b3a671387"
+      "contentDigest": "sha256:874c38ddc3f7f432b676c18544637bbe8ad26e0d52ba04d81967f97873e24bd0"
     },
     {
       "candidateId": "cand_8995fa6b7a13d8d0caaa72db",
@@ -219,7 +274,7 @@
         "on-device-inference",
         "failure-mode"
       ],
-      "contentDigest": "sha256:a6147c28e641683ae936ff5e1581f056baf13bf7195465dee785fbdb881ecf30"
+      "contentDigest": "sha256:dff683be4020323cffd3d3118bd648cd23e920243494c28b8ff79ac1bb39e910"
     },
     {
       "candidateId": "cand_0fc2ece30235e82106b7d75d",
@@ -230,7 +285,7 @@
         "on-device-inference",
         "operator-guide"
       ],
-      "contentDigest": "sha256:524d72854b665bc4e8b91d7b97933dc8d9c5e0c240e80d3326c6a854d5c3e659"
+      "contentDigest": "sha256:5b195f278e27874a33e2b1577ebf5aa27353757c61505806d5b969c12418002f"
     },
     {
       "candidateId": "cand_174ffcc2a50a1da916767f3a",
@@ -241,7 +296,18 @@
         "personal-knowledge-store",
         "definition"
       ],
-      "contentDigest": "sha256:7f1ff26bb9c4888c4b3f215ad4c26402a5ce6360ff7f5ff4756f6447d59e6559"
+      "contentDigest": "sha256:8a5dd743ee80dd282df93c747ee3fea02348a3c9bb69f2442efda4d361522c78"
+    },
+    {
+      "candidateId": "cand_518d95d1efa544481688aba1",
+      "path": "/knowledge/private-machine-systems/personal-knowledge-store/failure-mode",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/failure-mode",
+      "segments": [
+        "private-machine-systems",
+        "personal-knowledge-store",
+        "failure-mode"
+      ],
+      "contentDigest": "sha256:c2c3a13d39d8e24cc2a94c2c822264098e6ac8d938536ce0b498178583d718f9"
     },
     {
       "candidateId": "cand_95554b31e937ab3fd944a715",
@@ -252,7 +318,7 @@
         "personal-knowledge-store",
         "operator-guide"
       ],
-      "contentDigest": "sha256:00267d1495378e635696319b50486565fa923333f1b2deaa8244593b6abbf494"
+      "contentDigest": "sha256:37af22d74ef9d363ef8c8afe01745385fd27195aca2fc91fc9d12b856bed3a04"
     },
     {
       "candidateId": "cand_d6cbea3163ab9349857186bf",
@@ -288,5 +354,5 @@
       "contentDigest": "sha256:23e947a3c2c3e10e9e6d1b7aa0e57d9eac2d697129d7919307ff8ecb8b35ff74"
     }
   ],
-  "provenanceDigest": "sha256:7a95a932cdd3345c1dbbe8a4a0bf09c7d4d0f1fac5d7dab50fd4dbb5aca57b7d"
+  "provenanceDigest": "sha256:bc26391e21ae648054b1d28585000107be13479de06cceed959cadfbe59fcd70"
 }

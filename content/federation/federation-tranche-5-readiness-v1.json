@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "maha-federation-tranche-5-readiness/1.0",
+  "cohortDigest": "sha256:d7d8b9d1072d3c79dcd6c7da2af4224172a501459850f6956e305f5d45138550",
+  "decisionManifestDigest": "sha256:5640a0fcbe2c9d848ea65fc05ac63110a5fa2fd80a554d7e99a8fb660732c270",
+  "specificationManifestDigest": "sha256:c596bc9fa2775b2fbe886055d1d83a968da9aa26acd833642d7ad86e1c376e01",
+  "status": "local-reviewed-unreleased",
+  "counts": {
+    "candidates": 100,
+    "evidenceReady": 93,
+    "revise": 7,
+    "blocked": 0,
+    "duplicative": 0,
+    "pageSpecifications": 93,
+    "publicRoutesCreated": 0,
+    "buildsRun": 0
+  },
+  "boundary": "No route or public registry entry is created. Owner integration, exact-revision review, canonical release where applicable, completion of the 4,000-route corpus, and explicit build authorization remain required.",
+  "provenanceDigest": "sha256:9a33c4993e59224038d0a735ddb678689c45da76205a4224676e0b55da65fb28"
+}

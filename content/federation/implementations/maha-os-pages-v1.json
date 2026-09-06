@@ -2,14 +2,476 @@
   "schemaVersion": "maha-federation-property-pages/1.0",
   "siteId": "maha-os",
   "canonicalHost": "www.maha-os.com",
-  "registryDigest": "sha256:ea4ad1bd93033f7718a76b7701c671201474afd6b07ead32c17d5a127453f328",
+  "registryDigest": "sha256:1aea68733b6703ce13aa75e2cf0562a22b6f68b3ee70a5dc43d81c8c89f0a772",
   "status": "local-unreleased",
   "counts": {
-    "pages": 24,
-    "readyForOwnerIntegration": 24,
+    "pages": 30,
+    "readyForOwnerIntegration": 30,
     "blockedOnUnreadyPrerequisite": 0
   },
   "pages": [
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_330dee492175d4bb7d07b254",
+      "tranche": 5,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/biometric-data-boundary/definition",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/definition",
+      "title": "Biometric Data Boundary — Definition",
+      "topic": "biometric-data-boundary",
+      "routeRole": "definition",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:biometric-data-boundary",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:biometric-data-boundary"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Biometric Data Boundary, in this definition, is limited to the following inspected scope. Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Biometric Data Boundary, in this definition, is limited to the following inspected scope. Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Definition",
+          "kind": "role-method",
+          "paragraphs": [
+            "Use the term only for the source-backed scope stated here; keep adjacent concepts separate unless a typed relationship is explicit.",
+            "A useful definition states both inclusion and exclusion conditions so a machine answer cannot silently widen it.",
+            "Applied scope: Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Regulation (EU) 2016/679 (General Data Protection Regulation) — Articles 4(14), 9 and 22; Recital 51. Establishes: Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Applicability, lawful basis, exceptions, member-state law, system purpose, and individual facts require qualified legal analysis; not every image or sensor value is biometric data in this legal sense.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/operator-guide",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "gdpr-biometric-boundary",
+          "title": "Regulation (EU) 2016/679 (General Data Protection Regulation)",
+          "responsibleBody": "European Parliament and Council",
+          "versionOrDate": "OJ L 119, 4 May 2016",
+          "sourceClass": "law",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679",
+          "locator": "Articles 4(14), 9 and 22; Recital 51",
+          "establishes": "Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions.",
+          "doesNotEstablish": "Applicability, lawful basis, exceptions, member-state law, system purpose, and individual facts require qualified legal analysis; not every image or sensor value is biometric data in this legal sense.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_5c6e90c179c29d5cffb39ecf"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Biometric Data Boundary mean in this bounded context?",
+          "answer": "Biometric Data Boundary, in this definition, is limited to the following inspected scope. Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this definition answer?",
+          "answer": "Regulation (EU) 2016/679 (General Data Protection Regulation) (OJ L 119, 4 May 2016), at Articles 4(14), 9 and 22; Recital 51, supports biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Applicability, lawful basis, exceptions, member-state law, system purpose, and individual facts require qualified legal analysis; not every image or sensor value is biometric data in this legal sense. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/definition#article",
+        "headline": "Biometric Data Boundary — Definition",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/definition",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Biometric Data Boundary mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Biometric Data Boundary, in this definition, is limited to the following inspected scope. Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this definition answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Regulation (EU) 2016/679 (General Data Protection Regulation) (OJ L 119, 4 May 2016), at Articles 4(14), 9 and 22; Recital 51, supports biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Applicability, lawful basis, exceptions, member-state law, system purpose, and individual facts require qualified legal analysis; not every image or sensor value is biometric data in this legal sense. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-5",
+        "decisionManifestDigest": "sha256:5640a0fcbe2c9d848ea65fc05ac63110a5fa2fd80a554d7e99a8fb660732c270",
+        "decisionDigest": "sha256:bf61e442be9111e0e13f320e9569c0a87f18a7d8b325dc0d8e930024e9fa8bd5",
+        "specificationManifestDigest": "sha256:c596bc9fa2775b2fbe886055d1d83a968da9aa26acd833642d7ad86e1c376e01",
+        "specificationDigest": "sha256:0633bf5d9769a8404ef7f33613bdb42cc5c27edf6c9cdec0e3447791d74cdddc",
+        "packetManifestDigest": "sha256:4971a0090532da8d9ea487ab3205cefc7c82ac3b0a4b208465438148e7431449",
+        "packetDigest": "sha256:70630c9f1f23dea2c0338a05257a0d56861d3ee08b9b188ebc1ddb588de9faf0"
+      },
+      "contentDigest": "sha256:1ca452a36dd0eba3134825703769acfc9e3f21521e30c1c49006d7bbd3b75694"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_5c6e90c179c29d5cffb39ecf",
+      "tranche": 5,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/biometric-data-boundary/operator-guide",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/operator-guide",
+      "title": "Biometric Data Boundary — Operator Guide",
+      "topic": "biometric-data-boundary",
+      "routeRole": "operator-guide",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:biometric-data-boundary",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:biometric-data-boundary"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Biometric Data Boundary, in this operator guide, is limited to the following inspected scope. Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Biometric Data Boundary, in this operator guide, is limited to the following inspected scope. Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Operator guide",
+          "kind": "role-method",
+          "paragraphs": [
+            "Tell the operator what to check before acting, when to refuse, and how to preserve evidence of the outcome.",
+            "The guide cannot infer that a device, service, source, or credential is healthy when observation is unavailable.",
+            "Applied scope: Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Regulation (EU) 2016/679 (General Data Protection Regulation) — Articles 4(14), 9 and 22; Recital 51. Establishes: Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Applicability, lawful basis, exceptions, member-state law, system purpose, and individual facts require qualified legal analysis; not every image or sensor value is biometric data in this legal sense.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/definition",
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "gdpr-biometric-boundary",
+          "title": "Regulation (EU) 2016/679 (General Data Protection Regulation)",
+          "responsibleBody": "European Parliament and Council",
+          "versionOrDate": "OJ L 119, 4 May 2016",
+          "sourceClass": "law",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679",
+          "locator": "Articles 4(14), 9 and 22; Recital 51",
+          "establishes": "Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions.",
+          "doesNotEstablish": "Applicability, lawful basis, exceptions, member-state law, system purpose, and individual facts require qualified legal analysis; not every image or sensor value is biometric data in this legal sense.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_330dee492175d4bb7d07b254"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Biometric Data Boundary mean in this bounded context?",
+          "answer": "Biometric Data Boundary, in this operator guide, is limited to the following inspected scope. Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this operator guide answer?",
+          "answer": "Regulation (EU) 2016/679 (General Data Protection Regulation) (OJ L 119, 4 May 2016), at Articles 4(14), 9 and 22; Recital 51, supports biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Applicability, lawful basis, exceptions, member-state law, system purpose, and individual facts require qualified legal analysis; not every image or sensor value is biometric data in this legal sense. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/operator-guide#article",
+        "headline": "Biometric Data Boundary — Operator Guide",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/operator-guide",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Biometric Data Boundary mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Biometric Data Boundary, in this operator guide, is limited to the following inspected scope. Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this operator guide answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Regulation (EU) 2016/679 (General Data Protection Regulation) (OJ L 119, 4 May 2016), at Articles 4(14), 9 and 22; Recital 51, supports biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Applicability, lawful basis, exceptions, member-state law, system purpose, and individual facts require qualified legal analysis; not every image or sensor value is biometric data in this legal sense. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-5",
+        "decisionManifestDigest": "sha256:5640a0fcbe2c9d848ea65fc05ac63110a5fa2fd80a554d7e99a8fb660732c270",
+        "decisionDigest": "sha256:a8945a1cd4739f6deffb78d97879001e77fe8e8ddb85343856ebf70eb5168535",
+        "specificationManifestDigest": "sha256:c596bc9fa2775b2fbe886055d1d83a968da9aa26acd833642d7ad86e1c376e01",
+        "specificationDigest": "sha256:f65b275e2e45b0f3c91ea6f2d6e1603747d3d19935080b561d6c68e05503e3ba",
+        "packetManifestDigest": "sha256:4971a0090532da8d9ea487ab3205cefc7c82ac3b0a4b208465438148e7431449",
+        "packetDigest": "sha256:70630c9f1f23dea2c0338a05257a0d56861d3ee08b9b188ebc1ddb588de9faf0"
+      },
+      "contentDigest": "sha256:70f12d98c51ae0912a0ce642d9d717f48594559d5b0a7e6e2bb2abc20f4f8bab"
+    },
     {
       "schemaVersion": "maha-federation-page/1.0",
       "candidateId": "cand_f2e452a99e390ddae8b1001f",
@@ -1093,6 +1555,7 @@
           "paragraphs": [
             "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/household-agents/operator-guide",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/household-agents/failure-mode",
             "property-home: https://www.maha-os.com/"
           ]
         }
@@ -1125,6 +1588,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_44b96b45a1efae66643b0203"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/household-agents/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_350364d53ff997bd2ea8476f"
         },
         {
           "url": "https://www.maha-os.com/",
@@ -1242,7 +1711,245 @@
         "packetManifestDigest": "sha256:99e2851a8c1660632b051cc797929b748faf9402f853adbd9afe8d027557edfa",
         "packetDigest": "sha256:90fe7c5b87be7529a6e8edab8324a7da4123932dd97609c2f66b8a6ebf00726c"
       },
-      "contentDigest": "sha256:597e7459bdf381cca37bff9427b5cc9bf7d12d8c1b9a2f3f8bbc1d9fca37bd2c"
+      "contentDigest": "sha256:d2f27265c93816de1416e988c3243fd79859f3cadb95e82abd61afe9d133166f"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_350364d53ff997bd2ea8476f",
+      "tranche": 5,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/household-agents/failure-mode",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/household-agents/failure-mode",
+      "title": "Household Agents — Failure Mode",
+      "topic": "household-agents",
+      "routeRole": "failure-mode",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:household-agents",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:household-agents"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Household Agents, in this failure-mode analysis, is limited to the following inspected scope. A broadly applicable baseline covering device identification, configuration, data protection, logical access, software update, and cybersecurity state awareness. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Household Agents, in this failure-mode analysis, is limited to the following inspected scope. A broadly applicable baseline covering device identification, configuration, data protection, logical access, software update, and cybersecurity state awareness. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Failure Mode analysis",
+          "kind": "role-method",
+          "paragraphs": [
+            "Describe the failed invariant, observable signal, safe refusal, and correction or recovery path.",
+            "An absent signal is not proof of success unless the protocol defines and validates that interpretation.",
+            "Applied scope: A broadly applicable baseline covering device identification, configuration, data protection, logical access, software update, and cybersecurity state awareness."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "IoT Device Cybersecurity Capability Core Baseline — Section 2, Table 1. Establishes: A broadly applicable baseline covering device identification, configuration, data protection, logical access, software update, and cybersecurity state awareness."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The baseline is voluntary, is not specific to AI agents or homes, and does not certify safety, autonomy, or a Maha OS implementation.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/household-agents/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/household-agents/operator-guide",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-ir-8259a-household",
+          "title": "IoT Device Cybersecurity Capability Core Baseline",
+          "responsibleBody": "NIST",
+          "versionOrDate": "NISTIR 8259A, May 2020",
+          "sourceClass": "government-guidance",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ir/2020/NIST.IR.8259A.pdf",
+          "locator": "Section 2, Table 1",
+          "establishes": "A broadly applicable baseline covering device identification, configuration, data protection, logical access, software update, and cybersecurity state awareness.",
+          "doesNotEstablish": "The baseline is voluntary, is not specific to AI agents or homes, and does not certify safety, autonomy, or a Maha OS implementation.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/household-agents/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_ace82901bef8f92c6772b148"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/household-agents/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_44b96b45a1efae66643b0203"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Household Agents mean in this bounded context?",
+          "answer": "Household Agents, in this failure-mode analysis, is limited to the following inspected scope. A broadly applicable baseline covering device identification, configuration, data protection, logical access, software update, and cybersecurity state awareness. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this failure mode answer?",
+          "answer": "IoT Device Cybersecurity Capability Core Baseline (NISTIR 8259A, May 2020), at Section 2, Table 1, supports a broadly applicable baseline covering device identification, configuration, data protection, logical access, software update, and cybersecurity state awareness."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The baseline is voluntary, is not specific to AI agents or homes, and does not certify safety, autonomy, or a Maha OS implementation. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/household-agents/failure-mode#article",
+        "headline": "Household Agents — Failure Mode",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/household-agents/failure-mode",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://nvlpubs.nist.gov/nistpubs/ir/2020/NIST.IR.8259A.pdf"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Household Agents mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Household Agents, in this failure-mode analysis, is limited to the following inspected scope. A broadly applicable baseline covering device identification, configuration, data protection, logical access, software update, and cybersecurity state awareness. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this failure mode answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "IoT Device Cybersecurity Capability Core Baseline (NISTIR 8259A, May 2020), at Section 2, Table 1, supports a broadly applicable baseline covering device identification, configuration, data protection, logical access, software update, and cybersecurity state awareness."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The baseline is voluntary, is not specific to AI agents or homes, and does not certify safety, autonomy, or a Maha OS implementation. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-5",
+        "decisionManifestDigest": "sha256:5640a0fcbe2c9d848ea65fc05ac63110a5fa2fd80a554d7e99a8fb660732c270",
+        "decisionDigest": "sha256:84baaee5f826a95c1dd9b1489e0013aa2ea7ad5321ef3a6f356abb2d2685cdef",
+        "specificationManifestDigest": "sha256:c596bc9fa2775b2fbe886055d1d83a968da9aa26acd833642d7ad86e1c376e01",
+        "specificationDigest": "sha256:a626c8827e28dbba13ea502f52060f2d2cf0b5e2dd587991e139e93054056ec7",
+        "packetManifestDigest": "sha256:4971a0090532da8d9ea487ab3205cefc7c82ac3b0a4b208465438148e7431449",
+        "packetDigest": "sha256:122716f5bbf2c7dfcb661d26cc0bea4740adb8cb5bbdd67469af521f4fce4926"
+      },
+      "contentDigest": "sha256:8256a2842f63951588ba20a24a0d79d61853216051be8a661507cb9637c84ae6"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -1324,6 +2031,7 @@
           "paragraphs": [
             "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/household-agents/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/household-agents/failure-mode",
             "property-home: https://www.maha-os.com/"
           ]
         }
@@ -1356,6 +2064,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_ace82901bef8f92c6772b148"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/household-agents/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_350364d53ff997bd2ea8476f"
         },
         {
           "url": "https://www.maha-os.com/",
@@ -1473,7 +2187,7 @@
         "packetManifestDigest": "sha256:99e2851a8c1660632b051cc797929b748faf9402f853adbd9afe8d027557edfa",
         "packetDigest": "sha256:90fe7c5b87be7529a6e8edab8324a7da4123932dd97609c2f66b8a6ebf00726c"
       },
-      "contentDigest": "sha256:09b1f633a06de01fd986364a88086ca079f370563583f967fc038235e1e1ad04"
+      "contentDigest": "sha256:e61c4fb1858ee720937d4072c95756a59f48646507de569e59c4df32d4348c5c"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -2829,6 +3543,275 @@
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_03154525133f888c5cf9f2c3",
+      "tranche": 5,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/offline-operation/architecture",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/architecture",
+      "title": "Offline Operation — Architecture",
+      "topic": "offline-operation",
+      "routeRole": "architecture",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:offline-operation",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:offline-operation"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Offline Operation, in this architecture, is limited to the following inspected scope. Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Offline Operation, in this architecture, is limited to the following inspected scope. Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Architecture",
+          "kind": "role-method",
+          "paragraphs": [
+            "Describe components, trust boundaries, decisions, and handoffs before naming implementation benefits.",
+            "An architecture is incomplete when it hides which component refuses an invalid, stale, unauthorized, or unsupported request.",
+            "Applied scope: Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Contingency Planning Guide for Federal Information Systems — Sections 3.4–3.6; Table 3-4; Section 5. Establishes: Offline/alternate processing, backups, exercises, recovery, and reconstitution.",
+            "NIST Privacy Framework — Control-P and Protect-P functions. Establishes: User control and safeguards for local processing."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The source does not establish that a specific device can perform every function offline.",
+            "Local processing reduces some data-transfer risks but does not itself guarantee privacy.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/operator-guide",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/failure-mode",
+            "property-home: https://www.maha-os.com/",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/controls"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-contingency",
+          "title": "Contingency Planning Guide for Federal Information Systems",
+          "responsibleBody": "NIST",
+          "versionOrDate": "SP 800-34 Rev. 1, May 2010",
+          "sourceClass": "government-guidance",
+          "url": "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf",
+          "locator": "Sections 3.4–3.6; Table 3-4; Section 5",
+          "establishes": "Offline/alternate processing, backups, exercises, recovery, and reconstitution.",
+          "doesNotEstablish": "The source does not establish that a specific device can perform every function offline.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "nist-privacy",
+          "title": "NIST Privacy Framework",
+          "responsibleBody": "NIST",
+          "versionOrDate": "version 1.0, January 2020",
+          "sourceClass": "government-guidance",
+          "url": "https://www.nist.gov/privacy-framework/privacy-framework",
+          "locator": "Control-P and Protect-P functions",
+          "establishes": "User control and safeguards for local processing.",
+          "doesNotEstablish": "Local processing reduces some data-transfer risks but does not itself guarantee privacy.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_6c7d279e19fcb92f76df94e2"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_64e34cac0ca1f3ac67f6649d"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_784b1995902a5db299a0b086"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/controls",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_c39f4de7987d0d289ae4d0eb"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Offline Operation mean in this bounded context?",
+          "answer": "Offline Operation, in this architecture, is limited to the following inspected scope. Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this architecture answer?",
+          "answer": "Contingency Planning Guide for Federal Information Systems (SP 800-34 Rev. 1, May 2010), at Sections 3.4–3.6; Table 3-4; Section 5, supports offline/alternate processing, backups, exercises, recovery, and reconstitution. NIST Privacy Framework (version 1.0, January 2020), at Control-P and Protect-P functions, supports user control and safeguards for local processing."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The source does not establish that a specific device can perform every function offline. Local processing reduces some data-transfer risks but does not itself guarantee privacy. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/architecture#article",
+        "headline": "Offline Operation — Architecture",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/architecture",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf",
+          "https://www.nist.gov/privacy-framework/privacy-framework"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Offline Operation mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Offline Operation, in this architecture, is limited to the following inspected scope. Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this architecture answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Contingency Planning Guide for Federal Information Systems (SP 800-34 Rev. 1, May 2010), at Sections 3.4–3.6; Table 3-4; Section 5, supports offline/alternate processing, backups, exercises, recovery, and reconstitution. NIST Privacy Framework (version 1.0, January 2020), at Control-P and Protect-P functions, supports user control and safeguards for local processing."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The source does not establish that a specific device can perform every function offline. Local processing reduces some data-transfer risks but does not itself guarantee privacy. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-5",
+        "decisionManifestDigest": "sha256:5640a0fcbe2c9d848ea65fc05ac63110a5fa2fd80a554d7e99a8fb660732c270",
+        "decisionDigest": "sha256:4c0b397cfc12c57b6b3a2853b3228843641400b08d4683a5d652ed7bef4ed736",
+        "specificationManifestDigest": "sha256:c596bc9fa2775b2fbe886055d1d83a968da9aa26acd833642d7ad86e1c376e01",
+        "specificationDigest": "sha256:4138fe59f65d00ac2242f0fc9027cc00aae6cefbf072ddf6634c49b8f07a8cdf",
+        "packetManifestDigest": "sha256:4971a0090532da8d9ea487ab3205cefc7c82ac3b0a4b208465438148e7431449",
+        "packetDigest": "sha256:933e55e5242f10600a63b00b63b3685798a61994cb3ac11058cab22c1bc9e909"
+      },
+      "contentDigest": "sha256:6ff168bf7f07b489ac8f96a353f05349850c67ccb0b306f7e76b0e4f8c57f7d4"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
       "candidateId": "cand_c39f4de7987d0d289ae4d0eb",
       "tranche": 3,
       "siteId": "maha-os",
@@ -2911,7 +3894,8 @@
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/operator-guide",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/failure-mode",
-            "property-home: https://www.maha-os.com/"
+            "property-home: https://www.maha-os.com/",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/architecture"
           ]
         }
       ],
@@ -2975,6 +3959,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/architecture",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_03154525133f888c5cf9f2c3"
         }
       ],
       "boundedAnswers": [
@@ -3087,7 +4077,7 @@
         "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
         "packetDigest": "sha256:6d28814b623d7af2b4c440d263ffc5645199ee1b4bfbd85479e7dee0334652d6"
       },
-      "contentDigest": "sha256:9590b7fa7149d8747669d247e6052f23c36a5b454bbc26e5c1c477bd23086576"
+      "contentDigest": "sha256:5374ea6db4d6206adfea70100da65dcbb1f4101a3895b38e7d44e70e54e63e9e"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -3174,7 +4164,8 @@
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/operator-guide",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/failure-mode",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/controls",
-            "property-home: https://www.maha-os.com/"
+            "property-home: https://www.maha-os.com/",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/architecture"
           ]
         }
       ],
@@ -3244,6 +4235,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/architecture",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_03154525133f888c5cf9f2c3"
         }
       ],
       "boundedAnswers": [
@@ -3356,7 +4353,7 @@
         "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
         "packetDigest": "sha256:e7a5a4cb207a554cb5a8d32edbf7b9e523d6b38378bc2020f54758961c3fed51"
       },
-      "contentDigest": "sha256:335e0c1778b2fd94663be7040eebfe372db0a158f317c5e699e10fd5a172c638"
+      "contentDigest": "sha256:8c86561a568f693d056cd0034d60a286195e63c15db04ef64f35dae47da12f97"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -3442,7 +4439,8 @@
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/operator-guide",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/controls",
-            "property-home: https://www.maha-os.com/"
+            "property-home: https://www.maha-os.com/",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/architecture"
           ]
         }
       ],
@@ -3506,6 +4504,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/architecture",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_03154525133f888c5cf9f2c3"
         }
       ],
       "boundedAnswers": [
@@ -3618,7 +4622,7 @@
         "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
         "packetDigest": "sha256:e9b3e7597ed7c680397b7ccfe51fa10be5ff47ba50d59ae4bcdde1f52cf21a3a"
       },
-      "contentDigest": "sha256:3ad351e1e4966fa31e9c6a27725bf6e77795855a08f263cf59723bcc19c9b379"
+      "contentDigest": "sha256:bc53d04982503142aa421f0c67900228c84cad6c7395d6ea2383503312c87964"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -3704,7 +4708,8 @@
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/failure-mode",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/controls",
-            "property-home: https://www.maha-os.com/"
+            "property-home: https://www.maha-os.com/",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/architecture"
           ]
         }
       ],
@@ -3768,6 +4773,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/architecture",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_03154525133f888c5cf9f2c3"
         }
       ],
       "boundedAnswers": [
@@ -3880,7 +4891,276 @@
         "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
         "packetDigest": "sha256:e7a5a4cb207a554cb5a8d32edbf7b9e523d6b38378bc2020f54758961c3fed51"
       },
-      "contentDigest": "sha256:d1f57f136499e4941228f7d020c5f2c9564293ad3831f55bae916a1216d110b9"
+      "contentDigest": "sha256:a90173ae1cf25a039177b99da7d446c9a37b51016ec81c26757b23b0bd026828"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_a3cfd847f6805add4cc97df5",
+      "tranche": 5,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/on-device-inference/architecture",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/architecture",
+      "title": "On Device Inference — Architecture",
+      "topic": "on-device-inference",
+      "routeRole": "architecture",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:on-device-inference",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:on-device-inference"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "On Device Inference, in this architecture, is limited to the following inspected scope. AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. Local processing and selective collection or disclosure as privacy-risk controls. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "On Device Inference, in this architecture, is limited to the following inspected scope. AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. Local processing and selective collection or disclosure as privacy-risk controls. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Architecture",
+          "kind": "role-method",
+          "paragraphs": [
+            "Describe components, trust boundaries, decisions, and handoffs before naming implementation benefits.",
+            "An architecture is incomplete when it hides which component refuses an invalid, stale, unauthorized, or unsupported request.",
+            "Applied scope: AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. Local processing and selective collection or disclosure as privacy-risk controls."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Edge AI — Background and Key Challenges. Establishes: AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints.",
+            "NIST Privacy Framework 1.0 Core — Control-P data-processing policies, especially CT.DP-P1 and CT.DP-P4. Establishes: Local processing and selective collection or disclosure as privacy-risk controls."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Edge execution does not imply offline capability, confidentiality, accuracy, or immunity from model and software updates.",
+            "Local processing can reduce observability or linkability but does not by itself prove privacy, security, correctness, or legal compliance.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/operator-guide",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/failure-mode",
+            "property-home: https://www.maha-os.com/",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/controls"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-edge-ai",
+          "title": "Edge AI",
+          "responsibleBody": "NIST",
+          "versionOrDate": "program page inspected 2026-09-05",
+          "sourceClass": "government-guidance",
+          "url": "https://www.nist.gov/programs-projects/edge-ai",
+          "locator": "Background and Key Challenges",
+          "establishes": "AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints.",
+          "doesNotEstablish": "Edge execution does not imply offline capability, confidentiality, accuracy, or immunity from model and software updates.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "nist-privacy-core",
+          "title": "NIST Privacy Framework 1.0 Core",
+          "responsibleBody": "NIST",
+          "versionOrDate": "version 1.0, January 2020",
+          "sourceClass": "government-guidance",
+          "url": "https://www.nist.gov/system/files/documents/2021/05/05/NIST-Privacy-Framework-V1.0-Core-PDF.pdf",
+          "locator": "Control-P data-processing policies, especially CT.DP-P1 and CT.DP-P4",
+          "establishes": "Local processing and selective collection or disclosure as privacy-risk controls.",
+          "doesNotEstablish": "Local processing can reduce observability or linkability but does not by itself prove privacy, security, correctness, or legal compliance.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_263d251a7e65204ce3eae1a7"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_0fc2ece30235e82106b7d75d"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_8995fa6b7a13d8d0caaa72db"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/controls",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_31e8a982588b5d413833c285"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does On Device Inference mean in this bounded context?",
+          "answer": "On Device Inference, in this architecture, is limited to the following inspected scope. AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. Local processing and selective collection or disclosure as privacy-risk controls. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this architecture answer?",
+          "answer": "Edge AI (program page inspected 2026-09-05), at Background and Key Challenges, supports aI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. NIST Privacy Framework 1.0 Core (version 1.0, January 2020), at Control-P data-processing policies, especially CT.DP-P1 and CT.DP-P4, supports local processing and selective collection or disclosure as privacy-risk controls."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Edge execution does not imply offline capability, confidentiality, accuracy, or immunity from model and software updates. Local processing can reduce observability or linkability but does not by itself prove privacy, security, correctness, or legal compliance. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/architecture#article",
+        "headline": "On Device Inference — Architecture",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/architecture",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://www.nist.gov/programs-projects/edge-ai",
+          "https://www.nist.gov/system/files/documents/2021/05/05/NIST-Privacy-Framework-V1.0-Core-PDF.pdf"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does On Device Inference mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "On Device Inference, in this architecture, is limited to the following inspected scope. AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. Local processing and selective collection or disclosure as privacy-risk controls. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this architecture answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Edge AI (program page inspected 2026-09-05), at Background and Key Challenges, supports aI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints. NIST Privacy Framework 1.0 Core (version 1.0, January 2020), at Control-P data-processing policies, especially CT.DP-P1 and CT.DP-P4, supports local processing and selective collection or disclosure as privacy-risk controls."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Edge execution does not imply offline capability, confidentiality, accuracy, or immunity from model and software updates. Local processing can reduce observability or linkability but does not by itself prove privacy, security, correctness, or legal compliance. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-5",
+        "decisionManifestDigest": "sha256:5640a0fcbe2c9d848ea65fc05ac63110a5fa2fd80a554d7e99a8fb660732c270",
+        "decisionDigest": "sha256:0f21645073b6291123e7922a88942a8eb45af3f2626c6419b3c56fb597ca0727",
+        "specificationManifestDigest": "sha256:c596bc9fa2775b2fbe886055d1d83a968da9aa26acd833642d7ad86e1c376e01",
+        "specificationDigest": "sha256:11a3c4d8d042b338638ae4c8bca71a74e551102632f8f76d95aef96b5e2806c3",
+        "packetManifestDigest": "sha256:4971a0090532da8d9ea487ab3205cefc7c82ac3b0a4b208465438148e7431449",
+        "packetDigest": "sha256:2164a4628e05624cf47c6191395d969a8fa4158a7de1637d7d537cd5e3d7bbf5"
+      },
+      "contentDigest": "sha256:e538d905884f84253f8907d45932813c91b67257c5a3497a3dc1ac360ddd8829"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -3966,7 +5246,8 @@
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/operator-guide",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/failure-mode",
-            "property-home: https://www.maha-os.com/"
+            "property-home: https://www.maha-os.com/",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/architecture"
           ]
         }
       ],
@@ -4030,6 +5311,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/architecture",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_a3cfd847f6805add4cc97df5"
         }
       ],
       "boundedAnswers": [
@@ -4142,7 +5429,7 @@
         "packetManifestDigest": "sha256:99e2851a8c1660632b051cc797929b748faf9402f853adbd9afe8d027557edfa",
         "packetDigest": "sha256:c6fdb79ab4101b9e19f078e7f1cf3991e1092ddbc568a8bda8000ecb916c01e2"
       },
-      "contentDigest": "sha256:543f58d05914ab8768d2863ac6727c54d50eb7bbcfcf2edb3af13dc91a6f65c4"
+      "contentDigest": "sha256:a61f4412e92c59c017c5dda4e524116ca2b96a44e608c3d07646493dfd7d47ac"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -4229,7 +5516,8 @@
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/operator-guide",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/failure-mode",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/controls",
-            "property-home: https://www.maha-os.com/"
+            "property-home: https://www.maha-os.com/",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/architecture"
           ]
         }
       ],
@@ -4299,6 +5587,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/architecture",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_a3cfd847f6805add4cc97df5"
         }
       ],
       "boundedAnswers": [
@@ -4411,7 +5705,7 @@
         "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
         "packetDigest": "sha256:0f78391287d8e5b5fd9805703c978dc28c0822298f67d4916344952bbe398afb"
       },
-      "contentDigest": "sha256:d08ac185e22e4f5ab1743f2c031bb8add005158c499210c5213fa56b3a671387"
+      "contentDigest": "sha256:874c38ddc3f7f432b676c18544637bbe8ad26e0d52ba04d81967f97873e24bd0"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -4497,7 +5791,8 @@
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/operator-guide",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/controls",
-            "property-home: https://www.maha-os.com/"
+            "property-home: https://www.maha-os.com/",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/architecture"
           ]
         }
       ],
@@ -4561,6 +5856,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/architecture",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_a3cfd847f6805add4cc97df5"
         }
       ],
       "boundedAnswers": [
@@ -4673,7 +5974,7 @@
         "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
         "packetDigest": "sha256:0f78391287d8e5b5fd9805703c978dc28c0822298f67d4916344952bbe398afb"
       },
-      "contentDigest": "sha256:a6147c28e641683ae936ff5e1581f056baf13bf7195465dee785fbdb881ecf30"
+      "contentDigest": "sha256:dff683be4020323cffd3d3118bd648cd23e920243494c28b8ff79ac1bb39e910"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -4759,7 +6060,8 @@
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/failure-mode",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/controls",
-            "property-home: https://www.maha-os.com/"
+            "property-home: https://www.maha-os.com/",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/architecture"
           ]
         }
       ],
@@ -4823,6 +6125,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/architecture",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_a3cfd847f6805add4cc97df5"
         }
       ],
       "boundedAnswers": [
@@ -4935,7 +6243,7 @@
         "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
         "packetDigest": "sha256:0f78391287d8e5b5fd9805703c978dc28c0822298f67d4916344952bbe398afb"
       },
-      "contentDigest": "sha256:524d72854b665bc4e8b91d7b97933dc8d9c5e0c240e80d3326c6a854d5c3e659"
+      "contentDigest": "sha256:5b195f278e27874a33e2b1577ebf5aa27353757c61505806d5b969c12418002f"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -5017,6 +6325,7 @@
           "paragraphs": [
             "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/operator-guide",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/failure-mode",
             "property-home: https://www.maha-os.com/"
           ]
         }
@@ -5049,6 +6358,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_95554b31e937ab3fd944a715"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_518d95d1efa544481688aba1"
         },
         {
           "url": "https://www.maha-os.com/",
@@ -5166,7 +6481,245 @@
         "packetManifestDigest": "sha256:99e2851a8c1660632b051cc797929b748faf9402f853adbd9afe8d027557edfa",
         "packetDigest": "sha256:a50bd11acb61279d0c171468cf2306a86c913f1efc7ca081d458935fd5a13796"
       },
-      "contentDigest": "sha256:7f1ff26bb9c4888c4b3f215ad4c26402a5ce6360ff7f5ff4756f6447d59e6559"
+      "contentDigest": "sha256:8a5dd743ee80dd282df93c747ee3fea02348a3c9bb69f2442efda4d361522c78"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_518d95d1efa544481688aba1",
+      "tranche": 5,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/personal-knowledge-store/failure-mode",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/failure-mode",
+      "title": "Personal Knowledge Store — Failure Mode",
+      "topic": "personal-knowledge-store",
+      "routeRole": "failure-mode",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:personal-knowledge-store",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:personal-knowledge-store"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Personal Knowledge Store, in this failure-mode analysis, is limited to the following inspected scope. Secure permissioned access to externally stored data, URI-identified storage and resources, ownership, identity, authentication, and authorization. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Personal Knowledge Store, in this failure-mode analysis, is limited to the following inspected scope. Secure permissioned access to externally stored data, URI-identified storage and resources, ownership, identity, authentication, and authorization. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Failure Mode analysis",
+          "kind": "role-method",
+          "paragraphs": [
+            "Describe the failed invariant, observable signal, safe refusal, and correction or recovery path.",
+            "An absent signal is not proof of success unless the protocol defines and validates that interpretation.",
+            "Applied scope: Secure permissioned access to externally stored data, URI-identified storage and resources, ownership, identity, authentication, and authorization."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Solid Protocol — Abstract; Status; §§1.1, 4.1, 9–11 and 13. Establishes: Secure permissioned access to externally stored data, URI-identified storage and resources, ownership, identity, authentication, and authorization."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "This is a Draft Community Group Report, not a W3C Standard, and it does not prove data sovereignty, privacy outcomes, or a Maha OS deployment.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/operator-guide",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "solid-protocol-store",
+          "title": "Solid Protocol",
+          "responsibleBody": "W3C Solid Community Group",
+          "versionOrDate": "version 0.11.0, 12 May 2024",
+          "sourceClass": "community-group-specification",
+          "url": "https://solidproject.org/TR/2024/protocol-20240512",
+          "locator": "Abstract; Status; §§1.1, 4.1, 9–11 and 13",
+          "establishes": "Secure permissioned access to externally stored data, URI-identified storage and resources, ownership, identity, authentication, and authorization.",
+          "doesNotEstablish": "This is a Draft Community Group Report, not a W3C Standard, and it does not prove data sovereignty, privacy outcomes, or a Maha OS deployment.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_174ffcc2a50a1da916767f3a"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_95554b31e937ab3fd944a715"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Personal Knowledge Store mean in this bounded context?",
+          "answer": "Personal Knowledge Store, in this failure-mode analysis, is limited to the following inspected scope. Secure permissioned access to externally stored data, URI-identified storage and resources, ownership, identity, authentication, and authorization. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this failure mode answer?",
+          "answer": "Solid Protocol (version 0.11.0, 12 May 2024), at Abstract; Status; §§1.1, 4.1, 9–11 and 13, supports secure permissioned access to externally stored data, URI-identified storage and resources, ownership, identity, authentication, and authorization."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "This is a Draft Community Group Report, not a W3C Standard, and it does not prove data sovereignty, privacy outcomes, or a Maha OS deployment. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/failure-mode#article",
+        "headline": "Personal Knowledge Store — Failure Mode",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/failure-mode",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://solidproject.org/TR/2024/protocol-20240512"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Personal Knowledge Store mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Personal Knowledge Store, in this failure-mode analysis, is limited to the following inspected scope. Secure permissioned access to externally stored data, URI-identified storage and resources, ownership, identity, authentication, and authorization. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this failure mode answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Solid Protocol (version 0.11.0, 12 May 2024), at Abstract; Status; §§1.1, 4.1, 9–11 and 13, supports secure permissioned access to externally stored data, URI-identified storage and resources, ownership, identity, authentication, and authorization."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This is a Draft Community Group Report, not a W3C Standard, and it does not prove data sovereignty, privacy outcomes, or a Maha OS deployment. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-5",
+        "decisionManifestDigest": "sha256:5640a0fcbe2c9d848ea65fc05ac63110a5fa2fd80a554d7e99a8fb660732c270",
+        "decisionDigest": "sha256:f3db51f1b7a4c5f9b8fea2235403e1c67e9468a6b21ee6cdcdaa20d0ea8588a1",
+        "specificationManifestDigest": "sha256:c596bc9fa2775b2fbe886055d1d83a968da9aa26acd833642d7ad86e1c376e01",
+        "specificationDigest": "sha256:f546cc594ec44b5afbefe0f8190edf315f6648479bfcc193f9af299c6fceb69d",
+        "packetManifestDigest": "sha256:4971a0090532da8d9ea487ab3205cefc7c82ac3b0a4b208465438148e7431449",
+        "packetDigest": "sha256:6024c0fb16654840c0b52f6bc8371ad036b3b790a9a00108ec1803c4b4d7bc3a"
+      },
+      "contentDigest": "sha256:c2c3a13d39d8e24cc2a94c2c822264098e6ac8d938536ce0b498178583d718f9"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -5248,6 +6801,7 @@
           "paragraphs": [
             "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/failure-mode",
             "property-home: https://www.maha-os.com/"
           ]
         }
@@ -5280,6 +6834,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_174ffcc2a50a1da916767f3a"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_518d95d1efa544481688aba1"
         },
         {
           "url": "https://www.maha-os.com/",
@@ -5397,7 +6957,7 @@
         "packetManifestDigest": "sha256:99e2851a8c1660632b051cc797929b748faf9402f853adbd9afe8d027557edfa",
         "packetDigest": "sha256:a50bd11acb61279d0c171468cf2306a86c913f1efc7ca081d458935fd5a13796"
       },
-      "contentDigest": "sha256:00267d1495378e635696319b50486565fa923333f1b2deaa8244593b6abbf494"
+      "contentDigest": "sha256:37af22d74ef9d363ef8c8afe01745385fd27195aca2fc91fc9d12b856bed3a04"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -6162,5 +7722,5 @@
       "contentDigest": "sha256:23e947a3c2c3e10e9e6d1b7aa0e57d9eac2d697129d7919307ff8ecb8b35ff74"
     }
   ],
-  "provenanceDigest": "sha256:9a070896343656217dfd69214c59ad9cb89a31ce4248ed5de5ca4a2e2c2f1ed2"
+  "provenanceDigest": "sha256:27573a3b5b537fdad20b292ebff03dad300fb1f4a1be7170edb5f3c347ec3f66"
 }
