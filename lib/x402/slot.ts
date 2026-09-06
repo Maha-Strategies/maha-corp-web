@@ -85,6 +85,10 @@ export const SLOT_RELEASING_ROUTES = [
   'POST /api/v1/context/evidence-matrix',
   'POST /api/v1/context/governed-verification',
   'POST /api/v1/research/intake',
+  'POST /api/v1/books/the-imagined-life/section',
+  'POST /api/v1/books/the-volcanic-engine/section',
+  'POST /api/v1/books/the-imagined-life/edition',
+  'POST /api/v1/books/the-volcanic-engine/edition',
 ] as const
 
 /**

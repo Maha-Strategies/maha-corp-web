@@ -29,6 +29,8 @@ import {
   EVIDENCE_RETENTION_MATRIX_DISCOVERY,
   GOVERNED_CONTEXT_VERIFICATION_DISCOVERY,
 } from './context-product-offer-schemas.ts'
+import { bookSectionDiscovery } from './book-section-product.ts'
+import { bookEditionDiscovery } from './book-edition-product.ts'
 
 export const USDC_DECIMALS = 6
 
@@ -343,6 +345,88 @@ export const RESEARCH_INTAKE_EVIDENCE_PACK_OFFER: X402Offer = {
   discovery: RESEARCH_INTAKE_EVIDENCE_PACK_DISCOVERY,
 }
 
+const machineBookOffer = (input: {
+  id: 'book-section-the-imagined-life' | 'book-section-the-volcanic-engine'
+  path: string
+  title: string
+  bookId: 'the-imagined-life' | 'the-volcanic-engine'
+}): X402Offer => ({
+  id: input.id,
+  method: 'POST',
+  path: input.path,
+  amount: '5000',
+  description: `Retrieve one exact section of ${input.title} as machine-readable Markdown with ordered edition metadata, byte and word counts, SHA-256 content commitment, and deterministic receipt. The public web edition remains free. Payment purchases structured delivery, not exclusivity, copyright, analysis, factual certification, or a recommendation. Request and response bodies are not stored.`,
+  concurrencyCap: 8,
+  serviceName: `Maha Books — ${input.title}`,
+  tags: ['books', 'mcp', 'machine-readable', 'content-retrieval', 'x402'],
+  status: 'available',
+  availability: { payableInProduction: true, blockedBy: [] },
+  requiresIdempotency: false,
+  maxRequestBytes: 1024,
+  capabilityBoundaries: [
+    'Returns one already-published section in deterministic machine-readable form with integrity metadata.',
+    'The public web edition remains free; payment does not create exclusive access or transfer copyright or license rights.',
+    'No editorial analysis, factual certification, source verification, recommendation, or model inference is included.',
+  ],
+  retention: {
+    fullSourceTextStored: false,
+    verbatimExcerptsRetained: false,
+    retainedFields: ['offer usage status and aggregate counts'],
+    note: 'The request and delivered section are returned transiently and are not stored by this endpoint.',
+  },
+  discovery: bookSectionDiscovery(input.bookId),
+})
+
+const machineBookEditionOffer = (input: {
+  id: 'book-edition-the-imagined-life' | 'book-edition-the-volcanic-engine'
+  path: string
+  title: string
+  bookId: 'the-imagined-life' | 'the-volcanic-engine'
+}): X402Offer => ({
+  id: input.id,
+  method: 'POST',
+  path: input.path,
+  amount: '2990000',
+  description: `Purchase the complete machine-readable edition of ${input.title} as normalized Markdown with an ordered section manifest, per-section and whole-edition SHA-256 commitments, and a deterministic receipt. Includes non-exclusive personal or internal machine use; no redistribution, resale, model-training rights, copyright transfer, analysis, factual certification, or recommendation. The public web edition remains free.`,
+  concurrencyCap: 4,
+  serviceName: `Maha Books — ${input.title} complete edition`,
+  tags: ['books', 'mcp', 'machine-readable', 'complete-edition', 'x402'],
+  status: 'available',
+  availability: { payableInProduction: true, blockedBy: [] },
+  requiresIdempotency: false,
+  maxRequestBytes: 1024,
+  capabilityBoundaries: [
+    'Returns the complete published edition in deterministic machine-readable form with an ordered manifest and integrity metadata.',
+    'The public web edition remains free; purchase grants non-exclusive personal or internal machine use only.',
+    'Does not grant redistribution, resale, republication, model-training rights, or copyright ownership.',
+    'No editorial analysis, factual certification, source verification, recommendation, or model inference is included.',
+    'The complete edition is delivered in the paid response; a later request is a separate purchase.',
+  ],
+  retention: {
+    fullSourceTextStored: false,
+    verbatimExcerptsRetained: false,
+    retainedFields: ['offer usage status and aggregate counts'],
+    note: 'The request and complete delivered edition are returned transiently and are not stored by this endpoint.',
+  },
+  discovery: bookEditionDiscovery(input.bookId),
+})
+
+export const IMAGINED_LIFE_SECTION_OFFER = machineBookOffer({
+  id: 'book-section-the-imagined-life', path: '/api/v1/books/the-imagined-life/section', title: 'The Imagined Life', bookId: 'the-imagined-life',
+})
+
+export const VOLCANIC_ENGINE_SECTION_OFFER = machineBookOffer({
+  id: 'book-section-the-volcanic-engine', path: '/api/v1/books/the-volcanic-engine/section', title: 'The Volcanic Engine', bookId: 'the-volcanic-engine',
+})
+
+export const IMAGINED_LIFE_EDITION_OFFER = machineBookEditionOffer({
+  id: 'book-edition-the-imagined-life', path: '/api/v1/books/the-imagined-life/edition', title: 'The Imagined Life', bookId: 'the-imagined-life',
+})
+
+export const VOLCANIC_ENGINE_EDITION_OFFER = machineBookEditionOffer({
+  id: 'book-edition-the-volcanic-engine', path: '/api/v1/books/the-volcanic-engine/edition', title: 'The Volcanic Engine', bookId: 'the-volcanic-engine',
+})
+
 export const X402_OFFERS: readonly X402Offer[] = Object.freeze([
   CONTEXT_COMPRESSION_OFFER,
   CONTEXT_BUDGET_LADDER_OFFER,
@@ -351,6 +435,10 @@ export const X402_OFFERS: readonly X402Offer[] = Object.freeze([
   MPS_AUTONOMOUS_AUDIT_OFFER,
   GOVERNED_CONTEXT_VERIFICATION_OFFER,
   RESEARCH_INTAKE_EVIDENCE_PACK_OFFER,
+  IMAGINED_LIFE_SECTION_OFFER,
+  VOLCANIC_ENGINE_SECTION_OFFER,
+  IMAGINED_LIFE_EDITION_OFFER,
+  VOLCANIC_ENGINE_EDITION_OFFER,
 ])
 
 /**

@@ -297,6 +297,170 @@
         "MPS statuses and potential conflicts are automated triage requiring human review.",
         "Does not provide factual certification, legal advice, human judgment, or a recommendation."
       ]
+    },
+    {
+      "id": "book-section-the-imagined-life",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/books/the-imagined-life/section",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "5000",
+        "displayAmount": "0.005000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/book-section-the-imagined-life#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/book-section-the-imagined-life#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:c67423f79cd7b18c95b25859d385c2804b28aa831800b2446d7e95102dd353e0",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 1024,
+        "concurrencyCap": 8,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "The request and delivered section are returned transiently and are not stored by this endpoint."
+      },
+      "capabilityBoundaries": [
+        "Returns one already-published section in deterministic machine-readable form with integrity metadata.",
+        "The public web edition remains free; payment does not create exclusive access or transfer copyright or license rights.",
+        "No editorial analysis, factual certification, source verification, recommendation, or model inference is included."
+      ]
+    },
+    {
+      "id": "book-section-the-volcanic-engine",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/books/the-volcanic-engine/section",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "5000",
+        "displayAmount": "0.005000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/book-section-the-volcanic-engine#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/book-section-the-volcanic-engine#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:ba58f0b7fa6a58638be5f5805a45428b7e7f4f686d4bb04a2a5ffc32fbe7357c",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 1024,
+        "concurrencyCap": 8,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "The request and delivered section are returned transiently and are not stored by this endpoint."
+      },
+      "capabilityBoundaries": [
+        "Returns one already-published section in deterministic machine-readable form with integrity metadata.",
+        "The public web edition remains free; payment does not create exclusive access or transfer copyright or license rights.",
+        "No editorial analysis, factual certification, source verification, recommendation, or model inference is included."
+      ]
+    },
+    {
+      "id": "book-edition-the-imagined-life",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/books/the-imagined-life/edition",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "2990000",
+        "displayAmount": "2.990000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/book-edition-the-imagined-life#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/book-edition-the-imagined-life#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:6364d925b95f809052514f86c4c1919888c3f8c37c354b2ece20e60abf390a9c",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 1024,
+        "concurrencyCap": 4,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "The request and complete delivered edition are returned transiently and are not stored by this endpoint."
+      },
+      "capabilityBoundaries": [
+        "Returns the complete published edition in deterministic machine-readable form with an ordered manifest and integrity metadata.",
+        "The public web edition remains free; purchase grants non-exclusive personal or internal machine use only.",
+        "Does not grant redistribution, resale, republication, model-training rights, or copyright ownership.",
+        "No editorial analysis, factual certification, source verification, recommendation, or model inference is included.",
+        "The complete edition is delivered in the paid response; a later request is a separate purchase."
+      ]
+    },
+    {
+      "id": "book-edition-the-volcanic-engine",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/books/the-volcanic-engine/edition",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "2990000",
+        "displayAmount": "2.990000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/book-edition-the-volcanic-engine#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/book-edition-the-volcanic-engine#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:fa93b941facdbbc9e70b6a423a831826c8e6ac6bf22b5dca7c70108d909c05ff",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 1024,
+        "concurrencyCap": 4,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "The request and complete delivered edition are returned transiently and are not stored by this endpoint."
+      },
+      "capabilityBoundaries": [
+        "Returns the complete published edition in deterministic machine-readable form with an ordered manifest and integrity metadata.",
+        "The public web edition remains free; purchase grants non-exclusive personal or internal machine use only.",
+        "Does not grant redistribution, resale, republication, model-training rights, or copyright ownership.",
+        "No editorial analysis, factual certification, source verification, recommendation, or model inference is included.",
+        "The complete edition is delivered in the paid response; a later request is a separate purchase."
+      ]
     }
   ],
   "evidence": {

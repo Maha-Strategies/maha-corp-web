@@ -135,6 +135,46 @@
       "retention": "Complete supplied sections are transmitted to Anthropic for processing but are not retained by Maha. Results retain the question, supplied source and section identifiers, optional intake metadata, short verbatim claim excerpts, classifications, digests, and operational metadata."
     },
     {
+      "id": "book-section-the-imagined-life",
+      "status": "available_for_autonomous_payment",
+      "endpoint": "https://www.mahastrategies.com/api/v1/books/the-imagined-life/section",
+      "provides": "one exact machine-readable section of The Imagined Life with integrity metadata and a deterministic receipt",
+      "notProvided": ["exclusive access", "copyright transfer", "editorial analysis", "factual certification", "recommendation"],
+      "payment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "amount": "5000", "assetSymbol": "USDC", "autonomous": true },
+      "payableNow": true,
+      "retention": "The request and delivered section are returned transiently and are not stored by this endpoint."
+    },
+    {
+      "id": "book-section-the-volcanic-engine",
+      "status": "available_for_autonomous_payment",
+      "endpoint": "https://www.mahastrategies.com/api/v1/books/the-volcanic-engine/section",
+      "provides": "one exact machine-readable section of The Volcanic Engine with integrity metadata and a deterministic receipt",
+      "notProvided": ["exclusive access", "copyright transfer", "editorial analysis", "factual certification", "recommendation"],
+      "payment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "amount": "5000", "assetSymbol": "USDC", "autonomous": true },
+      "payableNow": true,
+      "retention": "The request and delivered section are returned transiently and are not stored by this endpoint."
+    },
+    {
+      "id": "book-edition-the-imagined-life",
+      "status": "available_for_autonomous_payment",
+      "endpoint": "https://www.mahastrategies.com/api/v1/books/the-imagined-life/edition",
+      "provides": "the complete normalized Markdown edition of The Imagined Life with an ordered section manifest and deterministic receipt",
+      "notProvided": ["exclusive access", "redistribution or resale rights", "model-training rights", "copyright transfer", "editorial analysis", "factual certification", "recommendation"],
+      "payment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "amount": "2990000", "assetSymbol": "USDC", "autonomous": true },
+      "payableNow": true,
+      "retention": "The request and complete delivered edition are returned transiently and are not stored by this endpoint."
+    },
+    {
+      "id": "book-edition-the-volcanic-engine",
+      "status": "available_for_autonomous_payment",
+      "endpoint": "https://www.mahastrategies.com/api/v1/books/the-volcanic-engine/edition",
+      "provides": "the complete normalized Markdown edition of The Volcanic Engine with an ordered section manifest and deterministic receipt",
+      "notProvided": ["exclusive access", "redistribution or resale rights", "model-training rights", "copyright transfer", "editorial analysis", "factual certification", "recommendation"],
+      "payment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "amount": "2990000", "assetSymbol": "USDC", "autonomous": true },
+      "payableNow": true,
+      "retention": "The request and complete delivered edition are returned transiently and are not stored by this endpoint."
+    },
+    {
       "id": "gpu-tensor-network",
       "status": "available_with_provisioned_api_key",
       "endpoint": "https://www.mahastrategies.com/api/v1/jobs/tensor-network"
@@ -153,12 +193,12 @@
   ],
   "terms": {
     "bindingCommitment": false,
-    "payment": "Seven bounded machine products are payable autonomously on Base Mainnet. A live PAYMENT-REQUIRED challenge is the only proof an offer can be bought. The GPU optimization routes are not x402 products. A human purchaser must authorize Stripe Checkout; custom research and enterprise work require human scope review.",
+    "payment": "Eleven bounded machine products are payable autonomously on Base Mainnet. A live PAYMENT-REQUIRED challenge is the only proof an offer can be bought. The GPU optimization routes are not x402 products. A human purchaser must authorize Stripe Checkout; custom research and enterprise work require human scope review.",
     "sensitiveData": "Do not submit confidential, regulated, or sensitive personal information."
   },
   "review": {
     "mode": "deterministic_qualification_then_human_scope_review",
     "responseTargetBusinessDays": 2
   },
-  "payment": "Seven bounded machine products are payable autonomously on Base Mainnet. A live PAYMENT-REQUIRED challenge is the only proof an offer can be bought. The GPU optimization routes are not x402 products. A human purchaser must authorize Stripe Checkout; custom research and enterprise work require human scope review."
+  "payment": "Eleven bounded machine products are payable autonomously on Base Mainnet. A live PAYMENT-REQUIRED challenge is the only proof an offer can be bought. The GPU optimization routes are not x402 products. A human purchaser must authorize Stripe Checkout; custom research and enterprise work require human scope review."
 }
