@@ -22,8 +22,10 @@
       "research-inquiries",
       "enterprise-onboarding"
     ],
-    "bindingCommitment": "Context Compression, Deep Context Evaluation and the Autonomous MPS Audit accept autonomous x402 payment on Base Mainnet under their published terms. A live PAYMENT-REQUIRED challenge is the only proof an offer can be bought. The MPS Audit checks its request identity, JSON body and input hash over the text field before settlement. Paid jobs are resumable free of charge and are never billed twice for an identical replay. The GPU optimization capabilities are not x402 products. Stripe products require purchaser confirmation, and research or enterprise engagements require human scope review.",
-    "describedNotPayable": []
+    "bindingCommitment": "Context Compression, Deep Context Evaluation and the Autonomous MPS Audit accept autonomous x402 payment on Base Mainnet under their published terms. A live PAYMENT-REQUIRED challenge is the only proof an offer can be bought. The MPS Audit checks its request identity, JSON body and input hash over the text field before settlement. Paid jobs are resumable free of charge and are never billed twice for an identical replay. The Research Intake Evidence Pack is described as a preview and is not currently payable. The GPU optimization capabilities are not x402 products. Stripe products require purchaser confirmation, and research or enterprise engagements require human scope review.",
+    "describedNotPayable": [
+      "research-intake-evidence-pack"
+    ]
   },
   "credentialPolicy": {
     "mode": "approved_client_credentials",
@@ -136,6 +138,36 @@
         "note": "Published terms. A live PAYMENT-REQUIRED challenge is the only proof an offer can be bought."
       },
       "payableNow": true
+    },
+    {
+      "id": "research-intake-evidence-pack",
+      "status": "preview_not_payable",
+      "endpoint": "https://www.mahastrategies.com/api/v1/research/intake",
+      "retrievalEndpoint": "https://www.mahastrategies.com/api/v1/research/intake/{packId}",
+      "method": "POST",
+      "methodBoundary": "Machine-generated intake packet for one research question and up to ten supplied source sections. It audits only supplied material and does not perform new research, acquire sources, certify facts, supply human judgment, or make a recommendation.",
+      "inputBounds": {
+        "questions": 1,
+        "sourceSections": "1-10",
+        "maxCharactersPerSection": 6000,
+        "maxRequestBytes": 65536
+      },
+      "retention": {
+        "fullSourceSectionsStored": false,
+        "verbatimClaimExcerptsRetained": true,
+        "note": "Results retain the question, supplied source and section identifiers, optional intake metadata, short verbatim claim excerpts, classifications, digests, and operational metadata."
+      },
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "amount": "1000000",
+        "displayAmount": "1.00 USDC",
+        "payableNow": false,
+        "note": "Preview contract only. Not payable in Production until the published readiness gates pass."
+      },
+      "payableNow": false
     },
     {
       "id": "gpu-tensor-network",

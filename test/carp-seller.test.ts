@@ -29,6 +29,7 @@ import {
   CONTEXT_COMPRESSION_OFFER,
   DEEP_CONTEXT_EVALUATION_OFFER,
   MPS_AUTONOMOUS_AUDIT_OFFER,
+  RESEARCH_INTAKE_EVIDENCE_PACK_OFFER,
 } from '../lib/x402/offers.ts'
 
 const role = JSON.parse(await readFile(new URL('../content/discovery/carp-seller-role.json', import.meta.url), 'utf8'))
@@ -41,7 +42,7 @@ test('the public Seller role mirrors the adopted upstream v0.2 contract', () => 
   assert.deepEqual(role.fulfillmentDescriptor.modes, ['physical', 'digital', 'hybrid'])
 })
 
-test('the Maha seller maps all three payable x402 products to the adopted digital offering shape', () => {
+test('the Maha seller maps the three payable products and one preview product to the adopted digital offering shape', () => {
   assert.equal(mahaCarpSellerProfile.schemaVersion, '0.1.3')
   assert.equal(mahaCarpSellerProfile.roleContract, CABEZON_SELLER_ROLE_URL)
   assert.equal(mahaCarpSellerProfile.roleMirror, CARP_SELLER_ROLE_URL)
@@ -63,13 +64,14 @@ test('the Maha seller maps all three payable x402 products to the adopted digita
     ['maha:context-compression:v1', '0.001', CONTEXT_COMPRESSION_OFFER],
     ['maha:deep-context-evaluation:v1', '0.01', DEEP_CONTEXT_EVALUATION_OFFER],
     ['maha:mps-autonomous-audit:v1', '0.10', MPS_AUTONOMOUS_AUDIT_OFFER],
+    ['maha:research-intake-evidence-pack:v1', '1.00', RESEARCH_INTAKE_EVIDENCE_PACK_OFFER],
   ] as const
-  assert.equal(MAHA_CARP_DIGITAL_OFFERS.length, 3)
+  assert.equal(MAHA_CARP_DIGITAL_OFFERS.length, 4)
   for (const [offeringRef, amount, x402] of expected) {
     const offer = MAHA_CARP_DIGITAL_OFFERS.find((candidate) => candidate.offeringRef === offeringRef)
     assert.ok(offer)
     assert.equal(offer.kind, 'digital')
-    assert.equal(offer.status, 'available')
+    assert.equal(offer.status, x402.status)
     assert.equal(offer.price.amount, amount)
     assert.equal(offer.directSettlement.amountBaseUnits, x402.amount)
     assert.equal(offer.directSettlement.resource, `https://www.mahastrategies.com${x402.path}`)
@@ -181,6 +183,26 @@ test('each digital offeringRef is independently discoverable without widening to
     assert.ok('result' in reply)
     assert.deepEqual((reply as { result: Array<{ offeringRef: string }> }).result.map((item) => item.offeringRef), [offer.offeringRef])
   }
+})
+
+test('the research-intake preview is discoverable but cannot issue payment instructions', () => {
+  const response = handleCarpSellerRequest({
+    jsonrpc: '2.0',
+    id: 'research-intake-preview-purchase',
+    method: 'purchase',
+    params: {
+      clientOrderRef: 'research-intake-order-001',
+      offeringRef: 'maha:research-intake-evidence-pack:v1',
+      quantity: 1,
+      agreedPrice: { amount: '1.00', asset: 'USDC', network: 'eip155:8453' },
+      input: null,
+      delivery: { mode: 'digital' },
+    },
+  })
+  assert.ok('error' in response)
+  assert.equal(response.error.code, -32012)
+  assert.match(response.error.message, /not[_ ]payable/i)
+  assert.equal(JSON.stringify(response).includes('paymentInstructions'), false)
 })
 
 test('free-text enquiry matching uses tokens rather than substrings', () => {
@@ -415,7 +437,8 @@ test('the physical RFQ discloses non-binding economics without presenting freigh
 })
 
 test('purchase binds each canonical order to its own exact x402 instructions', () => {
-  for (const [index, offer] of MAHA_CARP_DIGITAL_OFFERS.entries()) {
+  const payable = MAHA_CARP_DIGITAL_OFFERS.filter((offer) => offer.status === 'available')
+  for (const [index, offer] of payable.entries()) {
     const accepted = handleCarpSellerRequest({
       jsonrpc: '2.0', method: 'purchase', id: `purchase-${index + 1}`,
       params: {
@@ -462,7 +485,8 @@ test('purchase binds each canonical order to its own exact x402 instructions', (
 })
 
 test('legacy purchase arrays remain compatible with base-unit quotes', () => {
-  for (const [index, offer] of MAHA_CARP_DIGITAL_OFFERS.entries()) {
+  const payable = MAHA_CARP_DIGITAL_OFFERS.filter((offer) => offer.status === 'available')
+  for (const [index, offer] of payable.entries()) {
     const accepted = handleCarpSellerRequest({
       jsonrpc: '2.0', method: 'purchase', id: `0x${String(index + 1).repeat(64)}`,
       params: [1, offer.offeringRef, { amount: offer.directSettlement.amountBaseUnits, asset: offer.directSettlement.assetContract, network: offer.price.network }, null, ''],

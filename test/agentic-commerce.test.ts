@@ -157,6 +157,7 @@ test('public agent discovery identifies live capabilities and the scoped Context
     'context-compression',
     'deep-context-evaluation',
     'mps-autonomous-audit',
+    'research-intake-evidence-pack',
     // gpu-qubo-ising is deliberately absent: the standalone reference engine is
     // beta and undiscoverable until its vectorized candidate has passing A10G
     // evidence. See docs/qubo-reference-promotion.md.
@@ -194,6 +195,12 @@ test('public agent discovery identifies live capabilities and the scoped Context
     assetSymbol: contextCompressionX402Capability.payment.assetSymbol,
     autonomous: true,
   })
+  const intakeOffer = offers.technicalCapabilities.find((capability) => capability.id === 'research-intake-evidence-pack')
+  const intakeCard = card.capabilities.find((capability) => capability.id === 'research-intake-evidence-pack')
+  assert.equal(intakeOffer?.status, 'preview_not_payable')
+  assert.equal(intakeCard?.status, 'preview_not_payable')
+  assert.equal(intakeOffer?.machinePayment?.amount, '1000000')
+  assert.equal(intakeOffer?.machinePayment?.displayAmount, '1.00 USDC')
 })
 
 test('agent context links only to the canonical public discovery surfaces', () => {

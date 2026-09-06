@@ -144,7 +144,7 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
         kind: 'refused',
         status: 400,
         code: claim.reason,
-        message: `${offer.id} requires an ${'x-maha-idempotency-key'} header equal to clientRequestId and an ${'x-maha-input-hash'} header (sha256:<64 lowercase hex> of the text field alone, UTF-8, exactly as sent) so a retry cannot be charged twice. Both are checked against the body before settlement.`,
+        message: `${offer.id} requires an ${'x-maha-idempotency-key'} header equal to clientRequestId and an ${'x-maha-input-hash'} header computed from the preimage published in its discovery contract. Both are checked against the body before settlement so a retry cannot be charged twice.`,
       }
     }
     // A declared input hash is not evidence that the body reproduces it. Read

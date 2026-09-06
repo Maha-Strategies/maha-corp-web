@@ -22,6 +22,7 @@ import {
   CONTEXT_COMPRESSION_DISCOVERY,
   DEEP_CONTEXT_EVALUATION_DISCOVERY,
   MPS_AUTONOMOUS_AUDIT_DISCOVERY,
+  RESEARCH_INTAKE_EVIDENCE_PACK_DISCOVERY,
 } from './offer-schemas.ts'
 
 export const USDC_DECIMALS = 6
@@ -271,10 +272,55 @@ export const MPS_AUTONOMOUS_AUDIT_OFFER: X402Offer = {
   discovery: MPS_AUTONOMOUS_AUDIT_DISCOVERY,
 }
 
+export const RESEARCH_INTAKE_EVIDENCE_PACK_OFFER: X402Offer = {
+  id: 'research-intake-evidence-pack',
+  method: 'POST',
+  path: '/api/v1/research/intake',
+  amount: '1000000',
+  description:
+    'Machine-generated intake packet for one question and 1-10 supplied source sections. '
+    + 'Returns one MPS triage per section, an ordered manifest, claim inventory, citation gaps, potential conflicts, unresolved questions, proposed human-research scope, and deterministic digests. '
+    + 'Fixed $1 capacity price: up to ten $0.10 section audits. Not a research brief, new research, factual certification, human judgment, or a recommendation.',
+  concurrencyCap: 1,
+  serviceName: 'Maha Research Intake',
+  tags: ['research-intake', 'provenance', 'claim-triage', 'evidence', 'research-scoping'],
+  status: 'preview',
+  availability: {
+    payableInProduction: false,
+    blockedBy: [
+      'The computed conservative contribution margin must remain at or above 30 percent.',
+      'Recovery must persist completed section audits independently and retry only failed or missing sections.',
+      'The durable research-intake job migration must be applied and verified in Preview.',
+      'The endpoint must pass a non-paying Preview delivery and recovery exercise before Production enablement.',
+      'Production X402_RESOURCES must explicitly enable the exact $1 contract after separate deployment authorization.',
+    ],
+  },
+  requiresIdempotency: true,
+  maxRequestBytes: 65_536,
+  capabilityBoundaries: [
+    'Machine-generated intake packet, not a research brief.',
+    'Uses only 1-10 source sections supplied by the buyer; no source acquisition or new research.',
+    'MPS statuses and potential conflicts are automated triage requiring human review.',
+    'Does not provide factual certification, legal advice, human judgment, or a recommendation.',
+  ],
+  retention: {
+    fullSourceTextStored: false,
+    verbatimExcerptsRetained: true,
+    retainedFields: [
+      'input and receipt hashes', 'question and optional intake metadata', 'ordered source and section identifiers',
+      'short verbatim claim excerpts', 'MPS classifications and rationales', 'citation gaps', 'potential conflict candidates',
+      'payment transaction and payer',
+    ],
+    note: 'Complete supplied source sections are not stored. The result retains the question, supplied identifiers and metadata, short verbatim claim excerpts, classifications, digests, and operational metadata.',
+  },
+  discovery: RESEARCH_INTAKE_EVIDENCE_PACK_DISCOVERY,
+}
+
 export const X402_OFFERS: readonly X402Offer[] = Object.freeze([
   CONTEXT_COMPRESSION_OFFER,
   DEEP_CONTEXT_EVALUATION_OFFER,
   MPS_AUTONOMOUS_AUDIT_OFFER,
+  RESEARCH_INTAKE_EVIDENCE_PACK_OFFER,
 ])
 
 /**

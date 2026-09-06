@@ -82,6 +82,31 @@
       "retention": "The complete submitted passage is not retained. Results retain short verbatim claim excerpts, classifications, rationales, hashes, and operational metadata."
     },
     {
+      "id": "research-intake-evidence-pack",
+      "status": "preview_not_payable",
+      "endpoint": "https://www.mahastrategies.com/api/v1/research/intake",
+      "retrievalEndpoint": "https://www.mahastrategies.com/api/v1/research/intake/{packId}",
+      "provides": "machine-generated research intake evidence packet for one question and up to ten supplied source sections",
+      "notProvided": [
+        "research brief",
+        "new research or source acquisition",
+        "factual certification",
+        "human judgment",
+        "recommendation"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "1000000",
+        "assetSymbol": "USDC",
+        "autonomous": false,
+        "note": "Preview contract only. Not payable in Production until the published readiness gates pass."
+      },
+      "payableNow": false,
+      "retention": "Complete supplied sections are not retained. Results retain the question, supplied source and section identifiers, optional intake metadata, short verbatim claim excerpts, classifications, digests, and operational metadata."
+    },
+    {
       "id": "gpu-tensor-network",
       "status": "available_with_provisioned_api_key",
       "endpoint": "https://www.mahastrategies.com/api/v1/jobs/tensor-network"

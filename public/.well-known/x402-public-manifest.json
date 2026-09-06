@@ -138,6 +138,38 @@
         "Not legal advice.",
         "Not human verification, and not a substitute for editorial review before publication."
       ]
+    },
+    {
+      "id": "research-intake-evidence-pack",
+      "status": "evaluation-only",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/research/intake",
+      "method": "POST",
+      "payment": null,
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/research-intake-evidence-pack#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/research-intake-evidence-pack#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:62864255396dc680b030cbb1c371f0be3bf8cb84ecfa679866cf165cb3174fa6",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 65536,
+        "concurrencyCap": 1,
+        "requiresIdempotency": true
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": true,
+        "note": "Complete supplied source sections are not stored. The result retains the question, supplied identifiers and metadata, short verbatim claim excerpts, classifications, digests, and operational metadata."
+      },
+      "capabilityBoundaries": [
+        "Machine-generated intake packet, not a research brief.",
+        "Uses only 1-10 source sections supplied by the buyer; no source acquisition or new research.",
+        "MPS statuses and potential conflicts are automated triage requiring human review.",
+        "Does not provide factual certification, legal advice, human judgment, or a recommendation."
+      ]
     }
   ],
   "evidence": {

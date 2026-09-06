@@ -96,8 +96,11 @@ test('matching is by exact method and exact path', () => {
 })
 
 test('only routes that actually release their slot can be priced', () => {
-  for (const offer of X402_OFFERS) {
+  for (const offer of X402_OFFERS.filter((candidate) => candidate.status === 'available')) {
     assert.equal(releasesSlot(offer.method, offer.path), true, `${offer.id} must be in the slot-release allowlist`)
+  }
+  for (const offer of X402_OFFERS.filter((candidate) => candidate.status !== 'available')) {
+    assert.equal(releasesSlot(offer.method, offer.path), false, `${offer.id} is not implemented and must not be in the slot-release allowlist`)
   }
   // The allowlist is exact, so a listed route does not vouch for its children.
   assert.equal(releasesSlot('POST', '/api/v1/mps/audit/audit_abc'), false)

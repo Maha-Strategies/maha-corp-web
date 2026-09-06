@@ -6,6 +6,7 @@ import {
   CONTEXT_COMPRESSION_OFFER,
   DEEP_CONTEXT_EVALUATION_OFFER,
   MPS_AUTONOMOUS_AUDIT_OFFER,
+  RESEARCH_INTAKE_EVIDENCE_PACK_OFFER,
   USDC_DECIMALS,
   type X402Offer,
 } from '../x402/offers.ts'
@@ -45,6 +46,15 @@ const DIGITAL_OFFER_SPECS = Object.freeze([
     estimatedSeconds: 90,
     deliveryDeadlineSeconds: 180,
     termsUrl: `${SITE_URL}/mps`,
+  },
+  {
+    offeringRef: 'maha:research-intake-evidence-pack:v1',
+    title: 'Research Intake Evidence Pack',
+    amount: '1.00',
+    offer: RESEARCH_INTAKE_EVIDENCE_PACK_OFFER,
+    estimatedSeconds: 180,
+    deliveryDeadlineSeconds: 300,
+    termsUrl: `${SITE_URL}/pricing`,
   },
 ] as const)
 
@@ -500,6 +510,13 @@ export function handleCarpSellerRequest(request: CarpSellerRequest): CarpSellerR
   if (!digital) return jsonError(request.id, -32602, 'Unknown offerId or itemref.')
   const profileOffer = MAHA_CARP_DIGITAL_OFFERS.find((candidate) => candidate.offeringRef === digital.offeringRef)
   if (!profileOffer) return jsonError(request.id, -32603, 'The Seller catalog is internally inconsistent.')
+  if (digital.offer.status !== 'available') {
+    return jsonError(request.id, -32012, 'OFFER_NOT_PAYABLE: this digital offering is discoverable for evaluation but cannot currently issue payment instructions.', {
+      offeringRef: digital.offeringRef,
+      status: digital.offer.status,
+      blockedBy: digital.offer.availability.blockedBy,
+    })
+  }
   if (params.quantity !== 1) return jsonError(request.id, -32602, `${digital.title} must be purchased with quantity 1.`)
   if (!/^[A-Za-z0-9._:-]{8,120}$/.test(params.clientOrderRef)) {
     return jsonError(request.id, -32602, 'clientOrderRef must be an 8-120 character idempotency key.')
