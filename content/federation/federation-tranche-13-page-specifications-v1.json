@@ -1,0 +1,703 @@
+{
+  "schemaVersion": "maha-federation-tranche-13-page-specifications/1.0",
+  "frozenOn": "2026-09-06",
+  "cohortDigest": "sha256:2e87cdef5f58f9f83f821acb3a36c281611ad6ac3dfdd708fb93ed3c5a02fbfa",
+  "boundary": "Specifications exist only for evidence-ready candidates. A specification is not a route, a release, or a public page.",
+  "counts": {
+    "specifications": 10,
+    "boundedQuestions": 50
+  },
+  "specifications": [
+    {
+      "candidateId": "cand_0b45509e40de45dc7662f3b9",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/compiler-provenance/source-contract",
+      "owningProperty": "maha-research",
+      "routeRole": "source-contract",
+      "directAnswer": "That provenance can be modelled as entities, activities that act upon them over time, and derivation relations between entities.",
+      "context": "W3C PROV-DM: The PROV Data Model (W3C Recommendation, 30 April 2013) is the authority consulted for this route's topic.",
+      "evidenceSections": [
+        {
+          "heading": "What the source establishes",
+          "body": "That provenance can be modelled as entities, activities that act upon them over time, and derivation relations between entities.",
+          "locator": "§2.1 PROV Core Structures — Entity and Activity definitions."
+        },
+        {
+          "heading": "What it does not establish",
+          "body": "A data model for expressing provenance. It does not establish that any recorded provenance is accurate, complete, or trustworthy, and it prescribes no build or compiler behaviour.",
+          "locator": "§2.1 PROV Core Structures — Entity and Activity definitions."
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "A data model for expressing provenance. It does not establish that any recorded provenance is accurate, complete, or trustworthy, and it prescribes no build or compiler behaviour.",
+        "No route-specific search demand is observed; demand remains unknown."
+      ],
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does W3C PROV-DM: The PROV Data Model state about compiler-provenance?",
+        "Which exact locator in that source supports the claim on this page?",
+        "What does this source explicitly not establish about compiler-provenance?",
+        "Which canonical definition does this route depend on, and where is it owned?",
+        "What would have to be inspected before this page could claim more than it does?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:compiler-provenance"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "inspectionId": "tr13-src-003",
+          "sourceIdentity": "W3C PROV-DM: The PROV Data Model",
+          "stableUrl": "https://www.w3.org/TR/prov-dm/",
+          "locator": "§2.1 PROV Core Structures — Entity and Activity definitions."
+        }
+      ],
+      "evidenceMetadata": {
+        "sourceClass": "open-standard-recommendation",
+        "independence": "independent-of-maha",
+        "inspectionDepth": "targeted-section-read",
+        "reuseBasis": "W3C Document Licence. Reference-only here; specification text is not copied into artifacts.",
+        "demandEvidence": "unknown"
+      },
+      "expectedCanonicalDependencies": [
+        {
+          "conceptId": "urn:maha:concept:evidence:compiler-provenance",
+          "owner": "maha-research",
+          "state": "satisfied-by-earlier-tranche"
+        }
+      ],
+      "boundary": "A specification is not a route, a release, or a public page."
+    },
+    {
+      "candidateId": "cand_1249f5fa919624b3f9c219f8",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/model-evaluation/comparison",
+      "owningProperty": "maha-policy",
+      "routeRole": "comparison",
+      "directAnswer": "That evaluating an AI system for trustworthy characteristics involves documenting test sets, metrics and TEVV tooling, measuring performance under conditions similar to deployment, and documenting limits on generalisability beyond those conditions.",
+      "context": "NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1 (January 2023) is the authority consulted for this route's topic.",
+      "evidenceSections": [
+        {
+          "heading": "What the source establishes",
+          "body": "That evaluating an AI system for trustworthy characteristics involves documenting test sets, metrics and TEVV tooling, measuring performance under conditions similar to deployment, and documenting limits on generalisability beyond those conditions.",
+          "locator": "MEASURE 2, subcategories 2.1, 2.3 and 2.5."
+        },
+        {
+          "heading": "What it does not establish",
+          "body": "A voluntary framework. It does not certify any system, establish a passing threshold, create a legal obligation, or state that following it makes a system safe.",
+          "locator": "MEASURE 2, subcategories 2.1, 2.3 and 2.5."
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "A voluntary framework. It does not certify any system, establish a passing threshold, create a legal obligation, or state that following it makes a system safe.",
+        "No route-specific search demand is observed; demand remains unknown."
+      ],
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1 state about model-evaluation?",
+        "Which exact locator in that source supports the claim on this page?",
+        "What does this source explicitly not establish about model-evaluation?",
+        "Which canonical definition does this route depend on, and where is it owned?",
+        "What would have to be inspected before this page could claim more than it does?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:model-evaluation"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "citations": [
+        {
+          "inspectionId": "tr13-src-005",
+          "sourceIdentity": "NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+          "locator": "MEASURE 2, subcategories 2.1, 2.3 and 2.5."
+        }
+      ],
+      "evidenceMetadata": {
+        "sourceClass": "government-standards-body",
+        "independence": "independent-of-maha",
+        "inspectionDepth": "targeted-section-read",
+        "reuseBasis": "US government work; bounded original summary permitted with attribution.",
+        "demandEvidence": "unknown"
+      },
+      "expectedCanonicalDependencies": [
+        {
+          "conceptId": "urn:maha:concept:governance:model-evaluation",
+          "owner": "maha-policy",
+          "state": "satisfied-by-earlier-tranche"
+        }
+      ],
+      "boundary": "A specification is not a route, a release, or a public page."
+    },
+    {
+      "candidateId": "cand_2a68123b426603aa282cd998",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/citation-lineage/method",
+      "owningProperty": "maha-research",
+      "routeRole": "method",
+      "directAnswer": "That a later entity may be recorded as derived from an earlier one, giving a traceable chain between versions of a work.",
+      "context": "W3C PROV-DM: The PROV Data Model (W3C Recommendation, 30 April 2013) is the authority consulted for this route's topic.",
+      "evidenceSections": [
+        {
+          "heading": "What the source establishes",
+          "body": "That a later entity may be recorded as derived from an earlier one, giving a traceable chain between versions of a work.",
+          "locator": "§2.1 PROV Core Structures — derivation between entities."
+        },
+        {
+          "heading": "What it does not establish",
+          "body": "Supports expressing a lineage. It does not establish that a cited chain is correct, that a citation is warranted, or that any particular citation practice is standard.",
+          "locator": "§2.1 PROV Core Structures — derivation between entities."
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "Supports expressing a lineage. It does not establish that a cited chain is correct, that a citation is warranted, or that any particular citation practice is standard.",
+        "No route-specific search demand is observed; demand remains unknown."
+      ],
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does W3C PROV-DM: The PROV Data Model state about citation-lineage?",
+        "Which exact locator in that source supports the claim on this page?",
+        "What does this source explicitly not establish about citation-lineage?",
+        "Which canonical definition does this route depend on, and where is it owned?",
+        "What would have to be inspected before this page could claim more than it does?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:citation-lineage"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "inspectionId": "tr13-src-004",
+          "sourceIdentity": "W3C PROV-DM: The PROV Data Model",
+          "stableUrl": "https://www.w3.org/TR/prov-dm/",
+          "locator": "§2.1 PROV Core Structures — derivation between entities."
+        }
+      ],
+      "evidenceMetadata": {
+        "sourceClass": "open-standard-recommendation",
+        "independence": "independent-of-maha",
+        "inspectionDepth": "targeted-section-read",
+        "reuseBasis": "W3C Document Licence. Reference-only.",
+        "demandEvidence": "unknown"
+      },
+      "expectedCanonicalDependencies": [
+        {
+          "conceptId": "urn:maha:concept:evidence:citation-lineage",
+          "owner": "maha-research",
+          "state": "satisfied-by-earlier-tranche"
+        }
+      ],
+      "boundary": "A specification is not a route, a release, or a public page."
+    },
+    {
+      "candidateId": "cand_318ea274652b8b7791e3138c",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/container-image/method",
+      "owningProperty": "maha-research",
+      "routeRole": "method",
+      "directAnswer": "That an OCI image manifest is content-addressable, and that it references its configuration object by digest.",
+      "context": "OCI Image Manifest Specification (image-spec v1.1 (specs-go VersionMajor 1, VersionMinor 1)) is the authority consulted for this route's topic.",
+      "evidenceSections": [
+        {
+          "heading": "What the source establishes",
+          "body": "That an OCI image manifest is content-addressable, and that it references its configuration object by digest.",
+          "locator": "Line 4 (goals paragraph); §\"Image Manifest Property Descriptions\" line 16; `config` property, line 38"
+        },
+        {
+          "heading": "What it does not establish",
+          "body": "Supports what the manifest format specifies. It does not establish runtime behaviour, registry policy, supply-chain assurance, or that any particular image is trustworthy.",
+          "locator": "Line 4 (goals paragraph); §\"Image Manifest Property Descriptions\" line 16; `config` property, line 38"
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "Supports what the manifest format specifies. It does not establish runtime behaviour, registry policy, supply-chain assurance, or that any particular image is trustworthy.",
+        "No route-specific search demand is observed; demand remains unknown."
+      ],
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does OCI Image Manifest Specification state about container-image?",
+        "Which exact locator in that source supports the claim on this page?",
+        "What does this source explicitly not establish about container-image?",
+        "Which canonical definition does this route depend on, and where is it owned?",
+        "What would have to be inspected before this page could claim more than it does?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:container-image"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "inspectionId": "tr13-src-001",
+          "sourceIdentity": "OCI Image Manifest Specification",
+          "stableUrl": "https://github.com/opencontainers/image-spec/blob/main/manifest.md",
+          "locator": "Line 4 (goals paragraph); §\"Image Manifest Property Descriptions\" line 16; `config` property, line 38"
+        }
+      ],
+      "evidenceMetadata": {
+        "sourceClass": "open-specification",
+        "independence": "independent-of-maha",
+        "inspectionDepth": "full-document-read",
+        "reuseBasis": "Reference-only. Bounded original summary permitted; specification text is not copied into artifacts.",
+        "demandEvidence": "unknown"
+      },
+      "expectedCanonicalDependencies": [
+        {
+          "conceptId": "urn:maha:concept:evidence:container-image",
+          "owner": "maha-research",
+          "state": "satisfied-by-earlier-tranche"
+        }
+      ],
+      "boundary": "A specification is not a route, a release, or a public page."
+    },
+    {
+      "candidateId": "cand_42d249917e56d726fbe3d630",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/evaluation-protocol/protocol",
+      "owningProperty": "maha-research",
+      "routeRole": "protocol",
+      "directAnswer": "That an evaluation protocol is expected to record the test sets, the metrics and the tools used, so that the evaluation can be examined afterwards.",
+      "context": "NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1 (January 2023) is the authority consulted for this route's topic.",
+      "evidenceSections": [
+        {
+          "heading": "What the source establishes",
+          "body": "That an evaluation protocol is expected to record the test sets, the metrics and the tools used, so that the evaluation can be examined afterwards.",
+          "locator": "MEASURE 2.1 — test sets, metrics and TEVV tooling are documented."
+        },
+        {
+          "heading": "What it does not establish",
+          "body": "Says what should be documented, not how to design a protocol, which metrics are correct for a task, or that a documented protocol is a sound one.",
+          "locator": "MEASURE 2.1 — test sets, metrics and TEVV tooling are documented."
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "Says what should be documented, not how to design a protocol, which metrics are correct for a task, or that a documented protocol is a sound one.",
+        "No route-specific search demand is observed; demand remains unknown."
+      ],
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1 state about evaluation-protocol?",
+        "Which exact locator in that source supports the claim on this page?",
+        "What does this source explicitly not establish about evaluation-protocol?",
+        "Which canonical definition does this route depend on, and where is it owned?",
+        "What would have to be inspected before this page could claim more than it does?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:evaluation-protocol"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "inspectionId": "tr13-src-006",
+          "sourceIdentity": "NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+          "locator": "MEASURE 2.1 — test sets, metrics and TEVV tooling are documented."
+        }
+      ],
+      "evidenceMetadata": {
+        "sourceClass": "government-standards-body",
+        "independence": "independent-of-maha",
+        "inspectionDepth": "targeted-section-read",
+        "reuseBasis": "US government work; bounded original summary permitted with attribution.",
+        "demandEvidence": "unknown"
+      },
+      "expectedCanonicalDependencies": [
+        {
+          "conceptId": "urn:maha:concept:evidence:evaluation-protocol",
+          "owner": "maha-research",
+          "state": "satisfied-by-earlier-tranche"
+        }
+      ],
+      "boundary": "A specification is not a route, a release, or a public page."
+    },
+    {
+      "candidateId": "cand_72999d743cb7ff20c962d06e",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/compiler-provenance/method",
+      "owningProperty": "maha-research",
+      "routeRole": "method",
+      "directAnswer": "That provenance can be modelled as entities, activities that act upon them over time, and derivation relations between entities.",
+      "context": "W3C PROV-DM: The PROV Data Model (W3C Recommendation, 30 April 2013) is the authority consulted for this route's topic.",
+      "evidenceSections": [
+        {
+          "heading": "What the source establishes",
+          "body": "That provenance can be modelled as entities, activities that act upon them over time, and derivation relations between entities.",
+          "locator": "§2.1 PROV Core Structures — Entity and Activity definitions."
+        },
+        {
+          "heading": "What it does not establish",
+          "body": "A data model for expressing provenance. It does not establish that any recorded provenance is accurate, complete, or trustworthy, and it prescribes no build or compiler behaviour.",
+          "locator": "§2.1 PROV Core Structures — Entity and Activity definitions."
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "A data model for expressing provenance. It does not establish that any recorded provenance is accurate, complete, or trustworthy, and it prescribes no build or compiler behaviour.",
+        "No route-specific search demand is observed; demand remains unknown."
+      ],
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does W3C PROV-DM: The PROV Data Model state about compiler-provenance?",
+        "Which exact locator in that source supports the claim on this page?",
+        "What does this source explicitly not establish about compiler-provenance?",
+        "Which canonical definition does this route depend on, and where is it owned?",
+        "What would have to be inspected before this page could claim more than it does?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:compiler-provenance"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "inspectionId": "tr13-src-003",
+          "sourceIdentity": "W3C PROV-DM: The PROV Data Model",
+          "stableUrl": "https://www.w3.org/TR/prov-dm/",
+          "locator": "§2.1 PROV Core Structures — Entity and Activity definitions."
+        }
+      ],
+      "evidenceMetadata": {
+        "sourceClass": "open-standard-recommendation",
+        "independence": "independent-of-maha",
+        "inspectionDepth": "targeted-section-read",
+        "reuseBasis": "W3C Document Licence. Reference-only here; specification text is not copied into artifacts.",
+        "demandEvidence": "unknown"
+      },
+      "expectedCanonicalDependencies": [
+        {
+          "conceptId": "urn:maha:concept:evidence:compiler-provenance",
+          "owner": "maha-research",
+          "state": "satisfied-by-earlier-tranche"
+        }
+      ],
+      "boundary": "A specification is not a route, a release, or a public page."
+    },
+    {
+      "candidateId": "cand_896f2056ad75d5e09aa5ec96",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/container-image/protocol",
+      "owningProperty": "maha-research",
+      "routeRole": "protocol",
+      "directAnswer": "That an OCI image manifest is content-addressable, and that it references its configuration object by digest.",
+      "context": "OCI Image Manifest Specification (image-spec v1.1 (specs-go VersionMajor 1, VersionMinor 1)) is the authority consulted for this route's topic.",
+      "evidenceSections": [
+        {
+          "heading": "What the source establishes",
+          "body": "That an OCI image manifest is content-addressable, and that it references its configuration object by digest.",
+          "locator": "Line 4 (goals paragraph); §\"Image Manifest Property Descriptions\" line 16; `config` property, line 38"
+        },
+        {
+          "heading": "What it does not establish",
+          "body": "Supports what the manifest format specifies. It does not establish runtime behaviour, registry policy, supply-chain assurance, or that any particular image is trustworthy.",
+          "locator": "Line 4 (goals paragraph); §\"Image Manifest Property Descriptions\" line 16; `config` property, line 38"
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "Supports what the manifest format specifies. It does not establish runtime behaviour, registry policy, supply-chain assurance, or that any particular image is trustworthy.",
+        "No route-specific search demand is observed; demand remains unknown."
+      ],
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does OCI Image Manifest Specification state about container-image?",
+        "Which exact locator in that source supports the claim on this page?",
+        "What does this source explicitly not establish about container-image?",
+        "Which canonical definition does this route depend on, and where is it owned?",
+        "What would have to be inspected before this page could claim more than it does?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:container-image"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "inspectionId": "tr13-src-001",
+          "sourceIdentity": "OCI Image Manifest Specification",
+          "stableUrl": "https://github.com/opencontainers/image-spec/blob/main/manifest.md",
+          "locator": "Line 4 (goals paragraph); §\"Image Manifest Property Descriptions\" line 16; `config` property, line 38"
+        }
+      ],
+      "evidenceMetadata": {
+        "sourceClass": "open-specification",
+        "independence": "independent-of-maha",
+        "inspectionDepth": "full-document-read",
+        "reuseBasis": "Reference-only. Bounded original summary permitted; specification text is not copied into artifacts.",
+        "demandEvidence": "unknown"
+      },
+      "expectedCanonicalDependencies": [
+        {
+          "conceptId": "urn:maha:concept:evidence:container-image",
+          "owner": "maha-research",
+          "state": "satisfied-by-earlier-tranche"
+        }
+      ],
+      "boundary": "A specification is not a route, a release, or a public page."
+    },
+    {
+      "candidateId": "cand_8fded27b2e8ee022f7dd9116",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/citation-lineage/protocol",
+      "owningProperty": "maha-research",
+      "routeRole": "protocol",
+      "directAnswer": "That a later entity may be recorded as derived from an earlier one, giving a traceable chain between versions of a work.",
+      "context": "W3C PROV-DM: The PROV Data Model (W3C Recommendation, 30 April 2013) is the authority consulted for this route's topic.",
+      "evidenceSections": [
+        {
+          "heading": "What the source establishes",
+          "body": "That a later entity may be recorded as derived from an earlier one, giving a traceable chain between versions of a work.",
+          "locator": "§2.1 PROV Core Structures — derivation between entities."
+        },
+        {
+          "heading": "What it does not establish",
+          "body": "Supports expressing a lineage. It does not establish that a cited chain is correct, that a citation is warranted, or that any particular citation practice is standard.",
+          "locator": "§2.1 PROV Core Structures — derivation between entities."
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "Supports expressing a lineage. It does not establish that a cited chain is correct, that a citation is warranted, or that any particular citation practice is standard.",
+        "No route-specific search demand is observed; demand remains unknown."
+      ],
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does W3C PROV-DM: The PROV Data Model state about citation-lineage?",
+        "Which exact locator in that source supports the claim on this page?",
+        "What does this source explicitly not establish about citation-lineage?",
+        "Which canonical definition does this route depend on, and where is it owned?",
+        "What would have to be inspected before this page could claim more than it does?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:citation-lineage"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "inspectionId": "tr13-src-004",
+          "sourceIdentity": "W3C PROV-DM: The PROV Data Model",
+          "stableUrl": "https://www.w3.org/TR/prov-dm/",
+          "locator": "§2.1 PROV Core Structures — derivation between entities."
+        }
+      ],
+      "evidenceMetadata": {
+        "sourceClass": "open-standard-recommendation",
+        "independence": "independent-of-maha",
+        "inspectionDepth": "targeted-section-read",
+        "reuseBasis": "W3C Document Licence. Reference-only.",
+        "demandEvidence": "unknown"
+      },
+      "expectedCanonicalDependencies": [
+        {
+          "conceptId": "urn:maha:concept:evidence:citation-lineage",
+          "owner": "maha-research",
+          "state": "satisfied-by-earlier-tranche"
+        }
+      ],
+      "boundary": "A specification is not a route, a release, or a public page."
+    },
+    {
+      "candidateId": "cand_abb39a55a803cd6972178836",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/benchmark-design/relationships",
+      "owningProperty": "maha-research",
+      "routeRole": "relationships",
+      "directAnswer": "That a benchmark result holds for the conditions it was measured under, and that limits on generalising beyond those conditions are themselves to be documented.",
+      "context": "NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1 (January 2023) is the authority consulted for this route's topic.",
+      "evidenceSections": [
+        {
+          "heading": "What the source establishes",
+          "body": "That a benchmark result holds for the conditions it was measured under, and that limits on generalising beyond those conditions are themselves to be documented.",
+          "locator": "MEASURE 2.3 and 2.5 — measurement under deployment-like conditions; limits of generalisability."
+        },
+        {
+          "heading": "What it does not establish",
+          "body": "Does not prescribe any benchmark, dataset or scoring method, and does not establish that a benchmark measures what its name suggests.",
+          "locator": "MEASURE 2.3 and 2.5 — measurement under deployment-like conditions; limits of generalisability."
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "Does not prescribe any benchmark, dataset or scoring method, and does not establish that a benchmark measures what its name suggests.",
+        "No route-specific search demand is observed; demand remains unknown."
+      ],
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1 state about benchmark-design?",
+        "Which exact locator in that source supports the claim on this page?",
+        "What does this source explicitly not establish about benchmark-design?",
+        "Which canonical definition does this route depend on, and where is it owned?",
+        "What would have to be inspected before this page could claim more than it does?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:benchmark-design"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "inspectionId": "tr13-src-007",
+          "sourceIdentity": "NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+          "locator": "MEASURE 2.3 and 2.5 — measurement under deployment-like conditions; limits of generalisability."
+        }
+      ],
+      "evidenceMetadata": {
+        "sourceClass": "government-standards-body",
+        "independence": "independent-of-maha",
+        "inspectionDepth": "targeted-section-read",
+        "reuseBasis": "US government work; bounded original summary permitted with attribution.",
+        "demandEvidence": "unknown"
+      },
+      "expectedCanonicalDependencies": [
+        {
+          "conceptId": "urn:maha:concept:evidence:benchmark-design",
+          "owner": "maha-research",
+          "state": "satisfied-by-earlier-tranche"
+        }
+      ],
+      "boundary": "A specification is not a route, a release, or a public page."
+    },
+    {
+      "candidateId": "cand_dea77fb980e768f3f2f0a828",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/benchmark-design/machine-record",
+      "owningProperty": "maha-research",
+      "routeRole": "machine-record",
+      "directAnswer": "That a benchmark result holds for the conditions it was measured under, and that limits on generalising beyond those conditions are themselves to be documented.",
+      "context": "NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1 (January 2023) is the authority consulted for this route's topic.",
+      "evidenceSections": [
+        {
+          "heading": "What the source establishes",
+          "body": "That a benchmark result holds for the conditions it was measured under, and that limits on generalising beyond those conditions are themselves to be documented.",
+          "locator": "MEASURE 2.3 and 2.5 — measurement under deployment-like conditions; limits of generalisability."
+        },
+        {
+          "heading": "What it does not establish",
+          "body": "Does not prescribe any benchmark, dataset or scoring method, and does not establish that a benchmark measures what its name suggests.",
+          "locator": "MEASURE 2.3 and 2.5 — measurement under deployment-like conditions; limits of generalisability."
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "Does not prescribe any benchmark, dataset or scoring method, and does not establish that a benchmark measures what its name suggests.",
+        "No route-specific search demand is observed; demand remains unknown."
+      ],
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1 state about benchmark-design?",
+        "Which exact locator in that source supports the claim on this page?",
+        "What does this source explicitly not establish about benchmark-design?",
+        "Which canonical definition does this route depend on, and where is it owned?",
+        "What would have to be inspected before this page could claim more than it does?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:benchmark-design"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "inspectionId": "tr13-src-007",
+          "sourceIdentity": "NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+          "locator": "MEASURE 2.3 and 2.5 — measurement under deployment-like conditions; limits of generalisability."
+        }
+      ],
+      "evidenceMetadata": {
+        "sourceClass": "government-standards-body",
+        "independence": "independent-of-maha",
+        "inspectionDepth": "targeted-section-read",
+        "reuseBasis": "US government work; bounded original summary permitted with attribution.",
+        "demandEvidence": "unknown"
+      },
+      "expectedCanonicalDependencies": [
+        {
+          "conceptId": "urn:maha:concept:evidence:benchmark-design",
+          "owner": "maha-research",
+          "state": "satisfied-by-earlier-tranche"
+        }
+      ],
+      "boundary": "A specification is not a route, a release, or a public page."
+    }
+  ],
+  "provenanceDigest": "sha256:b8f19fe6e1d8bcd7fe1a68917480a4a8ce38657225be2dc0577f5ba0380d4e6c"
+}
