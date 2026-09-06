@@ -2,14 +2,280 @@
   "schemaVersion": "maha-federation-property-pages/1.0",
   "siteId": "mayone-maharajan",
   "canonicalHost": "www.mayonemaharajan.com",
-  "registryDigest": "sha256:bd484c37fd8fe7279561a32aa2321d05cd17336b2377fc988da7280126be68bd",
+  "registryDigest": "sha256:a8e9e54926e35ebd16d209a8de9b759c3e928f1a11340c9fa3143e4f4c4c4808",
   "status": "local-unreleased",
   "counts": {
-    "pages": 33,
-    "readyForOwnerIntegration": 33,
+    "pages": 37,
+    "readyForOwnerIntegration": 37,
     "blockedOnUnreadyPrerequisite": 0
   },
   "pages": [
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_7062ac80168cab7e17e02623",
+      "tranche": 9,
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "path": "/concepts/authorial-lineage/critique",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/authorial-lineage/critique",
+      "title": "Authorial Lineage — Critique",
+      "topic": "authorial-lineage",
+      "routeRole": "critique",
+      "concept": {
+        "conceptId": "urn:maha:concept:autonomy:authorial-lineage",
+        "familyId": "autonomy",
+        "canonicalOwner": "mayone-maharajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:autonomy:authorial-lineage"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:autonomy"
+          }
+        ]
+      },
+      "directAnswer": "Authorial Lineage, in this Critique, is limited to the following inspected scope. One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Authorial Lineage, in this Critique, is limited to the following inspected scope. One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Critique",
+          "kind": "role-method",
+          "paragraphs": [
+            "Keep the answer within the inspected source scope and make every operational step or conceptual relation explicit.",
+            "Do not use completeness of presentation as a substitute for evidence, review, or release.",
+            "Applied scope: One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayone-maharajan. This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish authorial interpretation, concept genealogy, book relationships. It must not publish authorial thesis presented as consensus or empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "The Maha Principle — The Network and the Feed; Chapter 6; Chapter 7; Whole-Food Information. Establishes: One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience.",
+            "The Cosmic Recursion — Introduction and closing synthesis; passages distinguishing analogy, recurrence, evidence, and model boundary. Establishes: A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "A manuscript can establish its own wording and internal relationships, not originality, influence, reception, consensus, or empirical truth.",
+            "Textual relationship inside one author’s corpus does not prove chronological influence, priority over other thinkers, public reception, or scientific validity.",
+            "This route must not claim authorial thesis presented as consensus.",
+            "This route must not claim empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/authorial-lineage/definition",
+            "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/authorial-lineage/relationship",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/authorial-lineage/development",
+            "property-home: https://www.mayonemaharajan.com/",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/authorial-lineage/limits"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "maha-principle-authorial-lineage",
+          "title": "The Maha Principle",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "The Network and the Feed; Chapter 6; Chapter 7; Whole-Food Information",
+          "establishes": "One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience.",
+          "doesNotEstablish": "A manuscript can establish its own wording and internal relationships, not originality, influence, reception, consensus, or empirical truth.",
+          "rightsBasis": "Maha-controlled authorial manuscript; bounded paraphrase and locator only. The packet does not redistribute the manuscript.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "cosmic-recursion-authorial-lineage",
+          "title": "The Cosmic Recursion",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "Introduction and closing synthesis; passages distinguishing analogy, recurrence, evidence, and model boundary",
+          "establishes": "A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification.",
+          "doesNotEstablish": "Textual relationship inside one author’s corpus does not prove chronological influence, priority over other thinkers, public reception, or scientific validity.",
+          "rightsBasis": "Maha-controlled authorial manuscript; bounded paraphrase and locator only. The packet does not redistribute the manuscript.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/authorial-lineage/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_9c5aadfaa34b1896f9ee2b36"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_6e5cae25a74731057505dc27",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/authorial-lineage/relationship",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_d4b6354f11aedcfbdac48596"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/authorial-lineage/development",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_4ef1f54c0bbbc1b35bc2d57c"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/authorial-lineage/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_4197fa19f0340c606c8d2174"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Authorial Lineage mean in this bounded context?",
+          "answer": "Authorial Lineage, in this Critique, is limited to the following inspected scope. One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this critique answer?",
+          "answer": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Network and the Feed; Chapter 6; Chapter 7; Whole-Food Information, supports one manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. The Cosmic Recursion (working authorial manuscript inspected 2026-09-06), at Introduction and closing synthesis; passages distinguishing analogy, recurrence, evidence, and model boundary, supports a second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "A manuscript can establish its own wording and internal relationships, not originality, influence, reception, consensus, or empirical truth. Textual relationship inside one author’s corpus does not prove chronological influence, priority over other thinkers, public reception, or scientific validity. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.mayonemaharajan.com/concepts/authorial-lineage/critique#article",
+        "headline": "Authorial Lineage — Critique",
+        "url": "https://www.mayonemaharajan.com/concepts/authorial-lineage/critique",
+        "isPartOf": "https://www.mayonemaharajan.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Authorial Lineage mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Authorial Lineage, in this Critique, is limited to the following inspected scope. One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this critique answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Network and the Feed; Chapter 6; Chapter 7; Whole-Food Information, supports one manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. The Cosmic Recursion (working authorial manuscript inspected 2026-09-06), at Introduction and closing synthesis; passages distinguishing analogy, recurrence, evidence, and model boundary, supports a second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A manuscript can establish its own wording and internal relationships, not originality, influence, reception, consensus, or empirical truth. Textual relationship inside one author’s corpus does not prove chronological influence, priority over other thinkers, public reception, or scientific validity. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-9",
+        "decisionManifestDigest": "sha256:7cbb510c5ce7c69c9be8f84b6f4d626c76c1b767555a20a9e54e34c8d7b9f3c2",
+        "decisionDigest": "sha256:6962d7fa866fbee45b32e553ad6ee552f8f436c1282318a1163dc75060345784",
+        "specificationManifestDigest": "sha256:ae4aa3b0623b9871065a537ff19d3ae219daba5835718e905a607756a27436cc",
+        "specificationDigest": "sha256:324c1cb4b36bf76d2db707822d707bcc916709c14a272fd37db0d85e84dec731",
+        "packetManifestDigest": "sha256:7f941d77ad9f36062fafee861e00a2d8878734b4f75c220390522dc1997fa1de",
+        "packetDigest": "sha256:fd888fbfda395b94f876a2349a3d31f9800ab6fe4fc61f80fbeb8dd79df43cbd"
+      },
+      "contentDigest": "sha256:e7cf28730a9d121bef2ac74ba007898933af6b62b69f224f39f9874341dc40c9"
+    },
     {
       "schemaVersion": "maha-federation-page/1.0",
       "candidateId": "cand_9c5aadfaa34b1896f9ee2b36",
@@ -516,6 +782,272 @@
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_4197fa19f0340c606c8d2174",
+      "tranche": 9,
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "path": "/concepts/authorial-lineage/limits",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/authorial-lineage/limits",
+      "title": "Authorial Lineage — Limits",
+      "topic": "authorial-lineage",
+      "routeRole": "limits",
+      "concept": {
+        "conceptId": "urn:maha:concept:autonomy:authorial-lineage",
+        "familyId": "autonomy",
+        "canonicalOwner": "mayone-maharajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:autonomy:authorial-lineage"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:autonomy"
+          }
+        ]
+      },
+      "directAnswer": "Authorial Lineage, in this limits guide, is limited to the following inspected scope. One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Authorial Lineage, in this limits guide, is limited to the following inspected scope. One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Limits guide",
+          "kind": "role-method",
+          "paragraphs": [
+            "State the strongest supported boundary first and route time-sensitive decisions to the current authority.",
+            "A limits page must not turn a warning into a weaker version of the unsupported claim.",
+            "Applied scope: One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayone-maharajan. This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish authorial interpretation, concept genealogy, book relationships. It must not publish authorial thesis presented as consensus or empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "The Maha Principle — The Network and the Feed; Chapter 6; Chapter 7; Whole-Food Information. Establishes: One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience.",
+            "The Cosmic Recursion — Introduction and closing synthesis; passages distinguishing analogy, recurrence, evidence, and model boundary. Establishes: A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "A manuscript can establish its own wording and internal relationships, not originality, influence, reception, consensus, or empirical truth.",
+            "Textual relationship inside one author’s corpus does not prove chronological influence, priority over other thinkers, public reception, or scientific validity.",
+            "This route must not claim authorial thesis presented as consensus.",
+            "This route must not claim empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/authorial-lineage/definition",
+            "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/authorial-lineage/relationship",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/authorial-lineage/development",
+            "property-home: https://www.mayonemaharajan.com/",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/authorial-lineage/critique"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "maha-principle-authorial-lineage",
+          "title": "The Maha Principle",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "The Network and the Feed; Chapter 6; Chapter 7; Whole-Food Information",
+          "establishes": "One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience.",
+          "doesNotEstablish": "A manuscript can establish its own wording and internal relationships, not originality, influence, reception, consensus, or empirical truth.",
+          "rightsBasis": "Maha-controlled authorial manuscript; bounded paraphrase and locator only. The packet does not redistribute the manuscript.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "cosmic-recursion-authorial-lineage",
+          "title": "The Cosmic Recursion",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "Introduction and closing synthesis; passages distinguishing analogy, recurrence, evidence, and model boundary",
+          "establishes": "A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification.",
+          "doesNotEstablish": "Textual relationship inside one author’s corpus does not prove chronological influence, priority over other thinkers, public reception, or scientific validity.",
+          "rightsBasis": "Maha-controlled authorial manuscript; bounded paraphrase and locator only. The packet does not redistribute the manuscript.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/authorial-lineage/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_9c5aadfaa34b1896f9ee2b36"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_6e5cae25a74731057505dc27",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/authorial-lineage/relationship",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_d4b6354f11aedcfbdac48596"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/authorial-lineage/development",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_4ef1f54c0bbbc1b35bc2d57c"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/authorial-lineage/critique",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_7062ac80168cab7e17e02623"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Authorial Lineage mean in this bounded context?",
+          "answer": "Authorial Lineage, in this limits guide, is limited to the following inspected scope. One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this limits answer?",
+          "answer": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Network and the Feed; Chapter 6; Chapter 7; Whole-Food Information, supports one manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. The Cosmic Recursion (working authorial manuscript inspected 2026-09-06), at Introduction and closing synthesis; passages distinguishing analogy, recurrence, evidence, and model boundary, supports a second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "A manuscript can establish its own wording and internal relationships, not originality, influence, reception, consensus, or empirical truth. Textual relationship inside one author’s corpus does not prove chronological influence, priority over other thinkers, public reception, or scientific validity. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.mayonemaharajan.com/concepts/authorial-lineage/limits#article",
+        "headline": "Authorial Lineage — Limits",
+        "url": "https://www.mayonemaharajan.com/concepts/authorial-lineage/limits",
+        "isPartOf": "https://www.mayonemaharajan.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Authorial Lineage mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Authorial Lineage, in this limits guide, is limited to the following inspected scope. One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this limits answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Network and the Feed; Chapter 6; Chapter 7; Whole-Food Information, supports one manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. The Cosmic Recursion (working authorial manuscript inspected 2026-09-06), at Introduction and closing synthesis; passages distinguishing analogy, recurrence, evidence, and model boundary, supports a second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A manuscript can establish its own wording and internal relationships, not originality, influence, reception, consensus, or empirical truth. Textual relationship inside one author’s corpus does not prove chronological influence, priority over other thinkers, public reception, or scientific validity. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-9",
+        "decisionManifestDigest": "sha256:7cbb510c5ce7c69c9be8f84b6f4d626c76c1b767555a20a9e54e34c8d7b9f3c2",
+        "decisionDigest": "sha256:ba970eb3d3c7ac35b4b2a1179b948cd63e5505032703fb366ab32dae9801d65c",
+        "specificationManifestDigest": "sha256:ae4aa3b0623b9871065a537ff19d3ae219daba5835718e905a607756a27436cc",
+        "specificationDigest": "sha256:51b4ba275c0c1da2db1c3360a0755313b37d125951b3443a1cd24cfd54fbd84e",
+        "packetManifestDigest": "sha256:7f941d77ad9f36062fafee861e00a2d8878734b4f75c220390522dc1997fa1de",
+        "packetDigest": "sha256:fd888fbfda395b94f876a2349a3d31f9800ab6fe4fc61f80fbeb8dd79df43cbd"
+      },
+      "contentDigest": "sha256:06b29540513f1e411b141540fe6d5208ba779dd2d6221b5dc0312277eb8b2249"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
       "candidateId": "cand_d4b6354f11aedcfbdac48596",
       "tranche": 5,
       "siteId": "mayone-maharajan",
@@ -765,6 +1297,256 @@
         "packetDigest": "sha256:b58f999397b272990ef3f621b4eac16bf6db36fda00c5829a7eab1875f048b51"
       },
       "contentDigest": "sha256:67321de3e71735c7999373b5e2a3590f9d8a41c84ae29553810799ef116b7d0b"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_a776af38a31ec64e03244944",
+      "tranche": 9,
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "path": "/concepts/civilizational-memory/critique",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/civilizational-memory/critique",
+      "title": "Civilizational Memory — Critique",
+      "topic": "civilizational-memory",
+      "routeRole": "critique",
+      "concept": {
+        "conceptId": "urn:maha:concept:autonomy:civilizational-memory",
+        "familyId": "autonomy",
+        "canonicalOwner": "mayone-maharajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:autonomy:civilizational-memory"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:autonomy"
+          }
+        ]
+      },
+      "directAnswer": "Civilizational Memory, in this Critique, is limited to the following inspected scope. The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Civilizational Memory, in this Critique, is limited to the following inspected scope. The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Critique",
+          "kind": "role-method",
+          "paragraphs": [
+            "Keep the answer within the inspected source scope and make every operational step or conceptual relation explicit.",
+            "Do not use completeness of presentation as a substitute for evidence, review, or release.",
+            "Applied scope: The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayone-maharajan. This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish authorial interpretation, concept genealogy, book relationships. It must not publish authorial thesis presented as consensus or empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "The Borrowed Light — Chapter 5: The Hard Problem in the Mirror; Chapter 6: The Evidence That Needs No Physics and The Custodians. Establishes: The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "This establishes the author’s framework, not a historical lineage, empirical model of memory, cultural authority, priority, or consensus.",
+            "This route must not claim authorial thesis presented as consensus.",
+            "This route must not claim empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/civilizational-memory/definition",
+            "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/civilizational-memory/relationship",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/civilizational-memory/development",
+            "property-home: https://www.mayonemaharajan.com/",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/civilizational-memory/limits"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "borrowed-light-civilizational-memory",
+          "title": "The Borrowed Light",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "Chapter 5: The Hard Problem in the Mirror; Chapter 6: The Evidence That Needs No Physics and The Custodians",
+          "establishes": "The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind.",
+          "doesNotEstablish": "This establishes the author’s framework, not a historical lineage, empirical model of memory, cultural authority, priority, or consensus.",
+          "rightsBasis": "Maha-controlled authorial manuscript; bounded paraphrase and locator only. The packet does not redistribute the manuscript.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_4928435919adf88fa11f5275"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_6e5cae25a74731057505dc27",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/relationship",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_6165e01368841892cc1214f8"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/development",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_91a359ed79a7cab188963d9b"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_4c198b13a5ecac5e073014a9"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Civilizational Memory mean in this bounded context?",
+          "answer": "Civilizational Memory, in this Critique, is limited to the following inspected scope. The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this critique answer?",
+          "answer": "The Borrowed Light (working authorial manuscript inspected 2026-09-06), at Chapter 5: The Hard Problem in the Mirror; Chapter 6: The Evidence That Needs No Physics and The Custodians, supports the manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "This establishes the author’s framework, not a historical lineage, empirical model of memory, cultural authority, priority, or consensus. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.mayonemaharajan.com/concepts/civilizational-memory/critique#article",
+        "headline": "Civilizational Memory — Critique",
+        "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/critique",
+        "isPartOf": "https://www.mayonemaharajan.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Civilizational Memory mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Civilizational Memory, in this Critique, is limited to the following inspected scope. The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this critique answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Borrowed Light (working authorial manuscript inspected 2026-09-06), at Chapter 5: The Hard Problem in the Mirror; Chapter 6: The Evidence That Needs No Physics and The Custodians, supports the manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This establishes the author’s framework, not a historical lineage, empirical model of memory, cultural authority, priority, or consensus. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-9",
+        "decisionManifestDigest": "sha256:7cbb510c5ce7c69c9be8f84b6f4d626c76c1b767555a20a9e54e34c8d7b9f3c2",
+        "decisionDigest": "sha256:3ec3b1c818294b7815420d33131e75b6222bab0c2370a9766add0e67b22b3929",
+        "specificationManifestDigest": "sha256:ae4aa3b0623b9871065a537ff19d3ae219daba5835718e905a607756a27436cc",
+        "specificationDigest": "sha256:04ee3045966b2067652eccd9ed23215cff1462ca49e78238fbfa167f17c3d6e6",
+        "packetManifestDigest": "sha256:7f941d77ad9f36062fafee861e00a2d8878734b4f75c220390522dc1997fa1de",
+        "packetDigest": "sha256:1b0bc5400893275f9bb56897091d19ddc30e673f508b640e8bdef85f50db5af0"
+      },
+      "contentDigest": "sha256:f0459af5538cf7794d7f995ffb352ca5e8b345af4a1d9e0f9f7c88713fd15090"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -1237,6 +2019,256 @@
         "packetDigest": "sha256:b97ad85a444699d36d7b9e05f2ebe77d94bfa9aa68f27bfef21dc4d4907f59cf"
       },
       "contentDigest": "sha256:11e4cbdac7bf5128f2531d5807723d0a1603aacd8b78e3b6980a184ebdfea6c4"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_4c198b13a5ecac5e073014a9",
+      "tranche": 9,
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "path": "/concepts/civilizational-memory/limits",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/civilizational-memory/limits",
+      "title": "Civilizational Memory — Limits",
+      "topic": "civilizational-memory",
+      "routeRole": "limits",
+      "concept": {
+        "conceptId": "urn:maha:concept:autonomy:civilizational-memory",
+        "familyId": "autonomy",
+        "canonicalOwner": "mayone-maharajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:autonomy:civilizational-memory"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:autonomy"
+          }
+        ]
+      },
+      "directAnswer": "Civilizational Memory, in this limits guide, is limited to the following inspected scope. The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Civilizational Memory, in this limits guide, is limited to the following inspected scope. The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Limits guide",
+          "kind": "role-method",
+          "paragraphs": [
+            "State the strongest supported boundary first and route time-sensitive decisions to the current authority.",
+            "A limits page must not turn a warning into a weaker version of the unsupported claim.",
+            "Applied scope: The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayone-maharajan. This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish authorial interpretation, concept genealogy, book relationships. It must not publish authorial thesis presented as consensus or empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "The Borrowed Light — Chapter 5: The Hard Problem in the Mirror; Chapter 6: The Evidence That Needs No Physics and The Custodians. Establishes: The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "This establishes the author’s framework, not a historical lineage, empirical model of memory, cultural authority, priority, or consensus.",
+            "This route must not claim authorial thesis presented as consensus.",
+            "This route must not claim empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/civilizational-memory/definition",
+            "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/civilizational-memory/relationship",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/civilizational-memory/development",
+            "property-home: https://www.mayonemaharajan.com/",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/civilizational-memory/critique"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "borrowed-light-civilizational-memory",
+          "title": "The Borrowed Light",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "Chapter 5: The Hard Problem in the Mirror; Chapter 6: The Evidence That Needs No Physics and The Custodians",
+          "establishes": "The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind.",
+          "doesNotEstablish": "This establishes the author’s framework, not a historical lineage, empirical model of memory, cultural authority, priority, or consensus.",
+          "rightsBasis": "Maha-controlled authorial manuscript; bounded paraphrase and locator only. The packet does not redistribute the manuscript.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_4928435919adf88fa11f5275"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_6e5cae25a74731057505dc27",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/relationship",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_6165e01368841892cc1214f8"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/development",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_91a359ed79a7cab188963d9b"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/critique",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_a776af38a31ec64e03244944"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Civilizational Memory mean in this bounded context?",
+          "answer": "Civilizational Memory, in this limits guide, is limited to the following inspected scope. The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this limits answer?",
+          "answer": "The Borrowed Light (working authorial manuscript inspected 2026-09-06), at Chapter 5: The Hard Problem in the Mirror; Chapter 6: The Evidence That Needs No Physics and The Custodians, supports the manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "This establishes the author’s framework, not a historical lineage, empirical model of memory, cultural authority, priority, or consensus. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.mayonemaharajan.com/concepts/civilizational-memory/limits#article",
+        "headline": "Civilizational Memory — Limits",
+        "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/limits",
+        "isPartOf": "https://www.mayonemaharajan.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Civilizational Memory mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Civilizational Memory, in this limits guide, is limited to the following inspected scope. The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this limits answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Borrowed Light (working authorial manuscript inspected 2026-09-06), at Chapter 5: The Hard Problem in the Mirror; Chapter 6: The Evidence That Needs No Physics and The Custodians, supports the manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This establishes the author’s framework, not a historical lineage, empirical model of memory, cultural authority, priority, or consensus. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-9",
+        "decisionManifestDigest": "sha256:7cbb510c5ce7c69c9be8f84b6f4d626c76c1b767555a20a9e54e34c8d7b9f3c2",
+        "decisionDigest": "sha256:cb3338399b4cbbdab03279522e8dd2cbd294fe5af65785f59392feaa97b72410",
+        "specificationManifestDigest": "sha256:ae4aa3b0623b9871065a537ff19d3ae219daba5835718e905a607756a27436cc",
+        "specificationDigest": "sha256:6bad38fc211db5222ff8a27f9c2c83c8bfe8e45ce1bbffffd6a4d9ffd3316164",
+        "packetManifestDigest": "sha256:7f941d77ad9f36062fafee861e00a2d8878734b4f75c220390522dc1997fa1de",
+        "packetDigest": "sha256:1b0bc5400893275f9bb56897091d19ddc30e673f508b640e8bdef85f50db5af0"
+      },
+      "contentDigest": "sha256:30c5f20796142042f9e3a726504306e3370425d4aedfaadeade8f29701cc2d56"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -8318,5 +9350,5 @@
       "contentDigest": "sha256:c9d1922b4365544788aa2b78ad01e8366edeeb4841270d79614d31ac9875d6d8"
     }
   ],
-  "provenanceDigest": "sha256:8807b749a416e0d452a1979ee034709087c42016e39872194b5625b2e934163b"
+  "provenanceDigest": "sha256:f33a7a22c323d2801e247bb2c23a6ab647e7bbfd9f97d18a58d2c780e8fee723"
 }

@@ -76,7 +76,7 @@ type Inputs = {
   }>
   supplements?: Array<{
     batchId: string
-    tranche: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
+    tranche: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
     decisions: { provenanceDigest: string; entries: Decision[] }
     specifications: { provenanceDigest: string; specifications: Specification[] }
     packets: { provenanceDigest: string; packets: Packet[] }
@@ -252,8 +252,7 @@ export function compileFederationPages(inputs: Inputs) {
   const packetBySourceSetAndKey = new Map(sourceSets.flatMap((sourceSet) => sourceSet.packets.packets.map((packet) => [`${sourceSet.batchId}:${packet.topicKey}`, packet] as const)))
   const specs = sourceSets.flatMap((sourceSet) => sourceSet.specifications.specifications.map((specification) => ({ specification, tranche: sourceSet.tranche, batchId: sourceSet.batchId })))
   const relationshipEligible = (pageTranche: number, siblingTranche: number) => inputs.priorRelationshipHorizon === undefined
-    || pageTranche > inputs.priorRelationshipHorizon
-    || siblingTranche <= inputs.priorRelationshipHorizon
+    || siblingTranche <= Math.max(pageTranche, inputs.priorRelationshipHorizon)
   if (specs.length !== readyIds.size) throw new Error(`Expected one specification for each of ${readyIds.size} evidence-ready decisions; received ${specs.length}.`)
 
   const drafts = specs.map(({ specification, tranche, batchId }) => {

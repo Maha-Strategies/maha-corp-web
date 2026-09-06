@@ -105,21 +105,21 @@ test('all one hundred exact candidates are ready and no candidate receives more 
   assert.ok(specifications.specifications.every((entry) => entry.implementationState === 'specification-only' && entry.machineContract.canonicalReleaseRequiredBeforePublication))
 })
 
-test('cumulative contracts reach 757 local pages while adapters expose only dependency-ready contracts', () => {
+test('cumulative contracts reach 854 local pages while adapters expose only dependency-ready contracts', () => {
   assert.deepEqual(implementationRegistry.counts, {
-    pages: 757,
-    readyForOwnerIntegration: 748,
-    blockedOnUnreadyPrerequisite: 9,
-    byProperty: { 'maha-strategies': 228, 'maha-research': 200, 'agentic-publishing': 64, 'maha-os': 48, 'mayone-maharajan': 33, 'mayon-rajan': 40, 'maha-policy': 144 },
-    boundedAnswers: 3785,
-    sourceBindings: 1295,
+    pages: 854,
+    readyForOwnerIntegration: 844,
+    blockedOnUnreadyPrerequisite: 10,
+    byProperty: { 'maha-strategies': 259, 'maha-research': 225, 'agentic-publishing': 74, 'maha-os': 54, 'mayone-maharajan': 37, 'mayon-rajan': 45, 'maha-policy': 160 },
+    boundedAnswers: 4270,
+    sourceBindings: 1466,
     publicRoutesCreated: 0,
     nextBuildsRun: 0,
     vercelBuildsRun: 0,
   })
-  assert.deepEqual(adapterRegistry.counts, { properties: 7, routes: 748, boundedAnswers: 3740, publicRoutesCreated: 0, buildsRun: 0 })
-  assert.equal(new Set(implementationRegistry.entries.map((entry) => entry.candidateId)).size, 757)
-  assert.equal(implementationRegistry.entries.filter((entry) => entry.adoptionState === 'blocked-on-unready-prerequisite').length, 9)
+  assert.deepEqual(adapterRegistry.counts, { properties: 7, routes: 844, boundedAnswers: 4220, publicRoutesCreated: 0, buildsRun: 0 })
+  assert.equal(new Set(implementationRegistry.entries.map((entry) => entry.candidateId)).size, 854)
+  assert.equal(implementationRegistry.entries.filter((entry) => entry.adoptionState === 'blocked-on-unready-prerequisite').length, 10)
   const trancheIds = new Set(cohort.entries.map((entry) => entry.candidateId))
   assert.equal(implementationRegistry.entries.filter((entry) => trancheIds.has(entry.candidateId) && entry.adoptionState === 'blocked-on-unready-prerequisite').length, 2)
   assert.match(adapterRegistry.buildBoundary, /No Next\.js or Vercel build is authorized/)

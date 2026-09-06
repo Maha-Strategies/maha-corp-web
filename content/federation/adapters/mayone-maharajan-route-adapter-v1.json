@@ -3,7 +3,7 @@
   "siteId": "mayone-maharajan",
   "canonicalHost": "www.mayonemaharajan.com",
   "rootPath": "/concepts/",
-  "sourceManifestDigest": "sha256:8807b749a416e0d452a1979ee034709087c42016e39872194b5625b2e934163b",
+  "sourceManifestDigest": "sha256:f33a7a22c323d2801e247bb2c23a6ab647e7bbfd9f97d18a58d2c780e8fee723",
   "state": "local-owner-handoff",
   "ownerIntegration": {
     "routeShape": "/concepts/[...segments]",
@@ -16,13 +16,23 @@
     "activeCanonicalReleaseRequired": true
   },
   "counts": {
-    "routes": 33,
-    "boundedAnswers": 165,
+    "routes": 37,
+    "boundedAnswers": 185,
     "publicRoutesCreated": 0,
     "buildsRun": 0
   },
   "publicationBoundary": "The adapter resolves local content only. The owner route must still bind an exact revision and active canonical release before crawlability; a missing or unready path resolves to null.",
   "entries": [
+    {
+      "candidateId": "cand_7062ac80168cab7e17e02623",
+      "path": "/concepts/authorial-lineage/critique",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/authorial-lineage/critique",
+      "segments": [
+        "authorial-lineage",
+        "critique"
+      ],
+      "contentDigest": "sha256:e7cf28730a9d121bef2ac74ba007898933af6b62b69f224f39f9874341dc40c9"
+    },
     {
       "candidateId": "cand_9c5aadfaa34b1896f9ee2b36",
       "path": "/concepts/authorial-lineage/definition",
@@ -44,6 +54,16 @@
       "contentDigest": "sha256:59b6fe6df37f3835380128accd12499a670c9f64b5bd36a85d797bebc70f4732"
     },
     {
+      "candidateId": "cand_4197fa19f0340c606c8d2174",
+      "path": "/concepts/authorial-lineage/limits",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/authorial-lineage/limits",
+      "segments": [
+        "authorial-lineage",
+        "limits"
+      ],
+      "contentDigest": "sha256:06b29540513f1e411b141540fe6d5208ba779dd2d6221b5dc0312277eb8b2249"
+    },
+    {
       "candidateId": "cand_d4b6354f11aedcfbdac48596",
       "path": "/concepts/authorial-lineage/relationship",
       "canonicalUrl": "https://www.mayonemaharajan.com/concepts/authorial-lineage/relationship",
@@ -52,6 +72,16 @@
         "relationship"
       ],
       "contentDigest": "sha256:67321de3e71735c7999373b5e2a3590f9d8a41c84ae29553810799ef116b7d0b"
+    },
+    {
+      "candidateId": "cand_a776af38a31ec64e03244944",
+      "path": "/concepts/civilizational-memory/critique",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/civilizational-memory/critique",
+      "segments": [
+        "civilizational-memory",
+        "critique"
+      ],
+      "contentDigest": "sha256:f0459af5538cf7794d7f995ffb352ca5e8b345af4a1d9e0f9f7c88713fd15090"
     },
     {
       "candidateId": "cand_4928435919adf88fa11f5275",
@@ -72,6 +102,16 @@
         "development"
       ],
       "contentDigest": "sha256:11e4cbdac7bf5128f2531d5807723d0a1603aacd8b78e3b6980a184ebdfea6c4"
+    },
+    {
+      "candidateId": "cand_4c198b13a5ecac5e073014a9",
+      "path": "/concepts/civilizational-memory/limits",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/civilizational-memory/limits",
+      "segments": [
+        "civilizational-memory",
+        "limits"
+      ],
+      "contentDigest": "sha256:30c5f20796142042f9e3a726504306e3370425d4aedfaadeade8f29701cc2d56"
     },
     {
       "candidateId": "cand_6165e01368841892cc1214f8",
@@ -354,5 +394,5 @@
       "contentDigest": "sha256:c9d1922b4365544788aa2b78ad01e8366edeeb4841270d79614d31ac9875d6d8"
     }
   ],
-  "provenanceDigest": "sha256:0d71fc13ef05f515d919ca0cfaebfae7b4c63b6363f236ccd836990645ec560b"
+  "provenanceDigest": "sha256:c4f40e665b9a9f3a931a5c1b1d53bf38383dc28aea6cd311979c457156713bf5"
 }

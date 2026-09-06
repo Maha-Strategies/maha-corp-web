@@ -3,7 +3,7 @@
   "siteId": "mayon-rajan",
   "canonicalHost": "mayonrajan.com",
   "rootPath": "/mayon-volcano/",
-  "sourceManifestDigest": "sha256:24e4a97d1a5c710c3f412efec4c90dcc21716f4cda83eb097a3bbc413c8ec054",
+  "sourceManifestDigest": "sha256:850108ed7d6263542535228adf6f119e71eb742d9051390bbecbd02c86d4f9ed",
   "state": "local-owner-handoff",
   "ownerIntegration": {
     "routeShape": "/mayon-volcano/[...segments]",
@@ -16,8 +16,8 @@
     "activeCanonicalReleaseRequired": true
   },
   "counts": {
-    "routes": 40,
-    "boundedAnswers": 200,
+    "routes": 45,
+    "boundedAnswers": 225,
     "publicRoutesCreated": 0,
     "buildsRun": 0
   },
@@ -44,6 +44,16 @@
       "contentDigest": "sha256:d9cb5623497f88798fccb6fc57422a6fec1bc75069785cd8b4fe11501a1b49dc"
     },
     {
+      "candidateId": "cand_4ab867a9e48f5f82ca0ef267",
+      "path": "/mayon-volcano/ashfall/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/ashfall/official-sources",
+      "segments": [
+        "ashfall",
+        "official-sources"
+      ],
+      "contentDigest": "sha256:003ac39d417088862e972837e0934827ff8f1880900aeefc74dbc3393f79e044"
+    },
+    {
       "candidateId": "cand_47c7ec838425303c83835f8f",
       "path": "/mayon-volcano/deformation/definition",
       "canonicalUrl": "https://mayonrajan.com/mayon-volcano/deformation/definition",
@@ -62,6 +72,16 @@
         "limits"
       ],
       "contentDigest": "sha256:b4f24033fb1f373e25bde768d501b229543d8b077e0f22b3ae38091f891a5f59"
+    },
+    {
+      "candidateId": "cand_4ee7b679e3c1e347cea75493",
+      "path": "/mayon-volcano/deformation/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/deformation/official-sources",
+      "segments": [
+        "deformation",
+        "official-sources"
+      ],
+      "contentDigest": "sha256:bfff247a0327baf45e37cadcecdb2b04b75b96be6cfbe2ad1ae364cc2169834a"
     },
     {
       "candidateId": "cand_cd6e69bef0bd5d8fe4ebf92d",
@@ -234,6 +254,16 @@
       "contentDigest": "sha256:0e73f4e234eea332df8fd0ff6ca5526a06168a1b0c4a8221f59c0f2e7a17d931"
     },
     {
+      "candidateId": "cand_12813b261a0b1808ffd66f76",
+      "path": "/mayon-volcano/lahar/evidence",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/lahar/evidence",
+      "segments": [
+        "lahar",
+        "evidence"
+      ],
+      "contentDigest": "sha256:92c718b0d615b78425e8c3695e03bb7043dd081bf10c1c803bd0873d675de3f5"
+    },
+    {
       "candidateId": "cand_f9753cf9ead17ebb7d1a5c1d",
       "path": "/mayon-volcano/lahar/limits",
       "canonicalUrl": "https://mayonrajan.com/mayon-volcano/lahar/limits",
@@ -254,6 +284,16 @@
       "contentDigest": "sha256:1ffbdb6f3e3690c05c07d4a843ad2896d8c7ed871db110473c040c5a1689f754"
     },
     {
+      "candidateId": "cand_eb34fe36f4bef03b21589590",
+      "path": "/mayon-volcano/lahar/preparedness",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/lahar/preparedness",
+      "segments": [
+        "lahar",
+        "preparedness"
+      ],
+      "contentDigest": "sha256:dc96c4732e86032d4f8f5207f4df5b7f12fbc61efc9965e0180602b946afbb89"
+    },
+    {
       "candidateId": "cand_3a0a373f88138f7c3b315691",
       "path": "/mayon-volcano/monitoring/definition",
       "canonicalUrl": "https://mayonrajan.com/mayon-volcano/monitoring/definition",
@@ -262,6 +302,16 @@
         "definition"
       ],
       "contentDigest": "sha256:537d1227ac1998d6062deb80ad5e0788fb4c94382761c42bb0aeccfd74cc27c1"
+    },
+    {
+      "candidateId": "cand_c43ac928090e2490d859c566",
+      "path": "/mayon-volcano/monitoring/evidence",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/monitoring/evidence",
+      "segments": [
+        "monitoring",
+        "evidence"
+      ],
+      "contentDigest": "sha256:9847b4c73e28e9bd3199f7a76b8e99f0550591c6a35155723800c58510e4e390"
     },
     {
       "candidateId": "cand_23876b3a8f7be549e78adebd",
@@ -424,5 +474,5 @@
       "contentDigest": "sha256:85091f0deb1bc654c1c87abd0caa93f697d9cb118f1b219646806a0e7760e028"
     }
   ],
-  "provenanceDigest": "sha256:d3cad501c73c1f823cc1894efe2f9324e6792406401b53107e92931048075acb"
+  "provenanceDigest": "sha256:1d57e19ba81f4699a41be1c26624a0ea40307142befecaaafa657a5629ac618a"
 }

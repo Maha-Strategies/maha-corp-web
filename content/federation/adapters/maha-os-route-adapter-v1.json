@@ -3,7 +3,7 @@
   "siteId": "maha-os",
   "canonicalHost": "www.maha-os.com",
   "rootPath": "/knowledge/",
-  "sourceManifestDigest": "sha256:95d24591a18b365065ac7452d1b559bfad34995dec9444ab8234c8d534a3973b",
+  "sourceManifestDigest": "sha256:24a7199544eb9db47c5ee21a0130c9326a563d7248eadc2d054cbc1f0c29d6e1",
   "state": "local-owner-handoff",
   "ownerIntegration": {
     "routeShape": "/knowledge/[...segments]",
@@ -16,13 +16,24 @@
     "activeCanonicalReleaseRequired": true
   },
   "counts": {
-    "routes": 48,
-    "boundedAnswers": 240,
+    "routes": 54,
+    "boundedAnswers": 270,
     "publicRoutesCreated": 0,
     "buildsRun": 0
   },
   "publicationBoundary": "The adapter resolves local content only. The owner route must still bind an exact revision and active canonical release before crawlability; a missing or unready path resolves to null.",
   "entries": [
+    {
+      "candidateId": "cand_7a535a4a4d2f4be95f1c392e",
+      "path": "/knowledge/private-machine-systems/biometric-data-boundary/controls",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/controls",
+      "segments": [
+        "private-machine-systems",
+        "biometric-data-boundary",
+        "controls"
+      ],
+      "contentDigest": "sha256:6e8eb374720e1e8ed6bb7c21d63ee2951fba9b8cb7057083aca6d73fc469dc66"
+    },
     {
       "candidateId": "cand_330dee492175d4bb7d07b254",
       "path": "/knowledge/private-machine-systems/biometric-data-boundary/definition",
@@ -178,6 +189,39 @@
       "contentDigest": "sha256:2ce626c43fbfd1f2c5eee492d7f7a559813c7c8e622251ac3c8e2be5be9d7117"
     },
     {
+      "candidateId": "cand_d55392adc006f09f376ba71a",
+      "path": "/knowledge/private-machine-systems/emergency-override/definition",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/definition",
+      "segments": [
+        "private-machine-systems",
+        "emergency-override",
+        "definition"
+      ],
+      "contentDigest": "sha256:31d833125f00dd0b9a134291032137a9b5c96d8281e9f50f22626c9fb1b43920"
+    },
+    {
+      "candidateId": "cand_34d89af41a49f61ce659525d",
+      "path": "/knowledge/private-machine-systems/emergency-override/failure-mode",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/failure-mode",
+      "segments": [
+        "private-machine-systems",
+        "emergency-override",
+        "failure-mode"
+      ],
+      "contentDigest": "sha256:b2a5b6c5c780e5f260aa47fc26742e86c7a85747885c6c7846570a4dfbcec79c"
+    },
+    {
+      "candidateId": "cand_1136b4de4581ea94770278c2",
+      "path": "/knowledge/private-machine-systems/emergency-override/operator-guide",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/operator-guide",
+      "segments": [
+        "private-machine-systems",
+        "emergency-override",
+        "operator-guide"
+      ],
+      "contentDigest": "sha256:ff6f1568c68514220b9b6f58e92a0ec2432e9d26f7df65de9b455f65d979f103"
+    },
+    {
       "candidateId": "cand_671d652918d62414c37d751d",
       "path": "/knowledge/private-machine-systems/health-data-consent/definition",
       "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
@@ -209,6 +253,17 @@
         "operator-guide"
       ],
       "contentDigest": "sha256:726c3c158fe24a1db410424676612093655fe74749d1133379ed5d75c288622f"
+    },
+    {
+      "candidateId": "cand_0df35529464f5d80d848a503",
+      "path": "/knowledge/private-machine-systems/household-agents/architecture",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/household-agents/architecture",
+      "segments": [
+        "private-machine-systems",
+        "household-agents",
+        "architecture"
+      ],
+      "contentDigest": "sha256:d7be22be55b22632f7536f62a6e0a76b9c8bdc8217c7a5bb400b902e6ef4344e"
     },
     {
       "candidateId": "cand_fa03d5cd269d387f7bac2895",
@@ -420,6 +475,17 @@
       "contentDigest": "sha256:5b195f278e27874a33e2b1577ebf5aa27353757c61505806d5b969c12418002f"
     },
     {
+      "candidateId": "cand_986c5a7265cbc70f8cfd273e",
+      "path": "/knowledge/private-machine-systems/personal-knowledge-store/architecture",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/architecture",
+      "segments": [
+        "private-machine-systems",
+        "personal-knowledge-store",
+        "architecture"
+      ],
+      "contentDigest": "sha256:e83c339c37e01a79089e76d486b554e99fa4eb4c95d20e1250cbc857d917bb51"
+    },
+    {
       "candidateId": "cand_8a8f623867480319fcd365ce",
       "path": "/knowledge/private-machine-systems/personal-knowledge-store/controls",
       "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/controls",
@@ -552,5 +618,5 @@
       "contentDigest": "sha256:d6532f45865a8e1ec3a21d3a42403a3ff5833b0a134d1724c1ab0f1765bb06a3"
     }
   ],
-  "provenanceDigest": "sha256:375854e9f119be69f4776067cac20f04b45e1006d9c2ad6b59b0636bf308e47c"
+  "provenanceDigest": "sha256:818f1bd42e93e85263768adb9b9d981def3eb0c7b80c0ea9cfececed25bc7971"
 }

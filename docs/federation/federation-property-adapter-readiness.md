@@ -2,17 +2,17 @@
 
 Status: **local-owner-handoff**
 
-Seven owner-specific adapter contracts cover **748 local routes** and **3740 bounded answers**. They do not create a route on any property by themselves.
+Seven owner-specific adapter contracts cover **844 local routes** and **4220 bounded answers**. They do not create a route on any property by themselves.
 
 | Property | Route root | Ready contracts |
 | --- | --- | ---: |
-| maha-strategies | `/clearing/` | 228 |
-| maha-research | `/federation/` | 200 |
-| agentic-publishing | `/agentic-publishing/` | 55 |
-| maha-os | `/knowledge/` | 48 |
-| mayone-maharajan | `/concepts/` | 33 |
-| mayon-rajan | `/mayon-volcano/` | 40 |
-| maha-policy | `/policy/` | 144 |
+| maha-strategies | `/clearing/` | 259 |
+| maha-research | `/federation/` | 225 |
+| agentic-publishing | `/agentic-publishing/` | 64 |
+| maha-os | `/knowledge/` | 54 |
+| mayone-maharajan | `/concepts/` | 37 |
+| mayon-rajan | `/mayon-volcano/` | 45 |
+| maha-policy | `/policy/` | 160 |
 
 ## Required owner integration
 
@@ -22,4 +22,4 @@ Each property installs its own catch-all route under the stated root, obtains st
 
 No Next.js or Vercel build is authorized by this registry. Each owner must install its adapter, bind exact-revision review and canonical release, and obtain explicit build authorization.
 
-Registry digest: `sha256:4d330216e49cf9437522e86b6ecd4271726078b653370d3aefa414f3403b8778`
+Registry digest: `sha256:9b3d4b47f14876becdfa90c78abcc894c0f0dbc7fd72b688f4832595d2443b5f`

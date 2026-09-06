@@ -2,14 +2,259 @@
   "schemaVersion": "maha-federation-property-pages/1.0",
   "siteId": "maha-os",
   "canonicalHost": "www.maha-os.com",
-  "registryDigest": "sha256:bd484c37fd8fe7279561a32aa2321d05cd17336b2377fc988da7280126be68bd",
+  "registryDigest": "sha256:a8e9e54926e35ebd16d209a8de9b759c3e928f1a11340c9fa3143e4f4c4c4808",
   "status": "local-unreleased",
   "counts": {
-    "pages": 48,
-    "readyForOwnerIntegration": 48,
+    "pages": 54,
+    "readyForOwnerIntegration": 54,
     "blockedOnUnreadyPrerequisite": 0
   },
   "pages": [
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_7a535a4a4d2f4be95f1c392e",
+      "tranche": 9,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/biometric-data-boundary/controls",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/controls",
+      "title": "Biometric Data Boundary — Controls",
+      "topic": "biometric-data-boundary",
+      "routeRole": "controls",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:biometric-data-boundary",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:biometric-data-boundary"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Biometric Data Boundary, in this control model, is limited to the following inspected scope. Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Biometric Data Boundary, in this control model, is limited to the following inspected scope. Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Control model",
+          "kind": "role-method",
+          "paragraphs": [
+            "State the controlled input, decision rule, observable failure, and evidence that the control ran.",
+            "A control description is not evidence of effectiveness; verification and operational observation remain separate.",
+            "Applied scope: Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Regulation (EU) 2016/679 (General Data Protection Regulation) — Articles 4(14), 9 and 22; Recital 51. Establishes: Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Applicability, lawful basis, exceptions, member-state law, system purpose, and individual facts require qualified legal analysis; not every image or sensor value is biometric data in this legal sense.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/definition",
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/operator-guide",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/failure-mode",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "gdpr-biometric-boundary",
+          "title": "Regulation (EU) 2016/679 (General Data Protection Regulation)",
+          "responsibleBody": "European Parliament and Council",
+          "versionOrDate": "OJ L 119, 4 May 2016",
+          "sourceClass": "law",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679",
+          "locator": "Articles 4(14), 9 and 22; Recital 51",
+          "establishes": "Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions.",
+          "doesNotEstablish": "Applicability, lawful basis, exceptions, member-state law, system purpose, and individual facts require qualified legal analysis; not every image or sensor value is biometric data in this legal sense.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_330dee492175d4bb7d07b254"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_5c6e90c179c29d5cffb39ecf"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_c7d73663e2740217ef1b14fe"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Biometric Data Boundary mean in this bounded context?",
+          "answer": "Biometric Data Boundary, in this control model, is limited to the following inspected scope. Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this controls answer?",
+          "answer": "Regulation (EU) 2016/679 (General Data Protection Regulation) (OJ L 119, 4 May 2016), at Articles 4(14), 9 and 22; Recital 51, supports biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Applicability, lawful basis, exceptions, member-state law, system purpose, and individual facts require qualified legal analysis; not every image or sensor value is biometric data in this legal sense. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/controls#article",
+        "headline": "Biometric Data Boundary — Controls",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/controls",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Biometric Data Boundary mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Biometric Data Boundary, in this control model, is limited to the following inspected scope. Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this controls answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Regulation (EU) 2016/679 (General Data Protection Regulation) (OJ L 119, 4 May 2016), at Articles 4(14), 9 and 22; Recital 51, supports biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Applicability, lawful basis, exceptions, member-state law, system purpose, and individual facts require qualified legal analysis; not every image or sensor value is biometric data in this legal sense. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-9",
+        "decisionManifestDigest": "sha256:7cbb510c5ce7c69c9be8f84b6f4d626c76c1b767555a20a9e54e34c8d7b9f3c2",
+        "decisionDigest": "sha256:941805e5972adddf3a0778e48b88316b6dd398d92ef1b46b027800ec41564365",
+        "specificationManifestDigest": "sha256:ae4aa3b0623b9871065a537ff19d3ae219daba5835718e905a607756a27436cc",
+        "specificationDigest": "sha256:6c9e64197d505b199611316e51371d094fee2f44624cc0e902678105ab97579a",
+        "packetManifestDigest": "sha256:7f941d77ad9f36062fafee861e00a2d8878734b4f75c220390522dc1997fa1de",
+        "packetDigest": "sha256:e3325861955123768acb6ac0aa48f9c8a5a0b4338aea99ab90dae261764dfe47"
+      },
+      "contentDigest": "sha256:6e8eb374720e1e8ed6bb7c21d63ee2951fba9b8cb7057083aca6d73fc469dc66"
+    },
     {
       "schemaVersion": "maha-federation-page/1.0",
       "candidateId": "cand_330dee492175d4bb7d07b254",
@@ -3575,6 +3820,771 @@
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_d55392adc006f09f376ba71a",
+      "tranche": 9,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/emergency-override/definition",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/definition",
+      "title": "Emergency Override — Definition",
+      "topic": "emergency-override",
+      "routeRole": "definition",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:emergency-override",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:emergency-override"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Emergency Override, in this definition, is limited to the following inspected scope. Covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI. A system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Emergency Override, in this definition, is limited to the following inspected scope. Covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI. A system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Definition",
+          "kind": "role-method",
+          "paragraphs": [
+            "Use the term only for the source-backed scope stated here; keep adjacent concepts separate unless a typed relationship is explicit.",
+            "A useful definition states both inclusion and exclusion conditions so a machine answer cannot silently widen it.",
+            "Applied scope: Covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI. A system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "45 CFR § 164.312 — Technical safeguards — §164.312(a)(1), (a)(2)(i)–(ii), (b), (c), and (d). Establishes: Covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI.",
+            "Security and Privacy Controls for Information Systems and Organizations — AC-2(2) Temporary and Emergency Accounts; AC-3 Access Enforcement; AC-6 Least Privilege; AU-2 Event Logging; AU-3 Content of Audit Records; IA-2 Identification and Authentication. Establishes: A system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "This is limited to HIPAA-regulated ePHI and does not prescribe one break-glass architecture, permit unrestricted access, displace minimum-necessary analysis, or provide legal advice.",
+            "Control selection does not establish implementation effectiveness, legal compliance, safe clinical use, or authority for a particular emergency action.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/operator-guide",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/failure-mode",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "ecfr-45-164-312-t9",
+          "title": "45 CFR § 164.312 — Technical safeguards",
+          "responsibleBody": "U.S. Department of Health and Human Services",
+          "versionOrDate": "current eCFR text inspected 2026-09-06",
+          "sourceClass": "regulation",
+          "url": "https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-C/part-164/subpart-C/section-164.312",
+          "locator": "§164.312(a)(1), (a)(2)(i)–(ii), (b), (c), and (d)",
+          "establishes": "Covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI.",
+          "doesNotEstablish": "This is limited to HIPAA-regulated ePHI and does not prescribe one break-glass architecture, permit unrestricted access, displace minimum-necessary analysis, or provide legal advice.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "nist-sp-800-53-emergency-t9",
+          "title": "Security and Privacy Controls for Information Systems and Organizations",
+          "responsibleBody": "National Institute of Standards and Technology",
+          "versionOrDate": "SP 800-53 Rev. 5.1.1",
+          "sourceClass": "government-guidance",
+          "url": "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final",
+          "locator": "AC-2(2) Temporary and Emergency Accounts; AC-3 Access Enforcement; AC-6 Least Privilege; AU-2 Event Logging; AU-3 Content of Audit Records; IA-2 Identification and Authentication",
+          "establishes": "A system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records.",
+          "doesNotEstablish": "Control selection does not establish implementation effectiveness, legal compliance, safe clinical use, or authority for a particular emergency action.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_1136b4de4581ea94770278c2"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_34d89af41a49f61ce659525d"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Emergency Override mean in this bounded context?",
+          "answer": "Emergency Override, in this definition, is limited to the following inspected scope. Covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI. A system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this definition answer?",
+          "answer": "45 CFR § 164.312 — Technical safeguards (current eCFR text inspected 2026-09-06), at §164.312(a)(1), (a)(2)(i)–(ii), (b), (c), and (d), supports covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI. Security and Privacy Controls for Information Systems and Organizations (SP 800-53 Rev. 5.1.1), at AC-2(2) Temporary and Emergency Accounts; AC-3 Access Enforcement; AC-6 Least Privilege; AU-2 Event Logging; AU-3 Content of Audit Records; IA-2 Identification and Authentication, supports a system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "This is limited to HIPAA-regulated ePHI and does not prescribe one break-glass architecture, permit unrestricted access, displace minimum-necessary analysis, or provide legal advice. Control selection does not establish implementation effectiveness, legal compliance, safe clinical use, or authority for a particular emergency action. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/definition#article",
+        "headline": "Emergency Override — Definition",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/definition",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-C/part-164/subpart-C/section-164.312",
+          "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Emergency Override mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Emergency Override, in this definition, is limited to the following inspected scope. Covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI. A system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this definition answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "45 CFR § 164.312 — Technical safeguards (current eCFR text inspected 2026-09-06), at §164.312(a)(1), (a)(2)(i)–(ii), (b), (c), and (d), supports covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI. Security and Privacy Controls for Information Systems and Organizations (SP 800-53 Rev. 5.1.1), at AC-2(2) Temporary and Emergency Accounts; AC-3 Access Enforcement; AC-6 Least Privilege; AU-2 Event Logging; AU-3 Content of Audit Records; IA-2 Identification and Authentication, supports a system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This is limited to HIPAA-regulated ePHI and does not prescribe one break-glass architecture, permit unrestricted access, displace minimum-necessary analysis, or provide legal advice. Control selection does not establish implementation effectiveness, legal compliance, safe clinical use, or authority for a particular emergency action. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-9",
+        "decisionManifestDigest": "sha256:7cbb510c5ce7c69c9be8f84b6f4d626c76c1b767555a20a9e54e34c8d7b9f3c2",
+        "decisionDigest": "sha256:0f53af4244978c9b4f1bcb840ceaef3a4657ee741b9327108f3a35f530907f8c",
+        "specificationManifestDigest": "sha256:ae4aa3b0623b9871065a537ff19d3ae219daba5835718e905a607756a27436cc",
+        "specificationDigest": "sha256:04cd82e186dfe7a9d5b6cfe08ab54bb596680bfc1b601fc4ed0f46370b22af06",
+        "packetManifestDigest": "sha256:7f941d77ad9f36062fafee861e00a2d8878734b4f75c220390522dc1997fa1de",
+        "packetDigest": "sha256:a80066c6e8f3fc95884dd8d41ccde44c7a3dab9102fc83f20e1f1927beaaaaea"
+      },
+      "contentDigest": "sha256:31d833125f00dd0b9a134291032137a9b5c96d8281e9f50f22626c9fb1b43920"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_34d89af41a49f61ce659525d",
+      "tranche": 9,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/emergency-override/failure-mode",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/failure-mode",
+      "title": "Emergency Override — Failure Mode",
+      "topic": "emergency-override",
+      "routeRole": "failure-mode",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:emergency-override",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:emergency-override"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Emergency Override, in this failure-mode analysis, is limited to the following inspected scope. Covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI. A system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Emergency Override, in this failure-mode analysis, is limited to the following inspected scope. Covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI. A system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Failure Mode analysis",
+          "kind": "role-method",
+          "paragraphs": [
+            "Describe the failed invariant, observable signal, safe refusal, and correction or recovery path.",
+            "An absent signal is not proof of success unless the protocol defines and validates that interpretation.",
+            "Applied scope: Covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI. A system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "45 CFR § 164.312 — Technical safeguards — §164.312(a)(1), (a)(2)(i)–(ii), (b), (c), and (d). Establishes: Covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI.",
+            "Security and Privacy Controls for Information Systems and Organizations — AC-2(2) Temporary and Emergency Accounts; AC-3 Access Enforcement; AC-6 Least Privilege; AU-2 Event Logging; AU-3 Content of Audit Records; IA-2 Identification and Authentication. Establishes: A system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "This is limited to HIPAA-regulated ePHI and does not prescribe one break-glass architecture, permit unrestricted access, displace minimum-necessary analysis, or provide legal advice.",
+            "Control selection does not establish implementation effectiveness, legal compliance, safe clinical use, or authority for a particular emergency action.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/definition",
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/operator-guide",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "ecfr-45-164-312-t9",
+          "title": "45 CFR § 164.312 — Technical safeguards",
+          "responsibleBody": "U.S. Department of Health and Human Services",
+          "versionOrDate": "current eCFR text inspected 2026-09-06",
+          "sourceClass": "regulation",
+          "url": "https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-C/part-164/subpart-C/section-164.312",
+          "locator": "§164.312(a)(1), (a)(2)(i)–(ii), (b), (c), and (d)",
+          "establishes": "Covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI.",
+          "doesNotEstablish": "This is limited to HIPAA-regulated ePHI and does not prescribe one break-glass architecture, permit unrestricted access, displace minimum-necessary analysis, or provide legal advice.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "nist-sp-800-53-emergency-t9",
+          "title": "Security and Privacy Controls for Information Systems and Organizations",
+          "responsibleBody": "National Institute of Standards and Technology",
+          "versionOrDate": "SP 800-53 Rev. 5.1.1",
+          "sourceClass": "government-guidance",
+          "url": "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final",
+          "locator": "AC-2(2) Temporary and Emergency Accounts; AC-3 Access Enforcement; AC-6 Least Privilege; AU-2 Event Logging; AU-3 Content of Audit Records; IA-2 Identification and Authentication",
+          "establishes": "A system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records.",
+          "doesNotEstablish": "Control selection does not establish implementation effectiveness, legal compliance, safe clinical use, or authority for a particular emergency action.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_d55392adc006f09f376ba71a"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_1136b4de4581ea94770278c2"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Emergency Override mean in this bounded context?",
+          "answer": "Emergency Override, in this failure-mode analysis, is limited to the following inspected scope. Covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI. A system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this failure mode answer?",
+          "answer": "45 CFR § 164.312 — Technical safeguards (current eCFR text inspected 2026-09-06), at §164.312(a)(1), (a)(2)(i)–(ii), (b), (c), and (d), supports covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI. Security and Privacy Controls for Information Systems and Organizations (SP 800-53 Rev. 5.1.1), at AC-2(2) Temporary and Emergency Accounts; AC-3 Access Enforcement; AC-6 Least Privilege; AU-2 Event Logging; AU-3 Content of Audit Records; IA-2 Identification and Authentication, supports a system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "This is limited to HIPAA-regulated ePHI and does not prescribe one break-glass architecture, permit unrestricted access, displace minimum-necessary analysis, or provide legal advice. Control selection does not establish implementation effectiveness, legal compliance, safe clinical use, or authority for a particular emergency action. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/failure-mode#article",
+        "headline": "Emergency Override — Failure Mode",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/failure-mode",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-C/part-164/subpart-C/section-164.312",
+          "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Emergency Override mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Emergency Override, in this failure-mode analysis, is limited to the following inspected scope. Covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI. A system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this failure mode answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "45 CFR § 164.312 — Technical safeguards (current eCFR text inspected 2026-09-06), at §164.312(a)(1), (a)(2)(i)–(ii), (b), (c), and (d), supports covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI. Security and Privacy Controls for Information Systems and Organizations (SP 800-53 Rev. 5.1.1), at AC-2(2) Temporary and Emergency Accounts; AC-3 Access Enforcement; AC-6 Least Privilege; AU-2 Event Logging; AU-3 Content of Audit Records; IA-2 Identification and Authentication, supports a system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This is limited to HIPAA-regulated ePHI and does not prescribe one break-glass architecture, permit unrestricted access, displace minimum-necessary analysis, or provide legal advice. Control selection does not establish implementation effectiveness, legal compliance, safe clinical use, or authority for a particular emergency action. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-9",
+        "decisionManifestDigest": "sha256:7cbb510c5ce7c69c9be8f84b6f4d626c76c1b767555a20a9e54e34c8d7b9f3c2",
+        "decisionDigest": "sha256:10b9e5d87920e52e37a61c69aebce2aafb5cc4d3e57e63e305df226af203c6fa",
+        "specificationManifestDigest": "sha256:ae4aa3b0623b9871065a537ff19d3ae219daba5835718e905a607756a27436cc",
+        "specificationDigest": "sha256:53c1c7cca4f12dfbd8e4eeb5b497015cdc8b5a3ba8edba4711d96d3fb064a9cf",
+        "packetManifestDigest": "sha256:7f941d77ad9f36062fafee861e00a2d8878734b4f75c220390522dc1997fa1de",
+        "packetDigest": "sha256:a80066c6e8f3fc95884dd8d41ccde44c7a3dab9102fc83f20e1f1927beaaaaea"
+      },
+      "contentDigest": "sha256:b2a5b6c5c780e5f260aa47fc26742e86c7a85747885c6c7846570a4dfbcec79c"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_1136b4de4581ea94770278c2",
+      "tranche": 9,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/emergency-override/operator-guide",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/operator-guide",
+      "title": "Emergency Override — Operator Guide",
+      "topic": "emergency-override",
+      "routeRole": "operator-guide",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:emergency-override",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:emergency-override"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Emergency Override, in this operator guide, is limited to the following inspected scope. Covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI. A system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Emergency Override, in this operator guide, is limited to the following inspected scope. Covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI. A system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Operator guide",
+          "kind": "role-method",
+          "paragraphs": [
+            "Tell the operator what to check before acting, when to refuse, and how to preserve evidence of the outcome.",
+            "The guide cannot infer that a device, service, source, or credential is healthy when observation is unavailable.",
+            "Applied scope: Covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI. A system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "45 CFR § 164.312 — Technical safeguards — §164.312(a)(1), (a)(2)(i)–(ii), (b), (c), and (d). Establishes: Covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI.",
+            "Security and Privacy Controls for Information Systems and Organizations — AC-2(2) Temporary and Emergency Accounts; AC-3 Access Enforcement; AC-6 Least Privilege; AU-2 Event Logging; AU-3 Content of Audit Records; IA-2 Identification and Authentication. Establishes: A system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "This is limited to HIPAA-regulated ePHI and does not prescribe one break-glass architecture, permit unrestricted access, displace minimum-necessary analysis, or provide legal advice.",
+            "Control selection does not establish implementation effectiveness, legal compliance, safe clinical use, or authority for a particular emergency action.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/definition",
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/failure-mode",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "ecfr-45-164-312-t9",
+          "title": "45 CFR § 164.312 — Technical safeguards",
+          "responsibleBody": "U.S. Department of Health and Human Services",
+          "versionOrDate": "current eCFR text inspected 2026-09-06",
+          "sourceClass": "regulation",
+          "url": "https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-C/part-164/subpart-C/section-164.312",
+          "locator": "§164.312(a)(1), (a)(2)(i)–(ii), (b), (c), and (d)",
+          "establishes": "Covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI.",
+          "doesNotEstablish": "This is limited to HIPAA-regulated ePHI and does not prescribe one break-glass architecture, permit unrestricted access, displace minimum-necessary analysis, or provide legal advice.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "nist-sp-800-53-emergency-t9",
+          "title": "Security and Privacy Controls for Information Systems and Organizations",
+          "responsibleBody": "National Institute of Standards and Technology",
+          "versionOrDate": "SP 800-53 Rev. 5.1.1",
+          "sourceClass": "government-guidance",
+          "url": "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final",
+          "locator": "AC-2(2) Temporary and Emergency Accounts; AC-3 Access Enforcement; AC-6 Least Privilege; AU-2 Event Logging; AU-3 Content of Audit Records; IA-2 Identification and Authentication",
+          "establishes": "A system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records.",
+          "doesNotEstablish": "Control selection does not establish implementation effectiveness, legal compliance, safe clinical use, or authority for a particular emergency action.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_d55392adc006f09f376ba71a"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_34d89af41a49f61ce659525d"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Emergency Override mean in this bounded context?",
+          "answer": "Emergency Override, in this operator guide, is limited to the following inspected scope. Covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI. A system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this operator guide answer?",
+          "answer": "45 CFR § 164.312 — Technical safeguards (current eCFR text inspected 2026-09-06), at §164.312(a)(1), (a)(2)(i)–(ii), (b), (c), and (d), supports covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI. Security and Privacy Controls for Information Systems and Organizations (SP 800-53 Rev. 5.1.1), at AC-2(2) Temporary and Emergency Accounts; AC-3 Access Enforcement; AC-6 Least Privilege; AU-2 Event Logging; AU-3 Content of Audit Records; IA-2 Identification and Authentication, supports a system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "This is limited to HIPAA-regulated ePHI and does not prescribe one break-glass architecture, permit unrestricted access, displace minimum-necessary analysis, or provide legal advice. Control selection does not establish implementation effectiveness, legal compliance, safe clinical use, or authority for a particular emergency action. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/operator-guide#article",
+        "headline": "Emergency Override — Operator Guide",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/emergency-override/operator-guide",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-C/part-164/subpart-C/section-164.312",
+          "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Emergency Override mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Emergency Override, in this operator guide, is limited to the following inspected scope. Covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI. A system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this operator guide answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "45 CFR § 164.312 — Technical safeguards (current eCFR text inspected 2026-09-06), at §164.312(a)(1), (a)(2)(i)–(ii), (b), (c), and (d), supports covered entities and business associates must implement access control, unique user identification, necessary emergency access procedures, audit controls, integrity protection, and person or entity authentication for ePHI. Security and Privacy Controls for Information Systems and Organizations (SP 800-53 Rev. 5.1.1), at AC-2(2) Temporary and Emergency Accounts; AC-3 Access Enforcement; AC-6 Least Privilege; AU-2 Event Logging; AU-3 Content of Audit Records; IA-2 Identification and Authentication, supports a system can constrain emergency identities through managed duration, approved authorization, least privilege, enforcement, authentication, and auditable event records."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This is limited to HIPAA-regulated ePHI and does not prescribe one break-glass architecture, permit unrestricted access, displace minimum-necessary analysis, or provide legal advice. Control selection does not establish implementation effectiveness, legal compliance, safe clinical use, or authority for a particular emergency action. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-9",
+        "decisionManifestDigest": "sha256:7cbb510c5ce7c69c9be8f84b6f4d626c76c1b767555a20a9e54e34c8d7b9f3c2",
+        "decisionDigest": "sha256:a981197b39723542ba4d31cff02676186afa56782e48a568eb82d88f7f5789de",
+        "specificationManifestDigest": "sha256:ae4aa3b0623b9871065a537ff19d3ae219daba5835718e905a607756a27436cc",
+        "specificationDigest": "sha256:e8b09a03297d7487b6a06717c78317a6b37f48da71a7bf14e786304b72c55f33",
+        "packetManifestDigest": "sha256:7f941d77ad9f36062fafee861e00a2d8878734b4f75c220390522dc1997fa1de",
+        "packetDigest": "sha256:a80066c6e8f3fc95884dd8d41ccde44c7a3dab9102fc83f20e1f1927beaaaaea"
+      },
+      "contentDigest": "sha256:ff6f1568c68514220b9b6f58e92a0ec2432e9d26f7df65de9b455f65d979f103"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
       "candidateId": "cand_671d652918d62414c37d751d",
       "tranche": 2,
       "siteId": "maha-os",
@@ -4302,6 +5312,258 @@
         "packetDigest": "sha256:877201d620017dde6d7cffa9c0de2a688f570d3a0a4cb7e8815554ff9418c3cf"
       },
       "contentDigest": "sha256:726c3c158fe24a1db410424676612093655fe74749d1133379ed5d75c288622f"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_0df35529464f5d80d848a503",
+      "tranche": 9,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/household-agents/architecture",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/household-agents/architecture",
+      "title": "Household Agents — Architecture",
+      "topic": "household-agents",
+      "routeRole": "architecture",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:household-agents",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:household-agents"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Household Agents, in this architecture, is limited to the following inspected scope. A broadly applicable baseline covering device identification, configuration, data protection, logical access, software update, and cybersecurity state awareness. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Household Agents, in this architecture, is limited to the following inspected scope. A broadly applicable baseline covering device identification, configuration, data protection, logical access, software update, and cybersecurity state awareness. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Architecture",
+          "kind": "role-method",
+          "paragraphs": [
+            "Describe components, trust boundaries, decisions, and handoffs before naming implementation benefits.",
+            "An architecture is incomplete when it hides which component refuses an invalid, stale, unauthorized, or unsupported request.",
+            "Applied scope: A broadly applicable baseline covering device identification, configuration, data protection, logical access, software update, and cybersecurity state awareness."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "IoT Device Cybersecurity Capability Core Baseline — Section 2, Table 1. Establishes: A broadly applicable baseline covering device identification, configuration, data protection, logical access, software update, and cybersecurity state awareness."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The baseline is voluntary, is not specific to AI agents or homes, and does not certify safety, autonomy, or a Maha OS implementation.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/household-agents/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/household-agents/operator-guide",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/household-agents/failure-mode",
+            "property-home: https://www.maha-os.com/",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/household-agents/controls"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-ir-8259a-household",
+          "title": "IoT Device Cybersecurity Capability Core Baseline",
+          "responsibleBody": "NIST",
+          "versionOrDate": "NISTIR 8259A, May 2020",
+          "sourceClass": "government-guidance",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ir/2020/NIST.IR.8259A.pdf",
+          "locator": "Section 2, Table 1",
+          "establishes": "A broadly applicable baseline covering device identification, configuration, data protection, logical access, software update, and cybersecurity state awareness.",
+          "doesNotEstablish": "The baseline is voluntary, is not specific to AI agents or homes, and does not certify safety, autonomy, or a Maha OS implementation.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/household-agents/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_ace82901bef8f92c6772b148"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/household-agents/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_44b96b45a1efae66643b0203"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/household-agents/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_350364d53ff997bd2ea8476f"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/household-agents/controls",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_fa03d5cd269d387f7bac2895"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Household Agents mean in this bounded context?",
+          "answer": "Household Agents, in this architecture, is limited to the following inspected scope. A broadly applicable baseline covering device identification, configuration, data protection, logical access, software update, and cybersecurity state awareness. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this architecture answer?",
+          "answer": "IoT Device Cybersecurity Capability Core Baseline (NISTIR 8259A, May 2020), at Section 2, Table 1, supports a broadly applicable baseline covering device identification, configuration, data protection, logical access, software update, and cybersecurity state awareness."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The baseline is voluntary, is not specific to AI agents or homes, and does not certify safety, autonomy, or a Maha OS implementation. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/household-agents/architecture#article",
+        "headline": "Household Agents — Architecture",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/household-agents/architecture",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://nvlpubs.nist.gov/nistpubs/ir/2020/NIST.IR.8259A.pdf"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Household Agents mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Household Agents, in this architecture, is limited to the following inspected scope. A broadly applicable baseline covering device identification, configuration, data protection, logical access, software update, and cybersecurity state awareness. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this architecture answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "IoT Device Cybersecurity Capability Core Baseline (NISTIR 8259A, May 2020), at Section 2, Table 1, supports a broadly applicable baseline covering device identification, configuration, data protection, logical access, software update, and cybersecurity state awareness."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The baseline is voluntary, is not specific to AI agents or homes, and does not certify safety, autonomy, or a Maha OS implementation. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-9",
+        "decisionManifestDigest": "sha256:7cbb510c5ce7c69c9be8f84b6f4d626c76c1b767555a20a9e54e34c8d7b9f3c2",
+        "decisionDigest": "sha256:dfa0717100403f001c4ca8ce5e4d100662f409e9a1785eadb26ef76a292b5690",
+        "specificationManifestDigest": "sha256:ae4aa3b0623b9871065a537ff19d3ae219daba5835718e905a607756a27436cc",
+        "specificationDigest": "sha256:2c131cf116b1af161f241aa1345ad1c1ef8a403e03d8163f995b520a337ecddc",
+        "packetManifestDigest": "sha256:7f941d77ad9f36062fafee861e00a2d8878734b4f75c220390522dc1997fa1de",
+        "packetDigest": "sha256:e04625870d4266cb630fbf03544ccf1e32d08a9a25684c38ac506fe81f0addce"
+      },
+      "contentDigest": "sha256:d7be22be55b22632f7536f62a6e0a76b9c8bdc8217c7a5bb400b902e6ef4344e"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -9320,6 +10582,258 @@
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_986c5a7265cbc70f8cfd273e",
+      "tranche": 9,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/personal-knowledge-store/architecture",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/architecture",
+      "title": "Personal Knowledge Store — Architecture",
+      "topic": "personal-knowledge-store",
+      "routeRole": "architecture",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:personal-knowledge-store",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:personal-knowledge-store"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Personal Knowledge Store, in this architecture, is limited to the following inspected scope. Secure permissioned access to externally stored data, URI-identified storage and resources, ownership, identity, authentication, and authorization. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Personal Knowledge Store, in this architecture, is limited to the following inspected scope. Secure permissioned access to externally stored data, URI-identified storage and resources, ownership, identity, authentication, and authorization. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Architecture",
+          "kind": "role-method",
+          "paragraphs": [
+            "Describe components, trust boundaries, decisions, and handoffs before naming implementation benefits.",
+            "An architecture is incomplete when it hides which component refuses an invalid, stale, unauthorized, or unsupported request.",
+            "Applied scope: Secure permissioned access to externally stored data, URI-identified storage and resources, ownership, identity, authentication, and authorization."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Solid Protocol — Abstract; Status; §§1.1, 4.1, 9–11 and 13. Establishes: Secure permissioned access to externally stored data, URI-identified storage and resources, ownership, identity, authentication, and authorization."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "This is a Draft Community Group Report, not a W3C Standard, and it does not prove data sovereignty, privacy outcomes, or a Maha OS deployment.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/operator-guide",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/failure-mode",
+            "property-home: https://www.maha-os.com/",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/controls"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "solid-protocol-store",
+          "title": "Solid Protocol",
+          "responsibleBody": "W3C Solid Community Group",
+          "versionOrDate": "version 0.11.0, 12 May 2024",
+          "sourceClass": "community-group-specification",
+          "url": "https://solidproject.org/TR/2024/protocol-20240512",
+          "locator": "Abstract; Status; §§1.1, 4.1, 9–11 and 13",
+          "establishes": "Secure permissioned access to externally stored data, URI-identified storage and resources, ownership, identity, authentication, and authorization.",
+          "doesNotEstablish": "This is a Draft Community Group Report, not a W3C Standard, and it does not prove data sovereignty, privacy outcomes, or a Maha OS deployment.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_174ffcc2a50a1da916767f3a"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_95554b31e937ab3fd944a715"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_518d95d1efa544481688aba1"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/controls",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_8a8f623867480319fcd365ce"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Personal Knowledge Store mean in this bounded context?",
+          "answer": "Personal Knowledge Store, in this architecture, is limited to the following inspected scope. Secure permissioned access to externally stored data, URI-identified storage and resources, ownership, identity, authentication, and authorization. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this architecture answer?",
+          "answer": "Solid Protocol (version 0.11.0, 12 May 2024), at Abstract; Status; §§1.1, 4.1, 9–11 and 13, supports secure permissioned access to externally stored data, URI-identified storage and resources, ownership, identity, authentication, and authorization."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "This is a Draft Community Group Report, not a W3C Standard, and it does not prove data sovereignty, privacy outcomes, or a Maha OS deployment. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/architecture#article",
+        "headline": "Personal Knowledge Store — Architecture",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/personal-knowledge-store/architecture",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://solidproject.org/TR/2024/protocol-20240512"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Personal Knowledge Store mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Personal Knowledge Store, in this architecture, is limited to the following inspected scope. Secure permissioned access to externally stored data, URI-identified storage and resources, ownership, identity, authentication, and authorization. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this architecture answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Solid Protocol (version 0.11.0, 12 May 2024), at Abstract; Status; §§1.1, 4.1, 9–11 and 13, supports secure permissioned access to externally stored data, URI-identified storage and resources, ownership, identity, authentication, and authorization."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This is a Draft Community Group Report, not a W3C Standard, and it does not prove data sovereignty, privacy outcomes, or a Maha OS deployment. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-9",
+        "decisionManifestDigest": "sha256:7cbb510c5ce7c69c9be8f84b6f4d626c76c1b767555a20a9e54e34c8d7b9f3c2",
+        "decisionDigest": "sha256:8ec65226f08587c0289952e38be2c976b8d4f472b1de7cf021ece7fdb0a201be",
+        "specificationManifestDigest": "sha256:ae4aa3b0623b9871065a537ff19d3ae219daba5835718e905a607756a27436cc",
+        "specificationDigest": "sha256:248fc19a8f7e3571f0e77ae5d154b97f2e047ded99fe6b87e3d7e01231b63c18",
+        "packetManifestDigest": "sha256:7f941d77ad9f36062fafee861e00a2d8878734b4f75c220390522dc1997fa1de",
+        "packetDigest": "sha256:8f937e46a5084a1328ba3fece51a322eda1268da9f3d17be2209d14778f8c02c"
+      },
+      "contentDigest": "sha256:e83c339c37e01a79089e76d486b554e99fa4eb4c95d20e1250cbc857d917bb51"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
       "candidateId": "cand_8a8f623867480319fcd365ce",
       "tranche": 8,
       "siteId": "maha-os",
@@ -12369,5 +13883,5 @@
       "contentDigest": "sha256:d6532f45865a8e1ec3a21d3a42403a3ff5833b0a134d1724c1ab0f1765bb06a3"
     }
   ],
-  "provenanceDigest": "sha256:95d24591a18b365065ac7452d1b559bfad34995dec9444ab8234c8d534a3973b"
+  "provenanceDigest": "sha256:24a7199544eb9db47c5ee21a0130c9326a563d7248eadc2d054cbc1f0c29d6e1"
 }

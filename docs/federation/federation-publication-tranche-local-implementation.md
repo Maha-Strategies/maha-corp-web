@@ -4,24 +4,25 @@ Status: **local-unreleased**
 
 ## Outcome
 
-All **757 evidence-ready specifications** now have deterministic, host-specific content implementations containing 3785 bounded answers and 1295 source bindings. This total includes append-only readiness remediations and every verified tranche through Tranche 8.
+All **854 evidence-ready specifications** now have deterministic, host-specific content implementations containing 4270 bounded answers and 1466 source bindings. This total includes append-only readiness remediations and every verified tranche through Tranche 9.
 
-**748** can enter their owning property’s integration workflow. **9** are fully compiled but held because a required definition is not evidence-ready.
+**844** can enter their owning property’s integration workflow. **10** are fully compiled but held because a required definition is not evidence-ready.
 
 | Property | Compiled |
 | --- | ---: |
-| maha-strategies | 228 |
-| maha-research | 200 |
-| agentic-publishing | 64 |
-| maha-os | 48 |
-| mayone-maharajan | 33 |
-| mayon-rajan | 40 |
-| maha-policy | 144 |
+| maha-strategies | 259 |
+| maha-research | 225 |
+| agentic-publishing | 74 |
+| maha-os | 54 |
+| mayone-maharajan | 37 |
+| mayon-rajan | 45 |
+| maha-policy | 160 |
 
 ## Dependency hold
 
-The 9 held pages depend on an unready candidate definition. The dependency is retained as a blocker and omitted from public related links; it is never treated as an existing route.
+The 10 held pages depend on an unready candidate definition. The dependency is retained as a blocker and omitted from public related links; it is never treated as an existing route.
 
+- `https://publish.mahastrategies.com/agentic-publishing/editorial-review/failure-mode`
 - `https://publish.mahastrategies.com/agentic-publishing/editorial-review/governance`
 - `https://publish.mahastrategies.com/agentic-publishing/editorial-review/machine-interface`
 - `https://publish.mahastrategies.com/agentic-publishing/editorial-review/policy`
@@ -36,4 +37,4 @@ The 9 held pages depend on an unready candidate definition. The dependency is re
 
 These records are local content implementations. Their owning properties must adopt and verify them. No route exists until an owner adapter is added; no page may become crawlable before exact-revision review, canonical release where applicable, and explicit build/deployment authorization.
 
-Registry digest: `sha256:bd484c37fd8fe7279561a32aa2321d05cd17336b2377fc988da7280126be68bd`
+Registry digest: `sha256:a8e9e54926e35ebd16d209a8de9b759c3e928f1a11340c9fa3143e4f4c4c4808`

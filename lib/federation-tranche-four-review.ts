@@ -172,8 +172,9 @@ export function buildFederationTrancheReview(input: {
   cohort: { provenanceDigest: string; entries: CohortEntry[] }
   candidates: { provenanceDigest: string; candidates: Candidate[] }
   priorPacketManifests: PriorPacketManifest[]
-  trancheNumber: 4 | 5 | 6 | 7 | 8
+  trancheNumber: 4 | 5 | 6 | 7 | 8 | 9
   additionalPackets?: Record<string, FederationReviewPacket>
+  decisionOverrides?: Record<string, { disposition: 'evidence-ready' | 'revise' | 'blocked'; reason: string }>
 }) {
   const schemaStem = `maha-federation-tranche-${input.trancheNumber}`
   const availableNewPackets = input.additionalPackets ?? {}
@@ -221,8 +222,9 @@ export function buildFederationTrancheReview(input: {
   const decisions = input.cohort.entries.map((entry) => {
     const key = topicKey(entry)
     const packetValue = packetMap.get(key)!
-    const disposition = entry.routeRole === 'commercialization' || packetValue.disposition !== 'evidence-ready' ? 'revise' : 'evidence-ready'
-    const reason = entry.routeRole === 'commercialization' ? COMMERCIAL_REASON : packetValue.reason
+    const override = input.decisionOverrides?.[`${key}:${entry.routeRole}`]
+    const disposition = override?.disposition ?? (entry.routeRole === 'commercialization' || packetValue.disposition !== 'evidence-ready' ? 'revise' : 'evidence-ready')
+    const reason = override?.reason ?? (entry.routeRole === 'commercialization' ? COMMERCIAL_REASON : packetValue.reason)
     return {
       cohortOrder: entry.cohortOrder,
       candidateId: entry.candidateId,
@@ -248,7 +250,7 @@ export function buildFederationTrancheReview(input: {
     dependencyValidationDigest: dependencyManifest.provenanceDigest,
     evidencePacketManifestDigest: packetManifest.provenanceDigest,
     assurance: 'Internal evidence and duplication review; no public route, canonical release, commercial availability, or external endorsement.',
-    counts: { evidenceReady: decisions.filter((value) => value.disposition === 'evidence-ready').length, revise: decisions.filter((value) => value.disposition === 'revise').length, blocked: 0, duplicative: 0 },
+    counts: { evidenceReady: decisions.filter((value) => value.disposition === 'evidence-ready').length, revise: decisions.filter((value) => value.disposition === 'revise').length, blocked: decisions.filter((value) => value.disposition === 'blocked').length, duplicative: 0 },
     entries: decisions,
   })
   const specifications = decisions.filter((value) => value.disposition === 'evidence-ready').map((decision) => specification(
@@ -263,7 +265,7 @@ export function buildFederationTrancheReview(input: {
     decisionManifestDigest: decisionManifest.provenanceDigest,
     specificationManifestDigest: specificationManifest.provenanceDigest,
     status: 'local-reviewed-unreleased',
-    counts: { candidates: 100, evidenceReady: specifications.length, revise: decisionManifest.counts.revise, blocked: 0, duplicative: 0, pageSpecifications: specifications.length, publicRoutesCreated: 0, buildsRun: 0 },
+    counts: { candidates: 100, evidenceReady: specifications.length, revise: decisionManifest.counts.revise, blocked: decisionManifest.counts.blocked, duplicative: 0, pageSpecifications: specifications.length, publicRoutesCreated: 0, buildsRun: 0 },
     boundary: 'No route or public registry entry is created. Owner integration, exact-revision review, canonical release where applicable, completion of the 4,000-route corpus, and explicit build authorization remain required.',
   })
   return { semanticManifest, dependencyManifest, packetManifest, decisionManifest, specificationManifest, readiness }

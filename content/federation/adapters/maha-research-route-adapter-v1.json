@@ -3,7 +3,7 @@
   "siteId": "maha-research",
   "canonicalHost": "research.mahastrategies.com",
   "rootPath": "/federation/",
-  "sourceManifestDigest": "sha256:b06843bdc7816f12a89b17d88ee5e97aa3d1ac7d01e32eb0e91a08859deccc5a",
+  "sourceManifestDigest": "sha256:0fe47cd3f680895455c5faf6096368e468fdafee498e1adb49b167e94db449f6",
   "state": "local-owner-handoff",
   "ownerIntegration": {
     "routeShape": "/federation/[...segments]",
@@ -16,8 +16,8 @@
     "activeCanonicalReleaseRequired": true
   },
   "counts": {
-    "routes": 200,
-    "boundedAnswers": 1000,
+    "routes": 225,
+    "boundedAnswers": 1125,
     "publicRoutesCreated": 0,
     "buildsRun": 0
   },
@@ -156,6 +156,17 @@
       "contentDigest": "sha256:d9bbf807d6fe382ec2c1235d17c81ad3ebdb8ad1e1c13504cb9b812793f3c635"
     },
     {
+      "candidateId": "cand_4f1b24848bc0adf837b6a6f1",
+      "path": "/federation/research/benchmark-design/protocol",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/benchmark-design/protocol",
+      "segments": [
+        "research",
+        "benchmark-design",
+        "protocol"
+      ],
+      "contentDigest": "sha256:100792d8ce12642dcd993a636d67c6371fa8f3f470446d82b003f55afaee3e0a"
+    },
+    {
       "candidateId": "cand_cb21435abc94c118b0073ad9",
       "path": "/federation/research/calculation-inputs/definition",
       "canonicalUrl": "https://research.mahastrategies.com/federation/research/calculation-inputs/definition",
@@ -253,6 +264,17 @@
         "definition"
       ],
       "contentDigest": "sha256:04bfc124bf79f784cd062c39b945846c76a31e3e42377d966c3b020f7015d6e3"
+    },
+    {
+      "candidateId": "cand_a98072a341dc774fa6980dea",
+      "path": "/federation/research/calibration/fixture",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/calibration/fixture",
+      "segments": [
+        "research",
+        "calibration",
+        "fixture"
+      ],
+      "contentDigest": "sha256:31c0744e1c0c14a55e1bd7e6207e19c466cfeeb5b39410bebf718c48aa9d4e58"
     },
     {
       "candidateId": "cand_86909bba26e795b3d560dc9c",
@@ -376,6 +398,17 @@
       "contentDigest": "sha256:7b7f445fa648df5bee5d34890b556cc712856c6571182d91f0c3795504d82c8f"
     },
     {
+      "candidateId": "cand_55253c47ea85e0a21bff8599",
+      "path": "/federation/research/correction/protocol",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/correction/protocol",
+      "segments": [
+        "research",
+        "correction",
+        "protocol"
+      ],
+      "contentDigest": "sha256:80e1f9f5edc5f691d311deb834c0efe80e1c3741417c9ef93743ac0bf77e43ee"
+    },
+    {
       "candidateId": "cand_917e449556b1266d90ac7e19",
       "path": "/federation/research/counterexample/definition",
       "canonicalUrl": "https://research.mahastrategies.com/federation/research/counterexample/definition",
@@ -451,6 +484,17 @@
         "definition"
       ],
       "contentDigest": "sha256:347b4ce7999c18091a1b0af31184247f55f262eda8bf05ec23ac26404113df4a"
+    },
+    {
+      "candidateId": "cand_f058b2a4dc1e003d8afea04e",
+      "path": "/federation/research/dataset-provenance/failure-mode",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/dataset-provenance/failure-mode",
+      "segments": [
+        "research",
+        "dataset-provenance",
+        "failure-mode"
+      ],
+      "contentDigest": "sha256:ec6bfe03bedeb282f28ed6044aa348b7e34a81fec3658aa1c19a5fef6977e432"
     },
     {
       "candidateId": "cand_42d09a2aaf3d04f29af37ec0",
@@ -541,6 +585,17 @@
       "contentDigest": "sha256:a34efb1e41bb69390985053286daa51bdf25131b11b067cb247346be95d3b7ce"
     },
     {
+      "candidateId": "cand_3f361e7d422ed7d20f9038a1",
+      "path": "/federation/research/doi-resolution/machine-record",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/doi-resolution/machine-record",
+      "segments": [
+        "research",
+        "doi-resolution",
+        "machine-record"
+      ],
+      "contentDigest": "sha256:68c0acf6a8da23975f2553f32c49f9e0f9de33984c2ddd1db095992f712b7c2c"
+    },
+    {
       "candidateId": "cand_651919d5d016c17f54e46d11",
       "path": "/federation/research/doi-resolution/method",
       "canonicalUrl": "https://research.mahastrategies.com/federation/research/doi-resolution/method",
@@ -607,6 +662,28 @@
       "contentDigest": "sha256:21db67b9d5d758aa88669aa7395ae1847761304d70bd2cabd9cb5820f5144ccc"
     },
     {
+      "candidateId": "cand_d23bf053da04a64869f6dee5",
+      "path": "/federation/research/equation-locator/method",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/equation-locator/method",
+      "segments": [
+        "research",
+        "equation-locator",
+        "method"
+      ],
+      "contentDigest": "sha256:5e33a7991b965cde5ceadf18d9a985d6c7537af651576b466ecd110ea76b29b7"
+    },
+    {
+      "candidateId": "cand_7aa0fdd898a51b52fda4402f",
+      "path": "/federation/research/equation-locator/protocol",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/equation-locator/protocol",
+      "segments": [
+        "research",
+        "equation-locator",
+        "protocol"
+      ],
+      "contentDigest": "sha256:4e54922820eae62a2b66f684632384c4d53a00955935321f7f85e7fecdbed5a4"
+    },
+    {
       "candidateId": "cand_92b8431b2d7b2b9c9b57be22",
       "path": "/federation/research/equation-locator/relationships",
       "canonicalUrl": "https://research.mahastrategies.com/federation/research/equation-locator/relationships",
@@ -616,6 +693,28 @@
         "relationships"
       ],
       "contentDigest": "sha256:1f6057cf483dffc0fa37aeacba48d3c30a426fc36b6bbc0a2ba81bc900d9285f"
+    },
+    {
+      "candidateId": "cand_3c54387e696fd3ff6ffcdd9e",
+      "path": "/federation/research/evidence-graph/definition",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/evidence-graph/definition",
+      "segments": [
+        "research",
+        "evidence-graph",
+        "definition"
+      ],
+      "contentDigest": "sha256:d9f1dda53daf5fb66a9422350999f944691eb06c9a765f753f4be71998f1ba0a"
+    },
+    {
+      "candidateId": "cand_4ee32215bec10c7056d9779e",
+      "path": "/federation/research/evidence-graph/fixture",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/evidence-graph/fixture",
+      "segments": [
+        "research",
+        "evidence-graph",
+        "fixture"
+      ],
+      "contentDigest": "sha256:1f0288281c8e4e327700010739c6c3b170bb93a3493448b870dc4b257cc94053"
     },
     {
       "candidateId": "cand_37630727dc4cb874fda1ce60",
@@ -704,6 +803,50 @@
         "source-contract"
       ],
       "contentDigest": "sha256:94d97c03af85958007d5f49c4085cacce58e74b88fc24bb972b26fdaf00cc0f0"
+    },
+    {
+      "candidateId": "cand_d8b74ae9ca5db4a69ea76aab",
+      "path": "/federation/research/full-text-evidence/definition",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/full-text-evidence/definition",
+      "segments": [
+        "research",
+        "full-text-evidence",
+        "definition"
+      ],
+      "contentDigest": "sha256:83afbc9c92253dba2211535f4e9da5c413c59fc9b2712829e601da38953cee91"
+    },
+    {
+      "candidateId": "cand_d52a7bece6b1cb3d8be988c4",
+      "path": "/federation/research/full-text-evidence/fixture",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/full-text-evidence/fixture",
+      "segments": [
+        "research",
+        "full-text-evidence",
+        "fixture"
+      ],
+      "contentDigest": "sha256:3282308c59e865f17ac4de985cc144950d7751b11224d046a5cc3becff98ad08"
+    },
+    {
+      "candidateId": "cand_35036fef2ef2769d42fbd707",
+      "path": "/federation/research/government-mirror/definition",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/government-mirror/definition",
+      "segments": [
+        "research",
+        "government-mirror",
+        "definition"
+      ],
+      "contentDigest": "sha256:6c4dfc009cfb028429802cc42b406ff4cda8284e38e67fc52bd5e805c0239111"
+    },
+    {
+      "candidateId": "cand_c3e3e74485e71ba36bce62b9",
+      "path": "/federation/research/government-mirror/fixture",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/government-mirror/fixture",
+      "segments": [
+        "research",
+        "government-mirror",
+        "fixture"
+      ],
+      "contentDigest": "sha256:fef002a58152a9fd5a00e4004ddeba2716504d6f6fe3587ff2a986ea5b7aaca6"
     },
     {
       "candidateId": "cand_d258b0fd5c19f21c6c85ecc4",
@@ -957,6 +1100,28 @@
         "fixture"
       ],
       "contentDigest": "sha256:98163c5d446dad80fa5c79cbc327152ecf73b8aa26eca740a06f6a9153b4743c"
+    },
+    {
+      "candidateId": "cand_c539ceabc0d5d80cb61ceb3c",
+      "path": "/federation/research/metadata-only-evidence/method",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/metadata-only-evidence/method",
+      "segments": [
+        "research",
+        "metadata-only-evidence",
+        "method"
+      ],
+      "contentDigest": "sha256:03ef251a1aec5eb13428c8e59fab1d84c31cc53160e7783bd71aed250f7e16eb"
+    },
+    {
+      "candidateId": "cand_c86332703a9335b4cb075f3a",
+      "path": "/federation/research/metadata-only-evidence/protocol",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/metadata-only-evidence/protocol",
+      "segments": [
+        "research",
+        "metadata-only-evidence",
+        "protocol"
+      ],
+      "contentDigest": "sha256:65e4cc5f48ccb374460a6bb07c8fae4464ec2f7a16878622014208f6198a9c94"
     },
     {
       "candidateId": "cand_e8b95f9c40ebbe481630b73f",
@@ -1256,6 +1421,28 @@
       "contentDigest": "sha256:e028e03454ba61cf2461401101cfff8fa1f6e943fc2bd53f33ff125c08eea529"
     },
     {
+      "candidateId": "cand_5d3567ccfb546442e41b234f",
+      "path": "/federation/research/random-seed/method",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/random-seed/method",
+      "segments": [
+        "research",
+        "random-seed",
+        "method"
+      ],
+      "contentDigest": "sha256:eb1e32136b2fd748989799d1a8a49b1d4f321fc4e50d69acfef98d070bf0dbdb"
+    },
+    {
+      "candidateId": "cand_f8e356fbd5eeecae0545945c",
+      "path": "/federation/research/random-seed/protocol",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/random-seed/protocol",
+      "segments": [
+        "research",
+        "random-seed",
+        "protocol"
+      ],
+      "contentDigest": "sha256:6b8a777b09e05fc67f311566e0d2aecf1e0eb4280ff4cc8627cde08331f2c237"
+    },
+    {
       "candidateId": "cand_f2211f765dc51b2b763c0ebb",
       "path": "/federation/research/random-seed/relationships",
       "canonicalUrl": "https://research.mahastrategies.com/federation/research/random-seed/relationships",
@@ -1289,6 +1476,28 @@
       "contentDigest": "sha256:53416ed75f7b8e4207d160cbfd7ddb49a5e1b433b4d91f245a302afa926ac46b"
     },
     {
+      "candidateId": "cand_1d2e9706d85db3c514e26c33",
+      "path": "/federation/research/repository-copy/method",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/repository-copy/method",
+      "segments": [
+        "research",
+        "repository-copy",
+        "method"
+      ],
+      "contentDigest": "sha256:171d37d2ac87e88de6cb38470d85aee878f4592d66651ad4bc48cafe35ac203e"
+    },
+    {
+      "candidateId": "cand_8fabee6667865c29e399a075",
+      "path": "/federation/research/repository-copy/protocol",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/repository-copy/protocol",
+      "segments": [
+        "research",
+        "repository-copy",
+        "protocol"
+      ],
+      "contentDigest": "sha256:3f840f42bf24361d9f33484fbd3bd7abb1806125140c236ee498e35df557e3db"
+    },
+    {
       "candidateId": "cand_6a69ffb76f3f7901273553ad",
       "path": "/federation/research/repository-copy/relationships",
       "canonicalUrl": "https://research.mahastrategies.com/federation/research/repository-copy/relationships",
@@ -1298,6 +1507,28 @@
         "relationships"
       ],
       "contentDigest": "sha256:1fb653b4960e8c891368068dcdac5bf69b941c3943903ade8a94258bc5c52f25"
+    },
+    {
+      "candidateId": "cand_5e084aa9b685381cb5b3dbce",
+      "path": "/federation/research/reproducibility/definition",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/reproducibility/definition",
+      "segments": [
+        "research",
+        "reproducibility",
+        "definition"
+      ],
+      "contentDigest": "sha256:7c724d5a73f1f2d4c87327e57dbbf0dae695b62ee72b06c43c897979d1dfaaa0"
+    },
+    {
+      "candidateId": "cand_994f77c8cb6e06ba13e79f2f",
+      "path": "/federation/research/reproducibility/fixture",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/reproducibility/fixture",
+      "segments": [
+        "research",
+        "reproducibility",
+        "fixture"
+      ],
+      "contentDigest": "sha256:4f79f60e4856fd2f6901616ec02bb1d6e27c8e1e73a5ef1c3ad33f8fe886d420"
     },
     {
       "candidateId": "cand_65e220fb78705ffad954bb99",
@@ -1542,6 +1773,28 @@
       "contentDigest": "sha256:1061f996348576ea2198db4d4538023e6bbb27238bc3808b691fdfd00646bcda"
     },
     {
+      "candidateId": "cand_b6b11992dfdf48e46c0b8a15",
+      "path": "/federation/research/scope-matching/definition",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/scope-matching/definition",
+      "segments": [
+        "research",
+        "scope-matching",
+        "definition"
+      ],
+      "contentDigest": "sha256:1073eb0002c6eec02d897ce530795280bf0f8dc5c591cd777af83ba48f03e14b"
+    },
+    {
+      "candidateId": "cand_615fe04e20d48cb64667be08",
+      "path": "/federation/research/scope-matching/fixture",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/scope-matching/fixture",
+      "segments": [
+        "research",
+        "scope-matching",
+        "fixture"
+      ],
+      "contentDigest": "sha256:6d6502330b955288b02cb72fca02ffb59a876066f06789ae2d51b4e10d878c45"
+    },
+    {
       "candidateId": "cand_32d9e5ecc97be740fc8cf103",
       "path": "/federation/research/section-locator/definition",
       "canonicalUrl": "https://research.mahastrategies.com/federation/research/section-locator/definition",
@@ -1628,6 +1881,28 @@
         "source-contract"
       ],
       "contentDigest": "sha256:6ff9ea7926fa5c59f39897477e5be5bbb53854139d6a8b6875a4c727e49a6f38"
+    },
+    {
+      "candidateId": "cand_13dd1bf080dd65438352773e",
+      "path": "/federation/research/slurm-job/definition",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/slurm-job/definition",
+      "segments": [
+        "research",
+        "slurm-job",
+        "definition"
+      ],
+      "contentDigest": "sha256:557fb9e7213dabb2a7cd22d95bafa85d597ea88c5eeb83f931c7b4139719e786"
+    },
+    {
+      "candidateId": "cand_f904f6ceb5d3b868233bd9d3",
+      "path": "/federation/research/slurm-job/fixture",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/slurm-job/fixture",
+      "segments": [
+        "research",
+        "slurm-job",
+        "fixture"
+      ],
+      "contentDigest": "sha256:3707857a62efd11f16860195ebadad2e2266ace88614acfc14a5861d56877c76"
     },
     {
       "candidateId": "cand_4bfdfd9ce5a0da51ddf57cb0",
@@ -2224,5 +2499,5 @@
       "contentDigest": "sha256:93b42bf6ea85ca0594184b1c2e43ed66dc43ead1531447af890fb51486be4286"
     }
   ],
-  "provenanceDigest": "sha256:618714139047ddc1909845593da707de21b7c31b6946d5cfd49de210d9a7659e"
+  "provenanceDigest": "sha256:4d75098aabcceed83e98144a84be32f4d1123239aeae2d4e974f9f7de41657fa"
 }
