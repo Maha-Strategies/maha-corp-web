@@ -63,6 +63,16 @@ export function compactSchema(schema: Schema, depth = 0): Schema {
   for (const [keyword, value] of Object.entries(schema)) {
     if (DROPPED_KEYWORDS.has(keyword)) continue
 
+    // Non-scalar response examples are deliberately reduced to one item.
+    // A fixed-cardinality full schema (for example, the five-run ladder)
+    // would otherwise reject the compact example it accompanies. Lowering
+    // only the inline minimum is a safe loosening; the complete hosted schema
+    // remains the endpoint contract and retains the authored cardinality.
+    if (keyword === 'minItems' && typeof value === 'number' && value > MAX_EXAMPLE_ITEMS) {
+      output.minItems = MAX_EXAMPLE_ITEMS
+      continue
+    }
+
     if (keyword === 'properties' && isSchema(value)) {
       if (depth >= KEEP_STRUCTURE_TO_DEPTH) continue
       const properties: Schema = {}

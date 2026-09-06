@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "configurationAsOf": "2026-09-05",
+  "configurationAsOf": "2026-09-06",
   "provider": {
     "name": "Maha Strategies LLC",
     "url": "https://www.mahastrategies.com"
@@ -58,6 +58,45 @@
       ]
     },
     {
+      "id": "context-budget-ladder",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/context/budget-ladder",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "5000",
+        "displayAmount": "0.005000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/context-budget-ladder#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/context-budget-ladder#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:1f43bbb7299d8224336110629470a6558bf3e62c63bbb9f1724720d0197fd923",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 450000,
+        "concurrencyCap": 3,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "Request and response bodies are returned transiently and are not stored."
+      },
+      "capabilityBoundaries": [
+        "Exactly five deterministic compilations at caller-declared budgets.",
+        "Extractive selection only; no claim verification, model inference, completeness guarantee, or answer-quality assessment."
+      ]
+    },
+    {
       "id": "deep-context-evaluation",
       "status": "active",
       "canonicalResource": "https://www.mahastrategies.com/api/v1/compress/evaluate",
@@ -99,6 +138,45 @@
       ]
     },
     {
+      "id": "evidence-retention-matrix",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/context/evidence-matrix",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "50000",
+        "displayAmount": "0.050000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/evidence-retention-matrix#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/evidence-retention-matrix#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:f3f7c1b16035b175c1108ed41d1816fa0e9090390ea64be4b1443b253cd1764e",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 1050000,
+        "concurrencyCap": 2,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "Documents, evidence spans, compiled packs, and response bodies are not stored."
+      },
+      "capabilityBoundaries": [
+        "Exactly five deterministic exact-span retention evaluations.",
+        "Retention is not truth, accuracy, answer quality, legal compliance, or hallucination prevention."
+      ]
+    },
+    {
       "id": "mps-autonomous-audit",
       "status": "active",
       "canonicalResource": "https://www.mahastrategies.com/api/v1/mps/audit",
@@ -137,6 +215,87 @@
         "Not factual certification: a VERIFIED status is a model judgement, not a confirmation.",
         "Not legal advice.",
         "Not human verification, and not a substitute for editorial review before publication."
+      ]
+    },
+    {
+      "id": "governed-context-verification-pack",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/context/governed-verification",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "500000",
+        "displayAmount": "0.500000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/governed-context-verification-pack#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/governed-context-verification-pack#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:80082ba44493447625adac5bd0618a809172220aba273b9c4a29af2d339e0af3",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 1050000,
+        "concurrencyCap": 2,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "Documents, evidence spans, compiled packs, and response bodies are not stored."
+      },
+      "capabilityBoundaries": [
+        "Machine-generated context-control evidence packet, not factual or compliance certification.",
+        "No source acquisition, new research, human judgment, model inference, or guarantee of downstream behavior."
+      ]
+    },
+    {
+      "id": "research-intake-evidence-pack",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/research/intake",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "1000000",
+        "displayAmount": "1.000000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/research-intake-evidence-pack#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/research-intake-evidence-pack#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:6226d8d55117c3dad49d1b049801a0f3e84b03b986da726d742de3c69de8c4ab",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 65536,
+        "concurrencyCap": 1,
+        "requiresIdempotency": true
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": true,
+        "note": "Complete supplied source sections are transmitted to Anthropic for processing but are not stored by Maha. The result retains the question, supplied identifiers and metadata, short verbatim claim excerpts, classifications, digests, and operational metadata."
+      },
+      "capabilityBoundaries": [
+        "Machine-generated intake packet, not a research brief.",
+        "Uses only 1-10 source sections supplied by the buyer; no source acquisition or new research.",
+        "Accepts only material declared public or synthetic and non-sensitive; supplied sections are transmitted to Anthropic for processing.",
+        "MPS statuses and potential conflicts are automated triage requiring human review.",
+        "Does not provide factual certification, legal advice, human judgment, or a recommendation."
       ]
     }
   ],

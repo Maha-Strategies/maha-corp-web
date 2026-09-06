@@ -3,9 +3,13 @@ import { createHash } from 'node:crypto'
 import { BASE_USDC, MAHA_PAYEE } from '../x402/discovery-payment-recipe.ts'
 import {
   BASE_MAINNET_CAIP2,
+  CONTEXT_BUDGET_LADDER_OFFER,
   CONTEXT_COMPRESSION_OFFER,
   DEEP_CONTEXT_EVALUATION_OFFER,
+  EVIDENCE_RETENTION_MATRIX_OFFER,
+  GOVERNED_CONTEXT_VERIFICATION_OFFER,
   MPS_AUTONOMOUS_AUDIT_OFFER,
+  RESEARCH_INTAKE_EVIDENCE_PACK_OFFER,
   USDC_DECIMALS,
   type X402Offer,
 } from '../x402/offers.ts'
@@ -29,6 +33,15 @@ const DIGITAL_OFFER_SPECS = Object.freeze([
     termsUrl: `${SITE_URL}/context-compiler`,
   },
   {
+    offeringRef: 'maha:context-budget-ladder:v1',
+    title: 'Context Budget Ladder',
+    amount: '0.005',
+    offer: CONTEXT_BUDGET_LADDER_OFFER,
+    estimatedSeconds: 30,
+    deliveryDeadlineSeconds: 90,
+    termsUrl: `${SITE_URL}/pricing`,
+  },
+  {
     offeringRef: 'maha:deep-context-evaluation:v1',
     title: 'Deep Context Evaluation',
     amount: '0.01',
@@ -38,6 +51,15 @@ const DIGITAL_OFFER_SPECS = Object.freeze([
     termsUrl: `${SITE_URL}/deep-context-evaluation`,
   },
   {
+    offeringRef: 'maha:evidence-retention-matrix:v1',
+    title: 'Evidence Retention Matrix',
+    amount: '0.05',
+    offer: EVIDENCE_RETENTION_MATRIX_OFFER,
+    estimatedSeconds: 60,
+    deliveryDeadlineSeconds: 120,
+    termsUrl: `${SITE_URL}/pricing`,
+  },
+  {
     offeringRef: 'maha:mps-autonomous-audit:v1',
     title: 'MPS Automated Claim Triage',
     amount: '0.10',
@@ -45,6 +67,24 @@ const DIGITAL_OFFER_SPECS = Object.freeze([
     estimatedSeconds: 90,
     deliveryDeadlineSeconds: 180,
     termsUrl: `${SITE_URL}/mps`,
+  },
+  {
+    offeringRef: 'maha:governed-context-verification-pack:v1',
+    title: 'Governed Context Verification Pack',
+    amount: '0.50',
+    offer: GOVERNED_CONTEXT_VERIFICATION_OFFER,
+    estimatedSeconds: 60,
+    deliveryDeadlineSeconds: 120,
+    termsUrl: `${SITE_URL}/pricing`,
+  },
+  {
+    offeringRef: 'maha:research-intake-evidence-pack:v1',
+    title: 'Research Intake Evidence Pack',
+    amount: '1.00',
+    offer: RESEARCH_INTAKE_EVIDENCE_PACK_OFFER,
+    estimatedSeconds: 180,
+    deliveryDeadlineSeconds: 300,
+    termsUrl: `${SITE_URL}/pricing`,
   },
 ] as const)
 
@@ -500,6 +540,13 @@ export function handleCarpSellerRequest(request: CarpSellerRequest): CarpSellerR
   if (!digital) return jsonError(request.id, -32602, 'Unknown offerId or itemref.')
   const profileOffer = MAHA_CARP_DIGITAL_OFFERS.find((candidate) => candidate.offeringRef === digital.offeringRef)
   if (!profileOffer) return jsonError(request.id, -32603, 'The Seller catalog is internally inconsistent.')
+  if (digital.offer.status !== 'available') {
+    return jsonError(request.id, -32012, 'OFFER_NOT_PAYABLE: this digital offering is discoverable for evaluation but cannot currently issue payment instructions.', {
+      offeringRef: digital.offeringRef,
+      status: digital.offer.status,
+      blockedBy: digital.offer.availability.blockedBy,
+    })
+  }
   if (params.quantity !== 1) return jsonError(request.id, -32602, `${digital.title} must be purchased with quantity 1.`)
   if (!/^[A-Za-z0-9._:-]{8,120}$/.test(params.clientOrderRef)) {
     return jsonError(request.id, -32602, 'clientOrderRef must be an 8-120 character idempotency key.')

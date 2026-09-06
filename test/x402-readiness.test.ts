@@ -280,7 +280,7 @@ test('a disabled environment reports unavailable without pretending to be broken
   assert.equal(check(report, 'x402.enabled')?.state, 'warn')
   // Every offer is still listed, with its published status, so the report is
   // readable without cross-referencing the catalog.
-  assert.equal(report.offers.length, 3)
+  assert.equal(report.offers.length, X402_OFFERS.length)
   assert.equal(report.offers.every((offer) => offer.enabledInThisEnvironment === false), true)
 })
 

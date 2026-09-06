@@ -58,7 +58,7 @@ const EVIDENCE_ID_PATTERN = '^[A-Za-z0-9][A-Za-z0-9._:-]{0,79}$'
  * copies would drift the first time a metric is added, and the drift would
  * only surface as a Bazaar example that fails validation on one offer.
  */
-function contextPackSchema(): JsonSchema {
+export function contextPackSchema(): JsonSchema {
   return {
     type: 'object',
     additionalProperties: false,
@@ -82,7 +82,7 @@ function contextPackSchema(): JsonSchema {
   }
 }
 
-function compilationMetricsSchema(): JsonSchema {
+export function compilationMetricsSchema(): JsonSchema {
   return {
     type: 'object',
     additionalProperties: false,
@@ -165,7 +165,7 @@ function retentionBoundariesSchema(): JsonSchema {
 }
 
 /** The document array both compression offers accept. */
-function documentsSchema(): JsonSchema {
+export function documentsSchema(): JsonSchema {
   return {
     type: 'array',
     minItems: 1,
@@ -184,7 +184,7 @@ function documentsSchema(): JsonSchema {
   }
 }
 
-function compilationInputProperties(): Record<string, JsonSchema> {
+export function compilationInputProperties(): Record<string, JsonSchema> {
   return {
     clientRequestId: { type: 'string', minLength: 8, maxLength: 120, description: 'Caller trace ID.' },
     task: { type: 'string', minLength: 8, maxLength: 1200, description: 'Task used to rank passages.' },
@@ -289,9 +289,16 @@ export const CONTEXT_COMPRESSION_DISCOVERY: OfferDiscoveryContract = {
 // "every example validates against its schema" test meaningful: a hand-written
 // example is a second implementation of the compiler, and it is the one that
 // will be wrong.
-import { DEEP_CONTEXT_EXAMPLE_INPUT, DEEP_CONTEXT_EXAMPLE_OUTPUT, MPS_AUDIT_EXAMPLE_INPUT, MPS_AUDIT_EXAMPLE_OUTPUT } from './offer-examples.ts'
+import {
+  DEEP_CONTEXT_EXAMPLE_INPUT,
+  DEEP_CONTEXT_EXAMPLE_OUTPUT,
+  MPS_AUDIT_EXAMPLE_INPUT,
+  MPS_AUDIT_EXAMPLE_OUTPUT,
+  RESEARCH_INTAKE_EXAMPLE_INPUT,
+  RESEARCH_INTAKE_EXAMPLE_OUTPUT,
+} from './offer-examples.ts'
 
-function evidenceSchema(): JsonSchema {
+export function evidenceSchema(): JsonSchema {
   return {
     type: 'array',
     minItems: 1,
@@ -509,5 +516,141 @@ export const MPS_AUTONOMOUS_AUDIT_DISCOVERY: OfferDiscoveryContract = {
       retentionNote: { type: 'string' },
     },
     required: ['version', 'offerId', 'auditId', 'retrievalToken', 'clientRequestId', 'inputHash', 'status', 'idempotentReplay', 'warnings', 'warningCodes', 'retentionBoundaries', 'fullPassageStored', 'verbatimExcerptsRetained'],
+  },
+}
+
+// ---------------------------------------------------------------------------
+// Offer 4 -- Research Intake Evidence Pack
+// ---------------------------------------------------------------------------
+
+const mpsClaimSchema = (): JsonSchema => ({
+  type: 'object', additionalProperties: false,
+  properties: {
+    excerpt: { type: 'string', minLength: 1 },
+    tag: { type: 'string', enum: ['VERIFIED', 'SOURCED', 'BOUNDARY', 'ILLUSTRATIVE', 'UNVERIFIED'] },
+    rationale: { type: 'string', minLength: 1, maxLength: 1000 },
+    action: { type: 'string', enum: ['none', 'verify', 'cite', 'reword', 'remove'] },
+  },
+  required: ['excerpt', 'tag', 'rationale', 'action'],
+})
+
+export const RESEARCH_INTAKE_EVIDENCE_PACK_DISCOVERY: OfferDiscoveryContract = {
+  requiredHeaders: {
+    'x-maha-input-hash': {
+      preimage: 'Maha canonical JSON v1 of {question, sections, sourceHandling, intendedAudience?, intendedDecision?, deadline?}; keys sorted, strings NFC-normalized, undefined fields omitted',
+      algorithm: 'sha256',
+      format: 'sha256:<64 lowercase hex>',
+      notes: 'clientRequestId is excluded. Parse and normalize the request using the published input schema before hashing.',
+    },
+  },
+  input: RESEARCH_INTAKE_EXAMPLE_INPUT,
+  inputSchema: {
+    type: 'object', additionalProperties: false,
+    properties: {
+      clientRequestId: { type: 'string', minLength: 8, maxLength: 120 },
+      question: { type: 'string', minLength: 8, maxLength: 1000 },
+      sections: {
+        type: 'array', minItems: 1, maxItems: 10,
+        items: {
+          type: 'object', additionalProperties: false,
+          properties: {
+            sourceId: { type: 'string', pattern: SOURCE_ID_PATTERN },
+            sectionId: { type: 'string', pattern: SOURCE_ID_PATTERN },
+            title: { type: 'string', minLength: 1, maxLength: 200 },
+            text: { type: 'string', minLength: 1, maxLength: 6000 },
+          },
+          required: ['sourceId', 'sectionId', 'text'],
+        },
+      },
+      sourceHandling: {
+        type: 'object', additionalProperties: false,
+        properties: {
+          classification: { type: 'string', const: 'public_or_synthetic_non_sensitive' },
+          anthropicProcessingAuthorized: { type: 'boolean', const: true },
+        },
+        required: ['classification', 'anthropicProcessingAuthorized'],
+      },
+      intendedAudience: { type: 'string', minLength: 1, maxLength: 240 },
+      intendedDecision: { type: 'string', minLength: 1, maxLength: 500 },
+      deadline: { type: 'string', minLength: 1, maxLength: 80 },
+    },
+    required: ['clientRequestId', 'question', 'sections', 'sourceHandling'],
+  },
+  output: RESEARCH_INTAKE_EXAMPLE_OUTPUT,
+  outputSchema: {
+    type: 'object', additionalProperties: false,
+    properties: {
+      packId: { type: 'string', pattern: '^intake_[a-f0-9]{32}$' },
+      retrievalToken: { type: 'string', pattern: '^rirt_[A-Za-z0-9_-]{43}$' },
+      clientRequestId: { type: 'string', minLength: 8, maxLength: 120 },
+      inputHash: { type: 'string', pattern: SHA256_PATTERN },
+      status: { type: 'string', enum: ['completed', 'processing', 'failed'] },
+      idempotentReplay: { type: 'boolean' },
+      retrievalPath: { type: 'string', pattern: '^/api/v1/research/intake/intake_[a-f0-9]{32}$' },
+      progress: {
+        type: 'object', additionalProperties: false,
+        properties: {
+          sectionCount: { type: 'integer', minimum: 1, maximum: 10 },
+          sectionsCompleted: { type: 'integer', minimum: 0, maximum: 10 },
+          sectionsFailed: { type: 'integer', minimum: 0, maximum: 10 },
+          totalModelCalls: { type: 'integer', minimum: 0, maximum: 30 },
+        },
+        required: ['sectionCount', 'sectionsCompleted', 'sectionsFailed', 'totalModelCalls'],
+      },
+      pack: {
+        type: 'object', additionalProperties: false,
+        properties: {
+          version: { type: 'string', const: '0.1' },
+          offerId: { type: 'string', const: 'research-intake-evidence-pack' },
+          clientRequestId: { type: 'string', minLength: 8, maxLength: 120 },
+          inputHash: { type: 'string', pattern: SHA256_PATTERN },
+          economicBasis: {
+            type: 'object', additionalProperties: false,
+            properties: {
+              priceBaseUnits: { type: 'string', const: '1000000' }, asset: { type: 'string', const: 'USDC' },
+              decimals: { type: 'integer', const: 6 }, includedSectionAuditCapacity: { type: 'integer', const: 10 },
+              sectionAuditReferencePriceBaseUnits: { type: 'string', const: '100000' },
+              auditsPerformed: { type: 'integer', minimum: 1, maximum: 10 }, unusedCapacity: { type: 'integer', minimum: 0, maximum: 9 },
+            },
+            required: ['priceBaseUnits', 'asset', 'decimals', 'includedSectionAuditCapacity', 'sectionAuditReferencePriceBaseUnits', 'auditsPerformed', 'unusedCapacity'],
+          },
+          question: { type: 'string' },
+          intakeContext: {
+            type: 'object', additionalProperties: false,
+            properties: { intendedAudience: { type: ['string', 'null'] }, intendedDecision: { type: ['string', 'null'] }, deadline: { type: ['string', 'null'] } },
+            required: ['intendedAudience', 'intendedDecision', 'deadline'],
+          },
+          sourceHandling: {
+            type: 'object', additionalProperties: false,
+            properties: {
+              classification: { type: 'string', const: 'public_or_synthetic_non_sensitive' },
+              anthropicProcessingAuthorized: { type: 'boolean', const: true },
+            },
+            required: ['classification', 'anthropicProcessingAuthorized'],
+          },
+          orderedSourceSectionManifest: {
+            type: 'array', minItems: 1, maxItems: 10,
+            items: { type: 'object', additionalProperties: false, properties: { order: { type: 'integer', minimum: 1, maximum: 10 }, sourceId: { type: 'string' }, sectionId: { type: 'string' }, title: { type: 'string' }, sourceSectionHash: { type: 'string', pattern: SHA256_PATTERN }, characterCount: { type: 'integer', minimum: 1, maximum: 6000 } }, required: ['order', 'sourceId', 'sectionId', 'sourceSectionHash', 'characterCount'] },
+          },
+          manifestDigest: { type: 'string', pattern: SHA256_PATTERN },
+          sectionAudits: {
+            type: 'array', minItems: 1, maxItems: 10,
+            items: { type: 'object', additionalProperties: false, properties: { sourceId: { type: 'string' }, sectionId: { type: 'string' }, order: { type: 'integer' }, inputHash: { type: 'string', pattern: SHA256_PATTERN }, claims: { type: 'array', items: mpsClaimSchema() } }, required: ['sourceId', 'sectionId', 'order', 'inputHash', 'claims'] },
+          },
+          consolidatedClaimInventory: {
+            type: 'array', items: { type: 'object', additionalProperties: false, properties: { claimId: { type: 'string', pattern: '^claim_[a-f0-9]{16}$' }, sourceId: { type: 'string' }, sectionId: { type: 'string' }, sectionOrder: { type: 'integer' }, ...(mpsClaimSchema().properties as Record<string, JsonSchema>) }, required: ['claimId', 'sourceId', 'sectionId', 'sectionOrder', 'excerpt', 'tag', 'rationale', 'action'] },
+          },
+          citationGaps: { type: 'array', items: { type: 'object', additionalProperties: false, properties: { claimId: { type: 'string' }, sourceId: { type: 'string' }, sectionId: { type: 'string' }, tag: { type: 'string' }, action: { type: 'string' } }, required: ['claimId', 'sourceId', 'sectionId', 'tag', 'action'] } },
+          potentialConflicts: { type: 'array', items: { type: 'object', additionalProperties: false, properties: { conflictId: { type: 'string' }, claimIds: { type: 'array', minItems: 2, maxItems: 2, items: { type: 'string' } }, reason: { type: 'string' } }, required: ['conflictId', 'claimIds', 'reason'] } },
+          boundaries: { type: 'array', minItems: 4, items: { type: 'string' } },
+          unresolvedQuestions: { type: 'array', items: { type: 'string' } },
+          proposedHumanResearchScope: { type: 'object', additionalProperties: false, properties: { objective: { type: 'string' }, analystTasks: { type: 'array', items: { type: 'string' } }, suppliedSectionCount: { type: 'integer' }, claimCount: { type: 'integer' }, excluded: { type: 'array', items: { type: 'string' } } }, required: ['objective', 'analystTasks', 'suppliedSectionCount', 'claimCount', 'excluded'] },
+          retentionBoundaries: { type: 'object', additionalProperties: false, properties: { fullSourceSectionsStored: { type: 'boolean', const: false }, verbatimClaimExcerptsRetained: { type: 'boolean', const: true }, suppliedMetadataRetained: { type: 'boolean', const: true } }, required: ['fullSourceSectionsStored', 'verbatimClaimExcerptsRetained', 'suppliedMetadataRetained'] },
+          receiptDigest: { type: 'string', pattern: SHA256_PATTERN },
+        },
+        required: ['version', 'offerId', 'clientRequestId', 'inputHash', 'economicBasis', 'question', 'intakeContext', 'sourceHandling', 'orderedSourceSectionManifest', 'manifestDigest', 'sectionAudits', 'consolidatedClaimInventory', 'citationGaps', 'potentialConflicts', 'boundaries', 'unresolvedQuestions', 'proposedHumanResearchScope', 'retentionBoundaries', 'receiptDigest'],
+      },
+    },
+    required: ['packId', 'retrievalToken', 'clientRequestId', 'inputHash', 'status', 'idempotentReplay', 'retrievalPath', 'progress', 'pack'],
   },
 }

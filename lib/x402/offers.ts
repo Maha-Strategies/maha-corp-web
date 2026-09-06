@@ -22,7 +22,13 @@ import {
   CONTEXT_COMPRESSION_DISCOVERY,
   DEEP_CONTEXT_EVALUATION_DISCOVERY,
   MPS_AUTONOMOUS_AUDIT_DISCOVERY,
+  RESEARCH_INTAKE_EVIDENCE_PACK_DISCOVERY,
 } from './offer-schemas.ts'
+import {
+  CONTEXT_BUDGET_LADDER_DISCOVERY,
+  EVIDENCE_RETENTION_MATRIX_DISCOVERY,
+  GOVERNED_CONTEXT_VERIFICATION_DISCOVERY,
+} from './context-product-offer-schemas.ts'
 
 export const USDC_DECIMALS = 6
 
@@ -271,10 +277,80 @@ export const MPS_AUTONOMOUS_AUDIT_OFFER: X402Offer = {
   discovery: MPS_AUTONOMOUS_AUDIT_DISCOVERY,
 }
 
+export const CONTEXT_BUDGET_LADDER_OFFER: X402Offer = {
+  id: 'context-budget-ladder', method: 'POST', path: '/api/v1/context/budget-ladder', amount: '5000',
+  description: 'Compile the same supplied documents at exactly five ascending token budgets. Returns five source-linked extractive Context Packs, a compact comparison table, stable hashes, and a deterministic receipt digest. Price basis: five $0.001 compilations. No model inference, source acquisition, claim verification, completeness guarantee, or answer-quality assessment. Request and result bodies are not stored.',
+  concurrencyCap: 3, serviceName: 'Maha Context Budget Ladder', tags: ['ai', 'context', 'budget', 'provenance', 'x402'],
+  status: 'available', availability: { payableInProduction: true, blockedBy: [] }, requiresIdempotency: false, maxRequestBytes: 450_000,
+  capabilityBoundaries: ['Exactly five deterministic compilations at caller-declared budgets.', 'Extractive selection only; no claim verification, model inference, completeness guarantee, or answer-quality assessment.'],
+  retention: { fullSourceTextStored: false, verbatimExcerptsRetained: false, retainedFields: ['offer usage status and aggregate counts'], note: 'Request and response bodies are returned transiently and are not stored.' },
+  discovery: CONTEXT_BUDGET_LADDER_DISCOVERY,
+}
+
+export const EVIDENCE_RETENTION_MATRIX_OFFER: X402Offer = {
+  id: 'evidence-retention-matrix', method: 'POST', path: '/api/v1/context/evidence-matrix', amount: '50000',
+  description: 'Evaluate exact retention of 1-32 caller-labelled evidence spans at exactly five ascending token budgets. Returns five source-linked Context Packs, per-run retention metrics, an evidence frontier, stable hashes, and a deterministic receipt digest. Price basis: five $0.01 evaluations. Retention is not truth, accuracy, answer quality, legal compliance, or hallucination prevention. Bodies are not stored.',
+  concurrencyCap: 2, serviceName: 'Maha Evidence Retention Matrix', tags: ['ai', 'context', 'evidence-retention', 'budget', 'x402'],
+  status: 'available', availability: { payableInProduction: true, blockedBy: [] }, requiresIdempotency: false, maxRequestBytes: 1_050_000,
+  capabilityBoundaries: ['Exactly five deterministic exact-span retention evaluations.', 'Retention is not truth, accuracy, answer quality, legal compliance, or hallucination prevention.'],
+  retention: { fullSourceTextStored: false, verbatimExcerptsRetained: false, retainedFields: ['offer usage status and aggregate counts'], note: 'Documents, evidence spans, compiled packs, and response bodies are not stored.' },
+  discovery: EVIDENCE_RETENTION_MATRIX_DISCOVERY,
+}
+
+export const GOVERNED_CONTEXT_VERIFICATION_OFFER: X402Offer = {
+  id: 'governed-context-verification-pack', method: 'POST', path: '/api/v1/context/governed-verification', amount: '500000',
+  description: 'Produce one machine-readable context-control evidence packet from caller-supplied documents and exact evidence spans: compiled Context Pack, retention results, policy and budget observations, integrity hashes, boundaries, and deterministic receipt digest. A machine-generated preflight, not factual or compliance certification, new research, human judgment, or proof of downstream model behavior. Bodies are not stored.',
+  concurrencyCap: 2, serviceName: 'Maha Governed Context Verification Pack', tags: ['ai', 'context-control', 'evidence', 'governance', 'x402'],
+  status: 'available', availability: { payableInProduction: true, blockedBy: [] }, requiresIdempotency: false, maxRequestBytes: 1_050_000,
+  capabilityBoundaries: ['Machine-generated context-control evidence packet, not factual or compliance certification.', 'No source acquisition, new research, human judgment, model inference, or guarantee of downstream behavior.'],
+  retention: { fullSourceTextStored: false, verbatimExcerptsRetained: false, retainedFields: ['offer usage status and aggregate counts'], note: 'Documents, evidence spans, compiled packs, and response bodies are not stored.' },
+  discovery: GOVERNED_CONTEXT_VERIFICATION_DISCOVERY,
+}
+
+export const RESEARCH_INTAKE_EVIDENCE_PACK_OFFER: X402Offer = {
+  id: 'research-intake-evidence-pack',
+  method: 'POST',
+  path: '/api/v1/research/intake',
+  amount: '1000000',
+  description:
+    'Machine-generated intake packet for one question and 1-10 supplied source sections. '
+    + 'Returns one MPS triage per section, an ordered manifest, claim inventory, citation gaps, potential conflicts, unresolved questions, proposed human-research scope, and deterministic digests. '
+    + 'Fixed $1 capacity price: up to ten $0.10 section audits. Not a research brief, new research, factual certification, human judgment, or a recommendation.',
+  concurrencyCap: 1,
+  serviceName: 'Maha Research Intake',
+  tags: ['research-intake', 'provenance', 'claim-triage', 'evidence', 'research-scoping'],
+  status: 'available',
+  availability: { payableInProduction: true, blockedBy: [] },
+  requiresIdempotency: true,
+  maxRequestBytes: 65_536,
+  capabilityBoundaries: [
+    'Machine-generated intake packet, not a research brief.',
+    'Uses only 1-10 source sections supplied by the buyer; no source acquisition or new research.',
+    'Accepts only material declared public or synthetic and non-sensitive; supplied sections are transmitted to Anthropic for processing.',
+    'MPS statuses and potential conflicts are automated triage requiring human review.',
+    'Does not provide factual certification, legal advice, human judgment, or a recommendation.',
+  ],
+  retention: {
+    fullSourceTextStored: false,
+    verbatimExcerptsRetained: true,
+    retainedFields: [
+      'input and receipt hashes', 'question and optional intake metadata', 'ordered source and section identifiers',
+      'short verbatim claim excerpts', 'MPS classifications and rationales', 'citation gaps', 'potential conflict candidates',
+      'payment transaction and payer',
+    ],
+    note: 'Complete supplied source sections are transmitted to Anthropic for processing but are not stored by Maha. The result retains the question, supplied identifiers and metadata, short verbatim claim excerpts, classifications, digests, and operational metadata.',
+  },
+  discovery: RESEARCH_INTAKE_EVIDENCE_PACK_DISCOVERY,
+}
+
 export const X402_OFFERS: readonly X402Offer[] = Object.freeze([
   CONTEXT_COMPRESSION_OFFER,
+  CONTEXT_BUDGET_LADDER_OFFER,
   DEEP_CONTEXT_EVALUATION_OFFER,
+  EVIDENCE_RETENTION_MATRIX_OFFER,
   MPS_AUTONOMOUS_AUDIT_OFFER,
+  GOVERNED_CONTEXT_VERIFICATION_OFFER,
+  RESEARCH_INTAKE_EVIDENCE_PACK_OFFER,
 ])
 
 /**
