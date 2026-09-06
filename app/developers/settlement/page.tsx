@@ -45,7 +45,7 @@ export default function SettlementLedgerPage() {
   ]
 
   return (
-    <main className="mx-auto max-w-5xl px-6 py-16">
+    <main className="evidence-page mx-auto max-w-5xl px-6 py-16">
       <p className="evidence-kicker">Base Mainnet · HTTP 402 v2</p>
       <h1 className="evidence-section-title mt-3 text-3xl">Autonomous Settlement &amp; Verification Ledger</h1>
       <p className="mt-4 max-w-3xl text-[var(--text-secondary)]">
