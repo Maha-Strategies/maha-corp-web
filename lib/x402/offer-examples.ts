@@ -255,3 +255,285 @@ export const MPS_AUDIT_EXAMPLE_OUTPUT = {
   "verbatimExcerptsRetained": true,
   "retentionNote": "The complete submitted passage is not retained. Audit results retain short verbatim claim excerpts, classifications, rationales, hashes, and operational metadata."
 } as const
+
+export const RESEARCH_INTAKE_EXAMPLE_INPUT = {
+  "clientRequestId": "req_research_intake_001",
+  "question": "What evidence would be needed to decide whether a governed AI gateway pilot is sufficiently scoped?",
+  "sections": [
+    {
+      "sourceId": "platform-note",
+      "sectionId": "requirements",
+      "title": "Platform requirements",
+      "text": "Soil microbial diversity has declined sharply across intensively farmed land. A 2019 meta-analysis attributed most of the loss to tillage frequency. Studies show that cover cropping restores diversity within three seasons, though the mechanism remains an open question."
+    },
+    {
+      "sourceId": "risk-note",
+      "sectionId": "limits",
+      "title": "Risk limits",
+      "text": "The proposed gateway may reduce context volume by 40 percent. No production benchmark has established that saving. The approval owner and acceptable failure threshold remain open questions."
+    }
+  ],
+  "sourceHandling": {
+    "classification": "public_or_synthetic_non_sensitive",
+    "anthropicProcessingAuthorized": true
+  },
+  "intendedAudience": "AI platform and risk owners",
+  "intendedDecision": "Whether to commission a bounded human research engagement"
+} as const
+
+export const RESEARCH_INTAKE_EXAMPLE_OUTPUT = {
+  "packId": "intake_9b3f71ac52d84e6fa0c8d1e37b5942af",
+  "retrievalToken": "rirt_Q7xK2mN8pR4vT6yB1cD3fG5hJ9kL0nM2qS4uW6zA8eC",
+  "clientRequestId": "req_research_intake_001",
+  "inputHash": "sha256:3d28abdfd65d08041637afe6e5d203a83baf0b4e9395091ab60ac249877786d2",
+  "status": "completed",
+  "idempotentReplay": false,
+  "retrievalPath": "/api/v1/research/intake/intake_9b3f71ac52d84e6fa0c8d1e37b5942af",
+  "progress": {
+    "sectionCount": 2,
+    "sectionsCompleted": 2,
+    "sectionsFailed": 0,
+    "totalModelCalls": 2
+  },
+  "pack": {
+    "version": "0.1",
+    "offerId": "research-intake-evidence-pack",
+    "clientRequestId": "req_research_intake_001",
+    "inputHash": "sha256:3d28abdfd65d08041637afe6e5d203a83baf0b4e9395091ab60ac249877786d2",
+    "economicBasis": {
+      "priceBaseUnits": "1000000",
+      "asset": "USDC",
+      "decimals": 6,
+      "includedSectionAuditCapacity": 10,
+      "sectionAuditReferencePriceBaseUnits": "100000",
+      "auditsPerformed": 2,
+      "unusedCapacity": 8
+    },
+    "question": "What evidence would be needed to decide whether a governed AI gateway pilot is sufficiently scoped?",
+    "intakeContext": {
+      "intendedAudience": "AI platform and risk owners",
+      "intendedDecision": "Whether to commission a bounded human research engagement",
+      "deadline": null
+    },
+    "sourceHandling": {
+      "classification": "public_or_synthetic_non_sensitive",
+      "anthropicProcessingAuthorized": true
+    },
+    "orderedSourceSectionManifest": [
+      {
+        "order": 1,
+        "sourceId": "platform-note",
+        "sectionId": "requirements",
+        "title": "Platform requirements",
+        "sourceSectionHash": "sha256:6fa063a6cf8eec2a2a4219a64675b0773487df4c7263450c7429e203ee030977",
+        "characterCount": 269
+      },
+      {
+        "order": 2,
+        "sourceId": "risk-note",
+        "sectionId": "limits",
+        "title": "Risk limits",
+        "sourceSectionHash": "sha256:9138ad61c1bbfbc4dcb99a5574b5139ffab46f2e25db05b1413fa2688a84a934",
+        "characterCount": 189
+      }
+    ],
+    "manifestDigest": "sha256:99e908901c482071690f8ea0b14ae00e4a2d5d1829ed446e1869b5f2b8c61a37",
+    "sectionAudits": [
+      {
+        "sourceId": "platform-note",
+        "sectionId": "requirements",
+        "order": 1,
+        "inputHash": "sha256:6fa063a6cf8eec2a2a4219a64675b0773487df4c7263450c7429e203ee030977",
+        "claims": [
+          {
+            "excerpt": "Soil microbial diversity has declined sharply across intensively farmed land",
+            "tag": "SOURCED",
+            "rationale": "Well-documented in soil science literature a reader could cite.",
+            "action": "cite"
+          },
+          {
+            "excerpt": "A 2019 meta-analysis attributed most of the loss to tillage frequency",
+            "tag": "UNVERIFIED",
+            "rationale": "Names a specific study without an identifiable citation.",
+            "action": "verify"
+          },
+          {
+            "excerpt": "Studies show that cover cropping restores diversity within three seasons",
+            "tag": "UNVERIFIED",
+            "rationale": "Studies show without a named study is always unverified.",
+            "action": "cite"
+          },
+          {
+            "excerpt": "though the mechanism remains an open question",
+            "tag": "BOUNDARY",
+            "rationale": "States a limit of current knowledge.",
+            "action": "none"
+          }
+        ]
+      },
+      {
+        "sourceId": "risk-note",
+        "sectionId": "limits",
+        "order": 2,
+        "inputHash": "sha256:9138ad61c1bbfbc4dcb99a5574b5139ffab46f2e25db05b1413fa2688a84a934",
+        "claims": [
+          {
+            "excerpt": "The proposed gateway may reduce context volume by 40 percent",
+            "tag": "UNVERIFIED",
+            "rationale": "The quantified projection has no supplied benchmark.",
+            "action": "verify"
+          },
+          {
+            "excerpt": "No production benchmark has established that saving",
+            "tag": "BOUNDARY",
+            "rationale": "Explicitly states the limit of the supplied evidence.",
+            "action": "none"
+          },
+          {
+            "excerpt": "The approval owner and acceptable failure threshold remain open questions",
+            "tag": "BOUNDARY",
+            "rationale": "Identifies unresolved governance inputs.",
+            "action": "none"
+          }
+        ]
+      }
+    ],
+    "consolidatedClaimInventory": [
+      {
+        "claimId": "claim_9d761576c2d0c70a",
+        "sourceId": "platform-note",
+        "sectionId": "requirements",
+        "sectionOrder": 1,
+        "excerpt": "Soil microbial diversity has declined sharply across intensively farmed land",
+        "tag": "SOURCED",
+        "rationale": "Well-documented in soil science literature a reader could cite.",
+        "action": "cite"
+      },
+      {
+        "claimId": "claim_5a58bbf2a467e7b7",
+        "sourceId": "platform-note",
+        "sectionId": "requirements",
+        "sectionOrder": 1,
+        "excerpt": "A 2019 meta-analysis attributed most of the loss to tillage frequency",
+        "tag": "UNVERIFIED",
+        "rationale": "Names a specific study without an identifiable citation.",
+        "action": "verify"
+      },
+      {
+        "claimId": "claim_14eacae100f088a1",
+        "sourceId": "platform-note",
+        "sectionId": "requirements",
+        "sectionOrder": 1,
+        "excerpt": "Studies show that cover cropping restores diversity within three seasons",
+        "tag": "UNVERIFIED",
+        "rationale": "Studies show without a named study is always unverified.",
+        "action": "cite"
+      },
+      {
+        "claimId": "claim_27c1d83c5b97656a",
+        "sourceId": "platform-note",
+        "sectionId": "requirements",
+        "sectionOrder": 1,
+        "excerpt": "though the mechanism remains an open question",
+        "tag": "BOUNDARY",
+        "rationale": "States a limit of current knowledge.",
+        "action": "none"
+      },
+      {
+        "claimId": "claim_04b1956448b607b6",
+        "sourceId": "risk-note",
+        "sectionId": "limits",
+        "sectionOrder": 2,
+        "excerpt": "The proposed gateway may reduce context volume by 40 percent",
+        "tag": "UNVERIFIED",
+        "rationale": "The quantified projection has no supplied benchmark.",
+        "action": "verify"
+      },
+      {
+        "claimId": "claim_bfd7470340c6e067",
+        "sourceId": "risk-note",
+        "sectionId": "limits",
+        "sectionOrder": 2,
+        "excerpt": "No production benchmark has established that saving",
+        "tag": "BOUNDARY",
+        "rationale": "Explicitly states the limit of the supplied evidence.",
+        "action": "none"
+      },
+      {
+        "claimId": "claim_c12a78dc6344b1e8",
+        "sourceId": "risk-note",
+        "sectionId": "limits",
+        "sectionOrder": 2,
+        "excerpt": "The approval owner and acceptable failure threshold remain open questions",
+        "tag": "BOUNDARY",
+        "rationale": "Identifies unresolved governance inputs.",
+        "action": "none"
+      }
+    ],
+    "citationGaps": [
+      {
+        "claimId": "claim_9d761576c2d0c70a",
+        "sourceId": "platform-note",
+        "sectionId": "requirements",
+        "tag": "SOURCED",
+        "action": "cite"
+      },
+      {
+        "claimId": "claim_5a58bbf2a467e7b7",
+        "sourceId": "platform-note",
+        "sectionId": "requirements",
+        "tag": "UNVERIFIED",
+        "action": "verify"
+      },
+      {
+        "claimId": "claim_14eacae100f088a1",
+        "sourceId": "platform-note",
+        "sectionId": "requirements",
+        "tag": "UNVERIFIED",
+        "action": "cite"
+      },
+      {
+        "claimId": "claim_04b1956448b607b6",
+        "sourceId": "risk-note",
+        "sectionId": "limits",
+        "tag": "UNVERIFIED",
+        "action": "verify"
+      }
+    ],
+    "potentialConflicts": [],
+    "boundaries": [
+      "Machine-generated research intake packet, not a research brief.",
+      "Uses only supplied source sections; no new research or source acquisition is performed.",
+      "Input is declared public or synthetic and non-sensitive, and supplied sections are transmitted to Anthropic for model processing.",
+      "MPS statuses and potential conflicts are automated triage requiring human review.",
+      "Does not provide factual certification, human judgment, legal advice, or a recommendation."
+    ],
+    "unresolvedQuestions": [
+      "When is the eventual research output needed?",
+      "Which primary or authoritative sources resolve the 4 citation or verification gaps?"
+    ],
+    "proposedHumanResearchScope": {
+      "objective": "Investigate the supplied question: What evidence would be needed to decide whether a governed AI gateway pilot is sufficiently scoped?",
+      "analystTasks": [
+        "Confirm scope, decision owner, audience, deadline, and acceptance criteria.",
+        "Acquire and assess authoritative sources needed to close citation gaps.",
+        "Resolve potential conflicts and document remaining uncertainty.",
+        "Produce a separately commissioned human research deliverable if authorized."
+      ],
+      "suppliedSectionCount": 2,
+      "claimCount": 7,
+      "excluded": [
+        "new research",
+        "source acquisition",
+        "factual certification",
+        "recommendation"
+      ]
+    },
+    "retentionBoundaries": {
+      "fullSourceSectionsStored": false,
+      "verbatimClaimExcerptsRetained": true,
+      "suppliedMetadataRetained": true
+    },
+    "receiptDigest": "sha256:1c19c3fff1f0feadd4a3c0ff762626f0aeefa73e2a107b673e094b5b6a29faac"
+  }
+} as const

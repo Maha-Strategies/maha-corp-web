@@ -25,6 +25,9 @@ on:
         type: string
 
 permissions:
+  # Read-only by design. Refreshed snapshots are uploaded for review, but a
+  # human-approved commit is required before a change can trigger a Vercel
+  # production build.
   contents: read
   issues: write
 
@@ -54,12 +57,23 @@ jobs:
           node --experimental-strip-types scripts/watch-x402-settlements.ts \
             --days "${{ inputs.days || '30' }}" 2>&1 | tee "$RUNNER_TEMP/settlement-watch.log"
 
+      # The public ledger at /developers/settlement renders this snapshot. It is
+      # refreshed here rather than on a Vercel cron because the artifact is a
+      # committed file, and a serverless function cannot commit one.
+      - name: Refresh the public settlement ledger
+        id: ledger
+        run: |
+          node --experimental-strip-types scripts/generate-x402-settlement-ledger.ts \
+            --days "${{ inputs.days || '60' }}"
+
       - name: Upload settlement evidence
         if: always()
         uses: actions/upload-artifact@v7
         with:
           name: x402-settlement-watch-${{ github.run_id }}
-          path: ${{ env.X402_WATCH_OUTPUT_PATH }}
+          path: |
+            ${{ env.X402_WATCH_OUTPUT_PATH }}
+            content/x402/settlement-ledger.json
           if-no-files-found: warn
           retention-days: 90
 

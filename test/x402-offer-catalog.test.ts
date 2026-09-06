@@ -42,6 +42,14 @@ test('each offer is published at exactly its intended price', () => {
   assert.equal(CONTEXT_COMPRESSION_OFFER.amount, '1000')
   assert.equal(DEEP_CONTEXT_EVALUATION_OFFER.amount, '10000')
   assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.amount, '100000')
+  const ladder = X402_OFFERS.find((offer) => offer.id === 'context-budget-ladder')
+  const matrix = X402_OFFERS.find((offer) => offer.id === 'evidence-retention-matrix')
+  const governed = X402_OFFERS.find((offer) => offer.id === 'governed-context-verification-pack')
+  const intake = X402_OFFERS.find((offer) => offer.id === 'research-intake-evidence-pack')
+  assert.equal(ladder?.amount, '5000')
+  assert.equal(matrix?.amount, '50000')
+  assert.equal(governed?.amount, '500000')
+  assert.equal(intake?.amount, '1000000')
 
   // And the runtime charges those amounts, not merely publishes them.
   assert.equal(priceFor('POST', '/api/v1/compress', config())?.amount, '1000')
@@ -96,8 +104,11 @@ test('matching is by exact method and exact path', () => {
 })
 
 test('only routes that actually release their slot can be priced', () => {
-  for (const offer of X402_OFFERS) {
+  for (const offer of X402_OFFERS.filter((candidate) => candidate.status === 'available')) {
     assert.equal(releasesSlot(offer.method, offer.path), true, `${offer.id} must be in the slot-release allowlist`)
+  }
+  for (const offer of X402_OFFERS.filter((candidate) => candidate.status !== 'available')) {
+    assert.equal(releasesSlot(offer.method, offer.path), false, `${offer.id} is not implemented and must not be in the slot-release allowlist`)
   }
   // The allowlist is exact, so a listed route does not vouch for its children.
   assert.equal(releasesSlot('POST', '/api/v1/mps/audit/audit_abc'), false)
@@ -135,6 +146,12 @@ test('the paid offers state what they are not', () => {
     /not accuracy, answer quality, verification, or hallucination prevention/i,
   )
   assert.match(MPS_AUTONOMOUS_AUDIT_OFFER.description, /not factual certification, legal advice, or human verification/i)
+
+  const intake = X402_OFFERS.find((offer) => offer.id === 'research-intake-evidence-pack')
+  assert.ok(intake)
+  assert.match(intake.capabilityBoundaries.join(' '), /public or synthetic and non-sensitive/i)
+  assert.match(intake.capabilityBoundaries.join(' '), /transmitted to Anthropic/i)
+  assert.match(intake.retention.note, /transmitted to Anthropic/i)
 
   for (const forbidden of [/\bfact-check/i, /\bguarantees? accuracy/i, /\bprevents? hallucination/i]) {
     for (const offer of X402_OFFERS) {

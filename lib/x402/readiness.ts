@@ -3,6 +3,7 @@ import { x402Config, x402Enabled, type X402Config } from './config.ts'
 import { X402_OFFERS, offerFor, type X402Offer } from './offers.ts'
 import { MAX_RESOURCE_DESCRIPTION_BYTES, MAX_RESOURCE_DESCRIPTION_CHARS } from './discovery.ts'
 import { createHash } from 'node:crypto'
+import { CONSERVATIVE_RESEARCH_INTAKE_ECONOMICS, RESEARCH_INTAKE_MINIMUM_CONSERVATIVE_MARGIN_PERCENT } from './research-intake-unit-economics.ts'
 
 /**
  * Identifies the bound database without disclosing it.
@@ -84,6 +85,10 @@ const REQUIRED_RELATIONS: Record<string, { tables: string[]; functions: string[]
   'mps-autonomous-audit': {
     tables: ['x402_payments', 'x402_offer_usage_daily', 'x402_mps_audits', 'x402_offer_admissions'],
     functions: ['record_x402_offer_usage', 'reserve_x402_admission', 'settle_x402_admission', 'release_x402_admission', 'resume_x402_mps_audit'],
+  },
+  'research-intake-evidence-pack': {
+    tables: ['x402_payments', 'x402_offer_usage_daily', 'x402_offer_admissions', 'x402_research_intake_packs', 'x402_research_intake_section_audits'],
+    functions: ['record_x402_offer_usage', 'reserve_x402_admission', 'settle_x402_admission', 'release_x402_admission', 'create_x402_research_intake_job', 'claim_x402_research_intake_sections'],
   },
 }
 
@@ -337,6 +342,18 @@ export async function getX402Readiness(options: {
             : 'MPS Autonomous Audit is not enabled here, and could not complete a paid job if it were.',
           detail: runtimeProblems.join('; '),
         })
+  }
+
+  {
+    const enabled = enabledIds.has('research-intake-evidence-pack')
+    const economics = CONSERVATIVE_RESEARCH_INTAKE_ECONOMICS()
+    const runtimeProblems: string[] = []
+    if ((environment.X402_RETRIEVAL_TOKEN_SECRET?.trim().length ?? 0) < 32) runtimeProblems.push('the retrieval-token secret is missing or shorter than 32 characters')
+    if (!environment.ANTHROPIC_API_KEY?.trim()) runtimeProblems.push('the model provider credential is missing')
+    if (!economics.promotable) runtimeProblems.push(`conservative contribution margin is below ${RESEARCH_INTAKE_MINIMUM_CONSERVATIVE_MARGIN_PERCENT} percent`)
+    checks.push(runtimeProblems.length === 0
+      ? { id: 'x402.offer.research-intake-evidence-pack.runtime', state: 'ok', summary: `Research Intake runtime is configured and its conservative margin is ${economics.marginPercent.toFixed(1)} percent.` }
+      : { id: 'x402.offer.research-intake-evidence-pack.runtime', state: enabled ? 'fail' : 'info', summary: enabled ? 'Research Intake could accept payment but cannot safely complete the paid job.' : 'Research Intake is not enabled and is not ready to accept payment.', detail: runtimeProblems.join('; ') })
   }
 
   // --- Discovery availability -----------------------------------------------

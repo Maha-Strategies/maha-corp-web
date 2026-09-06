@@ -7,7 +7,7 @@ Read-only discovery API: https://www.mahastrategies.com/api/agentic-commerce/off
 OpenAPI: https://www.mahastrategies.com/api/docs/openapi
 
 Machine-readable Maha offer selection guide: https://www.mahastrategies.com/.well-known/maha/offer-selection.json
-Deterministic rules for choosing Context Compression, Deep Context Evaluation, or neither, with published non-fit conditions and worked examples. Advisory: a live `PAYMENT-REQUIRED` challenge remains authoritative for terms.
+Deterministic rules for choosing among the original context products. The complete seven-offer catalog and per-offer schemas are available from the manifest and discovery API. Advisory: a live `PAYMENT-REQUIRED` challenge remains authoritative for terms.
 
 ## Context Compression via x402
 
@@ -61,17 +61,40 @@ Retention, stated precisely: **the complete submitted passage is not retained.**
 
 Recovery. The response carries a one-time high-entropy `retrievalToken`. A paid job is retrievable and resumable at the retrieval path without a second payment, up to three model attempts. Because no source text is stored, a resume must resubmit the original passage; it is accepted only if it hashes to the passage the job was paid for. Keep the token: it is issued once and the `auditId` alone is not sufficient to read a result.
 
+## Additional bounded x402 offers
+
+- `context-budget-ladder` — `POST /api/v1/context/budget-ladder`, 5,000 USDC base units (`0.005 USDC`). Runs exactly five deterministic context compilations at five caller-supplied ascending budgets.
+- `evidence-retention-matrix` — `POST /api/v1/context/evidence-matrix`, 50,000 USDC base units (`0.05 USDC`). Runs exactly five exact-span retention evaluations and reports the retention frontier.
+- `governed-context-verification-pack` — `POST /api/v1/context/governed-verification`, 500,000 USDC base units (`0.50 USDC`). Returns one context-control evidence packet with policy, budget, integrity, and receipt fields.
+- `research-intake-evidence-pack` — `POST /api/v1/research/intake`, 1,000,000 USDC base units (`1.00 USDC`). Audits up to ten supplied public or synthetic, non-sensitive sections and produces a machine-generated intake packet. Submitted sections are transmitted to Anthropic for processing. This is not a research brief, certification, recommendation, or human analysis. Completed sections are checkpointed; recovery retries only incomplete sections and never reruns the entire pack because one section failed.
+- `book-section-the-imagined-life` — `POST /api/v1/books/the-imagined-life/section`, 5,000 USDC base units (`0.005 USDC`). Returns one exact published section, edition metadata, a content digest, and a deterministic receipt for an MCP or HTTP client.
+- `book-section-the-volcanic-engine` — `POST /api/v1/books/the-volcanic-engine/section`, 5,000 USDC base units (`0.005 USDC`). Returns one exact published section, edition metadata, a content digest, and a deterministic receipt for an MCP or HTTP client.
+- `book-edition-the-imagined-life` — `POST /api/v1/books/the-imagined-life/edition`, 2,990,000 USDC base units (`2.99 USDC`). Returns the complete normalized Markdown edition, ordered section manifest, per-section and whole-edition digests, and a deterministic receipt.
+- `book-edition-the-volcanic-engine` — `POST /api/v1/books/the-volcanic-engine/edition`, 2,990,000 USDC base units (`2.99 USDC`). Returns the complete normalized Markdown edition, ordered section manifest, per-section and whole-edition digests, and a deterministic receipt.
+
+The book editions remain free on the public web. The section offers sell structured, section-addressable machine delivery. The complete-edition offers add one complete delivery plus a non-exclusive personal or internal machine-use licence. No book offer grants redistribution, resale, model-training rights, exclusivity, or copyright ownership. A later request is a separate purchase.
+
+Each offer publishes its exact input/output contract, retention statement, and capability boundary at `https://www.mahastrategies.com/api/discovery/x402-offers/{offerId}`.
+
 ## Which routes accept autonomous payment
 
-Three offers are published, and all three accept autonomous payment today, at these exact method-and-path pairs and no others:
+Eleven offers are published, and all eleven accept autonomous payment today, at these exact method-and-path pairs and no others:
 
 | Offer | Method and path | Price | Payable now |
 | --- | --- | --- | --- |
 | `context-compression` | `POST /api/v1/compress` | 1,000 USDC base units | yes |
+| `context-budget-ladder` | `POST /api/v1/context/budget-ladder` | 5,000 USDC base units | yes |
 | `deep-context-evaluation` | `POST /api/v1/compress/evaluate` | 10,000 USDC base units | yes |
+| `evidence-retention-matrix` | `POST /api/v1/context/evidence-matrix` | 50,000 USDC base units | yes |
 | `mps-autonomous-audit` | `POST /api/v1/mps/audit` | 100,000 USDC base units | yes |
+| `governed-context-verification-pack` | `POST /api/v1/context/governed-verification` | 500,000 USDC base units | yes |
+| `research-intake-evidence-pack` | `POST /api/v1/research/intake` | 1,000,000 USDC base units | yes |
+| `book-section-the-imagined-life` | `POST /api/v1/books/the-imagined-life/section` | 5,000 USDC base units | yes |
+| `book-section-the-volcanic-engine` | `POST /api/v1/books/the-volcanic-engine/section` | 5,000 USDC base units | yes |
+| `book-edition-the-imagined-life` | `POST /api/v1/books/the-imagined-life/edition` | 2,990,000 USDC base units | yes |
+| `book-edition-the-volcanic-engine` | `POST /api/v1/books/the-volcanic-engine/edition` | 2,990,000 USDC base units | yes |
 
-Choosing between the two payable offers is a documented decision rather than an inference from two descriptions: see the [machine-readable Maha offer selection guide](https://www.mahastrategies.com/.well-known/maha/offer-selection.json). Both offers compile a context pack; only Deep Context Evaluation measures retention of caller-labelled spans, and neither verifies facts.
+Choosing between the original context products is documented in the [machine-readable Maha offer selection guide](https://www.mahastrategies.com/.well-known/maha/offer-selection.json). The additional bundles publish their own exact contracts and economic basis; none verifies facts.
 
 A published price is not an offer to sell. Only a live `PAYMENT-REQUIRED` challenge proves an offer can be bought; the `status` and `payableNow` fields in the manifests are authoritative for everything else. Complete machine-readable declarations, including the uncompacted schemas, are at `https://www.mahastrategies.com/api/discovery/x402-offers/{offerId}`.
 

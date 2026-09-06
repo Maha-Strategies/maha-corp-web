@@ -1,5 +1,6 @@
 import { auditInputHash, validateAuditPassage } from '../mps-audit-engine.ts'
 import { parseMpsAuditJobRequest } from '../mps-audit-jobs.ts'
+import { parseResearchIntakeInput, researchIntakeInputHash } from '../research-intake-evidence-pack.ts'
 import type { AdmissionClaim } from './admission.ts'
 import type { X402Offer } from './offers.ts'
 
@@ -22,7 +23,7 @@ export async function validateAdmissionBody(
   offer: X402Offer,
   claim: AdmissionClaim,
 ): Promise<AdmissionBodyDecision> {
-  if (offer.id !== 'mps-autonomous-audit') return { ok: true }
+  if (!['mps-autonomous-audit', 'research-intake-evidence-pack'].includes(offer.id)) return { ok: true }
 
   if (!request.headers.get('content-type')?.toLowerCase().startsWith('application/json')) {
     return { ok: false, status: 415, code: 'unsupported_media_type', message: 'Content-Type must be application/json. No payment was taken.' }
@@ -40,9 +41,13 @@ export async function validateAdmissionBody(
   }
 
   try {
-    const body = parseMpsAuditJobRequest(JSON.parse(raw))
-    const passage = validateAuditPassage(body.text)
-    const actualHash = auditInputHash(passage)
+    const parsed = JSON.parse(raw)
+    const body = offer.id === 'mps-autonomous-audit'
+      ? parseMpsAuditJobRequest(parsed)
+      : parseResearchIntakeInput(parsed)
+    const actualHash = offer.id === 'mps-autonomous-audit'
+      ? auditInputHash(validateAuditPassage(parseMpsAuditJobRequest(parsed).text))
+      : researchIntakeInputHash(parseResearchIntakeInput(parsed))
 
     if (body.clientRequestId !== claim.idempotencyKey) {
       return { ok: false, status: 409, code: 'idempotency_key_mismatch', message: 'x-maha-idempotency-key must equal clientRequestId. No payment was taken.' }
@@ -52,7 +57,7 @@ export async function validateAdmissionBody(
         ok: false,
         status: 409,
         code: 'input_hash_mismatch',
-        message: 'x-maha-input-hash must be sha256 of the text field alone, UTF-8, exactly as sent. No payment was taken.',
+        message: `x-maha-input-hash does not match the published ${offer.id} preimage. No payment was taken.`,
       }
     }
   } catch (error) {

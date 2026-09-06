@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "configurationAsOf": "2026-09-05",
+  "configurationAsOf": "2026-09-06",
   "provider": {
     "name": "Maha Strategies LLC",
     "url": "https://www.mahastrategies.com"
@@ -58,6 +58,45 @@
       ]
     },
     {
+      "id": "context-budget-ladder",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/context/budget-ladder",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "5000",
+        "displayAmount": "0.005000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/context-budget-ladder#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/context-budget-ladder#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:1f43bbb7299d8224336110629470a6558bf3e62c63bbb9f1724720d0197fd923",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 450000,
+        "concurrencyCap": 3,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "Request and response bodies are returned transiently and are not stored."
+      },
+      "capabilityBoundaries": [
+        "Exactly five deterministic compilations at caller-declared budgets.",
+        "Extractive selection only; no claim verification, model inference, completeness guarantee, or answer-quality assessment."
+      ]
+    },
+    {
       "id": "deep-context-evaluation",
       "status": "active",
       "canonicalResource": "https://www.mahastrategies.com/api/v1/compress/evaluate",
@@ -99,6 +138,45 @@
       ]
     },
     {
+      "id": "evidence-retention-matrix",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/context/evidence-matrix",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "50000",
+        "displayAmount": "0.050000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/evidence-retention-matrix#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/evidence-retention-matrix#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:f3f7c1b16035b175c1108ed41d1816fa0e9090390ea64be4b1443b253cd1764e",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 1050000,
+        "concurrencyCap": 2,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "Documents, evidence spans, compiled packs, and response bodies are not stored."
+      },
+      "capabilityBoundaries": [
+        "Exactly five deterministic exact-span retention evaluations.",
+        "Retention is not truth, accuracy, answer quality, legal compliance, or hallucination prevention."
+      ]
+    },
+    {
       "id": "mps-autonomous-audit",
       "status": "active",
       "canonicalResource": "https://www.mahastrategies.com/api/v1/mps/audit",
@@ -137,6 +215,251 @@
         "Not factual certification: a VERIFIED status is a model judgement, not a confirmation.",
         "Not legal advice.",
         "Not human verification, and not a substitute for editorial review before publication."
+      ]
+    },
+    {
+      "id": "governed-context-verification-pack",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/context/governed-verification",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "500000",
+        "displayAmount": "0.500000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/governed-context-verification-pack#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/governed-context-verification-pack#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:80082ba44493447625adac5bd0618a809172220aba273b9c4a29af2d339e0af3",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 1050000,
+        "concurrencyCap": 2,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "Documents, evidence spans, compiled packs, and response bodies are not stored."
+      },
+      "capabilityBoundaries": [
+        "Machine-generated context-control evidence packet, not factual or compliance certification.",
+        "No source acquisition, new research, human judgment, model inference, or guarantee of downstream behavior."
+      ]
+    },
+    {
+      "id": "research-intake-evidence-pack",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/research/intake",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "1000000",
+        "displayAmount": "1.000000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/research-intake-evidence-pack#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/research-intake-evidence-pack#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:6226d8d55117c3dad49d1b049801a0f3e84b03b986da726d742de3c69de8c4ab",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 65536,
+        "concurrencyCap": 1,
+        "requiresIdempotency": true
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": true,
+        "note": "Complete supplied source sections are transmitted to Anthropic for processing but are not stored by Maha. The result retains the question, supplied identifiers and metadata, short verbatim claim excerpts, classifications, digests, and operational metadata."
+      },
+      "capabilityBoundaries": [
+        "Machine-generated intake packet, not a research brief.",
+        "Uses only 1-10 source sections supplied by the buyer; no source acquisition or new research.",
+        "Accepts only material declared public or synthetic and non-sensitive; supplied sections are transmitted to Anthropic for processing.",
+        "MPS statuses and potential conflicts are automated triage requiring human review.",
+        "Does not provide factual certification, legal advice, human judgment, or a recommendation."
+      ]
+    },
+    {
+      "id": "book-section-the-imagined-life",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/books/the-imagined-life/section",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "5000",
+        "displayAmount": "0.005000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/book-section-the-imagined-life#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/book-section-the-imagined-life#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:c67423f79cd7b18c95b25859d385c2804b28aa831800b2446d7e95102dd353e0",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 1024,
+        "concurrencyCap": 8,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "The request and delivered section are returned transiently and are not stored by this endpoint."
+      },
+      "capabilityBoundaries": [
+        "Returns one already-published section in deterministic machine-readable form with integrity metadata.",
+        "The public web edition remains free; payment does not create exclusive access or transfer copyright or license rights.",
+        "No editorial analysis, factual certification, source verification, recommendation, or model inference is included."
+      ]
+    },
+    {
+      "id": "book-section-the-volcanic-engine",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/books/the-volcanic-engine/section",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "5000",
+        "displayAmount": "0.005000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/book-section-the-volcanic-engine#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/book-section-the-volcanic-engine#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:ba58f0b7fa6a58638be5f5805a45428b7e7f4f686d4bb04a2a5ffc32fbe7357c",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 1024,
+        "concurrencyCap": 8,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "The request and delivered section are returned transiently and are not stored by this endpoint."
+      },
+      "capabilityBoundaries": [
+        "Returns one already-published section in deterministic machine-readable form with integrity metadata.",
+        "The public web edition remains free; payment does not create exclusive access or transfer copyright or license rights.",
+        "No editorial analysis, factual certification, source verification, recommendation, or model inference is included."
+      ]
+    },
+    {
+      "id": "book-edition-the-imagined-life",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/books/the-imagined-life/edition",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "2990000",
+        "displayAmount": "2.990000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/book-edition-the-imagined-life#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/book-edition-the-imagined-life#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:6364d925b95f809052514f86c4c1919888c3f8c37c354b2ece20e60abf390a9c",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 1024,
+        "concurrencyCap": 4,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "The request and complete delivered edition are returned transiently and are not stored by this endpoint."
+      },
+      "capabilityBoundaries": [
+        "Returns the complete published edition in deterministic machine-readable form with an ordered manifest and integrity metadata.",
+        "The public web edition remains free; purchase grants non-exclusive personal or internal machine use only.",
+        "Does not grant redistribution, resale, republication, model-training rights, or copyright ownership.",
+        "No editorial analysis, factual certification, source verification, recommendation, or model inference is included.",
+        "The complete edition is delivered in the paid response; a later request is a separate purchase."
+      ]
+    },
+    {
+      "id": "book-edition-the-volcanic-engine",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/books/the-volcanic-engine/edition",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "2990000",
+        "displayAmount": "2.990000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/book-edition-the-volcanic-engine#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/book-edition-the-volcanic-engine#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:fa93b941facdbbc9e70b6a423a831826c8e6ac6bf22b5dca7c70108d909c05ff",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 1024,
+        "concurrencyCap": 4,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "The request and complete delivered edition are returned transiently and are not stored by this endpoint."
+      },
+      "capabilityBoundaries": [
+        "Returns the complete published edition in deterministic machine-readable form with an ordered manifest and integrity metadata.",
+        "The public web edition remains free; purchase grants non-exclusive personal or internal machine use only.",
+        "Does not grant redistribution, resale, republication, model-training rights, or copyright ownership.",
+        "No editorial analysis, factual certification, source verification, recommendation, or model inference is included.",
+        "The complete edition is delivered in the paid response; a later request is a separate purchase."
       ]
     }
   ],

@@ -34,12 +34,17 @@ on:
           - dry-run
           - baseline
           - apply
+          - single-apply
       reason:
         description: Change ticket or reason (minimum 12 characters)
         required: true
         type: string
       confirmation:
-        description: For baseline, type RECORD PRODUCTION BASELINE; for apply, type APPLY PRODUCTION MIGRATIONS
+        description: For baseline, type RECORD PRODUCTION BASELINE; for apply, type APPLY PRODUCTION MIGRATIONS; for single-apply, type APPLY SINGLE PRODUCTION MIGRATION
+        required: false
+        type: string
+      target_migration:
+        description: Exact 14-digit migration version; required only for single-apply
         required: false
         type: string
       check_schema_drift:
@@ -122,6 +127,8 @@ jobs:
           test "${#REASON}" -ge 12
           if [ "$MODE" = 'apply' ]; then
             test "$CONFIRMATION" = 'APPLY PRODUCTION MIGRATIONS'
+          elif [ "$MODE" = 'single-apply' ]; then
+            test "$CONFIRMATION" = 'APPLY SINGLE PRODUCTION MIGRATION'
           elif [ "$MODE" = 'baseline' ]; then
             test "$CONFIRMATION" = 'RECORD PRODUCTION BASELINE'
           fi
@@ -166,6 +173,44 @@ jobs:
       - name: Record migration history
         run: supabase migration list --linked 2>&1 | tee "$EVIDENCE/migration-list-before.txt"
 
+      # Production can contain intentionally unapplied historical fixtures or
+      # canaries whose versions precede the current head. A bounded product
+      # migration must not turn `--include-all` into authority to execute that
+      # backlog. In single-apply mode, retain every migration already recorded
+      # remotely, retain the one reviewed target, and temporarily remove every
+      # other locally-unapplied file from the CLI's view.
+      - name: Isolate the reviewed migration
+        if: ${{ inputs.mode == 'single-apply' }}
+        env:
+          TARGET_MIGRATION: ${{ inputs.target_migration }}
+        run: |
+          set -euo pipefail
+          [[ "$TARGET_MIGRATION" =~ ^[0-9]{14}$ ]]
+          target_files=(supabase/migrations/${TARGET_MIGRATION}_*.sql)
+          test "${#target_files[@]}" -eq 1
+          test -f "${target_files[0]}"
+
+          mkdir -p "$EVIDENCE/withheld-migrations"
+          awk -F'|' '
+            function trim(value) { gsub(/^[[:space:]`]+|[[:space:]`]+$/, "", value); return value }
+            {
+              local_version = trim($1)
+              remote_version = trim($2)
+              if (local_version ~ /^[0-9]{14}$/ && remote_version == "") print local_version
+            }
+          ' "$EVIDENCE/migration-list-before.txt" > "$EVIDENCE/unapplied-versions.txt"
+
+          grep -qx "$TARGET_MIGRATION" "$EVIDENCE/unapplied-versions.txt"
+          while IFS= read -r version; do
+            if [ "$version" = "$TARGET_MIGRATION" ]; then continue; fi
+            files=(supabase/migrations/${version}_*.sql)
+            test "${#files[@]}" -eq 1
+            test -f "${files[0]}"
+            mv "${files[0]}" "$EVIDENCE/withheld-migrations/"
+          done < "$EVIDENCE/unapplied-versions.txt"
+
+          printf '%s\n' "$TARGET_MIGRATION" > "$EVIDENCE/authorized-single-migration.txt"
+
       # Schema only — never data. A data dump would place customer records and
       # commercial history into a workflow artifact.
       - name: Capture pre-apply schema snapshot
@@ -209,7 +254,7 @@ jobs:
       # the case the gate was built for: someone changed Production by hand.
       - name: Record schema drift before applying
         id: pre_apply_drift
-        if: ${{ inputs.check_schema_drift }}
+        if: ${{ inputs.check_schema_drift && inputs.mode != 'single-apply' }}
         run: |
           set -euo pipefail
           supabase db diff --linked --schema public > "$EVIDENCE/drift-before.sql"
@@ -235,12 +280,28 @@ jobs:
 
       - name: Apply pending migrations
         id: apply
-        if: ${{ inputs.mode == 'apply' }}
+        if: ${{ inputs.mode == 'apply' || inputs.mode == 'single-apply' }}
         run: supabase db push --linked --yes 2>&1 | tee "$EVIDENCE/applied.txt"
 
       - name: Record migration history after apply
-        if: ${{ inputs.mode == 'apply' }}
+        if: ${{ inputs.mode == 'apply' || inputs.mode == 'single-apply' }}
         run: supabase migration list --linked 2>&1 | tee "$EVIDENCE/migration-list-after.txt"
+
+      - name: Verify the single migration was recorded
+        if: ${{ inputs.mode == 'single-apply' }}
+        env:
+          TARGET_MIGRATION: ${{ inputs.target_migration }}
+        run: |
+          set -euo pipefail
+          awk -F'|' -v target="$TARGET_MIGRATION" '
+            function trim(value) { gsub(/^[[:space:]`]+|[[:space:]`]+$/, "", value); return value }
+            {
+              local_version = trim($1)
+              remote_version = trim($2)
+              if (local_version == target && remote_version == target) found = 1
+            }
+            END { exit(found ? 0 : 1) }
+          ' "$EVIDENCE/migration-list-after.txt"
 
       # The stop condition the pre-apply gate used to provide, moved to where it
       # can actually be satisfied. This is the stronger property: it does not
@@ -323,15 +384,15 @@ jobs:
       # against them. This is the same readiness check the release-health and
       # rollback workflows use: homepage, OpenAPI, billing, observability.
       - name: Install pinned Vercel CLI
-        if: ${{ inputs.mode == 'apply' }}
+        if: ${{ inputs.mode == 'apply' || inputs.mode == 'single-apply' }}
         run: npm install --global vercel@58.4.0
 
       - name: Resolve canonical Production deployment
-        if: ${{ inputs.mode == 'apply' }}
+        if: ${{ inputs.mode == 'apply' || inputs.mode == 'single-apply' }}
         run: vercel inspect "$PRODUCTION_BASE_URL" --json --token "$VERCEL_TOKEN" --scope "$VERCEL_TEAM_ID" > "$VERCEL_DEPLOYMENT_JSON_PATH"
 
       - name: Verify the application against the new schema
-        if: ${{ inputs.mode == 'apply' }}
+        if: ${{ inputs.mode == 'apply' || inputs.mode == 'single-apply' }}
         run: node --experimental-strip-types scripts/verify-production-release.ts | tee "$EVIDENCE/post-apply-health.txt"
 
       # Only meaningful once the push step actually started. A failure before

@@ -75,7 +75,17 @@ const lower = (value: string) => value.trim().toLowerCase()
 export function buildSettlementWatch(input: {
   settlements: readonly Settlement[]
   operatorWallets: readonly string[]
-  expectedAmountBaseUnits: bigint
+  /**
+   * Every price the catalog publishes, not one of them.
+   *
+   * This was a single value, taken from the canary recipe's buyer policy —
+   * "buys the $0.001 offer and refuses anything dearer". That is the right
+   * constant for deciding what our own canary may spend and the wrong one for
+   * deciding what a customer bought. The catalog publishes three prices, so
+   * every settlement for the 0.01 and 0.1 offers was filed as an unexpected
+   * amount and not counted as a sale.
+   */
+  expectedAmountsBaseUnits: readonly bigint[]
   fromBlock: bigint
   toBlock: bigint
   /** External payers already reported, so a repeat is news only once. */
@@ -83,7 +93,8 @@ export function buildSettlementWatch(input: {
 }): WatchReport {
   const operators = new Set(input.operatorWallets.map(lower))
   const reported = new Set((input.alreadyReportedPayers ?? []).map(lower))
-  const isExpectedPrice = (settlement: Settlement) => settlement.amountBaseUnits === input.expectedAmountBaseUnits
+  const publishedPrices = new Set(input.expectedAmountsBaseUnits)
+  const isExpectedPrice = (settlement: Settlement) => publishedPrices.has(settlement.amountBaseUnits)
 
   const grouped = new Map<string, Settlement[]>()
   for (const settlement of input.settlements) {
@@ -136,7 +147,7 @@ export function buildSettlementWatch(input: {
   // amount is a bug in our own bounded spend, which is worth knowing too.
   for (const [payer, settlements] of grouped) {
     for (const settlement of settlements) {
-      if (settlement.amountBaseUnits !== input.expectedAmountBaseUnits) {
+      if (!publishedPrices.has(settlement.amountBaseUnits)) {
         notable.push({
           kind: 'unexpected_amount',
           payer,

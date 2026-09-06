@@ -35,6 +35,19 @@ test('the Production workflow can only record the exact baseline without running
   assert.match(workflow, /test "\$CONFIRMATION" = 'RECORD PRODUCTION BASELINE'/)
   assert.match(workflow, /version='20260809000250'/)
   assert.match(workflow, /supabase migration repair "\$version" --status applied --linked/)
-  assert.match(workflow, /if: \$\{\{ inputs\.mode == 'apply' \}\}[\s\S]+supabase db push --linked --yes/)
+  assert.match(
+    workflow,
+    /if: \$\{\{ inputs\.mode == 'apply' \|\| inputs\.mode == 'single-apply' \}\}[\s\S]+supabase db push --linked --yes/,
+  )
   assert.doesNotMatch(workflow, /inputs\.mode == 'baseline'[\s\S]{0,180}supabase db push --linked --yes/)
+})
+
+test('the single-migration mode excludes unrelated pending history', async () => {
+  const workflow = await read('.github/workflows/production-migrations.yml')
+
+  assert.match(workflow, /test "\$CONFIRMATION" = 'APPLY SINGLE PRODUCTION MIGRATION'/)
+  assert.match(workflow, /grep -qx "\$TARGET_MIGRATION" "\$EVIDENCE\/unapplied-versions\.txt"/)
+  assert.match(workflow, /mv "\$\{files\[0\]\}" "\$EVIDENCE\/withheld-migrations\/"/)
+  assert.match(workflow, /Verify the single migration was recorded/)
+  assert.doesNotMatch(workflow, /supabase db push[^\n]*--include-all/)
 })

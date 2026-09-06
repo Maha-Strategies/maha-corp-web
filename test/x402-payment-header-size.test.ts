@@ -9,6 +9,8 @@ import { PAYMENT_HEADER_BUDGET, PAYMENT_HEADER_LIMIT } from '../lib/x402/declara
 import { buildTypedData, createPaidFetch, encodePaymentSignature } from '../lib/x402/client.ts'
 import { parsePaymentHeader, matchesPaymentContext, PAYMENT_REQUIRED_HEADER, PAYMENT_SIGNATURE_HEADER } from '../lib/x402/protocol.ts'
 import { auditInputHash } from '../lib/mps-audit-engine.ts'
+import { parseResearchIntakeInput, researchIntakeInputHash } from '../lib/research-intake-evidence-pack.ts'
+import type { X402Offer } from '../lib/x402/offers.ts'
 
 // The interoperability regression this file exists to prevent.
 //
@@ -80,7 +82,20 @@ function serverBackedFetch(capture: { header?: string }) {
 }
 
 /** Drives the shipped client end to end and returns the header it produced. */
-async function headerFromRealClient(path: string): Promise<string> {
+function requestForOffer(offer: X402Offer): { body: string; headers: Record<string, string> } {
+  const input = offer.discovery.input
+  const clientRequestId = String(input.clientRequestId ?? IDEMPOTENT['x-maha-idempotency-key'])
+  const headers: Record<string, string> = { 'content-type': 'application/json' }
+  if (offer.requiresIdempotency) {
+    headers['x-maha-idempotency-key'] = clientRequestId
+    headers['x-maha-input-hash'] = offer.id === 'research-intake-evidence-pack'
+      ? researchIntakeInputHash(parseResearchIntakeInput(input))
+      : auditInputHash(String(input.text))
+  }
+  return { body: JSON.stringify(input), headers }
+}
+
+async function headerFromRealClient(offer: X402Offer): Promise<string> {
   const capture: { header?: string } = {}
   const paidFetch = createPaidFetch({
     address: '0x00000000000000000000000000000000000000aa',
@@ -91,22 +106,20 @@ async function headerFromRealClient(path: string): Promise<string> {
     signTypedData: async () => `0x${'c'.repeat(130)}`,
   })
 
-  const response = await paidFetch(`${ORIGIN}${path}`, {
+  const request = requestForOffer(offer)
+  const response = await paidFetch(`${ORIGIN}${offer.path}`, {
     method: 'POST',
-    // Sent for every offer. Only the job-creating ones require them, and a
-    // header an offer ignores costs nothing -- but it must be counted in the
-    // size budget, because a real payer of the MPS offer sends it.
-    headers: { 'content-type': 'application/json', ...IDEMPOTENT },
-    body: JSON.stringify({ clientRequestId: IDEMPOTENT['x-maha-idempotency-key'], text: MPS_TEXT }),
+    headers: request.headers,
+    body: request.body,
   })
-  assert.equal(response.status, 201, `${path} must be admitted after paying`)
-  assert.ok(capture.header, `${path} produced no PAYMENT-SIGNATURE`)
+  assert.equal(response.status, 201, `${offer.path} must be admitted after paying`)
+  assert.ok(capture.header, `${offer.path} produced no PAYMENT-SIGNATURE`)
   return capture.header!
 }
 
 test('the real client produces a payment header for every offer', async () => {
   for (const offer of X402_OFFERS) {
-    const header = await headerFromRealClient(offer.path)
+    const header = await headerFromRealClient(offer)
     assert.ok(header.length > 0)
   }
 })
@@ -118,7 +131,7 @@ test('every offer stays inside the conservative payment-header budget', async ()
   // unpayable offer, and that failure would first be seen by a paying agent.
   const measured: string[] = []
   for (const offer of X402_OFFERS) {
-    const header = await headerFromRealClient(offer.path)
+    const header = await headerFromRealClient(offer)
     measured.push(`${offer.id}=${header.length}`)
     assert.ok(
       header.length < PAYMENT_HEADER_BUDGET,
@@ -130,7 +143,7 @@ test('every offer stays inside the conservative payment-header budget', async ()
 
 test('the header the real client emits is accepted by the real parser', async () => {
   for (const offer of X402_OFFERS) {
-    const header = await headerFromRealClient(offer.path)
+    const header = await headerFromRealClient(offer)
     const parsed = parsePaymentHeader(header)
     assert.equal(parsed.ok, true, `${offer.id}: ${parsed.ok ? '' : parsed.reason}`)
   }
@@ -173,7 +186,7 @@ test('digest-only binding remains accepted as an optional shortcut', async () =>
   // Kept, documented as a Maha extension, and deliberately not required.
   // Interoperability rests on the full echo fitting; this only spares a client
   // that already holds the digest from resending the declaration.
-  const offer = X402_OFFERS[1]!
+  const offer = X402_OFFERS.find((candidate) => candidate.id === 'deep-context-evaluation')!
   const url = `${ORIGIN}${offer.path}`
   const priced = priceFor('POST', offer.path, config())!
   const requirement = requirementFor(priced, url, config())
@@ -224,7 +237,7 @@ test('the input example a crawler replays is published verbatim', async () => {
   // its document. Truncating the input example would silently break that, and
   // a crawler that paid and replayed it would receive a 400 for a request our
   // own declaration handed it. Only schemas and response examples are reduced.
-  const offer = X402_OFFERS[1]!
+  const offer = X402_OFFERS.find((candidate) => candidate.id === 'deep-context-evaluation')!
   const url = `${ORIGIN}${offer.path}`
   const priced = priceFor('POST', offer.path, config())!
   const extensions = await discoveryExtensionsFor(priced, url, requirementFor(priced, url, config()))

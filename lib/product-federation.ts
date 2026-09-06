@@ -124,10 +124,11 @@ function buildAgentProducts(): FederatedProduct[] {
 function buildX402Products(): FederatedProduct[] {
   return X402_OFFERS.map((offer): FederatedProduct => {
     const state: FederatedProductState = offer.status === 'available' && offer.availability.payableInProduction ? 'payable' : 'withheld'
+    const isMachineBook = offer.id.startsWith('book-section-') || offer.id.startsWith('book-edition-')
     return {
       productId: offer.id,
       namespace: 'maha-strategies',
-      family: 'machine-utilities',
+      family: isMachineBook ? 'knowledge-and-books' : 'machine-utilities',
       title: offer.serviceName,
       description: offer.description,
       state,
@@ -138,7 +139,7 @@ function buildX402Products(): FederatedProduct[] {
         enquiryEnabled: false,
         purchaseEnabledInSource: state === 'payable',
         purchaseEnabledThroughCabezonPreview: false,
-        deliveryMode: state === 'payable' ? 'api' : 'none',
+        deliveryMode: state === 'payable' ? (isMachineBook ? 'mcp' : 'api') : 'none',
       },
       capability: null,
       boundaries: [...offer.capabilityBoundaries, 'CABEZON Preview cannot create, sign, settle, or replay an x402 payment.'],

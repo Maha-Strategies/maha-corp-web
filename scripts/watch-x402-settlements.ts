@@ -20,8 +20,16 @@
 import { createPublicClient, formatUnits, http, parseAbiItem } from 'viem'
 import { base } from 'viem/chains'
 
-import { BASE_USDC, EXPECTED_PRICE_BASE_UNITS, MAHA_PAYEE, OPERATOR_WALLETS } from '../lib/x402/discovery-payment-recipe.ts'
+import { BASE_USDC, MAHA_PAYEE, OPERATOR_WALLETS } from '../lib/x402/discovery-payment-recipe.ts'
+import { X402_OFFERS } from '../lib/x402/offers.ts'
 import { buildSettlementWatch, describeWatch, type Settlement } from '../lib/x402/settlement-watch.ts'
+
+/**
+ * The prices a customer can legitimately pay, taken from the offer catalog so a
+ * new offer is counted the day it is published rather than the day someone
+ * remembers to widen a constant.
+ */
+const PUBLISHED_PRICES = [...new Set(X402_OFFERS.map((offer) => BigInt(offer.amount)))].sort((a, b) => (a < b ? -1 : 1))
 
 const TRANSFER = parseAbiItem('event Transfer(address indexed from, address indexed to, uint256 value)')
 /** Public RPCs reject wide ranges; this is the largest most accept. */
@@ -82,7 +90,9 @@ for (let from = earliest; from <= latest; from += CHUNK + BigInt(1)) {
 const report = buildSettlementWatch({
   settlements,
   operatorWallets: [...OPERATOR_WALLETS],
-  expectedAmountBaseUnits: EXPECTED_PRICE_BASE_UNITS,
+  // Every published price, derived from the catalog rather than pinned. The
+  // canary's buyer-policy ceiling is not the definition of a sale.
+  expectedAmountsBaseUnits: PUBLISHED_PRICES,
   fromBlock: earliest,
   toBlock: latest,
   alreadyReportedPayers: reported,

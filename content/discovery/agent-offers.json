@@ -13,8 +13,16 @@
     "autonomousPaymentSupported": true,
     "autonomousPaymentScope": [
       "context-compression",
+      "context-budget-ladder",
       "deep-context-evaluation",
-      "mps-autonomous-audit"
+      "evidence-retention-matrix",
+      "mps-autonomous-audit",
+      "governed-context-verification-pack",
+      "research-intake-evidence-pack",
+      "book-section-the-imagined-life",
+      "book-section-the-volcanic-engine",
+      "book-edition-the-imagined-life",
+      "book-edition-the-volcanic-engine"
     ],
     "offerSelectionGuide": "https://www.mahastrategies.com/.well-known/maha/offer-selection.json",
     "humanConfirmationScope": [
@@ -22,7 +30,7 @@
       "research-inquiries",
       "enterprise-onboarding"
     ],
-    "bindingCommitment": "Context Compression, Deep Context Evaluation and the Autonomous MPS Audit accept autonomous x402 payment on Base Mainnet under their published terms. A live PAYMENT-REQUIRED challenge is the only proof an offer can be bought. The MPS Audit checks its request identity, JSON body and input hash over the text field before settlement. Paid jobs are resumable free of charge and are never billed twice for an identical replay. The GPU optimization capabilities are not x402 products. Stripe products require purchaser confirmation, and research or enterprise engagements require human scope review.",
+    "bindingCommitment": "Eleven bounded machine products accept autonomous x402 payment on Base Mainnet under their published terms. A live PAYMENT-REQUIRED challenge is the only proof an offer can be bought. Idempotent model-backed jobs validate request identity and input hashes before settlement and are resumable without another payment. The book-section products sell exact section retrieval; the complete-edition products sell one complete structured delivery with a non-exclusive internal machine-use licence. The public web editions remain free, and no book offer transfers copyright or grants redistribution, resale, or model-training rights. The GPU optimization capabilities are not x402 products. Stripe products require purchaser confirmation, and custom research or enterprise engagements require human scope review.",
     "describedNotPayable": []
   },
   "credentialPolicy": {
@@ -82,6 +90,16 @@
       "payableNow": true
     },
     {
+      "id": "context-budget-ladder",
+      "status": "available_for_autonomous_payment",
+      "endpoint": "https://www.mahastrategies.com/api/v1/context/budget-ladder",
+      "method": "POST",
+      "methodBoundary": "Exactly five deterministic extractive Context Packs at five caller-declared ascending budgets. No model inference, source acquisition, claim verification, completeness guarantee, or answer-quality assessment.",
+      "retention": { "sourceTextStored": false, "compiledContextStored": false },
+      "machinePayment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "asset": "USDC", "amount": "5000", "displayAmount": "0.005 USDC", "payableNow": true },
+      "payableNow": true
+    },
+    {
       "id": "deep-context-evaluation",
       "status": "available_with_api_key_or_x402",
       "endpoint": "https://www.mahastrategies.com/api/v1/compress/evaluate",
@@ -106,6 +124,16 @@
         "displayAmount": "0.01 USDC",
         "payableNow": true
       },
+      "payableNow": true
+    },
+    {
+      "id": "evidence-retention-matrix",
+      "status": "available_for_autonomous_payment",
+      "endpoint": "https://www.mahastrategies.com/api/v1/context/evidence-matrix",
+      "method": "POST",
+      "methodBoundary": "Five exact-span retention evaluations across five caller-declared budgets. Retention is not truth, factual accuracy, answer quality, legal compliance, or hallucination prevention.",
+      "retention": { "sourceTextStored": false, "compiledContextStored": false, "requiredEvidenceTextStored": false },
+      "machinePayment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "asset": "USDC", "amount": "50000", "displayAmount": "0.05 USDC", "payableNow": true },
       "payableNow": true
     },
     {
@@ -135,6 +163,91 @@
         "payableNow": true,
         "note": "Published terms. A live PAYMENT-REQUIRED challenge is the only proof an offer can be bought."
       },
+      "payableNow": true
+    },
+    {
+      "id": "governed-context-verification-pack",
+      "status": "available_for_autonomous_payment",
+      "endpoint": "https://www.mahastrategies.com/api/v1/context/governed-verification",
+      "method": "POST",
+      "methodBoundary": "One machine-generated context-control evidence packet with exact-span retention, policy and budget observations, integrity hashes, and a deterministic receipt. Not factual or compliance certification, human judgment, or proof of downstream behavior.",
+      "retention": { "sourceTextStored": false, "compiledContextStored": false, "requiredEvidenceTextStored": false },
+      "machinePayment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "asset": "USDC", "amount": "500000", "displayAmount": "0.50 USDC", "payableNow": true },
+      "payableNow": true
+    },
+    {
+      "id": "research-intake-evidence-pack",
+      "status": "available_for_autonomous_payment",
+      "endpoint": "https://www.mahastrategies.com/api/v1/research/intake",
+      "retrievalEndpoint": "https://www.mahastrategies.com/api/v1/research/intake/{packId}",
+      "method": "POST",
+      "methodBoundary": "Machine-generated intake packet for one research question and up to ten supplied source sections. It audits only supplied material and does not perform new research, acquire sources, certify facts, supply human judgment, or make a recommendation.",
+      "sourceHandling": "Only public or synthetic, non-sensitive source sections are accepted. The request must explicitly authorize transmission of those sections to Anthropic for processing.",
+      "inputBounds": {
+        "questions": 1,
+        "sourceSections": "1-10",
+        "maxCharactersPerSection": 6000,
+        "maxRequestBytes": 65536
+      },
+      "retention": {
+        "fullSourceSectionsStored": false,
+        "verbatimClaimExcerptsRetained": true,
+        "note": "Complete sections are transmitted to Anthropic for processing but are not retained by Maha. Results retain the question, supplied source and section identifiers, optional intake metadata, short verbatim claim excerpts, classifications, digests, and operational metadata."
+      },
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "amount": "1000000",
+        "displayAmount": "1.00 USDC",
+        "payableNow": true,
+        "note": "Requires explicit public-or-synthetic source classification and Anthropic processing authorization. Completed sections are checkpointed and not rerun during recovery."
+      },
+      "payableNow": true
+    },
+    {
+      "id": "book-section-the-imagined-life",
+      "status": "available_for_autonomous_payment",
+      "endpoint": "https://www.mahastrategies.com/api/v1/books/the-imagined-life/section",
+      "method": "POST",
+      "methodBoundary": "Returns one exact, already-published section of The Imagined Life with edition metadata, a content commitment, and a deterministic receipt. Payment purchases structured machine delivery, not exclusive access, copyright, analysis, factual certification, or a recommendation.",
+      "inputBounds": { "sectionId": "one published section slug", "maxRequestBytes": 1024 },
+      "retention": { "requestStored": false, "deliveredSectionStored": false },
+      "machinePayment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "asset": "USDC", "amount": "5000", "displayAmount": "0.005 USDC", "payableNow": true },
+      "payableNow": true
+    },
+    {
+      "id": "book-section-the-volcanic-engine",
+      "status": "available_for_autonomous_payment",
+      "endpoint": "https://www.mahastrategies.com/api/v1/books/the-volcanic-engine/section",
+      "method": "POST",
+      "methodBoundary": "Returns one exact, already-published section of The Volcanic Engine with edition metadata, a content commitment, and a deterministic receipt. Payment purchases structured machine delivery, not exclusive access, copyright, analysis, factual certification, or a recommendation.",
+      "inputBounds": { "sectionId": "one published section slug", "maxRequestBytes": 1024 },
+      "retention": { "requestStored": false, "deliveredSectionStored": false },
+      "machinePayment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "asset": "USDC", "amount": "5000", "displayAmount": "0.005 USDC", "payableNow": true },
+      "payableNow": true
+    },
+    {
+      "id": "book-edition-the-imagined-life",
+      "status": "available_for_autonomous_payment",
+      "endpoint": "https://www.mahastrategies.com/api/v1/books/the-imagined-life/edition",
+      "method": "POST",
+      "methodBoundary": "Returns the complete normalized Markdown edition of The Imagined Life with an ordered section manifest, per-section and whole-edition SHA-256 commitments, and a deterministic receipt. Purchase grants non-exclusive personal or internal machine use; it does not grant redistribution, resale, model-training rights, or copyright ownership.",
+      "inputBounds": { "body": "empty JSON object", "maxRequestBytes": 1024 },
+      "retention": { "requestStored": false, "deliveredEditionStored": false },
+      "machinePayment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "asset": "USDC", "amount": "2990000", "displayAmount": "2.99 USDC", "payableNow": true },
+      "payableNow": true
+    },
+    {
+      "id": "book-edition-the-volcanic-engine",
+      "status": "available_for_autonomous_payment",
+      "endpoint": "https://www.mahastrategies.com/api/v1/books/the-volcanic-engine/edition",
+      "method": "POST",
+      "methodBoundary": "Returns the complete normalized Markdown edition of The Volcanic Engine with an ordered section manifest, per-section and whole-edition SHA-256 commitments, and a deterministic receipt. Purchase grants non-exclusive personal or internal machine use; it does not grant redistribution, resale, model-training rights, or copyright ownership.",
+      "inputBounds": { "body": "empty JSON object", "maxRequestBytes": 1024 },
+      "retention": { "requestStored": false, "deliveredEditionStored": false },
+      "machinePayment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "asset": "USDC", "amount": "2990000", "displayAmount": "2.99 USDC", "payableNow": true },
       "payableNow": true
     },
     {
