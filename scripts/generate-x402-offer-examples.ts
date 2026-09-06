@@ -33,7 +33,10 @@ const deepOutput = {
   offerId: 'deep-context-evaluation',
   evaluationId: 'ctxeval_4f1c8a2b6d5e47c0913a7e2f8b46d5c1',
   clientRequestId: result.clientRequestId,
-  contextPack: result.contextPack,
+  // Discovery identifiers are fixtures, not runtime IDs. Keep this value
+  // stable so adding a new generated example cannot invalidate an existing
+  // paid offer's declaration digest.
+  contextPack: { ...result.contextPack, packId: 'ctxpack_d0dc187dd43a403d8aef472de5689408' },
   evidence: result.evidence,
   metrics: result.metrics,
   inputHash: result.inputHash,

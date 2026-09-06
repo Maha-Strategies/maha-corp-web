@@ -193,7 +193,7 @@ test('a wrong body hash is refused before settlement', async () => {
   if (outcome.kind !== 'refused') return
   assert.equal(outcome.status, 409)
   assert.equal(outcome.code, 'input_hash_mismatch')
-  assert.match(outcome.message, /text field alone/i)
+  assert.match(outcome.message, /published mps-autonomous-audit preimage/i)
   assert.equal(settlements.length, 0, 'a deterministic body disagreement must never reach settlement')
 })
 
@@ -313,7 +313,7 @@ test('an idempotent offer refuses a payer that declared no key, before settling'
   if (outcome.kind !== 'refused') return
   assert.equal(outcome.status, 400)
   assert.equal(outcome.code, 'idempotency_key_required')
-  assert.match(outcome.message, /text field alone/i)
+  assert.match(outcome.message, /preimage published in its discovery contract/i)
   assert.doesNotMatch(outcome.message, /exact request body/i)
   assert.equal(settlements.length, 0)
 })
