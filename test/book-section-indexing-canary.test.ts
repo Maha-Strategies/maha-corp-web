@@ -37,6 +37,7 @@ test('workflow keeps the key scoped to the payment step and uploads evidence on 
   assert.match(workflow, /environment:\s*\n\s*name: production-x402-canary/)
   assert.match(workflow, /if: \$\{\{ inputs\.book_section_indexing \}\}/)
   assert.match(workflow, /BOOK_INDEXING_CANARY_CONFIRMATION: \$\{\{ inputs\.book_section_confirmation \}\}/)
+  assert.match(workflow, /BOOK_INDEXING_RESUME_AFTER_IMAGINED: \$\{\{ inputs\.book_section_resume_after_imagined \|\| 'false' \}\}/)
   assert.match(workflow, /X402_BUYER_PRIVATE_KEY: \$\{\{ secrets\.X402_BUYER_PRIVATE_KEY \}\}/)
   assert.match(workflow, /if: always\(\)/)
   const bookJob = workflow.split('  index-book-sections:')[1]
@@ -48,6 +49,8 @@ test('script classifies publisher-funded calls and refuses a blind second purcha
   const script = await readFile(new URL('../scripts/run-book-section-indexing-canaries.ts', import.meta.url), 'utf8')
   assert.match(script, /publisher-funded discovery seeding; not customers, revenue traction, or organic demand/)
   assert.match(script, /if \(!step\.bazaarIndexed\) throw/)
+  assert.match(script, /Cannot resume: the prior Imagined Life settlement is not currently discoverable in Bazaar/)
+  assert.match(script, /targets = resumeAfterImagined \? BOOK_INDEXING_TARGETS\.slice\(1\)/)
   assert.match(script, /Refused a second signature/)
   assert.match(script, /MAX_TOTAL_AMOUNT = BigInt\(10_000\)/)
 })

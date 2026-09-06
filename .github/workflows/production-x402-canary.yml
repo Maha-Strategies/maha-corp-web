@@ -22,6 +22,11 @@ on:
         required: false
         type: string
         default: ''
+      book_section_resume_after_imagined:
+        description: 'Resume with Volcanic Engine only after independently checking the recorded Imagined Life settlement and listing.'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -106,6 +111,7 @@ jobs:
       BASE_RPC_URL: ${{ vars.BASE_RPC_URL }}
       BOOK_INDEXING_CANARY_OUTPUT_PATH: ${{ github.workspace }}/book-section-indexing-canary.json
       BOOK_INDEXING_CANARY_CONFIRMATION: ${{ inputs.book_section_confirmation }}
+      BOOK_INDEXING_RESUME_AFTER_IMAGINED: ${{ inputs.book_section_resume_after_imagined || 'false' }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
