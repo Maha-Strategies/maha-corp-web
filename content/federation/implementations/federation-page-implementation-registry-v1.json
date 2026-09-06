@@ -70,24 +70,31 @@
       "decisionManifestDigest": "sha256:7cbb510c5ce7c69c9be8f84b6f4d626c76c1b767555a20a9e54e34c8d7b9f3c2",
       "specificationManifestDigest": "sha256:ae4aa3b0623b9871065a537ff19d3ae219daba5835718e905a607756a27436cc",
       "packetManifestDigest": "sha256:7f941d77ad9f36062fafee861e00a2d8878734b4f75c220390522dc1997fa1de"
+    },
+    {
+      "batchId": "tranche-10",
+      "tranche": 10,
+      "decisionManifestDigest": "sha256:9ef07cfe461c123d2f87caf30b3271a31692f97f2c2307a426830667a68a1bfa",
+      "specificationManifestDigest": "sha256:f3a532332a4567fead139076fd821fe0436d910d4b3b576edd34f057ac3856f0",
+      "packetManifestDigest": "sha256:c3016515219a07cc5be0bf9761efa3afb2b4d315436650c2832ce3737310c408"
     }
   ],
   "status": "local-unreleased",
   "counts": {
-    "pages": 854,
-    "readyForOwnerIntegration": 844,
+    "pages": 951,
+    "readyForOwnerIntegration": 941,
     "blockedOnUnreadyPrerequisite": 10,
     "byProperty": {
-      "maha-strategies": 259,
-      "maha-research": 225,
-      "agentic-publishing": 74,
-      "maha-os": 54,
-      "mayone-maharajan": 37,
-      "mayon-rajan": 45,
-      "maha-policy": 160
+      "maha-strategies": 287,
+      "maha-research": 250,
+      "agentic-publishing": 84,
+      "maha-os": 60,
+      "mayone-maharajan": 42,
+      "mayon-rajan": 50,
+      "maha-policy": 178
     },
-    "boundedAnswers": 4270,
-    "sourceBindings": 1466,
+    "boundedAnswers": 4755,
+    "sourceBindings": 1609,
     "publicRoutesCreated": 0,
     "nextBuildsRun": 0,
     "vercelBuildsRun": 0
@@ -6995,7 +7002,783 @@
       "contentDigest": "sha256:c9d1922b4365544788aa2b78ad01e8366edeeb4841270d79614d31ac9875d6d8",
       "adoptionState": "ready-for-owner-integration",
       "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_0506892f4f6aeffd56c07141",
+      "siteId": "mayon-rajan",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/gas-emissions/definition",
+      "contentDigest": "sha256:fa235d5606a58b5b282884ce3ed6c014c64e7be4816c67b8f1f8ee827e467766",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_6903b7c636966d35a57b00f2",
+      "siteId": "mayon-rajan",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/gas-emissions/limits",
+      "contentDigest": "sha256:3fd40e63a1d159c1ffffbddb9bda96d0543693310c5c9c5515601d74c0d9e2ea",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_249777f280fc057e55e4b1f5",
+      "siteId": "mayon-rajan",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/gas-emissions/official-sources",
+      "contentDigest": "sha256:222b4494c07499e4fb621d5813e9a76b86c086aa88fe716d1c596b5f77250d77",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_774e8bf2286da109c496eb9e",
+      "siteId": "mayon-rajan",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/hazard-zones/evidence",
+      "contentDigest": "sha256:1560a33778e4a3a0de6ead3d5a4934afa11ede32138a45067f4a8a1f9ce306ea",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_31f30a5fd26c314c04af8395",
+      "siteId": "mayon-rajan",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/hazard-zones/preparedness",
+      "contentDigest": "sha256:61558278076923a8864e0034f0a0ea7eddff84f8c981517b818e2a28a06d2d69",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_ceb508e8da70d0ba5ec38279",
+      "siteId": "maha-policy",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/agent-identity/evidence",
+      "contentDigest": "sha256:9b1dab224594ad7c520f2bbc08457d17ceef9543fb9bc63106482a86e4c5e2d8",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_3113611323093ff6364925f7",
+      "siteId": "maha-policy",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/agent-identity/machine-rule",
+      "contentDigest": "sha256:3a80db1e3612246f66cddb1cd6f68787cd54ac33d8539ba97b880985cd3d5e42",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_9eda064018491fcca77ef6aa",
+      "siteId": "maha-policy",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/agent-identity/tradeoffs",
+      "contentDigest": "sha256:1d9bc8511b22b55cdf2f25ebe90a3d90056a662b8fa15d7502ab750d192c7d62",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_bca14fa3a4f45811f3d686cc",
+      "siteId": "maha-policy",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/machine-contracting/definition",
+      "contentDigest": "sha256:09fbb2b925d87105055ddc9d91f7c10bba5e631d8219f21c1ae211c4ac1dce1d",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_367c7557e4d23a239f2b06f4",
+      "siteId": "maha-policy",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/machine-contracting/mechanisms",
+      "contentDigest": "sha256:562b9faca7c1d0a6b1be033c2e36644f50b178d557841f029662e2af9cbf247e",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_a1f46b72b1f7bc311af3a020",
+      "siteId": "maha-policy",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/machine-contracting/sources",
+      "contentDigest": "sha256:385b62d8735044d30fe2b43e13d4708178f8cfee3b07a390a1c65daa72929dfe",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_e8c6b2df2f752c2f04ec6a61",
+      "siteId": "maha-policy",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/machine-contracting/uncertainty",
+      "contentDigest": "sha256:55c9d6bda74a3215b3b58e46bc27742bdc3b320268cdec707ad7cbd2b006d54f",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_a8227bc32337d596c84e962e",
+      "siteId": "maha-policy",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/model-evaluation/definition",
+      "contentDigest": "sha256:fb67195a2970ad36b0fd8d1825a445a0ac286d12abfd55298a1fdabad4c6a817",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_d41dd1930ecd0fc93f502979",
+      "siteId": "maha-policy",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/model-evaluation/mechanisms",
+      "contentDigest": "sha256:4a88643dcaff0128d6d5b6e4f0aed56eb1c949ab2b10218546a705e62b9ac8d7",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_182d0d15b3592aa9874389be",
+      "siteId": "maha-policy",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/model-evaluation/sources",
+      "contentDigest": "sha256:017d7e5f2cae5159f65e6fdb1a1556d39a49b11af94571db32f74d2299c7b6ca",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_f5e97a806ed9b775184982a5",
+      "siteId": "maha-policy",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/model-evaluation/uncertainty",
+      "contentDigest": "sha256:d72dc16453d8fdc8fbe77420ea5100cbf6744d92cf088d432ee30592bfcb13d8",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_8c2dd9af56fe825b1ef4df51",
+      "siteId": "maha-policy",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/public-sector-procurement/evidence",
+      "contentDigest": "sha256:bc2a49be73bbae41940f3055447d4fa9d65b99d346a43acc689a3354bb531fd2",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_2442fe7562c53bea01ce37f8",
+      "siteId": "maha-policy",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/scientific-evidence-policy/comparison",
+      "contentDigest": "sha256:fbe0d0ec80a230b7d20727ed07b324eecccae8af8e7d2b2a5f862bacdfd82b6d",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_e0892fb08bf6a9f945d7a575",
+      "siteId": "maha-policy",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/scientific-evidence-policy/current-law",
+      "contentDigest": "sha256:222af9babe48d039c951b3838bb43b34c4bca0959cb2a6f6e76bf83a80a1b219",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_9866f1d8a37a8962beb00d56",
+      "siteId": "maha-policy",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/scientific-evidence-policy/implementation",
+      "contentDigest": "sha256:2823ac893e6377d40dcc7e6328876a31d46db8840ef6bca5d39e1d2a79de541f",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_7b9252be46af5c9b818d07ce",
+      "siteId": "maha-policy",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/semiconductor-policy/comparison",
+      "contentDigest": "sha256:32a4127f0f49276f9f122b47b3748482c03c21b65baaf50845c067f2b4265d81",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_24271a03495a65f627634227",
+      "siteId": "maha-policy",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/semiconductor-policy/current-law",
+      "contentDigest": "sha256:4c4d44b0e5b3c75f1002f7f249dc076b20c3686e860f514ff0a2a1f14d2861af",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_0f0a87b8b46217417ee40071",
+      "siteId": "maha-policy",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/semiconductor-policy/implementation",
+      "contentDigest": "sha256:6b966a6ba9b963cf5b24e0a5ea56ac768dba258ce324896e09eaa0b6635b156f",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_ad4096bf1df1196a9febf3a4",
+      "siteId": "agentic-publishing",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/author-identity/workflow",
+      "contentDigest": "sha256:5d6054ff24c79c92a9f73d2129aac05c36632b7d47c8bcfc1cf0f72086c4798e",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_e2f9bb46e7fb8ba86b13599f",
+      "siteId": "agentic-publishing",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/citation-verification/template",
+      "contentDigest": "sha256:6a675b8bfaf453e765312a36e159f93b89393460390053f2b09253d8a1e5b873",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_5865e7346f80e358fb036fd5",
+      "siteId": "agentic-publishing",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/context-pack/machine-interface",
+      "contentDigest": "sha256:288ba46042a061e0971174bf69e25a14f3e4bfc098f2bf9b10cb921832d20f6f",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_a12f6f020c2d7c61e52a361f",
+      "siteId": "agentic-publishing",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/correction-policy/governance",
+      "contentDigest": "sha256:e085d2c23e373088b4645f2ff502846c10f634be70e8fecaf294d86659567e2f",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_f5fcf7babbf380a80c77e153",
+      "siteId": "agentic-publishing",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/delivery-receipt/governance",
+      "contentDigest": "sha256:a0b6261016dd68d8a2fb975cc60e48bfb4b7364f4cba875c812cc63006f15674",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_b090699a5da989410be8d80a",
+      "siteId": "agentic-publishing",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/fact-checking/workflow",
+      "contentDigest": "sha256:df24cf45b97014b1d17d7d4da698f6d47152a9bf01d41581b2e4346738afd6ec",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_a4524b72717cc8f184332c76",
+      "siteId": "agentic-publishing",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/licensed-delivery/workflow",
+      "contentDigest": "sha256:857e0d1e7c21a389b668e23ff6ee9c75b09071aabec9b3333e0ecbd735dd972c",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_e7207694b02473e1cf4ec0ae",
+      "siteId": "agentic-publishing",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/retraction-policy/template",
+      "contentDigest": "sha256:8e278f150e8cb0c4d932be586123d334b933b7640c4d52988613fe88a1f3877a",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_4dc4d6e9d9cc4ea8b9904063",
+      "siteId": "agentic-publishing",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/source-rights/governance",
+      "contentDigest": "sha256:54f088f978b779fee019eea604a71a156b3aaf31ab60f919943594445834cbe3",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_56e7f47072a4ee143963f36c",
+      "siteId": "agentic-publishing",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/source-rights/machine-interface",
+      "contentDigest": "sha256:ea432789f05e268b19cb06b52fb0bad20f47ea29b6695a6893175048a0194f94",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_ec19b3c5b09cc8d8265aaf2f",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/abstract-only-evidence/protocol",
+      "contentDigest": "sha256:76642bda351c32b136693726ddd162f588f2129530d13f34d7dd2c57af05e7dd",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_a1c059174844f6e7f068dda4",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/abstract-only-evidence/relationships",
+      "contentDigest": "sha256:283f03165a71c82539dd96403dbc5cb586b01f01bf35c71af780f4386e2d4a43",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_353e01ba3efc4981f51bf002",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/assumptions/failure-mode",
+      "contentDigest": "sha256:49dd83df8548d589133398463c4af83553a32823c036a8f833412a36d7eb43fd",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_c70fd7a41e8064469a72b830",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/assumptions/machine-record",
+      "contentDigest": "sha256:b42ea6e55da64c6098742eaec3012c1b0604f61a1ee19370af73879cc1eb43a0",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_29d264174d2e3d8e7e91d32f",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/author-manuscript/relationships",
+      "contentDigest": "sha256:66757c5775ce52e525c4ce7904865f0c322fb47f0643ef6230d1fe582e463e9c",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_694ed1973e95ecab8d78964c",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/citation-lineage/relationships",
+      "contentDigest": "sha256:2051eeafa4d76f13e23f47943c451724f07078e59b595d190e21e31aad1d3c18",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_8bb08941bd393585b84e56f2",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/claim-extraction/relationships",
+      "contentDigest": "sha256:19efb83f33d7d25c123fd596edf6f1606c090650f9080fbff9d17a09dafcfe90",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_1143fd293f0727f8eeb9ceb7",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/compiler-provenance/machine-record",
+      "contentDigest": "sha256:812760510defacf4e222a1e9dae2f4b9af11999afafdd2dba6d1636781f84bf9",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_8bae9a0b78007a8e0531bb96",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/compiler-provenance/relationships",
+      "contentDigest": "sha256:bd60ce9b9ea46e5177b3e78ba4b82279df3f1dfc9b9ab5d6d9299e2f6e0490ff",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_cb78c3ebddb0ce9bc9b1eb52",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/container-image/relationships",
+      "contentDigest": "sha256:065f9c3ab05233974aaed1365e5156cf10ea5af2d4b08f483e453d80c99ef88c",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_94a7265239c1a712ef58bc6f",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/counterexample/failure-mode",
+      "contentDigest": "sha256:a2d217f36bd7ed863503008e5f31bfe1c3a6782cb7c62a515400a08bd9c4b21c",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_056d441f4cefbab10ce0c9dd",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/counterexample/machine-record",
+      "contentDigest": "sha256:b3d1c48a9ceaf7a66e13bfa928f0dcd18236959584452acf54ae6af1c73839f8",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_130b67bd992123e8763d2409",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/doi-resolution/failure-mode",
+      "contentDigest": "sha256:a01a9b10a7ae3a8b401cc31684822c6812e2e53e94ddc0e9901d679a4224c1ec",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_c4e05f323277900ffc633a7d",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/equation-locator/source-contract",
+      "contentDigest": "sha256:c2dc256316c0588b66b48049eedcee8e9ef72f6d4ff4afd3fbc8c512a4c33983",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_61710caa48edecdf3b41c2b9",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/evaluation-protocol/definition",
+      "contentDigest": "sha256:b9c2eb8c1e518ca65ba979637a5e38772f4eae3a96a4dd87c502a8ddb6c1e435",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_dd99973f255a8f3df4f646d5",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/evaluation-protocol/fixture",
+      "contentDigest": "sha256:c58c3c7de0072de8acb8749c35efc6fd36d85ca72977bfb9f70c1b971f4ef973",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_7f2727917b9ebebdecd3f002",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/inspection-depth/failure-mode",
+      "contentDigest": "sha256:34f9e3714055839b9cd55b6896023dde724de279b95895308a614bbfc2b212da",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_21a78e73f1431cefb31f8c55",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/inspection-depth/machine-record",
+      "contentDigest": "sha256:b5c305986fca7be993799808225cabf85dd207de4bdfadfbcc64879bacc544a0",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_2ed66e7d62676480df3a45f8",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/metadata-only-evidence/source-contract",
+      "contentDigest": "sha256:fc832fc0988d9acab39b99e964506669a567c1103afcdcd1cb2f886951c8c974",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_1cd5fac4b9eb0f31ba761ae8",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/random-seed/source-contract",
+      "contentDigest": "sha256:de754f841c69916dd3e89a97e3390d0f434375d14c1666a18ce11b2569ee8a54",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_2de6d9759abdb278716ff3d9",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/repository-copy/source-contract",
+      "contentDigest": "sha256:ac2bb95bbb48bd3e8520f78e13183d04166c225a5c9a88fab0fc05725e1c771a",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_dfb73579972b3b02b15a6535",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/retraction/failure-mode",
+      "contentDigest": "sha256:9f85e3dfd0716bebbefeded411ab0751b2a8947f35ba7e978eb4505a0d1806c8",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_6f6ad5cf3a7faa888bfd4747",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/retraction/machine-record",
+      "contentDigest": "sha256:36fc9521097041d06262c6a975e36920550fc1fac1d4728a846011bb1d64db6a",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_5e1b570d230faf4b7ffdb549",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/table-locator/failure-mode",
+      "contentDigest": "sha256:6d3c575bfeb1da6b873107a05ba32ef92a0bfc3b2d2abf8141cb7121aa6ed180",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_7d47c24659864a3584296b2c",
+      "siteId": "maha-research",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/table-locator/machine-record",
+      "contentDigest": "sha256:75a59a586e872e2e54bbeb06bc9b1186c1960e18d757c557b55b6e13cc96ebc6",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_4f06ce61ff8dcf7f444b7e42",
+      "siteId": "maha-os",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/architecture",
+      "contentDigest": "sha256:4a2327d5396909850f41205d7dff3b98c87bcc04bfe87c2ce874baa6a7f36b0a",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_b7ef8200a3e256cecc0b94a6",
+      "siteId": "maha-os",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/caregiver-access/controls",
+      "contentDigest": "sha256:1bd7f7f9c53c7e721231577c372d9eeedc70a52534835d07bbe9959280327228",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_7c0bcc71dc1b563018c8e4a2",
+      "siteId": "maha-os",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/consent-receipts/controls",
+      "contentDigest": "sha256:5cbfa77897c6e9793cf705eb40a3f0ad670b0d0e8c26cd80cca7f07ab0e9cdf7",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_591f8a9c8d3c842c358fbd24",
+      "siteId": "maha-os",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/data-retention/definition",
+      "contentDigest": "sha256:1743619330409777090e72a1b775f251140bc7e50c08a5d0cafa20a6fdb798c6",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_e699f2e2e8ff44b75136697e",
+      "siteId": "maha-os",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/data-retention/operator-guide",
+      "contentDigest": "sha256:297dbb7e470ae7f2e0f5090028c3f1ed45eae70e142c91c4e0fe85b1d6a436fc",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_537cd35e465014c75ff6957a",
+      "siteId": "maha-os",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/sensor-provenance/controls",
+      "contentDigest": "sha256:88ba90e8e8d9aa551cbf4afaf3f478b3b749234f7fc738e672f330d079e5cdc6",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_c6b54586bcfa018a514cc2eb",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/coordinate-frames/evaluation",
+      "contentDigest": "sha256:f446347d678200da3d9025bcce1a15c5fe174df0fb0d395bf9893177b0d6fe7c",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_bb67319afcac29ed66b677e2",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/coordinate-frames/uncertainty",
+      "contentDigest": "sha256:dfffec0e905ce62e7b15ad55cc53c40f43733dd6c86e1caaebf161cadc4f0c19",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_d9003b3d300d3689b28aa9f7",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/falsifiability/input-contract",
+      "contentDigest": "sha256:7e09e1a26fce461d00eccb19e6ff201425b41caa72353102ab63121ad4211ccf",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_733af158d47bfa0a45c7635f",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/house-system-selection/evaluation",
+      "contentDigest": "sha256:265348abf8af041d03bceb0537bea6cc4f32e8a8367be747bb15db504d3b63f2",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_452f4d73c233c31d91de4134",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/house-system-selection/input-contract",
+      "contentDigest": "sha256:4104e0335d098d4d6cd09c6b70dd02ab7bea39cf05215551d69c2812db8b109d",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_b229119f404d0f7aaab10417",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/house-system-selection/workflow",
+      "contentDigest": "sha256:3655d962d5cb9cd833001597592f4c58e0086c6fb3494756c76000d4500dc307",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_a6e0d7f779b527e063bb3cf9",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/interpretation-boundaries/uncertainty",
+      "contentDigest": "sha256:8f877fa84db5df49bd9dfc6afd00c6de62e169e6a7396f67890fb86373c399ea",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_15212ccb368dfe56c7114015",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/interpretation-boundaries/workflow",
+      "contentDigest": "sha256:c5dc8a13e029e19a519ea427741ea361c62ea2006377344b26a6b63d82f10007",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_1efe2cc00bd4ffe3a2f7e7db",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/tradition-comparison/input-contract",
+      "contentDigest": "sha256:afece6cb444951ca5479717640e435ab2f125ffe2080aa88481a0c080c4484da",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_9f0e500613ba6529024f4427",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/tradition-comparison/workflow",
+      "contentDigest": "sha256:71decba470901db184cd259b12e9fe59e83a09cce40a215038db143465f37227",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_b22cf5d81466dafecbc1efbe",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/civilizational-computation/argument",
+      "contentDigest": "sha256:11bc3971571d157d35653c0d68230128fcc6c924eb699f253b78ca931e369829",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_d992fba8ce43a4d333e76196",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/civilizational-computation/genealogy",
+      "contentDigest": "sha256:62e2596b79018a0aa3f1c8c723e451aba47e951f89b81f89ed5d93609133e60b",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_871873c2bbe8dd9268b55875",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/epistemic-clearance/genealogy",
+      "contentDigest": "sha256:c0e4304ee6df670b6f7d17d2225f086ad3b1d4618cfe13d9fb5536852974e96c",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_101cd9561264061032ba89be",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/recursive-institutions/argument",
+      "contentDigest": "sha256:43f3c59e14117437f890b39f58f2a7db074ac621612c4b0a30144905b01556dc",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_0b41990fb3792aedac79ea8f",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/recursive-institutions/genealogy",
+      "contentDigest": "sha256:9513787e448d24473606311fbac45166253bead421f609f13e5679f977592588",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_ca83862de3c683e12da087ee",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/alvar-reception/relationship",
+      "contentDigest": "sha256:1198ca6156a2af8109602c1429e3236817140f8b6d1319b0947e57fef6081a98",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_596173f4334119bef4d9de0e",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/divine-epithets/primary-text",
+      "contentDigest": "sha256:5a543656edb3082053f40e7848ce35b615155387c53a6cf4dce814ed1ed1a0f4",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_35dccc08465e23dc27971bfa",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/divine-epithets/translation",
+      "contentDigest": "sha256:f6c26fd0367ceb9d63d30016b3c039fea18130d3e151ad412a7f002950783ffc",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_b3e6aefa664bc9ab372a49fa",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/kannan/translation",
+      "contentDigest": "sha256:23306ce5f409409c119e0bb4a54c2f046604c9d3e4187b288ca97362991bb9db",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_252db3c927f53ff17e005096",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/kurinji/commentary",
+      "contentDigest": "sha256:14bcf4d912440b0be87f457a0527c221ff425ca003a11d8f21e7415cd0a35077",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_d2e520302b54e167be16847d",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/kurinji/translation",
+      "contentDigest": "sha256:d6161851392e898a5b5f7f77c379d475b96c822fc51e8b5f6d334131f579286d",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_0b4102734ad9490059b23ca7",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/marutam/relationship",
+      "contentDigest": "sha256:1ebb12ce368ffcbbacd70a38996439f961991645a6fdc1818fb9f5b8ed8f21fc",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_4bca0e5b913df155ce6a85ee",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/mullai/translation",
+      "contentDigest": "sha256:6c0ceabc24e8fb4e8591cf7a16ed8bd13e9718ad57895ebced7a0876383f537f",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_b8b72bf7f0344cc3124caf01",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/narayana/identity",
+      "contentDigest": "sha256:37cbfb3ef07b82ee9361bc324fa8bbf2757b97ba4e91ed9bb4eca9f3fd311508",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_33250cdc209cf99455dbf8c4",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/narayana/primary-text",
+      "contentDigest": "sha256:0dcc651acf8c3adccc0132e6935ba808540f77293e08b30f1ff55e1a79720881",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_346b0ca727ec2f7b02b6b52a",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/narayana/translation",
+      "contentDigest": "sha256:00af6eb8ca141f3046737f3053199dc327cdb6c8c2046e1b1c87e6bd697383fd",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_752a5b0c8575c936c6df415a",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/primary-text-boundaries/relationship",
+      "contentDigest": "sha256:4a48a2ef6472ed5d14cb99ad60dbf7f7ad5c9ca790eb1c009fbf9c0a6e98e9b3",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_5095112565c602b1388883cf",
+      "siteId": "maha-strategies",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/sangam-landscapes/primary-text",
+      "contentDigest": "sha256:cce0e8643a32f4d90aee806971d122eaee631b45e702359446cca57d71d89719",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_94be7c924fbc92f197067186",
+      "siteId": "mayone-maharajan",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/authorial-lineage/origin",
+      "contentDigest": "sha256:d13c170559fccc51bd73a0fc5f428e9c3dbbba049e56407c0f874e7687229f35",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_b23f8e82f8ed9e7b18c8a535",
+      "siteId": "mayone-maharajan",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/civilizational-memory/origin",
+      "contentDigest": "sha256:cb5daf41ec85d8161efb71dade778b51e97e0a428e212a4eeff964033f22a135",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_eca3c4e2264913b2c113b043",
+      "siteId": "mayone-maharajan",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/maha-principle/relationship",
+      "contentDigest": "sha256:f74e5b5746c982633f709e2e6ab99eb274e000176dfd0149da921942cb2b610f",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_4acd70cabb69b750481a316c",
+      "siteId": "mayone-maharajan",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/recursive-institutions/definition",
+      "contentDigest": "sha256:1c869b2e298a5156c0b41426ceb015780e7e9bdfce5a62488e74d331fd89f4f3",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
+    },
+    {
+      "candidateId": "cand_2ef397182eddc44b4664a277",
+      "siteId": "mayone-maharajan",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/recursive-institutions/relationship",
+      "contentDigest": "sha256:56e0b1962ebe910615f18e5daa23a9ba62182d4463574cc4dbc9cfd53db87d2b",
+      "adoptionState": "ready-for-owner-integration",
+      "blockedDependencies": []
     }
   ],
-  "provenanceDigest": "sha256:a8e9e54926e35ebd16d209a8de9b759c3e928f1a11340c9fa3143e4f4c4c4808"
+  "provenanceDigest": "sha256:a2caf318ec903d9e5b39de9e055696cd1a5ee09525f55829d5c9cf05ad354764"
 }

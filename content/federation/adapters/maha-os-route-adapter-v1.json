@@ -3,7 +3,7 @@
   "siteId": "maha-os",
   "canonicalHost": "www.maha-os.com",
   "rootPath": "/knowledge/",
-  "sourceManifestDigest": "sha256:24a7199544eb9db47c5ee21a0130c9326a563d7248eadc2d054cbc1f0c29d6e1",
+  "sourceManifestDigest": "sha256:3d4494c3645711c9560a1543142986d258d38b687cf773a9da6d9bc3515c7d38",
   "state": "local-owner-handoff",
   "ownerIntegration": {
     "routeShape": "/knowledge/[...segments]",
@@ -16,8 +16,8 @@
     "activeCanonicalReleaseRequired": true
   },
   "counts": {
-    "routes": 54,
-    "boundedAnswers": 270,
+    "routes": 60,
+    "boundedAnswers": 300,
     "publicRoutesCreated": 0,
     "buildsRun": 0
   },
@@ -616,7 +616,73 @@
         "operator-guide"
       ],
       "contentDigest": "sha256:d6532f45865a8e1ec3a21d3a42403a3ff5833b0a134d1724c1ab0f1765bb06a3"
+    },
+    {
+      "candidateId": "cand_4f06ce61ff8dcf7f444b7e42",
+      "path": "/knowledge/private-machine-systems/biometric-data-boundary/architecture",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/architecture",
+      "segments": [
+        "private-machine-systems",
+        "biometric-data-boundary",
+        "architecture"
+      ],
+      "contentDigest": "sha256:4a2327d5396909850f41205d7dff3b98c87bcc04bfe87c2ce874baa6a7f36b0a"
+    },
+    {
+      "candidateId": "cand_b7ef8200a3e256cecc0b94a6",
+      "path": "/knowledge/private-machine-systems/caregiver-access/controls",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/caregiver-access/controls",
+      "segments": [
+        "private-machine-systems",
+        "caregiver-access",
+        "controls"
+      ],
+      "contentDigest": "sha256:1bd7f7f9c53c7e721231577c372d9eeedc70a52534835d07bbe9959280327228"
+    },
+    {
+      "candidateId": "cand_7c0bcc71dc1b563018c8e4a2",
+      "path": "/knowledge/private-machine-systems/consent-receipts/controls",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/consent-receipts/controls",
+      "segments": [
+        "private-machine-systems",
+        "consent-receipts",
+        "controls"
+      ],
+      "contentDigest": "sha256:5cbfa77897c6e9793cf705eb40a3f0ad670b0d0e8c26cd80cca7f07ab0e9cdf7"
+    },
+    {
+      "candidateId": "cand_591f8a9c8d3c842c358fbd24",
+      "path": "/knowledge/private-machine-systems/data-retention/definition",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/data-retention/definition",
+      "segments": [
+        "private-machine-systems",
+        "data-retention",
+        "definition"
+      ],
+      "contentDigest": "sha256:1743619330409777090e72a1b775f251140bc7e50c08a5d0cafa20a6fdb798c6"
+    },
+    {
+      "candidateId": "cand_e699f2e2e8ff44b75136697e",
+      "path": "/knowledge/private-machine-systems/data-retention/operator-guide",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/data-retention/operator-guide",
+      "segments": [
+        "private-machine-systems",
+        "data-retention",
+        "operator-guide"
+      ],
+      "contentDigest": "sha256:297dbb7e470ae7f2e0f5090028c3f1ed45eae70e142c91c4e0fe85b1d6a436fc"
+    },
+    {
+      "candidateId": "cand_537cd35e465014c75ff6957a",
+      "path": "/knowledge/private-machine-systems/sensor-provenance/controls",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/sensor-provenance/controls",
+      "segments": [
+        "private-machine-systems",
+        "sensor-provenance",
+        "controls"
+      ],
+      "contentDigest": "sha256:88ba90e8e8d9aa551cbf4afaf3f478b3b749234f7fc738e672f330d079e5cdc6"
     }
   ],
-  "provenanceDigest": "sha256:818f1bd42e93e85263768adb9b9d981def3eb0c7b80c0ea9cfececed25bc7971"
+  "provenanceDigest": "sha256:4744b81cbe14837e27c3ce10b40e592b700e7ce6469342b86094e90f43426fd8"
 }

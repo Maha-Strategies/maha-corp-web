@@ -37,7 +37,7 @@ function implementationReport(result: ReturnType<typeof compileFederationPages>)
     '',
     '## Outcome',
     '',
-    `All **${counts.pages} evidence-ready specifications** now have deterministic, host-specific content implementations containing ${counts.boundedAnswers} bounded answers and ${counts.sourceBindings} source bindings. This total includes append-only readiness remediations and every verified tranche through Tranche 9.`,
+    `All **${counts.pages} evidence-ready specifications** now have deterministic, host-specific content implementations containing ${counts.boundedAnswers} bounded answers and ${counts.sourceBindings} source bindings. This total includes append-only readiness remediations and every verified tranche through Tranche 10.`,
     '',
     `**${counts.readyForOwnerIntegration}** can enter their owning property’s integration workflow. **${counts.blockedOnUnreadyPrerequisite}** are fully compiled but held because a required definition is not evidence-ready.`,
     '',
@@ -61,7 +61,7 @@ function implementationReport(result: ReturnType<typeof compileFederationPages>)
   ].join('\n')}\n`
 }
 
-export function generateFederationPageImplementations(outputRoot: string, maximumTranche: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 = 9) {
+export function generateFederationPageImplementations(outputRoot: string, maximumTranche: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 = 10) {
   type Input = Parameters<typeof compileFederationPages>[0]
   type Supplement = NonNullable<Input['supplements']>[number]
   const candidateMap = verified<Input['candidateMap']>('content/federation/federation-route-candidates-v1.json')
@@ -81,6 +81,7 @@ export function generateFederationPageImplementations(outputRoot: string, maximu
     { batchId: 'tranche-7', tranche: 7 as const, decisions: 'content/federation/federation-tranche-7-decisions-v1.json', specifications: 'content/federation/federation-tranche-7-page-specifications-v1.json', packets: 'content/federation/federation-tranche-7-evidence-packets-v1.json' },
     { batchId: 'tranche-8', tranche: 8 as const, decisions: 'content/federation/federation-tranche-8-decisions-v1.json', specifications: 'content/federation/federation-tranche-8-page-specifications-v1.json', packets: 'content/federation/federation-tranche-8-evidence-packets-v1.json' },
     { batchId: 'tranche-9', tranche: 9 as const, decisions: 'content/federation/federation-tranche-9-decisions-v1.json', specifications: 'content/federation/federation-tranche-9-page-specifications-v1.json', packets: 'content/federation/federation-tranche-9-evidence-packets-v1.json' },
+    { batchId: 'tranche-10', tranche: 10 as const, decisions: 'content/federation/federation-tranche-10-decisions-v1.json', specifications: 'content/federation/federation-tranche-10-page-specifications-v1.json', packets: 'content/federation/federation-tranche-10-evidence-packets-v1.json' },
   ]
   for (const definition of supplementDefinitions) {
     if (definition.tranche > maximumTranche) continue
@@ -98,6 +99,7 @@ export function generateFederationPageImplementations(outputRoot: string, maximu
     tranches,
     supplements,
     priorRelationshipHorizon: supplements.some((entry) => entry.tranche >= 8) ? 7 : undefined,
+    appendOrderAfterTranche: maximumTranche >= 10 ? 9 : undefined,
   })
   const artifacts: string[] = []
   const registryPath = 'content/federation/implementations/federation-page-implementation-registry-v1.json'

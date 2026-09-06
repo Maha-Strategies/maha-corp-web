@@ -2,11 +2,11 @@
   "schemaVersion": "maha-federation-property-pages/1.0",
   "siteId": "agentic-publishing",
   "canonicalHost": "publish.mahastrategies.com",
-  "registryDigest": "sha256:a8e9e54926e35ebd16d209a8de9b759c3e928f1a11340c9fa3143e4f4c4c4808",
+  "registryDigest": "sha256:a2caf318ec903d9e5b39de9e055696cd1a5ee09525f55829d5c9cf05ad354764",
   "status": "local-unreleased",
   "counts": {
-    "pages": 74,
-    "readyForOwnerIntegration": 64,
+    "pages": 84,
+    "readyForOwnerIntegration": 74,
     "blockedOnUnreadyPrerequisite": 10
   },
   "pages": [
@@ -18787,7 +18787,2478 @@
         "packetDigest": "sha256:c39016ac884d41b3778ef25f8ce47bda83947859f7dc7c5f53444c48d2576be0"
       },
       "contentDigest": "sha256:7961a8bcfe8421ca829821f76146f910ad8d43c7dce0f2b296182f03423b1d9e"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_ad4096bf1df1196a9febf3a4",
+      "tranche": 10,
+      "siteId": "agentic-publishing",
+      "canonicalHost": "publish.mahastrategies.com",
+      "path": "/agentic-publishing/author-identity/workflow",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/author-identity/workflow",
+      "title": "Author Identity — Workflow",
+      "topic": "author-identity",
+      "routeRole": "workflow",
+      "concept": {
+        "conceptId": "urn:maha:concept:release:author-identity",
+        "familyId": "release",
+        "canonicalOwner": "agentic-publishing",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:release:author-identity"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:release"
+          }
+        ]
+      },
+      "directAnswer": "Author Identity, in this workflow, is limited to the following inspected scope. OAuth-authenticated ORCID iDs associate a record holder with a persistent identifier and can be carried in research-output metadata. A controlled vocabulary distinguishes fourteen kinds of contribution to research outputs. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Author Identity, in this workflow, is limited to the following inspected scope. OAuth-authenticated ORCID iDs associate a record holder with a persistent identifier and can be carried in research-output metadata. A controlled vocabulary distinguishes fourteen kinds of contribution to research outputs. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Workflow",
+          "kind": "role-method",
+          "paragraphs": [
+            "Show the ordered states, authorization boundaries, handoffs, replay rules, and terminal outcomes.",
+            "A workflow diagram does not prove that a remote provider, payment, release, or delivery occurred.",
+            "Applied scope: OAuth-authenticated ORCID iDs associate a record holder with a persistent identifier and can be carried in research-output metadata. A controlled vocabulary distinguishes fourteen kinds of contribution to research outputs."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is agentic-publishing. This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish publishing protocols, editorial templates, release guidance. It must not publish duplicate research records or unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Collecting and sharing ORCID iDs — Why it is important to collect authenticated ORCID iDs; How it works; metadata passed downstream. Establishes: OAuth-authenticated ORCID iDs associate a record holder with a persistent identifier and can be carried in research-output metadata.",
+            "CRediT — Contributor Role Taxonomy — CRediT’s 14 Contributor Roles. Establishes: A controlled vocabulary distinguishes fourteen kinds of contribution to research outputs."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "An ORCID iD does not prove every biographical claim, contribution, affiliation, or authorship decision.",
+            "A contributor role does not by itself determine authorship, responsibility for every claim, identity, or contribution quality.",
+            "This route must not claim duplicate research records.",
+            "This route must not claim unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/author-identity/definition",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/author-identity/example",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/author-identity/template",
+            "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/author-identity/governance"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "orcid-authenticated-ids",
+          "title": "Collecting and sharing ORCID iDs",
+          "responsibleBody": "ORCID",
+          "versionOrDate": "living guidance inspected 2026-09-06",
+          "sourceClass": "scholarly-identity-guidance",
+          "url": "https://info.orcid.org/documentation/collecting-and-sharing-orcid-ids/",
+          "locator": "Why it is important to collect authenticated ORCID iDs; How it works; metadata passed downstream",
+          "establishes": "OAuth-authenticated ORCID iDs associate a record holder with a persistent identifier and can be carried in research-output metadata.",
+          "doesNotEstablish": "An ORCID iD does not prove every biographical claim, contribution, affiliation, or authorship decision.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "credit-taxonomy",
+          "title": "CRediT — Contributor Role Taxonomy",
+          "responsibleBody": "NISO",
+          "versionOrDate": "ANSI/NISO standard approved 2022; site inspected 2026-09-06",
+          "sourceClass": "scholarly-contribution-standard",
+          "url": "https://credit.niso.org/",
+          "locator": "CRediT’s 14 Contributor Roles",
+          "establishes": "A controlled vocabulary distinguishes fourteen kinds of contribution to research outputs.",
+          "doesNotEstablish": "A contributor role does not by itself determine authorship, responsibility for every claim, identity, or contribution quality.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/author-identity/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_a9631c8bc4e5b0e1b1c81f77"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/author-identity/example",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_c568f6d3e2e110108ee43107"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/author-identity/template",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_2a430cafdfca6ca39585df66"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/author-identity/governance",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_70e290cb81e9584ddd8c096c"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Author Identity mean in this bounded context?",
+          "answer": "Author Identity, in this workflow, is limited to the following inspected scope. OAuth-authenticated ORCID iDs associate a record holder with a persistent identifier and can be carried in research-output metadata. A controlled vocabulary distinguishes fourteen kinds of contribution to research outputs. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this workflow answer?",
+          "answer": "Collecting and sharing ORCID iDs (living guidance inspected 2026-09-06), at Why it is important to collect authenticated ORCID iDs; How it works; metadata passed downstream, supports oAuth-authenticated ORCID iDs associate a record holder with a persistent identifier and can be carried in research-output metadata. CRediT — Contributor Role Taxonomy (ANSI/NISO standard approved 2022; site inspected 2026-09-06), at CRediT’s 14 Contributor Roles, supports a controlled vocabulary distinguishes fourteen kinds of contribution to research outputs."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "An ORCID iD does not prove every biographical claim, contribution, affiliation, or authorship decision. A contributor role does not by itself determine authorship, responsibility for every claim, identity, or contribution quality. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://publish.mahastrategies.com/agentic-publishing/author-identity/workflow#article",
+        "headline": "Author Identity — Workflow",
+        "url": "https://publish.mahastrategies.com/agentic-publishing/author-identity/workflow",
+        "isPartOf": "https://publish.mahastrategies.com/",
+        "citation": [
+          "https://info.orcid.org/documentation/collecting-and-sharing-orcid-ids/",
+          "https://credit.niso.org/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Author Identity mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Author Identity, in this workflow, is limited to the following inspected scope. OAuth-authenticated ORCID iDs associate a record holder with a persistent identifier and can be carried in research-output metadata. A controlled vocabulary distinguishes fourteen kinds of contribution to research outputs. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this workflow answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Collecting and sharing ORCID iDs (living guidance inspected 2026-09-06), at Why it is important to collect authenticated ORCID iDs; How it works; metadata passed downstream, supports oAuth-authenticated ORCID iDs associate a record holder with a persistent identifier and can be carried in research-output metadata. CRediT — Contributor Role Taxonomy (ANSI/NISO standard approved 2022; site inspected 2026-09-06), at CRediT’s 14 Contributor Roles, supports a controlled vocabulary distinguishes fourteen kinds of contribution to research outputs."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "An ORCID iD does not prove every biographical claim, contribution, affiliation, or authorship decision. A contributor role does not by itself determine authorship, responsibility for every claim, identity, or contribution quality. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-10",
+        "decisionManifestDigest": "sha256:9ef07cfe461c123d2f87caf30b3271a31692f97f2c2307a426830667a68a1bfa",
+        "decisionDigest": "sha256:d379bed4e4cbd23058876271dd2bd2089b19630ebb540d50f3373fde1fa77650",
+        "specificationManifestDigest": "sha256:f3a532332a4567fead139076fd821fe0436d910d4b3b576edd34f057ac3856f0",
+        "specificationDigest": "sha256:c839e2f7af4757b336e6f86ca681f839124897f07ecb66789329f599b7b7a9da",
+        "packetManifestDigest": "sha256:c3016515219a07cc5be0bf9761efa3afb2b4d315436650c2832ce3737310c408",
+        "packetDigest": "sha256:99d5b0d684bbc1049bac8747f26b7a9a3f4a33ea1bda758e01eab7747e63774f"
+      },
+      "contentDigest": "sha256:5d6054ff24c79c92a9f73d2129aac05c36632b7d47c8bcfc1cf0f72086c4798e"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_e2f9bb46e7fb8ba86b13599f",
+      "tranche": 10,
+      "siteId": "agentic-publishing",
+      "canonicalHost": "publish.mahastrategies.com",
+      "path": "/agentic-publishing/citation-verification/template",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/citation-verification/template",
+      "title": "Citation Verification — Template",
+      "topic": "citation-verification",
+      "routeRole": "template",
+      "concept": {
+        "conceptId": "urn:maha:concept:release:citation-verification",
+        "familyId": "release",
+        "canonicalOwner": "agentic-publishing",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:release:citation-verification"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:release"
+          }
+        ]
+      },
+      "directAnswer": "Citation Verification, in this template, is limited to the following inspected scope. Crossref exposes member-deposited bibliographic metadata and relationships through human, API, content-negotiation, and bulk interfaces. Resolution through doi.org can confirm that a DOI is live and identify its configured landing page after registration. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Citation Verification, in this template, is limited to the following inspected scope. Crossref exposes member-deposited bibliographic metadata and relationships through human, API, content-negotiation, and bulk interfaces. Resolution through doi.org can confirm that a DOI is live and identify its configured landing page after registration. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Template",
+          "kind": "role-method",
+          "paragraphs": [
+            "Expose required fields, their authority, allowed values, and validation failures without pre-filling unknown evidence.",
+            "A complete-looking template must not manufacture review, rights, measurements, or release state.",
+            "Applied scope: Crossref exposes member-deposited bibliographic metadata and relationships through human, API, content-negotiation, and bulk interfaces. Resolution through doi.org can confirm that a DOI is live and identify its configured landing page after registration."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is agentic-publishing. This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish publishing protocols, editorial templates, release guidance. It must not publish duplicate research records or unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Metadata Retrieval — Sources of metadata; REST API; Content negotiation; access and authentication. Establishes: Crossref exposes member-deposited bibliographic metadata and relationships through human, API, content-negotiation, and bulk interfaces.",
+            "Verify your registration — DOI resolution check; successful and failed deposit states; submission queue caveat. Establishes: Resolution through doi.org can confirm that a DOI is live and identify its configured landing page after registration."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Crossref primarily receives metadata rather than scraping full text. A returned record does not prove metadata completeness, source access, passage support, rights, or truth.",
+            "Resolution proves neither that the landing content was inspected nor that it supports a claim, names the intended version, is reusable, or remains complete.",
+            "This route must not claim duplicate research records.",
+            "This route must not claim unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/citation-verification/definition",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/citation-verification/example",
+            "property-home: https://publish.mahastrategies.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "crossref-metadata-retrieval-t9",
+          "title": "Metadata Retrieval",
+          "responsibleBody": "Crossref",
+          "versionOrDate": "living documentation updated 16 October 2025; inspected 2026-09-06",
+          "sourceClass": "scholarly-metadata-service",
+          "url": "https://www.crossref.org/documentation/retrieve-metadata/",
+          "locator": "Sources of metadata; REST API; Content negotiation; access and authentication",
+          "establishes": "Crossref exposes member-deposited bibliographic metadata and relationships through human, API, content-negotiation, and bulk interfaces.",
+          "doesNotEstablish": "Crossref primarily receives metadata rather than scraping full text. A returned record does not prove metadata completeness, source access, passage support, rights, or truth.",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "crossref-registration-verification-t9",
+          "title": "Verify your registration",
+          "responsibleBody": "Crossref",
+          "versionOrDate": "living documentation updated 10 December 2025; inspected 2026-09-06",
+          "sourceClass": "scholarly-metadata-service",
+          "url": "https://www.crossref.org/documentation/register-maintain-records/verify-your-registration/",
+          "locator": "DOI resolution check; successful and failed deposit states; submission queue caveat",
+          "establishes": "Resolution through doi.org can confirm that a DOI is live and identify its configured landing page after registration.",
+          "doesNotEstablish": "Resolution proves neither that the landing content was inspected nor that it supports a claim, names the intended version, is reusable, or remains complete.",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/citation-verification/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_e070d38c1f0af0a458384c1a"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/citation-verification/example",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_692e8e5dc2aadf4635f63088"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Citation Verification mean in this bounded context?",
+          "answer": "Citation Verification, in this template, is limited to the following inspected scope. Crossref exposes member-deposited bibliographic metadata and relationships through human, API, content-negotiation, and bulk interfaces. Resolution through doi.org can confirm that a DOI is live and identify its configured landing page after registration. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this template answer?",
+          "answer": "Metadata Retrieval (living documentation updated 16 October 2025; inspected 2026-09-06), at Sources of metadata; REST API; Content negotiation; access and authentication, supports crossref exposes member-deposited bibliographic metadata and relationships through human, API, content-negotiation, and bulk interfaces. Verify your registration (living documentation updated 10 December 2025; inspected 2026-09-06), at DOI resolution check; successful and failed deposit states; submission queue caveat, supports resolution through doi.org can confirm that a DOI is live and identify its configured landing page after registration."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Crossref primarily receives metadata rather than scraping full text. A returned record does not prove metadata completeness, source access, passage support, rights, or truth. Resolution proves neither that the landing content was inspected nor that it supports a claim, names the intended version, is reusable, or remains complete. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://publish.mahastrategies.com/agentic-publishing/citation-verification/template#article",
+        "headline": "Citation Verification — Template",
+        "url": "https://publish.mahastrategies.com/agentic-publishing/citation-verification/template",
+        "isPartOf": "https://publish.mahastrategies.com/",
+        "citation": [
+          "https://www.crossref.org/documentation/retrieve-metadata/",
+          "https://www.crossref.org/documentation/register-maintain-records/verify-your-registration/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Citation Verification mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Citation Verification, in this template, is limited to the following inspected scope. Crossref exposes member-deposited bibliographic metadata and relationships through human, API, content-negotiation, and bulk interfaces. Resolution through doi.org can confirm that a DOI is live and identify its configured landing page after registration. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this template answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Metadata Retrieval (living documentation updated 16 October 2025; inspected 2026-09-06), at Sources of metadata; REST API; Content negotiation; access and authentication, supports crossref exposes member-deposited bibliographic metadata and relationships through human, API, content-negotiation, and bulk interfaces. Verify your registration (living documentation updated 10 December 2025; inspected 2026-09-06), at DOI resolution check; successful and failed deposit states; submission queue caveat, supports resolution through doi.org can confirm that a DOI is live and identify its configured landing page after registration."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Crossref primarily receives metadata rather than scraping full text. A returned record does not prove metadata completeness, source access, passage support, rights, or truth. Resolution proves neither that the landing content was inspected nor that it supports a claim, names the intended version, is reusable, or remains complete. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-10",
+        "decisionManifestDigest": "sha256:9ef07cfe461c123d2f87caf30b3271a31692f97f2c2307a426830667a68a1bfa",
+        "decisionDigest": "sha256:dcbbdf438655c4f93672b03c238182d0f2bc4142a571c4257795b9d79e07e4af",
+        "specificationManifestDigest": "sha256:f3a532332a4567fead139076fd821fe0436d910d4b3b576edd34f057ac3856f0",
+        "specificationDigest": "sha256:c4781343a7fcf06962fbcb9c71231a954d29a7fab4060528b40b51f6bd2c5194",
+        "packetManifestDigest": "sha256:c3016515219a07cc5be0bf9761efa3afb2b4d315436650c2832ce3737310c408",
+        "packetDigest": "sha256:e8e21890951012eb08f728ea794cde285d2c1207ecffb176f519c6aa486ebd70"
+      },
+      "contentDigest": "sha256:6a675b8bfaf453e765312a36e159f93b89393460390053f2b09253d8a1e5b873"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_5865e7346f80e358fb036fd5",
+      "tranche": 10,
+      "siteId": "agentic-publishing",
+      "canonicalHost": "publish.mahastrategies.com",
+      "path": "/agentic-publishing/context-pack/machine-interface",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/context-pack/machine-interface",
+      "title": "Context Pack — Machine Interface",
+      "topic": "context-pack",
+      "routeRole": "machine-interface",
+      "concept": {
+        "conceptId": "urn:maha:concept:release:context-pack",
+        "familyId": "release",
+        "canonicalOwner": "agentic-publishing",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:release:context-pack"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:release"
+          }
+        ]
+      },
+      "directAnswer": "Context Pack, in this machine interface, is limited to the following inspected scope. The compiler validates bounded document and request inputs, selects source passages under a deterministic budget, and emits input and output hashes. The evaluator requires exact evidence spans from declared input documents and reports whether each span was retained in the compiled pack. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Context Pack, in this machine interface, is limited to the following inspected scope. The compiler validates bounded document and request inputs, selects source passages under a deterministic budget, and emits input and output hashes. The evaluator requires exact evidence spans from declared input documents and reports whether each span was retained in the compiled pack. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Machine interface",
+          "kind": "role-method",
+          "paragraphs": [
+            "Define request and response fields, versions, identifiers, error states, and replay behavior.",
+            "An interface contract must preserve unknown and refusal states and cannot imply a service is available.",
+            "Applied scope: The compiler validates bounded document and request inputs, selects source passages under a deterministic budget, and emits input and output hashes. The evaluator requires exact evidence spans from declared input documents and reports whether each span was retained in the compiled pack."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is agentic-publishing. This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish publishing protocols, editorial templates, release guidance. It must not publish duplicate research records or unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Maha context-pack compiler — parseContextPackRequest; compileContextPack; includedPassages; inputHash and outputHash. Establishes: The compiler validates bounded document and request inputs, selects source passages under a deterministic budget, and emits input and output hashes.",
+            "Maha context-pack evidence evaluator — parseContextEvaluationRequest; evaluateContextPack; requiredEvidenceRetentionPercent. Establishes: The evaluator requires exact evidence spans from declared input documents and reports whether each span was retained in the compiled pack."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "A compiled context pack does not establish source truth, relevance outside its declared request, legal compliance, downstream answer quality, or model behavior.",
+            "Retention means that an exact supplied span remains present; it does not validate factual accuracy, answer quality, rights, safety, or downstream use.",
+            "This route must not claim duplicate research records.",
+            "This route must not claim unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/context-pack/example",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/context-pack/template",
+            "property-home: https://publish.mahastrategies.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "local-context-pack-compiler",
+          "title": "Maha context-pack compiler",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source inspected 2026-09-06",
+          "sourceClass": "local-public-contract",
+          "url": null,
+          "locator": "parseContextPackRequest; compileContextPack; includedPassages; inputHash and outputHash",
+          "establishes": "The compiler validates bounded document and request inputs, selects source passages under a deterministic budget, and emits input and output hashes.",
+          "doesNotEstablish": "A compiled context pack does not establish source truth, relevance outside its declared request, legal compliance, downstream answer quality, or model behavior.",
+          "rightsBasis": "Maha-controlled repository source; symbols, headings, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "inspectionDepth": "code-symbol",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "local-context-pack-evaluator",
+          "title": "Maha context-pack evidence evaluator",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source inspected 2026-09-06",
+          "sourceClass": "local-public-contract",
+          "url": null,
+          "locator": "parseContextEvaluationRequest; evaluateContextPack; requiredEvidenceRetentionPercent",
+          "establishes": "The evaluator requires exact evidence spans from declared input documents and reports whether each span was retained in the compiled pack.",
+          "doesNotEstablish": "Retention means that an exact supplied span remains present; it does not validate factual accuracy, answer quality, rights, safety, or downstream use.",
+          "rightsBasis": "Maha-controlled repository source; symbols, headings, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "inspectionDepth": "code-symbol",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/context-pack/example",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_4049f9aea1313792f60871b4"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/context-pack/template",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_51c42edacec0b14271e83eec"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Context Pack mean in this bounded context?",
+          "answer": "Context Pack, in this machine interface, is limited to the following inspected scope. The compiler validates bounded document and request inputs, selects source passages under a deterministic budget, and emits input and output hashes. The evaluator requires exact evidence spans from declared input documents and reports whether each span was retained in the compiled pack. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this machine interface answer?",
+          "answer": "Maha context-pack compiler (repository source inspected 2026-09-06), at parseContextPackRequest; compileContextPack; includedPassages; inputHash and outputHash, supports the compiler validates bounded document and request inputs, selects source passages under a deterministic budget, and emits input and output hashes. Maha context-pack evidence evaluator (repository source inspected 2026-09-06), at parseContextEvaluationRequest; evaluateContextPack; requiredEvidenceRetentionPercent, supports the evaluator requires exact evidence spans from declared input documents and reports whether each span was retained in the compiled pack."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "A compiled context pack does not establish source truth, relevance outside its declared request, legal compliance, downstream answer quality, or model behavior. Retention means that an exact supplied span remains present; it does not validate factual accuracy, answer quality, rights, safety, or downstream use. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://publish.mahastrategies.com/agentic-publishing/context-pack/machine-interface#article",
+        "headline": "Context Pack — Machine Interface",
+        "url": "https://publish.mahastrategies.com/agentic-publishing/context-pack/machine-interface",
+        "isPartOf": "https://publish.mahastrategies.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Context Pack mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Context Pack, in this machine interface, is limited to the following inspected scope. The compiler validates bounded document and request inputs, selects source passages under a deterministic budget, and emits input and output hashes. The evaluator requires exact evidence spans from declared input documents and reports whether each span was retained in the compiled pack. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this machine interface answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Maha context-pack compiler (repository source inspected 2026-09-06), at parseContextPackRequest; compileContextPack; includedPassages; inputHash and outputHash, supports the compiler validates bounded document and request inputs, selects source passages under a deterministic budget, and emits input and output hashes. Maha context-pack evidence evaluator (repository source inspected 2026-09-06), at parseContextEvaluationRequest; evaluateContextPack; requiredEvidenceRetentionPercent, supports the evaluator requires exact evidence spans from declared input documents and reports whether each span was retained in the compiled pack."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A compiled context pack does not establish source truth, relevance outside its declared request, legal compliance, downstream answer quality, or model behavior. Retention means that an exact supplied span remains present; it does not validate factual accuracy, answer quality, rights, safety, or downstream use. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-10",
+        "decisionManifestDigest": "sha256:9ef07cfe461c123d2f87caf30b3271a31692f97f2c2307a426830667a68a1bfa",
+        "decisionDigest": "sha256:00301ef1a50f3055c542137aab6ad4ffea2b6b713c8a02961d348640d43d8e8e",
+        "specificationManifestDigest": "sha256:f3a532332a4567fead139076fd821fe0436d910d4b3b576edd34f057ac3856f0",
+        "specificationDigest": "sha256:f75fbc6f74dc38ef10fd36033521e5f1cfc76476afb39aaa03a0affe51383b00",
+        "packetManifestDigest": "sha256:c3016515219a07cc5be0bf9761efa3afb2b4d315436650c2832ce3737310c408",
+        "packetDigest": "sha256:93d8624c3ef676d92bff501bac89564776c411e21d9eb7b2e5b731e012d87f6a"
+      },
+      "contentDigest": "sha256:288ba46042a061e0971174bf69e25a14f3e4bfc098f2bf9b10cb921832d20f6f"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_a12f6f020c2d7c61e52a361f",
+      "tranche": 10,
+      "siteId": "agentic-publishing",
+      "canonicalHost": "publish.mahastrategies.com",
+      "path": "/agentic-publishing/correction-policy/governance",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/correction-policy/governance",
+      "title": "Correction Policy — Governance",
+      "topic": "correction-policy",
+      "routeRole": "governance",
+      "concept": {
+        "conceptId": "urn:maha:concept:release:correction-policy",
+        "familyId": "release",
+        "canonicalOwner": "agentic-publishing",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:release:correction-policy"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:release"
+          }
+        ]
+      },
+      "directAnswer": "Correction Policy, in this Governance, is limited to the following inspected scope. Publisher-deposited Crossmark metadata can communicate a work’s current status and link corrections, retractions, or other updates. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Correction Policy, in this Governance, is limited to the following inspected scope. Publisher-deposited Crossmark metadata can communicate a work’s current status and link corrections, retractions, or other updates. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Governance",
+          "kind": "role-method",
+          "paragraphs": [
+            "Keep the answer within the inspected source scope and make every operational step or conceptual relation explicit.",
+            "Do not use completeness of presentation as a substitute for evidence, review, or release.",
+            "Applied scope: Publisher-deposited Crossmark metadata can communicate a work’s current status and link corrections, retractions, or other updates."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is agentic-publishing. This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish publishing protocols, editorial templates, release guidance. It must not publish duplicate research records or unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Crossmark — Current status; corrections, retractions, and updates; additional publication information. Establishes: Publisher-deposited Crossmark metadata can communicate a work’s current status and link corrections, retractions, or other updates."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Crossmark depends on publisher deposits and does not independently determine truth, completeness, misconduct, correction adequacy, or current status when metadata are absent.",
+            "This route must not claim duplicate research records.",
+            "This route must not claim unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/correction-policy/definition",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/correction-policy/template",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/correction-policy/example",
+            "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/correction-policy/machine-interface"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "crossref-crossmark-t7",
+          "title": "Crossmark",
+          "responsibleBody": "Crossref",
+          "versionOrDate": "living service documentation inspected 2026-09-06",
+          "sourceClass": "scholarly-status-service",
+          "url": "https://www.crossref.org/services/crossmark/",
+          "locator": "Current status; corrections, retractions, and updates; additional publication information",
+          "establishes": "Publisher-deposited Crossmark metadata can communicate a work’s current status and link corrections, retractions, or other updates.",
+          "doesNotEstablish": "Crossmark depends on publisher deposits and does not independently determine truth, completeness, misconduct, correction adequacy, or current status when metadata are absent.",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/correction-policy/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_d07e0f7ee56b6acfbb2763f4"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/correction-policy/template",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_758a05ad3ebbfe012552fff9"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/correction-policy/example",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_772797408f57857f8c1280c3"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/correction-policy/machine-interface",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_42d98e670cf77dbceec333f0"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Correction Policy mean in this bounded context?",
+          "answer": "Correction Policy, in this Governance, is limited to the following inspected scope. Publisher-deposited Crossmark metadata can communicate a work’s current status and link corrections, retractions, or other updates. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this governance answer?",
+          "answer": "Crossmark (living service documentation inspected 2026-09-06), at Current status; corrections, retractions, and updates; additional publication information, supports publisher-deposited Crossmark metadata can communicate a work’s current status and link corrections, retractions, or other updates."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Crossmark depends on publisher deposits and does not independently determine truth, completeness, misconduct, correction adequacy, or current status when metadata are absent. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://publish.mahastrategies.com/agentic-publishing/correction-policy/governance#article",
+        "headline": "Correction Policy — Governance",
+        "url": "https://publish.mahastrategies.com/agentic-publishing/correction-policy/governance",
+        "isPartOf": "https://publish.mahastrategies.com/",
+        "citation": [
+          "https://www.crossref.org/services/crossmark/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Correction Policy mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Correction Policy, in this Governance, is limited to the following inspected scope. Publisher-deposited Crossmark metadata can communicate a work’s current status and link corrections, retractions, or other updates. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this governance answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Crossmark (living service documentation inspected 2026-09-06), at Current status; corrections, retractions, and updates; additional publication information, supports publisher-deposited Crossmark metadata can communicate a work’s current status and link corrections, retractions, or other updates."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Crossmark depends on publisher deposits and does not independently determine truth, completeness, misconduct, correction adequacy, or current status when metadata are absent. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-10",
+        "decisionManifestDigest": "sha256:9ef07cfe461c123d2f87caf30b3271a31692f97f2c2307a426830667a68a1bfa",
+        "decisionDigest": "sha256:2fc74a8c8208230ab0b191799da3ad8907df1aa95356b7433cd8d2d7ecd535c6",
+        "specificationManifestDigest": "sha256:f3a532332a4567fead139076fd821fe0436d910d4b3b576edd34f057ac3856f0",
+        "specificationDigest": "sha256:3054d6609465c284a7d594dab656c5bd73ae26edc120e00d01734cc21e3a4d9f",
+        "packetManifestDigest": "sha256:c3016515219a07cc5be0bf9761efa3afb2b4d315436650c2832ce3737310c408",
+        "packetDigest": "sha256:db5f5d4fad41f5e0ef4ba4a4e33ce0d50b8f078a8d5290a2c8e276af444d221f"
+      },
+      "contentDigest": "sha256:e085d2c23e373088b4645f2ff502846c10f634be70e8fecaf294d86659567e2f"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_f5fcf7babbf380a80c77e153",
+      "tranche": 10,
+      "siteId": "agentic-publishing",
+      "canonicalHost": "publish.mahastrategies.com",
+      "path": "/agentic-publishing/delivery-receipt/governance",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/delivery-receipt/governance",
+      "title": "Delivery Receipt — Governance",
+      "topic": "delivery-receipt",
+      "routeRole": "governance",
+      "concept": {
+        "conceptId": "urn:maha:concept:release:delivery-receipt",
+        "familyId": "release",
+        "canonicalOwner": "agentic-publishing",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:release:delivery-receipt"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:release"
+          }
+        ]
+      },
+      "directAnswer": "Delivery Receipt, in this Governance, is limited to the following inspected scope. A receipt records digest-bound execution, release, exact substantial-publication revision and route, delivery state, and acknowledgement requirement. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Delivery Receipt, in this Governance, is limited to the following inspected scope. A receipt records digest-bound execution, release, exact substantial-publication revision and route, delivery state, and acknowledgement requirement. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Governance",
+          "kind": "role-method",
+          "paragraphs": [
+            "Keep the answer within the inspected source scope and make every operational step or conceptual relation explicit.",
+            "Do not use completeness of presentation as a substitute for evidence, review, or release.",
+            "Applied scope: A receipt records digest-bound execution, release, exact substantial-publication revision and route, delivery state, and acknowledgement requirement."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is agentic-publishing. This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish publishing protocols, editorial templates, release guidance. It must not publish duplicate research records or unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Substantial MCP delivery receipt contract — bindingFromLicensedProjection; buildSubstantialMcpDeliveryReceipt; verifySubstantialMcpDeliveryReceipt. Establishes: A receipt records digest-bound execution, release, exact substantial-publication revision and route, delivery state, and acknowledgement requirement."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "A valid receipt proves internal field and digest consistency only; it does not prove payment settlement, recipient identity, downstream use, external acknowledgement, or claim truth.",
+            "This route must not claim duplicate research records.",
+            "This route must not claim unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/delivery-receipt/definition",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/delivery-receipt/example",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/delivery-receipt/template",
+            "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/delivery-receipt/machine-interface"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "local-substantial-delivery-receipt",
+          "title": "Substantial MCP delivery receipt contract",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source inspected 2026-09-06",
+          "sourceClass": "local-public-contract",
+          "url": null,
+          "locator": "bindingFromLicensedProjection; buildSubstantialMcpDeliveryReceipt; verifySubstantialMcpDeliveryReceipt",
+          "establishes": "A receipt records digest-bound execution, release, exact substantial-publication revision and route, delivery state, and acknowledgement requirement.",
+          "doesNotEstablish": "A valid receipt proves internal field and digest consistency only; it does not prove payment settlement, recipient identity, downstream use, external acknowledgement, or claim truth.",
+          "rightsBasis": "Maha-controlled repository source; symbols, headings, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "inspectionDepth": "code-symbol",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/delivery-receipt/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_a49f046f7a704bcfd3d99758"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/delivery-receipt/example",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_18d3df26596147cc9974382c"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/delivery-receipt/template",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_2bbdb7b05d62a3f499904973"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/delivery-receipt/machine-interface",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_11c4583945bcbf271f4261bf"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Delivery Receipt mean in this bounded context?",
+          "answer": "Delivery Receipt, in this Governance, is limited to the following inspected scope. A receipt records digest-bound execution, release, exact substantial-publication revision and route, delivery state, and acknowledgement requirement. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this governance answer?",
+          "answer": "Substantial MCP delivery receipt contract (repository source inspected 2026-09-06), at bindingFromLicensedProjection; buildSubstantialMcpDeliveryReceipt; verifySubstantialMcpDeliveryReceipt, supports a receipt records digest-bound execution, release, exact substantial-publication revision and route, delivery state, and acknowledgement requirement."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "A valid receipt proves internal field and digest consistency only; it does not prove payment settlement, recipient identity, downstream use, external acknowledgement, or claim truth. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://publish.mahastrategies.com/agentic-publishing/delivery-receipt/governance#article",
+        "headline": "Delivery Receipt — Governance",
+        "url": "https://publish.mahastrategies.com/agentic-publishing/delivery-receipt/governance",
+        "isPartOf": "https://publish.mahastrategies.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Delivery Receipt mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Delivery Receipt, in this Governance, is limited to the following inspected scope. A receipt records digest-bound execution, release, exact substantial-publication revision and route, delivery state, and acknowledgement requirement. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this governance answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Substantial MCP delivery receipt contract (repository source inspected 2026-09-06), at bindingFromLicensedProjection; buildSubstantialMcpDeliveryReceipt; verifySubstantialMcpDeliveryReceipt, supports a receipt records digest-bound execution, release, exact substantial-publication revision and route, delivery state, and acknowledgement requirement."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A valid receipt proves internal field and digest consistency only; it does not prove payment settlement, recipient identity, downstream use, external acknowledgement, or claim truth. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-10",
+        "decisionManifestDigest": "sha256:9ef07cfe461c123d2f87caf30b3271a31692f97f2c2307a426830667a68a1bfa",
+        "decisionDigest": "sha256:27eb0138ec8a5e8f26c104b5bce0cebac951506fb1b7755f153c43cfb1920ec1",
+        "specificationManifestDigest": "sha256:f3a532332a4567fead139076fd821fe0436d910d4b3b576edd34f057ac3856f0",
+        "specificationDigest": "sha256:d6387ef0d41be61c274a175b66ac12fb9e597214fb79426aa2cf7ca887469d02",
+        "packetManifestDigest": "sha256:c3016515219a07cc5be0bf9761efa3afb2b4d315436650c2832ce3737310c408",
+        "packetDigest": "sha256:020bac0a0c940bb9ced421180a254d013ca978d8529d62948b1c40f598ec3f8a"
+      },
+      "contentDigest": "sha256:a0b6261016dd68d8a2fb975cc60e48bfb4b7364f4cba875c812cc63006f15674"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_b090699a5da989410be8d80a",
+      "tranche": 10,
+      "siteId": "agentic-publishing",
+      "canonicalHost": "publish.mahastrategies.com",
+      "path": "/agentic-publishing/fact-checking/workflow",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/fact-checking/workflow",
+      "title": "Fact Checking — Workflow",
+      "topic": "fact-checking",
+      "routeRole": "workflow",
+      "concept": {
+        "conceptId": "urn:maha:concept:release:fact-checking",
+        "familyId": "release",
+        "canonicalOwner": "agentic-publishing",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:release:fact-checking"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:release"
+          }
+        ]
+      },
+      "directAnswer": "Fact Checking, in this workflow, is limited to the following inspected scope. Fact-checking organizations disclose nonpartisanship, source and funding transparency, methodology, and an open corrections policy. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Fact Checking, in this workflow, is limited to the following inspected scope. Fact-checking organizations disclose nonpartisanship, source and funding transparency, methodology, and an open corrections policy. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Workflow",
+          "kind": "role-method",
+          "paragraphs": [
+            "Show the ordered states, authorization boundaries, handoffs, replay rules, and terminal outcomes.",
+            "A workflow diagram does not prove that a remote provider, payment, release, or delivery occurred.",
+            "Applied scope: Fact-checking organizations disclose nonpartisanship, source and funding transparency, methodology, and an open corrections policy."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is agentic-publishing. This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish publishing protocols, editorial templates, release guidance. It must not publish duplicate research records or unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "IFCN Code of Principles — Commitments 1–5. Establishes: Fact-checking organizations disclose nonpartisanship, source and funding transparency, methodology, and an open corrections policy."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The code describes organizational commitments; it does not certify that a particular conclusion is true or complete.",
+            "This route must not claim duplicate research records.",
+            "This route must not claim unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/fact-checking/definition",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/fact-checking/example",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/fact-checking/template",
+            "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/fact-checking/governance"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "ifcn-code",
+          "title": "IFCN Code of Principles",
+          "responsibleBody": "International Fact-Checking Network at Poynter",
+          "versionOrDate": "current code inspected 2026-09-06",
+          "sourceClass": "editorial-standard",
+          "url": "https://ifcncodeofprinciples.poynter.org/know-more/the-commitments-of-the-code-of-principles",
+          "locator": "Commitments 1–5",
+          "establishes": "Fact-checking organizations disclose nonpartisanship, source and funding transparency, methodology, and an open corrections policy.",
+          "doesNotEstablish": "The code describes organizational commitments; it does not certify that a particular conclusion is true or complete.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/fact-checking/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_99b829e89e5a74983af7e4a0"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/fact-checking/example",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_5b084cbc53cdfccfb6168c7e"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/fact-checking/template",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_248db3f238b44fd72dde342e"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/fact-checking/governance",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_de60bb5150a4946a39c718fe"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Fact Checking mean in this bounded context?",
+          "answer": "Fact Checking, in this workflow, is limited to the following inspected scope. Fact-checking organizations disclose nonpartisanship, source and funding transparency, methodology, and an open corrections policy. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this workflow answer?",
+          "answer": "IFCN Code of Principles (current code inspected 2026-09-06), at Commitments 1–5, supports fact-checking organizations disclose nonpartisanship, source and funding transparency, methodology, and an open corrections policy."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The code describes organizational commitments; it does not certify that a particular conclusion is true or complete. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://publish.mahastrategies.com/agentic-publishing/fact-checking/workflow#article",
+        "headline": "Fact Checking — Workflow",
+        "url": "https://publish.mahastrategies.com/agentic-publishing/fact-checking/workflow",
+        "isPartOf": "https://publish.mahastrategies.com/",
+        "citation": [
+          "https://ifcncodeofprinciples.poynter.org/know-more/the-commitments-of-the-code-of-principles"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Fact Checking mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Fact Checking, in this workflow, is limited to the following inspected scope. Fact-checking organizations disclose nonpartisanship, source and funding transparency, methodology, and an open corrections policy. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this workflow answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "IFCN Code of Principles (current code inspected 2026-09-06), at Commitments 1–5, supports fact-checking organizations disclose nonpartisanship, source and funding transparency, methodology, and an open corrections policy."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The code describes organizational commitments; it does not certify that a particular conclusion is true or complete. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-10",
+        "decisionManifestDigest": "sha256:9ef07cfe461c123d2f87caf30b3271a31692f97f2c2307a426830667a68a1bfa",
+        "decisionDigest": "sha256:f055d8a5807aaa9a1285e2d04a7e020c9a3510af71cd1323598f365541d644fe",
+        "specificationManifestDigest": "sha256:f3a532332a4567fead139076fd821fe0436d910d4b3b576edd34f057ac3856f0",
+        "specificationDigest": "sha256:a0854fab161e50d77c1dd01976512413422ed7ef4a52e7bdb6b4bea4532fb414",
+        "packetManifestDigest": "sha256:c3016515219a07cc5be0bf9761efa3afb2b4d315436650c2832ce3737310c408",
+        "packetDigest": "sha256:206311d56b9ddf2858ff8b8d3943041133630600471d5c785102321e89c4a5b7"
+      },
+      "contentDigest": "sha256:df24cf45b97014b1d17d7d4da698f6d47152a9bf01d41581b2e4346738afd6ec"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_a4524b72717cc8f184332c76",
+      "tranche": 10,
+      "siteId": "agentic-publishing",
+      "canonicalHost": "publish.mahastrategies.com",
+      "path": "/agentic-publishing/licensed-delivery/workflow",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/licensed-delivery/workflow",
+      "title": "Licensed Delivery — Workflow",
+      "topic": "licensed-delivery",
+      "routeRole": "workflow",
+      "concept": {
+        "conceptId": "urn:maha:concept:release:licensed-delivery",
+        "familyId": "release",
+        "canonicalOwner": "agentic-publishing",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:release:licensed-delivery"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:release"
+          }
+        ]
+      },
+      "directAnswer": "Licensed Delivery, in this workflow, is limited to the following inspected scope. A license grants authenticated machine-format access to an exact active canonical release through one declared read-only tool, subject to plan quota and evidence boundaries. A deterministic delivery reference can bind execution, exact release and page revision, source coverage, delivery, and acknowledgement. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Licensed Delivery, in this workflow, is limited to the following inspected scope. A license grants authenticated machine-format access to an exact active canonical release through one declared read-only tool, subject to plan quota and evidence boundaries. A deterministic delivery reference can bind execution, exact release and page revision, source coverage, delivery, and acknowledgement. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Workflow",
+          "kind": "role-method",
+          "paragraphs": [
+            "Show the ordered states, authorization boundaries, handoffs, replay rules, and terminal outcomes.",
+            "A workflow diagram does not prove that a remote provider, payment, release, or delivery occurred.",
+            "Applied scope: A license grants authenticated machine-format access to an exact active canonical release through one declared read-only tool, subject to plan quota and evidence boundaries. A deterministic delivery reference can bind execution, exact release and page revision, source coverage, delivery, and acknowledgement."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is agentic-publishing. This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish publishing protocols, editorial templates, release guidance. It must not publish duplicate research records or unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Maha licensed-evidence public contract — MCP_EVIDENCE_TOOL; MCP_EVIDENCE_LICENSE_TERMS; availabilityBoundary and redistributionBoundary. Establishes: A license grants authenticated machine-format access to an exact active canonical release through one declared read-only tool, subject to plan quota and evidence boundaries.",
+            "Substantial-page MCP delivery receipt — delivery-reference identity, receipt digest, acknowledgement identity and verifier. Establishes: A deterministic delivery reference can bind execution, exact release and page revision, source coverage, delivery, and acknowledgement."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Entitlement does not improve evidence quality, convey third-party redistribution rights, prove availability, or establish that a customer received anything.",
+            "The local schema does not prove a remote delivery, payment, customer acceptance, or production operation.",
+            "This route must not claim duplicate research records.",
+            "This route must not claim unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/licensed-delivery/definition",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/licensed-delivery/example",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/licensed-delivery/template",
+            "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/licensed-delivery/governance"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "local-mcp-evidence-public-contract",
+          "title": "Maha licensed-evidence public contract",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source inspected 2026-09-06",
+          "sourceClass": "local-public-contract",
+          "url": null,
+          "locator": "MCP_EVIDENCE_TOOL; MCP_EVIDENCE_LICENSE_TERMS; availabilityBoundary and redistributionBoundary",
+          "establishes": "A license grants authenticated machine-format access to an exact active canonical release through one declared read-only tool, subject to plan quota and evidence boundaries.",
+          "doesNotEstablish": "Entitlement does not improve evidence quality, convey third-party redistribution rights, prove availability, or establish that a customer received anything.",
+          "rightsBasis": "Maha-controlled repository source; symbol names, headings, and file identity only. No credential, customer value, runtime payload, or receipt body is retained.",
+          "inspectionDepth": "code-symbol",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "local-substantial-delivery-receipt",
+          "title": "Substantial-page MCP delivery receipt",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source inspected 2026-09-06",
+          "sourceClass": "local-implementation",
+          "url": null,
+          "locator": "delivery-reference identity, receipt digest, acknowledgement identity and verifier",
+          "establishes": "A deterministic delivery reference can bind execution, exact release and page revision, source coverage, delivery, and acknowledgement.",
+          "doesNotEstablish": "The local schema does not prove a remote delivery, payment, customer acceptance, or production operation.",
+          "rightsBasis": "Maha-controlled repository source; symbol names, headings, and file identity only. No credential, customer value, runtime payload, or receipt body is retained.",
+          "inspectionDepth": "code-symbol",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/licensed-delivery/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_ef0924ac91a9aaf0d03b4a5a"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/licensed-delivery/example",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_4198df4ef372ca17dcb64edb"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/licensed-delivery/template",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_652281691a3dc25b7b50a1f6"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/licensed-delivery/governance",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_223e514752ac9192f930f348"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Licensed Delivery mean in this bounded context?",
+          "answer": "Licensed Delivery, in this workflow, is limited to the following inspected scope. A license grants authenticated machine-format access to an exact active canonical release through one declared read-only tool, subject to plan quota and evidence boundaries. A deterministic delivery reference can bind execution, exact release and page revision, source coverage, delivery, and acknowledgement. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this workflow answer?",
+          "answer": "Maha licensed-evidence public contract (repository source inspected 2026-09-06), at MCP_EVIDENCE_TOOL; MCP_EVIDENCE_LICENSE_TERMS; availabilityBoundary and redistributionBoundary, supports a license grants authenticated machine-format access to an exact active canonical release through one declared read-only tool, subject to plan quota and evidence boundaries. Substantial-page MCP delivery receipt (repository source inspected 2026-09-06), at delivery-reference identity, receipt digest, acknowledgement identity and verifier, supports a deterministic delivery reference can bind execution, exact release and page revision, source coverage, delivery, and acknowledgement."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Entitlement does not improve evidence quality, convey third-party redistribution rights, prove availability, or establish that a customer received anything. The local schema does not prove a remote delivery, payment, customer acceptance, or production operation. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://publish.mahastrategies.com/agentic-publishing/licensed-delivery/workflow#article",
+        "headline": "Licensed Delivery — Workflow",
+        "url": "https://publish.mahastrategies.com/agentic-publishing/licensed-delivery/workflow",
+        "isPartOf": "https://publish.mahastrategies.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Licensed Delivery mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Licensed Delivery, in this workflow, is limited to the following inspected scope. A license grants authenticated machine-format access to an exact active canonical release through one declared read-only tool, subject to plan quota and evidence boundaries. A deterministic delivery reference can bind execution, exact release and page revision, source coverage, delivery, and acknowledgement. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this workflow answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Maha licensed-evidence public contract (repository source inspected 2026-09-06), at MCP_EVIDENCE_TOOL; MCP_EVIDENCE_LICENSE_TERMS; availabilityBoundary and redistributionBoundary, supports a license grants authenticated machine-format access to an exact active canonical release through one declared read-only tool, subject to plan quota and evidence boundaries. Substantial-page MCP delivery receipt (repository source inspected 2026-09-06), at delivery-reference identity, receipt digest, acknowledgement identity and verifier, supports a deterministic delivery reference can bind execution, exact release and page revision, source coverage, delivery, and acknowledgement."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Entitlement does not improve evidence quality, convey third-party redistribution rights, prove availability, or establish that a customer received anything. The local schema does not prove a remote delivery, payment, customer acceptance, or production operation. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-10",
+        "decisionManifestDigest": "sha256:9ef07cfe461c123d2f87caf30b3271a31692f97f2c2307a426830667a68a1bfa",
+        "decisionDigest": "sha256:bc333fbfbc554f961088923cc307ee0ab781a12e09a0e986c93e0e23da93fcf6",
+        "specificationManifestDigest": "sha256:f3a532332a4567fead139076fd821fe0436d910d4b3b576edd34f057ac3856f0",
+        "specificationDigest": "sha256:d4b53e2c143072cb05a78f2d8535b9c7de4140b66cb08fe6093f3cb9923947c9",
+        "packetManifestDigest": "sha256:c3016515219a07cc5be0bf9761efa3afb2b4d315436650c2832ce3737310c408",
+        "packetDigest": "sha256:30ad6e9aed3bb2a490bd78be6d3c0d196ee8dff08ea74daad280018b0ac29277"
+      },
+      "contentDigest": "sha256:857e0d1e7c21a389b668e23ff6ee9c75b09071aabec9b3333e0ecbd735dd972c"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_e7207694b02473e1cf4ec0ae",
+      "tranche": 10,
+      "siteId": "agentic-publishing",
+      "canonicalHost": "publish.mahastrategies.com",
+      "path": "/agentic-publishing/retraction-policy/template",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/retraction-policy/template",
+      "title": "Retraction Policy — Template",
+      "topic": "retraction-policy",
+      "routeRole": "template",
+      "concept": {
+        "conceptId": "urn:maha:concept:release:retraction-policy",
+        "familyId": "release",
+        "canonicalOwner": "agentic-publishing",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:release:retraction-policy"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:release"
+          }
+        ]
+      },
+      "directAnswer": "Retraction Policy, in this template, is limited to the following inspected scope. Reasons for considering retraction and notice properties including linkage, identification, reason, responsibility, promptness, and accessibility. Publisher-deposited metadata can expose current status and link corrections, retractions, or other updates. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Retraction Policy, in this template, is limited to the following inspected scope. Reasons for considering retraction and notice properties including linkage, identification, reason, responsibility, promptness, and accessibility. Publisher-deposited metadata can expose current status and link corrections, retractions, or other updates. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Template",
+          "kind": "role-method",
+          "paragraphs": [
+            "Expose required fields, their authority, allowed values, and validation failures without pre-filling unknown evidence.",
+            "A complete-looking template must not manufacture review, rights, measurements, or release state.",
+            "Applied scope: Reasons for considering retraction and notice properties including linkage, identification, reason, responsibility, promptness, and accessibility. Publisher-deposited metadata can expose current status and link corrections, retractions, or other updates."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is agentic-publishing. This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish publishing protocols, editorial templates, release guidance. It must not publish duplicate research records or unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Retraction Guidelines — Summary; When should a publication be retracted?; What form should a retraction take?. Establishes: Reasons for considering retraction and notice properties including linkage, identification, reason, responsibility, promptness, and accessibility.",
+            "Crossmark documentation — Crossmark; Benefits; How Crossmark works; publisher obligations. Establishes: Publisher-deposited metadata can expose current status and link corrections, retractions, or other updates."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The guidance does not itself retract an object, adjudicate misconduct, resolve every correction case, or create universal law.",
+            "Crossmark depends on publisher deposits and does not determine truth, misconduct, notice adequacy, or completeness.",
+            "This route must not claim duplicate research records.",
+            "This route must not claim unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/retraction-policy/definition",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/retraction-policy/example",
+            "property-home: https://publish.mahastrategies.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "cope-retraction-v2-t9",
+          "title": "Retraction Guidelines",
+          "responsibleBody": "COPE Council",
+          "versionOrDate": "version 2, November 2019",
+          "sourceClass": "editorial-guidance",
+          "url": "https://doi.org/10.24318/cope.2019.1.4",
+          "locator": "Summary; When should a publication be retracted?; What form should a retraction take?",
+          "establishes": "Reasons for considering retraction and notice properties including linkage, identification, reason, responsibility, promptness, and accessibility.",
+          "doesNotEstablish": "The guidance does not itself retract an object, adjudicate misconduct, resolve every correction case, or create universal law.",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "crossref-crossmark-retraction-t9",
+          "title": "Crossmark documentation",
+          "responsibleBody": "Crossref",
+          "versionOrDate": "living service documentation inspected 2026-09-06",
+          "sourceClass": "scholarly-status-service",
+          "url": "https://www.crossref.org/documentation/crossmark/",
+          "locator": "Crossmark; Benefits; How Crossmark works; publisher obligations",
+          "establishes": "Publisher-deposited metadata can expose current status and link corrections, retractions, or other updates.",
+          "doesNotEstablish": "Crossmark depends on publisher deposits and does not determine truth, misconduct, notice adequacy, or completeness.",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/retraction-policy/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_0fb5e2ac26592d64125908e6"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/retraction-policy/example",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_49dd887bd8a84025a182bd60"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Retraction Policy mean in this bounded context?",
+          "answer": "Retraction Policy, in this template, is limited to the following inspected scope. Reasons for considering retraction and notice properties including linkage, identification, reason, responsibility, promptness, and accessibility. Publisher-deposited metadata can expose current status and link corrections, retractions, or other updates. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this template answer?",
+          "answer": "Retraction Guidelines (version 2, November 2019), at Summary; When should a publication be retracted?; What form should a retraction take?, supports reasons for considering retraction and notice properties including linkage, identification, reason, responsibility, promptness, and accessibility. Crossmark documentation (living service documentation inspected 2026-09-06), at Crossmark; Benefits; How Crossmark works; publisher obligations, supports publisher-deposited metadata can expose current status and link corrections, retractions, or other updates."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The guidance does not itself retract an object, adjudicate misconduct, resolve every correction case, or create universal law. Crossmark depends on publisher deposits and does not determine truth, misconduct, notice adequacy, or completeness. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://publish.mahastrategies.com/agentic-publishing/retraction-policy/template#article",
+        "headline": "Retraction Policy — Template",
+        "url": "https://publish.mahastrategies.com/agentic-publishing/retraction-policy/template",
+        "isPartOf": "https://publish.mahastrategies.com/",
+        "citation": [
+          "https://doi.org/10.24318/cope.2019.1.4",
+          "https://www.crossref.org/documentation/crossmark/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Retraction Policy mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Retraction Policy, in this template, is limited to the following inspected scope. Reasons for considering retraction and notice properties including linkage, identification, reason, responsibility, promptness, and accessibility. Publisher-deposited metadata can expose current status and link corrections, retractions, or other updates. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this template answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Retraction Guidelines (version 2, November 2019), at Summary; When should a publication be retracted?; What form should a retraction take?, supports reasons for considering retraction and notice properties including linkage, identification, reason, responsibility, promptness, and accessibility. Crossmark documentation (living service documentation inspected 2026-09-06), at Crossmark; Benefits; How Crossmark works; publisher obligations, supports publisher-deposited metadata can expose current status and link corrections, retractions, or other updates."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The guidance does not itself retract an object, adjudicate misconduct, resolve every correction case, or create universal law. Crossmark depends on publisher deposits and does not determine truth, misconduct, notice adequacy, or completeness. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-10",
+        "decisionManifestDigest": "sha256:9ef07cfe461c123d2f87caf30b3271a31692f97f2c2307a426830667a68a1bfa",
+        "decisionDigest": "sha256:0a2e838321cfe6148b5d70176eea84bc967bca90f23e2762597f6f0f6ac7541b",
+        "specificationManifestDigest": "sha256:f3a532332a4567fead139076fd821fe0436d910d4b3b576edd34f057ac3856f0",
+        "specificationDigest": "sha256:47760e642fa85d28c330ef722286f65e2c1b3c6a5ebe067d006e178c293a41d1",
+        "packetManifestDigest": "sha256:c3016515219a07cc5be0bf9761efa3afb2b4d315436650c2832ce3737310c408",
+        "packetDigest": "sha256:a68c7fb45910b09f233f04c31139280fd1f285742d9a9a88214d54d13e019837"
+      },
+      "contentDigest": "sha256:8e278f150e8cb0c4d932be586123d334b933b7640c4d52988613fe88a1f3877a"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_4dc4d6e9d9cc4ea8b9904063",
+      "tranche": 10,
+      "siteId": "agentic-publishing",
+      "canonicalHost": "publish.mahastrategies.com",
+      "path": "/agentic-publishing/source-rights/governance",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/source-rights/governance",
+      "title": "Source Rights — Governance",
+      "topic": "source-rights",
+      "routeRole": "governance",
+      "concept": {
+        "conceptId": "urn:maha:concept:release:source-rights",
+        "familyId": "release",
+        "canonicalOwner": "agentic-publishing",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:release:source-rights"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:release"
+          }
+        ]
+      },
+      "directAnswer": "Source Rights, in this Governance, is limited to the following inspected scope. The schema can record a rights or license statement, URI, identifier, identifier scheme, and scheme URI for a resource. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Source Rights, in this Governance, is limited to the following inspected scope. The schema can record a rights or license statement, URI, identifier, identifier scheme, and scheme URI for a resource. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Governance",
+          "kind": "role-method",
+          "paragraphs": [
+            "Keep the answer within the inspected source scope and make every operational step or conceptual relation explicit.",
+            "Do not use completeness of presentation as a substitute for evidence, review, or release.",
+            "Applied scope: The schema can record a rights or license statement, URI, identifier, identifier scheme, and scheme URI for a resource."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is agentic-publishing. This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish publishing protocols, editorial templates, release guidance. It must not publish duplicate research records or unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "DataCite Metadata Schema 4.7: Rights — Rights property; rightsList; rightsUri; rightsIdentifier; rightsIdentifierScheme; schemeUri. Establishes: The schema can record a rights or license statement, URI, identifier, identifier scheme, and scheme URI for a resource."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Rights metadata records a supplied assertion or link; it does not grant rights, prove ownership, resolve territorial or contractual limits, or establish that a license covers a proposed use.",
+            "This route must not claim duplicate research records.",
+            "This route must not claim unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/source-rights/definition",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/source-rights/example",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/source-rights/template",
+            "property-home: https://publish.mahastrategies.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "datacite-rights-4-7",
+          "title": "DataCite Metadata Schema 4.7: Rights",
+          "responsibleBody": "DataCite",
+          "versionOrDate": "Metadata Schema 4.7",
+          "sourceClass": "metadata-specification",
+          "url": "https://datacite-metadata-schema.readthedocs.io/en/4.7/properties/rights/",
+          "locator": "Rights property; rightsList; rightsUri; rightsIdentifier; rightsIdentifierScheme; schemeUri",
+          "establishes": "The schema can record a rights or license statement, URI, identifier, identifier scheme, and scheme URI for a resource.",
+          "doesNotEstablish": "Rights metadata records a supplied assertion or link; it does not grant rights, prove ownership, resolve territorial or contractual limits, or establish that a license covers a proposed use.",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/source-rights/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_9d231648a8f779816e0ba2dd"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/source-rights/example",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_a2febd3ad2e8082693b9a284"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/source-rights/template",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_826be690606e01f4e6b596f8"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Source Rights mean in this bounded context?",
+          "answer": "Source Rights, in this Governance, is limited to the following inspected scope. The schema can record a rights or license statement, URI, identifier, identifier scheme, and scheme URI for a resource. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this governance answer?",
+          "answer": "DataCite Metadata Schema 4.7: Rights (Metadata Schema 4.7), at Rights property; rightsList; rightsUri; rightsIdentifier; rightsIdentifierScheme; schemeUri, supports the schema can record a rights or license statement, URI, identifier, identifier scheme, and scheme URI for a resource."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Rights metadata records a supplied assertion or link; it does not grant rights, prove ownership, resolve territorial or contractual limits, or establish that a license covers a proposed use. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://publish.mahastrategies.com/agentic-publishing/source-rights/governance#article",
+        "headline": "Source Rights — Governance",
+        "url": "https://publish.mahastrategies.com/agentic-publishing/source-rights/governance",
+        "isPartOf": "https://publish.mahastrategies.com/",
+        "citation": [
+          "https://datacite-metadata-schema.readthedocs.io/en/4.7/properties/rights/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Source Rights mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Source Rights, in this Governance, is limited to the following inspected scope. The schema can record a rights or license statement, URI, identifier, identifier scheme, and scheme URI for a resource. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this governance answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "DataCite Metadata Schema 4.7: Rights (Metadata Schema 4.7), at Rights property; rightsList; rightsUri; rightsIdentifier; rightsIdentifierScheme; schemeUri, supports the schema can record a rights or license statement, URI, identifier, identifier scheme, and scheme URI for a resource."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Rights metadata records a supplied assertion or link; it does not grant rights, prove ownership, resolve territorial or contractual limits, or establish that a license covers a proposed use. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-10",
+        "decisionManifestDigest": "sha256:9ef07cfe461c123d2f87caf30b3271a31692f97f2c2307a426830667a68a1bfa",
+        "decisionDigest": "sha256:d9435bb39277474692e70f8bc410cca68c6f130655c597b7a39c3699f7339adf",
+        "specificationManifestDigest": "sha256:f3a532332a4567fead139076fd821fe0436d910d4b3b576edd34f057ac3856f0",
+        "specificationDigest": "sha256:625f075916c394b2a49bfc0cdc96c2322dd49a3a44b6af9ad728198fcb45bb26",
+        "packetManifestDigest": "sha256:c3016515219a07cc5be0bf9761efa3afb2b4d315436650c2832ce3737310c408",
+        "packetDigest": "sha256:2245245060339a87c69f370dee58ab92b05d3bd33c98d7b7e1799efee7367ebd"
+      },
+      "contentDigest": "sha256:54f088f978b779fee019eea604a71a156b3aaf31ab60f919943594445834cbe3"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_56e7f47072a4ee143963f36c",
+      "tranche": 10,
+      "siteId": "agentic-publishing",
+      "canonicalHost": "publish.mahastrategies.com",
+      "path": "/agentic-publishing/source-rights/machine-interface",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/source-rights/machine-interface",
+      "title": "Source Rights — Machine Interface",
+      "topic": "source-rights",
+      "routeRole": "machine-interface",
+      "concept": {
+        "conceptId": "urn:maha:concept:release:source-rights",
+        "familyId": "release",
+        "canonicalOwner": "agentic-publishing",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:release:source-rights"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:release"
+          }
+        ]
+      },
+      "directAnswer": "Source Rights, in this machine interface, is limited to the following inspected scope. The schema can record a rights or license statement, URI, identifier, identifier scheme, and scheme URI for a resource. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Source Rights, in this machine interface, is limited to the following inspected scope. The schema can record a rights or license statement, URI, identifier, identifier scheme, and scheme URI for a resource. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Machine interface",
+          "kind": "role-method",
+          "paragraphs": [
+            "Define request and response fields, versions, identifiers, error states, and replay behavior.",
+            "An interface contract must preserve unknown and refusal states and cannot imply a service is available.",
+            "Applied scope: The schema can record a rights or license statement, URI, identifier, identifier scheme, and scheme URI for a resource."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is agentic-publishing. This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish publishing protocols, editorial templates, release guidance. It must not publish duplicate research records or unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "DataCite Metadata Schema 4.7: Rights — Rights property; rightsList; rightsUri; rightsIdentifier; rightsIdentifierScheme; schemeUri. Establishes: The schema can record a rights or license statement, URI, identifier, identifier scheme, and scheme URI for a resource."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Rights metadata records a supplied assertion or link; it does not grant rights, prove ownership, resolve territorial or contractual limits, or establish that a license covers a proposed use.",
+            "This route must not claim duplicate research records.",
+            "This route must not claim unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/source-rights/definition",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/source-rights/example",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/source-rights/template",
+            "property-home: https://publish.mahastrategies.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "datacite-rights-4-7",
+          "title": "DataCite Metadata Schema 4.7: Rights",
+          "responsibleBody": "DataCite",
+          "versionOrDate": "Metadata Schema 4.7",
+          "sourceClass": "metadata-specification",
+          "url": "https://datacite-metadata-schema.readthedocs.io/en/4.7/properties/rights/",
+          "locator": "Rights property; rightsList; rightsUri; rightsIdentifier; rightsIdentifierScheme; schemeUri",
+          "establishes": "The schema can record a rights or license statement, URI, identifier, identifier scheme, and scheme URI for a resource.",
+          "doesNotEstablish": "Rights metadata records a supplied assertion or link; it does not grant rights, prove ownership, resolve territorial or contractual limits, or establish that a license covers a proposed use.",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/source-rights/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_9d231648a8f779816e0ba2dd"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/source-rights/example",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_a2febd3ad2e8082693b9a284"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/source-rights/template",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_826be690606e01f4e6b596f8"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Source Rights mean in this bounded context?",
+          "answer": "Source Rights, in this machine interface, is limited to the following inspected scope. The schema can record a rights or license statement, URI, identifier, identifier scheme, and scheme URI for a resource. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this machine interface answer?",
+          "answer": "DataCite Metadata Schema 4.7: Rights (Metadata Schema 4.7), at Rights property; rightsList; rightsUri; rightsIdentifier; rightsIdentifierScheme; schemeUri, supports the schema can record a rights or license statement, URI, identifier, identifier scheme, and scheme URI for a resource."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Rights metadata records a supplied assertion or link; it does not grant rights, prove ownership, resolve territorial or contractual limits, or establish that a license covers a proposed use. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://publish.mahastrategies.com/agentic-publishing/source-rights/machine-interface#article",
+        "headline": "Source Rights — Machine Interface",
+        "url": "https://publish.mahastrategies.com/agentic-publishing/source-rights/machine-interface",
+        "isPartOf": "https://publish.mahastrategies.com/",
+        "citation": [
+          "https://datacite-metadata-schema.readthedocs.io/en/4.7/properties/rights/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Source Rights mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Source Rights, in this machine interface, is limited to the following inspected scope. The schema can record a rights or license statement, URI, identifier, identifier scheme, and scheme URI for a resource. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this machine interface answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "DataCite Metadata Schema 4.7: Rights (Metadata Schema 4.7), at Rights property; rightsList; rightsUri; rightsIdentifier; rightsIdentifierScheme; schemeUri, supports the schema can record a rights or license statement, URI, identifier, identifier scheme, and scheme URI for a resource."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Rights metadata records a supplied assertion or link; it does not grant rights, prove ownership, resolve territorial or contractual limits, or establish that a license covers a proposed use. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-10",
+        "decisionManifestDigest": "sha256:9ef07cfe461c123d2f87caf30b3271a31692f97f2c2307a426830667a68a1bfa",
+        "decisionDigest": "sha256:f1cb3b919af2ca224700f6327389b1d0f98fdbc552ace95385da51305f3b6238",
+        "specificationManifestDigest": "sha256:f3a532332a4567fead139076fd821fe0436d910d4b3b576edd34f057ac3856f0",
+        "specificationDigest": "sha256:578fec9855dcfbe72ea550ff5bdd7a00519d60243df3c1959d3654a6a9bfd023",
+        "packetManifestDigest": "sha256:c3016515219a07cc5be0bf9761efa3afb2b4d315436650c2832ce3737310c408",
+        "packetDigest": "sha256:2245245060339a87c69f370dee58ab92b05d3bd33c98d7b7e1799efee7367ebd"
+      },
+      "contentDigest": "sha256:ea432789f05e268b19cb06b52fb0bad20f47ea29b6695a6893175048a0194f94"
     }
   ],
-  "provenanceDigest": "sha256:fda4334631e1617c9b06808c10c4f460242abb197f5f84d502e85f10189e466c"
+  "provenanceDigest": "sha256:8a99f750393a5cfc377195222a76352d884ddcd34478fbbeadc5a06d2a6223a1"
 }

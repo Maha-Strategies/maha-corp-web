@@ -101,18 +101,18 @@ test('ninety-three candidates are ready and seven remain held without invented c
 
 test('cumulative page implementations and exact-host adapters add only the ready Tranche 5 contracts', () => {
   assert.deepEqual(implementationRegistry.counts, {
-    pages: 854,
-    readyForOwnerIntegration: 844,
+    pages: 951,
+    readyForOwnerIntegration: 941,
     blockedOnUnreadyPrerequisite: 10,
-    byProperty: { 'maha-strategies': 259, 'maha-research': 225, 'agentic-publishing': 74, 'maha-os': 54, 'mayone-maharajan': 37, 'mayon-rajan': 45, 'maha-policy': 160 },
-    boundedAnswers: 4270,
-    sourceBindings: 1466,
+    byProperty: { 'maha-strategies': 287, 'maha-research': 250, 'agentic-publishing': 84, 'maha-os': 60, 'mayone-maharajan': 42, 'mayon-rajan': 50, 'maha-policy': 178 },
+    boundedAnswers: 4755,
+    sourceBindings: 1609,
     publicRoutesCreated: 0,
     nextBuildsRun: 0,
     vercelBuildsRun: 0,
   })
-  assert.deepEqual(adapterRegistry.counts, { properties: 7, routes: 844, boundedAnswers: 4220, publicRoutesCreated: 0, buildsRun: 0 })
-  assert.equal(new Set(implementationRegistry.entries.map((entry) => entry.candidateId)).size, 854)
+  assert.deepEqual(adapterRegistry.counts, { properties: 7, routes: 941, boundedAnswers: 4705, publicRoutesCreated: 0, buildsRun: 0 })
+  assert.equal(new Set(implementationRegistry.entries.map((entry) => entry.candidateId)).size, 951)
   assert.match(adapterRegistry.buildBoundary, /No Next\.js or Vercel build is authorized/)
 })
 

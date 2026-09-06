@@ -68,6 +68,7 @@ type Candidate = {
 type Inputs = {
   candidateMap: { provenanceDigest: string; candidates: Candidate[] }
   priorRelationshipHorizon?: number
+  appendOrderAfterTranche?: number
   tranches: Array<{
     tranche: 1 | 2
     decisions: { provenanceDigest: string; entries: Decision[] }
@@ -76,7 +77,7 @@ type Inputs = {
   }>
   supplements?: Array<{
     batchId: string
-    tranche: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+    tranche: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
     decisions: { provenanceDigest: string; entries: Decision[] }
     specifications: { provenanceDigest: string; specifications: Specification[] }
     packets: { provenanceDigest: string; packets: Packet[] }
@@ -363,7 +364,15 @@ export function compileFederationPages(inputs: Inputs) {
       },
     }
     return { ...body, contentDigest: provenanceDigest(body) }
-  }).sort((left, right) => codeUnit(left.canonicalUrl, right.canonicalUrl))
+  }).sort((left, right) => {
+    const appendOrderAfterTranche = inputs.appendOrderAfterTranche
+    if (appendOrderAfterTranche !== undefined) {
+      const leftGroup = left.tranche <= appendOrderAfterTranche ? 0 : left.tranche
+      const rightGroup = right.tranche <= appendOrderAfterTranche ? 0 : right.tranche
+      if (leftGroup !== rightGroup) return leftGroup - rightGroup
+    }
+    return codeUnit(left.canonicalUrl, right.canonicalUrl)
+  })
 
   const pages = drafts.map((page) => {
     const pageSiblingLinks = drafts

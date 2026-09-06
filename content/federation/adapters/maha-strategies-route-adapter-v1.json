@@ -3,7 +3,7 @@
   "siteId": "maha-strategies",
   "canonicalHost": "www.mahastrategies.com",
   "rootPath": "/clearing/",
-  "sourceManifestDigest": "sha256:ff923b4056c48ed4ae49b0445cf3f9b7366969e698cc8d3a7241416349569c79",
+  "sourceManifestDigest": "sha256:05e05d95f74dc34bae485592d2faa68563d67a867d8c288feaea6214ddb1014a",
   "state": "local-owner-handoff",
   "ownerIntegration": {
     "routeShape": "/clearing/[...segments]",
@@ -16,8 +16,8 @@
     "activeCanonicalReleaseRequired": true
   },
   "counts": {
-    "routes": 259,
-    "boundedAnswers": 1295,
+    "routes": 287,
+    "boundedAnswers": 1435,
     "publicRoutesCreated": 0,
     "buildsRun": 0
   },
@@ -2871,7 +2871,315 @@
         "translation"
       ],
       "contentDigest": "sha256:005ca0c93b3896426bb734bfcc4b2047cc4639b8b0101ea05490bbf62e5a0558"
+    },
+    {
+      "candidateId": "cand_c6b54586bcfa018a514cc2eb",
+      "path": "/clearing/astrology-infrastructure/coordinate-frames/evaluation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/coordinate-frames/evaluation",
+      "segments": [
+        "astrology-infrastructure",
+        "coordinate-frames",
+        "evaluation"
+      ],
+      "contentDigest": "sha256:f446347d678200da3d9025bcce1a15c5fe174df0fb0d395bf9893177b0d6fe7c"
+    },
+    {
+      "candidateId": "cand_bb67319afcac29ed66b677e2",
+      "path": "/clearing/astrology-infrastructure/coordinate-frames/uncertainty",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/coordinate-frames/uncertainty",
+      "segments": [
+        "astrology-infrastructure",
+        "coordinate-frames",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:dfffec0e905ce62e7b15ad55cc53c40f43733dd6c86e1caaebf161cadc4f0c19"
+    },
+    {
+      "candidateId": "cand_d9003b3d300d3689b28aa9f7",
+      "path": "/clearing/astrology-infrastructure/falsifiability/input-contract",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/falsifiability/input-contract",
+      "segments": [
+        "astrology-infrastructure",
+        "falsifiability",
+        "input-contract"
+      ],
+      "contentDigest": "sha256:7e09e1a26fce461d00eccb19e6ff201425b41caa72353102ab63121ad4211ccf"
+    },
+    {
+      "candidateId": "cand_733af158d47bfa0a45c7635f",
+      "path": "/clearing/astrology-infrastructure/house-system-selection/evaluation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/house-system-selection/evaluation",
+      "segments": [
+        "astrology-infrastructure",
+        "house-system-selection",
+        "evaluation"
+      ],
+      "contentDigest": "sha256:265348abf8af041d03bceb0537bea6cc4f32e8a8367be747bb15db504d3b63f2"
+    },
+    {
+      "candidateId": "cand_452f4d73c233c31d91de4134",
+      "path": "/clearing/astrology-infrastructure/house-system-selection/input-contract",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/house-system-selection/input-contract",
+      "segments": [
+        "astrology-infrastructure",
+        "house-system-selection",
+        "input-contract"
+      ],
+      "contentDigest": "sha256:4104e0335d098d4d6cd09c6b70dd02ab7bea39cf05215551d69c2812db8b109d"
+    },
+    {
+      "candidateId": "cand_b229119f404d0f7aaab10417",
+      "path": "/clearing/astrology-infrastructure/house-system-selection/workflow",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/house-system-selection/workflow",
+      "segments": [
+        "astrology-infrastructure",
+        "house-system-selection",
+        "workflow"
+      ],
+      "contentDigest": "sha256:3655d962d5cb9cd833001597592f4c58e0086c6fb3494756c76000d4500dc307"
+    },
+    {
+      "candidateId": "cand_a6e0d7f779b527e063bb3cf9",
+      "path": "/clearing/astrology-infrastructure/interpretation-boundaries/uncertainty",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/interpretation-boundaries/uncertainty",
+      "segments": [
+        "astrology-infrastructure",
+        "interpretation-boundaries",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:8f877fa84db5df49bd9dfc6afd00c6de62e169e6a7396f67890fb86373c399ea"
+    },
+    {
+      "candidateId": "cand_15212ccb368dfe56c7114015",
+      "path": "/clearing/astrology-infrastructure/interpretation-boundaries/workflow",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/interpretation-boundaries/workflow",
+      "segments": [
+        "astrology-infrastructure",
+        "interpretation-boundaries",
+        "workflow"
+      ],
+      "contentDigest": "sha256:c5dc8a13e029e19a519ea427741ea361c62ea2006377344b26a6b63d82f10007"
+    },
+    {
+      "candidateId": "cand_1efe2cc00bd4ffe3a2f7e7db",
+      "path": "/clearing/astrology-infrastructure/tradition-comparison/input-contract",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/tradition-comparison/input-contract",
+      "segments": [
+        "astrology-infrastructure",
+        "tradition-comparison",
+        "input-contract"
+      ],
+      "contentDigest": "sha256:afece6cb444951ca5479717640e435ab2f125ffe2080aa88481a0c080c4484da"
+    },
+    {
+      "candidateId": "cand_9f0e500613ba6529024f4427",
+      "path": "/clearing/astrology-infrastructure/tradition-comparison/workflow",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/tradition-comparison/workflow",
+      "segments": [
+        "astrology-infrastructure",
+        "tradition-comparison",
+        "workflow"
+      ],
+      "contentDigest": "sha256:71decba470901db184cd259b12e9fe59e83a09cce40a215038db143465f37227"
+    },
+    {
+      "candidateId": "cand_b22cf5d81466dafecbc1efbe",
+      "path": "/clearing/book-concepts/civilizational-computation/argument",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/civilizational-computation/argument",
+      "segments": [
+        "book-concepts",
+        "civilizational-computation",
+        "argument"
+      ],
+      "contentDigest": "sha256:11bc3971571d157d35653c0d68230128fcc6c924eb699f253b78ca931e369829"
+    },
+    {
+      "candidateId": "cand_d992fba8ce43a4d333e76196",
+      "path": "/clearing/book-concepts/civilizational-computation/genealogy",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/civilizational-computation/genealogy",
+      "segments": [
+        "book-concepts",
+        "civilizational-computation",
+        "genealogy"
+      ],
+      "contentDigest": "sha256:62e2596b79018a0aa3f1c8c723e451aba47e951f89b81f89ed5d93609133e60b"
+    },
+    {
+      "candidateId": "cand_871873c2bbe8dd9268b55875",
+      "path": "/clearing/book-concepts/epistemic-clearance/genealogy",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/epistemic-clearance/genealogy",
+      "segments": [
+        "book-concepts",
+        "epistemic-clearance",
+        "genealogy"
+      ],
+      "contentDigest": "sha256:c0e4304ee6df670b6f7d17d2225f086ad3b1d4618cfe13d9fb5536852974e96c"
+    },
+    {
+      "candidateId": "cand_101cd9561264061032ba89be",
+      "path": "/clearing/book-concepts/recursive-institutions/argument",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/recursive-institutions/argument",
+      "segments": [
+        "book-concepts",
+        "recursive-institutions",
+        "argument"
+      ],
+      "contentDigest": "sha256:43f3c59e14117437f890b39f58f2a7db074ac621612c4b0a30144905b01556dc"
+    },
+    {
+      "candidateId": "cand_0b41990fb3792aedac79ea8f",
+      "path": "/clearing/book-concepts/recursive-institutions/genealogy",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/recursive-institutions/genealogy",
+      "segments": [
+        "book-concepts",
+        "recursive-institutions",
+        "genealogy"
+      ],
+      "contentDigest": "sha256:9513787e448d24473606311fbac45166253bead421f609f13e5679f977592588"
+    },
+    {
+      "candidateId": "cand_ca83862de3c683e12da087ee",
+      "path": "/clearing/tamil-religion/alvar-reception/relationship",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/alvar-reception/relationship",
+      "segments": [
+        "tamil-religion",
+        "alvar-reception",
+        "relationship"
+      ],
+      "contentDigest": "sha256:1198ca6156a2af8109602c1429e3236817140f8b6d1319b0947e57fef6081a98"
+    },
+    {
+      "candidateId": "cand_596173f4334119bef4d9de0e",
+      "path": "/clearing/tamil-religion/divine-epithets/primary-text",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/divine-epithets/primary-text",
+      "segments": [
+        "tamil-religion",
+        "divine-epithets",
+        "primary-text"
+      ],
+      "contentDigest": "sha256:5a543656edb3082053f40e7848ce35b615155387c53a6cf4dce814ed1ed1a0f4"
+    },
+    {
+      "candidateId": "cand_35dccc08465e23dc27971bfa",
+      "path": "/clearing/tamil-religion/divine-epithets/translation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/divine-epithets/translation",
+      "segments": [
+        "tamil-religion",
+        "divine-epithets",
+        "translation"
+      ],
+      "contentDigest": "sha256:f6c26fd0367ceb9d63d30016b3c039fea18130d3e151ad412a7f002950783ffc"
+    },
+    {
+      "candidateId": "cand_b3e6aefa664bc9ab372a49fa",
+      "path": "/clearing/tamil-religion/kannan/translation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/kannan/translation",
+      "segments": [
+        "tamil-religion",
+        "kannan",
+        "translation"
+      ],
+      "contentDigest": "sha256:23306ce5f409409c119e0bb4a54c2f046604c9d3e4187b288ca97362991bb9db"
+    },
+    {
+      "candidateId": "cand_252db3c927f53ff17e005096",
+      "path": "/clearing/tamil-religion/kurinji/commentary",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/kurinji/commentary",
+      "segments": [
+        "tamil-religion",
+        "kurinji",
+        "commentary"
+      ],
+      "contentDigest": "sha256:14bcf4d912440b0be87f457a0527c221ff425ca003a11d8f21e7415cd0a35077"
+    },
+    {
+      "candidateId": "cand_d2e520302b54e167be16847d",
+      "path": "/clearing/tamil-religion/kurinji/translation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/kurinji/translation",
+      "segments": [
+        "tamil-religion",
+        "kurinji",
+        "translation"
+      ],
+      "contentDigest": "sha256:d6161851392e898a5b5f7f77c379d475b96c822fc51e8b5f6d334131f579286d"
+    },
+    {
+      "candidateId": "cand_0b4102734ad9490059b23ca7",
+      "path": "/clearing/tamil-religion/marutam/relationship",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/marutam/relationship",
+      "segments": [
+        "tamil-religion",
+        "marutam",
+        "relationship"
+      ],
+      "contentDigest": "sha256:1ebb12ce368ffcbbacd70a38996439f961991645a6fdc1818fb9f5b8ed8f21fc"
+    },
+    {
+      "candidateId": "cand_4bca0e5b913df155ce6a85ee",
+      "path": "/clearing/tamil-religion/mullai/translation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/mullai/translation",
+      "segments": [
+        "tamil-religion",
+        "mullai",
+        "translation"
+      ],
+      "contentDigest": "sha256:6c0ceabc24e8fb4e8591cf7a16ed8bd13e9718ad57895ebced7a0876383f537f"
+    },
+    {
+      "candidateId": "cand_b8b72bf7f0344cc3124caf01",
+      "path": "/clearing/tamil-religion/narayana/identity",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/narayana/identity",
+      "segments": [
+        "tamil-religion",
+        "narayana",
+        "identity"
+      ],
+      "contentDigest": "sha256:37cbfb3ef07b82ee9361bc324fa8bbf2757b97ba4e91ed9bb4eca9f3fd311508"
+    },
+    {
+      "candidateId": "cand_33250cdc209cf99455dbf8c4",
+      "path": "/clearing/tamil-religion/narayana/primary-text",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/narayana/primary-text",
+      "segments": [
+        "tamil-religion",
+        "narayana",
+        "primary-text"
+      ],
+      "contentDigest": "sha256:0dcc651acf8c3adccc0132e6935ba808540f77293e08b30f1ff55e1a79720881"
+    },
+    {
+      "candidateId": "cand_346b0ca727ec2f7b02b6b52a",
+      "path": "/clearing/tamil-religion/narayana/translation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/narayana/translation",
+      "segments": [
+        "tamil-religion",
+        "narayana",
+        "translation"
+      ],
+      "contentDigest": "sha256:00af6eb8ca141f3046737f3053199dc327cdb6c8c2046e1b1c87e6bd697383fd"
+    },
+    {
+      "candidateId": "cand_752a5b0c8575c936c6df415a",
+      "path": "/clearing/tamil-religion/primary-text-boundaries/relationship",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/primary-text-boundaries/relationship",
+      "segments": [
+        "tamil-religion",
+        "primary-text-boundaries",
+        "relationship"
+      ],
+      "contentDigest": "sha256:4a48a2ef6472ed5d14cb99ad60dbf7f7ad5c9ca790eb1c009fbf9c0a6e98e9b3"
+    },
+    {
+      "candidateId": "cand_5095112565c602b1388883cf",
+      "path": "/clearing/tamil-religion/sangam-landscapes/primary-text",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/sangam-landscapes/primary-text",
+      "segments": [
+        "tamil-religion",
+        "sangam-landscapes",
+        "primary-text"
+      ],
+      "contentDigest": "sha256:cce0e8643a32f4d90aee806971d122eaee631b45e702359446cca57d71d89719"
     }
   ],
-  "provenanceDigest": "sha256:2ee9fb05275b4d747be9209a2cb9b5b802fe0ef34e94dc78b40533f5e1a5bdc0"
+  "provenanceDigest": "sha256:7e376d72ea6cc008d8d9c1d9599514df1ab6612e9731ecf360869e430b66a3be"
 }

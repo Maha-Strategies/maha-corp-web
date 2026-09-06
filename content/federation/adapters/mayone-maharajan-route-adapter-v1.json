@@ -3,7 +3,7 @@
   "siteId": "mayone-maharajan",
   "canonicalHost": "www.mayonemaharajan.com",
   "rootPath": "/concepts/",
-  "sourceManifestDigest": "sha256:f33a7a22c323d2801e247bb2c23a6ab647e7bbfd9f97d18a58d2c780e8fee723",
+  "sourceManifestDigest": "sha256:bd092b31fba9efc8128acd320029bb5578935e4a926f4b10f6d286d8278061a9",
   "state": "local-owner-handoff",
   "ownerIntegration": {
     "routeShape": "/concepts/[...segments]",
@@ -16,8 +16,8 @@
     "activeCanonicalReleaseRequired": true
   },
   "counts": {
-    "routes": 37,
-    "boundedAnswers": 185,
+    "routes": 42,
+    "boundedAnswers": 210,
     "publicRoutesCreated": 0,
     "buildsRun": 0
   },
@@ -392,7 +392,57 @@
         "relationship"
       ],
       "contentDigest": "sha256:c9d1922b4365544788aa2b78ad01e8366edeeb4841270d79614d31ac9875d6d8"
+    },
+    {
+      "candidateId": "cand_94be7c924fbc92f197067186",
+      "path": "/concepts/authorial-lineage/origin",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/authorial-lineage/origin",
+      "segments": [
+        "authorial-lineage",
+        "origin"
+      ],
+      "contentDigest": "sha256:d13c170559fccc51bd73a0fc5f428e9c3dbbba049e56407c0f874e7687229f35"
+    },
+    {
+      "candidateId": "cand_b23f8e82f8ed9e7b18c8a535",
+      "path": "/concepts/civilizational-memory/origin",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/civilizational-memory/origin",
+      "segments": [
+        "civilizational-memory",
+        "origin"
+      ],
+      "contentDigest": "sha256:cb5daf41ec85d8161efb71dade778b51e97e0a428e212a4eeff964033f22a135"
+    },
+    {
+      "candidateId": "cand_eca3c4e2264913b2c113b043",
+      "path": "/concepts/maha-principle/relationship",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/maha-principle/relationship",
+      "segments": [
+        "maha-principle",
+        "relationship"
+      ],
+      "contentDigest": "sha256:f74e5b5746c982633f709e2e6ab99eb274e000176dfd0149da921942cb2b610f"
+    },
+    {
+      "candidateId": "cand_4acd70cabb69b750481a316c",
+      "path": "/concepts/recursive-institutions/definition",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/recursive-institutions/definition",
+      "segments": [
+        "recursive-institutions",
+        "definition"
+      ],
+      "contentDigest": "sha256:1c869b2e298a5156c0b41426ceb015780e7e9bdfce5a62488e74d331fd89f4f3"
+    },
+    {
+      "candidateId": "cand_2ef397182eddc44b4664a277",
+      "path": "/concepts/recursive-institutions/relationship",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/recursive-institutions/relationship",
+      "segments": [
+        "recursive-institutions",
+        "relationship"
+      ],
+      "contentDigest": "sha256:56e0b1962ebe910615f18e5daa23a9ba62182d4463574cc4dbc9cfd53db87d2b"
     }
   ],
-  "provenanceDigest": "sha256:c4f40e665b9a9f3a931a5c1b1d53bf38383dc28aea6cd311979c457156713bf5"
+  "provenanceDigest": "sha256:5f63fc30273c52385702fa78f94ab25ab50ee8b607ad481d13a58c7f72fa1e9c"
 }

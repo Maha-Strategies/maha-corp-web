@@ -57,7 +57,7 @@ export function selectFederationTranche(
   graph: DependencyGraph,
   demand: DemandArtifact,
   priorCohorts: readonly PriorCohort[],
-  trancheNumber: 3 | 4 | 5 | 6 | 7 | 8 | 9,
+  trancheNumber: 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10,
 ) {
   const candidateById = new Map(candidateMap.candidates.map((candidate) => [candidate.candidateId, candidate]))
   const semanticById = new Map(semantic.entries.map((entry) => [entry.candidateId, entry]))
@@ -155,7 +155,9 @@ export function selectFederationTranche(
               ? 'maha-federation-tranche-seven-cohort/1.0'
               : trancheNumber === 8
                 ? 'maha-federation-tranche-eight-cohort/1.0'
-                : 'maha-federation-tranche-nine-cohort/1.0',
+                : trancheNumber === 9
+                  ? 'maha-federation-tranche-nine-cohort/1.0'
+                  : 'maha-federation-tranche-ten-cohort/1.0',
     candidateMapDigest: candidateMap.provenanceDigest,
     semanticAdjudicationDigest: semantic.provenanceDigest,
     dependencyGraphDigest: graph.provenanceDigest,
@@ -174,7 +176,9 @@ export function selectFederationTranche(
               ? 'Highest calibrated utility after Tranches 1 through 6, with dependency closure, a four-page property/topic cap, proportional property caps, and prior-tranche definitions treated as satisfied prerequisites.'
               : trancheNumber === 8
                 ? 'Highest calibrated utility after Tranches 1 through 7, with dependency closure, a four-page property/topic cap, proportional property caps, and prior-tranche definitions treated as satisfied prerequisites.'
-                : 'Highest calibrated utility after Tranches 1 through 8, with dependency closure, a four-page property/topic cap, proportional property caps, and prior-tranche definitions treated as satisfied prerequisites.',
+                : trancheNumber === 9
+                  ? 'Highest calibrated utility after Tranches 1 through 8, with dependency closure, a four-page property/topic cap, proportional property caps, and prior-tranche definitions treated as satisfied prerequisites.'
+                  : 'Highest calibrated utility after Tranches 1 through 9, with dependency closure, a four-page property/topic cap, proportional property caps, and prior-tranche definitions treated as satisfied prerequisites.',
     propertyLimits: PROPERTY_LIMITS,
     counts: {
       selected: entries.length,

@@ -172,7 +172,7 @@ export function buildFederationTrancheReview(input: {
   cohort: { provenanceDigest: string; entries: CohortEntry[] }
   candidates: { provenanceDigest: string; candidates: Candidate[] }
   priorPacketManifests: PriorPacketManifest[]
-  trancheNumber: 4 | 5 | 6 | 7 | 8 | 9
+  trancheNumber: 4 | 5 | 6 | 7 | 8 | 9 | 10
   additionalPackets?: Record<string, FederationReviewPacket>
   decisionOverrides?: Record<string, { disposition: 'evidence-ready' | 'revise' | 'blocked'; reason: string }>
 }) {

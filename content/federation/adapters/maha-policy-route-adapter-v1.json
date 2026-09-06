@@ -3,7 +3,7 @@
   "siteId": "maha-policy",
   "canonicalHost": "policy.mahastrategies.com",
   "rootPath": "/policy/",
-  "sourceManifestDigest": "sha256:f36201ff868eec96421c9233e0a3bc166ceb4e6e1a9beda3648f616a670b9ac6",
+  "sourceManifestDigest": "sha256:a00606571f3be75027dbcc6f33ca5b204864021f1396820104026e4cac3eaf28",
   "state": "local-owner-handoff",
   "ownerIntegration": {
     "routeShape": "/policy/[...segments]",
@@ -16,8 +16,8 @@
     "activeCanonicalReleaseRequired": true
   },
   "counts": {
-    "routes": 160,
-    "boundedAnswers": 800,
+    "routes": 178,
+    "boundedAnswers": 890,
     "publicRoutesCreated": 0,
     "buildsRun": 0
   },
@@ -1622,7 +1622,187 @@
         "uncertainty"
       ],
       "contentDigest": "sha256:02b846e92c1a4fd8d8856693abbbd9ab334bf9a9339426ffcb489e80dde840e6"
+    },
+    {
+      "candidateId": "cand_ceb508e8da70d0ba5ec38279",
+      "path": "/policy/agent-identity/evidence",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/agent-identity/evidence",
+      "segments": [
+        "agent-identity",
+        "evidence"
+      ],
+      "contentDigest": "sha256:9b1dab224594ad7c520f2bbc08457d17ceef9543fb9bc63106482a86e4c5e2d8"
+    },
+    {
+      "candidateId": "cand_3113611323093ff6364925f7",
+      "path": "/policy/agent-identity/machine-rule",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/agent-identity/machine-rule",
+      "segments": [
+        "agent-identity",
+        "machine-rule"
+      ],
+      "contentDigest": "sha256:3a80db1e3612246f66cddb1cd6f68787cd54ac33d8539ba97b880985cd3d5e42"
+    },
+    {
+      "candidateId": "cand_9eda064018491fcca77ef6aa",
+      "path": "/policy/agent-identity/tradeoffs",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/agent-identity/tradeoffs",
+      "segments": [
+        "agent-identity",
+        "tradeoffs"
+      ],
+      "contentDigest": "sha256:1d9bc8511b22b55cdf2f25ebe90a3d90056a662b8fa15d7502ab750d192c7d62"
+    },
+    {
+      "candidateId": "cand_bca14fa3a4f45811f3d686cc",
+      "path": "/policy/machine-contracting/definition",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/machine-contracting/definition",
+      "segments": [
+        "machine-contracting",
+        "definition"
+      ],
+      "contentDigest": "sha256:09fbb2b925d87105055ddc9d91f7c10bba5e631d8219f21c1ae211c4ac1dce1d"
+    },
+    {
+      "candidateId": "cand_367c7557e4d23a239f2b06f4",
+      "path": "/policy/machine-contracting/mechanisms",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/machine-contracting/mechanisms",
+      "segments": [
+        "machine-contracting",
+        "mechanisms"
+      ],
+      "contentDigest": "sha256:562b9faca7c1d0a6b1be033c2e36644f50b178d557841f029662e2af9cbf247e"
+    },
+    {
+      "candidateId": "cand_a1f46b72b1f7bc311af3a020",
+      "path": "/policy/machine-contracting/sources",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/machine-contracting/sources",
+      "segments": [
+        "machine-contracting",
+        "sources"
+      ],
+      "contentDigest": "sha256:385b62d8735044d30fe2b43e13d4708178f8cfee3b07a390a1c65daa72929dfe"
+    },
+    {
+      "candidateId": "cand_e8c6b2df2f752c2f04ec6a61",
+      "path": "/policy/machine-contracting/uncertainty",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/machine-contracting/uncertainty",
+      "segments": [
+        "machine-contracting",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:55c9d6bda74a3215b3b58e46bc27742bdc3b320268cdec707ad7cbd2b006d54f"
+    },
+    {
+      "candidateId": "cand_a8227bc32337d596c84e962e",
+      "path": "/policy/model-evaluation/definition",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/model-evaluation/definition",
+      "segments": [
+        "model-evaluation",
+        "definition"
+      ],
+      "contentDigest": "sha256:fb67195a2970ad36b0fd8d1825a445a0ac286d12abfd55298a1fdabad4c6a817"
+    },
+    {
+      "candidateId": "cand_d41dd1930ecd0fc93f502979",
+      "path": "/policy/model-evaluation/mechanisms",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/model-evaluation/mechanisms",
+      "segments": [
+        "model-evaluation",
+        "mechanisms"
+      ],
+      "contentDigest": "sha256:4a88643dcaff0128d6d5b6e4f0aed56eb1c949ab2b10218546a705e62b9ac8d7"
+    },
+    {
+      "candidateId": "cand_182d0d15b3592aa9874389be",
+      "path": "/policy/model-evaluation/sources",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/model-evaluation/sources",
+      "segments": [
+        "model-evaluation",
+        "sources"
+      ],
+      "contentDigest": "sha256:017d7e5f2cae5159f65e6fdb1a1556d39a49b11af94571db32f74d2299c7b6ca"
+    },
+    {
+      "candidateId": "cand_f5e97a806ed9b775184982a5",
+      "path": "/policy/model-evaluation/uncertainty",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/model-evaluation/uncertainty",
+      "segments": [
+        "model-evaluation",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:d72dc16453d8fdc8fbe77420ea5100cbf6744d92cf088d432ee30592bfcb13d8"
+    },
+    {
+      "candidateId": "cand_8c2dd9af56fe825b1ef4df51",
+      "path": "/policy/public-sector-procurement/evidence",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/public-sector-procurement/evidence",
+      "segments": [
+        "public-sector-procurement",
+        "evidence"
+      ],
+      "contentDigest": "sha256:bc2a49be73bbae41940f3055447d4fa9d65b99d346a43acc689a3354bb531fd2"
+    },
+    {
+      "candidateId": "cand_2442fe7562c53bea01ce37f8",
+      "path": "/policy/scientific-evidence-policy/comparison",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/scientific-evidence-policy/comparison",
+      "segments": [
+        "scientific-evidence-policy",
+        "comparison"
+      ],
+      "contentDigest": "sha256:fbe0d0ec80a230b7d20727ed07b324eecccae8af8e7d2b2a5f862bacdfd82b6d"
+    },
+    {
+      "candidateId": "cand_e0892fb08bf6a9f945d7a575",
+      "path": "/policy/scientific-evidence-policy/current-law",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/scientific-evidence-policy/current-law",
+      "segments": [
+        "scientific-evidence-policy",
+        "current-law"
+      ],
+      "contentDigest": "sha256:222af9babe48d039c951b3838bb43b34c4bca0959cb2a6f6e76bf83a80a1b219"
+    },
+    {
+      "candidateId": "cand_9866f1d8a37a8962beb00d56",
+      "path": "/policy/scientific-evidence-policy/implementation",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/scientific-evidence-policy/implementation",
+      "segments": [
+        "scientific-evidence-policy",
+        "implementation"
+      ],
+      "contentDigest": "sha256:2823ac893e6377d40dcc7e6328876a31d46db8840ef6bca5d39e1d2a79de541f"
+    },
+    {
+      "candidateId": "cand_7b9252be46af5c9b818d07ce",
+      "path": "/policy/semiconductor-policy/comparison",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/semiconductor-policy/comparison",
+      "segments": [
+        "semiconductor-policy",
+        "comparison"
+      ],
+      "contentDigest": "sha256:32a4127f0f49276f9f122b47b3748482c03c21b65baaf50845c067f2b4265d81"
+    },
+    {
+      "candidateId": "cand_24271a03495a65f627634227",
+      "path": "/policy/semiconductor-policy/current-law",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/semiconductor-policy/current-law",
+      "segments": [
+        "semiconductor-policy",
+        "current-law"
+      ],
+      "contentDigest": "sha256:4c4d44b0e5b3c75f1002f7f249dc076b20c3686e860f514ff0a2a1f14d2861af"
+    },
+    {
+      "candidateId": "cand_0f0a87b8b46217417ee40071",
+      "path": "/policy/semiconductor-policy/implementation",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/semiconductor-policy/implementation",
+      "segments": [
+        "semiconductor-policy",
+        "implementation"
+      ],
+      "contentDigest": "sha256:6b966a6ba9b963cf5b24e0a5ea56ac768dba258ce324896e09eaa0b6635b156f"
     }
   ],
-  "provenanceDigest": "sha256:409daf0b74739ab6417579c5f190b9acea62e2c4607ac8e08ff11603bf6466ab"
+  "provenanceDigest": "sha256:fbdc09b833ed74922f870f2b6dfda0133e0cda86b4ede3bdcf1b2d9d54170fd5"
 }

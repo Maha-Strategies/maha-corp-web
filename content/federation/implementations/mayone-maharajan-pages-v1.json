@@ -2,11 +2,11 @@
   "schemaVersion": "maha-federation-property-pages/1.0",
   "siteId": "mayone-maharajan",
   "canonicalHost": "www.mayonemaharajan.com",
-  "registryDigest": "sha256:a8e9e54926e35ebd16d209a8de9b759c3e928f1a11340c9fa3143e4f4c4c4808",
+  "registryDigest": "sha256:a2caf318ec903d9e5b39de9e055696cd1a5ee09525f55829d5c9cf05ad354764",
   "status": "local-unreleased",
   "counts": {
-    "pages": 37,
-    "readyForOwnerIntegration": 37,
+    "pages": 42,
+    "readyForOwnerIntegration": 42,
     "blockedOnUnreadyPrerequisite": 0
   },
   "pages": [
@@ -9348,7 +9348,1203 @@
         "packetDigest": "sha256:90dc23aaec67505107f0953e9f5f7a85b51378bfd6d6753e98afde5b8f4ef40c"
       },
       "contentDigest": "sha256:c9d1922b4365544788aa2b78ad01e8366edeeb4841270d79614d31ac9875d6d8"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_94be7c924fbc92f197067186",
+      "tranche": 10,
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "path": "/concepts/authorial-lineage/origin",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/authorial-lineage/origin",
+      "title": "Authorial Lineage — Origin",
+      "topic": "authorial-lineage",
+      "routeRole": "origin",
+      "concept": {
+        "conceptId": "urn:maha:concept:autonomy:authorial-lineage",
+        "familyId": "autonomy",
+        "canonicalOwner": "mayone-maharajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:autonomy:authorial-lineage"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:autonomy"
+          }
+        ]
+      },
+      "directAnswer": "Authorial Lineage, in this Origin, is limited to the following inspected scope. One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Authorial Lineage, in this Origin, is limited to the following inspected scope. One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Origin",
+          "kind": "role-method",
+          "paragraphs": [
+            "Keep the answer within the inspected source scope and make every operational step or conceptual relation explicit.",
+            "Do not use completeness of presentation as a substitute for evidence, review, or release.",
+            "Applied scope: One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayone-maharajan. This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish authorial interpretation, concept genealogy, book relationships. It must not publish authorial thesis presented as consensus or empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "The Maha Principle — The Network and the Feed; Chapter 6; Chapter 7; Whole-Food Information. Establishes: One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience.",
+            "The Cosmic Recursion — Introduction and closing synthesis; passages distinguishing analogy, recurrence, evidence, and model boundary. Establishes: A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "A manuscript can establish its own wording and internal relationships, not originality, influence, reception, consensus, or empirical truth.",
+            "Textual relationship inside one author’s corpus does not prove chronological influence, priority over other thinkers, public reception, or scientific validity.",
+            "This route must not claim authorial thesis presented as consensus.",
+            "This route must not claim empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/authorial-lineage/definition",
+            "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/authorial-lineage/relationship",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/authorial-lineage/development",
+            "property-home: https://www.mayonemaharajan.com/",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/authorial-lineage/critique"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "maha-principle-authorial-lineage",
+          "title": "The Maha Principle",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "The Network and the Feed; Chapter 6; Chapter 7; Whole-Food Information",
+          "establishes": "One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience.",
+          "doesNotEstablish": "A manuscript can establish its own wording and internal relationships, not originality, influence, reception, consensus, or empirical truth.",
+          "rightsBasis": "Maha-controlled authorial manuscript; bounded paraphrase and locator only. The packet does not redistribute the manuscript.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "cosmic-recursion-authorial-lineage",
+          "title": "The Cosmic Recursion",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "Introduction and closing synthesis; passages distinguishing analogy, recurrence, evidence, and model boundary",
+          "establishes": "A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification.",
+          "doesNotEstablish": "Textual relationship inside one author’s corpus does not prove chronological influence, priority over other thinkers, public reception, or scientific validity.",
+          "rightsBasis": "Maha-controlled authorial manuscript; bounded paraphrase and locator only. The packet does not redistribute the manuscript.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/authorial-lineage/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_9c5aadfaa34b1896f9ee2b36"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_6e5cae25a74731057505dc27",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/authorial-lineage/relationship",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_d4b6354f11aedcfbdac48596"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/authorial-lineage/development",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_4ef1f54c0bbbc1b35bc2d57c"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/authorial-lineage/critique",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_7062ac80168cab7e17e02623"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Authorial Lineage mean in this bounded context?",
+          "answer": "Authorial Lineage, in this Origin, is limited to the following inspected scope. One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this origin answer?",
+          "answer": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Network and the Feed; Chapter 6; Chapter 7; Whole-Food Information, supports one manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. The Cosmic Recursion (working authorial manuscript inspected 2026-09-06), at Introduction and closing synthesis; passages distinguishing analogy, recurrence, evidence, and model boundary, supports a second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "A manuscript can establish its own wording and internal relationships, not originality, influence, reception, consensus, or empirical truth. Textual relationship inside one author’s corpus does not prove chronological influence, priority over other thinkers, public reception, or scientific validity. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.mayonemaharajan.com/concepts/authorial-lineage/origin#article",
+        "headline": "Authorial Lineage — Origin",
+        "url": "https://www.mayonemaharajan.com/concepts/authorial-lineage/origin",
+        "isPartOf": "https://www.mayonemaharajan.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Authorial Lineage mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Authorial Lineage, in this Origin, is limited to the following inspected scope. One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this origin answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Network and the Feed; Chapter 6; Chapter 7; Whole-Food Information, supports one manuscript state develops an authorial vocabulary for information, governance, verification, and resilience. The Cosmic Recursion (working authorial manuscript inspected 2026-09-06), at Introduction and closing synthesis; passages distinguishing analogy, recurrence, evidence, and model boundary, supports a second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A manuscript can establish its own wording and internal relationships, not originality, influence, reception, consensus, or empirical truth. Textual relationship inside one author’s corpus does not prove chronological influence, priority over other thinkers, public reception, or scientific validity. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-10",
+        "decisionManifestDigest": "sha256:9ef07cfe461c123d2f87caf30b3271a31692f97f2c2307a426830667a68a1bfa",
+        "decisionDigest": "sha256:98f261bf348c757e144c2e92f06eee5f27af7146bb84b20e2a62fc7f929669ba",
+        "specificationManifestDigest": "sha256:f3a532332a4567fead139076fd821fe0436d910d4b3b576edd34f057ac3856f0",
+        "specificationDigest": "sha256:1c55f7052a4be7c15900780184455496e4c2b0db328eb12df3e84983e6e82443",
+        "packetManifestDigest": "sha256:c3016515219a07cc5be0bf9761efa3afb2b4d315436650c2832ce3737310c408",
+        "packetDigest": "sha256:66a72ff577eb27e2fc5cfc2c68a9336664d985d9bccd61def8b3875b23cd2b15"
+      },
+      "contentDigest": "sha256:d13c170559fccc51bd73a0fc5f428e9c3dbbba049e56407c0f874e7687229f35"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_b23f8e82f8ed9e7b18c8a535",
+      "tranche": 10,
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "path": "/concepts/civilizational-memory/origin",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/civilizational-memory/origin",
+      "title": "Civilizational Memory — Origin",
+      "topic": "civilizational-memory",
+      "routeRole": "origin",
+      "concept": {
+        "conceptId": "urn:maha:concept:autonomy:civilizational-memory",
+        "familyId": "autonomy",
+        "canonicalOwner": "mayone-maharajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:autonomy:civilizational-memory"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:autonomy"
+          }
+        ]
+      },
+      "directAnswer": "Civilizational Memory, in this Origin, is limited to the following inspected scope. The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Civilizational Memory, in this Origin, is limited to the following inspected scope. The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Origin",
+          "kind": "role-method",
+          "paragraphs": [
+            "Keep the answer within the inspected source scope and make every operational step or conceptual relation explicit.",
+            "Do not use completeness of presentation as a substitute for evidence, review, or release.",
+            "Applied scope: The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayone-maharajan. This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish authorial interpretation, concept genealogy, book relationships. It must not publish authorial thesis presented as consensus or empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "The Borrowed Light — Chapter 5: The Hard Problem in the Mirror; Chapter 6: The Evidence That Needs No Physics and The Custodians. Establishes: The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "This establishes the author’s framework, not a historical lineage, empirical model of memory, cultural authority, priority, or consensus.",
+            "This route must not claim authorial thesis presented as consensus.",
+            "This route must not claim empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/civilizational-memory/definition",
+            "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/civilizational-memory/relationship",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/civilizational-memory/development",
+            "property-home: https://www.mayonemaharajan.com/",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/civilizational-memory/critique"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "borrowed-light-civilizational-memory",
+          "title": "The Borrowed Light",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "Chapter 5: The Hard Problem in the Mirror; Chapter 6: The Evidence That Needs No Physics and The Custodians",
+          "establishes": "The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind.",
+          "doesNotEstablish": "This establishes the author’s framework, not a historical lineage, empirical model of memory, cultural authority, priority, or consensus.",
+          "rightsBasis": "Maha-controlled authorial manuscript; bounded paraphrase and locator only. The packet does not redistribute the manuscript.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_4928435919adf88fa11f5275"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_6e5cae25a74731057505dc27",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/relationship",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_6165e01368841892cc1214f8"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/development",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_91a359ed79a7cab188963d9b"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/critique",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_a776af38a31ec64e03244944"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Civilizational Memory mean in this bounded context?",
+          "answer": "Civilizational Memory, in this Origin, is limited to the following inspected scope. The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this origin answer?",
+          "answer": "The Borrowed Light (working authorial manuscript inspected 2026-09-06), at Chapter 5: The Hard Problem in the Mirror; Chapter 6: The Evidence That Needs No Physics and The Custodians, supports the manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "This establishes the author’s framework, not a historical lineage, empirical model of memory, cultural authority, priority, or consensus. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.mayonemaharajan.com/concepts/civilizational-memory/origin#article",
+        "headline": "Civilizational Memory — Origin",
+        "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/origin",
+        "isPartOf": "https://www.mayonemaharajan.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Civilizational Memory mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Civilizational Memory, in this Origin, is limited to the following inspected scope. The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this origin answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Borrowed Light (working authorial manuscript inspected 2026-09-06), at Chapter 5: The Hard Problem in the Mirror; Chapter 6: The Evidence That Needs No Physics and The Custodians, supports the manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This establishes the author’s framework, not a historical lineage, empirical model of memory, cultural authority, priority, or consensus. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-10",
+        "decisionManifestDigest": "sha256:9ef07cfe461c123d2f87caf30b3271a31692f97f2c2307a426830667a68a1bfa",
+        "decisionDigest": "sha256:dabdb67cfe47284148d8d456fde51f9c3963fb325f80ce59697d6bf116945019",
+        "specificationManifestDigest": "sha256:f3a532332a4567fead139076fd821fe0436d910d4b3b576edd34f057ac3856f0",
+        "specificationDigest": "sha256:7691d816577ef7f7c90a1cd173dc31b2c954085eb443b5e0fdf126069ca9e71b",
+        "packetManifestDigest": "sha256:c3016515219a07cc5be0bf9761efa3afb2b4d315436650c2832ce3737310c408",
+        "packetDigest": "sha256:a4f3bad848af32a2998d18d7982fe89f18ba54d2e9f89058ca3c59b9a881dac2"
+      },
+      "contentDigest": "sha256:cb5daf41ec85d8161efb71dade778b51e97e0a428e212a4eeff964033f22a135"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_eca3c4e2264913b2c113b043",
+      "tranche": 10,
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "path": "/concepts/maha-principle/relationship",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/maha-principle/relationship",
+      "title": "Maha Principle — Relationship",
+      "topic": "maha-principle",
+      "routeRole": "relationship",
+      "concept": {
+        "conceptId": "urn:maha:concept:autonomy:maha-principle",
+        "familyId": "autonomy",
+        "canonicalOwner": "mayone-maharajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:autonomy:maha-principle"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:autonomy"
+          }
+        ]
+      },
+      "directAnswer": "Maha Principle, in this relationship map, is limited to the following inspected scope. The manuscript relates its central principle to asymmetric strategy, humane governance, verification under complexity, long-horizon vision, and application across scales. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Maha Principle, in this relationship map, is limited to the following inspected scope. The manuscript relates its central principle to asymmetric strategy, humane governance, verification under complexity, long-horizon vision, and application across scales. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Relationship map",
+          "kind": "role-method",
+          "paragraphs": [
+            "Name the relationship type and direction, then state what does not transfer across the edge.",
+            "A relationship does not make two concepts equivalent or transfer evidence, legal authority, or empirical validity.",
+            "Applied scope: The manuscript relates its central principle to asymmetric strategy, humane governance, verification under complexity, long-horizon vision, and application across scales."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayone-maharajan. This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish authorial interpretation, concept genealogy, book relationships. It must not publish authorial thesis presented as consensus or empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "The Maha Principle — THE MAHA PRINCIPLE: A MAP OF THE TERRAIN; The Architecture of Renewal; Chapters 5–8; The Fractal: As the Cell, So the State. Establishes: The manuscript relates its central principle to asymmetric strategy, humane governance, verification under complexity, long-horizon vision, and application across scales."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The manuscript establishes the author’s intended relationships only. It does not prove novelty, empirical validity, adoption, philosophical priority, commercial success, or consensus.",
+            "This route must not claim authorial thesis presented as consensus.",
+            "This route must not claim empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+            "property-home: https://www.mayonemaharajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "maha-principle-relationship-t10",
+          "title": "The Maha Principle",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "THE MAHA PRINCIPLE: A MAP OF THE TERRAIN; The Architecture of Renewal; Chapters 5–8; The Fractal: As the Cell, So the State",
+          "establishes": "The manuscript relates its central principle to asymmetric strategy, humane governance, verification under complexity, long-horizon vision, and application across scales.",
+          "doesNotEstablish": "The manuscript establishes the author’s intended relationships only. It does not prove novelty, empirical validity, adoption, philosophical priority, commercial success, or consensus.",
+          "rightsBasis": "Maha-controlled working authorial manuscript; bounded summary only. The packet does not imply publication, peer review, consensus, or empirical validation.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_6e5cae25a74731057505dc27",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Maha Principle mean in this bounded context?",
+          "answer": "Maha Principle, in this relationship map, is limited to the following inspected scope. The manuscript relates its central principle to asymmetric strategy, humane governance, verification under complexity, long-horizon vision, and application across scales. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this relationship answer?",
+          "answer": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at THE MAHA PRINCIPLE: A MAP OF THE TERRAIN; The Architecture of Renewal; Chapters 5–8; The Fractal: As the Cell, So the State, supports the manuscript relates its central principle to asymmetric strategy, humane governance, verification under complexity, long-horizon vision, and application across scales."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The manuscript establishes the author’s intended relationships only. It does not prove novelty, empirical validity, adoption, philosophical priority, commercial success, or consensus. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.mayonemaharajan.com/concepts/maha-principle/relationship#article",
+        "headline": "Maha Principle — Relationship",
+        "url": "https://www.mayonemaharajan.com/concepts/maha-principle/relationship",
+        "isPartOf": "https://www.mayonemaharajan.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Maha Principle mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Maha Principle, in this relationship map, is limited to the following inspected scope. The manuscript relates its central principle to asymmetric strategy, humane governance, verification under complexity, long-horizon vision, and application across scales. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this relationship answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at THE MAHA PRINCIPLE: A MAP OF THE TERRAIN; The Architecture of Renewal; Chapters 5–8; The Fractal: As the Cell, So the State, supports the manuscript relates its central principle to asymmetric strategy, humane governance, verification under complexity, long-horizon vision, and application across scales."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The manuscript establishes the author’s intended relationships only. It does not prove novelty, empirical validity, adoption, philosophical priority, commercial success, or consensus. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-10",
+        "decisionManifestDigest": "sha256:9ef07cfe461c123d2f87caf30b3271a31692f97f2c2307a426830667a68a1bfa",
+        "decisionDigest": "sha256:728689caaa3b4f7750095a1845c240b3ff1857073c8a418bcf1eaecadd54b014",
+        "specificationManifestDigest": "sha256:f3a532332a4567fead139076fd821fe0436d910d4b3b576edd34f057ac3856f0",
+        "specificationDigest": "sha256:d05a7699be34ef660484705f80f518d840231657bf044803fb312dd8817e89f4",
+        "packetManifestDigest": "sha256:c3016515219a07cc5be0bf9761efa3afb2b4d315436650c2832ce3737310c408",
+        "packetDigest": "sha256:8c36913177edf1f72cd13a50b39184cd64b014d1a9ef9813a99ce759c9f71b5e"
+      },
+      "contentDigest": "sha256:f74e5b5746c982633f709e2e6ab99eb274e000176dfd0149da921942cb2b610f"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_4acd70cabb69b750481a316c",
+      "tranche": 10,
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "path": "/concepts/recursive-institutions/definition",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/recursive-institutions/definition",
+      "title": "Recursive Institutions — Definition",
+      "topic": "recursive-institutions",
+      "routeRole": "definition",
+      "concept": {
+        "conceptId": "urn:maha:concept:autonomy:recursive-institutions",
+        "familyId": "autonomy",
+        "canonicalOwner": "mayone-maharajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:autonomy:recursive-institutions"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:autonomy"
+          }
+        ]
+      },
+      "directAnswer": "Recursive Institutions, in this definition, is limited to the following inspected scope. The manuscript proposes recurring governance patterns across individual, household, community, and civic scales and argues that competence and authority should remain scale-aware. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Recursive Institutions, in this definition, is limited to the following inspected scope. The manuscript proposes recurring governance patterns across individual, household, community, and civic scales and argues that competence and authority should remain scale-aware. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Definition",
+          "kind": "role-method",
+          "paragraphs": [
+            "Use the term only for the source-backed scope stated here; keep adjacent concepts separate unless a typed relationship is explicit.",
+            "A useful definition states both inclusion and exclusion conditions so a machine answer cannot silently widen it.",
+            "Applied scope: The manuscript proposes recurring governance patterns across individual, household, community, and civic scales and argues that competence and authority should remain scale-aware."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayone-maharajan. This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish authorial interpretation, concept genealogy, book relationships. It must not publish authorial thesis presented as consensus or empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "The Maha Principle — The Fractal: As the Cell, So the State; The Three Scales of Construction; subsidiarity and scale-error discussion; Zone of Exception. Establishes: The manuscript proposes recurring governance patterns across individual, household, community, and civic scales and argues that competence and authority should remain scale-aware."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "“Recursive institutions” is an editorial label, not a settled academic term. The manuscript does not prove structural identity across scales, causal effects, institutional feasibility, or superior outcomes.",
+            "This route must not claim authorial thesis presented as consensus.",
+            "This route must not claim empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/recursive-institutions/relationship",
+            "property-home: https://www.mayonemaharajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "maha-principle-recursive-institutions-t10",
+          "title": "The Maha Principle",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "The Fractal: As the Cell, So the State; The Three Scales of Construction; subsidiarity and scale-error discussion; Zone of Exception",
+          "establishes": "The manuscript proposes recurring governance patterns across individual, household, community, and civic scales and argues that competence and authority should remain scale-aware.",
+          "doesNotEstablish": "“Recursive institutions” is an editorial label, not a settled academic term. The manuscript does not prove structural identity across scales, causal effects, institutional feasibility, or superior outcomes.",
+          "rightsBasis": "Maha-controlled working authorial manuscript; bounded summary only. The packet does not imply publication, peer review, consensus, or empirical validation.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_6e5cae25a74731057505dc27",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/recursive-institutions/relationship",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_2ef397182eddc44b4664a277"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Recursive Institutions mean in this bounded context?",
+          "answer": "Recursive Institutions, in this definition, is limited to the following inspected scope. The manuscript proposes recurring governance patterns across individual, household, community, and civic scales and argues that competence and authority should remain scale-aware. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this definition answer?",
+          "answer": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Fractal: As the Cell, So the State; The Three Scales of Construction; subsidiarity and scale-error discussion; Zone of Exception, supports the manuscript proposes recurring governance patterns across individual, household, community, and civic scales and argues that competence and authority should remain scale-aware."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "“Recursive institutions” is an editorial label, not a settled academic term. The manuscript does not prove structural identity across scales, causal effects, institutional feasibility, or superior outcomes. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.mayonemaharajan.com/concepts/recursive-institutions/definition#article",
+        "headline": "Recursive Institutions — Definition",
+        "url": "https://www.mayonemaharajan.com/concepts/recursive-institutions/definition",
+        "isPartOf": "https://www.mayonemaharajan.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Recursive Institutions mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Recursive Institutions, in this definition, is limited to the following inspected scope. The manuscript proposes recurring governance patterns across individual, household, community, and civic scales and argues that competence and authority should remain scale-aware. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this definition answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Fractal: As the Cell, So the State; The Three Scales of Construction; subsidiarity and scale-error discussion; Zone of Exception, supports the manuscript proposes recurring governance patterns across individual, household, community, and civic scales and argues that competence and authority should remain scale-aware."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "“Recursive institutions” is an editorial label, not a settled academic term. The manuscript does not prove structural identity across scales, causal effects, institutional feasibility, or superior outcomes. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-10",
+        "decisionManifestDigest": "sha256:9ef07cfe461c123d2f87caf30b3271a31692f97f2c2307a426830667a68a1bfa",
+        "decisionDigest": "sha256:5427b214aa0198af3a4a3d4de45d03165e18001fb424ebf72148f62fe9e1c648",
+        "specificationManifestDigest": "sha256:f3a532332a4567fead139076fd821fe0436d910d4b3b576edd34f057ac3856f0",
+        "specificationDigest": "sha256:59f7fc59a0110b616c33d6e524e9c8a8bd9808109411496f4ed189ffd13326c1",
+        "packetManifestDigest": "sha256:c3016515219a07cc5be0bf9761efa3afb2b4d315436650c2832ce3737310c408",
+        "packetDigest": "sha256:4d24a3af4e71716d3dffd51c9ceee3b15ad5e31a49cf8d0521f15557f3deae98"
+      },
+      "contentDigest": "sha256:1c869b2e298a5156c0b41426ceb015780e7e9bdfce5a62488e74d331fd89f4f3"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_2ef397182eddc44b4664a277",
+      "tranche": 10,
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "path": "/concepts/recursive-institutions/relationship",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/recursive-institutions/relationship",
+      "title": "Recursive Institutions — Relationship",
+      "topic": "recursive-institutions",
+      "routeRole": "relationship",
+      "concept": {
+        "conceptId": "urn:maha:concept:autonomy:recursive-institutions",
+        "familyId": "autonomy",
+        "canonicalOwner": "mayone-maharajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:autonomy:recursive-institutions"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:autonomy"
+          }
+        ]
+      },
+      "directAnswer": "Recursive Institutions, in this relationship map, is limited to the following inspected scope. The manuscript proposes recurring governance patterns across individual, household, community, and civic scales and argues that competence and authority should remain scale-aware. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Recursive Institutions, in this relationship map, is limited to the following inspected scope. The manuscript proposes recurring governance patterns across individual, household, community, and civic scales and argues that competence and authority should remain scale-aware. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Relationship map",
+          "kind": "role-method",
+          "paragraphs": [
+            "Name the relationship type and direction, then state what does not transfer across the edge.",
+            "A relationship does not make two concepts equivalent or transfer evidence, legal authority, or empirical validity.",
+            "Applied scope: The manuscript proposes recurring governance patterns across individual, household, community, and civic scales and argues that competence and authority should remain scale-aware."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayone-maharajan. This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish authorial interpretation, concept genealogy, book relationships. It must not publish authorial thesis presented as consensus or empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "The Maha Principle — The Fractal: As the Cell, So the State; The Three Scales of Construction; subsidiarity and scale-error discussion; Zone of Exception. Establishes: The manuscript proposes recurring governance patterns across individual, household, community, and civic scales and argues that competence and authority should remain scale-aware."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "“Recursive institutions” is an editorial label, not a settled academic term. The manuscript does not prove structural identity across scales, causal effects, institutional feasibility, or superior outcomes.",
+            "This route must not claim authorial thesis presented as consensus.",
+            "This route must not claim empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/recursive-institutions/definition",
+            "property-home: https://www.mayonemaharajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "maha-principle-recursive-institutions-t10",
+          "title": "The Maha Principle",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "The Fractal: As the Cell, So the State; The Three Scales of Construction; subsidiarity and scale-error discussion; Zone of Exception",
+          "establishes": "The manuscript proposes recurring governance patterns across individual, household, community, and civic scales and argues that competence and authority should remain scale-aware.",
+          "doesNotEstablish": "“Recursive institutions” is an editorial label, not a settled academic term. The manuscript does not prove structural identity across scales, causal effects, institutional feasibility, or superior outcomes.",
+          "rightsBasis": "Maha-controlled working authorial manuscript; bounded summary only. The packet does not imply publication, peer review, consensus, or empirical validation.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_6e5cae25a74731057505dc27",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/recursive-institutions/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_4acd70cabb69b750481a316c"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Recursive Institutions mean in this bounded context?",
+          "answer": "Recursive Institutions, in this relationship map, is limited to the following inspected scope. The manuscript proposes recurring governance patterns across individual, household, community, and civic scales and argues that competence and authority should remain scale-aware. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this relationship answer?",
+          "answer": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Fractal: As the Cell, So the State; The Three Scales of Construction; subsidiarity and scale-error discussion; Zone of Exception, supports the manuscript proposes recurring governance patterns across individual, household, community, and civic scales and argues that competence and authority should remain scale-aware."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "“Recursive institutions” is an editorial label, not a settled academic term. The manuscript does not prove structural identity across scales, causal effects, institutional feasibility, or superior outcomes. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.mayonemaharajan.com/concepts/recursive-institutions/relationship#article",
+        "headline": "Recursive Institutions — Relationship",
+        "url": "https://www.mayonemaharajan.com/concepts/recursive-institutions/relationship",
+        "isPartOf": "https://www.mayonemaharajan.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Recursive Institutions mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Recursive Institutions, in this relationship map, is limited to the following inspected scope. The manuscript proposes recurring governance patterns across individual, household, community, and civic scales and argues that competence and authority should remain scale-aware. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this relationship answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Fractal: As the Cell, So the State; The Three Scales of Construction; subsidiarity and scale-error discussion; Zone of Exception, supports the manuscript proposes recurring governance patterns across individual, household, community, and civic scales and argues that competence and authority should remain scale-aware."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "“Recursive institutions” is an editorial label, not a settled academic term. The manuscript does not prove structural identity across scales, causal effects, institutional feasibility, or superior outcomes. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-10",
+        "decisionManifestDigest": "sha256:9ef07cfe461c123d2f87caf30b3271a31692f97f2c2307a426830667a68a1bfa",
+        "decisionDigest": "sha256:4b4e4c6e42011354f654b73b428c5229846eda58a2c2eff7071b868e9c808287",
+        "specificationManifestDigest": "sha256:f3a532332a4567fead139076fd821fe0436d910d4b3b576edd34f057ac3856f0",
+        "specificationDigest": "sha256:a27353ed9f81266af0c9eba6d97d5cc10f41a8603dfed2cbfa2bf6043a04858c",
+        "packetManifestDigest": "sha256:c3016515219a07cc5be0bf9761efa3afb2b4d315436650c2832ce3737310c408",
+        "packetDigest": "sha256:4d24a3af4e71716d3dffd51c9ceee3b15ad5e31a49cf8d0521f15557f3deae98"
+      },
+      "contentDigest": "sha256:56e0b1962ebe910615f18e5daa23a9ba62182d4463574cc4dbc9cfd53db87d2b"
     }
   ],
-  "provenanceDigest": "sha256:f33a7a22c323d2801e247bb2c23a6ab647e7bbfd9f97d18a58d2c780e8fee723"
+  "provenanceDigest": "sha256:bd092b31fba9efc8128acd320029bb5578935e4a926f4b10f6d286d8278061a9"
 }

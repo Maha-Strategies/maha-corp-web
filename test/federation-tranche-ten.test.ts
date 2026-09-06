@@ -7,24 +7,24 @@ import test from 'node:test'
 import { provenanceDigest } from '../lib/evidence-dossier/digest.ts'
 import { generateFederationPageImplementations } from '../scripts/generate-federation-page-implementations.ts'
 import { generateFederationPropertyAdapters } from '../scripts/generate-federation-property-adapters.ts'
-import { generateFederationTrancheNineReview } from '../scripts/generate-federation-tranche-nine-review.ts'
-import { generateTrancheNine } from '../scripts/generate-federation-tranche-nine.ts'
+import { generateFederationTrancheTenReview } from '../scripts/generate-federation-tranche-ten-review.ts'
+import { generateTrancheTen } from '../scripts/generate-federation-tranche-ten.ts'
 
 const ROOT = resolve(import.meta.dirname, '..')
 const readJson = <T>(path: string) => JSON.parse(readFileSync(resolve(ROOT, path), 'utf8')) as T
 
-type Cohort = ReturnType<typeof generateTrancheNine>
-type Review = ReturnType<typeof generateFederationTrancheNineReview>
+type Cohort = ReturnType<typeof generateTrancheTen>
+type Review = ReturnType<typeof generateFederationTrancheTenReview>
 type Implementations = ReturnType<typeof generateFederationPageImplementations>
 type Adapters = ReturnType<typeof generateFederationPropertyAdapters>
 
-const cohort = readJson<Cohort>('content/federation/federation-tranche-9-cohort-v1.json')
-const semantic = readJson<Review['semanticManifest']>('content/federation/federation-tranche-9-semantic-validation-v1.json')
-const dependencies = readJson<Review['dependencyManifest']>('content/federation/federation-tranche-9-dependency-validation-v1.json')
-const packets = readJson<Review['packetManifest']>('content/federation/federation-tranche-9-evidence-packets-v1.json')
-const decisions = readJson<Review['decisionManifest']>('content/federation/federation-tranche-9-decisions-v1.json')
-const specifications = readJson<Review['specificationManifest']>('content/federation/federation-tranche-9-page-specifications-v1.json')
-const readiness = readJson<Review['readiness']>('content/federation/federation-tranche-9-readiness-v1.json')
+const cohort = readJson<Cohort>('content/federation/federation-tranche-10-cohort-v1.json')
+const semantic = readJson<Review['semanticManifest']>('content/federation/federation-tranche-10-semantic-validation-v1.json')
+const dependencies = readJson<Review['dependencyManifest']>('content/federation/federation-tranche-10-dependency-validation-v1.json')
+const packets = readJson<Review['packetManifest']>('content/federation/federation-tranche-10-evidence-packets-v1.json')
+const decisions = readJson<Review['decisionManifest']>('content/federation/federation-tranche-10-decisions-v1.json')
+const specifications = readJson<Review['specificationManifest']>('content/federation/federation-tranche-10-page-specifications-v1.json')
+const readiness = readJson<Review['readiness']>('content/federation/federation-tranche-10-readiness-v1.json')
 const implementationRegistry = readJson<Implementations['registry']>('content/federation/implementations/federation-page-implementation-registry-v1.json')
 const adapterRegistry = readJson<Adapters['registry']>('content/federation/adapters/federation-property-route-adapter-registry-v1.json')
 
@@ -33,19 +33,19 @@ function filesUnder(path: string): string[] {
   return readdirSync(path, { withFileTypes: true }).flatMap((entry) => entry.isDirectory() ? filesUnder(join(path, entry.name)) : [join(path, entry.name)])
 }
 
-test('Tranche 9 freezes exactly candidates 801–900 without moving a prior cohort', () => {
-  assert.equal(cohort.schemaVersion, 'maha-federation-tranche-nine-cohort/1.0')
+test('Tranche 10 freezes exactly candidates 901–1,000 without moving a prior cohort', () => {
+  assert.equal(cohort.schemaVersion, 'maha-federation-tranche-ten-cohort/1.0')
   assert.deepEqual(cohort.counts, {
     selected: 100,
     overlapWithPriorTranches: 0,
-    dependenciesSatisfiedByPriorTranches: 71,
+    dependenciesSatisfiedByPriorTranches: 73,
     byProperty: { 'maha-strategies': 31, 'maha-research': 25, 'agentic-publishing': 10, 'maha-os': 6, 'mayone-maharajan': 5, 'mayon-rajan': 5, 'maha-policy': 18 },
     inspected: 0,
     evidenceReady: 0,
     pageSpecs: 0,
   })
   assert.equal(new Set(cohort.entries.map((entry) => entry.candidateId)).size, 100)
-  const priorIds = new Set([1, 2, 3, 4, 5, 6, 7, 8].flatMap((tranche) => readJson<{ entries: Array<{ candidateId: string }> }>(`content/federation/federation-tranche-${tranche}-cohort-v1.json`).entries.map((entry) => entry.candidateId)))
+  const priorIds = new Set([1, 2, 3, 4, 5, 6, 7, 8, 9].flatMap((tranche) => readJson<{ entries: Array<{ candidateId: string }> }>(`content/federation/federation-tranche-${tranche}-cohort-v1.json`).entries.map((entry) => entry.candidateId)))
   assert.equal(cohort.entries.filter((entry) => priorIds.has(entry.candidateId)).length, 0)
 })
 
@@ -60,10 +60,10 @@ test('semantic and dependency review preserves one hundred distinct, dependency-
   }
 })
 
-test('eighteen new packets and thirty-seven carried packets preserve all evidence axes independently', () => {
-  assert.deepEqual(packets.counts, { topics: 55, newTopics: 18, carriedForwardTopics: 37, sources: 94 })
-  assert.equal(packets.packets.filter((entry) => entry.provenance === 'new-section-inspection').length, 18)
-  assert.equal(packets.packets.filter((entry) => entry.provenance === 'carried-forward-same-version').length, 37)
+test('twelve fresh or refreshed packets and forty-eight carried packets preserve every evidence axis', () => {
+  assert.deepEqual(packets.counts, { topics: 60, newTopics: 12, carriedForwardTopics: 48, sources: 92 })
+  assert.equal(packets.packets.filter((entry) => entry.provenance === 'new-section-inspection').length, 12)
+  assert.equal(packets.packets.filter((entry) => entry.provenance === 'carried-forward-same-version').length, 48)
   for (const packet of packets.packets) {
     assert.equal(packet.sourceIdentityChecked, true)
     assert.equal(packet.locatorChecked, true)
@@ -87,39 +87,34 @@ test('eighteen new packets and thirty-seven carried packets preserve all evidenc
   }
 })
 
-test('new-topic packets retain source-class and inference boundaries', () => {
+test('fresh packets preserve legal, scientific, literary, operational and authorial boundaries', () => {
   const value = (topicKey: string) => JSON.stringify(packets.packets.find((entry) => entry.topicKey === topicKey))
-  assert.match(value('agentic-publishing:citation-verification'), /does not prove.*passage support|does not prove.*claim/i)
-  assert.match(value('maha-research:full-text-evidence'), /Free access is not the same as an open licence|systematic main-site downloading is prohibited/i)
-  assert.match(value('maha-research:reproducibility'), /does not establish scientific correctness|replicability uses new data/i)
-  assert.match(value('maha-os:emergency-override'), /does not prescribe one break-glass architecture|permit unrestricted access/i)
-  assert.match(value('maha-policy:scientific-evidence-policy'), /does not.*guarantee policy correctness|U\.S\. federal context/i)
-  assert.match(value('maha-policy:semiconductor-policy'), /does not prove industrial outcomes|funding is not evidence that a project succeeded/i)
-  assert.match(value('maha-research:government-mirror'), /does not prove.*current law|does not establish.*current/i)
-  assert.match(value('maha-strategies:divine-epithets'), /does not establish identity in every text|timeless equivalence/i)
-  assert.match(value('maha-strategies:tradition-comparison'), /do not validate astrology|do not.*empirically superior/i)
-  assert.match(value('maha-strategies:epistemic-clearance'), /does not use.*established term|not an independently verified Evidence Dossier/i)
-  assert.match(value('maha-strategies:recursive-institutions'), /editorial label|does not use.*settled academic term/i)
+  assert.match(value('maha-policy:machine-contracting'), /model law is not automatically enacted law|depends on the governing jurisdiction/i)
+  assert.match(value('maha-policy:model-evaluation'), /does not.*certify a model|does not.*guarantee deployment performance/i)
+  assert.match(value('maha-policy:scientific-evidence-policy'), /executive order is not a statute|may change, be revoked/i)
+  assert.match(value('maha-os:data-retention'), /does not choose a retention period|prove deletion/i)
+  assert.match(value('maha-strategies:coordinate-frames'), /not astrological meaning|do not validate astrology/i)
+  assert.match(value('maha-strategies:primary-text-boundaries'), /named translation|commentary|reception history|theology/i)
+  assert.match(value('mayon-rajan:gas-emissions'), /time-sensitive and intentionally not copied|latest PHIVOLCS bulletin/i)
+  assert.match(value('mayone-maharajan:maha-principle'), /author’s intended relationships only|does not prove novelty/i)
+  assert.match(value('mayone-maharajan:recursive-institutions'), /editorial label, not a settled academic term/i)
 })
 
-test('ninety-seven candidates are specified and three unsupported role transfers remain held', () => {
+test('ninety-seven candidates are specified and three unsupported calculation-role transfers remain held', () => {
   assert.deepEqual(decisions.counts, { evidenceReady: 97, revise: 3, blocked: 0, duplicative: 0 })
   assert.deepEqual(readiness.counts, { candidates: 100, evidenceReady: 97, revise: 3, blocked: 0, duplicative: 0, pageSpecifications: 97, publicRoutesCreated: 0, buildsRun: 0 })
-  const held = decisions.entries.filter((entry) => entry.disposition !== 'evidence-ready')
-  assert.deepEqual(held.map((entry) => `${entry.siteId}:${entry.topic}:${entry.routeRole}`).sort(), [
-    'maha-policy:agent-identity:current-law',
-    'maha-policy:public-sector-procurement:current-law',
-    'mayone-maharajan:public-reason:application',
+  assert.deepEqual(decisions.entries.filter((entry) => entry.disposition !== 'evidence-ready').map((entry) => entry.url).sort(), [
+    'https://www.mahastrategies.com/clearing/astrology-infrastructure/house-system-selection/calculation',
+    'https://www.mahastrategies.com/clearing/astrology-infrastructure/interpretation-boundaries/calculation',
+    'https://www.mahastrategies.com/clearing/astrology-infrastructure/tradition-comparison/calculation',
   ])
-  assert.match(held.find((entry) => entry.topic === 'agent-identity')!.reason, /not a jurisdiction-specific statute or regulation/)
-  assert.match(held.find((entry) => entry.topic === 'public-sector-procurement')!.reason, /policy instrument rather than a statute or regulation/)
-  assert.match(held.find((entry) => entry.siteId === 'mayone-maharajan')!.reason, /no inspected Mayone manuscript passage/)
+  assert.ok(decisions.entries.filter((entry) => entry.disposition === 'revise').every((entry) => /recomputable|numerical operation/i.test(entry.reason)))
   assert.equal(specifications.specifications.length, 97)
   assert.deepEqual(new Set(specifications.specifications.map((entry) => entry.candidateId)), new Set(decisions.entries.filter((entry) => entry.disposition === 'evidence-ready').map((entry) => entry.candidateId)))
   assert.ok(specifications.specifications.every((entry) => entry.implementationState === 'specification-only' && entry.machineContract.canonicalReleaseRequiredBeforePublication))
 })
 
-test('cumulative contracts reach 951 local pages while adapters expose only dependency-ready contracts', () => {
+test('cumulative local contracts reach 951 while exact-host adapters exclude all ten prerequisite holds', () => {
   assert.deepEqual(implementationRegistry.counts, {
     pages: 951,
     readyForOwnerIntegration: 941,
@@ -134,21 +129,21 @@ test('cumulative contracts reach 951 local pages while adapters expose only depe
   assert.deepEqual(adapterRegistry.counts, { properties: 7, routes: 941, boundedAnswers: 4705, publicRoutesCreated: 0, buildsRun: 0 })
   assert.equal(new Set(implementationRegistry.entries.map((entry) => entry.candidateId)).size, 951)
   const trancheIds = new Set(cohort.entries.map((entry) => entry.candidateId))
-  const trancheHeld = implementationRegistry.entries.filter((entry) => trancheIds.has(entry.candidateId) && entry.adoptionState === 'blocked-on-unready-prerequisite')
-  assert.deepEqual(trancheHeld.map((entry) => entry.canonicalUrl), ['https://publish.mahastrategies.com/agentic-publishing/editorial-review/failure-mode'])
+  assert.equal(implementationRegistry.entries.filter((entry) => trancheIds.has(entry.candidateId)).length, 97)
+  assert.equal(implementationRegistry.entries.filter((entry) => trancheIds.has(entry.candidateId) && entry.adoptionState === 'blocked-on-unready-prerequisite').length, 0)
   assert.match(adapterRegistry.buildBoundary, /No Next\.js or Vercel build is authorized/)
 })
 
-test('Tranche 9 and cumulative artifacts regenerate byte-identically without a build', () => {
-  const first = mkdtempSync(join(tmpdir(), 'maha-fed-t9-a-'))
-  const second = mkdtempSync(join(tmpdir(), 'maha-fed-t9-b-'))
+test('Tranche 10 and cumulative artifacts regenerate byte-identically without a build', () => {
+  const first = mkdtempSync(join(tmpdir(), 'maha-fed-t10-a-'))
+  const second = mkdtempSync(join(tmpdir(), 'maha-fed-t10-b-'))
   try {
     const runs = [first, second].map((root) => {
-      const frozen = generateTrancheNine(root)
-      const review = generateFederationTrancheNineReview(root)
+      const frozen = generateTrancheTen(root)
+      const review = generateFederationTrancheTenReview(root)
       const implementations = generateFederationPageImplementations(root)
       const adapters = generateFederationPropertyAdapters(root)
-      return { frozen, paths: ['content/federation/federation-tranche-9-cohort-v1.json', ...review.artifacts, ...implementations.artifacts, ...adapters.paths] }
+      return { frozen, paths: ['content/federation/federation-tranche-10-cohort-v1.json', ...review.artifacts, ...implementations.artifacts, ...adapters.paths] }
     })
     assert.equal(runs[0]!.frozen.provenanceDigest, runs[1]!.frozen.provenanceDigest)
     assert.deepEqual(runs[0]!.paths, runs[1]!.paths)
@@ -159,14 +154,16 @@ test('Tranche 9 and cumulative artifacts regenerate byte-identically without a b
   }
 })
 
-test('appending Tranche 9 cannot rewrite any earlier page contract', () => {
-  const priorRoot = mkdtempSync(join(tmpdir(), 'maha-fed-t8-only-'))
-  const fullRoot = mkdtempSync(join(tmpdir(), 'maha-fed-t9-full-'))
+test('appending Tranche 10 cannot rewrite any earlier page contract', () => {
+  const priorRoot = mkdtempSync(join(tmpdir(), 'maha-fed-t9-only-'))
+  const fullRoot = mkdtempSync(join(tmpdir(), 'maha-fed-t10-full-'))
   try {
-    const prior = generateFederationPageImplementations(priorRoot, 8)
-    const full = generateFederationPageImplementations(fullRoot, 9)
+    const prior = generateFederationPageImplementations(priorRoot, 9)
+    const full = generateFederationPageImplementations(fullRoot, 10)
     const fullByCandidate = new Map(full.pages.map((page) => [page.candidateId, page]))
-    assert.equal(prior.pages.length, 757)
+    assert.equal(prior.pages.length, 854)
+    assert.equal(full.pages.length - prior.pages.length, 97)
+    assert.deepEqual(full.pages.slice(0, prior.pages.length), prior.pages)
     for (const page of prior.pages) assert.deepEqual(fullByCandidate.get(page.candidateId), page, page.canonicalUrl)
   } finally {
     rmSync(priorRoot, { recursive: true })
@@ -181,7 +178,7 @@ test('all digests verify and private evidence remains outside served source', ()
   const served = [...filesUnder(resolve(ROOT, 'app')), ...filesUnder(resolve(ROOT, 'components'))]
     .filter((path) => /\.(?:ts|tsx|js|jsx)$/.test(path))
     .map((path) => readFileSync(path, 'utf8')).join('\n')
-  for (const marker of ['federation-tranche-nine', 'tranche-9-evidence-packets', 'federation/implementations', 'federation-property-route-adapter']) assert.doesNotMatch(served, new RegExp(marker))
+  for (const marker of ['federation-tranche-ten', 'tranche-10-evidence-packets', 'federation/implementations', 'federation-property-route-adapter']) assert.doesNotMatch(served, new RegExp(marker))
   const serialized = JSON.stringify({ packets, decisions, specifications, adapterRegistry })
   assert.doesNotMatch(serialized, /customerData|natalData|credentialValue|secretValue|sourceExcerpt|fullText/)
   for (const shape of [/\bsk_(?:live|test)_[A-Za-z0-9]{16,}\b/, /\bgh[oprsu]_[A-Za-z0-9_]{20,}\b/, /authorization:\s*bearer\s+/i]) assert.doesNotMatch(serialized, shape)

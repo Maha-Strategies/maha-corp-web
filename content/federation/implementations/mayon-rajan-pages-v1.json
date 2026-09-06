@@ -2,11 +2,11 @@
   "schemaVersion": "maha-federation-property-pages/1.0",
   "siteId": "mayon-rajan",
   "canonicalHost": "mayonrajan.com",
-  "registryDigest": "sha256:a8e9e54926e35ebd16d209a8de9b759c3e928f1a11340c9fa3143e4f4c4c4808",
+  "registryDigest": "sha256:a2caf318ec903d9e5b39de9e055696cd1a5ee09525f55829d5c9cf05ad354764",
   "status": "local-unreleased",
   "counts": {
-    "pages": 45,
-    "readyForOwnerIntegration": 45,
+    "pages": 50,
+    "readyForOwnerIntegration": 50,
     "blockedOnUnreadyPrerequisite": 0
   },
   "pages": [
@@ -11736,7 +11736,1248 @@
         "packetDigest": "sha256:9aa03809c5e375deaaff41934a3b332f2c28954d97681cda46a1aeb5a899ee59"
       },
       "contentDigest": "sha256:85091f0deb1bc654c1c87abd0caa93f697d9cb118f1b219646806a0e7760e028"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_0506892f4f6aeffd56c07141",
+      "tranche": 10,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/gas-emissions/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/gas-emissions/definition",
+      "title": "Gas Emissions — Definition",
+      "topic": "gas-emissions",
+      "routeRole": "definition",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:gas-emissions",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:gas-emissions"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Gas Emissions, in this definition, is limited to the following inspected scope. Gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change. PHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Gas Emissions, in this definition, is limited to the following inspected scope. Gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change. PHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Definition",
+          "kind": "role-method",
+          "paragraphs": [
+            "Use the term only for the source-backed scope stated here; keep adjacent concepts separate unless a typed relationship is explicit.",
+            "A useful definition states both inclusion and exclusion conditions so a machine answer cannot silently widen it.",
+            "Applied scope: Gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change. PHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Volcanic gas monitoring — Required capabilities; direct sampling; plume composition and emission-rate measurements; diffuse soil emissions; Satellite Remote Sensing for SO2. Establishes: Gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change.",
+            "PHIVOLCS-LAVA Mayon Volcano activity bulletin — Mayon bulletin fields for SO2 emission rate, measurement method, observation date, alert context, and authority notice. Establishes: PHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Techniques have different sensitivity, spatial scale, weather, access, and species limitations. A gas value alone does not deterministically predict an eruption or replace local multi-parameter interpretation.",
+            "The value is time-sensitive and intentionally not copied into this packet. Readers must consult the latest PHIVOLCS bulletin; this route is not an alert, forecast, evacuation order, or substitute for local authorities.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/gas-emissions/official-sources",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/gas-emissions/limits",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "usgs-volcanic-gas-monitoring-t10",
+          "title": "Volcanic gas monitoring",
+          "responsibleBody": "U.S. Geological Survey",
+          "versionOrDate": "Scientific Investigations Report 2024-5062, chapter E",
+          "sourceClass": "government-science",
+          "url": "https://pubs.usgs.gov/publication/sir20245062E",
+          "locator": "Required capabilities; direct sampling; plume composition and emission-rate measurements; diffuse soil emissions; Satellite Remote Sensing for SO2",
+          "establishes": "Gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change.",
+          "doesNotEstablish": "Techniques have different sensitivity, spatial scale, weather, access, and species limitations. A gas value alone does not deterministically predict an eruption or replace local multi-parameter interpretation.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "full-text",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "phivolcs-mayon-gas-bulletin-t10",
+          "title": "PHIVOLCS-LAVA Mayon Volcano activity bulletin",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "live operational bulletin service inspected 2026-09-06; no value retained",
+          "sourceClass": "official-hazard-source",
+          "url": "https://vmepd.phivolcs.dost.gov.ph/bulletin/activity-mvo?bid=16644&lang=en",
+          "locator": "Mayon bulletin fields for SO2 emission rate, measurement method, observation date, alert context, and authority notice",
+          "establishes": "PHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin.",
+          "doesNotEstablish": "The value is time-sensitive and intentionally not copied into this packet. Readers must consult the latest PHIVOLCS bulletin; this route is not an alert, forecast, evacuation order, or substitute for local authorities.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/gas-emissions/official-sources",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_249777f280fc057e55e4b1f5"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/gas-emissions/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_6903b7c636966d35a57b00f2"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Gas Emissions mean in this bounded context?",
+          "answer": "Gas Emissions, in this definition, is limited to the following inspected scope. Gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change. PHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this definition answer?",
+          "answer": "Volcanic gas monitoring (Scientific Investigations Report 2024-5062, chapter E), at Required capabilities; direct sampling; plume composition and emission-rate measurements; diffuse soil emissions; Satellite Remote Sensing for SO2, supports gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change. PHIVOLCS-LAVA Mayon Volcano activity bulletin (live operational bulletin service inspected 2026-09-06; no value retained), at Mayon bulletin fields for SO2 emission rate, measurement method, observation date, alert context, and authority notice, supports pHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Techniques have different sensitivity, spatial scale, weather, access, and species limitations. A gas value alone does not deterministically predict an eruption or replace local multi-parameter interpretation. The value is time-sensitive and intentionally not copied into this packet. Readers must consult the latest PHIVOLCS bulletin; this route is not an alert, forecast, evacuation order, or substitute for local authorities. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/gas-emissions/definition#article",
+        "headline": "Gas Emissions — Definition",
+        "url": "https://mayonrajan.com/mayon-volcano/gas-emissions/definition",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://pubs.usgs.gov/publication/sir20245062E",
+          "https://vmepd.phivolcs.dost.gov.ph/bulletin/activity-mvo?bid=16644&lang=en"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Gas Emissions mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Gas Emissions, in this definition, is limited to the following inspected scope. Gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change. PHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this definition answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Volcanic gas monitoring (Scientific Investigations Report 2024-5062, chapter E), at Required capabilities; direct sampling; plume composition and emission-rate measurements; diffuse soil emissions; Satellite Remote Sensing for SO2, supports gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change. PHIVOLCS-LAVA Mayon Volcano activity bulletin (live operational bulletin service inspected 2026-09-06; no value retained), at Mayon bulletin fields for SO2 emission rate, measurement method, observation date, alert context, and authority notice, supports pHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Techniques have different sensitivity, spatial scale, weather, access, and species limitations. A gas value alone does not deterministically predict an eruption or replace local multi-parameter interpretation. The value is time-sensitive and intentionally not copied into this packet. Readers must consult the latest PHIVOLCS bulletin; this route is not an alert, forecast, evacuation order, or substitute for local authorities. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-10",
+        "decisionManifestDigest": "sha256:9ef07cfe461c123d2f87caf30b3271a31692f97f2c2307a426830667a68a1bfa",
+        "decisionDigest": "sha256:5fa71c5110e278121afdf4cc87900fb09dc4e1f0e19186e2b7de46caa2f679fa",
+        "specificationManifestDigest": "sha256:f3a532332a4567fead139076fd821fe0436d910d4b3b576edd34f057ac3856f0",
+        "specificationDigest": "sha256:95367b59083b7d6c54d5e38fb8249d9276a62969dd608a98aa9d15464c56df42",
+        "packetManifestDigest": "sha256:c3016515219a07cc5be0bf9761efa3afb2b4d315436650c2832ce3737310c408",
+        "packetDigest": "sha256:156941c743843f876c6b67be9e461ea8e3b09807559c400634294e909f347d04"
+      },
+      "contentDigest": "sha256:fa235d5606a58b5b282884ce3ed6c014c64e7be4816c67b8f1f8ee827e467766"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_6903b7c636966d35a57b00f2",
+      "tranche": 10,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/gas-emissions/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/gas-emissions/limits",
+      "title": "Gas Emissions — Limits",
+      "topic": "gas-emissions",
+      "routeRole": "limits",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:gas-emissions",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:gas-emissions"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Gas Emissions, in this limits guide, is limited to the following inspected scope. Gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change. PHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Gas Emissions, in this limits guide, is limited to the following inspected scope. Gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change. PHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Limits guide",
+          "kind": "role-method",
+          "paragraphs": [
+            "State the strongest supported boundary first and route time-sensitive decisions to the current authority.",
+            "A limits page must not turn a warning into a weaker version of the unsupported claim.",
+            "Applied scope: Gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change. PHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Volcanic gas monitoring — Required capabilities; direct sampling; plume composition and emission-rate measurements; diffuse soil emissions; Satellite Remote Sensing for SO2. Establishes: Gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change.",
+            "PHIVOLCS-LAVA Mayon Volcano activity bulletin — Mayon bulletin fields for SO2 emission rate, measurement method, observation date, alert context, and authority notice. Establishes: PHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Techniques have different sensitivity, spatial scale, weather, access, and species limitations. A gas value alone does not deterministically predict an eruption or replace local multi-parameter interpretation.",
+            "The value is time-sensitive and intentionally not copied into this packet. Readers must consult the latest PHIVOLCS bulletin; this route is not an alert, forecast, evacuation order, or substitute for local authorities.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/gas-emissions/definition",
+            "graphEdges: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/gas-emissions/official-sources",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "usgs-volcanic-gas-monitoring-t10",
+          "title": "Volcanic gas monitoring",
+          "responsibleBody": "U.S. Geological Survey",
+          "versionOrDate": "Scientific Investigations Report 2024-5062, chapter E",
+          "sourceClass": "government-science",
+          "url": "https://pubs.usgs.gov/publication/sir20245062E",
+          "locator": "Required capabilities; direct sampling; plume composition and emission-rate measurements; diffuse soil emissions; Satellite Remote Sensing for SO2",
+          "establishes": "Gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change.",
+          "doesNotEstablish": "Techniques have different sensitivity, spatial scale, weather, access, and species limitations. A gas value alone does not deterministically predict an eruption or replace local multi-parameter interpretation.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "full-text",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "phivolcs-mayon-gas-bulletin-t10",
+          "title": "PHIVOLCS-LAVA Mayon Volcano activity bulletin",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "live operational bulletin service inspected 2026-09-06; no value retained",
+          "sourceClass": "official-hazard-source",
+          "url": "https://vmepd.phivolcs.dost.gov.ph/bulletin/activity-mvo?bid=16644&lang=en",
+          "locator": "Mayon bulletin fields for SO2 emission rate, measurement method, observation date, alert context, and authority notice",
+          "establishes": "PHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin.",
+          "doesNotEstablish": "The value is time-sensitive and intentionally not copied into this packet. Readers must consult the latest PHIVOLCS bulletin; this route is not an alert, forecast, evacuation order, or substitute for local authorities.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/gas-emissions/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_0506892f4f6aeffd56c07141"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/gas-emissions/official-sources",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_249777f280fc057e55e4b1f5"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Gas Emissions mean in this bounded context?",
+          "answer": "Gas Emissions, in this limits guide, is limited to the following inspected scope. Gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change. PHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this limits answer?",
+          "answer": "Volcanic gas monitoring (Scientific Investigations Report 2024-5062, chapter E), at Required capabilities; direct sampling; plume composition and emission-rate measurements; diffuse soil emissions; Satellite Remote Sensing for SO2, supports gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change. PHIVOLCS-LAVA Mayon Volcano activity bulletin (live operational bulletin service inspected 2026-09-06; no value retained), at Mayon bulletin fields for SO2 emission rate, measurement method, observation date, alert context, and authority notice, supports pHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Techniques have different sensitivity, spatial scale, weather, access, and species limitations. A gas value alone does not deterministically predict an eruption or replace local multi-parameter interpretation. The value is time-sensitive and intentionally not copied into this packet. Readers must consult the latest PHIVOLCS bulletin; this route is not an alert, forecast, evacuation order, or substitute for local authorities. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/gas-emissions/limits#article",
+        "headline": "Gas Emissions — Limits",
+        "url": "https://mayonrajan.com/mayon-volcano/gas-emissions/limits",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://pubs.usgs.gov/publication/sir20245062E",
+          "https://vmepd.phivolcs.dost.gov.ph/bulletin/activity-mvo?bid=16644&lang=en"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Gas Emissions mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Gas Emissions, in this limits guide, is limited to the following inspected scope. Gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change. PHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this limits answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Volcanic gas monitoring (Scientific Investigations Report 2024-5062, chapter E), at Required capabilities; direct sampling; plume composition and emission-rate measurements; diffuse soil emissions; Satellite Remote Sensing for SO2, supports gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change. PHIVOLCS-LAVA Mayon Volcano activity bulletin (live operational bulletin service inspected 2026-09-06; no value retained), at Mayon bulletin fields for SO2 emission rate, measurement method, observation date, alert context, and authority notice, supports pHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Techniques have different sensitivity, spatial scale, weather, access, and species limitations. A gas value alone does not deterministically predict an eruption or replace local multi-parameter interpretation. The value is time-sensitive and intentionally not copied into this packet. Readers must consult the latest PHIVOLCS bulletin; this route is not an alert, forecast, evacuation order, or substitute for local authorities. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-10",
+        "decisionManifestDigest": "sha256:9ef07cfe461c123d2f87caf30b3271a31692f97f2c2307a426830667a68a1bfa",
+        "decisionDigest": "sha256:7bd16f7a55b84cf05445b9f8b6e11ff4861fe2c57169b4e22246b9f5a6e0a0bd",
+        "specificationManifestDigest": "sha256:f3a532332a4567fead139076fd821fe0436d910d4b3b576edd34f057ac3856f0",
+        "specificationDigest": "sha256:46d354e023ea4436d94bc5aec79279640c77fe25d5becc1f5b85d4574a5b43e9",
+        "packetManifestDigest": "sha256:c3016515219a07cc5be0bf9761efa3afb2b4d315436650c2832ce3737310c408",
+        "packetDigest": "sha256:156941c743843f876c6b67be9e461ea8e3b09807559c400634294e909f347d04"
+      },
+      "contentDigest": "sha256:3fd40e63a1d159c1ffffbddb9bda96d0543693310c5c9c5515601d74c0d9e2ea"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_249777f280fc057e55e4b1f5",
+      "tranche": 10,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/gas-emissions/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/gas-emissions/official-sources",
+      "title": "Gas Emissions — Official Sources",
+      "topic": "gas-emissions",
+      "routeRole": "official-sources",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:gas-emissions",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:gas-emissions"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Gas Emissions, in this official-source guide, is limited to the following inspected scope. Gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change. PHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Gas Emissions, in this official-source guide, is limited to the following inspected scope. Gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change. PHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Official Source guide",
+          "kind": "role-method",
+          "paragraphs": [
+            "Identify the operational authority and explain how to find its freshest dated statement.",
+            "This page never substitutes for a current bulletin, evacuation order, or local authority.",
+            "Applied scope: Gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change. PHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Volcanic gas monitoring — Required capabilities; direct sampling; plume composition and emission-rate measurements; diffuse soil emissions; Satellite Remote Sensing for SO2. Establishes: Gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change.",
+            "PHIVOLCS-LAVA Mayon Volcano activity bulletin — Mayon bulletin fields for SO2 emission rate, measurement method, observation date, alert context, and authority notice. Establishes: PHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Techniques have different sensitivity, spatial scale, weather, access, and species limitations. A gas value alone does not deterministically predict an eruption or replace local multi-parameter interpretation.",
+            "The value is time-sensitive and intentionally not copied into this packet. Readers must consult the latest PHIVOLCS bulletin; this route is not an alert, forecast, evacuation order, or substitute for local authorities.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/gas-emissions/definition",
+            "graphEdges: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/gas-emissions/limits",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "usgs-volcanic-gas-monitoring-t10",
+          "title": "Volcanic gas monitoring",
+          "responsibleBody": "U.S. Geological Survey",
+          "versionOrDate": "Scientific Investigations Report 2024-5062, chapter E",
+          "sourceClass": "government-science",
+          "url": "https://pubs.usgs.gov/publication/sir20245062E",
+          "locator": "Required capabilities; direct sampling; plume composition and emission-rate measurements; diffuse soil emissions; Satellite Remote Sensing for SO2",
+          "establishes": "Gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change.",
+          "doesNotEstablish": "Techniques have different sensitivity, spatial scale, weather, access, and species limitations. A gas value alone does not deterministically predict an eruption or replace local multi-parameter interpretation.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "full-text",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "phivolcs-mayon-gas-bulletin-t10",
+          "title": "PHIVOLCS-LAVA Mayon Volcano activity bulletin",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "live operational bulletin service inspected 2026-09-06; no value retained",
+          "sourceClass": "official-hazard-source",
+          "url": "https://vmepd.phivolcs.dost.gov.ph/bulletin/activity-mvo?bid=16644&lang=en",
+          "locator": "Mayon bulletin fields for SO2 emission rate, measurement method, observation date, alert context, and authority notice",
+          "establishes": "PHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin.",
+          "doesNotEstablish": "The value is time-sensitive and intentionally not copied into this packet. Readers must consult the latest PHIVOLCS bulletin; this route is not an alert, forecast, evacuation order, or substitute for local authorities.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/gas-emissions/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_0506892f4f6aeffd56c07141"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/gas-emissions/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_6903b7c636966d35a57b00f2"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Gas Emissions mean in this bounded context?",
+          "answer": "Gas Emissions, in this official-source guide, is limited to the following inspected scope. Gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change. PHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this official sources answer?",
+          "answer": "Volcanic gas monitoring (Scientific Investigations Report 2024-5062, chapter E), at Required capabilities; direct sampling; plume composition and emission-rate measurements; diffuse soil emissions; Satellite Remote Sensing for SO2, supports gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change. PHIVOLCS-LAVA Mayon Volcano activity bulletin (live operational bulletin service inspected 2026-09-06; no value retained), at Mayon bulletin fields for SO2 emission rate, measurement method, observation date, alert context, and authority notice, supports pHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Techniques have different sensitivity, spatial scale, weather, access, and species limitations. A gas value alone does not deterministically predict an eruption or replace local multi-parameter interpretation. The value is time-sensitive and intentionally not copied into this packet. Readers must consult the latest PHIVOLCS bulletin; this route is not an alert, forecast, evacuation order, or substitute for local authorities. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/gas-emissions/official-sources#article",
+        "headline": "Gas Emissions — Official Sources",
+        "url": "https://mayonrajan.com/mayon-volcano/gas-emissions/official-sources",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://pubs.usgs.gov/publication/sir20245062E",
+          "https://vmepd.phivolcs.dost.gov.ph/bulletin/activity-mvo?bid=16644&lang=en"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Gas Emissions mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Gas Emissions, in this official-source guide, is limited to the following inspected scope. Gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change. PHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this official sources answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Volcanic gas monitoring (Scientific Investigations Report 2024-5062, chapter E), at Required capabilities; direct sampling; plume composition and emission-rate measurements; diffuse soil emissions; Satellite Remote Sensing for SO2, supports gas monitoring combines direct sampling, plume composition and emission-rate measurements, soil emissions, and satellite, airborne, and ground-based techniques to characterize baselines and change. PHIVOLCS-LAVA Mayon Volcano activity bulletin (live operational bulletin service inspected 2026-09-06; no value retained), at Mayon bulletin fields for SO2 emission rate, measurement method, observation date, alert context, and authority notice, supports pHIVOLCS publishes dated Mayon-specific SO2 observations with the named measurement method and interprets them inside a current multi-parameter bulletin."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Techniques have different sensitivity, spatial scale, weather, access, and species limitations. A gas value alone does not deterministically predict an eruption or replace local multi-parameter interpretation. The value is time-sensitive and intentionally not copied into this packet. Readers must consult the latest PHIVOLCS bulletin; this route is not an alert, forecast, evacuation order, or substitute for local authorities. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-10",
+        "decisionManifestDigest": "sha256:9ef07cfe461c123d2f87caf30b3271a31692f97f2c2307a426830667a68a1bfa",
+        "decisionDigest": "sha256:05a7276652f517c10f628f5ff71da3b5d5439d88fa43a88634789c86d0594eed",
+        "specificationManifestDigest": "sha256:f3a532332a4567fead139076fd821fe0436d910d4b3b576edd34f057ac3856f0",
+        "specificationDigest": "sha256:0287ce307354e9e59923f109c0942d185ec0b7b417aae01a6fe9e513e44c9dcb",
+        "packetManifestDigest": "sha256:c3016515219a07cc5be0bf9761efa3afb2b4d315436650c2832ce3737310c408",
+        "packetDigest": "sha256:156941c743843f876c6b67be9e461ea8e3b09807559c400634294e909f347d04"
+      },
+      "contentDigest": "sha256:222b4494c07499e4fb621d5813e9a76b86c086aa88fe716d1c596b5f77250d77"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_774e8bf2286da109c496eb9e",
+      "tranche": 10,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/hazard-zones/evidence",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/hazard-zones/evidence",
+      "title": "Hazard Zones — Evidence",
+      "topic": "hazard-zones",
+      "routeRole": "evidence",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:hazard-zones",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:hazard-zones"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Hazard Zones, in this evidence assessment, is limited to the following inspected scope. Official hazard-map categories and map provenance. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Hazard Zones, in this evidence assessment, is limited to the following inspected scope. Official hazard-map categories and map provenance. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Evidence assessment",
+          "kind": "role-method",
+          "paragraphs": [
+            "Bind each conclusion to the source and locator that can carry it, keeping contrary or missing evidence visible.",
+            "Evidence quality and sufficiency remain claim-specific; one source cannot automatically support every adjacent assertion.",
+            "Applied scope: Official hazard-map categories and map provenance."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Mayon Volcano Hazard Maps — Mayon Volcano Hazard Maps: pyroclastic flow, lahar, lava flow, and ash fall. Establishes: Official hazard-map categories and map provenance."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "A static guide never substitutes for the current PHIVOLCS alert level, bulletin, evacuation order, or local authority.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/hazard-zones/limits",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/hazard-zones/official-sources",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "phivolcs-hazards",
+          "title": "Mayon Volcano Hazard Maps",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "current landing page inspected 2026-09-05",
+          "sourceClass": "official-hazard-source",
+          "url": "https://www.phivolcs.dost.gov.ph/volcano-hazard/",
+          "locator": "Mayon Volcano Hazard Maps: pyroclastic flow, lahar, lava flow, and ash fall",
+          "establishes": "Official hazard-map categories and map provenance.",
+          "doesNotEstablish": "A static guide never substitutes for the current PHIVOLCS alert level, bulletin, evacuation order, or local authority.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_2f1a3a71e1f98dead537418a"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/official-sources",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_529ddb809984fafb9b4b02db"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Hazard Zones mean in this bounded context?",
+          "answer": "Hazard Zones, in this evidence assessment, is limited to the following inspected scope. Official hazard-map categories and map provenance. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this evidence answer?",
+          "answer": "Mayon Volcano Hazard Maps (current landing page inspected 2026-09-05), at Mayon Volcano Hazard Maps: pyroclastic flow, lahar, lava flow, and ash fall, supports official hazard-map categories and map provenance."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "A static guide never substitutes for the current PHIVOLCS alert level, bulletin, evacuation order, or local authority. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/hazard-zones/evidence#article",
+        "headline": "Hazard Zones — Evidence",
+        "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/evidence",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://www.phivolcs.dost.gov.ph/volcano-hazard/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Hazard Zones mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Hazard Zones, in this evidence assessment, is limited to the following inspected scope. Official hazard-map categories and map provenance. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this evidence answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mayon Volcano Hazard Maps (current landing page inspected 2026-09-05), at Mayon Volcano Hazard Maps: pyroclastic flow, lahar, lava flow, and ash fall, supports official hazard-map categories and map provenance."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A static guide never substitutes for the current PHIVOLCS alert level, bulletin, evacuation order, or local authority. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-10",
+        "decisionManifestDigest": "sha256:9ef07cfe461c123d2f87caf30b3271a31692f97f2c2307a426830667a68a1bfa",
+        "decisionDigest": "sha256:5ab6ae6029b954aa40f5677c82b3a7e1db3208ea6e753f22685329ce6fc02dea",
+        "specificationManifestDigest": "sha256:f3a532332a4567fead139076fd821fe0436d910d4b3b576edd34f057ac3856f0",
+        "specificationDigest": "sha256:39f6e30e48988602f7061379df22201825b0612a900481ac7936e463a3dab33e",
+        "packetManifestDigest": "sha256:c3016515219a07cc5be0bf9761efa3afb2b4d315436650c2832ce3737310c408",
+        "packetDigest": "sha256:78fc686f317dabaa6f2189c2088499922e3db561a352cc778cf3eb25ee163bca"
+      },
+      "contentDigest": "sha256:1560a33778e4a3a0de6ead3d5a4934afa11ede32138a45067f4a8a1f9ce306ea"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_31f30a5fd26c314c04af8395",
+      "tranche": 10,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/hazard-zones/preparedness",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/hazard-zones/preparedness",
+      "title": "Hazard Zones — Preparedness",
+      "topic": "hazard-zones",
+      "routeRole": "preparedness",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:hazard-zones",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:hazard-zones"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Hazard Zones, in this preparedness guide, is limited to the following inspected scope. Official hazard-map categories and map provenance. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Hazard Zones, in this preparedness guide, is limited to the following inspected scope. Official hazard-map categories and map provenance. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Preparedness guide",
+          "kind": "role-method",
+          "paragraphs": [
+            "Separate durable preparedness steps from current hazard conditions and operational orders.",
+            "Preparedness education never substitutes for official, current emergency instructions.",
+            "Applied scope: Official hazard-map categories and map provenance."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Mayon Volcano Hazard Maps — Mayon Volcano Hazard Maps: pyroclastic flow, lahar, lava flow, and ash fall. Establishes: Official hazard-map categories and map provenance."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "A static guide never substitutes for the current PHIVOLCS alert level, bulletin, evacuation order, or local authority.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/hazard-zones/limits",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/hazard-zones/official-sources",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "phivolcs-hazards",
+          "title": "Mayon Volcano Hazard Maps",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "current landing page inspected 2026-09-05",
+          "sourceClass": "official-hazard-source",
+          "url": "https://www.phivolcs.dost.gov.ph/volcano-hazard/",
+          "locator": "Mayon Volcano Hazard Maps: pyroclastic flow, lahar, lava flow, and ash fall",
+          "establishes": "Official hazard-map categories and map provenance.",
+          "doesNotEstablish": "A static guide never substitutes for the current PHIVOLCS alert level, bulletin, evacuation order, or local authority.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_2f1a3a71e1f98dead537418a"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/official-sources",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_529ddb809984fafb9b4b02db"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Hazard Zones mean in this bounded context?",
+          "answer": "Hazard Zones, in this preparedness guide, is limited to the following inspected scope. Official hazard-map categories and map provenance. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this preparedness answer?",
+          "answer": "Mayon Volcano Hazard Maps (current landing page inspected 2026-09-05), at Mayon Volcano Hazard Maps: pyroclastic flow, lahar, lava flow, and ash fall, supports official hazard-map categories and map provenance."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "A static guide never substitutes for the current PHIVOLCS alert level, bulletin, evacuation order, or local authority. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/hazard-zones/preparedness#article",
+        "headline": "Hazard Zones — Preparedness",
+        "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/preparedness",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://www.phivolcs.dost.gov.ph/volcano-hazard/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Hazard Zones mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Hazard Zones, in this preparedness guide, is limited to the following inspected scope. Official hazard-map categories and map provenance. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this preparedness answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mayon Volcano Hazard Maps (current landing page inspected 2026-09-05), at Mayon Volcano Hazard Maps: pyroclastic flow, lahar, lava flow, and ash fall, supports official hazard-map categories and map provenance."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A static guide never substitutes for the current PHIVOLCS alert level, bulletin, evacuation order, or local authority. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-10",
+        "decisionManifestDigest": "sha256:9ef07cfe461c123d2f87caf30b3271a31692f97f2c2307a426830667a68a1bfa",
+        "decisionDigest": "sha256:8430cd382584a83efd8acf0eaed7c7a7ca11faaf9d7566dfaeac2863d9e17a86",
+        "specificationManifestDigest": "sha256:f3a532332a4567fead139076fd821fe0436d910d4b3b576edd34f057ac3856f0",
+        "specificationDigest": "sha256:dcbad5b8662e132a73029f139d0751a3398711670dad815d4e38238fdcd47eb6",
+        "packetManifestDigest": "sha256:c3016515219a07cc5be0bf9761efa3afb2b4d315436650c2832ce3737310c408",
+        "packetDigest": "sha256:78fc686f317dabaa6f2189c2088499922e3db561a352cc778cf3eb25ee163bca"
+      },
+      "contentDigest": "sha256:61558278076923a8864e0034f0a0ea7eddff84f8c981517b818e2a28a06d2d69"
     }
   ],
-  "provenanceDigest": "sha256:850108ed7d6263542535228adf6f119e71eb742d9051390bbecbd02c86d4f9ed"
+  "provenanceDigest": "sha256:05510d132334b0ddf1b7c06665b6bc6347ae5bbd64b923247b509e850771951e"
 }
