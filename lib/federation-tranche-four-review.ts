@@ -172,7 +172,7 @@ export function buildFederationTrancheReview(input: {
   cohort: { provenanceDigest: string; entries: CohortEntry[] }
   candidates: { provenanceDigest: string; candidates: Candidate[] }
   priorPacketManifests: PriorPacketManifest[]
-  trancheNumber: 4 | 5
+  trancheNumber: 4 | 5 | 6
   additionalPackets?: Record<string, FederationReviewPacket>
 }) {
   const schemaStem = `maha-federation-tranche-${input.trancheNumber}`

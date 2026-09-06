@@ -1,0 +1,1399 @@
+{
+  "schemaVersion": "maha-federation-tranche-6-dependency-validation/1.0",
+  "cohortDigest": "sha256:a415742886c8d55701e5eff79d50fe0945b0ad4bd628d9d862dbac779fd531c3",
+  "counts": {
+    "candidates": 100,
+    "resolved": 100,
+    "unresolved": 0
+  },
+  "entries": [
+    {
+      "candidateId": "cand_0174f8a55d7f0ae00516b515",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/timezone-resolution/evaluation",
+      "dependencies": [],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_0a0e26322882c736ed3eafb1",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/location-input/calculation",
+      "dependencies": [],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_17c2619ec3dffc419b997a6b",
+      "url": "https://policy.mahastrategies.com/policy/health-ai-governance/definition",
+      "dependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_19dcd521066100b2c55188ff",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/location-input/workflow",
+      "dependencies": [],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_277f181b88d268a4655af4d9",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/birth-time-input/uncertainty",
+      "dependencies": [],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_2b7ef9a79d52ff4038bc232c",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/location-input/uncertainty",
+      "dependencies": [],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_12eee2b478a5fcf93a3706bb",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/governance",
+      "dependencies": [
+        {
+          "dependsOn": "cand_379d39a7b88f7c76518ba50c",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_398c0cd676027c712343f1b0",
+      "url": "https://policy.mahastrategies.com/policy/export-controls/definition",
+      "dependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_1c044dee55200cfd3492fe64",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/agentic-query-letter/failure-mode",
+      "dependencies": [
+        {
+          "dependsOn": "cand_3a7cc1c4dca92c985618384d",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/agentic-query-letter/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_3b128ca21fd94ea8bfaf7261",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/missing-inputs/uncertainty",
+      "dependencies": [],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_075f3efc8f287e0b42cf2a53",
+      "url": "https://research.mahastrategies.com/federation/research/theorem-statement/failure-mode",
+      "dependencies": [
+        {
+          "dependsOn": "cand_0145d36c049f02ae159ea987",
+          "url": "https://research.mahastrategies.com/federation/research/theorem-statement/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_4a3fe494a6547d35825f9ecb",
+      "url": "https://research.mahastrategies.com/federation/research/source-identity/failure-mode",
+      "dependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_2da991d48159c28f5284ebb2",
+      "url": "https://research.mahastrategies.com/federation/research/source-version/source-contract",
+      "dependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_537d9c76727c863d29982cc7",
+          "url": "https://research.mahastrategies.com/federation/research/source-version/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_620dae3dad53a00b13312c91",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/uncertainty-bounds/workflow",
+      "dependencies": [],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_26dfb1372bb4fe3d9c354fc2",
+      "url": "https://www.mahastrategies.com/clearing/book-concepts/biological-digital-sovereignty/definition",
+      "dependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_315000baae9b4c35d24ece4c",
+      "url": "https://www.mahastrategies.com/clearing/book-concepts/cosmic-recursion/critique",
+      "dependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_37b754948f885c9dbcd7807c",
+      "url": "https://www.mahastrategies.com/clearing/book-concepts/cosmic-recursion/application",
+      "dependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_2359f2933dac8e11b6da74aa",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/quota-enforcement/verification",
+      "dependencies": [
+        {
+          "dependsOn": "cand_54bebdc1fa35ce767bb527ac",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/quota-enforcement/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_481878bf581efb435f0dfe68",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/quota-enforcement/controls",
+      "dependencies": [
+        {
+          "dependsOn": "cand_54bebdc1fa35ce767bb527ac",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/quota-enforcement/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_6137dd4e9d5c921ca7503623",
+      "url": "https://www.mahastrategies.com/clearing/book-concepts/maha-principle/genealogy",
+      "dependencies": [
+        {
+          "dependsOn": "cand_412c4974551cd8696288c6b6",
+          "url": "https://www.mahastrategies.com/clearing/book-concepts/maha-principle/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_46a317a7c447d7e0f234ac9a",
+      "url": "https://research.mahastrategies.com/federation/research/research-release/failure-mode",
+      "dependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_65e220fb78705ffad954bb99",
+          "url": "https://research.mahastrategies.com/federation/research/research-release/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_66acaea34930a523bb1bd6fb",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/missing-inputs/evaluation",
+      "dependencies": [],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_0e7905800b3bd5899ce9114b",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/caregiver-access/definition",
+      "dependencies": [
+        {
+          "dependsOn": "cand_671d652918d62414c37d751d",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_1207aebf8f4d79925042c2e9",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/operator-guide",
+      "dependencies": [
+        {
+          "dependsOn": "cand_671d652918d62414c37d751d",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_575613c55a6e10a9e64cf387",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/caregiver-access/operator-guide",
+      "dependencies": [
+        {
+          "dependsOn": "cand_0e7905800b3bd5899ce9114b",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/caregiver-access/definition",
+          "resolution": "same-tranche"
+        },
+        {
+          "dependsOn": "cand_671d652918d62414c37d751d",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_69ebf78edded26bcb7f5f83b",
+      "url": "https://policy.mahastrategies.com/policy/export-controls/mechanisms",
+      "dependencies": [
+        {
+          "dependsOn": "cand_398c0cd676027c712343f1b0",
+          "url": "https://policy.mahastrategies.com/policy/export-controls/definition",
+          "resolution": "same-tranche"
+        },
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_6b2b747590c128266f2e5916",
+      "url": "https://research.mahastrategies.com/federation/research/inspection-depth/relationships",
+      "dependencies": [
+        {
+          "dependsOn": "cand_26a0f5cd07ebfca3f31307c4",
+          "url": "https://research.mahastrategies.com/federation/research/inspection-depth/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_6b4c0d26877e837902351c5a",
+      "url": "https://www.mahastrategies.com/clearing/tamil-religion/neytal/commentary",
+      "dependencies": [],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_3c895f5510c626c4cb164bda",
+      "url": "https://www.mayonemaharajan.com/concepts/public-reason/argument",
+      "dependencies": [
+        {
+          "dependsOn": "cand_31b7dabe923fc44a99337460",
+          "url": "https://www.mayonemaharajan.com/concepts/public-reason/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_6e5cae25a74731057505dc27",
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_4928435919adf88fa11f5275",
+      "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/definition",
+      "dependencies": [
+        {
+          "dependsOn": "cand_6e5cae25a74731057505dc27",
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_6165e01368841892cc1214f8",
+      "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/relationship",
+      "dependencies": [
+        {
+          "dependsOn": "cand_4928435919adf88fa11f5275",
+          "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/definition",
+          "resolution": "same-tranche"
+        },
+        {
+          "dependsOn": "cand_6e5cae25a74731057505dc27",
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_73f38d003e819f34fd315fc2",
+      "url": "https://research.mahastrategies.com/federation/research/research-release/machine-record",
+      "dependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_65e220fb78705ffad954bb99",
+          "url": "https://research.mahastrategies.com/federation/research/research-release/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_83ac4a9d5996957e7372c194",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/birth-time-input/calculation",
+      "dependencies": [],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_85eb206d72e9a0cf2385c845",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/location-input/evaluation",
+      "dependencies": [],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_5900044aae9309f156d45103",
+      "url": "https://research.mahastrategies.com/federation/research/table-locator/relationships",
+      "dependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_866eb5c95467412ba1c6f06d",
+          "url": "https://research.mahastrategies.com/federation/research/table-locator/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_112cc3e795074e83066008d1",
+      "url": "https://policy.mahastrategies.com/policy/capability-controls/tradeoffs",
+      "dependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_8a4458f22acbd2fcd06012d1",
+          "url": "https://policy.mahastrategies.com/policy/capability-controls/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_2940110890bc2a61a7e747cd",
+      "url": "https://policy.mahastrategies.com/policy/capability-controls/machine-rule",
+      "dependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_8a4458f22acbd2fcd06012d1",
+          "url": "https://policy.mahastrategies.com/policy/capability-controls/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_8a9f84ee174d7d90c188aa1e",
+      "url": "https://policy.mahastrategies.com/policy/export-controls/uncertainty",
+      "dependencies": [
+        {
+          "dependsOn": "cand_398c0cd676027c712343f1b0",
+          "url": "https://policy.mahastrategies.com/policy/export-controls/definition",
+          "resolution": "same-tranche"
+        },
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_8bfb67c4e614dfac509fe4ce",
+      "url": "https://policy.mahastrategies.com/policy/health-ai-governance/sources",
+      "dependencies": [
+        {
+          "dependsOn": "cand_17c2619ec3dffc419b997a6b",
+          "url": "https://policy.mahastrategies.com/policy/health-ai-governance/definition",
+          "resolution": "same-tranche"
+        },
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_9542ddfc16d5a66b146febb0",
+      "url": "https://policy.mahastrategies.com/policy/capability-controls/evidence",
+      "dependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_8a4458f22acbd2fcd06012d1",
+          "url": "https://policy.mahastrategies.com/policy/capability-controls/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_95f65f1aa0d20e0ca6369e0b",
+      "url": "https://www.mahastrategies.com/clearing/tamil-religion/neytal/relationship",
+      "dependencies": [],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_99b91692143b5054cd99d438",
+      "url": "https://policy.mahastrategies.com/policy/health-ai-governance/mechanisms",
+      "dependencies": [
+        {
+          "dependsOn": "cand_17c2619ec3dffc419b997a6b",
+          "url": "https://policy.mahastrategies.com/policy/health-ai-governance/definition",
+          "resolution": "same-tranche"
+        },
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_4ef1f54c0bbbc1b35bc2d57c",
+      "url": "https://www.mayonemaharajan.com/concepts/authorial-lineage/development",
+      "dependencies": [
+        {
+          "dependsOn": "cand_6e5cae25a74731057505dc27",
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_9c5aadfaa34b1896f9ee2b36",
+          "url": "https://www.mayonemaharajan.com/concepts/authorial-lineage/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_9e74da5d08aedae9e8933570",
+      "url": "https://research.mahastrategies.com/federation/research/inspection-depth/protocol",
+      "dependencies": [
+        {
+          "dependsOn": "cand_26a0f5cd07ebfca3f31307c4",
+          "url": "https://research.mahastrategies.com/federation/research/inspection-depth/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_a529ea2c85386b7f51ccbe12",
+      "url": "https://policy.mahastrategies.com/policy/health-ai-governance/uncertainty",
+      "dependencies": [
+        {
+          "dependsOn": "cand_17c2619ec3dffc419b997a6b",
+          "url": "https://policy.mahastrategies.com/policy/health-ai-governance/definition",
+          "resolution": "same-tranche"
+        },
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_32169681463f2b93a1f0798e",
+      "url": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/argument",
+      "dependencies": [
+        {
+          "dependsOn": "cand_6e5cae25a74731057505dc27",
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_a7603f4f4e1f0948c574c52d",
+          "url": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_a8d25b8eeb688325366b5944",
+      "url": "https://www.mahastrategies.com/clearing/book-concepts/biological-digital-sovereignty/critique",
+      "dependencies": [
+        {
+          "dependsOn": "cand_26dfb1372bb4fe3d9c354fc2",
+          "url": "https://www.mahastrategies.com/clearing/book-concepts/biological-digital-sovereignty/definition",
+          "resolution": "same-tranche"
+        },
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_27c7bb1d4880b18190caf0e6",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/author-identity/machine-interface",
+      "dependencies": [
+        {
+          "dependsOn": "cand_a9631c8bc4e5b0e1b1c81f77",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/author-identity/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_aa50aab9eb54d0282fd69b88",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/birth-time-input/evaluation",
+      "dependencies": [],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_aad9f278fb806adeb8273c30",
+      "url": "https://www.mahastrategies.com/clearing/book-concepts/mental-sovereignty/definition",
+      "dependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_57fd4244aa9bb5249f4e88a8",
+      "url": "https://www.mahastrategies.com/clearing/book-concepts/mental-sovereignty/critique",
+      "dependencies": [
+        {
+          "dependsOn": "cand_aad9f278fb806adeb8273c30",
+          "url": "https://www.mahastrategies.com/clearing/book-concepts/mental-sovereignty/definition",
+          "resolution": "same-tranche"
+        },
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_5dac588e37329d06c8fb8439",
+      "url": "https://www.mahastrategies.com/clearing/book-concepts/mental-sovereignty/application",
+      "dependencies": [
+        {
+          "dependsOn": "cand_aad9f278fb806adeb8273c30",
+          "url": "https://www.mahastrategies.com/clearing/book-concepts/mental-sovereignty/definition",
+          "resolution": "same-tranche"
+        },
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_ad8b96b034bbd11848e3d863",
+      "url": "https://research.mahastrategies.com/federation/research/doi-resolution/protocol",
+      "dependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_52618f6a2b190a11a07ef6a0",
+          "url": "https://research.mahastrategies.com/federation/research/doi-resolution/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_adf74b3b5f8012b997ae4265",
+      "url": "https://research.mahastrategies.com/federation/research/compiler-provenance/definition",
+      "dependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_93693424489f89923c818e3e",
+      "url": "https://research.mahastrategies.com/federation/research/units/source-contract",
+      "dependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_b0c4e38dc9e936921296cfde",
+          "url": "https://research.mahastrategies.com/federation/research/units/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_21e911047e19ddbd802510ec",
+      "url": "https://mayonrajan.com/mayon-volcano/seismicity/definition",
+      "dependencies": [
+        {
+          "dependsOn": "cand_b278a387341dd14ef01c0a2c",
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_529ddb809984fafb9b4b02db",
+      "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/official-sources",
+      "dependencies": [
+        {
+          "dependsOn": "cand_b278a387341dd14ef01c0a2c",
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_5ad799fae01ca9f0513933d1",
+      "url": "https://mayonrajan.com/mayon-volcano/seismicity/official-sources",
+      "dependencies": [
+        {
+          "dependsOn": "cand_21e911047e19ddbd802510ec",
+          "url": "https://mayonrajan.com/mayon-volcano/seismicity/definition",
+          "resolution": "same-tranche"
+        },
+        {
+          "dependsOn": "cand_b278a387341dd14ef01c0a2c",
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_36b107c4fbbcc21e63209168",
+      "url": "https://mayonrajan.com/mayon-volcano/official-alerts/evidence",
+      "dependencies": [
+        {
+          "dependsOn": "cand_5eedf7642252330cb10edc4b",
+          "url": "https://mayonrajan.com/mayon-volcano/official-alerts/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_b278a387341dd14ef01c0a2c",
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_5e48e9438443367a710d9611",
+      "url": "https://www.mahastrategies.com/clearing/book-concepts/governed-autonomy/argument",
+      "dependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_b9064574de6632624005891f",
+          "url": "https://www.mahastrategies.com/clearing/book-concepts/governed-autonomy/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_b954b83f5ddfe3d7f67ea97f",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/uncertainty-bounds/input-contract",
+      "dependencies": [],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_ba3d6504e7edfdf77f51054e",
+      "url": "https://research.mahastrategies.com/federation/research/section-locator/failure-mode",
+      "dependencies": [
+        {
+          "dependsOn": "cand_32d9e5ecc97be740fc8cf103",
+          "url": "https://research.mahastrategies.com/federation/research/section-locator/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_bf412f7bdd877e11df42c262",
+      "url": "https://research.mahastrategies.com/federation/research/compiler-provenance/fixture",
+      "dependencies": [
+        {
+          "dependsOn": "cand_adf74b3b5f8012b997ae4265",
+          "url": "https://research.mahastrategies.com/federation/research/compiler-provenance/definition",
+          "resolution": "same-tranche"
+        },
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_c3c551d86cccb4b31d5407e5",
+      "url": "https://research.mahastrategies.com/federation/research/table-locator/protocol",
+      "dependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_866eb5c95467412ba1c6f06d",
+          "url": "https://research.mahastrategies.com/federation/research/table-locator/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_1ce6a38138358d21808a4dda",
+      "url": "https://policy.mahastrategies.com/policy/automated-decision-governance/machine-rule",
+      "dependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_c5399f674f04e49c17d824f2",
+          "url": "https://policy.mahastrategies.com/policy/automated-decision-governance/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_24fed4febf5a9c9154a0ffac",
+      "url": "https://policy.mahastrategies.com/policy/automated-decision-governance/tradeoffs",
+      "dependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_c5399f674f04e49c17d824f2",
+          "url": "https://policy.mahastrategies.com/policy/automated-decision-governance/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_6508a172f8385d98e1f8059e",
+      "url": "https://policy.mahastrategies.com/policy/automated-decision-governance/evidence",
+      "dependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_c5399f674f04e49c17d824f2",
+          "url": "https://policy.mahastrategies.com/policy/automated-decision-governance/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_c65161ded4ccff11bc17ae48",
+      "url": "https://www.mahastrategies.com/clearing/book-concepts/governed-autonomy/genealogy",
+      "dependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_b9064574de6632624005891f",
+          "url": "https://www.mahastrategies.com/clearing/book-concepts/governed-autonomy/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_c6ff32aca85d5b4655291fdb",
+      "url": "https://policy.mahastrategies.com/policy/export-controls/sources",
+      "dependencies": [
+        {
+          "dependsOn": "cand_398c0cd676027c712343f1b0",
+          "url": "https://policy.mahastrategies.com/policy/export-controls/definition",
+          "resolution": "same-tranche"
+        },
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_c7d73663e2740217ef1b14fe",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/failure-mode",
+      "dependencies": [
+        {
+          "dependsOn": "cand_330dee492175d4bb7d07b254",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_671d652918d62414c37d751d",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_122acf473e176bd6fe563945",
+      "url": "https://research.mahastrategies.com/federation/research/calculation-inputs/failure-mode",
+      "dependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_cb21435abc94c118b0073ad9",
+          "url": "https://research.mahastrategies.com/federation/research/calculation-inputs/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_6577c5eab414e1e9a41da5c7",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/failure-mode",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ccfd0d1e38ae45c195c492a5",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_4d248d512c75e8822214cd33",
+      "url": "https://research.mahastrategies.com/federation/research/dataset-provenance/machine-record",
+      "dependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_cd5d3d0732f7f58fc7c7c88d",
+          "url": "https://research.mahastrategies.com/federation/research/dataset-provenance/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_7f4cff6b5a8ebd1f8cf2086f",
+      "url": "https://research.mahastrategies.com/federation/research/dataset-provenance/method",
+      "dependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_cd5d3d0732f7f58fc7c7c88d",
+          "url": "https://research.mahastrategies.com/federation/research/dataset-provenance/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_c242db696d5082cd7cb67b19",
+      "url": "https://research.mahastrategies.com/federation/research/dataset-provenance/source-contract",
+      "dependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_cd5d3d0732f7f58fc7c7c88d",
+          "url": "https://research.mahastrategies.com/federation/research/dataset-provenance/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_a749df38f2fa1c790d59256c",
+      "url": "https://research.mahastrategies.com/federation/research/inference-boundary/relationships",
+      "dependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_d258b0fd5c19f21c6c85ecc4",
+          "url": "https://research.mahastrategies.com/federation/research/inference-boundary/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_28059b6bd91b3c035527d582",
+      "url": "https://research.mahastrategies.com/federation/research/retraction/relationships",
+      "dependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_d66f7567eebd91f76b7ce4df",
+          "url": "https://research.mahastrategies.com/federation/research/retraction/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_385955fc6e2a9a940a3deec3",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/controls",
+      "dependencies": [
+        {
+          "dependsOn": "cand_671d652918d62414c37d751d",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_d6cbea3163ab9349857186bf",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_1069d86ea29c1b668d645741",
+      "url": "https://policy.mahastrategies.com/policy/biometric-governance/machine-rule",
+      "dependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_d74a376f8c6e55a25c2a00d4",
+          "url": "https://policy.mahastrategies.com/policy/biometric-governance/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_5a19739b7d0304e33d2ab2bf",
+      "url": "https://policy.mahastrategies.com/policy/biometric-governance/tradeoffs",
+      "dependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_d74a376f8c6e55a25c2a00d4",
+          "url": "https://policy.mahastrategies.com/policy/biometric-governance/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_742c651765a28079abf9034c",
+      "url": "https://policy.mahastrategies.com/policy/biometric-governance/evidence",
+      "dependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_d74a376f8c6e55a25c2a00d4",
+          "url": "https://policy.mahastrategies.com/policy/biometric-governance/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_4ea36d433cefdf0d049a6287",
+      "url": "https://research.mahastrategies.com/federation/research/assumptions/relationships",
+      "dependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_d8c301f84959d900b66256ed",
+          "url": "https://research.mahastrategies.com/federation/research/assumptions/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_d9d77da885d5188e14d787f9",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/policy",
+      "dependencies": [
+        {
+          "dependsOn": "cand_379d39a7b88f7c76518ba50c",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_543e095876946db8b4f2fa0c",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/governance",
+      "dependencies": [
+        {
+          "dependsOn": "cand_e581474a6bdb1c44a901a76b",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_960d059b2b3335cdee7745af",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/policy",
+      "dependencies": [
+        {
+          "dependsOn": "cand_e581474a6bdb1c44a901a76b",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_ed153b1269df6192eb6ddfa5",
+      "url": "https://mayonrajan.com/mayon-volcano/seismicity/limits",
+      "dependencies": [
+        {
+          "dependsOn": "cand_21e911047e19ddbd802510ec",
+          "url": "https://mayonrajan.com/mayon-volcano/seismicity/definition",
+          "resolution": "same-tranche"
+        },
+        {
+          "dependsOn": "cand_b278a387341dd14ef01c0a2c",
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_9abbd1138436cf53e4b83fb8",
+      "url": "https://research.mahastrategies.com/federation/research/literature-conflict/failure-mode",
+      "dependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_ed61e762fa0ec776b64ca043",
+          "url": "https://research.mahastrategies.com/federation/research/literature-conflict/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_ed6e639222b14bed469192a8",
+      "url": "https://www.mahastrategies.com/clearing/tamil-religion/mayon/relationship",
+      "dependencies": [],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_eeac57417a16ae87371ffe42",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/rectification-limits/uncertainty",
+      "dependencies": [],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_efe853785ea9bdfeff10012c",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/failure-mode",
+      "dependencies": [
+        {
+          "dependsOn": "cand_3310484656228e54e0023e11",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_cfc312cdb30a602f2f7c4b17",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/controls",
+      "dependencies": [
+        {
+          "dependsOn": "cand_671d652918d62414c37d751d",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_f2e452a99e390ddae8b1001f",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_9a2abd7f8664d531b9b23c4e",
+      "url": "https://policy.mahastrategies.com/policy/international-coordination/evidence",
+      "dependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_f2fa87d05dd261e0d645ead1",
+          "url": "https://policy.mahastrategies.com/policy/international-coordination/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_f75aeec508175cb7b63fee43",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/uncertainty-bounds/calculation",
+      "dependencies": [],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_f7e0ca1c06761ea434797887",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/quota-enforcement/architecture",
+      "dependencies": [
+        {
+          "dependsOn": "cand_54bebdc1fa35ce767bb527ac",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/quota-enforcement/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_f94d2bd0cb27b8ce052dae80",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/workflow",
+      "dependencies": [
+        {
+          "dependsOn": "cand_48485c2639eca0b2fb4d9852",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_fcf8be6da35613518c99769b",
+      "url": "https://research.mahastrategies.com/federation/research/doi-resolution/relationships",
+      "dependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_52618f6a2b190a11a07ef6a0",
+          "url": "https://research.mahastrategies.com/federation/research/doi-resolution/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_fe7c20e6023d410de4cd7a16",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/policy",
+      "dependencies": [
+        {
+          "dependsOn": "cand_48485c2639eca0b2fb4d9852",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_fec0e0610e968660725fbc79",
+      "url": "https://www.mahastrategies.com/clearing/tamil-religion/mayon/commentary",
+      "dependencies": [],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_ff5413b1c050a05c63f3476e",
+      "url": "https://research.mahastrategies.com/federation/research/counterexample/relationships",
+      "dependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_917e449556b1266d90ac7e19",
+          "url": "https://research.mahastrategies.com/federation/research/counterexample/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    },
+    {
+      "candidateId": "cand_ff96d57bb1fe7d494a8c8af9",
+      "url": "https://research.mahastrategies.com/federation/research/model-boundary/failure-mode",
+      "dependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition",
+          "resolution": "prior-tranche"
+        },
+        {
+          "dependsOn": "cand_3f1a9f08061713fb8ebe464c",
+          "url": "https://research.mahastrategies.com/federation/research/model-boundary/definition",
+          "resolution": "prior-tranche"
+        }
+      ],
+      "allDependenciesResolved": true
+    }
+  ],
+  "provenanceDigest": "sha256:1e149253689c5672ca523ff8e595bc9de06fc2c5f0748feff40e493640dfcb3f"
+}

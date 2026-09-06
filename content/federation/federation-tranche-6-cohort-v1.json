@@ -1,0 +1,2882 @@
+{
+  "schemaVersion": "maha-federation-tranche-six-cohort/1.0",
+  "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+  "semanticAdjudicationDigest": "sha256:e07e5bb63aaa4daadea589a15d9e162b7b8ca18355e7a2f2f0624727a4fdf8bd",
+  "dependencyGraphDigest": "sha256:26109aad61ef624dccc0f8032ccfcc4dd0424d9f4009cc67a4953461d231100b",
+  "demandCalibrationDigest": "sha256:44875f26a7fd2ae93b9722d9bfee924cd59ddeaa1288bacdf6cd43d341e6ae34",
+  "priorCohortDigests": [
+    "sha256:7e79b2585e2634449ef8c7b5d8c5889844b22440f8a071ab01dd5a6190b9529f",
+    "sha256:a956626094de36595b250c0f9adb5be0195a52c0597648e64ecd3c7959844ecc",
+    "sha256:5f432d449530f80f593e5fd4a46208ede855c1deafa3006d055a1424399390ef",
+    "sha256:efecbce834d48bf9a48f5a71913c5648f5b5fa2725037efd740fd3e5845e910b",
+    "sha256:d7d8b9d1072d3c79dcd6c7da2af4224172a501459850f6956e305f5d45138550"
+  ],
+  "status": "frozen-for-evidence-intake",
+  "selectionRule": "Highest calibrated utility after Tranches 1 through 5, with dependency closure, a four-page property/topic cap, proportional property caps, and prior-tranche definitions treated as satisfied prerequisites.",
+  "propertyLimits": {
+    "maha-strategies": 31,
+    "maha-research": 25,
+    "agentic-publishing": 10,
+    "maha-os": 6,
+    "mayone-maharajan": 5,
+    "mayon-rajan": 5,
+    "maha-policy": 18
+  },
+  "counts": {
+    "selected": 100,
+    "overlapWithPriorTranches": 0,
+    "dependenciesSatisfiedByPriorTranches": 82,
+    "byProperty": {
+      "maha-strategies": 31,
+      "maha-research": 25,
+      "agentic-publishing": 10,
+      "maha-os": 6,
+      "mayone-maharajan": 5,
+      "mayon-rajan": 5,
+      "maha-policy": 18
+    },
+    "inspected": 0,
+    "evidenceReady": 0,
+    "pageSpecs": 0
+  },
+  "entries": [
+    {
+      "cohortOrder": 1,
+      "candidateId": "cand_0174f8a55d7f0ae00516b515",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/timezone-resolution/evaluation",
+      "siteId": "maha-strategies",
+      "topic": "timezone-resolution",
+      "routeRole": "evaluation",
+      "calibratedScore": 84.24,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the evaluation intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply interpretation; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 2,
+      "candidateId": "cand_0a0e26322882c736ed3eafb1",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/location-input/calculation",
+      "siteId": "maha-strategies",
+      "topic": "location-input",
+      "routeRole": "calculation",
+      "calibratedScore": 83.75,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the calculation intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply interpretation; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 3,
+      "candidateId": "cand_17c2619ec3dffc419b997a6b",
+      "url": "https://policy.mahastrategies.com/policy/health-ai-governance/definition",
+      "siteId": "maha-policy",
+      "topic": "health-ai-governance",
+      "routeRole": "definition",
+      "calibratedScore": 91.06,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_1937134519716bbd2730b72f"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the definition intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 4,
+      "candidateId": "cand_19dcd521066100b2c55188ff",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/location-input/workflow",
+      "siteId": "maha-strategies",
+      "topic": "location-input",
+      "routeRole": "workflow",
+      "calibratedScore": 83.72,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the workflow intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply interpretation; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 5,
+      "candidateId": "cand_277f181b88d268a4655af4d9",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/birth-time-input/uncertainty",
+      "siteId": "maha-strategies",
+      "topic": "birth-time-input",
+      "routeRole": "uncertainty",
+      "calibratedScore": 83.88,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the uncertainty intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply interpretation; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 6,
+      "candidateId": "cand_2b7ef9a79d52ff4038bc232c",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/location-input/uncertainty",
+      "siteId": "maha-strategies",
+      "topic": "location-input",
+      "routeRole": "uncertainty",
+      "calibratedScore": 84.17,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the uncertainty intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply interpretation; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 7,
+      "candidateId": "cand_12eee2b478a5fcf93a3706bb",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/governance",
+      "siteId": "agentic-publishing",
+      "topic": "editorial-review",
+      "routeRole": "governance",
+      "calibratedScore": 86.35,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_379d39a7b88f7c76518ba50c"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the governance intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 8,
+      "candidateId": "cand_398c0cd676027c712343f1b0",
+      "url": "https://policy.mahastrategies.com/policy/export-controls/definition",
+      "siteId": "maha-policy",
+      "topic": "export-controls",
+      "routeRole": "definition",
+      "calibratedScore": 91.06,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_1937134519716bbd2730b72f"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the definition intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 9,
+      "candidateId": "cand_1c044dee55200cfd3492fe64",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/agentic-query-letter/failure-mode",
+      "siteId": "agentic-publishing",
+      "topic": "agentic-query-letter",
+      "routeRole": "failure-mode",
+      "calibratedScore": 86.21,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_3a7cc1c4dca92c985618384d"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the failure-mode intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 10,
+      "candidateId": "cand_3b128ca21fd94ea8bfaf7261",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/missing-inputs/uncertainty",
+      "siteId": "maha-strategies",
+      "topic": "missing-inputs",
+      "routeRole": "uncertainty",
+      "calibratedScore": 84.02,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the uncertainty intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply interpretation; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 11,
+      "candidateId": "cand_075f3efc8f287e0b42cf2a53",
+      "url": "https://research.mahastrategies.com/federation/research/theorem-statement/failure-mode",
+      "siteId": "maha-research",
+      "topic": "theorem-statement",
+      "routeRole": "failure-mode",
+      "calibratedScore": 87.85,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_0145d36c049f02ae159ea987",
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the failure-mode intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 12,
+      "candidateId": "cand_4a3fe494a6547d35825f9ecb",
+      "url": "https://research.mahastrategies.com/federation/research/source-identity/failure-mode",
+      "siteId": "maha-research",
+      "topic": "source-identity",
+      "routeRole": "failure-mode",
+      "calibratedScore": 87.85,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the failure-mode intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 13,
+      "candidateId": "cand_2da991d48159c28f5284ebb2",
+      "url": "https://research.mahastrategies.com/federation/research/source-version/source-contract",
+      "siteId": "maha-research",
+      "topic": "source-version",
+      "routeRole": "source-contract",
+      "calibratedScore": 87.93,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_537d9c76727c863d29982cc7"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the source-contract intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 14,
+      "candidateId": "cand_620dae3dad53a00b13312c91",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/uncertainty-bounds/workflow",
+      "siteId": "maha-strategies",
+      "topic": "uncertainty-bounds",
+      "routeRole": "workflow",
+      "calibratedScore": 83.83,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the workflow intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply interpretation; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 15,
+      "candidateId": "cand_26dfb1372bb4fe3d9c354fc2",
+      "url": "https://www.mahastrategies.com/clearing/book-concepts/biological-digital-sovereignty/definition",
+      "siteId": "maha-strategies",
+      "topic": "biological-digital-sovereignty",
+      "routeRole": "definition",
+      "calibratedScore": 82.56,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the definition intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply authority; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 16,
+      "candidateId": "cand_315000baae9b4c35d24ece4c",
+      "url": "https://www.mahastrategies.com/clearing/book-concepts/cosmic-recursion/critique",
+      "siteId": "maha-strategies",
+      "topic": "cosmic-recursion",
+      "routeRole": "critique",
+      "calibratedScore": 83.79,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the critique intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply authority; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 17,
+      "candidateId": "cand_37b754948f885c9dbcd7807c",
+      "url": "https://www.mahastrategies.com/clearing/book-concepts/cosmic-recursion/application",
+      "siteId": "maha-strategies",
+      "topic": "cosmic-recursion",
+      "routeRole": "application",
+      "calibratedScore": 83.71,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the application intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply authority; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 18,
+      "candidateId": "cand_2359f2933dac8e11b6da74aa",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/quota-enforcement/verification",
+      "siteId": "maha-strategies",
+      "topic": "quota-enforcement",
+      "routeRole": "verification",
+      "calibratedScore": 87.05,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_54bebdc1fa35ce767bb527ac",
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the verification intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply authority; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 19,
+      "candidateId": "cand_481878bf581efb435f0dfe68",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/quota-enforcement/controls",
+      "siteId": "maha-strategies",
+      "topic": "quota-enforcement",
+      "routeRole": "controls",
+      "calibratedScore": 87.57,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_54bebdc1fa35ce767bb527ac",
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the controls intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply authority; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 20,
+      "candidateId": "cand_6137dd4e9d5c921ca7503623",
+      "url": "https://www.mahastrategies.com/clearing/book-concepts/maha-principle/genealogy",
+      "siteId": "maha-strategies",
+      "topic": "maha-principle",
+      "routeRole": "genealogy",
+      "calibratedScore": 83.7,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_412c4974551cd8696288c6b6",
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the genealogy intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply authority; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 21,
+      "candidateId": "cand_46a317a7c447d7e0f234ac9a",
+      "url": "https://research.mahastrategies.com/federation/research/research-release/failure-mode",
+      "siteId": "maha-research",
+      "topic": "research-release",
+      "routeRole": "failure-mode",
+      "calibratedScore": 87.85,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_65e220fb78705ffad954bb99"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the failure-mode intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 22,
+      "candidateId": "cand_66acaea34930a523bb1bd6fb",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/missing-inputs/evaluation",
+      "siteId": "maha-strategies",
+      "topic": "missing-inputs",
+      "routeRole": "evaluation",
+      "calibratedScore": 84.1,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the evaluation intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply interpretation; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 23,
+      "candidateId": "cand_0e7905800b3bd5899ce9114b",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/caregiver-access/definition",
+      "siteId": "maha-os",
+      "topic": "caregiver-access",
+      "routeRole": "definition",
+      "calibratedScore": 84.83,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_671d652918d62414c37d751d"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the definition intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 24,
+      "candidateId": "cand_1207aebf8f4d79925042c2e9",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/operator-guide",
+      "siteId": "maha-os",
+      "topic": "health-data-consent",
+      "routeRole": "operator-guide",
+      "calibratedScore": 85.65,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_671d652918d62414c37d751d"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the operator-guide intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 25,
+      "candidateId": "cand_575613c55a6e10a9e64cf387",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/caregiver-access/operator-guide",
+      "siteId": "maha-os",
+      "topic": "caregiver-access",
+      "routeRole": "operator-guide",
+      "calibratedScore": 85.69,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [
+        "cand_0e7905800b3bd5899ce9114b"
+      ],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_671d652918d62414c37d751d"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the operator-guide intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 26,
+      "candidateId": "cand_69ebf78edded26bcb7f5f83b",
+      "url": "https://policy.mahastrategies.com/policy/export-controls/mechanisms",
+      "siteId": "maha-policy",
+      "topic": "export-controls",
+      "routeRole": "mechanisms",
+      "calibratedScore": 91.06,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [
+        "cand_398c0cd676027c712343f1b0"
+      ],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_1937134519716bbd2730b72f"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the mechanisms intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 27,
+      "candidateId": "cand_6b2b747590c128266f2e5916",
+      "url": "https://research.mahastrategies.com/federation/research/inspection-depth/relationships",
+      "siteId": "maha-research",
+      "topic": "inspection-depth",
+      "routeRole": "relationships",
+      "calibratedScore": 87.83,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_26a0f5cd07ebfca3f31307c4",
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the relationships intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 28,
+      "candidateId": "cand_6b4c0d26877e837902351c5a",
+      "url": "https://www.mahastrategies.com/clearing/tamil-religion/neytal/commentary",
+      "siteId": "maha-strategies",
+      "topic": "neytal",
+      "routeRole": "commentary",
+      "calibratedScore": 83.91,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the commentary intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply translation; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 29,
+      "candidateId": "cand_3c895f5510c626c4cb164bda",
+      "url": "https://www.mayonemaharajan.com/concepts/public-reason/argument",
+      "siteId": "mayone-maharajan",
+      "topic": "public-reason",
+      "routeRole": "argument",
+      "calibratedScore": 75.46,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_31b7dabe923fc44a99337460",
+        "cand_6e5cae25a74731057505dc27"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the argument intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 30,
+      "candidateId": "cand_4928435919adf88fa11f5275",
+      "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/definition",
+      "siteId": "mayone-maharajan",
+      "topic": "civilizational-memory",
+      "routeRole": "definition",
+      "calibratedScore": 74.66,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_6e5cae25a74731057505dc27"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the definition intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 31,
+      "candidateId": "cand_6165e01368841892cc1214f8",
+      "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/relationship",
+      "siteId": "mayone-maharajan",
+      "topic": "civilizational-memory",
+      "routeRole": "relationship",
+      "calibratedScore": 75.52,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [
+        "cand_4928435919adf88fa11f5275"
+      ],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_6e5cae25a74731057505dc27"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the relationship intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 32,
+      "candidateId": "cand_73f38d003e819f34fd315fc2",
+      "url": "https://research.mahastrategies.com/federation/research/research-release/machine-record",
+      "siteId": "maha-research",
+      "topic": "research-release",
+      "routeRole": "machine-record",
+      "calibratedScore": 87.92,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_65e220fb78705ffad954bb99"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the machine-record intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 33,
+      "candidateId": "cand_83ac4a9d5996957e7372c194",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/birth-time-input/calculation",
+      "siteId": "maha-strategies",
+      "topic": "birth-time-input",
+      "routeRole": "calculation",
+      "calibratedScore": 83.76,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the calculation intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply interpretation; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 34,
+      "candidateId": "cand_85eb206d72e9a0cf2385c845",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/location-input/evaluation",
+      "siteId": "maha-strategies",
+      "topic": "location-input",
+      "routeRole": "evaluation",
+      "calibratedScore": 83.95,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the evaluation intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply interpretation; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 35,
+      "candidateId": "cand_5900044aae9309f156d45103",
+      "url": "https://research.mahastrategies.com/federation/research/table-locator/relationships",
+      "siteId": "maha-research",
+      "topic": "table-locator",
+      "routeRole": "relationships",
+      "calibratedScore": 87.83,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_866eb5c95467412ba1c6f06d"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the relationships intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 36,
+      "candidateId": "cand_112cc3e795074e83066008d1",
+      "url": "https://policy.mahastrategies.com/policy/capability-controls/tradeoffs",
+      "siteId": "maha-policy",
+      "topic": "capability-controls",
+      "routeRole": "tradeoffs",
+      "calibratedScore": 91.06,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_1937134519716bbd2730b72f",
+        "cand_8a4458f22acbd2fcd06012d1"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the tradeoffs intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 37,
+      "candidateId": "cand_2940110890bc2a61a7e747cd",
+      "url": "https://policy.mahastrategies.com/policy/capability-controls/machine-rule",
+      "siteId": "maha-policy",
+      "topic": "capability-controls",
+      "routeRole": "machine-rule",
+      "calibratedScore": 91.06,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_1937134519716bbd2730b72f",
+        "cand_8a4458f22acbd2fcd06012d1"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the machine-rule intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 38,
+      "candidateId": "cand_8a9f84ee174d7d90c188aa1e",
+      "url": "https://policy.mahastrategies.com/policy/export-controls/uncertainty",
+      "siteId": "maha-policy",
+      "topic": "export-controls",
+      "routeRole": "uncertainty",
+      "calibratedScore": 91.06,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [
+        "cand_398c0cd676027c712343f1b0"
+      ],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_1937134519716bbd2730b72f"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the uncertainty intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 39,
+      "candidateId": "cand_8bfb67c4e614dfac509fe4ce",
+      "url": "https://policy.mahastrategies.com/policy/health-ai-governance/sources",
+      "siteId": "maha-policy",
+      "topic": "health-ai-governance",
+      "routeRole": "sources",
+      "calibratedScore": 91.06,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [
+        "cand_17c2619ec3dffc419b997a6b"
+      ],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_1937134519716bbd2730b72f"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the sources intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 40,
+      "candidateId": "cand_9542ddfc16d5a66b146febb0",
+      "url": "https://policy.mahastrategies.com/policy/capability-controls/evidence",
+      "siteId": "maha-policy",
+      "topic": "capability-controls",
+      "routeRole": "evidence",
+      "calibratedScore": 91.06,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_1937134519716bbd2730b72f",
+        "cand_8a4458f22acbd2fcd06012d1"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the evidence intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 41,
+      "candidateId": "cand_95f65f1aa0d20e0ca6369e0b",
+      "url": "https://www.mahastrategies.com/clearing/tamil-religion/neytal/relationship",
+      "siteId": "maha-strategies",
+      "topic": "neytal",
+      "routeRole": "relationship",
+      "calibratedScore": 83.99,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the relationship intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply translation; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 42,
+      "candidateId": "cand_99b91692143b5054cd99d438",
+      "url": "https://policy.mahastrategies.com/policy/health-ai-governance/mechanisms",
+      "siteId": "maha-policy",
+      "topic": "health-ai-governance",
+      "routeRole": "mechanisms",
+      "calibratedScore": 91.06,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [
+        "cand_17c2619ec3dffc419b997a6b"
+      ],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_1937134519716bbd2730b72f"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the mechanisms intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 43,
+      "candidateId": "cand_4ef1f54c0bbbc1b35bc2d57c",
+      "url": "https://www.mayonemaharajan.com/concepts/authorial-lineage/development",
+      "siteId": "mayone-maharajan",
+      "topic": "authorial-lineage",
+      "routeRole": "development",
+      "calibratedScore": 75.44,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_6e5cae25a74731057505dc27",
+        "cand_9c5aadfaa34b1896f9ee2b36"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the development intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 44,
+      "candidateId": "cand_9e74da5d08aedae9e8933570",
+      "url": "https://research.mahastrategies.com/federation/research/inspection-depth/protocol",
+      "siteId": "maha-research",
+      "topic": "inspection-depth",
+      "routeRole": "protocol",
+      "calibratedScore": 87.72,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_26a0f5cd07ebfca3f31307c4",
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the protocol intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 45,
+      "candidateId": "cand_a529ea2c85386b7f51ccbe12",
+      "url": "https://policy.mahastrategies.com/policy/health-ai-governance/uncertainty",
+      "siteId": "maha-policy",
+      "topic": "health-ai-governance",
+      "routeRole": "uncertainty",
+      "calibratedScore": 91.06,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [
+        "cand_17c2619ec3dffc419b997a6b"
+      ],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_1937134519716bbd2730b72f"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the uncertainty intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 46,
+      "candidateId": "cand_32169681463f2b93a1f0798e",
+      "url": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/argument",
+      "siteId": "mayone-maharajan",
+      "topic": "cosmic-recursion",
+      "routeRole": "argument",
+      "calibratedScore": 75.46,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_6e5cae25a74731057505dc27",
+        "cand_a7603f4f4e1f0948c574c52d"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the argument intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 47,
+      "candidateId": "cand_a8d25b8eeb688325366b5944",
+      "url": "https://www.mahastrategies.com/clearing/book-concepts/biological-digital-sovereignty/critique",
+      "siteId": "maha-strategies",
+      "topic": "biological-digital-sovereignty",
+      "routeRole": "critique",
+      "calibratedScore": 83.72,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [
+        "cand_26dfb1372bb4fe3d9c354fc2"
+      ],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the critique intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply authority; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 48,
+      "candidateId": "cand_27c7bb1d4880b18190caf0e6",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/author-identity/machine-interface",
+      "siteId": "agentic-publishing",
+      "topic": "author-identity",
+      "routeRole": "machine-interface",
+      "calibratedScore": 86.11,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_a9631c8bc4e5b0e1b1c81f77"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the machine-interface intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 49,
+      "candidateId": "cand_aa50aab9eb54d0282fd69b88",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/birth-time-input/evaluation",
+      "siteId": "maha-strategies",
+      "topic": "birth-time-input",
+      "routeRole": "evaluation",
+      "calibratedScore": 83.96,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the evaluation intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply interpretation; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 50,
+      "candidateId": "cand_aad9f278fb806adeb8273c30",
+      "url": "https://www.mahastrategies.com/clearing/book-concepts/mental-sovereignty/definition",
+      "siteId": "maha-strategies",
+      "topic": "mental-sovereignty",
+      "routeRole": "definition",
+      "calibratedScore": 82.82,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the definition intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply authority; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 51,
+      "candidateId": "cand_57fd4244aa9bb5249f4e88a8",
+      "url": "https://www.mahastrategies.com/clearing/book-concepts/mental-sovereignty/critique",
+      "siteId": "maha-strategies",
+      "topic": "mental-sovereignty",
+      "routeRole": "critique",
+      "calibratedScore": 83.98,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [
+        "cand_aad9f278fb806adeb8273c30"
+      ],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the critique intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply authority; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 52,
+      "candidateId": "cand_5dac588e37329d06c8fb8439",
+      "url": "https://www.mahastrategies.com/clearing/book-concepts/mental-sovereignty/application",
+      "siteId": "maha-strategies",
+      "topic": "mental-sovereignty",
+      "routeRole": "application",
+      "calibratedScore": 83.9,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [
+        "cand_aad9f278fb806adeb8273c30"
+      ],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the application intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply authority; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 53,
+      "candidateId": "cand_ad8b96b034bbd11848e3d863",
+      "url": "https://research.mahastrategies.com/federation/research/doi-resolution/protocol",
+      "siteId": "maha-research",
+      "topic": "doi-resolution",
+      "routeRole": "protocol",
+      "calibratedScore": 87.72,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_52618f6a2b190a11a07ef6a0"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the protocol intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 54,
+      "candidateId": "cand_adf74b3b5f8012b997ae4265",
+      "url": "https://research.mahastrategies.com/federation/research/compiler-provenance/definition",
+      "siteId": "maha-research",
+      "topic": "compiler-provenance",
+      "routeRole": "definition",
+      "calibratedScore": 86.89,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the definition intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 55,
+      "candidateId": "cand_93693424489f89923c818e3e",
+      "url": "https://research.mahastrategies.com/federation/research/units/source-contract",
+      "siteId": "maha-research",
+      "topic": "units",
+      "routeRole": "source-contract",
+      "calibratedScore": 87.93,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_b0c4e38dc9e936921296cfde"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the source-contract intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 56,
+      "candidateId": "cand_21e911047e19ddbd802510ec",
+      "url": "https://mayonrajan.com/mayon-volcano/seismicity/definition",
+      "siteId": "mayon-rajan",
+      "topic": "seismicity",
+      "routeRole": "definition",
+      "calibratedScore": 79.97,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_b278a387341dd14ef01c0a2c"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the definition intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 57,
+      "candidateId": "cand_529ddb809984fafb9b4b02db",
+      "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/official-sources",
+      "siteId": "mayon-rajan",
+      "topic": "hazard-zones",
+      "routeRole": "official-sources",
+      "calibratedScore": 80.9,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_b278a387341dd14ef01c0a2c"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the official-sources intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 58,
+      "candidateId": "cand_5ad799fae01ca9f0513933d1",
+      "url": "https://mayonrajan.com/mayon-volcano/seismicity/official-sources",
+      "siteId": "mayon-rajan",
+      "topic": "seismicity",
+      "routeRole": "official-sources",
+      "calibratedScore": 80.75,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [
+        "cand_21e911047e19ddbd802510ec"
+      ],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_b278a387341dd14ef01c0a2c"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the official-sources intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 59,
+      "candidateId": "cand_36b107c4fbbcc21e63209168",
+      "url": "https://mayonrajan.com/mayon-volcano/official-alerts/evidence",
+      "siteId": "mayon-rajan",
+      "topic": "official-alerts",
+      "routeRole": "evidence",
+      "calibratedScore": 80.92,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_5eedf7642252330cb10edc4b",
+        "cand_b278a387341dd14ef01c0a2c"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the evidence intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 60,
+      "candidateId": "cand_5e48e9438443367a710d9611",
+      "url": "https://www.mahastrategies.com/clearing/book-concepts/governed-autonomy/argument",
+      "siteId": "maha-strategies",
+      "topic": "governed-autonomy",
+      "routeRole": "argument",
+      "calibratedScore": 83.92,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_63800114df58212bf1827623",
+        "cand_b9064574de6632624005891f"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the argument intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply authority; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 61,
+      "candidateId": "cand_b954b83f5ddfe3d7f67ea97f",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/uncertainty-bounds/input-contract",
+      "siteId": "maha-strategies",
+      "topic": "uncertainty-bounds",
+      "routeRole": "input-contract",
+      "calibratedScore": 83.85,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the input-contract intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply interpretation; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 62,
+      "candidateId": "cand_ba3d6504e7edfdf77f51054e",
+      "url": "https://research.mahastrategies.com/federation/research/section-locator/failure-mode",
+      "siteId": "maha-research",
+      "topic": "section-locator",
+      "routeRole": "failure-mode",
+      "calibratedScore": 87.85,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_32d9e5ecc97be740fc8cf103",
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the failure-mode intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 63,
+      "candidateId": "cand_bf412f7bdd877e11df42c262",
+      "url": "https://research.mahastrategies.com/federation/research/compiler-provenance/fixture",
+      "siteId": "maha-research",
+      "topic": "compiler-provenance",
+      "routeRole": "fixture",
+      "calibratedScore": 87.75,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [
+        "cand_adf74b3b5f8012b997ae4265"
+      ],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_3dbf6da0286dd76c2ea339a6"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the fixture intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 64,
+      "candidateId": "cand_c3c551d86cccb4b31d5407e5",
+      "url": "https://research.mahastrategies.com/federation/research/table-locator/protocol",
+      "siteId": "maha-research",
+      "topic": "table-locator",
+      "routeRole": "protocol",
+      "calibratedScore": 87.72,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_866eb5c95467412ba1c6f06d"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the protocol intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 65,
+      "candidateId": "cand_1ce6a38138358d21808a4dda",
+      "url": "https://policy.mahastrategies.com/policy/automated-decision-governance/machine-rule",
+      "siteId": "maha-policy",
+      "topic": "automated-decision-governance",
+      "routeRole": "machine-rule",
+      "calibratedScore": 91.06,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_1937134519716bbd2730b72f",
+        "cand_c5399f674f04e49c17d824f2"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the machine-rule intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 66,
+      "candidateId": "cand_24fed4febf5a9c9154a0ffac",
+      "url": "https://policy.mahastrategies.com/policy/automated-decision-governance/tradeoffs",
+      "siteId": "maha-policy",
+      "topic": "automated-decision-governance",
+      "routeRole": "tradeoffs",
+      "calibratedScore": 91.06,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_1937134519716bbd2730b72f",
+        "cand_c5399f674f04e49c17d824f2"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the tradeoffs intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 67,
+      "candidateId": "cand_6508a172f8385d98e1f8059e",
+      "url": "https://policy.mahastrategies.com/policy/automated-decision-governance/evidence",
+      "siteId": "maha-policy",
+      "topic": "automated-decision-governance",
+      "routeRole": "evidence",
+      "calibratedScore": 91.06,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_1937134519716bbd2730b72f",
+        "cand_c5399f674f04e49c17d824f2"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the evidence intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 68,
+      "candidateId": "cand_c65161ded4ccff11bc17ae48",
+      "url": "https://www.mahastrategies.com/clearing/book-concepts/governed-autonomy/genealogy",
+      "siteId": "maha-strategies",
+      "topic": "governed-autonomy",
+      "routeRole": "genealogy",
+      "calibratedScore": 84,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_63800114df58212bf1827623",
+        "cand_b9064574de6632624005891f"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the genealogy intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply authority; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 69,
+      "candidateId": "cand_c6ff32aca85d5b4655291fdb",
+      "url": "https://policy.mahastrategies.com/policy/export-controls/sources",
+      "siteId": "maha-policy",
+      "topic": "export-controls",
+      "routeRole": "sources",
+      "calibratedScore": 91.06,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [
+        "cand_398c0cd676027c712343f1b0"
+      ],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_1937134519716bbd2730b72f"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the sources intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 70,
+      "candidateId": "cand_c7d73663e2740217ef1b14fe",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/failure-mode",
+      "siteId": "maha-os",
+      "topic": "biometric-data-boundary",
+      "routeRole": "failure-mode",
+      "calibratedScore": 85.93,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_330dee492175d4bb7d07b254",
+        "cand_671d652918d62414c37d751d"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the failure-mode intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 71,
+      "candidateId": "cand_122acf473e176bd6fe563945",
+      "url": "https://research.mahastrategies.com/federation/research/calculation-inputs/failure-mode",
+      "siteId": "maha-research",
+      "topic": "calculation-inputs",
+      "routeRole": "failure-mode",
+      "calibratedScore": 87.85,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_cb21435abc94c118b0073ad9"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the failure-mode intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 72,
+      "candidateId": "cand_6577c5eab414e1e9a41da5c7",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/failure-mode",
+      "siteId": "agentic-publishing",
+      "topic": "structured-abstract",
+      "routeRole": "failure-mode",
+      "calibratedScore": 86.21,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_ccfd0d1e38ae45c195c492a5"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the failure-mode intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 73,
+      "candidateId": "cand_4d248d512c75e8822214cd33",
+      "url": "https://research.mahastrategies.com/federation/research/dataset-provenance/machine-record",
+      "siteId": "maha-research",
+      "topic": "dataset-provenance",
+      "routeRole": "machine-record",
+      "calibratedScore": 87.92,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_cd5d3d0732f7f58fc7c7c88d"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the machine-record intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 74,
+      "candidateId": "cand_7f4cff6b5a8ebd1f8cf2086f",
+      "url": "https://research.mahastrategies.com/federation/research/dataset-provenance/method",
+      "siteId": "maha-research",
+      "topic": "dataset-provenance",
+      "routeRole": "method",
+      "calibratedScore": 87.77,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_cd5d3d0732f7f58fc7c7c88d"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the method intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 75,
+      "candidateId": "cand_c242db696d5082cd7cb67b19",
+      "url": "https://research.mahastrategies.com/federation/research/dataset-provenance/source-contract",
+      "siteId": "maha-research",
+      "topic": "dataset-provenance",
+      "routeRole": "source-contract",
+      "calibratedScore": 87.74,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_cd5d3d0732f7f58fc7c7c88d"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the source-contract intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 76,
+      "candidateId": "cand_a749df38f2fa1c790d59256c",
+      "url": "https://research.mahastrategies.com/federation/research/inference-boundary/relationships",
+      "siteId": "maha-research",
+      "topic": "inference-boundary",
+      "routeRole": "relationships",
+      "calibratedScore": 87.69,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_d258b0fd5c19f21c6c85ecc4"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the relationships intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 77,
+      "candidateId": "cand_28059b6bd91b3c035527d582",
+      "url": "https://research.mahastrategies.com/federation/research/retraction/relationships",
+      "siteId": "maha-research",
+      "topic": "retraction",
+      "routeRole": "relationships",
+      "calibratedScore": 87.83,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_d66f7567eebd91f76b7ce4df"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the relationships intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 78,
+      "candidateId": "cand_385955fc6e2a9a940a3deec3",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/controls",
+      "siteId": "maha-os",
+      "topic": "resilience-mode",
+      "routeRole": "controls",
+      "calibratedScore": 85.71,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_671d652918d62414c37d751d",
+        "cand_d6cbea3163ab9349857186bf"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the controls intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 79,
+      "candidateId": "cand_1069d86ea29c1b668d645741",
+      "url": "https://policy.mahastrategies.com/policy/biometric-governance/machine-rule",
+      "siteId": "maha-policy",
+      "topic": "biometric-governance",
+      "routeRole": "machine-rule",
+      "calibratedScore": 91.06,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_1937134519716bbd2730b72f",
+        "cand_d74a376f8c6e55a25c2a00d4"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the machine-rule intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 80,
+      "candidateId": "cand_5a19739b7d0304e33d2ab2bf",
+      "url": "https://policy.mahastrategies.com/policy/biometric-governance/tradeoffs",
+      "siteId": "maha-policy",
+      "topic": "biometric-governance",
+      "routeRole": "tradeoffs",
+      "calibratedScore": 91.06,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_1937134519716bbd2730b72f",
+        "cand_d74a376f8c6e55a25c2a00d4"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the tradeoffs intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 81,
+      "candidateId": "cand_742c651765a28079abf9034c",
+      "url": "https://policy.mahastrategies.com/policy/biometric-governance/evidence",
+      "siteId": "maha-policy",
+      "topic": "biometric-governance",
+      "routeRole": "evidence",
+      "calibratedScore": 91.06,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_1937134519716bbd2730b72f",
+        "cand_d74a376f8c6e55a25c2a00d4"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the evidence intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 82,
+      "candidateId": "cand_4ea36d433cefdf0d049a6287",
+      "url": "https://research.mahastrategies.com/federation/research/assumptions/relationships",
+      "siteId": "maha-research",
+      "topic": "assumptions",
+      "routeRole": "relationships",
+      "calibratedScore": 87.83,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_d8c301f84959d900b66256ed"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the relationships intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 83,
+      "candidateId": "cand_d9d77da885d5188e14d787f9",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/policy",
+      "siteId": "agentic-publishing",
+      "topic": "editorial-review",
+      "routeRole": "policy",
+      "calibratedScore": 86.17,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_379d39a7b88f7c76518ba50c"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the policy intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 84,
+      "candidateId": "cand_543e095876946db8b4f2fa0c",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/governance",
+      "siteId": "agentic-publishing",
+      "topic": "editorial-intake",
+      "routeRole": "governance",
+      "calibratedScore": 86.35,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_e581474a6bdb1c44a901a76b"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the governance intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 85,
+      "candidateId": "cand_960d059b2b3335cdee7745af",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/policy",
+      "siteId": "agentic-publishing",
+      "topic": "editorial-intake",
+      "routeRole": "policy",
+      "calibratedScore": 86.17,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_e581474a6bdb1c44a901a76b"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the policy intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 86,
+      "candidateId": "cand_ed153b1269df6192eb6ddfa5",
+      "url": "https://mayonrajan.com/mayon-volcano/seismicity/limits",
+      "siteId": "mayon-rajan",
+      "topic": "seismicity",
+      "routeRole": "limits",
+      "calibratedScore": 80.83,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [
+        "cand_21e911047e19ddbd802510ec"
+      ],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_b278a387341dd14ef01c0a2c"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the limits intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 87,
+      "candidateId": "cand_9abbd1138436cf53e4b83fb8",
+      "url": "https://research.mahastrategies.com/federation/research/literature-conflict/failure-mode",
+      "siteId": "maha-research",
+      "topic": "literature-conflict",
+      "routeRole": "failure-mode",
+      "calibratedScore": 87.85,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_ed61e762fa0ec776b64ca043"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the failure-mode intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 88,
+      "candidateId": "cand_ed6e639222b14bed469192a8",
+      "url": "https://www.mahastrategies.com/clearing/tamil-religion/mayon/relationship",
+      "siteId": "maha-strategies",
+      "topic": "mayon",
+      "routeRole": "relationship",
+      "calibratedScore": 83.99,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the relationship intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply translation; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 89,
+      "candidateId": "cand_eeac57417a16ae87371ffe42",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/rectification-limits/uncertainty",
+      "siteId": "maha-strategies",
+      "topic": "rectification-limits",
+      "routeRole": "uncertainty",
+      "calibratedScore": 83.81,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the uncertainty intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply interpretation; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 90,
+      "candidateId": "cand_efe853785ea9bdfeff10012c",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/failure-mode",
+      "siteId": "agentic-publishing",
+      "topic": "human-review",
+      "routeRole": "failure-mode",
+      "calibratedScore": 86.21,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_3310484656228e54e0023e11"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the failure-mode intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 91,
+      "candidateId": "cand_cfc312cdb30a602f2f7c4b17",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/controls",
+      "siteId": "maha-os",
+      "topic": "device-identity",
+      "routeRole": "controls",
+      "calibratedScore": 85.71,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_671d652918d62414c37d751d",
+        "cand_f2e452a99e390ddae8b1001f"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the controls intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 92,
+      "candidateId": "cand_9a2abd7f8664d531b9b23c4e",
+      "url": "https://policy.mahastrategies.com/policy/international-coordination/evidence",
+      "siteId": "maha-policy",
+      "topic": "international-coordination",
+      "routeRole": "evidence",
+      "calibratedScore": 91.06,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_1937134519716bbd2730b72f",
+        "cand_f2fa87d05dd261e0d645ead1"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the evidence intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 2,
+        "sourceClasses": [
+          "current primary law, regulator, or standards text",
+          "independent implementation or outcome evidence"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 93,
+      "candidateId": "cand_f75aeec508175cb7b63fee43",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/uncertainty-bounds/calculation",
+      "siteId": "maha-strategies",
+      "topic": "uncertainty-bounds",
+      "routeRole": "calculation",
+      "calibratedScore": 83.91,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the calculation intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply interpretation; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 94,
+      "candidateId": "cand_f7e0ca1c06761ea434797887",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/quota-enforcement/architecture",
+      "siteId": "maha-strategies",
+      "topic": "quota-enforcement",
+      "routeRole": "architecture",
+      "calibratedScore": 87.49,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_54bebdc1fa35ce767bb527ac",
+        "cand_63800114df58212bf1827623"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the architecture intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply authority; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 95,
+      "candidateId": "cand_f94d2bd0cb27b8ce052dae80",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/workflow",
+      "siteId": "agentic-publishing",
+      "topic": "machine-readable-article",
+      "routeRole": "workflow",
+      "calibratedScore": 86.29,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_48485c2639eca0b2fb4d9852"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the workflow intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 96,
+      "candidateId": "cand_fcf8be6da35613518c99769b",
+      "url": "https://research.mahastrategies.com/federation/research/doi-resolution/relationships",
+      "siteId": "maha-research",
+      "topic": "doi-resolution",
+      "routeRole": "relationships",
+      "calibratedScore": 87.83,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_52618f6a2b190a11a07ef6a0"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the relationships intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 97,
+      "candidateId": "cand_fe7c20e6023d410de4cd7a16",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/policy",
+      "siteId": "agentic-publishing",
+      "topic": "machine-readable-article",
+      "routeRole": "policy",
+      "calibratedScore": 86.37,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_48485c2639eca0b2fb4d9852"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the policy intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 98,
+      "candidateId": "cand_fec0e0610e968660725fbc79",
+      "url": "https://www.mahastrategies.com/clearing/tamil-religion/mayon/commentary",
+      "siteId": "maha-strategies",
+      "topic": "mayon",
+      "routeRole": "commentary",
+      "calibratedScore": 83.91,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the commentary intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply translation; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 99,
+      "candidateId": "cand_ff5413b1c050a05c63f3476e",
+      "url": "https://research.mahastrategies.com/federation/research/counterexample/relationships",
+      "siteId": "maha-research",
+      "topic": "counterexample",
+      "routeRole": "relationships",
+      "calibratedScore": 87.83,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_917e449556b1266d90ac7e19"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the relationships intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    },
+    {
+      "cohortOrder": 100,
+      "candidateId": "cand_ff96d57bb1fe7d494a8c8af9",
+      "url": "https://research.mahastrategies.com/federation/research/model-boundary/failure-mode",
+      "siteId": "maha-research",
+      "topic": "model-boundary",
+      "routeRole": "failure-mode",
+      "calibratedScore": 87.85,
+      "demandBasis": "unknown",
+      "dependenciesInTranche": [],
+      "dependenciesSatisfiedByPriorTranches": [
+        "cand_3dbf6da0286dd76c2ea339a6",
+        "cand_3f1a9f08061713fb8ebe464c"
+      ],
+      "evidenceRequirements": {
+        "sourceIdentity": "Verify canonical title, responsible institution or author, version/date, and stable URL or identifier.",
+        "locator": "Bind every explanatory assertion to an exact section, paragraph, figure, table, equation, or versioned specification anchor.",
+        "rights": "Record access and reuse basis; retain locators and fingerprints rather than restricted full text.",
+        "scope": "Support the failure-mode intent without inheriting authority from a neighboring topic or property.",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+        "minimumIndependentSources": 1,
+        "sourceClasses": [
+          "canonical primary authority",
+          "operational or empirical source where the application makes an outcome claim"
+        ]
+      },
+      "evidenceState": "not-inspected",
+      "pageSpecEligible": false
+    }
+  ],
+  "provenanceDigest": "sha256:a415742886c8d55701e5eff79d50fe0945b0ad4bd628d9d862dbac779fd531c3"
+}

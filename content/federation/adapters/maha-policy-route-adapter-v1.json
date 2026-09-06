@@ -3,7 +3,7 @@
   "siteId": "maha-policy",
   "canonicalHost": "policy.mahastrategies.com",
   "rootPath": "/policy/",
-  "sourceManifestDigest": "sha256:68a9ed194323ab47e2db93e76c265bc6bb430090eda699c115169059d47255e2",
+  "sourceManifestDigest": "sha256:c28213661b5416640e02c6f6e726c9072a998e79fb60b8fac4251d3774d0f35f",
   "state": "local-owner-handoff",
   "ownerIntegration": {
     "routeShape": "/policy/[...segments]",
@@ -16,8 +16,8 @@
     "activeCanonicalReleaseRequired": true
   },
   "counts": {
-    "routes": 90,
-    "boundedAnswers": 450,
+    "routes": 108,
+    "boundedAnswers": 540,
     "publicRoutesCreated": 0,
     "buildsRun": 0
   },
@@ -171,7 +171,7 @@
         "automated-decision-governance",
         "comparison"
       ],
-      "contentDigest": "sha256:4e52d324b43e8d3c2e0a70d0f925ad7fd3952a78f8b35f87c4d6f56281ab0da6"
+      "contentDigest": "sha256:117778b54ff84ec8dc8ed1fd0095b21b5b434749ae8d81bc9f8cb8002ee758b7"
     },
     {
       "candidateId": "cand_a661feca453b2524f07faf0f",
@@ -181,7 +181,7 @@
         "automated-decision-governance",
         "current-law"
       ],
-      "contentDigest": "sha256:80bd75c40ec837cb4c52b981deb803dd75d7f4ef3427dfdc1b6d4e4986531757"
+      "contentDigest": "sha256:4e93d4ab4d496b26d6fa30510e6c950447a39804fd5e3fac8cfd0a03d17cac09"
     },
     {
       "candidateId": "cand_c5399f674f04e49c17d824f2",
@@ -191,7 +191,17 @@
         "automated-decision-governance",
         "definition"
       ],
-      "contentDigest": "sha256:ff5c6c5a35a0d00d6a7e16ad64ea393afb9194effb7de5c625e590aea15c708e"
+      "contentDigest": "sha256:0beabfcae26a28b1d30f2342064fa52be1309d6d2de3632d0d7517beef55c594"
+    },
+    {
+      "candidateId": "cand_6508a172f8385d98e1f8059e",
+      "path": "/policy/automated-decision-governance/evidence",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/automated-decision-governance/evidence",
+      "segments": [
+        "automated-decision-governance",
+        "evidence"
+      ],
+      "contentDigest": "sha256:367a3597fc55f6a6e6ac4ddd118494025dcd6ddb2afddf1f55f7978d740741b0"
     },
     {
       "candidateId": "cand_361ae5904dfd60156fac6cc7",
@@ -202,6 +212,16 @@
         "implementation"
       ],
       "contentDigest": "sha256:d9c6ee6e3f08ccd7862ce50b6e07f1e5b5c8cfc437c870dabd6d8693fca15008"
+    },
+    {
+      "candidateId": "cand_1ce6a38138358d21808a4dda",
+      "path": "/policy/automated-decision-governance/machine-rule",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/automated-decision-governance/machine-rule",
+      "segments": [
+        "automated-decision-governance",
+        "machine-rule"
+      ],
+      "contentDigest": "sha256:28bdf1db9adea07609cc367a9f7ea290192a2c02d044a2110359ab505d8b0e1c"
     },
     {
       "candidateId": "cand_6fe748ca07bb92be930e92a0",
@@ -224,6 +244,16 @@
       "contentDigest": "sha256:7edb8c3d71e84da8b8ab1d81dbf29392d370f94ec5181600593f5a2d3011be0d"
     },
     {
+      "candidateId": "cand_24fed4febf5a9c9154a0ffac",
+      "path": "/policy/automated-decision-governance/tradeoffs",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/automated-decision-governance/tradeoffs",
+      "segments": [
+        "automated-decision-governance",
+        "tradeoffs"
+      ],
+      "contentDigest": "sha256:d2de69e172fe197cb28e3e4eda1eaa7635d59d3244a9377f74f828c70d50383e"
+    },
+    {
       "candidateId": "cand_b638f93a343314e3dbd37e14",
       "path": "/policy/automated-decision-governance/uncertainty",
       "canonicalUrl": "https://policy.mahastrategies.com/policy/automated-decision-governance/uncertainty",
@@ -241,7 +271,7 @@
         "biometric-governance",
         "comparison"
       ],
-      "contentDigest": "sha256:b44e64fb48f31cf38e460f3dea122a70b178e254c602ef0cb54202b43073ebf4"
+      "contentDigest": "sha256:b86e0cc6309b7e2e6f696a3aaa5f92cc378db7ed04d8fda9912795883c40c044"
     },
     {
       "candidateId": "cand_5cf4b134dbe43d8ab687d342",
@@ -251,7 +281,7 @@
         "biometric-governance",
         "current-law"
       ],
-      "contentDigest": "sha256:cd29087d6755dc13b83afa66ae1ad6081f32fe52f129fd6f8b6653d4d138b97f"
+      "contentDigest": "sha256:b743eada23fbaba319107078ca1b9b2d61989b255097e6b29e50681790741a32"
     },
     {
       "candidateId": "cand_d74a376f8c6e55a25c2a00d4",
@@ -261,7 +291,17 @@
         "biometric-governance",
         "definition"
       ],
-      "contentDigest": "sha256:132f5fbafb1a9307c37e4595fc25d7ddfacf010a97543cc6ce297a8ef3d6da99"
+      "contentDigest": "sha256:95df1bceab47eeee10d0f377be1304af7eb6ed82dac921d5c312ea22606fd89a"
+    },
+    {
+      "candidateId": "cand_742c651765a28079abf9034c",
+      "path": "/policy/biometric-governance/evidence",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/biometric-governance/evidence",
+      "segments": [
+        "biometric-governance",
+        "evidence"
+      ],
+      "contentDigest": "sha256:827e55c449b626187df44f44866a64b3750b7b07fe57ef5dc636e81dba85e688"
     },
     {
       "candidateId": "cand_89843a1b5b611306dd420b30",
@@ -272,6 +312,16 @@
         "implementation"
       ],
       "contentDigest": "sha256:3538f820249610c287c6edab009474812015fa1931df0ebe54119860fbf1c554"
+    },
+    {
+      "candidateId": "cand_1069d86ea29c1b668d645741",
+      "path": "/policy/biometric-governance/machine-rule",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/biometric-governance/machine-rule",
+      "segments": [
+        "biometric-governance",
+        "machine-rule"
+      ],
+      "contentDigest": "sha256:93e0d6bf8ef8323a30444b7ad333eee5eae14d7d7238eb695d93a595caf4e50f"
     },
     {
       "candidateId": "cand_13099bb1e1a366c85290fc34",
@@ -294,6 +344,16 @@
       "contentDigest": "sha256:50863436a16f178ed4d481a98ab53d26f86b7e22a22d418f5d136dbb5286bb43"
     },
     {
+      "candidateId": "cand_5a19739b7d0304e33d2ab2bf",
+      "path": "/policy/biometric-governance/tradeoffs",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/biometric-governance/tradeoffs",
+      "segments": [
+        "biometric-governance",
+        "tradeoffs"
+      ],
+      "contentDigest": "sha256:7dcfef172f6d43265c33c7cdd2330e8664011525784e93b32bad6a67e44b43ef"
+    },
+    {
       "candidateId": "cand_782ed8403a7ff5c79560b70d",
       "path": "/policy/biometric-governance/uncertainty",
       "canonicalUrl": "https://policy.mahastrategies.com/policy/biometric-governance/uncertainty",
@@ -311,7 +371,7 @@
         "capability-controls",
         "comparison"
       ],
-      "contentDigest": "sha256:87b51e6427e546fd0ff1db146087aa716ec3ba35d65440e8dca9521ea0837e6c"
+      "contentDigest": "sha256:f74e14f4df6a33bd041485665c34664aaf4aae5e903ccd981f3e77c515094527"
     },
     {
       "candidateId": "cand_3a2c419eb45c71ccf4e6ffb0",
@@ -321,7 +381,7 @@
         "capability-controls",
         "current-law"
       ],
-      "contentDigest": "sha256:c0d426893e2690f9c918bba0bb40450c25a38a43467fab71f0b8ecf1c4f7a8cd"
+      "contentDigest": "sha256:4abc02b4b641bf98b4c2b9bf41851e0d983760d387b465e3ce16febd5940b00b"
     },
     {
       "candidateId": "cand_8a4458f22acbd2fcd06012d1",
@@ -331,7 +391,17 @@
         "capability-controls",
         "definition"
       ],
-      "contentDigest": "sha256:be9167dbeb3184f44c212a654010733717df4a8c59a0cc99b416552b57785447"
+      "contentDigest": "sha256:03d37c26e5ddc20bab7e282087895e07bb2b5995fa226078ca3d169cf0f087e7"
+    },
+    {
+      "candidateId": "cand_9542ddfc16d5a66b146febb0",
+      "path": "/policy/capability-controls/evidence",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/capability-controls/evidence",
+      "segments": [
+        "capability-controls",
+        "evidence"
+      ],
+      "contentDigest": "sha256:51e756272dd89000ae09acf264e8cc5068bc69f7733b24f14f4cc7f96432e4a4"
     },
     {
       "candidateId": "cand_5f2cc668890393e0b3d8773f",
@@ -342,6 +412,16 @@
         "implementation"
       ],
       "contentDigest": "sha256:d279143d515523fb20357602f01f31a9f6f413adcc480b2f9153f39e8a53049d"
+    },
+    {
+      "candidateId": "cand_2940110890bc2a61a7e747cd",
+      "path": "/policy/capability-controls/machine-rule",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/capability-controls/machine-rule",
+      "segments": [
+        "capability-controls",
+        "machine-rule"
+      ],
+      "contentDigest": "sha256:3bf30acdc9486e94e2a673034e768326643f6a6ade59eb80df2b90be5f065943"
     },
     {
       "candidateId": "cand_85fc77d0f9d46778947f26e7",
@@ -362,6 +442,16 @@
         "sources"
       ],
       "contentDigest": "sha256:9db832d02546216e4e808ff4017244671a9c76e9b7b53cc0e74a74b47dc60ec6"
+    },
+    {
+      "candidateId": "cand_112cc3e795074e83066008d1",
+      "path": "/policy/capability-controls/tradeoffs",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/capability-controls/tradeoffs",
+      "segments": [
+        "capability-controls",
+        "tradeoffs"
+      ],
+      "contentDigest": "sha256:387969ca290db7ba9b0544c0e3e01beac7d1a030a881ee1f74eec34b871979c4"
     },
     {
       "candidateId": "cand_4372d2f218925bbe2a0a5c40",
@@ -574,6 +664,86 @@
       "contentDigest": "sha256:bf7506fb09146902da3c508e75c87dc84badb0310581ceedd7cafb411c51f2b7"
     },
     {
+      "candidateId": "cand_398c0cd676027c712343f1b0",
+      "path": "/policy/export-controls/definition",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/export-controls/definition",
+      "segments": [
+        "export-controls",
+        "definition"
+      ],
+      "contentDigest": "sha256:09e6e46886a3eb54d8afcd9467acdcc81a0125d631fa227b797a55ec2668b1a4"
+    },
+    {
+      "candidateId": "cand_69ebf78edded26bcb7f5f83b",
+      "path": "/policy/export-controls/mechanisms",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/export-controls/mechanisms",
+      "segments": [
+        "export-controls",
+        "mechanisms"
+      ],
+      "contentDigest": "sha256:0863869241eb7e13a9f34621959c701dfe794508b31bca82d0a303bb05ece276"
+    },
+    {
+      "candidateId": "cand_c6ff32aca85d5b4655291fdb",
+      "path": "/policy/export-controls/sources",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/export-controls/sources",
+      "segments": [
+        "export-controls",
+        "sources"
+      ],
+      "contentDigest": "sha256:bea44e9e14387d41b0c55fb0f15430676f30218e2ce3f0ca14d727f7948a5adb"
+    },
+    {
+      "candidateId": "cand_8a9f84ee174d7d90c188aa1e",
+      "path": "/policy/export-controls/uncertainty",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/export-controls/uncertainty",
+      "segments": [
+        "export-controls",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:4c013cc2aa3d81bc2bac5aa5c6a3805c236aa51a50644964425522412b0fb36c"
+    },
+    {
+      "candidateId": "cand_17c2619ec3dffc419b997a6b",
+      "path": "/policy/health-ai-governance/definition",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/health-ai-governance/definition",
+      "segments": [
+        "health-ai-governance",
+        "definition"
+      ],
+      "contentDigest": "sha256:b654d9adf26cdf0131ea7859678ba8af38c3b7bd166ff3fa61683070e6f9f627"
+    },
+    {
+      "candidateId": "cand_99b91692143b5054cd99d438",
+      "path": "/policy/health-ai-governance/mechanisms",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/health-ai-governance/mechanisms",
+      "segments": [
+        "health-ai-governance",
+        "mechanisms"
+      ],
+      "contentDigest": "sha256:e543bd66c83ff6aed90942e6f3472b482cfd49a324b412cb049ec17415b54894"
+    },
+    {
+      "candidateId": "cand_8bfb67c4e614dfac509fe4ce",
+      "path": "/policy/health-ai-governance/sources",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/health-ai-governance/sources",
+      "segments": [
+        "health-ai-governance",
+        "sources"
+      ],
+      "contentDigest": "sha256:0b03a3caf343d108ae68f88a0ff0dc491cac2652fc7e256ecc49d8501100ce9d"
+    },
+    {
+      "candidateId": "cand_a529ea2c85386b7f51ccbe12",
+      "path": "/policy/health-ai-governance/uncertainty",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/health-ai-governance/uncertainty",
+      "segments": [
+        "health-ai-governance",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:aa125f71d3a83c1893d59fecf574c828d33fdaf713e9dd0e0311483f7e2c41e8"
+    },
+    {
       "candidateId": "cand_c579ea086a31d922613a297a",
       "path": "/policy/human-oversight/comparison",
       "canonicalUrl": "https://policy.mahastrategies.com/policy/human-oversight/comparison",
@@ -681,7 +851,7 @@
         "international-coordination",
         "comparison"
       ],
-      "contentDigest": "sha256:d57502783c8e534ae56a363233b1eabc2fd715c6da5e598034d52cf79a517ea3"
+      "contentDigest": "sha256:b24b80f15e6881042eeb43e062b47cdf370ba37f64a393a5ac6dcb43be216351"
     },
     {
       "candidateId": "cand_880dc89f4fb658fa45aad9e0",
@@ -691,7 +861,7 @@
         "international-coordination",
         "current-law"
       ],
-      "contentDigest": "sha256:e2d2bf829285ab55c23e2be3e89d5a92088854a20beeaeca6e0604e3b9e75325"
+      "contentDigest": "sha256:685ea20a3c8e602c1d714ae4f9c270c5a4c5e980a336aad195523a25ac7ffd13"
     },
     {
       "candidateId": "cand_f2fa87d05dd261e0d645ead1",
@@ -701,7 +871,17 @@
         "international-coordination",
         "definition"
       ],
-      "contentDigest": "sha256:77f0d420f58d546dd433ea9464472b1ad11ccc63b77ebe3e70f99b7a434025ec"
+      "contentDigest": "sha256:26c5b148d13d071f5a1d381647643867f0a76001cb4cb6858f3eb19f48c57c25"
+    },
+    {
+      "candidateId": "cand_9a2abd7f8664d531b9b23c4e",
+      "path": "/policy/international-coordination/evidence",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/international-coordination/evidence",
+      "segments": [
+        "international-coordination",
+        "evidence"
+      ],
+      "contentDigest": "sha256:ecca7dacd3ff00766f4bdec508560adf9253b4f2efd8ea6818bdbaaef9a0d9c4"
     },
     {
       "candidateId": "cand_3ba50a514a90489c4674e851",
@@ -924,5 +1104,5 @@
       "contentDigest": "sha256:7df9754d7a69713d12f25a42a977fbb59d5878f3fa8a0acf85c4e4f21d2f988e"
     }
   ],
-  "provenanceDigest": "sha256:c80d07a88913f7eb37d5b0a079943d53b83c248f387901e3050ca49169ef768b"
+  "provenanceDigest": "sha256:2bb38003286af87e76ffe57d128b063c2a31cdc98ad9e8c291769d50070d3871"
 }

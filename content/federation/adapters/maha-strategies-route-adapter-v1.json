@@ -3,7 +3,7 @@
   "siteId": "maha-strategies",
   "canonicalHost": "www.mahastrategies.com",
   "rootPath": "/clearing/",
-  "sourceManifestDigest": "sha256:0cd13a63b8f30065e1ce42ed3a2d542ec5648879712405fae4b2af3a5618866c",
+  "sourceManifestDigest": "sha256:662fe2a14c34c1cf0c855c08fdcbac565df28068add05bf262d2de30594fa714",
   "state": "local-owner-handoff",
   "ownerIntegration": {
     "routeShape": "/clearing/[...segments]",
@@ -16,8 +16,8 @@
     "activeCanonicalReleaseRequired": true
   },
   "counts": {
-    "routes": 135,
-    "boundedAnswers": 675,
+    "routes": 166,
+    "boundedAnswers": 830,
     "publicRoutesCreated": 0,
     "buildsRun": 0
   },
@@ -1069,6 +1069,28 @@
       "contentDigest": "sha256:090a6272c1a8daa44de1ca85b2b5d98d6e3d8fbea2aca8b34d65c65e0ccc0988"
     },
     {
+      "candidateId": "cand_f7e0ca1c06761ea434797887",
+      "path": "/clearing/agent-governance/quota-enforcement/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/quota-enforcement/architecture",
+      "segments": [
+        "agent-governance",
+        "quota-enforcement",
+        "architecture"
+      ],
+      "contentDigest": "sha256:f0d4ed57cfdf945171a648f0473900559b749736232aab114ba514d1f1588e68"
+    },
+    {
+      "candidateId": "cand_481878bf581efb435f0dfe68",
+      "path": "/clearing/agent-governance/quota-enforcement/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/quota-enforcement/controls",
+      "segments": [
+        "agent-governance",
+        "quota-enforcement",
+        "controls"
+      ],
+      "contentDigest": "sha256:6458d00bd259d9ea4aadb79c51e0fdc01fbc9d2f926fb93b34dbc75489e2ff49"
+    },
+    {
       "candidateId": "cand_54bebdc1fa35ce767bb527ac",
       "path": "/clearing/agent-governance/quota-enforcement/definition",
       "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/quota-enforcement/definition",
@@ -1077,7 +1099,7 @@
         "quota-enforcement",
         "definition"
       ],
-      "contentDigest": "sha256:acf69525af47c84d8518a20a49956866bb95fdcd8a03fabc6dd18e2a93d6862c"
+      "contentDigest": "sha256:3c009789372d13ede4a3be5413cfc9cd88784dbccb786adaf239b975938cf3ba"
     },
     {
       "candidateId": "cand_c619bf1533a9346fbdc93a24",
@@ -1088,7 +1110,7 @@
         "quota-enforcement",
         "implementation"
       ],
-      "contentDigest": "sha256:64f5ffa4cb41d67594deec47dca1c81ba70374cff254bc25af6f4c0467c827bf"
+      "contentDigest": "sha256:fce6a7ad4f7e308b47f5b4f3af1613e2b3808639b0fa67d52fae4df856d85364"
     },
     {
       "candidateId": "cand_dfd52271051e8f410766f1cf",
@@ -1099,7 +1121,18 @@
         "quota-enforcement",
         "threats"
       ],
-      "contentDigest": "sha256:dece406412e152de4289d7de62a4bd65d368aff0ae2c5cbfb8e9ffdec8e4dfa8"
+      "contentDigest": "sha256:11c11e44dc28a68393fb9a70fe10a032513cf38eba5dbd01980f5285b7826506"
+    },
+    {
+      "candidateId": "cand_2359f2933dac8e11b6da74aa",
+      "path": "/clearing/agent-governance/quota-enforcement/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/quota-enforcement/verification",
+      "segments": [
+        "agent-governance",
+        "quota-enforcement",
+        "verification"
+      ],
+      "contentDigest": "sha256:f410880f80db932658a4dba2b86fa1ac8ee8d349935da249a8f2c203da4cf913"
     },
     {
       "candidateId": "cand_804a0a3da2a32d580ce1c874",
@@ -1300,6 +1333,105 @@
       "contentDigest": "sha256:f412c278c66fcba125ba6083eed36d09de6a33215d4bea4ad0ad829bf68d86c9"
     },
     {
+      "candidateId": "cand_83ac4a9d5996957e7372c194",
+      "path": "/clearing/astrology-infrastructure/birth-time-input/calculation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/birth-time-input/calculation",
+      "segments": [
+        "astrology-infrastructure",
+        "birth-time-input",
+        "calculation"
+      ],
+      "contentDigest": "sha256:693b6e638dbc687ae9811e00d36a613874ea9fba1e65f93158097c0ba95327ff"
+    },
+    {
+      "candidateId": "cand_aa50aab9eb54d0282fd69b88",
+      "path": "/clearing/astrology-infrastructure/birth-time-input/evaluation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/birth-time-input/evaluation",
+      "segments": [
+        "astrology-infrastructure",
+        "birth-time-input",
+        "evaluation"
+      ],
+      "contentDigest": "sha256:f6e1066c6f2d641a675a48d87f48e66926ed3385c1ee8e81df03643f753bac52"
+    },
+    {
+      "candidateId": "cand_277f181b88d268a4655af4d9",
+      "path": "/clearing/astrology-infrastructure/birth-time-input/uncertainty",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/birth-time-input/uncertainty",
+      "segments": [
+        "astrology-infrastructure",
+        "birth-time-input",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:c3de7c7e6635bbb845cd7aae0bf3a8789f2849469d0e4d4e0c176b6831de3c7d"
+    },
+    {
+      "candidateId": "cand_0a0e26322882c736ed3eafb1",
+      "path": "/clearing/astrology-infrastructure/location-input/calculation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/location-input/calculation",
+      "segments": [
+        "astrology-infrastructure",
+        "location-input",
+        "calculation"
+      ],
+      "contentDigest": "sha256:754941248365e239145581c201a0e1bdfe6f3b94b9e966dd57d7d44c73d182bb"
+    },
+    {
+      "candidateId": "cand_85eb206d72e9a0cf2385c845",
+      "path": "/clearing/astrology-infrastructure/location-input/evaluation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/location-input/evaluation",
+      "segments": [
+        "astrology-infrastructure",
+        "location-input",
+        "evaluation"
+      ],
+      "contentDigest": "sha256:c351439cb1bc9882b250feb2876780ebf88fdb55c2adce019f37b8c7a3fb4590"
+    },
+    {
+      "candidateId": "cand_2b7ef9a79d52ff4038bc232c",
+      "path": "/clearing/astrology-infrastructure/location-input/uncertainty",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/location-input/uncertainty",
+      "segments": [
+        "astrology-infrastructure",
+        "location-input",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:a777a1a040bd368960336c8118f31ab65e3a8e3e1958edb072adb2d0da43c408"
+    },
+    {
+      "candidateId": "cand_19dcd521066100b2c55188ff",
+      "path": "/clearing/astrology-infrastructure/location-input/workflow",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/location-input/workflow",
+      "segments": [
+        "astrology-infrastructure",
+        "location-input",
+        "workflow"
+      ],
+      "contentDigest": "sha256:4750dd16a6b86ac567f8b6367543f6838fd064860678047aaf3b92c51b46cf07"
+    },
+    {
+      "candidateId": "cand_66acaea34930a523bb1bd6fb",
+      "path": "/clearing/astrology-infrastructure/missing-inputs/evaluation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/missing-inputs/evaluation",
+      "segments": [
+        "astrology-infrastructure",
+        "missing-inputs",
+        "evaluation"
+      ],
+      "contentDigest": "sha256:19b89f9b9a0e84e9fe5198c2524920016b830fad054ed963d1c2ff92863cc47e"
+    },
+    {
+      "candidateId": "cand_3b128ca21fd94ea8bfaf7261",
+      "path": "/clearing/astrology-infrastructure/missing-inputs/uncertainty",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/missing-inputs/uncertainty",
+      "segments": [
+        "astrology-infrastructure",
+        "missing-inputs",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:14e06225468c6b3cf355e01def0400acacf9a03f3019698e57a4d3816a11853f"
+    },
+    {
       "candidateId": "cand_ab024531e5e1d54fde4f3596",
       "path": "/clearing/astrology-infrastructure/rectification-limits/evaluation",
       "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/rectification-limits/evaluation",
@@ -1308,7 +1440,40 @@
         "rectification-limits",
         "evaluation"
       ],
-      "contentDigest": "sha256:71d6e3fa9cb2ad16e641a4c976b63c0c0632308c437e9f4ebb768337b3e501b9"
+      "contentDigest": "sha256:d94420fdeb88b6cf311a8bec096f74f803e6ce89da2e17e43e990bd12aa70753"
+    },
+    {
+      "candidateId": "cand_eeac57417a16ae87371ffe42",
+      "path": "/clearing/astrology-infrastructure/rectification-limits/uncertainty",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/rectification-limits/uncertainty",
+      "segments": [
+        "astrology-infrastructure",
+        "rectification-limits",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:71eb6b9b058772c6c2c3f6043daa031a8f08dd6a6afbaf514f9820740c7d12bc"
+    },
+    {
+      "candidateId": "cand_0174f8a55d7f0ae00516b515",
+      "path": "/clearing/astrology-infrastructure/timezone-resolution/evaluation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/timezone-resolution/evaluation",
+      "segments": [
+        "astrology-infrastructure",
+        "timezone-resolution",
+        "evaluation"
+      ],
+      "contentDigest": "sha256:7ebf41eafad3fdb139eb064e9cdbcd950743c9825b32e86ecae3aa60ca968aaa"
+    },
+    {
+      "candidateId": "cand_f75aeec508175cb7b63fee43",
+      "path": "/clearing/astrology-infrastructure/uncertainty-bounds/calculation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/uncertainty-bounds/calculation",
+      "segments": [
+        "astrology-infrastructure",
+        "uncertainty-bounds",
+        "calculation"
+      ],
+      "contentDigest": "sha256:f7e8e51d5f22e26c611ac6d55b76746ff4510ca70c8fbf7bd2691d953a35fa57"
     },
     {
       "candidateId": "cand_cb9b4f8bb01cb82963ef869f",
@@ -1319,7 +1484,18 @@
         "uncertainty-bounds",
         "evaluation"
       ],
-      "contentDigest": "sha256:fb16a829649877ff65c98cb77fb6d22f4e1234d6cac4ecd995ac46d0d59ea38c"
+      "contentDigest": "sha256:d6e04f29fcd7a252de8f2ecd59a22c46cba1e4dbcfaff24145ba401de953ed72"
+    },
+    {
+      "candidateId": "cand_b954b83f5ddfe3d7f67ea97f",
+      "path": "/clearing/astrology-infrastructure/uncertainty-bounds/input-contract",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/uncertainty-bounds/input-contract",
+      "segments": [
+        "astrology-infrastructure",
+        "uncertainty-bounds",
+        "input-contract"
+      ],
+      "contentDigest": "sha256:c8f5bd43ff8f378c8ea3361770992e0f16a6f777102ae15d768c71d5977129ee"
     },
     {
       "candidateId": "cand_a7f5f832dcaee4664727acfb",
@@ -1330,7 +1506,62 @@
         "uncertainty-bounds",
         "uncertainty"
       ],
-      "contentDigest": "sha256:6c990a656cd020a97e8011fe2aa8afdbf19d146ff52f442c578a38a8d2675fbb"
+      "contentDigest": "sha256:b223ff7616cb267977942310d9c88118d9b6be08e4139f751fade0f92eb65b70"
+    },
+    {
+      "candidateId": "cand_620dae3dad53a00b13312c91",
+      "path": "/clearing/astrology-infrastructure/uncertainty-bounds/workflow",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/uncertainty-bounds/workflow",
+      "segments": [
+        "astrology-infrastructure",
+        "uncertainty-bounds",
+        "workflow"
+      ],
+      "contentDigest": "sha256:5cde06bc6a8702c31946d544d1ab2c0e74eb659526bf03432edd4ea2a8d1013e"
+    },
+    {
+      "candidateId": "cand_a8d25b8eeb688325366b5944",
+      "path": "/clearing/book-concepts/biological-digital-sovereignty/critique",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/biological-digital-sovereignty/critique",
+      "segments": [
+        "book-concepts",
+        "biological-digital-sovereignty",
+        "critique"
+      ],
+      "contentDigest": "sha256:bb301797de466264fdd014a256ae1d40615f674a07ecc01db7563144e0ad5427"
+    },
+    {
+      "candidateId": "cand_26dfb1372bb4fe3d9c354fc2",
+      "path": "/clearing/book-concepts/biological-digital-sovereignty/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/biological-digital-sovereignty/definition",
+      "segments": [
+        "book-concepts",
+        "biological-digital-sovereignty",
+        "definition"
+      ],
+      "contentDigest": "sha256:8e569ea765487fd15e5ecb1fc33e97b215aa706cf7f5dfa601a3e70b5591a26d"
+    },
+    {
+      "candidateId": "cand_37b754948f885c9dbcd7807c",
+      "path": "/clearing/book-concepts/cosmic-recursion/application",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/cosmic-recursion/application",
+      "segments": [
+        "book-concepts",
+        "cosmic-recursion",
+        "application"
+      ],
+      "contentDigest": "sha256:1e1aebe6a41becf8c192f0d2f42eac6772a8513f6dba6bbf3000066a84d407a4"
+    },
+    {
+      "candidateId": "cand_315000baae9b4c35d24ece4c",
+      "path": "/clearing/book-concepts/cosmic-recursion/critique",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/cosmic-recursion/critique",
+      "segments": [
+        "book-concepts",
+        "cosmic-recursion",
+        "critique"
+      ],
+      "contentDigest": "sha256:e26a5748379382ec94dcd8a8bbb125bd2a46d8f8d901ea37527fa039ad465679"
     },
     {
       "candidateId": "cand_2cf8c75a0e044a008c8d054a",
@@ -1341,7 +1572,18 @@
         "governed-autonomy",
         "application"
       ],
-      "contentDigest": "sha256:fa9b7ee93c6bbaf5942344c46e16c9a220f8ba65d6d446bab7495a3597f23e95"
+      "contentDigest": "sha256:359d4355e96826835cc8f173d16adf608e05d2b6c08453b85547f01b766562c7"
+    },
+    {
+      "candidateId": "cand_5e48e9438443367a710d9611",
+      "path": "/clearing/book-concepts/governed-autonomy/argument",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/governed-autonomy/argument",
+      "segments": [
+        "book-concepts",
+        "governed-autonomy",
+        "argument"
+      ],
+      "contentDigest": "sha256:29a9dfd841630758c60cb217d5bd50656ade4c0982198deb3c358c2e62be474e"
     },
     {
       "candidateId": "cand_2b46289c62489adc9f1008f6",
@@ -1352,7 +1594,7 @@
         "governed-autonomy",
         "critique"
       ],
-      "contentDigest": "sha256:0dcfc6c30ff28a9d5a1141276be87a84cbe1c31ab823a97ce87b01234b3fe8f7"
+      "contentDigest": "sha256:3a33620f58f6b17c8a6f9624cf335afe7efede706030fb0db0ed54cd9d7ebabe"
     },
     {
       "candidateId": "cand_b9064574de6632624005891f",
@@ -1363,7 +1605,18 @@
         "governed-autonomy",
         "definition"
       ],
-      "contentDigest": "sha256:7eb1679e69248e133fa4b90677002042d26129d5bc48adb9a400da49be20d1bc"
+      "contentDigest": "sha256:9d8f41fdd4ffc9cb48533fefdd0c4d67b3bb25c92ce4a7e2238aa29c54f25ec9"
+    },
+    {
+      "candidateId": "cand_c65161ded4ccff11bc17ae48",
+      "path": "/clearing/book-concepts/governed-autonomy/genealogy",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/governed-autonomy/genealogy",
+      "segments": [
+        "book-concepts",
+        "governed-autonomy",
+        "genealogy"
+      ],
+      "contentDigest": "sha256:6cf3a0095b67bd253c7583d443e3f28d970cb2db39ace5aaeef30f4b936f1689"
     },
     {
       "candidateId": "cand_8ba8b628bdadc7a34d8d5084",
@@ -1374,7 +1627,7 @@
         "maha-principle",
         "application"
       ],
-      "contentDigest": "sha256:ff64decd5a0fde077f3526a0311755eb738d9370294ae66cd938d215e134dd94"
+      "contentDigest": "sha256:e68395d11105803034b88ec4813d856c53b25f9e0342b3b1539704992f395d76"
     },
     {
       "candidateId": "cand_dacd8a33b1bab834bb751444",
@@ -1385,7 +1638,7 @@
         "maha-principle",
         "critique"
       ],
-      "contentDigest": "sha256:398ebb90a1ad802fa96f5564409362aa46287f052800d439117170c1a8f2f619"
+      "contentDigest": "sha256:800a7e383d8e33573405b9cf0781856ed1cfd4ec61068741d1cd601416a878c7"
     },
     {
       "candidateId": "cand_412c4974551cd8696288c6b6",
@@ -1396,7 +1649,51 @@
         "maha-principle",
         "definition"
       ],
-      "contentDigest": "sha256:18b1b705e17f6d77326cc242b53b8979b56a954a99cd022b9ff346f866d373da"
+      "contentDigest": "sha256:982786100c6c1cd758b2c490f587e3b7247df80b68edbc6f576ad91d53ccf563"
+    },
+    {
+      "candidateId": "cand_6137dd4e9d5c921ca7503623",
+      "path": "/clearing/book-concepts/maha-principle/genealogy",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/maha-principle/genealogy",
+      "segments": [
+        "book-concepts",
+        "maha-principle",
+        "genealogy"
+      ],
+      "contentDigest": "sha256:a88bd2d93bb740b251a7e455d6e91ee73bb5aca0866ec38606659042c6591049"
+    },
+    {
+      "candidateId": "cand_5dac588e37329d06c8fb8439",
+      "path": "/clearing/book-concepts/mental-sovereignty/application",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/mental-sovereignty/application",
+      "segments": [
+        "book-concepts",
+        "mental-sovereignty",
+        "application"
+      ],
+      "contentDigest": "sha256:a68a69eb6745dd2225da9f3647ef5ab3c3abda2763baf23a06c30b706b41f5db"
+    },
+    {
+      "candidateId": "cand_57fd4244aa9bb5249f4e88a8",
+      "path": "/clearing/book-concepts/mental-sovereignty/critique",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/mental-sovereignty/critique",
+      "segments": [
+        "book-concepts",
+        "mental-sovereignty",
+        "critique"
+      ],
+      "contentDigest": "sha256:049b3d6cd57b17f3aefa584e271c0449e3a140ace9fc620d1a60ebf863f019a7"
+    },
+    {
+      "candidateId": "cand_aad9f278fb806adeb8273c30",
+      "path": "/clearing/book-concepts/mental-sovereignty/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/mental-sovereignty/definition",
+      "segments": [
+        "book-concepts",
+        "mental-sovereignty",
+        "definition"
+      ],
+      "contentDigest": "sha256:8ebb0ee08c5ce44e830e513997559961425eed0bef0d22ab36f10b8095d540cf"
     },
     {
       "candidateId": "cand_edbd25353f79b43c1924cc54",
@@ -1507,7 +1804,51 @@
         "workflow"
       ],
       "contentDigest": "sha256:aadbd742f5dc1538bfbf2fd91713d2a4a8719179a79f7f6a69ff1b0c3aac2b45"
+    },
+    {
+      "candidateId": "cand_fec0e0610e968660725fbc79",
+      "path": "/clearing/tamil-religion/mayon/commentary",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/mayon/commentary",
+      "segments": [
+        "tamil-religion",
+        "mayon",
+        "commentary"
+      ],
+      "contentDigest": "sha256:f21fcf4fdec2bc59453bcdd3b5904a12c54e5aed6b9ce234c5fb8ab9d6cb32db"
+    },
+    {
+      "candidateId": "cand_ed6e639222b14bed469192a8",
+      "path": "/clearing/tamil-religion/mayon/relationship",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/mayon/relationship",
+      "segments": [
+        "tamil-religion",
+        "mayon",
+        "relationship"
+      ],
+      "contentDigest": "sha256:0a974601efb32c5adfcf1561e459f655e0df4f6afd1b27247e3f4c0c2cc9a05a"
+    },
+    {
+      "candidateId": "cand_6b4c0d26877e837902351c5a",
+      "path": "/clearing/tamil-religion/neytal/commentary",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/neytal/commentary",
+      "segments": [
+        "tamil-religion",
+        "neytal",
+        "commentary"
+      ],
+      "contentDigest": "sha256:80616ccd1c03eb40fa7a61f795a7f0eabe42ef647094d33497b85dcac7fced35"
+    },
+    {
+      "candidateId": "cand_95f65f1aa0d20e0ca6369e0b",
+      "path": "/clearing/tamil-religion/neytal/relationship",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/neytal/relationship",
+      "segments": [
+        "tamil-religion",
+        "neytal",
+        "relationship"
+      ],
+      "contentDigest": "sha256:22098bee745074c141058ffb566f42e2277cdd952be8b73dd88546bc36229d3c"
     }
   ],
-  "provenanceDigest": "sha256:63ae170c70fe7a78861405d0c4eb0b18432d844f7f423c2c6a5d43e1103b357d"
+  "provenanceDigest": "sha256:4215c81350fefe064468406b8f5a22e63662b64ff3b49729f7687df0ed99d43c"
 }

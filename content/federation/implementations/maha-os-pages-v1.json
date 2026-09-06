@@ -2,11 +2,11 @@
   "schemaVersion": "maha-federation-property-pages/1.0",
   "siteId": "maha-os",
   "canonicalHost": "www.maha-os.com",
-  "registryDigest": "sha256:1aea68733b6703ce13aa75e2cf0562a22b6f68b3ee70a5dc43d81c8c89f0a772",
+  "registryDigest": "sha256:7ff9243e1e619640969fa4d64d4f519b0a9712239412a538faa4045351234308",
   "status": "local-unreleased",
   "counts": {
-    "pages": 30,
-    "readyForOwnerIntegration": 30,
+    "pages": 36,
+    "readyForOwnerIntegration": 36,
     "blockedOnUnreadyPrerequisite": 0
   },
   "pages": [
@@ -90,6 +90,7 @@
           "paragraphs": [
             "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/operator-guide",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/failure-mode",
             "property-home: https://www.maha-os.com/"
           ]
         }
@@ -122,6 +123,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_5c6e90c179c29d5cffb39ecf"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_c7d73663e2740217ef1b14fe"
         },
         {
           "url": "https://www.maha-os.com/",
@@ -239,7 +246,245 @@
         "packetManifestDigest": "sha256:4971a0090532da8d9ea487ab3205cefc7c82ac3b0a4b208465438148e7431449",
         "packetDigest": "sha256:70630c9f1f23dea2c0338a05257a0d56861d3ee08b9b188ebc1ddb588de9faf0"
       },
-      "contentDigest": "sha256:1ca452a36dd0eba3134825703769acfc9e3f21521e30c1c49006d7bbd3b75694"
+      "contentDigest": "sha256:c04fb63288ed37c9abbed7b4e74593ef4a22018a8ef02928c54fe172811b484e"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_c7d73663e2740217ef1b14fe",
+      "tranche": 6,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/biometric-data-boundary/failure-mode",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/failure-mode",
+      "title": "Biometric Data Boundary — Failure Mode",
+      "topic": "biometric-data-boundary",
+      "routeRole": "failure-mode",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:biometric-data-boundary",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:biometric-data-boundary"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Biometric Data Boundary, in this failure-mode analysis, is limited to the following inspected scope. Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Biometric Data Boundary, in this failure-mode analysis, is limited to the following inspected scope. Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Failure Mode analysis",
+          "kind": "role-method",
+          "paragraphs": [
+            "Describe the failed invariant, observable signal, safe refusal, and correction or recovery path.",
+            "An absent signal is not proof of success unless the protocol defines and validates that interpretation.",
+            "Applied scope: Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Regulation (EU) 2016/679 (General Data Protection Regulation) — Articles 4(14), 9 and 22; Recital 51. Establishes: Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Applicability, lawful basis, exceptions, member-state law, system purpose, and individual facts require qualified legal analysis; not every image or sensor value is biometric data in this legal sense.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/definition",
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/operator-guide",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "gdpr-biometric-boundary",
+          "title": "Regulation (EU) 2016/679 (General Data Protection Regulation)",
+          "responsibleBody": "European Parliament and Council",
+          "versionOrDate": "OJ L 119, 4 May 2016",
+          "sourceClass": "law",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679",
+          "locator": "Articles 4(14), 9 and 22; Recital 51",
+          "establishes": "Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions.",
+          "doesNotEstablish": "Applicability, lawful basis, exceptions, member-state law, system purpose, and individual facts require qualified legal analysis; not every image or sensor value is biometric data in this legal sense.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_330dee492175d4bb7d07b254"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_5c6e90c179c29d5cffb39ecf"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Biometric Data Boundary mean in this bounded context?",
+          "answer": "Biometric Data Boundary, in this failure-mode analysis, is limited to the following inspected scope. Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this failure mode answer?",
+          "answer": "Regulation (EU) 2016/679 (General Data Protection Regulation) (OJ L 119, 4 May 2016), at Articles 4(14), 9 and 22; Recital 51, supports biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Applicability, lawful basis, exceptions, member-state law, system purpose, and individual facts require qualified legal analysis; not every image or sensor value is biometric data in this legal sense. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/failure-mode#article",
+        "headline": "Biometric Data Boundary — Failure Mode",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/failure-mode",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Biometric Data Boundary mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Biometric Data Boundary, in this failure-mode analysis, is limited to the following inspected scope. Biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this failure mode answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Regulation (EU) 2016/679 (General Data Protection Regulation) (OJ L 119, 4 May 2016), at Articles 4(14), 9 and 22; Recital 51, supports biometric data are defined by specific technical processing used to allow or confirm unique identification; special-category and automated-decision rules impose additional conditions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Applicability, lawful basis, exceptions, member-state law, system purpose, and individual facts require qualified legal analysis; not every image or sensor value is biometric data in this legal sense. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-6",
+        "decisionManifestDigest": "sha256:41bdf0a0cede263e6923a228204c9be1d57252fe38d07bcdeab00f4b6f42efb2",
+        "decisionDigest": "sha256:6fe9280f799c825c799a710629cd881f509483c46914a325eb29c5fd7e628c3c",
+        "specificationManifestDigest": "sha256:7f878a5b88a6f1793ca225ab97a1bbc69b4bcb786cc27208424e2efd0b526e9c",
+        "specificationDigest": "sha256:f2d2761479fc50b077a0d8a4c896503f617a51967b8a82a18415b9c0ce4515b4",
+        "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
+        "packetDigest": "sha256:addfc0cb122837c600ba0e2534054805ae323db39e1bb95308610ac1164aa3b1"
+      },
+      "contentDigest": "sha256:6227ed24dbcb1756657df7abc91e30ff7802c17397fbca5b3b48c7a325b4bf12"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -321,6 +566,7 @@
           "paragraphs": [
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/definition",
             "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/failure-mode",
             "property-home: https://www.maha-os.com/"
           ]
         }
@@ -353,6 +599,12 @@
           "relationship": "graphEdges",
           "candidateId": "cand_671d652918d62414c37d751d",
           "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_c7d73663e2740217ef1b14fe"
         },
         {
           "url": "https://www.maha-os.com/",
@@ -470,7 +722,764 @@
         "packetManifestDigest": "sha256:4971a0090532da8d9ea487ab3205cefc7c82ac3b0a4b208465438148e7431449",
         "packetDigest": "sha256:70630c9f1f23dea2c0338a05257a0d56861d3ee08b9b188ebc1ddb588de9faf0"
       },
-      "contentDigest": "sha256:70f12d98c51ae0912a0ce642d9d717f48594559d5b0a7e6e2bb2abc20f4f8bab"
+      "contentDigest": "sha256:0bca47b0d6240862dc41dbc9e7d07c005b81ef02ed108b5f4256f7c543e15fc2"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_0e7905800b3bd5899ce9114b",
+      "tranche": 6,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/caregiver-access/definition",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/caregiver-access/definition",
+      "title": "Caregiver Access — Definition",
+      "topic": "caregiver-access",
+      "routeRole": "definition",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:caregiver-access",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:caregiver-access"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Caregiver Access, in this definition, is limited to the following inspected scope. HIPAA permits distinct access or disclosure paths through applicable-law representation, an individual’s written direction, involvement in care, and specified professional-judgment circumstances. A covered entity generally treats a person authorized under applicable law to act for an individual as the individual for relevant HIPAA rights. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Caregiver Access, in this definition, is limited to the following inspected scope. HIPAA permits distinct access or disclosure paths through applicable-law representation, an individual’s written direction, involvement in care, and specified professional-judgment circumstances. A covered entity generally treats a person authorized under applicable law to act for an individual as the individual for relevant HIPAA rights. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Definition",
+          "kind": "role-method",
+          "paragraphs": [
+            "Use the term only for the source-backed scope stated here; keep adjacent concepts separate unless a typed relationship is explicit.",
+            "A useful definition states both inclusion and exclusion conditions so a machine answer cannot silently widen it.",
+            "Applied scope: HIPAA permits distinct access or disclosure paths through applicable-law representation, an individual’s written direction, involvement in care, and specified professional-judgment circumstances. A covered entity generally treats a person authorized under applicable law to act for an individual as the individual for relevant HIPAA rights."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Under HIPAA, when can a family member access an individual’s PHI? — Answer paragraphs on personal representatives, written direction, involvement in care, and incapacity. Establishes: HIPAA permits distinct access or disclosure paths through applicable-law representation, an individual’s written direction, involvement in care, and specified professional-judgment circumstances.",
+            "Personal Representatives — Who must be recognized; authority under applicable law; exceptions. Establishes: A covered entity generally treats a person authorized under applicable law to act for an individual as the individual for relevant HIPAA rights."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Family relationship alone does not create universal access; applicable law, the individual’s instructions, minimum relevance, capacity, and context control. This is U.S.-specific information, not legal advice.",
+            "Authority is role-, law-, person-, and context-specific and can be limited by exceptions; it does not authorize every caregiver action or every data system.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/caregiver-access/operator-guide",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "hhs-hipaa-family-access",
+          "title": "Under HIPAA, when can a family member access an individual’s PHI?",
+          "responsibleBody": "U.S. Department of Health and Human Services",
+          "versionOrDate": "official FAQ inspected 2026-09-06",
+          "sourceClass": "government-legal-guidance",
+          "url": "https://www.hhs.gov/hipaa/for-professionals/faq/2069/under-hipaa-when-can-a-family-member/index.html",
+          "locator": "Answer paragraphs on personal representatives, written direction, involvement in care, and incapacity",
+          "establishes": "HIPAA permits distinct access or disclosure paths through applicable-law representation, an individual’s written direction, involvement in care, and specified professional-judgment circumstances.",
+          "doesNotEstablish": "Family relationship alone does not create universal access; applicable law, the individual’s instructions, minimum relevance, capacity, and context control. This is U.S.-specific information, not legal advice.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "hhs-personal-representatives",
+          "title": "Personal Representatives",
+          "responsibleBody": "U.S. Department of Health and Human Services",
+          "versionOrDate": "official guidance inspected 2026-09-06",
+          "sourceClass": "government-legal-guidance",
+          "url": "https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/personal-representatives/index.html",
+          "locator": "Who must be recognized; authority under applicable law; exceptions",
+          "establishes": "A covered entity generally treats a person authorized under applicable law to act for an individual as the individual for relevant HIPAA rights.",
+          "doesNotEstablish": "Authority is role-, law-, person-, and context-specific and can be limited by exceptions; it does not authorize every caregiver action or every data system.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/caregiver-access/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_575613c55a6e10a9e64cf387"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Caregiver Access mean in this bounded context?",
+          "answer": "Caregiver Access, in this definition, is limited to the following inspected scope. HIPAA permits distinct access or disclosure paths through applicable-law representation, an individual’s written direction, involvement in care, and specified professional-judgment circumstances. A covered entity generally treats a person authorized under applicable law to act for an individual as the individual for relevant HIPAA rights. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this definition answer?",
+          "answer": "Under HIPAA, when can a family member access an individual’s PHI? (official FAQ inspected 2026-09-06), at Answer paragraphs on personal representatives, written direction, involvement in care, and incapacity, supports hIPAA permits distinct access or disclosure paths through applicable-law representation, an individual’s written direction, involvement in care, and specified professional-judgment circumstances. Personal Representatives (official guidance inspected 2026-09-06), at Who must be recognized; authority under applicable law; exceptions, supports a covered entity generally treats a person authorized under applicable law to act for an individual as the individual for relevant HIPAA rights."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Family relationship alone does not create universal access; applicable law, the individual’s instructions, minimum relevance, capacity, and context control. This is U.S.-specific information, not legal advice. Authority is role-, law-, person-, and context-specific and can be limited by exceptions; it does not authorize every caregiver action or every data system. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/caregiver-access/definition#article",
+        "headline": "Caregiver Access — Definition",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/caregiver-access/definition",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://www.hhs.gov/hipaa/for-professionals/faq/2069/under-hipaa-when-can-a-family-member/index.html",
+          "https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/personal-representatives/index.html"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Caregiver Access mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Caregiver Access, in this definition, is limited to the following inspected scope. HIPAA permits distinct access or disclosure paths through applicable-law representation, an individual’s written direction, involvement in care, and specified professional-judgment circumstances. A covered entity generally treats a person authorized under applicable law to act for an individual as the individual for relevant HIPAA rights. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this definition answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Under HIPAA, when can a family member access an individual’s PHI? (official FAQ inspected 2026-09-06), at Answer paragraphs on personal representatives, written direction, involvement in care, and incapacity, supports hIPAA permits distinct access or disclosure paths through applicable-law representation, an individual’s written direction, involvement in care, and specified professional-judgment circumstances. Personal Representatives (official guidance inspected 2026-09-06), at Who must be recognized; authority under applicable law; exceptions, supports a covered entity generally treats a person authorized under applicable law to act for an individual as the individual for relevant HIPAA rights."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Family relationship alone does not create universal access; applicable law, the individual’s instructions, minimum relevance, capacity, and context control. This is U.S.-specific information, not legal advice. Authority is role-, law-, person-, and context-specific and can be limited by exceptions; it does not authorize every caregiver action or every data system. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-6",
+        "decisionManifestDigest": "sha256:41bdf0a0cede263e6923a228204c9be1d57252fe38d07bcdeab00f4b6f42efb2",
+        "decisionDigest": "sha256:b669d49a43082fca0dd72cca3c9dc6163d2c5fea13ffbb717a7697df25904984",
+        "specificationManifestDigest": "sha256:7f878a5b88a6f1793ca225ab97a1bbc69b4bcb786cc27208424e2efd0b526e9c",
+        "specificationDigest": "sha256:6879d541e00902934756635e891546ea0cd3c8d2e7bf00b541b1e4145d2f7f0d",
+        "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
+        "packetDigest": "sha256:b85dfe2c581012f6a4c9bf6531bdce5d981830c3f5b62c5e1c2a865cc02cf750"
+      },
+      "contentDigest": "sha256:27d22d9b70402a7ec8a1fce0fbd875aafdcafec7f31633b04a2fe517f4d3d74e"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_575613c55a6e10a9e64cf387",
+      "tranche": 6,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/caregiver-access/operator-guide",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/caregiver-access/operator-guide",
+      "title": "Caregiver Access — Operator Guide",
+      "topic": "caregiver-access",
+      "routeRole": "operator-guide",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:caregiver-access",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:caregiver-access"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Caregiver Access, in this operator guide, is limited to the following inspected scope. HIPAA permits distinct access or disclosure paths through applicable-law representation, an individual’s written direction, involvement in care, and specified professional-judgment circumstances. A covered entity generally treats a person authorized under applicable law to act for an individual as the individual for relevant HIPAA rights. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Caregiver Access, in this operator guide, is limited to the following inspected scope. HIPAA permits distinct access or disclosure paths through applicable-law representation, an individual’s written direction, involvement in care, and specified professional-judgment circumstances. A covered entity generally treats a person authorized under applicable law to act for an individual as the individual for relevant HIPAA rights. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Operator guide",
+          "kind": "role-method",
+          "paragraphs": [
+            "Tell the operator what to check before acting, when to refuse, and how to preserve evidence of the outcome.",
+            "The guide cannot infer that a device, service, source, or credential is healthy when observation is unavailable.",
+            "Applied scope: HIPAA permits distinct access or disclosure paths through applicable-law representation, an individual’s written direction, involvement in care, and specified professional-judgment circumstances. A covered entity generally treats a person authorized under applicable law to act for an individual as the individual for relevant HIPAA rights."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Under HIPAA, when can a family member access an individual’s PHI? — Answer paragraphs on personal representatives, written direction, involvement in care, and incapacity. Establishes: HIPAA permits distinct access or disclosure paths through applicable-law representation, an individual’s written direction, involvement in care, and specified professional-judgment circumstances.",
+            "Personal Representatives — Who must be recognized; authority under applicable law; exceptions. Establishes: A covered entity generally treats a person authorized under applicable law to act for an individual as the individual for relevant HIPAA rights."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Family relationship alone does not create universal access; applicable law, the individual’s instructions, minimum relevance, capacity, and context control. This is U.S.-specific information, not legal advice.",
+            "Authority is role-, law-, person-, and context-specific and can be limited by exceptions; it does not authorize every caregiver action or every data system.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/caregiver-access/definition",
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "hhs-hipaa-family-access",
+          "title": "Under HIPAA, when can a family member access an individual’s PHI?",
+          "responsibleBody": "U.S. Department of Health and Human Services",
+          "versionOrDate": "official FAQ inspected 2026-09-06",
+          "sourceClass": "government-legal-guidance",
+          "url": "https://www.hhs.gov/hipaa/for-professionals/faq/2069/under-hipaa-when-can-a-family-member/index.html",
+          "locator": "Answer paragraphs on personal representatives, written direction, involvement in care, and incapacity",
+          "establishes": "HIPAA permits distinct access or disclosure paths through applicable-law representation, an individual’s written direction, involvement in care, and specified professional-judgment circumstances.",
+          "doesNotEstablish": "Family relationship alone does not create universal access; applicable law, the individual’s instructions, minimum relevance, capacity, and context control. This is U.S.-specific information, not legal advice.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "hhs-personal-representatives",
+          "title": "Personal Representatives",
+          "responsibleBody": "U.S. Department of Health and Human Services",
+          "versionOrDate": "official guidance inspected 2026-09-06",
+          "sourceClass": "government-legal-guidance",
+          "url": "https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/personal-representatives/index.html",
+          "locator": "Who must be recognized; authority under applicable law; exceptions",
+          "establishes": "A covered entity generally treats a person authorized under applicable law to act for an individual as the individual for relevant HIPAA rights.",
+          "doesNotEstablish": "Authority is role-, law-, person-, and context-specific and can be limited by exceptions; it does not authorize every caregiver action or every data system.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/caregiver-access/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_0e7905800b3bd5899ce9114b"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Caregiver Access mean in this bounded context?",
+          "answer": "Caregiver Access, in this operator guide, is limited to the following inspected scope. HIPAA permits distinct access or disclosure paths through applicable-law representation, an individual’s written direction, involvement in care, and specified professional-judgment circumstances. A covered entity generally treats a person authorized under applicable law to act for an individual as the individual for relevant HIPAA rights. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this operator guide answer?",
+          "answer": "Under HIPAA, when can a family member access an individual’s PHI? (official FAQ inspected 2026-09-06), at Answer paragraphs on personal representatives, written direction, involvement in care, and incapacity, supports hIPAA permits distinct access or disclosure paths through applicable-law representation, an individual’s written direction, involvement in care, and specified professional-judgment circumstances. Personal Representatives (official guidance inspected 2026-09-06), at Who must be recognized; authority under applicable law; exceptions, supports a covered entity generally treats a person authorized under applicable law to act for an individual as the individual for relevant HIPAA rights."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Family relationship alone does not create universal access; applicable law, the individual’s instructions, minimum relevance, capacity, and context control. This is U.S.-specific information, not legal advice. Authority is role-, law-, person-, and context-specific and can be limited by exceptions; it does not authorize every caregiver action or every data system. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/caregiver-access/operator-guide#article",
+        "headline": "Caregiver Access — Operator Guide",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/caregiver-access/operator-guide",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://www.hhs.gov/hipaa/for-professionals/faq/2069/under-hipaa-when-can-a-family-member/index.html",
+          "https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/personal-representatives/index.html"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Caregiver Access mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Caregiver Access, in this operator guide, is limited to the following inspected scope. HIPAA permits distinct access or disclosure paths through applicable-law representation, an individual’s written direction, involvement in care, and specified professional-judgment circumstances. A covered entity generally treats a person authorized under applicable law to act for an individual as the individual for relevant HIPAA rights. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this operator guide answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Under HIPAA, when can a family member access an individual’s PHI? (official FAQ inspected 2026-09-06), at Answer paragraphs on personal representatives, written direction, involvement in care, and incapacity, supports hIPAA permits distinct access or disclosure paths through applicable-law representation, an individual’s written direction, involvement in care, and specified professional-judgment circumstances. Personal Representatives (official guidance inspected 2026-09-06), at Who must be recognized; authority under applicable law; exceptions, supports a covered entity generally treats a person authorized under applicable law to act for an individual as the individual for relevant HIPAA rights."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Family relationship alone does not create universal access; applicable law, the individual’s instructions, minimum relevance, capacity, and context control. This is U.S.-specific information, not legal advice. Authority is role-, law-, person-, and context-specific and can be limited by exceptions; it does not authorize every caregiver action or every data system. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-6",
+        "decisionManifestDigest": "sha256:41bdf0a0cede263e6923a228204c9be1d57252fe38d07bcdeab00f4b6f42efb2",
+        "decisionDigest": "sha256:30574703e575eff36feeb348ff4ae67453852b76fd693a6b079f4acf5cfd8ab1",
+        "specificationManifestDigest": "sha256:7f878a5b88a6f1793ca225ab97a1bbc69b4bcb786cc27208424e2efd0b526e9c",
+        "specificationDigest": "sha256:e7423d95a50fa1c4eae47097f2677bee57df846963ba80839a81d798c66e86a2",
+        "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
+        "packetDigest": "sha256:b85dfe2c581012f6a4c9bf6531bdce5d981830c3f5b62c5e1c2a865cc02cf750"
+      },
+      "contentDigest": "sha256:4a11c47af5851fab6b84b7f08f4adffe2cf2c97ea1a0e668d76a70210d2c91bd"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_cfc312cdb30a602f2f7c4b17",
+      "tranche": 6,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/device-identity/controls",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/controls",
+      "title": "Device Identity — Controls",
+      "topic": "device-identity",
+      "routeRole": "controls",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:device-identity",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:device-identity"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Device Identity, in this control model, is limited to the following inspected scope. Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Device Identity, in this control model, is limited to the following inspected scope. Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Control model",
+          "kind": "role-method",
+          "paragraphs": [
+            "State the controlled input, decision rule, observable failure, and evidence that the control ran.",
+            "A control description is not evidence of effectiveness; verification and operational observation remain separate.",
+            "Applied scope: Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "IoT Device Cybersecurity Capability Core Baseline — Section 2 and Table 1, Device Identification. Establishes: Logical and physical identification of an IoT device for cybersecurity management.",
+            "Agent client credential authorization — credential fingerprint, client binding, status, and authorization checks. Establishes: Current Maha client-credential identity and authorization behavior."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The baseline is a manufacturer-oriented IoT starting point, not universal device identity or proof that a device has not been substituted.",
+            "Repository behavior is implementation evidence, not an independent security certification.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition",
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/operator-guide",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/failure-mode",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-ir-8259a",
+          "title": "IoT Device Cybersecurity Capability Core Baseline",
+          "responsibleBody": "NIST",
+          "versionOrDate": "NISTIR 8259A, May 2020",
+          "sourceClass": "government-guidance",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ir/2020/NIST.IR.8259a.pdf",
+          "locator": "Section 2 and Table 1, Device Identification",
+          "establishes": "Logical and physical identification of an IoT device for cybersecurity management.",
+          "doesNotEstablish": "The baseline is a manufacturer-oriented IoT starting point, not universal device identity or proof that a device has not been substituted.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "local-agent-credentials",
+          "title": "Agent client credential authorization",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source inspected 2026-09-05",
+          "sourceClass": "local-implementation",
+          "url": null,
+          "locator": "credential fingerprint, client binding, status, and authorization checks",
+          "establishes": "Current Maha client-credential identity and authorization behavior.",
+          "doesNotEstablish": "Repository behavior is implementation evidence, not an independent security certification.",
+          "rightsBasis": "Maha-controlled repository material; retain only file identity, symbol locator, and content fingerprint. No credential or runtime value is included.",
+          "inspectionDepth": "code-symbol",
+          "contentFingerprint": "sha256:15a41eeb0d4ed74d9134e6982ce367be72888d86636107ce8a31b8bd08dacf7f"
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_f2e452a99e390ddae8b1001f"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_9f41b4ed6746ae6e048f417f"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_956bb7c77098dead14075f84"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Device Identity mean in this bounded context?",
+          "answer": "Device Identity, in this control model, is limited to the following inspected scope. Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this controls answer?",
+          "answer": "IoT Device Cybersecurity Capability Core Baseline (NISTIR 8259A, May 2020), at Section 2 and Table 1, Device Identification, supports logical and physical identification of an IoT device for cybersecurity management. Agent client credential authorization (repository source inspected 2026-09-05), at credential fingerprint, client binding, status, and authorization checks, supports current Maha client-credential identity and authorization behavior."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The baseline is a manufacturer-oriented IoT starting point, not universal device identity or proof that a device has not been substituted. Repository behavior is implementation evidence, not an independent security certification. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/controls#article",
+        "headline": "Device Identity — Controls",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/controls",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://nvlpubs.nist.gov/nistpubs/ir/2020/NIST.IR.8259a.pdf"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Device Identity mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Device Identity, in this control model, is limited to the following inspected scope. Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this controls answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "IoT Device Cybersecurity Capability Core Baseline (NISTIR 8259A, May 2020), at Section 2 and Table 1, Device Identification, supports logical and physical identification of an IoT device for cybersecurity management. Agent client credential authorization (repository source inspected 2026-09-05), at credential fingerprint, client binding, status, and authorization checks, supports current Maha client-credential identity and authorization behavior."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The baseline is a manufacturer-oriented IoT starting point, not universal device identity or proof that a device has not been substituted. Repository behavior is implementation evidence, not an independent security certification. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-6",
+        "decisionManifestDigest": "sha256:41bdf0a0cede263e6923a228204c9be1d57252fe38d07bcdeab00f4b6f42efb2",
+        "decisionDigest": "sha256:b5a93004beb3178800c361cfe15b418422de0da3446b037d60a69866d0ecd214",
+        "specificationManifestDigest": "sha256:7f878a5b88a6f1793ca225ab97a1bbc69b4bcb786cc27208424e2efd0b526e9c",
+        "specificationDigest": "sha256:904c5660933ff97ae35b65ee4b58dff17ee886d6a0db64dda71f09f693dd67db",
+        "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
+        "packetDigest": "sha256:cf1972d2e20bd36aa7b9c9d3724be11d5383e4a7f6fa5dde1a894e4cde7c600f"
+      },
+      "contentDigest": "sha256:9f44ff3b61ff62e76b01d03bfee4f64b6aab48ffb12ab4ceee041ea6644b7533"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -556,6 +1565,7 @@
             "canonical-family-owner-definition-first: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/operator-guide",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/failure-mode",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/controls",
             "property-home: https://www.maha-os.com/"
           ]
         }
@@ -614,6 +1624,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_956bb7c77098dead14075f84"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/controls",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_cfc312cdb30a602f2f7c4b17"
         },
         {
           "url": "https://www.maha-os.com/",
@@ -731,7 +1747,7 @@
         "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
         "packetDigest": "sha256:2c939fcb210a0eaf5043eb3bca767b611fe659f13b3483426a4d256b8a047783"
       },
-      "contentDigest": "sha256:af62988ed0a8885c74d684a5c5644b9983e6cb7fd930b5396396d2995c568d5a"
+      "contentDigest": "sha256:340d444b75e85cca25f29a6aea267d81f2f6ed91274d006a48c23fa7bf55f944"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -816,6 +1832,7 @@
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition",
             "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/operator-guide",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/controls",
             "property-home: https://www.maha-os.com/"
           ]
         }
@@ -868,6 +1885,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_9f41b4ed6746ae6e048f417f"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/controls",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_cfc312cdb30a602f2f7c4b17"
         },
         {
           "url": "https://www.maha-os.com/",
@@ -985,7 +2008,7 @@
         "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
         "packetDigest": "sha256:5a26bfb65bbd3849066e000b7400f7fba334fa173c9211665a2e7cbc86236c99"
       },
-      "contentDigest": "sha256:aab1ff2988f0dadd5fea76367fa314d47ed552d0f1e5791851f411ca919c64ab"
+      "contentDigest": "sha256:add7a4f1644792f5e479f11e6e6820ced1fc968a23e580098d49326d03416c41"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -1070,6 +2093,7 @@
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition",
             "canonical-family-owner-definition-first: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/failure-mode",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/controls",
             "property-home: https://www.maha-os.com/"
           ]
         }
@@ -1122,6 +2146,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_956bb7c77098dead14075f84"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/controls",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_cfc312cdb30a602f2f7c4b17"
         },
         {
           "url": "https://www.maha-os.com/",
@@ -1239,7 +2269,7 @@
         "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
         "packetDigest": "sha256:2c939fcb210a0eaf5043eb3bca767b611fe659f13b3483426a4d256b8a047783"
       },
-      "contentDigest": "sha256:6315549c22ec7478ca545d9e6a9c34f960a88329d07e266f8391be19ec1b115d"
+      "contentDigest": "sha256:1afa89e7e1e66ef262c356560f30fc38698c904a066aa44712ae153afea33840"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -1321,6 +2351,7 @@
           "heading": "Related definitions and applications",
           "kind": "relationships",
           "paragraphs": [
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/operator-guide",
             "property-home: https://www.maha-os.com/"
           ]
         }
@@ -1356,6 +2387,12 @@
         }
       ],
       "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_1207aebf8f4d79925042c2e9"
+        },
         {
           "url": "https://www.maha-os.com/",
           "relationship": "property-home",
@@ -1473,7 +2510,248 @@
         "packetManifestDigest": "sha256:40f82b2317b7e4791be8876c563235b411b9174bebe43c6d8ecb7ee4db89c2ca",
         "packetDigest": "sha256:6b3a4b9dd9c0187b5a32a67cfff4837129e2333838fe13ee9fc7d9d952d46289"
       },
-      "contentDigest": "sha256:53ba253d1d96c868e87034b05ae0fc5f5503ca9b73d300405c56310ae13ebe4b"
+      "contentDigest": "sha256:755403dfe97625e928759a76a25e8886ef152cf0ea4689bfe64f4e3b19b46d20"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_1207aebf8f4d79925042c2e9",
+      "tranche": 6,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/health-data-consent/operator-guide",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/operator-guide",
+      "title": "Health Data Consent — Operator Guide",
+      "topic": "health-data-consent",
+      "routeRole": "operator-guide",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:health-data-consent",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:health-data-consent"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Health Data Consent, in this operator guide, is limited to the following inspected scope. HIPAA-specific distinction between optional consent and detailed authorization. Voluntary privacy-risk framework for data processing and user control. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Health Data Consent, in this operator guide, is limited to the following inspected scope. HIPAA-specific distinction between optional consent and detailed authorization. Voluntary privacy-risk framework for data processing and user control. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Operator guide",
+          "kind": "role-method",
+          "paragraphs": [
+            "Tell the operator what to check before acting, when to refuse, and how to preserve evidence of the outcome.",
+            "The guide cannot infer that a device, service, source, or credential is healthy when observation is unavailable.",
+            "Applied scope: HIPAA-specific distinction between optional consent and detailed authorization. Voluntary privacy-risk framework for data processing and user control."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "What is the difference between consent and authorization under the HIPAA Privacy Rule? — Entire FAQ: consent versus authorization. Establishes: HIPAA-specific distinction between optional consent and detailed authorization.",
+            "NIST Privacy Framework — Core functions Identify-P, Govern-P, Control-P, Communicate-P, Protect-P. Establishes: Voluntary privacy-risk framework for data processing and user control."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "HIPAA does not govern every consumer health application or every jurisdiction.",
+            "The framework is voluntary and does not create legal consent.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "hhs-hipaa-auth",
+          "title": "What is the difference between consent and authorization under the HIPAA Privacy Rule?",
+          "responsibleBody": "U.S. Department of Health and Human Services",
+          "versionOrDate": "reviewed 28 December 2022",
+          "sourceClass": "government-guidance",
+          "url": "https://www.hhs.gov/hipaa/for-professionals/faq/264/what-is-the-difference-between-consent-and-authorization/index.html",
+          "locator": "Entire FAQ: consent versus authorization",
+          "establishes": "HIPAA-specific distinction between optional consent and detailed authorization.",
+          "doesNotEstablish": "HIPAA does not govern every consumer health application or every jurisdiction.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "nist-privacy",
+          "title": "NIST Privacy Framework",
+          "responsibleBody": "NIST",
+          "versionOrDate": "version 1.0, January 2020",
+          "sourceClass": "government-guidance",
+          "url": "https://www.nist.gov/privacy-framework/privacy-framework",
+          "locator": "Core functions Identify-P, Govern-P, Control-P, Communicate-P, Protect-P",
+          "establishes": "Voluntary privacy-risk framework for data processing and user control.",
+          "doesNotEstablish": "The framework is voluntary and does not create legal consent.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_671d652918d62414c37d751d"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Health Data Consent mean in this bounded context?",
+          "answer": "Health Data Consent, in this operator guide, is limited to the following inspected scope. HIPAA-specific distinction between optional consent and detailed authorization. Voluntary privacy-risk framework for data processing and user control. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this operator guide answer?",
+          "answer": "What is the difference between consent and authorization under the HIPAA Privacy Rule? (reviewed 28 December 2022), at Entire FAQ: consent versus authorization, supports hIPAA-specific distinction between optional consent and detailed authorization. NIST Privacy Framework (version 1.0, January 2020), at Core functions Identify-P, Govern-P, Control-P, Communicate-P, Protect-P, supports voluntary privacy-risk framework for data processing and user control."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "HIPAA does not govern every consumer health application or every jurisdiction. The framework is voluntary and does not create legal consent. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/operator-guide#article",
+        "headline": "Health Data Consent — Operator Guide",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/operator-guide",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://www.hhs.gov/hipaa/for-professionals/faq/264/what-is-the-difference-between-consent-and-authorization/index.html",
+          "https://www.nist.gov/privacy-framework/privacy-framework"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Health Data Consent mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Health Data Consent, in this operator guide, is limited to the following inspected scope. HIPAA-specific distinction between optional consent and detailed authorization. Voluntary privacy-risk framework for data processing and user control. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this operator guide answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "What is the difference between consent and authorization under the HIPAA Privacy Rule? (reviewed 28 December 2022), at Entire FAQ: consent versus authorization, supports hIPAA-specific distinction between optional consent and detailed authorization. NIST Privacy Framework (version 1.0, January 2020), at Core functions Identify-P, Govern-P, Control-P, Communicate-P, Protect-P, supports voluntary privacy-risk framework for data processing and user control."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "HIPAA does not govern every consumer health application or every jurisdiction. The framework is voluntary and does not create legal consent. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-6",
+        "decisionManifestDigest": "sha256:41bdf0a0cede263e6923a228204c9be1d57252fe38d07bcdeab00f4b6f42efb2",
+        "decisionDigest": "sha256:025e80fd3d96fdf5b4a7699c21d1d95597e8898d18d43c8b5a7ada36bc4a8f41",
+        "specificationManifestDigest": "sha256:7f878a5b88a6f1793ca225ab97a1bbc69b4bcb786cc27208424e2efd0b526e9c",
+        "specificationDigest": "sha256:f350c03bf1ffb8f30bba8d210539976d51a91a1ca2afb8eb447cd1d8f4aa3b89",
+        "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
+        "packetDigest": "sha256:877201d620017dde6d7cffa9c0de2a688f570d3a0a4cb7e8815554ff9418c3cf"
+      },
+      "contentDigest": "sha256:726c3c158fe24a1db410424676612093655fe74749d1133379ed5d75c288622f"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -6961,6 +8239,267 @@
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_385955fc6e2a9a940a3deec3",
+      "tranche": 6,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/resilience-mode/controls",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/controls",
+      "title": "Resilience Mode — Controls",
+      "topic": "resilience-mode",
+      "routeRole": "controls",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:resilience-mode",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:resilience-mode"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Resilience Mode, in this control model, is limited to the following inspected scope. Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Resilience Mode, in this control model, is limited to the following inspected scope. Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Control model",
+          "kind": "role-method",
+          "paragraphs": [
+            "State the controlled input, decision rule, observable failure, and evidence that the control ran.",
+            "A control description is not evidence of effectiveness; verification and operational observation remain separate.",
+            "Applied scope: Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Contingency Planning Guide for Federal Information Systems — Sections 3.4–3.6, 4 and 5. Establishes: Alternate operations, recovery, testing, and reconstitution after disruption.",
+            "Governed workflow task-state ledger — State transitions, terminal states, replay keys and event history. Establishes: A local mechanism for preserving and resuming bounded workflow state."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The guide does not define a consumer-device mode, guarantee availability, or authorize unsafe degraded operation.",
+            "This code does not prove hardware resilience, offline inference quality, or deployed persistence.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/operator-guide",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/failure-mode",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-contingency-resilience",
+          "title": "Contingency Planning Guide for Federal Information Systems",
+          "responsibleBody": "NIST",
+          "versionOrDate": "SP 800-34 Rev. 1, May 2010",
+          "sourceClass": "government-guidance",
+          "url": "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf",
+          "locator": "Sections 3.4–3.6, 4 and 5",
+          "establishes": "Alternate operations, recovery, testing, and reconstitution after disruption.",
+          "doesNotEstablish": "The guide does not define a consumer-device mode, guarantee availability, or authorize unsafe degraded operation.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "local-task-resilience",
+          "title": "Governed workflow task-state ledger",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source reviewed 2026-09-06",
+          "sourceClass": "local-implementation",
+          "url": null,
+          "locator": "State transitions, terminal states, replay keys and event history",
+          "establishes": "A local mechanism for preserving and resuming bounded workflow state.",
+          "doesNotEstablish": "This code does not prove hardware resilience, offline inference quality, or deployed persistence.",
+          "rightsBasis": "Maha-controlled repository source; symbol names and a file identity may be recorded, but no credential, customer value, or runtime payload is retained.",
+          "inspectionDepth": "code-symbol",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_d6cbea3163ab9349857186bf"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_1754ab6d9ccee1ef6778e37e"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_3dee4cb4d23a8de9ae7a7e1d"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Resilience Mode mean in this bounded context?",
+          "answer": "Resilience Mode, in this control model, is limited to the following inspected scope. Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this controls answer?",
+          "answer": "Contingency Planning Guide for Federal Information Systems (SP 800-34 Rev. 1, May 2010), at Sections 3.4–3.6, 4 and 5, supports alternate operations, recovery, testing, and reconstitution after disruption. Governed workflow task-state ledger (repository source reviewed 2026-09-06), at State transitions, terminal states, replay keys and event history, supports a local mechanism for preserving and resuming bounded workflow state."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The guide does not define a consumer-device mode, guarantee availability, or authorize unsafe degraded operation. This code does not prove hardware resilience, offline inference quality, or deployed persistence. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/controls#article",
+        "headline": "Resilience Mode — Controls",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/controls",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Resilience Mode mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Resilience Mode, in this control model, is limited to the following inspected scope. Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this controls answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Contingency Planning Guide for Federal Information Systems (SP 800-34 Rev. 1, May 2010), at Sections 3.4–3.6, 4 and 5, supports alternate operations, recovery, testing, and reconstitution after disruption. Governed workflow task-state ledger (repository source reviewed 2026-09-06), at State transitions, terminal states, replay keys and event history, supports a local mechanism for preserving and resuming bounded workflow state."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The guide does not define a consumer-device mode, guarantee availability, or authorize unsafe degraded operation. This code does not prove hardware resilience, offline inference quality, or deployed persistence. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-6",
+        "decisionManifestDigest": "sha256:41bdf0a0cede263e6923a228204c9be1d57252fe38d07bcdeab00f4b6f42efb2",
+        "decisionDigest": "sha256:afaf167b03e1e5a0de08af0a9c54c18686aa8b903424cf7d88cc0bd36e71fcfb",
+        "specificationManifestDigest": "sha256:7f878a5b88a6f1793ca225ab97a1bbc69b4bcb786cc27208424e2efd0b526e9c",
+        "specificationDigest": "sha256:394c79aef7ab052e21bd5f55fb3ad25c4495feb2eae0c09e2c605fd9b4883c12",
+        "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
+        "packetDigest": "sha256:08524b98d91307d9ac791a5ec935219875ea0117d55bcc15695ea2de8bcdcbde"
+      },
+      "contentDigest": "sha256:a64e938701a5630d7a0a1202857eb008bd31a915713b6b686e4de92a5354e3b5"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
       "candidateId": "cand_d6cbea3163ab9349857186bf",
       "tranche": 3,
       "siteId": "maha-os",
@@ -7042,6 +8581,7 @@
             "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/operator-guide",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/failure-mode",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/controls",
             "property-home: https://www.maha-os.com/"
           ]
         }
@@ -7094,6 +8634,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_3dee4cb4d23a8de9ae7a7e1d"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/controls",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_385955fc6e2a9a940a3deec3"
         },
         {
           "url": "https://www.maha-os.com/",
@@ -7211,7 +8757,7 @@
         "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
         "packetDigest": "sha256:bc761a0d0b0c54f5d12e8b0dc366aa958025e9f6d8c9c2bfc574f6b59b11fd3e"
       },
-      "contentDigest": "sha256:7583bdbf61431c3bdcc1106729eafd37fb50b1d427ca99a81ea63da14de9ea85"
+      "contentDigest": "sha256:0b00eddab35c7242f94f044e3d9f3cac85f19615da3cb321f3df36d2c57b12aa"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -7296,6 +8842,7 @@
             "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/operator-guide",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/controls",
             "property-home: https://www.maha-os.com/"
           ]
         }
@@ -7348,6 +8895,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_1754ab6d9ccee1ef6778e37e"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/controls",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_385955fc6e2a9a940a3deec3"
         },
         {
           "url": "https://www.maha-os.com/",
@@ -7465,7 +9018,7 @@
         "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
         "packetDigest": "sha256:bc761a0d0b0c54f5d12e8b0dc366aa958025e9f6d8c9c2bfc574f6b59b11fd3e"
       },
-      "contentDigest": "sha256:7a1a378461ec0214ecb0e9d401044307d5a02c7e34b304e0c9a6d477be54ebb9"
+      "contentDigest": "sha256:645a075319d49ef01ed2d03f4f629fd0d1895221338f49cbe230fee173e13b7c"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -7550,6 +9103,7 @@
             "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/failure-mode",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/controls",
             "property-home: https://www.maha-os.com/"
           ]
         }
@@ -7602,6 +9156,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_3dee4cb4d23a8de9ae7a7e1d"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/controls",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_385955fc6e2a9a940a3deec3"
         },
         {
           "url": "https://www.maha-os.com/",
@@ -7719,8 +9279,8 @@
         "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
         "packetDigest": "sha256:bc761a0d0b0c54f5d12e8b0dc366aa958025e9f6d8c9c2bfc574f6b59b11fd3e"
       },
-      "contentDigest": "sha256:23e947a3c2c3e10e9e6d1b7aa0e57d9eac2d697129d7919307ff8ecb8b35ff74"
+      "contentDigest": "sha256:2d1316e3116f85838113235a9f0a532b8e0b18e710a5efb82a672b66d0ceca84"
     }
   ],
-  "provenanceDigest": "sha256:27573a3b5b537fdad20b292ebff03dad300fb1f4a1be7170edb5f3c347ec3f66"
+  "provenanceDigest": "sha256:409d372d614228698223b5fec043e59b9d4d16077d89101e08dd9980f0e35997"
 }

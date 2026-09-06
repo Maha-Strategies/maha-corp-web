@@ -2,11 +2,11 @@
   "schemaVersion": "maha-federation-property-pages/1.0",
   "siteId": "mayon-rajan",
   "canonicalHost": "mayonrajan.com",
-  "registryDigest": "sha256:1aea68733b6703ce13aa75e2cf0562a22b6f68b3ee70a5dc43d81c8c89f0a772",
+  "registryDigest": "sha256:7ff9243e1e619640969fa4d64d4f519b0a9712239412a538faa4045351234308",
   "status": "local-unreleased",
   "counts": {
-    "pages": 25,
-    "readyForOwnerIntegration": 25,
+    "pages": 30,
+    "readyForOwnerIntegration": 30,
     "blockedOnUnreadyPrerequisite": 0
   },
   "pages": [
@@ -90,6 +90,7 @@
           "paragraphs": [
             "localDefinition: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
             "same-topic-application: https://mayonrajan.com/mayon-volcano/hazard-zones/limits",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/hazard-zones/official-sources",
             "property-home: https://mayonrajan.com/"
           ]
         }
@@ -122,6 +123,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_2f1a3a71e1f98dead537418a"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/official-sources",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_529ddb809984fafb9b4b02db"
         },
         {
           "url": "https://mayonrajan.com/",
@@ -239,7 +246,7 @@
         "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
         "packetDigest": "sha256:c40d9875f187d20df15aab6f50af57459ba0c1db895a31e241ef2f4de6c932a4"
       },
-      "contentDigest": "sha256:2df78130790ea91b3588f52fb29649bc7afab6a6fcfce68777cafa904e464188"
+      "contentDigest": "sha256:d6c0a3ef1230bf24cb03f43d57a74dff42c15e979a1eb485d87b4b2f3b78fe21"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -320,6 +327,7 @@
           "kind": "relationships",
           "paragraphs": [
             "same-topic-application: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/hazard-zones/official-sources",
             "property-home: https://mayonrajan.com/"
           ]
         }
@@ -346,6 +354,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_b278a387341dd14ef01c0a2c"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/official-sources",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_529ddb809984fafb9b4b02db"
         },
         {
           "url": "https://mayonrajan.com/",
@@ -463,7 +477,238 @@
         "packetManifestDigest": "sha256:4971a0090532da8d9ea487ab3205cefc7c82ac3b0a4b208465438148e7431449",
         "packetDigest": "sha256:83451e5ab7f4396e4c6229e8b2986a43529bf15f0e70e1a506ce7febfd2a68a9"
       },
-      "contentDigest": "sha256:cc0586f97361abf07feba4092dcd509a00171c1fb76d4fe51958b6d489092f08"
+      "contentDigest": "sha256:f8a45f23041bbdfae761447651e090aeeae5bf9e7b9fa4b8a8a0bf95e4cfff34"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_529ddb809984fafb9b4b02db",
+      "tranche": 6,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/hazard-zones/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/hazard-zones/official-sources",
+      "title": "Hazard Zones — Official Sources",
+      "topic": "hazard-zones",
+      "routeRole": "official-sources",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:hazard-zones",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:hazard-zones"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Hazard Zones, in this official-source guide, is limited to the following inspected scope. Official hazard-map categories and map provenance. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Hazard Zones, in this official-source guide, is limited to the following inspected scope. Official hazard-map categories and map provenance. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Official Source guide",
+          "kind": "role-method",
+          "paragraphs": [
+            "Identify the operational authority and explain how to find its freshest dated statement.",
+            "This page never substitutes for a current bulletin, evacuation order, or local authority.",
+            "Applied scope: Official hazard-map categories and map provenance."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Mayon Volcano Hazard Maps — Mayon Volcano Hazard Maps: pyroclastic flow, lahar, lava flow, and ash fall. Establishes: Official hazard-map categories and map provenance."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "A static guide never substitutes for the current PHIVOLCS alert level, bulletin, evacuation order, or local authority.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/hazard-zones/limits",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "phivolcs-hazards",
+          "title": "Mayon Volcano Hazard Maps",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "current landing page inspected 2026-09-05",
+          "sourceClass": "official-hazard-source",
+          "url": "https://www.phivolcs.dost.gov.ph/volcano-hazard/",
+          "locator": "Mayon Volcano Hazard Maps: pyroclastic flow, lahar, lava flow, and ash fall",
+          "establishes": "Official hazard-map categories and map provenance.",
+          "doesNotEstablish": "A static guide never substitutes for the current PHIVOLCS alert level, bulletin, evacuation order, or local authority.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_2f1a3a71e1f98dead537418a"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Hazard Zones mean in this bounded context?",
+          "answer": "Hazard Zones, in this official-source guide, is limited to the following inspected scope. Official hazard-map categories and map provenance. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this official sources answer?",
+          "answer": "Mayon Volcano Hazard Maps (current landing page inspected 2026-09-05), at Mayon Volcano Hazard Maps: pyroclastic flow, lahar, lava flow, and ash fall, supports official hazard-map categories and map provenance."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "A static guide never substitutes for the current PHIVOLCS alert level, bulletin, evacuation order, or local authority. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/hazard-zones/official-sources#article",
+        "headline": "Hazard Zones — Official Sources",
+        "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/official-sources",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://www.phivolcs.dost.gov.ph/volcano-hazard/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Hazard Zones mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Hazard Zones, in this official-source guide, is limited to the following inspected scope. Official hazard-map categories and map provenance. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this official sources answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mayon Volcano Hazard Maps (current landing page inspected 2026-09-05), at Mayon Volcano Hazard Maps: pyroclastic flow, lahar, lava flow, and ash fall, supports official hazard-map categories and map provenance."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A static guide never substitutes for the current PHIVOLCS alert level, bulletin, evacuation order, or local authority. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-6",
+        "decisionManifestDigest": "sha256:41bdf0a0cede263e6923a228204c9be1d57252fe38d07bcdeab00f4b6f42efb2",
+        "decisionDigest": "sha256:2452fb64cd6a4cc985a7f72e85c32d0b7682e241697b3d05584b556c8859909d",
+        "specificationManifestDigest": "sha256:7f878a5b88a6f1793ca225ab97a1bbc69b4bcb786cc27208424e2efd0b526e9c",
+        "specificationDigest": "sha256:26a1dac7ef2873c611f9208cea4a0b2a4c3599003891aab5f8432d9e37c80f2c",
+        "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
+        "packetDigest": "sha256:ed1eec90d09d66c6e35b7ca8697648b0cc2dc1a1ca367e04ed2d76f35c329f9c"
+      },
+      "contentDigest": "sha256:07d3234437ca6594d75e12bd6b7a124f1829bd1078c2f410017f7d24d46ea5dd"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -5521,7 +5766,8 @@
             "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/limits",
             "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/official-sources",
             "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/preparedness",
-            "property-home: https://mayonrajan.com/"
+            "property-home: https://mayonrajan.com/",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/evidence"
           ]
         }
       ],
@@ -5591,6 +5837,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/official-alerts/evidence",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_36b107c4fbbcc21e63209168"
         }
       ],
       "boundedAnswers": [
@@ -5703,7 +5955,269 @@
         "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
         "packetDigest": "sha256:464ceaaa3dc21933f9e4232e91ea9b3dd0801060aea1edc85646383f3c37d587"
       },
-      "contentDigest": "sha256:42db0bcbe66d5897de021e13800cca39fbce92068a25d5e12b508fc96271a899"
+      "contentDigest": "sha256:f582a307689720622610ff5114a0f78eb3fa1587c5251213c3ded68f2be47e17"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_36b107c4fbbcc21e63209168",
+      "tranche": 6,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/official-alerts/evidence",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/official-alerts/evidence",
+      "title": "Official Alerts — Evidence",
+      "topic": "official-alerts",
+      "routeRole": "evidence",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:official-alerts",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:official-alerts"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Official Alerts, in this evidence assessment, is limited to the following inspected scope. Meaning and operational role of official Mayon alert levels. Primary route to dated official Mayon volcano bulletins. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Official Alerts, in this evidence assessment, is limited to the following inspected scope. Meaning and operational role of official Mayon alert levels. Primary route to dated official Mayon volcano bulletins. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Evidence assessment",
+          "kind": "role-method",
+          "paragraphs": [
+            "Bind each conclusion to the source and locator that can carry it, keeping contrary or missing evidence visible.",
+            "Evidence quality and sufficiency remain claim-specific; one source cannot automatically support every adjacent assertion.",
+            "Applied scope: Meaning and operational role of official Mayon alert levels. Primary route to dated official Mayon volcano bulletins."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Volcano Alert Levels — Mayon Volcano alert-level table and linked bulletin hierarchy. Establishes: Meaning and operational role of official Mayon alert levels.",
+            "Mayon Volcano Bulletin Archive — Mayon bulletin list, issue dates, and linked bulletin records. Establishes: Primary route to dated official Mayon volcano bulletins."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control.",
+            "An archive entry can become stale immediately; the latest official bulletin and local government instructions control.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/limits",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/official-sources",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "phivolcs-alert-levels",
+          "title": "Volcano Alert Levels",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "current official page inspected 2026-09-05",
+          "sourceClass": "official-hazard-source",
+          "url": "https://www2.phivolcs.dost.gov.ph/volcano/volcano-alert-levels/",
+          "locator": "Mayon Volcano alert-level table and linked bulletin hierarchy",
+          "establishes": "Meaning and operational role of official Mayon alert levels.",
+          "doesNotEstablish": "An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "phivolcs-mayon-bulletins",
+          "title": "Mayon Volcano Bulletin Archive",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "current archive inspected 2026-09-05",
+          "sourceClass": "official-hazard-source",
+          "url": "https://wovodat.phivolcs.dost.gov.ph/bulletin/list-of-bulletin?edate=&sdate=&type=&vdId=574",
+          "locator": "Mayon bulletin list, issue dates, and linked bulletin records",
+          "establishes": "Primary route to dated official Mayon volcano bulletins.",
+          "doesNotEstablish": "An archive entry can become stale immediately; the latest official bulletin and local government instructions control.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/official-alerts/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_5eedf7642252330cb10edc4b"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/official-alerts/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_f8e337ad1934c31c65dcea4d"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/official-alerts/official-sources",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_74e804dbf2febe142c6f4a1f"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Official Alerts mean in this bounded context?",
+          "answer": "Official Alerts, in this evidence assessment, is limited to the following inspected scope. Meaning and operational role of official Mayon alert levels. Primary route to dated official Mayon volcano bulletins. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this evidence answer?",
+          "answer": "Volcano Alert Levels (current official page inspected 2026-09-05), at Mayon Volcano alert-level table and linked bulletin hierarchy, supports meaning and operational role of official Mayon alert levels. Mayon Volcano Bulletin Archive (current archive inspected 2026-09-05), at Mayon bulletin list, issue dates, and linked bulletin records, supports primary route to dated official Mayon volcano bulletins."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control. An archive entry can become stale immediately; the latest official bulletin and local government instructions control. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/official-alerts/evidence#article",
+        "headline": "Official Alerts — Evidence",
+        "url": "https://mayonrajan.com/mayon-volcano/official-alerts/evidence",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://www2.phivolcs.dost.gov.ph/volcano/volcano-alert-levels/",
+          "https://wovodat.phivolcs.dost.gov.ph/bulletin/list-of-bulletin?edate=&sdate=&type=&vdId=574"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Official Alerts mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Official Alerts, in this evidence assessment, is limited to the following inspected scope. Meaning and operational role of official Mayon alert levels. Primary route to dated official Mayon volcano bulletins. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this evidence answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Volcano Alert Levels (current official page inspected 2026-09-05), at Mayon Volcano alert-level table and linked bulletin hierarchy, supports meaning and operational role of official Mayon alert levels. Mayon Volcano Bulletin Archive (current archive inspected 2026-09-05), at Mayon bulletin list, issue dates, and linked bulletin records, supports primary route to dated official Mayon volcano bulletins."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control. An archive entry can become stale immediately; the latest official bulletin and local government instructions control. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-6",
+        "decisionManifestDigest": "sha256:41bdf0a0cede263e6923a228204c9be1d57252fe38d07bcdeab00f4b6f42efb2",
+        "decisionDigest": "sha256:e8b899f8165cc44b079345bb0b190584ced8e4979ac39009e3b9e95ad1161786",
+        "specificationManifestDigest": "sha256:7f878a5b88a6f1793ca225ab97a1bbc69b4bcb786cc27208424e2efd0b526e9c",
+        "specificationDigest": "sha256:5507ef333f4b9b10bbaf1d9b3dba0fbb763fb5be32a7b994bbb531c739982f0c",
+        "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
+        "packetDigest": "sha256:0205e725d7dc641b6021d6c77a68592a0b82b683acdecb67fc1d57c8f13e6908"
+      },
+      "contentDigest": "sha256:5ff3f7413fd7119678d88a588cefa1d38573e920aa951a7b41e4117b1c76e876"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -5789,7 +6303,8 @@
             "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/definition",
             "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/official-sources",
             "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/preparedness",
-            "property-home: https://mayonrajan.com/"
+            "property-home: https://mayonrajan.com/",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/evidence"
           ]
         }
       ],
@@ -5853,6 +6368,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/official-alerts/evidence",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_36b107c4fbbcc21e63209168"
         }
       ],
       "boundedAnswers": [
@@ -5965,7 +6486,7 @@
         "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
         "packetDigest": "sha256:464ceaaa3dc21933f9e4232e91ea9b3dd0801060aea1edc85646383f3c37d587"
       },
-      "contentDigest": "sha256:ecc37127e5d5504930112d05338298cb94fb75d71edb1db459edc3a3bc1a7708"
+      "contentDigest": "sha256:ed65066021b508533dc666596440117b4be309fc59a11081695cc67c23e25395"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -6051,7 +6572,8 @@
             "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/definition",
             "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/limits",
             "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/preparedness",
-            "property-home: https://mayonrajan.com/"
+            "property-home: https://mayonrajan.com/",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/evidence"
           ]
         }
       ],
@@ -6115,6 +6637,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/official-alerts/evidence",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_36b107c4fbbcc21e63209168"
         }
       ],
       "boundedAnswers": [
@@ -6227,7 +6755,7 @@
         "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
         "packetDigest": "sha256:ecbebef0aaaada9bc8c0836597d716066c5e132c029d4313dfbca54d8e3a9459"
       },
-      "contentDigest": "sha256:ceec662011ea584d0dac6e303e555c8ce48ee0c02d4aa295e412adddf2729da0"
+      "contentDigest": "sha256:752f43cd3bef64a6495fc0a34df69532585b751278a0079bd89d0ff97d800b60"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -6313,7 +6841,8 @@
             "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/definition",
             "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/limits",
             "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/official-sources",
-            "property-home: https://mayonrajan.com/"
+            "property-home: https://mayonrajan.com/",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/evidence"
           ]
         }
       ],
@@ -6377,6 +6906,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/official-alerts/evidence",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_36b107c4fbbcc21e63209168"
         }
       ],
       "boundedAnswers": [
@@ -6489,8 +7024,773 @@
         "packetManifestDigest": "sha256:4971a0090532da8d9ea487ab3205cefc7c82ac3b0a4b208465438148e7431449",
         "packetDigest": "sha256:399357b0a7ba839948a1fdb9cf8ccb6603809502b1b0b55a57d3b11951feb966"
       },
-      "contentDigest": "sha256:68401565f3e41af0ce4cb381318247f63c63f92938e157a48fa7d4b042d2e662"
+      "contentDigest": "sha256:7f73c08b919ff44f344f1b915ca6031c40f8804ece2d272b361dca6a7ba28674"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_21e911047e19ddbd802510ec",
+      "tranche": 6,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/seismicity/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/seismicity/definition",
+      "title": "Seismicity — Definition",
+      "topic": "seismicity",
+      "routeRole": "definition",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:seismicity",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:seismicity"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Seismicity, in this definition, is limited to the following inspected scope. PHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements. Earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Seismicity, in this definition, is limited to the following inspected scope. PHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements. Earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Definition",
+          "kind": "role-method",
+          "paragraphs": [
+            "Use the term only for the source-backed scope stated here; keep adjacent concepts separate unless a typed relationship is explicit.",
+            "A useful definition states both inclusion and exclusion conditions so a machine answer cannot silently widen it.",
+            "Applied scope: PHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements. Earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Mayon Volcano monitoring instruments — Camera, volcano-station earthquake record, and RSAM instrument panels; page disclaimer. Establishes: PHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements.",
+            "Monitoring volcano seismicity provides insight to volcanic structure — Volcano-seismicity monitoring and interpretation sections. Establishes: Earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Values are time-sensitive and cannot be independently interpreted as current behavior or a forecast without PHIVOLCS evaluation; this packet records no current alert level or numerical reading.",
+            "General U.S. science is not Mayon’s operational authority, and seismicity alone does not determine eruption timing, hazard-zone status, or public action.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/seismicity/official-sources",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/seismicity/limits",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "phivolcs-mayon-instruments",
+          "title": "Mayon Volcano monitoring instruments",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "live official page inspected 2026-09-06",
+          "sourceClass": "official-hazard-source",
+          "url": "https://volcano.phivolcs.dost.gov.ph/monitor/instruments?volcano=mvo",
+          "locator": "Camera, volcano-station earthquake record, and RSAM instrument panels; page disclaimer",
+          "establishes": "PHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements.",
+          "doesNotEstablish": "Values are time-sensitive and cannot be independently interpreted as current behavior or a forecast without PHIVOLCS evaluation; this packet records no current alert level or numerical reading.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "usgs-volcano-seismicity",
+          "title": "Monitoring volcano seismicity provides insight to volcanic structure",
+          "responsibleBody": "U.S. Geological Survey",
+          "versionOrDate": "program explanation inspected 2026-09-06",
+          "sourceClass": "government-science",
+          "url": "https://www.usgs.gov/programs/VHP/monitoring-volcano-seismicity-provides-insight-volcanic-structure",
+          "locator": "Volcano-seismicity monitoring and interpretation sections",
+          "establishes": "Earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations.",
+          "doesNotEstablish": "General U.S. science is not Mayon’s operational authority, and seismicity alone does not determine eruption timing, hazard-zone status, or public action.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/seismicity/official-sources",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_5ad799fae01ca9f0513933d1"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/seismicity/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_ed153b1269df6192eb6ddfa5"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Seismicity mean in this bounded context?",
+          "answer": "Seismicity, in this definition, is limited to the following inspected scope. PHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements. Earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this definition answer?",
+          "answer": "Mayon Volcano monitoring instruments (live official page inspected 2026-09-06), at Camera, volcano-station earthquake record, and RSAM instrument panels; page disclaimer, supports pHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements. Monitoring volcano seismicity provides insight to volcanic structure (program explanation inspected 2026-09-06), at Volcano-seismicity monitoring and interpretation sections, supports earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Values are time-sensitive and cannot be independently interpreted as current behavior or a forecast without PHIVOLCS evaluation; this packet records no current alert level or numerical reading. General U.S. science is not Mayon’s operational authority, and seismicity alone does not determine eruption timing, hazard-zone status, or public action. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/seismicity/definition#article",
+        "headline": "Seismicity — Definition",
+        "url": "https://mayonrajan.com/mayon-volcano/seismicity/definition",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://volcano.phivolcs.dost.gov.ph/monitor/instruments?volcano=mvo",
+          "https://www.usgs.gov/programs/VHP/monitoring-volcano-seismicity-provides-insight-volcanic-structure"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Seismicity mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Seismicity, in this definition, is limited to the following inspected scope. PHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements. Earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this definition answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mayon Volcano monitoring instruments (live official page inspected 2026-09-06), at Camera, volcano-station earthquake record, and RSAM instrument panels; page disclaimer, supports pHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements. Monitoring volcano seismicity provides insight to volcanic structure (program explanation inspected 2026-09-06), at Volcano-seismicity monitoring and interpretation sections, supports earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Values are time-sensitive and cannot be independently interpreted as current behavior or a forecast without PHIVOLCS evaluation; this packet records no current alert level or numerical reading. General U.S. science is not Mayon’s operational authority, and seismicity alone does not determine eruption timing, hazard-zone status, or public action. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-6",
+        "decisionManifestDigest": "sha256:41bdf0a0cede263e6923a228204c9be1d57252fe38d07bcdeab00f4b6f42efb2",
+        "decisionDigest": "sha256:c35a3e4334c7ca84833c5d06caf8422549a4ff5a73baffef877e4a7e66fe8481",
+        "specificationManifestDigest": "sha256:7f878a5b88a6f1793ca225ab97a1bbc69b4bcb786cc27208424e2efd0b526e9c",
+        "specificationDigest": "sha256:542b5148d42e6f1e948a43b28732244fd89a24127f5e669ad73d3e91521725b9",
+        "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
+        "packetDigest": "sha256:9aa03809c5e375deaaff41934a3b332f2c28954d97681cda46a1aeb5a899ee59"
+      },
+      "contentDigest": "sha256:0ca61cf34b6f5a112dc820570ff27a45fc7c93ee921af9ee818cf877068f40c2"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_ed153b1269df6192eb6ddfa5",
+      "tranche": 6,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/seismicity/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/seismicity/limits",
+      "title": "Seismicity — Limits",
+      "topic": "seismicity",
+      "routeRole": "limits",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:seismicity",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:seismicity"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Seismicity, in this limits guide, is limited to the following inspected scope. PHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements. Earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Seismicity, in this limits guide, is limited to the following inspected scope. PHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements. Earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Limits guide",
+          "kind": "role-method",
+          "paragraphs": [
+            "State the strongest supported boundary first and route time-sensitive decisions to the current authority.",
+            "A limits page must not turn a warning into a weaker version of the unsupported claim.",
+            "Applied scope: PHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements. Earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Mayon Volcano monitoring instruments — Camera, volcano-station earthquake record, and RSAM instrument panels; page disclaimer. Establishes: PHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements.",
+            "Monitoring volcano seismicity provides insight to volcanic structure — Volcano-seismicity monitoring and interpretation sections. Establishes: Earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Values are time-sensitive and cannot be independently interpreted as current behavior or a forecast without PHIVOLCS evaluation; this packet records no current alert level or numerical reading.",
+            "General U.S. science is not Mayon’s operational authority, and seismicity alone does not determine eruption timing, hazard-zone status, or public action.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/seismicity/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/seismicity/official-sources",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "phivolcs-mayon-instruments",
+          "title": "Mayon Volcano monitoring instruments",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "live official page inspected 2026-09-06",
+          "sourceClass": "official-hazard-source",
+          "url": "https://volcano.phivolcs.dost.gov.ph/monitor/instruments?volcano=mvo",
+          "locator": "Camera, volcano-station earthquake record, and RSAM instrument panels; page disclaimer",
+          "establishes": "PHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements.",
+          "doesNotEstablish": "Values are time-sensitive and cannot be independently interpreted as current behavior or a forecast without PHIVOLCS evaluation; this packet records no current alert level or numerical reading.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "usgs-volcano-seismicity",
+          "title": "Monitoring volcano seismicity provides insight to volcanic structure",
+          "responsibleBody": "U.S. Geological Survey",
+          "versionOrDate": "program explanation inspected 2026-09-06",
+          "sourceClass": "government-science",
+          "url": "https://www.usgs.gov/programs/VHP/monitoring-volcano-seismicity-provides-insight-volcanic-structure",
+          "locator": "Volcano-seismicity monitoring and interpretation sections",
+          "establishes": "Earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations.",
+          "doesNotEstablish": "General U.S. science is not Mayon’s operational authority, and seismicity alone does not determine eruption timing, hazard-zone status, or public action.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/seismicity/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_21e911047e19ddbd802510ec"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/seismicity/official-sources",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_5ad799fae01ca9f0513933d1"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Seismicity mean in this bounded context?",
+          "answer": "Seismicity, in this limits guide, is limited to the following inspected scope. PHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements. Earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this limits answer?",
+          "answer": "Mayon Volcano monitoring instruments (live official page inspected 2026-09-06), at Camera, volcano-station earthquake record, and RSAM instrument panels; page disclaimer, supports pHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements. Monitoring volcano seismicity provides insight to volcanic structure (program explanation inspected 2026-09-06), at Volcano-seismicity monitoring and interpretation sections, supports earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Values are time-sensitive and cannot be independently interpreted as current behavior or a forecast without PHIVOLCS evaluation; this packet records no current alert level or numerical reading. General U.S. science is not Mayon’s operational authority, and seismicity alone does not determine eruption timing, hazard-zone status, or public action. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/seismicity/limits#article",
+        "headline": "Seismicity — Limits",
+        "url": "https://mayonrajan.com/mayon-volcano/seismicity/limits",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://volcano.phivolcs.dost.gov.ph/monitor/instruments?volcano=mvo",
+          "https://www.usgs.gov/programs/VHP/monitoring-volcano-seismicity-provides-insight-volcanic-structure"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Seismicity mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Seismicity, in this limits guide, is limited to the following inspected scope. PHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements. Earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this limits answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mayon Volcano monitoring instruments (live official page inspected 2026-09-06), at Camera, volcano-station earthquake record, and RSAM instrument panels; page disclaimer, supports pHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements. Monitoring volcano seismicity provides insight to volcanic structure (program explanation inspected 2026-09-06), at Volcano-seismicity monitoring and interpretation sections, supports earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Values are time-sensitive and cannot be independently interpreted as current behavior or a forecast without PHIVOLCS evaluation; this packet records no current alert level or numerical reading. General U.S. science is not Mayon’s operational authority, and seismicity alone does not determine eruption timing, hazard-zone status, or public action. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-6",
+        "decisionManifestDigest": "sha256:41bdf0a0cede263e6923a228204c9be1d57252fe38d07bcdeab00f4b6f42efb2",
+        "decisionDigest": "sha256:b31d4c3c2c9412c3aeac416870f1d1a9a688923b29e8d079e59bc479b7087ebb",
+        "specificationManifestDigest": "sha256:7f878a5b88a6f1793ca225ab97a1bbc69b4bcb786cc27208424e2efd0b526e9c",
+        "specificationDigest": "sha256:3f1e68fd737f1ea99f832739d4d2fcf1fd29efb05238ee41db2b9db7916147eb",
+        "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
+        "packetDigest": "sha256:9aa03809c5e375deaaff41934a3b332f2c28954d97681cda46a1aeb5a899ee59"
+      },
+      "contentDigest": "sha256:cbe8cf3d9d791ed43d614ef6281d56f32701fe13ac0a7000ce2cdcf317e4f9fe"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_5ad799fae01ca9f0513933d1",
+      "tranche": 6,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/seismicity/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/seismicity/official-sources",
+      "title": "Seismicity — Official Sources",
+      "topic": "seismicity",
+      "routeRole": "official-sources",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:seismicity",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:seismicity"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Seismicity, in this official-source guide, is limited to the following inspected scope. PHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements. Earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Seismicity, in this official-source guide, is limited to the following inspected scope. PHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements. Earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Official Source guide",
+          "kind": "role-method",
+          "paragraphs": [
+            "Identify the operational authority and explain how to find its freshest dated statement.",
+            "This page never substitutes for a current bulletin, evacuation order, or local authority.",
+            "Applied scope: PHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements. Earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Mayon Volcano monitoring instruments — Camera, volcano-station earthquake record, and RSAM instrument panels; page disclaimer. Establishes: PHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements.",
+            "Monitoring volcano seismicity provides insight to volcanic structure — Volcano-seismicity monitoring and interpretation sections. Establishes: Earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Values are time-sensitive and cannot be independently interpreted as current behavior or a forecast without PHIVOLCS evaluation; this packet records no current alert level or numerical reading.",
+            "General U.S. science is not Mayon’s operational authority, and seismicity alone does not determine eruption timing, hazard-zone status, or public action.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/seismicity/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/seismicity/limits",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "phivolcs-mayon-instruments",
+          "title": "Mayon Volcano monitoring instruments",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "live official page inspected 2026-09-06",
+          "sourceClass": "official-hazard-source",
+          "url": "https://volcano.phivolcs.dost.gov.ph/monitor/instruments?volcano=mvo",
+          "locator": "Camera, volcano-station earthquake record, and RSAM instrument panels; page disclaimer",
+          "establishes": "PHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements.",
+          "doesNotEstablish": "Values are time-sensitive and cannot be independently interpreted as current behavior or a forecast without PHIVOLCS evaluation; this packet records no current alert level or numerical reading.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "usgs-volcano-seismicity",
+          "title": "Monitoring volcano seismicity provides insight to volcanic structure",
+          "responsibleBody": "U.S. Geological Survey",
+          "versionOrDate": "program explanation inspected 2026-09-06",
+          "sourceClass": "government-science",
+          "url": "https://www.usgs.gov/programs/VHP/monitoring-volcano-seismicity-provides-insight-volcanic-structure",
+          "locator": "Volcano-seismicity monitoring and interpretation sections",
+          "establishes": "Earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations.",
+          "doesNotEstablish": "General U.S. science is not Mayon’s operational authority, and seismicity alone does not determine eruption timing, hazard-zone status, or public action.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/seismicity/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_21e911047e19ddbd802510ec"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/seismicity/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_ed153b1269df6192eb6ddfa5"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Seismicity mean in this bounded context?",
+          "answer": "Seismicity, in this official-source guide, is limited to the following inspected scope. PHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements. Earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this official sources answer?",
+          "answer": "Mayon Volcano monitoring instruments (live official page inspected 2026-09-06), at Camera, volcano-station earthquake record, and RSAM instrument panels; page disclaimer, supports pHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements. Monitoring volcano seismicity provides insight to volcanic structure (program explanation inspected 2026-09-06), at Volcano-seismicity monitoring and interpretation sections, supports earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Values are time-sensitive and cannot be independently interpreted as current behavior or a forecast without PHIVOLCS evaluation; this packet records no current alert level or numerical reading. General U.S. science is not Mayon’s operational authority, and seismicity alone does not determine eruption timing, hazard-zone status, or public action. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/seismicity/official-sources#article",
+        "headline": "Seismicity — Official Sources",
+        "url": "https://mayonrajan.com/mayon-volcano/seismicity/official-sources",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://volcano.phivolcs.dost.gov.ph/monitor/instruments?volcano=mvo",
+          "https://www.usgs.gov/programs/VHP/monitoring-volcano-seismicity-provides-insight-volcanic-structure"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Seismicity mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Seismicity, in this official-source guide, is limited to the following inspected scope. PHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements. Earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this official sources answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mayon Volcano monitoring instruments (live official page inspected 2026-09-06), at Camera, volcano-station earthquake record, and RSAM instrument panels; page disclaimer, supports pHIVOLCS exposes Mayon-specific instrument observations including earthquake records and real-time seismic amplitude measurements. Monitoring volcano seismicity provides insight to volcanic structure (program explanation inspected 2026-09-06), at Volcano-seismicity monitoring and interpretation sections, supports earthquake locations, types, rates, and patterns can inform models of volcanic structure and changing processes when interpreted with other observations."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Values are time-sensitive and cannot be independently interpreted as current behavior or a forecast without PHIVOLCS evaluation; this packet records no current alert level or numerical reading. General U.S. science is not Mayon’s operational authority, and seismicity alone does not determine eruption timing, hazard-zone status, or public action. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-6",
+        "decisionManifestDigest": "sha256:41bdf0a0cede263e6923a228204c9be1d57252fe38d07bcdeab00f4b6f42efb2",
+        "decisionDigest": "sha256:6f3438f24c02355d8b2f287e025edc13500e912bded03e17fcc020b50eaee7b8",
+        "specificationManifestDigest": "sha256:7f878a5b88a6f1793ca225ab97a1bbc69b4bcb786cc27208424e2efd0b526e9c",
+        "specificationDigest": "sha256:1be7e18f5c6152a3bea2098b086509c1bb76dce8026fe70961310efd40d25d1f",
+        "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
+        "packetDigest": "sha256:9aa03809c5e375deaaff41934a3b332f2c28954d97681cda46a1aeb5a899ee59"
+      },
+      "contentDigest": "sha256:85091f0deb1bc654c1c87abd0caa93f697d9cb118f1b219646806a0e7760e028"
     }
   ],
-  "provenanceDigest": "sha256:870f3d1ea0932721c1026df7475efa10c938656da8900a44f3a50530bfaaa139"
+  "provenanceDigest": "sha256:9ff0de56fb831df699e5683d14253ddcc56a6e964aeda8f3f4244ad307e17847"
 }

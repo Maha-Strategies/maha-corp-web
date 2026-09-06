@@ -3,7 +3,7 @@
   "siteId": "maha-os",
   "canonicalHost": "www.maha-os.com",
   "rootPath": "/knowledge/",
-  "sourceManifestDigest": "sha256:27573a3b5b537fdad20b292ebff03dad300fb1f4a1be7170edb5f3c347ec3f66",
+  "sourceManifestDigest": "sha256:409d372d614228698223b5fec043e59b9d4d16077d89101e08dd9980f0e35997",
   "state": "local-owner-handoff",
   "ownerIntegration": {
     "routeShape": "/knowledge/[...segments]",
@@ -16,8 +16,8 @@
     "activeCanonicalReleaseRequired": true
   },
   "counts": {
-    "routes": 30,
-    "boundedAnswers": 150,
+    "routes": 36,
+    "boundedAnswers": 180,
     "publicRoutesCreated": 0,
     "buildsRun": 0
   },
@@ -32,7 +32,18 @@
         "biometric-data-boundary",
         "definition"
       ],
-      "contentDigest": "sha256:1ca452a36dd0eba3134825703769acfc9e3f21521e30c1c49006d7bbd3b75694"
+      "contentDigest": "sha256:c04fb63288ed37c9abbed7b4e74593ef4a22018a8ef02928c54fe172811b484e"
+    },
+    {
+      "candidateId": "cand_c7d73663e2740217ef1b14fe",
+      "path": "/knowledge/private-machine-systems/biometric-data-boundary/failure-mode",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/biometric-data-boundary/failure-mode",
+      "segments": [
+        "private-machine-systems",
+        "biometric-data-boundary",
+        "failure-mode"
+      ],
+      "contentDigest": "sha256:6227ed24dbcb1756657df7abc91e30ff7802c17397fbca5b3b48c7a325b4bf12"
     },
     {
       "candidateId": "cand_5c6e90c179c29d5cffb39ecf",
@@ -43,7 +54,40 @@
         "biometric-data-boundary",
         "operator-guide"
       ],
-      "contentDigest": "sha256:70f12d98c51ae0912a0ce642d9d717f48594559d5b0a7e6e2bb2abc20f4f8bab"
+      "contentDigest": "sha256:0bca47b0d6240862dc41dbc9e7d07c005b81ef02ed108b5f4256f7c543e15fc2"
+    },
+    {
+      "candidateId": "cand_0e7905800b3bd5899ce9114b",
+      "path": "/knowledge/private-machine-systems/caregiver-access/definition",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/caregiver-access/definition",
+      "segments": [
+        "private-machine-systems",
+        "caregiver-access",
+        "definition"
+      ],
+      "contentDigest": "sha256:27d22d9b70402a7ec8a1fce0fbd875aafdcafec7f31633b04a2fe517f4d3d74e"
+    },
+    {
+      "candidateId": "cand_575613c55a6e10a9e64cf387",
+      "path": "/knowledge/private-machine-systems/caregiver-access/operator-guide",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/caregiver-access/operator-guide",
+      "segments": [
+        "private-machine-systems",
+        "caregiver-access",
+        "operator-guide"
+      ],
+      "contentDigest": "sha256:4a11c47af5851fab6b84b7f08f4adffe2cf2c97ea1a0e668d76a70210d2c91bd"
+    },
+    {
+      "candidateId": "cand_cfc312cdb30a602f2f7c4b17",
+      "path": "/knowledge/private-machine-systems/device-identity/controls",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/controls",
+      "segments": [
+        "private-machine-systems",
+        "device-identity",
+        "controls"
+      ],
+      "contentDigest": "sha256:9f44ff3b61ff62e76b01d03bfee4f64b6aab48ffb12ab4ceee041ea6644b7533"
     },
     {
       "candidateId": "cand_f2e452a99e390ddae8b1001f",
@@ -54,7 +98,7 @@
         "device-identity",
         "definition"
       ],
-      "contentDigest": "sha256:af62988ed0a8885c74d684a5c5644b9983e6cb7fd930b5396396d2995c568d5a"
+      "contentDigest": "sha256:340d444b75e85cca25f29a6aea267d81f2f6ed91274d006a48c23fa7bf55f944"
     },
     {
       "candidateId": "cand_956bb7c77098dead14075f84",
@@ -65,7 +109,7 @@
         "device-identity",
         "failure-mode"
       ],
-      "contentDigest": "sha256:aab1ff2988f0dadd5fea76367fa314d47ed552d0f1e5791851f411ca919c64ab"
+      "contentDigest": "sha256:add7a4f1644792f5e479f11e6e6820ced1fc968a23e580098d49326d03416c41"
     },
     {
       "candidateId": "cand_9f41b4ed6746ae6e048f417f",
@@ -76,7 +120,7 @@
         "device-identity",
         "operator-guide"
       ],
-      "contentDigest": "sha256:6315549c22ec7478ca545d9e6a9c34f960a88329d07e266f8391be19ec1b115d"
+      "contentDigest": "sha256:1afa89e7e1e66ef262c356560f30fc38698c904a066aa44712ae153afea33840"
     },
     {
       "candidateId": "cand_671d652918d62414c37d751d",
@@ -87,7 +131,18 @@
         "health-data-consent",
         "definition"
       ],
-      "contentDigest": "sha256:53ba253d1d96c868e87034b05ae0fc5f5503ca9b73d300405c56310ae13ebe4b"
+      "contentDigest": "sha256:755403dfe97625e928759a76a25e8886ef152cf0ea4689bfe64f4e3b19b46d20"
+    },
+    {
+      "candidateId": "cand_1207aebf8f4d79925042c2e9",
+      "path": "/knowledge/private-machine-systems/health-data-consent/operator-guide",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/operator-guide",
+      "segments": [
+        "private-machine-systems",
+        "health-data-consent",
+        "operator-guide"
+      ],
+      "contentDigest": "sha256:726c3c158fe24a1db410424676612093655fe74749d1133379ed5d75c288622f"
     },
     {
       "candidateId": "cand_ace82901bef8f92c6772b148",
@@ -321,6 +376,17 @@
       "contentDigest": "sha256:37af22d74ef9d363ef8c8afe01745385fd27195aca2fc91fc9d12b856bed3a04"
     },
     {
+      "candidateId": "cand_385955fc6e2a9a940a3deec3",
+      "path": "/knowledge/private-machine-systems/resilience-mode/controls",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/controls",
+      "segments": [
+        "private-machine-systems",
+        "resilience-mode",
+        "controls"
+      ],
+      "contentDigest": "sha256:a64e938701a5630d7a0a1202857eb008bd31a915713b6b686e4de92a5354e3b5"
+    },
+    {
       "candidateId": "cand_d6cbea3163ab9349857186bf",
       "path": "/knowledge/private-machine-systems/resilience-mode/definition",
       "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/definition",
@@ -329,7 +395,7 @@
         "resilience-mode",
         "definition"
       ],
-      "contentDigest": "sha256:7583bdbf61431c3bdcc1106729eafd37fb50b1d427ca99a81ea63da14de9ea85"
+      "contentDigest": "sha256:0b00eddab35c7242f94f044e3d9f3cac85f19615da3cb321f3df36d2c57b12aa"
     },
     {
       "candidateId": "cand_3dee4cb4d23a8de9ae7a7e1d",
@@ -340,7 +406,7 @@
         "resilience-mode",
         "failure-mode"
       ],
-      "contentDigest": "sha256:7a1a378461ec0214ecb0e9d401044307d5a02c7e34b304e0c9a6d477be54ebb9"
+      "contentDigest": "sha256:645a075319d49ef01ed2d03f4f629fd0d1895221338f49cbe230fee173e13b7c"
     },
     {
       "candidateId": "cand_1754ab6d9ccee1ef6778e37e",
@@ -351,8 +417,8 @@
         "resilience-mode",
         "operator-guide"
       ],
-      "contentDigest": "sha256:23e947a3c2c3e10e9e6d1b7aa0e57d9eac2d697129d7919307ff8ecb8b35ff74"
+      "contentDigest": "sha256:2d1316e3116f85838113235a9f0a532b8e0b18e710a5efb82a672b66d0ceca84"
     }
   ],
-  "provenanceDigest": "sha256:bc26391e21ae648054b1d28585000107be13479de06cceed959cadfbe59fcd70"
+  "provenanceDigest": "sha256:40c9cd4252997dbf2a42b6ae1c54e738584e907a776060871d56c920dc87fc4d"
 }

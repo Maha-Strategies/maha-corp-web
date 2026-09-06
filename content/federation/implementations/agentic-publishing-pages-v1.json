@@ -2,12 +2,12 @@
   "schemaVersion": "maha-federation-property-pages/1.0",
   "siteId": "agentic-publishing",
   "canonicalHost": "publish.mahastrategies.com",
-  "registryDigest": "sha256:1aea68733b6703ce13aa75e2cf0562a22b6f68b3ee70a5dc43d81c8c89f0a772",
+  "registryDigest": "sha256:7ff9243e1e619640969fa4d64d4f519b0a9712239412a538faa4045351234308",
   "status": "local-unreleased",
   "counts": {
-    "pages": 35,
-    "readyForOwnerIntegration": 32,
-    "blockedOnUnreadyPrerequisite": 3
+    "pages": 44,
+    "readyForOwnerIntegration": 37,
+    "blockedOnUnreadyPrerequisite": 7
   },
   "pages": [
     {
@@ -92,6 +92,7 @@
           "paragraphs": [
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/author-identity/example",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/author-identity/template",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/author-identity/machine-interface",
             "property-home: https://publish.mahastrategies.com/"
           ]
         }
@@ -138,6 +139,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_2a430cafdfca6ca39585df66"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/author-identity/machine-interface",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_27c7bb1d4880b18190caf0e6"
         },
         {
           "url": "https://publish.mahastrategies.com/",
@@ -256,7 +263,7 @@
         "packetManifestDigest": "sha256:99e2851a8c1660632b051cc797929b748faf9402f853adbd9afe8d027557edfa",
         "packetDigest": "sha256:9ef8cec0e8aca509a32172065ccb12add56a6cc6c46ae5c8afedd81e22bca12a"
       },
-      "contentDigest": "sha256:3074f3b50b3410e9c7d9d0beb2265688887e8bf2110b44815ebbdac6237f5568"
+      "contentDigest": "sha256:61466a4888999f60afa4532f7f088fbe6efd6bd7d183d0470c24463cf4e12b76"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -340,6 +347,7 @@
           "paragraphs": [
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/author-identity/definition",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/author-identity/template",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/author-identity/machine-interface",
             "property-home: https://publish.mahastrategies.com/"
           ]
         }
@@ -386,6 +394,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_2a430cafdfca6ca39585df66"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/author-identity/machine-interface",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_27c7bb1d4880b18190caf0e6"
         },
         {
           "url": "https://publish.mahastrategies.com/",
@@ -504,7 +518,262 @@
         "packetManifestDigest": "sha256:99e2851a8c1660632b051cc797929b748faf9402f853adbd9afe8d027557edfa",
         "packetDigest": "sha256:9ef8cec0e8aca509a32172065ccb12add56a6cc6c46ae5c8afedd81e22bca12a"
       },
-      "contentDigest": "sha256:17333f34a485f269242d124cf77e53a5ea498e2e389a303329ca866c99c8b8f9"
+      "contentDigest": "sha256:daf20bf6b9d6f06a457b835965475d83e48fe6577b157ff2b7dc30100432bd12"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_27c7bb1d4880b18190caf0e6",
+      "tranche": 6,
+      "siteId": "agentic-publishing",
+      "canonicalHost": "publish.mahastrategies.com",
+      "path": "/agentic-publishing/author-identity/machine-interface",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/author-identity/machine-interface",
+      "title": "Author Identity — Machine Interface",
+      "topic": "author-identity",
+      "routeRole": "machine-interface",
+      "concept": {
+        "conceptId": "urn:maha:concept:release:author-identity",
+        "familyId": "release",
+        "canonicalOwner": "agentic-publishing",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:release:author-identity"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:release"
+          }
+        ]
+      },
+      "directAnswer": "Author Identity, in this machine interface, is limited to the following inspected scope. OAuth-authenticated ORCID iDs associate a record holder with a persistent identifier and can be carried in research-output metadata. A controlled vocabulary distinguishes fourteen kinds of contribution to research outputs. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Author Identity, in this machine interface, is limited to the following inspected scope. OAuth-authenticated ORCID iDs associate a record holder with a persistent identifier and can be carried in research-output metadata. A controlled vocabulary distinguishes fourteen kinds of contribution to research outputs. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Machine interface",
+          "kind": "role-method",
+          "paragraphs": [
+            "Define request and response fields, versions, identifiers, error states, and replay behavior.",
+            "An interface contract must preserve unknown and refusal states and cannot imply a service is available.",
+            "Applied scope: OAuth-authenticated ORCID iDs associate a record holder with a persistent identifier and can be carried in research-output metadata. A controlled vocabulary distinguishes fourteen kinds of contribution to research outputs."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is agentic-publishing. This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish publishing protocols, editorial templates, release guidance. It must not publish duplicate research records or unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Collecting and sharing ORCID iDs — Why it is important to collect authenticated ORCID iDs; How it works; metadata passed downstream. Establishes: OAuth-authenticated ORCID iDs associate a record holder with a persistent identifier and can be carried in research-output metadata.",
+            "CRediT — Contributor Role Taxonomy — CRediT’s 14 Contributor Roles. Establishes: A controlled vocabulary distinguishes fourteen kinds of contribution to research outputs."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "An ORCID iD does not prove every biographical claim, contribution, affiliation, or authorship decision.",
+            "A contributor role does not by itself determine authorship, responsibility for every claim, identity, or contribution quality.",
+            "This route must not claim duplicate research records.",
+            "This route must not claim unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/author-identity/definition",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/author-identity/example",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/author-identity/template",
+            "property-home: https://publish.mahastrategies.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "orcid-authenticated-ids",
+          "title": "Collecting and sharing ORCID iDs",
+          "responsibleBody": "ORCID",
+          "versionOrDate": "living guidance inspected 2026-09-06",
+          "sourceClass": "scholarly-identity-guidance",
+          "url": "https://info.orcid.org/documentation/collecting-and-sharing-orcid-ids/",
+          "locator": "Why it is important to collect authenticated ORCID iDs; How it works; metadata passed downstream",
+          "establishes": "OAuth-authenticated ORCID iDs associate a record holder with a persistent identifier and can be carried in research-output metadata.",
+          "doesNotEstablish": "An ORCID iD does not prove every biographical claim, contribution, affiliation, or authorship decision.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "credit-taxonomy",
+          "title": "CRediT — Contributor Role Taxonomy",
+          "responsibleBody": "NISO",
+          "versionOrDate": "ANSI/NISO standard approved 2022; site inspected 2026-09-06",
+          "sourceClass": "scholarly-contribution-standard",
+          "url": "https://credit.niso.org/",
+          "locator": "CRediT’s 14 Contributor Roles",
+          "establishes": "A controlled vocabulary distinguishes fourteen kinds of contribution to research outputs.",
+          "doesNotEstablish": "A contributor role does not by itself determine authorship, responsibility for every claim, identity, or contribution quality.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/author-identity/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_a9631c8bc4e5b0e1b1c81f77"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/author-identity/example",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_c568f6d3e2e110108ee43107"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/author-identity/template",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_2a430cafdfca6ca39585df66"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Author Identity mean in this bounded context?",
+          "answer": "Author Identity, in this machine interface, is limited to the following inspected scope. OAuth-authenticated ORCID iDs associate a record holder with a persistent identifier and can be carried in research-output metadata. A controlled vocabulary distinguishes fourteen kinds of contribution to research outputs. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this machine interface answer?",
+          "answer": "Collecting and sharing ORCID iDs (living guidance inspected 2026-09-06), at Why it is important to collect authenticated ORCID iDs; How it works; metadata passed downstream, supports oAuth-authenticated ORCID iDs associate a record holder with a persistent identifier and can be carried in research-output metadata. CRediT — Contributor Role Taxonomy (ANSI/NISO standard approved 2022; site inspected 2026-09-06), at CRediT’s 14 Contributor Roles, supports a controlled vocabulary distinguishes fourteen kinds of contribution to research outputs."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "An ORCID iD does not prove every biographical claim, contribution, affiliation, or authorship decision. A contributor role does not by itself determine authorship, responsibility for every claim, identity, or contribution quality. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://publish.mahastrategies.com/agentic-publishing/author-identity/machine-interface#article",
+        "headline": "Author Identity — Machine Interface",
+        "url": "https://publish.mahastrategies.com/agentic-publishing/author-identity/machine-interface",
+        "isPartOf": "https://publish.mahastrategies.com/",
+        "citation": [
+          "https://info.orcid.org/documentation/collecting-and-sharing-orcid-ids/",
+          "https://credit.niso.org/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Author Identity mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Author Identity, in this machine interface, is limited to the following inspected scope. OAuth-authenticated ORCID iDs associate a record holder with a persistent identifier and can be carried in research-output metadata. A controlled vocabulary distinguishes fourteen kinds of contribution to research outputs. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this machine interface answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Collecting and sharing ORCID iDs (living guidance inspected 2026-09-06), at Why it is important to collect authenticated ORCID iDs; How it works; metadata passed downstream, supports oAuth-authenticated ORCID iDs associate a record holder with a persistent identifier and can be carried in research-output metadata. CRediT — Contributor Role Taxonomy (ANSI/NISO standard approved 2022; site inspected 2026-09-06), at CRediT’s 14 Contributor Roles, supports a controlled vocabulary distinguishes fourteen kinds of contribution to research outputs."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "An ORCID iD does not prove every biographical claim, contribution, affiliation, or authorship decision. A contributor role does not by itself determine authorship, responsibility for every claim, identity, or contribution quality. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-6",
+        "decisionManifestDigest": "sha256:41bdf0a0cede263e6923a228204c9be1d57252fe38d07bcdeab00f4b6f42efb2",
+        "decisionDigest": "sha256:ea818e00c52086143eff630077f841770d09749bf59287cd2eaf16b2284fba4b",
+        "specificationManifestDigest": "sha256:7f878a5b88a6f1793ca225ab97a1bbc69b4bcb786cc27208424e2efd0b526e9c",
+        "specificationDigest": "sha256:f269e09d4bcd0401bda12f13d7b08b889f7f372f41687bacf73cd2960d089697",
+        "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
+        "packetDigest": "sha256:6a4898bceb0f17db4f32935b719547a5e99e4ed8a3a87daf5a29b93d82d76ae4"
+      },
+      "contentDigest": "sha256:63dd5c689b78bf703af96e6520e4e35095c44914d5810b9e2a4c275a684b7e92"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -588,6 +857,7 @@
           "paragraphs": [
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/author-identity/definition",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/author-identity/example",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/author-identity/machine-interface",
             "property-home: https://publish.mahastrategies.com/"
           ]
         }
@@ -634,6 +904,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_c568f6d3e2e110108ee43107"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/author-identity/machine-interface",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_27c7bb1d4880b18190caf0e6"
         },
         {
           "url": "https://publish.mahastrategies.com/",
@@ -752,7 +1028,7 @@
         "packetManifestDigest": "sha256:4971a0090532da8d9ea487ab3205cefc7c82ac3b0a4b208465438148e7431449",
         "packetDigest": "sha256:8283aaf212adba7b67faffa65cfd5f458455c1e87449a2fec91c0d570a168fae"
       },
-      "contentDigest": "sha256:d2cedf5a63dacabe093fcb0044fee948f0c8baab6e6d4956fefef30ce4c958bb"
+      "contentDigest": "sha256:50e5a13bea1e03d19cf95a3b32f2a09649b9344f2ddec81c7c6b6718350446a1"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -837,7 +1113,8 @@
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/template",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/example",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/machine-interface",
-            "property-home: https://publish.mahastrategies.com/"
+            "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/governance"
           ]
         }
       ],
@@ -895,6 +1172,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/governance",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_543e095876946db8b4f2fa0c"
         }
       ],
       "boundedAnswers": [
@@ -1007,7 +1290,7 @@
         "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
         "packetDigest": "sha256:6f4534a43e0f261853973e7a98847d35d288370003e99d03f093041cf3c0cc6d"
       },
-      "contentDigest": "sha256:ac6e76d3aedb2b6689102b54fca69022f861f16822255299667e4a5523064ad1"
+      "contentDigest": "sha256:d26e9c06e32f0687280e11390c8b63f863dcce1931aec33ae263e98dfb3c16d2"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -1092,7 +1375,8 @@
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/definition",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/template",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/machine-interface",
-            "property-home: https://publish.mahastrategies.com/"
+            "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/governance"
           ]
         }
       ],
@@ -1150,6 +1434,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/governance",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_543e095876946db8b4f2fa0c"
         }
       ],
       "boundedAnswers": [
@@ -1262,7 +1552,269 @@
         "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
         "packetDigest": "sha256:6f4534a43e0f261853973e7a98847d35d288370003e99d03f093041cf3c0cc6d"
       },
-      "contentDigest": "sha256:ae8e929d8738bf6e7983187b82e550d1e2382eed549a4902facbfc7ee626488f"
+      "contentDigest": "sha256:4a02598b9c7937800b2ea820fba3f415e0ed1d6bceab3dc7e5ef2d96baec8d1a"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_543e095876946db8b4f2fa0c",
+      "tranche": 6,
+      "siteId": "agentic-publishing",
+      "canonicalHost": "publish.mahastrategies.com",
+      "path": "/agentic-publishing/editorial-intake/governance",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/governance",
+      "title": "Editorial Intake — Governance",
+      "topic": "editorial-intake",
+      "routeRole": "governance",
+      "concept": {
+        "conceptId": "urn:maha:concept:release:editorial-intake",
+        "familyId": "release",
+        "canonicalOwner": "agentic-publishing",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:release:editorial-intake"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:release"
+          }
+        ]
+      },
+      "directAnswer": "Editorial Intake, in this Governance, is limited to the following inspected scope. Documenting the search process and separating initial screening from full-text assessment. Human responsibility and confidentiality during submission and review. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Editorial Intake, in this Governance, is limited to the following inspected scope. Documenting the search process and separating initial screening from full-text assessment. Human responsibility and confidentiality during submission and review. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Governance",
+          "kind": "role-method",
+          "paragraphs": [
+            "Keep the answer within the inspected source scope and make every operational step or conceptual relation explicit.",
+            "Do not use completeness of presentation as a substitute for evidence, review, or release.",
+            "Applied scope: Documenting the search process and separating initial screening from full-text assessment. Human responsibility and confidentiality during submission and review."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is agentic-publishing. This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish publishing protocols, editorial templates, release guidance. It must not publish duplicate research records or unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Cochrane Handbook, Chapter 4: Searching for and selecting studies — Sections 4.5 and 4.6.3. Establishes: Documenting the search process and separating initial screening from full-text assessment.",
+            "Responsibilities in the Submission and Peer-Review Process — Author, journal, editor and reviewer responsibilities. Establishes: Human responsibility and confidentiality during submission and review."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "This is not a general publishing intake standard and does not authorize automated acceptance.",
+            "It does not define Maha fields, machine authorship, or release authority.",
+            "This route must not claim duplicate research records.",
+            "This route must not claim unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/definition",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/template",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/example",
+            "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/machine-interface"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "cochrane-intake",
+          "title": "Cochrane Handbook, Chapter 4: Searching for and selecting studies",
+          "responsibleBody": "Cochrane",
+          "versionOrDate": "version 6.5, updated March 2025",
+          "sourceClass": "scholarly-method",
+          "url": "https://training.cochrane.org/handbook/current/chapter-04",
+          "locator": "Sections 4.5 and 4.6.3",
+          "establishes": "Documenting the search process and separating initial screening from full-text assessment.",
+          "doesNotEstablish": "This is not a general publishing intake standard and does not authorize automated acceptance.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "icmje-intake",
+          "title": "Responsibilities in the Submission and Peer-Review Process",
+          "responsibleBody": "International Committee of Medical Journal Editors",
+          "versionOrDate": "living recommendation inspected 2026-09-06",
+          "sourceClass": "editorial-standard",
+          "url": "https://www.icmje.org/recommendations/browse/roles-and-responsibilities/responsibilities-in-the-submission-and-peer-peview-process.html",
+          "locator": "Author, journal, editor and reviewer responsibilities",
+          "establishes": "Human responsibility and confidentiality during submission and review.",
+          "doesNotEstablish": "It does not define Maha fields, machine authorship, or release authority.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_e581474a6bdb1c44a901a76b"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/template",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_714fb5d819282f35578f6c33"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/example",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_84b2316dc57f1e809d2360f6"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/machine-interface",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_cd443b8470ff9c933a9b76f2"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Editorial Intake mean in this bounded context?",
+          "answer": "Editorial Intake, in this Governance, is limited to the following inspected scope. Documenting the search process and separating initial screening from full-text assessment. Human responsibility and confidentiality during submission and review. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this governance answer?",
+          "answer": "Cochrane Handbook, Chapter 4: Searching for and selecting studies (version 6.5, updated March 2025), at Sections 4.5 and 4.6.3, supports documenting the search process and separating initial screening from full-text assessment. Responsibilities in the Submission and Peer-Review Process (living recommendation inspected 2026-09-06), at Author, journal, editor and reviewer responsibilities, supports human responsibility and confidentiality during submission and review."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "This is not a general publishing intake standard and does not authorize automated acceptance. It does not define Maha fields, machine authorship, or release authority. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/governance#article",
+        "headline": "Editorial Intake — Governance",
+        "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/governance",
+        "isPartOf": "https://publish.mahastrategies.com/",
+        "citation": [
+          "https://training.cochrane.org/handbook/current/chapter-04",
+          "https://www.icmje.org/recommendations/browse/roles-and-responsibilities/responsibilities-in-the-submission-and-peer-peview-process.html"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Editorial Intake mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Editorial Intake, in this Governance, is limited to the following inspected scope. Documenting the search process and separating initial screening from full-text assessment. Human responsibility and confidentiality during submission and review. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this governance answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Cochrane Handbook, Chapter 4: Searching for and selecting studies (version 6.5, updated March 2025), at Sections 4.5 and 4.6.3, supports documenting the search process and separating initial screening from full-text assessment. Responsibilities in the Submission and Peer-Review Process (living recommendation inspected 2026-09-06), at Author, journal, editor and reviewer responsibilities, supports human responsibility and confidentiality during submission and review."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This is not a general publishing intake standard and does not authorize automated acceptance. It does not define Maha fields, machine authorship, or release authority. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-6",
+        "decisionManifestDigest": "sha256:41bdf0a0cede263e6923a228204c9be1d57252fe38d07bcdeab00f4b6f42efb2",
+        "decisionDigest": "sha256:60d40711f9785588db21ba714d996664d66e93959f86b32c1b4c0244a0593cd1",
+        "specificationManifestDigest": "sha256:7f878a5b88a6f1793ca225ab97a1bbc69b4bcb786cc27208424e2efd0b526e9c",
+        "specificationDigest": "sha256:37e8e6bd408d34308a5342ffbd580e409616adc63266cfb411d10fb1197a4fdf",
+        "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
+        "packetDigest": "sha256:33bb08e2177d7b2c3d6ce139bfea72e1e408f0ce8db97375c50dbca75057fdb6"
+      },
+      "contentDigest": "sha256:8615ee31fb2ec57030de07412159bb2fa7bacc4bf7ae87faeda49ce9b1a1f280"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -1347,7 +1899,8 @@
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/definition",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/template",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/example",
-            "property-home: https://publish.mahastrategies.com/"
+            "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/governance"
           ]
         }
       ],
@@ -1405,6 +1958,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/governance",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_543e095876946db8b4f2fa0c"
         }
       ],
       "boundedAnswers": [
@@ -1517,7 +2076,269 @@
         "packetManifestDigest": "sha256:99e2851a8c1660632b051cc797929b748faf9402f853adbd9afe8d027557edfa",
         "packetDigest": "sha256:c607f2348d51d9e900c888504f1b6fe58a418f181acf55fe2a4b600495b00d1c"
       },
-      "contentDigest": "sha256:89a6c990aa6fa225b63655cfd6e792db65e00074646b6034452df84097ec02d5"
+      "contentDigest": "sha256:18b4f2fc68a7326c49b62f5beba5b45faf39a641f817e1913f96a420c1f6bc75"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_960d059b2b3335cdee7745af",
+      "tranche": 6,
+      "siteId": "agentic-publishing",
+      "canonicalHost": "publish.mahastrategies.com",
+      "path": "/agentic-publishing/editorial-intake/policy",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/policy",
+      "title": "Editorial Intake — Policy",
+      "topic": "editorial-intake",
+      "routeRole": "policy",
+      "concept": {
+        "conceptId": "urn:maha:concept:release:editorial-intake",
+        "familyId": "release",
+        "canonicalOwner": "agentic-publishing",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:release:editorial-intake"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:release"
+          }
+        ]
+      },
+      "directAnswer": "Editorial Intake, in this Policy, is limited to the following inspected scope. Documenting the search process and separating initial screening from full-text assessment. Human responsibility and confidentiality during submission and review. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Editorial Intake, in this Policy, is limited to the following inspected scope. Documenting the search process and separating initial screening from full-text assessment. Human responsibility and confidentiality during submission and review. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Policy",
+          "kind": "role-method",
+          "paragraphs": [
+            "Keep the answer within the inspected source scope and make every operational step or conceptual relation explicit.",
+            "Do not use completeness of presentation as a substitute for evidence, review, or release.",
+            "Applied scope: Documenting the search process and separating initial screening from full-text assessment. Human responsibility and confidentiality during submission and review."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is agentic-publishing. This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish publishing protocols, editorial templates, release guidance. It must not publish duplicate research records or unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Cochrane Handbook, Chapter 4: Searching for and selecting studies — Sections 4.5 and 4.6.3. Establishes: Documenting the search process and separating initial screening from full-text assessment.",
+            "Responsibilities in the Submission and Peer-Review Process — Author, journal, editor and reviewer responsibilities. Establishes: Human responsibility and confidentiality during submission and review."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "This is not a general publishing intake standard and does not authorize automated acceptance.",
+            "It does not define Maha fields, machine authorship, or release authority.",
+            "This route must not claim duplicate research records.",
+            "This route must not claim unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/definition",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/template",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/example",
+            "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/governance"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "cochrane-intake",
+          "title": "Cochrane Handbook, Chapter 4: Searching for and selecting studies",
+          "responsibleBody": "Cochrane",
+          "versionOrDate": "version 6.5, updated March 2025",
+          "sourceClass": "scholarly-method",
+          "url": "https://training.cochrane.org/handbook/current/chapter-04",
+          "locator": "Sections 4.5 and 4.6.3",
+          "establishes": "Documenting the search process and separating initial screening from full-text assessment.",
+          "doesNotEstablish": "This is not a general publishing intake standard and does not authorize automated acceptance.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "icmje-intake",
+          "title": "Responsibilities in the Submission and Peer-Review Process",
+          "responsibleBody": "International Committee of Medical Journal Editors",
+          "versionOrDate": "living recommendation inspected 2026-09-06",
+          "sourceClass": "editorial-standard",
+          "url": "https://www.icmje.org/recommendations/browse/roles-and-responsibilities/responsibilities-in-the-submission-and-peer-peview-process.html",
+          "locator": "Author, journal, editor and reviewer responsibilities",
+          "establishes": "Human responsibility and confidentiality during submission and review.",
+          "doesNotEstablish": "It does not define Maha fields, machine authorship, or release authority.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_e581474a6bdb1c44a901a76b"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/template",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_714fb5d819282f35578f6c33"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/example",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_84b2316dc57f1e809d2360f6"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/governance",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_543e095876946db8b4f2fa0c"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Editorial Intake mean in this bounded context?",
+          "answer": "Editorial Intake, in this Policy, is limited to the following inspected scope. Documenting the search process and separating initial screening from full-text assessment. Human responsibility and confidentiality during submission and review. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this policy answer?",
+          "answer": "Cochrane Handbook, Chapter 4: Searching for and selecting studies (version 6.5, updated March 2025), at Sections 4.5 and 4.6.3, supports documenting the search process and separating initial screening from full-text assessment. Responsibilities in the Submission and Peer-Review Process (living recommendation inspected 2026-09-06), at Author, journal, editor and reviewer responsibilities, supports human responsibility and confidentiality during submission and review."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "This is not a general publishing intake standard and does not authorize automated acceptance. It does not define Maha fields, machine authorship, or release authority. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/policy#article",
+        "headline": "Editorial Intake — Policy",
+        "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/policy",
+        "isPartOf": "https://publish.mahastrategies.com/",
+        "citation": [
+          "https://training.cochrane.org/handbook/current/chapter-04",
+          "https://www.icmje.org/recommendations/browse/roles-and-responsibilities/responsibilities-in-the-submission-and-peer-peview-process.html"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Editorial Intake mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Editorial Intake, in this Policy, is limited to the following inspected scope. Documenting the search process and separating initial screening from full-text assessment. Human responsibility and confidentiality during submission and review. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this policy answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Cochrane Handbook, Chapter 4: Searching for and selecting studies (version 6.5, updated March 2025), at Sections 4.5 and 4.6.3, supports documenting the search process and separating initial screening from full-text assessment. Responsibilities in the Submission and Peer-Review Process (living recommendation inspected 2026-09-06), at Author, journal, editor and reviewer responsibilities, supports human responsibility and confidentiality during submission and review."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This is not a general publishing intake standard and does not authorize automated acceptance. It does not define Maha fields, machine authorship, or release authority. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-6",
+        "decisionManifestDigest": "sha256:41bdf0a0cede263e6923a228204c9be1d57252fe38d07bcdeab00f4b6f42efb2",
+        "decisionDigest": "sha256:61a417b62a45a74f15fbb501e588f6f19fdea68f1a20c94e6346755fbf943bc5",
+        "specificationManifestDigest": "sha256:7f878a5b88a6f1793ca225ab97a1bbc69b4bcb786cc27208424e2efd0b526e9c",
+        "specificationDigest": "sha256:f30bbe0bdce2ab99fd941788b1aaffa5fd7a9325efe03a7dee77ba05ba45b123",
+        "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
+        "packetDigest": "sha256:33bb08e2177d7b2c3d6ce139bfea72e1e408f0ce8db97375c50dbca75057fdb6"
+      },
+      "contentDigest": "sha256:da9492028e93390304910b911db244fb702948a475b41a4b30577a09af8c454d"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -1602,7 +2423,8 @@
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/definition",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/example",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/machine-interface",
-            "property-home: https://publish.mahastrategies.com/"
+            "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-intake/governance"
           ]
         }
       ],
@@ -1660,6 +2482,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/governance",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_543e095876946db8b4f2fa0c"
         }
       ],
       "boundedAnswers": [
@@ -1772,7 +2600,7 @@
         "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
         "packetDigest": "sha256:6f4534a43e0f261853973e7a98847d35d288370003e99d03f093041cf3c0cc6d"
       },
-      "contentDigest": "sha256:b32c0622d3efab6dc328cafcd7ff8105ddcf1296c1ef55798b6eee10133eb0cb"
+      "contentDigest": "sha256:73b668197534f4dbc2454f4ade68f8d11cfb7a04aa52902dcbdc705d605f932d"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -1857,7 +2685,9 @@
             "graphEdges: https://publish.mahastrategies.com/docs/editorial-workflow",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-review/template",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-review/machine-interface",
-            "property-home: https://publish.mahastrategies.com/"
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-review/governance",
+            "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-review/policy"
           ]
         }
       ],
@@ -1911,10 +2741,22 @@
           "candidateId": "cand_7712144123a395b7979232c0"
         },
         {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/governance",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_12eee2b478a5fcf93a3706bb"
+        },
+        {
           "url": "https://publish.mahastrategies.com/",
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/policy",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_d9d77da885d5188e14d787f9"
         }
       ],
       "boundedAnswers": [
@@ -2027,7 +2869,276 @@
         "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
         "packetDigest": "sha256:5294cacd47a6639dfa9b0a59bd0e99fb52dc1f6846530bb4004ea77c1b0596f5"
       },
-      "contentDigest": "sha256:903cdb93574c00ad8715c700a4de2e5681397f8f2ccce2a692664cf1c37fc10b"
+      "contentDigest": "sha256:54b1e84aed8b0959baed5e2e8542b1f48bb138c7271a251504f3980b70464ec9"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_12eee2b478a5fcf93a3706bb",
+      "tranche": 6,
+      "siteId": "agentic-publishing",
+      "canonicalHost": "publish.mahastrategies.com",
+      "path": "/agentic-publishing/editorial-review/governance",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/governance",
+      "title": "Editorial Review — Governance",
+      "topic": "editorial-review",
+      "routeRole": "governance",
+      "concept": {
+        "conceptId": "urn:maha:concept:release:editorial-review",
+        "familyId": "release",
+        "canonicalOwner": "agentic-publishing",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:release:editorial-review"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:release"
+          }
+        ]
+      },
+      "directAnswer": "Editorial Review, in this Governance, is limited to the following inspected scope. Documented search, title/abstract screening, full-text assessment, and independent final inclusion decisions. Editors retain final responsibility for editorial decisions and confidentiality. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Editorial Review, in this Governance, is limited to the following inspected scope. Documented search, title/abstract screening, full-text assessment, and independent final inclusion decisions. Editors retain final responsibility for editorial decisions and confidentiality. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Governance",
+          "kind": "role-method",
+          "paragraphs": [
+            "Keep the answer within the inspected source scope and make every operational step or conceptual relation explicit.",
+            "Do not use completeness of presentation as a substitute for evidence, review, or release.",
+            "Applied scope: Documented search, title/abstract screening, full-text assessment, and independent final inclusion decisions. Editors retain final responsibility for editorial decisions and confidentiality."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is agentic-publishing. This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish publishing protocols, editorial templates, release guidance. It must not publish duplicate research records or unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Cochrane Handbook, Chapter 4: Searching for and selecting studies — Sections 4.5, 4.6.3 and 4.6.4. Establishes: Documented search, title/abstract screening, full-text assessment, and independent final inclusion decisions.",
+            "Responsibilities in the Submission and Peer-Review Process — Responsibilities in the Submission and Peer-Review Process. Establishes: Editors retain final responsibility for editorial decisions and confidentiality."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The handbook governs systematic-review study selection, not a universal editorial workflow or machine reviewer.",
+            "The recommendation does not define an agentic review schema or prove review quality.",
+            "This route must not claim duplicate research records.",
+            "This route must not claim unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-review/example",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-review/template",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-review/machine-interface",
+            "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-review/policy"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "cochrane-selection",
+          "title": "Cochrane Handbook, Chapter 4: Searching for and selecting studies",
+          "responsibleBody": "Cochrane",
+          "versionOrDate": "version 6.5, updated March 2025",
+          "sourceClass": "scholarly-method",
+          "url": "https://training.cochrane.org/handbook/current/chapter-04",
+          "locator": "Sections 4.5, 4.6.3 and 4.6.4",
+          "establishes": "Documented search, title/abstract screening, full-text assessment, and independent final inclusion decisions.",
+          "doesNotEstablish": "The handbook governs systematic-review study selection, not a universal editorial workflow or machine reviewer.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "icmje-peer-review-continuation",
+          "title": "Responsibilities in the Submission and Peer-Review Process",
+          "responsibleBody": "International Committee of Medical Journal Editors",
+          "versionOrDate": "living recommendation inspected 2026-09-06",
+          "sourceClass": "editorial-standard",
+          "url": "https://www.icmje.org/recommendations/browse/roles-and-responsibilities/responsibilities-in-the-submission-and-peer-peview-process.html",
+          "locator": "Responsibilities in the Submission and Peer-Review Process",
+          "establishes": "Editors retain final responsibility for editorial decisions and confidentiality.",
+          "doesNotEstablish": "The recommendation does not define an agentic review schema or prove review quality.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/example",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_98187d8dcf50748a7427c97f"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/template",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_c028323519fd8f1dca257078"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/machine-interface",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_7712144123a395b7979232c0"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/policy",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_d9d77da885d5188e14d787f9"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Editorial Review mean in this bounded context?",
+          "answer": "Editorial Review, in this Governance, is limited to the following inspected scope. Documented search, title/abstract screening, full-text assessment, and independent final inclusion decisions. Editors retain final responsibility for editorial decisions and confidentiality. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this governance answer?",
+          "answer": "Cochrane Handbook, Chapter 4: Searching for and selecting studies (version 6.5, updated March 2025), at Sections 4.5, 4.6.3 and 4.6.4, supports documented search, title/abstract screening, full-text assessment, and independent final inclusion decisions. Responsibilities in the Submission and Peer-Review Process (living recommendation inspected 2026-09-06), at Responsibilities in the Submission and Peer-Review Process, supports editors retain final responsibility for editorial decisions and confidentiality."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The handbook governs systematic-review study selection, not a universal editorial workflow or machine reviewer. The recommendation does not define an agentic review schema or prove review quality. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/governance#article",
+        "headline": "Editorial Review — Governance",
+        "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/governance",
+        "isPartOf": "https://publish.mahastrategies.com/",
+        "citation": [
+          "https://training.cochrane.org/handbook/current/chapter-04",
+          "https://www.icmje.org/recommendations/browse/roles-and-responsibilities/responsibilities-in-the-submission-and-peer-peview-process.html"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Editorial Review mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Editorial Review, in this Governance, is limited to the following inspected scope. Documented search, title/abstract screening, full-text assessment, and independent final inclusion decisions. Editors retain final responsibility for editorial decisions and confidentiality. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this governance answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Cochrane Handbook, Chapter 4: Searching for and selecting studies (version 6.5, updated March 2025), at Sections 4.5, 4.6.3 and 4.6.4, supports documented search, title/abstract screening, full-text assessment, and independent final inclusion decisions. Responsibilities in the Submission and Peer-Review Process (living recommendation inspected 2026-09-06), at Responsibilities in the Submission and Peer-Review Process, supports editors retain final responsibility for editorial decisions and confidentiality."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The handbook governs systematic-review study selection, not a universal editorial workflow or machine reviewer. The recommendation does not define an agentic review schema or prove review quality. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "blocked-on-unready-prerequisite",
+        "blockedDependencies": [
+          {
+            "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/definition",
+            "relationship": "graphEdges",
+            "candidateId": "cand_379d39a7b88f7c76518ba50c",
+            "availability": "unready-candidate"
+          }
+        ],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-6",
+        "decisionManifestDigest": "sha256:41bdf0a0cede263e6923a228204c9be1d57252fe38d07bcdeab00f4b6f42efb2",
+        "decisionDigest": "sha256:957a0b9a21bccff4bc497fade9d3bcd8b6283a6429cb0ca49a89b1bfa41ab154",
+        "specificationManifestDigest": "sha256:7f878a5b88a6f1793ca225ab97a1bbc69b4bcb786cc27208424e2efd0b526e9c",
+        "specificationDigest": "sha256:d217a4d3d6b8037c742edbd0facdc1313f143deb424a6fe6f3da04e1634bd971",
+        "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
+        "packetDigest": "sha256:7c71071e4fa8383ed0e3ba475989999d98b384e529e73af2816001cba0f309c1"
+      },
+      "contentDigest": "sha256:75d9aea37718e5ff7d6ac753c9cb54769c02f7dc28623cb0dba8006a7c7ddfac"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -2111,7 +3222,9 @@
           "paragraphs": [
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-review/example",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-review/template",
-            "property-home: https://publish.mahastrategies.com/"
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-review/governance",
+            "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-review/policy"
           ]
         }
       ],
@@ -2159,10 +3272,22 @@
           "candidateId": "cand_c028323519fd8f1dca257078"
         },
         {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/governance",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_12eee2b478a5fcf93a3706bb"
+        },
+        {
           "url": "https://publish.mahastrategies.com/",
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/policy",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_d9d77da885d5188e14d787f9"
         }
       ],
       "boundedAnswers": [
@@ -2282,7 +3407,276 @@
         "packetManifestDigest": "sha256:4971a0090532da8d9ea487ab3205cefc7c82ac3b0a4b208465438148e7431449",
         "packetDigest": "sha256:10792964f16b6570969e5d999fc3f3aec068f24c3df9bc68cc9fd4ba32fb31db"
       },
-      "contentDigest": "sha256:5473244aa488908134a28e339d81aff76669c1d723d1017cce4e8a1ea56899bf"
+      "contentDigest": "sha256:ca0885fdaa3945155a6b1b980764af1627d62d813720e75c50c73c0d7e8aa8e7"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_d9d77da885d5188e14d787f9",
+      "tranche": 6,
+      "siteId": "agentic-publishing",
+      "canonicalHost": "publish.mahastrategies.com",
+      "path": "/agentic-publishing/editorial-review/policy",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/policy",
+      "title": "Editorial Review — Policy",
+      "topic": "editorial-review",
+      "routeRole": "policy",
+      "concept": {
+        "conceptId": "urn:maha:concept:release:editorial-review",
+        "familyId": "release",
+        "canonicalOwner": "agentic-publishing",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:release:editorial-review"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:release"
+          }
+        ]
+      },
+      "directAnswer": "Editorial Review, in this Policy, is limited to the following inspected scope. Documented search, title/abstract screening, full-text assessment, and independent final inclusion decisions. Editors retain final responsibility for editorial decisions and confidentiality. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Editorial Review, in this Policy, is limited to the following inspected scope. Documented search, title/abstract screening, full-text assessment, and independent final inclusion decisions. Editors retain final responsibility for editorial decisions and confidentiality. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Policy",
+          "kind": "role-method",
+          "paragraphs": [
+            "Keep the answer within the inspected source scope and make every operational step or conceptual relation explicit.",
+            "Do not use completeness of presentation as a substitute for evidence, review, or release.",
+            "Applied scope: Documented search, title/abstract screening, full-text assessment, and independent final inclusion decisions. Editors retain final responsibility for editorial decisions and confidentiality."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is agentic-publishing. This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish publishing protocols, editorial templates, release guidance. It must not publish duplicate research records or unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Cochrane Handbook, Chapter 4: Searching for and selecting studies — Sections 4.5, 4.6.3 and 4.6.4. Establishes: Documented search, title/abstract screening, full-text assessment, and independent final inclusion decisions.",
+            "Responsibilities in the Submission and Peer-Review Process — Responsibilities in the Submission and Peer-Review Process. Establishes: Editors retain final responsibility for editorial decisions and confidentiality."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The handbook governs systematic-review study selection, not a universal editorial workflow or machine reviewer.",
+            "The recommendation does not define an agentic review schema or prove review quality.",
+            "This route must not claim duplicate research records.",
+            "This route must not claim unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-review/example",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-review/template",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-review/machine-interface",
+            "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-review/governance"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "cochrane-selection",
+          "title": "Cochrane Handbook, Chapter 4: Searching for and selecting studies",
+          "responsibleBody": "Cochrane",
+          "versionOrDate": "version 6.5, updated March 2025",
+          "sourceClass": "scholarly-method",
+          "url": "https://training.cochrane.org/handbook/current/chapter-04",
+          "locator": "Sections 4.5, 4.6.3 and 4.6.4",
+          "establishes": "Documented search, title/abstract screening, full-text assessment, and independent final inclusion decisions.",
+          "doesNotEstablish": "The handbook governs systematic-review study selection, not a universal editorial workflow or machine reviewer.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "icmje-peer-review-continuation",
+          "title": "Responsibilities in the Submission and Peer-Review Process",
+          "responsibleBody": "International Committee of Medical Journal Editors",
+          "versionOrDate": "living recommendation inspected 2026-09-06",
+          "sourceClass": "editorial-standard",
+          "url": "https://www.icmje.org/recommendations/browse/roles-and-responsibilities/responsibilities-in-the-submission-and-peer-peview-process.html",
+          "locator": "Responsibilities in the Submission and Peer-Review Process",
+          "establishes": "Editors retain final responsibility for editorial decisions and confidentiality.",
+          "doesNotEstablish": "The recommendation does not define an agentic review schema or prove review quality.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/example",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_98187d8dcf50748a7427c97f"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/template",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_c028323519fd8f1dca257078"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/machine-interface",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_7712144123a395b7979232c0"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/governance",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_12eee2b478a5fcf93a3706bb"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Editorial Review mean in this bounded context?",
+          "answer": "Editorial Review, in this Policy, is limited to the following inspected scope. Documented search, title/abstract screening, full-text assessment, and independent final inclusion decisions. Editors retain final responsibility for editorial decisions and confidentiality. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this policy answer?",
+          "answer": "Cochrane Handbook, Chapter 4: Searching for and selecting studies (version 6.5, updated March 2025), at Sections 4.5, 4.6.3 and 4.6.4, supports documented search, title/abstract screening, full-text assessment, and independent final inclusion decisions. Responsibilities in the Submission and Peer-Review Process (living recommendation inspected 2026-09-06), at Responsibilities in the Submission and Peer-Review Process, supports editors retain final responsibility for editorial decisions and confidentiality."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The handbook governs systematic-review study selection, not a universal editorial workflow or machine reviewer. The recommendation does not define an agentic review schema or prove review quality. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/policy#article",
+        "headline": "Editorial Review — Policy",
+        "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/policy",
+        "isPartOf": "https://publish.mahastrategies.com/",
+        "citation": [
+          "https://training.cochrane.org/handbook/current/chapter-04",
+          "https://www.icmje.org/recommendations/browse/roles-and-responsibilities/responsibilities-in-the-submission-and-peer-peview-process.html"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Editorial Review mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Editorial Review, in this Policy, is limited to the following inspected scope. Documented search, title/abstract screening, full-text assessment, and independent final inclusion decisions. Editors retain final responsibility for editorial decisions and confidentiality. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this policy answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Cochrane Handbook, Chapter 4: Searching for and selecting studies (version 6.5, updated March 2025), at Sections 4.5, 4.6.3 and 4.6.4, supports documented search, title/abstract screening, full-text assessment, and independent final inclusion decisions. Responsibilities in the Submission and Peer-Review Process (living recommendation inspected 2026-09-06), at Responsibilities in the Submission and Peer-Review Process, supports editors retain final responsibility for editorial decisions and confidentiality."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The handbook governs systematic-review study selection, not a universal editorial workflow or machine reviewer. The recommendation does not define an agentic review schema or prove review quality. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "blocked-on-unready-prerequisite",
+        "blockedDependencies": [
+          {
+            "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/definition",
+            "relationship": "graphEdges",
+            "candidateId": "cand_379d39a7b88f7c76518ba50c",
+            "availability": "unready-candidate"
+          }
+        ],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-6",
+        "decisionManifestDigest": "sha256:41bdf0a0cede263e6923a228204c9be1d57252fe38d07bcdeab00f4b6f42efb2",
+        "decisionDigest": "sha256:66cda05b0a879eedb2584041c15452c535e079591aeff383c7327b77acbb75a0",
+        "specificationManifestDigest": "sha256:7f878a5b88a6f1793ca225ab97a1bbc69b4bcb786cc27208424e2efd0b526e9c",
+        "specificationDigest": "sha256:3f423f780ec46d4efd8f4378071c2cc0aa3fcdc018fc9c8ff070865e0c541223",
+        "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
+        "packetDigest": "sha256:7c71071e4fa8383ed0e3ba475989999d98b384e529e73af2816001cba0f309c1"
+      },
+      "contentDigest": "sha256:f5a273d3e8aa91c22cfbc21cd8e8727467b7916aa0ce41550ddcc73d3e52cd04"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -2367,6 +3761,7 @@
             "graphEdges: https://publish.mahastrategies.com/docs/editorial-workflow",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-review/example",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-review/machine-interface",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/editorial-review/governance",
             "property-home: https://publish.mahastrategies.com/"
           ]
         }
@@ -2419,6 +3814,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_7712144123a395b7979232c0"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/governance",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_12eee2b478a5fcf93a3706bb"
         },
         {
           "url": "https://publish.mahastrategies.com/",
@@ -2537,7 +3938,7 @@
         "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
         "packetDigest": "sha256:5294cacd47a6639dfa9b0a59bd0e99fb52dc1f6846530bb4004ea77c1b0596f5"
       },
-      "contentDigest": "sha256:d0159df2e72db5785dde53090635d4a8a22cf74344cd1f6466954e8066506c7c"
+      "contentDigest": "sha256:e0c5dffccc5ed98dde049436c683f3e3ffdbdacd58bfc1d3667da30c6f1b1e31"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -3316,6 +4717,7 @@
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/template",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/machine-interface",
             "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/failure-mode",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/governance"
           ]
         }
@@ -3372,6 +4774,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_efe853785ea9bdfeff10012c"
         },
         {
           "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/governance",
@@ -3489,7 +4897,7 @@
         "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
         "packetDigest": "sha256:cf513665f24ba39315e3f8b286a50d452faa52354fa34804f242029e6669ffb4"
       },
-      "contentDigest": "sha256:103aa2b467a0b1a141b3023050c89933f98972d0408771e2b9efacc52f23b73f"
+      "contentDigest": "sha256:aea928c13b363f3a6fe5913ca4ee509659905accb33d811318c8c0c079613b05"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -3574,6 +4982,7 @@
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/template",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/machine-interface",
             "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/failure-mode",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/governance"
           ]
         }
@@ -3624,6 +5033,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_efe853785ea9bdfeff10012c"
         },
         {
           "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/governance",
@@ -3741,7 +5156,252 @@
         "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
         "packetDigest": "sha256:cf513665f24ba39315e3f8b286a50d452faa52354fa34804f242029e6669ffb4"
       },
-      "contentDigest": "sha256:7ccad330886e474b1d1744fe077f50acfe626e8974462492402bfed24fb35947"
+      "contentDigest": "sha256:852d71ce138196d1fffe07d7916cd1888a3a46b57d7207746b38c486c7a0c1bd"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_efe853785ea9bdfeff10012c",
+      "tranche": 6,
+      "siteId": "agentic-publishing",
+      "canonicalHost": "publish.mahastrategies.com",
+      "path": "/agentic-publishing/human-review/failure-mode",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/human-review/failure-mode",
+      "title": "Human Review — Failure Mode",
+      "topic": "human-review",
+      "routeRole": "failure-mode",
+      "concept": {
+        "conceptId": "urn:maha:concept:release:human-review",
+        "familyId": "release",
+        "canonicalOwner": "agentic-publishing",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:release:human-review"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:release"
+          }
+        ]
+      },
+      "directAnswer": "Human Review, in this failure-mode analysis, is limited to the following inspected scope. Independent critical assessment, confidentiality, conflicts, and editorial responsibility. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Human Review, in this failure-mode analysis, is limited to the following inspected scope. Independent critical assessment, confidentiality, conflicts, and editorial responsibility. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Failure Mode analysis",
+          "kind": "role-method",
+          "paragraphs": [
+            "Describe the failed invariant, observable signal, safe refusal, and correction or recovery path.",
+            "An absent signal is not proof of success unless the protocol defines and validates that interpretation.",
+            "Applied scope: Independent critical assessment, confidentiality, conflicts, and editorial responsibility."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is agentic-publishing. This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish publishing protocols, editorial templates, release guidance. It must not publish duplicate research records or unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Responsibilities in the Submission and Peer-Review Process — Responsibilities in the Submission and Peer-Review Process. Establishes: Independent critical assessment, confidentiality, conflicts, and editorial responsibility."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "This is medical-journal guidance; agentic publishing must label its adaptation and may not imply peer review occurred.",
+            "This route must not claim duplicate research records.",
+            "This route must not claim unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/definition",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/example",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/template",
+            "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/governance"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "icmje-peer-review",
+          "title": "Responsibilities in the Submission and Peer-Review Process",
+          "responsibleBody": "International Committee of Medical Journal Editors",
+          "versionOrDate": "living recommendation inspected 2026-09-05",
+          "sourceClass": "editorial-standard",
+          "url": "https://www.icmje.org/recommendations/browse/roles-and-responsibilities/responsibilities-in-the-submission-and-peer-peview-process.html",
+          "locator": "Responsibilities in the Submission and Peer-Review Process",
+          "establishes": "Independent critical assessment, confidentiality, conflicts, and editorial responsibility.",
+          "doesNotEstablish": "This is medical-journal guidance; agentic publishing must label its adaptation and may not imply peer review occurred.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_3310484656228e54e0023e11"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/example",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_741125933a6e700841e27c2b"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/template",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_8417eeb5a3fcd86a3a83b691"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/governance",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_d54eee7528d1770e1d94d083"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Human Review mean in this bounded context?",
+          "answer": "Human Review, in this failure-mode analysis, is limited to the following inspected scope. Independent critical assessment, confidentiality, conflicts, and editorial responsibility. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this failure mode answer?",
+          "answer": "Responsibilities in the Submission and Peer-Review Process (living recommendation inspected 2026-09-05), at Responsibilities in the Submission and Peer-Review Process, supports independent critical assessment, confidentiality, conflicts, and editorial responsibility."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "This is medical-journal guidance; agentic publishing must label its adaptation and may not imply peer review occurred. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://publish.mahastrategies.com/agentic-publishing/human-review/failure-mode#article",
+        "headline": "Human Review — Failure Mode",
+        "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/failure-mode",
+        "isPartOf": "https://publish.mahastrategies.com/",
+        "citation": [
+          "https://www.icmje.org/recommendations/browse/roles-and-responsibilities/responsibilities-in-the-submission-and-peer-peview-process.html"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Human Review mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Human Review, in this failure-mode analysis, is limited to the following inspected scope. Independent critical assessment, confidentiality, conflicts, and editorial responsibility. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this failure mode answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Responsibilities in the Submission and Peer-Review Process (living recommendation inspected 2026-09-05), at Responsibilities in the Submission and Peer-Review Process, supports independent critical assessment, confidentiality, conflicts, and editorial responsibility."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This is medical-journal guidance; agentic publishing must label its adaptation and may not imply peer review occurred. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-6",
+        "decisionManifestDigest": "sha256:41bdf0a0cede263e6923a228204c9be1d57252fe38d07bcdeab00f4b6f42efb2",
+        "decisionDigest": "sha256:e3881e99106ddbe39d677ab370a889fd9855fbdc70d638130f5e77f848dc9001",
+        "specificationManifestDigest": "sha256:7f878a5b88a6f1793ca225ab97a1bbc69b4bcb786cc27208424e2efd0b526e9c",
+        "specificationDigest": "sha256:3c31ffcbdafba00ccd1694dddd2352a0e875e618be886a5ebb74af0a05cc1dd6",
+        "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
+        "packetDigest": "sha256:1bb78d4b5e41d94fae87cd28615b64dac756be5f0bb78be7bea921732226466b"
+      },
+      "contentDigest": "sha256:df6a830b3d38b8eaf77275be11097b26b1d5e57ae64504887d0672a5265ece55"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -3825,7 +5485,7 @@
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/example",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/template",
             "property-home: https://publish.mahastrategies.com/",
-            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/machine-interface"
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/failure-mode"
           ]
         }
       ],
@@ -3871,10 +5531,10 @@
           "candidateId": null
         },
         {
-          "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/machine-interface",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/failure-mode",
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
-          "candidateId": "cand_553a086e89511cb24a006f5c"
+          "candidateId": "cand_efe853785ea9bdfeff10012c"
         }
       ],
       "boundedAnswers": [
@@ -3986,7 +5646,7 @@
         "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
         "packetDigest": "sha256:4776d4989b06d41d61fe3d517fc776abb78254c04f3c7d415c84fc9e684d6c6d"
       },
-      "contentDigest": "sha256:80cffb66644dd02ff1106ce5b0f94765d7c1645364dcab14da615dd989526791"
+      "contentDigest": "sha256:c2c5b3829c933b2553a7e5a01cd468e7dde341a4bac7b4c6945338975dcfa107"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -4070,7 +5730,7 @@
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/example",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/template",
             "property-home: https://publish.mahastrategies.com/",
-            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/governance"
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/failure-mode"
           ]
         }
       ],
@@ -4116,10 +5776,10 @@
           "candidateId": null
         },
         {
-          "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/governance",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/failure-mode",
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
-          "candidateId": "cand_d54eee7528d1770e1d94d083"
+          "candidateId": "cand_efe853785ea9bdfeff10012c"
         }
       ],
       "boundedAnswers": [
@@ -4231,7 +5891,7 @@
         "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
         "packetDigest": "sha256:4776d4989b06d41d61fe3d517fc776abb78254c04f3c7d415c84fc9e684d6c6d"
       },
-      "contentDigest": "sha256:78f0b172b21f086ca30c657ac5d8fa8d276f90f5439c80410e08c0b308915db4"
+      "contentDigest": "sha256:8a5c82a31350c417e8edfa57de5f26986e35e0195eb38896b4a21765107c6db2"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -4315,7 +5975,7 @@
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/example",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/template",
             "property-home: https://publish.mahastrategies.com/",
-            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/governance"
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/failure-mode"
           ]
         }
       ],
@@ -4361,10 +6021,10 @@
           "candidateId": null
         },
         {
-          "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/governance",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/failure-mode",
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
-          "candidateId": "cand_d54eee7528d1770e1d94d083"
+          "candidateId": "cand_efe853785ea9bdfeff10012c"
         }
       ],
       "boundedAnswers": [
@@ -4476,7 +6136,7 @@
         "packetManifestDigest": "sha256:99e2851a8c1660632b051cc797929b748faf9402f853adbd9afe8d027557edfa",
         "packetDigest": "sha256:300cfee1049679cf1142dddfcf02f0897bafec7cfd6d31b542118c620b6d3e8b"
       },
-      "contentDigest": "sha256:350bf6cf5bfe650ef63fa0cc7dfbeab3308bcf1762d3c1c049ce8fa75445c2a7"
+      "contentDigest": "sha256:5feb1355f2bd8c631840e77d700c305a7a85e3120a01ba1d962141e186124463"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -4561,7 +6221,7 @@
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/example",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/machine-interface",
             "property-home: https://publish.mahastrategies.com/",
-            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/governance"
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/failure-mode"
           ]
         }
       ],
@@ -4613,10 +6273,10 @@
           "candidateId": null
         },
         {
-          "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/governance",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/failure-mode",
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
-          "candidateId": "cand_d54eee7528d1770e1d94d083"
+          "candidateId": "cand_efe853785ea9bdfeff10012c"
         }
       ],
       "boundedAnswers": [
@@ -4728,7 +6388,7 @@
         "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
         "packetDigest": "sha256:8a9fcd0e8203672dfbd13d83436ffcea36cc16eee3314cdb9388d7433c3a6aa9"
       },
-      "contentDigest": "sha256:2a27990597d277f0f854aecc66fd0fe55b765530bddc7c97b1bfabb909270ad6"
+      "contentDigest": "sha256:555f250c5272ce7aa6ef3f5f89ce697de0ee44f4e9af49c5dc11c06b9e96e743"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -4812,7 +6472,7 @@
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/example",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/template",
             "property-home: https://publish.mahastrategies.com/",
-            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/governance"
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/human-review/failure-mode"
           ]
         }
       ],
@@ -4858,10 +6518,10 @@
           "candidateId": null
         },
         {
-          "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/governance",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/failure-mode",
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
-          "candidateId": "cand_d54eee7528d1770e1d94d083"
+          "candidateId": "cand_efe853785ea9bdfeff10012c"
         }
       ],
       "boundedAnswers": [
@@ -4973,7 +6633,7 @@
         "packetManifestDigest": "sha256:4971a0090532da8d9ea487ab3205cefc7c82ac3b0a4b208465438148e7431449",
         "packetDigest": "sha256:898eb908ed89966ad7872f18b8c9056febca29f80941d21e4bac65a2cc74fbcd"
       },
-      "contentDigest": "sha256:ee655470fd0cb65407e9fdb55724677b09f03fd89b3ec05a986c54b9d076c028"
+      "contentDigest": "sha256:70939e27406a7b0789012c13282b4a16298ebb876076d07bd67487ef29ac647d"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -5798,7 +7458,8 @@
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/template",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/governance",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/machine-interface",
-            "property-home: https://publish.mahastrategies.com/"
+            "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/policy"
           ]
         }
       ],
@@ -5890,6 +7551,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/policy",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_fe7c20e6023d410de4cd7a16"
         }
       ],
       "boundedAnswers": [
@@ -6004,7 +7671,7 @@
         "packetManifestDigest": "sha256:40f82b2317b7e4791be8876c563235b411b9174bebe43c6d8ecb7ee4db89c2ca",
         "packetDigest": "sha256:6c715cd88343531653f86f78fb81de8487da2cfc21d05187ee0b9c604843df47"
       },
-      "contentDigest": "sha256:b2b9fe17eb339456b3505a0dea6a624d5848f72e29ba67cbbde12cfa4581975e"
+      "contentDigest": "sha256:11c41f4065052c44829ea50967eb2a789e810e113d258e92f60b5ad113747670"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -6093,7 +7760,8 @@
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/template",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/example",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/machine-interface",
-            "property-home: https://publish.mahastrategies.com/"
+            "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/policy"
           ]
         }
       ],
@@ -6179,6 +7847,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/policy",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_fe7c20e6023d410de4cd7a16"
         }
       ],
       "boundedAnswers": [
@@ -6300,7 +7974,7 @@
         "packetManifestDigest": "sha256:99e2851a8c1660632b051cc797929b748faf9402f853adbd9afe8d027557edfa",
         "packetDigest": "sha256:c1dee29e6b58cdba16620bad17f6d31dae805fee081dcb107609272b7a6c8712"
       },
-      "contentDigest": "sha256:c0d668b6353d7716b463c72aaaa8a81cc07ad44724c0656b836d4615ab70c249"
+      "contentDigest": "sha256:803419b14c14a91dec0b0b76baca66bf461094d46f8878f5cc249bc2a5f07631"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -6389,7 +8063,8 @@
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/template",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/example",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/governance",
-            "property-home: https://publish.mahastrategies.com/"
+            "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/policy"
           ]
         }
       ],
@@ -6475,6 +8150,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/policy",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_fe7c20e6023d410de4cd7a16"
         }
       ],
       "boundedAnswers": [
@@ -6596,7 +8277,310 @@
         "packetManifestDigest": "sha256:4971a0090532da8d9ea487ab3205cefc7c82ac3b0a4b208465438148e7431449",
         "packetDigest": "sha256:c1dee29e6b58cdba16620bad17f6d31dae805fee081dcb107609272b7a6c8712"
       },
-      "contentDigest": "sha256:a8fb5ea66db4015c14369c8087503baddfc4427749fe68a428f7aa12229ed762"
+      "contentDigest": "sha256:edcbcb824c9c34bfd5d7e80f60f300c77779932617b524f8d57419885277a919"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_fe7c20e6023d410de4cd7a16",
+      "tranche": 6,
+      "siteId": "agentic-publishing",
+      "canonicalHost": "publish.mahastrategies.com",
+      "path": "/agentic-publishing/machine-readable-article/policy",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/policy",
+      "title": "Machine Readable Article — Policy",
+      "topic": "machine-readable-article",
+      "routeRole": "policy",
+      "concept": {
+        "conceptId": "urn:maha:concept:release:machine-readable-article",
+        "familyId": "release",
+        "canonicalOwner": "agentic-publishing",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:release:machine-readable-article"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:release"
+          }
+        ]
+      },
+      "directAnswer": "Machine Readable Article, in this Policy, is limited to the following inspected scope. XML elements and attributes for journal-article metadata and full content. Public structured-data vocabulary for describing article resources. The canonical definition and release guidance for machine-readable publishing. A live metadata-only machine record suitable for a bounded worked example. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Machine Readable Article, in this Policy, is limited to the following inspected scope. XML elements and attributes for journal-article metadata and full content. Public structured-data vocabulary for describing article resources. The canonical definition and release guidance for machine-readable publishing. A live metadata-only machine record suitable for a bounded worked example. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Policy",
+          "kind": "role-method",
+          "paragraphs": [
+            "Keep the answer within the inspected source scope and make every operational step or conceptual relation explicit.",
+            "Do not use completeness of presentation as a substitute for evidence, review, or release.",
+            "Applied scope: XML elements and attributes for journal-article metadata and full content. Public structured-data vocabulary for describing article resources. The canonical definition and release guidance for machine-readable publishing. A live metadata-only machine record suitable for a bounded worked example."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is agentic-publishing. This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish publishing protocols, editorial templates, release guidance. It must not publish duplicate research records or unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Journal Article Tag Suite (JATS) 1.4 — JATS 1.4 standard description and tag-suite scope. Establishes: XML elements and attributes for journal-article metadata and full content.",
+            "Article — Article type, properties, and TechArticle and ScholarlyArticle subtypes. Establishes: Public structured-data vocabulary for describing article resources.",
+            "Machine readability — Four guidance sections and payload-validation requirement. Establishes: The canonical definition and release guidance for machine-readable publishing.",
+            "The Maha Principle Context Pack v0.1.0 — Top-level metadata, exclusions, source identity and version fields. Establishes: A live metadata-only machine record suitable for a bounded worked example."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "JATS is designed for journal articles and does not define every agentic publication or Maha release field.",
+            "Schema.org describes resources; it does not verify evidence, authorship, review, release status, or factual accuracy.",
+            "The guidance does not guarantee indexing, citation, summarization, or external adoption.",
+            "The record is not a template or specification and does not license reproduction of the described book.",
+            "This route must not claim duplicate research records.",
+            "This route must not claim unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/template",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/example",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/governance",
+            "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/machine-interface"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "niso-jats-1-4",
+          "title": "Journal Article Tag Suite (JATS) 1.4",
+          "responsibleBody": "NISO",
+          "versionOrDate": "ANSI/NISO Z39.96-2024",
+          "sourceClass": "standard",
+          "url": "https://www.niso.org/standards-committees/jats",
+          "locator": "JATS 1.4 standard description and tag-suite scope",
+          "establishes": "XML elements and attributes for journal-article metadata and full content.",
+          "doesNotEstablish": "JATS is designed for journal articles and does not define every agentic publication or Maha release field.",
+          "rightsBasis": "Public standards material; cite the stable identifier and use bounded paraphrase subject to the publisher or standards body terms.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "schema-org-article",
+          "title": "Article",
+          "responsibleBody": "Schema.org Community Group",
+          "versionOrDate": "living vocabulary inspected 2026-09-05",
+          "sourceClass": "technical-specification",
+          "url": "https://schema.org/Article",
+          "locator": "Article type, properties, and TechArticle and ScholarlyArticle subtypes",
+          "establishes": "Public structured-data vocabulary for describing article resources.",
+          "doesNotEstablish": "Schema.org describes resources; it does not verify evidence, authorship, review, release status, or factual accuracy.",
+          "rightsBasis": "Public standards material; cite the stable identifier and use bounded paraphrase subject to the publisher or standards body terms.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "publish-machine-readability",
+          "title": "Machine readability",
+          "responsibleBody": "Maha Strategies Publish",
+          "versionOrDate": "live canonical documentation inspected 2026-09-06",
+          "sourceClass": "local-canonical-documentation",
+          "url": "https://publish.mahastrategies.com/docs/machine-readability",
+          "locator": "Four guidance sections and payload-validation requirement",
+          "establishes": "The canonical definition and release guidance for machine-readable publishing.",
+          "doesNotEstablish": "The guidance does not guarantee indexing, citation, summarization, or external adoption.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "maha-principle-context-pack",
+          "title": "The Maha Principle Context Pack v0.1.0",
+          "responsibleBody": "Maha Strategies Publish",
+          "versionOrDate": "live JSON inspected 2026-09-06",
+          "sourceClass": "public-machine-record",
+          "url": "https://publish.mahastrategies.com/context-packs/the-maha-principle-v0.1.0.json",
+          "locator": "Top-level metadata, exclusions, source identity and version fields",
+          "establishes": "A live metadata-only machine record suitable for a bounded worked example.",
+          "doesNotEstablish": "The record is not a template or specification and does not license reproduction of the described book.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/template",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_b0625906e210bafb279b7669"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/example",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_c8b98032f22fc91b51dac6be"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/governance",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_fa1e70c8ff000de961152229"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/machine-interface",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_3e9ff234685cde6c786f3a4c"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Machine Readable Article mean in this bounded context?",
+          "answer": "Machine Readable Article, in this Policy, is limited to the following inspected scope. XML elements and attributes for journal-article metadata and full content. Public structured-data vocabulary for describing article resources. The canonical definition and release guidance for machine-readable publishing. A live metadata-only machine record suitable for a bounded worked example. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this policy answer?",
+          "answer": "Journal Article Tag Suite (JATS) 1.4 (ANSI/NISO Z39.96-2024), at JATS 1.4 standard description and tag-suite scope, supports xML elements and attributes for journal-article metadata and full content. Article (living vocabulary inspected 2026-09-05), at Article type, properties, and TechArticle and ScholarlyArticle subtypes, supports public structured-data vocabulary for describing article resources. Machine readability (live canonical documentation inspected 2026-09-06), at Four guidance sections and payload-validation requirement, supports the canonical definition and release guidance for machine-readable publishing. The Maha Principle Context Pack v0.1.0 (live JSON inspected 2026-09-06), at Top-level metadata, exclusions, source identity and version fields, supports a live metadata-only machine record suitable for a bounded worked example."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "JATS is designed for journal articles and does not define every agentic publication or Maha release field. Schema.org describes resources; it does not verify evidence, authorship, review, release status, or factual accuracy. The guidance does not guarantee indexing, citation, summarization, or external adoption. The record is not a template or specification and does not license reproduction of the described book. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/policy#article",
+        "headline": "Machine Readable Article — Policy",
+        "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/policy",
+        "isPartOf": "https://publish.mahastrategies.com/",
+        "citation": [
+          "https://www.niso.org/standards-committees/jats",
+          "https://schema.org/Article",
+          "https://publish.mahastrategies.com/docs/machine-readability",
+          "https://publish.mahastrategies.com/context-packs/the-maha-principle-v0.1.0.json"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Machine Readable Article mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Machine Readable Article, in this Policy, is limited to the following inspected scope. XML elements and attributes for journal-article metadata and full content. Public structured-data vocabulary for describing article resources. The canonical definition and release guidance for machine-readable publishing. A live metadata-only machine record suitable for a bounded worked example. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this policy answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Journal Article Tag Suite (JATS) 1.4 (ANSI/NISO Z39.96-2024), at JATS 1.4 standard description and tag-suite scope, supports xML elements and attributes for journal-article metadata and full content. Article (living vocabulary inspected 2026-09-05), at Article type, properties, and TechArticle and ScholarlyArticle subtypes, supports public structured-data vocabulary for describing article resources. Machine readability (live canonical documentation inspected 2026-09-06), at Four guidance sections and payload-validation requirement, supports the canonical definition and release guidance for machine-readable publishing. The Maha Principle Context Pack v0.1.0 (live JSON inspected 2026-09-06), at Top-level metadata, exclusions, source identity and version fields, supports a live metadata-only machine record suitable for a bounded worked example."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "JATS is designed for journal articles and does not define every agentic publication or Maha release field. Schema.org describes resources; it does not verify evidence, authorship, review, release status, or factual accuracy. The guidance does not guarantee indexing, citation, summarization, or external adoption. The record is not a template or specification and does not license reproduction of the described book. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "blocked-on-unready-prerequisite",
+        "blockedDependencies": [
+          {
+            "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/definition",
+            "relationship": "graphEdges",
+            "candidateId": "cand_48485c2639eca0b2fb4d9852",
+            "availability": "unready-candidate"
+          }
+        ],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-6",
+        "decisionManifestDigest": "sha256:41bdf0a0cede263e6923a228204c9be1d57252fe38d07bcdeab00f4b6f42efb2",
+        "decisionDigest": "sha256:b0a34fb98e93d47939c83160eb8b906234dc310a1981c62f4e72b61251510d8b",
+        "specificationManifestDigest": "sha256:7f878a5b88a6f1793ca225ab97a1bbc69b4bcb786cc27208424e2efd0b526e9c",
+        "specificationDigest": "sha256:7555ecc35b9e1eb8f21ac8cf21bc92e42e6bfd8aacd83c93156aa9e6d5057cd1",
+        "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
+        "packetDigest": "sha256:c1dee29e6b58cdba16620bad17f6d31dae805fee081dcb107609272b7a6c8712"
+      },
+      "contentDigest": "sha256:fccf8f5cd326b0f469d1d02e69f840fdcc446dee9a02a3432765bda80643ca3e"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -6893,6 +8877,309 @@
         "packetDigest": "sha256:6c715cd88343531653f86f78fb81de8487da2cfc21d05187ee0b9c604843df47"
       },
       "contentDigest": "sha256:fea32d24c3ef04114b9bc600d16c2f38caf4c0a9dbb4cc567e923de6233aa280"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_f94d2bd0cb27b8ce052dae80",
+      "tranche": 6,
+      "siteId": "agentic-publishing",
+      "canonicalHost": "publish.mahastrategies.com",
+      "path": "/agentic-publishing/machine-readable-article/workflow",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/workflow",
+      "title": "Machine Readable Article — Workflow",
+      "topic": "machine-readable-article",
+      "routeRole": "workflow",
+      "concept": {
+        "conceptId": "urn:maha:concept:release:machine-readable-article",
+        "familyId": "release",
+        "canonicalOwner": "agentic-publishing",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:release:machine-readable-article"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:release"
+          }
+        ]
+      },
+      "directAnswer": "Machine Readable Article, in this workflow, is limited to the following inspected scope. XML elements and attributes for journal-article metadata and full content. Public structured-data vocabulary for describing article resources. The canonical definition and release guidance for machine-readable publishing. A live metadata-only machine record suitable for a bounded worked example. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Machine Readable Article, in this workflow, is limited to the following inspected scope. XML elements and attributes for journal-article metadata and full content. Public structured-data vocabulary for describing article resources. The canonical definition and release guidance for machine-readable publishing. A live metadata-only machine record suitable for a bounded worked example. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Workflow",
+          "kind": "role-method",
+          "paragraphs": [
+            "Show the ordered states, authorization boundaries, handoffs, replay rules, and terminal outcomes.",
+            "A workflow diagram does not prove that a remote provider, payment, release, or delivery occurred.",
+            "Applied scope: XML elements and attributes for journal-article metadata and full content. Public structured-data vocabulary for describing article resources. The canonical definition and release guidance for machine-readable publishing. A live metadata-only machine record suitable for a bounded worked example."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is agentic-publishing. This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish publishing protocols, editorial templates, release guidance. It must not publish duplicate research records or unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Journal Article Tag Suite (JATS) 1.4 — JATS 1.4 standard description and tag-suite scope. Establishes: XML elements and attributes for journal-article metadata and full content.",
+            "Article — Article type, properties, and TechArticle and ScholarlyArticle subtypes. Establishes: Public structured-data vocabulary for describing article resources.",
+            "Machine readability — Four guidance sections and payload-validation requirement. Establishes: The canonical definition and release guidance for machine-readable publishing.",
+            "The Maha Principle Context Pack v0.1.0 — Top-level metadata, exclusions, source identity and version fields. Establishes: A live metadata-only machine record suitable for a bounded worked example."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "JATS is designed for journal articles and does not define every agentic publication or Maha release field.",
+            "Schema.org describes resources; it does not verify evidence, authorship, review, release status, or factual accuracy.",
+            "The guidance does not guarantee indexing, citation, summarization, or external adoption.",
+            "The record is not a template or specification and does not license reproduction of the described book.",
+            "This route must not claim duplicate research records.",
+            "This route must not claim unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/template",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/example",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/governance",
+            "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/machine-interface"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "niso-jats-1-4",
+          "title": "Journal Article Tag Suite (JATS) 1.4",
+          "responsibleBody": "NISO",
+          "versionOrDate": "ANSI/NISO Z39.96-2024",
+          "sourceClass": "standard",
+          "url": "https://www.niso.org/standards-committees/jats",
+          "locator": "JATS 1.4 standard description and tag-suite scope",
+          "establishes": "XML elements and attributes for journal-article metadata and full content.",
+          "doesNotEstablish": "JATS is designed for journal articles and does not define every agentic publication or Maha release field.",
+          "rightsBasis": "Public standards material; cite the stable identifier and use bounded paraphrase subject to the publisher or standards body terms.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "schema-org-article",
+          "title": "Article",
+          "responsibleBody": "Schema.org Community Group",
+          "versionOrDate": "living vocabulary inspected 2026-09-05",
+          "sourceClass": "technical-specification",
+          "url": "https://schema.org/Article",
+          "locator": "Article type, properties, and TechArticle and ScholarlyArticle subtypes",
+          "establishes": "Public structured-data vocabulary for describing article resources.",
+          "doesNotEstablish": "Schema.org describes resources; it does not verify evidence, authorship, review, release status, or factual accuracy.",
+          "rightsBasis": "Public standards material; cite the stable identifier and use bounded paraphrase subject to the publisher or standards body terms.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "publish-machine-readability",
+          "title": "Machine readability",
+          "responsibleBody": "Maha Strategies Publish",
+          "versionOrDate": "live canonical documentation inspected 2026-09-06",
+          "sourceClass": "local-canonical-documentation",
+          "url": "https://publish.mahastrategies.com/docs/machine-readability",
+          "locator": "Four guidance sections and payload-validation requirement",
+          "establishes": "The canonical definition and release guidance for machine-readable publishing.",
+          "doesNotEstablish": "The guidance does not guarantee indexing, citation, summarization, or external adoption.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "maha-principle-context-pack",
+          "title": "The Maha Principle Context Pack v0.1.0",
+          "responsibleBody": "Maha Strategies Publish",
+          "versionOrDate": "live JSON inspected 2026-09-06",
+          "sourceClass": "public-machine-record",
+          "url": "https://publish.mahastrategies.com/context-packs/the-maha-principle-v0.1.0.json",
+          "locator": "Top-level metadata, exclusions, source identity and version fields",
+          "establishes": "A live metadata-only machine record suitable for a bounded worked example.",
+          "doesNotEstablish": "The record is not a template or specification and does not license reproduction of the described book.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/template",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_b0625906e210bafb279b7669"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/example",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_c8b98032f22fc91b51dac6be"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/governance",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_fa1e70c8ff000de961152229"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/machine-interface",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_3e9ff234685cde6c786f3a4c"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Machine Readable Article mean in this bounded context?",
+          "answer": "Machine Readable Article, in this workflow, is limited to the following inspected scope. XML elements and attributes for journal-article metadata and full content. Public structured-data vocabulary for describing article resources. The canonical definition and release guidance for machine-readable publishing. A live metadata-only machine record suitable for a bounded worked example. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this workflow answer?",
+          "answer": "Journal Article Tag Suite (JATS) 1.4 (ANSI/NISO Z39.96-2024), at JATS 1.4 standard description and tag-suite scope, supports xML elements and attributes for journal-article metadata and full content. Article (living vocabulary inspected 2026-09-05), at Article type, properties, and TechArticle and ScholarlyArticle subtypes, supports public structured-data vocabulary for describing article resources. Machine readability (live canonical documentation inspected 2026-09-06), at Four guidance sections and payload-validation requirement, supports the canonical definition and release guidance for machine-readable publishing. The Maha Principle Context Pack v0.1.0 (live JSON inspected 2026-09-06), at Top-level metadata, exclusions, source identity and version fields, supports a live metadata-only machine record suitable for a bounded worked example."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "JATS is designed for journal articles and does not define every agentic publication or Maha release field. Schema.org describes resources; it does not verify evidence, authorship, review, release status, or factual accuracy. The guidance does not guarantee indexing, citation, summarization, or external adoption. The record is not a template or specification and does not license reproduction of the described book. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/workflow#article",
+        "headline": "Machine Readable Article — Workflow",
+        "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/workflow",
+        "isPartOf": "https://publish.mahastrategies.com/",
+        "citation": [
+          "https://www.niso.org/standards-committees/jats",
+          "https://schema.org/Article",
+          "https://publish.mahastrategies.com/docs/machine-readability",
+          "https://publish.mahastrategies.com/context-packs/the-maha-principle-v0.1.0.json"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Machine Readable Article mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Machine Readable Article, in this workflow, is limited to the following inspected scope. XML elements and attributes for journal-article metadata and full content. Public structured-data vocabulary for describing article resources. The canonical definition and release guidance for machine-readable publishing. A live metadata-only machine record suitable for a bounded worked example. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this workflow answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Journal Article Tag Suite (JATS) 1.4 (ANSI/NISO Z39.96-2024), at JATS 1.4 standard description and tag-suite scope, supports xML elements and attributes for journal-article metadata and full content. Article (living vocabulary inspected 2026-09-05), at Article type, properties, and TechArticle and ScholarlyArticle subtypes, supports public structured-data vocabulary for describing article resources. Machine readability (live canonical documentation inspected 2026-09-06), at Four guidance sections and payload-validation requirement, supports the canonical definition and release guidance for machine-readable publishing. The Maha Principle Context Pack v0.1.0 (live JSON inspected 2026-09-06), at Top-level metadata, exclusions, source identity and version fields, supports a live metadata-only machine record suitable for a bounded worked example."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "JATS is designed for journal articles and does not define every agentic publication or Maha release field. Schema.org describes resources; it does not verify evidence, authorship, review, release status, or factual accuracy. The guidance does not guarantee indexing, citation, summarization, or external adoption. The record is not a template or specification and does not license reproduction of the described book. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "blocked-on-unready-prerequisite",
+        "blockedDependencies": [
+          {
+            "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/definition",
+            "relationship": "graphEdges",
+            "candidateId": "cand_48485c2639eca0b2fb4d9852",
+            "availability": "unready-candidate"
+          }
+        ],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-6",
+        "decisionManifestDigest": "sha256:41bdf0a0cede263e6923a228204c9be1d57252fe38d07bcdeab00f4b6f42efb2",
+        "decisionDigest": "sha256:10b6704fd683f09935eb9906bae0217be15187f936b6f4c015708f206ef83daa",
+        "specificationManifestDigest": "sha256:7f878a5b88a6f1793ca225ab97a1bbc69b4bcb786cc27208424e2efd0b526e9c",
+        "specificationDigest": "sha256:f66155ec19fa19b0938a8aabecd32a399a7bfe1e87cfd3d0f19f5ecfd052a3d8",
+        "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
+        "packetDigest": "sha256:c1dee29e6b58cdba16620bad17f6d31dae805fee081dcb107609272b7a6c8712"
+      },
+      "contentDigest": "sha256:6d9c04c09f88c48fffb90863485b779513f2f6a018d62c6299f6df936affde55"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -7202,6 +9489,7 @@
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/template",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/machine-interface",
             "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/failure-mode",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/governance"
           ]
         }
@@ -7258,6 +9546,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_6577c5eab414e1e9a41da5c7"
         },
         {
           "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/governance",
@@ -7375,7 +9669,7 @@
         "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
         "packetDigest": "sha256:237e8241111a7d6ddca317a8acdac8cb872bb87ef164dc9f98101459fd2132dc"
       },
-      "contentDigest": "sha256:840d46807a4cdcacbeca49f654be459ee65a96577c12bd587f5f6ce27beab366"
+      "contentDigest": "sha256:4335d2b35fd930f63487d96aaf38fb87c3f74e168f6f4bc4365f47ac41087fd9"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -7460,6 +9754,7 @@
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/template",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/machine-interface",
             "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/failure-mode",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/governance"
           ]
         }
@@ -7510,6 +9805,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_6577c5eab414e1e9a41da5c7"
         },
         {
           "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/governance",
@@ -7627,7 +9928,252 @@
         "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
         "packetDigest": "sha256:237e8241111a7d6ddca317a8acdac8cb872bb87ef164dc9f98101459fd2132dc"
       },
-      "contentDigest": "sha256:d9df8d7ecb2db4ffbfa60ff160c61af959b7e784f8cbf53036a5ddb4ac2e8101"
+      "contentDigest": "sha256:42cf587aa0bb1fd188d0081ac962ad25cabbb7ff50879191ceb97407564dcabd"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_6577c5eab414e1e9a41da5c7",
+      "tranche": 6,
+      "siteId": "agentic-publishing",
+      "canonicalHost": "publish.mahastrategies.com",
+      "path": "/agentic-publishing/structured-abstract/failure-mode",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/failure-mode",
+      "title": "Structured Abstract — Failure Mode",
+      "topic": "structured-abstract",
+      "routeRole": "failure-mode",
+      "concept": {
+        "conceptId": "urn:maha:concept:release:structured-abstract",
+        "familyId": "release",
+        "canonicalOwner": "agentic-publishing",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:release:structured-abstract"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:release"
+          }
+        ]
+      },
+      "directAnswer": "Structured Abstract, in this failure-mode analysis, is limited to the following inspected scope. Context, purpose, procedures, main findings, effect sizes, conclusions, limitations, and consistency. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Structured Abstract, in this failure-mode analysis, is limited to the following inspected scope. Context, purpose, procedures, main findings, effect sizes, conclusions, limitations, and consistency. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Failure Mode analysis",
+          "kind": "role-method",
+          "paragraphs": [
+            "Describe the failed invariant, observable signal, safe refusal, and correction or recovery path.",
+            "An absent signal is not proof of success unless the protocol defines and validates that interpretation.",
+            "Applied scope: Context, purpose, procedures, main findings, effect sizes, conclusions, limitations, and consistency."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is agentic-publishing. This route may apply release; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish publishing protocols, editorial templates, release guidance. It must not publish duplicate research records or unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Preparing a Manuscript for Submission to a Medical Journal — Abstract — Section IV.A.3.b Abstract. Establishes: Context, purpose, procedures, main findings, effect sizes, conclusions, limitations, and consistency."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The guidance is biomedical and does not establish one universal abstract format for all disciplines.",
+            "This route must not claim duplicate research records.",
+            "This route must not claim unlabelled machine authorship."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/definition",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/example",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/template",
+            "property-home: https://publish.mahastrategies.com/",
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/governance"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "icmje-abstract",
+          "title": "Preparing a Manuscript for Submission to a Medical Journal — Abstract",
+          "responsibleBody": "International Committee of Medical Journal Editors",
+          "versionOrDate": "living recommendation inspected 2026-09-05",
+          "sourceClass": "editorial-standard",
+          "url": "https://icmje.org/recommendations/browse/manuscript-preparation/preparing-for-submission.html",
+          "locator": "Section IV.A.3.b Abstract",
+          "establishes": "Context, purpose, procedures, main findings, effect sizes, conclusions, limitations, and consistency.",
+          "doesNotEstablish": "The guidance is biomedical and does not establish one universal abstract format for all disciplines.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_ccfd0d1e38ae45c195c492a5"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/example",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_d4b5347acc11d87e36da14c7"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/template",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_c8c9a9b63b8028c5b81ad25d"
+        },
+        {
+          "url": "https://publish.mahastrategies.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/governance",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_019de92f9cadeb365e7a2bfa"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Structured Abstract mean in this bounded context?",
+          "answer": "Structured Abstract, in this failure-mode analysis, is limited to the following inspected scope. Context, purpose, procedures, main findings, effect sizes, conclusions, limitations, and consistency. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this failure mode answer?",
+          "answer": "Preparing a Manuscript for Submission to a Medical Journal — Abstract (living recommendation inspected 2026-09-05), at Section IV.A.3.b Abstract, supports context, purpose, procedures, main findings, effect sizes, conclusions, limitations, and consistency."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The guidance is biomedical and does not establish one universal abstract format for all disciplines. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/failure-mode#article",
+        "headline": "Structured Abstract — Failure Mode",
+        "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/failure-mode",
+        "isPartOf": "https://publish.mahastrategies.com/",
+        "citation": [
+          "https://icmje.org/recommendations/browse/manuscript-preparation/preparing-for-submission.html"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Structured Abstract mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Structured Abstract, in this failure-mode analysis, is limited to the following inspected scope. Context, purpose, procedures, main findings, effect sizes, conclusions, limitations, and consistency. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this failure mode answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Preparing a Manuscript for Submission to a Medical Journal — Abstract (living recommendation inspected 2026-09-05), at Section IV.A.3.b Abstract, supports context, purpose, procedures, main findings, effect sizes, conclusions, limitations, and consistency."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The guidance is biomedical and does not establish one universal abstract format for all disciplines. Property boundary: This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local agentic-publishing definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-6",
+        "decisionManifestDigest": "sha256:41bdf0a0cede263e6923a228204c9be1d57252fe38d07bcdeab00f4b6f42efb2",
+        "decisionDigest": "sha256:f26589351bd06d156a98e23bffc6f1913d97d8dfdbc4432579a9794b85d7aced",
+        "specificationManifestDigest": "sha256:7f878a5b88a6f1793ca225ab97a1bbc69b4bcb786cc27208424e2efd0b526e9c",
+        "specificationDigest": "sha256:5dee0adf02bd4999c5255a23dc00d14c411b2cd239f3b8e1b8219c566e097988",
+        "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
+        "packetDigest": "sha256:b4ce541dd635dd00f2d1f078213a611b833879c057bbe796e6362fadac7dd775"
+      },
+      "contentDigest": "sha256:6dd4d789602af99c6a33473efc17ed4a7597be994943ada0e46e15471d6aef8c"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -7711,7 +10257,7 @@
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/example",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/template",
             "property-home: https://publish.mahastrategies.com/",
-            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/machine-interface"
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/failure-mode"
           ]
         }
       ],
@@ -7757,10 +10303,10 @@
           "candidateId": null
         },
         {
-          "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/machine-interface",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/failure-mode",
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
-          "candidateId": "cand_f25f76db2ec3d9a2ceed05e6"
+          "candidateId": "cand_6577c5eab414e1e9a41da5c7"
         }
       ],
       "boundedAnswers": [
@@ -7872,7 +10418,7 @@
         "packetManifestDigest": "sha256:99e2851a8c1660632b051cc797929b748faf9402f853adbd9afe8d027557edfa",
         "packetDigest": "sha256:f5b733249afafc2917fc9f6ebba7b563d32bb694bc512160ea84a566e221f4de"
       },
-      "contentDigest": "sha256:81ebe9fc6723a08377db059924a5fed9f5550e13ef07091c489454189275defb"
+      "contentDigest": "sha256:dc280e62e2ee295c9afd6d862873c2461037f4c28e67f7995a4407fbbf51e273"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -7956,7 +10502,7 @@
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/example",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/template",
             "property-home: https://publish.mahastrategies.com/",
-            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/governance"
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/failure-mode"
           ]
         }
       ],
@@ -8002,10 +10548,10 @@
           "candidateId": null
         },
         {
-          "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/governance",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/failure-mode",
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
-          "candidateId": "cand_019de92f9cadeb365e7a2bfa"
+          "candidateId": "cand_6577c5eab414e1e9a41da5c7"
         }
       ],
       "boundedAnswers": [
@@ -8117,7 +10663,7 @@
         "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
         "packetDigest": "sha256:116c5b0031fbe3b46570711c242b6ebcf4a3a548bbae0ec4c3d763d6614ab5ff"
       },
-      "contentDigest": "sha256:8d3f45abc57ee710460419e8e899d92eb22e8e42924633e763fc5cb153b79030"
+      "contentDigest": "sha256:4410ae3d5a14b2d1ee939b641ba256a16e590e45be4c322e72ba3af31ee8dd6c"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -8201,7 +10747,7 @@
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/example",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/template",
             "property-home: https://publish.mahastrategies.com/",
-            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/governance"
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/failure-mode"
           ]
         }
       ],
@@ -8247,10 +10793,10 @@
           "candidateId": null
         },
         {
-          "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/governance",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/failure-mode",
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
-          "candidateId": "cand_019de92f9cadeb365e7a2bfa"
+          "candidateId": "cand_6577c5eab414e1e9a41da5c7"
         }
       ],
       "boundedAnswers": [
@@ -8362,7 +10908,7 @@
         "packetManifestDigest": "sha256:99e2851a8c1660632b051cc797929b748faf9402f853adbd9afe8d027557edfa",
         "packetDigest": "sha256:f5b733249afafc2917fc9f6ebba7b563d32bb694bc512160ea84a566e221f4de"
       },
-      "contentDigest": "sha256:99ce0b3c16c5782c9e049bcb809ad32d9811f246730506eafd901a05e37b60f6"
+      "contentDigest": "sha256:f1785f4ebc6610493510ab7f949e705089664e3abc3c3b886827599f2ad55603"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -8447,7 +10993,7 @@
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/example",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/machine-interface",
             "property-home: https://publish.mahastrategies.com/",
-            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/governance"
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/failure-mode"
           ]
         }
       ],
@@ -8499,10 +11045,10 @@
           "candidateId": null
         },
         {
-          "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/governance",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/failure-mode",
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
-          "candidateId": "cand_019de92f9cadeb365e7a2bfa"
+          "candidateId": "cand_6577c5eab414e1e9a41da5c7"
         }
       ],
       "boundedAnswers": [
@@ -8614,7 +11160,7 @@
         "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
         "packetDigest": "sha256:7e0983fc2fe01ad8b5e96b2a9145c67e1dd6d1cebe64224d2fe17f2c9ef71764"
       },
-      "contentDigest": "sha256:7123efa136737e5a3c3a377f69f228a81d826ddd24c1ac62ffde9bd3968d33b1"
+      "contentDigest": "sha256:544bc6f57f3a06d21ce3e299c45c7a70700b6078cc23508e978b2f4c20362ef6"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -8698,7 +11244,7 @@
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/example",
             "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/template",
             "property-home: https://publish.mahastrategies.com/",
-            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/governance"
+            "same-topic-application: https://publish.mahastrategies.com/agentic-publishing/structured-abstract/failure-mode"
           ]
         }
       ],
@@ -8744,10 +11290,10 @@
           "candidateId": null
         },
         {
-          "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/governance",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/failure-mode",
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
-          "candidateId": "cand_019de92f9cadeb365e7a2bfa"
+          "candidateId": "cand_6577c5eab414e1e9a41da5c7"
         }
       ],
       "boundedAnswers": [
@@ -8859,8 +11405,8 @@
         "packetManifestDigest": "sha256:4971a0090532da8d9ea487ab3205cefc7c82ac3b0a4b208465438148e7431449",
         "packetDigest": "sha256:c39016ac884d41b3778ef25f8ce47bda83947859f7dc7c5f53444c48d2576be0"
       },
-      "contentDigest": "sha256:1969decaf34c82d9d51234c6b95eeccb71f1319175d210656a6e20ba441d2a0f"
+      "contentDigest": "sha256:7961a8bcfe8421ca829821f76146f910ad8d43c7dce0f2b296182f03423b1d9e"
     }
   ],
-  "provenanceDigest": "sha256:5390e3430afaa43f66e8f1b749d4612048419bfbd82c589309ac5a27501a63f4"
+  "provenanceDigest": "sha256:4b8b904ab4cd67b00b9c5c6170e8e9fba5ff07e29d9a2151cd9a272198eeed82"
 }
