@@ -19,7 +19,7 @@ const settlement = (payer: string, block: number, amount = EXPECTED_PRICE_BASE_U
 const watch = (settlements: Settlement[], reported: string[] = []) => buildSettlementWatch({
   settlements,
   operatorWallets: [...OPERATOR_WALLETS],
-  expectedAmountBaseUnits: EXPECTED_PRICE_BASE_UNITS,
+  expectedAmountsBaseUnits: [EXPECTED_PRICE_BASE_UNITS],
   fromBlock: BigInt(1),
   toBlock: BigInt(1_000),
   alreadyReportedPayers: reported,
@@ -174,4 +174,45 @@ test('totals in USDC base units survive round-tripping as strings', () => {
   const report = watch([settlement(EXTERNAL, 10), settlement(EXTERNAL, 20)])
   assert.equal(report.externalPayers[0].totalBaseUnits, '2000')
   assert.equal(JSON.parse(JSON.stringify(report)).externalPayers[0].totalBaseUnits, '2000')
+})
+
+test('a settlement at any published price is a sale, not an unexpected amount', () => {
+  // The catalog publishes three prices. Comparing against one of them — the
+  // canary recipe's buyer-policy ceiling — filed every payment for the 0.01 and
+  // 0.1 offers as an unexpected amount and dropped it from the sales count.
+  const settle = (payer: string, amount: bigint, hash: string) =>
+    ({ payer, amountBaseUnits: amount, blockNumber: BigInt(1), transactionHash: hash })
+  const report = buildSettlementWatch({
+    settlements: [
+      settle('0xaaa', BigInt(1_000), '0x1'),
+      settle('0xbbb', BigInt(10_000), '0x2'),
+      settle('0xccc', BigInt(100_000), '0x3'),
+      settle('0xddd', BigInt(7), '0x4'),
+    ],
+    operatorWallets: [],
+    expectedAmountsBaseUnits: [BigInt(1_000), BigInt(10_000), BigInt(100_000)],
+    fromBlock: BigInt(1),
+    toBlock: BigInt(2),
+  })
+  const unexpected = report.notable.filter((e) => e.kind === 'unexpected_amount')
+  assert.equal(unexpected.length, 1, 'only the amount matching no published price is unexpected')
+  assert.equal((unexpected[0] as { payer: string }).payer, '0xddd')
+  const firsts = report.notable.filter((e) => e.kind === 'first_external_settlement')
+  assert.equal(firsts.length, 3, 'a payer at any published price is a customer')
+})
+
+test('a repeat across two different products still counts as a repeat', () => {
+  // The real case: one wallet bought the 0.001 offer three times and the 0.01
+  // offer twice. Under a single expected price its 0.01 payments vanished.
+  const settle = (amount: bigint, hash: string, block: number) =>
+    ({ payer: '0xfadd', amountBaseUnits: amount, blockNumber: BigInt(block), transactionHash: hash })
+  const report = buildSettlementWatch({
+    settlements: [settle(BigInt(1_000), '0x1', 1), settle(BigInt(10_000), '0x2', 2)],
+    operatorWallets: [],
+    expectedAmountsBaseUnits: [BigInt(1_000), BigInt(10_000)],
+    fromBlock: BigInt(1),
+    toBlock: BigInt(3),
+  })
+  assert.ok(report.notable.some((e) => e.kind === 'repeat_external_settlement'),
+    'two settlements at two published prices is still a returning buyer')
 })
