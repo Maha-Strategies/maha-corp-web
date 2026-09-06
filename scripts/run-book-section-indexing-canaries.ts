@@ -26,6 +26,13 @@ const EXPECTED_AMOUNT = '5000'
 const MAX_TOTAL_AMOUNT = BigInt(10_000)
 const outputPath = process.env.BOOK_INDEXING_CANARY_OUTPUT_PATH?.trim()
 const erc20BalanceAbi = parseAbi(['function balanceOf(address owner) view returns (uint256)'])
+const PRIOR_IMAGINED_EVIDENCE = {
+  transaction: '0xb219dccff27539a3f42a54c7ed3b9aca2e2ad2afdfd349623ab0de2cb7afbeb0',
+  responseSha256: 'f81247501ed18831e62317b239432b0bd06c6db8e1158c2ce1ab9b72b0438109',
+  contentSha256: 'sha256:3e94ab6779c1792187216f5ecdc4568881071c893dd43659ee4990d86da2ba10',
+  receiptSha256: 'sha256:21608d698ddc0e2c5059c8ea1bd6030c879efb020a5a2028757caec07f4891d0',
+  blockNumber: 50_951_598,
+} as const
 
 export const BOOK_INDEXING_TARGETS = [
   {
@@ -99,6 +106,21 @@ async function merchantResources(): Promise<BazaarResource[]> {
   return body.resources as BazaarResource[]
 }
 
+async function searchResources(target: Target): Promise<BazaarResource[]> {
+  const url = new URL('https://api.cdp.coinbase.com/platform/v2/x402/discovery/search')
+  url.searchParams.set('query', `${target.offerId} machine-readable book section`)
+  url.searchParams.set('network', BASE_NETWORK)
+  url.searchParams.set('asset', BASE_USDC)
+  url.searchParams.set('scheme', 'exact')
+  url.searchParams.set('maxUsdPrice', '0.01')
+  url.searchParams.set('limit', '20')
+  const response = await fetch(url, { headers: { accept: 'application/json', 'user-agent': 'maha-book-section-indexing-canary/0.2' } })
+  if (!response.ok) throw new Error(`Bazaar semantic discovery returned HTTP ${response.status}.`)
+  const body = await response.json() as { resources?: unknown }
+  if (!Array.isArray(body.resources)) throw new Error('Bazaar semantic discovery omitted resources.')
+  return body.resources as BazaarResource[]
+}
+
 export function isTargetIndexed(resources: BazaarResource[], target: Target): boolean {
   return resources.some((candidate) => {
     if (candidate.resource !== target.resource) return false
@@ -113,6 +135,7 @@ export function isTargetIndexed(resources: BazaarResource[], target: Target): bo
 
 async function waitForBazaar(target: Target): Promise<boolean> {
   for (let attempt = 0; attempt < 30; attempt += 1) {
+    if (isTargetIndexed(await searchResources(target), target)) return true
     if (isTargetIndexed(await merchantResources(), target)) return true
     if (attempt < 29) await delay(10_000)
   }
@@ -231,12 +254,32 @@ async function purchase(target: Target, account: ReturnType<typeof loadBuyer>, e
 
 async function run(): Promise<void> {
   if (process.env.BOOK_INDEXING_CANARY_CONFIRMATION !== CONFIRMATION) throw new Error(`Set BOOK_INDEXING_CANARY_CONFIRMATION exactly to ${CONFIRMATION}.`)
+  const resumeAfterImagined = process.env.BOOK_INDEXING_RESUME_AFTER_IMAGINED === 'true'
+  if (resumeAfterImagined) {
+    const first = BOOK_INDEXING_TARGETS[0]
+    if (!isTargetIndexed(await searchResources(first), first)) throw new Error('Cannot resume: the prior Imagined Life settlement is not currently discoverable in Bazaar.')
+    const rpcUrl = rpcUrlFor(BASE_NETWORK, process.env.BASE_RPC_URL)
+    if (!rpcUrl) throw new Error('No Base RPC URL is available.')
+    const prior = await confirmSettlement({
+      rpcUrl,
+      caip2Network: BASE_NETWORK,
+      transaction: PRIOR_IMAGINED_EVIDENCE.transaction,
+      asset: BASE_USDC,
+      payer: CANARY_BUYER,
+      payTo: MAHA_PAYEE,
+      minAmount: EXPECTED_AMOUNT,
+      attempts: 1,
+      requestTimeoutMs: 4_000,
+    })
+    if (prior.status !== 'confirmed' || prior.amount !== EXPECTED_AMOUNT) throw new Error('Cannot resume: the prior Imagined Life settlement no longer confirms exactly.')
+  }
   const account = loadBuyer()
+  const targets = resumeAfterImagined ? BOOK_INDEXING_TARGETS.slice(1) : [...BOOK_INDEXING_TARGETS]
   const evidence: Evidence = {
     schemaVersion: 'maha-book-section-indexing-canary/0.1',
     authorization: CONFIRMATION,
     maximumAuthorizedBaseUnits: MAX_TOTAL_AMOUNT.toString() as '10000',
-    actualSettledBaseUnits: '0',
+    actualSettledBaseUnits: resumeAfterImagined ? EXPECTED_AMOUNT : '0',
     buyer: account.address,
     payee: MAHA_PAYEE,
     network: BASE_NETWORK,
@@ -255,12 +298,19 @@ async function run(): Promise<void> {
       outcome: 'pending',
     })),
   }
+  if (resumeAfterImagined) Object.assign(evidence.steps[0], {
+    ...PRIOR_IMAGINED_EVIDENCE,
+    paymentReceiptReported: true,
+    bazaarIndexed: true,
+    outcome: 'settled_and_indexed',
+  })
   await writeEvidence(evidence)
 
-  for (let index = 0; index < BOOK_INDEXING_TARGETS.length; index += 1) {
-    const target = BOOK_INDEXING_TARGETS[index]
+  for (let position = 0; position < targets.length; position += 1) {
+    const target = targets[position]
+    const index = evidence.steps.findIndex((step) => step.offerId === target.offerId)
     try {
-      await requireBalance(account, BigInt(BOOK_INDEXING_TARGETS.length - index) * BigInt(EXPECTED_AMOUNT))
+      await requireBalance(account, BigInt(targets.length - position) * BigInt(EXPECTED_AMOUNT))
       await purchase(target, account, evidence)
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error)
