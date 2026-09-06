@@ -33,6 +33,10 @@ const flag = (name: string, fallback: string) => {
 }
 const days = Math.max(1, Math.min(90, Number(flag('--days', '60')) || 60))
 
+const ACRONYMS = new Set(['mps', 'api', 'mcp', 'a2a', 'usdc'])
+const titleFor = (id: string) =>
+  id.split('-').map((w) => (ACRONYMS.has(w) ? w.toUpperCase() : w[0].toUpperCase() + w.slice(1))).join(' ')
+
 const client = createPublicClient({ chain: base, transport: http(process.env.BASE_RPC_URL?.trim() || undefined) })
 
 async function logsFor(fromBlock: bigint, toBlock: bigint) {
@@ -83,8 +87,10 @@ for (const row of rows) row.timestampUtc = timestamps.get(row.blockNumber) ?? nu
 const offers: OfferPrice[] = X402_OFFERS.map((o) => ({
   id: o.id,
   // serviceName is shared across offers from one service, so two products both
-  // read as "Maha Context Compiler". The id distinguishes them.
-  title: o.id.split('-').map((w) => w[0].toUpperCase() + w.slice(1)).join(' '),
+  // read as "Maha Context Compiler". The id distinguishes them. Known acronyms
+  // are upper-cased, because "Mps Autonomous Audit" on a public page reads as
+  // carelessness about the thing being sold.
+  title: titleFor(o.id),
   amountBaseUnits: BigInt(o.amount),
 }))
 

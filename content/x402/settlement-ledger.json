@@ -1,11 +1,11 @@
 {
   "schemaVersion": "maha-x402-settlement-ledger/1.0",
-  "contentDigest": "sha256:a226dde412571306b51cd6a73436a57be60b0826799d1db7068af90a026e8660",
+  "contentDigest": "sha256:cc136c384b02ea2853867b4925c2e30c637cd5965efe1d63543619947c0b289c",
   "network": "Base Mainnet",
   "protocol": "HTTP 402 v2 · Base USDC",
-  "observedAt": "2026-09-06T09:01:56.281Z",
-  "scannedFromBlock": "48355900",
-  "scannedToBlock": "50947900",
+  "observedAt": "2026-09-06T09:09:33.538Z",
+  "scannedFromBlock": "48356131",
+  "scannedToBlock": "50948131",
   "summary": {
     "totalSettlements": 20,
     "externalSettlements": 11,
@@ -15,6 +15,13 @@
     "crossProductWallets": 1,
     "externalValueUsdc": "0.047",
     "byProduct": [
+      {
+        "id": "context-budget-ladder",
+        "title": "Context Budget Ladder",
+        "priceUsdc": "0.005",
+        "settlements": 0,
+        "externalSettlements": 0
+      },
       {
         "id": "context-compression",
         "title": "Context Compression",
@@ -30,10 +37,31 @@
         "externalSettlements": 4
       },
       {
+        "id": "evidence-retention-matrix",
+        "title": "Evidence Retention Matrix",
+        "priceUsdc": "0.05",
+        "settlements": 0,
+        "externalSettlements": 0
+      },
+      {
+        "id": "governed-context-verification-pack",
+        "title": "Governed Context Verification Pack",
+        "priceUsdc": "0.5",
+        "settlements": 0,
+        "externalSettlements": 0
+      },
+      {
         "id": "mps-autonomous-audit",
-        "title": "Mps Autonomous Audit",
+        "title": "MPS Autonomous Audit",
         "priceUsdc": "0.1",
         "settlements": 1,
+        "externalSettlements": 0
+      },
+      {
+        "id": "research-intake-evidence-pack",
+        "title": "Research Intake Evidence Pack",
+        "priceUsdc": "1",
+        "settlements": 0,
         "externalSettlements": 0
       }
     ]
@@ -226,7 +254,7 @@
       "amountUsdc": "0.1",
       "product": {
         "id": "mps-autonomous-audit",
-        "title": "Mps Autonomous Audit",
+        "title": "MPS Autonomous Audit",
         "priceUsdc": "0.1"
       },
       "explorerUrl": "https://basescan.org/tx/0x1c6cf823546de43b33b79974bfe2309d44a11fcf7d15a833b755fc05b4e1b0c4"
