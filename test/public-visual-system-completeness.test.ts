@@ -69,7 +69,10 @@ test('every route belongs to one declared visual system', () => {
   // and the two approved reader FAQ routes restore the group to 41. Every other
   // group is unchanged, which is what this
   // assertion is really guarding.
-  assert.deepEqual(groups, { paper: 113, apps: 6, books: 41, docs: 1, knowledge: 68, intelligence: 2, operator: 32, internal: 1 })
+  // paper 113 -> 114: the autonomous settlement ledger at /developers/settlement,
+  // which renders a generated on-chain snapshot and owns the paper boundary
+  // directly rather than delegating to a shared renderer.
+  assert.deepEqual(groups, { paper: 114, apps: 6, books: 41, docs: 1, knowledge: 68, intelligence: 2, operator: 32, internal: 1 })
 })
 
 test('Apps, Books, Docs, Knowledge, and Intelligence own bounded cyber-light overlays', () => {

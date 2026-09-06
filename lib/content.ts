@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs'
 import { resolve, sep } from 'node:path'
 
 import { isKnownBook, type BookId } from './books.ts'
+import { openBookEditions } from './open-book-editions.ts'
 
 // Master markdown lives at content/books/<slug>/<slug>.md. Only the slug (already
 // validated against the catalog) ever enters the path, and the resolved path is
@@ -30,11 +31,78 @@ function masterPath(slug: BookId): string | null {
   return path
 }
 
+/**
+ * A manuscript filename that may be joined to a book directory.
+ *
+ * The comment above CONTENT_ROOT promises that only the slug — already checked
+ * against the catalog — reaches the filesystem. Reading filenames from the
+ * edition data breaks that promise unless each one is checked, so each is: a
+ * bare `.md` name with no separator and no traversal, resolving inside the
+ * book's own directory. Anything else is dropped rather than sanitised, because
+ * a name needing repair is a data error worth noticing, not worth guessing at.
+ */
+export function manuscriptPath(slug: BookId, filename: string): string | null {
+  if (!/^[A-Za-z0-9][A-Za-z0-9._-]*\.md$/.test(filename)) return null
+  if (filename.includes('..')) return null
+  const bookRoot = resolve(CONTENT_ROOT, slug)
+  const path = resolve(bookRoot, filename)
+  // Redundant with the pattern above, which already rejects separators and
+  // dots. Kept as the check that still holds if that pattern is ever loosened,
+  // and annotated as redundant because a test cannot distinguish it — removing
+  // it changes no behaviour, so it must not be mistaken for the thing doing
+  // the work.
+  if (!path.startsWith(bookRoot + sep)) return null
+  return path
+}
+
+/**
+ * The manuscript, from whichever shape the book was authored in.
+ *
+ * Most books have a single master at `<slug>/<slug>.md`. Two do not: The
+ * Volcanic Engine is seventeen files and The Borrowed Light fourteen, each
+ * named for its chapter. They had no AST at all, and so no paid payload, purely
+ * because this function looked for one filename and found nothing.
+ *
+ * The reading order was never missing — `openBookEditions[slug].manuscriptFiles`
+ * has always declared it, correctly sequenced. It simply was not read. So the
+ * master file stays the primary path, unchanged for the books that have one,
+ * and the declared list is the fallback rather than a rewrite of the working
+ * case.
+ */
 export function readBookMarkdown(slug: string): string | null {
   if (!isKnownBook(slug)) return null
-  const path = masterPath(slug)
-  if (!path) return null
-  try { return readFileSync(path, 'utf8') } catch { return null }
+
+  const master = masterPath(slug)
+  if (master) {
+    try { return readFileSync(master, 'utf8') } catch { /* fall through to the declared files */ }
+  }
+
+  const declared = (openBookEditions as Record<string, { manuscriptFiles?: readonly string[] } | undefined>)[slug]?.manuscriptFiles
+  if (!declared || declared.length === 0) return null
+
+  return joinManuscriptFiles(slug, declared)
+}
+
+/**
+ * Concatenates the declared files, or refuses.
+ *
+ * A missing or unreadable file returns null rather than a short book. Serving
+ * fifteen of seventeen chapters as the paid payload would be worse than serving
+ * none, because the chunk count would look plausible and nothing downstream
+ * could tell it was incomplete.
+ *
+ * Exported so that refusal is testable: it is the behaviour the comment claims,
+ * and a claim in a comment that no test exercises is a claim nobody checked.
+ */
+export function joinManuscriptFiles(slug: BookId, filenames: readonly string[]): string | null {
+  if (filenames.length === 0) return null
+  const parts: string[] = []
+  for (const filename of filenames) {
+    const path = manuscriptPath(slug, filename)
+    if (!path) return null
+    try { parts.push(readFileSync(path, 'utf8')) } catch { return null }
+  }
+  return parts.join('\n\n')
 }
 
 function anchorFor(heading: string): string {
