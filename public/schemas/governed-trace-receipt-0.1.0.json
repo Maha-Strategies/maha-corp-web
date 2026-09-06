@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.mahastrategies.com/schemas/governed-trace-receipt-0.1.0.json",
+  "title": "GovernedTraceReceipt v0.1",
+  "description": "Offline, content-minimizing receipt profile for Hawthorn SkillLoop-compatible trace exports mapped into Maha's evidence, context, authority and receipt layers.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "profile", "trace", "layers", "receiptDigest"],
+  "properties": {
+    "schema": { "const": "maha.governed-trace-receipt/0.1" },
+    "profile": { "const": "hawthorn-skillloop-trace-export/1.0" },
+    "trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["traceId", "sourceSchemaVersion", "runtime", "adapter", "normalizedTraceDigest", "rawTraceDigest"],
+      "properties": {
+        "traceId": { "type": "string", "minLength": 1 },
+        "sourceSchemaVersion": { "type": "string", "minLength": 1 },
+        "runtime": { "type": "string", "minLength": 1 },
+        "adapter": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "version"],
+          "properties": {
+            "name": { "const": "agent_architecture_trace_export" },
+            "version": { "type": "string", "minLength": 1 }
+          }
+        },
+        "normalizedTraceDigest": { "$ref": "#/$defs/digest" },
+        "rawTraceDigest": { "$ref": "#/$defs/digest" }
+      }
+    },
+    "layers": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence", "context", "authority", "receipt"],
+      "properties": {
+        "evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["orderedSourceRecords"],
+          "properties": {
+            "orderedSourceRecords": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["order", "recordId", "digest"],
+                "properties": {
+                  "order": { "type": "integer", "minimum": 0 },
+                  "recordId": { "type": "string", "minLength": 1 },
+                  "digest": { "$ref": "#/$defs/digest" }
+                }
+              }
+            }
+          }
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["selectedContextDigest", "retrievalPolicyDigest", "budget"],
+          "properties": {
+            "selectedContextDigest": { "$ref": "#/$defs/digest" },
+            "retrievalPolicyDigest": { "$ref": "#/$defs/digest" },
+            "budget": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["limitTokens", "selectedTokens", "held"],
+              "properties": {
+                "limitTokens": { "type": "integer", "minimum": 0 },
+                "selectedTokens": { "type": "integer", "minimum": 0 },
+                "held": { "type": "boolean" }
+              }
+            }
+          }
+        },
+        "authority": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["actorId", "organizationId", "role", "visibilityScope"],
+          "properties": {
+            "actorId": { "type": "string", "minLength": 1 },
+            "organizationId": { "type": "string", "minLength": 1 },
+            "role": { "type": "string", "minLength": 1 },
+            "visibilityScope": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+          }
+        },
+        "receipt": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["guardrail", "compaction", "escalation", "lineage", "completedAt"],
+          "properties": {
+            "guardrail": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["outcome", "policyDigest", "reasonCodes"],
+              "properties": {
+                "outcome": { "enum": ["passed", "blocked", "not_evaluated"] },
+                "policyDigest": { "$ref": "#/$defs/digest" },
+                "reasonCodes": { "$ref": "#/$defs/reasonCodes" }
+              }
+            },
+            "compaction": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["outcome", "inputDigest", "outputDigest", "reasonCodes"],
+              "properties": {
+                "outcome": { "enum": ["not_required", "applied", "failed"] },
+                "inputDigest": { "$ref": "#/$defs/digest" },
+                "outputDigest": { "$ref": "#/$defs/digest" },
+                "reasonCodes": { "$ref": "#/$defs/reasonCodes" }
+              }
+            },
+            "escalation": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["outcome", "reasonCodes"],
+              "properties": {
+                "outcome": { "enum": ["not_required", "requested", "approved", "rejected"] },
+                "reasonCodes": { "$ref": "#/$defs/reasonCodes" }
+              }
+            },
+            "lineage": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "checkpointId": { "type": "string", "minLength": 1 },
+                "parentTraceId": { "type": "string", "minLength": 1 }
+              },
+              "anyOf": [{ "required": ["checkpointId"] }, { "required": ["parentTraceId"] }]
+            },
+            "completedAt": { "type": "string", "format": "date-time" }
+          }
+        }
+      }
+    },
+    "receiptDigest": { "$ref": "#/$defs/digest" },
+    "proof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "keyId", "signature"],
+      "properties": {
+        "algorithm": { "type": "string", "minLength": 1 },
+        "keyId": { "type": "string", "minLength": 1 },
+        "signature": { "type": "string", "minLength": 1 }
+      }
+    }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "reasonCodes": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]*$" } }
+  }
+}
