@@ -284,6 +284,296 @@ const INSPECTIONS = [
     independence: 'independent-of-maha',
     relationshipToEarlier: 'Same standard as tr13-src-010, inspected for a different question.',
   },
+  {
+    inspectionId: 'tr13-src-012',
+    topic: 'quantum-policy',
+    sourceIdentity: 'FIPS 203, Module-Lattice-Based Key-Encapsulation Mechanism Standard',
+    version: 'Effective 13 August 2024',
+    stableUrl: 'https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf',
+    locator: '§1 Introduction — ML-KEM and its three parameter sets (ML-KEM-512, -768, -1024).',
+    inspectionDepth: 'targeted-section-read',
+    accessBasis: 'United States federal standard, freely published.',
+    reuseBasis: 'US government work; bounded original summary with attribution.',
+    supportedClaimScope:
+      'That a federal standard now specifies a key-encapsulation mechanism, ML-KEM, in three parameter sets, believed secure against an adversary possessing a quantum computer.',
+    boundary:
+      'Specifies an algorithm and its parameters. It does not state when any organisation must migrate, that migration is complete anywhere, or that quantum attack is imminent. "Believed to be secure" is the standard\u2019s own hedge and is not a proof.',
+    sourceClass: 'federal-standard',
+    independence: 'independent-of-maha',
+    relationshipToEarlier: 'No earlier version inspected in this programme.',
+  },
+  {
+    inspectionId: 'tr13-src-013',
+    topic: 'standards-and-conformity',
+    sourceIdentity: "NIST Special Publication 2000-01, ABC's of Conformity Assessment",
+    version: 'NIST SP 2000-01',
+    stableUrl: 'https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.2000-01.pdf',
+    locator: 'Definition paragraph quoting ISO/IEC 17000, and the following paragraph enumerating testing, inspection, certification and accreditation.',
+    inspectionDepth: 'targeted-section-read',
+    accessBasis: 'United States government publication, freely available.',
+    reuseBasis: 'US government work; bounded original summary with attribution.',
+    supportedClaimScope:
+      'That conformity assessment is the demonstration that specified requirements relating to a product, process, system, person or body are fulfilled, and that it includes testing, inspection, certification and the accreditation of the bodies performing those activities.',
+    boundary:
+      'Describes the field. It does not accredit anyone, does not establish that any particular assessment is adequate, and does not substitute for the ISO/IEC 17000 text it quotes.',
+    sourceClass: 'government-standards-body',
+    independence: 'independent-of-maha',
+    relationshipToEarlier:
+      'Used as a lawful free route to the ISO/IEC 17000 definition. ISO/IEC 42001 and the ISO catalogue entry are paywalled and were not accessed.',
+  },
+  {
+    inspectionId: 'tr13-src-014',
+    topic: 'health-claim-boundaries',
+    sourceIdentity: 'US Federal Trade Commission, Health Products Compliance Guidance',
+    version: 'As published at ftc.gov, read 2026-09-06',
+    stableUrl: 'https://www.ftc.gov/business-guidance/resources/health-products-compliance-guidance',
+    locator: 'Substantiation section — "competent and reliable scientific evidence"; the paragraph on randomised controlled human clinical testing.',
+    inspectionDepth: 'targeted-section-read',
+    accessBasis: 'United States government guidance, freely available.',
+    reuseBasis: 'US government work; bounded original summary with attribution.',
+    supportedClaimScope:
+      'That health-benefit claims require substantiation as competent and reliable scientific evidence, and that for health-related benefits this generally means randomised, controlled human clinical testing, assessed on parameters including sample size, duration and outcomes.',
+    boundary:
+      'Guidance on advertising substantiation, not a clinical standard and not legal advice. It does not state what any specific product may claim, and does not determine whether a given study is adequate.',
+    sourceClass: 'government-regulator-guidance',
+    independence: 'independent-of-maha',
+    relationshipToEarlier: 'No earlier version inspected in this programme.',
+  },
+  {
+    inspectionId: 'tr13-src-015',
+    topic: 'wellness-recommendation-limits',
+    sourceIdentity: 'US FDA CDRH, General Wellness: Policy for Low Risk Devices',
+    version: 'Document issued 6 January 2026',
+    stableUrl: 'https://www.fda.gov/media/90652/download',
+    locator: 'Definition passage: the two factors defining a general wellness product; the following paragraph on products that do not meet the device definition under FD&C Act §201(h).',
+    inspectionDepth: 'targeted-section-read',
+    accessBasis: 'United States government guidance, freely available.',
+    reuseBasis: 'US government work; bounded original summary with attribution.',
+    supportedClaimScope:
+      'That a general wellness product is one intended only for general wellness use and presenting low risk, and that some such products fall outside the statutory device definition.',
+    boundary:
+      'A compliance policy describing when CDRH does not intend to examine a product. It confers no approval, does not classify any specific product, and does not establish that a wellness claim is accurate.',
+    sourceClass: 'government-regulator-guidance',
+    independence: 'independent-of-maha',
+    relationshipToEarlier: 'No earlier version inspected in this programme.',
+  },
+  {
+    inspectionId: 'tr13-src-016',
+    topic: 'machine-contracting',
+    sourceIdentity: 'Regulation (EU) No 910/2014 (eIDAS)',
+    version: 'EUR-Lex CELEX 32014R0910',
+    stableUrl: 'https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32014R0910',
+    locator: 'Article 25(1) and 25(2) — legal effects of electronic signatures.',
+    inspectionDepth: 'targeted-article-read',
+    accessBasis: 'Official EU legal publication, freely accessible.',
+    reuseBasis: 'EUR-Lex reuse policy permits reproduction with acknowledgement; summarised here.',
+    supportedClaimScope:
+      'That an electronic signature may not be denied legal effect or admissibility solely for being electronic, and that a qualified electronic signature has the equivalent legal effect of a handwritten one.',
+    boundary:
+      'Addresses signatures by natural and legal persons. It does not confer contracting capacity on an autonomous machine, does not establish that an agent may bind a principal, and must not be read as authorising machine-formed contracts.',
+    sourceClass: 'statutory-instrument',
+    independence: 'independent-of-maha',
+    relationshipToEarlier: 'Distinct instrument from the GDPR inspections tr13-src-008 and tr13-src-009.',
+  },
+  {
+    inspectionId: 'tr13-src-017',
+    topic: 'public-sector-procurement',
+    sourceIdentity: 'Directive 2014/24/EU on public procurement',
+    version: 'EUR-Lex CELEX 32014L0024',
+    stableUrl: 'https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32014L0024',
+    locator: 'Recital on Treaty principles — equal treatment, non-discrimination, mutual recognition, proportionality and transparency.',
+    inspectionDepth: 'targeted-section-read',
+    accessBasis: 'Official EU legal publication, freely accessible.',
+    reuseBasis: 'EUR-Lex reuse policy permits reproduction with acknowledgement; summarised here.',
+    supportedClaimScope:
+      'That public procurement in the EU is governed by equal treatment, non-discrimination, mutual recognition, proportionality and transparency, with coordinated procedures applying above defined contract values.',
+    boundary:
+      'States principles and their scope. It does not determine whether any procurement was lawful, does not apply outside the EU, and is not legal advice.',
+    sourceClass: 'statutory-instrument',
+    independence: 'independent-of-maha',
+    relationshipToEarlier: 'Distinct instrument from the GDPR and eIDAS inspections.',
+  },
+  {
+    inspectionId: 'tr13-src-018',
+    topic: 'author-manuscript',
+    sourceIdentity: 'PubMed Central, Author Manuscripts in PMC',
+    version: 'As published at pmc.ncbi.nlm.nih.gov, read 2026-09-06',
+    stableUrl: 'https://pmc.ncbi.nlm.nih.gov/about/authorms/',
+    locator: 'Section "What is the Author Manuscript?" — first paragraph.',
+    inspectionDepth: 'targeted-section-read',
+    accessBasis: 'United States government service, freely accessible.',
+    reuseBasis: 'US government work; bounded original summary with attribution.',
+    supportedClaimScope:
+      'That an author manuscript is the version peer reviewed and accepted by a journal, including changes made during peer review but generally excluding copyediting and stylistic edits.',
+    boundary:
+      'Defines one version in a chain. It does not establish which version should be cited, that an author manuscript matches the published record, or any deposit obligation.',
+    sourceClass: 'government-repository-policy',
+    independence: 'independent-of-maha',
+    relationshipToEarlier: 'The NIH public access policy page returned 403 and was not accessed; this PMC page is the lawful accessible route to the same definition.',
+  },
+  {
+    inspectionId: 'tr13-src-019',
+    topic: 'repository-copy',
+    sourceIdentity: 'PubMed Central, Author Manuscripts in PMC',
+    version: 'As published at pmc.ncbi.nlm.nih.gov, read 2026-09-06',
+    stableUrl: 'https://pmc.ncbi.nlm.nih.gov/about/authorms/',
+    locator: 'Section "What is the Author Manuscript?" — first paragraph.',
+    inspectionDepth: 'targeted-section-read',
+    accessBasis: 'United States government service, freely accessible.',
+    reuseBasis: 'US government work; bounded original summary with attribution.',
+    supportedClaimScope:
+      'That a repository may hold a version of a work distinct from the publisher\u2019s, and that the distinction between them is a matter of which edits are included.',
+    boundary:
+      'Does not establish that a repository copy is interchangeable with the version of record, nor that any repository copy is complete or current.',
+    sourceClass: 'government-repository-policy',
+    independence: 'independent-of-maha',
+    relationshipToEarlier: 'Same page as tr13-src-018, inspected for the repository-versus-publisher distinction.',
+  },
+  {
+    inspectionId: 'tr13-src-020',
+    topic: 'version-relationship',
+    sourceIdentity: 'PubMed Central, Author Manuscripts in PMC',
+    version: 'As published at pmc.ncbi.nlm.nih.gov, read 2026-09-06',
+    stableUrl: 'https://pmc.ncbi.nlm.nih.gov/about/authorms/',
+    locator: 'Section "What is the Author Manuscript?" — first paragraph.',
+    inspectionDepth: 'targeted-section-read',
+    accessBasis: 'United States government service, freely accessible.',
+    reuseBasis: 'US government work; bounded original summary with attribution.',
+    supportedClaimScope:
+      'That versions of one work stand in a stated relationship — accepted manuscript versus published record — differing by the edits each contains.',
+    boundary:
+      'Supports the existence of a version relationship for journal articles. It does not generalise to other artifact types and establishes no versioning scheme.',
+    sourceClass: 'government-repository-policy',
+    independence: 'independent-of-maha',
+    relationshipToEarlier: 'Same page as tr13-src-018 and tr13-src-019.',
+  },
+  {
+    inspectionId: 'tr13-src-021',
+    topic: 'correction',
+    sourceIdentity: 'ICMJE Recommendations, §III.A Corrections and Version Control',
+    version: 'Updated January 2026',
+    stableUrl: 'https://www.icmje.org/recommendations/browse/publishing-and-editorial-issues/corrections-and-version-control.html',
+    locator: '§III.A, paragraph beginning "Errors serious enough to invalidate a paper\u2019s results".',
+    inspectionDepth: 'targeted-section-read',
+    accessBasis: 'Publicly published editorial recommendations.',
+    reuseBasis: 'Reference-only. Bounded original summary; recommendation text is not copied into artifacts.',
+    supportedClaimScope:
+      'That errors serious enough to invalidate results and conclusions may require retraction, and that retraction with republication may be considered where honest error changes results but the underlying science appears valid.',
+    boundary:
+      'Editorial recommendations for journals. They bind no publisher, do not determine whether any specific correction was handled properly, and address scholarly articles rather than arbitrary published records.',
+    sourceClass: 'professional-body-recommendation',
+    independence: 'independent-of-maha',
+    relationshipToEarlier: 'COPE retraction guidelines returned 403 and were not accessed; ICMJE is the accessible equivalent authority consulted instead.',
+  },
+  {
+    inspectionId: 'tr13-src-022',
+    topic: 'private-compute',
+    sourceIdentity: 'Regulation (EU) 2016/679 (GDPR)',
+    version: 'Consolidated text, EUR-Lex CELEX 32016R0679',
+    stableUrl: 'https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32016R0679',
+    locator: 'Article 32(1)(a)-(c) — security of processing, including pseudonymisation and encryption.',
+    inspectionDepth: 'targeted-article-read',
+    accessBasis: 'Official EU legal publication, freely accessible.',
+    reuseBasis: 'EUR-Lex reuse policy permits reproduction with acknowledgement; summarised here.',
+    supportedClaimScope:
+      'That security appropriate to the risk is required, and that pseudonymisation and encryption, together with ongoing confidentiality, integrity, availability and resilience, are named among the measures.',
+    boundary:
+      'Names measures without prescribing an architecture. It does not establish that computing locally, or in any specific environment, satisfies the obligation.',
+    sourceClass: 'statutory-instrument',
+    independence: 'independent-of-maha',
+    relationshipToEarlier: 'Same instrument as tr13-src-008 and tr13-src-009, inspected for a different article.',
+  },
+  {
+    inspectionId: 'tr13-src-023',
+    topic: 'cloud-escalation',
+    sourceIdentity: 'Regulation (EU) 2016/679 (GDPR)',
+    version: 'Consolidated text, EUR-Lex CELEX 32016R0679',
+    stableUrl: 'https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32016R0679',
+    locator: 'Article 28(3) — processing by a processor governed by a binding contract setting out subject-matter, duration, nature and purpose.',
+    inspectionDepth: 'targeted-article-read',
+    accessBasis: 'Official EU legal publication, freely accessible.',
+    reuseBasis: 'EUR-Lex reuse policy permits reproduction with acknowledgement; summarised here.',
+    supportedClaimScope:
+      'That sending processing to another party requires a binding instrument that fixes the subject-matter, duration, nature and purpose of that processing.',
+    boundary:
+      'Governs the controller-processor relationship. It does not address when escalation is appropriate, and does not make any escalation lawful by itself.',
+    sourceClass: 'statutory-instrument',
+    independence: 'independent-of-maha',
+    relationshipToEarlier: 'Same instrument as tr13-src-008, tr13-src-009 and tr13-src-022.',
+  },
+  {
+    inspectionId: 'tr13-src-024',
+    topic: 'evacuation',
+    sourceIdentity: 'Ready.gov (US Department of Homeland Security / FEMA), Volcanoes',
+    version: 'As published at ready.gov, read 2026-09-06',
+    stableUrl: 'https://www.ready.gov/volcanoes',
+    locator: 'Section "Be Safe DURING" — evacuation-order paragraph.',
+    inspectionDepth: 'full-page-read',
+    accessBasis: 'United States government public guidance.',
+    reuseBasis: 'US government work; bounded original summary with attribution.',
+    supportedClaimScope:
+      'That the published guidance is to follow evacuation orders from local authorities, evacuate early, and avoid areas downwind and river valleys downstream of the volcano.',
+    boundary:
+      'General public preparedness guidance. It sets no distances or thresholds for any specific volcano, issues no order, and does not substitute for direction from local authorities.',
+    sourceClass: 'government-preparedness-guidance',
+    independence: 'independent-of-maha',
+    relationshipToEarlier: 'Complements the USGS hazard description in tr13-src-002, which describes the hazard rather than the response.',
+  },
+  {
+    inspectionId: 'tr13-src-025',
+    topic: 'community-preparedness',
+    sourceIdentity: 'Ready.gov (US Department of Homeland Security / FEMA), Volcanoes',
+    version: 'As published at ready.gov, read 2026-09-06',
+    stableUrl: 'https://www.ready.gov/volcanoes',
+    locator: 'Section "Prepare NOW" — know your area\u2019s risk; ask local emergency management for evacuation and shelter plans; community warning systems.',
+    inspectionDepth: 'full-page-read',
+    accessBasis: 'United States government public guidance.',
+    reuseBasis: 'US government work; bounded original summary with attribution.',
+    supportedClaimScope:
+      'That preparedness is described as knowing the local risk, obtaining evacuation and shelter plans from local emergency management, and learning the community warning systems.',
+    boundary:
+      'Describes what a household is advised to do. It does not assess any community\u2019s readiness, prescribe a programme, or establish that following it produces a safe outcome.',
+    sourceClass: 'government-preparedness-guidance',
+    independence: 'independent-of-maha',
+    relationshipToEarlier: 'Same page as tr13-src-024, inspected for the preparedness section.',
+  },
+  {
+    inspectionId: 'tr13-src-026',
+    topic: 'random-seed',
+    sourceIdentity: 'NeurIPS Paper Checklist',
+    version: 'As published at neurips.cc, read 2026-09-06',
+    stableUrl: 'https://neurips.cc/public/guides/PaperChecklist',
+    locator: 'Items 4 (Experimental Result Reproducibility) and 5 (Open Access to Data and Code).',
+    inspectionDepth: 'targeted-section-read',
+    accessBasis: 'Publicly published conference guidance.',
+    reuseBasis: 'Reference-only. Bounded original summary; checklist text is not copied into artifacts.',
+    supportedClaimScope:
+      'That a venue may require authors to state what steps make results reproducible or verifiable, and whether the code, data and instructions needed to reproduce the main experimental results were included.',
+    boundary:
+      'A submission checklist for one conference. It does not specify seed handling, does not define reproducibility, and answering it does not make a result reproducible.',
+    sourceClass: 'conference-policy',
+    independence: 'independent-of-maha',
+    relationshipToEarlier:
+      'ACM artifact review and badging returned 403 and was not accessed; this is the accessible venue policy consulted instead.',
+  },
+  {
+    inspectionId: 'tr13-src-027',
+    topic: 'semiconductor-policy',
+    sourceIdentity: 'CHIPS and Science Act, Public Law 117-167',
+    version: 'Public Law 117-167, 9 August 2022',
+    stableUrl: 'https://www.congress.gov/117/plaws/publ167/PLAW-117publ167.pdf',
+    locator: 'Sec. 102-103; §(3) Assistance for Mature Technology Nodes, appropriating $2,000,000,000 under 15 U.S.C. 4652.',
+    inspectionDepth: 'targeted-section-read',
+    accessBasis: 'United States public law, freely published.',
+    reuseBasis: 'US government work; bounded original summary with attribution.',
+    supportedClaimScope:
+      'That the statute creates a semiconductor incentive fund and directs a named appropriation toward fabrication, assembly, testing or packaging at mature technology nodes in the United States.',
+    boundary:
+      'States what the law appropriates and authorises. It does not establish what has been disbursed, whether any objective was met, or the policy\u2019s effect on supply.',
+    sourceClass: 'statute',
+    independence: 'independent-of-maha',
+    relationshipToEarlier: 'No earlier version inspected in this programme.',
+  },
 ] as const
 
 const inspectedTopics = new Set(INSPECTIONS.map((i) => i.topic))
@@ -471,8 +761,27 @@ write('source-inspections', {
   cohortDigest: cohortDigests,
   method: 'Sources were opened and read. Metadata was not treated as inspection, and no search snippet was used as evidence. No paywall, CAPTCHA or access control was bypassed.',
   topicsInCohort: new Set(cohort.map((c) => topicOf(c))).size,
-  topicsInspected: INSPECTIONS.length,
+  topicsInspected: new Set(INSPECTIONS.map((i) => i.topic)).size,
+  distinctSources: new Set(INSPECTIONS.map((i) => i.sourceIdentity)).size,
   inspections: INSPECTIONS,
+  // Recorded so that an uninspected topic is distinguishable from an unexamined
+  // one. An access refusal and a failed extraction are different facts, and
+  // neither was worked around.
+  soughtButNotInspected: [
+    { source: 'COPE retraction guidelines', outcome: 'HTTP 403', topic: 'correction', resolution: 'ICMJE §III.A consulted instead (tr13-src-021).' },
+    { source: 'ACM artifact review and badging', outcome: 'HTTP 403', topic: 'random-seed', resolution: 'NeurIPS checklist consulted instead (tr13-src-026).' },
+    { source: 'NIH public access policy', outcome: 'HTTP 403', topic: 'author-manuscript', resolution: 'PMC author-manuscript page consulted instead (tr13-src-018).' },
+    { source: 'ISO/IEC 42001 and the ISO catalogue', outcome: 'paywalled', topic: 'standards-and-conformity', resolution: 'NIST SP 2000-01, which quotes ISO/IEC 17000, consulted instead (tr13-src-013). The paywall was not bypassed.' },
+    { source: 'arXiv version availability policy', outcome: 'served navigation and licence boilerplate rather than policy text', topic: 'manuscript-versioning', resolution: 'None. A failed extraction is not an inspection, so the topic remains uninspected.' },
+    { source: 'JATS tag library (sec, disp-formula)', outcome: 'served navigation index and element headings rather than definitions', topic: 'passage-locator, equation-locator', resolution: 'None. Headings are metadata, not content.' },
+    { source: 'Crossref REST API documentation', outcome: 'served site navigation rather than documentation body', topic: 'metadata-only-evidence, abstract-only-evidence', resolution: 'None.' },
+  ],
+  uninspectedTopicNote:
+    'The topics with no inspection are predominantly this organisation\u2019s own operational concepts — claim intake, ' +
+    'evidence dossiers, runtime witness receipts, uncertainty recording, internal review, context packs — and the ' +
+    'author\u2019s own concepts on the personal properties. No external authority defines them, so none was cited. ' +
+    'Their candidates are blocked on inspection rather than faulted, and a first-party definition would have to be ' +
+    'written and reviewed before they could be sourced at all.',
 })
 
 write('decisions', {
