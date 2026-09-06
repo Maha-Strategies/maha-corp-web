@@ -1,0 +1,379 @@
+{
+  "schemaVersion": "maha-federation-readiness-remediation-page-specifications/1.0",
+  "decisionManifestDigest": "sha256:fce87596b82d8a94ea098fed14d401cc7eb017550c6d1ebe9b51e1c9c3a0fbda",
+  "counts": {
+    "specifications": 6
+  },
+  "specifications": [
+    {
+      "candidateId": "cand_671d652918d62414c37d751d",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+      "title": "Health Data Consent — Definition",
+      "siteId": "maha-os",
+      "topic": "health-data-consent",
+      "routeRole": "definition",
+      "answerContract": "Answer the definition intent for Health Data Consent directly, using only the inspected scope and preserving every source boundary.",
+      "requiredSections": [
+        "Direct answer",
+        "Role-specific answer",
+        "Definition and operating context",
+        "Evidence and exact locators",
+        "What the evidence does not establish",
+        "Related definitions and applications"
+      ],
+      "boundedQuestions": [
+        "What does Health Data Consent mean in this bounded context?",
+        "Which inspected sources support this definition answer?",
+        "What does the evidence not establish?",
+        "Which definition or canonical owner must be read first?",
+        "What source, policy, implementation, or release change would require revision?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "hhs-hipaa-auth",
+          "locator": "Entire FAQ: consent versus authorization",
+          "scope": "HIPAA-specific distinction between optional consent and detailed authorization.",
+          "boundary": "HIPAA does not govern every consumer health application or every jurisdiction."
+        },
+        {
+          "sourceId": "nist-privacy",
+          "locator": "Core functions Identify-P, Govern-P, Control-P, Communicate-P, Protect-P",
+          "scope": "Voluntary privacy-risk framework for data processing and user control.",
+          "boundary": "The framework is voluntary and does not create legal consent."
+        }
+      ],
+      "dependencies": {
+        "canonicalOwner": "maha-os"
+      },
+      "structuredData": {
+        "type": "TechArticle",
+        "noRatingOrEndorsement": true
+      },
+      "machineContract": {
+        "deterministicAnswerRegistry": true,
+        "exactLocatorsRequired": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_41ee6b7080d2c8416e30adaf",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/commercialization",
+      "title": "Context Budgeting — Commercialization",
+      "siteId": "maha-strategies",
+      "topic": "context-budgeting",
+      "routeRole": "commercialization",
+      "answerContract": "Answer the commercialization intent for Context Budgeting directly, using only the inspected scope and preserving every source boundary.",
+      "requiredSections": [
+        "Direct answer",
+        "Role-specific answer",
+        "Definition and operating context",
+        "Evidence and exact locators",
+        "What the evidence does not establish",
+        "Related definitions and applications"
+      ],
+      "boundedQuestions": [
+        "What does Context Budgeting mean in this bounded context?",
+        "Which inspected sources support this commercialization answer?",
+        "What does the evidence not establish?",
+        "Which definition or canonical owner must be read first?",
+        "What source, policy, implementation, or release change would require revision?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "local-context-compiler",
+          "locator": "STANDARD_MAX_CONTEXT_PACK_BYTES; parseContextPackRequest; compileContextPack; quoteMeteredCredits",
+          "scope": "Current bounded context-selection behavior.",
+          "boundary": "Local implementation does not establish that a chosen context is sufficient or improves a model outcome."
+        },
+        {
+          "sourceId": "nist-ai-rmf",
+          "locator": "MAP 2.2 and MEASURE 2.9",
+          "scope": "Documenting knowledge limits and interpreting outputs in context.",
+          "boundary": "NIST does not prescribe Maha token budgets or ranking algorithms."
+        },
+        {
+          "sourceId": "maha-pricing-2026-09-06",
+          "locator": "Context Control & Evidence Assessment; Enterprise Context Integrity Assessment; founding design partner section",
+          "scope": "Published assessment tiers, prices, availability, hard-budget positioning, and measured token, cost, and failure-path behavior.",
+          "boundary": "The offer promises no customer outcome, saving, performance improvement, production credential handling, or recovery result."
+        },
+        {
+          "sourceId": "maha-context-assessment-sample",
+          "locator": "Scope, measured inputs, limitations and delivery sections",
+          "scope": "The published sample demonstrates the assessment’s bounded measurement and reporting form.",
+          "boundary": "A sample is not a customer result and does not prove savings or external validation."
+        }
+      ],
+      "dependencies": {
+        "canonicalOwner": "maha-strategies"
+      },
+      "structuredData": {
+        "type": "TechArticle",
+        "noRatingOrEndorsement": true
+      },
+      "machineContract": {
+        "deterministicAnswerRegistry": true,
+        "exactLocatorsRequired": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_5322e19e5c67b1aae32124b0",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/failure-mode",
+      "title": "Release Manifest — Failure Mode",
+      "siteId": "agentic-publishing",
+      "topic": "release-manifest",
+      "routeRole": "failure-mode",
+      "answerContract": "Answer the failure mode intent for Release Manifest directly, using only the inspected scope and preserving every source boundary.",
+      "requiredSections": [
+        "Direct answer",
+        "Role-specific answer",
+        "Definition and operating context",
+        "Evidence and exact locators",
+        "What the evidence does not establish",
+        "Related definitions and applications"
+      ],
+      "boundedQuestions": [
+        "What does Release Manifest mean in this bounded context?",
+        "Which inspected sources support this failure mode answer?",
+        "What does the evidence not establish?",
+        "Which definition or canonical owner must be read first?",
+        "What source, policy, implementation, or release change would require revision?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "publish-release-manifests",
+          "locator": "Approval-before-release and withdrawal behavior",
+          "scope": "Metadata-public releases require approval and must stop resolving when withdrawn.",
+          "boundary": "The page establishes one withdrawal failure condition, not an exhaustive failure-mode catalogue."
+        }
+      ],
+      "dependencies": {
+        "canonicalOwner": {
+          "url": "https://publish.mahastrategies.com/docs/release-manifests",
+          "reason": "observed-canonical-definition"
+        }
+      },
+      "structuredData": {
+        "type": "TechArticle",
+        "noRatingOrEndorsement": true
+      },
+      "machineContract": {
+        "deterministicAnswerRegistry": true,
+        "exactLocatorsRequired": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_b0625906e210bafb279b7669",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/template",
+      "title": "Machine Readable Article — Template",
+      "siteId": "agentic-publishing",
+      "topic": "machine-readable-article",
+      "routeRole": "template",
+      "answerContract": "Answer the template intent for Machine Readable Article directly, using only the inspected scope and preserving every source boundary.",
+      "requiredSections": [
+        "Direct answer",
+        "Role-specific answer",
+        "Definition and operating context",
+        "Evidence and exact locators",
+        "What the evidence does not establish",
+        "Related definitions and applications"
+      ],
+      "boundedQuestions": [
+        "What does Machine Readable Article mean in this bounded context?",
+        "Which inspected sources support this template answer?",
+        "What does the evidence not establish?",
+        "Which definition or canonical owner must be read first?",
+        "What source, policy, implementation, or release change would require revision?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "niso-jats-1-4",
+          "locator": "JATS 1.4 standard description and tag-suite scope",
+          "scope": "XML elements and attributes for journal-article metadata and full content.",
+          "boundary": "JATS is designed for journal articles and does not define every agentic publication or Maha release field."
+        },
+        {
+          "sourceId": "schema-org-article",
+          "locator": "Article type, properties, and TechArticle and ScholarlyArticle subtypes",
+          "scope": "Public structured-data vocabulary for describing article resources.",
+          "boundary": "Schema.org describes resources; it does not verify evidence, authorship, review, release status, or factual accuracy."
+        },
+        {
+          "sourceId": "publish-machine-readability",
+          "locator": "Four guidance sections and payload-validation requirement",
+          "scope": "The canonical definition and release guidance for machine-readable publishing.",
+          "boundary": "The guidance does not guarantee indexing, citation, summarization, or external adoption."
+        },
+        {
+          "sourceId": "maha-principle-context-pack",
+          "locator": "Top-level metadata, exclusions, source identity and version fields",
+          "scope": "A live metadata-only machine record suitable for a bounded worked example.",
+          "boundary": "The record is not a template or specification and does not license reproduction of the described book."
+        }
+      ],
+      "dependencies": {
+        "canonicalOwner": {
+          "url": "https://publish.mahastrategies.com/docs/machine-readability",
+          "reason": "observed-canonical-definition"
+        }
+      },
+      "structuredData": {
+        "type": "TechArticle",
+        "noRatingOrEndorsement": true
+      },
+      "machineContract": {
+        "deterministicAnswerRegistry": true,
+        "exactLocatorsRequired": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_c8b98032f22fc91b51dac6be",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/example",
+      "title": "Machine Readable Article — Example",
+      "siteId": "agentic-publishing",
+      "topic": "machine-readable-article",
+      "routeRole": "example",
+      "answerContract": "Answer the example intent for Machine Readable Article directly, using only the inspected scope and preserving every source boundary.",
+      "requiredSections": [
+        "Direct answer",
+        "Role-specific answer",
+        "Definition and operating context",
+        "Evidence and exact locators",
+        "What the evidence does not establish",
+        "Related definitions and applications"
+      ],
+      "boundedQuestions": [
+        "What does Machine Readable Article mean in this bounded context?",
+        "Which inspected sources support this example answer?",
+        "What does the evidence not establish?",
+        "Which definition or canonical owner must be read first?",
+        "What source, policy, implementation, or release change would require revision?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "niso-jats-1-4",
+          "locator": "JATS 1.4 standard description and tag-suite scope",
+          "scope": "XML elements and attributes for journal-article metadata and full content.",
+          "boundary": "JATS is designed for journal articles and does not define every agentic publication or Maha release field."
+        },
+        {
+          "sourceId": "schema-org-article",
+          "locator": "Article type, properties, and TechArticle and ScholarlyArticle subtypes",
+          "scope": "Public structured-data vocabulary for describing article resources.",
+          "boundary": "Schema.org describes resources; it does not verify evidence, authorship, review, release status, or factual accuracy."
+        },
+        {
+          "sourceId": "publish-machine-readability",
+          "locator": "Four guidance sections and payload-validation requirement",
+          "scope": "The canonical definition and release guidance for machine-readable publishing.",
+          "boundary": "The guidance does not guarantee indexing, citation, summarization, or external adoption."
+        },
+        {
+          "sourceId": "maha-principle-context-pack",
+          "locator": "Top-level metadata, exclusions, source identity and version fields",
+          "scope": "A live metadata-only machine record suitable for a bounded worked example.",
+          "boundary": "The record is not a template or specification and does not license reproduction of the described book."
+        }
+      ],
+      "dependencies": {
+        "canonicalOwner": {
+          "url": "https://publish.mahastrategies.com/docs/machine-readability",
+          "reason": "observed-canonical-definition"
+        }
+      },
+      "structuredData": {
+        "type": "TechArticle",
+        "noRatingOrEndorsement": true
+      },
+      "machineContract": {
+        "deterministicAnswerRegistry": true,
+        "exactLocatorsRequired": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_f6409ea20cfc51496e3a61d8",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/commercialization",
+      "title": "Failure Recovery — Commercialization",
+      "siteId": "maha-strategies",
+      "topic": "failure-recovery",
+      "routeRole": "commercialization",
+      "answerContract": "Answer the commercialization intent for Failure Recovery directly, using only the inspected scope and preserving every source boundary.",
+      "requiredSections": [
+        "Direct answer",
+        "Role-specific answer",
+        "Definition and operating context",
+        "Evidence and exact locators",
+        "What the evidence does not establish",
+        "Related definitions and applications"
+      ],
+      "boundedQuestions": [
+        "What does Failure Recovery mean in this bounded context?",
+        "Which inspected sources support this commercialization answer?",
+        "What does the evidence not establish?",
+        "Which definition or canonical owner must be read first?",
+        "What source, policy, implementation, or release change would require revision?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "nist-contingency",
+          "locator": "Sections 3.4–3.6 and 5: recovery strategies, testing, and reconstitution",
+          "scope": "Recovery planning, alternate processing, testing, and known-state restoration.",
+          "boundary": "Federal-system contingency guidance does not prove a specific SaaS recovery time."
+        },
+        {
+          "sourceId": "local-recovery",
+          "locator": "RecoveryStatus; RecoveryStore.claim; RecoveryStore.finish; recoveryResponseHeaders",
+          "scope": "Current replay-safe action and recovery-state ledger.",
+          "boundary": "A recorded state is not independent confirmation of the upstream side effect."
+        },
+        {
+          "sourceId": "maha-pricing-2026-09-06",
+          "locator": "Context Control & Evidence Assessment; Enterprise Context Integrity Assessment; founding design partner section",
+          "scope": "Published assessment tiers, prices, availability, hard-budget positioning, and measured token, cost, and failure-path behavior.",
+          "boundary": "The offer promises no customer outcome, saving, performance improvement, production credential handling, or recovery result."
+        },
+        {
+          "sourceId": "maha-context-assessment-sample",
+          "locator": "Scope, measured inputs, limitations and delivery sections",
+          "scope": "The published sample demonstrates the assessment’s bounded measurement and reporting form.",
+          "boundary": "A sample is not a customer result and does not prove savings or external validation."
+        }
+      ],
+      "dependencies": {
+        "canonicalOwner": "maha-strategies"
+      },
+      "structuredData": {
+        "type": "TechArticle",
+        "noRatingOrEndorsement": true
+      },
+      "machineContract": {
+        "deterministicAnswerRegistry": true,
+        "exactLocatorsRequired": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    }
+  ],
+  "provenanceDigest": "sha256:0b55414100160b120dceb843b16f824b596538500e99e2d68ba7f4a7479a5eb1"
+}

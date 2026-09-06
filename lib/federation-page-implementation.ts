@@ -73,6 +73,13 @@ type Inputs = {
     specifications: { provenanceDigest: string; specifications: Specification[] }
     packets: { provenanceDigest: string; packets: Packet[] }
   }>
+  supplements?: Array<{
+    batchId: string
+    tranche: 1 | 2 | 3
+    decisions: { provenanceDigest: string; entries: Decision[] }
+    specifications: { provenanceDigest: string; specifications: Specification[] }
+    packets: { provenanceDigest: string; packets: Packet[] }
+  }>
 }
 
 type DependencyLink = {
@@ -234,20 +241,25 @@ function publicSource(source: Packet['sources'][number]) {
 
 export function compileFederationPages(inputs: Inputs) {
   const candidates = new Map(inputs.candidateMap.candidates.map((entry) => [entry.candidateId, entry]))
-  const allDecisions = inputs.tranches.flatMap((tranche) => tranche.decisions.entries.map((entry) => ({ ...entry, tranche: tranche.tranche })))
+  const sourceSets = [
+    ...inputs.tranches.map((entry) => ({ ...entry, batchId: `tranche-${entry.tranche}` })),
+    ...(inputs.supplements ?? []),
+  ]
+  const allDecisions = sourceSets.flatMap((sourceSet) => sourceSet.decisions.entries.map((entry) => ({ ...entry, tranche: sourceSet.tranche, batchId: sourceSet.batchId })))
   const decisionById = new Map(allDecisions.map((entry) => [entry.candidateId, entry]))
-  const readyIds = new Set(allDecisions.filter((entry) => entry.disposition === 'evidence-ready').map((entry) => entry.candidateId))
-  const packetByTrancheAndKey = new Map(inputs.tranches.flatMap((tranche) => tranche.packets.packets.map((packet) => [`${tranche.tranche}:${packet.topicKey}`, packet] as const)))
-  const specs = inputs.tranches.flatMap((tranche) => tranche.specifications.specifications.map((specification) => ({ specification, tranche: tranche.tranche })))
-  if (specs.length !== 175) throw new Error(`Expected 175 evidence-ready specifications; received ${specs.length}.`)
+  const readyIds = new Set([...decisionById.values()].filter((entry) => entry.disposition === 'evidence-ready').map((entry) => entry.candidateId))
+  const packetBySourceSetAndKey = new Map(sourceSets.flatMap((sourceSet) => sourceSet.packets.packets.map((packet) => [`${sourceSet.batchId}:${packet.topicKey}`, packet] as const)))
+  const specs = sourceSets.flatMap((sourceSet) => sourceSet.specifications.specifications.map((specification) => ({ specification, tranche: sourceSet.tranche, batchId: sourceSet.batchId })))
+  if (specs.length !== readyIds.size) throw new Error(`Expected one specification for each of ${readyIds.size} evidence-ready decisions; received ${specs.length}.`)
 
-  const drafts = specs.map(({ specification, tranche }) => {
+  const drafts = specs.map(({ specification, tranche, batchId }) => {
     const candidate = candidates.get(specification.candidateId)
     const decision = decisionById.get(specification.candidateId)
     if (!candidate || !decision) throw new Error(`Missing candidate or decision for ${specification.candidateId}.`)
     if (decision.disposition !== 'evidence-ready') throw new Error(`Specification exists for non-ready candidate ${specification.candidateId}.`)
-    const packet = packetByTrancheAndKey.get(`${tranche}:${decision.topicPacketKey}`)
-    if (!packet) throw new Error(`Missing packet ${decision.topicPacketKey} for Tranche ${tranche}.`)
+    if (decision.batchId !== batchId) throw new Error(`Specification and active decision disagree on source set for ${specification.candidateId}.`)
+    const packet = packetBySourceSetAndKey.get(`${batchId}:${decision.topicPacketKey}`)
+    if (!packet) throw new Error(`Missing packet ${decision.topicPacketKey} for ${batchId}.`)
     const dependencies = dependencyObjects(specification.dependencies).map((dependency): DependencyLink => ({
       ...dependency,
       availability: dependency.candidateId
@@ -338,11 +350,12 @@ export function compileFederationPages(inputs: Inputs) {
       },
       provenance: {
         candidateMapDigest: inputs.candidateMap.provenanceDigest,
-        decisionManifestDigest: inputs.tranches.find((entry) => entry.tranche === tranche)!.decisions.provenanceDigest,
+        sourceSetId: batchId,
+        decisionManifestDigest: sourceSets.find((entry) => entry.batchId === batchId)!.decisions.provenanceDigest,
         decisionDigest: provenanceDigest(decision),
-        specificationManifestDigest: inputs.tranches.find((entry) => entry.tranche === tranche)!.specifications.provenanceDigest,
+        specificationManifestDigest: sourceSets.find((entry) => entry.batchId === batchId)!.specifications.provenanceDigest,
         specificationDigest: provenanceDigest(specification),
-        packetManifestDigest: inputs.tranches.find((entry) => entry.tranche === tranche)!.packets.provenanceDigest,
+        packetManifestDigest: sourceSets.find((entry) => entry.batchId === batchId)!.packets.provenanceDigest,
         packetDigest: provenanceDigest(packet),
       },
     }
@@ -369,7 +382,7 @@ export function compileFederationPages(inputs: Inputs) {
   const byProperty = Object.fromEntries(SITE_CONTRACTS.map((contract) => [contract.siteId, pages.filter((entry) => entry.siteId === contract.siteId).length])) as Record<SiteId, number>
   const registryBody = {
     schemaVersion: 'maha-federation-page-implementation-registry/1.0',
-    generatedFrom: inputs.tranches.map((tranche) => ({ tranche: tranche.tranche, decisionManifestDigest: tranche.decisions.provenanceDigest, specificationManifestDigest: tranche.specifications.provenanceDigest, packetManifestDigest: tranche.packets.provenanceDigest })),
+    generatedFrom: sourceSets.map((sourceSet) => ({ batchId: sourceSet.batchId, tranche: sourceSet.tranche, decisionManifestDigest: sourceSet.decisions.provenanceDigest, specificationManifestDigest: sourceSet.specifications.provenanceDigest, packetManifestDigest: sourceSet.packets.provenanceDigest })),
     status: 'local-unreleased',
     counts: {
       pages: pages.length,

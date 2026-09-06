@@ -2,11 +2,11 @@
   "schemaVersion": "maha-federation-property-pages/1.0",
   "siteId": "mayon-rajan",
   "canonicalHost": "mayonrajan.com",
-  "registryDigest": "sha256:fdec47d7878c317a6442c61b5b1d4d310d5713140e65d2fd4e488ad8d745775d",
+  "registryDigest": "sha256:457ce5d0d8da368faed995dc7fbca577490dc3af0b5358e3864f17d432c3c167",
   "status": "local-unreleased",
   "counts": {
-    "pages": 10,
-    "readyForOwnerIntegration": 10,
+    "pages": 15,
+    "readyForOwnerIntegration": 15,
     "blockedOnUnreadyPrerequisite": 0
   },
   "pages": [
@@ -224,14 +224,15 @@
       },
       "provenance": {
         "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-1",
         "decisionManifestDigest": "sha256:56932d33572ce2111374fd0386337d2f0ec7e12bdcc84e10d49ab35669e50868",
-        "decisionDigest": "sha256:20b8e08908c9b8a64352ac5dfe5e8731aeaf8234ea8cb5940e3428286abe3d75",
+        "decisionDigest": "sha256:811b6fb61b68b449fb72412e7662226d2016008c3935837326e6776bf6cb7abb",
         "specificationManifestDigest": "sha256:3221465669604603d9486f0368a10e86a34845d4d4a5e2f01234f15c9ab314d1",
         "specificationDigest": "sha256:6e2964d0c3209f622626e5f21790a7f97057ad28131990ca39ebe4d8dd50033a",
         "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
         "packetDigest": "sha256:c40d9875f187d20df15aab6f50af57459ba0c1db895a31e241ef2f4de6c932a4"
       },
-      "contentDigest": "sha256:ab0f61cd5a33f484494bca3e68c0af2c7a073b133db4e264d969bfea09a51353"
+      "contentDigest": "sha256:5fdffa65d6437f3ce02532fa4ef79c14f92a4064e43c07d1a3e4269da5c48c89"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -318,7 +319,8 @@
             "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/preparedness",
             "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/limits",
             "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/official-sources",
-            "property-home: https://mayonrajan.com/"
+            "property-home: https://mayonrajan.com/",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/evidence"
           ]
         }
       ],
@@ -388,6 +390,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/evidence",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_016674ad6a0ef156afdf8a61"
         }
       ],
       "boundedAnswers": [
@@ -492,14 +500,284 @@
       },
       "provenance": {
         "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-1",
         "decisionManifestDigest": "sha256:56932d33572ce2111374fd0386337d2f0ec7e12bdcc84e10d49ab35669e50868",
-        "decisionDigest": "sha256:07434a6a253bfd1ca409e9cb8a807b0969fe908cecdf7209914618c0b2d6b2fc",
+        "decisionDigest": "sha256:ca9d7d9936c4e27f23158e3499c7cdc257a8f52436ecbed33dfa1dfeabbb3900",
         "specificationManifestDigest": "sha256:3221465669604603d9486f0368a10e86a34845d4d4a5e2f01234f15c9ab314d1",
         "specificationDigest": "sha256:33c25e31b1018ffbb68dbf9a80db754eb220c60cfe113505ba70cc42e007630c",
         "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
         "packetDigest": "sha256:a637dcd784d641cca8a55673aa15903194c12bdbf73355f1b34322e65de7996a"
       },
-      "contentDigest": "sha256:3dc32c14ede1e2a4d8438ba51d555dc1ad82b102583ce5e152f601d9f18ba66a"
+      "contentDigest": "sha256:6a1af6683b21c001b12a68a2f77e99983d5bad401f6542dce9290f40ebf30539"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_016674ad6a0ef156afdf8a61",
+      "tranche": 3,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/identity-and-location/evidence",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/identity-and-location/evidence",
+      "title": "Identity And Location — Evidence",
+      "topic": "identity-and-location",
+      "routeRole": "evidence",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:identity-and-location",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:identity-and-location"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Identity And Location, in this evidence assessment, is limited to the following inspected scope. Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Identity And Location, in this evidence assessment, is limited to the following inspected scope. Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Evidence assessment",
+          "kind": "role-method",
+          "paragraphs": [
+            "Bind each conclusion to the source and locator that can carry it, keeping contrary or missing evidence visible.",
+            "Evidence quality and sufficiency remain claim-specific; one source cannot automatically support every adjacent assertion.",
+            "Applied scope: Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Mayon — Volcanoes of the World — Basic Data; Geological Summary; volcano number 273030. Establishes: Mayon identity, coordinates, morphology, setting, and historical-summary context.",
+            "Mayon Volcano Hazard Maps — Mayon Volcano Hazard Maps and current GIS link. Establishes: Official Philippine hazard sources and route to current maps."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The database is periodically updated and is not the live local alert authority.",
+            "Location and identity do not establish current safety.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/preparedness",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/limits",
+            "property-home: https://mayonrajan.com/",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/official-sources"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "gvp-mayon",
+          "title": "Mayon — Volcanoes of the World",
+          "responsibleBody": "Smithsonian Global Volcanism Program",
+          "versionOrDate": "database v5.4.0, 7 August 2026",
+          "sourceClass": "official-hazard-source",
+          "url": "https://volcano.si.edu/volcano.cfm?vn=273030",
+          "locator": "Basic Data; Geological Summary; volcano number 273030",
+          "establishes": "Mayon identity, coordinates, morphology, setting, and historical-summary context.",
+          "doesNotEstablish": "The database is periodically updated and is not the live local alert authority.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "phivolcs-hazards",
+          "title": "Mayon Volcano Hazard Maps",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "current landing page inspected 2026-09-05",
+          "sourceClass": "official-hazard-source",
+          "url": "https://www.phivolcs.dost.gov.ph/volcano-hazard/",
+          "locator": "Mayon Volcano Hazard Maps and current GIS link",
+          "establishes": "Official Philippine hazard sources and route to current maps.",
+          "doesNotEstablish": "Location and identity do not establish current safety.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_60bf213c0188bc6dfa4bf87d"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/preparedness",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_014f23f2d6774766bc713860"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_57ec9c027eee2ac1385f192c"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/official-sources",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_836befa63802925d77932866"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Identity And Location mean in this bounded context?",
+          "answer": "Identity And Location, in this evidence assessment, is limited to the following inspected scope. Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this evidence answer?",
+          "answer": "Mayon — Volcanoes of the World (database v5.4.0, 7 August 2026), at Basic Data; Geological Summary; volcano number 273030, supports mayon identity, coordinates, morphology, setting, and historical-summary context. Mayon Volcano Hazard Maps (current landing page inspected 2026-09-05), at Mayon Volcano Hazard Maps and current GIS link, supports official Philippine hazard sources and route to current maps."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The database is periodically updated and is not the live local alert authority. Location and identity do not establish current safety. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/identity-and-location/evidence#article",
+        "headline": "Identity And Location — Evidence",
+        "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/evidence",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://volcano.si.edu/volcano.cfm?vn=273030",
+          "https://www.phivolcs.dost.gov.ph/volcano-hazard/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Identity And Location mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Identity And Location, in this evidence assessment, is limited to the following inspected scope. Mayon identity, coordinates, morphology, setting, and historical-summary context. Official Philippine hazard sources and route to current maps. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this evidence answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mayon — Volcanoes of the World (database v5.4.0, 7 August 2026), at Basic Data; Geological Summary; volcano number 273030, supports mayon identity, coordinates, morphology, setting, and historical-summary context. Mayon Volcano Hazard Maps (current landing page inspected 2026-09-05), at Mayon Volcano Hazard Maps and current GIS link, supports official Philippine hazard sources and route to current maps."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The database is periodically updated and is not the live local alert authority. Location and identity do not establish current safety. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-3",
+        "decisionManifestDigest": "sha256:f95ca42523e4202cc92c41166041b9a9870a4d4f4b9ae574bdbe38a8968ec4a8",
+        "decisionDigest": "sha256:355758fdf55a389ec91a1b284b165c2756ef303d6af47496024a3caf30e33002",
+        "specificationManifestDigest": "sha256:9318c6c732e859e985dcaa7f1b44c73b5344006464d4097404a0e82ddbf115cd",
+        "specificationDigest": "sha256:63099e541dca27bd24b8146dff5a60254d6e1904bbe69b1d2602471e54c66534",
+        "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
+        "packetDigest": "sha256:266cdd5d3958701a26e5a52da15cb88171281f9032431e213c891fa25c03d2a6"
+      },
+      "contentDigest": "sha256:d881500cd99d2dff6bc40102b74019e68f4307e64360c3156aef04d81954be8a"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -585,7 +863,8 @@
             "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/definition",
             "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/preparedness",
             "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/official-sources",
-            "property-home: https://mayonrajan.com/"
+            "property-home: https://mayonrajan.com/",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/evidence"
           ]
         }
       ],
@@ -649,6 +928,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/evidence",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_016674ad6a0ef156afdf8a61"
         }
       ],
       "boundedAnswers": [
@@ -753,14 +1038,15 @@
       },
       "provenance": {
         "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-1",
         "decisionManifestDigest": "sha256:56932d33572ce2111374fd0386337d2f0ec7e12bdcc84e10d49ab35669e50868",
-        "decisionDigest": "sha256:24383bd8036438cce2a6d25830015c0414164c55fddb4cbb06e5111f7ad21301",
+        "decisionDigest": "sha256:4a88f87cf0703fec0b548164de29743bb0edc7917abe437c5a68ff91214e05cb",
         "specificationManifestDigest": "sha256:3221465669604603d9486f0368a10e86a34845d4d4a5e2f01234f15c9ab314d1",
         "specificationDigest": "sha256:109a4fcce08808a95a2b37d36f66a40722baacfe69d7a0111be27e14e20d023b",
         "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
         "packetDigest": "sha256:a637dcd784d641cca8a55673aa15903194c12bdbf73355f1b34322e65de7996a"
       },
-      "contentDigest": "sha256:784f67d2cc769df41a244c41a27d227366b94a426a38225a4f0aff02941229b5"
+      "contentDigest": "sha256:aa92c7e14a81df495e1521d3bd1b8dcb058c54e5e7d94ccb2212f2565002ca7d"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -846,7 +1132,8 @@
             "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/definition",
             "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/preparedness",
             "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/limits",
-            "property-home: https://mayonrajan.com/"
+            "property-home: https://mayonrajan.com/",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/evidence"
           ]
         }
       ],
@@ -910,6 +1197,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/evidence",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_016674ad6a0ef156afdf8a61"
         }
       ],
       "boundedAnswers": [
@@ -1014,14 +1307,15 @@
       },
       "provenance": {
         "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-1",
         "decisionManifestDigest": "sha256:56932d33572ce2111374fd0386337d2f0ec7e12bdcc84e10d49ab35669e50868",
-        "decisionDigest": "sha256:d375e67e2fad278243c6de165e1ca553dee14d6b1485446c16c197e97858b4f5",
+        "decisionDigest": "sha256:4d9ea5a20bf28a72ca98bb94d7e9d69ffabf6ce0e6b50cc078b6a0c658ee7a9f",
         "specificationManifestDigest": "sha256:3221465669604603d9486f0368a10e86a34845d4d4a5e2f01234f15c9ab314d1",
         "specificationDigest": "sha256:09d8b97c7ce8e354da328a91085e0a3aacf870ee1ce27379a5085afb4769d475",
         "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
         "packetDigest": "sha256:a637dcd784d641cca8a55673aa15903194c12bdbf73355f1b34322e65de7996a"
       },
-      "contentDigest": "sha256:062a9ced344b22625ae5528a072d89dc87ca12768df690d7ad23006e60c0357b"
+      "contentDigest": "sha256:17fd8dc3ddd3b9987b5be578ad98dd5b742fcd86899b1e55888904d7b1a1fa58"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -1107,7 +1401,8 @@
             "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/definition",
             "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/limits",
             "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/official-sources",
-            "property-home: https://mayonrajan.com/"
+            "property-home: https://mayonrajan.com/",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/identity-and-location/evidence"
           ]
         }
       ],
@@ -1171,6 +1466,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/evidence",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_016674ad6a0ef156afdf8a61"
         }
       ],
       "boundedAnswers": [
@@ -1275,14 +1576,15 @@
       },
       "provenance": {
         "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-1",
         "decisionManifestDigest": "sha256:56932d33572ce2111374fd0386337d2f0ec7e12bdcc84e10d49ab35669e50868",
-        "decisionDigest": "sha256:e7814d8c9b9d725c23c8f107f7c2f31d183229368a0170a4d884d0d5b7914450",
+        "decisionDigest": "sha256:de3f154e43e8bd9951d547e94ce1b9a1cfca550cbb31a8d066976eb96ac1a98f",
         "specificationManifestDigest": "sha256:3221465669604603d9486f0368a10e86a34845d4d4a5e2f01234f15c9ab314d1",
         "specificationDigest": "sha256:8c821378c7836eb62cd65d4443fffe839164dd11af43e4636aa82128c56da2fc",
         "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
         "packetDigest": "sha256:a637dcd784d641cca8a55673aa15903194c12bdbf73355f1b34322e65de7996a"
       },
-      "contentDigest": "sha256:87caba13b278b905a4f814793d76d7cbd82733ce86b05451f0dd2cdba2eb5581"
+      "contentDigest": "sha256:b704ab9ace450b65d1434a5986bff2f45ea214364d1767f1cf5efcff6aec231e"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -1536,14 +1838,15 @@
       },
       "provenance": {
         "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-2",
         "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
-        "decisionDigest": "sha256:6377cc973ded67d101d0fa787e94cebf19f3ae23b2552ab00c98e489c048c9fe",
+        "decisionDigest": "sha256:b1251642825f5ce2444ac8f239564eb7c81e9a7b510422ef299288a925709ea7",
         "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
         "specificationDigest": "sha256:ce03264b205e19aadfc43c42ea0987515e313d038c28765696862d4d5894bc77",
         "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
         "packetDigest": "sha256:db256a7509c7252cc98b7da5e5ae87d3ae16edda6638b60bee4ddb72badb39de"
       },
-      "contentDigest": "sha256:d80ff554b18c6ff3dd8f2133eb3570a7da3f673f5386e1f8389517938d0e1c84"
+      "contentDigest": "sha256:e5c88759e4294979f634429561d56e02417b0f5efaee9741113ad4be1a851470"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -1790,14 +2093,15 @@
       },
       "provenance": {
         "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-2",
         "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
-        "decisionDigest": "sha256:b172af781abc07576131247a66120aa5c055f215e749fc55a8eccfc0d261543e",
+        "decisionDigest": "sha256:63b0e58272443a7633ff1b57040c0a841b0eaf2dd1e5d4d66d0b016959b1b83f",
         "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
         "specificationDigest": "sha256:ca29d4ca5dbd4f462d421605564df96804e3f60843b64e13cccfc9ee4bc183dd",
         "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
         "packetDigest": "sha256:db256a7509c7252cc98b7da5e5ae87d3ae16edda6638b60bee4ddb72badb39de"
       },
-      "contentDigest": "sha256:236fbd67bb8467cf290826d94ee4ec1a3cb619250e34af768232325503fa2d29"
+      "contentDigest": "sha256:fa9e7979a9b947fb28d5c53891b083c5c365248e9173d12aefcfd804e8ddc704"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -2044,14 +2348,780 @@
       },
       "provenance": {
         "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-2",
         "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
-        "decisionDigest": "sha256:0cccbff87e2e0b35a3115f00452bcb74be499f1db56b5efc00700bb3690b9eba",
+        "decisionDigest": "sha256:aba5a5ab563c6c28457837c0f9d0d41a6c11b64b86685edf72abf9cf48ed2b37",
         "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
         "specificationDigest": "sha256:c478213a2db81e431cbdfdea04b03243734a938d11e778aab753bc794b03797e",
         "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
         "packetDigest": "sha256:db256a7509c7252cc98b7da5e5ae87d3ae16edda6638b60bee4ddb72badb39de"
       },
-      "contentDigest": "sha256:2ace3c4e92c195188f9716d5d840958c2947f2d6438359ae35bc01d9daa346e6"
+      "contentDigest": "sha256:6831e3ac8066e321330646c180bdef09360692e7c291e2503f535bea7cbc8239"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_ab7cc5b440beea7f5f551c39",
+      "tranche": 3,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/name-disambiguation/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/name-disambiguation/definition",
+      "title": "Name Disambiguation — Definition",
+      "topic": "name-disambiguation",
+      "routeRole": "definition",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:name-disambiguation",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:name-disambiguation"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Name Disambiguation, in this definition, is limited to the following inspected scope. Mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier. PHIVOLCS is the operational Philippine authority for current Mayon hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Name Disambiguation, in this definition, is limited to the following inspected scope. Mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier. PHIVOLCS is the operational Philippine authority for current Mayon hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Definition",
+          "kind": "role-method",
+          "paragraphs": [
+            "Use the term only for the source-backed scope stated here; keep adjacent concepts separate unless a typed relationship is explicit.",
+            "A useful definition states both inclusion and exclusion conditions so a machine answer cannot silently widen it.",
+            "Applied scope: Mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier. PHIVOLCS is the operational Philippine authority for current Mayon hazard information."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Mayon — Volcanoes of the World — Volcano number 273030; location and name record. Establishes: Mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier.",
+            "Mayon Volcano official hazard information — Mayon hazard maps and bulletin hierarchy. Establishes: PHIVOLCS is the operational Philippine authority for current Mayon hazard information."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The database does not address the Tamil deity Māyōṉ or a person named Mayon and does not establish etymological identity.",
+            "Official hazard authority does not adjudicate linguistic, religious, or personal-name relationships.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/name-disambiguation/official-sources",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/name-disambiguation/limits",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "gvp-mayon-disambiguation",
+          "title": "Mayon — Volcanoes of the World",
+          "responsibleBody": "Smithsonian Global Volcanism Program",
+          "versionOrDate": "database v5.4.0, 7 August 2026",
+          "sourceClass": "official-hazard-source",
+          "url": "https://volcano.si.edu/volcano.cfm?vn=273030",
+          "locator": "Volcano number 273030; location and name record",
+          "establishes": "Mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier.",
+          "doesNotEstablish": "The database does not address the Tamil deity Māyōṉ or a person named Mayon and does not establish etymological identity.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "phivolcs-mayon-disambiguation",
+          "title": "Mayon Volcano official hazard information",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "official pages inspected 2026-09-06",
+          "sourceClass": "official-hazard-source",
+          "url": "https://www.phivolcs.dost.gov.ph/volcano-hazard/",
+          "locator": "Mayon hazard maps and bulletin hierarchy",
+          "establishes": "PHIVOLCS is the operational Philippine authority for current Mayon hazard information.",
+          "doesNotEstablish": "Official hazard authority does not adjudicate linguistic, religious, or personal-name relationships.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/name-disambiguation/official-sources",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_c734f496120c4e025014bd3c"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/name-disambiguation/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_d570c04cbe49659f8996c6d9"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Name Disambiguation mean in this bounded context?",
+          "answer": "Name Disambiguation, in this definition, is limited to the following inspected scope. Mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier. PHIVOLCS is the operational Philippine authority for current Mayon hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this definition answer?",
+          "answer": "Mayon — Volcanoes of the World (database v5.4.0, 7 August 2026), at Volcano number 273030; location and name record, supports mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier. Mayon Volcano official hazard information (official pages inspected 2026-09-06), at Mayon hazard maps and bulletin hierarchy, supports pHIVOLCS is the operational Philippine authority for current Mayon hazard information."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The database does not address the Tamil deity Māyōṉ or a person named Mayon and does not establish etymological identity. Official hazard authority does not adjudicate linguistic, religious, or personal-name relationships. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/name-disambiguation/definition#article",
+        "headline": "Name Disambiguation — Definition",
+        "url": "https://mayonrajan.com/mayon-volcano/name-disambiguation/definition",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://volcano.si.edu/volcano.cfm?vn=273030",
+          "https://www.phivolcs.dost.gov.ph/volcano-hazard/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Name Disambiguation mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Name Disambiguation, in this definition, is limited to the following inspected scope. Mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier. PHIVOLCS is the operational Philippine authority for current Mayon hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this definition answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mayon — Volcanoes of the World (database v5.4.0, 7 August 2026), at Volcano number 273030; location and name record, supports mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier. Mayon Volcano official hazard information (official pages inspected 2026-09-06), at Mayon hazard maps and bulletin hierarchy, supports pHIVOLCS is the operational Philippine authority for current Mayon hazard information."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The database does not address the Tamil deity Māyōṉ or a person named Mayon and does not establish etymological identity. Official hazard authority does not adjudicate linguistic, religious, or personal-name relationships. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-3",
+        "decisionManifestDigest": "sha256:f95ca42523e4202cc92c41166041b9a9870a4d4f4b9ae574bdbe38a8968ec4a8",
+        "decisionDigest": "sha256:52f2e869e9294b43ee605fc86570dc7705cc869176526fcb3b1d062fb8df4c49",
+        "specificationManifestDigest": "sha256:9318c6c732e859e985dcaa7f1b44c73b5344006464d4097404a0e82ddbf115cd",
+        "specificationDigest": "sha256:4b169fa58b52d9281d8b84f078695389b2b1027e9f1ec2c246dcade5e89eb391",
+        "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
+        "packetDigest": "sha256:6db6c6b7c121c2f35eca40205c6b6ec736c6361a58810dac62e76bfc82881a5a"
+      },
+      "contentDigest": "sha256:efd323440b45223069db5b1456cfd0e59394e563ba4d90297704bdd17e1e5370"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_d570c04cbe49659f8996c6d9",
+      "tranche": 3,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/name-disambiguation/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/name-disambiguation/limits",
+      "title": "Name Disambiguation — Limits",
+      "topic": "name-disambiguation",
+      "routeRole": "limits",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:name-disambiguation",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:name-disambiguation"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Name Disambiguation, in this limits guide, is limited to the following inspected scope. Mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier. PHIVOLCS is the operational Philippine authority for current Mayon hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Name Disambiguation, in this limits guide, is limited to the following inspected scope. Mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier. PHIVOLCS is the operational Philippine authority for current Mayon hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Limits guide",
+          "kind": "role-method",
+          "paragraphs": [
+            "State the strongest supported boundary first and route time-sensitive decisions to the current authority.",
+            "A limits page must not turn a warning into a weaker version of the unsupported claim.",
+            "Applied scope: Mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier. PHIVOLCS is the operational Philippine authority for current Mayon hazard information."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Mayon — Volcanoes of the World — Volcano number 273030; location and name record. Establishes: Mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier.",
+            "Mayon Volcano official hazard information — Mayon hazard maps and bulletin hierarchy. Establishes: PHIVOLCS is the operational Philippine authority for current Mayon hazard information."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The database does not address the Tamil deity Māyōṉ or a person named Mayon and does not establish etymological identity.",
+            "Official hazard authority does not adjudicate linguistic, religious, or personal-name relationships.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/name-disambiguation/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/name-disambiguation/official-sources",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "gvp-mayon-disambiguation",
+          "title": "Mayon — Volcanoes of the World",
+          "responsibleBody": "Smithsonian Global Volcanism Program",
+          "versionOrDate": "database v5.4.0, 7 August 2026",
+          "sourceClass": "official-hazard-source",
+          "url": "https://volcano.si.edu/volcano.cfm?vn=273030",
+          "locator": "Volcano number 273030; location and name record",
+          "establishes": "Mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier.",
+          "doesNotEstablish": "The database does not address the Tamil deity Māyōṉ or a person named Mayon and does not establish etymological identity.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "phivolcs-mayon-disambiguation",
+          "title": "Mayon Volcano official hazard information",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "official pages inspected 2026-09-06",
+          "sourceClass": "official-hazard-source",
+          "url": "https://www.phivolcs.dost.gov.ph/volcano-hazard/",
+          "locator": "Mayon hazard maps and bulletin hierarchy",
+          "establishes": "PHIVOLCS is the operational Philippine authority for current Mayon hazard information.",
+          "doesNotEstablish": "Official hazard authority does not adjudicate linguistic, religious, or personal-name relationships.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/name-disambiguation/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_ab7cc5b440beea7f5f551c39"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/name-disambiguation/official-sources",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_c734f496120c4e025014bd3c"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Name Disambiguation mean in this bounded context?",
+          "answer": "Name Disambiguation, in this limits guide, is limited to the following inspected scope. Mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier. PHIVOLCS is the operational Philippine authority for current Mayon hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this limits answer?",
+          "answer": "Mayon — Volcanoes of the World (database v5.4.0, 7 August 2026), at Volcano number 273030; location and name record, supports mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier. Mayon Volcano official hazard information (official pages inspected 2026-09-06), at Mayon hazard maps and bulletin hierarchy, supports pHIVOLCS is the operational Philippine authority for current Mayon hazard information."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The database does not address the Tamil deity Māyōṉ or a person named Mayon and does not establish etymological identity. Official hazard authority does not adjudicate linguistic, religious, or personal-name relationships. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/name-disambiguation/limits#article",
+        "headline": "Name Disambiguation — Limits",
+        "url": "https://mayonrajan.com/mayon-volcano/name-disambiguation/limits",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://volcano.si.edu/volcano.cfm?vn=273030",
+          "https://www.phivolcs.dost.gov.ph/volcano-hazard/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Name Disambiguation mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Name Disambiguation, in this limits guide, is limited to the following inspected scope. Mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier. PHIVOLCS is the operational Philippine authority for current Mayon hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this limits answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mayon — Volcanoes of the World (database v5.4.0, 7 August 2026), at Volcano number 273030; location and name record, supports mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier. Mayon Volcano official hazard information (official pages inspected 2026-09-06), at Mayon hazard maps and bulletin hierarchy, supports pHIVOLCS is the operational Philippine authority for current Mayon hazard information."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The database does not address the Tamil deity Māyōṉ or a person named Mayon and does not establish etymological identity. Official hazard authority does not adjudicate linguistic, religious, or personal-name relationships. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-3",
+        "decisionManifestDigest": "sha256:f95ca42523e4202cc92c41166041b9a9870a4d4f4b9ae574bdbe38a8968ec4a8",
+        "decisionDigest": "sha256:e2f1e5ff16a04b474c6ef8e1a0b7d67b43c963ffd626815c284956bdafb22ad8",
+        "specificationManifestDigest": "sha256:9318c6c732e859e985dcaa7f1b44c73b5344006464d4097404a0e82ddbf115cd",
+        "specificationDigest": "sha256:9535234d59f5e9b893d4a0f31be07b3e6ecb5a4a9291d8c3c57d50cceb26e09f",
+        "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
+        "packetDigest": "sha256:6db6c6b7c121c2f35eca40205c6b6ec736c6361a58810dac62e76bfc82881a5a"
+      },
+      "contentDigest": "sha256:d86443b09eb7037ede203513bd7c20da43afa2455c3a46acd27e1de0923ca34a"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_c734f496120c4e025014bd3c",
+      "tranche": 3,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/name-disambiguation/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/name-disambiguation/official-sources",
+      "title": "Name Disambiguation — Official Sources",
+      "topic": "name-disambiguation",
+      "routeRole": "official-sources",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:name-disambiguation",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:name-disambiguation"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Name Disambiguation, in this official-source guide, is limited to the following inspected scope. Mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier. PHIVOLCS is the operational Philippine authority for current Mayon hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Name Disambiguation, in this official-source guide, is limited to the following inspected scope. Mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier. PHIVOLCS is the operational Philippine authority for current Mayon hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Official Source guide",
+          "kind": "role-method",
+          "paragraphs": [
+            "Identify the operational authority and explain how to find its freshest dated statement.",
+            "This page never substitutes for a current bulletin, evacuation order, or local authority.",
+            "Applied scope: Mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier. PHIVOLCS is the operational Philippine authority for current Mayon hazard information."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Mayon — Volcanoes of the World — Volcano number 273030; location and name record. Establishes: Mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier.",
+            "Mayon Volcano official hazard information — Mayon hazard maps and bulletin hierarchy. Establishes: PHIVOLCS is the operational Philippine authority for current Mayon hazard information."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The database does not address the Tamil deity Māyōṉ or a person named Mayon and does not establish etymological identity.",
+            "Official hazard authority does not adjudicate linguistic, religious, or personal-name relationships.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/name-disambiguation/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/name-disambiguation/limits",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "gvp-mayon-disambiguation",
+          "title": "Mayon — Volcanoes of the World",
+          "responsibleBody": "Smithsonian Global Volcanism Program",
+          "versionOrDate": "database v5.4.0, 7 August 2026",
+          "sourceClass": "official-hazard-source",
+          "url": "https://volcano.si.edu/volcano.cfm?vn=273030",
+          "locator": "Volcano number 273030; location and name record",
+          "establishes": "Mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier.",
+          "doesNotEstablish": "The database does not address the Tamil deity Māyōṉ or a person named Mayon and does not establish etymological identity.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "phivolcs-mayon-disambiguation",
+          "title": "Mayon Volcano official hazard information",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "official pages inspected 2026-09-06",
+          "sourceClass": "official-hazard-source",
+          "url": "https://www.phivolcs.dost.gov.ph/volcano-hazard/",
+          "locator": "Mayon hazard maps and bulletin hierarchy",
+          "establishes": "PHIVOLCS is the operational Philippine authority for current Mayon hazard information.",
+          "doesNotEstablish": "Official hazard authority does not adjudicate linguistic, religious, or personal-name relationships.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/name-disambiguation/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_ab7cc5b440beea7f5f551c39"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/name-disambiguation/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_d570c04cbe49659f8996c6d9"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Name Disambiguation mean in this bounded context?",
+          "answer": "Name Disambiguation, in this official-source guide, is limited to the following inspected scope. Mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier. PHIVOLCS is the operational Philippine authority for current Mayon hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this official sources answer?",
+          "answer": "Mayon — Volcanoes of the World (database v5.4.0, 7 August 2026), at Volcano number 273030; location and name record, supports mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier. Mayon Volcano official hazard information (official pages inspected 2026-09-06), at Mayon hazard maps and bulletin hierarchy, supports pHIVOLCS is the operational Philippine authority for current Mayon hazard information."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The database does not address the Tamil deity Māyōṉ or a person named Mayon and does not establish etymological identity. Official hazard authority does not adjudicate linguistic, religious, or personal-name relationships. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/name-disambiguation/official-sources#article",
+        "headline": "Name Disambiguation — Official Sources",
+        "url": "https://mayonrajan.com/mayon-volcano/name-disambiguation/official-sources",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://volcano.si.edu/volcano.cfm?vn=273030",
+          "https://www.phivolcs.dost.gov.ph/volcano-hazard/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Name Disambiguation mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Name Disambiguation, in this official-source guide, is limited to the following inspected scope. Mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier. PHIVOLCS is the operational Philippine authority for current Mayon hazard information. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this official sources answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mayon — Volcanoes of the World (database v5.4.0, 7 August 2026), at Volcano number 273030; location and name record, supports mayon is a named stratovolcano in Albay, Philippines, with a stable volcano identifier. Mayon Volcano official hazard information (official pages inspected 2026-09-06), at Mayon hazard maps and bulletin hierarchy, supports pHIVOLCS is the operational Philippine authority for current Mayon hazard information."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The database does not address the Tamil deity Māyōṉ or a person named Mayon and does not establish etymological identity. Official hazard authority does not adjudicate linguistic, religious, or personal-name relationships. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-3",
+        "decisionManifestDigest": "sha256:f95ca42523e4202cc92c41166041b9a9870a4d4f4b9ae574bdbe38a8968ec4a8",
+        "decisionDigest": "sha256:5059e2a357012b9a4853b467779f4d525c69d69a22427acd61671e639ca1dc20",
+        "specificationManifestDigest": "sha256:9318c6c732e859e985dcaa7f1b44c73b5344006464d4097404a0e82ddbf115cd",
+        "specificationDigest": "sha256:0a9e2898e791db3a6b90ad0f1c26aa8540e16bec93a39520a68861eaad6fbe8e",
+        "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
+        "packetDigest": "sha256:6db6c6b7c121c2f35eca40205c6b6ec736c6361a58810dac62e76bfc82881a5a"
+      },
+      "contentDigest": "sha256:1bcd785c00d1e3dea030379c42370c15d81bbf0dde06be23882839f36b782a9b"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -2136,6 +3206,7 @@
             "canonical-family-owner-definition-first: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
             "definition: https://mayonrajan.com/mayon-volcano/official-alerts/definition",
             "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/limits",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/official-sources",
             "property-home: https://mayonrajan.com/"
           ]
         }
@@ -2188,6 +3259,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_f8e337ad1934c31c65dcea4d"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/official-alerts/official-sources",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_74e804dbf2febe142c6f4a1f"
         },
         {
           "url": "https://mayonrajan.com/",
@@ -2298,14 +3375,15 @@
       },
       "provenance": {
         "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-2",
         "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
-        "decisionDigest": "sha256:8c63ebb63aada77e63b1f1d6a4d8e464b90d49bd0a6230366d16d1d6dacb3eed",
+        "decisionDigest": "sha256:3eb198607ed2db37e9c012d19887ee1fd0b47a3e8d5458bc654b73944f62cda3",
         "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
         "specificationDigest": "sha256:bbd71ef654447fbe69b39160cc429576bd0335a25eac7b2812f05ae600b8ced8",
         "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
         "packetDigest": "sha256:464ceaaa3dc21933f9e4232e91ea9b3dd0801060aea1edc85646383f3c37d587"
       },
-      "contentDigest": "sha256:2e9ef7ab57f43597332a03f0cce5f4d05af87bcbd19f0124146f52e98f0bc84a"
+      "contentDigest": "sha256:373c46e8b0941c579fa5e51f44aad7714ef93c1b3a8c32a19d2e4ee382b5de9c"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -2389,6 +3467,7 @@
           "paragraphs": [
             "canonical-family-owner-definition-first: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
             "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/official-sources",
             "property-home: https://mayonrajan.com/"
           ]
         }
@@ -2435,6 +3514,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_5eedf7642252330cb10edc4b"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/official-alerts/official-sources",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_74e804dbf2febe142c6f4a1f"
         },
         {
           "url": "https://mayonrajan.com/",
@@ -2545,15 +3630,271 @@
       },
       "provenance": {
         "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-2",
         "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
-        "decisionDigest": "sha256:9cdf562a6a6b8de1027fe583e646fa2e8242c7fd8de78bef6101e31e5c5111db",
+        "decisionDigest": "sha256:4b7968e4026110045f880f76d545a6cad9fc8af8aeb2f21dae58d26f5ea08850",
         "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
         "specificationDigest": "sha256:9693466506e0eb1d967d4730f39d2c4d434f805b00b8487a87f72850365ac4c6",
         "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
         "packetDigest": "sha256:464ceaaa3dc21933f9e4232e91ea9b3dd0801060aea1edc85646383f3c37d587"
       },
-      "contentDigest": "sha256:3b6a09b9b89601410bac367ceaba16ac64f952c6b41eee0ee77f33a9a3a4a1bd"
+      "contentDigest": "sha256:f27d31837b6a53c46e2e76f8aa397b715a847c88ccea83233a3d84206575b2bf"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_74e804dbf2febe142c6f4a1f",
+      "tranche": 3,
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "path": "/mayon-volcano/official-alerts/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/official-alerts/official-sources",
+      "title": "Official Alerts — Official Sources",
+      "topic": "official-alerts",
+      "routeRole": "official-sources",
+      "concept": {
+        "conceptId": "urn:maha:concept:risk:official-alerts",
+        "familyId": "risk",
+        "canonicalOwner": "mayon-rajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:risk:official-alerts"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:risk"
+          }
+        ]
+      },
+      "directAnswer": "Official Alerts, in this official-source guide, is limited to the following inspected scope. Meaning and operational role of official Mayon alert levels. Primary route to dated official Mayon volcano bulletins. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Official Alerts, in this official-source guide, is limited to the following inspected scope. Meaning and operational role of official Mayon alert levels. Primary route to dated official Mayon volcano bulletins. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Official Source guide",
+          "kind": "role-method",
+          "paragraphs": [
+            "Identify the operational authority and explain how to find its freshest dated statement.",
+            "This page never substitutes for a current bulletin, evacuation order, or local authority.",
+            "Applied scope: Meaning and operational role of official Mayon alert levels. Primary route to dated official Mayon volcano bulletins."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayon-rajan. This route may apply risk; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish bounded hazard education, official-source routing, place interpretation. It must not publish real-time alert substitution or religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Volcano Alert Levels — Mayon Volcano alert-level table and linked bulletin hierarchy. Establishes: Meaning and operational role of official Mayon alert levels.",
+            "Mayon Volcano Bulletin Archive — Mayon bulletin list, issue dates, and linked bulletin records. Establishes: Primary route to dated official Mayon volcano bulletins."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control.",
+            "An archive entry can become stale immediately; the latest official bulletin and local government instructions control.",
+            "This route must not claim real-time alert substitution.",
+            "This route must not claim religious-name conflation."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/definition",
+            "same-topic-application: https://mayonrajan.com/mayon-volcano/official-alerts/limits",
+            "property-home: https://mayonrajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "phivolcs-alert-levels",
+          "title": "Volcano Alert Levels",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "current official page inspected 2026-09-05",
+          "sourceClass": "official-hazard-source",
+          "url": "https://www2.phivolcs.dost.gov.ph/volcano/volcano-alert-levels/",
+          "locator": "Mayon Volcano alert-level table and linked bulletin hierarchy",
+          "establishes": "Meaning and operational role of official Mayon alert levels.",
+          "doesNotEstablish": "An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "phivolcs-mayon-bulletins",
+          "title": "Mayon Volcano Bulletin Archive",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "current archive inspected 2026-09-05",
+          "sourceClass": "official-hazard-source",
+          "url": "https://wovodat.phivolcs.dost.gov.ph/bulletin/list-of-bulletin?edate=&sdate=&type=&vdId=574",
+          "locator": "Mayon bulletin list, issue dates, and linked bulletin records",
+          "establishes": "Primary route to dated official Mayon volcano bulletins.",
+          "doesNotEstablish": "An archive entry can become stale immediately; the latest official bulletin and local government instructions control.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_b278a387341dd14ef01c0a2c",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/official-alerts/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_5eedf7642252330cb10edc4b"
+        },
+        {
+          "url": "https://mayonrajan.com/mayon-volcano/official-alerts/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_f8e337ad1934c31c65dcea4d"
+        },
+        {
+          "url": "https://mayonrajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Official Alerts mean in this bounded context?",
+          "answer": "Official Alerts, in this official-source guide, is limited to the following inspected scope. Meaning and operational role of official Mayon alert levels. Primary route to dated official Mayon volcano bulletins. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this official sources answer?",
+          "answer": "Volcano Alert Levels (current official page inspected 2026-09-05), at Mayon Volcano alert-level table and linked bulletin hierarchy, supports meaning and operational role of official Mayon alert levels. Mayon Volcano Bulletin Archive (current archive inspected 2026-09-05), at Mayon bulletin list, issue dates, and linked bulletin records, supports primary route to dated official Mayon volcano bulletins."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control. An archive entry can become stale immediately; the latest official bulletin and local government instructions control. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://mayonrajan.com/mayon-volcano/official-alerts/official-sources#article",
+        "headline": "Official Alerts — Official Sources",
+        "url": "https://mayonrajan.com/mayon-volcano/official-alerts/official-sources",
+        "isPartOf": "https://mayonrajan.com/",
+        "citation": [
+          "https://www2.phivolcs.dost.gov.ph/volcano/volcano-alert-levels/",
+          "https://wovodat.phivolcs.dost.gov.ph/bulletin/list-of-bulletin?edate=&sdate=&type=&vdId=574"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Official Alerts mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Official Alerts, in this official-source guide, is limited to the following inspected scope. Meaning and operational role of official Mayon alert levels. Primary route to dated official Mayon volcano bulletins. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this official sources answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Volcano Alert Levels (current official page inspected 2026-09-05), at Mayon Volcano alert-level table and linked bulletin hierarchy, supports meaning and operational role of official Mayon alert levels. Mayon Volcano Bulletin Archive (current archive inspected 2026-09-05), at Mayon bulletin list, issue dates, and linked bulletin records, supports primary route to dated official Mayon volcano bulletins."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "An explanatory page is not a live alert. Current bulletins, evacuation orders, and local authorities always control. An archive entry can become stale immediately; the latest official bulletin and local government instructions control. Property boundary: This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayon-rajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-3",
+        "decisionManifestDigest": "sha256:f95ca42523e4202cc92c41166041b9a9870a4d4f4b9ae574bdbe38a8968ec4a8",
+        "decisionDigest": "sha256:71d7c99bcec72b57e7e2d24d8c41666d559931caeac48e0e3ff8a1c785d78709",
+        "specificationManifestDigest": "sha256:9318c6c732e859e985dcaa7f1b44c73b5344006464d4097404a0e82ddbf115cd",
+        "specificationDigest": "sha256:80570655fdf24b656f3e6b8edf25f9e778fa89d1f2be193a9b5d618d7644cde7",
+        "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
+        "packetDigest": "sha256:ecbebef0aaaada9bc8c0836597d716066c5e132c029d4313dfbca54d8e3a9459"
+      },
+      "contentDigest": "sha256:bbfd2ccf7e315762d999d33265e91ea7cd4750149ff5328e4736f97d18e3b4fe"
     }
   ],
-  "provenanceDigest": "sha256:b68f800dc665618a3e206b74958a5b4751721da1a8a670c3c2fcd2d5f6ce9e99"
+  "provenanceDigest": "sha256:6d3a1ec75c7c19dd11b6cfe82306ca9ce7889af0d689ca856670bf7f5da61149"
 }

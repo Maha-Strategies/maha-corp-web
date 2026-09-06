@@ -1,4 +1,4 @@
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 
 import { provenanceDigest } from '../lib/evidence-dossier/digest.ts'
@@ -31,13 +31,13 @@ function implementationReport(result: ReturnType<typeof compileFederationPages>)
   const counts = result.registry.counts
   const held = result.registry.entries.filter((entry) => entry.adoptionState === 'blocked-on-unready-prerequisite')
   return `${[
-    '# Federation Tranches 1–2 local implementation',
+    '# Federation publication tranche local implementation',
     '',
     `Status: **${result.registry.status}**`,
     '',
     '## Outcome',
     '',
-    `All **${counts.pages} evidence-ready specifications** now have deterministic, host-specific content implementations containing ${counts.boundedAnswers} bounded answers and ${counts.sourceBindings} source bindings.`,
+    `All **${counts.pages} evidence-ready specifications** now have deterministic, host-specific content implementations containing ${counts.boundedAnswers} bounded answers and ${counts.sourceBindings} source bindings. This total includes append-only readiness remediations and Tranche 3 when their verified artifacts are present.`,
     '',
     `**${counts.readyForOwnerIntegration}** can enter their owning property’s integration workflow. **${counts.blockedOnUnreadyPrerequisite}** are fully compiled but held because a required definition is not evidence-ready.`,
     '',
@@ -58,12 +58,12 @@ function implementationReport(result: ReturnType<typeof compileFederationPages>)
     result.registry.releaseBoundary,
     '',
     `Registry digest: \`${result.registry.provenanceDigest}\``,
-    '',
   ].join('\n')}\n`
 }
 
 export function generateFederationPageImplementations(outputRoot: string) {
   type Input = Parameters<typeof compileFederationPages>[0]
+  type Supplement = NonNullable<Input['supplements']>[number]
   const candidateMap = verified<Input['candidateMap']>('content/federation/federation-route-candidates-v1.json')
   const tranches: Input['tranches'] = [1, 2].map((tranche) => ({
     tranche: tranche as 1 | 2,
@@ -71,7 +71,22 @@ export function generateFederationPageImplementations(outputRoot: string) {
     specifications: verified<Input['tranches'][number]['specifications']>(`content/federation/federation-tranche-${tranche}-page-specifications-v1.json`),
     packets: verified<Input['tranches'][number]['packets']>(`content/federation/federation-tranche-${tranche}-evidence-packets-v1.json`),
   }))
-  const result = compileFederationPages({ candidateMap, tranches })
+  const supplements: NonNullable<Input['supplements']> = []
+  const supplementDefinitions = [
+    { batchId: 'readiness-remediations-v1', tranche: 2 as const, decisions: 'content/federation/federation-readiness-remediation-decisions-v1.json', specifications: 'content/federation/federation-readiness-remediation-page-specifications-v1.json', packets: 'content/federation/federation-readiness-remediation-packets-v1.json' },
+    { batchId: 'tranche-3', tranche: 3 as const, decisions: 'content/federation/federation-tranche-3-decisions-v1.json', specifications: 'content/federation/federation-tranche-3-page-specifications-v1.json', packets: 'content/federation/federation-tranche-3-evidence-packets-v1.json' },
+  ]
+  for (const definition of supplementDefinitions) {
+    if (!existsSync(resolve(ROOT, definition.decisions)) || !existsSync(resolve(ROOT, definition.specifications)) || !existsSync(resolve(ROOT, definition.packets))) continue
+    supplements.push({
+      batchId: definition.batchId,
+      tranche: definition.tranche,
+      decisions: verified<Supplement['decisions']>(definition.decisions),
+      specifications: verified<Supplement['specifications']>(definition.specifications),
+      packets: verified<Supplement['packets']>(definition.packets),
+    })
+  }
+  const result = compileFederationPages({ candidateMap, tranches, supplements })
   const artifacts: string[] = []
   const registryPath = 'content/federation/implementations/federation-page-implementation-registry-v1.json'
   writeJson(outputRoot, registryPath, result.registry)
@@ -81,7 +96,7 @@ export function generateFederationPageImplementations(outputRoot: string) {
     writeJson(outputRoot, path, manifest)
     artifacts.push(path)
   }
-  const reportPath = 'docs/federation/federation-tranches-1-2-local-implementation.md'
+  const reportPath = 'docs/federation/federation-publication-tranche-local-implementation.md'
   const reportOutput = resolve(outputRoot, reportPath)
   mkdirSync(dirname(reportOutput), { recursive: true })
   writeFileSync(reportOutput, implementationReport(result))

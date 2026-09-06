@@ -1,0 +1,930 @@
+{
+  "schemaVersion": "maha-federation-property-route-adapter/1.0",
+  "siteId": "maha-strategies",
+  "canonicalHost": "www.mahastrategies.com",
+  "rootPath": "/clearing/",
+  "sourceManifestDigest": "sha256:c40ab43913ccd875f1a39e98ebc2294aca6e7e10a92f865af13250dda523d2b8",
+  "state": "local-owner-handoff",
+  "ownerIntegration": {
+    "routeShape": "/clearing/[...segments]",
+    "staticParameters": true,
+    "dynamicParameters": false,
+    "metadataFromExactPage": true,
+    "structuredDataFromExactPage": true,
+    "missingOrUnreadyReturnsNotFound": true,
+    "exactRevisionReviewRequired": true,
+    "activeCanonicalReleaseRequired": true
+  },
+  "counts": {
+    "routes": 82,
+    "boundedAnswers": 410,
+    "publicRoutesCreated": 0,
+    "buildsRun": 0
+  },
+  "publicationBoundary": "The adapter resolves local content only. The owner route must still bind an exact revision and active canonical release before crawlability; a missing or unready path resolves to null.",
+  "entries": [
+    {
+      "candidateId": "cand_234f0e582890e0ba575e90a7",
+      "path": "/clearing/agent-governance/audit-receipts/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/audit-receipts/definition",
+      "segments": [
+        "agent-governance",
+        "audit-receipts",
+        "definition"
+      ],
+      "contentDigest": "sha256:59bade237c526864d9522288756450ec2936554ca94e0efba60b6d065a31cdc4"
+    },
+    {
+      "candidateId": "cand_757ac8c69dc965702b1a89a8",
+      "path": "/clearing/agent-governance/audit-receipts/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/audit-receipts/implementation",
+      "segments": [
+        "agent-governance",
+        "audit-receipts",
+        "implementation"
+      ],
+      "contentDigest": "sha256:23359fed4cbfd5c6bb9402c6c3dc95b29409616980a8a3d94b9da94c07b426aa"
+    },
+    {
+      "candidateId": "cand_5091a9a3409f32edae6a4770",
+      "path": "/clearing/agent-governance/audit-receipts/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/audit-receipts/threats",
+      "segments": [
+        "agent-governance",
+        "audit-receipts",
+        "threats"
+      ],
+      "contentDigest": "sha256:ac81591f222351eddfa9bb96cbe727a4f0588a4cb2c73d871b89e6a9b2aebb71"
+    },
+    {
+      "candidateId": "cand_cabc32863fd4cfafd655d989",
+      "path": "/clearing/agent-governance/capability-scoped-tokens/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/capability-scoped-tokens/architecture",
+      "segments": [
+        "agent-governance",
+        "capability-scoped-tokens",
+        "architecture"
+      ],
+      "contentDigest": "sha256:acc8578a4e6637afefea85577603e221c48901236d7e948fe934ca7c2f941f88"
+    },
+    {
+      "candidateId": "cand_63f92573770fe932b11581d0",
+      "path": "/clearing/agent-governance/capability-scoped-tokens/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/capability-scoped-tokens/controls",
+      "segments": [
+        "agent-governance",
+        "capability-scoped-tokens",
+        "controls"
+      ],
+      "contentDigest": "sha256:243c905cb73ecf25c07537bf0b480f6d78a9b2970da097afe2b3737fb36ed69d"
+    },
+    {
+      "candidateId": "cand_a171638fd36c45db3153ab2f",
+      "path": "/clearing/agent-governance/capability-scoped-tokens/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/capability-scoped-tokens/definition",
+      "segments": [
+        "agent-governance",
+        "capability-scoped-tokens",
+        "definition"
+      ],
+      "contentDigest": "sha256:2e749723a58567406da49f1b9d1ac49b0f605f71472c3664c5b857b09cc9820e"
+    },
+    {
+      "candidateId": "cand_07b0aad23f4c4368c0932659",
+      "path": "/clearing/agent-governance/capability-scoped-tokens/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/capability-scoped-tokens/implementation",
+      "segments": [
+        "agent-governance",
+        "capability-scoped-tokens",
+        "implementation"
+      ],
+      "contentDigest": "sha256:bd18332bc355893166a44b600a0d171a6d3d03a86989184940f8f085334c7d66"
+    },
+    {
+      "candidateId": "cand_00097effc59b6b9de67fe54f",
+      "path": "/clearing/agent-governance/capability-scoped-tokens/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/capability-scoped-tokens/threats",
+      "segments": [
+        "agent-governance",
+        "capability-scoped-tokens",
+        "threats"
+      ],
+      "contentDigest": "sha256:cf02b43ba75da1ab94dcfad0c70a51861535e4cfea672b382a329ea9545047ea"
+    },
+    {
+      "candidateId": "cand_4e77d7f7b9c947755aa8b03a",
+      "path": "/clearing/agent-governance/context-budgeting/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/architecture",
+      "segments": [
+        "agent-governance",
+        "context-budgeting",
+        "architecture"
+      ],
+      "contentDigest": "sha256:82fd78900c30b900747d3a01c80c60682cb2ca6678622109d9a975f0206ed428"
+    },
+    {
+      "candidateId": "cand_41ee6b7080d2c8416e30adaf",
+      "path": "/clearing/agent-governance/context-budgeting/commercialization",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/commercialization",
+      "segments": [
+        "agent-governance",
+        "context-budgeting",
+        "commercialization"
+      ],
+      "contentDigest": "sha256:02fbda25ac9d1b2f4e6408a82ce2d66d569a2aabf17220ad8ddaf3eb3ac7e43b"
+    },
+    {
+      "candidateId": "cand_501bc5c18c3e6037bc2f8ddb",
+      "path": "/clearing/agent-governance/context-budgeting/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/controls",
+      "segments": [
+        "agent-governance",
+        "context-budgeting",
+        "controls"
+      ],
+      "contentDigest": "sha256:24ed4c325f23317d78b672a66c5933e70eff38e33919c368f10746d13dae4469"
+    },
+    {
+      "candidateId": "cand_1730f46729e7507504a87eb7",
+      "path": "/clearing/agent-governance/context-budgeting/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/definition",
+      "segments": [
+        "agent-governance",
+        "context-budgeting",
+        "definition"
+      ],
+      "contentDigest": "sha256:35f762c3d7d8e742cf3de34552bdfae93348e8630e6de0810d4d931d472881a0"
+    },
+    {
+      "candidateId": "cand_94da29ed449b6d273a75e5f7",
+      "path": "/clearing/agent-governance/context-budgeting/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/implementation",
+      "segments": [
+        "agent-governance",
+        "context-budgeting",
+        "implementation"
+      ],
+      "contentDigest": "sha256:75c6f662e7da1a8b187be373ba4e4e241f5863baf7ae51e41d856da20f6a65c5"
+    },
+    {
+      "candidateId": "cand_bb97bc9d7602283a3b8b5a5d",
+      "path": "/clearing/agent-governance/context-budgeting/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/threats",
+      "segments": [
+        "agent-governance",
+        "context-budgeting",
+        "threats"
+      ],
+      "contentDigest": "sha256:23bb519e5b453f09fb8b1037bb3205c6fd33f51f8522b3e1689e473562b43017"
+    },
+    {
+      "candidateId": "cand_e0aecd32b5ce34c9d007d30d",
+      "path": "/clearing/agent-governance/context-budgeting/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/verification",
+      "segments": [
+        "agent-governance",
+        "context-budgeting",
+        "verification"
+      ],
+      "contentDigest": "sha256:4d6f1d8507dca4a39dbb048d44dff9faf73ca95cb2f192d6409e03c3473d4206"
+    },
+    {
+      "candidateId": "cand_c834e0da8233234c23b40e58",
+      "path": "/clearing/agent-governance/credential-rotation/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/architecture",
+      "segments": [
+        "agent-governance",
+        "credential-rotation",
+        "architecture"
+      ],
+      "contentDigest": "sha256:c644f491aa03c8f5e2bea818e5e21bea27205b023587d03ae9ab0304f76ea86c"
+    },
+    {
+      "candidateId": "cand_d1d3fd263f69666c3b186b6d",
+      "path": "/clearing/agent-governance/credential-rotation/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/controls",
+      "segments": [
+        "agent-governance",
+        "credential-rotation",
+        "controls"
+      ],
+      "contentDigest": "sha256:de084f77bd8fb05af1acd9552d46afdafe450d84d685675f738d08c8692b8c09"
+    },
+    {
+      "candidateId": "cand_7b558066ec71b18a21f4187f",
+      "path": "/clearing/agent-governance/credential-rotation/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/definition",
+      "segments": [
+        "agent-governance",
+        "credential-rotation",
+        "definition"
+      ],
+      "contentDigest": "sha256:ff82962d848bbf8448b47d24538b8e820bc678cb5c7f93ae432481150f83c8e9"
+    },
+    {
+      "candidateId": "cand_b95168113fccd6c46a9277b0",
+      "path": "/clearing/agent-governance/credential-rotation/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/implementation",
+      "segments": [
+        "agent-governance",
+        "credential-rotation",
+        "implementation"
+      ],
+      "contentDigest": "sha256:4db54915b68188a571b222e1a685caaec19c475bf1a78db14263db8f6c8b2e78"
+    },
+    {
+      "candidateId": "cand_5ce69812befe6f9cba5bcc3d",
+      "path": "/clearing/agent-governance/credential-rotation/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/threats",
+      "segments": [
+        "agent-governance",
+        "credential-rotation",
+        "threats"
+      ],
+      "contentDigest": "sha256:083c22bed873078e9f7e84e69645b41851e6339b0bed9b7bdb8e50c4a6775f5a"
+    },
+    {
+      "candidateId": "cand_57e5ff03f5aa4c2fb3596f4a",
+      "path": "/clearing/agent-governance/credential-rotation/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/verification",
+      "segments": [
+        "agent-governance",
+        "credential-rotation",
+        "verification"
+      ],
+      "contentDigest": "sha256:d7ddbe0aa52da8a5ca9cfa58717544714dcd8785dbde6614c2469fe97dc3dc4e"
+    },
+    {
+      "candidateId": "cand_a56c8ffc90ee7d11ae2400c8",
+      "path": "/clearing/agent-governance/delivery-acknowledgement/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/delivery-acknowledgement/implementation",
+      "segments": [
+        "agent-governance",
+        "delivery-acknowledgement",
+        "implementation"
+      ],
+      "contentDigest": "sha256:c12646c40b2573222ac34c79207af2260c129414a5dc7f03054bb21e944d7e2f"
+    },
+    {
+      "candidateId": "cand_0aaeea95bb96b49c3e1e1169",
+      "path": "/clearing/agent-governance/delivery-acknowledgement/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/delivery-acknowledgement/threats",
+      "segments": [
+        "agent-governance",
+        "delivery-acknowledgement",
+        "threats"
+      ],
+      "contentDigest": "sha256:adc203970bb3457f51cd7825e70f8024ca7ca967fe867db9a235d2b04cc9eff0"
+    },
+    {
+      "candidateId": "cand_52b0740751bb63c0cf7dc490",
+      "path": "/clearing/agent-governance/durable-task-state/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/durable-task-state/definition",
+      "segments": [
+        "agent-governance",
+        "durable-task-state",
+        "definition"
+      ],
+      "contentDigest": "sha256:7629b3baa71b0adf73ae9fd3d1caa535fc1b9e4488b102947ab9e71d4f71304b"
+    },
+    {
+      "candidateId": "cand_453a832725e3adc7a814bdbf",
+      "path": "/clearing/agent-governance/durable-task-state/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/durable-task-state/implementation",
+      "segments": [
+        "agent-governance",
+        "durable-task-state",
+        "implementation"
+      ],
+      "contentDigest": "sha256:e858722e6519f4a4ecffcc53a85f45300a5c2ee55b719986d34ebe3c96ce2d70"
+    },
+    {
+      "candidateId": "cand_ee2eb2f19a7cd44a7ed0ad6e",
+      "path": "/clearing/agent-governance/durable-task-state/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/durable-task-state/threats",
+      "segments": [
+        "agent-governance",
+        "durable-task-state",
+        "threats"
+      ],
+      "contentDigest": "sha256:1b55a666b809bc7b10d53e658220fa5ef630dba118b6e51f20b1590d5516bd1c"
+    },
+    {
+      "candidateId": "cand_2dc57ee429651b19ba26dcd3",
+      "path": "/clearing/agent-governance/endpoint-substitution-defense/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/endpoint-substitution-defense/architecture",
+      "segments": [
+        "agent-governance",
+        "endpoint-substitution-defense",
+        "architecture"
+      ],
+      "contentDigest": "sha256:c135d6f3dd7918861ec6185ea74ceb66438d2920f80bff6213a7a1b589eed125"
+    },
+    {
+      "candidateId": "cand_39628430ca071389ed4703de",
+      "path": "/clearing/agent-governance/endpoint-substitution-defense/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/endpoint-substitution-defense/controls",
+      "segments": [
+        "agent-governance",
+        "endpoint-substitution-defense",
+        "controls"
+      ],
+      "contentDigest": "sha256:d83db7c53bac877324eba0b8a296e467fff438698cc71ab1b730230f533da4a7"
+    },
+    {
+      "candidateId": "cand_41f8d80fdc904e177523f915",
+      "path": "/clearing/agent-governance/endpoint-substitution-defense/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/endpoint-substitution-defense/definition",
+      "segments": [
+        "agent-governance",
+        "endpoint-substitution-defense",
+        "definition"
+      ],
+      "contentDigest": "sha256:7daee802b9e3c5fb2f43c05377a0979d1f8a878b013206c54da5990d543b3f48"
+    },
+    {
+      "candidateId": "cand_9749d38dea6640be6196afef",
+      "path": "/clearing/agent-governance/endpoint-substitution-defense/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/endpoint-substitution-defense/implementation",
+      "segments": [
+        "agent-governance",
+        "endpoint-substitution-defense",
+        "implementation"
+      ],
+      "contentDigest": "sha256:9cf66b36f616c0a35a9ae2d7432f4578e9c2a0e4faf87c48917e9017c435373b"
+    },
+    {
+      "candidateId": "cand_56311b11be2d35905203e3ad",
+      "path": "/clearing/agent-governance/endpoint-substitution-defense/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/endpoint-substitution-defense/threats",
+      "segments": [
+        "agent-governance",
+        "endpoint-substitution-defense",
+        "threats"
+      ],
+      "contentDigest": "sha256:b893385792f90058e04bcf71414c0708bb3694623a89285875f613e7f0f409d6"
+    },
+    {
+      "candidateId": "cand_23b94089c37a0988ccb86c27",
+      "path": "/clearing/agent-governance/enterprise-mcp-gateway/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/enterprise-mcp-gateway/architecture",
+      "segments": [
+        "agent-governance",
+        "enterprise-mcp-gateway",
+        "architecture"
+      ],
+      "contentDigest": "sha256:af377fe00a1ac6a00c582a105bf292dfc5959c05374055efe28c5f78a2cd2f6b"
+    },
+    {
+      "candidateId": "cand_a7dc85b082092d763eeea7c2",
+      "path": "/clearing/agent-governance/enterprise-mcp-gateway/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/enterprise-mcp-gateway/controls",
+      "segments": [
+        "agent-governance",
+        "enterprise-mcp-gateway",
+        "controls"
+      ],
+      "contentDigest": "sha256:289e36259fbb9e934e30741c07fbe2f47166bd4cf4fc2fb9e2317ef174801358"
+    },
+    {
+      "candidateId": "cand_75e4bd509bd9951b41590427",
+      "path": "/clearing/agent-governance/enterprise-mcp-gateway/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/enterprise-mcp-gateway/implementation",
+      "segments": [
+        "agent-governance",
+        "enterprise-mcp-gateway",
+        "implementation"
+      ],
+      "contentDigest": "sha256:b66f237bf662969f66b0ff6a2742942f3fff84484e7605f2296166326957df76"
+    },
+    {
+      "candidateId": "cand_d251f41a252e4b533f1b4eef",
+      "path": "/clearing/agent-governance/enterprise-mcp-gateway/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/enterprise-mcp-gateway/threats",
+      "segments": [
+        "agent-governance",
+        "enterprise-mcp-gateway",
+        "threats"
+      ],
+      "contentDigest": "sha256:9f7961c6ad5532a289e38c28f7db765b0ac85cc45e5fd990f0002bd8777c9b7c"
+    },
+    {
+      "candidateId": "cand_98da6e0ee462652e0277613f",
+      "path": "/clearing/agent-governance/enterprise-mcp-gateway/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/enterprise-mcp-gateway/verification",
+      "segments": [
+        "agent-governance",
+        "enterprise-mcp-gateway",
+        "verification"
+      ],
+      "contentDigest": "sha256:1ddf9bc8615c8e6f5416e1068bb317a864680719ddf0afdc0997f2875f0f08e6"
+    },
+    {
+      "candidateId": "cand_5949b30ed697d2606dbdce0a",
+      "path": "/clearing/agent-governance/failure-recovery/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/architecture",
+      "segments": [
+        "agent-governance",
+        "failure-recovery",
+        "architecture"
+      ],
+      "contentDigest": "sha256:bb2d40388f6a114cd82dc6792edbc0d2bcdf2596ce7329ffe1cced07ebb077b1"
+    },
+    {
+      "candidateId": "cand_f6409ea20cfc51496e3a61d8",
+      "path": "/clearing/agent-governance/failure-recovery/commercialization",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/commercialization",
+      "segments": [
+        "agent-governance",
+        "failure-recovery",
+        "commercialization"
+      ],
+      "contentDigest": "sha256:5bc56450007d446735758b3f1c9f5631883984420d21e6dff090d9d93f0b012e"
+    },
+    {
+      "candidateId": "cand_b86babf5135f9a573d02e5ae",
+      "path": "/clearing/agent-governance/failure-recovery/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/controls",
+      "segments": [
+        "agent-governance",
+        "failure-recovery",
+        "controls"
+      ],
+      "contentDigest": "sha256:c29b32523d1d94c997d88b6940f44b6990149c998b369050aa9bbc80edb0ee11"
+    },
+    {
+      "candidateId": "cand_6e59fad8478a7efbfa9f88af",
+      "path": "/clearing/agent-governance/failure-recovery/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/definition",
+      "segments": [
+        "agent-governance",
+        "failure-recovery",
+        "definition"
+      ],
+      "contentDigest": "sha256:cc307cd5828b9b2f114fc04aece879721da31f90daa7a3c2442bce134f328d2d"
+    },
+    {
+      "candidateId": "cand_bc2c0a51fccecc34fb24c794",
+      "path": "/clearing/agent-governance/failure-recovery/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/implementation",
+      "segments": [
+        "agent-governance",
+        "failure-recovery",
+        "implementation"
+      ],
+      "contentDigest": "sha256:9caa1c2b617021c07d7b51321a4b93268e2e4952e5ef9345b302171a0b5d8621"
+    },
+    {
+      "candidateId": "cand_49acbaf80c15c406036eb89d",
+      "path": "/clearing/agent-governance/failure-recovery/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/threats",
+      "segments": [
+        "agent-governance",
+        "failure-recovery",
+        "threats"
+      ],
+      "contentDigest": "sha256:5b5d3bd04349899dad20de34ad4c1345d783189f9d7c58bdd16a88741a9654bf"
+    },
+    {
+      "candidateId": "cand_ba1f85fdbc1cfbd3c8a3b2a4",
+      "path": "/clearing/agent-governance/failure-recovery/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/verification",
+      "segments": [
+        "agent-governance",
+        "failure-recovery",
+        "verification"
+      ],
+      "contentDigest": "sha256:b585b1548318c8f5d37ccd46328d3bae4a4bec7b04216427e7acc595e8902871"
+    },
+    {
+      "candidateId": "cand_87776c000adeb7a12e6534cc",
+      "path": "/clearing/agent-governance/human-approval-gates/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/human-approval-gates/definition",
+      "segments": [
+        "agent-governance",
+        "human-approval-gates",
+        "definition"
+      ],
+      "contentDigest": "sha256:2b8379a71f64b8213c915a7412af5b0cfabd9ec1ab16cb8e90392a1d43154b31"
+    },
+    {
+      "candidateId": "cand_5b4dc2fe272365b6df6671e2",
+      "path": "/clearing/agent-governance/human-approval-gates/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/human-approval-gates/implementation",
+      "segments": [
+        "agent-governance",
+        "human-approval-gates",
+        "implementation"
+      ],
+      "contentDigest": "sha256:3fa68b4c5d1aef6b6cdb9e6f182e87882aae6633e90062882f39cb85d9b2c247"
+    },
+    {
+      "candidateId": "cand_d917d2aaff678b182062a198",
+      "path": "/clearing/agent-governance/human-approval-gates/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/human-approval-gates/threats",
+      "segments": [
+        "agent-governance",
+        "human-approval-gates",
+        "threats"
+      ],
+      "contentDigest": "sha256:8a8e3b737b62d76bedb47ba1fc18dde5d624521a6961879d9b8cdd7a6cf6e9fb"
+    },
+    {
+      "candidateId": "cand_bd6b98d2244e4634cd7f3c23",
+      "path": "/clearing/agent-governance/identity-bound-agents/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/architecture",
+      "segments": [
+        "agent-governance",
+        "identity-bound-agents",
+        "architecture"
+      ],
+      "contentDigest": "sha256:15786831f2134f3fd8a57024aecacf0b12748bdf4488740ffc4de5cfb7b66437"
+    },
+    {
+      "candidateId": "cand_948dafb7f815b713239ab5f8",
+      "path": "/clearing/agent-governance/identity-bound-agents/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/controls",
+      "segments": [
+        "agent-governance",
+        "identity-bound-agents",
+        "controls"
+      ],
+      "contentDigest": "sha256:37d76ffb4677ea4f5530e3e6a044b18fa34f028b954f5af0ec2aa05934a9e6f0"
+    },
+    {
+      "candidateId": "cand_63800114df58212bf1827623",
+      "path": "/clearing/agent-governance/identity-bound-agents/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition",
+      "segments": [
+        "agent-governance",
+        "identity-bound-agents",
+        "definition"
+      ],
+      "contentDigest": "sha256:d97245fd32929f6bd14586356890f606859da2b39571faeac0c068ee9e922221"
+    },
+    {
+      "candidateId": "cand_894175e0b31eeb9201e2db71",
+      "path": "/clearing/agent-governance/identity-bound-agents/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/implementation",
+      "segments": [
+        "agent-governance",
+        "identity-bound-agents",
+        "implementation"
+      ],
+      "contentDigest": "sha256:a92bb468d68d7cc4c2e5502efca79f8877e3e5028acb99caad813ea6048f897a"
+    },
+    {
+      "candidateId": "cand_015bd0d008cca73f6395b704",
+      "path": "/clearing/agent-governance/identity-bound-agents/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/threats",
+      "segments": [
+        "agent-governance",
+        "identity-bound-agents",
+        "threats"
+      ],
+      "contentDigest": "sha256:f1e2f35c76ee9ca0a53f0f6f2939e3cfd2982f1a0a40fb29460789989e75a3e3"
+    },
+    {
+      "candidateId": "cand_8966b5ce4540add13b855b6b",
+      "path": "/clearing/agent-governance/machine-commerce-entitlement/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/machine-commerce-entitlement/controls",
+      "segments": [
+        "agent-governance",
+        "machine-commerce-entitlement",
+        "controls"
+      ],
+      "contentDigest": "sha256:25e248b05e996e0035e33349496a4ee7c7342d8ebdbd6415fe9d1f605f2dd27b"
+    },
+    {
+      "candidateId": "cand_5f75c387d49a705e210e237f",
+      "path": "/clearing/agent-governance/machine-commerce-entitlement/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/machine-commerce-entitlement/definition",
+      "segments": [
+        "agent-governance",
+        "machine-commerce-entitlement",
+        "definition"
+      ],
+      "contentDigest": "sha256:aab3b8c213ef58340f30d42f2fda0a67896b023aa2527d59ad1992209358f889"
+    },
+    {
+      "candidateId": "cand_fc84174a23763a79823ac9a5",
+      "path": "/clearing/agent-governance/machine-commerce-entitlement/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/machine-commerce-entitlement/implementation",
+      "segments": [
+        "agent-governance",
+        "machine-commerce-entitlement",
+        "implementation"
+      ],
+      "contentDigest": "sha256:a0f72b56d8113091dbe485fc1f7d7c48b94d65747884176f394207cf43d1c57a"
+    },
+    {
+      "candidateId": "cand_568c22583d18a5fd1c0bca74",
+      "path": "/clearing/agent-governance/machine-commerce-entitlement/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/machine-commerce-entitlement/threats",
+      "segments": [
+        "agent-governance",
+        "machine-commerce-entitlement",
+        "threats"
+      ],
+      "contentDigest": "sha256:1e56b00c79caa8aee873161bfaf93eb8b61f591f239fc3b23cffb91d5f1e009f"
+    },
+    {
+      "candidateId": "cand_7c75d81360d848d32b0b98c4",
+      "path": "/clearing/agent-governance/metered-evidence-retrieval/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/architecture",
+      "segments": [
+        "agent-governance",
+        "metered-evidence-retrieval",
+        "architecture"
+      ],
+      "contentDigest": "sha256:988af3f5bdcda519541a7e57b2dcb7d4ba4b8925ef1705ed63f7d49744df042f"
+    },
+    {
+      "candidateId": "cand_f0c682db65aed0113f08f6a9",
+      "path": "/clearing/agent-governance/metered-evidence-retrieval/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/controls",
+      "segments": [
+        "agent-governance",
+        "metered-evidence-retrieval",
+        "controls"
+      ],
+      "contentDigest": "sha256:4af709843788c333d2abe6c8c4a9bc2e264c297e6878e6fb0b4cd70a14ada89b"
+    },
+    {
+      "candidateId": "cand_03783f0a589f183ebb951043",
+      "path": "/clearing/agent-governance/metered-evidence-retrieval/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/definition",
+      "segments": [
+        "agent-governance",
+        "metered-evidence-retrieval",
+        "definition"
+      ],
+      "contentDigest": "sha256:8f397836e862dcec15e4c789ea6ec5bb4e21b4dfa9a519375866de5c2c9e4983"
+    },
+    {
+      "candidateId": "cand_e4d6a544f2fc9d8d2bbc21af",
+      "path": "/clearing/agent-governance/metered-evidence-retrieval/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/implementation",
+      "segments": [
+        "agent-governance",
+        "metered-evidence-retrieval",
+        "implementation"
+      ],
+      "contentDigest": "sha256:ec4c993fdb78dbb15d9dd7e444794e8b03c890f820c868087396cc1a18451759"
+    },
+    {
+      "candidateId": "cand_ddd31b53e6436d4628439e3a",
+      "path": "/clearing/agent-governance/metered-evidence-retrieval/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/threats",
+      "segments": [
+        "agent-governance",
+        "metered-evidence-retrieval",
+        "threats"
+      ],
+      "contentDigest": "sha256:d6922061fedd4bdf0cfed1b641f8152acaef44750b174de8cbf9c36ae7a7850a"
+    },
+    {
+      "candidateId": "cand_dc3f5e45155a32217aaa5761",
+      "path": "/clearing/agent-governance/metered-evidence-retrieval/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/verification",
+      "segments": [
+        "agent-governance",
+        "metered-evidence-retrieval",
+        "verification"
+      ],
+      "contentDigest": "sha256:7d79786e4bb18cd0eb255e731c3403ebf2e828b5cd59f290ab9942dd3a7779c0"
+    },
+    {
+      "candidateId": "cand_74221b098dfd0b9b0feb2ff7",
+      "path": "/clearing/agent-governance/tenant-isolation/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tenant-isolation/architecture",
+      "segments": [
+        "agent-governance",
+        "tenant-isolation",
+        "architecture"
+      ],
+      "contentDigest": "sha256:8d9a77a5703226ecb98ee7954c4f16864ad5105185a34d5cf648b0fa98bb5bdf"
+    },
+    {
+      "candidateId": "cand_2d858bb451ba6df46e3ca2bb",
+      "path": "/clearing/agent-governance/tenant-isolation/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tenant-isolation/controls",
+      "segments": [
+        "agent-governance",
+        "tenant-isolation",
+        "controls"
+      ],
+      "contentDigest": "sha256:6a4c9aabeabb482c3150ac525d23b2f30da11960d2ea2a8208b42476e7477e5f"
+    },
+    {
+      "candidateId": "cand_3461e3f8da83e0663f56783e",
+      "path": "/clearing/agent-governance/tenant-isolation/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tenant-isolation/definition",
+      "segments": [
+        "agent-governance",
+        "tenant-isolation",
+        "definition"
+      ],
+      "contentDigest": "sha256:7c493f7f20685ec795f5fd1507c5f4083f3449d6d594109ce46c14f78ad7d33e"
+    },
+    {
+      "candidateId": "cand_d621c8e727d8c75e4c60b42e",
+      "path": "/clearing/agent-governance/tenant-isolation/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tenant-isolation/implementation",
+      "segments": [
+        "agent-governance",
+        "tenant-isolation",
+        "implementation"
+      ],
+      "contentDigest": "sha256:8936ef8e69a6aa9c8e17031f881a010998ea2a97e79ffeb26a86c5bebf8a6aff"
+    },
+    {
+      "candidateId": "cand_ba845b90e84d225764a52037",
+      "path": "/clearing/agent-governance/tenant-isolation/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tenant-isolation/threats",
+      "segments": [
+        "agent-governance",
+        "tenant-isolation",
+        "threats"
+      ],
+      "contentDigest": "sha256:a7fb071fdf5a74907ebdb31215490b27f07a3c11ea8fd3597a6c426805fc26a7"
+    },
+    {
+      "candidateId": "cand_ecff0e1d07982edf497cd776",
+      "path": "/clearing/agent-governance/tool-authorization/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/architecture",
+      "segments": [
+        "agent-governance",
+        "tool-authorization",
+        "architecture"
+      ],
+      "contentDigest": "sha256:32d34f10034d1c848b68eef71c3a93d454fa2650b4e7bfb389046749bf677140"
+    },
+    {
+      "candidateId": "cand_d98b6bacc48fba6c93f7e094",
+      "path": "/clearing/agent-governance/tool-authorization/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/controls",
+      "segments": [
+        "agent-governance",
+        "tool-authorization",
+        "controls"
+      ],
+      "contentDigest": "sha256:cf7835d4d9fa969a0a1101df70b0fe53742adb2a1d0800e6a14908454db78b22"
+    },
+    {
+      "candidateId": "cand_20da33096b4bf0cd8817d93d",
+      "path": "/clearing/agent-governance/tool-authorization/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/definition",
+      "segments": [
+        "agent-governance",
+        "tool-authorization",
+        "definition"
+      ],
+      "contentDigest": "sha256:234cc95d402fadec07c7faebb04bb535034722472580f8b123e5ba4fd6cf2676"
+    },
+    {
+      "candidateId": "cand_65e29e233a6650e62ff2565b",
+      "path": "/clearing/agent-governance/tool-authorization/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/implementation",
+      "segments": [
+        "agent-governance",
+        "tool-authorization",
+        "implementation"
+      ],
+      "contentDigest": "sha256:b22d930d2d806c213bb867a26b6aff035043cebbdf7149492cfb18997bca0d6d"
+    },
+    {
+      "candidateId": "cand_5a7c51df1e3223dacf93e9d1",
+      "path": "/clearing/agent-governance/tool-authorization/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/threats",
+      "segments": [
+        "agent-governance",
+        "tool-authorization",
+        "threats"
+      ],
+      "contentDigest": "sha256:11c1ab5ba6be59a964ff1ce6e0c4cd0de46e0675401c6fcb3835958830b54a0a"
+    },
+    {
+      "candidateId": "cand_e2fe7f6b4b5867c5d29e83b8",
+      "path": "/clearing/agent-governance/tool-authorization/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/verification",
+      "segments": [
+        "agent-governance",
+        "tool-authorization",
+        "verification"
+      ],
+      "contentDigest": "sha256:f412c278c66fcba125ba6083eed36d09de6a33215d4bea4ad0ad829bf68d86c9"
+    },
+    {
+      "candidateId": "cand_edbd25353f79b43c1924cc54",
+      "path": "/clearing/deterministic-computation/uncertainty-propagation/machine-interface",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/uncertainty-propagation/machine-interface",
+      "segments": [
+        "deterministic-computation",
+        "uncertainty-propagation",
+        "machine-interface"
+      ],
+      "contentDigest": "sha256:67b27b128b59992c69bf4145466998066c1f37bec4b3fb2e1d243a768c7534c8"
+    },
+    {
+      "candidateId": "cand_290d11e426d78bbb3e4932c5",
+      "path": "/clearing/deterministic-computation/uncertainty-propagation/reproducibility",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/uncertainty-propagation/reproducibility",
+      "segments": [
+        "deterministic-computation",
+        "uncertainty-propagation",
+        "reproducibility"
+      ],
+      "contentDigest": "sha256:2a178afcac8f5e9c3c81b561c74fb5a954b7a39679d2d8c7ad3ece9231ca0fd6"
+    },
+    {
+      "candidateId": "cand_1d96c6f07453f3a91c62e985",
+      "path": "/clearing/deterministic-computation/uncertainty-propagation/uncertainty",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/uncertainty-propagation/uncertainty",
+      "segments": [
+        "deterministic-computation",
+        "uncertainty-propagation",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:fb59c5ed0f4ac9ab6b3686ae3ab215ed20aa4e809a9a5dc85468664da2388ba3"
+    },
+    {
+      "candidateId": "cand_c649076b210c5ee56c40921e",
+      "path": "/clearing/deterministic-computation/uncertainty-propagation/worked-example",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/uncertainty-propagation/worked-example",
+      "segments": [
+        "deterministic-computation",
+        "uncertainty-propagation",
+        "worked-example"
+      ],
+      "contentDigest": "sha256:e2505b8e0a4fc0c0df0e74ec77c27a6edb0d1f8f1d3015b3abc36094941019e0"
+    },
+    {
+      "candidateId": "cand_d4e5b2c6ab09d0efb0cf18da",
+      "path": "/clearing/evidence-workflows/rights-basis/commercial-use",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/rights-basis/commercial-use",
+      "segments": [
+        "evidence-workflows",
+        "rights-basis",
+        "commercial-use"
+      ],
+      "contentDigest": "sha256:d9e45da5efff2be2c316a6752d63c33d99321b08c247ddd1c23adc06caeac4b1"
+    },
+    {
+      "candidateId": "cand_4cc36bf23125318d76871e24",
+      "path": "/clearing/evidence-workflows/rights-basis/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/rights-basis/verification",
+      "segments": [
+        "evidence-workflows",
+        "rights-basis",
+        "verification"
+      ],
+      "contentDigest": "sha256:de50d126d289e62eada5ae6ffd20c8dc3f708843c83ca156a53dca07b4a730d1"
+    },
+    {
+      "candidateId": "cand_ec51046262d16ae33f68402b",
+      "path": "/clearing/evidence-workflows/rights-basis/workflow",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/rights-basis/workflow",
+      "segments": [
+        "evidence-workflows",
+        "rights-basis",
+        "workflow"
+      ],
+      "contentDigest": "sha256:f007061091c0e851c6b8dcc59032577b14a777ee3b40c59569eca20c79abcdab"
+    },
+    {
+      "candidateId": "cand_9399ecb5994f8ff63f2145f0",
+      "path": "/clearing/evidence-workflows/source-identity/commercial-use",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/source-identity/commercial-use",
+      "segments": [
+        "evidence-workflows",
+        "source-identity",
+        "commercial-use"
+      ],
+      "contentDigest": "sha256:6c423f842e8c6fb28df9f94a1c21211d78eeaf8ef40dd6a9912c3c32c17e2fa8"
+    },
+    {
+      "candidateId": "cand_938673c13a86e5b73e5c3e58",
+      "path": "/clearing/evidence-workflows/source-identity/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/source-identity/verification",
+      "segments": [
+        "evidence-workflows",
+        "source-identity",
+        "verification"
+      ],
+      "contentDigest": "sha256:6b6b42b2be0a4f78992557338116f88d1f929f1e72eb79864e8cc95570d3f037"
+    },
+    {
+      "candidateId": "cand_ba025cb22985c559d9c6b86d",
+      "path": "/clearing/evidence-workflows/source-identity/workflow",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/source-identity/workflow",
+      "segments": [
+        "evidence-workflows",
+        "source-identity",
+        "workflow"
+      ],
+      "contentDigest": "sha256:aadbd742f5dc1538bfbf2fd91713d2a4a8719179a79f7f6a69ff1b0c3aac2b45"
+    }
+  ],
+  "provenanceDigest": "sha256:a7d4f6402350368f090876aea7e85be8b2de92f0c157597a3c3462e60340be06"
+}

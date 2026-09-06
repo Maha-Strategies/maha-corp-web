@@ -2,12 +2,12 @@
   "schemaVersion": "maha-federation-property-pages/1.0",
   "siteId": "maha-os",
   "canonicalHost": "www.maha-os.com",
-  "registryDigest": "sha256:fdec47d7878c317a6442c61b5b1d4d310d5713140e65d2fd4e488ad8d745775d",
+  "registryDigest": "sha256:457ce5d0d8da368faed995dc7fbca577490dc3af0b5358e3864f17d432c3c167",
   "status": "local-unreleased",
   "counts": {
-    "pages": 11,
-    "readyForOwnerIntegration": 0,
-    "blockedOnUnreadyPrerequisite": 11
+    "pages": 18,
+    "readyForOwnerIntegration": 18,
+    "blockedOnUnreadyPrerequisite": 0
   },
   "pages": [
     {
@@ -91,7 +91,9 @@
           "kind": "relationships",
           "paragraphs": [
             "definition: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition",
+            "canonical-family-owner-definition-first: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/operator-guide",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/failure-mode",
             "property-home: https://www.maha-os.com/"
           ]
         }
@@ -134,10 +136,22 @@
           "availability": "observed-existing"
         },
         {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "canonical-family-owner-definition-first",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
           "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/operator-guide",
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_9f41b4ed6746ae6e048f417f"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_956bb7c77098dead14075f84"
         },
         {
           "url": "https://www.maha-os.com/",
@@ -238,15 +252,8 @@
         "noRatingOrEndorsement": true
       },
       "adoption": {
-        "state": "blocked-on-unready-prerequisite",
-        "blockedDependencies": [
-          {
-            "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
-            "relationship": "canonical-family-owner-definition-first",
-            "candidateId": "cand_671d652918d62414c37d751d",
-            "availability": "unready-candidate"
-          }
-        ],
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
         "routeFileCreated": false,
         "exactRevisionReviewed": false,
         "canonicallyReleased": false,
@@ -254,14 +261,269 @@
       },
       "provenance": {
         "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-2",
         "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
-        "decisionDigest": "sha256:ffd2085f46884af13245dc02eacd2a3d2fd86f6784e4d8ffde012e825699a86b",
+        "decisionDigest": "sha256:7d247aa86898a8fa2255f281711dd8984614ae02eca22300bf006fd4213142b2",
         "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
         "specificationDigest": "sha256:5c63f0e5755e075d81cae119e5ced04082e556f3d02b2fb9b025491a24f392ae",
         "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
         "packetDigest": "sha256:2c939fcb210a0eaf5043eb3bca767b611fe659f13b3483426a4d256b8a047783"
       },
-      "contentDigest": "sha256:22ea8cbeb03262695f5421c93ba9c7a8de1a01a0250987315bbb11a6b1c76dfc"
+      "contentDigest": "sha256:af62988ed0a8885c74d684a5c5644b9983e6cb7fd930b5396396d2995c568d5a"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_956bb7c77098dead14075f84",
+      "tranche": 3,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/device-identity/failure-mode",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/failure-mode",
+      "title": "Device Identity — Failure Mode",
+      "topic": "device-identity",
+      "routeRole": "failure-mode",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:device-identity",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:device-identity"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Device Identity, in this failure-mode analysis, is limited to the following inspected scope. Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Device Identity, in this failure-mode analysis, is limited to the following inspected scope. Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Failure Mode analysis",
+          "kind": "role-method",
+          "paragraphs": [
+            "Describe the failed invariant, observable signal, safe refusal, and correction or recovery path.",
+            "An absent signal is not proof of success unless the protocol defines and validates that interpretation.",
+            "Applied scope: Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "IoT Device Cybersecurity Capability Core Baseline — Section 2 and Table 1, Device Identification. Establishes: Logical and physical identification of an IoT device for cybersecurity management.",
+            "Agent client credential authorization — credential fingerprint, client binding, status, and authorization checks. Establishes: Current Maha client-credential identity and authorization behavior."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The baseline is a manufacturer-oriented IoT starting point, not universal device identity or proof that a device has not been substituted.",
+            "Repository behavior is implementation evidence, not an independent security certification.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition",
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/operator-guide",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-ir-8259a",
+          "title": "IoT Device Cybersecurity Capability Core Baseline",
+          "responsibleBody": "NIST",
+          "versionOrDate": "NISTIR 8259A, May 2020",
+          "sourceClass": "government-guidance",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ir/2020/NIST.IR.8259a.pdf",
+          "locator": "Section 2 and Table 1, Device Identification",
+          "establishes": "Logical and physical identification of an IoT device for cybersecurity management.",
+          "doesNotEstablish": "The baseline is a manufacturer-oriented IoT starting point, not universal device identity or proof that a device has not been substituted.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "local-agent-credentials",
+          "title": "Agent client credential authorization",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source inspected 2026-09-05",
+          "sourceClass": "local-implementation",
+          "url": null,
+          "locator": "credential fingerprint, client binding, status, and authorization checks",
+          "establishes": "Current Maha client-credential identity and authorization behavior.",
+          "doesNotEstablish": "Repository behavior is implementation evidence, not an independent security certification.",
+          "rightsBasis": "Maha-controlled repository material; retain only file identity, symbol locator, and content fingerprint. No credential or runtime value is included.",
+          "inspectionDepth": "code-symbol",
+          "contentFingerprint": "sha256:15a41eeb0d4ed74d9134e6982ce367be72888d86636107ce8a31b8bd08dacf7f"
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_f2e452a99e390ddae8b1001f"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_9f41b4ed6746ae6e048f417f"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Device Identity mean in this bounded context?",
+          "answer": "Device Identity, in this failure-mode analysis, is limited to the following inspected scope. Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this failure mode answer?",
+          "answer": "IoT Device Cybersecurity Capability Core Baseline (NISTIR 8259A, May 2020), at Section 2 and Table 1, Device Identification, supports logical and physical identification of an IoT device for cybersecurity management. Agent client credential authorization (repository source inspected 2026-09-05), at credential fingerprint, client binding, status, and authorization checks, supports current Maha client-credential identity and authorization behavior."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The baseline is a manufacturer-oriented IoT starting point, not universal device identity or proof that a device has not been substituted. Repository behavior is implementation evidence, not an independent security certification. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/failure-mode#article",
+        "headline": "Device Identity — Failure Mode",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/failure-mode",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://nvlpubs.nist.gov/nistpubs/ir/2020/NIST.IR.8259a.pdf"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Device Identity mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Device Identity, in this failure-mode analysis, is limited to the following inspected scope. Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this failure mode answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "IoT Device Cybersecurity Capability Core Baseline (NISTIR 8259A, May 2020), at Section 2 and Table 1, Device Identification, supports logical and physical identification of an IoT device for cybersecurity management. Agent client credential authorization (repository source inspected 2026-09-05), at credential fingerprint, client binding, status, and authorization checks, supports current Maha client-credential identity and authorization behavior."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The baseline is a manufacturer-oriented IoT starting point, not universal device identity or proof that a device has not been substituted. Repository behavior is implementation evidence, not an independent security certification. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-3",
+        "decisionManifestDigest": "sha256:f95ca42523e4202cc92c41166041b9a9870a4d4f4b9ae574bdbe38a8968ec4a8",
+        "decisionDigest": "sha256:752c0b12f4243f00aa5b54de22eb6a591816c4364cd060a4d74d101527313e6d",
+        "specificationManifestDigest": "sha256:9318c6c732e859e985dcaa7f1b44c73b5344006464d4097404a0e82ddbf115cd",
+        "specificationDigest": "sha256:c4f93e0b3ecacc5ec045c71635b9aaf818a6126e2b3aa95e17966226262d3421",
+        "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
+        "packetDigest": "sha256:5a26bfb65bbd3849066e000b7400f7fba334fa173c9211665a2e7cbc86236c99"
+      },
+      "contentDigest": "sha256:aab1ff2988f0dadd5fea76367fa314d47ed552d0f1e5791851f411ca919c64ab"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -344,6 +606,8 @@
           "kind": "relationships",
           "paragraphs": [
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition",
+            "canonical-family-owner-definition-first: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/failure-mode",
             "property-home: https://www.maha-os.com/"
           ]
         }
@@ -386,6 +650,18 @@
           "candidateId": "cand_f2e452a99e390ddae8b1001f"
         },
         {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "canonical-family-owner-definition-first",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_956bb7c77098dead14075f84"
+        },
+        {
           "url": "https://www.maha-os.com/",
           "relationship": "property-home",
           "availability": "observed-existing",
@@ -407,7 +683,7 @@
         },
         {
           "question": "Which definition or canonical owner must be read first?",
-          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+          "answer": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition first. The present page applies that definition through its narrower route role."
         },
         {
           "question": "What source, policy, implementation, or release change would require revision?",
@@ -464,6 +740,240 @@
             "name": "Which definition or canonical owner must be read first?",
             "acceptedAnswer": {
               "@type": "Answer",
+              "text": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition first. The present page applies that definition through its narrower route role."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-2",
+        "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
+        "decisionDigest": "sha256:3ac426c361288116e0def7d9487a60b7a64aafb0cd77bd7d39218a74ae3f078c",
+        "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
+        "specificationDigest": "sha256:d1b473e1777239467e20792fb4d5ceaa294418226a97f85d36299d3c97ab53cd",
+        "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
+        "packetDigest": "sha256:2c939fcb210a0eaf5043eb3bca767b611fe659f13b3483426a4d256b8a047783"
+      },
+      "contentDigest": "sha256:6315549c22ec7478ca545d9e6a9c34f960a88329d07e266f8391be19ec1b115d"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_671d652918d62414c37d751d",
+      "tranche": 2,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/health-data-consent/definition",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+      "title": "Health Data Consent — Definition",
+      "topic": "health-data-consent",
+      "routeRole": "definition",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:health-data-consent",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:health-data-consent"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Health Data Consent, in this definition, is limited to the following inspected scope. HIPAA-specific distinction between optional consent and detailed authorization. Voluntary privacy-risk framework for data processing and user control. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Health Data Consent, in this definition, is limited to the following inspected scope. HIPAA-specific distinction between optional consent and detailed authorization. Voluntary privacy-risk framework for data processing and user control. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Definition",
+          "kind": "role-method",
+          "paragraphs": [
+            "Use the term only for the source-backed scope stated here; keep adjacent concepts separate unless a typed relationship is explicit.",
+            "A useful definition states both inclusion and exclusion conditions so a machine answer cannot silently widen it.",
+            "Applied scope: HIPAA-specific distinction between optional consent and detailed authorization. Voluntary privacy-risk framework for data processing and user control."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "What is the difference between consent and authorization under the HIPAA Privacy Rule? — Entire FAQ: consent versus authorization. Establishes: HIPAA-specific distinction between optional consent and detailed authorization.",
+            "NIST Privacy Framework — Core functions Identify-P, Govern-P, Control-P, Communicate-P, Protect-P. Establishes: Voluntary privacy-risk framework for data processing and user control."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "HIPAA does not govern every consumer health application or every jurisdiction.",
+            "The framework is voluntary and does not create legal consent.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "hhs-hipaa-auth",
+          "title": "What is the difference between consent and authorization under the HIPAA Privacy Rule?",
+          "responsibleBody": "U.S. Department of Health and Human Services",
+          "versionOrDate": "reviewed 28 December 2022",
+          "sourceClass": "government-guidance",
+          "url": "https://www.hhs.gov/hipaa/for-professionals/faq/264/what-is-the-difference-between-consent-and-authorization/index.html",
+          "locator": "Entire FAQ: consent versus authorization",
+          "establishes": "HIPAA-specific distinction between optional consent and detailed authorization.",
+          "doesNotEstablish": "HIPAA does not govern every consumer health application or every jurisdiction.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "nist-privacy",
+          "title": "NIST Privacy Framework",
+          "responsibleBody": "NIST",
+          "versionOrDate": "version 1.0, January 2020",
+          "sourceClass": "government-guidance",
+          "url": "https://www.nist.gov/privacy-framework/privacy-framework",
+          "locator": "Core functions Identify-P, Govern-P, Control-P, Communicate-P, Protect-P",
+          "establishes": "Voluntary privacy-risk framework for data processing and user control.",
+          "doesNotEstablish": "The framework is voluntary and does not create legal consent.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Health Data Consent mean in this bounded context?",
+          "answer": "Health Data Consent, in this definition, is limited to the following inspected scope. HIPAA-specific distinction between optional consent and detailed authorization. Voluntary privacy-risk framework for data processing and user control. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this definition answer?",
+          "answer": "What is the difference between consent and authorization under the HIPAA Privacy Rule? (reviewed 28 December 2022), at Entire FAQ: consent versus authorization, supports hIPAA-specific distinction between optional consent and detailed authorization. NIST Privacy Framework (version 1.0, January 2020), at Core functions Identify-P, Govern-P, Control-P, Communicate-P, Protect-P, supports voluntary privacy-risk framework for data processing and user control."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "HIPAA does not govern every consumer health application or every jurisdiction. The framework is voluntary and does not create legal consent. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition#article",
+        "headline": "Health Data Consent — Definition",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://www.hhs.gov/hipaa/for-professionals/faq/264/what-is-the-difference-between-consent-and-authorization/index.html",
+          "https://www.nist.gov/privacy-framework/privacy-framework"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Health Data Consent mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Health Data Consent, in this definition, is limited to the following inspected scope. HIPAA-specific distinction between optional consent and detailed authorization. Voluntary privacy-risk framework for data processing and user control. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this definition answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "What is the difference between consent and authorization under the HIPAA Privacy Rule? (reviewed 28 December 2022), at Entire FAQ: consent versus authorization, supports hIPAA-specific distinction between optional consent and detailed authorization. NIST Privacy Framework (version 1.0, January 2020), at Core functions Identify-P, Govern-P, Control-P, Communicate-P, Protect-P, supports voluntary privacy-risk framework for data processing and user control."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "HIPAA does not govern every consumer health application or every jurisdiction. The framework is voluntary and does not create legal consent. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
               "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
             }
           },
@@ -484,15 +994,8 @@
         "noRatingOrEndorsement": true
       },
       "adoption": {
-        "state": "blocked-on-unready-prerequisite",
-        "blockedDependencies": [
-          {
-            "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
-            "relationship": "canonical-family-owner-definition-first",
-            "candidateId": "cand_671d652918d62414c37d751d",
-            "availability": "unready-candidate"
-          }
-        ],
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
         "routeFileCreated": false,
         "exactRevisionReviewed": false,
         "canonicallyReleased": false,
@@ -500,14 +1003,277 @@
       },
       "provenance": {
         "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
-        "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
-        "decisionDigest": "sha256:96244eaa98a7c643e8a66e4f0d996df817834d5f854a616e1249220a13b83c87",
-        "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
-        "specificationDigest": "sha256:d1b473e1777239467e20792fb4d5ceaa294418226a97f85d36299d3c97ab53cd",
-        "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
-        "packetDigest": "sha256:2c939fcb210a0eaf5043eb3bca767b611fe659f13b3483426a4d256b8a047783"
+        "sourceSetId": "readiness-remediations-v1",
+        "decisionManifestDigest": "sha256:fce87596b82d8a94ea098fed14d401cc7eb017550c6d1ebe9b51e1c9c3a0fbda",
+        "decisionDigest": "sha256:9ab1e277c5c069e250a7b40cd78edcb8ded38e21df59e32043fcc96f2be1cc5c",
+        "specificationManifestDigest": "sha256:0b55414100160b120dceb843b16f824b596538500e99e2d68ba7f4a7479a5eb1",
+        "specificationDigest": "sha256:d95d76c66c3102ac892ab3bbad4730b203592c344369916ccc56337dfda75c0d",
+        "packetManifestDigest": "sha256:40f82b2317b7e4791be8876c563235b411b9174bebe43c6d8ecb7ee4db89c2ca",
+        "packetDigest": "sha256:6b3a4b9dd9c0187b5a32a67cfff4837129e2333838fe13ee9fc7d9d952d46289"
       },
-      "contentDigest": "sha256:153e696f267c10ed7a9733243bb94144c7b4f45129d42c55a1dc3ed717af5cc5"
+      "contentDigest": "sha256:53ba253d1d96c868e87034b05ae0fc5f5503ca9b73d300405c56310ae13ebe4b"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_79b14a30c80b13b864c76e91",
+      "tranche": 3,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/model-update/controls",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/controls",
+      "title": "Model Update — Controls",
+      "topic": "model-update",
+      "routeRole": "controls",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:model-update",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:model-update"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Model Update, in this control model, is limited to the following inspected scope. Planned update acquisition, testing, deployment, verification, and risk prioritization. Lifecycle change, context, validation, limitations, monitoring, and response. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Model Update, in this control model, is limited to the following inspected scope. Planned update acquisition, testing, deployment, verification, and risk prioritization. Lifecycle change, context, validation, limitations, monitoring, and response. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Control model",
+          "kind": "role-method",
+          "paragraphs": [
+            "State the controlled input, decision rule, observable failure, and evidence that the control ran.",
+            "A control description is not evidence of effectiveness; verification and operational observation remain separate.",
+            "Applied scope: Planned update acquisition, testing, deployment, verification, and risk prioritization. Lifecycle change, context, validation, limitations, monitoring, and response."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Guide to Enterprise Patch Management Planning — Sections 2–4: enterprise patch management strategy and lifecycle. Establishes: Planned update acquisition, testing, deployment, verification, and risk prioritization.",
+            "Artificial Intelligence Risk Management Framework (AI RMF 1.0) — GOVERN 1.5; MAP 1.1; MEASURE 2.5–2.9; MANAGE 4.1. Establishes: Lifecycle change, context, validation, limitations, monitoring, and response."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Patch guidance does not establish the safety or efficacy of a particular model update.",
+            "AI RMF 1.0 is voluntary and currently under revision.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/model-update/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/model-update/failure-mode",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/model-update/operator-guide",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-patching",
+          "title": "Guide to Enterprise Patch Management Planning",
+          "responsibleBody": "NIST",
+          "versionOrDate": "SP 800-40 Rev. 4, April 2022",
+          "sourceClass": "government-guidance",
+          "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
+          "locator": "Sections 2–4: enterprise patch management strategy and lifecycle",
+          "establishes": "Planned update acquisition, testing, deployment, verification, and risk prioritization.",
+          "doesNotEstablish": "Patch guidance does not establish the safety or efficacy of a particular model update.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "nist-ai-rmf",
+          "title": "Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
+          "responsibleBody": "NIST",
+          "versionOrDate": "NIST AI 100-1, January 2023",
+          "sourceClass": "government-guidance",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+          "locator": "GOVERN 1.5; MAP 1.1; MEASURE 2.5–2.9; MANAGE 4.1",
+          "establishes": "Lifecycle change, context, validation, limitations, monitoring, and response.",
+          "doesNotEstablish": "AI RMF 1.0 is voluntary and currently under revision.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_6f3eacfcecccd7732583a282"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_9f1eaef842514bf1f43b76f5"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_c3808a61cc515e6f5283f08f"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Model Update mean in this bounded context?",
+          "answer": "Model Update, in this control model, is limited to the following inspected scope. Planned update acquisition, testing, deployment, verification, and risk prioritization. Lifecycle change, context, validation, limitations, monitoring, and response. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this controls answer?",
+          "answer": "Guide to Enterprise Patch Management Planning (SP 800-40 Rev. 4, April 2022), at Sections 2–4: enterprise patch management strategy and lifecycle, supports planned update acquisition, testing, deployment, verification, and risk prioritization. Artificial Intelligence Risk Management Framework (AI RMF 1.0) (NIST AI 100-1, January 2023), at GOVERN 1.5; MAP 1.1; MEASURE 2.5–2.9; MANAGE 4.1, supports lifecycle change, context, validation, limitations, monitoring, and response."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Patch guidance does not establish the safety or efficacy of a particular model update. AI RMF 1.0 is voluntary and currently under revision. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/controls#article",
+        "headline": "Model Update — Controls",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/controls",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
+          "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Model Update mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Model Update, in this control model, is limited to the following inspected scope. Planned update acquisition, testing, deployment, verification, and risk prioritization. Lifecycle change, context, validation, limitations, monitoring, and response. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this controls answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Guide to Enterprise Patch Management Planning (SP 800-40 Rev. 4, April 2022), at Sections 2–4: enterprise patch management strategy and lifecycle, supports planned update acquisition, testing, deployment, verification, and risk prioritization. Artificial Intelligence Risk Management Framework (AI RMF 1.0) (NIST AI 100-1, January 2023), at GOVERN 1.5; MAP 1.1; MEASURE 2.5–2.9; MANAGE 4.1, supports lifecycle change, context, validation, limitations, monitoring, and response."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Patch guidance does not establish the safety or efficacy of a particular model update. AI RMF 1.0 is voluntary and currently under revision. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-3",
+        "decisionManifestDigest": "sha256:f95ca42523e4202cc92c41166041b9a9870a4d4f4b9ae574bdbe38a8968ec4a8",
+        "decisionDigest": "sha256:856e09f70452afa6e9d0eb2ed3144a1bf97aba357444bd03dd43d27c981483cf",
+        "specificationManifestDigest": "sha256:9318c6c732e859e985dcaa7f1b44c73b5344006464d4097404a0e82ddbf115cd",
+        "specificationDigest": "sha256:c376b71a2031d76ac0b2eec01764ce22ebc652dce86befdac84c5f6093ca004c",
+        "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
+        "packetDigest": "sha256:f0194d1ea7766cec5048e2f3ddc001777fa99abcb8e8a296e7cdddce363eabfd"
+      },
+      "contentDigest": "sha256:6774e2845ff0f4acace6e8a85504a1b0038872207bb62b6c6447c42325c45e1d"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -589,9 +1355,11 @@
           "heading": "Related definitions and applications",
           "kind": "relationships",
           "paragraphs": [
+            "canonical-family-owner-definition-first: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "localDefinition: https://www.maha-os.com/knowledge/private-machine-systems/model-update/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/model-update/failure-mode",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/model-update/operator-guide",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/model-update/controls",
             "property-home: https://www.maha-os.com/"
           ]
         }
@@ -628,6 +1396,12 @@
       ],
       "relatedLinks": [
         {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "canonical-family-owner-definition-first",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
           "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/definition",
           "relationship": "localDefinition",
           "candidateId": "cand_6f3eacfcecccd7732583a282",
@@ -644,6 +1418,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_c3808a61cc515e6f5283f08f"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/controls",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_79b14a30c80b13b864c76e91"
         },
         {
           "url": "https://www.maha-os.com/",
@@ -667,7 +1447,7 @@
         },
         {
           "question": "Which canonical definition must be read first?",
-          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+          "answer": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition first. The present page applies that definition through its narrower route role."
         },
         {
           "question": "What change would require this page to be revised or withdrawn?",
@@ -725,7 +1505,7 @@
             "name": "Which canonical definition must be read first?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+              "text": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition first. The present page applies that definition through its narrower route role."
             }
           },
           {
@@ -745,15 +1525,8 @@
         "noRatingOrEndorsement": true
       },
       "adoption": {
-        "state": "blocked-on-unready-prerequisite",
-        "blockedDependencies": [
-          {
-            "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
-            "relationship": "canonical-family-owner-definition-first",
-            "candidateId": "cand_671d652918d62414c37d751d",
-            "availability": "unready-candidate"
-          }
-        ],
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
         "routeFileCreated": false,
         "exactRevisionReviewed": false,
         "canonicallyReleased": false,
@@ -761,14 +1534,15 @@
       },
       "provenance": {
         "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-1",
         "decisionManifestDigest": "sha256:56932d33572ce2111374fd0386337d2f0ec7e12bdcc84e10d49ab35669e50868",
-        "decisionDigest": "sha256:2a74bea1c2b6d1ad8612adc3a14895dcc85675881837e21839d4c2f634a383f0",
+        "decisionDigest": "sha256:a380b34fe2004394217fc4fa57f5463dee637da680534b1d65967e0e2cf3c026",
         "specificationManifestDigest": "sha256:3221465669604603d9486f0368a10e86a34845d4d4a5e2f01234f15c9ab314d1",
         "specificationDigest": "sha256:6b47ead2a5ddccf775faebec17eea6becfb22bfc32d0f6b9de235f39ab73a49c",
         "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
         "packetDigest": "sha256:962f82cf6e1e3c1da266b7a3358b1bd4c0ce6b2add444f37a046a1d2528cf7c5"
       },
-      "contentDigest": "sha256:e87584e95877de3fe17ae68e1358ecdca7701a8636238497e44a639faaf693fd"
+      "contentDigest": "sha256:de565a453825d80153411a3be869e088ef264a05117fd20f99f8a7fbdcee205d"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -850,8 +1624,10 @@
           "heading": "Related definitions and applications",
           "kind": "relationships",
           "paragraphs": [
+            "canonical-family-owner-definition-first: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/model-update/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/model-update/operator-guide",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/model-update/controls",
             "property-home: https://www.maha-os.com/"
           ]
         }
@@ -888,6 +1664,12 @@
       ],
       "relatedLinks": [
         {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "canonical-family-owner-definition-first",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
           "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/definition",
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
@@ -898,6 +1680,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_c3808a61cc515e6f5283f08f"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/controls",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_79b14a30c80b13b864c76e91"
         },
         {
           "url": "https://www.maha-os.com/",
@@ -921,7 +1709,7 @@
         },
         {
           "question": "Which canonical definition must be read first?",
-          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+          "answer": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition first. The present page applies that definition through its narrower route role."
         },
         {
           "question": "What change would require this page to be revised or withdrawn?",
@@ -979,7 +1767,7 @@
             "name": "Which canonical definition must be read first?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+              "text": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition first. The present page applies that definition through its narrower route role."
             }
           },
           {
@@ -999,15 +1787,8 @@
         "noRatingOrEndorsement": true
       },
       "adoption": {
-        "state": "blocked-on-unready-prerequisite",
-        "blockedDependencies": [
-          {
-            "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
-            "relationship": "canonical-family-owner-definition-first",
-            "candidateId": "cand_671d652918d62414c37d751d",
-            "availability": "unready-candidate"
-          }
-        ],
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
         "routeFileCreated": false,
         "exactRevisionReviewed": false,
         "canonicallyReleased": false,
@@ -1015,14 +1796,15 @@
       },
       "provenance": {
         "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-1",
         "decisionManifestDigest": "sha256:56932d33572ce2111374fd0386337d2f0ec7e12bdcc84e10d49ab35669e50868",
-        "decisionDigest": "sha256:3e7e192a7ad9947c1fc2aac079baf1563f842d351a58dafc51b3ca128ba3ed90",
+        "decisionDigest": "sha256:7b12bac4da3cc058aa52810a501f7db1b2e68861fbbd4b554187c04119c57e28",
         "specificationManifestDigest": "sha256:3221465669604603d9486f0368a10e86a34845d4d4a5e2f01234f15c9ab314d1",
         "specificationDigest": "sha256:b306779a152705ffe8c9eb1c868cb16f70a3382ff928b6d2bfea680290b7a2b7",
         "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
         "packetDigest": "sha256:962f82cf6e1e3c1da266b7a3358b1bd4c0ce6b2add444f37a046a1d2528cf7c5"
       },
-      "contentDigest": "sha256:f46c9eef6061e88a55f83c22e5743976da0159310d37347b9ecc892bd31b0f81"
+      "contentDigest": "sha256:0f4f7affb6b41d4dbeb0acc1d50ae22db8abbfd6c78cd9fc68aace0766a238a2"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -1104,8 +1886,10 @@
           "heading": "Related definitions and applications",
           "kind": "relationships",
           "paragraphs": [
+            "canonical-family-owner-definition-first: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/model-update/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/model-update/failure-mode",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/model-update/controls",
             "property-home: https://www.maha-os.com/"
           ]
         }
@@ -1142,6 +1926,12 @@
       ],
       "relatedLinks": [
         {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "canonical-family-owner-definition-first",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
           "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/definition",
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
@@ -1152,6 +1942,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_9f1eaef842514bf1f43b76f5"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/controls",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_79b14a30c80b13b864c76e91"
         },
         {
           "url": "https://www.maha-os.com/",
@@ -1175,7 +1971,7 @@
         },
         {
           "question": "Which canonical definition must be read first?",
-          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+          "answer": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition first. The present page applies that definition through its narrower route role."
         },
         {
           "question": "What change would require this page to be revised or withdrawn?",
@@ -1233,7 +2029,7 @@
             "name": "Which canonical definition must be read first?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+              "text": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition first. The present page applies that definition through its narrower route role."
             }
           },
           {
@@ -1253,15 +2049,8 @@
         "noRatingOrEndorsement": true
       },
       "adoption": {
-        "state": "blocked-on-unready-prerequisite",
-        "blockedDependencies": [
-          {
-            "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
-            "relationship": "canonical-family-owner-definition-first",
-            "candidateId": "cand_671d652918d62414c37d751d",
-            "availability": "unready-candidate"
-          }
-        ],
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
         "routeFileCreated": false,
         "exactRevisionReviewed": false,
         "canonicallyReleased": false,
@@ -1269,14 +2058,277 @@
       },
       "provenance": {
         "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-1",
         "decisionManifestDigest": "sha256:56932d33572ce2111374fd0386337d2f0ec7e12bdcc84e10d49ab35669e50868",
-        "decisionDigest": "sha256:e3f19877f729b6b366746e3f5f6ede1f504310e47c77577618b497ab75c4d5f7",
+        "decisionDigest": "sha256:a1d8c3d16ef78f53deec0ad74187084bdcdd176b3b8593f3ecf75b53fc59dd75",
         "specificationManifestDigest": "sha256:3221465669604603d9486f0368a10e86a34845d4d4a5e2f01234f15c9ab314d1",
         "specificationDigest": "sha256:084229570287ea8a55958d049b259de3ed786f852ba4ecacd1fbbdc1bbd8c14b",
         "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
         "packetDigest": "sha256:962f82cf6e1e3c1da266b7a3358b1bd4c0ce6b2add444f37a046a1d2528cf7c5"
       },
-      "contentDigest": "sha256:d4779a20cc4af565529f61d9712de162e761576396bba1c35cc21e5a869947c4"
+      "contentDigest": "sha256:2448fbe0490b70e6afacb4918e393fc07e4bce5cf7d26f7e1e31431e6d4ccecb"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_c39f4de7987d0d289ae4d0eb",
+      "tranche": 3,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/offline-operation/controls",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/controls",
+      "title": "Offline Operation — Controls",
+      "topic": "offline-operation",
+      "routeRole": "controls",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:offline-operation",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:offline-operation"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Offline Operation, in this control model, is limited to the following inspected scope. Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Offline Operation, in this control model, is limited to the following inspected scope. Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Control model",
+          "kind": "role-method",
+          "paragraphs": [
+            "State the controlled input, decision rule, observable failure, and evidence that the control ran.",
+            "A control description is not evidence of effectiveness; verification and operational observation remain separate.",
+            "Applied scope: Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Contingency Planning Guide for Federal Information Systems — Sections 3.4–3.6; Table 3-4; Section 5. Establishes: Offline/alternate processing, backups, exercises, recovery, and reconstitution.",
+            "NIST Privacy Framework — Control-P and Protect-P functions. Establishes: User control and safeguards for local processing."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The source does not establish that a specific device can perform every function offline.",
+            "Local processing reduces some data-transfer risks but does not itself guarantee privacy.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/operator-guide",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/failure-mode",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-contingency",
+          "title": "Contingency Planning Guide for Federal Information Systems",
+          "responsibleBody": "NIST",
+          "versionOrDate": "SP 800-34 Rev. 1, May 2010",
+          "sourceClass": "government-guidance",
+          "url": "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf",
+          "locator": "Sections 3.4–3.6; Table 3-4; Section 5",
+          "establishes": "Offline/alternate processing, backups, exercises, recovery, and reconstitution.",
+          "doesNotEstablish": "The source does not establish that a specific device can perform every function offline.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "nist-privacy",
+          "title": "NIST Privacy Framework",
+          "responsibleBody": "NIST",
+          "versionOrDate": "version 1.0, January 2020",
+          "sourceClass": "government-guidance",
+          "url": "https://www.nist.gov/privacy-framework/privacy-framework",
+          "locator": "Control-P and Protect-P functions",
+          "establishes": "User control and safeguards for local processing.",
+          "doesNotEstablish": "Local processing reduces some data-transfer risks but does not itself guarantee privacy.",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_6c7d279e19fcb92f76df94e2"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_64e34cac0ca1f3ac67f6649d"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_784b1995902a5db299a0b086"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Offline Operation mean in this bounded context?",
+          "answer": "Offline Operation, in this control model, is limited to the following inspected scope. Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this controls answer?",
+          "answer": "Contingency Planning Guide for Federal Information Systems (SP 800-34 Rev. 1, May 2010), at Sections 3.4–3.6; Table 3-4; Section 5, supports offline/alternate processing, backups, exercises, recovery, and reconstitution. NIST Privacy Framework (version 1.0, January 2020), at Control-P and Protect-P functions, supports user control and safeguards for local processing."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The source does not establish that a specific device can perform every function offline. Local processing reduces some data-transfer risks but does not itself guarantee privacy. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/controls#article",
+        "headline": "Offline Operation — Controls",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/controls",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf",
+          "https://www.nist.gov/privacy-framework/privacy-framework"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Offline Operation mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Offline Operation, in this control model, is limited to the following inspected scope. Offline/alternate processing, backups, exercises, recovery, and reconstitution. User control and safeguards for local processing. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this controls answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Contingency Planning Guide for Federal Information Systems (SP 800-34 Rev. 1, May 2010), at Sections 3.4–3.6; Table 3-4; Section 5, supports offline/alternate processing, backups, exercises, recovery, and reconstitution. NIST Privacy Framework (version 1.0, January 2020), at Control-P and Protect-P functions, supports user control and safeguards for local processing."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The source does not establish that a specific device can perform every function offline. Local processing reduces some data-transfer risks but does not itself guarantee privacy. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-3",
+        "decisionManifestDigest": "sha256:f95ca42523e4202cc92c41166041b9a9870a4d4f4b9ae574bdbe38a8968ec4a8",
+        "decisionDigest": "sha256:184579257940fd9b1197e1a9a42acd27d2e06da0b55453ff06990c0ca1ea94ce",
+        "specificationManifestDigest": "sha256:9318c6c732e859e985dcaa7f1b44c73b5344006464d4097404a0e82ddbf115cd",
+        "specificationDigest": "sha256:3514d3b75137f64650e43b0a0f471e26ba5a2359962603d2ee5ac9d843a78b8b",
+        "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
+        "packetDigest": "sha256:6d28814b623d7af2b4c440d263ffc5645199ee1b4bfbd85479e7dee0334652d6"
+      },
+      "contentDigest": "sha256:9590b7fa7149d8747669d247e6052f23c36a5b454bbc26e5c1c477bd23086576"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -1358,9 +2410,11 @@
           "heading": "Related definitions and applications",
           "kind": "relationships",
           "paragraphs": [
+            "canonical-family-owner-definition-first: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "localDefinition: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/operator-guide",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/failure-mode",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/controls",
             "property-home: https://www.maha-os.com/"
           ]
         }
@@ -1397,6 +2451,12 @@
       ],
       "relatedLinks": [
         {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "canonical-family-owner-definition-first",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
           "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition",
           "relationship": "localDefinition",
           "candidateId": "cand_6c7d279e19fcb92f76df94e2",
@@ -1413,6 +2473,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_784b1995902a5db299a0b086"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/controls",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_c39f4de7987d0d289ae4d0eb"
         },
         {
           "url": "https://www.maha-os.com/",
@@ -1436,7 +2502,7 @@
         },
         {
           "question": "Which canonical definition must be read first?",
-          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+          "answer": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition first. The present page applies that definition through its narrower route role."
         },
         {
           "question": "What change would require this page to be revised or withdrawn?",
@@ -1494,7 +2560,7 @@
             "name": "Which canonical definition must be read first?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+              "text": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition first. The present page applies that definition through its narrower route role."
             }
           },
           {
@@ -1514,15 +2580,8 @@
         "noRatingOrEndorsement": true
       },
       "adoption": {
-        "state": "blocked-on-unready-prerequisite",
-        "blockedDependencies": [
-          {
-            "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
-            "relationship": "canonical-family-owner-definition-first",
-            "candidateId": "cand_671d652918d62414c37d751d",
-            "availability": "unready-candidate"
-          }
-        ],
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
         "routeFileCreated": false,
         "exactRevisionReviewed": false,
         "canonicallyReleased": false,
@@ -1530,14 +2589,15 @@
       },
       "provenance": {
         "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-1",
         "decisionManifestDigest": "sha256:56932d33572ce2111374fd0386337d2f0ec7e12bdcc84e10d49ab35669e50868",
-        "decisionDigest": "sha256:d0bd298edc163378e0a0845fe08824f1dd5c4a8813abb283f0f5d37118d006b8",
+        "decisionDigest": "sha256:119547eed368b56061d7b278fd587cf39e270d010adb3ee6cd28503f9d3252d9",
         "specificationManifestDigest": "sha256:3221465669604603d9486f0368a10e86a34845d4d4a5e2f01234f15c9ab314d1",
         "specificationDigest": "sha256:47d231f1ed8c9852269ceb48b196e40616cb3fe4e20c1edc09c2ca6a427912d5",
         "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
         "packetDigest": "sha256:e7a5a4cb207a554cb5a8d32edbf7b9e523d6b38378bc2020f54758961c3fed51"
       },
-      "contentDigest": "sha256:daaa6bdede43734968f21fbaa4bf813bb7b30d1286301b93ad1b480d61303a35"
+      "contentDigest": "sha256:335e0c1778b2fd94663be7040eebfe372db0a158f317c5e699e10fd5a172c638"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -1619,8 +2679,10 @@
           "heading": "Related definitions and applications",
           "kind": "relationships",
           "paragraphs": [
+            "canonical-family-owner-definition-first: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/operator-guide",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/controls",
             "property-home: https://www.maha-os.com/"
           ]
         }
@@ -1657,6 +2719,12 @@
       ],
       "relatedLinks": [
         {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "canonical-family-owner-definition-first",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
           "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition",
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
@@ -1667,6 +2735,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_64e34cac0ca1f3ac67f6649d"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/controls",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_c39f4de7987d0d289ae4d0eb"
         },
         {
           "url": "https://www.maha-os.com/",
@@ -1690,7 +2764,7 @@
         },
         {
           "question": "Which definition or canonical owner must be read first?",
-          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+          "answer": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition first. The present page applies that definition through its narrower route role."
         },
         {
           "question": "What source, policy, implementation, or release change would require revision?",
@@ -1748,7 +2822,7 @@
             "name": "Which definition or canonical owner must be read first?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+              "text": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition first. The present page applies that definition through its narrower route role."
             }
           },
           {
@@ -1768,15 +2842,8 @@
         "noRatingOrEndorsement": true
       },
       "adoption": {
-        "state": "blocked-on-unready-prerequisite",
-        "blockedDependencies": [
-          {
-            "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
-            "relationship": "canonical-family-owner-definition-first",
-            "candidateId": "cand_671d652918d62414c37d751d",
-            "availability": "unready-candidate"
-          }
-        ],
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
         "routeFileCreated": false,
         "exactRevisionReviewed": false,
         "canonicallyReleased": false,
@@ -1784,14 +2851,15 @@
       },
       "provenance": {
         "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-2",
         "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
-        "decisionDigest": "sha256:9cc5ad362dcd8ef9ce32ad532e4194eed993fe324316298ff5cd25800359cd90",
+        "decisionDigest": "sha256:471e3cdedd8d654fd3d2d6414ac1f3b9c23807855dcb090d20937cf0ddfe13ff",
         "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
         "specificationDigest": "sha256:1cc550a80c7f9c5d02cc42415ea25ef6a21628df31dd332dd65aea225a96194f",
         "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
         "packetDigest": "sha256:e9b3e7597ed7c680397b7ccfe51fa10be5ff47ba50d59ae4bcdde1f52cf21a3a"
       },
-      "contentDigest": "sha256:84db13b1d1ca14fa685ce09bf3067b286baf009c33e7d4b4b1cf5ee7ecc19b15"
+      "contentDigest": "sha256:3ad351e1e4966fa31e9c6a27725bf6e77795855a08f263cf59723bcc19c9b379"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -1873,8 +2941,10 @@
           "heading": "Related definitions and applications",
           "kind": "relationships",
           "paragraphs": [
+            "canonical-family-owner-definition-first: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/failure-mode",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/controls",
             "property-home: https://www.maha-os.com/"
           ]
         }
@@ -1911,6 +2981,12 @@
       ],
       "relatedLinks": [
         {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "canonical-family-owner-definition-first",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
           "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition",
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
@@ -1921,6 +2997,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_784b1995902a5db299a0b086"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/controls",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_c39f4de7987d0d289ae4d0eb"
         },
         {
           "url": "https://www.maha-os.com/",
@@ -1944,7 +3026,7 @@
         },
         {
           "question": "Which canonical definition must be read first?",
-          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+          "answer": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition first. The present page applies that definition through its narrower route role."
         },
         {
           "question": "What change would require this page to be revised or withdrawn?",
@@ -2002,7 +3084,7 @@
             "name": "Which canonical definition must be read first?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+              "text": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition first. The present page applies that definition through its narrower route role."
             }
           },
           {
@@ -2022,15 +3104,8 @@
         "noRatingOrEndorsement": true
       },
       "adoption": {
-        "state": "blocked-on-unready-prerequisite",
-        "blockedDependencies": [
-          {
-            "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
-            "relationship": "canonical-family-owner-definition-first",
-            "candidateId": "cand_671d652918d62414c37d751d",
-            "availability": "unready-candidate"
-          }
-        ],
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
         "routeFileCreated": false,
         "exactRevisionReviewed": false,
         "canonicallyReleased": false,
@@ -2038,14 +3113,15 @@
       },
       "provenance": {
         "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-1",
         "decisionManifestDigest": "sha256:56932d33572ce2111374fd0386337d2f0ec7e12bdcc84e10d49ab35669e50868",
-        "decisionDigest": "sha256:75ea626329b16f83d474f291df5ce19521cb7e4ad662f5b64ef53b324ac8c825",
+        "decisionDigest": "sha256:18272ebafd0e394a6293bb9a0e85fd1eb69651e1a7532384fc91d3d35ce097c5",
         "specificationManifestDigest": "sha256:3221465669604603d9486f0368a10e86a34845d4d4a5e2f01234f15c9ab314d1",
         "specificationDigest": "sha256:9747e21ba99b6fb62e1fcf8d3d79a3b1270238add55e94f1ed48d579f4873409",
         "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
         "packetDigest": "sha256:e7a5a4cb207a554cb5a8d32edbf7b9e523d6b38378bc2020f54758961c3fed51"
       },
-      "contentDigest": "sha256:f38f72432e45cb80092da106da9e87c0579fc0c70dad9f9ede2aeb1418798d68"
+      "contentDigest": "sha256:d1f57f136499e4941228f7d020c5f2c9564293ad3831f55bae916a1216d110b9"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -2127,6 +3203,7 @@
           "heading": "Related definitions and applications",
           "kind": "relationships",
           "paragraphs": [
+            "canonical-family-owner-definition-first: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "definition: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/operator-guide",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/failure-mode",
@@ -2165,6 +3242,12 @@
         }
       ],
       "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "canonical-family-owner-definition-first",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
         {
           "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition",
           "relationship": "definition",
@@ -2205,7 +3288,7 @@
         },
         {
           "question": "Which definition or canonical owner must be read first?",
-          "answer": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition first. The present page applies that definition through its narrower route role."
+          "answer": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition first. The present page applies that definition through its narrower route role."
         },
         {
           "question": "What source, policy, implementation, or release change would require revision?",
@@ -2263,7 +3346,7 @@
             "name": "Which definition or canonical owner must be read first?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition first. The present page applies that definition through its narrower route role."
+              "text": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition first. The present page applies that definition through its narrower route role."
             }
           },
           {
@@ -2283,15 +3366,8 @@
         "noRatingOrEndorsement": true
       },
       "adoption": {
-        "state": "blocked-on-unready-prerequisite",
-        "blockedDependencies": [
-          {
-            "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
-            "relationship": "canonical-family-owner-definition-first",
-            "candidateId": "cand_671d652918d62414c37d751d",
-            "availability": "unready-candidate"
-          }
-        ],
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
         "routeFileCreated": false,
         "exactRevisionReviewed": false,
         "canonicallyReleased": false,
@@ -2299,14 +3375,15 @@
       },
       "provenance": {
         "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-2",
         "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
-        "decisionDigest": "sha256:fddf5669ba76fd55ba2c3fe192b5d67b5bd362464f15840c4a3885fee340df7e",
+        "decisionDigest": "sha256:0022e5302ebeaab5d63eed16d5213bd5d44b5bcf5a1343429a562844f4c690c2",
         "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
         "specificationDigest": "sha256:52f85da1c23c4c13224d040e625b91fd15db88b1343b66b9ef48bd9e78a2b677",
         "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
         "packetDigest": "sha256:0f78391287d8e5b5fd9805703c978dc28c0822298f67d4916344952bbe398afb"
       },
-      "contentDigest": "sha256:88fee230f78f89d233385fb87fae40ffea453eb83e752fa816ea979928915a4a"
+      "contentDigest": "sha256:f2e6985dc17819602fbe935064dee4f65947a6ae1edff1e50a22e56831354326"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -2388,6 +3465,7 @@
           "heading": "Related definitions and applications",
           "kind": "relationships",
           "paragraphs": [
+            "canonical-family-owner-definition-first: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/operator-guide",
             "property-home: https://www.maha-os.com/"
@@ -2426,6 +3504,12 @@
       ],
       "relatedLinks": [
         {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "canonical-family-owner-definition-first",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
           "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition",
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
@@ -2459,7 +3543,7 @@
         },
         {
           "question": "Which definition or canonical owner must be read first?",
-          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+          "answer": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition first. The present page applies that definition through its narrower route role."
         },
         {
           "question": "What source, policy, implementation, or release change would require revision?",
@@ -2517,7 +3601,7 @@
             "name": "Which definition or canonical owner must be read first?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+              "text": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition first. The present page applies that definition through its narrower route role."
             }
           },
           {
@@ -2537,15 +3621,8 @@
         "noRatingOrEndorsement": true
       },
       "adoption": {
-        "state": "blocked-on-unready-prerequisite",
-        "blockedDependencies": [
-          {
-            "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
-            "relationship": "canonical-family-owner-definition-first",
-            "candidateId": "cand_671d652918d62414c37d751d",
-            "availability": "unready-candidate"
-          }
-        ],
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
         "routeFileCreated": false,
         "exactRevisionReviewed": false,
         "canonicallyReleased": false,
@@ -2553,14 +3630,15 @@
       },
       "provenance": {
         "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-2",
         "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
-        "decisionDigest": "sha256:4590434b4ac360ec5379c3a37eec65a2e719a43b7d0c077a33247c25efb17437",
+        "decisionDigest": "sha256:a5d1d8f4fd288c781e064d5c97f8a2ef881a6275a749c65e70eebf3209fe354e",
         "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
         "specificationDigest": "sha256:0e10be54dd5dc72b4a819a131a69302f1b4dfd4b288ded51983fc8d800ce40e3",
         "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
         "packetDigest": "sha256:0f78391287d8e5b5fd9805703c978dc28c0822298f67d4916344952bbe398afb"
       },
-      "contentDigest": "sha256:22c7480dbeec331ad14b9cb46373ff243800d6ba7a2c287bcd1018c6998465e9"
+      "contentDigest": "sha256:ebcca0e5a8910a6d4176273261d3c29f3b2e124c55eb4b51043f4a3043b200f8"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -2642,6 +3720,7 @@
           "heading": "Related definitions and applications",
           "kind": "relationships",
           "paragraphs": [
+            "canonical-family-owner-definition-first: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/failure-mode",
             "property-home: https://www.maha-os.com/"
@@ -2680,6 +3759,12 @@
       ],
       "relatedLinks": [
         {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "canonical-family-owner-definition-first",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
           "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition",
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
@@ -2713,7 +3798,7 @@
         },
         {
           "question": "Which definition or canonical owner must be read first?",
-          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+          "answer": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition first. The present page applies that definition through its narrower route role."
         },
         {
           "question": "What source, policy, implementation, or release change would require revision?",
@@ -2771,6 +3856,260 @@
             "name": "Which definition or canonical owner must be read first?",
             "acceptedAnswer": {
               "@type": "Answer",
+              "text": "Read the maha-os definition at https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition first. The present page applies that definition through its narrower route role."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-2",
+        "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
+        "decisionDigest": "sha256:490ff37ff82719d0b3f996305f4d7fc49513704a6678b4847decd06abc5e4fd3",
+        "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
+        "specificationDigest": "sha256:e9ca33d309e573faceddae7c7b63ca18906dcfed020f00bc93963539a8f042fb",
+        "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
+        "packetDigest": "sha256:0f78391287d8e5b5fd9805703c978dc28c0822298f67d4916344952bbe398afb"
+      },
+      "contentDigest": "sha256:4e6845809f119d7319db36cf48ddaa3594970a3663b898ecd69fe3e885236170"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_d6cbea3163ab9349857186bf",
+      "tranche": 3,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/resilience-mode/definition",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/definition",
+      "title": "Resilience Mode — Definition",
+      "topic": "resilience-mode",
+      "routeRole": "definition",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:resilience-mode",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:resilience-mode"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Resilience Mode, in this definition, is limited to the following inspected scope. Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Resilience Mode, in this definition, is limited to the following inspected scope. Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Definition",
+          "kind": "role-method",
+          "paragraphs": [
+            "Use the term only for the source-backed scope stated here; keep adjacent concepts separate unless a typed relationship is explicit.",
+            "A useful definition states both inclusion and exclusion conditions so a machine answer cannot silently widen it.",
+            "Applied scope: Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Contingency Planning Guide for Federal Information Systems — Sections 3.4–3.6, 4 and 5. Establishes: Alternate operations, recovery, testing, and reconstitution after disruption.",
+            "Governed workflow task-state ledger — State transitions, terminal states, replay keys and event history. Establishes: A local mechanism for preserving and resuming bounded workflow state."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The guide does not define a consumer-device mode, guarantee availability, or authorize unsafe degraded operation.",
+            "This code does not prove hardware resilience, offline inference quality, or deployed persistence.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/operator-guide",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/failure-mode",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-contingency-resilience",
+          "title": "Contingency Planning Guide for Federal Information Systems",
+          "responsibleBody": "NIST",
+          "versionOrDate": "SP 800-34 Rev. 1, May 2010",
+          "sourceClass": "government-guidance",
+          "url": "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf",
+          "locator": "Sections 3.4–3.6, 4 and 5",
+          "establishes": "Alternate operations, recovery, testing, and reconstitution after disruption.",
+          "doesNotEstablish": "The guide does not define a consumer-device mode, guarantee availability, or authorize unsafe degraded operation.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "local-task-resilience",
+          "title": "Governed workflow task-state ledger",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source reviewed 2026-09-06",
+          "sourceClass": "local-implementation",
+          "url": null,
+          "locator": "State transitions, terminal states, replay keys and event history",
+          "establishes": "A local mechanism for preserving and resuming bounded workflow state.",
+          "doesNotEstablish": "This code does not prove hardware resilience, offline inference quality, or deployed persistence.",
+          "rightsBasis": "Maha-controlled repository source; symbol names and a file identity may be recorded, but no credential, customer value, or runtime payload is retained.",
+          "inspectionDepth": "code-symbol",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_1754ab6d9ccee1ef6778e37e"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_3dee4cb4d23a8de9ae7a7e1d"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Resilience Mode mean in this bounded context?",
+          "answer": "Resilience Mode, in this definition, is limited to the following inspected scope. Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this definition answer?",
+          "answer": "Contingency Planning Guide for Federal Information Systems (SP 800-34 Rev. 1, May 2010), at Sections 3.4–3.6, 4 and 5, supports alternate operations, recovery, testing, and reconstitution after disruption. Governed workflow task-state ledger (repository source reviewed 2026-09-06), at State transitions, terminal states, replay keys and event history, supports a local mechanism for preserving and resuming bounded workflow state."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The guide does not define a consumer-device mode, guarantee availability, or authorize unsafe degraded operation. This code does not prove hardware resilience, offline inference quality, or deployed persistence. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/definition#article",
+        "headline": "Resilience Mode — Definition",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/definition",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Resilience Mode mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Resilience Mode, in this definition, is limited to the following inspected scope. Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this definition answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Contingency Planning Guide for Federal Information Systems (SP 800-34 Rev. 1, May 2010), at Sections 3.4–3.6, 4 and 5, supports alternate operations, recovery, testing, and reconstitution after disruption. Governed workflow task-state ledger (repository source reviewed 2026-09-06), at State transitions, terminal states, replay keys and event history, supports a local mechanism for preserving and resuming bounded workflow state."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The guide does not define a consumer-device mode, guarantee availability, or authorize unsafe degraded operation. This code does not prove hardware resilience, offline inference quality, or deployed persistence. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
               "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
             }
           },
@@ -2791,15 +4130,8 @@
         "noRatingOrEndorsement": true
       },
       "adoption": {
-        "state": "blocked-on-unready-prerequisite",
-        "blockedDependencies": [
-          {
-            "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
-            "relationship": "canonical-family-owner-definition-first",
-            "candidateId": "cand_671d652918d62414c37d751d",
-            "availability": "unready-candidate"
-          }
-        ],
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
         "routeFileCreated": false,
         "exactRevisionReviewed": false,
         "canonicallyReleased": false,
@@ -2807,15 +4139,524 @@
       },
       "provenance": {
         "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
-        "decisionManifestDigest": "sha256:3b59030708a55001a23ec5e455b3e904e1a094034eaa4546cca5f972571dd993",
-        "decisionDigest": "sha256:eda4ec8e51c0169f8a319b30f4a9709f2a4f94759f963f4fb78e6cd4f360e642",
-        "specificationManifestDigest": "sha256:c61ef2b3407e40fd24caad77f6fc139b1c4a22b34a952a9371957226321efad4",
-        "specificationDigest": "sha256:e9ca33d309e573faceddae7c7b63ca18906dcfed020f00bc93963539a8f042fb",
-        "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
-        "packetDigest": "sha256:0f78391287d8e5b5fd9805703c978dc28c0822298f67d4916344952bbe398afb"
+        "sourceSetId": "tranche-3",
+        "decisionManifestDigest": "sha256:f95ca42523e4202cc92c41166041b9a9870a4d4f4b9ae574bdbe38a8968ec4a8",
+        "decisionDigest": "sha256:c250d792bfc3c8c4e3a486e0be14676414221ae1d700e3b6571ed624304606ea",
+        "specificationManifestDigest": "sha256:9318c6c732e859e985dcaa7f1b44c73b5344006464d4097404a0e82ddbf115cd",
+        "specificationDigest": "sha256:650ac28a1fa6b29f7f7585c8afd6888bb1b052d6c0ff595af1bceffeee7105ae",
+        "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
+        "packetDigest": "sha256:bc761a0d0b0c54f5d12e8b0dc366aa958025e9f6d8c9c2bfc574f6b59b11fd3e"
       },
-      "contentDigest": "sha256:7265da149033183a2776e627d132994b612f4a96164f7bf569702df5ab61a9f1"
+      "contentDigest": "sha256:7583bdbf61431c3bdcc1106729eafd37fb50b1d427ca99a81ea63da14de9ea85"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_3dee4cb4d23a8de9ae7a7e1d",
+      "tranche": 3,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/resilience-mode/failure-mode",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/failure-mode",
+      "title": "Resilience Mode — Failure Mode",
+      "topic": "resilience-mode",
+      "routeRole": "failure-mode",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:resilience-mode",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:resilience-mode"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Resilience Mode, in this failure-mode analysis, is limited to the following inspected scope. Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Resilience Mode, in this failure-mode analysis, is limited to the following inspected scope. Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Failure Mode analysis",
+          "kind": "role-method",
+          "paragraphs": [
+            "Describe the failed invariant, observable signal, safe refusal, and correction or recovery path.",
+            "An absent signal is not proof of success unless the protocol defines and validates that interpretation.",
+            "Applied scope: Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Contingency Planning Guide for Federal Information Systems — Sections 3.4–3.6, 4 and 5. Establishes: Alternate operations, recovery, testing, and reconstitution after disruption.",
+            "Governed workflow task-state ledger — State transitions, terminal states, replay keys and event history. Establishes: A local mechanism for preserving and resuming bounded workflow state."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The guide does not define a consumer-device mode, guarantee availability, or authorize unsafe degraded operation.",
+            "This code does not prove hardware resilience, offline inference quality, or deployed persistence.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/operator-guide",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-contingency-resilience",
+          "title": "Contingency Planning Guide for Federal Information Systems",
+          "responsibleBody": "NIST",
+          "versionOrDate": "SP 800-34 Rev. 1, May 2010",
+          "sourceClass": "government-guidance",
+          "url": "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf",
+          "locator": "Sections 3.4–3.6, 4 and 5",
+          "establishes": "Alternate operations, recovery, testing, and reconstitution after disruption.",
+          "doesNotEstablish": "The guide does not define a consumer-device mode, guarantee availability, or authorize unsafe degraded operation.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "local-task-resilience",
+          "title": "Governed workflow task-state ledger",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source reviewed 2026-09-06",
+          "sourceClass": "local-implementation",
+          "url": null,
+          "locator": "State transitions, terminal states, replay keys and event history",
+          "establishes": "A local mechanism for preserving and resuming bounded workflow state.",
+          "doesNotEstablish": "This code does not prove hardware resilience, offline inference quality, or deployed persistence.",
+          "rightsBasis": "Maha-controlled repository source; symbol names and a file identity may be recorded, but no credential, customer value, or runtime payload is retained.",
+          "inspectionDepth": "code-symbol",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_d6cbea3163ab9349857186bf"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_1754ab6d9ccee1ef6778e37e"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Resilience Mode mean in this bounded context?",
+          "answer": "Resilience Mode, in this failure-mode analysis, is limited to the following inspected scope. Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this failure mode answer?",
+          "answer": "Contingency Planning Guide for Federal Information Systems (SP 800-34 Rev. 1, May 2010), at Sections 3.4–3.6, 4 and 5, supports alternate operations, recovery, testing, and reconstitution after disruption. Governed workflow task-state ledger (repository source reviewed 2026-09-06), at State transitions, terminal states, replay keys and event history, supports a local mechanism for preserving and resuming bounded workflow state."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The guide does not define a consumer-device mode, guarantee availability, or authorize unsafe degraded operation. This code does not prove hardware resilience, offline inference quality, or deployed persistence. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/failure-mode#article",
+        "headline": "Resilience Mode — Failure Mode",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/failure-mode",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Resilience Mode mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Resilience Mode, in this failure-mode analysis, is limited to the following inspected scope. Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this failure mode answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Contingency Planning Guide for Federal Information Systems (SP 800-34 Rev. 1, May 2010), at Sections 3.4–3.6, 4 and 5, supports alternate operations, recovery, testing, and reconstitution after disruption. Governed workflow task-state ledger (repository source reviewed 2026-09-06), at State transitions, terminal states, replay keys and event history, supports a local mechanism for preserving and resuming bounded workflow state."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The guide does not define a consumer-device mode, guarantee availability, or authorize unsafe degraded operation. This code does not prove hardware resilience, offline inference quality, or deployed persistence. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-3",
+        "decisionManifestDigest": "sha256:f95ca42523e4202cc92c41166041b9a9870a4d4f4b9ae574bdbe38a8968ec4a8",
+        "decisionDigest": "sha256:c40d6d17fb532aaf04b0ff616e6bdf34c12838fb9e2843e3c62e04d53c08e31e",
+        "specificationManifestDigest": "sha256:9318c6c732e859e985dcaa7f1b44c73b5344006464d4097404a0e82ddbf115cd",
+        "specificationDigest": "sha256:95144275221fbc7bd1d5c1723939c3b8b976ffe130f81e2d74370f6c8d42b9bc",
+        "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
+        "packetDigest": "sha256:bc761a0d0b0c54f5d12e8b0dc366aa958025e9f6d8c9c2bfc574f6b59b11fd3e"
+      },
+      "contentDigest": "sha256:7a1a378461ec0214ecb0e9d401044307d5a02c7e34b304e0c9a6d477be54ebb9"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_1754ab6d9ccee1ef6778e37e",
+      "tranche": 3,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/resilience-mode/operator-guide",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/operator-guide",
+      "title": "Resilience Mode — Operator Guide",
+      "topic": "resilience-mode",
+      "routeRole": "operator-guide",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:resilience-mode",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:resilience-mode"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Resilience Mode, in this operator guide, is limited to the following inspected scope. Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Resilience Mode, in this operator guide, is limited to the following inspected scope. Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Operator guide",
+          "kind": "role-method",
+          "paragraphs": [
+            "Tell the operator what to check before acting, when to refuse, and how to preserve evidence of the outcome.",
+            "The guide cannot infer that a device, service, source, or credential is healthy when observation is unavailable.",
+            "Applied scope: Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Contingency Planning Guide for Federal Information Systems — Sections 3.4–3.6, 4 and 5. Establishes: Alternate operations, recovery, testing, and reconstitution after disruption.",
+            "Governed workflow task-state ledger — State transitions, terminal states, replay keys and event history. Establishes: A local mechanism for preserving and resuming bounded workflow state."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The guide does not define a consumer-device mode, guarantee availability, or authorize unsafe degraded operation.",
+            "This code does not prove hardware resilience, offline inference quality, or deployed persistence.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/failure-mode",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-contingency-resilience",
+          "title": "Contingency Planning Guide for Federal Information Systems",
+          "responsibleBody": "NIST",
+          "versionOrDate": "SP 800-34 Rev. 1, May 2010",
+          "sourceClass": "government-guidance",
+          "url": "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf",
+          "locator": "Sections 3.4–3.6, 4 and 5",
+          "establishes": "Alternate operations, recovery, testing, and reconstitution after disruption.",
+          "doesNotEstablish": "The guide does not define a consumer-device mode, guarantee availability, or authorize unsafe degraded operation.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "local-task-resilience",
+          "title": "Governed workflow task-state ledger",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source reviewed 2026-09-06",
+          "sourceClass": "local-implementation",
+          "url": null,
+          "locator": "State transitions, terminal states, replay keys and event history",
+          "establishes": "A local mechanism for preserving and resuming bounded workflow state.",
+          "doesNotEstablish": "This code does not prove hardware resilience, offline inference quality, or deployed persistence.",
+          "rightsBasis": "Maha-controlled repository source; symbol names and a file identity may be recorded, but no credential, customer value, or runtime payload is retained.",
+          "inspectionDepth": "code-symbol",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_d6cbea3163ab9349857186bf"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_3dee4cb4d23a8de9ae7a7e1d"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Resilience Mode mean in this bounded context?",
+          "answer": "Resilience Mode, in this operator guide, is limited to the following inspected scope. Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this operator guide answer?",
+          "answer": "Contingency Planning Guide for Federal Information Systems (SP 800-34 Rev. 1, May 2010), at Sections 3.4–3.6, 4 and 5, supports alternate operations, recovery, testing, and reconstitution after disruption. Governed workflow task-state ledger (repository source reviewed 2026-09-06), at State transitions, terminal states, replay keys and event history, supports a local mechanism for preserving and resuming bounded workflow state."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The guide does not define a consumer-device mode, guarantee availability, or authorize unsafe degraded operation. This code does not prove hardware resilience, offline inference quality, or deployed persistence. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/operator-guide#article",
+        "headline": "Resilience Mode — Operator Guide",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/operator-guide",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Resilience Mode mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Resilience Mode, in this operator guide, is limited to the following inspected scope. Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this operator guide answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Contingency Planning Guide for Federal Information Systems (SP 800-34 Rev. 1, May 2010), at Sections 3.4–3.6, 4 and 5, supports alternate operations, recovery, testing, and reconstitution after disruption. Governed workflow task-state ledger (repository source reviewed 2026-09-06), at State transitions, terminal states, replay keys and event history, supports a local mechanism for preserving and resuming bounded workflow state."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The guide does not define a consumer-device mode, guarantee availability, or authorize unsafe degraded operation. This code does not prove hardware resilience, offline inference quality, or deployed persistence. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-3",
+        "decisionManifestDigest": "sha256:f95ca42523e4202cc92c41166041b9a9870a4d4f4b9ae574bdbe38a8968ec4a8",
+        "decisionDigest": "sha256:29a07f73418fe1fa74bba1388e23b3c14be7b70c36254e8862e50ee6071441db",
+        "specificationManifestDigest": "sha256:9318c6c732e859e985dcaa7f1b44c73b5344006464d4097404a0e82ddbf115cd",
+        "specificationDigest": "sha256:dc067be4ef81ecd676fb7b2e4381116b06305acaeae619b499fca5d987265a49",
+        "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
+        "packetDigest": "sha256:bc761a0d0b0c54f5d12e8b0dc366aa958025e9f6d8c9c2bfc574f6b59b11fd3e"
+      },
+      "contentDigest": "sha256:23e947a3c2c3e10e9e6d1b7aa0e57d9eac2d697129d7919307ff8ecb8b35ff74"
     }
   ],
-  "provenanceDigest": "sha256:e7753d5fd9de8b3f5d81fe8373605e69762bfd15b6dd3f379bb9d4823527e3dd"
+  "provenanceDigest": "sha256:71004f43e37c1f7c61f97198bd7c026aa956cebc62ff43a650fab2c927695f71"
 }

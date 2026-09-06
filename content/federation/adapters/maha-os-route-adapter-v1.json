@@ -1,0 +1,226 @@
+{
+  "schemaVersion": "maha-federation-property-route-adapter/1.0",
+  "siteId": "maha-os",
+  "canonicalHost": "www.maha-os.com",
+  "rootPath": "/knowledge/",
+  "sourceManifestDigest": "sha256:71004f43e37c1f7c61f97198bd7c026aa956cebc62ff43a650fab2c927695f71",
+  "state": "local-owner-handoff",
+  "ownerIntegration": {
+    "routeShape": "/knowledge/[...segments]",
+    "staticParameters": true,
+    "dynamicParameters": false,
+    "metadataFromExactPage": true,
+    "structuredDataFromExactPage": true,
+    "missingOrUnreadyReturnsNotFound": true,
+    "exactRevisionReviewRequired": true,
+    "activeCanonicalReleaseRequired": true
+  },
+  "counts": {
+    "routes": 18,
+    "boundedAnswers": 90,
+    "publicRoutesCreated": 0,
+    "buildsRun": 0
+  },
+  "publicationBoundary": "The adapter resolves local content only. The owner route must still bind an exact revision and active canonical release before crawlability; a missing or unready path resolves to null.",
+  "entries": [
+    {
+      "candidateId": "cand_f2e452a99e390ddae8b1001f",
+      "path": "/knowledge/private-machine-systems/device-identity/definition",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition",
+      "segments": [
+        "private-machine-systems",
+        "device-identity",
+        "definition"
+      ],
+      "contentDigest": "sha256:af62988ed0a8885c74d684a5c5644b9983e6cb7fd930b5396396d2995c568d5a"
+    },
+    {
+      "candidateId": "cand_956bb7c77098dead14075f84",
+      "path": "/knowledge/private-machine-systems/device-identity/failure-mode",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/failure-mode",
+      "segments": [
+        "private-machine-systems",
+        "device-identity",
+        "failure-mode"
+      ],
+      "contentDigest": "sha256:aab1ff2988f0dadd5fea76367fa314d47ed552d0f1e5791851f411ca919c64ab"
+    },
+    {
+      "candidateId": "cand_9f41b4ed6746ae6e048f417f",
+      "path": "/knowledge/private-machine-systems/device-identity/operator-guide",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/operator-guide",
+      "segments": [
+        "private-machine-systems",
+        "device-identity",
+        "operator-guide"
+      ],
+      "contentDigest": "sha256:6315549c22ec7478ca545d9e6a9c34f960a88329d07e266f8391be19ec1b115d"
+    },
+    {
+      "candidateId": "cand_671d652918d62414c37d751d",
+      "path": "/knowledge/private-machine-systems/health-data-consent/definition",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+      "segments": [
+        "private-machine-systems",
+        "health-data-consent",
+        "definition"
+      ],
+      "contentDigest": "sha256:53ba253d1d96c868e87034b05ae0fc5f5503ca9b73d300405c56310ae13ebe4b"
+    },
+    {
+      "candidateId": "cand_79b14a30c80b13b864c76e91",
+      "path": "/knowledge/private-machine-systems/model-update/controls",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/controls",
+      "segments": [
+        "private-machine-systems",
+        "model-update",
+        "controls"
+      ],
+      "contentDigest": "sha256:6774e2845ff0f4acace6e8a85504a1b0038872207bb62b6c6447c42325c45e1d"
+    },
+    {
+      "candidateId": "cand_6f3eacfcecccd7732583a282",
+      "path": "/knowledge/private-machine-systems/model-update/definition",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/definition",
+      "segments": [
+        "private-machine-systems",
+        "model-update",
+        "definition"
+      ],
+      "contentDigest": "sha256:de565a453825d80153411a3be869e088ef264a05117fd20f99f8a7fbdcee205d"
+    },
+    {
+      "candidateId": "cand_9f1eaef842514bf1f43b76f5",
+      "path": "/knowledge/private-machine-systems/model-update/failure-mode",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/failure-mode",
+      "segments": [
+        "private-machine-systems",
+        "model-update",
+        "failure-mode"
+      ],
+      "contentDigest": "sha256:0f4f7affb6b41d4dbeb0acc1d50ae22db8abbfd6c78cd9fc68aace0766a238a2"
+    },
+    {
+      "candidateId": "cand_c3808a61cc515e6f5283f08f",
+      "path": "/knowledge/private-machine-systems/model-update/operator-guide",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/operator-guide",
+      "segments": [
+        "private-machine-systems",
+        "model-update",
+        "operator-guide"
+      ],
+      "contentDigest": "sha256:2448fbe0490b70e6afacb4918e393fc07e4bce5cf7d26f7e1e31431e6d4ccecb"
+    },
+    {
+      "candidateId": "cand_c39f4de7987d0d289ae4d0eb",
+      "path": "/knowledge/private-machine-systems/offline-operation/controls",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/controls",
+      "segments": [
+        "private-machine-systems",
+        "offline-operation",
+        "controls"
+      ],
+      "contentDigest": "sha256:9590b7fa7149d8747669d247e6052f23c36a5b454bbc26e5c1c477bd23086576"
+    },
+    {
+      "candidateId": "cand_6c7d279e19fcb92f76df94e2",
+      "path": "/knowledge/private-machine-systems/offline-operation/definition",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition",
+      "segments": [
+        "private-machine-systems",
+        "offline-operation",
+        "definition"
+      ],
+      "contentDigest": "sha256:335e0c1778b2fd94663be7040eebfe372db0a158f317c5e699e10fd5a172c638"
+    },
+    {
+      "candidateId": "cand_784b1995902a5db299a0b086",
+      "path": "/knowledge/private-machine-systems/offline-operation/failure-mode",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/failure-mode",
+      "segments": [
+        "private-machine-systems",
+        "offline-operation",
+        "failure-mode"
+      ],
+      "contentDigest": "sha256:3ad351e1e4966fa31e9c6a27725bf6e77795855a08f263cf59723bcc19c9b379"
+    },
+    {
+      "candidateId": "cand_64e34cac0ca1f3ac67f6649d",
+      "path": "/knowledge/private-machine-systems/offline-operation/operator-guide",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/operator-guide",
+      "segments": [
+        "private-machine-systems",
+        "offline-operation",
+        "operator-guide"
+      ],
+      "contentDigest": "sha256:d1f57f136499e4941228f7d020c5f2c9564293ad3831f55bae916a1216d110b9"
+    },
+    {
+      "candidateId": "cand_263d251a7e65204ce3eae1a7",
+      "path": "/knowledge/private-machine-systems/on-device-inference/definition",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition",
+      "segments": [
+        "private-machine-systems",
+        "on-device-inference",
+        "definition"
+      ],
+      "contentDigest": "sha256:f2e6985dc17819602fbe935064dee4f65947a6ae1edff1e50a22e56831354326"
+    },
+    {
+      "candidateId": "cand_8995fa6b7a13d8d0caaa72db",
+      "path": "/knowledge/private-machine-systems/on-device-inference/failure-mode",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/failure-mode",
+      "segments": [
+        "private-machine-systems",
+        "on-device-inference",
+        "failure-mode"
+      ],
+      "contentDigest": "sha256:ebcca0e5a8910a6d4176273261d3c29f3b2e124c55eb4b51043f4a3043b200f8"
+    },
+    {
+      "candidateId": "cand_0fc2ece30235e82106b7d75d",
+      "path": "/knowledge/private-machine-systems/on-device-inference/operator-guide",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/operator-guide",
+      "segments": [
+        "private-machine-systems",
+        "on-device-inference",
+        "operator-guide"
+      ],
+      "contentDigest": "sha256:4e6845809f119d7319db36cf48ddaa3594970a3663b898ecd69fe3e885236170"
+    },
+    {
+      "candidateId": "cand_d6cbea3163ab9349857186bf",
+      "path": "/knowledge/private-machine-systems/resilience-mode/definition",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/definition",
+      "segments": [
+        "private-machine-systems",
+        "resilience-mode",
+        "definition"
+      ],
+      "contentDigest": "sha256:7583bdbf61431c3bdcc1106729eafd37fb50b1d427ca99a81ea63da14de9ea85"
+    },
+    {
+      "candidateId": "cand_3dee4cb4d23a8de9ae7a7e1d",
+      "path": "/knowledge/private-machine-systems/resilience-mode/failure-mode",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/failure-mode",
+      "segments": [
+        "private-machine-systems",
+        "resilience-mode",
+        "failure-mode"
+      ],
+      "contentDigest": "sha256:7a1a378461ec0214ecb0e9d401044307d5a02c7e34b304e0c9a6d477be54ebb9"
+    },
+    {
+      "candidateId": "cand_1754ab6d9ccee1ef6778e37e",
+      "path": "/knowledge/private-machine-systems/resilience-mode/operator-guide",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/operator-guide",
+      "segments": [
+        "private-machine-systems",
+        "resilience-mode",
+        "operator-guide"
+      ],
+      "contentDigest": "sha256:23e947a3c2c3e10e9e6d1b7aa0e57d9eac2d697129d7919307ff8ecb8b35ff74"
+    }
+  ],
+  "provenanceDigest": "sha256:4a0e4ae28cbdfbf64f22c2cd7260c32d53c95a5cc4819a8f8fe07fe9347ae4e5"
+}

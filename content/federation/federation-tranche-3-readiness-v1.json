@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "maha-federation-tranche-three-readiness/1.0",
+  "cohortDigest": "sha256:5f432d449530f80f593e5fd4a46208ede855c1deafa3006d055a1424399390ef",
+  "decisionManifestDigest": "sha256:f95ca42523e4202cc92c41166041b9a9870a4d4f4b9ae574bdbe38a8968ec4a8",
+  "specificationManifestDigest": "sha256:9318c6c732e859e985dcaa7f1b44c73b5344006464d4097404a0e82ddbf115cd",
+  "status": "local-reviewed-unreleased",
+  "counts": {
+    "candidates": 100,
+    "evidenceReady": 92,
+    "revise": 7,
+    "blocked": 0,
+    "duplicative": 1,
+    "pageSpecifications": 92,
+    "publicRoutesCreated": 0,
+    "buildsRun": 0
+  },
+  "boundary": "Candidate review and specifications do not create routes. Owner integration, exact-revision review, canonical release where applicable, and explicit build authorization remain required.",
+  "provenanceDigest": "sha256:bc3bc55bcd4501aac9941a561f07defc43d5130cb202187308ba733f7d9c33f1"
+}
