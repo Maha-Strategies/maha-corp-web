@@ -12,6 +12,16 @@ on:
         required: false
         type: boolean
         default: false
+      book_section_indexing:
+        description: 'Run the separately bounded two-section publisher-funded indexing canary instead.'
+        required: false
+        type: boolean
+        default: false
+      book_section_confirmation:
+        description: 'Exact authorization phrase; required only for book-section indexing.'
+        required: false
+        type: string
+        default: ''
 
 permissions:
   contents: read
@@ -23,6 +33,7 @@ concurrency:
 
 jobs:
   preserve-listing:
+    if: ${{ !inputs.book_section_indexing }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment:
@@ -83,3 +94,34 @@ jobs:
             gh label create x402-canary --color B60205 --description "Production x402 Bazaar canary failure" 2>/dev/null || true
             gh issue create --title "Production x402 Bazaar canary failed" --label x402-canary --body "$body"
           fi
+
+  index-book-sections:
+    if: ${{ inputs.book_section_indexing }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: production-x402-canary
+      url: https://www.mahastrategies.com/.well-known/carp/seller.json
+    env:
+      BASE_RPC_URL: ${{ vars.BASE_RPC_URL }}
+      BOOK_INDEXING_CANARY_OUTPUT_PATH: ${{ github.workspace }}/book-section-indexing-canary.json
+      BOOK_INDEXING_CANARY_CONFIRMATION: ${{ inputs.book_section_confirmation }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Purchase and verify sections sequentially
+        env:
+          X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
+        run: node --experimental-strip-types scripts/run-book-section-indexing-canaries.ts
+      - name: Upload sanitized evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: production-book-section-indexing-canary-${{ github.run_id }}
+          path: ${{ env.BOOK_INDEXING_CANARY_OUTPUT_PATH }}
+          if-no-files-found: error
+          retention-days: 90
