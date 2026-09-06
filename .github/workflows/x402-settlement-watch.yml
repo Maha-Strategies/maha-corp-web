@@ -25,10 +25,10 @@ on:
         type: string
 
 permissions:
-  # write, so the refreshed ledger snapshot can be committed. The snapshot is a
-  # file in the repository rather than a database row, so a serverless cron
-  # cannot produce it and a workflow must.
-  contents: write
+  # Read-only by design. Refreshed snapshots are uploaded for review, but a
+  # human-approved commit is required before a change can trigger a Vercel
+  # production build.
+  contents: read
   issues: write
 
 concurrency:
@@ -65,21 +65,6 @@ jobs:
         run: |
           node --experimental-strip-types scripts/generate-x402-settlement-ledger.ts \
             --days "${{ inputs.days || '60' }}"
-
-      # Only when the ledger moved. observedAt and the scanned block range change
-      # on every run, so committing unconditionally would land a change on main
-      # twice a day and start a production build each time for a snapshot that
-      # says the same thing. Settlements arrive every few days; builds should be
-      # spent at that rate, not at the polling rate.
-      - name: Commit the refreshed ledger
-        if: ${{ steps.ledger.outputs.ledger_changed == 'true' && github.ref == 'refs/heads/main' }}
-        run: |
-          set -euo pipefail
-          git config user.name 'maha-settlement-bot'
-          git config user.email 'noreply@mahastrategies.com'
-          git add content/x402/settlement-ledger.json
-          git commit -m "chore(x402): refresh settlement ledger (${{ steps.ledger.outputs.external_settlements }} external)"
-          git push
 
       - name: Upload settlement evidence
         if: always()

@@ -1,26 +1,59 @@
 {
   "schemaVersion": "maha-x402-settlement-ledger/1.0",
-  "contentDigest": "sha256:cc136c384b02ea2853867b4925c2e30c637cd5965efe1d63543619947c0b289c",
+  "contentDigest": "sha256:245ed18b566cb40f6881976129bb8d1da17bfe0a723a1b55fc12e77e361f0e68",
   "network": "Base Mainnet",
   "protocol": "HTTP 402 v2 · Base USDC",
-  "observedAt": "2026-09-06T09:09:33.538Z",
-  "scannedFromBlock": "48356131",
-  "scannedToBlock": "50948131",
+  "observedAt": "2026-09-06T11:48:10.986Z",
+  "scannedFromBlock": "48360877",
+  "scannedToBlock": "50952877",
   "summary": {
-    "totalSettlements": 20,
+    "totalSettlements": 22,
     "externalSettlements": 11,
-    "canarySettlements": 9,
+    "canarySettlements": 11,
     "externalWallets": 6,
     "repeatExternalWallets": 2,
     "crossProductWallets": 1,
     "externalValueUsdc": "0.047",
     "byProduct": [
       {
+        "id": "book-edition-the-imagined-life",
+        "title": "Book Edition The Imagined Life",
+        "priceUsdc": "2.99",
+        "settlements": 0,
+        "externalSettlements": 0,
+        "attributionAmbiguous": true
+      },
+      {
+        "id": "book-edition-the-volcanic-engine",
+        "title": "Book Edition The Volcanic Engine",
+        "priceUsdc": "2.99",
+        "settlements": 0,
+        "externalSettlements": 0,
+        "attributionAmbiguous": true
+      },
+      {
+        "id": "book-section-the-imagined-life",
+        "title": "Book Section The Imagined Life",
+        "priceUsdc": "0.005",
+        "settlements": 0,
+        "externalSettlements": 0,
+        "attributionAmbiguous": true
+      },
+      {
+        "id": "book-section-the-volcanic-engine",
+        "title": "Book Section The Volcanic Engine",
+        "priceUsdc": "0.005",
+        "settlements": 0,
+        "externalSettlements": 0,
+        "attributionAmbiguous": true
+      },
+      {
         "id": "context-budget-ladder",
         "title": "Context Budget Ladder",
         "priceUsdc": "0.005",
         "settlements": 0,
-        "externalSettlements": 0
+        "externalSettlements": 0,
+        "attributionAmbiguous": true
       },
       {
         "id": "context-compression",
@@ -67,6 +100,30 @@
     ]
   },
   "entries": [
+    {
+      "transactionHash": "0x15f9651128725440f888bc98ea203196cf55acffcf963623496c5b338bcc5c37",
+      "blockNumber": "50952235",
+      "timestampUtc": "2026-09-06T11:23:37.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "5000",
+      "amountUsdc": "0.005",
+      "product": null,
+      "explorerUrl": "https://basescan.org/tx/0x15f9651128725440f888bc98ea203196cf55acffcf963623496c5b338bcc5c37"
+    },
+    {
+      "transactionHash": "0xb219dccff27539a3f42a54c7ed3b9aca2e2ad2afdfd349623ab0de2cb7afbeb0",
+      "blockNumber": "50951598",
+      "timestampUtc": "2026-09-06T11:02:23.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "5000",
+      "amountUsdc": "0.005",
+      "product": null,
+      "explorerUrl": "https://basescan.org/tx/0xb219dccff27539a3f42a54c7ed3b9aca2e2ad2afdfd349623ab0de2cb7afbeb0"
+    },
     {
       "transactionHash": "0xb4170f76f049931b6419ed6802821b92020b2d520e35e497061b7c76d14a2e62",
       "blockNumber": "50896168",
