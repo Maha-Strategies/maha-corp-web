@@ -53,6 +53,16 @@ export type LedgerSummary = {
 
 export type SettlementLedger = {
   schemaVersion: string
+  /**
+   * Digest of the settlements and the figures derived from them, excluding
+   * observedAt and the scanned block range.
+   *
+   * Those two move on every scan even when nothing settled, so a plain file
+   * diff would report a change twice a day forever. Each such commit lands on
+   * main and starts a production build. This digest changes only when the
+   * ledger actually moved, which is the condition worth spending a build on.
+   */
+  contentDigest: string
   network: string
   protocol: string
   observedAt: string
@@ -63,7 +73,28 @@ export type SettlementLedger = {
   boundaries: string[]
 }
 
+import { createHash } from 'node:crypto'
+
 const USDC_DECIMALS = 6
+
+/**
+ * Stable across scans that found the same settlements.
+ *
+ * Keys are sorted so the digest tracks content rather than serialisation order,
+ * and observedAt and the block range are excluded because they move on every
+ * run whether or not anything happened.
+ */
+function contentDigestOf(entries: readonly LedgerEntry[], summary: LedgerSummary): string {
+  const stable = (value: unknown): string => {
+    if (value === null || typeof value !== 'object') return JSON.stringify(value) ?? 'null'
+    if (Array.isArray(value)) return `[${value.map(stable).join(',')}]`
+    return `{${Object.entries(value as Record<string, unknown>)
+      .filter(([, v]) => v !== undefined)
+      .sort(([a], [b]) => (a < b ? -1 : 1))
+      .map(([k, v]) => `${JSON.stringify(k)}:${stable(v)}`).join(',')}}`
+  }
+  return `sha256:${createHash('sha256').update(stable({ entries, summary }), 'utf8').digest('hex')}`
+}
 
 export function formatUsdc(baseUnits: bigint): string {
   const whole = baseUnits / BigInt(10 ** USDC_DECIMALS)
@@ -155,14 +186,7 @@ export function buildLedger(input: {
 
   const externalValue = external.reduce((sum, e) => sum + BigInt(e.amountBaseUnits), BigInt(0))
 
-  return {
-    schemaVersion: 'maha-x402-settlement-ledger/1.0',
-    network: 'Base Mainnet',
-    protocol: 'HTTP 402 v2 · Base USDC',
-    observedAt: input.observedAt,
-    scannedFromBlock: input.fromBlock.toString(),
-    scannedToBlock: input.toBlock.toString(),
-    summary: {
+  const summary = {
       totalSettlements: entries.filter(isPriced).length,
       externalSettlements: external.length,
       canarySettlements: entries.filter((e) => e.payerRole === 'maha-canary-test' && isPriced(e)).length,
@@ -171,7 +195,17 @@ export function buildLedger(input: {
       crossProductWallets: [...walletPrices.values()].filter((s) => s.size > 1).length,
       externalValueUsdc: formatUsdc(externalValue),
       byProduct,
-    },
+  }
+
+  return {
+    schemaVersion: 'maha-x402-settlement-ledger/1.0',
+    contentDigest: contentDigestOf(entries, summary),
+    network: 'Base Mainnet',
+    protocol: 'HTTP 402 v2 · Base USDC',
+    observedAt: input.observedAt,
+    scannedFromBlock: input.fromBlock.toString(),
+    scannedToBlock: input.toBlock.toString(),
+    summary,
     entries,
     boundaries: [
       'Settlement is not delivery. These rows establish discovery, a call, and a transfer at a published price. They do not establish that any buyer received or accepted a correct deliverable; that would require internal response telemetry.',

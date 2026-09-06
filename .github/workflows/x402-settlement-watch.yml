@@ -25,7 +25,10 @@ on:
         type: string
 
 permissions:
-  contents: read
+  # write, so the refreshed ledger snapshot can be committed. The snapshot is a
+  # file in the repository rather than a database row, so a serverless cron
+  # cannot produce it and a workflow must.
+  contents: write
   issues: write
 
 concurrency:
@@ -54,12 +57,38 @@ jobs:
           node --experimental-strip-types scripts/watch-x402-settlements.ts \
             --days "${{ inputs.days || '30' }}" 2>&1 | tee "$RUNNER_TEMP/settlement-watch.log"
 
+      # The public ledger at /developers/settlement renders this snapshot. It is
+      # refreshed here rather than on a Vercel cron because the artifact is a
+      # committed file, and a serverless function cannot commit one.
+      - name: Refresh the public settlement ledger
+        id: ledger
+        run: |
+          node --experimental-strip-types scripts/generate-x402-settlement-ledger.ts \
+            --days "${{ inputs.days || '60' }}"
+
+      # Only when the ledger moved. observedAt and the scanned block range change
+      # on every run, so committing unconditionally would land a change on main
+      # twice a day and start a production build each time for a snapshot that
+      # says the same thing. Settlements arrive every few days; builds should be
+      # spent at that rate, not at the polling rate.
+      - name: Commit the refreshed ledger
+        if: ${{ steps.ledger.outputs.ledger_changed == 'true' && github.ref == 'refs/heads/main' }}
+        run: |
+          set -euo pipefail
+          git config user.name 'maha-settlement-bot'
+          git config user.email 'noreply@mahastrategies.com'
+          git add content/x402/settlement-ledger.json
+          git commit -m "chore(x402): refresh settlement ledger (${{ steps.ledger.outputs.external_settlements }} external)"
+          git push
+
       - name: Upload settlement evidence
         if: always()
         uses: actions/upload-artifact@v7
         with:
           name: x402-settlement-watch-${{ github.run_id }}
-          path: ${{ env.X402_WATCH_OUTPUT_PATH }}
+          path: |
+            ${{ env.X402_WATCH_OUTPUT_PATH }}
+            content/x402/settlement-ledger.json
           if-no-files-found: warn
           retention-days: 90
 

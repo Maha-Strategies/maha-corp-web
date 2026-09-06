@@ -13,7 +13,7 @@
  *
  * Read-only. No credentials, no wallet, nothing it can spend.
  */
-import { writeFileSync } from 'node:fs'
+import { appendFileSync, existsSync, readFileSync, writeFileSync } from 'node:fs'
 
 import { createPublicClient, http, parseAbiItem } from 'viem'
 import { base } from 'viem/chains'
@@ -97,11 +97,31 @@ const ledger = buildLedger({
   toBlock: latest,
 })
 
+/**
+ * Whether the ledger actually moved.
+ *
+ * observedAt and the block range change on every scan, so the file always
+ * differs even when nothing settled. Committing on that would land a change on
+ * main twice a day and start a production build each time, for a snapshot
+ * saying the same thing. The content digest excludes those fields, so a commit
+ * happens only when a settlement arrived.
+ */
+const previous = existsSync(OUT)
+  ? (JSON.parse(readFileSync(OUT, 'utf8')) as { contentDigest?: string }).contentDigest
+  : undefined
+const changed = previous !== ledger.contentDigest
+
 writeFileSync(OUT, `${JSON.stringify(ledger, null, 2)}\n`)
+
+// Consumed by the workflow to decide whether to commit.
+if (process.env.GITHUB_OUTPUT) {
+  appendFileSync(process.env.GITHUB_OUTPUT, `ledger_changed=${changed}\n`)
+  appendFileSync(process.env.GITHUB_OUTPUT, `external_settlements=${ledger.summary.externalSettlements}\n`)
+}
 
 const s = ledger.summary
 console.log(`${s.totalSettlements} settlements at a published price  (${s.externalSettlements} external, ${s.canarySettlements} canary)`)
 console.log(`${s.externalWallets} external wallets, ${s.repeatExternalWallets} repeat, ${s.crossProductWallets} cross-product`)
 console.log(`external value ${s.externalValueUsdc} USDC`)
 for (const p of s.byProduct) console.log(`  ${p.title}: ${p.externalSettlements} external of ${p.settlements}`)
-console.log(`-> ${OUT}`)
+console.log(`-> ${OUT}  (${changed ? 'ledger moved' : 'unchanged; no commit needed'})`)
