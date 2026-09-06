@@ -1,0 +1,1843 @@
+{
+  "schemaVersion": "maha-federation-tranche-four-evidence-packets/1.0",
+  "cohortDigest": "sha256:efecbce834d48bf9a48f5a71913c5648f5b5fa2725037efd740fd3e5845e910b",
+  "inspectedOn": "2026-09-06",
+  "inspectionMethod": "Exact-locator inspection of authoritative public sources and named local code; source text is not retained. Prior packets are reused only at the recorded version and scope.",
+  "counts": {
+    "topics": 51,
+    "newTopics": 15,
+    "carriedForwardTopics": 36,
+    "sources": 84
+  },
+  "packets": [
+    {
+      "topicKey": "agentic-publishing:agentic-query-letter",
+      "disposition": "revise",
+      "reason": "No inspected authority defines an agentic query letter; the closest editorial source only governs conventional submission responsibilities.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": "Write and review a canonical Publish protocol first, explicitly labelled as a Maha proposal rather than an editorial standard.",
+      "sources": [
+        {
+          "sourceId": "icmje-peer-review",
+          "title": "Responsibilities in the Submission and Peer-Review Process",
+          "responsibleBody": "International Committee of Medical Journal Editors",
+          "versionOrDate": "living recommendation inspected 2026-09-05",
+          "url": "https://www.icmje.org/recommendations/browse/roles-and-responsibilities/responsibilities-in-the-submission-and-peer-peview-process.html",
+          "sourceClass": "editorial-standard",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Responsibilities in the Submission and Peer-Review Process",
+          "scope": "Human author/editor responsibilities that a proposed machine query letter must not obscure.",
+          "boundary": "The source does not define machine authorship, an agentic query-letter schema, or acceptance criteria."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:31729efbecee6fbbf072fb6ad79b0290a00198107f562eebedf1358692938d73"
+    },
+    {
+      "topicKey": "agentic-publishing:author-identity",
+      "disposition": "evidence-ready",
+      "reason": "ORCID supports authenticated persistent researcher identifiers and CRediT supports explicit contributor roles; neither substitutes for authorship policy or identity proof outside its own workflow.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "sources": [
+        {
+          "sourceId": "orcid-authenticated-ids",
+          "title": "Collecting and sharing ORCID iDs",
+          "responsibleBody": "ORCID",
+          "versionOrDate": "living guidance inspected 2026-09-06",
+          "url": "https://info.orcid.org/documentation/collecting-and-sharing-orcid-ids/",
+          "sourceClass": "scholarly-identity-guidance",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "Why it is important to collect authenticated ORCID iDs; How it works; metadata passed downstream",
+          "scope": "OAuth-authenticated ORCID iDs associate a record holder with a persistent identifier and can be carried in research-output metadata.",
+          "boundary": "An ORCID iD does not prove every biographical claim, contribution, affiliation, or authorship decision."
+        },
+        {
+          "sourceId": "credit-taxonomy",
+          "title": "CRediT — Contributor Role Taxonomy",
+          "responsibleBody": "NISO",
+          "versionOrDate": "ANSI/NISO standard approved 2022; site inspected 2026-09-06",
+          "url": "https://credit.niso.org/",
+          "sourceClass": "scholarly-contribution-standard",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "CRediT’s 14 Contributor Roles",
+          "scope": "A controlled vocabulary distinguishes fourteen kinds of contribution to research outputs.",
+          "boundary": "A contributor role does not by itself determine authorship, responsibility for every claim, identity, or contribution quality."
+        }
+      ],
+      "provenance": "new-section-inspection"
+    },
+    {
+      "topicKey": "agentic-publishing:editorial-intake",
+      "disposition": "evidence-ready",
+      "reason": "The inspected editorial sources support a bounded intake record that preserves identity, search history, eligibility criteria, and responsibility.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "sources": [
+        {
+          "sourceId": "cochrane-intake",
+          "title": "Cochrane Handbook, Chapter 4: Searching for and selecting studies",
+          "responsibleBody": "Cochrane",
+          "versionOrDate": "version 6.5, updated March 2025",
+          "url": "https://training.cochrane.org/handbook/current/chapter-04",
+          "sourceClass": "scholarly-method",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "Sections 4.5 and 4.6.3",
+          "scope": "Documenting the search process and separating initial screening from full-text assessment.",
+          "boundary": "This is not a general publishing intake standard and does not authorize automated acceptance."
+        },
+        {
+          "sourceId": "icmje-intake",
+          "title": "Responsibilities in the Submission and Peer-Review Process",
+          "responsibleBody": "International Committee of Medical Journal Editors",
+          "versionOrDate": "living recommendation inspected 2026-09-06",
+          "url": "https://www.icmje.org/recommendations/browse/roles-and-responsibilities/responsibilities-in-the-submission-and-peer-peview-process.html",
+          "sourceClass": "editorial-standard",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "Author, journal, editor and reviewer responsibilities",
+          "scope": "Human responsibility and confidentiality during submission and review.",
+          "boundary": "It does not define Maha fields, machine authorship, or release authority."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:6f4534a43e0f261853973e7a98847d35d288370003e99d03f093041cf3c0cc6d"
+    },
+    {
+      "topicKey": "agentic-publishing:fact-checking",
+      "disposition": "evidence-ready",
+      "reason": "The IFCN code supports a bounded fact-checking workflow centered on nonpartisanship, source transparency, methodology, funding, and corrections.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "sources": [
+        {
+          "sourceId": "ifcn-code",
+          "title": "IFCN Code of Principles",
+          "responsibleBody": "International Fact-Checking Network at Poynter",
+          "versionOrDate": "current code inspected 2026-09-06",
+          "url": "https://ifcncodeofprinciples.poynter.org/know-more/the-commitments-of-the-code-of-principles",
+          "sourceClass": "editorial-standard",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "Commitments 1–5",
+          "scope": "Fact-checking organizations disclose nonpartisanship, source and funding transparency, methodology, and an open corrections policy.",
+          "boundary": "The code describes organizational commitments; it does not certify that a particular conclusion is true or complete."
+        }
+      ],
+      "provenance": "new-section-inspection"
+    },
+    {
+      "topicKey": "agentic-publishing:human-review",
+      "disposition": "evidence-ready",
+      "reason": "ICMJE supplies a clear editorial-review definition and assigns final responsibility to editors.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "icmje-peer-review",
+          "title": "Responsibilities in the Submission and Peer-Review Process",
+          "responsibleBody": "International Committee of Medical Journal Editors",
+          "versionOrDate": "living recommendation inspected 2026-09-05",
+          "url": "https://www.icmje.org/recommendations/browse/roles-and-responsibilities/responsibilities-in-the-submission-and-peer-peview-process.html",
+          "sourceClass": "editorial-standard",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Responsibilities in the Submission and Peer-Review Process",
+          "scope": "Independent critical assessment, confidentiality, conflicts, and editorial responsibility.",
+          "boundary": "This is medical-journal guidance; agentic publishing must label its adaptation and may not imply peer review occurred."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:4776d4989b06d41d61fe3d517fc776abb78254c04f3c7d415c84fc9e684d6c6d"
+    },
+    {
+      "topicKey": "agentic-publishing:machine-readable-article",
+      "disposition": "evidence-ready",
+      "reason": "The canonical guidance supports additive field templates and a live metadata-only example without redefining the concept.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "sources": [
+        {
+          "sourceId": "niso-jats-1-4",
+          "title": "Journal Article Tag Suite (JATS) 1.4",
+          "responsibleBody": "NISO",
+          "versionOrDate": "ANSI/NISO Z39.96-2024",
+          "url": "https://www.niso.org/standards-committees/jats",
+          "sourceClass": "standard",
+          "rightsBasis": "Public standards material; cite the stable identifier and use bounded paraphrase subject to the publisher or standards body terms.",
+          "inspectionDepth": "section",
+          "locator": "JATS 1.4 standard description and tag-suite scope",
+          "scope": "XML elements and attributes for journal-article metadata and full content.",
+          "boundary": "JATS is designed for journal articles and does not define every agentic publication or Maha release field."
+        },
+        {
+          "sourceId": "schema-org-article",
+          "title": "Article",
+          "responsibleBody": "Schema.org Community Group",
+          "versionOrDate": "living vocabulary inspected 2026-09-05",
+          "url": "https://schema.org/Article",
+          "sourceClass": "technical-specification",
+          "rightsBasis": "Public standards material; cite the stable identifier and use bounded paraphrase subject to the publisher or standards body terms.",
+          "inspectionDepth": "section",
+          "locator": "Article type, properties, and TechArticle and ScholarlyArticle subtypes",
+          "scope": "Public structured-data vocabulary for describing article resources.",
+          "boundary": "Schema.org describes resources; it does not verify evidence, authorship, review, release status, or factual accuracy."
+        },
+        {
+          "sourceId": "publish-machine-readability",
+          "title": "Machine readability",
+          "responsibleBody": "Maha Strategies Publish",
+          "versionOrDate": "live canonical documentation inspected 2026-09-06",
+          "url": "https://publish.mahastrategies.com/docs/machine-readability",
+          "sourceClass": "local-canonical-documentation",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "Four guidance sections and payload-validation requirement",
+          "scope": "The canonical definition and release guidance for machine-readable publishing.",
+          "boundary": "The guidance does not guarantee indexing, citation, summarization, or external adoption."
+        },
+        {
+          "sourceId": "maha-principle-context-pack",
+          "title": "The Maha Principle Context Pack v0.1.0",
+          "responsibleBody": "Maha Strategies Publish",
+          "versionOrDate": "live JSON inspected 2026-09-06",
+          "url": "https://publish.mahastrategies.com/context-packs/the-maha-principle-v0.1.0.json",
+          "sourceClass": "public-machine-record",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "Top-level metadata, exclusions, source identity and version fields",
+          "scope": "A live metadata-only machine record suitable for a bounded worked example.",
+          "boundary": "The record is not a template or specification and does not license reproduction of the described book."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:6c715cd88343531653f86f78fb81de8487da2cfc21d05187ee0b9c604843df47"
+    },
+    {
+      "topicKey": "agentic-publishing:structured-abstract",
+      "disposition": "evidence-ready",
+      "reason": "ICMJE names the required abstract components and the limits against overinterpretation.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "icmje-abstract",
+          "title": "Preparing a Manuscript for Submission to a Medical Journal — Abstract",
+          "responsibleBody": "International Committee of Medical Journal Editors",
+          "versionOrDate": "living recommendation inspected 2026-09-05",
+          "url": "https://icmje.org/recommendations/browse/manuscript-preparation/preparing-for-submission.html",
+          "sourceClass": "editorial-standard",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Section IV.A.3.b Abstract",
+          "scope": "Context, purpose, procedures, main findings, effect sizes, conclusions, limitations, and consistency.",
+          "boundary": "The guidance is biomedical and does not establish one universal abstract format for all disciplines."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:116c5b0031fbe3b46570711c242b6ebcf4a3a548bbae0ec4c3d763d6614ab5ff"
+    },
+    {
+      "topicKey": "maha-os:household-agents",
+      "disposition": "evidence-ready",
+      "reason": "This is a Maha OS operational definition constrained by the NIST IoT baseline: a household agent must remain device-identifiable, configurable, access-controlled, updateable, and observable.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "sources": [
+        {
+          "sourceId": "nist-ir-8259a-household",
+          "title": "IoT Device Cybersecurity Capability Core Baseline",
+          "responsibleBody": "NIST",
+          "versionOrDate": "NISTIR 8259A, May 2020",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ir/2020/NIST.IR.8259A.pdf",
+          "sourceClass": "government-guidance",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Section 2, Table 1",
+          "scope": "A broadly applicable baseline covering device identification, configuration, data protection, logical access, software update, and cybersecurity state awareness.",
+          "boundary": "The baseline is voluntary, is not specific to AI agents or homes, and does not certify safety, autonomy, or a Maha OS implementation."
+        }
+      ],
+      "provenance": "new-section-inspection"
+    },
+    {
+      "topicKey": "maha-os:model-update",
+      "disposition": "evidence-ready",
+      "reason": "NIST patch guidance defines inventory, prioritization, testing, installation, verification, and operational tradeoffs.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "nist-patching",
+          "title": "Guide to Enterprise Patch Management Planning",
+          "responsibleBody": "NIST",
+          "versionOrDate": "SP 800-40 Rev. 4, April 2022",
+          "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
+          "sourceClass": "government-guidance",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Sections 2–4: enterprise patch management strategy and lifecycle",
+          "scope": "Planned update acquisition, testing, deployment, verification, and risk prioritization.",
+          "boundary": "Patch guidance does not establish the safety or efficacy of a particular model update."
+        },
+        {
+          "sourceId": "nist-ai-rmf",
+          "title": "Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
+          "responsibleBody": "NIST",
+          "versionOrDate": "NIST AI 100-1, January 2023",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+          "sourceClass": "government-guidance",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "locator": "GOVERN 1.5; MAP 1.1; MEASURE 2.5–2.9; MANAGE 4.1",
+          "scope": "Lifecycle change, context, validation, limitations, monitoring, and response.",
+          "boundary": "AI RMF 1.0 is voluntary and currently under revision."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:f0194d1ea7766cec5048e2f3ddc001777fa99abcb8e8a296e7cdddce363eabfd"
+    },
+    {
+      "topicKey": "maha-os:on-device-inference",
+      "disposition": "evidence-ready",
+      "reason": "NIST supplies the edge-processing and privacy-control boundaries needed for a bounded local-inference definition and operator guide.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "nist-edge-ai",
+          "title": "Edge AI",
+          "responsibleBody": "NIST",
+          "versionOrDate": "program page inspected 2026-09-05",
+          "url": "https://www.nist.gov/programs-projects/edge-ai",
+          "sourceClass": "government-guidance",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "Background and Key Challenges",
+          "scope": "AI computation at edge nodes and user devices under resource, privacy, security, and reliability constraints.",
+          "boundary": "Edge execution does not imply offline capability, confidentiality, accuracy, or immunity from model and software updates."
+        },
+        {
+          "sourceId": "nist-privacy-core",
+          "title": "NIST Privacy Framework 1.0 Core",
+          "responsibleBody": "NIST",
+          "versionOrDate": "version 1.0, January 2020",
+          "url": "https://www.nist.gov/system/files/documents/2021/05/05/NIST-Privacy-Framework-V1.0-Core-PDF.pdf",
+          "sourceClass": "government-guidance",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "Control-P data-processing policies, especially CT.DP-P1 and CT.DP-P4",
+          "scope": "Local processing and selective collection or disclosure as privacy-risk controls.",
+          "boundary": "Local processing can reduce observability or linkability but does not by itself prove privacy, security, correctness, or legal compliance."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:0f78391287d8e5b5fd9805703c978dc28c0822298f67d4916344952bbe398afb"
+    },
+    {
+      "topicKey": "maha-os:personal-knowledge-store",
+      "disposition": "evidence-ready",
+      "reason": "Solid supplies a bounded interoperable model for externally stored resources, owner control, identity, authentication, authorization, and resource lifecycle.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "sources": [
+        {
+          "sourceId": "solid-protocol-store",
+          "title": "Solid Protocol",
+          "responsibleBody": "W3C Solid Community Group",
+          "versionOrDate": "version 0.11.0, 12 May 2024",
+          "url": "https://solidproject.org/TR/2024/protocol-20240512",
+          "sourceClass": "community-group-specification",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "Abstract; Status; §§1.1, 4.1, 9–11 and 13",
+          "scope": "Secure permissioned access to externally stored data, URI-identified storage and resources, ownership, identity, authentication, and authorization.",
+          "boundary": "This is a Draft Community Group Report, not a W3C Standard, and it does not prove data sovereignty, privacy outcomes, or a Maha OS deployment."
+        }
+      ],
+      "provenance": "new-section-inspection"
+    },
+    {
+      "topicKey": "maha-policy:automated-decision-governance",
+      "disposition": "evidence-ready",
+      "reason": "Current EU primary law supports a jurisdiction-bounded distinction among automated-decision rights, high-risk-system oversight, and broader policy proposals.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "gdpr-art-22",
+          "title": "Regulation (EU) 2016/679",
+          "responsibleBody": "European Parliament and Council",
+          "versionOrDate": "OJ L 119, 4 May 2016",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679",
+          "sourceClass": "law",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "Article 22 and related safeguards",
+          "scope": "EU restrictions and safeguards for certain decisions based solely on automated processing.",
+          "boundary": "Article 22 has defined scope, exceptions, jurisdiction, and contested interpretation; it is not a universal ban or legal advice."
+        },
+        {
+          "sourceId": "eu-ai-act-art-14",
+          "title": "Regulation (EU) 2024/1689 (Artificial Intelligence Act)",
+          "responsibleBody": "European Parliament and Council",
+          "versionOrDate": "OJ L, 12 July 2024",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32024R1689",
+          "sourceClass": "law",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "Article 14, Human oversight",
+          "scope": "Human-oversight objectives and capabilities for high-risk AI systems.",
+          "boundary": "Article 14 applies within the Act’s high-risk-system framework and must not be generalized to every automated decision."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:8296c9263adae661a781a4dcb4e213b8c583db07bdde63180456e9aaeb74bec3"
+    },
+    {
+      "topicKey": "maha-policy:data-protection",
+      "disposition": "evidence-ready",
+      "reason": "GDPR provides binding EU principles and rights while NIST provides a clearly voluntary operational framework.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "gdpr",
+          "title": "Regulation (EU) 2016/679 (General Data Protection Regulation)",
+          "responsibleBody": "European Parliament and Council",
+          "versionOrDate": "OJ L 119, 4 May 2016",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679",
+          "sourceClass": "law",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Articles 5, 22, 24, and 25",
+          "scope": "EU data-processing principles, automated decisions, controller responsibility, and data protection by design/default.",
+          "boundary": "Jurisdiction, role, exemptions, and effective legal interpretation must be stated; this is not legal advice."
+        },
+        {
+          "sourceId": "nist-privacy",
+          "title": "NIST Privacy Framework",
+          "responsibleBody": "NIST",
+          "versionOrDate": "version 1.0, January 2020",
+          "url": "https://www.nist.gov/privacy-framework/privacy-framework",
+          "sourceClass": "government-guidance",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Identify-P, Govern-P, Control-P, Communicate-P, Protect-P",
+          "scope": "Operational privacy-risk management functions.",
+          "boundary": "The NIST framework is voluntary and does not satisfy GDPR by itself."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:a549c3a64bd1fa11600498a292e6743e3357cf08f1dfbe5592b502a4c5a34c1e"
+    },
+    {
+      "topicKey": "maha-policy:human-oversight",
+      "disposition": "evidence-ready",
+      "reason": "The EU AI Act supplies binding high-risk-system duties; MCP supplies a narrower tool-denial recommendation.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "eu-ai-act",
+          "title": "Regulation (EU) 2024/1689 (Artificial Intelligence Act)",
+          "responsibleBody": "European Parliament and Council",
+          "versionOrDate": "OJ L, 12 July 2024",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32024R1689",
+          "sourceClass": "law",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Article 14",
+          "scope": "Human oversight objectives, competence, interpretation, override, intervention, and stop capability for high-risk systems.",
+          "boundary": "Article 14 applies to high-risk systems under the Act and must not be generalized to every AI use."
+        },
+        {
+          "sourceId": "mcp-tools",
+          "title": "Tools",
+          "responsibleBody": "Model Context Protocol",
+          "versionOrDate": "specification 2025-06-18",
+          "url": "https://modelcontextprotocol.io/specification/2025-06-18/server/tools",
+          "sourceClass": "technical-specification",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Human in the loop and tool safety recommendations",
+          "scope": "A human able to deny tool invocations in MCP deployments.",
+          "boundary": "The protocol itself does not mandate a specific user interaction model."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:ba20fafc9ae9cf5ab3c771cc8770c921a3a0decf77b13a6de458e092c5caa024"
+    },
+    {
+      "topicKey": "maha-policy:international-coordination",
+      "disposition": "evidence-ready",
+      "reason": "OECD identifies cooperation mechanisms and the Council of Europe treaty supplies a distinct legal instrument whose force depends on party status and scope.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "sources": [
+        {
+          "sourceId": "oecd-ai-principle-2-5",
+          "title": "International co-operation for trustworthy AI",
+          "responsibleBody": "OECD",
+          "versionOrDate": "AI Principle 2.5, updated May 2024",
+          "url": "https://oecd.ai/en/dashboards/ai-principles/P14",
+          "sourceClass": "intergovernmental-recommendation",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "Principle 2.5 and rationale",
+          "scope": "Cross-border and cross-sector knowledge sharing, consensus technical standards, and comparable indicators are mechanisms for AI-policy coordination.",
+          "boundary": "The OECD Recommendation is non-binding and does not establish harmonized law or implementation by any particular jurisdiction."
+        },
+        {
+          "sourceId": "coe-ai-convention-225",
+          "title": "Framework Convention on Artificial Intelligence and Human Rights, Democracy and the Rule of Law",
+          "responsibleBody": "Council of Europe",
+          "versionOrDate": "CETS No. 225, opened for signature 5 September 2024",
+          "url": "https://www.coe.int/en/web/conventions/full-list?module=treaty-detail&treatynum=225",
+          "sourceClass": "international-treaty",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "Treaty details; scope, principles, safeguards and follow-up mechanism",
+          "scope": "A treaty framework for lifecycle consistency with human rights, democracy, and the rule of law, with cooperation and follow-up mechanisms.",
+          "boundary": "Legal effect depends on entry into force, ratification, declarations, party status, jurisdiction, and scoped exclusions; this is not legal advice."
+        }
+      ],
+      "provenance": "new-section-inspection"
+    },
+    {
+      "topicKey": "maha-policy:public-trust",
+      "disposition": "evidence-ready",
+      "reason": "OECD and NIST tie trustworthy practice to transparency, traceability, accountability, and documented risk management.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "oecd-transparency",
+          "title": "OECD AI Principle 1.3: Transparency and explainability",
+          "responsibleBody": "OECD.AI",
+          "versionOrDate": "principle page inspected 2026-09-05",
+          "url": "https://oecd.ai/en/dashboards/ai-principles/P7",
+          "sourceClass": "government-guidance",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Principle 1.3",
+          "scope": "Disclosure, meaningful information, and ability to challenge AI outcomes.",
+          "boundary": "A principle is not evidence that public trust increased."
+        },
+        {
+          "sourceId": "nist-ai-rmf",
+          "title": "Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
+          "responsibleBody": "NIST",
+          "versionOrDate": "NIST AI 100-1, January 2023",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+          "sourceClass": "government-guidance",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "locator": "GOVERN 4.2; MAP 2.2; MEASURE 2.8–2.9",
+          "scope": "Documentation, communication of impacts, limits, transparency, and accountability.",
+          "boundary": "AI RMF is voluntary and trustworthiness characteristics can conflict."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:0a4be0181b7990e9ee2f95c6634e64c985fcf02ece58c03b54b56b9fbfb3f037"
+    },
+    {
+      "topicKey": "maha-policy:research-integrity",
+      "disposition": "evidence-ready",
+      "reason": "ALLEA states broad integrity principles while the current U.S. PHS rule provides a narrower jurisdictional misconduct and proceeding framework.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "sources": [
+        {
+          "sourceId": "allea-code-2023",
+          "title": "The European Code of Conduct for Research Integrity",
+          "responsibleBody": "ALLEA",
+          "versionOrDate": "revised edition, June 2023",
+          "url": "https://allea.org/code-of-conduct/",
+          "sourceClass": "research-integrity-code",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "Section 1, Principles; Sections 2–3",
+          "scope": "Reliability, honesty, respect, and accountability frame good research practice and responsibilities.",
+          "boundary": "The code is a self-regulatory European reference and does not decide a specific allegation or create universal law."
+        },
+        {
+          "sourceId": "hhs-42-cfr-93-2024",
+          "title": "Public Health Service Policies on Research Misconduct",
+          "responsibleBody": "U.S. Department of Health and Human Services",
+          "versionOrDate": "42 CFR Part 93 final rule, 17 September 2024; applicable 1 January 2026",
+          "url": "https://ori.hhs.gov/sites/default/files/2025-01/42CFR93.pdf",
+          "sourceClass": "regulation",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Subpart A scope; §§93.103–93.106; institutional and ORI proceeding subparts",
+          "scope": "The current PHS rule defines covered research misconduct and requirements for findings and proceedings within its statutory scope.",
+          "boundary": "The rule is limited to covered PHS-supported activity, excludes honest error and differences of opinion, and is not a universal research-integrity definition or legal advice."
+        }
+      ],
+      "provenance": "new-section-inspection"
+    },
+    {
+      "topicKey": "maha-research:figure-locator",
+      "disposition": "evidence-ready",
+      "reason": "The selector model supports fragment-addressed resources and explicit states.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "w3c-annotation",
+          "title": "Web Annotation Data Model",
+          "responsibleBody": "W3C",
+          "versionOrDate": "Recommendation, 23 February 2017",
+          "url": "https://www.w3.org/TR/annotation-model/",
+          "sourceClass": "standard",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Sections 4.2.1 Fragment Selector and 4.3 State",
+          "scope": "Figure or media-fragment identity with version state.",
+          "boundary": "A figure locator does not license image redistribution or validate an interpretation of the figure."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:86e6a3fbd7637ce2c54d95303dfc0308bbd6bc94063cf4d9dd819e485efd3ac9"
+    },
+    {
+      "topicKey": "maha-research:inference-boundary",
+      "disposition": "evidence-ready",
+      "reason": "NIST AI RMF requires intended context, assumptions, knowledge limits, oversight, scientific integrity, and generalization limits to remain explicit.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "sources": [
+        {
+          "sourceId": "nist-ai-rmf-inference",
+          "title": "Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
+          "responsibleBody": "NIST",
+          "versionOrDate": "NIST AI 100-1, January 2023",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+          "sourceClass": "government-guidance",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "locator": "MAP 1.1, MAP 2.2, MAP 2.3 and MEASURE 2.5",
+          "scope": "Documenting context, assumptions, knowledge limits, human oversight, scientific integrity, and generalization limits.",
+          "boundary": "The voluntary framework does not validate a particular inference, model, result, or deployment."
+        }
+      ],
+      "provenance": "new-section-inspection"
+    },
+    {
+      "topicKey": "maha-research:literature-conflict",
+      "disposition": "evidence-ready",
+      "reason": "Cochrane distinguishes clinical, methodological, and statistical heterogeneity and warns against forced synthesis.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "cochrane-heterogeneity",
+          "title": "Cochrane Handbook, Chapter 10: Analysing data and undertaking meta-analyses",
+          "responsibleBody": "Cochrane",
+          "versionOrDate": "version 6.5, November 2024",
+          "url": "https://training.cochrane.org/handbook/current/chapter-10",
+          "sourceClass": "scholarly-method",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Sections 10.10.1–10.10.4",
+          "scope": "Classifying inconsistency, measuring it, and deciding whether synthesis is meaningful.",
+          "boundary": "The guidance is written for systematic reviews of interventions; other domains must adapt it explicitly."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:bb17f6da9f931150f1e1a59670658a9e77503be23dd0f9b82ea211618c482784"
+    },
+    {
+      "topicKey": "maha-research:model-boundary",
+      "disposition": "evidence-ready",
+      "reason": "NIST requires intended context, knowledge limits, assumptions, and generalization limits to be documented.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "nist-ai-rmf",
+          "title": "Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
+          "responsibleBody": "NIST",
+          "versionOrDate": "NIST AI 100-1, January 2023",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+          "sourceClass": "government-guidance",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "locator": "MAP 1.1, MAP 2.2, MEASURE 2.5–2.9",
+          "scope": "Documented use context, knowledge limits, generalizability, validation, and safe failure.",
+          "boundary": "AI RMF 1.0 is voluntary guidance and is being revised; it does not certify a model."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:5b0ecb1664b4e9e1bb16db077c86c68bb82977c9856458a4ce07292eb2d9645b"
+    },
+    {
+      "topicKey": "maha-research:proof-status",
+      "disposition": "evidence-ready",
+      "reason": "Lean defines theorem and proof objects; the local bridge records whether a particular artifact was accepted, refused, or remained unverified.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "lean-theorems",
+          "title": "Theorem Definitions",
+          "responsibleBody": "Lean FRO",
+          "versionOrDate": "Lean Language Reference inspected 2026-09-05",
+          "url": "https://lean-lang.org/doc/reference/latest/Definitions/Theorems/",
+          "sourceClass": "technical-specification",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "Theorem Definitions: syntax, elaboration, proof term, and irreducibility",
+          "scope": "Formal theorem declarations and the distinction between a proposition, proof term, and checker result.",
+          "boundary": "A checked proof establishes only the encoded proposition under its formal assumptions; it does not validate empirical premises."
+        },
+        {
+          "sourceId": "local-lean-verifier",
+          "title": "Maha Lean bridge verifier",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source inspected 2026-09-05",
+          "url": "repo:packages/maha-lean-bridge/src/verifier.ts",
+          "sourceClass": "local-implementation",
+          "rightsBasis": "Maha-controlled repository material; retain only file identity, symbol locator, and content fingerprint. No credential or runtime value is included.",
+          "inspectionDepth": "code-symbol",
+          "locator": "verification result and refusal construction",
+          "scope": "Current local proof-verification status model.",
+          "boundary": "A local verifier result is implementation evidence; it does not establish empirical truth or external review.",
+          "contentFingerprint": "sha256:c290fe3a438722956c1217a0724b0afbcedc65ac391d09f43c0c91620bca0ffc"
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:1de5780987369fa573f2188f8c2d16bcb90514e711ece2723eb415dccafddaa8"
+    },
+    {
+      "topicKey": "maha-research:research-release",
+      "disposition": "evidence-ready",
+      "reason": "Crossref and COPE preserve versions and correction/retraction history instead of silently overwriting records.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "crossref-versioning",
+          "title": "Versioning",
+          "responsibleBody": "Crossref",
+          "versionOrDate": "living guidance inspected 2026-09-05",
+          "url": "https://www.crossref.org/documentation/principles-practices/best-practices/versioning/",
+          "sourceClass": "technical-specification",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Versioning: corrections, retractions, and version relationships",
+          "scope": "Persistent version and correction relationships.",
+          "boundary": "Crossref guidance does not define Maha release authority."
+        },
+        {
+          "sourceId": "cope-retraction",
+          "title": "Retraction Guidelines",
+          "responsibleBody": "Committee on Publication Ethics",
+          "versionOrDate": "version 2, November 2019",
+          "url": "https://members.publicationethics.org/sites/default/files/retraction-guidelines-cope.pdf",
+          "sourceClass": "editorial-standard",
+          "rightsBasis": "COPE PDF is CC BY-NC-ND 4.0; this packet records metadata and paraphrase only.",
+          "inspectionDepth": "section",
+          "locator": "Sections 2–4: when to retract and form of notices",
+          "scope": "Reasons for retraction and durable notice requirements.",
+          "boundary": "COPE guidance concerns scholarly publication ethics, not software deployment."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:c5fe7d7c673e375f0c1b2d8acca7636a7d7220cedd7c69415dff85e5956104cc"
+    },
+    {
+      "topicKey": "maha-research:retraction",
+      "disposition": "evidence-ready",
+      "reason": "COPE defines when retraction should be considered and what a notice should communicate; Crossmark supplies a status-update mechanism rather than a truth guarantee.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "sources": [
+        {
+          "sourceId": "cope-retraction-v2",
+          "title": "Retraction Guidelines",
+          "responsibleBody": "COPE Council",
+          "versionOrDate": "version 2, November 2019",
+          "url": "https://doi.org/10.24318/cope.2019.1.4",
+          "sourceClass": "editorial-guidance",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "Summary; When should a publication be retracted?; What form should a retraction take?",
+          "scope": "Reasons for considering retraction and notice properties including linkage, identification, reason, responsibility, promptness, and accessibility.",
+          "boundary": "The guidance primarily addresses publications and does not itself retract an object, adjudicate misconduct, or resolve every correction case."
+        },
+        {
+          "sourceId": "crossref-crossmark",
+          "title": "Crossmark",
+          "responsibleBody": "Crossref",
+          "versionOrDate": "living service documentation inspected 2026-09-06",
+          "url": "https://www.crossref.org/services/crossmark/",
+          "sourceClass": "metadata-service-documentation",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "What is Crossmark?; updates and current-status metadata",
+          "scope": "Publisher-deposited metadata can communicate corrections, retractions, and other updates to a work.",
+          "boundary": "Crossmark depends on deposited publisher metadata and does not guarantee truth, completeness, or the substantive adequacy of an update."
+        }
+      ],
+      "provenance": "new-section-inspection"
+    },
+    {
+      "topicKey": "maha-research:rights-basis",
+      "disposition": "evidence-ready",
+      "reason": "The inspected rights sources separate access, permission, attribution, exceptions, and endorsement.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "cc-by-4",
+          "title": "Attribution 4.0 International Legal Code",
+          "responsibleBody": "Creative Commons",
+          "versionOrDate": "version 4.0",
+          "url": "https://creativecommons.org/licenses/by/4.0/legalcode",
+          "sourceClass": "standard",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Sections 2 and 3",
+          "scope": "Licensed rights, attribution conditions, retained notices, and no-endorsement boundary.",
+          "boundary": "One work’s license does not grant rights in third-party material, trademarks, privacy, or patents."
+        },
+        {
+          "sourceId": "w3c-annotation",
+          "title": "Web Annotation Data Model",
+          "responsibleBody": "W3C",
+          "versionOrDate": "Recommendation, 23 February 2017",
+          "url": "https://www.w3.org/TR/annotation-model/",
+          "sourceClass": "standard",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Section 3.3.6 Rights",
+          "scope": "Recording rights information on annotation resources.",
+          "boundary": "Recording a rights URI is not proof that the asserted right is valid."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:0455010570882c5fc3d803e92cac62746caef54ed8eff2d285100982cf0a4e60"
+    },
+    {
+      "topicKey": "maha-research:section-locator",
+      "disposition": "evidence-ready",
+      "reason": "The Web Annotation model defines exact selectors and their maintenance tradeoffs.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "w3c-annotation",
+          "title": "Web Annotation Data Model",
+          "responsibleBody": "W3C",
+          "versionOrDate": "Recommendation, 23 February 2017",
+          "url": "https://www.w3.org/TR/annotation-model/",
+          "sourceClass": "standard",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Sections 4.2.1, 4.2.4, and 4.2.5",
+          "scope": "Fragment, text-quote, and text-position selectors for passage location.",
+          "boundary": "A locator makes content findable; it does not establish source identity or claim support."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:54104a418611865d333e245bd16d612c1b4cbba87781fbc6d616556e305e0dab"
+    },
+    {
+      "topicKey": "maha-research:software-environment",
+      "disposition": "evidence-ready",
+      "reason": "OCI gives a content-addressed environment vocabulary and the witness implementation records the narrower runtime receipt actually observed.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "oci-image-spec",
+          "title": "Open Container Initiative Image Format Specification",
+          "responsibleBody": "Open Container Initiative",
+          "versionOrDate": "release 1.1.1",
+          "url": "https://github.com/opencontainers/image-spec/blob/v1.1.1/spec.md",
+          "sourceClass": "technical-specification",
+          "rightsBasis": "Apache License 2.0 source; cite the versioned specification and retain bounded excerpts only.",
+          "inspectionDepth": "section",
+          "locator": "Image Manifest, Image Index, Image Configuration, Layers, and content descriptors",
+          "scope": "Content-addressed manifests, configuration, layers, media types, and digests for container images.",
+          "boundary": "An image digest identifies declared image content; it does not capture every host, kernel, device, network, or runtime dependency."
+        },
+        {
+          "sourceId": "local-witness-receipt",
+          "title": "Maha computational witness receipt",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source inspected 2026-09-05",
+          "url": "repo:packages/maha-witness/src/maha_witness/receipt.py",
+          "sourceClass": "local-implementation",
+          "rightsBasis": "Maha-controlled repository material; retain only file identity, symbol locator, and content fingerprint. No credential or runtime value is included.",
+          "inspectionDepth": "code-symbol",
+          "locator": "runtime, inputs, environment, seed, and receipt digest fields",
+          "scope": "Current local runtime-provenance receipt behavior.",
+          "boundary": "A receipt attests recorded inputs and environment metadata; it does not prove scientific validity or complete environmental capture.",
+          "contentFingerprint": "sha256:6e993e41503033122f2ca9a7148c8ea9f9dcefc9863a0c927d2a6f5efbcf3c93"
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:e773d4aa0cfab525aa389867c85dfe13d1bc187e3ba25e665285ddd989d3a8ad"
+    },
+    {
+      "topicKey": "maha-research:source-identity",
+      "disposition": "evidence-ready",
+      "reason": "The inspected standards distinguish persistent identity, provenance, and revision relationships.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "crossref-versioning",
+          "title": "Versioning",
+          "responsibleBody": "Crossref",
+          "versionOrDate": "living guidance inspected 2026-09-05",
+          "url": "https://www.crossref.org/documentation/principles-practices/best-practices/versioning/",
+          "sourceClass": "technical-specification",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Versioning: preprints/accepted manuscripts/versions of record and corrections",
+          "scope": "Version relationships and persistent identifiers for scholarly objects.",
+          "boundary": "A DOI identifies an object; it does not prove the object supports a claim."
+        },
+        {
+          "sourceId": "w3c-prov-o",
+          "title": "PROV-O: The PROV Ontology",
+          "responsibleBody": "W3C",
+          "versionOrDate": "Recommendation, 30 April 2013",
+          "url": "https://www.w3.org/TR/prov-o/",
+          "sourceClass": "standard",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Overview; Entity; wasRevisionOf and wasDerivedFrom",
+          "scope": "Machine-readable identity and provenance relationships.",
+          "boundary": "PROV expresses asserted provenance and does not independently validate it."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:536d5379a36a051b04e9ac21a4d3cb96adf3f0d6289f5780f69a559ee17eeae5"
+    },
+    {
+      "topicKey": "maha-research:source-version",
+      "disposition": "evidence-ready",
+      "reason": "Crossref explicitly separates scholarly versions and correction relationships, supporting a source-version record without treating versions as interchangeable.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "crossref-versioning",
+          "title": "Versioning",
+          "responsibleBody": "Crossref",
+          "versionOrDate": "living guidance inspected 2026-09-05",
+          "url": "https://www.crossref.org/documentation/principles-practices/best-practices/versioning/",
+          "sourceClass": "technical-specification",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "Versioning: preprints, accepted manuscripts, versions of record, corrections, and retractions",
+          "scope": "Persistent scholarly-object identity and explicit relationships among versions.",
+          "boundary": "A version relationship does not prove that a source supports a claim or that two versions are substantively equivalent."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:1f82a13340ec84bbb02f4a173af722d7efccb9f3ccb227b770108928bf91e8d6"
+    },
+    {
+      "topicKey": "maha-research:table-locator",
+      "disposition": "evidence-ready",
+      "reason": "NISO JATS supplies a stable structural container and identifiers for tables; claim support still requires inspecting the table and its context.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "sources": [
+        {
+          "sourceId": "jats-table-wrap-1-4",
+          "title": "JATS: Journal Article Tag Suite, Archiving and Interchange Tag Library",
+          "responsibleBody": "NISO and U.S. National Library of Medicine",
+          "versionOrDate": "JATS 1.4",
+          "url": "https://jats.nlm.nih.gov/archiving/tag-library/1.4/element/table-wrap.html",
+          "sourceClass": "markup-standard",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "Element <table-wrap>; base attribute id; label, caption, table and table-wrap-foot content model",
+          "scope": "A table wrapper can carry an identifier, label, caption, table content, alternatives, permissions, and footnotes.",
+          "boundary": "Markup identity does not prove that a table supports a claim, that row and column context was preserved, or that reuse rights permit reproduction."
+        }
+      ],
+      "provenance": "new-section-inspection"
+    },
+    {
+      "topicKey": "maha-research:theorem-statement",
+      "disposition": "evidence-ready",
+      "reason": "Lean provides an exact formal distinction between a proposition-bearing theorem statement and its proof body.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "lean-theorems",
+          "title": "Theorem Definitions",
+          "responsibleBody": "Lean FRO",
+          "versionOrDate": "Lean Language Reference inspected 2026-09-05",
+          "url": "https://lean-lang.org/doc/reference/latest/Definitions/Theorems/",
+          "sourceClass": "technical-specification",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Theorem Definitions: syntax, elaboration, and irreducibility",
+          "scope": "Formal theorem declarations and the statement/proof boundary.",
+          "boundary": "A checked theorem proves only the encoded proposition under its assumptions; it does not validate an empirical premise."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:8dab8b9e676654e500612df22920300740cb66306c6a81a4a92ff206bf24b6a4"
+    },
+    {
+      "topicKey": "maha-research:units",
+      "disposition": "evidence-ready",
+      "reason": "The SI Brochure supplies authoritative quantity-value and unit-writing rules for the definition and fixture.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "bipm-si-brochure",
+          "title": "The International System of Units (SI Brochure)",
+          "responsibleBody": "BIPM",
+          "versionOrDate": "9th edition, version 4.01, August 2025",
+          "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf",
+          "sourceClass": "standard",
+          "rightsBasis": "Public standards material; cite the stable identifier and use bounded paraphrase subject to the publisher or standards body terms.",
+          "inspectionDepth": "section",
+          "locator": "Sections 2.2–2.3 and 5.4",
+          "scope": "SI base and derived units, quantity values, and rules for writing unit symbols and values.",
+          "boundary": "Correct units do not establish that a model, measurement, conversion, or numerical result is scientifically appropriate."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:fd68fc024e105dd1304154d7a03a19a4219f13def49cd68276329ff197d57c3d"
+    },
+    {
+      "topicKey": "maha-strategies:agent-memory-governance",
+      "disposition": "evidence-ready",
+      "reason": "The NIST Privacy Framework supplies lifecycle and governance boundaries that can be applied to an agent memory without implying that memory is accurate or consented.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "sources": [
+        {
+          "sourceId": "nist-privacy-memory",
+          "title": "NIST Privacy Framework: A Tool for Improving Privacy through Enterprise Risk Management",
+          "responsibleBody": "NIST",
+          "versionOrDate": "version 1.0, January 2020",
+          "url": "https://www.nist.gov/document/nist-privacy-frameworkv10pdf",
+          "sourceClass": "government-guidance",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Glossary: Data Action and Data Processing; Core Identify-P, Govern-P and Control-P",
+          "scope": "Data processing includes collection, retention, logging, transformation, use, disclosure, sharing, transmission, and disposal, governed through privacy-risk management.",
+          "boundary": "The voluntary framework does not define AI memory, establish consent, validate remembered content, or prove a Maha implementation."
+        }
+      ],
+      "provenance": "new-section-inspection"
+    },
+    {
+      "topicKey": "maha-strategies:audit-receipts",
+      "disposition": "evidence-ready",
+      "reason": "NIST audit-record controls and W3C provenance relations support a receipt that names actors, events, objects, time, outcome, and derivation.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "sources": [
+        {
+          "sourceId": "nist-800-53-audit",
+          "title": "Security and Privacy Controls for Information Systems and Organizations",
+          "responsibleBody": "NIST",
+          "versionOrDate": "SP 800-53 Rev. 5.1.1",
+          "url": "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final",
+          "sourceClass": "government-guidance",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "AU-2 Event Logging and AU-3 Content of Audit Records",
+          "scope": "Selected events and audit-record content including event type, time, location, source, outcome, and associated identities.",
+          "boundary": "Logging requirements do not make a record true, complete, tamper-proof, or independently witnessed."
+        },
+        {
+          "sourceId": "w3c-prov-receipt",
+          "title": "PROV-O: The PROV Ontology",
+          "responsibleBody": "W3C",
+          "versionOrDate": "Recommendation, 30 April 2013",
+          "url": "https://www.w3.org/TR/prov-o/",
+          "sourceClass": "standard",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "Entity, Activity, Agent; used; wasGeneratedBy; wasAssociatedWith",
+          "scope": "Typed provenance between an activity, its inputs, outputs, and responsible agents.",
+          "boundary": "PROV represents asserted provenance and does not authenticate an actor or validate the underlying event."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:a0e7720cd9cb21a06d18cfd1ef1b8955c2a70d89e2a3a0aae7ccea2922720ea0"
+    },
+    {
+      "topicKey": "maha-strategies:capability-scoped-tokens",
+      "disposition": "evidence-ready",
+      "reason": "OAuth BCP supplies least-privilege and audience restrictions while the local credential layer supplies the concrete capability binding.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "rfc-9700",
+          "title": "Best Current Practice for OAuth 2.0 Security",
+          "responsibleBody": "IETF",
+          "versionOrDate": "RFC 9700 / BCP 240, January 2025",
+          "url": "https://www.rfc-editor.org/rfc/rfc9700.html",
+          "sourceClass": "standard",
+          "rightsBasis": "Public standards material; cite the stable identifier and use bounded paraphrase subject to the publisher or standards body terms.",
+          "inspectionDepth": "section",
+          "locator": "Sections 2.2, 2.3, and 4.10.2",
+          "scope": "Replay resistance, least-privilege access tokens, audience restriction, and counterfeit resource-server threats.",
+          "boundary": "OAuth security guidance does not prove a particular gateway enforces scopes or that an entitlement is commercially valid."
+        },
+        {
+          "sourceId": "local-agent-credentials",
+          "title": "Agent client credential authorization",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source inspected 2026-09-05",
+          "url": "repo:lib/agent-client-credentials.ts",
+          "sourceClass": "local-implementation",
+          "rightsBasis": "Maha-controlled repository material; retain only file identity, symbol locator, and content fingerprint. No credential or runtime value is included.",
+          "inspectionDepth": "code-symbol",
+          "locator": "credential scopes, fingerprint, client binding, status, and authorization checks",
+          "scope": "Current Maha capability and client binding.",
+          "boundary": "Local code does not independently establish deployment security or correct policy configuration.",
+          "contentFingerprint": "sha256:15a41eeb0d4ed74d9134e6982ce367be72888d86636107ce8a31b8bd08dacf7f"
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:18e91caaf6d82e602d30d32acc9ab09ae823803a78cee19d4f8040d185bc07ed"
+    },
+    {
+      "topicKey": "maha-strategies:cross-agent-delegation",
+      "disposition": "evidence-ready",
+      "reason": "OAuth token exchange precisely separates delegation from impersonation and represents subject and actor chains; it does not define a universal agent protocol.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "sources": [
+        {
+          "sourceId": "rfc-8693-delegation",
+          "title": "OAuth 2.0 Token Exchange",
+          "responsibleBody": "IETF",
+          "versionOrDate": "RFC 8693, January 2020",
+          "url": "https://www.rfc-editor.org/rfc/rfc8693.html",
+          "sourceClass": "internet-standard",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "§1.1; §2.1 subject_token and actor_token; §4.1 act claim",
+          "scope": "Delegation, impersonation, subject and actor token roles, validation inputs, and an actor chain representation.",
+          "boundary": "Token exchange does not prove authorization policy quality, downstream enforcement, revocation propagation, agent identity, or a Maha deployment."
+        }
+      ],
+      "provenance": "new-section-inspection"
+    },
+    {
+      "topicKey": "maha-strategies:delivery-acknowledgement",
+      "disposition": "evidence-ready",
+      "reason": "The local lifecycle and HTTP replay guidance support digest-bound delivery acknowledgement with explicit unknown outcomes.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "sources": [
+        {
+          "sourceId": "local-cabezon-lifecycle",
+          "title": "CABEZON Preview lifecycle implementation",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source reviewed 2026-09-06",
+          "url": "repo:lib/cabezon-preview.ts",
+          "sourceClass": "local-implementation",
+          "rightsBasis": "Maha-controlled repository source; symbol names and a file identity may be recorded, but no credential, customer value, or runtime payload is retained.",
+          "inspectionDepth": "code-symbol",
+          "locator": "CabezonLifecycleStatus; applyAcknowledgementToLifecycle; actionIdempotency",
+          "scope": "Delivery precedes acknowledgement; the acknowledgement binds the delivery-reference digest and rejects substitution or premature state.",
+          "boundary": "Local code proves the bounded implementation shape, not external interoperability or production operation."
+        },
+        {
+          "sourceId": "rfc-8470",
+          "title": "Using Early Data in HTTP",
+          "responsibleBody": "IETF",
+          "versionOrDate": "RFC 8470, September 2018",
+          "url": "https://www.rfc-editor.org/rfc/rfc8470.html",
+          "sourceClass": "standard",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "Sections 5.1 and 5.2",
+          "scope": "A client cannot infer from a failed connection that a request was not processed; replay requires explicit safeguards.",
+          "boundary": "The RFC does not define a CABEZON receipt or prove a provider delivered content."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:28ae9ceb63fa9cb0beecbc9a6ae6ee7ff2dc7c2208d2aeb2a89554e55272a592"
+    },
+    {
+      "topicKey": "maha-strategies:durable-task-state",
+      "disposition": "evidence-ready",
+      "reason": "NIST contingency guidance and the local append-only task ledger support explicit states, recovery points, replay refusal, and reconstitution.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "sources": [
+        {
+          "sourceId": "nist-contingency-state",
+          "title": "Contingency Planning Guide for Federal Information Systems",
+          "responsibleBody": "NIST",
+          "versionOrDate": "SP 800-34 Rev. 1, May 2010",
+          "url": "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf",
+          "sourceClass": "government-guidance",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "Sections 3.4, 3.5, 4 and 5",
+          "scope": "Recovery strategies, testing, reconstitution, and restoration to a known state.",
+          "boundary": "The guide does not prescribe Maha task fields or prove a specific store is durable."
+        },
+        {
+          "sourceId": "local-task-state",
+          "title": "Governed workflow task-state ledger",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source reviewed 2026-09-06",
+          "url": "repo:lib/workflows/task-state.ts",
+          "sourceClass": "local-implementation",
+          "rightsBasis": "Maha-controlled repository source; symbol names and a file identity may be recorded, but no credential, customer value, or runtime payload is retained.",
+          "inspectionDepth": "code-symbol",
+          "locator": "WorkflowTaskStatus; WorkflowTaskEvent; transition replay keys",
+          "scope": "Explicit task states and idempotent append-only transitions.",
+          "boundary": "The in-repository contract does not establish provider uptime, disaster recovery, or production persistence."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:4b8c8fa600f9b450183e6cf341984817bbfc2bef2b94478f5284b06de18e748a"
+    },
+    {
+      "topicKey": "maha-strategies:endpoint-substitution-defense",
+      "disposition": "evidence-ready",
+      "reason": "The OAuth issuer and audience controls define the substitution threat, and the local A2A validation path supplies the applied refusal boundary.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "rfc-9207",
+          "title": "OAuth 2.0 Authorization Server Issuer Identification",
+          "responsibleBody": "IETF",
+          "versionOrDate": "RFC 9207, March 2022",
+          "url": "https://www.rfc-editor.org/rfc/rfc9207.html",
+          "sourceClass": "standard",
+          "rightsBasis": "Public standards material; cite the stable identifier and use bounded paraphrase subject to the publisher or standards body terms.",
+          "inspectionDepth": "section",
+          "locator": "Sections 2 and 4, issuer parameter and mix-up attack mitigation",
+          "scope": "Binding an authorization response to the expected issuer.",
+          "boundary": "Issuer validation addresses authorization-server mix-up; resource audience, TLS, redirect, and application-level selector checks remain separate."
+        },
+        {
+          "sourceId": "rfc-9700",
+          "title": "Best Current Practice for OAuth 2.0 Security",
+          "responsibleBody": "IETF",
+          "versionOrDate": "RFC 9700 / BCP 240, January 2025",
+          "url": "https://www.rfc-editor.org/rfc/rfc9700.html",
+          "sourceClass": "standard",
+          "rightsBasis": "Public standards material; cite the stable identifier and use bounded paraphrase subject to the publisher or standards body terms.",
+          "inspectionDepth": "section",
+          "locator": "Sections 2.2, 2.3, and 4.10.2",
+          "scope": "Replay resistance, least-privilege access tokens, audience restriction, and counterfeit resource-server threats.",
+          "boundary": "OAuth security guidance does not prove a particular gateway enforces scopes or that an entitlement is commercially valid."
+        },
+        {
+          "sourceId": "local-a2a-validation",
+          "title": "Maha A2A validation and proxy",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source inspected 2026-09-05",
+          "url": "repo:lib/a2a/validation.ts",
+          "sourceClass": "local-implementation",
+          "rightsBasis": "Maha-controlled repository material; retain only file identity, symbol locator, and content fingerprint. No credential or runtime value is included.",
+          "inspectionDepth": "code-symbol",
+          "locator": "endpoint identity and request validation",
+          "scope": "Current endpoint and request validation behavior before A2A forwarding.",
+          "boundary": "Local validation is implementation evidence and does not prove the remote endpoint’s identity or behavior beyond checked signals.",
+          "contentFingerprint": "sha256:c1eaccf6500766fe2633df3791d890bb2b7037fbe13043e9c29b15c4f8c9c21d"
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:0d1ace2916ddbbc50e6c17397e497404c046299f248320a23535a26594c08f3b"
+    },
+    {
+      "topicKey": "maha-strategies:human-approval-gates",
+      "disposition": "evidence-ready",
+      "reason": "NIST requires human-oversight roles to be defined and documented, while the local store binds one decision to one action and policy identity.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "sources": [
+        {
+          "sourceId": "nist-ai-rmf-approval",
+          "title": "Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
+          "responsibleBody": "NIST",
+          "versionOrDate": "NIST AI 100-1, January 2023",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+          "sourceClass": "government-guidance",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "GOVERN 2.3 and MAP 3.5",
+          "scope": "Leadership responsibility and defined, assessed, documented human-oversight processes.",
+          "boundary": "Voluntary guidance does not require a particular approval UI or prove meaningful human control."
+        },
+        {
+          "sourceId": "local-approval-store",
+          "title": "Governed workflow approval store",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source reviewed 2026-09-06",
+          "url": "repo:lib/workflows/approvals.ts",
+          "sourceClass": "local-implementation",
+          "rightsBasis": "Maha-controlled repository source; symbol names and a file identity may be recorded, but no credential, customer value, or runtime payload is retained.",
+          "inspectionDepth": "code-symbol",
+          "locator": "approvalIdFor; decide; consume",
+          "scope": "An approval identity binds action and policy digests, supports approve or deny, and is consumed once.",
+          "boundary": "Code-symbol inspection does not prove a human reviewed the evidence or that production enforcement ran."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:b36c17f2dc279f1cb1215b9346e7dfdc1f03ed867f84df5d7d621396cbf965c2"
+    },
+    {
+      "topicKey": "maha-strategies:identity-bound-agents",
+      "disposition": "evidence-ready",
+      "reason": "NIST zero trust and MCP authorization both bind access decisions to an authenticated subject, resource, and policy.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "nist-zero-trust",
+          "title": "Zero Trust Architecture",
+          "responsibleBody": "NIST",
+          "versionOrDate": "SP 800-207, August 2020",
+          "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-207.pdf",
+          "sourceClass": "government-guidance",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Sections 3.2–3.3: policy decision point, policy enforcement point, and trust algorithm",
+          "scope": "Per-request subject and resource authorization.",
+          "boundary": "Zero trust is an architecture, not proof that this implementation is secure."
+        },
+        {
+          "sourceId": "mcp-authorization",
+          "title": "Authorization",
+          "responsibleBody": "Model Context Protocol",
+          "versionOrDate": "specification 2025-06-18",
+          "url": "https://modelcontextprotocol.io/specification/2025-06-18/basic/authorization",
+          "sourceClass": "technical-specification",
+          "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Token validation; resource indicators; audience validation; token storage",
+          "scope": "MCP resource-server authorization boundaries.",
+          "boundary": "Authorization is optional in MCP and HTTP transport-specific."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:96cae5f541f0e98851f966219086166d5f0b96afc0fb8b9c84876fbf82bfc542"
+    },
+    {
+      "topicKey": "maha-strategies:machine-commerce-entitlement",
+      "disposition": "evidence-ready",
+      "reason": "The local federation and Preview contracts distinguish discovery, entitlement, zero-dollar licensing, delivery, and acknowledgement without claiming payment capability.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "local-product-federation",
+          "title": "CARP/CABEZON product federation contract",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source inspected 2026-09-05",
+          "url": "repo:lib/product-federation.ts",
+          "sourceClass": "local-implementation",
+          "rightsBasis": "Maha-controlled repository material; retain only file identity, symbol locator, and content fingerprint. No credential or runtime value is included.",
+          "inspectionDepth": "code-symbol",
+          "locator": "offer state, identity binding, entitlement, delivery reference, and acknowledgement types",
+          "scope": "Current private machine-commerce offer and entitlement state model.",
+          "boundary": "The contract is not evidence of an external customer, settled payment, escrow, or Production availability.",
+          "contentFingerprint": "sha256:65a1ae7d111f3d8bf47f3332a1bc3da5eec10e48ffb5c2e7702ce7a571df5576"
+        },
+        {
+          "sourceId": "local-cabezon-preview",
+          "title": "CABEZON Preview adapter",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source inspected 2026-09-05",
+          "url": "repo:lib/cabezon-preview.ts",
+          "sourceClass": "local-implementation",
+          "rightsBasis": "Maha-controlled repository material; retain only file identity, symbol locator, and content fingerprint. No credential or runtime value is included.",
+          "inspectionDepth": "code-symbol",
+          "locator": "Preview enquiry, replay, delivery, and acknowledgement boundaries",
+          "scope": "Current Preview-only lifecycle behavior and refusal states.",
+          "boundary": "Preview fixtures and canaries are synthetic and do not establish commercial demand or Production operation.",
+          "contentFingerprint": "sha256:339174156ef92455a6cdf356a7e2b0b3bbbe024795481c9432943fd7ed020381"
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:cfbe44e31e61c965ff70b92aa7356ba66366f71e0df85749fe1472317e2d7316"
+    },
+    {
+      "topicKey": "maha-strategies:provenance-witnessing",
+      "disposition": "evidence-ready",
+      "reason": "W3C PROV defines typed provenance assertions and the local witness records and independently verifies digest-bound execution metadata without capturing arguments or secrets.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "sources": [
+        {
+          "sourceId": "w3c-prov-witness",
+          "title": "PROV Model Primer",
+          "responsibleBody": "W3C",
+          "versionOrDate": "Working Group Note, 30 April 2013",
+          "url": "https://www.w3.org/TR/prov-primer/",
+          "sourceClass": "standard-primer",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "§2.3 generation and usage; §2.4 agents and responsibility; §2.5 roles",
+          "scope": "Entities, activities, agents, generation, use, association, attribution, and role-qualified responsibility.",
+          "boundary": "PROV represents asserted provenance; it does not authenticate an actor, observe execution, or establish the truth of an underlying claim."
+        },
+        {
+          "sourceId": "local-computational-witness",
+          "title": "Maha computational provenance witness",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source inspected 2026-09-06",
+          "url": "repo:packages/maha-witness/src/maha_witness/receipt.py",
+          "sourceClass": "local-implementation",
+          "rightsBasis": "Maha-controlled repository source; symbol names and file identity only. No credential, customer value, runtime payload, or receipt body is retained.",
+          "inspectionDepth": "code-symbol",
+          "locator": "build_receipt; verify_receipt; assurance and bindings fields",
+          "scope": "Digest-bound inputs, outputs, environment, seeds, adapters, dossier/claim bindings, explicit assurance limits, and offline verification.",
+          "boundary": "The receipt observes declared execution metadata; it does not independently reproduce the run, certify scientific validity, prove environment completeness, or establish production use."
+        }
+      ],
+      "provenance": "new-section-inspection"
+    },
+    {
+      "topicKey": "maha-strategies:replay-safe-execution",
+      "disposition": "evidence-ready",
+      "reason": "HTTP defines idempotent request semantics while the local guard shows the additional identity and body-binding needed for a replay-safe paid action.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "sources": [
+        {
+          "sourceId": "rfc-9110-idempotency",
+          "title": "HTTP Semantics",
+          "responsibleBody": "IETF",
+          "versionOrDate": "RFC 9110, June 2022",
+          "url": "https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2",
+          "sourceClass": "internet-standard",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "§9.2.2 Idempotent Methods",
+          "scope": "Idempotent methods have the same intended effect for multiple identical requests and may be retried under specified conditions.",
+          "boundary": "Method semantics alone do not make a non-idempotent business action replay-safe or prove a request was not processed."
+        },
+        {
+          "sourceId": "local-x402-replay-guard",
+          "title": "Maha x402 replay guard",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source inspected 2026-09-06",
+          "url": "repo:lib/x402/replay-guard.ts",
+          "sourceClass": "local-implementation",
+          "rightsBasis": "Maha-controlled repository source; symbol names and file identity only. No credential, customer value, runtime payload, or receipt body is retained.",
+          "inspectionDepth": "code-symbol",
+          "locator": "reserveReplayKey; bodyDigest and settled replay outcomes",
+          "scope": "A bounded implementation reserves an idempotency identity, binds a body digest, and distinguishes in-progress, settled, mismatched, and failed outcomes.",
+          "boundary": "Local code inspection does not prove provider delivery, payment settlement, durable storage, or production enforcement."
+        }
+      ],
+      "provenance": "new-section-inspection"
+    },
+    {
+      "topicKey": "maha-strategies:tenant-isolation",
+      "disposition": "evidence-ready",
+      "reason": "NIST frames multitenant isolation as a cloud security requirement and the gateway source identifies the narrower tenant boundary currently enforced.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "nist-sp-800-144",
+          "title": "Guidelines on Security and Privacy in Public Cloud Computing",
+          "responsibleBody": "NIST",
+          "versionOrDate": "SP 800-144, December 2011",
+          "url": "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-144.pdf",
+          "sourceClass": "government-guidance",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "locator": "Section 2.1, pp. 2–4, cloud architecture and multi-tenancy",
+          "scope": "Isolation of computations and data belonging to different cloud tenants.",
+          "boundary": "The publication is general and dated guidance; it does not certify Maha’s current tenancy controls."
+        },
+        {
+          "sourceId": "local-mcp-gateway",
+          "title": "Enterprise MCP gateway implementation",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source inspected 2026-09-05",
+          "url": "repo:lib/mcp-gateway.ts",
+          "sourceClass": "local-implementation",
+          "rightsBasis": "Maha-controlled repository material; retain only file identity, symbol locator, and content fingerprint. No credential or runtime value is included.",
+          "inspectionDepth": "code-symbol",
+          "locator": "tenant resolution, tool allowlist, quota, and request-ledger boundaries",
+          "scope": "Current Maha gateway tenant-selection and request-control behavior.",
+          "boundary": "Repository behavior is not independent penetration testing or proof of infrastructure configuration.",
+          "contentFingerprint": "sha256:7d56ddecb1ac45ae472b3735b41d5b102bac0f9b63ab497ab5bf08fda3ff498c"
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:756b01f37492a0e8d0eaefc8309a5a867705788d9f2b16e94499bd838cff85cd"
+    },
+    {
+      "topicKey": "mayon-rajan:lahar",
+      "disposition": "evidence-ready",
+      "reason": "USGS establishes the general physical hazard while PHIVOLCS supplies Mayon-specific operational authority and hazard-map context.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "sources": [
+        {
+          "sourceId": "usgs-lahar-2024",
+          "title": "Lahars: Origins, behavior and hazards",
+          "responsibleBody": "U.S. Geological Survey",
+          "versionOrDate": "29 March 2024",
+          "url": "https://www.usgs.gov/publications/lahars-origins-behavior-and-hazards",
+          "sourceClass": "government-science",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Publication abstract and hazard-mitigation summary",
+          "scope": "Lahars are volcano-origin debris flows with varied triggers, evolving flow behavior, long runout, and severe downstream consequences.",
+          "boundary": "General lahar science does not forecast a Mayon event, define a current hazard zone, or replace local instructions."
+        },
+        {
+          "sourceId": "phivolcs-mayon-lahar",
+          "title": "Mayon Volcano Lahar Hazard Map and volcano hazard information",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "official map catalog inspected 2026-09-06",
+          "url": "https://www.phivolcs.dost.gov.ph/volcano-hazard/",
+          "sourceClass": "official-hazard-source",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Mayon Volcano Lahar Hazard Map entry and map legend",
+          "scope": "The Philippine operational authority publishes Mayon-specific lahar hazard mapping for planning and reference.",
+          "boundary": "A static hazard map is not a current warning, event prediction, evacuation order, or guarantee of safety outside mapped areas."
+        }
+      ],
+      "provenance": "new-section-inspection"
+    },
+    {
+      "topicKey": "mayon-rajan:monitoring",
+      "disposition": "evidence-ready",
+      "reason": "PHIVOLCS is the current operational authority for Mayon status and exposes multiple monitoring streams; USGS explains the complementary measurement classes.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "sources": [
+        {
+          "sourceId": "phivolcs-volcano-monitoring",
+          "title": "PHIVOLCS-LAVA: Local Active Volcanoes Archive",
+          "responsibleBody": "DOST-PHIVOLCS",
+          "versionOrDate": "live portal inspected 2026-09-06",
+          "url": "https://volcano.phivolcs.dost.gov.ph/",
+          "sourceClass": "official-hazard-source",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Volcano Status; Volcanic Earthquake; Monitoring Data; Visualize Data",
+          "scope": "Current bulletins and monitoring data cover seismicity, ground deformation, gas, visual observations, and other parameters for monitored Philippine volcanoes.",
+          "boundary": "Portal data are time-sensitive; this packet records no alert level or current numerical value and never replaces the latest PHIVOLCS bulletin."
+        },
+        {
+          "sourceId": "usgs-volcano-monitoring",
+          "title": "Monitoring Volcanoes",
+          "responsibleBody": "U.S. Geological Survey",
+          "versionOrDate": "program guidance inspected 2026-09-06",
+          "url": "https://www.usgs.gov/programs/VHP/monitoring",
+          "sourceClass": "government-science",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+          "inspectionDepth": "section",
+          "locator": "Earthquakes, deformation, gas, visual and lahar-monitoring sections",
+          "scope": "Seismic, deformation, gas, thermal, visual, and flow observations provide complementary evidence about volcanic processes.",
+          "boundary": "No single signal deterministically predicts an eruption, and general U.S. guidance is not the operational authority for Mayon."
+        }
+      ],
+      "provenance": "new-section-inspection"
+    },
+    {
+      "topicKey": "mayone-maharajan:cosmic-recursion",
+      "disposition": "evidence-ready",
+      "reason": "The authorial manuscript explicitly defines the term, separates its registers, relates its conceptual slots, and states how the thesis could be wrong.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "cosmic-recursion-manuscript",
+          "title": "The Cosmic Recursion",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-05",
+          "url": "repo:content/books/the-cosmic-recursion/THE-COSMIC-RECURSION-manuscript.md",
+          "sourceClass": "authorial-primary-source",
+          "rightsBasis": "Maha-controlled authorial manuscript; retain only file identity, section locator, and content fingerprint. Quotation remains governed by the author publication policy.",
+          "inspectionDepth": "book-section",
+          "locator": "Introduction: “On the word recursion, and what I am refusing”; “The three registers”; “Four slots”; “How this could be wrong”",
+          "scope": "Mayone Maharajan’s own definition, conceptual relationships, development, and stated limits.",
+          "boundary": "This is an authorial thesis, not scientific consensus, empirical proof, a theological authority, or a claim that metaphor establishes mechanism.",
+          "contentFingerprint": "sha256:8666652794dc501bee716658b8e6e3a20c0921f393b28bab1f79c12dfa36c439"
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:36d14c8a1aabcfabe19343aeeebcb2387f7a9b41a3cc8bbe1205675311059722"
+    },
+    {
+      "topicKey": "mayone-maharajan:epistemic-infrastructure",
+      "disposition": "evidence-ready",
+      "reason": "The authorial manuscript describes infrastructures that shape attention, information, verification, and institutional truth; the page is limited to that authorial concept.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "sources": [
+        {
+          "sourceId": "maha-principle-epistemic",
+          "title": "The Maha Principle",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "url": "repo:content/books/the-maha-principle/The-Maha-Principle.md",
+          "sourceClass": "authorial-primary-source",
+          "rightsBasis": "Maha-controlled authorial manuscript; section identity and bounded paraphrase only. Authorial claims are not external validation.",
+          "inspectionDepth": "book-section",
+          "locator": "The Network and the Feed; Chapter 7 verification framework; Whole-Food Information; Chapter 6 humane governance",
+          "scope": "The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems.",
+          "boundary": "This is authorial doctrine, not a settled philosophical term, empirical validation, or consensus."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:05efbcda903c3051106dbd4ae2e6d4043d30f67e3106004e13283b43624d3c00"
+    },
+    {
+      "topicKey": "mayone-maharajan:human-agency",
+      "disposition": "evidence-ready",
+      "reason": "The manuscript explicitly defines agency, its limits, relationships, and development while separating evidence from symbolism.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": null,
+      "sources": [
+        {
+          "sourceId": "orbital-mind",
+          "title": "The Orbital Mind",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-05",
+          "url": "repo:content/books/the-orbital-mind/the-orbital-mind.md",
+          "sourceClass": "authorial-primary-source",
+          "rightsBasis": "Maha-controlled authorial manuscript; record section identity and file digest only. Any later quotation remains subject to the author-controlled publication policy.",
+          "inspectionDepth": "book-section",
+          "locator": "Mars · Agency and Boundary, sections I–V; Appendix A, Agency, effort, and leadership; Appendix B",
+          "scope": "Authorial definition, under/over-expression limits, relational stewardship, and development practices.",
+          "boundary": "Authorial interpretation must remain labelled; psychology claims require their separately cited literature and planetary imagery testifies to nothing."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:3b245f28e86de138be2c6aac7238c681f20e7ad90db4c5c27c38744b76dd8b20"
+    },
+    {
+      "topicKey": "mayone-maharajan:public-reason",
+      "disposition": "revise",
+      "reason": "Rawls supplies a primary genealogy for public reason, but no inspected Mayone manuscript passage establishes that the term is part of Mayone’s authorial system or how his use differs.",
+      "sourceIdentityChecked": true,
+      "locatorChecked": true,
+      "rightsChecked": true,
+      "scopeChecked": true,
+      "boundaryChecked": true,
+      "implementationCondition": "Add and inspect an authorial passage that explicitly adopts, rejects, or revises Rawls’s concept; until then publish neither a Mayone definition nor a relationship map.",
+      "sources": [
+        {
+          "sourceId": "rawls-public-reason",
+          "title": "The Idea of Public Reason Revisited",
+          "responsibleBody": "John Rawls",
+          "versionOrDate": "University of Chicago Law Review 64(3), 1997",
+          "url": "https://chicagounbound.uchicago.edu/uclrev/vol64/iss3/1/",
+          "sourceClass": "scholarly-primary-source",
+          "rightsBasis": "Copyrighted scholarly article; cite bibliographic metadata and use bounded paraphrase only.",
+          "inspectionDepth": "section",
+          "locator": "pp. 765–807, especially the statement of public reason and the criterion of reciprocity",
+          "scope": "Rawls’s account of public reason in constitutional democratic political justification.",
+          "boundary": "Rawls establishes his own political conception, not Mayone Maharajan’s adoption of it, empirical public agreement, or a universal theory of reason."
+        }
+      ],
+      "provenance": "carried-forward-same-version",
+      "priorPacketDigest": "sha256:256a7cf365468a62f8220fb53d0330cac297f16fc72096a74297ec69a3810998"
+    }
+  ],
+  "provenanceDigest": "sha256:99e2851a8c1660632b051cc797929b748faf9402f853adbd9afe8d027557edfa"
+}

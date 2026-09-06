@@ -50,13 +50,14 @@ function evidenceRequirements(candidate: Candidate) {
     : { ...common, minimumIndependentSources: 1, sourceClasses: ['canonical primary authority', 'operational or empirical source where the application makes an outcome claim'] }
 }
 
-/** Selects the next dependency-closed 100 candidates after Tranches 1 and 2. */
-export function selectTrancheThree(
+/** Selects the next dependency-closed 100 candidates after the supplied prior tranches. */
+export function selectFederationTranche(
   candidateMap: CandidateMap,
   semantic: SemanticArtifact,
   graph: DependencyGraph,
   demand: DemandArtifact,
   priorCohorts: readonly PriorCohort[],
+  trancheNumber: 3 | 4,
 ) {
   const candidateById = new Map(candidateMap.candidates.map((candidate) => [candidate.candidateId, candidate]))
   const semanticById = new Map(semantic.entries.map((entry) => [entry.candidateId, entry]))
@@ -116,7 +117,7 @@ export function selectTrancheThree(
     if (selected.size === 100) break
     addIfFits(candidate)
   }
-  if (selected.size !== 100) throw new Error(`Tranche 3 must contain 100 candidates; selected ${selected.size}.`)
+  if (selected.size !== 100) throw new Error(`Tranche ${trancheNumber} must contain 100 candidates; selected ${selected.size}.`)
 
   const orderIndex = new Map(graph.topologicalOrder.map((id, index) => [id, index]))
   const entries = [...selected]
@@ -142,14 +143,16 @@ export function selectTrancheThree(
       }
     })
   const body = {
-    schemaVersion: 'maha-federation-tranche-three-cohort/1.0',
+    schemaVersion: trancheNumber === 3 ? 'maha-federation-tranche-three-cohort/1.0' : 'maha-federation-tranche-four-cohort/1.0',
     candidateMapDigest: candidateMap.provenanceDigest,
     semanticAdjudicationDigest: semantic.provenanceDigest,
     dependencyGraphDigest: graph.provenanceDigest,
     demandCalibrationDigest: demand.provenanceDigest,
     priorCohortDigests: priorCohorts.map((cohort) => cohort.provenanceDigest),
     status: 'frozen-for-evidence-intake',
-    selectionRule: 'Highest calibrated utility after Tranches 1 and 2, with dependency closure, a four-page property/topic cap, proportional property caps, and prior-tranche definitions treated as satisfied prerequisites.',
+    selectionRule: trancheNumber === 3
+      ? 'Highest calibrated utility after Tranches 1 and 2, with dependency closure, a four-page property/topic cap, proportional property caps, and prior-tranche definitions treated as satisfied prerequisites.'
+      : 'Highest calibrated utility after Tranches 1 through 3, with dependency closure, a four-page property/topic cap, proportional property caps, and prior-tranche definitions treated as satisfied prerequisites.',
     propertyLimits: PROPERTY_LIMITS,
     counts: {
       selected: entries.length,
@@ -163,4 +166,15 @@ export function selectTrancheThree(
     entries,
   }
   return { ...body, provenanceDigest: provenanceDigest(body) }
+}
+
+/** Preserves the frozen Tranche 3 contract while sharing the selection machinery. */
+export function selectTrancheThree(
+  candidateMap: CandidateMap,
+  semantic: SemanticArtifact,
+  graph: DependencyGraph,
+  demand: DemandArtifact,
+  priorCohorts: readonly PriorCohort[],
+) {
+  return selectFederationTranche(candidateMap, semantic, graph, demand, priorCohorts, 3)
 }

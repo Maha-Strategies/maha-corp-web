@@ -37,7 +37,7 @@ function implementationReport(result: ReturnType<typeof compileFederationPages>)
     '',
     '## Outcome',
     '',
-    `All **${counts.pages} evidence-ready specifications** now have deterministic, host-specific content implementations containing ${counts.boundedAnswers} bounded answers and ${counts.sourceBindings} source bindings. This total includes append-only readiness remediations and Tranche 3 when their verified artifacts are present.`,
+    `All **${counts.pages} evidence-ready specifications** now have deterministic, host-specific content implementations containing ${counts.boundedAnswers} bounded answers and ${counts.sourceBindings} source bindings. This total includes append-only readiness remediations and Tranches 3–4 when their verified artifacts are present.`,
     '',
     `**${counts.readyForOwnerIntegration}** can enter their owning property’s integration workflow. **${counts.blockedOnUnreadyPrerequisite}** are fully compiled but held because a required definition is not evidence-ready.`,
     '',
@@ -75,6 +75,7 @@ export function generateFederationPageImplementations(outputRoot: string) {
   const supplementDefinitions = [
     { batchId: 'readiness-remediations-v1', tranche: 2 as const, decisions: 'content/federation/federation-readiness-remediation-decisions-v1.json', specifications: 'content/federation/federation-readiness-remediation-page-specifications-v1.json', packets: 'content/federation/federation-readiness-remediation-packets-v1.json' },
     { batchId: 'tranche-3', tranche: 3 as const, decisions: 'content/federation/federation-tranche-3-decisions-v1.json', specifications: 'content/federation/federation-tranche-3-page-specifications-v1.json', packets: 'content/federation/federation-tranche-3-evidence-packets-v1.json' },
+    { batchId: 'tranche-4', tranche: 4 as const, decisions: 'content/federation/federation-tranche-4-decisions-v1.json', specifications: 'content/federation/federation-tranche-4-page-specifications-v1.json', packets: 'content/federation/federation-tranche-4-evidence-packets-v1.json' },
   ]
   for (const definition of supplementDefinitions) {
     if (!existsSync(resolve(ROOT, definition.decisions)) || !existsSync(resolve(ROOT, definition.specifications)) || !existsSync(resolve(ROOT, definition.packets))) continue

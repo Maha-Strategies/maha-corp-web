@@ -3,7 +3,7 @@
   "siteId": "mayone-maharajan",
   "canonicalHost": "www.mayonemaharajan.com",
   "rootPath": "/concepts/",
-  "sourceManifestDigest": "sha256:629d64f9adf7e7c58e1edaabda2a5d8e473638bda0b779acfd30de7d192e849e",
+  "sourceManifestDigest": "sha256:67e2608894fc6e074499cb24b8d5c44bf14d774fa9ba70446e4f32fe8ef604f8",
   "state": "local-owner-handoff",
   "ownerIntegration": {
     "routeShape": "/concepts/[...segments]",
@@ -16,13 +16,23 @@
     "activeCanonicalReleaseRequired": true
   },
   "counts": {
-    "routes": 12,
-    "boundedAnswers": 60,
+    "routes": 16,
+    "boundedAnswers": 80,
     "publicRoutesCreated": 0,
     "buildsRun": 0
   },
   "publicationBoundary": "The adapter resolves local content only. The owner route must still bind an exact revision and active canonical release before crawlability; a missing or unready path resolves to null.",
   "entries": [
+    {
+      "candidateId": "cand_c6b061c4183758c2920b9ec0",
+      "path": "/concepts/cosmic-recursion/critique",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/critique",
+      "segments": [
+        "cosmic-recursion",
+        "critique"
+      ],
+      "contentDigest": "sha256:06b0f759c273d9b3fc8105353f1997e3fd4c9164fa9b2634ddf218e03b442b01"
+    },
     {
       "candidateId": "cand_a7603f4f4e1f0948c574c52d",
       "path": "/concepts/cosmic-recursion/definition",
@@ -31,7 +41,7 @@
         "cosmic-recursion",
         "definition"
       ],
-      "contentDigest": "sha256:3978128186ca285f893fc3af9d17151facf8497f2c63b7feb5bbfbd29ff03a09"
+      "contentDigest": "sha256:66ae53a75797ffac1f4240f7c3415e6954ba92345b3d52a2bb9326faa00656e0"
     },
     {
       "candidateId": "cand_4f9959397f06dadaa4f00d0f",
@@ -41,7 +51,17 @@
         "cosmic-recursion",
         "development"
       ],
-      "contentDigest": "sha256:74940b98b1ef824c23e87e1d9e23b4aeb86b276efa2f232d99de03c56200caf3"
+      "contentDigest": "sha256:bf56a14bf0121c477178b704f7928989d75c1c5e97e0d687da15a3e27cc8d4a5"
+    },
+    {
+      "candidateId": "cand_9963e97ce7563bd886ffe362",
+      "path": "/concepts/cosmic-recursion/limits",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/limits",
+      "segments": [
+        "cosmic-recursion",
+        "limits"
+      ],
+      "contentDigest": "sha256:e11fc9ba0d5a355887620c751eeb89392ee38c252d474582106307d8dbd57330"
     },
     {
       "candidateId": "cand_3062f2ecc529be26d6b28874",
@@ -51,7 +71,7 @@
         "cosmic-recursion",
         "relationship"
       ],
-      "contentDigest": "sha256:fe746299dee8d265567339d4785aad14824da288b05da18dff74ec8dcce5bd96"
+      "contentDigest": "sha256:d8b53744873f2af60e348826ec22194b0610d1a893652df7f41ed7326ec8906f"
     },
     {
       "candidateId": "cand_00550cfbe5ae4958c10fcc49",
@@ -61,7 +81,17 @@
         "epistemic-infrastructure",
         "definition"
       ],
-      "contentDigest": "sha256:3b65950117dc609ef5ecf650302715944dec53cc9be4a424094174213a1f90c3"
+      "contentDigest": "sha256:74c22f92137d3c66c1c971003502df779574f4813bb562972e9288b556b43747"
+    },
+    {
+      "candidateId": "cand_a3f4072f82d1b2c2b58e733b",
+      "path": "/concepts/epistemic-infrastructure/development",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/development",
+      "segments": [
+        "epistemic-infrastructure",
+        "development"
+      ],
+      "contentDigest": "sha256:008c69fb0cad1fa90380667adfada7754293dc276856ec3494c280340cd31b14"
     },
     {
       "candidateId": "cand_b90586936a17ca13a038cb62",
@@ -71,7 +101,7 @@
         "epistemic-infrastructure",
         "relationship"
       ],
-      "contentDigest": "sha256:61fe5c516982ef931210072200b2bc287ccf65bc9a9747e95c4605b9d07eefac"
+      "contentDigest": "sha256:0b1e3c3a019e8e32d041da991346800dd78dd57fb5914e234ad3b7f361783727"
     },
     {
       "candidateId": "cand_6e5cae25a74731057505dc27",
@@ -84,6 +114,16 @@
       "contentDigest": "sha256:855d4bc00fc63f3354f5a148d3f288da337aee88de6939c7734b54e37457e00a"
     },
     {
+      "candidateId": "cand_65e1bc49ba4f5331b70873ec",
+      "path": "/concepts/human-agency/argument",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/human-agency/argument",
+      "segments": [
+        "human-agency",
+        "argument"
+      ],
+      "contentDigest": "sha256:dab544d4783b8b8536db2c512d5fcac7b47add2c02e648d64a36eed881edca10"
+    },
+    {
       "candidateId": "cand_976ef363f543c74b6de18f81",
       "path": "/concepts/human-agency/critique",
       "canonicalUrl": "https://www.mayonemaharajan.com/concepts/human-agency/critique",
@@ -91,7 +131,7 @@
         "human-agency",
         "critique"
       ],
-      "contentDigest": "sha256:afe0447082df6b0549ee6950d401ba7f71ad41cba2a731837d8daa7eb2e5b2c5"
+      "contentDigest": "sha256:6ba8f00cf36224269742e4eb8f4881a2f96848d56e65f1471fe18a6f0a7a1c1a"
     },
     {
       "candidateId": "cand_cd5f05f97fe7cf9f14b760c9",
@@ -101,7 +141,7 @@
         "human-agency",
         "definition"
       ],
-      "contentDigest": "sha256:91ff1c13e6b9f3a6dce8723cf24a5ac16d932b7bdbcd55d9e231e1b92c1bff8c"
+      "contentDigest": "sha256:c0a7b4ad58af2bb3d94db3165f1a05cedb74bd683e981c1515bcc0a4c6a59e0b"
     },
     {
       "candidateId": "cand_b98c789039b918ee6dcc5efe",
@@ -111,7 +151,7 @@
         "human-agency",
         "development"
       ],
-      "contentDigest": "sha256:f5078fe4e1ae6f21865a3a3fe127a6cf79eb8d189277075628cf2d6fdef263c9"
+      "contentDigest": "sha256:e0e3e5b49e8d07832700e9ce0fec06ba1c00108dba70995285254be96b3e4504"
     },
     {
       "candidateId": "cand_50310cb0a578d0d98844c11c",
@@ -121,7 +161,7 @@
         "human-agency",
         "limits"
       ],
-      "contentDigest": "sha256:cdbf02dd06d8091265c2b381c04f0eb6c3bc014238f032f9b2c4830a2bbae3c2"
+      "contentDigest": "sha256:4af4c4898ba71bdf78d783c045d838ea917f3f5fde97ee3cf3a7b54efca709e9"
     },
     {
       "candidateId": "cand_5d18811d3e8ef9e4d02d9da2",
@@ -131,7 +171,7 @@
         "human-agency",
         "origin"
       ],
-      "contentDigest": "sha256:5a5da4de3d5d9c338a8c41b729107b10e3c15c73c165f46b0e7f887a6edc24e8"
+      "contentDigest": "sha256:608342c17cb634811911ef74957bfb901646de8a3e2e31f93499cdfc858238ab"
     },
     {
       "candidateId": "cand_52ca34f5d175d915a5aed2c7",
@@ -141,8 +181,8 @@
         "human-agency",
         "relationship"
       ],
-      "contentDigest": "sha256:8136f99578ca82ff5b7009c1d759109eccda65341fbcbd4da2cdf00d99c9b280"
+      "contentDigest": "sha256:8b21599923c81562bdf982ea93ef31cc4a0241f93b9ca643c155557e98abe5e1"
     }
   ],
-  "provenanceDigest": "sha256:7a0bd523ed0fdd1d80c13509e05e1876c9834caee24ad05e4e0d0fce49b885f8"
+  "provenanceDigest": "sha256:8a0048cec70ac7025e6b870d02fbc43b62b290dc6db31207a559efa56b645f52"
 }

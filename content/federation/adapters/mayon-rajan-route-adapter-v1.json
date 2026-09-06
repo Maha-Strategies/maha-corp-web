@@ -3,7 +3,7 @@
   "siteId": "mayon-rajan",
   "canonicalHost": "mayonrajan.com",
   "rootPath": "/mayon-volcano/",
-  "sourceManifestDigest": "sha256:6d3a1ec75c7c19dd11b6cfe82306ca9ce7889af0d689ca856670bf7f5da61149",
+  "sourceManifestDigest": "sha256:6febe57740e36be0861e09c3f47552977d97631ad4e359a6d48840957f942912",
   "state": "local-owner-handoff",
   "ownerIntegration": {
     "routeShape": "/mayon-volcano/[...segments]",
@@ -16,8 +16,8 @@
     "activeCanonicalReleaseRequired": true
   },
   "counts": {
-    "routes": 15,
-    "boundedAnswers": 75,
+    "routes": 20,
+    "boundedAnswers": 100,
     "publicRoutesCreated": 0,
     "buildsRun": 0
   },
@@ -114,6 +114,56 @@
       "contentDigest": "sha256:6831e3ac8066e321330646c180bdef09360692e7c291e2503f535bea7cbc8239"
     },
     {
+      "candidateId": "cand_7a0b81efa6eb66077feee67b",
+      "path": "/mayon-volcano/lahar/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/lahar/definition",
+      "segments": [
+        "lahar",
+        "definition"
+      ],
+      "contentDigest": "sha256:3ce12b6d3ae5e1bfa426c74dc9a4ff8959b66a2b5fc8df69e500038d11e030a3"
+    },
+    {
+      "candidateId": "cand_f9753cf9ead17ebb7d1a5c1d",
+      "path": "/mayon-volcano/lahar/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/lahar/limits",
+      "segments": [
+        "lahar",
+        "limits"
+      ],
+      "contentDigest": "sha256:d1b0a009c8195241c38b48ff47b7522c8dd9ff910aebe31e84921bcf9b87c202"
+    },
+    {
+      "candidateId": "cand_3a0a373f88138f7c3b315691",
+      "path": "/mayon-volcano/monitoring/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/monitoring/definition",
+      "segments": [
+        "monitoring",
+        "definition"
+      ],
+      "contentDigest": "sha256:537d1227ac1998d6062deb80ad5e0788fb4c94382761c42bb0aeccfd74cc27c1"
+    },
+    {
+      "candidateId": "cand_23876b3a8f7be549e78adebd",
+      "path": "/mayon-volcano/monitoring/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/monitoring/limits",
+      "segments": [
+        "monitoring",
+        "limits"
+      ],
+      "contentDigest": "sha256:5222e1d6ecef5706aac540d7aeefc0e0ac8744953ee217c7cd9e0a096495d082"
+    },
+    {
+      "candidateId": "cand_f730536538c26e00bfa0e4fa",
+      "path": "/mayon-volcano/monitoring/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/monitoring/official-sources",
+      "segments": [
+        "monitoring",
+        "official-sources"
+      ],
+      "contentDigest": "sha256:0f9fb7a0ad837fae843c39e97ef61a2e76208d8dc0aa70e1ccb50721eb18da34"
+    },
+    {
       "candidateId": "cand_ab7cc5b440beea7f5f551c39",
       "path": "/mayon-volcano/name-disambiguation/definition",
       "canonicalUrl": "https://mayonrajan.com/mayon-volcano/name-disambiguation/definition",
@@ -174,5 +224,5 @@
       "contentDigest": "sha256:bbfd2ccf7e315762d999d33265e91ea7cd4750149ff5328e4736f97d18e3b4fe"
     }
   ],
-  "provenanceDigest": "sha256:b906dab7c6796d659c1f3a596507a6f90b77daf6a7bc50cc5f05d62871f9aada"
+  "provenanceDigest": "sha256:ee51fca7fcfb9531830f0136da38a27efa402b490b653bb95aac0936fb1cc8e3"
 }

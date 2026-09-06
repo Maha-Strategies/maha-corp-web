@@ -3,7 +3,7 @@
   "siteId": "agentic-publishing",
   "canonicalHost": "publish.mahastrategies.com",
   "rootPath": "/agentic-publishing/",
-  "sourceManifestDigest": "sha256:1c579527551b116605695a085b4533d5d8def6c280ff8ecae59477a702555e3d",
+  "sourceManifestDigest": "sha256:a354b58d6e70837a49a1580ca6124da0dea72fbb2addcc3cbdddb838f8c6ca57",
   "state": "local-owner-handoff",
   "ownerIntegration": {
     "routeShape": "/agentic-publishing/[...segments]",
@@ -16,13 +16,33 @@
     "activeCanonicalReleaseRequired": true
   },
   "counts": {
-    "routes": 17,
-    "boundedAnswers": 85,
+    "routes": 25,
+    "boundedAnswers": 125,
     "publicRoutesCreated": 0,
     "buildsRun": 0
   },
   "publicationBoundary": "The adapter resolves local content only. The owner route must still bind an exact revision and active canonical release before crawlability; a missing or unready path resolves to null.",
   "entries": [
+    {
+      "candidateId": "cand_a9631c8bc4e5b0e1b1c81f77",
+      "path": "/agentic-publishing/author-identity/definition",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/author-identity/definition",
+      "segments": [
+        "author-identity",
+        "definition"
+      ],
+      "contentDigest": "sha256:4c386149c33503511461928a9f5b05d7c131546e37a02f1e573c1ec990fa4e48"
+    },
+    {
+      "candidateId": "cand_c568f6d3e2e110108ee43107",
+      "path": "/agentic-publishing/author-identity/example",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/author-identity/example",
+      "segments": [
+        "author-identity",
+        "example"
+      ],
+      "contentDigest": "sha256:c164c6dc06ce9f9d71bb8df4430c042abc405607c7706db50a5750f35a58a9a0"
+    },
     {
       "candidateId": "cand_e581474a6bdb1c44a901a76b",
       "path": "/agentic-publishing/editorial-intake/definition",
@@ -31,7 +51,7 @@
         "editorial-intake",
         "definition"
       ],
-      "contentDigest": "sha256:9fb9216601363859cefbdceead60d79c548c7e62ef6dc2d3681a48c927da69c2"
+      "contentDigest": "sha256:ac6e76d3aedb2b6689102b54fca69022f861f16822255299667e4a5523064ad1"
     },
     {
       "candidateId": "cand_84b2316dc57f1e809d2360f6",
@@ -41,7 +61,17 @@
         "editorial-intake",
         "example"
       ],
-      "contentDigest": "sha256:2aac18be7b6f43fc511b27d1820d247dae8ef3155dfaf031032352dabbb22db9"
+      "contentDigest": "sha256:ae8e929d8738bf6e7983187b82e550d1e2382eed549a4902facbfc7ee626488f"
+    },
+    {
+      "candidateId": "cand_cd443b8470ff9c933a9b76f2",
+      "path": "/agentic-publishing/editorial-intake/machine-interface",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/machine-interface",
+      "segments": [
+        "editorial-intake",
+        "machine-interface"
+      ],
+      "contentDigest": "sha256:89a6c990aa6fa225b63655cfd6e792db65e00074646b6034452df84097ec02d5"
     },
     {
       "candidateId": "cand_714fb5d819282f35578f6c33",
@@ -51,7 +81,7 @@
         "editorial-intake",
         "template"
       ],
-      "contentDigest": "sha256:e2ae19d8d644ccb69d7d8f736db273d01c7a155118e92589bde288d3174d8dfd"
+      "contentDigest": "sha256:b32c0622d3efab6dc328cafcd7ff8105ddcf1296c1ef55798b6eee10133eb0cb"
     },
     {
       "candidateId": "cand_98187d8dcf50748a7427c97f",
@@ -72,6 +102,26 @@
         "template"
       ],
       "contentDigest": "sha256:cbf8428d82f80b64df930e472d2e1b7a5136bed190c8d861f1f2e423a761bb5c"
+    },
+    {
+      "candidateId": "cand_99b829e89e5a74983af7e4a0",
+      "path": "/agentic-publishing/fact-checking/definition",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/fact-checking/definition",
+      "segments": [
+        "fact-checking",
+        "definition"
+      ],
+      "contentDigest": "sha256:6acfe9703596f68fbcbb242523d6551aa8ce6c3745ad455b778c944618385b4c"
+    },
+    {
+      "candidateId": "cand_5b084cbc53cdfccfb6168c7e",
+      "path": "/agentic-publishing/fact-checking/example",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/fact-checking/example",
+      "segments": [
+        "fact-checking",
+        "example"
+      ],
+      "contentDigest": "sha256:74c0f9d8e9a16eb5f344a5ea90c044bfc85cdcc7bdf5f781bf2690f8b605b049"
     },
     {
       "candidateId": "cand_3310484656228e54e0023e11",
@@ -114,6 +164,16 @@
       "contentDigest": "sha256:78f0b172b21f086ca30c657ac5d8fa8d276f90f5439c80410e08c0b308915db4"
     },
     {
+      "candidateId": "cand_f9ee71ec2afd9d170213f884",
+      "path": "/agentic-publishing/human-review/policy",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/human-review/policy",
+      "segments": [
+        "human-review",
+        "policy"
+      ],
+      "contentDigest": "sha256:350bf6cf5bfe650ef63fa0cc7dfbeab3308bcf1762d3c1c049ce8fa75445c2a7"
+    },
+    {
       "candidateId": "cand_8417eeb5a3fcd86a3a83b691",
       "path": "/agentic-publishing/human-review/template",
       "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/human-review/template",
@@ -131,7 +191,7 @@
         "machine-readable-article",
         "example"
       ],
-      "contentDigest": "sha256:b26e2c565ffc0e52279032344d7cde75aa0088cbf3f843c24d963bc10b0cfbe8"
+      "contentDigest": "sha256:feffcc699e3401b253558db1ce90361060c7f8bcb7b979445b478eb40104274b"
     },
     {
       "candidateId": "cand_b0625906e210bafb279b7669",
@@ -141,7 +201,7 @@
         "machine-readable-article",
         "template"
       ],
-      "contentDigest": "sha256:9911f51e64b21dd4dc66d72d108014d371ec23b93e0209950c8ef2692a81e46d"
+      "contentDigest": "sha256:59440b40e83378f209c15c0c601f7156685d6539e361397b8240ec022166e285"
     },
     {
       "candidateId": "cand_5322e19e5c67b1aae32124b0",
@@ -161,7 +221,7 @@
         "structured-abstract",
         "definition"
       ],
-      "contentDigest": "sha256:b02038844336184a1f8c7b70f41a2c954a3ea3479e4644a026a82ed285434ef2"
+      "contentDigest": "sha256:840d46807a4cdcacbeca49f654be459ee65a96577c12bd587f5f6ce27beab366"
     },
     {
       "candidateId": "cand_d4b5347acc11d87e36da14c7",
@@ -171,7 +231,17 @@
         "structured-abstract",
         "example"
       ],
-      "contentDigest": "sha256:a5622d15af90c2286a5331919da4e04e602a037cf269eb581723a8f983bf492c"
+      "contentDigest": "sha256:d9df8d7ecb2db4ffbfa60ff160c61af959b7e784f8cbf53036a5ddb4ac2e8101"
+    },
+    {
+      "candidateId": "cand_019de92f9cadeb365e7a2bfa",
+      "path": "/agentic-publishing/structured-abstract/governance",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/governance",
+      "segments": [
+        "structured-abstract",
+        "governance"
+      ],
+      "contentDigest": "sha256:81ebe9fc6723a08377db059924a5fed9f5550e13ef07091c489454189275defb"
     },
     {
       "candidateId": "cand_f25f76db2ec3d9a2ceed05e6",
@@ -181,7 +251,17 @@
         "structured-abstract",
         "machine-interface"
       ],
-      "contentDigest": "sha256:296cd9cf68449ce7bedb93047e53fee47171449d1d8eb6192641453559087915"
+      "contentDigest": "sha256:8d3f45abc57ee710460419e8e899d92eb22e8e42924633e763fc5cb153b79030"
+    },
+    {
+      "candidateId": "cand_f7b9f730123f8fcf82d81f15",
+      "path": "/agentic-publishing/structured-abstract/policy",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/policy",
+      "segments": [
+        "structured-abstract",
+        "policy"
+      ],
+      "contentDigest": "sha256:99ce0b3c16c5782c9e049bcb809ad32d9811f246730506eafd901a05e37b60f6"
     },
     {
       "candidateId": "cand_c8c9a9b63b8028c5b81ad25d",
@@ -191,8 +271,8 @@
         "structured-abstract",
         "template"
       ],
-      "contentDigest": "sha256:5cd59c7eeaeef03ed614fa19b2c9e8359a84d86d0bdd16c6d553bb8cee7eaaed"
+      "contentDigest": "sha256:7123efa136737e5a3c3a377f69f228a81d826ddd24c1ac62ffde9bd3968d33b1"
     }
   ],
-  "provenanceDigest": "sha256:24ba176df4267c309871f70ce50a956d6c2be9132ec3010bd9ed239fbe577f35"
+  "provenanceDigest": "sha256:a49af183cea869c1c572e62305a1820f1d1b84e5a8da91d4e0b783235051112f"
 }

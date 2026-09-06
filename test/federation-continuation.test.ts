@@ -50,8 +50,9 @@ test('health-data consent is narrowed to an operational permission record and cl
   assert.match(JSON.stringify(decision.narrowedScope), /legal regime/)
   assert.match(JSON.stringify(decision.narrowedScope), /HIPAA authorization/)
   assert.equal(continuation.remediations.review.counts.downstreamMahaOsPagesCleared, 11)
-  assert.equal(implementations.registry.counts.blockedOnUnreadyPrerequisite, 0)
-  assert.equal(implementations.registry.counts.readyForOwnerIntegration, 273)
+  assert.equal(implementations.pages.filter((entry) => entry.siteId === 'maha-os' && entry.adoption.state === 'blocked-on-unready-prerequisite').length, 0)
+  assert.equal(implementations.registry.counts.blockedOnUnreadyPrerequisite, 1)
+  assert.equal(implementations.registry.counts.readyForOwnerIntegration, 365)
 })
 
 test('candidates 201–300 partition into 92 ready, seven revise and one semantic duplicate', () => {
@@ -81,19 +82,20 @@ test('all Tranche 3 dependencies resolve to an evidence-ready candidate or an ob
   }
 })
 
-test('the combined publication tranche has 273 unique, source-bound implementations', () => {
-  assert.deepEqual(implementations.registry.counts.byProperty, { 'maha-strategies': 82, 'maha-research': 75, 'agentic-publishing': 17, 'maha-os': 18, 'mayone-maharajan': 12, 'mayon-rajan': 15, 'maha-policy': 54 })
-  assert.equal(implementations.pages.length, 273)
-  assert.equal(new Set(implementations.pages.map((entry) => entry.candidateId)).size, 273)
-  assert.equal(new Set(implementations.pages.map((entry) => entry.canonicalUrl)).size, 273)
-  assert.ok(implementations.pages.every((entry) => entry.sources.length > 0 && entry.boundedAnswers.length === 5 && entry.adoption.state === 'ready-for-owner-integration'))
+test('the combined publication tranche has 366 unique, source-bound implementations', () => {
+  assert.deepEqual(implementations.registry.counts.byProperty, { 'maha-strategies': 108, 'maha-research': 100, 'agentic-publishing': 26, 'maha-os': 24, 'mayone-maharajan': 16, 'mayon-rajan': 20, 'maha-policy': 72 })
+  assert.equal(implementations.pages.length, 366)
+  assert.equal(new Set(implementations.pages.map((entry) => entry.candidateId)).size, 366)
+  assert.equal(new Set(implementations.pages.map((entry) => entry.canonicalUrl)).size, 366)
+  assert.ok(implementations.pages.every((entry) => entry.sources.length > 0 && entry.boundedAnswers.length === 5))
+  assert.equal(implementations.pages.filter((entry) => entry.adoption.state === 'blocked-on-unready-prerequisite').length, 1)
   assert.equal(implementations.registry.counts.publicRoutesCreated, 0)
   assert.equal(implementations.registry.counts.nextBuildsRun, 0)
   assert.equal(implementations.registry.counts.vercelBuildsRun, 0)
 })
 
 test('seven property adapters resolve only exact ready paths and never cross hosts', () => {
-  assert.deepEqual(adapters.registry.counts, { properties: 7, routes: 273, boundedAnswers: 1365, publicRoutesCreated: 0, buildsRun: 0 })
+  assert.deepEqual(adapters.registry.counts, { properties: 7, routes: 365, boundedAnswers: 1825, publicRoutesCreated: 0, buildsRun: 0 })
   for (const contract of adapters.contracts) {
     const manifest = readJson<PropertyManifest>(`content/federation/implementations/${contract.siteId}-pages-v1.json`)
     const adapter = createFederationPropertyAdapter(manifest)
@@ -129,7 +131,7 @@ test('all continuation, implementation and adapter artifacts regenerate byte-ide
 
 test('private review material and federation adapters remain outside served source', () => {
   const served = [...filesUnder(resolve(ROOT, 'app')), ...filesUnder(resolve(ROOT, 'components'))].filter((path) => /\.(?:ts|tsx|js|jsx)$/.test(path)).map((path) => readFileSync(path, 'utf8')).join('\n')
-  for (const marker of ['federation-continuation', 'federation-property-adapter', 'readiness-remediation', 'tranche-3-evidence-packets']) assert.doesNotMatch(served, new RegExp(marker))
+  for (const marker of ['federation-continuation', 'federation-property-adapter', 'readiness-remediation', 'tranche-3-evidence-packets', 'tranche-4-evidence-packets']) assert.doesNotMatch(served, new RegExp(marker))
   const serialized = JSON.stringify({ continuation, adapters })
   assert.doesNotMatch(serialized, /customerData|natalData|credentialValue|secretValue|sourceExcerpt|fullText/)
   for (const shape of [/\bsk_(?:live|test)_[A-Za-z0-9]{16,}\b/, /\bgh[oprsu]_[A-Za-z0-9_]{20,}\b/, /authorization:\s*bearer\s+/i]) assert.doesNotMatch(serialized, shape)
