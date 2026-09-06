@@ -69,6 +69,7 @@
         "legal advice",
         "human verification"
       ],
+      "sourceHandling": "Only public or synthetic, non-sensitive source sections are accepted. The request must explicitly authorize transmission of those sections to Anthropic for processing.",
       "payment": {
         "protocol": "x402",
         "version": 2,
@@ -104,7 +105,7 @@
         "note": "Preview contract only. Not payable in Production until the published readiness gates pass."
       },
       "payableNow": false,
-      "retention": "Complete supplied sections are not retained. Results retain the question, supplied source and section identifiers, optional intake metadata, short verbatim claim excerpts, classifications, digests, and operational metadata."
+      "retention": "Complete supplied sections are transmitted to Anthropic for processing but are not retained by Maha. Results retain the question, supplied source and section identifiers, optional intake metadata, short verbatim claim excerpts, classifications, digests, and operational metadata."
     },
     {
       "id": "gpu-tensor-network",

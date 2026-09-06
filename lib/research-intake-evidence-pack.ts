@@ -26,6 +26,10 @@ export type ResearchIntakeInput = {
   clientRequestId: string
   question: string
   sections: ResearchSourceSection[]
+  sourceHandling: {
+    classification: 'public_or_synthetic_non_sensitive'
+    anthropicProcessingAuthorized: true
+  }
   intendedAudience?: string
   intendedDecision?: string
   deadline?: string
@@ -94,7 +98,7 @@ function digest(value: unknown): string {
 export function parseResearchIntakeInput(value: unknown): ResearchIntakeInput {
   const body = object(value)
   if (!body) throw new Error('Request body must be a JSON object.')
-  const allowed = new Set(['clientRequestId', 'question', 'sections', 'intendedAudience', 'intendedDecision', 'deadline'])
+  const allowed = new Set(['clientRequestId', 'question', 'sections', 'sourceHandling', 'intendedAudience', 'intendedDecision', 'deadline'])
   const unknown = Object.keys(body).filter((key) => !allowed.has(key))
   if (unknown.length) throw new Error(`Unknown request field: ${unknown[0]}.`)
 
@@ -126,10 +130,21 @@ export function parseResearchIntakeInput(value: unknown): ResearchIntakeInput {
   if (deadline && Number.isNaN(Date.parse(deadline))) throw new Error('deadline must be an ISO-8601 date or timestamp.')
   const intendedAudience = optionalLine(body.intendedAudience, 'intendedAudience', 240)
   const intendedDecision = optionalLine(body.intendedDecision, 'intendedDecision', 500)
+  const sourceHandling = object(body.sourceHandling)
+  if (!sourceHandling
+    || Object.keys(sourceHandling).some((key) => !['classification', 'anthropicProcessingAuthorized'].includes(key))
+    || sourceHandling.classification !== 'public_or_synthetic_non_sensitive'
+    || sourceHandling.anthropicProcessingAuthorized !== true) {
+    throw new Error('sourceHandling must declare public_or_synthetic_non_sensitive content and authorize Anthropic processing.')
+  }
   return {
     clientRequestId: boundedLine(body.clientRequestId, 'clientRequestId', 8, 120),
     question: boundedLine(body.question, 'question', 8, 1_000),
     sections,
+    sourceHandling: {
+      classification: 'public_or_synthetic_non_sensitive',
+      anthropicProcessingAuthorized: true,
+    },
     ...(intendedAudience ? { intendedAudience } : {}),
     ...(intendedDecision ? { intendedDecision } : {}),
     ...(deadline ? { deadline } : {}),
@@ -140,6 +155,7 @@ export function researchIntakeInputHash(input: ResearchIntakeInput): string {
   const content = {
     question: input.question,
     sections: input.sections,
+    sourceHandling: input.sourceHandling,
     ...(input.intendedAudience ? { intendedAudience: input.intendedAudience } : {}),
     ...(input.intendedDecision ? { intendedDecision: input.intendedDecision } : {}),
     ...(input.deadline ? { deadline: input.deadline } : {}),
@@ -318,6 +334,7 @@ export function assembleResearchIntakeEvidencePack(input: ResearchIntakeInput, a
       intendedDecision: input.intendedDecision ?? null,
       deadline: input.deadline ?? null,
     },
+    sourceHandling: input.sourceHandling,
     orderedSourceSectionManifest: manifest,
     manifestDigest,
     sectionAudits,
@@ -327,6 +344,7 @@ export function assembleResearchIntakeEvidencePack(input: ResearchIntakeInput, a
     boundaries: [
       'Machine-generated research intake packet, not a research brief.',
       'Uses only supplied source sections; no new research or source acquisition is performed.',
+      'Input is declared public or synthetic and non-sensitive, and supplied sections are transmitted to Anthropic for model processing.',
       'MPS statuses and potential conflicts are automated triage requiring human review.',
       'Does not provide factual certification, human judgment, legal advice, or a recommendation.',
     ],

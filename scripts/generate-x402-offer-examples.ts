@@ -102,6 +102,7 @@ const researchInput = parseResearchIntakeInput({
   question: 'What evidence would be needed to decide whether a governed AI gateway pilot is sufficiently scoped?',
   intendedAudience: 'AI platform and risk owners',
   intendedDecision: 'Whether to commission a bounded human research engagement',
+  sourceHandling: { classification: 'public_or_synthetic_non_sensitive', anthropicProcessingAuthorized: true },
   sections: [
     { sourceId: 'platform-note', sectionId: 'requirements', title: 'Platform requirements', text: PASSAGE },
     { sourceId: 'risk-note', sectionId: 'limits', title: 'Risk limits', text: 'The proposed gateway may reduce context volume by 40 percent. No production benchmark has established that saving. The approval owner and acceptable failure threshold remain open questions.' },

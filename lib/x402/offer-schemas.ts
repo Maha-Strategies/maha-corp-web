@@ -537,7 +537,7 @@ const mpsClaimSchema = (): JsonSchema => ({
 export const RESEARCH_INTAKE_EVIDENCE_PACK_DISCOVERY: OfferDiscoveryContract = {
   requiredHeaders: {
     'x-maha-input-hash': {
-      preimage: 'Maha canonical JSON v1 of {question, sections, intendedAudience?, intendedDecision?, deadline?}; keys sorted, strings NFC-normalized, undefined fields omitted',
+      preimage: 'Maha canonical JSON v1 of {question, sections, sourceHandling, intendedAudience?, intendedDecision?, deadline?}; keys sorted, strings NFC-normalized, undefined fields omitted',
       algorithm: 'sha256',
       format: 'sha256:<64 lowercase hex>',
       notes: 'clientRequestId is excluded. Parse and normalize the request using the published input schema before hashing.',
@@ -562,11 +562,19 @@ export const RESEARCH_INTAKE_EVIDENCE_PACK_DISCOVERY: OfferDiscoveryContract = {
           required: ['sourceId', 'sectionId', 'text'],
         },
       },
+      sourceHandling: {
+        type: 'object', additionalProperties: false,
+        properties: {
+          classification: { type: 'string', const: 'public_or_synthetic_non_sensitive' },
+          anthropicProcessingAuthorized: { type: 'boolean', const: true },
+        },
+        required: ['classification', 'anthropicProcessingAuthorized'],
+      },
       intendedAudience: { type: 'string', minLength: 1, maxLength: 240 },
       intendedDecision: { type: 'string', minLength: 1, maxLength: 500 },
       deadline: { type: 'string', minLength: 1, maxLength: 80 },
     },
-    required: ['clientRequestId', 'question', 'sections'],
+    required: ['clientRequestId', 'question', 'sections', 'sourceHandling'],
   },
   output: RESEARCH_INTAKE_EXAMPLE_OUTPUT,
   outputSchema: {
@@ -612,6 +620,14 @@ export const RESEARCH_INTAKE_EVIDENCE_PACK_DISCOVERY: OfferDiscoveryContract = {
             properties: { intendedAudience: { type: ['string', 'null'] }, intendedDecision: { type: ['string', 'null'] }, deadline: { type: ['string', 'null'] } },
             required: ['intendedAudience', 'intendedDecision', 'deadline'],
           },
+          sourceHandling: {
+            type: 'object', additionalProperties: false,
+            properties: {
+              classification: { type: 'string', const: 'public_or_synthetic_non_sensitive' },
+              anthropicProcessingAuthorized: { type: 'boolean', const: true },
+            },
+            required: ['classification', 'anthropicProcessingAuthorized'],
+          },
           orderedSourceSectionManifest: {
             type: 'array', minItems: 1, maxItems: 10,
             items: { type: 'object', additionalProperties: false, properties: { order: { type: 'integer', minimum: 1, maximum: 10 }, sourceId: { type: 'string' }, sectionId: { type: 'string' }, title: { type: 'string' }, sourceSectionHash: { type: 'string', pattern: SHA256_PATTERN }, characterCount: { type: 'integer', minimum: 1, maximum: 6000 } }, required: ['order', 'sourceId', 'sectionId', 'sourceSectionHash', 'characterCount'] },
@@ -632,7 +648,7 @@ export const RESEARCH_INTAKE_EVIDENCE_PACK_DISCOVERY: OfferDiscoveryContract = {
           retentionBoundaries: { type: 'object', additionalProperties: false, properties: { fullSourceSectionsStored: { type: 'boolean', const: false }, verbatimClaimExcerptsRetained: { type: 'boolean', const: true }, suppliedMetadataRetained: { type: 'boolean', const: true } }, required: ['fullSourceSectionsStored', 'verbatimClaimExcerptsRetained', 'suppliedMetadataRetained'] },
           receiptDigest: { type: 'string', pattern: SHA256_PATTERN },
         },
-        required: ['version', 'offerId', 'clientRequestId', 'inputHash', 'economicBasis', 'question', 'intakeContext', 'orderedSourceSectionManifest', 'manifestDigest', 'sectionAudits', 'consolidatedClaimInventory', 'citationGaps', 'potentialConflicts', 'boundaries', 'unresolvedQuestions', 'proposedHumanResearchScope', 'retentionBoundaries', 'receiptDigest'],
+        required: ['version', 'offerId', 'clientRequestId', 'inputHash', 'economicBasis', 'question', 'intakeContext', 'sourceHandling', 'orderedSourceSectionManifest', 'manifestDigest', 'sectionAudits', 'consolidatedClaimInventory', 'citationGaps', 'potentialConflicts', 'boundaries', 'unresolvedQuestions', 'proposedHumanResearchScope', 'retentionBoundaries', 'receiptDigest'],
       },
     },
     required: ['packId', 'retrievalToken', 'clientRequestId', 'inputHash', 'status', 'idempotentReplay', 'retrievalPath', 'progress', 'pack'],

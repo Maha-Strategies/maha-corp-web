@@ -17,6 +17,7 @@ const input = () => parseResearchIntakeInput({
   question: 'Should a governed gateway pilot proceed to a human research engagement?',
   intendedAudience: 'AI risk owner',
   intendedDecision: 'Whether to commission the next phase',
+  sourceHandling: { classification: 'public_or_synthetic_non_sensitive', anthropicProcessingAuthorized: true },
   sections: [
     { sourceId: 'source-a', sectionId: 'findings', title: 'Findings', text: 'The gateway reduced selected context by 40 percent in a synthetic test. No production result has established the same reduction.' },
     { sourceId: 'source-b', sectionId: 'limits', title: 'Limits', text: 'The gateway reduced selected context by 15 percent in a separate trial. The acceptable failure threshold remains undecided.' },
@@ -40,8 +41,10 @@ function audits(value = input()): MpsAuditResult[] {
 test('parses one to ten ordered supplied sections and refuses unknown fields', () => {
   assert.equal(input().sections.length, 2)
   const eleven = Array.from({ length: RESEARCH_INTAKE_MAX_SECTIONS + 1 }, (_, i) => ({ sourceId: `s-${i}`, sectionId: 'one', text: 'A sufficiently long source section for validation.' }))
-  assert.throws(() => parseResearchIntakeInput({ clientRequestId: 'request-001', question: 'What should happen next?', sections: eleven }), /1-10/)
+  assert.throws(() => parseResearchIntakeInput({ clientRequestId: 'request-001', question: 'What should happen next?', sourceHandling: { classification: 'public_or_synthetic_non_sensitive', anthropicProcessingAuthorized: true }, sections: eleven }), /1-10/)
   assert.throws(() => parseResearchIntakeInput({ ...input(), extra: true }), /Unknown request field/)
+  assert.throws(() => parseResearchIntakeInput({ ...input(), sourceHandling: { classification: 'confidential', anthropicProcessingAuthorized: true } }), /public_or_synthetic_non_sensitive/)
+  assert.throws(() => parseResearchIntakeInput({ ...input(), sourceHandling: { classification: 'public_or_synthetic_non_sensitive', anthropicProcessingAuthorized: false } }), /authorize Anthropic/)
   assert.throws(() => parseResearchIntakeInput({ ...input(), sections: [{ sourceId: 'a', sectionId: 'b', text: 'Valid source section content for one.' }, { sourceId: 'a', sectionId: 'b', text: 'Valid source section content for two.' }] }), /Duplicate/)
 })
 
@@ -98,6 +101,15 @@ test('the machine packet does not reproduce complete supplied sections', () => {
   for (const section of value.sections) assert.equal(serialized.includes(section.text), false)
   assert.equal(pack.retentionBoundaries.fullSourceSectionsStored, false)
   assert.equal(pack.retentionBoundaries.verbatimClaimExcerptsRetained, true)
+})
+
+test('the receipt preserves the public-or-synthetic declaration and Anthropic authorization', () => {
+  const pack = assembleResearchIntakeEvidencePack(input(), audits())
+  assert.deepEqual(pack.sourceHandling, {
+    classification: 'public_or_synthetic_non_sensitive',
+    anthropicProcessingAuthorized: true,
+  })
+  assert.match(pack.boundaries.join(' '), /transmitted to Anthropic/i)
 })
 
 test('recovery retries only the failed section and reuses persisted successful siblings', async () => {

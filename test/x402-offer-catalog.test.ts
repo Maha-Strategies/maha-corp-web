@@ -139,6 +139,12 @@ test('the paid offers state what they are not', () => {
   )
   assert.match(MPS_AUTONOMOUS_AUDIT_OFFER.description, /not factual certification, legal advice, or human verification/i)
 
+  const intake = X402_OFFERS.find((offer) => offer.id === 'research-intake-evidence-pack')
+  assert.ok(intake)
+  assert.match(intake.capabilityBoundaries.join(' '), /public or synthetic and non-sensitive/i)
+  assert.match(intake.capabilityBoundaries.join(' '), /transmitted to Anthropic/i)
+  assert.match(intake.retention.note, /transmitted to Anthropic/i)
+
   for (const forbidden of [/\bfact-check/i, /\bguarantees? accuracy/i, /\bprevents? hallucination/i]) {
     for (const offer of X402_OFFERS) {
       assert.equal(forbidden.test(offer.description), false, `${offer.id} must not claim ${forbidden}`)

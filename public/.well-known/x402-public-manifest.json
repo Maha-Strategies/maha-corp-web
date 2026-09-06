@@ -151,7 +151,7 @@
       },
       "configurationDigest": {
         "algorithm": "sha256",
-        "digest": "sha256:62864255396dc680b030cbb1c371f0be3bf8cb84ecfa679866cf165cb3174fa6",
+        "digest": "sha256:6226d8d55117c3dad49d1b049801a0f3e84b03b986da726d742de3c69de8c4ab",
         "schemaVersion": "1.0.0"
       },
       "limits": {
@@ -162,11 +162,12 @@
       "retention": {
         "fullSourceTextStored": false,
         "verbatimExcerptsRetained": true,
-        "note": "Complete supplied source sections are not stored. The result retains the question, supplied identifiers and metadata, short verbatim claim excerpts, classifications, digests, and operational metadata."
+        "note": "Complete supplied source sections are transmitted to Anthropic for processing but are not stored by Maha. The result retains the question, supplied identifiers and metadata, short verbatim claim excerpts, classifications, digests, and operational metadata."
       },
       "capabilityBoundaries": [
         "Machine-generated intake packet, not a research brief.",
         "Uses only 1-10 source sections supplied by the buyer; no source acquisition or new research.",
+        "Accepts only material declared public or synthetic and non-sensitive; supplied sections are transmitted to Anthropic for processing.",
         "MPS statuses and potential conflicts are automated triage requiring human review.",
         "Does not provide factual certification, legal advice, human judgment, or a recommendation."
       ]

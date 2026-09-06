@@ -300,6 +300,7 @@ export const RESEARCH_INTAKE_EVIDENCE_PACK_OFFER: X402Offer = {
   capabilityBoundaries: [
     'Machine-generated intake packet, not a research brief.',
     'Uses only 1-10 source sections supplied by the buyer; no source acquisition or new research.',
+    'Accepts only material declared public or synthetic and non-sensitive; supplied sections are transmitted to Anthropic for processing.',
     'MPS statuses and potential conflicts are automated triage requiring human review.',
     'Does not provide factual certification, legal advice, human judgment, or a recommendation.',
   ],
@@ -311,7 +312,7 @@ export const RESEARCH_INTAKE_EVIDENCE_PACK_OFFER: X402Offer = {
       'short verbatim claim excerpts', 'MPS classifications and rationales', 'citation gaps', 'potential conflict candidates',
       'payment transaction and payer',
     ],
-    note: 'Complete supplied source sections are not stored. The result retains the question, supplied identifiers and metadata, short verbatim claim excerpts, classifications, digests, and operational metadata.',
+    note: 'Complete supplied source sections are transmitted to Anthropic for processing but are not stored by Maha. The result retains the question, supplied identifiers and metadata, short verbatim claim excerpts, classifications, digests, and operational metadata.',
   },
   discovery: RESEARCH_INTAKE_EVIDENCE_PACK_DISCOVERY,
 }

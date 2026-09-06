@@ -51,7 +51,7 @@ export const DEEP_CONTEXT_EXAMPLE_OUTPUT = {
   "clientRequestId": "req_rag_release_eval_001",
   "contextPack": {
     "version": "0.1.0",
-    "packId": "ctxpack_e89f8eeea70a462d9554975d5bde9343",
+    "packId": "ctxpack_53cc47d58af94a149c507ca66cf15028",
     "clientRequestId": "req_rag_release_eval_001",
     "task": "Find the release condition and rollback trigger while removing duplicate operational background.",
     "tokenBudget": 128,
@@ -273,6 +273,10 @@ export const RESEARCH_INTAKE_EXAMPLE_INPUT = {
       "text": "The proposed gateway may reduce context volume by 40 percent. No production benchmark has established that saving. The approval owner and acceptable failure threshold remain open questions."
     }
   ],
+  "sourceHandling": {
+    "classification": "public_or_synthetic_non_sensitive",
+    "anthropicProcessingAuthorized": true
+  },
   "intendedAudience": "AI platform and risk owners",
   "intendedDecision": "Whether to commission a bounded human research engagement"
 } as const
@@ -281,7 +285,7 @@ export const RESEARCH_INTAKE_EXAMPLE_OUTPUT = {
   "packId": "intake_9b3f71ac52d84e6fa0c8d1e37b5942af",
   "retrievalToken": "rirt_Q7xK2mN8pR4vT6yB1cD3fG5hJ9kL0nM2qS4uW6zA8eC",
   "clientRequestId": "req_research_intake_001",
-  "inputHash": "sha256:07e339687018076bb741fb50d18e97a2989bb458297309ed6e78a7bfc34157d6",
+  "inputHash": "sha256:3d28abdfd65d08041637afe6e5d203a83baf0b4e9395091ab60ac249877786d2",
   "status": "completed",
   "idempotentReplay": false,
   "retrievalPath": "/api/v1/research/intake/intake_9b3f71ac52d84e6fa0c8d1e37b5942af",
@@ -295,7 +299,7 @@ export const RESEARCH_INTAKE_EXAMPLE_OUTPUT = {
     "version": "0.1",
     "offerId": "research-intake-evidence-pack",
     "clientRequestId": "req_research_intake_001",
-    "inputHash": "sha256:07e339687018076bb741fb50d18e97a2989bb458297309ed6e78a7bfc34157d6",
+    "inputHash": "sha256:3d28abdfd65d08041637afe6e5d203a83baf0b4e9395091ab60ac249877786d2",
     "economicBasis": {
       "priceBaseUnits": "1000000",
       "asset": "USDC",
@@ -310,6 +314,10 @@ export const RESEARCH_INTAKE_EXAMPLE_OUTPUT = {
       "intendedAudience": "AI platform and risk owners",
       "intendedDecision": "Whether to commission a bounded human research engagement",
       "deadline": null
+    },
+    "sourceHandling": {
+      "classification": "public_or_synthetic_non_sensitive",
+      "anthropicProcessingAuthorized": true
     },
     "orderedSourceSectionManifest": [
       {
@@ -496,6 +504,7 @@ export const RESEARCH_INTAKE_EXAMPLE_OUTPUT = {
     "boundaries": [
       "Machine-generated research intake packet, not a research brief.",
       "Uses only supplied source sections; no new research or source acquisition is performed.",
+      "Input is declared public or synthetic and non-sensitive, and supplied sections are transmitted to Anthropic for model processing.",
       "MPS statuses and potential conflicts are automated triage requiring human review.",
       "Does not provide factual certification, human judgment, legal advice, or a recommendation."
     ],
@@ -525,6 +534,6 @@ export const RESEARCH_INTAKE_EXAMPLE_OUTPUT = {
       "verbatimClaimExcerptsRetained": true,
       "suppliedMetadataRetained": true
     },
-    "receiptDigest": "sha256:4027221de88e26568d469488c3961f68d0e8c0d181210c6873409040431f72da"
+    "receiptDigest": "sha256:1c19c3fff1f0feadd4a3c0ff762626f0aeefa73e2a107b673e094b5b6a29faac"
   }
 } as const

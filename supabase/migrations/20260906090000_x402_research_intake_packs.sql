@@ -50,6 +50,60 @@ revoke all on table public.x402_research_intake_section_audits from public, anon
 grant select, insert, update on table public.x402_research_intake_section_audits to service_role;
 revoke delete, truncate on table public.x402_research_intake_section_audits from service_role;
 
+-- Creates the paid parent job and every section checkpoint in one transaction.
+-- No model call may begin unless this function commits successfully.
+create or replace function public.create_x402_research_intake_job(
+  p_public_id text,
+  p_retrieval_token_hash text,
+  p_payment_transaction text,
+  p_payer text,
+  p_client_request_id text,
+  p_input_hash text,
+  p_model text,
+  p_sections jsonb
+) returns text language plpgsql security definer set search_path = public, extensions as $$
+declare
+  v_count integer;
+begin
+  if jsonb_typeof(p_sections) <> 'array' then
+    raise exception 'sections must be an array';
+  end if;
+  v_count := jsonb_array_length(p_sections);
+  if v_count < 1 or v_count > 10 then
+    raise exception 'sections must contain 1-10 entries';
+  end if;
+
+  insert into public.x402_research_intake_packs (
+    public_id, retrieval_token_hash, payment_transaction, payer,
+    client_request_id, input_hash, status, model
+  ) values (
+    p_public_id, p_retrieval_token_hash, p_payment_transaction, p_payer,
+    p_client_request_id, p_input_hash, 'processing', p_model
+  );
+
+  insert into public.x402_research_intake_section_audits (
+    pack_public_id, section_order, source_id, section_id,
+    source_section_hash, status, attempt_count
+  )
+  select p_public_id, item.section_order, item.source_id, item.section_id,
+    item.source_section_hash, 'processing', 1
+  from jsonb_to_recordset(p_sections) as item(
+    section_order integer,
+    source_id text,
+    section_id text,
+    source_section_hash text
+  );
+
+  if (select count(*) from public.x402_research_intake_section_audits where pack_public_id = p_public_id) <> v_count then
+    raise exception 'section checkpoint count mismatch';
+  end if;
+  return p_public_id;
+end;
+$$;
+
+revoke all on function public.create_x402_research_intake_job(text, text, text, text, text, text, text, jsonb) from public, anon, authenticated;
+grant execute on function public.create_x402_research_intake_job(text, text, text, text, text, text, text, jsonb) to service_role;
+
 -- Claims one section at a time. A completed row is deliberately ineligible,
 -- so a pack retry cannot rerun a successful sibling.
 create or replace function public.claim_x402_research_intake_section(
@@ -67,7 +121,7 @@ begin
         updated_at = now()
   where pack_public_id = p_pack_public_id
     and section_order = p_section_order
-    and status in ('pending', 'failed')
+    and (status in ('pending', 'failed') or (status = 'processing' and updated_at < now() - interval '5 minutes'))
     and attempt_count < least(p_max_attempts, 3)
   returning attempt_count into v_attempt;
   return v_attempt;

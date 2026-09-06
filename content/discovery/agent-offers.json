@@ -146,6 +146,7 @@
       "retrievalEndpoint": "https://www.mahastrategies.com/api/v1/research/intake/{packId}",
       "method": "POST",
       "methodBoundary": "Machine-generated intake packet for one research question and up to ten supplied source sections. It audits only supplied material and does not perform new research, acquire sources, certify facts, supply human judgment, or make a recommendation.",
+      "sourceHandling": "Only public or synthetic, non-sensitive source sections are accepted. The request must explicitly authorize transmission of those sections to Anthropic for processing.",
       "inputBounds": {
         "questions": 1,
         "sourceSections": "1-10",
@@ -155,7 +156,7 @@
       "retention": {
         "fullSourceSectionsStored": false,
         "verbatimClaimExcerptsRetained": true,
-        "note": "Results retain the question, supplied source and section identifiers, optional intake metadata, short verbatim claim excerpts, classifications, digests, and operational metadata."
+        "note": "Complete sections are transmitted to Anthropic for processing but are not retained by Maha. Results retain the question, supplied source and section identifiers, optional intake metadata, short verbatim claim excerpts, classifications, digests, and operational metadata."
       },
       "machinePayment": {
         "protocol": "x402",

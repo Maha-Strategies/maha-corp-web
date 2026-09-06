@@ -7,6 +7,7 @@ import {
   researchIntakeJobResponse,
   researchIntakeRetrievalTokenHash,
   researchIntakeRetrievalTokenMatches,
+  staleResearchIntakeSection,
   validResearchIntakeJobId,
 } from '../lib/x402/research-intake-job.ts'
 
@@ -28,14 +29,20 @@ test('failed-job guidance promises section-local recovery, never a whole-pack re
     status: 'failed',
     result: null,
     failure_code: 'section_audit_failed',
-    section_count: 10,
-    sections_completed: 9,
-    sections_failed: 1,
-    total_model_calls: 10,
-  })
+  }, [
+    ...Array.from({ length: 9 }, () => ({ status: 'completed' as const, attempt_count: 1 })),
+    { status: 'failed', attempt_count: 1 },
+  ])
   assert.deepEqual(response.progress, { sectionCount: 10, sectionsCompleted: 9, sectionsFailed: 1, totalModelCalls: 10 })
   assert.match(JSON.stringify(response.error), /only failed or missing sections/i)
   assert.doesNotMatch(JSON.stringify(response), /rerun (?:the )?(?:entire|whole) pack/i)
+})
+
+test('only a processing checkpoint older than five minutes is stale', () => {
+  const now = Date.parse('2026-09-06T10:10:00.000Z')
+  assert.equal(staleResearchIntakeSection({ status: 'processing', updated_at: '2026-09-06T10:04:59.000Z' }, now), true)
+  assert.equal(staleResearchIntakeSection({ status: 'processing', updated_at: '2026-09-06T10:05:01.000Z' }, now), false)
+  assert.equal(staleResearchIntakeSection({ status: 'failed', updated_at: '2026-09-06T09:00:00.000Z' }, now), false)
 })
 
 test('the migration persists section-local progress and makes completed checkpoints immutable', async () => {
