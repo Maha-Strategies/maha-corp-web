@@ -26,8 +26,11 @@ import {
 } from '../lib/carp/identity.ts'
 import { pollCarpSeller } from '../scripts/run-carp-seller-worker.ts'
 import {
+  CONTEXT_BUDGET_LADDER_OFFER,
   CONTEXT_COMPRESSION_OFFER,
   DEEP_CONTEXT_EVALUATION_OFFER,
+  EVIDENCE_RETENTION_MATRIX_OFFER,
+  GOVERNED_CONTEXT_VERIFICATION_OFFER,
   MPS_AUTONOMOUS_AUDIT_OFFER,
   RESEARCH_INTAKE_EVIDENCE_PACK_OFFER,
 } from '../lib/x402/offers.ts'
@@ -42,7 +45,7 @@ test('the public Seller role mirrors the adopted upstream v0.2 contract', () => 
   assert.deepEqual(role.fulfillmentDescriptor.modes, ['physical', 'digital', 'hybrid'])
 })
 
-test('the Maha seller maps the three payable products and one preview product to the adopted digital offering shape', () => {
+test('the Maha seller maps all seven payable products to the adopted digital offering shape', () => {
   assert.equal(mahaCarpSellerProfile.schemaVersion, '0.1.3')
   assert.equal(mahaCarpSellerProfile.roleContract, CABEZON_SELLER_ROLE_URL)
   assert.equal(mahaCarpSellerProfile.roleMirror, CARP_SELLER_ROLE_URL)
@@ -62,11 +65,14 @@ test('the Maha seller maps the three payable products and one preview product to
   }])
   const expected = [
     ['maha:context-compression:v1', '0.001', CONTEXT_COMPRESSION_OFFER],
+    ['maha:context-budget-ladder:v1', '0.005', CONTEXT_BUDGET_LADDER_OFFER],
     ['maha:deep-context-evaluation:v1', '0.01', DEEP_CONTEXT_EVALUATION_OFFER],
+    ['maha:evidence-retention-matrix:v1', '0.05', EVIDENCE_RETENTION_MATRIX_OFFER],
     ['maha:mps-autonomous-audit:v1', '0.10', MPS_AUTONOMOUS_AUDIT_OFFER],
+    ['maha:governed-context-verification-pack:v1', '0.50', GOVERNED_CONTEXT_VERIFICATION_OFFER],
     ['maha:research-intake-evidence-pack:v1', '1.00', RESEARCH_INTAKE_EVIDENCE_PACK_OFFER],
   ] as const
-  assert.equal(MAHA_CARP_DIGITAL_OFFERS.length, 4)
+  assert.equal(MAHA_CARP_DIGITAL_OFFERS.length, 7)
   for (const [offeringRef, amount, x402] of expected) {
     const offer = MAHA_CARP_DIGITAL_OFFERS.find((candidate) => candidate.offeringRef === offeringRef)
     assert.ok(offer)
@@ -185,7 +191,7 @@ test('each digital offeringRef is independently discoverable without widening to
   }
 })
 
-test('the research-intake preview is discoverable but cannot issue payment instructions', () => {
+test('the research-intake offer returns its exact payment instructions', () => {
   const response = handleCarpSellerRequest({
     jsonrpc: '2.0',
     id: 'research-intake-preview-purchase',
@@ -199,10 +205,12 @@ test('the research-intake preview is discoverable but cannot issue payment instr
       delivery: { mode: 'digital' },
     },
   })
-  assert.ok('error' in response)
-  assert.equal(response.error.code, -32012)
-  assert.match(response.error.message, /not[_ ]payable/i)
-  assert.equal(JSON.stringify(response).includes('paymentInstructions'), false)
+  assert.ok('result' in response)
+  const result = (response as { result: { status: string; paymentInstructions: { amount: string; amountBaseUnits: string; resource: string } } }).result
+  assert.equal(result.status, 'PAYMENT_REQUIRED')
+  assert.equal(result.paymentInstructions.amount, '1.00')
+  assert.equal(result.paymentInstructions.amountBaseUnits, '1000000')
+  assert.match(result.paymentInstructions.resource, /\/api\/v1\/research\/intake$/)
 })
 
 test('free-text enquiry matching uses tokens rather than substrings', () => {

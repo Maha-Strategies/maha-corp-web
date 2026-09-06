@@ -2,6 +2,13 @@ import { MAX_AUDIT_CHARS, MPS_ACTIONS, MPS_TAGS, MPS_VERSION } from './mps-audit
 import { MPS_AUDIT_CREDIT_UNIT } from './mps-credits.ts'
 import { AGENTIC_COMMERCE_API_URL } from './agentic-commerce.ts'
 import {
+  CONTEXT_BUDGET_LADDER_DISCOVERY,
+  EVIDENCE_RETENTION_MATRIX_DISCOVERY,
+  GOVERNED_CONTEXT_VERIFICATION_DISCOVERY,
+} from './x402/context-product-offer-schemas.ts'
+import { RESEARCH_INTAKE_EVIDENCE_PACK_DISCOVERY } from './x402/offer-schemas.ts'
+import { X402_OFFERS } from './x402/offers.ts'
+import {
   COMPATIBILITY_PACK_CONTRACT,
   COMPATIBILITY_PACK_OUTPUT_SCHEMA,
 } from './agent-infrastructure-compatibility-pack.ts'
@@ -234,7 +241,7 @@ export const openApiDocument = {
       get: {
         tags: ['Maha SDK'], operationId: 'getX402OfferDeclaration', summary: 'Fetch the complete discovery declaration for an x402 offer', security: [{}],
         description: 'Public, unauthenticated and free. The PAYMENT-REQUIRED challenge carries a complete-but-compact declaration so that a conforming x402 v2 client, which echoes the declaration back inside PAYMENT-SIGNATURE, stays under the 16 KB request-header ceiling. This route serves the uncompacted input and output schemas and examples that had to be left out, and is the form a catalog should index. Returns the offer status and, when an offer is not payable in Production, the gates it is waiting on.',
-        parameters: [{ name: 'offerId', in: 'path', required: true, schema: { type: 'string', enum: ['context-compression', 'deep-context-evaluation', 'mps-autonomous-audit'] } }],
+        parameters: [{ name: 'offerId', in: 'path', required: true, schema: { type: 'string', enum: X402_OFFERS.map((offer) => offer.id) } }],
         responses: { '200': { description: 'Complete offer declaration.', content: { 'application/json': { schema: { type: 'object', required: ['offerId', 'resource', 'payment', 'status', 'contract'], properties: { offerId: { type: 'string' }, metadataVersion: { type: 'string' }, declarationUrl: { type: 'string', format: 'uri' }, resource: { type: 'object' }, description: { type: 'string' }, payment: { type: 'object' }, status: { type: 'string', enum: ['available', 'preview', 'withheld'] }, availability: { type: 'object' }, maxRequestBytes: { type: 'integer' }, capabilityBoundaries: { type: 'array', items: { type: 'string' } }, retention: { type: 'object' }, contract: { type: 'object' } } } } } }, '404': errorResponse('No such x402 offer.') },
       },
     },
@@ -251,6 +258,52 @@ export const openApiDocument = {
         description: 'Deep Context Evaluation. Compiles 1-8 documents into a token-budgeted context pack, then reports whether each of 1-32 caller-supplied evidence spans survived selection verbatim. Available with a Maha API key or an autonomous $0.01 USDC payment over x402 v2 on Base Mainnet. The retention figure is exact span matching and nothing else: it is not factual accuracy, answer quality, verification, or hallucination prevention, and a retained span means the text was present, not that the text is true. Source text, compiled context and evidence spans are all transient; only hashes and counts are retained.', security: [{ credential: [] }, {}],
         requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['clientRequestId', 'task', 'tokenBudget', 'documents', 'requiredEvidence'], properties: { clientRequestId: { type: 'string', minLength: 8, maxLength: 120 }, task: { type: 'string', minLength: 8, maxLength: 1200 }, tokenBudget: { type: 'integer', minimum: 64, maximum: 16000 }, documents: { type: 'array', minItems: 1, maxItems: 8, items: { type: 'object', required: ['id', 'text'], properties: { id: { type: 'string' }, title: { type: 'string' }, text: { type: 'string' } } } }, requiredEvidence: { type: 'array', minItems: 1, maxItems: 32, description: 'Spans the compiled pack must retain. Each must be an exact substring of its declared source document.', items: { type: 'object', required: ['evidenceId', 'sourceId', 'text'], properties: { evidenceId: { type: 'string' }, sourceId: { type: 'string' }, text: { type: 'string', minLength: 3, maxLength: 4000 } } } } } } } } },
         responses: { '201': { description: 'Compiled context pack with per-span retention.', content: { 'application/json': { schema: { type: 'object', required: ['evaluationId', 'contextPack', 'evidence', 'metrics', 'inputHash', 'outputHash', 'warningCodes', 'retentionBoundaries'], properties: { evaluationId: { type: 'string' }, offerId: { const: 'deep-context-evaluation' }, contextPack: { type: 'object' }, evidence: { type: 'array', items: { type: 'object', properties: { evidenceId: { type: 'string' }, sourceId: { type: 'string' }, evidenceHash: { type: 'string' }, status: { type: 'string', enum: ['retained', 'omitted'] } } } }, metrics: { type: 'object', properties: { requiredEvidenceCount: { type: 'integer' }, retainedEvidenceCount: { type: 'integer' }, requiredEvidenceRetentionPercent: { type: 'number', description: 'Exact span retention rate. Not factual accuracy, answer quality, verification, or hallucination prevention.' } } }, inputHash: { type: 'string' }, outputHash: { type: 'string' }, warnings: { type: 'array', items: { type: 'string' } }, warningCodes: { type: 'array', items: { type: 'string' } }, retentionBoundaries: { type: 'object' }, sourceTextStored: { const: false }, compiledContextStored: { const: false }, requiredEvidenceTextStored: { const: false } } } } } }, '400': errorResponse('Invalid evaluation request.'), '401': errorResponse('Missing or invalid API key.'), '402': { description: 'API-key credits are depleted, or an unauthenticated caller must answer the x402 v2 payment challenge for 10000 USDC base units.', headers: { 'PAYMENT-REQUIRED': { description: 'Base64-encoded x402 v2 PaymentRequired object.', schema: { type: 'string' } } }, content: { 'application/json': { schema: { type: 'object' } } } }, '413': errorResponse('Evaluation input exceeds 1,050,000 bytes.'), '415': errorResponse('Content-Type must be application/json.') },
+      },
+    },
+    '/api/v1/context/budget-ladder': {
+      post: {
+        tags: ['Maha SDK'], operationId: 'createContextBudgetLadder', summary: 'Compile the same supplied material at five ascending context budgets', security: [{}],
+        description: 'A deterministic five-run bundle priced at 0.005 USDC over x402 v2 on Base. It performs no model inference, source acquisition, or factual verification and stores neither source text nor compiled context.',
+        requestBody: { required: true, content: { 'application/json': { schema: CONTEXT_BUDGET_LADDER_DISCOVERY.inputSchema } } },
+        responses: { '201': { description: 'Five context packs and their budget comparison.', content: { 'application/json': { schema: CONTEXT_BUDGET_LADDER_DISCOVERY.outputSchema } } }, '400': errorResponse('Invalid ladder request.'), '402': errorResponse('The x402 payment challenge for 5000 USDC base units.'), '413': errorResponse('Request exceeds the published byte limit.'), '415': errorResponse('Content-Type must be application/json.') },
+      },
+    },
+    '/api/v1/context/evidence-matrix': {
+      post: {
+        tags: ['Maha SDK'], operationId: 'createEvidenceRetentionMatrix', summary: 'Measure exact-span retention at five ascending context budgets', security: [{}],
+        description: 'A deterministic five-run exact-span retention bundle priced at 0.05 USDC over x402 v2 on Base. Retention is not factual accuracy, answer quality, certification, or hallucination prevention.',
+        requestBody: { required: true, content: { 'application/json': { schema: EVIDENCE_RETENTION_MATRIX_DISCOVERY.inputSchema } } },
+        responses: { '201': { description: 'Five evaluations and a required-evidence retention frontier.', content: { 'application/json': { schema: EVIDENCE_RETENTION_MATRIX_DISCOVERY.outputSchema } } }, '400': errorResponse('Invalid matrix request.'), '402': errorResponse('The x402 payment challenge for 50000 USDC base units.'), '413': errorResponse('Request exceeds the published byte limit.'), '415': errorResponse('Content-Type must be application/json.') },
+      },
+    },
+    '/api/v1/context/governed-verification': {
+      post: {
+        tags: ['Maha SDK'], operationId: 'createGovernedContextVerificationPack', summary: 'Create a bounded context-control evidence packet', security: [{}],
+        description: 'A machine-generated policy, budget, integrity and receipt packet priced at 0.50 USDC over x402 v2 on Base. It does not certify facts, compliance, completeness, or downstream model behavior.',
+        requestBody: { required: true, content: { 'application/json': { schema: GOVERNED_CONTEXT_VERIFICATION_DISCOVERY.inputSchema } } },
+        responses: { '201': { description: 'Governed context verification packet.', content: { 'application/json': { schema: GOVERNED_CONTEXT_VERIFICATION_DISCOVERY.outputSchema } } }, '400': errorResponse('Invalid governed-context request.'), '402': errorResponse('The x402 payment challenge for 500000 USDC base units.'), '413': errorResponse('Request exceeds the published byte limit.'), '415': errorResponse('Content-Type must be application/json.') },
+      },
+    },
+    '/api/v1/research/intake': {
+      post: {
+        tags: ['MPS Audit'], operationId: 'createResearchIntakeEvidencePack', summary: 'Audit up to ten supplied source sections into a research intake evidence packet', security: [{}],
+        description: 'A 1.00 USDC machine-generated intake packet for public or synthetic, non-sensitive sections. The caller must expressly authorize transmission of submitted sections to Anthropic. This is not a research brief and includes no new research, source acquisition, factual certification, recommendation, or human judgment. Each completed section is checkpointed; recovery retries only incomplete sections.',
+        requestBody: { required: true, content: { 'application/json': { schema: RESEARCH_INTAKE_EVIDENCE_PACK_DISCOVERY.inputSchema } } },
+        responses: { '201': { description: 'Completed pack; the retrieval token is returned once.', content: { 'application/json': { schema: RESEARCH_INTAKE_EVIDENCE_PACK_DISCOVERY.outputSchema } } }, '202': errorResponse('The pack remains recoverable without another payment.'), '400': errorResponse('Invalid intake request.'), '402': errorResponse('The x402 payment challenge for 1000000 USDC base units.'), '409': errorResponse('The idempotency identity conflicts with another input.'), '413': errorResponse('Request exceeds the 64 KB limit.'), '415': errorResponse('Content-Type must be application/json.'), '502': errorResponse('One or more section audits did not complete; use the retrieval path to retry only incomplete sections.'), '503': errorResponse('The durable intake ledger is unavailable; no model call was made.') },
+      },
+    },
+    '/api/v1/research/intake/{packId}': {
+      get: {
+        tags: ['MPS Audit'], operationId: 'getResearchIntakeEvidencePack', summary: 'Retrieve an intake pack already paid for', security: [{}],
+        parameters: [{ name: 'packId', in: 'path', required: true, schema: { type: 'string', pattern: '^intake_[a-f0-9]{32}$' } }],
+        responses: { '200': { description: 'Current pack state.', content: { 'application/json': { schema: { type: 'object' } } } }, '404': errorResponse('No pack matches that ID and bearer token.'), '503': errorResponse('The intake ledger could not be read.') },
+      },
+      post: {
+        tags: ['MPS Audit'], operationId: 'resumeResearchIntakeEvidencePack', summary: 'Retry only incomplete sections of a paid intake pack', security: [{}],
+        description: 'The complete original request must be resubmitted because source sections are not retained. Its digest must match. Completed section audits are never rerun merely because a sibling failed.',
+        parameters: [{ name: 'packId', in: 'path', required: true, schema: { type: 'string', pattern: '^intake_[a-f0-9]{32}$' } }],
+        requestBody: { required: true, content: { 'application/json': { schema: RESEARCH_INTAKE_EVIDENCE_PACK_DISCOVERY.inputSchema } } },
+        responses: { '200': { description: 'Completed pack.', content: { 'application/json': { schema: { type: 'object' } } } }, '202': errorResponse('The pack is still processing.'), '404': errorResponse('No pack matches that ID and bearer token.'), '409': errorResponse('The request digest differs or retry allowance is exhausted.'), '502': errorResponse('At least one incomplete section failed again.'), '503': errorResponse('The intake ledger is unavailable.') },
       },
     },
     '/api/v1/mps/audit': {

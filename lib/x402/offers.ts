@@ -24,6 +24,11 @@ import {
   MPS_AUTONOMOUS_AUDIT_DISCOVERY,
   RESEARCH_INTAKE_EVIDENCE_PACK_DISCOVERY,
 } from './offer-schemas.ts'
+import {
+  CONTEXT_BUDGET_LADDER_DISCOVERY,
+  EVIDENCE_RETENTION_MATRIX_DISCOVERY,
+  GOVERNED_CONTEXT_VERIFICATION_DISCOVERY,
+} from './context-product-offer-schemas.ts'
 
 export const USDC_DECIMALS = 6
 
@@ -272,6 +277,36 @@ export const MPS_AUTONOMOUS_AUDIT_OFFER: X402Offer = {
   discovery: MPS_AUTONOMOUS_AUDIT_DISCOVERY,
 }
 
+export const CONTEXT_BUDGET_LADDER_OFFER: X402Offer = {
+  id: 'context-budget-ladder', method: 'POST', path: '/api/v1/context/budget-ladder', amount: '5000',
+  description: 'Compile the same supplied documents at exactly five ascending token budgets. Returns five source-linked extractive Context Packs, a compact comparison table, stable hashes, and a deterministic receipt digest. Price basis: five $0.001 compilations. No model inference, source acquisition, claim verification, completeness guarantee, or answer-quality assessment. Request and result bodies are not stored.',
+  concurrencyCap: 3, serviceName: 'Maha Context Budget Ladder', tags: ['ai', 'context', 'budget', 'provenance', 'x402'],
+  status: 'available', availability: { payableInProduction: true, blockedBy: [] }, requiresIdempotency: false, maxRequestBytes: 450_000,
+  capabilityBoundaries: ['Exactly five deterministic compilations at caller-declared budgets.', 'Extractive selection only; no claim verification, model inference, completeness guarantee, or answer-quality assessment.'],
+  retention: { fullSourceTextStored: false, verbatimExcerptsRetained: false, retainedFields: ['offer usage status and aggregate counts'], note: 'Request and response bodies are returned transiently and are not stored.' },
+  discovery: CONTEXT_BUDGET_LADDER_DISCOVERY,
+}
+
+export const EVIDENCE_RETENTION_MATRIX_OFFER: X402Offer = {
+  id: 'evidence-retention-matrix', method: 'POST', path: '/api/v1/context/evidence-matrix', amount: '50000',
+  description: 'Evaluate exact retention of 1-32 caller-labelled evidence spans at exactly five ascending token budgets. Returns five source-linked Context Packs, per-run retention metrics, an evidence frontier, stable hashes, and a deterministic receipt digest. Price basis: five $0.01 evaluations. Retention is not truth, accuracy, answer quality, legal compliance, or hallucination prevention. Bodies are not stored.',
+  concurrencyCap: 2, serviceName: 'Maha Evidence Retention Matrix', tags: ['ai', 'context', 'evidence-retention', 'budget', 'x402'],
+  status: 'available', availability: { payableInProduction: true, blockedBy: [] }, requiresIdempotency: false, maxRequestBytes: 1_050_000,
+  capabilityBoundaries: ['Exactly five deterministic exact-span retention evaluations.', 'Retention is not truth, accuracy, answer quality, legal compliance, or hallucination prevention.'],
+  retention: { fullSourceTextStored: false, verbatimExcerptsRetained: false, retainedFields: ['offer usage status and aggregate counts'], note: 'Documents, evidence spans, compiled packs, and response bodies are not stored.' },
+  discovery: EVIDENCE_RETENTION_MATRIX_DISCOVERY,
+}
+
+export const GOVERNED_CONTEXT_VERIFICATION_OFFER: X402Offer = {
+  id: 'governed-context-verification-pack', method: 'POST', path: '/api/v1/context/governed-verification', amount: '500000',
+  description: 'Produce one machine-readable context-control evidence packet from caller-supplied documents and exact evidence spans: compiled Context Pack, retention results, policy and budget observations, integrity hashes, boundaries, and deterministic receipt digest. A machine-generated preflight, not factual or compliance certification, new research, human judgment, or proof of downstream model behavior. Bodies are not stored.',
+  concurrencyCap: 2, serviceName: 'Maha Governed Context Verification Pack', tags: ['ai', 'context-control', 'evidence', 'governance', 'x402'],
+  status: 'available', availability: { payableInProduction: true, blockedBy: [] }, requiresIdempotency: false, maxRequestBytes: 1_050_000,
+  capabilityBoundaries: ['Machine-generated context-control evidence packet, not factual or compliance certification.', 'No source acquisition, new research, human judgment, model inference, or guarantee of downstream behavior.'],
+  retention: { fullSourceTextStored: false, verbatimExcerptsRetained: false, retainedFields: ['offer usage status and aggregate counts'], note: 'Documents, evidence spans, compiled packs, and response bodies are not stored.' },
+  discovery: GOVERNED_CONTEXT_VERIFICATION_DISCOVERY,
+}
+
 export const RESEARCH_INTAKE_EVIDENCE_PACK_OFFER: X402Offer = {
   id: 'research-intake-evidence-pack',
   method: 'POST',
@@ -284,17 +319,8 @@ export const RESEARCH_INTAKE_EVIDENCE_PACK_OFFER: X402Offer = {
   concurrencyCap: 1,
   serviceName: 'Maha Research Intake',
   tags: ['research-intake', 'provenance', 'claim-triage', 'evidence', 'research-scoping'],
-  status: 'preview',
-  availability: {
-    payableInProduction: false,
-    blockedBy: [
-      'The computed conservative contribution margin must remain at or above 30 percent.',
-      'Recovery must persist completed section audits independently and retry only failed or missing sections.',
-      'The durable research-intake job migration must be applied and verified in Preview.',
-      'The endpoint must pass a non-paying Preview delivery and recovery exercise before Production enablement.',
-      'Production X402_RESOURCES must explicitly enable the exact $1 contract after separate deployment authorization.',
-    ],
-  },
+  status: 'available',
+  availability: { payableInProduction: true, blockedBy: [] },
   requiresIdempotency: true,
   maxRequestBytes: 65_536,
   capabilityBoundaries: [
@@ -319,8 +345,11 @@ export const RESEARCH_INTAKE_EVIDENCE_PACK_OFFER: X402Offer = {
 
 export const X402_OFFERS: readonly X402Offer[] = Object.freeze([
   CONTEXT_COMPRESSION_OFFER,
+  CONTEXT_BUDGET_LADDER_OFFER,
   DEEP_CONTEXT_EVALUATION_OFFER,
+  EVIDENCE_RETENTION_MATRIX_OFFER,
   MPS_AUTONOMOUS_AUDIT_OFFER,
+  GOVERNED_CONTEXT_VERIFICATION_OFFER,
   RESEARCH_INTAKE_EVIDENCE_PACK_OFFER,
 ])
 

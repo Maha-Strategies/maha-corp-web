@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "configurationAsOf": "2026-09-05",
+  "configurationAsOf": "2026-09-06",
   "provider": {
     "name": "Maha Strategies LLC",
     "url": "https://www.mahastrategies.com"
@@ -58,6 +58,45 @@
       ]
     },
     {
+      "id": "context-budget-ladder",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/context/budget-ladder",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "5000",
+        "displayAmount": "0.005000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/context-budget-ladder#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/context-budget-ladder#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:1f43bbb7299d8224336110629470a6558bf3e62c63bbb9f1724720d0197fd923",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 450000,
+        "concurrencyCap": 3,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "Request and response bodies are returned transiently and are not stored."
+      },
+      "capabilityBoundaries": [
+        "Exactly five deterministic compilations at caller-declared budgets.",
+        "Extractive selection only; no claim verification, model inference, completeness guarantee, or answer-quality assessment."
+      ]
+    },
+    {
       "id": "deep-context-evaluation",
       "status": "active",
       "canonicalResource": "https://www.mahastrategies.com/api/v1/compress/evaluate",
@@ -96,6 +135,45 @@
         "Not factual accuracy, answer quality, verification, or hallucination prevention.",
         "A retained span means the text survived selection, not that the text is true.",
         "Extractive and budget-bound: spans that exceed the token budget are dropped and reported."
+      ]
+    },
+    {
+      "id": "evidence-retention-matrix",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/context/evidence-matrix",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "50000",
+        "displayAmount": "0.050000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/evidence-retention-matrix#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/evidence-retention-matrix#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:f3f7c1b16035b175c1108ed41d1816fa0e9090390ea64be4b1443b253cd1764e",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 1050000,
+        "concurrencyCap": 2,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "Documents, evidence spans, compiled packs, and response bodies are not stored."
+      },
+      "capabilityBoundaries": [
+        "Exactly five deterministic exact-span retention evaluations.",
+        "Retention is not truth, accuracy, answer quality, legal compliance, or hallucination prevention."
       ]
     },
     {
@@ -140,11 +218,59 @@
       ]
     },
     {
+      "id": "governed-context-verification-pack",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/context/governed-verification",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "500000",
+        "displayAmount": "0.500000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/governed-context-verification-pack#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/governed-context-verification-pack#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:80082ba44493447625adac5bd0618a809172220aba273b9c4a29af2d339e0af3",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 1050000,
+        "concurrencyCap": 2,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "Documents, evidence spans, compiled packs, and response bodies are not stored."
+      },
+      "capabilityBoundaries": [
+        "Machine-generated context-control evidence packet, not factual or compliance certification.",
+        "No source acquisition, new research, human judgment, model inference, or guarantee of downstream behavior."
+      ]
+    },
+    {
       "id": "research-intake-evidence-pack",
-      "status": "evaluation-only",
+      "status": "active",
       "canonicalResource": "https://www.mahastrategies.com/api/v1/research/intake",
       "method": "POST",
-      "payment": null,
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "1000000",
+        "displayAmount": "1.000000 USDC"
+      },
       "schemas": {
         "input": "https://www.mahastrategies.com/api/discovery/x402-offers/research-intake-evidence-pack#input",
         "output": "https://www.mahastrategies.com/api/discovery/x402-offers/research-intake-evidence-pack#output"

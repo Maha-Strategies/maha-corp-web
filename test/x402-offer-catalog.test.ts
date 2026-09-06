@@ -42,6 +42,14 @@ test('each offer is published at exactly its intended price', () => {
   assert.equal(CONTEXT_COMPRESSION_OFFER.amount, '1000')
   assert.equal(DEEP_CONTEXT_EVALUATION_OFFER.amount, '10000')
   assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.amount, '100000')
+  const ladder = X402_OFFERS.find((offer) => offer.id === 'context-budget-ladder')
+  const matrix = X402_OFFERS.find((offer) => offer.id === 'evidence-retention-matrix')
+  const governed = X402_OFFERS.find((offer) => offer.id === 'governed-context-verification-pack')
+  const intake = X402_OFFERS.find((offer) => offer.id === 'research-intake-evidence-pack')
+  assert.equal(ladder?.amount, '5000')
+  assert.equal(matrix?.amount, '50000')
+  assert.equal(governed?.amount, '500000')
+  assert.equal(intake?.amount, '1000000')
 
   // And the runtime charges those amounts, not merely publishes them.
   assert.equal(priceFor('POST', '/api/v1/compress', config())?.amount, '1000')

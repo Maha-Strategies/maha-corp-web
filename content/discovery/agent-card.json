@@ -38,6 +38,15 @@
       "payableNow": true
     },
     {
+      "id": "context-budget-ladder",
+      "status": "available_for_autonomous_payment",
+      "endpoint": "https://www.mahastrategies.com/api/v1/context/budget-ladder",
+      "provides": "five deterministic source-linked Context Packs at five ascending token budgets",
+      "payment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "amount": "5000", "assetSymbol": "USDC", "autonomous": true },
+      "payableNow": true,
+      "retention": "Request and response bodies are not stored."
+    },
+    {
       "id": "deep-context-evaluation",
       "status": "available_with_api_key_or_x402",
       "endpoint": "https://www.mahastrategies.com/api/v1/compress/evaluate",
@@ -59,6 +68,15 @@
       "payableNow": true
     },
     {
+      "id": "evidence-retention-matrix",
+      "status": "available_for_autonomous_payment",
+      "endpoint": "https://www.mahastrategies.com/api/v1/context/evidence-matrix",
+      "provides": "five exact-span evidence-retention evaluations and a budget frontier",
+      "payment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "amount": "50000", "assetSymbol": "USDC", "autonomous": true },
+      "payableNow": true,
+      "retention": "Documents, evidence spans, compiled packs, and response bodies are not stored."
+    },
+    {
       "id": "mps-autonomous-audit",
       "status": "available_for_autonomous_payment",
       "endpoint": "https://www.mahastrategies.com/api/v1/mps/audit",
@@ -69,7 +87,6 @@
         "legal advice",
         "human verification"
       ],
-      "sourceHandling": "Only public or synthetic, non-sensitive source sections are accepted. The request must explicitly authorize transmission of those sections to Anthropic for processing.",
       "payment": {
         "protocol": "x402",
         "version": 2,
@@ -83,8 +100,17 @@
       "retention": "The complete submitted passage is not retained. Results retain short verbatim claim excerpts, classifications, rationales, hashes, and operational metadata."
     },
     {
+      "id": "governed-context-verification-pack",
+      "status": "available_for_autonomous_payment",
+      "endpoint": "https://www.mahastrategies.com/api/v1/context/governed-verification",
+      "provides": "a machine-readable context-control evidence packet with policy, budget, integrity, and receipt fields",
+      "payment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "amount": "500000", "assetSymbol": "USDC", "autonomous": true },
+      "payableNow": true,
+      "retention": "Documents, evidence spans, compiled packs, and response bodies are not stored."
+    },
+    {
       "id": "research-intake-evidence-pack",
-      "status": "preview_not_payable",
+      "status": "available_for_autonomous_payment",
       "endpoint": "https://www.mahastrategies.com/api/v1/research/intake",
       "retrievalEndpoint": "https://www.mahastrategies.com/api/v1/research/intake/{packId}",
       "provides": "machine-generated research intake evidence packet for one question and up to ten supplied source sections",
@@ -95,16 +121,17 @@
         "human judgment",
         "recommendation"
       ],
+      "sourceHandling": "Only public or synthetic, non-sensitive source sections are accepted. The request must explicitly authorize transmission of those sections to Anthropic for processing.",
       "payment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
         "amount": "1000000",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "note": "Preview contract only. Not payable in Production until the published readiness gates pass."
+        "autonomous": true,
+        "note": "Payable autonomously over x402 v2 on Base Mainnet. Completed section audits are checkpointed and never rerun when a sibling section fails."
       },
-      "payableNow": false,
+      "payableNow": true,
       "retention": "Complete supplied sections are transmitted to Anthropic for processing but are not retained by Maha. Results retain the question, supplied source and section identifiers, optional intake metadata, short verbatim claim excerpts, classifications, digests, and operational metadata."
     },
     {
@@ -126,12 +153,12 @@
   ],
   "terms": {
     "bindingCommitment": false,
-    "payment": "Context Compression, Deep Context Evaluation and the Autonomous MPS Audit are payable autonomously on Base Mainnet. A live PAYMENT-REQUIRED challenge is the only proof an offer can be bought. The GPU optimization routes are not x402 products. A human purchaser must authorize Stripe Checkout; research and enterprise work require human scope review.",
+    "payment": "Seven bounded machine products are payable autonomously on Base Mainnet. A live PAYMENT-REQUIRED challenge is the only proof an offer can be bought. The GPU optimization routes are not x402 products. A human purchaser must authorize Stripe Checkout; custom research and enterprise work require human scope review.",
     "sensitiveData": "Do not submit confidential, regulated, or sensitive personal information."
   },
   "review": {
     "mode": "deterministic_qualification_then_human_scope_review",
     "responseTargetBusinessDays": 2
   },
-  "payment": "Context Compression, Deep Context Evaluation and the Autonomous MPS Audit are payable autonomously on Base Mainnet. A live PAYMENT-REQUIRED challenge is the only proof an offer can be bought. The GPU optimization routes are not x402 products. A human purchaser must authorize Stripe Checkout; research and enterprise work require human scope review."
+  "payment": "Seven bounded machine products are payable autonomously on Base Mainnet. A live PAYMENT-REQUIRED challenge is the only proof an offer can be bought. The GPU optimization routes are not x402 products. A human purchaser must authorize Stripe Checkout; custom research and enterprise work require human scope review."
 }

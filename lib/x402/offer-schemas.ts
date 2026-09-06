@@ -58,7 +58,7 @@ const EVIDENCE_ID_PATTERN = '^[A-Za-z0-9][A-Za-z0-9._:-]{0,79}$'
  * copies would drift the first time a metric is added, and the drift would
  * only surface as a Bazaar example that fails validation on one offer.
  */
-function contextPackSchema(): JsonSchema {
+export function contextPackSchema(): JsonSchema {
   return {
     type: 'object',
     additionalProperties: false,
@@ -82,7 +82,7 @@ function contextPackSchema(): JsonSchema {
   }
 }
 
-function compilationMetricsSchema(): JsonSchema {
+export function compilationMetricsSchema(): JsonSchema {
   return {
     type: 'object',
     additionalProperties: false,
@@ -165,7 +165,7 @@ function retentionBoundariesSchema(): JsonSchema {
 }
 
 /** The document array both compression offers accept. */
-function documentsSchema(): JsonSchema {
+export function documentsSchema(): JsonSchema {
   return {
     type: 'array',
     minItems: 1,
@@ -184,7 +184,7 @@ function documentsSchema(): JsonSchema {
   }
 }
 
-function compilationInputProperties(): Record<string, JsonSchema> {
+export function compilationInputProperties(): Record<string, JsonSchema> {
   return {
     clientRequestId: { type: 'string', minLength: 8, maxLength: 120, description: 'Caller trace ID.' },
     task: { type: 'string', minLength: 8, maxLength: 1200, description: 'Task used to rank passages.' },
@@ -298,7 +298,7 @@ import {
   RESEARCH_INTAKE_EXAMPLE_OUTPUT,
 } from './offer-examples.ts'
 
-function evidenceSchema(): JsonSchema {
+export function evidenceSchema(): JsonSchema {
   return {
     type: 'array',
     minItems: 1,

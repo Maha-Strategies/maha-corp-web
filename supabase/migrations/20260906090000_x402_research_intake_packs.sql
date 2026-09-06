@@ -131,6 +131,48 @@ $$;
 revoke all on function public.claim_x402_research_intake_section(text, integer, integer) from public, anon, authenticated;
 grant execute on function public.claim_x402_research_intake_section(text, integer, integer) to service_role;
 
+-- Atomically claims every unfinished section in one pack. Row locking means
+-- concurrent recovery requests cannot each acquire a different subset and
+-- accidentally run overlapping model calls. Completed siblings are excluded
+-- from the update and remain immutable.
+create or replace function public.claim_x402_research_intake_sections(
+  p_pack_public_id text,
+  p_max_attempts integer default 3
+) returns integer language plpgsql security definer set search_path = public, extensions as $$
+declare
+  v_unfinished integer;
+  v_ineligible integer;
+  v_claimed integer;
+begin
+  perform 1 from public.x402_research_intake_section_audits
+    where pack_public_id = p_pack_public_id
+    order by section_order
+    for update;
+
+  select count(*) into v_unfinished
+    from public.x402_research_intake_section_audits
+    where pack_public_id = p_pack_public_id and status <> 'completed';
+  if v_unfinished = 0 then return 0; end if;
+
+  select count(*) into v_ineligible
+    from public.x402_research_intake_section_audits
+    where pack_public_id = p_pack_public_id and status <> 'completed'
+      and (attempt_count >= least(p_max_attempts, 3)
+        or (status = 'processing' and updated_at >= now() - interval '5 minutes'));
+  if v_ineligible > 0 then return -1; end if;
+
+  update public.x402_research_intake_section_audits
+    set attempt_count = attempt_count + 1,
+        status = 'processing', failure_code = null, updated_at = now()
+    where pack_public_id = p_pack_public_id and status <> 'completed';
+  get diagnostics v_claimed = row_count;
+  return v_claimed;
+end;
+$$;
+
+revoke all on function public.claim_x402_research_intake_sections(text, integer) from public, anon, authenticated;
+grant execute on function public.claim_x402_research_intake_sections(text, integer) to service_role;
+
 create or replace function public.protect_completed_x402_research_intake_section()
 returns trigger language plpgsql set search_path = public, extensions as $$
 begin

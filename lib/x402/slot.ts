@@ -81,6 +81,10 @@ export const SLOT_RELEASING_ROUTES = [
   // boundary, so a leaked slot is held for the length of a model call rather
   // than a few milliseconds, against a cap of 2.
   'POST /api/v1/mps/audit',
+  'POST /api/v1/context/budget-ladder',
+  'POST /api/v1/context/evidence-matrix',
+  'POST /api/v1/context/governed-verification',
+  'POST /api/v1/research/intake',
 ] as const
 
 /**

@@ -155,8 +155,11 @@ test('public agent discovery identifies live capabilities and the scoped Context
   )
   const expected = [
     'context-compression',
+    'context-budget-ladder',
     'deep-context-evaluation',
+    'evidence-retention-matrix',
     'mps-autonomous-audit',
+    'governed-context-verification-pack',
     'research-intake-evidence-pack',
     // gpu-qubo-ising is deliberately absent: the standalone reference engine is
     // beta and undiscoverable until its vectorized candidate has passing A10G
@@ -197,8 +200,8 @@ test('public agent discovery identifies live capabilities and the scoped Context
   })
   const intakeOffer = offers.technicalCapabilities.find((capability) => capability.id === 'research-intake-evidence-pack')
   const intakeCard = card.capabilities.find((capability) => capability.id === 'research-intake-evidence-pack')
-  assert.equal(intakeOffer?.status, 'preview_not_payable')
-  assert.equal(intakeCard?.status, 'preview_not_payable')
+  assert.equal(intakeOffer?.status, 'available_for_autonomous_payment')
+  assert.equal(intakeCard?.status, 'available_for_autonomous_payment')
   assert.equal(intakeOffer?.machinePayment?.amount, '1000000')
   assert.equal(intakeOffer?.machinePayment?.displayAmount, '1.00 USDC')
 })

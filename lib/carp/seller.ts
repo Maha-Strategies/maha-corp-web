@@ -3,8 +3,11 @@ import { createHash } from 'node:crypto'
 import { BASE_USDC, MAHA_PAYEE } from '../x402/discovery-payment-recipe.ts'
 import {
   BASE_MAINNET_CAIP2,
+  CONTEXT_BUDGET_LADDER_OFFER,
   CONTEXT_COMPRESSION_OFFER,
   DEEP_CONTEXT_EVALUATION_OFFER,
+  EVIDENCE_RETENTION_MATRIX_OFFER,
+  GOVERNED_CONTEXT_VERIFICATION_OFFER,
   MPS_AUTONOMOUS_AUDIT_OFFER,
   RESEARCH_INTAKE_EVIDENCE_PACK_OFFER,
   USDC_DECIMALS,
@@ -30,6 +33,15 @@ const DIGITAL_OFFER_SPECS = Object.freeze([
     termsUrl: `${SITE_URL}/context-compiler`,
   },
   {
+    offeringRef: 'maha:context-budget-ladder:v1',
+    title: 'Context Budget Ladder',
+    amount: '0.005',
+    offer: CONTEXT_BUDGET_LADDER_OFFER,
+    estimatedSeconds: 30,
+    deliveryDeadlineSeconds: 90,
+    termsUrl: `${SITE_URL}/pricing`,
+  },
+  {
     offeringRef: 'maha:deep-context-evaluation:v1',
     title: 'Deep Context Evaluation',
     amount: '0.01',
@@ -39,6 +51,15 @@ const DIGITAL_OFFER_SPECS = Object.freeze([
     termsUrl: `${SITE_URL}/deep-context-evaluation`,
   },
   {
+    offeringRef: 'maha:evidence-retention-matrix:v1',
+    title: 'Evidence Retention Matrix',
+    amount: '0.05',
+    offer: EVIDENCE_RETENTION_MATRIX_OFFER,
+    estimatedSeconds: 60,
+    deliveryDeadlineSeconds: 120,
+    termsUrl: `${SITE_URL}/pricing`,
+  },
+  {
     offeringRef: 'maha:mps-autonomous-audit:v1',
     title: 'MPS Automated Claim Triage',
     amount: '0.10',
@@ -46,6 +67,15 @@ const DIGITAL_OFFER_SPECS = Object.freeze([
     estimatedSeconds: 90,
     deliveryDeadlineSeconds: 180,
     termsUrl: `${SITE_URL}/mps`,
+  },
+  {
+    offeringRef: 'maha:governed-context-verification-pack:v1',
+    title: 'Governed Context Verification Pack',
+    amount: '0.50',
+    offer: GOVERNED_CONTEXT_VERIFICATION_OFFER,
+    estimatedSeconds: 60,
+    deliveryDeadlineSeconds: 120,
+    termsUrl: `${SITE_URL}/pricing`,
   },
   {
     offeringRef: 'maha:research-intake-evidence-pack:v1',
