@@ -2,11 +2,11 @@
   "schemaVersion": "maha-federation-property-pages/1.0",
   "siteId": "mayone-maharajan",
   "canonicalHost": "www.mayonemaharajan.com",
-  "registryDigest": "sha256:7ff9243e1e619640969fa4d64d4f519b0a9712239412a538faa4045351234308",
+  "registryDigest": "sha256:0d1055d22f83ada2ab63eabe87cf66e4a12fa6c756b39a6142c1a521a78ce569",
   "status": "local-unreleased",
   "counts": {
-    "pages": 23,
-    "readyForOwnerIntegration": 23,
+    "pages": 28,
+    "readyForOwnerIntegration": 28,
     "blockedOnUnreadyPrerequisite": 0
   },
   "pages": [
@@ -846,6 +846,7 @@
           "paragraphs": [
             "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
             "same-topic-application: https://www.mayonemaharajan.com/concepts/civilizational-memory/relationship",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/civilizational-memory/development",
             "property-home: https://www.mayonemaharajan.com/"
           ]
         }
@@ -878,6 +879,12 @@
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_6165e01368841892cc1214f8"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/development",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_91a359ed79a7cab188963d9b"
         },
         {
           "url": "https://www.mayonemaharajan.com/",
@@ -993,7 +1000,243 @@
         "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
         "packetDigest": "sha256:68013a4472a9f80f6c281fa455de33eb89d8e594479a0210efca7bfef697eaed"
       },
-      "contentDigest": "sha256:4018f5f95e13c69e89df995e5c8e5956f4d03247f62fddec3e2c5ed78ff5b334"
+      "contentDigest": "sha256:a9b97d0e87ec76bdc128e5350e9a94da9e95b210a2806a77321cbbe7d0a74e97"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_91a359ed79a7cab188963d9b",
+      "tranche": 7,
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "path": "/concepts/civilizational-memory/development",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/civilizational-memory/development",
+      "title": "Civilizational Memory — Development",
+      "topic": "civilizational-memory",
+      "routeRole": "development",
+      "concept": {
+        "conceptId": "urn:maha:concept:autonomy:civilizational-memory",
+        "familyId": "autonomy",
+        "canonicalOwner": "mayone-maharajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:autonomy:civilizational-memory"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:autonomy"
+          }
+        ]
+      },
+      "directAnswer": "Civilizational Memory, in this development account, is limited to the following inspected scope. The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Civilizational Memory, in this development account, is limited to the following inspected scope. The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Development account",
+          "kind": "role-method",
+          "paragraphs": [
+            "Trace the concept through dated authorial stages and identify revisions, departures, and unresolved tensions.",
+            "Authorial development is not historical consensus or empirical validation.",
+            "Applied scope: The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayone-maharajan. This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish authorial interpretation, concept genealogy, book relationships. It must not publish authorial thesis presented as consensus or empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "The Borrowed Light — Chapter 5: The Hard Problem in the Mirror; Chapter 6: The Evidence That Needs No Physics and The Custodians. Establishes: The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "This establishes the author’s framework, not a historical lineage, empirical model of memory, cultural authority, priority, or consensus.",
+            "This route must not claim authorial thesis presented as consensus.",
+            "This route must not claim empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/civilizational-memory/definition",
+            "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/civilizational-memory/relationship",
+            "property-home: https://www.mayonemaharajan.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "borrowed-light-civilizational-memory",
+          "title": "The Borrowed Light",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "Chapter 5: The Hard Problem in the Mirror; Chapter 6: The Evidence That Needs No Physics and The Custodians",
+          "establishes": "The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind.",
+          "doesNotEstablish": "This establishes the author’s framework, not a historical lineage, empirical model of memory, cultural authority, priority, or consensus.",
+          "rightsBasis": "Maha-controlled authorial manuscript; bounded paraphrase and locator only. The packet does not redistribute the manuscript.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_4928435919adf88fa11f5275"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_6e5cae25a74731057505dc27",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/relationship",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_6165e01368841892cc1214f8"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Civilizational Memory mean in this bounded context?",
+          "answer": "Civilizational Memory, in this development account, is limited to the following inspected scope. The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this development answer?",
+          "answer": "The Borrowed Light (working authorial manuscript inspected 2026-09-06), at Chapter 5: The Hard Problem in the Mirror; Chapter 6: The Evidence That Needs No Physics and The Custodians, supports the manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "This establishes the author’s framework, not a historical lineage, empirical model of memory, cultural authority, priority, or consensus. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.mayonemaharajan.com/concepts/civilizational-memory/development#article",
+        "headline": "Civilizational Memory — Development",
+        "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/development",
+        "isPartOf": "https://www.mayonemaharajan.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Civilizational Memory mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Civilizational Memory, in this development account, is limited to the following inspected scope. The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this development answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Borrowed Light (working authorial manuscript inspected 2026-09-06), at Chapter 5: The Hard Problem in the Mirror; Chapter 6: The Evidence That Needs No Physics and The Custodians, supports the manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This establishes the author’s framework, not a historical lineage, empirical model of memory, cultural authority, priority, or consensus. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-7",
+        "decisionManifestDigest": "sha256:f88da6da01d6b6b077afda6bca0492a0303f65701cfcd30d620c2d3363fbb5b3",
+        "decisionDigest": "sha256:25e255a128f46e2a133d526561049811f0cb9b872c45a49ea011794806d9dca6",
+        "specificationManifestDigest": "sha256:8a9b4e672a5d1e336d7d483130a134f35dd94db60c41bd915eaa54f53585576e",
+        "specificationDigest": "sha256:2031f39face69a486264062a51aaddf2b805e6237d10ae50b18a0ea5db613eab",
+        "packetManifestDigest": "sha256:433b3a971c498178ba32c2541f67a6bbdc6b8d397ddb23f32201b89593d00245",
+        "packetDigest": "sha256:b97ad85a444699d36d7b9e05f2ebe77d94bfa9aa68f27bfef21dc4d4907f59cf"
+      },
+      "contentDigest": "sha256:11e4cbdac7bf5128f2531d5807723d0a1603aacd8b78e3b6980a184ebdfea6c4"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -1075,6 +1318,7 @@
           "paragraphs": [
             "same-topic-application: https://www.mayonemaharajan.com/concepts/civilizational-memory/definition",
             "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/civilizational-memory/development",
             "property-home: https://www.mayonemaharajan.com/"
           ]
         }
@@ -1107,6 +1351,12 @@
           "relationship": "graphEdges",
           "candidateId": "cand_6e5cae25a74731057505dc27",
           "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/civilizational-memory/development",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_91a359ed79a7cab188963d9b"
         },
         {
           "url": "https://www.mayonemaharajan.com/",
@@ -1222,7 +1472,7 @@
         "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
         "packetDigest": "sha256:68013a4472a9f80f6c281fa455de33eb89d8e594479a0210efca7bfef697eaed"
       },
-      "contentDigest": "sha256:94a8f31b38f99cf77d2fbe766ca93666c133cc7e6619ac64db3ec6e274406c72"
+      "contentDigest": "sha256:aceba324828c477b76a38726aa2a658cf78ebbba38b4892ffeb0a912740921e8"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -3018,6 +3268,256 @@
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_f88363aea71ad19c537111d4",
+      "tranche": 7,
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "path": "/concepts/epistemic-infrastructure/critique",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/critique",
+      "title": "Epistemic Infrastructure — Critique",
+      "topic": "epistemic-infrastructure",
+      "routeRole": "critique",
+      "concept": {
+        "conceptId": "urn:maha:concept:autonomy:epistemic-infrastructure",
+        "familyId": "autonomy",
+        "canonicalOwner": "mayone-maharajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:autonomy:epistemic-infrastructure"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:autonomy"
+          }
+        ]
+      },
+      "directAnswer": "Epistemic Infrastructure, in this Critique, is limited to the following inspected scope. The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Epistemic Infrastructure, in this Critique, is limited to the following inspected scope. The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Critique",
+          "kind": "role-method",
+          "paragraphs": [
+            "Keep the answer within the inspected source scope and make every operational step or conceptual relation explicit.",
+            "Do not use completeness of presentation as a substitute for evidence, review, or release.",
+            "Applied scope: The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayone-maharajan. This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish authorial interpretation, concept genealogy, book relationships. It must not publish authorial thesis presented as consensus or empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "The Maha Principle — The Network and the Feed; Chapter 7 verification framework; Whole-Food Information; Chapter 6 humane governance. Establishes: The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "This is authorial doctrine, not a settled philosophical term, empirical validation, or consensus.",
+            "This route must not claim authorial thesis presented as consensus.",
+            "This route must not claim empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/definition",
+            "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/relationship",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/development",
+            "property-home: https://www.mayonemaharajan.com/",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/limits"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "maha-principle-epistemic",
+          "title": "The Maha Principle",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "The Network and the Feed; Chapter 7 verification framework; Whole-Food Information; Chapter 6 humane governance",
+          "establishes": "The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems.",
+          "doesNotEstablish": "This is authorial doctrine, not a settled philosophical term, empirical validation, or consensus.",
+          "rightsBasis": "Maha-controlled authorial manuscript; section identity and bounded paraphrase only. Authorial claims are not external validation.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_00550cfbe5ae4958c10fcc49"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_6e5cae25a74731057505dc27",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/relationship",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_b90586936a17ca13a038cb62"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/development",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_a3f4072f82d1b2c2b58e733b"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_3b2772d0bd8a73ea4e8f59d5"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Epistemic Infrastructure mean in this bounded context?",
+          "answer": "Epistemic Infrastructure, in this Critique, is limited to the following inspected scope. The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this critique answer?",
+          "answer": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Network and the Feed; Chapter 7 verification framework; Whole-Food Information; Chapter 6 humane governance, supports the author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "This is authorial doctrine, not a settled philosophical term, empirical validation, or consensus. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/critique#article",
+        "headline": "Epistemic Infrastructure — Critique",
+        "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/critique",
+        "isPartOf": "https://www.mayonemaharajan.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Epistemic Infrastructure mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Epistemic Infrastructure, in this Critique, is limited to the following inspected scope. The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this critique answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Network and the Feed; Chapter 7 verification framework; Whole-Food Information; Chapter 6 humane governance, supports the author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This is authorial doctrine, not a settled philosophical term, empirical validation, or consensus. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-7",
+        "decisionManifestDigest": "sha256:f88da6da01d6b6b077afda6bca0492a0303f65701cfcd30d620c2d3363fbb5b3",
+        "decisionDigest": "sha256:cb77cc422225162fe0f2a4bdda20f4b4108013887a83ae69959050c181a9b802",
+        "specificationManifestDigest": "sha256:8a9b4e672a5d1e336d7d483130a134f35dd94db60c41bd915eaa54f53585576e",
+        "specificationDigest": "sha256:49813851f94b177d63b7d5f5d1c7fa0be6b768cd52a895a3fdd926d1ee9859ca",
+        "packetManifestDigest": "sha256:433b3a971c498178ba32c2541f67a6bbdc6b8d397ddb23f32201b89593d00245",
+        "packetDigest": "sha256:c947328198f1b13e7fb4d5703181abedf7096812bd9f0661590dc18c534e74b0"
+      },
+      "contentDigest": "sha256:277415b910779b963a7abdce3bc041b1fc0f1ee33f3de354c69520b7c8215728"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
       "candidateId": "cand_00550cfbe5ae4958c10fcc49",
       "tranche": 3,
       "siteId": "mayone-maharajan",
@@ -3097,7 +3597,9 @@
             "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
             "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/relationship",
             "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/development",
-            "property-home: https://www.mayonemaharajan.com/"
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/limits",
+            "property-home: https://www.mayonemaharajan.com/",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/critique"
           ]
         }
       ],
@@ -3137,10 +3639,22 @@
           "candidateId": "cand_a3f4072f82d1b2c2b58e733b"
         },
         {
+          "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_3b2772d0bd8a73ea4e8f59d5"
+        },
+        {
           "url": "https://www.mayonemaharajan.com/",
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/critique",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_f88363aea71ad19c537111d4"
         }
       ],
       "boundedAnswers": [
@@ -3250,7 +3764,7 @@
         "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
         "packetDigest": "sha256:05efbcda903c3051106dbd4ae2e6d4043d30f67e3106004e13283b43624d3c00"
       },
-      "contentDigest": "sha256:74c22f92137d3c66c1c971003502df779574f4813bb562972e9288b556b43747"
+      "contentDigest": "sha256:6f68a0d4cc2012e7f89d2d42b56722734663817d051cd77ff950cdf9f8df281d"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -3333,7 +3847,9 @@
             "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/definition",
             "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
             "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/relationship",
-            "property-home: https://www.mayonemaharajan.com/"
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/limits",
+            "property-home: https://www.mayonemaharajan.com/",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/critique"
           ]
         }
       ],
@@ -3373,10 +3889,22 @@
           "candidateId": "cand_b90586936a17ca13a038cb62"
         },
         {
+          "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_3b2772d0bd8a73ea4e8f59d5"
+        },
+        {
           "url": "https://www.mayonemaharajan.com/",
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/critique",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_f88363aea71ad19c537111d4"
         }
       ],
       "boundedAnswers": [
@@ -3486,7 +4014,507 @@
         "packetManifestDigest": "sha256:99e2851a8c1660632b051cc797929b748faf9402f853adbd9afe8d027557edfa",
         "packetDigest": "sha256:32e0c65234f7ce0a9f5a87b973b8ff8dad363162ce276dc373a984b245a460dc"
       },
-      "contentDigest": "sha256:008c69fb0cad1fa90380667adfada7754293dc276856ec3494c280340cd31b14"
+      "contentDigest": "sha256:38b64178373afc069f851f2ab0f22be53d4530dead4d12487e664268ea3581b5"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_3b2772d0bd8a73ea4e8f59d5",
+      "tranche": 7,
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "path": "/concepts/epistemic-infrastructure/limits",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/limits",
+      "title": "Epistemic Infrastructure — Limits",
+      "topic": "epistemic-infrastructure",
+      "routeRole": "limits",
+      "concept": {
+        "conceptId": "urn:maha:concept:autonomy:epistemic-infrastructure",
+        "familyId": "autonomy",
+        "canonicalOwner": "mayone-maharajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:autonomy:epistemic-infrastructure"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:autonomy"
+          }
+        ]
+      },
+      "directAnswer": "Epistemic Infrastructure, in this limits guide, is limited to the following inspected scope. The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Epistemic Infrastructure, in this limits guide, is limited to the following inspected scope. The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Limits guide",
+          "kind": "role-method",
+          "paragraphs": [
+            "State the strongest supported boundary first and route time-sensitive decisions to the current authority.",
+            "A limits page must not turn a warning into a weaker version of the unsupported claim.",
+            "Applied scope: The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayone-maharajan. This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish authorial interpretation, concept genealogy, book relationships. It must not publish authorial thesis presented as consensus or empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "The Maha Principle — The Network and the Feed; Chapter 7 verification framework; Whole-Food Information; Chapter 6 humane governance. Establishes: The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "This is authorial doctrine, not a settled philosophical term, empirical validation, or consensus.",
+            "This route must not claim authorial thesis presented as consensus.",
+            "This route must not claim empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/definition",
+            "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/relationship",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/development",
+            "property-home: https://www.mayonemaharajan.com/",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/critique"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "maha-principle-epistemic",
+          "title": "The Maha Principle",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "The Network and the Feed; Chapter 7 verification framework; Whole-Food Information; Chapter 6 humane governance",
+          "establishes": "The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems.",
+          "doesNotEstablish": "This is authorial doctrine, not a settled philosophical term, empirical validation, or consensus.",
+          "rightsBasis": "Maha-controlled authorial manuscript; section identity and bounded paraphrase only. Authorial claims are not external validation.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_00550cfbe5ae4958c10fcc49"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_6e5cae25a74731057505dc27",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/relationship",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_b90586936a17ca13a038cb62"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/development",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_a3f4072f82d1b2c2b58e733b"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/critique",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_f88363aea71ad19c537111d4"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Epistemic Infrastructure mean in this bounded context?",
+          "answer": "Epistemic Infrastructure, in this limits guide, is limited to the following inspected scope. The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this limits answer?",
+          "answer": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Network and the Feed; Chapter 7 verification framework; Whole-Food Information; Chapter 6 humane governance, supports the author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "This is authorial doctrine, not a settled philosophical term, empirical validation, or consensus. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/limits#article",
+        "headline": "Epistemic Infrastructure — Limits",
+        "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/limits",
+        "isPartOf": "https://www.mayonemaharajan.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Epistemic Infrastructure mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Epistemic Infrastructure, in this limits guide, is limited to the following inspected scope. The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this limits answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Network and the Feed; Chapter 7 verification framework; Whole-Food Information; Chapter 6 humane governance, supports the author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This is authorial doctrine, not a settled philosophical term, empirical validation, or consensus. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-7",
+        "decisionManifestDigest": "sha256:f88da6da01d6b6b077afda6bca0492a0303f65701cfcd30d620c2d3363fbb5b3",
+        "decisionDigest": "sha256:19a52f7d41dc004c9d5b239197608a1b5c5533a95b0232bddf1ce2bb524be7c2",
+        "specificationManifestDigest": "sha256:8a9b4e672a5d1e336d7d483130a134f35dd94db60c41bd915eaa54f53585576e",
+        "specificationDigest": "sha256:13ff4bc44aef19496fb1271bb17c25b1e8540bd66e3662afc0e32740df2a54fa",
+        "packetManifestDigest": "sha256:433b3a971c498178ba32c2541f67a6bbdc6b8d397ddb23f32201b89593d00245",
+        "packetDigest": "sha256:c947328198f1b13e7fb4d5703181abedf7096812bd9f0661590dc18c534e74b0"
+      },
+      "contentDigest": "sha256:f77b6f1f9948e9cd7a5448313158a190fa6a56ac46dfc808709eb07d027bba7a"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_9835f3fd076b64ead9cbbca1",
+      "tranche": 7,
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "path": "/concepts/epistemic-infrastructure/origin",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/origin",
+      "title": "Epistemic Infrastructure — Origin",
+      "topic": "epistemic-infrastructure",
+      "routeRole": "origin",
+      "concept": {
+        "conceptId": "urn:maha:concept:autonomy:epistemic-infrastructure",
+        "familyId": "autonomy",
+        "canonicalOwner": "mayone-maharajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:autonomy:epistemic-infrastructure"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:autonomy"
+          }
+        ]
+      },
+      "directAnswer": "Epistemic Infrastructure, in this Origin, is limited to the following inspected scope. The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Epistemic Infrastructure, in this Origin, is limited to the following inspected scope. The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Origin",
+          "kind": "role-method",
+          "paragraphs": [
+            "Keep the answer within the inspected source scope and make every operational step or conceptual relation explicit.",
+            "Do not use completeness of presentation as a substitute for evidence, review, or release.",
+            "Applied scope: The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayone-maharajan. This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish authorial interpretation, concept genealogy, book relationships. It must not publish authorial thesis presented as consensus or empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "The Maha Principle — The Network and the Feed; Chapter 7 verification framework; Whole-Food Information; Chapter 6 humane governance. Establishes: The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "This is authorial doctrine, not a settled philosophical term, empirical validation, or consensus.",
+            "This route must not claim authorial thesis presented as consensus.",
+            "This route must not claim empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/definition",
+            "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/relationship",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/development",
+            "property-home: https://www.mayonemaharajan.com/",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/critique"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "maha-principle-epistemic",
+          "title": "The Maha Principle",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-06",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "The Network and the Feed; Chapter 7 verification framework; Whole-Food Information; Chapter 6 humane governance",
+          "establishes": "The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems.",
+          "doesNotEstablish": "This is authorial doctrine, not a settled philosophical term, empirical validation, or consensus.",
+          "rightsBasis": "Maha-controlled authorial manuscript; section identity and bounded paraphrase only. Authorial claims are not external validation.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_00550cfbe5ae4958c10fcc49"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_6e5cae25a74731057505dc27",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/relationship",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_b90586936a17ca13a038cb62"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/development",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_a3f4072f82d1b2c2b58e733b"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/critique",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_f88363aea71ad19c537111d4"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Epistemic Infrastructure mean in this bounded context?",
+          "answer": "Epistemic Infrastructure, in this Origin, is limited to the following inspected scope. The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this origin answer?",
+          "answer": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Network and the Feed; Chapter 7 verification framework; Whole-Food Information; Chapter 6 humane governance, supports the author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "This is authorial doctrine, not a settled philosophical term, empirical validation, or consensus. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/origin#article",
+        "headline": "Epistemic Infrastructure — Origin",
+        "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/origin",
+        "isPartOf": "https://www.mayonemaharajan.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Epistemic Infrastructure mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Epistemic Infrastructure, in this Origin, is limited to the following inspected scope. The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this origin answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Maha Principle (working authorial manuscript inspected 2026-09-06), at The Network and the Feed; Chapter 7 verification framework; Whole-Food Information; Chapter 6 humane governance, supports the author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This is authorial doctrine, not a settled philosophical term, empirical validation, or consensus. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-7",
+        "decisionManifestDigest": "sha256:f88da6da01d6b6b077afda6bca0492a0303f65701cfcd30d620c2d3363fbb5b3",
+        "decisionDigest": "sha256:3ee35280e41c51c7ccbe12fdaeb872a1add3e3e9b620ce1a8c5cb9ffa88d5aca",
+        "specificationManifestDigest": "sha256:8a9b4e672a5d1e336d7d483130a134f35dd94db60c41bd915eaa54f53585576e",
+        "specificationDigest": "sha256:385949c329bec7bce2c58da64af0dc90831dc6d5881ee2732ef428a485ba741d",
+        "packetManifestDigest": "sha256:433b3a971c498178ba32c2541f67a6bbdc6b8d397ddb23f32201b89593d00245",
+        "packetDigest": "sha256:c947328198f1b13e7fb4d5703181abedf7096812bd9f0661590dc18c534e74b0"
+      },
+      "contentDigest": "sha256:6f7d44bb3ab1e89cf64bb7cb0e61f91b89dd88aae4e711188a9169c4acf07a80"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -3569,7 +4597,9 @@
             "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/definition",
             "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
             "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/development",
-            "property-home: https://www.mayonemaharajan.com/"
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/limits",
+            "property-home: https://www.mayonemaharajan.com/",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/critique"
           ]
         }
       ],
@@ -3609,10 +4639,22 @@
           "candidateId": "cand_a3f4072f82d1b2c2b58e733b"
         },
         {
+          "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_3b2772d0bd8a73ea4e8f59d5"
+        },
+        {
           "url": "https://www.mayonemaharajan.com/",
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/critique",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_f88363aea71ad19c537111d4"
         }
       ],
       "boundedAnswers": [
@@ -3722,7 +4764,7 @@
         "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
         "packetDigest": "sha256:05efbcda903c3051106dbd4ae2e6d4043d30f67e3106004e13283b43624d3c00"
       },
-      "contentDigest": "sha256:0b1e3c3a019e8e32d041da991346800dd78dd57fb5914e234ad3b7f361783727"
+      "contentDigest": "sha256:6fbad9fa60e0f9dba10921a1fda3fc6cd9f6d405ad7b6cbe87caddf6dbc963a6"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -3964,6 +5006,263 @@
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_2414b35f36bbe49c7191ed21",
+      "tranche": 7,
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "path": "/concepts/human-agency/application",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/human-agency/application",
+      "title": "Human Agency — Application",
+      "topic": "human-agency",
+      "routeRole": "application",
+      "concept": {
+        "conceptId": "urn:maha:concept:autonomy:human-agency",
+        "familyId": "autonomy",
+        "canonicalOwner": "mayone-maharajan",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:autonomy:human-agency"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:autonomy"
+          }
+        ]
+      },
+      "directAnswer": "Human Agency, in this Application, is limited to the following inspected scope. Authorial definition, under/over-expression limits, relational stewardship, and development practices. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Human Agency, in this Application, is limited to the following inspected scope. Authorial definition, under/over-expression limits, relational stewardship, and development practices. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Application",
+          "kind": "role-method",
+          "paragraphs": [
+            "Keep the answer within the inspected source scope and make every operational step or conceptual relation explicit.",
+            "Do not use completeness of presentation as a substitute for evidence, review, or release.",
+            "Applied scope: Authorial definition, under/over-expression limits, relational stewardship, and development practices."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is mayone-maharajan. This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish authorial interpretation, concept genealogy, book relationships. It must not publish authorial thesis presented as consensus or empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "The Orbital Mind — Mars · Agency and Boundary, sections I–V; Appendix A, Agency, effort, and leadership; Appendix B. Establishes: Authorial definition, under/over-expression limits, relational stewardship, and development practices."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "Authorial interpretation must remain labelled; psychology claims require their separately cited literature and planetary imagery testifies to nothing.",
+            "This route must not claim authorial thesis presented as consensus.",
+            "This route must not claim empirical authority transfer."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/definition",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/limits",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/relationship",
+            "property-home: https://www.mayonemaharajan.com/",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/argument",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/critique"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "orbital-mind",
+          "title": "The Orbital Mind",
+          "responsibleBody": "Mayone Maharajan",
+          "versionOrDate": "working authorial manuscript inspected 2026-09-05",
+          "sourceClass": "authorial-primary-source",
+          "url": null,
+          "locator": "Mars · Agency and Boundary, sections I–V; Appendix A, Agency, effort, and leadership; Appendix B",
+          "establishes": "Authorial definition, under/over-expression limits, relational stewardship, and development practices.",
+          "doesNotEstablish": "Authorial interpretation must remain labelled; psychology claims require their separately cited literature and planetary imagery testifies to nothing.",
+          "rightsBasis": "Maha-controlled authorial manuscript; record section identity and file digest only. Any later quotation remains subject to the author-controlled publication policy.",
+          "inspectionDepth": "book-section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_6e5cae25a74731057505dc27",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/human-agency/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_cd5f05f97fe7cf9f14b760c9"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/human-agency/limits",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_50310cb0a578d0d98844c11c"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/human-agency/relationship",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_52ca34f5d175d915a5aed2c7"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/human-agency/argument",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_65e1bc49ba4f5331b70873ec"
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/human-agency/critique",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_976ef363f543c74b6de18f81"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Human Agency mean in this bounded context?",
+          "answer": "Human Agency, in this Application, is limited to the following inspected scope. Authorial definition, under/over-expression limits, relational stewardship, and development practices. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this application answer?",
+          "answer": "The Orbital Mind (working authorial manuscript inspected 2026-09-05), at Mars · Agency and Boundary, sections I–V; Appendix A, Agency, effort, and leadership; Appendix B, supports authorial definition, under/over-expression limits, relational stewardship, and development practices."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "Authorial interpretation must remain labelled; psychology claims require their separately cited literature and planetary imagery testifies to nothing. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.mayonemaharajan.com/concepts/human-agency/application#article",
+        "headline": "Human Agency — Application",
+        "url": "https://www.mayonemaharajan.com/concepts/human-agency/application",
+        "isPartOf": "https://www.mayonemaharajan.com/",
+        "citation": [],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Human Agency mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Human Agency, in this Application, is limited to the following inspected scope. Authorial definition, under/over-expression limits, relational stewardship, and development practices. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this application answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Orbital Mind (working authorial manuscript inspected 2026-09-05), at Mars · Agency and Boundary, sections I–V; Appendix A, Agency, effort, and leadership; Appendix B, supports authorial definition, under/over-expression limits, relational stewardship, and development practices."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Authorial interpretation must remain labelled; psychology claims require their separately cited literature and planetary imagery testifies to nothing. Property boundary: This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local mayone-maharajan definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-7",
+        "decisionManifestDigest": "sha256:f88da6da01d6b6b077afda6bca0492a0303f65701cfcd30d620c2d3363fbb5b3",
+        "decisionDigest": "sha256:e12d5fb3ccfaca2789baee11ae26beb13fdfcbd1dfa5908de1584533ca835b03",
+        "specificationManifestDigest": "sha256:8a9b4e672a5d1e336d7d483130a134f35dd94db60c41bd915eaa54f53585576e",
+        "specificationDigest": "sha256:6dae1e2532ed1fd8a28b02125114bb776b58e8c0078f940dd086689dce4bd788",
+        "packetManifestDigest": "sha256:433b3a971c498178ba32c2541f67a6bbdc6b8d397ddb23f32201b89593d00245",
+        "packetDigest": "sha256:74d1ec9192660ffba60739b0ee4a34d1a3bdac3e5832f1df54904f6804bfba4f"
+      },
+      "contentDigest": "sha256:8a61a216e378c8e610f7871fee91277d0b56e51ca741bf021442efb33a61b7a9"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
       "candidateId": "cand_65e1bc49ba4f5331b70873ec",
       "tranche": 4,
       "siteId": "mayone-maharajan",
@@ -4045,8 +5344,8 @@
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/limits",
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/relationship",
             "property-home: https://www.mayonemaharajan.com/",
-            "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/critique",
-            "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/development"
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/application",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/critique"
           ]
         }
       ],
@@ -4098,16 +5397,16 @@
           "candidateId": null
         },
         {
+          "url": "https://www.mayonemaharajan.com/concepts/human-agency/application",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_2414b35f36bbe49c7191ed21"
+        },
+        {
           "url": "https://www.mayonemaharajan.com/concepts/human-agency/critique",
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_976ef363f543c74b6de18f81"
-        },
-        {
-          "url": "https://www.mayonemaharajan.com/concepts/human-agency/development",
-          "relationship": "same-topic-application",
-          "availability": "implemented-in-this-batch",
-          "candidateId": "cand_b98c789039b918ee6dcc5efe"
         }
       ],
       "boundedAnswers": [
@@ -4217,7 +5516,7 @@
         "packetManifestDigest": "sha256:99e2851a8c1660632b051cc797929b748faf9402f853adbd9afe8d027557edfa",
         "packetDigest": "sha256:5b1d4bce12b104c2055c52ecc2ab97b5aebe0ef32bbc5955e32b1f56f6a76536"
       },
-      "contentDigest": "sha256:dab544d4783b8b8536db2c512d5fcac7b47add2c02e648d64a36eed881edca10"
+      "contentDigest": "sha256:7e2524cfe7e2667f16e4b0f8308da4bc4cf914fb1446be1af99c80ce3234fd6b"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -4302,8 +5601,8 @@
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/limits",
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/relationship",
             "property-home: https://www.mayonemaharajan.com/",
-            "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/argument",
-            "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/development"
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/application",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/argument"
           ]
         }
       ],
@@ -4355,16 +5654,16 @@
           "candidateId": null
         },
         {
+          "url": "https://www.mayonemaharajan.com/concepts/human-agency/application",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_2414b35f36bbe49c7191ed21"
+        },
+        {
           "url": "https://www.mayonemaharajan.com/concepts/human-agency/argument",
           "relationship": "same-topic-application",
           "availability": "implemented-in-this-batch",
           "candidateId": "cand_65e1bc49ba4f5331b70873ec"
-        },
-        {
-          "url": "https://www.mayonemaharajan.com/concepts/human-agency/development",
-          "relationship": "same-topic-application",
-          "availability": "implemented-in-this-batch",
-          "candidateId": "cand_b98c789039b918ee6dcc5efe"
         }
       ],
       "boundedAnswers": [
@@ -4474,7 +5773,7 @@
         "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
         "packetDigest": "sha256:3b245f28e86de138be2c6aac7238c681f20e7ad90db4c5c27c38744b76dd8b20"
       },
-      "contentDigest": "sha256:6ba8f00cf36224269742e4eb8f4881a2f96848d56e65f1471fe18a6f0a7a1c1a"
+      "contentDigest": "sha256:58aa2d120e5767bda35025ef3848c0a553d6d81578a7ee9ae501333bb69f9905"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -4560,6 +5859,7 @@
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/relationship",
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/development",
             "property-home: https://www.mayonemaharajan.com/",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/application",
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/argument",
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/critique"
           ]
@@ -4617,6 +5917,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/human-agency/application",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_2414b35f36bbe49c7191ed21"
         },
         {
           "url": "https://www.mayonemaharajan.com/concepts/human-agency/argument",
@@ -4738,7 +6044,7 @@
         "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
         "packetDigest": "sha256:dc378def8c23e79beea66602f0cfaa27c973ac6910c116204526d8c7b0ad37ca"
       },
-      "contentDigest": "sha256:c0a7b4ad58af2bb3d94db3165f1a05cedb74bd683e981c1515bcc0a4c6a59e0b"
+      "contentDigest": "sha256:687b7ba47b9cda54e624f3bcdf9ebf0cf340f7b618822b211574f07d11f2760d"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -4823,6 +6129,7 @@
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/limits",
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/relationship",
             "property-home: https://www.mayonemaharajan.com/",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/application",
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/argument",
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/critique"
           ]
@@ -4874,6 +6181,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/human-agency/application",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_2414b35f36bbe49c7191ed21"
         },
         {
           "url": "https://www.mayonemaharajan.com/concepts/human-agency/argument",
@@ -4995,7 +6308,7 @@
         "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
         "packetDigest": "sha256:dc378def8c23e79beea66602f0cfaa27c973ac6910c116204526d8c7b0ad37ca"
       },
-      "contentDigest": "sha256:e0e3e5b49e8d07832700e9ce0fec06ba1c00108dba70995285254be96b3e4504"
+      "contentDigest": "sha256:2c5af43111f2fe360a1a987400171b9fabb14e2748efef176d8dd859af58bb9c"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -5080,6 +6393,7 @@
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/relationship",
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/development",
             "property-home: https://www.mayonemaharajan.com/",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/application",
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/argument",
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/critique"
           ]
@@ -5131,6 +6445,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/human-agency/application",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_2414b35f36bbe49c7191ed21"
         },
         {
           "url": "https://www.mayonemaharajan.com/concepts/human-agency/argument",
@@ -5252,7 +6572,7 @@
         "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
         "packetDigest": "sha256:dc378def8c23e79beea66602f0cfaa27c973ac6910c116204526d8c7b0ad37ca"
       },
-      "contentDigest": "sha256:4af4c4898ba71bdf78d783c045d838ea917f3f5fde97ee3cf3a7b54efca709e9"
+      "contentDigest": "sha256:bf748adf42aacec8731107be04c058e8219565eae562d1c7b430f01cd7ece84d"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -5337,6 +6657,7 @@
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/limits",
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/relationship",
             "property-home: https://www.mayonemaharajan.com/",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/application",
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/argument",
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/critique"
           ]
@@ -5388,6 +6709,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/human-agency/application",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_2414b35f36bbe49c7191ed21"
         },
         {
           "url": "https://www.mayonemaharajan.com/concepts/human-agency/argument",
@@ -5509,7 +6836,7 @@
         "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
         "packetDigest": "sha256:3b245f28e86de138be2c6aac7238c681f20e7ad90db4c5c27c38744b76dd8b20"
       },
-      "contentDigest": "sha256:608342c17cb634811911ef74957bfb901646de8a3e2e31f93499cdfc858238ab"
+      "contentDigest": "sha256:6971092df76e79caf6e42f5f6bbd6153f188b46984c5cf6d7f15c625e43bf848"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -5594,6 +6921,7 @@
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/limits",
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/development",
             "property-home: https://www.mayonemaharajan.com/",
+            "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/application",
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/argument",
             "same-topic-application: https://www.mayonemaharajan.com/concepts/human-agency/critique"
           ]
@@ -5645,6 +6973,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.mayonemaharajan.com/concepts/human-agency/application",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_2414b35f36bbe49c7191ed21"
         },
         {
           "url": "https://www.mayonemaharajan.com/concepts/human-agency/argument",
@@ -5766,8 +7100,8 @@
         "packetManifestDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
         "packetDigest": "sha256:dc378def8c23e79beea66602f0cfaa27c973ac6910c116204526d8c7b0ad37ca"
       },
-      "contentDigest": "sha256:8b21599923c81562bdf982ea93ef31cc4a0241f93b9ca643c155557e98abe5e1"
+      "contentDigest": "sha256:58ef61dec715c77f0a280ebe50ba49624896d0e7efdd30dd96dfcefa925d33c1"
     }
   ],
-  "provenanceDigest": "sha256:13df38407b833751a5d7860ca5c1a74ab930408f6eb5ba5ec354ffb6b141a22c"
+  "provenanceDigest": "sha256:cfb50d3d36b58912f44dc9bf016a40baa6b27e394744b548746b54c3a2402abb"
 }

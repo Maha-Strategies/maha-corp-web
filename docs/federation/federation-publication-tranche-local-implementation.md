@@ -4,19 +4,19 @@ Status: **local-unreleased**
 
 ## Outcome
 
-All **557 evidence-ready specifications** now have deterministic, host-specific content implementations containing 2785 bounded answers and 970 source bindings. This total includes append-only readiness remediations and every verified tranche through Tranche 6.
+All **657 evidence-ready specifications** now have deterministic, host-specific content implementations containing 3285 bounded answers and 1133 source bindings. This total includes append-only readiness remediations and every verified tranche through Tranche 7.
 
-**550** can enter their owning property’s integration workflow. **7** are fully compiled but held because a required definition is not evidence-ready.
+**650** can enter their owning property’s integration workflow. **7** are fully compiled but held because a required definition is not evidence-ready.
 
 | Property | Compiled |
 | --- | ---: |
-| maha-strategies | 166 |
-| maha-research | 150 |
-| agentic-publishing | 44 |
-| maha-os | 36 |
-| mayone-maharajan | 23 |
-| mayon-rajan | 30 |
-| maha-policy | 108 |
+| maha-strategies | 197 |
+| maha-research | 175 |
+| agentic-publishing | 54 |
+| maha-os | 42 |
+| mayone-maharajan | 28 |
+| mayon-rajan | 35 |
+| maha-policy | 126 |
 
 ## Dependency hold
 
@@ -34,4 +34,4 @@ The 7 held pages depend on an unready candidate definition. The dependency is re
 
 These records are local content implementations. Their owning properties must adopt and verify them. No route exists until an owner adapter is added; no page may become crawlable before exact-revision review, canonical release where applicable, and explicit build/deployment authorization.
 
-Registry digest: `sha256:7ff9243e1e619640969fa4d64d4f519b0a9712239412a538faa4045351234308`
+Registry digest: `sha256:0d1055d22f83ada2ab63eabe87cf66e4a12fa6c756b39a6142c1a521a78ce569`

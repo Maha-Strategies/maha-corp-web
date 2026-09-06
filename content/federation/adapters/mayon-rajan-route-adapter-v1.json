@@ -3,7 +3,7 @@
   "siteId": "mayon-rajan",
   "canonicalHost": "mayonrajan.com",
   "rootPath": "/mayon-volcano/",
-  "sourceManifestDigest": "sha256:9ff0de56fb831df699e5683d14253ddcc56a6e964aeda8f3f4244ad307e17847",
+  "sourceManifestDigest": "sha256:1f77761077248885d5c5b47dbd1881ebcc5d6b67674ffbfe64acc1a06a3a1f26",
   "state": "local-owner-handoff",
   "ownerIntegration": {
     "routeShape": "/mayon-volcano/[...segments]",
@@ -16,13 +16,43 @@
     "activeCanonicalReleaseRequired": true
   },
   "counts": {
-    "routes": 30,
-    "boundedAnswers": 150,
+    "routes": 35,
+    "boundedAnswers": 175,
     "publicRoutesCreated": 0,
     "buildsRun": 0
   },
   "publicationBoundary": "The adapter resolves local content only. The owner route must still bind an exact revision and active canonical release before crawlability; a missing or unready path resolves to null.",
   "entries": [
+    {
+      "candidateId": "cand_cd6e69bef0bd5d8fe4ebf92d",
+      "path": "/mayon-volcano/eruption-history/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/eruption-history/definition",
+      "segments": [
+        "eruption-history",
+        "definition"
+      ],
+      "contentDigest": "sha256:06790675a572c1a884262b4e6a9b80740b79bc63813d4980b0a04966bab1cc7e"
+    },
+    {
+      "candidateId": "cand_3fd539b606b30cc5164a736f",
+      "path": "/mayon-volcano/eruption-history/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/eruption-history/limits",
+      "segments": [
+        "eruption-history",
+        "limits"
+      ],
+      "contentDigest": "sha256:6059c2a624e584ce1f3dc35b07d17d39d061036c8682de5b30576b6f0c26a426"
+    },
+    {
+      "candidateId": "cand_05eb1401b8cc5d7da5bbcd55",
+      "path": "/mayon-volcano/eruption-history/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/eruption-history/official-sources",
+      "segments": [
+        "eruption-history",
+        "official-sources"
+      ],
+      "contentDigest": "sha256:021849dcb79ab8782daa6ddde05ba09a7b49ef067c89e1e17d5ce038cafb81ca"
+    },
     {
       "candidateId": "cand_b278a387341dd14ef01c0a2c",
       "path": "/mayon-volcano/hazard-zones/definition",
@@ -221,7 +251,17 @@
         "name-disambiguation",
         "definition"
       ],
-      "contentDigest": "sha256:efd323440b45223069db5b1456cfd0e59394e563ba4d90297704bdd17e1e5370"
+      "contentDigest": "sha256:bd016eed64de21a6cace5c516f98c109a05e4e37067fbec42707f337f461f98a"
+    },
+    {
+      "candidateId": "cand_fd07ca576164a47791ca7971",
+      "path": "/mayon-volcano/name-disambiguation/evidence",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/name-disambiguation/evidence",
+      "segments": [
+        "name-disambiguation",
+        "evidence"
+      ],
+      "contentDigest": "sha256:fa5fe56066d3dd9651f75063b79a237a858b71dacafca26a706cb6b655909a7b"
     },
     {
       "candidateId": "cand_d570c04cbe49659f8996c6d9",
@@ -231,7 +271,7 @@
         "name-disambiguation",
         "limits"
       ],
-      "contentDigest": "sha256:d86443b09eb7037ede203513bd7c20da43afa2455c3a46acd27e1de0923ca34a"
+      "contentDigest": "sha256:9d56c4af2485086d19ee502ce602ca0250c38dfc9ef8461b0fdc096b40effbad"
     },
     {
       "candidateId": "cand_c734f496120c4e025014bd3c",
@@ -241,7 +281,17 @@
         "name-disambiguation",
         "official-sources"
       ],
-      "contentDigest": "sha256:1bcd785c00d1e3dea030379c42370c15d81bbf0dde06be23882839f36b782a9b"
+      "contentDigest": "sha256:67a03895867799cf7379c5889384fb516682c4c70ecae20736357cae77267985"
+    },
+    {
+      "candidateId": "cand_98cbfe4add44dd423db63e64",
+      "path": "/mayon-volcano/name-disambiguation/preparedness",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/name-disambiguation/preparedness",
+      "segments": [
+        "name-disambiguation",
+        "preparedness"
+      ],
+      "contentDigest": "sha256:d454ccd1f8892f89d80d5ed125c55db9592f8fee0cfe613a723733446f26df29"
     },
     {
       "candidateId": "cand_5eedf7642252330cb10edc4b",
@@ -324,5 +374,5 @@
       "contentDigest": "sha256:85091f0deb1bc654c1c87abd0caa93f697d9cb118f1b219646806a0e7760e028"
     }
   ],
-  "provenanceDigest": "sha256:081fc418669ee5c70f210ad2a3e3c8a5e794293eb808295f46c813e8c4fc98a4"
+  "provenanceDigest": "sha256:91a3ce6765c5744b608bc920a5dd1539f8a5a0bb974c01b062894431b011d944"
 }

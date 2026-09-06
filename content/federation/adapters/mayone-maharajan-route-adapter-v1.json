@@ -3,7 +3,7 @@
   "siteId": "mayone-maharajan",
   "canonicalHost": "www.mayonemaharajan.com",
   "rootPath": "/concepts/",
-  "sourceManifestDigest": "sha256:13df38407b833751a5d7860ca5c1a74ab930408f6eb5ba5ec354ffb6b141a22c",
+  "sourceManifestDigest": "sha256:cfb50d3d36b58912f44dc9bf016a40baa6b27e394744b548746b54c3a2402abb",
   "state": "local-owner-handoff",
   "ownerIntegration": {
     "routeShape": "/concepts/[...segments]",
@@ -16,8 +16,8 @@
     "activeCanonicalReleaseRequired": true
   },
   "counts": {
-    "routes": 23,
-    "boundedAnswers": 115,
+    "routes": 28,
+    "boundedAnswers": 140,
     "publicRoutesCreated": 0,
     "buildsRun": 0
   },
@@ -61,7 +61,17 @@
         "civilizational-memory",
         "definition"
       ],
-      "contentDigest": "sha256:4018f5f95e13c69e89df995e5c8e5956f4d03247f62fddec3e2c5ed78ff5b334"
+      "contentDigest": "sha256:a9b97d0e87ec76bdc128e5350e9a94da9e95b210a2806a77321cbbe7d0a74e97"
+    },
+    {
+      "candidateId": "cand_91a359ed79a7cab188963d9b",
+      "path": "/concepts/civilizational-memory/development",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/civilizational-memory/development",
+      "segments": [
+        "civilizational-memory",
+        "development"
+      ],
+      "contentDigest": "sha256:11e4cbdac7bf5128f2531d5807723d0a1603aacd8b78e3b6980a184ebdfea6c4"
     },
     {
       "candidateId": "cand_6165e01368841892cc1214f8",
@@ -71,7 +81,7 @@
         "civilizational-memory",
         "relationship"
       ],
-      "contentDigest": "sha256:94a8f31b38f99cf77d2fbe766ca93666c133cc7e6619ac64db3ec6e274406c72"
+      "contentDigest": "sha256:aceba324828c477b76a38726aa2a658cf78ebbba38b4892ffeb0a912740921e8"
     },
     {
       "candidateId": "cand_32169681463f2b93a1f0798e",
@@ -144,6 +154,16 @@
       "contentDigest": "sha256:9511624986ca4655e73266fc82ebfe31f2a819df0d5c7e5ae2778ea6e693d78a"
     },
     {
+      "candidateId": "cand_f88363aea71ad19c537111d4",
+      "path": "/concepts/epistemic-infrastructure/critique",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/critique",
+      "segments": [
+        "epistemic-infrastructure",
+        "critique"
+      ],
+      "contentDigest": "sha256:277415b910779b963a7abdce3bc041b1fc0f1ee33f3de354c69520b7c8215728"
+    },
+    {
       "candidateId": "cand_00550cfbe5ae4958c10fcc49",
       "path": "/concepts/epistemic-infrastructure/definition",
       "canonicalUrl": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/definition",
@@ -151,7 +171,7 @@
         "epistemic-infrastructure",
         "definition"
       ],
-      "contentDigest": "sha256:74c22f92137d3c66c1c971003502df779574f4813bb562972e9288b556b43747"
+      "contentDigest": "sha256:6f68a0d4cc2012e7f89d2d42b56722734663817d051cd77ff950cdf9f8df281d"
     },
     {
       "candidateId": "cand_a3f4072f82d1b2c2b58e733b",
@@ -161,7 +181,27 @@
         "epistemic-infrastructure",
         "development"
       ],
-      "contentDigest": "sha256:008c69fb0cad1fa90380667adfada7754293dc276856ec3494c280340cd31b14"
+      "contentDigest": "sha256:38b64178373afc069f851f2ab0f22be53d4530dead4d12487e664268ea3581b5"
+    },
+    {
+      "candidateId": "cand_3b2772d0bd8a73ea4e8f59d5",
+      "path": "/concepts/epistemic-infrastructure/limits",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/limits",
+      "segments": [
+        "epistemic-infrastructure",
+        "limits"
+      ],
+      "contentDigest": "sha256:f77b6f1f9948e9cd7a5448313158a190fa6a56ac46dfc808709eb07d027bba7a"
+    },
+    {
+      "candidateId": "cand_9835f3fd076b64ead9cbbca1",
+      "path": "/concepts/epistemic-infrastructure/origin",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/origin",
+      "segments": [
+        "epistemic-infrastructure",
+        "origin"
+      ],
+      "contentDigest": "sha256:6f7d44bb3ab1e89cf64bb7cb0e61f91b89dd88aae4e711188a9169c4acf07a80"
     },
     {
       "candidateId": "cand_b90586936a17ca13a038cb62",
@@ -171,7 +211,7 @@
         "epistemic-infrastructure",
         "relationship"
       ],
-      "contentDigest": "sha256:0b1e3c3a019e8e32d041da991346800dd78dd57fb5914e234ad3b7f361783727"
+      "contentDigest": "sha256:6fbad9fa60e0f9dba10921a1fda3fc6cd9f6d405ad7b6cbe87caddf6dbc963a6"
     },
     {
       "candidateId": "cand_6e5cae25a74731057505dc27",
@@ -184,6 +224,16 @@
       "contentDigest": "sha256:855d4bc00fc63f3354f5a148d3f288da337aee88de6939c7734b54e37457e00a"
     },
     {
+      "candidateId": "cand_2414b35f36bbe49c7191ed21",
+      "path": "/concepts/human-agency/application",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/human-agency/application",
+      "segments": [
+        "human-agency",
+        "application"
+      ],
+      "contentDigest": "sha256:8a61a216e378c8e610f7871fee91277d0b56e51ca741bf021442efb33a61b7a9"
+    },
+    {
       "candidateId": "cand_65e1bc49ba4f5331b70873ec",
       "path": "/concepts/human-agency/argument",
       "canonicalUrl": "https://www.mayonemaharajan.com/concepts/human-agency/argument",
@@ -191,7 +241,7 @@
         "human-agency",
         "argument"
       ],
-      "contentDigest": "sha256:dab544d4783b8b8536db2c512d5fcac7b47add2c02e648d64a36eed881edca10"
+      "contentDigest": "sha256:7e2524cfe7e2667f16e4b0f8308da4bc4cf914fb1446be1af99c80ce3234fd6b"
     },
     {
       "candidateId": "cand_976ef363f543c74b6de18f81",
@@ -201,7 +251,7 @@
         "human-agency",
         "critique"
       ],
-      "contentDigest": "sha256:6ba8f00cf36224269742e4eb8f4881a2f96848d56e65f1471fe18a6f0a7a1c1a"
+      "contentDigest": "sha256:58aa2d120e5767bda35025ef3848c0a553d6d81578a7ee9ae501333bb69f9905"
     },
     {
       "candidateId": "cand_cd5f05f97fe7cf9f14b760c9",
@@ -211,7 +261,7 @@
         "human-agency",
         "definition"
       ],
-      "contentDigest": "sha256:c0a7b4ad58af2bb3d94db3165f1a05cedb74bd683e981c1515bcc0a4c6a59e0b"
+      "contentDigest": "sha256:687b7ba47b9cda54e624f3bcdf9ebf0cf340f7b618822b211574f07d11f2760d"
     },
     {
       "candidateId": "cand_b98c789039b918ee6dcc5efe",
@@ -221,7 +271,7 @@
         "human-agency",
         "development"
       ],
-      "contentDigest": "sha256:e0e3e5b49e8d07832700e9ce0fec06ba1c00108dba70995285254be96b3e4504"
+      "contentDigest": "sha256:2c5af43111f2fe360a1a987400171b9fabb14e2748efef176d8dd859af58bb9c"
     },
     {
       "candidateId": "cand_50310cb0a578d0d98844c11c",
@@ -231,7 +281,7 @@
         "human-agency",
         "limits"
       ],
-      "contentDigest": "sha256:4af4c4898ba71bdf78d783c045d838ea917f3f5fde97ee3cf3a7b54efca709e9"
+      "contentDigest": "sha256:bf748adf42aacec8731107be04c058e8219565eae562d1c7b430f01cd7ece84d"
     },
     {
       "candidateId": "cand_5d18811d3e8ef9e4d02d9da2",
@@ -241,7 +291,7 @@
         "human-agency",
         "origin"
       ],
-      "contentDigest": "sha256:608342c17cb634811911ef74957bfb901646de8a3e2e31f93499cdfc858238ab"
+      "contentDigest": "sha256:6971092df76e79caf6e42f5f6bbd6153f188b46984c5cf6d7f15c625e43bf848"
     },
     {
       "candidateId": "cand_52ca34f5d175d915a5aed2c7",
@@ -251,8 +301,8 @@
         "human-agency",
         "relationship"
       ],
-      "contentDigest": "sha256:8b21599923c81562bdf982ea93ef31cc4a0241f93b9ca643c155557e98abe5e1"
+      "contentDigest": "sha256:58ef61dec715c77f0a280ebe50ba49624896d0e7efdd30dd96dfcefa925d33c1"
     }
   ],
-  "provenanceDigest": "sha256:be2424d55f27d06b57d1012d0a30bd35d56b7f6d9fd60d93d0ff887e04d6d150"
+  "provenanceDigest": "sha256:63942b9d13abeadb97b8075102ee69cf5f80f4189f62c89763f9ffb01ef79bfd"
 }

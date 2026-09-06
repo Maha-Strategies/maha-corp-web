@@ -3,7 +3,7 @@
   "siteId": "maha-os",
   "canonicalHost": "www.maha-os.com",
   "rootPath": "/knowledge/",
-  "sourceManifestDigest": "sha256:409d372d614228698223b5fec043e59b9d4d16077d89101e08dd9980f0e35997",
+  "sourceManifestDigest": "sha256:4d263fc87f3111464f6bd29dcd6352d4f273383f190411b05ef1c8284b3e9aca",
   "state": "local-owner-handoff",
   "ownerIntegration": {
     "routeShape": "/knowledge/[...segments]",
@@ -16,8 +16,8 @@
     "activeCanonicalReleaseRequired": true
   },
   "counts": {
-    "routes": 36,
-    "boundedAnswers": 180,
+    "routes": 42,
+    "boundedAnswers": 210,
     "publicRoutesCreated": 0,
     "buildsRun": 0
   },
@@ -79,6 +79,39 @@
       "contentDigest": "sha256:4a11c47af5851fab6b84b7f08f4adffe2cf2c97ea1a0e668d76a70210d2c91bd"
     },
     {
+      "candidateId": "cand_12e3279b728ef2adca2d2224",
+      "path": "/knowledge/private-machine-systems/consent-receipts/definition",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/consent-receipts/definition",
+      "segments": [
+        "private-machine-systems",
+        "consent-receipts",
+        "definition"
+      ],
+      "contentDigest": "sha256:c36bf9e85fca89c61adeb7482a73afdb771f2694128d5e2afba07f3c6d197d9a"
+    },
+    {
+      "candidateId": "cand_dbb7c78817a3314662bc2909",
+      "path": "/knowledge/private-machine-systems/consent-receipts/operator-guide",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/consent-receipts/operator-guide",
+      "segments": [
+        "private-machine-systems",
+        "consent-receipts",
+        "operator-guide"
+      ],
+      "contentDigest": "sha256:1c568ad8db7c3efc9542f4d2f774f3d4de6e0ec03ec7ce83b7b968c57a5e157f"
+    },
+    {
+      "candidateId": "cand_107224c160be48d750de375d",
+      "path": "/knowledge/private-machine-systems/device-identity/architecture",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/architecture",
+      "segments": [
+        "private-machine-systems",
+        "device-identity",
+        "architecture"
+      ],
+      "contentDigest": "sha256:2d006fecdeb813b01bdb2a4d882e765d79f373f97e0bd4cb6cd4ba2a24589aa1"
+    },
+    {
       "candidateId": "cand_cfc312cdb30a602f2f7c4b17",
       "path": "/knowledge/private-machine-systems/device-identity/controls",
       "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/controls",
@@ -87,7 +120,7 @@
         "device-identity",
         "controls"
       ],
-      "contentDigest": "sha256:9f44ff3b61ff62e76b01d03bfee4f64b6aab48ffb12ab4ceee041ea6644b7533"
+      "contentDigest": "sha256:e4c95f7a4cfefd40bd8c7c04c19ae43d1f30ec7633e4a885f69c52fec72ce252"
     },
     {
       "candidateId": "cand_f2e452a99e390ddae8b1001f",
@@ -98,7 +131,7 @@
         "device-identity",
         "definition"
       ],
-      "contentDigest": "sha256:340d444b75e85cca25f29a6aea267d81f2f6ed91274d006a48c23fa7bf55f944"
+      "contentDigest": "sha256:cb96ec64f7ef35701cbf3a7090ad51c8b1a11250971c12811e866ecd3151aee9"
     },
     {
       "candidateId": "cand_956bb7c77098dead14075f84",
@@ -109,7 +142,7 @@
         "device-identity",
         "failure-mode"
       ],
-      "contentDigest": "sha256:add7a4f1644792f5e479f11e6e6820ced1fc968a23e580098d49326d03416c41"
+      "contentDigest": "sha256:34d639cc279bf332d541da0a0962ef19efa27c35ab0bbee56d05e30a0bb294b4"
     },
     {
       "candidateId": "cand_9f41b4ed6746ae6e048f417f",
@@ -120,7 +153,7 @@
         "device-identity",
         "operator-guide"
       ],
-      "contentDigest": "sha256:1afa89e7e1e66ef262c356560f30fc38698c904a066aa44712ae153afea33840"
+      "contentDigest": "sha256:2ce626c43fbfd1f2c5eee492d7f7a559813c7c8e622251ac3c8e2be5be9d7117"
     },
     {
       "candidateId": "cand_671d652918d62414c37d751d",
@@ -376,6 +409,17 @@
       "contentDigest": "sha256:37af22d74ef9d363ef8c8afe01745385fd27195aca2fc91fc9d12b856bed3a04"
     },
     {
+      "candidateId": "cand_3336730afb2b7bb2e57390db",
+      "path": "/knowledge/private-machine-systems/resilience-mode/architecture",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/architecture",
+      "segments": [
+        "private-machine-systems",
+        "resilience-mode",
+        "architecture"
+      ],
+      "contentDigest": "sha256:52b7a6e0caef7d156b6bff3a6f936beee23ad564a60a9732d42e5441447718a0"
+    },
+    {
       "candidateId": "cand_385955fc6e2a9a940a3deec3",
       "path": "/knowledge/private-machine-systems/resilience-mode/controls",
       "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/controls",
@@ -384,7 +428,7 @@
         "resilience-mode",
         "controls"
       ],
-      "contentDigest": "sha256:a64e938701a5630d7a0a1202857eb008bd31a915713b6b686e4de92a5354e3b5"
+      "contentDigest": "sha256:1ce6f0736c72cd35de09fc2bc87a8cf6f10d2e2cea770b5187e188ad62b09351"
     },
     {
       "candidateId": "cand_d6cbea3163ab9349857186bf",
@@ -395,7 +439,7 @@
         "resilience-mode",
         "definition"
       ],
-      "contentDigest": "sha256:0b00eddab35c7242f94f044e3d9f3cac85f19615da3cb321f3df36d2c57b12aa"
+      "contentDigest": "sha256:e5ca0ffd5b2b72fdf13fd7afd8b3171e8d0956f93d49cf5d0a6c94c9ab923588"
     },
     {
       "candidateId": "cand_3dee4cb4d23a8de9ae7a7e1d",
@@ -406,7 +450,7 @@
         "resilience-mode",
         "failure-mode"
       ],
-      "contentDigest": "sha256:645a075319d49ef01ed2d03f4f629fd0d1895221338f49cbe230fee173e13b7c"
+      "contentDigest": "sha256:a8b200301f63517384c663c51829ba90a2082de9977c670eb17b6e7f84b38d18"
     },
     {
       "candidateId": "cand_1754ab6d9ccee1ef6778e37e",
@@ -417,8 +461,30 @@
         "resilience-mode",
         "operator-guide"
       ],
-      "contentDigest": "sha256:2d1316e3116f85838113235a9f0a532b8e0b18e710a5efb82a672b66d0ceca84"
+      "contentDigest": "sha256:ac92595877568f3cce98df4a6f77b7ba8498d0e27cad16efceb44790aa8687ed"
+    },
+    {
+      "candidateId": "cand_33cd1bc11cbfa3f62f02c825",
+      "path": "/knowledge/private-machine-systems/sensor-provenance/definition",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/sensor-provenance/definition",
+      "segments": [
+        "private-machine-systems",
+        "sensor-provenance",
+        "definition"
+      ],
+      "contentDigest": "sha256:dbeea1b917e2bff0fdee82025d4835c97f652a6ae99e6508f4c9bb4b703a5332"
+    },
+    {
+      "candidateId": "cand_151288f524ae500d4f2a9c3c",
+      "path": "/knowledge/private-machine-systems/sensor-provenance/operator-guide",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/sensor-provenance/operator-guide",
+      "segments": [
+        "private-machine-systems",
+        "sensor-provenance",
+        "operator-guide"
+      ],
+      "contentDigest": "sha256:d6532f45865a8e1ec3a21d3a42403a3ff5833b0a134d1724c1ab0f1765bb06a3"
     }
   ],
-  "provenanceDigest": "sha256:40c9cd4252997dbf2a42b6ae1c54e738584e907a776060871d56c920dc87fc4d"
+  "provenanceDigest": "sha256:1adc330c3c11f13c24292f14ce4c091e28629b6944b2d7d61b001a169ae335af"
 }

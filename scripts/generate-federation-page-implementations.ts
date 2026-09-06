@@ -37,7 +37,7 @@ function implementationReport(result: ReturnType<typeof compileFederationPages>)
     '',
     '## Outcome',
     '',
-    `All **${counts.pages} evidence-ready specifications** now have deterministic, host-specific content implementations containing ${counts.boundedAnswers} bounded answers and ${counts.sourceBindings} source bindings. This total includes append-only readiness remediations and every verified tranche through Tranche 6.`,
+    `All **${counts.pages} evidence-ready specifications** now have deterministic, host-specific content implementations containing ${counts.boundedAnswers} bounded answers and ${counts.sourceBindings} source bindings. This total includes append-only readiness remediations and every verified tranche through Tranche 7.`,
     '',
     `**${counts.readyForOwnerIntegration}** can enter their owning property’s integration workflow. **${counts.blockedOnUnreadyPrerequisite}** are fully compiled but held because a required definition is not evidence-ready.`,
     '',
@@ -78,6 +78,7 @@ export function generateFederationPageImplementations(outputRoot: string) {
     { batchId: 'tranche-4', tranche: 4 as const, decisions: 'content/federation/federation-tranche-4-decisions-v1.json', specifications: 'content/federation/federation-tranche-4-page-specifications-v1.json', packets: 'content/federation/federation-tranche-4-evidence-packets-v1.json' },
     { batchId: 'tranche-5', tranche: 5 as const, decisions: 'content/federation/federation-tranche-5-decisions-v1.json', specifications: 'content/federation/federation-tranche-5-page-specifications-v1.json', packets: 'content/federation/federation-tranche-5-evidence-packets-v1.json' },
     { batchId: 'tranche-6', tranche: 6 as const, decisions: 'content/federation/federation-tranche-6-decisions-v1.json', specifications: 'content/federation/federation-tranche-6-page-specifications-v1.json', packets: 'content/federation/federation-tranche-6-evidence-packets-v1.json' },
+    { batchId: 'tranche-7', tranche: 7 as const, decisions: 'content/federation/federation-tranche-7-decisions-v1.json', specifications: 'content/federation/federation-tranche-7-page-specifications-v1.json', packets: 'content/federation/federation-tranche-7-evidence-packets-v1.json' },
   ]
   for (const definition of supplementDefinitions) {
     if (!existsSync(resolve(ROOT, definition.decisions)) || !existsSync(resolve(ROOT, definition.specifications)) || !existsSync(resolve(ROOT, definition.packets))) continue

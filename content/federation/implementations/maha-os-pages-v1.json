@@ -2,11 +2,11 @@
   "schemaVersion": "maha-federation-property-pages/1.0",
   "siteId": "maha-os",
   "canonicalHost": "www.maha-os.com",
-  "registryDigest": "sha256:7ff9243e1e619640969fa4d64d4f519b0a9712239412a538faa4045351234308",
+  "registryDigest": "sha256:0d1055d22f83ada2ab63eabe87cf66e4a12fa6c756b39a6142c1a521a78ce569",
   "status": "local-unreleased",
   "counts": {
-    "pages": 36,
-    "readyForOwnerIntegration": 36,
+    "pages": 42,
+    "readyForOwnerIntegration": 42,
     "blockedOnUnreadyPrerequisite": 0
   },
   "pages": [
@@ -1222,6 +1222,770 @@
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_12e3279b728ef2adca2d2224",
+      "tranche": 7,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/consent-receipts/definition",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/consent-receipts/definition",
+      "title": "Consent Receipts — Definition",
+      "topic": "consent-receipts",
+      "routeRole": "definition",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:consent-receipts",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:consent-receipts"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Consent Receipts, in this definition, is limited to the following inspected scope. The specification describes a record of authority a PII principal states that a controller has for processing PII, with purpose and related receipt fields. The framework organizes privacy-risk governance, data-processing awareness, individual participation, permissions, preferences, and communication across an information lifecycle. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Consent Receipts, in this definition, is limited to the following inspected scope. The specification describes a record of authority a PII principal states that a controller has for processing PII, with purpose and related receipt fields. The framework organizes privacy-risk governance, data-processing awareness, individual participation, permissions, preferences, and communication across an information lifecycle. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Definition",
+          "kind": "role-method",
+          "paragraphs": [
+            "Use the term only for the source-backed scope stated here; keep adjacent concepts separate unless a typed relationship is explicit.",
+            "A useful definition states both inclusion and exclusion conditions so a machine answer cannot silently widen it.",
+            "Applied scope: The specification describes a record of authority a PII principal states that a controller has for processing PII, with purpose and related receipt fields. The framework organizes privacy-risk governance, data-processing awareness, individual participation, permissions, preferences, and communication across an information lifecycle."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Consent Receipt Specification — Definition of a Consent Receipt; receipt fields; human-readable and JSON representations. Establishes: The specification describes a record of authority a PII principal states that a controller has for processing PII, with purpose and related receipt fields.",
+            "NIST Privacy Framework: A Tool for Improving Privacy through Enterprise Risk Management — Core Functions Identify-P, Govern-P, Control-P and Communicate-P; glossary definitions for data action and data processing. Establishes: The framework organizes privacy-risk governance, data-processing awareness, individual participation, permissions, preferences, and communication across an information lifecycle."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "A receipt records stated consent; it does not prove identity, comprehension, legal validity, freely given consent, continuing authority, execution compliance, or applicability in every jurisdiction.",
+            "The voluntary framework does not establish legal consent, identity, capacity, comprehension, jurisdictional compliance, or that a recorded preference was enforced.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/consent-receipts/operator-guide",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "kantara-consent-receipt-1-1",
+          "title": "Consent Receipt Specification",
+          "responsibleBody": "Kantara Initiative",
+          "versionOrDate": "version 1.1.0, 20 February 2018",
+          "sourceClass": "consent-record-specification",
+          "url": "https://kantarainitiative.org/file-downloads/consent-receipt-specification-v1-1-0/",
+          "locator": "Definition of a Consent Receipt; receipt fields; human-readable and JSON representations",
+          "establishes": "The specification describes a record of authority a PII principal states that a controller has for processing PII, with purpose and related receipt fields.",
+          "doesNotEstablish": "A receipt records stated consent; it does not prove identity, comprehension, legal validity, freely given consent, continuing authority, execution compliance, or applicability in every jurisdiction.",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "nist-privacy-framework-consent-t7",
+          "title": "NIST Privacy Framework: A Tool for Improving Privacy through Enterprise Risk Management",
+          "responsibleBody": "National Institute of Standards and Technology",
+          "versionOrDate": "version 1.0, January 2020",
+          "sourceClass": "government-guidance",
+          "url": "https://www.nist.gov/document/nist-privacy-frameworkv10pdf",
+          "locator": "Core Functions Identify-P, Govern-P, Control-P and Communicate-P; glossary definitions for data action and data processing",
+          "establishes": "The framework organizes privacy-risk governance, data-processing awareness, individual participation, permissions, preferences, and communication across an information lifecycle.",
+          "doesNotEstablish": "The voluntary framework does not establish legal consent, identity, capacity, comprehension, jurisdictional compliance, or that a recorded preference was enforced.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/consent-receipts/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_dbb7c78817a3314662bc2909"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Consent Receipts mean in this bounded context?",
+          "answer": "Consent Receipts, in this definition, is limited to the following inspected scope. The specification describes a record of authority a PII principal states that a controller has for processing PII, with purpose and related receipt fields. The framework organizes privacy-risk governance, data-processing awareness, individual participation, permissions, preferences, and communication across an information lifecycle. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this definition answer?",
+          "answer": "Consent Receipt Specification (version 1.1.0, 20 February 2018), at Definition of a Consent Receipt; receipt fields; human-readable and JSON representations, supports the specification describes a record of authority a PII principal states that a controller has for processing PII, with purpose and related receipt fields. NIST Privacy Framework: A Tool for Improving Privacy through Enterprise Risk Management (version 1.0, January 2020), at Core Functions Identify-P, Govern-P, Control-P and Communicate-P; glossary definitions for data action and data processing, supports the framework organizes privacy-risk governance, data-processing awareness, individual participation, permissions, preferences, and communication across an information lifecycle."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "A receipt records stated consent; it does not prove identity, comprehension, legal validity, freely given consent, continuing authority, execution compliance, or applicability in every jurisdiction. The voluntary framework does not establish legal consent, identity, capacity, comprehension, jurisdictional compliance, or that a recorded preference was enforced. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/consent-receipts/definition#article",
+        "headline": "Consent Receipts — Definition",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/consent-receipts/definition",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://kantarainitiative.org/file-downloads/consent-receipt-specification-v1-1-0/",
+          "https://www.nist.gov/document/nist-privacy-frameworkv10pdf"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Consent Receipts mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Consent Receipts, in this definition, is limited to the following inspected scope. The specification describes a record of authority a PII principal states that a controller has for processing PII, with purpose and related receipt fields. The framework organizes privacy-risk governance, data-processing awareness, individual participation, permissions, preferences, and communication across an information lifecycle. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this definition answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Consent Receipt Specification (version 1.1.0, 20 February 2018), at Definition of a Consent Receipt; receipt fields; human-readable and JSON representations, supports the specification describes a record of authority a PII principal states that a controller has for processing PII, with purpose and related receipt fields. NIST Privacy Framework: A Tool for Improving Privacy through Enterprise Risk Management (version 1.0, January 2020), at Core Functions Identify-P, Govern-P, Control-P and Communicate-P; glossary definitions for data action and data processing, supports the framework organizes privacy-risk governance, data-processing awareness, individual participation, permissions, preferences, and communication across an information lifecycle."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A receipt records stated consent; it does not prove identity, comprehension, legal validity, freely given consent, continuing authority, execution compliance, or applicability in every jurisdiction. The voluntary framework does not establish legal consent, identity, capacity, comprehension, jurisdictional compliance, or that a recorded preference was enforced. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-7",
+        "decisionManifestDigest": "sha256:f88da6da01d6b6b077afda6bca0492a0303f65701cfcd30d620c2d3363fbb5b3",
+        "decisionDigest": "sha256:bf7aff6ea00a7437825c05ce966b116268a914ac0bbdcf27997e5e1835412423",
+        "specificationManifestDigest": "sha256:8a9b4e672a5d1e336d7d483130a134f35dd94db60c41bd915eaa54f53585576e",
+        "specificationDigest": "sha256:033bdd7c47019844adb5e982c680eed070185600f1017a6a2af76a1e4f0c1fbd",
+        "packetManifestDigest": "sha256:433b3a971c498178ba32c2541f67a6bbdc6b8d397ddb23f32201b89593d00245",
+        "packetDigest": "sha256:21d544292264d50e871ab2aa21760a0c630bd4494b601445b9cd7a7775a0b881"
+      },
+      "contentDigest": "sha256:c36bf9e85fca89c61adeb7482a73afdb771f2694128d5e2afba07f3c6d197d9a"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_dbb7c78817a3314662bc2909",
+      "tranche": 7,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/consent-receipts/operator-guide",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/consent-receipts/operator-guide",
+      "title": "Consent Receipts — Operator Guide",
+      "topic": "consent-receipts",
+      "routeRole": "operator-guide",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:consent-receipts",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:consent-receipts"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Consent Receipts, in this operator guide, is limited to the following inspected scope. The specification describes a record of authority a PII principal states that a controller has for processing PII, with purpose and related receipt fields. The framework organizes privacy-risk governance, data-processing awareness, individual participation, permissions, preferences, and communication across an information lifecycle. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Consent Receipts, in this operator guide, is limited to the following inspected scope. The specification describes a record of authority a PII principal states that a controller has for processing PII, with purpose and related receipt fields. The framework organizes privacy-risk governance, data-processing awareness, individual participation, permissions, preferences, and communication across an information lifecycle. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Operator guide",
+          "kind": "role-method",
+          "paragraphs": [
+            "Tell the operator what to check before acting, when to refuse, and how to preserve evidence of the outcome.",
+            "The guide cannot infer that a device, service, source, or credential is healthy when observation is unavailable.",
+            "Applied scope: The specification describes a record of authority a PII principal states that a controller has for processing PII, with purpose and related receipt fields. The framework organizes privacy-risk governance, data-processing awareness, individual participation, permissions, preferences, and communication across an information lifecycle."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Consent Receipt Specification — Definition of a Consent Receipt; receipt fields; human-readable and JSON representations. Establishes: The specification describes a record of authority a PII principal states that a controller has for processing PII, with purpose and related receipt fields.",
+            "NIST Privacy Framework: A Tool for Improving Privacy through Enterprise Risk Management — Core Functions Identify-P, Govern-P, Control-P and Communicate-P; glossary definitions for data action and data processing. Establishes: The framework organizes privacy-risk governance, data-processing awareness, individual participation, permissions, preferences, and communication across an information lifecycle."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "A receipt records stated consent; it does not prove identity, comprehension, legal validity, freely given consent, continuing authority, execution compliance, or applicability in every jurisdiction.",
+            "The voluntary framework does not establish legal consent, identity, capacity, comprehension, jurisdictional compliance, or that a recorded preference was enforced.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/consent-receipts/definition",
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "kantara-consent-receipt-1-1",
+          "title": "Consent Receipt Specification",
+          "responsibleBody": "Kantara Initiative",
+          "versionOrDate": "version 1.1.0, 20 February 2018",
+          "sourceClass": "consent-record-specification",
+          "url": "https://kantarainitiative.org/file-downloads/consent-receipt-specification-v1-1-0/",
+          "locator": "Definition of a Consent Receipt; receipt fields; human-readable and JSON representations",
+          "establishes": "The specification describes a record of authority a PII principal states that a controller has for processing PII, with purpose and related receipt fields.",
+          "doesNotEstablish": "A receipt records stated consent; it does not prove identity, comprehension, legal validity, freely given consent, continuing authority, execution compliance, or applicability in every jurisdiction.",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "nist-privacy-framework-consent-t7",
+          "title": "NIST Privacy Framework: A Tool for Improving Privacy through Enterprise Risk Management",
+          "responsibleBody": "National Institute of Standards and Technology",
+          "versionOrDate": "version 1.0, January 2020",
+          "sourceClass": "government-guidance",
+          "url": "https://www.nist.gov/document/nist-privacy-frameworkv10pdf",
+          "locator": "Core Functions Identify-P, Govern-P, Control-P and Communicate-P; glossary definitions for data action and data processing",
+          "establishes": "The framework organizes privacy-risk governance, data-processing awareness, individual participation, permissions, preferences, and communication across an information lifecycle.",
+          "doesNotEstablish": "The voluntary framework does not establish legal consent, identity, capacity, comprehension, jurisdictional compliance, or that a recorded preference was enforced.",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/consent-receipts/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_12e3279b728ef2adca2d2224"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Consent Receipts mean in this bounded context?",
+          "answer": "Consent Receipts, in this operator guide, is limited to the following inspected scope. The specification describes a record of authority a PII principal states that a controller has for processing PII, with purpose and related receipt fields. The framework organizes privacy-risk governance, data-processing awareness, individual participation, permissions, preferences, and communication across an information lifecycle. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this operator guide answer?",
+          "answer": "Consent Receipt Specification (version 1.1.0, 20 February 2018), at Definition of a Consent Receipt; receipt fields; human-readable and JSON representations, supports the specification describes a record of authority a PII principal states that a controller has for processing PII, with purpose and related receipt fields. NIST Privacy Framework: A Tool for Improving Privacy through Enterprise Risk Management (version 1.0, January 2020), at Core Functions Identify-P, Govern-P, Control-P and Communicate-P; glossary definitions for data action and data processing, supports the framework organizes privacy-risk governance, data-processing awareness, individual participation, permissions, preferences, and communication across an information lifecycle."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "A receipt records stated consent; it does not prove identity, comprehension, legal validity, freely given consent, continuing authority, execution compliance, or applicability in every jurisdiction. The voluntary framework does not establish legal consent, identity, capacity, comprehension, jurisdictional compliance, or that a recorded preference was enforced. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/consent-receipts/operator-guide#article",
+        "headline": "Consent Receipts — Operator Guide",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/consent-receipts/operator-guide",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://kantarainitiative.org/file-downloads/consent-receipt-specification-v1-1-0/",
+          "https://www.nist.gov/document/nist-privacy-frameworkv10pdf"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Consent Receipts mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Consent Receipts, in this operator guide, is limited to the following inspected scope. The specification describes a record of authority a PII principal states that a controller has for processing PII, with purpose and related receipt fields. The framework organizes privacy-risk governance, data-processing awareness, individual participation, permissions, preferences, and communication across an information lifecycle. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this operator guide answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Consent Receipt Specification (version 1.1.0, 20 February 2018), at Definition of a Consent Receipt; receipt fields; human-readable and JSON representations, supports the specification describes a record of authority a PII principal states that a controller has for processing PII, with purpose and related receipt fields. NIST Privacy Framework: A Tool for Improving Privacy through Enterprise Risk Management (version 1.0, January 2020), at Core Functions Identify-P, Govern-P, Control-P and Communicate-P; glossary definitions for data action and data processing, supports the framework organizes privacy-risk governance, data-processing awareness, individual participation, permissions, preferences, and communication across an information lifecycle."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A receipt records stated consent; it does not prove identity, comprehension, legal validity, freely given consent, continuing authority, execution compliance, or applicability in every jurisdiction. The voluntary framework does not establish legal consent, identity, capacity, comprehension, jurisdictional compliance, or that a recorded preference was enforced. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-7",
+        "decisionManifestDigest": "sha256:f88da6da01d6b6b077afda6bca0492a0303f65701cfcd30d620c2d3363fbb5b3",
+        "decisionDigest": "sha256:83a98eec45dc544371cf51b5e4b1b9d430242562f1b93f864c7513775271b6c2",
+        "specificationManifestDigest": "sha256:8a9b4e672a5d1e336d7d483130a134f35dd94db60c41bd915eaa54f53585576e",
+        "specificationDigest": "sha256:04d7a8e3723d8e2d3ef0ab98816c36a68e37548f5ee4337239103536d78e1591",
+        "packetManifestDigest": "sha256:433b3a971c498178ba32c2541f67a6bbdc6b8d397ddb23f32201b89593d00245",
+        "packetDigest": "sha256:21d544292264d50e871ab2aa21760a0c630bd4494b601445b9cd7a7775a0b881"
+      },
+      "contentDigest": "sha256:1c568ad8db7c3efc9542f4d2f774f3d4de6e0ec03ec7ce83b7b968c57a5e157f"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_107224c160be48d750de375d",
+      "tranche": 7,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/device-identity/architecture",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/architecture",
+      "title": "Device Identity — Architecture",
+      "topic": "device-identity",
+      "routeRole": "architecture",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:device-identity",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:device-identity"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Device Identity, in this architecture, is limited to the following inspected scope. Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Device Identity, in this architecture, is limited to the following inspected scope. Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Architecture",
+          "kind": "role-method",
+          "paragraphs": [
+            "Describe components, trust boundaries, decisions, and handoffs before naming implementation benefits.",
+            "An architecture is incomplete when it hides which component refuses an invalid, stale, unauthorized, or unsupported request.",
+            "Applied scope: Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "IoT Device Cybersecurity Capability Core Baseline — Section 2 and Table 1, Device Identification. Establishes: Logical and physical identification of an IoT device for cybersecurity management.",
+            "Agent client credential authorization — credential fingerprint, client binding, status, and authorization checks. Establishes: Current Maha client-credential identity and authorization behavior."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The baseline is a manufacturer-oriented IoT starting point, not universal device identity or proof that a device has not been substituted.",
+            "Repository behavior is implementation evidence, not an independent security certification.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition",
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/operator-guide",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/failure-mode",
+            "property-home: https://www.maha-os.com/",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/controls"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-ir-8259a",
+          "title": "IoT Device Cybersecurity Capability Core Baseline",
+          "responsibleBody": "NIST",
+          "versionOrDate": "NISTIR 8259A, May 2020",
+          "sourceClass": "government-guidance",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ir/2020/NIST.IR.8259a.pdf",
+          "locator": "Section 2 and Table 1, Device Identification",
+          "establishes": "Logical and physical identification of an IoT device for cybersecurity management.",
+          "doesNotEstablish": "The baseline is a manufacturer-oriented IoT starting point, not universal device identity or proof that a device has not been substituted.",
+          "rightsBasis": "Publicly accessible official material; retain the link and a bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "local-agent-credentials",
+          "title": "Agent client credential authorization",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source inspected 2026-09-05",
+          "sourceClass": "local-implementation",
+          "url": null,
+          "locator": "credential fingerprint, client binding, status, and authorization checks",
+          "establishes": "Current Maha client-credential identity and authorization behavior.",
+          "doesNotEstablish": "Repository behavior is implementation evidence, not an independent security certification.",
+          "rightsBasis": "Maha-controlled repository material; retain only file identity, symbol locator, and content fingerprint. No credential or runtime value is included.",
+          "inspectionDepth": "code-symbol",
+          "contentFingerprint": "sha256:15a41eeb0d4ed74d9134e6982ce367be72888d86636107ce8a31b8bd08dacf7f"
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_f2e452a99e390ddae8b1001f"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_9f41b4ed6746ae6e048f417f"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_956bb7c77098dead14075f84"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/controls",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_cfc312cdb30a602f2f7c4b17"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Device Identity mean in this bounded context?",
+          "answer": "Device Identity, in this architecture, is limited to the following inspected scope. Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this architecture answer?",
+          "answer": "IoT Device Cybersecurity Capability Core Baseline (NISTIR 8259A, May 2020), at Section 2 and Table 1, Device Identification, supports logical and physical identification of an IoT device for cybersecurity management. Agent client credential authorization (repository source inspected 2026-09-05), at credential fingerprint, client binding, status, and authorization checks, supports current Maha client-credential identity and authorization behavior."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The baseline is a manufacturer-oriented IoT starting point, not universal device identity or proof that a device has not been substituted. Repository behavior is implementation evidence, not an independent security certification. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/architecture#article",
+        "headline": "Device Identity — Architecture",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/architecture",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://nvlpubs.nist.gov/nistpubs/ir/2020/NIST.IR.8259a.pdf"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Device Identity mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Device Identity, in this architecture, is limited to the following inspected scope. Logical and physical identification of an IoT device for cybersecurity management. Current Maha client-credential identity and authorization behavior. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this architecture answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "IoT Device Cybersecurity Capability Core Baseline (NISTIR 8259A, May 2020), at Section 2 and Table 1, Device Identification, supports logical and physical identification of an IoT device for cybersecurity management. Agent client credential authorization (repository source inspected 2026-09-05), at credential fingerprint, client binding, status, and authorization checks, supports current Maha client-credential identity and authorization behavior."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The baseline is a manufacturer-oriented IoT starting point, not universal device identity or proof that a device has not been substituted. Repository behavior is implementation evidence, not an independent security certification. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-7",
+        "decisionManifestDigest": "sha256:f88da6da01d6b6b077afda6bca0492a0303f65701cfcd30d620c2d3363fbb5b3",
+        "decisionDigest": "sha256:c768fbd882a8971670bf66314412bec4906bba567654cef4047a5e57ffbfe06e",
+        "specificationManifestDigest": "sha256:8a9b4e672a5d1e336d7d483130a134f35dd94db60c41bd915eaa54f53585576e",
+        "specificationDigest": "sha256:5d1898ac85cc4a3ef2544c358dd911fea6267a06e2986dffc7f7aeb88e2a04c2",
+        "packetManifestDigest": "sha256:433b3a971c498178ba32c2541f67a6bbdc6b8d397ddb23f32201b89593d00245",
+        "packetDigest": "sha256:0f2b085f088485dbda656dd024d85d14b2ae06ca0aa32a12dd94db5bc90d8ab6"
+      },
+      "contentDigest": "sha256:2d006fecdeb813b01bdb2a4d882e765d79f373f97e0bd4cb6cd4ba2a24589aa1"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
       "candidateId": "cand_cfc312cdb30a602f2f7c4b17",
       "tranche": 6,
       "siteId": "maha-os",
@@ -1304,7 +2068,8 @@
             "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/operator-guide",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/failure-mode",
-            "property-home: https://www.maha-os.com/"
+            "property-home: https://www.maha-os.com/",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/architecture"
           ]
         }
       ],
@@ -1368,6 +2133,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/architecture",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_107224c160be48d750de375d"
         }
       ],
       "boundedAnswers": [
@@ -1479,7 +2250,7 @@
         "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
         "packetDigest": "sha256:cf1972d2e20bd36aa7b9c9d3724be11d5383e4a7f6fa5dde1a894e4cde7c600f"
       },
-      "contentDigest": "sha256:9f44ff3b61ff62e76b01d03bfee4f64b6aab48ffb12ab4ceee041ea6644b7533"
+      "contentDigest": "sha256:e4c95f7a4cfefd40bd8c7c04c19ae43d1f30ec7633e4a885f69c52fec72ce252"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -1566,7 +2337,8 @@
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/operator-guide",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/failure-mode",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/controls",
-            "property-home: https://www.maha-os.com/"
+            "property-home: https://www.maha-os.com/",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/architecture"
           ]
         }
       ],
@@ -1636,6 +2408,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/architecture",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_107224c160be48d750de375d"
         }
       ],
       "boundedAnswers": [
@@ -1747,7 +2525,7 @@
         "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
         "packetDigest": "sha256:2c939fcb210a0eaf5043eb3bca767b611fe659f13b3483426a4d256b8a047783"
       },
-      "contentDigest": "sha256:340d444b75e85cca25f29a6aea267d81f2f6ed91274d006a48c23fa7bf55f944"
+      "contentDigest": "sha256:cb96ec64f7ef35701cbf3a7090ad51c8b1a11250971c12811e866ecd3151aee9"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -1833,7 +2611,8 @@
             "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/operator-guide",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/controls",
-            "property-home: https://www.maha-os.com/"
+            "property-home: https://www.maha-os.com/",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/architecture"
           ]
         }
       ],
@@ -1897,6 +2676,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/architecture",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_107224c160be48d750de375d"
         }
       ],
       "boundedAnswers": [
@@ -2008,7 +2793,7 @@
         "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
         "packetDigest": "sha256:5a26bfb65bbd3849066e000b7400f7fba334fa173c9211665a2e7cbc86236c99"
       },
-      "contentDigest": "sha256:add7a4f1644792f5e479f11e6e6820ced1fc968a23e580098d49326d03416c41"
+      "contentDigest": "sha256:34d639cc279bf332d541da0a0962ef19efa27c35ab0bbee56d05e30a0bb294b4"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -2094,7 +2879,8 @@
             "canonical-family-owner-definition-first: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/failure-mode",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/controls",
-            "property-home: https://www.maha-os.com/"
+            "property-home: https://www.maha-os.com/",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/device-identity/architecture"
           ]
         }
       ],
@@ -2158,6 +2944,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/architecture",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_107224c160be48d750de375d"
         }
       ],
       "boundedAnswers": [
@@ -2269,7 +3061,7 @@
         "packetManifestDigest": "sha256:86c65339059caf9fbfa44d6439a997293f01862f6c2084961efe44349db9580b",
         "packetDigest": "sha256:2c939fcb210a0eaf5043eb3bca767b611fe659f13b3483426a4d256b8a047783"
       },
-      "contentDigest": "sha256:1afa89e7e1e66ef262c356560f30fc38698c904a066aa44712ae153afea33840"
+      "contentDigest": "sha256:2ce626c43fbfd1f2c5eee492d7f7a559813c7c8e622251ac3c8e2be5be9d7117"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -8239,6 +9031,274 @@
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_3336730afb2b7bb2e57390db",
+      "tranche": 7,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/resilience-mode/architecture",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/architecture",
+      "title": "Resilience Mode — Architecture",
+      "topic": "resilience-mode",
+      "routeRole": "architecture",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:resilience-mode",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:resilience-mode"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Resilience Mode, in this architecture, is limited to the following inspected scope. Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Resilience Mode, in this architecture, is limited to the following inspected scope. Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Architecture",
+          "kind": "role-method",
+          "paragraphs": [
+            "Describe components, trust boundaries, decisions, and handoffs before naming implementation benefits.",
+            "An architecture is incomplete when it hides which component refuses an invalid, stale, unauthorized, or unsupported request.",
+            "Applied scope: Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Contingency Planning Guide for Federal Information Systems — Sections 3.4–3.6, 4 and 5. Establishes: Alternate operations, recovery, testing, and reconstitution after disruption.",
+            "Governed workflow task-state ledger — State transitions, terminal states, replay keys and event history. Establishes: A local mechanism for preserving and resuming bounded workflow state."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The guide does not define a consumer-device mode, guarantee availability, or authorize unsafe degraded operation.",
+            "This code does not prove hardware resilience, offline inference quality, or deployed persistence.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/operator-guide",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/failure-mode",
+            "property-home: https://www.maha-os.com/",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/controls"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "nist-contingency-resilience",
+          "title": "Contingency Planning Guide for Federal Information Systems",
+          "responsibleBody": "NIST",
+          "versionOrDate": "SP 800-34 Rev. 1, May 2010",
+          "sourceClass": "government-guidance",
+          "url": "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf",
+          "locator": "Sections 3.4–3.6, 4 and 5",
+          "establishes": "Alternate operations, recovery, testing, and reconstitution after disruption.",
+          "doesNotEstablish": "The guide does not define a consumer-device mode, guarantee availability, or authorize unsafe degraded operation.",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "local-task-resilience",
+          "title": "Governed workflow task-state ledger",
+          "responsibleBody": "Maha Strategies",
+          "versionOrDate": "repository source reviewed 2026-09-06",
+          "sourceClass": "local-implementation",
+          "url": null,
+          "locator": "State transitions, terminal states, replay keys and event history",
+          "establishes": "A local mechanism for preserving and resuming bounded workflow state.",
+          "doesNotEstablish": "This code does not prove hardware resilience, offline inference quality, or deployed persistence.",
+          "rightsBasis": "Maha-controlled repository source; symbol names and a file identity may be recorded, but no credential, customer value, or runtime payload is retained.",
+          "inspectionDepth": "code-symbol",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_d6cbea3163ab9349857186bf"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_1754ab6d9ccee1ef6778e37e"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/failure-mode",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_3dee4cb4d23a8de9ae7a7e1d"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/controls",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_385955fc6e2a9a940a3deec3"
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Resilience Mode mean in this bounded context?",
+          "answer": "Resilience Mode, in this architecture, is limited to the following inspected scope. Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this architecture answer?",
+          "answer": "Contingency Planning Guide for Federal Information Systems (SP 800-34 Rev. 1, May 2010), at Sections 3.4–3.6, 4 and 5, supports alternate operations, recovery, testing, and reconstitution after disruption. Governed workflow task-state ledger (repository source reviewed 2026-09-06), at State transitions, terminal states, replay keys and event history, supports a local mechanism for preserving and resuming bounded workflow state."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The guide does not define a consumer-device mode, guarantee availability, or authorize unsafe degraded operation. This code does not prove hardware resilience, offline inference quality, or deployed persistence. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/architecture#article",
+        "headline": "Resilience Mode — Architecture",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/architecture",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Resilience Mode mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Resilience Mode, in this architecture, is limited to the following inspected scope. Alternate operations, recovery, testing, and reconstitution after disruption. A local mechanism for preserving and resuming bounded workflow state. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this architecture answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Contingency Planning Guide for Federal Information Systems (SP 800-34 Rev. 1, May 2010), at Sections 3.4–3.6, 4 and 5, supports alternate operations, recovery, testing, and reconstitution after disruption. Governed workflow task-state ledger (repository source reviewed 2026-09-06), at State transitions, terminal states, replay keys and event history, supports a local mechanism for preserving and resuming bounded workflow state."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The guide does not define a consumer-device mode, guarantee availability, or authorize unsafe degraded operation. This code does not prove hardware resilience, offline inference quality, or deployed persistence. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-7",
+        "decisionManifestDigest": "sha256:f88da6da01d6b6b077afda6bca0492a0303f65701cfcd30d620c2d3363fbb5b3",
+        "decisionDigest": "sha256:8f6202be17a590bed3c20a90d5cc590b5bb16a9d918c7b2867ce56a5cf9fe2d5",
+        "specificationManifestDigest": "sha256:8a9b4e672a5d1e336d7d483130a134f35dd94db60c41bd915eaa54f53585576e",
+        "specificationDigest": "sha256:89b8f0af49c20baac28cc82ec7d91b474824a1a0bb4703b7a61f975f5e56c821",
+        "packetManifestDigest": "sha256:433b3a971c498178ba32c2541f67a6bbdc6b8d397ddb23f32201b89593d00245",
+        "packetDigest": "sha256:16dd674d116660884671c835cbf59e3f5bf63a65f105a02c605ebd1bd13b650d"
+      },
+      "contentDigest": "sha256:52b7a6e0caef7d156b6bff3a6f936beee23ad564a60a9732d42e5441447718a0"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
       "candidateId": "cand_385955fc6e2a9a940a3deec3",
       "tranche": 6,
       "siteId": "maha-os",
@@ -8321,7 +9381,8 @@
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/operator-guide",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/failure-mode",
-            "property-home: https://www.maha-os.com/"
+            "property-home: https://www.maha-os.com/",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/architecture"
           ]
         }
       ],
@@ -8385,6 +9446,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/architecture",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_3336730afb2b7bb2e57390db"
         }
       ],
       "boundedAnswers": [
@@ -8496,7 +9563,7 @@
         "packetManifestDigest": "sha256:cc2efaae1f218af26f852b3625981334c8ba1c8fb9b9737b0e55f00b41ef3c01",
         "packetDigest": "sha256:08524b98d91307d9ac791a5ec935219875ea0117d55bcc15695ea2de8bcdcbde"
       },
-      "contentDigest": "sha256:a64e938701a5630d7a0a1202857eb008bd31a915713b6b686e4de92a5354e3b5"
+      "contentDigest": "sha256:1ce6f0736c72cd35de09fc2bc87a8cf6f10d2e2cea770b5187e188ad62b09351"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -8582,7 +9649,8 @@
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/operator-guide",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/failure-mode",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/controls",
-            "property-home: https://www.maha-os.com/"
+            "property-home: https://www.maha-os.com/",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/architecture"
           ]
         }
       ],
@@ -8646,6 +9714,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/architecture",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_3336730afb2b7bb2e57390db"
         }
       ],
       "boundedAnswers": [
@@ -8757,7 +9831,7 @@
         "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
         "packetDigest": "sha256:bc761a0d0b0c54f5d12e8b0dc366aa958025e9f6d8c9c2bfc574f6b59b11fd3e"
       },
-      "contentDigest": "sha256:0b00eddab35c7242f94f044e3d9f3cac85f19615da3cb321f3df36d2c57b12aa"
+      "contentDigest": "sha256:e5ca0ffd5b2b72fdf13fd7afd8b3171e8d0956f93d49cf5d0a6c94c9ab923588"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -8843,7 +9917,8 @@
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/operator-guide",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/controls",
-            "property-home: https://www.maha-os.com/"
+            "property-home: https://www.maha-os.com/",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/architecture"
           ]
         }
       ],
@@ -8907,6 +9982,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/architecture",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_3336730afb2b7bb2e57390db"
         }
       ],
       "boundedAnswers": [
@@ -9018,7 +10099,7 @@
         "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
         "packetDigest": "sha256:bc761a0d0b0c54f5d12e8b0dc366aa958025e9f6d8c9c2bfc574f6b59b11fd3e"
       },
-      "contentDigest": "sha256:645a075319d49ef01ed2d03f4f629fd0d1895221338f49cbe230fee173e13b7c"
+      "contentDigest": "sha256:a8b200301f63517384c663c51829ba90a2082de9977c670eb17b6e7f84b38d18"
     },
     {
       "schemaVersion": "maha-federation-page/1.0",
@@ -9104,7 +10185,8 @@
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/definition",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/failure-mode",
             "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/controls",
-            "property-home: https://www.maha-os.com/"
+            "property-home: https://www.maha-os.com/",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/architecture"
           ]
         }
       ],
@@ -9168,6 +10250,12 @@
           "relationship": "property-home",
           "availability": "observed-existing",
           "candidateId": null
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/architecture",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_3336730afb2b7bb2e57390db"
         }
       ],
       "boundedAnswers": [
@@ -9279,8 +10367,504 @@
         "packetManifestDigest": "sha256:8977495922b317f48f1c65156a317c1255a3f69897c441b73da770d14f1572c7",
         "packetDigest": "sha256:bc761a0d0b0c54f5d12e8b0dc366aa958025e9f6d8c9c2bfc574f6b59b11fd3e"
       },
-      "contentDigest": "sha256:2d1316e3116f85838113235a9f0a532b8e0b18e710a5efb82a672b66d0ceca84"
+      "contentDigest": "sha256:ac92595877568f3cce98df4a6f77b7ba8498d0e27cad16efceb44790aa8687ed"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_33cd1bc11cbfa3f62f02c825",
+      "tranche": 7,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/sensor-provenance/definition",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/sensor-provenance/definition",
+      "title": "Sensor Provenance — Definition",
+      "topic": "sensor-provenance",
+      "routeRole": "definition",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:sensor-provenance",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:sensor-provenance"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Sensor Provenance, in this definition, is limited to the following inspected scope. SOSA can identify a sensor, observed property, feature of interest, procedure, result, phenomenon time, and result time for an asserted observation. PROV represents entities, activities, agents, generation, use, derivation, association, attribution, and role-qualified responsibility. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Sensor Provenance, in this definition, is limited to the following inspected scope. SOSA can identify a sensor, observed property, feature of interest, procedure, result, phenomenon time, and result time for an asserted observation. PROV represents entities, activities, agents, generation, use, derivation, association, attribution, and role-qualified responsibility. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Definition",
+          "kind": "role-method",
+          "paragraphs": [
+            "Use the term only for the source-backed scope stated here; keep adjacent concepts separate unless a typed relationship is explicit.",
+            "A useful definition states both inclusion and exclusion conditions so a machine answer cannot silently widen it.",
+            "Applied scope: SOSA can identify a sensor, observed property, feature of interest, procedure, result, phenomenon time, and result time for an asserted observation. PROV represents entities, activities, agents, generation, use, derivation, association, attribution, and role-qualified responsibility."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Semantic Sensor Network Ontology — §§5.5.1–5.5.2; sosa:madeBySensor, observedProperty, hasFeatureOfInterest, usedProcedure, hasResult, phenomenonTime, resultTime. Establishes: SOSA can identify a sensor, observed property, feature of interest, procedure, result, phenomenon time, and result time for an asserted observation.",
+            "PROV Model Primer — §2.3 generation and usage; §2.4 agents and responsibility; §2.5 roles. Establishes: PROV represents entities, activities, agents, generation, use, derivation, association, attribution, and role-qualified responsibility."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The ontology structures an assertion; it does not prove sensor accuracy, calibration, integrity, device identity, consent, completeness, or truthful reporting.",
+            "PROV represents asserted provenance; it does not authenticate actors, observe an event, validate a result, or prove that the asserted history is complete.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/sensor-provenance/operator-guide",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "w3c-ssn-sosa-2023",
+          "title": "Semantic Sensor Network Ontology",
+          "responsibleBody": "W3C",
+          "versionOrDate": "W3C Recommendation, 4 December 2023",
+          "sourceClass": "web-standard",
+          "url": "https://www.w3.org/TR/vocab-ssn-2023/",
+          "locator": "§§5.5.1–5.5.2; sosa:madeBySensor, observedProperty, hasFeatureOfInterest, usedProcedure, hasResult, phenomenonTime, resultTime",
+          "establishes": "SOSA can identify a sensor, observed property, feature of interest, procedure, result, phenomenon time, and result time for an asserted observation.",
+          "doesNotEstablish": "The ontology structures an assertion; it does not prove sensor accuracy, calibration, integrity, device identity, consent, completeness, or truthful reporting.",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "w3c-prov-primer-t7",
+          "title": "PROV Model Primer",
+          "responsibleBody": "W3C",
+          "versionOrDate": "Working Group Note, 30 April 2013",
+          "sourceClass": "standard-primer",
+          "url": "https://www.w3.org/TR/prov-primer/",
+          "locator": "§2.3 generation and usage; §2.4 agents and responsibility; §2.5 roles",
+          "establishes": "PROV represents entities, activities, agents, generation, use, derivation, association, attribution, and role-qualified responsibility.",
+          "doesNotEstablish": "PROV represents asserted provenance; it does not authenticate actors, observe an event, validate a result, or prove that the asserted history is complete.",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/sensor-provenance/operator-guide",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_151288f524ae500d4f2a9c3c"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Sensor Provenance mean in this bounded context?",
+          "answer": "Sensor Provenance, in this definition, is limited to the following inspected scope. SOSA can identify a sensor, observed property, feature of interest, procedure, result, phenomenon time, and result time for an asserted observation. PROV represents entities, activities, agents, generation, use, derivation, association, attribution, and role-qualified responsibility. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this definition answer?",
+          "answer": "Semantic Sensor Network Ontology (W3C Recommendation, 4 December 2023), at §§5.5.1–5.5.2; sosa:madeBySensor, observedProperty, hasFeatureOfInterest, usedProcedure, hasResult, phenomenonTime, resultTime, supports sOSA can identify a sensor, observed property, feature of interest, procedure, result, phenomenon time, and result time for an asserted observation. PROV Model Primer (Working Group Note, 30 April 2013), at §2.3 generation and usage; §2.4 agents and responsibility; §2.5 roles, supports pROV represents entities, activities, agents, generation, use, derivation, association, attribution, and role-qualified responsibility."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The ontology structures an assertion; it does not prove sensor accuracy, calibration, integrity, device identity, consent, completeness, or truthful reporting. PROV represents asserted provenance; it does not authenticate actors, observe an event, validate a result, or prove that the asserted history is complete. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/sensor-provenance/definition#article",
+        "headline": "Sensor Provenance — Definition",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/sensor-provenance/definition",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://www.w3.org/TR/vocab-ssn-2023/",
+          "https://www.w3.org/TR/prov-primer/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Sensor Provenance mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sensor Provenance, in this definition, is limited to the following inspected scope. SOSA can identify a sensor, observed property, feature of interest, procedure, result, phenomenon time, and result time for an asserted observation. PROV represents entities, activities, agents, generation, use, derivation, association, attribution, and role-qualified responsibility. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this definition answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Semantic Sensor Network Ontology (W3C Recommendation, 4 December 2023), at §§5.5.1–5.5.2; sosa:madeBySensor, observedProperty, hasFeatureOfInterest, usedProcedure, hasResult, phenomenonTime, resultTime, supports sOSA can identify a sensor, observed property, feature of interest, procedure, result, phenomenon time, and result time for an asserted observation. PROV Model Primer (Working Group Note, 30 April 2013), at §2.3 generation and usage; §2.4 agents and responsibility; §2.5 roles, supports pROV represents entities, activities, agents, generation, use, derivation, association, attribution, and role-qualified responsibility."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The ontology structures an assertion; it does not prove sensor accuracy, calibration, integrity, device identity, consent, completeness, or truthful reporting. PROV represents asserted provenance; it does not authenticate actors, observe an event, validate a result, or prove that the asserted history is complete. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-7",
+        "decisionManifestDigest": "sha256:f88da6da01d6b6b077afda6bca0492a0303f65701cfcd30d620c2d3363fbb5b3",
+        "decisionDigest": "sha256:b8b9d4a0307e7c2299bb228a755ba8e5da76beacd8bd1c4fdc67bf349235c2f7",
+        "specificationManifestDigest": "sha256:8a9b4e672a5d1e336d7d483130a134f35dd94db60c41bd915eaa54f53585576e",
+        "specificationDigest": "sha256:7578b4bd3ac4cbd771abdaeff9bc1a14117418312bacd6b0c0ddc20d67d5e30d",
+        "packetManifestDigest": "sha256:433b3a971c498178ba32c2541f67a6bbdc6b8d397ddb23f32201b89593d00245",
+        "packetDigest": "sha256:885759aaf9e9a30b35ace2d5b6ceaa3cadd6ae337306827233e2ccc28e894d2f"
+      },
+      "contentDigest": "sha256:dbeea1b917e2bff0fdee82025d4835c97f652a6ae99e6508f4c9bb4b703a5332"
+    },
+    {
+      "schemaVersion": "maha-federation-page/1.0",
+      "candidateId": "cand_151288f524ae500d4f2a9c3c",
+      "tranche": 7,
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "path": "/knowledge/private-machine-systems/sensor-provenance/operator-guide",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/sensor-provenance/operator-guide",
+      "title": "Sensor Provenance — Operator Guide",
+      "topic": "sensor-provenance",
+      "routeRole": "operator-guide",
+      "concept": {
+        "conceptId": "urn:maha:concept:consent:sensor-provenance",
+        "familyId": "consent",
+        "canonicalOwner": "maha-os",
+        "authorityRole": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+        "typedRelationships": [
+          {
+            "type": "applies-to",
+            "target": "urn:maha:concept:consent:sensor-provenance"
+          },
+          {
+            "type": "governed-by",
+            "target": "urn:maha:concept:governance"
+          },
+          {
+            "type": "evidence-for",
+            "target": "urn:maha:concept:consent"
+          }
+        ]
+      },
+      "directAnswer": "Sensor Provenance, in this operator guide, is limited to the following inspected scope. SOSA can identify a sensor, observed property, feature of interest, procedure, result, phenomenon time, and result time for an asserted observation. PROV represents entities, activities, agents, generation, use, derivation, association, attribution, and role-qualified responsibility. The answer carries the source boundaries forward and does not infer authority from a neighboring topic.",
+      "sections": [
+        {
+          "heading": "Direct answer",
+          "kind": "answer",
+          "paragraphs": [
+            "Sensor Provenance, in this operator guide, is limited to the following inspected scope. SOSA can identify a sensor, observed property, feature of interest, procedure, result, phenomenon time, and result time for an asserted observation. PROV represents entities, activities, agents, generation, use, derivation, association, attribution, and role-qualified responsibility. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+          ]
+        },
+        {
+          "heading": "Operator guide",
+          "kind": "role-method",
+          "paragraphs": [
+            "Tell the operator what to check before acting, when to refuse, and how to preserve evidence of the outcome.",
+            "The guide cannot infer that a device, service, source, or credential is healthy when observation is unavailable.",
+            "Applied scope: SOSA can identify a sensor, observed property, feature of interest, procedure, result, phenomenon time, and result time for an asserted observation. PROV represents entities, activities, agents, generation, use, derivation, association, attribution, and role-qualified responsibility."
+          ]
+        },
+        {
+          "heading": "Definition and operating context",
+          "kind": "authority",
+          "paragraphs": [
+            "The canonical concept owner is maha-os. This route may apply consent; it cannot redefine or inherit the authority of its canonical owner.",
+            "This property may publish private-system architecture, consent controls, operator guidance. It must not publish medical diagnosis or cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Evidence and exact locators",
+          "kind": "evidence",
+          "paragraphs": [
+            "Semantic Sensor Network Ontology — §§5.5.1–5.5.2; sosa:madeBySensor, observedProperty, hasFeatureOfInterest, usedProcedure, hasResult, phenomenonTime, resultTime. Establishes: SOSA can identify a sensor, observed property, feature of interest, procedure, result, phenomenon time, and result time for an asserted observation.",
+            "PROV Model Primer — §2.3 generation and usage; §2.4 agents and responsibility; §2.5 roles. Establishes: PROV represents entities, activities, agents, generation, use, derivation, association, attribution, and role-qualified responsibility."
+          ]
+        },
+        {
+          "heading": "What the evidence does not establish",
+          "kind": "limitations",
+          "paragraphs": [
+            "The ontology structures an assertion; it does not prove sensor accuracy, calibration, integrity, device identity, consent, completeness, or truthful reporting.",
+            "PROV represents asserted provenance; it does not authenticate actors, observe an event, validate a result, or prove that the asserted history is complete.",
+            "This route must not claim medical diagnosis.",
+            "This route must not claim cloud-first defaults presented as private."
+          ]
+        },
+        {
+          "heading": "Related definitions and applications",
+          "kind": "relationships",
+          "paragraphs": [
+            "graphEdges: https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+            "same-topic-application: https://www.maha-os.com/knowledge/private-machine-systems/sensor-provenance/definition",
+            "property-home: https://www.maha-os.com/"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceId": "w3c-ssn-sosa-2023",
+          "title": "Semantic Sensor Network Ontology",
+          "responsibleBody": "W3C",
+          "versionOrDate": "W3C Recommendation, 4 December 2023",
+          "sourceClass": "web-standard",
+          "url": "https://www.w3.org/TR/vocab-ssn-2023/",
+          "locator": "§§5.5.1–5.5.2; sosa:madeBySensor, observedProperty, hasFeatureOfInterest, usedProcedure, hasResult, phenomenonTime, resultTime",
+          "establishes": "SOSA can identify a sensor, observed property, feature of interest, procedure, result, phenomenon time, and result time for an asserted observation.",
+          "doesNotEstablish": "The ontology structures an assertion; it does not prove sensor accuracy, calibration, integrity, device identity, consent, completeness, or truthful reporting.",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        },
+        {
+          "sourceId": "w3c-prov-primer-t7",
+          "title": "PROV Model Primer",
+          "responsibleBody": "W3C",
+          "versionOrDate": "Working Group Note, 30 April 2013",
+          "sourceClass": "standard-primer",
+          "url": "https://www.w3.org/TR/prov-primer/",
+          "locator": "§2.3 generation and usage; §2.4 agents and responsibility; §2.5 roles",
+          "establishes": "PROV represents entities, activities, agents, generation, use, derivation, association, attribution, and role-qualified responsibility.",
+          "doesNotEstablish": "PROV represents asserted provenance; it does not authenticate actors, observe an event, validate a result, or prove that the asserted history is complete.",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "inspectionDepth": "section",
+          "contentFingerprint": null
+        }
+      ],
+      "relatedLinks": [
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+          "relationship": "graphEdges",
+          "candidateId": "cand_671d652918d62414c37d751d",
+          "availability": "implemented-in-this-batch"
+        },
+        {
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/sensor-provenance/definition",
+          "relationship": "same-topic-application",
+          "availability": "implemented-in-this-batch",
+          "candidateId": "cand_33cd1bc11cbfa3f62f02c825"
+        },
+        {
+          "url": "https://www.maha-os.com/",
+          "relationship": "property-home",
+          "availability": "observed-existing",
+          "candidateId": null
+        }
+      ],
+      "boundedAnswers": [
+        {
+          "question": "What does Sensor Provenance mean in this bounded context?",
+          "answer": "Sensor Provenance, in this operator guide, is limited to the following inspected scope. SOSA can identify a sensor, observed property, feature of interest, procedure, result, phenomenon time, and result time for an asserted observation. PROV represents entities, activities, agents, generation, use, derivation, association, attribution, and role-qualified responsibility. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+        },
+        {
+          "question": "Which inspected sources support this operator guide answer?",
+          "answer": "Semantic Sensor Network Ontology (W3C Recommendation, 4 December 2023), at §§5.5.1–5.5.2; sosa:madeBySensor, observedProperty, hasFeatureOfInterest, usedProcedure, hasResult, phenomenonTime, resultTime, supports sOSA can identify a sensor, observed property, feature of interest, procedure, result, phenomenon time, and result time for an asserted observation. PROV Model Primer (Working Group Note, 30 April 2013), at §2.3 generation and usage; §2.4 agents and responsibility; §2.5 roles, supports pROV represents entities, activities, agents, generation, use, derivation, association, attribution, and role-qualified responsibility."
+        },
+        {
+          "question": "What does the evidence not establish?",
+          "answer": "The ontology structures an assertion; it does not prove sensor accuracy, calibration, integrity, device identity, consent, completeness, or truthful reporting. PROV represents asserted provenance; it does not authenticate actors, observe an event, validate a result, or prove that the asserted history is complete. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        },
+        {
+          "question": "Which definition or canonical owner must be read first?",
+          "answer": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+        },
+        {
+          "question": "What source, policy, implementation, or release change would require revision?",
+          "answer": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+        }
+      ],
+      "qualityDimensions": [
+        "direct-answer",
+        "role-specific-method",
+        "claim-level-source-binding",
+        "exact-locators",
+        "source-boundaries",
+        "authority-boundary",
+        "typed-related-links",
+        "bounded-question-registry"
+      ],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://www.maha-os.com/knowledge/private-machine-systems/sensor-provenance/operator-guide#article",
+        "headline": "Sensor Provenance — Operator Guide",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/sensor-provenance/operator-guide",
+        "isPartOf": "https://www.maha-os.com/",
+        "citation": [
+          "https://www.w3.org/TR/vocab-ssn-2023/",
+          "https://www.w3.org/TR/prov-primer/"
+        ],
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Sensor Provenance mean in this bounded context?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sensor Provenance, in this operator guide, is limited to the following inspected scope. SOSA can identify a sensor, observed property, feature of interest, procedure, result, phenomenon time, and result time for an asserted observation. PROV represents entities, activities, agents, generation, use, derivation, association, attribution, and role-qualified responsibility. The answer carries the source boundaries forward and does not infer authority from a neighboring topic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which inspected sources support this operator guide answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Semantic Sensor Network Ontology (W3C Recommendation, 4 December 2023), at §§5.5.1–5.5.2; sosa:madeBySensor, observedProperty, hasFeatureOfInterest, usedProcedure, hasResult, phenomenonTime, resultTime, supports sOSA can identify a sensor, observed property, feature of interest, procedure, result, phenomenon time, and result time for an asserted observation. PROV Model Primer (Working Group Note, 30 April 2013), at §2.3 generation and usage; §2.4 agents and responsibility; §2.5 roles, supports pROV represents entities, activities, agents, generation, use, derivation, association, attribution, and role-qualified responsibility."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the evidence not establish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The ontology structures an assertion; it does not prove sensor accuracy, calibration, integrity, device identity, consent, completeness, or truthful reporting. PROV represents asserted provenance; it does not authenticate actors, observe an event, validate a result, or prove that the asserted history is complete. Property boundary: This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which definition or canonical owner must be read first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page is the local maha-os definition for its topic. Related applications may depend on it but may not silently redefine it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What source, policy, implementation, or release change would require revision?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Re-evaluate this page when a cited source, locator, governing instrument, local implementation, or canonical definition changes. Publication also requires a matching exact-revision review and active canonical release."
+            }
+          }
+        ]
+      },
+      "sourcePolicy": {
+        "exactLocatorsRequired": true,
+        "noSourceTextRetained": true,
+        "unsupportedValuesRemainUnknown": true,
+        "noRatingOrEndorsement": true
+      },
+      "adoption": {
+        "state": "ready-for-owner-integration",
+        "blockedDependencies": [],
+        "routeFileCreated": false,
+        "exactRevisionReviewed": false,
+        "canonicallyReleased": false,
+        "crawlable": false
+      },
+      "provenance": {
+        "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+        "sourceSetId": "tranche-7",
+        "decisionManifestDigest": "sha256:f88da6da01d6b6b077afda6bca0492a0303f65701cfcd30d620c2d3363fbb5b3",
+        "decisionDigest": "sha256:d54f7e5833365bac33674920718d6316c9229b05594f57a4d58c37ada27c0d62",
+        "specificationManifestDigest": "sha256:8a9b4e672a5d1e336d7d483130a134f35dd94db60c41bd915eaa54f53585576e",
+        "specificationDigest": "sha256:fed232e07340455b429b1231d14bff49ef3db08c734368729d84264618f9de79",
+        "packetManifestDigest": "sha256:433b3a971c498178ba32c2541f67a6bbdc6b8d397ddb23f32201b89593d00245",
+        "packetDigest": "sha256:885759aaf9e9a30b35ace2d5b6ceaa3cadd6ae337306827233e2ccc28e894d2f"
+      },
+      "contentDigest": "sha256:d6532f45865a8e1ec3a21d3a42403a3ff5833b0a134d1724c1ab0f1765bb06a3"
     }
   ],
-  "provenanceDigest": "sha256:409d372d614228698223b5fec043e59b9d4d16077d89101e08dd9980f0e35997"
+  "provenanceDigest": "sha256:4d263fc87f3111464f6bd29dcd6352d4f273383f190411b05ef1c8284b3e9aca"
 }
