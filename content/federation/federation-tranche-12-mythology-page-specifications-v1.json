@@ -1,0 +1,2941 @@
+{
+  "schemaVersion": "maha-federation-tranche-twelve-mythology-page-specifications/1.0",
+  "decisionManifestDigest": "sha256:f6fb5b1fc4593ab09a917b3ee2b2ff095377521031c1e180937f14477696d4b6",
+  "rule": "Only evidence-ready candidates receive substantial-page specifications; a specification creates no public route and cannot enter a build before later review and release gates.",
+  "counts": {
+    "specifications": 33,
+    "boundedQuestions": 165,
+    "excludedNonReady": 67
+  },
+  "specifications": [
+    {
+      "candidateId": "cand_44cf5a491db675046c4d328b",
+      "candidateDigest": "sha256:d7c543ea71c62af7a4b11002996c8307dca4352c0a9d89ab64f9f62cbb121ab7",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/ashur/source-text",
+      "title": "Ashur — Source text",
+      "topic": "ashur",
+      "routeRole": "source-text",
+      "answerContract": "Answer only the source text question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Name the work, language, edition, tablet or line range, and translation status; one literary or administrative witness cannot represent all periods and cities.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Ashur under the source text lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "oracc-reuse-policy",
+          "url": "https://oracc.museum.upenn.edu/doc/help/visitingoracc/reusingoracc/index.html",
+          "locator": "Default licence, project-specific exceptions, images and PDFs, attribution and stable URIs",
+          "rightsStatus": "cc-by-sa-3.0",
+          "scope": "Governs reuse of Oracc-authored text and data subject to project and object-level exceptions.",
+          "boundary": "The default licence cannot be transferred to museum images, linked PDFs, or separately credited material."
+        },
+        {
+          "sourceId": "oracc-ashur-temple-inventory",
+          "url": "https://oracc.museum.upenn.edu/saao/saa20/Q004802",
+          "locator": "SAA 20 049, obverse lines 1–17; line 1 begins the inventory with Aššur and named sacred spaces",
+          "rightsStatus": "cc-by-sa-3.0",
+          "scope": "Supplies one line-addressable Assyrian temple inventory naming Aššur, other deities, rooms, and cult objects.",
+          "boundary": "One inventory does not establish a complete theology, every Aššur cult, or the relationship between Aššur, Anšar, and Anu."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_44cf5a491db675046c4d328b",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/ashur/source-text",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_9b97ce04c5289450b6c74e88",
+      "candidateDigest": "sha256:16d785ed3ddbca2f3e89731f463d067e39082d8583e2d1039ab4ff9bd7ebc0e1",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/tiamat/city-and-cult",
+      "title": "Tiamat — City and cult",
+      "topic": "tiamat",
+      "routeRole": "city-and-cult",
+      "answerContract": "Answer only the city and cult question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Bind function, temple, city, ritual, and period to inspected evidence; absence of direct cult evidence must remain a finding rather than be filled by literary prominence.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Tiamat under the city and cult lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "oracc-reuse-policy",
+          "url": "https://oracc.museum.upenn.edu/doc/help/visitingoracc/reusingoracc/index.html",
+          "locator": "Default licence, project-specific exceptions, images and PDFs, attribution and stable URIs",
+          "rightsStatus": "cc-by-sa-3.0",
+          "scope": "Governs reuse of Oracc-authored text and data subject to project and object-level exceptions.",
+          "boundary": "The default licence cannot be transferred to museum images, linked PDFs, or separately credited material."
+        },
+        {
+          "sourceId": "oracc-tiamat",
+          "url": "https://oracc.museum.upenn.edu/amgg/listofdeities/tiamat/index.html",
+          "locator": "Functions; Divine Genealogy and Syncretisms; Cult Places; Time Periods; Name and Spellings",
+          "rightsStatus": "cc-by-sa-3.0",
+          "scope": "Explains Tiamat’s role in Enūma eliš and states that no direct cult is known while the poem was recited at Babylon’s New Year festival.",
+          "boundary": "Literary importance and festival recitation are not evidence for a direct cult of Tiamat; the overview is not the primary text of Enūma eliš."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_9b97ce04c5289450b6c74e88",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/tiamat/city-and-cult",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_95227d7a46fd3d8ad838bb1f",
+      "candidateDigest": "sha256:de42aecadc42f60b90acd9cd3b9fb13feefc6d00049b1364d2d8932be35525a6",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/rudra-shiva/vedic-text",
+      "title": "Rudra and Śiva — Vedic text",
+      "topic": "rudra-shiva",
+      "routeRole": "vedic-text",
+      "answerContract": "Answer only the vedic text question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "State only what one identified Vedic hymn and translation witness render; a hymn cannot establish a complete profile or later Hindu doctrine.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Rudra and Śiva under the vedic text lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "gretil-rigveda-registry",
+          "url": "https://gretil.sub.uni-goettingen.de/gretil.html",
+          "locator": "Vedic Sanskrit e-texts; Rigveda TEI, HTML, and text entries; source-file terms",
+          "rightsStatus": "reference-only",
+          "scope": "Confirms a scholarly Sanskrit e-text registry and edition metadata.",
+          "boundary": "Registry presence is not translation, passage interpretation, or permission to republish the e-text."
+        },
+        {
+          "sourceId": "rigveda-rudra-2-33",
+          "url": "https://en.wikisource.org/wiki/The_Hymns_of_the_Rigveda/Book_2/Hymn_33",
+          "locator": "Rigveda 2.33, stanzas 1–15",
+          "rightsStatus": "public-domain-work",
+          "scope": "Supplies one hymn addressing Rudra, including medicine, weapons, protection, and the Maruts.",
+          "boundary": "Griffith’s nineteenth-century rendering is philologically dated. One hymn does not establish later Śaiva, Vaiṣṇava, Śākta, epic, Purāṇic, or living theological claims."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_95227d7a46fd3d8ad838bb1f",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/rudra-shiva/vedic-text",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_97449eefeb716a467733ed1f",
+      "candidateDigest": "sha256:24fbbcd0de283e121bc7901c5ba6dd40488fd9733c9f11d5c4568dd854e910de",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/devi/vedic-text",
+      "title": "Devī — Vedic text",
+      "topic": "devi",
+      "routeRole": "vedic-text",
+      "answerContract": "Answer only the vedic text question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "State only what one identified Vedic hymn and translation witness render; a hymn cannot establish a complete profile or later Hindu doctrine.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Devī under the vedic text lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "gretil-rigveda-registry",
+          "url": "https://gretil.sub.uni-goettingen.de/gretil.html",
+          "locator": "Vedic Sanskrit e-texts; Rigveda TEI, HTML, and text entries; source-file terms",
+          "rightsStatus": "reference-only",
+          "scope": "Confirms a scholarly Sanskrit e-text registry and edition metadata.",
+          "boundary": "Registry presence is not translation, passage interpretation, or permission to republish the e-text."
+        },
+        {
+          "sourceId": "rigveda-devi-10-125",
+          "url": "https://en.wikisource.org/wiki/The_Hymns_of_the_Rigveda/Book_10/Hymn_125",
+          "locator": "Rigveda 10.125, stanzas 1–8",
+          "rightsStatus": "public-domain-work",
+          "scope": "Supplies one first-person hymn conventionally identified with Vāc/Devī in the page heading and source tradition.",
+          "boundary": "Griffith’s nineteenth-century rendering is philologically dated. One hymn does not establish later Śaiva, Vaiṣṇava, Śākta, epic, Purāṇic, or living theological claims."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_97449eefeb716a467733ed1f",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/devi/vedic-text",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_6c84b1b40a75b3f01ad68e27",
+      "candidateDigest": "sha256:4cc0cbc1dbd61ba682cf4a7d08aead6c41687b2b85f592b3e1d03e6f7868ccbb",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/egyptian/thoth/cult-and-place",
+      "title": "Thoth — Cult and place",
+      "topic": "thoth",
+      "routeRole": "cult-and-place",
+      "answerContract": "Answer only the cult and place question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Locate temple, place, period, title, and evidence; contextual fusion and differentiation prevent one static identity from being projected across Egypt.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Thoth under the cult and place lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "ucl-digital-egypt-deities",
+          "url": "https://www.ucl.ac.uk/museums-static/digitalegypt/religion/deitiesindex.html",
+          "locator": "The names of deities; fissioning and fusing; form, iconography, and contextual identity",
+          "rightsStatus": "reference-only",
+          "scope": "Explains why Egyptian divine names, forms, combinations, and iconography must be interpreted in context.",
+          "boundary": "The overview is a method boundary, not a passage-level source for every named deity or cult."
+        },
+        {
+          "sourceId": "uee-thoth",
+          "url": "https://escholarship.org/uc/item/2xj8c3qg",
+          "locator": "pp. 1–17; especially Iconography pp. 2–5, Mythology pp. 5–10, cult sites pp. 10–12, and Hellenistic/Roman reception in abstract and pp. 1–2",
+          "rightsStatus": "reference-only",
+          "scope": "Surveys Thoth’s contradictory mythic traditions, forms, Hermopolitan and other cult contexts, textual functions, and transformation into Hermes Trismegistos.",
+          "boundary": "The article warns against a single biography and against identifying an uncaptained ibis automatically as Thoth; its summaries do not replace primary-text editions."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_6c84b1b40a75b3f01ad68e27",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/egyptian/thoth/cult-and-place",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_d83e2af2dad1523048369c3f",
+      "candidateDigest": "sha256:f57105465a550922c25743e059d61da7e7216fc4c7d132b6edd86cb2c88e5130",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/egyptian/thoth/reception-and-comparison",
+      "title": "Thoth — Reception and comparison",
+      "topic": "thoth",
+      "routeRole": "reception-and-comparison",
+      "answerContract": "Answer only the reception and comparison question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Separate ancient evidence, Greco-Roman reception, modern Egyptology, and popular reception; depiction, epithet, function, and identity are distinct layers.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Thoth under the reception and comparison lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "ucl-digital-egypt-deities",
+          "url": "https://www.ucl.ac.uk/museums-static/digitalegypt/religion/deitiesindex.html",
+          "locator": "The names of deities; fissioning and fusing; form, iconography, and contextual identity",
+          "rightsStatus": "reference-only",
+          "scope": "Explains why Egyptian divine names, forms, combinations, and iconography must be interpreted in context.",
+          "boundary": "The overview is a method boundary, not a passage-level source for every named deity or cult."
+        },
+        {
+          "sourceId": "uee-thoth",
+          "url": "https://escholarship.org/uc/item/2xj8c3qg",
+          "locator": "pp. 1–17; especially Iconography pp. 2–5, Mythology pp. 5–10, cult sites pp. 10–12, and Hellenistic/Roman reception in abstract and pp. 1–2",
+          "rightsStatus": "reference-only",
+          "scope": "Surveys Thoth’s contradictory mythic traditions, forms, Hermopolitan and other cult contexts, textual functions, and transformation into Hermes Trismegistos.",
+          "boundary": "The article warns against a single biography and against identifying an uncaptained ibis automatically as Thoth; its summaries do not replace primary-text editions."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_d83e2af2dad1523048369c3f",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/egyptian/thoth/reception-and-comparison",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_6e216be6cdb850bb8ec45ce7",
+      "candidateDigest": "sha256:d09ca5cac905beead7d7ad992861f2749aa98b094aebe61e39be1a4e36f441f1",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/freyr/eddic-source",
+      "title": "Freyr — Eddic source",
+      "topic": "freyr",
+      "routeRole": "eddic-source",
+      "answerContract": "Answer only the eddic source question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Name poem, manuscript relationship, stanza, edition, and translator; Poetic Edda evidence is not silently merged with Snorri or later folklore.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Freyr under the eddic source lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "bellows-poetic-edda",
+          "url": "https://sacred-texts.com/neu/poe/poe00.htm",
+          "locator": "Title page and public-domain notice; contents available from linked index",
+          "rightsStatus": "public-domain-work",
+          "scope": "Supplies an older English translation that can serve as a public-domain comparison witness.",
+          "boundary": "The title page is not a passage inspection, and an older translation cannot replace a modern critical edition or manuscript analysis."
+        },
+        {
+          "sourceId": "bellows-skirnismol-freyr",
+          "url": "https://sacred-texts.com/neu/poe/poe07.htm",
+          "locator": "Introductory prose and stanzas 1–10, with poem-wide manuscript and editorial notes",
+          "rightsStatus": "public-domain-work",
+          "scope": "Supplies one Eddic witness centered on Freyr’s desire for Gerðr and Skírnir’s mission.",
+          "boundary": "The witness establishes Bellows’s rendering of the named poem and its editorial notes only; it does not merge manuscript variants, Snorri, later folklore, or modern reception."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_6e216be6cdb850bb8ec45ce7",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/freyr/eddic-source",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_f09585ea11724140ffd7ae51",
+      "candidateDigest": "sha256:1e9de3fd0af80939278090c12ff01d0ecf740b290b477f5f779b244e0767a524",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/loki/eddic-source",
+      "title": "Loki — Eddic source",
+      "topic": "loki",
+      "routeRole": "eddic-source",
+      "answerContract": "Answer only the eddic source question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Name poem, manuscript relationship, stanza, edition, and translator; Poetic Edda evidence is not silently merged with Snorri or later folklore.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Loki under the eddic source lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "bellows-poetic-edda",
+          "url": "https://sacred-texts.com/neu/poe/poe00.htm",
+          "locator": "Title page and public-domain notice; contents available from linked index",
+          "rightsStatus": "public-domain-work",
+          "scope": "Supplies an older English translation that can serve as a public-domain comparison witness.",
+          "boundary": "The title page is not a passage inspection, and an older translation cannot replace a modern critical edition or manuscript analysis."
+        },
+        {
+          "sourceId": "bellows-lokasenna-loki",
+          "url": "https://sacred-texts.com/neu/poe/poe10.htm",
+          "locator": "Introductory prose and stanzas 1–65; especially stanzas 1–10 and concluding prose",
+          "rightsStatus": "public-domain-work",
+          "scope": "Supplies one Eddic witness structured around Loki’s arrival, accusations, exchanges, and punishment frame.",
+          "boundary": "The witness establishes Bellows’s rendering of the named poem and its editorial notes only; it does not merge manuscript variants, Snorri, later folklore, or modern reception."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_f09585ea11724140ffd7ae51",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/loki/eddic-source",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_9b3ca466364a72d151960fce",
+      "candidateDigest": "sha256:207300c3350511a6d8ce5fb81154e54c690ac01a357a406ecf7eebbb0345eceb",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/tyr/eddic-source",
+      "title": "Týr — Eddic source",
+      "topic": "tyr",
+      "routeRole": "eddic-source",
+      "answerContract": "Answer only the eddic source question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Name poem, manuscript relationship, stanza, edition, and translator; Poetic Edda evidence is not silently merged with Snorri or later folklore.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Týr under the eddic source lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "bellows-poetic-edda",
+          "url": "https://sacred-texts.com/neu/poe/poe00.htm",
+          "locator": "Title page and public-domain notice; contents available from linked index",
+          "rightsStatus": "public-domain-work",
+          "scope": "Supplies an older English translation that can serve as a public-domain comparison witness.",
+          "boundary": "The title page is not a passage inspection, and an older translation cannot replace a modern critical edition or manuscript analysis."
+        },
+        {
+          "sourceId": "bellows-hymiskvitha-tyr",
+          "url": "https://sacred-texts.com/neu/poe/poe09.htm",
+          "locator": "Introductory notes and stanzas 4–7 on Tyr, Hymir, and the proposed journey",
+          "rightsStatus": "public-domain-work",
+          "scope": "Supplies one bounded Eddic passage in which Tyr speaks and the poem identifies a disputed kinship.",
+          "boundary": "The witness establishes Bellows’s rendering of the named poem and its editorial notes only; it does not merge manuscript variants, Snorri, later folklore, or modern reception."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_9b3ca466364a72d151960fce",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/tyr/eddic-source",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_1347eff618abb151260d72fa",
+      "candidateDigest": "sha256:43033f1f3dab02503421cac469873247a9b7f3c007dd10f815541ceb844416a0",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/baldr/eddic-source",
+      "title": "Baldr — Eddic source",
+      "topic": "baldr",
+      "routeRole": "eddic-source",
+      "answerContract": "Answer only the eddic source question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Name poem, manuscript relationship, stanza, edition, and translator; Poetic Edda evidence is not silently merged with Snorri or later folklore.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Baldr under the eddic source lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "bellows-poetic-edda",
+          "url": "https://sacred-texts.com/neu/poe/poe00.htm",
+          "locator": "Title page and public-domain notice; contents available from linked index",
+          "rightsStatus": "public-domain-work",
+          "scope": "Supplies an older English translation that can serve as a public-domain comparison witness.",
+          "boundary": "The title page is not a passage inspection, and an older translation cannot replace a modern critical edition or manuscript analysis."
+        },
+        {
+          "sourceId": "bellows-baldrs-draumar",
+          "url": "https://sacred-texts.com/neu/poe/poe13.htm",
+          "locator": "Introductory notes and stanzas 1–14",
+          "rightsStatus": "public-domain-work",
+          "scope": "Supplies the complete short Eddic poem concerning Baldr’s dreams, Óðinn’s journey, and the seeress’s answers.",
+          "boundary": "The witness establishes Bellows’s rendering of the named poem and its editorial notes only; it does not merge manuscript variants, Snorri, later folklore, or modern reception."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_1347eff618abb151260d72fa",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/baldr/eddic-source",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_7a92bed2cf53f50a1e961781",
+      "candidateDigest": "sha256:5b931c3378ba1de5d5112a229123f9c4e39413051d2c2429ff38c62f23a6c06b",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/frigg/eddic-source",
+      "title": "Frigg — Eddic source",
+      "topic": "frigg",
+      "routeRole": "eddic-source",
+      "answerContract": "Answer only the eddic source question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Name poem, manuscript relationship, stanza, edition, and translator; Poetic Edda evidence is not silently merged with Snorri or later folklore.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Frigg under the eddic source lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "bellows-poetic-edda",
+          "url": "https://sacred-texts.com/neu/poe/poe00.htm",
+          "locator": "Title page and public-domain notice; contents available from linked index",
+          "rightsStatus": "public-domain-work",
+          "scope": "Supplies an older English translation that can serve as a public-domain comparison witness.",
+          "boundary": "The title page is not a passage inspection, and an older translation cannot replace a modern critical edition or manuscript analysis."
+        },
+        {
+          "sourceId": "bellows-vafthruthnismol-frigg",
+          "url": "https://sacred-texts.com/neu/poe/poe05.htm",
+          "locator": "Introductory notes and stanzas 1–4",
+          "rightsStatus": "public-domain-work",
+          "scope": "Supplies one bounded exchange between Frigg and Óðinn before the wisdom contest.",
+          "boundary": "The witness establishes Bellows’s rendering of the named poem and its editorial notes only; it does not merge manuscript variants, Snorri, later folklore, or modern reception."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_7a92bed2cf53f50a1e961781",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/frigg/eddic-source",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_06c9b2b0cacd6ee9c91b593b",
+      "candidateDigest": "sha256:b3f4034c40677a0290d00cdbed7c2a98e65ea89a9c8f2df2250ceac7e732d178",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/hel/eddic-source",
+      "title": "Hel — Eddic source",
+      "topic": "hel",
+      "routeRole": "eddic-source",
+      "answerContract": "Answer only the eddic source question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Name poem, manuscript relationship, stanza, edition, and translator; Poetic Edda evidence is not silently merged with Snorri or later folklore.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Hel under the eddic source lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "bellows-poetic-edda",
+          "url": "https://sacred-texts.com/neu/poe/poe00.htm",
+          "locator": "Title page and public-domain notice; contents available from linked index",
+          "rightsStatus": "public-domain-work",
+          "scope": "Supplies an older English translation that can serve as a public-domain comparison witness.",
+          "boundary": "The title page is not a passage inspection, and an older translation cannot replace a modern critical edition or manuscript analysis."
+        },
+        {
+          "sourceId": "bellows-voluspo-hel",
+          "url": "https://sacred-texts.com/neu/poe/poe03.htm",
+          "locator": "Stanzas 32–39 and manuscript/editorial notes; especially 38–39 on Hel’s realm",
+          "rightsStatus": "public-domain-work",
+          "scope": "Supplies named Eddic stanzas concerning Baldr, Frigg, Loki, and the realm associated with Hel.",
+          "boundary": "The witness establishes Bellows’s rendering of the named poem and its editorial notes only; it does not merge manuscript variants, Snorri, later folklore, or modern reception."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_06c9b2b0cacd6ee9c91b593b",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/hel/eddic-source",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_d63b341214cc222206a7e8dc",
+      "candidateDigest": "sha256:54fa5561a9d60778150d16b10849d97438108ddea0d6d193ddbceb7fb7d0d545",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/njord/eddic-source",
+      "title": "Njörðr — Eddic source",
+      "topic": "njord",
+      "routeRole": "eddic-source",
+      "answerContract": "Answer only the eddic source question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Name poem, manuscript relationship, stanza, edition, and translator; Poetic Edda evidence is not silently merged with Snorri or later folklore.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Njörðr under the eddic source lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "bellows-poetic-edda",
+          "url": "https://sacred-texts.com/neu/poe/poe00.htm",
+          "locator": "Title page and public-domain notice; contents available from linked index",
+          "rightsStatus": "public-domain-work",
+          "scope": "Supplies an older English translation that can serve as a public-domain comparison witness.",
+          "boundary": "The title page is not a passage inspection, and an older translation cannot replace a modern critical edition or manuscript analysis."
+        },
+        {
+          "sourceId": "bellows-lokasenna-njord",
+          "url": "https://sacred-texts.com/neu/poe/poe10.htm",
+          "locator": "Introductory prose and stanzas 32–36",
+          "rightsStatus": "public-domain-work",
+          "scope": "Supplies one located exchange naming Njörðr, his hostage status, and Freyr.",
+          "boundary": "The witness establishes Bellows’s rendering of the named poem and its editorial notes only; it does not merge manuscript variants, Snorri, later folklore, or modern reception."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_d63b341214cc222206a7e8dc",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/njord/eddic-source",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_d902126d330a564cc11acd65",
+      "candidateDigest": "sha256:8f5bfc54dc5862d4de4b0c4e2bdd35cd157abbc3301c4eebce7b590103f2626a",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/amaterasu/source-lineage",
+      "title": "Amaterasu — Source lineage",
+      "topic": "amaterasu",
+      "routeRole": "source-lineage",
+      "answerContract": "Answer only the source lineage question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Keep Kojiki, Nihongi variants, fudoki, shrine records, medieval combinations, and modern encyclopedic synthesis distinguishable rather than forcing one linear biography.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Amaterasu under the source lineage lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "kokugakuin-eos-foreword-and-guide",
+          "url": "https://d-museum.kokugakuin.ac.jp/eos/usage/",
+          "locator": "Guide to Usage: name variants, Kojiki/Nihongi citation conventions, alternate writings, online amendments, and print-edition relationship",
+          "rightsStatus": "reference-only",
+          "scope": "Explains the encyclopedia’s source conventions and version relationship to the 1994 Shinto jiten.",
+          "boundary": "A modern encyclopedia entry is not a primary text, shrine authority, or blanket account of living practice."
+        },
+        {
+          "sourceId": "eos-amaterasu",
+          "url": "https://d-museum.kokugakuin.ac.jp/eos/detail/?id=9440",
+          "locator": "Complete Article: classic-text variants, other names, and source-specific narrative relationships",
+          "rightsStatus": "reference-only",
+          "scope": "Compares source-specific presentations and names of Amaterasu in Kojiki, Nihongi, and related traditions.",
+          "boundary": "The article is a modern scholarly synthesis. Textual variants, cult history, combination with other figures, and current practice remain separate propositions."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_d902126d330a564cc11acd65",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/amaterasu/source-lineage",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_eb1f1b93f29f484578efa0a9",
+      "candidateDigest": "sha256:332929ae00f44f871ece5115b96f8bd26564099643e02b6fe5e2a13c09aab7df",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/amaterasu/cult-and-reception",
+      "title": "Amaterasu — Cult and reception",
+      "topic": "amaterasu",
+      "routeRole": "cult-and-reception",
+      "answerContract": "Answer only the cult and reception question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Bind shrine, cult, festival, combination, place, and period claims to their source; textual narrative and later worship do not establish each other automatically.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Amaterasu under the cult and reception lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "kokugakuin-eos-foreword-and-guide",
+          "url": "https://d-museum.kokugakuin.ac.jp/eos/usage/",
+          "locator": "Guide to Usage: name variants, Kojiki/Nihongi citation conventions, alternate writings, online amendments, and print-edition relationship",
+          "rightsStatus": "reference-only",
+          "scope": "Explains the encyclopedia’s source conventions and version relationship to the 1994 Shinto jiten.",
+          "boundary": "A modern encyclopedia entry is not a primary text, shrine authority, or blanket account of living practice."
+        },
+        {
+          "sourceId": "eos-ise-shinko",
+          "url": "https://d-museum.kokugakuin.ac.jp/eos/detail/?id=9029",
+          "locator": "Complete Article: Ise cult history, pilgrimage, institutions, periods, and Amaterasu relationship",
+          "rightsStatus": "reference-only",
+          "scope": "Traces located Ise devotion and reception associated with Amaterasu.",
+          "boundary": "The article is a modern scholarly synthesis. Textual variants, cult history, combination with other figures, and current practice remain separate propositions."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_eb1f1b93f29f484578efa0a9",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/amaterasu/cult-and-reception",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_d419ba1ba68ad5ed0fd75184",
+      "candidateDigest": "sha256:6183b2c3706444649a5587c92df60af102080b3fa82ab01b782e6b82b724387d",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/susanoo/source-lineage",
+      "title": "Susanoo — Source lineage",
+      "topic": "susanoo",
+      "routeRole": "source-lineage",
+      "answerContract": "Answer only the source lineage question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Keep Kojiki, Nihongi variants, fudoki, shrine records, medieval combinations, and modern encyclopedic synthesis distinguishable rather than forcing one linear biography.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Susanoo under the source lineage lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "kokugakuin-eos-foreword-and-guide",
+          "url": "https://d-museum.kokugakuin.ac.jp/eos/usage/",
+          "locator": "Guide to Usage: name variants, Kojiki/Nihongi citation conventions, alternate writings, online amendments, and print-edition relationship",
+          "rightsStatus": "reference-only",
+          "scope": "Explains the encyclopedia’s source conventions and version relationship to the 1994 Shinto jiten.",
+          "boundary": "A modern encyclopedia entry is not a primary text, shrine authority, or blanket account of living practice."
+        },
+        {
+          "sourceId": "eos-susanoo",
+          "url": "https://d-museum.kokugakuin.ac.jp/eos/detail/?id=9152",
+          "locator": "Complete Article: Kojiki, Nihongi, fudoki, source variants, Izumo, and medieval Gozu Tennō identification",
+          "rightsStatus": "reference-only",
+          "scope": "Distinguishes Susanoo narratives and identities across named classic texts and later combinations.",
+          "boundary": "The article is a modern scholarly synthesis. Textual variants, cult history, combination with other figures, and current practice remain separate propositions."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_d419ba1ba68ad5ed0fd75184",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/susanoo/source-lineage",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_600e8ba3d8b15aac6b837aa0",
+      "candidateDigest": "sha256:707522359a525c729b1c2064ace092ff3cd87a476e0a6e86de2c37782b9ec8df",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/susanoo/cult-and-reception",
+      "title": "Susanoo — Cult and reception",
+      "topic": "susanoo",
+      "routeRole": "cult-and-reception",
+      "answerContract": "Answer only the cult and reception question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Bind shrine, cult, festival, combination, place, and period claims to their source; textual narrative and later worship do not establish each other automatically.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Susanoo under the cult and reception lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "kokugakuin-eos-foreword-and-guide",
+          "url": "https://d-museum.kokugakuin.ac.jp/eos/usage/",
+          "locator": "Guide to Usage: name variants, Kojiki/Nihongi citation conventions, alternate writings, online amendments, and print-edition relationship",
+          "rightsStatus": "reference-only",
+          "scope": "Explains the encyclopedia’s source conventions and version relationship to the 1994 Shinto jiten.",
+          "boundary": "A modern encyclopedia entry is not a primary text, shrine authority, or blanket account of living practice."
+        },
+        {
+          "sourceId": "eos-gion-tsushima",
+          "url": "https://d-museum.kokugakuin.ac.jp/eos/detail/id%3D8885",
+          "locator": "Complete Article: Gozu Tennō, Susanoo, shrines, ritual, and historical combination",
+          "rightsStatus": "reference-only",
+          "scope": "Traces one historically located cult-and-reception complex involving Susanoo.",
+          "boundary": "The article is a modern scholarly synthesis. Textual variants, cult history, combination with other figures, and current practice remain separate propositions."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_600e8ba3d8b15aac6b837aa0",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/susanoo/cult-and-reception",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_b66f3b949c7967eb7d3befe6",
+      "candidateDigest": "sha256:ec06fefe423738785b6d7425c24f0f9ffae0b2c493dd2bfe4ff293aa21750fce",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/tsukuyomi/source-lineage",
+      "title": "Tsukuyomi — Source lineage",
+      "topic": "tsukuyomi",
+      "routeRole": "source-lineage",
+      "answerContract": "Answer only the source lineage question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Keep Kojiki, Nihongi variants, fudoki, shrine records, medieval combinations, and modern encyclopedic synthesis distinguishable rather than forcing one linear biography.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Tsukuyomi under the source lineage lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "kokugakuin-eos-foreword-and-guide",
+          "url": "https://d-museum.kokugakuin.ac.jp/eos/usage/",
+          "locator": "Guide to Usage: name variants, Kojiki/Nihongi citation conventions, alternate writings, online amendments, and print-edition relationship",
+          "rightsStatus": "reference-only",
+          "scope": "Explains the encyclopedia’s source conventions and version relationship to the 1994 Shinto jiten.",
+          "boundary": "A modern encyclopedia entry is not a primary text, shrine authority, or blanket account of living practice."
+        },
+        {
+          "sourceId": "eos-tsukuyomi",
+          "url": "https://d-museum.kokugakuin.ac.jp/eos/detail/?id=9136",
+          "locator": "Complete Article: Kojiki and Nihongi variants, alternate writings, lines of interpretation, and named shrines",
+          "rightsStatus": "reference-only",
+          "scope": "Separates Tsukuyomi’s variant births and roles across texts and identifies bounded cult locations.",
+          "boundary": "The article is a modern scholarly synthesis. Textual variants, cult history, combination with other figures, and current practice remain separate propositions."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_b66f3b949c7967eb7d3befe6",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/tsukuyomi/source-lineage",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_08191a36cd0e29782e5a09b3",
+      "candidateDigest": "sha256:90903f01ef6c7c8c560ce72d7b47481d03e87d1a7f156680d2220269c75e5b3b",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/tsukuyomi/cult-and-reception",
+      "title": "Tsukuyomi — Cult and reception",
+      "topic": "tsukuyomi",
+      "routeRole": "cult-and-reception",
+      "answerContract": "Answer only the cult and reception question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Bind shrine, cult, festival, combination, place, and period claims to their source; textual narrative and later worship do not establish each other automatically.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Tsukuyomi under the cult and reception lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "kokugakuin-eos-foreword-and-guide",
+          "url": "https://d-museum.kokugakuin.ac.jp/eos/usage/",
+          "locator": "Guide to Usage: name variants, Kojiki/Nihongi citation conventions, alternate writings, online amendments, and print-edition relationship",
+          "rightsStatus": "reference-only",
+          "scope": "Explains the encyclopedia’s source conventions and version relationship to the 1994 Shinto jiten.",
+          "boundary": "A modern encyclopedia entry is not a primary text, shrine authority, or blanket account of living practice."
+        },
+        {
+          "sourceId": "eos-tsukuyomi",
+          "url": "https://d-museum.kokugakuin.ac.jp/eos/detail/?id=9136",
+          "locator": "Complete Article: Kojiki and Nihongi variants, alternate writings, lines of interpretation, and named shrines",
+          "rightsStatus": "reference-only",
+          "scope": "Separates Tsukuyomi’s variant births and roles across texts and identifies bounded cult locations.",
+          "boundary": "The article is a modern scholarly synthesis. Textual variants, cult history, combination with other figures, and current practice remain separate propositions."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_08191a36cd0e29782e5a09b3",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/tsukuyomi/cult-and-reception",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_ff5218033a2af380def0b106",
+      "candidateDigest": "sha256:9c3cffaa85b6578f6e24df339db7a575dd87e01e1c6ec898b4a1d0838bd69d51",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/inari/source-lineage",
+      "title": "Inari — Source lineage",
+      "topic": "inari",
+      "routeRole": "source-lineage",
+      "answerContract": "Answer only the source lineage question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Keep Kojiki, Nihongi variants, fudoki, shrine records, medieval combinations, and modern encyclopedic synthesis distinguishable rather than forcing one linear biography.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Inari under the source lineage lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "kokugakuin-eos-foreword-and-guide",
+          "url": "https://d-museum.kokugakuin.ac.jp/eos/usage/",
+          "locator": "Guide to Usage: name variants, Kojiki/Nihongi citation conventions, alternate writings, online amendments, and print-edition relationship",
+          "rightsStatus": "reference-only",
+          "scope": "Explains the encyclopedia’s source conventions and version relationship to the 1994 Shinto jiten.",
+          "boundary": "A modern encyclopedia entry is not a primary text, shrine authority, or blanket account of living practice."
+        },
+        {
+          "sourceId": "eos-inari-shinko",
+          "url": "https://d-museum.kokugakuin.ac.jp/eos/detail/?id=9027",
+          "locator": "Complete Article: fudoki, Engishiki, medieval documents, Fushimi traditions, festivals, combinations, and regional spread",
+          "rightsStatus": "reference-only",
+          "scope": "Traces textual witnesses and multiple historical forms of Inari cult rather than presenting one static deity biography.",
+          "boundary": "The article is a modern scholarly synthesis. Textual variants, cult history, combination with other figures, and current practice remain separate propositions."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_ff5218033a2af380def0b106",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/inari/source-lineage",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_d9b933f9cf7dff37d8afd644",
+      "candidateDigest": "sha256:504e894af0f0197a1d63034a8653ad33a2dc60bfe0384d5ee9b1810302733255",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/inari/cult-and-reception",
+      "title": "Inari — Cult and reception",
+      "topic": "inari",
+      "routeRole": "cult-and-reception",
+      "answerContract": "Answer only the cult and reception question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Bind shrine, cult, festival, combination, place, and period claims to their source; textual narrative and later worship do not establish each other automatically.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Inari under the cult and reception lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "kokugakuin-eos-foreword-and-guide",
+          "url": "https://d-museum.kokugakuin.ac.jp/eos/usage/",
+          "locator": "Guide to Usage: name variants, Kojiki/Nihongi citation conventions, alternate writings, online amendments, and print-edition relationship",
+          "rightsStatus": "reference-only",
+          "scope": "Explains the encyclopedia’s source conventions and version relationship to the 1994 Shinto jiten.",
+          "boundary": "A modern encyclopedia entry is not a primary text, shrine authority, or blanket account of living practice."
+        },
+        {
+          "sourceId": "eos-inari-shinko",
+          "url": "https://d-museum.kokugakuin.ac.jp/eos/detail/?id=9027",
+          "locator": "Complete Article: fudoki, Engishiki, medieval documents, Fushimi traditions, festivals, combinations, and regional spread",
+          "rightsStatus": "reference-only",
+          "scope": "Traces textual witnesses and multiple historical forms of Inari cult rather than presenting one static deity biography.",
+          "boundary": "The article is a modern scholarly synthesis. Textual variants, cult history, combination with other figures, and current practice remain separate propositions."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_d9b933f9cf7dff37d8afd644",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/inari/cult-and-reception",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_538750f96c35ff398e83ad3a",
+      "candidateDigest": "sha256:a349134465414ccc30548fcee27a59aceeddb0e51f3115da41ef574001bd2400",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/hachiman/source-lineage",
+      "title": "Hachiman — Source lineage",
+      "topic": "hachiman",
+      "routeRole": "source-lineage",
+      "answerContract": "Answer only the source lineage question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Keep Kojiki, Nihongi variants, fudoki, shrine records, medieval combinations, and modern encyclopedic synthesis distinguishable rather than forcing one linear biography.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Hachiman under the source lineage lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "kokugakuin-eos-foreword-and-guide",
+          "url": "https://d-museum.kokugakuin.ac.jp/eos/usage/",
+          "locator": "Guide to Usage: name variants, Kojiki/Nihongi citation conventions, alternate writings, online amendments, and print-edition relationship",
+          "rightsStatus": "reference-only",
+          "scope": "Explains the encyclopedia’s source conventions and version relationship to the 1994 Shinto jiten.",
+          "boundary": "A modern encyclopedia entry is not a primary text, shrine authority, or blanket account of living practice."
+        },
+        {
+          "sourceId": "eos-hachiman-shinko",
+          "url": "https://d-museum.kokugakuin.ac.jp/eos/detail/?id=8878",
+          "locator": "Complete Article: Usa, imperial and warrior reception, shrine networks, Buddhist combination, and historical periods",
+          "rightsStatus": "reference-only",
+          "scope": "Traces Hachiman source and cult history across institutions and periods.",
+          "boundary": "The article is a modern scholarly synthesis. Textual variants, cult history, combination with other figures, and current practice remain separate propositions."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_538750f96c35ff398e83ad3a",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/hachiman/source-lineage",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_6811a93b2c1b6bd3de3c6564",
+      "candidateDigest": "sha256:04606f6c5568f3b531e703686ed092b95a414187de1519d425c994fd08fecf2d",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/hachiman/cult-and-reception",
+      "title": "Hachiman — Cult and reception",
+      "topic": "hachiman",
+      "routeRole": "cult-and-reception",
+      "answerContract": "Answer only the cult and reception question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Bind shrine, cult, festival, combination, place, and period claims to their source; textual narrative and later worship do not establish each other automatically.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Hachiman under the cult and reception lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "kokugakuin-eos-foreword-and-guide",
+          "url": "https://d-museum.kokugakuin.ac.jp/eos/usage/",
+          "locator": "Guide to Usage: name variants, Kojiki/Nihongi citation conventions, alternate writings, online amendments, and print-edition relationship",
+          "rightsStatus": "reference-only",
+          "scope": "Explains the encyclopedia’s source conventions and version relationship to the 1994 Shinto jiten.",
+          "boundary": "A modern encyclopedia entry is not a primary text, shrine authority, or blanket account of living practice."
+        },
+        {
+          "sourceId": "eos-hachiman-shinko",
+          "url": "https://d-museum.kokugakuin.ac.jp/eos/detail/?id=8878",
+          "locator": "Complete Article: Usa, imperial and warrior reception, shrine networks, Buddhist combination, and historical periods",
+          "rightsStatus": "reference-only",
+          "scope": "Traces Hachiman source and cult history across institutions and periods.",
+          "boundary": "The article is a modern scholarly synthesis. Textual variants, cult history, combination with other figures, and current practice remain separate propositions."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_6811a93b2c1b6bd3de3c6564",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/hachiman/cult-and-reception",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_50ae1c641e05ea8fa9b4d28a",
+      "candidateDigest": "sha256:5b2be415d532c5c3e774e05a43b63cf42b7c01c6a74f8b63e2defebd18aa6339",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/izanagi-izanami/source-lineage",
+      "title": "Izanagi and Izanami — Source lineage",
+      "topic": "izanagi-izanami",
+      "routeRole": "source-lineage",
+      "answerContract": "Answer only the source lineage question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Keep Kojiki, Nihongi variants, fudoki, shrine records, medieval combinations, and modern encyclopedic synthesis distinguishable rather than forcing one linear biography.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Izanagi and Izanami under the source lineage lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "kokugakuin-eos-foreword-and-guide",
+          "url": "https://d-museum.kokugakuin.ac.jp/eos/usage/",
+          "locator": "Guide to Usage: name variants, Kojiki/Nihongi citation conventions, alternate writings, online amendments, and print-edition relationship",
+          "rightsStatus": "reference-only",
+          "scope": "Explains the encyclopedia’s source conventions and version relationship to the 1994 Shinto jiten.",
+          "boundary": "A modern encyclopedia entry is not a primary text, shrine authority, or blanket account of living practice."
+        },
+        {
+          "sourceId": "eos-izanagi-izanami",
+          "url": "https://d-museum.kokugakuin.ac.jp/eos/detail/?id=9384",
+          "locator": "Complete Izanami article together with linked Izanagi article id 9385: Kojiki, Nihongi variants, death, Yomi, and purification",
+          "rightsStatus": "reference-only",
+          "scope": "Supplies a modern comparison of named classic-text variants involving Izanagi and Izanami.",
+          "boundary": "The article is a modern scholarly synthesis. Textual variants, cult history, combination with other figures, and current practice remain separate propositions."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_50ae1c641e05ea8fa9b4d28a",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/izanagi-izanami/source-lineage",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_b2110b0cc1c615b1369547a6",
+      "candidateDigest": "sha256:37328b8701f0a54f459dfe598a1feb9b4aff39c15fe2f0eaa690ca136b9ad0a4",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/quetzalcoatl/source-identity",
+      "title": "Quetzalcoatl — Source identity",
+      "topic": "quetzalcoatl",
+      "routeRole": "source-identity",
+      "answerContract": "Answer only the source identity question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Bind identity claims to a named Nahuatl, Spanish, or material witness and its folio; colonial translation and editorial framing remain visible.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Quetzalcoatl under the source identity lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "getty-florentine-project-and-terms",
+          "url": "https://www.getty.edu/projects/florentine-codex/",
+          "locator": "Project history and edition description; Getty Terms of Use; Codex book index and parallel text/translation labels",
+          "rightsStatus": "reference-only",
+          "scope": "Establishes the manuscript’s collaborative sixteenth-century production and the digital edition’s separate Nahuatl, Spanish, and translation layers.",
+          "boundary": "The project description’s reliability claim does not remove colonial mediation or make translations and images freely reusable."
+        },
+        {
+          "sourceId": "florentine-quetzalcoatl-2v",
+          "url": "https://florentinecodex.getty.edu/book/1/folio/2v",
+          "locator": "Book 1, folio 2v; Quetzalcoatl chapter, attire, priestly statement, parallel columns, and Christian comparison in the Spanish frame",
+          "rightsStatus": "reference-only",
+          "scope": "Provides a named folio witness for Quetzalcoatl and a visible example of colonial-Christian interpretive framing.",
+          "boundary": "This is a sixteenth-century collaborative and colonial witness. Nahuatl, Spanish, later English translations, footnotes, and Christian polemic cannot be collapsed into one unmediated precolonial voice."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_b2110b0cc1c615b1369547a6",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/quetzalcoatl/source-identity",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_6664091278b08b5c788bed3e",
+      "candidateDigest": "sha256:15e6d4776c300b1c3b945833f2be7168df9dc2092fb8dfb3477d4265050a0ad7",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/quetzalcoatl/colonial-reception-boundary",
+      "title": "Quetzalcoatl — Colonial reception boundary",
+      "topic": "quetzalcoatl",
+      "routeRole": "colonial-reception-boundary",
+      "answerContract": "Answer only the colonial reception boundary question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Treat the Florentine Codex as a sixteenth-century collaborative and colonial document with parallel, non-equivalent voices; polemical comparison is not precolonial identity.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Quetzalcoatl under the colonial reception boundary lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "getty-florentine-project-and-terms",
+          "url": "https://www.getty.edu/projects/florentine-codex/",
+          "locator": "Project history and edition description; Getty Terms of Use; Codex book index and parallel text/translation labels",
+          "rightsStatus": "reference-only",
+          "scope": "Establishes the manuscript’s collaborative sixteenth-century production and the digital edition’s separate Nahuatl, Spanish, and translation layers.",
+          "boundary": "The project description’s reliability claim does not remove colonial mediation or make translations and images freely reusable."
+        },
+        {
+          "sourceId": "florentine-quetzalcoatl-2v",
+          "url": "https://florentinecodex.getty.edu/book/1/folio/2v",
+          "locator": "Book 1, folio 2v; Quetzalcoatl chapter, attire, priestly statement, parallel columns, and Christian comparison in the Spanish frame",
+          "rightsStatus": "reference-only",
+          "scope": "Provides a named folio witness for Quetzalcoatl and a visible example of colonial-Christian interpretive framing.",
+          "boundary": "This is a sixteenth-century collaborative and colonial witness. Nahuatl, Spanish, later English translations, footnotes, and Christian polemic cannot be collapsed into one unmediated precolonial voice."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_6664091278b08b5c788bed3e",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/quetzalcoatl/colonial-reception-boundary",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_e5f2ad0ca74ea9e194ecaf20",
+      "candidateDigest": "sha256:2683dd4888c9afd2f22fa08d763b57dfeae079ca6556f2399f8ddeac07e0b617",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/tezcatlipoca/source-identity",
+      "title": "Tezcatlipoca — Source identity",
+      "topic": "tezcatlipoca",
+      "routeRole": "source-identity",
+      "answerContract": "Answer only the source identity question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Bind identity claims to a named Nahuatl, Spanish, or material witness and its folio; colonial translation and editorial framing remain visible.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Tezcatlipoca under the source identity lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "getty-florentine-project-and-terms",
+          "url": "https://www.getty.edu/projects/florentine-codex/",
+          "locator": "Project history and edition description; Getty Terms of Use; Codex book index and parallel text/translation labels",
+          "rightsStatus": "reference-only",
+          "scope": "Establishes the manuscript’s collaborative sixteenth-century production and the digital edition’s separate Nahuatl, Spanish, and translation layers.",
+          "boundary": "The project description’s reliability claim does not remove colonial mediation or make translations and images freely reusable."
+        },
+        {
+          "sourceId": "florentine-tezcatlipoca-1v",
+          "url": "https://florentinecodex.getty.edu/book/1/folio/1v",
+          "locator": "Book 1, folio 1v; Chapter 3, parallel Nahuatl and Spanish columns and English translations",
+          "rightsStatus": "reference-only",
+          "scope": "Provides a named folio witness for Tezcatlipoca, epithets, and functions in parallel colonial-era textual layers.",
+          "boundary": "This is a sixteenth-century collaborative and colonial witness. Nahuatl, Spanish, later English translations, footnotes, and Christian polemic cannot be collapsed into one unmediated precolonial voice."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_e5f2ad0ca74ea9e194ecaf20",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/tezcatlipoca/source-identity",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_b37e7b2d522123f53169dc9c",
+      "candidateDigest": "sha256:23de442c2346686d453118b65f521d90c344b8b1d2553d679f4a7ef7aeb01e4d",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/tezcatlipoca/colonial-reception-boundary",
+      "title": "Tezcatlipoca — Colonial reception boundary",
+      "topic": "tezcatlipoca",
+      "routeRole": "colonial-reception-boundary",
+      "answerContract": "Answer only the colonial reception boundary question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Treat the Florentine Codex as a sixteenth-century collaborative and colonial document with parallel, non-equivalent voices; polemical comparison is not precolonial identity.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Tezcatlipoca under the colonial reception boundary lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "getty-florentine-project-and-terms",
+          "url": "https://www.getty.edu/projects/florentine-codex/",
+          "locator": "Project history and edition description; Getty Terms of Use; Codex book index and parallel text/translation labels",
+          "rightsStatus": "reference-only",
+          "scope": "Establishes the manuscript’s collaborative sixteenth-century production and the digital edition’s separate Nahuatl, Spanish, and translation layers.",
+          "boundary": "The project description’s reliability claim does not remove colonial mediation or make translations and images freely reusable."
+        },
+        {
+          "sourceId": "florentine-tezcatlipoca-1v",
+          "url": "https://florentinecodex.getty.edu/book/1/folio/1v",
+          "locator": "Book 1, folio 1v; Chapter 3, parallel Nahuatl and Spanish columns and English translations",
+          "rightsStatus": "reference-only",
+          "scope": "Provides a named folio witness for Tezcatlipoca, epithets, and functions in parallel colonial-era textual layers.",
+          "boundary": "This is a sixteenth-century collaborative and colonial witness. Nahuatl, Spanish, later English translations, footnotes, and Christian polemic cannot be collapsed into one unmediated precolonial voice."
+        },
+        {
+          "sourceId": "florentine-colonial-polemic-34r",
+          "url": "https://florentinecodex.getty.edu/book/1/folio/34r",
+          "locator": "Book 1, folio 34r; Spanish and translated polemic concerning Huitzilopochtli and Tezcatlipoca",
+          "rightsStatus": "reference-only",
+          "scope": "Provides an explicit late-book colonial-Christian evaluative frame for comparison with the earlier parallel deity chapters.",
+          "boundary": "This is a sixteenth-century collaborative and colonial witness. Nahuatl, Spanish, later English translations, footnotes, and Christian polemic cannot be collapsed into one unmediated precolonial voice."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_b37e7b2d522123f53169dc9c",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/tezcatlipoca/colonial-reception-boundary",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_99602c47fada8b98b65e15a0",
+      "candidateDigest": "sha256:20a4ca37d5f34fbb4e1c4baa67315796187febd0458052a08d0f097165ae1488",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/huitzilopochtli/source-identity",
+      "title": "Huitzilopochtli — Source identity",
+      "topic": "huitzilopochtli",
+      "routeRole": "source-identity",
+      "answerContract": "Answer only the source identity question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Bind identity claims to a named Nahuatl, Spanish, or material witness and its folio; colonial translation and editorial framing remain visible.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Huitzilopochtli under the source identity lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "getty-florentine-project-and-terms",
+          "url": "https://www.getty.edu/projects/florentine-codex/",
+          "locator": "Project history and edition description; Getty Terms of Use; Codex book index and parallel text/translation labels",
+          "rightsStatus": "reference-only",
+          "scope": "Establishes the manuscript’s collaborative sixteenth-century production and the digital edition’s separate Nahuatl, Spanish, and translation layers.",
+          "boundary": "The project description’s reliability claim does not remove colonial mediation or make translations and images freely reusable."
+        },
+        {
+          "sourceId": "florentine-huitzilopochtli-1r",
+          "url": "https://florentinecodex.getty.edu/book/1/folio/1r",
+          "locator": "Book 1, folio 1r; Nahuatl and Spanish columns, modern translations, Chapter 1 and notes",
+          "rightsStatus": "reference-only",
+          "scope": "Provides a named folio witness for Huitzilopochtli and exposes differences between the parallel columns and translations.",
+          "boundary": "This is a sixteenth-century collaborative and colonial witness. Nahuatl, Spanish, later English translations, footnotes, and Christian polemic cannot be collapsed into one unmediated precolonial voice."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_99602c47fada8b98b65e15a0",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/huitzilopochtli/source-identity",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_c173e48e08149044fc93ff16",
+      "candidateDigest": "sha256:d17069c71829702311f52e1e1f6e205b5a323501ef1ca51c4a5aeb4b25f758d7",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/huitzilopochtli/colonial-reception-boundary",
+      "title": "Huitzilopochtli — Colonial reception boundary",
+      "topic": "huitzilopochtli",
+      "routeRole": "colonial-reception-boundary",
+      "answerContract": "Answer only the colonial reception boundary question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Treat the Florentine Codex as a sixteenth-century collaborative and colonial document with parallel, non-equivalent voices; polemical comparison is not precolonial identity.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Huitzilopochtli under the colonial reception boundary lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "getty-florentine-project-and-terms",
+          "url": "https://www.getty.edu/projects/florentine-codex/",
+          "locator": "Project history and edition description; Getty Terms of Use; Codex book index and parallel text/translation labels",
+          "rightsStatus": "reference-only",
+          "scope": "Establishes the manuscript’s collaborative sixteenth-century production and the digital edition’s separate Nahuatl, Spanish, and translation layers.",
+          "boundary": "The project description’s reliability claim does not remove colonial mediation or make translations and images freely reusable."
+        },
+        {
+          "sourceId": "florentine-huitzilopochtli-1r",
+          "url": "https://florentinecodex.getty.edu/book/1/folio/1r",
+          "locator": "Book 1, folio 1r; Nahuatl and Spanish columns, modern translations, Chapter 1 and notes",
+          "rightsStatus": "reference-only",
+          "scope": "Provides a named folio witness for Huitzilopochtli and exposes differences between the parallel columns and translations.",
+          "boundary": "This is a sixteenth-century collaborative and colonial witness. Nahuatl, Spanish, later English translations, footnotes, and Christian polemic cannot be collapsed into one unmediated precolonial voice."
+        },
+        {
+          "sourceId": "florentine-colonial-polemic-34r",
+          "url": "https://florentinecodex.getty.edu/book/1/folio/34r",
+          "locator": "Book 1, folio 34r; Spanish and translated polemic concerning Huitzilopochtli and Tezcatlipoca",
+          "rightsStatus": "reference-only",
+          "scope": "Provides an explicit late-book colonial-Christian evaluative frame for comparison with the earlier parallel deity chapters.",
+          "boundary": "This is a sixteenth-century collaborative and colonial witness. Nahuatl, Spanish, later English translations, footnotes, and Christian polemic cannot be collapsed into one unmediated precolonial voice."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_c173e48e08149044fc93ff16",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/huitzilopochtli/colonial-reception-boundary",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_a771ed469676df8bbb1fdddd",
+      "candidateDigest": "sha256:82115b7296418a7449b3f03dc6c2947f5b4381ea6f6aa341181b78621af0d1ea",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/tlaloc/source-identity",
+      "title": "Tlaloc — Source identity",
+      "topic": "tlaloc",
+      "routeRole": "source-identity",
+      "answerContract": "Answer only the source identity question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Bind identity claims to a named Nahuatl, Spanish, or material witness and its folio; colonial translation and editorial framing remain visible.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Tlaloc under the source identity lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "getty-florentine-project-and-terms",
+          "url": "https://www.getty.edu/projects/florentine-codex/",
+          "locator": "Project history and edition description; Getty Terms of Use; Codex book index and parallel text/translation labels",
+          "rightsStatus": "reference-only",
+          "scope": "Establishes the manuscript’s collaborative sixteenth-century production and the digital edition’s separate Nahuatl, Spanish, and translation layers.",
+          "boundary": "The project description’s reliability claim does not remove colonial mediation or make translations and images freely reusable."
+        },
+        {
+          "sourceId": "florentine-tlaloc-6r",
+          "url": "https://florentinecodex.getty.edu/book/1/folio/6r",
+          "locator": "Book 1, folio 6r; Tlaloc chapter in parallel textual and translation layers",
+          "rightsStatus": "reference-only",
+          "scope": "Provides one named folio witness for Tlaloc in the Book of the Gods.",
+          "boundary": "This is a sixteenth-century collaborative and colonial witness. Nahuatl, Spanish, later English translations, footnotes, and Christian polemic cannot be collapsed into one unmediated precolonial voice."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_a771ed469676df8bbb1fdddd",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/tlaloc/source-identity",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_5cb759f25ebb598dbab4c727",
+      "candidateDigest": "sha256:9767920d7c063e8844c13ec68f777a632c55dfaed1ccde0ae38d9229f66e841f",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/comparative-methodology/iconography-versus-textual-identity/method",
+      "title": "Iconography versus textual identity — Method",
+      "topic": "iconography-versus-textual-identity",
+      "routeRole": "method",
+      "answerContract": "Answer only the method question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Declare comparands, source frames, purpose, scale, scope, criterion, and alternatives; resemblance is not proof of identity, diffusion, genealogy, or universal origin.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Iconography versus textual identity under the method lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "freiberger-comparison-method",
+          "url": "https://doi.org/10.3390/rel9020038",
+          "locator": "§2 comparative configuration and process; §3 conclusions; pp. 1–14",
+          "rightsStatus": "cc-by-4.0",
+          "scope": "Defines comparison as a research design with declared goals, mode, scale, scope, comparands, criteria, description, juxtaposition, redescription, rectification, and theory formation.",
+          "boundary": "The framework does not make a selected comparison criterion natural, prove two figures identical, or validate a historical diffusion claim."
+        },
+        {
+          "sourceId": "ucl-digital-egypt-deities",
+          "url": "https://www.ucl.ac.uk/museums-static/digitalegypt/religion/deitiesindex.html",
+          "locator": "The names of deities; fissioning and fusing; form, iconography, and contextual identity",
+          "rightsStatus": "reference-only",
+          "scope": "Explains why Egyptian divine names, forms, combinations, and iconography must be interpreted in context.",
+          "boundary": "The overview is a method boundary, not a passage-level source for every named deity or cult."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_5cb759f25ebb598dbab4c727",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/comparative-methodology/iconography-versus-textual-identity/method",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_b92df7f20fc601d84789f4a6",
+      "candidateDigest": "sha256:773a9153cd180404246b3bbdb0df29ab92dd3a952c41048f79028815b4bd07c0",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/comparative-methodology/reception-versus-origin/method",
+      "title": "Reception versus origin — Method",
+      "topic": "reception-versus-origin",
+      "routeRole": "method",
+      "answerContract": "Answer only the method question inside the adjudicated boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Declare comparands, source frames, purpose, scale, scope, criterion, and alternatives; resemblance is not proof of identity, diffusion, genealogy, or universal origin.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Text, translation, identity, cult, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Reception versus origin under the method lens?",
+        "Which exact source, edition, folio, stanza, passage, place, or period controls the answer?",
+        "Which textual, translation, identity, cult, or reception layers must remain separate?",
+        "What does the inspected evidence explicitly fail to establish?",
+        "Which source, rights, or version change would require exact-revision review again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "freiberger-comparison-method",
+          "url": "https://doi.org/10.3390/rel9020038",
+          "locator": "§2 comparative configuration and process; §3 conclusions; pp. 1–14",
+          "rightsStatus": "cc-by-4.0",
+          "scope": "Defines comparison as a research design with declared goals, mode, scale, scope, comparands, criteria, description, juxtaposition, redescription, rectification, and theory formation.",
+          "boundary": "The framework does not make a selected comparison criterion natural, prove two figures identical, or validate a historical diffusion claim."
+        },
+        {
+          "sourceId": "bojadzievska-comparative-mythology",
+          "url": "https://journals.ukim.mk/index.php/jcp/en/article/view/17",
+          "locator": "Abstract; references; article identity and licence notice",
+          "rightsStatus": "reference-only",
+          "scope": "Surveys linguistic, psychological, anthropological, structural, and phylogenetic approaches and notes multiple possible explanations for cross-cultural similarity.",
+          "boundary": "A possible explanation is not evidence of common origin, diffusion, identity, or universality in a particular comparison."
+        },
+        {
+          "sourceId": "getty-florentine-project-and-terms",
+          "url": "https://www.getty.edu/projects/florentine-codex/",
+          "locator": "Project history and edition description; Getty Terms of Use; Codex book index and parallel text/translation labels",
+          "rightsStatus": "reference-only",
+          "scope": "Establishes the manuscript’s collaborative sixteenth-century production and the digital edition’s separate Nahuatl, Spanish, and translation layers.",
+          "boundary": "The project description’s reliability claim does not remove colonial mediation or make translations and images freely reusable."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_b92df7f20fc601d84789f4a6",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/comparative-methodology/reception-versus-origin/method",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "canonicalDefinitionOwners": {
+          "methodology": "maha-strategies",
+          "mythologyHub": "maha-strategies"
+        },
+        "missing": [],
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "communityAuthorityRequiredWhereApplicable": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    }
+  ],
+  "provenanceDigest": "sha256:f97ada286ee5024dbdd9bd94ae6a24178998f300401c8b870b15f768fb40bf07"
+}
