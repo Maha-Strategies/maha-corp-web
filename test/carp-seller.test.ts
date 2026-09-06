@@ -31,8 +31,12 @@ import {
   DEEP_CONTEXT_EVALUATION_OFFER,
   EVIDENCE_RETENTION_MATRIX_OFFER,
   GOVERNED_CONTEXT_VERIFICATION_OFFER,
+  IMAGINED_LIFE_SECTION_OFFER,
+  IMAGINED_LIFE_EDITION_OFFER,
   MPS_AUTONOMOUS_AUDIT_OFFER,
   RESEARCH_INTAKE_EVIDENCE_PACK_OFFER,
+  VOLCANIC_ENGINE_SECTION_OFFER,
+  VOLCANIC_ENGINE_EDITION_OFFER,
 } from '../lib/x402/offers.ts'
 
 const role = JSON.parse(await readFile(new URL('../content/discovery/carp-seller-role.json', import.meta.url), 'utf8'))
@@ -45,7 +49,7 @@ test('the public Seller role mirrors the adopted upstream v0.2 contract', () => 
   assert.deepEqual(role.fulfillmentDescriptor.modes, ['physical', 'digital', 'hybrid'])
 })
 
-test('the Maha seller maps all seven payable products to the adopted digital offering shape', () => {
+test('the Maha seller maps all eleven payable products to the adopted digital offering shape', () => {
   assert.equal(mahaCarpSellerProfile.schemaVersion, '0.1.3')
   assert.equal(mahaCarpSellerProfile.roleContract, CABEZON_SELLER_ROLE_URL)
   assert.equal(mahaCarpSellerProfile.roleMirror, CARP_SELLER_ROLE_URL)
@@ -71,8 +75,12 @@ test('the Maha seller maps all seven payable products to the adopted digital off
     ['maha:mps-autonomous-audit:v1', '0.10', MPS_AUTONOMOUS_AUDIT_OFFER],
     ['maha:governed-context-verification-pack:v1', '0.50', GOVERNED_CONTEXT_VERIFICATION_OFFER],
     ['maha:research-intake-evidence-pack:v1', '1.00', RESEARCH_INTAKE_EVIDENCE_PACK_OFFER],
+    ['maha:book-section:the-imagined-life:v0.1', '0.005', IMAGINED_LIFE_SECTION_OFFER],
+    ['maha:book-section:the-volcanic-engine:v0.1', '0.005', VOLCANIC_ENGINE_SECTION_OFFER],
+    ['maha:book-edition:the-imagined-life:v0.1', '2.99', IMAGINED_LIFE_EDITION_OFFER],
+    ['maha:book-edition:the-volcanic-engine:v0.1', '2.99', VOLCANIC_ENGINE_EDITION_OFFER],
   ] as const
-  assert.equal(MAHA_CARP_DIGITAL_OFFERS.length, 7)
+  assert.equal(MAHA_CARP_DIGITAL_OFFERS.length, 11)
   for (const [offeringRef, amount, x402] of expected) {
     const offer = MAHA_CARP_DIGITAL_OFFERS.find((candidate) => candidate.offeringRef === offeringRef)
     assert.ok(offer)

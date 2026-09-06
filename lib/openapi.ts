@@ -7,7 +7,13 @@ import {
   GOVERNED_CONTEXT_VERIFICATION_DISCOVERY,
 } from './x402/context-product-offer-schemas.ts'
 import { RESEARCH_INTAKE_EVIDENCE_PACK_DISCOVERY } from './x402/offer-schemas.ts'
-import { X402_OFFERS } from './x402/offers.ts'
+import {
+  IMAGINED_LIFE_EDITION_OFFER,
+  IMAGINED_LIFE_SECTION_OFFER,
+  VOLCANIC_ENGINE_EDITION_OFFER,
+  VOLCANIC_ENGINE_SECTION_OFFER,
+  X402_OFFERS,
+} from './x402/offers.ts'
 import {
   COMPATIBILITY_PACK_CONTRACT,
   COMPATIBILITY_PACK_OUTPUT_SCHEMA,
@@ -304,6 +310,38 @@ export const openApiDocument = {
         parameters: [{ name: 'packId', in: 'path', required: true, schema: { type: 'string', pattern: '^intake_[a-f0-9]{32}$' } }],
         requestBody: { required: true, content: { 'application/json': { schema: RESEARCH_INTAKE_EVIDENCE_PACK_DISCOVERY.inputSchema } } },
         responses: { '200': { description: 'Completed pack.', content: { 'application/json': { schema: { type: 'object' } } } }, '202': errorResponse('The pack is still processing.'), '404': errorResponse('No pack matches that ID and bearer token.'), '409': errorResponse('The request digest differs or retry allowance is exhausted.'), '502': errorResponse('At least one incomplete section failed again.'), '503': errorResponse('The intake ledger is unavailable.') },
+      },
+    },
+    '/api/v1/books/the-imagined-life/section': {
+      post: {
+        tags: ['Books'], operationId: 'readImaginedLifeMachineSection', summary: 'Retrieve one machine-readable section of The Imagined Life', security: [{}],
+        description: 'A deterministic section retrieval priced at 0.005 USDC over x402 v2 on Base. The public web edition remains free. Payment purchases structured delivery and an integrity receipt; it does not create exclusive access, transfer copyright, or include analysis or factual certification.',
+        requestBody: { required: true, content: { 'application/json': { schema: IMAGINED_LIFE_SECTION_OFFER.discovery.inputSchema } } },
+        responses: { '200': { description: 'Exact published section with edition metadata and deterministic receipt.', content: { 'application/json': { schema: IMAGINED_LIFE_SECTION_OFFER.discovery.outputSchema } } }, '400': errorResponse('Unknown section or invalid request.'), '402': errorResponse('The x402 payment challenge for 5000 USDC base units.'), '413': errorResponse('Request exceeds 1024 bytes.'), '415': errorResponse('Content-Type must be application/json.') },
+      },
+    },
+    '/api/v1/books/the-volcanic-engine/section': {
+      post: {
+        tags: ['Books'], operationId: 'readVolcanicEngineMachineSection', summary: 'Retrieve one machine-readable section of The Volcanic Engine', security: [{}],
+        description: 'A deterministic section retrieval priced at 0.005 USDC over x402 v2 on Base. The public web edition remains free. Payment purchases structured delivery and an integrity receipt; it does not create exclusive access, transfer copyright, or include analysis or factual certification.',
+        requestBody: { required: true, content: { 'application/json': { schema: VOLCANIC_ENGINE_SECTION_OFFER.discovery.inputSchema } } },
+        responses: { '200': { description: 'Exact published section with edition metadata and deterministic receipt.', content: { 'application/json': { schema: VOLCANIC_ENGINE_SECTION_OFFER.discovery.outputSchema } } }, '400': errorResponse('Unknown section or invalid request.'), '402': errorResponse('The x402 payment challenge for 5000 USDC base units.'), '413': errorResponse('Request exceeds 1024 bytes.'), '415': errorResponse('Content-Type must be application/json.') },
+      },
+    },
+    '/api/v1/books/the-imagined-life/edition': {
+      post: {
+        tags: ['Books'], operationId: 'purchaseImaginedLifeMachineEdition', summary: 'Purchase the complete machine-readable edition of The Imagined Life', security: [{}],
+        description: 'A complete normalized Markdown edition priced at 2.99 USDC over x402 v2 on Base, with an ordered section manifest, per-section and whole-edition SHA-256 commitments, and a deterministic receipt. The public web edition remains free. Purchase grants non-exclusive personal or internal machine use; it does not grant redistribution, resale, model-training rights, copyright ownership, analysis, or factual certification. The complete edition is delivered in the paid response; later requests are separate purchases.',
+        requestBody: { required: true, content: { 'application/json': { schema: IMAGINED_LIFE_EDITION_OFFER.discovery.inputSchema } } },
+        responses: { '200': { description: 'Complete machine-readable edition with manifest and deterministic receipt.', content: { 'application/json': { schema: IMAGINED_LIFE_EDITION_OFFER.discovery.outputSchema } } }, '400': errorResponse('Request body must be an empty JSON object.'), '402': errorResponse('The x402 payment challenge for 2990000 USDC base units.'), '413': errorResponse('Request exceeds 1024 bytes.'), '415': errorResponse('Content-Type must be application/json.') },
+      },
+    },
+    '/api/v1/books/the-volcanic-engine/edition': {
+      post: {
+        tags: ['Books'], operationId: 'purchaseVolcanicEngineMachineEdition', summary: 'Purchase the complete machine-readable edition of The Volcanic Engine', security: [{}],
+        description: 'A complete normalized Markdown edition priced at 2.99 USDC over x402 v2 on Base, with an ordered section manifest, per-section and whole-edition SHA-256 commitments, and a deterministic receipt. The public web edition remains free. Purchase grants non-exclusive personal or internal machine use; it does not grant redistribution, resale, model-training rights, copyright ownership, analysis, or factual certification. The complete edition is delivered in the paid response; later requests are separate purchases.',
+        requestBody: { required: true, content: { 'application/json': { schema: VOLCANIC_ENGINE_EDITION_OFFER.discovery.inputSchema } } },
+        responses: { '200': { description: 'Complete machine-readable edition with manifest and deterministic receipt.', content: { 'application/json': { schema: VOLCANIC_ENGINE_EDITION_OFFER.discovery.outputSchema } } }, '400': errorResponse('Request body must be an empty JSON object.'), '402': errorResponse('The x402 payment challenge for 2990000 USDC base units.'), '413': errorResponse('Request exceeds 1024 bytes.'), '415': errorResponse('Content-Type must be application/json.') },
       },
     },
     '/api/v1/mps/audit': {

@@ -161,6 +161,10 @@ test('public agent discovery identifies live capabilities and the scoped Context
     'mps-autonomous-audit',
     'governed-context-verification-pack',
     'research-intake-evidence-pack',
+    'book-section-the-imagined-life',
+    'book-section-the-volcanic-engine',
+    'book-edition-the-imagined-life',
+    'book-edition-the-volcanic-engine',
     // gpu-qubo-ising is deliberately absent: the standalone reference engine is
     // beta and undiscoverable until its vectorized candidate has passing A10G
     // evidence. See docs/qubo-reference-promotion.md.
