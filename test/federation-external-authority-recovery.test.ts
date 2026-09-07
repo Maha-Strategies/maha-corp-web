@@ -34,7 +34,8 @@ test('all sources are reference-only and no passage text is stored', () => {
 })
 
 test('dependent impact is derived from the frozen candidate map without mutation', () => {
-  const map = read('federation-route-candidates-v3.json')
+  const map = read('federation-route-candidates-v4.json')
+  const graph = read('federation-definition-graph-objects-v1.json')
   const cohort = read('federation-external-authority-recovery-cohort-v1.json')
   const impact = read('federation-external-authority-dependency-impact-v1.json')
   const ids = new Set(AUTHORITY_DECISIONS.map((x) => x.conceptId))
@@ -42,9 +43,28 @@ test('dependent impact is derived from the frozen candidate map without mutation
     .filter((x: { conceptId: string }) => ids.has(x.conceptId))
     .sort((a: { rank: number; candidateId: string }, b: { rank: number; candidateId: string }) => a.rank - b.rank || a.candidateId.localeCompare(b.candidateId))
     .map((x: { candidateId: string }) => x.candidateId)
-  assert.deepEqual(cohort.dependentCandidateIds, expected)
-  assert.equal(impact.totalDependentCandidates, expected.length)
-  assert.equal(map.candidates.length, cohort.candidateMap.observedCandidateCount)
+  const expectedObjects = graph.graphObjects.filter((x: { conceptId: string }) => ids.has(x.conceptId)).map((x: { graphObjectId: string }) => x.graphObjectId).sort()
+  assert.deepEqual(cohort.dependentRouteCandidateIds, expected)
+  assert.deepEqual(cohort.graphObjectIds, expectedObjects)
+  assert.equal(impact.totalDependentRouteCandidates, expected.length)
+  assert.equal(impact.totalDefinitionGraphObjects, expectedObjects.length)
+  assert.equal(impact.totalPriorMissingDependencyRecords, 32)
+  assert.equal(map.candidates.length, cohort.candidateMap.routeCandidateCount)
+  assert.equal(map.candidates.length, 1628)
+  assert.equal(expected.length, 48)
+  assert.equal(expectedObjects.length, 12)
+})
+
+test('authority proposals overlay graph identities without converting them into routes', () => {
+  const graph = read('federation-definition-graph-objects-v1.json')
+  const impact = read('federation-external-authority-dependency-impact-v1.json')
+  for (const row of impact.impacts) {
+    const object = graph.graphObjects.find((item: { graphObjectId: string }) => item.graphObjectId === row.graphObjectId)
+    assert.ok(object, row.conceptId)
+    assert.equal(object.publicRoute, null)
+    assert.equal(object.routeBudget, false)
+    assert.equal(row.routeCandidateCount, 4)
+  }
 })
 
 test('generated artifacts authenticate their complete bodies', () => {

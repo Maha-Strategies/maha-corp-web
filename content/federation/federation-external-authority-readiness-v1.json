@@ -6,7 +6,9 @@
   "result": {
     "definitionProposalsReady": 11,
     "heldForRevision": 1,
-    "dependentCandidates": 60
+    "definitionGraphObjects": 12,
+    "dependentRouteCandidates": 48,
+    "priorMissingDependencyRecords": 32
   },
   "gate": "Definition proposals remain private and cannot make a route evidence-ready. Each dependent candidate still requires its own source identity, content and locator inspection, alignment audit, exact-revision review, and active canonical release.",
   "execution": {
@@ -16,5 +18,5 @@
     "llmsChanged": false,
     "deployed": false
   },
-  "provenanceDigest": "sha256:c29f58a682c2c72cb9f126570293121a521bfd45191d0a2e7014f6a666897e91"
+  "provenanceDigest": "sha256:a2ee69d5170bf580bb04b2acd1b63acc4ec4b6e60b99eddedf7efb6c196e2827"
 }

@@ -4,10 +4,10 @@ Generated 2026-09-07. Private, noncanonical, and additive.
 
 ## Result
 
-- 12 externally governed concepts frozen.
+- 12 externally governed concepts frozen and matched to 12 non-route v4 graph objects.
 - 11 definition proposals have section-level authority support.
 - 1 remains held: deterministic arithmetic is broader than the inspected public material.
-- 60 candidate routes depend on these concepts. None changed state.
+- 48 v4 route candidates apply these concepts; 32 records were historically blocked by their missing identities. None changed state.
 - Active bindings changed: 0. Reviews, releases, compiled routes, builds, and deployments: 0.
 
 ## Boundary

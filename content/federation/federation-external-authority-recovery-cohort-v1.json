@@ -4,9 +4,14 @@
   "generatedOn": "2026-09-07",
   "status": "private-noncanonical-proposals-only",
   "candidateMap": {
-    "schemaVersion": "maha-federation-route-candidates/3.0",
+    "schemaVersion": "maha-federation-route-candidate-map/4.0",
     "baselineDigest": "sha256:b7c9dfff2aa8a6da30046d43938b42566b3e3d6f3b51695274642c6b9a6fb357",
-    "observedCandidateCount": 1660
+    "provenanceDigest": "sha256:092610ce5eb78f6f9b385bc94775056d0ef2c89a3acd2f3fa70bbfc05a766f0d",
+    "routeCandidateCount": 1628
+  },
+  "graphObjectManifest": {
+    "provenanceDigest": "sha256:2c4def0c281f056ac6d5829caf04e186902bcda1a5c52a9df1b727ea1e7def3a",
+    "graphObjectCount": 32
   },
   "conceptIds": [
     "urn:maha:concept:computation:causal-inference",
@@ -22,7 +27,7 @@
     "urn:maha:concept:computation:reference-frame-conversion",
     "urn:maha:concept:computation:root-finding"
   ],
-  "dependentCandidateIds": [
+  "graphObjectIds": [
     "cand_0d9b1a88cbf93d413a243d71",
     "cand_25c680ff193b4f35f49e96ae",
     "cand_2cb4942c45f1804543a91a4a",
@@ -34,7 +39,9 @@
     "cand_c1e0a9d1956d137e337cae16",
     "cand_d90b7197535681a502dccba9",
     "cand_de8dd0a88e8704fe5855033e",
-    "cand_e41cfa0c9ad358c43c72d1ee",
+    "cand_e41cfa0c9ad358c43c72d1ee"
+  ],
+  "dependentRouteCandidateIds": [
     "cand_a24840e1b41dabdf0d8312b2",
     "cand_e6913e5b1d6155dcbe056b6a",
     "cand_5da47ae131bd50c28a964e74",
@@ -84,5 +91,5 @@
     "cand_67328511b3565384d1f5240c",
     "cand_d9bccf96502cbf09b7d6e882"
   ],
-  "provenanceDigest": "sha256:20dd4b9e744db720d020b5fd22e266c90df1e5023c529a89005e97daaf5fb10f"
+  "provenanceDigest": "sha256:04ebad4807c4ef62ccfb78e8626d91bf8a5c10c83fa5d2161c542cac9db0d65e"
 }
