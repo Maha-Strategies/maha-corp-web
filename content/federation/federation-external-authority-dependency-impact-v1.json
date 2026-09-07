@@ -1,0 +1,514 @@
+{
+  "artifact": "federation-external-authority-dependency-impact",
+  "schemaVersion": "1.0",
+  "generatedOn": "2026-09-07",
+  "status": "private-noncanonical-proposals-only",
+  "impacts": [
+    {
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "decisionState": "definition-proposal-ready",
+      "dependentCandidateCount": 5,
+      "dependentCandidates": [
+        {
+          "candidateId": "cand_a870823d00f81a9a4854f848",
+          "siteId": "maha-research",
+          "path": "/federation/research/causal-inference/definition",
+          "routeRole": "definition",
+          "rank": null
+        },
+        {
+          "candidateId": "cand_ec90d506fb510c60080a8494",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/causal-inference/machine-interface",
+          "routeRole": "machine-interface",
+          "rank": 1054
+        },
+        {
+          "candidateId": "cand_bf6f5983b7e8f95b5f2fb564",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/causal-inference/reproducibility",
+          "routeRole": "reproducibility",
+          "rank": 1098
+        },
+        {
+          "candidateId": "cand_eb0fd7680849180edc43bdcd",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/causal-inference/uncertainty",
+          "routeRole": "uncertainty",
+          "rank": 1266
+        },
+        {
+          "candidateId": "cand_d9bccf96502cbf09b7d6e882",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/causal-inference/worked-example",
+          "routeRole": "worked-example",
+          "rank": 1299
+        }
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "decisionState": "definition-proposal-ready",
+      "dependentCandidateCount": 5,
+      "dependentCandidates": [
+        {
+          "candidateId": "cand_908638ce5ea422d98d5273fb",
+          "siteId": "maha-research",
+          "path": "/federation/research/cryptographic-commitments/definition",
+          "routeRole": "definition",
+          "rank": null
+        },
+        {
+          "candidateId": "cand_dd951c2a4e39f3756f7ee6f9",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/cryptographic-commitments/machine-interface",
+          "routeRole": "machine-interface",
+          "rank": 597
+        },
+        {
+          "candidateId": "cand_7168a05d58662e49b6826c7e",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/cryptographic-commitments/reproducibility",
+          "routeRole": "reproducibility",
+          "rank": 654
+        },
+        {
+          "candidateId": "cand_31f9bd3e2a64a40aac291acb",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/cryptographic-commitments/uncertainty",
+          "routeRole": "uncertainty",
+          "rank": 964
+        },
+        {
+          "candidateId": "cand_08db53dbe892e6f61197e0a9",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/cryptographic-commitments/worked-example",
+          "routeRole": "worked-example",
+          "rank": 1046
+        }
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "decisionState": "revise",
+      "dependentCandidateCount": 5,
+      "dependentCandidates": [
+        {
+          "candidateId": "cand_a563c1dcade1fa354b9069fa",
+          "siteId": "maha-research",
+          "path": "/federation/research/deterministic-arithmetic/definition",
+          "routeRole": "definition",
+          "rank": null
+        },
+        {
+          "candidateId": "cand_a24840e1b41dabdf0d8312b2",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/deterministic-arithmetic/machine-interface",
+          "routeRole": "machine-interface",
+          "rank": 509
+        },
+        {
+          "candidateId": "cand_e6913e5b1d6155dcbe056b6a",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/deterministic-arithmetic/reproducibility",
+          "routeRole": "reproducibility",
+          "rank": 541
+        },
+        {
+          "candidateId": "cand_6a8af21d891464188c29dbb8",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/deterministic-arithmetic/uncertainty",
+          "routeRole": "uncertainty",
+          "rank": 805
+        },
+        {
+          "candidateId": "cand_7cec457fac2ac6a5b7839c9a",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/deterministic-arithmetic/worked-example",
+          "routeRole": "worked-example",
+          "rank": 897
+        }
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "decisionState": "definition-proposal-ready",
+      "dependentCandidateCount": 5,
+      "dependentCandidates": [
+        {
+          "candidateId": "cand_d90b7197535681a502dccba9",
+          "siteId": "maha-research",
+          "path": "/federation/research/dimensional-analysis/definition",
+          "routeRole": "definition",
+          "rank": null
+        },
+        {
+          "candidateId": "cand_5ace7cc1e1287874f505c134",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/dimensional-analysis/machine-interface",
+          "routeRole": "machine-interface",
+          "rank": 982
+        },
+        {
+          "candidateId": "cand_fcea33351dc6b5ed02dac901",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/dimensional-analysis/reproducibility",
+          "routeRole": "reproducibility",
+          "rank": 1035
+        },
+        {
+          "candidateId": "cand_4ca1eef82246da3174e34e17",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/dimensional-analysis/uncertainty",
+          "routeRole": "uncertainty",
+          "rank": 1237
+        },
+        {
+          "candidateId": "cand_67328511b3565384d1f5240c",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/dimensional-analysis/worked-example",
+          "routeRole": "worked-example",
+          "rank": 1269
+        }
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "decisionState": "definition-proposal-ready",
+      "dependentCandidateCount": 5,
+      "dependentCandidates": [
+        {
+          "candidateId": "cand_25c680ff193b4f35f49e96ae",
+          "siteId": "maha-research",
+          "path": "/federation/research/formal-verification/definition",
+          "routeRole": "definition",
+          "rank": null
+        },
+        {
+          "candidateId": "cand_5da47ae131bd50c28a964e74",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/formal-verification/machine-interface",
+          "routeRole": "machine-interface",
+          "rank": 585
+        },
+        {
+          "candidateId": "cand_cd30fe8a10e733f835d60834",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/formal-verification/reproducibility",
+          "routeRole": "reproducibility",
+          "rank": 589
+        },
+        {
+          "candidateId": "cand_3492801bafa20e3d50408a8e",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/formal-verification/uncertainty",
+          "routeRole": "uncertainty",
+          "rank": 810
+        },
+        {
+          "candidateId": "cand_1c9d1d2ca8af857b87a76813",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/formal-verification/worked-example",
+          "routeRole": "worked-example",
+          "rank": 824
+        }
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "decisionState": "definition-proposal-ready",
+      "dependentCandidateCount": 5,
+      "dependentCandidates": [
+        {
+          "candidateId": "cand_de8dd0a88e8704fe5855033e",
+          "siteId": "maha-research",
+          "path": "/federation/research/interpolation/definition",
+          "routeRole": "definition",
+          "rank": null
+        },
+        {
+          "candidateId": "cand_558c29e71ada643b2d7f7270",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/interpolation/machine-interface",
+          "routeRole": "machine-interface",
+          "rank": 728
+        },
+        {
+          "candidateId": "cand_03638eae89d44b2fcb9b6d10",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/interpolation/reproducibility",
+          "routeRole": "reproducibility",
+          "rank": 777
+        },
+        {
+          "candidateId": "cand_f6059812822caaf8d68d2b08",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/interpolation/uncertainty",
+          "routeRole": "uncertainty",
+          "rank": 1111
+        },
+        {
+          "candidateId": "cand_43f091f909c8222f825ed1f9",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/interpolation/worked-example",
+          "routeRole": "worked-example",
+          "rank": 1162
+        }
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "decisionState": "definition-proposal-ready",
+      "dependentCandidateCount": 5,
+      "dependentCandidates": [
+        {
+          "candidateId": "cand_e41cfa0c9ad358c43c72d1ee",
+          "siteId": "maha-research",
+          "path": "/federation/research/interval-bounds/definition",
+          "routeRole": "definition",
+          "rank": null
+        },
+        {
+          "candidateId": "cand_c9ea7b1ca4cbc881270bd35c",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/interval-bounds/machine-interface",
+          "routeRole": "machine-interface",
+          "rank": 761
+        },
+        {
+          "candidateId": "cand_f2d40776c02061fd82af4f0d",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/interval-bounds/reproducibility",
+          "routeRole": "reproducibility",
+          "rank": 803
+        },
+        {
+          "candidateId": "cand_c2a12acd1d0d40ff518b312d",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/interval-bounds/uncertainty",
+          "routeRole": "uncertainty",
+          "rank": 1075
+        },
+        {
+          "candidateId": "cand_f1c83160cbd51444ec1e318c",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/interval-bounds/worked-example",
+          "routeRole": "worked-example",
+          "rank": 1142
+        }
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:numerical-integration",
+      "decisionState": "definition-proposal-ready",
+      "dependentCandidateCount": 5,
+      "dependentCandidates": [
+        {
+          "candidateId": "cand_2cb4942c45f1804543a91a4a",
+          "siteId": "maha-research",
+          "path": "/federation/research/numerical-integration/definition",
+          "routeRole": "definition",
+          "rank": null
+        },
+        {
+          "candidateId": "cand_e3921066edee31291c7f4712",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/numerical-integration/machine-interface",
+          "routeRole": "machine-interface",
+          "rank": 891
+        },
+        {
+          "candidateId": "cand_5b501d7014282b7eec965ea1",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/numerical-integration/reproducibility",
+          "routeRole": "reproducibility",
+          "rank": 957
+        },
+        {
+          "candidateId": "cand_92353922a006421e3fa32cf4",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/numerical-integration/uncertainty",
+          "routeRole": "uncertainty",
+          "rank": 1192
+        },
+        {
+          "candidateId": "cand_5c64e76d0682c6128cece69c",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/numerical-integration/worked-example",
+          "routeRole": "worked-example",
+          "rank": 1241
+        }
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "decisionState": "definition-proposal-ready",
+      "dependentCandidateCount": 5,
+      "dependentCandidates": [
+        {
+          "candidateId": "cand_0d9b1a88cbf93d413a243d71",
+          "siteId": "maha-research",
+          "path": "/federation/research/numerical-stability/definition",
+          "routeRole": "definition",
+          "rank": null
+        },
+        {
+          "candidateId": "cand_d06946e7b842a6b692144ebf",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/numerical-stability/machine-interface",
+          "routeRole": "machine-interface",
+          "rank": 691
+        },
+        {
+          "candidateId": "cand_457721881f95e53782806bb6",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/numerical-stability/reproducibility",
+          "routeRole": "reproducibility",
+          "rank": 727
+        },
+        {
+          "candidateId": "cand_6e4fa6c27f0b694e1c642ff9",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/numerical-stability/uncertainty",
+          "routeRole": "uncertainty",
+          "rank": 1008
+        },
+        {
+          "candidateId": "cand_28654e2b2e0e77af894a2f1d",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/numerical-stability/worked-example",
+          "routeRole": "worked-example",
+          "rank": 1089
+        }
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:optimization",
+      "decisionState": "definition-proposal-ready",
+      "dependentCandidateCount": 5,
+      "dependentCandidates": [
+        {
+          "candidateId": "cand_9e9edd5648c41382537f568c",
+          "siteId": "maha-research",
+          "path": "/federation/research/optimization/definition",
+          "routeRole": "definition",
+          "rank": null
+        },
+        {
+          "candidateId": "cand_5d2d5c52fc91b9ecce7bb007",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/optimization/machine-interface",
+          "routeRole": "machine-interface",
+          "rank": 868
+        },
+        {
+          "candidateId": "cand_eac662a166aa8f5f94e0bc20",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/optimization/reproducibility",
+          "routeRole": "reproducibility",
+          "rank": 898
+        },
+        {
+          "candidateId": "cand_435411f57ee0f613ee321c7e",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/optimization/uncertainty",
+          "routeRole": "uncertainty",
+          "rank": 1161
+        },
+        {
+          "candidateId": "cand_ba19526bba1d8c7647a0572f",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/optimization/worked-example",
+          "routeRole": "worked-example",
+          "rank": 1211
+        }
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "decisionState": "definition-proposal-ready",
+      "dependentCandidateCount": 5,
+      "dependentCandidates": [
+        {
+          "candidateId": "cand_c1e0a9d1956d137e337cae16",
+          "siteId": "maha-research",
+          "path": "/federation/research/reference-frame-conversion/definition",
+          "routeRole": "definition",
+          "rank": null
+        },
+        {
+          "candidateId": "cand_6af09a682cc7e2277169d046",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/reference-frame-conversion/machine-interface",
+          "routeRole": "machine-interface",
+          "rank": 622
+        },
+        {
+          "candidateId": "cand_ac614aab7eb9cc394996553b",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/reference-frame-conversion/reproducibility",
+          "routeRole": "reproducibility",
+          "rank": 658
+        },
+        {
+          "candidateId": "cand_9b067b11b9941116008a6a34",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/reference-frame-conversion/uncertainty",
+          "routeRole": "uncertainty",
+          "rank": 851
+        },
+        {
+          "candidateId": "cand_6708f2125c704c598a373d02",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/reference-frame-conversion/worked-example",
+          "routeRole": "worked-example",
+          "rank": 881
+        }
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "decisionState": "definition-proposal-ready",
+      "dependentCandidateCount": 5,
+      "dependentCandidates": [
+        {
+          "candidateId": "cand_4e3ffcedfa7d51607e56c384",
+          "siteId": "maha-research",
+          "path": "/federation/research/root-finding/definition",
+          "routeRole": "definition",
+          "rank": null
+        },
+        {
+          "candidateId": "cand_de495ad3d3b6cbad65c2537a",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/root-finding/machine-interface",
+          "routeRole": "machine-interface",
+          "rank": 737
+        },
+        {
+          "candidateId": "cand_0eff8a7f07532fcb14af59f2",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/root-finding/reproducibility",
+          "routeRole": "reproducibility",
+          "rank": 795
+        },
+        {
+          "candidateId": "cand_df8bc14ba0c8d37a4e944b28",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/root-finding/uncertainty",
+          "routeRole": "uncertainty",
+          "rank": 1104
+        },
+        {
+          "candidateId": "cand_6d65397e7a1c9ad8abd13d39",
+          "siteId": "maha-strategies",
+          "path": "/clearing/deterministic-computation/root-finding/worked-example",
+          "routeRole": "worked-example",
+          "rank": 1154
+        }
+      ]
+    }
+  ],
+  "totalDependentCandidates": 60,
+  "provenanceDigest": "sha256:41a0f65111750abb235f913dbf161c78c793edc37fd626c8f20b1180aeafd764"
+}

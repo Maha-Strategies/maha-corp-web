@@ -1,0 +1,20 @@
+{
+  "artifact": "federation-external-authority-readiness",
+  "schemaVersion": "1.0",
+  "generatedOn": "2026-09-07",
+  "status": "private-noncanonical-proposals-only",
+  "result": {
+    "definitionProposalsReady": 11,
+    "heldForRevision": 1,
+    "dependentCandidates": 60
+  },
+  "gate": "Definition proposals remain private and cannot make a route evidence-ready. Each dependent candidate still requires its own source identity, content and locator inspection, alignment audit, exact-revision review, and active canonical release.",
+  "execution": {
+    "buildRun": false,
+    "routeGenerated": false,
+    "sitemapChanged": false,
+    "llmsChanged": false,
+    "deployed": false
+  },
+  "provenanceDigest": "sha256:c29f58a682c2c72cb9f126570293121a521bfd45191d0a2e7014f6a666897e91"
+}
