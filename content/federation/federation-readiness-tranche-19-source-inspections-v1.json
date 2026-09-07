@@ -1,0 +1,745 @@
+{
+  "schemaVersion": "maha-federation-readiness-tranche-19-sources/1.0",
+  "frozenOn": "2026-09-07",
+  "method": "Each local source was read at the named symbol and surrounding implementation. External sources are carried only from prior section-level inspection artifacts with their original scope and boundary. No source passage or full document is stored.",
+  "counts": {
+    "localInspections": 33,
+    "carriedExternalInspections": 14
+  },
+  "localInspections": [
+    {
+      "sourceId": "t19-runtime-attachment",
+      "locator": "lib/evidence-dossier/runtime-witness.ts — attachRuntimeWitnessToDossier",
+      "roles": [
+        "workflow"
+      ],
+      "scope": "Binds a validated runtime receipt to exact dossier, claim, and calculation identities.",
+      "boundary": "Records one execution; it does not establish correctness or independent reproduction.",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "sourceIdentity": "lib/evidence-dossier/runtime-witness.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-runtime-verifier",
+      "locator": "lib/evidence-dossier/runtime-witness.ts — verifyComputationalWitnessReceipt",
+      "roles": [
+        "verification",
+        "failure-modes"
+      ],
+      "scope": "Checks required receipt fields, hashes, timestamps, status, seeds, and artifacts.",
+      "boundary": "A clean structural verification does not validate the computation or its inputs.",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "sourceIdentity": "lib/evidence-dossier/runtime-witness.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-claim-intake-parser",
+      "locator": "lib/evidence-preflight.ts — parseEvidencePreflightInput",
+      "roles": [
+        "workflow",
+        "failure-modes"
+      ],
+      "scope": "Accepts at most three separately structured claims with source, excerpt, locator, and rights fields.",
+      "boundary": "The caller supplies claim separation and excerpts; parsing performs no source inspection.",
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "sourceIdentity": "lib/evidence-preflight.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-claim-intake-verifier",
+      "locator": "lib/evidence-preflight.ts — verifyEvidencePreflightResult",
+      "roles": [
+        "verification"
+      ],
+      "scope": "Recomputes and checks the digest-bound structural preflight result.",
+      "boundary": "Verification covers result consistency, not the truth or identity of submitted evidence.",
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "sourceIdentity": "lib/evidence-preflight.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-claim-intake-commercial-state",
+      "locator": "lib/evidence-workflow-examples.ts — EVIDENCE_WORKFLOW_COMMERCIAL_STATES",
+      "roles": [
+        "commercial-use"
+      ],
+      "scope": "Declares the structural preflight available free and distinguishes disabled or private next steps.",
+      "boundary": "It does not establish purchase availability for a dossier or a completed customer engagement.",
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "sourceIdentity": "lib/evidence-workflow-examples.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-basis-boundaries",
+      "locator": "lib/evidence-basis.ts — BASIS_CONTRACT",
+      "roles": [
+        "workflow"
+      ],
+      "scope": "Requires every evidence basis to state what it cannot establish.",
+      "boundary": "This is evidence-scope uncertainty, not metrological measurement uncertainty.",
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "sourceIdentity": "lib/evidence-basis.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-frame-transfer-refusal",
+      "locator": "lib/evidence-basis.ts — assertBasisCanCarry",
+      "roles": [
+        "verification",
+        "failure-modes"
+      ],
+      "scope": "Refuses evidentiary frame transfers that the declared basis cannot carry.",
+      "boundary": "A passing basis check does not assess the source or the claim-specific passage.",
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "sourceIdentity": "lib/evidence-basis.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-release-transition",
+      "locator": "lib/epistemic-release.ts — buildEpistemicCanonicalRelease and buildEpistemicReleaseWithdrawal",
+      "roles": [
+        "workflow"
+      ],
+      "scope": "Implements superseding releases and separately recorded withdrawals.",
+      "boundary": "This is Maha release behavior, not a general scholarly correction policy.",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "sourceIdentity": "lib/epistemic-release.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-release-status",
+      "locator": "lib/epistemic-release.ts — epistemicReleaseStatus and activeEpistemicReleases",
+      "roles": [
+        "verification"
+      ],
+      "scope": "Derives active, superseded, and withdrawn status and excludes non-active releases.",
+      "boundary": "It cannot invalidate copies or caches outside this system.",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "sourceIdentity": "lib/epistemic-release.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-release-readiness",
+      "locator": "lib/epistemic-release.ts — releaseReadiness",
+      "roles": [
+        "failure-modes"
+      ],
+      "scope": "Refuses release when exact target, scope, decision, or authority conditions are incomplete.",
+      "boundary": "Refusal coverage is bounded to the implemented checks.",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "sourceIdentity": "lib/epistemic-release.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-dossier-compiler",
+      "locator": "lib/evidence-dossier/compiler.ts — compileEvidenceDossier",
+      "roles": [
+        "workflow"
+      ],
+      "scope": "Compiles typed sources, passages, claims, comparisons, limitations, and provenance into a dossier.",
+      "boundary": "Compilation does not establish evidentiary sufficiency or truth.",
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "sourceIdentity": "lib/evidence-dossier/compiler.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-dossier-validator",
+      "locator": "lib/evidence-dossier/validator.ts — validateDossier",
+      "roles": [
+        "verification",
+        "failure-modes"
+      ],
+      "scope": "Checks dossier schema, identities, transitions, and nested provenance consistency.",
+      "boundary": "A valid package can still contain weak or misinterpreted evidence.",
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "sourceIdentity": "lib/evidence-dossier/validator.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-licensed-retrieval-flow",
+      "locator": "lib/mcp-evidence-licensing.ts — buildMcpEvidenceGrantSnapshot and buildLicensedEvidenceProjection",
+      "roles": [
+        "workflow",
+        "verification"
+      ],
+      "scope": "Binds client, grant, plan, quota, tool, active release, and returned projection.",
+      "boundary": "Entitlement does not upgrade evidence quality or establish external interoperability.",
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "sourceIdentity": "lib/mcp-evidence-licensing.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-licensed-retrieval-refusals",
+      "locator": "lib/mcp-evidence-licensing.ts — parseMcpEvidenceToolArguments and mcpEvidenceRequestSha256",
+      "roles": [
+        "failure-modes"
+      ],
+      "scope": "Requires one exact selector and binds material request arguments for replay safety.",
+      "boundary": "Local parsing and digests do not prove hosted availability.",
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "sourceIdentity": "lib/mcp-evidence-licensing.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-licensed-retrieval-commercial",
+      "locator": "lib/mcp-evidence-public-contract.ts — MCP_EVIDENCE_LICENSE_PLANS",
+      "roles": [
+        "commercial-use"
+      ],
+      "scope": "Declares plan identifiers, allowed tools, quotas, audiences, and list prices.",
+      "boundary": "A listed private plan does not prove a signed contract, payment, or public runtime availability.",
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "sourceIdentity": "lib/mcp-evidence-public-contract.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-receipt-registry-flow",
+      "locator": "lib/computational-witness-registry.ts — buildWitnessSubmissionPlan",
+      "roles": [
+        "workflow"
+      ],
+      "scope": "Builds a bounded, consented, replay-safe registry submission for a validated receipt.",
+      "boundary": "Registration does not establish calculation correctness.",
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "sourceIdentity": "lib/computational-witness-registry.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-receipt-registry-verification",
+      "locator": "lib/computational-witness-registry.ts — validatedWitnessReceipt",
+      "roles": [
+        "verification"
+      ],
+      "scope": "Validates the computational witness schema before registry use.",
+      "boundary": "Schema validity does not reproduce the calculation.",
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "sourceIdentity": "lib/computational-witness-registry.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-receipt-registry-failures",
+      "locator": "lib/computational-witness-registry.ts — WitnessRegistryInputError and WitnessRegistryConflictError",
+      "roles": [
+        "failure-modes"
+      ],
+      "scope": "Represents bounded-input and replay-conflict refusals.",
+      "boundary": "It does not enumerate failures outside the registry boundary.",
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "sourceIdentity": "lib/computational-witness-registry.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-delivery-receipt-flow",
+      "locator": "lib/substantial-mcp-delivery-receipt.ts — buildSubstantialMcpDeliveryReceipt",
+      "roles": [
+        "workflow"
+      ],
+      "scope": "Binds execution, released revision, substantial publication, delivery state, and acknowledgement requirement.",
+      "boundary": "A generated receipt does not prove external receipt, payment, or customer acceptance.",
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "sourceIdentity": "lib/substantial-mcp-delivery-receipt.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-delivery-receipt-verifier",
+      "locator": "lib/substantial-mcp-delivery-receipt.ts — verifySubstantialMcpDeliveryReceipt",
+      "roles": [
+        "verification",
+        "failure-modes"
+      ],
+      "scope": "Rebuilds the receipt and checks exact digest-bound field consistency.",
+      "boundary": "Verification establishes internal consistency only.",
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "sourceIdentity": "lib/substantial-mcp-delivery-receipt.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-delivery-commercial-state",
+      "locator": "lib/evidence-workflow-examples.ts — EVIDENCE_WORKFLOW_COMMERCIAL_STATES",
+      "roles": [
+        "commercial-use"
+      ],
+      "scope": "Labels licensed delivery as a private engagement rather than a public purchase flow.",
+      "boundary": "It does not establish a customer, transaction, or Production delivery.",
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "sourceIdentity": "lib/evidence-workflow-examples.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-review-projection",
+      "locator": "lib/exact-revision-review.ts — projectReviewState",
+      "roles": [
+        "workflow",
+        "verification"
+      ],
+      "scope": "Projects review state only from decisions bound to the exact revision digest and separates stale decisions.",
+      "boundary": "Internal review is not independent, expert, or peer review.",
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "sourceIdentity": "lib/exact-revision-review.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-review-release-refusal",
+      "locator": "lib/exact-revision-review.ts — classifyForRelease",
+      "roles": [
+        "failure-modes"
+      ],
+      "scope": "Classifies exact-revision review completeness and refuses stale or incomplete bundles.",
+      "boundary": "Classification does not authorize release by itself.",
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "sourceIdentity": "lib/exact-revision-review.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-private-bundle-scan",
+      "locator": "lib/batch-11-rehearsal-phases.ts — assertNoPrivateCorpusInBundle",
+      "roles": [
+        "workflow",
+        "verification",
+        "failure-modes"
+      ],
+      "scope": "Scans served bundle output against a fixed private-corpus marker set and refuses matches.",
+      "boundary": "Passing proves absence of enumerated markers only, not general privacy or confidentiality.",
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "sourceIdentity": "lib/batch-11-rehearsal-phases.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-public-claim-defects",
+      "locator": "lib/public-claim-defects.ts — detectPublicClaimDefects",
+      "roles": [
+        "workflow",
+        "failure-modes"
+      ],
+      "scope": "Detects a bounded set of claim-to-passage scope and causal-language defects.",
+      "boundary": "A clean result does not establish truth or support.",
+      "conceptId": "urn:maha:concept:evidence:unsupported-inference",
+      "sourceIdentity": "lib/public-claim-defects.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-relevance-contract",
+      "locator": "lib/public-claim-defects.ts — RELEVANCE_CONTRACT",
+      "roles": [
+        "verification"
+      ],
+      "scope": "States that structural relevance checks do not independently verify truth.",
+      "boundary": "This boundary is a contract, not an external evaluation.",
+      "conceptId": "urn:maha:concept:evidence:unsupported-inference",
+      "sourceIdentity": "lib/public-claim-defects.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-preflight-commercial-state",
+      "locator": "lib/evidence-workflow-examples.ts — EVIDENCE_WORKFLOW_COMMERCIAL_STATES",
+      "roles": [
+        "commercial-use"
+      ],
+      "scope": "Makes the structural preflight available free while keeping stronger offers separately labelled.",
+      "boundary": "The free check does not verify source identity, passage support, or truth.",
+      "conceptId": "urn:maha:concept:evidence:unsupported-inference",
+      "sourceIdentity": "lib/evidence-workflow-examples.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-canonical-release-flow",
+      "locator": "lib/epistemic-release.ts — buildEpistemicCanonicalRelease",
+      "roles": [
+        "workflow"
+      ],
+      "scope": "Creates an exact-target release under a separately authenticated release authority.",
+      "boundary": "Release is publication, not factual verification.",
+      "conceptId": "urn:maha:concept:evidence:canonical-release",
+      "sourceIdentity": "lib/epistemic-release.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-canonical-release-verification",
+      "locator": "lib/epistemic-release.ts — releaseReadiness",
+      "roles": [
+        "verification",
+        "failure-modes"
+      ],
+      "scope": "Checks exact target, decision scopes, assurance tier, lineage, and authority prerequisites.",
+      "boundary": "Passing does not establish empirical truth or independent reproduction.",
+      "conceptId": "urn:maha:concept:evidence:canonical-release",
+      "sourceIdentity": "lib/epistemic-release.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-passage-readiness",
+      "locator": "lib/release-readiness-policy-v2.ts — evaluateReadinessV2",
+      "roles": [
+        "workflow",
+        "verification",
+        "failure-modes"
+      ],
+      "scope": "Requires exact locator and claim-to-passage support decisions on one target under one policy.",
+      "boundary": "A decision records review; it does not make the passage or claim true.",
+      "conceptId": "urn:maha:concept:evidence:passage-support",
+      "sourceIdentity": "lib/release-readiness-policy-v2.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-audit-export-generator",
+      "locator": "lib/audit/exporter.ts — generatePDF",
+      "roles": [],
+      "scope": "Renders a bounded audit payload into a PDF export.",
+      "boundary": "Generation is not verification; it establishes neither export completeness nor the truth of ledger events.",
+      "conceptId": "urn:maha:concept:evidence:audit-export",
+      "sourceIdentity": "lib/audit/exporter.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-version-state",
+      "locator": "lib/source-recovery.ts — validateObservation",
+      "roles": [
+        "failure-modes"
+      ],
+      "scope": "Keeps source identity and version-relationship uncertainty as explicit recovery findings.",
+      "boundary": "It does not prove two artifacts are substantively equivalent.",
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "sourceIdentity": "lib/source-recovery.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "t19-reproducibility-fixtures",
+      "locator": "lib/evidence-workflow-examples.ts — EVIDENCE_WORKFLOW_EXAMPLES",
+      "roles": [
+        "worked-example",
+        "reproducibility",
+        "uncertainty"
+      ],
+      "scope": "Provides committed synthetic inputs, expected outputs, refusals, checks, and explicit synthetic boundaries.",
+      "boundary": "A fixture exercises a code path and is not independent scientific reproduction.",
+      "conceptId": "urn:maha:concept:computation:reproducibility-fixtures",
+      "sourceIdentity": "lib/evidence-workflow-examples.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    }
+  ],
+  "carriedExternalInspections": [
+    {
+      "sourceId": "src-nist-formal-verification",
+      "title": "Formal verification",
+      "publisher": "NIST Dictionary of Algorithms and Data Structures",
+      "version": "Public definition",
+      "url": "https://xlinux.nist.gov/dads/HTML/formalverf.html",
+      "locator": "Definition and Notes",
+      "inspectionDepth": "section-or-full-text",
+      "rightsBasis": "reference-only",
+      "scope": "Defines formal verification through formal requirements, a model, logic, and rules of inference.",
+      "boundary": "Does not establish that a particular model matches the implemented system or that a particular proof is sound.",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "carriedFrom": "federation-external-authority-source-inspections-v1",
+      "passageStored": false
+    },
+    {
+      "inspectionId": "tr15-src-102",
+      "topic": "error-budgets",
+      "sourceIdentity": "Site Reliability Engineering (Google), chapter \"Embracing Risk\"",
+      "version": "As published at sre.google/sre-book, read 2026-09-06",
+      "stableUrl": "https://sre.google/sre-book/embracing-risk/",
+      "locator": "Section \"Forming Your Error Budget\".",
+      "inspectionDepth": "targeted-section-read",
+      "accessBasis": "Published online by the authors, freely readable.",
+      "reuseBasis": "Reference-only. Bounded original summary; the text is not copied into artifacts.",
+      "supportedClaimScope": "That an error budget is derived from a service level objective and states, as an objective metric, how unreliable a service is permitted to be within a defined period.",
+      "boundary": "Describes one organisation’s published practice, not a standard. It sets no budget for any service, and an error budget bounds permitted unreliability rather than measuring correctness.",
+      "sourceClass": "industry-practice-reference",
+      "independence": "independent-of-maha",
+      "relationshipToEarlier": "Carried forward into Tranche 18: same source, same locator, same claim scope. Originally inspected as tr15-src-102.",
+      "conceptId": "urn:maha:concept:computation:error-budgets",
+      "carriedFrom": "federation-tranche-18-source-inspections-v1",
+      "passageStored": false
+    },
+    {
+      "sourceId": "src-bipm-dimensions",
+      "title": "The International System of Units (SI Brochure)",
+      "publisher": "BIPM",
+      "version": "9th edition, version 3.02",
+      "url": "https://www.bipm.org/documents/d/guest/si-brochure-9-en-pdf",
+      "locator": "§2.3.3, p. 136, Table 3",
+      "inspectionDepth": "section-or-full-text",
+      "rightsBasis": "reference-only",
+      "scope": "Defines dimensions of base and derived quantities and their expression as products of base dimensions.",
+      "boundary": "Does not validate a particular equation, measurement, unit conversion, or uncertainty budget.",
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "carriedFrom": "federation-external-authority-source-inspections-v1",
+      "passageStored": false
+    },
+    {
+      "sourceId": "src-iers-reference-frames",
+      "title": "IERS Conventions (2010), Chapter 5",
+      "publisher": "International Earth Rotation and Reference Systems Service",
+      "version": "IERS Technical Note 36",
+      "url": "https://iers-conventions.obspm.fr/content/chapter5/icc5.pdf",
+      "locator": "Chapter 5, transformation between the ITRS and GCRS",
+      "inspectionDepth": "section-or-full-text",
+      "rightsBasis": "reference-only",
+      "scope": "Specifies the sequence and quantities used to transform between terrestrial and celestial reference systems.",
+      "boundary": "Does not establish that a software implementation uses the correct epoch, Earth-orientation parameters, units, or convention version.",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "carriedFrom": "federation-external-authority-source-inspections-v1",
+      "passageStored": false
+    },
+    {
+      "sourceId": "src-dlmf-arithmetic",
+      "title": "DLMF §3.1 — Arithmetics and Error Measures",
+      "publisher": "NIST",
+      "version": "DLMF 1.2.7, released 2026-06-15",
+      "url": "https://dlmf.nist.gov/3.1",
+      "locator": "§3.1(i), equations 3.1.1–3.1.5",
+      "inspectionDepth": "section-or-full-text",
+      "rightsBasis": "reference-only",
+      "scope": "Defines floating-point representation and rounding conventions.",
+      "boundary": "Does not establish bit-for-bit deterministic results across hardware, compilers, libraries, execution order, or implementations.",
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "carriedFrom": "federation-external-authority-source-inspections-v1",
+      "passageStored": false
+    },
+    {
+      "sourceId": "src-causal-what-if",
+      "title": "Causal Inference: What If",
+      "publisher": "Chapman & Hall/CRC; author-hosted copy at Harvard T.H. Chan School of Public Health",
+      "version": "2024 online revision",
+      "url": "https://www.hsph.harvard.edu/miguel-hernan/wp-content/uploads/sites/1268/2024/04/hernanrobins_WhatIf_26apr24.pdf",
+      "locator": "Chapter 1, p. 12, “A definition of causal effect”",
+      "inspectionDepth": "section-or-full-text",
+      "rightsBasis": "reference-only",
+      "scope": "Defines causal effects as contrasts under alternative treatments in a target population and distinguishes causal from associational quantities.",
+      "boundary": "Does not establish identification for a particular dataset, the validity of a causal model, or an effect estimate.",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "carriedFrom": "federation-external-authority-source-inspections-v1",
+      "passageStored": false
+    },
+    {
+      "inspectionId": "tr13-src-020",
+      "topic": "version-relationship",
+      "sourceIdentity": "PubMed Central, Author Manuscripts in PMC",
+      "version": "As published at pmc.ncbi.nlm.nih.gov, read 2026-09-06",
+      "stableUrl": "https://pmc.ncbi.nlm.nih.gov/about/authorms/",
+      "locator": "Section \"What is the Author Manuscript?\" — first paragraph.",
+      "inspectionDepth": "targeted-section-read",
+      "accessBasis": "United States government service, freely accessible.",
+      "reuseBasis": "US government work; bounded original summary with attribution.",
+      "supportedClaimScope": "That versions of one work stand in a stated relationship — accepted manuscript versus published record — differing by the edits each contains.",
+      "boundary": "Supports the existence of a version relationship for journal articles. It does not generalise to other artifact types and establishes no versioning scheme.",
+      "sourceClass": "government-repository-policy",
+      "independence": "independent-of-maha",
+      "relationshipToEarlier": "Carried forward into Tranche 18: same source, same locator, same claim scope. Originally inspected as tr13-src-020.",
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "carriedFrom": "federation-tranche-18-source-inspections-v1",
+      "passageStored": false
+    },
+    {
+      "inspectionId": "tr14-src-102",
+      "topic": "audit-export",
+      "sourceIdentity": "NIST SP 800-53 Rev. 5, Security and Privacy Controls for Information Systems and Organizations",
+      "version": "Revision 5, DOI 10.6028/NIST.SP.800-53r5",
+      "stableUrl": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf",
+      "locator": "Control AU-3 (Content of Audit Records), items a-f and the Discussion paragraph.",
+      "inspectionDepth": "targeted-control-read",
+      "accessBasis": "United States government publication, freely available.",
+      "reuseBasis": "US government work; bounded original summary with attribution.",
+      "supportedClaimScope": "That an audit record is expected to carry the event description, timestamp, source, outcome and the identity of entities associated with the event, and that audit trails can reveal personally identifiable information, which the organisation is expected to consider and mitigate.",
+      "boundary": "Specifies record content, not an export format, retention period or disclosure rule. The privacy caution is a consideration the standard raises, not a permission to export.",
+      "sourceClass": "government-standards-body",
+      "independence": "independent-of-maha",
+      "relationshipToEarlier": "Carried forward into Tranche 18: same source, same locator, same claim scope. Originally inspected as tr14-src-102.",
+      "conceptId": "urn:maha:concept:evidence:audit-export",
+      "carriedFrom": "federation-tranche-18-source-inspections-v1",
+      "passageStored": false
+    },
+    {
+      "sourceId": "src-dlmf-interpolation",
+      "title": "DLMF §3.3 — Interpolation",
+      "publisher": "NIST",
+      "version": "DLMF 1.2.7, released 2026-06-15",
+      "url": "https://dlmf.nist.gov/3.3",
+      "locator": "§3.3(i), equation 3.3.1; §3.3(vi)",
+      "inspectionDepth": "section-or-full-text",
+      "rightsBasis": "reference-only",
+      "scope": "Defines polynomial interpolation through distinct nodes and identifies other interpolation methods.",
+      "boundary": "Does not establish accuracy between nodes, suitability for extrapolation, or numerical stability for a particular implementation.",
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "carriedFrom": "federation-external-authority-source-inspections-v1",
+      "passageStored": false
+    },
+    {
+      "sourceId": "src-dlmf-roots",
+      "title": "DLMF §3.8 — Nonlinear Equations",
+      "publisher": "NIST",
+      "version": "DLMF 1.2.7, released 2026-06-15",
+      "url": "https://dlmf.nist.gov/3.8",
+      "locator": "§3.8(i)–(ii), including equation 3.8.6 and conditioning discussion",
+      "inspectionDepth": "section-or-full-text",
+      "rightsBasis": "reference-only",
+      "scope": "Defines bracketing and iterative methods for locating zeros, with conditions and accuracy or conditioning considerations.",
+      "boundary": "Does not establish convergence for an arbitrary starting value or certify a computed root without residual and conditioning evidence.",
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "carriedFrom": "federation-external-authority-source-inspections-v1",
+      "passageStored": false
+    },
+    {
+      "sourceId": "src-nist-stability",
+      "title": "A Methodology for Numerical Software Testing",
+      "publisher": "NIST",
+      "version": "NISTIR 4763",
+      "url": "https://nvlpubs.nist.gov/nistpubs/Legacy/IR/nistir4763.pdf",
+      "locator": "Discussion of stability and conditioning",
+      "inspectionDepth": "section-or-full-text",
+      "rightsBasis": "reference-only",
+      "scope": "Distinguishes an ill-conditioned problem from an unstable algorithm and bounds stability by comparison with inherent error.",
+      "boundary": "Does not establish the stability of a named algorithm without an analysis under its stated inputs and arithmetic.",
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "carriedFrom": "federation-external-authority-source-inspections-v1",
+      "passageStored": false
+    },
+    {
+      "sourceId": "src-perk-commitments",
+      "title": "PERK specification",
+      "publisher": "NIST-hosted Post-Quantum Cryptography submission",
+      "version": "Round 1 specification",
+      "url": "https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/round-1/spec-files/PERK-spec-web.pdf",
+      "locator": "§2.2.3, Definitions 2.3–2.5",
+      "inspectionDepth": "section-or-full-text",
+      "rightsBasis": "reference-only",
+      "scope": "Defines commitment algorithms, correctness, computational hiding, and computational binding.",
+      "boundary": "A candidate submission hosted by NIST is not a NIST standard or endorsement and does not establish security of an implementation.",
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "carriedFrom": "federation-external-authority-source-inspections-v1",
+      "passageStored": false
+    },
+    {
+      "sourceId": "src-dlmf-intervals",
+      "title": "DLMF §3.1(ii) — Interval Arithmetic",
+      "publisher": "NIST",
+      "version": "DLMF 1.2.7, released 2026-06-15",
+      "url": "https://dlmf.nist.gov/3.1",
+      "locator": "§3.1(ii), equation 3.1.6 and accompanying text",
+      "inspectionDepth": "section-or-full-text",
+      "rightsBasis": "reference-only",
+      "scope": "Defines interval arithmetic as producing inclusion regions and states the restriction on division by an interval containing zero.",
+      "boundary": "Does not certify an interval implementation, a rounding mode, or the tightness of a computed bound.",
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "carriedFrom": "federation-external-authority-source-inspections-v1",
+      "passageStored": false
+    },
+    {
+      "sourceId": "src-ieee-1788-identity",
+      "title": "IEEE 1788-2015 — Standard for Interval Arithmetic",
+      "publisher": "IEEE Standards Association",
+      "version": "2015 standard; landing page observed as inactive-reserved",
+      "url": "https://standards.ieee.org/ieee/1788/4431/",
+      "locator": "Public standard landing page: Abstract and Scope",
+      "inspectionDepth": "metadata-only",
+      "rightsBasis": "reference-only",
+      "scope": "Confirms the identity and stated scope of the interval-arithmetic standard.",
+      "boundary": "The full subscribed standard was not inspected; this source cannot supply clause-level normative requirements.",
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "carriedFrom": "federation-external-authority-source-inspections-v1",
+      "passageStored": false
+    }
+  ],
+  "privacyBoundary": "Reference metadata, exact locators, scope, and boundaries only. No customer data, credentials, source passages, or reviewer identities.",
+  "provenanceDigest": "sha256:ac88e1c3295937a432d0ca2aaebd219f08fafc3173761b8c033f01a8b3e1741e"
+}

@@ -1,0 +1,1703 @@
+{
+  "schemaVersion": "maha-federation-readiness-tranche-19-page-specifications/1.0",
+  "frozenOn": "2026-09-07",
+  "counts": {
+    "specifications": 47,
+    "boundedQuestions": 235
+  },
+  "specifications": [
+    {
+      "candidateId": "cand_0e93144f12fa050be40c458a",
+      "candidateDigest": "sha256:66adb240e27f421d5111cb3f4e4e3c060c25f6305f3bdb2200f0ef0843e62a2e",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/internal-review/failure-modes",
+      "title": "Internal Review — Failure Modes",
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "routeRole": "failure-modes",
+      "directAnswer": "Internal Review — Failure Modes describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-review-release-refusal",
+          "locator": "lib/exact-revision-review.ts — classifyForRelease",
+          "scope": "Classifies exact-revision review completeness and refuses stale or incomplete bundles.",
+          "boundary": "Classification does not authorize release by itself.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:dea66d65a9081b31946b5f94299501e11d4b34476beba689ea19376a425c0962",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_114ff651c020a137c05c0a70",
+      "candidateDigest": "sha256:111aa7c1d663af87c25118c4d12f741ae6f6f5e657bb461243ff797fbb719e17",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/runtime-witness-receipts/workflow",
+      "title": "Runtime Witness Receipts — Workflow",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "routeRole": "workflow",
+      "directAnswer": "Runtime Witness Receipts — Workflow describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-runtime-attachment",
+          "locator": "lib/evidence-dossier/runtime-witness.ts — attachRuntimeWitnessToDossier",
+          "scope": "Binds a validated runtime receipt to exact dossier, claim, and calculation identities.",
+          "boundary": "Records one execution; it does not establish correctness or independent reproduction.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:22436a9d1a8f414f3fb5ad1ff05904ab38302ac3404d709bf2781fa8fbe6c70f",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_16c398dac13cec683a380b28",
+      "candidateDigest": "sha256:1ea6a7f324d3ac3b3242d154e69f39002e71bdfe422a31fb1c964a06c0aae959",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/unsupported-inference/verification",
+      "title": "Unsupported Inference — Verification",
+      "conceptId": "urn:maha:concept:evidence:unsupported-inference",
+      "routeRole": "verification",
+      "directAnswer": "Unsupported Inference — Verification describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-relevance-contract",
+          "locator": "lib/public-claim-defects.ts — RELEVANCE_CONTRACT",
+          "scope": "States that structural relevance checks do not independently verify truth.",
+          "boundary": "This boundary is a contract, not an external evaluation.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:0719469cdc14f5c8c97547df4bfaec4336b1376bf3865c733980d2a5e4b1d288",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_34d368d3cffc0123319624c3",
+      "candidateDigest": "sha256:f1d4e3c21445a08d8e06fcf6e98c025de9dc462b74ba11568bee65ee9d59e623",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/claim-intake/workflow",
+      "title": "Claim Intake — Workflow",
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "routeRole": "workflow",
+      "directAnswer": "Claim Intake — Workflow describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-claim-intake-parser",
+          "locator": "lib/evidence-preflight.ts — parseEvidencePreflightInput",
+          "scope": "Accepts at most three separately structured claims with source, excerpt, locator, and rights fields.",
+          "boundary": "The caller supplies claim separation and excerpts; parsing performs no source inspection.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:c060f677e6f12bfb76c1f13dfcc98409a772be8e2dbee38c371d393e2151e823",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_384ee3f7a26eb546e6e0c053",
+      "candidateDigest": "sha256:043c611525aef8727fdf01d2b41483e043aac00f6d20a3348649d96ac4e6b93e",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/reproducibility-fixtures/worked-example",
+      "title": "Reproducibility Fixtures — Worked Example",
+      "conceptId": "urn:maha:concept:computation:reproducibility-fixtures",
+      "routeRole": "worked-example",
+      "directAnswer": "Reproducibility Fixtures — Worked Example describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-reproducibility-fixtures",
+          "locator": "lib/evidence-workflow-examples.ts — EVIDENCE_WORKFLOW_EXAMPLES",
+          "scope": "Provides committed synthetic inputs, expected outputs, refusals, checks, and explicit synthetic boundaries.",
+          "boundary": "A fixture exercises a code path and is not independent scientific reproduction.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:31197d099452c65be1e6f8d063e9a971e65c0f6ec37475a99b4474755bae4d11",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_3b1a9ef814c8fd19ae5dd4f3",
+      "candidateDigest": "sha256:2c7bcf39f69d9625609a989741a86d0a84c56407c9f6920e1e9138e6defbef68",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/claim-intake/verification",
+      "title": "Claim Intake — Verification",
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "routeRole": "verification",
+      "directAnswer": "Claim Intake — Verification describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-claim-intake-verifier",
+          "locator": "lib/evidence-preflight.ts — verifyEvidencePreflightResult",
+          "scope": "Recomputes and checks the digest-bound structural preflight result.",
+          "boundary": "Verification covers result consistency, not the truth or identity of submitted evidence.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:ee8ca631910e50aff84f5d89e65d0285d67ac8af580d38928c09e77d9c20e477",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_3bd043436f7c9dd07250974b",
+      "candidateDigest": "sha256:63c3fb5498ceb12c3f3eed9ea0807c1aec3e3030b531f6365ce71cb0d8e6f923",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/unsupported-inference/commercial-use",
+      "title": "Unsupported Inference — Commercial Use",
+      "conceptId": "urn:maha:concept:evidence:unsupported-inference",
+      "routeRole": "commercial-use",
+      "directAnswer": "Unsupported Inference — Commercial Use describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-preflight-commercial-state",
+          "locator": "lib/evidence-workflow-examples.ts — EVIDENCE_WORKFLOW_COMMERCIAL_STATES",
+          "scope": "Makes the structural preflight available free while keeping stronger offers separately labelled.",
+          "boundary": "The free check does not verify source identity, passage support, or truth.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:f57bf8952a542ebd5cc947e6514bc38cbbdf8ec15d952047891ec62e6034057b",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_4732f241656c17cfa80dea46",
+      "candidateDigest": "sha256:1b6e7bbbf3de365f20529c637c8377d210c98ce112898718acf755b6788ccd61",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/runtime-witness-receipts/verification",
+      "title": "Runtime Witness Receipts — Verification",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "routeRole": "verification",
+      "directAnswer": "Runtime Witness Receipts — Verification describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-runtime-verifier",
+          "locator": "lib/evidence-dossier/runtime-witness.ts — verifyComputationalWitnessReceipt",
+          "scope": "Checks required receipt fields, hashes, timestamps, status, seeds, and artifacts.",
+          "boundary": "A clean structural verification does not validate the computation or its inputs.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:0bbcc0945ae7b2884d6adec8026fb016954b7a39144556a8ea499cb0c6a309b8",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_49563482102bec2a4698ca6d",
+      "candidateDigest": "sha256:ec5cc9bd97cd7114d6224dce5ef86658b803880ffc9a26c1919dad81e0c15445",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/internal-review/workflow",
+      "title": "Internal Review — Workflow",
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "routeRole": "workflow",
+      "directAnswer": "Internal Review — Workflow describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-review-projection",
+          "locator": "lib/exact-revision-review.ts — projectReviewState",
+          "scope": "Projects review state only from decisions bound to the exact revision digest and separates stale decisions.",
+          "boundary": "Internal review is not independent, expert, or peer review.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:23f92a07c30ba0f946c1e670d8259fcb1f3ba6a0ad2e4f35a7d087ddd0d14a4d",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_4c8e1c0aaa0eb1fb2b0105eb",
+      "candidateDigest": "sha256:ae5f9ae2f90c5ef3159d49498e67a64ac60321ef1aca70bb6206d973f3432a2a",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/uncertainty-recording/failure-modes",
+      "title": "Uncertainty Recording — Failure Modes",
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "routeRole": "failure-modes",
+      "directAnswer": "Uncertainty Recording — Failure Modes describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-frame-transfer-refusal",
+          "locator": "lib/evidence-basis.ts — assertBasisCanCarry",
+          "scope": "Refuses evidentiary frame transfers that the declared basis cannot carry.",
+          "boundary": "A passing basis check does not assess the source or the claim-specific passage.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:3bb974c4479e67cd8994a7d1bd121d6228332354dc411cd95e72497995ed4663",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_5025ed02e119fef37e34abfb",
+      "candidateDigest": "sha256:88056f7f986a273cef9886bea77e87fd1fc4f4b552f194ae2fe4005281eb91bc",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/runtime-witness-receipts/failure-modes",
+      "title": "Runtime Witness Receipts — Failure Modes",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "routeRole": "failure-modes",
+      "directAnswer": "Runtime Witness Receipts — Failure Modes describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-runtime-verifier",
+          "locator": "lib/evidence-dossier/runtime-witness.ts — verifyComputationalWitnessReceipt",
+          "scope": "Checks required receipt fields, hashes, timestamps, status, seeds, and artifacts.",
+          "boundary": "A clean structural verification does not validate the computation or its inputs.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:013df29d5d8a9f223d454051d56edfa1cd218ebc3776e8e8fbb7bf052dde8ca6",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_52ba56be784230fe4c5a90d4",
+      "candidateDigest": "sha256:50a8d0f09ee7b194f5a8020848130506a6e5335e68e748d45ca2adfac37206ea",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/privacy-boundary/failure-modes",
+      "title": "Privacy Boundary — Failure Modes",
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "routeRole": "failure-modes",
+      "directAnswer": "Privacy Boundary — Failure Modes describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-private-bundle-scan",
+          "locator": "lib/batch-11-rehearsal-phases.ts — assertNoPrivateCorpusInBundle",
+          "scope": "Scans served bundle output against a fixed private-corpus marker set and refuses matches.",
+          "boundary": "Passing proves absence of enumerated markers only, not general privacy or confidentiality.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:cddddbd93247511d73fb65ec5e316a09fed310f1b1a5ba39d80afb405b6a3003",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_53c217f369e3ea364567364a",
+      "candidateDigest": "sha256:bb7b6c27e3540bf77e231fe93a37ffeb98af26eacb9d985cef743166c37343e1",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/correction-and-retraction/workflow",
+      "title": "Correction And Retraction — Workflow",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "routeRole": "workflow",
+      "directAnswer": "Correction And Retraction — Workflow describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-release-transition",
+          "locator": "lib/epistemic-release.ts — buildEpistemicCanonicalRelease and buildEpistemicReleaseWithdrawal",
+          "scope": "Implements superseding releases and separately recorded withdrawals.",
+          "boundary": "This is Maha release behavior, not a general scholarly correction policy.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:6f86a76b54a29fbc153be0f9110ca3bed2a0373f178a64cab4a9a01736e00500",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_567977061305bfb171030d13",
+      "candidateDigest": "sha256:c60df98da6108b422b381a004928ba274535a8ea08a5f818ef7e86b07fdce22d",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/evidence-dossiers/verification",
+      "title": "Evidence Dossiers — Verification",
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "routeRole": "verification",
+      "directAnswer": "Evidence Dossiers — Verification describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-dossier-validator",
+          "locator": "lib/evidence-dossier/validator.ts — validateDossier",
+          "scope": "Checks dossier schema, identities, transitions, and nested provenance consistency.",
+          "boundary": "A valid package can still contain weak or misinterpreted evidence.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:13d2f1eb3cd26699aadd38028ea00290e996d9e3db77f23c89031ee7165579f8",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_5e120d34f43896e9ddd4c2cd",
+      "candidateDigest": "sha256:793472d12e67d35efa54eb3230d3570c9b9c4643e16ba5c54f26ccc54a169eb8",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/licensed-retrieval/verification",
+      "title": "Licensed Retrieval — Verification",
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "routeRole": "verification",
+      "directAnswer": "Licensed Retrieval — Verification describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-licensed-retrieval-flow",
+          "locator": "lib/mcp-evidence-licensing.ts — buildMcpEvidenceGrantSnapshot and buildLicensedEvidenceProjection",
+          "scope": "Binds client, grant, plan, quota, tool, active release, and returned projection.",
+          "boundary": "Entitlement does not upgrade evidence quality or establish external interoperability.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:ade68f8467cda660b00d1a32e104b6ebea6cfdf14290d1e7985fb02f9d111c06",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_6e39d7b25fc7f9913e52d052",
+      "candidateDigest": "sha256:cba9f5619bb6a84b58eb0d6f33b5de12acde7acafe6e1b5d48cc1a1c6db3cab6",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/licensed-retrieval/workflow",
+      "title": "Licensed Retrieval — Workflow",
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "routeRole": "workflow",
+      "directAnswer": "Licensed Retrieval — Workflow describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-licensed-retrieval-flow",
+          "locator": "lib/mcp-evidence-licensing.ts — buildMcpEvidenceGrantSnapshot and buildLicensedEvidenceProjection",
+          "scope": "Binds client, grant, plan, quota, tool, active release, and returned projection.",
+          "boundary": "Entitlement does not upgrade evidence quality or establish external interoperability.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:07b00782d087257a31bac20974d1bea2a0157fd2a78f42d2e45ef90a91fffd65",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_746829e7a9580c24768c5280",
+      "candidateDigest": "sha256:697e87b5ebb773e748cf9dfa6ccd4ac64bc9a6e6ee43d20c541d293fdd119a8b",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/privacy-boundary/workflow",
+      "title": "Privacy Boundary — Workflow",
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "routeRole": "workflow",
+      "directAnswer": "Privacy Boundary — Workflow describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-private-bundle-scan",
+          "locator": "lib/batch-11-rehearsal-phases.ts — assertNoPrivateCorpusInBundle",
+          "scope": "Scans served bundle output against a fixed private-corpus marker set and refuses matches.",
+          "boundary": "Passing proves absence of enumerated markers only, not general privacy or confidentiality.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:8bb108600fc130bb28fdc4901cedf158f2f7c21eee385494ba94cd8cad34c2c9",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_76a609835bd997daf18d03c9",
+      "candidateDigest": "sha256:5437b4d6dc9da19e9bad50c90f5f3684a61ba9ac4f04a97d894371961afb5670",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/correction-and-retraction/verification",
+      "title": "Correction And Retraction — Verification",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "routeRole": "verification",
+      "directAnswer": "Correction And Retraction — Verification describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-release-status",
+          "locator": "lib/epistemic-release.ts — epistemicReleaseStatus and activeEpistemicReleases",
+          "scope": "Derives active, superseded, and withdrawn status and excludes non-active releases.",
+          "boundary": "It cannot invalidate copies or caches outside this system.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:52f1848682bb8938456d3ed722c8415e1a860922c5983aa23e56c2ba70eaf28f",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_777b4bf168156b8720a1c87d",
+      "candidateDigest": "sha256:331592452cc89368e58de6f1862b08468c6e6693fddbd040ebbe340fdb3d5a7c",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/licensed-retrieval/commercial-use",
+      "title": "Licensed Retrieval — Commercial Use",
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "routeRole": "commercial-use",
+      "directAnswer": "Licensed Retrieval — Commercial Use describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-licensed-retrieval-commercial",
+          "locator": "lib/mcp-evidence-public-contract.ts — MCP_EVIDENCE_LICENSE_PLANS",
+          "scope": "Declares plan identifiers, allowed tools, quotas, audiences, and list prices.",
+          "boundary": "A listed private plan does not prove a signed contract, payment, or public runtime availability.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:9bb55a41a49ee0d65e01a7e6e390ef3985321fd81ae07e2f7f2194ab0c96e7a0",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_7afab943b366ec1ce0a420f6",
+      "candidateDigest": "sha256:d3680d32dd27ee3cce8eb9c7105f0fb9e93cc6734d5772155c4eae626151e1e7",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/calculation-receipts/workflow",
+      "title": "Calculation Receipts — Workflow",
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "routeRole": "workflow",
+      "directAnswer": "Calculation Receipts — Workflow describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-receipt-registry-flow",
+          "locator": "lib/computational-witness-registry.ts — buildWitnessSubmissionPlan",
+          "scope": "Builds a bounded, consented, replay-safe registry submission for a validated receipt.",
+          "boundary": "Registration does not establish calculation correctness.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:6b56f2b28d10fdda6ce4ba33b2279d79f6f13793a23f0c26bbcd708a7d4f7523",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_7b0e5131e5a8b8295bae99bb",
+      "candidateDigest": "sha256:4dbe6a3ec83f8f3ceb697b6a302162486b9f52e5e9711c979082fe594c02342f",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/unsupported-inference/workflow",
+      "title": "Unsupported Inference — Workflow",
+      "conceptId": "urn:maha:concept:evidence:unsupported-inference",
+      "routeRole": "workflow",
+      "directAnswer": "Unsupported Inference — Workflow describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-public-claim-defects",
+          "locator": "lib/public-claim-defects.ts — detectPublicClaimDefects",
+          "scope": "Detects a bounded set of claim-to-passage scope and causal-language defects.",
+          "boundary": "A clean result does not establish truth or support.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:6e69295fde6a9faf9c7035cb27349754ae28e0405da985b9fe2a88d458c6d143",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_82064d5d886a4f5debe9d0ae",
+      "candidateDigest": "sha256:6467cf552c9d278c1a4eb04bff8d19c35ff48353d2058aba3fc71435a5d137d8",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/uncertainty-recording/workflow",
+      "title": "Uncertainty Recording — Workflow",
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "routeRole": "workflow",
+      "directAnswer": "Uncertainty Recording — Workflow describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-basis-boundaries",
+          "locator": "lib/evidence-basis.ts — BASIS_CONTRACT",
+          "scope": "Requires every evidence basis to state what it cannot establish.",
+          "boundary": "This is evidence-scope uncertainty, not metrological measurement uncertainty.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:83d65badb2286079c7d2a8d76979becebc2337826226ea6f07740a0471faaa4c",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_87bc8ff96e129e61197cfe19",
+      "candidateDigest": "sha256:288399bb6328ed17de22eff5baad3ba2168c5d208e6d88ba87cc39eddf84e2c8",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/privacy-boundary/verification",
+      "title": "Privacy Boundary — Verification",
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "routeRole": "verification",
+      "directAnswer": "Privacy Boundary — Verification describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-private-bundle-scan",
+          "locator": "lib/batch-11-rehearsal-phases.ts — assertNoPrivateCorpusInBundle",
+          "scope": "Scans served bundle output against a fixed private-corpus marker set and refuses matches.",
+          "boundary": "Passing proves absence of enumerated markers only, not general privacy or confidentiality.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:82dae0e649e14b9a22fa56bfc5299bd171c048ec293e9cb763b21f468dfdb46e",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_89ca2d8582ec5fdfd70701bd",
+      "candidateDigest": "sha256:7f6ac32118e97c79d67a04eac882bd46a57fcb99619a8d0487b05ca7bd236660",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/reproducibility-fixtures/reproducibility",
+      "title": "Reproducibility Fixtures — Reproducibility",
+      "conceptId": "urn:maha:concept:computation:reproducibility-fixtures",
+      "routeRole": "reproducibility",
+      "directAnswer": "Reproducibility Fixtures — Reproducibility describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-reproducibility-fixtures",
+          "locator": "lib/evidence-workflow-examples.ts — EVIDENCE_WORKFLOW_EXAMPLES",
+          "scope": "Provides committed synthetic inputs, expected outputs, refusals, checks, and explicit synthetic boundaries.",
+          "boundary": "A fixture exercises a code path and is not independent scientific reproduction.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:4311d8ab727470ace6e8aa01b5741d000d7e002f7844ea8e07ad3c1b69228b3d",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_985cbc355b9050f85b926942",
+      "candidateDigest": "sha256:5400f034ac5fc78cc9d0e1219e65795bbd16da207add2f831d3671c5b67ae8e0",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/calculation-receipts/verification",
+      "title": "Calculation Receipts — Verification",
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "routeRole": "verification",
+      "directAnswer": "Calculation Receipts — Verification describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-receipt-registry-verification",
+          "locator": "lib/computational-witness-registry.ts — validatedWitnessReceipt",
+          "scope": "Validates the computational witness schema before registry use.",
+          "boundary": "Schema validity does not reproduce the calculation.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:3f57e78f5766d377fbe9ea5c86a6cc76cf435842a8ce5c65d4d5a6cba5547619",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_a84907e8cd7aaeb462975ff0",
+      "candidateDigest": "sha256:0ff4662f1e80ff2c85f38a1da219186e61af0d68abe52f9e456d00380847aae4",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/delivery-acknowledgement/verification",
+      "title": "Delivery Acknowledgement — Verification",
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "routeRole": "verification",
+      "directAnswer": "Delivery Acknowledgement — Verification describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-delivery-receipt-verifier",
+          "locator": "lib/substantial-mcp-delivery-receipt.ts — verifySubstantialMcpDeliveryReceipt",
+          "scope": "Rebuilds the receipt and checks exact digest-bound field consistency.",
+          "boundary": "Verification establishes internal consistency only.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:8c3c20b672269e931a0f12a509982dfa9c6769f9ad6757be7610fd36a6370606",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_af1e13cd58046f3b89fcf312",
+      "candidateDigest": "sha256:d2b7bf52925e147704bbbbca1cd73fc9ce50eb5ac6e43909f3c51b141a43abcd",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/claim-intake/failure-modes",
+      "title": "Claim Intake — Failure Modes",
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "routeRole": "failure-modes",
+      "directAnswer": "Claim Intake — Failure Modes describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-claim-intake-parser",
+          "locator": "lib/evidence-preflight.ts — parseEvidencePreflightInput",
+          "scope": "Accepts at most three separately structured claims with source, excerpt, locator, and rights fields.",
+          "boundary": "The caller supplies claim separation and excerpts; parsing performs no source inspection.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:ce9bc213393a3bc4e500345a98e8b820db46263d91d46ec813564a2891b8e417",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_bbfc84c12e0abb852c57ea7b",
+      "candidateDigest": "sha256:502418e6389c9df4a425bff36ca4efa1ab1a988a88dbecb5d7e6c2b7080956b2",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/correction-and-retraction/failure-modes",
+      "title": "Correction And Retraction — Failure Modes",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "routeRole": "failure-modes",
+      "directAnswer": "Correction And Retraction — Failure Modes describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-release-readiness",
+          "locator": "lib/epistemic-release.ts — releaseReadiness",
+          "scope": "Refuses release when exact target, scope, decision, or authority conditions are incomplete.",
+          "boundary": "Refusal coverage is bounded to the implemented checks.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:b1a55ada61369838aed247ee6ab2a077b1b1d0a46df5bd43ec21fae7d21f740e",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_bd33b2f4440bad71f453d1cd",
+      "candidateDigest": "sha256:58d98e6b35f27d7272f1f1d21a650eefeec38e351f354bd4959129223c4688d4",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/unsupported-inference/failure-modes",
+      "title": "Unsupported Inference — Failure Modes",
+      "conceptId": "urn:maha:concept:evidence:unsupported-inference",
+      "routeRole": "failure-modes",
+      "directAnswer": "Unsupported Inference — Failure Modes describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-public-claim-defects",
+          "locator": "lib/public-claim-defects.ts — detectPublicClaimDefects",
+          "scope": "Detects a bounded set of claim-to-passage scope and causal-language defects.",
+          "boundary": "A clean result does not establish truth or support.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:4c2bf3807cfc2172cc3d747b4cc8ed00f48633a6336c280970428b5f3f50f519",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_c1d27d899558b2f408725af4",
+      "candidateDigest": "sha256:e39323c5c6a6a210857b3141e9e708f04ceacfd89e49d8da3d8344ec5b0debf9",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/passage-support/verification",
+      "title": "Passage Support — Verification",
+      "conceptId": "urn:maha:concept:evidence:passage-support",
+      "routeRole": "verification",
+      "directAnswer": "Passage Support — Verification describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-passage-readiness",
+          "locator": "lib/release-readiness-policy-v2.ts — evaluateReadinessV2",
+          "scope": "Requires exact locator and claim-to-passage support decisions on one target under one policy.",
+          "boundary": "A decision records review; it does not make the passage or claim true.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:c8828dfb72c80619e746283e78cf00d69ce100be1f3aaad1473a0520acad48b4",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_c633bcf3413122ad08df9bc3",
+      "candidateDigest": "sha256:90571bd107b50194c7870e138df092becbce51b59ba9d573b341753859e6d4ec",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/passage-support/failure-modes",
+      "title": "Passage Support — Failure Modes",
+      "conceptId": "urn:maha:concept:evidence:passage-support",
+      "routeRole": "failure-modes",
+      "directAnswer": "Passage Support — Failure Modes describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-passage-readiness",
+          "locator": "lib/release-readiness-policy-v2.ts — evaluateReadinessV2",
+          "scope": "Requires exact locator and claim-to-passage support decisions on one target under one policy.",
+          "boundary": "A decision records review; it does not make the passage or claim true.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:476cb44e948cd7a61a83c9efe1863975da4eb54876f635b75245d0a1ffef8f3a",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_c8942765582ba19ccafd6b7c",
+      "candidateDigest": "sha256:33c877abb672387fa8534b93ef214062b218a3d2addbf85d36891b05572df8fa",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/licensed-retrieval/failure-modes",
+      "title": "Licensed Retrieval — Failure Modes",
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "routeRole": "failure-modes",
+      "directAnswer": "Licensed Retrieval — Failure Modes describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-licensed-retrieval-refusals",
+          "locator": "lib/mcp-evidence-licensing.ts — parseMcpEvidenceToolArguments and mcpEvidenceRequestSha256",
+          "scope": "Requires one exact selector and binds material request arguments for replay safety.",
+          "boundary": "Local parsing and digests do not prove hosted availability.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:1ad3e7b4b7e788ada2539ed92a95c69abefcecfed47403225c4b6d8f42c98a59",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_c9b1999e391248ee19abc521",
+      "candidateDigest": "sha256:1d23f57e8e59ef75a3f2fe40db11a83ff16c976bad5167a3be212ebbec6ce439",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/version-relationship/failure-modes",
+      "title": "Version Relationship — Failure Modes",
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "routeRole": "failure-modes",
+      "directAnswer": "Version Relationship — Failure Modes describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-version-state",
+          "locator": "lib/source-recovery.ts — validateObservation",
+          "scope": "Keeps source identity and version-relationship uncertainty as explicit recovery findings.",
+          "boundary": "It does not prove two artifacts are substantively equivalent.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:a7c773b2547636f8203cc6da107cd496ae3d895cd23a81a78860e9673f32b5b3",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_cc82c7609bf44bee9a8a3966",
+      "candidateDigest": "sha256:10811346786630356ae0f6967c638724a0ded2ae4d743d5349ecd3ec7d77b2c4",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/reproducibility-fixtures/uncertainty",
+      "title": "Reproducibility Fixtures — Uncertainty",
+      "conceptId": "urn:maha:concept:computation:reproducibility-fixtures",
+      "routeRole": "uncertainty",
+      "directAnswer": "Reproducibility Fixtures — Uncertainty describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-reproducibility-fixtures",
+          "locator": "lib/evidence-workflow-examples.ts — EVIDENCE_WORKFLOW_EXAMPLES",
+          "scope": "Provides committed synthetic inputs, expected outputs, refusals, checks, and explicit synthetic boundaries.",
+          "boundary": "A fixture exercises a code path and is not independent scientific reproduction.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:47503a4729085b5a51439446cdb9168731fb6f5554be20977aab2914a45d56b3",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_d2f94b145cf7db71f092d98f",
+      "candidateDigest": "sha256:6e2c9c470a7c78cf2fb4d5c4d38c611d0acf9b0c831f05698ca4b1fe0fbceaa8",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/canonical-release/verification",
+      "title": "Canonical Release — Verification",
+      "conceptId": "urn:maha:concept:evidence:canonical-release",
+      "routeRole": "verification",
+      "directAnswer": "Canonical Release — Verification describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-canonical-release-verification",
+          "locator": "lib/epistemic-release.ts — releaseReadiness",
+          "scope": "Checks exact target, decision scopes, assurance tier, lineage, and authority prerequisites.",
+          "boundary": "Passing does not establish empirical truth or independent reproduction.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:850dd1c3da162cada44ebb129df2c118ad8ae5ab0105bca37b1936f08b4149e9",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_d3fd4dd629615b77d72dd7d9",
+      "candidateDigest": "sha256:83cd366b8956c57687a4f9bc7a800beefc989257d552679654fae1d2b042f8bd",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/delivery-acknowledgement/workflow",
+      "title": "Delivery Acknowledgement — Workflow",
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "routeRole": "workflow",
+      "directAnswer": "Delivery Acknowledgement — Workflow describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-delivery-receipt-flow",
+          "locator": "lib/substantial-mcp-delivery-receipt.ts — buildSubstantialMcpDeliveryReceipt",
+          "scope": "Binds execution, released revision, substantial publication, delivery state, and acknowledgement requirement.",
+          "boundary": "A generated receipt does not prove external receipt, payment, or customer acceptance.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:d778ad140d7379dec34c5d745aaea45347cfeb02c2e512b1e3dc88e5df7d3c3d",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_dc250735100e8e76edee974c",
+      "candidateDigest": "sha256:9894ebcb8e5cbef7692cff2998220cc93705f1453100c45eb7e0197105b75f6f",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/delivery-acknowledgement/failure-modes",
+      "title": "Delivery Acknowledgement — Failure Modes",
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "routeRole": "failure-modes",
+      "directAnswer": "Delivery Acknowledgement — Failure Modes describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-delivery-receipt-verifier",
+          "locator": "lib/substantial-mcp-delivery-receipt.ts — verifySubstantialMcpDeliveryReceipt",
+          "scope": "Rebuilds the receipt and checks exact digest-bound field consistency.",
+          "boundary": "Verification establishes internal consistency only.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:2d08ace99b09fba41b213745671967aada90818152712fc50d496f8d41c17f9e",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_dc8070ea994e1058754e5a31",
+      "candidateDigest": "sha256:ea4f228abf18fcdeb66f58235e1aba97978cc25db5ae8c8d9dfc1b5453b1d610",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/delivery-acknowledgement/commercial-use",
+      "title": "Delivery Acknowledgement — Commercial Use",
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "routeRole": "commercial-use",
+      "directAnswer": "Delivery Acknowledgement — Commercial Use describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-delivery-commercial-state",
+          "locator": "lib/evidence-workflow-examples.ts — EVIDENCE_WORKFLOW_COMMERCIAL_STATES",
+          "scope": "Labels licensed delivery as a private engagement rather than a public purchase flow.",
+          "boundary": "It does not establish a customer, transaction, or Production delivery.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:aa9a2ec524cfb012e81c7d48240b23f5eae0b8df2814b026e4c1fd78cc2dd7cc",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_de47b40f36767f60c101974a",
+      "candidateDigest": "sha256:6e88fd8c188c4db7c48a69ebaa2ade787e7c1bbb2ace6a5536fbdadcf89f4c0e",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/claim-intake/commercial-use",
+      "title": "Claim Intake — Commercial Use",
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "routeRole": "commercial-use",
+      "directAnswer": "Claim Intake — Commercial Use describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-claim-intake-commercial-state",
+          "locator": "lib/evidence-workflow-examples.ts — EVIDENCE_WORKFLOW_COMMERCIAL_STATES",
+          "scope": "Declares the structural preflight available free and distinguishes disabled or private next steps.",
+          "boundary": "It does not establish purchase availability for a dossier or a completed customer engagement.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:7de754d10139293c087f7d6c8e62df82569d33c5b6c94fa4bc3a9784a3c7102a",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_e19e8901c36b13c148997e41",
+      "candidateDigest": "sha256:9e66c4ab9f60d3dfcdfcdf9afa015c7d23e9c58f739d20cd989187881b3312bd",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/internal-review/verification",
+      "title": "Internal Review — Verification",
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "routeRole": "verification",
+      "directAnswer": "Internal Review — Verification describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-review-projection",
+          "locator": "lib/exact-revision-review.ts — projectReviewState",
+          "scope": "Projects review state only from decisions bound to the exact revision digest and separates stale decisions.",
+          "boundary": "Internal review is not independent, expert, or peer review.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:9a1af41c254e5af727fa6be3b414c5792a5bf7ffcb94191ec1f35c27e5459852",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_e97a99783ecf4eff32941550",
+      "candidateDigest": "sha256:ce1641d5d4e16f50220f5d829f1aa06fb0f3c8bd90c7a9139dc7347f916b97fd",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/passage-support/workflow",
+      "title": "Passage Support — Workflow",
+      "conceptId": "urn:maha:concept:evidence:passage-support",
+      "routeRole": "workflow",
+      "directAnswer": "Passage Support — Workflow describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-passage-readiness",
+          "locator": "lib/release-readiness-policy-v2.ts — evaluateReadinessV2",
+          "scope": "Requires exact locator and claim-to-passage support decisions on one target under one policy.",
+          "boundary": "A decision records review; it does not make the passage or claim true.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:9e7af4bbad8b05778c609ff6bf1684f7163a251fb38ac4f3fa2da715cd709114",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_ec131abe6004e62d84a73718",
+      "candidateDigest": "sha256:1ac9ee8d220a9824acfd03608960b4e4cf4330f31c83df832848f6817d138f41",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/uncertainty-recording/verification",
+      "title": "Uncertainty Recording — Verification",
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "routeRole": "verification",
+      "directAnswer": "Uncertainty Recording — Verification describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-frame-transfer-refusal",
+          "locator": "lib/evidence-basis.ts — assertBasisCanCarry",
+          "scope": "Refuses evidentiary frame transfers that the declared basis cannot carry.",
+          "boundary": "A passing basis check does not assess the source or the claim-specific passage.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:bd8d1351bd813f3b3d7e36172fb0fde69d36f7d987f4cc22a2808bc35e82ce6b",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_ef11e2b421fe9aac0d8c24c3",
+      "candidateDigest": "sha256:50b6510c2fb1360c1a0de128034c4aace139d17e79caeaede2479ea799864d29",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/evidence-dossiers/workflow",
+      "title": "Evidence Dossiers — Workflow",
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "routeRole": "workflow",
+      "directAnswer": "Evidence Dossiers — Workflow describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-dossier-compiler",
+          "locator": "lib/evidence-dossier/compiler.ts — compileEvidenceDossier",
+          "scope": "Compiles typed sources, passages, claims, comparisons, limitations, and provenance into a dossier.",
+          "boundary": "Compilation does not establish evidentiary sufficiency or truth.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:d189f0e283be7037d1438647ac8e3a3fa8f56fe58bac2021d2abd3749b371f1b",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_f1c82b9f23a6ad45d764d203",
+      "candidateDigest": "sha256:973f3ad24132400e6cd1b62fd7b8d52e11e18258ac4d5ae57ee4a4a64474fbdb",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/canonical-release/failure-modes",
+      "title": "Canonical Release — Failure Modes",
+      "conceptId": "urn:maha:concept:evidence:canonical-release",
+      "routeRole": "failure-modes",
+      "directAnswer": "Canonical Release — Failure Modes describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-canonical-release-verification",
+          "locator": "lib/epistemic-release.ts — releaseReadiness",
+          "scope": "Checks exact target, decision scopes, assurance tier, lineage, and authority prerequisites.",
+          "boundary": "Passing does not establish empirical truth or independent reproduction.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:cb10d195178b758519d0f99413eb8ef5be2e117199132517c007ee601dbbbfc9",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_f958c961ac3d47800b272d37",
+      "candidateDigest": "sha256:b45466eb894c750f78051682e4cc05edc768334c41a520e13e8197d3d850b5df",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/evidence-dossiers/failure-modes",
+      "title": "Evidence Dossiers — Failure Modes",
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "routeRole": "failure-modes",
+      "directAnswer": "Evidence Dossiers — Failure Modes describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-dossier-validator",
+          "locator": "lib/evidence-dossier/validator.ts — validateDossier",
+          "scope": "Checks dossier schema, identities, transitions, and nested provenance consistency.",
+          "boundary": "A valid package can still contain weak or misinterpreted evidence.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:0aca0525cde9c145a7ba927a29807968ec471debff7e4cfae2ec21f93c9de4ca",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_fb6b392e20f120a12369e9a9",
+      "candidateDigest": "sha256:6d24345f3490bc1b86baba2ebc61da9c38de89834a31e5718d8bffc42fe58d93",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/canonical-release/workflow",
+      "title": "Canonical Release — Workflow",
+      "conceptId": "urn:maha:concept:evidence:canonical-release",
+      "routeRole": "workflow",
+      "directAnswer": "Canonical Release — Workflow describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-canonical-release-flow",
+          "locator": "lib/epistemic-release.ts — buildEpistemicCanonicalRelease",
+          "scope": "Creates an exact-target release under a separately authenticated release authority.",
+          "boundary": "Release is publication, not factual verification.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:715d53c8132b54137ba0684820195479769157b1f367bed4431d8a0c6d9c94f5",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_fd914cf4b7855cfa614efb27",
+      "candidateDigest": "sha256:a49bc4cb185303e524d3f0bc150f7655b1cf644055eb85cee0638a95cdafe8be",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/calculation-receipts/failure-modes",
+      "title": "Calculation Receipts — Failure Modes",
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "routeRole": "failure-modes",
+      "directAnswer": "Calculation Receipts — Failure Modes describes the bounded Maha behavior established by the cited implementation and carries the implementation's explicit non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Inputs and prerequisites",
+        "Ordered behavior",
+        "Verification or refusal states",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What exact behavior is implemented?",
+        "Which inputs and identities are required?",
+        "Which exact symbol bears the explanation?",
+        "Which refusal or verification boundary applies?",
+        "What external outcome does this implementation not establish?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t19-receipt-registry-failures",
+          "locator": "lib/computational-witness-registry.ts — WitnessRegistryInputError and WitnessRegistryConflictError",
+          "scope": "Represents bounded-input and replay-conflict refusals.",
+          "boundary": "It does not enumerate failures outside the registry boundary.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "decisionDigest": "sha256:c10bd3704a36b8b0d0744f9a2b39521648f1d7912854d282dba126021125318b",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    }
+  ],
+  "provenanceDigest": "sha256:1a5d0c6790c2ea6265d4ce21fdfcf99d215180321afe03cfd959266209542d02"
+}
