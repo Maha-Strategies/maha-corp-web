@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "maha-commercial-offer-role-reconciliation/1.0",
+  "frozenOn": "2026-09-07",
+  "layers": [
+    {
+      "offerId": "free-evidence-preflight",
+      "priceUsd": 0,
+      "acquisitionState": "available-free",
+      "locator": "app/tools/evidence-preflight/page.tsx — Service JSON-LD and public preflight form",
+      "scope": "Automated structural assessment of at most three claims; no independent source inspection."
+    },
+    {
+      "offerId": "mps-document-preflight",
+      "priceUsd": 49,
+      "acquisitionState": "self-service-checkout",
+      "locator": "lib/mps-preflight.ts — PREFLIGHT_PRICE_USD and app/api/mps-preflight/checkout/route.ts",
+      "scope": "Private automated claim map and verification backlog for a bounded nonfiction extract."
+    },
+    {
+      "offerId": "verified-evidence-dossier",
+      "priceUsd": 250,
+      "acquisitionState": "informational-purchase-disabled",
+      "locator": "lib/evidence-preflight-contract.ts — EVIDENCE_PREFLIGHT_PRICE_USD and fullDossierOffer",
+      "scope": "Proposed source-inspected, claim-level evidence assessment and digest-bound package."
+    },
+    {
+      "offerId": "bespoke-dossier-paid-pilot",
+      "priceUsd": 5000,
+      "acquisitionState": "contracted-paid-pilot-only",
+      "locator": "lib/evidence-dossier/package.ts — DOSSIER_OFFER_LIST_PRICE_USD and DossierEngagement",
+      "scope": "Separately contracted 8–15 claim dossier package with 5–12 inspected sources and internal audit."
+    }
+  ],
+  "commonBoundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior.",
+  "finding": "The declarations are compatible only when treated as four distinct scopes and acquisition states. The $250 offer remains disabled; the $5,000 package remains a separately contracted pilot.",
+  "mutation": {
+    "checkoutChanged": false,
+    "availabilityChanged": false,
+    "priceChanged": false,
+    "refundTermsChanged": false,
+    "privacyTermsChanged": false,
+    "deliveryTermsChanged": false
+  },
+  "provenanceDigest": "sha256:3fa3042b4be56f5e4518b3c181084887eb5b659f711a04d608638c2cc59955a7"
+}
