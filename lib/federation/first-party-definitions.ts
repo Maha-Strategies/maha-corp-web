@@ -2,32 +2,40 @@
  * First-party canonical definitions.
  *
  * Twenty-nine definitions added in map v3 reached Tranche 18 blocked on source
- * inspection. Seventeen of them are this organisation's own operational
- * concepts — runtime witness receipts, evidence dossiers, claim intake — for
- * which no external authority exists, because nobody outside Maha uses the
- * terms. Those are written here.
+ * inspection. They fall into three groups, and the split is the substance of
+ * this file.
  *
- * The other twelve are not. causal-inference, cryptographic-commitments,
- * deterministic-arithmetic, dimensional-analysis, formal-verification,
- * interpolation, interval-bounds, numerical-integration, numerical-stability,
- * optimization, reference-frame-conversion and root-finding are established
- * concepts with real authorities — DLMF, IEEE 754, NIST, the IAU. Writing a
- * Maha definition for interpolation would manufacture authority where a
- * standard already exists, and would be worse than leaving the page blocked.
- * They stay blocked, and are listed as needing external inspection rather than
- * authorship.
+ * Fifteen are this organisation's own operational concepts — runtime witness
+ * receipts, evidence dossiers, canonical release — for which no external
+ * authority exists because nobody outside Maha uses the terms. Those are
+ * written here.
+ *
+ * Two are deferred. conflicting-literature and source-recovery name real
+ * operational practices that nothing in this codebase implements: no check
+ * compares two sources against each other, and no field records that an
+ * alternative route to a source was sought. Defining them would describe
+ * intent as though it were behaviour, so they are listed as deferred rather
+ * than written.
+ *
+ * Twelve are refused. causal-inference, interpolation, numerical-stability and
+ * nine more are established concepts with real authorities — DLMF, IEEE 754,
+ * the SI Brochure, the IAU. A Maha definition for interpolation would
+ * manufacture authority where a standard already exists, which is worse than
+ * leaving the page blocked.
  *
  * What a first-party definition is worth, stated once and carried on every
  * entry: it establishes what this organisation means by a term and what its
- * implementation does. It does not establish that the concept is standard, that
- * anyone else uses it, or that the implementation is correct. That is a weaker
- * claim than an external source supports, and it is the honest one — the same
- * distinction lib/evidence-basis.ts draws between first-party documentation and
- * independent scientific support.
+ * implementation does. It does not establish that the concept is standard,
+ * that anyone else uses it, or that the implementation is correct. That is a
+ * weaker claim than an external source supports, and it is the honest one.
  *
- * Every definition cites the implementation it describes. A definition of a
- * concept with no implementation would be a proposal, and this file contains
- * none.
+ * Every definition cites the implementation it describes, and says in
+ * supportsDefinitionBecause why that locator bears this definition rather than
+ * merely relating to it. That field is a judgement, not a check. An automated
+ * test can confirm a file exists and a symbol is declared in it; it cannot
+ * confirm the code means what the definition says. Two definitions in the
+ * first draft of this file passed such a test while citing code that did not
+ * support them, which is why the field exists.
  */
 
 export type FirstPartyDefinition = {
@@ -39,8 +47,16 @@ export type FirstPartyDefinition = {
   establishes: string
   /** What it does not license, however carefully the page is written. */
   doesNotEstablish: string
-  /** The implementation this describes, and what in it shows the behaviour. */
-  groundedIn: { locator: string; shows: string }
+  groundedIn: {
+    /** file — Symbol, where Symbol is declared in that file. */
+    locator: string
+    /** What is in the code. */
+    shows: string
+    /** Why that code bears this definition. A judgement, not a check. */
+    supportsDefinitionBecause: string
+  }
+  /** An established term this one collides with and must not be read as. */
+  notToBeConfusedWith?: string
 }
 
 /** The basis every entry here carries. Never independent, never external. */
@@ -69,6 +85,40 @@ export const EXTERNAL_AUTHORITY_REQUIRED: readonly { conceptId: string; authorit
   { conceptId: 'urn:maha:concept:computation:root-finding', authority: 'NIST DLMF' },
 ]
 
+/**
+ * Concepts withdrawn from this file because nothing implements them.
+ *
+ * These were defined in the first draft. Both definitions described what the
+ * practice would look like, cited a file that was merely adjacent, and passed
+ * review only because the citation was checked for existence rather than for
+ * support.
+ */
+export const DEFERRED_PENDING_IMPLEMENTATION: readonly {
+  conceptId: string
+  whatWasClaimed: string
+  whyDeferred: string
+  whatWouldGroundIt: string
+}[] = [
+  {
+    conceptId: 'urn:maha:concept:evidence:conflicting-literature',
+    whatWasClaimed: 'That two inspected sources bearing on the same claim and disagreeing are recorded as a disagreement rather than resolved by preferring one.',
+    whyDeferred:
+      'Nothing computes a relation between two sources. All six codes in PUBLIC_CLAIM_DEFECTS compare a single ' +
+      'claim to its own evidence — whether the source was read, whether a locator exists, whether the claim reaches ' +
+      'past the passage. A between-source disagreement is not among them, and no other module derives one.',
+    whatWouldGroundIt: 'A defect code, or a separate check, that takes two or more inspected passages and reports that they conflict on a shared claim.',
+  },
+  {
+    conceptId: 'urn:maha:concept:evidence:source-recovery',
+    whatWasClaimed: 'That a lawful alternative route to a source — a repository copy, an author manuscript, a government mirror — was sought before the source was recorded as inaccessible.',
+    whyDeferred:
+      'ACCESS_STATUSES is open, restricted or unknown. Nothing records that an alternative route was attempted, ' +
+      'which route it was, or that the recovered copy differs from the version of record. The practice may well ' +
+      'happen; the system holds no trace of it, so a page citing this would be citing an intention.',
+    whatWouldGroundIt: 'A recorded recovery attempt: the route tried, its outcome, and the relationship of any recovered copy to the cited version.',
+  },
+]
+
 export const FIRST_PARTY_DEFINITIONS: readonly FirstPartyDefinition[] = [
   {
     conceptId: 'urn:maha:concept:evidence:runtime-witness-receipts',
@@ -86,6 +136,9 @@ export const FIRST_PARTY_DEFINITIONS: readonly FirstPartyDefinition[] = [
     groundedIn: {
       locator: 'lib/evidence-dossier/runtime-witness.ts — ComputationalWitnessReceipt',
       shows: 'The field set: jobId, callable.module and qualname, execution status and timing, inputSha256, outputSha256, environmentSha256, randomSeeds, artifacts.',
+      supportsDefinitionBecause:
+        'Every element of the definition is a required field on the interface. The definition is a reading of the ' +
+        'type, not a description of what the type is for.',
     },
   },
   {
@@ -101,8 +154,12 @@ export const FIRST_PARTY_DEFINITIONS: readonly FirstPartyDefinition[] = [
       'The accuracy of the calculation, or that the figure a page quotes was taken from the receipt rather than ' +
       'restated beside it.',
     groundedIn: {
-      locator: 'lib/computational-witness-registry.ts',
+      locator: 'lib/computational-witness-registry.ts — WITNESS_REGISTRY_MAX_BYTES',
       shows: 'Verification against the receipt schema, a maximum stored size, and an explicit persist-receipt retention consent.',
+      supportsDefinitionBecause:
+        'The definition’s claim is retrievability, and the registry is what makes a receipt retrievable after the ' +
+        'run. The size cap and the retention consent are the two conditions it places on that, so both appear in ' +
+        'the establishes clause rather than being omitted as detail.',
     },
   },
   {
@@ -118,8 +175,11 @@ export const FIRST_PARTY_DEFINITIONS: readonly FirstPartyDefinition[] = [
       'That the evidence assembled is sufficient, relevant, or correctly interpreted. A digest fixes content; it ' +
       'does not assess it.',
     groundedIn: {
-      locator: 'lib/evidence-dossier/digest.ts',
+      locator: 'lib/evidence-dossier/digest.ts — provenanceDigest',
       shows: 'Canonicalisation before hashing, with the digest field excluded from its own preimage.',
+      supportsDefinitionBecause:
+        'The definition’s entire content is the digest property, and canonicalise-then-hash with the digest field ' +
+        'excluded is exactly what the module does and the only thing it does.',
     },
   },
   {
@@ -136,7 +196,14 @@ export const FIRST_PARTY_DEFINITIONS: readonly FirstPartyDefinition[] = [
     groundedIn: {
       locator: 'lib/digest-roles.ts — ReleaseTargetDigest and PublicationDigest',
       shows: 'Separate branded digest types for the released target and the rendered projection.',
+      supportsDefinitionBecause:
+        'The definition turns on the released target being distinguishable from the rendered projection. The ' +
+        'module exists to keep those two in separate branded types precisely so one cannot be passed where the ' +
+        'other is expected — the distinction is enforced by the compiler, not by convention.',
     },
+    notToBeConfusedWith:
+      'The rel=canonical link relation, which this codebase also uses. That declares a preferred URL to a search ' +
+      'engine; this declares which revision of a record is the published one.',
   },
   {
     conceptId: 'urn:maha:concept:evidence:unsupported-inference',
@@ -147,12 +214,18 @@ export const FIRST_PARTY_DEFINITIONS: readonly FirstPartyDefinition[] = [
     establishes:
       'That the relationship between a claim and its evidence can be checked separately from whether the claim is true.',
     doesNotEstablish:
-      'That a claim flagged as unsupported is false, or that an unflagged claim is true. The detector is a ' +
-      'relevance fixture, not a truth oracle.',
+      'That a claim flagged as unsupported is false, or that an unflagged claim is true. A clean result means no ' +
+      'defect of the six detected kinds was found, not that the page is correct.',
     groundedIn: {
-      locator: 'lib/public-claim-defects.ts',
-      shows: 'Rules checking the relationship between a claim and its evidence, with the module stating it is not a truth oracle.',
+      locator: 'lib/public-claim-defects.ts — PUBLIC_CLAIM_DEFECTS and RELEVANCE_CONTRACT',
+      shows: 'Two of the six codes are this defect — claim-stronger-than-passage for the general case and unsupported-causal-inference for the causal one — and RELEVANCE_CONTRACT sets independentlyVerifiesTruth to false.',
+      supportsDefinitionBecause:
+        'The limit is expressed in the code as data rather than in prose about the code: a caller reading ' +
+        'RELEVANCE_CONTRACT cannot present a clean result as verification, because the contract says it is not.',
     },
+    notToBeConfusedWith:
+      'Causal inference itself, which belongs to the statistical literature and is deliberately not defined here. ' +
+      'The unsupported-causal-inference code flags a claim outrunning its passage; it does not define the inference.',
   },
   {
     conceptId: 'urn:maha:concept:evidence:internal-review',
@@ -169,23 +242,39 @@ export const FIRST_PARTY_DEFINITIONS: readonly FirstPartyDefinition[] = [
     groundedIn: {
       locator: 'lib/exact-revision-review.ts',
       shows: 'Review observed rather than inferred, because an active release was previously the only readable evidence of review.',
+      supportsDefinitionBecause:
+        'The module exists for the distinction the definition draws. Before it, a reviewed-but-unreleased revision ' +
+        'and an unreviewed one were indistinguishable from outside; separating them is the module’s reason to exist.',
     },
+    notToBeConfusedWith:
+      'Peer review. This is review by the organisation of its own work, which the doesNotEstablish clause states ' +
+      'rather than leaving to the reader.',
   },
   {
     conceptId: 'urn:maha:concept:evidence:uncertainty-recording',
     term: 'Uncertainty recording',
     definition:
-      'Stating what a source does not establish alongside what it does, as a required field rather than a caveat ' +
-      'appended when convenient.',
+      'Recording, for each kind of evidentiary basis, the classes of claim that basis cannot carry — held as a ' +
+      'required field of the basis vocabulary rather than written per claim.',
     establishes:
-      'That the boundary of a claim was considered and written down at the time the claim was made.',
+      'That no source can be used without its limits being stated somewhere, because every basis kind carries a ' +
+      'non-empty list of what it cannot establish.',
     doesNotEstablish:
-      'That the boundary is complete. An unrecorded uncertainty is not thereby absent, and a recorded one is not ' +
-      'thereby the only one.',
+      'That anyone judged the boundary of a particular claim. The limits are a fixed lookup keyed by basis kind: ' +
+      'two claims on the same basis get identical limits regardless of what they assert. It is a vocabulary-level ' +
+      'guarantee, and a weaker thing than an author having thought about this claim.',
     groundedIn: {
-      locator: 'lib/evidence-basis.ts',
-      shows: 'Basis kinds separating what a source can carry from how deep the page using it is.',
+      locator: 'lib/evidence-basis.ts — BASIS_CONTRACT',
+      shows: 'A required cannotEstablish array on every basis kind, from "anything outside the study stated scope" to, for the weakest basis, "anything".',
+      supportsDefinitionBecause:
+        'cannotEstablish is required on every entry, so the guarantee is structural — a basis cannot be added ' +
+        'without stating its limits. That is what the definition claims, and it is deliberately scoped to the ' +
+        'vocabulary rather than to authoring, because the code offers nothing per claim.',
     },
+    notToBeConfusedWith:
+      'Measurement uncertainty in the metrological sense (JCGM 100, the GUM). This concept is about the evidentiary ' +
+      'scope of a source. It carries no interval, no coverage factor and no error budget, and must never be cited ' +
+      'for a measurement claim. Both senses already appear in this codebase.',
   },
   {
     conceptId: 'urn:maha:concept:evidence:passage-support',
@@ -199,24 +288,30 @@ export const FIRST_PARTY_DEFINITIONS: readonly FirstPartyDefinition[] = [
       'That the passage is correct, or that the reader will agree it bears the claim. It fixes what is being ' +
       'pointed at, so that disagreement is possible.',
     groundedIn: {
-      locator: 'lib/release-readiness-policy-v2.ts and lib/exact-revision-review.ts',
-      shows: 'Support assessed against exact revisions and locators rather than whole sources.',
+      locator: 'lib/release-readiness-policy-v2.ts',
+      shows: 'claim-to-passage-support is a named review axis, alongside scope-and-unsupported-inference, and a decision without an exact locator is refused as locator-missing.',
+      supportsDefinitionBecause:
+        'The axis is named for this exact relation, and the locator-missing refusal enforces the granularity the ' +
+        'definition insists on: a decision cannot pass by pointing at a whole source.',
     },
   },
   {
     conceptId: 'urn:maha:concept:evidence:locator-verification',
     term: 'Locator verification',
     definition:
-      'Confirming that a cited locator — a section, paragraph, table, figure or clause — resolves in the ' +
-      'source version cited, and contains the passage the citation relies on.',
+      'Confirming that a cited locator — a page, section, paragraph, figure, table, equation or timestamp — ' +
+      'resolves in the source version cited, and contains the passage the citation relies on.',
     establishes:
       'That a citation can be followed to the specific place it names.',
     doesNotEstablish:
       'That the passage found there supports the claim. Verification of a locator and assessment of support are ' +
       'separate steps, and passing the first says nothing about the second.',
     groundedIn: {
-      locator: 'lib/evidence-preflight.ts — LOCATOR_KINDS',
-      shows: 'An enumerated set of locator kinds, checked separately from access status and rights basis.',
+      locator: 'lib/evidence-preflight-contract.ts — LOCATOR_KINDS',
+      shows: 'An enumerated set of eight locator kinds, held separately from ACCESS_STATUSES and RIGHTS_BASES.',
+      supportsDefinitionBecause:
+        'Locator kind, access status and rights basis are three separate enumerations, which is the separation the ' +
+        'definition draws between finding a place, reaching it, and being allowed to use it.',
     },
   },
   {
@@ -234,38 +329,32 @@ export const FIRST_PARTY_DEFINITIONS: readonly FirstPartyDefinition[] = [
     groundedIn: {
       locator: 'lib/batch-11-rehearsal-phases.ts — PRIVATE_CORPUS_MARKERS and assertNoPrivateCorpusInBundle',
       shows: 'A fixed marker list checked against both the rendered HTML and the RSC flight payload, because a served page can carry text in its streamed data that never appears in the markup a reader sees.',
-    },
-  },
-  {
-    conceptId: 'urn:maha:concept:evidence:source-recovery',
-    term: 'Source recovery',
-    definition:
-      'Obtaining the content a citation refers to when the cited route is unavailable — through a repository ' +
-      'copy, an author manuscript, or a government mirror — without bypassing an access control.',
-    establishes:
-      'That a lawful alternative route to a source was sought before the source was recorded as inaccessible.',
-    doesNotEstablish:
-      'That the recovered copy is identical to the cited version. A repository copy and a version of record differ ' +
-      'by the edits each contains.',
-    groundedIn: {
-      locator: 'lib/evidence-preflight.ts — ACCESS_STATUSES and RIGHTS_BASES',
-      shows: 'Access status recorded separately from rights basis, so reachable and reusable are distinct findings.',
+      supportsDefinitionBecause:
+        'The function refuses on the served bundle rather than on the inputs, which is the distinction the ' +
+        'definition turns on. That the marker list is literal and finite is why the limit clause is stated as ' +
+        'strongly as it is.',
     },
   },
   {
     conceptId: 'urn:maha:concept:evidence:claim-intake',
     term: 'Claim intake',
     definition:
-      'Separating a passage into the individual substantive claims it makes, so each can carry its own evidence ' +
-      'and its own status rather than inheriting the passage’s.',
+      'Accepting claims one at a time, each arriving with its own source, excerpt, locator and rights, so that a ' +
+      'claim cannot be submitted without its evidence attached and no claim inherits another’s status.',
     establishes:
-      'That claims are assessed individually, and that a passage can hold claims at different statuses.',
+      'That claims are structured and assessed individually, and that a submission carrying a claim without a ' +
+      'source, excerpt, locator or rights basis is rejected at the boundary.',
     doesNotEstablish:
-      'That the separation is complete or that each extracted claim is well-formed. Intake decides what will be ' +
-      'assessed; it does not assess it.',
+      'That a passage was correctly separated into claims. Nothing here reads a passage or extracts anything: the ' +
+      'caller decides what the claims are and submits them already separated, up to three per request. Intake ' +
+      'validates that structure; it does not produce it.',
     groundedIn: {
-      locator: 'lib/evidence-preflight.ts — EVIDENCE_PREFLIGHT_MAX_CLAIMS',
-      shows: 'A bounded number of claims per submission, assessed individually.',
+      locator: 'lib/evidence-preflight.ts — parseClaim',
+      shows: 'Each claim parsed against a required key set of claim, source, excerpt, locator and rights, with the source and rights objects validated in turn.',
+      supportsDefinitionBecause:
+        'The required key set is the definition: a claim that arrives without its own evidence does not parse. ' +
+        'Reading the parser is also what corrected the definition — an earlier draft said intake separates a ' +
+        'passage into claims, which nothing here does.',
     },
   },
   {
@@ -281,38 +370,30 @@ export const FIRST_PARTY_DEFINITIONS: readonly FirstPartyDefinition[] = [
     groundedIn: {
       locator: 'lib/mcp-evidence-public-contract.ts — MCP_EVIDENCE_LICENSE_PLANS',
       shows: 'Plans carrying allowedTools and monthlyQuotaUnits, with a terms digest.',
+      supportsDefinitionBecause:
+        'allowedTools and monthlyQuotaUnits are fields of a plan, so entitlement is data attached to the plan ' +
+        'rather than implied by a tool appearing in a manifest. That contrast is what the definition asserts.',
     },
   },
   {
     conceptId: 'urn:maha:concept:evidence:delivery-acknowledgement',
     term: 'Delivery acknowledgement',
     definition:
-      'A record that a purchased artifact was delivered to a buyer, kept separately from the record that payment ' +
-      'settled.',
+      'A record that a purchased artifact reached its buyer, written by its own call at its own time, separate ' +
+      'from the record that payment settled.',
     establishes:
-      'That settlement and delivery are tracked as different events.',
+      'That for card checkout, delivery is recorded as an event in its own right rather than inferred from payment.',
     doesNotEstablish:
-      'That the buyer received a correct deliverable, or accepted it. On-chain settlement establishes a transfer, ' +
-      'not fulfilment.',
+      'That the buyer received a correct deliverable or accepted it — only that this system recorded a delivery. ' +
+      'And it covers card checkout alone: x402 settlements have no delivery record at all, so for those the ' +
+      'concept is not merely unproven but unrepresented, and no x402 page may cite this.',
     groundedIn: {
-      locator: 'lib/x402/settlement-ledger.ts',
-      shows: 'The ledger stating that settlement is not delivery, and that establishing delivery would need internal response telemetry.',
-    },
-  },
-  {
-    conceptId: 'urn:maha:concept:evidence:conflicting-literature',
-    term: 'Conflicting literature',
-    definition:
-      'Two or more inspected sources that bear on the same claim and disagree, recorded as a disagreement rather ' +
-      'than resolved by preferring one.',
-    establishes:
-      'That the disagreement was found and is visible to a reader.',
-    doesNotEstablish:
-      'Which source is right. Recording a conflict is the opposite of adjudicating it, and a page citing this must ' +
-      'not present either side as settled.',
-    groundedIn: {
-      locator: 'lib/public-claim-defects.ts',
-      shows: 'Defect codes describing claim-to-evidence relationships rather than truth judgements.',
+      locator: 'lib/revenue-reconciliation.ts — reconcileRevenueDelivery',
+      shows: 'A separate call from reconcileRevenuePayment, writing deliveredAt through record_revenue_checkout_delivery, with refunds handled by a third call again.',
+      supportsDefinitionBecause:
+        'Delivery, payment and reversal are three separate calls to three RPCs, so the events cannot be conflated ' +
+        'in the ledger. An earlier draft grounded this in the x402 settlement ledger, which states three times ' +
+        'that it does not establish delivery — citing a file’s disclaimer as evidence for the thing disclaimed.',
     },
   },
   {
@@ -329,9 +410,15 @@ export const FIRST_PARTY_DEFINITIONS: readonly FirstPartyDefinition[] = [
       'That every error has been found, or that a withdrawn record is unreachable — withdrawal stops this system ' +
       'serving it, and does nothing about copies, caches or citations already made elsewhere.',
     groundedIn: {
-      locator: 'lib/epistemic-release.ts — EpistemicReleaseStatus, with lib/mcp-evidence-store.ts',
-      shows: 'Three statuses (active, superseded, withdrawn), a withdrawal record carrying rationale, withdrawnAt and withdrawalSha256, and withdrawn releases filtered out of the active set before they are served.',
+      locator: 'lib/epistemic-release.ts — EpistemicReleaseStatus',
+      shows: 'Three statuses (active, superseded, withdrawn), a withdrawal record carrying rationale, withdrawnAt and withdrawalSha256, and withdrawn releases filtered out of the active set in lib/mcp-evidence-store.ts before they are served.',
+      supportsDefinitionBecause:
+        'The vocabulary has no corrected state, which is why the definition says correction is supersession rather ' +
+        'than a status of its own. Reading the type is what produced that wording.',
     },
+    notToBeConfusedWith:
+      'Correction and retraction in scholarly publishing (COPE, ICMJE). Same words, different obligations. This ' +
+      'describes what this system does to its own records, not what a journal owes a reader.',
   },
   {
     conceptId: 'urn:maha:concept:evidence:reproducibility-fixtures',
@@ -340,13 +427,20 @@ export const FIRST_PARTY_DEFINITIONS: readonly FirstPartyDefinition[] = [
       'A synthetic, committed input used to exercise a workflow end to end, so the workflow can be checked without ' +
       'customer data and without a live service.',
     establishes:
-      'That a workflow was exercised against a fixed input whose content is inspectable.',
+      'That a workflow was exercised against a fixed input whose content is inspectable, and that a caller can ' +
+      'tell a fixture from a real record from the data rather than by reading it.',
     doesNotEstablish:
-      'That the workflow behaves the same on real data. A fixture is synthetic by construction, which is what makes ' +
-      'it safe and what limits what it proves.',
+      'That the workflow behaves the same on real data. A fixture is synthetic by construction, which is what ' +
+      'makes it safe to commit and what limits what it proves.',
     groundedIn: {
       locator: 'lib/evidence-workflow-examples.ts',
-      shows: 'Workflow seeds carrying fixtures marked synthetic: true.',
+      shows: 'Workflow seeds carrying synthetic: true, with fixture claims written to be recognisably artificial.',
+      supportsDefinitionBecause:
+        'The synthetic flag is on the seed as data, so a consumer can refuse to treat a fixture as a record ' +
+        'without inspecting its text — which is the property that makes committing them safe.',
     },
+    notToBeConfusedWith:
+      'Reproducibility in the scientific sense — independent replication of a result. A fixture exercises a code ' +
+      'path. It replicates nothing, and no page may cite it as evidence that a finding reproduces.',
   },
 ]
