@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "maha-federation-readiness-recovery-sources/1.0",
+  "frozenOn": "2026-09-07",
+  "externalAuthoritySourceManifest": {
+    "artifact": "federation-external-authority-source-inspections-v1.json",
+    "provenanceDigest": "sha256:c64540f4b013938277d15cfe1cf646c4723596b918609b2e9f5d83f7e98cde4d",
+    "sourcesUsed": [
+      "src-causal-what-if",
+      "src-perk-commitments",
+      "src-dlmf-arithmetic",
+      "src-bipm-dimensions",
+      "src-nist-formal-verification",
+      "src-dlmf-interpolation",
+      "src-dlmf-intervals",
+      "src-ieee-1788-identity",
+      "src-dlmf-quadrature",
+      "src-nist-stability",
+      "src-boyd-optimization",
+      "src-iers-reference-frames",
+      "src-dlmf-roots"
+    ]
+  },
+  "replacementSources": [
+    {
+      "sourceId": "src-maha-runtime-witness-contract",
+      "locator": "lib/evidence-dossier/runtime-witness.ts — ComputationalWitnessReceipt",
+      "scope": "The interface records consumed and produced artifacts separately, including each artifact’s path, digest, role, and size.",
+      "boundary": "A receipt records an execution. It does not establish correctness, reproducibility, or fitness for purpose.",
+      "sourceClass": "first-party-implementation",
+      "versionRelationship": "exact repository implementation at reviewed commit",
+      "access": "local-repository",
+      "rights": "project-owned-reference-only",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "src-maha-served-bundle-boundary",
+      "locator": "lib/batch-11-rehearsal-phases.ts — PRIVATE_CORPUS_MARKERS and assertNoPrivateCorpusInBundle",
+      "scope": "The implementation scans rendered markup and streamed payloads for a fixed marker set and refuses a match.",
+      "boundary": "Passing proves absence of the enumerated markers only; it is not a general privacy certification.",
+      "sourceClass": "first-party-implementation",
+      "versionRelationship": "exact repository implementation at reviewed commit",
+      "access": "local-repository",
+      "rights": "project-owned-reference-only",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "src-maha-release-withdrawal-state",
+      "locator": "lib/epistemic-release.ts — epistemicReleaseStatus and activeEpistemicReleases",
+      "scope": "The implementation distinguishes active, superseded, and withdrawn releases and excludes non-active releases from the active projection.",
+      "boundary": "It establishes this system’s state transition, not scholarly retraction obligations or universal cache invalidation.",
+      "sourceClass": "first-party-implementation",
+      "versionRelationship": "exact repository implementation at reviewed commit",
+      "access": "local-repository",
+      "rights": "project-owned-reference-only",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "independence": "not-independent"
+    },
+    {
+      "sourceId": "src-maha-exact-revision-review",
+      "locator": "lib/exact-revision-review.ts — projectReviewState",
+      "scope": "The implementation filters decisions by exact revision digest and reports stale decisions separately.",
+      "boundary": "It records internal review state. It does not establish independent, expert, or peer review.",
+      "sourceClass": "first-party-implementation",
+      "versionRelationship": "exact repository implementation at reviewed commit",
+      "access": "local-repository",
+      "rights": "project-owned-reference-only",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "independence": "not-independent"
+    }
+  ],
+  "boundary": "No source passage or full document is stored. External sources are reference-only; replacement sources establish only this repository’s implementation behavior.",
+  "provenanceDigest": "sha256:0a866e1223987840c6e0060b43c465ca9a7542f07a36ce61dea904adbde0a2aa"
+}

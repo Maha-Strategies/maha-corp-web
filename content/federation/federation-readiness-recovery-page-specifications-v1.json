@@ -1,0 +1,783 @@
+{
+  "schemaVersion": "maha-federation-readiness-recovery-page-specifications/1.0",
+  "frozenOn": "2026-09-07",
+  "counts": {
+    "specifications": 21,
+    "boundedQuestions": 105,
+    "authorityApplications": 17,
+    "replacements": 4
+  },
+  "specifications": [
+    {
+      "candidateId": "cand_08db53dbe892e6f61197e0a9",
+      "candidateDigest": "sha256:e2074f2c9426690fa245ec7c48f4014cdabd95f17a3c127feb29ddbd1e90270e",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/cryptographic-commitments/worked-example",
+      "owningProperty": "maha-strategies",
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "routeRole": "worked-example",
+      "directAnswer": "Cryptographic Commitments — Worked Example is bounded to the inspected authority’s exact method, conditions, and limitations; it does not inherit the definition’s evidence status.",
+      "requiredSections": [
+        "Direct answer",
+        "Role-specific method or boundary",
+        "Exact authority locator",
+        "Assumptions and failure conditions",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What operation or limitation does this route explain?",
+        "Which exact source locator bears it?",
+        "Which assumptions control the answer?",
+        "What result or implementation is not established?",
+        "Which non-route definition identity does it depend on?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "src-perk-commitments",
+          "locator": "§2.2.3, Definitions 2.3–2.5",
+          "scope": "Defines commitment algorithms, correctness, computational hiding, and computational binding.",
+          "boundary": "A candidate submission hosted by NIST is not a NIST standard or endorsement and does not establish security of an implementation.",
+          "rightsBasis": "reference-only"
+        }
+      ],
+      "definitionDependency": "cand_908638ce5ea422d98d5273fb",
+      "implementationState": "specification-only",
+      "publicationBoundary": "Not a route, release, or public page. Exact-revision review and canonical release remain required."
+    },
+    {
+      "candidateId": "cand_1981169ef4336a655069490c",
+      "candidateDigest": "sha256:3ede592475196dc931b52e36538d8e0a59afb6ed14dbcbf34ab125ae9fdc5500",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/correction-and-retraction/withdrawal-propagation",
+      "owningProperty": "agentic-publishing",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "routeRole": "withdrawal-propagation",
+      "directAnswer": "Correction and Retraction — Withdrawal Propagation documents the bounded behavior of the cited Maha implementation and makes no independent or field-wide claim.",
+      "requiredSections": [
+        "Direct answer",
+        "Implementation contract",
+        "Exact code locator",
+        "Failure and refusal boundary",
+        "What this does not establish",
+        "Related definition and application"
+      ],
+      "boundedQuestions": [
+        "What behavior does the implementation record or refuse?",
+        "Which exact symbol establishes that behavior?",
+        "What does a successful check not prove?",
+        "Which adjacent concept must not be conflated?",
+        "What change would require a new revision?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "src-maha-release-withdrawal-state",
+          "locator": "lib/epistemic-release.ts — epistemicReleaseStatus and activeEpistemicReleases",
+          "scope": "The implementation distinguishes active, superseded, and withdrawn releases and excludes non-active releases from the active projection.",
+          "boundary": "It establishes this system’s state transition, not scholarly retraction obligations or universal cache invalidation.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "definitionDependency": "cand_31188cec0703fe842e52f242",
+      "implementationState": "specification-only",
+      "publicationBoundary": "First-party operational specification only; not a route, release, independent review, or public page."
+    },
+    {
+      "candidateId": "cand_31f9bd3e2a64a40aac291acb",
+      "candidateDigest": "sha256:a367c10918a011c754f92afbb09111ad57fb19c34eda2beeef3f25146f762845",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/cryptographic-commitments/uncertainty",
+      "owningProperty": "maha-strategies",
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "routeRole": "uncertainty",
+      "directAnswer": "Cryptographic Commitments — Uncertainty is bounded to the inspected authority’s exact method, conditions, and limitations; it does not inherit the definition’s evidence status.",
+      "requiredSections": [
+        "Direct answer",
+        "Role-specific method or boundary",
+        "Exact authority locator",
+        "Assumptions and failure conditions",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What operation or limitation does this route explain?",
+        "Which exact source locator bears it?",
+        "Which assumptions control the answer?",
+        "What result or implementation is not established?",
+        "Which non-route definition identity does it depend on?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "src-perk-commitments",
+          "locator": "§2.2.3, Definitions 2.3–2.5",
+          "scope": "Defines commitment algorithms, correctness, computational hiding, and computational binding.",
+          "boundary": "A candidate submission hosted by NIST is not a NIST standard or endorsement and does not establish security of an implementation.",
+          "rightsBasis": "reference-only"
+        }
+      ],
+      "definitionDependency": "cand_908638ce5ea422d98d5273fb",
+      "implementationState": "specification-only",
+      "publicationBoundary": "Not a route, release, or public page. Exact-revision review and canonical release remain required."
+    },
+    {
+      "candidateId": "cand_3492801bafa20e3d50408a8e",
+      "candidateDigest": "sha256:537f33330bc4feeb45da69587359714efab7d6dcdbb7bee7d1a5624354705ecc",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/formal-verification/uncertainty",
+      "owningProperty": "maha-strategies",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "routeRole": "uncertainty",
+      "directAnswer": "Formal Verification — Uncertainty is bounded to the inspected authority’s exact method, conditions, and limitations; it does not inherit the definition’s evidence status.",
+      "requiredSections": [
+        "Direct answer",
+        "Role-specific method or boundary",
+        "Exact authority locator",
+        "Assumptions and failure conditions",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What operation or limitation does this route explain?",
+        "Which exact source locator bears it?",
+        "Which assumptions control the answer?",
+        "What result or implementation is not established?",
+        "Which non-route definition identity does it depend on?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "src-nist-formal-verification",
+          "locator": "Definition and Notes",
+          "scope": "Defines formal verification through formal requirements, a model, logic, and rules of inference.",
+          "boundary": "Does not establish that a particular model matches the implemented system or that a particular proof is sound.",
+          "rightsBasis": "reference-only"
+        }
+      ],
+      "definitionDependency": "cand_25c680ff193b4f35f49e96ae",
+      "implementationState": "specification-only",
+      "publicationBoundary": "Not a route, release, or public page. Exact-revision review and canonical release remain required."
+    },
+    {
+      "candidateId": "cand_4080575bad7a1bfd45b42d3a",
+      "candidateDigest": "sha256:152a9f187dcbb36882fff5c4dc17ac30f88b4cc1a1346400cf0a852405ae4527",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/privacy-boundary/served-bundle-check",
+      "owningProperty": "maha-strategies",
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "routeRole": "served-bundle-check",
+      "directAnswer": "Privacy Boundary — Served Bundle Check documents the bounded behavior of the cited Maha implementation and makes no independent or field-wide claim.",
+      "requiredSections": [
+        "Direct answer",
+        "Implementation contract",
+        "Exact code locator",
+        "Failure and refusal boundary",
+        "What this does not establish",
+        "Related definition and application"
+      ],
+      "boundedQuestions": [
+        "What behavior does the implementation record or refuse?",
+        "Which exact symbol establishes that behavior?",
+        "What does a successful check not prove?",
+        "Which adjacent concept must not be conflated?",
+        "What change would require a new revision?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "src-maha-served-bundle-boundary",
+          "locator": "lib/batch-11-rehearsal-phases.ts — PRIVATE_CORPUS_MARKERS and assertNoPrivateCorpusInBundle",
+          "scope": "The implementation scans rendered markup and streamed payloads for a fixed marker set and refuses a match.",
+          "boundary": "Passing proves absence of the enumerated markers only; it is not a general privacy certification.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "definitionDependency": "cand_eee65fe274335f8de817ecd7",
+      "implementationState": "specification-only",
+      "publicationBoundary": "First-party operational specification only; not a route, release, independent review, or public page."
+    },
+    {
+      "candidateId": "cand_435411f57ee0f613ee321c7e",
+      "candidateDigest": "sha256:30526a21096a24b0636c7c559843d8a527147a56585fd7f0b6bcade2d9f79912",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/optimization/uncertainty",
+      "owningProperty": "maha-strategies",
+      "conceptId": "urn:maha:concept:computation:optimization",
+      "routeRole": "uncertainty",
+      "directAnswer": "Optimization — Uncertainty is bounded to the inspected authority’s exact method, conditions, and limitations; it does not inherit the definition’s evidence status.",
+      "requiredSections": [
+        "Direct answer",
+        "Role-specific method or boundary",
+        "Exact authority locator",
+        "Assumptions and failure conditions",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What operation or limitation does this route explain?",
+        "Which exact source locator bears it?",
+        "Which assumptions control the answer?",
+        "What result or implementation is not established?",
+        "Which non-route definition identity does it depend on?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "src-boyd-optimization",
+          "locator": "§4.1.1–4.1.2, pp. 127–129",
+          "scope": "Defines a standard optimization problem using an objective, inequality and equality constraints, feasible points, and optimal value.",
+          "boundary": "Does not establish convexity, existence or uniqueness of a solution, or performance of a solver for a particular problem.",
+          "rightsBasis": "reference-only"
+        }
+      ],
+      "definitionDependency": "cand_9e9edd5648c41382537f568c",
+      "implementationState": "specification-only",
+      "publicationBoundary": "Not a route, release, or public page. Exact-revision review and canonical release remain required."
+    },
+    {
+      "candidateId": "cand_43f091f909c8222f825ed1f9",
+      "candidateDigest": "sha256:22c8ee72b08d3e4ca284a61d9b895cb8a4450c2bf8f0cf72bdf012ee95aaec66",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/interpolation/worked-example",
+      "owningProperty": "maha-strategies",
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "routeRole": "worked-example",
+      "directAnswer": "Interpolation — Worked Example is bounded to the inspected authority’s exact method, conditions, and limitations; it does not inherit the definition’s evidence status.",
+      "requiredSections": [
+        "Direct answer",
+        "Role-specific method or boundary",
+        "Exact authority locator",
+        "Assumptions and failure conditions",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What operation or limitation does this route explain?",
+        "Which exact source locator bears it?",
+        "Which assumptions control the answer?",
+        "What result or implementation is not established?",
+        "Which non-route definition identity does it depend on?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "src-dlmf-interpolation",
+          "locator": "§3.3(i), equation 3.3.1; §3.3(vi)",
+          "scope": "Defines polynomial interpolation through distinct nodes and identifies other interpolation methods.",
+          "boundary": "Does not establish accuracy between nodes, suitability for extrapolation, or numerical stability for a particular implementation.",
+          "rightsBasis": "reference-only"
+        }
+      ],
+      "definitionDependency": "cand_de8dd0a88e8704fe5855033e",
+      "implementationState": "specification-only",
+      "publicationBoundary": "Not a route, release, or public page. Exact-revision review and canonical release remain required."
+    },
+    {
+      "candidateId": "cand_4ca1eef82246da3174e34e17",
+      "candidateDigest": "sha256:74026882f3cf0106cedc5c8f06b5950dbb00f1bd61e5021c994b497a3d847b42",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/dimensional-analysis/uncertainty",
+      "owningProperty": "maha-strategies",
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "routeRole": "uncertainty",
+      "directAnswer": "Dimensional Analysis — Uncertainty is bounded to the inspected authority’s exact method, conditions, and limitations; it does not inherit the definition’s evidence status.",
+      "requiredSections": [
+        "Direct answer",
+        "Role-specific method or boundary",
+        "Exact authority locator",
+        "Assumptions and failure conditions",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What operation or limitation does this route explain?",
+        "Which exact source locator bears it?",
+        "Which assumptions control the answer?",
+        "What result or implementation is not established?",
+        "Which non-route definition identity does it depend on?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "src-bipm-dimensions",
+          "locator": "§2.3.3, p. 136, Table 3",
+          "scope": "Defines dimensions of base and derived quantities and their expression as products of base dimensions.",
+          "boundary": "Does not validate a particular equation, measurement, unit conversion, or uncertainty budget.",
+          "rightsBasis": "reference-only"
+        }
+      ],
+      "definitionDependency": "cand_d90b7197535681a502dccba9",
+      "implementationState": "specification-only",
+      "publicationBoundary": "Not a route, release, or public page. Exact-revision review and canonical release remain required."
+    },
+    {
+      "candidateId": "cand_5c64e76d0682c6128cece69c",
+      "candidateDigest": "sha256:6ac3d9079de45b9c0c812794da7a8ce9697d92ae497a086617c3f27ac9244fac",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/numerical-integration/worked-example",
+      "owningProperty": "maha-strategies",
+      "conceptId": "urn:maha:concept:computation:numerical-integration",
+      "routeRole": "worked-example",
+      "directAnswer": "Numerical Integration — Worked Example is bounded to the inspected authority’s exact method, conditions, and limitations; it does not inherit the definition’s evidence status.",
+      "requiredSections": [
+        "Direct answer",
+        "Role-specific method or boundary",
+        "Exact authority locator",
+        "Assumptions and failure conditions",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What operation or limitation does this route explain?",
+        "Which exact source locator bears it?",
+        "Which assumptions control the answer?",
+        "What result or implementation is not established?",
+        "Which non-route definition identity does it depend on?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "src-dlmf-quadrature",
+          "locator": "§3.5(iv), equation 3.5.15 and exactness statement",
+          "scope": "Defines interpolatory quadrature with weights and an error term and states its polynomial exactness.",
+          "boundary": "Does not establish convergence or error for an arbitrary integrand, node choice, or numerical implementation.",
+          "rightsBasis": "reference-only"
+        }
+      ],
+      "definitionDependency": "cand_2cb4942c45f1804543a91a4a",
+      "implementationState": "specification-only",
+      "publicationBoundary": "Not a route, release, or public page. Exact-revision review and canonical release remain required."
+    },
+    {
+      "candidateId": "cand_67328511b3565384d1f5240c",
+      "candidateDigest": "sha256:312c1efa1c1e61158009a8d8593ec9212756e4e869c1e4384a459a26dde266aa",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/dimensional-analysis/worked-example",
+      "owningProperty": "maha-strategies",
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "routeRole": "worked-example",
+      "directAnswer": "Dimensional Analysis — Worked Example is bounded to the inspected authority’s exact method, conditions, and limitations; it does not inherit the definition’s evidence status.",
+      "requiredSections": [
+        "Direct answer",
+        "Role-specific method or boundary",
+        "Exact authority locator",
+        "Assumptions and failure conditions",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What operation or limitation does this route explain?",
+        "Which exact source locator bears it?",
+        "Which assumptions control the answer?",
+        "What result or implementation is not established?",
+        "Which non-route definition identity does it depend on?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "src-bipm-dimensions",
+          "locator": "§2.3.3, p. 136, Table 3",
+          "scope": "Defines dimensions of base and derived quantities and their expression as products of base dimensions.",
+          "boundary": "Does not validate a particular equation, measurement, unit conversion, or uncertainty budget.",
+          "rightsBasis": "reference-only"
+        }
+      ],
+      "definitionDependency": "cand_d90b7197535681a502dccba9",
+      "implementationState": "specification-only",
+      "publicationBoundary": "Not a route, release, or public page. Exact-revision review and canonical release remain required."
+    },
+    {
+      "candidateId": "cand_6d65397e7a1c9ad8abd13d39",
+      "candidateDigest": "sha256:39896cc5d0585ec0658f25b49f034d55549e0040ceb0631634604b0a1514d118",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/root-finding/worked-example",
+      "owningProperty": "maha-strategies",
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "routeRole": "worked-example",
+      "directAnswer": "Root Finding — Worked Example is bounded to the inspected authority’s exact method, conditions, and limitations; it does not inherit the definition’s evidence status.",
+      "requiredSections": [
+        "Direct answer",
+        "Role-specific method or boundary",
+        "Exact authority locator",
+        "Assumptions and failure conditions",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What operation or limitation does this route explain?",
+        "Which exact source locator bears it?",
+        "Which assumptions control the answer?",
+        "What result or implementation is not established?",
+        "Which non-route definition identity does it depend on?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "src-dlmf-roots",
+          "locator": "§3.8(i)–(ii), including equation 3.8.6 and conditioning discussion",
+          "scope": "Defines bracketing and iterative methods for locating zeros, with conditions and accuracy or conditioning considerations.",
+          "boundary": "Does not establish convergence for an arbitrary starting value or certify a computed root without residual and conditioning evidence.",
+          "rightsBasis": "reference-only"
+        }
+      ],
+      "definitionDependency": "cand_4e3ffcedfa7d51607e56c384",
+      "implementationState": "specification-only",
+      "publicationBoundary": "Not a route, release, or public page. Exact-revision review and canonical release remain required."
+    },
+    {
+      "candidateId": "cand_6e4fa6c27f0b694e1c642ff9",
+      "candidateDigest": "sha256:a17748556df40eb37fa966dd76ffcb618c5a303b7d895b4200a49de80d2a0e16",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/numerical-stability/uncertainty",
+      "owningProperty": "maha-strategies",
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "routeRole": "uncertainty",
+      "directAnswer": "Numerical Stability — Uncertainty is bounded to the inspected authority’s exact method, conditions, and limitations; it does not inherit the definition’s evidence status.",
+      "requiredSections": [
+        "Direct answer",
+        "Role-specific method or boundary",
+        "Exact authority locator",
+        "Assumptions and failure conditions",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What operation or limitation does this route explain?",
+        "Which exact source locator bears it?",
+        "Which assumptions control the answer?",
+        "What result or implementation is not established?",
+        "Which non-route definition identity does it depend on?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "src-nist-stability",
+          "locator": "Discussion of stability and conditioning",
+          "scope": "Distinguishes an ill-conditioned problem from an unstable algorithm and bounds stability by comparison with inherent error.",
+          "boundary": "Does not establish the stability of a named algorithm without an analysis under its stated inputs and arithmetic.",
+          "rightsBasis": "reference-only"
+        }
+      ],
+      "definitionDependency": "cand_0d9b1a88cbf93d413a243d71",
+      "implementationState": "specification-only",
+      "publicationBoundary": "Not a route, release, or public page. Exact-revision review and canonical release remain required."
+    },
+    {
+      "candidateId": "cand_92353922a006421e3fa32cf4",
+      "candidateDigest": "sha256:4ae3435bdb193b8f4659649c926fbca416b08366ff6b05a3d010fdad2506c21b",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/numerical-integration/uncertainty",
+      "owningProperty": "maha-strategies",
+      "conceptId": "urn:maha:concept:computation:numerical-integration",
+      "routeRole": "uncertainty",
+      "directAnswer": "Numerical Integration — Uncertainty is bounded to the inspected authority’s exact method, conditions, and limitations; it does not inherit the definition’s evidence status.",
+      "requiredSections": [
+        "Direct answer",
+        "Role-specific method or boundary",
+        "Exact authority locator",
+        "Assumptions and failure conditions",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What operation or limitation does this route explain?",
+        "Which exact source locator bears it?",
+        "Which assumptions control the answer?",
+        "What result or implementation is not established?",
+        "Which non-route definition identity does it depend on?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "src-dlmf-quadrature",
+          "locator": "§3.5(iv), equation 3.5.15 and exactness statement",
+          "scope": "Defines interpolatory quadrature with weights and an error term and states its polynomial exactness.",
+          "boundary": "Does not establish convergence or error for an arbitrary integrand, node choice, or numerical implementation.",
+          "rightsBasis": "reference-only"
+        }
+      ],
+      "definitionDependency": "cand_2cb4942c45f1804543a91a4a",
+      "implementationState": "specification-only",
+      "publicationBoundary": "Not a route, release, or public page. Exact-revision review and canonical release remain required."
+    },
+    {
+      "candidateId": "cand_9b067b11b9941116008a6a34",
+      "candidateDigest": "sha256:13c8256f7f21938955f259e4d39fcb5e7063a2fac5881767f755f22637c66fde",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/reference-frame-conversion/uncertainty",
+      "owningProperty": "maha-strategies",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "routeRole": "uncertainty",
+      "directAnswer": "Reference Frame Conversion — Uncertainty is bounded to the inspected authority’s exact method, conditions, and limitations; it does not inherit the definition’s evidence status.",
+      "requiredSections": [
+        "Direct answer",
+        "Role-specific method or boundary",
+        "Exact authority locator",
+        "Assumptions and failure conditions",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What operation or limitation does this route explain?",
+        "Which exact source locator bears it?",
+        "Which assumptions control the answer?",
+        "What result or implementation is not established?",
+        "Which non-route definition identity does it depend on?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "src-iers-reference-frames",
+          "locator": "Chapter 5, transformation between the ITRS and GCRS",
+          "scope": "Specifies the sequence and quantities used to transform between terrestrial and celestial reference systems.",
+          "boundary": "Does not establish that a software implementation uses the correct epoch, Earth-orientation parameters, units, or convention version.",
+          "rightsBasis": "reference-only"
+        }
+      ],
+      "definitionDependency": "cand_c1e0a9d1956d137e337cae16",
+      "implementationState": "specification-only",
+      "publicationBoundary": "Not a route, release, or public page. Exact-revision review and canonical release remain required."
+    },
+    {
+      "candidateId": "cand_9d7f62fef0254f8faa993456",
+      "candidateDigest": "sha256:b27553e1d0dbf12f0a8ab49f801ddf6be43d39c89bf99925ad9db2495a1a6486",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/internal-review/exact-revision-binding",
+      "owningProperty": "agentic-publishing",
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "routeRole": "exact-revision-binding",
+      "directAnswer": "Internal Review — Exact Revision Binding documents the bounded behavior of the cited Maha implementation and makes no independent or field-wide claim.",
+      "requiredSections": [
+        "Direct answer",
+        "Implementation contract",
+        "Exact code locator",
+        "Failure and refusal boundary",
+        "What this does not establish",
+        "Related definition and application"
+      ],
+      "boundedQuestions": [
+        "What behavior does the implementation record or refuse?",
+        "Which exact symbol establishes that behavior?",
+        "What does a successful check not prove?",
+        "Which adjacent concept must not be conflated?",
+        "What change would require a new revision?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "src-maha-exact-revision-review",
+          "locator": "lib/exact-revision-review.ts — projectReviewState",
+          "scope": "The implementation filters decisions by exact revision digest and reports stale decisions separately.",
+          "boundary": "It records internal review state. It does not establish independent, expert, or peer review.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "definitionDependency": "cand_1677d8e5ffd0adccd70025c9",
+      "implementationState": "specification-only",
+      "publicationBoundary": "First-party operational specification only; not a route, release, independent review, or public page."
+    },
+    {
+      "candidateId": "cand_c2a12acd1d0d40ff518b312d",
+      "candidateDigest": "sha256:ec0a01a68b356fc069958db4fbdb5926797854a76970abff937736af6ae3d77f",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/interval-bounds/uncertainty",
+      "owningProperty": "maha-strategies",
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "routeRole": "uncertainty",
+      "directAnswer": "Interval Bounds — Uncertainty is bounded to the inspected authority’s exact method, conditions, and limitations; it does not inherit the definition’s evidence status.",
+      "requiredSections": [
+        "Direct answer",
+        "Role-specific method or boundary",
+        "Exact authority locator",
+        "Assumptions and failure conditions",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What operation or limitation does this route explain?",
+        "Which exact source locator bears it?",
+        "Which assumptions control the answer?",
+        "What result or implementation is not established?",
+        "Which non-route definition identity does it depend on?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "src-dlmf-intervals",
+          "locator": "§3.1(ii), equation 3.1.6 and accompanying text",
+          "scope": "Defines interval arithmetic as producing inclusion regions and states the restriction on division by an interval containing zero.",
+          "boundary": "Does not certify an interval implementation, a rounding mode, or the tightness of a computed bound.",
+          "rightsBasis": "reference-only"
+        },
+        {
+          "sourceId": "src-ieee-1788-identity",
+          "locator": "Public standard landing page: Abstract and Scope",
+          "scope": "Confirms the identity and stated scope of the interval-arithmetic standard.",
+          "boundary": "The full subscribed standard was not inspected; this source cannot supply clause-level normative requirements.",
+          "rightsBasis": "reference-only"
+        }
+      ],
+      "definitionDependency": "cand_e41cfa0c9ad358c43c72d1ee",
+      "implementationState": "specification-only",
+      "publicationBoundary": "Not a route, release, or public page. Exact-revision review and canonical release remain required."
+    },
+    {
+      "candidateId": "cand_d43767b90b272ddead9ab56c",
+      "candidateDigest": "sha256:ed00e78309e261eebd8bb18bc3455b7862d53cabdbe84b9ebe8fa8754729c730",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/runtime-witness-receipts/artifact-role-inventory",
+      "owningProperty": "maha-strategies",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "routeRole": "artifact-role-inventory",
+      "directAnswer": "Runtime Witness Receipts — Artifact Role Inventory documents the bounded behavior of the cited Maha implementation and makes no independent or field-wide claim.",
+      "requiredSections": [
+        "Direct answer",
+        "Implementation contract",
+        "Exact code locator",
+        "Failure and refusal boundary",
+        "What this does not establish",
+        "Related definition and application"
+      ],
+      "boundedQuestions": [
+        "What behavior does the implementation record or refuse?",
+        "Which exact symbol establishes that behavior?",
+        "What does a successful check not prove?",
+        "Which adjacent concept must not be conflated?",
+        "What change would require a new revision?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "src-maha-runtime-witness-contract",
+          "locator": "lib/evidence-dossier/runtime-witness.ts — ComputationalWitnessReceipt",
+          "scope": "The interface records consumed and produced artifacts separately, including each artifact’s path, digest, role, and size.",
+          "boundary": "A receipt records an execution. It does not establish correctness, reproducibility, or fitness for purpose.",
+          "rightsBasis": "project-owned-reference-only"
+        }
+      ],
+      "definitionDependency": "cand_3476e38beb1e953348f8d600",
+      "implementationState": "specification-only",
+      "publicationBoundary": "First-party operational specification only; not a route, release, independent review, or public page."
+    },
+    {
+      "candidateId": "cand_df8bc14ba0c8d37a4e944b28",
+      "candidateDigest": "sha256:af99e07d21e495c0e29f8d59c9cd05430b7e589a5ba756978643d5e53433d16d",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/root-finding/uncertainty",
+      "owningProperty": "maha-strategies",
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "routeRole": "uncertainty",
+      "directAnswer": "Root Finding — Uncertainty is bounded to the inspected authority’s exact method, conditions, and limitations; it does not inherit the definition’s evidence status.",
+      "requiredSections": [
+        "Direct answer",
+        "Role-specific method or boundary",
+        "Exact authority locator",
+        "Assumptions and failure conditions",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What operation or limitation does this route explain?",
+        "Which exact source locator bears it?",
+        "Which assumptions control the answer?",
+        "What result or implementation is not established?",
+        "Which non-route definition identity does it depend on?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "src-dlmf-roots",
+          "locator": "§3.8(i)–(ii), including equation 3.8.6 and conditioning discussion",
+          "scope": "Defines bracketing and iterative methods for locating zeros, with conditions and accuracy or conditioning considerations.",
+          "boundary": "Does not establish convergence for an arbitrary starting value or certify a computed root without residual and conditioning evidence.",
+          "rightsBasis": "reference-only"
+        }
+      ],
+      "definitionDependency": "cand_4e3ffcedfa7d51607e56c384",
+      "implementationState": "specification-only",
+      "publicationBoundary": "Not a route, release, or public page. Exact-revision review and canonical release remain required."
+    },
+    {
+      "candidateId": "cand_eb0fd7680849180edc43bdcd",
+      "candidateDigest": "sha256:918dcd3004569fd1f41de490ef45121f2d1a032abb1660c39586206bc7824364",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/causal-inference/uncertainty",
+      "owningProperty": "maha-strategies",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "routeRole": "uncertainty",
+      "directAnswer": "Causal Inference — Uncertainty is bounded to the inspected authority’s exact method, conditions, and limitations; it does not inherit the definition’s evidence status.",
+      "requiredSections": [
+        "Direct answer",
+        "Role-specific method or boundary",
+        "Exact authority locator",
+        "Assumptions and failure conditions",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What operation or limitation does this route explain?",
+        "Which exact source locator bears it?",
+        "Which assumptions control the answer?",
+        "What result or implementation is not established?",
+        "Which non-route definition identity does it depend on?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "src-causal-what-if",
+          "locator": "Chapter 1, p. 12, “A definition of causal effect”",
+          "scope": "Defines causal effects as contrasts under alternative treatments in a target population and distinguishes causal from associational quantities.",
+          "boundary": "Does not establish identification for a particular dataset, the validity of a causal model, or an effect estimate.",
+          "rightsBasis": "reference-only"
+        }
+      ],
+      "definitionDependency": "cand_a870823d00f81a9a4854f848",
+      "implementationState": "specification-only",
+      "publicationBoundary": "Not a route, release, or public page. Exact-revision review and canonical release remain required."
+    },
+    {
+      "candidateId": "cand_f1c83160cbd51444ec1e318c",
+      "candidateDigest": "sha256:73b9c6632c746c2e33ed96f52a03f4d97d3d9741ded905ea10317b24d8007986",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/interval-bounds/worked-example",
+      "owningProperty": "maha-strategies",
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "routeRole": "worked-example",
+      "directAnswer": "Interval Bounds — Worked Example is bounded to the inspected authority’s exact method, conditions, and limitations; it does not inherit the definition’s evidence status.",
+      "requiredSections": [
+        "Direct answer",
+        "Role-specific method or boundary",
+        "Exact authority locator",
+        "Assumptions and failure conditions",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What operation or limitation does this route explain?",
+        "Which exact source locator bears it?",
+        "Which assumptions control the answer?",
+        "What result or implementation is not established?",
+        "Which non-route definition identity does it depend on?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "src-dlmf-intervals",
+          "locator": "§3.1(ii), equation 3.1.6 and accompanying text",
+          "scope": "Defines interval arithmetic as producing inclusion regions and states the restriction on division by an interval containing zero.",
+          "boundary": "Does not certify an interval implementation, a rounding mode, or the tightness of a computed bound.",
+          "rightsBasis": "reference-only"
+        },
+        {
+          "sourceId": "src-ieee-1788-identity",
+          "locator": "Public standard landing page: Abstract and Scope",
+          "scope": "Confirms the identity and stated scope of the interval-arithmetic standard.",
+          "boundary": "The full subscribed standard was not inspected; this source cannot supply clause-level normative requirements.",
+          "rightsBasis": "reference-only"
+        }
+      ],
+      "definitionDependency": "cand_e41cfa0c9ad358c43c72d1ee",
+      "implementationState": "specification-only",
+      "publicationBoundary": "Not a route, release, or public page. Exact-revision review and canonical release remain required."
+    },
+    {
+      "candidateId": "cand_f6059812822caaf8d68d2b08",
+      "candidateDigest": "sha256:e438582b511b201c9b4904bba2ea10f5e7e9d2542719b01ce675858c913d246d",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/interpolation/uncertainty",
+      "owningProperty": "maha-strategies",
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "routeRole": "uncertainty",
+      "directAnswer": "Interpolation — Uncertainty is bounded to the inspected authority’s exact method, conditions, and limitations; it does not inherit the definition’s evidence status.",
+      "requiredSections": [
+        "Direct answer",
+        "Role-specific method or boundary",
+        "Exact authority locator",
+        "Assumptions and failure conditions",
+        "What this does not establish",
+        "Related definition and applications"
+      ],
+      "boundedQuestions": [
+        "What operation or limitation does this route explain?",
+        "Which exact source locator bears it?",
+        "Which assumptions control the answer?",
+        "What result or implementation is not established?",
+        "Which non-route definition identity does it depend on?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "src-dlmf-interpolation",
+          "locator": "§3.3(i), equation 3.3.1; §3.3(vi)",
+          "scope": "Defines polynomial interpolation through distinct nodes and identifies other interpolation methods.",
+          "boundary": "Does not establish accuracy between nodes, suitability for extrapolation, or numerical stability for a particular implementation.",
+          "rightsBasis": "reference-only"
+        }
+      ],
+      "definitionDependency": "cand_de8dd0a88e8704fe5855033e",
+      "implementationState": "specification-only",
+      "publicationBoundary": "Not a route, release, or public page. Exact-revision review and canonical release remain required."
+    }
+  ],
+  "provenanceDigest": "sha256:7cc1465cafbe6fa9a2eae7a132d5932ac16771f97a8abe3a71a9c8fd60e3c06c"
+}
