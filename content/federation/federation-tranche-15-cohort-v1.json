@@ -141,8 +141,8 @@
       "conceptFamilyId": "autonomy",
       "conceptAuthority": {
         "canonicalOwner": "mayone-maharajan",
-        "role": "owner-application",
-        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of autonomy for mayone-maharajan. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
       "typedRelationships": [
         {
@@ -7281,8 +7281,8 @@
       "conceptFamilyId": "governance",
       "conceptAuthority": {
         "canonicalOwner": "maha-policy",
-        "role": "owner-application",
-        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of governance for maha-policy. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
       "typedRelationships": [
         {
@@ -7449,8 +7449,8 @@
       "conceptFamilyId": "governance",
       "conceptAuthority": {
         "canonicalOwner": "maha-policy",
-        "role": "owner-application",
-        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of governance for maha-policy. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
       "typedRelationships": [
         {
@@ -8289,8 +8289,8 @@
       "conceptFamilyId": "governance",
       "conceptAuthority": {
         "canonicalOwner": "maha-policy",
-        "role": "owner-application",
-        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of governance for maha-policy. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
       "typedRelationships": [
         {
@@ -8373,8 +8373,8 @@
       "conceptFamilyId": "governance",
       "conceptAuthority": {
         "canonicalOwner": "maha-policy",
-        "role": "owner-application",
-        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of governance for maha-policy. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
       "typedRelationships": [
         {
@@ -8522,5 +8522,5 @@
       "tranche": 3
     }
   ],
-  "provenanceDigest": "sha256:6520c9e711ec3e08f2c9ec051facee9979a97b4a30f7e7821a7b43c9e4196eca"
+  "provenanceDigest": "sha256:86e5aac54599a852ab02ad16c4fcfc10d7929b247c2d7f8c8ad56f719b177569"
 }

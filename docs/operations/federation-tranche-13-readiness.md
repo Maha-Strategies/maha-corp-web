@@ -10,17 +10,16 @@ Reviewed, not published. No route, release, sitemap entry or public page was cre
 | Topics in cohort | 58 |
 | Topics inspected | 27 |
 | Distinct sources | 18 |
-| Specifications | 27 |
-| Bounded questions | 135 |
+| Specifications | 40 |
+| Bounded questions | 200 |
 | Dependencies missing | 38 |
 
 ## Classification
 
 | State | Candidates |
 |---|---|
-| `blocked` | 57 |
-| `evidence-ready` | 27 |
-| `revise` | 16 |
+| `blocked` | 60 |
+| `evidence-ready` | 40 |
 
 ## What bounds the outcome
 

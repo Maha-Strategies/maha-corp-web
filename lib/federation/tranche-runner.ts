@@ -20,6 +20,7 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import {
   diagnosePrerequisite, selectTranche14, topicOf, type Candidate, type Prerequisite,
 } from './tranche-14-selection.ts'
+import { summariseRepair, withRepairedContract } from './contract-repair.ts'
 
 const OUT = 'content/federation'
 
@@ -88,7 +89,13 @@ export function runTranche(config: TrancheConfig): void {
     } catch { /* a tranche without a cohort file contributes nothing */ }
   }
 
-  const active = map.candidates.filter((c) => !superseded.has(c.candidateId))
+  // The definition-role contract repair, applied before selection so that
+  // adjudication sees the corrected contract rather than the map's mislabel.
+  // The frozen map itself is untouched; its digest is bound into every prior
+  // artifact including Codex's Tranches 1-12.
+  const repairSummary = summariseRepair(map.candidates)
+  const repairedCandidates = map.candidates.map(withRepairedContract)
+  const active = repairedCandidates.filter((c) => !superseded.has(c.candidateId))
   const pool = active.filter((c) => !covered.has(c.candidateId))
 
   /* -- dependency remediation ------------------------------------------------ */
@@ -153,6 +160,31 @@ export function runTranche(config: TrancheConfig): void {
       })),
     boundary:
       `An analysis. It inserts no candidate, activates no proposal, and changes no Tranche ${prev} classification.`,
+  })
+
+  write('contract-repair', {
+    schemaVersion: `${schema}-contract-repair/1.0`,
+    frozenOn: FROZEN_ON,
+    defect:
+      'Route role `definition` declared against contract role `owner-application`, whose boundary reads "may apply; ' +
+      'cannot redefine". A definition page must own its concept, so the two cannot both be correct.',
+    diagnosis:
+      'All 169 definition-role candidates in the frozen map sit on the property that owns the concept they define. ' +
+      'The role is correct and the contract is not. The cause is a gap in the vocabulary rather than 169 separate ' +
+      'mistakes: the map offers owner-application, local-application and source-led-religion-application, and no ' +
+      'role for a route that defines its own concept.',
+    rule:
+      'Applies where routeRole is `definition`, the contract is not already `canonical-owner`, and siteId equals ' +
+      'conceptAuthority.canonicalOwner. A definition on a property that does not own the concept is a different ' +
+      'fault — the role would be wrong rather than the contract — and is left alone.',
+    frozenMapUntouched:
+      'The map is not rewritten. Its digest is bound into every tranche artifact including Tranches 1-12, and ' +
+      'editing it would invalidate those bindings to correct a labelling error. The repair is applied at review time.',
+    counts: repairSummary,
+    correctedBoundaryShape:
+      'This route is the canonical definition of <family> for <property>. It owns the concept on this property and ' +
+      'does not govern how other properties apply it. Owning a definition is not evidence for it: the definition ' +
+      'still requires an inspected source like any other claim.',
   })
 
   /* -- selection ------------------------------------------------------------- */

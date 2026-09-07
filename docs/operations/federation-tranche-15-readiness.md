@@ -20,9 +20,8 @@ Reviewed, not published. No route, release, sitemap entry or public page was cre
 
 | State | Candidates |
 |---|---|
-| `blocked` | 79 |
+| `blocked` | 84 |
 | `evidence-ready` | 16 |
-| `revise` | 5 |
 
 ## Dependency-first selection, and its ceiling
 

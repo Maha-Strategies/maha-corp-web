@@ -137,8 +137,8 @@
       "conceptFamilyId": "evidence",
       "conceptAuthority": {
         "canonicalOwner": "maha-research",
-        "role": "owner-application",
-        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
       "typedRelationships": [
         {
@@ -221,8 +221,8 @@
       "conceptFamilyId": "evidence",
       "conceptAuthority": {
         "canonicalOwner": "maha-research",
-        "role": "owner-application",
-        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
       "typedRelationships": [
         {
@@ -305,8 +305,8 @@
       "conceptFamilyId": "evidence",
       "conceptAuthority": {
         "canonicalOwner": "maha-research",
-        "role": "owner-application",
-        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
       "typedRelationships": [
         {
@@ -2470,5 +2470,5 @@
       "tranche": 4
     }
   ],
-  "provenanceDigest": "sha256:2a82d6e4b75b0f4eae9d4ed4875c1b57d58ad0de2d7de43c5ddb7acf4fa25407"
+  "provenanceDigest": "sha256:0d1fbccde58ae20dad36b247047f0a4eb0bc48854a6509b5ec6b0b4e3cf2b30e"
 }

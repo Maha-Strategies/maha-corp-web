@@ -7,13 +7,11 @@
   "counts": {
     "bySemanticResult": {
       "blocked on ownership or dependency": 38,
-      "distinct": 46,
-      "revise boundary": 16
+      "distinct": 62
     },
     "byFinalState": {
-      "blocked": 57,
-      "evidence-ready": 27,
-      "revise": 16
+      "blocked": 60,
+      "evidence-ready": 40
     }
   },
   "decisions": [
@@ -117,9 +115,9 @@
       "conceptId": "urn:maha:concept:risk:pyroclastic-density-current",
       "declaredOwner": "mayon-rajan",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision."
+      "semanticResult": "distinct",
+      "finalState": "evidence-ready",
+      "reason": "Dependency resolved (live); source inspected for \"pyroclastic-density-current\" with an exact locator and a stated reuse basis."
     },
     {
       "candidateId": "cand_15104c29d1fd26b7a57944b8",
@@ -195,9 +193,9 @@
       "conceptId": "urn:maha:concept:release:publishing-observability",
       "declaredOwner": "agentic-publishing",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision."
+      "semanticResult": "distinct",
+      "finalState": "blocked",
+      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"publishing-observability\". The candidate map records evidencePlan as not-started on all six axes, and evidence-ready requires inspected content with an exact locator. Blocked on source inspection, not on any defect in the candidate."
     },
     {
       "candidateId": "cand_25d6b11f76000b761b47201a",
@@ -260,9 +258,9 @@
       "conceptId": "urn:maha:concept:consent:local-memory",
       "declaredOwner": "maha-os",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision."
+      "semanticResult": "distinct",
+      "finalState": "evidence-ready",
+      "reason": "Dependency resolved (live); source inspected for \"local-memory\" with an exact locator and a stated reuse basis."
     },
     {
       "candidateId": "cand_34d368d3cffc0123319624c3",
@@ -442,9 +440,9 @@
       "conceptId": "urn:maha:concept:release:acknowledgement",
       "declaredOwner": "agentic-publishing",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision."
+      "semanticResult": "distinct",
+      "finalState": "evidence-ready",
+      "reason": "Dependency resolved (live); source inspected for \"acknowledgement\" with an exact locator and a stated reuse basis."
     },
     {
       "candidateId": "cand_5bdc9da2a849a0335c581dbd",
@@ -455,9 +453,9 @@
       "conceptId": "urn:maha:concept:consent:private-compute",
       "declaredOwner": "maha-os",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision."
+      "semanticResult": "distinct",
+      "finalState": "evidence-ready",
+      "reason": "Dependency resolved (live); source inspected for \"private-compute\" with an exact locator and a stated reuse basis."
     },
     {
       "candidateId": "cand_5c3e6cc1d6dba40f77f20008",
@@ -468,9 +466,9 @@
       "conceptId": "urn:maha:concept:consent:health-claim-boundaries",
       "declaredOwner": "maha-os",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision."
+      "semanticResult": "distinct",
+      "finalState": "evidence-ready",
+      "reason": "Dependency resolved (live); source inspected for \"health-claim-boundaries\" with an exact locator and a stated reuse basis."
     },
     {
       "candidateId": "cand_5c6d171020c0c502800ed7b2",
@@ -520,9 +518,9 @@
       "conceptId": "urn:maha:concept:risk:evacuation",
       "declaredOwner": "mayon-rajan",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision."
+      "semanticResult": "distinct",
+      "finalState": "evidence-ready",
+      "reason": "Dependency resolved (live); source inspected for \"evacuation\" with an exact locator and a stated reuse basis."
     },
     {
       "candidateId": "cand_72999d743cb7ff20c962d06e",
@@ -624,9 +622,9 @@
       "conceptId": "urn:maha:concept:release:manuscript-versioning",
       "declaredOwner": "agentic-publishing",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision."
+      "semanticResult": "distinct",
+      "finalState": "blocked",
+      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"manuscript-versioning\". The candidate map records evidencePlan as not-started on all six axes, and evidence-ready requires inspected content with an exact locator. Blocked on source inspection, not on any defect in the candidate."
     },
     {
       "candidateId": "cand_81e1f40588172aa1b15248f3",
@@ -689,9 +687,9 @@
       "conceptId": "urn:maha:concept:consent:wellness-recommendation-limits",
       "declaredOwner": "maha-os",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision."
+      "semanticResult": "distinct",
+      "finalState": "evidence-ready",
+      "reason": "Dependency resolved (live); source inspected for \"wellness-recommendation-limits\" with an exact locator and a stated reuse basis."
     },
     {
       "candidateId": "cand_896f2056ad75d5e09aa5ec96",
@@ -806,9 +804,9 @@
       "conceptId": "urn:maha:concept:risk:community-preparedness",
       "declaredOwner": "mayon-rajan",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision."
+      "semanticResult": "distinct",
+      "finalState": "evidence-ready",
+      "reason": "Dependency resolved (live); source inspected for \"community-preparedness\" with an exact locator and a stated reuse basis."
     },
     {
       "candidateId": "cand_9f300acca87befa4e56e4379",
@@ -832,9 +830,9 @@
       "conceptId": "urn:maha:concept:governance:quantum-policy",
       "declaredOwner": "maha-policy",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision."
+      "semanticResult": "distinct",
+      "finalState": "evidence-ready",
+      "reason": "Dependency resolved (live); source inspected for \"quantum-policy\" with an exact locator and a stated reuse basis."
     },
     {
       "candidateId": "cand_a28acd0b1886418a86a340d5",
@@ -910,9 +908,9 @@
       "conceptId": "urn:maha:concept:consent:cloud-escalation",
       "declaredOwner": "maha-os",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision."
+      "semanticResult": "distinct",
+      "finalState": "evidence-ready",
+      "reason": "Dependency resolved (live); source inspected for \"cloud-escalation\" with an exact locator and a stated reuse basis."
     },
     {
       "candidateId": "cand_af1e13cd58046f3b89fcf312",
@@ -962,9 +960,9 @@
       "conceptId": "urn:maha:concept:consent:user-revocation",
       "declaredOwner": "maha-os",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision."
+      "semanticResult": "distinct",
+      "finalState": "evidence-ready",
+      "reason": "Dependency resolved (live); source inspected for \"user-revocation\" with an exact locator and a stated reuse basis."
     },
     {
       "candidateId": "cand_bac6be3a43a1c8b707e51f04",
@@ -988,9 +986,9 @@
       "conceptId": "urn:maha:concept:governance:standards-and-conformity",
       "declaredOwner": "maha-policy",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision."
+      "semanticResult": "distinct",
+      "finalState": "evidence-ready",
+      "reason": "Dependency resolved (live); source inspected for \"standards-and-conformity\" with an exact locator and a stated reuse basis."
     },
     {
       "candidateId": "cand_c9b1999e391248ee19abc521",
@@ -1053,9 +1051,9 @@
       "conceptId": "urn:maha:concept:risk:rainfall-triggered-hazards",
       "declaredOwner": "mayon-rajan",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision."
+      "semanticResult": "distinct",
+      "finalState": "blocked",
+      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"rainfall-triggered-hazards\". The candidate map records evidencePlan as not-started on all six axes, and evidence-ready requires inspected content with an exact locator. Blocked on source inspection, not on any defect in the candidate."
     },
     {
       "candidateId": "cand_de47b40f36767f60c101974a",
@@ -1079,9 +1077,9 @@
       "conceptId": "urn:maha:concept:release:machine-authorship-disclosure",
       "declaredOwner": "agentic-publishing",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision."
+      "semanticResult": "distinct",
+      "finalState": "evidence-ready",
+      "reason": "Dependency resolved (live); source inspected for \"machine-authorship-disclosure\" with an exact locator and a stated reuse basis."
     },
     {
       "candidateId": "cand_dea77fb980e768f3f2f0a828",
@@ -1318,5 +1316,5 @@
       "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"recursive-institutions\". The candidate map records evidencePlan as not-started on all six axes, and evidence-ready requires inspected content with an exact locator. Blocked on source inspection, not on any defect in the candidate."
     }
   ],
-  "provenanceDigest": "sha256:086fbcb61918d7000f7e391bf62006ef0b20449f32f3b8c04a3667d352c390ce"
+  "provenanceDigest": "sha256:54146890621163f42b2f830d5b10fde5610329b38bc323a70470bfefd6c68ff1"
 }

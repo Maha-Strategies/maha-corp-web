@@ -918,16 +918,16 @@
     },
     {
       "candidateId": "cand_a159ed8af4bf1ffcf1709356",
-      "candidateDigest": "sha256:e8ff900a2f28721839ffdec90ed7ebf903be532dba3549ce2442f663ac28943c",
+      "candidateDigest": "sha256:2e4740c1aa81c3859e4f5cae792ea7b2374f11851352f36fc387c06fd0384c4f",
       "path": "/policy/quantum-policy/definition",
       "conceptId": "urn:maha:concept:governance:quantum-policy",
       "routeRole": "definition",
       "declaredOwner": {
         "canonicalOwner": "maha-policy",
-        "role": "owner-application",
-        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of governance for maha-policy. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
-      "semanticResult": "revise boundary",
+      "semanticResult": "distinct",
       "nearestNeighbour": {
         "candidateId": "cand_189ffe3dc2c1dbc11ed11a6d",
         "path": "/policy/quantum-policy/mechanisms",
@@ -981,16 +981,16 @@
     },
     {
       "candidateId": "cand_c87bc84e2db2ffd9e3c1ba16",
-      "candidateDigest": "sha256:470bb4d14a2dfcddf484870f637ecb4921f27c2b88aa3a96994c6957e0138e83",
+      "candidateDigest": "sha256:8eb8b22b33024d290877abcce9f78d27afb93b24fe6850321755bea830d2bc72",
       "path": "/policy/standards-and-conformity/definition",
       "conceptId": "urn:maha:concept:governance:standards-and-conformity",
       "routeRole": "definition",
       "declaredOwner": {
         "canonicalOwner": "maha-policy",
-        "role": "owner-application",
-        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of governance for maha-policy. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
-      "semanticResult": "revise boundary",
+      "semanticResult": "distinct",
       "nearestNeighbour": {
         "candidateId": "cand_9875eb9f6fbc2cbb02603cea",
         "path": "/policy/standards-and-conformity/sources",
@@ -1559,16 +1559,16 @@
     },
     {
       "candidateId": "cand_59b6dcfe56df30a6886ed841",
-      "candidateDigest": "sha256:d157dd66e12e4b10fc62be2bb830d072bbc3dfff175b40b432e192c95d7cf9d9",
+      "candidateDigest": "sha256:c32d7e686ddcc0c61d02f40bb043c700620bf49625ce22a2103f57cc7ee9083b",
       "path": "/agentic-publishing/acknowledgement/definition",
       "conceptId": "urn:maha:concept:release:acknowledgement",
       "routeRole": "definition",
       "declaredOwner": {
         "canonicalOwner": "agentic-publishing",
-        "role": "owner-application",
-        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of release for agentic-publishing. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
-      "semanticResult": "revise boundary",
+      "semanticResult": "distinct",
       "nearestNeighbour": null,
       "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
       "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
@@ -1576,16 +1576,16 @@
     },
     {
       "candidateId": "cand_7f83b841af363176f9056dd3",
-      "candidateDigest": "sha256:2c97d5f0fdcc2dd0e39924abdeb0cbdc08ba33b9dc0e424889ec2231df220218",
+      "candidateDigest": "sha256:3f76783b8f8b8ad1e7ad758b9ef17e08cc582c0461cf01adf4a82c6f50cd8e6e",
       "path": "/agentic-publishing/manuscript-versioning/definition",
       "conceptId": "urn:maha:concept:release:manuscript-versioning",
       "routeRole": "definition",
       "declaredOwner": {
         "canonicalOwner": "agentic-publishing",
-        "role": "owner-application",
-        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of release for agentic-publishing. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
-      "semanticResult": "revise boundary",
+      "semanticResult": "distinct",
       "nearestNeighbour": null,
       "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
       "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
@@ -1614,16 +1614,16 @@
     },
     {
       "candidateId": "cand_de94f0d7ae2227b6979eac5c",
-      "candidateDigest": "sha256:8fe7344561e51f1874cf38bd035988793defcf22d50d2ef2a2b4a31bd485615f",
+      "candidateDigest": "sha256:06848fbd834c61dc19b3c544fd16a4005b795b3e8bce893b040f3f07e3bfb236",
       "path": "/agentic-publishing/machine-authorship-disclosure/definition",
       "conceptId": "urn:maha:concept:release:machine-authorship-disclosure",
       "routeRole": "definition",
       "declaredOwner": {
         "canonicalOwner": "agentic-publishing",
-        "role": "owner-application",
-        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of release for agentic-publishing. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
-      "semanticResult": "revise boundary",
+      "semanticResult": "distinct",
       "nearestNeighbour": null,
       "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
       "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
@@ -1631,16 +1631,16 @@
     },
     {
       "candidateId": "cand_1d5d236b7b8c0233ec9b1bf0",
-      "candidateDigest": "sha256:e6af4d0ca5e9a36fef214a3d3efc24ef109b47bc84777717f77fe44bf7e65712",
+      "candidateDigest": "sha256:b703d48947eed6ed2fa71706db4d1e548dc3c520d3a6b70d7c42054820f8b4cf",
       "path": "/agentic-publishing/publishing-observability/definition",
       "conceptId": "urn:maha:concept:release:publishing-observability",
       "routeRole": "definition",
       "declaredOwner": {
         "canonicalOwner": "agentic-publishing",
-        "role": "owner-application",
-        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of release for agentic-publishing. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
-      "semanticResult": "revise boundary",
+      "semanticResult": "distinct",
       "nearestNeighbour": null,
       "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
       "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
@@ -1690,16 +1690,16 @@
     },
     {
       "candidateId": "cand_334c97681db312676655a5c4",
-      "candidateDigest": "sha256:fb4992459e3185a3fa1d73c213db53d306f3fff33e914db9ce7616d2626af834",
+      "candidateDigest": "sha256:a3bf9a6c522b3c64f354fc19b9e4d6d26f06ce477005d0c00a98654bb762bb16",
       "path": "/knowledge/private-machine-systems/local-memory/definition",
       "conceptId": "urn:maha:concept:consent:local-memory",
       "routeRole": "definition",
       "declaredOwner": {
         "canonicalOwner": "maha-os",
-        "role": "owner-application",
-        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of consent for maha-os. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
-      "semanticResult": "revise boundary",
+      "semanticResult": "distinct",
       "nearestNeighbour": null,
       "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
       "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
@@ -1728,16 +1728,16 @@
     },
     {
       "candidateId": "cand_5c3e6cc1d6dba40f77f20008",
-      "candidateDigest": "sha256:ac06c2a4448522fee1649ea63565584754aca9b5f2280146cbf5110a7908364a",
+      "candidateDigest": "sha256:388862a178614293f0c6631e91c5fa7b444f8e2c7fdaa6b24e70f247064584c4",
       "path": "/knowledge/private-machine-systems/health-claim-boundaries/definition",
       "conceptId": "urn:maha:concept:consent:health-claim-boundaries",
       "routeRole": "definition",
       "declaredOwner": {
         "canonicalOwner": "maha-os",
-        "role": "owner-application",
-        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of consent for maha-os. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
-      "semanticResult": "revise boundary",
+      "semanticResult": "distinct",
       "nearestNeighbour": null,
       "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
       "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
@@ -1745,16 +1745,16 @@
     },
     {
       "candidateId": "cand_5bdc9da2a849a0335c581dbd",
-      "candidateDigest": "sha256:55069e15f3d585d8cd9d8d85c1468b0fb18825c807aa8bb4c1bab861633b3a78",
+      "candidateDigest": "sha256:899e0f8c87bd3b7c7a5d12075b19090d1c85333bdd98c67e3fda4f23de011088",
       "path": "/knowledge/private-machine-systems/private-compute/definition",
       "conceptId": "urn:maha:concept:consent:private-compute",
       "routeRole": "definition",
       "declaredOwner": {
         "canonicalOwner": "maha-os",
-        "role": "owner-application",
-        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of consent for maha-os. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
-      "semanticResult": "revise boundary",
+      "semanticResult": "distinct",
       "nearestNeighbour": null,
       "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
       "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
@@ -1762,16 +1762,16 @@
     },
     {
       "candidateId": "cand_b592a7bacc1bf3f58033902f",
-      "candidateDigest": "sha256:ca80485b30aba557cd5fa539a61075fbf6967225f1a8348857da1d01119a6f66",
+      "candidateDigest": "sha256:5c66769240f4df06b873dc3cd0488eaa08da08358fc46f51d2421ce749b98327",
       "path": "/knowledge/private-machine-systems/user-revocation/definition",
       "conceptId": "urn:maha:concept:consent:user-revocation",
       "routeRole": "definition",
       "declaredOwner": {
         "canonicalOwner": "maha-os",
-        "role": "owner-application",
-        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of consent for maha-os. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
-      "semanticResult": "revise boundary",
+      "semanticResult": "distinct",
       "nearestNeighbour": null,
       "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
       "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
@@ -1779,16 +1779,16 @@
     },
     {
       "candidateId": "cand_87c3dab9a4ee314eee8e57ef",
-      "candidateDigest": "sha256:7ce76658252219c4ea88f4327f8abc0a337bce25e764b73fa96f928d8d839135",
+      "candidateDigest": "sha256:28b5ca6c47057d98cb750174219fc1fb6b7c9b797b2fb3f8e791f4ebca91d114",
       "path": "/knowledge/private-machine-systems/wellness-recommendation-limits/definition",
       "conceptId": "urn:maha:concept:consent:wellness-recommendation-limits",
       "routeRole": "definition",
       "declaredOwner": {
         "canonicalOwner": "maha-os",
-        "role": "owner-application",
-        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of consent for maha-os. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
-      "semanticResult": "revise boundary",
+      "semanticResult": "distinct",
       "nearestNeighbour": null,
       "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
       "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
@@ -1796,16 +1796,16 @@
     },
     {
       "candidateId": "cand_af0ac684e4d62f292456214c",
-      "candidateDigest": "sha256:dceb533f5126d9219177f0a3610e56683e48c7838c00219d4c533e82124b0cd0",
+      "candidateDigest": "sha256:7a74ca8af06e5a82345afb435c8a10cfd5ce2dee3f07ba6a29e50890536924d3",
       "path": "/knowledge/private-machine-systems/cloud-escalation/definition",
       "conceptId": "urn:maha:concept:consent:cloud-escalation",
       "routeRole": "definition",
       "declaredOwner": {
         "canonicalOwner": "maha-os",
-        "role": "owner-application",
-        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of consent for maha-os. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
-      "semanticResult": "revise boundary",
+      "semanticResult": "distinct",
       "nearestNeighbour": null,
       "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
       "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
@@ -1813,16 +1813,16 @@
     },
     {
       "candidateId": "cand_14ccc2df61c9b8ff9e0cd9cf",
-      "candidateDigest": "sha256:e89caa62e65ffaef9de2411b8c16519076f27d968a0b37676ee6c58f13fdc41c",
+      "candidateDigest": "sha256:4caffc34614674c2fd283500d611707235057907e7aec38a063ca2fb9ef1f806",
       "path": "/mayon-volcano/pyroclastic-density-current/definition",
       "conceptId": "urn:maha:concept:risk:pyroclastic-density-current",
       "routeRole": "definition",
       "declaredOwner": {
         "canonicalOwner": "mayon-rajan",
-        "role": "owner-application",
-        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of risk for mayon-rajan. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
-      "semanticResult": "revise boundary",
+      "semanticResult": "distinct",
       "nearestNeighbour": null,
       "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
       "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
@@ -1830,16 +1830,16 @@
     },
     {
       "candidateId": "cand_9a28dcd22dc28bf5e5716e5e",
-      "candidateDigest": "sha256:51193da3a4c58fb6c7358a269467d5c56b832ad75fcbb1bf42cb8876977877fb",
+      "candidateDigest": "sha256:258a938100e68c21252a1191a5d2ffe27cd3bb186683fdcf857acb9684109483",
       "path": "/mayon-volcano/community-preparedness/definition",
       "conceptId": "urn:maha:concept:risk:community-preparedness",
       "routeRole": "definition",
       "declaredOwner": {
         "canonicalOwner": "mayon-rajan",
-        "role": "owner-application",
-        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of risk for mayon-rajan. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
-      "semanticResult": "revise boundary",
+      "semanticResult": "distinct",
       "nearestNeighbour": null,
       "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
       "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
@@ -1847,16 +1847,16 @@
     },
     {
       "candidateId": "cand_6e50d4c196a384f4fb7c7c91",
-      "candidateDigest": "sha256:8e1b9b9aaf6463d14b9451ea06e8f8632bc3516d14b4f20e89e13d63943a19c4",
+      "candidateDigest": "sha256:d2a1d3ec75aeb5e4ed1678cbfcbd92e3d1f26ac18b62bf8810d9ef7efa572004",
       "path": "/mayon-volcano/evacuation/definition",
       "conceptId": "urn:maha:concept:risk:evacuation",
       "routeRole": "definition",
       "declaredOwner": {
         "canonicalOwner": "mayon-rajan",
-        "role": "owner-application",
-        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of risk for mayon-rajan. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
-      "semanticResult": "revise boundary",
+      "semanticResult": "distinct",
       "nearestNeighbour": null,
       "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
       "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
@@ -1864,16 +1864,16 @@
     },
     {
       "candidateId": "cand_d3036631bf63b64c4a141e1a",
-      "candidateDigest": "sha256:757254fa2c9140c99b6759a8697f791915e983883cd8491d1a3888f1ea5ed0cd",
+      "candidateDigest": "sha256:4532a7db7ef2c0b2841d8f41e9a0f980e7955fdf0cf0d98094a0c0acdc16c130",
       "path": "/mayon-volcano/rainfall-triggered-hazards/definition",
       "conceptId": "urn:maha:concept:risk:rainfall-triggered-hazards",
       "routeRole": "definition",
       "declaredOwner": {
         "canonicalOwner": "mayon-rajan",
-        "role": "owner-application",
-        "boundary": "This route may apply risk; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of risk for mayon-rajan. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
-      "semanticResult": "revise boundary",
+      "semanticResult": "distinct",
       "nearestNeighbour": null,
       "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
       "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
@@ -1965,5 +1965,5 @@
       "dependencyState": "satisfied-by-earlier-tranche"
     }
   ],
-  "provenanceDigest": "sha256:b8ead31eaa028f41a81340183dc78fb89e58e5311983a14d10136013f7d72580"
+  "provenanceDigest": "sha256:2fe25308298b35f12771959243d4308ae345fea244be3d4ed5e71ce79f627dfb"
 }

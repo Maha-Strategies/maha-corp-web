@@ -4,8 +4,8 @@
   "cohortDigest": "sha256:2e87cdef5f58f9f83f821acb3a36c281611ad6ac3dfdd708fb93ed3c5a02fbfa",
   "boundary": "Specifications exist only for evidence-ready candidates. A specification is not a route, a release, or a public page.",
   "counts": {
-    "specifications": 27,
-    "boundedQuestions": 135
+    "specifications": 40,
+    "boundedQuestions": 200
   },
   "specifications": [
     {
@@ -211,6 +211,75 @@
           "conceptId": "urn:maha:concept:governance:model-evaluation",
           "owner": "maha-policy",
           "state": "satisfied-by-earlier-tranche"
+        }
+      ],
+      "boundary": "A specification is not a route, a release, or a public page."
+    },
+    {
+      "candidateId": "cand_14ccc2df61c9b8ff9e0cd9cf",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/pyroclastic-density-current/definition",
+      "owningProperty": "mayon-rajan",
+      "routeRole": "definition",
+      "directAnswer": "That pyroclastic flows typically travel faster than 80 km/h (50 mph) and that internal rock and gas temperatures are generally between 200°C and 700°C.",
+      "context": "U.S. Geological Survey, Volcano Hazards Program — \"Pyroclastic flows move fast and destroy everything in their path\" (Page as served 2026-09-06) is the authority consulted for this route's topic.",
+      "evidenceSections": [
+        {
+          "heading": "What the source establishes",
+          "body": "That pyroclastic flows typically travel faster than 80 km/h (50 mph) and that internal rock and gas temperatures are generally between 200°C and 700°C.",
+          "locator": "Opening descriptive paragraph: speed and temperature sentences."
+        },
+        {
+          "heading": "What it does not establish",
+          "body": "A hazard description for a general audience. It does not establish site-specific risk for any volcano, evacuation distances, or preparedness policy, and it is not a substitute for a hazard assessment.",
+          "locator": "Opening descriptive paragraph: speed and temperature sentences."
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "A hazard description for a general audience. It does not establish site-specific risk for any volcano, evacuation distances, or preparedness policy, and it is not a substitute for a hazard assessment.",
+        "No route-specific search demand is observed; demand remains unknown."
+      ],
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does U.S. Geological Survey, Volcano Hazards Program — \"Pyroclastic flows move fast and destroy everything in their path\" state about pyroclastic-density-current?",
+        "Which exact locator in that source supports the claim on this page?",
+        "What does this source explicitly not establish about pyroclastic-density-current?",
+        "Which canonical definition does this route depend on, and where is it owned?",
+        "What would have to be inspected before this page could claim more than it does?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:risk:pyroclastic-density-current"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:risk"
+        }
+      ],
+      "citations": [
+        {
+          "inspectionId": "tr13-src-002",
+          "sourceIdentity": "U.S. Geological Survey, Volcano Hazards Program — \"Pyroclastic flows move fast and destroy everything in their path\"",
+          "stableUrl": "https://www.usgs.gov/programs/VHP/pyroclastic-flows-move-fast-and-destroy-everything-their-path",
+          "locator": "Opening descriptive paragraph: speed and temperature sentences."
+        }
+      ],
+      "evidenceMetadata": {
+        "sourceClass": "government-scientific-agency",
+        "independence": "independent-of-maha",
+        "inspectionDepth": "full-page-read",
+        "reuseBasis": "US government work; bounded original summary permitted with attribution.",
+        "demandEvidence": "unknown"
+      },
+      "expectedCanonicalDependencies": [
+        {
+          "conceptId": "urn:maha:concept:risk:pyroclastic-density-current",
+          "owner": "mayon-rajan",
+          "state": "live"
         }
       ],
       "boundary": "A specification is not a route, a release, or a public page."
@@ -492,6 +561,75 @@
       "boundary": "A specification is not a route, a release, or a public page."
     },
     {
+      "candidateId": "cand_334c97681db312676655a5c4",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/local-memory/definition",
+      "owningProperty": "maha-os",
+      "routeRole": "definition",
+      "directAnswer": "That minimising the personal data processed, and doing so by design and by default, is an expressed obligation rather than an optional practice.",
+      "context": "Regulation (EU) 2016/679 (General Data Protection Regulation) (Consolidated text, EUR-Lex CELEX 32016R0679) is the authority consulted for this route's topic.",
+      "evidenceSections": [
+        {
+          "heading": "What the source establishes",
+          "body": "That minimising the personal data processed, and doing so by design and by default, is an expressed obligation rather than an optional practice.",
+          "locator": "Article 25 — data protection by design and by default, including minimising processing."
+        },
+        {
+          "heading": "What it does not establish",
+          "body": "Establishes a duty, not an architecture. It does not state that local retention satisfies it, nor that any particular storage location is compliant.",
+          "locator": "Article 25 — data protection by design and by default, including minimising processing."
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "Establishes a duty, not an architecture. It does not state that local retention satisfies it, nor that any particular storage location is compliant.",
+        "No route-specific search demand is observed; demand remains unknown."
+      ],
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does Regulation (EU) 2016/679 (General Data Protection Regulation) state about local-memory?",
+        "Which exact locator in that source supports the claim on this page?",
+        "What does this source explicitly not establish about local-memory?",
+        "Which canonical definition does this route depend on, and where is it owned?",
+        "What would have to be inspected before this page could claim more than it does?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:consent:local-memory"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:consent"
+        }
+      ],
+      "citations": [
+        {
+          "inspectionId": "tr13-src-009",
+          "sourceIdentity": "Regulation (EU) 2016/679 (General Data Protection Regulation)",
+          "stableUrl": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32016R0679",
+          "locator": "Article 25 — data protection by design and by default, including minimising processing."
+        }
+      ],
+      "evidenceMetadata": {
+        "sourceClass": "statutory-instrument",
+        "independence": "independent-of-maha",
+        "inspectionDepth": "targeted-article-read",
+        "reuseBasis": "EUR-Lex reuse policy permits reproduction with source acknowledgement; summarised here.",
+        "demandEvidence": "unknown"
+      },
+      "expectedCanonicalDependencies": [
+        {
+          "conceptId": "urn:maha:concept:consent:local-memory",
+          "owner": "maha-os",
+          "state": "live"
+        }
+      ],
+      "boundary": "A specification is not a route, a release, or a public page."
+    },
+    {
       "candidateId": "cand_42d249917e56d726fbe3d630",
       "canonicalUrl": "https://research.mahastrategies.com/federation/research/evaluation-protocol/protocol",
       "owningProperty": "maha-research",
@@ -630,6 +768,213 @@
       "boundary": "A specification is not a route, a release, or a public page."
     },
     {
+      "candidateId": "cand_59b6dcfe56df30a6886ed841",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/acknowledgement/definition",
+      "owningProperty": "agentic-publishing",
+      "routeRole": "definition",
+      "directAnswer": "That contribution to a work can be recorded against fourteen named roles rather than a single undifferentiated credit.",
+      "context": "CRediT — Contributor Roles Taxonomy (ANSI/NISO Z39.104) (Approved as an ANSI/NISO standard in 2022) is the authority consulted for this route's topic.",
+      "evidenceSections": [
+        {
+          "heading": "What the source establishes",
+          "body": "That contribution to a work can be recorded against fourteen named roles rather than a single undifferentiated credit.",
+          "locator": "Summary table, \"CRediT’s 14 Contributor Roles\"."
+        },
+        {
+          "heading": "What it does not establish",
+          "body": "A vocabulary for describing contribution. It does not determine authorship, allocate credit, or establish that a declared role was actually performed.",
+          "locator": "Summary table, \"CRediT’s 14 Contributor Roles\"."
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "A vocabulary for describing contribution. It does not determine authorship, allocate credit, or establish that a declared role was actually performed.",
+        "No route-specific search demand is observed; demand remains unknown."
+      ],
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does CRediT — Contributor Roles Taxonomy (ANSI/NISO Z39.104) state about acknowledgement?",
+        "Which exact locator in that source supports the claim on this page?",
+        "What does this source explicitly not establish about acknowledgement?",
+        "Which canonical definition does this route depend on, and where is it owned?",
+        "What would have to be inspected before this page could claim more than it does?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:release:acknowledgement"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:release"
+        }
+      ],
+      "citations": [
+        {
+          "inspectionId": "tr13-src-010",
+          "sourceIdentity": "CRediT — Contributor Roles Taxonomy (ANSI/NISO Z39.104)",
+          "stableUrl": "https://credit.niso.org/",
+          "locator": "Summary table, \"CRediT’s 14 Contributor Roles\"."
+        }
+      ],
+      "evidenceMetadata": {
+        "sourceClass": "consensus-standard",
+        "independence": "independent-of-maha",
+        "inspectionDepth": "full-page-read",
+        "reuseBasis": "Licensed CC-BY 4.0, which permits reuse with attribution. Summarised rather than copied.",
+        "demandEvidence": "unknown"
+      },
+      "expectedCanonicalDependencies": [
+        {
+          "conceptId": "urn:maha:concept:release:acknowledgement",
+          "owner": "agentic-publishing",
+          "state": "live"
+        }
+      ],
+      "boundary": "A specification is not a route, a release, or a public page."
+    },
+    {
+      "candidateId": "cand_5bdc9da2a849a0335c581dbd",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/private-compute/definition",
+      "owningProperty": "maha-os",
+      "routeRole": "definition",
+      "directAnswer": "That security appropriate to the risk is required, and that pseudonymisation and encryption, together with ongoing confidentiality, integrity, availability and resilience, are named among the measures.",
+      "context": "Regulation (EU) 2016/679 (GDPR) (Consolidated text, EUR-Lex CELEX 32016R0679) is the authority consulted for this route's topic.",
+      "evidenceSections": [
+        {
+          "heading": "What the source establishes",
+          "body": "That security appropriate to the risk is required, and that pseudonymisation and encryption, together with ongoing confidentiality, integrity, availability and resilience, are named among the measures.",
+          "locator": "Article 32(1)(a)-(c) — security of processing, including pseudonymisation and encryption."
+        },
+        {
+          "heading": "What it does not establish",
+          "body": "Names measures without prescribing an architecture. It does not establish that computing locally, or in any specific environment, satisfies the obligation.",
+          "locator": "Article 32(1)(a)-(c) — security of processing, including pseudonymisation and encryption."
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "Names measures without prescribing an architecture. It does not establish that computing locally, or in any specific environment, satisfies the obligation.",
+        "No route-specific search demand is observed; demand remains unknown."
+      ],
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does Regulation (EU) 2016/679 (GDPR) state about private-compute?",
+        "Which exact locator in that source supports the claim on this page?",
+        "What does this source explicitly not establish about private-compute?",
+        "Which canonical definition does this route depend on, and where is it owned?",
+        "What would have to be inspected before this page could claim more than it does?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:consent:private-compute"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:consent"
+        }
+      ],
+      "citations": [
+        {
+          "inspectionId": "tr13-src-022",
+          "sourceIdentity": "Regulation (EU) 2016/679 (GDPR)",
+          "stableUrl": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32016R0679",
+          "locator": "Article 32(1)(a)-(c) — security of processing, including pseudonymisation and encryption."
+        }
+      ],
+      "evidenceMetadata": {
+        "sourceClass": "statutory-instrument",
+        "independence": "independent-of-maha",
+        "inspectionDepth": "targeted-article-read",
+        "reuseBasis": "EUR-Lex reuse policy permits reproduction with acknowledgement; summarised here.",
+        "demandEvidence": "unknown"
+      },
+      "expectedCanonicalDependencies": [
+        {
+          "conceptId": "urn:maha:concept:consent:private-compute",
+          "owner": "maha-os",
+          "state": "live"
+        }
+      ],
+      "boundary": "A specification is not a route, a release, or a public page."
+    },
+    {
+      "candidateId": "cand_5c3e6cc1d6dba40f77f20008",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/health-claim-boundaries/definition",
+      "owningProperty": "maha-os",
+      "routeRole": "definition",
+      "directAnswer": "That health-benefit claims require substantiation as competent and reliable scientific evidence, and that for health-related benefits this generally means randomised, controlled human clinical testing, assessed on parameters including sample size, duration and outcomes.",
+      "context": "US Federal Trade Commission, Health Products Compliance Guidance (As published at ftc.gov, read 2026-09-06) is the authority consulted for this route's topic.",
+      "evidenceSections": [
+        {
+          "heading": "What the source establishes",
+          "body": "That health-benefit claims require substantiation as competent and reliable scientific evidence, and that for health-related benefits this generally means randomised, controlled human clinical testing, assessed on parameters including sample size, duration and outcomes.",
+          "locator": "Substantiation section — \"competent and reliable scientific evidence\"; the paragraph on randomised controlled human clinical testing."
+        },
+        {
+          "heading": "What it does not establish",
+          "body": "Guidance on advertising substantiation, not a clinical standard and not legal advice. It does not state what any specific product may claim, and does not determine whether a given study is adequate.",
+          "locator": "Substantiation section — \"competent and reliable scientific evidence\"; the paragraph on randomised controlled human clinical testing."
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "Guidance on advertising substantiation, not a clinical standard and not legal advice. It does not state what any specific product may claim, and does not determine whether a given study is adequate.",
+        "No route-specific search demand is observed; demand remains unknown."
+      ],
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does US Federal Trade Commission, Health Products Compliance Guidance state about health-claim-boundaries?",
+        "Which exact locator in that source supports the claim on this page?",
+        "What does this source explicitly not establish about health-claim-boundaries?",
+        "Which canonical definition does this route depend on, and where is it owned?",
+        "What would have to be inspected before this page could claim more than it does?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:consent:health-claim-boundaries"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:consent"
+        }
+      ],
+      "citations": [
+        {
+          "inspectionId": "tr13-src-014",
+          "sourceIdentity": "US Federal Trade Commission, Health Products Compliance Guidance",
+          "stableUrl": "https://www.ftc.gov/business-guidance/resources/health-products-compliance-guidance",
+          "locator": "Substantiation section — \"competent and reliable scientific evidence\"; the paragraph on randomised controlled human clinical testing."
+        }
+      ],
+      "evidenceMetadata": {
+        "sourceClass": "government-regulator-guidance",
+        "independence": "independent-of-maha",
+        "inspectionDepth": "targeted-section-read",
+        "reuseBasis": "US government work; bounded original summary with attribution.",
+        "demandEvidence": "unknown"
+      },
+      "expectedCanonicalDependencies": [
+        {
+          "conceptId": "urn:maha:concept:consent:health-claim-boundaries",
+          "owner": "maha-os",
+          "state": "live"
+        }
+      ],
+      "boundary": "A specification is not a route, a release, or a public page."
+    },
+    {
       "candidateId": "cand_66b1cd55112a4367aff6cfaa",
       "canonicalUrl": "https://research.mahastrategies.com/federation/research/repository-copy/machine-record",
       "owningProperty": "maha-research",
@@ -694,6 +1039,75 @@
           "conceptId": "urn:maha:concept:evidence:repository-copy",
           "owner": "maha-research",
           "state": "satisfied-by-earlier-tranche"
+        }
+      ],
+      "boundary": "A specification is not a route, a release, or a public page."
+    },
+    {
+      "candidateId": "cand_6e50d4c196a384f4fb7c7c91",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/evacuation/definition",
+      "owningProperty": "mayon-rajan",
+      "routeRole": "definition",
+      "directAnswer": "That the published guidance is to follow evacuation orders from local authorities, evacuate early, and avoid areas downwind and river valleys downstream of the volcano.",
+      "context": "Ready.gov (US Department of Homeland Security / FEMA), Volcanoes (As published at ready.gov, read 2026-09-06) is the authority consulted for this route's topic.",
+      "evidenceSections": [
+        {
+          "heading": "What the source establishes",
+          "body": "That the published guidance is to follow evacuation orders from local authorities, evacuate early, and avoid areas downwind and river valleys downstream of the volcano.",
+          "locator": "Section \"Be Safe DURING\" — evacuation-order paragraph."
+        },
+        {
+          "heading": "What it does not establish",
+          "body": "General public preparedness guidance. It sets no distances or thresholds for any specific volcano, issues no order, and does not substitute for direction from local authorities.",
+          "locator": "Section \"Be Safe DURING\" — evacuation-order paragraph."
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "General public preparedness guidance. It sets no distances or thresholds for any specific volcano, issues no order, and does not substitute for direction from local authorities.",
+        "No route-specific search demand is observed; demand remains unknown."
+      ],
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does Ready.gov (US Department of Homeland Security / FEMA), Volcanoes state about evacuation?",
+        "Which exact locator in that source supports the claim on this page?",
+        "What does this source explicitly not establish about evacuation?",
+        "Which canonical definition does this route depend on, and where is it owned?",
+        "What would have to be inspected before this page could claim more than it does?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:risk:evacuation"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:risk"
+        }
+      ],
+      "citations": [
+        {
+          "inspectionId": "tr13-src-024",
+          "sourceIdentity": "Ready.gov (US Department of Homeland Security / FEMA), Volcanoes",
+          "stableUrl": "https://www.ready.gov/volcanoes",
+          "locator": "Section \"Be Safe DURING\" — evacuation-order paragraph."
+        }
+      ],
+      "evidenceMetadata": {
+        "sourceClass": "government-preparedness-guidance",
+        "independence": "independent-of-maha",
+        "inspectionDepth": "full-page-read",
+        "reuseBasis": "US government work; bounded original summary with attribution.",
+        "demandEvidence": "unknown"
+      },
+      "expectedCanonicalDependencies": [
+        {
+          "conceptId": "urn:maha:concept:risk:evacuation",
+          "owner": "mayon-rajan",
+          "state": "live"
         }
       ],
       "boundary": "A specification is not a route, a release, or a public page."
@@ -832,6 +1246,75 @@
           "conceptId": "urn:maha:concept:governance:public-sector-procurement",
           "owner": "maha-policy",
           "state": "satisfied-by-earlier-tranche"
+        }
+      ],
+      "boundary": "A specification is not a route, a release, or a public page."
+    },
+    {
+      "candidateId": "cand_87c3dab9a4ee314eee8e57ef",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/wellness-recommendation-limits/definition",
+      "owningProperty": "maha-os",
+      "routeRole": "definition",
+      "directAnswer": "That a general wellness product is one intended only for general wellness use and presenting low risk, and that some such products fall outside the statutory device definition.",
+      "context": "US FDA CDRH, General Wellness: Policy for Low Risk Devices (Document issued 6 January 2026) is the authority consulted for this route's topic.",
+      "evidenceSections": [
+        {
+          "heading": "What the source establishes",
+          "body": "That a general wellness product is one intended only for general wellness use and presenting low risk, and that some such products fall outside the statutory device definition.",
+          "locator": "Definition passage: the two factors defining a general wellness product; the following paragraph on products that do not meet the device definition under FD&C Act §201(h)."
+        },
+        {
+          "heading": "What it does not establish",
+          "body": "A compliance policy describing when CDRH does not intend to examine a product. It confers no approval, does not classify any specific product, and does not establish that a wellness claim is accurate.",
+          "locator": "Definition passage: the two factors defining a general wellness product; the following paragraph on products that do not meet the device definition under FD&C Act §201(h)."
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "A compliance policy describing when CDRH does not intend to examine a product. It confers no approval, does not classify any specific product, and does not establish that a wellness claim is accurate.",
+        "No route-specific search demand is observed; demand remains unknown."
+      ],
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does US FDA CDRH, General Wellness: Policy for Low Risk Devices state about wellness-recommendation-limits?",
+        "Which exact locator in that source supports the claim on this page?",
+        "What does this source explicitly not establish about wellness-recommendation-limits?",
+        "Which canonical definition does this route depend on, and where is it owned?",
+        "What would have to be inspected before this page could claim more than it does?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:consent:wellness-recommendation-limits"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:consent"
+        }
+      ],
+      "citations": [
+        {
+          "inspectionId": "tr13-src-015",
+          "sourceIdentity": "US FDA CDRH, General Wellness: Policy for Low Risk Devices",
+          "stableUrl": "https://www.fda.gov/media/90652/download",
+          "locator": "Definition passage: the two factors defining a general wellness product; the following paragraph on products that do not meet the device definition under FD&C Act §201(h)."
+        }
+      ],
+      "evidenceMetadata": {
+        "sourceClass": "government-regulator-guidance",
+        "independence": "independent-of-maha",
+        "inspectionDepth": "targeted-section-read",
+        "reuseBasis": "US government work; bounded original summary with attribution.",
+        "demandEvidence": "unknown"
+      },
+      "expectedCanonicalDependencies": [
+        {
+          "conceptId": "urn:maha:concept:consent:wellness-recommendation-limits",
+          "owner": "maha-os",
+          "state": "live"
         }
       ],
       "boundary": "A specification is not a route, a release, or a public page."
@@ -1251,6 +1734,144 @@
       "boundary": "A specification is not a route, a release, or a public page."
     },
     {
+      "candidateId": "cand_9a28dcd22dc28bf5e5716e5e",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/community-preparedness/definition",
+      "owningProperty": "mayon-rajan",
+      "routeRole": "definition",
+      "directAnswer": "That preparedness is described as knowing the local risk, obtaining evacuation and shelter plans from local emergency management, and learning the community warning systems.",
+      "context": "Ready.gov (US Department of Homeland Security / FEMA), Volcanoes (As published at ready.gov, read 2026-09-06) is the authority consulted for this route's topic.",
+      "evidenceSections": [
+        {
+          "heading": "What the source establishes",
+          "body": "That preparedness is described as knowing the local risk, obtaining evacuation and shelter plans from local emergency management, and learning the community warning systems.",
+          "locator": "Section \"Prepare NOW\" — know your area’s risk; ask local emergency management for evacuation and shelter plans; community warning systems."
+        },
+        {
+          "heading": "What it does not establish",
+          "body": "Describes what a household is advised to do. It does not assess any community’s readiness, prescribe a programme, or establish that following it produces a safe outcome.",
+          "locator": "Section \"Prepare NOW\" — know your area’s risk; ask local emergency management for evacuation and shelter plans; community warning systems."
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "Describes what a household is advised to do. It does not assess any community’s readiness, prescribe a programme, or establish that following it produces a safe outcome.",
+        "No route-specific search demand is observed; demand remains unknown."
+      ],
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does Ready.gov (US Department of Homeland Security / FEMA), Volcanoes state about community-preparedness?",
+        "Which exact locator in that source supports the claim on this page?",
+        "What does this source explicitly not establish about community-preparedness?",
+        "Which canonical definition does this route depend on, and where is it owned?",
+        "What would have to be inspected before this page could claim more than it does?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:risk:community-preparedness"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:risk"
+        }
+      ],
+      "citations": [
+        {
+          "inspectionId": "tr13-src-025",
+          "sourceIdentity": "Ready.gov (US Department of Homeland Security / FEMA), Volcanoes",
+          "stableUrl": "https://www.ready.gov/volcanoes",
+          "locator": "Section \"Prepare NOW\" — know your area’s risk; ask local emergency management for evacuation and shelter plans; community warning systems."
+        }
+      ],
+      "evidenceMetadata": {
+        "sourceClass": "government-preparedness-guidance",
+        "independence": "independent-of-maha",
+        "inspectionDepth": "full-page-read",
+        "reuseBasis": "US government work; bounded original summary with attribution.",
+        "demandEvidence": "unknown"
+      },
+      "expectedCanonicalDependencies": [
+        {
+          "conceptId": "urn:maha:concept:risk:community-preparedness",
+          "owner": "mayon-rajan",
+          "state": "live"
+        }
+      ],
+      "boundary": "A specification is not a route, a release, or a public page."
+    },
+    {
+      "candidateId": "cand_a159ed8af4bf1ffcf1709356",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/quantum-policy/definition",
+      "owningProperty": "maha-policy",
+      "routeRole": "definition",
+      "directAnswer": "That a federal standard now specifies a key-encapsulation mechanism, ML-KEM, in three parameter sets, believed secure against an adversary possessing a quantum computer.",
+      "context": "FIPS 203, Module-Lattice-Based Key-Encapsulation Mechanism Standard (Effective 13 August 2024) is the authority consulted for this route's topic.",
+      "evidenceSections": [
+        {
+          "heading": "What the source establishes",
+          "body": "That a federal standard now specifies a key-encapsulation mechanism, ML-KEM, in three parameter sets, believed secure against an adversary possessing a quantum computer.",
+          "locator": "§1 Introduction — ML-KEM and its three parameter sets (ML-KEM-512, -768, -1024)."
+        },
+        {
+          "heading": "What it does not establish",
+          "body": "Specifies an algorithm and its parameters. It does not state when any organisation must migrate, that migration is complete anywhere, or that quantum attack is imminent. \"Believed to be secure\" is the standard’s own hedge and is not a proof.",
+          "locator": "§1 Introduction — ML-KEM and its three parameter sets (ML-KEM-512, -768, -1024)."
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "Specifies an algorithm and its parameters. It does not state when any organisation must migrate, that migration is complete anywhere, or that quantum attack is imminent. \"Believed to be secure\" is the standard’s own hedge and is not a proof.",
+        "No route-specific search demand is observed; demand remains unknown."
+      ],
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does FIPS 203, Module-Lattice-Based Key-Encapsulation Mechanism Standard state about quantum-policy?",
+        "Which exact locator in that source supports the claim on this page?",
+        "What does this source explicitly not establish about quantum-policy?",
+        "Which canonical definition does this route depend on, and where is it owned?",
+        "What would have to be inspected before this page could claim more than it does?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:quantum-policy"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "citations": [
+        {
+          "inspectionId": "tr13-src-012",
+          "sourceIdentity": "FIPS 203, Module-Lattice-Based Key-Encapsulation Mechanism Standard",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf",
+          "locator": "§1 Introduction — ML-KEM and its three parameter sets (ML-KEM-512, -768, -1024)."
+        }
+      ],
+      "evidenceMetadata": {
+        "sourceClass": "federal-standard",
+        "independence": "independent-of-maha",
+        "inspectionDepth": "targeted-section-read",
+        "reuseBasis": "US government work; bounded original summary with attribution.",
+        "demandEvidence": "unknown"
+      },
+      "expectedCanonicalDependencies": [
+        {
+          "conceptId": "urn:maha:concept:governance:quantum-policy",
+          "owner": "maha-policy",
+          "state": "live"
+        }
+      ],
+      "boundary": "A specification is not a route, a release, or a public page."
+    },
+    {
       "candidateId": "cand_a409ca8d43b4a3bb02e51328",
       "canonicalUrl": "https://policy.mahastrategies.com/policy/standards-and-conformity/uncertainty",
       "owningProperty": "maha-policy",
@@ -1389,6 +2010,144 @@
       "boundary": "A specification is not a route, a release, or a public page."
     },
     {
+      "candidateId": "cand_af0ac684e4d62f292456214c",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/cloud-escalation/definition",
+      "owningProperty": "maha-os",
+      "routeRole": "definition",
+      "directAnswer": "That sending processing to another party requires a binding instrument that fixes the subject-matter, duration, nature and purpose of that processing.",
+      "context": "Regulation (EU) 2016/679 (GDPR) (Consolidated text, EUR-Lex CELEX 32016R0679) is the authority consulted for this route's topic.",
+      "evidenceSections": [
+        {
+          "heading": "What the source establishes",
+          "body": "That sending processing to another party requires a binding instrument that fixes the subject-matter, duration, nature and purpose of that processing.",
+          "locator": "Article 28(3) — processing by a processor governed by a binding contract setting out subject-matter, duration, nature and purpose."
+        },
+        {
+          "heading": "What it does not establish",
+          "body": "Governs the controller-processor relationship. It does not address when escalation is appropriate, and does not make any escalation lawful by itself.",
+          "locator": "Article 28(3) — processing by a processor governed by a binding contract setting out subject-matter, duration, nature and purpose."
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "Governs the controller-processor relationship. It does not address when escalation is appropriate, and does not make any escalation lawful by itself.",
+        "No route-specific search demand is observed; demand remains unknown."
+      ],
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does Regulation (EU) 2016/679 (GDPR) state about cloud-escalation?",
+        "Which exact locator in that source supports the claim on this page?",
+        "What does this source explicitly not establish about cloud-escalation?",
+        "Which canonical definition does this route depend on, and where is it owned?",
+        "What would have to be inspected before this page could claim more than it does?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:consent:cloud-escalation"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:consent"
+        }
+      ],
+      "citations": [
+        {
+          "inspectionId": "tr13-src-023",
+          "sourceIdentity": "Regulation (EU) 2016/679 (GDPR)",
+          "stableUrl": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32016R0679",
+          "locator": "Article 28(3) — processing by a processor governed by a binding contract setting out subject-matter, duration, nature and purpose."
+        }
+      ],
+      "evidenceMetadata": {
+        "sourceClass": "statutory-instrument",
+        "independence": "independent-of-maha",
+        "inspectionDepth": "targeted-article-read",
+        "reuseBasis": "EUR-Lex reuse policy permits reproduction with acknowledgement; summarised here.",
+        "demandEvidence": "unknown"
+      },
+      "expectedCanonicalDependencies": [
+        {
+          "conceptId": "urn:maha:concept:consent:cloud-escalation",
+          "owner": "maha-os",
+          "state": "live"
+        }
+      ],
+      "boundary": "A specification is not a route, a release, or a public page."
+    },
+    {
+      "candidateId": "cand_b592a7bacc1bf3f58033902f",
+      "canonicalUrl": "https://www.maha-os.com/knowledge/private-machine-systems/user-revocation/definition",
+      "owningProperty": "maha-os",
+      "routeRole": "definition",
+      "directAnswer": "That a data subject may withdraw consent at any time without affecting the lawfulness of processing before withdrawal, and may obtain erasure of personal data without undue delay on the stated grounds.",
+      "context": "Regulation (EU) 2016/679 (General Data Protection Regulation) (Consolidated text, EUR-Lex CELEX 32016R0679) is the authority consulted for this route's topic.",
+      "evidenceSections": [
+        {
+          "heading": "What the source establishes",
+          "body": "That a data subject may withdraw consent at any time without affecting the lawfulness of processing before withdrawal, and may obtain erasure of personal data without undue delay on the stated grounds.",
+          "locator": "Article 7(3) (withdrawal of consent); Article 17(1) (right to erasure)."
+        },
+        {
+          "heading": "What it does not establish",
+          "body": "States the right and its conditions. It does not specify any technical mechanism for revocation, does not determine whether a given system is compliant, and is not legal advice.",
+          "locator": "Article 7(3) (withdrawal of consent); Article 17(1) (right to erasure)."
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "States the right and its conditions. It does not specify any technical mechanism for revocation, does not determine whether a given system is compliant, and is not legal advice.",
+        "No route-specific search demand is observed; demand remains unknown."
+      ],
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does Regulation (EU) 2016/679 (General Data Protection Regulation) state about user-revocation?",
+        "Which exact locator in that source supports the claim on this page?",
+        "What does this source explicitly not establish about user-revocation?",
+        "Which canonical definition does this route depend on, and where is it owned?",
+        "What would have to be inspected before this page could claim more than it does?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:consent:user-revocation"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:consent"
+        }
+      ],
+      "citations": [
+        {
+          "inspectionId": "tr13-src-008",
+          "sourceIdentity": "Regulation (EU) 2016/679 (General Data Protection Regulation)",
+          "stableUrl": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32016R0679",
+          "locator": "Article 7(3) (withdrawal of consent); Article 17(1) (right to erasure)."
+        }
+      ],
+      "evidenceMetadata": {
+        "sourceClass": "statutory-instrument",
+        "independence": "independent-of-maha",
+        "inspectionDepth": "targeted-article-read",
+        "reuseBasis": "EUR-Lex reuse policy permits reproduction with source acknowledgement; summarised here rather than reproduced.",
+        "demandEvidence": "unknown"
+      },
+      "expectedCanonicalDependencies": [
+        {
+          "conceptId": "urn:maha:concept:consent:user-revocation",
+          "owner": "maha-os",
+          "state": "live"
+        }
+      ],
+      "boundary": "A specification is not a route, a release, or a public page."
+    },
+    {
       "candidateId": "cand_bac6be3a43a1c8b707e51f04",
       "canonicalUrl": "https://research.mahastrategies.com/federation/research/random-seed/machine-record",
       "owningProperty": "maha-research",
@@ -1453,6 +2212,144 @@
           "conceptId": "urn:maha:concept:evidence:random-seed",
           "owner": "maha-research",
           "state": "satisfied-by-earlier-tranche"
+        }
+      ],
+      "boundary": "A specification is not a route, a release, or a public page."
+    },
+    {
+      "candidateId": "cand_c87bc84e2db2ffd9e3c1ba16",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/standards-and-conformity/definition",
+      "owningProperty": "maha-policy",
+      "routeRole": "definition",
+      "directAnswer": "That conformity assessment is the demonstration that specified requirements relating to a product, process, system, person or body are fulfilled, and that it includes testing, inspection, certification and the accreditation of the bodies performing those activities.",
+      "context": "NIST Special Publication 2000-01, ABC's of Conformity Assessment (NIST SP 2000-01) is the authority consulted for this route's topic.",
+      "evidenceSections": [
+        {
+          "heading": "What the source establishes",
+          "body": "That conformity assessment is the demonstration that specified requirements relating to a product, process, system, person or body are fulfilled, and that it includes testing, inspection, certification and the accreditation of the bodies performing those activities.",
+          "locator": "Definition paragraph quoting ISO/IEC 17000, and the following paragraph enumerating testing, inspection, certification and accreditation."
+        },
+        {
+          "heading": "What it does not establish",
+          "body": "Describes the field. It does not accredit anyone, does not establish that any particular assessment is adequate, and does not substitute for the ISO/IEC 17000 text it quotes.",
+          "locator": "Definition paragraph quoting ISO/IEC 17000, and the following paragraph enumerating testing, inspection, certification and accreditation."
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "Describes the field. It does not accredit anyone, does not establish that any particular assessment is adequate, and does not substitute for the ISO/IEC 17000 text it quotes.",
+        "No route-specific search demand is observed; demand remains unknown."
+      ],
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does NIST Special Publication 2000-01, ABC's of Conformity Assessment state about standards-and-conformity?",
+        "Which exact locator in that source supports the claim on this page?",
+        "What does this source explicitly not establish about standards-and-conformity?",
+        "Which canonical definition does this route depend on, and where is it owned?",
+        "What would have to be inspected before this page could claim more than it does?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:standards-and-conformity"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "citations": [
+        {
+          "inspectionId": "tr13-src-013",
+          "sourceIdentity": "NIST Special Publication 2000-01, ABC's of Conformity Assessment",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.2000-01.pdf",
+          "locator": "Definition paragraph quoting ISO/IEC 17000, and the following paragraph enumerating testing, inspection, certification and accreditation."
+        }
+      ],
+      "evidenceMetadata": {
+        "sourceClass": "government-standards-body",
+        "independence": "independent-of-maha",
+        "inspectionDepth": "targeted-section-read",
+        "reuseBasis": "US government work; bounded original summary with attribution.",
+        "demandEvidence": "unknown"
+      },
+      "expectedCanonicalDependencies": [
+        {
+          "conceptId": "urn:maha:concept:governance:standards-and-conformity",
+          "owner": "maha-policy",
+          "state": "live"
+        }
+      ],
+      "boundary": "A specification is not a route, a release, or a public page."
+    },
+    {
+      "candidateId": "cand_de94f0d7ae2227b6979eac5c",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/machine-authorship-disclosure/definition",
+      "owningProperty": "agentic-publishing",
+      "routeRole": "definition",
+      "directAnswer": "That the taxonomy enumerates roles for human contributors to a scholarly work.",
+      "context": "CRediT — Contributor Roles Taxonomy (ANSI/NISO Z39.104) (Approved as an ANSI/NISO standard in 2022) is the authority consulted for this route's topic.",
+      "evidenceSections": [
+        {
+          "heading": "What the source establishes",
+          "body": "That the taxonomy enumerates roles for human contributors to a scholarly work.",
+          "locator": "Summary table of the fourteen contributor roles."
+        },
+        {
+          "heading": "What it does not establish",
+          "body": "It does not address machine or model contribution, and must not be read as authorising a machine to be listed as a contributor. Inspected because it is the nearest applicable standard, and it does not reach the question this route asks.",
+          "locator": "Summary table of the fourteen contributor roles."
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "It does not address machine or model contribution, and must not be read as authorising a machine to be listed as a contributor. Inspected because it is the nearest applicable standard, and it does not reach the question this route asks.",
+        "No route-specific search demand is observed; demand remains unknown."
+      ],
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does CRediT — Contributor Roles Taxonomy (ANSI/NISO Z39.104) state about machine-authorship-disclosure?",
+        "Which exact locator in that source supports the claim on this page?",
+        "What does this source explicitly not establish about machine-authorship-disclosure?",
+        "Which canonical definition does this route depend on, and where is it owned?",
+        "What would have to be inspected before this page could claim more than it does?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:release:machine-authorship-disclosure"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:release"
+        }
+      ],
+      "citations": [
+        {
+          "inspectionId": "tr13-src-011",
+          "sourceIdentity": "CRediT — Contributor Roles Taxonomy (ANSI/NISO Z39.104)",
+          "stableUrl": "https://credit.niso.org/",
+          "locator": "Summary table of the fourteen contributor roles."
+        }
+      ],
+      "evidenceMetadata": {
+        "sourceClass": "consensus-standard",
+        "independence": "independent-of-maha",
+        "inspectionDepth": "full-page-read",
+        "reuseBasis": "Licensed CC-BY 4.0. Summarised rather than copied.",
+        "demandEvidence": "unknown"
+      },
+      "expectedCanonicalDependencies": [
+        {
+          "conceptId": "urn:maha:concept:release:machine-authorship-disclosure",
+          "owner": "agentic-publishing",
+          "state": "live"
         }
       ],
       "boundary": "A specification is not a route, a release, or a public page."
@@ -1872,5 +2769,5 @@
       "boundary": "A specification is not a route, a release, or a public page."
     }
   ],
-  "provenanceDigest": "sha256:a5a54ca584847f778f77aa54d721dab36bc90a2a6ba64dda83adc7ab3d0ec368"
+  "provenanceDigest": "sha256:e06ba0858ed6c0f6ad3411dcbf8efff1efd342fdfe364c554903f1bc995e5b32"
 }

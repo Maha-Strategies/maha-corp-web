@@ -10,8 +10,8 @@ Reviewed, not published. No route, release, sitemap entry or public page was cre
 | Topics in cohort | 15 |
 | Topics inspected | 4 |
 | Distinct sources | 3 |
-| Specifications | 4 |
-| Bounded questions | 20 |
+| Specifications | 6 |
+| Bounded questions | 30 |
 | Dependencies missing | 0 |
 | Prerequisites selected | 3 |
 | Projected Tranche 16 unlocks | 6 |
@@ -20,9 +20,8 @@ Reviewed, not published. No route, release, sitemap entry or public page was cre
 
 | State | Candidates |
 |---|---|
-| `blocked` | 21 |
-| `evidence-ready` | 4 |
-| `revise` | 3 |
+| `blocked` | 22 |
+| `evidence-ready` | 6 |
 
 ## Dependency-first selection, and its ceiling
 

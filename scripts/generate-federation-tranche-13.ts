@@ -22,6 +22,7 @@ import {
   PROPORTIONAL_TARGET, resolveDependency, selectCohort, topicOf,
   type Candidate,
 } from '../lib/federation/tranche-13-selection.ts'
+import { summariseRepair, withRepairedContract } from '../lib/federation/contract-repair.ts'
 
 const OUT = 'content/federation'
 const FROZEN_ON = '2026-09-06'
@@ -56,7 +57,12 @@ for (const t of priorCohortFiles) {
   }
 }
 
-const remaining = map.candidates.filter((c) => !covered.has(c.candidateId) && !superseded.has(c.candidateId))
+// The definition-role contract repair, applied before selection. All 169
+// definition candidates sit on the property that owns the concept, so the
+// contract was mislabelled rather than the role. See contract-repair.ts.
+const repairSummary = summariseRepair(map.candidates)
+const repaired = map.candidates.map(withRepairedContract)
+const remaining = repaired.filter((c) => !covered.has(c.candidateId) && !superseded.has(c.candidateId))
 const selection = selectCohort(remaining)
 const cohort = selection.selected
 const cohortIds = new Set(cohort.map((c) => c.candidateId))
@@ -68,7 +74,7 @@ for (const c of map.candidates) {
   if (c.routeRole !== 'definition') continue
   definitionsByConcept.set(c.conceptId, [...(definitionsByConcept.get(c.conceptId) ?? []), c])
 }
-const reviewedConcepts = new Set(map.candidates.filter((c) => covered.has(c.candidateId)).map((c) => c.conceptId))
+const reviewedConcepts = new Set(repaired.filter((c) => covered.has(c.candidateId)).map((c) => c.conceptId))
 
 const dependencies = cohort.map((c) => ({
   candidateId: c.candidateId,
@@ -707,6 +713,20 @@ const write = (name: string, body: Record<string, unknown>) => {
   writeFileSync(`${OUT}/federation-tranche-13-${name}-v1.json`, `${JSON.stringify(artifact, null, 2)}\n`)
   return artifact.provenanceDigest
 }
+
+write('contract-repair', {
+  schemaVersion: `${SCHEMA}-contract-repair/1.0`,
+  frozenOn: FROZEN_ON,
+  defect:
+    'Route role `definition` declared against contract role `owner-application`, whose boundary reads "may apply; ' +
+    'cannot redefine". A definition page must own its concept, so the two cannot both be correct.',
+  diagnosis:
+    'All 169 definition-role candidates in the frozen map sit on the property that owns the concept they define. ' +
+    'The role is correct and the contract is not; the map has no canonical-owner role at all.',
+  frozenMapUntouched:
+    'The map is not rewritten. Its digest is bound into every tranche artifact including Tranches 1-12.',
+  counts: repairSummary,
+})
 
 const cohortDigests = write('cohort', {
   schemaVersion: `${SCHEMA}-cohort/1.0`,

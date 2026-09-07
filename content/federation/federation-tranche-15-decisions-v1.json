@@ -6,14 +6,12 @@
   "counts": {
     "total": 100,
     "byFinalState": {
-      "blocked": 79,
-      "evidence-ready": 16,
-      "revise": 5
+      "blocked": 84,
+      "evidence-ready": 16
     },
     "bySemanticResult": {
       "blocked on ownership or dependency": 32,
-      "distinct": 63,
-      "revise boundary": 5
+      "distinct": 68
     }
   },
   "decisions": [
@@ -145,7 +143,7 @@
     },
     {
       "candidateId": "cand_179532c8e9ca588df1721a70",
-      "candidateDigest": "sha256:3f7384853c81788918668d75368e328027f584d605fde5344f95a44957cb1baf",
+      "candidateDigest": "sha256:f505ac8f4bcb4709a671b8be1a46aeac5dbc00eec799b74c9c5a8ee580b76ba3",
       "path": "/concepts/machine-civilization/definition",
       "siteId": "mayone-maharajan",
       "topic": "machine-civilization",
@@ -153,9 +151,9 @@
       "conceptId": "urn:maha:concept:autonomy:machine-civilization",
       "declaredOwner": "mayone-maharajan",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision rather than a review finding."
+      "semanticResult": "distinct",
+      "finalState": "blocked",
+      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"machine-civilization\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
     },
     {
       "candidateId": "cand_18e131fa8cc1db3982cb3add",
@@ -369,7 +367,7 @@
     },
     {
       "candidateId": "cand_441e5732a2f8748e1ba5bc29",
-      "candidateDigest": "sha256:a8723201f09c84e78bc2eb2c5a2e827cd027fecd83f8b74be6cffd9ac7c360e3",
+      "candidateDigest": "sha256:d20fbc31fd100fa27c67ec1c9a91f2cbf2d519a888314e44742e968683a26cb1",
       "path": "/policy/traceability/definition",
       "siteId": "maha-policy",
       "topic": "traceability",
@@ -377,9 +375,9 @@
       "conceptId": "urn:maha:concept:governance:traceability",
       "declaredOwner": "maha-policy",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision rather than a review finding."
+      "semanticResult": "distinct",
+      "finalState": "blocked",
+      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"traceability\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
     },
     {
       "candidateId": "cand_457721881f95e53782806bb6",
@@ -565,7 +563,7 @@
     },
     {
       "candidateId": "cand_6010d2716a2fcb9da4be22ef",
-      "candidateDigest": "sha256:66854023c116b9cbdb798d6e655d53f8e6d4a8d7f78e168f2a42fc9d0d6cd7b3",
+      "candidateDigest": "sha256:3d52124f081a3acea5546d580c86786863e9487cf1af8db459dd5c6bff6c4b0f",
       "path": "/policy/interoperability/definition",
       "siteId": "maha-policy",
       "topic": "interoperability",
@@ -573,9 +571,9 @@
       "conceptId": "urn:maha:concept:governance:interoperability",
       "declaredOwner": "maha-policy",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision rather than a review finding."
+      "semanticResult": "distinct",
+      "finalState": "blocked",
+      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"interoperability\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
     },
     {
       "candidateId": "cand_6127ae52abc48ec8dc905aea",
@@ -1251,7 +1249,7 @@
     },
     {
       "candidateId": "cand_e1bb56f16f7230ef6dd832a6",
-      "candidateDigest": "sha256:da587ec41e0b71b43a335ec8dc9dd436581dc5b46fd18ffd29f6280ac25253db",
+      "candidateDigest": "sha256:0bdc4de38f8c1a3bcb3fa79de282a76b7c1da0419bbe8b306bb9f7b290f95315",
       "path": "/policy/incident-reporting/definition",
       "siteId": "maha-policy",
       "topic": "incident-reporting",
@@ -1259,9 +1257,9 @@
       "conceptId": "urn:maha:concept:governance:incident-reporting",
       "declaredOwner": "maha-policy",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision rather than a review finding."
+      "semanticResult": "distinct",
+      "finalState": "blocked",
+      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"incident-reporting\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
     },
     {
       "candidateId": "cand_e3921066edee31291c7f4712",
@@ -1363,7 +1361,7 @@
     },
     {
       "candidateId": "cand_efdc881d2b8c3990ae4bc643",
-      "candidateDigest": "sha256:bb8b5318684e5ac652c0db67119e3233ec45762bd552bf17c6a9f0332f4bc533",
+      "candidateDigest": "sha256:8464e89cebef9cf6f687de6eb838ad00a863db48215adc1bb1e594b6b27f5532",
       "path": "/policy/intellectual-property/definition",
       "siteId": "maha-policy",
       "topic": "intellectual-property",
@@ -1371,9 +1369,9 @@
       "conceptId": "urn:maha:concept:governance:intellectual-property",
       "declaredOwner": "maha-policy",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision rather than a review finding."
+      "semanticResult": "distinct",
+      "finalState": "blocked",
+      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"intellectual-property\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
     },
     {
       "candidateId": "cand_f2d40776c02061fd82af4f0d",
@@ -1418,5 +1416,5 @@
       "reason": "No definition candidate exists for urn:maha:concept:computation:error-budgets on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
     }
   ],
-  "provenanceDigest": "sha256:4253c209b66c604b3a34e7b7aa82422b12c763a37b99e467c0bda3b23c87db76"
+  "provenanceDigest": "sha256:965a13cc671db99a65528017ce6b7dc7a74f620f27589d5ead25897e48b70ee7"
 }

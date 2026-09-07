@@ -3,8 +3,8 @@
   "frozenOn": "2026-09-06",
   "rule": "Specifications exist only for evidence-ready candidates. A blocked, revised or duplicative candidate cannot receive one.",
   "counts": {
-    "specifications": 32,
-    "boundedQuestions": 160
+    "specifications": 33,
+    "boundedQuestions": 165
   },
   "specifications": [
     {
@@ -1424,6 +1424,65 @@
       "boundary": "A specification. Not a route, a release or a public page."
     },
     {
+      "candidateId": "cand_c8c793b4bcb56617c0bc4d63",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/auditability/definition",
+      "owningProperty": "maha-policy",
+      "conceptId": "urn:maha:concept:governance:auditability",
+      "routeRole": "definition",
+      "directAnswer": "Auditability — Definition: Understand Auditability through the definition lens in Policy Clearing on policy.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:governance:auditability under the canonical-owner contract. The canonical definition remains with maha-policy.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "NIST SP 800-53 Rev. 5, Security and Privacy Controls for Information Systems and Organizations",
+          "locator": "Control AU-2 (Event Logging), items a and b.",
+          "supports": "That auditability begins with identifying which event types a system is capable of logging in support of the audit function, and coordinating that logging with the parties who need audit-related information."
+        }
+      ],
+      "limitations": [
+        "A control catalogue. It does not state that any system is auditable, does not select events for any deployment, and confers no assurance by being cited."
+      ],
+      "negativeSpace": "This route is the canonical definition of governance for maha-policy. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does auditability mean in this context, and who owns the definition?",
+        "What does the inspected source establish about auditability, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:auditability"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "NIST SP 800-53 Rev. 5, Security and Privacy Controls for Information Systems and Organizations",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf",
+          "locator": "Control AU-2 (Event Logging), items a and b.",
+          "version": "Revision 5, DOI 10.6028/NIST.SP.800-53r5"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:governance:auditability"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
       "candidateId": "cand_d17718beaa0c8bfbc8f97d8a",
       "canonicalUrl": "https://research.mahastrategies.com/federation/research/author-manuscript/source-contract",
       "owningProperty": "maha-research",
@@ -1896,5 +1955,5 @@
       "boundary": "A specification. Not a route, a release or a public page."
     }
   ],
-  "provenanceDigest": "sha256:a557de6332b9dedcffb256ddefe6066d3975b8666dcbc066411cdb6738cef35f"
+  "provenanceDigest": "sha256:b4966fc26692ff8e7a2266e4e32944f35af36ad5aa03b456cf5c80078ae9b887"
 }

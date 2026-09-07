@@ -6,12 +6,12 @@
   "validations": [
     {
       "candidateId": "cand_635395b41cc580c20ac0c307",
-      "candidateDigest": "sha256:c8b5ae17fe132be8511e99375d11196ed29f22a41c71bc91a674b1288d4120d0",
+      "candidateDigest": "sha256:bccdf55c7c05be21b642f820a0d78f9169a0a8830d3ba656a87020b70c79b1e5",
       "path": "/federation/research/measurement-error/definition",
       "conceptId": "urn:maha:concept:evidence:measurement-error",
       "routeRole": "definition",
       "declaredOwner": "maha-research",
-      "semanticResult": "revise boundary",
+      "semanticResult": "distinct",
       "nearestNeighbour": null,
       "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
       "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
@@ -19,12 +19,12 @@
     },
     {
       "candidateId": "cand_40085923a5197282f4f0252a",
-      "candidateDigest": "sha256:9c1ed79cd445e563e380a054a11b71fbff4f2656866c5426ce92f736fd9f4538",
+      "candidateDigest": "sha256:daf7995c059c98c20d80ba5523a7c43ea1eec5010ff4164315362b3fb242008f",
       "path": "/federation/research/provenance-graph/definition",
       "conceptId": "urn:maha:concept:evidence:provenance-graph",
       "routeRole": "definition",
       "declaredOwner": "maha-research",
-      "semanticResult": "revise boundary",
+      "semanticResult": "distinct",
       "nearestNeighbour": null,
       "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
       "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
@@ -32,12 +32,12 @@
     },
     {
       "candidateId": "cand_8fa40f42d53edd7287d851b1",
-      "candidateDigest": "sha256:453dd638efe0e539d388c3ec67c718340ab89a79028e1047831adab8d996184d",
+      "candidateDigest": "sha256:b777c6f5cad4ee4ec1177dd8159fcf7707364c24e6e097473f7a0341238e79c0",
       "path": "/federation/research/qiskit-circuit/definition",
       "conceptId": "urn:maha:concept:evidence:qiskit-circuit",
       "routeRole": "definition",
       "declaredOwner": "maha-research",
-      "semanticResult": "revise boundary",
+      "semanticResult": "distinct",
       "nearestNeighbour": null,
       "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
       "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
@@ -457,5 +457,5 @@
       "dependencyState": "satisfied-by-earlier-tranche"
     }
   ],
-  "provenanceDigest": "sha256:d088325d9c53e8266864640bde5adf81c5179cbd46a02fd2c15475687f32b0bf"
+  "provenanceDigest": "sha256:9c773cbd26439d104fdf95d4cfc617cc2ec6442ad9156a4ed262b69fbff9d1e5"
 }

@@ -6,13 +6,11 @@
   "counts": {
     "total": 28,
     "byFinalState": {
-      "blocked": 21,
-      "evidence-ready": 4,
-      "revise": 3
+      "blocked": 22,
+      "evidence-ready": 6
     },
     "bySemanticResult": {
-      "distinct": 25,
-      "revise boundary": 3
+      "distinct": 28
     }
   },
   "decisions": [
@@ -74,7 +72,7 @@
     },
     {
       "candidateId": "cand_40085923a5197282f4f0252a",
-      "candidateDigest": "sha256:9c1ed79cd445e563e380a054a11b71fbff4f2656866c5426ce92f736fd9f4538",
+      "candidateDigest": "sha256:daf7995c059c98c20d80ba5523a7c43ea1eec5010ff4164315362b3fb242008f",
       "path": "/federation/research/provenance-graph/definition",
       "siteId": "maha-research",
       "topic": "provenance-graph",
@@ -82,9 +80,9 @@
       "conceptId": "urn:maha:concept:evidence:provenance-graph",
       "declaredOwner": "maha-research",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision rather than a review finding."
+      "semanticResult": "distinct",
+      "finalState": "evidence-ready",
+      "reason": "Dependency resolved (live); source inspected for \"provenance-graph\" with an exact locator and a stated reuse basis."
     },
     {
       "candidateId": "cand_4b35a196452f5653ccaf092a",
@@ -116,7 +114,7 @@
     },
     {
       "candidateId": "cand_635395b41cc580c20ac0c307",
-      "candidateDigest": "sha256:c8b5ae17fe132be8511e99375d11196ed29f22a41c71bc91a674b1288d4120d0",
+      "candidateDigest": "sha256:bccdf55c7c05be21b642f820a0d78f9169a0a8830d3ba656a87020b70c79b1e5",
       "path": "/federation/research/measurement-error/definition",
       "siteId": "maha-research",
       "topic": "measurement-error",
@@ -124,9 +122,9 @@
       "conceptId": "urn:maha:concept:evidence:measurement-error",
       "declaredOwner": "maha-research",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision rather than a review finding."
+      "semanticResult": "distinct",
+      "finalState": "evidence-ready",
+      "reason": "Dependency resolved (live); source inspected for \"measurement-error\" with an exact locator and a stated reuse basis."
     },
     {
       "candidateId": "cand_69be6c48cdea298121802157",
@@ -256,7 +254,7 @@
     },
     {
       "candidateId": "cand_8fa40f42d53edd7287d851b1",
-      "candidateDigest": "sha256:453dd638efe0e539d388c3ec67c718340ab89a79028e1047831adab8d996184d",
+      "candidateDigest": "sha256:b777c6f5cad4ee4ec1177dd8159fcf7707364c24e6e097473f7a0341238e79c0",
       "path": "/federation/research/qiskit-circuit/definition",
       "siteId": "maha-research",
       "topic": "qiskit-circuit",
@@ -264,9 +262,9 @@
       "conceptId": "urn:maha:concept:evidence:qiskit-circuit",
       "declaredOwner": "maha-research",
       "dependencyState": "live",
-      "semanticResult": "revise boundary",
-      "finalState": "revise",
-      "reason": "Route role is \"definition\" but the declared contract is \"owner-application\" with a boundary forbidding redefinition. A definition page must own its concept. Either the role or the contract is wrong, and which one is a product decision rather than a review finding."
+      "semanticResult": "distinct",
+      "finalState": "blocked",
+      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"qiskit-circuit\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
     },
     {
       "candidateId": "cand_9c6ff21cc9ba97753bc29752",
@@ -409,5 +407,5 @@
       "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"alvar-reception\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
     }
   ],
-  "provenanceDigest": "sha256:b773ee081b3b92b16922c3e5121d8eaec0cf4b22671e9f6c84da43eb6b167251"
+  "provenanceDigest": "sha256:8cb14b15e0920966e93c4f035cde16be0343b3967bf6175d10011325bf6f7e0a"
 }
