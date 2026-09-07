@@ -48,7 +48,7 @@ import { FEDERATION_CANONICAL_HOSTS, normalizedRequestHost } from '@/lib/federat
  */
 export const dynamic = 'force-dynamic'
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export async function currentHostSitemap(): Promise<MetadataRoute.Sitemap> {
   const requestHost = normalizedRequestHost((await headers()).get('host'))
   if (FEDERATION_CANONICAL_HOSTS.includes(requestHost as (typeof FEDERATION_CANONICAL_HOSTS)[number]) && requestHost !== 'www.mahastrategies.com') {
     return mergeFederationSitemapRows(federationObservedSitemapRows(requestHost), federationSitemapRows(requestHost))
@@ -554,3 +554,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     federationSitemapRows('www.mahastrategies.com'),
   )
 }
+
+export default currentHostSitemap

@@ -55,6 +55,7 @@ export type FederationRelease = {
   targetContentDigest: string
   sourceManifestDigest: string
   reviewLedgerDigest: string
+  authority: { kind: string; scope: string; authorizedOn: string }
   status: 'active'
   releaseDigest: string
 }
@@ -119,7 +120,10 @@ export function federationPathsMatching(pattern: RegExp): string[] {
 }
 
 export function federationSitemapRows(host: string) {
-  return federationPagesForHost(host).map((page) => ({ url: page.canonicalUrl, lastModified: new Date('2026-09-07') }))
+  return federationPagesForHost(host).map((page) => ({
+    url: page.canonicalUrl,
+    lastModified: new Date(page.release.authority.authorizedOn),
+  }))
 }
 
 export function federationObservedSitemapRows(host: string) {
