@@ -8,12 +8,16 @@ import { buildProvenanceBundle, epistemicProvenancePath, epistemicRecordPath, ep
 import { getActiveEpistemicRecordByPath, getPublicEpistemicRecords } from '@/lib/public-epistemic-releases'
 import { getPublishedSubstantialPage } from '@/lib/substantial-page-public'
 import { mayRenderSubstantialMaterial } from '@/lib/substantial-render-guard'
+import { federationMetadata, federationParams, renderFederationPage } from '@/lib/federation-route-page'
 
 type PageProps = { params: Promise<{ kind: string; slug: string; recordSlug: string }> }
 
 export const dynamicParams = true
 export function generateStaticParams() {
-  return PUBLIC_EPISTEMIC_RECORDS.map((record) => ({ kind: record.domainSlug, slug: recordKindSegment(record), recordSlug: record.slug }))
+  return [
+    ...PUBLIC_EPISTEMIC_RECORDS.map((record) => ({ kind: record.domainSlug, slug: recordKindSegment(record), recordSlug: record.slug })),
+    ...federationParams(/^\/knowledge\/private-machine-systems\/([^/]+)\/([^/]+)$/, ['slug', 'recordSlug']).map((params) => ({ kind: 'private-machine-systems', ...params })),
+  ]
 }
 
 async function resolveRecord(kind: string, slug: string, recordSlug: string) {
@@ -35,6 +39,7 @@ function substantialPageFor(record: NonNullable<Awaited<ReturnType<typeof resolv
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { kind, slug, recordSlug } = await params
+  if (kind === 'private-machine-systems') return federationMetadata(`/knowledge/${kind}/${slug}/${recordSlug}`)
   const record = await resolveRecord(kind, slug, recordSlug)
   if (!record) return {}
   const substantial = substantialPageFor(record)
@@ -51,6 +56,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function EpistemicRecordPage({ params }: PageProps) {
   const { kind, slug, recordSlug } = await params
+  if (kind === 'private-machine-systems') return renderFederationPage(`/knowledge/${kind}/${slug}/${recordSlug}`)
   const record = await resolveRecord(kind, slug, recordSlug)
   if (!record) notFound()
   const domain = getEpistemicDomain(record.domainSlug) ?? {

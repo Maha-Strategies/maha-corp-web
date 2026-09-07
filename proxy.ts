@@ -7,6 +7,7 @@ import { X402_HEADERS, paidRequestHeaders, resolveX402 } from '@/lib/x402/gatewa
 import { metersAtProxy, recordContextCompilerUsage } from '@/lib/context-compiler-metering'
 import { discoverySourceFrom, offerChallengeFor, recordOfferUsage } from '@/lib/x402/offer-telemetry'
 import { privateDeploymentPathDecision } from '@/lib/workflows/deployment-boundary'
+import { federationCanonicalHostForPath, federationHostAllowsPath } from '@/lib/federation-host-routing'
 
 function json(body: unknown, status: number, headers: HeadersInit = {}) {
   return NextResponse.json(body, { status, headers: { ...API_CORS_HEADERS, ...headers } })
@@ -14,6 +15,10 @@ function json(body: unknown, status: number, headers: HeadersInit = {}) {
 
 export async function proxy(request: NextRequest, event: NextFetchEvent) {
   const { pathname } = request.nextUrl
+  const federationHost = federationCanonicalHostForPath(pathname)
+  if (federationHost && !federationHostAllowsPath(request.headers.get('host'), pathname)) {
+    return NextResponse.json({ error: 'Not found.' }, { status: 404, headers: { 'Cache-Control': 'no-store' } })
+  }
   const privateBoundary = privateDeploymentPathDecision(pathname, process.env.ORCHESTRATION_DEPLOYMENT_MODE)
   if (privateBoundary === 'redirect_console') return NextResponse.redirect(new URL('/admin/orchestration', request.url))
   if (privateBoundary === 'deny') return NextResponse.json({ error: 'Not found.' }, { status: 404, headers: { 'Cache-Control': 'no-store' } })
