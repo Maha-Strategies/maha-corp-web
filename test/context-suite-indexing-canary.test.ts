@@ -3,6 +3,7 @@ import test from 'node:test'
 
 import {
   CONTEXT_SUITE_INDEXING_TARGETS,
+  contextSuiteIndexingTargets,
   isContextSuiteTargetIndexed,
 } from '../scripts/run-context-suite-indexing-canaries.ts'
 
@@ -15,6 +16,14 @@ test('the authorized sequence is exactly Budget Ladder then Evidence Matrix', ()
     { offerId: 'evidence-retention-matrix', amount: '50000' },
   ])
   assert.equal(CONTEXT_SUITE_INDEXING_TARGETS.reduce((sum, target) => sum + BigInt(target.amount), BigInt(0)), BigInt(55_000))
+})
+
+test('matrix-only resume excludes the indexed ladder and caps spend at 0.05 USDC', () => {
+  const targets = contextSuiteIndexingTargets(true)
+  assert.deepEqual(targets.map(({ offerId, amount }) => ({ offerId, amount })), [
+    { offerId: 'evidence-retention-matrix', amount: '50000' },
+  ])
+  assert.equal(targets.reduce((sum, target) => sum + BigInt(target.amount), BigInt(0)), BigInt(50_000))
 })
 
 test('Bazaar discovery requires the exact route and payment terms', () => {

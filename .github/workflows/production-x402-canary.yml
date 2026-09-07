@@ -37,6 +37,11 @@ on:
         required: false
         type: string
         default: ''
+      context_suite_resume_matrix_only:
+        description: 'Skip the already-indexed Budget Ladder and purchase only the 0.05 USDC Evidence Matrix.'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -153,6 +158,7 @@ jobs:
       BASE_RPC_URL: ${{ vars.BASE_RPC_URL }}
       CONTEXT_SUITE_INDEXING_OUTPUT_PATH: ${{ github.workspace }}/context-suite-indexing-canary.json
       CONTEXT_SUITE_INDEXING_CONFIRMATION: ${{ inputs.context_suite_confirmation }}
+      CONTEXT_SUITE_INDEXING_RESUME_MATRIX_ONLY: ${{ inputs.context_suite_resume_matrix_only || 'false' }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -160,7 +166,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Purchase and verify Budget Ladder, then Evidence Matrix
+      - name: Purchase and verify the authorized context-suite target
         env:
           X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
         run: node --experimental-strip-types scripts/run-context-suite-indexing-canaries.ts

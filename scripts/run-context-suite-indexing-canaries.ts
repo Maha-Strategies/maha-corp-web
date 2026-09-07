@@ -22,6 +22,7 @@ import {
 } from '../lib/x402/discovery-payment-recipe.ts'
 
 const CONFIRMATION = 'PUBLISHER_FUNDED_INDEX_CONTEXT_LADDER_AND_MATRIX_MAX_0_055_USDC'
+const MATRIX_ONLY_CONFIRMATION = 'PUBLISHER_FUNDED_INDEX_EVIDENCE_MATRIX_MAX_0_050_USDC'
 const MAX_TOTAL_AMOUNT = BigInt(55_000)
 const outputPath = process.env.CONTEXT_SUITE_INDEXING_OUTPUT_PATH?.trim()
 const erc20BalanceAbi = parseAbi(['function balanceOf(address owner) view returns (uint256)'])
@@ -40,6 +41,10 @@ export const CONTEXT_SUITE_INDEXING_TARGETS = [
     buildExpected: buildEvidenceRetentionMatrix,
   },
 ] as const
+
+export function contextSuiteIndexingTargets(matrixOnly: boolean): readonly Target[] {
+  return matrixOnly ? CONTEXT_SUITE_INDEXING_TARGETS.slice(1) : CONTEXT_SUITE_INDEXING_TARGETS
+}
 
 type Target = (typeof CONTEXT_SUITE_INDEXING_TARGETS)[number]
 type StepEvidence = {
@@ -63,8 +68,8 @@ type StepEvidence = {
 
 type Evidence = {
   schemaVersion: 'maha-context-suite-indexing-canary/0.1'
-  authorization: typeof CONFIRMATION
-  maximumAuthorizedBaseUnits: '55000'
+  authorization: typeof CONFIRMATION | typeof MATRIX_ONLY_CONFIRMATION
+  maximumAuthorizedBaseUnits: '55000' | '50000'
   actualSettledBaseUnits: string
   buyer: string
   payee: string
@@ -269,17 +274,21 @@ async function purchase(
 }
 
 async function run(): Promise<void> {
-  if (process.env.CONTEXT_SUITE_INDEXING_CONFIRMATION !== CONFIRMATION) {
-    throw new Error(`Set CONTEXT_SUITE_INDEXING_CONFIRMATION exactly to ${CONFIRMATION}.`)
+  const matrixOnly = process.env.CONTEXT_SUITE_INDEXING_RESUME_MATRIX_ONLY === 'true'
+  const requiredConfirmation = matrixOnly ? MATRIX_ONLY_CONFIRMATION : CONFIRMATION
+  if (process.env.CONTEXT_SUITE_INDEXING_CONFIRMATION !== requiredConfirmation) {
+    throw new Error(`Set CONTEXT_SUITE_INDEXING_CONFIRMATION exactly to ${requiredConfirmation}.`)
   }
+  const targets = contextSuiteIndexingTargets(matrixOnly)
+  const maximum = targets.reduce((sum, target) => sum + BigInt(target.amount), BigInt(0))
   const preflights = []
-  for (const target of CONTEXT_SUITE_INDEXING_TARGETS) preflights.push(await preflight(target))
+  for (const target of targets) preflights.push(await preflight(target))
   const account = loadBuyer()
-  await requireBalance(account, MAX_TOTAL_AMOUNT)
+  await requireBalance(account, maximum)
   const evidence: Evidence = {
     schemaVersion: 'maha-context-suite-indexing-canary/0.1',
-    authorization: CONFIRMATION,
-    maximumAuthorizedBaseUnits: '55000',
+    authorization: requiredConfirmation,
+    maximumAuthorizedBaseUnits: maximum.toString() as Evidence['maximumAuthorizedBaseUnits'],
     actualSettledBaseUnits: '0',
     buyer: account.address,
     payee: MAHA_PAYEE,
@@ -288,7 +297,7 @@ async function run(): Promise<void> {
     startedAt: new Date().toISOString(),
     outcome: 'running',
     classification: 'publisher-funded discovery seeding; not customers, revenue traction, or organic demand',
-    steps: CONTEXT_SUITE_INDEXING_TARGETS.map((target) => ({
+    steps: targets.map((target) => ({
       offerId: target.offerId,
       resource: target.resource,
       classification: 'publisher-funded-indexing-canary',
@@ -301,10 +310,10 @@ async function run(): Promise<void> {
   }
   await writeEvidence(evidence)
 
-  for (let index = 0; index < CONTEXT_SUITE_INDEXING_TARGETS.length; index += 1) {
-    const target = CONTEXT_SUITE_INDEXING_TARGETS[index]!
+  for (let index = 0; index < targets.length; index += 1) {
+    const target = targets[index]!
     try {
-      const remaining = CONTEXT_SUITE_INDEXING_TARGETS.slice(index).reduce((sum, item) => sum + BigInt(item.amount), BigInt(0))
+      const remaining = targets.slice(index).reduce((sum, item) => sum + BigInt(item.amount), BigInt(0))
       await requireBalance(account, remaining)
       await purchase(target, preflights[index]!.input, account, evidence)
     } catch (error) {
@@ -319,7 +328,7 @@ async function run(): Promise<void> {
       throw error
     }
   }
-  if (BigInt(evidence.actualSettledBaseUnits) > MAX_TOTAL_AMOUNT) throw new Error('Settled amount exceeded the authorized maximum.')
+  if (BigInt(evidence.actualSettledBaseUnits) > maximum || maximum > MAX_TOTAL_AMOUNT) throw new Error('Settled amount exceeded the authorized maximum.')
   evidence.outcome = 'complete'
   evidence.completedAt = new Date().toISOString()
   await writeEvidence(evidence)
