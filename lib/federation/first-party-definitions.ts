@@ -421,7 +421,7 @@ export const FIRST_PARTY_DEFINITIONS: readonly FirstPartyDefinition[] = [
       'describes what this system does to its own records, not what a journal owes a reader.',
   },
   {
-    conceptId: 'urn:maha:concept:evidence:reproducibility-fixtures',
+    conceptId: 'urn:maha:concept:computation:reproducibility-fixtures',
     term: 'Reproducibility fixture',
     definition:
       'A synthetic, committed input used to exercise a workflow end to end, so the workflow can be checked without ' +

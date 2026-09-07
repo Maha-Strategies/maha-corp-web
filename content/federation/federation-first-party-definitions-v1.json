@@ -190,7 +190,7 @@
       "notToBeConfusedWith": "Correction and retraction in scholarly publishing (COPE, ICMJE). Same words, different obligations. This describes what this system does to its own records, not what a journal owes a reader."
     },
     {
-      "conceptId": "urn:maha:concept:evidence:reproducibility-fixtures",
+      "conceptId": "urn:maha:concept:computation:reproducibility-fixtures",
       "term": "Reproducibility fixture",
       "definition": "A synthetic, committed input used to exercise a workflow end to end, so the workflow can be checked without customer data and without a live service.",
       "establishes": "That a workflow was exercised against a fixed input whose content is inspectable, and that a caller can tell a fixture from a real record from the data rather than by reading it.",
@@ -285,5 +285,5 @@
     "It does not unblock the 12 refused concepts, and is not intended to.",
     "It does not verify that any locator bears the definition citing it. supportsDefinitionBecause is a stated judgement a reviewer can disagree with; the automated check confirms only that a file exists and that a named symbol is declared in it."
   ],
-  "provenanceDigest": "sha256:b86ebc0997a0e71c49f2d20e421cb88a647389d152d32dfcdbabc5457adddc21"
+  "provenanceDigest": "sha256:0b0c3ef961c26e090d25a25f91a9f5a17f5cc549b5e288ce7e8a9e5f1d66a1e0"
 }

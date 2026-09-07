@@ -1,0 +1,954 @@
+{
+  "schemaVersion": "maha-federation-dependency-reconciliation/2.0",
+  "frozenOn": "2026-09-07",
+  "rule": "A canonical graph object resolves concept identity. Evidence readiness remains a separate state and never transfers to a dependent claim.",
+  "counts": {
+    "priorMissingRecords": 94,
+    "identityResolved": 94,
+    "identityStillMissing": 0,
+    "definitionEvidenceReady": 9
+  },
+  "rows": [
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_02377c9cde28ef6f26525b2a",
+      "conceptId": "urn:maha:concept:evidence:locator-verification",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_6f89066f567226c0e442bb39",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_0e93144f12fa050be40c458a",
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_1677d8e5ffd0adccd70025c9",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_114ff651c020a137c05c0a70",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_3476e38beb1e953348f8d600",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_152bd81a9c3042b26c93ee8f",
+      "conceptId": "urn:maha:concept:evidence:audit-export",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-evidence-ready",
+      "graphObjectId": "cand_99546e87db73ddd7326a34ab",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_16c398dac13cec683a380b28",
+      "conceptId": "urn:maha:concept:evidence:unsupported-inference",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_79d4527b01877f8e8a9cf1ee",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_34d368d3cffc0123319624c3",
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_faa1c9127f42242870c4661a",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_3b1a9ef814c8fd19ae5dd4f3",
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_faa1c9127f42242870c4661a",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_3bd043436f7c9dd07250974b",
+      "conceptId": "urn:maha:concept:evidence:unsupported-inference",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_79d4527b01877f8e8a9cf1ee",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_4732f241656c17cfa80dea46",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_3476e38beb1e953348f8d600",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_4c8e1c0aaa0eb1fb2b0105eb",
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_9d040a84a30d4c24c219709b",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_5025ed02e119fef37e34abfb",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_3476e38beb1e953348f8d600",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_52ba56be784230fe4c5a90d4",
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_eee65fe274335f8de817ecd7",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_54bf0ff5e1dfaa08469e51ad",
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-evidence-ready",
+      "graphObjectId": "cand_f770668f95f1fc5022b10680",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_567977061305bfb171030d13",
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_e9e65aab997734663ea01dc4",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_5fda66506d4caf3a6f10c1d0",
+      "conceptId": "urn:maha:concept:evidence:canonical-release",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_941aed3932712f20f9dad49d",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_76bb498009ae77f248d9b2b3",
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_9d040a84a30d4c24c219709b",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_7c06c37e2399d72dd61ef2bc",
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-evidence-ready",
+      "graphObjectId": "cand_f770668f95f1fc5022b10680",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_7c130ffaab158bfd0ad4df45",
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_eee65fe274335f8de817ecd7",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_7ea97e6389a152a6e06ea440",
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_1677d8e5ffd0adccd70025c9",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_82064d5d886a4f5debe9d0ae",
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_9d040a84a30d4c24c219709b",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_87bc8ff96e129e61197cfe19",
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_eee65fe274335f8de817ecd7",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_af1e13cd58046f3b89fcf312",
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_faa1c9127f42242870c4661a",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_b0b9232e69dc37951ca96a2d",
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_e9e65aab997734663ea01dc4",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_b4bf5d63227ea2a4fed280b1",
+      "conceptId": "urn:maha:concept:evidence:audit-export",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-evidence-ready",
+      "graphObjectId": "cand_99546e87db73ddd7326a34ab",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_c9b1999e391248ee19abc521",
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-evidence-ready",
+      "graphObjectId": "cand_f770668f95f1fc5022b10680",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_d2f94b145cf7db71f092d98f",
+      "conceptId": "urn:maha:concept:evidence:canonical-release",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_941aed3932712f20f9dad49d",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_de47b40f36767f60c101974a",
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_faa1c9127f42242870c4661a",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_e19e8901c36b13c148997e41",
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_1677d8e5ffd0adccd70025c9",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_ec131abe6004e62d84a73718",
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_9d040a84a30d4c24c219709b",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_ec3b866d1dd8cb3b5b4608b0",
+      "conceptId": "urn:maha:concept:evidence:source-recovery",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_a265c5d9ff36ca1b17bfb8a0",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_ec46737935d410443b264871",
+      "conceptId": "urn:maha:concept:evidence:passage-support",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_f8bc85696eedfca72dc83120",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_ee7975f658326487f563d6c1",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_3476e38beb1e953348f8d600",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_ef11e2b421fe9aac0d8c24c3",
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_e9e65aab997734663ea01dc4",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 13,
+      "dependentCandidateId": "cand_f958c961ac3d47800b272d37",
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_e9e65aab997734663ea01dc4",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 14,
+      "dependentCandidateId": "cand_0a13428b731b87a242aa8860",
+      "conceptId": "urn:maha:concept:evidence:conflicting-literature",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_70ca0daa7c7b8f82481ef8bd",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 14,
+      "dependentCandidateId": "cand_0e187bdd3d33afee1b23310d",
+      "conceptId": "urn:maha:concept:evidence:conflicting-literature",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_70ca0daa7c7b8f82481ef8bd",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 14,
+      "dependentCandidateId": "cand_2b4ee754b4b8aa01c89396c8",
+      "conceptId": "urn:maha:concept:evidence:conflicting-literature",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_70ca0daa7c7b8f82481ef8bd",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 14,
+      "dependentCandidateId": "cand_53c217f369e3ea364567364a",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_31188cec0703fe842e52f242",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 14,
+      "dependentCandidateId": "cand_5e120d34f43896e9ddd4c2cd",
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_d93df04cd32791dbcc717955",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 14,
+      "dependentCandidateId": "cand_6e39d7b25fc7f9913e52d052",
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_d93df04cd32791dbcc717955",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 14,
+      "dependentCandidateId": "cand_76a609835bd997daf18d03c9",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_31188cec0703fe842e52f242",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 14,
+      "dependentCandidateId": "cand_777b4bf168156b8720a1c87d",
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_d93df04cd32791dbcc717955",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 14,
+      "dependentCandidateId": "cand_7afab943b366ec1ce0a420f6",
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_fdada5f64f6c5c8b6f218663",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 14,
+      "dependentCandidateId": "cand_90c0ea2f6a833c6e940f0fcb",
+      "conceptId": "urn:maha:concept:evidence:conflicting-literature",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_70ca0daa7c7b8f82481ef8bd",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 14,
+      "dependentCandidateId": "cand_94d3ab89dc9b9a4049cfcc64",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_31188cec0703fe842e52f242",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 14,
+      "dependentCandidateId": "cand_985cbc355b9050f85b926942",
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_fdada5f64f6c5c8b6f218663",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 14,
+      "dependentCandidateId": "cand_9f9fb8e2bddf2c3d845f0735",
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_fdada5f64f6c5c8b6f218663",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 14,
+      "dependentCandidateId": "cand_a84907e8cd7aaeb462975ff0",
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_5abc1a241361feb7e0f36d0d",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 14,
+      "dependentCandidateId": "cand_bbfc84c12e0abb852c57ea7b",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_31188cec0703fe842e52f242",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 14,
+      "dependentCandidateId": "cand_c8942765582ba19ccafd6b7c",
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_d93df04cd32791dbcc717955",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 14,
+      "dependentCandidateId": "cand_d3fd4dd629615b77d72dd7d9",
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_5abc1a241361feb7e0f36d0d",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 14,
+      "dependentCandidateId": "cand_dc250735100e8e76edee974c",
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_5abc1a241361feb7e0f36d0d",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 14,
+      "dependentCandidateId": "cand_dc8070ea994e1058754e5a31",
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_5abc1a241361feb7e0f36d0d",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 14,
+      "dependentCandidateId": "cand_fd914cf4b7855cfa614efb27",
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_fdada5f64f6c5c8b6f218663",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_03638eae89d44b2fcb9b6d10",
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_de8dd0a88e8704fe5855033e",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_0eff8a7f07532fcb14af59f2",
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_4e3ffcedfa7d51607e56c384",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_1c9d1d2ca8af857b87a76813",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_25c680ff193b4f35f49e96ae",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_3492801bafa20e3d50408a8e",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_25c680ff193b4f35f49e96ae",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_384ee3f7a26eb546e6e0c053",
+      "conceptId": "urn:maha:concept:computation:reproducibility-fixtures",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_be8600b5f02aea927f745c11",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_457721881f95e53782806bb6",
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_0d9b1a88cbf93d413a243d71",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_51fe56a2bfa94898ecb30609",
+      "conceptId": "urn:maha:concept:computation:error-budgets",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-evidence-ready",
+      "graphObjectId": "cand_aaf26e116535a7269e150c81",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_558c29e71ada643b2d7f7270",
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_de8dd0a88e8704fe5855033e",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_5d2d5c52fc91b9ecce7bb007",
+      "conceptId": "urn:maha:concept:computation:optimization",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_9e9edd5648c41382537f568c",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_5da47ae131bd50c28a964e74",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_25c680ff193b4f35f49e96ae",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_6708f2125c704c598a373d02",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_c1e0a9d1956d137e337cae16",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_6a8af21d891464188c29dbb8",
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_a563c1dcade1fa354b9069fa",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_6af09a682cc7e2277169d046",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_c1e0a9d1956d137e337cae16",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_7168a05d58662e49b6826c7e",
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_908638ce5ea422d98d5273fb",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_75a83140ef750c18da69801d",
+      "conceptId": "urn:maha:concept:computation:error-budgets",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-evidence-ready",
+      "graphObjectId": "cand_aaf26e116535a7269e150c81",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_7cec457fac2ac6a5b7839c9a",
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_a563c1dcade1fa354b9069fa",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_89ca2d8582ec5fdfd70701bd",
+      "conceptId": "urn:maha:concept:computation:reproducibility-fixtures",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_be8600b5f02aea927f745c11",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_9b067b11b9941116008a6a34",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_c1e0a9d1956d137e337cae16",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_a24840e1b41dabdf0d8312b2",
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_a563c1dcade1fa354b9069fa",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_a635802d1b21eb2ac591b5f9",
+      "conceptId": "urn:maha:concept:computation:error-budgets",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-evidence-ready",
+      "graphObjectId": "cand_aaf26e116535a7269e150c81",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_ac614aab7eb9cc394996553b",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_c1e0a9d1956d137e337cae16",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_b47015c81e7f03093bca4044",
+      "conceptId": "urn:maha:concept:computation:reproducibility-fixtures",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_be8600b5f02aea927f745c11",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_c9ea7b1ca4cbc881270bd35c",
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_e41cfa0c9ad358c43c72d1ee",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_cc82c7609bf44bee9a8a3966",
+      "conceptId": "urn:maha:concept:computation:reproducibility-fixtures",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_be8600b5f02aea927f745c11",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_cd30fe8a10e733f835d60834",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_25c680ff193b4f35f49e96ae",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_d06946e7b842a6b692144ebf",
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_0d9b1a88cbf93d413a243d71",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_dd951c2a4e39f3756f7ee6f9",
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_908638ce5ea422d98d5273fb",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_de495ad3d3b6cbad65c2537a",
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_4e3ffcedfa7d51607e56c384",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_e3921066edee31291c7f4712",
+      "conceptId": "urn:maha:concept:computation:numerical-integration",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_2cb4942c45f1804543a91a4a",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_e6913e5b1d6155dcbe056b6a",
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_a563c1dcade1fa354b9069fa",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_f2d40776c02061fd82af4f0d",
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_e41cfa0c9ad358c43c72d1ee",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 15,
+      "dependentCandidateId": "cand_fc4da46d837d7b134b3d488f",
+      "conceptId": "urn:maha:concept:computation:error-budgets",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-evidence-ready",
+      "graphObjectId": "cand_aaf26e116535a7269e150c81",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 16,
+      "dependentCandidateId": "cand_4ca1eef82246da3174e34e17",
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_d90b7197535681a502dccba9",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 16,
+      "dependentCandidateId": "cand_5ace7cc1e1287874f505c134",
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_d90b7197535681a502dccba9",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 16,
+      "dependentCandidateId": "cand_67328511b3565384d1f5240c",
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_d90b7197535681a502dccba9",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 16,
+      "dependentCandidateId": "cand_bf6f5983b7e8f95b5f2fb564",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_a870823d00f81a9a4854f848",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 16,
+      "dependentCandidateId": "cand_d9bccf96502cbf09b7d6e882",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_a870823d00f81a9a4854f848",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 16,
+      "dependentCandidateId": "cand_eb0fd7680849180edc43bdcd",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_a870823d00f81a9a4854f848",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 16,
+      "dependentCandidateId": "cand_ec90d506fb510c60080a8494",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_a870823d00f81a9a4854f848",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    },
+    {
+      "tranche": 16,
+      "dependentCandidateId": "cand_fcea33351dc6b5ed02dac901",
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "declaredOwner": "maha-research",
+      "identityState": "resolved-to-graph-object",
+      "evidenceState": "definition-not-evidence-ready",
+      "graphObjectId": "cand_d90b7197535681a502dccba9",
+      "boundary": "Identity resolution does not inherit evidence or make the dependent candidate publishable."
+    }
+  ],
+  "provenanceDigest": "sha256:dd230005fb9fc1990587323f4a66e6f704f069472ff267043be8688e637eecff"
+}
