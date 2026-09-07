@@ -36,7 +36,7 @@ concurrency:
 jobs:
   settle:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 45
     environment:
       name: production-x402-canary
       url: https://www.mahastrategies.com/api/v1/mps/audit
@@ -105,6 +105,13 @@ jobs:
         env:
           X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
         run: npm run verify:mps-production
+
+      # No signing key is present in this step. Bazaar ingestion is eventually
+      # consistent, so a bounded catalog miss preserves the verified settlement
+      # as pending rather than failing the paid operation or inviting a retry.
+      - name: Observe Bazaar indexing without payment
+        if: ${{ success() }}
+        run: node --experimental-strip-types scripts/poll-mps-bazaar-indexing.ts
 
       - name: Report
         if: always()

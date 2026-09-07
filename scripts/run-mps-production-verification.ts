@@ -48,7 +48,12 @@ async function readJson(response: Response): Promise<Json> {
 }
 
 export async function run(): Promise<void> {
-  const evidence: Json = { subject: SUBJECT, startedAt: new Date().toISOString() }
+  const evidence: Json = {
+    subject: SUBJECT,
+    startedAt: new Date().toISOString(),
+    classification: 'publisher-funded-indexing-canary; not customer demand, revenue traction, or organic traffic',
+    outcome: 'running',
+  }
 
   // --- 1. Free challenge, asserted before the key is used -------------------
   const challenge = await readJson(await fetch(SUBJECT, {
@@ -185,10 +190,14 @@ export async function run(): Promise<void> {
     throw new Error(`An identical replay produced a different job (${String(replayBody.auditId)}); it would have been charged twice.`)
   }
 
-  evidence.outcome = 'verified'
+  // Settlement and delivery are complete at this point. Bazaar ingestion is
+  // eventually consistent and is observed by a separate read-only step. A
+  // short catalog delay must never turn a completed payment into an apparent
+  // failure or invite a second authorization.
+  evidence.outcome = 'settled_and_verified_pending_index'
   evidence.finishedAt = new Date().toISOString()
   await writeFile('mps-verification.json', `${JSON.stringify(evidence, null, 2)}\n`, 'utf8')
-  console.log('\nVerified: one settlement, job delivered, retrieval free, replay charged nothing.')
+  console.log('\nVerified: one settlement, job delivered, retrieval free, replay charged nothing. Bazaar indexing is pending read-only observation.')
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
