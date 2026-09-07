@@ -1,0 +1,2066 @@
+{
+  "schemaVersion": "maha-federation-readiness-tranche-27-decisions/1.0",
+  "frozenOn": "2026-09-07",
+  "appendOnly": true,
+  "counts": {
+    "candidates": 36,
+    "evidenceReady": 36,
+    "revise": 0,
+    "blocked": 0
+  },
+  "decisions": [
+    {
+      "candidateId": "cand_07c0afa06dc081ac6d3de371",
+      "candidateDigest": "sha256:7fcb75caa3e29d2ae8c91002a0e70860124114575d5cff858200a2a3072d7678",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:aphrodite-venus",
+      "siteId": "maha-strategies",
+      "routeRole": "epithet-and-cult",
+      "path": "/knowledge/religion/mythology/greek-roman/aphrodite-venus/epithet-and-cult",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-aphrodite-venus"
+        ],
+        "exactLocator": "s.v. “Aphrodite, called Venus,” pp. 41–42; scan PDF pages 51–52",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Describe an epithet, sanctuary, rite, place, and period only where the inspected source locates it; no local title or practice becomes a universal definition of the deity.",
+        "nonOverlapFinding": "Unlike the sibling identity and reception routes, this route is restricted to located titles, practices, sanctuaries, places, and periods."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact epithet-and-cult route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_4fe17b4867f9be0fe42ca201",
+      "candidateDigest": "sha256:601f8c5550b27bd6be709cb58e9c4b2f3e9356cb34047b89387d4c69cb6f75ca",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:aphrodite-venus",
+      "siteId": "maha-strategies",
+      "routeRole": "reception-and-comparison",
+      "path": "/knowledge/religion/mythology/greek-roman/aphrodite-venus/reception-and-comparison",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-aphrodite-venus"
+        ],
+        "exactLocator": "s.v. “Aphrodite, called Venus,” pp. 41–42; scan PDF pages 51–52",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Separate ancient Greek evidence, Roman reception, and later artistic or literary reception; similarity of function never proves identity or common origin.",
+        "nonOverlapFinding": "Unlike source-identity and cult routes, this route describes a later reception or an explicitly framed comparison without retroactive identity claims."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact reception-and-comparison route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_d16bd0aeeef4d38b1bfb0f2d",
+      "candidateDigest": "sha256:330bcbb7290e78aa277ef7b309391bbd28449dea682948eb91bce46c0134fd1d",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:aphrodite-venus",
+      "siteId": "maha-strategies",
+      "routeRole": "source-identity",
+      "path": "/knowledge/religion/mythology/greek-roman/aphrodite-venus/source-identity",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-aphrodite-venus"
+        ],
+        "exactLocator": "s.v. “Aphrodite, called Venus,” pp. 41–42; scan PDF pages 51–52",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Identify the named Greek and Roman figures only through explicit ancient or scholarly source relationships; translation, interpretatio Romana, adoption, and later equivalence remain different propositions.",
+        "nonOverlapFinding": "Unlike the sibling cult and reception routes, this route asks which named sources relate the identities and what kind of relationship they assert."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact source-identity route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_6d6798d9c9117b48e2326867",
+      "candidateDigest": "sha256:6e49db222ef9e95430b134d99ac73e1484d59ffce0f195b6dc75cad40ac2298f",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:apollo",
+      "siteId": "maha-strategies",
+      "routeRole": "epithet-and-cult",
+      "path": "/knowledge/religion/mythology/greek-roman/apollo/epithet-and-cult",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-apollo"
+        ],
+        "exactLocator": "s.v. “Apollo,” pp. 42–43; scan PDF pages 52–53",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Describe an epithet, sanctuary, rite, place, and period only where the inspected source locates it; no local title or practice becomes a universal definition of the deity.",
+        "nonOverlapFinding": "Unlike the sibling identity and reception routes, this route is restricted to located titles, practices, sanctuaries, places, and periods."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact epithet-and-cult route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_df0ee499e037d3b87aae35e3",
+      "candidateDigest": "sha256:53f1bbdb6702afa6418969c7984b6d4078d36b9ced208e0a166bfc3db1eded7a",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:apollo",
+      "siteId": "maha-strategies",
+      "routeRole": "reception-and-comparison",
+      "path": "/knowledge/religion/mythology/greek-roman/apollo/reception-and-comparison",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-apollo"
+        ],
+        "exactLocator": "s.v. “Apollo,” pp. 42–43; scan PDF pages 52–53",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Separate ancient Greek evidence, Roman reception, and later artistic or literary reception; similarity of function never proves identity or common origin.",
+        "nonOverlapFinding": "Unlike source-identity and cult routes, this route describes a later reception or an explicitly framed comparison without retroactive identity claims."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact reception-and-comparison route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_d875bbf4cdca9e19b0548805",
+      "candidateDigest": "sha256:9ff2a78e0777df6dd02aa78dcb447cd9292664fa7de64d6234b347a3d2930b3e",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:apollo",
+      "siteId": "maha-strategies",
+      "routeRole": "source-identity",
+      "path": "/knowledge/religion/mythology/greek-roman/apollo/source-identity",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-apollo"
+        ],
+        "exactLocator": "s.v. “Apollo,” pp. 42–43; scan PDF pages 52–53",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Identify the named Greek and Roman figures only through explicit ancient or scholarly source relationships; translation, interpretatio Romana, adoption, and later equivalence remain different propositions.",
+        "nonOverlapFinding": "Unlike the sibling cult and reception routes, this route asks which named sources relate the identities and what kind of relationship they assert."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact source-identity route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_45e1b857bfff8e7668400b82",
+      "candidateDigest": "sha256:7909e2986c9795647dec376a108075acece245ccea396991a4207fa2b404b94d",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:ares-mars",
+      "siteId": "maha-strategies",
+      "routeRole": "epithet-and-cult",
+      "path": "/knowledge/religion/mythology/greek-roman/ares-mars/epithet-and-cult",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-ares-mars"
+        ],
+        "exactLocator": "s.v. “Ares, called Mars,” pp. 48–49; scan PDF pages 58–59",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Bind every epithet, sanctuary, practice, place, and date to its own source; a local title or cult cannot become a universal divine definition.",
+        "nonOverlapFinding": "This route is restricted to located titles and practices; it cannot absorb source identity or later reception merely because the figure is the same."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact epithet-and-cult route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_ac05539156b5a10e55e68e3a",
+      "candidateDigest": "sha256:1caf1e2c507a7f0f2c991676e9b5cebe29054dd7a798d61c0f9b80e8df267128",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:ares-mars",
+      "siteId": "maha-strategies",
+      "routeRole": "reception-and-comparison",
+      "path": "/knowledge/religion/mythology/greek-roman/ares-mars/reception-and-comparison",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-ares-mars"
+        ],
+        "exactLocator": "s.v. “Ares, called Mars,” pp. 48–49; scan PDF pages 58–59",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Separate Greek evidence, Roman reception, and later literary or artistic reception; similar functions do not prove identity, descent, or common origin.",
+        "nonOverlapFinding": "This route begins with an explicitly later reception or framed comparison and cannot rewrite an earlier source identity."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact reception-and-comparison route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_153e6118f6c961c3995fd5f1",
+      "candidateDigest": "sha256:42c6fbf60af38a8dfbe6bb07a47bf963ae80d31c958e4e2547624c708e2d3388",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:ares-mars",
+      "siteId": "maha-strategies",
+      "routeRole": "source-identity",
+      "path": "/knowledge/religion/mythology/greek-roman/ares-mars/source-identity",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-ares-mars"
+        ],
+        "exactLocator": "s.v. “Ares, called Mars,” pp. 48–49; scan PDF pages 58–59",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Relate a Greek and Roman name only through identified ancient witnesses and relationship scholarship; translation, adoption, and interpretatio Romana remain separate propositions.",
+        "nonOverlapFinding": "This route tests an identity relationship in named witnesses; sibling cult and reception routes answer different historical questions."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact source-identity route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_5dd4519b1808b75b0ffa6b69",
+      "candidateDigest": "sha256:49a54493c99f3a5c7d6fad5f35fb4b758b1098c41b79bbdc9fbb56381df43639",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:artemis-diana",
+      "siteId": "maha-strategies",
+      "routeRole": "epithet-and-cult",
+      "path": "/knowledge/religion/mythology/greek-roman/artemis-diana/epithet-and-cult",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-artemis-diana"
+        ],
+        "exactLocator": "s.v. “Artemis, called Diana,” pp. 59–60; scan PDF pages 69–70",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Describe an epithet, sanctuary, rite, place, and period only where the inspected source locates it; no local title or practice becomes a universal definition of the deity.",
+        "nonOverlapFinding": "Unlike the sibling identity and reception routes, this route is restricted to located titles, practices, sanctuaries, places, and periods."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact epithet-and-cult route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_9be20b3ef8382660d456e223",
+      "candidateDigest": "sha256:002f3e742c1de921aeccb1ec641e3776aecdeb17a10c31d3365b9e05a7a24ab9",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:artemis-diana",
+      "siteId": "maha-strategies",
+      "routeRole": "reception-and-comparison",
+      "path": "/knowledge/religion/mythology/greek-roman/artemis-diana/reception-and-comparison",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-artemis-diana"
+        ],
+        "exactLocator": "s.v. “Artemis, called Diana,” pp. 59–60; scan PDF pages 69–70",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Separate ancient Greek evidence, Roman reception, and later artistic or literary reception; similarity of function never proves identity or common origin.",
+        "nonOverlapFinding": "Unlike source-identity and cult routes, this route describes a later reception or an explicitly framed comparison without retroactive identity claims."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact reception-and-comparison route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_787b797318dc19c7cf1a3285",
+      "candidateDigest": "sha256:901516a786279bea883724a4168bc3beb3023f45b1d4bae98709a0e4430d0ab0",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:artemis-diana",
+      "siteId": "maha-strategies",
+      "routeRole": "source-identity",
+      "path": "/knowledge/religion/mythology/greek-roman/artemis-diana/source-identity",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-artemis-diana"
+        ],
+        "exactLocator": "s.v. “Artemis, called Diana,” pp. 59–60; scan PDF pages 69–70",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Identify the named Greek and Roman figures only through explicit ancient or scholarly source relationships; translation, interpretatio Romana, adoption, and later equivalence remain different propositions.",
+        "nonOverlapFinding": "Unlike the sibling cult and reception routes, this route asks which named sources relate the identities and what kind of relationship they assert."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact source-identity route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_295ca72c9e7c282beace722f",
+      "candidateDigest": "sha256:909505cb7ec5ead8f88534962f0583e6c6724b02b4e46e53b64b12c932cffcfd",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:athena-minerva",
+      "siteId": "maha-strategies",
+      "routeRole": "epithet-and-cult",
+      "path": "/knowledge/religion/mythology/greek-roman/athena-minerva/epithet-and-cult",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-athena-minerva"
+        ],
+        "exactLocator": "s.v. “Athena, called Minerva,” pp. 65–66; scan PDF pages 75–76",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Describe an epithet, sanctuary, rite, place, and period only where the inspected source locates it; no local title or practice becomes a universal definition of the deity.",
+        "nonOverlapFinding": "Unlike the sibling identity and reception routes, this route is restricted to located titles, practices, sanctuaries, places, and periods."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact epithet-and-cult route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_8874e92b96f178ce2e1b232a",
+      "candidateDigest": "sha256:0d5761d8f87cf813e78ea083b6a8308c5c13a89fefbea9a26827cd5046822f66",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:athena-minerva",
+      "siteId": "maha-strategies",
+      "routeRole": "reception-and-comparison",
+      "path": "/knowledge/religion/mythology/greek-roman/athena-minerva/reception-and-comparison",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-athena-minerva"
+        ],
+        "exactLocator": "s.v. “Athena, called Minerva,” pp. 65–66; scan PDF pages 75–76",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Separate ancient Greek evidence, Roman reception, and later artistic or literary reception; similarity of function never proves identity or common origin.",
+        "nonOverlapFinding": "Unlike source-identity and cult routes, this route describes a later reception or an explicitly framed comparison without retroactive identity claims."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact reception-and-comparison route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_c12add199249649d20ce777c",
+      "candidateDigest": "sha256:04e836fa9b3aba0b3977e30358599319a94f4cce47c7a658879db5986d5d6a76",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:athena-minerva",
+      "siteId": "maha-strategies",
+      "routeRole": "source-identity",
+      "path": "/knowledge/religion/mythology/greek-roman/athena-minerva/source-identity",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-athena-minerva"
+        ],
+        "exactLocator": "s.v. “Athena, called Minerva,” pp. 65–66; scan PDF pages 75–76",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Identify the named Greek and Roman figures only through explicit ancient or scholarly source relationships; translation, interpretatio Romana, adoption, and later equivalence remain different propositions.",
+        "nonOverlapFinding": "Unlike the sibling cult and reception routes, this route asks which named sources relate the identities and what kind of relationship they assert."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact source-identity route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_6eab88033ca52850fa2126d9",
+      "candidateDigest": "sha256:46b14ae104ef91880caf0a7401dc93eb3e66b5b292a55a73a986fab14a5a113d",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:demeter-ceres",
+      "siteId": "maha-strategies",
+      "routeRole": "epithet-and-cult",
+      "path": "/knowledge/religion/mythology/greek-roman/demeter-ceres/epithet-and-cult",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-demeter-ceres"
+        ],
+        "exactLocator": "s.v. “Demeter, called Ceres,” pp. 140–141; scan PDF pages 150–151",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Describe an epithet, sanctuary, rite, place, and period only where the inspected source locates it; no local title or practice becomes a universal definition of the deity.",
+        "nonOverlapFinding": "Unlike the sibling identity and reception routes, this route is restricted to located titles, practices, sanctuaries, places, and periods."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact epithet-and-cult route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_c0b38c413c629e45957f1188",
+      "candidateDigest": "sha256:715704fabcc715965c1c0323cc67fab97f8c73b62c384a801a3813c7b5c48341",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:demeter-ceres",
+      "siteId": "maha-strategies",
+      "routeRole": "reception-and-comparison",
+      "path": "/knowledge/religion/mythology/greek-roman/demeter-ceres/reception-and-comparison",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-demeter-ceres"
+        ],
+        "exactLocator": "s.v. “Demeter, called Ceres,” pp. 140–141; scan PDF pages 150–151",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Separate ancient Greek evidence, Roman reception, and later artistic or literary reception; similarity of function never proves identity or common origin.",
+        "nonOverlapFinding": "Unlike source-identity and cult routes, this route describes a later reception or an explicitly framed comparison without retroactive identity claims."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact reception-and-comparison route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_2727e3fca1239c7d30d0d52f",
+      "candidateDigest": "sha256:6f0b59b001905578ad469116baf208cf1bbcb3f28656be4dddd7bdf34bf44d18",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:demeter-ceres",
+      "siteId": "maha-strategies",
+      "routeRole": "source-identity",
+      "path": "/knowledge/religion/mythology/greek-roman/demeter-ceres/source-identity",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-demeter-ceres"
+        ],
+        "exactLocator": "s.v. “Demeter, called Ceres,” pp. 140–141; scan PDF pages 150–151",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Identify the named Greek and Roman figures only through explicit ancient or scholarly source relationships; translation, interpretatio Romana, adoption, and later equivalence remain different propositions.",
+        "nonOverlapFinding": "Unlike the sibling cult and reception routes, this route asks which named sources relate the identities and what kind of relationship they assert."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact source-identity route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_9f5129f6534d6024ffd3cec0",
+      "candidateDigest": "sha256:f1a388efd32c5a1c9de55cb7f80515f202922c6a15fbafdc09d4e62d16ba3178",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:dionysus-bacchus",
+      "siteId": "maha-strategies",
+      "routeRole": "epithet-and-cult",
+      "path": "/knowledge/religion/mythology/greek-roman/dionysus-bacchus/epithet-and-cult",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-dionysus-bacchus"
+        ],
+        "exactLocator": "s.v. “Dionysus,” pp. 147–149; scan PDF pages 157–158–159",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Bind every epithet, sanctuary, practice, place, and date to its own source; a local title or cult cannot become a universal divine definition.",
+        "nonOverlapFinding": "This route is restricted to located titles and practices; it cannot absorb source identity or later reception merely because the figure is the same."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact epithet-and-cult route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_763fc50de5c75f57a8964521",
+      "candidateDigest": "sha256:e2b0b0131833f95e8d259acdd58aac62a54573a9676999f0cad93bb7c18c19dc",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:dionysus-bacchus",
+      "siteId": "maha-strategies",
+      "routeRole": "reception-and-comparison",
+      "path": "/knowledge/religion/mythology/greek-roman/dionysus-bacchus/reception-and-comparison",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-dionysus-bacchus"
+        ],
+        "exactLocator": "s.v. “Dionysus,” pp. 147–149; scan PDF pages 157–158–159",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Separate Greek evidence, Roman reception, and later literary or artistic reception; similar functions do not prove identity, descent, or common origin.",
+        "nonOverlapFinding": "This route begins with an explicitly later reception or framed comparison and cannot rewrite an earlier source identity."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact reception-and-comparison route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_79905c989f92257b93b53c70",
+      "candidateDigest": "sha256:c854137d3a6b29338972efa668139ac1c5dd7632811314c679af660316a3e64b",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:dionysus-bacchus",
+      "siteId": "maha-strategies",
+      "routeRole": "source-identity",
+      "path": "/knowledge/religion/mythology/greek-roman/dionysus-bacchus/source-identity",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-dionysus-bacchus"
+        ],
+        "exactLocator": "s.v. “Dionysus,” pp. 147–149; scan PDF pages 157–158–159",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Identify the named Greek and Roman figures only through explicit ancient or scholarly source relationships; translation, interpretatio Romana, adoption, and later equivalence remain different propositions.",
+        "nonOverlapFinding": "Unlike the sibling cult and reception routes, this route asks which named sources relate the identities and what kind of relationship they assert."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact source-identity route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_723dc016fc42697879993423",
+      "candidateDigest": "sha256:908591f72fba45bd4d997e273f0a201a33ee8ef44407e6018af2ff3b2f1f925b",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:hades-pluto",
+      "siteId": "maha-strategies",
+      "routeRole": "epithet-and-cult",
+      "path": "/knowledge/religion/mythology/greek-roman/hades-pluto/epithet-and-cult",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-hades-pluto"
+        ],
+        "exactLocator": "s.v. “Hades or Aides or Pluto,” pp. 183–184; scan PDF pages 193–194",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Describe an epithet, sanctuary, rite, place, and period only where the inspected source locates it; no local title or practice becomes a universal definition of the deity.",
+        "nonOverlapFinding": "Unlike the sibling identity and reception routes, this route is restricted to located titles, practices, sanctuaries, places, and periods."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact epithet-and-cult route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_9209e3b9da7835eecfe5543d",
+      "candidateDigest": "sha256:a981eb4a3be951f764644bd67be989f6f6903a3e9685b06a51daca199b60f136",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:hades-pluto",
+      "siteId": "maha-strategies",
+      "routeRole": "reception-and-comparison",
+      "path": "/knowledge/religion/mythology/greek-roman/hades-pluto/reception-and-comparison",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-hades-pluto"
+        ],
+        "exactLocator": "s.v. “Hades or Aides or Pluto,” pp. 183–184; scan PDF pages 193–194",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Separate ancient Greek evidence, Roman reception, and later artistic or literary reception; similarity of function never proves identity or common origin.",
+        "nonOverlapFinding": "Unlike source-identity and cult routes, this route describes a later reception or an explicitly framed comparison without retroactive identity claims."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact reception-and-comparison route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_d9a0f8a41b4e0dfa8474aefc",
+      "candidateDigest": "sha256:0c6f22e8bb19dc4d721626bdf50d26fac19191de22912b2e67688d3e7178b309",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:hades-pluto",
+      "siteId": "maha-strategies",
+      "routeRole": "source-identity",
+      "path": "/knowledge/religion/mythology/greek-roman/hades-pluto/source-identity",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-hades-pluto"
+        ],
+        "exactLocator": "s.v. “Hades or Aides or Pluto,” pp. 183–184; scan PDF pages 193–194",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Identify the named Greek and Roman figures only through explicit ancient or scholarly source relationships; translation, interpretatio Romana, adoption, and later equivalence remain different propositions.",
+        "nonOverlapFinding": "Unlike the sibling cult and reception routes, this route asks which named sources relate the identities and what kind of relationship they assert."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact source-identity route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_e6eec2cf4d35c6aafc15fe9b",
+      "candidateDigest": "sha256:b9d61316d4ee1c7bc00d55981f944007c16d9b78ab24a978362dba127433807b",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:hera-juno",
+      "siteId": "maha-strategies",
+      "routeRole": "epithet-and-cult",
+      "path": "/knowledge/religion/mythology/greek-roman/hera-juno/epithet-and-cult",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-hera-juno"
+        ],
+        "exactLocator": "s.v. “Hera, called Juno,” pp. 193–194; scan PDF pages 203–204",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Describe an epithet, sanctuary, rite, place, and period only where the inspected source locates it; no local title or practice becomes a universal definition of the deity.",
+        "nonOverlapFinding": "Unlike the sibling identity and reception routes, this route is restricted to located titles, practices, sanctuaries, places, and periods."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact epithet-and-cult route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_4d08959c6f2cd3a22096d989",
+      "candidateDigest": "sha256:0fb3a0f544e87c3f186947a058f6f2954cc036091d1689c91267e63198ddfc74",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:hera-juno",
+      "siteId": "maha-strategies",
+      "routeRole": "reception-and-comparison",
+      "path": "/knowledge/religion/mythology/greek-roman/hera-juno/reception-and-comparison",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-hera-juno"
+        ],
+        "exactLocator": "s.v. “Hera, called Juno,” pp. 193–194; scan PDF pages 203–204",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Separate ancient Greek evidence, Roman reception, and later artistic or literary reception; similarity of function never proves identity or common origin.",
+        "nonOverlapFinding": "Unlike source-identity and cult routes, this route describes a later reception or an explicitly framed comparison without retroactive identity claims."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact reception-and-comparison route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_412d625511d2c70716b96f81",
+      "candidateDigest": "sha256:14e54c0573c6563a4c44a4100f822fafb0d4f8f3b54418902e28af8439676dcc",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:hera-juno",
+      "siteId": "maha-strategies",
+      "routeRole": "source-identity",
+      "path": "/knowledge/religion/mythology/greek-roman/hera-juno/source-identity",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-hera-juno"
+        ],
+        "exactLocator": "s.v. “Hera, called Juno,” pp. 193–194; scan PDF pages 203–204",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Identify the named Greek and Roman figures only through explicit ancient or scholarly source relationships; translation, interpretatio Romana, adoption, and later equivalence remain different propositions.",
+        "nonOverlapFinding": "Unlike the sibling cult and reception routes, this route asks which named sources relate the identities and what kind of relationship they assert."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact source-identity route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_22816fb088961d6c55ede221",
+      "candidateDigest": "sha256:215d8e071d3d464fdcc65cfc094525650d886cfc47f7b2bd99fe5c67a915fac1",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:hermes-mercury",
+      "siteId": "maha-strategies",
+      "routeRole": "epithet-and-cult",
+      "path": "/knowledge/religion/mythology/greek-roman/hermes-mercury/epithet-and-cult",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-hermes-mercury"
+        ],
+        "exactLocator": "s.v. “Hermes, called Mercurius,” pp. 201–202; scan PDF pages 211–212",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Bind every epithet, sanctuary, practice, place, and date to its own source; a local title or cult cannot become a universal divine definition.",
+        "nonOverlapFinding": "This route is restricted to located titles and practices; it cannot absorb source identity or later reception merely because the figure is the same."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact epithet-and-cult route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_6209efe5c31c50ebb8de8406",
+      "candidateDigest": "sha256:a24858ed3716635210138ed124b9939e5ef6f87d058ddc1160b8fe0364ac25ca",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:hermes-mercury",
+      "siteId": "maha-strategies",
+      "routeRole": "reception-and-comparison",
+      "path": "/knowledge/religion/mythology/greek-roman/hermes-mercury/reception-and-comparison",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-hermes-mercury"
+        ],
+        "exactLocator": "s.v. “Hermes, called Mercurius,” pp. 201–202; scan PDF pages 211–212",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Separate Greek evidence, Roman reception, and later literary or artistic reception; similar functions do not prove identity, descent, or common origin.",
+        "nonOverlapFinding": "This route begins with an explicitly later reception or framed comparison and cannot rewrite an earlier source identity."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact reception-and-comparison route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_ee0f0d7c891f42e232b3a7d6",
+      "candidateDigest": "sha256:63713067084b180c290adf7556ca267f1bb76f85a31f8a1f385716d6daa65047",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:hermes-mercury",
+      "siteId": "maha-strategies",
+      "routeRole": "source-identity",
+      "path": "/knowledge/religion/mythology/greek-roman/hermes-mercury/source-identity",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-hermes-mercury"
+        ],
+        "exactLocator": "s.v. “Hermes, called Mercurius,” pp. 201–202; scan PDF pages 211–212",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Relate a Greek and Roman name only through identified ancient witnesses and relationship scholarship; translation, adoption, and interpretatio Romana remain separate propositions.",
+        "nonOverlapFinding": "This route tests an identity relationship in named witnesses; sibling cult and reception routes answer different historical questions."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "tranche-eleven"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact source-identity route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_95052db29b48251b8c0d8b09",
+      "candidateDigest": "sha256:7688abe47b107994fe51b897cdaae223672d8062292c8cdcae366e23153a5f61",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:poseidon-neptune",
+      "siteId": "maha-strategies",
+      "routeRole": "epithet-and-cult",
+      "path": "/knowledge/religion/mythology/greek-roman/poseidon-neptune/epithet-and-cult",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-poseidon-neptune"
+        ],
+        "exactLocator": "s.v. “Poseidon, called Neptunus,” pp. 337–338; scan PDF pages 347–348",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Describe an epithet, sanctuary, rite, place, and period only where the inspected source locates it; no local title or practice becomes a universal definition of the deity.",
+        "nonOverlapFinding": "Unlike the sibling identity and reception routes, this route is restricted to located titles, practices, sanctuaries, places, and periods."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact epithet-and-cult route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_8bced31fb2d8be737f1c9c62",
+      "candidateDigest": "sha256:0f4122ab60198b9b878e35cf5f4fa1813cd5726ef5d315b7086a7a4eb488efe4",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:poseidon-neptune",
+      "siteId": "maha-strategies",
+      "routeRole": "reception-and-comparison",
+      "path": "/knowledge/religion/mythology/greek-roman/poseidon-neptune/reception-and-comparison",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-poseidon-neptune"
+        ],
+        "exactLocator": "s.v. “Poseidon, called Neptunus,” pp. 337–338; scan PDF pages 347–348",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Separate ancient Greek evidence, Roman reception, and later artistic or literary reception; similarity of function never proves identity or common origin.",
+        "nonOverlapFinding": "Unlike source-identity and cult routes, this route describes a later reception or an explicitly framed comparison without retroactive identity claims."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact reception-and-comparison route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_091ae0c188f4d08bcda619bd",
+      "candidateDigest": "sha256:f6e9ec3886619b41588ba6e9484b2627d31ef41ee11025a89035c469208c9c73",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:poseidon-neptune",
+      "siteId": "maha-strategies",
+      "routeRole": "source-identity",
+      "path": "/knowledge/religion/mythology/greek-roman/poseidon-neptune/source-identity",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-poseidon-neptune"
+        ],
+        "exactLocator": "s.v. “Poseidon, called Neptunus,” pp. 337–338; scan PDF pages 347–348",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Identify the named Greek and Roman figures only through explicit ancient or scholarly source relationships; translation, interpretatio Romana, adoption, and later equivalence remain different propositions.",
+        "nonOverlapFinding": "Unlike the sibling cult and reception routes, this route asks which named sources relate the identities and what kind of relationship they assert."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact source-identity route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_aa0a39274d0cb4dc8f4c130c",
+      "candidateDigest": "sha256:f1aa305cee5554cabd8a7048011c4e2601442200ca982d6a72b98e2c0d0623e5",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:zeus-jupiter",
+      "siteId": "maha-strategies",
+      "routeRole": "epithet-and-cult",
+      "path": "/knowledge/religion/mythology/greek-roman/zeus-jupiter/epithet-and-cult",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-zeus-jupiter"
+        ],
+        "exactLocator": "s.v. “Zeus, called Jupiter,” pp. 462–463; scan PDF pages 472–473",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Describe an epithet, sanctuary, rite, place, and period only where the inspected source locates it; no local title or practice becomes a universal definition of the deity.",
+        "nonOverlapFinding": "Unlike the sibling identity and reception routes, this route is restricted to located titles, practices, sanctuaries, places, and periods."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact epithet-and-cult route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_723f9046537551ad6afc30bf",
+      "candidateDigest": "sha256:36a04cd723ce160a20da68a49bd5fc98127c2f492b01f439f6844fd5e52504f9",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:zeus-jupiter",
+      "siteId": "maha-strategies",
+      "routeRole": "reception-and-comparison",
+      "path": "/knowledge/religion/mythology/greek-roman/zeus-jupiter/reception-and-comparison",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-zeus-jupiter"
+        ],
+        "exactLocator": "s.v. “Zeus, called Jupiter,” pp. 462–463; scan PDF pages 472–473",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Separate ancient Greek evidence, Roman reception, and later artistic or literary reception; similarity of function never proves identity or common origin.",
+        "nonOverlapFinding": "Unlike source-identity and cult routes, this route describes a later reception or an explicitly framed comparison without retroactive identity claims."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact reception-and-comparison route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    },
+    {
+      "candidateId": "cand_35c74e2b8ee427e5df7e1ed1",
+      "candidateDigest": "sha256:041d15938ad4a43151cc950e97871b35372a07d2f5cdbc6597b2e0a9e864c435",
+      "conceptId": "urn:maha:concept:mythology:greek-roman:zeus-jupiter",
+      "siteId": "maha-strategies",
+      "routeRole": "source-identity",
+      "path": "/knowledge/religion/mythology/greek-roman/zeus-jupiter/source-identity",
+      "sourceAssessment": {
+        "sourceIds": [
+          "t27-smith-1873-zeus-jupiter"
+        ],
+        "exactLocator": "s.v. “Zeus, called Jupiter,” pp. 462–463; scan PDF pages 472–473",
+        "roleSupported": true
+      },
+      "semanticAssessment": {
+        "disposition": "retain-distinct",
+        "answerBoundary": "Identify the named Greek and Roman figures only through explicit ancient or scholarly source relationships; translation, interpretatio Romana, adoption, and later equivalence remain different propositions.",
+        "nonOverlapFinding": "Unlike the sibling cult and reception routes, this route asks which named sources relate the identities and what kind of relationship they assert."
+      },
+      "dependencyAssessment": {
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "structurallyResolved": true
+      },
+      "axes": {
+        "sourceIdentity": "verified",
+        "locator": "exact-printed-pages-and-scan-pages",
+        "rights": "public-domain",
+        "scope": "source-specific-historical-synthesis",
+        "boundary": "nineteenth-century-frame-required",
+        "dependency": "validated"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact source-identity route is distinct, dependency-complete, and supportable as an explicitly attributed reading of Smith’s 1873 entry; no ancient-source, modern-consensus, equivalence, or theological claim is inherited.",
+      "noInheritance": "Evidence does not transfer among sibling roles. The same inspected entry is separately bounded to each route’s reviewed answer contract.",
+      "activeBindingChanged": false
+    }
+  ],
+  "provenanceDigest": "sha256:9142f377f7413964d06d792c4d651c12f9f66f58446c2aa65397b3aab22f145b"
+}
