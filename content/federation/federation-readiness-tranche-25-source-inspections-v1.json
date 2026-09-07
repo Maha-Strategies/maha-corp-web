@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "maha-federation-readiness-tranche-25-sources/1.0",
+  "inspectedOn": "2026-09-07",
+  "counts": {
+    "inspections": 5
+  },
+  "inspections": [
+    {
+      "sourceId": "perseus-rights-policy",
+      "identity": "Perseus copyright and reuse policy — Perseus Digital Library, Tufts University",
+      "locator": "https://www.perseus.tufts.edu/hopper/help/copyright.jsp — Copyrighted materials; Public-domain materials; XML downloads and item-level credits",
+      "rightsBasis": "reference-only; item-level authorization remains necessary unless the item is public domain or separately licensed",
+      "scope": "Explains repository item-level rights and reuse checks.",
+      "boundary": "Repository access is not a blanket reuse license; editions, translations, commentary, images, and XML may have different rights.",
+      "roles": [
+        "source-identity"
+      ],
+      "kind": "repository-rights-policy",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t25-smith-athena",
+      "identity": "Athena — A Dictionary of Greek and Roman Biography and Mythology, William Smith, ed. (1873)",
+      "locator": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.04.0104%3Aentry%3Dathena-bio-1 — Athena entry",
+      "rightsBasis": "reference-only bounded paraphrase; Perseus item-level rights policy applies",
+      "scope": "Historical lexicographic account of Greek Athena traditions and names.",
+      "boundary": "A nineteenth-century dictionary is not current scholarly consensus and does not by itself establish Roman Minerva, cult continuity, or original identity.",
+      "roles": [
+        "source-identity"
+      ],
+      "kind": "historical-scholarship",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t25-smith-minerva",
+      "identity": "Minerva — A Dictionary of Greek and Roman Biography and Mythology, William Smith, ed. (1873)",
+      "locator": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.04.0104%3Aentry%3Dminerva-bio-1 — Minerva entry; paragraphs distinguishing Roman Minerva from later identification with Athena",
+      "rightsBasis": "reference-only bounded paraphrase; Perseus item-level rights policy applies",
+      "scope": "Historical lexicographic account distinguishing Roman Minerva and later Greek identification or attribute transfer.",
+      "boundary": "Does not prove that Athena and Minerva were originally identical, supply balanced primary passages, or establish current scholarly consensus.",
+      "roles": [
+        "source-identity"
+      ],
+      "kind": "historical-scholarship",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t25-smith-aphrodite",
+      "identity": "Aphrodite — A Dictionary of Greek and Roman Biography and Mythology, William Smith, ed. (1873)",
+      "locator": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.04.0104%3Aentry%3Daphrodite-bio-1 — Aphrodite entry",
+      "rightsBasis": "reference-only bounded paraphrase; Perseus item-level rights policy applies",
+      "scope": "Historical lexicographic account of Greek Aphrodite traditions and cult descriptions.",
+      "boundary": "Does not by itself establish Roman Venus, original identity, or current scholarly consensus.",
+      "roles": [
+        "source-identity"
+      ],
+      "kind": "historical-scholarship",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t25-smith-venus",
+      "identity": "Venus — A Dictionary of Greek and Roman Biography and Mythology, William Smith, ed. (1873)",
+      "locator": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.04.0104%3Aentry%3Dvenus-bio-1 — Venus entry; opening account of early Roman Venus and later identification with Aphrodite",
+      "rightsBasis": "reference-only bounded paraphrase; Perseus item-level rights policy applies",
+      "scope": "Historical lexicographic account distinguishing early Roman Venus from later Greek identification and transferred attributes.",
+      "boundary": "Does not prove original equivalence, supply a Roman primary passage, or establish current scholarly consensus.",
+      "roles": [
+        "source-identity"
+      ],
+      "kind": "historical-scholarship",
+      "passageStored": false
+    }
+  ],
+  "privacyBoundary": "Only source identity, locator, rights, scope, and boundary metadata are retained; no source passage is stored.",
+  "provenanceDigest": "sha256:d7279d9abb9fdbcd54f7309083f107923f900004bd8edfee1fe8036b2fba1ba7"
+}
