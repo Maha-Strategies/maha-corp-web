@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "maha-federation-readiness-tranche-26-page-specifications/1.0",
+  "frozenOn": "2026-09-07",
+  "counts": {
+    "specifications": 4,
+    "boundedQuestions": 20
+  },
+  "specifications": [
+    {
+      "candidateId": "cand_1981169ef4336a655069490c",
+      "candidateDigest": "sha256:3ede592475196dc931b52e36538d8e0a59afb6ed14dbcbf34ab125ae9fdc5500",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/correction-and-retraction/withdrawal-propagation",
+      "title": "Correction and Retraction — Withdrawal Propagation",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "routeRole": "withdrawal-propagation",
+      "requiredSections": [
+        "Direct answer",
+        "Executable contract",
+        "Verification evidence",
+        "Failure boundaries",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is implemented?",
+        "Which exact locator proves it?",
+        "What fails closed?",
+        "What does the implementation not establish?",
+        "Which release gates remain?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t26-withdrawal-propagation",
+          "identity": "Source-reference withdrawal propagation contract",
+          "locator": "lib/source-evidence-reference.ts — GOVERNANCE_MODEL and evaluateSourcePage; test/source-first-engine.test.ts — must trace to an active released revision",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Makes source-reference pages projections of active released claims and removes eligibility when an underlying record is withdrawn or no active released claim remains.",
+          "boundary": "The projection does not retract external copies, prove the underlying claim false, or replace canonical release governance.",
+          "roles": [
+            "withdrawal-propagation"
+          ],
+          "kind": "local-implementation"
+        }
+      ],
+      "decisionDigest": "sha256:f042c7ca2526880a05962cc621f36ce098b7eeb6cc1c370ea891be8eb9f2cfee",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_4080575bad7a1bfd45b42d3a",
+      "candidateDigest": "sha256:152a9f187dcbb36882fff5c4dc17ac30f88b4cc1a1346400cf0a852405ae4527",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/privacy-boundary/served-bundle-check",
+      "title": "Privacy Boundary — Served Bundle Check",
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "routeRole": "served-bundle-check",
+      "requiredSections": [
+        "Direct answer",
+        "Executable contract",
+        "Verification evidence",
+        "Failure boundaries",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is implemented?",
+        "Which exact locator proves it?",
+        "What fails closed?",
+        "What does the implementation not establish?",
+        "Which release gates remain?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t26-served-bundle-scanner",
+          "identity": "Digest-gated served-bundle privacy scanner and adversarial fixture",
+          "locator": "lib/batch-11-evidence-verifier.ts — scanForProhibitedContent; test/batch-11-scanner-path-awareness.test.ts — the exemption is a single exact literal at a single exact path",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Scans a digest-verified output for credential shapes and named private-data classes while allowing one exact static policy literal at one exact path.",
+          "boundary": "A passing scan covers the implemented patterns and inspected bundle; it does not prove absence of every possible confidential datum or authorize publication.",
+          "roles": [
+            "served-bundle-check"
+          ],
+          "kind": "local-implementation"
+        }
+      ],
+      "decisionDigest": "sha256:6f5e7c9268e9f0ea8d10519b0fadcaabffd075f2bc9adac90dbc8a71e8ec4365",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_9d7f62fef0254f8faa993456",
+      "candidateDigest": "sha256:b27553e1d0dbf12f0a8ab49f801ddf6be43d39c89bf99925ad9db2495a1a6486",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/internal-review/exact-revision-binding",
+      "title": "Internal Review — Exact Revision Binding",
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "routeRole": "exact-revision-binding",
+      "requiredSections": [
+        "Direct answer",
+        "Executable contract",
+        "Verification evidence",
+        "Failure boundaries",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is implemented?",
+        "Which exact locator proves it?",
+        "What fails closed?",
+        "What does the implementation not establish?",
+        "Which release gates remain?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t26-exact-revision-review",
+          "identity": "Exact-revision internal-review projection contract",
+          "locator": "lib/exact-revision-review.ts — projectReviewState and classifyForRelease and releaseAuthorized; test/exact-revision-review.test.ts — decisions are append-only and bind the exact revision",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Binds review decisions to an exact target digest and requires the complete review projection before release authorization.",
+          "boundary": "Internal exact-revision review is not external expert review, peer review, scientific validation, or authority to publish without the remaining release gates.",
+          "roles": [
+            "exact-revision-binding"
+          ],
+          "kind": "local-implementation"
+        }
+      ],
+      "decisionDigest": "sha256:aa715a5885c778918705a5c4f8ca51582749348556c6fc9b4d1e99b64e128fb7",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_d43767b90b272ddead9ab56c",
+      "candidateDigest": "sha256:ed00e78309e261eebd8bb18bc3455b7862d53cabdbe84b9ebe8fa8754729c730",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/runtime-witness-receipts/artifact-role-inventory",
+      "title": "Runtime Witness Receipts — Artifact Role Inventory",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "routeRole": "artifact-role-inventory",
+      "requiredSections": [
+        "Direct answer",
+        "Executable contract",
+        "Verification evidence",
+        "Failure boundaries",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is implemented?",
+        "Which exact locator proves it?",
+        "What fails closed?",
+        "What does the implementation not establish?",
+        "Which release gates remain?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t26-runtime-witness-artifact-roles",
+          "identity": "Computational witness receipt artifact-role verifier",
+          "locator": "lib/evidence-dossier/runtime-witness.ts — artifacts: and verifyComputationalWitnessReceipt",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Defines input, output, and code artifact roles; validates deterministic ordering, uniqueness, byte counts, and SHA-256 commitments.",
+          "boundary": "An artifact inventory proves receipt structure and commitments, not scientific validity, independent reproduction, or completeness of the execution environment.",
+          "roles": [
+            "artifact-role-inventory"
+          ],
+          "kind": "local-implementation"
+        }
+      ],
+      "decisionDigest": "sha256:6835e8b373e336e7be692b2b9f674245221d66942597ccfb5ce2fe890dc8eab0",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    }
+  ],
+  "provenanceDigest": "sha256:bcb9eb4553b53e16e36ca0cc830eee12ccd7f5124b0b293db9fa3e0382004811"
+}

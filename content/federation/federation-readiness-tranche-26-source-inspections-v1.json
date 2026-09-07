@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "maha-federation-readiness-tranche-26-sources/1.0",
+  "inspectedOn": "2026-09-07",
+  "counts": {
+    "inspections": 4
+  },
+  "inspections": [
+    {
+      "sourceId": "t26-runtime-witness-artifact-roles",
+      "identity": "Computational witness receipt artifact-role verifier",
+      "locator": "lib/evidence-dossier/runtime-witness.ts — artifacts: and verifyComputationalWitnessReceipt",
+      "rightsBasis": "project-owned-reference-only",
+      "scope": "Defines input, output, and code artifact roles; validates deterministic ordering, uniqueness, byte counts, and SHA-256 commitments.",
+      "boundary": "An artifact inventory proves receipt structure and commitments, not scientific validity, independent reproduction, or completeness of the execution environment.",
+      "roles": [
+        "artifact-role-inventory"
+      ],
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t26-served-bundle-scanner",
+      "identity": "Digest-gated served-bundle privacy scanner and adversarial fixture",
+      "locator": "lib/batch-11-evidence-verifier.ts — scanForProhibitedContent; test/batch-11-scanner-path-awareness.test.ts — the exemption is a single exact literal at a single exact path",
+      "rightsBasis": "project-owned-reference-only",
+      "scope": "Scans a digest-verified output for credential shapes and named private-data classes while allowing one exact static policy literal at one exact path.",
+      "boundary": "A passing scan covers the implemented patterns and inspected bundle; it does not prove absence of every possible confidential datum or authorize publication.",
+      "roles": [
+        "served-bundle-check"
+      ],
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t26-withdrawal-propagation",
+      "identity": "Source-reference withdrawal propagation contract",
+      "locator": "lib/source-evidence-reference.ts — GOVERNANCE_MODEL and evaluateSourcePage; test/source-first-engine.test.ts — must trace to an active released revision",
+      "rightsBasis": "project-owned-reference-only",
+      "scope": "Makes source-reference pages projections of active released claims and removes eligibility when an underlying record is withdrawn or no active released claim remains.",
+      "boundary": "The projection does not retract external copies, prove the underlying claim false, or replace canonical release governance.",
+      "roles": [
+        "withdrawal-propagation"
+      ],
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t26-exact-revision-review",
+      "identity": "Exact-revision internal-review projection contract",
+      "locator": "lib/exact-revision-review.ts — projectReviewState and classifyForRelease and releaseAuthorized; test/exact-revision-review.test.ts — decisions are append-only and bind the exact revision",
+      "rightsBasis": "project-owned-reference-only",
+      "scope": "Binds review decisions to an exact target digest and requires the complete review projection before release authorization.",
+      "boundary": "Internal exact-revision review is not external expert review, peer review, scientific validation, or authority to publish without the remaining release gates.",
+      "roles": [
+        "exact-revision-binding"
+      ],
+      "kind": "local-implementation",
+      "passageStored": false
+    }
+  ],
+  "privacyBoundary": "Only implementation identity, locator, rights, scope, and boundary metadata are retained.",
+  "provenanceDigest": "sha256:e7bec0527a9544015e4da27936d921467d365558d6fc5d28a6637974592ef164"
+}
