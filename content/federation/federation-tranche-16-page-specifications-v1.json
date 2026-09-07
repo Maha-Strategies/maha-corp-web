@@ -3,8 +3,8 @@
   "frozenOn": "2026-09-06",
   "rule": "Specifications exist only for evidence-ready candidates. A blocked, revised or duplicative candidate cannot receive one.",
   "counts": {
-    "specifications": 19,
-    "boundedQuestions": 95
+    "specifications": 23,
+    "boundedQuestions": 115
   },
   "specifications": [
     {
@@ -122,6 +122,65 @@
       },
       "expectedCanonicalDependencies": [
         "urn:maha:concept:evidence:provenance-graph"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_354348af7cc0316828d6bfe2",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/evaluation-protocol/source-contract",
+      "owningProperty": "maha-research",
+      "conceptId": "urn:maha:concept:evidence:evaluation-protocol",
+      "routeRole": "source-contract",
+      "directAnswer": "Evaluation Protocol — Source Contract: Understand Evaluation Protocol through the source contract lens in Research Objects on research.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:evidence:evaluation-protocol under the owner-application contract. The canonical definition remains with maha-research.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1",
+          "locator": "MEASURE 2.1 — test sets, metrics and TEVV tooling are documented.",
+          "supports": "That an evaluation protocol is expected to record the test sets, the metrics and the tools used, so that the evaluation can be examined afterwards."
+        }
+      ],
+      "limitations": [
+        "Says what should be documented, not how to design a protocol, which metrics are correct for a task, or that a documented protocol is a sound one."
+      ],
+      "negativeSpace": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does evaluation-protocol mean in this context, and who owns the definition?",
+        "What does the inspected source establish about evaluation-protocol, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:evaluation-protocol"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+          "locator": "MEASURE 2.1 — test sets, metrics and TEVV tooling are documented.",
+          "version": "January 2023"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:evidence:evaluation-protocol"
       ],
       "boundary": "A specification. Not a route, a release or a public page."
     },
@@ -299,6 +358,65 @@
       },
       "expectedCanonicalDependencies": [
         "urn:maha:concept:evidence:calibration"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_45e384077f11ca1d96a8aa60",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/evaluation-protocol/method",
+      "owningProperty": "maha-research",
+      "conceptId": "urn:maha:concept:evidence:evaluation-protocol",
+      "routeRole": "method",
+      "directAnswer": "Evaluation Protocol — Method: Understand Evaluation Protocol through the method lens in Research Objects on research.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:evidence:evaluation-protocol under the owner-application contract. The canonical definition remains with maha-research.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1",
+          "locator": "MEASURE 2.1 — test sets, metrics and TEVV tooling are documented.",
+          "supports": "That an evaluation protocol is expected to record the test sets, the metrics and the tools used, so that the evaluation can be examined afterwards."
+        }
+      ],
+      "limitations": [
+        "Says what should be documented, not how to design a protocol, which metrics are correct for a task, or that a documented protocol is a sound one."
+      ],
+      "negativeSpace": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does evaluation-protocol mean in this context, and who owns the definition?",
+        "What does the inspected source establish about evaluation-protocol, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:evaluation-protocol"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+          "locator": "MEASURE 2.1 — test sets, metrics and TEVV tooling are documented.",
+          "version": "January 2023"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:evidence:evaluation-protocol"
       ],
       "boundary": "A specification. Not a route, a release or a public page."
     },
@@ -535,6 +653,65 @@
       },
       "expectedCanonicalDependencies": [
         "urn:maha:concept:governance:incident-reporting"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_648244fb98e7a1ce420df87f",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/correction/failure-mode",
+      "owningProperty": "maha-research",
+      "conceptId": "urn:maha:concept:evidence:correction",
+      "routeRole": "failure-mode",
+      "directAnswer": "Correction — Failure Mode: Understand Correction through the failure mode lens in Research Objects on research.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:evidence:correction under the owner-application contract. The canonical definition remains with maha-research.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "ICMJE Recommendations, §III.A Corrections and Version Control",
+          "locator": "§III.A, paragraph beginning \"Errors serious enough to invalidate a paper’s results\".",
+          "supports": "That errors serious enough to invalidate results and conclusions may require retraction, and that retraction with republication may be considered where honest error changes results but the underlying science appears valid."
+        }
+      ],
+      "limitations": [
+        "Editorial recommendations for journals. They bind no publisher, do not determine whether any specific correction was handled properly, and address scholarly articles rather than arbitrary published records."
+      ],
+      "negativeSpace": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does correction mean in this context, and who owns the definition?",
+        "What does the inspected source establish about correction, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:correction"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "ICMJE Recommendations, §III.A Corrections and Version Control",
+          "stableUrl": "https://www.icmje.org/recommendations/browse/publishing-and-editorial-issues/corrections-and-version-control.html",
+          "locator": "§III.A, paragraph beginning \"Errors serious enough to invalidate a paper’s results\".",
+          "version": "Updated January 2026"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:evidence:correction"
       ],
       "boundary": "A specification. Not a route, a release or a public page."
     },
@@ -893,6 +1070,65 @@
       "boundary": "A specification. Not a route, a release or a public page."
     },
     {
+      "candidateId": "cand_9980d129088906f24abe745a",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/benchmark-design/failure-mode",
+      "owningProperty": "maha-research",
+      "conceptId": "urn:maha:concept:evidence:benchmark-design",
+      "routeRole": "failure-mode",
+      "directAnswer": "Benchmark Design — Failure Mode: Understand Benchmark Design through the failure mode lens in Research Objects on research.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:evidence:benchmark-design under the owner-application contract. The canonical definition remains with maha-research.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1",
+          "locator": "MEASURE 2.3 and 2.5 — measurement under deployment-like conditions; limits of generalisability.",
+          "supports": "That a benchmark result holds for the conditions it was measured under, and that limits on generalising beyond those conditions are themselves to be documented."
+        }
+      ],
+      "limitations": [
+        "Does not prescribe any benchmark, dataset or scoring method, and does not establish that a benchmark measures what its name suggests."
+      ],
+      "negativeSpace": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does benchmark-design mean in this context, and who owns the definition?",
+        "What does the inspected source establish about benchmark-design, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:benchmark-design"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+          "locator": "MEASURE 2.3 and 2.5 — measurement under deployment-like conditions; limits of generalisability.",
+          "version": "January 2023"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:evidence:benchmark-design"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
       "candidateId": "cand_bc5ead81c6c5b02d6dc5e30b",
       "canonicalUrl": "https://research.mahastrategies.com/federation/research/citation-lineage/failure-mode",
       "owningProperty": "maha-research",
@@ -1129,5 +1365,5 @@
       "boundary": "A specification. Not a route, a release or a public page."
     }
   ],
-  "provenanceDigest": "sha256:20fba0d78ad40c0593265066329bfe3b275a848618677bba7e95b0eaa1798819"
+  "provenanceDigest": "sha256:cac72ad23c0c6db6754b62856d3bdfc7e65500c1423b2827d83e8e1a85a5c391"
 }

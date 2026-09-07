@@ -3,9 +3,9 @@
   "frozenOn": "2026-09-06",
   "method": "Sources were opened and read at a stated locator. Metadata, abstracts, search snippets, dictionary entries and landing pages are not inspection. No access control was bypassed.",
   "topicsInCohort": 48,
-  "topicsInspected": 9,
-  "distinctSources": 6,
-  "carriedForward": 6,
+  "topicsInspected": 12,
+  "distinctSources": 8,
+  "carriedForward": 9,
   "freshlyInspected": 3,
   "inspections": [
     {
@@ -22,7 +22,7 @@
       "boundary": "Supports what the manifest format specifies. It does not establish runtime behaviour, registry policy, supply-chain assurance, or that any particular image is trustworthy.",
       "sourceClass": "open-specification",
       "independence": "independent-of-maha",
-      "relationshipToEarlier": "Carried forward into Tranche 16 via Tranche 15: same source, same locator, same claim scope. Originally inspected as tr13-src-001."
+      "relationshipToEarlier": "Carried forward into Tranche 16: same source, same locator, same claim scope. Originally inspected as tr13-src-001."
     },
     {
       "inspectionId": "tr13-src-004",
@@ -38,7 +38,39 @@
       "boundary": "Supports expressing a lineage. It does not establish that a cited chain is correct, that a citation is warranted, or that any particular citation practice is standard.",
       "sourceClass": "open-standard-recommendation",
       "independence": "independent-of-maha",
-      "relationshipToEarlier": "Carried forward into Tranche 16 via Tranche 15: same source, same locator, same claim scope. Originally inspected as tr13-src-004."
+      "relationshipToEarlier": "Carried forward into Tranche 16: same source, same locator, same claim scope. Originally inspected as tr13-src-004."
+    },
+    {
+      "inspectionId": "tr13-src-006",
+      "topic": "evaluation-protocol",
+      "sourceIdentity": "NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1",
+      "version": "January 2023",
+      "stableUrl": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+      "locator": "MEASURE 2.1 — test sets, metrics and TEVV tooling are documented.",
+      "inspectionDepth": "targeted-section-read",
+      "accessBasis": "United States government publication, freely available.",
+      "reuseBasis": "US government work; bounded original summary permitted with attribution.",
+      "supportedClaimScope": "That an evaluation protocol is expected to record the test sets, the metrics and the tools used, so that the evaluation can be examined afterwards.",
+      "boundary": "Says what should be documented, not how to design a protocol, which metrics are correct for a task, or that a documented protocol is a sound one.",
+      "sourceClass": "government-standards-body",
+      "independence": "independent-of-maha",
+      "relationshipToEarlier": "Carried forward into Tranche 16: same source, same locator, same claim scope. Originally inspected as tr13-src-006."
+    },
+    {
+      "inspectionId": "tr13-src-007",
+      "topic": "benchmark-design",
+      "sourceIdentity": "NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1",
+      "version": "January 2023",
+      "stableUrl": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+      "locator": "MEASURE 2.3 and 2.5 — measurement under deployment-like conditions; limits of generalisability.",
+      "inspectionDepth": "targeted-section-read",
+      "accessBasis": "United States government publication, freely available.",
+      "reuseBasis": "US government work; bounded original summary permitted with attribution.",
+      "supportedClaimScope": "That a benchmark result holds for the conditions it was measured under, and that limits on generalising beyond those conditions are themselves to be documented.",
+      "boundary": "Does not prescribe any benchmark, dataset or scoring method, and does not establish that a benchmark measures what its name suggests.",
+      "sourceClass": "government-standards-body",
+      "independence": "independent-of-maha",
+      "relationshipToEarlier": "Carried forward into Tranche 16: same source, same locator, same claim scope. Originally inspected as tr13-src-007."
     },
     {
       "inspectionId": "tr13-src-018",
@@ -54,7 +86,23 @@
       "boundary": "Defines one version in a chain. It does not establish which version should be cited, that an author manuscript matches the published record, or any deposit obligation.",
       "sourceClass": "government-repository-policy",
       "independence": "independent-of-maha",
-      "relationshipToEarlier": "Carried forward into Tranche 16 via Tranche 15: same source, same locator, same claim scope. Originally inspected as tr13-src-018."
+      "relationshipToEarlier": "Carried forward into Tranche 16: same source, same locator, same claim scope. Originally inspected as tr13-src-018."
+    },
+    {
+      "inspectionId": "tr13-src-021",
+      "topic": "correction",
+      "sourceIdentity": "ICMJE Recommendations, §III.A Corrections and Version Control",
+      "version": "Updated January 2026",
+      "stableUrl": "https://www.icmje.org/recommendations/browse/publishing-and-editorial-issues/corrections-and-version-control.html",
+      "locator": "§III.A, paragraph beginning \"Errors serious enough to invalidate a paper’s results\".",
+      "inspectionDepth": "targeted-section-read",
+      "accessBasis": "Publicly published editorial recommendations.",
+      "reuseBasis": "Reference-only. Bounded original summary; recommendation text is not copied into artifacts.",
+      "supportedClaimScope": "That errors serious enough to invalidate results and conclusions may require retraction, and that retraction with republication may be considered where honest error changes results but the underlying science appears valid.",
+      "boundary": "Editorial recommendations for journals. They bind no publisher, do not determine whether any specific correction was handled properly, and address scholarly articles rather than arbitrary published records.",
+      "sourceClass": "professional-body-recommendation",
+      "independence": "independent-of-maha",
+      "relationshipToEarlier": "Carried forward into Tranche 16: same source, same locator, same claim scope. Originally inspected as tr13-src-021."
     },
     {
       "inspectionId": "tr14-src-101",
@@ -70,7 +118,7 @@
       "boundary": "A control catalogue. It does not state that any system is auditable, does not select events for any deployment, and confers no assurance by being cited.",
       "sourceClass": "government-standards-body",
       "independence": "independent-of-maha",
-      "relationshipToEarlier": "Carried forward into Tranche 16 via Tranche 15: same source, same locator, same claim scope. Originally inspected as tr14-src-101."
+      "relationshipToEarlier": "Carried forward into Tranche 16: same source, same locator, same claim scope. Originally inspected as tr14-src-101."
     },
     {
       "inspectionId": "tr15-src-101",
@@ -86,7 +134,7 @@
       "boundary": "This is measurement calibration of an instrument against a standard. It does not define calibration of a probabilistic forecast, which is a different concept sharing the word. A page on forecast calibration must not cite this definition, and this source establishes nothing about model confidence.",
       "sourceClass": "international-metrology-authority",
       "independence": "independent-of-maha",
-      "relationshipToEarlier": "Carried forward into Tranche 16 via Tranche 15: same source, same locator, same claim scope. Originally inspected as tr15-src-101."
+      "relationshipToEarlier": "Carried forward into Tranche 16: same source, same locator, same claim scope. Originally inspected as tr15-src-101."
     },
     {
       "inspectionId": "tr15-src-103",
@@ -102,7 +150,7 @@
       "boundary": "Error in the metrological sense, requiring a reference value. It is not model error, prediction error, or a mistake in a procedure, and it does not define uncertainty, which the same vocabulary treats as a separate concept.",
       "sourceClass": "international-metrology-authority",
       "independence": "independent-of-maha",
-      "relationshipToEarlier": "Carried forward into Tranche 16 via Tranche 15: same source, same locator, same claim scope. Originally inspected as tr15-src-103."
+      "relationshipToEarlier": "Carried forward into Tranche 16: same source, same locator, same claim scope. Originally inspected as tr15-src-103."
     },
     {
       "inspectionId": "tr16-src-101",
@@ -162,5 +210,5 @@
     }
   ],
   "uninspectedTopicNote": "The uninspected topics are predominantly this organisation’s own operational concepts and the author’s own concepts on the personal properties, for which no external authority exists to cite.",
-  "provenanceDigest": "sha256:45713be1759fa3e2afbf40df858a1f268f08c8682bec04b3aee5ba1984a3560b"
+  "provenanceDigest": "sha256:32be521da0c888307192f79ed1ff3f15c3d4f964bb7e870c3b7774e53e624674"
 }

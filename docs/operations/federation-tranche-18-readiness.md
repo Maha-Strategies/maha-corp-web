@@ -1,4 +1,4 @@
-# Federation Tranche 15 — local readiness
+# Federation Tranche 18 — local readiness
 
 Reviewed, not published. No route, release, sitemap entry or public page was created, and no build was run.
 
@@ -6,26 +6,26 @@ Reviewed, not published. No route, release, sitemap entry or public page was cre
 
 | | |
 |---|---|
-| Cohort | 100 |
-| Topics in cohort | 44 |
-| Topics inspected | 13 |
-| Distinct sources | 10 |
-| Specifications | 20 |
-| Bounded questions | 100 |
-| Dependencies missing | 32 |
+| Cohort | 32 |
+| Topics in cohort | 32 |
+| Topics inspected | 3 |
+| Distinct sources | 3 |
+| Specifications | 3 |
+| Bounded questions | 15 |
+| Dependencies missing | 0 |
 | Prerequisites selected | 0 |
-| Projected Tranche 14 unlocks | 0 |
+| Projected Tranche 17 unlocks | 0 |
 
 ## Classification
 
 | State | Candidates |
 |---|---|
-| `blocked` | 80 |
-| `evidence-ready` | 20 |
+| `blocked` | 29 |
+| `evidence-ready` | 3 |
 
 ## Dependency-first selection, and its ceiling
 
-Tranche 14 left 38 candidates blocked on 17 distinct prerequisites. Only 0 of those
+Tranche 17 left 38 candidates blocked on 17 distinct prerequisites. Only 0 of those
 prerequisites exist in the remaining pool, and each unlocks exactly one dependent. Every prerequisite with a fan-out
 above one is absent from the frozen candidate map.
 

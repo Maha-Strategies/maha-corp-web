@@ -6,8 +6,8 @@
   "counts": {
     "total": 100,
     "byFinalState": {
-      "blocked": 83,
-      "evidence-ready": 17
+      "blocked": 80,
+      "evidence-ready": 20
     },
     "bySemanticResult": {
       "blocked on ownership or dependency": 32,
@@ -348,8 +348,8 @@
       "declaredOwner": "maha-research",
       "dependencyState": "satisfied-by-earlier-tranche",
       "semanticResult": "distinct",
-      "finalState": "blocked",
-      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"evaluation-protocol\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
+      "finalState": "evidence-ready",
+      "reason": "Dependency resolved (satisfied-by-earlier-tranche); source inspected for \"evaluation-protocol\" with an exact locator and a stated reuse basis."
     },
     {
       "candidateId": "cand_3c50d519b9226c242fc87b14",
@@ -572,8 +572,8 @@
       "declaredOwner": "maha-research",
       "dependencyState": "satisfied-by-earlier-tranche",
       "semanticResult": "distinct",
-      "finalState": "blocked",
-      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"evaluation-protocol\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
+      "finalState": "evidence-ready",
+      "reason": "Dependency resolved (satisfied-by-earlier-tranche); source inspected for \"evaluation-protocol\" with an exact locator and a stated reuse basis."
     },
     {
       "candidateId": "cand_6010d2716a2fcb9da4be22ef",
@@ -1118,8 +1118,8 @@
       "declaredOwner": "maha-research",
       "dependencyState": "satisfied-by-earlier-tranche",
       "semanticResult": "distinct",
-      "finalState": "blocked",
-      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"compiler-provenance\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
+      "finalState": "evidence-ready",
+      "reason": "Dependency resolved (satisfied-by-earlier-tranche); source inspected for \"compiler-provenance\" with an exact locator and a stated reuse basis."
     },
     {
       "candidateId": "cand_cc82c7609bf44bee9a8a3966",
@@ -1416,5 +1416,5 @@
       "reason": "No definition candidate exists for urn:maha:concept:computation:error-budgets on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
     }
   ],
-  "provenanceDigest": "sha256:48cb32b5b024ef1af066b4d149e4f327e7aec22b947b3d7ff81c59f34b0ff197"
+  "provenanceDigest": "sha256:20a2526098ad4ed70414026a3e10423e4adf0af63661bc9651aa881b66bf7eec"
 }

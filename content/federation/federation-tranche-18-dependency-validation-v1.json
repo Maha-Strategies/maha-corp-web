@@ -1,0 +1,235 @@
+{
+  "schemaVersion": "maha-federation-tranche-18-dependency-validation/1.0",
+  "frozenOn": "2026-09-06",
+  "rule": "An application page depends on the canonical definition of its concept, on the property that declares ownership. It may apply the concept and may not redefine it. A missing prerequisite blocks the dependent page and is never inferred.",
+  "counts": {
+    "live": 32
+  },
+  "dependencies": [
+    {
+      "candidateId": "cand_0d9b1a88cbf93d413a243d71",
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_1677d8e5ffd0adccd70025c9",
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_25c680ff193b4f35f49e96ae",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_2cb4942c45f1804543a91a4a",
+      "conceptId": "urn:maha:concept:computation:numerical-integration",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_31188cec0703fe842e52f242",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_3476e38beb1e953348f8d600",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_4e3ffcedfa7d51607e56c384",
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_5abc1a241361feb7e0f36d0d",
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_6f89066f567226c0e442bb39",
+      "conceptId": "urn:maha:concept:evidence:locator-verification",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_70ca0daa7c7b8f82481ef8bd",
+      "conceptId": "urn:maha:concept:evidence:conflicting-literature",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_79d4527b01877f8e8a9cf1ee",
+      "conceptId": "urn:maha:concept:evidence:unsupported-inference",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_908638ce5ea422d98d5273fb",
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_941aed3932712f20f9dad49d",
+      "conceptId": "urn:maha:concept:evidence:canonical-release",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_99546e87db73ddd7326a34ab",
+      "conceptId": "urn:maha:concept:evidence:audit-export",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_9d040a84a30d4c24c219709b",
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_9e9edd5648c41382537f568c",
+      "conceptId": "urn:maha:concept:computation:optimization",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_a265c5d9ff36ca1b17bfb8a0",
+      "conceptId": "urn:maha:concept:evidence:source-recovery",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_a563c1dcade1fa354b9069fa",
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_a870823d00f81a9a4854f848",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_aaf26e116535a7269e150c81",
+      "conceptId": "urn:maha:concept:computation:error-budgets",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_be8600b5f02aea927f745c11",
+      "conceptId": "urn:maha:concept:computation:reproducibility-fixtures",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_c1e0a9d1956d137e337cae16",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_d90b7197535681a502dccba9",
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_d93df04cd32791dbcc717955",
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_de8dd0a88e8704fe5855033e",
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_e41cfa0c9ad358c43c72d1ee",
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_e9e65aab997734663ea01dc4",
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_eee65fe274335f8de817ecd7",
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_f770668f95f1fc5022b10680",
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_f8bc85696eedfca72dc83120",
+      "conceptId": "urn:maha:concept:evidence:passage-support",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_faa1c9127f42242870c4661a",
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_fdada5f64f6c5c8b6f218663",
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    }
+  ],
+  "provenanceDigest": "sha256:f86b1124eb0c78c473d90006a92228325b500c861b8965d8fe67af7a2e1563de"
+}

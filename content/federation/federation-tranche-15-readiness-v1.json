@@ -6,19 +6,19 @@
   "counts": {
     "cohort": 100,
     "byFinalState": {
-      "blocked": 83,
-      "evidence-ready": 17
+      "blocked": 80,
+      "evidence-ready": 20
     },
-    "specifications": 17,
-    "boundedQuestions": 85,
+    "specifications": 20,
+    "boundedQuestions": 100,
     "topicsInCohort": 44,
-    "topicsInspected": 11,
+    "topicsInspected": 13,
     "distinctSources": 10,
     "dependenciesMissing": 32,
     "prerequisitesSelected": 0,
     "projectedTranche14Unlocks": 0
   },
-  "honestOutcome": "Selection was dependency-first, and the diagnosis bounded what that could achieve. Of the 17 prerequisites blocking Tranche 14, 0 exist in the remaining pool and each unlocks one dependent, so this cohort projects 0 unlocks rather than 38. The other 13 are absent from the frozen candidate map and are recorded as inactive repair proposals. Evidence-ready is bounded by source inspection: 11 of 44 topics were inspected, 8 carried forward from Tranche 14 and 3 newly.",
+  "honestOutcome": "Selection was dependency-first, and the diagnosis bounded what that could achieve. Of the 17 prerequisites blocking Tranche 14, 0 exist in the remaining pool and each unlocks one dependent, so this cohort projects 0 unlocks rather than 38. The other 13 are absent from the frozen candidate map and are recorded as inactive repair proposals. Evidence-ready is bounded by source inspection: 13 of 44 topics were inspected, 10 carried forward from Tranche 14 and 3 newly.",
   "publicationBoundary": "No route, release, sitemap entry or public page is created. No build was run.",
-  "provenanceDigest": "sha256:073a82d901bbac03cfe22cdbd1e55954524eb271cdf0ea5f71ff39dd3c110ff6"
+  "provenanceDigest": "sha256:95157a41f413d74e5e695089360775f2237c771552eed5ca7bd2c26fc7b470e0"
 }

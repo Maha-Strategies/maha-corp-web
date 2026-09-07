@@ -6,8 +6,8 @@
   "counts": {
     "total": 100,
     "byFinalState": {
-      "blocked": 81,
-      "evidence-ready": 19
+      "blocked": 77,
+      "evidence-ready": 23
     },
     "bySemanticResult": {
       "blocked on ownership or dependency": 8,
@@ -208,8 +208,8 @@
       "declaredOwner": "maha-research",
       "dependencyState": "satisfied-by-earlier-tranche",
       "semanticResult": "distinct",
-      "finalState": "blocked",
-      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"evaluation-protocol\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
+      "finalState": "evidence-ready",
+      "reason": "Dependency resolved (satisfied-by-earlier-tranche); source inspected for \"evaluation-protocol\" with an exact locator and a stated reuse basis."
     },
     {
       "candidateId": "cand_369a6f8e3a53afd1240059df",
@@ -334,8 +334,8 @@
       "declaredOwner": "maha-research",
       "dependencyState": "satisfied-by-earlier-tranche",
       "semanticResult": "distinct",
-      "finalState": "blocked",
-      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"evaluation-protocol\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
+      "finalState": "evidence-ready",
+      "reason": "Dependency resolved (satisfied-by-earlier-tranche); source inspected for \"evaluation-protocol\" with an exact locator and a stated reuse basis."
     },
     {
       "candidateId": "cand_49aa8c59c3937c1fa051a721",
@@ -586,8 +586,8 @@
       "declaredOwner": "maha-research",
       "dependencyState": "satisfied-by-earlier-tranche",
       "semanticResult": "distinct",
-      "finalState": "blocked",
-      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"correction\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
+      "finalState": "evidence-ready",
+      "reason": "Dependency resolved (satisfied-by-earlier-tranche); source inspected for \"correction\" with an exact locator and a stated reuse basis."
     },
     {
       "candidateId": "cand_67328511b3565384d1f5240c",
@@ -922,8 +922,8 @@
       "declaredOwner": "maha-research",
       "dependencyState": "satisfied-by-earlier-tranche",
       "semanticResult": "distinct",
-      "finalState": "blocked",
-      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"benchmark-design\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
+      "finalState": "evidence-ready",
+      "reason": "Dependency resolved (satisfied-by-earlier-tranche); source inspected for \"benchmark-design\" with an exact locator and a stated reuse basis."
     },
     {
       "candidateId": "cand_a0e0e32303b98befccc35d04",
@@ -1416,5 +1416,5 @@
       "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"assurance-cases\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
     }
   ],
-  "provenanceDigest": "sha256:e301ad1478fc9341008c33cae9b9110f603e9f3cd9257f9db28037e54286dae8"
+  "provenanceDigest": "sha256:1066f97d6b39a5fc930d550a5f87a50c498f9fc51a755f521df2e25c62ed3b55"
 }

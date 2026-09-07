@@ -3,8 +3,8 @@
   "frozenOn": "2026-09-06",
   "rule": "Specifications exist only for evidence-ready candidates. A blocked, revised or duplicative candidate cannot receive one.",
   "counts": {
-    "specifications": 17,
-    "boundedQuestions": 85
+    "specifications": 20,
+    "boundedQuestions": 100
   },
   "specifications": [
     {
@@ -362,6 +362,65 @@
       "boundary": "A specification. Not a route, a release or a public page."
     },
     {
+      "candidateId": "cand_3bf1cf99485cf2d8d6af73ab",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/evaluation-protocol/relationships",
+      "owningProperty": "maha-research",
+      "conceptId": "urn:maha:concept:evidence:evaluation-protocol",
+      "routeRole": "relationships",
+      "directAnswer": "Evaluation Protocol — Relationships: Understand Evaluation Protocol through the relationships lens in Research Objects on research.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:evidence:evaluation-protocol under the owner-application contract. The canonical definition remains with maha-research.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1",
+          "locator": "MEASURE 2.1 — test sets, metrics and TEVV tooling are documented.",
+          "supports": "That an evaluation protocol is expected to record the test sets, the metrics and the tools used, so that the evaluation can be examined afterwards."
+        }
+      ],
+      "limitations": [
+        "Says what should be documented, not how to design a protocol, which metrics are correct for a task, or that a documented protocol is a sound one."
+      ],
+      "negativeSpace": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does evaluation-protocol mean in this context, and who owns the definition?",
+        "What does the inspected source establish about evaluation-protocol, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:evaluation-protocol"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+          "locator": "MEASURE 2.1 — test sets, metrics and TEVV tooling are documented.",
+          "version": "January 2023"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:evidence:evaluation-protocol"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
       "candidateId": "cand_3c50d519b9226c242fc87b14",
       "canonicalUrl": "https://policy.mahastrategies.com/policy/auditability/machine-rule",
       "owningProperty": "maha-policy",
@@ -594,6 +653,65 @@
       },
       "expectedCanonicalDependencies": [
         "urn:maha:concept:governance:standards-and-conformity"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_5f162714781001cffbb7061b",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/evaluation-protocol/machine-record",
+      "owningProperty": "maha-research",
+      "conceptId": "urn:maha:concept:evidence:evaluation-protocol",
+      "routeRole": "machine-record",
+      "directAnswer": "Evaluation Protocol — Machine Record: Understand Evaluation Protocol through the machine record lens in Research Objects on research.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:evidence:evaluation-protocol under the owner-application contract. The canonical definition remains with maha-research.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1",
+          "locator": "MEASURE 2.1 — test sets, metrics and TEVV tooling are documented.",
+          "supports": "That an evaluation protocol is expected to record the test sets, the metrics and the tools used, so that the evaluation can be examined afterwards."
+        }
+      ],
+      "limitations": [
+        "Says what should be documented, not how to design a protocol, which metrics are correct for a task, or that a documented protocol is a sound one."
+      ],
+      "negativeSpace": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does evaluation-protocol mean in this context, and who owns the definition?",
+        "What does the inspected source establish about evaluation-protocol, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:evaluation-protocol"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+          "locator": "MEASURE 2.1 — test sets, metrics and TEVV tooling are documented.",
+          "version": "January 2023"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:evidence:evaluation-protocol"
       ],
       "boundary": "A specification. Not a route, a release or a public page."
     },
@@ -893,6 +1011,65 @@
       "boundary": "A specification. Not a route, a release or a public page."
     },
     {
+      "candidateId": "cand_cc1c55c861ab943017fd61a9",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/compiler-provenance/failure-mode",
+      "owningProperty": "maha-research",
+      "conceptId": "urn:maha:concept:evidence:compiler-provenance",
+      "routeRole": "failure-mode",
+      "directAnswer": "Compiler Provenance — Failure Mode: Understand Compiler Provenance through the failure mode lens in Research Objects on research.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:evidence:compiler-provenance under the owner-application contract. The canonical definition remains with maha-research.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "W3C PROV-DM: The PROV Data Model",
+          "locator": "§2.1 PROV Core Structures — Entity and Activity definitions.",
+          "supports": "That provenance can be modelled as entities, activities that act upon them over time, and derivation relations between entities."
+        }
+      ],
+      "limitations": [
+        "A data model for expressing provenance. It does not establish that any recorded provenance is accurate, complete, or trustworthy, and it prescribes no build or compiler behaviour."
+      ],
+      "negativeSpace": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does compiler-provenance mean in this context, and who owns the definition?",
+        "What does the inspected source establish about compiler-provenance, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:compiler-provenance"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "W3C PROV-DM: The PROV Data Model",
+          "stableUrl": "https://www.w3.org/TR/prov-dm/",
+          "locator": "§2.1 PROV Core Structures — Entity and Activity definitions.",
+          "version": "W3C Recommendation, 30 April 2013"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:evidence:compiler-provenance"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
       "candidateId": "cand_e484d7475ce7aaba4e5a3536",
       "canonicalUrl": "https://policy.mahastrategies.com/policy/model-evaluation/machine-rule",
       "owningProperty": "maha-policy",
@@ -1011,5 +1188,5 @@
       "boundary": "A specification. Not a route, a release or a public page."
     }
   ],
-  "provenanceDigest": "sha256:32f783b893ba74fdecd15a8e2d3afd4843190621fe07d6d28bf51f1be313bb27"
+  "provenanceDigest": "sha256:55df67458f7cf8b14861c9df04bc05b73afe7bb1ae6fc5cf6c57de52cc42c232"
 }

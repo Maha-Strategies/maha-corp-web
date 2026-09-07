@@ -53,6 +53,12 @@ export type TrancheConfig = {
   soughtButNotInspected: { source: string; outcome: string; topic: string; resolution: string }[]
   /** Prose for the Markdown report explaining this tranche's situation. */
   situationNote: string
+  /**
+   * Which candidate map to read. Defaults to v2, so every tranche built against
+   * it keeps reproducing byte-identically; v3 adds the 32 definitions v2 never
+   * contained and is read only by the tranche that reviews them.
+   */
+  mapVersion?: 'v2' | 'v3'
 }
 
 export function runTranche(config: TrancheConfig): void {
@@ -71,9 +77,10 @@ export function runTranche(config: TrancheConfig): void {
 
   /* -- inputs ---------------------------------------------------------------- */
 
-  const map = JSON.parse(readFileSync(`${OUT}/federation-route-candidates-v2.json`, 'utf8')) as
+  const mapVersion = config.mapVersion ?? 'v2'
+  const map = JSON.parse(readFileSync(`${OUT}/federation-route-candidates-${mapVersion}.json`, 'utf8')) as
     { candidates: Candidate[] }
-  const lineage = JSON.parse(readFileSync(`${OUT}/federation-candidate-lineage-v2.json`, 'utf8')) as
+  const lineage = JSON.parse(readFileSync(`${OUT}/federation-candidate-lineage-${mapVersion}.json`, 'utf8')) as
     { supersededCandidates: { candidateId: string }[] }
   const previousDeps = JSON.parse(readFileSync(`${OUT}/federation-tranche-${prev}-dependency-validation-v1.json`, 'utf8')) as
     { dependencies: { candidateId: string; conceptId: string; declaredOwner: string; state: string }[] }
@@ -260,18 +267,43 @@ export function runTranche(config: TrancheConfig): void {
    * inspection it derives from, so a reader can see the evidence was not gathered
    * afresh for this cohort.
    */
-  const t13Sources = JSON.parse(readFileSync(`${OUT}/federation-tranche-${prev}-source-inspections-v1.json`, 'utf8')) as
-    { inspections: Inspection[] }
-  const carried: Inspection[] = t13Sources.inspections
+  /**
+   * Every inspection from every prior tranche, not only the previous one.
+   *
+   * Reading `prev` alone loses an inspection whenever its topic skips a
+   * tranche: audit-export was inspected in Tranche 14 and version-relationship
+   * in Tranche 13, and neither reached Tranche 18 because Tranche 17 did not
+   * contain them. An inspection is a reading of one source at one locator, and
+   * it stays valid wherever that topic appears; which tranche happened to
+   * contain it is an accident of selection.
+   *
+   * Deduplicated by topic, keeping the earliest, so a topic is never inspected
+   * twice and the recorded provenance points at the reading that actually
+   * happened.
+   */
+  const priorInspections = new Map<string, Inspection>()
+  for (const t of config.priorCohorts) {
+    let prior: { inspections?: Inspection[] }
+    try {
+      prior = JSON.parse(readFileSync(`${OUT}/federation-tranche-${t}-source-inspections-v1.json`, 'utf8'))
+    } catch { continue }
+    for (const i of prior.inspections ?? []) {
+      if (!priorInspections.has(i.topic)) priorInspections.set(i.topic, i)
+    }
+  }
+
+  /**
+   * Prior inspections whose topic appears in this cohort.
+   *
+   * Each records where it was originally read, so a carried inspection is never
+   * presented as evidence newly gathered for this tranche.
+   */
+  const carried: Inspection[] = [...priorInspections.values()]
     .filter((i) => cohortTopics.has(i.topic))
     .map((i) => ({
       ...i,
-      // The id is not rewritten. An inspection identifies one reading of one
-      // source at one locator, and renaming it per tranche implies a reading
-      // that did not happen — which is how carried ids drifted two tranches out
-      // of step. The id stays; the relationship records the chain.
       relationshipToEarlier:
-        `Carried forward into Tranche ${n} via Tranche ${prev}: same source, same locator, same claim scope. ` +
+        `Carried forward into Tranche ${n}: same source, same locator, same claim scope. ` +
         `Originally inspected as ${i.inspectionId}.`,
     }))
 

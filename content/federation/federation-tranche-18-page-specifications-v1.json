@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "maha-federation-tranche-18-page-specifications/1.0",
+  "frozenOn": "2026-09-06",
+  "rule": "Specifications exist only for evidence-ready candidates. A blocked, revised or duplicative candidate cannot receive one.",
+  "counts": {
+    "specifications": 3,
+    "boundedQuestions": 15
+  },
+  "specifications": [
+    {
+      "candidateId": "cand_99546e87db73ddd7326a34ab",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/audit-export/definition",
+      "owningProperty": "maha-research",
+      "conceptId": "urn:maha:concept:evidence:audit-export",
+      "routeRole": "definition",
+      "directAnswer": "Audit Export — Definition: Understand Audit Export through the definition lens in Research Objects on research.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:evidence:audit-export under the canonical-owner contract. The canonical definition remains with maha-research.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "NIST SP 800-53 Rev. 5, Security and Privacy Controls for Information Systems and Organizations",
+          "locator": "Control AU-3 (Content of Audit Records), items a-f and the Discussion paragraph.",
+          "supports": "That an audit record is expected to carry the event description, timestamp, source, outcome and the identity of entities associated with the event, and that audit trails can reveal personally identifiable information, which the organisation is expected to consider and mitigate."
+        }
+      ],
+      "limitations": [
+        "Specifies record content, not an export format, retention period or disclosure rule. The privacy caution is a consideration the standard raises, not a permission to export."
+      ],
+      "negativeSpace": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does audit-export mean in this context, and who owns the definition?",
+        "What does the inspected source establish about audit-export, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:evidence:audit-export"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "NIST SP 800-53 Rev. 5, Security and Privacy Controls for Information Systems and Organizations",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf",
+          "locator": "Control AU-3 (Content of Audit Records), items a-f and the Discussion paragraph.",
+          "version": "Revision 5, DOI 10.6028/NIST.SP.800-53r5"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:evidence:audit-export"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_aaf26e116535a7269e150c81",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/error-budgets/definition",
+      "owningProperty": "maha-research",
+      "conceptId": "urn:maha:concept:computation:error-budgets",
+      "routeRole": "definition",
+      "directAnswer": "Error Budgets — Definition: Understand Error Budgets through the definition lens in Research Objects on research.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:computation:error-budgets under the canonical-owner contract. The canonical definition remains with maha-research.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "Site Reliability Engineering (Google), chapter \"Embracing Risk\"",
+          "locator": "Section \"Forming Your Error Budget\".",
+          "supports": "That an error budget is derived from a service level objective and states, as an objective metric, how unreliable a service is permitted to be within a defined period."
+        }
+      ],
+      "limitations": [
+        "Describes one organisation’s published practice, not a standard. It sets no budget for any service, and an error budget bounds permitted unreliability rather than measuring correctness."
+      ],
+      "negativeSpace": "This route is the canonical definition of computation for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does error-budgets mean in this context, and who owns the definition?",
+        "What does the inspected source establish about error-budgets, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:computation:error-budgets"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "Site Reliability Engineering (Google), chapter \"Embracing Risk\"",
+          "stableUrl": "https://sre.google/sre-book/embracing-risk/",
+          "locator": "Section \"Forming Your Error Budget\".",
+          "version": "As published at sre.google/sre-book, read 2026-09-06"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:computation:error-budgets"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_f770668f95f1fc5022b10680",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/version-relationship/definition",
+      "owningProperty": "maha-research",
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "routeRole": "definition",
+      "directAnswer": "Version Relationship — Definition: Understand Version Relationship through the definition lens in Research Objects on research.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:evidence:version-relationship under the canonical-owner contract. The canonical definition remains with maha-research.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "PubMed Central, Author Manuscripts in PMC",
+          "locator": "Section \"What is the Author Manuscript?\" — first paragraph.",
+          "supports": "That versions of one work stand in a stated relationship — accepted manuscript versus published record — differing by the edits each contains."
+        }
+      ],
+      "limitations": [
+        "Supports the existence of a version relationship for journal articles. It does not generalise to other artifact types and establishes no versioning scheme."
+      ],
+      "negativeSpace": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does version-relationship mean in this context, and who owns the definition?",
+        "What does the inspected source establish about version-relationship, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:evidence:version-relationship"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "PubMed Central, Author Manuscripts in PMC",
+          "stableUrl": "https://pmc.ncbi.nlm.nih.gov/about/authorms/",
+          "locator": "Section \"What is the Author Manuscript?\" — first paragraph.",
+          "version": "As published at pmc.ncbi.nlm.nih.gov, read 2026-09-06"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:evidence:version-relationship"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    }
+  ],
+  "provenanceDigest": "sha256:eec0837043874337a50b4fe1156908dc121c4c999b23cf6c973b73b04d969b95"
+}
