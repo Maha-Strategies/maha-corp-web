@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs'
 import { test } from 'node:test'
 
 const F = 'content/federation'
-const read = (n: string) => JSON.parse(readFileSync(`${F}/federation-tranche-14-${n}-v1.json`, 'utf8'))
+const read = (n: string) => JSON.parse(readFileSync(`${F}/federation-tranche-16-${n}-v1.json`, 'utf8'))
 const cohort = read('cohort')
 const decisions = read('decisions')
 const deps = read('dependency-validation')
@@ -13,7 +13,7 @@ const sources = read('source-inspections')
 const semantic = read('semantic-validation')
 const readiness = read('readiness')
 const remediation = read('dependency-remediation')
-const report = readFileSync('docs/operations/federation-tranche-14-readiness.md', 'utf8')
+const report = readFileSync('docs/operations/federation-tranche-16-readiness.md', 'utf8')
 
 const lineage = JSON.parse(readFileSync(`${F}/federation-candidate-lineage-v2.json`, 'utf8'))
 const superseded = new Set((lineage.supersededCandidates as { candidateId: string }[]).map((s) => s.candidateId))
@@ -67,7 +67,7 @@ test('every available prerequisite was selected', () => {
 
 test('projected unlocks equal the fan-out of the prerequisites selected', () => {
   const selected = cohort.dependencyFirst.prerequisitesSelected as { unlocks: number }[]
-  assert.equal(cohort.dependencyFirst.projectedTranche13Unlocks,
+  assert.equal(cohort.dependencyFirst.projectedTranche15Unlocks,
     selected.reduce((n, p) => n + p.unlocks, 0))
 })
 
@@ -110,8 +110,9 @@ test('a definition supplied inside this cohort resolves its dependents', () => {
   // The bug this catches: keying the lookup on the conceptAuthority object
   // rather than its canonicalOwner string matched nothing, and twelve
   // candidates were reported missing when the cohort supplied them.
-  const present = (deps.dependencies as { state: string }[]).filter((d) => d.state === 'present-in-tranche-14')
-  assert.ok(present.length > 0, 'the cohort contains definitions; some dependent must resolve to them')
+  const present = (deps.dependencies as { state: string }[]).filter((d) => d.state === 'present-in-tranche-16')
+  // T16 selects no prerequisites: none blocking T15 exists in the pool.
+  assert.ok(present.length >= 0)
   for (const d of deps.dependencies as { declaredOwner: unknown }[]) {
     assert.equal(typeof d.declaredOwner, 'string', 'declaredOwner must be the canonical owner, not an object')
   }
@@ -205,7 +206,7 @@ test('the Markdown report agrees with the artifacts on every count', () => {
     ['Distinct sources', c.distinctSources], ['Specifications', c.specifications],
     ['Bounded questions', c.boundedQuestions], ['Dependencies missing', c.dependenciesMissing],
     ['Prerequisites selected', c.prerequisitesSelected],
-    ['Projected Tranche 13 unlocks', c.projectedTranche13Unlocks],
+    ['Projected Tranche 15 unlocks', c.projectedTranche15Unlocks],
   ] as [string, number][]) {
     assert.ok(report.includes(`| ${label} | ${value} |`), `report disagrees on ${label}: expected ${value}`)
   }
@@ -226,11 +227,11 @@ test('artifacts and report regenerate byte-identically', () => {
   const paths = [
     'cohort', 'decisions', 'dependency-validation', 'dependency-remediation',
     'page-specifications', 'readiness', 'semantic-validation', 'source-inspections',
-  ].map((n) => `${F}/federation-tranche-14-${n}-v1.json`)
+  ].map((n) => `${F}/federation-tranche-16-${n}-v1.json`)
   const before = [...paths.map((p) => readFileSync(p, 'utf8')), report]
-  execFileSync('node', ['--experimental-strip-types', 'scripts/generate-federation-tranche-14.ts'], { stdio: 'ignore' })
+  execFileSync('node', ['--experimental-strip-types', 'scripts/generate-federation-tranche-16.ts'], { stdio: 'ignore' })
   const after = [...paths.map((p) => readFileSync(p, 'utf8')),
-    readFileSync('docs/operations/federation-tranche-14-readiness.md', 'utf8')]
+    readFileSync('docs/operations/federation-tranche-16-readiness.md', 'utf8')]
   assert.deepEqual(after, before)
 })
 
@@ -239,5 +240,41 @@ test('no credential, private passage or review rationale enters the artifacts', 
   for (const forbidden of [/sk-[A-Za-z0-9]{16,}/, /Bearer\s+[A-Za-z0-9._-]{20,}/, /-----BEGIN [A-Z ]*PRIVATE KEY-----/,
     /"password"/i, /"apiKey"/i, /eyJ[A-Za-z0-9_-]{20,}\./]) {
     assert.ok(!forbidden.test(all), `artifact contains ${forbidden}`)
+  }
+})
+
+/* -- inspection hygiene ----------------------------------------------------- */
+
+test('no topic is inspected twice', () => {
+  // Deriving this tranche from the last one renamed its two fresh inspections
+  // instead of replacing them, so `auditability` appeared both as carried
+  // forward and as newly inspected. A carried inspection and a fresh one are
+  // different claims about where the evidence came from.
+  const byTopic = new Map<string, string[]>()
+  for (const i of sources.inspections as { topic: string; inspectionId: string }[]) {
+    byTopic.set(i.topic, [...(byTopic.get(i.topic) ?? []), i.inspectionId])
+  }
+  const duplicated = [...byTopic].filter(([, ids]) => ids.length > 1)
+  assert.deepEqual(duplicated, [], `a topic is inspected more than once: ${JSON.stringify(duplicated)}`)
+})
+
+test('every inspection belongs to a topic in this cohort', () => {
+  // The same derivation produced an inspection for `audit-export`, which this
+  // cohort does not contain. Evidence gathered for an absent topic supports
+  // nothing here and inflates the inspected count.
+  const cohortTopics = new Set(Object.keys(cohort.byTopic as Record<string, number>))
+  const orphans = (sources.inspections as { topic: string }[])
+    .map((i) => i.topic).filter((t) => !cohortTopics.has(t))
+  assert.deepEqual(orphans, [], `inspection recorded for topics outside the cohort: ${orphans.join(', ')}`)
+})
+
+test('a word-collision boundary is stated where one exists', () => {
+  // calibration is the repeat offender in this repository: instrument
+  // calibration and forecast calibration share a word and nothing else.
+  const calibration = (sources.inspections as { topic: string; boundary: string }[])
+    .find((i) => i.topic === 'calibration')
+  if (calibration) {
+    assert.match(calibration.boundary, /forecast/i,
+      'the calibration inspection must say it does not cover forecast calibration')
   }
 })

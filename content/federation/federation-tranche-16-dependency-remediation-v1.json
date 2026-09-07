@@ -1,0 +1,256 @@
+{
+  "schemaVersion": "maha-federation-tranche-16-dependency-remediation/1.0",
+  "frozenOn": "2026-09-06",
+  "purpose": "Diagnoses every prerequisite that blocked a Tranche 15 candidate, so the next cohort can be selected on what it would actually unblock rather than on utility alone.",
+  "counts": {
+    "blockedDependents": 32,
+    "distinctPrerequisites": 12,
+    "byAvailability": {
+      "absent-from-frozen-map": 12
+    },
+    "unlockableByThisTranche": 0
+  },
+  "finding": "Fan-out and availability are inversely related here. Every prerequisite with a fan-out above one is absent from the frozen map, and every prerequisite present in the pool unlocks exactly one dependent. Selecting all four available definitions therefore unblocks four of the thirty-eight. The remaining thirty-four are blocked by an incomplete candidate map rather than by selection policy.",
+  "prerequisites": [
+    {
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "declaredOwner": "maha-research",
+      "unlocks": 4,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_6a8af21d891464188c29dbb8",
+        "cand_7cec457fac2ac6a5b7839c9a",
+        "cand_a24840e1b41dabdf0d8312b2",
+        "cand_e6913e5b1d6155dcbe056b6a"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:error-budgets",
+      "declaredOwner": "maha-research",
+      "unlocks": 4,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_51fe56a2bfa94898ecb30609",
+        "cand_75a83140ef750c18da69801d",
+        "cand_a635802d1b21eb2ac591b5f9",
+        "cand_fc4da46d837d7b134b3d488f"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "declaredOwner": "maha-research",
+      "unlocks": 4,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_1c9d1d2ca8af857b87a76813",
+        "cand_3492801bafa20e3d50408a8e",
+        "cand_5da47ae131bd50c28a964e74",
+        "cand_cd30fe8a10e733f835d60834"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "declaredOwner": "maha-research",
+      "unlocks": 4,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_6708f2125c704c598a373d02",
+        "cand_6af09a682cc7e2277169d046",
+        "cand_9b067b11b9941116008a6a34",
+        "cand_ac614aab7eb9cc394996553b"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:reproducibility-fixtures",
+      "declaredOwner": "maha-research",
+      "unlocks": 4,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_384ee3f7a26eb546e6e0c053",
+        "cand_89ca2d8582ec5fdfd70701bd",
+        "cand_b47015c81e7f03093bca4044",
+        "cand_cc82c7609bf44bee9a8a3966"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "declaredOwner": "maha-research",
+      "unlocks": 2,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_7168a05d58662e49b6826c7e",
+        "cand_dd951c2a4e39f3756f7ee6f9"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "declaredOwner": "maha-research",
+      "unlocks": 2,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_03638eae89d44b2fcb9b6d10",
+        "cand_558c29e71ada643b2d7f7270"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "declaredOwner": "maha-research",
+      "unlocks": 2,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_c9ea7b1ca4cbc881270bd35c",
+        "cand_f2d40776c02061fd82af4f0d"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "declaredOwner": "maha-research",
+      "unlocks": 2,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_457721881f95e53782806bb6",
+        "cand_d06946e7b842a6b692144ebf"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "declaredOwner": "maha-research",
+      "unlocks": 2,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_0eff8a7f07532fcb14af59f2",
+        "cand_de495ad3d3b6cbad65c2537a"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:numerical-integration",
+      "declaredOwner": "maha-research",
+      "unlocks": 1,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_e3921066edee31291c7f4712"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:optimization",
+      "declaredOwner": "maha-research",
+      "unlocks": 1,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_5d2d5c52fc91b9ecce7bb007"
+      ]
+    }
+  ],
+  "repairProposals": [
+    {
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 4,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:error-budgets",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 4,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 4,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 4,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:reproducibility-fixtures",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 4,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 2,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 2,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 2,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 2,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 2,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:numerical-integration",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 1,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:optimization",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 1,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    }
+  ],
+  "boundary": "An analysis. It inserts no candidate, activates no proposal, and changes no Tranche 15 classification.",
+  "provenanceDigest": "sha256:b5d3343310379b6de30e0025c4043a8feebf3b5552f65f0a8c3fb5a10699f6e3"
+}

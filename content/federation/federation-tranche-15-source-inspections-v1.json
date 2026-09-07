@@ -9,7 +9,7 @@
   "freshlyInspected": 2,
   "inspections": [
     {
-      "inspectionId": "tr14-src-001",
+      "inspectionId": "tr13-src-001",
       "topic": "container-image",
       "sourceIdentity": "OCI Image Manifest Specification",
       "version": "image-spec v1.1 (specs-go VersionMajor 1, VersionMinor 1)",
@@ -22,10 +22,10 @@
       "boundary": "Supports what the manifest format specifies. It does not establish runtime behaviour, registry policy, supply-chain assurance, or that any particular image is trustworthy.",
       "sourceClass": "open-specification",
       "independence": "independent-of-maha",
-      "relationshipToEarlier": "Carried forward from Tranche 14 inspection tr14-src-001: same source, same locator, same claim scope."
+      "relationshipToEarlier": "Carried forward into Tranche 15 via Tranche 14: same source, same locator, same claim scope. Originally inspected as tr13-src-001."
     },
     {
-      "inspectionId": "tr14-src-004",
+      "inspectionId": "tr13-src-004",
       "topic": "citation-lineage",
       "sourceIdentity": "W3C PROV-DM: The PROV Data Model",
       "version": "W3C Recommendation, 30 April 2013",
@@ -38,10 +38,10 @@
       "boundary": "Supports expressing a lineage. It does not establish that a cited chain is correct, that a citation is warranted, or that any particular citation practice is standard.",
       "sourceClass": "open-standard-recommendation",
       "independence": "independent-of-maha",
-      "relationshipToEarlier": "Carried forward from Tranche 14 inspection tr14-src-004: same source, same locator, same claim scope."
+      "relationshipToEarlier": "Carried forward into Tranche 15 via Tranche 14: same source, same locator, same claim scope. Originally inspected as tr13-src-004."
     },
     {
-      "inspectionId": "tr14-src-005",
+      "inspectionId": "tr13-src-005",
       "topic": "model-evaluation",
       "sourceIdentity": "NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1",
       "version": "January 2023",
@@ -54,10 +54,10 @@
       "boundary": "A voluntary framework. It does not certify any system, establish a passing threshold, create a legal obligation, or state that following it makes a system safe.",
       "sourceClass": "government-standards-body",
       "independence": "independent-of-maha",
-      "relationshipToEarlier": "Carried forward from Tranche 14 inspection tr14-src-005: same source, same locator, same claim scope."
+      "relationshipToEarlier": "Carried forward into Tranche 15 via Tranche 14: same source, same locator, same claim scope. Originally inspected as tr13-src-005."
     },
     {
-      "inspectionId": "tr14-src-012",
+      "inspectionId": "tr13-src-012",
       "topic": "quantum-policy",
       "sourceIdentity": "FIPS 203, Module-Lattice-Based Key-Encapsulation Mechanism Standard",
       "version": "Effective 13 August 2024",
@@ -70,10 +70,10 @@
       "boundary": "Specifies an algorithm and its parameters. It does not state when any organisation must migrate, that migration is complete anywhere, or that quantum attack is imminent. \"Believed to be secure\" is the standard’s own hedge and is not a proof.",
       "sourceClass": "federal-standard",
       "independence": "independent-of-maha",
-      "relationshipToEarlier": "Carried forward from Tranche 14 inspection tr14-src-012: same source, same locator, same claim scope."
+      "relationshipToEarlier": "Carried forward into Tranche 15 via Tranche 14: same source, same locator, same claim scope. Originally inspected as tr13-src-012."
     },
     {
-      "inspectionId": "tr14-src-013",
+      "inspectionId": "tr13-src-013",
       "topic": "standards-and-conformity",
       "sourceIdentity": "NIST Special Publication 2000-01, ABC's of Conformity Assessment",
       "version": "NIST SP 2000-01",
@@ -86,10 +86,10 @@
       "boundary": "Describes the field. It does not accredit anyone, does not establish that any particular assessment is adequate, and does not substitute for the ISO/IEC 17000 text it quotes.",
       "sourceClass": "government-standards-body",
       "independence": "independent-of-maha",
-      "relationshipToEarlier": "Carried forward from Tranche 14 inspection tr14-src-013: same source, same locator, same claim scope."
+      "relationshipToEarlier": "Carried forward into Tranche 15 via Tranche 14: same source, same locator, same claim scope. Originally inspected as tr13-src-013."
     },
     {
-      "inspectionId": "tr14-src-016",
+      "inspectionId": "tr13-src-016",
       "topic": "machine-contracting",
       "sourceIdentity": "Regulation (EU) No 910/2014 (eIDAS)",
       "version": "EUR-Lex CELEX 32014R0910",
@@ -102,10 +102,10 @@
       "boundary": "Addresses signatures by natural and legal persons. It does not confer contracting capacity on an autonomous machine, does not establish that an agent may bind a principal, and must not be read as authorising machine-formed contracts.",
       "sourceClass": "statutory-instrument",
       "independence": "independent-of-maha",
-      "relationshipToEarlier": "Carried forward from Tranche 14 inspection tr14-src-016: same source, same locator, same claim scope."
+      "relationshipToEarlier": "Carried forward into Tranche 15 via Tranche 14: same source, same locator, same claim scope. Originally inspected as tr13-src-016."
     },
     {
-      "inspectionId": "tr14-src-018",
+      "inspectionId": "tr13-src-018",
       "topic": "author-manuscript",
       "sourceIdentity": "PubMed Central, Author Manuscripts in PMC",
       "version": "As published at pmc.ncbi.nlm.nih.gov, read 2026-09-06",
@@ -118,7 +118,7 @@
       "boundary": "Defines one version in a chain. It does not establish which version should be cited, that an author manuscript matches the published record, or any deposit obligation.",
       "sourceClass": "government-repository-policy",
       "independence": "independent-of-maha",
-      "relationshipToEarlier": "Carried forward from Tranche 14 inspection tr14-src-018: same source, same locator, same claim scope."
+      "relationshipToEarlier": "Carried forward into Tranche 15 via Tranche 14: same source, same locator, same claim scope. Originally inspected as tr13-src-018."
     },
     {
       "inspectionId": "tr14-src-101",
@@ -134,7 +134,7 @@
       "boundary": "A control catalogue. It does not state that any system is auditable, does not select events for any deployment, and confers no assurance by being cited.",
       "sourceClass": "government-standards-body",
       "independence": "independent-of-maha",
-      "relationshipToEarlier": "Carried forward from Tranche 14 inspection tr14-src-101: same source, same locator, same claim scope."
+      "relationshipToEarlier": "Carried forward into Tranche 15 via Tranche 14: same source, same locator, same claim scope. Originally inspected as tr14-src-101."
     },
     {
       "inspectionId": "tr15-src-101",
@@ -178,5 +178,5 @@
     }
   ],
   "uninspectedTopicNote": "The uninspected topics are predominantly this organisation’s own operational concepts and the author’s own concepts on the personal properties, for which no external authority exists to cite.",
-  "provenanceDigest": "sha256:7707c1cf6a1d91078d8fae81c826126d99bc1e4a0e38ae85cc835db3246c7abc"
+  "provenanceDigest": "sha256:cd0d0b88e0213ad4e0d85329d43c9d159cd2bf31826588c6448c777dacb49a1f"
 }

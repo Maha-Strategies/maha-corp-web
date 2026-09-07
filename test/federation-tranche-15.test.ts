@@ -176,7 +176,7 @@ test('carried-forward inspections say where they came from', () => {
   const carried = (sources.inspections as { inspectionId: string; relationshipToEarlier: string }[])
     .filter((i) => /Carried forward/.test(i.relationshipToEarlier))
   assert.equal(carried.length, sources.carriedForward)
-  for (const i of carried) assert.match(i.relationshipToEarlier, /Tranche 14 inspection tr14-src-\d+/)
+  for (const i of carried) assert.match(i.relationshipToEarlier, /Originally inspected as tr[0-9]+-src-[0-9]+/)
 })
 
 test('a source that could not be read is recorded, not omitted', () => {

@@ -35,6 +35,12 @@ export type Candidate = {
   conceptId: string
   conceptFamilyId: string
   conceptAuthority: { canonicalOwner: string; role: string; boundary: string }
+  // Present on every candidate in the frozen map and used by the page
+  // specifications. They were absent from this type and nothing noticed,
+  // because tsconfig excludes `scripts` and the generators lived there.
+  url: string
+  searchIntent: string
+  typedRelationships?: unknown[]
   scores: { weighted: number }
   rank: number
   tranche: number
