@@ -13,11 +13,9 @@ import { test } from 'node:test'
  * carries them as evidence-ready and implementation-ready, inside the
  * implementation-ready count.
  *
- * This guard fails today, deliberately. It is the gap, written down and
- * executable, rather than a note in a report. Closing it means either
- * recording the exact-revision review those four are waiting on, or marking
- * them awaiting-review in the ledger until it happens. Silencing the guard is
- * neither.
+ * Ledger v7 closes the gap by returning those four replacements to unresolved
+ * until their exact-revision reviews exist. The guard remains executable so a
+ * later ledger cannot silently reintroduce the unsupported readiness claim.
  *
  * The review index below is deliberately generous: every artifact that records
  * a per-candidate outcome counts, across all three vocabularies and both
@@ -30,7 +28,7 @@ const read = (name: string) => JSON.parse(readFileSync(`${F}/${name}`, 'utf8'))
 const has = (name: string) => existsSync(`${F}/${name}`)
 
 /** The ledger this guard checks. Asserted below to still be the newest. */
-const LATEST_LEDGER_VERSION = 5
+const LATEST_LEDGER_VERSION = 7
 
 /**
  * Every artifact that records a per-candidate review outcome.
