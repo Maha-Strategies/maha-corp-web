@@ -1,0 +1,721 @@
+{
+  "schemaVersion": "maha-federation-readiness-tranche-23-sources/1.0",
+  "inspectedOn": "2026-09-07",
+  "counts": {
+    "inspections": 54
+  },
+  "inspections": [
+    {
+      "sourceId": "borrowed-light-civilizational-memory",
+      "identity": "The Borrowed Light — Mayone Maharajan",
+      "locator": "repo:content/books/the-borrowed-light/chapter-5.md; repo:content/books/the-borrowed-light/chapter-6.md — working authorial manuscript inspected 2026-09-06; Chapter 5: The Hard Problem in the Mirror; Chapter 6: The Evidence That Needs No Physics and The Custodians",
+      "rightsBasis": "Maha-controlled authorial manuscript; bounded paraphrase and locator only. The packet does not redistribute the manuscript.",
+      "scope": "The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind.",
+      "boundary": "This establishes the author’s framework, not a historical lineage, empirical model of memory, cultural authority, priority, or consensus.",
+      "roles": [
+        "*"
+      ],
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "cosmic-recursion-authorial-lineage",
+      "identity": "The Cosmic Recursion — Mayone Maharajan",
+      "locator": "repo:content/books/the-cosmic-recursion/THE-COSMIC-RECURSION-manuscript.md — working authorial manuscript inspected 2026-09-06; Introduction and closing synthesis; passages distinguishing analogy, recurrence, evidence, and model boundary",
+      "rightsBasis": "Maha-controlled authorial manuscript; bounded paraphrase and locator only. The packet does not redistribute the manuscript.",
+      "scope": "A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification.",
+      "boundary": "Textual relationship inside one author’s corpus does not prove chronological influence, priority over other thinkers, public reception, or scientific validity.",
+      "roles": [
+        "*"
+      ],
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "datacite-schema-evidence-graph-t9",
+      "identity": "DataCite Metadata Schema Documentation — DataCite",
+      "locator": "https://datacite-metadata-schema.readthedocs.io/en/4.6/ — version 4.6; Identifier; Creator; Contributor; Version; RelatedIdentifier; Rights",
+      "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+      "scope": "Versioned metadata can name research objects, contributors, versions, typed relations, and rights statements.",
+      "boundary": "Metadata fields do not establish source quality, lawful collection, relationship truth, or that one object supports another object’s claim.",
+      "roles": [
+        "*"
+      ],
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "govinfo-api-and-urls-t9",
+      "identity": "GovInfo API and link service — U.S. Government Publishing Office",
+      "locator": "https://www.govinfo.gov/features/api — living documentation inspected 2026-09-06; API overview; package and granule endpoints; content and metadata downloads; API-key requirement",
+      "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+      "scope": "GovInfo provides programmatic discovery and retrieval for official content, package and granule metadata, and rendition links.",
+      "boundary": "An API response establishes repository identity and supplied metadata only; it does not prove a document supports a claim, is current law, or applies to a specific fact.",
+      "roles": [
+        "*"
+      ],
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "govinfo-authentication-t9",
+      "identity": "Authentication — U.S. Government Publishing Office",
+      "locator": "https://www.govinfo.gov/about/authentication — living documentation inspected 2026-09-06; Digital signatures for official PDFs; verification status and document-integrity explanation",
+      "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+      "scope": "Digital signatures can support verification that an official PDF was issued by GPO and has not changed since signing.",
+      "boundary": "Signature verification does not establish that the document is current, applicable, complete for a question, or substantively correct.",
+      "roles": [
+        "*"
+      ],
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "hhs-hipaa-auth",
+      "identity": "What is the difference between consent and authorization under the HIPAA Privacy Rule? — U.S. Department of Health and Human Services",
+      "locator": "https://www.hhs.gov/hipaa/for-professionals/faq/264/what-is-the-difference-between-consent-and-authorization/index.html — reviewed 28 December 2022; Entire FAQ: consent versus authorization",
+      "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+      "scope": "HIPAA-specific distinction between optional consent and detailed authorization.",
+      "boundary": "HIPAA does not govern every consumer health application or every jurisdiction.",
+      "roles": [
+        "*"
+      ],
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "local-claim-evidence-contract",
+      "identity": "Maha claim-evidence contract — Maha Strategies",
+      "locator": "repo:lib/claim-evidence.ts — repository source inspected 2026-09-06; assertClaimEvidence; provenance and empirical evidence axes",
+      "rightsBasis": "Maha-controlled repository source; symbols, headings, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+      "scope": "The contract represents where a claim came from separately from what empirical evidence, if any, supports it.",
+      "boundary": "A typed evidence label does not make a claim true, sufficient, current, causal, reproducible, or within a source’s actual scope.",
+      "roles": [
+        "*"
+      ],
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "local-computational-witness-repro-t9",
+      "identity": "Maha computational provenance witness — Maha Strategies",
+      "locator": "repo:packages/maha-witness/README.md — repository source inspected 2026-09-06; Recorded fields; Adapter boundary; Assurance boundary; verification command",
+      "rightsBasis": "Maha-controlled repository source; headings, symbols, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+      "scope": "The witness records execution identity, bounded environment metadata, seeds, configuration, and artifact hashes, and verifies the receipt digest offline.",
+      "boundary": "It does not capture arguments, arbitrary environment variables, paths, file contents, or credentials and does not establish scientific correctness, complete environment capture, or independent reproduction.",
+      "roles": [
+        "*"
+      ],
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "local-evidence-preflight-clearance-t9",
+      "identity": "Maha Evidence Preflight contract — Maha Strategies",
+      "locator": "repo:lib/evidence-preflight-contract.ts — repository source inspected 2026-09-06; EvidencePreflightClaimAssessment; blockers; privacy and offer boundaries",
+      "rightsBasis": "Maha-controlled repository source; headings, symbols, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+      "scope": "The local contract emits bounded structural findings for source identity, locator, claim scope, evidence status, inference risk, and rights/access limitations.",
+      "boundary": "A preflight result is not an independently verified Evidence Dossier, expert endorsement, legal clearance, or proof of truth.",
+      "roles": [
+        "*"
+      ],
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "local-evidence-preflight-scope-t9",
+      "identity": "Maha Evidence Preflight contract — Maha Strategies",
+      "locator": "repo:lib/evidence-preflight-contract.ts — repository source inspected 2026-09-06; EvidencePreflightBlocker; exact-locator-missing; claim-scope-overbroad; unsupported-inference-risk; rights-basis-unresolved",
+      "rightsBasis": "Maha-controlled repository source; headings, symbols, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+      "scope": "The local preflight separately records source identity, exact locator, evidence status, scope overbreadth, unsupported inference, rights, and access blockers.",
+      "boundary": "The preflight is automated and structural. It does not independently inspect a source, verify a dossier, retain submitted content by default, or establish claim truth.",
+      "roles": [
+        "*"
+      ],
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "local-recovery",
+      "identity": "Governed workflow recovery ledger — Maha Strategies",
+      "locator": "repo:lib/workflows/recovery.ts — repository source reviewed 2026-09-05; RecoveryStatus; RecoveryStore.claim; RecoveryStore.finish; recoveryResponseHeaders",
+      "rightsBasis": "Maha-controlled repository source; record symbols and file digest only. No credential, customer data, or runtime value is included.",
+      "scope": "Current replay-safe action and recovery-state ledger.",
+      "boundary": "A recorded state is not independent confirmation of the upstream side effect.",
+      "roles": [
+        "*"
+      ],
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "local-slurm-witness-adapter-t9",
+      "identity": "Maha SLURM witness adapter — Maha Strategies",
+      "locator": "repo:packages/maha-witness/src/maha_witness/adapters.py — repository source inspected 2026-09-06; slurm_metadata; allowlisted SLURM_ARRAY_JOB_ID, SLURM_ARRAY_TASK_ID, SLURM_CLUSTER_NAME, SLURM_CPUS_PER_TASK, SLURM_JOB_ID, SLURM_JOB_NAME, SLURM_NNODES and SLURM_JOB_PARTITION",
+      "rightsBasis": "Maha-controlled repository source; headings, symbols, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+      "scope": "The adapter normalizes a caller-supplied, allowlisted subset of SLURM metadata into a deterministic witness field set.",
+      "boundary": "The adapter does not submit a job, contact Slurm, capture arbitrary environment values, prove scheduler identity, prove job completion, or establish output correctness.",
+      "roles": [
+        "*"
+      ],
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "local-source-alignment-contract-t7",
+      "identity": "Maha frontier source-alignment contract — Maha Strategies",
+      "locator": "repo:lib/frontier-source-alignment.ts — repository source inspected 2026-09-06; source identity, version, locator, claim scope, and boundary axes",
+      "rightsBasis": "Maha-controlled repository source; symbols, headings, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+      "scope": "The alignment contract keeps source identity, version relationship, locator completeness, claim scope, and inference boundary as distinct review axes.",
+      "boundary": "The contract detects recorded defects and omissions; it cannot replace inspection or infer support from metadata or topical similarity.",
+      "roles": [
+        "*"
+      ],
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "local-source-reference-gate",
+      "identity": "Maha source-reference eligibility gate — Maha Strategies",
+      "locator": "repo:lib/source-evidence-reference.ts — repository source inspected 2026-09-06; SourceInspectionDepth; evaluateSourcePage; section-or-full-text eligibility",
+      "rightsBasis": "Maha-controlled repository source; symbols, headings, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+      "scope": "The contract records inspection depth and permits an explanatory source page only when every bound record is current, released, subject-aligned, and inspected at section or full-text depth.",
+      "boundary": "The gate enforces recorded state but cannot prove that the human inspection was competent, exhaustive, unbiased, or correctly transcribed.",
+      "roles": [
+        "*"
+      ],
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "local-task-state",
+      "identity": "Governed workflow task-state ledger — Maha Strategies",
+      "locator": "repo:lib/workflows/task-state.ts — repository source reviewed 2026-09-06; WorkflowTaskStatus; WorkflowTaskEvent; transition replay keys",
+      "rightsBasis": "Maha-controlled repository source; symbol names and a file identity may be recorded, but no credential, customer value, or runtime payload is retained.",
+      "scope": "Explicit task states and idempotent append-only transitions.",
+      "boundary": "The in-repository contract does not establish provider uptime, disaster recovery, or production persistence.",
+      "roles": [
+        "*"
+      ],
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "maha-principle",
+      "identity": "The Maha Principle — Mayone Maharajan",
+      "locator": "repo:content/books/the-maha-principle/The-Maha-Principle.md — working authorial manuscript inspected 2026-09-05; Device Autonomy assessment; bodily-autonomy bridge; authorial framing",
+      "rightsBasis": "Maha-controlled authorial manuscript; record section identity and file digest only. Any later quotation remains subject to the author-controlled publication policy.",
+      "scope": "The author’s normative concept of autonomy under technological and institutional pressure.",
+      "boundary": "This is an authorial thesis and assessment framework, not a validated clinical scale or settled political doctrine.",
+      "roles": [
+        "*"
+      ],
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "maha-principle-authorial-lineage",
+      "identity": "The Maha Principle — Mayone Maharajan",
+      "locator": "repo:content/books/the-maha-principle/The-Maha-Principle.md — working authorial manuscript inspected 2026-09-06; The Network and the Feed; Chapter 6; Chapter 7; Whole-Food Information",
+      "rightsBasis": "Maha-controlled authorial manuscript; bounded paraphrase and locator only. The packet does not redistribute the manuscript.",
+      "scope": "One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience.",
+      "boundary": "A manuscript can establish its own wording and internal relationships, not originality, influence, reception, consensus, or empirical truth.",
+      "roles": [
+        "*"
+      ],
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "maha-principle-context-pack",
+      "identity": "The Maha Principle Context Pack v0.1.0 — Maha Strategies Publish",
+      "locator": "https://publish.mahastrategies.com/context-packs/the-maha-principle-v0.1.0.json — live JSON inspected 2026-09-06; Top-level metadata, exclusions, source identity and version fields",
+      "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+      "scope": "A live metadata-only machine record suitable for a bounded worked example.",
+      "boundary": "The record is not a template or specification and does not license reproduction of the described book.",
+      "roles": [
+        "*"
+      ],
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "maha-principle-epistemic-clearance-t9",
+      "identity": "The Maha Principle — Mayone Maharajan",
+      "locator": "repo:content/books/the-maha-principle/The-Maha-Principle.md — working authorial manuscript inspected 2026-09-06; The Trinity of Verification: Three Filters for a Noisy World; Ontological Arbitrage; glossary entry Trinity of Verification",
+      "rightsBasis": "Maha-controlled working authorial manuscript; bounded summary only. The packet does not imply publication, peer review, consensus, or empirical validation.",
+      "scope": "The manuscript proposes an authorial three-filter practice for evaluating significant claims and keeping incentive, coherence, and consequence questions visible.",
+      "boundary": "The manuscript does not use “epistemic clearance” as an established term, prove its filters valid, certify an accepted claim, or substitute for domain expertise and source inspection.",
+      "roles": [
+        "*"
+      ],
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "maha-principle-mental-sovereignty-t8",
+      "identity": "The Maha Principle — Mayone Maharajan",
+      "locator": "repo:content/books/the-maha-principle/The-Maha-Principle.md — working authorial manuscript inspected 2026-09-06; The Biological Basis of Liberty; Chapter 2: The Fractured Mind; The Attentional Veto; The Sovereign Self: Internal Authority Without Domination; The Mind Domain: Attentional Sovereignty",
+      "rightsBasis": "Maha-controlled working authorial manuscript; bounded summary and short attributed quotation only. The packet does not imply publication, peer review, consensus, or empirical validation.",
+      "scope": "The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme.",
+      "boundary": "The term is Mayone Maharajan’s normative synthesis. It is not a diagnosis, legal status, measured neurological construct, proof that the proposed practices work, permission to disregard care, or authority over another person.",
+      "roles": [
+        "*"
+      ],
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "maha-principle-recursive-institutions-t10",
+      "identity": "The Maha Principle — Mayone Maharajan",
+      "locator": "repo:content/books/the-maha-principle/The-Maha-Principle.md — working authorial manuscript inspected 2026-09-06; The Fractal: As the Cell, So the State; The Three Scales of Construction; subsidiarity and scale-error discussion; Zone of Exception",
+      "rightsBasis": "Maha-controlled working authorial manuscript; bounded summary only. The packet does not imply publication, peer review, consensus, or empirical validation.",
+      "scope": "The manuscript proposes recurring governance patterns across individual, household, community, and civic scales and argues that competence and authority should remain scale-aware.",
+      "boundary": "“Recursive institutions” is an editorial label, not a settled academic term. The manuscript does not prove structural identity across scales, causal effects, institutional feasibility, or superior outcomes.",
+      "roles": [
+        "*"
+      ],
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "maha-principle-relationship-t10",
+      "identity": "The Maha Principle — Mayone Maharajan",
+      "locator": "repo:content/books/the-maha-principle/The-Maha-Principle.md — working authorial manuscript inspected 2026-09-06; THE MAHA PRINCIPLE: A MAP OF THE TERRAIN; The Architecture of Renewal; Chapters 5–8; The Fractal: As the Cell, So the State",
+      "rightsBasis": "Maha-controlled working authorial manuscript; bounded summary only. The packet does not imply publication, peer review, consensus, or empirical validation.",
+      "scope": "The manuscript relates its central principle to asymmetric strategy, humane governance, verification under complexity, long-horizon vision, and application across scales.",
+      "boundary": "The manuscript establishes the author’s intended relationships only. It does not prove novelty, empirical validity, adoption, philosophical priority, commercial success, or consensus.",
+      "roles": [
+        "*"
+      ],
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "nasem-reproducibility-2019-t9",
+      "identity": "Reproducibility and Replicability in Science — National Academies of Sciences, Engineering, and Medicine",
+      "locator": "https://nap.nationalacademies.org/catalog/25303/reproducibility-and-replicability-in-science — Consensus Study Report, 2019; Chapter 3, Understanding Reproducibility and Replicability; report summary definitions",
+      "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+      "scope": "Computational reproducibility means obtaining consistent computational results with the same data, steps, methods, code, and analysis conditions; replicability uses new data to answer the same scientific question.",
+      "boundary": "Reproducibility does not establish scientific correctness or external validity, and a failed replication does not by itself identify which study or condition is wrong.",
+      "roles": [
+        "*"
+      ],
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "niso-jats-1-4",
+      "identity": "Journal Article Tag Suite (JATS) 1.4 — NISO",
+      "locator": "https://www.niso.org/standards-committees/jats — ANSI/NISO Z39.96-2024; JATS 1.4 standard description and tag-suite scope",
+      "rightsBasis": "Public standards material; cite the stable identifier and use bounded paraphrase subject to the publisher or standards body terms.",
+      "scope": "XML elements and attributes for journal-article metadata and full content.",
+      "boundary": "JATS is designed for journal articles and does not define every agentic publication or Maha release field.",
+      "roles": [
+        "*"
+      ],
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "nist-ai-rmf-scope-t9",
+      "identity": "Artificial Intelligence Risk Management Framework (AI RMF 1.0) — National Institute of Standards and Technology",
+      "locator": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf — NIST AI 100-1, January 2023; MAP 1.1; MAP 2.2–2.3; MEASURE 2.5",
+      "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+      "scope": "The framework calls for intended context, assumptions, knowledge limits, scientific integrity, and generalization limits to remain explicit.",
+      "boundary": "The voluntary framework does not determine whether a particular source supports a claim or validate a model, inference, result, or deployment.",
+      "roles": [
+        "*"
+      ],
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "nist-contingency",
+      "identity": "Contingency Planning Guide for Federal Information Systems — NIST",
+      "locator": "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf — SP 800-34 Rev. 1, May 2010; Sections 3.4–3.6 and 5: recovery strategies, testing, and reconstitution",
+      "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+      "scope": "Recovery planning, alternate processing, testing, and known-state restoration.",
+      "boundary": "Federal-system contingency guidance does not prove a specific SaaS recovery time.",
+      "roles": [
+        "*"
+      ],
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "nist-contingency-state",
+      "identity": "Contingency Planning Guide for Federal Information Systems — NIST",
+      "locator": "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf — SP 800-34 Rev. 1, May 2010; Sections 3.4, 3.5, 4 and 5",
+      "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+      "scope": "Recovery strategies, testing, reconstitution, and restoration to a known state.",
+      "boundary": "The guide does not prescribe Maha task fields or prove a specific store is durable.",
+      "roles": [
+        "*"
+      ],
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "nist-privacy",
+      "identity": "NIST Privacy Framework — NIST",
+      "locator": "https://www.nist.gov/privacy-framework/privacy-framework — version 1.0, January 2020; Core functions Identify-P, Govern-P, Control-P, Communicate-P, Protect-P",
+      "rightsBasis": "Publicly accessible official source; link and bounded paraphrase only. No source text is redistributed in the packet.",
+      "scope": "Voluntary privacy-risk framework for data processing and user control.",
+      "boundary": "The framework is voluntary and does not create legal consent.",
+      "roles": [
+        "*"
+      ],
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "nist-privacy-memory",
+      "identity": "NIST Privacy Framework: A Tool for Improving Privacy through Enterprise Risk Management — NIST",
+      "locator": "https://www.nist.gov/document/nist-privacy-frameworkv10pdf — version 1.0, January 2020; Glossary: Data Action and Data Processing; Core Identify-P, Govern-P and Control-P",
+      "rightsBasis": "Official government source; link and bounded paraphrase only. No full text is retained in the packet.",
+      "scope": "Data processing includes collection, retention, logging, transformation, use, disclosure, sharing, transmission, and disposal, governed through privacy-risk management.",
+      "boundary": "The voluntary framework does not define AI memory, establish consent, validate remembered content, or prove a Maha implementation.",
+      "roles": [
+        "*"
+      ],
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "nist-tn-1297",
+      "identity": "Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results — National Institute of Standards and Technology",
+      "locator": "https://www.nist.gov/pml/nist-technical-note-1297 — NIST Technical Note 1297, 1994 edition; §§2–7; Appendix A; Appendix D.1",
+      "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+      "scope": "The note distinguishes Type A and Type B evaluations, standard uncertainty, combined standard uncertainty, expanded uncertainty, uncertainty components, and reporting requirements.",
+      "boundary": "An uncertainty budget does not prove that a model or calibration is correct, identify every systematic effect, validate an input source, or validate astrology.",
+      "roles": [
+        "*"
+      ],
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "orbital-mind",
+      "identity": "The Orbital Mind — Mayone Maharajan",
+      "locator": "repo:content/books/the-orbital-mind/the-orbital-mind.md — working authorial manuscript inspected 2026-09-05; Mars · Agency and Boundary; Limits and Alternatives",
+      "rightsBasis": "Maha-controlled authorial manuscript; record section identity and file digest only. Any later quotation remains subject to the author-controlled publication policy.",
+      "scope": "Agency as mobilization constrained by boundaries and explicit failure modes.",
+      "boundary": "Planetary and mythic material is symbolic imagery, not empirical evidence.",
+      "roles": [
+        "*"
+      ],
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "pmc-copyright-t9",
+      "identity": "PMC Copyright Notice — U.S. National Library of Medicine",
+      "locator": "https://pmc.ncbi.nlm.nih.gov/about/copyright/ — modified 9 September 2025; Restrictions on systematic downloading; Open Access Articles; Author Manuscripts; Digitized Articles",
+      "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+      "scope": "PMC identifies authorized bulk interfaces and distinguishes OA-subset licences, author manuscripts, public-domain records, and traditionally copyrighted free-to-read articles.",
+      "boundary": "Free access is not the same as an open licence. Third-party figures may carry separate rights, and systematic main-site downloading is prohibited.",
+      "roles": [
+        "*"
+      ],
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "pmc-oai-full-text-t9",
+      "identity": "PMC OAI-PMH API — U.S. National Library of Medicine",
+      "locator": "https://pmc.ncbi.nlm.nih.gov/tools/oai/ — living API documentation inspected 2026-09-06; set=pmc-open; metadataPrefix=pmc and pmc_fm; OAI PMC identifiers",
+      "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+      "scope": "The API exposes metadata for PMC items and full text for records whose licenses or usage rights allow reuse; set=pmc-open identifies retrievable full-text items.",
+      "boundary": "API retrieval does not prove claim relevance, inspection, version equivalence, or that every PMC item permits reuse.",
+      "roles": [
+        "*"
+      ],
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "publish-machine-readability",
+      "identity": "Machine readability — Maha Strategies Publish",
+      "locator": "https://publish.mahastrategies.com/docs/machine-readability — live canonical documentation inspected 2026-09-06; Four guidance sections and payload-validation requirement",
+      "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+      "scope": "The canonical definition and release guidance for machine-readable publishing.",
+      "boundary": "The guidance does not guarantee indexing, citation, summarization, or external adoption.",
+      "roles": [
+        "*"
+      ],
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "rfc-8693-delegation",
+      "identity": "OAuth 2.0 Token Exchange — IETF",
+      "locator": "https://www.rfc-editor.org/rfc/rfc8693.html — RFC 8693, January 2020; §1.1; §2.1 subject_token and actor_token; §4.1 act claim",
+      "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+      "scope": "Delegation, impersonation, subject and actor token roles, validation inputs, and an actor chain representation.",
+      "boundary": "Token exchange does not prove authorization policy quality, downstream enforcement, revocation propagation, agent identity, or a Maha deployment.",
+      "roles": [
+        "*"
+      ],
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "schema-org-article",
+      "identity": "Article — Schema.org Community Group",
+      "locator": "https://schema.org/Article — living vocabulary inspected 2026-09-05; Article type, properties, and TechArticle and ScholarlyArticle subtypes",
+      "rightsBasis": "Public standards material; cite the stable identifier and use bounded paraphrase subject to the publisher or standards body terms.",
+      "scope": "Public structured-data vocabulary for describing article resources.",
+      "boundary": "Schema.org describes resources; it does not verify evidence, authorship, review, release status, or factual accuracy.",
+      "roles": [
+        "*"
+      ],
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "slurm-sbatch-t9",
+      "identity": "Slurm Workload Manager — sbatch — SchedMD",
+      "locator": "https://slurm.schedmd.com/sbatch.html — current documentation inspected 2026-09-06; DESCRIPTION; #SBATCH directives; input environment variables; output environment variables; RETURN VALUE",
+      "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+      "scope": "sbatch submits a batch script, assigns a job identifier, applies directive and option precedence, and makes named SLURM_* metadata available to the job environment.",
+      "boundary": "Successful submission is not successful execution, scientific validity, resource availability, or proof that an output came from the named job.",
+      "roles": [
+        "*"
+      ],
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-checked-arithmetic",
+      "identity": "lib/federation/readiness-tranche-22.ts",
+      "locator": "lib/federation/readiness-tranche-22.ts — checkedIntegerArithmetic",
+      "roles": [
+        "machine-interface",
+        "reproducibility",
+        "worked-example",
+        "uncertainty"
+      ],
+      "scope": "Performs bounded exact integer addition, subtraction, or multiplication and refuses inputs or results outside the declared absolute limit.",
+      "boundary": "Exact integer arithmetic has no rounding uncertainty inside the bound; it does not establish measurement uncertainty, floating-point behavior, or model validity.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-evidence-act",
+      "identity": "Foundations for Evidence-Based Policymaking Act of 2018",
+      "locator": "https://www.congress.gov/115/statute/STATUTE-132/STATUTE-132-Pg5529.pdf — Title I federal evidence-building activities and Titles II–III data access and confidentiality",
+      "roles": [
+        "current-law",
+        "definition"
+      ],
+      "scope": "Establishes US federal evaluation, evidence-building, data governance, and confidentiality duties.",
+      "boundary": "This is US federal law; it neither mandates one scientific method nor creates an executable decision rule for arbitrary claims.",
+      "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-gao-evidence-policy",
+      "identity": "U.S. Government Accountability Office GAO-23-105460",
+      "locator": "https://www.gao.gov/products/gao-23-105460 — 13 practices across planning, assessing/building, using evidence, and learning",
+      "roles": [
+        "evidence",
+        "tradeoffs"
+      ],
+      "scope": "Describes evidence-building and use practices, evidence types, implementation actions, and observed limits in US federal agencies.",
+      "boundary": "This is US federal management guidance and audit synthesis, not a universal hierarchy of evidence or proof that a policy works.",
+      "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-nasem-reproducibility",
+      "identity": "National Academies Reproducibility and Replicability in Science",
+      "locator": "https://nap.nationalacademies.org/resource/25303/R%26R.pdf — definitions and recommendations",
+      "roles": [
+        "evidence",
+        "tradeoffs"
+      ],
+      "scope": "Separates computational reproducibility from replicability and records why contrary results require contextual assessment rather than automatic reversal.",
+      "boundary": "The report does not rank every study design or decide a specific policy question.",
+      "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t23-abstract-boundary",
+      "identity": "lib/source-recovery.ts",
+      "locator": "lib/source-recovery.ts — validateObservation",
+      "roles": [
+        "*"
+      ],
+      "scope": "Preserves abstract-only inspection as a shallower state than section or full-text inspection.",
+      "boundary": "An abstract cannot support section-specific detail.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t23-astrology-workflows",
+      "identity": "lib/astrology-workflow-protocols.ts",
+      "locator": "lib/astrology-workflow-protocols.ts — ASTROLOGY_WORKFLOW_PROTOCOLS",
+      "roles": [
+        "input-contract",
+        "workflow",
+        "calculation"
+      ],
+      "scope": "Defines bounded reference-frame inputs, deterministic operations, receipts, uncertainty, and refusal conditions.",
+      "boundary": "Reproducible arithmetic does not validate astrology, select a true tradition, or justify interpretive claims.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t23-claim-extraction",
+      "identity": "lib/claim-evidence.ts",
+      "locator": "lib/claim-evidence.ts — assertClaimEvidence",
+      "roles": [
+        "*"
+      ],
+      "scope": "Validates claim provenance and empirical-evidence axes independently under a typed contract.",
+      "boundary": "The contract records supplied assertions; it does not establish truth, source support, completeness, or semantic entailment.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t23-contradiction-contract",
+      "identity": "lib/federation/readiness-tranche-21.ts",
+      "locator": "lib/federation/readiness-tranche-21.ts — classifyLiterature",
+      "roles": [
+        "*"
+      ],
+      "scope": "Compares located observations only at matching claim, population, and outcome scope.",
+      "boundary": "Directional conflict does not adjudicate study quality or truth.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t23-formal-definition",
+      "identity": "packages/maha-lean-bridge/src/verifier.ts",
+      "locator": "packages/maha-lean-bridge/src/verifier.ts — verifyAttachments",
+      "roles": [
+        "*"
+      ],
+      "scope": "Verifies formal-proof attachments against pinned source, manifest, claim, and toolchain identities.",
+      "boundary": "Formal verification does not establish empirical premises or source truth.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t23-fulltext-contract",
+      "identity": "lib/source-recovery.ts",
+      "locator": "lib/source-recovery.ts — compileRecoveryPackets",
+      "roles": [
+        "*"
+      ],
+      "scope": "Keeps access, inspection, locator, identity, and version states separate.",
+      "boundary": "Full-text access alone does not establish relevance, rights, or support.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t23-government-recovery",
+      "identity": "lib/source-recovery.ts",
+      "locator": "lib/source-recovery.ts — recoveryRequests",
+      "roles": [
+        "*"
+      ],
+      "scope": "Represents government-host recovery as one bounded route while preserving identity and version checks.",
+      "boundary": "Government hosting does not make a source authoritative for every claim.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t23-locator-contract",
+      "identity": "lib/federation/readiness-tranche-22.ts",
+      "locator": "lib/federation/readiness-tranche-22.ts — verifyLocator",
+      "roles": [
+        "*"
+      ],
+      "scope": "Binds source, source revision, locator kind, and locator value and refuses substitution.",
+      "boundary": "A matching declaration does not prove passage existence or claim support.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t23-qiskit-contract",
+      "identity": "packages/maha-witness/src/maha_witness/adapters.py",
+      "locator": "packages/maha-witness/src/maha_witness/adapters.py — qiskit_metadata",
+      "roles": [
+        "*"
+      ],
+      "scope": "Normalizes bounded circuit and backend metadata with digest and positive-shot checks.",
+      "boundary": "Metadata capture does not establish quantum advantage, hardware fidelity, or scientific validity.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t23-reproducibility-registry",
+      "identity": "lib/evidence-workflow-examples.ts",
+      "locator": "lib/evidence-workflow-examples.ts — EVIDENCE_WORKFLOW_PUBLIC_REGISTRY",
+      "roles": [
+        "*"
+      ],
+      "scope": "Publishes digest-bound synthetic workflows, refusals, and checks.",
+      "boundary": "Synthetic conformance is not independent reproduction.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t23-scope-preflight",
+      "identity": "lib/evidence-preflight.ts",
+      "locator": "lib/evidence-preflight.ts — compileEvidencePreflight",
+      "roles": [
+        "*"
+      ],
+      "scope": "Computes deterministic bounded-language and lexical-coverage review signals.",
+      "boundary": "Lexical overlap is routing evidence only, not semantic support.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t23-slurm-contract",
+      "identity": "packages/maha-witness/src/maha_witness/adapters.py",
+      "locator": "packages/maha-witness/src/maha_witness/adapters.py — slurm_metadata",
+      "roles": [
+        "*"
+      ],
+      "scope": "Normalizes a bounded allowlist of caller-supplied SLURM metadata without executing a scheduler.",
+      "boundary": "Metadata capture does not prove workload correctness, scheduler truth, or reproducibility.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "w3c-prov-o-evidence-graph-t9",
+      "identity": "PROV-O: The PROV Ontology — W3C",
+      "locator": "https://www.w3.org/TR/prov-o/ — Recommendation, 30 April 2013; Entities, Activities and Agents; used; wasGeneratedBy; wasDerivedFrom; wasAssociatedWith; wasAttributedTo",
+      "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+      "scope": "PROV-O can represent typed provenance between entities, activities, agents, inputs, outputs, derivations, associations, and attributions.",
+      "boundary": "PROV represents asserted provenance; it does not verify truth, completeness, authentication, rights, causal validity, or passage-level claim support.",
+      "roles": [
+        "*"
+      ],
+      "kind": "official-authority",
+      "passageStored": false
+    }
+  ],
+  "privacyBoundary": "Only source identity, locator, rights, scope, and boundary metadata are retained.",
+  "provenanceDigest": "sha256:b9a0efd41fe2bd57f212a3948c5e17ee77ae2a7eb48eb90f395df10047fc0c3a"
+}
