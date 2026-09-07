@@ -99,7 +99,7 @@ test('rejected, revised and blocked candidates cannot become specifications', ()
 
 test('every evidence-ready candidate rests on an inspected source', () => {
   // The gate that bounds this tranche. Evidence-ready requires inspected content
-  // with an exact locator, and only two topics were inspected.
+  // with an exact locator, so a candidate can reach it only on an inspected topic.
   const inspected = new Set(sources.inspections.map((i: { topic: string }) => i.topic))
   for (const d of (decisions.decisions as { topic: string; finalState: string }[])) {
     if (d.finalState === 'evidence-ready') assert.ok(inspected.has(d.topic), `${d.topic} was never inspected`)
@@ -164,4 +164,73 @@ test('no prior tranche artifact was mutated', () => {
     .split('\n').map((l) => l.slice(3).trim()).filter(Boolean)
     .filter((f) => !/tranche-13/.test(f))
   assert.deepEqual(changed, [], `prior artifacts changed: ${changed.join(', ')}`)
+})
+
+/* -- closure: prose, report and artifacts must agree ------------------------ */
+
+const semantic = read('semantic-validation')
+const report = readFileSync('docs/operations/federation-tranche-13-readiness.md', 'utf8')
+
+test('readiness counts are derived from the artifacts, not asserted beside them', () => {
+  const c = readiness.counts
+  assert.equal(c.cohort, cohort.entries.length)
+  assert.equal(c.specifications, specs.specifications.length)
+  assert.equal(c.topicsInspected, new Set(sources.inspections.map((i: { topic: string }) => i.topic)).size)
+  assert.equal(c.distinctSources,
+    new Set(sources.inspections.map((i: { sourceIdentity: string }) => i.sourceIdentity)).size)
+  assert.equal(c.boundedQuestions,
+    (specs.specifications as { boundedQuestions: unknown[] }[]).reduce((n, s) => n + s.boundedQuestions.length, 0))
+  assert.equal(c.dependenciesMissing,
+    (deps.dependencies as { state: string }[]).filter((d) => d.state === 'missing').length)
+})
+
+test('the readiness narrative states the number of topics actually inspected', () => {
+  // The narrative said two topics after twenty-seven had been inspected. It is
+  // now interpolated from the same derived block the counts come from, so a
+  // stale sentence would require the counts to be stale too.
+  const inspected = new Set(sources.inspections.map((i: { topic: string }) => i.topic)).size
+  assert.match(readiness.honestOutcome, new RegExp(`inspected for ${inspected} of`))
+  assert.ok(!/inspected for two topics/.test(readiness.honestOutcome))
+})
+
+test('the Markdown report agrees with the artifacts on every count', () => {
+  const c = readiness.counts
+  for (const [label, value] of [
+    ['Cohort', c.cohort], ['Topics in cohort', c.topicsInCohort], ['Topics inspected', c.topicsInspected],
+    ['Distinct sources', c.distinctSources], ['Specifications', c.specifications],
+    ['Bounded questions', c.boundedQuestions], ['Dependencies missing', c.dependenciesMissing],
+  ] as [string, number][]) {
+    assert.ok(report.includes(`| ${label} | ${value} |`), `report disagrees on ${label}: expected ${value}`)
+  }
+  for (const [state, n] of Object.entries(c.byFinalState as Record<string, number>)) {
+    assert.ok(report.includes(`| \`${state}\` | ${n} |`), `report disagrees on ${state}`)
+  }
+})
+
+test('no artifact still claims a stale inspected-topic count', () => {
+  // The specific regression. A comment is not covered by a digest, which is how
+  // the stale sentence survived a byte-identical regeneration check.
+  //
+  // Scans the generated artifacts rather than this file: a test that greps its
+  // own source matches the pattern it is searching for, which is a false
+  // failure and would have to be defeated by obfuscating the pattern.
+  const stale = new RegExp(['inspected', 'for', 'two', 'topics'].join(' '))
+  for (const text of [readiness.honestOutcome, report, JSON.stringify(sources)]) {
+    assert.ok(!stale.test(text))
+  }
+})
+
+test('semantic validation covers every candidate exactly once', () => {
+  const ids = (semantic.validations as { candidateId: string }[]).map((v) => v.candidateId)
+  assert.equal(ids.length, cohort.entries.length)
+  assert.equal(new Set(ids).size, ids.length)
+  assert.deepEqual([...ids].sort(),
+    (cohort.entries as { candidateId: string }[]).map((c) => c.candidateId).sort())
+})
+
+test('every semantic validation carries a digest and a prohibited inference', () => {
+  for (const v of semantic.validations as { candidateDigest: string; prohibitedInference: string }[]) {
+    assert.match(v.candidateDigest, /^sha256:[0-9a-f]{64}$/)
+    assert.ok(v.prohibitedInference.trim().length > 30)
+  }
 })

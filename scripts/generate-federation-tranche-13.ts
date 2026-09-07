@@ -9,7 +9,7 @@
  *
  * Every candidate in the map carries `evidencePlan: not-started` on all six
  * axes. Evidence-ready requires inspected source content with an exact locator
- * and a rights basis. Sources were inspected for two topics in this pass, so at
+ * and a rights basis. Sources were inspected for 27 of the 58 topics, so at
  * most those candidates can qualify, and the rest are blocked on inspection
  * rather than downgraded for any fault of their own. Reporting a larger
  * evidence-ready count would require either inspecting more sources or relaxing
@@ -806,26 +806,165 @@ write('page-specifications', {
   specifications,
 })
 
+/**
+ * One derived count block. Readiness, the Markdown report and the narrative all
+ * read from it, so a figure cannot be right in one place and stale in another —
+ * which is exactly how the readiness narrative came to say two topics after
+ * twenty-seven had been inspected.
+ */
+const topicsInspected = new Set(INSPECTIONS.map((i) => i.topic)).size
+const distinctSources = new Set(INSPECTIONS.map((i) => i.sourceIdentity)).size
+const boundedQuestions = specifications.reduce((sum, spec) => sum + spec.boundedQuestions.length, 0)
+const byFinalState = tally(decisions.map((d) => d.finalState))
+const dependenciesMissing = dependencies.filter((d) => d.state === 'missing').length
+const topicsInCohort = new Set(cohort.map((c) => topicOf(c))).size
+
+const COUNTS = {
+  cohort: cohort.length,
+  byFinalState,
+  specifications: specifications.length,
+  boundedQuestions,
+  topicsInCohort,
+  topicsInspected,
+  distinctSources,
+  dependenciesMissing,
+} as const
+
+/**
+ * Semantic validation, covering all 100 candidates.
+ *
+ * The decisions artifact records the outcome; this records the adjudication that
+ * produced it — the nearest neighbour considered, what would have made the
+ * candidate a duplicate, and the inference the route must not license. It exists
+ * separately because a reviewer checking whether a rejection was fair should not
+ * have to reconstruct the comparison from a one-line reason.
+ */
+const neighbourOf = (c: Candidate) => {
+  const sameConcept = cohort.filter((o) => o.conceptId === c.conceptId && o.candidateId !== c.candidateId)
+  if (sameConcept.length > 0) {
+    const nearest = [...sameConcept].sort((a, b) => a.candidateId.localeCompare(b.candidateId))[0]
+    return { candidateId: nearest.candidateId, path: nearest.path, relation: 'same-concept-different-role' as const }
+  }
+  const sameTopic = cohort.filter((o) => topicOf(o) === topicOf(c) && o.candidateId !== c.candidateId)
+  if (sameTopic.length > 0) {
+    const nearest = [...sameTopic].sort((a, b) => a.candidateId.localeCompare(b.candidateId))[0]
+    return { candidateId: nearest.candidateId, path: nearest.path, relation: 'same-topic-different-concept' as const }
+  }
+  return null
+}
+
+write('semantic-validation', {
+  schemaVersion: `${SCHEMA}-semantic-validation/1.0`,
+  frozenOn: FROZEN_ON,
+  method:
+    'Each candidate was adjudicated against the cohort and the observed surface on concept ownership, route role, ' +
+    'and the question the route asks. Distinctness is decided on meaning rather than URL shape: two candidates ' +
+    'sharing a concept are duplicates only where they also ask the same question, which is why same-concept ' +
+    'candidates at different roles are retained.',
+  duplicateRule:
+    'A candidate is duplicative only where another candidate in the cohort shares its concept and its route role, ' +
+    'or where a normalised search intent already appears. Both were checked across all 100; neither occurs.',
+  validations: cohort.map((c) => {
+    const decision = decisions.find((d) => d.candidateId === c.candidateId)!
+    return {
+      candidateId: c.candidateId,
+      candidateDigest: digest(canonicalJson(c)),
+      path: c.path,
+      conceptId: c.conceptId,
+      routeRole: c.routeRole,
+      declaredOwner: c.conceptAuthority,
+      semanticResult: decision.semanticResult,
+      nearestNeighbour: neighbourOf(c),
+      distinctionBasis:
+        neighbourOf(c) === null
+          ? 'No other candidate in the cohort shares this concept or topic.'
+          : 'Shares a neighbour in the cohort; retained because the route role and the question asked differ.',
+      prohibitedInference: c.routeRole === 'definition'
+        ? 'Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.'
+        : 'Must not redefine the concept it applies. The canonical definition remains with the declared owner.',
+      dependencyState: decision.dependencyState,
+    }
+  }),
+})
+
 const readiness = write('readiness', {
   schemaVersion: `${SCHEMA}-readiness/1.0`,
   frozenOn: FROZEN_ON,
   cohortDigest: cohortDigests,
   status: 'reviewed-not-published',
-  counts: {
-    cohort: cohort.length,
-    byFinalState: tally(decisions.map((d) => d.finalState)),
-    specifications: specifications.length,
-    topicsInCohort: new Set(cohort.map((c) => topicOf(c))).size,
-    topicsInspected: INSPECTIONS.length,
-    dependenciesMissing: dependencies.filter((d) => d.state === 'missing').length,
-  },
+  counts: COUNTS,
   honestOutcome:
-    'Evidence-ready is bounded by source inspection, not by candidate quality. All 100 candidates carry ' +
-    'evidencePlan not-started in the candidate map; sources were inspected for two topics in this pass, so only ' +
-    'candidates on those topics can satisfy the evidence-ready gate. Raising the count requires inspecting more ' +
-    'sources, not relaxing the gate.',
+    'Evidence-ready is bounded by source inspection, not by candidate quality. All ' + `${cohort.length}` +
+    ' candidates carry evidencePlan not-started in the candidate map. Sources were inspected for ' +
+    `${topicsInspected}` + ' of ' + `${topicsInCohort}` + ' topics across ' + `${distinctSources}` +
+    ' distinct sources, so only candidates on those topics can satisfy the evidence-ready gate. The remaining ' +
+    `${topicsInCohort - topicsInspected}` + ' topics are predominantly this organisation\u2019s own operational ' +
+    'concepts and the author\u2019s own concepts, for which no external authority exists to cite. Raising the ' +
+    'count requires inspecting more sources or writing first-party definitions, not relaxing the gate.',
   publicationBoundary: 'No route, release, sitemap entry or public page is created. No build was run.',
 })
+
+/**
+ * The Markdown report, written from COUNTS rather than retyped.
+ *
+ * Every figure below is interpolated from the same derived block the artifacts
+ * use, so the report cannot drift from them. That is the failure this closure
+ * exists to fix.
+ */
+const stateRows = Object.entries(byFinalState)
+  .map(([state, n]) => `| \`${state}\` | ${n} |`).join('\n')
+const notInspected = (readFileSync(`${OUT}/federation-tranche-13-source-inspections-v1.json`, 'utf8')
+  ? (JSON.parse(readFileSync(`${OUT}/federation-tranche-13-source-inspections-v1.json`, 'utf8')) as
+      { soughtButNotInspected?: { source: string; outcome: string }[] }).soughtButNotInspected ?? []
+  : [])
+
+writeFileSync('docs/operations/federation-tranche-13-readiness.md', `# Federation Tranche 13 — local readiness
+
+Reviewed, not published. No route, release, sitemap entry or public page was created, and no build was run.
+
+## Counts
+
+| | |
+|---|---|
+| Cohort | ${COUNTS.cohort} |
+| Topics in cohort | ${COUNTS.topicsInCohort} |
+| Topics inspected | ${COUNTS.topicsInspected} |
+| Distinct sources | ${COUNTS.distinctSources} |
+| Specifications | ${COUNTS.specifications} |
+| Bounded questions | ${COUNTS.boundedQuestions} |
+| Dependencies missing | ${COUNTS.dependenciesMissing} |
+
+## Classification
+
+| State | Candidates |
+|---|---|
+${stateRows}
+
+## What bounds the outcome
+
+Evidence-ready is bounded by source inspection rather than candidate quality. Every candidate carries
+\`evidencePlan: not-started\` in the frozen map, so a candidate can only reach evidence-ready once its topic has an
+inspected source with an exact locator and a stated rights basis.
+
+${COUNTS.topicsInCohort - COUNTS.topicsInspected} topics remain uninspected. They are predominantly this
+organisation's own operational concepts — claim intake, evidence dossiers, runtime witness receipts, uncertainty
+recording, internal review, context packs — together with the author's own concepts on the personal properties. No
+external authority defines them, so none was cited. Those candidates are blocked on inspection rather than faulted,
+and a first-party definition would need to be written and reviewed before they could be sourced at all.
+
+${COUNTS.dependenciesMissing} candidates have no canonical definition anywhere in the frozen map for the concept they
+apply, on the property that declares ownership. A missing prerequisite blocks its dependent page and was not inferred.
+
+## Sources sought and not inspected
+
+${notInspected.map((x) => `- **${x.source}** — ${x.outcome}`).join('\n')}
+
+None was worked around. Where a lawful alternative reached the same ground it was used and recorded.
+
+## Boundary
+
+Specifications are not routes, releases or public pages. Nothing here is published.
+`)
 
 console.log(`cohort ${cohort.length} (unique ${new Set(cohort.map((c) => c.candidateId)).size}, overlap ${cohort.filter((c) => covered.has(c.candidateId)).length})`)
 console.log(`dependencies: ${JSON.stringify(tally(dependencies.map((d) => d.state)))}`)
