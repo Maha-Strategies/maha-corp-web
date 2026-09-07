@@ -1,0 +1,956 @@
+{
+  "schemaVersion": "maha-federation-tranche-15-page-specifications/1.0",
+  "frozenOn": "2026-09-06",
+  "rule": "Specifications exist only for evidence-ready candidates. A blocked, revised or duplicative candidate cannot receive one.",
+  "counts": {
+    "specifications": 16,
+    "boundedQuestions": 80
+  },
+  "specifications": [
+    {
+      "candidateId": "cand_0374e3b5578465b6b89fbb97",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/calibration/source-contract",
+      "owningProperty": "maha-research",
+      "conceptId": "urn:maha:concept:evidence:calibration",
+      "routeRole": "source-contract",
+      "directAnswer": "Calibration — Source Contract: Understand Calibration through the source contract lens in Research Objects on research.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:evidence:calibration under the owner-application contract. The canonical definition remains with maha-research.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "JCGM 200:2012, International Vocabulary of Metrology (VIM), 3rd edition",
+          "locator": "§2.39 (6.11), definition of calibration.",
+          "supports": "That calibration is a two-step operation: first establishing a relation between quantity values with measurement uncertainties provided by standards and the corresponding indications with their uncertainties, then using that relation to obtain a measurement result from an indication."
+        }
+      ],
+      "limitations": [
+        "This is measurement calibration of an instrument against a standard. It does not define calibration of a probabilistic forecast, which is a different concept sharing the word. A page on forecast calibration must not cite this definition, and this source establishes nothing about model confidence."
+      ],
+      "negativeSpace": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does calibration mean in this context, and who owns the definition?",
+        "What does the inspected source establish about calibration, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:calibration"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "JCGM 200:2012, International Vocabulary of Metrology (VIM), 3rd edition",
+          "stableUrl": "https://www.bipm.org/documents/20126/2071204/JCGM_200_2012.pdf",
+          "locator": "§2.39 (6.11), definition of calibration.",
+          "version": "JCGM 200:2012, 2008 version with minor corrections"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:evidence:calibration"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_102305ae82ed15637a4914db",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/author-manuscript/machine-record",
+      "owningProperty": "maha-research",
+      "conceptId": "urn:maha:concept:evidence:author-manuscript",
+      "routeRole": "machine-record",
+      "directAnswer": "Author Manuscript — Machine Record: Understand Author Manuscript through the machine record lens in Research Objects on research.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:evidence:author-manuscript under the owner-application contract. The canonical definition remains with maha-research.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "PubMed Central, Author Manuscripts in PMC",
+          "locator": "Section \"What is the Author Manuscript?\" — first paragraph.",
+          "supports": "That an author manuscript is the version peer reviewed and accepted by a journal, including changes made during peer review but generally excluding copyediting and stylistic edits."
+        }
+      ],
+      "limitations": [
+        "Defines one version in a chain. It does not establish which version should be cited, that an author manuscript matches the published record, or any deposit obligation."
+      ],
+      "negativeSpace": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does author-manuscript mean in this context, and who owns the definition?",
+        "What does the inspected source establish about author-manuscript, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:author-manuscript"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "PubMed Central, Author Manuscripts in PMC",
+          "stableUrl": "https://pmc.ncbi.nlm.nih.gov/about/authorms/",
+          "locator": "Section \"What is the Author Manuscript?\" — first paragraph.",
+          "version": "As published at pmc.ncbi.nlm.nih.gov, read 2026-09-06"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:evidence:author-manuscript"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_145ea124c6aa720f8c7646c4",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/container-image/machine-record",
+      "owningProperty": "maha-research",
+      "conceptId": "urn:maha:concept:evidence:container-image",
+      "routeRole": "machine-record",
+      "directAnswer": "Container Image — Machine Record: Understand Container Image through the machine record lens in Research Objects on research.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:evidence:container-image under the owner-application contract. The canonical definition remains with maha-research.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "OCI Image Manifest Specification",
+          "locator": "Line 4 (goals paragraph); §\"Image Manifest Property Descriptions\" line 16; `config` property, line 38",
+          "supports": "That an OCI image manifest is content-addressable, and that it references its configuration object by digest."
+        }
+      ],
+      "limitations": [
+        "Supports what the manifest format specifies. It does not establish runtime behaviour, registry policy, supply-chain assurance, or that any particular image is trustworthy."
+      ],
+      "negativeSpace": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does container-image mean in this context, and who owns the definition?",
+        "What does the inspected source establish about container-image, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:container-image"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "OCI Image Manifest Specification",
+          "stableUrl": "https://github.com/opencontainers/image-spec/blob/main/manifest.md",
+          "locator": "Line 4 (goals paragraph); §\"Image Manifest Property Descriptions\" line 16; `config` property, line 38",
+          "version": "image-spec v1.1 (specs-go VersionMajor 1, VersionMinor 1)"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:evidence:container-image"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_24eae9842057ae0847e86cf4",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/auditability/implementation",
+      "owningProperty": "maha-policy",
+      "conceptId": "urn:maha:concept:governance:auditability",
+      "routeRole": "implementation",
+      "directAnswer": "Auditability — Implementation: Understand Auditability through the implementation lens in Policy Clearing on policy.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:governance:auditability under the owner-application contract. The canonical definition remains with maha-policy.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "NIST SP 800-53 Rev. 5, Security and Privacy Controls for Information Systems and Organizations",
+          "locator": "Control AU-2 (Event Logging), items a and b.",
+          "supports": "That auditability begins with identifying which event types a system is capable of logging in support of the audit function, and coordinating that logging with the parties who need audit-related information."
+        }
+      ],
+      "limitations": [
+        "A control catalogue. It does not state that any system is auditable, does not select events for any deployment, and confers no assurance by being cited."
+      ],
+      "negativeSpace": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does auditability mean in this context, and who owns the definition?",
+        "What does the inspected source establish about auditability, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:auditability"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "NIST SP 800-53 Rev. 5, Security and Privacy Controls for Information Systems and Organizations",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf",
+          "locator": "Control AU-2 (Event Logging), items a and b.",
+          "version": "Revision 5, DOI 10.6028/NIST.SP.800-53r5"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:governance:auditability"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_274e58f9799ee6aea1c8f771",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/calibration/protocol",
+      "owningProperty": "maha-research",
+      "conceptId": "urn:maha:concept:evidence:calibration",
+      "routeRole": "protocol",
+      "directAnswer": "Calibration — Protocol: Understand Calibration through the protocol lens in Research Objects on research.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:evidence:calibration under the owner-application contract. The canonical definition remains with maha-research.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "JCGM 200:2012, International Vocabulary of Metrology (VIM), 3rd edition",
+          "locator": "§2.39 (6.11), definition of calibration.",
+          "supports": "That calibration is a two-step operation: first establishing a relation between quantity values with measurement uncertainties provided by standards and the corresponding indications with their uncertainties, then using that relation to obtain a measurement result from an indication."
+        }
+      ],
+      "limitations": [
+        "This is measurement calibration of an instrument against a standard. It does not define calibration of a probabilistic forecast, which is a different concept sharing the word. A page on forecast calibration must not cite this definition, and this source establishes nothing about model confidence."
+      ],
+      "negativeSpace": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does calibration mean in this context, and who owns the definition?",
+        "What does the inspected source establish about calibration, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:calibration"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "JCGM 200:2012, International Vocabulary of Metrology (VIM), 3rd edition",
+          "stableUrl": "https://www.bipm.org/documents/20126/2071204/JCGM_200_2012.pdf",
+          "locator": "§2.39 (6.11), definition of calibration.",
+          "version": "JCGM 200:2012, 2008 version with minor corrections"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:evidence:calibration"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_3c50d519b9226c242fc87b14",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/auditability/machine-rule",
+      "owningProperty": "maha-policy",
+      "conceptId": "urn:maha:concept:governance:auditability",
+      "routeRole": "machine-rule",
+      "directAnswer": "Auditability — Machine Rule: Understand Auditability through the machine rule lens in Policy Clearing on policy.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:governance:auditability under the owner-application contract. The canonical definition remains with maha-policy.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "NIST SP 800-53 Rev. 5, Security and Privacy Controls for Information Systems and Organizations",
+          "locator": "Control AU-2 (Event Logging), items a and b.",
+          "supports": "That auditability begins with identifying which event types a system is capable of logging in support of the audit function, and coordinating that logging with the parties who need audit-related information."
+        }
+      ],
+      "limitations": [
+        "A control catalogue. It does not state that any system is auditable, does not select events for any deployment, and confers no assurance by being cited."
+      ],
+      "negativeSpace": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does auditability mean in this context, and who owns the definition?",
+        "What does the inspected source establish about auditability, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:auditability"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "NIST SP 800-53 Rev. 5, Security and Privacy Controls for Information Systems and Organizations",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf",
+          "locator": "Control AU-2 (Event Logging), items a and b.",
+          "version": "Revision 5, DOI 10.6028/NIST.SP.800-53r5"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:governance:auditability"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_3e86f59a798be0f64a03abac",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/calibration/method",
+      "owningProperty": "maha-research",
+      "conceptId": "urn:maha:concept:evidence:calibration",
+      "routeRole": "method",
+      "directAnswer": "Calibration — Method: Understand Calibration through the method lens in Research Objects on research.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:evidence:calibration under the owner-application contract. The canonical definition remains with maha-research.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "JCGM 200:2012, International Vocabulary of Metrology (VIM), 3rd edition",
+          "locator": "§2.39 (6.11), definition of calibration.",
+          "supports": "That calibration is a two-step operation: first establishing a relation between quantity values with measurement uncertainties provided by standards and the corresponding indications with their uncertainties, then using that relation to obtain a measurement result from an indication."
+        }
+      ],
+      "limitations": [
+        "This is measurement calibration of an instrument against a standard. It does not define calibration of a probabilistic forecast, which is a different concept sharing the word. A page on forecast calibration must not cite this definition, and this source establishes nothing about model confidence."
+      ],
+      "negativeSpace": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does calibration mean in this context, and who owns the definition?",
+        "What does the inspected source establish about calibration, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:calibration"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "JCGM 200:2012, International Vocabulary of Metrology (VIM), 3rd edition",
+          "stableUrl": "https://www.bipm.org/documents/20126/2071204/JCGM_200_2012.pdf",
+          "locator": "§2.39 (6.11), definition of calibration.",
+          "version": "JCGM 200:2012, 2008 version with minor corrections"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:evidence:calibration"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_50e7020f297fd09dc49ad8c8",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/auditability/comparison",
+      "owningProperty": "maha-policy",
+      "conceptId": "urn:maha:concept:governance:auditability",
+      "routeRole": "comparison",
+      "directAnswer": "Auditability — Comparison: Understand Auditability through the comparison lens in Policy Clearing on policy.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:governance:auditability under the owner-application contract. The canonical definition remains with maha-policy.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "NIST SP 800-53 Rev. 5, Security and Privacy Controls for Information Systems and Organizations",
+          "locator": "Control AU-2 (Event Logging), items a and b.",
+          "supports": "That auditability begins with identifying which event types a system is capable of logging in support of the audit function, and coordinating that logging with the parties who need audit-related information."
+        }
+      ],
+      "limitations": [
+        "A control catalogue. It does not state that any system is auditable, does not select events for any deployment, and confers no assurance by being cited."
+      ],
+      "negativeSpace": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does auditability mean in this context, and who owns the definition?",
+        "What does the inspected source establish about auditability, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:auditability"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "NIST SP 800-53 Rev. 5, Security and Privacy Controls for Information Systems and Organizations",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf",
+          "locator": "Control AU-2 (Event Logging), items a and b.",
+          "version": "Revision 5, DOI 10.6028/NIST.SP.800-53r5"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:governance:auditability"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_527e081883cbd5ca93beed2c",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/standards-and-conformity/evidence",
+      "owningProperty": "maha-policy",
+      "conceptId": "urn:maha:concept:governance:standards-and-conformity",
+      "routeRole": "evidence",
+      "directAnswer": "Standards And Conformity — Evidence: Understand Standards And Conformity through the evidence lens in Policy Clearing on policy.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:governance:standards-and-conformity under the owner-application contract. The canonical definition remains with maha-policy.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "NIST Special Publication 2000-01, ABC's of Conformity Assessment",
+          "locator": "Definition paragraph quoting ISO/IEC 17000, and the following paragraph enumerating testing, inspection, certification and accreditation.",
+          "supports": "That conformity assessment is the demonstration that specified requirements relating to a product, process, system, person or body are fulfilled, and that it includes testing, inspection, certification and the accreditation of the bodies performing those activities."
+        }
+      ],
+      "limitations": [
+        "Describes the field. It does not accredit anyone, does not establish that any particular assessment is adequate, and does not substitute for the ISO/IEC 17000 text it quotes."
+      ],
+      "negativeSpace": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does standards-and-conformity mean in this context, and who owns the definition?",
+        "What does the inspected source establish about standards-and-conformity, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:standards-and-conformity"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "NIST Special Publication 2000-01, ABC's of Conformity Assessment",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.2000-01.pdf",
+          "locator": "Definition paragraph quoting ISO/IEC 17000, and the following paragraph enumerating testing, inspection, certification and accreditation.",
+          "version": "NIST SP 2000-01"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:governance:standards-and-conformity"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_6a207a974f91b6082bf3c707",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/citation-lineage/machine-record",
+      "owningProperty": "maha-research",
+      "conceptId": "urn:maha:concept:evidence:citation-lineage",
+      "routeRole": "machine-record",
+      "directAnswer": "Citation Lineage — Machine Record: Understand Citation Lineage through the machine record lens in Research Objects on research.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:evidence:citation-lineage under the owner-application contract. The canonical definition remains with maha-research.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "W3C PROV-DM: The PROV Data Model",
+          "locator": "§2.1 PROV Core Structures — derivation between entities.",
+          "supports": "That a later entity may be recorded as derived from an earlier one, giving a traceable chain between versions of a work."
+        }
+      ],
+      "limitations": [
+        "Supports expressing a lineage. It does not establish that a cited chain is correct, that a citation is warranted, or that any particular citation practice is standard."
+      ],
+      "negativeSpace": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does citation-lineage mean in this context, and who owns the definition?",
+        "What does the inspected source establish about citation-lineage, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:citation-lineage"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "W3C PROV-DM: The PROV Data Model",
+          "stableUrl": "https://www.w3.org/TR/prov-dm/",
+          "locator": "§2.1 PROV Core Structures — derivation between entities.",
+          "version": "W3C Recommendation, 30 April 2013"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:evidence:citation-lineage"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_6eaebe9c85d180a18e6f736b",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/quantum-policy/tradeoffs",
+      "owningProperty": "maha-policy",
+      "conceptId": "urn:maha:concept:governance:quantum-policy",
+      "routeRole": "tradeoffs",
+      "directAnswer": "Quantum Policy — Tradeoffs: Understand Quantum Policy through the tradeoffs lens in Policy Clearing on policy.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:governance:quantum-policy under the owner-application contract. The canonical definition remains with maha-policy.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "FIPS 203, Module-Lattice-Based Key-Encapsulation Mechanism Standard",
+          "locator": "§1 Introduction — ML-KEM and its three parameter sets (ML-KEM-512, -768, -1024).",
+          "supports": "That a federal standard now specifies a key-encapsulation mechanism, ML-KEM, in three parameter sets, believed secure against an adversary possessing a quantum computer."
+        }
+      ],
+      "limitations": [
+        "Specifies an algorithm and its parameters. It does not state when any organisation must migrate, that migration is complete anywhere, or that quantum attack is imminent. \"Believed to be secure\" is the standard’s own hedge and is not a proof."
+      ],
+      "negativeSpace": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does quantum-policy mean in this context, and who owns the definition?",
+        "What does the inspected source establish about quantum-policy, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:quantum-policy"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "FIPS 203, Module-Lattice-Based Key-Encapsulation Mechanism Standard",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf",
+          "locator": "§1 Introduction — ML-KEM and its three parameter sets (ML-KEM-512, -768, -1024).",
+          "version": "Effective 13 August 2024"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:governance:quantum-policy"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_9cce4d72cbb7b2ccff9c19fa",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/auditability/current-law",
+      "owningProperty": "maha-policy",
+      "conceptId": "urn:maha:concept:governance:auditability",
+      "routeRole": "current-law",
+      "directAnswer": "Auditability — Current Law: Understand Auditability through the current law lens in Policy Clearing on policy.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:governance:auditability under the owner-application contract. The canonical definition remains with maha-policy.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "NIST SP 800-53 Rev. 5, Security and Privacy Controls for Information Systems and Organizations",
+          "locator": "Control AU-2 (Event Logging), items a and b.",
+          "supports": "That auditability begins with identifying which event types a system is capable of logging in support of the audit function, and coordinating that logging with the parties who need audit-related information."
+        }
+      ],
+      "limitations": [
+        "A control catalogue. It does not state that any system is auditable, does not select events for any deployment, and confers no assurance by being cited."
+      ],
+      "negativeSpace": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does auditability mean in this context, and who owns the definition?",
+        "What does the inspected source establish about auditability, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:auditability"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "NIST SP 800-53 Rev. 5, Security and Privacy Controls for Information Systems and Organizations",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf",
+          "locator": "Control AU-2 (Event Logging), items a and b.",
+          "version": "Revision 5, DOI 10.6028/NIST.SP.800-53r5"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:governance:auditability"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_afd7a5c2cdb8bb023e184f18",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/quantum-policy/evidence",
+      "owningProperty": "maha-policy",
+      "conceptId": "urn:maha:concept:governance:quantum-policy",
+      "routeRole": "evidence",
+      "directAnswer": "Quantum Policy — Evidence: Understand Quantum Policy through the evidence lens in Policy Clearing on policy.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:governance:quantum-policy under the owner-application contract. The canonical definition remains with maha-policy.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "FIPS 203, Module-Lattice-Based Key-Encapsulation Mechanism Standard",
+          "locator": "§1 Introduction — ML-KEM and its three parameter sets (ML-KEM-512, -768, -1024).",
+          "supports": "That a federal standard now specifies a key-encapsulation mechanism, ML-KEM, in three parameter sets, believed secure against an adversary possessing a quantum computer."
+        }
+      ],
+      "limitations": [
+        "Specifies an algorithm and its parameters. It does not state when any organisation must migrate, that migration is complete anywhere, or that quantum attack is imminent. \"Believed to be secure\" is the standard’s own hedge and is not a proof."
+      ],
+      "negativeSpace": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does quantum-policy mean in this context, and who owns the definition?",
+        "What does the inspected source establish about quantum-policy, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:quantum-policy"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "FIPS 203, Module-Lattice-Based Key-Encapsulation Mechanism Standard",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf",
+          "locator": "§1 Introduction — ML-KEM and its three parameter sets (ML-KEM-512, -768, -1024).",
+          "version": "Effective 13 August 2024"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:governance:quantum-policy"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_cae2934717d249d513e22c3e",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/standards-and-conformity/machine-rule",
+      "owningProperty": "maha-policy",
+      "conceptId": "urn:maha:concept:governance:standards-and-conformity",
+      "routeRole": "machine-rule",
+      "directAnswer": "Standards And Conformity — Machine Rule: Understand Standards And Conformity through the machine rule lens in Policy Clearing on policy.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:governance:standards-and-conformity under the owner-application contract. The canonical definition remains with maha-policy.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "NIST Special Publication 2000-01, ABC's of Conformity Assessment",
+          "locator": "Definition paragraph quoting ISO/IEC 17000, and the following paragraph enumerating testing, inspection, certification and accreditation.",
+          "supports": "That conformity assessment is the demonstration that specified requirements relating to a product, process, system, person or body are fulfilled, and that it includes testing, inspection, certification and the accreditation of the bodies performing those activities."
+        }
+      ],
+      "limitations": [
+        "Describes the field. It does not accredit anyone, does not establish that any particular assessment is adequate, and does not substitute for the ISO/IEC 17000 text it quotes."
+      ],
+      "negativeSpace": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does standards-and-conformity mean in this context, and who owns the definition?",
+        "What does the inspected source establish about standards-and-conformity, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:standards-and-conformity"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "NIST Special Publication 2000-01, ABC's of Conformity Assessment",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.2000-01.pdf",
+          "locator": "Definition paragraph quoting ISO/IEC 17000, and the following paragraph enumerating testing, inspection, certification and accreditation.",
+          "version": "NIST SP 2000-01"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:governance:standards-and-conformity"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_e484d7475ce7aaba4e5a3536",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/model-evaluation/machine-rule",
+      "owningProperty": "maha-policy",
+      "conceptId": "urn:maha:concept:governance:model-evaluation",
+      "routeRole": "machine-rule",
+      "directAnswer": "Model Evaluation — Machine Rule: Understand Model Evaluation through the machine rule lens in Policy Clearing on policy.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:governance:model-evaluation under the owner-application contract. The canonical definition remains with maha-policy.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1",
+          "locator": "MEASURE 2, subcategories 2.1, 2.3 and 2.5.",
+          "supports": "That evaluating an AI system for trustworthy characteristics involves documenting test sets, metrics and TEVV tooling, measuring performance under conditions similar to deployment, and documenting limits on generalisability beyond those conditions."
+        }
+      ],
+      "limitations": [
+        "A voluntary framework. It does not certify any system, establish a passing threshold, create a legal obligation, or state that following it makes a system safe."
+      ],
+      "negativeSpace": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does model-evaluation mean in this context, and who owns the definition?",
+        "What does the inspected source establish about model-evaluation, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:model-evaluation"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "NIST AI Risk Management Framework (AI RMF 1.0), NIST AI 100-1",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+          "locator": "MEASURE 2, subcategories 2.1, 2.3 and 2.5.",
+          "version": "January 2023"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:governance:model-evaluation"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_e870ac7537b63a2a5a854e3e",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/machine-contracting/machine-rule",
+      "owningProperty": "maha-policy",
+      "conceptId": "urn:maha:concept:governance:machine-contracting",
+      "routeRole": "machine-rule",
+      "directAnswer": "Machine Contracting — Machine Rule: Understand Machine Contracting through the machine rule lens in Policy Clearing on policy.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:governance:machine-contracting under the owner-application contract. The canonical definition remains with maha-policy.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "Regulation (EU) No 910/2014 (eIDAS)",
+          "locator": "Article 25(1) and 25(2) — legal effects of electronic signatures.",
+          "supports": "That an electronic signature may not be denied legal effect or admissibility solely for being electronic, and that a qualified electronic signature has the equivalent legal effect of a handwritten one."
+        }
+      ],
+      "limitations": [
+        "Addresses signatures by natural and legal persons. It does not confer contracting capacity on an autonomous machine, does not establish that an agent may bind a principal, and must not be read as authorising machine-formed contracts."
+      ],
+      "negativeSpace": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does machine-contracting mean in this context, and who owns the definition?",
+        "What does the inspected source establish about machine-contracting, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:machine-contracting"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "Regulation (EU) No 910/2014 (eIDAS)",
+          "stableUrl": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32014R0910",
+          "locator": "Article 25(1) and 25(2) — legal effects of electronic signatures.",
+          "version": "EUR-Lex CELEX 32014R0910"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:governance:machine-contracting"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    }
+  ],
+  "provenanceDigest": "sha256:994b315eadcfdbe50b12533e4229b26a34f59f652828d588b1501ec57f91d92d"
+}
