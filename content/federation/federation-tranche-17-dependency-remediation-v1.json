@@ -3,13 +3,12 @@
   "frozenOn": "2026-09-06",
   "purpose": "Diagnoses every prerequisite that blocked a Tranche 16 candidate, so the next cohort can be selected on what it would actually unblock rather than on utility alone.",
   "counts": {
-    "blockedDependents": 14,
-    "distinctPrerequisites": 5,
+    "blockedDependents": 8,
+    "distinctPrerequisites": 2,
     "byAvailability": {
-      "absent-from-frozen-map": 2,
-      "available-in-pool": 3
+      "absent-from-frozen-map": 2
     },
-    "unlockableByThisTranche": 6
+    "unlockableByThisTranche": 0
   },
   "finding": "Fan-out and availability are inversely related here. Every prerequisite with a fan-out above one is absent from the frozen map, and every prerequisite present in the pool unlocks exactly one dependent. Selecting all four available definitions therefore unblocks four of the thirty-eight. The remaining thirty-four are blocked by an incomplete candidate map rather than by selection policy.",
   "prerequisites": [
@@ -40,42 +39,6 @@
         "cand_67328511b3565384d1f5240c",
         "cand_fcea33351dc6b5ed02dac901"
       ]
-    },
-    {
-      "conceptId": "urn:maha:concept:evidence:measurement-error",
-      "declaredOwner": "maha-research",
-      "unlocks": 2,
-      "supplierCandidateId": "cand_635395b41cc580c20ac0c307",
-      "supplierPath": "/federation/research/measurement-error/definition",
-      "availability": "available-in-pool",
-      "dependents": [
-        "cand_218b242cc33b2ce89ab28778",
-        "cand_98b822a4bb523ac26a0372cd"
-      ]
-    },
-    {
-      "conceptId": "urn:maha:concept:evidence:provenance-graph",
-      "declaredOwner": "maha-research",
-      "unlocks": 2,
-      "supplierCandidateId": "cand_40085923a5197282f4f0252a",
-      "supplierPath": "/federation/research/provenance-graph/definition",
-      "availability": "available-in-pool",
-      "dependents": [
-        "cand_0b5df84666830bd201383f4c",
-        "cand_86b8908b39614fac43e89d7f"
-      ]
-    },
-    {
-      "conceptId": "urn:maha:concept:evidence:qiskit-circuit",
-      "declaredOwner": "maha-research",
-      "unlocks": 2,
-      "supplierCandidateId": "cand_8fa40f42d53edd7287d851b1",
-      "supplierPath": "/federation/research/qiskit-circuit/definition",
-      "availability": "available-in-pool",
-      "dependents": [
-        "cand_49aa8c59c3937c1fa051a721",
-        "cand_4d092c2e7e20eccfcffc066b"
-      ]
     }
   ],
   "repairProposals": [
@@ -95,5 +58,5 @@
     }
   ],
   "boundary": "An analysis. It inserts no candidate, activates no proposal, and changes no Tranche 16 classification.",
-  "provenanceDigest": "sha256:a12c2fc3a018ab691c0616024d0339f3d521d003f779d295be4603d2fa14821d"
+  "provenanceDigest": "sha256:9535718a65df6cdbbda3f9c9b0be5174c10deea65945306da921d3370fa96166"
 }

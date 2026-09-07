@@ -12,7 +12,7 @@ Reviewed, not published. No route, release, sitemap entry or public page was cre
 | Distinct sources | 18 |
 | Specifications | 40 |
 | Bounded questions | 200 |
-| Dependencies missing | 38 |
+| Dependencies missing | 34 |
 
 ## Classification
 
@@ -33,7 +33,7 @@ recording, internal review, context packs — together with the author's own con
 external authority defines them, so none was cited. Those candidates are blocked on inspection rather than faulted,
 and a first-party definition would need to be written and reviewed before they could be sourced at all.
 
-38 candidates have no canonical definition anywhere in the frozen map for the concept they
+34 candidates have no canonical definition anywhere in the frozen map for the concept they
 apply, on the property that declares ownership. A missing prerequisite blocks its dependent page and was not inferred.
 
 ## Sources sought and not inspected

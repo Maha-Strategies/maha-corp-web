@@ -3,10 +3,10 @@
   "frozenOn": "2026-09-06",
   "method": "Sources were opened and read at a stated locator. Metadata, abstracts, search snippets, dictionary entries and landing pages are not inspection. No access control was bypassed.",
   "topicsInCohort": 15,
-  "topicsInspected": 4,
-  "distinctSources": 3,
+  "topicsInspected": 2,
+  "distinctSources": 2,
   "carriedForward": 2,
-  "freshlyInspected": 2,
+  "freshlyInspected": 0,
   "inspections": [
     {
       "inspectionId": "tr16-src-101",
@@ -39,41 +39,9 @@
       "sourceClass": "government-standards-body",
       "independence": "independent-of-maha",
       "relationshipToEarlier": "Carried forward into Tranche 17 via Tranche 16: same source, same locator, same claim scope. Originally inspected as tr16-src-102."
-    },
-    {
-      "inspectionId": "tr17-src-101",
-      "topic": "measurement-error",
-      "sourceIdentity": "JCGM 200:2012, International Vocabulary of Metrology (VIM), 3rd edition",
-      "version": "JCGM 200:2012",
-      "stableUrl": "https://www.bipm.org/documents/20126/2071204/JCGM_200_2012.pdf",
-      "locator": "§2.16 (3.10), definition of measurement error.",
-      "inspectionDepth": "targeted-definition-read",
-      "accessBasis": "Published by the BIPM Joint Committee for Guides in Metrology, freely available.",
-      "reuseBasis": "Reference-only. Bounded original summary; the definition is not reproduced verbatim.",
-      "supportedClaimScope": "That measurement error is the measured quantity value minus a reference quantity value, and therefore presupposes a reference against which the measurement is compared.",
-      "boundary": "Error in the metrological sense, requiring a reference value. It is not model error, prediction error, or a mistake in a procedure, and it does not define uncertainty, which the same vocabulary treats as a separate concept.",
-      "sourceClass": "international-metrology-authority",
-      "independence": "independent-of-maha",
-      "relationshipToEarlier": "Third definition read from the document already inspected for calibration in Tranche 15 and traceability in Tranche 16."
-    },
-    {
-      "inspectionId": "tr17-src-102",
-      "topic": "provenance-graph",
-      "sourceIdentity": "W3C PROV-DM: The PROV Data Model",
-      "version": "W3C Recommendation, 30 April 2013",
-      "stableUrl": "https://www.w3.org/TR/prov-dm/",
-      "locator": "Bundle definition — a named set of provenance descriptions that is itself an entity.",
-      "inspectionDepth": "targeted-section-read",
-      "accessBasis": "W3C Recommendation, publicly published.",
-      "reuseBasis": "W3C Document Licence. Reference-only; specification text is not copied into artifacts.",
-      "supportedClaimScope": "That a set of provenance descriptions can be named and treated as an entity in its own right, so that the provenance of provenance can be expressed and a reader can ask who asserted a given account.",
-      "boundary": "A model for expressing provenance, not a guarantee of it. Naming a bundle does not make its contents accurate, and the specification does not establish that any recorded graph is complete.",
-      "sourceClass": "open-standard-recommendation",
-      "independence": "independent-of-maha",
-      "relationshipToEarlier": "Same Recommendation inspected in Tranche 13 for compiler provenance and citation lineage, read here at the bundle definition."
     }
   ],
   "soughtButNotInspected": [],
   "uninspectedTopicNote": "The uninspected topics are predominantly this organisation’s own operational concepts and the author’s own concepts on the personal properties, for which no external authority exists to cite.",
-  "provenanceDigest": "sha256:f448186f7d05ea338a98400ddc8a47deb723588f8b854a2bed79a5c80d3c758e"
+  "provenanceDigest": "sha256:8175842e9b07c7a2fd251fc33b39c752eb39ca34922bccc8f5d8ee94d4018220"
 }

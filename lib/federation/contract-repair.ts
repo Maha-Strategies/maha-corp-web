@@ -28,6 +28,7 @@
 
 export type ConceptAuthority = { canonicalOwner: string; role: string; boundary: string }
 export type RepairableCandidate = {
+  conceptId?: string
   candidateId: string
   siteId: string
   routeRole: string
@@ -98,4 +99,22 @@ export function summariseRepair(candidates: readonly RepairableCandidate[]): Rep
       .sort(),
     byProperty: Object.fromEntries(Object.entries(byProperty).sort(([a], [b]) => a.localeCompare(b))),
   }
+}
+
+/**
+ * Whether a reported dependency gap is a genuine absence from the map.
+ *
+ * The distinction the v3 addition rests on. A concept whose definition exists
+ * on the declared owner is not absent, however the dependency was reported —
+ * it is unreviewed, and adding a second definition would duplicate it. Exported
+ * so the rule is testable on a constructed case rather than only on data that
+ * happens to contain no counter-example.
+ */
+export function dependencyGapIsGenuine(
+  conceptId: string,
+  declaredOwner: string,
+  candidates: readonly RepairableCandidate[],
+): boolean {
+  return !candidates.some(
+    (c) => c.conceptId === conceptId && c.routeRole === 'definition' && c.siteId === declaredOwner)
 }

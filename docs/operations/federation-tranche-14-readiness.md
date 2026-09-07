@@ -7,14 +7,14 @@ Reviewed, not published. No route, release, sitemap entry or public page was cre
 | | |
 |---|---|
 | Cohort | 100 |
-| Topics in cohort | 46 |
+| Topics in cohort | 42 |
 | Topics inspected | 14 |
 | Distinct sources | 10 |
 | Specifications | 33 |
 | Bounded questions | 165 |
-| Dependencies missing | 21 |
-| Prerequisites selected | 4 |
-| Projected Tranche 13 unlocks | 4 |
+| Dependencies missing | 20 |
+| Prerequisites selected | 0 |
+| Projected Tranche 13 unlocks | 0 |
 
 ## Classification
 
@@ -25,7 +25,7 @@ Reviewed, not published. No route, release, sitemap entry or public page was cre
 
 ## Dependency-first selection, and its ceiling
 
-Tranche 13 left 38 candidates blocked on 17 distinct prerequisites. Only 4 of those
+Tranche 13 left 38 candidates blocked on 17 distinct prerequisites. Only 0 of those
 prerequisites exist in the remaining pool, and each unlocks exactly one dependent. Every prerequisite with a fan-out
 above one is absent from the frozen candidate map.
 

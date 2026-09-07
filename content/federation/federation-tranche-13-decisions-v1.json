@@ -6,8 +6,8 @@
   "note": "Every candidate carries exactly one decision. Rejected, revised and blocked candidates are preserved here and cannot become specifications.",
   "counts": {
     "bySemanticResult": {
-      "blocked on ownership or dependency": 38,
-      "distinct": 62
+      "blocked on ownership or dependency": 34,
+      "distinct": 66
     },
     "byFinalState": {
       "blocked": 60,
@@ -764,10 +764,10 @@
       "routeRole": "fixture",
       "conceptId": "urn:maha:concept:evidence:passage-locator",
       "declaredOwner": "maha-research",
-      "dependencyState": "missing",
-      "semanticResult": "blocked on ownership or dependency",
+      "dependencyState": "awaiting-definition-review",
+      "semanticResult": "distinct",
       "finalState": "blocked",
-      "reason": "A definition candidate exists (cand_528210d274913a7eb2093bf1) but is neither reviewed nor in this cohort."
+      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"passage-locator\". The candidate map records evidencePlan as not-started on all six axes, and evidence-ready requires inspected content with an exact locator. Blocked on source inspection, not on any defect in the candidate."
     },
     {
       "candidateId": "cand_9761f950f4578a4523a01c57",
@@ -816,10 +816,10 @@
       "routeRole": "fixture",
       "conceptId": "urn:maha:concept:evidence:formal-definition",
       "declaredOwner": "maha-research",
-      "dependencyState": "missing",
-      "semanticResult": "blocked on ownership or dependency",
+      "dependencyState": "awaiting-definition-review",
+      "semanticResult": "distinct",
       "finalState": "blocked",
-      "reason": "A definition candidate exists (cand_4941b8fd397b7b41ac4cda40) but is neither reviewed nor in this cohort."
+      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"formal-definition\". The candidate map records evidencePlan as not-started on all six axes, and evidence-ready requires inspected content with an exact locator. Blocked on source inspection, not on any defect in the candidate."
     },
     {
       "candidateId": "cand_a159ed8af4bf1ffcf1709356",
@@ -1011,10 +1011,10 @@
       "routeRole": "fixture",
       "conceptId": "urn:maha:concept:evidence:primary-source",
       "declaredOwner": "maha-research",
-      "dependencyState": "missing",
-      "semanticResult": "blocked on ownership or dependency",
+      "dependencyState": "awaiting-definition-review",
+      "semanticResult": "distinct",
       "finalState": "blocked",
-      "reason": "A definition candidate exists (cand_db12a930bf43b2510a97e0ad) but is neither reviewed nor in this cohort."
+      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"primary-source\". The candidate map records evidencePlan as not-started on all six axes, and evidence-ready requires inspected content with an exact locator. Blocked on source inspection, not on any defect in the candidate."
     },
     {
       "candidateId": "cand_d168942505ab7d2084529962",
@@ -1102,10 +1102,10 @@
       "routeRole": "fixture",
       "conceptId": "urn:maha:concept:evidence:contradiction-search",
       "declaredOwner": "maha-research",
-      "dependencyState": "missing",
-      "semanticResult": "blocked on ownership or dependency",
+      "dependencyState": "awaiting-definition-review",
+      "semanticResult": "distinct",
       "finalState": "blocked",
-      "reason": "A definition candidate exists (cand_2c8d504e70fa69a97aa2a5cc) but is neither reviewed nor in this cohort."
+      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"contradiction-search\". The candidate map records evidencePlan as not-started on all six axes, and evidence-ready requires inspected content with an exact locator. Blocked on source inspection, not on any defect in the candidate."
     },
     {
       "candidateId": "cand_e19e8901c36b13c148997e41",
@@ -1316,5 +1316,5 @@
       "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"recursive-institutions\". The candidate map records evidencePlan as not-started on all six axes, and evidence-ready requires inspected content with an exact locator. Blocked on source inspection, not on any defect in the candidate."
     }
   ],
-  "provenanceDigest": "sha256:54146890621163f42b2f830d5b10fde5610329b38bc323a70470bfefd6c68ff1"
+  "provenanceDigest": "sha256:26bf86064cb7f09c32d5ffa0f63e5533e0a93e2bb9535e08ea3a75334173fc31"
 }

@@ -10,29 +10,8 @@
     "poolAfter": 228
   },
   "dependencyFirst": {
-    "prerequisitesSelected": [
-      {
-        "conceptId": "urn:maha:concept:evidence:contradiction-search",
-        "supplierCandidateId": "cand_2c8d504e70fa69a97aa2a5cc",
-        "unlocks": 1
-      },
-      {
-        "conceptId": "urn:maha:concept:evidence:formal-definition",
-        "supplierCandidateId": "cand_4941b8fd397b7b41ac4cda40",
-        "unlocks": 1
-      },
-      {
-        "conceptId": "urn:maha:concept:evidence:passage-locator",
-        "supplierCandidateId": "cand_528210d274913a7eb2093bf1",
-        "unlocks": 1
-      },
-      {
-        "conceptId": "urn:maha:concept:evidence:primary-source",
-        "supplierCandidateId": "cand_db12a930bf43b2510a97e0ad",
-        "unlocks": 1
-      }
-    ],
-    "projectedTranche13Unlocks": 4
+    "prerequisitesSelected": [],
+    "projectedTranche13Unlocks": 0
   },
   "shortfalls": [
     {
@@ -81,17 +60,15 @@
     "competition-policy": 4,
     "conflicting-literature": 4,
     "container-image": 1,
-    "contradiction-search": 1,
     "correction": 3,
     "correction-and-retraction": 4,
     "delivery-acknowledgement": 4,
     "digital-public-infrastructure": 4,
     "equation-locator": 1,
-    "evidence-graph": 1,
-    "formal-definition": 1,
+    "evidence-graph": 2,
     "full-text-evidence": 2,
     "governed-autonomy": 1,
-    "government-mirror": 1,
+    "government-mirror": 2,
     "internal-review": 1,
     "licensed-retrieval": 4,
     "locator-verification": 3,
@@ -100,16 +77,14 @@
     "mental-sovereignty": 3,
     "metadata-only-evidence": 1,
     "model-evaluation": 4,
-    "passage-locator": 1,
     "passage-support": 3,
-    "primary-source": 1,
     "privacy-boundary": 1,
     "quantum-policy": 4,
     "random-seed": 1,
     "repository-copy": 1,
     "reproducibility": 1,
-    "scope-matching": 1,
-    "slurm-job": 1,
+    "scope-matching": 2,
+    "slurm-job": 2,
     "source-recovery": 3,
     "standards-and-conformity": 4,
     "unsupported-inference": 2,
@@ -120,7 +95,7 @@
     "comparison": 3,
     "critique": 1,
     "current-law": 3,
-    "definition": 8,
+    "definition": 4,
     "evidence": 2,
     "failure-mode": 4,
     "failure-modes": 11,
@@ -131,7 +106,7 @@
     "mechanisms": 4,
     "method": 2,
     "origin": 1,
-    "protocol": 1,
+    "protocol": 5,
     "relationship": 2,
     "relationships": 7,
     "source-contract": 6,
@@ -142,342 +117,6 @@
     "workflow": 14
   },
   "entries": [
-    {
-      "candidateId": "cand_2c8d504e70fa69a97aa2a5cc",
-      "siteId": "maha-research",
-      "canonicalHost": "research.mahastrategies.com",
-      "groupId": "research-objects",
-      "routeRole": "definition",
-      "path": "/federation/research/contradiction-search/definition",
-      "url": "https://research.mahastrategies.com/federation/research/contradiction-search/definition",
-      "title": "Contradiction Search — Definition",
-      "searchIntent": "Understand Contradiction Search through the definition lens in Research Objects on research.mahastrategies.com.",
-      "demandEvidence": {
-        "basis": "category-prior-not-observed",
-        "observedQueries": 0,
-        "observedImpressions": null,
-        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
-      },
-      "conceptId": "urn:maha:concept:evidence:contradiction-search",
-      "conceptFamilyId": "evidence",
-      "conceptAuthority": {
-        "canonicalOwner": "maha-research",
-        "role": "canonical-owner",
-        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
-      },
-      "typedRelationships": [
-        {
-          "type": "applies-to",
-          "target": "urn:maha:concept:evidence:contradiction-search"
-        },
-        {
-          "type": "governed-by",
-          "target": "urn:maha:concept:governance"
-        },
-        {
-          "type": "evidence-for",
-          "target": "urn:maha:concept:evidence"
-        }
-      ],
-      "evidencePlan": {
-        "sourceIdentity": "not-started",
-        "contentInspection": "not-started",
-        "locatorInspection": "not-started",
-        "rightsReview": "not-started",
-        "alignmentAudit": "not-started",
-        "exactRevisionReview": "not-started"
-      },
-      "routeContract": {
-        "selfCanonical": true,
-        "canonicalOwner": "maha-research",
-        "allowedContent": [
-          "research objects",
-          "machine-readable provenance",
-          "reproduction protocols"
-        ],
-        "mustNotClaim": [
-          "sales copy",
-          "unsupported interpretation"
-        ]
-      },
-      "duplicateScreen": {
-        "nearestObservedUrl": "https://research.mahastrategies.com",
-        "tokenJaccard": 0,
-        "status": "no-high-similarity-observed"
-      },
-      "scores": {
-        "searchDemandPrior": 56,
-        "evidenceAvailability": 96,
-        "differentiation": 96,
-        "machineUtility": 99,
-        "commercialProximity": 78,
-        "federationUtility": 86,
-        "duplicationSafety": 100,
-        "weighted": 86.05
-      },
-      "publication": {
-        "state": "candidate-only",
-        "inspected": false,
-        "reviewed": false,
-        "canonicallyReleased": false,
-        "compiled": false,
-        "crawlable": false
-      },
-      "rank": 1023,
-      "tranche": 3
-    },
-    {
-      "candidateId": "cand_4941b8fd397b7b41ac4cda40",
-      "siteId": "maha-research",
-      "canonicalHost": "research.mahastrategies.com",
-      "groupId": "research-objects",
-      "routeRole": "definition",
-      "path": "/federation/research/formal-definition/definition",
-      "url": "https://research.mahastrategies.com/federation/research/formal-definition/definition",
-      "title": "Formal Definition — Definition",
-      "searchIntent": "Understand Formal Definition through the definition lens in Research Objects on research.mahastrategies.com.",
-      "demandEvidence": {
-        "basis": "category-prior-not-observed",
-        "observedQueries": 0,
-        "observedImpressions": null,
-        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
-      },
-      "conceptId": "urn:maha:concept:evidence:formal-definition",
-      "conceptFamilyId": "evidence",
-      "conceptAuthority": {
-        "canonicalOwner": "maha-research",
-        "role": "canonical-owner",
-        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
-      },
-      "typedRelationships": [
-        {
-          "type": "applies-to",
-          "target": "urn:maha:concept:evidence:formal-definition"
-        },
-        {
-          "type": "governed-by",
-          "target": "urn:maha:concept:governance"
-        },
-        {
-          "type": "evidence-for",
-          "target": "urn:maha:concept:evidence"
-        }
-      ],
-      "evidencePlan": {
-        "sourceIdentity": "not-started",
-        "contentInspection": "not-started",
-        "locatorInspection": "not-started",
-        "rightsReview": "not-started",
-        "alignmentAudit": "not-started",
-        "exactRevisionReview": "not-started"
-      },
-      "routeContract": {
-        "selfCanonical": true,
-        "canonicalOwner": "maha-research",
-        "allowedContent": [
-          "research objects",
-          "machine-readable provenance",
-          "reproduction protocols"
-        ],
-        "mustNotClaim": [
-          "sales copy",
-          "unsupported interpretation"
-        ]
-      },
-      "duplicateScreen": {
-        "nearestObservedUrl": "https://research.mahastrategies.com",
-        "tokenJaccard": 0,
-        "status": "no-high-similarity-observed"
-      },
-      "scores": {
-        "searchDemandPrior": 56,
-        "evidenceAvailability": 96,
-        "differentiation": 96,
-        "machineUtility": 99,
-        "commercialProximity": 78,
-        "federationUtility": 86,
-        "duplicationSafety": 100,
-        "weighted": 86.05
-      },
-      "publication": {
-        "state": "candidate-only",
-        "inspected": false,
-        "reviewed": false,
-        "canonicallyReleased": false,
-        "compiled": false,
-        "crawlable": false
-      },
-      "rank": 1025,
-      "tranche": 3
-    },
-    {
-      "candidateId": "cand_528210d274913a7eb2093bf1",
-      "siteId": "maha-research",
-      "canonicalHost": "research.mahastrategies.com",
-      "groupId": "research-objects",
-      "routeRole": "definition",
-      "path": "/federation/research/passage-locator/definition",
-      "url": "https://research.mahastrategies.com/federation/research/passage-locator/definition",
-      "title": "Passage Locator — Definition",
-      "searchIntent": "Understand Passage Locator through the definition lens in Research Objects on research.mahastrategies.com.",
-      "demandEvidence": {
-        "basis": "category-prior-not-observed",
-        "observedQueries": 0,
-        "observedImpressions": null,
-        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
-      },
-      "conceptId": "urn:maha:concept:evidence:passage-locator",
-      "conceptFamilyId": "evidence",
-      "conceptAuthority": {
-        "canonicalOwner": "maha-research",
-        "role": "canonical-owner",
-        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
-      },
-      "typedRelationships": [
-        {
-          "type": "applies-to",
-          "target": "urn:maha:concept:evidence:passage-locator"
-        },
-        {
-          "type": "governed-by",
-          "target": "urn:maha:concept:governance"
-        },
-        {
-          "type": "evidence-for",
-          "target": "urn:maha:concept:evidence"
-        }
-      ],
-      "evidencePlan": {
-        "sourceIdentity": "not-started",
-        "contentInspection": "not-started",
-        "locatorInspection": "not-started",
-        "rightsReview": "not-started",
-        "alignmentAudit": "not-started",
-        "exactRevisionReview": "not-started"
-      },
-      "routeContract": {
-        "selfCanonical": true,
-        "canonicalOwner": "maha-research",
-        "allowedContent": [
-          "research objects",
-          "machine-readable provenance",
-          "reproduction protocols"
-        ],
-        "mustNotClaim": [
-          "sales copy",
-          "unsupported interpretation"
-        ]
-      },
-      "duplicateScreen": {
-        "nearestObservedUrl": "https://research.mahastrategies.com",
-        "tokenJaccard": 0,
-        "status": "no-high-similarity-observed"
-      },
-      "scores": {
-        "searchDemandPrior": 56,
-        "evidenceAvailability": 96,
-        "differentiation": 96,
-        "machineUtility": 99,
-        "commercialProximity": 78,
-        "federationUtility": 86,
-        "duplicationSafety": 100,
-        "weighted": 86.05
-      },
-      "publication": {
-        "state": "candidate-only",
-        "inspected": false,
-        "reviewed": false,
-        "canonicallyReleased": false,
-        "compiled": false,
-        "crawlable": false
-      },
-      "rank": 1028,
-      "tranche": 3
-    },
-    {
-      "candidateId": "cand_db12a930bf43b2510a97e0ad",
-      "siteId": "maha-research",
-      "canonicalHost": "research.mahastrategies.com",
-      "groupId": "research-objects",
-      "routeRole": "definition",
-      "path": "/federation/research/primary-source/definition",
-      "url": "https://research.mahastrategies.com/federation/research/primary-source/definition",
-      "title": "Primary Source — Definition",
-      "searchIntent": "Understand Primary Source through the definition lens in Research Objects on research.mahastrategies.com.",
-      "demandEvidence": {
-        "basis": "category-prior-not-observed",
-        "observedQueries": 0,
-        "observedImpressions": null,
-        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
-      },
-      "conceptId": "urn:maha:concept:evidence:primary-source",
-      "conceptFamilyId": "evidence",
-      "conceptAuthority": {
-        "canonicalOwner": "maha-research",
-        "role": "canonical-owner",
-        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
-      },
-      "typedRelationships": [
-        {
-          "type": "applies-to",
-          "target": "urn:maha:concept:evidence:primary-source"
-        },
-        {
-          "type": "governed-by",
-          "target": "urn:maha:concept:governance"
-        },
-        {
-          "type": "evidence-for",
-          "target": "urn:maha:concept:evidence"
-        }
-      ],
-      "evidencePlan": {
-        "sourceIdentity": "not-started",
-        "contentInspection": "not-started",
-        "locatorInspection": "not-started",
-        "rightsReview": "not-started",
-        "alignmentAudit": "not-started",
-        "exactRevisionReview": "not-started"
-      },
-      "routeContract": {
-        "selfCanonical": true,
-        "canonicalOwner": "maha-research",
-        "allowedContent": [
-          "research objects",
-          "machine-readable provenance",
-          "reproduction protocols"
-        ],
-        "mustNotClaim": [
-          "sales copy",
-          "unsupported interpretation"
-        ]
-      },
-      "duplicateScreen": {
-        "nearestObservedUrl": "https://research.mahastrategies.com",
-        "tokenJaccard": 0,
-        "status": "no-high-similarity-observed"
-      },
-      "scores": {
-        "searchDemandPrior": 56,
-        "evidenceAvailability": 96,
-        "differentiation": 96,
-        "machineUtility": 99,
-        "commercialProximity": 78,
-        "federationUtility": 86,
-        "duplicationSafety": 100,
-        "weighted": 86.05
-      },
-      "publication": {
-        "state": "candidate-only",
-        "inspected": false,
-        "reviewed": false,
-        "canonicallyReleased": false,
-        "compiled": false,
-        "crawlable": false
-      },
-      "rank": 1029,
-      "tranche": 3
-    },
     {
       "candidateId": "cand_49563482102bec2a4698ca6d",
       "siteId": "maha-strategies",
@@ -6359,6 +5998,342 @@
       "tranche": 3
     },
     {
+      "candidateId": "cand_ab0a972ba8bc988c8023249c",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "protocol",
+      "path": "/federation/research/government-mirror/protocol",
+      "url": "https://research.mahastrategies.com/federation/research/government-mirror/protocol",
+      "title": "Government Mirror — Protocol",
+      "searchIntent": "Understand Government Mirror through the protocol lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:government-mirror",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:government-mirror"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "research objects",
+          "machine-readable provenance",
+          "reproduction protocols"
+        ],
+        "mustNotClaim": [
+          "sales copy",
+          "unsupported interpretation"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://research.mahastrategies.com/library/lessons/seismic-cover-protocol",
+        "tokenJaccard": 0.1111,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 58,
+        "evidenceAvailability": 96,
+        "differentiation": 96,
+        "machineUtility": 99,
+        "commercialProximity": 78,
+        "federationUtility": 92,
+        "duplicationSafety": 89,
+        "weighted": 86.64
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 887,
+      "tranche": 3
+    },
+    {
+      "candidateId": "cand_bcb46f3d55587a2e0245700c",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "protocol",
+      "path": "/federation/research/evidence-graph/protocol",
+      "url": "https://research.mahastrategies.com/federation/research/evidence-graph/protocol",
+      "title": "Evidence Graph — Protocol",
+      "searchIntent": "Understand Evidence Graph through the protocol lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:evidence-graph",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:evidence-graph"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "research objects",
+          "machine-readable provenance",
+          "reproduction protocols"
+        ],
+        "mustNotClaim": [
+          "sales copy",
+          "unsupported interpretation"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://research.mahastrategies.com/library/lessons/seismic-cover-protocol",
+        "tokenJaccard": 0.1111,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 58,
+        "evidenceAvailability": 96,
+        "differentiation": 96,
+        "machineUtility": 99,
+        "commercialProximity": 78,
+        "federationUtility": 92,
+        "duplicationSafety": 89,
+        "weighted": 86.64
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 886,
+      "tranche": 3
+    },
+    {
+      "candidateId": "cand_df63ff03ee9ecebe4a8904fc",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "protocol",
+      "path": "/federation/research/slurm-job/protocol",
+      "url": "https://research.mahastrategies.com/federation/research/slurm-job/protocol",
+      "title": "Slurm Job — Protocol",
+      "searchIntent": "Understand Slurm Job through the protocol lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:slurm-job",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:slurm-job"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "research objects",
+          "machine-readable provenance",
+          "reproduction protocols"
+        ],
+        "mustNotClaim": [
+          "sales copy",
+          "unsupported interpretation"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://research.mahastrategies.com/library/lessons/seismic-cover-protocol",
+        "tokenJaccard": 0.1111,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 58,
+        "evidenceAvailability": 96,
+        "differentiation": 96,
+        "machineUtility": 99,
+        "commercialProximity": 78,
+        "federationUtility": 92,
+        "duplicationSafety": 89,
+        "weighted": 86.64
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 889,
+      "tranche": 3
+    },
+    {
+      "candidateId": "cand_e71bcde308737c6689e3a98f",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "protocol",
+      "path": "/federation/research/scope-matching/protocol",
+      "url": "https://research.mahastrategies.com/federation/research/scope-matching/protocol",
+      "title": "Scope Matching — Protocol",
+      "searchIntent": "Understand Scope Matching through the protocol lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:scope-matching",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:scope-matching"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "research objects",
+          "machine-readable provenance",
+          "reproduction protocols"
+        ],
+        "mustNotClaim": [
+          "sales copy",
+          "unsupported interpretation"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://research.mahastrategies.com/library/lessons/seismic-cover-protocol",
+        "tokenJaccard": 0.1111,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 58,
+        "evidenceAvailability": 96,
+        "differentiation": 96,
+        "machineUtility": 99,
+        "commercialProximity": 78,
+        "federationUtility": 92,
+        "duplicationSafety": 89,
+        "weighted": 86.64
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 888,
+      "tranche": 3
+    },
+    {
       "candidateId": "cand_685fc365b60f050b990b581c",
       "siteId": "mayone-maharajan",
       "canonicalHost": "www.mayonemaharajan.com",
@@ -8543,5 +8518,5 @@
       "tranche": 1
     }
   ],
-  "provenanceDigest": "sha256:348ecb3d02e782c6467d92a339dac4b1935612693656f915e867c8c2af381637"
+  "provenanceDigest": "sha256:b50526338242ebf92e22d3b17f0cd3d85dc1c996e3ecb4bdd8ba2bf0446250da"
 }

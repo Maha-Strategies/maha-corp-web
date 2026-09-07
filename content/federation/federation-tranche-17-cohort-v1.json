@@ -10,24 +10,8 @@
     "poolAfter": 0
   },
   "dependencyFirst": {
-    "prerequisitesSelected": [
-      {
-        "conceptId": "urn:maha:concept:evidence:measurement-error",
-        "supplierCandidateId": "cand_635395b41cc580c20ac0c307",
-        "unlocks": 2
-      },
-      {
-        "conceptId": "urn:maha:concept:evidence:provenance-graph",
-        "supplierCandidateId": "cand_40085923a5197282f4f0252a",
-        "unlocks": 2
-      },
-      {
-        "conceptId": "urn:maha:concept:evidence:qiskit-circuit",
-        "supplierCandidateId": "cand_8fa40f42d53edd7287d851b1",
-        "unlocks": 2
-      }
-    ],
-    "projectedTranche16Unlocks": 6
+    "prerequisitesSelected": [],
+    "projectedTranche16Unlocks": 0
   },
   "shortfalls": [
     {
@@ -88,287 +72,33 @@
   },
   "byTopic": {
     "alvar-reception": 3,
+    "contradiction-search": 1,
     "coordinate-frames": 3,
+    "formal-definition": 1,
     "incident-reporting": 2,
     "intellectual-property": 2,
     "interoperability": 2,
     "interpretation-boundaries": 1,
     "kurinji": 2,
-    "maha-principle": 1,
+    "machine-civilization": 1,
     "marutam": 3,
-    "measurement-error": 1,
+    "passage-locator": 1,
+    "primary-source": 1,
     "primary-text-boundaries": 3,
-    "provenance-graph": 1,
-    "qiskit-circuit": 1,
-    "reproducibility": 1,
     "traceability": 2
   },
   "byRouteRole": {
     "calculation": 1,
-    "definition": 3,
+    "definition": 5,
     "identity": 4,
     "input-contract": 2,
-    "machine-record": 1,
     "machine-rule": 4,
-    "origin": 1,
     "primary-text": 4,
     "tradeoffs": 4,
     "translation": 3,
     "workflow": 1
   },
   "entries": [
-    {
-      "candidateId": "cand_635395b41cc580c20ac0c307",
-      "siteId": "maha-research",
-      "canonicalHost": "research.mahastrategies.com",
-      "groupId": "research-objects",
-      "routeRole": "definition",
-      "path": "/federation/research/measurement-error/definition",
-      "url": "https://research.mahastrategies.com/federation/research/measurement-error/definition",
-      "title": "Measurement Error — Definition",
-      "searchIntent": "Understand Measurement Error through the definition lens in Research Objects on research.mahastrategies.com.",
-      "demandEvidence": {
-        "basis": "category-prior-not-observed",
-        "observedQueries": 0,
-        "observedImpressions": null,
-        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
-      },
-      "conceptId": "urn:maha:concept:evidence:measurement-error",
-      "conceptFamilyId": "evidence",
-      "conceptAuthority": {
-        "canonicalOwner": "maha-research",
-        "role": "canonical-owner",
-        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
-      },
-      "typedRelationships": [
-        {
-          "type": "applies-to",
-          "target": "urn:maha:concept:evidence:measurement-error"
-        },
-        {
-          "type": "governed-by",
-          "target": "urn:maha:concept:governance"
-        },
-        {
-          "type": "evidence-for",
-          "target": "urn:maha:concept:evidence"
-        }
-      ],
-      "evidencePlan": {
-        "sourceIdentity": "not-started",
-        "contentInspection": "not-started",
-        "locatorInspection": "not-started",
-        "rightsReview": "not-started",
-        "alignmentAudit": "not-started",
-        "exactRevisionReview": "not-started"
-      },
-      "routeContract": {
-        "selfCanonical": true,
-        "canonicalOwner": "maha-research",
-        "allowedContent": [
-          "research objects",
-          "machine-readable provenance",
-          "reproduction protocols"
-        ],
-        "mustNotClaim": [
-          "sales copy",
-          "unsupported interpretation"
-        ]
-      },
-      "duplicateScreen": {
-        "nearestObservedUrl": "https://research.mahastrategies.com/atlas/quantum-computing/concepts/error-correction",
-        "tokenJaccard": 0.1,
-        "status": "no-high-similarity-observed"
-      },
-      "scores": {
-        "searchDemandPrior": 56,
-        "evidenceAvailability": 96,
-        "differentiation": 96,
-        "machineUtility": 99,
-        "commercialProximity": 78,
-        "federationUtility": 86,
-        "duplicationSafety": 90,
-        "weighted": 85.55
-      },
-      "publication": {
-        "state": "candidate-only",
-        "inspected": false,
-        "reviewed": false,
-        "canonicallyReleased": false,
-        "compiled": false,
-        "crawlable": false
-      },
-      "rank": 1120,
-      "tranche": 3
-    },
-    {
-      "candidateId": "cand_40085923a5197282f4f0252a",
-      "siteId": "maha-research",
-      "canonicalHost": "research.mahastrategies.com",
-      "groupId": "research-objects",
-      "routeRole": "definition",
-      "path": "/federation/research/provenance-graph/definition",
-      "url": "https://research.mahastrategies.com/federation/research/provenance-graph/definition",
-      "title": "Provenance Graph — Definition",
-      "searchIntent": "Understand Provenance Graph through the definition lens in Research Objects on research.mahastrategies.com.",
-      "demandEvidence": {
-        "basis": "category-prior-not-observed",
-        "observedQueries": 0,
-        "observedImpressions": null,
-        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
-      },
-      "conceptId": "urn:maha:concept:evidence:provenance-graph",
-      "conceptFamilyId": "evidence",
-      "conceptAuthority": {
-        "canonicalOwner": "maha-research",
-        "role": "canonical-owner",
-        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
-      },
-      "typedRelationships": [
-        {
-          "type": "applies-to",
-          "target": "urn:maha:concept:evidence:provenance-graph"
-        },
-        {
-          "type": "governed-by",
-          "target": "urn:maha:concept:governance"
-        },
-        {
-          "type": "evidence-for",
-          "target": "urn:maha:concept:evidence"
-        }
-      ],
-      "evidencePlan": {
-        "sourceIdentity": "not-started",
-        "contentInspection": "not-started",
-        "locatorInspection": "not-started",
-        "rightsReview": "not-started",
-        "alignmentAudit": "not-started",
-        "exactRevisionReview": "not-started"
-      },
-      "routeContract": {
-        "selfCanonical": true,
-        "canonicalOwner": "maha-research",
-        "allowedContent": [
-          "research objects",
-          "machine-readable provenance",
-          "reproduction protocols"
-        ],
-        "mustNotClaim": [
-          "sales copy",
-          "unsupported interpretation"
-        ]
-      },
-      "duplicateScreen": {
-        "nearestObservedUrl": "https://research.mahastrategies.com/standards/maha-provenance-standard",
-        "tokenJaccard": 0.125,
-        "status": "no-high-similarity-observed"
-      },
-      "scores": {
-        "searchDemandPrior": 56,
-        "evidenceAvailability": 96,
-        "differentiation": 96,
-        "machineUtility": 99,
-        "commercialProximity": 78,
-        "federationUtility": 86,
-        "duplicationSafety": 88,
-        "weighted": 85.45
-      },
-      "publication": {
-        "state": "candidate-only",
-        "inspected": false,
-        "reviewed": false,
-        "canonicallyReleased": false,
-        "compiled": false,
-        "crawlable": false
-      },
-      "rank": 1130,
-      "tranche": 3
-    },
-    {
-      "candidateId": "cand_8fa40f42d53edd7287d851b1",
-      "siteId": "maha-research",
-      "canonicalHost": "research.mahastrategies.com",
-      "groupId": "research-objects",
-      "routeRole": "definition",
-      "path": "/federation/research/qiskit-circuit/definition",
-      "url": "https://research.mahastrategies.com/federation/research/qiskit-circuit/definition",
-      "title": "Qiskit Circuit — Definition",
-      "searchIntent": "Understand Qiskit Circuit through the definition lens in Research Objects on research.mahastrategies.com.",
-      "demandEvidence": {
-        "basis": "category-prior-not-observed",
-        "observedQueries": 0,
-        "observedImpressions": null,
-        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
-      },
-      "conceptId": "urn:maha:concept:evidence:qiskit-circuit",
-      "conceptFamilyId": "evidence",
-      "conceptAuthority": {
-        "canonicalOwner": "maha-research",
-        "role": "canonical-owner",
-        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
-      },
-      "typedRelationships": [
-        {
-          "type": "applies-to",
-          "target": "urn:maha:concept:evidence:qiskit-circuit"
-        },
-        {
-          "type": "governed-by",
-          "target": "urn:maha:concept:governance"
-        },
-        {
-          "type": "evidence-for",
-          "target": "urn:maha:concept:evidence"
-        }
-      ],
-      "evidencePlan": {
-        "sourceIdentity": "not-started",
-        "contentInspection": "not-started",
-        "locatorInspection": "not-started",
-        "rightsReview": "not-started",
-        "alignmentAudit": "not-started",
-        "exactRevisionReview": "not-started"
-      },
-      "routeContract": {
-        "selfCanonical": true,
-        "canonicalOwner": "maha-research",
-        "allowedContent": [
-          "research objects",
-          "machine-readable provenance",
-          "reproduction protocols"
-        ],
-        "mustNotClaim": [
-          "sales copy",
-          "unsupported interpretation"
-        ]
-      },
-      "duplicateScreen": {
-        "nearestObservedUrl": "https://research.mahastrategies.com/atlas/quantum-computing/concepts/quantum-circuit",
-        "tokenJaccard": 0.1111,
-        "status": "no-high-similarity-observed"
-      },
-      "scores": {
-        "searchDemandPrior": 56,
-        "evidenceAvailability": 96,
-        "differentiation": 96,
-        "machineUtility": 99,
-        "commercialProximity": 78,
-        "federationUtility": 86,
-        "duplicationSafety": 89,
-        "weighted": 85.5
-      },
-      "publication": {
-        "state": "candidate-only",
-        "inspected": false,
-        "reviewed": false,
-        "canonicallyReleased": false,
-        "compiled": false,
-        "crawlable": false
-      },
-      "rank": 1124,
-      "tranche": 3
-    },
     {
       "candidateId": "cand_6a3233decc610bb5ab78925c",
       "siteId": "maha-policy",
@@ -1042,32 +772,32 @@
       "tranche": 2
     },
     {
-      "candidateId": "cand_77c70849de00d1f2aa2653c2",
+      "candidateId": "cand_2c8d504e70fa69a97aa2a5cc",
       "siteId": "maha-research",
       "canonicalHost": "research.mahastrategies.com",
       "groupId": "research-objects",
-      "routeRole": "machine-record",
-      "path": "/federation/research/reproducibility/machine-record",
-      "url": "https://research.mahastrategies.com/federation/research/reproducibility/machine-record",
-      "title": "Reproducibility — Machine Record",
-      "searchIntent": "Understand Reproducibility through the machine record lens in Research Objects on research.mahastrategies.com.",
+      "routeRole": "definition",
+      "path": "/federation/research/contradiction-search/definition",
+      "url": "https://research.mahastrategies.com/federation/research/contradiction-search/definition",
+      "title": "Contradiction Search — Definition",
+      "searchIntent": "Understand Contradiction Search through the definition lens in Research Objects on research.mahastrategies.com.",
       "demandEvidence": {
         "basis": "category-prior-not-observed",
         "observedQueries": 0,
         "observedImpressions": null,
         "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
       },
-      "conceptId": "urn:maha:concept:evidence:reproducibility",
+      "conceptId": "urn:maha:concept:evidence:contradiction-search",
       "conceptFamilyId": "evidence",
       "conceptAuthority": {
         "canonicalOwner": "maha-research",
-        "role": "owner-application",
-        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
       "typedRelationships": [
         {
           "type": "applies-to",
-          "target": "urn:maha:concept:evidence:reproducibility"
+          "target": "urn:maha:concept:evidence:contradiction-search"
         },
         {
           "type": "governed-by",
@@ -1100,19 +830,19 @@
         ]
       },
       "duplicateScreen": {
-        "nearestObservedUrl": "https://research.mahastrategies.com/papers/machine_learning_g2_betti",
-        "tokenJaccard": 0.1111,
+        "nearestObservedUrl": "https://research.mahastrategies.com",
+        "tokenJaccard": 0,
         "status": "no-high-similarity-observed"
       },
       "scores": {
-        "searchDemandPrior": 58,
+        "searchDemandPrior": 56,
         "evidenceAvailability": 96,
         "differentiation": 96,
         "machineUtility": 99,
         "commercialProximity": 78,
-        "federationUtility": 88,
-        "duplicationSafety": 89,
-        "weighted": 86.12
+        "federationUtility": 86,
+        "duplicationSafety": 100,
+        "weighted": 86.05
       },
       "publication": {
         "state": "candidate-only",
@@ -1122,7 +852,259 @@
         "compiled": false,
         "crawlable": false
       },
-      "rank": 1010,
+      "rank": 1023,
+      "tranche": 3
+    },
+    {
+      "candidateId": "cand_4941b8fd397b7b41ac4cda40",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/formal-definition/definition",
+      "url": "https://research.mahastrategies.com/federation/research/formal-definition/definition",
+      "title": "Formal Definition — Definition",
+      "searchIntent": "Understand Formal Definition through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:formal-definition",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:formal-definition"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "research objects",
+          "machine-readable provenance",
+          "reproduction protocols"
+        ],
+        "mustNotClaim": [
+          "sales copy",
+          "unsupported interpretation"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://research.mahastrategies.com",
+        "tokenJaccard": 0,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 56,
+        "evidenceAvailability": 96,
+        "differentiation": 96,
+        "machineUtility": 99,
+        "commercialProximity": 78,
+        "federationUtility": 86,
+        "duplicationSafety": 100,
+        "weighted": 86.05
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1025,
+      "tranche": 3
+    },
+    {
+      "candidateId": "cand_528210d274913a7eb2093bf1",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/passage-locator/definition",
+      "url": "https://research.mahastrategies.com/federation/research/passage-locator/definition",
+      "title": "Passage Locator — Definition",
+      "searchIntent": "Understand Passage Locator through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:passage-locator",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:passage-locator"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "research objects",
+          "machine-readable provenance",
+          "reproduction protocols"
+        ],
+        "mustNotClaim": [
+          "sales copy",
+          "unsupported interpretation"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://research.mahastrategies.com",
+        "tokenJaccard": 0,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 56,
+        "evidenceAvailability": 96,
+        "differentiation": 96,
+        "machineUtility": 99,
+        "commercialProximity": 78,
+        "federationUtility": 86,
+        "duplicationSafety": 100,
+        "weighted": 86.05
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1028,
+      "tranche": 3
+    },
+    {
+      "candidateId": "cand_db12a930bf43b2510a97e0ad",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/primary-source/definition",
+      "url": "https://research.mahastrategies.com/federation/research/primary-source/definition",
+      "title": "Primary Source — Definition",
+      "searchIntent": "Understand Primary Source through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:primary-source",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:primary-source"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "research objects",
+          "machine-readable provenance",
+          "reproduction protocols"
+        ],
+        "mustNotClaim": [
+          "sales copy",
+          "unsupported interpretation"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://research.mahastrategies.com",
+        "tokenJaccard": 0,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 56,
+        "evidenceAvailability": 96,
+        "differentiation": 96,
+        "machineUtility": 99,
+        "commercialProximity": 78,
+        "federationUtility": 86,
+        "duplicationSafety": 100,
+        "weighted": 86.05
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1029,
       "tranche": 3
     },
     {
@@ -2386,32 +2368,32 @@
       "tranche": 4
     },
     {
-      "candidateId": "cand_69fed6d03264243259bd3b64",
+      "candidateId": "cand_179532c8e9ca588df1721a70",
       "siteId": "mayone-maharajan",
       "canonicalHost": "www.mayonemaharajan.com",
       "groupId": "authorial-concepts",
-      "routeRole": "origin",
-      "path": "/concepts/maha-principle/origin",
-      "url": "https://www.mayonemaharajan.com/concepts/maha-principle/origin",
-      "title": "Maha Principle — Origin",
-      "searchIntent": "Understand Maha Principle through the origin lens in Authorial Concepts on www.mayonemaharajan.com.",
+      "routeRole": "definition",
+      "path": "/concepts/machine-civilization/definition",
+      "url": "https://www.mayonemaharajan.com/concepts/machine-civilization/definition",
+      "title": "Machine Civilization — Definition",
+      "searchIntent": "Understand Machine Civilization through the definition lens in Authorial Concepts on www.mayonemaharajan.com.",
       "demandEvidence": {
         "basis": "category-prior-not-observed",
         "observedQueries": 0,
         "observedImpressions": null,
         "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
       },
-      "conceptId": "urn:maha:concept:autonomy:maha-principle",
+      "conceptId": "urn:maha:concept:autonomy:machine-civilization",
       "conceptFamilyId": "autonomy",
       "conceptAuthority": {
         "canonicalOwner": "mayone-maharajan",
-        "role": "owner-application",
-        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of autonomy for mayone-maharajan. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
       },
       "typedRelationships": [
         {
           "type": "applies-to",
-          "target": "urn:maha:concept:autonomy:maha-principle"
+          "target": "urn:maha:concept:autonomy:machine-civilization"
         },
         {
           "type": "governed-by",
@@ -2444,19 +2426,19 @@
         ]
       },
       "duplicateScreen": {
-        "nearestObservedUrl": "https://www.mayonemaharajan.com/concepts/the-maha-principle",
-        "tokenJaccard": 0.6,
+        "nearestObservedUrl": "https://www.mayonemaharajan.com/concepts",
+        "tokenJaccard": 0.25,
         "status": "no-high-similarity-observed"
       },
       "scores": {
-        "searchDemandPrior": 60,
+        "searchDemandPrior": 50,
         "evidenceAvailability": 72,
         "differentiation": 99,
         "machineUtility": 72,
         "commercialProximity": 68,
-        "federationUtility": 90,
-        "duplicationSafety": 40,
-        "weighted": 74.15
+        "federationUtility": 86,
+        "duplicationSafety": 75,
+        "weighted": 73.58
       },
       "publication": {
         "state": "candidate-only",
@@ -2466,9 +2448,9 @@
         "compiled": false,
         "crawlable": false
       },
-      "rank": 1608,
+      "rank": 1624,
       "tranche": 4
     }
   ],
-  "provenanceDigest": "sha256:0d1fbccde58ae20dad36b247047f0a4eb0bc48854a6509b5ec6b0b4e3cf2b30e"
+  "provenanceDigest": "sha256:248f98ff8aa89e43fcb62675883121c64d21ae057d2d8359d0e8534760cf1dde"
 }

@@ -3,13 +3,12 @@
   "frozenOn": "2026-09-06",
   "purpose": "Diagnoses every prerequisite that blocked a Tranche 13 candidate, so the next cohort can be selected on what it would actually unblock rather than on utility alone.",
   "counts": {
-    "blockedDependents": 38,
-    "distinctPrerequisites": 17,
+    "blockedDependents": 34,
+    "distinctPrerequisites": 13,
     "byAvailability": {
-      "absent-from-frozen-map": 13,
-      "available-in-pool": 4
+      "absent-from-frozen-map": 13
     },
-    "unlockableByThisTranche": 4
+    "unlockableByThisTranche": 0
   },
   "finding": "Fan-out and availability are inversely related here. Every prerequisite with a fan-out above one is absent from the frozen map, and every prerequisite present in the pool unlocks exactly one dependent. Selecting all four available definitions therefore unblocks four of the thirty-eight. The remaining thirty-four are blocked by an incomplete candidate map rather than by selection policy.",
   "prerequisites": [
@@ -145,28 +144,6 @@
       ]
     },
     {
-      "conceptId": "urn:maha:concept:evidence:contradiction-search",
-      "declaredOwner": "maha-research",
-      "unlocks": 1,
-      "supplierCandidateId": "cand_2c8d504e70fa69a97aa2a5cc",
-      "supplierPath": "/federation/research/contradiction-search/definition",
-      "availability": "available-in-pool",
-      "dependents": [
-        "cand_dfef6927eb87261861490d26"
-      ]
-    },
-    {
-      "conceptId": "urn:maha:concept:evidence:formal-definition",
-      "declaredOwner": "maha-research",
-      "unlocks": 1,
-      "supplierCandidateId": "cand_4941b8fd397b7b41ac4cda40",
-      "supplierPath": "/federation/research/formal-definition/definition",
-      "availability": "available-in-pool",
-      "dependents": [
-        "cand_9f300acca87befa4e56e4379"
-      ]
-    },
-    {
       "conceptId": "urn:maha:concept:evidence:locator-verification",
       "declaredOwner": "maha-research",
       "unlocks": 1,
@@ -178,17 +155,6 @@
       ]
     },
     {
-      "conceptId": "urn:maha:concept:evidence:passage-locator",
-      "declaredOwner": "maha-research",
-      "unlocks": 1,
-      "supplierCandidateId": "cand_528210d274913a7eb2093bf1",
-      "supplierPath": "/federation/research/passage-locator/definition",
-      "availability": "available-in-pool",
-      "dependents": [
-        "cand_9704953bd90560a6f79f3a17"
-      ]
-    },
-    {
       "conceptId": "urn:maha:concept:evidence:passage-support",
       "declaredOwner": "maha-research",
       "unlocks": 1,
@@ -197,17 +163,6 @@
       "availability": "absent-from-frozen-map",
       "dependents": [
         "cand_ec46737935d410443b264871"
-      ]
-    },
-    {
-      "conceptId": "urn:maha:concept:evidence:primary-source",
-      "declaredOwner": "maha-research",
-      "unlocks": 1,
-      "supplierCandidateId": "cand_db12a930bf43b2510a97e0ad",
-      "supplierPath": "/federation/research/primary-source/definition",
-      "availability": "available-in-pool",
-      "dependents": [
-        "cand_d08711bd6c48c27d199522c6"
       ]
     },
     {
@@ -316,5 +271,5 @@
     }
   ],
   "boundary": "An analysis. It inserts no candidate, activates no proposal, and changes no Tranche 13 classification.",
-  "provenanceDigest": "sha256:0d2403c52d9a09a3b7d0995cbaad87b7f3dfb11f42ff42bdbbf5d5a7e0cbf024"
+  "provenanceDigest": "sha256:5d78747c353ce05306698ec009676431c9386ff62d850d366d8d6052e97669b2"
 }

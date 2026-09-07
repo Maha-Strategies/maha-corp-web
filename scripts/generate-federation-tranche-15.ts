@@ -44,6 +44,24 @@ const FRESH: Inspection[] = [
     independence: 'independent-of-maha',
     relationshipToEarlier: 'No earlier version inspected in this programme.',
   },
+  {
+    inspectionId: 'tr15-src-103',
+    topic: 'measurement-error',
+    sourceIdentity: 'JCGM 200:2012, International Vocabulary of Metrology (VIM), 3rd edition',
+    version: 'JCGM 200:2012',
+    stableUrl: 'https://www.bipm.org/documents/20126/2071204/JCGM_200_2012.pdf',
+    locator: '\u00a72.16 (3.10), definition of measurement error.',
+    inspectionDepth: 'targeted-definition-read',
+    accessBasis: 'Published by the BIPM Joint Committee for Guides in Metrology, freely available.',
+    reuseBasis: 'Reference-only. Bounded original summary; the definition is not reproduced verbatim.',
+    supportedClaimScope:
+      'That measurement error is the measured quantity value minus a reference quantity value, and therefore presupposes a reference against which the measurement is compared.',
+    boundary:
+      'Error in the metrological sense, requiring a reference value. It is not model error, prediction error, or a mistake in a procedure, and it does not define uncertainty, which the same vocabulary treats as a separate concept.',
+    sourceClass: 'international-metrology-authority',
+    independence: 'independent-of-maha',
+    relationshipToEarlier: 'Third definition read from the document already inspected for calibration in Tranche 15 and traceability in Tranche 16.',
+  },
 ]
 
 

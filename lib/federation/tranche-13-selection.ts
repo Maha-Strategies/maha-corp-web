@@ -146,6 +146,7 @@ export type DependencyState =
   | 'present-in-tranche-13'
   | 'missing'
   | 'incorrectly-owned'
+  | 'awaiting-definition-review'
 
 /**
  * Where an application route's canonical definition stands.
@@ -190,9 +191,13 @@ export function resolveDependency(
   if (reviewedConceptIds.has(candidate.conceptId)) {
     return { state: 'satisfied-by-earlier-tranche', note: 'Definition reviewed in an earlier tranche.', definitionId: owned[0].candidateId }
   }
+  // The definition is in the map on the correct property and simply has not
+  // been reviewed yet. Reporting that as `missing` sends someone looking for a
+  // candidate that already exists; it is also not satisfied, because nothing
+  // has reviewed it, so the dependent stays blocked either way.
   return {
-    state: 'missing',
-    note: `A definition candidate exists (${owned[0].candidateId}) but is neither reviewed nor in this cohort.`,
+    state: 'awaiting-definition-review',
+    note: `A definition candidate exists (${owned[0].candidateId}) on ${owner} and has not been reviewed yet. The prerequisite is present but unreviewed.`,
     definitionId: owned[0].candidateId,
   }
 }

@@ -3,8 +3,8 @@
   "frozenOn": "2026-09-06",
   "rule": "Specifications exist only for evidence-ready candidates. A blocked, revised or duplicative candidate cannot receive one.",
   "counts": {
-    "specifications": 14,
-    "boundedQuestions": 70
+    "specifications": 19,
+    "boundedQuestions": 95
   },
   "specifications": [
     {
@@ -67,6 +67,65 @@
       "boundary": "A specification. Not a route, a release or a public page."
     },
     {
+      "candidateId": "cand_0b5df84666830bd201383f4c",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/provenance-graph/fixture",
+      "owningProperty": "maha-research",
+      "conceptId": "urn:maha:concept:evidence:provenance-graph",
+      "routeRole": "fixture",
+      "directAnswer": "Provenance Graph — Fixture: Understand Provenance Graph through the fixture lens in Research Objects on research.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:evidence:provenance-graph under the owner-application contract. The canonical definition remains with maha-research.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "W3C PROV-DM: The PROV Data Model",
+          "locator": "Bundle definition — a named set of provenance descriptions that is itself an entity.",
+          "supports": "That a set of provenance descriptions can be named and treated as an entity in its own right, so that the provenance of provenance can be expressed and a reader can ask who asserted a given account."
+        }
+      ],
+      "limitations": [
+        "A model for expressing provenance, not a guarantee of it. Naming a bundle does not make its contents accurate, and the specification does not establish that any recorded graph is complete."
+      ],
+      "negativeSpace": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does provenance-graph mean in this context, and who owns the definition?",
+        "What does the inspected source establish about provenance-graph, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:provenance-graph"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "W3C PROV-DM: The PROV Data Model",
+          "stableUrl": "https://www.w3.org/TR/prov-dm/",
+          "locator": "Bundle definition — a named set of provenance descriptions that is itself an entity.",
+          "version": "W3C Recommendation, 30 April 2013"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:evidence:provenance-graph"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
       "candidateId": "cand_3d6cd8ee64394ca77f4bad86",
       "canonicalUrl": "https://research.mahastrategies.com/federation/research/container-image/failure-mode",
       "owningProperty": "maha-research",
@@ -122,6 +181,65 @@
       },
       "expectedCanonicalDependencies": [
         "urn:maha:concept:evidence:container-image"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_40085923a5197282f4f0252a",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/provenance-graph/definition",
+      "owningProperty": "maha-research",
+      "conceptId": "urn:maha:concept:evidence:provenance-graph",
+      "routeRole": "definition",
+      "directAnswer": "Provenance Graph — Definition: Understand Provenance Graph through the definition lens in Research Objects on research.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:evidence:provenance-graph under the canonical-owner contract. The canonical definition remains with maha-research.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "W3C PROV-DM: The PROV Data Model",
+          "locator": "Bundle definition — a named set of provenance descriptions that is itself an entity.",
+          "supports": "That a set of provenance descriptions can be named and treated as an entity in its own right, so that the provenance of provenance can be expressed and a reader can ask who asserted a given account."
+        }
+      ],
+      "limitations": [
+        "A model for expressing provenance, not a guarantee of it. Naming a bundle does not make its contents accurate, and the specification does not establish that any recorded graph is complete."
+      ],
+      "negativeSpace": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does provenance-graph mean in this context, and who owns the definition?",
+        "What does the inspected source establish about provenance-graph, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:provenance-graph"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "W3C PROV-DM: The PROV Data Model",
+          "stableUrl": "https://www.w3.org/TR/prov-dm/",
+          "locator": "Bundle definition — a named set of provenance descriptions that is itself an entity.",
+          "version": "W3C Recommendation, 30 April 2013"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:evidence:provenance-graph"
       ],
       "boundary": "A specification. Not a route, a release or a public page."
     },
@@ -240,6 +358,65 @@
       },
       "expectedCanonicalDependencies": [
         "urn:maha:concept:governance:incident-reporting"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_635395b41cc580c20ac0c307",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/measurement-error/definition",
+      "owningProperty": "maha-research",
+      "conceptId": "urn:maha:concept:evidence:measurement-error",
+      "routeRole": "definition",
+      "directAnswer": "Measurement Error — Definition: Understand Measurement Error through the definition lens in Research Objects on research.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:evidence:measurement-error under the canonical-owner contract. The canonical definition remains with maha-research.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "JCGM 200:2012, International Vocabulary of Metrology (VIM), 3rd edition",
+          "locator": "§2.16 (3.10), definition of measurement error.",
+          "supports": "That measurement error is the measured quantity value minus a reference quantity value, and therefore presupposes a reference against which the measurement is compared."
+        }
+      ],
+      "limitations": [
+        "Error in the metrological sense, requiring a reference value. It is not model error, prediction error, or a mistake in a procedure, and it does not define uncertainty, which the same vocabulary treats as a separate concept."
+      ],
+      "negativeSpace": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does measurement-error mean in this context, and who owns the definition?",
+        "What does the inspected source establish about measurement-error, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:measurement-error"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "JCGM 200:2012, International Vocabulary of Metrology (VIM), 3rd edition",
+          "stableUrl": "https://www.bipm.org/documents/20126/2071204/JCGM_200_2012.pdf",
+          "locator": "§2.16 (3.10), definition of measurement error.",
+          "version": "JCGM 200:2012"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:evidence:measurement-error"
       ],
       "boundary": "A specification. Not a route, a release or a public page."
     },
@@ -421,6 +598,65 @@
       "boundary": "A specification. Not a route, a release or a public page."
     },
     {
+      "candidateId": "cand_86b8908b39614fac43e89d7f",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/provenance-graph/protocol",
+      "owningProperty": "maha-research",
+      "conceptId": "urn:maha:concept:evidence:provenance-graph",
+      "routeRole": "protocol",
+      "directAnswer": "Provenance Graph — Protocol: Understand Provenance Graph through the protocol lens in Research Objects on research.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:evidence:provenance-graph under the owner-application contract. The canonical definition remains with maha-research.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "W3C PROV-DM: The PROV Data Model",
+          "locator": "Bundle definition — a named set of provenance descriptions that is itself an entity.",
+          "supports": "That a set of provenance descriptions can be named and treated as an entity in its own right, so that the provenance of provenance can be expressed and a reader can ask who asserted a given account."
+        }
+      ],
+      "limitations": [
+        "A model for expressing provenance, not a guarantee of it. Naming a bundle does not make its contents accurate, and the specification does not establish that any recorded graph is complete."
+      ],
+      "negativeSpace": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does provenance-graph mean in this context, and who owns the definition?",
+        "What does the inspected source establish about provenance-graph, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:provenance-graph"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "W3C PROV-DM: The PROV Data Model",
+          "stableUrl": "https://www.w3.org/TR/prov-dm/",
+          "locator": "Bundle definition — a named set of provenance descriptions that is itself an entity.",
+          "version": "W3C Recommendation, 30 April 2013"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:evidence:provenance-graph"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
       "candidateId": "cand_8c2d9720c991cac57059e2a4",
       "canonicalUrl": "https://policy.mahastrategies.com/policy/incident-reporting/current-law",
       "owningProperty": "maha-policy",
@@ -535,6 +771,65 @@
       },
       "expectedCanonicalDependencies": [
         "urn:maha:concept:governance:auditability"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_98b822a4bb523ac26a0372cd",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/measurement-error/protocol",
+      "owningProperty": "maha-research",
+      "conceptId": "urn:maha:concept:evidence:measurement-error",
+      "routeRole": "protocol",
+      "directAnswer": "Measurement Error — Protocol: Understand Measurement Error through the protocol lens in Research Objects on research.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:evidence:measurement-error under the owner-application contract. The canonical definition remains with maha-research.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "JCGM 200:2012, International Vocabulary of Metrology (VIM), 3rd edition",
+          "locator": "§2.16 (3.10), definition of measurement error.",
+          "supports": "That measurement error is the measured quantity value minus a reference quantity value, and therefore presupposes a reference against which the measurement is compared."
+        }
+      ],
+      "limitations": [
+        "Error in the metrological sense, requiring a reference value. It is not model error, prediction error, or a mistake in a procedure, and it does not define uncertainty, which the same vocabulary treats as a separate concept."
+      ],
+      "negativeSpace": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does measurement-error mean in this context, and who owns the definition?",
+        "What does the inspected source establish about measurement-error, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:measurement-error"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "JCGM 200:2012, International Vocabulary of Metrology (VIM), 3rd edition",
+          "stableUrl": "https://www.bipm.org/documents/20126/2071204/JCGM_200_2012.pdf",
+          "locator": "§2.16 (3.10), definition of measurement error.",
+          "version": "JCGM 200:2012"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:evidence:measurement-error"
       ],
       "boundary": "A specification. Not a route, a release or a public page."
     },
@@ -834,5 +1129,5 @@
       "boundary": "A specification. Not a route, a release or a public page."
     }
   ],
-  "provenanceDigest": "sha256:8d3901fb10dceebe1fb650b4604d6e0166a5587d2f48e0e83991945e5741e789"
+  "provenanceDigest": "sha256:20fba0d78ad40c0593265066329bfe3b275a848618677bba7e95b0eaa1798819"
 }

@@ -1407,11 +1407,11 @@
         "role": "owner-application",
         "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
       },
-      "semanticResult": "blocked on ownership or dependency",
+      "semanticResult": "distinct",
       "nearestNeighbour": null,
       "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
       "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
-      "dependencyState": "missing"
+      "dependencyState": "awaiting-definition-review"
     },
     {
       "candidateId": "cand_9f300acca87befa4e56e4379",
@@ -1424,11 +1424,11 @@
         "role": "owner-application",
         "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
       },
-      "semanticResult": "blocked on ownership or dependency",
+      "semanticResult": "distinct",
       "nearestNeighbour": null,
       "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
       "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
-      "dependencyState": "missing"
+      "dependencyState": "awaiting-definition-review"
     },
     {
       "candidateId": "cand_d08711bd6c48c27d199522c6",
@@ -1441,11 +1441,11 @@
         "role": "owner-application",
         "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
       },
-      "semanticResult": "blocked on ownership or dependency",
+      "semanticResult": "distinct",
       "nearestNeighbour": null,
       "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
       "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
-      "dependencyState": "missing"
+      "dependencyState": "awaiting-definition-review"
     },
     {
       "candidateId": "cand_dfef6927eb87261861490d26",
@@ -1458,11 +1458,11 @@
         "role": "owner-application",
         "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
       },
-      "semanticResult": "blocked on ownership or dependency",
+      "semanticResult": "distinct",
       "nearestNeighbour": null,
       "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
       "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
-      "dependencyState": "missing"
+      "dependencyState": "awaiting-definition-review"
     },
     {
       "candidateId": "cand_5c6d171020c0c502800ed7b2",
@@ -1965,5 +1965,5 @@
       "dependencyState": "satisfied-by-earlier-tranche"
     }
   ],
-  "provenanceDigest": "sha256:2fe25308298b35f12771959243d4308ae345fea244be3d4ed5e71ce79f627dfb"
+  "provenanceDigest": "sha256:10f99dbc1fda37cf5b88e30a23bc3daf4a064f34184529def361b35c765338be"
 }

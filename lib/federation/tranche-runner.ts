@@ -326,6 +326,26 @@ export function runTranche(config: TrancheConfig): void {
     if (reviewedConcepts.has(c.conceptId)) {
       return { candidateId: c.candidateId, conceptId: c.conceptId, declaredOwner: c.conceptAuthority.canonicalOwner, state: 'satisfied-by-earlier-tranche' as const, note: 'A definition for this concept was reviewed in an earlier tranche.' }
     }
+    // A definition that exists on the declared owner but has not been reviewed
+    // yet. Reported as its own state rather than as missing: the prerequisite
+    // is in the map and will be reviewed, so calling it absent would send
+    // someone looking for a definition that is already there. It is also not
+    // "satisfied" — nothing has reviewed it — so it does not unblock.
+    const laterDefinition = repairedCandidates.find(
+      (o) => o.conceptId === c.conceptId && o.routeRole === 'definition'
+        && o.siteId === c.conceptAuthority.canonicalOwner)
+    if (laterDefinition) {
+      return {
+        candidateId: c.candidateId,
+        conceptId: c.conceptId,
+        declaredOwner: c.conceptAuthority.canonicalOwner,
+        state: 'awaiting-definition-review' as const,
+        note:
+          `A definition exists at ${laterDefinition.candidateId} on ${c.conceptAuthority.canonicalOwner} and has ` +
+          'not been reviewed yet. The prerequisite is present in the map but unreviewed, so the dependent stays ' +
+          'blocked without the definition being reported as absent.',
+      }
+    }
     return { candidateId: c.candidateId, conceptId: c.conceptId, declaredOwner: c.conceptAuthority.canonicalOwner, state: 'missing' as const, note: `No definition candidate exists for ${c.conceptId} on ${c.conceptAuthority.canonicalOwner}. The dependent page is blocked; the prerequisite must not be inferred.` }
   })
   const dependencyByCandidate = new Map(dependencies.map((d) => [d.candidateId, d]))

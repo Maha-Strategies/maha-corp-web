@@ -170,7 +170,13 @@ test('no prior tranche artifact was mutated', () => {
     return m ? Number(m[1]) : null
   }
   const changed = execFileSync('git', ['status', '--short', '--', F], { encoding: 'utf8' })
-    .split('\n').map((l) => l.slice(3).trim()).filter(Boolean)
+    .split('\n')
+    // Modifications and deletions only. A new file is an addition, not a
+    // mutation, and the candidate map v3 additions are new files carrying no
+    // tranche number — which the number check below would otherwise read as
+    // earlier artifacts being rewritten.
+    .filter((l) => /^\s*[MD]/.test(l))
+    .map((l) => l.slice(3).trim()).filter(Boolean)
     .filter((f) => {
       const n = trancheNumber(f)
       return n === null || n < 13

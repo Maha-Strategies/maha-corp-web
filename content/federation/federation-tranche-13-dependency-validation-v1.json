@@ -4,8 +4,9 @@
   "cohortDigest": "sha256:2e87cdef5f58f9f83f821acb3a36c281611ad6ac3dfdd708fb93ed3c5a02fbfa",
   "rule": "An application route may not redefine its dependency. A missing prerequisite blocks the dependent page and is never inferred.",
   "counts": {
+    "awaiting-definition-review": 4,
     "live": 16,
-    "missing": 38,
+    "missing": 34,
     "present-in-tranche-13": 6,
     "satisfied-by-earlier-tranche": 40
   },
@@ -438,8 +439,8 @@
       "candidateId": "cand_9704953bd90560a6f79f3a17",
       "conceptId": "urn:maha:concept:evidence:passage-locator",
       "declaredOwner": "maha-research",
-      "state": "missing",
-      "note": "A definition candidate exists (cand_528210d274913a7eb2093bf1) but is neither reviewed nor in this cohort.",
+      "state": "awaiting-definition-review",
+      "note": "A definition candidate exists (cand_528210d274913a7eb2093bf1) on maha-research and has not been reviewed yet. The prerequisite is present but unreviewed.",
       "definitionId": "cand_528210d274913a7eb2093bf1"
     },
     {
@@ -469,8 +470,8 @@
       "candidateId": "cand_9f300acca87befa4e56e4379",
       "conceptId": "urn:maha:concept:evidence:formal-definition",
       "declaredOwner": "maha-research",
-      "state": "missing",
-      "note": "A definition candidate exists (cand_4941b8fd397b7b41ac4cda40) but is neither reviewed nor in this cohort.",
+      "state": "awaiting-definition-review",
+      "note": "A definition candidate exists (cand_4941b8fd397b7b41ac4cda40) on maha-research and has not been reviewed yet. The prerequisite is present but unreviewed.",
       "definitionId": "cand_4941b8fd397b7b41ac4cda40"
     },
     {
@@ -580,8 +581,8 @@
       "candidateId": "cand_d08711bd6c48c27d199522c6",
       "conceptId": "urn:maha:concept:evidence:primary-source",
       "declaredOwner": "maha-research",
-      "state": "missing",
-      "note": "A definition candidate exists (cand_db12a930bf43b2510a97e0ad) but is neither reviewed nor in this cohort.",
+      "state": "awaiting-definition-review",
+      "note": "A definition candidate exists (cand_db12a930bf43b2510a97e0ad) on maha-research and has not been reviewed yet. The prerequisite is present but unreviewed.",
       "definitionId": "cand_db12a930bf43b2510a97e0ad"
     },
     {
@@ -631,8 +632,8 @@
       "candidateId": "cand_dfef6927eb87261861490d26",
       "conceptId": "urn:maha:concept:evidence:contradiction-search",
       "declaredOwner": "maha-research",
-      "state": "missing",
-      "note": "A definition candidate exists (cand_2c8d504e70fa69a97aa2a5cc) but is neither reviewed nor in this cohort.",
+      "state": "awaiting-definition-review",
+      "note": "A definition candidate exists (cand_2c8d504e70fa69a97aa2a5cc) on maha-research and has not been reviewed yet. The prerequisite is present but unreviewed.",
       "definitionId": "cand_2c8d504e70fa69a97aa2a5cc"
     },
     {
@@ -756,5 +757,5 @@
       "definitionId": "cand_4acd70cabb69b750481a316c"
     }
   ],
-  "provenanceDigest": "sha256:f66bebb4e9bd89611593e2a15339ce138a6ec29b7f28569e798f8164228ee799"
+  "provenanceDigest": "sha256:2124fe96d05f307178ec4bc284fdb5162518973477fcabe6c8cf2822120ea6e1"
 }

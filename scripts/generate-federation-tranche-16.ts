@@ -49,6 +49,24 @@ const FRESH: Inspection[] = [
     independence: 'independent-of-maha',
     relationshipToEarlier: 'No earlier version inspected in this programme.',
   },
+  {
+    inspectionId: 'tr16-src-103',
+    topic: 'provenance-graph',
+    sourceIdentity: 'W3C PROV-DM: The PROV Data Model',
+    version: 'W3C Recommendation, 30 April 2013',
+    stableUrl: 'https://www.w3.org/TR/prov-dm/',
+    locator: 'Bundle definition — a named set of provenance descriptions that is itself an entity.',
+    inspectionDepth: 'targeted-section-read',
+    accessBasis: 'W3C Recommendation, publicly published.',
+    reuseBasis: 'W3C Document Licence. Reference-only; specification text is not copied into artifacts.',
+    supportedClaimScope:
+      'That a set of provenance descriptions can be named and treated as an entity in its own right, so that the provenance of provenance can be expressed and a reader can ask who asserted a given account.',
+    boundary:
+      'A model for expressing provenance, not a guarantee of it. Naming a bundle does not make its contents accurate, and the specification does not establish that any recorded graph is complete.',
+    sourceClass: 'open-standard-recommendation',
+    independence: 'independent-of-maha',
+    relationshipToEarlier: 'Same Recommendation inspected in Tranche 13 for compiler provenance and citation lineage, read here at the bundle definition.',
+  },
 ]
 
 runTranche({

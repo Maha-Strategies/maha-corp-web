@@ -3,19 +3,13 @@
   "frozenOn": "2026-09-06",
   "rule": "An application page depends on the canonical definition of its concept, on the property that declares ownership. It may apply the concept and may not redefine it. A missing prerequisite blocks the dependent page and is never inferred.",
   "counts": {
-    "live": 5,
+    "awaiting-definition-review": 1,
+    "live": 4,
     "missing": 32,
-    "present-in-tranche-15": 13,
-    "satisfied-by-earlier-tranche": 50
+    "present-in-tranche-15": 12,
+    "satisfied-by-earlier-tranche": 51
   },
   "dependencies": [
-    {
-      "candidateId": "cand_179532c8e9ca588df1721a70",
-      "conceptId": "urn:maha:concept:autonomy:machine-civilization",
-      "declaredOwner": "mayone-maharajan",
-      "state": "live",
-      "note": "A definition owns its concept; it depends on no earlier definition."
-    },
     {
       "candidateId": "cand_527e081883cbd5ca93beed2c",
       "conceptId": "urn:maha:concept:governance:standards-and-conformity",
@@ -353,34 +347,6 @@
       "note": "No definition candidate exists for urn:maha:concept:computation:reference-frame-conversion on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
     },
     {
-      "candidateId": "cand_ab0a972ba8bc988c8023249c",
-      "conceptId": "urn:maha:concept:evidence:government-mirror",
-      "declaredOwner": "maha-research",
-      "state": "satisfied-by-earlier-tranche",
-      "note": "A definition for this concept was reviewed in an earlier tranche."
-    },
-    {
-      "candidateId": "cand_bcb46f3d55587a2e0245700c",
-      "conceptId": "urn:maha:concept:evidence:evidence-graph",
-      "declaredOwner": "maha-research",
-      "state": "satisfied-by-earlier-tranche",
-      "note": "A definition for this concept was reviewed in an earlier tranche."
-    },
-    {
-      "candidateId": "cand_df63ff03ee9ecebe4a8904fc",
-      "conceptId": "urn:maha:concept:evidence:slurm-job",
-      "declaredOwner": "maha-research",
-      "state": "satisfied-by-earlier-tranche",
-      "note": "A definition for this concept was reviewed in an earlier tranche."
-    },
-    {
-      "candidateId": "cand_e71bcde308737c6689e3a98f",
-      "conceptId": "urn:maha:concept:evidence:scope-matching",
-      "declaredOwner": "maha-research",
-      "state": "satisfied-by-earlier-tranche",
-      "note": "A definition for this concept was reviewed in an earlier tranche."
-    },
-    {
       "candidateId": "cand_e3921066edee31291c7f4712",
       "conceptId": "urn:maha:concept:computation:numerical-integration",
       "declaredOwner": "maha-research",
@@ -535,11 +501,39 @@
       "note": "A definition for this concept was reviewed in an earlier tranche."
     },
     {
+      "candidateId": "cand_9d4c182527b3a1655b044871",
+      "conceptId": "urn:maha:concept:evidence:government-mirror",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_d6d7be21efa0337e98d35cf8",
+      "conceptId": "urn:maha:concept:evidence:scope-matching",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_e670c19ba82bb66e90310b79",
+      "conceptId": "urn:maha:concept:evidence:slurm-job",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_218b242cc33b2ce89ab28778",
+      "conceptId": "urn:maha:concept:evidence:measurement-error",
+      "declaredOwner": "maha-research",
+      "state": "awaiting-definition-review",
+      "note": "A definition exists at cand_635395b41cc580c20ac0c307 on maha-research and has not been reviewed yet. The prerequisite is present in the map but unreviewed, so the dependent stays blocked without the definition being reported as absent."
+    },
+    {
       "candidateId": "cand_f6981b4e7372530bbfa4d726",
       "conceptId": "urn:maha:concept:autonomy:machine-civilization",
       "declaredOwner": "mayone-maharajan",
-      "state": "present-in-tranche-15",
-      "note": "Supplied by cand_179532c8e9ca588df1721a70 in this cohort."
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
     },
     {
       "candidateId": "cand_9488f75e84c089bff6e6c5b2",
@@ -558,6 +552,13 @@
     {
       "candidateId": "cand_bcdbc5566d5fda959e54878d",
       "conceptId": "urn:maha:concept:autonomy:maha-principle",
+      "declaredOwner": "mayone-maharajan",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_0334f4dc2cef2b7aca5f87ae",
+      "conceptId": "urn:maha:concept:autonomy:authorial-lineage",
       "declaredOwner": "mayone-maharajan",
       "state": "satisfied-by-earlier-tranche",
       "note": "A definition for this concept was reviewed in an earlier tranche."
@@ -710,5 +711,5 @@
       "note": "No definition candidate exists for urn:maha:concept:computation:deterministic-arithmetic on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
     }
   ],
-  "provenanceDigest": "sha256:510f4196e328507d368ec3df0a0e14543c22693c701fa99d155231ef2c6b9734"
+  "provenanceDigest": "sha256:8f9ca6eec65728dc50fa352d5e0c379f7dafa7542cc6cefb58a2a7fe805e1a9e"
 }

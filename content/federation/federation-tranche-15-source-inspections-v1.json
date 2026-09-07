@@ -2,11 +2,11 @@
   "schemaVersion": "maha-federation-tranche-15-source-inspections/1.0",
   "frozenOn": "2026-09-06",
   "method": "Sources were opened and read at a stated locator. Metadata, abstracts, search snippets, dictionary entries and landing pages are not inspection. No access control was bypassed.",
-  "topicsInCohort": 42,
-  "topicsInspected": 10,
+  "topicsInCohort": 44,
+  "topicsInspected": 11,
   "distinctSources": 10,
   "carriedForward": 8,
-  "freshlyInspected": 2,
+  "freshlyInspected": 3,
   "inspections": [
     {
       "inspectionId": "tr13-src-001",
@@ -167,6 +167,22 @@
       "sourceClass": "industry-practice-reference",
       "independence": "independent-of-maha",
       "relationshipToEarlier": "No earlier version inspected in this programme."
+    },
+    {
+      "inspectionId": "tr15-src-103",
+      "topic": "measurement-error",
+      "sourceIdentity": "JCGM 200:2012, International Vocabulary of Metrology (VIM), 3rd edition",
+      "version": "JCGM 200:2012",
+      "stableUrl": "https://www.bipm.org/documents/20126/2071204/JCGM_200_2012.pdf",
+      "locator": "§2.16 (3.10), definition of measurement error.",
+      "inspectionDepth": "targeted-definition-read",
+      "accessBasis": "Published by the BIPM Joint Committee for Guides in Metrology, freely available.",
+      "reuseBasis": "Reference-only. Bounded original summary; the definition is not reproduced verbatim.",
+      "supportedClaimScope": "That measurement error is the measured quantity value minus a reference quantity value, and therefore presupposes a reference against which the measurement is compared.",
+      "boundary": "Error in the metrological sense, requiring a reference value. It is not model error, prediction error, or a mistake in a procedure, and it does not define uncertainty, which the same vocabulary treats as a separate concept.",
+      "sourceClass": "international-metrology-authority",
+      "independence": "independent-of-maha",
+      "relationshipToEarlier": "Third definition read from the document already inspected for calibration in Tranche 15 and traceability in Tranche 16."
     }
   ],
   "soughtButNotInspected": [
@@ -178,5 +194,5 @@
     }
   ],
   "uninspectedTopicNote": "The uninspected topics are predominantly this organisation’s own operational concepts and the author’s own concepts on the personal properties, for which no external authority exists to cite.",
-  "provenanceDigest": "sha256:cd0d0b88e0213ad4e0d85329d43c9d159cd2bf31826588c6448c777dacb49a1f"
+  "provenanceDigest": "sha256:2980b3a84bb3d97fa30f76b72b2cd26ee5711661b347c0b022bf23b098883a6a"
 }

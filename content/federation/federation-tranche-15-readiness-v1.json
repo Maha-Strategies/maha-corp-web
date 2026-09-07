@@ -1,24 +1,24 @@
 {
   "schemaVersion": "maha-federation-tranche-15-readiness/1.0",
   "frozenOn": "2026-09-06",
-  "cohortDigest": "sha256:86e5aac54599a852ab02ad16c4fcfc10d7929b247c2d7f8c8ad56f719b177569",
+  "cohortDigest": "sha256:7e256aeed541842ed5e40b09bddd8437d91d587d8e2e201eb437fd71a7a0ab17",
   "status": "reviewed-not-published",
   "counts": {
     "cohort": 100,
     "byFinalState": {
-      "blocked": 84,
-      "evidence-ready": 16
+      "blocked": 83,
+      "evidence-ready": 17
     },
-    "specifications": 16,
-    "boundedQuestions": 80,
-    "topicsInCohort": 42,
-    "topicsInspected": 10,
+    "specifications": 17,
+    "boundedQuestions": 85,
+    "topicsInCohort": 44,
+    "topicsInspected": 11,
     "distinctSources": 10,
     "dependenciesMissing": 32,
-    "prerequisitesSelected": 1,
-    "projectedTranche14Unlocks": 1
+    "prerequisitesSelected": 0,
+    "projectedTranche14Unlocks": 0
   },
-  "honestOutcome": "Selection was dependency-first, and the diagnosis bounded what that could achieve. Of the 17 prerequisites blocking Tranche 14, 1 exist in the remaining pool and each unlocks one dependent, so this cohort projects 1 unlocks rather than 38. The other 13 are absent from the frozen candidate map and are recorded as inactive repair proposals. Evidence-ready is bounded by source inspection: 10 of 42 topics were inspected, 8 carried forward from Tranche 14 and 2 newly.",
+  "honestOutcome": "Selection was dependency-first, and the diagnosis bounded what that could achieve. Of the 17 prerequisites blocking Tranche 14, 0 exist in the remaining pool and each unlocks one dependent, so this cohort projects 0 unlocks rather than 38. The other 13 are absent from the frozen candidate map and are recorded as inactive repair proposals. Evidence-ready is bounded by source inspection: 11 of 44 topics were inspected, 8 carried forward from Tranche 14 and 3 newly.",
   "publicationBoundary": "No route, release, sitemap entry or public page is created. No build was run.",
-  "provenanceDigest": "sha256:6d1339977c0b0ab965fdad210c6faf2df158554c06e8ceac6653c455dbc72f8f"
+  "provenanceDigest": "sha256:073a82d901bbac03cfe22cdbd1e55954524eb271cdf0ea5f71ff39dd3c110ff6"
 }

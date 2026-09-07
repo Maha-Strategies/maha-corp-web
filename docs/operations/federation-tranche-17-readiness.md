@@ -8,24 +8,24 @@ Reviewed, not published. No route, release, sitemap entry or public page was cre
 |---|---|
 | Cohort | 28 |
 | Topics in cohort | 15 |
-| Topics inspected | 4 |
-| Distinct sources | 3 |
-| Specifications | 6 |
-| Bounded questions | 30 |
+| Topics inspected | 2 |
+| Distinct sources | 2 |
+| Specifications | 4 |
+| Bounded questions | 20 |
 | Dependencies missing | 0 |
-| Prerequisites selected | 3 |
-| Projected Tranche 16 unlocks | 6 |
+| Prerequisites selected | 0 |
+| Projected Tranche 16 unlocks | 0 |
 
 ## Classification
 
 | State | Candidates |
 |---|---|
-| `blocked` | 22 |
-| `evidence-ready` | 6 |
+| `blocked` | 24 |
+| `evidence-ready` | 4 |
 
 ## Dependency-first selection, and its ceiling
 
-Tranche 16 left 38 candidates blocked on 17 distinct prerequisites. Only 3 of those
+Tranche 16 left 38 candidates blocked on 17 distinct prerequisites. Only 0 of those
 prerequisites exist in the remaining pool, and each unlocks exactly one dependent. Every prerequisite with a fan-out
 above one is absent from the frozen candidate map.
 

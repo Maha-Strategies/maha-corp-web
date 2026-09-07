@@ -3,8 +3,10 @@
   "frozenOn": "2026-09-06",
   "rule": "An application page depends on the canonical definition of its concept, on the property that declares ownership. It may apply the concept and may not redefine it. A missing prerequisite blocks the dependent page and is never inferred.",
   "counts": {
-    "missing": 14,
-    "satisfied-by-earlier-tranche": 86
+    "live": 3,
+    "missing": 8,
+    "present-in-tranche-16": 5,
+    "satisfied-by-earlier-tranche": 84
   },
   "dependencies": [
     {
@@ -141,34 +143,6 @@
       "note": "A definition for this concept was reviewed in an earlier tranche."
     },
     {
-      "candidateId": "cand_9d4c182527b3a1655b044871",
-      "conceptId": "urn:maha:concept:evidence:government-mirror",
-      "declaredOwner": "maha-research",
-      "state": "satisfied-by-earlier-tranche",
-      "note": "A definition for this concept was reviewed in an earlier tranche."
-    },
-    {
-      "candidateId": "cand_d6d7be21efa0337e98d35cf8",
-      "conceptId": "urn:maha:concept:evidence:scope-matching",
-      "declaredOwner": "maha-research",
-      "state": "satisfied-by-earlier-tranche",
-      "note": "A definition for this concept was reviewed in an earlier tranche."
-    },
-    {
-      "candidateId": "cand_e670c19ba82bb66e90310b79",
-      "conceptId": "urn:maha:concept:evidence:slurm-job",
-      "declaredOwner": "maha-research",
-      "state": "satisfied-by-earlier-tranche",
-      "note": "A definition for this concept was reviewed in an earlier tranche."
-    },
-    {
-      "candidateId": "cand_218b242cc33b2ce89ab28778",
-      "conceptId": "urn:maha:concept:evidence:measurement-error",
-      "declaredOwner": "maha-research",
-      "state": "missing",
-      "note": "No definition candidate exists for urn:maha:concept:evidence:measurement-error on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
-    },
-    {
       "candidateId": "cand_3d6cd8ee64394ca77f4bad86",
       "conceptId": "urn:maha:concept:evidence:container-image",
       "declaredOwner": "maha-research",
@@ -256,8 +230,8 @@
       "candidateId": "cand_49aa8c59c3937c1fa051a721",
       "conceptId": "urn:maha:concept:evidence:qiskit-circuit",
       "declaredOwner": "maha-research",
-      "state": "missing",
-      "note": "No definition candidate exists for urn:maha:concept:evidence:qiskit-circuit on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+      "state": "present-in-tranche-16",
+      "note": "Supplied by cand_8fa40f42d53edd7287d851b1 in this cohort."
     },
     {
       "candidateId": "cand_354348af7cc0316828d6bfe2",
@@ -277,15 +251,15 @@
       "candidateId": "cand_0b5df84666830bd201383f4c",
       "conceptId": "urn:maha:concept:evidence:provenance-graph",
       "declaredOwner": "maha-research",
-      "state": "missing",
-      "note": "No definition candidate exists for urn:maha:concept:evidence:provenance-graph on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+      "state": "present-in-tranche-16",
+      "note": "Supplied by cand_40085923a5197282f4f0252a in this cohort."
     },
     {
       "candidateId": "cand_4d092c2e7e20eccfcffc066b",
       "conceptId": "urn:maha:concept:evidence:qiskit-circuit",
       "declaredOwner": "maha-research",
-      "state": "missing",
-      "note": "No definition candidate exists for urn:maha:concept:evidence:qiskit-circuit on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+      "state": "present-in-tranche-16",
+      "note": "Supplied by cand_8fa40f42d53edd7287d851b1 in this cohort."
     },
     {
       "candidateId": "cand_5446a5c1ef479a180cb62379",
@@ -312,8 +286,8 @@
       "candidateId": "cand_98b822a4bb523ac26a0372cd",
       "conceptId": "urn:maha:concept:evidence:measurement-error",
       "declaredOwner": "maha-research",
-      "state": "missing",
-      "note": "No definition candidate exists for urn:maha:concept:evidence:measurement-error on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+      "state": "present-in-tranche-16",
+      "note": "Supplied by cand_635395b41cc580c20ac0c307 in this cohort."
     },
     {
       "candidateId": "cand_d9bdecd2534da2685bdfc3dc",
@@ -335,6 +309,34 @@
       "declaredOwner": "maha-research",
       "state": "missing",
       "note": "No definition candidate exists for urn:maha:concept:computation:dimensional-analysis on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+    },
+    {
+      "candidateId": "cand_86b8908b39614fac43e89d7f",
+      "conceptId": "urn:maha:concept:evidence:provenance-graph",
+      "declaredOwner": "maha-research",
+      "state": "present-in-tranche-16",
+      "note": "Supplied by cand_40085923a5197282f4f0252a in this cohort."
+    },
+    {
+      "candidateId": "cand_6a36218ed3962f4666f70bd7",
+      "conceptId": "urn:maha:concept:evidence:full-text-evidence",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_014a9f6b81816e86f731fc9d",
+      "conceptId": "urn:maha:concept:evidence:formal-definition",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_1baa943c62bd7e8bf79337be",
+      "conceptId": "urn:maha:concept:evidence:passage-locator",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
     },
     {
       "candidateId": "cand_6e4fa6c27f0b694e1c642ff9",
@@ -526,13 +528,6 @@
       "note": "A definition for this concept was reviewed in an earlier tranche."
     },
     {
-      "candidateId": "cand_0334f4dc2cef2b7aca5f87ae",
-      "conceptId": "urn:maha:concept:autonomy:authorial-lineage",
-      "declaredOwner": "mayone-maharajan",
-      "state": "satisfied-by-earlier-tranche",
-      "note": "A definition for this concept was reviewed in an earlier tranche."
-    },
-    {
       "candidateId": "cand_3cf095886c3ed1a43dc9e9dd",
       "conceptId": "urn:maha:concept:autonomy:civilizational-memory",
       "declaredOwner": "mayone-maharajan",
@@ -556,6 +551,13 @@
     {
       "candidateId": "cand_a29a99772fb5e193e27c87a4",
       "conceptId": "urn:maha:concept:autonomy:recursive-institutions",
+      "declaredOwner": "mayone-maharajan",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_69fed6d03264243259bd3b64",
+      "conceptId": "urn:maha:concept:autonomy:maha-principle",
       "declaredOwner": "mayone-maharajan",
       "state": "satisfied-by-earlier-tranche",
       "note": "A definition for this concept was reviewed in an earlier tranche."
@@ -599,34 +601,6 @@
       "candidateId": "cand_945c9fb062e30f6d12dceac8",
       "conceptId": "urn:maha:concept:governance:intellectual-property",
       "declaredOwner": "maha-policy",
-      "state": "satisfied-by-earlier-tranche",
-      "note": "A definition for this concept was reviewed in an earlier tranche."
-    },
-    {
-      "candidateId": "cand_86b8908b39614fac43e89d7f",
-      "conceptId": "urn:maha:concept:evidence:provenance-graph",
-      "declaredOwner": "maha-research",
-      "state": "missing",
-      "note": "No definition candidate exists for urn:maha:concept:evidence:provenance-graph on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
-    },
-    {
-      "candidateId": "cand_6a36218ed3962f4666f70bd7",
-      "conceptId": "urn:maha:concept:evidence:full-text-evidence",
-      "declaredOwner": "maha-research",
-      "state": "satisfied-by-earlier-tranche",
-      "note": "A definition for this concept was reviewed in an earlier tranche."
-    },
-    {
-      "candidateId": "cand_014a9f6b81816e86f731fc9d",
-      "conceptId": "urn:maha:concept:evidence:formal-definition",
-      "declaredOwner": "maha-research",
-      "state": "satisfied-by-earlier-tranche",
-      "note": "A definition for this concept was reviewed in an earlier tranche."
-    },
-    {
-      "candidateId": "cand_1baa943c62bd7e8bf79337be",
-      "conceptId": "urn:maha:concept:evidence:passage-locator",
-      "declaredOwner": "maha-research",
       "state": "satisfied-by-earlier-tranche",
       "note": "A definition for this concept was reviewed in an earlier tranche."
     },
@@ -706,7 +680,35 @@
       "declaredOwner": "maha-research",
       "state": "satisfied-by-earlier-tranche",
       "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_77c70849de00d1f2aa2653c2",
+      "conceptId": "urn:maha:concept:evidence:reproducibility",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_635395b41cc580c20ac0c307",
+      "conceptId": "urn:maha:concept:evidence:measurement-error",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_8fa40f42d53edd7287d851b1",
+      "conceptId": "urn:maha:concept:evidence:qiskit-circuit",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_40085923a5197282f4f0252a",
+      "conceptId": "urn:maha:concept:evidence:provenance-graph",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
     }
   ],
-  "provenanceDigest": "sha256:ef4d145e7d82c21eb376a1191955da026af7512bbeb78c19dd3dbd5e8cbb722d"
+  "provenanceDigest": "sha256:b37750fd7658a30b850f8ebc64d2c2ad3a79e76fb8ff0c1f9c902b470120c561"
 }

@@ -6,8 +6,8 @@
   "counts": {
     "total": 28,
     "byFinalState": {
-      "blocked": 22,
-      "evidence-ready": 6
+      "blocked": 24,
+      "evidence-ready": 4
     },
     "bySemanticResult": {
       "distinct": 28
@@ -29,6 +29,20 @@
       "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"marutam\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
     },
     {
+      "candidateId": "cand_179532c8e9ca588df1721a70",
+      "candidateDigest": "sha256:f505ac8f4bcb4709a671b8be1a46aeac5dbc00eec799b74c9c5a8ee580b76ba3",
+      "path": "/concepts/machine-civilization/definition",
+      "siteId": "mayone-maharajan",
+      "topic": "machine-civilization",
+      "routeRole": "definition",
+      "conceptId": "urn:maha:concept:autonomy:machine-civilization",
+      "declaredOwner": "mayone-maharajan",
+      "dependencyState": "live",
+      "semanticResult": "distinct",
+      "finalState": "blocked",
+      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"machine-civilization\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
+    },
+    {
       "candidateId": "cand_25bfa0b1ecacebcf6baebe83",
       "candidateDigest": "sha256:4a86808a32c388a64d3e18a6e6e86e160ec38196edd513e2da2c546e7331d86a",
       "path": "/clearing/tamil-religion/primary-text-boundaries/identity",
@@ -41,6 +55,20 @@
       "semanticResult": "distinct",
       "finalState": "blocked",
       "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"primary-text-boundaries\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
+    },
+    {
+      "candidateId": "cand_2c8d504e70fa69a97aa2a5cc",
+      "candidateDigest": "sha256:7d4f317d89349f821efe368274ad8218224d4f627e5d759f5c925ce8a0b2963c",
+      "path": "/federation/research/contradiction-search/definition",
+      "siteId": "maha-research",
+      "topic": "contradiction-search",
+      "routeRole": "definition",
+      "conceptId": "urn:maha:concept:evidence:contradiction-search",
+      "declaredOwner": "maha-research",
+      "dependencyState": "live",
+      "semanticResult": "distinct",
+      "finalState": "blocked",
+      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"contradiction-search\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
     },
     {
       "candidateId": "cand_2fa80f875634ff36dd3debd0",
@@ -71,18 +99,18 @@
       "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"coordinate-frames\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
     },
     {
-      "candidateId": "cand_40085923a5197282f4f0252a",
-      "candidateDigest": "sha256:daf7995c059c98c20d80ba5523a7c43ea1eec5010ff4164315362b3fb242008f",
-      "path": "/federation/research/provenance-graph/definition",
+      "candidateId": "cand_4941b8fd397b7b41ac4cda40",
+      "candidateDigest": "sha256:fbb957f04ce63817ac4f59c3886e44b5a622fae86f749b23e1f77e788e047e6a",
+      "path": "/federation/research/formal-definition/definition",
       "siteId": "maha-research",
-      "topic": "provenance-graph",
+      "topic": "formal-definition",
       "routeRole": "definition",
-      "conceptId": "urn:maha:concept:evidence:provenance-graph",
+      "conceptId": "urn:maha:concept:evidence:formal-definition",
       "declaredOwner": "maha-research",
       "dependencyState": "live",
       "semanticResult": "distinct",
-      "finalState": "evidence-ready",
-      "reason": "Dependency resolved (live); source inspected for \"provenance-graph\" with an exact locator and a stated reuse basis."
+      "finalState": "blocked",
+      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"formal-definition\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
     },
     {
       "candidateId": "cand_4b35a196452f5653ccaf092a",
@@ -99,6 +127,20 @@
       "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"alvar-reception\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
     },
     {
+      "candidateId": "cand_528210d274913a7eb2093bf1",
+      "candidateDigest": "sha256:448d6f651dbb3a83e9029a77344a2f6374014c74b23e73955955c8dc062aa220",
+      "path": "/federation/research/passage-locator/definition",
+      "siteId": "maha-research",
+      "topic": "passage-locator",
+      "routeRole": "definition",
+      "conceptId": "urn:maha:concept:evidence:passage-locator",
+      "declaredOwner": "maha-research",
+      "dependencyState": "live",
+      "semanticResult": "distinct",
+      "finalState": "blocked",
+      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"passage-locator\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
+    },
+    {
       "candidateId": "cand_60c8a827c07cc6a69276fc3e",
       "candidateDigest": "sha256:2198121437bedec8535720502c9b7f0f24c24332a464c703cceebf6b13d9b892",
       "path": "/clearing/tamil-religion/primary-text-boundaries/translation",
@@ -113,20 +155,6 @@
       "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"primary-text-boundaries\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
     },
     {
-      "candidateId": "cand_635395b41cc580c20ac0c307",
-      "candidateDigest": "sha256:bccdf55c7c05be21b642f820a0d78f9169a0a8830d3ba656a87020b70c79b1e5",
-      "path": "/federation/research/measurement-error/definition",
-      "siteId": "maha-research",
-      "topic": "measurement-error",
-      "routeRole": "definition",
-      "conceptId": "urn:maha:concept:evidence:measurement-error",
-      "declaredOwner": "maha-research",
-      "dependencyState": "live",
-      "semanticResult": "distinct",
-      "finalState": "evidence-ready",
-      "reason": "Dependency resolved (live); source inspected for \"measurement-error\" with an exact locator and a stated reuse basis."
-    },
-    {
       "candidateId": "cand_69be6c48cdea298121802157",
       "candidateDigest": "sha256:432393de1bc05e7bd8a32bfb39921579f20338ff1fed4118abb7dc7f7e8f1b61",
       "path": "/clearing/tamil-religion/kurinji/identity",
@@ -139,20 +167,6 @@
       "semanticResult": "distinct",
       "finalState": "blocked",
       "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"kurinji\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
-    },
-    {
-      "candidateId": "cand_69fed6d03264243259bd3b64",
-      "candidateDigest": "sha256:742f80bda997d48083e6515e529795023c9486c368f93659c080e9545029c0e0",
-      "path": "/concepts/maha-principle/origin",
-      "siteId": "mayone-maharajan",
-      "topic": "maha-principle",
-      "routeRole": "origin",
-      "conceptId": "urn:maha:concept:autonomy:maha-principle",
-      "declaredOwner": "mayone-maharajan",
-      "dependencyState": "satisfied-by-earlier-tranche",
-      "semanticResult": "distinct",
-      "finalState": "blocked",
-      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"maha-principle\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
     },
     {
       "candidateId": "cand_6a3233decc610bb5ab78925c",
@@ -197,20 +211,6 @@
       "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"marutam\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
     },
     {
-      "candidateId": "cand_77c70849de00d1f2aa2653c2",
-      "candidateDigest": "sha256:9640d5042cc25785e259a780913c56ebcca91783cd8f7e6758022fd3f119a236",
-      "path": "/federation/research/reproducibility/machine-record",
-      "siteId": "maha-research",
-      "topic": "reproducibility",
-      "routeRole": "machine-record",
-      "conceptId": "urn:maha:concept:evidence:reproducibility",
-      "declaredOwner": "maha-research",
-      "dependencyState": "satisfied-by-earlier-tranche",
-      "semanticResult": "distinct",
-      "finalState": "blocked",
-      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"reproducibility\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
-    },
-    {
       "candidateId": "cand_7d0af4ad3f71218441dcbefc",
       "candidateDigest": "sha256:1b7c32ffd9f15e4b70655e686d499a75d54ccbd1d423dd629fc6f083af2898ea",
       "path": "/policy/interoperability/machine-rule",
@@ -251,20 +251,6 @@
       "semanticResult": "distinct",
       "finalState": "blocked",
       "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"marutam\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
-    },
-    {
-      "candidateId": "cand_8fa40f42d53edd7287d851b1",
-      "candidateDigest": "sha256:b777c6f5cad4ee4ec1177dd8159fcf7707364c24e6e097473f7a0341238e79c0",
-      "path": "/federation/research/qiskit-circuit/definition",
-      "siteId": "maha-research",
-      "topic": "qiskit-circuit",
-      "routeRole": "definition",
-      "conceptId": "urn:maha:concept:evidence:qiskit-circuit",
-      "declaredOwner": "maha-research",
-      "dependencyState": "live",
-      "semanticResult": "distinct",
-      "finalState": "blocked",
-      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"qiskit-circuit\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
     },
     {
       "candidateId": "cand_9c6ff21cc9ba97753bc29752",
@@ -351,6 +337,20 @@
       "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"interoperability\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
     },
     {
+      "candidateId": "cand_db12a930bf43b2510a97e0ad",
+      "candidateDigest": "sha256:54491c5dfd1d6e8b4da7f878489a59e4f223647a81719614e9b70134e46302f3",
+      "path": "/federation/research/primary-source/definition",
+      "siteId": "maha-research",
+      "topic": "primary-source",
+      "routeRole": "definition",
+      "conceptId": "urn:maha:concept:evidence:primary-source",
+      "declaredOwner": "maha-research",
+      "dependencyState": "live",
+      "semanticResult": "distinct",
+      "finalState": "blocked",
+      "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"primary-source\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
+    },
+    {
       "candidateId": "cand_e310e159b6bfa7a9f1604f8c",
       "candidateDigest": "sha256:911c510ef415799bdeef02dac73e41ad5801ac37b4b6e30eb3ded9dd96f761e8",
       "path": "/policy/incident-reporting/machine-rule",
@@ -407,5 +407,5 @@
       "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"alvar-reception\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate."
     }
   ],
-  "provenanceDigest": "sha256:8cb14b15e0920966e93c4f035cde16be0343b3967bf6175d10011325bf6f7e0a"
+  "provenanceDigest": "sha256:d1c3a64deae6f63131a6fe5cd55be8f8778c501ccd44b4dd3048de5cea3a0bc0"
 }

@@ -3,40 +3,13 @@
   "frozenOn": "2026-09-06",
   "rule": "An application page depends on the canonical definition of its concept, on the property that declares ownership. It may apply the concept and may not redefine it. A missing prerequisite blocks the dependent page and is never inferred.",
   "counts": {
-    "live": 8,
-    "missing": 21,
+    "awaiting-definition-review": 1,
+    "live": 4,
+    "missing": 20,
     "present-in-tranche-14": 12,
-    "satisfied-by-earlier-tranche": 59
+    "satisfied-by-earlier-tranche": 63
   },
   "dependencies": [
-    {
-      "candidateId": "cand_2c8d504e70fa69a97aa2a5cc",
-      "conceptId": "urn:maha:concept:evidence:contradiction-search",
-      "declaredOwner": "maha-research",
-      "state": "live",
-      "note": "A definition owns its concept; it depends on no earlier definition."
-    },
-    {
-      "candidateId": "cand_4941b8fd397b7b41ac4cda40",
-      "conceptId": "urn:maha:concept:evidence:formal-definition",
-      "declaredOwner": "maha-research",
-      "state": "live",
-      "note": "A definition owns its concept; it depends on no earlier definition."
-    },
-    {
-      "candidateId": "cand_528210d274913a7eb2093bf1",
-      "conceptId": "urn:maha:concept:evidence:passage-locator",
-      "declaredOwner": "maha-research",
-      "state": "live",
-      "note": "A definition owns its concept; it depends on no earlier definition."
-    },
-    {
-      "candidateId": "cand_db12a930bf43b2510a97e0ad",
-      "conceptId": "urn:maha:concept:evidence:primary-source",
-      "declaredOwner": "maha-research",
-      "state": "live",
-      "note": "A definition owns its concept; it depends on no earlier definition."
-    },
     {
       "candidateId": "cand_49563482102bec2a4698ca6d",
       "conceptId": "urn:maha:concept:evidence:internal-review",
@@ -528,6 +501,34 @@
       "note": "A definition for this concept was reviewed in an earlier tranche."
     },
     {
+      "candidateId": "cand_ab0a972ba8bc988c8023249c",
+      "conceptId": "urn:maha:concept:evidence:government-mirror",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_bcb46f3d55587a2e0245700c",
+      "conceptId": "urn:maha:concept:evidence:evidence-graph",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_df63ff03ee9ecebe4a8904fc",
+      "conceptId": "urn:maha:concept:evidence:slurm-job",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_e71bcde308737c6689e3a98f",
+      "conceptId": "urn:maha:concept:evidence:scope-matching",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
       "candidateId": "cand_685fc365b60f050b990b581c",
       "conceptId": "urn:maha:concept:autonomy:mental-sovereignty",
       "declaredOwner": "mayone-maharajan",
@@ -545,8 +546,8 @@
       "candidateId": "cand_056e2379f2de63098564375d",
       "conceptId": "urn:maha:concept:autonomy:machine-civilization",
       "declaredOwner": "mayone-maharajan",
-      "state": "missing",
-      "note": "No definition candidate exists for urn:maha:concept:autonomy:machine-civilization on mayone-maharajan. The dependent page is blocked; the prerequisite must not be inferred."
+      "state": "awaiting-definition-review",
+      "note": "A definition exists at cand_179532c8e9ca588df1721a70 on mayone-maharajan and has not been reviewed yet. The prerequisite is present in the map but unreviewed, so the dependent stays blocked without the definition being reported as absent."
     },
     {
       "candidateId": "cand_e598e2209ba94e3a2da2fa8e",
@@ -710,5 +711,5 @@
       "note": "No definition candidate exists for urn:maha:concept:evidence:calculation-receipts on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
     }
   ],
-  "provenanceDigest": "sha256:192337008a0f453e3e65228c64aee157b1863a0fe7364736062167e66544aa4e"
+  "provenanceDigest": "sha256:11ea8e9900156acea269225952f0180725516f78969431a78ebf0e20cdc5d0b1"
 }
