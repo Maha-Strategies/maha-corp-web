@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "maha-federation-dependency-cascade-contract/1.0",
+  "frozenOn": "2026-09-07",
+  "purpose": "Verifies the properties the dependency graph is supposed to hold. The graph and the reconciliation already compute the cascade; nothing here recomputes them. What was missing was any check that their rules hold, and any test covering dependencies at all. Computed against dependency graph v3, in which the 19 edges v5 left dangling are repaired: 14 preserved against missing-owner definitions and 5 dropped with their removed dependent. The inheritance count is higher than against v2 because those 14 are now visible to the check rather than skipped as unknown nodes.",
+  "boundExactlyTo": {
+    "candidateMap": "sha256:83191d017d8c377d7e5b198b9aa49891cfae5148cc44149c794f383c4ca39eda",
+    "dependencyGraph": "sha256:e675ac24f4eaa484cea62614111af78981575e7d2e46be1f2212f62ee7bae17e",
+    "unifiedReadinessLedger": "sha256:bf5769e51b4b69b358805e5050c548be11482380c7fb38905ce7263c4348a5ee",
+    "definitionGraphObjects": "sha256:2c4def0c281f056ac6d5829caf04e186902bcda1a5c52a9df1b727ea1e7def3a"
+  },
+  "properties": [
+    "A dependency points at the canonical owner of the concept it needs.",
+    "Definitions, applications, policies, implementations and commercial offers are distinguished, and edges crossing categories are counted.",
+    "No candidate is evidence-ready while a prerequisite it depends on is unresolved.",
+    "Results are order-independent and bound to input digests."
+  ],
+  "verification": {
+    "inputs": {
+      "nodeCount": 1678,
+      "edgeCount": 3117,
+      "inputsDigest": "sha256:8ce2608213f1125058f6170c8507db92e1d4e0070b16fa0940a7015107140c8c"
+    },
+    "categories": {
+      "definition": 265,
+      "application": 761,
+      "policy": 169,
+      "implementation": 443,
+      "commercial-offer": 40
+    },
+    "crossCategoryEdges": {
+      "application -> definition": 1566,
+      "commercial-offer -> definition": 77,
+      "definition -> definition": 260,
+      "implementation -> definition": 850,
+      "policy -> definition": 364
+    },
+    "violations": {
+      "canonicalOwner": [],
+      "evidenceInheritance": [
+        {
+          "code": "evidence-inherited-across-edge",
+          "from": "cand_12eee2b478a5fcf93a3706bb",
+          "dependsOn": "missing_512123f9a59cf97d85e7b292",
+          "detail": "governance is evidence-ready, but the definition it depends on exists in neither the route map nor the canonical graph objects."
+        },
+        {
+          "code": "evidence-inherited-across-edge",
+          "from": "cand_3e9ff234685cde6c786f3a4c",
+          "dependsOn": "missing_f1399a20ef5e4d90c96eab7d",
+          "detail": "machine-interface is evidence-ready, but the definition it depends on exists in neither the route map nor the canonical graph objects."
+        },
+        {
+          "code": "evidence-inherited-across-edge",
+          "from": "cand_742e087b65ce73bdae3f4603",
+          "dependsOn": "missing_f1399a20ef5e4d90c96eab7d",
+          "detail": "failure-mode is evidence-ready, but the definition it depends on exists in neither the route map nor the canonical graph objects."
+        },
+        {
+          "code": "evidence-inherited-across-edge",
+          "from": "cand_7712144123a395b7979232c0",
+          "dependsOn": "missing_512123f9a59cf97d85e7b292",
+          "detail": "machine-interface is evidence-ready, but the definition it depends on exists in neither the route map nor the canonical graph objects."
+        },
+        {
+          "code": "evidence-inherited-across-edge",
+          "from": "cand_821c9a3ae1ad7422e3f0cec8",
+          "dependsOn": "missing_512123f9a59cf97d85e7b292",
+          "detail": "workflow is evidence-ready, but the definition it depends on exists in neither the route map nor the canonical graph objects."
+        },
+        {
+          "code": "evidence-inherited-across-edge",
+          "from": "cand_98187d8dcf50748a7427c97f",
+          "dependsOn": "missing_512123f9a59cf97d85e7b292",
+          "detail": "example is evidence-ready, but the definition it depends on exists in neither the route map nor the canonical graph objects."
+        },
+        {
+          "code": "evidence-inherited-across-edge",
+          "from": "cand_c028323519fd8f1dca257078",
+          "dependsOn": "missing_512123f9a59cf97d85e7b292",
+          "detail": "template is evidence-ready, but the definition it depends on exists in neither the route map nor the canonical graph objects."
+        },
+        {
+          "code": "evidence-inherited-across-edge",
+          "from": "cand_d9d77da885d5188e14d787f9",
+          "dependsOn": "missing_512123f9a59cf97d85e7b292",
+          "detail": "policy is evidence-ready, but the definition it depends on exists in neither the route map nor the canonical graph objects."
+        },
+        {
+          "code": "evidence-inherited-across-edge",
+          "from": "cand_df4a376867c0d3f20c0aee7b",
+          "dependsOn": "missing_512123f9a59cf97d85e7b292",
+          "detail": "failure-mode is evidence-ready, but the definition it depends on exists in neither the route map nor the canonical graph objects."
+        },
+        {
+          "code": "evidence-inherited-across-edge",
+          "from": "cand_f94d2bd0cb27b8ce052dae80",
+          "dependsOn": "missing_f1399a20ef5e4d90c96eab7d",
+          "detail": "workflow is evidence-ready, but the definition it depends on exists in neither the route map nor the canonical graph objects."
+        },
+        {
+          "code": "evidence-inherited-across-edge",
+          "from": "cand_fa1e70c8ff000de961152229",
+          "dependsOn": "missing_f1399a20ef5e4d90c96eab7d",
+          "detail": "governance is evidence-ready, but the definition it depends on exists in neither the route map nor the canonical graph objects."
+        },
+        {
+          "code": "evidence-inherited-across-edge",
+          "from": "cand_fe7c20e6023d410de4cd7a16",
+          "dependsOn": "missing_f1399a20ef5e4d90c96eab7d",
+          "detail": "policy is evidence-ready, but the definition it depends on exists in neither the route map nor the canonical graph objects."
+        }
+      ]
+    },
+    "nonBlocking": {
+      "orderingConstraints": 114,
+      "identityResolvedPrerequisites": 123
+    },
+    "counts": {
+      "canonicalOwnerViolations": 0,
+      "evidenceInheritanceViolations": 12
+    },
+    "clean": false
+  },
+  "finding": "12 edges carry evidence inheritance: a candidate is evidence-ready while the definition it depends on exists in neither the route map nor the canonical graph objects. An earlier version of this check reported 251 by counting two things that are not violations: 114 publication-ordering edges, which the graph itself excludes from dependencyReadyNodes, and 123 prerequisites resolved by a canonical graph object, which is exactly what the Tranche 19 Model A decision intended. Those are reported under nonBlocking and confer no evidence.",
+  "boundary": "A verifier. It changes no decision, resolves nothing, and does not itself make any candidate ready or unready. It reports what the graph and ledger already say about each other.",
+  "provenanceDigest": "sha256:e14a9a3b4d0d9eec7cfd6f7ba8e0096c3fafe12f67c829ba8fd4d9411ffa44db"
+}

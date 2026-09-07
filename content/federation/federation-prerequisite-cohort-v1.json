@@ -1,0 +1,573 @@
+{
+  "schemaVersion": "maha-federation-prerequisite-cohort/1.0",
+  "frozenOn": "2026-09-07",
+  "derivation": "Every definition candidate that is unresolved in unified readiness ledger v7 and carries at least one incoming dependency edge in repaired dependency graph v3. Computed at generation time; the cohort size is not written into the generator.",
+  "boundExactlyTo": {
+    "dependencyGraph": "sha256:e675ac24f4eaa484cea62614111af78981575e7d2e46be1f2212f62ee7bae17e",
+    "unifiedReadinessLedger": "sha256:bf5769e51b4b69b358805e5050c548be11482380c7fb38905ce7263c4348a5ee",
+    "candidateMap": "sha256:83191d017d8c377d7e5b198b9aa49891cfae5148cc44149c794f383c4ca39eda"
+  },
+  "counts": {
+    "frozenDefinitionCandidates": 4,
+    "totalIncomingEdges": 81,
+    "nonCandidatePrerequisites": 34,
+    "nonCandidateIncomingEdges": 142
+  },
+  "frozenCandidates": [
+    {
+      "candidateId": "cand_671d652918d62414c37d751d",
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "groupId": "private-machine-systems",
+      "routeRole": "definition",
+      "path": "/knowledge/private-machine-systems/health-data-consent/definition",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+      "title": "Health Data Consent — Definition",
+      "searchIntent": "Understand Health Data Consent through the definition lens in Private Machine Systems on www.maha-os.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:consent:health-data-consent",
+      "conceptFamilyId": "consent",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-os",
+        "role": "owner-application",
+        "boundary": "This route may apply consent; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:consent:health-data-consent"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:consent"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-os",
+        "allowedContent": [
+          "private-system architecture",
+          "consent controls",
+          "operator guidance"
+        ],
+        "mustNotClaim": [
+          "medical diagnosis",
+          "cloud-first defaults presented as private"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://www.maha-os.com/blog/agentic-health-system",
+        "tokenJaccard": 0.0909,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 72,
+        "evidenceAvailability": 82,
+        "differentiation": 94,
+        "machineUtility": 91,
+        "commercialProximity": 84,
+        "federationUtility": 86,
+        "duplicationSafety": 91,
+        "weighted": 84.74
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1215,
+      "tranche": 4,
+      "fanIn": 65,
+      "priorState": "revise"
+    },
+    {
+      "candidateId": "cand_31b7dabe923fc44a99337460",
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "groupId": "authorial-concepts",
+      "routeRole": "definition",
+      "path": "/concepts/public-reason/definition",
+      "url": "https://www.mayonemaharajan.com/concepts/public-reason/definition",
+      "title": "Public Reason — Definition",
+      "searchIntent": "Understand Public Reason through the definition lens in Authorial Concepts on www.mayonemaharajan.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:autonomy:public-reason",
+      "conceptFamilyId": "autonomy",
+      "conceptAuthority": {
+        "canonicalOwner": "mayone-maharajan",
+        "role": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:autonomy:public-reason"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:autonomy"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "mayone-maharajan",
+        "allowedContent": [
+          "authorial interpretation",
+          "concept genealogy",
+          "book relationships"
+        ],
+        "mustNotClaim": [
+          "authorial thesis presented as consensus",
+          "empirical authority transfer"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://www.mayonemaharajan.com/concepts",
+        "tokenJaccard": 0.25,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 60,
+        "evidenceAvailability": 72,
+        "differentiation": 99,
+        "machineUtility": 72,
+        "commercialProximity": 68,
+        "federationUtility": 86,
+        "duplicationSafety": 75,
+        "weighted": 75.38
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1568,
+      "tranche": 4,
+      "fanIn": 7,
+      "priorState": "revise"
+    },
+    {
+      "candidateId": "cand_3a7cc1c4dca92c985618384d",
+      "siteId": "agentic-publishing",
+      "canonicalHost": "publish.mahastrategies.com",
+      "groupId": "agentic-publishing",
+      "routeRole": "definition",
+      "path": "/agentic-publishing/agentic-query-letter/definition",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/agentic-query-letter/definition",
+      "title": "Agentic Query Letter — Definition",
+      "searchIntent": "Understand Agentic Query Letter through the definition lens in Agentic Publishing on publish.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:release:agentic-query-letter",
+      "conceptFamilyId": "release",
+      "conceptAuthority": {
+        "canonicalOwner": "agentic-publishing",
+        "role": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:release:agentic-query-letter"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:release"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "agentic-publishing",
+        "allowedContent": [
+          "publishing protocols",
+          "editorial templates",
+          "release guidance"
+        ],
+        "mustNotClaim": [
+          "duplicate research records",
+          "unlabelled machine authorship"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://publish.mahastrategies.com/guides/agentic-publishing-architecture",
+        "tokenJaccard": 0.2857,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 72,
+        "evidenceAvailability": 86,
+        "differentiation": 98,
+        "machineUtility": 94,
+        "commercialProximity": 90,
+        "federationUtility": 86,
+        "duplicationSafety": 71,
+        "weighted": 86.37
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 959,
+      "tranche": 3,
+      "fanIn": 7,
+      "priorState": "revise"
+    },
+    {
+      "candidateId": "cand_179532c8e9ca588df1721a70",
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "groupId": "authorial-concepts",
+      "routeRole": "definition",
+      "path": "/concepts/machine-civilization/definition",
+      "url": "https://www.mayonemaharajan.com/concepts/machine-civilization/definition",
+      "title": "Machine Civilization — Definition",
+      "searchIntent": "Understand Machine Civilization through the definition lens in Authorial Concepts on www.mayonemaharajan.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:autonomy:machine-civilization",
+      "conceptFamilyId": "autonomy",
+      "conceptAuthority": {
+        "canonicalOwner": "mayone-maharajan",
+        "role": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:autonomy:machine-civilization"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:autonomy"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "mayone-maharajan",
+        "allowedContent": [
+          "authorial interpretation",
+          "concept genealogy",
+          "book relationships"
+        ],
+        "mustNotClaim": [
+          "authorial thesis presented as consensus",
+          "empirical authority transfer"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://www.mayonemaharajan.com/concepts",
+        "tokenJaccard": 0.25,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 50,
+        "evidenceAvailability": 72,
+        "differentiation": 99,
+        "machineUtility": 72,
+        "commercialProximity": 68,
+        "federationUtility": 86,
+        "duplicationSafety": 75,
+        "weighted": 73.58
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1624,
+      "tranche": 4,
+      "fanIn": 2,
+      "priorState": "revise"
+    }
+  ],
+  "nonCandidatePrerequisites": {
+    "note": "Concepts that something depends on but which are not route candidates: 32 held as canonical graph objects by the Tranche 19 Model A decision, and 2 whose definitions v5 deleted. They cannot be frozen or reviewed as candidates because they are not candidates. They are listed so the fan-out they carry is visible.",
+    "entries": [
+      {
+        "nodeId": "missing_512123f9a59cf97d85e7b292",
+        "siteId": "agentic-publishing",
+        "concept": "editorial-review",
+        "fanIn": 7
+      },
+      {
+        "nodeId": "missing_f1399a20ef5e4d90c96eab7d",
+        "siteId": "agentic-publishing",
+        "concept": "machine-readable-article",
+        "fanIn": 7
+      },
+      {
+        "nodeId": "missing_8f5f53cbebb4b264adb31452",
+        "siteId": "maha-research",
+        "concept": "audit-export",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_9bee7744d41289fe62671f96",
+        "siteId": "maha-research",
+        "concept": "calculation-receipts",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_dfa4daebdc8ee24dc7491355",
+        "siteId": "maha-research",
+        "concept": "canonical-release",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_a6a87432eb7361a5f854eb37",
+        "siteId": "maha-research",
+        "concept": "causal-inference",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_ef8fd38edc93d2275b8eaa96",
+        "siteId": "maha-research",
+        "concept": "claim-intake",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_37c3007f5bbc6b5cbcd6939b",
+        "siteId": "maha-research",
+        "concept": "conflicting-literature",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_1a4f8d97bd23b9a9059bb093",
+        "siteId": "maha-research",
+        "concept": "correction-and-retraction",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_d264fcc97cca689a366010c1",
+        "siteId": "maha-research",
+        "concept": "cryptographic-commitments",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_cad78b30a0560899e61879fd",
+        "siteId": "maha-research",
+        "concept": "delivery-acknowledgement",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_dc4bf7dafde1883281d8b281",
+        "siteId": "maha-research",
+        "concept": "deterministic-arithmetic",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_0b7648f7af124a80ae28a32a",
+        "siteId": "maha-research",
+        "concept": "dimensional-analysis",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_e788d18a6d88113347e9a97f",
+        "siteId": "maha-research",
+        "concept": "error-budgets",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_a8dbcb746c8017d3df5f6dd0",
+        "siteId": "maha-research",
+        "concept": "evidence-dossiers",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_a5f578399628ce8dc5f4dc01",
+        "siteId": "maha-research",
+        "concept": "formal-verification",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_4c5719d66d3cab87b2afe651",
+        "siteId": "maha-research",
+        "concept": "internal-review",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_6815c74c1b340d4e96875a9a",
+        "siteId": "maha-research",
+        "concept": "interpolation",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_169082f43019d77233e99139",
+        "siteId": "maha-research",
+        "concept": "interval-bounds",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_fe57147502b50bc2d5e45148",
+        "siteId": "maha-research",
+        "concept": "licensed-retrieval",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_d5f2230acc93cc06948f789d",
+        "siteId": "maha-research",
+        "concept": "locator-verification",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_fd842151b2bf801962735480",
+        "siteId": "maha-research",
+        "concept": "numerical-integration",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_1d513f38b0e022589a49c05a",
+        "siteId": "maha-research",
+        "concept": "numerical-stability",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_dabd80ce3c8fa6f1abbf34a4",
+        "siteId": "maha-research",
+        "concept": "optimization",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_f207fbeb9a017f4a090262f5",
+        "siteId": "maha-research",
+        "concept": "passage-support",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_6988a855fa927ec3d578f439",
+        "siteId": "maha-research",
+        "concept": "privacy-boundary",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_9a5b8cf492025e11eee6068e",
+        "siteId": "maha-research",
+        "concept": "reference-frame-conversion",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_a3152de782f2eef6c1b7a6d7",
+        "siteId": "maha-research",
+        "concept": "reproducibility-fixtures",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_c9322a8ae5b97fc820f63ba3",
+        "siteId": "maha-research",
+        "concept": "root-finding",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_401381072a52c9a18b6d3dfe",
+        "siteId": "maha-research",
+        "concept": "runtime-witness-receipts",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_b2c0706b52ec034fed39f37c",
+        "siteId": "maha-research",
+        "concept": "source-recovery",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_2f5a6a8ae6b917bbe213c82a",
+        "siteId": "maha-research",
+        "concept": "uncertainty-recording",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_290a8f0542020764235ae7a8",
+        "siteId": "maha-research",
+        "concept": "unsupported-inference",
+        "fanIn": 4
+      },
+      {
+        "nodeId": "missing_5b72c597eb70594b02a74d68",
+        "siteId": "maha-research",
+        "concept": "version-relationship",
+        "fanIn": 4
+      }
+    ]
+  },
+  "boundary": "Freezing records that these definitions are the prerequisites under review. It changes no state, creates no route, and confers nothing on any dependent.",
+  "provenanceDigest": "sha256:6a2898836b68498bbd3dc0d58fc518731f170ae82cfef94427416512953ccaea"
+}

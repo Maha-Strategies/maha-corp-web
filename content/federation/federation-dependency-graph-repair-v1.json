@@ -1,0 +1,233 @@
+{
+  "schemaVersion": "maha-federation-dependency-graph-repair/1.0",
+  "frozenOn": "2026-09-07",
+  "defect": "The v5 replacement pass removed four candidates without updating dependency graph v2, leaving 19 edges that name ids no longer in the map. An edge to an invisible node is exempt from every verifier check rather than reported by one, so the dangle concealed the dependencies it broke.",
+  "removedCandidates": [
+    {
+      "candidateId": "cand_379d39a7b88f7c76518ba50c",
+      "path": "/agentic-publishing/editorial-review/definition",
+      "conceptId": "urn:maha:concept:release:editorial-review",
+      "siteId": "agentic-publishing",
+      "routeRole": "definition"
+    },
+    {
+      "candidateId": "cand_451a78ac92d2875a61747627",
+      "path": "/clearing/evidence-workflows/source-identity/failure-modes",
+      "conceptId": "urn:maha:concept:evidence:source-identity",
+      "siteId": "maha-strategies",
+      "routeRole": "failure-modes"
+    },
+    {
+      "candidateId": "cand_48485c2639eca0b2fb4d9852",
+      "path": "/agentic-publishing/machine-readable-article/definition",
+      "conceptId": "urn:maha:concept:release:machine-readable-article",
+      "siteId": "agentic-publishing",
+      "routeRole": "definition"
+    },
+    {
+      "candidateId": "cand_dcd48c0795ff5cb8ebfcc26b",
+      "path": "/clearing/evidence-workflows/rights-basis/failure-modes",
+      "conceptId": "urn:maha:concept:evidence:rights-basis",
+      "siteId": "maha-strategies",
+      "routeRole": "failure-modes"
+    }
+  ],
+  "declaredReplacementsNotUsed": {
+    "finding": "v5 declares a four-for-four replacement, but each successor is a different concept and none is a definition. machine-readable-article and editorial-review each now hold seven routes and zero definitions.",
+    "consequence": "Fourteen routes depend on a definition that no longer exists anywhere in the route map. Repointing them at a successor that defines something else would hide that, so the dependency is preserved as unsatisfied."
+  },
+  "counts": {
+    "danglingEdges": 19,
+    "reboundToMissingOwnerDefinition": 14,
+    "droppedOrphanedSource": 5,
+    "missingOwnerDefinitionNodesAdded": 2
+  },
+  "missingOwnerDefinitionNodesAdded": [
+    {
+      "nodeId": "missing_512123f9a59cf97d85e7b292",
+      "siteId": "agentic-publishing",
+      "topic": "editorial-review",
+      "conceptId": "urn:maha:concept:release:editorial-review",
+      "state": "missing-owner-topic-definition",
+      "absentSince": "federation-route-candidates-v5.json"
+    },
+    {
+      "nodeId": "missing_f1399a20ef5e4d90c96eab7d",
+      "siteId": "agentic-publishing",
+      "topic": "machine-readable-article",
+      "conceptId": "urn:maha:concept:release:machine-readable-article",
+      "state": "missing-owner-topic-definition",
+      "absentSince": "federation-route-candidates-v5.json"
+    }
+  ],
+  "repairs": [
+    {
+      "action": "rebound-to-missing-owner-definition",
+      "from": "cand_12eee2b478a5fcf93a3706bb",
+      "dependsOn": "cand_379d39a7b88f7c76518ba50c",
+      "reason": "local-topic-definition-first",
+      "removedCandidate": "/agentic-publishing/editorial-review/definition",
+      "newTarget": "missing_512123f9a59cf97d85e7b292",
+      "detail": "/agentic-publishing/editorial-review/definition was the canonical definition for urn:maha:concept:release:editorial-review and was removed in v5. No definition for that concept remains in the route map. The dependency is preserved against a missing-owner definition node, which is what the graph already uses for a concept whose owner definition is absent. It is not repointed at the declared v5 replacement, which is a different concept and not a definition."
+    },
+    {
+      "action": "dropped-orphaned-source",
+      "from": "cand_379d39a7b88f7c76518ba50c",
+      "dependsOn": "observed_43f63ec17ea0bf8650dd06e1",
+      "reason": "canonical-family-owner-definition-first",
+      "removedCandidate": "/agentic-publishing/editorial-review/definition",
+      "detail": "The route this edge belongs to (/agentic-publishing/editorial-review/definition) was removed in v5, so there is no dependent left to express a dependency. The edge is dropped rather than repointed: a dependency with no subject is not a dependency."
+    },
+    {
+      "action": "rebound-to-missing-owner-definition",
+      "from": "cand_3e9ff234685cde6c786f3a4c",
+      "dependsOn": "cand_48485c2639eca0b2fb4d9852",
+      "reason": "local-topic-definition-first",
+      "removedCandidate": "/agentic-publishing/machine-readable-article/definition",
+      "newTarget": "missing_f1399a20ef5e4d90c96eab7d",
+      "detail": "/agentic-publishing/machine-readable-article/definition was the canonical definition for urn:maha:concept:release:machine-readable-article and was removed in v5. No definition for that concept remains in the route map. The dependency is preserved against a missing-owner definition node, which is what the graph already uses for a concept whose owner definition is absent. It is not repointed at the declared v5 replacement, which is a different concept and not a definition."
+    },
+    {
+      "action": "dropped-orphaned-source",
+      "from": "cand_451a78ac92d2875a61747627",
+      "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+      "reason": "canonical-owner-topic-definition-first",
+      "removedCandidate": "/clearing/evidence-workflows/source-identity/failure-modes",
+      "detail": "The route this edge belongs to (/clearing/evidence-workflows/source-identity/failure-modes) was removed in v5, so there is no dependent left to express a dependency. The edge is dropped rather than repointed: a dependency with no subject is not a dependency."
+    },
+    {
+      "action": "dropped-orphaned-source",
+      "from": "cand_48485c2639eca0b2fb4d9852",
+      "dependsOn": "observed_43f63ec17ea0bf8650dd06e1",
+      "reason": "canonical-family-owner-definition-first",
+      "removedCandidate": "/agentic-publishing/machine-readable-article/definition",
+      "detail": "The route this edge belongs to (/agentic-publishing/machine-readable-article/definition) was removed in v5, so there is no dependent left to express a dependency. The edge is dropped rather than repointed: a dependency with no subject is not a dependency."
+    },
+    {
+      "action": "rebound-to-missing-owner-definition",
+      "from": "cand_742e087b65ce73bdae3f4603",
+      "dependsOn": "cand_48485c2639eca0b2fb4d9852",
+      "reason": "local-topic-definition-first",
+      "removedCandidate": "/agentic-publishing/machine-readable-article/definition",
+      "newTarget": "missing_f1399a20ef5e4d90c96eab7d",
+      "detail": "/agentic-publishing/machine-readable-article/definition was the canonical definition for urn:maha:concept:release:machine-readable-article and was removed in v5. No definition for that concept remains in the route map. The dependency is preserved against a missing-owner definition node, which is what the graph already uses for a concept whose owner definition is absent. It is not repointed at the declared v5 replacement, which is a different concept and not a definition."
+    },
+    {
+      "action": "rebound-to-missing-owner-definition",
+      "from": "cand_7712144123a395b7979232c0",
+      "dependsOn": "cand_379d39a7b88f7c76518ba50c",
+      "reason": "local-topic-definition-first",
+      "removedCandidate": "/agentic-publishing/editorial-review/definition",
+      "newTarget": "missing_512123f9a59cf97d85e7b292",
+      "detail": "/agentic-publishing/editorial-review/definition was the canonical definition for urn:maha:concept:release:editorial-review and was removed in v5. No definition for that concept remains in the route map. The dependency is preserved against a missing-owner definition node, which is what the graph already uses for a concept whose owner definition is absent. It is not repointed at the declared v5 replacement, which is a different concept and not a definition."
+    },
+    {
+      "action": "rebound-to-missing-owner-definition",
+      "from": "cand_821c9a3ae1ad7422e3f0cec8",
+      "dependsOn": "cand_379d39a7b88f7c76518ba50c",
+      "reason": "local-topic-definition-first",
+      "removedCandidate": "/agentic-publishing/editorial-review/definition",
+      "newTarget": "missing_512123f9a59cf97d85e7b292",
+      "detail": "/agentic-publishing/editorial-review/definition was the canonical definition for urn:maha:concept:release:editorial-review and was removed in v5. No definition for that concept remains in the route map. The dependency is preserved against a missing-owner definition node, which is what the graph already uses for a concept whose owner definition is absent. It is not repointed at the declared v5 replacement, which is a different concept and not a definition."
+    },
+    {
+      "action": "rebound-to-missing-owner-definition",
+      "from": "cand_98187d8dcf50748a7427c97f",
+      "dependsOn": "cand_379d39a7b88f7c76518ba50c",
+      "reason": "local-topic-definition-first",
+      "removedCandidate": "/agentic-publishing/editorial-review/definition",
+      "newTarget": "missing_512123f9a59cf97d85e7b292",
+      "detail": "/agentic-publishing/editorial-review/definition was the canonical definition for urn:maha:concept:release:editorial-review and was removed in v5. No definition for that concept remains in the route map. The dependency is preserved against a missing-owner definition node, which is what the graph already uses for a concept whose owner definition is absent. It is not repointed at the declared v5 replacement, which is a different concept and not a definition."
+    },
+    {
+      "action": "rebound-to-missing-owner-definition",
+      "from": "cand_b0625906e210bafb279b7669",
+      "dependsOn": "cand_48485c2639eca0b2fb4d9852",
+      "reason": "local-topic-definition-first",
+      "removedCandidate": "/agentic-publishing/machine-readable-article/definition",
+      "newTarget": "missing_f1399a20ef5e4d90c96eab7d",
+      "detail": "/agentic-publishing/machine-readable-article/definition was the canonical definition for urn:maha:concept:release:machine-readable-article and was removed in v5. No definition for that concept remains in the route map. The dependency is preserved against a missing-owner definition node, which is what the graph already uses for a concept whose owner definition is absent. It is not repointed at the declared v5 replacement, which is a different concept and not a definition."
+    },
+    {
+      "action": "rebound-to-missing-owner-definition",
+      "from": "cand_c028323519fd8f1dca257078",
+      "dependsOn": "cand_379d39a7b88f7c76518ba50c",
+      "reason": "local-topic-definition-first",
+      "removedCandidate": "/agentic-publishing/editorial-review/definition",
+      "newTarget": "missing_512123f9a59cf97d85e7b292",
+      "detail": "/agentic-publishing/editorial-review/definition was the canonical definition for urn:maha:concept:release:editorial-review and was removed in v5. No definition for that concept remains in the route map. The dependency is preserved against a missing-owner definition node, which is what the graph already uses for a concept whose owner definition is absent. It is not repointed at the declared v5 replacement, which is a different concept and not a definition."
+    },
+    {
+      "action": "rebound-to-missing-owner-definition",
+      "from": "cand_c8b98032f22fc91b51dac6be",
+      "dependsOn": "cand_48485c2639eca0b2fb4d9852",
+      "reason": "local-topic-definition-first",
+      "removedCandidate": "/agentic-publishing/machine-readable-article/definition",
+      "newTarget": "missing_f1399a20ef5e4d90c96eab7d",
+      "detail": "/agentic-publishing/machine-readable-article/definition was the canonical definition for urn:maha:concept:release:machine-readable-article and was removed in v5. No definition for that concept remains in the route map. The dependency is preserved against a missing-owner definition node, which is what the graph already uses for a concept whose owner definition is absent. It is not repointed at the declared v5 replacement, which is a different concept and not a definition."
+    },
+    {
+      "action": "rebound-to-missing-owner-definition",
+      "from": "cand_d9d77da885d5188e14d787f9",
+      "dependsOn": "cand_379d39a7b88f7c76518ba50c",
+      "reason": "local-topic-definition-first",
+      "removedCandidate": "/agentic-publishing/editorial-review/definition",
+      "newTarget": "missing_512123f9a59cf97d85e7b292",
+      "detail": "/agentic-publishing/editorial-review/definition was the canonical definition for urn:maha:concept:release:editorial-review and was removed in v5. No definition for that concept remains in the route map. The dependency is preserved against a missing-owner definition node, which is what the graph already uses for a concept whose owner definition is absent. It is not repointed at the declared v5 replacement, which is a different concept and not a definition."
+    },
+    {
+      "action": "dropped-orphaned-source",
+      "from": "cand_dcd48c0795ff5cb8ebfcc26b",
+      "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+      "reason": "canonical-family-owner-definition-first",
+      "removedCandidate": "/clearing/evidence-workflows/rights-basis/failure-modes",
+      "detail": "The route this edge belongs to (/clearing/evidence-workflows/rights-basis/failure-modes) was removed in v5, so there is no dependent left to express a dependency. The edge is dropped rather than repointed: a dependency with no subject is not a dependency."
+    },
+    {
+      "action": "dropped-orphaned-source",
+      "from": "cand_dcd48c0795ff5cb8ebfcc26b",
+      "dependsOn": "cand_f40a8ffd0e5eda5b8f404d14",
+      "reason": "canonical-owner-topic-definition-first",
+      "removedCandidate": "/clearing/evidence-workflows/rights-basis/failure-modes",
+      "detail": "The route this edge belongs to (/clearing/evidence-workflows/rights-basis/failure-modes) was removed in v5, so there is no dependent left to express a dependency. The edge is dropped rather than repointed: a dependency with no subject is not a dependency."
+    },
+    {
+      "action": "rebound-to-missing-owner-definition",
+      "from": "cand_df4a376867c0d3f20c0aee7b",
+      "dependsOn": "cand_379d39a7b88f7c76518ba50c",
+      "reason": "local-topic-definition-first",
+      "removedCandidate": "/agentic-publishing/editorial-review/definition",
+      "newTarget": "missing_512123f9a59cf97d85e7b292",
+      "detail": "/agentic-publishing/editorial-review/definition was the canonical definition for urn:maha:concept:release:editorial-review and was removed in v5. No definition for that concept remains in the route map. The dependency is preserved against a missing-owner definition node, which is what the graph already uses for a concept whose owner definition is absent. It is not repointed at the declared v5 replacement, which is a different concept and not a definition."
+    },
+    {
+      "action": "rebound-to-missing-owner-definition",
+      "from": "cand_f94d2bd0cb27b8ce052dae80",
+      "dependsOn": "cand_48485c2639eca0b2fb4d9852",
+      "reason": "local-topic-definition-first",
+      "removedCandidate": "/agentic-publishing/machine-readable-article/definition",
+      "newTarget": "missing_f1399a20ef5e4d90c96eab7d",
+      "detail": "/agentic-publishing/machine-readable-article/definition was the canonical definition for urn:maha:concept:release:machine-readable-article and was removed in v5. No definition for that concept remains in the route map. The dependency is preserved against a missing-owner definition node, which is what the graph already uses for a concept whose owner definition is absent. It is not repointed at the declared v5 replacement, which is a different concept and not a definition."
+    },
+    {
+      "action": "rebound-to-missing-owner-definition",
+      "from": "cand_fa1e70c8ff000de961152229",
+      "dependsOn": "cand_48485c2639eca0b2fb4d9852",
+      "reason": "local-topic-definition-first",
+      "removedCandidate": "/agentic-publishing/machine-readable-article/definition",
+      "newTarget": "missing_f1399a20ef5e4d90c96eab7d",
+      "detail": "/agentic-publishing/machine-readable-article/definition was the canonical definition for urn:maha:concept:release:machine-readable-article and was removed in v5. No definition for that concept remains in the route map. The dependency is preserved against a missing-owner definition node, which is what the graph already uses for a concept whose owner definition is absent. It is not repointed at the declared v5 replacement, which is a different concept and not a definition."
+    },
+    {
+      "action": "rebound-to-missing-owner-definition",
+      "from": "cand_fe7c20e6023d410de4cd7a16",
+      "dependsOn": "cand_48485c2639eca0b2fb4d9852",
+      "reason": "local-topic-definition-first",
+      "removedCandidate": "/agentic-publishing/machine-readable-article/definition",
+      "newTarget": "missing_f1399a20ef5e4d90c96eab7d",
+      "detail": "/agentic-publishing/machine-readable-article/definition was the canonical definition for urn:maha:concept:release:machine-readable-article and was removed in v5. No definition for that concept remains in the route map. The dependency is preserved against a missing-owner definition node, which is what the graph already uses for a concept whose owner definition is absent. It is not repointed at the declared v5 replacement, which is a different concept and not a definition."
+    }
+  ],
+  "boundary": "A graph repair. It creates no route, resolves no dependency and changes no readiness state. Fourteen dependencies that were invisible are now visible and unsatisfied, which is expected to raise the evidence-inheritance count rather than lower it.",
+  "provenanceDigest": "sha256:07272b041f9773a78f1846a92bcc476ce1d52753d5fb8f18765d77ff9617836b"
+}
