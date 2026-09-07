@@ -160,10 +160,22 @@ test('artifacts regenerate byte-identically', () => {
 })
 
 test('no prior tranche artifact was mutated', () => {
+  // The invariant is that nothing *earlier* than this tranche changed. Excluding
+  // only the literal string "tranche-13" also flagged Tranche 14's new files,
+  // which are additions by a later tranche rather than mutations of an earlier
+  // one. The frozen map and lineage are still guarded: they carry no tranche
+  // number and so are never excluded.
+  const trancheNumber = (file: string) => {
+    const m = /federation-tranche-(\d+)/.exec(file)
+    return m ? Number(m[1]) : null
+  }
   const changed = execFileSync('git', ['status', '--short', '--', F], { encoding: 'utf8' })
     .split('\n').map((l) => l.slice(3).trim()).filter(Boolean)
-    .filter((f) => !/tranche-13/.test(f))
-  assert.deepEqual(changed, [], `prior artifacts changed: ${changed.join(', ')}`)
+    .filter((f) => {
+      const n = trancheNumber(f)
+      return n === null || n < 13
+    })
+  assert.deepEqual(changed, [], `earlier artifacts changed: ${changed.join(', ')}`)
 })
 
 /* -- closure: prose, report and artifacts must agree ------------------------ */

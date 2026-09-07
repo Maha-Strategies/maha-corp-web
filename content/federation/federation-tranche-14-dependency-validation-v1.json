@@ -1,0 +1,714 @@
+{
+  "schemaVersion": "maha-federation-tranche-14-dependency-validation/1.0",
+  "frozenOn": "2026-09-06",
+  "rule": "An application page depends on the canonical definition of its concept, on the property that declares ownership. It may apply the concept and may not redefine it. A missing prerequisite blocks the dependent page and is never inferred.",
+  "counts": {
+    "live": 8,
+    "missing": 21,
+    "present-in-tranche-14": 12,
+    "satisfied-by-earlier-tranche": 59
+  },
+  "dependencies": [
+    {
+      "candidateId": "cand_2c8d504e70fa69a97aa2a5cc",
+      "conceptId": "urn:maha:concept:evidence:contradiction-search",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_4941b8fd397b7b41ac4cda40",
+      "conceptId": "urn:maha:concept:evidence:formal-definition",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_528210d274913a7eb2093bf1",
+      "conceptId": "urn:maha:concept:evidence:passage-locator",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_db12a930bf43b2510a97e0ad",
+      "conceptId": "urn:maha:concept:evidence:primary-source",
+      "declaredOwner": "maha-research",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_49563482102bec2a4698ca6d",
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_746829e7a9580c24768c5280",
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_d874609efd0e81a3cff48a1f",
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_777b4bf168156b8720a1c87d",
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "declaredOwner": "maha-research",
+      "state": "missing",
+      "note": "No definition candidate exists for urn:maha:concept:evidence:licensed-retrieval on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+    },
+    {
+      "candidateId": "cand_c1d27d899558b2f408725af4",
+      "conceptId": "urn:maha:concept:evidence:passage-support",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_07bc903a65181921d3cbe0f1",
+      "conceptId": "urn:maha:concept:evidence:audit-export",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_f1c82b9f23a6ad45d764d203",
+      "conceptId": "urn:maha:concept:evidence:canonical-release",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_94d3ab89dc9b9a4049cfcc64",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "declaredOwner": "maha-research",
+      "state": "missing",
+      "note": "No definition candidate exists for urn:maha:concept:evidence:correction-and-retraction on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+    },
+    {
+      "candidateId": "cand_dc8070ea994e1058754e5a31",
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "declaredOwner": "maha-research",
+      "state": "missing",
+      "note": "No definition candidate exists for urn:maha:concept:evidence:delivery-acknowledgement on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+    },
+    {
+      "candidateId": "cand_5e120d34f43896e9ddd4c2cd",
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "declaredOwner": "maha-research",
+      "state": "missing",
+      "note": "No definition candidate exists for urn:maha:concept:evidence:licensed-retrieval on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+    },
+    {
+      "candidateId": "cand_7edddffaa6cd822175f7425b",
+      "conceptId": "urn:maha:concept:evidence:source-recovery",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_76a609835bd997daf18d03c9",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "declaredOwner": "maha-research",
+      "state": "missing",
+      "note": "No definition candidate exists for urn:maha:concept:evidence:correction-and-retraction on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+    },
+    {
+      "candidateId": "cand_bd33b2f4440bad71f453d1cd",
+      "conceptId": "urn:maha:concept:evidence:unsupported-inference",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_7ce60cdad4168519d2a1271e",
+      "conceptId": "urn:maha:concept:evidence:audit-export",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_ed894d73f5e99239787fe958",
+      "conceptId": "urn:maha:concept:evidence:locator-verification",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_fb6b392e20f120a12369e9a9",
+      "conceptId": "urn:maha:concept:evidence:canonical-release",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_a84907e8cd7aaeb462975ff0",
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "declaredOwner": "maha-research",
+      "state": "missing",
+      "note": "No definition candidate exists for urn:maha:concept:evidence:delivery-acknowledgement on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+    },
+    {
+      "candidateId": "cand_c633bcf3413122ad08df9bc3",
+      "conceptId": "urn:maha:concept:evidence:passage-support",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_0a13428b731b87a242aa8860",
+      "conceptId": "urn:maha:concept:evidence:conflicting-literature",
+      "declaredOwner": "maha-research",
+      "state": "missing",
+      "note": "No definition candidate exists for urn:maha:concept:evidence:conflicting-literature on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+    },
+    {
+      "candidateId": "cand_123255040ef5ce3e1ab37a09",
+      "conceptId": "urn:maha:concept:evidence:locator-verification",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_23cda9020b0530f363a22323",
+      "conceptId": "urn:maha:concept:evidence:source-recovery",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_7b0e5131e5a8b8295bae99bb",
+      "conceptId": "urn:maha:concept:evidence:unsupported-inference",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_9f9fb8e2bddf2c3d845f0735",
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "declaredOwner": "maha-research",
+      "state": "missing",
+      "note": "No definition candidate exists for urn:maha:concept:evidence:calculation-receipts on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+    },
+    {
+      "candidateId": "cand_e97a99783ecf4eff32941550",
+      "conceptId": "urn:maha:concept:evidence:passage-support",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_c8942765582ba19ccafd6b7c",
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "declaredOwner": "maha-research",
+      "state": "missing",
+      "note": "No definition candidate exists for urn:maha:concept:evidence:licensed-retrieval on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+    },
+    {
+      "candidateId": "cand_9f777990308651d1a4980b2d",
+      "conceptId": "urn:maha:concept:evidence:locator-verification",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_2b4ee754b4b8aa01c89396c8",
+      "conceptId": "urn:maha:concept:evidence:conflicting-literature",
+      "declaredOwner": "maha-research",
+      "state": "missing",
+      "note": "No definition candidate exists for urn:maha:concept:evidence:conflicting-literature on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+    },
+    {
+      "candidateId": "cand_bbfc84c12e0abb852c57ea7b",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "declaredOwner": "maha-research",
+      "state": "missing",
+      "note": "No definition candidate exists for urn:maha:concept:evidence:correction-and-retraction on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+    },
+    {
+      "candidateId": "cand_dc250735100e8e76edee974c",
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "declaredOwner": "maha-research",
+      "state": "missing",
+      "note": "No definition candidate exists for urn:maha:concept:evidence:delivery-acknowledgement on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+    },
+    {
+      "candidateId": "cand_6e39d7b25fc7f9913e52d052",
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "declaredOwner": "maha-research",
+      "state": "missing",
+      "note": "No definition candidate exists for urn:maha:concept:evidence:licensed-retrieval on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+    },
+    {
+      "candidateId": "cand_733aeb6e14e7d59c26e3f102",
+      "conceptId": "urn:maha:concept:evidence:source-recovery",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_28de1da777f73683c90b1e19",
+      "conceptId": "urn:maha:concept:governance:model-evaluation",
+      "declaredOwner": "maha-policy",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_4092a04488f824d23cb863e8",
+      "conceptId": "urn:maha:concept:governance:standards-and-conformity",
+      "declaredOwner": "maha-policy",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_4629fc39d5997817fe231b50",
+      "conceptId": "urn:maha:concept:governance:standards-and-conformity",
+      "declaredOwner": "maha-policy",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_5cc2e7cd02418abe9ea5e664",
+      "conceptId": "urn:maha:concept:governance:quantum-policy",
+      "declaredOwner": "maha-policy",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_7ffb9ccd42765ea8ca74db91",
+      "conceptId": "urn:maha:concept:governance:quantum-policy",
+      "declaredOwner": "maha-policy",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_907711f497a2d46c20380c6a",
+      "conceptId": "urn:maha:concept:governance:model-evaluation",
+      "declaredOwner": "maha-policy",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_b65eb482fa00057ab683331c",
+      "conceptId": "urn:maha:concept:governance:machine-contracting",
+      "declaredOwner": "maha-policy",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_bc97d3fd682d0c765405a06b",
+      "conceptId": "urn:maha:concept:governance:machine-contracting",
+      "declaredOwner": "maha-policy",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_d49d72de97dcf1602d11eeaf",
+      "conceptId": "urn:maha:concept:governance:quantum-policy",
+      "declaredOwner": "maha-policy",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_f23f4e5ab87434e512275d99",
+      "conceptId": "urn:maha:concept:governance:standards-and-conformity",
+      "declaredOwner": "maha-policy",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_06329f76761bad1c73eb465a",
+      "conceptId": "urn:maha:concept:governance:standards-and-conformity",
+      "declaredOwner": "maha-policy",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_1bd9dec87ac3dc21c8780672",
+      "conceptId": "urn:maha:concept:governance:machine-contracting",
+      "declaredOwner": "maha-policy",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_2afea75555d5a5fa86fd03fa",
+      "conceptId": "urn:maha:concept:governance:digital-public-infrastructure",
+      "declaredOwner": "maha-policy",
+      "state": "present-in-tranche-14",
+      "note": "Supplied by cand_9e437f23e54ca9b613f2dc25 in this cohort."
+    },
+    {
+      "candidateId": "cand_356fec9c3368bf5ff1b9b041",
+      "conceptId": "urn:maha:concept:governance:quantum-policy",
+      "declaredOwner": "maha-policy",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_5976f67f20f15c4e9b85bafe",
+      "conceptId": "urn:maha:concept:governance:machine-contracting",
+      "declaredOwner": "maha-policy",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_6856f3d6fe72d3163ca5bfa3",
+      "conceptId": "urn:maha:concept:governance:assurance-cases",
+      "declaredOwner": "maha-policy",
+      "state": "present-in-tranche-14",
+      "note": "Supplied by cand_c1d35a50bb5dfee780da69ef in this cohort."
+    },
+    {
+      "candidateId": "cand_6e54d4d72a5e2d34c3560cfc",
+      "conceptId": "urn:maha:concept:governance:auditability",
+      "declaredOwner": "maha-policy",
+      "state": "present-in-tranche-14",
+      "note": "Supplied by cand_c8c793b4bcb56617c0bc4d63 in this cohort."
+    },
+    {
+      "candidateId": "cand_70f30e4345038fe9ec94bbb0",
+      "conceptId": "urn:maha:concept:governance:assurance-cases",
+      "declaredOwner": "maha-policy",
+      "state": "present-in-tranche-14",
+      "note": "Supplied by cand_c1d35a50bb5dfee780da69ef in this cohort."
+    },
+    {
+      "candidateId": "cand_78ca3e0798f6fbfa5b85f521",
+      "conceptId": "urn:maha:concept:evidence:citation-lineage",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_cc11596d6192de84154e0982",
+      "conceptId": "urn:maha:concept:evidence:claim-extraction",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_d17718beaa0c8bfbc8f97d8a",
+      "conceptId": "urn:maha:concept:evidence:author-manuscript",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_dcc9d89b18709e87fcce6de7",
+      "conceptId": "urn:maha:concept:evidence:container-image",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_2ca75d407bea58801cf3c5ff",
+      "conceptId": "urn:maha:concept:evidence:correction",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_655d9e8054dffe22f16b55aa",
+      "conceptId": "urn:maha:concept:evidence:benchmark-design",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_4191e443964b4b25c002f26c",
+      "conceptId": "urn:maha:concept:evidence:metadata-only-evidence",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_43eb895754a408ee1a6e002f",
+      "conceptId": "urn:maha:concept:evidence:random-seed",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_5f7e1bae818a3747a0fa9d19",
+      "conceptId": "urn:maha:concept:evidence:equation-locator",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_ae09b3786d108af605bd1dc4",
+      "conceptId": "urn:maha:concept:evidence:repository-copy",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_211c4417bb972c66832e5fb5",
+      "conceptId": "urn:maha:concept:evidence:benchmark-design",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_009408ac2122d5452565ffb9",
+      "conceptId": "urn:maha:concept:evidence:scope-matching",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_30e030dbb067232f8152183e",
+      "conceptId": "urn:maha:concept:evidence:full-text-evidence",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_4eb9f0f6754923badf58ef11",
+      "conceptId": "urn:maha:concept:evidence:calibration",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_56850c27bb00fd728015f0d2",
+      "conceptId": "urn:maha:concept:evidence:reproducibility",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_6462f0391f76fb8d58e8ab95",
+      "conceptId": "urn:maha:concept:evidence:government-mirror",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_8297753a523b3b107d97dc63",
+      "conceptId": "urn:maha:concept:evidence:slurm-job",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_86e0bcaf7041b5ca2277e9c2",
+      "conceptId": "urn:maha:concept:evidence:evidence-graph",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_e6d8d86a1d84775eb16492f2",
+      "conceptId": "urn:maha:concept:evidence:correction",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_fb59bce42da2e3677e49f71e",
+      "conceptId": "urn:maha:concept:evidence:correction",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_62e6c60f66c3a9f0659917d5",
+      "conceptId": "urn:maha:concept:evidence:full-text-evidence",
+      "declaredOwner": "maha-research",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_685fc365b60f050b990b581c",
+      "conceptId": "urn:maha:concept:autonomy:mental-sovereignty",
+      "declaredOwner": "mayone-maharajan",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_00b671b5c1a277be05330521",
+      "conceptId": "urn:maha:concept:autonomy:mental-sovereignty",
+      "declaredOwner": "mayone-maharajan",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_056e2379f2de63098564375d",
+      "conceptId": "urn:maha:concept:autonomy:machine-civilization",
+      "declaredOwner": "mayone-maharajan",
+      "state": "missing",
+      "note": "No definition candidate exists for urn:maha:concept:autonomy:machine-civilization on mayone-maharajan. The dependent page is blocked; the prerequisite must not be inferred."
+    },
+    {
+      "candidateId": "cand_e598e2209ba94e3a2da2fa8e",
+      "conceptId": "urn:maha:concept:autonomy:mental-sovereignty",
+      "declaredOwner": "mayone-maharajan",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_e6be33007df4ac68950246f0",
+      "conceptId": "urn:maha:concept:autonomy:governed-autonomy",
+      "declaredOwner": "mayone-maharajan",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_985cbc355b9050f85b926942",
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "declaredOwner": "maha-research",
+      "state": "missing",
+      "note": "No definition candidate exists for urn:maha:concept:evidence:calculation-receipts on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+    },
+    {
+      "candidateId": "cand_53c217f369e3ea364567364a",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "declaredOwner": "maha-research",
+      "state": "missing",
+      "note": "No definition candidate exists for urn:maha:concept:evidence:correction-and-retraction on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+    },
+    {
+      "candidateId": "cand_d3fd4dd629615b77d72dd7d9",
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "declaredOwner": "maha-research",
+      "state": "missing",
+      "note": "No definition candidate exists for urn:maha:concept:evidence:delivery-acknowledgement on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+    },
+    {
+      "candidateId": "cand_0e187bdd3d33afee1b23310d",
+      "conceptId": "urn:maha:concept:evidence:conflicting-literature",
+      "declaredOwner": "maha-research",
+      "state": "missing",
+      "note": "No definition candidate exists for urn:maha:concept:evidence:conflicting-literature on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+    },
+    {
+      "candidateId": "cand_7969a6ffc99ebd2ef65f19ab",
+      "conceptId": "urn:maha:concept:governance:auditability",
+      "declaredOwner": "maha-policy",
+      "state": "present-in-tranche-14",
+      "note": "Supplied by cand_c8c793b4bcb56617c0bc4d63 in this cohort."
+    },
+    {
+      "candidateId": "cand_8a9f4d3922c7cd8e224277a0",
+      "conceptId": "urn:maha:concept:governance:digital-public-infrastructure",
+      "declaredOwner": "maha-policy",
+      "state": "present-in-tranche-14",
+      "note": "Supplied by cand_9e437f23e54ca9b613f2dc25 in this cohort."
+    },
+    {
+      "candidateId": "cand_91b40071003f63fa5b16ec5d",
+      "conceptId": "urn:maha:concept:governance:competition-policy",
+      "declaredOwner": "maha-policy",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_9a1b90848b3729006fe83525",
+      "conceptId": "urn:maha:concept:governance:model-evaluation",
+      "declaredOwner": "maha-policy",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_9bf9198d75b5172dfdbd8663",
+      "conceptId": "urn:maha:concept:governance:digital-public-infrastructure",
+      "declaredOwner": "maha-policy",
+      "state": "present-in-tranche-14",
+      "note": "Supplied by cand_9e437f23e54ca9b613f2dc25 in this cohort."
+    },
+    {
+      "candidateId": "cand_9e437f23e54ca9b613f2dc25",
+      "conceptId": "urn:maha:concept:governance:digital-public-infrastructure",
+      "declaredOwner": "maha-policy",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_a1fe22281db9fdc7d01d1821",
+      "conceptId": "urn:maha:concept:governance:competition-policy",
+      "declaredOwner": "maha-policy",
+      "state": "present-in-tranche-14",
+      "note": "Supplied by cand_91b40071003f63fa5b16ec5d in this cohort."
+    },
+    {
+      "candidateId": "cand_a66bb77b86d0f2c13e26308a",
+      "conceptId": "urn:maha:concept:governance:competition-policy",
+      "declaredOwner": "maha-policy",
+      "state": "present-in-tranche-14",
+      "note": "Supplied by cand_91b40071003f63fa5b16ec5d in this cohort."
+    },
+    {
+      "candidateId": "cand_ad80c31d5ead66f94dac3f0d",
+      "conceptId": "urn:maha:concept:governance:model-evaluation",
+      "declaredOwner": "maha-policy",
+      "state": "satisfied-by-earlier-tranche",
+      "note": "A definition for this concept was reviewed in an earlier tranche."
+    },
+    {
+      "candidateId": "cand_c1d35a50bb5dfee780da69ef",
+      "conceptId": "urn:maha:concept:governance:assurance-cases",
+      "declaredOwner": "maha-policy",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_c8c793b4bcb56617c0bc4d63",
+      "conceptId": "urn:maha:concept:governance:auditability",
+      "declaredOwner": "maha-policy",
+      "state": "live",
+      "note": "A definition owns its concept; it depends on no earlier definition."
+    },
+    {
+      "candidateId": "cand_d13fdf9168ce63d4bf8426c7",
+      "conceptId": "urn:maha:concept:governance:assurance-cases",
+      "declaredOwner": "maha-policy",
+      "state": "present-in-tranche-14",
+      "note": "Supplied by cand_c1d35a50bb5dfee780da69ef in this cohort."
+    },
+    {
+      "candidateId": "cand_d97c9035c35eaa7a549b69a2",
+      "conceptId": "urn:maha:concept:governance:competition-policy",
+      "declaredOwner": "maha-policy",
+      "state": "present-in-tranche-14",
+      "note": "Supplied by cand_91b40071003f63fa5b16ec5d in this cohort."
+    },
+    {
+      "candidateId": "cand_f6ee0152497db41ee264ad72",
+      "conceptId": "urn:maha:concept:governance:auditability",
+      "declaredOwner": "maha-policy",
+      "state": "present-in-tranche-14",
+      "note": "Supplied by cand_c8c793b4bcb56617c0bc4d63 in this cohort."
+    },
+    {
+      "candidateId": "cand_fd914cf4b7855cfa614efb27",
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "declaredOwner": "maha-research",
+      "state": "missing",
+      "note": "No definition candidate exists for urn:maha:concept:evidence:calculation-receipts on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+    },
+    {
+      "candidateId": "cand_90c0ea2f6a833c6e940f0fcb",
+      "conceptId": "urn:maha:concept:evidence:conflicting-literature",
+      "declaredOwner": "maha-research",
+      "state": "missing",
+      "note": "No definition candidate exists for urn:maha:concept:evidence:conflicting-literature on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+    },
+    {
+      "candidateId": "cand_7afab943b366ec1ce0a420f6",
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "declaredOwner": "maha-research",
+      "state": "missing",
+      "note": "No definition candidate exists for urn:maha:concept:evidence:calculation-receipts on maha-research. The dependent page is blocked; the prerequisite must not be inferred."
+    }
+  ],
+  "provenanceDigest": "sha256:192337008a0f453e3e65228c64aee157b1863a0fe7364736062167e66544aa4e"
+}
