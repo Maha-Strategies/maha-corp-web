@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 
 /**
  * Immutable pre-inspection snapshot.
@@ -36,8 +37,8 @@ export interface AlignmentBatch7Intake {
   digest: string
 }
 
-const intakeUrl = new URL('../content/frontier-alignment/batch-7-intake.json', import.meta.url)
-export const ALIGNMENT_BATCH_7_INTAKE = JSON.parse(readFileSync(intakeUrl, 'utf8')) as AlignmentBatch7Intake
+const intakePath = resolve(process.cwd(), 'content/frontier-alignment/batch-7-intake.json')
+export const ALIGNMENT_BATCH_7_INTAKE = JSON.parse(readFileSync(intakePath, 'utf8')) as AlignmentBatch7Intake
 
 if (ALIGNMENT_BATCH_7_INTAKE.schemaVersion !== ALIGNMENT_BATCH_7_INTAKE_SCHEMA) throw new Error('Batch 7 intake schema drifted.')
 if (ALIGNMENT_BATCH_7_INTAKE.records.length !== 94 || ALIGNMENT_BATCH_7_INTAKE.recordCount !== 94) {

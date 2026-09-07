@@ -3,7 +3,8 @@ import test from 'node:test'
 
 import Stripe from 'stripe'
 
-import { isInvoicePaymentIntent, POST } from '../app/api/webhooks/stripe/route.ts'
+import { POST } from '../app/api/webhooks/stripe/route.ts'
+import { isInvoicePaymentIntent } from '../lib/stripe-webhook.ts'
 
 const secret = 'sk_test_123'
 const webhookSecret = 'whsec_test_123'

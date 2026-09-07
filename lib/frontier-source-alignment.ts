@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 
 import { FRONTIER_DOMAIN_GRAPH_RECORDS, FRONTIER_EXPLICIT_SOURCE_OVERRIDES } from './frontier-domain-graphs.ts'
 import { ALIGNMENT_BATCH_7_DECISIONS } from './frontier-alignment-batch-7.ts'
@@ -221,9 +222,9 @@ interface MetadataCacheEntry {
 
 import { ALIGNMENT_CLOSURE_BATCH_ID, ALIGNMENT_CLOSURE_DISPOSITIONS } from './alignment-closure-batch.ts'
 
-const cacheUrl = new URL('../content/frontier-audit/source-metadata-cache.json', import.meta.url)
+const cachePath = resolve(process.cwd(), 'content/frontier-audit/source-metadata-cache.json')
 const metadataCache: Record<string, MetadataCacheEntry> =
-  JSON.parse(readFileSync(cacheUrl, 'utf8')).entries ?? {}
+  JSON.parse(readFileSync(cachePath, 'utf8')).entries ?? {}
 
 /* --------------------------------------------------- inspected judgements -- */
 

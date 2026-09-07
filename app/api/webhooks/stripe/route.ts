@@ -4,6 +4,7 @@ import { bindTenantSubscription, creditKeyOnce, creditTenantTopupOnce, endTenant
 import { apiCreditWebhookConfig, createApiCreditLedgerEntryId, isTenantSubscriptionTier, tenantBillingConfig } from '../../../../lib/api-credit-billing.ts'
 import { createAgentInquiryLedger } from '../../../../lib/agent-inquiry-ledger.ts'
 import { stripeWebhookPayloadHash } from '../../../../lib/mps-credits.ts'
+import { isInvoicePaymentIntent } from '../../../../lib/stripe-webhook.ts'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -21,14 +22,6 @@ async function checkoutPriceId(stripe: Stripe, sessionId: string) {
   const lines = await stripe.checkout.sessions.listLineItems(sessionId, { limit: 2 })
   if (lines.data.length !== 1) return null
   return priceId(lines.data[0].price)
-}
-
-export async function isInvoicePaymentIntent(stripe: Pick<Stripe, 'invoicePayments'>, paymentIntentId: string) {
-  const payments = await stripe.invoicePayments.list({
-    payment: { type: 'payment_intent', payment_intent: paymentIntentId },
-    limit: 1,
-  })
-  return payments.data.length > 0
 }
 
 async function processPurchase(input: { stripe: Stripe; event: Stripe.Event; session: Stripe.Checkout.Session; payloadHash: string }) {
