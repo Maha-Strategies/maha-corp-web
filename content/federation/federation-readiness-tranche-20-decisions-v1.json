@@ -1,0 +1,3274 @@
+{
+  "schemaVersion": "maha-federation-readiness-tranche-20-decisions/1.0",
+  "frozenOn": "2026-09-07",
+  "appendOnly": true,
+  "counts": {
+    "candidates": 100,
+    "evidenceReady": 28,
+    "revise": 71,
+    "blocked": 1
+  },
+  "decisions": [
+    {
+      "selectionOrder": 1,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_76bb498009ae77f248d9b2b3",
+      "candidateDigest": "sha256:8b8a6811a75c58d4451ef81d516e415bce8968eb07177201ece447fab2d6e15e",
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "siteId": "maha-strategies",
+      "routeRole": "commercial-use",
+      "path": "/clearing/evidence-workflows/uncertainty-recording/commercial-use",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_9d040a84a30d4c24c219709b",
+        "priorDisposition": "non-route-graph-object",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 2,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_94d3ab89dc9b9a4049cfcc64",
+      "candidateDigest": "sha256:c27039c6b195a7765d68f82f6ca286fa384e38886c59abf512102fb0356c750c",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "siteId": "maha-strategies",
+      "routeRole": "commercial-use",
+      "path": "/clearing/evidence-workflows/correction-and-retraction/commercial-use",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_31188cec0703fe842e52f242",
+        "priorDisposition": "non-route-graph-object",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 3,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_9f9fb8e2bddf2c3d845f0735",
+      "candidateDigest": "sha256:d594bbd53d6a3e6fd024d03c1b4c25a7e52a5548956f4c971cc06b48c06eeb26",
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "siteId": "maha-strategies",
+      "routeRole": "commercial-use",
+      "path": "/clearing/evidence-workflows/calculation-receipts/commercial-use",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_fdada5f64f6c5c8b6f218663",
+        "priorDisposition": "non-route-graph-object",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 4,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_b0b9232e69dc37951ca96a2d",
+      "candidateDigest": "sha256:dc93bb51ebde463575ca9308a18e099be5f4ff4fd45e6a22eb6a368fbaf1be71",
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "siteId": "maha-strategies",
+      "routeRole": "commercial-use",
+      "path": "/clearing/evidence-workflows/evidence-dossiers/commercial-use",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_e9e65aab997734663ea01dc4",
+        "priorDisposition": "non-route-graph-object",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 5,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_ee7975f658326487f563d6c1",
+      "candidateDigest": "sha256:4d408ca80708bb25d8b63617ae288a802c4522778574e4d0bd176cc9447a8cf0",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "siteId": "maha-strategies",
+      "routeRole": "commercial-use",
+      "path": "/clearing/evidence-workflows/runtime-witness-receipts/commercial-use",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_3476e38beb1e953348f8d600",
+        "priorDisposition": "non-route-graph-object",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 6,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_1c9d1d2ca8af857b87a76813",
+      "candidateDigest": "sha256:b5a3e641b97dfbdc828a71ecc63b6dd1f92ef01d93a6b3ab6a21ebbc1f881c1e",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "siteId": "maha-strategies",
+      "routeRole": "worked-example",
+      "path": "/clearing/deterministic-computation/formal-verification/worked-example",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_25c680ff193b4f35f49e96ae",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the worked-example role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 7,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_51fe56a2bfa94898ecb30609",
+      "candidateDigest": "sha256:d84ee32748ea3542d1a4dc6ed022a924e827e5f5afbdb2b203857790695fd71d",
+      "conceptId": "urn:maha:concept:computation:error-budgets",
+      "siteId": "maha-strategies",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/error-budgets/machine-interface",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_aaf26e116535a7269e150c81",
+        "priorDisposition": "non-route-graph-object",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the machine-interface role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 8,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_5ace7cc1e1287874f505c134",
+      "candidateDigest": "sha256:9961a8f263bf03a591934652045db4cd6431bd895e88bf400b8b7f6cb28016c2",
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "siteId": "maha-strategies",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/dimensional-analysis/machine-interface",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_d90b7197535681a502dccba9",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the machine-interface role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 9,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_5da47ae131bd50c28a964e74",
+      "candidateDigest": "sha256:0a959dfc49ebaeb7b1c52439231651463be1b27b0d2cc3eed0815ba643f33217",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "siteId": "maha-strategies",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/formal-verification/machine-interface",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_25c680ff193b4f35f49e96ae",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the machine-interface role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 10,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_6708f2125c704c598a373d02",
+      "candidateDigest": "sha256:abc58289a8e8a58dfee0aff3e86b148d26c09c7d8c60d820ab5f4533556a22cb",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "siteId": "maha-strategies",
+      "routeRole": "worked-example",
+      "path": "/clearing/deterministic-computation/reference-frame-conversion/worked-example",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_c1e0a9d1956d137e337cae16",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the worked-example role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 11,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_6a8af21d891464188c29dbb8",
+      "candidateDigest": "sha256:ac402cb0326c4cdc35d52b63b2237a3a9aaf0131d1c263f3eda6653828932178",
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "siteId": "maha-strategies",
+      "routeRole": "uncertainty",
+      "path": "/clearing/deterministic-computation/deterministic-arithmetic/uncertainty",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_a563c1dcade1fa354b9069fa",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the uncertainty role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 12,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_6af09a682cc7e2277169d046",
+      "candidateDigest": "sha256:b76a6169426b217bd16cd122ad3a14bea43caae6e17d388bcaa8d103a390f780",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "siteId": "maha-strategies",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/reference-frame-conversion/machine-interface",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_c1e0a9d1956d137e337cae16",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the machine-interface role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 13,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_75a83140ef750c18da69801d",
+      "candidateDigest": "sha256:d87523757bc0e9db2e425e8b157c93ab9b7534f2fb68e13bacc56388c0ad1214",
+      "conceptId": "urn:maha:concept:computation:error-budgets",
+      "siteId": "maha-strategies",
+      "routeRole": "uncertainty",
+      "path": "/clearing/deterministic-computation/error-budgets/uncertainty",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_aaf26e116535a7269e150c81",
+        "priorDisposition": "non-route-graph-object",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the uncertainty role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 14,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_7cec457fac2ac6a5b7839c9a",
+      "candidateDigest": "sha256:358427652fd27f62b8ecd969b42929a8d824bddcbd98cb25a7eeaf641d0b8bd5",
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "siteId": "maha-strategies",
+      "routeRole": "worked-example",
+      "path": "/clearing/deterministic-computation/deterministic-arithmetic/worked-example",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_a563c1dcade1fa354b9069fa",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the worked-example role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 15,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_a24840e1b41dabdf0d8312b2",
+      "candidateDigest": "sha256:904ccf99be994e900c709ebb7f87bce000d67a80a9b55669eebeaf0ffb198002",
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "siteId": "maha-strategies",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/deterministic-arithmetic/machine-interface",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_a563c1dcade1fa354b9069fa",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the machine-interface role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 16,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_a635802d1b21eb2ac591b5f9",
+      "candidateDigest": "sha256:78cba7de2b99a2f4f5e3e7c262b20b8647e295011622525a2fb7ea19ba4236ff",
+      "conceptId": "urn:maha:concept:computation:error-budgets",
+      "siteId": "maha-strategies",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/error-budgets/reproducibility",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_aaf26e116535a7269e150c81",
+        "priorDisposition": "non-route-graph-object",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the reproducibility role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 17,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_ac614aab7eb9cc394996553b",
+      "candidateDigest": "sha256:cb250e7434f71e5f8f256f909cf4edfb6116345bb76d9eb9a8548d213d89ed99",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "siteId": "maha-strategies",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/reference-frame-conversion/reproducibility",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_c1e0a9d1956d137e337cae16",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the reproducibility role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 18,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_b47015c81e7f03093bca4044",
+      "candidateDigest": "sha256:28cfacbdce5fb1651ef511b1573fde4654731ed9b72dfb288230be9bf604c239",
+      "conceptId": "urn:maha:concept:computation:reproducibility-fixtures",
+      "siteId": "maha-strategies",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/reproducibility-fixtures/machine-interface",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_be8600b5f02aea927f745c11",
+        "priorDisposition": "non-route-graph-object",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "local-implementation",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-fixture-registry"
+        ],
+        "locators": [
+          "lib/evidence-workflow-examples.ts — EVIDENCE_WORKFLOW_PUBLIC_REGISTRY and EVIDENCE_WORKFLOW_REGISTRY_DIGEST"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact local-implementation source supports the bounded machine-interface role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 19,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_bf6f5983b7e8f95b5f2fb564",
+      "candidateDigest": "sha256:8610911d7b054f7e3c4232ef4a14714ff84305b79d53f2c9518e5696b424f95f",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "siteId": "maha-strategies",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/causal-inference/reproducibility",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_a870823d00f81a9a4854f848",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the reproducibility role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 20,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_cd30fe8a10e733f835d60834",
+      "candidateDigest": "sha256:759eff170512a4612760e14487c1554fcd7322a44db4aef475044829bd448873",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "siteId": "maha-strategies",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/formal-verification/reproducibility",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_25c680ff193b4f35f49e96ae",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the reproducibility role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 21,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_d9bccf96502cbf09b7d6e882",
+      "candidateDigest": "sha256:49661f369c261eb194492c0db764fd175167155e48dd5be25bceac9985b1b311",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "siteId": "maha-strategies",
+      "routeRole": "worked-example",
+      "path": "/clearing/deterministic-computation/causal-inference/worked-example",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_a870823d00f81a9a4854f848",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the worked-example role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 22,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_e6913e5b1d6155dcbe056b6a",
+      "candidateDigest": "sha256:693c038b0314c4e44e6eb36728b78efe4bd38419beb82b29c55f19cc6f4c8f82",
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "siteId": "maha-strategies",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/deterministic-arithmetic/reproducibility",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_a563c1dcade1fa354b9069fa",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the reproducibility role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 23,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_ec90d506fb510c60080a8494",
+      "candidateDigest": "sha256:f5f557ffc265ed0a9f267ec1f3977c2bbca05d11322b78e8ae180bc3e8e8aa96",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "siteId": "maha-strategies",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/causal-inference/machine-interface",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_a870823d00f81a9a4854f848",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the machine-interface role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 24,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_fc4da46d837d7b134b3d488f",
+      "candidateDigest": "sha256:80a618aa450d8228bed6528be069ead11ba648b0a4dd1853ac6084adcdbc4f4a",
+      "conceptId": "urn:maha:concept:computation:error-budgets",
+      "siteId": "maha-strategies",
+      "routeRole": "worked-example",
+      "path": "/clearing/deterministic-computation/error-budgets/worked-example",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_aaf26e116535a7269e150c81",
+        "priorDisposition": "non-route-graph-object",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the worked-example role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 25,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_fcea33351dc6b5ed02dac901",
+      "candidateDigest": "sha256:a773d6ca05c444480f5b117a6dbd43bb98c70c31811efcdcdb1ece603b0b7cc0",
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "siteId": "maha-strategies",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/dimensional-analysis/reproducibility",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_d90b7197535681a502dccba9",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the reproducibility role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 26,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_54bf0ff5e1dfaa08469e51ad",
+      "candidateDigest": "sha256:4f1763cf261a7bda29ee5708b43085a5cafbe1233c3b0780a962368243972721",
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "siteId": "maha-strategies",
+      "routeRole": "commercial-use",
+      "path": "/clearing/evidence-workflows/version-relationship/commercial-use",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_f770668f95f1fc5022b10680",
+        "priorDisposition": "non-route-graph-object",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 27,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_7c06c37e2399d72dd61ef2bc",
+      "candidateDigest": "sha256:bd0cbd95064d87a8da7725273766f9baf000b130e837e4ae29e91173002f568b",
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "siteId": "maha-strategies",
+      "routeRole": "verification",
+      "path": "/clearing/evidence-workflows/version-relationship/verification",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_f770668f95f1fc5022b10680",
+        "priorDisposition": "non-route-graph-object",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the verification role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 28,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_7c130ffaab158bfd0ad4df45",
+      "candidateDigest": "sha256:0d4a0568ff32ebad8004095fe6936c235a358ad72d40d8e599877473481eb52d",
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "siteId": "maha-strategies",
+      "routeRole": "commercial-use",
+      "path": "/clearing/evidence-workflows/privacy-boundary/commercial-use",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_eee65fe274335f8de817ecd7",
+        "priorDisposition": "non-route-graph-object",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 29,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_7ea97e6389a152a6e06ea440",
+      "candidateDigest": "sha256:df45d696a8632bc8b818a5047f0a21ae7e1bef653adc0ba454ca8ca353b18575",
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "siteId": "maha-strategies",
+      "routeRole": "commercial-use",
+      "path": "/clearing/evidence-workflows/internal-review/commercial-use",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_1677d8e5ffd0adccd70025c9",
+        "priorDisposition": "non-route-graph-object",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 30,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_152bd81a9c3042b26c93ee8f",
+      "candidateDigest": "sha256:96ba868917d3c947e765ff584936dec1e6c546c137a79b7dc3e596df4bb4cb56",
+      "conceptId": "urn:maha:concept:evidence:audit-export",
+      "siteId": "maha-strategies",
+      "routeRole": "commercial-use",
+      "path": "/clearing/evidence-workflows/audit-export/commercial-use",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_99546e87db73ddd7326a34ab",
+        "priorDisposition": "non-route-graph-object",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 31,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_5fda66506d4caf3a6f10c1d0",
+      "candidateDigest": "sha256:2d49bee97c494f70a9bf86eba03efdebcf7ce1008058e5c99b91ae8eb0dbd1e7",
+      "conceptId": "urn:maha:concept:evidence:canonical-release",
+      "siteId": "maha-strategies",
+      "routeRole": "commercial-use",
+      "path": "/clearing/evidence-workflows/canonical-release/commercial-use",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_941aed3932712f20f9dad49d",
+        "priorDisposition": "non-route-graph-object",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 32,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_b4bf5d63227ea2a4fed280b1",
+      "candidateDigest": "sha256:4106a268ab0e5a16c96ac4e8aefbb76091adb770db7625d5c50817f7b5ef27de",
+      "conceptId": "urn:maha:concept:evidence:audit-export",
+      "siteId": "maha-strategies",
+      "routeRole": "verification",
+      "path": "/clearing/evidence-workflows/audit-export/verification",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_99546e87db73ddd7326a34ab",
+        "priorDisposition": "non-route-graph-object",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the verification role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 33,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_03638eae89d44b2fcb9b6d10",
+      "candidateDigest": "sha256:2e27f8f00bf363fbc6672a210cdf170de67a6b325246fd12a9a399af7c4ed5d4",
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "siteId": "maha-strategies",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/interpolation/reproducibility",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_de8dd0a88e8704fe5855033e",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the reproducibility role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 34,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_0eff8a7f07532fcb14af59f2",
+      "candidateDigest": "sha256:e67f05e85f800a987709bd62482158abbe1fbd2d3a92db5d898c9f5179c94862",
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "siteId": "maha-strategies",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/root-finding/reproducibility",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_4e3ffcedfa7d51607e56c384",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "local-implementation",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-newton-fixture"
+        ],
+        "locators": [
+          "lib/deterministic-calculation.ts — newtonRoot and buildCalculation and assertCalculable"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact local-implementation source supports the bounded reproducibility role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 35,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_28654e2b2e0e77af894a2f1d",
+      "candidateDigest": "sha256:8b297bf4b592f8029b214fb4e00152eb735fb6b8fdbcb104a5cf9cd9ac3f7f8c",
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "siteId": "maha-strategies",
+      "routeRole": "worked-example",
+      "path": "/clearing/deterministic-computation/numerical-stability/worked-example",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_0d9b1a88cbf93d413a243d71",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the worked-example role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 36,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_457721881f95e53782806bb6",
+      "candidateDigest": "sha256:9245cba0068bd69158f78e273874bad6259c20a12b0b45783b0e3308824e50ab",
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "siteId": "maha-strategies",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/numerical-stability/reproducibility",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_0d9b1a88cbf93d413a243d71",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the reproducibility role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 37,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_558c29e71ada643b2d7f7270",
+      "candidateDigest": "sha256:feb4215a1a94bc00f97599b7c3306bc681f8efc4adcfc989893c453e61aac186",
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "siteId": "maha-strategies",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/interpolation/machine-interface",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_de8dd0a88e8704fe5855033e",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the machine-interface role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 38,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_7168a05d58662e49b6826c7e",
+      "candidateDigest": "sha256:38eb7efb535ddbc19baf7b58a533d8c3a92cd840ea5c8f79e631307f59be21e8",
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "siteId": "maha-strategies",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/cryptographic-commitments/reproducibility",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_908638ce5ea422d98d5273fb",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "local-implementation",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-canonical-commitment"
+        ],
+        "locators": [
+          "lib/evidence-dossier/digest.ts — canonicalJson and provenanceDigest"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact local-implementation source supports the bounded reproducibility role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 39,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_c9ea7b1ca4cbc881270bd35c",
+      "candidateDigest": "sha256:f38aff0b467d9990d3adb06ceb32190970388828fcd4a593ea900462b37d450c",
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "siteId": "maha-strategies",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/interval-bounds/machine-interface",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_e41cfa0c9ad358c43c72d1ee",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "local-implementation",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-interval-execution"
+        ],
+        "locators": [
+          "packages/wasm-kernel/src/execution.ts — executeKernelRequest and verifyExecutedCalculationReceipt"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact local-implementation source supports the bounded machine-interface role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 40,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_d06946e7b842a6b692144ebf",
+      "candidateDigest": "sha256:306b3dbf95f0847912bc73d8d4d00edc6a11df3da30efd6ec5c34df1f29bbcc0",
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "siteId": "maha-strategies",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/numerical-stability/machine-interface",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_0d9b1a88cbf93d413a243d71",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the machine-interface role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 41,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_dd951c2a4e39f3756f7ee6f9",
+      "candidateDigest": "sha256:55961e2d5940024ae2fe8f773e06aa2207921a381c7d48fae89aca635a6071a4",
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "siteId": "maha-strategies",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/cryptographic-commitments/machine-interface",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_908638ce5ea422d98d5273fb",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "local-implementation",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-canonical-commitment"
+        ],
+        "locators": [
+          "lib/evidence-dossier/digest.ts — canonicalJson and provenanceDigest"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact local-implementation source supports the bounded machine-interface role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 42,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_de495ad3d3b6cbad65c2537a",
+      "candidateDigest": "sha256:d1bcf18f66fce64c8abddc9720a094545471fec1a8983c11b61addb5a93c008a",
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "siteId": "maha-strategies",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/root-finding/machine-interface",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_4e3ffcedfa7d51607e56c384",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "local-implementation",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-newton-fixture"
+        ],
+        "locators": [
+          "lib/deterministic-calculation.ts — newtonRoot and buildCalculation and assertCalculable"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact local-implementation source supports the bounded machine-interface role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 43,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_f2d40776c02061fd82af4f0d",
+      "candidateDigest": "sha256:24b385cbc3b36b8c9ab85730ce28ec3dd4cadb5dfff765b5a987c814b27ddcdd",
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "siteId": "maha-strategies",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/interval-bounds/reproducibility",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_e41cfa0c9ad358c43c72d1ee",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "local-implementation",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-interval-execution"
+        ],
+        "locators": [
+          "packages/wasm-kernel/src/execution.ts — executeKernelRequest and verifyExecutedCalculationReceipt"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact local-implementation source supports the bounded reproducibility role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 44,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_02377c9cde28ef6f26525b2a",
+      "candidateDigest": "sha256:8f0d8b2c8548439fbf9d8018c744eade99995f94b99d511d64073c6c00e39f85",
+      "conceptId": "urn:maha:concept:evidence:locator-verification",
+      "siteId": "maha-strategies",
+      "routeRole": "commercial-use",
+      "path": "/clearing/evidence-workflows/locator-verification/commercial-use",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_6f89066f567226c0e442bb39",
+        "priorDisposition": "non-route-graph-object",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 45,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_123255040ef5ce3e1ab37a09",
+      "candidateDigest": "sha256:a3b42a8f2512e7bfbf56b1e5345af7f02ec9834e62ac08abde101d7c892daacb",
+      "conceptId": "urn:maha:concept:evidence:locator-verification",
+      "siteId": "maha-strategies",
+      "routeRole": "failure-modes",
+      "path": "/clearing/evidence-workflows/locator-verification/failure-modes",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_6f89066f567226c0e442bb39",
+        "priorDisposition": "non-route-graph-object",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the failure-modes role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 46,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_23cda9020b0530f363a22323",
+      "candidateDigest": "sha256:66da3e6e17e78ac149d7b05ab221f24c9a4b28ecda04a91372732d10c24edbe2",
+      "conceptId": "urn:maha:concept:evidence:source-recovery",
+      "siteId": "maha-strategies",
+      "routeRole": "failure-modes",
+      "path": "/clearing/evidence-workflows/source-recovery/failure-modes",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_a265c5d9ff36ca1b17bfb8a0",
+        "priorDisposition": "deferred-pending-implementation",
+        "localRevision": "t20-source-recovery-definition"
+      },
+      "sourceAssessment": {
+        "kind": "local-implementation",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-source-recovery"
+        ],
+        "locators": [
+          "lib/source-recovery.ts — recoveryRequests and validateObservation and compileRecoveryPackets"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact local-implementation source supports the bounded failure-modes role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 47,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_733aeb6e14e7d59c26e3f102",
+      "candidateDigest": "sha256:15fa07c892da1274cbba0ae2b63e8610b8007fc6a1e1e811fef8261ea0c1db76",
+      "conceptId": "urn:maha:concept:evidence:source-recovery",
+      "siteId": "maha-strategies",
+      "routeRole": "workflow",
+      "path": "/clearing/evidence-workflows/source-recovery/workflow",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_a265c5d9ff36ca1b17bfb8a0",
+        "priorDisposition": "deferred-pending-implementation",
+        "localRevision": "t20-source-recovery-definition"
+      },
+      "sourceAssessment": {
+        "kind": "local-implementation",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-source-recovery"
+        ],
+        "locators": [
+          "lib/source-recovery.ts — recoveryRequests and validateObservation and compileRecoveryPackets"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact local-implementation source supports the bounded workflow role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 48,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_7edddffaa6cd822175f7425b",
+      "candidateDigest": "sha256:8a925d9e31fcbc9151e373b30c20fe394ea4e295e8535542604f2637b7e88d8e",
+      "conceptId": "urn:maha:concept:evidence:source-recovery",
+      "siteId": "maha-strategies",
+      "routeRole": "verification",
+      "path": "/clearing/evidence-workflows/source-recovery/verification",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_a265c5d9ff36ca1b17bfb8a0",
+        "priorDisposition": "deferred-pending-implementation",
+        "localRevision": "t20-source-recovery-definition"
+      },
+      "sourceAssessment": {
+        "kind": "local-implementation",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-source-recovery"
+        ],
+        "locators": [
+          "lib/source-recovery.ts — recoveryRequests and validateObservation and compileRecoveryPackets"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact local-implementation source supports the bounded verification role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 49,
+      "selectionBasis": "tranche-19-revision-requirement",
+      "candidateId": "cand_9f777990308651d1a4980b2d",
+      "candidateDigest": "sha256:fcfe9527e3eaa02f688a3afa05a4a078eb9d8b7b3864517cb969a123e79ed076",
+      "conceptId": "urn:maha:concept:evidence:locator-verification",
+      "siteId": "maha-strategies",
+      "routeRole": "workflow",
+      "path": "/clearing/evidence-workflows/locator-verification/workflow",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_6f89066f567226c0e442bb39",
+        "priorDisposition": "non-route-graph-object",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the workflow role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 50,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_ec3b866d1dd8cb3b5b4608b0",
+      "candidateDigest": "sha256:a1e261f28d256bd8a6ba831cace1f221fd83f949ac2c846d204af4893cdf15d5",
+      "conceptId": "urn:maha:concept:evidence:source-recovery",
+      "siteId": "maha-strategies",
+      "routeRole": "commercial-use",
+      "path": "/clearing/evidence-workflows/source-recovery/commercial-use",
+      "priorState": "blocked",
+      "dependency": {
+        "graphObjectId": "cand_a265c5d9ff36ca1b17bfb8a0",
+        "priorDisposition": "deferred-pending-implementation",
+        "localRevision": "t20-source-recovery-definition"
+      },
+      "sourceAssessment": {
+        "kind": "local-implementation",
+        "roleSupported": false,
+        "sourceIds": [
+          "t20-source-recovery"
+        ],
+        "locators": [
+          "lib/source-recovery.ts — recoveryRequests and validateObservation and compileRecoveryPackets"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "does-not-support-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 51,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_ec46737935d410443b264871",
+      "candidateDigest": "sha256:ed53c3025d4ebf020fdb0b285076ad28d1de341aa594dd5f6a833aec14d8afd9",
+      "conceptId": "urn:maha:concept:evidence:passage-support",
+      "siteId": "maha-strategies",
+      "routeRole": "commercial-use",
+      "path": "/clearing/evidence-workflows/passage-support/commercial-use",
+      "priorState": "blocked",
+      "dependency": {
+        "graphObjectId": "cand_f8bc85696eedfca72dc83120",
+        "priorDisposition": "non-route-graph-object",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 52,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_ed894d73f5e99239787fe958",
+      "candidateDigest": "sha256:b27c9cdf992d2a9e3ef33ee59167448e8f91f2c220a2945414b90671df03206f",
+      "conceptId": "urn:maha:concept:evidence:locator-verification",
+      "siteId": "maha-strategies",
+      "routeRole": "verification",
+      "path": "/clearing/evidence-workflows/locator-verification/verification",
+      "priorState": "blocked",
+      "dependency": {
+        "graphObjectId": "cand_6f89066f567226c0e442bb39",
+        "priorDisposition": "non-route-graph-object",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the verification role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 53,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_5b501d7014282b7eec965ea1",
+      "candidateDigest": "sha256:485c0e3a9edd2b1f6a4eff6b5581a8874dbaf73a090f78ec701145a068b25cea",
+      "conceptId": "urn:maha:concept:computation:numerical-integration",
+      "siteId": "maha-strategies",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/numerical-integration/reproducibility",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_2cb4942c45f1804543a91a4a",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the reproducibility role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 54,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_5d2d5c52fc91b9ecce7bb007",
+      "candidateDigest": "sha256:2fb5d237256d2446f60524d4d9bb5420e64aff02eecc2f13a1fc1aaabb5a3584",
+      "conceptId": "urn:maha:concept:computation:optimization",
+      "siteId": "maha-strategies",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/optimization/machine-interface",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_9e9edd5648c41382537f568c",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the machine-interface role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 55,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_ba19526bba1d8c7647a0572f",
+      "candidateDigest": "sha256:0b7918e22861d31e2d82e4619e4ca0a3a73bcd12ae26a45cd95d03c9f92988ea",
+      "conceptId": "urn:maha:concept:computation:optimization",
+      "siteId": "maha-strategies",
+      "routeRole": "worked-example",
+      "path": "/clearing/deterministic-computation/optimization/worked-example",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_9e9edd5648c41382537f568c",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the worked-example role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 56,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_e3921066edee31291c7f4712",
+      "candidateDigest": "sha256:f6f45d07ed0cdca7f7fdf90eec13d8acb1b848d947e16d908237ffe84b176912",
+      "conceptId": "urn:maha:concept:computation:numerical-integration",
+      "siteId": "maha-strategies",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/numerical-integration/machine-interface",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_2cb4942c45f1804543a91a4a",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the machine-interface role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 57,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_eac662a166aa8f5f94e0bc20",
+      "candidateDigest": "sha256:21df829e33071222c063e60d040f4b18cda6921bf9a215f49da61014718ee1ef",
+      "conceptId": "urn:maha:concept:computation:optimization",
+      "siteId": "maha-strategies",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/optimization/reproducibility",
+      "priorState": "revise",
+      "dependency": {
+        "graphObjectId": "cand_9e9edd5648c41382537f568c",
+        "priorDisposition": "requires-external-authority",
+        "localRevision": null
+      },
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the reproducibility role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 58,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_0a1d37ad506fe9b0fdf91a0e",
+      "candidateDigest": "sha256:f63dfcb87d219aa04ead935600f8240173999aff21151783f1048cfe668f6660",
+      "conceptId": "urn:maha:concept:authority:credential-rotation",
+      "siteId": "maha-strategies",
+      "routeRole": "commercialization",
+      "path": "/clearing/agent-governance/credential-rotation/commercialization",
+      "priorState": "revise",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 59,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_22d9ff199c2b10c0dabf2206",
+      "candidateDigest": "sha256:29d4d810cc471016f96ce74ef004689d10fc4030b96e24183cff54b4601b7a37",
+      "conceptId": "urn:maha:concept:authority:tool-authorization",
+      "siteId": "maha-strategies",
+      "routeRole": "commercialization",
+      "path": "/clearing/agent-governance/tool-authorization/commercialization",
+      "priorState": "revise",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 60,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_249aed606c4e0b8c3a5da727",
+      "candidateDigest": "sha256:1e4f7e0fb3e83cde43b3bf6f10ce13451cc49751b19b9397bab767079783fa60",
+      "conceptId": "urn:maha:concept:authority:audit-receipts",
+      "siteId": "maha-strategies",
+      "routeRole": "commercialization",
+      "path": "/clearing/agent-governance/audit-receipts/commercialization",
+      "priorState": "revise",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 61,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_274bd4ffb8610003e5bc692e",
+      "candidateDigest": "sha256:21c5defbe221bbf58be5cb2bd5834c2259e4f3e3ce1c2f730f749544e738cff1",
+      "conceptId": "urn:maha:concept:authority:delivery-acknowledgement",
+      "siteId": "maha-strategies",
+      "routeRole": "commercialization",
+      "path": "/clearing/agent-governance/delivery-acknowledgement/commercialization",
+      "priorState": "revise",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 62,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_2eccb574f1373ddf0c8569c1",
+      "candidateDigest": "sha256:ed1b03c576ce95ad6eee6a11e9bb659c8732b1909e9a5fff37e0534dae2d52ab",
+      "conceptId": "urn:maha:concept:authority:agent-memory-governance",
+      "siteId": "maha-strategies",
+      "routeRole": "commercialization",
+      "path": "/clearing/agent-governance/agent-memory-governance/commercialization",
+      "priorState": "revise",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 63,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_35312a8e1744e223d0647e34",
+      "candidateDigest": "sha256:5e998258c627b18a6fb917fa33a5b3852117e5ba56f769d0351630a03c7a031d",
+      "conceptId": "urn:maha:concept:authority:identity-bound-agents",
+      "siteId": "maha-strategies",
+      "routeRole": "commercialization",
+      "path": "/clearing/agent-governance/identity-bound-agents/commercialization",
+      "priorState": "revise",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 64,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_41ee6b7080d2c8416e30adaf",
+      "candidateDigest": "sha256:2ef5eabcb92f4148c0b4a92e349cc9c3eb22424e9484cc5832bb1d2a1b9d71a3",
+      "conceptId": "urn:maha:concept:authority:context-budgeting",
+      "siteId": "maha-strategies",
+      "routeRole": "commercialization",
+      "path": "/clearing/agent-governance/context-budgeting/commercialization",
+      "priorState": "revise",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 65,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_4833b677961686ca0be790c2",
+      "candidateDigest": "sha256:73ab9d93a13727b0bebf7ad8f84875dfabddeba08f7c4b658b0eaf013481a3ad",
+      "conceptId": "urn:maha:concept:authority:durable-task-state",
+      "siteId": "maha-strategies",
+      "routeRole": "commercialization",
+      "path": "/clearing/agent-governance/durable-task-state/commercialization",
+      "priorState": "revise",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 66,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_757660327e81854886c9df90",
+      "candidateDigest": "sha256:28956fa6193160473156ef9bfe194980c73139ab2f2f019406eae61e40d15bef",
+      "conceptId": "urn:maha:concept:authority:metered-evidence-retrieval",
+      "siteId": "maha-strategies",
+      "routeRole": "commercialization",
+      "path": "/clearing/agent-governance/metered-evidence-retrieval/commercialization",
+      "priorState": "revise",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 67,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_7e491bc22da1ad832898171b",
+      "candidateDigest": "sha256:226d620ae77b66aa4a890890c84e62d33d6de42251fc4617a56cf24735ce8066",
+      "conceptId": "urn:maha:concept:authority:capability-scoped-tokens",
+      "siteId": "maha-strategies",
+      "routeRole": "commercialization",
+      "path": "/clearing/agent-governance/capability-scoped-tokens/commercialization",
+      "priorState": "revise",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 68,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_8ebaeb0d3ab9edaecaa39fcf",
+      "candidateDigest": "sha256:20932eb5a09f5791e77615527b34ab7c4e3f6e2d30da364202e57eb0a6b2124b",
+      "conceptId": "urn:maha:concept:authority:machine-commerce-entitlement",
+      "siteId": "maha-strategies",
+      "routeRole": "commercialization",
+      "path": "/clearing/agent-governance/machine-commerce-entitlement/commercialization",
+      "priorState": "revise",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 69,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_947cfe53f46c16bf80fb9cae",
+      "candidateDigest": "sha256:d0572883d6abcc0e9b039fe7429f30f936a90efa8b2bdb859caad81aa65f2dec",
+      "conceptId": "urn:maha:concept:authority:tenant-isolation",
+      "siteId": "maha-strategies",
+      "routeRole": "commercialization",
+      "path": "/clearing/agent-governance/tenant-isolation/commercialization",
+      "priorState": "revise",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 70,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_a322413e35ee23167a146ced",
+      "candidateDigest": "sha256:2d792bd8a8d168e227ab8e9925c3b482c136b11638799cf41053ad363b5e0c15",
+      "conceptId": "urn:maha:concept:authority:enterprise-mcp-gateway",
+      "siteId": "maha-strategies",
+      "routeRole": "commercialization",
+      "path": "/clearing/agent-governance/enterprise-mcp-gateway/commercialization",
+      "priorState": "revise",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 71,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_a865e0153eccaac18a2a8706",
+      "candidateDigest": "sha256:42c73e94583f7143d67e0d0fae9dc49aa1f4335dabdf278f77a4185356a10338",
+      "conceptId": "urn:maha:concept:authority:human-approval-gates",
+      "siteId": "maha-strategies",
+      "routeRole": "commercialization",
+      "path": "/clearing/agent-governance/human-approval-gates/commercialization",
+      "priorState": "revise",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 72,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_b6fd957cd4fc6f280ae87a6e",
+      "candidateDigest": "sha256:1c16f0ab59487f2942aef37f144a404419856c5f79a2de8adbfcb6b7b47798d1",
+      "conceptId": "urn:maha:concept:authority:provenance-witnessing",
+      "siteId": "maha-strategies",
+      "routeRole": "commercialization",
+      "path": "/clearing/agent-governance/provenance-witnessing/commercialization",
+      "priorState": "revise",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 73,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_c05ceb49a98afde6f4382268",
+      "candidateDigest": "sha256:3595bc0f671dc1f7e6e25d7f6f5c73b0914ccc3c0035e5d9dee67b4f4e988e12",
+      "conceptId": "urn:maha:concept:authority:endpoint-substitution-defense",
+      "siteId": "maha-strategies",
+      "routeRole": "commercialization",
+      "path": "/clearing/agent-governance/endpoint-substitution-defense/commercialization",
+      "priorState": "revise",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 74,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_e11d9acb52d27d02e64e171b",
+      "candidateDigest": "sha256:9011766e4cd40029edc36694ecc246cfead4102068da3bae1b2cb86ecf075746",
+      "conceptId": "urn:maha:concept:authority:quota-enforcement",
+      "siteId": "maha-strategies",
+      "routeRole": "commercialization",
+      "path": "/clearing/agent-governance/quota-enforcement/commercialization",
+      "priorState": "revise",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 75,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_e304db8ee27945a762a1bfb1",
+      "candidateDigest": "sha256:1fccba2e03d31903f41336677b313ac1e1d45490624861be2990cbb85c6b33ec",
+      "conceptId": "urn:maha:concept:authority:cross-agent-delegation",
+      "siteId": "maha-strategies",
+      "routeRole": "commercialization",
+      "path": "/clearing/agent-governance/cross-agent-delegation/commercialization",
+      "priorState": "revise",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 76,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_f6409ea20cfc51496e3a61d8",
+      "candidateDigest": "sha256:76e3759c30f0bf7caebf0125d0040014ef00ab0446e0b7ebe4468d54c7f88cd5",
+      "conceptId": "urn:maha:concept:authority:failure-recovery",
+      "siteId": "maha-strategies",
+      "routeRole": "commercialization",
+      "path": "/clearing/agent-governance/failure-recovery/commercialization",
+      "priorState": "revise",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 77,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_ff7d7f42d8f2f09fd7401efd",
+      "candidateDigest": "sha256:23433729a51650edffdeb52fc8b56b3dc2f6deed34669f238ca2934ac5253312",
+      "conceptId": "urn:maha:concept:authority:replay-safe-execution",
+      "siteId": "maha-strategies",
+      "routeRole": "commercialization",
+      "path": "/clearing/agent-governance/replay-safe-execution/commercialization",
+      "priorState": "revise",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "revise",
+      "finding": "The repository currently declares a free preflight, a $49 document preflight, a disabled proposed $250 bounded dossier, and a separate $5,000 dossier-package list price. Commercial-use claims remain revise until one versioned offer contract reconciles scope, availability, price, turnaround, privacy, and refund terms.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 78,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_037f0aa1b557fdab2ae6d483",
+      "candidateDigest": "sha256:d3daa13828358b6301be66f40e4888ab184c2776fb58d6fa95a2727f646e62a6",
+      "conceptId": "urn:maha:concept:governance:intellectual-property",
+      "siteId": "maha-policy",
+      "routeRole": "mechanisms",
+      "path": "/policy/intellectual-property/mechanisms",
+      "priorState": "blocked",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "official-authority",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-wipo-ai-ip"
+        ],
+        "locators": [
+          "https://www.wipo.int/meetings/en/doc_details.jsp?doc_id=499504 — issue taxonomy and policy questions"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact official-authority source supports the bounded mechanisms role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 79,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_03bee4fd49beec1bd75e76ba",
+      "candidateDigest": "sha256:6dab60322113a50907d8abfe99e27a96d37326c0e419b6b0e1fd6b2eb4562545",
+      "conceptId": "urn:maha:concept:governance:traceability",
+      "siteId": "maha-policy",
+      "routeRole": "uncertainty",
+      "path": "/policy/traceability/uncertainty",
+      "priorState": "blocked",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "official-authority",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-eu-ai-traceability"
+        ],
+        "locators": [
+          "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-71 — Recital 71 and linked Articles 11, 12, 19, 72"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact official-authority source supports the bounded uncertainty role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 80,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_1ac85616a2364c897be4f103",
+      "candidateDigest": "sha256:e24f1d31420e10f0bfce5323b7d4f324d41663943e6f763a325ab2a9407d040f",
+      "conceptId": "urn:maha:concept:governance:interoperability",
+      "siteId": "maha-policy",
+      "routeRole": "mechanisms",
+      "path": "/policy/interoperability/mechanisms",
+      "priorState": "blocked",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "official-authority",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-eif"
+        ],
+        "locators": [
+          "https://interoperable-europe.ec.europa.eu/collection/iopeu-monitoring/european-interoperability-framework-detail — introduction, layers, conceptual model, 47 recommendations"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact official-authority source supports the bounded mechanisms role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 81,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_29e7ed35275140ded5e90e1e",
+      "candidateDigest": "sha256:0bd9f2038971c11c7abd6fbe49823494fdf496b0eed5b0434130d5843e4506e3",
+      "conceptId": "urn:maha:concept:governance:agent-identity",
+      "siteId": "maha-policy",
+      "routeRole": "current-law",
+      "path": "/policy/agent-identity/current-law",
+      "priorState": "revise",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "none",
+        "roleSupported": false,
+        "sourceIds": [],
+        "locators": []
+      },
+      "axes": {
+        "sourceIdentity": "missing",
+        "locator": "missing",
+        "rights": "missing",
+        "scope": "does-not-support-route-role",
+        "boundary": "missing"
+      },
+      "decision": "blocked",
+      "finding": "No authoritative source was inspected for the current-law policy claim; current-law and policy assertions cannot be inferred from adjacent topics.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 82,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_2afea75555d5a5fa86fd03fa",
+      "candidateDigest": "sha256:f7b062b9a334aaf189b710048940e558c7058fafdb26c385cab18b04b55da25a",
+      "conceptId": "urn:maha:concept:governance:digital-public-infrastructure",
+      "siteId": "maha-policy",
+      "routeRole": "sources",
+      "path": "/policy/digital-public-infrastructure/sources",
+      "priorState": "blocked",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "official-authority",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-oecd-dpi"
+        ],
+        "locators": [
+          "https://www.oecd.org/en/publications/digital-public-infrastructure-for-digital-governments_ff525dc8-en.html — abstract and governance findings"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact official-authority source supports the bounded sources role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 83,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_352aa27ed5cb2bbd9ad2a5f0",
+      "candidateDigest": "sha256:6bbfcb45276a391c9b0e118d239fdd5eb7e5e07d4f20e81f5394df8022209220",
+      "conceptId": "urn:maha:concept:governance:digital-public-infrastructure",
+      "siteId": "maha-policy",
+      "routeRole": "tradeoffs",
+      "path": "/policy/digital-public-infrastructure/tradeoffs",
+      "priorState": "blocked",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "official-authority",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-oecd-dpi"
+        ],
+        "locators": [
+          "https://www.oecd.org/en/publications/digital-public-infrastructure-for-digital-governments_ff525dc8-en.html — abstract and governance findings"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact official-authority source supports the bounded tradeoffs role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 84,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_370042811c57d3508c6c0526",
+      "candidateDigest": "sha256:502d51d81ee5bc02e6ad5690c5e5e254ad0b7575e2efe9dd50bb2205b4133406",
+      "conceptId": "urn:maha:concept:governance:competition-policy",
+      "siteId": "maha-policy",
+      "routeRole": "tradeoffs",
+      "path": "/policy/competition-policy/tradeoffs",
+      "priorState": "blocked",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "official-authority",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-doj-antitrust"
+        ],
+        "locators": [
+          "https://www.justice.gov/atr/antitrust-laws-and-you — Sherman, Clayton, and FTC Act overview; https://www.justice.gov/atr/merger-guidelines/overview — 2023 Merger Guidelines overview"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact official-authority source supports the bounded tradeoffs role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 85,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_388aced5349b90ee7d86db0b",
+      "candidateDigest": "sha256:9ed4d4690ab5a5134d3e322e7c16dd3418e75140df7d5fea30ce369081299880",
+      "conceptId": "urn:maha:concept:governance:assurance-cases",
+      "siteId": "maha-policy",
+      "routeRole": "current-law",
+      "path": "/policy/assurance-cases/current-law",
+      "priorState": "blocked",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "official-authority",
+        "roleSupported": false,
+        "sourceIds": [
+          "t20-nist-assurance-case"
+        ],
+        "locators": [
+          "https://csrc.nist.gov/glossary/term/assurance_case — definitions and identified source documents"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "does-not-support-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the current-law role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 86,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_3ac31a7868e71b10cdf5e48b",
+      "candidateDigest": "sha256:3c81dd9c2778e51117c097d2cf41d73f912a7b6b99d80d3a51324d6541c18bd5",
+      "conceptId": "urn:maha:concept:governance:competition-policy",
+      "siteId": "maha-policy",
+      "routeRole": "machine-rule",
+      "path": "/policy/competition-policy/machine-rule",
+      "priorState": "blocked",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "official-authority",
+        "roleSupported": false,
+        "sourceIds": [
+          "t20-doj-antitrust"
+        ],
+        "locators": [
+          "https://www.justice.gov/atr/antitrust-laws-and-you — Sherman, Clayton, and FTC Act overview; https://www.justice.gov/atr/merger-guidelines/overview — 2023 Merger Guidelines overview"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "does-not-support-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the machine-rule role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 87,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_441e5732a2f8748e1ba5bc29",
+      "candidateDigest": "sha256:a8723201f09c84e78bc2eb2c5a2e827cd027fecd83f8b74be6cffd9ac7c360e3",
+      "conceptId": "urn:maha:concept:governance:traceability",
+      "siteId": "maha-policy",
+      "routeRole": "definition",
+      "path": "/policy/traceability/definition",
+      "priorState": "blocked",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "official-authority",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-eu-ai-traceability"
+        ],
+        "locators": [
+          "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-71 — Recital 71 and linked Articles 11, 12, 19, 72"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact official-authority source supports the bounded definition role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 88,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_4ac7d45a36c4843fe42ee011",
+      "candidateDigest": "sha256:8bf70e5c8c0893a3c212ceb2ab4bef59c20f8ee61214602142f329cf5ea406db",
+      "conceptId": "urn:maha:concept:governance:intellectual-property",
+      "siteId": "maha-policy",
+      "routeRole": "uncertainty",
+      "path": "/policy/intellectual-property/uncertainty",
+      "priorState": "blocked",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "official-authority",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-wipo-ai-ip"
+        ],
+        "locators": [
+          "https://www.wipo.int/meetings/en/doc_details.jsp?doc_id=499504 — issue taxonomy and policy questions"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact official-authority source supports the bounded uncertainty role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 89,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_50f3d03e58c3f4dace8a28ac",
+      "candidateDigest": "sha256:267338feca65f1fc4caa61be7101866d1a21c08a7c3d3a5275482b8b2c9863b1",
+      "conceptId": "urn:maha:concept:governance:interoperability",
+      "siteId": "maha-policy",
+      "routeRole": "evidence",
+      "path": "/policy/interoperability/evidence",
+      "priorState": "blocked",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "official-authority",
+        "roleSupported": false,
+        "sourceIds": [
+          "t20-eif"
+        ],
+        "locators": [
+          "https://interoperable-europe.ec.europa.eu/collection/iopeu-monitoring/european-interoperability-framework-detail — introduction, layers, conceptual model, 47 recommendations"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "does-not-support-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the evidence role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 90,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_53c3d7027c302568986b68f8",
+      "candidateDigest": "sha256:6e63f3397382e309f01f47eaf2cf85ebe7c84212f15681f54ed42bbf731e92c1",
+      "conceptId": "urn:maha:concept:governance:competition-policy",
+      "siteId": "maha-policy",
+      "routeRole": "current-law",
+      "path": "/policy/competition-policy/current-law",
+      "priorState": "blocked",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "official-authority",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-doj-antitrust"
+        ],
+        "locators": [
+          "https://www.justice.gov/atr/antitrust-laws-and-you — Sherman, Clayton, and FTC Act overview; https://www.justice.gov/atr/merger-guidelines/overview — 2023 Merger Guidelines overview"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact official-authority source supports the bounded current-law role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 91,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_593256e5f444659771f35322",
+      "candidateDigest": "sha256:be1f46f0b202847e54a8472ad71f1ab30a1b3dfb2885873aad3ae5f84725133b",
+      "conceptId": "urn:maha:concept:governance:interoperability",
+      "siteId": "maha-policy",
+      "routeRole": "implementation",
+      "path": "/policy/interoperability/implementation",
+      "priorState": "blocked",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "official-authority",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-eif"
+        ],
+        "locators": [
+          "https://interoperable-europe.ec.europa.eu/collection/iopeu-monitoring/european-interoperability-framework-detail — introduction, layers, conceptual model, 47 recommendations"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact official-authority source supports the bounded implementation role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 92,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_5aa01e3083516b86ace455f2",
+      "candidateDigest": "sha256:4c4e1b7e64d32c1336dd5df9290bd749fb10e4299e42eaf88281b9e6c9b846ea",
+      "conceptId": "urn:maha:concept:governance:public-sector-procurement",
+      "siteId": "maha-policy",
+      "routeRole": "current-law",
+      "path": "/policy/public-sector-procurement/current-law",
+      "priorState": "revise",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "official-authority",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-far-it-procurement"
+        ],
+        "locators": [
+          "https://www.acquisition.gov/far/39.101 — IT acquisition policy; https://www.acquisition.gov/far/part-10 — market research"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact official-authority source supports the bounded current-law role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 93,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_6010d2716a2fcb9da4be22ef",
+      "candidateDigest": "sha256:66854023c116b9cbdb798d6e655d53f8e6d4a8d7f78e168f2a42fc9d0d6cd7b3",
+      "conceptId": "urn:maha:concept:governance:interoperability",
+      "siteId": "maha-policy",
+      "routeRole": "definition",
+      "path": "/policy/interoperability/definition",
+      "priorState": "blocked",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "official-authority",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-eif"
+        ],
+        "locators": [
+          "https://interoperable-europe.ec.europa.eu/collection/iopeu-monitoring/european-interoperability-framework-detail — introduction, layers, conceptual model, 47 recommendations"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact official-authority source supports the bounded definition role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 94,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_606c52977deec7b46d14b10a",
+      "candidateDigest": "sha256:84871ad76d057edf083112ecaeee50d3d47a826977eed9877497ed05955c20b4",
+      "conceptId": "urn:maha:concept:governance:competition-policy",
+      "siteId": "maha-policy",
+      "routeRole": "evidence",
+      "path": "/policy/competition-policy/evidence",
+      "priorState": "blocked",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "official-authority",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-doj-antitrust"
+        ],
+        "locators": [
+          "https://www.justice.gov/atr/antitrust-laws-and-you — Sherman, Clayton, and FTC Act overview; https://www.justice.gov/atr/merger-guidelines/overview — 2023 Merger Guidelines overview"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact official-authority source supports the bounded evidence role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 95,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_6127ae52abc48ec8dc905aea",
+      "candidateDigest": "sha256:f53643574c236e2575baeb78a9167d3ad16bb05a3eb14a499cf7fc4ea42e3663",
+      "conceptId": "urn:maha:concept:governance:traceability",
+      "siteId": "maha-policy",
+      "routeRole": "sources",
+      "path": "/policy/traceability/sources",
+      "priorState": "blocked",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "official-authority",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-eu-ai-traceability"
+        ],
+        "locators": [
+          "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-71 — Recital 71 and linked Articles 11, 12, 19, 72"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact official-authority source supports the bounded sources role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 96,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_62d0d9414209a2a97dd0612d",
+      "candidateDigest": "sha256:6eb0714280ebab378bcbc6d6f66d258e9e0171ce6ce67e03851f2a1f4eceff4a",
+      "conceptId": "urn:maha:concept:governance:incident-reporting",
+      "siteId": "maha-policy",
+      "routeRole": "mechanisms",
+      "path": "/policy/incident-reporting/mechanisms",
+      "priorState": "blocked",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "official-authority",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-nist-incident"
+        ],
+        "locators": [
+          "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf — MAP 5.1; https://nvlpubs.nist.gov/nistpubs/SpecialPublications/800-171r3/NIST.SP.800-171r3.html — 03.06.01–03.06.03"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact official-authority source supports the bounded mechanisms role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 97,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_6856f3d6fe72d3163ca5bfa3",
+      "candidateDigest": "sha256:a0d651db4b2c33cf908ee4644e3cdcbaca65e472a2e9ddd438cbfb57fbc77171",
+      "conceptId": "urn:maha:concept:governance:assurance-cases",
+      "siteId": "maha-policy",
+      "routeRole": "uncertainty",
+      "path": "/policy/assurance-cases/uncertainty",
+      "priorState": "blocked",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "official-authority",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-nist-assurance-case"
+        ],
+        "locators": [
+          "https://csrc.nist.gov/glossary/term/assurance_case — definitions and identified source documents"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact official-authority source supports the bounded uncertainty role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 98,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_6ade26ced9483393e32aa945",
+      "candidateDigest": "sha256:fd6391cd6eb9e1ed6f3a48bbbfdc0d1dece14023ec1592ee381036e75cc94ef9",
+      "conceptId": "urn:maha:concept:governance:incident-reporting",
+      "siteId": "maha-policy",
+      "routeRole": "uncertainty",
+      "path": "/policy/incident-reporting/uncertainty",
+      "priorState": "blocked",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "official-authority",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-nist-incident"
+        ],
+        "locators": [
+          "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf — MAP 5.1; https://nvlpubs.nist.gov/nistpubs/SpecialPublications/800-171r3/NIST.SP.800-171r3.html — 03.06.01–03.06.03"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact official-authority source supports the bounded uncertainty role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 99,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_70f30e4345038fe9ec94bbb0",
+      "candidateDigest": "sha256:a792785ebd170b51386b9a7bcc7b1df175420d76899e43136aff0d6fb65bce78",
+      "conceptId": "urn:maha:concept:governance:assurance-cases",
+      "siteId": "maha-policy",
+      "routeRole": "sources",
+      "path": "/policy/assurance-cases/sources",
+      "priorState": "blocked",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "official-authority",
+        "roleSupported": true,
+        "sourceIds": [
+          "t20-nist-assurance-case"
+        ],
+        "locators": [
+          "https://csrc.nist.gov/glossary/term/assurance_case — definitions and identified source documents"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "supports-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "evidence-ready",
+      "finding": "The exact official-authority source supports the bounded sources role and its non-claims are carried forward.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    },
+    {
+      "selectionOrder": 100,
+      "selectionBasis": "next-unreviewed-unresolved-priority",
+      "candidateId": "cand_71c7f98e8da928b16af8a1c8",
+      "candidateDigest": "sha256:401c7c96b6338502634197e29817a204e0eec512fab1e02be6b5262942d3be51",
+      "conceptId": "urn:maha:concept:governance:digital-public-infrastructure",
+      "siteId": "maha-policy",
+      "routeRole": "implementation",
+      "path": "/policy/digital-public-infrastructure/implementation",
+      "priorState": "blocked",
+      "dependency": null,
+      "sourceAssessment": {
+        "kind": "official-authority",
+        "roleSupported": false,
+        "sourceIds": [
+          "t20-oecd-dpi"
+        ],
+        "locators": [
+          "https://www.oecd.org/en/publications/digital-public-infrastructure-for-digital-governments_ff525dc8-en.html — abstract and governance findings"
+        ]
+      },
+      "axes": {
+        "sourceIdentity": "inspected",
+        "locator": "exact",
+        "rights": "recorded",
+        "scope": "does-not-support-route-role",
+        "boundary": "recorded"
+      },
+      "decision": "revise",
+      "finding": "No inspected source or bounded fixture establishes the implementation role at the required scope.",
+      "noInheritance": "Readiness is role-specific. A definition, sibling route, commercial plan, or adjacent implementation cannot be inherited as evidence.",
+      "activeBindingChanged": false
+    }
+  ],
+  "provenanceDigest": "sha256:72ec2948815e7d4ccd46a520661db414c66a05b5b06d22b47a096c3e5a1055e2"
+}

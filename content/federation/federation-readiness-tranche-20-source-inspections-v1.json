@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "maha-federation-readiness-tranche-20-sources/1.0",
+  "inspectedOn": "2026-09-07",
+  "method": "Local symbols were inspected in repository context. Official public authorities were inspected at the exact named sections. Metadata, locators, scope, and boundaries are retained; passages are not.",
+  "counts": {
+    "inspections": 13,
+    "localImplementation": 5,
+    "officialAuthority": 8
+  },
+  "inspections": [
+    {
+      "sourceId": "t20-interval-execution",
+      "identity": "packages/wasm-kernel/src/execution.ts",
+      "locator": "packages/wasm-kernel/src/execution.ts — executeKernelRequest and verifyExecutedCalculationReceipt",
+      "roles": [
+        "machine-interface",
+        "reproducibility"
+      ],
+      "scope": "Executes interval addition over canonical signed-i64 inputs with one explicit unit and independently recomputes the receipt output.",
+      "boundary": "This proves only bounded interval addition; it does not establish general interval arithmetic or measurement validity.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t20-newton-fixture",
+      "identity": "lib/deterministic-calculation.ts",
+      "locator": "lib/deterministic-calculation.ts — newtonRoot and buildCalculation and assertCalculable",
+      "roles": [
+        "machine-interface",
+        "reproducibility"
+      ],
+      "scope": "Executes a fixed-precision Newton iteration and binds the exact method locator, inputs, assumptions, steps, result, and uncertainty treatment into a receipt.",
+      "boundary": "This proves a bounded Newton-method fixture, not convergence for arbitrary functions or a general root-finding service.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t20-canonical-commitment",
+      "identity": "lib/evidence-dossier/digest.ts",
+      "locator": "lib/evidence-dossier/digest.ts — canonicalJson and provenanceDigest",
+      "roles": [
+        "machine-interface",
+        "reproducibility"
+      ],
+      "scope": "Canonicalizes supported JSON values and emits a SHA-256 commitment that can be recomputed from the same non-empty payload.",
+      "boundary": "A matching digest establishes byte-equivalent canonical content, not truth, authorship, timestamp, or legal signature.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t20-fixture-registry",
+      "identity": "lib/evidence-workflow-examples.ts",
+      "locator": "lib/evidence-workflow-examples.ts — EVIDENCE_WORKFLOW_PUBLIC_REGISTRY and EVIDENCE_WORKFLOW_REGISTRY_DIGEST",
+      "roles": [
+        "machine-interface"
+      ],
+      "scope": "Publishes a typed synthetic fixture registry with expected outputs, refusals, checks, and one digest over the registry.",
+      "boundary": "Synthetic conformance is not independent reproduction and the registry is prepared rather than deployed.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "conceptId": "urn:maha:concept:computation:reproducibility-fixtures",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t20-source-recovery",
+      "identity": "lib/source-recovery.ts",
+      "locator": "lib/source-recovery.ts — recoveryRequests and validateObservation and compileRecoveryPackets",
+      "roles": [
+        "workflow",
+        "verification",
+        "failure-modes"
+      ],
+      "scope": "Builds bounded recovery requests, validates observations, and compiles packets while preserving identity, version, access, and inspection states.",
+      "boundary": "Recovery locates candidates only; it cannot claim content inspection, canonical substitution, or version equivalence without evidence.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "conceptId": "urn:maha:concept:evidence:source-recovery",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t20-wipo-ai-ip",
+      "identity": "WIPO Revised Issues Paper on IP Policy and AI",
+      "locator": "https://www.wipo.int/meetings/en/doc_details.jsp?doc_id=499504 — issue taxonomy and policy questions",
+      "roles": [
+        "mechanisms",
+        "uncertainty"
+      ],
+      "scope": "Identifies IP mechanisms and unresolved policy questions raised by AI.",
+      "boundary": "An issues paper is not law, jurisdiction-specific advice, or a final WIPO position.",
+      "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+      "kind": "official-authority",
+      "conceptId": "urn:maha:concept:governance:intellectual-property",
+      "inspectionDepth": "section-level-public-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t20-eu-ai-traceability",
+      "identity": "European Commission AI Act service material",
+      "locator": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-71 — Recital 71 and linked Articles 11, 12, 19, 72",
+      "roles": [
+        "definition",
+        "sources",
+        "uncertainty"
+      ],
+      "scope": "Connects traceability for high-risk AI to technical documentation, lifecycle records, logs, and post-market monitoring.",
+      "boundary": "This is bounded to the EU AI Act and high-risk-system context; it is not a universal definition or legal advice.",
+      "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+      "kind": "official-authority",
+      "conceptId": "urn:maha:concept:governance:traceability",
+      "inspectionDepth": "section-level-public-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t20-eif",
+      "identity": "European Commission European Interoperability Framework",
+      "locator": "https://interoperable-europe.ec.europa.eu/collection/iopeu-monitoring/european-interoperability-framework-detail — introduction, layers, conceptual model, 47 recommendations",
+      "roles": [
+        "definition",
+        "mechanisms",
+        "implementation"
+      ],
+      "scope": "Defines organisational interoperability and provides layered mechanisms and implementation recommendations for European public services.",
+      "boundary": "The framework is public-sector guidance; it does not prove outcomes or universal private-sector applicability.",
+      "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+      "kind": "official-authority",
+      "conceptId": "urn:maha:concept:governance:interoperability",
+      "inspectionDepth": "section-level-public-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t20-oecd-dpi",
+      "identity": "OECD Digital Public Infrastructure for Digital Governments",
+      "locator": "https://www.oecd.org/en/publications/digital-public-infrastructure-for-digital-governments_ff525dc8-en.html — abstract and governance findings",
+      "roles": [
+        "sources",
+        "tradeoffs"
+      ],
+      "scope": "Defines shared secure interoperable systems and identifies funding, collaboration, privacy, security, resilience, and cross-border governance tradeoffs.",
+      "boundary": "The paper surveys policy design; it does not prescribe one implementation or establish local outcomes.",
+      "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+      "kind": "official-authority",
+      "conceptId": "urn:maha:concept:governance:digital-public-infrastructure",
+      "inspectionDepth": "section-level-public-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t20-doj-antitrust",
+      "identity": "US Department of Justice Antitrust Division",
+      "locator": "https://www.justice.gov/atr/antitrust-laws-and-you — Sherman, Clayton, and FTC Act overview; https://www.justice.gov/atr/merger-guidelines/overview — 2023 Merger Guidelines overview",
+      "roles": [
+        "current-law",
+        "evidence",
+        "tradeoffs"
+      ],
+      "scope": "Identifies current US federal antitrust statutes and the evidence-oriented merger-analysis framework.",
+      "boundary": "US federal materials do not establish other jurisdictions, case outcomes, or an executable machine rule.",
+      "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+      "kind": "official-authority",
+      "conceptId": "urn:maha:concept:governance:competition-policy",
+      "inspectionDepth": "section-level-public-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t20-nist-assurance-case",
+      "identity": "NIST CSRC assurance-case glossary",
+      "locator": "https://csrc.nist.gov/glossary/term/assurance_case — definitions and identified source documents",
+      "roles": [
+        "sources",
+        "uncertainty"
+      ],
+      "scope": "Defines an assurance case as auditable argument and evidence with explicit assumptions supporting specified claims.",
+      "boundary": "A glossary definition is not current law and does not show that a particular assurance case is adequate.",
+      "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+      "kind": "official-authority",
+      "conceptId": "urn:maha:concept:governance:assurance-cases",
+      "inspectionDepth": "section-level-public-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t20-far-it-procurement",
+      "identity": "US Federal Acquisition Regulation",
+      "locator": "https://www.acquisition.gov/far/39.101 — IT acquisition policy; https://www.acquisition.gov/far/part-10 — market research",
+      "roles": [
+        "current-law"
+      ],
+      "scope": "Records current US federal IT acquisition and market-research requirements at FAC 2026-01.",
+      "boundary": "This is US federal procurement only, changes over time, and is not procurement advice.",
+      "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+      "kind": "official-authority",
+      "conceptId": "urn:maha:concept:governance:public-sector-procurement",
+      "inspectionDepth": "section-level-public-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t20-nist-incident",
+      "identity": "NIST AI 600-1 and NIST SP 800-171r3",
+      "locator": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf — MAP 5.1; https://nvlpubs.nist.gov/nistpubs/SpecialPublications/800-171r3/NIST.SP.800-171r3.html — 03.06.01–03.06.03",
+      "roles": [
+        "mechanisms",
+        "uncertainty"
+      ],
+      "scope": "Describes incident inputs, tracking, reporting, response, testing, and the dependence of reporting details on law, policy, sensitivity, and organizational assignment.",
+      "boundary": "Cybersecurity controls and voluntary AI guidance do not establish a universal mandatory AI-incident regime.",
+      "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+      "kind": "official-authority",
+      "conceptId": "urn:maha:concept:governance:incident-reporting",
+      "inspectionDepth": "section-level-public-authority",
+      "passageStored": false
+    }
+  ],
+  "privacyBoundary": "No source passage, customer material, credential, reviewer identity, or private corpus content is stored.",
+  "provenanceDigest": "sha256:7be6bc684e56ed66eb79a013dba4935ee044483c9d804e22c779c7d1349f6f81"
+}
