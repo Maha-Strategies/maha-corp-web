@@ -1,0 +1,248 @@
+{
+  "schemaVersion": "maha-federation-tranche-17-page-specifications/1.0",
+  "frozenOn": "2026-09-06",
+  "rule": "Specifications exist only for evidence-ready candidates. A blocked, revised or duplicative candidate cannot receive one.",
+  "counts": {
+    "specifications": 4,
+    "boundedQuestions": 20
+  },
+  "specifications": [
+    {
+      "candidateId": "cand_6a3233decc610bb5ab78925c",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/traceability/tradeoffs",
+      "owningProperty": "maha-policy",
+      "conceptId": "urn:maha:concept:governance:traceability",
+      "routeRole": "tradeoffs",
+      "directAnswer": "Traceability — Tradeoffs: Understand Traceability through the tradeoffs lens in Policy Clearing on policy.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:governance:traceability under the owner-application contract. The canonical definition remains with maha-policy.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "JCGM 200:2012, International Vocabulary of Metrology (VIM), 3rd edition",
+          "locator": "§2.41 (6.10), definition of metrological traceability, with Note 1.",
+          "supports": "That metrological traceability is a property of a measurement result: the result can be related to a reference through a documented unbroken chain of calibrations, each contributing to the measurement uncertainty."
+        }
+      ],
+      "limitations": [
+        "This is traceability of a measurement to a reference standard. It is not provenance of a document, lineage of a citation, or an audit trail of a system, all of which share the word. A page about record traceability must not cite this definition."
+      ],
+      "negativeSpace": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does traceability mean in this context, and who owns the definition?",
+        "What does the inspected source establish about traceability, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:traceability"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "JCGM 200:2012, International Vocabulary of Metrology (VIM), 3rd edition",
+          "stableUrl": "https://www.bipm.org/documents/20126/2071204/JCGM_200_2012.pdf",
+          "locator": "§2.41 (6.10), definition of metrological traceability, with Note 1.",
+          "version": "JCGM 200:2012"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:governance:traceability"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_83df1bf3542ab77e0d112f3b",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/incident-reporting/tradeoffs",
+      "owningProperty": "maha-policy",
+      "conceptId": "urn:maha:concept:governance:incident-reporting",
+      "routeRole": "tradeoffs",
+      "directAnswer": "Incident Reporting — Tradeoffs: Understand Incident Reporting through the tradeoffs lens in Policy Clearing on policy.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:governance:incident-reporting under the owner-application contract. The canonical definition remains with maha-policy.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "NIST SP 800-61 Rev. 3, Incident Response Recommendations and Considerations for Cybersecurity Risk Management",
+          "locator": "Executive Summary, paragraph placing incident response across the six CSF 2.0 Functions.",
+          "supports": "That incident response is treated as part of cybersecurity risk management rather than a standalone activity, and is distributed across the Govern, Identify, Protect, Detect, Respond and Recover functions."
+        }
+      ],
+      "limitations": [
+        "Recommendations and considerations, not a reporting obligation. It sets no disclosure deadline, names no regulator, and does not establish when an incident must be reported to anyone."
+      ],
+      "negativeSpace": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does incident-reporting mean in this context, and who owns the definition?",
+        "What does the inspected source establish about incident-reporting, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:incident-reporting"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "NIST SP 800-61 Rev. 3, Incident Response Recommendations and Considerations for Cybersecurity Risk Management",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-61r3.pdf",
+          "locator": "Executive Summary, paragraph placing incident response across the six CSF 2.0 Functions.",
+          "version": "Revision 3"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:governance:incident-reporting"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_b6f8fe66c83990472c395d8b",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/traceability/machine-rule",
+      "owningProperty": "maha-policy",
+      "conceptId": "urn:maha:concept:governance:traceability",
+      "routeRole": "machine-rule",
+      "directAnswer": "Traceability — Machine Rule: Understand Traceability through the machine rule lens in Policy Clearing on policy.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:governance:traceability under the owner-application contract. The canonical definition remains with maha-policy.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "JCGM 200:2012, International Vocabulary of Metrology (VIM), 3rd edition",
+          "locator": "§2.41 (6.10), definition of metrological traceability, with Note 1.",
+          "supports": "That metrological traceability is a property of a measurement result: the result can be related to a reference through a documented unbroken chain of calibrations, each contributing to the measurement uncertainty."
+        }
+      ],
+      "limitations": [
+        "This is traceability of a measurement to a reference standard. It is not provenance of a document, lineage of a citation, or an audit trail of a system, all of which share the word. A page about record traceability must not cite this definition."
+      ],
+      "negativeSpace": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does traceability mean in this context, and who owns the definition?",
+        "What does the inspected source establish about traceability, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:traceability"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "JCGM 200:2012, International Vocabulary of Metrology (VIM), 3rd edition",
+          "stableUrl": "https://www.bipm.org/documents/20126/2071204/JCGM_200_2012.pdf",
+          "locator": "§2.41 (6.10), definition of metrological traceability, with Note 1.",
+          "version": "JCGM 200:2012"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:governance:traceability"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    },
+    {
+      "candidateId": "cand_e310e159b6bfa7a9f1604f8c",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/incident-reporting/machine-rule",
+      "owningProperty": "maha-policy",
+      "conceptId": "urn:maha:concept:governance:incident-reporting",
+      "routeRole": "machine-rule",
+      "directAnswer": "Incident Reporting — Machine Rule: Understand Incident Reporting through the machine rule lens in Policy Clearing on policy.mahastrategies.com.",
+      "context": "This route applies urn:maha:concept:governance:incident-reporting under the owner-application contract. The canonical definition remains with maha-policy.",
+      "evidenceSections": [
+        {
+          "sourceIdentity": "NIST SP 800-61 Rev. 3, Incident Response Recommendations and Considerations for Cybersecurity Risk Management",
+          "locator": "Executive Summary, paragraph placing incident response across the six CSF 2.0 Functions.",
+          "supports": "That incident response is treated as part of cybersecurity risk management rather than a standalone activity, and is distributed across the Govern, Identify, Protect, Detect, Respond and Recover functions."
+        }
+      ],
+      "limitations": [
+        "Recommendations and considerations, not a reporting obligation. It sets no disclosure deadline, names no regulator, and does not establish when an incident must be reported to anyone."
+      ],
+      "negativeSpace": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner.",
+      "comparisons": [],
+      "boundedQuestions": [
+        "What does incident-reporting mean in this context, and who owns the definition?",
+        "What does the inspected source establish about incident-reporting, and at which locator?",
+        "What does that source explicitly not establish?",
+        "Which canonical definition must this page defer to rather than restate?",
+        "What inference would this page not license?"
+      ],
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:incident-reporting"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "citations": [
+        {
+          "sourceIdentity": "NIST SP 800-61 Rev. 3, Incident Response Recommendations and Considerations for Cybersecurity Risk Management",
+          "stableUrl": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-61r3.pdf",
+          "locator": "Executive Summary, paragraph placing incident response across the six CSF 2.0 Functions.",
+          "version": "Revision 3"
+        }
+      ],
+      "evidenceMetadata": {
+        "inspectedSources": 1,
+        "demand": "unknown",
+        "demandNote": "No route-specific GSC evidence exists for this path. Demand remains unknown rather than estimated."
+      },
+      "expectedCanonicalDependencies": [
+        "urn:maha:concept:governance:incident-reporting"
+      ],
+      "boundary": "A specification. Not a route, a release or a public page."
+    }
+  ],
+  "provenanceDigest": "sha256:66bd122bd9599eddaeb32ad34534c4f65f393d3ab80aa30fb445d3a65423dee3"
+}
