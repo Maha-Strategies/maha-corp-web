@@ -7,6 +7,8 @@ import {
   isContextSuiteTargetIndexed,
 } from '../scripts/run-context-suite-indexing-canaries.ts'
 import { isMpsIndexed } from '../scripts/poll-mps-bazaar-indexing.ts'
+import { mpsCanaryInputHash } from '../scripts/run-mps-production-verification.ts'
+import { auditInputHash } from '../lib/mps-audit-engine.ts'
 
 const payTo = '0xec84c1cd6602bbe387bc8e6f0d3c062f2762de28'
 const asset = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
@@ -50,4 +52,10 @@ test('MPS delayed observer requires the exact indexed declaration', () => {
   assert.equal(isMpsIndexed([{ ...resource, resource: `${resource.resource}/wrong` }]), false)
   assert.equal(isMpsIndexed([{ ...resource, accepts: [{ ...resource.accepts[0], amount: '50000' }] }]), false)
   assert.equal(isMpsIndexed([{ ...resource, extensions: {} }]), false)
+})
+
+test('MPS canary signs the published text-field preimage, not the JSON envelope', () => {
+  const text = 'The source establishes a bounded claim suitable for automated provenance triage.'
+  assert.equal(mpsCanaryInputHash({ text }), auditInputHash(text))
+  assert.notEqual(mpsCanaryInputHash({ text }), auditInputHash(JSON.stringify({ clientRequestId: 'request_1234', text })))
 })

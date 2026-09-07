@@ -1,4 +1,3 @@
-import { createHash } from 'node:crypto'
 import { writeFile } from 'node:fs/promises'
 import { pathToFileURL } from 'node:url'
 
@@ -7,6 +6,7 @@ import { privateKeyToAccount } from 'viem/accounts'
 import { createPaidFetch } from '../lib/x402/client.ts'
 import { IDEMPOTENCY_KEY_HEADER, INPUT_HASH_HEADER } from '../lib/x402/admission.ts'
 import { CANARY_BUYER, BASE_USDC, MAHA_PAYEE, BASE_NETWORK } from '../lib/x402/discovery-payment-recipe.ts'
+import { auditInputHash, validateAuditPassage } from '../lib/mps-audit-engine.ts'
 import { MPS_AUTONOMOUS_AUDIT_OFFER } from '../lib/x402/offers.ts'
 
 /**
@@ -31,6 +31,10 @@ const SUBJECT = 'https://www.mahastrategies.com/api/v1/mps/audit'
 const MAX_AMOUNT = BigInt(MPS_AUTONOMOUS_AUDIT_OFFER.amount)
 
 type Json = Record<string, unknown>
+
+export function mpsCanaryInputHash(input: Json): string {
+  return auditInputHash(validateAuditPassage(input.text))
+}
 
 function assertEqual(field: string, actual: unknown, wanted: unknown): void {
   if (String(actual).toLowerCase() !== String(wanted).toLowerCase()) {
@@ -84,10 +88,11 @@ export async function run(): Promise<void> {
 
   const clientRequestId = `mps_prod_verify_${process.env.GITHUB_RUN_ID ?? Date.now()}`
   const body = JSON.stringify({ ...input, clientRequestId })
-  // Prefixed, not bare hex. readAdmissionClaim matches /^sha256:[a-f0-9]{64}$/
-  // so the algorithm travels with the digest -- a bare hash would silently
-  // become ambiguous the day a second algorithm is accepted.
-  const inputHash = `sha256:${createHash('sha256').update(body, 'utf8').digest('hex')}`
+  // The published MPS admission preimage is the validated text field, not the
+  // request envelope. clientRequestId is bound independently by the matching
+  // idempotency header. Using the full JSON body here is rejected before
+  // signing, which is the fail-closed behavior this canary just exercised.
+  const inputHash = mpsCanaryInputHash(input)
   const admissionHeaders = {
     'content-type': 'application/json',
     [IDEMPOTENCY_KEY_HEADER]: clientRequestId,
