@@ -14,7 +14,7 @@ test('freezes the complete 12 by 3 Greek and Roman cohort', () => {
   const cohort = read(names[0])
   assert.deepEqual(cohort.counts, { candidates: 36, concepts: 12, rolesPerConcept: 3 })
   assert.equal(new Set(cohort.candidates.map((row: { candidateId: string }) => row.candidateId)).size, 36)
-  const byConcept = Map.groupBy(cohort.candidates, (row: { conceptId: string }) => row.conceptId)
+  const byConcept = Map.groupBy(cohort.candidates as { conceptId: string; routeRole: string }[], (row) => row.conceptId)
   assert.equal(byConcept.size, 12)
   for (const rows of byConcept.values()) assert.deepEqual(new Set(rows.map((row: { routeRole: string }) => row.routeRole)), new Set(['source-identity', 'epithet-and-cult', 'reception-and-comparison']))
 })

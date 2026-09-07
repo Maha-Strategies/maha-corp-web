@@ -13,9 +13,10 @@ import { test } from 'node:test'
  * carries them as evidence-ready and implementation-ready, inside the
  * implementation-ready count.
  *
- * Ledger v7 closes the gap by returning those four replacements to unresolved
- * until their exact-revision reviews exist. The guard remains executable so a
- * later ledger cannot silently reintroduce the unsupported readiness claim.
+ * Ledger v7 closes the gap by returning those four replacements to unresolved.
+ * Ledger v8 carries their later exact reviews plus the reviewed, one-for-one
+ * source-centered closure replacements. The guard remains executable so a
+ * later ledger cannot silently reintroduce an unsupported readiness claim.
  *
  * The review index below is deliberately generous: every artifact that records
  * a per-candidate outcome counts, across all three vocabularies and both
@@ -28,7 +29,7 @@ const read = (name: string) => JSON.parse(readFileSync(`${F}/${name}`, 'utf8'))
 const has = (name: string) => existsSync(`${F}/${name}`)
 
 /** The ledger this guard checks. Asserted below to still be the newest. */
-const LATEST_LEDGER_VERSION = 7
+const LATEST_LEDGER_VERSION = 8
 
 /**
  * Every artifact that records a per-candidate review outcome.
