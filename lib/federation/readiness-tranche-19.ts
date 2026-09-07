@@ -81,6 +81,9 @@ export const LOCAL_APPLICATION_SOURCES: Readonly<Record<string, readonly LocalAp
   'urn:maha:concept:evidence:version-relationship': [
     source('t19-version-state', 'lib/source-recovery.ts — validateObservation', ['failure-modes'], 'Keeps source identity and version-relationship uncertainty as explicit recovery findings.', 'It does not prove two artifacts are substantively equivalent.'),
   ],
+  'urn:maha:concept:evidence:source-recovery': [
+    source('t19-source-recovery-engine', 'lib/source-recovery.ts — compileRecoveryPackets', [], 'Compiles recorded recovery observations into bounded recovery packets with explicit identity and version states.', 'The canonical definition object remains deferred; this adjacent implementation cannot be inherited as application readiness.'),
+  ],
   'urn:maha:concept:computation:reproducibility-fixtures': [
     source('t19-reproducibility-fixtures', 'lib/evidence-workflow-examples.ts — EVIDENCE_WORKFLOW_EXAMPLES', ['worked-example', 'reproducibility', 'uncertainty'], 'Provides committed synthetic inputs, expected outputs, refusals, checks, and explicit synthetic boundaries.', 'A fixture exercises a code path and is not independent scientific reproduction.'),
   ],

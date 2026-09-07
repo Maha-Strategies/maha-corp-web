@@ -69,8 +69,10 @@ const sourceBody = {
 writeFileSync(`${F}/federation-readiness-tranche-19-source-inspections-v1.json`, `${JSON.stringify(signed(sourceBody), null, 2)}\n`)
 
 function inspectedBasis(conceptId: string, role: string) {
-  const local = (LOCAL_APPLICATION_SOURCES[conceptId] ?? []).filter((source) => source.roles.includes(role))
+  const allLocal = LOCAL_APPLICATION_SOURCES[conceptId] ?? []
+  const local = allLocal.filter((source) => source.roles.includes(role))
   if (local.length) return { kind: 'local-application', sources: local, roleSupported: true }
+  if (allLocal.length) return { kind: 'local-adjacent-only', sources: allLocal, roleSupported: false }
   const external = externalByConcept.get(conceptId) ?? (tranche18ByTopic.has(conceptId) ? [tranche18ByTopic.get(conceptId)] : [])
   const definition = firstPartyByConcept.get(conceptId)
   if (external.length) return { kind: 'external-definition-only', sources: external, roleSupported: false }

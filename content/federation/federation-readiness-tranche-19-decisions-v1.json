@@ -465,10 +465,11 @@
         "disposition": "non-route-graph-object"
       },
       "sourceAssessment": {
-        "kind": "first-party-definition-only",
+        "kind": "local-adjacent-only",
         "roleSupported": false,
         "sourceLocators": [
-          "lib/evidence-basis.ts — BASIS_CONTRACT"
+          "lib/evidence-basis.ts — BASIS_CONTRACT",
+          "lib/evidence-basis.ts — assertBasisCanCarry"
         ]
       },
       "axes": {
@@ -623,10 +624,12 @@
         "disposition": "non-route-graph-object"
       },
       "sourceAssessment": {
-        "kind": "first-party-definition-only",
+        "kind": "local-adjacent-only",
         "roleSupported": false,
         "sourceLocators": [
-          "lib/epistemic-release.ts — EpistemicReleaseStatus"
+          "lib/epistemic-release.ts — buildEpistemicCanonicalRelease and buildEpistemicReleaseWithdrawal",
+          "lib/epistemic-release.ts — epistemicReleaseStatus and activeEpistemicReleases",
+          "lib/epistemic-release.ts — releaseReadiness"
         ]
       },
       "axes": {
@@ -687,10 +690,12 @@
         "disposition": "non-route-graph-object"
       },
       "sourceAssessment": {
-        "kind": "first-party-definition-only",
+        "kind": "local-adjacent-only",
         "roleSupported": false,
         "sourceLocators": [
-          "lib/computational-witness-registry.ts — WITNESS_REGISTRY_MAX_BYTES"
+          "lib/computational-witness-registry.ts — buildWitnessSubmissionPlan",
+          "lib/computational-witness-registry.ts — validatedWitnessReceipt",
+          "lib/computational-witness-registry.ts — WitnessRegistryInputError and WitnessRegistryConflictError"
         ]
       },
       "axes": {
@@ -783,10 +788,11 @@
         "disposition": "non-route-graph-object"
       },
       "sourceAssessment": {
-        "kind": "first-party-definition-only",
+        "kind": "local-adjacent-only",
         "roleSupported": false,
         "sourceLocators": [
-          "lib/evidence-dossier/digest.ts — provenanceDigest"
+          "lib/evidence-dossier/compiler.ts — compileEvidenceDossier",
+          "lib/evidence-dossier/validator.ts — validateDossier"
         ]
       },
       "axes": {
@@ -1039,10 +1045,11 @@
         "disposition": "non-route-graph-object"
       },
       "sourceAssessment": {
-        "kind": "first-party-definition-only",
+        "kind": "local-adjacent-only",
         "roleSupported": false,
         "sourceLocators": [
-          "lib/evidence-dossier/runtime-witness.ts — ComputationalWitnessReceipt"
+          "lib/evidence-dossier/runtime-witness.ts — attachRuntimeWitnessToDossier",
+          "lib/evidence-dossier/runtime-witness.ts — verifyComputationalWitnessReceipt"
         ]
       },
       "axes": {
@@ -1615,10 +1622,10 @@
         "disposition": "non-route-graph-object"
       },
       "sourceAssessment": {
-        "kind": "first-party-definition-only",
+        "kind": "local-adjacent-only",
         "roleSupported": false,
         "sourceLocators": [
-          "lib/evidence-workflow-examples.ts"
+          "lib/evidence-workflow-examples.ts — EVIDENCE_WORKFLOW_EXAMPLES"
         ]
       },
       "axes": {
@@ -1999,10 +2006,10 @@
         "disposition": "non-route-graph-object"
       },
       "sourceAssessment": {
-        "kind": "external-definition-only",
+        "kind": "local-adjacent-only",
         "roleSupported": false,
         "sourceLocators": [
-          "Section \"What is the Author Manuscript?\" — first paragraph."
+          "lib/source-recovery.ts — validateObservation"
         ]
       },
       "axes": {
@@ -2063,10 +2070,10 @@
         "disposition": "non-route-graph-object"
       },
       "sourceAssessment": {
-        "kind": "external-definition-only",
+        "kind": "local-adjacent-only",
         "roleSupported": false,
         "sourceLocators": [
-          "Section \"What is the Author Manuscript?\" — first paragraph."
+          "lib/source-recovery.ts — validateObservation"
         ]
       },
       "axes": {
@@ -2095,10 +2102,10 @@
         "disposition": "non-route-graph-object"
       },
       "sourceAssessment": {
-        "kind": "first-party-definition-only",
+        "kind": "local-adjacent-only",
         "roleSupported": false,
         "sourceLocators": [
-          "lib/batch-11-rehearsal-phases.ts — PRIVATE_CORPUS_MARKERS and assertNoPrivateCorpusInBundle"
+          "lib/batch-11-rehearsal-phases.ts — assertNoPrivateCorpusInBundle"
         ]
       },
       "axes": {
@@ -2127,10 +2134,11 @@
         "disposition": "non-route-graph-object"
       },
       "sourceAssessment": {
-        "kind": "first-party-definition-only",
+        "kind": "local-adjacent-only",
         "roleSupported": false,
         "sourceLocators": [
-          "lib/exact-revision-review.ts"
+          "lib/exact-revision-review.ts — projectReviewState",
+          "lib/exact-revision-review.ts — classifyForRelease"
         ]
       },
       "axes": {
@@ -2255,10 +2263,10 @@
         "disposition": "non-route-graph-object"
       },
       "sourceAssessment": {
-        "kind": "external-definition-only",
+        "kind": "local-adjacent-only",
         "roleSupported": false,
         "sourceLocators": [
-          "Control AU-3 (Content of Audit Records), items a-f and the Discussion paragraph."
+          "lib/audit/exporter.ts — generatePDF"
         ]
       },
       "axes": {
@@ -2351,10 +2359,11 @@
         "disposition": "non-route-graph-object"
       },
       "sourceAssessment": {
-        "kind": "first-party-definition-only",
+        "kind": "local-adjacent-only",
         "roleSupported": false,
         "sourceLocators": [
-          "lib/digest-roles.ts — ReleaseTargetDigest and PublicationDigest"
+          "lib/epistemic-release.ts — buildEpistemicCanonicalRelease",
+          "lib/epistemic-release.ts — releaseReadiness"
         ]
       },
       "axes": {
@@ -2415,10 +2424,10 @@
         "disposition": "non-route-graph-object"
       },
       "sourceAssessment": {
-        "kind": "external-definition-only",
+        "kind": "local-adjacent-only",
         "roleSupported": false,
         "sourceLocators": [
-          "Control AU-3 (Content of Audit Records), items a-f and the Discussion paragraph."
+          "lib/audit/exporter.ts — generatePDF"
         ]
       },
       "axes": {
@@ -2993,16 +3002,18 @@
         "disposition": "deferred-pending-implementation"
       },
       "sourceAssessment": {
-        "kind": "none",
+        "kind": "local-adjacent-only",
         "roleSupported": false,
-        "sourceLocators": []
+        "sourceLocators": [
+          "lib/source-recovery.ts — compileRecoveryPackets"
+        ]
       },
       "axes": {
-        "sourceIdentity": "missing",
-        "locator": "missing",
-        "rights": "missing",
+        "sourceIdentity": "inspected",
+        "locator": "exact-or-carried-exact",
+        "rights": "recorded",
         "scope": "does-not-support-route-role",
-        "boundary": "missing"
+        "boundary": "recorded"
       },
       "decision": "revise",
       "finding": "Recovery-attempt code now exists, but the canonical definition object remains deferred and requires an exact-definition re-review before applications proceed.",
@@ -3023,16 +3034,18 @@
         "disposition": "deferred-pending-implementation"
       },
       "sourceAssessment": {
-        "kind": "none",
+        "kind": "local-adjacent-only",
         "roleSupported": false,
-        "sourceLocators": []
+        "sourceLocators": [
+          "lib/source-recovery.ts — compileRecoveryPackets"
+        ]
       },
       "axes": {
-        "sourceIdentity": "missing",
-        "locator": "missing",
-        "rights": "missing",
+        "sourceIdentity": "inspected",
+        "locator": "exact-or-carried-exact",
+        "rights": "recorded",
         "scope": "does-not-support-route-role",
-        "boundary": "missing"
+        "boundary": "recorded"
       },
       "decision": "revise",
       "finding": "Recovery-attempt code now exists, but the canonical definition object remains deferred and requires an exact-definition re-review before applications proceed.",
@@ -3053,16 +3066,18 @@
         "disposition": "deferred-pending-implementation"
       },
       "sourceAssessment": {
-        "kind": "none",
+        "kind": "local-adjacent-only",
         "roleSupported": false,
-        "sourceLocators": []
+        "sourceLocators": [
+          "lib/source-recovery.ts — compileRecoveryPackets"
+        ]
       },
       "axes": {
-        "sourceIdentity": "missing",
-        "locator": "missing",
-        "rights": "missing",
+        "sourceIdentity": "inspected",
+        "locator": "exact-or-carried-exact",
+        "rights": "recorded",
         "scope": "does-not-support-route-role",
-        "boundary": "missing"
+        "boundary": "recorded"
       },
       "decision": "revise",
       "finding": "Recovery-attempt code now exists, but the canonical definition object remains deferred and requires an exact-definition re-review before applications proceed.",
@@ -3198,5 +3213,5 @@
       "activeBindingChanged": false
     }
   ],
-  "provenanceDigest": "sha256:f6f471dc0d2ae47e4cb2b94b6edfce1a37a6c1b27bc4f119731ffe6cba18496b"
+  "provenanceDigest": "sha256:3f5ce00cade29ca2091c38046d883d01f790a34ffc33e6860390bf873291b36d"
 }

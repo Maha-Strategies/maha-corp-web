@@ -3,7 +3,7 @@
   "frozenOn": "2026-09-07",
   "method": "Each local source was read at the named symbol and surrounding implementation. External sources are carried only from prior section-level inspection artifacts with their original scope and boundary. No source passage or full document is stored.",
   "counts": {
-    "localInspections": 33,
+    "localInspections": 34,
     "carriedExternalInspections": 14
   },
   "localInspections": [
@@ -499,6 +499,19 @@
       "independence": "not-independent"
     },
     {
+      "sourceId": "t19-source-recovery-engine",
+      "locator": "lib/source-recovery.ts — compileRecoveryPackets",
+      "roles": [],
+      "scope": "Compiles recorded recovery observations into bounded recovery packets with explicit identity and version states.",
+      "boundary": "The canonical definition object remains deferred; this adjacent implementation cannot be inherited as application readiness.",
+      "conceptId": "urn:maha:concept:evidence:source-recovery",
+      "sourceIdentity": "lib/source-recovery.ts",
+      "version": "exact repository implementation at reviewed commit",
+      "inspectionDepth": "symbol-and-surrounding-implementation",
+      "rightsBasis": "project-owned-reference-only",
+      "independence": "not-independent"
+    },
+    {
       "sourceId": "t19-reproducibility-fixtures",
       "locator": "lib/evidence-workflow-examples.ts — EVIDENCE_WORKFLOW_EXAMPLES",
       "roles": [
@@ -741,5 +754,5 @@
     }
   ],
   "privacyBoundary": "Reference metadata, exact locators, scope, and boundaries only. No customer data, credentials, source passages, or reviewer identities.",
-  "provenanceDigest": "sha256:ac88e1c3295937a432d0ca2aaebd219f08fafc3173761b8c033f01a8b3e1741e"
+  "provenanceDigest": "sha256:5a37a0b759d3a7af83b1e0ff10700520fb01b1f73bd2808696ed3e7c630a285d"
 }
