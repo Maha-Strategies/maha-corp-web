@@ -1,0 +1,33 @@
+.main {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 5rem 0 7rem;
+}
+
+.eyebrow, .release, .sectionKind {
+  font-family: var(--font-geist-mono), monospace;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  font-size: .72rem;
+}
+
+.eyebrow { color: var(--color-accent, #276a78); }
+.title { max-width: 920px; margin: 1rem 0; font-family: var(--font-newsreader), serif; font-size: clamp(2.4rem, 7vw, 5.6rem); line-height: .96; }
+.answer { max-width: 850px; font-size: clamp(1.15rem, 2.2vw, 1.55rem); line-height: 1.55; color: var(--color-text-muted, #40504d); }
+.release { margin-top: 1.5rem; overflow-wrap: anywhere; color: var(--color-text-muted, #52615e); }
+.grid { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(260px, .75fr); gap: 3rem; margin-top: 4rem; }
+.section { padding: 2rem 0; border-top: 1px solid color-mix(in srgb, currentColor 18%, transparent); }
+.section h2, .aside h2 { font-family: var(--font-newsreader), serif; font-size: clamp(1.55rem, 3vw, 2.2rem); margin: .4rem 0 1rem; }
+.section p, .aside p, .aside li { line-height: 1.7; }
+.aside { align-self: start; position: sticky; top: 2rem; }
+.card { border: 1px solid color-mix(in srgb, currentColor 18%, transparent); padding: 1.35rem; margin-bottom: 1rem; background: color-mix(in srgb, currentColor 3%, transparent); }
+.card a { overflow-wrap: anywhere; }
+.list { padding-left: 1.1rem; }
+.question { margin-top: 1.3rem; font-weight: 650; }
+.boundary { color: #7b3d2e; }
+
+@media (max-width: 760px) {
+  .main { padding-top: 3rem; }
+  .grid { grid-template-columns: 1fr; gap: 1rem; }
+  .aside { position: static; }
+}

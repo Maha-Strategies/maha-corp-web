@@ -1,0 +1,586 @@
+{
+  "schemaVersion": "maha-federation-authority-definition-reviews/1.0",
+  "frozenOn": "2026-09-07",
+  "appendOnly": true,
+  "proposalManifest": {
+    "provenanceDigest": "sha256:1d4965a185774b2446d7c6f36c89b2b3fe44096f358d01bcb44ae56f42b87374"
+  },
+  "graphManifest": {
+    "provenanceDigest": "sha256:2c4def0c281f056ac6d5829caf04e186902bcda1a5c52a9df1b727ea1e7def3a"
+  },
+  "counts": {
+    "reviewed": 12,
+    "accepted": 11,
+    "revise": 1,
+    "human": 0,
+    "expert": 0
+  },
+  "reviews": [
+    {
+      "graphObjectId": "cand_a870823d00f81a9a4854f848",
+      "graphObjectDigest": "sha256:0719ca27d22d6263b01abe94ba1671fc9e6e08c1f9f0175fab9e0892438009aa",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "proposalDigest": "sha256:5c8142272d469151307d902b24ba55eb2ed07f1ccde0e915f37bd15743936c23",
+      "reviewerKind": "automated-internal-editorial",
+      "humanReviewed": false,
+      "expertReviewed": false,
+      "axes": [
+        {
+          "axis": "source-identity",
+          "decision": "approve",
+          "proposalDigest": "sha256:5c8142272d469151307d902b24ba55eb2ed07f1ccde0e915f37bd15743936c23",
+          "graphObjectDigest": "sha256:0719ca27d22d6263b01abe94ba1671fc9e6e08c1f9f0175fab9e0892438009aa"
+        },
+        {
+          "axis": "locator",
+          "decision": "approve",
+          "proposalDigest": "sha256:5c8142272d469151307d902b24ba55eb2ed07f1ccde0e915f37bd15743936c23",
+          "graphObjectDigest": "sha256:0719ca27d22d6263b01abe94ba1671fc9e6e08c1f9f0175fab9e0892438009aa"
+        },
+        {
+          "axis": "claim-scope",
+          "decision": "approve",
+          "proposalDigest": "sha256:5c8142272d469151307d902b24ba55eb2ed07f1ccde0e915f37bd15743936c23",
+          "graphObjectDigest": "sha256:0719ca27d22d6263b01abe94ba1671fc9e6e08c1f9f0175fab9e0892438009aa"
+        },
+        {
+          "axis": "rights",
+          "decision": "approve",
+          "proposalDigest": "sha256:5c8142272d469151307d902b24ba55eb2ed07f1ccde0e915f37bd15743936c23",
+          "graphObjectDigest": "sha256:0719ca27d22d6263b01abe94ba1671fc9e6e08c1f9f0175fab9e0892438009aa"
+        },
+        {
+          "axis": "boundary",
+          "decision": "approve",
+          "proposalDigest": "sha256:5c8142272d469151307d902b24ba55eb2ed07f1ccde0e915f37bd15743936c23",
+          "graphObjectDigest": "sha256:0719ca27d22d6263b01abe94ba1671fc9e6e08c1f9f0175fab9e0892438009aa"
+        }
+      ],
+      "finalDecision": "accept",
+      "bindingState": "definition-proposal-bound-to-graph-object",
+      "sourceIds": [
+        "src-causal-what-if"
+      ],
+      "boundary": "This binds an internally reviewed definition proposal to a non-route graph identity. It does not publish a route, constitute external expert review, or support a dependent application claim."
+    },
+    {
+      "graphObjectId": "cand_908638ce5ea422d98d5273fb",
+      "graphObjectDigest": "sha256:04417757ec821942801fa333f903f4530e826b7b0a4560c4eb06e69b101ec136",
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "proposalDigest": "sha256:6bec3b7c9698692556e18657013cff3f19d45934f986e39d3633991fc1e09774",
+      "reviewerKind": "automated-internal-editorial",
+      "humanReviewed": false,
+      "expertReviewed": false,
+      "axes": [
+        {
+          "axis": "source-identity",
+          "decision": "approve",
+          "proposalDigest": "sha256:6bec3b7c9698692556e18657013cff3f19d45934f986e39d3633991fc1e09774",
+          "graphObjectDigest": "sha256:04417757ec821942801fa333f903f4530e826b7b0a4560c4eb06e69b101ec136"
+        },
+        {
+          "axis": "locator",
+          "decision": "approve",
+          "proposalDigest": "sha256:6bec3b7c9698692556e18657013cff3f19d45934f986e39d3633991fc1e09774",
+          "graphObjectDigest": "sha256:04417757ec821942801fa333f903f4530e826b7b0a4560c4eb06e69b101ec136"
+        },
+        {
+          "axis": "claim-scope",
+          "decision": "approve",
+          "proposalDigest": "sha256:6bec3b7c9698692556e18657013cff3f19d45934f986e39d3633991fc1e09774",
+          "graphObjectDigest": "sha256:04417757ec821942801fa333f903f4530e826b7b0a4560c4eb06e69b101ec136"
+        },
+        {
+          "axis": "rights",
+          "decision": "approve",
+          "proposalDigest": "sha256:6bec3b7c9698692556e18657013cff3f19d45934f986e39d3633991fc1e09774",
+          "graphObjectDigest": "sha256:04417757ec821942801fa333f903f4530e826b7b0a4560c4eb06e69b101ec136"
+        },
+        {
+          "axis": "boundary",
+          "decision": "approve",
+          "proposalDigest": "sha256:6bec3b7c9698692556e18657013cff3f19d45934f986e39d3633991fc1e09774",
+          "graphObjectDigest": "sha256:04417757ec821942801fa333f903f4530e826b7b0a4560c4eb06e69b101ec136"
+        }
+      ],
+      "finalDecision": "accept",
+      "bindingState": "definition-proposal-bound-to-graph-object",
+      "sourceIds": [
+        "src-perk-commitments"
+      ],
+      "boundary": "This binds an internally reviewed definition proposal to a non-route graph identity. It does not publish a route, constitute external expert review, or support a dependent application claim."
+    },
+    {
+      "graphObjectId": "cand_a563c1dcade1fa354b9069fa",
+      "graphObjectDigest": "sha256:8025849e183f62d13a97c6eeffe55eea6810aa267f67034501120aacde8123d3",
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "proposalDigest": "sha256:81cca7e4b253f37de1f4a5e8e4d5913facc0715ede341bb8b0e76815d43982a1",
+      "reviewerKind": "automated-internal-editorial",
+      "humanReviewed": false,
+      "expertReviewed": false,
+      "axes": [
+        {
+          "axis": "source-identity",
+          "decision": "revise",
+          "proposalDigest": "sha256:81cca7e4b253f37de1f4a5e8e4d5913facc0715ede341bb8b0e76815d43982a1",
+          "graphObjectDigest": "sha256:8025849e183f62d13a97c6eeffe55eea6810aa267f67034501120aacde8123d3"
+        },
+        {
+          "axis": "locator",
+          "decision": "revise",
+          "proposalDigest": "sha256:81cca7e4b253f37de1f4a5e8e4d5913facc0715ede341bb8b0e76815d43982a1",
+          "graphObjectDigest": "sha256:8025849e183f62d13a97c6eeffe55eea6810aa267f67034501120aacde8123d3"
+        },
+        {
+          "axis": "claim-scope",
+          "decision": "revise",
+          "proposalDigest": "sha256:81cca7e4b253f37de1f4a5e8e4d5913facc0715ede341bb8b0e76815d43982a1",
+          "graphObjectDigest": "sha256:8025849e183f62d13a97c6eeffe55eea6810aa267f67034501120aacde8123d3"
+        },
+        {
+          "axis": "rights",
+          "decision": "revise",
+          "proposalDigest": "sha256:81cca7e4b253f37de1f4a5e8e4d5913facc0715ede341bb8b0e76815d43982a1",
+          "graphObjectDigest": "sha256:8025849e183f62d13a97c6eeffe55eea6810aa267f67034501120aacde8123d3"
+        },
+        {
+          "axis": "boundary",
+          "decision": "revise",
+          "proposalDigest": "sha256:81cca7e4b253f37de1f4a5e8e4d5913facc0715ede341bb8b0e76815d43982a1",
+          "graphObjectDigest": "sha256:8025849e183f62d13a97c6eeffe55eea6810aa267f67034501120aacde8123d3"
+        }
+      ],
+      "finalDecision": "revise",
+      "bindingState": "held-without-definition-binding",
+      "sourceIds": [
+        "src-dlmf-arithmetic"
+      ],
+      "boundary": "The graph identity remains resolvable, but no definition is attached because the inspected authority did not establish the proposed breadth."
+    },
+    {
+      "graphObjectId": "cand_d90b7197535681a502dccba9",
+      "graphObjectDigest": "sha256:f2b2bc39ffa79dbd90830151ba0fa58a96b14248c7e7625205cbac9ea55d13ec",
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "proposalDigest": "sha256:431f4eede082c785fc68c08e3c9465af9c1065589166a9310fc71c358112f498",
+      "reviewerKind": "automated-internal-editorial",
+      "humanReviewed": false,
+      "expertReviewed": false,
+      "axes": [
+        {
+          "axis": "source-identity",
+          "decision": "approve",
+          "proposalDigest": "sha256:431f4eede082c785fc68c08e3c9465af9c1065589166a9310fc71c358112f498",
+          "graphObjectDigest": "sha256:f2b2bc39ffa79dbd90830151ba0fa58a96b14248c7e7625205cbac9ea55d13ec"
+        },
+        {
+          "axis": "locator",
+          "decision": "approve",
+          "proposalDigest": "sha256:431f4eede082c785fc68c08e3c9465af9c1065589166a9310fc71c358112f498",
+          "graphObjectDigest": "sha256:f2b2bc39ffa79dbd90830151ba0fa58a96b14248c7e7625205cbac9ea55d13ec"
+        },
+        {
+          "axis": "claim-scope",
+          "decision": "approve",
+          "proposalDigest": "sha256:431f4eede082c785fc68c08e3c9465af9c1065589166a9310fc71c358112f498",
+          "graphObjectDigest": "sha256:f2b2bc39ffa79dbd90830151ba0fa58a96b14248c7e7625205cbac9ea55d13ec"
+        },
+        {
+          "axis": "rights",
+          "decision": "approve",
+          "proposalDigest": "sha256:431f4eede082c785fc68c08e3c9465af9c1065589166a9310fc71c358112f498",
+          "graphObjectDigest": "sha256:f2b2bc39ffa79dbd90830151ba0fa58a96b14248c7e7625205cbac9ea55d13ec"
+        },
+        {
+          "axis": "boundary",
+          "decision": "approve",
+          "proposalDigest": "sha256:431f4eede082c785fc68c08e3c9465af9c1065589166a9310fc71c358112f498",
+          "graphObjectDigest": "sha256:f2b2bc39ffa79dbd90830151ba0fa58a96b14248c7e7625205cbac9ea55d13ec"
+        }
+      ],
+      "finalDecision": "accept",
+      "bindingState": "definition-proposal-bound-to-graph-object",
+      "sourceIds": [
+        "src-bipm-dimensions"
+      ],
+      "boundary": "This binds an internally reviewed definition proposal to a non-route graph identity. It does not publish a route, constitute external expert review, or support a dependent application claim."
+    },
+    {
+      "graphObjectId": "cand_25c680ff193b4f35f49e96ae",
+      "graphObjectDigest": "sha256:ff6d765e3b558bcf12bf3be8cc0786fe82f32aac1edbc6aef76d2d7efcefd82f",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "proposalDigest": "sha256:855e6de6661384f88f938abdfbe7ec51a1f5ba582fc0f703d13950149f85a22b",
+      "reviewerKind": "automated-internal-editorial",
+      "humanReviewed": false,
+      "expertReviewed": false,
+      "axes": [
+        {
+          "axis": "source-identity",
+          "decision": "approve",
+          "proposalDigest": "sha256:855e6de6661384f88f938abdfbe7ec51a1f5ba582fc0f703d13950149f85a22b",
+          "graphObjectDigest": "sha256:ff6d765e3b558bcf12bf3be8cc0786fe82f32aac1edbc6aef76d2d7efcefd82f"
+        },
+        {
+          "axis": "locator",
+          "decision": "approve",
+          "proposalDigest": "sha256:855e6de6661384f88f938abdfbe7ec51a1f5ba582fc0f703d13950149f85a22b",
+          "graphObjectDigest": "sha256:ff6d765e3b558bcf12bf3be8cc0786fe82f32aac1edbc6aef76d2d7efcefd82f"
+        },
+        {
+          "axis": "claim-scope",
+          "decision": "approve",
+          "proposalDigest": "sha256:855e6de6661384f88f938abdfbe7ec51a1f5ba582fc0f703d13950149f85a22b",
+          "graphObjectDigest": "sha256:ff6d765e3b558bcf12bf3be8cc0786fe82f32aac1edbc6aef76d2d7efcefd82f"
+        },
+        {
+          "axis": "rights",
+          "decision": "approve",
+          "proposalDigest": "sha256:855e6de6661384f88f938abdfbe7ec51a1f5ba582fc0f703d13950149f85a22b",
+          "graphObjectDigest": "sha256:ff6d765e3b558bcf12bf3be8cc0786fe82f32aac1edbc6aef76d2d7efcefd82f"
+        },
+        {
+          "axis": "boundary",
+          "decision": "approve",
+          "proposalDigest": "sha256:855e6de6661384f88f938abdfbe7ec51a1f5ba582fc0f703d13950149f85a22b",
+          "graphObjectDigest": "sha256:ff6d765e3b558bcf12bf3be8cc0786fe82f32aac1edbc6aef76d2d7efcefd82f"
+        }
+      ],
+      "finalDecision": "accept",
+      "bindingState": "definition-proposal-bound-to-graph-object",
+      "sourceIds": [
+        "src-nist-formal-verification"
+      ],
+      "boundary": "This binds an internally reviewed definition proposal to a non-route graph identity. It does not publish a route, constitute external expert review, or support a dependent application claim."
+    },
+    {
+      "graphObjectId": "cand_de8dd0a88e8704fe5855033e",
+      "graphObjectDigest": "sha256:13acc2f322743768ce445380addfda8c943f272278f7e0eb621c487add59c7c4",
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "proposalDigest": "sha256:80ab2410d369514174cec737b343183a477bc93df97237acb08c7bfd624a0f23",
+      "reviewerKind": "automated-internal-editorial",
+      "humanReviewed": false,
+      "expertReviewed": false,
+      "axes": [
+        {
+          "axis": "source-identity",
+          "decision": "approve",
+          "proposalDigest": "sha256:80ab2410d369514174cec737b343183a477bc93df97237acb08c7bfd624a0f23",
+          "graphObjectDigest": "sha256:13acc2f322743768ce445380addfda8c943f272278f7e0eb621c487add59c7c4"
+        },
+        {
+          "axis": "locator",
+          "decision": "approve",
+          "proposalDigest": "sha256:80ab2410d369514174cec737b343183a477bc93df97237acb08c7bfd624a0f23",
+          "graphObjectDigest": "sha256:13acc2f322743768ce445380addfda8c943f272278f7e0eb621c487add59c7c4"
+        },
+        {
+          "axis": "claim-scope",
+          "decision": "approve",
+          "proposalDigest": "sha256:80ab2410d369514174cec737b343183a477bc93df97237acb08c7bfd624a0f23",
+          "graphObjectDigest": "sha256:13acc2f322743768ce445380addfda8c943f272278f7e0eb621c487add59c7c4"
+        },
+        {
+          "axis": "rights",
+          "decision": "approve",
+          "proposalDigest": "sha256:80ab2410d369514174cec737b343183a477bc93df97237acb08c7bfd624a0f23",
+          "graphObjectDigest": "sha256:13acc2f322743768ce445380addfda8c943f272278f7e0eb621c487add59c7c4"
+        },
+        {
+          "axis": "boundary",
+          "decision": "approve",
+          "proposalDigest": "sha256:80ab2410d369514174cec737b343183a477bc93df97237acb08c7bfd624a0f23",
+          "graphObjectDigest": "sha256:13acc2f322743768ce445380addfda8c943f272278f7e0eb621c487add59c7c4"
+        }
+      ],
+      "finalDecision": "accept",
+      "bindingState": "definition-proposal-bound-to-graph-object",
+      "sourceIds": [
+        "src-dlmf-interpolation"
+      ],
+      "boundary": "This binds an internally reviewed definition proposal to a non-route graph identity. It does not publish a route, constitute external expert review, or support a dependent application claim."
+    },
+    {
+      "graphObjectId": "cand_e41cfa0c9ad358c43c72d1ee",
+      "graphObjectDigest": "sha256:05330f9eaefbf4d8bd980c7be8b396abfcfafe06d735c3f3d4014b50607d9748",
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "proposalDigest": "sha256:8afb2efadf204d87661d00bd4cf59e22521db1525b332d8f227259298d49edfc",
+      "reviewerKind": "automated-internal-editorial",
+      "humanReviewed": false,
+      "expertReviewed": false,
+      "axes": [
+        {
+          "axis": "source-identity",
+          "decision": "approve",
+          "proposalDigest": "sha256:8afb2efadf204d87661d00bd4cf59e22521db1525b332d8f227259298d49edfc",
+          "graphObjectDigest": "sha256:05330f9eaefbf4d8bd980c7be8b396abfcfafe06d735c3f3d4014b50607d9748"
+        },
+        {
+          "axis": "locator",
+          "decision": "approve",
+          "proposalDigest": "sha256:8afb2efadf204d87661d00bd4cf59e22521db1525b332d8f227259298d49edfc",
+          "graphObjectDigest": "sha256:05330f9eaefbf4d8bd980c7be8b396abfcfafe06d735c3f3d4014b50607d9748"
+        },
+        {
+          "axis": "claim-scope",
+          "decision": "approve",
+          "proposalDigest": "sha256:8afb2efadf204d87661d00bd4cf59e22521db1525b332d8f227259298d49edfc",
+          "graphObjectDigest": "sha256:05330f9eaefbf4d8bd980c7be8b396abfcfafe06d735c3f3d4014b50607d9748"
+        },
+        {
+          "axis": "rights",
+          "decision": "approve",
+          "proposalDigest": "sha256:8afb2efadf204d87661d00bd4cf59e22521db1525b332d8f227259298d49edfc",
+          "graphObjectDigest": "sha256:05330f9eaefbf4d8bd980c7be8b396abfcfafe06d735c3f3d4014b50607d9748"
+        },
+        {
+          "axis": "boundary",
+          "decision": "approve",
+          "proposalDigest": "sha256:8afb2efadf204d87661d00bd4cf59e22521db1525b332d8f227259298d49edfc",
+          "graphObjectDigest": "sha256:05330f9eaefbf4d8bd980c7be8b396abfcfafe06d735c3f3d4014b50607d9748"
+        }
+      ],
+      "finalDecision": "accept",
+      "bindingState": "definition-proposal-bound-to-graph-object",
+      "sourceIds": [
+        "src-dlmf-intervals",
+        "src-ieee-1788-identity"
+      ],
+      "boundary": "This binds an internally reviewed definition proposal to a non-route graph identity. It does not publish a route, constitute external expert review, or support a dependent application claim."
+    },
+    {
+      "graphObjectId": "cand_2cb4942c45f1804543a91a4a",
+      "graphObjectDigest": "sha256:f6f67f647fa5cf96070e5bf50faad8e875f32a2d801f503504e67bf6e5d85feb",
+      "conceptId": "urn:maha:concept:computation:numerical-integration",
+      "proposalDigest": "sha256:172aec2bdfae2a60420288b27bae4714b204601bb648371da8f481f2a89d0770",
+      "reviewerKind": "automated-internal-editorial",
+      "humanReviewed": false,
+      "expertReviewed": false,
+      "axes": [
+        {
+          "axis": "source-identity",
+          "decision": "approve",
+          "proposalDigest": "sha256:172aec2bdfae2a60420288b27bae4714b204601bb648371da8f481f2a89d0770",
+          "graphObjectDigest": "sha256:f6f67f647fa5cf96070e5bf50faad8e875f32a2d801f503504e67bf6e5d85feb"
+        },
+        {
+          "axis": "locator",
+          "decision": "approve",
+          "proposalDigest": "sha256:172aec2bdfae2a60420288b27bae4714b204601bb648371da8f481f2a89d0770",
+          "graphObjectDigest": "sha256:f6f67f647fa5cf96070e5bf50faad8e875f32a2d801f503504e67bf6e5d85feb"
+        },
+        {
+          "axis": "claim-scope",
+          "decision": "approve",
+          "proposalDigest": "sha256:172aec2bdfae2a60420288b27bae4714b204601bb648371da8f481f2a89d0770",
+          "graphObjectDigest": "sha256:f6f67f647fa5cf96070e5bf50faad8e875f32a2d801f503504e67bf6e5d85feb"
+        },
+        {
+          "axis": "rights",
+          "decision": "approve",
+          "proposalDigest": "sha256:172aec2bdfae2a60420288b27bae4714b204601bb648371da8f481f2a89d0770",
+          "graphObjectDigest": "sha256:f6f67f647fa5cf96070e5bf50faad8e875f32a2d801f503504e67bf6e5d85feb"
+        },
+        {
+          "axis": "boundary",
+          "decision": "approve",
+          "proposalDigest": "sha256:172aec2bdfae2a60420288b27bae4714b204601bb648371da8f481f2a89d0770",
+          "graphObjectDigest": "sha256:f6f67f647fa5cf96070e5bf50faad8e875f32a2d801f503504e67bf6e5d85feb"
+        }
+      ],
+      "finalDecision": "accept",
+      "bindingState": "definition-proposal-bound-to-graph-object",
+      "sourceIds": [
+        "src-dlmf-quadrature"
+      ],
+      "boundary": "This binds an internally reviewed definition proposal to a non-route graph identity. It does not publish a route, constitute external expert review, or support a dependent application claim."
+    },
+    {
+      "graphObjectId": "cand_0d9b1a88cbf93d413a243d71",
+      "graphObjectDigest": "sha256:5389be2b9dabf8993610fe5578530e8adc14ec79d27d2ebabc5e550373557956",
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "proposalDigest": "sha256:f66f4a234c95611f001c5ed7147aeb767ac56fddd2a95f8ce3fbc8e45312cb7d",
+      "reviewerKind": "automated-internal-editorial",
+      "humanReviewed": false,
+      "expertReviewed": false,
+      "axes": [
+        {
+          "axis": "source-identity",
+          "decision": "approve",
+          "proposalDigest": "sha256:f66f4a234c95611f001c5ed7147aeb767ac56fddd2a95f8ce3fbc8e45312cb7d",
+          "graphObjectDigest": "sha256:5389be2b9dabf8993610fe5578530e8adc14ec79d27d2ebabc5e550373557956"
+        },
+        {
+          "axis": "locator",
+          "decision": "approve",
+          "proposalDigest": "sha256:f66f4a234c95611f001c5ed7147aeb767ac56fddd2a95f8ce3fbc8e45312cb7d",
+          "graphObjectDigest": "sha256:5389be2b9dabf8993610fe5578530e8adc14ec79d27d2ebabc5e550373557956"
+        },
+        {
+          "axis": "claim-scope",
+          "decision": "approve",
+          "proposalDigest": "sha256:f66f4a234c95611f001c5ed7147aeb767ac56fddd2a95f8ce3fbc8e45312cb7d",
+          "graphObjectDigest": "sha256:5389be2b9dabf8993610fe5578530e8adc14ec79d27d2ebabc5e550373557956"
+        },
+        {
+          "axis": "rights",
+          "decision": "approve",
+          "proposalDigest": "sha256:f66f4a234c95611f001c5ed7147aeb767ac56fddd2a95f8ce3fbc8e45312cb7d",
+          "graphObjectDigest": "sha256:5389be2b9dabf8993610fe5578530e8adc14ec79d27d2ebabc5e550373557956"
+        },
+        {
+          "axis": "boundary",
+          "decision": "approve",
+          "proposalDigest": "sha256:f66f4a234c95611f001c5ed7147aeb767ac56fddd2a95f8ce3fbc8e45312cb7d",
+          "graphObjectDigest": "sha256:5389be2b9dabf8993610fe5578530e8adc14ec79d27d2ebabc5e550373557956"
+        }
+      ],
+      "finalDecision": "accept",
+      "bindingState": "definition-proposal-bound-to-graph-object",
+      "sourceIds": [
+        "src-nist-stability"
+      ],
+      "boundary": "This binds an internally reviewed definition proposal to a non-route graph identity. It does not publish a route, constitute external expert review, or support a dependent application claim."
+    },
+    {
+      "graphObjectId": "cand_9e9edd5648c41382537f568c",
+      "graphObjectDigest": "sha256:0a0134ec1fd34db87271fa095b28cce0bebd8de403bbcc6382a4aa70f453d348",
+      "conceptId": "urn:maha:concept:computation:optimization",
+      "proposalDigest": "sha256:42d2317c121a92cb77c14316ec73bf344799b172dac3b85e0f1ee7fb9187b64b",
+      "reviewerKind": "automated-internal-editorial",
+      "humanReviewed": false,
+      "expertReviewed": false,
+      "axes": [
+        {
+          "axis": "source-identity",
+          "decision": "approve",
+          "proposalDigest": "sha256:42d2317c121a92cb77c14316ec73bf344799b172dac3b85e0f1ee7fb9187b64b",
+          "graphObjectDigest": "sha256:0a0134ec1fd34db87271fa095b28cce0bebd8de403bbcc6382a4aa70f453d348"
+        },
+        {
+          "axis": "locator",
+          "decision": "approve",
+          "proposalDigest": "sha256:42d2317c121a92cb77c14316ec73bf344799b172dac3b85e0f1ee7fb9187b64b",
+          "graphObjectDigest": "sha256:0a0134ec1fd34db87271fa095b28cce0bebd8de403bbcc6382a4aa70f453d348"
+        },
+        {
+          "axis": "claim-scope",
+          "decision": "approve",
+          "proposalDigest": "sha256:42d2317c121a92cb77c14316ec73bf344799b172dac3b85e0f1ee7fb9187b64b",
+          "graphObjectDigest": "sha256:0a0134ec1fd34db87271fa095b28cce0bebd8de403bbcc6382a4aa70f453d348"
+        },
+        {
+          "axis": "rights",
+          "decision": "approve",
+          "proposalDigest": "sha256:42d2317c121a92cb77c14316ec73bf344799b172dac3b85e0f1ee7fb9187b64b",
+          "graphObjectDigest": "sha256:0a0134ec1fd34db87271fa095b28cce0bebd8de403bbcc6382a4aa70f453d348"
+        },
+        {
+          "axis": "boundary",
+          "decision": "approve",
+          "proposalDigest": "sha256:42d2317c121a92cb77c14316ec73bf344799b172dac3b85e0f1ee7fb9187b64b",
+          "graphObjectDigest": "sha256:0a0134ec1fd34db87271fa095b28cce0bebd8de403bbcc6382a4aa70f453d348"
+        }
+      ],
+      "finalDecision": "accept",
+      "bindingState": "definition-proposal-bound-to-graph-object",
+      "sourceIds": [
+        "src-boyd-optimization"
+      ],
+      "boundary": "This binds an internally reviewed definition proposal to a non-route graph identity. It does not publish a route, constitute external expert review, or support a dependent application claim."
+    },
+    {
+      "graphObjectId": "cand_c1e0a9d1956d137e337cae16",
+      "graphObjectDigest": "sha256:06780bd07859fc9ae14da4554a2cd90194c21a32139411e85d2f6b12cd4a97a2",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "proposalDigest": "sha256:471c0c05eb71b8b7c0849ff815db29348148b275358fd4ff38c5bd3a2bded41c",
+      "reviewerKind": "automated-internal-editorial",
+      "humanReviewed": false,
+      "expertReviewed": false,
+      "axes": [
+        {
+          "axis": "source-identity",
+          "decision": "approve",
+          "proposalDigest": "sha256:471c0c05eb71b8b7c0849ff815db29348148b275358fd4ff38c5bd3a2bded41c",
+          "graphObjectDigest": "sha256:06780bd07859fc9ae14da4554a2cd90194c21a32139411e85d2f6b12cd4a97a2"
+        },
+        {
+          "axis": "locator",
+          "decision": "approve",
+          "proposalDigest": "sha256:471c0c05eb71b8b7c0849ff815db29348148b275358fd4ff38c5bd3a2bded41c",
+          "graphObjectDigest": "sha256:06780bd07859fc9ae14da4554a2cd90194c21a32139411e85d2f6b12cd4a97a2"
+        },
+        {
+          "axis": "claim-scope",
+          "decision": "approve",
+          "proposalDigest": "sha256:471c0c05eb71b8b7c0849ff815db29348148b275358fd4ff38c5bd3a2bded41c",
+          "graphObjectDigest": "sha256:06780bd07859fc9ae14da4554a2cd90194c21a32139411e85d2f6b12cd4a97a2"
+        },
+        {
+          "axis": "rights",
+          "decision": "approve",
+          "proposalDigest": "sha256:471c0c05eb71b8b7c0849ff815db29348148b275358fd4ff38c5bd3a2bded41c",
+          "graphObjectDigest": "sha256:06780bd07859fc9ae14da4554a2cd90194c21a32139411e85d2f6b12cd4a97a2"
+        },
+        {
+          "axis": "boundary",
+          "decision": "approve",
+          "proposalDigest": "sha256:471c0c05eb71b8b7c0849ff815db29348148b275358fd4ff38c5bd3a2bded41c",
+          "graphObjectDigest": "sha256:06780bd07859fc9ae14da4554a2cd90194c21a32139411e85d2f6b12cd4a97a2"
+        }
+      ],
+      "finalDecision": "accept",
+      "bindingState": "definition-proposal-bound-to-graph-object",
+      "sourceIds": [
+        "src-iers-reference-frames"
+      ],
+      "boundary": "This binds an internally reviewed definition proposal to a non-route graph identity. It does not publish a route, constitute external expert review, or support a dependent application claim."
+    },
+    {
+      "graphObjectId": "cand_4e3ffcedfa7d51607e56c384",
+      "graphObjectDigest": "sha256:f4a3378d13568746010b7b36924be6f43270d34142dfdf6c8551d8dc59b8ac79",
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "proposalDigest": "sha256:1d8d2f1eecc8a7f071e9083e251cebde1fb9557d8ef417b3bbfdf4de66bcacd5",
+      "reviewerKind": "automated-internal-editorial",
+      "humanReviewed": false,
+      "expertReviewed": false,
+      "axes": [
+        {
+          "axis": "source-identity",
+          "decision": "approve",
+          "proposalDigest": "sha256:1d8d2f1eecc8a7f071e9083e251cebde1fb9557d8ef417b3bbfdf4de66bcacd5",
+          "graphObjectDigest": "sha256:f4a3378d13568746010b7b36924be6f43270d34142dfdf6c8551d8dc59b8ac79"
+        },
+        {
+          "axis": "locator",
+          "decision": "approve",
+          "proposalDigest": "sha256:1d8d2f1eecc8a7f071e9083e251cebde1fb9557d8ef417b3bbfdf4de66bcacd5",
+          "graphObjectDigest": "sha256:f4a3378d13568746010b7b36924be6f43270d34142dfdf6c8551d8dc59b8ac79"
+        },
+        {
+          "axis": "claim-scope",
+          "decision": "approve",
+          "proposalDigest": "sha256:1d8d2f1eecc8a7f071e9083e251cebde1fb9557d8ef417b3bbfdf4de66bcacd5",
+          "graphObjectDigest": "sha256:f4a3378d13568746010b7b36924be6f43270d34142dfdf6c8551d8dc59b8ac79"
+        },
+        {
+          "axis": "rights",
+          "decision": "approve",
+          "proposalDigest": "sha256:1d8d2f1eecc8a7f071e9083e251cebde1fb9557d8ef417b3bbfdf4de66bcacd5",
+          "graphObjectDigest": "sha256:f4a3378d13568746010b7b36924be6f43270d34142dfdf6c8551d8dc59b8ac79"
+        },
+        {
+          "axis": "boundary",
+          "decision": "approve",
+          "proposalDigest": "sha256:1d8d2f1eecc8a7f071e9083e251cebde1fb9557d8ef417b3bbfdf4de66bcacd5",
+          "graphObjectDigest": "sha256:f4a3378d13568746010b7b36924be6f43270d34142dfdf6c8551d8dc59b8ac79"
+        }
+      ],
+      "finalDecision": "accept",
+      "bindingState": "definition-proposal-bound-to-graph-object",
+      "sourceIds": [
+        "src-dlmf-roots"
+      ],
+      "boundary": "This binds an internally reviewed definition proposal to a non-route graph identity. It does not publish a route, constitute external expert review, or support a dependent application claim."
+    }
+  ],
+  "provenanceDigest": "sha256:772ff16b68b34805a3233a877dd3e830600c879c6cbf5d2e09d4493a9a071c6c"
+}

@@ -1,0 +1,1083 @@
+{
+  "schemaVersion": "maha-federation-readiness-tranche-24-page-specifications/1.0",
+  "frozenOn": "2026-09-07",
+  "counts": {
+    "specifications": 27,
+    "boundedQuestions": 135
+  },
+  "specifications": [
+    {
+      "candidateId": "cand_0a1775a5b9a6b6567320c246",
+      "candidateDigest": "sha256:92a418ea95081d955f9c4a77d5fbe28e7cd472a8b7a11d53d6d35b9129908284",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/marutam/commentary",
+      "title": "Marutam — Commentary",
+      "conceptId": "urn:maha:concept:translation:marutam",
+      "routeRole": "commentary",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "tolkappiyam-porul-5-t10",
+          "locator": "https://textgridrep.org/browse/49tqk.0 — TextGrid version dated 2025-05-27; Project Madurai base text prepared 1999–2001; Akattiṇaiyiyal, nūṟpā 5, complete six-line deity-and-landscape stanza",
+          "rightsBasis": "CC BY-NC-SA 4.0 for the TextGrid representation; short quotation with attribution.",
+          "scope": "The printed unit orders Māyōṉ with mullai, Cēyōṉ with kuṟiñci, Vēntaṉ with marutam, and Varuṇaṉ with neytal.",
+          "boundary": "The stanza establishes wording and literary classification, not chronology, ethnic ownership, modern geography, a complete pantheon, or later theological identity."
+        }
+      ],
+      "decisionDigest": "sha256:184051855db4789b6eefcf4044d0e93218d147fa71f75655f46c3b3f1eae0bec",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_0e200c54da13414a9525e48b",
+      "candidateDigest": "sha256:302891381d80900aa458e7a8cd5406e11bf004912964181cbaac5c7b482e41b2",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/marutam/translation",
+      "title": "Marutam — Translation",
+      "conceptId": "urn:maha:concept:translation:marutam",
+      "routeRole": "translation",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "tolkappiyam-porul-5-t10",
+          "locator": "https://textgridrep.org/browse/49tqk.0 — TextGrid version dated 2025-05-27; Project Madurai base text prepared 1999–2001; Akattiṇaiyiyal, nūṟpā 5, complete six-line deity-and-landscape stanza",
+          "rightsBasis": "CC BY-NC-SA 4.0 for the TextGrid representation; short quotation with attribution.",
+          "scope": "The printed unit orders Māyōṉ with mullai, Cēyōṉ with kuṟiñci, Vēntaṉ with marutam, and Varuṇaṉ with neytal.",
+          "boundary": "The stanza establishes wording and literary classification, not chronology, ethnic ownership, modern geography, a complete pantheon, or later theological identity."
+        }
+      ],
+      "decisionDigest": "sha256:b882c514de73fff4d9f358c228c66b88b4ec283f1a08bc414688acbd82027559",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_0e8abe8f5d721c23e51bd0e0",
+      "candidateDigest": "sha256:b0a394afaca8e1b3d563da408d0845b8ce7e4fc1fde86b38cefbc74763b68025",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/divine-epithets/identity",
+      "title": "Divine Epithets — Identity",
+      "conceptId": "urn:maha:concept:translation:divine-epithets",
+      "routeRole": "identity",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "project-madurai-paripatal-t9",
+          "locator": "https://www.projectmadurai.org/pm_etexts/utf8/pmuni0087.html — Unicode Tamil edition first published 2000; page notice updated through 2021; Tirumāl poems 1–4, 13 and 15; especially poem 2 lines 20–25 and poem 3 lines 31–40",
+          "rightsBasis": "Project Madurai permits free distribution with its header intact; this packet links and paraphrases only.",
+          "scope": "The inspected edition preserves named devotional epithets, associated figures, poetic places, and compressed mythic allusions in specific Tirumāl poems.",
+          "boundary": "An epithet occurrence establishes wording in one passage; it does not establish identity in every text, chronology, historical influence, or theological truth."
+        },
+        {
+          "sourceId": "divya-prabandham-part-4-t9",
+          "locator": "https://www.projectmadurai.org/pm_etexts/utf8/pmuni0624_eng.html — Project Madurai translation containing pāsurams 2971–4000; Tiruvāymoḻi pāsurams 3052–3054, 3147–3150, 3211–3232, 3244–3254 and 3288–3298",
+          "rightsBasis": "Project Madurai distribution terms; limited quotation and bounded paraphrase with translator attribution.",
+          "scope": "The named translation renders later devotional occurrences of forms including Māyan, Māl, Kaṇṇan, Nārāyaṇa, and Neṭumāl at exact numbered units.",
+          "boundary": "This establishes one translator’s rendering, not the untranslated Tamil’s complete range, continuity from Sangam texts, timeless equivalence, or theological truth."
+        }
+      ],
+      "decisionDigest": "sha256:7e1f158f9fde32e5264a3153d56b28bba5e318c403af9ac828860c449d66de68",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_25bfa0b1ecacebcf6baebe83",
+      "candidateDigest": "sha256:4a86808a32c388a64d3e18a6e6e86e160ec38196edd513e2da2c546e7331d86a",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/primary-text-boundaries/identity",
+      "title": "Primary Text Boundaries — Identity",
+      "conceptId": "urn:maha:concept:translation:primary-text-boundaries",
+      "routeRole": "identity",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "tolkappiyam-porul-5-t10",
+          "locator": "https://textgridrep.org/browse/49tqk.0 — TextGrid version dated 2025-05-27; Project Madurai base text prepared 1999–2001; Akattiṇaiyiyal, nūṟpā 5, complete six-line deity-and-landscape stanza",
+          "rightsBasis": "CC BY-NC-SA 4.0 for the TextGrid representation; short quotation with attribution.",
+          "scope": "The printed unit orders Māyōṉ with mullai, Cēyōṉ with kuṟiñci, Vēntaṉ with marutam, and Varuṇaṉ with neytal.",
+          "boundary": "The stanza establishes wording and literary classification, not chronology, ethnic ownership, modern geography, a complete pantheon, or later theological identity."
+        },
+        {
+          "sourceId": "project-madurai-tiruvaymoli-t10",
+          "locator": "https://www.projectmadurai.org/pm_etexts/utf8/pmuni0624_eng.html — Project Madurai translation containing pāsurams 2971–4000; Edition header and Tiruvāymoḻi pāsurams 2791–3298, including numbered units with Māyan, Māl, Kaṇṇan, Nārāyaṇa and named devotional places",
+          "rightsBasis": "Project Madurai permits free distribution with its header intact; this packet links and paraphrases only.",
+          "scope": "The named translation supplies passage-level later devotional occurrences, poetic voices, places, epithets, and relationships.",
+          "boundary": "This is one translator’s rendering, not the untranslated Tamil, a critical apparatus, proof of direct descent from Sangam material, or verification of theology."
+        },
+        {
+          "sourceId": "local-mayon-evidence-frames-t10",
+          "locator": "repo:lib/mayon-knowledge.ts — repository source inspected 2026-09-06; MayonEvidenceFrame; MAYON_SOURCES; MAYON_CLAIMS; commentarial-identification-layer",
+          "rightsBasis": "Maha-controlled repository source; headings, symbols, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The local contract records exact source locators and distinguishes primary text, named translation, attributed scholarship, and bibliographic records.",
+          "boundary": "A typed frame prevents authority transfer; it does not make a source correct, settle textual variants, verify theology, or permit silent translation."
+        }
+      ],
+      "decisionDigest": "sha256:a8048ed87b9e7aeac9260bbce458ec0e1893b115cb78c058c574f83b22911b13",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_2fa80f875634ff36dd3debd0",
+      "candidateDigest": "sha256:a0c45b2330abef267619eeb84f334b7e7b45dccf45496cdbe1817be469685069",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/primary-text-boundaries/primary-text",
+      "title": "Primary Text Boundaries — Primary Text",
+      "conceptId": "urn:maha:concept:translation:primary-text-boundaries",
+      "routeRole": "primary-text",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "tolkappiyam-porul-5-t10",
+          "locator": "https://textgridrep.org/browse/49tqk.0 — TextGrid version dated 2025-05-27; Project Madurai base text prepared 1999–2001; Akattiṇaiyiyal, nūṟpā 5, complete six-line deity-and-landscape stanza",
+          "rightsBasis": "CC BY-NC-SA 4.0 for the TextGrid representation; short quotation with attribution.",
+          "scope": "The printed unit orders Māyōṉ with mullai, Cēyōṉ with kuṟiñci, Vēntaṉ with marutam, and Varuṇaṉ with neytal.",
+          "boundary": "The stanza establishes wording and literary classification, not chronology, ethnic ownership, modern geography, a complete pantheon, or later theological identity."
+        },
+        {
+          "sourceId": "project-madurai-tiruvaymoli-t10",
+          "locator": "https://www.projectmadurai.org/pm_etexts/utf8/pmuni0624_eng.html — Project Madurai translation containing pāsurams 2971–4000; Edition header and Tiruvāymoḻi pāsurams 2791–3298, including numbered units with Māyan, Māl, Kaṇṇan, Nārāyaṇa and named devotional places",
+          "rightsBasis": "Project Madurai permits free distribution with its header intact; this packet links and paraphrases only.",
+          "scope": "The named translation supplies passage-level later devotional occurrences, poetic voices, places, epithets, and relationships.",
+          "boundary": "This is one translator’s rendering, not the untranslated Tamil, a critical apparatus, proof of direct descent from Sangam material, or verification of theology."
+        },
+        {
+          "sourceId": "local-mayon-evidence-frames-t10",
+          "locator": "repo:lib/mayon-knowledge.ts — repository source inspected 2026-09-06; MayonEvidenceFrame; MAYON_SOURCES; MAYON_CLAIMS; commentarial-identification-layer",
+          "rightsBasis": "Maha-controlled repository source; headings, symbols, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The local contract records exact source locators and distinguishes primary text, named translation, attributed scholarship, and bibliographic records.",
+          "boundary": "A typed frame prevents authority transfer; it does not make a source correct, settle textual variants, verify theology, or permit silent translation."
+        }
+      ],
+      "decisionDigest": "sha256:871972bae5b4fd21065bc6821b237a44fc724d780be9b7634dd70ed11cef71a6",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_4b35a196452f5653ccaf092a",
+      "candidateDigest": "sha256:7dab66a634e35047aaa41c0d8cc183aecb9c876048aee04830b09b7f4932d038",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/alvar-reception/primary-text",
+      "title": "Alvar Reception — Primary Text",
+      "conceptId": "urn:maha:concept:translation:alvar-reception",
+      "routeRole": "primary-text",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "project-madurai-tiruvaymoli-t10",
+          "locator": "https://www.projectmadurai.org/pm_etexts/utf8/pmuni0624_eng.html — Project Madurai translation containing pāsurams 2971–4000; Edition header and Tiruvāymoḻi pāsurams 2791–3298, including numbered units with Māyan, Māl, Kaṇṇan, Nārāyaṇa and named devotional places",
+          "rightsBasis": "Project Madurai permits free distribution with its header intact; this packet links and paraphrases only.",
+          "scope": "The named translation supplies passage-level later devotional occurrences, poetic voices, places, epithets, and relationships.",
+          "boundary": "This is one translator’s rendering, not the untranslated Tamil, a critical apparatus, proof of direct descent from Sangam material, or verification of theology."
+        },
+        {
+          "sourceId": "reddy-tamil-bhakti-context-t10",
+          "locator": "https://escholarship.org/content/qt9v6585kp/qt9v6585kp.pdf — PhD dissertation, 2011; pp. 25–26, 30, 33–46 and 88–93: Tamil bhakti, Āḻvārs, Nammāḻvār, temple localization, and akam/tiṇai literary continuity",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "scope": "The dissertation supplies an attributed literary and reception-historical context for Āḻvār devotion, Nammāḻvār, localization, and adaptation of Tamil poetic modes.",
+          "boundary": "Literary continuity does not prove unchanged identity, cult, doctrine, institution, or direct transmission between any two named passages."
+        }
+      ],
+      "decisionDigest": "sha256:cf498dcdf48b7a6782a73d5ed4a691adc13c568ddc125d5e36268dbb5b30fd16",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_60c8a827c07cc6a69276fc3e",
+      "candidateDigest": "sha256:2198121437bedec8535720502c9b7f0f24c24332a464c703cceebf6b13d9b892",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/primary-text-boundaries/translation",
+      "title": "Primary Text Boundaries — Translation",
+      "conceptId": "urn:maha:concept:translation:primary-text-boundaries",
+      "routeRole": "translation",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "tolkappiyam-porul-5-t10",
+          "locator": "https://textgridrep.org/browse/49tqk.0 — TextGrid version dated 2025-05-27; Project Madurai base text prepared 1999–2001; Akattiṇaiyiyal, nūṟpā 5, complete six-line deity-and-landscape stanza",
+          "rightsBasis": "CC BY-NC-SA 4.0 for the TextGrid representation; short quotation with attribution.",
+          "scope": "The printed unit orders Māyōṉ with mullai, Cēyōṉ with kuṟiñci, Vēntaṉ with marutam, and Varuṇaṉ with neytal.",
+          "boundary": "The stanza establishes wording and literary classification, not chronology, ethnic ownership, modern geography, a complete pantheon, or later theological identity."
+        },
+        {
+          "sourceId": "project-madurai-tiruvaymoli-t10",
+          "locator": "https://www.projectmadurai.org/pm_etexts/utf8/pmuni0624_eng.html — Project Madurai translation containing pāsurams 2971–4000; Edition header and Tiruvāymoḻi pāsurams 2791–3298, including numbered units with Māyan, Māl, Kaṇṇan, Nārāyaṇa and named devotional places",
+          "rightsBasis": "Project Madurai permits free distribution with its header intact; this packet links and paraphrases only.",
+          "scope": "The named translation supplies passage-level later devotional occurrences, poetic voices, places, epithets, and relationships.",
+          "boundary": "This is one translator’s rendering, not the untranslated Tamil, a critical apparatus, proof of direct descent from Sangam material, or verification of theology."
+        },
+        {
+          "sourceId": "local-mayon-evidence-frames-t10",
+          "locator": "repo:lib/mayon-knowledge.ts — repository source inspected 2026-09-06; MayonEvidenceFrame; MAYON_SOURCES; MAYON_CLAIMS; commentarial-identification-layer",
+          "rightsBasis": "Maha-controlled repository source; headings, symbols, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The local contract records exact source locators and distinguishes primary text, named translation, attributed scholarship, and bibliographic records.",
+          "boundary": "A typed frame prevents authority transfer; it does not make a source correct, settle textual variants, verify theology, or permit silent translation."
+        }
+      ],
+      "decisionDigest": "sha256:225dffc476a19078a9f87de1e622a4563bc2e9f4f602da8d200702e6f0421cd4",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_69be6c48cdea298121802157",
+      "candidateDigest": "sha256:432393de1bc05e7bd8a32bfb39921579f20338ff1fed4118abb7dc7f7e8f1b61",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/kurinji/identity",
+      "title": "Kurinji — Identity",
+      "conceptId": "urn:maha:concept:translation:kurinji",
+      "routeRole": "identity",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "tolkappiyam-porul-5-t9",
+          "locator": "https://textgridrep.org/browse/49tqk.0 — TextGrid version dated 2025-05-27; Project Madurai base text prepared 1999–2001; Akattiṇaiyiyal, nūṟpā 5, complete six-line deity-and-landscape stanza",
+          "rightsBasis": "CC BY-NC-SA 4.0 for the TextGrid representation; short quotation with attribution.",
+          "scope": "The edition places Māyōṉ with mullai and Cēyōṉ with kuṟiñci as two relations in one literary landscape classification.",
+          "boundary": "The stanza establishes wording and literary classification, not chronology, ethnic ownership, universal worship, a complete pantheon, or later theological identity."
+        }
+      ],
+      "decisionDigest": "sha256:e2f50cc2846e52a5a4623f7384304ba33ff4325e692d82403f94e19780f9bee8",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_6f6307db0d85b291334329b5",
+      "candidateDigest": "sha256:1ed8cb2d74523a09d584d7015e8eb2eadc47ca17a1244ecbc85b4b9892cf9c66",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/primary-text-boundaries/commentary",
+      "title": "Primary Text Boundaries — Commentary",
+      "conceptId": "urn:maha:concept:translation:primary-text-boundaries",
+      "routeRole": "commentary",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "tolkappiyam-porul-5-t10",
+          "locator": "https://textgridrep.org/browse/49tqk.0 — TextGrid version dated 2025-05-27; Project Madurai base text prepared 1999–2001; Akattiṇaiyiyal, nūṟpā 5, complete six-line deity-and-landscape stanza",
+          "rightsBasis": "CC BY-NC-SA 4.0 for the TextGrid representation; short quotation with attribution.",
+          "scope": "The printed unit orders Māyōṉ with mullai, Cēyōṉ with kuṟiñci, Vēntaṉ with marutam, and Varuṇaṉ with neytal.",
+          "boundary": "The stanza establishes wording and literary classification, not chronology, ethnic ownership, modern geography, a complete pantheon, or later theological identity."
+        },
+        {
+          "sourceId": "project-madurai-tiruvaymoli-t10",
+          "locator": "https://www.projectmadurai.org/pm_etexts/utf8/pmuni0624_eng.html — Project Madurai translation containing pāsurams 2971–4000; Edition header and Tiruvāymoḻi pāsurams 2791–3298, including numbered units with Māyan, Māl, Kaṇṇan, Nārāyaṇa and named devotional places",
+          "rightsBasis": "Project Madurai permits free distribution with its header intact; this packet links and paraphrases only.",
+          "scope": "The named translation supplies passage-level later devotional occurrences, poetic voices, places, epithets, and relationships.",
+          "boundary": "This is one translator’s rendering, not the untranslated Tamil, a critical apparatus, proof of direct descent from Sangam material, or verification of theology."
+        },
+        {
+          "sourceId": "local-mayon-evidence-frames-t10",
+          "locator": "repo:lib/mayon-knowledge.ts — repository source inspected 2026-09-06; MayonEvidenceFrame; MAYON_SOURCES; MAYON_CLAIMS; commentarial-identification-layer",
+          "rightsBasis": "Maha-controlled repository source; headings, symbols, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The local contract records exact source locators and distinguishes primary text, named translation, attributed scholarship, and bibliographic records.",
+          "boundary": "A typed frame prevents authority transfer; it does not make a source correct, settle textual variants, verify theology, or permit silent translation."
+        }
+      ],
+      "decisionDigest": "sha256:a55b47b90fa63f84775d4aeef0821660044859c6a629531fadd34d6ecc1e3710",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_71ced5b91f6f804fc9a0b82e",
+      "candidateDigest": "sha256:1ec347498239c6b1375c8567f7e2be77d13208d94ea8a48d5d857fcdc9e5ca13",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/marutam/primary-text",
+      "title": "Marutam — Primary Text",
+      "conceptId": "urn:maha:concept:translation:marutam",
+      "routeRole": "primary-text",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "tolkappiyam-porul-5-t10",
+          "locator": "https://textgridrep.org/browse/49tqk.0 — TextGrid version dated 2025-05-27; Project Madurai base text prepared 1999–2001; Akattiṇaiyiyal, nūṟpā 5, complete six-line deity-and-landscape stanza",
+          "rightsBasis": "CC BY-NC-SA 4.0 for the TextGrid representation; short quotation with attribution.",
+          "scope": "The printed unit orders Māyōṉ with mullai, Cēyōṉ with kuṟiñci, Vēntaṉ with marutam, and Varuṇaṉ with neytal.",
+          "boundary": "The stanza establishes wording and literary classification, not chronology, ethnic ownership, modern geography, a complete pantheon, or later theological identity."
+        }
+      ],
+      "decisionDigest": "sha256:beaa67137928d24678f75ed87f5663027b57c1fa2da3fec83f7ee9bea01e70f1",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_7c0b749f34884a72429e5c55",
+      "candidateDigest": "sha256:82927a82000223ffc249e0345e89eb598686f7041b3a54fb7142bd97e5af841b",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/primary-source/source-contract",
+      "title": "Primary Source — Source Contract",
+      "conceptId": "urn:maha:concept:evidence:primary-source",
+      "routeRole": "source-contract",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t24-loc-primary-sources",
+          "locator": "https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/ — “What are primary sources?” and “Why teach with primary sources?”",
+          "rightsBasis": "official-public-reference; bounded paraphrase only",
+          "scope": "Defines primary sources as original documents and objects created at the time under study and distinguishes observation from inference during analysis.",
+          "boundary": "Whether something is primary depends on the research question and use; primary status does not establish truth, completeness, neutrality, or sufficient context."
+        },
+        {
+          "sourceId": "t24-primary-source-contract",
+          "locator": "lib/source-recovery.ts — validateObservation and compileRecoveryPackets",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Separates source identity, access, inspection depth, locator, version relationship, and claim support.",
+          "boundary": "A typed recovery packet records supplied evidence state; it does not prove that a source is truthful or sufficient for a claim."
+        }
+      ],
+      "decisionDigest": "sha256:e7bf1639afa41199b55812403737c270f9cb07a1d67a0af088a647bd451762ce",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_87c7ff26f45f61ba7eac93df",
+      "candidateDigest": "sha256:d0356e7d089244fda116afdb9433390003e4e68b426c8e736e87afcdd6d1f1e7",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/mullai/primary-text",
+      "title": "Mullai — Primary Text",
+      "conceptId": "urn:maha:concept:translation:mullai",
+      "routeRole": "primary-text",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "tolkappiyam-porul-5-t9",
+          "locator": "https://textgridrep.org/browse/49tqk.0 — TextGrid version dated 2025-05-27; Project Madurai base text prepared 1999–2001; Akattiṇaiyiyal, nūṟpā 5, complete six-line deity-and-landscape stanza",
+          "rightsBasis": "CC BY-NC-SA 4.0 for the TextGrid representation; short quotation with attribution.",
+          "scope": "The edition places Māyōṉ with mullai and Cēyōṉ with kuṟiñci as two relations in one literary landscape classification.",
+          "boundary": "The stanza establishes wording and literary classification, not chronology, ethnic ownership, universal worship, a complete pantheon, or later theological identity."
+        },
+        {
+          "sourceId": "project-madurai-paripatal-t9",
+          "locator": "https://www.projectmadurai.org/pm_etexts/utf8/pmuni0087.html — Unicode Tamil edition first published 2000; page notice updated through 2021; Tirumāl poems 1–4, 13 and 15; especially poem 2 lines 20–25 and poem 3 lines 31–40",
+          "rightsBasis": "Project Madurai permits free distribution with its header intact; this packet links and paraphrases only.",
+          "scope": "The inspected edition preserves named devotional epithets, associated figures, poetic places, and compressed mythic allusions in specific Tirumāl poems.",
+          "boundary": "An epithet occurrence establishes wording in one passage; it does not establish identity in every text, chronology, historical influence, or theological truth."
+        }
+      ],
+      "decisionDigest": "sha256:0d2a7de059735db050cbe7c5e56039bb4d221005aee7bb522d6a9faf6958cae9",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_8ed6aeaa67a8dbdf63894edb",
+      "candidateDigest": "sha256:88f5b2d1fc188aa89c9f9b3f4eb363edf77cb38777c38bac3cc21d1bd3802a89",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/marutam/identity",
+      "title": "Marutam — Identity",
+      "conceptId": "urn:maha:concept:translation:marutam",
+      "routeRole": "identity",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "tolkappiyam-porul-5-t10",
+          "locator": "https://textgridrep.org/browse/49tqk.0 — TextGrid version dated 2025-05-27; Project Madurai base text prepared 1999–2001; Akattiṇaiyiyal, nūṟpā 5, complete six-line deity-and-landscape stanza",
+          "rightsBasis": "CC BY-NC-SA 4.0 for the TextGrid representation; short quotation with attribution.",
+          "scope": "The printed unit orders Māyōṉ with mullai, Cēyōṉ with kuṟiñci, Vēntaṉ with marutam, and Varuṇaṉ with neytal.",
+          "boundary": "The stanza establishes wording and literary classification, not chronology, ethnic ownership, modern geography, a complete pantheon, or later theological identity."
+        }
+      ],
+      "decisionDigest": "sha256:8394a612bf2453a43aced7cd10a9fc09aceafdee800c7b5f0bd2aed20743ee94",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_90b2281466f70b10b2e8ed6b",
+      "candidateDigest": "sha256:4fbce83e69c866cdb530e76f173c60784196d75d7c6ac765a1998e412438f06c",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/primary-source/protocol",
+      "title": "Primary Source — Protocol",
+      "conceptId": "urn:maha:concept:evidence:primary-source",
+      "routeRole": "protocol",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t24-loc-primary-sources",
+          "locator": "https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/ — “What are primary sources?” and “Why teach with primary sources?”",
+          "rightsBasis": "official-public-reference; bounded paraphrase only",
+          "scope": "Defines primary sources as original documents and objects created at the time under study and distinguishes observation from inference during analysis.",
+          "boundary": "Whether something is primary depends on the research question and use; primary status does not establish truth, completeness, neutrality, or sufficient context."
+        },
+        {
+          "sourceId": "t24-primary-source-contract",
+          "locator": "lib/source-recovery.ts — validateObservation and compileRecoveryPackets",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Separates source identity, access, inspection depth, locator, version relationship, and claim support.",
+          "boundary": "A typed recovery packet records supplied evidence state; it does not prove that a source is truthful or sufficient for a claim."
+        }
+      ],
+      "decisionDigest": "sha256:522eeeaa112fca4b6f9cd531e9992a49a275a79a713c4a7f3aec8984be5cbbbf",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_9c6ff21cc9ba97753bc29752",
+      "candidateDigest": "sha256:c0d67c8a4ae0381ed6d4b17b2140467109af8f361617aca31c61dfb5447cdcfb",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/alvar-reception/identity",
+      "title": "Alvar Reception — Identity",
+      "conceptId": "urn:maha:concept:translation:alvar-reception",
+      "routeRole": "identity",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "project-madurai-tiruvaymoli-t10",
+          "locator": "https://www.projectmadurai.org/pm_etexts/utf8/pmuni0624_eng.html — Project Madurai translation containing pāsurams 2971–4000; Edition header and Tiruvāymoḻi pāsurams 2791–3298, including numbered units with Māyan, Māl, Kaṇṇan, Nārāyaṇa and named devotional places",
+          "rightsBasis": "Project Madurai permits free distribution with its header intact; this packet links and paraphrases only.",
+          "scope": "The named translation supplies passage-level later devotional occurrences, poetic voices, places, epithets, and relationships.",
+          "boundary": "This is one translator’s rendering, not the untranslated Tamil, a critical apparatus, proof of direct descent from Sangam material, or verification of theology."
+        },
+        {
+          "sourceId": "reddy-tamil-bhakti-context-t10",
+          "locator": "https://escholarship.org/content/qt9v6585kp/qt9v6585kp.pdf — PhD dissertation, 2011; pp. 25–26, 30, 33–46 and 88–93: Tamil bhakti, Āḻvārs, Nammāḻvār, temple localization, and akam/tiṇai literary continuity",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "scope": "The dissertation supplies an attributed literary and reception-historical context for Āḻvār devotion, Nammāḻvār, localization, and adaptation of Tamil poetic modes.",
+          "boundary": "Literary continuity does not prove unchanged identity, cult, doctrine, institution, or direct transmission between any two named passages."
+        }
+      ],
+      "decisionDigest": "sha256:fa412b53e4a8ea3b3e9b3b461473d947b938a0f7d9d18ab090c0bd358ce294b0",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_b191247a151e250546645ccc",
+      "candidateDigest": "sha256:898650fc6ab1a3d367162b70ae3f71b1df2a761cafef8eec7cc49bdffac71125",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/primary-source/relationships",
+      "title": "Primary Source — Relationships",
+      "conceptId": "urn:maha:concept:evidence:primary-source",
+      "routeRole": "relationships",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t24-loc-primary-sources",
+          "locator": "https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/ — “What are primary sources?” and “Why teach with primary sources?”",
+          "rightsBasis": "official-public-reference; bounded paraphrase only",
+          "scope": "Defines primary sources as original documents and objects created at the time under study and distinguishes observation from inference during analysis.",
+          "boundary": "Whether something is primary depends on the research question and use; primary status does not establish truth, completeness, neutrality, or sufficient context."
+        },
+        {
+          "sourceId": "t24-primary-source-contract",
+          "locator": "lib/source-recovery.ts — validateObservation and compileRecoveryPackets",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Separates source identity, access, inspection depth, locator, version relationship, and claim support.",
+          "boundary": "A typed recovery packet records supplied evidence state; it does not prove that a source is truthful or sufficient for a claim."
+        }
+      ],
+      "decisionDigest": "sha256:d15a72f6d9a06470ee50dab53c1799ffe96b7532c81d66513b0d364e7230b34e",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_b4142ef56bd1085cc82ecd42",
+      "candidateDigest": "sha256:85f78bcf001ff7bb4af960f5227596d54a3770581c6b1a83321e92150d9c46a2",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/primary-source/method",
+      "title": "Primary Source — Method",
+      "conceptId": "urn:maha:concept:evidence:primary-source",
+      "routeRole": "method",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t24-loc-primary-sources",
+          "locator": "https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/ — “What are primary sources?” and “Why teach with primary sources?”",
+          "rightsBasis": "official-public-reference; bounded paraphrase only",
+          "scope": "Defines primary sources as original documents and objects created at the time under study and distinguishes observation from inference during analysis.",
+          "boundary": "Whether something is primary depends on the research question and use; primary status does not establish truth, completeness, neutrality, or sufficient context."
+        },
+        {
+          "sourceId": "t24-primary-source-contract",
+          "locator": "lib/source-recovery.ts — validateObservation and compileRecoveryPackets",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Separates source identity, access, inspection depth, locator, version relationship, and claim support.",
+          "boundary": "A typed recovery packet records supplied evidence state; it does not prove that a source is truthful or sufficient for a claim."
+        }
+      ],
+      "decisionDigest": "sha256:eac2b4c7561c64656b62b8f388ea8fd97a134284ece98f6aba44a76cbfdc0f04",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_c26ad556a93df4e1677d5228",
+      "candidateDigest": "sha256:23c65cb30b8dc071a288b8672cca78095e0f2fdf167b8f60043908ba21f43e77",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/kurinji/primary-text",
+      "title": "Kurinji — Primary Text",
+      "conceptId": "urn:maha:concept:translation:kurinji",
+      "routeRole": "primary-text",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "tolkappiyam-porul-5-t9",
+          "locator": "https://textgridrep.org/browse/49tqk.0 — TextGrid version dated 2025-05-27; Project Madurai base text prepared 1999–2001; Akattiṇaiyiyal, nūṟpā 5, complete six-line deity-and-landscape stanza",
+          "rightsBasis": "CC BY-NC-SA 4.0 for the TextGrid representation; short quotation with attribution.",
+          "scope": "The edition places Māyōṉ with mullai and Cēyōṉ with kuṟiñci as two relations in one literary landscape classification.",
+          "boundary": "The stanza establishes wording and literary classification, not chronology, ethnic ownership, universal worship, a complete pantheon, or later theological identity."
+        }
+      ],
+      "decisionDigest": "sha256:19c7a5a58eb9e10ee831c87a5d081de9b1723cff0a47911cdaa6e51c5a72981a",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_d08711bd6c48c27d199522c6",
+      "candidateDigest": "sha256:381cbb64f8552a0ef353fc46b0f96759c41ca002e47fdccad6eb88fff8e51ed0",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/primary-source/fixture",
+      "title": "Primary Source — Fixture",
+      "conceptId": "urn:maha:concept:evidence:primary-source",
+      "routeRole": "fixture",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t24-loc-primary-sources",
+          "locator": "https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/ — “What are primary sources?” and “Why teach with primary sources?”",
+          "rightsBasis": "official-public-reference; bounded paraphrase only",
+          "scope": "Defines primary sources as original documents and objects created at the time under study and distinguishes observation from inference during analysis.",
+          "boundary": "Whether something is primary depends on the research question and use; primary status does not establish truth, completeness, neutrality, or sufficient context."
+        },
+        {
+          "sourceId": "t24-primary-source-contract",
+          "locator": "lib/source-recovery.ts — validateObservation and compileRecoveryPackets",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Separates source identity, access, inspection depth, locator, version relationship, and claim support.",
+          "boundary": "A typed recovery packet records supplied evidence state; it does not prove that a source is truthful or sufficient for a claim."
+        }
+      ],
+      "decisionDigest": "sha256:893e48e2f99d6d7ed60a9f86c163e7b9b5c3f04d3bf9d98d5a1a020addf8ef7f",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_d920d5f6786dc5e2cd003b0b",
+      "candidateDigest": "sha256:ac5f4851cc3cef387b9d652eaf26eb09ee78fb1458382a4bba9d5770775523c0",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/mullai/identity",
+      "title": "Mullai — Identity",
+      "conceptId": "urn:maha:concept:translation:mullai",
+      "routeRole": "identity",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "tolkappiyam-porul-5-t9",
+          "locator": "https://textgridrep.org/browse/49tqk.0 — TextGrid version dated 2025-05-27; Project Madurai base text prepared 1999–2001; Akattiṇaiyiyal, nūṟpā 5, complete six-line deity-and-landscape stanza",
+          "rightsBasis": "CC BY-NC-SA 4.0 for the TextGrid representation; short quotation with attribution.",
+          "scope": "The edition places Māyōṉ with mullai and Cēyōṉ with kuṟiñci as two relations in one literary landscape classification.",
+          "boundary": "The stanza establishes wording and literary classification, not chronology, ethnic ownership, universal worship, a complete pantheon, or later theological identity."
+        },
+        {
+          "sourceId": "project-madurai-paripatal-t9",
+          "locator": "https://www.projectmadurai.org/pm_etexts/utf8/pmuni0087.html — Unicode Tamil edition first published 2000; page notice updated through 2021; Tirumāl poems 1–4, 13 and 15; especially poem 2 lines 20–25 and poem 3 lines 31–40",
+          "rightsBasis": "Project Madurai permits free distribution with its header intact; this packet links and paraphrases only.",
+          "scope": "The inspected edition preserves named devotional epithets, associated figures, poetic places, and compressed mythic allusions in specific Tirumāl poems.",
+          "boundary": "An epithet occurrence establishes wording in one passage; it does not establish identity in every text, chronology, historical influence, or theological truth."
+        }
+      ],
+      "decisionDigest": "sha256:12055993c4d6446185ef57fdc478889822025b3b09147a8b9c1a6db6b35a0ff4",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_db12a930bf43b2510a97e0ad",
+      "candidateDigest": "sha256:00229867d54cb52ff72c376bc861ab0641183972688f73e875443e9f0939d185",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/primary-source/definition",
+      "title": "Primary Source — Definition",
+      "conceptId": "urn:maha:concept:evidence:primary-source",
+      "routeRole": "definition",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t24-loc-primary-sources",
+          "locator": "https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/ — “What are primary sources?” and “Why teach with primary sources?”",
+          "rightsBasis": "official-public-reference; bounded paraphrase only",
+          "scope": "Defines primary sources as original documents and objects created at the time under study and distinguishes observation from inference during analysis.",
+          "boundary": "Whether something is primary depends on the research question and use; primary status does not establish truth, completeness, neutrality, or sufficient context."
+        },
+        {
+          "sourceId": "t24-primary-source-contract",
+          "locator": "lib/source-recovery.ts — validateObservation and compileRecoveryPackets",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Separates source identity, access, inspection depth, locator, version relationship, and claim support.",
+          "boundary": "A typed recovery packet records supplied evidence state; it does not prove that a source is truthful or sufficient for a claim."
+        }
+      ],
+      "decisionDigest": "sha256:d16e5096c1c0b9bf0b4e319464f886791a11e808c4fd36031db5f1ac2081fb19",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_e598e2209ba94e3a2da2fa8e",
+      "candidateDigest": "sha256:3bda58744c37bb4f4bfd7beb24342a7ec075ea9ab532e37aa78a89e126c878eb",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/origin",
+      "title": "Mental Sovereignty — Origin",
+      "conceptId": "urn:maha:concept:autonomy:mental-sovereignty",
+      "routeRole": "origin",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "maha-principle-mental-sovereignty-t8",
+          "locator": "repo:content/books/the-maha-principle/The-Maha-Principle.md — working authorial manuscript inspected 2026-09-06; The Biological Basis of Liberty; Chapter 2: The Fractured Mind; The Attentional Veto; The Sovereign Self: Internal Authority Without Domination; The Mind Domain: Attentional Sovereignty",
+          "rightsBasis": "Maha-controlled working authorial manuscript; bounded summary and short attributed quotation only. The packet does not imply publication, peer review, consensus, or empirical validation.",
+          "scope": "The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme.",
+          "boundary": "The term is Mayone Maharajan’s normative synthesis. It is not a diagnosis, legal status, measured neurological construct, proof that the proposed practices work, permission to disregard care, or authority over another person."
+        }
+      ],
+      "decisionDigest": "sha256:a36f54d49c8c5a7c8ebb495a64b092e3a8f970679ea83d108cdf99845db1b365",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_e644480b4078b5366917cd57",
+      "candidateDigest": "sha256:fe2279f04ae601810db6721198d476e2124162f38a644e84eb880ac494662cab",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/application",
+      "title": "Epistemic Infrastructure — Application",
+      "conceptId": "urn:maha:concept:autonomy:epistemic-infrastructure",
+      "routeRole": "application",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "maha-principle-epistemic",
+          "locator": "repo:content/books/the-maha-principle/The-Maha-Principle.md — working authorial manuscript inspected 2026-09-06; The Network and the Feed; Chapter 7 verification framework; Whole-Food Information; Chapter 6 humane governance",
+          "rightsBasis": "Maha-controlled authorial manuscript; section identity and bounded paraphrase only. Authorial claims are not external validation.",
+          "scope": "The author’s account of information infrastructure, directed knowledge use, source verification, and governance of truth-bearing systems.",
+          "boundary": "This is authorial doctrine, not a settled philosophical term, empirical validation, or consensus."
+        }
+      ],
+      "decisionDigest": "sha256:94ae89ce32457a7f527195fe3310023f5317a41e51fd5d924c609d45a4ea1b64",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_e6be33007df4ac68950246f0",
+      "candidateDigest": "sha256:1a7340ffe8220aeeba18f6eb91fe675d85557699e46e50974f49efd9715db223",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/governed-autonomy/relationship",
+      "title": "Governed Autonomy — Relationship",
+      "conceptId": "urn:maha:concept:autonomy:governed-autonomy",
+      "routeRole": "relationship",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "maha-principle",
+          "locator": "repo:content/books/the-maha-principle/The-Maha-Principle.md — working authorial manuscript inspected 2026-09-05; Device Autonomy assessment; bodily-autonomy bridge; authorial framing",
+          "rightsBasis": "Maha-controlled authorial manuscript; record section identity and file digest only. Any later quotation remains subject to the author-controlled publication policy.",
+          "scope": "The author’s normative concept of autonomy under technological and institutional pressure.",
+          "boundary": "This is an authorial thesis and assessment framework, not a validated clinical scale or settled political doctrine."
+        },
+        {
+          "sourceId": "orbital-mind",
+          "locator": "repo:content/books/the-orbital-mind/the-orbital-mind.md — working authorial manuscript inspected 2026-09-05; Mars · Agency and Boundary; Limits and Alternatives",
+          "rightsBasis": "Maha-controlled authorial manuscript; record section identity and file digest only. Any later quotation remains subject to the author-controlled publication policy.",
+          "scope": "Agency as mobilization constrained by boundaries and explicit failure modes.",
+          "boundary": "Planetary and mythic material is symbolic imagery, not empirical evidence."
+        }
+      ],
+      "decisionDigest": "sha256:b664aba6d10d4d12a1375700c14e94997318520bcaeb6f8d49ebc1edc5d348ed",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_e87557b08991fa4ab7a55fbc",
+      "candidateDigest": "sha256:fd588dd0e2e03ae81c671bb89f87b036114d120dd92e70f558de32dab564297d",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/alvar-reception/commentary",
+      "title": "Alvar Reception — Commentary",
+      "conceptId": "urn:maha:concept:translation:alvar-reception",
+      "routeRole": "commentary",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "project-madurai-tiruvaymoli-t10",
+          "locator": "https://www.projectmadurai.org/pm_etexts/utf8/pmuni0624_eng.html — Project Madurai translation containing pāsurams 2971–4000; Edition header and Tiruvāymoḻi pāsurams 2791–3298, including numbered units with Māyan, Māl, Kaṇṇan, Nārāyaṇa and named devotional places",
+          "rightsBasis": "Project Madurai permits free distribution with its header intact; this packet links and paraphrases only.",
+          "scope": "The named translation supplies passage-level later devotional occurrences, poetic voices, places, epithets, and relationships.",
+          "boundary": "This is one translator’s rendering, not the untranslated Tamil, a critical apparatus, proof of direct descent from Sangam material, or verification of theology."
+        },
+        {
+          "sourceId": "reddy-tamil-bhakti-context-t10",
+          "locator": "https://escholarship.org/content/qt9v6585kp/qt9v6585kp.pdf — PhD dissertation, 2011; pp. 25–26, 30, 33–46 and 88–93: Tamil bhakti, Āḻvārs, Nammāḻvār, temple localization, and akam/tiṇai literary continuity",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "scope": "The dissertation supplies an attributed literary and reception-historical context for Āḻvār devotion, Nammāḻvār, localization, and adaptation of Tamil poetic modes.",
+          "boundary": "Literary continuity does not prove unchanged identity, cult, doctrine, institution, or direct transmission between any two named passages."
+        }
+      ],
+      "decisionDigest": "sha256:9ef02f633db01a03b943440d4df433751dd3d21c66cd71495858f8486bad29fe",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_fbd1f1088ca6eb59bab0aba1",
+      "candidateDigest": "sha256:43e60ddd6c9caf19dce79ce5f0fb0e2708c9a9e89c6e18ade767486203219ded",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/recursive-institutions/development",
+      "title": "Recursive Institutions — Development",
+      "conceptId": "urn:maha:concept:autonomy:recursive-institutions",
+      "routeRole": "development",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "maha-principle-recursive-institutions-t10",
+          "locator": "repo:content/books/the-maha-principle/The-Maha-Principle.md — working authorial manuscript inspected 2026-09-06; The Fractal: As the Cell, So the State; The Three Scales of Construction; subsidiarity and scale-error discussion; Zone of Exception",
+          "rightsBasis": "Maha-controlled working authorial manuscript; bounded summary only. The packet does not imply publication, peer review, consensus, or empirical validation.",
+          "scope": "The manuscript proposes recurring governance patterns across individual, household, community, and civic scales and argues that competence and authority should remain scale-aware.",
+          "boundary": "“Recursive institutions” is an editorial label, not a settled academic term. The manuscript does not prove structural identity across scales, causal effects, institutional feasibility, or superior outcomes."
+        }
+      ],
+      "decisionDigest": "sha256:0b367f86e9106e290b28735a5a65f48f52ddb1b6d3812e032e170a16fb6ed82b",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_fee5f02dd8404c96c28572aa",
+      "candidateDigest": "sha256:7d11cf52b273ef825ff288aedf2c0ff950c722553960c78b703c0add79ff8b4d",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/alvar-reception/translation",
+      "title": "Alvar Reception — Translation",
+      "conceptId": "urn:maha:concept:translation:alvar-reception",
+      "routeRole": "translation",
+      "requiredSections": [
+        "Direct answer",
+        "Authority and locator",
+        "Context or method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact authority establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "project-madurai-tiruvaymoli-t10",
+          "locator": "https://www.projectmadurai.org/pm_etexts/utf8/pmuni0624_eng.html — Project Madurai translation containing pāsurams 2971–4000; Edition header and Tiruvāymoḻi pāsurams 2791–3298, including numbered units with Māyan, Māl, Kaṇṇan, Nārāyaṇa and named devotional places",
+          "rightsBasis": "Project Madurai permits free distribution with its header intact; this packet links and paraphrases only.",
+          "scope": "The named translation supplies passage-level later devotional occurrences, poetic voices, places, epithets, and relationships.",
+          "boundary": "This is one translator’s rendering, not the untranslated Tamil, a critical apparatus, proof of direct descent from Sangam material, or verification of theology."
+        },
+        {
+          "sourceId": "reddy-tamil-bhakti-context-t10",
+          "locator": "https://escholarship.org/content/qt9v6585kp/qt9v6585kp.pdf — PhD dissertation, 2011; pp. 25–26, 30, 33–46 and 88–93: Tamil bhakti, Āḻvārs, Nammāḻvār, temple localization, and akam/tiṇai literary continuity",
+          "rightsBasis": "Publicly accessible authority; link and bounded paraphrase only. No source text is redistributed.",
+          "scope": "The dissertation supplies an attributed literary and reception-historical context for Āḻvār devotion, Nammāḻvār, localization, and adaptation of Tamil poetic modes.",
+          "boundary": "Literary continuity does not prove unchanged identity, cult, doctrine, institution, or direct transmission between any two named passages."
+        }
+      ],
+      "decisionDigest": "sha256:814cf6c3125439e3de77fd982a6b71bfd3ffa553d47eef884f46107216585a01",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    }
+  ],
+  "provenanceDigest": "sha256:266bb58f2ce9e9dfd716fba335fd36c816b28a0ae32d82c4ef1d9cc39997aa38"
+}

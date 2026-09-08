@@ -1,0 +1,528 @@
+{
+  "schemaVersion": "maha-federation-property-route-adapter/1.0",
+  "siteId": "mayon-rajan",
+  "canonicalHost": "mayonrajan.com",
+  "rootPath": "/mayon-volcano/",
+  "sourceManifestDigest": "sha256:05510d132334b0ddf1b7c06665b6bc6347ae5bbd64b923247b509e850771951e",
+  "state": "local-owner-handoff",
+  "ownerIntegration": {
+    "routeShape": "/mayon-volcano/[...segments]",
+    "staticParameters": true,
+    "dynamicParameters": false,
+    "metadataFromExactPage": true,
+    "structuredDataFromExactPage": true,
+    "missingOrUnreadyReturnsNotFound": true,
+    "exactRevisionReviewRequired": true,
+    "activeCanonicalReleaseRequired": true
+  },
+  "counts": {
+    "routes": 50,
+    "boundedAnswers": 250,
+    "publicRoutesCreated": 0,
+    "buildsRun": 0
+  },
+  "publicationBoundary": "The adapter resolves local content only. The owner route must still bind an exact revision and active canonical release before crawlability; a missing or unready path resolves to null.",
+  "entries": [
+    {
+      "candidateId": "cand_427e160b10095096fd72b89a",
+      "path": "/mayon-volcano/ashfall/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/ashfall/definition",
+      "segments": [
+        "ashfall",
+        "definition"
+      ],
+      "contentDigest": "sha256:d5b53d15677158a267e3cb14e155fd3969a41f37c5b033d1ecb47deec44ac54f"
+    },
+    {
+      "candidateId": "cand_a0f881afd12c8f8af419cf43",
+      "path": "/mayon-volcano/ashfall/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/ashfall/limits",
+      "segments": [
+        "ashfall",
+        "limits"
+      ],
+      "contentDigest": "sha256:d9cb5623497f88798fccb6fc57422a6fec1bc75069785cd8b4fe11501a1b49dc"
+    },
+    {
+      "candidateId": "cand_4ab867a9e48f5f82ca0ef267",
+      "path": "/mayon-volcano/ashfall/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/ashfall/official-sources",
+      "segments": [
+        "ashfall",
+        "official-sources"
+      ],
+      "contentDigest": "sha256:003ac39d417088862e972837e0934827ff8f1880900aeefc74dbc3393f79e044"
+    },
+    {
+      "candidateId": "cand_47c7ec838425303c83835f8f",
+      "path": "/mayon-volcano/deformation/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/deformation/definition",
+      "segments": [
+        "deformation",
+        "definition"
+      ],
+      "contentDigest": "sha256:220a02fe27934817d9087013f1d6a627eb350568e8214a559ab16c6c1871e50c"
+    },
+    {
+      "candidateId": "cand_5ffa846d42b23df65d798af2",
+      "path": "/mayon-volcano/deformation/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/deformation/limits",
+      "segments": [
+        "deformation",
+        "limits"
+      ],
+      "contentDigest": "sha256:b4f24033fb1f373e25bde768d501b229543d8b077e0f22b3ae38091f891a5f59"
+    },
+    {
+      "candidateId": "cand_4ee7b679e3c1e347cea75493",
+      "path": "/mayon-volcano/deformation/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/deformation/official-sources",
+      "segments": [
+        "deformation",
+        "official-sources"
+      ],
+      "contentDigest": "sha256:bfff247a0327baf45e37cadcecdb2b04b75b96be6cfbe2ad1ae364cc2169834a"
+    },
+    {
+      "candidateId": "cand_cd6e69bef0bd5d8fe4ebf92d",
+      "path": "/mayon-volcano/eruption-history/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/eruption-history/definition",
+      "segments": [
+        "eruption-history",
+        "definition"
+      ],
+      "contentDigest": "sha256:06790675a572c1a884262b4e6a9b80740b79bc63813d4980b0a04966bab1cc7e"
+    },
+    {
+      "candidateId": "cand_3fd539b606b30cc5164a736f",
+      "path": "/mayon-volcano/eruption-history/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/eruption-history/limits",
+      "segments": [
+        "eruption-history",
+        "limits"
+      ],
+      "contentDigest": "sha256:6059c2a624e584ce1f3dc35b07d17d39d061036c8682de5b30576b6f0c26a426"
+    },
+    {
+      "candidateId": "cand_05eb1401b8cc5d7da5bbcd55",
+      "path": "/mayon-volcano/eruption-history/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/eruption-history/official-sources",
+      "segments": [
+        "eruption-history",
+        "official-sources"
+      ],
+      "contentDigest": "sha256:021849dcb79ab8782daa6ddde05ba09a7b49ef067c89e1e17d5ce038cafb81ca"
+    },
+    {
+      "candidateId": "cand_b278a387341dd14ef01c0a2c",
+      "path": "/mayon-volcano/hazard-zones/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition",
+      "segments": [
+        "hazard-zones",
+        "definition"
+      ],
+      "contentDigest": "sha256:d6c0a3ef1230bf24cb03f43d57a74dff42c15e979a1eb485d87b4b2f3b78fe21"
+    },
+    {
+      "candidateId": "cand_2f1a3a71e1f98dead537418a",
+      "path": "/mayon-volcano/hazard-zones/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/hazard-zones/limits",
+      "segments": [
+        "hazard-zones",
+        "limits"
+      ],
+      "contentDigest": "sha256:f8a45f23041bbdfae761447651e090aeeae5bf9e7b9fa4b8a8a0bf95e4cfff34"
+    },
+    {
+      "candidateId": "cand_529ddb809984fafb9b4b02db",
+      "path": "/mayon-volcano/hazard-zones/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/hazard-zones/official-sources",
+      "segments": [
+        "hazard-zones",
+        "official-sources"
+      ],
+      "contentDigest": "sha256:07d3234437ca6594d75e12bd6b7a124f1829bd1078c2f410017f7d24d46ea5dd"
+    },
+    {
+      "candidateId": "cand_60bf213c0188bc6dfa4bf87d",
+      "path": "/mayon-volcano/identity-and-location/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/identity-and-location/definition",
+      "segments": [
+        "identity-and-location",
+        "definition"
+      ],
+      "contentDigest": "sha256:6a1af6683b21c001b12a68a2f77e99983d5bad401f6542dce9290f40ebf30539"
+    },
+    {
+      "candidateId": "cand_016674ad6a0ef156afdf8a61",
+      "path": "/mayon-volcano/identity-and-location/evidence",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/identity-and-location/evidence",
+      "segments": [
+        "identity-and-location",
+        "evidence"
+      ],
+      "contentDigest": "sha256:d881500cd99d2dff6bc40102b74019e68f4307e64360c3156aef04d81954be8a"
+    },
+    {
+      "candidateId": "cand_57ec9c027eee2ac1385f192c",
+      "path": "/mayon-volcano/identity-and-location/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/identity-and-location/limits",
+      "segments": [
+        "identity-and-location",
+        "limits"
+      ],
+      "contentDigest": "sha256:aa92c7e14a81df495e1521d3bd1b8dcb058c54e5e7d94ccb2212f2565002ca7d"
+    },
+    {
+      "candidateId": "cand_836befa63802925d77932866",
+      "path": "/mayon-volcano/identity-and-location/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/identity-and-location/official-sources",
+      "segments": [
+        "identity-and-location",
+        "official-sources"
+      ],
+      "contentDigest": "sha256:17fd8dc3ddd3b9987b5be578ad98dd5b742fcd86899b1e55888904d7b1a1fa58"
+    },
+    {
+      "candidateId": "cand_014f23f2d6774766bc713860",
+      "path": "/mayon-volcano/identity-and-location/preparedness",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/identity-and-location/preparedness",
+      "segments": [
+        "identity-and-location",
+        "preparedness"
+      ],
+      "contentDigest": "sha256:b704ab9ace450b65d1434a5986bff2f45ea214364d1767f1cf5efcff6aec231e"
+    },
+    {
+      "candidateId": "cand_2ff0e71aa26465112036daaa",
+      "path": "/mayon-volcano/infrastructure-resilience/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/definition",
+      "segments": [
+        "infrastructure-resilience",
+        "definition"
+      ],
+      "contentDigest": "sha256:5a7bfaeb3297ab17ef46fbeedd103077f4f45d77d79ba3bcf8624bf352c27ee1"
+    },
+    {
+      "candidateId": "cand_393ccfef4f2c1b704033aab5",
+      "path": "/mayon-volcano/infrastructure-resilience/evidence",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/evidence",
+      "segments": [
+        "infrastructure-resilience",
+        "evidence"
+      ],
+      "contentDigest": "sha256:167286db3803dadff985d624eb0ae7eb48b8f7a8c622d3fc8631fec9e71059cf"
+    },
+    {
+      "candidateId": "cand_cc5e3966d5ae31e5565245bb",
+      "path": "/mayon-volcano/infrastructure-resilience/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/limits",
+      "segments": [
+        "infrastructure-resilience",
+        "limits"
+      ],
+      "contentDigest": "sha256:be98fb102b06a60f956b5142a1f243a89c06dc542d16b4082472df62762a20c8"
+    },
+    {
+      "candidateId": "cand_f189698720a3e4d0dfd92d33",
+      "path": "/mayon-volcano/infrastructure-resilience/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/official-sources",
+      "segments": [
+        "infrastructure-resilience",
+        "official-sources"
+      ],
+      "contentDigest": "sha256:a90653288db9092f7c715ff3d1ef5117078c5edb2b8520b1550746af2fd6b795"
+    },
+    {
+      "candidateId": "cand_d3e682d8e552ec8d8ec8656d",
+      "path": "/mayon-volcano/infrastructure-resilience/preparedness",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/preparedness",
+      "segments": [
+        "infrastructure-resilience",
+        "preparedness"
+      ],
+      "contentDigest": "sha256:2fcd9a1eee16fe37e34373f6549b391f0dc888a7e471b5ca0d809912925b99cc"
+    },
+    {
+      "candidateId": "cand_7a0b81efa6eb66077feee67b",
+      "path": "/mayon-volcano/lahar/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/lahar/definition",
+      "segments": [
+        "lahar",
+        "definition"
+      ],
+      "contentDigest": "sha256:0e73f4e234eea332df8fd0ff6ca5526a06168a1b0c4a8221f59c0f2e7a17d931"
+    },
+    {
+      "candidateId": "cand_12813b261a0b1808ffd66f76",
+      "path": "/mayon-volcano/lahar/evidence",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/lahar/evidence",
+      "segments": [
+        "lahar",
+        "evidence"
+      ],
+      "contentDigest": "sha256:92c718b0d615b78425e8c3695e03bb7043dd081bf10c1c803bd0873d675de3f5"
+    },
+    {
+      "candidateId": "cand_f9753cf9ead17ebb7d1a5c1d",
+      "path": "/mayon-volcano/lahar/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/lahar/limits",
+      "segments": [
+        "lahar",
+        "limits"
+      ],
+      "contentDigest": "sha256:cc12d61cc353cdd75cb017b3e8eb9be4231fa09e3bb27d57a54e556e0ff6d83f"
+    },
+    {
+      "candidateId": "cand_1648aaf06460cbdc20f6a869",
+      "path": "/mayon-volcano/lahar/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/lahar/official-sources",
+      "segments": [
+        "lahar",
+        "official-sources"
+      ],
+      "contentDigest": "sha256:1ffbdb6f3e3690c05c07d4a843ad2896d8c7ed871db110473c040c5a1689f754"
+    },
+    {
+      "candidateId": "cand_eb34fe36f4bef03b21589590",
+      "path": "/mayon-volcano/lahar/preparedness",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/lahar/preparedness",
+      "segments": [
+        "lahar",
+        "preparedness"
+      ],
+      "contentDigest": "sha256:dc96c4732e86032d4f8f5207f4df5b7f12fbc61efc9965e0180602b946afbb89"
+    },
+    {
+      "candidateId": "cand_3a0a373f88138f7c3b315691",
+      "path": "/mayon-volcano/monitoring/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/monitoring/definition",
+      "segments": [
+        "monitoring",
+        "definition"
+      ],
+      "contentDigest": "sha256:537d1227ac1998d6062deb80ad5e0788fb4c94382761c42bb0aeccfd74cc27c1"
+    },
+    {
+      "candidateId": "cand_c43ac928090e2490d859c566",
+      "path": "/mayon-volcano/monitoring/evidence",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/monitoring/evidence",
+      "segments": [
+        "monitoring",
+        "evidence"
+      ],
+      "contentDigest": "sha256:9847b4c73e28e9bd3199f7a76b8e99f0550591c6a35155723800c58510e4e390"
+    },
+    {
+      "candidateId": "cand_23876b3a8f7be549e78adebd",
+      "path": "/mayon-volcano/monitoring/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/monitoring/limits",
+      "segments": [
+        "monitoring",
+        "limits"
+      ],
+      "contentDigest": "sha256:5222e1d6ecef5706aac540d7aeefc0e0ac8744953ee217c7cd9e0a096495d082"
+    },
+    {
+      "candidateId": "cand_f730536538c26e00bfa0e4fa",
+      "path": "/mayon-volcano/monitoring/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/monitoring/official-sources",
+      "segments": [
+        "monitoring",
+        "official-sources"
+      ],
+      "contentDigest": "sha256:0f9fb7a0ad837fae843c39e97ef61a2e76208d8dc0aa70e1ccb50721eb18da34"
+    },
+    {
+      "candidateId": "cand_1b6d64f12a59da80eecf264f",
+      "path": "/mayon-volcano/monitoring/preparedness",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/monitoring/preparedness",
+      "segments": [
+        "monitoring",
+        "preparedness"
+      ],
+      "contentDigest": "sha256:229dd2b02b5e4d66e78da77d91efbd96025547fec3bb1759c26a749531513123"
+    },
+    {
+      "candidateId": "cand_ab7cc5b440beea7f5f551c39",
+      "path": "/mayon-volcano/name-disambiguation/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/name-disambiguation/definition",
+      "segments": [
+        "name-disambiguation",
+        "definition"
+      ],
+      "contentDigest": "sha256:bd016eed64de21a6cace5c516f98c109a05e4e37067fbec42707f337f461f98a"
+    },
+    {
+      "candidateId": "cand_fd07ca576164a47791ca7971",
+      "path": "/mayon-volcano/name-disambiguation/evidence",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/name-disambiguation/evidence",
+      "segments": [
+        "name-disambiguation",
+        "evidence"
+      ],
+      "contentDigest": "sha256:fa5fe56066d3dd9651f75063b79a237a858b71dacafca26a706cb6b655909a7b"
+    },
+    {
+      "candidateId": "cand_d570c04cbe49659f8996c6d9",
+      "path": "/mayon-volcano/name-disambiguation/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/name-disambiguation/limits",
+      "segments": [
+        "name-disambiguation",
+        "limits"
+      ],
+      "contentDigest": "sha256:9d56c4af2485086d19ee502ce602ca0250c38dfc9ef8461b0fdc096b40effbad"
+    },
+    {
+      "candidateId": "cand_c734f496120c4e025014bd3c",
+      "path": "/mayon-volcano/name-disambiguation/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/name-disambiguation/official-sources",
+      "segments": [
+        "name-disambiguation",
+        "official-sources"
+      ],
+      "contentDigest": "sha256:67a03895867799cf7379c5889384fb516682c4c70ecae20736357cae77267985"
+    },
+    {
+      "candidateId": "cand_98cbfe4add44dd423db63e64",
+      "path": "/mayon-volcano/name-disambiguation/preparedness",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/name-disambiguation/preparedness",
+      "segments": [
+        "name-disambiguation",
+        "preparedness"
+      ],
+      "contentDigest": "sha256:d454ccd1f8892f89d80d5ed125c55db9592f8fee0cfe613a723733446f26df29"
+    },
+    {
+      "candidateId": "cand_5eedf7642252330cb10edc4b",
+      "path": "/mayon-volcano/official-alerts/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/official-alerts/definition",
+      "segments": [
+        "official-alerts",
+        "definition"
+      ],
+      "contentDigest": "sha256:f582a307689720622610ff5114a0f78eb3fa1587c5251213c3ded68f2be47e17"
+    },
+    {
+      "candidateId": "cand_36b107c4fbbcc21e63209168",
+      "path": "/mayon-volcano/official-alerts/evidence",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/official-alerts/evidence",
+      "segments": [
+        "official-alerts",
+        "evidence"
+      ],
+      "contentDigest": "sha256:5ff3f7413fd7119678d88a588cefa1d38573e920aa951a7b41e4117b1c76e876"
+    },
+    {
+      "candidateId": "cand_f8e337ad1934c31c65dcea4d",
+      "path": "/mayon-volcano/official-alerts/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/official-alerts/limits",
+      "segments": [
+        "official-alerts",
+        "limits"
+      ],
+      "contentDigest": "sha256:ed65066021b508533dc666596440117b4be309fc59a11081695cc67c23e25395"
+    },
+    {
+      "candidateId": "cand_74e804dbf2febe142c6f4a1f",
+      "path": "/mayon-volcano/official-alerts/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/official-alerts/official-sources",
+      "segments": [
+        "official-alerts",
+        "official-sources"
+      ],
+      "contentDigest": "sha256:752f43cd3bef64a6495fc0a34df69532585b751278a0079bd89d0ff97d800b60"
+    },
+    {
+      "candidateId": "cand_a0d920b14da4d21973abceb1",
+      "path": "/mayon-volcano/official-alerts/preparedness",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/official-alerts/preparedness",
+      "segments": [
+        "official-alerts",
+        "preparedness"
+      ],
+      "contentDigest": "sha256:7f73c08b919ff44f344f1b915ca6031c40f8804ece2d272b361dca6a7ba28674"
+    },
+    {
+      "candidateId": "cand_21e911047e19ddbd802510ec",
+      "path": "/mayon-volcano/seismicity/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/seismicity/definition",
+      "segments": [
+        "seismicity",
+        "definition"
+      ],
+      "contentDigest": "sha256:0ca61cf34b6f5a112dc820570ff27a45fc7c93ee921af9ee818cf877068f40c2"
+    },
+    {
+      "candidateId": "cand_ed153b1269df6192eb6ddfa5",
+      "path": "/mayon-volcano/seismicity/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/seismicity/limits",
+      "segments": [
+        "seismicity",
+        "limits"
+      ],
+      "contentDigest": "sha256:cbe8cf3d9d791ed43d614ef6281d56f32701fe13ac0a7000ce2cdcf317e4f9fe"
+    },
+    {
+      "candidateId": "cand_5ad799fae01ca9f0513933d1",
+      "path": "/mayon-volcano/seismicity/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/seismicity/official-sources",
+      "segments": [
+        "seismicity",
+        "official-sources"
+      ],
+      "contentDigest": "sha256:85091f0deb1bc654c1c87abd0caa93f697d9cb118f1b219646806a0e7760e028"
+    },
+    {
+      "candidateId": "cand_0506892f4f6aeffd56c07141",
+      "path": "/mayon-volcano/gas-emissions/definition",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/gas-emissions/definition",
+      "segments": [
+        "gas-emissions",
+        "definition"
+      ],
+      "contentDigest": "sha256:fa235d5606a58b5b282884ce3ed6c014c64e7be4816c67b8f1f8ee827e467766"
+    },
+    {
+      "candidateId": "cand_6903b7c636966d35a57b00f2",
+      "path": "/mayon-volcano/gas-emissions/limits",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/gas-emissions/limits",
+      "segments": [
+        "gas-emissions",
+        "limits"
+      ],
+      "contentDigest": "sha256:3fd40e63a1d159c1ffffbddb9bda96d0543693310c5c9c5515601d74c0d9e2ea"
+    },
+    {
+      "candidateId": "cand_249777f280fc057e55e4b1f5",
+      "path": "/mayon-volcano/gas-emissions/official-sources",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/gas-emissions/official-sources",
+      "segments": [
+        "gas-emissions",
+        "official-sources"
+      ],
+      "contentDigest": "sha256:222b4494c07499e4fb621d5813e9a76b86c086aa88fe716d1c596b5f77250d77"
+    },
+    {
+      "candidateId": "cand_774e8bf2286da109c496eb9e",
+      "path": "/mayon-volcano/hazard-zones/evidence",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/hazard-zones/evidence",
+      "segments": [
+        "hazard-zones",
+        "evidence"
+      ],
+      "contentDigest": "sha256:1560a33778e4a3a0de6ead3d5a4934afa11ede32138a45067f4a8a1f9ce306ea"
+    },
+    {
+      "candidateId": "cand_31f30a5fd26c314c04af8395",
+      "path": "/mayon-volcano/hazard-zones/preparedness",
+      "canonicalUrl": "https://mayonrajan.com/mayon-volcano/hazard-zones/preparedness",
+      "segments": [
+        "hazard-zones",
+        "preparedness"
+      ],
+      "contentDigest": "sha256:61558278076923a8864e0034f0a0ea7eddff84f8c981517b818e2a28a06d2d69"
+    }
+  ],
+  "provenanceDigest": "sha256:fb56ef164a529786a6d5c7da1d6210a7990c25c904fc93b7b1437fab6a54d263"
+}

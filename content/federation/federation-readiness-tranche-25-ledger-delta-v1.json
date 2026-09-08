@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "maha-federation-readiness-ledger-delta/25.0",
+  "frozenOn": "2026-09-07",
+  "baseLedger": {
+    "provenanceDigest": "sha256:bf5769e51b4b69b358805e5050c548be11482380c7fb38905ce7263c4348a5ee",
+    "implementationReady": 1426,
+    "unresolved": 202
+  },
+  "ownershipBoundary": "Non-definition ordinary candidate-review lane only. This delta is not a unified ledger and does not incorporate or modify Claude’s prerequisite-definition work.",
+  "counts": {
+    "reviewed": 100,
+    "newlyImplementationReady": 0,
+    "remainUnresolved": 100,
+    "excludedDefinitions": 6
+  },
+  "readyCandidateIds": [],
+  "execution": {
+    "ledgerApplied": false,
+    "publicRoutesGenerated": 0,
+    "buildRun": false,
+    "deployed": false
+  },
+  "provenanceDigest": "sha256:7c4ed52199b59bc0bb02a7dc5ce756d20cb54fa61e42eed7a67bb6b1a828b990"
+}

@@ -1,0 +1,275 @@
+{
+  "schemaVersion": "maha-federation-tranche-14-dependency-remediation/1.0",
+  "frozenOn": "2026-09-06",
+  "purpose": "Diagnoses every prerequisite that blocked a Tranche 13 candidate, so the next cohort can be selected on what it would actually unblock rather than on utility alone.",
+  "counts": {
+    "blockedDependents": 34,
+    "distinctPrerequisites": 13,
+    "byAvailability": {
+      "absent-from-frozen-map": 13
+    },
+    "unlockableByThisTranche": 0
+  },
+  "finding": "Fan-out and availability are inversely related here. Every prerequisite with a fan-out above one is absent from the frozen map, and every prerequisite present in the pool unlocks exactly one dependent. Selecting all four available definitions therefore unblocks four of the thirty-eight. The remaining thirty-four are blocked by an incomplete candidate map rather than by selection policy.",
+  "prerequisites": [
+    {
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "declaredOwner": "maha-research",
+      "unlocks": 4,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_34d368d3cffc0123319624c3",
+        "cand_3b1a9ef814c8fd19ae5dd4f3",
+        "cand_af1e13cd58046f3b89fcf312",
+        "cand_de47b40f36767f60c101974a"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "declaredOwner": "maha-research",
+      "unlocks": 4,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_567977061305bfb171030d13",
+        "cand_b0b9232e69dc37951ca96a2d",
+        "cand_ef11e2b421fe9aac0d8c24c3",
+        "cand_f958c961ac3d47800b272d37"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "declaredOwner": "maha-research",
+      "unlocks": 4,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_114ff651c020a137c05c0a70",
+        "cand_4732f241656c17cfa80dea46",
+        "cand_5025ed02e119fef37e34abfb",
+        "cand_ee7975f658326487f563d6c1"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "declaredOwner": "maha-research",
+      "unlocks": 4,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_4c8e1c0aaa0eb1fb2b0105eb",
+        "cand_76bb498009ae77f248d9b2b3",
+        "cand_82064d5d886a4f5debe9d0ae",
+        "cand_ec131abe6004e62d84a73718"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "declaredOwner": "maha-research",
+      "unlocks": 3,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_0e93144f12fa050be40c458a",
+        "cand_7ea97e6389a152a6e06ea440",
+        "cand_e19e8901c36b13c148997e41"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "declaredOwner": "maha-research",
+      "unlocks": 3,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_52ba56be784230fe4c5a90d4",
+        "cand_7c130ffaab158bfd0ad4df45",
+        "cand_87bc8ff96e129e61197cfe19"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "declaredOwner": "maha-research",
+      "unlocks": 3,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_54bf0ff5e1dfaa08469e51ad",
+        "cand_7c06c37e2399d72dd61ef2bc",
+        "cand_c9b1999e391248ee19abc521"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:audit-export",
+      "declaredOwner": "maha-research",
+      "unlocks": 2,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_152bd81a9c3042b26c93ee8f",
+        "cand_b4bf5d63227ea2a4fed280b1"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:canonical-release",
+      "declaredOwner": "maha-research",
+      "unlocks": 2,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_5fda66506d4caf3a6f10c1d0",
+        "cand_d2f94b145cf7db71f092d98f"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:unsupported-inference",
+      "declaredOwner": "maha-research",
+      "unlocks": 2,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_16c398dac13cec683a380b28",
+        "cand_3bd043436f7c9dd07250974b"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:locator-verification",
+      "declaredOwner": "maha-research",
+      "unlocks": 1,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_02377c9cde28ef6f26525b2a"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:passage-support",
+      "declaredOwner": "maha-research",
+      "unlocks": 1,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_ec46737935d410443b264871"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:source-recovery",
+      "declaredOwner": "maha-research",
+      "unlocks": 1,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_ec3b866d1dd8cb3b5b4608b0"
+      ]
+    }
+  ],
+  "repairProposals": [
+    {
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 4,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 4,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 4,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 4,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 3,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 3,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 3,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:audit-export",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 2,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:canonical-release",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 2,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:unsupported-inference",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 2,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:locator-verification",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 1,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:passage-support",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 1,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:source-recovery",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 1,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    }
+  ],
+  "boundary": "An analysis. It inserts no candidate, activates no proposal, and changes no Tranche 13 classification.",
+  "provenanceDigest": "sha256:5d78747c353ce05306698ec009676431c9386ff62d850d366d8d6052e97669b2"
+}

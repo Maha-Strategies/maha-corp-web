@@ -1,0 +1,1217 @@
+{
+  "schemaVersion": "maha-federation-authority-application-reassessment/1.0",
+  "frozenOn": "2026-09-07",
+  "appendOnly": true,
+  "counts": {
+    "candidates": 48,
+    "evidenceReady": 17,
+    "revise": 31
+  },
+  "reassessments": [
+    {
+      "candidateId": "cand_03638eae89d44b2fcb9b6d10",
+      "candidateDigest": "sha256:2e27f8f00bf363fbc6672a210cdf170de67a6b325246fd12a9a399af7c4ed5d4",
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/interpolation/reproducibility",
+      "priorDecision": {
+        "candidateId": "cand_03638eae89d44b2fcb9b6d10",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:interpolation on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_de8dd0a88e8704fe5855033e",
+        "proposalDigest": "sha256:80ab2410d369514174cec737b343183a477bc93df97237acb08c7bfd624a0f23",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-dlmf-interpolation"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The external authority states the method, not a complete replay fixture, environment, implementation, and receipt for this route.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_08db53dbe892e6f61197e0a9",
+      "candidateDigest": "sha256:e2074f2c9426690fa245ec7c48f4014cdabd95f17a3c127feb29ddbd1e90270e",
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "routeRole": "worked-example",
+      "path": "/clearing/deterministic-computation/cryptographic-commitments/worked-example",
+      "priorDecision": {
+        "candidateId": "cand_08db53dbe892e6f61197e0a9",
+        "disposition": "blocked",
+        "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"cryptographic-commitments\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_908638ce5ea422d98d5273fb",
+        "proposalDigest": "sha256:6bec3b7c9698692556e18657013cff3f19d45934f986e39d3633991fc1e09774",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-perk-commitments"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "evidence-ready",
+      "roleFinding": "The inspected locator supplies an explicit operation, equation, or protocol from which a bounded worked example can be constructed without inventing a result.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_0eff8a7f07532fcb14af59f2",
+      "candidateDigest": "sha256:e67f05e85f800a987709bd62482158abbe1fbd2d3a92db5d898c9f5179c94862",
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/root-finding/reproducibility",
+      "priorDecision": {
+        "candidateId": "cand_0eff8a7f07532fcb14af59f2",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:root-finding on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_4e3ffcedfa7d51607e56c384",
+        "proposalDigest": "sha256:1d8d2f1eecc8a7f071e9083e251cebde1fb9557d8ef417b3bbfdf4de66bcacd5",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-dlmf-roots"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The external authority states the method, not a complete replay fixture, environment, implementation, and receipt for this route.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_1c9d1d2ca8af857b87a76813",
+      "candidateDigest": "sha256:b5a3e641b97dfbdc828a71ecc63b6dd1f92ef01d93a6b3ab6a21ebbc1f881c1e",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "routeRole": "worked-example",
+      "path": "/clearing/deterministic-computation/formal-verification/worked-example",
+      "priorDecision": {
+        "candidateId": "cand_1c9d1d2ca8af857b87a76813",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:formal-verification on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_25c680ff193b4f35f49e96ae",
+        "proposalDigest": "sha256:855e6de6661384f88f938abdfbe7ec51a1f5ba582fc0f703d13950149f85a22b",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-nist-formal-verification"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The definition is supported, but this worked-example role still lacks a complete inspected fixture with exact inputs and checks.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_28654e2b2e0e77af894a2f1d",
+      "candidateDigest": "sha256:8b297bf4b592f8029b214fb4e00152eb735fb6b8fdbcb104a5cf9cd9ac3f7f8c",
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "routeRole": "worked-example",
+      "path": "/clearing/deterministic-computation/numerical-stability/worked-example",
+      "priorDecision": {
+        "candidateId": "cand_28654e2b2e0e77af894a2f1d",
+        "disposition": "blocked",
+        "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"numerical-stability\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_0d9b1a88cbf93d413a243d71",
+        "proposalDigest": "sha256:f66f4a234c95611f001c5ed7147aeb767ac56fddd2a95f8ce3fbc8e45312cb7d",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-nist-stability"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The definition is supported, but this worked-example role still lacks a complete inspected fixture with exact inputs and checks.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_31f9bd3e2a64a40aac291acb",
+      "candidateDigest": "sha256:a367c10918a011c754f92afbb09111ad57fb19c34eda2beeef3f25146f762845",
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "routeRole": "uncertainty",
+      "path": "/clearing/deterministic-computation/cryptographic-commitments/uncertainty",
+      "priorDecision": {
+        "candidateId": "cand_31f9bd3e2a64a40aac291acb",
+        "disposition": "blocked",
+        "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"cryptographic-commitments\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_908638ce5ea422d98d5273fb",
+        "proposalDigest": "sha256:6bec3b7c9698692556e18657013cff3f19d45934f986e39d3633991fc1e09774",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-perk-commitments"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "evidence-ready",
+      "roleFinding": "The page is limited to the inspected source’s stated conditions, failure boundaries, and what the method does not establish.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_3492801bafa20e3d50408a8e",
+      "candidateDigest": "sha256:537f33330bc4feeb45da69587359714efab7d6dcdbb7bee7d1a5624354705ecc",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "routeRole": "uncertainty",
+      "path": "/clearing/deterministic-computation/formal-verification/uncertainty",
+      "priorDecision": {
+        "candidateId": "cand_3492801bafa20e3d50408a8e",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:formal-verification on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_25c680ff193b4f35f49e96ae",
+        "proposalDigest": "sha256:855e6de6661384f88f938abdfbe7ec51a1f5ba582fc0f703d13950149f85a22b",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-nist-formal-verification"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "evidence-ready",
+      "roleFinding": "The page is limited to the inspected source’s stated conditions, failure boundaries, and what the method does not establish.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_435411f57ee0f613ee321c7e",
+      "candidateDigest": "sha256:30526a21096a24b0636c7c559843d8a527147a56585fd7f0b6bcade2d9f79912",
+      "conceptId": "urn:maha:concept:computation:optimization",
+      "routeRole": "uncertainty",
+      "path": "/clearing/deterministic-computation/optimization/uncertainty",
+      "priorDecision": {
+        "candidateId": "cand_435411f57ee0f613ee321c7e",
+        "disposition": "blocked",
+        "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"optimization\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_9e9edd5648c41382537f568c",
+        "proposalDigest": "sha256:42d2317c121a92cb77c14316ec73bf344799b172dac3b85e0f1ee7fb9187b64b",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-boyd-optimization"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "evidence-ready",
+      "roleFinding": "The page is limited to the inspected source’s stated conditions, failure boundaries, and what the method does not establish.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_43f091f909c8222f825ed1f9",
+      "candidateDigest": "sha256:22c8ee72b08d3e4ca284a61d9b895cb8a4450c2bf8f0cf72bdf012ee95aaec66",
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "routeRole": "worked-example",
+      "path": "/clearing/deterministic-computation/interpolation/worked-example",
+      "priorDecision": {
+        "candidateId": "cand_43f091f909c8222f825ed1f9",
+        "disposition": "blocked",
+        "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"interpolation\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_de8dd0a88e8704fe5855033e",
+        "proposalDigest": "sha256:80ab2410d369514174cec737b343183a477bc93df97237acb08c7bfd624a0f23",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-dlmf-interpolation"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "evidence-ready",
+      "roleFinding": "The inspected locator supplies an explicit operation, equation, or protocol from which a bounded worked example can be constructed without inventing a result.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_457721881f95e53782806bb6",
+      "candidateDigest": "sha256:9245cba0068bd69158f78e273874bad6259c20a12b0b45783b0e3308824e50ab",
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/numerical-stability/reproducibility",
+      "priorDecision": {
+        "candidateId": "cand_457721881f95e53782806bb6",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:numerical-stability on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_0d9b1a88cbf93d413a243d71",
+        "proposalDigest": "sha256:f66f4a234c95611f001c5ed7147aeb767ac56fddd2a95f8ce3fbc8e45312cb7d",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-nist-stability"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The external authority states the method, not a complete replay fixture, environment, implementation, and receipt for this route.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_4ca1eef82246da3174e34e17",
+      "candidateDigest": "sha256:74026882f3cf0106cedc5c8f06b5950dbb00f1bd61e5021c994b497a3d847b42",
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "routeRole": "uncertainty",
+      "path": "/clearing/deterministic-computation/dimensional-analysis/uncertainty",
+      "priorDecision": {
+        "candidateId": "cand_4ca1eef82246da3174e34e17",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:dimensional-analysis on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_d90b7197535681a502dccba9",
+        "proposalDigest": "sha256:431f4eede082c785fc68c08e3c9465af9c1065589166a9310fc71c358112f498",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-bipm-dimensions"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "evidence-ready",
+      "roleFinding": "The page is limited to the inspected source’s stated conditions, failure boundaries, and what the method does not establish.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_558c29e71ada643b2d7f7270",
+      "candidateDigest": "sha256:feb4215a1a94bc00f97599b7c3306bc681f8efc4adcfc989893c453e61aac186",
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/interpolation/machine-interface",
+      "priorDecision": {
+        "candidateId": "cand_558c29e71ada643b2d7f7270",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:interpolation on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_de8dd0a88e8704fe5855033e",
+        "proposalDigest": "sha256:80ab2410d369514174cec737b343183a477bc93df97237acb08c7bfd624a0f23",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-dlmf-interpolation"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The external authority defines the concept but does not establish a concept-specific Maha machine interface. No implementation locator was inspected for this route.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_5ace7cc1e1287874f505c134",
+      "candidateDigest": "sha256:9961a8f263bf03a591934652045db4cd6431bd895e88bf400b8b7f6cb28016c2",
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/dimensional-analysis/machine-interface",
+      "priorDecision": {
+        "candidateId": "cand_5ace7cc1e1287874f505c134",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:dimensional-analysis on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_d90b7197535681a502dccba9",
+        "proposalDigest": "sha256:431f4eede082c785fc68c08e3c9465af9c1065589166a9310fc71c358112f498",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-bipm-dimensions"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The external authority defines the concept but does not establish a concept-specific Maha machine interface. No implementation locator was inspected for this route.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_5b501d7014282b7eec965ea1",
+      "candidateDigest": "sha256:485c0e3a9edd2b1f6a4eff6b5581a8874dbaf73a090f78ec701145a068b25cea",
+      "conceptId": "urn:maha:concept:computation:numerical-integration",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/numerical-integration/reproducibility",
+      "priorDecision": {
+        "candidateId": "cand_5b501d7014282b7eec965ea1",
+        "disposition": "blocked",
+        "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"numerical-integration\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_2cb4942c45f1804543a91a4a",
+        "proposalDigest": "sha256:172aec2bdfae2a60420288b27bae4714b204601bb648371da8f481f2a89d0770",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-dlmf-quadrature"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The external authority states the method, not a complete replay fixture, environment, implementation, and receipt for this route.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_5c64e76d0682c6128cece69c",
+      "candidateDigest": "sha256:6ac3d9079de45b9c0c812794da7a8ce9697d92ae497a086617c3f27ac9244fac",
+      "conceptId": "urn:maha:concept:computation:numerical-integration",
+      "routeRole": "worked-example",
+      "path": "/clearing/deterministic-computation/numerical-integration/worked-example",
+      "priorDecision": {
+        "candidateId": "cand_5c64e76d0682c6128cece69c",
+        "disposition": "blocked",
+        "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"numerical-integration\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_2cb4942c45f1804543a91a4a",
+        "proposalDigest": "sha256:172aec2bdfae2a60420288b27bae4714b204601bb648371da8f481f2a89d0770",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-dlmf-quadrature"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "evidence-ready",
+      "roleFinding": "The inspected locator supplies an explicit operation, equation, or protocol from which a bounded worked example can be constructed without inventing a result.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_5d2d5c52fc91b9ecce7bb007",
+      "candidateDigest": "sha256:2fb5d237256d2446f60524d4d9bb5420e64aff02eecc2f13a1fc1aaabb5a3584",
+      "conceptId": "urn:maha:concept:computation:optimization",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/optimization/machine-interface",
+      "priorDecision": {
+        "candidateId": "cand_5d2d5c52fc91b9ecce7bb007",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:optimization on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_9e9edd5648c41382537f568c",
+        "proposalDigest": "sha256:42d2317c121a92cb77c14316ec73bf344799b172dac3b85e0f1ee7fb9187b64b",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-boyd-optimization"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The external authority defines the concept but does not establish a concept-specific Maha machine interface. No implementation locator was inspected for this route.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_5da47ae131bd50c28a964e74",
+      "candidateDigest": "sha256:0a959dfc49ebaeb7b1c52439231651463be1b27b0d2cc3eed0815ba643f33217",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/formal-verification/machine-interface",
+      "priorDecision": {
+        "candidateId": "cand_5da47ae131bd50c28a964e74",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:formal-verification on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_25c680ff193b4f35f49e96ae",
+        "proposalDigest": "sha256:855e6de6661384f88f938abdfbe7ec51a1f5ba582fc0f703d13950149f85a22b",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-nist-formal-verification"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The external authority defines the concept but does not establish a concept-specific Maha machine interface. No implementation locator was inspected for this route.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_6708f2125c704c598a373d02",
+      "candidateDigest": "sha256:abc58289a8e8a58dfee0aff3e86b148d26c09c7d8c60d820ab5f4533556a22cb",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "routeRole": "worked-example",
+      "path": "/clearing/deterministic-computation/reference-frame-conversion/worked-example",
+      "priorDecision": {
+        "candidateId": "cand_6708f2125c704c598a373d02",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:reference-frame-conversion on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_c1e0a9d1956d137e337cae16",
+        "proposalDigest": "sha256:471c0c05eb71b8b7c0849ff815db29348148b275358fd4ff38c5bd3a2bded41c",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-iers-reference-frames"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The definition is supported, but this worked-example role still lacks a complete inspected fixture with exact inputs and checks.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_67328511b3565384d1f5240c",
+      "candidateDigest": "sha256:312c1efa1c1e61158009a8d8593ec9212756e4e869c1e4384a459a26dde266aa",
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "routeRole": "worked-example",
+      "path": "/clearing/deterministic-computation/dimensional-analysis/worked-example",
+      "priorDecision": {
+        "candidateId": "cand_67328511b3565384d1f5240c",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:dimensional-analysis on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_d90b7197535681a502dccba9",
+        "proposalDigest": "sha256:431f4eede082c785fc68c08e3c9465af9c1065589166a9310fc71c358112f498",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-bipm-dimensions"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "evidence-ready",
+      "roleFinding": "The inspected locator supplies an explicit operation, equation, or protocol from which a bounded worked example can be constructed without inventing a result.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_6a8af21d891464188c29dbb8",
+      "candidateDigest": "sha256:ac402cb0326c4cdc35d52b63b2237a3a9aaf0131d1c263f3eda6653828932178",
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "routeRole": "uncertainty",
+      "path": "/clearing/deterministic-computation/deterministic-arithmetic/uncertainty",
+      "priorDecision": {
+        "candidateId": "cand_6a8af21d891464188c29dbb8",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:deterministic-arithmetic on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_a563c1dcade1fa354b9069fa",
+        "proposalDigest": "sha256:81cca7e4b253f37de1f4a5e8e4d5913facc0715ede341bb8b0e76815d43982a1",
+        "accepted": false
+      },
+      "sourceIds": [
+        "src-dlmf-arithmetic"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The definition remains in revision, so no application role can proceed.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_6af09a682cc7e2277169d046",
+      "candidateDigest": "sha256:b76a6169426b217bd16cd122ad3a14bea43caae6e17d388bcaa8d103a390f780",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/reference-frame-conversion/machine-interface",
+      "priorDecision": {
+        "candidateId": "cand_6af09a682cc7e2277169d046",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:reference-frame-conversion on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_c1e0a9d1956d137e337cae16",
+        "proposalDigest": "sha256:471c0c05eb71b8b7c0849ff815db29348148b275358fd4ff38c5bd3a2bded41c",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-iers-reference-frames"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The external authority defines the concept but does not establish a concept-specific Maha machine interface. No implementation locator was inspected for this route.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_6d65397e7a1c9ad8abd13d39",
+      "candidateDigest": "sha256:39896cc5d0585ec0658f25b49f034d55549e0040ceb0631634604b0a1514d118",
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "routeRole": "worked-example",
+      "path": "/clearing/deterministic-computation/root-finding/worked-example",
+      "priorDecision": {
+        "candidateId": "cand_6d65397e7a1c9ad8abd13d39",
+        "disposition": "blocked",
+        "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"root-finding\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_4e3ffcedfa7d51607e56c384",
+        "proposalDigest": "sha256:1d8d2f1eecc8a7f071e9083e251cebde1fb9557d8ef417b3bbfdf4de66bcacd5",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-dlmf-roots"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "evidence-ready",
+      "roleFinding": "The inspected locator supplies an explicit operation, equation, or protocol from which a bounded worked example can be constructed without inventing a result.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_6e4fa6c27f0b694e1c642ff9",
+      "candidateDigest": "sha256:a17748556df40eb37fa966dd76ffcb618c5a303b7d895b4200a49de80d2a0e16",
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "routeRole": "uncertainty",
+      "path": "/clearing/deterministic-computation/numerical-stability/uncertainty",
+      "priorDecision": {
+        "candidateId": "cand_6e4fa6c27f0b694e1c642ff9",
+        "disposition": "blocked",
+        "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"numerical-stability\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_0d9b1a88cbf93d413a243d71",
+        "proposalDigest": "sha256:f66f4a234c95611f001c5ed7147aeb767ac56fddd2a95f8ce3fbc8e45312cb7d",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-nist-stability"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "evidence-ready",
+      "roleFinding": "The page is limited to the inspected source’s stated conditions, failure boundaries, and what the method does not establish.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_7168a05d58662e49b6826c7e",
+      "candidateDigest": "sha256:38eb7efb535ddbc19baf7b58a533d8c3a92cd840ea5c8f79e631307f59be21e8",
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/cryptographic-commitments/reproducibility",
+      "priorDecision": {
+        "candidateId": "cand_7168a05d58662e49b6826c7e",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:cryptographic-commitments on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_908638ce5ea422d98d5273fb",
+        "proposalDigest": "sha256:6bec3b7c9698692556e18657013cff3f19d45934f986e39d3633991fc1e09774",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-perk-commitments"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The external authority states the method, not a complete replay fixture, environment, implementation, and receipt for this route.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_7cec457fac2ac6a5b7839c9a",
+      "candidateDigest": "sha256:358427652fd27f62b8ecd969b42929a8d824bddcbd98cb25a7eeaf641d0b8bd5",
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "routeRole": "worked-example",
+      "path": "/clearing/deterministic-computation/deterministic-arithmetic/worked-example",
+      "priorDecision": {
+        "candidateId": "cand_7cec457fac2ac6a5b7839c9a",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:deterministic-arithmetic on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_a563c1dcade1fa354b9069fa",
+        "proposalDigest": "sha256:81cca7e4b253f37de1f4a5e8e4d5913facc0715ede341bb8b0e76815d43982a1",
+        "accepted": false
+      },
+      "sourceIds": [
+        "src-dlmf-arithmetic"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The definition remains in revision, so no application role can proceed.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_92353922a006421e3fa32cf4",
+      "candidateDigest": "sha256:4ae3435bdb193b8f4659649c926fbca416b08366ff6b05a3d010fdad2506c21b",
+      "conceptId": "urn:maha:concept:computation:numerical-integration",
+      "routeRole": "uncertainty",
+      "path": "/clearing/deterministic-computation/numerical-integration/uncertainty",
+      "priorDecision": {
+        "candidateId": "cand_92353922a006421e3fa32cf4",
+        "disposition": "blocked",
+        "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"numerical-integration\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_2cb4942c45f1804543a91a4a",
+        "proposalDigest": "sha256:172aec2bdfae2a60420288b27bae4714b204601bb648371da8f481f2a89d0770",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-dlmf-quadrature"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "evidence-ready",
+      "roleFinding": "The page is limited to the inspected source’s stated conditions, failure boundaries, and what the method does not establish.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_9b067b11b9941116008a6a34",
+      "candidateDigest": "sha256:13c8256f7f21938955f259e4d39fcb5e7063a2fac5881767f755f22637c66fde",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "routeRole": "uncertainty",
+      "path": "/clearing/deterministic-computation/reference-frame-conversion/uncertainty",
+      "priorDecision": {
+        "candidateId": "cand_9b067b11b9941116008a6a34",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:reference-frame-conversion on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_c1e0a9d1956d137e337cae16",
+        "proposalDigest": "sha256:471c0c05eb71b8b7c0849ff815db29348148b275358fd4ff38c5bd3a2bded41c",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-iers-reference-frames"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "evidence-ready",
+      "roleFinding": "The page is limited to the inspected source’s stated conditions, failure boundaries, and what the method does not establish.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_a24840e1b41dabdf0d8312b2",
+      "candidateDigest": "sha256:904ccf99be994e900c709ebb7f87bce000d67a80a9b55669eebeaf0ffb198002",
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/deterministic-arithmetic/machine-interface",
+      "priorDecision": {
+        "candidateId": "cand_a24840e1b41dabdf0d8312b2",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:deterministic-arithmetic on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_a563c1dcade1fa354b9069fa",
+        "proposalDigest": "sha256:81cca7e4b253f37de1f4a5e8e4d5913facc0715ede341bb8b0e76815d43982a1",
+        "accepted": false
+      },
+      "sourceIds": [
+        "src-dlmf-arithmetic"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The definition remains in revision, so no application role can proceed.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_ac614aab7eb9cc394996553b",
+      "candidateDigest": "sha256:cb250e7434f71e5f8f256f909cf4edfb6116345bb76d9eb9a8548d213d89ed99",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/reference-frame-conversion/reproducibility",
+      "priorDecision": {
+        "candidateId": "cand_ac614aab7eb9cc394996553b",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:reference-frame-conversion on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_c1e0a9d1956d137e337cae16",
+        "proposalDigest": "sha256:471c0c05eb71b8b7c0849ff815db29348148b275358fd4ff38c5bd3a2bded41c",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-iers-reference-frames"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The external authority states the method, not a complete replay fixture, environment, implementation, and receipt for this route.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_ba19526bba1d8c7647a0572f",
+      "candidateDigest": "sha256:0b7918e22861d31e2d82e4619e4ca0a3a73bcd12ae26a45cd95d03c9f92988ea",
+      "conceptId": "urn:maha:concept:computation:optimization",
+      "routeRole": "worked-example",
+      "path": "/clearing/deterministic-computation/optimization/worked-example",
+      "priorDecision": {
+        "candidateId": "cand_ba19526bba1d8c7647a0572f",
+        "disposition": "blocked",
+        "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"optimization\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_9e9edd5648c41382537f568c",
+        "proposalDigest": "sha256:42d2317c121a92cb77c14316ec73bf344799b172dac3b85e0f1ee7fb9187b64b",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-boyd-optimization"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The definition is supported, but this worked-example role still lacks a complete inspected fixture with exact inputs and checks.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_bf6f5983b7e8f95b5f2fb564",
+      "candidateDigest": "sha256:8610911d7b054f7e3c4232ef4a14714ff84305b79d53f2c9518e5696b424f95f",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/causal-inference/reproducibility",
+      "priorDecision": {
+        "candidateId": "cand_bf6f5983b7e8f95b5f2fb564",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:causal-inference on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_a870823d00f81a9a4854f848",
+        "proposalDigest": "sha256:5c8142272d469151307d902b24ba55eb2ed07f1ccde0e915f37bd15743936c23",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-causal-what-if"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The external authority states the method, not a complete replay fixture, environment, implementation, and receipt for this route.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_c2a12acd1d0d40ff518b312d",
+      "candidateDigest": "sha256:ec0a01a68b356fc069958db4fbdb5926797854a76970abff937736af6ae3d77f",
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "routeRole": "uncertainty",
+      "path": "/clearing/deterministic-computation/interval-bounds/uncertainty",
+      "priorDecision": {
+        "candidateId": "cand_c2a12acd1d0d40ff518b312d",
+        "disposition": "blocked",
+        "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"interval-bounds\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_e41cfa0c9ad358c43c72d1ee",
+        "proposalDigest": "sha256:8afb2efadf204d87661d00bd4cf59e22521db1525b332d8f227259298d49edfc",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-dlmf-intervals",
+        "src-ieee-1788-identity"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "evidence-ready",
+      "roleFinding": "The page is limited to the inspected source’s stated conditions, failure boundaries, and what the method does not establish.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_c9ea7b1ca4cbc881270bd35c",
+      "candidateDigest": "sha256:f38aff0b467d9990d3adb06ceb32190970388828fcd4a593ea900462b37d450c",
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/interval-bounds/machine-interface",
+      "priorDecision": {
+        "candidateId": "cand_c9ea7b1ca4cbc881270bd35c",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:interval-bounds on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_e41cfa0c9ad358c43c72d1ee",
+        "proposalDigest": "sha256:8afb2efadf204d87661d00bd4cf59e22521db1525b332d8f227259298d49edfc",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-dlmf-intervals",
+        "src-ieee-1788-identity"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The external authority defines the concept but does not establish a concept-specific Maha machine interface. No implementation locator was inspected for this route.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_cd30fe8a10e733f835d60834",
+      "candidateDigest": "sha256:759eff170512a4612760e14487c1554fcd7322a44db4aef475044829bd448873",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/formal-verification/reproducibility",
+      "priorDecision": {
+        "candidateId": "cand_cd30fe8a10e733f835d60834",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:formal-verification on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_25c680ff193b4f35f49e96ae",
+        "proposalDigest": "sha256:855e6de6661384f88f938abdfbe7ec51a1f5ba582fc0f703d13950149f85a22b",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-nist-formal-verification"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The external authority states the method, not a complete replay fixture, environment, implementation, and receipt for this route.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_d06946e7b842a6b692144ebf",
+      "candidateDigest": "sha256:306b3dbf95f0847912bc73d8d4d00edc6a11df3da30efd6ec5c34df1f29bbcc0",
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/numerical-stability/machine-interface",
+      "priorDecision": {
+        "candidateId": "cand_d06946e7b842a6b692144ebf",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:numerical-stability on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_0d9b1a88cbf93d413a243d71",
+        "proposalDigest": "sha256:f66f4a234c95611f001c5ed7147aeb767ac56fddd2a95f8ce3fbc8e45312cb7d",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-nist-stability"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The external authority defines the concept but does not establish a concept-specific Maha machine interface. No implementation locator was inspected for this route.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_d9bccf96502cbf09b7d6e882",
+      "candidateDigest": "sha256:49661f369c261eb194492c0db764fd175167155e48dd5be25bceac9985b1b311",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "routeRole": "worked-example",
+      "path": "/clearing/deterministic-computation/causal-inference/worked-example",
+      "priorDecision": {
+        "candidateId": "cand_d9bccf96502cbf09b7d6e882",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:causal-inference on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_a870823d00f81a9a4854f848",
+        "proposalDigest": "sha256:5c8142272d469151307d902b24ba55eb2ed07f1ccde0e915f37bd15743936c23",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-causal-what-if"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The definition is supported, but this worked-example role still lacks a complete inspected fixture with exact inputs and checks.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_dd951c2a4e39f3756f7ee6f9",
+      "candidateDigest": "sha256:55961e2d5940024ae2fe8f773e06aa2207921a381c7d48fae89aca635a6071a4",
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/cryptographic-commitments/machine-interface",
+      "priorDecision": {
+        "candidateId": "cand_dd951c2a4e39f3756f7ee6f9",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:cryptographic-commitments on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_908638ce5ea422d98d5273fb",
+        "proposalDigest": "sha256:6bec3b7c9698692556e18657013cff3f19d45934f986e39d3633991fc1e09774",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-perk-commitments"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The external authority defines the concept but does not establish a concept-specific Maha machine interface. No implementation locator was inspected for this route.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_de495ad3d3b6cbad65c2537a",
+      "candidateDigest": "sha256:d1bcf18f66fce64c8abddc9720a094545471fec1a8983c11b61addb5a93c008a",
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/root-finding/machine-interface",
+      "priorDecision": {
+        "candidateId": "cand_de495ad3d3b6cbad65c2537a",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:root-finding on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_4e3ffcedfa7d51607e56c384",
+        "proposalDigest": "sha256:1d8d2f1eecc8a7f071e9083e251cebde1fb9557d8ef417b3bbfdf4de66bcacd5",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-dlmf-roots"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The external authority defines the concept but does not establish a concept-specific Maha machine interface. No implementation locator was inspected for this route.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_df8bc14ba0c8d37a4e944b28",
+      "candidateDigest": "sha256:af99e07d21e495c0e29f8d59c9cd05430b7e589a5ba756978643d5e53433d16d",
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "routeRole": "uncertainty",
+      "path": "/clearing/deterministic-computation/root-finding/uncertainty",
+      "priorDecision": {
+        "candidateId": "cand_df8bc14ba0c8d37a4e944b28",
+        "disposition": "blocked",
+        "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"root-finding\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_4e3ffcedfa7d51607e56c384",
+        "proposalDigest": "sha256:1d8d2f1eecc8a7f071e9083e251cebde1fb9557d8ef417b3bbfdf4de66bcacd5",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-dlmf-roots"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "evidence-ready",
+      "roleFinding": "The page is limited to the inspected source’s stated conditions, failure boundaries, and what the method does not establish.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_e3921066edee31291c7f4712",
+      "candidateDigest": "sha256:f6f45d07ed0cdca7f7fdf90eec13d8acb1b848d947e16d908237ffe84b176912",
+      "conceptId": "urn:maha:concept:computation:numerical-integration",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/numerical-integration/machine-interface",
+      "priorDecision": {
+        "candidateId": "cand_e3921066edee31291c7f4712",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:numerical-integration on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_2cb4942c45f1804543a91a4a",
+        "proposalDigest": "sha256:172aec2bdfae2a60420288b27bae4714b204601bb648371da8f481f2a89d0770",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-dlmf-quadrature"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The external authority defines the concept but does not establish a concept-specific Maha machine interface. No implementation locator was inspected for this route.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_e6913e5b1d6155dcbe056b6a",
+      "candidateDigest": "sha256:693c038b0314c4e44e6eb36728b78efe4bd38419beb82b29c55f19cc6f4c8f82",
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/deterministic-arithmetic/reproducibility",
+      "priorDecision": {
+        "candidateId": "cand_e6913e5b1d6155dcbe056b6a",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:deterministic-arithmetic on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_a563c1dcade1fa354b9069fa",
+        "proposalDigest": "sha256:81cca7e4b253f37de1f4a5e8e4d5913facc0715ede341bb8b0e76815d43982a1",
+        "accepted": false
+      },
+      "sourceIds": [
+        "src-dlmf-arithmetic"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The definition remains in revision, so no application role can proceed.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_eac662a166aa8f5f94e0bc20",
+      "candidateDigest": "sha256:21df829e33071222c063e60d040f4b18cda6921bf9a215f49da61014718ee1ef",
+      "conceptId": "urn:maha:concept:computation:optimization",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/optimization/reproducibility",
+      "priorDecision": {
+        "candidateId": "cand_eac662a166aa8f5f94e0bc20",
+        "disposition": "blocked",
+        "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"optimization\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_9e9edd5648c41382537f568c",
+        "proposalDigest": "sha256:42d2317c121a92cb77c14316ec73bf344799b172dac3b85e0f1ee7fb9187b64b",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-boyd-optimization"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The external authority states the method, not a complete replay fixture, environment, implementation, and receipt for this route.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_eb0fd7680849180edc43bdcd",
+      "candidateDigest": "sha256:918dcd3004569fd1f41de490ef45121f2d1a032abb1660c39586206bc7824364",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "routeRole": "uncertainty",
+      "path": "/clearing/deterministic-computation/causal-inference/uncertainty",
+      "priorDecision": {
+        "candidateId": "cand_eb0fd7680849180edc43bdcd",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:causal-inference on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_a870823d00f81a9a4854f848",
+        "proposalDigest": "sha256:5c8142272d469151307d902b24ba55eb2ed07f1ccde0e915f37bd15743936c23",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-causal-what-if"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "evidence-ready",
+      "roleFinding": "The page is limited to the inspected source’s stated conditions, failure boundaries, and what the method does not establish.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_ec90d506fb510c60080a8494",
+      "candidateDigest": "sha256:f5f557ffc265ed0a9f267ec1f3977c2bbca05d11322b78e8ae180bc3e8e8aa96",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "routeRole": "machine-interface",
+      "path": "/clearing/deterministic-computation/causal-inference/machine-interface",
+      "priorDecision": {
+        "candidateId": "cand_ec90d506fb510c60080a8494",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:causal-inference on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_a870823d00f81a9a4854f848",
+        "proposalDigest": "sha256:5c8142272d469151307d902b24ba55eb2ed07f1ccde0e915f37bd15743936c23",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-causal-what-if"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The external authority defines the concept but does not establish a concept-specific Maha machine interface. No implementation locator was inspected for this route.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_f1c83160cbd51444ec1e318c",
+      "candidateDigest": "sha256:73b9c6632c746c2e33ed96f52a03f4d97d3d9741ded905ea10317b24d8007986",
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "routeRole": "worked-example",
+      "path": "/clearing/deterministic-computation/interval-bounds/worked-example",
+      "priorDecision": {
+        "candidateId": "cand_f1c83160cbd51444ec1e318c",
+        "disposition": "blocked",
+        "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"interval-bounds\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_e41cfa0c9ad358c43c72d1ee",
+        "proposalDigest": "sha256:8afb2efadf204d87661d00bd4cf59e22521db1525b332d8f227259298d49edfc",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-dlmf-intervals",
+        "src-ieee-1788-identity"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "evidence-ready",
+      "roleFinding": "The inspected locator supplies an explicit operation, equation, or protocol from which a bounded worked example can be constructed without inventing a result.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_f2d40776c02061fd82af4f0d",
+      "candidateDigest": "sha256:24b385cbc3b36b8c9ab85730ce28ec3dd4cadb5dfff765b5a987c814b27ddcdd",
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/interval-bounds/reproducibility",
+      "priorDecision": {
+        "candidateId": "cand_f2d40776c02061fd82af4f0d",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:interval-bounds on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 15
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_e41cfa0c9ad358c43c72d1ee",
+        "proposalDigest": "sha256:8afb2efadf204d87661d00bd4cf59e22521db1525b332d8f227259298d49edfc",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-dlmf-intervals",
+        "src-ieee-1788-identity"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The external authority states the method, not a complete replay fixture, environment, implementation, and receipt for this route.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_f6059812822caaf8d68d2b08",
+      "candidateDigest": "sha256:e438582b511b201c9b4904bba2ea10f5e7e9d2542719b01ce675858c913d246d",
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "routeRole": "uncertainty",
+      "path": "/clearing/deterministic-computation/interpolation/uncertainty",
+      "priorDecision": {
+        "candidateId": "cand_f6059812822caaf8d68d2b08",
+        "disposition": "blocked",
+        "reason": "Semantically distinct and dependency-clear, but no source was inspected for topic \"interpolation\". Evidence-ready requires inspected content with an exact locator, so this is blocked on source inspection rather than on any defect in the candidate.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_de8dd0a88e8704fe5855033e",
+        "proposalDigest": "sha256:80ab2410d369514174cec737b343183a477bc93df97237acb08c7bfd624a0f23",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-dlmf-interpolation"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "evidence-ready",
+      "roleFinding": "The page is limited to the inspected source’s stated conditions, failure boundaries, and what the method does not establish.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    },
+    {
+      "candidateId": "cand_fcea33351dc6b5ed02dac901",
+      "candidateDigest": "sha256:a773d6ca05c444480f5b117a6dbd43bb98c70c31811efcdcdb1ece603b0b7cc0",
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "routeRole": "reproducibility",
+      "path": "/clearing/deterministic-computation/dimensional-analysis/reproducibility",
+      "priorDecision": {
+        "candidateId": "cand_fcea33351dc6b5ed02dac901",
+        "disposition": "blocked",
+        "reason": "No definition candidate exists for urn:maha:concept:computation:dimensional-analysis on maha-research. The dependent page is blocked; the prerequisite must not be inferred.",
+        "tranche": 16
+      },
+      "definitionBinding": {
+        "graphObjectId": "cand_d90b7197535681a502dccba9",
+        "proposalDigest": "sha256:431f4eede082c785fc68c08e3c9465af9c1065589166a9310fc71c358112f498",
+        "accepted": true
+      },
+      "sourceIds": [
+        "src-bipm-dimensions"
+      ],
+      "independentApplicationAssessment": true,
+      "finalState": "revise",
+      "roleFinding": "The external authority states the method, not a complete replay fixture, environment, implementation, and receipt for this route.",
+      "noInheritanceFinding": "The definition binding resolves and defines the concept only. This application was separately assessed against its route role and may not inherit evidence readiness from the definition."
+    }
+  ],
+  "provenanceDigest": "sha256:b3e08868899353958566f912824b015907cdfff272ddc73d880cff60814fd79a"
+}

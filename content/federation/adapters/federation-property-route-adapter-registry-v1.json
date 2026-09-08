@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "maha-federation-property-route-adapter-registry/1.0",
+  "state": "local-owner-handoff",
+  "counts": {
+    "properties": 7,
+    "routes": 941,
+    "boundedAnswers": 4705,
+    "publicRoutesCreated": 0,
+    "buildsRun": 0
+  },
+  "contracts": [
+    {
+      "siteId": "maha-strategies",
+      "canonicalHost": "www.mahastrategies.com",
+      "rootPath": "/clearing/",
+      "routes": 287,
+      "boundedAnswers": 1435,
+      "contractDigest": "sha256:7e376d72ea6cc008d8d9c1d9599514df1ab6612e9731ecf360869e430b66a3be"
+    },
+    {
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "rootPath": "/federation/",
+      "routes": 250,
+      "boundedAnswers": 1250,
+      "contractDigest": "sha256:f748431865a41a9df41b0369d871317bf950f3eb60a716ef8403bc217d39b80f"
+    },
+    {
+      "siteId": "agentic-publishing",
+      "canonicalHost": "publish.mahastrategies.com",
+      "rootPath": "/agentic-publishing/",
+      "routes": 74,
+      "boundedAnswers": 370,
+      "contractDigest": "sha256:bb2c92e0a0afbc3517a825718b408b495a1677079263c93a201d1dec2e0d4c7a"
+    },
+    {
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "rootPath": "/knowledge/",
+      "routes": 60,
+      "boundedAnswers": 300,
+      "contractDigest": "sha256:4744b81cbe14837e27c3ce10b40e592b700e7ce6469342b86094e90f43426fd8"
+    },
+    {
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "rootPath": "/concepts/",
+      "routes": 42,
+      "boundedAnswers": 210,
+      "contractDigest": "sha256:5f63fc30273c52385702fa78f94ab25ab50ee8b607ad481d13a58c7f72fa1e9c"
+    },
+    {
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "rootPath": "/mayon-volcano/",
+      "routes": 50,
+      "boundedAnswers": 250,
+      "contractDigest": "sha256:fb56ef164a529786a6d5c7da1d6210a7990c25c904fc93b7b1437fab6a54d263"
+    },
+    {
+      "siteId": "maha-policy",
+      "canonicalHost": "policy.mahastrategies.com",
+      "rootPath": "/policy/",
+      "routes": 178,
+      "boundedAnswers": 890,
+      "contractDigest": "sha256:fbdc09b833ed74922f870f2b6dfda0133e0cda86b4ede3bdcf1b2d9d54170fd5"
+    }
+  ],
+  "buildBoundary": "No Next.js or Vercel build is authorized by this registry. Each owner must install its adapter, bind exact-revision review and canonical release, and obtain explicit build authorization.",
+  "provenanceDigest": "sha256:e33c1822239ca43aeb844261414dab5176f4c77bac740e6af16c17416d71aa26"
+}

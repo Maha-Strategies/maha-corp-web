@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "maha-federation-tranche-17-source-inspections/1.0",
+  "frozenOn": "2026-09-06",
+  "method": "Sources were opened and read at a stated locator. Metadata, abstracts, search snippets, dictionary entries and landing pages are not inspection. No access control was bypassed.",
+  "topicsInCohort": 15,
+  "topicsInspected": 2,
+  "distinctSources": 2,
+  "carriedForward": 2,
+  "freshlyInspected": 0,
+  "inspections": [
+    {
+      "inspectionId": "tr16-src-101",
+      "topic": "traceability",
+      "sourceIdentity": "JCGM 200:2012, International Vocabulary of Metrology (VIM), 3rd edition",
+      "version": "JCGM 200:2012",
+      "stableUrl": "https://www.bipm.org/documents/20126/2071204/JCGM_200_2012.pdf",
+      "locator": "§2.41 (6.10), definition of metrological traceability, with Note 1.",
+      "inspectionDepth": "targeted-definition-read",
+      "accessBasis": "Published by the BIPM Joint Committee for Guides in Metrology, freely available.",
+      "reuseBasis": "Reference-only. Bounded original summary; the definition is not reproduced verbatim.",
+      "supportedClaimScope": "That metrological traceability is a property of a measurement result: the result can be related to a reference through a documented unbroken chain of calibrations, each contributing to the measurement uncertainty.",
+      "boundary": "This is traceability of a measurement to a reference standard. It is not provenance of a document, lineage of a citation, or an audit trail of a system, all of which share the word. A page about record traceability must not cite this definition.",
+      "sourceClass": "international-metrology-authority",
+      "independence": "independent-of-maha",
+      "relationshipToEarlier": "Carried forward into Tranche 17: same source, same locator, same claim scope. Originally inspected as tr16-src-101."
+    },
+    {
+      "inspectionId": "tr16-src-102",
+      "topic": "incident-reporting",
+      "sourceIdentity": "NIST SP 800-61 Rev. 3, Incident Response Recommendations and Considerations for Cybersecurity Risk Management",
+      "version": "Revision 3",
+      "stableUrl": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-61r3.pdf",
+      "locator": "Executive Summary, paragraph placing incident response across the six CSF 2.0 Functions.",
+      "inspectionDepth": "targeted-section-read",
+      "accessBasis": "United States government publication, freely available.",
+      "reuseBasis": "US government work; bounded original summary with attribution.",
+      "supportedClaimScope": "That incident response is treated as part of cybersecurity risk management rather than a standalone activity, and is distributed across the Govern, Identify, Protect, Detect, Respond and Recover functions.",
+      "boundary": "Recommendations and considerations, not a reporting obligation. It sets no disclosure deadline, names no regulator, and does not establish when an incident must be reported to anyone.",
+      "sourceClass": "government-standards-body",
+      "independence": "independent-of-maha",
+      "relationshipToEarlier": "Carried forward into Tranche 17: same source, same locator, same claim scope. Originally inspected as tr16-src-102."
+    }
+  ],
+  "soughtButNotInspected": [],
+  "uninspectedTopicNote": "The uninspected topics are predominantly this organisation’s own operational concepts and the author’s own concepts on the personal properties, for which no external authority exists to cite.",
+  "provenanceDigest": "sha256:ffeb4ef5ae743283a44ec3b3862b32a9b4d88c66b5b22bab5b395c0b998e36c2"
+}

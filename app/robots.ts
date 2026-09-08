@@ -1,6 +1,11 @@
 import { MetadataRoute } from 'next'
+import { headers } from 'next/headers'
+import { indexingHost } from '@/lib/indexing-control-plane'
 
-export default function robots(): MetadataRoute.Robots {
+export const dynamic = 'force-dynamic'
+
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const host = indexingHost((await headers()).get('host'))
   return {
     rules: [
       {
@@ -12,7 +17,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/private/'],
       },
     ],
-    sitemap: 'https://www.mahastrategies.com/sitemap.xml',
-    host: 'https://www.mahastrategies.com',
+    sitemap: [`https://${host}/sitemap-index.xml`, `https://${host}/sitemap.xml`],
+    host: `https://${host}`,
   }
 }

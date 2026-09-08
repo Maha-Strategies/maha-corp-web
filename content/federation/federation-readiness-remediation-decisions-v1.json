@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "maha-federation-readiness-remediation-decisions/1.0",
+  "reviewedOn": "2026-09-06",
+  "remediationDeterminationsDigest": "sha256:aa9f73c2e993b75ff7af17f3d79b29855aa496b74af05cd9711f8ad26c5c8387",
+  "assurance": "Append-only internal editorial decisions; no external or expert endorsement.",
+  "counts": {
+    "reviewed": 6,
+    "promoted": 6,
+    "activeBindingsChanged": 0
+  },
+  "entries": [
+    {
+      "cohortOrder": 24,
+      "candidateId": "cand_671d652918d62414c37d751d",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+      "title": "Health Data Consent — Definition",
+      "siteId": "maha-os",
+      "topic": "health-data-consent",
+      "routeRole": "definition",
+      "disposition": "evidence-ready",
+      "reason": "Narrowed to an operational permission record rather than a universal legal consent claim.",
+      "topicPacketKey": "maha-os:health-data-consent",
+      "topicPacketDigest": "sha256:6b3a4b9dd9c0187b5a32a67cfff4837129e2333838fe13ee9fc7d9d952d46289",
+      "dependencyValidationDigest": "sha256:047a0ac47a362477df51a0b58096b3569a13e0114cd0e5fa5ede2a88d622511d",
+      "exactSourceCount": 2,
+      "reviewedOn": "2026-09-06",
+      "activeRouteCreated": false,
+      "supersedesDecisionDigest": "sha256:f85c3ad1aac35ecff2b018004bfb9f3e2d3e379c6a4578289bf23ce0438d9642",
+      "assurance": "internal-editorial-narrowed-scope",
+      "narrowedScope": {
+        "mayState": [
+          "Data categories, purpose, actor or recipient, duration or expiry, revocation state, and declared legal regime."
+        ],
+        "mayNotState": [
+          "Universal consent validity, HIPAA authorization, medical diagnosis, or compliance certification."
+        ]
+      }
+    },
+    {
+      "cohortOrder": 15,
+      "candidateId": "cand_41ee6b7080d2c8416e30adaf",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/commercialization",
+      "title": "Context Budgeting — Commercialization",
+      "siteId": "maha-strategies",
+      "topic": "context-budgeting",
+      "routeRole": "commercialization",
+      "disposition": "evidence-ready",
+      "reason": "The live offer establishes assessment tiers, prices, hard budgets, and token/cost measurement.",
+      "semanticValidationDigest": "sha256:9e4dd22cc225b2403e70585c250dfb1af24d746f99ac9b3eea482fec711d1fe0",
+      "dependencyValidationDigest": "sha256:1c99c78a53ecb111852a9a4b4db0b71c042e62afa702b0d5e34dceb4837d8435",
+      "topicPacketKey": "maha-strategies:context-budgeting",
+      "topicPacketDigest": "sha256:796ab66614ba6286bd79094741800a7455bf34d9003c8542f3750db6e3458b3e",
+      "reviewedOn": "2026-09-06",
+      "activeRouteCreated": false,
+      "supersedesDecisionDigest": "sha256:eae62bf48b51ed121b357d36b4b274a584bc7c8a8f07dd7ca5bc73c63f846e94",
+      "assurance": "internal-editorial-narrowed-scope",
+      "narrowedScope": {
+        "mayState": [
+          "Published assessment availability, scope, and prices."
+        ],
+        "mayNotState": [
+          "Customer outcomes, savings, or delivered benefit."
+        ]
+      }
+    },
+    {
+      "cohortOrder": 8,
+      "candidateId": "cand_5322e19e5c67b1aae32124b0",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/failure-mode",
+      "title": "Release Manifest — Failure Mode",
+      "siteId": "agentic-publishing",
+      "topic": "release-manifest",
+      "routeRole": "failure-mode",
+      "disposition": "evidence-ready",
+      "reason": "The canonical documentation establishes withdrawal non-resolution as one failure mode.",
+      "semanticValidationDigest": "sha256:d46b2d91fa78f28985eeaf165bf9ea511abf9e913e15bb7c89c6c698ef9367e9",
+      "dependencyValidationDigest": "sha256:b4cd252eb8aa7f9524aa28ee1a47dbae83fd196385c0e490f67b58a8b518539c",
+      "topicPacketKey": "agentic-publishing:release-manifest",
+      "topicPacketDigest": "sha256:f1afd358d28eae7f6d468689947f09f0dae26d49a80bad15dfbc4e7542bd37b6",
+      "reviewedOn": "2026-09-06",
+      "activeRouteCreated": false,
+      "supersedesDecisionDigest": "sha256:7abcef3ee58f3497a39f7696ec68c5293dadde68840c3cc2375e812011ebeb96",
+      "assurance": "internal-editorial-narrowed-scope",
+      "narrowedScope": {
+        "mayState": [
+          "A withdrawn metadata-public release must stop resolving."
+        ],
+        "mayNotState": [
+          "An exhaustive failure-mode catalogue."
+        ]
+      }
+    },
+    {
+      "cohortOrder": 50,
+      "candidateId": "cand_b0625906e210bafb279b7669",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/template",
+      "title": "Machine Readable Article — Template",
+      "siteId": "agentic-publishing",
+      "topic": "machine-readable-article",
+      "routeRole": "template",
+      "disposition": "evidence-ready",
+      "reason": "The template is additive when every field defers to the canonical machine-readability guidance.",
+      "semanticValidationDigest": "sha256:108ee73b694018e6e90aef8de7c0cb45917a3ee305840449b52efb4ac3262efe",
+      "dependencyValidationDigest": "sha256:4df649dbdcf0a1fb0860ce34923addf6e4701d4a236b048c24803148050b056b",
+      "topicPacketKey": "agentic-publishing:machine-readable-article",
+      "topicPacketDigest": "sha256:6c715cd88343531653f86f78fb81de8487da2cfc21d05187ee0b9c604843df47",
+      "reviewedOn": "2026-09-06",
+      "activeRouteCreated": false,
+      "supersedesDecisionDigest": "sha256:f34383cd02b7b69355542689a698436a89945eb160741a8418ca07dd2777ab65",
+      "assurance": "internal-editorial-narrowed-scope",
+      "narrowedScope": {
+        "mayState": [
+          "A Schema.org/JATS-derived field template and payload validation."
+        ],
+        "mayNotState": [
+          "A competing definition or any indexing/citation guarantee."
+        ]
+      }
+    },
+    {
+      "cohortOrder": 66,
+      "candidateId": "cand_c8b98032f22fc91b51dac6be",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/example",
+      "title": "Machine Readable Article — Example",
+      "siteId": "agentic-publishing",
+      "topic": "machine-readable-article",
+      "routeRole": "example",
+      "disposition": "evidence-ready",
+      "reason": "The live metadata-only Context Pack supports a bounded worked example.",
+      "semanticValidationDigest": "sha256:2acd2409161a2845421cffeff8357bbeceb52f4b1114fa07e15b37c09f962e00",
+      "dependencyValidationDigest": "sha256:b1dd427ab9c7231c94909237dc342270c169acd3ec95b66cee9dd4ae559ad413",
+      "topicPacketKey": "agentic-publishing:machine-readable-article",
+      "topicPacketDigest": "sha256:6c715cd88343531653f86f78fb81de8487da2cfc21d05187ee0b9c604843df47",
+      "reviewedOn": "2026-09-06",
+      "activeRouteCreated": false,
+      "supersedesDecisionDigest": "sha256:70d9baa362ca83450326ecde5e4a1cccdc480b2722a0171060a9afb03364a988",
+      "assurance": "internal-editorial-narrowed-scope",
+      "narrowedScope": {
+        "mayState": [
+          "Which public fields are metadata and which content is excluded."
+        ],
+        "mayNotState": [
+          "That the record is a template/specification or licenses the book."
+        ]
+      }
+    },
+    {
+      "cohortOrder": 97,
+      "candidateId": "cand_f6409ea20cfc51496e3a61d8",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/commercialization",
+      "title": "Failure Recovery — Commercialization",
+      "siteId": "maha-strategies",
+      "topic": "failure-recovery",
+      "routeRole": "commercialization",
+      "disposition": "evidence-ready",
+      "reason": "The live offer establishes measurement of failure-path behavior at published prices.",
+      "semanticValidationDigest": "sha256:0a2e4b63c0d85bfde34660cc7fc7d0710e31b74d446e11ec347100a958826950",
+      "dependencyValidationDigest": "sha256:fe77b820d304fa4d12e586a4e23900a7f29d59c17675bf946fa792dc7a1c005f",
+      "topicPacketKey": "maha-strategies:failure-recovery",
+      "topicPacketDigest": "sha256:3a82f05cfb6c2a19cd5d7416674ee540e0b8408aaabf9756bf51990043afced1",
+      "reviewedOn": "2026-09-06",
+      "activeRouteCreated": false,
+      "supersedesDecisionDigest": "sha256:fc792ca81b7a170a79c72c8e2b0a1e38c7ee974d48d85d315df70b1311eebe1d",
+      "assurance": "internal-editorial-narrowed-scope",
+      "narrowedScope": {
+        "mayState": [
+          "Assessment of failure-path behavior and published prices."
+        ],
+        "mayNotState": [
+          "A promise to recover failures or any customer outcome."
+        ]
+      }
+    }
+  ],
+  "provenanceDigest": "sha256:fce87596b82d8a94ea098fed14d401cc7eb017550c6d1ebe9b51e1c9c3a0fbda"
+}

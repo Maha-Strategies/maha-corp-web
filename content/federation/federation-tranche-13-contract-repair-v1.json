@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "maha-federation-tranche-13-contract-repair/1.0",
+  "frozenOn": "2026-09-06",
+  "defect": "Route role `definition` declared against contract role `owner-application`, whose boundary reads \"may apply; cannot redefine\". A definition page must own its concept, so the two cannot both be correct.",
+  "diagnosis": "All 169 definition-role candidates in the frozen map sit on the property that owns the concept they define. The role is correct and the contract is not; the map has no canonical-owner role at all.",
+  "frozenMapUntouched": "The map is not rewritten. Its digest is bound into every tranche artifact including Tranches 1-12.",
+  "counts": {
+    "inspected": 169,
+    "repaired": 169,
+    "roleWrongNotContract": [],
+    "byProperty": {
+      "agentic-publishing": 18,
+      "maha-os": 20,
+      "maha-policy": 30,
+      "maha-research": 50,
+      "maha-strategies": 25,
+      "mayon-rajan": 16,
+      "mayone-maharajan": 10
+    }
+  },
+  "provenanceDigest": "sha256:525bd736bc165ff7f652a9a2fa3dd238af5fcc4e42b8f2b231bbd5f80b207e63"
+}

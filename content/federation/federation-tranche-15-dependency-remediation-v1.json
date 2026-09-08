@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "maha-federation-tranche-15-dependency-remediation/1.0",
+  "frozenOn": "2026-09-06",
+  "purpose": "Diagnoses every prerequisite that blocked a Tranche 14 candidate, so the next cohort can be selected on what it would actually unblock rather than on utility alone.",
+  "counts": {
+    "blockedDependents": 20,
+    "distinctPrerequisites": 5,
+    "byAvailability": {
+      "absent-from-frozen-map": 5
+    },
+    "unlockableByThisTranche": 0
+  },
+  "finding": "Fan-out and availability are inversely related here. Every prerequisite with a fan-out above one is absent from the frozen map, and every prerequisite present in the pool unlocks exactly one dependent. Selecting all four available definitions therefore unblocks four of the thirty-eight. The remaining thirty-four are blocked by an incomplete candidate map rather than by selection policy.",
+  "prerequisites": [
+    {
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "declaredOwner": "maha-research",
+      "unlocks": 4,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_7afab943b366ec1ce0a420f6",
+        "cand_985cbc355b9050f85b926942",
+        "cand_9f9fb8e2bddf2c3d845f0735",
+        "cand_fd914cf4b7855cfa614efb27"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:conflicting-literature",
+      "declaredOwner": "maha-research",
+      "unlocks": 4,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_0a13428b731b87a242aa8860",
+        "cand_0e187bdd3d33afee1b23310d",
+        "cand_2b4ee754b4b8aa01c89396c8",
+        "cand_90c0ea2f6a833c6e940f0fcb"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "declaredOwner": "maha-research",
+      "unlocks": 4,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_53c217f369e3ea364567364a",
+        "cand_76a609835bd997daf18d03c9",
+        "cand_94d3ab89dc9b9a4049cfcc64",
+        "cand_bbfc84c12e0abb852c57ea7b"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "declaredOwner": "maha-research",
+      "unlocks": 4,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_a84907e8cd7aaeb462975ff0",
+        "cand_d3fd4dd629615b77d72dd7d9",
+        "cand_dc250735100e8e76edee974c",
+        "cand_dc8070ea994e1058754e5a31"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "declaredOwner": "maha-research",
+      "unlocks": 4,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_5e120d34f43896e9ddd4c2cd",
+        "cand_6e39d7b25fc7f9913e52d052",
+        "cand_777b4bf168156b8720a1c87d",
+        "cand_c8942765582ba19ccafd6b7c"
+      ]
+    }
+  ],
+  "repairProposals": [
+    {
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 4,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:conflicting-literature",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 4,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 4,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 4,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 4,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    }
+  ],
+  "boundary": "An analysis. It inserts no candidate, activates no proposal, and changes no Tranche 14 classification.",
+  "provenanceDigest": "sha256:75bbcaa556d9a372dcfc17a601c936cde6b30a7083f4fbf7c4bcd1859d11f986"
+}

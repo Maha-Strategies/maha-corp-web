@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "maha-federation-readiness-ledger-delta/27.0",
+  "frozenOn": "2026-09-07",
+  "baseLedger": {
+    "provenanceDigest": "sha256:bf5769e51b4b69b358805e5050c548be11482380c7fb38905ce7263c4348a5ee",
+    "implementationReady": 1426,
+    "unresolved": 202
+  },
+  "priorMergedDeltas": {
+    "tranche26": 4,
+    "prerequisiteClosure": 1
+  },
+  "counts": {
+    "reviewed": 36,
+    "newlyImplementationReady": 36,
+    "remainUnresolvedInTranche": 0,
+    "projectedImplementationReady": 1467,
+    "projectedUnresolved": 161
+  },
+  "readyCandidateIds": [
+    "cand_07c0afa06dc081ac6d3de371",
+    "cand_091ae0c188f4d08bcda619bd",
+    "cand_153e6118f6c961c3995fd5f1",
+    "cand_22816fb088961d6c55ede221",
+    "cand_2727e3fca1239c7d30d0d52f",
+    "cand_295ca72c9e7c282beace722f",
+    "cand_35c74e2b8ee427e5df7e1ed1",
+    "cand_412d625511d2c70716b96f81",
+    "cand_45e1b857bfff8e7668400b82",
+    "cand_4d08959c6f2cd3a22096d989",
+    "cand_4fe17b4867f9be0fe42ca201",
+    "cand_5dd4519b1808b75b0ffa6b69",
+    "cand_6209efe5c31c50ebb8de8406",
+    "cand_6d6798d9c9117b48e2326867",
+    "cand_6eab88033ca52850fa2126d9",
+    "cand_723dc016fc42697879993423",
+    "cand_723f9046537551ad6afc30bf",
+    "cand_763fc50de5c75f57a8964521",
+    "cand_787b797318dc19c7cf1a3285",
+    "cand_79905c989f92257b93b53c70",
+    "cand_8874e92b96f178ce2e1b232a",
+    "cand_8bced31fb2d8be737f1c9c62",
+    "cand_9209e3b9da7835eecfe5543d",
+    "cand_95052db29b48251b8c0d8b09",
+    "cand_9be20b3ef8382660d456e223",
+    "cand_9f5129f6534d6024ffd3cec0",
+    "cand_aa0a39274d0cb4dc8f4c130c",
+    "cand_ac05539156b5a10e55e68e3a",
+    "cand_c0b38c413c629e45957f1188",
+    "cand_c12add199249649d20ce777c",
+    "cand_d16bd0aeeef4d38b1bfb0f2d",
+    "cand_d875bbf4cdca9e19b0548805",
+    "cand_d9a0f8a41b4e0dfa8474aefc",
+    "cand_df0ee499e037d3b87aae35e3",
+    "cand_e6eec2cf4d35c6aafc15fe9b",
+    "cand_ee0f0d7c891f42e232b3a7d6"
+  ],
+  "execution": {
+    "unifiedLedgerApplied": false,
+    "publicRoutesGenerated": 0,
+    "buildRun": false,
+    "deployed": false
+  },
+  "provenanceDigest": "sha256:78d88ffd57ff6eb1cd48c535917ddb907437a6c8db62002e98066e49dbc50145"
+}

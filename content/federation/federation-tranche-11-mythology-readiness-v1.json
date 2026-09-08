@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "maha-federation-tranche-eleven-mythology-readiness/1.0",
+  "cohortDigest": "sha256:252532f20196c56f9281fb470d8a9beab4cb5e46a8b2598ccee64cfa91aa9e16",
+  "decisionManifestDigest": "sha256:8b0c82346adba214a6178250ec285e4cfe790489c4b3014a6668f812d9226a40",
+  "specificationManifestDigest": "sha256:4f419eee297d850f6bf9fabcf4ba4b9c0edd9a2a30bb88ea7b95c39a009c216d",
+  "status": "local-reviewed-unreleased",
+  "counts": {
+    "candidates": 100,
+    "evidenceReady": 16,
+    "revise": 77,
+    "blocked": 7,
+    "duplicative": 0,
+    "pageSpecifications": 16,
+    "publicRoutesCreated": 0,
+    "buildsRun": 0
+  },
+  "nextResearch": [
+    "Inspect paired Greek and Roman primary passages plus relationship scholarship for the 28 Greek/Roman routes.",
+    "Inspect translation-bearing primary texts and reception scholarship for Mesopotamian source-text and reception routes.",
+    "Add route-specific philology and later epic/Purāṇic sources without transferring Vedic authority forward.",
+    "Inspect deity-specific Egyptian texts or objects and scholarship for Ra, Isis, and Horus.",
+    "Inspect exact Eddic stanzas under a commercially compatible use plan and separate medieval evidence from reception.",
+    "Add the missing Publish release-manifest dependency before any machine registry implementation."
+  ],
+  "boundary": "No generated public route, sitemap or llms.txt entry, Next.js or Vercel build, push, Preview, canonical release, deployment, or Production mutation is authorized or performed.",
+  "provenanceDigest": "sha256:9b32834c9b093126663b432d1665ca1ec517f70132d03bf2f9b2e3aa86d97a8c"
+}

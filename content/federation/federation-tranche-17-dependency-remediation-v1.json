@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "maha-federation-tranche-17-dependency-remediation/1.0",
+  "frozenOn": "2026-09-06",
+  "purpose": "Diagnoses every prerequisite that blocked a Tranche 16 candidate, so the next cohort can be selected on what it would actually unblock rather than on utility alone.",
+  "counts": {
+    "blockedDependents": 8,
+    "distinctPrerequisites": 2,
+    "byAvailability": {
+      "absent-from-frozen-map": 2
+    },
+    "unlockableByThisTranche": 0
+  },
+  "finding": "Fan-out and availability are inversely related here. Every prerequisite with a fan-out above one is absent from the frozen map, and every prerequisite present in the pool unlocks exactly one dependent. Selecting all four available definitions therefore unblocks four of the thirty-eight. The remaining thirty-four are blocked by an incomplete candidate map rather than by selection policy.",
+  "prerequisites": [
+    {
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "declaredOwner": "maha-research",
+      "unlocks": 4,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_bf6f5983b7e8f95b5f2fb564",
+        "cand_d9bccf96502cbf09b7d6e882",
+        "cand_eb0fd7680849180edc43bdcd",
+        "cand_ec90d506fb510c60080a8494"
+      ]
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "declaredOwner": "maha-research",
+      "unlocks": 4,
+      "supplierCandidateId": null,
+      "supplierPath": null,
+      "availability": "absent-from-frozen-map",
+      "dependents": [
+        "cand_4ca1eef82246da3174e34e17",
+        "cand_5ace7cc1e1287874f505c134",
+        "cand_67328511b3565384d1f5240c",
+        "cand_fcea33351dc6b5ed02dac901"
+      ]
+    }
+  ],
+  "repairProposals": [
+    {
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 4,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "proposedOwner": "maha-research",
+      "wouldUnlock": 4,
+      "status": "proposed-inactive",
+      "note": "No definition candidate exists for this concept in the frozen map. A repair would add one under the declared owner. Recorded as a proposal and deliberately not inserted: adding it here would create a prerequisite that no freeze reviewed."
+    }
+  ],
+  "boundary": "An analysis. It inserts no candidate, activates no proposal, and changes no Tranche 16 classification.",
+  "provenanceDigest": "sha256:9535718a65df6cdbbda3f9c9b0be5174c10deea65945306da921d3370fa96166"
+}

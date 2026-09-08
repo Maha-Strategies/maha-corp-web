@@ -1,0 +1,2312 @@
+{
+  "schemaVersion": "maha-federation-tranche-18-cohort/1.0",
+  "frozenOn": "2026-09-06",
+  "candidateMapDigest": "sha256:51865dea64a17396d8bae455d9133a7d0f1e709309abf14ac0744cddd26a4947",
+  "selectionRule": "Active and unreviewed after Tranches 1-13, ordered dependency-first: every prerequisite definition available in the pool is selected before any filler, by fan-out then candidate id. The remainder is filled by calibrated utility under the four-per-site-topic cap and proportional targets bounded by remaining inventory, with candidate id as the deterministic tie-break. Legacy rank is not used: the mythology migration left it non-contiguous.",
+  "exclusions": {
+    "supersededExcluded": 0,
+    "coveredByPriorTranches": 1628,
+    "poolBefore": 32,
+    "poolAfter": 0
+  },
+  "dependencyFirst": {
+    "prerequisitesSelected": [],
+    "projectedTranche17Unlocks": 0
+  },
+  "shortfalls": [
+    {
+      "siteId": "agentic-publishing",
+      "target": 10,
+      "available": 0,
+      "selected": 0
+    },
+    {
+      "siteId": "maha-os",
+      "target": 6,
+      "available": 0,
+      "selected": 0
+    },
+    {
+      "siteId": "maha-policy",
+      "target": 18,
+      "available": 0,
+      "selected": 0
+    },
+    {
+      "siteId": "maha-strategies",
+      "target": 31,
+      "available": 0,
+      "selected": 0
+    },
+    {
+      "siteId": "mayon-rajan",
+      "target": 5,
+      "available": 0,
+      "selected": 0
+    },
+    {
+      "siteId": "mayone-maharajan",
+      "target": 5,
+      "available": 0,
+      "selected": 0
+    }
+  ],
+  "shortfallNote": "A shortfall is a property target the remaining inventory cannot meet. It is recorded rather than absorbed, so a later tranche is not misread as having under-selected a property that had nothing left to give.",
+  "counts": {
+    "cohort": 32,
+    "unique": 32,
+    "overlapWithPriorTranches": 0,
+    "supersededSelected": 0
+  },
+  "byProperty": {
+    "maha-research": 32
+  },
+  "byTopic": {
+    "audit-export": 1,
+    "calculation-receipts": 1,
+    "canonical-release": 1,
+    "causal-inference": 1,
+    "claim-intake": 1,
+    "conflicting-literature": 1,
+    "correction-and-retraction": 1,
+    "cryptographic-commitments": 1,
+    "delivery-acknowledgement": 1,
+    "deterministic-arithmetic": 1,
+    "dimensional-analysis": 1,
+    "error-budgets": 1,
+    "evidence-dossiers": 1,
+    "formal-verification": 1,
+    "internal-review": 1,
+    "interpolation": 1,
+    "interval-bounds": 1,
+    "licensed-retrieval": 1,
+    "locator-verification": 1,
+    "numerical-integration": 1,
+    "numerical-stability": 1,
+    "optimization": 1,
+    "passage-support": 1,
+    "privacy-boundary": 1,
+    "reference-frame-conversion": 1,
+    "reproducibility-fixtures": 1,
+    "root-finding": 1,
+    "runtime-witness-receipts": 1,
+    "source-recovery": 1,
+    "uncertainty-recording": 1,
+    "unsupported-inference": 1,
+    "version-relationship": 1
+  },
+  "byRouteRole": {
+    "definition": 32
+  },
+  "entries": [
+    {
+      "candidateId": "cand_0d9b1a88cbf93d413a243d71",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/numerical-stability/definition",
+      "url": "https://research.mahastrategies.com/federation/research/numerical-stability/definition",
+      "title": "Numerical Stability — Definition",
+      "searchIntent": "Understand Numerical Stability through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "conceptFamilyId": "computation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of computation for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:computation:numerical-stability"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 2
+    },
+    {
+      "candidateId": "cand_1677d8e5ffd0adccd70025c9",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/internal-review/definition",
+      "url": "https://research.mahastrategies.com/federation/research/internal-review/definition",
+      "title": "Internal Review — Definition",
+      "searchIntent": "Understand Internal Review through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:evidence:internal-review"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 3
+    },
+    {
+      "candidateId": "cand_25c680ff193b4f35f49e96ae",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/formal-verification/definition",
+      "url": "https://research.mahastrategies.com/federation/research/formal-verification/definition",
+      "title": "Formal Verification — Definition",
+      "searchIntent": "Understand Formal Verification through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "conceptFamilyId": "computation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of computation for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:computation:formal-verification"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_2cb4942c45f1804543a91a4a",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/numerical-integration/definition",
+      "url": "https://research.mahastrategies.com/federation/research/numerical-integration/definition",
+      "title": "Numerical Integration — Definition",
+      "searchIntent": "Understand Numerical Integration through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:computation:numerical-integration",
+      "conceptFamilyId": "computation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of computation for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:computation:numerical-integration"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 1
+    },
+    {
+      "candidateId": "cand_31188cec0703fe842e52f242",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/correction-and-retraction/definition",
+      "url": "https://research.mahastrategies.com/federation/research/correction-and-retraction/definition",
+      "title": "Correction And Retraction — Definition",
+      "searchIntent": "Understand Correction And Retraction through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:evidence:correction-and-retraction"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_3476e38beb1e953348f8d600",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/runtime-witness-receipts/definition",
+      "url": "https://research.mahastrategies.com/federation/research/runtime-witness-receipts/definition",
+      "title": "Runtime Witness Receipts — Definition",
+      "searchIntent": "Understand Runtime Witness Receipts through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:evidence:runtime-witness-receipts"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_4e3ffcedfa7d51607e56c384",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/root-finding/definition",
+      "url": "https://research.mahastrategies.com/federation/research/root-finding/definition",
+      "title": "Root Finding — Definition",
+      "searchIntent": "Understand Root Finding through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "conceptFamilyId": "computation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of computation for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:computation:root-finding"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 2
+    },
+    {
+      "candidateId": "cand_5abc1a241361feb7e0f36d0d",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/delivery-acknowledgement/definition",
+      "url": "https://research.mahastrategies.com/federation/research/delivery-acknowledgement/definition",
+      "title": "Delivery Acknowledgement — Definition",
+      "searchIntent": "Understand Delivery Acknowledgement through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:evidence:delivery-acknowledgement"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_6f89066f567226c0e442bb39",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/locator-verification/definition",
+      "url": "https://research.mahastrategies.com/federation/research/locator-verification/definition",
+      "title": "Locator Verification — Definition",
+      "searchIntent": "Understand Locator Verification through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:locator-verification",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:evidence:locator-verification"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 1
+    },
+    {
+      "candidateId": "cand_70ca0daa7c7b8f82481ef8bd",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/conflicting-literature/definition",
+      "url": "https://research.mahastrategies.com/federation/research/conflicting-literature/definition",
+      "title": "Conflicting Literature — Definition",
+      "searchIntent": "Understand Conflicting Literature through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:conflicting-literature",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:evidence:conflicting-literature"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_79d4527b01877f8e8a9cf1ee",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/unsupported-inference/definition",
+      "url": "https://research.mahastrategies.com/federation/research/unsupported-inference/definition",
+      "title": "Unsupported Inference — Definition",
+      "searchIntent": "Understand Unsupported Inference through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:unsupported-inference",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:evidence:unsupported-inference"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 2
+    },
+    {
+      "candidateId": "cand_908638ce5ea422d98d5273fb",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/cryptographic-commitments/definition",
+      "url": "https://research.mahastrategies.com/federation/research/cryptographic-commitments/definition",
+      "title": "Cryptographic Commitments — Definition",
+      "searchIntent": "Understand Cryptographic Commitments through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "conceptFamilyId": "computation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of computation for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:computation:cryptographic-commitments"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 2
+    },
+    {
+      "candidateId": "cand_941aed3932712f20f9dad49d",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/canonical-release/definition",
+      "url": "https://research.mahastrategies.com/federation/research/canonical-release/definition",
+      "title": "Canonical Release — Definition",
+      "searchIntent": "Understand Canonical Release through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:canonical-release",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:evidence:canonical-release"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 2
+    },
+    {
+      "candidateId": "cand_99546e87db73ddd7326a34ab",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/audit-export/definition",
+      "url": "https://research.mahastrategies.com/federation/research/audit-export/definition",
+      "title": "Audit Export — Definition",
+      "searchIntent": "Understand Audit Export through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:audit-export",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:evidence:audit-export"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 2
+    },
+    {
+      "candidateId": "cand_9d040a84a30d4c24c219709b",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/uncertainty-recording/definition",
+      "url": "https://research.mahastrategies.com/federation/research/uncertainty-recording/definition",
+      "title": "Uncertainty Recording — Definition",
+      "searchIntent": "Understand Uncertainty Recording through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:evidence:uncertainty-recording"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_9e9edd5648c41382537f568c",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/optimization/definition",
+      "url": "https://research.mahastrategies.com/federation/research/optimization/definition",
+      "title": "Optimization — Definition",
+      "searchIntent": "Understand Optimization through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:computation:optimization",
+      "conceptFamilyId": "computation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of computation for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:computation:optimization"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 1
+    },
+    {
+      "candidateId": "cand_a265c5d9ff36ca1b17bfb8a0",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/source-recovery/definition",
+      "url": "https://research.mahastrategies.com/federation/research/source-recovery/definition",
+      "title": "Source Recovery — Definition",
+      "searchIntent": "Understand Source Recovery through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:source-recovery",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:evidence:source-recovery"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 1
+    },
+    {
+      "candidateId": "cand_a563c1dcade1fa354b9069fa",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/deterministic-arithmetic/definition",
+      "url": "https://research.mahastrategies.com/federation/research/deterministic-arithmetic/definition",
+      "title": "Deterministic Arithmetic — Definition",
+      "searchIntent": "Understand Deterministic Arithmetic through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "conceptFamilyId": "computation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of computation for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:computation:deterministic-arithmetic"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_a870823d00f81a9a4854f848",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/causal-inference/definition",
+      "url": "https://research.mahastrategies.com/federation/research/causal-inference/definition",
+      "title": "Causal Inference — Definition",
+      "searchIntent": "Understand Causal Inference through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "conceptFamilyId": "computation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of computation for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:computation:causal-inference"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_aaf26e116535a7269e150c81",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/error-budgets/definition",
+      "url": "https://research.mahastrategies.com/federation/research/error-budgets/definition",
+      "title": "Error Budgets — Definition",
+      "searchIntent": "Understand Error Budgets through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:computation:error-budgets",
+      "conceptFamilyId": "computation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of computation for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:computation:error-budgets"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_be8600b5f02aea927f745c11",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/reproducibility-fixtures/definition",
+      "url": "https://research.mahastrategies.com/federation/research/reproducibility-fixtures/definition",
+      "title": "Reproducibility Fixtures — Definition",
+      "searchIntent": "Understand Reproducibility Fixtures through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:computation:reproducibility-fixtures",
+      "conceptFamilyId": "computation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of computation for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:computation:reproducibility-fixtures"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_c1e0a9d1956d137e337cae16",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/reference-frame-conversion/definition",
+      "url": "https://research.mahastrategies.com/federation/research/reference-frame-conversion/definition",
+      "title": "Reference Frame Conversion — Definition",
+      "searchIntent": "Understand Reference Frame Conversion through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "conceptFamilyId": "computation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of computation for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:computation:reference-frame-conversion"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_d90b7197535681a502dccba9",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/dimensional-analysis/definition",
+      "url": "https://research.mahastrategies.com/federation/research/dimensional-analysis/definition",
+      "title": "Dimensional Analysis — Definition",
+      "searchIntent": "Understand Dimensional Analysis through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "conceptFamilyId": "computation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of computation for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:computation:dimensional-analysis"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_d93df04cd32791dbcc717955",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/licensed-retrieval/definition",
+      "url": "https://research.mahastrategies.com/federation/research/licensed-retrieval/definition",
+      "title": "Licensed Retrieval — Definition",
+      "searchIntent": "Understand Licensed Retrieval through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:evidence:licensed-retrieval"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_de8dd0a88e8704fe5855033e",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/interpolation/definition",
+      "url": "https://research.mahastrategies.com/federation/research/interpolation/definition",
+      "title": "Interpolation — Definition",
+      "searchIntent": "Understand Interpolation through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "conceptFamilyId": "computation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of computation for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:computation:interpolation"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 2
+    },
+    {
+      "candidateId": "cand_e41cfa0c9ad358c43c72d1ee",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/interval-bounds/definition",
+      "url": "https://research.mahastrategies.com/federation/research/interval-bounds/definition",
+      "title": "Interval Bounds — Definition",
+      "searchIntent": "Understand Interval Bounds through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "conceptFamilyId": "computation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of computation for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:computation:interval-bounds"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 2
+    },
+    {
+      "candidateId": "cand_e9e65aab997734663ea01dc4",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/evidence-dossiers/definition",
+      "url": "https://research.mahastrategies.com/federation/research/evidence-dossiers/definition",
+      "title": "Evidence Dossiers — Definition",
+      "searchIntent": "Understand Evidence Dossiers through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:evidence:evidence-dossiers"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_eee65fe274335f8de817ecd7",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/privacy-boundary/definition",
+      "url": "https://research.mahastrategies.com/federation/research/privacy-boundary/definition",
+      "title": "Privacy Boundary — Definition",
+      "searchIntent": "Understand Privacy Boundary through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:evidence:privacy-boundary"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 3
+    },
+    {
+      "candidateId": "cand_f770668f95f1fc5022b10680",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/version-relationship/definition",
+      "url": "https://research.mahastrategies.com/federation/research/version-relationship/definition",
+      "title": "Version Relationship — Definition",
+      "searchIntent": "Understand Version Relationship through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:evidence:version-relationship"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 3
+    },
+    {
+      "candidateId": "cand_f8bc85696eedfca72dc83120",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/passage-support/definition",
+      "url": "https://research.mahastrategies.com/federation/research/passage-support/definition",
+      "title": "Passage Support — Definition",
+      "searchIntent": "Understand Passage Support through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:passage-support",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:evidence:passage-support"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 1
+    },
+    {
+      "candidateId": "cand_faa1c9127f42242870c4661a",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/claim-intake/definition",
+      "url": "https://research.mahastrategies.com/federation/research/claim-intake/definition",
+      "title": "Claim Intake — Definition",
+      "searchIntent": "Understand Claim Intake through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:evidence:claim-intake"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_fdada5f64f6c5c8b6f218663",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/calculation-receipts/definition",
+      "url": "https://research.mahastrategies.com/federation/research/calculation-receipts/definition",
+      "title": "Calculation Receipts — Definition",
+      "searchIntent": "Understand Calculation Receipts through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "defines",
+          "target": "urn:maha:concept:evidence:calculation-receipts"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "definition of the concept",
+          "scope and boundary",
+          "inspected source citations"
+        ],
+        "prohibitedContent": [
+          "application guidance owned by another property",
+          "unsourced assertion"
+        ]
+      },
+      "duplicateScreen": {
+        "screenedAgainst": "v2 definitions for the same concept on the same property",
+        "result": "no existing definition found; this candidate supplies the missing one"
+      },
+      "scores": {
+        "weighted": 0
+      },
+      "publication": {
+        "state": "candidate-not-published"
+      },
+      "rank": null,
+      "tranche": null,
+      "addedIn": "v3",
+      "unlocksDependents": 4
+    }
+  ],
+  "provenanceDigest": "sha256:77b03d0e37401e8de0ae3b0fa49852636cc9728a0b8eec97205e3483aae1218d"
+}

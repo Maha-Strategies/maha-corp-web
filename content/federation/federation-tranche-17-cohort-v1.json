@@ -1,0 +1,2456 @@
+{
+  "schemaVersion": "maha-federation-tranche-17-cohort/1.0",
+  "frozenOn": "2026-09-06",
+  "candidateMapDigest": "sha256:c19a678ec73b71babeecf5b272b14fd148c49312fc9bab90703c2f1849a38cf8",
+  "selectionRule": "Active and unreviewed after Tranches 1-13, ordered dependency-first: every prerequisite definition available in the pool is selected before any filler, by fan-out then candidate id. The remainder is filled by calibrated utility under the four-per-site-topic cap and proportional targets bounded by remaining inventory, with candidate id as the deterministic tie-break. Legacy rank is not used: the mythology migration left it non-contiguous.",
+  "exclusions": {
+    "supersededExcluded": 200,
+    "coveredByPriorTranches": 1600,
+    "poolBefore": 28,
+    "poolAfter": 0
+  },
+  "dependencyFirst": {
+    "prerequisitesSelected": [],
+    "projectedTranche16Unlocks": 0
+  },
+  "shortfalls": [
+    {
+      "siteId": "agentic-publishing",
+      "target": 10,
+      "available": 0,
+      "selected": 0
+    },
+    {
+      "siteId": "maha-os",
+      "target": 6,
+      "available": 0,
+      "selected": 0
+    },
+    {
+      "siteId": "maha-policy",
+      "target": 18,
+      "available": 8,
+      "selected": 8
+    },
+    {
+      "siteId": "maha-research",
+      "target": 25,
+      "available": 4,
+      "selected": 4
+    },
+    {
+      "siteId": "maha-strategies",
+      "target": 31,
+      "available": 15,
+      "selected": 15
+    },
+    {
+      "siteId": "mayon-rajan",
+      "target": 5,
+      "available": 0,
+      "selected": 0
+    },
+    {
+      "siteId": "mayone-maharajan",
+      "target": 5,
+      "available": 1,
+      "selected": 1
+    }
+  ],
+  "shortfallNote": "A shortfall is a property target the remaining inventory cannot meet. It is recorded rather than absorbed, so a later tranche is not misread as having under-selected a property that had nothing left to give.",
+  "counts": {
+    "cohort": 28,
+    "unique": 28,
+    "overlapWithPriorTranches": 0,
+    "supersededSelected": 0
+  },
+  "byProperty": {
+    "maha-policy": 8,
+    "maha-research": 4,
+    "maha-strategies": 15,
+    "mayone-maharajan": 1
+  },
+  "byTopic": {
+    "alvar-reception": 3,
+    "contradiction-search": 1,
+    "coordinate-frames": 3,
+    "formal-definition": 1,
+    "incident-reporting": 2,
+    "intellectual-property": 2,
+    "interoperability": 2,
+    "interpretation-boundaries": 1,
+    "kurinji": 2,
+    "machine-civilization": 1,
+    "marutam": 3,
+    "passage-locator": 1,
+    "primary-source": 1,
+    "primary-text-boundaries": 3,
+    "traceability": 2
+  },
+  "byRouteRole": {
+    "calculation": 1,
+    "definition": 5,
+    "identity": 4,
+    "input-contract": 2,
+    "machine-rule": 4,
+    "primary-text": 4,
+    "tradeoffs": 4,
+    "translation": 3,
+    "workflow": 1
+  },
+  "entries": [
+    {
+      "candidateId": "cand_6a3233decc610bb5ab78925c",
+      "siteId": "maha-policy",
+      "canonicalHost": "policy.mahastrategies.com",
+      "groupId": "policy-clearing",
+      "routeRole": "tradeoffs",
+      "path": "/policy/traceability/tradeoffs",
+      "url": "https://policy.mahastrategies.com/policy/traceability/tradeoffs",
+      "title": "Traceability — Tradeoffs",
+      "searchIntent": "Understand Traceability through the tradeoffs lens in Policy Clearing on policy.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:governance:traceability",
+      "conceptFamilyId": "governance",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:traceability"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-policy",
+        "allowedContent": [
+          "current-law summaries",
+          "policy evidence",
+          "Maha proposals labelled as proposals"
+        ],
+        "mustNotClaim": [
+          "legal advice",
+          "proposal presented as enacted law"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": null,
+        "tokenJaccard": 0,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 68,
+        "evidenceAvailability": 90,
+        "differentiation": 96,
+        "machineUtility": 96,
+        "commercialProximity": 88,
+        "federationUtility": 98,
+        "duplicationSafety": 100,
+        "weighted": 89.26
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 451,
+      "tranche": 2
+    },
+    {
+      "candidateId": "cand_7d0af4ad3f71218441dcbefc",
+      "siteId": "maha-policy",
+      "canonicalHost": "policy.mahastrategies.com",
+      "groupId": "policy-clearing",
+      "routeRole": "machine-rule",
+      "path": "/policy/interoperability/machine-rule",
+      "url": "https://policy.mahastrategies.com/policy/interoperability/machine-rule",
+      "title": "Interoperability — Machine Rule",
+      "searchIntent": "Understand Interoperability through the machine rule lens in Policy Clearing on policy.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:governance:interoperability",
+      "conceptFamilyId": "governance",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:interoperability"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-policy",
+        "allowedContent": [
+          "current-law summaries",
+          "policy evidence",
+          "Maha proposals labelled as proposals"
+        ],
+        "mustNotClaim": [
+          "legal advice",
+          "proposal presented as enacted law"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": null,
+        "tokenJaccard": 0,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 68,
+        "evidenceAvailability": 90,
+        "differentiation": 96,
+        "machineUtility": 96,
+        "commercialProximity": 88,
+        "federationUtility": 98,
+        "duplicationSafety": 100,
+        "weighted": 89.26
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 447,
+      "tranche": 2
+    },
+    {
+      "candidateId": "cand_83df1bf3542ab77e0d112f3b",
+      "siteId": "maha-policy",
+      "canonicalHost": "policy.mahastrategies.com",
+      "groupId": "policy-clearing",
+      "routeRole": "tradeoffs",
+      "path": "/policy/incident-reporting/tradeoffs",
+      "url": "https://policy.mahastrategies.com/policy/incident-reporting/tradeoffs",
+      "title": "Incident Reporting — Tradeoffs",
+      "searchIntent": "Understand Incident Reporting through the tradeoffs lens in Policy Clearing on policy.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:governance:incident-reporting",
+      "conceptFamilyId": "governance",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:incident-reporting"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-policy",
+        "allowedContent": [
+          "current-law summaries",
+          "policy evidence",
+          "Maha proposals labelled as proposals"
+        ],
+        "mustNotClaim": [
+          "legal advice",
+          "proposal presented as enacted law"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": null,
+        "tokenJaccard": 0,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 68,
+        "evidenceAvailability": 90,
+        "differentiation": 96,
+        "machineUtility": 96,
+        "commercialProximity": 88,
+        "federationUtility": 98,
+        "duplicationSafety": 100,
+        "weighted": 89.26
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 442,
+      "tranche": 2
+    },
+    {
+      "candidateId": "cand_b0cf64933df6509bf5ce911a",
+      "siteId": "maha-policy",
+      "canonicalHost": "policy.mahastrategies.com",
+      "groupId": "policy-clearing",
+      "routeRole": "tradeoffs",
+      "path": "/policy/intellectual-property/tradeoffs",
+      "url": "https://policy.mahastrategies.com/policy/intellectual-property/tradeoffs",
+      "title": "Intellectual Property — Tradeoffs",
+      "searchIntent": "Understand Intellectual Property through the tradeoffs lens in Policy Clearing on policy.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:governance:intellectual-property",
+      "conceptFamilyId": "governance",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:intellectual-property"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-policy",
+        "allowedContent": [
+          "current-law summaries",
+          "policy evidence",
+          "Maha proposals labelled as proposals"
+        ],
+        "mustNotClaim": [
+          "legal advice",
+          "proposal presented as enacted law"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": null,
+        "tokenJaccard": 0,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 68,
+        "evidenceAvailability": 90,
+        "differentiation": 96,
+        "machineUtility": 96,
+        "commercialProximity": 88,
+        "federationUtility": 98,
+        "duplicationSafety": 100,
+        "weighted": 89.26
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 445,
+      "tranche": 2
+    },
+    {
+      "candidateId": "cand_b6f8fe66c83990472c395d8b",
+      "siteId": "maha-policy",
+      "canonicalHost": "policy.mahastrategies.com",
+      "groupId": "policy-clearing",
+      "routeRole": "machine-rule",
+      "path": "/policy/traceability/machine-rule",
+      "url": "https://policy.mahastrategies.com/policy/traceability/machine-rule",
+      "title": "Traceability — Machine Rule",
+      "searchIntent": "Understand Traceability through the machine rule lens in Policy Clearing on policy.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:governance:traceability",
+      "conceptFamilyId": "governance",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:traceability"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-policy",
+        "allowedContent": [
+          "current-law summaries",
+          "policy evidence",
+          "Maha proposals labelled as proposals"
+        ],
+        "mustNotClaim": [
+          "legal advice",
+          "proposal presented as enacted law"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": null,
+        "tokenJaccard": 0,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 68,
+        "evidenceAvailability": 90,
+        "differentiation": 96,
+        "machineUtility": 96,
+        "commercialProximity": 88,
+        "federationUtility": 98,
+        "duplicationSafety": 100,
+        "weighted": 89.26
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 450,
+      "tranche": 2
+    },
+    {
+      "candidateId": "cand_cf62087097250037070cd0ad",
+      "siteId": "maha-policy",
+      "canonicalHost": "policy.mahastrategies.com",
+      "groupId": "policy-clearing",
+      "routeRole": "tradeoffs",
+      "path": "/policy/interoperability/tradeoffs",
+      "url": "https://policy.mahastrategies.com/policy/interoperability/tradeoffs",
+      "title": "Interoperability — Tradeoffs",
+      "searchIntent": "Understand Interoperability through the tradeoffs lens in Policy Clearing on policy.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:governance:interoperability",
+      "conceptFamilyId": "governance",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:interoperability"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-policy",
+        "allowedContent": [
+          "current-law summaries",
+          "policy evidence",
+          "Maha proposals labelled as proposals"
+        ],
+        "mustNotClaim": [
+          "legal advice",
+          "proposal presented as enacted law"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": null,
+        "tokenJaccard": 0,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 68,
+        "evidenceAvailability": 90,
+        "differentiation": 96,
+        "machineUtility": 96,
+        "commercialProximity": 88,
+        "federationUtility": 98,
+        "duplicationSafety": 100,
+        "weighted": 89.26
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 448,
+      "tranche": 2
+    },
+    {
+      "candidateId": "cand_e310e159b6bfa7a9f1604f8c",
+      "siteId": "maha-policy",
+      "canonicalHost": "policy.mahastrategies.com",
+      "groupId": "policy-clearing",
+      "routeRole": "machine-rule",
+      "path": "/policy/incident-reporting/machine-rule",
+      "url": "https://policy.mahastrategies.com/policy/incident-reporting/machine-rule",
+      "title": "Incident Reporting — Machine Rule",
+      "searchIntent": "Understand Incident Reporting through the machine rule lens in Policy Clearing on policy.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:governance:incident-reporting",
+      "conceptFamilyId": "governance",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:incident-reporting"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-policy",
+        "allowedContent": [
+          "current-law summaries",
+          "policy evidence",
+          "Maha proposals labelled as proposals"
+        ],
+        "mustNotClaim": [
+          "legal advice",
+          "proposal presented as enacted law"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": null,
+        "tokenJaccard": 0,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 68,
+        "evidenceAvailability": 90,
+        "differentiation": 96,
+        "machineUtility": 96,
+        "commercialProximity": 88,
+        "federationUtility": 98,
+        "duplicationSafety": 100,
+        "weighted": 89.26
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 441,
+      "tranche": 2
+    },
+    {
+      "candidateId": "cand_ee530322095633bbbf900a67",
+      "siteId": "maha-policy",
+      "canonicalHost": "policy.mahastrategies.com",
+      "groupId": "policy-clearing",
+      "routeRole": "machine-rule",
+      "path": "/policy/intellectual-property/machine-rule",
+      "url": "https://policy.mahastrategies.com/policy/intellectual-property/machine-rule",
+      "title": "Intellectual Property — Machine Rule",
+      "searchIntent": "Understand Intellectual Property through the machine rule lens in Policy Clearing on policy.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:governance:intellectual-property",
+      "conceptFamilyId": "governance",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:governance:intellectual-property"
+        },
+        {
+          "type": "implemented-by",
+          "target": "urn:maha:property:maha-strategies"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:governance"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-policy",
+        "allowedContent": [
+          "current-law summaries",
+          "policy evidence",
+          "Maha proposals labelled as proposals"
+        ],
+        "mustNotClaim": [
+          "legal advice",
+          "proposal presented as enacted law"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": null,
+        "tokenJaccard": 0,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 68,
+        "evidenceAvailability": 90,
+        "differentiation": 96,
+        "machineUtility": 96,
+        "commercialProximity": 88,
+        "federationUtility": 98,
+        "duplicationSafety": 100,
+        "weighted": 89.26
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 444,
+      "tranche": 2
+    },
+    {
+      "candidateId": "cand_2c8d504e70fa69a97aa2a5cc",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/contradiction-search/definition",
+      "url": "https://research.mahastrategies.com/federation/research/contradiction-search/definition",
+      "title": "Contradiction Search — Definition",
+      "searchIntent": "Understand Contradiction Search through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:contradiction-search",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:contradiction-search"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "research objects",
+          "machine-readable provenance",
+          "reproduction protocols"
+        ],
+        "mustNotClaim": [
+          "sales copy",
+          "unsupported interpretation"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://research.mahastrategies.com",
+        "tokenJaccard": 0,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 56,
+        "evidenceAvailability": 96,
+        "differentiation": 96,
+        "machineUtility": 99,
+        "commercialProximity": 78,
+        "federationUtility": 86,
+        "duplicationSafety": 100,
+        "weighted": 86.05
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1023,
+      "tranche": 3
+    },
+    {
+      "candidateId": "cand_4941b8fd397b7b41ac4cda40",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/formal-definition/definition",
+      "url": "https://research.mahastrategies.com/federation/research/formal-definition/definition",
+      "title": "Formal Definition — Definition",
+      "searchIntent": "Understand Formal Definition through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:formal-definition",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:formal-definition"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "research objects",
+          "machine-readable provenance",
+          "reproduction protocols"
+        ],
+        "mustNotClaim": [
+          "sales copy",
+          "unsupported interpretation"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://research.mahastrategies.com",
+        "tokenJaccard": 0,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 56,
+        "evidenceAvailability": 96,
+        "differentiation": 96,
+        "machineUtility": 99,
+        "commercialProximity": 78,
+        "federationUtility": 86,
+        "duplicationSafety": 100,
+        "weighted": 86.05
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1025,
+      "tranche": 3
+    },
+    {
+      "candidateId": "cand_528210d274913a7eb2093bf1",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/passage-locator/definition",
+      "url": "https://research.mahastrategies.com/federation/research/passage-locator/definition",
+      "title": "Passage Locator — Definition",
+      "searchIntent": "Understand Passage Locator through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:passage-locator",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:passage-locator"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "research objects",
+          "machine-readable provenance",
+          "reproduction protocols"
+        ],
+        "mustNotClaim": [
+          "sales copy",
+          "unsupported interpretation"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://research.mahastrategies.com",
+        "tokenJaccard": 0,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 56,
+        "evidenceAvailability": 96,
+        "differentiation": 96,
+        "machineUtility": 99,
+        "commercialProximity": 78,
+        "federationUtility": 86,
+        "duplicationSafety": 100,
+        "weighted": 86.05
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1028,
+      "tranche": 3
+    },
+    {
+      "candidateId": "cand_db12a930bf43b2510a97e0ad",
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "groupId": "research-objects",
+      "routeRole": "definition",
+      "path": "/federation/research/primary-source/definition",
+      "url": "https://research.mahastrategies.com/federation/research/primary-source/definition",
+      "title": "Primary Source — Definition",
+      "searchIntent": "Understand Primary Source through the definition lens in Research Objects on research.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:evidence:primary-source",
+      "conceptFamilyId": "evidence",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-research",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of evidence for maha-research. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:evidence:primary-source"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:evidence"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-research",
+        "allowedContent": [
+          "research objects",
+          "machine-readable provenance",
+          "reproduction protocols"
+        ],
+        "mustNotClaim": [
+          "sales copy",
+          "unsupported interpretation"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://research.mahastrategies.com",
+        "tokenJaccard": 0,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 56,
+        "evidenceAvailability": 96,
+        "differentiation": 96,
+        "machineUtility": 99,
+        "commercialProximity": 78,
+        "federationUtility": 86,
+        "duplicationSafety": 100,
+        "weighted": 86.05
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1029,
+      "tranche": 3
+    },
+    {
+      "candidateId": "cand_e48583ff17024acca121776f",
+      "siteId": "maha-strategies",
+      "canonicalHost": "www.mahastrategies.com",
+      "groupId": "astrology-infrastructure",
+      "routeRole": "input-contract",
+      "path": "/clearing/astrology-infrastructure/interpretation-boundaries/input-contract",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/interpretation-boundaries/input-contract",
+      "title": "Interpretation Boundaries — Input Contract",
+      "searchIntent": "Understand Interpretation Boundaries through the input contract lens in Astrology Infrastructure on www.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:interpretation:interpretation-boundaries",
+      "conceptFamilyId": "interpretation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-strategies",
+        "role": "owner-application",
+        "boundary": "This route may apply interpretation; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:interpretation:interpretation-boundaries"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:interpretation"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-strategies",
+        "allowedContent": [
+          "bounded explanations",
+          "operational guides",
+          "commercial entry points"
+        ],
+        "mustNotClaim": [
+          "research-source duplication",
+          "unreleased evidence claims"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://www.mahastrategies.com/knowledge/integrations/epistemic-clearing/astronomy-astrology-source-contract",
+        "tokenJaccard": 0.25,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 80,
+        "evidenceAvailability": 78,
+        "differentiation": 90,
+        "machineUtility": 86,
+        "commercialProximity": 72,
+        "federationUtility": 86,
+        "duplicationSafety": 75,
+        "weighted": 81.69
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1448,
+      "tranche": 4
+    },
+    {
+      "candidateId": "cand_69be6c48cdea298121802157",
+      "siteId": "maha-strategies",
+      "canonicalHost": "www.mahastrategies.com",
+      "groupId": "tamil-religion",
+      "routeRole": "identity",
+      "path": "/clearing/tamil-religion/kurinji/identity",
+      "url": "https://www.mahastrategies.com/clearing/tamil-religion/kurinji/identity",
+      "title": "Kurinji — Identity",
+      "searchIntent": "Understand Kurinji through the identity lens in Tamil Religion on www.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:translation:kurinji",
+      "conceptFamilyId": "translation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-strategies",
+        "role": "owner-application",
+        "boundary": "This route may apply translation; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:translation:kurinji"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:translation"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-strategies",
+        "allowedContent": [
+          "bounded explanations",
+          "operational guides",
+          "commercial entry points"
+        ],
+        "mustNotClaim": [
+          "research-source duplication",
+          "unreleased evidence claims"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://www.mahastrategies.com/knowledge/epistemic-system/clearing/tamil-source-claim-source-identity",
+        "tokenJaccard": 0.3,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 82,
+        "evidenceAvailability": 84,
+        "differentiation": 99,
+        "machineUtility": 83,
+        "commercialProximity": 54,
+        "federationUtility": 86,
+        "duplicationSafety": 70,
+        "weighted": 81.68
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1450,
+      "tranche": 4
+    },
+    {
+      "candidateId": "cand_cb383697bfa30b2905e3bce7",
+      "siteId": "maha-strategies",
+      "canonicalHost": "www.mahastrategies.com",
+      "groupId": "astrology-infrastructure",
+      "routeRole": "calculation",
+      "path": "/clearing/astrology-infrastructure/coordinate-frames/calculation",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/coordinate-frames/calculation",
+      "title": "Coordinate Frames — Calculation",
+      "searchIntent": "Understand Coordinate Frames through the calculation lens in Astrology Infrastructure on www.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:interpretation:coordinate-frames",
+      "conceptFamilyId": "interpretation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-strategies",
+        "role": "owner-application",
+        "boundary": "This route may apply interpretation; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:interpretation:coordinate-frames"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:interpretation"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-strategies",
+        "allowedContent": [
+          "bounded explanations",
+          "operational guides",
+          "commercial entry points"
+        ],
+        "mustNotClaim": [
+          "research-source duplication",
+          "unreleased evidence claims"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://www.mahastrategies.com/knowledge/astrology/workflows/reference-frames/coordinate-precision",
+        "tokenJaccard": 0.3,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 78,
+        "evidenceAvailability": 78,
+        "differentiation": 90,
+        "machineUtility": 86,
+        "commercialProximity": 72,
+        "federationUtility": 90,
+        "duplicationSafety": 70,
+        "weighted": 81.6
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1452,
+      "tranche": 4
+    },
+    {
+      "candidateId": "cand_37218c30613c8f06df821f89",
+      "siteId": "maha-strategies",
+      "canonicalHost": "www.mahastrategies.com",
+      "groupId": "astrology-infrastructure",
+      "routeRole": "input-contract",
+      "path": "/clearing/astrology-infrastructure/coordinate-frames/input-contract",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/coordinate-frames/input-contract",
+      "title": "Coordinate Frames — Input Contract",
+      "searchIntent": "Understand Coordinate Frames through the input contract lens in Astrology Infrastructure on www.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:interpretation:coordinate-frames",
+      "conceptFamilyId": "interpretation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-strategies",
+        "role": "owner-application",
+        "boundary": "This route may apply interpretation; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:interpretation:coordinate-frames"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:interpretation"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-strategies",
+        "allowedContent": [
+          "bounded explanations",
+          "operational guides",
+          "commercial entry points"
+        ],
+        "mustNotClaim": [
+          "research-source duplication",
+          "unreleased evidence claims"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://www.mahastrategies.com/knowledge/astrology/workflows/reference-frames/coordinate-precision",
+        "tokenJaccard": 0.2727,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 80,
+        "evidenceAvailability": 78,
+        "differentiation": 90,
+        "machineUtility": 86,
+        "commercialProximity": 72,
+        "federationUtility": 86,
+        "duplicationSafety": 73,
+        "weighted": 81.59
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1453,
+      "tranche": 4
+    },
+    {
+      "candidateId": "cand_6f161263a1fa18078e745e15",
+      "siteId": "maha-strategies",
+      "canonicalHost": "www.mahastrategies.com",
+      "groupId": "astrology-infrastructure",
+      "routeRole": "workflow",
+      "path": "/clearing/astrology-infrastructure/coordinate-frames/workflow",
+      "url": "https://www.mahastrategies.com/clearing/astrology-infrastructure/coordinate-frames/workflow",
+      "title": "Coordinate Frames — Workflow",
+      "searchIntent": "Understand Coordinate Frames through the workflow lens in Astrology Infrastructure on www.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:interpretation:coordinate-frames",
+      "conceptFamilyId": "interpretation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-strategies",
+        "role": "owner-application",
+        "boundary": "This route may apply interpretation; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:interpretation:coordinate-frames"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:interpretation"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-strategies",
+        "allowedContent": [
+          "bounded explanations",
+          "operational guides",
+          "commercial entry points"
+        ],
+        "mustNotClaim": [
+          "research-source duplication",
+          "unreleased evidence claims"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://www.mahastrategies.com/knowledge/astrology/workflows/reference-frames/coordinate-precision",
+        "tokenJaccard": 0.3,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 79,
+        "evidenceAvailability": 78,
+        "differentiation": 90,
+        "machineUtility": 86,
+        "commercialProximity": 72,
+        "federationUtility": 88,
+        "duplicationSafety": 70,
+        "weighted": 81.52
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1454,
+      "tranche": 4
+    },
+    {
+      "candidateId": "cand_c26ad556a93df4e1677d5228",
+      "siteId": "maha-strategies",
+      "canonicalHost": "www.mahastrategies.com",
+      "groupId": "tamil-religion",
+      "routeRole": "primary-text",
+      "path": "/clearing/tamil-religion/kurinji/primary-text",
+      "url": "https://www.mahastrategies.com/clearing/tamil-religion/kurinji/primary-text",
+      "title": "Kurinji — Primary Text",
+      "searchIntent": "Understand Kurinji through the primary text lens in Tamil Religion on www.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:translation:kurinji",
+      "conceptFamilyId": "translation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-strategies",
+        "role": "owner-application",
+        "boundary": "This route may apply translation; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:translation:kurinji"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:translation"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-strategies",
+        "allowedContent": [
+          "bounded explanations",
+          "operational guides",
+          "commercial entry points"
+        ],
+        "mustNotClaim": [
+          "research-source duplication",
+          "unreleased evidence claims"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://www.mahastrategies.com/knowledge/religion/clearing/methods/primary-text-and-translation-separation",
+        "tokenJaccard": 0.3636,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 81,
+        "evidenceAvailability": 84,
+        "differentiation": 99,
+        "machineUtility": 83,
+        "commercialProximity": 54,
+        "federationUtility": 88,
+        "duplicationSafety": 64,
+        "weighted": 81.46
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1456,
+      "tranche": 4
+    },
+    {
+      "candidateId": "cand_4b35a196452f5653ccaf092a",
+      "siteId": "maha-strategies",
+      "canonicalHost": "www.mahastrategies.com",
+      "groupId": "tamil-religion",
+      "routeRole": "primary-text",
+      "path": "/clearing/tamil-religion/alvar-reception/primary-text",
+      "url": "https://www.mahastrategies.com/clearing/tamil-religion/alvar-reception/primary-text",
+      "title": "Alvar Reception — Primary Text",
+      "searchIntent": "Understand Alvar Reception through the primary text lens in Tamil Religion on www.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:translation:alvar-reception",
+      "conceptFamilyId": "translation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-strategies",
+        "role": "owner-application",
+        "boundary": "This route may apply translation; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:translation:alvar-reception"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:translation"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-strategies",
+        "allowedContent": [
+          "bounded explanations",
+          "operational guides",
+          "commercial entry points"
+        ],
+        "mustNotClaim": [
+          "research-source duplication",
+          "unreleased evidence claims"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://www.mahastrategies.com/knowledge/religion/clearing/reception/kannan-in-alvar-reception",
+        "tokenJaccard": 0.4,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 81,
+        "evidenceAvailability": 84,
+        "differentiation": 99,
+        "machineUtility": 83,
+        "commercialProximity": 54,
+        "federationUtility": 88,
+        "duplicationSafety": 60,
+        "weighted": 81.26
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1460,
+      "tranche": 4
+    },
+    {
+      "candidateId": "cand_25bfa0b1ecacebcf6baebe83",
+      "siteId": "maha-strategies",
+      "canonicalHost": "www.mahastrategies.com",
+      "groupId": "tamil-religion",
+      "routeRole": "identity",
+      "path": "/clearing/tamil-religion/primary-text-boundaries/identity",
+      "url": "https://www.mahastrategies.com/clearing/tamil-religion/primary-text-boundaries/identity",
+      "title": "Primary Text Boundaries — Identity",
+      "searchIntent": "Understand Primary Text Boundaries through the identity lens in Tamil Religion on www.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:translation:primary-text-boundaries",
+      "conceptFamilyId": "translation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-strategies",
+        "role": "owner-application",
+        "boundary": "This route may apply translation; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:translation:primary-text-boundaries"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:translation"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-strategies",
+        "allowedContent": [
+          "bounded explanations",
+          "operational guides",
+          "commercial entry points"
+        ],
+        "mustNotClaim": [
+          "research-source duplication",
+          "unreleased evidence claims"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://www.mahastrategies.com/knowledge/epistemic-system/clearing/translated-primary-text-source-identity",
+        "tokenJaccard": 0.3333,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 80,
+        "evidenceAvailability": 84,
+        "differentiation": 99,
+        "machineUtility": 83,
+        "commercialProximity": 54,
+        "federationUtility": 86,
+        "duplicationSafety": 67,
+        "weighted": 81.17
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1462,
+      "tranche": 4
+    },
+    {
+      "candidateId": "cand_fee5f02dd8404c96c28572aa",
+      "siteId": "maha-strategies",
+      "canonicalHost": "www.mahastrategies.com",
+      "groupId": "tamil-religion",
+      "routeRole": "translation",
+      "path": "/clearing/tamil-religion/alvar-reception/translation",
+      "url": "https://www.mahastrategies.com/clearing/tamil-religion/alvar-reception/translation",
+      "title": "Alvar Reception — Translation",
+      "searchIntent": "Understand Alvar Reception through the translation lens in Tamil Religion on www.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:translation:alvar-reception",
+      "conceptFamilyId": "translation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-strategies",
+        "role": "owner-application",
+        "boundary": "This route may apply translation; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:translation:alvar-reception"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:translation"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-strategies",
+        "allowedContent": [
+          "bounded explanations",
+          "operational guides",
+          "commercial entry points"
+        ],
+        "mustNotClaim": [
+          "research-source duplication",
+          "unreleased evidence claims"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://www.mahastrategies.com/knowledge/religion/clearing/reception/kannan-in-alvar-reception",
+        "tokenJaccard": 0.4444,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 80,
+        "evidenceAvailability": 84,
+        "differentiation": 99,
+        "machineUtility": 83,
+        "commercialProximity": 54,
+        "federationUtility": 90,
+        "duplicationSafety": 56,
+        "weighted": 81.14
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1463,
+      "tranche": 4
+    },
+    {
+      "candidateId": "cand_0e200c54da13414a9525e48b",
+      "siteId": "maha-strategies",
+      "canonicalHost": "www.mahastrategies.com",
+      "groupId": "tamil-religion",
+      "routeRole": "translation",
+      "path": "/clearing/tamil-religion/marutam/translation",
+      "url": "https://www.mahastrategies.com/clearing/tamil-religion/marutam/translation",
+      "title": "Marutam — Translation",
+      "searchIntent": "Understand Marutam through the translation lens in Tamil Religion on www.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:translation:marutam",
+      "conceptFamilyId": "translation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-strategies",
+        "role": "owner-application",
+        "boundary": "This route may apply translation; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:translation:marutam"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:translation"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-strategies",
+        "allowedContent": [
+          "bounded explanations",
+          "operational guides",
+          "commercial entry points"
+        ],
+        "mustNotClaim": [
+          "research-source duplication",
+          "unreleased evidence claims"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://www.mahastrategies.com/knowledge/religion/clearing/tolkappiyam/marutam-landscape",
+        "tokenJaccard": 0.375,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 78,
+        "evidenceAvailability": 84,
+        "differentiation": 99,
+        "machineUtility": 83,
+        "commercialProximity": 54,
+        "federationUtility": 90,
+        "duplicationSafety": 63,
+        "weighted": 81.13
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1464,
+      "tranche": 4
+    },
+    {
+      "candidateId": "cand_2fa80f875634ff36dd3debd0",
+      "siteId": "maha-strategies",
+      "canonicalHost": "www.mahastrategies.com",
+      "groupId": "tamil-religion",
+      "routeRole": "primary-text",
+      "path": "/clearing/tamil-religion/primary-text-boundaries/primary-text",
+      "url": "https://www.mahastrategies.com/clearing/tamil-religion/primary-text-boundaries/primary-text",
+      "title": "Primary Text Boundaries — Primary Text",
+      "searchIntent": "Understand Primary Text Boundaries through the primary text lens in Tamil Religion on www.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:translation:primary-text-boundaries",
+      "conceptFamilyId": "translation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-strategies",
+        "role": "owner-application",
+        "boundary": "This route may apply translation; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:translation:primary-text-boundaries"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:translation"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-strategies",
+        "allowedContent": [
+          "bounded explanations",
+          "operational guides",
+          "commercial entry points"
+        ],
+        "mustNotClaim": [
+          "research-source duplication",
+          "unreleased evidence claims"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://www.mahastrategies.com/knowledge/religion/clearing/methods/primary-text-and-translation-separation",
+        "tokenJaccard": 0.3636,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 79,
+        "evidenceAvailability": 84,
+        "differentiation": 99,
+        "machineUtility": 83,
+        "commercialProximity": 54,
+        "federationUtility": 88,
+        "duplicationSafety": 64,
+        "weighted": 81.1
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1468,
+      "tranche": 4
+    },
+    {
+      "candidateId": "cand_71ced5b91f6f804fc9a0b82e",
+      "siteId": "maha-strategies",
+      "canonicalHost": "www.mahastrategies.com",
+      "groupId": "tamil-religion",
+      "routeRole": "primary-text",
+      "path": "/clearing/tamil-religion/marutam/primary-text",
+      "url": "https://www.mahastrategies.com/clearing/tamil-religion/marutam/primary-text",
+      "title": "Marutam — Primary Text",
+      "searchIntent": "Understand Marutam through the primary text lens in Tamil Religion on www.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:translation:marutam",
+      "conceptFamilyId": "translation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-strategies",
+        "role": "owner-application",
+        "boundary": "This route may apply translation; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:translation:marutam"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:translation"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-strategies",
+        "allowedContent": [
+          "bounded explanations",
+          "operational guides",
+          "commercial entry points"
+        ],
+        "mustNotClaim": [
+          "research-source duplication",
+          "unreleased evidence claims"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://www.mahastrategies.com/knowledge/religion/clearing/methods/primary-text-and-translation-separation",
+        "tokenJaccard": 0.3636,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 79,
+        "evidenceAvailability": 84,
+        "differentiation": 99,
+        "machineUtility": 83,
+        "commercialProximity": 54,
+        "federationUtility": 88,
+        "duplicationSafety": 64,
+        "weighted": 81.1
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1467,
+      "tranche": 4
+    },
+    {
+      "candidateId": "cand_9c6ff21cc9ba97753bc29752",
+      "siteId": "maha-strategies",
+      "canonicalHost": "www.mahastrategies.com",
+      "groupId": "tamil-religion",
+      "routeRole": "identity",
+      "path": "/clearing/tamil-religion/alvar-reception/identity",
+      "url": "https://www.mahastrategies.com/clearing/tamil-religion/alvar-reception/identity",
+      "title": "Alvar Reception — Identity",
+      "searchIntent": "Understand Alvar Reception through the identity lens in Tamil Religion on www.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:translation:alvar-reception",
+      "conceptFamilyId": "translation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-strategies",
+        "role": "owner-application",
+        "boundary": "This route may apply translation; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:translation:alvar-reception"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:translation"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-strategies",
+        "allowedContent": [
+          "bounded explanations",
+          "operational guides",
+          "commercial entry points"
+        ],
+        "mustNotClaim": [
+          "research-source duplication",
+          "unreleased evidence claims"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://www.mahastrategies.com/knowledge/religion/clearing/reception/kannan-in-alvar-reception",
+        "tokenJaccard": 0.4444,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 82,
+        "evidenceAvailability": 84,
+        "differentiation": 99,
+        "machineUtility": 83,
+        "commercialProximity": 54,
+        "federationUtility": 86,
+        "duplicationSafety": 56,
+        "weighted": 80.98
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1473,
+      "tranche": 4
+    },
+    {
+      "candidateId": "cand_8ed6aeaa67a8dbdf63894edb",
+      "siteId": "maha-strategies",
+      "canonicalHost": "www.mahastrategies.com",
+      "groupId": "tamil-religion",
+      "routeRole": "identity",
+      "path": "/clearing/tamil-religion/marutam/identity",
+      "url": "https://www.mahastrategies.com/clearing/tamil-religion/marutam/identity",
+      "title": "Marutam — Identity",
+      "searchIntent": "Understand Marutam through the identity lens in Tamil Religion on www.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:translation:marutam",
+      "conceptFamilyId": "translation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-strategies",
+        "role": "owner-application",
+        "boundary": "This route may apply translation; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:translation:marutam"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:translation"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-strategies",
+        "allowedContent": [
+          "bounded explanations",
+          "operational guides",
+          "commercial entry points"
+        ],
+        "mustNotClaim": [
+          "research-source duplication",
+          "unreleased evidence claims"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://www.mahastrategies.com/knowledge/religion/clearing/tolkappiyam/marutam-landscape",
+        "tokenJaccard": 0.375,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 80,
+        "evidenceAvailability": 84,
+        "differentiation": 99,
+        "machineUtility": 83,
+        "commercialProximity": 54,
+        "federationUtility": 86,
+        "duplicationSafety": 63,
+        "weighted": 80.97
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1474,
+      "tranche": 4
+    },
+    {
+      "candidateId": "cand_60c8a827c07cc6a69276fc3e",
+      "siteId": "maha-strategies",
+      "canonicalHost": "www.mahastrategies.com",
+      "groupId": "tamil-religion",
+      "routeRole": "translation",
+      "path": "/clearing/tamil-religion/primary-text-boundaries/translation",
+      "url": "https://www.mahastrategies.com/clearing/tamil-religion/primary-text-boundaries/translation",
+      "title": "Primary Text Boundaries — Translation",
+      "searchIntent": "Understand Primary Text Boundaries through the translation lens in Tamil Religion on www.mahastrategies.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:translation:primary-text-boundaries",
+      "conceptFamilyId": "translation",
+      "conceptAuthority": {
+        "canonicalOwner": "maha-strategies",
+        "role": "owner-application",
+        "boundary": "This route may apply translation; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:translation:primary-text-boundaries"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:translation"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "maha-strategies",
+        "allowedContent": [
+          "bounded explanations",
+          "operational guides",
+          "commercial entry points"
+        ],
+        "mustNotClaim": [
+          "research-source duplication",
+          "unreleased evidence claims"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://www.mahastrategies.com/knowledge/religion/clearing/methods/primary-text-and-translation-separation",
+        "tokenJaccard": 0.4545,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 78,
+        "evidenceAvailability": 84,
+        "differentiation": 99,
+        "machineUtility": 83,
+        "commercialProximity": 54,
+        "federationUtility": 90,
+        "duplicationSafety": 55,
+        "weighted": 80.73
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1483,
+      "tranche": 4
+    },
+    {
+      "candidateId": "cand_179532c8e9ca588df1721a70",
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "www.mayonemaharajan.com",
+      "groupId": "authorial-concepts",
+      "routeRole": "definition",
+      "path": "/concepts/machine-civilization/definition",
+      "url": "https://www.mayonemaharajan.com/concepts/machine-civilization/definition",
+      "title": "Machine Civilization — Definition",
+      "searchIntent": "Understand Machine Civilization through the definition lens in Authorial Concepts on www.mayonemaharajan.com.",
+      "demandEvidence": {
+        "basis": "category-prior-not-observed",
+        "observedQueries": 0,
+        "observedImpressions": null,
+        "warning": "This score orders research only. It is not route-specific search evidence or a publication claim."
+      },
+      "conceptId": "urn:maha:concept:autonomy:machine-civilization",
+      "conceptFamilyId": "autonomy",
+      "conceptAuthority": {
+        "canonicalOwner": "mayone-maharajan",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of autonomy for mayone-maharajan. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "typedRelationships": [
+        {
+          "type": "applies-to",
+          "target": "urn:maha:concept:autonomy:machine-civilization"
+        },
+        {
+          "type": "governed-by",
+          "target": "urn:maha:concept:governance"
+        },
+        {
+          "type": "evidence-for",
+          "target": "urn:maha:concept:autonomy"
+        }
+      ],
+      "evidencePlan": {
+        "sourceIdentity": "not-started",
+        "contentInspection": "not-started",
+        "locatorInspection": "not-started",
+        "rightsReview": "not-started",
+        "alignmentAudit": "not-started",
+        "exactRevisionReview": "not-started"
+      },
+      "routeContract": {
+        "selfCanonical": true,
+        "canonicalOwner": "mayone-maharajan",
+        "allowedContent": [
+          "authorial interpretation",
+          "concept genealogy",
+          "book relationships"
+        ],
+        "mustNotClaim": [
+          "authorial thesis presented as consensus",
+          "empirical authority transfer"
+        ]
+      },
+      "duplicateScreen": {
+        "nearestObservedUrl": "https://www.mayonemaharajan.com/concepts",
+        "tokenJaccard": 0.25,
+        "status": "no-high-similarity-observed"
+      },
+      "scores": {
+        "searchDemandPrior": 50,
+        "evidenceAvailability": 72,
+        "differentiation": 99,
+        "machineUtility": 72,
+        "commercialProximity": 68,
+        "federationUtility": 86,
+        "duplicationSafety": 75,
+        "weighted": 73.58
+      },
+      "publication": {
+        "state": "candidate-only",
+        "inspected": false,
+        "reviewed": false,
+        "canonicallyReleased": false,
+        "compiled": false,
+        "crawlable": false
+      },
+      "rank": 1624,
+      "tranche": 4
+    }
+  ],
+  "provenanceDigest": "sha256:248f98ff8aa89e43fcb62675883121c64d21ae057d2d8359d0e8534760cf1dde"
+}

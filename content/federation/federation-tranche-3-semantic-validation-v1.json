@@ -1,0 +1,1014 @@
+{
+  "schemaVersion": "maha-federation-tranche-three-semantic-validation/1.0",
+  "cohortDigest": "sha256:5f432d449530f80f593e5fd4a46208ede855c1deafa3006d055a1424399390ef",
+  "method": "Manual topic, role, nearest-route, and canonical-owner review; semantic identity is not inferred from URL similarity.",
+  "assurance": "Internal editorial review; not external expert endorsement.",
+  "counts": {
+    "reviewed": 100,
+    "retainDistinct": 99,
+    "duplicative": 1
+  },
+  "entries": [
+    {
+      "candidateId": "cand_379d39a7b88f7c76518ba50c",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/definition",
+      "topic": "editorial-review",
+      "routeRole": "definition",
+      "disposition": "reject-as-duplicative",
+      "reason": "The observed https://publish.mahastrategies.com/docs/editorial-workflow route is the canonical editorial-review definition; this generic definition would create a second doorway.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_26a0f5cd07ebfca3f31307c4",
+      "url": "https://research.mahastrategies.com/federation/research/inspection-depth/definition",
+      "topic": "inspection-depth",
+      "routeRole": "definition",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_37eeab4b890895e8dcebc75f",
+      "url": "https://research.mahastrategies.com/federation/research/inspection-depth/fixture",
+      "topic": "inspection-depth",
+      "routeRole": "fixture",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_0f9c7f5af30063e7ac52b80f",
+      "url": "https://research.mahastrategies.com/federation/research/model-boundary/protocol",
+      "topic": "model-boundary",
+      "routeRole": "protocol",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_2ff171d3c56be95e787af3df",
+      "url": "https://research.mahastrategies.com/federation/research/model-boundary/method",
+      "topic": "model-boundary",
+      "routeRole": "method",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_46386d66d3b634426e7b32f8",
+      "url": "https://research.mahastrategies.com/federation/research/section-locator/protocol",
+      "topic": "section-locator",
+      "routeRole": "protocol",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_52618f6a2b190a11a07ef6a0",
+      "url": "https://research.mahastrategies.com/federation/research/doi-resolution/definition",
+      "topic": "doi-resolution",
+      "routeRole": "definition",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_553a086e89511cb24a006f5c",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/machine-interface",
+      "topic": "human-review",
+      "routeRole": "machine-interface",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_5888f8b0a0c87a957d0872a9",
+      "url": "https://research.mahastrategies.com/federation/research/source-identity/method",
+      "topic": "source-identity",
+      "routeRole": "method",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_0aaeea95bb96b49c3e1e1169",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/delivery-acknowledgement/threats",
+      "topic": "delivery-acknowledgement",
+      "routeRole": "threats",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_234f0e582890e0ba575e90a7",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/audit-receipts/definition",
+      "topic": "audit-receipts",
+      "routeRole": "definition",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_2d858bb451ba6df46e3ca2bb",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/tenant-isolation/controls",
+      "topic": "tenant-isolation",
+      "routeRole": "controls",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_35312a8e1744e223d0647e34",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/commercialization",
+      "topic": "identity-bound-agents",
+      "routeRole": "commercialization",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_2dc57ee429651b19ba26dcd3",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/endpoint-substitution-defense/architecture",
+      "topic": "endpoint-substitution-defense",
+      "routeRole": "architecture",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_39628430ca071389ed4703de",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/endpoint-substitution-defense/controls",
+      "topic": "endpoint-substitution-defense",
+      "routeRole": "controls",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_5091a9a3409f32edae6a4770",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/audit-receipts/threats",
+      "topic": "audit-receipts",
+      "routeRole": "threats",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_52b0740751bb63c0cf7dc490",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/durable-task-state/definition",
+      "topic": "durable-task-state",
+      "routeRole": "definition",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_453a832725e3adc7a814bdbf",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/durable-task-state/implementation",
+      "topic": "durable-task-state",
+      "routeRole": "implementation",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_568c22583d18a5fd1c0bca74",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/machine-commerce-entitlement/threats",
+      "topic": "machine-commerce-entitlement",
+      "routeRole": "threats",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_65378413e8421a6e7a32683f",
+      "url": "https://research.mahastrategies.com/federation/research/theorem-statement/protocol",
+      "topic": "theorem-statement",
+      "routeRole": "protocol",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_47d7cf8516d3536bc1b24992",
+      "url": "https://research.mahastrategies.com/federation/research/research-release/protocol",
+      "topic": "research-release",
+      "routeRole": "protocol",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_00550cfbe5ae4958c10fcc49",
+      "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/definition",
+      "topic": "epistemic-infrastructure",
+      "routeRole": "definition",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_74221b098dfd0b9b0feb2ff7",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/tenant-isolation/architecture",
+      "topic": "tenant-isolation",
+      "routeRole": "architecture",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_74f429c859b83abed201f07d",
+      "url": "https://research.mahastrategies.com/federation/research/research-release/method",
+      "topic": "research-release",
+      "routeRole": "method",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_757ac8c69dc965702b1a89a8",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/audit-receipts/implementation",
+      "topic": "audit-receipts",
+      "routeRole": "implementation",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_79b14a30c80b13b864c76e91",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/model-update/controls",
+      "topic": "model-update",
+      "routeRole": "controls",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_57e5ff03f5aa4c2fb3596f4a",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/verification",
+      "topic": "credential-rotation",
+      "routeRole": "verification",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_87776c000adeb7a12e6534cc",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/human-approval-gates/definition",
+      "topic": "human-approval-gates",
+      "routeRole": "definition",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_5b4dc2fe272365b6df6671e2",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/human-approval-gates/implementation",
+      "topic": "human-approval-gates",
+      "routeRole": "implementation",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_8966b5ce4540add13b855b6b",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/machine-commerce-entitlement/controls",
+      "topic": "machine-commerce-entitlement",
+      "routeRole": "controls",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_8a4458f22acbd2fcd06012d1",
+      "url": "https://policy.mahastrategies.com/policy/capability-controls/definition",
+      "topic": "capability-controls",
+      "routeRole": "definition",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_4372d2f218925bbe2a0a5c40",
+      "url": "https://policy.mahastrategies.com/policy/capability-controls/uncertainty",
+      "topic": "capability-controls",
+      "routeRole": "uncertainty",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_85fc77d0f9d46778947f26e7",
+      "url": "https://policy.mahastrategies.com/policy/capability-controls/mechanisms",
+      "topic": "capability-controls",
+      "routeRole": "mechanisms",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_8ebaeb0d3ab9edaecaa39fcf",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/machine-commerce-entitlement/commercialization",
+      "topic": "machine-commerce-entitlement",
+      "routeRole": "commercialization",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_917e449556b1266d90ac7e19",
+      "url": "https://research.mahastrategies.com/federation/research/counterexample/definition",
+      "topic": "counterexample",
+      "routeRole": "definition",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_5d91bae1cd6ac34dccc31d44",
+      "url": "https://research.mahastrategies.com/federation/research/counterexample/fixture",
+      "topic": "counterexample",
+      "routeRole": "fixture",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_947cfe53f46c16bf80fb9cae",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/tenant-isolation/commercialization",
+      "topic": "tenant-isolation",
+      "routeRole": "commercialization",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_948dafb7f815b713239ab5f8",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/controls",
+      "topic": "identity-bound-agents",
+      "routeRole": "controls",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_9792631ee65d70decaadf623",
+      "url": "https://research.mahastrategies.com/federation/research/doi-resolution/fixture",
+      "topic": "doi-resolution",
+      "routeRole": "fixture",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_98187d8dcf50748a7427c97f",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/example",
+      "topic": "editorial-review",
+      "routeRole": "example",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_63f92573770fe932b11581d0",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/capability-scoped-tokens/controls",
+      "topic": "capability-scoped-tokens",
+      "routeRole": "controls",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_7e491bc22da1ad832898171b",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/capability-scoped-tokens/commercialization",
+      "topic": "capability-scoped-tokens",
+      "routeRole": "commercialization",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_a1b8822e8a59159993eb8482",
+      "url": "https://research.mahastrategies.com/federation/research/section-locator/method",
+      "topic": "section-locator",
+      "routeRole": "method",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_a56c8ffc90ee7d11ae2400c8",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/delivery-acknowledgement/implementation",
+      "topic": "delivery-acknowledgement",
+      "routeRole": "implementation",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_5ee945d24d1c7fe82477cbd6",
+      "url": "https://policy.mahastrategies.com/policy/public-trust/current-law",
+      "topic": "public-trust",
+      "routeRole": "current-law",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_6b2759634ae9cc956a437b0d",
+      "url": "https://policy.mahastrategies.com/policy/public-trust/implementation",
+      "topic": "public-trust",
+      "routeRole": "implementation",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_ae7802cc2f24589be6de5c64",
+      "url": "https://www.mayonemaharajan.com/concepts/public-reason/development",
+      "topic": "public-reason",
+      "routeRole": "development",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_016674ad6a0ef156afdf8a61",
+      "url": "https://mayonrajan.com/mayon-volcano/identity-and-location/evidence",
+      "topic": "identity-and-location",
+      "routeRole": "evidence",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_74e804dbf2febe142c6f4a1f",
+      "url": "https://mayonrajan.com/mayon-volcano/official-alerts/official-sources",
+      "topic": "official-alerts",
+      "routeRole": "official-sources",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_ab7cc5b440beea7f5f551c39",
+      "url": "https://mayonrajan.com/mayon-volcano/name-disambiguation/definition",
+      "topic": "name-disambiguation",
+      "routeRole": "definition",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_b90586936a17ca13a038cb62",
+      "url": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/relationship",
+      "topic": "epistemic-infrastructure",
+      "routeRole": "relationship",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_ba1f85fdbc1cfbd3c8a3b2a4",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/verification",
+      "topic": "failure-recovery",
+      "routeRole": "verification",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_bcfa6053ad078f84750eb029",
+      "url": "https://research.mahastrategies.com/federation/research/theorem-statement/method",
+      "topic": "theorem-statement",
+      "routeRole": "method",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_bd6b98d2244e4634cd7f3c23",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/architecture",
+      "topic": "identity-bound-agents",
+      "routeRole": "architecture",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_c028323519fd8f1dca257078",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-review/template",
+      "topic": "editorial-review",
+      "routeRole": "template",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_c05ceb49a98afde6f4382268",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/endpoint-substitution-defense/commercialization",
+      "topic": "endpoint-substitution-defense",
+      "routeRole": "commercialization",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_310d9b52c33129ddf5047e37",
+      "url": "https://policy.mahastrategies.com/policy/ai-agent-accountability/tradeoffs",
+      "topic": "ai-agent-accountability",
+      "routeRole": "tradeoffs",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_44ec4deb0e388595b3d9bf20",
+      "url": "https://policy.mahastrategies.com/policy/ai-agent-accountability/machine-rule",
+      "topic": "ai-agent-accountability",
+      "routeRole": "machine-rule",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_c39f4de7987d0d289ae4d0eb",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/controls",
+      "topic": "offline-operation",
+      "routeRole": "controls",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_6fe748ca07bb92be930e92a0",
+      "url": "https://policy.mahastrategies.com/policy/automated-decision-governance/mechanisms",
+      "topic": "automated-decision-governance",
+      "routeRole": "mechanisms",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_b638f93a343314e3dbd37e14",
+      "url": "https://policy.mahastrategies.com/policy/automated-decision-governance/uncertainty",
+      "topic": "automated-decision-governance",
+      "routeRole": "uncertainty",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_c734f496120c4e025014bd3c",
+      "url": "https://mayonrajan.com/mayon-volcano/name-disambiguation/official-sources",
+      "topic": "name-disambiguation",
+      "routeRole": "official-sources",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_cabc32863fd4cfafd655d989",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/capability-scoped-tokens/architecture",
+      "topic": "capability-scoped-tokens",
+      "routeRole": "architecture",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_00881a62dc182ed5de98f034",
+      "url": "https://research.mahastrategies.com/federation/research/calculation-inputs/method",
+      "topic": "calculation-inputs",
+      "routeRole": "method",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_a25dc9f3e3d5b23630a03c4e",
+      "url": "https://research.mahastrategies.com/federation/research/calculation-inputs/source-contract",
+      "topic": "calculation-inputs",
+      "routeRole": "source-contract",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_cd55bfa32db2bb307a90f90f",
+      "url": "https://research.mahastrategies.com/federation/research/source-identity/protocol",
+      "topic": "source-identity",
+      "routeRole": "protocol",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_cd5d3d0732f7f58fc7c7c88d",
+      "url": "https://research.mahastrategies.com/federation/research/dataset-provenance/definition",
+      "topic": "dataset-provenance",
+      "routeRole": "definition",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_42d09a2aaf3d04f29af37ec0",
+      "url": "https://research.mahastrategies.com/federation/research/dataset-provenance/fixture",
+      "topic": "dataset-provenance",
+      "routeRole": "fixture",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_917e1021c303fb1305e63616",
+      "url": "https://research.mahastrategies.com/federation/research/dataset-provenance/protocol",
+      "topic": "dataset-provenance",
+      "routeRole": "protocol",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_5d18811d3e8ef9e4d02d9da2",
+      "url": "https://www.mayonemaharajan.com/concepts/human-agency/origin",
+      "topic": "human-agency",
+      "routeRole": "origin",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_976ef363f543c74b6de18f81",
+      "url": "https://www.mayonemaharajan.com/concepts/human-agency/critique",
+      "topic": "human-agency",
+      "routeRole": "critique",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_d35f250034bea3b72f5ead05",
+      "url": "https://policy.mahastrategies.com/policy/capability-controls/sources",
+      "topic": "capability-controls",
+      "routeRole": "sources",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_d54eee7528d1770e1d94d083",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/governance",
+      "topic": "human-review",
+      "routeRole": "governance",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_d570c04cbe49659f8996c6d9",
+      "url": "https://mayonrajan.com/mayon-volcano/name-disambiguation/limits",
+      "topic": "name-disambiguation",
+      "routeRole": "limits",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_d6cbea3163ab9349857186bf",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/definition",
+      "topic": "resilience-mode",
+      "routeRole": "definition",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_1754ab6d9ccee1ef6778e37e",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/operator-guide",
+      "topic": "resilience-mode",
+      "routeRole": "operator-guide",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_3dee4cb4d23a8de9ae7a7e1d",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/resilience-mode/failure-mode",
+      "topic": "resilience-mode",
+      "routeRole": "failure-mode",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_d74a376f8c6e55a25c2a00d4",
+      "url": "https://policy.mahastrategies.com/policy/biometric-governance/definition",
+      "topic": "biometric-governance",
+      "routeRole": "definition",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_13099bb1e1a366c85290fc34",
+      "url": "https://policy.mahastrategies.com/policy/biometric-governance/mechanisms",
+      "topic": "biometric-governance",
+      "routeRole": "mechanisms",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_29fc3c607302e929cf9ac8be",
+      "url": "https://policy.mahastrategies.com/policy/biometric-governance/sources",
+      "topic": "biometric-governance",
+      "routeRole": "sources",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_782ed8403a7ff5c79560b70d",
+      "url": "https://policy.mahastrategies.com/policy/biometric-governance/uncertainty",
+      "topic": "biometric-governance",
+      "routeRole": "uncertainty",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_d8c301f84959d900b66256ed",
+      "url": "https://research.mahastrategies.com/federation/research/assumptions/definition",
+      "topic": "assumptions",
+      "routeRole": "definition",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_d917d2aaff678b182062a198",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/human-approval-gates/threats",
+      "topic": "human-approval-gates",
+      "routeRole": "threats",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_d9e56c0927de3f7a2a1c9a2b",
+      "url": "https://research.mahastrategies.com/federation/research/assumptions/fixture",
+      "topic": "assumptions",
+      "routeRole": "fixture",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_dc3f5e45155a32217aaa5761",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/verification",
+      "topic": "metered-evidence-retrieval",
+      "routeRole": "verification",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_dcf8f0f4d1244f46abd98c7e",
+      "url": "https://policy.mahastrategies.com/policy/automated-decision-governance/sources",
+      "topic": "automated-decision-governance",
+      "routeRole": "sources",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_e0aecd32b5ce34c9d007d30d",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/verification",
+      "topic": "context-budgeting",
+      "routeRole": "verification",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_34582e645fcaae96411c21a3",
+      "url": "https://policy.mahastrategies.com/policy/copyright-and-training-data/evidence",
+      "topic": "copyright-and-training-data",
+      "routeRole": "evidence",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_823480d91f4d147a95791000",
+      "url": "https://policy.mahastrategies.com/policy/copyright-and-training-data/machine-rule",
+      "topic": "copyright-and-training-data",
+      "routeRole": "machine-rule",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_b92f6c2ed7721d5014be8f71",
+      "url": "https://policy.mahastrategies.com/policy/copyright-and-training-data/tradeoffs",
+      "topic": "copyright-and-training-data",
+      "routeRole": "tradeoffs",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_e2fe7f6b4b5867c5d29e83b8",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/verification",
+      "topic": "tool-authorization",
+      "routeRole": "verification",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_e581474a6bdb1c44a901a76b",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/definition",
+      "topic": "editorial-intake",
+      "routeRole": "definition",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_714fb5d819282f35578f6c33",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/template",
+      "topic": "editorial-intake",
+      "routeRole": "template",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_84b2316dc57f1e809d2360f6",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/editorial-intake/example",
+      "topic": "editorial-intake",
+      "routeRole": "example",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_8e3924f228f14535e84ec0c8",
+      "url": "https://research.mahastrategies.com/federation/research/literature-conflict/method",
+      "topic": "literature-conflict",
+      "routeRole": "method",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_94c215b1a8798a602ba01453",
+      "url": "https://research.mahastrategies.com/federation/research/literature-conflict/protocol",
+      "topic": "literature-conflict",
+      "routeRole": "protocol",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_ee2eb2f19a7cd44a7ed0ad6e",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/durable-task-state/threats",
+      "topic": "durable-task-state",
+      "routeRole": "threats",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_f25f76db2ec3d9a2ceed05e6",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/machine-interface",
+      "topic": "structured-abstract",
+      "routeRole": "machine-interface",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_956bb7c77098dead14075f84",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/failure-mode",
+      "topic": "device-identity",
+      "routeRole": "failure-mode",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    },
+    {
+      "candidateId": "cand_fc7c6557cce5dc34b0378e8a",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/agentic-query-letter/governance",
+      "topic": "agentic-query-letter",
+      "routeRole": "governance",
+      "disposition": "retain-distinct",
+      "reason": "The route answers a distinct role-specific question after exact-topic and canonical-owner review.",
+      "reviewedOn": "2026-09-06",
+      "reviewerTier": "internal-editorial"
+    }
+  ],
+  "provenanceDigest": "sha256:8eb869f62c00958a3d0215a6456278da6ccc695f43879dfcaed239070796fece"
+}

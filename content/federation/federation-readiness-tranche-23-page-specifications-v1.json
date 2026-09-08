@@ -1,0 +1,2327 @@
+{
+  "schemaVersion": "maha-federation-readiness-tranche-23-page-specifications/1.0",
+  "frozenOn": "2026-09-07",
+  "counts": {
+    "specifications": 57,
+    "boundedQuestions": 285
+  },
+  "specifications": [
+    {
+      "candidateId": "cand_00b671b5c1a277be05330521",
+      "candidateDigest": "sha256:275b2ae6d97bf5fa2791fd7e406f31a281a26d9bcd720e6742feead2ee617677",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/critique",
+      "title": "Mental Sovereignty — Critique",
+      "conceptId": "urn:maha:concept:autonomy:mental-sovereignty",
+      "routeRole": "critique",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "maha-principle-mental-sovereignty-t8",
+          "locator": "repo:content/books/the-maha-principle/The-Maha-Principle.md — working authorial manuscript inspected 2026-09-06; The Biological Basis of Liberty; Chapter 2: The Fractured Mind; The Attentional Veto; The Sovereign Self: Internal Authority Without Domination; The Mind Domain: Attentional Sovereignty",
+          "rightsBasis": "Maha-controlled working authorial manuscript; bounded summary and short attributed quotation only. The packet does not imply publication, peer review, consensus, or empirical validation.",
+          "scope": "The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme.",
+          "boundary": "The term is Mayone Maharajan’s normative synthesis. It is not a diagnosis, legal status, measured neurological construct, proof that the proposed practices work, permission to disregard care, or authority over another person."
+        }
+      ],
+      "decisionDigest": "sha256:d8263bcd3f7a1392262c984697f838e578ec293ce65f33d4c2cda0df6551574e",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_0334f4dc2cef2b7aca5f87ae",
+      "candidateDigest": "sha256:6c1c5b902de4923fea5a909a7739534cee44c531ad77d76d41e213ef7052055e",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/authorial-lineage/application",
+      "title": "Authorial Lineage — Application",
+      "conceptId": "urn:maha:concept:autonomy:authorial-lineage",
+      "routeRole": "application",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "maha-principle-authorial-lineage",
+          "locator": "repo:content/books/the-maha-principle/The-Maha-Principle.md — working authorial manuscript inspected 2026-09-06; The Network and the Feed; Chapter 6; Chapter 7; Whole-Food Information",
+          "rightsBasis": "Maha-controlled authorial manuscript; bounded paraphrase and locator only. The packet does not redistribute the manuscript.",
+          "scope": "One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience.",
+          "boundary": "A manuscript can establish its own wording and internal relationships, not originality, influence, reception, consensus, or empirical truth."
+        },
+        {
+          "sourceId": "cosmic-recursion-authorial-lineage",
+          "locator": "repo:content/books/the-cosmic-recursion/THE-COSMIC-RECURSION-manuscript.md — working authorial manuscript inspected 2026-09-06; Introduction and closing synthesis; passages distinguishing analogy, recurrence, evidence, and model boundary",
+          "rightsBasis": "Maha-controlled authorial manuscript; bounded paraphrase and locator only. The packet does not redistribute the manuscript.",
+          "scope": "A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification.",
+          "boundary": "Textual relationship inside one author’s corpus does not prove chronological influence, priority over other thinkers, public reception, or scientific validity."
+        }
+      ],
+      "decisionDigest": "sha256:37b025f0d5b6bc6a20f0d04ba7ec62382bcba26377fc30a13ca54b19476b80e8",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_15104c29d1fd26b7a57944b8",
+      "candidateDigest": "sha256:42f42eadee593d6a1170a36f8e06b4eedd9b19ea46f0001e83ecd395d3730317",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/claim-extraction/method",
+      "title": "Claim Extraction — Method",
+      "conceptId": "urn:maha:concept:evidence:claim-extraction",
+      "routeRole": "method",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-claim-extraction",
+          "locator": "lib/claim-evidence.ts — assertClaimEvidence",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Validates claim provenance and empirical-evidence axes independently under a typed contract.",
+          "boundary": "The contract records supplied assertions; it does not establish truth, source support, completeness, or semantic entailment."
+        },
+        {
+          "sourceId": "local-claim-evidence-contract",
+          "locator": "repo:lib/claim-evidence.ts — repository source inspected 2026-09-06; assertClaimEvidence; provenance and empirical evidence axes",
+          "rightsBasis": "Maha-controlled repository source; symbols, headings, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The contract represents where a claim came from separately from what empirical evidence, if any, supports it.",
+          "boundary": "A typed evidence label does not make a claim true, sufficient, current, causal, reproducible, or within a source’s actual scope."
+        },
+        {
+          "sourceId": "local-source-alignment-contract-t7",
+          "locator": "repo:lib/frontier-source-alignment.ts — repository source inspected 2026-09-06; source identity, version, locator, claim scope, and boundary axes",
+          "rightsBasis": "Maha-controlled repository source; symbols, headings, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The alignment contract keeps source identity, version relationship, locator completeness, claim scope, and inference boundary as distinct review axes.",
+          "boundary": "The contract detects recorded defects and omissions; it cannot replace inspection or infer support from metadata or topical similarity."
+        }
+      ],
+      "decisionDigest": "sha256:2848a5e5e038ebbd42216903dd91205c187428904b014d3856e59f5ebe27b663",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_158eb87506efec35bb613679",
+      "candidateDigest": "sha256:f654818f72bee9932b2743fc3249a7a8e7ef9eaac9581baacee42ec085f9d7f8",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/authorial-lineage/argument",
+      "title": "Authorial Lineage — Argument",
+      "conceptId": "urn:maha:concept:autonomy:authorial-lineage",
+      "routeRole": "argument",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "maha-principle-authorial-lineage",
+          "locator": "repo:content/books/the-maha-principle/The-Maha-Principle.md — working authorial manuscript inspected 2026-09-06; The Network and the Feed; Chapter 6; Chapter 7; Whole-Food Information",
+          "rightsBasis": "Maha-controlled authorial manuscript; bounded paraphrase and locator only. The packet does not redistribute the manuscript.",
+          "scope": "One manuscript state develops an authorial vocabulary for information, governance, verification, and resilience.",
+          "boundary": "A manuscript can establish its own wording and internal relationships, not originality, influence, reception, consensus, or empirical truth."
+        },
+        {
+          "sourceId": "cosmic-recursion-authorial-lineage",
+          "locator": "repo:content/books/the-cosmic-recursion/THE-COSMIC-RECURSION-manuscript.md — working authorial manuscript inspected 2026-09-06; Introduction and closing synthesis; passages distinguishing analogy, recurrence, evidence, and model boundary",
+          "rightsBasis": "Maha-controlled authorial manuscript; bounded paraphrase and locator only. The packet does not redistribute the manuscript.",
+          "scope": "A second identified manuscript develops a related but distinct authorial treatment of recurrence, analogy, model limits, and verification.",
+          "boundary": "Textual relationship inside one author’s corpus does not prove chronological influence, priority over other thinkers, public reception, or scientific validity."
+        }
+      ],
+      "decisionDigest": "sha256:74c3c9ea59a443b05ac6d34e741bb77c1b9d437299fe1ec3ab5534c45b01a0a1",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_18e131fa8cc1db3982cb3add",
+      "candidateDigest": "sha256:fea37ee2c1cb3c7b0606dd29a44a042d3675c2c4483e8ab7fc06276e3cb760a4",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/evidence-graph/method",
+      "title": "Evidence Graph — Method",
+      "conceptId": "urn:maha:concept:evidence:evidence-graph",
+      "routeRole": "method",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "w3c-prov-o-evidence-graph-t9",
+          "locator": "https://www.w3.org/TR/prov-o/ — Recommendation, 30 April 2013; Entities, Activities and Agents; used; wasGeneratedBy; wasDerivedFrom; wasAssociatedWith; wasAttributedTo",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "scope": "PROV-O can represent typed provenance between entities, activities, agents, inputs, outputs, derivations, associations, and attributions.",
+          "boundary": "PROV represents asserted provenance; it does not verify truth, completeness, authentication, rights, causal validity, or passage-level claim support."
+        },
+        {
+          "sourceId": "datacite-schema-evidence-graph-t9",
+          "locator": "https://datacite-metadata-schema.readthedocs.io/en/4.6/ — version 4.6; Identifier; Creator; Contributor; Version; RelatedIdentifier; Rights",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "scope": "Versioned metadata can name research objects, contributors, versions, typed relations, and rights statements.",
+          "boundary": "Metadata fields do not establish source quality, lawful collection, relationship truth, or that one object supports another object’s claim."
+        }
+      ],
+      "decisionDigest": "sha256:16d3f3b106c3253e0e1a3baeecbd233793c4ee93f6a9ad6b469553e8354aa42e",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_198d3dd9a4876d2aca01485a",
+      "candidateDigest": "sha256:2f1d3f6e6e760f769a47f05b30ccc249f8fc2de4bad622c4d4ce478266cad2b8",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/maha-principle/critique",
+      "title": "Maha Principle — Critique",
+      "conceptId": "urn:maha:concept:autonomy:maha-principle",
+      "routeRole": "critique",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "maha-principle-relationship-t10",
+          "locator": "repo:content/books/the-maha-principle/The-Maha-Principle.md — working authorial manuscript inspected 2026-09-06; THE MAHA PRINCIPLE: A MAP OF THE TERRAIN; The Architecture of Renewal; Chapters 5–8; The Fractal: As the Cell, So the State",
+          "rightsBasis": "Maha-controlled working authorial manuscript; bounded summary only. The packet does not imply publication, peer review, consensus, or empirical validation.",
+          "scope": "The manuscript relates its central principle to asymmetric strategy, humane governance, verification under complexity, long-horizon vision, and application across scales.",
+          "boundary": "The manuscript establishes the author’s intended relationships only. It does not prove novelty, empirical validity, adoption, philosophical priority, commercial success, or consensus."
+        }
+      ],
+      "decisionDigest": "sha256:131ecdcd8a8caa1715aa23533ed2a19221e9d2ffa4b966800a74962f4c6814d8",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_369a6f8e3a53afd1240059df",
+      "candidateDigest": "sha256:cee2962bac9fb03ec856db5272b75ae1d4e5c490e989c97e52153884aafae517",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/epistemic-clearance/argument",
+      "title": "Epistemic Clearance — Argument",
+      "conceptId": "urn:maha:concept:authority:epistemic-clearance",
+      "routeRole": "argument",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "maha-principle-epistemic-clearance-t9",
+          "locator": "repo:content/books/the-maha-principle/The-Maha-Principle.md — working authorial manuscript inspected 2026-09-06; The Trinity of Verification: Three Filters for a Noisy World; Ontological Arbitrage; glossary entry Trinity of Verification",
+          "rightsBasis": "Maha-controlled working authorial manuscript; bounded summary only. The packet does not imply publication, peer review, consensus, or empirical validation.",
+          "scope": "The manuscript proposes an authorial three-filter practice for evaluating significant claims and keeping incentive, coherence, and consequence questions visible.",
+          "boundary": "The manuscript does not use “epistemic clearance” as an established term, prove its filters valid, certify an accepted claim, or substitute for domain expertise and source inspection."
+        },
+        {
+          "sourceId": "local-evidence-preflight-clearance-t9",
+          "locator": "repo:lib/evidence-preflight-contract.ts — repository source inspected 2026-09-06; EvidencePreflightClaimAssessment; blockers; privacy and offer boundaries",
+          "rightsBasis": "Maha-controlled repository source; headings, symbols, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The local contract emits bounded structural findings for source identity, locator, claim scope, evidence status, inference risk, and rights/access limitations.",
+          "boundary": "A preflight result is not an independently verified Evidence Dossier, expert endorsement, legal clearance, or proof of truth."
+        }
+      ],
+      "decisionDigest": "sha256:966f54d690a5edca7380b0cc862daa740f4a0993b09675045d5b94eda30291e3",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_37218c30613c8f06df821f89",
+      "candidateDigest": "sha256:4993657f55605dc7b722a9ffd7ce54fc6de7d18ddae178a6e3e83c031f7ce7a1",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/coordinate-frames/input-contract",
+      "title": "Coordinate Frames — Input Contract",
+      "conceptId": "urn:maha:concept:interpretation:coordinate-frames",
+      "routeRole": "input-contract",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-astrology-workflows",
+          "locator": "lib/astrology-workflow-protocols.ts — ASTROLOGY_WORKFLOW_PROTOCOLS",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Defines bounded reference-frame inputs, deterministic operations, receipts, uncertainty, and refusal conditions.",
+          "boundary": "Reproducible arithmetic does not validate astrology, select a true tradition, or justify interpretive claims."
+        }
+      ],
+      "decisionDigest": "sha256:45806443594d311ac0a0d6102e1b466611c59f7b4a92f06466db2457808a4412",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_3cf095886c3ed1a43dc9e9dd",
+      "candidateDigest": "sha256:fc67d9891fc8a502b5f72e5d79d49eb9dd25618cc550a6cd19ce79133426b4c7",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/civilizational-memory/application",
+      "title": "Civilizational Memory — Application",
+      "conceptId": "urn:maha:concept:autonomy:civilizational-memory",
+      "routeRole": "application",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "borrowed-light-civilizational-memory",
+          "locator": "repo:content/books/the-borrowed-light/chapter-5.md; repo:content/books/the-borrowed-light/chapter-6.md — working authorial manuscript inspected 2026-09-06; Chapter 5: The Hard Problem in the Mirror; Chapter 6: The Evidence That Needs No Physics and The Custodians",
+          "rightsBasis": "Maha-controlled authorial manuscript; bounded paraphrase and locator only. The packet does not redistribute the manuscript.",
+          "scope": "The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind.",
+          "boundary": "This establishes the author’s framework, not a historical lineage, empirical model of memory, cultural authority, priority, or consensus."
+        }
+      ],
+      "decisionDigest": "sha256:d68a90fd90ece620ebbf3311c780cf8334a7c464d06caf5030b39a6abafe8923",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_482fa771d4d61e8e61cffac8",
+      "candidateDigest": "sha256:e9007f7f1d1056089bc69c7841648f4b5bfa669882958d870b4a6487c34d75aa",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/evidence-graph/source-contract",
+      "title": "Evidence Graph — Source Contract",
+      "conceptId": "urn:maha:concept:evidence:evidence-graph",
+      "routeRole": "source-contract",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "w3c-prov-o-evidence-graph-t9",
+          "locator": "https://www.w3.org/TR/prov-o/ — Recommendation, 30 April 2013; Entities, Activities and Agents; used; wasGeneratedBy; wasDerivedFrom; wasAssociatedWith; wasAttributedTo",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "scope": "PROV-O can represent typed provenance between entities, activities, agents, inputs, outputs, derivations, associations, and attributions.",
+          "boundary": "PROV represents asserted provenance; it does not verify truth, completeness, authentication, rights, causal validity, or passage-level claim support."
+        },
+        {
+          "sourceId": "datacite-schema-evidence-graph-t9",
+          "locator": "https://datacite-metadata-schema.readthedocs.io/en/4.6/ — version 4.6; Identifier; Creator; Contributor; Version; RelatedIdentifier; Rights",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "scope": "Versioned metadata can name research objects, contributors, versions, typed relations, and rights statements.",
+          "boundary": "Metadata fields do not establish source quality, lawful collection, relationship truth, or that one object supports another object’s claim."
+        }
+      ],
+      "decisionDigest": "sha256:7559e243a9a1d809541746ed5afc05e3da43b877ccd88a4e6c2622d7b3a0e45f",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_4d755f9a702349b6a21e88b6",
+      "candidateDigest": "sha256:6e0874b2c286a2c12b4ee832b57e3e4be9bc7affd1098c05b46a5ebd4409fc93",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/governed-autonomy/development",
+      "title": "Governed Autonomy — Development",
+      "conceptId": "urn:maha:concept:autonomy:governed-autonomy",
+      "routeRole": "development",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "maha-principle",
+          "locator": "repo:content/books/the-maha-principle/The-Maha-Principle.md — working authorial manuscript inspected 2026-09-05; Device Autonomy assessment; bodily-autonomy bridge; authorial framing",
+          "rightsBasis": "Maha-controlled authorial manuscript; record section identity and file digest only. Any later quotation remains subject to the author-controlled publication policy.",
+          "scope": "The author’s normative concept of autonomy under technological and institutional pressure.",
+          "boundary": "This is an authorial thesis and assessment framework, not a validated clinical scale or settled political doctrine."
+        },
+        {
+          "sourceId": "orbital-mind",
+          "locator": "repo:content/books/the-orbital-mind/the-orbital-mind.md — working authorial manuscript inspected 2026-09-05; Mars · Agency and Boundary; Limits and Alternatives",
+          "rightsBasis": "Maha-controlled authorial manuscript; record section identity and file digest only. Any later quotation remains subject to the author-controlled publication policy.",
+          "scope": "Agency as mobilization constrained by boundaries and explicit failure modes.",
+          "boundary": "Planetary and mythic material is symbolic imagery, not empirical evidence."
+        }
+      ],
+      "decisionDigest": "sha256:79742471b5d70b57866cb7676e5ab301fd7e8d6cfbce4d7c140497c359517b49",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_4eb9f0f6754923badf58ef11",
+      "candidateDigest": "sha256:9ec0422f505d39a05b633387cd387c330504c6fa3d0bfdc553172d15c08a4372",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/calibration/relationships",
+      "title": "Calibration — Relationships",
+      "conceptId": "urn:maha:concept:evidence:calibration",
+      "routeRole": "relationships",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "nist-tn-1297",
+          "locator": "https://www.nist.gov/pml/nist-technical-note-1297 — NIST Technical Note 1297, 1994 edition; §§2–7; Appendix A; Appendix D.1",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "scope": "The note distinguishes Type A and Type B evaluations, standard uncertainty, combined standard uncertainty, expanded uncertainty, uncertainty components, and reporting requirements.",
+          "boundary": "An uncertainty budget does not prove that a model or calibration is correct, identify every systematic effect, validate an input source, or validate astrology."
+        }
+      ],
+      "decisionDigest": "sha256:08c85d889dc948e3929898febd2c2520fee4eb99518a1733b010a64f363a2c2d",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_6462f0391f76fb8d58e8ab95",
+      "candidateDigest": "sha256:afc8178854ae7aa4a9060579c2b58f776aea666d69855807da2b5898ddbfd0f5",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/government-mirror/relationships",
+      "title": "Government Mirror — Relationships",
+      "conceptId": "urn:maha:concept:evidence:government-mirror",
+      "routeRole": "relationships",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-government-recovery",
+          "locator": "lib/source-recovery.ts — recoveryRequests",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Represents government-host recovery as one bounded route while preserving identity and version checks.",
+          "boundary": "Government hosting does not make a source authoritative for every claim."
+        },
+        {
+          "sourceId": "govinfo-api-and-urls-t9",
+          "locator": "https://www.govinfo.gov/features/api — living documentation inspected 2026-09-06; API overview; package and granule endpoints; content and metadata downloads; API-key requirement",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "scope": "GovInfo provides programmatic discovery and retrieval for official content, package and granule metadata, and rendition links.",
+          "boundary": "An API response establishes repository identity and supplied metadata only; it does not prove a document supports a claim, is current law, or applies to a specific fact."
+        },
+        {
+          "sourceId": "govinfo-authentication-t9",
+          "locator": "https://www.govinfo.gov/about/authentication — living documentation inspected 2026-09-06; Digital signatures for official PDFs; verification status and document-integrity explanation",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "scope": "Digital signatures can support verification that an official PDF was issued by GPO and has not changed since signing.",
+          "boundary": "Signature verification does not establish that the document is current, applicable, complete for a question, or substantively correct."
+        }
+      ],
+      "decisionDigest": "sha256:8b60fea798dec494d29edcd6620ab8daa775f39030fb756aff2c954fcb8b16a1",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_685fc365b60f050b990b581c",
+      "candidateDigest": "sha256:29a696b3337077a4066a82bbcb1ad290cbb274d1967775373e9eab8bfc1d320c",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/limits",
+      "title": "Mental Sovereignty — Limits",
+      "conceptId": "urn:maha:concept:autonomy:mental-sovereignty",
+      "routeRole": "limits",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "maha-principle-mental-sovereignty-t8",
+          "locator": "repo:content/books/the-maha-principle/The-Maha-Principle.md — working authorial manuscript inspected 2026-09-06; The Biological Basis of Liberty; Chapter 2: The Fractured Mind; The Attentional Veto; The Sovereign Self: Internal Authority Without Domination; The Mind Domain: Attentional Sovereignty",
+          "rightsBasis": "Maha-controlled working authorial manuscript; bounded summary and short attributed quotation only. The packet does not imply publication, peer review, consensus, or empirical validation.",
+          "scope": "The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme.",
+          "boundary": "The term is Mayone Maharajan’s normative synthesis. It is not a diagnosis, legal status, measured neurological construct, proof that the proposed practices work, permission to disregard care, or authority over another person."
+        }
+      ],
+      "decisionDigest": "sha256:8e931d315cf134009be1019012a3c39faca8e85fa9525f4e457e8efa913a66b1",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_6999c9ab8921798a87e0b059",
+      "candidateDigest": "sha256:8ea16f15a3980f74e771c50f314299a9d6bcaf0f6bd0ea23192e3bfc68394ccd",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/government-mirror/method",
+      "title": "Government Mirror — Method",
+      "conceptId": "urn:maha:concept:evidence:government-mirror",
+      "routeRole": "method",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-government-recovery",
+          "locator": "lib/source-recovery.ts — recoveryRequests",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Represents government-host recovery as one bounded route while preserving identity and version checks.",
+          "boundary": "Government hosting does not make a source authoritative for every claim."
+        },
+        {
+          "sourceId": "govinfo-api-and-urls-t9",
+          "locator": "https://www.govinfo.gov/features/api — living documentation inspected 2026-09-06; API overview; package and granule endpoints; content and metadata downloads; API-key requirement",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "scope": "GovInfo provides programmatic discovery and retrieval for official content, package and granule metadata, and rendition links.",
+          "boundary": "An API response establishes repository identity and supplied metadata only; it does not prove a document supports a claim, is current law, or applies to a specific fact."
+        },
+        {
+          "sourceId": "govinfo-authentication-t9",
+          "locator": "https://www.govinfo.gov/about/authentication — living documentation inspected 2026-09-06; Digital signatures for official PDFs; verification status and document-integrity explanation",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "scope": "Digital signatures can support verification that an official PDF was issued by GPO and has not changed since signing.",
+          "boundary": "Signature verification does not establish that the document is current, applicable, complete for a question, or substantively correct."
+        }
+      ],
+      "decisionDigest": "sha256:fcfd43c2682735d0181f879559f4521d9f4849056f99cff8b0590d82e0e12037",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_69fed6d03264243259bd3b64",
+      "candidateDigest": "sha256:742f80bda997d48083e6515e529795023c9486c368f93659c080e9545029c0e0",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/maha-principle/origin",
+      "title": "Maha Principle — Origin",
+      "conceptId": "urn:maha:concept:autonomy:maha-principle",
+      "routeRole": "origin",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "maha-principle-relationship-t10",
+          "locator": "repo:content/books/the-maha-principle/The-Maha-Principle.md — working authorial manuscript inspected 2026-09-06; THE MAHA PRINCIPLE: A MAP OF THE TERRAIN; The Architecture of Renewal; Chapters 5–8; The Fractal: As the Cell, So the State",
+          "rightsBasis": "Maha-controlled working authorial manuscript; bounded summary only. The packet does not imply publication, peer review, consensus, or empirical validation.",
+          "scope": "The manuscript relates its central principle to asymmetric strategy, humane governance, verification under complexity, long-horizon vision, and application across scales.",
+          "boundary": "The manuscript establishes the author’s intended relationships only. It does not prove novelty, empirical validity, adoption, philosophical priority, commercial success, or consensus."
+        }
+      ],
+      "decisionDigest": "sha256:d7ae55a4c8e2fb7a92c542543fab6c2975bf1e3f76a614c28b06c191a66d6def",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_6a36218ed3962f4666f70bd7",
+      "candidateDigest": "sha256:a997b5bda58c5bb356cf0c561de9906619e09891cc94f2b5306b4be655bd2db1",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/full-text-evidence/machine-record",
+      "title": "Full Text Evidence — Machine Record",
+      "conceptId": "urn:maha:concept:evidence:full-text-evidence",
+      "routeRole": "machine-record",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-fulltext-contract",
+          "locator": "lib/source-recovery.ts — compileRecoveryPackets",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Keeps access, inspection, locator, identity, and version states separate.",
+          "boundary": "Full-text access alone does not establish relevance, rights, or support."
+        },
+        {
+          "sourceId": "pmc-oai-full-text-t9",
+          "locator": "https://pmc.ncbi.nlm.nih.gov/tools/oai/ — living API documentation inspected 2026-09-06; set=pmc-open; metadataPrefix=pmc and pmc_fm; OAI PMC identifiers",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "scope": "The API exposes metadata for PMC items and full text for records whose licenses or usage rights allow reuse; set=pmc-open identifies retrievable full-text items.",
+          "boundary": "API retrieval does not prove claim relevance, inspection, version equivalence, or that every PMC item permits reuse."
+        },
+        {
+          "sourceId": "pmc-copyright-t9",
+          "locator": "https://pmc.ncbi.nlm.nih.gov/about/copyright/ — modified 9 September 2025; Restrictions on systematic downloading; Open Access Articles; Author Manuscripts; Digitized Articles",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "scope": "PMC identifies authorized bulk interfaces and distinguishes OA-subset licences, author manuscripts, public-domain records, and traditionally copyrighted free-to-read articles.",
+          "boundary": "Free access is not the same as an open licence. Third-party figures may carry separate rights, and systematic main-site downloading is prohibited."
+        }
+      ],
+      "decisionDigest": "sha256:d19202f3f139cd8367a689ccbaf6a9aba302fa9f92bfe8e2c17709480743dd16",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_6f161263a1fa18078e745e15",
+      "candidateDigest": "sha256:b0d10428fc966ed6e2aecb0add897ca3dbd801e2e05b89c68349e8b5697e6177",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/coordinate-frames/workflow",
+      "title": "Coordinate Frames — Workflow",
+      "conceptId": "urn:maha:concept:interpretation:coordinate-frames",
+      "routeRole": "workflow",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-astrology-workflows",
+          "locator": "lib/astrology-workflow-protocols.ts — ASTROLOGY_WORKFLOW_PROTOCOLS",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Defines bounded reference-frame inputs, deterministic operations, receipts, uncertainty, and refusal conditions.",
+          "boundary": "Reproducible arithmetic does not validate astrology, select a true tradition, or justify interpretive claims."
+        }
+      ],
+      "decisionDigest": "sha256:bc59995a1ace27b5325a1c70d8a68f116428c5f0c1b5289e2a0b33e16ff941e2",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_7131873dbfa4bffb2b60596f",
+      "candidateDigest": "sha256:b0c09826e23a3e8cf3eecc863590e7a139e623c00c8a5d938b556fe0aa56c56d",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/claim-extraction/failure-mode",
+      "title": "Claim Extraction — Failure Mode",
+      "conceptId": "urn:maha:concept:evidence:claim-extraction",
+      "routeRole": "failure-mode",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-claim-extraction",
+          "locator": "lib/claim-evidence.ts — assertClaimEvidence",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Validates claim provenance and empirical-evidence axes independently under a typed contract.",
+          "boundary": "The contract records supplied assertions; it does not establish truth, source support, completeness, or semantic entailment."
+        },
+        {
+          "sourceId": "local-claim-evidence-contract",
+          "locator": "repo:lib/claim-evidence.ts — repository source inspected 2026-09-06; assertClaimEvidence; provenance and empirical evidence axes",
+          "rightsBasis": "Maha-controlled repository source; symbols, headings, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The contract represents where a claim came from separately from what empirical evidence, if any, supports it.",
+          "boundary": "A typed evidence label does not make a claim true, sufficient, current, causal, reproducible, or within a source’s actual scope."
+        },
+        {
+          "sourceId": "local-source-alignment-contract-t7",
+          "locator": "repo:lib/frontier-source-alignment.ts — repository source inspected 2026-09-06; source identity, version, locator, claim scope, and boundary axes",
+          "rightsBasis": "Maha-controlled repository source; symbols, headings, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The alignment contract keeps source identity, version relationship, locator completeness, claim scope, and inference boundary as distinct review axes.",
+          "boundary": "The contract detects recorded defects and omissions; it cannot replace inspection or infer support from metadata or topical similarity."
+        }
+      ],
+      "decisionDigest": "sha256:76f2486114b1e3cdd96075620d16a6b38f1e8217eb10873260ee1be3dc207ba0",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_77c70849de00d1f2aa2653c2",
+      "candidateDigest": "sha256:9640d5042cc25785e259a780913c56ebcca91783cd8f7e6758022fd3f119a236",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/reproducibility/machine-record",
+      "title": "Reproducibility — Machine Record",
+      "conceptId": "urn:maha:concept:evidence:reproducibility",
+      "routeRole": "machine-record",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-reproducibility-registry",
+          "locator": "lib/evidence-workflow-examples.ts — EVIDENCE_WORKFLOW_PUBLIC_REGISTRY",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Publishes digest-bound synthetic workflows, refusals, and checks.",
+          "boundary": "Synthetic conformance is not independent reproduction."
+        },
+        {
+          "sourceId": "nasem-reproducibility-2019-t9",
+          "locator": "https://nap.nationalacademies.org/catalog/25303/reproducibility-and-replicability-in-science — Consensus Study Report, 2019; Chapter 3, Understanding Reproducibility and Replicability; report summary definitions",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "scope": "Computational reproducibility means obtaining consistent computational results with the same data, steps, methods, code, and analysis conditions; replicability uses new data to answer the same scientific question.",
+          "boundary": "Reproducibility does not establish scientific correctness or external validity, and a failed replication does not by itself identify which study or condition is wrong."
+        },
+        {
+          "sourceId": "local-computational-witness-repro-t9",
+          "locator": "repo:packages/maha-witness/README.md — repository source inspected 2026-09-06; Recorded fields; Adapter boundary; Assurance boundary; verification command",
+          "rightsBasis": "Maha-controlled repository source; headings, symbols, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The witness records execution identity, bounded environment metadata, seeds, configuration, and artifact hashes, and verifies the receipt digest offline.",
+          "boundary": "It does not capture arguments, arbitrary environment variables, paths, file contents, or credentials and does not establish scientific correctness, complete environment capture, or independent reproduction."
+        }
+      ],
+      "decisionDigest": "sha256:7e74ad35a7c1217b0f06c9970a94144bf5c106170892f65fa0e10e3ce219b690",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_7a5523bcf25391fa4e07d397",
+      "candidateDigest": "sha256:333e49db9c68e36cb4edeecc598b1ab5dc0c04345c1accb80191921a47f416a2",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/full-text-evidence/method",
+      "title": "Full Text Evidence — Method",
+      "conceptId": "urn:maha:concept:evidence:full-text-evidence",
+      "routeRole": "method",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-fulltext-contract",
+          "locator": "lib/source-recovery.ts — compileRecoveryPackets",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Keeps access, inspection, locator, identity, and version states separate.",
+          "boundary": "Full-text access alone does not establish relevance, rights, or support."
+        },
+        {
+          "sourceId": "pmc-oai-full-text-t9",
+          "locator": "https://pmc.ncbi.nlm.nih.gov/tools/oai/ — living API documentation inspected 2026-09-06; set=pmc-open; metadataPrefix=pmc and pmc_fm; OAI PMC identifiers",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "scope": "The API exposes metadata for PMC items and full text for records whose licenses or usage rights allow reuse; set=pmc-open identifies retrievable full-text items.",
+          "boundary": "API retrieval does not prove claim relevance, inspection, version equivalence, or that every PMC item permits reuse."
+        },
+        {
+          "sourceId": "pmc-copyright-t9",
+          "locator": "https://pmc.ncbi.nlm.nih.gov/about/copyright/ — modified 9 September 2025; Restrictions on systematic downloading; Open Access Articles; Author Manuscripts; Digitized Articles",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "scope": "PMC identifies authorized bulk interfaces and distinguishes OA-subset licences, author manuscripts, public-domain records, and traditionally copyrighted free-to-read articles.",
+          "boundary": "Free access is not the same as an open licence. Third-party figures may carry separate rights, and systematic main-site downloading is prohibited."
+        }
+      ],
+      "decisionDigest": "sha256:07b8ef17d6dca1ee6114e0fba8439a4787c443fe2c4fe40394c551e0ca6c4a6d",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_7afe45c2083622d0d98c352d",
+      "candidateDigest": "sha256:99c0412a3dfb21a6d54ce9e42ad63646638793e50a6794bbe87814c5ecf29a08",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/scientific-evidence-policy/tradeoffs",
+      "title": "Scientific Evidence Policy — Tradeoffs",
+      "conceptId": "urn:maha:concept:governance:scientific-evidence-policy",
+      "routeRole": "tradeoffs",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-gao-evidence-policy",
+          "locator": "https://www.gao.gov/products/gao-23-105460 — 13 practices across planning, assessing/building, using evidence, and learning",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Describes evidence-building and use practices, evidence types, implementation actions, and observed limits in US federal agencies.",
+          "boundary": "This is US federal management guidance and audit synthesis, not a universal hierarchy of evidence or proof that a policy works."
+        },
+        {
+          "sourceId": "t22-evidence-act",
+          "locator": "https://www.congress.gov/115/statute/STATUTE-132/STATUTE-132-Pg5529.pdf — Title I federal evidence-building activities and Titles II–III data access and confidentiality",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Establishes US federal evaluation, evidence-building, data governance, and confidentiality duties.",
+          "boundary": "This is US federal law; it neither mandates one scientific method nor creates an executable decision rule for arbitrary claims."
+        },
+        {
+          "sourceId": "t22-nasem-reproducibility",
+          "locator": "https://nap.nationalacademies.org/resource/25303/R%26R.pdf — definitions and recommendations",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Separates computational reproducibility from replicability and records why contrary results require contextual assessment rather than automatic reversal.",
+          "boundary": "The report does not rank every study design or decide a specific policy question."
+        }
+      ],
+      "decisionDigest": "sha256:0819cf469cf16973ef6eeee9a64f927d06297ba2504d1e42b6c9e99499805b07",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_7d84de8e5ad28dee93a7e098",
+      "candidateDigest": "sha256:351611cbc80ec31fd5c757a5fd78cce2a0907b13aa282a20180f37bbbf0244a1",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/slurm-job/method",
+      "title": "Slurm Job — Method",
+      "conceptId": "urn:maha:concept:evidence:slurm-job",
+      "routeRole": "method",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-slurm-contract",
+          "locator": "packages/maha-witness/src/maha_witness/adapters.py — slurm_metadata",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Normalizes a bounded allowlist of caller-supplied SLURM metadata without executing a scheduler.",
+          "boundary": "Metadata capture does not prove workload correctness, scheduler truth, or reproducibility."
+        },
+        {
+          "sourceId": "slurm-sbatch-t9",
+          "locator": "https://slurm.schedmd.com/sbatch.html — current documentation inspected 2026-09-06; DESCRIPTION; #SBATCH directives; input environment variables; output environment variables; RETURN VALUE",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "scope": "sbatch submits a batch script, assigns a job identifier, applies directive and option precedence, and makes named SLURM_* metadata available to the job environment.",
+          "boundary": "Successful submission is not successful execution, scientific validity, resource availability, or proof that an output came from the named job."
+        },
+        {
+          "sourceId": "local-slurm-witness-adapter-t9",
+          "locator": "repo:packages/maha-witness/src/maha_witness/adapters.py — repository source inspected 2026-09-06; slurm_metadata; allowlisted SLURM_ARRAY_JOB_ID, SLURM_ARRAY_TASK_ID, SLURM_CLUSTER_NAME, SLURM_CPUS_PER_TASK, SLURM_JOB_ID, SLURM_JOB_NAME, SLURM_NNODES and SLURM_JOB_PARTITION",
+          "rightsBasis": "Maha-controlled repository source; headings, symbols, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The adapter normalizes a caller-supplied, allowlisted subset of SLURM metadata into a deterministic witness field set.",
+          "boundary": "The adapter does not submit a job, contact Slurm, capture arbitrary environment values, prove scheduler identity, prove job completion, or establish output correctness."
+        }
+      ],
+      "decisionDigest": "sha256:2b122f8a34055bc70e8d49bfb537974372544536630a560b0e5316d1fb6edeac",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_81e1f40588172aa1b15248f3",
+      "candidateDigest": "sha256:5f709b0fd85ae55c60dc5e0b3c3c7830c6d688638c200f02c8aefcf6b8e374dc",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/maha-principle/development",
+      "title": "Maha Principle — Development",
+      "conceptId": "urn:maha:concept:autonomy:maha-principle",
+      "routeRole": "development",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "maha-principle-relationship-t10",
+          "locator": "repo:content/books/the-maha-principle/The-Maha-Principle.md — working authorial manuscript inspected 2026-09-06; THE MAHA PRINCIPLE: A MAP OF THE TERRAIN; The Architecture of Renewal; Chapters 5–8; The Fractal: As the Cell, So the State",
+          "rightsBasis": "Maha-controlled working authorial manuscript; bounded summary only. The packet does not imply publication, peer review, consensus, or empirical validation.",
+          "scope": "The manuscript relates its central principle to asymmetric strategy, humane governance, verification under complexity, long-horizon vision, and application across scales.",
+          "boundary": "The manuscript establishes the author’s intended relationships only. It does not prove novelty, empirical validity, adoption, philosophical priority, commercial success, or consensus."
+        }
+      ],
+      "decisionDigest": "sha256:71a950776a28ef74675aa965a1b55af27a76e62c20107dc6fef7d6bc2e247468",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_8297753a523b3b107d97dc63",
+      "candidateDigest": "sha256:6e6147d286932e97031fba41774052f8f22e4a58ce4afd3f2b2d11d3485ed801",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/slurm-job/relationships",
+      "title": "Slurm Job — Relationships",
+      "conceptId": "urn:maha:concept:evidence:slurm-job",
+      "routeRole": "relationships",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-slurm-contract",
+          "locator": "packages/maha-witness/src/maha_witness/adapters.py — slurm_metadata",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Normalizes a bounded allowlist of caller-supplied SLURM metadata without executing a scheduler.",
+          "boundary": "Metadata capture does not prove workload correctness, scheduler truth, or reproducibility."
+        },
+        {
+          "sourceId": "slurm-sbatch-t9",
+          "locator": "https://slurm.schedmd.com/sbatch.html — current documentation inspected 2026-09-06; DESCRIPTION; #SBATCH directives; input environment variables; output environment variables; RETURN VALUE",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "scope": "sbatch submits a batch script, assigns a job identifier, applies directive and option precedence, and makes named SLURM_* metadata available to the job environment.",
+          "boundary": "Successful submission is not successful execution, scientific validity, resource availability, or proof that an output came from the named job."
+        },
+        {
+          "sourceId": "local-slurm-witness-adapter-t9",
+          "locator": "repo:packages/maha-witness/src/maha_witness/adapters.py — repository source inspected 2026-09-06; slurm_metadata; allowlisted SLURM_ARRAY_JOB_ID, SLURM_ARRAY_TASK_ID, SLURM_CLUSTER_NAME, SLURM_CPUS_PER_TASK, SLURM_JOB_ID, SLURM_JOB_NAME, SLURM_NNODES and SLURM_JOB_PARTITION",
+          "rightsBasis": "Maha-controlled repository source; headings, symbols, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The adapter normalizes a caller-supplied, allowlisted subset of SLURM metadata into a deterministic witness field set.",
+          "boundary": "The adapter does not submit a job, contact Slurm, capture arbitrary environment values, prove scheduler identity, prove job completion, or establish output correctness."
+        }
+      ],
+      "decisionDigest": "sha256:3444326bcdd543a88a8636d3d79d98b6af4e10e2f5c5dc85b4cab28c32978cc7",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_853410636b70760e8e956d70",
+      "candidateDigest": "sha256:a542a8c2387a022fce47d340227bd8a6edb0eca22b713a9fe6cc4b1970a78961",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/formal-definition/source-contract",
+      "title": "Formal Definition — Source Contract",
+      "conceptId": "urn:maha:concept:evidence:formal-definition",
+      "routeRole": "source-contract",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-formal-definition",
+          "locator": "packages/maha-lean-bridge/src/verifier.ts — verifyAttachments",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Verifies formal-proof attachments against pinned source, manifest, claim, and toolchain identities.",
+          "boundary": "Formal verification does not establish empirical premises or source truth."
+        }
+      ],
+      "decisionDigest": "sha256:61b21790667cad029c0e8e86d6ae65c21b336516dd836b7af39c240a92befb3b",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_86e0bcaf7041b5ca2277e9c2",
+      "candidateDigest": "sha256:61a41b813413704d140179427a649057c5ef1c4f7a8a2450b5d7d460363764e5",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/evidence-graph/relationships",
+      "title": "Evidence Graph — Relationships",
+      "conceptId": "urn:maha:concept:evidence:evidence-graph",
+      "routeRole": "relationships",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "w3c-prov-o-evidence-graph-t9",
+          "locator": "https://www.w3.org/TR/prov-o/ — Recommendation, 30 April 2013; Entities, Activities and Agents; used; wasGeneratedBy; wasDerivedFrom; wasAssociatedWith; wasAttributedTo",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "scope": "PROV-O can represent typed provenance between entities, activities, agents, inputs, outputs, derivations, associations, and attributions.",
+          "boundary": "PROV represents asserted provenance; it does not verify truth, completeness, authentication, rights, causal validity, or passage-level claim support."
+        },
+        {
+          "sourceId": "datacite-schema-evidence-graph-t9",
+          "locator": "https://datacite-metadata-schema.readthedocs.io/en/4.6/ — version 4.6; Identifier; Creator; Contributor; Version; RelatedIdentifier; Rights",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "scope": "Versioned metadata can name research objects, contributors, versions, typed relations, and rights statements.",
+          "boundary": "Metadata fields do not establish source quality, lawful collection, relationship truth, or that one object supports another object’s claim."
+        }
+      ],
+      "decisionDigest": "sha256:b8af11aadb9185b1144915c68b768cec092a3dcd1c76fa806791bb8f74b404df",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_8fa40f42d53edd7287d851b1",
+      "candidateDigest": "sha256:453dd638efe0e539d388c3ec67c718340ab89a79028e1047831adab8d996184d",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/qiskit-circuit/definition",
+      "title": "Qiskit Circuit — Definition",
+      "conceptId": "urn:maha:concept:evidence:qiskit-circuit",
+      "routeRole": "definition",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-qiskit-contract",
+          "locator": "packages/maha-witness/src/maha_witness/adapters.py — qiskit_metadata",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Normalizes bounded circuit and backend metadata with digest and positive-shot checks.",
+          "boundary": "Metadata capture does not establish quantum advantage, hardware fidelity, or scientific validity."
+        }
+      ],
+      "decisionDigest": "sha256:dc238c07850ce19b84d28dca5d30bf3d0362912c33cf0109bf1c23095449c4c4",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_9488f75e84c089bff6e6c5b2",
+      "candidateDigest": "sha256:d664b0a8330f754f7b45c9d45dde627bce0ab4561ec4046888b27db047db5b15",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/argument",
+      "title": "Mental Sovereignty — Argument",
+      "conceptId": "urn:maha:concept:autonomy:mental-sovereignty",
+      "routeRole": "argument",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "maha-principle-mental-sovereignty-t8",
+          "locator": "repo:content/books/the-maha-principle/The-Maha-Principle.md — working authorial manuscript inspected 2026-09-06; The Biological Basis of Liberty; Chapter 2: The Fractured Mind; The Attentional Veto; The Sovereign Self: Internal Authority Without Domination; The Mind Domain: Attentional Sovereignty",
+          "rightsBasis": "Maha-controlled working authorial manuscript; bounded summary and short attributed quotation only. The packet does not imply publication, peer review, consensus, or empirical validation.",
+          "scope": "The manuscript defines sovereignty as capacity for considered choice within one’s own mind and body, distinguishes that interior authority from domination of others, and proposes attention-management practices as an authorial programme.",
+          "boundary": "The term is Mayone Maharajan’s normative synthesis. It is not a diagnosis, legal status, measured neurological construct, proof that the proposed practices work, permission to disregard care, or authority over another person."
+        }
+      ],
+      "decisionDigest": "sha256:bf469e6e9490039f68d300c9aeab4c4c394113b74c233ccaf8040423897fa17c",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_9704953bd90560a6f79f3a17",
+      "candidateDigest": "sha256:e622ee2d45c69b838f0138726de1e8ea552f5ede6b4ba3b85d9aba4d01136707",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/passage-locator/fixture",
+      "title": "Passage Locator — Fixture",
+      "conceptId": "urn:maha:concept:evidence:passage-locator",
+      "routeRole": "fixture",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-locator-contract",
+          "locator": "lib/federation/readiness-tranche-22.ts — verifyLocator",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Binds source, source revision, locator kind, and locator value and refuses substitution.",
+          "boundary": "A matching declaration does not prove passage existence or claim support."
+        }
+      ],
+      "decisionDigest": "sha256:b205e29153ca5e9fe03e9d094fa464660e7ac32c311267036297e633fcec8ddb",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_9761f950f4578a4523a01c57",
+      "candidateDigest": "sha256:613464cae74b8cee22a81c1cf77cae89fe33d5eb5a236119431f08b1fec1dbae",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/scientific-evidence-policy/evidence",
+      "title": "Scientific Evidence Policy — Evidence",
+      "conceptId": "urn:maha:concept:governance:scientific-evidence-policy",
+      "routeRole": "evidence",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-gao-evidence-policy",
+          "locator": "https://www.gao.gov/products/gao-23-105460 — 13 practices across planning, assessing/building, using evidence, and learning",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Describes evidence-building and use practices, evidence types, implementation actions, and observed limits in US federal agencies.",
+          "boundary": "This is US federal management guidance and audit synthesis, not a universal hierarchy of evidence or proof that a policy works."
+        },
+        {
+          "sourceId": "t22-evidence-act",
+          "locator": "https://www.congress.gov/115/statute/STATUTE-132/STATUTE-132-Pg5529.pdf — Title I federal evidence-building activities and Titles II–III data access and confidentiality",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Establishes US federal evaluation, evidence-building, data governance, and confidentiality duties.",
+          "boundary": "This is US federal law; it neither mandates one scientific method nor creates an executable decision rule for arbitrary claims."
+        },
+        {
+          "sourceId": "t22-nasem-reproducibility",
+          "locator": "https://nap.nationalacademies.org/resource/25303/R%26R.pdf — definitions and recommendations",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Separates computational reproducibility from replicability and records why contrary results require contextual assessment rather than automatic reversal.",
+          "boundary": "The report does not rank every study design or decide a specific policy question."
+        }
+      ],
+      "decisionDigest": "sha256:fd8084c3a7e3974b9eac73c9c1f215a2a6973e2839f3fc3371d4ccbdac4512e4",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_9d4c182527b3a1655b044871",
+      "candidateDigest": "sha256:607e27c3b1ef8f78a4afd3ab5a0c823179171fd6b6cf9eb8befd22e49275652c",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/government-mirror/source-contract",
+      "title": "Government Mirror — Source Contract",
+      "conceptId": "urn:maha:concept:evidence:government-mirror",
+      "routeRole": "source-contract",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-government-recovery",
+          "locator": "lib/source-recovery.ts — recoveryRequests",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Represents government-host recovery as one bounded route while preserving identity and version checks.",
+          "boundary": "Government hosting does not make a source authoritative for every claim."
+        },
+        {
+          "sourceId": "govinfo-api-and-urls-t9",
+          "locator": "https://www.govinfo.gov/features/api — living documentation inspected 2026-09-06; API overview; package and granule endpoints; content and metadata downloads; API-key requirement",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "scope": "GovInfo provides programmatic discovery and retrieval for official content, package and granule metadata, and rendition links.",
+          "boundary": "An API response establishes repository identity and supplied metadata only; it does not prove a document supports a claim, is current law, or applies to a specific fact."
+        },
+        {
+          "sourceId": "govinfo-authentication-t9",
+          "locator": "https://www.govinfo.gov/about/authentication — living documentation inspected 2026-09-06; Digital signatures for official PDFs; verification status and document-integrity explanation",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "scope": "Digital signatures can support verification that an official PDF was issued by GPO and has not changed since signing.",
+          "boundary": "Signature verification does not establish that the document is current, applicable, complete for a question, or substantively correct."
+        }
+      ],
+      "decisionDigest": "sha256:82f5c82a6e4c06b21321c44d5ded5d9f6742aea46d056ea64bc7ea26c2ecd0fc",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_9f300acca87befa4e56e4379",
+      "candidateDigest": "sha256:8b700f0a1cb56fce1f3cb9b93609bf051e8e0254485b5a05b797cb178a70f136",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/formal-definition/fixture",
+      "title": "Formal Definition — Fixture",
+      "conceptId": "urn:maha:concept:evidence:formal-definition",
+      "routeRole": "fixture",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-formal-definition",
+          "locator": "packages/maha-lean-bridge/src/verifier.ts — verifyAttachments",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Verifies formal-proof attachments against pinned source, manifest, claim, and toolchain identities.",
+          "boundary": "Formal verification does not establish empirical premises or source truth."
+        }
+      ],
+      "decisionDigest": "sha256:b2fdc52968bbbccd2d17885be5c52c6903b6e3fb5f5e89ab7aedce6938aa7e1d",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_a0e0e32303b98befccc35d04",
+      "candidateDigest": "sha256:af322eb9062025743aa67a1683bb3aad4da0a70615c4cb6845ed2630105c2041",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/scope-matching/machine-record",
+      "title": "Scope Matching — Machine Record",
+      "conceptId": "urn:maha:concept:evidence:scope-matching",
+      "routeRole": "machine-record",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-scope-preflight",
+          "locator": "lib/evidence-preflight.ts — compileEvidencePreflight",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Computes deterministic bounded-language and lexical-coverage review signals.",
+          "boundary": "Lexical overlap is routing evidence only, not semantic support."
+        },
+        {
+          "sourceId": "nist-ai-rmf-scope-t9",
+          "locator": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf — NIST AI 100-1, January 2023; MAP 1.1; MAP 2.2–2.3; MEASURE 2.5",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "scope": "The framework calls for intended context, assumptions, knowledge limits, scientific integrity, and generalization limits to remain explicit.",
+          "boundary": "The voluntary framework does not determine whether a particular source supports a claim or validate a model, inference, result, or deployment."
+        },
+        {
+          "sourceId": "local-evidence-preflight-scope-t9",
+          "locator": "repo:lib/evidence-preflight-contract.ts — repository source inspected 2026-09-06; EvidencePreflightBlocker; exact-locator-missing; claim-scope-overbroad; unsupported-inference-risk; rights-basis-unresolved",
+          "rightsBasis": "Maha-controlled repository source; headings, symbols, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The local preflight separately records source identity, exact locator, evidence status, scope overbreadth, unsupported inference, rights, and access blockers.",
+          "boundary": "The preflight is automated and structural. It does not independently inspect a source, verify a dossier, retain submitted content by default, or establish claim truth."
+        }
+      ],
+      "decisionDigest": "sha256:30a709687b520ffdebe3d42008c179edf4ebb9e659aa4a4e648860a0908abe3c",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_a29a99772fb5e193e27c87a4",
+      "candidateDigest": "sha256:0cfcd517800608522f7d089570efd2c55a952a694e78143ddfd96a316c6599be",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/recursive-institutions/critique",
+      "title": "Recursive Institutions — Critique",
+      "conceptId": "urn:maha:concept:autonomy:recursive-institutions",
+      "routeRole": "critique",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "maha-principle-recursive-institutions-t10",
+          "locator": "repo:content/books/the-maha-principle/The-Maha-Principle.md — working authorial manuscript inspected 2026-09-06; The Fractal: As the Cell, So the State; The Three Scales of Construction; subsidiarity and scale-error discussion; Zone of Exception",
+          "rightsBasis": "Maha-controlled working authorial manuscript; bounded summary only. The packet does not imply publication, peer review, consensus, or empirical validation.",
+          "scope": "The manuscript proposes recurring governance patterns across individual, household, community, and civic scales and argues that competence and authority should remain scale-aware.",
+          "boundary": "“Recursive institutions” is an editorial label, not a settled academic term. The manuscript does not prove structural identity across scales, causal effects, institutional feasibility, or superior outcomes."
+        }
+      ],
+      "decisionDigest": "sha256:3224c114a298d8a98bb519daa19e99946bff3eab11f1858864c6772ee78d8cc3",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_a32d1b7e17d758908749e91d",
+      "candidateDigest": "sha256:5e0c4222d47e49f7d5a5ce954a82e252a1218491417518cdea74d5132547b91b",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/scope-matching/method",
+      "title": "Scope Matching — Method",
+      "conceptId": "urn:maha:concept:evidence:scope-matching",
+      "routeRole": "method",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-scope-preflight",
+          "locator": "lib/evidence-preflight.ts — compileEvidencePreflight",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Computes deterministic bounded-language and lexical-coverage review signals.",
+          "boundary": "Lexical overlap is routing evidence only, not semantic support."
+        },
+        {
+          "sourceId": "nist-ai-rmf-scope-t9",
+          "locator": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf — NIST AI 100-1, January 2023; MAP 1.1; MAP 2.2–2.3; MEASURE 2.5",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "scope": "The framework calls for intended context, assumptions, knowledge limits, scientific integrity, and generalization limits to remain explicit.",
+          "boundary": "The voluntary framework does not determine whether a particular source supports a claim or validate a model, inference, result, or deployment."
+        },
+        {
+          "sourceId": "local-evidence-preflight-scope-t9",
+          "locator": "repo:lib/evidence-preflight-contract.ts — repository source inspected 2026-09-06; EvidencePreflightBlocker; exact-locator-missing; claim-scope-overbroad; unsupported-inference-risk; rights-basis-unresolved",
+          "rightsBasis": "Maha-controlled repository source; headings, symbols, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The local preflight separately records source identity, exact locator, evidence status, scope overbreadth, unsupported inference, rights, and access blockers.",
+          "boundary": "The preflight is automated and structural. It does not independently inspect a source, verify a dossier, retain submitted content by default, or establish claim truth."
+        }
+      ],
+      "decisionDigest": "sha256:01750bfb87f6380e8bb9f4567db1fc67f36da2b914c64e951bd626da4b397e9c",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_ab0a972ba8bc988c8023249c",
+      "candidateDigest": "sha256:f7c80a99ed29e91318896f7c0a355759f2bfe8836dcc70eec690aa5db26e1179",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/government-mirror/protocol",
+      "title": "Government Mirror — Protocol",
+      "conceptId": "urn:maha:concept:evidence:government-mirror",
+      "routeRole": "protocol",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-government-recovery",
+          "locator": "lib/source-recovery.ts — recoveryRequests",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Represents government-host recovery as one bounded route while preserving identity and version checks.",
+          "boundary": "Government hosting does not make a source authoritative for every claim."
+        },
+        {
+          "sourceId": "govinfo-api-and-urls-t9",
+          "locator": "https://www.govinfo.gov/features/api — living documentation inspected 2026-09-06; API overview; package and granule endpoints; content and metadata downloads; API-key requirement",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "scope": "GovInfo provides programmatic discovery and retrieval for official content, package and granule metadata, and rendition links.",
+          "boundary": "An API response establishes repository identity and supplied metadata only; it does not prove a document supports a claim, is current law, or applies to a specific fact."
+        },
+        {
+          "sourceId": "govinfo-authentication-t9",
+          "locator": "https://www.govinfo.gov/about/authentication — living documentation inspected 2026-09-06; Digital signatures for official PDFs; verification status and document-integrity explanation",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "scope": "Digital signatures can support verification that an official PDF was issued by GPO and has not changed since signing.",
+          "boundary": "Signature verification does not establish that the document is current, applicable, complete for a question, or substantively correct."
+        }
+      ],
+      "decisionDigest": "sha256:add691b5c8eaf887ee98198e3af20e0890f4c439651010058685b30c236af821",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_ae7bc329e2cc28e8d0d2c60a",
+      "candidateDigest": "sha256:065f1297ab9348ba099db51c4a3db0fdc3278733c9f2df9926d50da8d1a0099a",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/civilizational-memory/argument",
+      "title": "Civilizational Memory — Argument",
+      "conceptId": "urn:maha:concept:autonomy:civilizational-memory",
+      "routeRole": "argument",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "borrowed-light-civilizational-memory",
+          "locator": "repo:content/books/the-borrowed-light/chapter-5.md; repo:content/books/the-borrowed-light/chapter-6.md — working authorial manuscript inspected 2026-09-06; Chapter 5: The Hard Problem in the Mirror; Chapter 6: The Evidence That Needs No Physics and The Custodians",
+          "rightsBasis": "Maha-controlled authorial manuscript; bounded paraphrase and locator only. The packet does not redistribute the manuscript.",
+          "scope": "The manuscript relates cultural and linguistic inheritance to distributed memory and describes custodians as carrying knowledge beyond an individual mind.",
+          "boundary": "This establishes the author’s framework, not a historical lineage, empirical model of memory, cultural authority, priority, or consensus."
+        }
+      ],
+      "decisionDigest": "sha256:f4aae27a4dba3eab9483370537f1c3c91c333d6a9f6ce00a76f151f69b77d06f",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_bcb46f3d55587a2e0245700c",
+      "candidateDigest": "sha256:85edfb48f2e0247c8d92d5e172d135135355bb95db3da2ac1067966ffb3e0c8a",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/evidence-graph/protocol",
+      "title": "Evidence Graph — Protocol",
+      "conceptId": "urn:maha:concept:evidence:evidence-graph",
+      "routeRole": "protocol",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "w3c-prov-o-evidence-graph-t9",
+          "locator": "https://www.w3.org/TR/prov-o/ — Recommendation, 30 April 2013; Entities, Activities and Agents; used; wasGeneratedBy; wasDerivedFrom; wasAssociatedWith; wasAttributedTo",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "scope": "PROV-O can represent typed provenance between entities, activities, agents, inputs, outputs, derivations, associations, and attributions.",
+          "boundary": "PROV represents asserted provenance; it does not verify truth, completeness, authentication, rights, causal validity, or passage-level claim support."
+        },
+        {
+          "sourceId": "datacite-schema-evidence-graph-t9",
+          "locator": "https://datacite-metadata-schema.readthedocs.io/en/4.6/ — version 4.6; Identifier; Creator; Contributor; Version; RelatedIdentifier; Rights",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "scope": "Versioned metadata can name research objects, contributors, versions, typed relations, and rights statements.",
+          "boundary": "Metadata fields do not establish source quality, lawful collection, relationship truth, or that one object supports another object’s claim."
+        }
+      ],
+      "decisionDigest": "sha256:e9cb21fb9a9ad0d178c5faa9f0be2ed463362fe5e1823cf08b16a60ecd5a186d",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_bcdbc5566d5fda959e54878d",
+      "candidateDigest": "sha256:bde2bc9263ad8f407f766255a03b7e435c934e76ca6c14b418f66d6e00a5f1e9",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/maha-principle/limits",
+      "title": "Maha Principle — Limits",
+      "conceptId": "urn:maha:concept:autonomy:maha-principle",
+      "routeRole": "limits",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "maha-principle-relationship-t10",
+          "locator": "repo:content/books/the-maha-principle/The-Maha-Principle.md — working authorial manuscript inspected 2026-09-06; THE MAHA PRINCIPLE: A MAP OF THE TERRAIN; The Architecture of Renewal; Chapters 5–8; The Fractal: As the Cell, So the State",
+          "rightsBasis": "Maha-controlled working authorial manuscript; bounded summary only. The packet does not imply publication, peer review, consensus, or empirical validation.",
+          "scope": "The manuscript relates its central principle to asymmetric strategy, humane governance, verification under complexity, long-horizon vision, and application across scales.",
+          "boundary": "The manuscript establishes the author’s intended relationships only. It does not prove novelty, empirical validity, adoption, philosophical priority, commercial success, or consensus."
+        }
+      ],
+      "decisionDigest": "sha256:00d6bcbe2c46f52736dc6e0263fadf608bbe5662588ef324b9284a070072a9f8",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_c922de2bf51748f291144262",
+      "candidateDigest": "sha256:b5ee2e0731acd529609f47863819482bb6f5eeeaa10210cc4b950fc9b6968af9",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/recursive-institutions/limits",
+      "title": "Recursive Institutions — Limits",
+      "conceptId": "urn:maha:concept:autonomy:recursive-institutions",
+      "routeRole": "limits",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "maha-principle-recursive-institutions-t10",
+          "locator": "repo:content/books/the-maha-principle/The-Maha-Principle.md — working authorial manuscript inspected 2026-09-06; The Fractal: As the Cell, So the State; The Three Scales of Construction; subsidiarity and scale-error discussion; Zone of Exception",
+          "rightsBasis": "Maha-controlled working authorial manuscript; bounded summary only. The packet does not imply publication, peer review, consensus, or empirical validation.",
+          "scope": "The manuscript proposes recurring governance patterns across individual, household, community, and civic scales and argues that competence and authority should remain scale-aware.",
+          "boundary": "“Recursive institutions” is an editorial label, not a settled academic term. The manuscript does not prove structural identity across scales, causal effects, institutional feasibility, or superior outcomes."
+        }
+      ],
+      "decisionDigest": "sha256:a9bb3de571f9c6e83341dfcdf18d8b6644d256faa785b3ba17941c3f54b36ab9",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_cb383697bfa30b2905e3bce7",
+      "candidateDigest": "sha256:6ee8519d2695110f2e906ec62e5c1e5a2a81ba100fc6f0f744c513b22627710e",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/coordinate-frames/calculation",
+      "title": "Coordinate Frames — Calculation",
+      "conceptId": "urn:maha:concept:interpretation:coordinate-frames",
+      "routeRole": "calculation",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-astrology-workflows",
+          "locator": "lib/astrology-workflow-protocols.ts — ASTROLOGY_WORKFLOW_PROTOCOLS",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Defines bounded reference-frame inputs, deterministic operations, receipts, uncertainty, and refusal conditions.",
+          "boundary": "Reproducible arithmetic does not validate astrology, select a true tradition, or justify interpretive claims."
+        }
+      ],
+      "decisionDigest": "sha256:8b07b12e1ff5f8cdf161c5949b15f402638dacfed32f6fa0b899c182c9dfcb2d",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_cc11596d6192de84154e0982",
+      "candidateDigest": "sha256:f95e2dede301e28cfb32ad33d34f352d05faa409b894a0e9d5f7bc7b348dc5ba",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/claim-extraction/source-contract",
+      "title": "Claim Extraction — Source Contract",
+      "conceptId": "urn:maha:concept:evidence:claim-extraction",
+      "routeRole": "source-contract",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-claim-extraction",
+          "locator": "lib/claim-evidence.ts — assertClaimEvidence",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Validates claim provenance and empirical-evidence axes independently under a typed contract.",
+          "boundary": "The contract records supplied assertions; it does not establish truth, source support, completeness, or semantic entailment."
+        },
+        {
+          "sourceId": "local-claim-evidence-contract",
+          "locator": "repo:lib/claim-evidence.ts — repository source inspected 2026-09-06; assertClaimEvidence; provenance and empirical evidence axes",
+          "rightsBasis": "Maha-controlled repository source; symbols, headings, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The contract represents where a claim came from separately from what empirical evidence, if any, supports it.",
+          "boundary": "A typed evidence label does not make a claim true, sufficient, current, causal, reproducible, or within a source’s actual scope."
+        },
+        {
+          "sourceId": "local-source-alignment-contract-t7",
+          "locator": "repo:lib/frontier-source-alignment.ts — repository source inspected 2026-09-06; source identity, version, locator, claim scope, and boundary axes",
+          "rightsBasis": "Maha-controlled repository source; symbols, headings, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The alignment contract keeps source identity, version relationship, locator completeness, claim scope, and inference boundary as distinct review axes.",
+          "boundary": "The contract detects recorded defects and omissions; it cannot replace inspection or infer support from metadata or topical similarity."
+        }
+      ],
+      "decisionDigest": "sha256:1d4c73156e51d4f4adffebe568014b7579d1aeb3bc27194faef6ba4e6480a438",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_cd31b13a65741431e463116c",
+      "candidateDigest": "sha256:105818d267d3604f6f2062e98f9aa451869e862c5a61e8457c70479c4c822380",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/claim-extraction/machine-record",
+      "title": "Claim Extraction — Machine Record",
+      "conceptId": "urn:maha:concept:evidence:claim-extraction",
+      "routeRole": "machine-record",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-claim-extraction",
+          "locator": "lib/claim-evidence.ts — assertClaimEvidence",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Validates claim provenance and empirical-evidence axes independently under a typed contract.",
+          "boundary": "The contract records supplied assertions; it does not establish truth, source support, completeness, or semantic entailment."
+        },
+        {
+          "sourceId": "local-claim-evidence-contract",
+          "locator": "repo:lib/claim-evidence.ts — repository source inspected 2026-09-06; assertClaimEvidence; provenance and empirical evidence axes",
+          "rightsBasis": "Maha-controlled repository source; symbols, headings, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The contract represents where a claim came from separately from what empirical evidence, if any, supports it.",
+          "boundary": "A typed evidence label does not make a claim true, sufficient, current, causal, reproducible, or within a source’s actual scope."
+        },
+        {
+          "sourceId": "local-source-alignment-contract-t7",
+          "locator": "repo:lib/frontier-source-alignment.ts — repository source inspected 2026-09-06; source identity, version, locator, claim scope, and boundary axes",
+          "rightsBasis": "Maha-controlled repository source; symbols, headings, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The alignment contract keeps source identity, version relationship, locator completeness, claim scope, and inference boundary as distinct review axes.",
+          "boundary": "The contract detects recorded defects and omissions; it cannot replace inspection or infer support from metadata or topical similarity."
+        }
+      ],
+      "decisionDigest": "sha256:5d32c2fdc6c41e71b0b636af0596cd6c53df1553ac89cf964179f7696f25eefb",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_d6d7be21efa0337e98d35cf8",
+      "candidateDigest": "sha256:0e31bd8e17eae22bbeef911911ffc5e1bc8bb3fabc940a5b64f3b7caa8edf84b",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/scope-matching/source-contract",
+      "title": "Scope Matching — Source Contract",
+      "conceptId": "urn:maha:concept:evidence:scope-matching",
+      "routeRole": "source-contract",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-scope-preflight",
+          "locator": "lib/evidence-preflight.ts — compileEvidencePreflight",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Computes deterministic bounded-language and lexical-coverage review signals.",
+          "boundary": "Lexical overlap is routing evidence only, not semantic support."
+        },
+        {
+          "sourceId": "nist-ai-rmf-scope-t9",
+          "locator": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf — NIST AI 100-1, January 2023; MAP 1.1; MAP 2.2–2.3; MEASURE 2.5",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "scope": "The framework calls for intended context, assumptions, knowledge limits, scientific integrity, and generalization limits to remain explicit.",
+          "boundary": "The voluntary framework does not determine whether a particular source supports a claim or validate a model, inference, result, or deployment."
+        },
+        {
+          "sourceId": "local-evidence-preflight-scope-t9",
+          "locator": "repo:lib/evidence-preflight-contract.ts — repository source inspected 2026-09-06; EvidencePreflightBlocker; exact-locator-missing; claim-scope-overbroad; unsupported-inference-risk; rights-basis-unresolved",
+          "rightsBasis": "Maha-controlled repository source; headings, symbols, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The local preflight separately records source identity, exact locator, evidence status, scope overbreadth, unsupported inference, rights, and access blockers.",
+          "boundary": "The preflight is automated and structural. It does not independently inspect a source, verify a dossier, retain submitted content by default, or establish claim truth."
+        }
+      ],
+      "decisionDigest": "sha256:8c32739195fd69955418c7a5f9d25ac58f3884b243ee94a0479e3d40bde93b74",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_d88e00d8341faec1ecb41603",
+      "candidateDigest": "sha256:18984c18f40dd84f9adf12ed4fb50577ac095a52561343192646fc21df46f33e",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/abstract-only-evidence/failure-mode",
+      "title": "Abstract Only Evidence — Failure Mode",
+      "conceptId": "urn:maha:concept:evidence:abstract-only-evidence",
+      "routeRole": "failure-mode",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-abstract-boundary",
+          "locator": "lib/source-recovery.ts — validateObservation",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Preserves abstract-only inspection as a shallower state than section or full-text inspection.",
+          "boundary": "An abstract cannot support section-specific detail."
+        },
+        {
+          "sourceId": "local-source-reference-gate",
+          "locator": "repo:lib/source-evidence-reference.ts — repository source inspected 2026-09-06; SourceInspectionDepth; evaluateSourcePage; section-or-full-text eligibility",
+          "rightsBasis": "Maha-controlled repository source; symbols, headings, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The contract records inspection depth and permits an explanatory source page only when every bound record is current, released, subject-aligned, and inspected at section or full-text depth.",
+          "boundary": "The gate enforces recorded state but cannot prove that the human inspection was competent, exhaustive, unbiased, or correctly transcribed."
+        }
+      ],
+      "decisionDigest": "sha256:6d8e64620603be4e9218b8170c3756e4774598c10dc9d4ac55e7caa30f3adb93",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_d9bdecd2534da2685bdfc3dc",
+      "candidateDigest": "sha256:79baf9f9973a3b2ff588c85850534d803ad3ea989fd8019c4fa1d5bfde12f363",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/contradiction-search/protocol",
+      "title": "Contradiction Search — Protocol",
+      "conceptId": "urn:maha:concept:evidence:contradiction-search",
+      "routeRole": "protocol",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-contradiction-contract",
+          "locator": "lib/federation/readiness-tranche-21.ts — classifyLiterature",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Compares located observations only at matching claim, population, and outcome scope.",
+          "boundary": "Directional conflict does not adjudicate study quality or truth."
+        }
+      ],
+      "decisionDigest": "sha256:8d0990c1d1aeb9cbeaa92acb8ce1213979cc79028e712d0ebc6ca093cf51ded4",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_de62a02fe8834f311e5f701d",
+      "candidateDigest": "sha256:bcf635602c47143c10fc0e88239e1195f2445e4f382127497dad8eb08229efed",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/evidence-graph/machine-record",
+      "title": "Evidence Graph — Machine Record",
+      "conceptId": "urn:maha:concept:evidence:evidence-graph",
+      "routeRole": "machine-record",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "w3c-prov-o-evidence-graph-t9",
+          "locator": "https://www.w3.org/TR/prov-o/ — Recommendation, 30 April 2013; Entities, Activities and Agents; used; wasGeneratedBy; wasDerivedFrom; wasAssociatedWith; wasAttributedTo",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "scope": "PROV-O can represent typed provenance between entities, activities, agents, inputs, outputs, derivations, associations, and attributions.",
+          "boundary": "PROV represents asserted provenance; it does not verify truth, completeness, authentication, rights, causal validity, or passage-level claim support."
+        },
+        {
+          "sourceId": "datacite-schema-evidence-graph-t9",
+          "locator": "https://datacite-metadata-schema.readthedocs.io/en/4.6/ — version 4.6; Identifier; Creator; Contributor; Version; RelatedIdentifier; Rights",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "scope": "Versioned metadata can name research objects, contributors, versions, typed relations, and rights statements.",
+          "boundary": "Metadata fields do not establish source quality, lawful collection, relationship truth, or that one object supports another object’s claim."
+        }
+      ],
+      "decisionDigest": "sha256:1fb10c5686ee22f17745ac995681fca5ec6d54e609fb8b4e7eb2bc68f5a51b4a",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_df63ff03ee9ecebe4a8904fc",
+      "candidateDigest": "sha256:2151f72a88f14dce210b9ca2d962a78dfb18fe91d57f79a1d490a45364241de4",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/slurm-job/protocol",
+      "title": "Slurm Job — Protocol",
+      "conceptId": "urn:maha:concept:evidence:slurm-job",
+      "routeRole": "protocol",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-slurm-contract",
+          "locator": "packages/maha-witness/src/maha_witness/adapters.py — slurm_metadata",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Normalizes a bounded allowlist of caller-supplied SLURM metadata without executing a scheduler.",
+          "boundary": "Metadata capture does not prove workload correctness, scheduler truth, or reproducibility."
+        },
+        {
+          "sourceId": "slurm-sbatch-t9",
+          "locator": "https://slurm.schedmd.com/sbatch.html — current documentation inspected 2026-09-06; DESCRIPTION; #SBATCH directives; input environment variables; output environment variables; RETURN VALUE",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "scope": "sbatch submits a batch script, assigns a job identifier, applies directive and option precedence, and makes named SLURM_* metadata available to the job environment.",
+          "boundary": "Successful submission is not successful execution, scientific validity, resource availability, or proof that an output came from the named job."
+        },
+        {
+          "sourceId": "local-slurm-witness-adapter-t9",
+          "locator": "repo:packages/maha-witness/src/maha_witness/adapters.py — repository source inspected 2026-09-06; slurm_metadata; allowlisted SLURM_ARRAY_JOB_ID, SLURM_ARRAY_TASK_ID, SLURM_CLUSTER_NAME, SLURM_CPUS_PER_TASK, SLURM_JOB_ID, SLURM_JOB_NAME, SLURM_NNODES and SLURM_JOB_PARTITION",
+          "rightsBasis": "Maha-controlled repository source; headings, symbols, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The adapter normalizes a caller-supplied, allowlisted subset of SLURM metadata into a deterministic witness field set.",
+          "boundary": "The adapter does not submit a job, contact Slurm, capture arbitrary environment values, prove scheduler identity, prove job completion, or establish output correctness."
+        }
+      ],
+      "decisionDigest": "sha256:c43517ceddbfa5865042af9f0bcbc8dbde57e1415e39ee6cd44c3057bd0a3bcf",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_dfef6927eb87261861490d26",
+      "candidateDigest": "sha256:e8f022cccfb13fc7bd0d4a36a1665fc0989a828d26658d1e542c5a01da6d8ea8",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/contradiction-search/fixture",
+      "title": "Contradiction Search — Fixture",
+      "conceptId": "urn:maha:concept:evidence:contradiction-search",
+      "routeRole": "fixture",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-contradiction-contract",
+          "locator": "lib/federation/readiness-tranche-21.ts — classifyLiterature",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Compares located observations only at matching claim, population, and outcome scope.",
+          "boundary": "Directional conflict does not adjudicate study quality or truth."
+        }
+      ],
+      "decisionDigest": "sha256:283c57cd697f49e73a592773e703332aca659ffebbf1cf47619d2a40bedd76fb",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_e0a648e12cf5f62cfcfc1dae",
+      "candidateDigest": "sha256:5e746afe063c3fe3957e1c530055394a506ab57b520c0fca92653352cefa127f",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/passage-locator/source-contract",
+      "title": "Passage Locator — Source Contract",
+      "conceptId": "urn:maha:concept:evidence:passage-locator",
+      "routeRole": "source-contract",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-locator-contract",
+          "locator": "lib/federation/readiness-tranche-22.ts — verifyLocator",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Binds source, source revision, locator kind, and locator value and refuses substitution.",
+          "boundary": "A matching declaration does not prove passage existence or claim support."
+        }
+      ],
+      "decisionDigest": "sha256:117dd932d2aa98b62f3093b479bcc16d5de8b7ecba6c14e328b21ca42fac3dc6",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_e48583ff17024acca121776f",
+      "candidateDigest": "sha256:91885be8014c0bfaaac766fa3c0b4633c0e0cb56c68b02e77b5f856db27173e6",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/interpretation-boundaries/input-contract",
+      "title": "Interpretation Boundaries — Input Contract",
+      "conceptId": "urn:maha:concept:interpretation:interpretation-boundaries",
+      "routeRole": "input-contract",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-astrology-workflows",
+          "locator": "lib/astrology-workflow-protocols.ts — ASTROLOGY_WORKFLOW_PROTOCOLS",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Defines bounded reference-frame inputs, deterministic operations, receipts, uncertainty, and refusal conditions.",
+          "boundary": "Reproducible arithmetic does not validate astrology, select a true tradition, or justify interpretive claims."
+        }
+      ],
+      "decisionDigest": "sha256:2e1151ff14f08976f357cc92712cf557b4beb2b33e8ae51dee15b279f256a86d",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_e670c19ba82bb66e90310b79",
+      "candidateDigest": "sha256:4ea32cfd87dfaec39537d65a46707491b22382aa73c6aa78b003e8b783b71ab7",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/slurm-job/source-contract",
+      "title": "Slurm Job — Source Contract",
+      "conceptId": "urn:maha:concept:evidence:slurm-job",
+      "routeRole": "source-contract",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-slurm-contract",
+          "locator": "packages/maha-witness/src/maha_witness/adapters.py — slurm_metadata",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Normalizes a bounded allowlist of caller-supplied SLURM metadata without executing a scheduler.",
+          "boundary": "Metadata capture does not prove workload correctness, scheduler truth, or reproducibility."
+        },
+        {
+          "sourceId": "slurm-sbatch-t9",
+          "locator": "https://slurm.schedmd.com/sbatch.html — current documentation inspected 2026-09-06; DESCRIPTION; #SBATCH directives; input environment variables; output environment variables; RETURN VALUE",
+          "rightsBasis": "Publicly accessible source; link and bounded paraphrase only. No source text is redistributed.",
+          "scope": "sbatch submits a batch script, assigns a job identifier, applies directive and option precedence, and makes named SLURM_* metadata available to the job environment.",
+          "boundary": "Successful submission is not successful execution, scientific validity, resource availability, or proof that an output came from the named job."
+        },
+        {
+          "sourceId": "local-slurm-witness-adapter-t9",
+          "locator": "repo:packages/maha-witness/src/maha_witness/adapters.py — repository source inspected 2026-09-06; slurm_metadata; allowlisted SLURM_ARRAY_JOB_ID, SLURM_ARRAY_TASK_ID, SLURM_CLUSTER_NAME, SLURM_CPUS_PER_TASK, SLURM_JOB_ID, SLURM_JOB_NAME, SLURM_NNODES and SLURM_JOB_PARTITION",
+          "rightsBasis": "Maha-controlled repository source; headings, symbols, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The adapter normalizes a caller-supplied, allowlisted subset of SLURM metadata into a deterministic witness field set.",
+          "boundary": "The adapter does not submit a job, contact Slurm, capture arbitrary environment values, prove scheduler identity, prove job completion, or establish output correctness."
+        }
+      ],
+      "decisionDigest": "sha256:b3188ca13b6c8baad14cd0da4270db575b5ae90945ad886d09333691c393b6bd",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_e71bcde308737c6689e3a98f",
+      "candidateDigest": "sha256:d5407a95941be19dbeef5c811325cf763ede41d120000131f710fe3db1ec6c3d",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/scope-matching/protocol",
+      "title": "Scope Matching — Protocol",
+      "conceptId": "urn:maha:concept:evidence:scope-matching",
+      "routeRole": "protocol",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-scope-preflight",
+          "locator": "lib/evidence-preflight.ts — compileEvidencePreflight",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Computes deterministic bounded-language and lexical-coverage review signals.",
+          "boundary": "Lexical overlap is routing evidence only, not semantic support."
+        },
+        {
+          "sourceId": "nist-ai-rmf-scope-t9",
+          "locator": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf — NIST AI 100-1, January 2023; MAP 1.1; MAP 2.2–2.3; MEASURE 2.5",
+          "rightsBasis": "Official government source; link and bounded paraphrase only. No full text or time-sensitive operational value is retained.",
+          "scope": "The framework calls for intended context, assumptions, knowledge limits, scientific integrity, and generalization limits to remain explicit.",
+          "boundary": "The voluntary framework does not determine whether a particular source supports a claim or validate a model, inference, result, or deployment."
+        },
+        {
+          "sourceId": "local-evidence-preflight-scope-t9",
+          "locator": "repo:lib/evidence-preflight-contract.ts — repository source inspected 2026-09-06; EvidencePreflightBlocker; exact-locator-missing; claim-scope-overbroad; unsupported-inference-risk; rights-basis-unresolved",
+          "rightsBasis": "Maha-controlled repository source; headings, symbols, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The local preflight separately records source identity, exact locator, evidence status, scope overbreadth, unsupported inference, rights, and access blockers.",
+          "boundary": "The preflight is automated and structural. It does not independently inspect a source, verify a dossier, retain submitted content by default, or establish claim truth."
+        }
+      ],
+      "decisionDigest": "sha256:0479551a8076442403cd5c268e6185eded59ff0c56722f2647d973e44cdec64d",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_f1b32db6ef6284debbae452c",
+      "candidateDigest": "sha256:99bdead0c7cbc09f0f0e25d4f9a5ab5bffe84f47351bf38038ca77b36ab0592e",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/contradiction-search/method",
+      "title": "Contradiction Search — Method",
+      "conceptId": "urn:maha:concept:evidence:contradiction-search",
+      "routeRole": "method",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-contradiction-contract",
+          "locator": "lib/federation/readiness-tranche-21.ts — classifyLiterature",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Compares located observations only at matching claim, population, and outcome scope.",
+          "boundary": "Directional conflict does not adjudicate study quality or truth."
+        }
+      ],
+      "decisionDigest": "sha256:eb7a024dd88e6effb49dae2fa726c142ccfa0c896dbda95fb8ebd1b2f8922391",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_f5f517b4ec8b88872d241f43",
+      "candidateDigest": "sha256:71142416d9f8fb7c7b3fb1dbc8580c2b61131053b367c0f8c8ceccf93153a12a",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/claim-extraction/protocol",
+      "title": "Claim Extraction — Protocol",
+      "conceptId": "urn:maha:concept:evidence:claim-extraction",
+      "routeRole": "protocol",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-claim-extraction",
+          "locator": "lib/claim-evidence.ts — assertClaimEvidence",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Validates claim provenance and empirical-evidence axes independently under a typed contract.",
+          "boundary": "The contract records supplied assertions; it does not establish truth, source support, completeness, or semantic entailment."
+        },
+        {
+          "sourceId": "local-claim-evidence-contract",
+          "locator": "repo:lib/claim-evidence.ts — repository source inspected 2026-09-06; assertClaimEvidence; provenance and empirical evidence axes",
+          "rightsBasis": "Maha-controlled repository source; symbols, headings, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The contract represents where a claim came from separately from what empirical evidence, if any, supports it.",
+          "boundary": "A typed evidence label does not make a claim true, sufficient, current, causal, reproducible, or within a source’s actual scope."
+        },
+        {
+          "sourceId": "local-source-alignment-contract-t7",
+          "locator": "repo:lib/frontier-source-alignment.ts — repository source inspected 2026-09-06; source identity, version, locator, claim scope, and boundary axes",
+          "rightsBasis": "Maha-controlled repository source; symbols, headings, and file identity only. No credential, customer value, runtime payload, private input, or receipt body is retained.",
+          "scope": "The alignment contract keeps source identity, version relationship, locator completeness, claim scope, and inference boundary as distinct review axes.",
+          "boundary": "The contract detects recorded defects and omissions; it cannot replace inspection or infer support from metadata or topical similarity."
+        }
+      ],
+      "decisionDigest": "sha256:a6d19a125620f51f7af2a5eba81a3491d2c11d06816b6916dd8bd10f5d82a699",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_fa42411b4ee7fffef82e597a",
+      "candidateDigest": "sha256:652110e4ab7498e9de2e1b754d660d229fa0a3e1b07f456c0a62535c3dc7e2f1",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/passage-locator/relationships",
+      "title": "Passage Locator — Relationships",
+      "conceptId": "urn:maha:concept:evidence:passage-locator",
+      "routeRole": "relationships",
+      "requiredSections": [
+        "Direct answer",
+        "Source or implementation",
+        "Method",
+        "Limits and uncertainty",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t23-locator-contract",
+          "locator": "lib/federation/readiness-tranche-22.ts — verifyLocator",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Binds source, source revision, locator kind, and locator value and refuses substitution.",
+          "boundary": "A matching declaration does not prove passage existence or claim support."
+        }
+      ],
+      "decisionDigest": "sha256:6ce5b11de19ba2d9bc68ead98aa6e0866a4e36f168b4ffdc1ccc05a6c014e1a0",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    }
+  ],
+  "provenanceDigest": "sha256:0d8b590aac16ad051cebe4edc0b9fbfe82ed09f41e6c5e452fa5380a5f8775d7"
+}

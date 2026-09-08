@@ -1,0 +1,1373 @@
+{
+  "schemaVersion": "maha-federation-tranche-eleven-mythology-page-specifications/1.0",
+  "decisionManifestDigest": "sha256:8b0c82346adba214a6178250ec285e4cfe790489c4b3014a6668f812d9226a40",
+  "rule": "Only evidence-ready candidates receive substantial-page specifications. A specification is not a generated route and cannot enter a build before later review and release gates.",
+  "counts": {
+    "specifications": 16,
+    "boundedQuestions": 80,
+    "excludedNonReady": 84
+  },
+  "specifications": [
+    {
+      "candidateId": "cand_6f639fc13d34f2517769d263",
+      "candidateDigest": "sha256:359b579d54da7f11f94f3c78b177d6e50a208d7eaa0ede8129d710dcd14a2d0b",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/inanna-ishtar/city-and-cult",
+      "title": "Inanna and Ishtar — City and cult",
+      "topic": "inanna-ishtar",
+      "routeRole": "city-and-cult",
+      "answerContract": "Answer only the city and cult question for Inanna and Ishtar inside the manual boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Bind each function, temple, city, and cult statement to its period and evidence; Sumerian and Akkadian names are not flattened into timeless synonyms.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Identity, translation, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Inanna and Ishtar under the city and cult lens?",
+        "Which exact source, edition, passage, place, or period controls this answer about inanna-ishtar?",
+        "Which translation, identity, cult, or reception distinction must remain explicit?",
+        "What does resemblance or later reception fail to establish?",
+        "Which source or rights change would require this answer to be reviewed again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "oracc-reuse-policy",
+          "url": "https://oracc.museum.upenn.edu/doc/help/visitingoracc/reusingoracc/index.html",
+          "locator": "Default licence, project-specific exceptions, images and PDFs, attribution and stable URIs",
+          "rightsStatus": "cc-by-sa-3.0",
+          "scope": "Governs reuse of Oracc-authored text and data subject to project and object-level exceptions.",
+          "boundary": "The default licence cannot be transferred to museum images, linked PDFs, or separately credited material."
+        },
+        {
+          "sourceId": "oracc-inanna-ishtar",
+          "url": "https://oracc.museum.upenn.edu/amgg/listofdeities/inanaitar/index.html",
+          "locator": "Functions; Divine Genealogy and Syncretisms; Cult Places; Time Periods; Name and Spellings",
+          "rightsStatus": "cc-by-sa-3.0",
+          "scope": "Provides a named scholarly overview of functions, name relationships, historical attestation, and cult places for Inana/Ištar.",
+          "boundary": "The overview is secondary scholarship. It does not make every literary episode, period, city, image, or similarly named deity interchangeable with inanna-ishtar."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_6f639fc13d34f2517769d263",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/inanna-ishtar/city-and-cult",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "publicationDependencyGap": null,
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_c12a652f30bf2d5202f2b112",
+      "candidateDigest": "sha256:0e720c5ae1d95c16f541672d8c4c01b6f346d5cc6eb700cd0481a042b6edddac",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/enlil/city-and-cult",
+      "title": "Enlil — City and cult",
+      "topic": "enlil",
+      "routeRole": "city-and-cult",
+      "answerContract": "Answer only the city and cult question for Enlil inside the manual boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Bind each function, temple, city, and cult statement to its period and evidence; Sumerian and Akkadian names are not flattened into timeless synonyms.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Identity, translation, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Enlil under the city and cult lens?",
+        "Which exact source, edition, passage, place, or period controls this answer about enlil?",
+        "Which translation, identity, cult, or reception distinction must remain explicit?",
+        "What does resemblance or later reception fail to establish?",
+        "Which source or rights change would require this answer to be reviewed again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "oracc-reuse-policy",
+          "url": "https://oracc.museum.upenn.edu/doc/help/visitingoracc/reusingoracc/index.html",
+          "locator": "Default licence, project-specific exceptions, images and PDFs, attribution and stable URIs",
+          "rightsStatus": "cc-by-sa-3.0",
+          "scope": "Governs reuse of Oracc-authored text and data subject to project and object-level exceptions.",
+          "boundary": "The default licence cannot be transferred to museum images, linked PDFs, or separately credited material."
+        },
+        {
+          "sourceId": "oracc-enlil",
+          "url": "https://oracc.museum.upenn.edu/amgg/listofdeities/enlil/index.html",
+          "locator": "Functions; Divine Genealogy and Syncretisms; Cult Places; Time Periods; Name and Spellings",
+          "rightsStatus": "cc-by-sa-3.0",
+          "scope": "Provides a named scholarly overview of functions, name relationships, historical attestation, and cult places for Enlil/Ellil.",
+          "boundary": "The overview is secondary scholarship. It does not make every literary episode, period, city, image, or similarly named deity interchangeable with enlil."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_c12a652f30bf2d5202f2b112",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/enlil/city-and-cult",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "publicationDependencyGap": null,
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_1d126d0568ac2aedf1b7dd43",
+      "candidateDigest": "sha256:4e3d44f89517280887758687c09c4ae3d2d214a08131c7fa15a0e7a68f2495ed",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/enki-ea/city-and-cult",
+      "title": "Enki and Ea — City and cult",
+      "topic": "enki-ea",
+      "routeRole": "city-and-cult",
+      "answerContract": "Answer only the city and cult question for Enki and Ea inside the manual boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Bind each function, temple, city, and cult statement to its period and evidence; Sumerian and Akkadian names are not flattened into timeless synonyms.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Identity, translation, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Enki and Ea under the city and cult lens?",
+        "Which exact source, edition, passage, place, or period controls this answer about enki-ea?",
+        "Which translation, identity, cult, or reception distinction must remain explicit?",
+        "What does resemblance or later reception fail to establish?",
+        "Which source or rights change would require this answer to be reviewed again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "oracc-reuse-policy",
+          "url": "https://oracc.museum.upenn.edu/doc/help/visitingoracc/reusingoracc/index.html",
+          "locator": "Default licence, project-specific exceptions, images and PDFs, attribution and stable URIs",
+          "rightsStatus": "cc-by-sa-3.0",
+          "scope": "Governs reuse of Oracc-authored text and data subject to project and object-level exceptions.",
+          "boundary": "The default licence cannot be transferred to museum images, linked PDFs, or separately credited material."
+        },
+        {
+          "sourceId": "oracc-enki-ea",
+          "url": "https://oracc.museum.upenn.edu/amgg/listofdeities/enki/index.html",
+          "locator": "Functions; Divine Genealogy and Syncretisms; Cult Places; Time Periods; Name and Spellings",
+          "rightsStatus": "cc-by-sa-3.0",
+          "scope": "Provides a named scholarly overview of functions, name relationships, historical attestation, and cult places for Enki/Ea.",
+          "boundary": "The overview is secondary scholarship. It does not make every literary episode, period, city, image, or similarly named deity interchangeable with enki-ea."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_1d126d0568ac2aedf1b7dd43",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/enki-ea/city-and-cult",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "publicationDependencyGap": null,
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_2cdaf277b5b5b43df45a8810",
+      "candidateDigest": "sha256:2b28b6bdea4453e04ef3c5228d6be38de5799ec971e55d7f7730f0e8d886e3d4",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/marduk/city-and-cult",
+      "title": "Marduk — City and cult",
+      "topic": "marduk",
+      "routeRole": "city-and-cult",
+      "answerContract": "Answer only the city and cult question for Marduk inside the manual boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Bind each function, temple, city, and cult statement to its period and evidence; Sumerian and Akkadian names are not flattened into timeless synonyms.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Identity, translation, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Marduk under the city and cult lens?",
+        "Which exact source, edition, passage, place, or period controls this answer about marduk?",
+        "Which translation, identity, cult, or reception distinction must remain explicit?",
+        "What does resemblance or later reception fail to establish?",
+        "Which source or rights change would require this answer to be reviewed again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "oracc-reuse-policy",
+          "url": "https://oracc.museum.upenn.edu/doc/help/visitingoracc/reusingoracc/index.html",
+          "locator": "Default licence, project-specific exceptions, images and PDFs, attribution and stable URIs",
+          "rightsStatus": "cc-by-sa-3.0",
+          "scope": "Governs reuse of Oracc-authored text and data subject to project and object-level exceptions.",
+          "boundary": "The default licence cannot be transferred to museum images, linked PDFs, or separately credited material."
+        },
+        {
+          "sourceId": "oracc-marduk",
+          "url": "https://oracc.museum.upenn.edu/amgg/listofdeities/marduk/index.html",
+          "locator": "Functions; Divine Genealogy and Syncretisms; Cult Places; Time Periods; Name and Spellings",
+          "rightsStatus": "cc-by-sa-3.0",
+          "scope": "Provides a named scholarly overview of functions, name relationships, historical attestation, and cult places for Marduk.",
+          "boundary": "The overview is secondary scholarship. It does not make every literary episode, period, city, image, or similarly named deity interchangeable with marduk."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_2cdaf277b5b5b43df45a8810",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/marduk/city-and-cult",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "publicationDependencyGap": null,
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_af2a13c82565d94f57f8118d",
+      "candidateDigest": "sha256:a492c7fc058e36f1b31548b101a335f4f4d322dffd18c442d999ea3c8788f30c",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/shamash-utu/city-and-cult",
+      "title": "Shamash and Utu — City and cult",
+      "topic": "shamash-utu",
+      "routeRole": "city-and-cult",
+      "answerContract": "Answer only the city and cult question for Shamash and Utu inside the manual boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Bind each function, temple, city, and cult statement to its period and evidence; Sumerian and Akkadian names are not flattened into timeless synonyms.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Identity, translation, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Shamash and Utu under the city and cult lens?",
+        "Which exact source, edition, passage, place, or period controls this answer about shamash-utu?",
+        "Which translation, identity, cult, or reception distinction must remain explicit?",
+        "What does resemblance or later reception fail to establish?",
+        "Which source or rights change would require this answer to be reviewed again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "oracc-reuse-policy",
+          "url": "https://oracc.museum.upenn.edu/doc/help/visitingoracc/reusingoracc/index.html",
+          "locator": "Default licence, project-specific exceptions, images and PDFs, attribution and stable URIs",
+          "rightsStatus": "cc-by-sa-3.0",
+          "scope": "Governs reuse of Oracc-authored text and data subject to project and object-level exceptions.",
+          "boundary": "The default licence cannot be transferred to museum images, linked PDFs, or separately credited material."
+        },
+        {
+          "sourceId": "oracc-utu-shamash",
+          "url": "https://oracc.museum.upenn.edu/amgg/listofdeities/utu/index.html",
+          "locator": "Functions; Divine Genealogy and Syncretisms; Cult Places; Time Periods; Name and Spellings",
+          "rightsStatus": "cc-by-sa-3.0",
+          "scope": "Provides a named scholarly overview of functions, name relationships, historical attestation, and cult places for Utu/Šamaš.",
+          "boundary": "The overview is secondary scholarship. It does not make every literary episode, period, city, image, or similarly named deity interchangeable with shamash-utu."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_af2a13c82565d94f57f8118d",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/shamash-utu/city-and-cult",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "publicationDependencyGap": null,
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_73ad83b8a27718dd469130d4",
+      "candidateDigest": "sha256:06fff22eb967b62574dfa9db73b9c19cc8ebac7e3c27f2b9a3530257b287986a",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/sin-nanna/city-and-cult",
+      "title": "Sîn and Nanna — City and cult",
+      "topic": "sin-nanna",
+      "routeRole": "city-and-cult",
+      "answerContract": "Answer only the city and cult question for Sîn and Nanna inside the manual boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Bind each function, temple, city, and cult statement to its period and evidence; Sumerian and Akkadian names are not flattened into timeless synonyms.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Identity, translation, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Sîn and Nanna under the city and cult lens?",
+        "Which exact source, edition, passage, place, or period controls this answer about sin-nanna?",
+        "Which translation, identity, cult, or reception distinction must remain explicit?",
+        "What does resemblance or later reception fail to establish?",
+        "Which source or rights change would require this answer to be reviewed again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "oracc-reuse-policy",
+          "url": "https://oracc.museum.upenn.edu/doc/help/visitingoracc/reusingoracc/index.html",
+          "locator": "Default licence, project-specific exceptions, images and PDFs, attribution and stable URIs",
+          "rightsStatus": "cc-by-sa-3.0",
+          "scope": "Governs reuse of Oracc-authored text and data subject to project and object-level exceptions.",
+          "boundary": "The default licence cannot be transferred to museum images, linked PDFs, or separately credited material."
+        },
+        {
+          "sourceId": "oracc-nanna-sin",
+          "url": "https://oracc.museum.upenn.edu/amgg/listofdeities/nannasuen/index.html",
+          "locator": "Functions; Divine Genealogy and Syncretisms; Cult Places; Time Periods; Name and Spellings",
+          "rightsStatus": "cc-by-sa-3.0",
+          "scope": "Provides a named scholarly overview of functions, name relationships, historical attestation, and cult places for Nanna/Suen/Sin.",
+          "boundary": "The overview is secondary scholarship. It does not make every literary episode, period, city, image, or similarly named deity interchangeable with sin-nanna."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_73ad83b8a27718dd469130d4",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/sin-nanna/city-and-cult",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "publicationDependencyGap": null,
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_c39d66e8eddc1c52e5deece5",
+      "candidateDigest": "sha256:eafff455b0f934c0975d56a9534a78769eb60e672b155bc9e939f3279e3a451a",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/ereshkigal/city-and-cult",
+      "title": "Ereshkigal — City and cult",
+      "topic": "ereshkigal",
+      "routeRole": "city-and-cult",
+      "answerContract": "Answer only the city and cult question for Ereshkigal inside the manual boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Bind each function, temple, city, and cult statement to its period and evidence; Sumerian and Akkadian names are not flattened into timeless synonyms.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Identity, translation, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Ereshkigal under the city and cult lens?",
+        "Which exact source, edition, passage, place, or period controls this answer about ereshkigal?",
+        "Which translation, identity, cult, or reception distinction must remain explicit?",
+        "What does resemblance or later reception fail to establish?",
+        "Which source or rights change would require this answer to be reviewed again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "oracc-reuse-policy",
+          "url": "https://oracc.museum.upenn.edu/doc/help/visitingoracc/reusingoracc/index.html",
+          "locator": "Default licence, project-specific exceptions, images and PDFs, attribution and stable URIs",
+          "rightsStatus": "cc-by-sa-3.0",
+          "scope": "Governs reuse of Oracc-authored text and data subject to project and object-level exceptions.",
+          "boundary": "The default licence cannot be transferred to museum images, linked PDFs, or separately credited material."
+        },
+        {
+          "sourceId": "oracc-ereshkigal",
+          "url": "https://oracc.museum.upenn.edu/amgg/listofdeities/erekigal/",
+          "locator": "Functions; Divine Genealogy and Syncretisms; Cult Places; Time Periods; Name and Spellings",
+          "rightsStatus": "cc-by-sa-3.0",
+          "scope": "Provides a named scholarly overview of functions, name relationships, historical attestation, and cult places for Ereškigal.",
+          "boundary": "The overview is secondary scholarship. It does not make every literary episode, period, city, image, or similarly named deity interchangeable with ereshkigal."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_c39d66e8eddc1c52e5deece5",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/ereshkigal/city-and-cult",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "publicationDependencyGap": null,
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_f60f5cf053807742ca11de26",
+      "candidateDigest": "sha256:74c0fc3f5b9a9a620352ff8dbee7d3d8df8166591042872eee861af844752001",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/nergal/city-and-cult",
+      "title": "Nergal — City and cult",
+      "topic": "nergal",
+      "routeRole": "city-and-cult",
+      "answerContract": "Answer only the city and cult question for Nergal inside the manual boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Bind each function, temple, city, and cult statement to its period and evidence; Sumerian and Akkadian names are not flattened into timeless synonyms.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Identity, translation, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Nergal under the city and cult lens?",
+        "Which exact source, edition, passage, place, or period controls this answer about nergal?",
+        "Which translation, identity, cult, or reception distinction must remain explicit?",
+        "What does resemblance or later reception fail to establish?",
+        "Which source or rights change would require this answer to be reviewed again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "oracc-reuse-policy",
+          "url": "https://oracc.museum.upenn.edu/doc/help/visitingoracc/reusingoracc/index.html",
+          "locator": "Default licence, project-specific exceptions, images and PDFs, attribution and stable URIs",
+          "rightsStatus": "cc-by-sa-3.0",
+          "scope": "Governs reuse of Oracc-authored text and data subject to project and object-level exceptions.",
+          "boundary": "The default licence cannot be transferred to museum images, linked PDFs, or separately credited material."
+        },
+        {
+          "sourceId": "oracc-nergal",
+          "url": "https://oracc.museum.upenn.edu/amgg/Listofdeities/Nergal/index.html",
+          "locator": "Functions; Divine Genealogy and Syncretisms; Cult Places; Time Periods; Name and Spellings",
+          "rightsStatus": "cc-by-sa-3.0",
+          "scope": "Provides a named scholarly overview of functions, name relationships, historical attestation, and cult places for Nergal.",
+          "boundary": "The overview is secondary scholarship. It does not make every literary episode, period, city, image, or similarly named deity interchangeable with nergal."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_f60f5cf053807742ca11de26",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/nergal/city-and-cult",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "publicationDependencyGap": null,
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_a4ed1962587a84e012fea9fa",
+      "candidateDigest": "sha256:28f37b435637a83f71a0d8cde226d99911c29b459a6cdbbb2c77c432839e5aa0",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/indra/vedic-text",
+      "title": "Indra — Vedic text",
+      "topic": "indra",
+      "routeRole": "vedic-text",
+      "answerContract": "Answer only the vedic text question for Indra inside the manual boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "State only what the identified Vedic hymn and named translation render; one hymn cannot establish a complete Vedic profile or later Hindu doctrine.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Identity, translation, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Indra under the vedic text lens?",
+        "Which exact source, edition, passage, place, or period controls this answer about indra?",
+        "Which translation, identity, cult, or reception distinction must remain explicit?",
+        "What does resemblance or later reception fail to establish?",
+        "Which source or rights change would require this answer to be reviewed again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "gretil-rigveda-registry",
+          "url": "https://gretil.sub.uni-goettingen.de/gretil.html",
+          "locator": "Vedic Sanskrit e-texts; Rigveda TEI, HTML, and text entries; source-file terms",
+          "rightsStatus": "reference-only",
+          "scope": "Confirms a scholarly Sanskrit e-text registry and edition metadata.",
+          "boundary": "Registry presence is not translation, passage interpretation, or permission to republish the e-text."
+        },
+        {
+          "sourceId": "rigveda-griffith-indra-1-32",
+          "url": "https://en.wikisource.org/wiki/The_Hymns_of_the_Rigveda/Book_1/Hymn_32",
+          "locator": "Rigveda 1.32, stanzas 1–15",
+          "rightsStatus": "public-domain-work",
+          "scope": "Supplies one line-addressable nineteenth-century English translation witness for a hymn addressed to Indra.",
+          "boundary": "The translation is old and philologically superseded. It establishes Griffith’s rendering of indra in one hymn, not a complete Vedic profile, later Hindu doctrine, or the only defensible translation."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_a4ed1962587a84e012fea9fa",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/indra/vedic-text",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "publicationDependencyGap": null,
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_ff094e49bf2ead0c61ea5650",
+      "candidateDigest": "sha256:81ebe0cda8e6bd951832bcad1ce9815288f90145486fa9aa13700b4270d7fd9b",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/agni/vedic-text",
+      "title": "Agni — Vedic text",
+      "topic": "agni",
+      "routeRole": "vedic-text",
+      "answerContract": "Answer only the vedic text question for Agni inside the manual boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "State only what the identified Vedic hymn and named translation render; one hymn cannot establish a complete Vedic profile or later Hindu doctrine.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Identity, translation, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Agni under the vedic text lens?",
+        "Which exact source, edition, passage, place, or period controls this answer about agni?",
+        "Which translation, identity, cult, or reception distinction must remain explicit?",
+        "What does resemblance or later reception fail to establish?",
+        "Which source or rights change would require this answer to be reviewed again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "gretil-rigveda-registry",
+          "url": "https://gretil.sub.uni-goettingen.de/gretil.html",
+          "locator": "Vedic Sanskrit e-texts; Rigveda TEI, HTML, and text entries; source-file terms",
+          "rightsStatus": "reference-only",
+          "scope": "Confirms a scholarly Sanskrit e-text registry and edition metadata.",
+          "boundary": "Registry presence is not translation, passage interpretation, or permission to republish the e-text."
+        },
+        {
+          "sourceId": "rigveda-griffith-agni-1-1",
+          "url": "https://en.wikisource.org/wiki/The_Hymns_of_the_Rigveda/Book_1/Hymn_1",
+          "locator": "Rigveda 1.1, stanzas 1–9",
+          "rightsStatus": "public-domain-work",
+          "scope": "Supplies one line-addressable nineteenth-century English translation witness for a hymn addressed to Agni.",
+          "boundary": "The translation is old and philologically superseded. It establishes Griffith’s rendering of agni in one hymn, not a complete Vedic profile, later Hindu doctrine, or the only defensible translation."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_ff094e49bf2ead0c61ea5650",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/agni/vedic-text",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "publicationDependencyGap": null,
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_05726669bf401ffe2b4fc2a7",
+      "candidateDigest": "sha256:f8bab73be9a5d6aedcc13fe3a343a8ef61c9d30e4e27688f7c5780b787a4cf4a",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/soma/vedic-text",
+      "title": "Soma — Vedic text",
+      "topic": "soma",
+      "routeRole": "vedic-text",
+      "answerContract": "Answer only the vedic text question for Soma inside the manual boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "State only what the identified Vedic hymn and named translation render; one hymn cannot establish a complete Vedic profile or later Hindu doctrine.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Identity, translation, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Soma under the vedic text lens?",
+        "Which exact source, edition, passage, place, or period controls this answer about soma?",
+        "Which translation, identity, cult, or reception distinction must remain explicit?",
+        "What does resemblance or later reception fail to establish?",
+        "Which source or rights change would require this answer to be reviewed again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "gretil-rigveda-registry",
+          "url": "https://gretil.sub.uni-goettingen.de/gretil.html",
+          "locator": "Vedic Sanskrit e-texts; Rigveda TEI, HTML, and text entries; source-file terms",
+          "rightsStatus": "reference-only",
+          "scope": "Confirms a scholarly Sanskrit e-text registry and edition metadata.",
+          "boundary": "Registry presence is not translation, passage interpretation, or permission to republish the e-text."
+        },
+        {
+          "sourceId": "rigveda-griffith-soma-9-107",
+          "url": "https://en.wikisource.org/wiki/The_Hymns_of_the_Rigveda/Book_9/Hymn_107",
+          "locator": "Rigveda 9.107, numbered stanzas",
+          "rightsStatus": "public-domain-work",
+          "scope": "Supplies one line-addressable nineteenth-century English translation witness for a hymn addressed to Soma.",
+          "boundary": "The translation is old and philologically superseded. It establishes Griffith’s rendering of soma in one hymn, not a complete Vedic profile, later Hindu doctrine, or the only defensible translation."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_05726669bf401ffe2b4fc2a7",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/soma/vedic-text",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "publicationDependencyGap": null,
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_356f5d14f90cd015e8ce2da5",
+      "candidateDigest": "sha256:06cd11f5391c75dab806789983143775225321bab17e5c6e3c92aebad80e63e5",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/varuna/vedic-text",
+      "title": "Varuṇa — Vedic text",
+      "topic": "varuna",
+      "routeRole": "vedic-text",
+      "answerContract": "Answer only the vedic text question for Varuṇa inside the manual boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "State only what the identified Vedic hymn and named translation render; one hymn cannot establish a complete Vedic profile or later Hindu doctrine.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Identity, translation, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Varuṇa under the vedic text lens?",
+        "Which exact source, edition, passage, place, or period controls this answer about varuna?",
+        "Which translation, identity, cult, or reception distinction must remain explicit?",
+        "What does resemblance or later reception fail to establish?",
+        "Which source or rights change would require this answer to be reviewed again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "gretil-rigveda-registry",
+          "url": "https://gretil.sub.uni-goettingen.de/gretil.html",
+          "locator": "Vedic Sanskrit e-texts; Rigveda TEI, HTML, and text entries; source-file terms",
+          "rightsStatus": "reference-only",
+          "scope": "Confirms a scholarly Sanskrit e-text registry and edition metadata.",
+          "boundary": "Registry presence is not translation, passage interpretation, or permission to republish the e-text."
+        },
+        {
+          "sourceId": "rigveda-griffith-varuna-7-86",
+          "url": "https://en.wikisource.org/wiki/The_Hymns_of_the_Rigveda/Book_7/Hymn_86",
+          "locator": "Rigveda 7.86, stanzas 1–8",
+          "rightsStatus": "public-domain-work",
+          "scope": "Supplies one line-addressable nineteenth-century English translation witness for a hymn addressed to Varuṇa.",
+          "boundary": "The translation is old and philologically superseded. It establishes Griffith’s rendering of varuna in one hymn, not a complete Vedic profile, later Hindu doctrine, or the only defensible translation."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_356f5d14f90cd015e8ce2da5",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/varuna/vedic-text",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "publicationDependencyGap": null,
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_187f24a060ba431f2293edcc",
+      "candidateDigest": "sha256:770489ba99f13a8a214b45e611f5481bb879d654103abdbb769a0b19f8d80dee",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/vishnu/vedic-text",
+      "title": "Viṣṇu — Vedic text",
+      "topic": "vishnu",
+      "routeRole": "vedic-text",
+      "answerContract": "Answer only the vedic text question for Viṣṇu inside the manual boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "State only what the identified Vedic hymn and named translation render; one hymn cannot establish a complete Vedic profile or later Hindu doctrine.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Identity, translation, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Viṣṇu under the vedic text lens?",
+        "Which exact source, edition, passage, place, or period controls this answer about vishnu?",
+        "Which translation, identity, cult, or reception distinction must remain explicit?",
+        "What does resemblance or later reception fail to establish?",
+        "Which source or rights change would require this answer to be reviewed again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "gretil-rigveda-registry",
+          "url": "https://gretil.sub.uni-goettingen.de/gretil.html",
+          "locator": "Vedic Sanskrit e-texts; Rigveda TEI, HTML, and text entries; source-file terms",
+          "rightsStatus": "reference-only",
+          "scope": "Confirms a scholarly Sanskrit e-text registry and edition metadata.",
+          "boundary": "Registry presence is not translation, passage interpretation, or permission to republish the e-text."
+        },
+        {
+          "sourceId": "rigveda-griffith-vishnu-1-154",
+          "url": "https://en.wikisource.org/wiki/The_Hymns_of_the_Rigveda/Book_1/Hymn_154",
+          "locator": "Rigveda 1.154, stanzas 1–6",
+          "rightsStatus": "public-domain-work",
+          "scope": "Supplies one line-addressable nineteenth-century English translation witness for a hymn addressed to Viṣṇu.",
+          "boundary": "The translation is old and philologically superseded. It establishes Griffith’s rendering of vishnu in one hymn, not a complete Vedic profile, later Hindu doctrine, or the only defensible translation."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_187f24a060ba431f2293edcc",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/vishnu/vedic-text",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "publicationDependencyGap": null,
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_737a7dd4ad4ed93b8946181e",
+      "candidateDigest": "sha256:00959c291960537c35abcc054bca8d295f2cb15cea0b85a7f5c25fccc8a929d9",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/egyptian/osiris/reception-and-comparison",
+      "title": "Osiris — Reception and comparison",
+      "topic": "osiris",
+      "routeRole": "reception-and-comparison",
+      "answerContract": "Answer only the reception and comparison question for Osiris inside the manual boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Separate ancient Egyptian evidence, Greco-Roman reception, modern Egyptology, and popular reception; depiction, epithet, and identity are distinct evidentiary layers.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Identity, translation, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Osiris under the reception and comparison lens?",
+        "Which exact source, edition, passage, place, or period controls this answer about osiris?",
+        "Which translation, identity, cult, or reception distinction must remain explicit?",
+        "What does resemblance or later reception fail to establish?",
+        "Which source or rights change would require this answer to be reviewed again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "ucl-digital-egypt-deities",
+          "url": "https://www.ucl.ac.uk/museums-static/digitalegypt/religion/deitiesindex.html",
+          "locator": "The names of deities; fissioning and fusing; form, iconography, and contextual identity",
+          "rightsStatus": "reference-only",
+          "scope": "Explains why Egyptian divine names, forms, combinations, and iconography must be interpreted in context.",
+          "boundary": "The overview is a method boundary, not a passage-level source for every named deity or cult."
+        },
+        {
+          "sourceId": "uee-osiris-deceased",
+          "url": "https://escholarship.org/uc/item/29r70244",
+          "locator": "pp. 1–8; especially pp. 2–5 on composite source biography, Osirian aspect, following, and becoming",
+          "rightsStatus": "reference-only",
+          "scope": "Explains the relationship constructed between Osiris and deceased Egyptians across mortuary sources.",
+          "boundary": "Acquiring an Osirian aspect or entering a relationship with Osiris is not automatically identity with Osiris; the article does not cover every Osiris cult or later reception."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_737a7dd4ad4ed93b8946181e",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/egyptian/osiris/reception-and-comparison",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "publicationDependencyGap": null,
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_bdf17225d1de715b8813a2a0",
+      "candidateDigest": "sha256:9ddea52bc3472b960bd9567f637f29867c1a73cdd43a6b733617ec81db0f0058",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/comparative-methodology/deity-equivalence-method/method",
+      "title": "Deity equivalence method — Method",
+      "topic": "deity-equivalence-method",
+      "routeRole": "method",
+      "answerContract": "Answer only the method question for Deity equivalence method inside the manual boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Declare the comparands, source frames, purpose, scale, scope, and comparison criterion; resemblance is an observation, not proof of identity, diffusion, genealogy, or universal origin.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Identity, translation, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Deity equivalence method under the method lens?",
+        "Which exact source, edition, passage, place, or period controls this answer about deity-equivalence-method?",
+        "Which translation, identity, cult, or reception distinction must remain explicit?",
+        "What does resemblance or later reception fail to establish?",
+        "Which source or rights change would require this answer to be reviewed again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "freiberger-comparison-method",
+          "url": "https://doi.org/10.3390/rel9020038",
+          "locator": "§2 comparative configuration and process; §3 conclusions; pp. 1–14",
+          "rightsStatus": "cc-by-4.0",
+          "scope": "Defines comparison as a research design with declared goals, mode, scale, scope, comparands, criteria, description, juxtaposition, redescription, rectification, and theory formation.",
+          "boundary": "The framework does not make a selected comparison criterion natural, prove two figures identical, or validate a historical diffusion claim."
+        },
+        {
+          "sourceId": "bojadzievska-comparative-mythology",
+          "url": "https://journals.ukim.mk/index.php/jcp/en/article/view/17",
+          "locator": "Abstract; references; article identity and licence notice",
+          "rightsStatus": "reference-only",
+          "scope": "Surveys linguistic, psychological, anthropological, structural, and phylogenetic approaches and notes multiple possible explanations for cross-cultural similarity.",
+          "boundary": "A possible explanation is not evidence of common origin, diffusion, identity, or universality in a particular comparison."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_bdf17225d1de715b8813a2a0",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/comparative-methodology/deity-equivalence-method/method",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "publicationDependencyGap": null,
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    },
+    {
+      "candidateId": "cand_85a5ab1e00cb09d098094a6e",
+      "candidateDigest": "sha256:c6c30314aefee3d0a622dbd8ced43ec44866386ed0b0d455acab295fc7f6bf95",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/comparative-methodology/shared-function-not-same-deity/method",
+      "title": "Shared function does not establish identical deity — Method",
+      "topic": "shared-function-not-same-deity",
+      "routeRole": "method",
+      "answerContract": "Answer only the method question for Shared function does not establish identical deity inside the manual boundary and inspected source scopes; label source, translation, period, rights, and uncertainty explicitly.",
+      "semanticBoundary": "Declare the comparands, source frames, purpose, scale, scope, and comparison criterion; resemblance is an observation, not proof of identity, diffusion, genealogy, or universal origin.",
+      "requiredSections": [
+        "Direct bounded answer",
+        "Named source and exact locator",
+        "Identity, translation, period, and reception frame",
+        "Evidence scope",
+        "What the evidence does not establish",
+        "Related definitions and sibling lenses"
+      ],
+      "boundedQuestions": [
+        "What can the inspected evidence establish about Shared function does not establish identical deity under the method lens?",
+        "Which exact source, edition, passage, place, or period controls this answer about shared-function-not-same-deity?",
+        "Which translation, identity, cult, or reception distinction must remain explicit?",
+        "What does resemblance or later reception fail to establish?",
+        "Which source or rights change would require this answer to be reviewed again?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "freiberger-comparison-method",
+          "url": "https://doi.org/10.3390/rel9020038",
+          "locator": "§2 comparative configuration and process; §3 conclusions; pp. 1–14",
+          "rightsStatus": "cc-by-4.0",
+          "scope": "Defines comparison as a research design with declared goals, mode, scale, scope, comparands, criteria, description, juxtaposition, redescription, rectification, and theory formation.",
+          "boundary": "The framework does not make a selected comparison criterion natural, prove two figures identical, or validate a historical diffusion claim."
+        },
+        {
+          "sourceId": "bojadzievska-comparative-mythology",
+          "url": "https://journals.ukim.mk/index.php/jcp/en/article/view/17",
+          "locator": "Abstract; references; article identity and licence notice",
+          "rightsStatus": "reference-only",
+          "scope": "Surveys linguistic, psychological, anthropological, structural, and phylogenetic approaches and notes multiple possible explanations for cross-cultural similarity.",
+          "boundary": "A possible explanation is not evidence of common origin, diffusion, identity, or universality in a particular comparison."
+        }
+      ],
+      "dependencies": {
+        "candidateId": "cand_85a5ab1e00cb09d098094a6e",
+        "url": "https://www.mahastrategies.com/knowledge/religion/mythology/comparative-methodology/shared-function-not-same-deity/method",
+        "dependencies": [
+          {
+            "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+            "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+            "reason": "mythology-discovery-hub-precedes-specialized-route",
+            "resolution": "same-tranche"
+          },
+          {
+            "dependsOn": "observed_56fe9966e4c1a502a8326830",
+            "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-method-anchor"
+          },
+          {
+            "dependsOn": "observed_697a19477c302a0394c914d2",
+            "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+            "reason": "observed-religion-methodology-precedes-mythology-route",
+            "resolution": "observed-owner-anchor"
+          }
+        ],
+        "methodAnchorsComplete": true,
+        "hubDependencyCorrect": true,
+        "publicationDependencyGap": null,
+        "structurallyResolved": true
+      },
+      "structuredData": {
+        "type": "Article",
+        "noRatingOrEndorsement": true,
+        "noTheologicalCertification": true
+      },
+      "machineContract": {
+        "exactLocatorsRequired": true,
+        "rightsStateRequired": true,
+        "evidenceFrameRequired": true,
+        "prohibitedInferenceRequired": true,
+        "exactRevisionReviewRequired": true,
+        "canonicalReleaseRequiredBeforePublication": true
+      },
+      "implementationState": "specification-only"
+    }
+  ],
+  "provenanceDigest": "sha256:4f419eee297d850f6bf9fabcf4ba4b9c0edd9a2a30bb88ea7b95c39a009c216d"
+}

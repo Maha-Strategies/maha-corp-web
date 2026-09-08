@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "maha-federation-prerequisite-page-specifications/1.0",
+  "frozenOn": "2026-09-07",
+  "rule": "A specification is prepared only for a definition that reached evidence-ready. Nothing else gets one.",
+  "counts": {
+    "specifications": 1,
+    "candidatesReviewed": 4
+  },
+  "specifications": [
+    {
+      "candidateId": "cand_671d652918d62414c37d751d",
+      "conceptId": "urn:maha:concept:consent:health-data-consent",
+      "canonicalUrl": "https://os.mahastrategies.com/knowledge/private-machine-systems/health-data-consent/definition",
+      "owningProperty": "maha-os",
+      "routeRole": "definition",
+      "directAnswer": "Health-data consent, as this organisation uses the term, is the permission a person gives for their health data to be processed — distinct from an authorization document, from a privacy notice, and from the lawful basis that makes processing permissible at all.",
+      "evidenceSections": [
+        {
+          "instrument": "45 CFR § 164.508 (HIPAA Privacy Rule)",
+          "locators": [
+            "§ 164.508(a)(1)",
+            "§ 164.508(b)(5)",
+            "§ 164.508(c)(1)"
+          ],
+          "jurisdiction": "United States"
+        },
+        {
+          "instrument": "45 CFR § 164.510 (HIPAA Privacy Rule)",
+          "locators": [
+            "§ 164.510(b)(3)"
+          ],
+          "jurisdiction": "United States"
+        },
+        {
+          "instrument": "45 CFR § 164.520 (HIPAA Privacy Rule)",
+          "locators": [
+            "§ 164.520(a)(1)",
+            "§ 164.520(b)(1)(ii)(E)"
+          ],
+          "jurisdiction": "United States"
+        },
+        {
+          "instrument": "Regulation (EU) 2016/679 (GDPR), Article 4",
+          "locators": [
+            "Article 4(11)",
+            "Article 4(15)"
+          ],
+          "jurisdiction": "European Union"
+        },
+        {
+          "instrument": "Regulation (EU) 2016/679 (GDPR), Article 6",
+          "locators": [
+            "Article 6(1)(a)-(f)"
+          ],
+          "jurisdiction": "European Union"
+        },
+        {
+          "instrument": "Regulation (EU) 2016/679 (GDPR), Article 7",
+          "locators": [
+            "Article 7(1)",
+            "Article 7(3)",
+            "Article 7(4)"
+          ],
+          "jurisdiction": "European Union"
+        },
+        {
+          "instrument": "Regulation (EU) 2016/679 (GDPR), Article 9",
+          "locators": [
+            "Article 9(1)",
+            "Article 9(2)(a)",
+            "Article 9(2)(c)",
+            "Article 9(2)(j)"
+          ],
+          "jurisdiction": "European Union"
+        },
+        {
+          "instrument": "45 CFR § 46.116 (Federal Policy for the Protection of Human Subjects)",
+          "locators": [
+            "§ 46.116(a)",
+            "§ 46.116(b)",
+            "§ 46.116(e)-(f)"
+          ],
+          "jurisdiction": "United States"
+        }
+      ],
+      "limitationsAndNegativeSpace": [
+        "A universal or global law of health-data consent. Every inspected instrument binds a named class of actor in a named jurisdiction; a device in neither regime is governed by neither.",
+        "An executable machine rule for consent. \"Freely given\", \"professional judgment\" and IRB waiver findings are human judgements, and no inspected provision specifies a data structure, receipt format or interface.",
+        "A universal or global law of health-data consent. Every source is jurisdictional and binds a defined class of actor; a device outside both regimes is governed by neither.",
+        "A machine-executable consent rule. \"Freely given\", \"professional judgment\" and IRB waiver findings are human judgements, and no inspected provision specifies a data structure, receipt format or interface.",
+        "That Maha OS, or any product, complies with either regime. These inspections describe instruments, not this organisation's conformance to them.",
+        "Legal advice, or that the definition substitutes for counsel in any jurisdiction."
+      ],
+      "boundedQuestions": [
+        "What is the difference between consent and authorization for health data?",
+        "Does receiving a privacy notice mean permission was given?",
+        "Is consent the only lawful basis for processing health data?",
+        "Can consent be withdrawn, and does withdrawal undo prior processing?",
+        "What happens when the person cannot consent in an emergency?",
+        "Is research consent the same as product consent?"
+      ],
+      "expectedCanonicalDependencies": [],
+      "boundary": "This specification describes one definition page. It is not a compliance claim, not legal advice, and not a specification for any of the routes that depend on this definition."
+    }
+  ],
+  "provenanceDigest": "sha256:c1ebee8ab4a9ace8b4aec73b0f4e24441745536139fe2813bbca5ffcc434ebd6"
+}

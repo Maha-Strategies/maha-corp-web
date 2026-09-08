@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "maha-federation-tranche-2-remediation-inspection/1.0",
+  "observedOn": "2026-09-05",
+  "purpose": "Sources fetched while reassessing the fifteen non-ready Tranche 2 candidates. Recorded with status codes because \"could not be inspected\" is the claim under test.",
+  "upstreamTrancheTwoDigests": {
+    "readiness": "sha256:4ad86b3ac8733bc653902849250b68ce61724eedb26d86b7ac4b687d5a5898ef",
+    "decisions": "sha256:33ce2e818f5f90fc6f7ab37fa59ebb8593dec4fe4cd02ff8aee7a875bced7edc",
+    "evidence-packets": "sha256:72e1e23aa186c8d40b9328c33926fd62d0120826d00f0092dc8cf5ad58563b17",
+    "cohort": "sha256:824003516cd7d1cfb18272a22324e4b67c7a810c96a132aa5e872e1e38856eca"
+  },
+  "inspections": [
+    {
+      "url": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/policy",
+      "observedOn": "2026-09-05",
+      "httpStatus": 404,
+      "establishes": "The proposed route does not exist, confirming this remediation creates no public route.",
+      "doesNotEstablish": "Anything about the candidate’s merits."
+    },
+    {
+      "url": "https://publish.mahastrategies.com/context-packs/the-maha-principle-v0.1.0.json",
+      "observedOn": "2026-09-05",
+      "httpStatus": 200,
+      "establishes": "A live, metadata-only machine-readable record served as JSON: a concrete instance rather than a description of one.",
+      "doesNotEstablish": "It is one instance and does not generalise to a template."
+    },
+    {
+      "url": "https://publish.mahastrategies.com/docs/editorial-workflow",
+      "observedOn": "2026-09-05",
+      "httpStatus": 200,
+      "establishes": "The canonical owner of editorial workflow on the Publish property.",
+      "doesNotEstablish": "Nothing relevant is absent; its existence is the finding."
+    },
+    {
+      "url": "https://publish.mahastrategies.com/docs/glossary",
+      "observedOn": "2026-09-05",
+      "httpStatus": 200,
+      "establishes": "A published glossary for the Publish property. It mentions a query letter once, in its conventional sense.",
+      "doesNotEstablish": "It never uses or defines the term \"agentic query letter\"."
+    },
+    {
+      "url": "https://publish.mahastrategies.com/docs/machine-readability",
+      "observedOn": "2026-09-05",
+      "httpStatus": 200,
+      "sections": [
+        "Start with readable public pages",
+        "Validate the actual payload",
+        "Use discovery files as supplements",
+        "Independent corroboration remains separate",
+        "Related documentation"
+      ],
+      "establishes": "The canonical definition of machine-readable publishing practice: unique title, description, canonical URL, structured data matching visible content, payload validation as a release blocker, and that discovery files grant no access and guarantee no indexing.",
+      "doesNotEstablish": "Any article template, schema listing, or worked example. It is guidance, not a specification."
+    },
+    {
+      "url": "https://publish.mahastrategies.com/docs/release-gates",
+      "observedOn": "2026-09-05",
+      "httpStatus": 200,
+      "establishes": "The canonical owner of release gating on the Publish property.",
+      "doesNotEstablish": "Nothing relevant is absent; its existence is the finding."
+    },
+    {
+      "url": "https://publish.mahastrategies.com/docs/release-manifests",
+      "observedOn": "2026-09-05",
+      "httpStatus": 200,
+      "sections": [
+        "The release contract",
+        "Access modes",
+        "Why approval comes first",
+        "Related documentation"
+      ],
+      "establishes": "The manifest fields, the three access modes, that metadata-public releases stop resolving when withdrawn, and that approval is an accountable editorial act preceding release.",
+      "doesNotEstablish": "Any failure mode other than withdrawal ceasing to resolve, and no procedural workflow."
+    },
+    {
+      "url": "https://www.mahastrategies.com/assessments/context-control-evidence-assessment-sample.pdf",
+      "observedOn": "2026-09-05",
+      "httpStatus": 200,
+      "establishes": "The published assessment sample the offer prices are gated on. Its reachability is what makes the offer terms citable.",
+      "doesNotEstablish": "Delivered customer results."
+    },
+    {
+      "url": "https://www.mahastrategies.com/pricing",
+      "observedOn": "2026-09-05",
+      "httpStatus": 200,
+      "establishes": "Current offer terms are public: two assessment tiers at $12,500 and $25,000, a founding-partner exchange at $2,500 limited to the first two signed customers, a named scope covering token and cost measurement and failure-path behaviour, and hard token budgets as a positioning claim.",
+      "doesNotEstablish": "Customer outcomes. The offer explicitly excludes any performance or savings guarantee, and excludes production credentials from scope entirely."
+    }
+  ],
+  "provenanceDigest": "sha256:c603904a068dffba2bd61a49a1d36fe153ab1dc0826c26e96cb7fc8ca1b24e95"
+}

@@ -1,0 +1,166 @@
+{
+  "artifact": "federation-external-authority-decisions",
+  "schemaVersion": "1.0",
+  "generatedOn": "2026-09-07",
+  "status": "private-noncanonical-proposals-only",
+  "decisions": [
+    {
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "state": "definition-proposal-ready",
+      "sourceIds": [
+        "src-causal-what-if"
+      ],
+      "term": "Causal inference",
+      "definition": "Reasoning about contrasts between outcomes under specified alternative interventions or treatment strategies for a target population, rather than treating an observed association as the causal effect.",
+      "establishes": "The distinction between causal contrasts and associational quantities.",
+      "doesNotEstablish": "Identification, exchangeability, model validity, transportability, or a causal estimate for any particular data.",
+      "rationale": "The inspected chapter directly defines the quantity and its contrast."
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "state": "definition-proposal-ready",
+      "sourceIds": [
+        "src-perk-commitments"
+      ],
+      "term": "Cryptographic commitment",
+      "definition": "A two-stage construction in which a value is committed and later opened, with correctness and security properties such as hiding and binding stated under a security model.",
+      "establishes": "The commit/open structure and the distinction between hiding and binding.",
+      "doesNotEstablish": "Security of an implementation, suitability of a scheme, or NIST endorsement of the candidate specification.",
+      "rationale": "The inspected definitions state the algorithms and properties; the source status is explicitly bounded."
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "state": "revise",
+      "sourceIds": [
+        "src-dlmf-arithmetic"
+      ],
+      "term": "Deterministic arithmetic",
+      "definition": "A proposed term for arithmetic whose execution contract fixes all choices that could alter the resulting representation.",
+      "establishes": "Only that floating-point representation and rounding are necessary parts of such a contract.",
+      "doesNotEstablish": "That fixing a format and rounding mode alone produces cross-platform or replay determinism.",
+      "rationale": "The inspected public authority covers representation and rounding but not the broader cross-implementation reproducibility claim. IEEE 754 full normative text was not inspected."
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "state": "definition-proposal-ready",
+      "sourceIds": [
+        "src-bipm-dimensions"
+      ],
+      "term": "Dimensional analysis",
+      "definition": "Checking and reasoning about physical quantities through their dimensions, expressed as products of powers of base dimensions.",
+      "establishes": "The dimensional vocabulary for base and derived quantities.",
+      "doesNotEstablish": "The truth of an equation or the correctness of a measurement, conversion, or uncertainty budget.",
+      "rationale": "The SI Brochure gives the exact dimensional system and table."
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "state": "definition-proposal-ready",
+      "sourceIds": [
+        "src-nist-formal-verification"
+      ],
+      "term": "Formal verification",
+      "definition": "Establishing a stated property of a formal model from formal requirements using a logic and rules of inference.",
+      "establishes": "The roles of formal requirements, model, logic, and inference.",
+      "doesNotEstablish": "That the model corresponds to deployed code, assumptions are true, or the proof tool and proof are sound.",
+      "rationale": "The inspected NIST definition directly enumerates the required elements."
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "state": "definition-proposal-ready",
+      "sourceIds": [
+        "src-dlmf-interpolation"
+      ],
+      "term": "Interpolation",
+      "definition": "Constructing a function that agrees with specified values at stated nodes; polynomial interpolation is the unique polynomial of bounded degree through distinct nodes.",
+      "establishes": "The node-matching relation and the bounded polynomial case.",
+      "doesNotEstablish": "Accuracy between nodes, safe extrapolation, or numerical stability.",
+      "rationale": "DLMF §3.3 directly states the polynomial construction and broader method family."
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "state": "definition-proposal-ready",
+      "sourceIds": [
+        "src-dlmf-intervals",
+        "src-ieee-1788-identity"
+      ],
+      "term": "Interval bound",
+      "definition": "An interval used as an inclusion region for a quantity, propagated with interval operations so the represented result remains enclosed under the stated arithmetic contract.",
+      "establishes": "The inclusion-region meaning and the existence and scope of an interval-arithmetic standard.",
+      "doesNotEstablish": "Tightness, implementation conformance, or certification of a computed enclosure.",
+      "rationale": "DLMF supplies content-level support; IEEE’s public page supplies only the standard identity and scope."
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:numerical-integration",
+      "state": "definition-proposal-ready",
+      "sourceIds": [
+        "src-dlmf-quadrature"
+      ],
+      "term": "Numerical integration",
+      "definition": "Approximating an integral by a weighted combination of function values, with the rule’s domain of exactness and error conditions stated.",
+      "establishes": "The structure of an interpolatory quadrature rule and its exactness for a bounded polynomial class.",
+      "doesNotEstablish": "Accuracy or convergence for an arbitrary integrand or implementation.",
+      "rationale": "DLMF supplies an exact formula, weights, error term, and exactness statement."
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "state": "definition-proposal-ready",
+      "sourceIds": [
+        "src-nist-stability"
+      ],
+      "term": "Numerical stability",
+      "definition": "A property of an algorithm’s error behaviour, assessed separately from the conditioning of the problem it solves.",
+      "establishes": "That problem conditioning and algorithmic stability are distinct and both affect numerical reliability.",
+      "doesNotEstablish": "Stability of a named algorithm without analysis under its inputs and arithmetic.",
+      "rationale": "The inspected NIST report makes the distinction explicitly."
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:optimization",
+      "state": "definition-proposal-ready",
+      "sourceIds": [
+        "src-boyd-optimization"
+      ],
+      "term": "Optimization",
+      "definition": "Selecting feasible decision variables to minimize an objective subject to stated equality and inequality constraints.",
+      "establishes": "The roles of objective, feasible domain, constraints, and optimal value.",
+      "doesNotEstablish": "Convexity, existence, uniqueness, global optimality, or solver performance for a particular problem.",
+      "rationale": "The inspected textbook section gives the standard problem form and definitions."
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "state": "definition-proposal-ready",
+      "sourceIds": [
+        "src-iers-reference-frames"
+      ],
+      "term": "Reference-frame conversion",
+      "definition": "Transforming coordinates between named reference systems using the ordered transformations, epochs, and orientation parameters prescribed by a stated convention version.",
+      "establishes": "The convention-governed relationship between terrestrial and celestial coordinates.",
+      "doesNotEstablish": "Correct implementation, correct input epoch or Earth-orientation parameters, or applicability outside the named systems.",
+      "rationale": "IERS Chapter 5 specifies the transformation and its inputs."
+    },
+    {
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "state": "definition-proposal-ready",
+      "sourceIds": [
+        "src-dlmf-roots"
+      ],
+      "term": "Root finding",
+      "definition": "Locating a value at which a function is zero using a stated bracketing or iterative method and its convergence conditions.",
+      "establishes": "The zero-finding objective and the need to state method conditions, accuracy, or conditioning.",
+      "doesNotEstablish": "Convergence from arbitrary initial values or correctness of a reported root without residual and conditioning evidence.",
+      "rationale": "DLMF §3.8 directly describes the methods, conditions, and conditioning."
+    }
+  ],
+  "counts": {
+    "definition-proposal-ready": 11,
+    "revise": 1,
+    "blocked": 0
+  },
+  "adoption": {
+    "activeBindingsChanged": 0,
+    "candidateStatesChanged": 0,
+    "reviewsCreated": 0,
+    "releasesCreated": 0,
+    "routesCompiled": 0
+  },
+  "provenanceDigest": "sha256:1d4965a185774b2446d7c6f36c89b2b3fe44096f358d01bcb44ae56f42b87374"
+}

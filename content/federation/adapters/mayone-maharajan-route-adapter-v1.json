@@ -1,0 +1,448 @@
+{
+  "schemaVersion": "maha-federation-property-route-adapter/1.0",
+  "siteId": "mayone-maharajan",
+  "canonicalHost": "www.mayonemaharajan.com",
+  "rootPath": "/concepts/",
+  "sourceManifestDigest": "sha256:bd092b31fba9efc8128acd320029bb5578935e4a926f4b10f6d286d8278061a9",
+  "state": "local-owner-handoff",
+  "ownerIntegration": {
+    "routeShape": "/concepts/[...segments]",
+    "staticParameters": true,
+    "dynamicParameters": false,
+    "metadataFromExactPage": true,
+    "structuredDataFromExactPage": true,
+    "missingOrUnreadyReturnsNotFound": true,
+    "exactRevisionReviewRequired": true,
+    "activeCanonicalReleaseRequired": true
+  },
+  "counts": {
+    "routes": 42,
+    "boundedAnswers": 210,
+    "publicRoutesCreated": 0,
+    "buildsRun": 0
+  },
+  "publicationBoundary": "The adapter resolves local content only. The owner route must still bind an exact revision and active canonical release before crawlability; a missing or unready path resolves to null.",
+  "entries": [
+    {
+      "candidateId": "cand_7062ac80168cab7e17e02623",
+      "path": "/concepts/authorial-lineage/critique",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/authorial-lineage/critique",
+      "segments": [
+        "authorial-lineage",
+        "critique"
+      ],
+      "contentDigest": "sha256:e7cf28730a9d121bef2ac74ba007898933af6b62b69f224f39f9874341dc40c9"
+    },
+    {
+      "candidateId": "cand_9c5aadfaa34b1896f9ee2b36",
+      "path": "/concepts/authorial-lineage/definition",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/authorial-lineage/definition",
+      "segments": [
+        "authorial-lineage",
+        "definition"
+      ],
+      "contentDigest": "sha256:2d768808b2b475433250ea8c94ff0f3c9191b6a0898ad12b65da435b9589036d"
+    },
+    {
+      "candidateId": "cand_4ef1f54c0bbbc1b35bc2d57c",
+      "path": "/concepts/authorial-lineage/development",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/authorial-lineage/development",
+      "segments": [
+        "authorial-lineage",
+        "development"
+      ],
+      "contentDigest": "sha256:59b6fe6df37f3835380128accd12499a670c9f64b5bd36a85d797bebc70f4732"
+    },
+    {
+      "candidateId": "cand_4197fa19f0340c606c8d2174",
+      "path": "/concepts/authorial-lineage/limits",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/authorial-lineage/limits",
+      "segments": [
+        "authorial-lineage",
+        "limits"
+      ],
+      "contentDigest": "sha256:06b29540513f1e411b141540fe6d5208ba779dd2d6221b5dc0312277eb8b2249"
+    },
+    {
+      "candidateId": "cand_d4b6354f11aedcfbdac48596",
+      "path": "/concepts/authorial-lineage/relationship",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/authorial-lineage/relationship",
+      "segments": [
+        "authorial-lineage",
+        "relationship"
+      ],
+      "contentDigest": "sha256:67321de3e71735c7999373b5e2a3590f9d8a41c84ae29553810799ef116b7d0b"
+    },
+    {
+      "candidateId": "cand_a776af38a31ec64e03244944",
+      "path": "/concepts/civilizational-memory/critique",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/civilizational-memory/critique",
+      "segments": [
+        "civilizational-memory",
+        "critique"
+      ],
+      "contentDigest": "sha256:f0459af5538cf7794d7f995ffb352ca5e8b345af4a1d9e0f9f7c88713fd15090"
+    },
+    {
+      "candidateId": "cand_4928435919adf88fa11f5275",
+      "path": "/concepts/civilizational-memory/definition",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/civilizational-memory/definition",
+      "segments": [
+        "civilizational-memory",
+        "definition"
+      ],
+      "contentDigest": "sha256:a9b97d0e87ec76bdc128e5350e9a94da9e95b210a2806a77321cbbe7d0a74e97"
+    },
+    {
+      "candidateId": "cand_91a359ed79a7cab188963d9b",
+      "path": "/concepts/civilizational-memory/development",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/civilizational-memory/development",
+      "segments": [
+        "civilizational-memory",
+        "development"
+      ],
+      "contentDigest": "sha256:11e4cbdac7bf5128f2531d5807723d0a1603aacd8b78e3b6980a184ebdfea6c4"
+    },
+    {
+      "candidateId": "cand_4c198b13a5ecac5e073014a9",
+      "path": "/concepts/civilizational-memory/limits",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/civilizational-memory/limits",
+      "segments": [
+        "civilizational-memory",
+        "limits"
+      ],
+      "contentDigest": "sha256:30c5f20796142042f9e3a726504306e3370425d4aedfaadeade8f29701cc2d56"
+    },
+    {
+      "candidateId": "cand_6165e01368841892cc1214f8",
+      "path": "/concepts/civilizational-memory/relationship",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/civilizational-memory/relationship",
+      "segments": [
+        "civilizational-memory",
+        "relationship"
+      ],
+      "contentDigest": "sha256:aceba324828c477b76a38726aa2a658cf78ebbba38b4892ffeb0a912740921e8"
+    },
+    {
+      "candidateId": "cand_a28553843749b495ae93f383",
+      "path": "/concepts/cosmic-recursion/application",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/application",
+      "segments": [
+        "cosmic-recursion",
+        "application"
+      ],
+      "contentDigest": "sha256:2a82a3ad4d9ebd235d615733b75cfb16acf3a83fea87cb2aaf679d683c120ee7"
+    },
+    {
+      "candidateId": "cand_32169681463f2b93a1f0798e",
+      "path": "/concepts/cosmic-recursion/argument",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/argument",
+      "segments": [
+        "cosmic-recursion",
+        "argument"
+      ],
+      "contentDigest": "sha256:e3056b22e193ac2cfdda7ca9446675672f3718c3a9ea922a294ed31e030812a7"
+    },
+    {
+      "candidateId": "cand_c6b061c4183758c2920b9ec0",
+      "path": "/concepts/cosmic-recursion/critique",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/critique",
+      "segments": [
+        "cosmic-recursion",
+        "critique"
+      ],
+      "contentDigest": "sha256:cec248d11e1cae763acf7002343c9c06fb74f39a720ef91b032633903f551e13"
+    },
+    {
+      "candidateId": "cand_a7603f4f4e1f0948c574c52d",
+      "path": "/concepts/cosmic-recursion/definition",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/definition",
+      "segments": [
+        "cosmic-recursion",
+        "definition"
+      ],
+      "contentDigest": "sha256:dc0f8f801d5a5b4e079b6fb87d801d7efbb9c8fae265d31f7a002cbf9da71abe"
+    },
+    {
+      "candidateId": "cand_4f9959397f06dadaa4f00d0f",
+      "path": "/concepts/cosmic-recursion/development",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/development",
+      "segments": [
+        "cosmic-recursion",
+        "development"
+      ],
+      "contentDigest": "sha256:ba43a8f5bdfdbd01c18945e477453acf306cbb2938885ebf65a550ce036f1948"
+    },
+    {
+      "candidateId": "cand_9963e97ce7563bd886ffe362",
+      "path": "/concepts/cosmic-recursion/limits",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/limits",
+      "segments": [
+        "cosmic-recursion",
+        "limits"
+      ],
+      "contentDigest": "sha256:8100319e1092786ea9a8fe142fb8e9638cfffbd181cd42053f9bab87cb2c38e4"
+    },
+    {
+      "candidateId": "cand_981e54dc4e399f8dd3400cc3",
+      "path": "/concepts/cosmic-recursion/origin",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/origin",
+      "segments": [
+        "cosmic-recursion",
+        "origin"
+      ],
+      "contentDigest": "sha256:2f5112e8b1dccf8b891a07c7e51df3ae57cdfda7aa275bdd91011a796176c01a"
+    },
+    {
+      "candidateId": "cand_3062f2ecc529be26d6b28874",
+      "path": "/concepts/cosmic-recursion/relationship",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/relationship",
+      "segments": [
+        "cosmic-recursion",
+        "relationship"
+      ],
+      "contentDigest": "sha256:9511624986ca4655e73266fc82ebfe31f2a819df0d5c7e5ae2778ea6e693d78a"
+    },
+    {
+      "candidateId": "cand_dff1556d6f55d11bdf873afd",
+      "path": "/concepts/epistemic-infrastructure/argument",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/argument",
+      "segments": [
+        "epistemic-infrastructure",
+        "argument"
+      ],
+      "contentDigest": "sha256:be6d00747acc8ee69969e9ee44303b83c77e1d1b40a65c215f44584c32cc7f4a"
+    },
+    {
+      "candidateId": "cand_f88363aea71ad19c537111d4",
+      "path": "/concepts/epistemic-infrastructure/critique",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/critique",
+      "segments": [
+        "epistemic-infrastructure",
+        "critique"
+      ],
+      "contentDigest": "sha256:277415b910779b963a7abdce3bc041b1fc0f1ee33f3de354c69520b7c8215728"
+    },
+    {
+      "candidateId": "cand_00550cfbe5ae4958c10fcc49",
+      "path": "/concepts/epistemic-infrastructure/definition",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/definition",
+      "segments": [
+        "epistemic-infrastructure",
+        "definition"
+      ],
+      "contentDigest": "sha256:6f68a0d4cc2012e7f89d2d42b56722734663817d051cd77ff950cdf9f8df281d"
+    },
+    {
+      "candidateId": "cand_a3f4072f82d1b2c2b58e733b",
+      "path": "/concepts/epistemic-infrastructure/development",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/development",
+      "segments": [
+        "epistemic-infrastructure",
+        "development"
+      ],
+      "contentDigest": "sha256:38b64178373afc069f851f2ab0f22be53d4530dead4d12487e664268ea3581b5"
+    },
+    {
+      "candidateId": "cand_3b2772d0bd8a73ea4e8f59d5",
+      "path": "/concepts/epistemic-infrastructure/limits",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/limits",
+      "segments": [
+        "epistemic-infrastructure",
+        "limits"
+      ],
+      "contentDigest": "sha256:f77b6f1f9948e9cd7a5448313158a190fa6a56ac46dfc808709eb07d027bba7a"
+    },
+    {
+      "candidateId": "cand_9835f3fd076b64ead9cbbca1",
+      "path": "/concepts/epistemic-infrastructure/origin",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/origin",
+      "segments": [
+        "epistemic-infrastructure",
+        "origin"
+      ],
+      "contentDigest": "sha256:6f7d44bb3ab1e89cf64bb7cb0e61f91b89dd88aae4e711188a9169c4acf07a80"
+    },
+    {
+      "candidateId": "cand_b90586936a17ca13a038cb62",
+      "path": "/concepts/epistemic-infrastructure/relationship",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/epistemic-infrastructure/relationship",
+      "segments": [
+        "epistemic-infrastructure",
+        "relationship"
+      ],
+      "contentDigest": "sha256:6fbad9fa60e0f9dba10921a1fda3fc6cd9f6d405ad7b6cbe87caddf6dbc963a6"
+    },
+    {
+      "candidateId": "cand_6e5cae25a74731057505dc27",
+      "path": "/concepts/governed-autonomy/definition",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition",
+      "segments": [
+        "governed-autonomy",
+        "definition"
+      ],
+      "contentDigest": "sha256:855d4bc00fc63f3354f5a148d3f288da337aee88de6939c7734b54e37457e00a"
+    },
+    {
+      "candidateId": "cand_2414b35f36bbe49c7191ed21",
+      "path": "/concepts/human-agency/application",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/human-agency/application",
+      "segments": [
+        "human-agency",
+        "application"
+      ],
+      "contentDigest": "sha256:8a61a216e378c8e610f7871fee91277d0b56e51ca741bf021442efb33a61b7a9"
+    },
+    {
+      "candidateId": "cand_65e1bc49ba4f5331b70873ec",
+      "path": "/concepts/human-agency/argument",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/human-agency/argument",
+      "segments": [
+        "human-agency",
+        "argument"
+      ],
+      "contentDigest": "sha256:7e2524cfe7e2667f16e4b0f8308da4bc4cf914fb1446be1af99c80ce3234fd6b"
+    },
+    {
+      "candidateId": "cand_976ef363f543c74b6de18f81",
+      "path": "/concepts/human-agency/critique",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/human-agency/critique",
+      "segments": [
+        "human-agency",
+        "critique"
+      ],
+      "contentDigest": "sha256:58aa2d120e5767bda35025ef3848c0a553d6d81578a7ee9ae501333bb69f9905"
+    },
+    {
+      "candidateId": "cand_cd5f05f97fe7cf9f14b760c9",
+      "path": "/concepts/human-agency/definition",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/human-agency/definition",
+      "segments": [
+        "human-agency",
+        "definition"
+      ],
+      "contentDigest": "sha256:687b7ba47b9cda54e624f3bcdf9ebf0cf340f7b618822b211574f07d11f2760d"
+    },
+    {
+      "candidateId": "cand_b98c789039b918ee6dcc5efe",
+      "path": "/concepts/human-agency/development",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/human-agency/development",
+      "segments": [
+        "human-agency",
+        "development"
+      ],
+      "contentDigest": "sha256:2c5af43111f2fe360a1a987400171b9fabb14e2748efef176d8dd859af58bb9c"
+    },
+    {
+      "candidateId": "cand_50310cb0a578d0d98844c11c",
+      "path": "/concepts/human-agency/limits",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/human-agency/limits",
+      "segments": [
+        "human-agency",
+        "limits"
+      ],
+      "contentDigest": "sha256:bf748adf42aacec8731107be04c058e8219565eae562d1c7b430f01cd7ece84d"
+    },
+    {
+      "candidateId": "cand_5d18811d3e8ef9e4d02d9da2",
+      "path": "/concepts/human-agency/origin",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/human-agency/origin",
+      "segments": [
+        "human-agency",
+        "origin"
+      ],
+      "contentDigest": "sha256:6971092df76e79caf6e42f5f6bbd6153f188b46984c5cf6d7f15c625e43bf848"
+    },
+    {
+      "candidateId": "cand_52ca34f5d175d915a5aed2c7",
+      "path": "/concepts/human-agency/relationship",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/human-agency/relationship",
+      "segments": [
+        "human-agency",
+        "relationship"
+      ],
+      "contentDigest": "sha256:58ef61dec715c77f0a280ebe50ba49624896d0e7efdd30dd96dfcefa925d33c1"
+    },
+    {
+      "candidateId": "cand_d0c6db73dd5bff24eb348d92",
+      "path": "/concepts/mental-sovereignty/definition",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/definition",
+      "segments": [
+        "mental-sovereignty",
+        "definition"
+      ],
+      "contentDigest": "sha256:6f6a3920d07aca0c7b4c3dd4d1f87cd594e1dc82806997db8e08a6468e824766"
+    },
+    {
+      "candidateId": "cand_315691ce49192667fdb1e58b",
+      "path": "/concepts/mental-sovereignty/development",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/development",
+      "segments": [
+        "mental-sovereignty",
+        "development"
+      ],
+      "contentDigest": "sha256:5180e16a028531e1cf45d1d3d4b8601a1a822b30c85eed5c99482b711afc9714"
+    },
+    {
+      "candidateId": "cand_6f33fc8f47f2ebdc55baef65",
+      "path": "/concepts/mental-sovereignty/relationship",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/mental-sovereignty/relationship",
+      "segments": [
+        "mental-sovereignty",
+        "relationship"
+      ],
+      "contentDigest": "sha256:c9d1922b4365544788aa2b78ad01e8366edeeb4841270d79614d31ac9875d6d8"
+    },
+    {
+      "candidateId": "cand_94be7c924fbc92f197067186",
+      "path": "/concepts/authorial-lineage/origin",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/authorial-lineage/origin",
+      "segments": [
+        "authorial-lineage",
+        "origin"
+      ],
+      "contentDigest": "sha256:d13c170559fccc51bd73a0fc5f428e9c3dbbba049e56407c0f874e7687229f35"
+    },
+    {
+      "candidateId": "cand_b23f8e82f8ed9e7b18c8a535",
+      "path": "/concepts/civilizational-memory/origin",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/civilizational-memory/origin",
+      "segments": [
+        "civilizational-memory",
+        "origin"
+      ],
+      "contentDigest": "sha256:cb5daf41ec85d8161efb71dade778b51e97e0a428e212a4eeff964033f22a135"
+    },
+    {
+      "candidateId": "cand_eca3c4e2264913b2c113b043",
+      "path": "/concepts/maha-principle/relationship",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/maha-principle/relationship",
+      "segments": [
+        "maha-principle",
+        "relationship"
+      ],
+      "contentDigest": "sha256:f74e5b5746c982633f709e2e6ab99eb274e000176dfd0149da921942cb2b610f"
+    },
+    {
+      "candidateId": "cand_4acd70cabb69b750481a316c",
+      "path": "/concepts/recursive-institutions/definition",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/recursive-institutions/definition",
+      "segments": [
+        "recursive-institutions",
+        "definition"
+      ],
+      "contentDigest": "sha256:1c869b2e298a5156c0b41426ceb015780e7e9bdfce5a62488e74d331fd89f4f3"
+    },
+    {
+      "candidateId": "cand_2ef397182eddc44b4664a277",
+      "path": "/concepts/recursive-institutions/relationship",
+      "canonicalUrl": "https://www.mayonemaharajan.com/concepts/recursive-institutions/relationship",
+      "segments": [
+        "recursive-institutions",
+        "relationship"
+      ],
+      "contentDigest": "sha256:56e0b1962ebe910615f18e5daa23a9ba62182d4463574cc4dbc9cfd53db87d2b"
+    }
+  ],
+  "provenanceDigest": "sha256:5f63fc30273c52385702fa78f94ab25ab50ee8b607ad481d13a58c7f72fa1e9c"
+}

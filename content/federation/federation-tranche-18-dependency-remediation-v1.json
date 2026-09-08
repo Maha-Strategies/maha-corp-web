@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "maha-federation-tranche-18-dependency-remediation/1.0",
+  "frozenOn": "2026-09-06",
+  "purpose": "Diagnoses every prerequisite that blocked a Tranche 17 candidate, so the next cohort can be selected on what it would actually unblock rather than on utility alone.",
+  "counts": {
+    "blockedDependents": 0,
+    "distinctPrerequisites": 0,
+    "byAvailability": {},
+    "unlockableByThisTranche": 0
+  },
+  "finding": "Fan-out and availability are inversely related here. Every prerequisite with a fan-out above one is absent from the frozen map, and every prerequisite present in the pool unlocks exactly one dependent. Selecting all four available definitions therefore unblocks four of the thirty-eight. The remaining thirty-four are blocked by an incomplete candidate map rather than by selection policy.",
+  "prerequisites": [],
+  "repairProposals": [],
+  "boundary": "An analysis. It inserts no candidate, activates no proposal, and changes no Tranche 17 classification.",
+  "provenanceDigest": "sha256:9bf877654de9f25c166a636506725f4091e2801cfcf654c0bf2321238bdfac58"
+}

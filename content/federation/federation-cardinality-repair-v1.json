@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "maha-federation-cardinality-repair/1.0",
+  "frozenOn": "2026-09-07",
+  "finding": "Map v3 mixed 1,628 ranked route candidates with 32 unranked definition identities while retaining the 1,628-route summary. Treating all 1,660 as routes projected 4,032 and contradicted allocation and activeRanks.",
+  "decision": "Model A: preserve all 1,628 route candidates and represent the 32 identities as non-route canonical graph objects. No reviewed route is displaced.",
+  "alternativesRejected": [
+    "Grow to 4,032 routes: violates the frozen 4,000 target and assigns routes without ranking or allocation.",
+    "Displace 32 reviewed routes: no added definition has observed route-specific demand sufficient to justify replacement.",
+    "Delete the definitions: would reopen 94 identity gaps and discard Tranche 18 work."
+  ],
+  "audit": {
+    "derived": {
+      "observedCanonicalRoutes": 2372,
+      "routeCandidateCount": 1628,
+      "graphObjectCount": 32,
+      "totalObjects": 1660,
+      "uniqueCandidateIds": 1660,
+      "uniqueCanonicalUrls": 1660,
+      "projectedCanonicalRoutes": 4000,
+      "activeRanksLength": 1628,
+      "lineageAdded": 32,
+      "lineageSuperseded": 0,
+      "coveredByATranche": 1660,
+      "coveredByNoTranche": 0
+    },
+    "declared": {
+      "summaryActiveCandidates": 1628,
+      "summaryProjectedCanonicalRoutes": 4000
+    },
+    "defects": [],
+    "consistent": true
+  },
+  "execution": {
+    "candidateContentChanged": false,
+    "reviewsRewritten": false,
+    "publicRoutesGenerated": false,
+    "buildRun": false,
+    "deployed": false
+  },
+  "provenanceDigest": "sha256:c4654755fb13ee9744acf85c30cdf729756bc64b03b90eaf6be608fa0d540a13"
+}

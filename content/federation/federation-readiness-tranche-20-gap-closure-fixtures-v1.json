@@ -1,0 +1,129 @@
+{
+  "schemaVersion": "maha-federation-gap-closure-fixtures/1.0",
+  "frozenOn": "2026-09-07",
+  "syntheticOnly": true,
+  "definitionRevision": {
+    "schemaVersion": "maha-federation-definition-revision/1.0",
+    "revisionId": "t20-source-recovery-definition",
+    "graphObjectId": "cand_a265c5d9ff36ca1b17bfb8a0",
+    "conceptId": "urn:maha:concept:evidence:source-recovery",
+    "priorDisposition": "deferred-pending-implementation",
+    "proposedDisposition": "non-route-graph-object",
+    "proposedEvidenceGroup": "first-party",
+    "exactImplementationLocators": [
+      "lib/source-recovery.ts — recoveryRequests and validateObservation and compileRecoveryPackets"
+    ],
+    "reviewDecision": "accept-for-local-readiness",
+    "canonicalBindingChanged": false,
+    "boundary": "This revision establishes the implemented Maha recovery protocol only. It does not establish successful recovery, source inspection, substitution, or external consensus."
+  },
+  "fixtures": [
+    {
+      "fixtureId": "interval-add-i64",
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "operation": "interval-add",
+      "input": {
+        "left": [
+          "10",
+          "14"
+        ],
+        "right": [
+          "3",
+          "5"
+        ],
+        "unit": "nm"
+      },
+      "expected": {
+        "interval": "[13,19]",
+        "unit": "nm"
+      },
+      "refusals": [
+        "mixed-unit",
+        "lower-above-upper",
+        "noncanonical-integer",
+        "i64-overflow"
+      ],
+      "claimsIndependentReproduction": false
+    },
+    {
+      "fixtureId": "newton-fixed-iteration",
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "operation": "newtonRoot",
+      "input": {
+        "function": "x^2-2",
+        "derivative": "2x",
+        "x0": 1,
+        "iterations": 5
+      },
+      "expected": {
+        "precisionDigits": 12,
+        "methodLocator": "DLMF 3.8.4",
+        "receiptRecomputable": true
+      },
+      "refusals": [
+        "zero-derivative",
+        "missing-units",
+        "missing-assumptions",
+        "missing-uncertainty-treatment"
+      ],
+      "claimsGeneralConvergence": false
+    },
+    {
+      "fixtureId": "canonical-sha256-commitment",
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "operation": "provenanceDigest",
+      "input": {
+        "z": 2,
+        "a": 1
+      },
+      "expected": {
+        "keyOrderIndependent": true,
+        "nonEmptyRequired": true
+      },
+      "refusals": [
+        "empty-payload",
+        "unsupported-value"
+      ],
+      "claimsSignatureOrTruth": false
+    },
+    {
+      "fixtureId": "public-workflow-registry",
+      "conceptId": "urn:maha:concept:computation:reproducibility-fixtures",
+      "operation": "EVIDENCE_WORKFLOW_REGISTRY_DIGEST",
+      "input": {
+        "syntheticOnly": true
+      },
+      "expected": {
+        "digestBound": true,
+        "purchaseEnabled": false,
+        "deployed": false
+      },
+      "refusals": [
+        "digest-mismatch",
+        "non-synthetic-input"
+      ],
+      "claimsIndependentReproduction": false
+    },
+    {
+      "fixtureId": "source-recovery-state-machine",
+      "conceptId": "urn:maha:concept:evidence:source-recovery",
+      "operation": "compileRecoveryPackets",
+      "input": {
+        "contentInspected": false,
+        "exactLocator": null
+      },
+      "expected": {
+        "identityAndVersionStatesDistinct": true,
+        "canonicalMutationAuthorized": false
+      },
+      "refusals": [
+        "inspection-claimed-by-recovery",
+        "unknown-state",
+        "identity-verdict-disagrees"
+      ],
+      "claimsRecoveredSourceCanonical": false
+    }
+  ],
+  "boundary": "Fixtures close only the named local application role. They contain synthetic inputs and cannot confer readiness on sibling roles.",
+  "provenanceDigest": "sha256:cbc553fb1216d229b2046f20e1afd6c8bf236e4bf79fe6cd1a6fb854b5c47a44"
+}

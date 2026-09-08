@@ -1,0 +1,1969 @@
+{
+  "schemaVersion": "maha-federation-tranche-13-semantic-validation/1.0",
+  "frozenOn": "2026-09-06",
+  "method": "Each candidate was adjudicated against the cohort and the observed surface on concept ownership, route role, and the question the route asks. Distinctness is decided on meaning rather than URL shape: two candidates sharing a concept are duplicates only where they also ask the same question, which is why same-concept candidates at different roles are retained.",
+  "duplicateRule": "A candidate is duplicative only where another candidate in the cohort shares its concept and its route role, or where a normalised search intent already appears. Both were checked across all 100; neither occurs.",
+  "validations": [
+    {
+      "candidateId": "cand_76bb498009ae77f248d9b2b3",
+      "candidateDigest": "sha256:8b8a6811a75c58d4451ef81d516e415bce8968eb07177201ece447fab2d6e15e",
+      "path": "/clearing/evidence-workflows/uncertainty-recording/commercial-use",
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "routeRole": "commercial-use",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_4c8e1c0aaa0eb1fb2b0105eb",
+        "path": "/clearing/evidence-workflows/uncertainty-recording/failure-modes",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_de47b40f36767f60c101974a",
+      "candidateDigest": "sha256:6e88fd8c188c4db7c48a69ebaa2ade787e7c1bbb2ace6a5536fbdadcf89f4c0e",
+      "path": "/clearing/evidence-workflows/claim-intake/commercial-use",
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "routeRole": "commercial-use",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_34d368d3cffc0123319624c3",
+        "path": "/clearing/evidence-workflows/claim-intake/workflow",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_3b1a9ef814c8fd19ae5dd4f3",
+      "candidateDigest": "sha256:2c7bcf39f69d9625609a989741a86d0a84c56407c9f6920e1e9138e6defbef68",
+      "path": "/clearing/evidence-workflows/claim-intake/verification",
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "routeRole": "verification",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_34d368d3cffc0123319624c3",
+        "path": "/clearing/evidence-workflows/claim-intake/workflow",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_ec131abe6004e62d84a73718",
+      "candidateDigest": "sha256:1ac9ee8d220a9824acfd03608960b4e4cf4330f31c83df832848f6817d138f41",
+      "path": "/clearing/evidence-workflows/uncertainty-recording/verification",
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "routeRole": "verification",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_4c8e1c0aaa0eb1fb2b0105eb",
+        "path": "/clearing/evidence-workflows/uncertainty-recording/failure-modes",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_ee7975f658326487f563d6c1",
+      "candidateDigest": "sha256:4d408ca80708bb25d8b63617ae288a802c4522778574e4d0bd176cc9447a8cf0",
+      "path": "/clearing/evidence-workflows/runtime-witness-receipts/commercial-use",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "routeRole": "commercial-use",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_114ff651c020a137c05c0a70",
+        "path": "/clearing/evidence-workflows/runtime-witness-receipts/workflow",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_b0b9232e69dc37951ca96a2d",
+      "candidateDigest": "sha256:dc93bb51ebde463575ca9308a18e099be5f4ff4fd45e6a22eb6a368fbaf1be71",
+      "path": "/clearing/evidence-workflows/evidence-dossiers/commercial-use",
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "routeRole": "commercial-use",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_567977061305bfb171030d13",
+        "path": "/clearing/evidence-workflows/evidence-dossiers/verification",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_4732f241656c17cfa80dea46",
+      "candidateDigest": "sha256:1b6e7bbbf3de365f20529c637c8377d210c98ce112898718acf755b6788ccd61",
+      "path": "/clearing/evidence-workflows/runtime-witness-receipts/verification",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "routeRole": "verification",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_114ff651c020a137c05c0a70",
+        "path": "/clearing/evidence-workflows/runtime-witness-receipts/workflow",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_4c8e1c0aaa0eb1fb2b0105eb",
+      "candidateDigest": "sha256:ae5f9ae2f90c5ef3159d49498e67a64ac60321ef1aca70bb6206d973f3432a2a",
+      "path": "/clearing/evidence-workflows/uncertainty-recording/failure-modes",
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "routeRole": "failure-modes",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_76bb498009ae77f248d9b2b3",
+        "path": "/clearing/evidence-workflows/uncertainty-recording/commercial-use",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_54bf0ff5e1dfaa08469e51ad",
+      "candidateDigest": "sha256:4f1763cf261a7bda29ee5708b43085a5cafbe1233c3b0780a962368243972721",
+      "path": "/clearing/evidence-workflows/version-relationship/commercial-use",
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "routeRole": "commercial-use",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_7c06c37e2399d72dd61ef2bc",
+        "path": "/clearing/evidence-workflows/version-relationship/verification",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_7c130ffaab158bfd0ad4df45",
+      "candidateDigest": "sha256:0d4a0568ff32ebad8004095fe6936c235a358ad72d40d8e599877473481eb52d",
+      "path": "/clearing/evidence-workflows/privacy-boundary/commercial-use",
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "routeRole": "commercial-use",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_52ba56be784230fe4c5a90d4",
+        "path": "/clearing/evidence-workflows/privacy-boundary/failure-modes",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_7ea97e6389a152a6e06ea440",
+      "candidateDigest": "sha256:df45d696a8632bc8b818a5047f0a21ae7e1bef653adc0ba454ca8ca353b18575",
+      "path": "/clearing/evidence-workflows/internal-review/commercial-use",
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "routeRole": "commercial-use",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_0e93144f12fa050be40c458a",
+        "path": "/clearing/evidence-workflows/internal-review/failure-modes",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_af1e13cd58046f3b89fcf312",
+      "candidateDigest": "sha256:d2b7bf52925e147704bbbbca1cd73fc9ce50eb5ac6e43909f3c51b141a43abcd",
+      "path": "/clearing/evidence-workflows/claim-intake/failure-modes",
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "routeRole": "failure-modes",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_34d368d3cffc0123319624c3",
+        "path": "/clearing/evidence-workflows/claim-intake/workflow",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_567977061305bfb171030d13",
+      "candidateDigest": "sha256:c60df98da6108b422b381a004928ba274535a8ea08a5f818ef7e86b07fdce22d",
+      "path": "/clearing/evidence-workflows/evidence-dossiers/verification",
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "routeRole": "verification",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_b0b9232e69dc37951ca96a2d",
+        "path": "/clearing/evidence-workflows/evidence-dossiers/commercial-use",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_82064d5d886a4f5debe9d0ae",
+      "candidateDigest": "sha256:6467cf552c9d278c1a4eb04bff8d19c35ff48353d2058aba3fc71435a5d137d8",
+      "path": "/clearing/evidence-workflows/uncertainty-recording/workflow",
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "routeRole": "workflow",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_4c8e1c0aaa0eb1fb2b0105eb",
+        "path": "/clearing/evidence-workflows/uncertainty-recording/failure-modes",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_34d368d3cffc0123319624c3",
+      "candidateDigest": "sha256:f1d4e3c21445a08d8e06fcf6e98c025de9dc462b74ba11568bee65ee9d59e623",
+      "path": "/clearing/evidence-workflows/claim-intake/workflow",
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "routeRole": "workflow",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_3b1a9ef814c8fd19ae5dd4f3",
+        "path": "/clearing/evidence-workflows/claim-intake/verification",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_7c06c37e2399d72dd61ef2bc",
+      "candidateDigest": "sha256:bd0cbd95064d87a8da7725273766f9baf000b130e837e4ae29e91173002f568b",
+      "path": "/clearing/evidence-workflows/version-relationship/verification",
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "routeRole": "verification",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_54bf0ff5e1dfaa08469e51ad",
+        "path": "/clearing/evidence-workflows/version-relationship/commercial-use",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_87bc8ff96e129e61197cfe19",
+      "candidateDigest": "sha256:288399bb6328ed17de22eff5baad3ba2168c5d208e6d88ba87cc39eddf84e2c8",
+      "path": "/clearing/evidence-workflows/privacy-boundary/verification",
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "routeRole": "verification",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_52ba56be784230fe4c5a90d4",
+        "path": "/clearing/evidence-workflows/privacy-boundary/failure-modes",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_e19e8901c36b13c148997e41",
+      "candidateDigest": "sha256:9e66c4ab9f60d3dfcdfcdf9afa015c7d23e9c58f739d20cd989187881b3312bd",
+      "path": "/clearing/evidence-workflows/internal-review/verification",
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "routeRole": "verification",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_0e93144f12fa050be40c458a",
+        "path": "/clearing/evidence-workflows/internal-review/failure-modes",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_152bd81a9c3042b26c93ee8f",
+      "candidateDigest": "sha256:96ba868917d3c947e765ff584936dec1e6c546c137a79b7dc3e596df4bb4cb56",
+      "path": "/clearing/evidence-workflows/audit-export/commercial-use",
+      "conceptId": "urn:maha:concept:evidence:audit-export",
+      "routeRole": "commercial-use",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_b4bf5d63227ea2a4fed280b1",
+        "path": "/clearing/evidence-workflows/audit-export/verification",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_5fda66506d4caf3a6f10c1d0",
+      "candidateDigest": "sha256:2d49bee97c494f70a9bf86eba03efdebcf7ce1008058e5c99b91ae8eb0dbd1e7",
+      "path": "/clearing/evidence-workflows/canonical-release/commercial-use",
+      "conceptId": "urn:maha:concept:evidence:canonical-release",
+      "routeRole": "commercial-use",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_d2f94b145cf7db71f092d98f",
+        "path": "/clearing/evidence-workflows/canonical-release/verification",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_5025ed02e119fef37e34abfb",
+      "candidateDigest": "sha256:88056f7f986a273cef9886bea77e87fd1fc4f4b552f194ae2fe4005281eb91bc",
+      "path": "/clearing/evidence-workflows/runtime-witness-receipts/failure-modes",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "routeRole": "failure-modes",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_114ff651c020a137c05c0a70",
+        "path": "/clearing/evidence-workflows/runtime-witness-receipts/workflow",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_f958c961ac3d47800b272d37",
+      "candidateDigest": "sha256:b45466eb894c750f78051682e4cc05edc768334c41a520e13e8197d3d850b5df",
+      "path": "/clearing/evidence-workflows/evidence-dossiers/failure-modes",
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "routeRole": "failure-modes",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_567977061305bfb171030d13",
+        "path": "/clearing/evidence-workflows/evidence-dossiers/verification",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_3bd043436f7c9dd07250974b",
+      "candidateDigest": "sha256:63c3fb5498ceb12c3f3eed9ea0807c1aec3e3030b531f6365ce71cb0d8e6f923",
+      "path": "/clearing/evidence-workflows/unsupported-inference/commercial-use",
+      "conceptId": "urn:maha:concept:evidence:unsupported-inference",
+      "routeRole": "commercial-use",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_16c398dac13cec683a380b28",
+        "path": "/clearing/evidence-workflows/unsupported-inference/verification",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_114ff651c020a137c05c0a70",
+      "candidateDigest": "sha256:111aa7c1d663af87c25118c4d12f741ae6f6f5e657bb461243ff797fbb719e17",
+      "path": "/clearing/evidence-workflows/runtime-witness-receipts/workflow",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "routeRole": "workflow",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_4732f241656c17cfa80dea46",
+        "path": "/clearing/evidence-workflows/runtime-witness-receipts/verification",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_b4bf5d63227ea2a4fed280b1",
+      "candidateDigest": "sha256:4106a268ab0e5a16c96ac4e8aefbb76091adb770db7625d5c50817f7b5ef27de",
+      "path": "/clearing/evidence-workflows/audit-export/verification",
+      "conceptId": "urn:maha:concept:evidence:audit-export",
+      "routeRole": "verification",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_152bd81a9c3042b26c93ee8f",
+        "path": "/clearing/evidence-workflows/audit-export/commercial-use",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_d2f94b145cf7db71f092d98f",
+      "candidateDigest": "sha256:6e2c9c470a7c78cf2fb4d5c4d38c611d0acf9b0c831f05698ca4b1fe0fbceaa8",
+      "path": "/clearing/evidence-workflows/canonical-release/verification",
+      "conceptId": "urn:maha:concept:evidence:canonical-release",
+      "routeRole": "verification",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_5fda66506d4caf3a6f10c1d0",
+        "path": "/clearing/evidence-workflows/canonical-release/commercial-use",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_0e93144f12fa050be40c458a",
+      "candidateDigest": "sha256:66adb240e27f421d5111cb3f4e4e3c060c25f6305f3bdb2200f0ef0843e62a2e",
+      "path": "/clearing/evidence-workflows/internal-review/failure-modes",
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "routeRole": "failure-modes",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_7ea97e6389a152a6e06ea440",
+        "path": "/clearing/evidence-workflows/internal-review/commercial-use",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_52ba56be784230fe4c5a90d4",
+      "candidateDigest": "sha256:50a8d0f09ee7b194f5a8020848130506a6e5335e68e748d45ca2adfac37206ea",
+      "path": "/clearing/evidence-workflows/privacy-boundary/failure-modes",
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "routeRole": "failure-modes",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_7c130ffaab158bfd0ad4df45",
+        "path": "/clearing/evidence-workflows/privacy-boundary/commercial-use",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_c9b1999e391248ee19abc521",
+      "candidateDigest": "sha256:1d23f57e8e59ef75a3f2fe40db11a83ff16c976bad5167a3be212ebbec6ce439",
+      "path": "/clearing/evidence-workflows/version-relationship/failure-modes",
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "routeRole": "failure-modes",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_54bf0ff5e1dfaa08469e51ad",
+        "path": "/clearing/evidence-workflows/version-relationship/commercial-use",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_ec46737935d410443b264871",
+      "candidateDigest": "sha256:ed53c3025d4ebf020fdb0b285076ad28d1de341aa594dd5f6a833aec14d8afd9",
+      "path": "/clearing/evidence-workflows/passage-support/commercial-use",
+      "conceptId": "urn:maha:concept:evidence:passage-support",
+      "routeRole": "commercial-use",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_02377c9cde28ef6f26525b2a",
+      "candidateDigest": "sha256:8f0d8b2c8548439fbf9d8018c744eade99995f94b99d511d64073c6c00e39f85",
+      "path": "/clearing/evidence-workflows/locator-verification/commercial-use",
+      "conceptId": "urn:maha:concept:evidence:locator-verification",
+      "routeRole": "commercial-use",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_ef11e2b421fe9aac0d8c24c3",
+      "candidateDigest": "sha256:50b6510c2fb1360c1a0de128034c4aace139d17e79caeaede2479ea799864d29",
+      "path": "/clearing/evidence-workflows/evidence-dossiers/workflow",
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "routeRole": "workflow",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_567977061305bfb171030d13",
+        "path": "/clearing/evidence-workflows/evidence-dossiers/verification",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_16c398dac13cec683a380b28",
+      "candidateDigest": "sha256:1ea6a7f324d3ac3b3242d154e69f39002e71bdfe422a31fb1c964a06c0aae959",
+      "path": "/clearing/evidence-workflows/unsupported-inference/verification",
+      "conceptId": "urn:maha:concept:evidence:unsupported-inference",
+      "routeRole": "verification",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": {
+        "candidateId": "cand_3bd043436f7c9dd07250974b",
+        "path": "/clearing/evidence-workflows/unsupported-inference/commercial-use",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_ec3b866d1dd8cb3b5b4608b0",
+      "candidateDigest": "sha256:a1e261f28d256bd8a6ba831cace1f221fd83f949ac2c846d204af4893cdf15d5",
+      "path": "/clearing/evidence-workflows/source-recovery/commercial-use",
+      "conceptId": "urn:maha:concept:evidence:source-recovery",
+      "routeRole": "commercial-use",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "local-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "blocked on ownership or dependency",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "missing"
+    },
+    {
+      "candidateId": "cand_189ffe3dc2c1dbc11ed11a6d",
+      "candidateDigest": "sha256:b19dc624d7549f7c1a1c0056a36fd400b4482d937dc17814b473edfe79f5c044",
+      "path": "/policy/quantum-policy/mechanisms",
+      "conceptId": "urn:maha:concept:governance:quantum-policy",
+      "routeRole": "mechanisms",
+      "declaredOwner": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_32cc2966901b6ed01e9ba95d",
+        "path": "/policy/quantum-policy/uncertainty",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "present-in-tranche-13"
+    },
+    {
+      "candidateId": "cand_32cc2966901b6ed01e9ba95d",
+      "candidateDigest": "sha256:31d39adc776b25a8d53c78bd9f286f629fa6562e2b1862f5baed6f94e77ccdf1",
+      "path": "/policy/quantum-policy/uncertainty",
+      "conceptId": "urn:maha:concept:governance:quantum-policy",
+      "routeRole": "uncertainty",
+      "declaredOwner": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_189ffe3dc2c1dbc11ed11a6d",
+        "path": "/policy/quantum-policy/mechanisms",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "present-in-tranche-13"
+    },
+    {
+      "candidateId": "cand_52b9a072f602eaff0522bca1",
+      "candidateDigest": "sha256:a9d1b384d862173e253b9b9514240550d2e0f6e05ac484315eb52962f65afb67",
+      "path": "/policy/public-sector-procurement/tradeoffs",
+      "conceptId": "urn:maha:concept:governance:public-sector-procurement",
+      "routeRole": "tradeoffs",
+      "declaredOwner": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_76253fd9cf2d6b6e024f0148",
+        "path": "/policy/public-sector-procurement/machine-rule",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_76253fd9cf2d6b6e024f0148",
+      "candidateDigest": "sha256:384ae22d862e1f9c93145cf6d401f259cb8d719e22675730a380612ef2abc396",
+      "path": "/policy/public-sector-procurement/machine-rule",
+      "conceptId": "urn:maha:concept:governance:public-sector-procurement",
+      "routeRole": "machine-rule",
+      "declaredOwner": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_52b9a072f602eaff0522bca1",
+        "path": "/policy/public-sector-procurement/tradeoffs",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_7afe45c2083622d0d98c352d",
+      "candidateDigest": "sha256:99c0412a3dfb21a6d54ce9e42ad63646638793e50a6794bbe87814c5ecf29a08",
+      "path": "/policy/scientific-evidence-policy/tradeoffs",
+      "conceptId": "urn:maha:concept:governance:scientific-evidence-policy",
+      "routeRole": "tradeoffs",
+      "declaredOwner": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_9761f950f4578a4523a01c57",
+        "path": "/policy/scientific-evidence-policy/evidence",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_9172e1bfbfeea46df5063099",
+      "candidateDigest": "sha256:1e85c1fca068c4991197ad08e7c6938c8b2d31ddaee815205e429b17898cabfc",
+      "path": "/policy/semiconductor-policy/tradeoffs",
+      "conceptId": "urn:maha:concept:governance:semiconductor-policy",
+      "routeRole": "tradeoffs",
+      "declaredOwner": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_9460d0d480ddb470345b4467",
+        "path": "/policy/semiconductor-policy/evidence",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_94320966a585c71799dddea9",
+      "candidateDigest": "sha256:ca7933dcf35418c7d42cc9280185d39f0ecbd8cb57f4a5511327db834581beae",
+      "path": "/policy/quantum-policy/sources",
+      "conceptId": "urn:maha:concept:governance:quantum-policy",
+      "routeRole": "sources",
+      "declaredOwner": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_189ffe3dc2c1dbc11ed11a6d",
+        "path": "/policy/quantum-policy/mechanisms",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "present-in-tranche-13"
+    },
+    {
+      "candidateId": "cand_9460d0d480ddb470345b4467",
+      "candidateDigest": "sha256:b603c7822dc9b9e571e761424681814510e1650e9961d9abdafd5c981d1165c6",
+      "path": "/policy/semiconductor-policy/evidence",
+      "conceptId": "urn:maha:concept:governance:semiconductor-policy",
+      "routeRole": "evidence",
+      "declaredOwner": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_9172e1bfbfeea46df5063099",
+        "path": "/policy/semiconductor-policy/tradeoffs",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_9761f950f4578a4523a01c57",
+      "candidateDigest": "sha256:613464cae74b8cee22a81c1cf77cae89fe33d5eb5a236119431f08b1fec1dbae",
+      "path": "/policy/scientific-evidence-policy/evidence",
+      "conceptId": "urn:maha:concept:governance:scientific-evidence-policy",
+      "routeRole": "evidence",
+      "declaredOwner": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_7afe45c2083622d0d98c352d",
+        "path": "/policy/scientific-evidence-policy/tradeoffs",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_9875eb9f6fbc2cbb02603cea",
+      "candidateDigest": "sha256:f5e15c06142ea8f4adf5709c3f9b48ced4e624f3acdcd05d9257b3af653ae906",
+      "path": "/policy/standards-and-conformity/sources",
+      "conceptId": "urn:maha:concept:governance:standards-and-conformity",
+      "routeRole": "sources",
+      "declaredOwner": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_a409ca8d43b4a3bb02e51328",
+        "path": "/policy/standards-and-conformity/uncertainty",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "present-in-tranche-13"
+    },
+    {
+      "candidateId": "cand_a159ed8af4bf1ffcf1709356",
+      "candidateDigest": "sha256:2e4740c1aa81c3859e4f5cae792ea7b2374f11851352f36fc387c06fd0384c4f",
+      "path": "/policy/quantum-policy/definition",
+      "conceptId": "urn:maha:concept:governance:quantum-policy",
+      "routeRole": "definition",
+      "declaredOwner": {
+        "canonicalOwner": "maha-policy",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of governance for maha-policy. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_189ffe3dc2c1dbc11ed11a6d",
+        "path": "/policy/quantum-policy/mechanisms",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
+      "dependencyState": "live"
+    },
+    {
+      "candidateId": "cand_a28acd0b1886418a86a340d5",
+      "candidateDigest": "sha256:68117f6077488cf419738827e9f5d23544926ad7830de4752ec2aa65174445ff",
+      "path": "/policy/scientific-evidence-policy/machine-rule",
+      "conceptId": "urn:maha:concept:governance:scientific-evidence-policy",
+      "routeRole": "machine-rule",
+      "declaredOwner": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_7afe45c2083622d0d98c352d",
+        "path": "/policy/scientific-evidence-policy/tradeoffs",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_a409ca8d43b4a3bb02e51328",
+      "candidateDigest": "sha256:4a8f6808657a2345d8335b4c9b1b1917e92adc2f97600659726b90124d854a35",
+      "path": "/policy/standards-and-conformity/uncertainty",
+      "conceptId": "urn:maha:concept:governance:standards-and-conformity",
+      "routeRole": "uncertainty",
+      "declaredOwner": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_9875eb9f6fbc2cbb02603cea",
+        "path": "/policy/standards-and-conformity/sources",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "present-in-tranche-13"
+    },
+    {
+      "candidateId": "cand_c87bc84e2db2ffd9e3c1ba16",
+      "candidateDigest": "sha256:8eb8b22b33024d290877abcce9f78d27afb93b24fe6850321755bea830d2bc72",
+      "path": "/policy/standards-and-conformity/definition",
+      "conceptId": "urn:maha:concept:governance:standards-and-conformity",
+      "routeRole": "definition",
+      "declaredOwner": {
+        "canonicalOwner": "maha-policy",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of governance for maha-policy. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_9875eb9f6fbc2cbb02603cea",
+        "path": "/policy/standards-and-conformity/sources",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
+      "dependencyState": "live"
+    },
+    {
+      "candidateId": "cand_e1c1aa7b25314b4733720988",
+      "candidateDigest": "sha256:2d0f3cb5eecc74d314a05e74f1daeb82ca5e7e78595b46ad5e1b877101cc3963",
+      "path": "/policy/standards-and-conformity/mechanisms",
+      "conceptId": "urn:maha:concept:governance:standards-and-conformity",
+      "routeRole": "mechanisms",
+      "declaredOwner": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_9875eb9f6fbc2cbb02603cea",
+        "path": "/policy/standards-and-conformity/sources",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "present-in-tranche-13"
+    },
+    {
+      "candidateId": "cand_efabfd2ecce960b3226372b4",
+      "candidateDigest": "sha256:9261cd9eba51c65a15218a36f27e3ab0e397614fc3c38feba69e33476f07841c",
+      "path": "/policy/semiconductor-policy/machine-rule",
+      "conceptId": "urn:maha:concept:governance:semiconductor-policy",
+      "routeRole": "machine-rule",
+      "declaredOwner": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_9172e1bfbfeea46df5063099",
+        "path": "/policy/semiconductor-policy/tradeoffs",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_0ac93a043a5abb3074cfa10e",
+      "candidateDigest": "sha256:346b7e9106b55ea63df385b11953e2ab9dd4d6372c5253e9b4eaf24a98bfb265",
+      "path": "/policy/machine-contracting/current-law",
+      "conceptId": "urn:maha:concept:governance:machine-contracting",
+      "routeRole": "current-law",
+      "declaredOwner": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_1249f5fa919624b3f9c219f8",
+      "candidateDigest": "sha256:64c910bc4728d2cad34c6dbc640022cb9e8e5db83ae26b6d1ecf799ffb5a6ce1",
+      "path": "/policy/model-evaluation/comparison",
+      "conceptId": "urn:maha:concept:governance:model-evaluation",
+      "routeRole": "comparison",
+      "declaredOwner": {
+        "canonicalOwner": "maha-policy",
+        "role": "owner-application",
+        "boundary": "This route may apply governance; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_72999d743cb7ff20c962d06e",
+      "candidateDigest": "sha256:6ce97200fc761f16b50ed76402c5cc7782cca14cbde19df5e9315802f82ceb7b",
+      "path": "/federation/research/compiler-provenance/method",
+      "conceptId": "urn:maha:concept:evidence:compiler-provenance",
+      "routeRole": "method",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_0b45509e40de45dc7662f3b9",
+        "path": "/federation/research/compiler-provenance/source-contract",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_1311261f731efbee6d81ea83",
+      "candidateDigest": "sha256:9d7dc144f61d210552053f175319fb9e9c363bf15dc19fdddc1cea5440979479",
+      "path": "/federation/research/inference-boundary/failure-mode",
+      "conceptId": "urn:maha:concept:evidence:inference-boundary",
+      "routeRole": "failure-mode",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_0b45509e40de45dc7662f3b9",
+      "candidateDigest": "sha256:0f6dac64b20597c8918e807a13209d8810fda35168a04def9d740657da3eee54",
+      "path": "/federation/research/compiler-provenance/source-contract",
+      "conceptId": "urn:maha:concept:evidence:compiler-provenance",
+      "routeRole": "source-contract",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_72999d743cb7ff20c962d06e",
+        "path": "/federation/research/compiler-provenance/method",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_896f2056ad75d5e09aa5ec96",
+      "candidateDigest": "sha256:3a40f24f8f2233e9e3564972ce037117135ee576db14ae5305ca08189e55939d",
+      "path": "/federation/research/container-image/protocol",
+      "conceptId": "urn:maha:concept:evidence:container-image",
+      "routeRole": "protocol",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_318ea274652b8b7791e3138c",
+        "path": "/federation/research/container-image/method",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_8fded27b2e8ee022f7dd9116",
+      "candidateDigest": "sha256:2726edfe7d914d9b938c05117e9678d6cb3822786563deabd7d7002b604fcfc5",
+      "path": "/federation/research/citation-lineage/protocol",
+      "conceptId": "urn:maha:concept:evidence:citation-lineage",
+      "routeRole": "protocol",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_2a68123b426603aa282cd998",
+        "path": "/federation/research/citation-lineage/method",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_f380410b6fedc96e4e94647e",
+      "candidateDigest": "sha256:d289ff0b5835accf566ca584bf43a4224fc53a1b2f1f8bc3a0955682f7f571d7",
+      "path": "/federation/research/author-manuscript/protocol",
+      "conceptId": "urn:maha:concept:evidence:author-manuscript",
+      "routeRole": "protocol",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_e875b5ace1229e7c254074bd",
+        "path": "/federation/research/author-manuscript/method",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_f5f517b4ec8b88872d241f43",
+      "candidateDigest": "sha256:71142416d9f8fb7c7b3fb1dbc8580c2b61131053b367c0f8c8ceccf93153a12a",
+      "path": "/federation/research/claim-extraction/protocol",
+      "conceptId": "urn:maha:concept:evidence:claim-extraction",
+      "routeRole": "protocol",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_15104c29d1fd26b7a57944b8",
+        "path": "/federation/research/claim-extraction/method",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_abb39a55a803cd6972178836",
+      "candidateDigest": "sha256:1a80835023806cf3201ce08dbb59a3cd13790a800a83fbc223413ef165ca240a",
+      "path": "/federation/research/benchmark-design/relationships",
+      "conceptId": "urn:maha:concept:evidence:benchmark-design",
+      "routeRole": "relationships",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_dea77fb980e768f3f2f0a828",
+        "path": "/federation/research/benchmark-design/machine-record",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_42d249917e56d726fbe3d630",
+      "candidateDigest": "sha256:4c1304ab83d109cb7611f98258c9892ac097592d4ab52963dbdcc267240426be",
+      "path": "/federation/research/evaluation-protocol/protocol",
+      "conceptId": "urn:maha:concept:evidence:evaluation-protocol",
+      "routeRole": "protocol",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_39675754e831c3fd08c452c7",
+      "candidateDigest": "sha256:d6c65cea64b4517fba487b70f578c1f091b2d2dd6729440cfe84453e30ea1894",
+      "path": "/federation/research/metadata-only-evidence/machine-record",
+      "conceptId": "urn:maha:concept:evidence:metadata-only-evidence",
+      "routeRole": "machine-record",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_15104c29d1fd26b7a57944b8",
+      "candidateDigest": "sha256:42f42eadee593d6a1170a36f8e06b4eedd9b19ea46f0001e83ecd395d3730317",
+      "path": "/federation/research/claim-extraction/method",
+      "conceptId": "urn:maha:concept:evidence:claim-extraction",
+      "routeRole": "method",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_f5f517b4ec8b88872d241f43",
+        "path": "/federation/research/claim-extraction/protocol",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_2a68123b426603aa282cd998",
+      "candidateDigest": "sha256:548dbdc8178ea967a9f835c7c6d22a93bc610a149406fde65e0a7ade6f52bd66",
+      "path": "/federation/research/citation-lineage/method",
+      "conceptId": "urn:maha:concept:evidence:citation-lineage",
+      "routeRole": "method",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_8fded27b2e8ee022f7dd9116",
+        "path": "/federation/research/citation-lineage/protocol",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_318ea274652b8b7791e3138c",
+      "candidateDigest": "sha256:149faab1e16bce8c0d581da9a8c89bfb26de0dd7539de825243956c92fc4d682",
+      "path": "/federation/research/container-image/method",
+      "conceptId": "urn:maha:concept:evidence:container-image",
+      "routeRole": "method",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_896f2056ad75d5e09aa5ec96",
+        "path": "/federation/research/container-image/protocol",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_483f9f04478c375058e71c18",
+      "candidateDigest": "sha256:f62ccc587197546233ea1c0c954feda40aeef2ec0eb3dfd6cd23dbf44e78e01a",
+      "path": "/federation/research/abstract-only-evidence/method",
+      "conceptId": "urn:maha:concept:evidence:abstract-only-evidence",
+      "routeRole": "method",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_25d6b11f76000b761b47201a",
+        "path": "/federation/research/abstract-only-evidence/source-contract",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_e875b5ace1229e7c254074bd",
+      "candidateDigest": "sha256:12bc2c29c9bd0254130ea601634321d73e9914299cb34b8cb9501168004b55b4",
+      "path": "/federation/research/author-manuscript/method",
+      "conceptId": "urn:maha:concept:evidence:author-manuscript",
+      "routeRole": "method",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_f380410b6fedc96e4e94647e",
+        "path": "/federation/research/author-manuscript/protocol",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_e677f93a1cc7a8d87cb7d79d",
+      "candidateDigest": "sha256:bf63b0b3fe188a9150a6ea0e13334893310504fd5836be2c5f546634bee1265f",
+      "path": "/federation/research/correction/relationships",
+      "conceptId": "urn:maha:concept:evidence:correction",
+      "routeRole": "relationships",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_9704953bd90560a6f79f3a17",
+      "candidateDigest": "sha256:e622ee2d45c69b838f0138726de1e8ea552f5ede6b4ba3b85d9aba4d01136707",
+      "path": "/federation/research/passage-locator/fixture",
+      "conceptId": "urn:maha:concept:evidence:passage-locator",
+      "routeRole": "fixture",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "awaiting-definition-review"
+    },
+    {
+      "candidateId": "cand_9f300acca87befa4e56e4379",
+      "candidateDigest": "sha256:8b700f0a1cb56fce1f3cb9b93609bf051e8e0254485b5a05b797cb178a70f136",
+      "path": "/federation/research/formal-definition/fixture",
+      "conceptId": "urn:maha:concept:evidence:formal-definition",
+      "routeRole": "fixture",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "awaiting-definition-review"
+    },
+    {
+      "candidateId": "cand_d08711bd6c48c27d199522c6",
+      "candidateDigest": "sha256:381cbb64f8552a0ef353fc46b0f96759c41ca002e47fdccad6eb88fff8e51ed0",
+      "path": "/federation/research/primary-source/fixture",
+      "conceptId": "urn:maha:concept:evidence:primary-source",
+      "routeRole": "fixture",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "awaiting-definition-review"
+    },
+    {
+      "candidateId": "cand_dfef6927eb87261861490d26",
+      "candidateDigest": "sha256:e8f022cccfb13fc7bd0d4a36a1665fc0989a828d26658d1e542c5a01da6d8ea8",
+      "path": "/federation/research/contradiction-search/fixture",
+      "conceptId": "urn:maha:concept:evidence:contradiction-search",
+      "routeRole": "fixture",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "awaiting-definition-review"
+    },
+    {
+      "candidateId": "cand_5c6d171020c0c502800ed7b2",
+      "candidateDigest": "sha256:4380d197bd048fc9738bc0b609e56276e2b333ad1ec2d25ee09b6b709fc7209f",
+      "path": "/federation/research/equation-locator/machine-record",
+      "conceptId": "urn:maha:concept:evidence:equation-locator",
+      "routeRole": "machine-record",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_66b1cd55112a4367aff6cfaa",
+      "candidateDigest": "sha256:fccd08bacac20cec713f14b9328430677f4049812b4cbe5b92277f748879c5cd",
+      "path": "/federation/research/repository-copy/machine-record",
+      "conceptId": "urn:maha:concept:evidence:repository-copy",
+      "routeRole": "machine-record",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_bac6be3a43a1c8b707e51f04",
+      "candidateDigest": "sha256:1fc7578097cb28b2bb5df09eb6c368c48a3c703504fbe36df040faa39edcc9bb",
+      "path": "/federation/research/random-seed/machine-record",
+      "conceptId": "urn:maha:concept:evidence:random-seed",
+      "routeRole": "machine-record",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_dea77fb980e768f3f2f0a828",
+      "candidateDigest": "sha256:cb5e44459644d5b6a409d124ad581d2d01faccf41fac22c87aacf83eb46f4e31",
+      "path": "/federation/research/benchmark-design/machine-record",
+      "conceptId": "urn:maha:concept:evidence:benchmark-design",
+      "routeRole": "machine-record",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_abb39a55a803cd6972178836",
+        "path": "/federation/research/benchmark-design/relationships",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_25d6b11f76000b761b47201a",
+      "candidateDigest": "sha256:ba896fc66f49781ea9bfe23d37d26d774cfe62a1db50ec561c7f772b834bab21",
+      "path": "/federation/research/abstract-only-evidence/source-contract",
+      "conceptId": "urn:maha:concept:evidence:abstract-only-evidence",
+      "routeRole": "source-contract",
+      "declaredOwner": {
+        "canonicalOwner": "maha-research",
+        "role": "owner-application",
+        "boundary": "This route may apply evidence; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_483f9f04478c375058e71c18",
+        "path": "/federation/research/abstract-only-evidence/method",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_59b6dcfe56df30a6886ed841",
+      "candidateDigest": "sha256:c32d7e686ddcc0c61d02f40bb043c700620bf49625ce22a2103f57cc7ee9083b",
+      "path": "/agentic-publishing/acknowledgement/definition",
+      "conceptId": "urn:maha:concept:release:acknowledgement",
+      "routeRole": "definition",
+      "declaredOwner": {
+        "canonicalOwner": "agentic-publishing",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of release for agentic-publishing. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
+      "dependencyState": "live"
+    },
+    {
+      "candidateId": "cand_7f83b841af363176f9056dd3",
+      "candidateDigest": "sha256:3f76783b8f8b8ad1e7ad758b9ef17e08cc582c0461cf01adf4a82c6f50cd8e6e",
+      "path": "/agentic-publishing/manuscript-versioning/definition",
+      "conceptId": "urn:maha:concept:release:manuscript-versioning",
+      "routeRole": "definition",
+      "declaredOwner": {
+        "canonicalOwner": "agentic-publishing",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of release for agentic-publishing. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
+      "dependencyState": "live"
+    },
+    {
+      "candidateId": "cand_aaa33ae4b9dcb8476265932b",
+      "candidateDigest": "sha256:8487b6da88e4751a89e209598d94f1cc8a8032fc0e2713203e77bc1587603d73",
+      "path": "/agentic-publishing/context-pack/governance",
+      "conceptId": "urn:maha:concept:release:context-pack",
+      "routeRole": "governance",
+      "declaredOwner": {
+        "canonicalOwner": "agentic-publishing",
+        "role": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_86ebcdf345c4d27c43f243eb",
+        "path": "/agentic-publishing/context-pack/policy",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_de94f0d7ae2227b6979eac5c",
+      "candidateDigest": "sha256:06848fbd834c61dc19b3c544fd16a4005b795b3e8bce893b040f3f07e3bfb236",
+      "path": "/agentic-publishing/machine-authorship-disclosure/definition",
+      "conceptId": "urn:maha:concept:release:machine-authorship-disclosure",
+      "routeRole": "definition",
+      "declaredOwner": {
+        "canonicalOwner": "agentic-publishing",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of release for agentic-publishing. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
+      "dependencyState": "live"
+    },
+    {
+      "candidateId": "cand_1d5d236b7b8c0233ec9b1bf0",
+      "candidateDigest": "sha256:b703d48947eed6ed2fa71706db4d1e548dc3c520d3a6b70d7c42054820f8b4cf",
+      "path": "/agentic-publishing/publishing-observability/definition",
+      "conceptId": "urn:maha:concept:release:publishing-observability",
+      "routeRole": "definition",
+      "declaredOwner": {
+        "canonicalOwner": "agentic-publishing",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of release for agentic-publishing. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
+      "dependencyState": "live"
+    },
+    {
+      "candidateId": "cand_86ebcdf345c4d27c43f243eb",
+      "candidateDigest": "sha256:40813f555e41c3fa65e75bd0e748862d9270ca9b012198bf8092ab06996f46ba",
+      "path": "/agentic-publishing/context-pack/policy",
+      "conceptId": "urn:maha:concept:release:context-pack",
+      "routeRole": "policy",
+      "declaredOwner": {
+        "canonicalOwner": "agentic-publishing",
+        "role": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_aaa33ae4b9dcb8476265932b",
+        "path": "/agentic-publishing/context-pack/governance",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_d168942505ab7d2084529962",
+      "candidateDigest": "sha256:6ce33ccbbbd8606f151a77f89d35b2ef9fd9ba2757080c21a885b0cd8080151e",
+      "path": "/agentic-publishing/context-pack/workflow",
+      "conceptId": "urn:maha:concept:release:context-pack",
+      "routeRole": "workflow",
+      "declaredOwner": {
+        "canonicalOwner": "agentic-publishing",
+        "role": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_86ebcdf345c4d27c43f243eb",
+        "path": "/agentic-publishing/context-pack/policy",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_334c97681db312676655a5c4",
+      "candidateDigest": "sha256:a3bf9a6c522b3c64f354fc19b9e4d6d26f06ce477005d0c00a98654bb762bb16",
+      "path": "/knowledge/private-machine-systems/local-memory/definition",
+      "conceptId": "urn:maha:concept:consent:local-memory",
+      "routeRole": "definition",
+      "declaredOwner": {
+        "canonicalOwner": "maha-os",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of consent for maha-os. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
+      "dependencyState": "live"
+    },
+    {
+      "candidateId": "cand_e2efc48efc92a02fce22ebb8",
+      "candidateDigest": "sha256:85e5cc469bbca3573f329c33e745791731fba948e6064815dcb5bbb27d9b090f",
+      "path": "/agentic-publishing/context-pack/failure-mode",
+      "conceptId": "urn:maha:concept:release:context-pack",
+      "routeRole": "failure-mode",
+      "declaredOwner": {
+        "canonicalOwner": "agentic-publishing",
+        "role": "owner-application",
+        "boundary": "This route may apply release; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": {
+        "candidateId": "cand_86ebcdf345c4d27c43f243eb",
+        "path": "/agentic-publishing/context-pack/policy",
+        "relation": "same-concept-different-role"
+      },
+      "distinctionBasis": "Shares a neighbour in the cohort; retained because the route role and the question asked differ.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_5c3e6cc1d6dba40f77f20008",
+      "candidateDigest": "sha256:388862a178614293f0c6631e91c5fa7b444f8e2c7fdaa6b24e70f247064584c4",
+      "path": "/knowledge/private-machine-systems/health-claim-boundaries/definition",
+      "conceptId": "urn:maha:concept:consent:health-claim-boundaries",
+      "routeRole": "definition",
+      "declaredOwner": {
+        "canonicalOwner": "maha-os",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of consent for maha-os. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
+      "dependencyState": "live"
+    },
+    {
+      "candidateId": "cand_5bdc9da2a849a0335c581dbd",
+      "candidateDigest": "sha256:899e0f8c87bd3b7c7a5d12075b19090d1c85333bdd98c67e3fda4f23de011088",
+      "path": "/knowledge/private-machine-systems/private-compute/definition",
+      "conceptId": "urn:maha:concept:consent:private-compute",
+      "routeRole": "definition",
+      "declaredOwner": {
+        "canonicalOwner": "maha-os",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of consent for maha-os. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
+      "dependencyState": "live"
+    },
+    {
+      "candidateId": "cand_b592a7bacc1bf3f58033902f",
+      "candidateDigest": "sha256:5c66769240f4df06b873dc3cd0488eaa08da08358fc46f51d2421ce749b98327",
+      "path": "/knowledge/private-machine-systems/user-revocation/definition",
+      "conceptId": "urn:maha:concept:consent:user-revocation",
+      "routeRole": "definition",
+      "declaredOwner": {
+        "canonicalOwner": "maha-os",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of consent for maha-os. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
+      "dependencyState": "live"
+    },
+    {
+      "candidateId": "cand_87c3dab9a4ee314eee8e57ef",
+      "candidateDigest": "sha256:28b5ca6c47057d98cb750174219fc1fb6b7c9b797b2fb3f8e791f4ebca91d114",
+      "path": "/knowledge/private-machine-systems/wellness-recommendation-limits/definition",
+      "conceptId": "urn:maha:concept:consent:wellness-recommendation-limits",
+      "routeRole": "definition",
+      "declaredOwner": {
+        "canonicalOwner": "maha-os",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of consent for maha-os. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
+      "dependencyState": "live"
+    },
+    {
+      "candidateId": "cand_af0ac684e4d62f292456214c",
+      "candidateDigest": "sha256:7a74ca8af06e5a82345afb435c8a10cfd5ce2dee3f07ba6a29e50890536924d3",
+      "path": "/knowledge/private-machine-systems/cloud-escalation/definition",
+      "conceptId": "urn:maha:concept:consent:cloud-escalation",
+      "routeRole": "definition",
+      "declaredOwner": {
+        "canonicalOwner": "maha-os",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of consent for maha-os. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
+      "dependencyState": "live"
+    },
+    {
+      "candidateId": "cand_14ccc2df61c9b8ff9e0cd9cf",
+      "candidateDigest": "sha256:4caffc34614674c2fd283500d611707235057907e7aec38a063ca2fb9ef1f806",
+      "path": "/mayon-volcano/pyroclastic-density-current/definition",
+      "conceptId": "urn:maha:concept:risk:pyroclastic-density-current",
+      "routeRole": "definition",
+      "declaredOwner": {
+        "canonicalOwner": "mayon-rajan",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of risk for mayon-rajan. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
+      "dependencyState": "live"
+    },
+    {
+      "candidateId": "cand_9a28dcd22dc28bf5e5716e5e",
+      "candidateDigest": "sha256:258a938100e68c21252a1191a5d2ffe27cd3bb186683fdcf857acb9684109483",
+      "path": "/mayon-volcano/community-preparedness/definition",
+      "conceptId": "urn:maha:concept:risk:community-preparedness",
+      "routeRole": "definition",
+      "declaredOwner": {
+        "canonicalOwner": "mayon-rajan",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of risk for mayon-rajan. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
+      "dependencyState": "live"
+    },
+    {
+      "candidateId": "cand_6e50d4c196a384f4fb7c7c91",
+      "candidateDigest": "sha256:d2a1d3ec75aeb5e4ed1678cbfcbd92e3d1f26ac18b62bf8810d9ef7efa572004",
+      "path": "/mayon-volcano/evacuation/definition",
+      "conceptId": "urn:maha:concept:risk:evacuation",
+      "routeRole": "definition",
+      "declaredOwner": {
+        "canonicalOwner": "mayon-rajan",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of risk for mayon-rajan. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
+      "dependencyState": "live"
+    },
+    {
+      "candidateId": "cand_d3036631bf63b64c4a141e1a",
+      "candidateDigest": "sha256:4532a7db7ef2c0b2841d8f41e9a0f980e7955fdf0cf0d98094a0c0acdc16c130",
+      "path": "/mayon-volcano/rainfall-triggered-hazards/definition",
+      "conceptId": "urn:maha:concept:risk:rainfall-triggered-hazards",
+      "routeRole": "definition",
+      "declaredOwner": {
+        "canonicalOwner": "mayon-rajan",
+        "role": "canonical-owner",
+        "boundary": "This route is the canonical definition of risk for mayon-rajan. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not be read as licensing an application claim; a definition states what the concept is, not what may be done with it.",
+      "dependencyState": "live"
+    },
+    {
+      "candidateId": "cand_81e1f40588172aa1b15248f3",
+      "candidateDigest": "sha256:5f709b0fd85ae55c60dc5e0b3c3c7830c6d688638c200f02c8aefcf6b8e374dc",
+      "path": "/concepts/maha-principle/development",
+      "conceptId": "urn:maha:concept:autonomy:maha-principle",
+      "routeRole": "development",
+      "declaredOwner": {
+        "canonicalOwner": "mayone-maharajan",
+        "role": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_158eb87506efec35bb613679",
+      "candidateDigest": "sha256:f654818f72bee9932b2743fc3249a7a8e7ef9eaac9581baacee42ec085f9d7f8",
+      "path": "/concepts/authorial-lineage/argument",
+      "conceptId": "urn:maha:concept:autonomy:authorial-lineage",
+      "routeRole": "argument",
+      "declaredOwner": {
+        "canonicalOwner": "mayone-maharajan",
+        "role": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_ae7bc329e2cc28e8d0d2c60a",
+      "candidateDigest": "sha256:065f1297ab9348ba099db51c4a3db0fdc3278733c9f2df9926d50da8d1a0099a",
+      "path": "/concepts/civilizational-memory/argument",
+      "conceptId": "urn:maha:concept:autonomy:civilizational-memory",
+      "routeRole": "argument",
+      "declaredOwner": {
+        "canonicalOwner": "mayone-maharajan",
+        "role": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_fbd1f1088ca6eb59bab0aba1",
+      "candidateDigest": "sha256:43e60ddd6c9caf19dce79ce5f0fb0e2708c9a9e89c6e18ade767486203219ded",
+      "path": "/concepts/recursive-institutions/development",
+      "conceptId": "urn:maha:concept:autonomy:recursive-institutions",
+      "routeRole": "development",
+      "declaredOwner": {
+        "canonicalOwner": "mayone-maharajan",
+        "role": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    },
+    {
+      "candidateId": "cand_e644480b4078b5366917cd57",
+      "candidateDigest": "sha256:fe2279f04ae601810db6721198d476e2124162f38a644e84eb880ac494662cab",
+      "path": "/concepts/epistemic-infrastructure/application",
+      "conceptId": "urn:maha:concept:autonomy:epistemic-infrastructure",
+      "routeRole": "application",
+      "declaredOwner": {
+        "canonicalOwner": "mayone-maharajan",
+        "role": "owner-application",
+        "boundary": "This route may apply autonomy; it cannot redefine or inherit the authority of its canonical owner."
+      },
+      "semanticResult": "distinct",
+      "nearestNeighbour": null,
+      "distinctionBasis": "No other candidate in the cohort shares this concept or topic.",
+      "prohibitedInference": "Must not redefine the concept it applies. The canonical definition remains with the declared owner.",
+      "dependencyState": "satisfied-by-earlier-tranche"
+    }
+  ],
+  "provenanceDigest": "sha256:10f99dbc1fda37cf5b88e30a23bc3daf4a064f34184529def361b35c765338be"
+}

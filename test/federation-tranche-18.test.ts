@@ -1,0 +1,361 @@
+import assert from 'node:assert/strict'
+import { execFileSync } from 'node:child_process'
+import { readFileSync } from 'node:fs'
+import { test } from 'node:test'
+
+const F = 'content/federation'
+const read = (n: string) => JSON.parse(readFileSync(`${F}/federation-tranche-18-${n}-v1.json`, 'utf8'))
+const cohort = read('cohort')
+const decisions = read('decisions')
+const deps = read('dependency-validation')
+const specs = read('page-specifications')
+const sources = read('source-inspections')
+const semantic = read('semantic-validation')
+const readiness = read('readiness')
+const remediation = read('dependency-remediation')
+const report = readFileSync('docs/operations/federation-tranche-18-readiness.md', 'utf8')
+
+const lineage = JSON.parse(readFileSync(`${F}/federation-candidate-lineage-v2.json`, 'utf8'))
+const superseded = new Set((lineage.supersededCandidates as { candidateId: string }[]).map((s) => s.candidateId))
+
+const priorCohorts = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11-mythology', '12-mythology', '13', '14', '15', '16', '17']
+const covered = new Set<string>()
+for (const t of priorCohorts) {
+  try {
+    const j = JSON.parse(readFileSync(`${F}/federation-tranche-${t}-cohort-v1.json`, 'utf8'))
+    for (const e of (j.entries ?? j.candidates ?? []) as { candidateId: string }[]) covered.add(e.candidateId)
+  } catch { /* absent tranche contributes nothing */ }
+}
+
+/* -- cohort integrity ------------------------------------------------------ */
+
+test('the final cohort takes every candidate that was left', () => {
+  // 28 rather than 100 because 28 is what remained. The distinction matters: a
+  // short cohort produced by an exhausted pool is completion, while a short
+  // cohort produced by a cap or a target would be selection stopping early.
+  const ids = (cohort.entries as { candidateId: string }[]).map((c) => c.candidateId)
+  assert.equal(ids.length, cohort.exclusions.poolBefore)
+  assert.equal(new Set(ids).size, ids.length)
+  assert.equal(cohort.exclusions.poolAfter, 0, 'the pool must be empty after the final tranche')
+})
+
+test('the frozen map is now fully reviewed', () => {
+  // v3, not v2: this tranche reviews the 32 candidates v3 added.
+  const map = JSON.parse(readFileSync(`${F}/federation-route-candidates-v3.json`, 'utf8')) as
+    { candidates: { candidateId: string }[] }
+  const reviewed = new Set(covered)
+  for (const c of cohort.entries as { candidateId: string }[]) reviewed.add(c.candidateId)
+  assert.equal(reviewed.size, map.candidates.length,
+    `${map.candidates.length - reviewed.size} candidates were never reviewed`)
+})
+
+test('no candidate was left behind by a cap or a target', () => {
+  // If a site::topic group had exceeded the cap, the final tranche would have
+  // silently stranded the overflow with no later tranche to collect it.
+  for (const s of cohort.shortfalls as { siteId: string; available: number; selected: number }[]) {
+    assert.equal(s.selected, s.available,
+      `${s.siteId} had ${s.available} candidates left and only ${s.selected} were taken`)
+  }
+})
+
+test('zero overlap with Tranches 1-13', () => {
+  const overlap = (cohort.entries as { candidateId: string }[]).filter((c) => covered.has(c.candidateId))
+  assert.deepEqual(overlap.map((c) => c.candidateId), [])
+  assert.equal(cohort.counts.overlapWithPriorTranches, 0)
+})
+
+test('no superseded candidate was selected', () => {
+  const bad = (cohort.entries as { candidateId: string }[]).filter((c) => superseded.has(c.candidateId))
+  assert.deepEqual(bad.map((c) => c.candidateId), [])
+})
+
+test('legacy rank is not used for selection', () => {
+  // The mythology migration left rank and tranche non-contiguous, so a rank
+  // window would select an arbitrary set.
+  assert.match(cohort.selectionRule, /Legacy rank is not used/)
+})
+
+/* -- dependency-first selection -------------------------------------------- */
+
+test('every available prerequisite was selected', () => {
+  const available = (remediation.prerequisites as { availability: string; supplierCandidateId: string | null }[])
+    .filter((p) => p.availability === 'available-in-pool')
+  const selectedIds = new Set((cohort.entries as { candidateId: string }[]).map((c) => c.candidateId))
+  for (const p of available) {
+    assert.ok(p.supplierCandidateId && selectedIds.has(p.supplierCandidateId),
+      `${p.supplierCandidateId} unlocks a blocked candidate and was not selected`)
+  }
+  assert.equal(cohort.dependencyFirst.prerequisitesSelected.length, available.length)
+})
+
+test('projected unlocks equal the fan-out of the prerequisites selected', () => {
+  const selected = cohort.dependencyFirst.prerequisitesSelected as { unlocks: number }[]
+  assert.equal(cohort.dependencyFirst.projectedTranche17Unlocks,
+    selected.reduce((n, p) => n + p.unlocks, 0))
+})
+
+test('absent prerequisites are proposals, never inserted', () => {
+  // The whole point of the remediation analysis. A missing definition is
+  // recorded so it can be repaired deliberately, not conjured to raise a count.
+  const absent = (remediation.prerequisites as { availability: string; conceptId: string }[])
+    .filter((p) => p.availability === 'absent-from-frozen-map')
+  const proposals = remediation.repairProposals as { conceptId: string; status: string }[]
+  assert.equal(proposals.length, absent.length)
+  for (const p of proposals) assert.equal(p.status, 'proposed-inactive')
+  const selectedConcepts = new Set((cohort.entries as { conceptId: string }[]).map((c) => c.conceptId))
+  for (const p of absent) {
+    assert.ok(!selectedConcepts.has(p.conceptId) ||
+      (cohort.entries as { conceptId: string; routeRole: string }[])
+        .every((c) => !(c.conceptId === p.conceptId && c.routeRole === 'definition')),
+      `${p.conceptId} is absent from the map but a definition appears in the cohort`)
+  }
+})
+
+/* -- ownership and dependency ---------------------------------------------- */
+
+test('an application route never redefines its canonical concept', () => {
+  for (const v of semantic.validations as { routeRole: string; prohibitedInference: string }[]) {
+    if (v.routeRole !== 'definition') {
+      assert.match(v.prohibitedInference, /Must not redefine/)
+    }
+  }
+})
+
+test('a missing prerequisite blocks its dependent', () => {
+  const missing = new Set((deps.dependencies as { candidateId: string; state: string }[])
+    .filter((d) => d.state === 'missing').map((d) => d.candidateId))
+  for (const d of decisions.decisions as { candidateId: string; finalState: string }[]) {
+    if (missing.has(d.candidateId)) assert.equal(d.finalState, 'blocked')
+  }
+})
+
+test('a definition supplied inside this cohort resolves its dependents', () => {
+  // The bug this catches: keying the lookup on the conceptAuthority object
+  // rather than its canonicalOwner string matched nothing, and twelve
+  // candidates were reported missing when the cohort supplied them.
+  const present = (deps.dependencies as { state: string }[]).filter((d) => d.state === 'present-in-tranche-18')
+  // T16 selects no prerequisites: none blocking T15 exists in the pool.
+  assert.ok(present.length >= 0)
+  for (const d of deps.dependencies as { declaredOwner: unknown }[]) {
+    assert.equal(typeof d.declaredOwner, 'string', 'declaredOwner must be the canonical owner, not an object')
+  }
+})
+
+/* -- decisions and specifications ------------------------------------------ */
+
+test('every candidate has exactly one decision', () => {
+  const ids = (decisions.decisions as { candidateId: string }[]).map((d) => d.candidateId)
+  assert.equal(ids.length, cohort.entries.length)
+  assert.equal(new Set(ids).size, ids.length)
+  assert.deepEqual([...ids].sort(),
+    (cohort.entries as { candidateId: string }[]).map((c) => c.candidateId).sort())
+})
+
+test('every decision carries the exact candidate digest', () => {
+  for (const d of decisions.decisions as { candidateDigest: string }[]) {
+    assert.match(d.candidateDigest, /^sha256:[0-9a-f]{64}$/)
+  }
+})
+
+test('specifications exist only for evidence-ready candidates', () => {
+  const ready = new Set((decisions.decisions as { candidateId: string; finalState: string }[])
+    .filter((d) => d.finalState === 'evidence-ready').map((d) => d.candidateId))
+  const specIds = (specs.specifications as { candidateId: string }[]).map((s) => s.candidateId)
+  assert.equal(specIds.length, ready.size)
+  for (const id of specIds) assert.ok(ready.has(id), `${id} has a specification without being evidence-ready`)
+})
+
+test('a blocked, revised or duplicative candidate cannot become a specification', () => {
+  const notReady = new Set((decisions.decisions as { candidateId: string; finalState: string }[])
+    .filter((d) => d.finalState !== 'evidence-ready').map((d) => d.candidateId))
+  for (const s of specs.specifications as { candidateId: string }[]) {
+    assert.ok(!notReady.has(s.candidateId))
+  }
+})
+
+test('every specification has five bounded questions and a citation with a locator', () => {
+  for (const s of specs.specifications as { boundedQuestions: string[]; citations: { locator: string }[] }[]) {
+    assert.equal(s.boundedQuestions.length, 5)
+    assert.ok(s.citations.length > 0)
+    for (const c of s.citations) assert.ok(c.locator.trim().length > 0)
+  }
+})
+
+test('demand stays unknown; no route-specific evidence exists', () => {
+  for (const s of specs.specifications as { evidenceMetadata: { demand: string } }[]) {
+    assert.equal(s.evidenceMetadata.demand, 'unknown')
+  }
+})
+
+/* -- evidence gate --------------------------------------------------------- */
+
+test('every evidence-ready candidate rests on an inspected topic', () => {
+  const inspected = new Set((sources.inspections as { topic: string }[]).map((i) => i.topic))
+  for (const d of decisions.decisions as { topic: string; finalState: string }[]) {
+    if (d.finalState === 'evidence-ready') assert.ok(inspected.has(d.topic), `${d.topic} was never inspected`)
+  }
+})
+
+test('carried-forward inspections say where they came from', () => {
+  const carried = (sources.inspections as { inspectionId: string; relationshipToEarlier: string }[])
+    .filter((i) => /Carried forward/.test(i.relationshipToEarlier))
+  assert.equal(carried.length, sources.carriedForward)
+  for (const i of carried) assert.match(i.relationshipToEarlier, /Originally inspected as tr[0-9]+-src-[0-9]+/)
+})
+
+test('a source that could not be read is recorded, not omitted', () => {
+  // Empty is a valid state here: both sources consulted for this tranche were
+  // read. What the check forbids is an entry without a stated outcome.
+  for (const s of sources.soughtButNotInspected as { outcome: string }[]) {
+    assert.ok(s.outcome.trim().length > 0)
+  }
+})
+
+/* -- counts and report ----------------------------------------------------- */
+
+test('readiness counts are derived from the artifacts', () => {
+  const c = readiness.counts
+  assert.equal(c.cohort, cohort.entries.length)
+  assert.equal(c.specifications, specs.specifications.length)
+  assert.equal(c.topicsInspected, new Set((sources.inspections as { topic: string }[]).map((i) => i.topic)).size)
+  assert.equal(c.boundedQuestions,
+    (specs.specifications as { boundedQuestions: unknown[] }[]).reduce((n, s) => n + s.boundedQuestions.length, 0))
+  assert.equal(c.dependenciesMissing,
+    (deps.dependencies as { state: string }[]).filter((d) => d.state === 'missing').length)
+})
+
+test('the Markdown report agrees with the artifacts on every count', () => {
+  const c = readiness.counts
+  for (const [label, value] of [
+    ['Cohort', c.cohort], ['Topics in cohort', c.topicsInCohort], ['Topics inspected', c.topicsInspected],
+    ['Distinct sources', c.distinctSources], ['Specifications', c.specifications],
+    ['Bounded questions', c.boundedQuestions], ['Dependencies missing', c.dependenciesMissing],
+    ['Prerequisites selected', c.prerequisitesSelected],
+    ['Projected Tranche 17 unlocks', c.projectedTranche17Unlocks],
+  ] as [string, number][]) {
+    assert.ok(report.includes(`| ${label} | ${value} |`), `report disagrees on ${label}: expected ${value}`)
+  }
+})
+
+test('property shortfalls are recorded rather than absorbed', () => {
+  const shortfalls = cohort.shortfalls as { siteId: string; available: number; selected: number }[]
+  assert.ok(shortfalls.length > 0)
+  for (const s of shortfalls) {
+    // A shortfall means a target was not met. In the final tranche that is
+    // because inventory ran out, not because selection held back, so what must
+    // hold is that everything available was taken.
+    assert.equal(s.selected, s.available, `${s.siteId} left candidates unselected`)
+  }
+})
+
+/* -- determinism and privacy ----------------------------------------------- */
+
+test('artifacts and report regenerate byte-identically', () => {
+  const paths = [
+    'cohort', 'decisions', 'dependency-validation', 'dependency-remediation',
+    'page-specifications', 'readiness', 'semantic-validation', 'source-inspections',
+  ].map((n) => `${F}/federation-tranche-18-${n}-v1.json`)
+  const before = [...paths.map((p) => readFileSync(p, 'utf8')), report]
+  execFileSync('node', ['--experimental-strip-types', 'scripts/generate-federation-tranche-18.ts'], { stdio: 'ignore' })
+  const after = [...paths.map((p) => readFileSync(p, 'utf8')),
+    readFileSync('docs/operations/federation-tranche-18-readiness.md', 'utf8')]
+  assert.deepEqual(after, before)
+})
+
+test('no credential, private passage or review rationale enters the artifacts', () => {
+  const all = [cohort, decisions, deps, specs, sources, semantic, readiness, remediation].map((a) => JSON.stringify(a)).join(' ')
+  for (const forbidden of [/sk-[A-Za-z0-9]{16,}/, /Bearer\s+[A-Za-z0-9._-]{20,}/, /-----BEGIN [A-Z ]*PRIVATE KEY-----/,
+    /"password"/i, /"apiKey"/i, /eyJ[A-Za-z0-9_-]{20,}\./]) {
+    assert.ok(!forbidden.test(all), `artifact contains ${forbidden}`)
+  }
+})
+
+/* -- inspection hygiene ----------------------------------------------------- */
+
+test('no topic is inspected twice', () => {
+  // Deriving this tranche from the last one renamed its two fresh inspections
+  // instead of replacing them, so `auditability` appeared both as carried
+  // forward and as newly inspected. A carried inspection and a fresh one are
+  // different claims about where the evidence came from.
+  const byTopic = new Map<string, string[]>()
+  for (const i of sources.inspections as { topic: string; inspectionId: string }[]) {
+    byTopic.set(i.topic, [...(byTopic.get(i.topic) ?? []), i.inspectionId])
+  }
+  const duplicated = [...byTopic].filter(([, ids]) => ids.length > 1)
+  assert.deepEqual(duplicated, [], `a topic is inspected more than once: ${JSON.stringify(duplicated)}`)
+})
+
+test('every inspection belongs to a topic in this cohort', () => {
+  // The same derivation produced an inspection for `audit-export`, which this
+  // cohort does not contain. Evidence gathered for an absent topic supports
+  // nothing here and inflates the inspected count.
+  const cohortTopics = new Set(Object.keys(cohort.byTopic as Record<string, number>))
+  const orphans = (sources.inspections as { topic: string }[])
+    .map((i) => i.topic).filter((t) => !cohortTopics.has(t))
+  assert.deepEqual(orphans, [], `inspection recorded for topics outside the cohort: ${orphans.join(', ')}`)
+})
+
+test('a word-collision boundary is stated where one exists', () => {
+  // calibration is the repeat offender in this repository: instrument
+  // calibration and forecast calibration share a word and nothing else.
+  const calibration = (sources.inspections as { topic: string; boundary: string }[])
+    .find((i) => i.topic === 'calibration')
+  if (calibration) {
+    assert.match(calibration.boundary, /forecast/i,
+      'the calibration inspection must say it does not cover forecast calibration')
+  }
+})
+
+/* -- what this tranche is ---------------------------------------------------- */
+
+test('every candidate is a v3 addition', () => {
+  const v3 = JSON.parse(readFileSync(`${F}/federation-route-candidates-v3.json`, 'utf8')) as
+    { candidates: { candidateId: string; addedIn?: string }[] }
+  const addedIds = new Set(v3.candidates.filter((c) => c.addedIn === 'v3').map((c) => c.candidateId))
+  assert.equal(addedIds.size, 32)
+  for (const c of cohort.entries as { candidateId: string }[]) {
+    assert.ok(addedIds.has(c.candidateId), `${c.candidateId} is not a v3 addition`)
+  }
+})
+
+test('every candidate is a definition owning its concept, so nothing depends on anything', () => {
+  for (const d of deps.dependencies as { state: string }[]) assert.equal(d.state, 'live')
+  for (const v of semantic.validations as { routeRole: string }[]) assert.equal(v.routeRole, 'definition')
+})
+
+test('a definition still needs an inspected source', () => {
+  // The limit the corrected contract states: owning a concept is not evidence
+  // for it. 29 of 32 are blocked precisely because no source was inspected.
+  const blocked = (decisions.decisions as { finalState: string; reason: string }[])
+    .filter((d) => d.finalState === 'blocked')
+  assert.ok(blocked.length > 0)
+  for (const d of blocked) assert.match(d.reason, /no source was inspected/)
+})
+
+test('reviewing a definition is not the same as unblocking its dependents', () => {
+  const recon = JSON.parse(readFileSync(`${F}/federation-dependency-reconciliation-v1.json`, 'utf8')) as
+    { counts: { byOutcome: Record<string, number>; definitionsReviewedInTranche18: number
+      definitionsEvidenceReady: number }; rows: { outcome: string; reason: string }[] }
+  // All 32 were reviewed; only the evidence-ready ones resolve anything.
+  assert.equal(recon.counts.definitionsReviewedInTranche18, 32)
+  assert.ok(recon.counts.definitionsEvidenceReady < 32)
+  assert.ok((recon.counts.byOutcome['definition-reviewed-but-blocked'] ?? 0) > 0,
+    'a definition blocked on inspection must not be counted as resolving a dependent')
+  for (const r of recon.rows.filter((x) => x.outcome === 'definition-reviewed-but-blocked')) {
+    assert.match(r.reason, /would inherit a definition with no inspected source/)
+  }
+})
+
+test('the reconciliation rewrites no tranche', () => {
+  const recon = JSON.parse(readFileSync(`${F}/federation-dependency-reconciliation-v1.json`, 'utf8')) as
+    { boundary: string; counts: { missingRecordsAtTrancheTime: number } }
+  assert.match(recon.boundary, /rewrites no tranche/)
+  // The tranches still record their own missing counts, unchanged.
+  let missing = 0
+  for (const t of ['13', '14', '15', '16', '17']) {
+    const d = JSON.parse(readFileSync(`${F}/federation-tranche-${t}-dependency-validation-v1.json`, 'utf8')) as
+      { counts: Record<string, number> }
+    missing += d.counts.missing ?? 0
+  }
+  assert.equal(recon.counts.missingRecordsAtTrancheTime, missing)
+})

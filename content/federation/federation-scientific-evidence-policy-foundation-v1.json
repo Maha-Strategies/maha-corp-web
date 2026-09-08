@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "maha-scientific-evidence-policy-foundation/1.0",
+  "inspectedOn": "2026-09-07",
+  "sources": [
+    {
+      "sourceId": "t22-gao-evidence-policy",
+      "identity": "U.S. Government Accountability Office GAO-23-105460",
+      "locator": "https://www.gao.gov/products/gao-23-105460 — 13 practices across planning, assessing/building, using evidence, and learning",
+      "roles": [
+        "evidence",
+        "tradeoffs"
+      ],
+      "scope": "Describes evidence-building and use practices, evidence types, implementation actions, and observed limits in US federal agencies.",
+      "boundary": "This is US federal management guidance and audit synthesis, not a universal hierarchy of evidence or proof that a policy works.",
+      "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-evidence-act",
+      "identity": "Foundations for Evidence-Based Policymaking Act of 2018",
+      "locator": "https://www.congress.gov/115/statute/STATUTE-132/STATUTE-132-Pg5529.pdf — Title I federal evidence-building activities and Titles II–III data access and confidentiality",
+      "roles": [
+        "current-law",
+        "definition"
+      ],
+      "scope": "Establishes US federal evaluation, evidence-building, data governance, and confidentiality duties.",
+      "boundary": "This is US federal law; it neither mandates one scientific method nor creates an executable decision rule for arbitrary claims.",
+      "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-nasem-reproducibility",
+      "identity": "National Academies Reproducibility and Replicability in Science",
+      "locator": "https://nap.nationalacademies.org/resource/25303/R%26R.pdf — definitions and recommendations",
+      "roles": [
+        "evidence",
+        "tradeoffs"
+      ],
+      "scope": "Separates computational reproducibility from replicability and records why contrary results require contextual assessment rather than automatic reversal.",
+      "boundary": "The report does not rank every study design or decide a specific policy question.",
+      "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+      "kind": "official-authority",
+      "passageStored": false
+    }
+  ],
+  "established": [
+    "Evidence-building is a governed lifecycle rather than one undifferentiated evidence score.",
+    "Reproducibility and replicability are distinct and neither automatically adjudicates policy relevance.",
+    "Legal duties, scientific method, evaluation practice, data access, and confidentiality must remain separate frames."
+  ],
+  "machineRule": {
+    "state": "blocked",
+    "reason": "No inspected authority supplies a universal executable rule that can decide arbitrary scientific claims or policy choices."
+  },
+  "provenanceDigest": "sha256:e122b42159472d917c3364f28a1d7b28787f1787d6ac480c489fc61e957da501"
+}

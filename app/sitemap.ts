@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next'
+import { headers } from 'next/headers'
 import { MAHA_SITE_URL } from '@/lib/entity'
 import { getPublicContentPublicationSitemapRows } from '@/lib/public-content-publications'
 import { unfinishedSpeciesSections } from '@/lib/unfinished-species'
@@ -35,6 +36,8 @@ import { getPublishedSubstantialPage, SUBSTANTIAL_PUBLICATION_DATE } from '@/lib
 import { eligibleSourceSlugs, SOURCE_ROUTE_PREFIX } from '@/lib/source-reference-projection'
 import { EXACTZK_EVIDENCE_PATH, EXACTZK_RELEASE_DATE, KNOWLEDGE_INTEGRATIONS_PATH, NSGOODS_PREFLIGHT_V3_EVIDENCE_PATH, NSGOODS_PREFLIGHT_V3_RELEASE_DATE } from '@/lib/knowledge-integration-evidence'
 import { EPISTEMIC_CLEARING_PAGES } from '@/lib/epistemic-clearing-batch-one'
+import { federationObservedSitemapRows, federationSitemapRows, mergeFederationSitemapRows } from '@/lib/federation-publication'
+import { FEDERATION_CANONICAL_HOSTS, normalizedRequestHost } from '@/lib/federation-host-routing'
 
 /*
  * The sitemap reads active canonical releases from the database, so it must be
@@ -45,7 +48,11 @@ import { EPISTEMIC_CLEARING_PAGES } from '@/lib/epistemic-clearing-batch-one'
  */
 export const dynamic = 'force-dynamic'
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export async function currentHostSitemap(): Promise<MetadataRoute.Sitemap> {
+  const requestHost = normalizedRequestHost((await headers()).get('host'))
+  if (FEDERATION_CANONICAL_HOSTS.includes(requestHost as (typeof FEDERATION_CANONICAL_HOSTS)[number]) && requestHost !== 'www.mahastrategies.com') {
+    return mergeFederationSitemapRows(federationObservedSitemapRows(requestHost), federationSitemapRows(requestHost))
+  }
   const baseUrl = MAHA_SITE_URL
   
   // Source references are listed only while they still resolve. The same live
@@ -541,5 +548,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     !url.startsWith(`${baseUrl}/intelligence/briefs/`) || publicIntelligenceBriefUrls.has(url),
   )
 
-  return [...publicStaticPages, ...sourceReferencePages, ...knowledgePages, ...astronomyKnowledgePages, ...astrologyTraditionPages, ...knowledgeSupplierPages, ...unfinishedSpeciesReader, ...otherOpenBookReaders, ...canonicalReleasePages, ...published.map((publication) => ({ url: `${baseUrl}/insights/${publication.slug}`, lastModified: new Date(publication.updated_at) }))]
+  return mergeFederationSitemapRows(
+    [...publicStaticPages, ...sourceReferencePages, ...knowledgePages, ...astronomyKnowledgePages, ...astrologyTraditionPages, ...knowledgeSupplierPages, ...unfinishedSpeciesReader, ...otherOpenBookReaders, ...canonicalReleasePages, ...published.map((publication) => ({ url: `${baseUrl}/insights/${publication.slug}`, lastModified: new Date(publication.updated_at) }))],
+    federationObservedSitemapRows('www.mahastrategies.com'),
+    federationSitemapRows('www.mahastrategies.com'),
+  )
 }
+
+export default currentHostSitemap

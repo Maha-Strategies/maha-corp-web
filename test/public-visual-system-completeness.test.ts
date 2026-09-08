@@ -44,7 +44,7 @@ test('every route belongs to one declared visual system', () => {
     groups.paper += 1
     const source = readFileSync(path, 'utf8')
     const ownsBoundary = source.includes('evidence-page')
-    const delegatesBoundary = /<(?:ResearchBriefServicePage|EvidenceGuide|ContextCompilerPlayground|EpistemicClearingGuidePage)\b/.test(source)
+    const delegatesBoundary = /<(?:ResearchBriefServicePage|EvidenceGuide|ContextCompilerPlayground|EpistemicClearingGuidePage)\b|\brenderFederationPage\(/.test(source)
     if (!ownsBoundary && !delegatesBoundary) missingPaperBoundary.push(file)
   }
 
@@ -62,6 +62,7 @@ test('every route belongs to one declared visual system', () => {
   // 60 -> 62: the evidence-workflow commercial hub and its dynamic example route.
   // 62 -> 65: the first three finite epistemic-clearing families inherit the Knowledge overlay.
   // 65 -> 68: Batch 2 adds mathematics, astronomy, and cross-domain clearing families.
+  // 68 -> 70: federation mythology and religion source-guide families inherit Knowledge.
   // The developer clearing family delegates to the shared bounded guide renderer,
   // moving paper 112 -> 113 without introducing another visual system.
   // join the Knowledge group and its bounded cyber-light overlay. books 38 -> 41 arrives with the
@@ -72,7 +73,9 @@ test('every route belongs to one declared visual system', () => {
   // paper 113 -> 114: the autonomous settlement ledger at /developers/settlement,
   // which renders a generated on-chain snapshot and owns the paper boundary
   // directly rather than delegating to a shared renderer.
-  assert.deepEqual(groups, { paper: 114, apps: 6, books: 41, docs: 1, knowledge: 68, intelligence: 2, operator: 32, internal: 1 })
+  // paper 114 -> 122: eight federation route families delegate to the shared
+  // evidence-page renderer and therefore introduce no second visual system.
+  assert.deepEqual(groups, { paper: 122, apps: 6, books: 41, docs: 1, knowledge: 70, intelligence: 2, operator: 32, internal: 1 })
 })
 
 test('Apps, Books, Docs, Knowledge, and Intelligence own bounded cyber-light overlays', () => {

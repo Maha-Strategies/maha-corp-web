@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "maha-federation-candidate-lineage/5.0",
+  "frozenOn": "2026-09-07",
+  "from": {
+    "schemaVersion": "maha-federation-route-candidate-map/4.0",
+    "provenanceDigest": "sha256:092610ce5eb78f6f9b385bc94775056d0ef2c89a3acd2f3fa70bbfc05a766f0d"
+  },
+  "to": {
+    "schemaVersion": "maha-federation-route-candidate-map/5.0",
+    "candidateArrayDigest": "sha256:94e6006dd337e38769dbb4ce57c80abd54bcc498076fab8131047e8f7252eb26"
+  },
+  "counts": {
+    "retained": 1624,
+    "supersededAsDuplicative": 4,
+    "replacementsAdded": 4,
+    "resultingRouteCandidates": 1628
+  },
+  "replacements": [
+    {
+      "predecessorCandidateId": "cand_451a78ac92d2875a61747627",
+      "predecessorDigest": "sha256:3eaec61fd0515bfcab0911a3ddf2c5093db3a7d902022ae93619b432e02e1243",
+      "replacementCandidateId": "cand_d43767b90b272ddead9ab56c",
+      "replacementDigest": "sha256:ed00e78309e261eebd8bb18bc3455b7862d53cabdbe84b9ebe8fa8754729c730",
+      "property": "maha-strategies",
+      "rank": 173,
+      "activeRank": 166
+    },
+    {
+      "predecessorCandidateId": "cand_dcd48c0795ff5cb8ebfcc26b",
+      "predecessorDigest": "sha256:a516f05cebc2580dcc8a19633d48dbadb0f0e8382e55051892982cd2f3ed0999",
+      "replacementCandidateId": "cand_4080575bad7a1bfd45b42d3a",
+      "replacementDigest": "sha256:152a9f187dcbb36882fff5c4dc17ac30f88b4cc1a1346400cf0a852405ae4527",
+      "property": "maha-strategies",
+      "rank": 254,
+      "activeRank": 241
+    },
+    {
+      "predecessorCandidateId": "cand_48485c2639eca0b2fb4d9852",
+      "predecessorDigest": "sha256:a171e5ca7698b6a7807d4a9d5110bc1a52988c728b07472e15e215c9cea9b8b7",
+      "replacementCandidateId": "cand_1981169ef4336a655069490c",
+      "replacementDigest": "sha256:3ede592475196dc931b52e36538d8e0a59afb6ed14dbcbf34ab125ae9fdc5500",
+      "property": "agentic-publishing",
+      "rank": 988,
+      "activeRank": 959
+    },
+    {
+      "predecessorCandidateId": "cand_379d39a7b88f7c76518ba50c",
+      "predecessorDigest": "sha256:9e9b3eb4f9f753221f59e4c2253d009b72aa0e7b684178b32ceebf3d7a553f9a",
+      "replacementCandidateId": "cand_9d7f62fef0254f8faa993456",
+      "replacementDigest": "sha256:b27553e1d0dbf12f0a8ab49f801ddf6be43d39c89bf99925ad9db2495a1a6486",
+      "property": "agentic-publishing",
+      "rank": 1037,
+      "activeRank": 999
+    }
+  ],
+  "boundary": "A route-budget substitution only. It creates no route, review inheritance, release, or crawlability.",
+  "provenanceDigest": "sha256:b49935a1ca2dbf55a422771b0928d5b418338088cc933e8ebddc0d8606746e0a"
+}

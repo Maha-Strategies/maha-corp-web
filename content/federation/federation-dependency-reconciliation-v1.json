@@ -1,0 +1,684 @@
+{
+  "schemaVersion": "maha-federation-dependency-reconciliation/1.0",
+  "frozenOn": "2026-09-06",
+  "purpose": "Reports which Tranche 13-17 dependency gaps the v3 additions and their Tranche 18 review would resolve, without re-running those tranches.",
+  "method": "A dependency resolves when its definition has been reviewed and reached evidence-ready. Added but unreviewed does not resolve it; reviewed but blocked on source inspection does not resolve it either, because the dependent would inherit a definition that cannot yet be cited.",
+  "boundary": "An analysis. It rewrites no tranche, changes no classification, and does not itself unblock anything. Tranches 13-17 were computed against map v2 and their artifacts stand as the record of what was reviewed when.",
+  "counts": {
+    "missingRecordsAtTrancheTime": 94,
+    "byOutcome": {
+      "definition-reviewed-but-blocked": 85,
+      "would-resolve": 9
+    },
+    "byTranche": {
+      "13": 34,
+      "14": 20,
+      "15": 32,
+      "16": 8
+    },
+    "definitionsAddedInV3": 32,
+    "definitionsReviewedInTranche18": 32,
+    "definitionsEvidenceReady": 3
+  },
+  "rows": [
+    {
+      "tranche": "13",
+      "candidateId": "cand_02377c9cde28ef6f26525b2a",
+      "conceptId": "urn:maha:concept:evidence:locator-verification",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_0e93144f12fa050be40c458a",
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_114ff651c020a137c05c0a70",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_152bd81a9c3042b26c93ee8f",
+      "conceptId": "urn:maha:concept:evidence:audit-export",
+      "outcome": "would-resolve",
+      "reason": "The definition was added in map v3 and reached evidence-ready in Tranche 18."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_16c398dac13cec683a380b28",
+      "conceptId": "urn:maha:concept:evidence:unsupported-inference",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_34d368d3cffc0123319624c3",
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_3b1a9ef814c8fd19ae5dd4f3",
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_3bd043436f7c9dd07250974b",
+      "conceptId": "urn:maha:concept:evidence:unsupported-inference",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_4732f241656c17cfa80dea46",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_4c8e1c0aaa0eb1fb2b0105eb",
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_5025ed02e119fef37e34abfb",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_52ba56be784230fe4c5a90d4",
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_54bf0ff5e1dfaa08469e51ad",
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "outcome": "would-resolve",
+      "reason": "The definition was added in map v3 and reached evidence-ready in Tranche 18."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_567977061305bfb171030d13",
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_5fda66506d4caf3a6f10c1d0",
+      "conceptId": "urn:maha:concept:evidence:canonical-release",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_76bb498009ae77f248d9b2b3",
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_7c06c37e2399d72dd61ef2bc",
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "outcome": "would-resolve",
+      "reason": "The definition was added in map v3 and reached evidence-ready in Tranche 18."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_7c130ffaab158bfd0ad4df45",
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_7ea97e6389a152a6e06ea440",
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_82064d5d886a4f5debe9d0ae",
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_87bc8ff96e129e61197cfe19",
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_af1e13cd58046f3b89fcf312",
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_b0b9232e69dc37951ca96a2d",
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_b4bf5d63227ea2a4fed280b1",
+      "conceptId": "urn:maha:concept:evidence:audit-export",
+      "outcome": "would-resolve",
+      "reason": "The definition was added in map v3 and reached evidence-ready in Tranche 18."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_c9b1999e391248ee19abc521",
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "outcome": "would-resolve",
+      "reason": "The definition was added in map v3 and reached evidence-ready in Tranche 18."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_d2f94b145cf7db71f092d98f",
+      "conceptId": "urn:maha:concept:evidence:canonical-release",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_de47b40f36767f60c101974a",
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_e19e8901c36b13c148997e41",
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_ec131abe6004e62d84a73718",
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_ec3b866d1dd8cb3b5b4608b0",
+      "conceptId": "urn:maha:concept:evidence:source-recovery",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_ec46737935d410443b264871",
+      "conceptId": "urn:maha:concept:evidence:passage-support",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_ee7975f658326487f563d6c1",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_ef11e2b421fe9aac0d8c24c3",
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "13",
+      "candidateId": "cand_f958c961ac3d47800b272d37",
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "14",
+      "candidateId": "cand_0a13428b731b87a242aa8860",
+      "conceptId": "urn:maha:concept:evidence:conflicting-literature",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "14",
+      "candidateId": "cand_0e187bdd3d33afee1b23310d",
+      "conceptId": "urn:maha:concept:evidence:conflicting-literature",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "14",
+      "candidateId": "cand_2b4ee754b4b8aa01c89396c8",
+      "conceptId": "urn:maha:concept:evidence:conflicting-literature",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "14",
+      "candidateId": "cand_53c217f369e3ea364567364a",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "14",
+      "candidateId": "cand_5e120d34f43896e9ddd4c2cd",
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "14",
+      "candidateId": "cand_6e39d7b25fc7f9913e52d052",
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "14",
+      "candidateId": "cand_76a609835bd997daf18d03c9",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "14",
+      "candidateId": "cand_777b4bf168156b8720a1c87d",
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "14",
+      "candidateId": "cand_7afab943b366ec1ce0a420f6",
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "14",
+      "candidateId": "cand_90c0ea2f6a833c6e940f0fcb",
+      "conceptId": "urn:maha:concept:evidence:conflicting-literature",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "14",
+      "candidateId": "cand_94d3ab89dc9b9a4049cfcc64",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "14",
+      "candidateId": "cand_985cbc355b9050f85b926942",
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "14",
+      "candidateId": "cand_9f9fb8e2bddf2c3d845f0735",
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "14",
+      "candidateId": "cand_a84907e8cd7aaeb462975ff0",
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "14",
+      "candidateId": "cand_bbfc84c12e0abb852c57ea7b",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "14",
+      "candidateId": "cand_c8942765582ba19ccafd6b7c",
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "14",
+      "candidateId": "cand_d3fd4dd629615b77d72dd7d9",
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "14",
+      "candidateId": "cand_dc250735100e8e76edee974c",
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "14",
+      "candidateId": "cand_dc8070ea994e1058754e5a31",
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "14",
+      "candidateId": "cand_fd914cf4b7855cfa614efb27",
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_03638eae89d44b2fcb9b6d10",
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_0eff8a7f07532fcb14af59f2",
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_1c9d1d2ca8af857b87a76813",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_3492801bafa20e3d50408a8e",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_384ee3f7a26eb546e6e0c053",
+      "conceptId": "urn:maha:concept:computation:reproducibility-fixtures",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_457721881f95e53782806bb6",
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_51fe56a2bfa94898ecb30609",
+      "conceptId": "urn:maha:concept:computation:error-budgets",
+      "outcome": "would-resolve",
+      "reason": "The definition was added in map v3 and reached evidence-ready in Tranche 18."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_558c29e71ada643b2d7f7270",
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_5d2d5c52fc91b9ecce7bb007",
+      "conceptId": "urn:maha:concept:computation:optimization",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_5da47ae131bd50c28a964e74",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_6708f2125c704c598a373d02",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_6a8af21d891464188c29dbb8",
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_6af09a682cc7e2277169d046",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_7168a05d58662e49b6826c7e",
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_75a83140ef750c18da69801d",
+      "conceptId": "urn:maha:concept:computation:error-budgets",
+      "outcome": "would-resolve",
+      "reason": "The definition was added in map v3 and reached evidence-ready in Tranche 18."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_7cec457fac2ac6a5b7839c9a",
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_89ca2d8582ec5fdfd70701bd",
+      "conceptId": "urn:maha:concept:computation:reproducibility-fixtures",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_9b067b11b9941116008a6a34",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_a24840e1b41dabdf0d8312b2",
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_a635802d1b21eb2ac591b5f9",
+      "conceptId": "urn:maha:concept:computation:error-budgets",
+      "outcome": "would-resolve",
+      "reason": "The definition was added in map v3 and reached evidence-ready in Tranche 18."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_ac614aab7eb9cc394996553b",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_b47015c81e7f03093bca4044",
+      "conceptId": "urn:maha:concept:computation:reproducibility-fixtures",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_c9ea7b1ca4cbc881270bd35c",
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_cc82c7609bf44bee9a8a3966",
+      "conceptId": "urn:maha:concept:computation:reproducibility-fixtures",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_cd30fe8a10e733f835d60834",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_d06946e7b842a6b692144ebf",
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_dd951c2a4e39f3756f7ee6f9",
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_de495ad3d3b6cbad65c2537a",
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_e3921066edee31291c7f4712",
+      "conceptId": "urn:maha:concept:computation:numerical-integration",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_e6913e5b1d6155dcbe056b6a",
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_f2d40776c02061fd82af4f0d",
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "15",
+      "candidateId": "cand_fc4da46d837d7b134b3d488f",
+      "conceptId": "urn:maha:concept:computation:error-budgets",
+      "outcome": "would-resolve",
+      "reason": "The definition was added in map v3 and reached evidence-ready in Tranche 18."
+    },
+    {
+      "tranche": "16",
+      "candidateId": "cand_4ca1eef82246da3174e34e17",
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "16",
+      "candidateId": "cand_5ace7cc1e1287874f505c134",
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "16",
+      "candidateId": "cand_67328511b3565384d1f5240c",
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "16",
+      "candidateId": "cand_bf6f5983b7e8f95b5f2fb564",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "16",
+      "candidateId": "cand_d9bccf96502cbf09b7d6e882",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "16",
+      "candidateId": "cand_eb0fd7680849180edc43bdcd",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "16",
+      "candidateId": "cand_ec90d506fb510c60080a8494",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    },
+    {
+      "tranche": "16",
+      "candidateId": "cand_fcea33351dc6b5ed02dac901",
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "outcome": "definition-reviewed-but-blocked",
+      "reason": "The definition exists and was reviewed in Tranche 18, but is blocked on source inspection. A dependent would inherit a definition with no inspected source, so it does not unblock."
+    }
+  ],
+  "provenanceDigest": "sha256:08719ab0e73329f7d568347653cbb21c9a218f47ba343cf20a82e4561a4052e2"
+}

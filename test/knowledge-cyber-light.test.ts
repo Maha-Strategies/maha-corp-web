@@ -45,7 +45,7 @@ function contrast(foreground: string, background: string): number {
 
 test('all Knowledge pages inherit one bounded cyber-light layout', () => {
   const routes = pageFiles(new URL('../app/knowledge', import.meta.url).pathname)
-  // 68 since the reviewed Māyōṉ, classical Tamil, Tiruvāymoḻi, astrology,
+  // 70 since the reviewed Māyōṉ, classical Tamil, Tiruvāymoḻi, astrology,
   // Tamil source-atlas, and worked astrology protocol
   // answer clusters and their quality-gated dynamic topic routes were added. The count is a
   // tripwire for unreviewed Knowledge routes, so it is re-pinned rather than
@@ -53,8 +53,9 @@ test('all Knowledge pages inherit one bounded cyber-light layout', () => {
   // adds no visual system of its own.
   // and evidence-workflow hubs and quality-gated dynamic routes were added;
   // six finite epistemic-clearing route families inherit this same layout;
-  // Batch 2 adds mathematics, astronomy, and typed cross-domain clearing.
-  assert.equal(routes.length, 68)
+  // Batch 2 adds mathematics, astronomy, and typed cross-domain clearing;
+  // the federation release adds two religion route families under this layout.
+  assert.equal(routes.length, 70)
   assert.match(layout, /data-visual-system="cyber-light"/)
   assert.match(layout, /data-visual-scope="knowledge"/)
   assert.match(layout, /knowledge-cyber-light\.module\.css/)

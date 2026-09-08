@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "maha-federation-tranche-18-source-inspections/1.0",
+  "frozenOn": "2026-09-06",
+  "method": "Sources were opened and read at a stated locator. Metadata, abstracts, search snippets, dictionary entries and landing pages are not inspection. No access control was bypassed.",
+  "topicsInCohort": 32,
+  "topicsInspected": 3,
+  "distinctSources": 3,
+  "carriedForward": 3,
+  "freshlyInspected": 0,
+  "inspections": [
+    {
+      "inspectionId": "tr13-src-020",
+      "topic": "version-relationship",
+      "sourceIdentity": "PubMed Central, Author Manuscripts in PMC",
+      "version": "As published at pmc.ncbi.nlm.nih.gov, read 2026-09-06",
+      "stableUrl": "https://pmc.ncbi.nlm.nih.gov/about/authorms/",
+      "locator": "Section \"What is the Author Manuscript?\" — first paragraph.",
+      "inspectionDepth": "targeted-section-read",
+      "accessBasis": "United States government service, freely accessible.",
+      "reuseBasis": "US government work; bounded original summary with attribution.",
+      "supportedClaimScope": "That versions of one work stand in a stated relationship — accepted manuscript versus published record — differing by the edits each contains.",
+      "boundary": "Supports the existence of a version relationship for journal articles. It does not generalise to other artifact types and establishes no versioning scheme.",
+      "sourceClass": "government-repository-policy",
+      "independence": "independent-of-maha",
+      "relationshipToEarlier": "Carried forward into Tranche 18: same source, same locator, same claim scope. Originally inspected as tr13-src-020."
+    },
+    {
+      "inspectionId": "tr14-src-102",
+      "topic": "audit-export",
+      "sourceIdentity": "NIST SP 800-53 Rev. 5, Security and Privacy Controls for Information Systems and Organizations",
+      "version": "Revision 5, DOI 10.6028/NIST.SP.800-53r5",
+      "stableUrl": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf",
+      "locator": "Control AU-3 (Content of Audit Records), items a-f and the Discussion paragraph.",
+      "inspectionDepth": "targeted-control-read",
+      "accessBasis": "United States government publication, freely available.",
+      "reuseBasis": "US government work; bounded original summary with attribution.",
+      "supportedClaimScope": "That an audit record is expected to carry the event description, timestamp, source, outcome and the identity of entities associated with the event, and that audit trails can reveal personally identifiable information, which the organisation is expected to consider and mitigate.",
+      "boundary": "Specifies record content, not an export format, retention period or disclosure rule. The privacy caution is a consideration the standard raises, not a permission to export.",
+      "sourceClass": "government-standards-body",
+      "independence": "independent-of-maha",
+      "relationshipToEarlier": "Carried forward into Tranche 18: same source, same locator, same claim scope. Originally inspected as tr14-src-102."
+    },
+    {
+      "inspectionId": "tr15-src-102",
+      "topic": "error-budgets",
+      "sourceIdentity": "Site Reliability Engineering (Google), chapter \"Embracing Risk\"",
+      "version": "As published at sre.google/sre-book, read 2026-09-06",
+      "stableUrl": "https://sre.google/sre-book/embracing-risk/",
+      "locator": "Section \"Forming Your Error Budget\".",
+      "inspectionDepth": "targeted-section-read",
+      "accessBasis": "Published online by the authors, freely readable.",
+      "reuseBasis": "Reference-only. Bounded original summary; the text is not copied into artifacts.",
+      "supportedClaimScope": "That an error budget is derived from a service level objective and states, as an objective metric, how unreliable a service is permitted to be within a defined period.",
+      "boundary": "Describes one organisation’s published practice, not a standard. It sets no budget for any service, and an error budget bounds permitted unreliability rather than measuring correctness.",
+      "sourceClass": "industry-practice-reference",
+      "independence": "independent-of-maha",
+      "relationshipToEarlier": "Carried forward into Tranche 18: same source, same locator, same claim scope. Originally inspected as tr15-src-102."
+    }
+  ],
+  "soughtButNotInspected": [],
+  "uninspectedTopicNote": "The uninspected topics are predominantly this organisation’s own operational concepts and the author’s own concepts on the personal properties, for which no external authority exists to cite.",
+  "provenanceDigest": "sha256:0d5a968160ac428d25281600594aafaf59bf2f40b05012fcc604a5969f169bf9"
+}

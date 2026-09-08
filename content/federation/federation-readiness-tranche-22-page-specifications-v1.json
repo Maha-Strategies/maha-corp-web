@@ -1,0 +1,2363 @@
+{
+  "schemaVersion": "maha-federation-readiness-tranche-22-page-specifications/1.0",
+  "frozenOn": "2026-09-07",
+  "counts": {
+    "specifications": 66,
+    "boundedQuestions": 330
+  },
+  "specifications": [
+    {
+      "candidateId": "cand_009408ac2122d5452565ffb9",
+      "candidateDigest": "sha256:e01361bddb936b63a76bd161474fa878ccabd2bcfb5b20a4b4524aa827dd4786",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/scope-matching/relationships",
+      "title": "Scope Matching — Relationships",
+      "conceptId": "urn:maha:concept:evidence:scope-matching",
+      "routeRole": "relationships",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-preflight-scope",
+          "locator": "lib/evidence-preflight.ts — compileEvidencePreflight",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Records bounded-language and lexical-coverage signals between one claim and one supplied excerpt.",
+          "boundary": "Lexical overlap is structural preflight, not proof of semantic support or source truth."
+        }
+      ],
+      "decisionDigest": "sha256:ff603775023aa7ad000dff3b9ed4e71bfd1c1ddb580ae318f51a3f0d0705e756",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_014a9f6b81816e86f731fc9d",
+      "candidateDigest": "sha256:e5be6791ffc35647814fb2cacfae6545fb2502c4567b445f9a57fc7c142bbb5b",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/formal-definition/method",
+      "title": "Formal Definition — Method",
+      "conceptId": "urn:maha:concept:evidence:formal-definition",
+      "routeRole": "method",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-formal-proof-contract",
+          "locator": "packages/maha-lean-bridge/src/verifier.ts — verifyAttachments",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Defines and verifies a machine-checked theorem attachment against a pinned manifest, source, claim, and toolchain.",
+          "boundary": "A formal definition or checked deduction does not establish empirical truth or source support."
+        }
+      ],
+      "decisionDigest": "sha256:32ca142550df7d480fa5e7fff4c72fa149000bbe01a45c493ae3e928ed3dc5fb",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_0216946395eed4e8c803e286",
+      "candidateDigest": "sha256:1331d580aeab13dcc799f9e002eac325acea5ce21ea9670d5f952b0ef3f30437",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/abstract-only-evidence/machine-record",
+      "title": "Abstract Only Evidence — Machine Record",
+      "conceptId": "urn:maha:concept:evidence:abstract-only-evidence",
+      "routeRole": "machine-record",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-recovery-depth",
+          "locator": "lib/source-recovery.ts — validateObservation and compileRecoveryPackets",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Preserves access, inspection, identity, and exact-locator states without upgrading abstract-only access to full-text inspection.",
+          "boundary": "An abstract can establish subject and metadata at most; it cannot support section-specific or detailed claims."
+        }
+      ],
+      "decisionDigest": "sha256:674d34ab30d10bb25df0952d6fc944c68e9395f27b6393c32865468ff2aa54a4",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_0d2887f28c4f137e9751cf29",
+      "candidateDigest": "sha256:56f649cdb990ab96a736399d9900dafd1c95c3c130390622c3016deceb6f8831",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/reproducibility/method",
+      "title": "Reproducibility — Method",
+      "conceptId": "urn:maha:concept:evidence:reproducibility",
+      "routeRole": "method",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-reproducibility-registry",
+          "locator": "lib/evidence-workflow-examples.ts — EVIDENCE_WORKFLOW_PUBLIC_REGISTRY and EVIDENCE_WORKFLOW_REGISTRY_DIGEST",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Publishes synthetic inputs, outputs, refusals, checks, and one digest-bound workflow registry.",
+          "boundary": "Synthetic conformance is not independent scientific reproduction."
+        }
+      ],
+      "decisionDigest": "sha256:4ddc611c979938cb3c065c158e7f97ddb22c267c4de7dce823d85c2af5a472e8",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_123255040ef5ce3e1ab37a09",
+      "candidateDigest": "sha256:a3b42a8f2512e7bfbf56b1e5345af7f02ec9834e62ac08abde101d7c892daacb",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/locator-verification/failure-modes",
+      "title": "Locator Verification — Failure Modes",
+      "conceptId": "urn:maha:concept:evidence:locator-verification",
+      "routeRole": "failure-modes",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-locator-verifier",
+          "locator": "lib/federation/readiness-tranche-22.ts — verifyLocator",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Verifies exact equality of source identity, revision, locator kind, and locator value and returns a digest.",
+          "boundary": "A matching locator proves identity of the declaration, not that the passage exists, was inspected, or supports a claim."
+        }
+      ],
+      "decisionDigest": "sha256:f529a1c2ef90ef9bd4839b1fc6726ee335f1ba199d86d5133629cf3238b83cdc",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_1311261f731efbee6d81ea83",
+      "candidateDigest": "sha256:9d7dc144f61d210552053f175319fb9e9c363bf15dc19fdddc1cea5440979479",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/inference-boundary/failure-mode",
+      "title": "Inference Boundary — Failure Mode",
+      "conceptId": "urn:maha:concept:evidence:inference-boundary",
+      "routeRole": "failure-mode",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-preflight-inference",
+          "locator": "lib/evidence-preflight.ts — compileEvidencePreflight",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Flags bounded lexical signals for unsupported causal, universal, certainty, and safety inference.",
+          "boundary": "A lexical signal is a review prompt, not a semantic verdict."
+        }
+      ],
+      "decisionDigest": "sha256:57b0cbdd2a08f84aa78fbedee8e5aee3df4bb9e01f1d5203f06f3950d30937b1",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_14558b793d84907acd133346",
+      "candidateDigest": "sha256:246195300606490fa02924b103ab0e2ab48c708bd61182a97721052dff092ea1",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/contradiction-search/relationships",
+      "title": "Contradiction Search — Relationships",
+      "conceptId": "urn:maha:concept:evidence:contradiction-search",
+      "routeRole": "relationships",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-conflict-search",
+          "locator": "lib/federation/readiness-tranche-21.ts — classifyLiterature",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Compares located observations only after claim, population, and outcome scopes match.",
+          "boundary": "Directional disagreement does not adjudicate study quality or truth."
+        }
+      ],
+      "decisionDigest": "sha256:320212b336c3ab543333f8d59f70b7ca26379b08ac78d7fb15002d2b4698c981",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_1baa943c62bd7e8bf79337be",
+      "candidateDigest": "sha256:a58561f1e7016c0dc4fe7e2b0f8e850578844716dc54cfb8261750d80258870b",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/passage-locator/method",
+      "title": "Passage Locator — Method",
+      "conceptId": "urn:maha:concept:evidence:passage-locator",
+      "routeRole": "method",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-passage-locator",
+          "locator": "lib/federation/readiness-tranche-22.ts — verifyLocator",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Defines and verifies source, revision, locator kind, and exact locator value as one bound assertion.",
+          "boundary": "It does not establish passage existence, inspection, or claim support."
+        }
+      ],
+      "decisionDigest": "sha256:956aa426cf90cbe85179bfb6bf83831053e5815a8ece3050b02c87e21b472225",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_25d6b11f76000b761b47201a",
+      "candidateDigest": "sha256:ba896fc66f49781ea9bfe23d37d26d774cfe62a1db50ec561c7f772b834bab21",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/abstract-only-evidence/source-contract",
+      "title": "Abstract Only Evidence — Source Contract",
+      "conceptId": "urn:maha:concept:evidence:abstract-only-evidence",
+      "routeRole": "source-contract",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-recovery-depth",
+          "locator": "lib/source-recovery.ts — validateObservation and compileRecoveryPackets",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Preserves access, inspection, identity, and exact-locator states without upgrading abstract-only access to full-text inspection.",
+          "boundary": "An abstract can establish subject and metadata at most; it cannot support section-specific or detailed claims."
+        }
+      ],
+      "decisionDigest": "sha256:f87b9b65875ec2cba4ea5d39adefcd0fff10f124c42e77008b5f114e014536e4",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_2601b351d1505130b1c0b102",
+      "candidateDigest": "sha256:81db99f62c9ac937cba80305fc9d22814c4290924aa0c5ab82ddb4e8d1cbf857",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/slurm-job/machine-record",
+      "title": "Slurm Job — Machine Record",
+      "conceptId": "urn:maha:concept:evidence:slurm-job",
+      "routeRole": "machine-record",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-slurm-adapter",
+          "locator": "packages/maha-witness/src/maha_witness/adapters.py — slurm_metadata",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Captures bounded SLURM runtime metadata into the witness receipt contract.",
+          "boundary": "Recorded scheduler metadata does not prove workload correctness or cluster configuration completeness."
+        }
+      ],
+      "decisionDigest": "sha256:5a9895554a5976356ab01859fd3dc5617b8d79fba8358d130daeaf2ed37609c8",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_2c8d504e70fa69a97aa2a5cc",
+      "candidateDigest": "sha256:95519ed0dfd3c56bffb2f23866694f527329478c0d6803c4dab09eeed8ae6706",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/contradiction-search/definition",
+      "title": "Contradiction Search — Definition",
+      "conceptId": "urn:maha:concept:evidence:contradiction-search",
+      "routeRole": "definition",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-conflict-search",
+          "locator": "lib/federation/readiness-tranche-21.ts — classifyLiterature",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Compares located observations only after claim, population, and outcome scopes match.",
+          "boundary": "Directional disagreement does not adjudicate study quality or truth."
+        }
+      ],
+      "decisionDigest": "sha256:af75924893e39f5325d5544383a7881b1f89d8eebb685bdd69a6c755272bf7e9",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_30e030dbb067232f8152183e",
+      "candidateDigest": "sha256:dcf03572cc15d2d94ed04799ca472130cbf040a13401aa5a4e97ef28b0433533",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/full-text-evidence/relationships",
+      "title": "Full Text Evidence — Relationships",
+      "conceptId": "urn:maha:concept:evidence:full-text-evidence",
+      "routeRole": "relationships",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-recovery-fulltext",
+          "locator": "lib/source-recovery.ts — validateObservation and compileRecoveryPackets",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Requires a content-inspected observation and exact locator before a recovery packet can describe full-text evidence.",
+          "boundary": "Full-text access alone does not prove relevance, rights, claim support, or correctness."
+        }
+      ],
+      "decisionDigest": "sha256:6c0ae73dd06f9c5333f93a227f2b7fe32a0367f200f9c207f5f3d134cf1c0f81",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_31ee2d31784c77651fd53543",
+      "candidateDigest": "sha256:fde00afb9e6559b10682ef07754702104a06b752e10328482f404ece205994db",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/government-mirror/machine-record",
+      "title": "Government Mirror — Machine Record",
+      "conceptId": "urn:maha:concept:evidence:government-mirror",
+      "routeRole": "machine-record",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-government-mirror",
+          "locator": "lib/source-recovery.ts — recoveryRequests and compileRecoveryPackets",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Represents a government-host recovery route while preserving identity, version, access, and inspection as separate states.",
+          "boundary": "Government hosting does not make a document authoritative for every claim or establish version equivalence."
+        }
+      ],
+      "decisionDigest": "sha256:e17ee13e31af8320fb7709d9c827cb4a2e51bc9b5dede24ee58f00bdaf20f799",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_321181713a018eb6e821e670",
+      "candidateDigest": "sha256:3b1ce8620c22de39e704f571c28c574b68a073bc92495ab5ce5696b43f2bb498",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/full-text-evidence/source-contract",
+      "title": "Full Text Evidence — Source Contract",
+      "conceptId": "urn:maha:concept:evidence:full-text-evidence",
+      "routeRole": "source-contract",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-recovery-fulltext",
+          "locator": "lib/source-recovery.ts — validateObservation and compileRecoveryPackets",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Requires a content-inspected observation and exact locator before a recovery packet can describe full-text evidence.",
+          "boundary": "Full-text access alone does not prove relevance, rights, claim support, or correctness."
+        }
+      ],
+      "decisionDigest": "sha256:afa9ae63d0de241830824e5f41d1a30302a88a7d13cc7d180325edcd1cf8f03c",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_33a5aff1e0d51441f5c3c1f8",
+      "candidateDigest": "sha256:1861edc6e98625cac1b6c064deca394909957eaa7ee3561a20aa78715f9b1569",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/reproducibility/source-contract",
+      "title": "Reproducibility — Source Contract",
+      "conceptId": "urn:maha:concept:evidence:reproducibility",
+      "routeRole": "source-contract",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-reproducibility-registry",
+          "locator": "lib/evidence-workflow-examples.ts — EVIDENCE_WORKFLOW_PUBLIC_REGISTRY and EVIDENCE_WORKFLOW_REGISTRY_DIGEST",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Publishes synthetic inputs, outputs, refusals, checks, and one digest-bound workflow registry.",
+          "boundary": "Synthetic conformance is not independent scientific reproduction."
+        }
+      ],
+      "decisionDigest": "sha256:fc23af77b1a275c50a5e6962660144d2209c8c466e56f6534595410eeece46be",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_39675754e831c3fd08c452c7",
+      "candidateDigest": "sha256:d6c65cea64b4517fba487b70f578c1f091b2d2dd6729440cfe84453e30ea1894",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/metadata-only-evidence/machine-record",
+      "title": "Metadata Only Evidence — Machine Record",
+      "conceptId": "urn:maha:concept:evidence:metadata-only-evidence",
+      "routeRole": "machine-record",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-metadata-boundary",
+          "locator": "lib/evidence-preflight-contract.ts — EvidencePreflightClaimAssessment and evidenceStatus",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Distinguishes metadata-only evidence from located user-supplied excerpts and blocks it before source inspection.",
+          "boundary": "Metadata identifies a possible source; it is non-explanatory and does not support a claim."
+        }
+      ],
+      "decisionDigest": "sha256:e6638feec72f80c823c40c4efdcdd6dd3bf7685972487108233c50e47f2176fc",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_4191e443964b4b25c002f26c",
+      "candidateDigest": "sha256:7b06cd23dd1431d26426febcec21c34e6e11cc87d8d4a0e2eb776db29fbc0a4d",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/metadata-only-evidence/failure-mode",
+      "title": "Metadata Only Evidence — Failure Mode",
+      "conceptId": "urn:maha:concept:evidence:metadata-only-evidence",
+      "routeRole": "failure-mode",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-metadata-boundary",
+          "locator": "lib/evidence-preflight-contract.ts — EvidencePreflightClaimAssessment and evidenceStatus",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Distinguishes metadata-only evidence from located user-supplied excerpts and blocks it before source inspection.",
+          "boundary": "Metadata identifies a possible source; it is non-explanatory and does not support a claim."
+        }
+      ],
+      "decisionDigest": "sha256:cf68d8355e7c4d36c7f2b891e5d67e091d23570dba0b218e80087da4f3ee38dd",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_41ee6b7080d2c8416e30adaf",
+      "candidateDigest": "sha256:2ef5eabcb92f4148c0b4a92e349cc9c3eb22424e9484cc5832bb1d2a1b9d71a3",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/commercialization",
+      "title": "Context Budgeting — Commercialization",
+      "conceptId": "urn:maha:concept:authority:context-budgeting",
+      "routeRole": "commercialization",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-context-compression-offer",
+          "locator": "lib/agentic-commerce.ts — contextCompressionX402Capability",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Publishes a payable bounded context-compression capability with an exact endpoint and x402 terms.",
+          "boundary": "The offer covers transient context compression only; it does not commercialize general memory governance, durable tasks, delegation, or failure recovery."
+        }
+      ],
+      "decisionDigest": "sha256:9bf5e2fc34e0fd2da77c13e49556846865905919ddf508eb2a65b9555724e048",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_483f9f04478c375058e71c18",
+      "candidateDigest": "sha256:f62ccc587197546233ea1c0c954feda40aeef2ec0eb3dfd6cd23dbf44e78e01a",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/abstract-only-evidence/method",
+      "title": "Abstract Only Evidence — Method",
+      "conceptId": "urn:maha:concept:evidence:abstract-only-evidence",
+      "routeRole": "method",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-recovery-depth",
+          "locator": "lib/source-recovery.ts — validateObservation and compileRecoveryPackets",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Preserves access, inspection, identity, and exact-locator states without upgrading abstract-only access to full-text inspection.",
+          "boundary": "An abstract can establish subject and metadata at most; it cannot support section-specific or detailed claims."
+        }
+      ],
+      "decisionDigest": "sha256:3998eef457d6874a96bc37c4653776a38d2114831caf2b69fed85704858b5865",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_4941b8fd397b7b41ac4cda40",
+      "candidateDigest": "sha256:f71aa616936e57796c4dd7272a71b2906adffaf29d4c4e4f9d05e947d07d1cbd",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/formal-definition/definition",
+      "title": "Formal Definition — Definition",
+      "conceptId": "urn:maha:concept:evidence:formal-definition",
+      "routeRole": "definition",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-formal-proof-contract",
+          "locator": "packages/maha-lean-bridge/src/verifier.ts — verifyAttachments",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Defines and verifies a machine-checked theorem attachment against a pinned manifest, source, claim, and toolchain.",
+          "boundary": "A formal definition or checked deduction does not establish empirical truth or source support."
+        }
+      ],
+      "decisionDigest": "sha256:eee98cb6f339a894608697f25d56c26469edfb7a4d63b452c522da0d586b14d6",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_49aa8c59c3937c1fa051a721",
+      "candidateDigest": "sha256:c3b8dff2873338143bbe450c40b2b92ed63d29c6c23fdc005625f61d8618b2ab",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/qiskit-circuit/fixture",
+      "title": "Qiskit Circuit — Fixture",
+      "conceptId": "urn:maha:concept:evidence:qiskit-circuit",
+      "routeRole": "fixture",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-qiskit-adapter",
+          "locator": "packages/maha-witness/src/maha_witness/adapters.py — qiskit_metadata",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Captures bounded Qiskit circuit, backend, shot, seed, and runtime metadata under the witness contract.",
+          "boundary": "A receipt does not establish quantum advantage, hardware fidelity, or scientific validity."
+        }
+      ],
+      "decisionDigest": "sha256:b1532b2497a7dc5f9bd6a76510e969c8d9d3114b88143936d9fc7f3ab0a6ab91",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_4b101b84ca753b71e4ab0b5e",
+      "candidateDigest": "sha256:8f2e58692926d780a77f116d0f3651f6a4d9d7b48e65fe228c3500141662f446",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/contradiction-search/source-contract",
+      "title": "Contradiction Search — Source Contract",
+      "conceptId": "urn:maha:concept:evidence:contradiction-search",
+      "routeRole": "source-contract",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-conflict-search",
+          "locator": "lib/federation/readiness-tranche-21.ts — classifyLiterature",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Compares located observations only after claim, population, and outcome scopes match.",
+          "boundary": "Directional disagreement does not adjudicate study quality or truth."
+        }
+      ],
+      "decisionDigest": "sha256:b9e68ab1351adce3b8f6fce3141b366cc794a06a8f7f6d274813f10822563df4",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_4d092c2e7e20eccfcffc066b",
+      "candidateDigest": "sha256:b012efe967ec1fbaca212123cc33eb4610cd3d74fb41a34a64dcaad602ca3cc9",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/qiskit-circuit/protocol",
+      "title": "Qiskit Circuit — Protocol",
+      "conceptId": "urn:maha:concept:evidence:qiskit-circuit",
+      "routeRole": "protocol",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-qiskit-adapter",
+          "locator": "packages/maha-witness/src/maha_witness/adapters.py — qiskit_metadata",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Captures bounded Qiskit circuit, backend, shot, seed, and runtime metadata under the witness contract.",
+          "boundary": "A receipt does not establish quantum advantage, hardware fidelity, or scientific validity."
+        }
+      ],
+      "decisionDigest": "sha256:0a9f09e8b4f8f6c0fff7883e1cb821b0b9576b3ab34e1a028717f07be0663f0d",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_50f3d03e58c3f4dace8a28ac",
+      "candidateDigest": "sha256:267338feca65f1fc4caa61be7101866d1a21c08a7c3d3a5275482b8b2c9863b1",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/interoperability/evidence",
+      "title": "Interoperability — Evidence",
+      "conceptId": "urn:maha:concept:governance:interoperability",
+      "routeRole": "evidence",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-eu-interoperability",
+          "locator": "https://interoperable-europe.ec.europa.eu/Interoperable-Europe-Act-Regulation — Articles 1–6; https://interoperable-europe.ec.europa.eu/collection/iopeu-monitoring/european-interoperability-framework-detail — layers and recommendations",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Defines legal, organizational, semantic, and technical interoperability and records assessment, reuse, governance, and implementation tradeoffs.",
+          "boundary": "EU public-sector law and guidance do not establish a universal private-sector machine rule or prove outcomes."
+        }
+      ],
+      "decisionDigest": "sha256:7a1aea19cff758b333c5e572e0519d9dc7b44ac6816e28e81ecad6f2a0e3941a",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_528210d274913a7eb2093bf1",
+      "candidateDigest": "sha256:177f953ccde4d722898142aee87615b29d93631e508c471bb791724a38090fe3",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/passage-locator/definition",
+      "title": "Passage Locator — Definition",
+      "conceptId": "urn:maha:concept:evidence:passage-locator",
+      "routeRole": "definition",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-passage-locator",
+          "locator": "lib/federation/readiness-tranche-22.ts — verifyLocator",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Defines and verifies source, revision, locator kind, and exact locator value as one bound assertion.",
+          "boundary": "It does not establish passage existence, inspection, or claim support."
+        }
+      ],
+      "decisionDigest": "sha256:351fdbc9f381010a21d67ba618dbb9e40c77868c07dca1fdba2bf3607d831918",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_5322e19e5c67b1aae32124b0",
+      "candidateDigest": "sha256:881a0868e50ebae5af843d810f2327e7a6d8a83bac50048768fc6a119bc4ef14",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/failure-mode",
+      "title": "Release Manifest — Failure Mode",
+      "conceptId": "urn:maha:concept:release:release-manifest",
+      "routeRole": "failure-mode",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-release-manifest",
+          "locator": "lib/epistemic-release.ts — parseEpistemicReleaseRequest and releaseReadiness and buildEpistemicCanonicalRelease",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Defines, validates, evaluates, and compiles an exact-target canonical release with scoped approvals and separate release authority.",
+          "boundary": "The release manifest records governance and provenance; it does not establish empirical truth, independent review, or source correctness."
+        }
+      ],
+      "decisionDigest": "sha256:54e03d4ca28cc992a376770896ce34bfb0372bc17a1421c9eff032f252252987",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_5446a5c1ef479a180cb62379",
+      "candidateDigest": "sha256:ce92e69b7b0c74ed95643cf40005b876e4e1f5d9fb92c7f07de8578ac9fe0807",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/formal-definition/protocol",
+      "title": "Formal Definition — Protocol",
+      "conceptId": "urn:maha:concept:evidence:formal-definition",
+      "routeRole": "protocol",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-formal-proof-contract",
+          "locator": "packages/maha-lean-bridge/src/verifier.ts — verifyAttachments",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Defines and verifies a machine-checked theorem attachment against a pinned manifest, source, claim, and toolchain.",
+          "boundary": "A formal definition or checked deduction does not establish empirical truth or source support."
+        }
+      ],
+      "decisionDigest": "sha256:c67184306e0ec26a0a827e151441f54531a42a24ee4fa9869337bf406d6acaab",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_56850c27bb00fd728015f0d2",
+      "candidateDigest": "sha256:a1a25c43c49e1ff8bb881b70270b17b1dd07cb4bb643e72be7ca161f5178c066",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/reproducibility/relationships",
+      "title": "Reproducibility — Relationships",
+      "conceptId": "urn:maha:concept:evidence:reproducibility",
+      "routeRole": "relationships",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-reproducibility-registry",
+          "locator": "lib/evidence-workflow-examples.ts — EVIDENCE_WORKFLOW_PUBLIC_REGISTRY and EVIDENCE_WORKFLOW_REGISTRY_DIGEST",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Publishes synthetic inputs, outputs, refusals, checks, and one digest-bound workflow registry.",
+          "boundary": "Synthetic conformance is not independent scientific reproduction."
+        }
+      ],
+      "decisionDigest": "sha256:2ddd3721216628f009d548381a3c44466cc9d7cc59ad09b22a6da76d763db5d1",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_5720e12f50d70c4b6a2323f4",
+      "candidateDigest": "sha256:bcf7f3930e0d65458ccd446dd43d1c0770ddea6cc7696a552de89fe664cc6ded",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/reproducibility/protocol",
+      "title": "Reproducibility — Protocol",
+      "conceptId": "urn:maha:concept:evidence:reproducibility",
+      "routeRole": "protocol",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-reproducibility-registry",
+          "locator": "lib/evidence-workflow-examples.ts — EVIDENCE_WORKFLOW_PUBLIC_REGISTRY and EVIDENCE_WORKFLOW_REGISTRY_DIGEST",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Publishes synthetic inputs, outputs, refusals, checks, and one digest-bound workflow registry.",
+          "boundary": "Synthetic conformance is not independent scientific reproduction."
+        }
+      ],
+      "decisionDigest": "sha256:cb0f2d4e3ac11f8b1117cb7c1cae9b7fae0844cdf818b1ca115384a99960a8af",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_5c6d171020c0c502800ed7b2",
+      "candidateDigest": "sha256:4380d197bd048fc9738bc0b609e56276e2b333ad1ec2d25ee09b6b709fc7209f",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/equation-locator/machine-record",
+      "title": "Equation Locator — Machine Record",
+      "conceptId": "urn:maha:concept:evidence:equation-locator",
+      "routeRole": "machine-record",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-equation-locator",
+          "locator": "lib/federation/readiness-tranche-22.ts — verifyLocator",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Uses the exact locator contract with equation as a distinct locator kind and fails on kind or value substitution.",
+          "boundary": "Equation identity does not validate transcription, symbols, assumptions, or arithmetic."
+        }
+      ],
+      "decisionDigest": "sha256:54f1294b18714e6f5cdb80927026d755be949dd39165a6749bcd6b624d06f510",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_5f7e1bae818a3747a0fa9d19",
+      "candidateDigest": "sha256:b208ea8e477d4f334b074126a3db0986d9e43fc954be742cdee830b5fb8a54a8",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/equation-locator/failure-mode",
+      "title": "Equation Locator — Failure Mode",
+      "conceptId": "urn:maha:concept:evidence:equation-locator",
+      "routeRole": "failure-mode",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-equation-locator",
+          "locator": "lib/federation/readiness-tranche-22.ts — verifyLocator",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Uses the exact locator contract with equation as a distinct locator kind and fails on kind or value substitution.",
+          "boundary": "Equation identity does not validate transcription, symbols, assumptions, or arithmetic."
+        }
+      ],
+      "decisionDigest": "sha256:c727fc8e20e0ff407d3f3128eb980f4337c6daa44a323a58bb219e5805220a97",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_5fe63dbdca0244657c04a976",
+      "candidateDigest": "sha256:ee010913fec2e91f2b2d596f5bb87964313c0abf94f8b0945a0289db3318946e",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/formal-definition/relationships",
+      "title": "Formal Definition — Relationships",
+      "conceptId": "urn:maha:concept:evidence:formal-definition",
+      "routeRole": "relationships",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-formal-proof-contract",
+          "locator": "packages/maha-lean-bridge/src/verifier.ts — verifyAttachments",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Defines and verifies a machine-checked theorem attachment against a pinned manifest, source, claim, and toolchain.",
+          "boundary": "A formal definition or checked deduction does not establish empirical truth or source support."
+        }
+      ],
+      "decisionDigest": "sha256:320da69e1e5041eab9cfdee7902a2a1e0a63d65f51a473dcae5a8ee47f6f1ccd",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_601371b4cf4144f1806824a9",
+      "candidateDigest": "sha256:b865edb110f7467efcaeacdae5c8b6e49817bd1d5ece942e0d404bb1d260b842",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/passage-locator/protocol",
+      "title": "Passage Locator — Protocol",
+      "conceptId": "urn:maha:concept:evidence:passage-locator",
+      "routeRole": "protocol",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-passage-locator",
+          "locator": "lib/federation/readiness-tranche-22.ts — verifyLocator",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Defines and verifies source, revision, locator kind, and exact locator value as one bound assertion.",
+          "boundary": "It does not establish passage existence, inspection, or claim support."
+        }
+      ],
+      "decisionDigest": "sha256:229b2ccbeedbe005b123ff495f316e00e962b9a457a0bb69ff57b3591a2b5563",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_62e6c60f66c3a9f0659917d5",
+      "candidateDigest": "sha256:ecaac0dcbd4f92f57a043d70fc8b3cc7fc9c4b02c694f7d7110e66779205a89b",
+      "canonicalUrl": "https://research.mahastrategies.com/federation/research/full-text-evidence/protocol",
+      "title": "Full Text Evidence — Protocol",
+      "conceptId": "urn:maha:concept:evidence:full-text-evidence",
+      "routeRole": "protocol",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-recovery-fulltext",
+          "locator": "lib/source-recovery.ts — validateObservation and compileRecoveryPackets",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Requires a content-inspected observation and exact locator before a recovery packet can describe full-text evidence.",
+          "boundary": "Full-text access alone does not prove relevance, rights, claim support, or correctness."
+        }
+      ],
+      "decisionDigest": "sha256:eba96b1bd0003ae464161291db15d99d5f646ea0f18600a342c89c4a878ac36c",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_6708f2125c704c598a373d02",
+      "candidateDigest": "sha256:abc58289a8e8a58dfee0aff3e86b148d26c09c7d8c60d820ab5f4533556a22cb",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/reference-frame-conversion/worked-example",
+      "title": "Reference Frame Conversion — Worked Example",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "routeRole": "worked-example",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-quarter-turn-frame",
+          "locator": "lib/federation/readiness-tranche-22.ts — rotateCartesianQuarterTurns",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Performs exact Cartesian rotations in integer quarter turns with a normalized transform identifier.",
+          "boundary": "This is a synthetic two-dimensional orthogonal transform, not an Earth-orientation, celestial, geodetic, epoch, or uncertainty service."
+        },
+        {
+          "sourceId": "src-iers-reference-frames",
+          "locator": "Chapter 5, transformation between the ITRS and GCRS",
+          "rightsBasis": "reference-only",
+          "scope": "Specifies the sequence and quantities used to transform between terrestrial and celestial reference systems.",
+          "boundary": "Does not establish that a software implementation uses the correct epoch, Earth-orientation parameters, units, or convention version."
+        }
+      ],
+      "decisionDigest": "sha256:16ac1493d2231c824af6bae4f7f6c4168226e0580b59d0a50d013ae21fece3c5",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_6af09a682cc7e2277169d046",
+      "candidateDigest": "sha256:b76a6169426b217bd16cd122ad3a14bea43caae6e17d388bcaa8d103a390f780",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/reference-frame-conversion/machine-interface",
+      "title": "Reference Frame Conversion — Machine Interface",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "routeRole": "machine-interface",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-quarter-turn-frame",
+          "locator": "lib/federation/readiness-tranche-22.ts — rotateCartesianQuarterTurns",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Performs exact Cartesian rotations in integer quarter turns with a normalized transform identifier.",
+          "boundary": "This is a synthetic two-dimensional orthogonal transform, not an Earth-orientation, celestial, geodetic, epoch, or uncertainty service."
+        },
+        {
+          "sourceId": "src-iers-reference-frames",
+          "locator": "Chapter 5, transformation between the ITRS and GCRS",
+          "rightsBasis": "reference-only",
+          "scope": "Specifies the sequence and quantities used to transform between terrestrial and celestial reference systems.",
+          "boundary": "Does not establish that a software implementation uses the correct epoch, Earth-orientation parameters, units, or convention version."
+        }
+      ],
+      "decisionDigest": "sha256:1ef5349d271f786d78598531c015b2733858e6d067d8bcfccb79828b6f00f567",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_71c7f98e8da928b16af8a1c8",
+      "candidateDigest": "sha256:401c7c96b6338502634197e29817a204e0eec512fab1e02be6b5262942d3be51",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/digital-public-infrastructure/implementation",
+      "title": "Digital Public Infrastructure — Implementation",
+      "conceptId": "urn:maha:concept:governance:digital-public-infrastructure",
+      "routeRole": "implementation",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-oecd-dpi",
+          "locator": "https://www.oecd.org/en/publications/digital-public-infrastructure-for-digital-governments_ff525dc8-en.html — definition, components, safeguards, and implementation considerations",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Describes shared digital systems, implementation conditions, governance, safeguards, and interoperability considerations.",
+          "boundary": "An OECD policy paper is not current law and does not create an executable machine rule."
+        }
+      ],
+      "decisionDigest": "sha256:ccffeb70ff8b8fb52a2f343b002559c531e60c5d97babe5d720cef2f5ab9bfa2",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_79ca17406668823c29d6f6dd",
+      "candidateDigest": "sha256:9bf7e4da393e8dfde31f846496f9a587b736be53a514ca9413adbf5cb5fc2609",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/template",
+      "title": "Release Manifest — Template",
+      "conceptId": "urn:maha:concept:release:release-manifest",
+      "routeRole": "template",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-release-manifest",
+          "locator": "lib/epistemic-release.ts — parseEpistemicReleaseRequest and releaseReadiness and buildEpistemicCanonicalRelease",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Defines, validates, evaluates, and compiles an exact-target canonical release with scoped approvals and separate release authority.",
+          "boundary": "The release manifest records governance and provenance; it does not establish empirical truth, independent review, or source correctness."
+        }
+      ],
+      "decisionDigest": "sha256:8a343947a659c79f5b24d946a5a1930456b9655e7d8da0a98774ebe5d061e54d",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_7c06c37e2399d72dd61ef2bc",
+      "candidateDigest": "sha256:bd0cbd95064d87a8da7725273766f9baf000b130e837e4ae29e91173002f568b",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/version-relationship/verification",
+      "title": "Version Relationship — Verification",
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "routeRole": "verification",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-version-verifier",
+          "locator": "lib/federation/readiness-tranche-22.ts — verifyVersionRelationship",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Verifies an initial or superseding transition against exact object and predecessor revision digests.",
+          "boundary": "A valid transition establishes lineage consistency, not semantic equivalence, evidence quality, or review inheritance."
+        }
+      ],
+      "decisionDigest": "sha256:d48984ea72a298f2a69ba74ee308db5907e08d124a53dfc806d0335397722fd0",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_7f83b841af363176f9056dd3",
+      "candidateDigest": "sha256:2c97d5f0fdcc2dd0e39924abdeb0cbdc08ba33b9dc0e424889ec2231df220218",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/manuscript-versioning/definition",
+      "title": "Manuscript Versioning — Definition",
+      "conceptId": "urn:maha:concept:release:manuscript-versioning",
+      "routeRole": "definition",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-versioned-release",
+          "locator": "lib/epistemic-release.ts — epistemicReleaseStatus and activeEpistemicReleases",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Distinguishes active, superseded, and withdrawn release states over exact targets.",
+          "boundary": "Release lineage is not a universal publishing-version ontology and does not establish equivalence between manuscripts and versions of record."
+        }
+      ],
+      "decisionDigest": "sha256:4b5e52f31a12474a5bfd3600b2908d81b6c8d22842893a6708da0beefe650ff8",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_86ebcdf345c4d27c43f243eb",
+      "candidateDigest": "sha256:40813f555e41c3fa65e75bd0e748862d9270ca9b012198bf8092ab06996f46ba",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/context-pack/policy",
+      "title": "Context Pack — Policy",
+      "conceptId": "urn:maha:concept:release:context-pack",
+      "routeRole": "policy",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-context-pack",
+          "locator": "lib/context-compiler.ts — parseContextPackRequest and compileContextPack",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Validates bounded context inputs and deterministically compiles a source-attributed context pack under an explicit budget.",
+          "boundary": "Selection and retention do not validate source truth, relevance outside the request, legal compliance, or downstream model behavior."
+        }
+      ],
+      "decisionDigest": "sha256:21929ab132774b5b575ef5bebdd8d4a82d5ba919b78012e978ab946d4244d6af",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_94d3da0fbeefa7016d947db9",
+      "candidateDigest": "sha256:53957087714de28d8371d0eb3c4321841cd8d4721b1c4189c20c89ef1d15792f",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/machine-interface",
+      "title": "Release Manifest — Machine Interface",
+      "conceptId": "urn:maha:concept:release:release-manifest",
+      "routeRole": "machine-interface",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-release-manifest",
+          "locator": "lib/epistemic-release.ts — parseEpistemicReleaseRequest and releaseReadiness and buildEpistemicCanonicalRelease",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Defines, validates, evaluates, and compiles an exact-target canonical release with scoped approvals and separate release authority.",
+          "boundary": "The release manifest records governance and provenance; it does not establish empirical truth, independent review, or source correctness."
+        }
+      ],
+      "decisionDigest": "sha256:115391cc888c04e14fcdcb30f3f981f37047c80dc754c779b8d1b2d86490ca82",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_9f777990308651d1a4980b2d",
+      "candidateDigest": "sha256:fcfe9527e3eaa02f688a3afa05a4a078eb9d8b7b3864517cb969a123e79ed076",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/locator-verification/workflow",
+      "title": "Locator Verification — Workflow",
+      "conceptId": "urn:maha:concept:evidence:locator-verification",
+      "routeRole": "workflow",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-locator-verifier",
+          "locator": "lib/federation/readiness-tranche-22.ts — verifyLocator",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Verifies exact equality of source identity, revision, locator kind, and locator value and returns a digest.",
+          "boundary": "A matching locator proves identity of the declaration, not that the passage exists, was inspected, or supports a claim."
+        }
+      ],
+      "decisionDigest": "sha256:5aba594423aafad7a1a7de3783784e2024e0707970d2b2e7b855521f434f8cfb",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_aaa33ae4b9dcb8476265932b",
+      "candidateDigest": "sha256:8487b6da88e4751a89e209598d94f1cc8a8032fc0e2713203e77bc1587603d73",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/context-pack/governance",
+      "title": "Context Pack — Governance",
+      "conceptId": "urn:maha:concept:release:context-pack",
+      "routeRole": "governance",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-context-pack",
+          "locator": "lib/context-compiler.ts — parseContextPackRequest and compileContextPack",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Validates bounded context inputs and deterministically compiles a source-attributed context pack under an explicit budget.",
+          "boundary": "Selection and retention do not validate source truth, relevance outside the request, legal compliance, or downstream model behavior."
+        }
+      ],
+      "decisionDigest": "sha256:7c4635fd048bb840dfb158d1f3ad3f3cffd3bf3980e58467477c26995e3a191e",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_ac614aab7eb9cc394996553b",
+      "candidateDigest": "sha256:cb250e7434f71e5f8f256f909cf4edfb6116345bb76d9eb9a8548d213d89ed99",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/reference-frame-conversion/reproducibility",
+      "title": "Reference Frame Conversion — Reproducibility",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "routeRole": "reproducibility",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-quarter-turn-frame",
+          "locator": "lib/federation/readiness-tranche-22.ts — rotateCartesianQuarterTurns",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Performs exact Cartesian rotations in integer quarter turns with a normalized transform identifier.",
+          "boundary": "This is a synthetic two-dimensional orthogonal transform, not an Earth-orientation, celestial, geodetic, epoch, or uncertainty service."
+        },
+        {
+          "sourceId": "src-iers-reference-frames",
+          "locator": "Chapter 5, transformation between the ITRS and GCRS",
+          "rightsBasis": "reference-only",
+          "scope": "Specifies the sequence and quantities used to transform between terrestrial and celestial reference systems.",
+          "boundary": "Does not establish that a software implementation uses the correct epoch, Earth-orientation parameters, units, or convention version."
+        }
+      ],
+      "decisionDigest": "sha256:edde3f27e49e23767c2f1bf3a2d0c29558345523706ef79d8d8f18f2a5ba30a5",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_b4bf5d63227ea2a4fed280b1",
+      "candidateDigest": "sha256:4106a268ab0e5a16c96ac4e8aefbb76091adb770db7625d5c50817f7b5ef27de",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/audit-export/verification",
+      "title": "Audit Export — Verification",
+      "conceptId": "urn:maha:concept:evidence:audit-export",
+      "routeRole": "verification",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-audit-export",
+          "locator": "lib/federation/readiness-tranche-22.ts — compileAuditExport",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Sorts append-only metadata events, rejects duplicates and malformed digests or times, and binds the export to one digest.",
+          "boundary": "The export contains metadata and fingerprints only; it does not prove completeness against an external system or include submitted content."
+        }
+      ],
+      "decisionDigest": "sha256:c1153f9d4d55ef076a5f621e5aebd77b0915b5067e129d64c500db79243fe899",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_bf6f5983b7e8f95b5f2fb564",
+      "candidateDigest": "sha256:8610911d7b054f7e3c4232ef4a14714ff84305b79d53f2c9518e5696b424f95f",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/causal-inference/reproducibility",
+      "title": "Causal Inference — Reproducibility",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "routeRole": "reproducibility",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-randomized-contrast",
+          "locator": "lib/federation/readiness-tranche-22.ts — randomizedMeanContrast",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Computes the exact sample-mean contrast for two declared randomized synthetic arms.",
+          "boundary": "Randomization is caller-declared; this fixture does not verify assignment, estimate population effects, handle attrition, or justify transportability."
+        },
+        {
+          "sourceId": "src-causal-what-if",
+          "locator": "Chapter 1, p. 12, “A definition of causal effect”",
+          "rightsBasis": "reference-only",
+          "scope": "Defines causal effects as contrasts under alternative treatments in a target population and distinguishes causal from associational quantities.",
+          "boundary": "Does not establish identification for a particular dataset, the validity of a causal model, or an effect estimate."
+        }
+      ],
+      "decisionDigest": "sha256:4f7f16559148b8ede80d29c4f4e8b1748f0b160eda38d5041d1596818212b594",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_c82683caf61b53dcda122289",
+      "candidateDigest": "sha256:085983ee9dad80b749a94a35994f9d5d4655a2867d92f8f909495406a53eca1c",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/incident-reporting/sources",
+      "title": "Incident Reporting — Sources",
+      "conceptId": "urn:maha:concept:governance:incident-reporting",
+      "routeRole": "sources",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-nist-incident",
+          "locator": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf — MAP 5.1; https://nvlpubs.nist.gov/nistpubs/SpecialPublications/800-171r3/NIST.SP.800-171r3.html — 03.06.01–03.06.03",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Describes incident inputs, tracking, response, testing, reporting, and organizational assignment.",
+          "boundary": "Voluntary AI guidance and cybersecurity controls do not establish one universal mandatory incident regime."
+        }
+      ],
+      "decisionDigest": "sha256:4cba5ef9d81592d896bf781e048bf0b31a942bf716c9fd8cc1772e0f0692a33c",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_cb0c429a6e583f8eca11ee47",
+      "candidateDigest": "sha256:0074376b2f50d203f16edeb2b61169857b145efc9cb89a45e8d08c5f80dd414b",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/intellectual-property/sources",
+      "title": "Intellectual Property — Sources",
+      "conceptId": "urn:maha:concept:governance:intellectual-property",
+      "routeRole": "sources",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-wipo-ip",
+          "locator": "https://www.wipo.int/meetings/en/doc_details.jsp?doc_id=499504 — issue taxonomy and policy questions",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Identifies IP domains, mechanisms, and unresolved AI-related policy questions.",
+          "boundary": "An issues paper is not jurisdiction-specific law, legal advice, or a final WIPO position."
+        }
+      ],
+      "decisionDigest": "sha256:a98e0ad1126d543a1bf08e083fc9b48777a5b9e6544b42cc4e9c16db8887bc20",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_cd1e2d9529295cabd6ade110",
+      "candidateDigest": "sha256:3a0d8931487fa42dbdc924297565747df11f1139e196fd26538135d0be4ed7ea",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/example",
+      "title": "Release Manifest — Example",
+      "conceptId": "urn:maha:concept:release:release-manifest",
+      "routeRole": "example",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-release-manifest",
+          "locator": "lib/epistemic-release.ts — parseEpistemicReleaseRequest and releaseReadiness and buildEpistemicCanonicalRelease",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Defines, validates, evaluates, and compiles an exact-target canonical release with scoped approvals and separate release authority.",
+          "boundary": "The release manifest records governance and provenance; it does not establish empirical truth, independent review, or source correctness."
+        }
+      ],
+      "decisionDigest": "sha256:e426a1637d89e0ccaa153344112752b3b7d4ee68c9a93dcb372193263e98d403",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_cf62087097250037070cd0ad",
+      "candidateDigest": "sha256:2c7d077213790d920140625a92455122264f27357d24affe2fa3a9f41712ebcf",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/interoperability/tradeoffs",
+      "title": "Interoperability — Tradeoffs",
+      "conceptId": "urn:maha:concept:governance:interoperability",
+      "routeRole": "tradeoffs",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-eu-interoperability",
+          "locator": "https://interoperable-europe.ec.europa.eu/Interoperable-Europe-Act-Regulation — Articles 1–6; https://interoperable-europe.ec.europa.eu/collection/iopeu-monitoring/european-interoperability-framework-detail — layers and recommendations",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Defines legal, organizational, semantic, and technical interoperability and records assessment, reuse, governance, and implementation tradeoffs.",
+          "boundary": "EU public-sector law and guidance do not establish a universal private-sector machine rule or prove outcomes."
+        }
+      ],
+      "decisionDigest": "sha256:18d2233e240b38ab3f214f568eb94c7dda2de3d563165f3b8cda72182c94225a",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_d0046ae431ba418a068c809b",
+      "candidateDigest": "sha256:fb35f9b8a89047c46d361406e61a770f96464d29fb88dcb3a5bfa6023ca5d93f",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/competition-policy/implementation",
+      "title": "Competition Policy — Implementation",
+      "conceptId": "urn:maha:concept:governance:competition-policy",
+      "routeRole": "implementation",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-doj-antitrust",
+          "locator": "https://www.justice.gov/atr/antitrust-laws-and-you — statutes; https://www.justice.gov/atr/merger-guidelines/overview — 2023 Merger Guidelines",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Describes US federal antitrust enforcement authorities and the analytical framework used in merger review.",
+          "boundary": "Guidelines identify enforcement analysis, not guaranteed outcomes, universal law, or an executable adjudication rule."
+        }
+      ],
+      "decisionDigest": "sha256:4f139c2794aa5f71c0386ef8702cafb7baa9ac2d6f95fa2ea15354bef6cddf1b",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_d13fdf9168ce63d4bf8426c7",
+      "candidateDigest": "sha256:5ed5d040518eeb197d924ce843d99555773fdeb85a4b7f878a75d36913085216",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/assurance-cases/mechanisms",
+      "title": "Assurance Cases — Mechanisms",
+      "conceptId": "urn:maha:concept:governance:assurance-cases",
+      "routeRole": "mechanisms",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-nist-assurance",
+          "locator": "https://csrc.nist.gov/glossary/term/assurance_case — definition and source documents",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Defines an assurance case as an auditable argument supported by evidence and explicit assumptions.",
+          "boundary": "A definition does not establish current law or adequacy of a particular assurance case."
+        }
+      ],
+      "decisionDigest": "sha256:1103f0930e8f475327d20348c34fa1a28d423989e97e4d6f289cd45823bc2dab",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_d168942505ab7d2084529962",
+      "candidateDigest": "sha256:6ce33ccbbbd8606f151a77f89d35b2ef9fd9ba2757080c21a885b0cd8080151e",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/context-pack/workflow",
+      "title": "Context Pack — Workflow",
+      "conceptId": "urn:maha:concept:release:context-pack",
+      "routeRole": "workflow",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-context-pack",
+          "locator": "lib/context-compiler.ts — parseContextPackRequest and compileContextPack",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Validates bounded context inputs and deterministically compiles a source-attributed context pack under an explicit budget.",
+          "boundary": "Selection and retention do not validate source truth, relevance outside the request, legal compliance, or downstream model behavior."
+        }
+      ],
+      "decisionDigest": "sha256:153ae09de07e217c60052177ec5450eadf5175464ee83f1cb581c14237c66a40",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_d62bfb90dfe41abba2796051",
+      "candidateDigest": "sha256:8e0a2c41a865b81c183a07de8100fb8fda11d0d7b556d9ac63a69c95fa327264",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/governance",
+      "title": "Release Manifest — Governance",
+      "conceptId": "urn:maha:concept:release:release-manifest",
+      "routeRole": "governance",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-release-manifest",
+          "locator": "lib/epistemic-release.ts — parseEpistemicReleaseRequest and releaseReadiness and buildEpistemicCanonicalRelease",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Defines, validates, evaluates, and compiles an exact-target canonical release with scoped approvals and separate release authority.",
+          "boundary": "The release manifest records governance and provenance; it does not establish empirical truth, independent review, or source correctness."
+        }
+      ],
+      "decisionDigest": "sha256:3e1dfb3c6466fb82da9ff2b1dd28bbd4cf6b030a9669aef10f28997aea405006",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_d6fc967f1f4c46dd429e96ec",
+      "candidateDigest": "sha256:aa00c83c9d3905278511e83a1bf46a2c7d93353182191e5eb21c052a3e887fc9",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/interoperability/sources",
+      "title": "Interoperability — Sources",
+      "conceptId": "urn:maha:concept:governance:interoperability",
+      "routeRole": "sources",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-eu-interoperability",
+          "locator": "https://interoperable-europe.ec.europa.eu/Interoperable-Europe-Act-Regulation — Articles 1–6; https://interoperable-europe.ec.europa.eu/collection/iopeu-monitoring/european-interoperability-framework-detail — layers and recommendations",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Defines legal, organizational, semantic, and technical interoperability and records assessment, reuse, governance, and implementation tradeoffs.",
+          "boundary": "EU public-sector law and guidance do not establish a universal private-sector machine rule or prove outcomes."
+        }
+      ],
+      "decisionDigest": "sha256:93b3451498cdb331ab6cc2e47fb487393d646c30a0d36f9e1ba19b34de87a258",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_d97c9035c35eaa7a549b69a2",
+      "candidateDigest": "sha256:9aa2c199d09b5ad21798417dea1d8478dcaa3da72e34cd52563292dab3ef1256",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/competition-policy/uncertainty",
+      "title": "Competition Policy — Uncertainty",
+      "conceptId": "urn:maha:concept:governance:competition-policy",
+      "routeRole": "uncertainty",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-doj-antitrust",
+          "locator": "https://www.justice.gov/atr/antitrust-laws-and-you — statutes; https://www.justice.gov/atr/merger-guidelines/overview — 2023 Merger Guidelines",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Describes US federal antitrust enforcement authorities and the analytical framework used in merger review.",
+          "boundary": "Guidelines identify enforcement analysis, not guaranteed outcomes, universal law, or an executable adjudication rule."
+        }
+      ],
+      "decisionDigest": "sha256:754c90a2d7e05b0438e3d7684318ecfb5a388e1f801eabd8ef9897180adedb7c",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_d9bccf96502cbf09b7d6e882",
+      "candidateDigest": "sha256:49661f369c261eb194492c0db764fd175167155e48dd5be25bceac9985b1b311",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/causal-inference/worked-example",
+      "title": "Causal Inference — Worked Example",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "routeRole": "worked-example",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-randomized-contrast",
+          "locator": "lib/federation/readiness-tranche-22.ts — randomizedMeanContrast",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Computes the exact sample-mean contrast for two declared randomized synthetic arms.",
+          "boundary": "Randomization is caller-declared; this fixture does not verify assignment, estimate population effects, handle attrition, or justify transportability."
+        },
+        {
+          "sourceId": "src-causal-what-if",
+          "locator": "Chapter 1, p. 12, “A definition of causal effect”",
+          "rightsBasis": "reference-only",
+          "scope": "Defines causal effects as contrasts under alternative treatments in a target population and distinguishes causal from associational quantities.",
+          "boundary": "Does not establish identification for a particular dataset, the validity of a causal model, or an effect estimate."
+        }
+      ],
+      "decisionDigest": "sha256:16f028435af9153f011123954112adfc3c063392db4af9d00cbf56fa5fc57c6a",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_e1bb56f16f7230ef6dd832a6",
+      "candidateDigest": "sha256:da587ec41e0b71b43a335ec8dc9dd436581dc5b46fd18ffd29f6280ac25253db",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/incident-reporting/definition",
+      "title": "Incident Reporting — Definition",
+      "conceptId": "urn:maha:concept:governance:incident-reporting",
+      "routeRole": "definition",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-nist-incident",
+          "locator": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf — MAP 5.1; https://nvlpubs.nist.gov/nistpubs/SpecialPublications/800-171r3/NIST.SP.800-171r3.html — 03.06.01–03.06.03",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Describes incident inputs, tracking, response, testing, reporting, and organizational assignment.",
+          "boundary": "Voluntary AI guidance and cybersecurity controls do not establish one universal mandatory incident regime."
+        }
+      ],
+      "decisionDigest": "sha256:3658e6aa7807cf228a828fc5eabd620eb5039d7ccd7bb169393a85a5d99ffc50",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_e2efc48efc92a02fce22ebb8",
+      "candidateDigest": "sha256:85e5cc469bbca3573f329c33e745791731fba948e6064815dcb5bbb27d9b090f",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/context-pack/failure-mode",
+      "title": "Context Pack — Failure Mode",
+      "conceptId": "urn:maha:concept:release:context-pack",
+      "routeRole": "failure-mode",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-context-pack",
+          "locator": "lib/context-compiler.ts — parseContextPackRequest and compileContextPack",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Validates bounded context inputs and deterministically compiles a source-attributed context pack under an explicit budget.",
+          "boundary": "Selection and retention do not validate source truth, relevance outside the request, legal compliance, or downstream model behavior."
+        }
+      ],
+      "decisionDigest": "sha256:ff99c7e67037be4a0a532294e8a717728f6df74c3b3cfa0ec20f022ca9c76446",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_ec90d506fb510c60080a8494",
+      "candidateDigest": "sha256:f5f557ffc265ed0a9f267ec1f3977c2bbca05d11322b78e8ae180bc3e8e8aa96",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/causal-inference/machine-interface",
+      "title": "Causal Inference — Machine Interface",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "routeRole": "machine-interface",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-randomized-contrast",
+          "locator": "lib/federation/readiness-tranche-22.ts — randomizedMeanContrast",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Computes the exact sample-mean contrast for two declared randomized synthetic arms.",
+          "boundary": "Randomization is caller-declared; this fixture does not verify assignment, estimate population effects, handle attrition, or justify transportability."
+        },
+        {
+          "sourceId": "src-causal-what-if",
+          "locator": "Chapter 1, p. 12, “A definition of causal effect”",
+          "rightsBasis": "reference-only",
+          "scope": "Defines causal effects as contrasts under alternative treatments in a target population and distinguishes causal from associational quantities.",
+          "boundary": "Does not establish identification for a particular dataset, the validity of a causal model, or an effect estimate."
+        }
+      ],
+      "decisionDigest": "sha256:6ba7ff43a65beab677ea0a66c5eb97737ec7d9b84cddd29a2a77e86cb0e54714",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_ed6e9e5b6194a4a45b17910f",
+      "candidateDigest": "sha256:d42c36db6548016a5fd24b3a13caa0cab7c22d620ebd04ca77420c7209abb9f5",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/assurance-cases/implementation",
+      "title": "Assurance Cases — Implementation",
+      "conceptId": "urn:maha:concept:governance:assurance-cases",
+      "routeRole": "implementation",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-nist-assurance",
+          "locator": "https://csrc.nist.gov/glossary/term/assurance_case — definition and source documents",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Defines an assurance case as an auditable argument supported by evidence and explicit assumptions.",
+          "boundary": "A definition does not establish current law or adequacy of a particular assurance case."
+        }
+      ],
+      "decisionDigest": "sha256:3a25632c16f265b61b7882647588192454382ebd8625a762080376a2254a3539",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_ed894d73f5e99239787fe958",
+      "candidateDigest": "sha256:b27c9cdf992d2a9e3ef33ee59167448e8f91f2c220a2945414b90671df03206f",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/locator-verification/verification",
+      "title": "Locator Verification — Verification",
+      "conceptId": "urn:maha:concept:evidence:locator-verification",
+      "routeRole": "verification",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-locator-verifier",
+          "locator": "lib/federation/readiness-tranche-22.ts — verifyLocator",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Verifies exact equality of source identity, revision, locator kind, and locator value and returns a digest.",
+          "boundary": "A matching locator proves identity of the declaration, not that the passage exists, was inspected, or supports a claim."
+        }
+      ],
+      "decisionDigest": "sha256:4972f6d27ac9b346af5adec9b8eb82f0acbbfdab7aa6999f5235241c85006997",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_edda69105a975d84215ad8ab",
+      "candidateDigest": "sha256:0e3cf2cb0b5f60005c9717b71972fde4f42ecd960afea0e5918f11526f5cf8a5",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/policy",
+      "title": "Release Manifest — Policy",
+      "conceptId": "urn:maha:concept:release:release-manifest",
+      "routeRole": "policy",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-release-manifest",
+          "locator": "lib/epistemic-release.ts — parseEpistemicReleaseRequest and releaseReadiness and buildEpistemicCanonicalRelease",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Defines, validates, evaluates, and compiles an exact-target canonical release with scoped approvals and separate release authority.",
+          "boundary": "The release manifest records governance and provenance; it does not establish empirical truth, independent review, or source correctness."
+        }
+      ],
+      "decisionDigest": "sha256:cde0a00ac39d7dc35348272d3c43ea0d9b119c3e90704764ff596857c4d577d2",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_efdc881d2b8c3990ae4bc643",
+      "candidateDigest": "sha256:bb8b5318684e5ac652c0db67119e3233ec45762bd552bf17c6a9f0332f4bc533",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/intellectual-property/definition",
+      "title": "Intellectual Property — Definition",
+      "conceptId": "urn:maha:concept:governance:intellectual-property",
+      "routeRole": "definition",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-wipo-ip",
+          "locator": "https://www.wipo.int/meetings/en/doc_details.jsp?doc_id=499504 — issue taxonomy and policy questions",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Identifies IP domains, mechanisms, and unresolved AI-related policy questions.",
+          "boundary": "An issues paper is not jurisdiction-specific law, legal advice, or a final WIPO position."
+        }
+      ],
+      "decisionDigest": "sha256:4aee73c0f9a701362877f9c7061cc200e9dcfa9005e9fb983d9638d6b0356c86",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_f805090b4bbcaa508d1215a0",
+      "candidateDigest": "sha256:d0217efc99fae508f2cd4e7719d00a6b87a183614f8d4a21735e83125ab62452",
+      "canonicalUrl": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/workflow",
+      "title": "Release Manifest — Workflow",
+      "conceptId": "urn:maha:concept:release:release-manifest",
+      "routeRole": "workflow",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Method or mechanism",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "What exact source or implementation establishes it?",
+        "What dependency remains separate?",
+        "What uncertainty remains?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t22-release-manifest",
+          "locator": "lib/epistemic-release.ts — parseEpistemicReleaseRequest and releaseReadiness and buildEpistemicCanonicalRelease",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Defines, validates, evaluates, and compiles an exact-target canonical release with scoped approvals and separate release authority.",
+          "boundary": "The release manifest records governance and provenance; it does not establish empirical truth, independent review, or source correctness."
+        }
+      ],
+      "decisionDigest": "sha256:3b1a00880ed1b4264f90dc6a2114cbea1c24a8de1f770e3504e549eac5ef3284",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    }
+  ],
+  "provenanceDigest": "sha256:99d9fd56b6219539efcc7d974cf81ee74021350bf9b437c5988bc45b9103cffe"
+}

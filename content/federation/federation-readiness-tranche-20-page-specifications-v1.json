@@ -1,0 +1,1019 @@
+{
+  "schemaVersion": "maha-federation-readiness-tranche-20-page-specifications/1.0",
+  "frozenOn": "2026-09-07",
+  "counts": {
+    "specifications": 28,
+    "boundedQuestions": 140
+  },
+  "specifications": [
+    {
+      "candidateId": "cand_037f0aa1b557fdab2ae6d483",
+      "candidateDigest": "sha256:d3daa13828358b6301be66f40e4888ab184c2776fb58d6fa95a2727f646e62a6",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/intellectual-property/mechanisms",
+      "title": "Intellectual Property — Mechanisms",
+      "conceptId": "urn:maha:concept:governance:intellectual-property",
+      "routeRole": "mechanisms",
+      "directAnswer": "Intellectual Property — Mechanisms is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-wipo-ai-ip",
+          "locator": "https://www.wipo.int/meetings/en/doc_details.jsp?doc_id=499504 — issue taxonomy and policy questions",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Identifies IP mechanisms and unresolved policy questions raised by AI.",
+          "boundary": "An issues paper is not law, jurisdiction-specific advice, or a final WIPO position."
+        }
+      ],
+      "decisionDigest": "sha256:159f33754f99a3ab1f472d4306d2b3ac09ec089c3f120a4b0f37a1b05a0a236a",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_03bee4fd49beec1bd75e76ba",
+      "candidateDigest": "sha256:6dab60322113a50907d8abfe99e27a96d37326c0e419b6b0e1fd6b2eb4562545",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/traceability/uncertainty",
+      "title": "Traceability — Uncertainty",
+      "conceptId": "urn:maha:concept:governance:traceability",
+      "routeRole": "uncertainty",
+      "directAnswer": "Traceability — Uncertainty is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-eu-ai-traceability",
+          "locator": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-71 — Recital 71 and linked Articles 11, 12, 19, 72",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Connects traceability for high-risk AI to technical documentation, lifecycle records, logs, and post-market monitoring.",
+          "boundary": "This is bounded to the EU AI Act and high-risk-system context; it is not a universal definition or legal advice."
+        }
+      ],
+      "decisionDigest": "sha256:2b48ea9235fa23481ba510323e771c69ec4138a8ae37eb827f8ded99b89765d1",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_0eff8a7f07532fcb14af59f2",
+      "candidateDigest": "sha256:e67f05e85f800a987709bd62482158abbe1fbd2d3a92db5d898c9f5179c94862",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/root-finding/reproducibility",
+      "title": "Root Finding — Reproducibility",
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "routeRole": "reproducibility",
+      "directAnswer": "Root Finding — Reproducibility is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-newton-fixture",
+          "locator": "lib/deterministic-calculation.ts — newtonRoot and buildCalculation and assertCalculable",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Executes a fixed-precision Newton iteration and binds the exact method locator, inputs, assumptions, steps, result, and uncertainty treatment into a receipt.",
+          "boundary": "This proves a bounded Newton-method fixture, not convergence for arbitrary functions or a general root-finding service."
+        }
+      ],
+      "decisionDigest": "sha256:adf5c9d3bdd973ff122a490525f226f24ea6844cb00d28dd30a6013e15bb0f19",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_1ac85616a2364c897be4f103",
+      "candidateDigest": "sha256:e24f1d31420e10f0bfce5323b7d4f324d41663943e6f763a325ab2a9407d040f",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/interoperability/mechanisms",
+      "title": "Interoperability — Mechanisms",
+      "conceptId": "urn:maha:concept:governance:interoperability",
+      "routeRole": "mechanisms",
+      "directAnswer": "Interoperability — Mechanisms is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-eif",
+          "locator": "https://interoperable-europe.ec.europa.eu/collection/iopeu-monitoring/european-interoperability-framework-detail — introduction, layers, conceptual model, 47 recommendations",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Defines organisational interoperability and provides layered mechanisms and implementation recommendations for European public services.",
+          "boundary": "The framework is public-sector guidance; it does not prove outcomes or universal private-sector applicability."
+        }
+      ],
+      "decisionDigest": "sha256:3abded1db382184ef7714ab6d679e5bc7242105a4d32019b036cb9c7abe3e433",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_23cda9020b0530f363a22323",
+      "candidateDigest": "sha256:66da3e6e17e78ac149d7b05ab221f24c9a4b28ecda04a91372732d10c24edbe2",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/source-recovery/failure-modes",
+      "title": "Source Recovery — Failure Modes",
+      "conceptId": "urn:maha:concept:evidence:source-recovery",
+      "routeRole": "failure-modes",
+      "directAnswer": "Source Recovery — Failure Modes is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-source-recovery",
+          "locator": "lib/source-recovery.ts — recoveryRequests and validateObservation and compileRecoveryPackets",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Builds bounded recovery requests, validates observations, and compiles packets while preserving identity, version, access, and inspection states.",
+          "boundary": "Recovery locates candidates only; it cannot claim content inspection, canonical substitution, or version equivalence without evidence."
+        }
+      ],
+      "decisionDigest": "sha256:6f0f34068a651cc4190df467e38773a070dc6ca7b097ab05b3ba83f728756d45",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_2afea75555d5a5fa86fd03fa",
+      "candidateDigest": "sha256:f7b062b9a334aaf189b710048940e558c7058fafdb26c385cab18b04b55da25a",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/digital-public-infrastructure/sources",
+      "title": "Digital Public Infrastructure — Sources",
+      "conceptId": "urn:maha:concept:governance:digital-public-infrastructure",
+      "routeRole": "sources",
+      "directAnswer": "Digital Public Infrastructure — Sources is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-oecd-dpi",
+          "locator": "https://www.oecd.org/en/publications/digital-public-infrastructure-for-digital-governments_ff525dc8-en.html — abstract and governance findings",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Defines shared secure interoperable systems and identifies funding, collaboration, privacy, security, resilience, and cross-border governance tradeoffs.",
+          "boundary": "The paper surveys policy design; it does not prescribe one implementation or establish local outcomes."
+        }
+      ],
+      "decisionDigest": "sha256:ce0cfbbc39b41ace94e8b541644f273e25b6d5c3610f8f18bdaeaaa3e44961cd",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_352aa27ed5cb2bbd9ad2a5f0",
+      "candidateDigest": "sha256:6bbfcb45276a391c9b0e118d239fdd5eb7e5e07d4f20e81f5394df8022209220",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/digital-public-infrastructure/tradeoffs",
+      "title": "Digital Public Infrastructure — Tradeoffs",
+      "conceptId": "urn:maha:concept:governance:digital-public-infrastructure",
+      "routeRole": "tradeoffs",
+      "directAnswer": "Digital Public Infrastructure — Tradeoffs is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-oecd-dpi",
+          "locator": "https://www.oecd.org/en/publications/digital-public-infrastructure-for-digital-governments_ff525dc8-en.html — abstract and governance findings",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Defines shared secure interoperable systems and identifies funding, collaboration, privacy, security, resilience, and cross-border governance tradeoffs.",
+          "boundary": "The paper surveys policy design; it does not prescribe one implementation or establish local outcomes."
+        }
+      ],
+      "decisionDigest": "sha256:7ed5ca3989588d18251836ff052aeab786a20acb513207e3c476e105d5bcdd85",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_370042811c57d3508c6c0526",
+      "candidateDigest": "sha256:502d51d81ee5bc02e6ad5690c5e5e254ad0b7575e2efe9dd50bb2205b4133406",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/competition-policy/tradeoffs",
+      "title": "Competition Policy — Tradeoffs",
+      "conceptId": "urn:maha:concept:governance:competition-policy",
+      "routeRole": "tradeoffs",
+      "directAnswer": "Competition Policy — Tradeoffs is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-doj-antitrust",
+          "locator": "https://www.justice.gov/atr/antitrust-laws-and-you — Sherman, Clayton, and FTC Act overview; https://www.justice.gov/atr/merger-guidelines/overview — 2023 Merger Guidelines overview",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Identifies current US federal antitrust statutes and the evidence-oriented merger-analysis framework.",
+          "boundary": "US federal materials do not establish other jurisdictions, case outcomes, or an executable machine rule."
+        }
+      ],
+      "decisionDigest": "sha256:78b8ad59d4a876dc71c8ced398a9931b6039c7618d8c696f28e9b2b502cafddf",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_441e5732a2f8748e1ba5bc29",
+      "candidateDigest": "sha256:a8723201f09c84e78bc2eb2c5a2e827cd027fecd83f8b74be6cffd9ac7c360e3",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/traceability/definition",
+      "title": "Traceability — Definition",
+      "conceptId": "urn:maha:concept:governance:traceability",
+      "routeRole": "definition",
+      "directAnswer": "Traceability — Definition is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-eu-ai-traceability",
+          "locator": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-71 — Recital 71 and linked Articles 11, 12, 19, 72",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Connects traceability for high-risk AI to technical documentation, lifecycle records, logs, and post-market monitoring.",
+          "boundary": "This is bounded to the EU AI Act and high-risk-system context; it is not a universal definition or legal advice."
+        }
+      ],
+      "decisionDigest": "sha256:8e01a1a41fcf54fa71b0fca22bdbb395d3cecd650edf940cd7339533cb928a51",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_4ac7d45a36c4843fe42ee011",
+      "candidateDigest": "sha256:8bf70e5c8c0893a3c212ceb2ab4bef59c20f8ee61214602142f329cf5ea406db",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/intellectual-property/uncertainty",
+      "title": "Intellectual Property — Uncertainty",
+      "conceptId": "urn:maha:concept:governance:intellectual-property",
+      "routeRole": "uncertainty",
+      "directAnswer": "Intellectual Property — Uncertainty is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-wipo-ai-ip",
+          "locator": "https://www.wipo.int/meetings/en/doc_details.jsp?doc_id=499504 — issue taxonomy and policy questions",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Identifies IP mechanisms and unresolved policy questions raised by AI.",
+          "boundary": "An issues paper is not law, jurisdiction-specific advice, or a final WIPO position."
+        }
+      ],
+      "decisionDigest": "sha256:c083f0d37421deb7848c3e254a4d5e79117cf872b97ed2374a0b0f640abd2880",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_53c3d7027c302568986b68f8",
+      "candidateDigest": "sha256:6e63f3397382e309f01f47eaf2cf85ebe7c84212f15681f54ed42bbf731e92c1",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/competition-policy/current-law",
+      "title": "Competition Policy — Current Law",
+      "conceptId": "urn:maha:concept:governance:competition-policy",
+      "routeRole": "current-law",
+      "directAnswer": "Competition Policy — Current Law is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-doj-antitrust",
+          "locator": "https://www.justice.gov/atr/antitrust-laws-and-you — Sherman, Clayton, and FTC Act overview; https://www.justice.gov/atr/merger-guidelines/overview — 2023 Merger Guidelines overview",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Identifies current US federal antitrust statutes and the evidence-oriented merger-analysis framework.",
+          "boundary": "US federal materials do not establish other jurisdictions, case outcomes, or an executable machine rule."
+        }
+      ],
+      "decisionDigest": "sha256:3eac389b164fe2f5ccd72d8178836f70322b894f16b1d6a1a7b1302289d3e2df",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_593256e5f444659771f35322",
+      "candidateDigest": "sha256:be1f46f0b202847e54a8472ad71f1ab30a1b3dfb2885873aad3ae5f84725133b",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/interoperability/implementation",
+      "title": "Interoperability — Implementation",
+      "conceptId": "urn:maha:concept:governance:interoperability",
+      "routeRole": "implementation",
+      "directAnswer": "Interoperability — Implementation is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-eif",
+          "locator": "https://interoperable-europe.ec.europa.eu/collection/iopeu-monitoring/european-interoperability-framework-detail — introduction, layers, conceptual model, 47 recommendations",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Defines organisational interoperability and provides layered mechanisms and implementation recommendations for European public services.",
+          "boundary": "The framework is public-sector guidance; it does not prove outcomes or universal private-sector applicability."
+        }
+      ],
+      "decisionDigest": "sha256:62331909ca6844c4e7a65f4c85b6cd305427121b7ff26f1a06159e3a34f8b733",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_5aa01e3083516b86ace455f2",
+      "candidateDigest": "sha256:4c4e1b7e64d32c1336dd5df9290bd749fb10e4299e42eaf88281b9e6c9b846ea",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/public-sector-procurement/current-law",
+      "title": "Public Sector Procurement — Current Law",
+      "conceptId": "urn:maha:concept:governance:public-sector-procurement",
+      "routeRole": "current-law",
+      "directAnswer": "Public Sector Procurement — Current Law is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-far-it-procurement",
+          "locator": "https://www.acquisition.gov/far/39.101 — IT acquisition policy; https://www.acquisition.gov/far/part-10 — market research",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Records current US federal IT acquisition and market-research requirements at FAC 2026-01.",
+          "boundary": "This is US federal procurement only, changes over time, and is not procurement advice."
+        }
+      ],
+      "decisionDigest": "sha256:ac748f96d0e9ceeed7099cc0809c87e953ce90799d4531cba7bd270516652cce",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_6010d2716a2fcb9da4be22ef",
+      "candidateDigest": "sha256:66854023c116b9cbdb798d6e655d53f8e6d4a8d7f78e168f2a42fc9d0d6cd7b3",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/interoperability/definition",
+      "title": "Interoperability — Definition",
+      "conceptId": "urn:maha:concept:governance:interoperability",
+      "routeRole": "definition",
+      "directAnswer": "Interoperability — Definition is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-eif",
+          "locator": "https://interoperable-europe.ec.europa.eu/collection/iopeu-monitoring/european-interoperability-framework-detail — introduction, layers, conceptual model, 47 recommendations",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Defines organisational interoperability and provides layered mechanisms and implementation recommendations for European public services.",
+          "boundary": "The framework is public-sector guidance; it does not prove outcomes or universal private-sector applicability."
+        }
+      ],
+      "decisionDigest": "sha256:a597021d6e3a97bb76dff438cd00b4fc39441ca53ce67b91e7fea21d6ff2652c",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_606c52977deec7b46d14b10a",
+      "candidateDigest": "sha256:84871ad76d057edf083112ecaeee50d3d47a826977eed9877497ed05955c20b4",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/competition-policy/evidence",
+      "title": "Competition Policy — Evidence",
+      "conceptId": "urn:maha:concept:governance:competition-policy",
+      "routeRole": "evidence",
+      "directAnswer": "Competition Policy — Evidence is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-doj-antitrust",
+          "locator": "https://www.justice.gov/atr/antitrust-laws-and-you — Sherman, Clayton, and FTC Act overview; https://www.justice.gov/atr/merger-guidelines/overview — 2023 Merger Guidelines overview",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Identifies current US federal antitrust statutes and the evidence-oriented merger-analysis framework.",
+          "boundary": "US federal materials do not establish other jurisdictions, case outcomes, or an executable machine rule."
+        }
+      ],
+      "decisionDigest": "sha256:f051a996ad9af3c6e0c647339362ebe7a2e22d59522eaddd6acce38b3fcb9278",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_6127ae52abc48ec8dc905aea",
+      "candidateDigest": "sha256:f53643574c236e2575baeb78a9167d3ad16bb05a3eb14a499cf7fc4ea42e3663",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/traceability/sources",
+      "title": "Traceability — Sources",
+      "conceptId": "urn:maha:concept:governance:traceability",
+      "routeRole": "sources",
+      "directAnswer": "Traceability — Sources is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-eu-ai-traceability",
+          "locator": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-71 — Recital 71 and linked Articles 11, 12, 19, 72",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Connects traceability for high-risk AI to technical documentation, lifecycle records, logs, and post-market monitoring.",
+          "boundary": "This is bounded to the EU AI Act and high-risk-system context; it is not a universal definition or legal advice."
+        }
+      ],
+      "decisionDigest": "sha256:1c8473c83a4a5793ec805a23340c395675e422731cf760a1c4cc7999463080b3",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_62d0d9414209a2a97dd0612d",
+      "candidateDigest": "sha256:6eb0714280ebab378bcbc6d6f66d258e9e0171ce6ce67e03851f2a1f4eceff4a",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/incident-reporting/mechanisms",
+      "title": "Incident Reporting — Mechanisms",
+      "conceptId": "urn:maha:concept:governance:incident-reporting",
+      "routeRole": "mechanisms",
+      "directAnswer": "Incident Reporting — Mechanisms is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-nist-incident",
+          "locator": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf — MAP 5.1; https://nvlpubs.nist.gov/nistpubs/SpecialPublications/800-171r3/NIST.SP.800-171r3.html — 03.06.01–03.06.03",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Describes incident inputs, tracking, reporting, response, testing, and the dependence of reporting details on law, policy, sensitivity, and organizational assignment.",
+          "boundary": "Cybersecurity controls and voluntary AI guidance do not establish a universal mandatory AI-incident regime."
+        }
+      ],
+      "decisionDigest": "sha256:10b52e5361404547f15b9d6caf343bd91067fd10abdd9c70689ce655a9ce7390",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_6856f3d6fe72d3163ca5bfa3",
+      "candidateDigest": "sha256:a0d651db4b2c33cf908ee4644e3cdcbaca65e472a2e9ddd438cbfb57fbc77171",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/assurance-cases/uncertainty",
+      "title": "Assurance Cases — Uncertainty",
+      "conceptId": "urn:maha:concept:governance:assurance-cases",
+      "routeRole": "uncertainty",
+      "directAnswer": "Assurance Cases — Uncertainty is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-nist-assurance-case",
+          "locator": "https://csrc.nist.gov/glossary/term/assurance_case — definitions and identified source documents",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Defines an assurance case as auditable argument and evidence with explicit assumptions supporting specified claims.",
+          "boundary": "A glossary definition is not current law and does not show that a particular assurance case is adequate."
+        }
+      ],
+      "decisionDigest": "sha256:6051f2af6f03c4fcf9e3cf5577874b5b4238a9351bed623a2ea6e1f5fa27c78f",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_6ade26ced9483393e32aa945",
+      "candidateDigest": "sha256:fd6391cd6eb9e1ed6f3a48bbbfdc0d1dece14023ec1592ee381036e75cc94ef9",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/incident-reporting/uncertainty",
+      "title": "Incident Reporting — Uncertainty",
+      "conceptId": "urn:maha:concept:governance:incident-reporting",
+      "routeRole": "uncertainty",
+      "directAnswer": "Incident Reporting — Uncertainty is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-nist-incident",
+          "locator": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf — MAP 5.1; https://nvlpubs.nist.gov/nistpubs/SpecialPublications/800-171r3/NIST.SP.800-171r3.html — 03.06.01–03.06.03",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Describes incident inputs, tracking, reporting, response, testing, and the dependence of reporting details on law, policy, sensitivity, and organizational assignment.",
+          "boundary": "Cybersecurity controls and voluntary AI guidance do not establish a universal mandatory AI-incident regime."
+        }
+      ],
+      "decisionDigest": "sha256:e185bfdd277e9b8dd16ff167b94da3e8e1fb6bf5f8b1779d3af8cb64e97e1d71",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_70f30e4345038fe9ec94bbb0",
+      "candidateDigest": "sha256:a792785ebd170b51386b9a7bcc7b1df175420d76899e43136aff0d6fb65bce78",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/assurance-cases/sources",
+      "title": "Assurance Cases — Sources",
+      "conceptId": "urn:maha:concept:governance:assurance-cases",
+      "routeRole": "sources",
+      "directAnswer": "Assurance Cases — Sources is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-nist-assurance-case",
+          "locator": "https://csrc.nist.gov/glossary/term/assurance_case — definitions and identified source documents",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Defines an assurance case as auditable argument and evidence with explicit assumptions supporting specified claims.",
+          "boundary": "A glossary definition is not current law and does not show that a particular assurance case is adequate."
+        }
+      ],
+      "decisionDigest": "sha256:4f2c8b7ebe6433cd95f9b4ba01d0147ffb39e5372fb8d7765623f248e28a0e08",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_7168a05d58662e49b6826c7e",
+      "candidateDigest": "sha256:38eb7efb535ddbc19baf7b58a533d8c3a92cd840ea5c8f79e631307f59be21e8",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/cryptographic-commitments/reproducibility",
+      "title": "Cryptographic Commitments — Reproducibility",
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "routeRole": "reproducibility",
+      "directAnswer": "Cryptographic Commitments — Reproducibility is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-canonical-commitment",
+          "locator": "lib/evidence-dossier/digest.ts — canonicalJson and provenanceDigest",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Canonicalizes supported JSON values and emits a SHA-256 commitment that can be recomputed from the same non-empty payload.",
+          "boundary": "A matching digest establishes byte-equivalent canonical content, not truth, authorship, timestamp, or legal signature."
+        }
+      ],
+      "decisionDigest": "sha256:ea55e0d4e615c153117c3a52f05a971202ec0bd3a4b1ac17dbb4312f755b3b07",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_733aeb6e14e7d59c26e3f102",
+      "candidateDigest": "sha256:15fa07c892da1274cbba0ae2b63e8610b8007fc6a1e1e811fef8261ea0c1db76",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/source-recovery/workflow",
+      "title": "Source Recovery — Workflow",
+      "conceptId": "urn:maha:concept:evidence:source-recovery",
+      "routeRole": "workflow",
+      "directAnswer": "Source Recovery — Workflow is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-source-recovery",
+          "locator": "lib/source-recovery.ts — recoveryRequests and validateObservation and compileRecoveryPackets",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Builds bounded recovery requests, validates observations, and compiles packets while preserving identity, version, access, and inspection states.",
+          "boundary": "Recovery locates candidates only; it cannot claim content inspection, canonical substitution, or version equivalence without evidence."
+        }
+      ],
+      "decisionDigest": "sha256:b6f7bf5811e8bd5a8130f2530d5f0ee0995b88aaf82463858b53dd49f1109293",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_7edddffaa6cd822175f7425b",
+      "candidateDigest": "sha256:8a925d9e31fcbc9151e373b30c20fe394ea4e295e8535542604f2637b7e88d8e",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/source-recovery/verification",
+      "title": "Source Recovery — Verification",
+      "conceptId": "urn:maha:concept:evidence:source-recovery",
+      "routeRole": "verification",
+      "directAnswer": "Source Recovery — Verification is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-source-recovery",
+          "locator": "lib/source-recovery.ts — recoveryRequests and validateObservation and compileRecoveryPackets",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Builds bounded recovery requests, validates observations, and compiles packets while preserving identity, version, access, and inspection states.",
+          "boundary": "Recovery locates candidates only; it cannot claim content inspection, canonical substitution, or version equivalence without evidence."
+        }
+      ],
+      "decisionDigest": "sha256:15b9fa5600d4e05c35f13f0b5817fa5b2e5b7c8f97d80a0bc5484a6213808cec",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_b47015c81e7f03093bca4044",
+      "candidateDigest": "sha256:28cfacbdce5fb1651ef511b1573fde4654731ed9b72dfb288230be9bf604c239",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/reproducibility-fixtures/machine-interface",
+      "title": "Reproducibility Fixtures — Machine Interface",
+      "conceptId": "urn:maha:concept:computation:reproducibility-fixtures",
+      "routeRole": "machine-interface",
+      "directAnswer": "Reproducibility Fixtures — Machine Interface is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-fixture-registry",
+          "locator": "lib/evidence-workflow-examples.ts — EVIDENCE_WORKFLOW_PUBLIC_REGISTRY and EVIDENCE_WORKFLOW_REGISTRY_DIGEST",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Publishes a typed synthetic fixture registry with expected outputs, refusals, checks, and one digest over the registry.",
+          "boundary": "Synthetic conformance is not independent reproduction and the registry is prepared rather than deployed."
+        }
+      ],
+      "decisionDigest": "sha256:f79788ce861b701a6eac9f29452cd33ed2fa52e5eec0190194ce1f63f970c17e",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_c9ea7b1ca4cbc881270bd35c",
+      "candidateDigest": "sha256:f38aff0b467d9990d3adb06ceb32190970388828fcd4a593ea900462b37d450c",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/interval-bounds/machine-interface",
+      "title": "Interval Bounds — Machine Interface",
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "routeRole": "machine-interface",
+      "directAnswer": "Interval Bounds — Machine Interface is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-interval-execution",
+          "locator": "packages/wasm-kernel/src/execution.ts — executeKernelRequest and verifyExecutedCalculationReceipt",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Executes interval addition over canonical signed-i64 inputs with one explicit unit and independently recomputes the receipt output.",
+          "boundary": "This proves only bounded interval addition; it does not establish general interval arithmetic or measurement validity."
+        }
+      ],
+      "decisionDigest": "sha256:ec7873b78009a857800ba8cf93fc539090ebbf87583135126107f79b65bab4e3",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_dd951c2a4e39f3756f7ee6f9",
+      "candidateDigest": "sha256:55961e2d5940024ae2fe8f773e06aa2207921a381c7d48fae89aca635a6071a4",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/cryptographic-commitments/machine-interface",
+      "title": "Cryptographic Commitments — Machine Interface",
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "routeRole": "machine-interface",
+      "directAnswer": "Cryptographic Commitments — Machine Interface is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-canonical-commitment",
+          "locator": "lib/evidence-dossier/digest.ts — canonicalJson and provenanceDigest",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Canonicalizes supported JSON values and emits a SHA-256 commitment that can be recomputed from the same non-empty payload.",
+          "boundary": "A matching digest establishes byte-equivalent canonical content, not truth, authorship, timestamp, or legal signature."
+        }
+      ],
+      "decisionDigest": "sha256:6f9111b5e941da1ebf47499a4a6ab3c07b2ef2c5683c3dcf15ff44536f5d50d1",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_de495ad3d3b6cbad65c2537a",
+      "candidateDigest": "sha256:d1bcf18f66fce64c8abddc9720a094545471fec1a8983c11b61addb5a93c008a",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/root-finding/machine-interface",
+      "title": "Root Finding — Machine Interface",
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "routeRole": "machine-interface",
+      "directAnswer": "Root Finding — Machine Interface is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-newton-fixture",
+          "locator": "lib/deterministic-calculation.ts — newtonRoot and buildCalculation and assertCalculable",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Executes a fixed-precision Newton iteration and binds the exact method locator, inputs, assumptions, steps, result, and uncertainty treatment into a receipt.",
+          "boundary": "This proves a bounded Newton-method fixture, not convergence for arbitrary functions or a general root-finding service."
+        }
+      ],
+      "decisionDigest": "sha256:94130eaa289c2b3cf6b27dd735d7ab511fa488dce66d9cfd502b65c15fa17750",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_f2d40776c02061fd82af4f0d",
+      "candidateDigest": "sha256:24b385cbc3b36b8c9ab85730ce28ec3dd4cadb5dfff765b5a987c814b27ddcdd",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/interval-bounds/reproducibility",
+      "title": "Interval Bounds — Reproducibility",
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "routeRole": "reproducibility",
+      "directAnswer": "Interval Bounds — Reproducibility is limited to the behavior or authority established by the bound source and explicitly excludes the source's non-claims.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or procedure",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which exact source or symbol establishes it?",
+        "Which jurisdiction or implementation boundary applies?",
+        "What remains uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t20-interval-execution",
+          "locator": "packages/wasm-kernel/src/execution.ts — executeKernelRequest and verifyExecutedCalculationReceipt",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Executes interval addition over canonical signed-i64 inputs with one explicit unit and independently recomputes the receipt output.",
+          "boundary": "This proves only bounded interval addition; it does not establish general interval arithmetic or measurement validity."
+        }
+      ],
+      "decisionDigest": "sha256:bc163ba90519fbf603837eec9037c2fc10ea1491e100aebb69ae9a677cc10ee9",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    }
+  ],
+  "provenanceDigest": "sha256:77888e0e0865685854a13717c3e3eecab7c107ab1ee636a8a6a2d369c7a5037e"
+}

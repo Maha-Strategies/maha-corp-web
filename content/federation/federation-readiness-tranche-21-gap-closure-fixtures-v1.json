@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "maha-federation-gap-closure-fixtures/2.0",
+  "frozenOn": "2026-09-07",
+  "syntheticOnly": true,
+  "graphRevision": {
+    "graphObjectId": "cand_70ca0daa7c7b8f82481ef8bd",
+    "conceptId": "urn:maha:concept:evidence:conflicting-literature",
+    "priorDisposition": "deferred-pending-implementation",
+    "proposedDisposition": "non-route-graph-object",
+    "reviewDecision": "accept-for-local-readiness",
+    "canonicalBindingChanged": false
+  },
+  "executions": [
+    {
+      "fixtureId": "linear-interpolation-exact-rational",
+      "result": {
+        "numerator": "12",
+        "denominator": "1"
+      },
+      "expected": {
+        "numerator": "12",
+        "denominator": "1"
+      },
+      "refusals": [
+        "nodes-not-distinct",
+        "extrapolation-refused"
+      ]
+    },
+    {
+      "fixtureId": "composite-trapezoid-exact-rational",
+      "result": {
+        "numerator": "3",
+        "denominator": "1"
+      },
+      "expected": {
+        "numerator": "3",
+        "denominator": "1"
+      },
+      "refusals": [
+        "spacing-not-positive",
+        "insufficient-ordinates"
+      ]
+    },
+    {
+      "fixtureId": "bounded-enumeration-minimum",
+      "result": {
+        "index": 1,
+        "value": "4"
+      },
+      "expected": {
+        "index": 1,
+        "value": "4"
+      },
+      "refusals": [
+        "empty-domain"
+      ]
+    },
+    {
+      "fixtureId": "si-dimension-vector-composition",
+      "result": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "expected": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "refusals": [
+        "unknown-operation"
+      ]
+    },
+    {
+      "fixtureId": "sum-of-squares-budget",
+      "result": {
+        "sumOfSquares": "25"
+      },
+      "expected": {
+        "sumOfSquares": "25"
+      },
+      "refusals": [
+        "invalid-error-budget"
+      ]
+    },
+    {
+      "fixtureId": "binary64-cancellation",
+      "result": {
+        "floating": 0,
+        "exactInteger": "1",
+        "precisionLost": true
+      },
+      "expected": {
+        "floating": 0,
+        "exactInteger": "1",
+        "precisionLost": true
+      },
+      "refusals": []
+    },
+    {
+      "fixtureId": "scope-preserving-literature-conflict",
+      "result": {
+        "state": "conflict-observed",
+        "observationIds": [
+          "obs-a",
+          "obs-b"
+        ]
+      },
+      "expected": {
+        "state": "conflict-observed",
+        "observationIds": [
+          "obs-a",
+          "obs-b"
+        ]
+      },
+      "refusals": [
+        "at-least-two-observations-required",
+        "duplicate-observation",
+        "unlocated-observation",
+        "claim-substitution"
+      ]
+    }
+  ],
+  "boundary": "Every fixture is an exact bounded application of an accepted authority definition or a local protocol. It establishes only the named application roles and never transfers authority from a definition to an implementation.",
+  "provenanceDigest": "sha256:0f9fb1fb7ea5117a1c090ea1fdc01f97223ce835355624c0883c7037ba622234"
+}

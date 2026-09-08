@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "maha-federation-prerequisite-decisions/1.0",
+  "frozenOn": "2026-09-07",
+  "appendOnly": true,
+  "rule": "One decision per frozen candidate, each made on that candidate's own inspected sources. A decision binds the candidate it names and never travels along a dependency edge.",
+  "counts": {
+    "reviewed": 4,
+    "evidenceReady": 1,
+    "revise": 3,
+    "blocked": 0,
+    "dependentsOfClearedDefinitions": 65,
+    "dependentsMadeEvidenceReady": 0
+  },
+  "noInheritance": "The cleared definitions carry 65 dependents between them, and none of those dependents becomes evidence-ready. A definition establishes what a term means. It is not evidence for any claim a page makes using the term, and no dependent's state is changed by this artifact.",
+  "clearedDistinctions": [
+    "consent",
+    "authorization",
+    "privacy-notice",
+    "lawful-basis",
+    "revocation",
+    "emergency-use",
+    "research-consent"
+  ],
+  "rejectedInterpretations": [
+    "A universal or global law of health-data consent. Every inspected instrument binds a named class of actor in a named jurisdiction; a device in neither regime is governed by neither.",
+    "An executable machine rule for consent. \"Freely given\", \"professional judgment\" and IRB waiver findings are human judgements, and no inspected provision specifies a data structure, receipt format or interface."
+  ],
+  "decisions": [
+    {
+      "conceptId": "urn:maha:concept:autonomy:machine-civilization",
+      "path": "/concepts/machine-civilization/definition",
+      "siteId": "mayone-maharajan",
+      "fanIn": 2,
+      "priorState": "revise",
+      "decision": "revise",
+      "basis": "no-inspected-source",
+      "requirements": {
+        "sourceIdentity": false,
+        "locator": false,
+        "rights": false,
+        "scope": false,
+        "boundary": false
+      },
+      "reason": "An authorial coinage with no external authority and no implementation in this repository. A first-party definition is the appropriate form, but a first-party definition is only legitimate when it is grounded in something real that it describes, and there is nothing here for it to describe. Writing one now would be a proposal presented as a definition.",
+      "clearanceBoundary": "Unchanged at revise. Clearing it requires either an inspected source or an implementation the definition can be grounded in and cite.",
+      "candidateId": "cand_179532c8e9ca588df1721a70"
+    },
+    {
+      "conceptId": "urn:maha:concept:autonomy:public-reason",
+      "path": "/concepts/public-reason/definition",
+      "siteId": "mayone-maharajan",
+      "fanIn": 7,
+      "priorState": "revise",
+      "decision": "revise",
+      "basis": "no-inspected-source",
+      "requirements": {
+        "sourceIdentity": false,
+        "locator": false,
+        "rights": false,
+        "scope": false,
+        "boundary": false
+      },
+      "reason": "The candidate is filed as an authorial concept, but \"public reason\" is an established term in political philosophy. The Stanford Encyclopedia of Philosophy entry (first published 2013-05-20, substantively revised 2022-04-20) defines it as the requirement that rules regulating common life be justifiable to those they bind, and associates it primarily with Rawls, Political Liberalism. A definition on this property is therefore either the established concept, in which case it must cite that literature, or a distinct authorial sense, in which case it must say so and disambiguate. Neither is done, and no source is inspected for either reading.",
+      "clearanceBoundary": "Unchanged at revise. Clearing it requires either an inspected citation to the political-philosophy literature or an explicit statement that the authorial sense differs, with the difference named.",
+      "candidateId": "cand_31b7dabe923fc44a99337460"
+    },
+    {
+      "conceptId": "urn:maha:concept:consent:health-data-consent",
+      "path": "/knowledge/private-machine-systems/health-data-consent/definition",
+      "siteId": "maha-os",
+      "fanIn": 65,
+      "priorState": "revise",
+      "decision": "evidence-ready",
+      "basis": "inspected-external-authority",
+      "requirements": {
+        "sourceIdentity": true,
+        "locator": true,
+        "rights": true,
+        "scope": true,
+        "boundary": true
+      },
+      "reason": "Eight authorities inspected across two jurisdictions, seventeen findings, each with an exact locator. The definition can distinguish consent from authorization from notice from lawful basis, and can preserve the revocation and emergency-use differences between the regimes, entirely on sources that state those things.",
+      "clearanceBoundary": "This clears one candidate: the health-data-consent definition itself. It confers nothing on the 65 routes that depend on it. Each of those makes its own claims about caregiver access, emergency override, biometric boundaries and the rest, and needs its own inspected sources for them. A definition establishes what a term means; it is not evidence for what any page says using the term.",
+      "candidateId": "cand_671d652918d62414c37d751d"
+    },
+    {
+      "conceptId": "urn:maha:concept:release:agentic-query-letter",
+      "path": "/agentic-publishing/agentic-query-letter/definition",
+      "siteId": "agentic-publishing",
+      "fanIn": 7,
+      "priorState": "revise",
+      "decision": "revise",
+      "basis": "no-inspected-source",
+      "requirements": {
+        "sourceIdentity": false,
+        "locator": false,
+        "rights": false,
+        "scope": false,
+        "boundary": false
+      },
+      "reason": "No implementation of an agentic query letter exists in this repository and no external authority defines the term. lib/agent-inquiries.ts implements a machine-submitted structured inquiry with a review lifecycle, which is a genuinely reusable shape, but it concerns commercial offers: nothing there models a manuscript, a work, an author or a publishing decision. An adjacent implementation is not an implementation of this concept, and treating it as one would turn a proposal into a standard by association.",
+      "clearanceBoundary": "Unchanged at revise. Its seven dependents stay held, and this review adds no evidence to any of them.",
+      "candidateId": "cand_3a7cc1c4dca92c985618384d"
+    }
+  ],
+  "provenanceDigest": "sha256:b75d2f3e88a892033c7c2d8dc07ad8cd85b9393c11ea62cf36b7663b06a87e17"
+}

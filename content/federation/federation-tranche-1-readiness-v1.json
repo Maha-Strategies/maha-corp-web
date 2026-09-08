@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "maha-federation-tranche-one-readiness/1.0",
+  "candidateMapDigest": "sha256:b6ceb8387ab4243bcb943992de9be4b1a05170ad96bbea032790515318f6b5f6",
+  "cohortDigest": "sha256:7e79b2585e2634449ef8c7b5d8c5889844b22440f8a071ab01dd5a6190b9529f",
+  "manualSemanticDigest": "sha256:f8c99c7734eaf4baedbcc131aa219a8c24b7f42ea22199eadf75d9599f792df6",
+  "dependencyValidationDigest": "sha256:c42d12a788beb079f66929211d0985d2c5999138c87e649b2cd84bd2644edf12",
+  "evidencePacketsDigest": "sha256:d0eeefd5e914b3a9ff8bc6b8738b940ae39ba9f0f47048d01e68d2291601f910",
+  "decisionManifestDigest": "sha256:56932d33572ce2111374fd0386337d2f0ec7e12bdcc84e10d49ab35669e50868",
+  "specificationsDigest": "sha256:3221465669604603d9486f0368a10e86a34845d4d4a5e2f01234f15c9ab314d1",
+  "status": "local-readiness-complete",
+  "counts": {
+    "semanticAdjudicationsReviewed": 43,
+    "semanticAdjudicationsCorrected": 8,
+    "selectedCandidates": 100,
+    "representedTopics": 38,
+    "dependenciesValid": 100,
+    "evidenceReady": 90,
+    "revise": 4,
+    "blocked": 4,
+    "duplicative": 2,
+    "substantialPageSpecifications": 90,
+    "publicRoutesCreated": 0,
+    "vercelBuildsRun": 0
+  },
+  "implementationBoundary": "The evidence-ready count may enter implementation. Publication still requires route implementation, deterministic verification, exact-revision review, canonical release where applicable, and explicit build/deployment authorization.",
+  "blockers": [
+    {
+      "candidateId": "cand_3a7cc1c4dca92c985618384d",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/agentic-query-letter/definition",
+      "disposition": "revise",
+      "reason": "No inspected authority defines an agentic query letter; the closest editorial source only governs conventional submission responsibilities."
+    },
+    {
+      "candidateId": "cand_451a78ac92d2875a61747627",
+      "url": "https://www.mahastrategies.com/clearing/evidence-workflows/source-identity/failure-modes",
+      "disposition": "reject-as-duplicative",
+      "reason": "The observed source-identity-mismatch page already answers this failure-mode intent; retain one canonical answer."
+    },
+    {
+      "candidateId": "cand_5b5c83330bcb28b072f037d9",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/agentic-query-letter/example",
+      "disposition": "revise",
+      "reason": "No inspected authority defines an agentic query letter; the closest editorial source only governs conventional submission responsibilities."
+    },
+    {
+      "candidateId": "cand_671d652918d62414c37d751d",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition",
+      "disposition": "revise",
+      "reason": "HIPAA distinguishes consent and authorization, but the generic route would overstate a rule that only applies to covered entities and business associates."
+    },
+    {
+      "candidateId": "cand_79ca17406668823c29d6f6dd",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/template",
+      "disposition": "blocked",
+      "reason": "The observed canonical Publish definition route could not be inspected, so its templates and interfaces cannot be checked for semantic or schema agreement."
+    },
+    {
+      "candidateId": "cand_94d3da0fbeefa7016d947db9",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/machine-interface",
+      "disposition": "blocked",
+      "reason": "The observed canonical Publish definition route could not be inspected, so its templates and interfaces cannot be checked for semantic or schema agreement."
+    },
+    {
+      "candidateId": "cand_a322413e35ee23167a146ced",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/enterprise-mcp-gateway/commercialization",
+      "disposition": "revise",
+      "reason": "The implementation and controls are evidenced, but current offer terms, availability, and customer outcomes are not established by the inspected sources."
+    },
+    {
+      "candidateId": "cand_cd1e2d9529295cabd6ade110",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/example",
+      "disposition": "blocked",
+      "reason": "The observed canonical Publish definition route could not be inspected, so its templates and interfaces cannot be checked for semantic or schema agreement."
+    },
+    {
+      "candidateId": "cand_d62bfb90dfe41abba2796051",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/governance",
+      "disposition": "blocked",
+      "reason": "The observed canonical Publish definition route could not be inspected, so its templates and interfaces cannot be checked for semantic or schema agreement."
+    },
+    {
+      "candidateId": "cand_dcd48c0795ff5cb8ebfcc26b",
+      "url": "https://www.mahastrategies.com/clearing/evidence-workflows/rights-basis/failure-modes",
+      "disposition": "reject-as-duplicative",
+      "reason": "The observed rights-and-access-uncertain page already answers this failure-mode intent; retain one canonical answer."
+    }
+  ],
+  "provenanceDigest": "sha256:eee8532aa5e10c3e6ec8ca3dd5989a9f81f55ab247a6392c6e3ec7c421498692"
+}

@@ -1,0 +1,247 @@
+{
+  "schemaVersion": "maha-federation-candidate-lineage/4.0",
+  "frozenOn": "2026-09-07",
+  "from": {
+    "schemaVersion": "maha-federation-route-candidates/3.0",
+    "provenanceDigest": "sha256:58aafc2a12b7c5ff805254a7598bf53a1cca866d8d8009207983a54e073f9147"
+  },
+  "to": {
+    "schemaVersion": "maha-federation-route-candidate-map/4.0",
+    "candidateArrayDigest": "sha256:c19a678ec73b71babeecf5b272b14fd148c49312fc9bab90703c2f1849a38cf8"
+  },
+  "rule": "Retain all 1,628 route candidates. Reclassify the 32 unranked, unallocated v3 additions as non-route graph objects. Delete or supersede no identity and create no public route.",
+  "counts": {
+    "retainedRouteCandidates": 1628,
+    "reclassifiedAsGraphObjects": 32,
+    "deletedObjects": 0,
+    "supersededRouteCandidates": 0,
+    "resultingRouteCandidates": 1628
+  },
+  "reclassifications": [
+    {
+      "graphObjectId": "cand_a870823d00f81a9a4854f848",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "from": "unranked-v3-route-candidate",
+      "to": "requires-external-authority",
+      "graphObjectDigest": "sha256:0719ca27d22d6263b01abe94ba1671fc9e6e08c1f9f0175fab9e0892438009aa"
+    },
+    {
+      "graphObjectId": "cand_908638ce5ea422d98d5273fb",
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "from": "unranked-v3-route-candidate",
+      "to": "requires-external-authority",
+      "graphObjectDigest": "sha256:04417757ec821942801fa333f903f4530e826b7b0a4560c4eb06e69b101ec136"
+    },
+    {
+      "graphObjectId": "cand_a563c1dcade1fa354b9069fa",
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "from": "unranked-v3-route-candidate",
+      "to": "requires-external-authority",
+      "graphObjectDigest": "sha256:8025849e183f62d13a97c6eeffe55eea6810aa267f67034501120aacde8123d3"
+    },
+    {
+      "graphObjectId": "cand_d90b7197535681a502dccba9",
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "from": "unranked-v3-route-candidate",
+      "to": "requires-external-authority",
+      "graphObjectDigest": "sha256:f2b2bc39ffa79dbd90830151ba0fa58a96b14248c7e7625205cbac9ea55d13ec"
+    },
+    {
+      "graphObjectId": "cand_aaf26e116535a7269e150c81",
+      "conceptId": "urn:maha:concept:computation:error-budgets",
+      "from": "unranked-v3-route-candidate",
+      "to": "non-route-graph-object",
+      "graphObjectDigest": "sha256:1ac638843b89c6a8a1b58819dce22f359e5f85ce68b324104d54dbfb431c3c63"
+    },
+    {
+      "graphObjectId": "cand_25c680ff193b4f35f49e96ae",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "from": "unranked-v3-route-candidate",
+      "to": "requires-external-authority",
+      "graphObjectDigest": "sha256:ff6d765e3b558bcf12bf3be8cc0786fe82f32aac1edbc6aef76d2d7efcefd82f"
+    },
+    {
+      "graphObjectId": "cand_de8dd0a88e8704fe5855033e",
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "from": "unranked-v3-route-candidate",
+      "to": "requires-external-authority",
+      "graphObjectDigest": "sha256:13acc2f322743768ce445380addfda8c943f272278f7e0eb621c487add59c7c4"
+    },
+    {
+      "graphObjectId": "cand_e41cfa0c9ad358c43c72d1ee",
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "from": "unranked-v3-route-candidate",
+      "to": "requires-external-authority",
+      "graphObjectDigest": "sha256:05330f9eaefbf4d8bd980c7be8b396abfcfafe06d735c3f3d4014b50607d9748"
+    },
+    {
+      "graphObjectId": "cand_2cb4942c45f1804543a91a4a",
+      "conceptId": "urn:maha:concept:computation:numerical-integration",
+      "from": "unranked-v3-route-candidate",
+      "to": "requires-external-authority",
+      "graphObjectDigest": "sha256:f6f67f647fa5cf96070e5bf50faad8e875f32a2d801f503504e67bf6e5d85feb"
+    },
+    {
+      "graphObjectId": "cand_0d9b1a88cbf93d413a243d71",
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "from": "unranked-v3-route-candidate",
+      "to": "requires-external-authority",
+      "graphObjectDigest": "sha256:5389be2b9dabf8993610fe5578530e8adc14ec79d27d2ebabc5e550373557956"
+    },
+    {
+      "graphObjectId": "cand_9e9edd5648c41382537f568c",
+      "conceptId": "urn:maha:concept:computation:optimization",
+      "from": "unranked-v3-route-candidate",
+      "to": "requires-external-authority",
+      "graphObjectDigest": "sha256:0a0134ec1fd34db87271fa095b28cce0bebd8de403bbcc6382a4aa70f453d348"
+    },
+    {
+      "graphObjectId": "cand_c1e0a9d1956d137e337cae16",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "from": "unranked-v3-route-candidate",
+      "to": "requires-external-authority",
+      "graphObjectDigest": "sha256:06780bd07859fc9ae14da4554a2cd90194c21a32139411e85d2f6b12cd4a97a2"
+    },
+    {
+      "graphObjectId": "cand_be8600b5f02aea927f745c11",
+      "conceptId": "urn:maha:concept:computation:reproducibility-fixtures",
+      "from": "unranked-v3-route-candidate",
+      "to": "non-route-graph-object",
+      "graphObjectDigest": "sha256:8786057884d2ae9990ea41e4c5bcc56f36d34ab184a90b979607e4576ec18afe"
+    },
+    {
+      "graphObjectId": "cand_4e3ffcedfa7d51607e56c384",
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "from": "unranked-v3-route-candidate",
+      "to": "requires-external-authority",
+      "graphObjectDigest": "sha256:f4a3378d13568746010b7b36924be6f43270d34142dfdf6c8551d8dc59b8ac79"
+    },
+    {
+      "graphObjectId": "cand_99546e87db73ddd7326a34ab",
+      "conceptId": "urn:maha:concept:evidence:audit-export",
+      "from": "unranked-v3-route-candidate",
+      "to": "non-route-graph-object",
+      "graphObjectDigest": "sha256:2ea364e65cb87f427595fd8505f36bc01c08b77e082d54d3cabd39c58b839222"
+    },
+    {
+      "graphObjectId": "cand_fdada5f64f6c5c8b6f218663",
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "from": "unranked-v3-route-candidate",
+      "to": "non-route-graph-object",
+      "graphObjectDigest": "sha256:5daa8970a2fc8923dee8707f9705c08e5075d569614d222de11fe203fb270deb"
+    },
+    {
+      "graphObjectId": "cand_941aed3932712f20f9dad49d",
+      "conceptId": "urn:maha:concept:evidence:canonical-release",
+      "from": "unranked-v3-route-candidate",
+      "to": "non-route-graph-object",
+      "graphObjectDigest": "sha256:6610f8f8b28faa9fac7b7242104f44ef8bcef5ac05b5c7c6d75bf32382778099"
+    },
+    {
+      "graphObjectId": "cand_faa1c9127f42242870c4661a",
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "from": "unranked-v3-route-candidate",
+      "to": "non-route-graph-object",
+      "graphObjectDigest": "sha256:82539ed34ce731d0ced5ef1576223f3015b038a0a3c515d1759e6927accf0219"
+    },
+    {
+      "graphObjectId": "cand_70ca0daa7c7b8f82481ef8bd",
+      "conceptId": "urn:maha:concept:evidence:conflicting-literature",
+      "from": "unranked-v3-route-candidate",
+      "to": "deferred-pending-implementation",
+      "graphObjectDigest": "sha256:ba8c09f420b13f8cc719011f42c983f9f806c407f6ad984d5d53fffe343c9f07"
+    },
+    {
+      "graphObjectId": "cand_31188cec0703fe842e52f242",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "from": "unranked-v3-route-candidate",
+      "to": "non-route-graph-object",
+      "graphObjectDigest": "sha256:a54dc86ec75e9aa99ff6b2d7e74c02c067dd6b3df20e4989e801cc7e727ac960"
+    },
+    {
+      "graphObjectId": "cand_5abc1a241361feb7e0f36d0d",
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "from": "unranked-v3-route-candidate",
+      "to": "non-route-graph-object",
+      "graphObjectDigest": "sha256:848be2b3c9fedfa90cdf09dd0387606f5c5fd7f0a95bde85573072831aa40b1d"
+    },
+    {
+      "graphObjectId": "cand_e9e65aab997734663ea01dc4",
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "from": "unranked-v3-route-candidate",
+      "to": "non-route-graph-object",
+      "graphObjectDigest": "sha256:6d4a9d417f574a8ee1e6325eb3f1f7c919dccbde9cc2b285074297661a7a2f6c"
+    },
+    {
+      "graphObjectId": "cand_1677d8e5ffd0adccd70025c9",
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "from": "unranked-v3-route-candidate",
+      "to": "non-route-graph-object",
+      "graphObjectDigest": "sha256:9b93c90f88e80681f2267a7482fc30e50eb0907a95ce1db3bf56d537be948d3d"
+    },
+    {
+      "graphObjectId": "cand_d93df04cd32791dbcc717955",
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "from": "unranked-v3-route-candidate",
+      "to": "non-route-graph-object",
+      "graphObjectDigest": "sha256:4697248e368d731529623dd2286aed08e260562efb74724947cc53b1658c1a88"
+    },
+    {
+      "graphObjectId": "cand_6f89066f567226c0e442bb39",
+      "conceptId": "urn:maha:concept:evidence:locator-verification",
+      "from": "unranked-v3-route-candidate",
+      "to": "non-route-graph-object",
+      "graphObjectDigest": "sha256:9572b7680627c3f241c60681e12fcf686338ed4da5f4f686b5ea287c917d7609"
+    },
+    {
+      "graphObjectId": "cand_f8bc85696eedfca72dc83120",
+      "conceptId": "urn:maha:concept:evidence:passage-support",
+      "from": "unranked-v3-route-candidate",
+      "to": "non-route-graph-object",
+      "graphObjectDigest": "sha256:ced96637cf92cc5c3a1d176741fa02a442c357bb3be2ddeb13e02b37713bcd3f"
+    },
+    {
+      "graphObjectId": "cand_eee65fe274335f8de817ecd7",
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "from": "unranked-v3-route-candidate",
+      "to": "non-route-graph-object",
+      "graphObjectDigest": "sha256:b6becd892c94465324e916724e710340fe533858936aba7f46631b4680a0df6e"
+    },
+    {
+      "graphObjectId": "cand_3476e38beb1e953348f8d600",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "from": "unranked-v3-route-candidate",
+      "to": "non-route-graph-object",
+      "graphObjectDigest": "sha256:d720e2993130391f9265093c9901d09516400d779989089e69016cf0264ff5b4"
+    },
+    {
+      "graphObjectId": "cand_a265c5d9ff36ca1b17bfb8a0",
+      "conceptId": "urn:maha:concept:evidence:source-recovery",
+      "from": "unranked-v3-route-candidate",
+      "to": "deferred-pending-implementation",
+      "graphObjectDigest": "sha256:88d7c470f6533853002ac291744e9ffb729be623855d60b4d78a409f3a35298a"
+    },
+    {
+      "graphObjectId": "cand_9d040a84a30d4c24c219709b",
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "from": "unranked-v3-route-candidate",
+      "to": "non-route-graph-object",
+      "graphObjectDigest": "sha256:4180378f2eb060a9d63354e14496b91507b6d3218a043be8af0a6acef338461d"
+    },
+    {
+      "graphObjectId": "cand_79d4527b01877f8e8a9cf1ee",
+      "conceptId": "urn:maha:concept:evidence:unsupported-inference",
+      "from": "unranked-v3-route-candidate",
+      "to": "non-route-graph-object",
+      "graphObjectDigest": "sha256:7b9fd9a40ef0b087049126f9ce6face35e0eb89c8c8c50d8c74364c759d2e552"
+    },
+    {
+      "graphObjectId": "cand_f770668f95f1fc5022b10680",
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "from": "unranked-v3-route-candidate",
+      "to": "non-route-graph-object",
+      "graphObjectDigest": "sha256:96dc67f114e26cfe250f735434fda4cfda76c5885a6ec03e38aaa2e5c584a117"
+    }
+  ],
+  "provenanceDigest": "sha256:e731d6b5936bb4e24c5f7d9b71712b70a3fe2852ed8e6cd3d61fb7460c66fcbb"
+}

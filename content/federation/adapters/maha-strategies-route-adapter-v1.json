@@ -1,0 +1,3185 @@
+{
+  "schemaVersion": "maha-federation-property-route-adapter/1.0",
+  "siteId": "maha-strategies",
+  "canonicalHost": "www.mahastrategies.com",
+  "rootPath": "/clearing/",
+  "sourceManifestDigest": "sha256:05e05d95f74dc34bae485592d2faa68563d67a867d8c288feaea6214ddb1014a",
+  "state": "local-owner-handoff",
+  "ownerIntegration": {
+    "routeShape": "/clearing/[...segments]",
+    "staticParameters": true,
+    "dynamicParameters": false,
+    "metadataFromExactPage": true,
+    "structuredDataFromExactPage": true,
+    "missingOrUnreadyReturnsNotFound": true,
+    "exactRevisionReviewRequired": true,
+    "activeCanonicalReleaseRequired": true
+  },
+  "counts": {
+    "routes": 287,
+    "boundedAnswers": 1435,
+    "publicRoutesCreated": 0,
+    "buildsRun": 0
+  },
+  "publicationBoundary": "The adapter resolves local content only. The owner route must still bind an exact revision and active canonical release before crawlability; a missing or unready path resolves to null.",
+  "entries": [
+    {
+      "candidateId": "cand_9d425888baacacd05d992f5f",
+      "path": "/clearing/agent-governance/agent-memory-governance/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/agent-memory-governance/architecture",
+      "segments": [
+        "agent-governance",
+        "agent-memory-governance",
+        "architecture"
+      ],
+      "contentDigest": "sha256:7d5ac2f60b41e3e3bbff75d908e482e7ea5b2190334c164059b08ec07798f06e"
+    },
+    {
+      "candidateId": "cand_5bcbb507ccbfd3519a972127",
+      "path": "/clearing/agent-governance/agent-memory-governance/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/agent-memory-governance/controls",
+      "segments": [
+        "agent-governance",
+        "agent-memory-governance",
+        "controls"
+      ],
+      "contentDigest": "sha256:54ee7e1e6f99c35232561a279dee4785fe7e58198ed18436005fd1c07eaba9f9"
+    },
+    {
+      "candidateId": "cand_6761aec9f0f3e393be7eb8a4",
+      "path": "/clearing/agent-governance/agent-memory-governance/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/agent-memory-governance/definition",
+      "segments": [
+        "agent-governance",
+        "agent-memory-governance",
+        "definition"
+      ],
+      "contentDigest": "sha256:26fa17096514e04b61deca01a9490d72756ede4c6808ce96a64dbace889fac35"
+    },
+    {
+      "candidateId": "cand_384ed577ee850a877f3bb68b",
+      "path": "/clearing/agent-governance/agent-memory-governance/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/agent-memory-governance/implementation",
+      "segments": [
+        "agent-governance",
+        "agent-memory-governance",
+        "implementation"
+      ],
+      "contentDigest": "sha256:893b1921f43a463a8a14c595c88a9a28bb1a3ed39780ec67fa28d61b1efa6974"
+    },
+    {
+      "candidateId": "cand_894c74fa1dc3c4730342c2e9",
+      "path": "/clearing/agent-governance/agent-memory-governance/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/agent-memory-governance/threats",
+      "segments": [
+        "agent-governance",
+        "agent-memory-governance",
+        "threats"
+      ],
+      "contentDigest": "sha256:ec51c14984c48637f7f2bdbcad84373d19a4696cb95ce4fdc05e30558624d0b9"
+    },
+    {
+      "candidateId": "cand_734920211415dac6291c6b4e",
+      "path": "/clearing/agent-governance/agent-memory-governance/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/agent-memory-governance/verification",
+      "segments": [
+        "agent-governance",
+        "agent-memory-governance",
+        "verification"
+      ],
+      "contentDigest": "sha256:de425e9966962e0a47f201cc54b699ea4ec18ec5f2894035f2489a2e7d7caf08"
+    },
+    {
+      "candidateId": "cand_ca33c914f35356394d1215b1",
+      "path": "/clearing/agent-governance/audit-receipts/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/audit-receipts/architecture",
+      "segments": [
+        "agent-governance",
+        "audit-receipts",
+        "architecture"
+      ],
+      "contentDigest": "sha256:1cc44e022d86cd999355136f0b2962674205672fb5bc562ec52fcfc2b62ca626"
+    },
+    {
+      "candidateId": "cand_c056a43a0f71b569b8d58e5c",
+      "path": "/clearing/agent-governance/audit-receipts/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/audit-receipts/controls",
+      "segments": [
+        "agent-governance",
+        "audit-receipts",
+        "controls"
+      ],
+      "contentDigest": "sha256:61591aa89d3fe66f65439d85a539fb3bfb28cb123df735a81a82cacf6e60502e"
+    },
+    {
+      "candidateId": "cand_234f0e582890e0ba575e90a7",
+      "path": "/clearing/agent-governance/audit-receipts/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/audit-receipts/definition",
+      "segments": [
+        "agent-governance",
+        "audit-receipts",
+        "definition"
+      ],
+      "contentDigest": "sha256:20def73060c5eb63ca02f45dd6240e202963a0e0e4f5baa194c872dbcc93dd6d"
+    },
+    {
+      "candidateId": "cand_757ac8c69dc965702b1a89a8",
+      "path": "/clearing/agent-governance/audit-receipts/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/audit-receipts/implementation",
+      "segments": [
+        "agent-governance",
+        "audit-receipts",
+        "implementation"
+      ],
+      "contentDigest": "sha256:1ea2291bb4e68b0a75dcb9e905e4004fa2767fdb1e5081dea4b7474c1c3a6582"
+    },
+    {
+      "candidateId": "cand_5091a9a3409f32edae6a4770",
+      "path": "/clearing/agent-governance/audit-receipts/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/audit-receipts/threats",
+      "segments": [
+        "agent-governance",
+        "audit-receipts",
+        "threats"
+      ],
+      "contentDigest": "sha256:6b35a25a2434d0a8ba096255a1f2c81e7cb789f464f60c752e47778e88afc0b7"
+    },
+    {
+      "candidateId": "cand_796acf7f014df7093c816164",
+      "path": "/clearing/agent-governance/audit-receipts/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/audit-receipts/verification",
+      "segments": [
+        "agent-governance",
+        "audit-receipts",
+        "verification"
+      ],
+      "contentDigest": "sha256:e8e4cf791ee67e52ce009e95827f499d0b0e95d41222d93b91dcd4e05fa76041"
+    },
+    {
+      "candidateId": "cand_cabc32863fd4cfafd655d989",
+      "path": "/clearing/agent-governance/capability-scoped-tokens/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/capability-scoped-tokens/architecture",
+      "segments": [
+        "agent-governance",
+        "capability-scoped-tokens",
+        "architecture"
+      ],
+      "contentDigest": "sha256:acc8578a4e6637afefea85577603e221c48901236d7e948fe934ca7c2f941f88"
+    },
+    {
+      "candidateId": "cand_63f92573770fe932b11581d0",
+      "path": "/clearing/agent-governance/capability-scoped-tokens/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/capability-scoped-tokens/controls",
+      "segments": [
+        "agent-governance",
+        "capability-scoped-tokens",
+        "controls"
+      ],
+      "contentDigest": "sha256:243c905cb73ecf25c07537bf0b480f6d78a9b2970da097afe2b3737fb36ed69d"
+    },
+    {
+      "candidateId": "cand_a171638fd36c45db3153ab2f",
+      "path": "/clearing/agent-governance/capability-scoped-tokens/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/capability-scoped-tokens/definition",
+      "segments": [
+        "agent-governance",
+        "capability-scoped-tokens",
+        "definition"
+      ],
+      "contentDigest": "sha256:2e749723a58567406da49f1b9d1ac49b0f605f71472c3664c5b857b09cc9820e"
+    },
+    {
+      "candidateId": "cand_07b0aad23f4c4368c0932659",
+      "path": "/clearing/agent-governance/capability-scoped-tokens/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/capability-scoped-tokens/implementation",
+      "segments": [
+        "agent-governance",
+        "capability-scoped-tokens",
+        "implementation"
+      ],
+      "contentDigest": "sha256:bd18332bc355893166a44b600a0d171a6d3d03a86989184940f8f085334c7d66"
+    },
+    {
+      "candidateId": "cand_00097effc59b6b9de67fe54f",
+      "path": "/clearing/agent-governance/capability-scoped-tokens/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/capability-scoped-tokens/threats",
+      "segments": [
+        "agent-governance",
+        "capability-scoped-tokens",
+        "threats"
+      ],
+      "contentDigest": "sha256:cf02b43ba75da1ab94dcfad0c70a51861535e4cfea672b382a329ea9545047ea"
+    },
+    {
+      "candidateId": "cand_44fd7e67cc86f428f500edeb",
+      "path": "/clearing/agent-governance/capability-scoped-tokens/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/capability-scoped-tokens/verification",
+      "segments": [
+        "agent-governance",
+        "capability-scoped-tokens",
+        "verification"
+      ],
+      "contentDigest": "sha256:12d6243d78d45c2fda3499dddaa06b29e535539412c9ab1cf8fbd958d9e793de"
+    },
+    {
+      "candidateId": "cand_4e77d7f7b9c947755aa8b03a",
+      "path": "/clearing/agent-governance/context-budgeting/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/architecture",
+      "segments": [
+        "agent-governance",
+        "context-budgeting",
+        "architecture"
+      ],
+      "contentDigest": "sha256:82fd78900c30b900747d3a01c80c60682cb2ca6678622109d9a975f0206ed428"
+    },
+    {
+      "candidateId": "cand_41ee6b7080d2c8416e30adaf",
+      "path": "/clearing/agent-governance/context-budgeting/commercialization",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/commercialization",
+      "segments": [
+        "agent-governance",
+        "context-budgeting",
+        "commercialization"
+      ],
+      "contentDigest": "sha256:02fbda25ac9d1b2f4e6408a82ce2d66d569a2aabf17220ad8ddaf3eb3ac7e43b"
+    },
+    {
+      "candidateId": "cand_501bc5c18c3e6037bc2f8ddb",
+      "path": "/clearing/agent-governance/context-budgeting/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/controls",
+      "segments": [
+        "agent-governance",
+        "context-budgeting",
+        "controls"
+      ],
+      "contentDigest": "sha256:24ed4c325f23317d78b672a66c5933e70eff38e33919c368f10746d13dae4469"
+    },
+    {
+      "candidateId": "cand_1730f46729e7507504a87eb7",
+      "path": "/clearing/agent-governance/context-budgeting/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/definition",
+      "segments": [
+        "agent-governance",
+        "context-budgeting",
+        "definition"
+      ],
+      "contentDigest": "sha256:35f762c3d7d8e742cf3de34552bdfae93348e8630e6de0810d4d931d472881a0"
+    },
+    {
+      "candidateId": "cand_94da29ed449b6d273a75e5f7",
+      "path": "/clearing/agent-governance/context-budgeting/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/implementation",
+      "segments": [
+        "agent-governance",
+        "context-budgeting",
+        "implementation"
+      ],
+      "contentDigest": "sha256:75c6f662e7da1a8b187be373ba4e4e241f5863baf7ae51e41d856da20f6a65c5"
+    },
+    {
+      "candidateId": "cand_bb97bc9d7602283a3b8b5a5d",
+      "path": "/clearing/agent-governance/context-budgeting/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/threats",
+      "segments": [
+        "agent-governance",
+        "context-budgeting",
+        "threats"
+      ],
+      "contentDigest": "sha256:23bb519e5b453f09fb8b1037bb3205c6fd33f51f8522b3e1689e473562b43017"
+    },
+    {
+      "candidateId": "cand_e0aecd32b5ce34c9d007d30d",
+      "path": "/clearing/agent-governance/context-budgeting/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/verification",
+      "segments": [
+        "agent-governance",
+        "context-budgeting",
+        "verification"
+      ],
+      "contentDigest": "sha256:4d6f1d8507dca4a39dbb048d44dff9faf73ca95cb2f192d6409e03c3473d4206"
+    },
+    {
+      "candidateId": "cand_c834e0da8233234c23b40e58",
+      "path": "/clearing/agent-governance/credential-rotation/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/architecture",
+      "segments": [
+        "agent-governance",
+        "credential-rotation",
+        "architecture"
+      ],
+      "contentDigest": "sha256:c644f491aa03c8f5e2bea818e5e21bea27205b023587d03ae9ab0304f76ea86c"
+    },
+    {
+      "candidateId": "cand_d1d3fd263f69666c3b186b6d",
+      "path": "/clearing/agent-governance/credential-rotation/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/controls",
+      "segments": [
+        "agent-governance",
+        "credential-rotation",
+        "controls"
+      ],
+      "contentDigest": "sha256:de084f77bd8fb05af1acd9552d46afdafe450d84d685675f738d08c8692b8c09"
+    },
+    {
+      "candidateId": "cand_7b558066ec71b18a21f4187f",
+      "path": "/clearing/agent-governance/credential-rotation/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/definition",
+      "segments": [
+        "agent-governance",
+        "credential-rotation",
+        "definition"
+      ],
+      "contentDigest": "sha256:ff82962d848bbf8448b47d24538b8e820bc678cb5c7f93ae432481150f83c8e9"
+    },
+    {
+      "candidateId": "cand_b95168113fccd6c46a9277b0",
+      "path": "/clearing/agent-governance/credential-rotation/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/implementation",
+      "segments": [
+        "agent-governance",
+        "credential-rotation",
+        "implementation"
+      ],
+      "contentDigest": "sha256:4db54915b68188a571b222e1a685caaec19c475bf1a78db14263db8f6c8b2e78"
+    },
+    {
+      "candidateId": "cand_5ce69812befe6f9cba5bcc3d",
+      "path": "/clearing/agent-governance/credential-rotation/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/threats",
+      "segments": [
+        "agent-governance",
+        "credential-rotation",
+        "threats"
+      ],
+      "contentDigest": "sha256:083c22bed873078e9f7e84e69645b41851e6339b0bed9b7bdb8e50c4a6775f5a"
+    },
+    {
+      "candidateId": "cand_57e5ff03f5aa4c2fb3596f4a",
+      "path": "/clearing/agent-governance/credential-rotation/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/verification",
+      "segments": [
+        "agent-governance",
+        "credential-rotation",
+        "verification"
+      ],
+      "contentDigest": "sha256:d7ddbe0aa52da8a5ca9cfa58717544714dcd8785dbde6614c2469fe97dc3dc4e"
+    },
+    {
+      "candidateId": "cand_f462e98442caa7511eeaa88b",
+      "path": "/clearing/agent-governance/cross-agent-delegation/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/cross-agent-delegation/architecture",
+      "segments": [
+        "agent-governance",
+        "cross-agent-delegation",
+        "architecture"
+      ],
+      "contentDigest": "sha256:01619c590b70607cdcc7b71c0b27e691adecf628c344f7a50e8e19f5d9b0841b"
+    },
+    {
+      "candidateId": "cand_6601514bc620f16e8ed2d3fe",
+      "path": "/clearing/agent-governance/cross-agent-delegation/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/cross-agent-delegation/controls",
+      "segments": [
+        "agent-governance",
+        "cross-agent-delegation",
+        "controls"
+      ],
+      "contentDigest": "sha256:c1b9794ac34ae7a0db53642eb22b974d4aebd0bc3663c991c7844eb60811ee0b"
+    },
+    {
+      "candidateId": "cand_938d05de97615a836c7dc8c6",
+      "path": "/clearing/agent-governance/cross-agent-delegation/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/cross-agent-delegation/definition",
+      "segments": [
+        "agent-governance",
+        "cross-agent-delegation",
+        "definition"
+      ],
+      "contentDigest": "sha256:2f4a01e75c1e415f55e1cf4f24ea015f1b30b9a1f6913c8232d6f15846ad27c5"
+    },
+    {
+      "candidateId": "cand_6d06df457dfebcf2a9aaf46c",
+      "path": "/clearing/agent-governance/cross-agent-delegation/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/cross-agent-delegation/implementation",
+      "segments": [
+        "agent-governance",
+        "cross-agent-delegation",
+        "implementation"
+      ],
+      "contentDigest": "sha256:2791c640dd62f86eaba0fddf298ee7d2b38607c25d7a6ce42f642174c3ffafc3"
+    },
+    {
+      "candidateId": "cand_e9fc9dcad33de4df872237de",
+      "path": "/clearing/agent-governance/cross-agent-delegation/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/cross-agent-delegation/threats",
+      "segments": [
+        "agent-governance",
+        "cross-agent-delegation",
+        "threats"
+      ],
+      "contentDigest": "sha256:5e25a900d6568e3849285bba44856b9dcabf5f8edcfcd0686a13412c8170a820"
+    },
+    {
+      "candidateId": "cand_9a4e08405a32091997afb14d",
+      "path": "/clearing/agent-governance/cross-agent-delegation/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/cross-agent-delegation/verification",
+      "segments": [
+        "agent-governance",
+        "cross-agent-delegation",
+        "verification"
+      ],
+      "contentDigest": "sha256:a0ff5fc7a7f078b558b358978c01ad8d1b2fabb70612fe28f0b88829bf9776f9"
+    },
+    {
+      "candidateId": "cand_9511d0dcd2e966b2e3c610d0",
+      "path": "/clearing/agent-governance/delivery-acknowledgement/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/delivery-acknowledgement/architecture",
+      "segments": [
+        "agent-governance",
+        "delivery-acknowledgement",
+        "architecture"
+      ],
+      "contentDigest": "sha256:0a325b727a1e35ee5eda6b454014a50c74b3feaf6744e06204c19fd41d0a295b"
+    },
+    {
+      "candidateId": "cand_28ed007784000229d7f6ead7",
+      "path": "/clearing/agent-governance/delivery-acknowledgement/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/delivery-acknowledgement/controls",
+      "segments": [
+        "agent-governance",
+        "delivery-acknowledgement",
+        "controls"
+      ],
+      "contentDigest": "sha256:14635bc052394315feacbc4c8092a869024c1bcb8114c268bb5b514c05548400"
+    },
+    {
+      "candidateId": "cand_a56c8ffc90ee7d11ae2400c8",
+      "path": "/clearing/agent-governance/delivery-acknowledgement/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/delivery-acknowledgement/implementation",
+      "segments": [
+        "agent-governance",
+        "delivery-acknowledgement",
+        "implementation"
+      ],
+      "contentDigest": "sha256:bd98cbc5ad12038f7344a5fe691bf36db16cd9e627677c1cc4a13f21170afa2a"
+    },
+    {
+      "candidateId": "cand_0aaeea95bb96b49c3e1e1169",
+      "path": "/clearing/agent-governance/delivery-acknowledgement/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/delivery-acknowledgement/threats",
+      "segments": [
+        "agent-governance",
+        "delivery-acknowledgement",
+        "threats"
+      ],
+      "contentDigest": "sha256:38a778f05a74ab9d198b8b5366cd027a3f69b4e7fd7d92a990d742eb19dc5e7a"
+    },
+    {
+      "candidateId": "cand_aafabc8c69de3d4fd36f2108",
+      "path": "/clearing/agent-governance/durable-task-state/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/durable-task-state/architecture",
+      "segments": [
+        "agent-governance",
+        "durable-task-state",
+        "architecture"
+      ],
+      "contentDigest": "sha256:7b4265f88aec085a264091b7eea8a70e9cef96185281bac5352d395e1614dc52"
+    },
+    {
+      "candidateId": "cand_3e92496c04ff8eaccfb951b4",
+      "path": "/clearing/agent-governance/durable-task-state/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/durable-task-state/controls",
+      "segments": [
+        "agent-governance",
+        "durable-task-state",
+        "controls"
+      ],
+      "contentDigest": "sha256:d8e604eb979c5ab4df1a6fb540452f1b25cf1297ea4ec044a70e94abf8a0abb8"
+    },
+    {
+      "candidateId": "cand_52b0740751bb63c0cf7dc490",
+      "path": "/clearing/agent-governance/durable-task-state/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/durable-task-state/definition",
+      "segments": [
+        "agent-governance",
+        "durable-task-state",
+        "definition"
+      ],
+      "contentDigest": "sha256:8fd68c106c27ec55cf8263c7574a8780cff4ca8484de1f13a6f79d2e85d8670f"
+    },
+    {
+      "candidateId": "cand_453a832725e3adc7a814bdbf",
+      "path": "/clearing/agent-governance/durable-task-state/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/durable-task-state/implementation",
+      "segments": [
+        "agent-governance",
+        "durable-task-state",
+        "implementation"
+      ],
+      "contentDigest": "sha256:aecf2b73364e4c387175b3649da92ef90f4dd9fc2009013605b5d1b9402c65f0"
+    },
+    {
+      "candidateId": "cand_ee2eb2f19a7cd44a7ed0ad6e",
+      "path": "/clearing/agent-governance/durable-task-state/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/durable-task-state/threats",
+      "segments": [
+        "agent-governance",
+        "durable-task-state",
+        "threats"
+      ],
+      "contentDigest": "sha256:5208223a5092445b305e79380638c30a3af04b246fc35eff55d6b8fa171ad9b8"
+    },
+    {
+      "candidateId": "cand_f1138b2e74084262f7d25bb6",
+      "path": "/clearing/agent-governance/durable-task-state/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/durable-task-state/verification",
+      "segments": [
+        "agent-governance",
+        "durable-task-state",
+        "verification"
+      ],
+      "contentDigest": "sha256:6d2275b44edbd72087b7740b7489c0794f4c673f4150cb7241445a84f57e6300"
+    },
+    {
+      "candidateId": "cand_2dc57ee429651b19ba26dcd3",
+      "path": "/clearing/agent-governance/endpoint-substitution-defense/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/endpoint-substitution-defense/architecture",
+      "segments": [
+        "agent-governance",
+        "endpoint-substitution-defense",
+        "architecture"
+      ],
+      "contentDigest": "sha256:c135d6f3dd7918861ec6185ea74ceb66438d2920f80bff6213a7a1b589eed125"
+    },
+    {
+      "candidateId": "cand_39628430ca071389ed4703de",
+      "path": "/clearing/agent-governance/endpoint-substitution-defense/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/endpoint-substitution-defense/controls",
+      "segments": [
+        "agent-governance",
+        "endpoint-substitution-defense",
+        "controls"
+      ],
+      "contentDigest": "sha256:d83db7c53bac877324eba0b8a296e467fff438698cc71ab1b730230f533da4a7"
+    },
+    {
+      "candidateId": "cand_41f8d80fdc904e177523f915",
+      "path": "/clearing/agent-governance/endpoint-substitution-defense/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/endpoint-substitution-defense/definition",
+      "segments": [
+        "agent-governance",
+        "endpoint-substitution-defense",
+        "definition"
+      ],
+      "contentDigest": "sha256:7daee802b9e3c5fb2f43c05377a0979d1f8a878b013206c54da5990d543b3f48"
+    },
+    {
+      "candidateId": "cand_9749d38dea6640be6196afef",
+      "path": "/clearing/agent-governance/endpoint-substitution-defense/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/endpoint-substitution-defense/implementation",
+      "segments": [
+        "agent-governance",
+        "endpoint-substitution-defense",
+        "implementation"
+      ],
+      "contentDigest": "sha256:9cf66b36f616c0a35a9ae2d7432f4578e9c2a0e4faf87c48917e9017c435373b"
+    },
+    {
+      "candidateId": "cand_56311b11be2d35905203e3ad",
+      "path": "/clearing/agent-governance/endpoint-substitution-defense/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/endpoint-substitution-defense/threats",
+      "segments": [
+        "agent-governance",
+        "endpoint-substitution-defense",
+        "threats"
+      ],
+      "contentDigest": "sha256:b893385792f90058e04bcf71414c0708bb3694623a89285875f613e7f0f409d6"
+    },
+    {
+      "candidateId": "cand_69cc74a38505943915a53219",
+      "path": "/clearing/agent-governance/endpoint-substitution-defense/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/endpoint-substitution-defense/verification",
+      "segments": [
+        "agent-governance",
+        "endpoint-substitution-defense",
+        "verification"
+      ],
+      "contentDigest": "sha256:5902845c4b665cbccd9a3872ae67a8e3a20f67ca83d7947e3e13c3b207d3024c"
+    },
+    {
+      "candidateId": "cand_23b94089c37a0988ccb86c27",
+      "path": "/clearing/agent-governance/enterprise-mcp-gateway/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/enterprise-mcp-gateway/architecture",
+      "segments": [
+        "agent-governance",
+        "enterprise-mcp-gateway",
+        "architecture"
+      ],
+      "contentDigest": "sha256:af377fe00a1ac6a00c582a105bf292dfc5959c05374055efe28c5f78a2cd2f6b"
+    },
+    {
+      "candidateId": "cand_a7dc85b082092d763eeea7c2",
+      "path": "/clearing/agent-governance/enterprise-mcp-gateway/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/enterprise-mcp-gateway/controls",
+      "segments": [
+        "agent-governance",
+        "enterprise-mcp-gateway",
+        "controls"
+      ],
+      "contentDigest": "sha256:289e36259fbb9e934e30741c07fbe2f47166bd4cf4fc2fb9e2317ef174801358"
+    },
+    {
+      "candidateId": "cand_75e4bd509bd9951b41590427",
+      "path": "/clearing/agent-governance/enterprise-mcp-gateway/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/enterprise-mcp-gateway/implementation",
+      "segments": [
+        "agent-governance",
+        "enterprise-mcp-gateway",
+        "implementation"
+      ],
+      "contentDigest": "sha256:b66f237bf662969f66b0ff6a2742942f3fff84484e7605f2296166326957df76"
+    },
+    {
+      "candidateId": "cand_d251f41a252e4b533f1b4eef",
+      "path": "/clearing/agent-governance/enterprise-mcp-gateway/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/enterprise-mcp-gateway/threats",
+      "segments": [
+        "agent-governance",
+        "enterprise-mcp-gateway",
+        "threats"
+      ],
+      "contentDigest": "sha256:9f7961c6ad5532a289e38c28f7db765b0ac85cc45e5fd990f0002bd8777c9b7c"
+    },
+    {
+      "candidateId": "cand_98da6e0ee462652e0277613f",
+      "path": "/clearing/agent-governance/enterprise-mcp-gateway/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/enterprise-mcp-gateway/verification",
+      "segments": [
+        "agent-governance",
+        "enterprise-mcp-gateway",
+        "verification"
+      ],
+      "contentDigest": "sha256:1ddf9bc8615c8e6f5416e1068bb317a864680719ddf0afdc0997f2875f0f08e6"
+    },
+    {
+      "candidateId": "cand_5949b30ed697d2606dbdce0a",
+      "path": "/clearing/agent-governance/failure-recovery/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/architecture",
+      "segments": [
+        "agent-governance",
+        "failure-recovery",
+        "architecture"
+      ],
+      "contentDigest": "sha256:bb2d40388f6a114cd82dc6792edbc0d2bcdf2596ce7329ffe1cced07ebb077b1"
+    },
+    {
+      "candidateId": "cand_f6409ea20cfc51496e3a61d8",
+      "path": "/clearing/agent-governance/failure-recovery/commercialization",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/commercialization",
+      "segments": [
+        "agent-governance",
+        "failure-recovery",
+        "commercialization"
+      ],
+      "contentDigest": "sha256:5bc56450007d446735758b3f1c9f5631883984420d21e6dff090d9d93f0b012e"
+    },
+    {
+      "candidateId": "cand_b86babf5135f9a573d02e5ae",
+      "path": "/clearing/agent-governance/failure-recovery/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/controls",
+      "segments": [
+        "agent-governance",
+        "failure-recovery",
+        "controls"
+      ],
+      "contentDigest": "sha256:c29b32523d1d94c997d88b6940f44b6990149c998b369050aa9bbc80edb0ee11"
+    },
+    {
+      "candidateId": "cand_6e59fad8478a7efbfa9f88af",
+      "path": "/clearing/agent-governance/failure-recovery/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/definition",
+      "segments": [
+        "agent-governance",
+        "failure-recovery",
+        "definition"
+      ],
+      "contentDigest": "sha256:cc307cd5828b9b2f114fc04aece879721da31f90daa7a3c2442bce134f328d2d"
+    },
+    {
+      "candidateId": "cand_bc2c0a51fccecc34fb24c794",
+      "path": "/clearing/agent-governance/failure-recovery/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/implementation",
+      "segments": [
+        "agent-governance",
+        "failure-recovery",
+        "implementation"
+      ],
+      "contentDigest": "sha256:9caa1c2b617021c07d7b51321a4b93268e2e4952e5ef9345b302171a0b5d8621"
+    },
+    {
+      "candidateId": "cand_49acbaf80c15c406036eb89d",
+      "path": "/clearing/agent-governance/failure-recovery/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/threats",
+      "segments": [
+        "agent-governance",
+        "failure-recovery",
+        "threats"
+      ],
+      "contentDigest": "sha256:5b5d3bd04349899dad20de34ad4c1345d783189f9d7c58bdd16a88741a9654bf"
+    },
+    {
+      "candidateId": "cand_ba1f85fdbc1cfbd3c8a3b2a4",
+      "path": "/clearing/agent-governance/failure-recovery/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/verification",
+      "segments": [
+        "agent-governance",
+        "failure-recovery",
+        "verification"
+      ],
+      "contentDigest": "sha256:b585b1548318c8f5d37ccd46328d3bae4a4bec7b04216427e7acc595e8902871"
+    },
+    {
+      "candidateId": "cand_3addd183b455bbe7fba0037b",
+      "path": "/clearing/agent-governance/human-approval-gates/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/human-approval-gates/architecture",
+      "segments": [
+        "agent-governance",
+        "human-approval-gates",
+        "architecture"
+      ],
+      "contentDigest": "sha256:2f07c469a3baab60f1dfe0a0606a129d7b4f0e964573da479259920d68cb6401"
+    },
+    {
+      "candidateId": "cand_2bb85aa815ea53382caf4b20",
+      "path": "/clearing/agent-governance/human-approval-gates/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/human-approval-gates/controls",
+      "segments": [
+        "agent-governance",
+        "human-approval-gates",
+        "controls"
+      ],
+      "contentDigest": "sha256:ad19f515725e92fc24d205c4cc9497d71e381262450abfb16f9cfe3280200f9c"
+    },
+    {
+      "candidateId": "cand_87776c000adeb7a12e6534cc",
+      "path": "/clearing/agent-governance/human-approval-gates/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/human-approval-gates/definition",
+      "segments": [
+        "agent-governance",
+        "human-approval-gates",
+        "definition"
+      ],
+      "contentDigest": "sha256:79d803d20502152ece6779e279bd52bd0501bf6e77550b33c1309a05027f02e5"
+    },
+    {
+      "candidateId": "cand_5b4dc2fe272365b6df6671e2",
+      "path": "/clearing/agent-governance/human-approval-gates/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/human-approval-gates/implementation",
+      "segments": [
+        "agent-governance",
+        "human-approval-gates",
+        "implementation"
+      ],
+      "contentDigest": "sha256:4452f8aee3c958c24c720b0668dfaa78ce817c8a72ab1e2d6b749dbfffbf4518"
+    },
+    {
+      "candidateId": "cand_d917d2aaff678b182062a198",
+      "path": "/clearing/agent-governance/human-approval-gates/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/human-approval-gates/threats",
+      "segments": [
+        "agent-governance",
+        "human-approval-gates",
+        "threats"
+      ],
+      "contentDigest": "sha256:25bbc4c332c12d20bd8a9abf4c46b8abbbd74d8c36d864f22877a7913886b634"
+    },
+    {
+      "candidateId": "cand_0a7152757898d0236e047aa4",
+      "path": "/clearing/agent-governance/human-approval-gates/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/human-approval-gates/verification",
+      "segments": [
+        "agent-governance",
+        "human-approval-gates",
+        "verification"
+      ],
+      "contentDigest": "sha256:ec0d7d9c281964bc09562ee814b9ae7d029e3c9c73b682009868f29e0071e628"
+    },
+    {
+      "candidateId": "cand_bd6b98d2244e4634cd7f3c23",
+      "path": "/clearing/agent-governance/identity-bound-agents/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/architecture",
+      "segments": [
+        "agent-governance",
+        "identity-bound-agents",
+        "architecture"
+      ],
+      "contentDigest": "sha256:15786831f2134f3fd8a57024aecacf0b12748bdf4488740ffc4de5cfb7b66437"
+    },
+    {
+      "candidateId": "cand_948dafb7f815b713239ab5f8",
+      "path": "/clearing/agent-governance/identity-bound-agents/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/controls",
+      "segments": [
+        "agent-governance",
+        "identity-bound-agents",
+        "controls"
+      ],
+      "contentDigest": "sha256:37d76ffb4677ea4f5530e3e6a044b18fa34f028b954f5af0ec2aa05934a9e6f0"
+    },
+    {
+      "candidateId": "cand_63800114df58212bf1827623",
+      "path": "/clearing/agent-governance/identity-bound-agents/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition",
+      "segments": [
+        "agent-governance",
+        "identity-bound-agents",
+        "definition"
+      ],
+      "contentDigest": "sha256:d97245fd32929f6bd14586356890f606859da2b39571faeac0c068ee9e922221"
+    },
+    {
+      "candidateId": "cand_894175e0b31eeb9201e2db71",
+      "path": "/clearing/agent-governance/identity-bound-agents/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/implementation",
+      "segments": [
+        "agent-governance",
+        "identity-bound-agents",
+        "implementation"
+      ],
+      "contentDigest": "sha256:a92bb468d68d7cc4c2e5502efca79f8877e3e5028acb99caad813ea6048f897a"
+    },
+    {
+      "candidateId": "cand_015bd0d008cca73f6395b704",
+      "path": "/clearing/agent-governance/identity-bound-agents/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/threats",
+      "segments": [
+        "agent-governance",
+        "identity-bound-agents",
+        "threats"
+      ],
+      "contentDigest": "sha256:f1e2f35c76ee9ca0a53f0f6f2939e3cfd2982f1a0a40fb29460789989e75a3e3"
+    },
+    {
+      "candidateId": "cand_bb494aca00fac157c0dc34e7",
+      "path": "/clearing/agent-governance/identity-bound-agents/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/verification",
+      "segments": [
+        "agent-governance",
+        "identity-bound-agents",
+        "verification"
+      ],
+      "contentDigest": "sha256:8faf36572d32d9e9f936d0c2a8713ac1464f2e0dab31565f2219ea095ec5a025"
+    },
+    {
+      "candidateId": "cand_da8801c17e5cc2de04905b9f",
+      "path": "/clearing/agent-governance/machine-commerce-entitlement/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/machine-commerce-entitlement/architecture",
+      "segments": [
+        "agent-governance",
+        "machine-commerce-entitlement",
+        "architecture"
+      ],
+      "contentDigest": "sha256:d3a316e91b8ce36530f645a614ff4dc575835f68d4ba6440bbeab60a797503db"
+    },
+    {
+      "candidateId": "cand_8966b5ce4540add13b855b6b",
+      "path": "/clearing/agent-governance/machine-commerce-entitlement/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/machine-commerce-entitlement/controls",
+      "segments": [
+        "agent-governance",
+        "machine-commerce-entitlement",
+        "controls"
+      ],
+      "contentDigest": "sha256:ad7a6f990e2afeda130a6b915719c7dff3360ffa5e8e5c476d050913191b978d"
+    },
+    {
+      "candidateId": "cand_5f75c387d49a705e210e237f",
+      "path": "/clearing/agent-governance/machine-commerce-entitlement/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/machine-commerce-entitlement/definition",
+      "segments": [
+        "agent-governance",
+        "machine-commerce-entitlement",
+        "definition"
+      ],
+      "contentDigest": "sha256:7e57d48f3ccb26e4014c43220df00bbb12806b5e013cdfe205e8b1fde6afc7dc"
+    },
+    {
+      "candidateId": "cand_fc84174a23763a79823ac9a5",
+      "path": "/clearing/agent-governance/machine-commerce-entitlement/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/machine-commerce-entitlement/implementation",
+      "segments": [
+        "agent-governance",
+        "machine-commerce-entitlement",
+        "implementation"
+      ],
+      "contentDigest": "sha256:af4feaad7da5c05a62543d33a260b0bbb14b9452519772c8231321a0b8f155e2"
+    },
+    {
+      "candidateId": "cand_568c22583d18a5fd1c0bca74",
+      "path": "/clearing/agent-governance/machine-commerce-entitlement/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/machine-commerce-entitlement/threats",
+      "segments": [
+        "agent-governance",
+        "machine-commerce-entitlement",
+        "threats"
+      ],
+      "contentDigest": "sha256:6ff63a938d2ffc62d78116f12eb5b7e8aef03694741b874ae150859cdd34deee"
+    },
+    {
+      "candidateId": "cand_46621fc00bec680efe1bd3e6",
+      "path": "/clearing/agent-governance/machine-commerce-entitlement/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/machine-commerce-entitlement/verification",
+      "segments": [
+        "agent-governance",
+        "machine-commerce-entitlement",
+        "verification"
+      ],
+      "contentDigest": "sha256:73529b1ab479a1cfb810ef68bd74e4a45bdb4b010135a376becac0a6c8fcd1ac"
+    },
+    {
+      "candidateId": "cand_7c75d81360d848d32b0b98c4",
+      "path": "/clearing/agent-governance/metered-evidence-retrieval/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/architecture",
+      "segments": [
+        "agent-governance",
+        "metered-evidence-retrieval",
+        "architecture"
+      ],
+      "contentDigest": "sha256:988af3f5bdcda519541a7e57b2dcb7d4ba4b8925ef1705ed63f7d49744df042f"
+    },
+    {
+      "candidateId": "cand_f0c682db65aed0113f08f6a9",
+      "path": "/clearing/agent-governance/metered-evidence-retrieval/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/controls",
+      "segments": [
+        "agent-governance",
+        "metered-evidence-retrieval",
+        "controls"
+      ],
+      "contentDigest": "sha256:4af709843788c333d2abe6c8c4a9bc2e264c297e6878e6fb0b4cd70a14ada89b"
+    },
+    {
+      "candidateId": "cand_03783f0a589f183ebb951043",
+      "path": "/clearing/agent-governance/metered-evidence-retrieval/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/definition",
+      "segments": [
+        "agent-governance",
+        "metered-evidence-retrieval",
+        "definition"
+      ],
+      "contentDigest": "sha256:8f397836e862dcec15e4c789ea6ec5bb4e21b4dfa9a519375866de5c2c9e4983"
+    },
+    {
+      "candidateId": "cand_e4d6a544f2fc9d8d2bbc21af",
+      "path": "/clearing/agent-governance/metered-evidence-retrieval/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/implementation",
+      "segments": [
+        "agent-governance",
+        "metered-evidence-retrieval",
+        "implementation"
+      ],
+      "contentDigest": "sha256:ec4c993fdb78dbb15d9dd7e444794e8b03c890f820c868087396cc1a18451759"
+    },
+    {
+      "candidateId": "cand_ddd31b53e6436d4628439e3a",
+      "path": "/clearing/agent-governance/metered-evidence-retrieval/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/threats",
+      "segments": [
+        "agent-governance",
+        "metered-evidence-retrieval",
+        "threats"
+      ],
+      "contentDigest": "sha256:d6922061fedd4bdf0cfed1b641f8152acaef44750b174de8cbf9c36ae7a7850a"
+    },
+    {
+      "candidateId": "cand_dc3f5e45155a32217aaa5761",
+      "path": "/clearing/agent-governance/metered-evidence-retrieval/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/verification",
+      "segments": [
+        "agent-governance",
+        "metered-evidence-retrieval",
+        "verification"
+      ],
+      "contentDigest": "sha256:7d79786e4bb18cd0eb255e731c3403ebf2e828b5cd59f290ab9942dd3a7779c0"
+    },
+    {
+      "candidateId": "cand_ba9f11520fe3839a79b92342",
+      "path": "/clearing/agent-governance/provenance-witnessing/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/provenance-witnessing/architecture",
+      "segments": [
+        "agent-governance",
+        "provenance-witnessing",
+        "architecture"
+      ],
+      "contentDigest": "sha256:59d1e804bb1efcd9b5a304bec3909d32fbdc700dd3a79a0824fc3657ee1488b2"
+    },
+    {
+      "candidateId": "cand_01cf9ac1dd9cbecfce3b9e41",
+      "path": "/clearing/agent-governance/provenance-witnessing/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/provenance-witnessing/controls",
+      "segments": [
+        "agent-governance",
+        "provenance-witnessing",
+        "controls"
+      ],
+      "contentDigest": "sha256:356044a01407fabf7d37a3a7a335d24364ca89f539eaa7a82650940b18af3075"
+    },
+    {
+      "candidateId": "cand_c859e37a593e1516d0210a02",
+      "path": "/clearing/agent-governance/provenance-witnessing/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/provenance-witnessing/definition",
+      "segments": [
+        "agent-governance",
+        "provenance-witnessing",
+        "definition"
+      ],
+      "contentDigest": "sha256:24908f6a31cf9727f63ed8fc4fc6e8ada23a816fd6c82ea74649076acd4b8fb1"
+    },
+    {
+      "candidateId": "cand_463cf2006e0a92ff5a8370f3",
+      "path": "/clearing/agent-governance/provenance-witnessing/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/provenance-witnessing/implementation",
+      "segments": [
+        "agent-governance",
+        "provenance-witnessing",
+        "implementation"
+      ],
+      "contentDigest": "sha256:49e9ec81d1aef5edb58b7bf8a16e3e106e7041bdbe4a7924ed380b9f49bf6afb"
+    },
+    {
+      "candidateId": "cand_0c5a57195dc7cceb4f390be5",
+      "path": "/clearing/agent-governance/provenance-witnessing/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/provenance-witnessing/threats",
+      "segments": [
+        "agent-governance",
+        "provenance-witnessing",
+        "threats"
+      ],
+      "contentDigest": "sha256:fb3d3b9b2334528bcdd9cf5205526132ed66346eec005b95f2a0dc8b981a1125"
+    },
+    {
+      "candidateId": "cand_ea6398cdb875d669a41dc59b",
+      "path": "/clearing/agent-governance/provenance-witnessing/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/provenance-witnessing/verification",
+      "segments": [
+        "agent-governance",
+        "provenance-witnessing",
+        "verification"
+      ],
+      "contentDigest": "sha256:090a6272c1a8daa44de1ca85b2b5d98d6e3d8fbea2aca8b34d65c65e0ccc0988"
+    },
+    {
+      "candidateId": "cand_f7e0ca1c06761ea434797887",
+      "path": "/clearing/agent-governance/quota-enforcement/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/quota-enforcement/architecture",
+      "segments": [
+        "agent-governance",
+        "quota-enforcement",
+        "architecture"
+      ],
+      "contentDigest": "sha256:f0d4ed57cfdf945171a648f0473900559b749736232aab114ba514d1f1588e68"
+    },
+    {
+      "candidateId": "cand_481878bf581efb435f0dfe68",
+      "path": "/clearing/agent-governance/quota-enforcement/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/quota-enforcement/controls",
+      "segments": [
+        "agent-governance",
+        "quota-enforcement",
+        "controls"
+      ],
+      "contentDigest": "sha256:6458d00bd259d9ea4aadb79c51e0fdc01fbc9d2f926fb93b34dbc75489e2ff49"
+    },
+    {
+      "candidateId": "cand_54bebdc1fa35ce767bb527ac",
+      "path": "/clearing/agent-governance/quota-enforcement/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/quota-enforcement/definition",
+      "segments": [
+        "agent-governance",
+        "quota-enforcement",
+        "definition"
+      ],
+      "contentDigest": "sha256:3c009789372d13ede4a3be5413cfc9cd88784dbccb786adaf239b975938cf3ba"
+    },
+    {
+      "candidateId": "cand_c619bf1533a9346fbdc93a24",
+      "path": "/clearing/agent-governance/quota-enforcement/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/quota-enforcement/implementation",
+      "segments": [
+        "agent-governance",
+        "quota-enforcement",
+        "implementation"
+      ],
+      "contentDigest": "sha256:fce6a7ad4f7e308b47f5b4f3af1613e2b3808639b0fa67d52fae4df856d85364"
+    },
+    {
+      "candidateId": "cand_dfd52271051e8f410766f1cf",
+      "path": "/clearing/agent-governance/quota-enforcement/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/quota-enforcement/threats",
+      "segments": [
+        "agent-governance",
+        "quota-enforcement",
+        "threats"
+      ],
+      "contentDigest": "sha256:11c11e44dc28a68393fb9a70fe10a032513cf38eba5dbd01980f5285b7826506"
+    },
+    {
+      "candidateId": "cand_2359f2933dac8e11b6da74aa",
+      "path": "/clearing/agent-governance/quota-enforcement/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/quota-enforcement/verification",
+      "segments": [
+        "agent-governance",
+        "quota-enforcement",
+        "verification"
+      ],
+      "contentDigest": "sha256:f410880f80db932658a4dba2b86fa1ac8ee8d349935da249a8f2c203da4cf913"
+    },
+    {
+      "candidateId": "cand_804a0a3da2a32d580ce1c874",
+      "path": "/clearing/agent-governance/replay-safe-execution/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/replay-safe-execution/architecture",
+      "segments": [
+        "agent-governance",
+        "replay-safe-execution",
+        "architecture"
+      ],
+      "contentDigest": "sha256:d1c562ae6f3209cffa9ca87b7c03e69ad968de733c42ad49e67b5867d26e209b"
+    },
+    {
+      "candidateId": "cand_2ba57542379b7a015a9ba100",
+      "path": "/clearing/agent-governance/replay-safe-execution/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/replay-safe-execution/controls",
+      "segments": [
+        "agent-governance",
+        "replay-safe-execution",
+        "controls"
+      ],
+      "contentDigest": "sha256:237ab7dc581f4354b2a83b4bf1fcacd48133b0a6e694207e79e005912036b6df"
+    },
+    {
+      "candidateId": "cand_d4d30938f6832c0c2be9c83c",
+      "path": "/clearing/agent-governance/replay-safe-execution/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/replay-safe-execution/definition",
+      "segments": [
+        "agent-governance",
+        "replay-safe-execution",
+        "definition"
+      ],
+      "contentDigest": "sha256:26d229557ecae2056be5b090a03cb41356a90de8d0e64a49f41ac7dc3f6970f6"
+    },
+    {
+      "candidateId": "cand_32c2ca6250439477691f5bae",
+      "path": "/clearing/agent-governance/replay-safe-execution/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/replay-safe-execution/implementation",
+      "segments": [
+        "agent-governance",
+        "replay-safe-execution",
+        "implementation"
+      ],
+      "contentDigest": "sha256:a286ed067eefa718f7e7581aa313350e86e89d47aa41867ca1d4c5d056874684"
+    },
+    {
+      "candidateId": "cand_4aac12a442c5eb2e680e14ef",
+      "path": "/clearing/agent-governance/replay-safe-execution/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/replay-safe-execution/threats",
+      "segments": [
+        "agent-governance",
+        "replay-safe-execution",
+        "threats"
+      ],
+      "contentDigest": "sha256:9fd8555b7d5f55a17914b584d710b4e6f37d254b6e5a2d69c1aff2e3fc60288d"
+    },
+    {
+      "candidateId": "cand_b892d797389fe6ca5721a376",
+      "path": "/clearing/agent-governance/replay-safe-execution/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/replay-safe-execution/verification",
+      "segments": [
+        "agent-governance",
+        "replay-safe-execution",
+        "verification"
+      ],
+      "contentDigest": "sha256:0ed6d212b42ea1254b0b3476dd58a5074b49c256243a68b425130fe9bc5476d5"
+    },
+    {
+      "candidateId": "cand_74221b098dfd0b9b0feb2ff7",
+      "path": "/clearing/agent-governance/tenant-isolation/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tenant-isolation/architecture",
+      "segments": [
+        "agent-governance",
+        "tenant-isolation",
+        "architecture"
+      ],
+      "contentDigest": "sha256:8d9a77a5703226ecb98ee7954c4f16864ad5105185a34d5cf648b0fa98bb5bdf"
+    },
+    {
+      "candidateId": "cand_2d858bb451ba6df46e3ca2bb",
+      "path": "/clearing/agent-governance/tenant-isolation/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tenant-isolation/controls",
+      "segments": [
+        "agent-governance",
+        "tenant-isolation",
+        "controls"
+      ],
+      "contentDigest": "sha256:6a4c9aabeabb482c3150ac525d23b2f30da11960d2ea2a8208b42476e7477e5f"
+    },
+    {
+      "candidateId": "cand_3461e3f8da83e0663f56783e",
+      "path": "/clearing/agent-governance/tenant-isolation/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tenant-isolation/definition",
+      "segments": [
+        "agent-governance",
+        "tenant-isolation",
+        "definition"
+      ],
+      "contentDigest": "sha256:7c493f7f20685ec795f5fd1507c5f4083f3449d6d594109ce46c14f78ad7d33e"
+    },
+    {
+      "candidateId": "cand_d621c8e727d8c75e4c60b42e",
+      "path": "/clearing/agent-governance/tenant-isolation/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tenant-isolation/implementation",
+      "segments": [
+        "agent-governance",
+        "tenant-isolation",
+        "implementation"
+      ],
+      "contentDigest": "sha256:8936ef8e69a6aa9c8e17031f881a010998ea2a97e79ffeb26a86c5bebf8a6aff"
+    },
+    {
+      "candidateId": "cand_ba845b90e84d225764a52037",
+      "path": "/clearing/agent-governance/tenant-isolation/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tenant-isolation/threats",
+      "segments": [
+        "agent-governance",
+        "tenant-isolation",
+        "threats"
+      ],
+      "contentDigest": "sha256:a7fb071fdf5a74907ebdb31215490b27f07a3c11ea8fd3597a6c426805fc26a7"
+    },
+    {
+      "candidateId": "cand_c1abe71dc7645f6eb699293a",
+      "path": "/clearing/agent-governance/tenant-isolation/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tenant-isolation/verification",
+      "segments": [
+        "agent-governance",
+        "tenant-isolation",
+        "verification"
+      ],
+      "contentDigest": "sha256:4b5beeea58f07de4431bdda2b85eec42146af78cadbfb146e41a8efcd81d9a56"
+    },
+    {
+      "candidateId": "cand_ecff0e1d07982edf497cd776",
+      "path": "/clearing/agent-governance/tool-authorization/architecture",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/architecture",
+      "segments": [
+        "agent-governance",
+        "tool-authorization",
+        "architecture"
+      ],
+      "contentDigest": "sha256:32d34f10034d1c848b68eef71c3a93d454fa2650b4e7bfb389046749bf677140"
+    },
+    {
+      "candidateId": "cand_d98b6bacc48fba6c93f7e094",
+      "path": "/clearing/agent-governance/tool-authorization/controls",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/controls",
+      "segments": [
+        "agent-governance",
+        "tool-authorization",
+        "controls"
+      ],
+      "contentDigest": "sha256:cf7835d4d9fa969a0a1101df70b0fe53742adb2a1d0800e6a14908454db78b22"
+    },
+    {
+      "candidateId": "cand_20da33096b4bf0cd8817d93d",
+      "path": "/clearing/agent-governance/tool-authorization/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/definition",
+      "segments": [
+        "agent-governance",
+        "tool-authorization",
+        "definition"
+      ],
+      "contentDigest": "sha256:234cc95d402fadec07c7faebb04bb535034722472580f8b123e5ba4fd6cf2676"
+    },
+    {
+      "candidateId": "cand_65e29e233a6650e62ff2565b",
+      "path": "/clearing/agent-governance/tool-authorization/implementation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/implementation",
+      "segments": [
+        "agent-governance",
+        "tool-authorization",
+        "implementation"
+      ],
+      "contentDigest": "sha256:b22d930d2d806c213bb867a26b6aff035043cebbdf7149492cfb18997bca0d6d"
+    },
+    {
+      "candidateId": "cand_5a7c51df1e3223dacf93e9d1",
+      "path": "/clearing/agent-governance/tool-authorization/threats",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/threats",
+      "segments": [
+        "agent-governance",
+        "tool-authorization",
+        "threats"
+      ],
+      "contentDigest": "sha256:11c1ab5ba6be59a964ff1ce6e0c4cd0de46e0675401c6fcb3835958830b54a0a"
+    },
+    {
+      "candidateId": "cand_e2fe7f6b4b5867c5d29e83b8",
+      "path": "/clearing/agent-governance/tool-authorization/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/verification",
+      "segments": [
+        "agent-governance",
+        "tool-authorization",
+        "verification"
+      ],
+      "contentDigest": "sha256:f412c278c66fcba125ba6083eed36d09de6a33215d4bea4ad0ad829bf68d86c9"
+    },
+    {
+      "candidateId": "cand_1c9d3667980c13b267aeed2b",
+      "path": "/clearing/astrology-infrastructure/ayanamsha-selection/calculation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/ayanamsha-selection/calculation",
+      "segments": [
+        "astrology-infrastructure",
+        "ayanamsha-selection",
+        "calculation"
+      ],
+      "contentDigest": "sha256:73f9d96942f2323472e849fcb7499729e52308ecfab09ae71276c4faabe156b9"
+    },
+    {
+      "candidateId": "cand_962f59babb7d0e5409362df8",
+      "path": "/clearing/astrology-infrastructure/ayanamsha-selection/evaluation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/ayanamsha-selection/evaluation",
+      "segments": [
+        "astrology-infrastructure",
+        "ayanamsha-selection",
+        "evaluation"
+      ],
+      "contentDigest": "sha256:6ba40bfe986d77c302a070837598947db138607ad3f03407b6db8a442fd28d7e"
+    },
+    {
+      "candidateId": "cand_46ff303c924e1493a2da68d4",
+      "path": "/clearing/astrology-infrastructure/ayanamsha-selection/input-contract",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/ayanamsha-selection/input-contract",
+      "segments": [
+        "astrology-infrastructure",
+        "ayanamsha-selection",
+        "input-contract"
+      ],
+      "contentDigest": "sha256:f51fee804fbdf090505f3c8095279495c67d6c116d8cb6f41903a6d4ac479963"
+    },
+    {
+      "candidateId": "cand_a5fce4a3553303ab8865955a",
+      "path": "/clearing/astrology-infrastructure/ayanamsha-selection/uncertainty",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/ayanamsha-selection/uncertainty",
+      "segments": [
+        "astrology-infrastructure",
+        "ayanamsha-selection",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:07d6a0b633d3c0000e725114f4ffb5617a1dcd1c22312ccf57f8cdae3a9e8f94"
+    },
+    {
+      "candidateId": "cand_51da1c90e6ef2fff6d0a9a49",
+      "path": "/clearing/astrology-infrastructure/ayanamsha-selection/workflow",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/ayanamsha-selection/workflow",
+      "segments": [
+        "astrology-infrastructure",
+        "ayanamsha-selection",
+        "workflow"
+      ],
+      "contentDigest": "sha256:123759442f32f6b5c96c7a6ea91806d792cd6e1a4dcafcb5d162fe4210ff0461"
+    },
+    {
+      "candidateId": "cand_83ac4a9d5996957e7372c194",
+      "path": "/clearing/astrology-infrastructure/birth-time-input/calculation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/birth-time-input/calculation",
+      "segments": [
+        "astrology-infrastructure",
+        "birth-time-input",
+        "calculation"
+      ],
+      "contentDigest": "sha256:f4590174eb3358a57f89c7d5a6197e7059f5bfe46a436901ed5c55eb58a49998"
+    },
+    {
+      "candidateId": "cand_aa50aab9eb54d0282fd69b88",
+      "path": "/clearing/astrology-infrastructure/birth-time-input/evaluation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/birth-time-input/evaluation",
+      "segments": [
+        "astrology-infrastructure",
+        "birth-time-input",
+        "evaluation"
+      ],
+      "contentDigest": "sha256:dd7dcd1946641f9d1e0ab8531bfd55ecd243b30a5d891ac6bc82a63cc749873e"
+    },
+    {
+      "candidateId": "cand_80019429ad1a9bf95876f4e7",
+      "path": "/clearing/astrology-infrastructure/birth-time-input/input-contract",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/birth-time-input/input-contract",
+      "segments": [
+        "astrology-infrastructure",
+        "birth-time-input",
+        "input-contract"
+      ],
+      "contentDigest": "sha256:cf934b9a7f336b9ccc4e2269667321df9b7488d19f8fed436d8cb3ad2da07190"
+    },
+    {
+      "candidateId": "cand_277f181b88d268a4655af4d9",
+      "path": "/clearing/astrology-infrastructure/birth-time-input/uncertainty",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/birth-time-input/uncertainty",
+      "segments": [
+        "astrology-infrastructure",
+        "birth-time-input",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:707e903c52018c611b37dbe07b2ca87e761fc021d3f8b2b8f8893b6e02b39566"
+    },
+    {
+      "candidateId": "cand_711df87fadf5cdbf6a3352bb",
+      "path": "/clearing/astrology-infrastructure/birth-time-input/workflow",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/birth-time-input/workflow",
+      "segments": [
+        "astrology-infrastructure",
+        "birth-time-input",
+        "workflow"
+      ],
+      "contentDigest": "sha256:929f6c82a1f9cae0e7d12dee1bb11189d617f6c1d3cbcf23d41bc4640658627b"
+    },
+    {
+      "candidateId": "cand_1e0a7b06b8bf0364130bbb17",
+      "path": "/clearing/astrology-infrastructure/ephemeris-selection/calculation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/ephemeris-selection/calculation",
+      "segments": [
+        "astrology-infrastructure",
+        "ephemeris-selection",
+        "calculation"
+      ],
+      "contentDigest": "sha256:942101811cee82896ec5d25e2624b99773186ba6d225534d9337fee54757ed2e"
+    },
+    {
+      "candidateId": "cand_730ad17f4eccbc55bc194fca",
+      "path": "/clearing/astrology-infrastructure/ephemeris-selection/evaluation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/ephemeris-selection/evaluation",
+      "segments": [
+        "astrology-infrastructure",
+        "ephemeris-selection",
+        "evaluation"
+      ],
+      "contentDigest": "sha256:2ad261e6686aaef865eafc8b417633c4db5b2327dd3cfd9214fe556e67f31185"
+    },
+    {
+      "candidateId": "cand_80f60a8e2e4ad2f698140257",
+      "path": "/clearing/astrology-infrastructure/ephemeris-selection/input-contract",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/ephemeris-selection/input-contract",
+      "segments": [
+        "astrology-infrastructure",
+        "ephemeris-selection",
+        "input-contract"
+      ],
+      "contentDigest": "sha256:3ac0a3b8e605a49c4528269d9af90c1b3f7a65e8fbdc1cadb7eeec091ad73b72"
+    },
+    {
+      "candidateId": "cand_b9cc6bfefa6f7d65134dd1f8",
+      "path": "/clearing/astrology-infrastructure/ephemeris-selection/uncertainty",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/ephemeris-selection/uncertainty",
+      "segments": [
+        "astrology-infrastructure",
+        "ephemeris-selection",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:b3568bf5269da86861c53e4266e5b4d5cde3ad85039dabdd4b940ba425d0bc5c"
+    },
+    {
+      "candidateId": "cand_1be7fd7fa256200746cdb292",
+      "path": "/clearing/astrology-infrastructure/ephemeris-selection/workflow",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/ephemeris-selection/workflow",
+      "segments": [
+        "astrology-infrastructure",
+        "ephemeris-selection",
+        "workflow"
+      ],
+      "contentDigest": "sha256:02733b50586050cfb5b14d315e8710d8d646eca470ec33e93eb4ca6cce2a8ca8"
+    },
+    {
+      "candidateId": "cand_7d667b10af6a8472af9ddad9",
+      "path": "/clearing/astrology-infrastructure/falsifiability/calculation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/falsifiability/calculation",
+      "segments": [
+        "astrology-infrastructure",
+        "falsifiability",
+        "calculation"
+      ],
+      "contentDigest": "sha256:a9f4170ccdb4cd135f0a8150dec4865a26c38f08bcaa3a873c6e953f1326adbc"
+    },
+    {
+      "candidateId": "cand_9538470b2c6fba384832a29f",
+      "path": "/clearing/astrology-infrastructure/falsifiability/evaluation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/falsifiability/evaluation",
+      "segments": [
+        "astrology-infrastructure",
+        "falsifiability",
+        "evaluation"
+      ],
+      "contentDigest": "sha256:d10668fe1629c3d3542329f3ff2066f4181b56bcfe8fd3679c1fdd38da1c9640"
+    },
+    {
+      "candidateId": "cand_46ba671c42d46ad2c4f7cbb0",
+      "path": "/clearing/astrology-infrastructure/falsifiability/uncertainty",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/falsifiability/uncertainty",
+      "segments": [
+        "astrology-infrastructure",
+        "falsifiability",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:957472e08cc539c8a30a545978361c58e6bb5b460a397e93438453a3e1464e9e"
+    },
+    {
+      "candidateId": "cand_60face22febbaa88bf1863bd",
+      "path": "/clearing/astrology-infrastructure/falsifiability/workflow",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/falsifiability/workflow",
+      "segments": [
+        "astrology-infrastructure",
+        "falsifiability",
+        "workflow"
+      ],
+      "contentDigest": "sha256:0491e00ef964f5f7ff962c3d8b8e0091382494e6c9cdb9619ef135ee7f69d3df"
+    },
+    {
+      "candidateId": "cand_b73eb0bd0123d31b76a8d36e",
+      "path": "/clearing/astrology-infrastructure/house-system-selection/uncertainty",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/house-system-selection/uncertainty",
+      "segments": [
+        "astrology-infrastructure",
+        "house-system-selection",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:4462c2145aefb4801a12b57a8a0af96bb614941d79fdff9b2a03360edb5c2c96"
+    },
+    {
+      "candidateId": "cand_4a3d899e82d8b9ca0292768a",
+      "path": "/clearing/astrology-infrastructure/interpretation-boundaries/evaluation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/interpretation-boundaries/evaluation",
+      "segments": [
+        "astrology-infrastructure",
+        "interpretation-boundaries",
+        "evaluation"
+      ],
+      "contentDigest": "sha256:2ef323a80bd4e11ca74e7fa50befb290e9ad14abd07ec381239c790032a87cf3"
+    },
+    {
+      "candidateId": "cand_0a0e26322882c736ed3eafb1",
+      "path": "/clearing/astrology-infrastructure/location-input/calculation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/location-input/calculation",
+      "segments": [
+        "astrology-infrastructure",
+        "location-input",
+        "calculation"
+      ],
+      "contentDigest": "sha256:8630037e34969ff2537f09c3532c6c3e9c6f508986c5cc7b60a83e679290b207"
+    },
+    {
+      "candidateId": "cand_85eb206d72e9a0cf2385c845",
+      "path": "/clearing/astrology-infrastructure/location-input/evaluation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/location-input/evaluation",
+      "segments": [
+        "astrology-infrastructure",
+        "location-input",
+        "evaluation"
+      ],
+      "contentDigest": "sha256:c3d724d3e36977c6bb698e6dc542ef271b625d4cbff6b7e6d644688c5147115d"
+    },
+    {
+      "candidateId": "cand_35ba93aa68d0183e160c70d2",
+      "path": "/clearing/astrology-infrastructure/location-input/input-contract",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/location-input/input-contract",
+      "segments": [
+        "astrology-infrastructure",
+        "location-input",
+        "input-contract"
+      ],
+      "contentDigest": "sha256:42404278c70e461cb6244e9a480e790761a871f968c631ba504ce89523bb8112"
+    },
+    {
+      "candidateId": "cand_2b7ef9a79d52ff4038bc232c",
+      "path": "/clearing/astrology-infrastructure/location-input/uncertainty",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/location-input/uncertainty",
+      "segments": [
+        "astrology-infrastructure",
+        "location-input",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:6b0905bb4d3ef3432b07fa081ba76239d840437104b69161e3fee9fbc295781b"
+    },
+    {
+      "candidateId": "cand_19dcd521066100b2c55188ff",
+      "path": "/clearing/astrology-infrastructure/location-input/workflow",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/location-input/workflow",
+      "segments": [
+        "astrology-infrastructure",
+        "location-input",
+        "workflow"
+      ],
+      "contentDigest": "sha256:32e3b48bfdd256fb455eaf0fc28ef6fda362587b6f2f413fa7917ec5481394b4"
+    },
+    {
+      "candidateId": "cand_eda6d573a9e1fccf24ffb149",
+      "path": "/clearing/astrology-infrastructure/missing-inputs/calculation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/missing-inputs/calculation",
+      "segments": [
+        "astrology-infrastructure",
+        "missing-inputs",
+        "calculation"
+      ],
+      "contentDigest": "sha256:5238a7f736b85519087653a75c1dd3df74bde7c84ca9fb5c19c419e26423c945"
+    },
+    {
+      "candidateId": "cand_66acaea34930a523bb1bd6fb",
+      "path": "/clearing/astrology-infrastructure/missing-inputs/evaluation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/missing-inputs/evaluation",
+      "segments": [
+        "astrology-infrastructure",
+        "missing-inputs",
+        "evaluation"
+      ],
+      "contentDigest": "sha256:6f4742f76c242334661e3d59842872684948cca5bba054cccaab938dc0ef7c33"
+    },
+    {
+      "candidateId": "cand_1099c74ec0266d8543094eb0",
+      "path": "/clearing/astrology-infrastructure/missing-inputs/input-contract",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/missing-inputs/input-contract",
+      "segments": [
+        "astrology-infrastructure",
+        "missing-inputs",
+        "input-contract"
+      ],
+      "contentDigest": "sha256:cd0cbe04e054ca58213fde881451b9b92da6e5771beb7a233ef7490c650db84e"
+    },
+    {
+      "candidateId": "cand_3b128ca21fd94ea8bfaf7261",
+      "path": "/clearing/astrology-infrastructure/missing-inputs/uncertainty",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/missing-inputs/uncertainty",
+      "segments": [
+        "astrology-infrastructure",
+        "missing-inputs",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:78322467f71c304fe0e4516481666c6648d31fcc79713c2b9b15bdbfa358fe6e"
+    },
+    {
+      "candidateId": "cand_a96af15c27aedb954ece6cca",
+      "path": "/clearing/astrology-infrastructure/missing-inputs/workflow",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/missing-inputs/workflow",
+      "segments": [
+        "astrology-infrastructure",
+        "missing-inputs",
+        "workflow"
+      ],
+      "contentDigest": "sha256:1848e9033e770fd403a391ac3a16398b6f688d2c652380547b7aade06acf538c"
+    },
+    {
+      "candidateId": "cand_b8a14f884ac7c676471da05d",
+      "path": "/clearing/astrology-infrastructure/prospective-registration/calculation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/prospective-registration/calculation",
+      "segments": [
+        "astrology-infrastructure",
+        "prospective-registration",
+        "calculation"
+      ],
+      "contentDigest": "sha256:af65de3d0fbfe2c6fa9a37a904e31581669e529c3ba3777d00539b8089fd8c3f"
+    },
+    {
+      "candidateId": "cand_180f4f6f63bf94d88cc2b84b",
+      "path": "/clearing/astrology-infrastructure/prospective-registration/evaluation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/prospective-registration/evaluation",
+      "segments": [
+        "astrology-infrastructure",
+        "prospective-registration",
+        "evaluation"
+      ],
+      "contentDigest": "sha256:9a6ae5b8748c5a6e5f4fe38d0df2429c4e3acc3537b73821319098c4538e3575"
+    },
+    {
+      "candidateId": "cand_803fb336a405c18731ff6db3",
+      "path": "/clearing/astrology-infrastructure/prospective-registration/input-contract",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/prospective-registration/input-contract",
+      "segments": [
+        "astrology-infrastructure",
+        "prospective-registration",
+        "input-contract"
+      ],
+      "contentDigest": "sha256:620669a9dd658783778b11ae165e5a1e1fdac3299e413f2c4951ae69e1cbc5a8"
+    },
+    {
+      "candidateId": "cand_46b510b7543ff01003a24686",
+      "path": "/clearing/astrology-infrastructure/prospective-registration/uncertainty",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/prospective-registration/uncertainty",
+      "segments": [
+        "astrology-infrastructure",
+        "prospective-registration",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:61f54f12c805ad4b58a0f4eb83ead33152ce530fa7f0fc626b49f41458cdc505"
+    },
+    {
+      "candidateId": "cand_be09fd60e0d9f432efdb3a90",
+      "path": "/clearing/astrology-infrastructure/prospective-registration/workflow",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/prospective-registration/workflow",
+      "segments": [
+        "astrology-infrastructure",
+        "prospective-registration",
+        "workflow"
+      ],
+      "contentDigest": "sha256:4085e4d8ea6012f83fc923fa89f9190555c96f3d949b0ad6e84af7f43733b668"
+    },
+    {
+      "candidateId": "cand_0238873d501555a2dd86395e",
+      "path": "/clearing/astrology-infrastructure/rectification-limits/calculation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/rectification-limits/calculation",
+      "segments": [
+        "astrology-infrastructure",
+        "rectification-limits",
+        "calculation"
+      ],
+      "contentDigest": "sha256:decf05c6e4f204a530d3c981521ff46855bdc08307b6b34e1906a065eb99b9b9"
+    },
+    {
+      "candidateId": "cand_ab024531e5e1d54fde4f3596",
+      "path": "/clearing/astrology-infrastructure/rectification-limits/evaluation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/rectification-limits/evaluation",
+      "segments": [
+        "astrology-infrastructure",
+        "rectification-limits",
+        "evaluation"
+      ],
+      "contentDigest": "sha256:1a88695837c99576124ead51ce587ffb0b7066b4c392e55e1d0a23543066a42f"
+    },
+    {
+      "candidateId": "cand_5f63259a66c0342933da9ca7",
+      "path": "/clearing/astrology-infrastructure/rectification-limits/input-contract",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/rectification-limits/input-contract",
+      "segments": [
+        "astrology-infrastructure",
+        "rectification-limits",
+        "input-contract"
+      ],
+      "contentDigest": "sha256:c31f8d8fb4b3b2782d8f28cd8b093c2abbb1737c31a57b88d77c8a601ae5a6f1"
+    },
+    {
+      "candidateId": "cand_eeac57417a16ae87371ffe42",
+      "path": "/clearing/astrology-infrastructure/rectification-limits/uncertainty",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/rectification-limits/uncertainty",
+      "segments": [
+        "astrology-infrastructure",
+        "rectification-limits",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:0b296ebf6b6082102ec151e24cc4a4979bb161e3037eebdaf4aa3317336b96d2"
+    },
+    {
+      "candidateId": "cand_0a009769503dcff55ab1e951",
+      "path": "/clearing/astrology-infrastructure/rectification-limits/workflow",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/rectification-limits/workflow",
+      "segments": [
+        "astrology-infrastructure",
+        "rectification-limits",
+        "workflow"
+      ],
+      "contentDigest": "sha256:576b0072609e6173d2adbcb5245dc092d5d1fbaa4d675b108c5a35bec38b2049"
+    },
+    {
+      "candidateId": "cand_92f15e207d7e31d1f3669e63",
+      "path": "/clearing/astrology-infrastructure/timezone-resolution/calculation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/timezone-resolution/calculation",
+      "segments": [
+        "astrology-infrastructure",
+        "timezone-resolution",
+        "calculation"
+      ],
+      "contentDigest": "sha256:019749dfc9e11c876bc1cff23edeab1ff017d1813d8df47066f6624be1d7ed6a"
+    },
+    {
+      "candidateId": "cand_0174f8a55d7f0ae00516b515",
+      "path": "/clearing/astrology-infrastructure/timezone-resolution/evaluation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/timezone-resolution/evaluation",
+      "segments": [
+        "astrology-infrastructure",
+        "timezone-resolution",
+        "evaluation"
+      ],
+      "contentDigest": "sha256:1966742a448cf9f973c0d274fb975ca1d482b19c9701350e395bb8811af944cc"
+    },
+    {
+      "candidateId": "cand_a52acdd426b5a676078d8213",
+      "path": "/clearing/astrology-infrastructure/timezone-resolution/input-contract",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/timezone-resolution/input-contract",
+      "segments": [
+        "astrology-infrastructure",
+        "timezone-resolution",
+        "input-contract"
+      ],
+      "contentDigest": "sha256:8ae576c40d6313c0915a82f5496ed55e238ab49c622deb5a8ca9c867c3a5fa80"
+    },
+    {
+      "candidateId": "cand_15082f84611d893cf47f8ff9",
+      "path": "/clearing/astrology-infrastructure/timezone-resolution/uncertainty",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/timezone-resolution/uncertainty",
+      "segments": [
+        "astrology-infrastructure",
+        "timezone-resolution",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:1789396b5e5445286c0d88e1c8c065138e3f17a233dae4045ca1a121b80388a8"
+    },
+    {
+      "candidateId": "cand_85d7cdbdbd90391f24ef35ed",
+      "path": "/clearing/astrology-infrastructure/timezone-resolution/workflow",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/timezone-resolution/workflow",
+      "segments": [
+        "astrology-infrastructure",
+        "timezone-resolution",
+        "workflow"
+      ],
+      "contentDigest": "sha256:0e72cb01f3ffba2d4dc08d4dbdf9991e3f409ffb17b743e032038ab09ce5339d"
+    },
+    {
+      "candidateId": "cand_f9c543b5ef56fac570a7ff5a",
+      "path": "/clearing/astrology-infrastructure/tradition-comparison/evaluation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/tradition-comparison/evaluation",
+      "segments": [
+        "astrology-infrastructure",
+        "tradition-comparison",
+        "evaluation"
+      ],
+      "contentDigest": "sha256:80ae2c8a26d64c5a1b2344effc9007c32b23d700cd93dfeab0c4d00e2f3e6f82"
+    },
+    {
+      "candidateId": "cand_aa4d48198fe1f4ffc5e86d61",
+      "path": "/clearing/astrology-infrastructure/tradition-comparison/uncertainty",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/tradition-comparison/uncertainty",
+      "segments": [
+        "astrology-infrastructure",
+        "tradition-comparison",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:9090f8cc98f122a62608cf1c6c2b9a9c775a8fc0342f829b40a94b7a7b6314f8"
+    },
+    {
+      "candidateId": "cand_f75aeec508175cb7b63fee43",
+      "path": "/clearing/astrology-infrastructure/uncertainty-bounds/calculation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/uncertainty-bounds/calculation",
+      "segments": [
+        "astrology-infrastructure",
+        "uncertainty-bounds",
+        "calculation"
+      ],
+      "contentDigest": "sha256:f7e8e51d5f22e26c611ac6d55b76746ff4510ca70c8fbf7bd2691d953a35fa57"
+    },
+    {
+      "candidateId": "cand_cb9b4f8bb01cb82963ef869f",
+      "path": "/clearing/astrology-infrastructure/uncertainty-bounds/evaluation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/uncertainty-bounds/evaluation",
+      "segments": [
+        "astrology-infrastructure",
+        "uncertainty-bounds",
+        "evaluation"
+      ],
+      "contentDigest": "sha256:d6e04f29fcd7a252de8f2ecd59a22c46cba1e4dbcfaff24145ba401de953ed72"
+    },
+    {
+      "candidateId": "cand_b954b83f5ddfe3d7f67ea97f",
+      "path": "/clearing/astrology-infrastructure/uncertainty-bounds/input-contract",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/uncertainty-bounds/input-contract",
+      "segments": [
+        "astrology-infrastructure",
+        "uncertainty-bounds",
+        "input-contract"
+      ],
+      "contentDigest": "sha256:c8f5bd43ff8f378c8ea3361770992e0f16a6f777102ae15d768c71d5977129ee"
+    },
+    {
+      "candidateId": "cand_a7f5f832dcaee4664727acfb",
+      "path": "/clearing/astrology-infrastructure/uncertainty-bounds/uncertainty",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/uncertainty-bounds/uncertainty",
+      "segments": [
+        "astrology-infrastructure",
+        "uncertainty-bounds",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:b223ff7616cb267977942310d9c88118d9b6be08e4139f751fade0f92eb65b70"
+    },
+    {
+      "candidateId": "cand_620dae3dad53a00b13312c91",
+      "path": "/clearing/astrology-infrastructure/uncertainty-bounds/workflow",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/uncertainty-bounds/workflow",
+      "segments": [
+        "astrology-infrastructure",
+        "uncertainty-bounds",
+        "workflow"
+      ],
+      "contentDigest": "sha256:5cde06bc6a8702c31946d544d1ab2c0e74eb659526bf03432edd4ea2a8d1013e"
+    },
+    {
+      "candidateId": "cand_0a6afb1dff13f2220f208adb",
+      "path": "/clearing/book-concepts/biological-digital-sovereignty/application",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/biological-digital-sovereignty/application",
+      "segments": [
+        "book-concepts",
+        "biological-digital-sovereignty",
+        "application"
+      ],
+      "contentDigest": "sha256:095e3673afeef3ddeda3a50ac23c6a13787ccb54d741bef083ef9eb070b86f2d"
+    },
+    {
+      "candidateId": "cand_244e953a2da9394ffeea19c2",
+      "path": "/clearing/book-concepts/biological-digital-sovereignty/argument",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/biological-digital-sovereignty/argument",
+      "segments": [
+        "book-concepts",
+        "biological-digital-sovereignty",
+        "argument"
+      ],
+      "contentDigest": "sha256:b3bf1d1d4169ef06680701588b41a5335d9a5406079942883cc3de453a1d0d08"
+    },
+    {
+      "candidateId": "cand_a8d25b8eeb688325366b5944",
+      "path": "/clearing/book-concepts/biological-digital-sovereignty/critique",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/biological-digital-sovereignty/critique",
+      "segments": [
+        "book-concepts",
+        "biological-digital-sovereignty",
+        "critique"
+      ],
+      "contentDigest": "sha256:b0b2972434c03c07ab5f82bb5c1bf90583a5532a54fc4d8a0a83f206c848b36b"
+    },
+    {
+      "candidateId": "cand_26dfb1372bb4fe3d9c354fc2",
+      "path": "/clearing/book-concepts/biological-digital-sovereignty/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/biological-digital-sovereignty/definition",
+      "segments": [
+        "book-concepts",
+        "biological-digital-sovereignty",
+        "definition"
+      ],
+      "contentDigest": "sha256:6345e51d330b176150dba2d274cf6f8272fc4e21b4e7c4cfbfb99a67f5420688"
+    },
+    {
+      "candidateId": "cand_4684712244de8ad23a6b7c8f",
+      "path": "/clearing/book-concepts/biological-digital-sovereignty/genealogy",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/biological-digital-sovereignty/genealogy",
+      "segments": [
+        "book-concepts",
+        "biological-digital-sovereignty",
+        "genealogy"
+      ],
+      "contentDigest": "sha256:36fb7a18bd153c192dea8a0fe3b4d8e6352f076840de6fb0ae294709b880f896"
+    },
+    {
+      "candidateId": "cand_37a01d04eaaa78bf7b5ca110",
+      "path": "/clearing/book-concepts/civilizational-computation/application",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/civilizational-computation/application",
+      "segments": [
+        "book-concepts",
+        "civilizational-computation",
+        "application"
+      ],
+      "contentDigest": "sha256:7485f3329470e27e60d8091b3ae5e229634985bed1ce0bc9529cfd2899a63087"
+    },
+    {
+      "candidateId": "cand_3f07cdb498cdd43346866025",
+      "path": "/clearing/book-concepts/civilizational-computation/critique",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/civilizational-computation/critique",
+      "segments": [
+        "book-concepts",
+        "civilizational-computation",
+        "critique"
+      ],
+      "contentDigest": "sha256:4c0d642acdc1d9b09f03939b22d6a757271415f46c1f2050834abdd3d9cd318f"
+    },
+    {
+      "candidateId": "cand_9577d6a853d80d8d1b99901c",
+      "path": "/clearing/book-concepts/civilizational-computation/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/civilizational-computation/definition",
+      "segments": [
+        "book-concepts",
+        "civilizational-computation",
+        "definition"
+      ],
+      "contentDigest": "sha256:d4d0917c62ac1a97f95eb28ba990b5c6644ff2e6c86fdd227d07557afdc8f890"
+    },
+    {
+      "candidateId": "cand_37b754948f885c9dbcd7807c",
+      "path": "/clearing/book-concepts/cosmic-recursion/application",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/cosmic-recursion/application",
+      "segments": [
+        "book-concepts",
+        "cosmic-recursion",
+        "application"
+      ],
+      "contentDigest": "sha256:1e1aebe6a41becf8c192f0d2f42eac6772a8513f6dba6bbf3000066a84d407a4"
+    },
+    {
+      "candidateId": "cand_2488789403cf6a85a0df1c8e",
+      "path": "/clearing/book-concepts/cosmic-recursion/argument",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/cosmic-recursion/argument",
+      "segments": [
+        "book-concepts",
+        "cosmic-recursion",
+        "argument"
+      ],
+      "contentDigest": "sha256:9906578c5c6ed16be93e0031778c34fe085745ea431aacbee248c4d8a0cac4c4"
+    },
+    {
+      "candidateId": "cand_315000baae9b4c35d24ece4c",
+      "path": "/clearing/book-concepts/cosmic-recursion/critique",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/cosmic-recursion/critique",
+      "segments": [
+        "book-concepts",
+        "cosmic-recursion",
+        "critique"
+      ],
+      "contentDigest": "sha256:e26a5748379382ec94dcd8a8bbb125bd2a46d8f8d901ea37527fa039ad465679"
+    },
+    {
+      "candidateId": "cand_819e1b3915793291b26b1fa1",
+      "path": "/clearing/book-concepts/cosmic-recursion/genealogy",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/cosmic-recursion/genealogy",
+      "segments": [
+        "book-concepts",
+        "cosmic-recursion",
+        "genealogy"
+      ],
+      "contentDigest": "sha256:0ba94c27442b67f76a2a10cfcc791dd3d4164c9b01445808a6aef074a03b3ffd"
+    },
+    {
+      "candidateId": "cand_19a588cafe15ea3f03f66d61",
+      "path": "/clearing/book-concepts/epistemic-clearance/application",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/epistemic-clearance/application",
+      "segments": [
+        "book-concepts",
+        "epistemic-clearance",
+        "application"
+      ],
+      "contentDigest": "sha256:502d2a8e6459023ac3feb256b5be26cdcfa3bea758188fe3c7a7e3085dae4312"
+    },
+    {
+      "candidateId": "cand_4d6f8f6f83e05165207aa8c5",
+      "path": "/clearing/book-concepts/epistemic-clearance/critique",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/epistemic-clearance/critique",
+      "segments": [
+        "book-concepts",
+        "epistemic-clearance",
+        "critique"
+      ],
+      "contentDigest": "sha256:d57c8429fc481f84e61beb2076184190845da6b23fe6250fc0b58afd2d67596d"
+    },
+    {
+      "candidateId": "cand_ce94809393c73445595e12a0",
+      "path": "/clearing/book-concepts/epistemic-clearance/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/epistemic-clearance/definition",
+      "segments": [
+        "book-concepts",
+        "epistemic-clearance",
+        "definition"
+      ],
+      "contentDigest": "sha256:23131e7cdec3ada9762ced5b7ae32cbbd7b9965761bcce974e83b831ecae2c70"
+    },
+    {
+      "candidateId": "cand_2cf8c75a0e044a008c8d054a",
+      "path": "/clearing/book-concepts/governed-autonomy/application",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/governed-autonomy/application",
+      "segments": [
+        "book-concepts",
+        "governed-autonomy",
+        "application"
+      ],
+      "contentDigest": "sha256:359d4355e96826835cc8f173d16adf608e05d2b6c08453b85547f01b766562c7"
+    },
+    {
+      "candidateId": "cand_5e48e9438443367a710d9611",
+      "path": "/clearing/book-concepts/governed-autonomy/argument",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/governed-autonomy/argument",
+      "segments": [
+        "book-concepts",
+        "governed-autonomy",
+        "argument"
+      ],
+      "contentDigest": "sha256:29a9dfd841630758c60cb217d5bd50656ade4c0982198deb3c358c2e62be474e"
+    },
+    {
+      "candidateId": "cand_2b46289c62489adc9f1008f6",
+      "path": "/clearing/book-concepts/governed-autonomy/critique",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/governed-autonomy/critique",
+      "segments": [
+        "book-concepts",
+        "governed-autonomy",
+        "critique"
+      ],
+      "contentDigest": "sha256:3a33620f58f6b17c8a6f9624cf335afe7efede706030fb0db0ed54cd9d7ebabe"
+    },
+    {
+      "candidateId": "cand_b9064574de6632624005891f",
+      "path": "/clearing/book-concepts/governed-autonomy/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/governed-autonomy/definition",
+      "segments": [
+        "book-concepts",
+        "governed-autonomy",
+        "definition"
+      ],
+      "contentDigest": "sha256:9d8f41fdd4ffc9cb48533fefdd0c4d67b3bb25c92ce4a7e2238aa29c54f25ec9"
+    },
+    {
+      "candidateId": "cand_c65161ded4ccff11bc17ae48",
+      "path": "/clearing/book-concepts/governed-autonomy/genealogy",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/governed-autonomy/genealogy",
+      "segments": [
+        "book-concepts",
+        "governed-autonomy",
+        "genealogy"
+      ],
+      "contentDigest": "sha256:6cf3a0095b67bd253c7583d443e3f28d970cb2db39ace5aaeef30f4b936f1689"
+    },
+    {
+      "candidateId": "cand_8ba8b628bdadc7a34d8d5084",
+      "path": "/clearing/book-concepts/maha-principle/application",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/maha-principle/application",
+      "segments": [
+        "book-concepts",
+        "maha-principle",
+        "application"
+      ],
+      "contentDigest": "sha256:27b7f7b20eabc14c02b7fb51ed286738f7f344a79e8331498f9e70ef9d604d10"
+    },
+    {
+      "candidateId": "cand_a2a3ea964ec1e15989c1dc37",
+      "path": "/clearing/book-concepts/maha-principle/argument",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/maha-principle/argument",
+      "segments": [
+        "book-concepts",
+        "maha-principle",
+        "argument"
+      ],
+      "contentDigest": "sha256:2313dfcfa2e780a08236f597b777c78784f509f6dd993a1aa4bb9bcaa5d82b63"
+    },
+    {
+      "candidateId": "cand_dacd8a33b1bab834bb751444",
+      "path": "/clearing/book-concepts/maha-principle/critique",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/maha-principle/critique",
+      "segments": [
+        "book-concepts",
+        "maha-principle",
+        "critique"
+      ],
+      "contentDigest": "sha256:4ebc1f9feca40c7346c0e8d83cf8b47d7dee1097ee64d9685391f414cc49aebe"
+    },
+    {
+      "candidateId": "cand_412c4974551cd8696288c6b6",
+      "path": "/clearing/book-concepts/maha-principle/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/maha-principle/definition",
+      "segments": [
+        "book-concepts",
+        "maha-principle",
+        "definition"
+      ],
+      "contentDigest": "sha256:04d603058b1775900e5be211a59c7f3e6a5e687ef11bc0dfd99ae49dee567288"
+    },
+    {
+      "candidateId": "cand_6137dd4e9d5c921ca7503623",
+      "path": "/clearing/book-concepts/maha-principle/genealogy",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/maha-principle/genealogy",
+      "segments": [
+        "book-concepts",
+        "maha-principle",
+        "genealogy"
+      ],
+      "contentDigest": "sha256:f96b1167bd43fc8e3c8d6ee6548f6733cc7808b1b20d516fc62b5bca3ced8ef9"
+    },
+    {
+      "candidateId": "cand_5dac588e37329d06c8fb8439",
+      "path": "/clearing/book-concepts/mental-sovereignty/application",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/mental-sovereignty/application",
+      "segments": [
+        "book-concepts",
+        "mental-sovereignty",
+        "application"
+      ],
+      "contentDigest": "sha256:3a7555d373f03a0b26534a6fce6f7e4a49867940ad6db6c8bcfe1bc18548c201"
+    },
+    {
+      "candidateId": "cand_59dc64c248065efd396bc6fe",
+      "path": "/clearing/book-concepts/mental-sovereignty/argument",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/mental-sovereignty/argument",
+      "segments": [
+        "book-concepts",
+        "mental-sovereignty",
+        "argument"
+      ],
+      "contentDigest": "sha256:be3388b70b3d32695dfc987010eccc2817d21b48c182991585bd0563a4640017"
+    },
+    {
+      "candidateId": "cand_57fd4244aa9bb5249f4e88a8",
+      "path": "/clearing/book-concepts/mental-sovereignty/critique",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/mental-sovereignty/critique",
+      "segments": [
+        "book-concepts",
+        "mental-sovereignty",
+        "critique"
+      ],
+      "contentDigest": "sha256:b58b2279e39bc7a5ad51ebf7cb73cbb62f8aa39615e26eeb6d094177c53d6a2d"
+    },
+    {
+      "candidateId": "cand_aad9f278fb806adeb8273c30",
+      "path": "/clearing/book-concepts/mental-sovereignty/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/mental-sovereignty/definition",
+      "segments": [
+        "book-concepts",
+        "mental-sovereignty",
+        "definition"
+      ],
+      "contentDigest": "sha256:2373ad06baed98edbdd962cc784929e1e7d3e25d7b17dde6d8747450a083f806"
+    },
+    {
+      "candidateId": "cand_cd87116d0be36523be9ba734",
+      "path": "/clearing/book-concepts/mental-sovereignty/genealogy",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/mental-sovereignty/genealogy",
+      "segments": [
+        "book-concepts",
+        "mental-sovereignty",
+        "genealogy"
+      ],
+      "contentDigest": "sha256:60700c7d80962889f2199be6fac33ae23ca8c4b883f82a86411c3495667950d3"
+    },
+    {
+      "candidateId": "cand_acd7e7e28b81291d86f124bf",
+      "path": "/clearing/book-concepts/recursive-institutions/application",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/recursive-institutions/application",
+      "segments": [
+        "book-concepts",
+        "recursive-institutions",
+        "application"
+      ],
+      "contentDigest": "sha256:1fcd60ddd8b5ecd8499013cf295bce8124b2c750a7233d3ddece148847bdb9f3"
+    },
+    {
+      "candidateId": "cand_5d298c1702d4949346480538",
+      "path": "/clearing/book-concepts/recursive-institutions/critique",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/recursive-institutions/critique",
+      "segments": [
+        "book-concepts",
+        "recursive-institutions",
+        "critique"
+      ],
+      "contentDigest": "sha256:4009d311a25ee58c021abdd613a088005fed1d6140067890cee419c9ce058dcb"
+    },
+    {
+      "candidateId": "cand_3b17670dfd56990c65226000",
+      "path": "/clearing/book-concepts/recursive-institutions/definition",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/recursive-institutions/definition",
+      "segments": [
+        "book-concepts",
+        "recursive-institutions",
+        "definition"
+      ],
+      "contentDigest": "sha256:04fd02c2d98408561e49a7508b08f4bbf8b9d443a7e6e0294ee9473a50adb51a"
+    },
+    {
+      "candidateId": "cand_a0748fc33473b6e0b3aea3de",
+      "path": "/clearing/deterministic-computation/calibration/machine-interface",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/calibration/machine-interface",
+      "segments": [
+        "deterministic-computation",
+        "calibration",
+        "machine-interface"
+      ],
+      "contentDigest": "sha256:b4a155a8ac13fabb1906843c852c4f45189585871b5f241fc5c33e7e0bc0dc16"
+    },
+    {
+      "candidateId": "cand_8db6d0af552656562b479eea",
+      "path": "/clearing/deterministic-computation/calibration/reproducibility",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/calibration/reproducibility",
+      "segments": [
+        "deterministic-computation",
+        "calibration",
+        "reproducibility"
+      ],
+      "contentDigest": "sha256:4b505f16f312b8906f63ff2b94bb8b1576531702be02eab2e7d592b6215934f1"
+    },
+    {
+      "candidateId": "cand_c4252562833f33cf3a3854e4",
+      "path": "/clearing/deterministic-computation/calibration/uncertainty",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/calibration/uncertainty",
+      "segments": [
+        "deterministic-computation",
+        "calibration",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:88699fb237aaa76f35f40ebba1112794ecc60192c25d765657f873c1aec1a0d4"
+    },
+    {
+      "candidateId": "cand_95cea133b500130734a74d16",
+      "path": "/clearing/deterministic-computation/calibration/worked-example",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/calibration/worked-example",
+      "segments": [
+        "deterministic-computation",
+        "calibration",
+        "worked-example"
+      ],
+      "contentDigest": "sha256:d1d63eead3291ba613c61468ef7617ec87b62a1c9681cac882f3614ffa2f7a28"
+    },
+    {
+      "candidateId": "cand_edbd25353f79b43c1924cc54",
+      "path": "/clearing/deterministic-computation/uncertainty-propagation/machine-interface",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/uncertainty-propagation/machine-interface",
+      "segments": [
+        "deterministic-computation",
+        "uncertainty-propagation",
+        "machine-interface"
+      ],
+      "contentDigest": "sha256:67b27b128b59992c69bf4145466998066c1f37bec4b3fb2e1d243a768c7534c8"
+    },
+    {
+      "candidateId": "cand_290d11e426d78bbb3e4932c5",
+      "path": "/clearing/deterministic-computation/uncertainty-propagation/reproducibility",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/uncertainty-propagation/reproducibility",
+      "segments": [
+        "deterministic-computation",
+        "uncertainty-propagation",
+        "reproducibility"
+      ],
+      "contentDigest": "sha256:2a178afcac8f5e9c3c81b561c74fb5a954b7a39679d2d8c7ad3ece9231ca0fd6"
+    },
+    {
+      "candidateId": "cand_1d96c6f07453f3a91c62e985",
+      "path": "/clearing/deterministic-computation/uncertainty-propagation/uncertainty",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/uncertainty-propagation/uncertainty",
+      "segments": [
+        "deterministic-computation",
+        "uncertainty-propagation",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:fb59c5ed0f4ac9ab6b3686ae3ab215ed20aa4e809a9a5dc85468664da2388ba3"
+    },
+    {
+      "candidateId": "cand_c649076b210c5ee56c40921e",
+      "path": "/clearing/deterministic-computation/uncertainty-propagation/worked-example",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/uncertainty-propagation/worked-example",
+      "segments": [
+        "deterministic-computation",
+        "uncertainty-propagation",
+        "worked-example"
+      ],
+      "contentDigest": "sha256:e2505b8e0a4fc0c0df0e74ec77c27a6edb0d1f8f1d3015b3abc36094941019e0"
+    },
+    {
+      "candidateId": "cand_d4e5b2c6ab09d0efb0cf18da",
+      "path": "/clearing/evidence-workflows/rights-basis/commercial-use",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/rights-basis/commercial-use",
+      "segments": [
+        "evidence-workflows",
+        "rights-basis",
+        "commercial-use"
+      ],
+      "contentDigest": "sha256:d9e45da5efff2be2c316a6752d63c33d99321b08c247ddd1c23adc06caeac4b1"
+    },
+    {
+      "candidateId": "cand_4cc36bf23125318d76871e24",
+      "path": "/clearing/evidence-workflows/rights-basis/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/rights-basis/verification",
+      "segments": [
+        "evidence-workflows",
+        "rights-basis",
+        "verification"
+      ],
+      "contentDigest": "sha256:de50d126d289e62eada5ae6ffd20c8dc3f708843c83ca156a53dca07b4a730d1"
+    },
+    {
+      "candidateId": "cand_ec51046262d16ae33f68402b",
+      "path": "/clearing/evidence-workflows/rights-basis/workflow",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/rights-basis/workflow",
+      "segments": [
+        "evidence-workflows",
+        "rights-basis",
+        "workflow"
+      ],
+      "contentDigest": "sha256:f007061091c0e851c6b8dcc59032577b14a777ee3b40c59569eca20c79abcdab"
+    },
+    {
+      "candidateId": "cand_9399ecb5994f8ff63f2145f0",
+      "path": "/clearing/evidence-workflows/source-identity/commercial-use",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/source-identity/commercial-use",
+      "segments": [
+        "evidence-workflows",
+        "source-identity",
+        "commercial-use"
+      ],
+      "contentDigest": "sha256:6c423f842e8c6fb28df9f94a1c21211d78eeaf8ef40dd6a9912c3c32c17e2fa8"
+    },
+    {
+      "candidateId": "cand_938673c13a86e5b73e5c3e58",
+      "path": "/clearing/evidence-workflows/source-identity/verification",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/source-identity/verification",
+      "segments": [
+        "evidence-workflows",
+        "source-identity",
+        "verification"
+      ],
+      "contentDigest": "sha256:6b6b42b2be0a4f78992557338116f88d1f929f1e72eb79864e8cc95570d3f037"
+    },
+    {
+      "candidateId": "cand_ba025cb22985c559d9c6b86d",
+      "path": "/clearing/evidence-workflows/source-identity/workflow",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/source-identity/workflow",
+      "segments": [
+        "evidence-workflows",
+        "source-identity",
+        "workflow"
+      ],
+      "contentDigest": "sha256:aadbd742f5dc1538bfbf2fd91713d2a4a8719179a79f7f6a69ff1b0c3aac2b45"
+    },
+    {
+      "candidateId": "cand_016eac9a7165c8ee5f12227c",
+      "path": "/clearing/tamil-religion/divine-epithets/commentary",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/divine-epithets/commentary",
+      "segments": [
+        "tamil-religion",
+        "divine-epithets",
+        "commentary"
+      ],
+      "contentDigest": "sha256:41fcd7a21217a1258126b0e102641dd70120f8b2c59b7dc9d14a0a3024385c07"
+    },
+    {
+      "candidateId": "cand_d0fdaabc084d4d372f53b82a",
+      "path": "/clearing/tamil-religion/divine-epithets/relationship",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/divine-epithets/relationship",
+      "segments": [
+        "tamil-religion",
+        "divine-epithets",
+        "relationship"
+      ],
+      "contentDigest": "sha256:a934cb2f46ebd6ed178513ef76e105af814a9461da8fccc19483590579f930bd"
+    },
+    {
+      "candidateId": "cand_ed21fe347061ca941981abe5",
+      "path": "/clearing/tamil-religion/kannan/commentary",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/kannan/commentary",
+      "segments": [
+        "tamil-religion",
+        "kannan",
+        "commentary"
+      ],
+      "contentDigest": "sha256:2c5ae7db29b148cfce9c7bb71b9c421793f1a381a631823e0e4ef16e9a30b9ae"
+    },
+    {
+      "candidateId": "cand_b0a23bdae960e27239d8d245",
+      "path": "/clearing/tamil-religion/kannan/identity",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/kannan/identity",
+      "segments": [
+        "tamil-religion",
+        "kannan",
+        "identity"
+      ],
+      "contentDigest": "sha256:c844965544184393404c5163278a93985ec25a5b53cb1e9c2bf5c7e43b95c755"
+    },
+    {
+      "candidateId": "cand_862f8ecec44c1beea7da98b4",
+      "path": "/clearing/tamil-religion/kannan/primary-text",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/kannan/primary-text",
+      "segments": [
+        "tamil-religion",
+        "kannan",
+        "primary-text"
+      ],
+      "contentDigest": "sha256:a4f26edba0e1096c7d263877cb5d8b6a16a141c43247ebf71f4943798cbdd94b"
+    },
+    {
+      "candidateId": "cand_d8016c0b825f23cb80932850",
+      "path": "/clearing/tamil-religion/kannan/relationship",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/kannan/relationship",
+      "segments": [
+        "tamil-religion",
+        "kannan",
+        "relationship"
+      ],
+      "contentDigest": "sha256:bbf195c77a9ee052d2878ffb33147794eb978be1ef084a3b104adb520760b77b"
+    },
+    {
+      "candidateId": "cand_aedbf05b08f86d9b79d63577",
+      "path": "/clearing/tamil-religion/kurinji/relationship",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/kurinji/relationship",
+      "segments": [
+        "tamil-religion",
+        "kurinji",
+        "relationship"
+      ],
+      "contentDigest": "sha256:24d115af7f3dfacaa2c8c2dcdf9dab8a574952ed76f8045059c264d40cb91056"
+    },
+    {
+      "candidateId": "cand_fec0e0610e968660725fbc79",
+      "path": "/clearing/tamil-religion/mayon/commentary",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/mayon/commentary",
+      "segments": [
+        "tamil-religion",
+        "mayon",
+        "commentary"
+      ],
+      "contentDigest": "sha256:8701eb1d7501975dde32d6581e995b2a4f633feba1fe06476a8dbb14a4f1e2fc"
+    },
+    {
+      "candidateId": "cand_b15e3edc7fc188909280111a",
+      "path": "/clearing/tamil-religion/mayon/identity",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/mayon/identity",
+      "segments": [
+        "tamil-religion",
+        "mayon",
+        "identity"
+      ],
+      "contentDigest": "sha256:40ec8c77d2990771ba40ef43dbdf0f01bc4847ede26084f1c9a3cab56286e271"
+    },
+    {
+      "candidateId": "cand_ff8c0213eec94f7062c7b91e",
+      "path": "/clearing/tamil-religion/mayon/primary-text",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/mayon/primary-text",
+      "segments": [
+        "tamil-religion",
+        "mayon",
+        "primary-text"
+      ],
+      "contentDigest": "sha256:a77bb4c8bb4f28864f59283ca80a7409af12b17197ef3e4bc687f7cf398b4471"
+    },
+    {
+      "candidateId": "cand_ed6e639222b14bed469192a8",
+      "path": "/clearing/tamil-religion/mayon/relationship",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/mayon/relationship",
+      "segments": [
+        "tamil-religion",
+        "mayon",
+        "relationship"
+      ],
+      "contentDigest": "sha256:5cd0f63712092c498b522351b069cd51678b458aa8e366663cb4721a2ee7708c"
+    },
+    {
+      "candidateId": "cand_1582dbbf4591b04c91603a2f",
+      "path": "/clearing/tamil-religion/mayon/translation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/mayon/translation",
+      "segments": [
+        "tamil-religion",
+        "mayon",
+        "translation"
+      ],
+      "contentDigest": "sha256:4001efeedab0851a543321c424cbe4f2e33129b4b05d07b9dc30d31df5b4e974"
+    },
+    {
+      "candidateId": "cand_d27e3c012001ce673d764e4b",
+      "path": "/clearing/tamil-religion/mullai/commentary",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/mullai/commentary",
+      "segments": [
+        "tamil-religion",
+        "mullai",
+        "commentary"
+      ],
+      "contentDigest": "sha256:1342956d074ad8a65fd5c9007bbccc28a8604c924f5d3c651d942fb53201a0db"
+    },
+    {
+      "candidateId": "cand_7cf9a348e8516d2a34476471",
+      "path": "/clearing/tamil-religion/mullai/relationship",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/mullai/relationship",
+      "segments": [
+        "tamil-religion",
+        "mullai",
+        "relationship"
+      ],
+      "contentDigest": "sha256:fa4fc4a867bce4fd804d265c3f4bf69c91996d4e44761ee3b87896e2476f949e"
+    },
+    {
+      "candidateId": "cand_81b4bf2763de00e0c2fc3fd6",
+      "path": "/clearing/tamil-religion/narayana/commentary",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/narayana/commentary",
+      "segments": [
+        "tamil-religion",
+        "narayana",
+        "commentary"
+      ],
+      "contentDigest": "sha256:2f5df83d42fb80d975b394b82095708fc7497cac9b4c9d1c17740c5f2074b0ed"
+    },
+    {
+      "candidateId": "cand_86a1027de7fada7992869264",
+      "path": "/clearing/tamil-religion/narayana/relationship",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/narayana/relationship",
+      "segments": [
+        "tamil-religion",
+        "narayana",
+        "relationship"
+      ],
+      "contentDigest": "sha256:fc6999c17c9e4e75db8aa2c55d7fd63b640188286317fe33f7cab52dbd92b108"
+    },
+    {
+      "candidateId": "cand_6b4c0d26877e837902351c5a",
+      "path": "/clearing/tamil-religion/neytal/commentary",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/neytal/commentary",
+      "segments": [
+        "tamil-religion",
+        "neytal",
+        "commentary"
+      ],
+      "contentDigest": "sha256:06cd40c190ad5b39914e88e0d28caa68956954bf617b5188794d7faa7e81d2c2"
+    },
+    {
+      "candidateId": "cand_34b88f5f55eb0a70bdf34296",
+      "path": "/clearing/tamil-religion/neytal/identity",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/neytal/identity",
+      "segments": [
+        "tamil-religion",
+        "neytal",
+        "identity"
+      ],
+      "contentDigest": "sha256:6059ff0f2d196fb7bfbb65a0e1fa3b91437521778637e1b7d12077b7ef24166a"
+    },
+    {
+      "candidateId": "cand_0220100ccf08e6176935c6fe",
+      "path": "/clearing/tamil-religion/neytal/primary-text",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/neytal/primary-text",
+      "segments": [
+        "tamil-religion",
+        "neytal",
+        "primary-text"
+      ],
+      "contentDigest": "sha256:d715782617cabbe439a56dfb750bb1d69ac99c2720d545269eb3b579c883f9dd"
+    },
+    {
+      "candidateId": "cand_95f65f1aa0d20e0ca6369e0b",
+      "path": "/clearing/tamil-religion/neytal/relationship",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/neytal/relationship",
+      "segments": [
+        "tamil-religion",
+        "neytal",
+        "relationship"
+      ],
+      "contentDigest": "sha256:90023c247aacfb8aae03d35677f103366b944e19ea54033ef1ff90bc09361cb7"
+    },
+    {
+      "candidateId": "cand_4c16543c75dabe56e9d15ed4",
+      "path": "/clearing/tamil-religion/neytal/translation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/neytal/translation",
+      "segments": [
+        "tamil-religion",
+        "neytal",
+        "translation"
+      ],
+      "contentDigest": "sha256:da3d5eb9aaf1ed7f342a35a495e15737c94fb88af2bfa93f58b76945b2e6facb"
+    },
+    {
+      "candidateId": "cand_fea5489ede9d5faa58716da5",
+      "path": "/clearing/tamil-religion/palai/commentary",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/palai/commentary",
+      "segments": [
+        "tamil-religion",
+        "palai",
+        "commentary"
+      ],
+      "contentDigest": "sha256:5bf2b7e8282cc5d4f719884f0ac0bf01318a7acd88b91915a10acca8e3461f08"
+    },
+    {
+      "candidateId": "cand_7e980d5348a0e440f6eb4735",
+      "path": "/clearing/tamil-religion/palai/identity",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/palai/identity",
+      "segments": [
+        "tamil-religion",
+        "palai",
+        "identity"
+      ],
+      "contentDigest": "sha256:775bae22f63a6d56d328d48f218a8b4487e21735bf821df841328e0e2f4059fd"
+    },
+    {
+      "candidateId": "cand_df2001d5ba64179cf8ac24f4",
+      "path": "/clearing/tamil-religion/palai/primary-text",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/palai/primary-text",
+      "segments": [
+        "tamil-religion",
+        "palai",
+        "primary-text"
+      ],
+      "contentDigest": "sha256:af17f19bec14c5f444c96b23a335d313de7ba2973748f437a39c00d6018e02a2"
+    },
+    {
+      "candidateId": "cand_d98c3d6f89625208ddd250f2",
+      "path": "/clearing/tamil-religion/palai/relationship",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/palai/relationship",
+      "segments": [
+        "tamil-religion",
+        "palai",
+        "relationship"
+      ],
+      "contentDigest": "sha256:f7384e9521d815cf8f4e30bb7e91ed3a88d77bd8613e0cfcfbb4b5b8328d908f"
+    },
+    {
+      "candidateId": "cand_244ad05e11b05c32213f38e4",
+      "path": "/clearing/tamil-religion/palai/translation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/palai/translation",
+      "segments": [
+        "tamil-religion",
+        "palai",
+        "translation"
+      ],
+      "contentDigest": "sha256:ff5ddd5126dbc3c8fa56180a4c5c58ab539bfad1b15f4450e28ad291a212d4a1"
+    },
+    {
+      "candidateId": "cand_e157782a145158c2b400deeb",
+      "path": "/clearing/tamil-religion/paripatal/commentary",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/paripatal/commentary",
+      "segments": [
+        "tamil-religion",
+        "paripatal",
+        "commentary"
+      ],
+      "contentDigest": "sha256:f643632504be9b5847b43b0d00378ec71492b7b8df93d0a1f184db3bed16b806"
+    },
+    {
+      "candidateId": "cand_c6b17a26a309ac99e4df60fa",
+      "path": "/clearing/tamil-religion/paripatal/identity",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/paripatal/identity",
+      "segments": [
+        "tamil-religion",
+        "paripatal",
+        "identity"
+      ],
+      "contentDigest": "sha256:ee8d76e6b7ac4e67a7aadf608fc222e7a1a22334579d2c446d1b3a5d7487c00e"
+    },
+    {
+      "candidateId": "cand_9c7cbbf007b59d8702d80ffe",
+      "path": "/clearing/tamil-religion/paripatal/primary-text",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/paripatal/primary-text",
+      "segments": [
+        "tamil-religion",
+        "paripatal",
+        "primary-text"
+      ],
+      "contentDigest": "sha256:7f94f50ebc9d6fe29548d7456330be328e9cd16c8887c5b89c46556fef5d8ad5"
+    },
+    {
+      "candidateId": "cand_ae9b619eb57d12a5cd7cde90",
+      "path": "/clearing/tamil-religion/paripatal/relationship",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/paripatal/relationship",
+      "segments": [
+        "tamil-religion",
+        "paripatal",
+        "relationship"
+      ],
+      "contentDigest": "sha256:e76c6d4e4d6ca2b84b4be56bd0783974828d0e0467c541f374732913618888e4"
+    },
+    {
+      "candidateId": "cand_75a6091517b7c4dda4093221",
+      "path": "/clearing/tamil-religion/paripatal/translation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/paripatal/translation",
+      "segments": [
+        "tamil-religion",
+        "paripatal",
+        "translation"
+      ],
+      "contentDigest": "sha256:5ee0205368dbb9e684173a291559928bd6919cbf0cc350fc20bb6ab47813bd53"
+    },
+    {
+      "candidateId": "cand_2256d109fb452fc2a4710649",
+      "path": "/clearing/tamil-religion/sangam-landscapes/commentary",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/sangam-landscapes/commentary",
+      "segments": [
+        "tamil-religion",
+        "sangam-landscapes",
+        "commentary"
+      ],
+      "contentDigest": "sha256:3529c0a98c3845b2e51a10d5287fcebcb69d30dcb31ffe12d8dd9adf915dd50e"
+    },
+    {
+      "candidateId": "cand_a84b83dfddab9045540b9987",
+      "path": "/clearing/tamil-religion/sangam-landscapes/identity",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/sangam-landscapes/identity",
+      "segments": [
+        "tamil-religion",
+        "sangam-landscapes",
+        "identity"
+      ],
+      "contentDigest": "sha256:57caa6b639b3b0cd05960dc77a7f13300351b9a3a65f158e3bb5a4baf6ea9a90"
+    },
+    {
+      "candidateId": "cand_5f30533dd0f9f31ad85dddd0",
+      "path": "/clearing/tamil-religion/sangam-landscapes/relationship",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/sangam-landscapes/relationship",
+      "segments": [
+        "tamil-religion",
+        "sangam-landscapes",
+        "relationship"
+      ],
+      "contentDigest": "sha256:d6c41935715365c0b562de7d051078c1a7a75f05a2ed2171a215733ca823e1fa"
+    },
+    {
+      "candidateId": "cand_6f12143fef10131311c62f49",
+      "path": "/clearing/tamil-religion/sangam-landscapes/translation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/sangam-landscapes/translation",
+      "segments": [
+        "tamil-religion",
+        "sangam-landscapes",
+        "translation"
+      ],
+      "contentDigest": "sha256:7bf3ef147600163d2a308305b8f826f0eb0e3cbe17ba5d9fb124760d16b29451"
+    },
+    {
+      "candidateId": "cand_67f8e7d208f1334f120b9cb8",
+      "path": "/clearing/tamil-religion/tirumal/commentary",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/tirumal/commentary",
+      "segments": [
+        "tamil-religion",
+        "tirumal",
+        "commentary"
+      ],
+      "contentDigest": "sha256:acdd8bd9945b712326e149cd8f4eaa752b11785d90ae6fbb6edbc5cf4570fabc"
+    },
+    {
+      "candidateId": "cand_98a2578683861562833700cb",
+      "path": "/clearing/tamil-religion/tirumal/identity",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/tirumal/identity",
+      "segments": [
+        "tamil-religion",
+        "tirumal",
+        "identity"
+      ],
+      "contentDigest": "sha256:2b86c3ecb66f813e95651f6e9aaaec25dd70a9e10ead1d3b990b773e2fa32596"
+    },
+    {
+      "candidateId": "cand_2756d824d0b69c5355e54885",
+      "path": "/clearing/tamil-religion/tirumal/primary-text",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/tirumal/primary-text",
+      "segments": [
+        "tamil-religion",
+        "tirumal",
+        "primary-text"
+      ],
+      "contentDigest": "sha256:46a5bde9e93e0c50a423abf168ce26763c1c28031a09e87f63fcff1c31451ea7"
+    },
+    {
+      "candidateId": "cand_1f1413a39a1457e5588bea8b",
+      "path": "/clearing/tamil-religion/tirumal/relationship",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/tirumal/relationship",
+      "segments": [
+        "tamil-religion",
+        "tirumal",
+        "relationship"
+      ],
+      "contentDigest": "sha256:9839ab17154b8fa9f493e2287765bc4e3bb27f2317dcd0f59fd2db63ca046a85"
+    },
+    {
+      "candidateId": "cand_1a78f7a627da0452ec96580e",
+      "path": "/clearing/tamil-religion/tirumal/translation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/tirumal/translation",
+      "segments": [
+        "tamil-religion",
+        "tirumal",
+        "translation"
+      ],
+      "contentDigest": "sha256:005ca0c93b3896426bb734bfcc4b2047cc4639b8b0101ea05490bbf62e5a0558"
+    },
+    {
+      "candidateId": "cand_c6b54586bcfa018a514cc2eb",
+      "path": "/clearing/astrology-infrastructure/coordinate-frames/evaluation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/coordinate-frames/evaluation",
+      "segments": [
+        "astrology-infrastructure",
+        "coordinate-frames",
+        "evaluation"
+      ],
+      "contentDigest": "sha256:f446347d678200da3d9025bcce1a15c5fe174df0fb0d395bf9893177b0d6fe7c"
+    },
+    {
+      "candidateId": "cand_bb67319afcac29ed66b677e2",
+      "path": "/clearing/astrology-infrastructure/coordinate-frames/uncertainty",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/coordinate-frames/uncertainty",
+      "segments": [
+        "astrology-infrastructure",
+        "coordinate-frames",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:dfffec0e905ce62e7b15ad55cc53c40f43733dd6c86e1caaebf161cadc4f0c19"
+    },
+    {
+      "candidateId": "cand_d9003b3d300d3689b28aa9f7",
+      "path": "/clearing/astrology-infrastructure/falsifiability/input-contract",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/falsifiability/input-contract",
+      "segments": [
+        "astrology-infrastructure",
+        "falsifiability",
+        "input-contract"
+      ],
+      "contentDigest": "sha256:7e09e1a26fce461d00eccb19e6ff201425b41caa72353102ab63121ad4211ccf"
+    },
+    {
+      "candidateId": "cand_733af158d47bfa0a45c7635f",
+      "path": "/clearing/astrology-infrastructure/house-system-selection/evaluation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/house-system-selection/evaluation",
+      "segments": [
+        "astrology-infrastructure",
+        "house-system-selection",
+        "evaluation"
+      ],
+      "contentDigest": "sha256:265348abf8af041d03bceb0537bea6cc4f32e8a8367be747bb15db504d3b63f2"
+    },
+    {
+      "candidateId": "cand_452f4d73c233c31d91de4134",
+      "path": "/clearing/astrology-infrastructure/house-system-selection/input-contract",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/house-system-selection/input-contract",
+      "segments": [
+        "astrology-infrastructure",
+        "house-system-selection",
+        "input-contract"
+      ],
+      "contentDigest": "sha256:4104e0335d098d4d6cd09c6b70dd02ab7bea39cf05215551d69c2812db8b109d"
+    },
+    {
+      "candidateId": "cand_b229119f404d0f7aaab10417",
+      "path": "/clearing/astrology-infrastructure/house-system-selection/workflow",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/house-system-selection/workflow",
+      "segments": [
+        "astrology-infrastructure",
+        "house-system-selection",
+        "workflow"
+      ],
+      "contentDigest": "sha256:3655d962d5cb9cd833001597592f4c58e0086c6fb3494756c76000d4500dc307"
+    },
+    {
+      "candidateId": "cand_a6e0d7f779b527e063bb3cf9",
+      "path": "/clearing/astrology-infrastructure/interpretation-boundaries/uncertainty",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/interpretation-boundaries/uncertainty",
+      "segments": [
+        "astrology-infrastructure",
+        "interpretation-boundaries",
+        "uncertainty"
+      ],
+      "contentDigest": "sha256:8f877fa84db5df49bd9dfc6afd00c6de62e169e6a7396f67890fb86373c399ea"
+    },
+    {
+      "candidateId": "cand_15212ccb368dfe56c7114015",
+      "path": "/clearing/astrology-infrastructure/interpretation-boundaries/workflow",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/interpretation-boundaries/workflow",
+      "segments": [
+        "astrology-infrastructure",
+        "interpretation-boundaries",
+        "workflow"
+      ],
+      "contentDigest": "sha256:c5dc8a13e029e19a519ea427741ea361c62ea2006377344b26a6b63d82f10007"
+    },
+    {
+      "candidateId": "cand_1efe2cc00bd4ffe3a2f7e7db",
+      "path": "/clearing/astrology-infrastructure/tradition-comparison/input-contract",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/tradition-comparison/input-contract",
+      "segments": [
+        "astrology-infrastructure",
+        "tradition-comparison",
+        "input-contract"
+      ],
+      "contentDigest": "sha256:afece6cb444951ca5479717640e435ab2f125ffe2080aa88481a0c080c4484da"
+    },
+    {
+      "candidateId": "cand_9f0e500613ba6529024f4427",
+      "path": "/clearing/astrology-infrastructure/tradition-comparison/workflow",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/astrology-infrastructure/tradition-comparison/workflow",
+      "segments": [
+        "astrology-infrastructure",
+        "tradition-comparison",
+        "workflow"
+      ],
+      "contentDigest": "sha256:71decba470901db184cd259b12e9fe59e83a09cce40a215038db143465f37227"
+    },
+    {
+      "candidateId": "cand_b22cf5d81466dafecbc1efbe",
+      "path": "/clearing/book-concepts/civilizational-computation/argument",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/civilizational-computation/argument",
+      "segments": [
+        "book-concepts",
+        "civilizational-computation",
+        "argument"
+      ],
+      "contentDigest": "sha256:11bc3971571d157d35653c0d68230128fcc6c924eb699f253b78ca931e369829"
+    },
+    {
+      "candidateId": "cand_d992fba8ce43a4d333e76196",
+      "path": "/clearing/book-concepts/civilizational-computation/genealogy",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/civilizational-computation/genealogy",
+      "segments": [
+        "book-concepts",
+        "civilizational-computation",
+        "genealogy"
+      ],
+      "contentDigest": "sha256:62e2596b79018a0aa3f1c8c723e451aba47e951f89b81f89ed5d93609133e60b"
+    },
+    {
+      "candidateId": "cand_871873c2bbe8dd9268b55875",
+      "path": "/clearing/book-concepts/epistemic-clearance/genealogy",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/epistemic-clearance/genealogy",
+      "segments": [
+        "book-concepts",
+        "epistemic-clearance",
+        "genealogy"
+      ],
+      "contentDigest": "sha256:c0e4304ee6df670b6f7d17d2225f086ad3b1d4618cfe13d9fb5536852974e96c"
+    },
+    {
+      "candidateId": "cand_101cd9561264061032ba89be",
+      "path": "/clearing/book-concepts/recursive-institutions/argument",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/recursive-institutions/argument",
+      "segments": [
+        "book-concepts",
+        "recursive-institutions",
+        "argument"
+      ],
+      "contentDigest": "sha256:43f3c59e14117437f890b39f58f2a7db074ac621612c4b0a30144905b01556dc"
+    },
+    {
+      "candidateId": "cand_0b41990fb3792aedac79ea8f",
+      "path": "/clearing/book-concepts/recursive-institutions/genealogy",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/book-concepts/recursive-institutions/genealogy",
+      "segments": [
+        "book-concepts",
+        "recursive-institutions",
+        "genealogy"
+      ],
+      "contentDigest": "sha256:9513787e448d24473606311fbac45166253bead421f609f13e5679f977592588"
+    },
+    {
+      "candidateId": "cand_ca83862de3c683e12da087ee",
+      "path": "/clearing/tamil-religion/alvar-reception/relationship",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/alvar-reception/relationship",
+      "segments": [
+        "tamil-religion",
+        "alvar-reception",
+        "relationship"
+      ],
+      "contentDigest": "sha256:1198ca6156a2af8109602c1429e3236817140f8b6d1319b0947e57fef6081a98"
+    },
+    {
+      "candidateId": "cand_596173f4334119bef4d9de0e",
+      "path": "/clearing/tamil-religion/divine-epithets/primary-text",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/divine-epithets/primary-text",
+      "segments": [
+        "tamil-religion",
+        "divine-epithets",
+        "primary-text"
+      ],
+      "contentDigest": "sha256:5a543656edb3082053f40e7848ce35b615155387c53a6cf4dce814ed1ed1a0f4"
+    },
+    {
+      "candidateId": "cand_35dccc08465e23dc27971bfa",
+      "path": "/clearing/tamil-religion/divine-epithets/translation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/divine-epithets/translation",
+      "segments": [
+        "tamil-religion",
+        "divine-epithets",
+        "translation"
+      ],
+      "contentDigest": "sha256:f6c26fd0367ceb9d63d30016b3c039fea18130d3e151ad412a7f002950783ffc"
+    },
+    {
+      "candidateId": "cand_b3e6aefa664bc9ab372a49fa",
+      "path": "/clearing/tamil-religion/kannan/translation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/kannan/translation",
+      "segments": [
+        "tamil-religion",
+        "kannan",
+        "translation"
+      ],
+      "contentDigest": "sha256:23306ce5f409409c119e0bb4a54c2f046604c9d3e4187b288ca97362991bb9db"
+    },
+    {
+      "candidateId": "cand_252db3c927f53ff17e005096",
+      "path": "/clearing/tamil-religion/kurinji/commentary",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/kurinji/commentary",
+      "segments": [
+        "tamil-religion",
+        "kurinji",
+        "commentary"
+      ],
+      "contentDigest": "sha256:14bcf4d912440b0be87f457a0527c221ff425ca003a11d8f21e7415cd0a35077"
+    },
+    {
+      "candidateId": "cand_d2e520302b54e167be16847d",
+      "path": "/clearing/tamil-religion/kurinji/translation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/kurinji/translation",
+      "segments": [
+        "tamil-religion",
+        "kurinji",
+        "translation"
+      ],
+      "contentDigest": "sha256:d6161851392e898a5b5f7f77c379d475b96c822fc51e8b5f6d334131f579286d"
+    },
+    {
+      "candidateId": "cand_0b4102734ad9490059b23ca7",
+      "path": "/clearing/tamil-religion/marutam/relationship",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/marutam/relationship",
+      "segments": [
+        "tamil-religion",
+        "marutam",
+        "relationship"
+      ],
+      "contentDigest": "sha256:1ebb12ce368ffcbbacd70a38996439f961991645a6fdc1818fb9f5b8ed8f21fc"
+    },
+    {
+      "candidateId": "cand_4bca0e5b913df155ce6a85ee",
+      "path": "/clearing/tamil-religion/mullai/translation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/mullai/translation",
+      "segments": [
+        "tamil-religion",
+        "mullai",
+        "translation"
+      ],
+      "contentDigest": "sha256:6c0ceabc24e8fb4e8591cf7a16ed8bd13e9718ad57895ebced7a0876383f537f"
+    },
+    {
+      "candidateId": "cand_b8b72bf7f0344cc3124caf01",
+      "path": "/clearing/tamil-religion/narayana/identity",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/narayana/identity",
+      "segments": [
+        "tamil-religion",
+        "narayana",
+        "identity"
+      ],
+      "contentDigest": "sha256:37cbfb3ef07b82ee9361bc324fa8bbf2757b97ba4e91ed9bb4eca9f3fd311508"
+    },
+    {
+      "candidateId": "cand_33250cdc209cf99455dbf8c4",
+      "path": "/clearing/tamil-religion/narayana/primary-text",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/narayana/primary-text",
+      "segments": [
+        "tamil-religion",
+        "narayana",
+        "primary-text"
+      ],
+      "contentDigest": "sha256:0dcc651acf8c3adccc0132e6935ba808540f77293e08b30f1ff55e1a79720881"
+    },
+    {
+      "candidateId": "cand_346b0ca727ec2f7b02b6b52a",
+      "path": "/clearing/tamil-religion/narayana/translation",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/narayana/translation",
+      "segments": [
+        "tamil-religion",
+        "narayana",
+        "translation"
+      ],
+      "contentDigest": "sha256:00af6eb8ca141f3046737f3053199dc327cdb6c8c2046e1b1c87e6bd697383fd"
+    },
+    {
+      "candidateId": "cand_752a5b0c8575c936c6df415a",
+      "path": "/clearing/tamil-religion/primary-text-boundaries/relationship",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/primary-text-boundaries/relationship",
+      "segments": [
+        "tamil-religion",
+        "primary-text-boundaries",
+        "relationship"
+      ],
+      "contentDigest": "sha256:4a48a2ef6472ed5d14cb99ad60dbf7f7ad5c9ca790eb1c009fbf9c0a6e98e9b3"
+    },
+    {
+      "candidateId": "cand_5095112565c602b1388883cf",
+      "path": "/clearing/tamil-religion/sangam-landscapes/primary-text",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/tamil-religion/sangam-landscapes/primary-text",
+      "segments": [
+        "tamil-religion",
+        "sangam-landscapes",
+        "primary-text"
+      ],
+      "contentDigest": "sha256:cce0e8643a32f4d90aee806971d122eaee631b45e702359446cca57d71d89719"
+    }
+  ],
+  "provenanceDigest": "sha256:7e376d72ea6cc008d8d9c1d9599514df1ab6612e9731ecf360869e430b66a3be"
+}

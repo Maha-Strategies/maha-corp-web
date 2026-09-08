@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "maha-agent-governance-product-mapping/1.0",
+  "inspectedOn": "2026-09-07",
+  "counts": {
+    "roles": 5,
+    "mapped": 1,
+    "unsupported": 4
+  },
+  "mappings": [
+    {
+      "conceptId": "urn:maha:concept:authority:agent-memory-governance",
+      "role": "commercialization",
+      "mapping": "no-current-product-mapping",
+      "sourceIds": [],
+      "offerManufactured": false,
+      "boundary": "No exact current product, endpoint, acquisition state, and bounded delivery contract jointly establish this commercialization role."
+    },
+    {
+      "conceptId": "urn:maha:concept:authority:context-budgeting",
+      "role": "commercialization",
+      "mapping": "real-product-capability",
+      "sourceIds": [
+        "t22-context-compression-offer"
+      ],
+      "offerManufactured": false,
+      "boundary": "The offer covers transient context compression only; it does not commercialize general memory governance, durable tasks, delegation, or failure recovery."
+    },
+    {
+      "conceptId": "urn:maha:concept:authority:durable-task-state",
+      "role": "commercialization",
+      "mapping": "no-current-product-mapping",
+      "sourceIds": [],
+      "offerManufactured": false,
+      "boundary": "No exact current product, endpoint, acquisition state, and bounded delivery contract jointly establish this commercialization role."
+    },
+    {
+      "conceptId": "urn:maha:concept:authority:cross-agent-delegation",
+      "role": "commercialization",
+      "mapping": "no-current-product-mapping",
+      "sourceIds": [],
+      "offerManufactured": false,
+      "boundary": "No exact current product, endpoint, acquisition state, and bounded delivery contract jointly establish this commercialization role."
+    },
+    {
+      "conceptId": "urn:maha:concept:authority:failure-recovery",
+      "role": "commercialization",
+      "mapping": "no-current-product-mapping",
+      "sourceIds": [],
+      "offerManufactured": false,
+      "boundary": "No exact current product, endpoint, acquisition state, and bounded delivery contract jointly establish this commercialization role."
+    }
+  ],
+  "provenanceDigest": "sha256:523fd5b67b79427ef2c702e81b4e59915bad3decf410916b23c0af4b9340e051"
+}

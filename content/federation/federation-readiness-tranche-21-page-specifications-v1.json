@@ -1,0 +1,2657 @@
+{
+  "schemaVersion": "maha-federation-readiness-tranche-21-page-specifications/1.0",
+  "frozenOn": "2026-09-07",
+  "counts": {
+    "specifications": 70,
+    "boundedQuestions": 350
+  },
+  "specifications": [
+    {
+      "candidateId": "cand_02377c9cde28ef6f26525b2a",
+      "candidateDigest": "sha256:8f0d8b2c8548439fbf9d8018c744eade99995f94b99d511d64073c6c00e39f85",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/locator-verification/commercial-use",
+      "title": "Locator Verification — Commercial Use",
+      "conceptId": "urn:maha:concept:evidence:locator-verification",
+      "routeRole": "commercial-use",
+      "directAnswer": "Locator Verification — Commercial Use is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-offer-layers",
+          "locator": "lib/federation/readiness-tranche-21.ts — OFFER_LAYERS and OFFER_BOUNDARY",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Separates free structural preflight, $49 document preflight, disabled proposed $250 verified dossier, and a distinct $5,000 contracted pilot.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:32a143cdba17d9d4f0849211233ad78696df0b4801d326d7392ded96cd4c0588",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_03638eae89d44b2fcb9b6d10",
+      "candidateDigest": "sha256:2e27f8f00bf363fbc6672a210cdf170de67a6b325246fd12a9a399af7c4ed5d4",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/interpolation/reproducibility",
+      "title": "Interpolation — Reproducibility",
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "routeRole": "reproducibility",
+      "directAnswer": "Interpolation — Reproducibility is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-linear-interpolation",
+          "locator": "lib/federation/readiness-tranche-21.ts — linearInterpolate",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Computes exact rational linear interpolation between two distinct integer-coordinate nodes and refuses extrapolation.",
+          "boundary": "This fixture establishes only linear interpolation inside one interval, not error bounds or suitability for observed data."
+        },
+        {
+          "sourceId": "src-dlmf-interpolation",
+          "locator": "§3.3(i), equation 3.3.1; §3.3(vi)",
+          "rightsBasis": "reference-only",
+          "scope": "Defines polynomial interpolation through distinct nodes and identifies other interpolation methods.",
+          "boundary": "Does not establish accuracy between nodes, suitability for extrapolation, or numerical stability for a particular implementation."
+        }
+      ],
+      "decisionDigest": "sha256:912bd0d6092bc7b9bbd3474099ed18ad0818705de7363f525316acab5d88beab",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_0a13428b731b87a242aa8860",
+      "candidateDigest": "sha256:a9b0d856aacac2965090ee36a577b320b0a077d895647f85f4c1e79d7ed2b971",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/conflicting-literature/commercial-use",
+      "title": "Conflicting Literature — Commercial Use",
+      "conceptId": "urn:maha:concept:evidence:conflicting-literature",
+      "routeRole": "commercial-use",
+      "directAnswer": "Conflicting Literature — Commercial Use is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-offer-layers",
+          "locator": "lib/federation/readiness-tranche-21.ts — OFFER_LAYERS and OFFER_BOUNDARY",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Separates free structural preflight, $49 document preflight, disabled proposed $250 verified dossier, and a distinct $5,000 contracted pilot.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:409a5eb88e8dc2166f659dc13312822e05386b56a5e245deabefa39a0f06965b",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_0a1d37ad506fe9b0fdf91a0e",
+      "candidateDigest": "sha256:f63dfcb87d219aa04ead935600f8240173999aff21151783f1048cfe668f6660",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/commercialization",
+      "title": "Credential Rotation — Commercialization",
+      "conceptId": "urn:maha:concept:authority:credential-rotation",
+      "routeRole": "commercialization",
+      "directAnswer": "Credential Rotation — Commercialization is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-product-federation",
+          "locator": "lib/product-federation.ts — buildProductFederation and internalProducts",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Projects actual source product states and acquisition modes without enabling CABEZON payment.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:9befbd90654836a3fb557da4f9c724a476924ba4cb186af20aa69f91d27f4797",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_0e187bdd3d33afee1b23310d",
+      "candidateDigest": "sha256:64604e983641975898b67b04fea694ae22c0796919300fe856796a2cedfcddf2",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/conflicting-literature/failure-modes",
+      "title": "Conflicting Literature — Failure Modes",
+      "conceptId": "urn:maha:concept:evidence:conflicting-literature",
+      "routeRole": "failure-modes",
+      "directAnswer": "Conflicting Literature — Failure Modes is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-literature-conflict",
+          "locator": "lib/federation/readiness-tranche-21.ts — classifyLiterature",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Compares two or more located observations only when claim, population, and outcome scopes match; preserves non-comparable observations without manufacturing conflict.",
+          "boundary": "The classifier records directional disagreement; it does not adjudicate study quality, pool estimates, or decide which result is true."
+        }
+      ],
+      "decisionDigest": "sha256:caea111a8ce41aab8ffa304275688fe6db94d2e4e952afef70ab2991c2c7c094",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_152bd81a9c3042b26c93ee8f",
+      "candidateDigest": "sha256:96ba868917d3c947e765ff584936dec1e6c546c137a79b7dc3e596df4bb4cb56",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/audit-export/commercial-use",
+      "title": "Audit Export — Commercial Use",
+      "conceptId": "urn:maha:concept:evidence:audit-export",
+      "routeRole": "commercial-use",
+      "directAnswer": "Audit Export — Commercial Use is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-offer-layers",
+          "locator": "lib/federation/readiness-tranche-21.ts — OFFER_LAYERS and OFFER_BOUNDARY",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Separates free structural preflight, $49 document preflight, disabled proposed $250 verified dossier, and a distinct $5,000 contracted pilot.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:178e4562b68effabc1d33cd58b3b42f68ed4be9a60697baa6b4b55059f17c604",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_1c9d1d2ca8af857b87a76813",
+      "candidateDigest": "sha256:b5a3e641b97dfbdc828a71ecc63b6dd1f92ef01d93a6b3ab6a21ebbc1f881c1e",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/formal-verification/worked-example",
+      "title": "Formal Verification — Worked Example",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "routeRole": "worked-example",
+      "directAnswer": "Formal Verification — Worked Example is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-formal-proof-lifecycle",
+          "locator": "lib/evidence-dossier/formal-proof-fixture.ts — FORMAL_PROOF_FIXTURE_DOSSIER and FORMAL_PROOF_FIXTURE_DIGEST",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Binds a synthetic interval claim to a machine-checked Lean proof, deterministic calculation, sources, and an offline-verifiable package.",
+          "boundary": "A proof establishes deduction under declared assumptions, not empirical truth, source fidelity, kernel equivalence, or independent reproduction."
+        },
+        {
+          "sourceId": "src-nist-formal-verification",
+          "locator": "Definition and Notes",
+          "rightsBasis": "reference-only",
+          "scope": "Defines formal verification through formal requirements, a model, logic, and rules of inference.",
+          "boundary": "Does not establish that a particular model matches the implemented system or that a particular proof is sound."
+        }
+      ],
+      "decisionDigest": "sha256:3fd8472aec0e6fa2caa3083eba377fbb0679b5e4275c2b6f78c830538ab9bc4f",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_22d9ff199c2b10c0dabf2206",
+      "candidateDigest": "sha256:29d4d810cc471016f96ce74ef004689d10fc4030b96e24183cff54b4601b7a37",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/commercialization",
+      "title": "Tool Authorization — Commercialization",
+      "conceptId": "urn:maha:concept:authority:tool-authorization",
+      "routeRole": "commercialization",
+      "directAnswer": "Tool Authorization — Commercialization is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-product-federation",
+          "locator": "lib/product-federation.ts — buildProductFederation and internalProducts",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Projects actual source product states and acquisition modes without enabling CABEZON payment.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:8d9ae1ec0a89fba692c60ae7c9cbd3769e0b2c2773e0b0f4394dafb3f08b648e",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_249aed606c4e0b8c3a5da727",
+      "candidateDigest": "sha256:1e4f7e0fb3e83cde43b3bf6f10ce13451cc49751b19b9397bab767079783fa60",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/audit-receipts/commercialization",
+      "title": "Audit Receipts — Commercialization",
+      "conceptId": "urn:maha:concept:authority:audit-receipts",
+      "routeRole": "commercialization",
+      "directAnswer": "Audit Receipts — Commercialization is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-product-federation",
+          "locator": "lib/product-federation.ts — buildProductFederation and internalProducts",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Projects actual source product states and acquisition modes without enabling CABEZON payment.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:98b1c116b219a9f2f1e645b7cced7a5b31f8cdd5384dbd272d4a2d91b5a73cf6",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_274bd4ffb8610003e5bc692e",
+      "candidateDigest": "sha256:21c5defbe221bbf58be5cb2bd5834c2259e4f3e3ce1c2f730f749544e738cff1",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/delivery-acknowledgement/commercialization",
+      "title": "Delivery Acknowledgement — Commercialization",
+      "conceptId": "urn:maha:concept:authority:delivery-acknowledgement",
+      "routeRole": "commercialization",
+      "directAnswer": "Delivery Acknowledgement — Commercialization is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-product-federation",
+          "locator": "lib/product-federation.ts — buildProductFederation and internalProducts",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Projects actual source product states and acquisition modes without enabling CABEZON payment.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:91dccc6f8f5032132abcb242382f9b373c9ac277d0785ac24aa824f984d73897",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_28654e2b2e0e77af894a2f1d",
+      "candidateDigest": "sha256:8b297bf4b592f8029b214fb4e00152eb735fb6b8fdbcb104a5cf9cd9ac3f7f8c",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/numerical-stability/worked-example",
+      "title": "Numerical Stability — Worked Example",
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "routeRole": "worked-example",
+      "directAnswer": "Numerical Stability — Worked Example is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-cancellation",
+          "locator": "lib/federation/readiness-tranche-21.ts — cancellationFixture",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Compares one specified IEEE-754 binary64 cancellation result with exact integer arithmetic.",
+          "boundary": "One cancellation example does not characterize an algorithm, platform beyond ECMAScript Number semantics, or general stability."
+        },
+        {
+          "sourceId": "src-nist-stability",
+          "locator": "Discussion of stability and conditioning",
+          "rightsBasis": "reference-only",
+          "scope": "Distinguishes an ill-conditioned problem from an unstable algorithm and bounds stability by comparison with inherent error.",
+          "boundary": "Does not establish the stability of a named algorithm without an analysis under its stated inputs and arithmetic."
+        }
+      ],
+      "decisionDigest": "sha256:7084407e53c76424f05747c49f6fc4622dd724cac04a4c59aa7276672ec0e1a2",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_2b4ee754b4b8aa01c89396c8",
+      "candidateDigest": "sha256:d0c58bbbd543721a80e306d5a74261f0b15b959f624f445b710f60d70377296d",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/conflicting-literature/verification",
+      "title": "Conflicting Literature — Verification",
+      "conceptId": "urn:maha:concept:evidence:conflicting-literature",
+      "routeRole": "verification",
+      "directAnswer": "Conflicting Literature — Verification is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-literature-conflict",
+          "locator": "lib/federation/readiness-tranche-21.ts — classifyLiterature",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Compares two or more located observations only when claim, population, and outcome scopes match; preserves non-comparable observations without manufacturing conflict.",
+          "boundary": "The classifier records directional disagreement; it does not adjudicate study quality, pool estimates, or decide which result is true."
+        }
+      ],
+      "decisionDigest": "sha256:e11ac91086599be8a0f381fda29fa9e9f3b370e97acfcb392baf230bd2a6c265",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_35312a8e1744e223d0647e34",
+      "candidateDigest": "sha256:5e998258c627b18a6fb917fa33a5b3852117e5ba56f769d0351630a03c7a031d",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/commercialization",
+      "title": "Identity Bound Agents — Commercialization",
+      "conceptId": "urn:maha:concept:authority:identity-bound-agents",
+      "routeRole": "commercialization",
+      "directAnswer": "Identity Bound Agents — Commercialization is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-product-federation",
+          "locator": "lib/product-federation.ts — buildProductFederation and internalProducts",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Projects actual source product states and acquisition modes without enabling CABEZON payment.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:d5b569666e647e20c323890e0d818b91c0318b7933819d7a9b57eef1fa29c5db",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_457721881f95e53782806bb6",
+      "candidateDigest": "sha256:9245cba0068bd69158f78e273874bad6259c20a12b0b45783b0e3308824e50ab",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/numerical-stability/reproducibility",
+      "title": "Numerical Stability — Reproducibility",
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "routeRole": "reproducibility",
+      "directAnswer": "Numerical Stability — Reproducibility is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-cancellation",
+          "locator": "lib/federation/readiness-tranche-21.ts — cancellationFixture",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Compares one specified IEEE-754 binary64 cancellation result with exact integer arithmetic.",
+          "boundary": "One cancellation example does not characterize an algorithm, platform beyond ECMAScript Number semantics, or general stability."
+        },
+        {
+          "sourceId": "src-nist-stability",
+          "locator": "Discussion of stability and conditioning",
+          "rightsBasis": "reference-only",
+          "scope": "Distinguishes an ill-conditioned problem from an unstable algorithm and bounds stability by comparison with inherent error.",
+          "boundary": "Does not establish the stability of a named algorithm without an analysis under its stated inputs and arithmetic."
+        }
+      ],
+      "decisionDigest": "sha256:b4390443459a05c39ee30724290436e7bc42cfe018f75e9626cad142f1407e44",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_51fe56a2bfa94898ecb30609",
+      "candidateDigest": "sha256:d84ee32748ea3542d1a4dc6ed022a924e827e5f5afbdb2b203857790695fd71d",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/error-budgets/machine-interface",
+      "title": "Error Budgets — Machine Interface",
+      "conceptId": "urn:maha:concept:computation:error-budgets",
+      "routeRole": "machine-interface",
+      "directAnswer": "Error Budgets — Machine Interface is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-error-budget",
+          "locator": "lib/federation/readiness-tranche-21.ts — errorBudget",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Computes an exact integer sum of squared non-negative component budgets.",
+          "boundary": "This fixture does not select components, claim statistical independence, take a square root, or establish an uncertainty model."
+        },
+        {
+          "sourceId": "t21-google-sre-error-budget",
+          "locator": "https://sre.google/sre-book/embracing-risk/ — section “Forming Your Error Budget”",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Defines an error budget from a service-level objective as the permitted unreliability within a defined period.",
+          "boundary": "This is one organization’s published practice, not a standard; it sets no budget for any service and does not measure correctness."
+        }
+      ],
+      "decisionDigest": "sha256:4401fe092ee550bbe6b6b3bb7ac33c1967baef7ecc481af6631e12cb7f989ff5",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_54bf0ff5e1dfaa08469e51ad",
+      "candidateDigest": "sha256:4f1763cf261a7bda29ee5708b43085a5cafbe1233c3b0780a962368243972721",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/version-relationship/commercial-use",
+      "title": "Version Relationship — Commercial Use",
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "routeRole": "commercial-use",
+      "directAnswer": "Version Relationship — Commercial Use is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-offer-layers",
+          "locator": "lib/federation/readiness-tranche-21.ts — OFFER_LAYERS and OFFER_BOUNDARY",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Separates free structural preflight, $49 document preflight, disabled proposed $250 verified dossier, and a distinct $5,000 contracted pilot.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:9b4a8d71d4ae9d79799b42bd7ea1070e1505efb75302e8ee04936a9683839279",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_558c29e71ada643b2d7f7270",
+      "candidateDigest": "sha256:feb4215a1a94bc00f97599b7c3306bc681f8efc4adcfc989893c453e61aac186",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/interpolation/machine-interface",
+      "title": "Interpolation — Machine Interface",
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "routeRole": "machine-interface",
+      "directAnswer": "Interpolation — Machine Interface is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-linear-interpolation",
+          "locator": "lib/federation/readiness-tranche-21.ts — linearInterpolate",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Computes exact rational linear interpolation between two distinct integer-coordinate nodes and refuses extrapolation.",
+          "boundary": "This fixture establishes only linear interpolation inside one interval, not error bounds or suitability for observed data."
+        },
+        {
+          "sourceId": "src-dlmf-interpolation",
+          "locator": "§3.3(i), equation 3.3.1; §3.3(vi)",
+          "rightsBasis": "reference-only",
+          "scope": "Defines polynomial interpolation through distinct nodes and identifies other interpolation methods.",
+          "boundary": "Does not establish accuracy between nodes, suitability for extrapolation, or numerical stability for a particular implementation."
+        }
+      ],
+      "decisionDigest": "sha256:8805151bdb38377b11717ab03606d32e84937ecb89e1575cbc12e066bccb330b",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_5ace7cc1e1287874f505c134",
+      "candidateDigest": "sha256:9961a8f263bf03a591934652045db4cd6431bd895e88bf400b8b7f6cb28016c2",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/dimensional-analysis/machine-interface",
+      "title": "Dimensional Analysis — Machine Interface",
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "routeRole": "machine-interface",
+      "directAnswer": "Dimensional Analysis — Machine Interface is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-dimension-vector",
+          "locator": "lib/federation/readiness-tranche-21.ts — combineDimensions",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Combines seven-component SI base-dimension exponent vectors under multiplication or division.",
+          "boundary": "Dimensional consistency is necessary but does not establish a correct model, scale factor, unit conversion, or empirical validity."
+        },
+        {
+          "sourceId": "src-bipm-dimensions",
+          "locator": "§2.3.3, p. 136, Table 3",
+          "rightsBasis": "reference-only",
+          "scope": "Defines dimensions of base and derived quantities and their expression as products of base dimensions.",
+          "boundary": "Does not validate a particular equation, measurement, unit conversion, or uncertainty budget."
+        }
+      ],
+      "decisionDigest": "sha256:e57030a56f4c834cf1b50fe7dcb2aeb8d6c30eeab77aafc27f5d8301ddf28cef",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_5b501d7014282b7eec965ea1",
+      "candidateDigest": "sha256:485c0e3a9edd2b1f6a4eff6b5581a8874dbaf73a090f78ec701145a068b25cea",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/numerical-integration/reproducibility",
+      "title": "Numerical Integration — Reproducibility",
+      "conceptId": "urn:maha:concept:computation:numerical-integration",
+      "routeRole": "reproducibility",
+      "directAnswer": "Numerical Integration — Reproducibility is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-trapezoid",
+          "locator": "lib/federation/readiness-tranche-21.ts — trapezoidIntegral",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Computes an exact rational composite trapezoid result on an equally spaced integer grid.",
+          "boundary": "This fixture does not estimate quadrature error, choose a grid, or establish that the sampled function is integrable."
+        },
+        {
+          "sourceId": "src-dlmf-quadrature",
+          "locator": "§3.5(iv), equation 3.5.15 and exactness statement",
+          "rightsBasis": "reference-only",
+          "scope": "Defines interpolatory quadrature with weights and an error term and states its polynomial exactness.",
+          "boundary": "Does not establish convergence or error for an arbitrary integrand, node choice, or numerical implementation."
+        }
+      ],
+      "decisionDigest": "sha256:dc555d4a4975228ac7322c7da0f7783ff95b02a21a7390cb64f8457c4bb1685d",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_5d2d5c52fc91b9ecce7bb007",
+      "candidateDigest": "sha256:2fb5d237256d2446f60524d4d9bb5420e64aff02eecc2f13a1fc1aaabb5a3584",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/optimization/machine-interface",
+      "title": "Optimization — Machine Interface",
+      "conceptId": "urn:maha:concept:computation:optimization",
+      "routeRole": "machine-interface",
+      "directAnswer": "Optimization — Machine Interface is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-bounded-minimum",
+          "locator": "lib/federation/readiness-tranche-21.ts — boundedMinimum",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Enumerates a finite declared objective vector and returns the first exact minimum.",
+          "boundary": "This fixture does not solve continuous, constrained, stochastic, or large-scale optimization problems."
+        },
+        {
+          "sourceId": "src-boyd-optimization",
+          "locator": "§4.1.1–4.1.2, pp. 127–129",
+          "rightsBasis": "reference-only",
+          "scope": "Defines a standard optimization problem using an objective, inequality and equality constraints, feasible points, and optimal value.",
+          "boundary": "Does not establish convexity, existence or uniqueness of a solution, or performance of a solver for a particular problem."
+        }
+      ],
+      "decisionDigest": "sha256:3e78d26d013278525e78ad9073c6d76eee0483771f5dc37be83eaee22f5ffcb5",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_5da47ae131bd50c28a964e74",
+      "candidateDigest": "sha256:0a959dfc49ebaeb7b1c52439231651463be1b27b0d2cc3eed0815ba643f33217",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/formal-verification/machine-interface",
+      "title": "Formal Verification — Machine Interface",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "routeRole": "machine-interface",
+      "directAnswer": "Formal Verification — Machine Interface is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-formal-proof-lifecycle",
+          "locator": "lib/evidence-dossier/formal-proof-fixture.ts — FORMAL_PROOF_FIXTURE_DOSSIER and FORMAL_PROOF_FIXTURE_DIGEST",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Binds a synthetic interval claim to a machine-checked Lean proof, deterministic calculation, sources, and an offline-verifiable package.",
+          "boundary": "A proof establishes deduction under declared assumptions, not empirical truth, source fidelity, kernel equivalence, or independent reproduction."
+        },
+        {
+          "sourceId": "src-nist-formal-verification",
+          "locator": "Definition and Notes",
+          "rightsBasis": "reference-only",
+          "scope": "Defines formal verification through formal requirements, a model, logic, and rules of inference.",
+          "boundary": "Does not establish that a particular model matches the implemented system or that a particular proof is sound."
+        }
+      ],
+      "decisionDigest": "sha256:44a42ad4180bd0860f39c02f1929dff51ed52da2778974cada1236fd4e9430e2",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_5fda66506d4caf3a6f10c1d0",
+      "candidateDigest": "sha256:2d49bee97c494f70a9bf86eba03efdebcf7ce1008058e5c99b91ae8eb0dbd1e7",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/canonical-release/commercial-use",
+      "title": "Canonical Release — Commercial Use",
+      "conceptId": "urn:maha:concept:evidence:canonical-release",
+      "routeRole": "commercial-use",
+      "directAnswer": "Canonical Release — Commercial Use is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-offer-layers",
+          "locator": "lib/federation/readiness-tranche-21.ts — OFFER_LAYERS and OFFER_BOUNDARY",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Separates free structural preflight, $49 document preflight, disabled proposed $250 verified dossier, and a distinct $5,000 contracted pilot.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:47e5c2b9b6ce0168ac3686762da4bc6cbfed56f3c947b9b3435cf014ff0b74e6",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_757660327e81854886c9df90",
+      "candidateDigest": "sha256:28956fa6193160473156ef9bfe194980c73139ab2f2f019406eae61e40d15bef",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/commercialization",
+      "title": "Metered Evidence Retrieval — Commercialization",
+      "conceptId": "urn:maha:concept:authority:metered-evidence-retrieval",
+      "routeRole": "commercialization",
+      "directAnswer": "Metered Evidence Retrieval — Commercialization is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-product-federation",
+          "locator": "lib/product-federation.ts — buildProductFederation and internalProducts",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Projects actual source product states and acquisition modes without enabling CABEZON payment.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:677389ffe88513b35aa10611129aa50163064105f89da15b6235cb33c2b026dc",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_76bb498009ae77f248d9b2b3",
+      "candidateDigest": "sha256:8b8a6811a75c58d4451ef81d516e415bce8968eb07177201ece447fab2d6e15e",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/uncertainty-recording/commercial-use",
+      "title": "Uncertainty Recording — Commercial Use",
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "routeRole": "commercial-use",
+      "directAnswer": "Uncertainty Recording — Commercial Use is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-offer-layers",
+          "locator": "lib/federation/readiness-tranche-21.ts — OFFER_LAYERS and OFFER_BOUNDARY",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Separates free structural preflight, $49 document preflight, disabled proposed $250 verified dossier, and a distinct $5,000 contracted pilot.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:65ab97b07ec3a32b14917391ea3da0f7847094b658da3d118f55d810eb7bdf6a",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_7c130ffaab158bfd0ad4df45",
+      "candidateDigest": "sha256:0d4a0568ff32ebad8004095fe6936c235a358ad72d40d8e599877473481eb52d",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/privacy-boundary/commercial-use",
+      "title": "Privacy Boundary — Commercial Use",
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "routeRole": "commercial-use",
+      "directAnswer": "Privacy Boundary — Commercial Use is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-offer-layers",
+          "locator": "lib/federation/readiness-tranche-21.ts — OFFER_LAYERS and OFFER_BOUNDARY",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Separates free structural preflight, $49 document preflight, disabled proposed $250 verified dossier, and a distinct $5,000 contracted pilot.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:aa2d947bdb51dea948f8af4177ff059f3bbfa5671655b76acd66b341b2ab7f9f",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_7e491bc22da1ad832898171b",
+      "candidateDigest": "sha256:226d620ae77b66aa4a890890c84e62d33d6de42251fc4617a56cf24735ce8066",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/capability-scoped-tokens/commercialization",
+      "title": "Capability Scoped Tokens — Commercialization",
+      "conceptId": "urn:maha:concept:authority:capability-scoped-tokens",
+      "routeRole": "commercialization",
+      "directAnswer": "Capability Scoped Tokens — Commercialization is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-product-federation",
+          "locator": "lib/product-federation.ts — buildProductFederation and internalProducts",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Projects actual source product states and acquisition modes without enabling CABEZON payment.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:1b693661ebafbd07c201e62166661ed54d87e6b4f92615b3c173803050b02af4",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_7ea97e6389a152a6e06ea440",
+      "candidateDigest": "sha256:df45d696a8632bc8b818a5047f0a21ae7e1bef653adc0ba454ca8ca353b18575",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/internal-review/commercial-use",
+      "title": "Internal Review — Commercial Use",
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "routeRole": "commercial-use",
+      "directAnswer": "Internal Review — Commercial Use is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-offer-layers",
+          "locator": "lib/federation/readiness-tranche-21.ts — OFFER_LAYERS and OFFER_BOUNDARY",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Separates free structural preflight, $49 document preflight, disabled proposed $250 verified dossier, and a distinct $5,000 contracted pilot.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:4da985c27035bb693d037bc3d300a8313954818baff4b6fb969c34941ae7b0ac",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_872d9a697d33dc9e0c314611",
+      "candidateDigest": "sha256:164fdfc31cf1136a983fd35505a03a159aa041b0871203e14782f052c15ea392",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/interoperability/current-law",
+      "title": "Interoperability — Current Law",
+      "conceptId": "urn:maha:concept:governance:interoperability",
+      "routeRole": "current-law",
+      "directAnswer": "Interoperability — Current Law is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-eu-interoperability-act",
+          "locator": "https://interoperable-europe.ec.europa.eu/Interoperable-Europe-Act-Regulation — Articles 1–6 and Annex",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Establishes an EU public-sector legal framework, four interoperability layers, assessments, and sharing rules.",
+          "boundary": "Current law is bounded to the Regulation scope; the four layers are not an executable universal machine rule."
+        }
+      ],
+      "decisionDigest": "sha256:8d76a1cf24a7fceba219ce884b467942e6c612b58dfaa319018e9f756effee73",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_8a9f4d3922c7cd8e224277a0",
+      "candidateDigest": "sha256:ffbee58faedaf2459e26ee696ce0d561ea91fad88528b6bbc6eec3cec6e6426c",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/digital-public-infrastructure/uncertainty",
+      "title": "Digital Public Infrastructure — Uncertainty",
+      "conceptId": "urn:maha:concept:governance:digital-public-infrastructure",
+      "routeRole": "uncertainty",
+      "directAnswer": "Digital Public Infrastructure — Uncertainty is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-oecd-dpi-2024",
+          "locator": "https://doi.org/10.1787/ff525dc8-en — abstract and sections 2–4",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Defines DPI, identifies common components, and records governance, adoption, funding, privacy, security, resilience, and cross-border considerations.",
+          "boundary": "The policy paper does not prescribe one stack, prove causal outcomes, or turn survey observations into universal requirements."
+        }
+      ],
+      "decisionDigest": "sha256:41371f995e8d74204eb41b0df26d4f910350692b9f05bb274d2990b444c2625a",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_8ebaeb0d3ab9edaecaa39fcf",
+      "candidateDigest": "sha256:20932eb5a09f5791e77615527b34ab7c4e3f6e2d30da364202e57eb0a6b2124b",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/machine-commerce-entitlement/commercialization",
+      "title": "Machine Commerce Entitlement — Commercialization",
+      "conceptId": "urn:maha:concept:authority:machine-commerce-entitlement",
+      "routeRole": "commercialization",
+      "directAnswer": "Machine Commerce Entitlement — Commercialization is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-product-federation",
+          "locator": "lib/product-federation.ts — buildProductFederation and internalProducts",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Projects actual source product states and acquisition modes without enabling CABEZON payment.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:9412bb531e49b639af44f0dbf3d318139313dc9410f7964f6356c4cf848b77d7",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_90c0ea2f6a833c6e940f0fcb",
+      "candidateDigest": "sha256:d507b2d07e646b100aa8e06810602c4a98866f9cd59c7d8e589ab0d6df68ccff",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/conflicting-literature/workflow",
+      "title": "Conflicting Literature — Workflow",
+      "conceptId": "urn:maha:concept:evidence:conflicting-literature",
+      "routeRole": "workflow",
+      "directAnswer": "Conflicting Literature — Workflow is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-literature-conflict",
+          "locator": "lib/federation/readiness-tranche-21.ts — classifyLiterature",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Compares two or more located observations only when claim, population, and outcome scopes match; preserves non-comparable observations without manufacturing conflict.",
+          "boundary": "The classifier records directional disagreement; it does not adjudicate study quality, pool estimates, or decide which result is true."
+        }
+      ],
+      "decisionDigest": "sha256:7cd68ed3e18b0c035a7cd2a661d571ff64cbfff94626e711aa4f5e0718198c53",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_91b40071003f63fa5b16ec5d",
+      "candidateDigest": "sha256:19c28757c452595162a6bd9d0ce0e4dd9c25ac389853d5c21ce8cf6b05482f57",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/competition-policy/definition",
+      "title": "Competition Policy — Definition",
+      "conceptId": "urn:maha:concept:governance:competition-policy",
+      "routeRole": "definition",
+      "directAnswer": "Competition Policy — Definition is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-doj-antitrust",
+          "locator": "https://www.justice.gov/atr/antitrust-laws-and-you — Sherman, Clayton, FTC Act; https://www.justice.gov/atr/merger-guidelines/overview — 2023 Merger Guidelines",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Identifies US federal antitrust authorities and distinct conduct and merger-analysis mechanisms.",
+          "boundary": "US federal sources are not other jurisdictions, case-specific legal advice, or an executable enforcement rule."
+        }
+      ],
+      "decisionDigest": "sha256:b38ddb8b57eacdd9a9a5145fd4af05f9411f86d2969d230faf1b2524266930a2",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_945c9fb062e30f6d12dceac8",
+      "candidateDigest": "sha256:9b5e1f4f489c986f9b5b27e209ee0f3732b392d750701f4054be7a4ddb8e4e36",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/intellectual-property/evidence",
+      "title": "Intellectual Property — Evidence",
+      "conceptId": "urn:maha:concept:governance:intellectual-property",
+      "routeRole": "evidence",
+      "directAnswer": "Intellectual Property — Evidence is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-wipo-ip-ai",
+          "locator": "https://www.wipo.int/meetings/en/doc_details.jsp?doc_id=499504 — issue groups 4–13",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Organizes AI/IP questions across patents, copyright, designs, data, trade secrets, and technology gaps.",
+          "boundary": "The issues paper frames questions and options; it is not current national law, legal advice, or a final WIPO position."
+        }
+      ],
+      "decisionDigest": "sha256:7f1f99137927a60e93db42787506f30413b6bd7d2a250740ff690f8ffc5ed96a",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_947cfe53f46c16bf80fb9cae",
+      "candidateDigest": "sha256:d0572883d6abcc0e9b039fe7429f30f936a90efa8b2bdb859caad81aa65f2dec",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/tenant-isolation/commercialization",
+      "title": "Tenant Isolation — Commercialization",
+      "conceptId": "urn:maha:concept:authority:tenant-isolation",
+      "routeRole": "commercialization",
+      "directAnswer": "Tenant Isolation — Commercialization is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-product-federation",
+          "locator": "lib/product-federation.ts — buildProductFederation and internalProducts",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Projects actual source product states and acquisition modes without enabling CABEZON payment.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:ae81a003f7298c87784f53e7907fcb32d2d0cba2718d191a14fde3a189137ce0",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_94d3ab89dc9b9a4049cfcc64",
+      "candidateDigest": "sha256:c27039c6b195a7765d68f82f6ca286fa384e38886c59abf512102fb0356c750c",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/correction-and-retraction/commercial-use",
+      "title": "Correction And Retraction — Commercial Use",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "routeRole": "commercial-use",
+      "directAnswer": "Correction And Retraction — Commercial Use is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-offer-layers",
+          "locator": "lib/federation/readiness-tranche-21.ts — OFFER_LAYERS and OFFER_BOUNDARY",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Separates free structural preflight, $49 document preflight, disabled proposed $250 verified dossier, and a distinct $5,000 contracted pilot.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:b533d23a694f48811edf09f8b93ecbdc459782b2358d0d55b9c22aa15af8ed05",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_99242712f297cbc173746d63",
+      "candidateDigest": "sha256:4dfb74a7f2262cfcd33615d10bfe98e721971369808305921fb3595b24dc8dbc",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/intellectual-property/comparison",
+      "title": "Intellectual Property — Comparison",
+      "conceptId": "urn:maha:concept:governance:intellectual-property",
+      "routeRole": "comparison",
+      "directAnswer": "Intellectual Property — Comparison is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-wipo-ip-ai",
+          "locator": "https://www.wipo.int/meetings/en/doc_details.jsp?doc_id=499504 — issue groups 4–13",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Organizes AI/IP questions across patents, copyright, designs, data, trade secrets, and technology gaps.",
+          "boundary": "The issues paper frames questions and options; it is not current national law, legal advice, or a final WIPO position."
+        }
+      ],
+      "decisionDigest": "sha256:303728c4e2ce10ad3d71ef79f168e60c73bd36aa8d8f172a532ba28b15270771",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_9945c9bcee008b06ba9199fb",
+      "candidateDigest": "sha256:9fc3b4d518ff7b9b0fbfb156c6141016ac748cb8000c96966599a900ffb074f1",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/interoperability/uncertainty",
+      "title": "Interoperability — Uncertainty",
+      "conceptId": "urn:maha:concept:governance:interoperability",
+      "routeRole": "uncertainty",
+      "directAnswer": "Interoperability — Uncertainty is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-eu-interoperability-act",
+          "locator": "https://interoperable-europe.ec.europa.eu/Interoperable-Europe-Act-Regulation — Articles 1–6 and Annex",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Establishes an EU public-sector legal framework, four interoperability layers, assessments, and sharing rules.",
+          "boundary": "Current law is bounded to the Regulation scope; the four layers are not an executable universal machine rule."
+        }
+      ],
+      "decisionDigest": "sha256:9e665fd9d06b067adb5e4f6a00e8dd76aaea3e94e870ffb66ab0b244bbc5878a",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_9bf9198d75b5172dfdbd8663",
+      "candidateDigest": "sha256:47c8a9602179300619c0da9f1a9027a7a66139fe1b76c001dd98da3a3cd38da3",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/digital-public-infrastructure/mechanisms",
+      "title": "Digital Public Infrastructure — Mechanisms",
+      "conceptId": "urn:maha:concept:governance:digital-public-infrastructure",
+      "routeRole": "mechanisms",
+      "directAnswer": "Digital Public Infrastructure — Mechanisms is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-oecd-dpi-2024",
+          "locator": "https://doi.org/10.1787/ff525dc8-en — abstract and sections 2–4",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Defines DPI, identifies common components, and records governance, adoption, funding, privacy, security, resilience, and cross-border considerations.",
+          "boundary": "The policy paper does not prescribe one stack, prove causal outcomes, or turn survey observations into universal requirements."
+        }
+      ],
+      "decisionDigest": "sha256:afda04bc7c3bd52a95a6df602307b03d25fc2d6ef2a3d6a0202934a8f6bd4045",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_9e437f23e54ca9b613f2dc25",
+      "candidateDigest": "sha256:5d8e6bbe451b52e315ae5d6a7f034a4dce9e8df56f22d5cd0ea457db9b487e96",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/digital-public-infrastructure/definition",
+      "title": "Digital Public Infrastructure — Definition",
+      "conceptId": "urn:maha:concept:governance:digital-public-infrastructure",
+      "routeRole": "definition",
+      "directAnswer": "Digital Public Infrastructure — Definition is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-oecd-dpi-2024",
+          "locator": "https://doi.org/10.1787/ff525dc8-en — abstract and sections 2–4",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Defines DPI, identifies common components, and records governance, adoption, funding, privacy, security, resilience, and cross-border considerations.",
+          "boundary": "The policy paper does not prescribe one stack, prove causal outcomes, or turn survey observations into universal requirements."
+        }
+      ],
+      "decisionDigest": "sha256:a5754daf343866fb48715be796397a6cec05ae472e5bcfa8833d0b32223b3c4a",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_9f9fb8e2bddf2c3d845f0735",
+      "candidateDigest": "sha256:d594bbd53d6a3e6fd024d03c1b4c25a7e52a5548956f4c971cc06b48c06eeb26",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/calculation-receipts/commercial-use",
+      "title": "Calculation Receipts — Commercial Use",
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "routeRole": "commercial-use",
+      "directAnswer": "Calculation Receipts — Commercial Use is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-offer-layers",
+          "locator": "lib/federation/readiness-tranche-21.ts — OFFER_LAYERS and OFFER_BOUNDARY",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Separates free structural preflight, $49 document preflight, disabled proposed $250 verified dossier, and a distinct $5,000 contracted pilot.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:c1d05cb1b83d671aecd64817a66bc877f24f90a73eb04921e86de98085162f6b",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_a1fe22281db9fdc7d01d1821",
+      "candidateDigest": "sha256:e70414c84648aa78b250fc212a9289a2195ab74a023feb1f4ec7d0ca4f9f8792",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/competition-policy/sources",
+      "title": "Competition Policy — Sources",
+      "conceptId": "urn:maha:concept:governance:competition-policy",
+      "routeRole": "sources",
+      "directAnswer": "Competition Policy — Sources is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-doj-antitrust",
+          "locator": "https://www.justice.gov/atr/antitrust-laws-and-you — Sherman, Clayton, FTC Act; https://www.justice.gov/atr/merger-guidelines/overview — 2023 Merger Guidelines",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Identifies US federal antitrust authorities and distinct conduct and merger-analysis mechanisms.",
+          "boundary": "US federal sources are not other jurisdictions, case-specific legal advice, or an executable enforcement rule."
+        }
+      ],
+      "decisionDigest": "sha256:59e54337c5153856051999fed240eec28d85791d84e192d0cf5c08527865c589",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_a21abba1b10ceeb93075a444",
+      "candidateDigest": "sha256:11116f78858bc3021a953931440efe1e5ba813eabae53ef878e6caea99ffe21d",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/interoperability/comparison",
+      "title": "Interoperability — Comparison",
+      "conceptId": "urn:maha:concept:governance:interoperability",
+      "routeRole": "comparison",
+      "directAnswer": "Interoperability — Comparison is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-eu-interoperability-act",
+          "locator": "https://interoperable-europe.ec.europa.eu/Interoperable-Europe-Act-Regulation — Articles 1–6 and Annex",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Establishes an EU public-sector legal framework, four interoperability layers, assessments, and sharing rules.",
+          "boundary": "Current law is bounded to the Regulation scope; the four layers are not an executable universal machine rule."
+        }
+      ],
+      "decisionDigest": "sha256:a54a5ab40643b18a486a214a1e80a866d23b83a43874404ef6db790cc95d0d93",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_a30ebb7c950adc4ede318899",
+      "candidateDigest": "sha256:b5f60b0cdf44908d2892e5b7f336d7a367ebb28a8c6f7cd2b1230cbb82f1acab",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/intellectual-property/implementation",
+      "title": "Intellectual Property — Implementation",
+      "conceptId": "urn:maha:concept:governance:intellectual-property",
+      "routeRole": "implementation",
+      "directAnswer": "Intellectual Property — Implementation is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-wipo-ip-ai",
+          "locator": "https://www.wipo.int/meetings/en/doc_details.jsp?doc_id=499504 — issue groups 4–13",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Organizes AI/IP questions across patents, copyright, designs, data, trade secrets, and technology gaps.",
+          "boundary": "The issues paper frames questions and options; it is not current national law, legal advice, or a final WIPO position."
+        }
+      ],
+      "decisionDigest": "sha256:daee0fa3d2699b3b3bf65887c6b86b200d4bcc233e684ce19d059db4c9425985",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_a322413e35ee23167a146ced",
+      "candidateDigest": "sha256:2d792bd8a8d168e227ab8e9925c3b482c136b11638799cf41053ad363b5e0c15",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/enterprise-mcp-gateway/commercialization",
+      "title": "Enterprise MCP Gateway — Commercialization",
+      "conceptId": "urn:maha:concept:authority:enterprise-mcp-gateway",
+      "routeRole": "commercialization",
+      "directAnswer": "Enterprise MCP Gateway — Commercialization is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-product-federation",
+          "locator": "lib/product-federation.ts — buildProductFederation and internalProducts",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Projects actual source product states and acquisition modes without enabling CABEZON payment.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:30cf917a3c9dfcadf203817cbe91705d70ea39daa0360c3faaab5f53cab58493",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_a635802d1b21eb2ac591b5f9",
+      "candidateDigest": "sha256:78cba7de2b99a2f4f5e3e7c262b20b8647e295011622525a2fb7ea19ba4236ff",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/error-budgets/reproducibility",
+      "title": "Error Budgets — Reproducibility",
+      "conceptId": "urn:maha:concept:computation:error-budgets",
+      "routeRole": "reproducibility",
+      "directAnswer": "Error Budgets — Reproducibility is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-error-budget",
+          "locator": "lib/federation/readiness-tranche-21.ts — errorBudget",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Computes an exact integer sum of squared non-negative component budgets.",
+          "boundary": "This fixture does not select components, claim statistical independence, take a square root, or establish an uncertainty model."
+        },
+        {
+          "sourceId": "t21-google-sre-error-budget",
+          "locator": "https://sre.google/sre-book/embracing-risk/ — section “Forming Your Error Budget”",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Defines an error budget from a service-level objective as the permitted unreliability within a defined period.",
+          "boundary": "This is one organization’s published practice, not a standard; it sets no budget for any service and does not measure correctness."
+        }
+      ],
+      "decisionDigest": "sha256:c944d0c38ec3dc4f9c641c8e371b0c04dde544b2d65f3066120efe2857b865ca",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_a66bb77b86d0f2c13e26308a",
+      "candidateDigest": "sha256:946391b14296dd39c9dec2cea57e85a97665c587676e90ade23ca1b965dbd344",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/competition-policy/mechanisms",
+      "title": "Competition Policy — Mechanisms",
+      "conceptId": "urn:maha:concept:governance:competition-policy",
+      "routeRole": "mechanisms",
+      "directAnswer": "Competition Policy — Mechanisms is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-doj-antitrust",
+          "locator": "https://www.justice.gov/atr/antitrust-laws-and-you — Sherman, Clayton, FTC Act; https://www.justice.gov/atr/merger-guidelines/overview — 2023 Merger Guidelines",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Identifies US federal antitrust authorities and distinct conduct and merger-analysis mechanisms.",
+          "boundary": "US federal sources are not other jurisdictions, case-specific legal advice, or an executable enforcement rule."
+        }
+      ],
+      "decisionDigest": "sha256:3d41a6b69f2112799b3e1368930f077d8728e0f904372484c767121f6b5e7c3c",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_a66fa27faee51761591d07a5",
+      "candidateDigest": "sha256:f804f34f22a6be0e061d308b66bd6ded905a376073bc6a3d47b16455ab957625",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/assurance-cases/tradeoffs",
+      "title": "Assurance Cases — Tradeoffs",
+      "conceptId": "urn:maha:concept:governance:assurance-cases",
+      "routeRole": "tradeoffs",
+      "directAnswer": "Assurance Cases — Tradeoffs is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-nist-assurance",
+          "locator": "https://csrc.nist.gov/glossary/term/assurance_case — definition, source documents, assumptions and evidence",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Defines an assurance case as an auditable argument supported by evidence and explicit assumptions.",
+          "boundary": "The glossary does not establish current law, adequacy of a particular case, or superiority over an audit or certification."
+        }
+      ],
+      "decisionDigest": "sha256:f466ee451900d0283867079676387c111178a15f34ad42e39054a297231cbf5f",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_a8567610f84e6c76c94db4c9",
+      "candidateDigest": "sha256:8efa5b392cf6ece545c025a0b2604a3ed974c55e4a2b429792d733c88aae1c36",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/assurance-cases/evidence",
+      "title": "Assurance Cases — Evidence",
+      "conceptId": "urn:maha:concept:governance:assurance-cases",
+      "routeRole": "evidence",
+      "directAnswer": "Assurance Cases — Evidence is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-nist-assurance",
+          "locator": "https://csrc.nist.gov/glossary/term/assurance_case — definition, source documents, assumptions and evidence",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Defines an assurance case as an auditable argument supported by evidence and explicit assumptions.",
+          "boundary": "The glossary does not establish current law, adequacy of a particular case, or superiority over an audit or certification."
+        }
+      ],
+      "decisionDigest": "sha256:18f27bcf999f54436ffb76e803a824c59a49399b910d32eb248913bfcddcb6a6",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_a865e0153eccaac18a2a8706",
+      "candidateDigest": "sha256:42c73e94583f7143d67e0d0fae9dc49aa1f4335dabdf278f77a4185356a10338",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/human-approval-gates/commercialization",
+      "title": "Human Approval Gates — Commercialization",
+      "conceptId": "urn:maha:concept:authority:human-approval-gates",
+      "routeRole": "commercialization",
+      "directAnswer": "Human Approval Gates — Commercialization is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-product-federation",
+          "locator": "lib/product-federation.ts — buildProductFederation and internalProducts",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Projects actual source product states and acquisition modes without enabling CABEZON payment.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:fc1dd9264e7a968cdc8f4367a6977c5abfc4f2a4e0aeaf149b16367cd031e19e",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_b0b9232e69dc37951ca96a2d",
+      "candidateDigest": "sha256:dc93bb51ebde463575ca9308a18e099be5f4ff4fd45e6a22eb6a368fbaf1be71",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/evidence-dossiers/commercial-use",
+      "title": "Evidence Dossiers — Commercial Use",
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "routeRole": "commercial-use",
+      "directAnswer": "Evidence Dossiers — Commercial Use is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-offer-layers",
+          "locator": "lib/federation/readiness-tranche-21.ts — OFFER_LAYERS and OFFER_BOUNDARY",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Separates free structural preflight, $49 document preflight, disabled proposed $250 verified dossier, and a distinct $5,000 contracted pilot.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:c2e5fcb8a9468e42139da167cdbc6fae8ac1010686001f1e23f0ee07f73e39d8",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_b0cf64933df6509bf5ce911a",
+      "candidateDigest": "sha256:68d960cb4cc6df0498309a2cd5c34a6494c17f064a670bcc81f4955f15cbb27c",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/intellectual-property/tradeoffs",
+      "title": "Intellectual Property — Tradeoffs",
+      "conceptId": "urn:maha:concept:governance:intellectual-property",
+      "routeRole": "tradeoffs",
+      "directAnswer": "Intellectual Property — Tradeoffs is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-wipo-ip-ai",
+          "locator": "https://www.wipo.int/meetings/en/doc_details.jsp?doc_id=499504 — issue groups 4–13",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Organizes AI/IP questions across patents, copyright, designs, data, trade secrets, and technology gaps.",
+          "boundary": "The issues paper frames questions and options; it is not current national law, legal advice, or a final WIPO position."
+        }
+      ],
+      "decisionDigest": "sha256:be5e4ab402de28986b814617eb228ff86f384c9676f3a62117e172bdec381c18",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_b6fd957cd4fc6f280ae87a6e",
+      "candidateDigest": "sha256:1c16f0ab59487f2942aef37f144a404419856c5f79a2de8adbfcb6b7b47798d1",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/provenance-witnessing/commercialization",
+      "title": "Provenance Witnessing — Commercialization",
+      "conceptId": "urn:maha:concept:authority:provenance-witnessing",
+      "routeRole": "commercialization",
+      "directAnswer": "Provenance Witnessing — Commercialization is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-product-federation",
+          "locator": "lib/product-federation.ts — buildProductFederation and internalProducts",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Projects actual source product states and acquisition modes without enabling CABEZON payment.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:45418c728a28fc3713403f0d0e0c2de909d2ba0deb73ffc68eed2073a977ab72",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_b731767fcff0c93f5a475e66",
+      "candidateDigest": "sha256:b77c6cf79b363f58429de2e03bf48f8705499ce31c34aab90277e3947b8997cc",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/competition-policy/comparison",
+      "title": "Competition Policy — Comparison",
+      "conceptId": "urn:maha:concept:governance:competition-policy",
+      "routeRole": "comparison",
+      "directAnswer": "Competition Policy — Comparison is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-doj-antitrust",
+          "locator": "https://www.justice.gov/atr/antitrust-laws-and-you — Sherman, Clayton, FTC Act; https://www.justice.gov/atr/merger-guidelines/overview — 2023 Merger Guidelines",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Identifies US federal antitrust authorities and distinct conduct and merger-analysis mechanisms.",
+          "boundary": "US federal sources are not other jurisdictions, case-specific legal advice, or an executable enforcement rule."
+        }
+      ],
+      "decisionDigest": "sha256:73e6e11dc59edbcf580d84c37ccf36891b3fcb26d6a6a2f0c44a1b9bc36b5ef3",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_b8aa85f5a9deadae291cdc83",
+      "candidateDigest": "sha256:ec7386b006bba1a60879bd7f3281cc4989e776712e43267f848ed5bb2e31bf3b",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/digital-public-infrastructure/evidence",
+      "title": "Digital Public Infrastructure — Evidence",
+      "conceptId": "urn:maha:concept:governance:digital-public-infrastructure",
+      "routeRole": "evidence",
+      "directAnswer": "Digital Public Infrastructure — Evidence is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-oecd-dpi-2024",
+          "locator": "https://doi.org/10.1787/ff525dc8-en — abstract and sections 2–4",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Defines DPI, identifies common components, and records governance, adoption, funding, privacy, security, resilience, and cross-border considerations.",
+          "boundary": "The policy paper does not prescribe one stack, prove causal outcomes, or turn survey observations into universal requirements."
+        }
+      ],
+      "decisionDigest": "sha256:733ec7136e39020cfbfd945c7ec1703d5783c482092dc6d495c5f46b10b49c64",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_ba19526bba1d8c7647a0572f",
+      "candidateDigest": "sha256:0b7918e22861d31e2d82e4619e4ca0a3a73bcd12ae26a45cd95d03c9f92988ea",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/optimization/worked-example",
+      "title": "Optimization — Worked Example",
+      "conceptId": "urn:maha:concept:computation:optimization",
+      "routeRole": "worked-example",
+      "directAnswer": "Optimization — Worked Example is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-bounded-minimum",
+          "locator": "lib/federation/readiness-tranche-21.ts — boundedMinimum",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Enumerates a finite declared objective vector and returns the first exact minimum.",
+          "boundary": "This fixture does not solve continuous, constrained, stochastic, or large-scale optimization problems."
+        },
+        {
+          "sourceId": "src-boyd-optimization",
+          "locator": "§4.1.1–4.1.2, pp. 127–129",
+          "rightsBasis": "reference-only",
+          "scope": "Defines a standard optimization problem using an objective, inequality and equality constraints, feasible points, and optimal value.",
+          "boundary": "Does not establish convexity, existence or uniqueness of a solution, or performance of a solver for a particular problem."
+        }
+      ],
+      "decisionDigest": "sha256:10dd5eae3a65362ff204d10ce5f8ffa424375992b8b495f3f8c66af4f0f7a85f",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_bad19bc3997451a693a4e79c",
+      "candidateDigest": "sha256:f628f07a167fbe20ec9fbd1e3a578e4eeab7e8ef41515768e33067538d5334f4",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/traceability/mechanisms",
+      "title": "Traceability — Mechanisms",
+      "conceptId": "urn:maha:concept:governance:traceability",
+      "routeRole": "mechanisms",
+      "directAnswer": "Traceability — Mechanisms is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-eu-ai-traceability",
+          "locator": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-71 — Recital 71 and Articles 11, 12, 19 and 72",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Connects high-risk AI traceability to technical documentation, automatic logs, retention, and post-market monitoring.",
+          "boundary": "The mechanism is specific to the EU AI Act context and does not establish universal technical sufficiency or legal advice."
+        }
+      ],
+      "decisionDigest": "sha256:7d289f4c2dbbf8aa198b219e6954ad37ca2eb24ef113e7ae7c0e023ebdf6e9de",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_bc2bce2a376f66fd93792242",
+      "candidateDigest": "sha256:8c3ffdc00fe716ce5656f9a182e634f68a40371a155f57548fb6e8acad26dc2d",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/digital-public-infrastructure/comparison",
+      "title": "Digital Public Infrastructure — Comparison",
+      "conceptId": "urn:maha:concept:governance:digital-public-infrastructure",
+      "routeRole": "comparison",
+      "directAnswer": "Digital Public Infrastructure — Comparison is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-oecd-dpi-2024",
+          "locator": "https://doi.org/10.1787/ff525dc8-en — abstract and sections 2–4",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Defines DPI, identifies common components, and records governance, adoption, funding, privacy, security, resilience, and cross-border considerations.",
+          "boundary": "The policy paper does not prescribe one stack, prove causal outcomes, or turn survey observations into universal requirements."
+        }
+      ],
+      "decisionDigest": "sha256:2ac09ebd90f89da0447f170740e37948452e82552f8007121c861c172edde9b5",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_c05ceb49a98afde6f4382268",
+      "candidateDigest": "sha256:3595bc0f671dc1f7e6e25d7f6f5c73b0914ccc3c0035e5d9dee67b4f4e988e12",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/endpoint-substitution-defense/commercialization",
+      "title": "Endpoint Substitution Defense — Commercialization",
+      "conceptId": "urn:maha:concept:authority:endpoint-substitution-defense",
+      "routeRole": "commercialization",
+      "directAnswer": "Endpoint Substitution Defense — Commercialization is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-product-federation",
+          "locator": "lib/product-federation.ts — buildProductFederation and internalProducts",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Projects actual source product states and acquisition modes without enabling CABEZON payment.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:01f3d24f4b4aaabb2da17b35ffb9d4169d3ba41fca2d1134a297941c2c6be3d9",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_c1d35a50bb5dfee780da69ef",
+      "candidateDigest": "sha256:7116c36e9d1524a212e3436b1ad0b7e37fe35f4dccbc0ecd5266b30d60d2a66e",
+      "canonicalUrl": "https://policy.mahastrategies.com/policy/assurance-cases/definition",
+      "title": "Assurance Cases — Definition",
+      "conceptId": "urn:maha:concept:governance:assurance-cases",
+      "routeRole": "definition",
+      "directAnswer": "Assurance Cases — Definition is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-nist-assurance",
+          "locator": "https://csrc.nist.gov/glossary/term/assurance_case — definition, source documents, assumptions and evidence",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Defines an assurance case as an auditable argument supported by evidence and explicit assumptions.",
+          "boundary": "The glossary does not establish current law, adequacy of a particular case, or superiority over an audit or certification."
+        }
+      ],
+      "decisionDigest": "sha256:739f9041571f8dd0f79cbf40d198be66544de7511a22dd97aac717c7b552110b",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_cd30fe8a10e733f835d60834",
+      "candidateDigest": "sha256:759eff170512a4612760e14487c1554fcd7322a44db4aef475044829bd448873",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/formal-verification/reproducibility",
+      "title": "Formal Verification — Reproducibility",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "routeRole": "reproducibility",
+      "directAnswer": "Formal Verification — Reproducibility is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-formal-proof-lifecycle",
+          "locator": "lib/evidence-dossier/formal-proof-fixture.ts — FORMAL_PROOF_FIXTURE_DOSSIER and FORMAL_PROOF_FIXTURE_DIGEST",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Binds a synthetic interval claim to a machine-checked Lean proof, deterministic calculation, sources, and an offline-verifiable package.",
+          "boundary": "A proof establishes deduction under declared assumptions, not empirical truth, source fidelity, kernel equivalence, or independent reproduction."
+        },
+        {
+          "sourceId": "src-nist-formal-verification",
+          "locator": "Definition and Notes",
+          "rightsBasis": "reference-only",
+          "scope": "Defines formal verification through formal requirements, a model, logic, and rules of inference.",
+          "boundary": "Does not establish that a particular model matches the implemented system or that a particular proof is sound."
+        }
+      ],
+      "decisionDigest": "sha256:92a76863f232fea1ad95f275d41b47d1cddf1cd7a997ec461bfa915e846ba178",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_d06946e7b842a6b692144ebf",
+      "candidateDigest": "sha256:306b3dbf95f0847912bc73d8d4d00edc6a11df3da30efd6ec5c34df1f29bbcc0",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/numerical-stability/machine-interface",
+      "title": "Numerical Stability — Machine Interface",
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "routeRole": "machine-interface",
+      "directAnswer": "Numerical Stability — Machine Interface is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-cancellation",
+          "locator": "lib/federation/readiness-tranche-21.ts — cancellationFixture",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Compares one specified IEEE-754 binary64 cancellation result with exact integer arithmetic.",
+          "boundary": "One cancellation example does not characterize an algorithm, platform beyond ECMAScript Number semantics, or general stability."
+        },
+        {
+          "sourceId": "src-nist-stability",
+          "locator": "Discussion of stability and conditioning",
+          "rightsBasis": "reference-only",
+          "scope": "Distinguishes an ill-conditioned problem from an unstable algorithm and bounds stability by comparison with inherent error.",
+          "boundary": "Does not establish the stability of a named algorithm without an analysis under its stated inputs and arithmetic."
+        }
+      ],
+      "decisionDigest": "sha256:bba1e3c2c4706746093e64e575dfd68e479bc9d8f57fdbf38bd8f9be4ea6e04f",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_e11d9acb52d27d02e64e171b",
+      "candidateDigest": "sha256:9011766e4cd40029edc36694ecc246cfead4102068da3bae1b2cb86ecf075746",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/quota-enforcement/commercialization",
+      "title": "Quota Enforcement — Commercialization",
+      "conceptId": "urn:maha:concept:authority:quota-enforcement",
+      "routeRole": "commercialization",
+      "directAnswer": "Quota Enforcement — Commercialization is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-product-federation",
+          "locator": "lib/product-federation.ts — buildProductFederation and internalProducts",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Projects actual source product states and acquisition modes without enabling CABEZON payment.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:c9d19de7570979cd8968512010ec37e8e7eab8a2998c2a2abdf4f1b35a5d6f31",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_e3921066edee31291c7f4712",
+      "candidateDigest": "sha256:f6f45d07ed0cdca7f7fdf90eec13d8acb1b848d947e16d908237ffe84b176912",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/numerical-integration/machine-interface",
+      "title": "Numerical Integration — Machine Interface",
+      "conceptId": "urn:maha:concept:computation:numerical-integration",
+      "routeRole": "machine-interface",
+      "directAnswer": "Numerical Integration — Machine Interface is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-trapezoid",
+          "locator": "lib/federation/readiness-tranche-21.ts — trapezoidIntegral",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Computes an exact rational composite trapezoid result on an equally spaced integer grid.",
+          "boundary": "This fixture does not estimate quadrature error, choose a grid, or establish that the sampled function is integrable."
+        },
+        {
+          "sourceId": "src-dlmf-quadrature",
+          "locator": "§3.5(iv), equation 3.5.15 and exactness statement",
+          "rightsBasis": "reference-only",
+          "scope": "Defines interpolatory quadrature with weights and an error term and states its polynomial exactness.",
+          "boundary": "Does not establish convergence or error for an arbitrary integrand, node choice, or numerical implementation."
+        }
+      ],
+      "decisionDigest": "sha256:b71443ddf44ceab7b74ab7904be5fa7dc51954d19e716d1465c851771f8286e2",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_eac662a166aa8f5f94e0bc20",
+      "candidateDigest": "sha256:21df829e33071222c063e60d040f4b18cda6921bf9a215f49da61014718ee1ef",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/optimization/reproducibility",
+      "title": "Optimization — Reproducibility",
+      "conceptId": "urn:maha:concept:computation:optimization",
+      "routeRole": "reproducibility",
+      "directAnswer": "Optimization — Reproducibility is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-bounded-minimum",
+          "locator": "lib/federation/readiness-tranche-21.ts — boundedMinimum",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Enumerates a finite declared objective vector and returns the first exact minimum.",
+          "boundary": "This fixture does not solve continuous, constrained, stochastic, or large-scale optimization problems."
+        },
+        {
+          "sourceId": "src-boyd-optimization",
+          "locator": "§4.1.1–4.1.2, pp. 127–129",
+          "rightsBasis": "reference-only",
+          "scope": "Defines a standard optimization problem using an objective, inequality and equality constraints, feasible points, and optimal value.",
+          "boundary": "Does not establish convexity, existence or uniqueness of a solution, or performance of a solver for a particular problem."
+        }
+      ],
+      "decisionDigest": "sha256:4b24cfbd635908b544bcaaeaf957e122b8b9be0d7fa5c5bfb58fd86e6caac7f9",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_ec3b866d1dd8cb3b5b4608b0",
+      "candidateDigest": "sha256:a1e261f28d256bd8a6ba831cace1f221fd83f949ac2c846d204af4893cdf15d5",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/source-recovery/commercial-use",
+      "title": "Source Recovery — Commercial Use",
+      "conceptId": "urn:maha:concept:evidence:source-recovery",
+      "routeRole": "commercial-use",
+      "directAnswer": "Source Recovery — Commercial Use is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-offer-layers",
+          "locator": "lib/federation/readiness-tranche-21.ts — OFFER_LAYERS and OFFER_BOUNDARY",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Separates free structural preflight, $49 document preflight, disabled proposed $250 verified dossier, and a distinct $5,000 contracted pilot.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:84d41bf27de66977226a5b3bcf62245c505c5b999f05a39db4af6cb24e8255f8",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_ec46737935d410443b264871",
+      "candidateDigest": "sha256:ed53c3025d4ebf020fdb0b285076ad28d1de341aa594dd5f6a833aec14d8afd9",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/passage-support/commercial-use",
+      "title": "Passage Support — Commercial Use",
+      "conceptId": "urn:maha:concept:evidence:passage-support",
+      "routeRole": "commercial-use",
+      "directAnswer": "Passage Support — Commercial Use is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-offer-layers",
+          "locator": "lib/federation/readiness-tranche-21.ts — OFFER_LAYERS and OFFER_BOUNDARY",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Separates free structural preflight, $49 document preflight, disabled proposed $250 verified dossier, and a distinct $5,000 contracted pilot.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:10daa935899ced37245295a427d1807ba6fe62de006b78accd6b6c5cc2232ae0",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_ee7975f658326487f563d6c1",
+      "candidateDigest": "sha256:4d408ca80708bb25d8b63617ae288a802c4522778574e4d0bd176cc9447a8cf0",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/evidence-workflows/runtime-witness-receipts/commercial-use",
+      "title": "Runtime Witness Receipts — Commercial Use",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "routeRole": "commercial-use",
+      "directAnswer": "Runtime Witness Receipts — Commercial Use is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-offer-layers",
+          "locator": "lib/federation/readiness-tranche-21.ts — OFFER_LAYERS and OFFER_BOUNDARY",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Separates free structural preflight, $49 document preflight, disabled proposed $250 verified dossier, and a distinct $5,000 contracted pilot.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:90a0969ff5c9f86348063aed48d530080998ac5c73977d2f4b6ced133d1c71da",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_fc4da46d837d7b134b3d488f",
+      "candidateDigest": "sha256:80a618aa450d8228bed6528be069ead11ba648b0a4dd1853ac6084adcdbc4f4a",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/error-budgets/worked-example",
+      "title": "Error Budgets — Worked Example",
+      "conceptId": "urn:maha:concept:computation:error-budgets",
+      "routeRole": "worked-example",
+      "directAnswer": "Error Budgets — Worked Example is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-error-budget",
+          "locator": "lib/federation/readiness-tranche-21.ts — errorBudget",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Computes an exact integer sum of squared non-negative component budgets.",
+          "boundary": "This fixture does not select components, claim statistical independence, take a square root, or establish an uncertainty model."
+        },
+        {
+          "sourceId": "t21-google-sre-error-budget",
+          "locator": "https://sre.google/sre-book/embracing-risk/ — section “Forming Your Error Budget”",
+          "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+          "scope": "Defines an error budget from a service-level objective as the permitted unreliability within a defined period.",
+          "boundary": "This is one organization’s published practice, not a standard; it sets no budget for any service and does not measure correctness."
+        }
+      ],
+      "decisionDigest": "sha256:5f849f1cc13221d05fbeb2b5ee667237340e232b507db15a89ff04deb804faf3",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_fcea33351dc6b5ed02dac901",
+      "candidateDigest": "sha256:a773d6ca05c444480f5b117a6dbd43bb98c70c31811efcdcdb1ece603b0b7cc0",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/deterministic-computation/dimensional-analysis/reproducibility",
+      "title": "Dimensional Analysis — Reproducibility",
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "routeRole": "reproducibility",
+      "directAnswer": "Dimensional Analysis — Reproducibility is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-dimension-vector",
+          "locator": "lib/federation/readiness-tranche-21.ts — combineDimensions",
+          "rightsBasis": "project-owned-reference-only",
+          "scope": "Combines seven-component SI base-dimension exponent vectors under multiplication or division.",
+          "boundary": "Dimensional consistency is necessary but does not establish a correct model, scale factor, unit conversion, or empirical validity."
+        },
+        {
+          "sourceId": "src-bipm-dimensions",
+          "locator": "§2.3.3, p. 136, Table 3",
+          "rightsBasis": "reference-only",
+          "scope": "Defines dimensions of base and derived quantities and their expression as products of base dimensions.",
+          "boundary": "Does not validate a particular equation, measurement, unit conversion, or uncertainty budget."
+        }
+      ],
+      "decisionDigest": "sha256:d299bf16943affdd0b8207f61b680d5b8c5cb6dc356c82ba5e7d50a7cfb85d6e",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    },
+    {
+      "candidateId": "cand_ff7d7f42d8f2f09fd7401efd",
+      "candidateDigest": "sha256:23433729a51650edffdeb52fc8b56b3dc2f6deed34669f238ca2934ac5253312",
+      "canonicalUrl": "https://www.mahastrategies.com/clearing/agent-governance/replay-safe-execution/commercialization",
+      "title": "Replay Safe Execution — Commercialization",
+      "conceptId": "urn:maha:concept:authority:replay-safe-execution",
+      "routeRole": "commercialization",
+      "directAnswer": "Replay Safe Execution — Commercialization is limited to the bound authority, implementation, or commercial acquisition state and carries its exclusions explicitly.",
+      "requiredSections": [
+        "Direct answer",
+        "Authority or implementation",
+        "Mechanism or acquisition state",
+        "Verification and uncertainty",
+        "What this does not establish",
+        "Dependencies and related concepts"
+      ],
+      "boundedQuestions": [
+        "What is established?",
+        "Which source or symbol establishes it?",
+        "What prerequisite remains separate?",
+        "What remains unavailable or uncertain?",
+        "What must not be inferred?"
+      ],
+      "sourceBindings": [
+        {
+          "sourceId": "t21-product-federation",
+          "locator": "lib/product-federation.ts — buildProductFederation and internalProducts",
+          "rightsBasis": "project-owned-commercial-contract-reference",
+          "scope": "Projects actual source product states and acquisition modes without enabling CABEZON payment.",
+          "boundary": "The four declarations describe distinct scopes and acquisition states. A proposed or paid-pilot list price is not self-service availability, and no local readiness artifact may enable checkout or alter refund, delivery, privacy, or payment behavior."
+        }
+      ],
+      "decisionDigest": "sha256:130350816476eab312a148fcd5dc11f6f90c51191363bd2edc4216f5f6ffe91b",
+      "implementationState": "specification-only",
+      "publicRouteCreated": false
+    }
+  ],
+  "provenanceDigest": "sha256:e8d9cf8756c86673f004f1516ec89ba3629a00504f8170bf2f2ca7a0e034e8b9"
+}

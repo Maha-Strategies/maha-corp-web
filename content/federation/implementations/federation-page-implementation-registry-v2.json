@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "maha-federation-page-implementation-registry/2.0",
+  "frozenOn": "2026-09-07",
+  "sourceLedgerDigest": "sha256:1dadfa342c173b24e4c70a1910fa142727b49c3034e610ad7a0d1e0e0db0ed67",
+  "sourceCandidateMapDigest": "sha256:7d2be45637935f0957f064a9e668c874c7239213df99449d7ddf9c1619dfe5f0",
+  "status": "all-candidate-pages-implemented-local-owner-handoff",
+  "counts": {
+    "pages": 1628,
+    "readyForOwnerIntegration": 1628,
+    "blocked": 0,
+    "boundedAnswers": 8140,
+    "sourceBindings": 2431,
+    "publicRoutesCreated": 0,
+    "nextBuildsRun": 0,
+    "vercelBuildsRun": 0,
+    "byProperty": {
+      "mayone-maharajan": 71,
+      "mayon-rajan": 54,
+      "maha-policy": 300,
+      "agentic-publishing": 108,
+      "maha-research": 369,
+      "maha-os": 66,
+      "maha-strategies": 660
+    }
+  },
+  "manifests": [
+    {
+      "siteId": "agentic-publishing",
+      "canonicalHost": "publish.mahastrategies.com",
+      "pages": 108,
+      "provenanceDigest": "sha256:e994003819d3f48a10daec0f1a79c437fd0795d4b8f980e093497a38288df177"
+    },
+    {
+      "siteId": "maha-os",
+      "canonicalHost": "www.maha-os.com",
+      "pages": 66,
+      "provenanceDigest": "sha256:0e793dbd7adad5521a6a36ccf53bad686f33451129bbeb7cc91377fbc63fb36d"
+    },
+    {
+      "siteId": "maha-policy",
+      "canonicalHost": "policy.mahastrategies.com",
+      "pages": 300,
+      "provenanceDigest": "sha256:e51e6fb761471a6f4df1313a6475c3cad645477fbb19e71740ef51299511f88f"
+    },
+    {
+      "siteId": "maha-research",
+      "canonicalHost": "research.mahastrategies.com",
+      "pages": 369,
+      "provenanceDigest": "sha256:536a18f9c2e4a8bce048c2a2836ea5809bb2b056ed9228646a7a87fa449d2a45"
+    },
+    {
+      "siteId": "maha-strategies",
+      "canonicalHost": "www.mahastrategies.com",
+      "pages": 660,
+      "provenanceDigest": "sha256:cf69d112d3b001f690f508958637b36d573787297b9f5f0389c8addbfe522d10"
+    },
+    {
+      "siteId": "mayon-rajan",
+      "canonicalHost": "mayonrajan.com",
+      "pages": 54,
+      "provenanceDigest": "sha256:615955328de1e6aad97f9bfc555143eef2b7542bb3dd7e6b579948acfa44d37c"
+    },
+    {
+      "siteId": "mayone-maharajan",
+      "canonicalHost": "mayonemaharajan.com",
+      "pages": 71,
+      "provenanceDigest": "sha256:8893e6e28ca95d95a0daf24f15f4f7f90f606e6e1e868607f64fa3dec22def1a"
+    }
+  ],
+  "releaseBoundary": "No page is crawlable. Every owner must install its handoff manifest, bind an active canonical release to the exact reviewed content digest, and obtain explicit build and deployment authorization.",
+  "provenanceDigest": "sha256:dd60bab7e59111d348ca7947cbc4be498923f25901752a05b5581bfe5b20a261"
+}

@@ -3,14 +3,21 @@ import { buildLlmsManifest } from '@/lib/llms-manifest'
 import { getPublicEpistemicRecords } from '@/lib/public-epistemic-releases'
 import { eligibleSourceSlugs, projectSourceReference } from '@/lib/source-reference-projection'
 import type { MpsClaim } from '@/scripts/expand-graph'
+import { federationLlmsManifest } from '@/lib/federation-publication'
+import { FEDERATION_CANONICAL_HOSTS, normalizedRequestHost } from '@/lib/federation-host-routing'
+import type { NextRequest } from 'next/server'
 
 export const dynamic = 'force-dynamic'
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const requestHost = normalizedRequestHost(request.headers.get('host'))
+  if (FEDERATION_CANONICAL_HOSTS.includes(requestHost as (typeof FEDERATION_CANONICAL_HOSTS)[number]) && requestHost !== 'www.mahastrategies.com') {
+    return new Response(federationLlmsManifest(requestHost), { headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'public, max-age=0, s-maxage=3600' } })
+  }
   const slugs = await eligibleSourceSlugs()
   const references = (await Promise.all(slugs.map((slug) => projectSourceReference(slug))))
     .filter((page): page is NonNullable<typeof page> => page !== null)
     .map((page) => ({ slug: page.slug, title: page.title, sourceId: page.sourceId }))
-  const manifest = buildLlmsManifest(claimsData as MpsClaim[], await getPublicEpistemicRecords(), references)
+  const manifest = `${buildLlmsManifest(claimsData as MpsClaim[], await getPublicEpistemicRecords(), references)}\n${federationLlmsManifest('www.mahastrategies.com')}`
   return new Response(manifest, { headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'public, max-age=0, s-maxage=3600', Link: '</mcp.json>; rel="alternate"; type="application/json"' } })
 }

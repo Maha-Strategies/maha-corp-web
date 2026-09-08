@@ -1,0 +1,3015 @@
+{
+  "schemaVersion": "maha-federation-tranche-twelve-mythology-dependency-validation/1.0",
+  "cohortDigest": "sha256:7a2c2dc931e7cc81f5cc5ecb739c3c78bdc26bc6483ec4f5fe28840db6770619",
+  "dependencyGraphDigest": "sha256:90593f681fe73ea1a5549a3f20770a19d46c858c7d3b3ee62f0ae43a10f54b6b",
+  "rule": "Every Tranche 12 application route must resolve through the Tranche 11 mythology hub plus the observed textual-authority and translation-boundary definitions before implementation.",
+  "counts": {
+    "candidates": 100,
+    "structurallyResolved": 100,
+    "unresolved": 0,
+    "priorTrancheHubDependencies": 100
+  },
+  "entries": [
+    {
+      "candidateId": "cand_9f5129f6534d6024ffd3cec0",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/greek-roman/dionysus-bacchus/epithet-and-cult",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_763fc50de5c75f57a8964521",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/greek-roman/dionysus-bacchus/reception-and-comparison",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_ee0f0d7c891f42e232b3a7d6",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/greek-roman/hermes-mercury/source-identity",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_22816fb088961d6c55ede221",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/greek-roman/hermes-mercury/epithet-and-cult",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_6209efe5c31c50ebb8de8406",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/greek-roman/hermes-mercury/reception-and-comparison",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_153e6118f6c961c3995fd5f1",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/greek-roman/ares-mars/source-identity",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_45e1b857bfff8e7668400b82",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/greek-roman/ares-mars/epithet-and-cult",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_ac05539156b5a10e55e68e3a",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/greek-roman/ares-mars/reception-and-comparison",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_52b256113221f0df72438302",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/tammuz-dumuzi/city-and-cult",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_f662cf8c172c5e70597324ca",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/tammuz-dumuzi/reception-and-comparison",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_44cf5a491db675046c4d328b",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/ashur/source-text",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_6965c1a310d0548050dc251b",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/ashur/city-and-cult",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_85b66fdea5cc7f726698f6c9",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/ashur/reception-and-comparison",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_60cc1e71806eca43fc6acf07",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/tiamat/source-text",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_9b97ce04c5289450b6c74e88",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/tiamat/city-and-cult",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_ae22c301cd4e6d49a9058eab",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesopotamian/tiamat/reception-and-comparison",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_95227d7a46fd3d8ad838bb1f",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/rudra-shiva/vedic-text",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_63a8ada144654c5613ffd456",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/rudra-shiva/epic-puranic-reception",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_721277577c645b2b77048edb",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/rudra-shiva/epithet-identity",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_84f735a9cd65b6c4252fd82e",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/rudra-shiva/comparison-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_79c2f2bf0b59cdfb5d099dca",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/krishna/vedic-text",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_324d2fd69efaec94d6b84099",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/krishna/epic-puranic-reception",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_b98b1f10b66253364ced1657",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/krishna/epithet-identity",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_0badc811bd61a35f315d8d11",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/krishna/comparison-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_97449eefeb716a467733ed1f",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/devi/vedic-text",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_a1223d93495ae482f4f0b797",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/devi/epic-puranic-reception",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_7cfd1e267bf4607e42e80467",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/devi/epithet-identity",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_0604b3fb2f2617344c50f85d",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/devi/comparison-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_96c280bcd0e9f41d65a498cb",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/egyptian/horus/cult-and-place",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_b2794d584fee952d5795dc31",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/egyptian/horus/reception-and-comparison",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_7bc0cc8d8d6cb04ecb68076d",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/egyptian/seth/source-text",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_c30765790dce896c746d641e",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/egyptian/seth/cult-and-place",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_36c6894a1db6b4c3e140cff8",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/egyptian/seth/reception-and-comparison",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_9de7551d164a08ae4af0decf",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/egyptian/hathor/source-text",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_1a4d8607a9d5d5699906e6aa",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/egyptian/hathor/cult-and-place",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_5bba7266365c744697a3a1c4",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/egyptian/hathor/reception-and-comparison",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_32345805656599d1fc07a39e",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/egyptian/thoth/source-text",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_6c84b1b40a75b3f01ad68e27",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/egyptian/thoth/cult-and-place",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_d83e2af2dad1523048369c3f",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/egyptian/thoth/reception-and-comparison",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_460a982a0dcc7ab0d6e21a25",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/egyptian/anubis/source-text",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_79a86cb180a2c371494b3341",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/egyptian/anubis/cult-and-place",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_ae844ec800ef694dafdf3c59",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/egyptian/anubis/reception-and-comparison",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_6e216be6cdb850bb8ec45ce7",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/freyr/eddic-source",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_d43581524b7926baf63df282",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/freyr/reception-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_f09585ea11724140ffd7ae51",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/loki/eddic-source",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_103c6768bfb0faac36992313",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/loki/reception-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_9b3ca466364a72d151960fce",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/tyr/eddic-source",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_995a6e842da00b4c0f3683bc",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/tyr/reception-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_1347eff618abb151260d72fa",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/baldr/eddic-source",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_53030a548b9ac6497d6162d2",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/baldr/reception-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_7a92bed2cf53f50a1e961781",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/frigg/eddic-source",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_05256ea0ff4558c439cc7345",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/frigg/reception-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_06c9b2b0cacd6ee9c91b593b",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/hel/eddic-source",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_2c8bb79fcc5787379b4df1c2",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/hel/reception-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_d63b341214cc222206a7e8dc",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/njord/eddic-source",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_b43fcf62c04b4b16597e02c6",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/norse-germanic/njord/reception-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_7a85baa6e93450506cf2de0d",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/chinese/shangdi/source-lineage",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_b848a52af99c834919b205f6",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/chinese/shangdi/reception-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_80ff71dea8611d2c5a4bc529",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/chinese/tian/source-lineage",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_ee229aeb861271918ee8fdfd",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/chinese/tian/reception-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_46277beb1c8419a3513329af",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/chinese/nuwa/source-lineage",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_f98b80102f02ce494b14d47b",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/chinese/nuwa/reception-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_f5f343a15aebbd25b80e580c",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/chinese/fuxi/source-lineage",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_ec69a021e1cf9e731ec1981b",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/chinese/fuxi/reception-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_aca1596a9bf50120e29c07db",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/chinese/guanyin/source-lineage",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_1a9af8def826a8e7e22d99b4",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/chinese/guanyin/reception-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_32d6dbf763e6145539aa7b06",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/chinese/jade-emperor/source-lineage",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_867d4b758d46199153ce16ee",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/chinese/jade-emperor/reception-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_90d187961ba97f722a68a9e2",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/chinese/queen-mother-of-the-west/source-lineage",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_5c8ce0a1f46966d1edb25f94",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/chinese/queen-mother-of-the-west/reception-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_f740b5dcf81804a0e3ecb6b2",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/chinese/nezha/source-lineage",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_a9943f631e2fcea252bdd460",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/chinese/nezha/reception-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_d902126d330a564cc11acd65",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/amaterasu/source-lineage",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_eb1f1b93f29f484578efa0a9",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/amaterasu/cult-and-reception",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_d419ba1ba68ad5ed0fd75184",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/susanoo/source-lineage",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_600e8ba3d8b15aac6b837aa0",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/susanoo/cult-and-reception",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_b66f3b949c7967eb7d3befe6",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/tsukuyomi/source-lineage",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_08191a36cd0e29782e5a09b3",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/tsukuyomi/cult-and-reception",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_ff5218033a2af380def0b106",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/inari/source-lineage",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_d9b933f9cf7dff37d8afd644",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/inari/cult-and-reception",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_538750f96c35ff398e83ad3a",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/hachiman/source-lineage",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_6811a93b2c1b6bd3de3c6564",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/hachiman/cult-and-reception",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_50ae1c641e05ea8fa9b4d28a",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/izanagi-izanami/source-lineage",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_95f27f5cea9b7f48f0a9ce8d",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/japanese/izanagi-izanami/cult-and-reception",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_b2110b0cc1c615b1369547a6",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/quetzalcoatl/source-identity",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_6664091278b08b5c788bed3e",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/quetzalcoatl/colonial-reception-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_e5f2ad0ca74ea9e194ecaf20",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/tezcatlipoca/source-identity",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_b37e7b2d522123f53169dc9c",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/tezcatlipoca/colonial-reception-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_99602c47fada8b98b65e15a0",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/huitzilopochtli/source-identity",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_c173e48e08149044fc93ff16",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/huitzilopochtli/colonial-reception-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_a771ed469676df8bbb1fdddd",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/tlaloc/source-identity",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_31c965963e28eaa3bae91c54",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/tlaloc/colonial-reception-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_315c2dae656aed4a95dbd8c6",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/maya-maize-god/source-identity",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_2be8569d4865da0e156554e5",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/mesoamerican/maya-maize-god/colonial-reception-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_f97a74f451beca31b1e2ee36",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/african-source-rights-pilots/yoruba-orisha-source-boundaries/source-and-rights-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_8f23339a48898cdf5b920dae",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/african-source-rights-pilots/asante-nyame-source-boundaries/source-and-rights-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_f1d73cbb9c6de4fffa1c5b67",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/african-source-rights-pilots/dahomey-vodun-source-boundaries/source-and-rights-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_afb03cd5db9641672dcab3ed",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/african-source-rights-pilots/ancient-kush-religion-source-boundaries/source-and-rights-boundary",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_5cb759f25ebb598dbab4c727",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/comparative-methodology/iconography-versus-textual-identity/method",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    },
+    {
+      "candidateId": "cand_b92df7f20fc601d84789f4a6",
+      "url": "https://www.mahastrategies.com/knowledge/religion/mythology/comparative-methodology/reception-versus-origin/method",
+      "dependencies": [
+        {
+          "dependsOn": "cand_ae1fa1cb99b9e8599597db24",
+          "url": "https://www.mahastrategies.com/knowledge/religion/mythology",
+          "reason": "mythology-discovery-hub-precedes-specialized-route",
+          "resolution": "tranche-eleven"
+        },
+        {
+          "dependsOn": "observed_56fe9966e4c1a502a8326830",
+          "url": "https://www.mahastrategies.com/knowledge/religion/textual-authority",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-method-anchor"
+        },
+        {
+          "dependsOn": "observed_697a19477c302a0394c914d2",
+          "url": "https://www.mahastrategies.com/knowledge/religion/translation-and-semantic-range",
+          "reason": "observed-religion-methodology-precedes-mythology-route",
+          "resolution": "observed-owner-anchor"
+        }
+      ],
+      "canonicalDefinitionOwners": {
+        "methodology": "maha-strategies",
+        "mythologyHub": "maha-strategies"
+      },
+      "missing": [],
+      "structurallyResolved": true
+    }
+  ],
+  "provenanceDigest": "sha256:4c3d3542961b761e24e76dd748c283447845d024a74e91c898224498927ddc21"
+}

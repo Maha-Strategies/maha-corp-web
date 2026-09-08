@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "maha-federation-tranche-13-readiness/1.0",
+  "frozenOn": "2026-09-06",
+  "cohortDigest": "sha256:2e87cdef5f58f9f83f821acb3a36c281611ad6ac3dfdd708fb93ed3c5a02fbfa",
+  "status": "reviewed-not-published",
+  "counts": {
+    "cohort": 100,
+    "byFinalState": {
+      "blocked": 60,
+      "evidence-ready": 40
+    },
+    "specifications": 40,
+    "boundedQuestions": 200,
+    "topicsInCohort": 58,
+    "topicsInspected": 27,
+    "distinctSources": 18,
+    "dependenciesMissing": 34
+  },
+  "honestOutcome": "Evidence-ready is bounded by source inspection, not by candidate quality. All 100 candidates carry evidencePlan not-started in the candidate map. Sources were inspected for 27 of 58 topics across 18 distinct sources, so only candidates on those topics can satisfy the evidence-ready gate. The remaining 31 topics are predominantly this organisation’s own operational concepts and the author’s own concepts, for which no external authority exists to cite. Raising the count requires inspecting more sources or writing first-party definitions, not relaxing the gate.",
+  "publicationBoundary": "No route, release, sitemap entry or public page is created. No build was run.",
+  "provenanceDigest": "sha256:39fac0b1e8bb14d516b0bd7c644126cef5f666f85612e08132445a4dc1eb432f"
+}

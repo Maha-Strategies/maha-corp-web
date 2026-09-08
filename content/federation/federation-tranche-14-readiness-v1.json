@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "maha-federation-tranche-14-readiness/1.0",
+  "frozenOn": "2026-09-06",
+  "cohortDigest": "sha256:b50526338242ebf92e22d3b17f0cd3d85dc1c996e3ecb4bdd8ba2bf0446250da",
+  "status": "reviewed-not-published",
+  "counts": {
+    "cohort": 100,
+    "byFinalState": {
+      "blocked": 67,
+      "evidence-ready": 33
+    },
+    "specifications": 33,
+    "boundedQuestions": 165,
+    "topicsInCohort": 42,
+    "topicsInspected": 14,
+    "distinctSources": 10,
+    "dependenciesMissing": 20,
+    "prerequisitesSelected": 0,
+    "projectedTranche13Unlocks": 0
+  },
+  "honestOutcome": "Selection was dependency-first, and the diagnosis bounded what that could achieve. Of the 17 prerequisites blocking Tranche 13, 0 exist in the remaining pool and each unlocks one dependent, so this cohort projects 0 unlocks rather than 38. The other 13 are absent from the frozen candidate map and are recorded as inactive repair proposals. Evidence-ready is bounded by source inspection: 14 of 42 topics were inspected, 12 carried forward from Tranche 13 and 2 newly.",
+  "publicationBoundary": "No route, release, sitemap entry or public page is created. No build was run.",
+  "provenanceDigest": "sha256:971954b6b910a489ddbaf3f7ab707b3476ce3640b81f4c90e77bba4bf36ee6fe"
+}

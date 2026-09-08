@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "maha-federation-tranche-17-contract-repair/1.0",
+  "frozenOn": "2026-09-06",
+  "defect": "Route role `definition` declared against contract role `owner-application`, whose boundary reads \"may apply; cannot redefine\". A definition page must own its concept, so the two cannot both be correct.",
+  "diagnosis": "All 169 definition-role candidates in the frozen map sit on the property that owns the concept they define. The role is correct and the contract is not. The cause is a gap in the vocabulary rather than 169 separate mistakes: the map offers owner-application, local-application and source-led-religion-application, and no role for a route that defines its own concept.",
+  "rule": "Applies where routeRole is `definition`, the contract is not already `canonical-owner`, and siteId equals conceptAuthority.canonicalOwner. A definition on a property that does not own the concept is a different fault — the role would be wrong rather than the contract — and is left alone.",
+  "frozenMapUntouched": "The map is not rewritten. Its digest is bound into every tranche artifact including Tranches 1-12, and editing it would invalidate those bindings to correct a labelling error. The repair is applied at review time.",
+  "counts": {
+    "inspected": 169,
+    "repaired": 169,
+    "roleWrongNotContract": [],
+    "byProperty": {
+      "agentic-publishing": 18,
+      "maha-os": 20,
+      "maha-policy": 30,
+      "maha-research": 50,
+      "maha-strategies": 25,
+      "mayon-rajan": 16,
+      "mayone-maharajan": 10
+    }
+  },
+  "correctedBoundaryShape": "This route is the canonical definition of <family> for <property>. It owns the concept on this property and does not govern how other properties apply it. Owning a definition is not evidence for it: the definition still requires an inspected source like any other claim.",
+  "provenanceDigest": "sha256:985413f2f35b55660c6f33b428d05ac8fa1aaa71cdb7b66503c02d442235375f"
+}

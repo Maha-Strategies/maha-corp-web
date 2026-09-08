@@ -1,0 +1,278 @@
+{
+  "schemaVersion": "maha-federation-candidate-lineage/3.0",
+  "previousCandidateMapDigest": "sha256:c19a678ec73b71babeecf5b272b14fd148c49312fc9bab90703c2f1849a38cf8",
+  "migrationPurpose": "Add the canonical definitions that v2 never contained. v2 is retained unchanged: its digest is bound into every tranche artifact including Tranches 1-12, and editing it would invalidate those bindings.",
+  "rules": [
+    "A definition is added only where no definition for that concept exists on the declared owner in v2.",
+    "A concept whose definition exists but is unreviewed is awaiting review, not absent, and is not duplicated here.",
+    "Candidate ids are derived from the concept and owner, so regeneration is reproducible.",
+    "Added candidates carry evidencePlan not-started on all six axes. They are candidates for review, not reviewed pages.",
+    "rank and tranche are null: nothing has ranked or allocated them."
+  ],
+  "counts": {
+    "retainedCandidates": 1628,
+    "supersededCandidates": 0,
+    "addedCandidates": 32,
+    "dependentsUnblocked": 94
+  },
+  "supersededCandidates": [],
+  "addedCandidates": [
+    {
+      "candidateId": "cand_a870823d00f81a9a4854f848",
+      "candidateObjectDigest": "sha256:c29ff10eba48aef4d1323b2d294c4bd3fbe31b592b3def62e6e95ae2850c685d",
+      "conceptId": "urn:maha:concept:computation:causal-inference",
+      "siteId": "maha-research",
+      "path": "/federation/research/causal-inference/definition",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_908638ce5ea422d98d5273fb",
+      "candidateObjectDigest": "sha256:bf72c3289416f936fcf4b98e7d8f05767f09eb87b06b31a5258b61ec657a477f",
+      "conceptId": "urn:maha:concept:computation:cryptographic-commitments",
+      "siteId": "maha-research",
+      "path": "/federation/research/cryptographic-commitments/definition",
+      "unlocksDependents": 2
+    },
+    {
+      "candidateId": "cand_a563c1dcade1fa354b9069fa",
+      "candidateObjectDigest": "sha256:d2e97f6c44d8bca73759d5f3027ee1fae659b96115f172eaa522aa48eea31f5c",
+      "conceptId": "urn:maha:concept:computation:deterministic-arithmetic",
+      "siteId": "maha-research",
+      "path": "/federation/research/deterministic-arithmetic/definition",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_d90b7197535681a502dccba9",
+      "candidateObjectDigest": "sha256:f62fe27ef45197252ef3f8cef58de8438c519e88762a5c79d043ce80188db7e5",
+      "conceptId": "urn:maha:concept:computation:dimensional-analysis",
+      "siteId": "maha-research",
+      "path": "/federation/research/dimensional-analysis/definition",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_aaf26e116535a7269e150c81",
+      "candidateObjectDigest": "sha256:7dfa77f6ef87c5da7b977a08eaf6a3123b1fd90650f61afb097e8b2be5d1dad3",
+      "conceptId": "urn:maha:concept:computation:error-budgets",
+      "siteId": "maha-research",
+      "path": "/federation/research/error-budgets/definition",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_25c680ff193b4f35f49e96ae",
+      "candidateObjectDigest": "sha256:c1494094be046a64d2fd27736e05c96da6769461918c8d74f8794e4ee5e37509",
+      "conceptId": "urn:maha:concept:computation:formal-verification",
+      "siteId": "maha-research",
+      "path": "/federation/research/formal-verification/definition",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_de8dd0a88e8704fe5855033e",
+      "candidateObjectDigest": "sha256:b3782a9f5cdb92de44d26a7d52a3feb37657f02d207ad09c735d6b229fa6c6d1",
+      "conceptId": "urn:maha:concept:computation:interpolation",
+      "siteId": "maha-research",
+      "path": "/federation/research/interpolation/definition",
+      "unlocksDependents": 2
+    },
+    {
+      "candidateId": "cand_e41cfa0c9ad358c43c72d1ee",
+      "candidateObjectDigest": "sha256:179c6c43b9de46c4d257f68a2d69dab55d643fc7554551cbfc6e98499b21bc4a",
+      "conceptId": "urn:maha:concept:computation:interval-bounds",
+      "siteId": "maha-research",
+      "path": "/federation/research/interval-bounds/definition",
+      "unlocksDependents": 2
+    },
+    {
+      "candidateId": "cand_2cb4942c45f1804543a91a4a",
+      "candidateObjectDigest": "sha256:9ff9b6316f73d16274944ffce4d888fafff7ff8d0bbae7c04b9dfcfde17830ca",
+      "conceptId": "urn:maha:concept:computation:numerical-integration",
+      "siteId": "maha-research",
+      "path": "/federation/research/numerical-integration/definition",
+      "unlocksDependents": 1
+    },
+    {
+      "candidateId": "cand_0d9b1a88cbf93d413a243d71",
+      "candidateObjectDigest": "sha256:0bca4249696499d2272081040654e14994bf8b3dbe13c5bb671f08ae8fe7dff9",
+      "conceptId": "urn:maha:concept:computation:numerical-stability",
+      "siteId": "maha-research",
+      "path": "/federation/research/numerical-stability/definition",
+      "unlocksDependents": 2
+    },
+    {
+      "candidateId": "cand_9e9edd5648c41382537f568c",
+      "candidateObjectDigest": "sha256:589c4520de401bdca808b679e4def890f46a643d63d432b9c285e59bc55f3fbf",
+      "conceptId": "urn:maha:concept:computation:optimization",
+      "siteId": "maha-research",
+      "path": "/federation/research/optimization/definition",
+      "unlocksDependents": 1
+    },
+    {
+      "candidateId": "cand_c1e0a9d1956d137e337cae16",
+      "candidateObjectDigest": "sha256:9060967dcbd12bf79ffdffba23f7c010c833875be64f928d6a4b1680d97c88c9",
+      "conceptId": "urn:maha:concept:computation:reference-frame-conversion",
+      "siteId": "maha-research",
+      "path": "/federation/research/reference-frame-conversion/definition",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_be8600b5f02aea927f745c11",
+      "candidateObjectDigest": "sha256:4fe8f79e0acc5c5e28e43a8a998898d0b6ee280a2236b41ccc28ffa70693f1be",
+      "conceptId": "urn:maha:concept:computation:reproducibility-fixtures",
+      "siteId": "maha-research",
+      "path": "/federation/research/reproducibility-fixtures/definition",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_4e3ffcedfa7d51607e56c384",
+      "candidateObjectDigest": "sha256:ebddfddab92df62c2ccb97660bfdc026ba98daa2ab8ba57e6d684dc9f1ab5ccb",
+      "conceptId": "urn:maha:concept:computation:root-finding",
+      "siteId": "maha-research",
+      "path": "/federation/research/root-finding/definition",
+      "unlocksDependents": 2
+    },
+    {
+      "candidateId": "cand_99546e87db73ddd7326a34ab",
+      "candidateObjectDigest": "sha256:87f155067407b99e54904f4cd4395db28723aad308e4d0ad648a3b0bdfd53d81",
+      "conceptId": "urn:maha:concept:evidence:audit-export",
+      "siteId": "maha-research",
+      "path": "/federation/research/audit-export/definition",
+      "unlocksDependents": 2
+    },
+    {
+      "candidateId": "cand_fdada5f64f6c5c8b6f218663",
+      "candidateObjectDigest": "sha256:76dfd2203469794053994b8f0b65892993d564d0eaa3b89c548aa3795d32fd99",
+      "conceptId": "urn:maha:concept:evidence:calculation-receipts",
+      "siteId": "maha-research",
+      "path": "/federation/research/calculation-receipts/definition",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_941aed3932712f20f9dad49d",
+      "candidateObjectDigest": "sha256:efa3e443dd204841a743f69ac0a7e7d572e056bd1ef40a38a90f65d089295cb3",
+      "conceptId": "urn:maha:concept:evidence:canonical-release",
+      "siteId": "maha-research",
+      "path": "/federation/research/canonical-release/definition",
+      "unlocksDependents": 2
+    },
+    {
+      "candidateId": "cand_faa1c9127f42242870c4661a",
+      "candidateObjectDigest": "sha256:66ceed2cdd755778730b683311f541fecbc4ff2a07880db7eb395a274f1c8d23",
+      "conceptId": "urn:maha:concept:evidence:claim-intake",
+      "siteId": "maha-research",
+      "path": "/federation/research/claim-intake/definition",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_70ca0daa7c7b8f82481ef8bd",
+      "candidateObjectDigest": "sha256:fbe0026c0963173d1cfdda7561228a42754783f33229eef8ecee7488145fa265",
+      "conceptId": "urn:maha:concept:evidence:conflicting-literature",
+      "siteId": "maha-research",
+      "path": "/federation/research/conflicting-literature/definition",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_31188cec0703fe842e52f242",
+      "candidateObjectDigest": "sha256:5285c94df1376c195d3c7470b75cef783d28014c5aab317f3acb1c19ffdf287e",
+      "conceptId": "urn:maha:concept:evidence:correction-and-retraction",
+      "siteId": "maha-research",
+      "path": "/federation/research/correction-and-retraction/definition",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_5abc1a241361feb7e0f36d0d",
+      "candidateObjectDigest": "sha256:b3960ed894240f5fc7578260e6454d10c304ad6171cd0be8fe623a04b12d6372",
+      "conceptId": "urn:maha:concept:evidence:delivery-acknowledgement",
+      "siteId": "maha-research",
+      "path": "/federation/research/delivery-acknowledgement/definition",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_e9e65aab997734663ea01dc4",
+      "candidateObjectDigest": "sha256:0a4db9c3d35c982bdcbdb082bb1cafdc0fab5ef4214d73270f0bf9ec50d1ee4b",
+      "conceptId": "urn:maha:concept:evidence:evidence-dossiers",
+      "siteId": "maha-research",
+      "path": "/federation/research/evidence-dossiers/definition",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_1677d8e5ffd0adccd70025c9",
+      "candidateObjectDigest": "sha256:2e9bcc379dcdc83439a159ada21b9fcb9027e57d367069f5906ccbf33ef24005",
+      "conceptId": "urn:maha:concept:evidence:internal-review",
+      "siteId": "maha-research",
+      "path": "/federation/research/internal-review/definition",
+      "unlocksDependents": 3
+    },
+    {
+      "candidateId": "cand_d93df04cd32791dbcc717955",
+      "candidateObjectDigest": "sha256:749f002ba75f0ed66be43d9b136a9b4fe06ba3d8d98ce92855aa2334795335fc",
+      "conceptId": "urn:maha:concept:evidence:licensed-retrieval",
+      "siteId": "maha-research",
+      "path": "/federation/research/licensed-retrieval/definition",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_6f89066f567226c0e442bb39",
+      "candidateObjectDigest": "sha256:f4ef4b7d91f36419618226a01e8e3bf4ea2256c964458fa6f686f860b174869e",
+      "conceptId": "urn:maha:concept:evidence:locator-verification",
+      "siteId": "maha-research",
+      "path": "/federation/research/locator-verification/definition",
+      "unlocksDependents": 1
+    },
+    {
+      "candidateId": "cand_f8bc85696eedfca72dc83120",
+      "candidateObjectDigest": "sha256:7cade2687c8d963e55228acd875037b70670be17a5dd425338d856708c42ed2e",
+      "conceptId": "urn:maha:concept:evidence:passage-support",
+      "siteId": "maha-research",
+      "path": "/federation/research/passage-support/definition",
+      "unlocksDependents": 1
+    },
+    {
+      "candidateId": "cand_eee65fe274335f8de817ecd7",
+      "candidateObjectDigest": "sha256:71dcb4dd8ba46cd9df618430f9fd3c85f2111d881232f33774df5e0d32997b6a",
+      "conceptId": "urn:maha:concept:evidence:privacy-boundary",
+      "siteId": "maha-research",
+      "path": "/federation/research/privacy-boundary/definition",
+      "unlocksDependents": 3
+    },
+    {
+      "candidateId": "cand_3476e38beb1e953348f8d600",
+      "candidateObjectDigest": "sha256:3c8a10a0d8fd040ecca648bea93140b3d7d0e13d6be9d0945be9f90f708ce426",
+      "conceptId": "urn:maha:concept:evidence:runtime-witness-receipts",
+      "siteId": "maha-research",
+      "path": "/federation/research/runtime-witness-receipts/definition",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_a265c5d9ff36ca1b17bfb8a0",
+      "candidateObjectDigest": "sha256:ad0ab472df83658d454006dc28738af6db81a6dc555bdf5abbe5983e333f4011",
+      "conceptId": "urn:maha:concept:evidence:source-recovery",
+      "siteId": "maha-research",
+      "path": "/federation/research/source-recovery/definition",
+      "unlocksDependents": 1
+    },
+    {
+      "candidateId": "cand_9d040a84a30d4c24c219709b",
+      "candidateObjectDigest": "sha256:7af17e1406ccca2110bf8ad52c5c3240ae0c6da4851a740ce01360de40a7f674",
+      "conceptId": "urn:maha:concept:evidence:uncertainty-recording",
+      "siteId": "maha-research",
+      "path": "/federation/research/uncertainty-recording/definition",
+      "unlocksDependents": 4
+    },
+    {
+      "candidateId": "cand_79d4527b01877f8e8a9cf1ee",
+      "candidateObjectDigest": "sha256:7eec9b2e4b31a284ae33d958af6d4db80e9bb86912b5f23a85a32c17833f5ae6",
+      "conceptId": "urn:maha:concept:evidence:unsupported-inference",
+      "siteId": "maha-research",
+      "path": "/federation/research/unsupported-inference/definition",
+      "unlocksDependents": 2
+    },
+    {
+      "candidateId": "cand_f770668f95f1fc5022b10680",
+      "candidateObjectDigest": "sha256:f96cba7f23a7acfc3ee2590279fc6db474d563fc1eb4dd3cebef8422204c758c",
+      "conceptId": "urn:maha:concept:evidence:version-relationship",
+      "siteId": "maha-research",
+      "path": "/federation/research/version-relationship/definition",
+      "unlocksDependents": 3
+    }
+  ],
+  "provenanceDigest": "sha256:520e93490017433c2bbbddd114be5b7c997df83ebeb82f1907fd80f1c3b5a197"
+}

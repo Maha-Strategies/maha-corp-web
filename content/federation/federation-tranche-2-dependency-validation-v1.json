@@ -1,0 +1,4067 @@
+{
+  "schemaVersion": "maha-federation-tranche-two-dependency-validation/1.0",
+  "cohortDigest": "sha256:a956626094de36595b250c0f9adb5be0195a52c0597648e64ecd3c7959844ecc",
+  "priorCohortDigest": "sha256:7e79b2585e2634449ef8c7b5d8c5889844b22440f8a071ab01dd5a6190b9529f",
+  "dependencyGraphDigest": "sha256:26109aad61ef624dccc0f8032ccfcc4dd0424d9f4009cc67a4953461d231100b",
+  "rule": "Resolve every frozen dependency, require the local definition before applications, preserve canonical-property ownership, and replace the rejected machine-readable definition with the existing Publish owner route.",
+  "counts": {
+    "checked": 100,
+    "valid": 100,
+    "invalid": 0,
+    "dependenciesResolvedThroughTrancheOne": 94,
+    "observedOwnerBodyCaveats": 6
+  },
+  "entries": [
+    {
+      "cohortOrder": 1,
+      "candidateId": "cand_15b7a2d6f8c2dd552264e7ac",
+      "url": "https://research.mahastrategies.com/federation/research/propagation/source-contract",
+      "siteId": "maha-research",
+      "topic": "propagation",
+      "routeRole": "source-contract",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "dependsOn": "cand_30afc974780ef67ee4b6bb13",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_30afc974780ef67ee4b6bb13",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://research.mahastrategies.com/federation/research/propagation/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_30afc974780ef67ee4b6bb13",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_30afc974780ef67ee4b6bb13",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/propagation/definition"
+        },
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 2,
+      "candidateId": "cand_2d3bd754417f679ece1fa3d0",
+      "url": "https://research.mahastrategies.com/federation/research/propagation/machine-record",
+      "siteId": "maha-research",
+      "topic": "propagation",
+      "routeRole": "machine-record",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "dependsOn": "cand_30afc974780ef67ee4b6bb13",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_30afc974780ef67ee4b6bb13",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://research.mahastrategies.com/federation/research/propagation/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_30afc974780ef67ee4b6bb13",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_30afc974780ef67ee4b6bb13",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/propagation/definition"
+        },
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 3,
+      "candidateId": "cand_2e5ac4d34315686f3ad24c9f",
+      "url": "https://research.mahastrategies.com/federation/research/section-locator/relationships",
+      "siteId": "maha-research",
+      "topic": "section-locator",
+      "routeRole": "relationships",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "dependsOn": "cand_32d9e5ecc97be740fc8cf103",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_32d9e5ecc97be740fc8cf103",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://research.mahastrategies.com/federation/research/section-locator/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_32d9e5ecc97be740fc8cf103",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_32d9e5ecc97be740fc8cf103",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/section-locator/definition"
+        },
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 4,
+      "candidateId": "cand_04b448089ffa01a3942724be",
+      "url": "https://research.mahastrategies.com/federation/research/model-boundary/relationships",
+      "siteId": "maha-research",
+      "topic": "model-boundary",
+      "routeRole": "relationships",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "dependsOn": "cand_3f1a9f08061713fb8ebe464c",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_3f1a9f08061713fb8ebe464c",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://research.mahastrategies.com/federation/research/model-boundary/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        },
+        {
+          "dependsOn": "cand_3f1a9f08061713fb8ebe464c",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_3f1a9f08061713fb8ebe464c",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/model-boundary/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 5,
+      "candidateId": "cand_35fd4db0585222436923cca0",
+      "url": "https://research.mahastrategies.com/federation/research/uncertainty/source-contract",
+      "siteId": "maha-research",
+      "topic": "uncertainty",
+      "routeRole": "source-contract",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "dependsOn": "cand_43a69974e1c3c11878b470f9",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_43a69974e1c3c11878b470f9",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://research.mahastrategies.com/federation/research/uncertainty/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        },
+        {
+          "dependsOn": "cand_43a69974e1c3c11878b470f9",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_43a69974e1c3c11878b470f9",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/uncertainty/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 6,
+      "candidateId": "cand_48485c2639eca0b2fb4d9852",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/definition",
+      "siteId": "agentic-publishing",
+      "topic": "machine-readable-article",
+      "routeRole": "definition",
+      "canonicalOwner": "agentic-publishing",
+      "definitionDependency": {
+        "nodeId": "cand_48485c2639eca0b2fb4d9852",
+        "resolution": "observed-canonical-replacement",
+        "url": "https://publish.mahastrategies.com/docs/machine-readability"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "observed_43f63ec17ea0bf8650dd06e1",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "observed_43f63ec17ea0bf8650dd06e1",
+          "resolution": "observed-route",
+          "url": "https://publish.mahastrategies.com/docs/release-manifests"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "observed_43f63ec17ea0bf8650dd06e1",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "observed_43f63ec17ea0bf8650dd06e1",
+          "resolution": "observed-route",
+          "url": "https://publish.mahastrategies.com/docs/release-manifests"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": "The existing Publish machine-readability owner route was identified but its body was not available for inspection."
+    },
+    {
+      "cohortOrder": 7,
+      "candidateId": "cand_4bfdfd9ce5a0da51ddf57cb0",
+      "url": "https://research.mahastrategies.com/federation/research/software-environment/definition",
+      "siteId": "maha-research",
+      "topic": "software-environment",
+      "routeRole": "definition",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "nodeId": "cand_4bfdfd9ce5a0da51ddf57cb0",
+        "resolution": "self-definition",
+        "url": "https://research.mahastrategies.com/federation/research/software-environment/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 8,
+      "candidateId": "cand_5322e19e5c67b1aae32124b0",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/failure-mode",
+      "siteId": "agentic-publishing",
+      "topic": "release-manifest",
+      "routeRole": "failure-mode",
+      "canonicalOwner": "agentic-publishing",
+      "definitionDependency": {
+        "nodeId": "observed:agentic-publishing:release-manifest",
+        "resolution": "observed-local-definition",
+        "url": "https://publish.mahastrategies.com/docs/release-manifests"
+      },
+      "ownerDependencies": [],
+      "graphEdges": [
+        {
+          "dependsOn": "observed_43f63ec17ea0bf8650dd06e1",
+          "reason": "observed-local-topic-definition-already-precedes-application",
+          "nodeId": "observed_43f63ec17ea0bf8650dd06e1",
+          "resolution": "observed-route",
+          "url": "https://publish.mahastrategies.com/docs/release-manifests"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": "The existing Publish release-manifest owner route was identified but its body was not available for inspection."
+    },
+    {
+      "cohortOrder": 9,
+      "candidateId": "cand_537d9c76727c863d29982cc7",
+      "url": "https://research.mahastrategies.com/federation/research/source-version/definition",
+      "siteId": "maha-research",
+      "topic": "source-version",
+      "routeRole": "definition",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "nodeId": "cand_537d9c76727c863d29982cc7",
+        "resolution": "self-definition",
+        "url": "https://research.mahastrategies.com/federation/research/source-version/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 10,
+      "candidateId": "cand_5affd45e90ddcdefa749c9b4",
+      "url": "https://research.mahastrategies.com/federation/research/source-identity/relationships",
+      "siteId": "maha-research",
+      "topic": "source-identity",
+      "routeRole": "relationships",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+      },
+      "ownerDependencies": [],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 11,
+      "candidateId": "cand_015bd0d008cca73f6395b704",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/threats",
+      "siteId": "maha-strategies",
+      "topic": "identity-bound-agents",
+      "routeRole": "threats",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_63800114df58212bf1827623",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_63800114df58212bf1827623",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+      },
+      "ownerDependencies": [],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 12,
+      "candidateId": "cand_22d9ff199c2b10c0dabf2206",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/commercialization",
+      "siteId": "maha-strategies",
+      "topic": "tool-authorization",
+      "routeRole": "commercialization",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_20da33096b4bf0cd8817d93d",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_20da33096b4bf0cd8817d93d",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_20da33096b4bf0cd8817d93d",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_20da33096b4bf0cd8817d93d",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/definition"
+        },
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 13,
+      "candidateId": "cand_23b94089c37a0988ccb86c27",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/enterprise-mcp-gateway/architecture",
+      "siteId": "maha-strategies",
+      "topic": "enterprise-mcp-gateway",
+      "routeRole": "architecture",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "nodeId": "observed:maha-strategies:enterprise-mcp-gateway",
+        "resolution": "observed-local-definition",
+        "url": "https://www.mahastrategies.com/enterprise-mcp-gateway"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        },
+        {
+          "dependsOn": "observed_f49191b958cd7a95bf6df1fe",
+          "reason": "observed-local-topic-definition-already-precedes-application",
+          "nodeId": "observed_f49191b958cd7a95bf6df1fe",
+          "resolution": "observed-route",
+          "url": "https://www.mahastrategies.com/enterprise-mcp-gateway"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 14,
+      "candidateId": "cand_3461e3f8da83e0663f56783e",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/tenant-isolation/definition",
+      "siteId": "maha-strategies",
+      "topic": "tenant-isolation",
+      "routeRole": "definition",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "nodeId": "cand_3461e3f8da83e0663f56783e",
+        "resolution": "self-definition",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/tenant-isolation/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 15,
+      "candidateId": "cand_41ee6b7080d2c8416e30adaf",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/commercialization",
+      "siteId": "maha-strategies",
+      "topic": "context-budgeting",
+      "routeRole": "commercialization",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_1730f46729e7507504a87eb7",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_1730f46729e7507504a87eb7",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_1730f46729e7507504a87eb7",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_1730f46729e7507504a87eb7",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/definition"
+        },
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 16,
+      "candidateId": "cand_41f8d80fdc904e177523f915",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/endpoint-substitution-defense/definition",
+      "siteId": "maha-strategies",
+      "topic": "endpoint-substitution-defense",
+      "routeRole": "definition",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "nodeId": "cand_41f8d80fdc904e177523f915",
+        "resolution": "self-definition",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/endpoint-substitution-defense/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 17,
+      "candidateId": "cand_4e77d7f7b9c947755aa8b03a",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/architecture",
+      "siteId": "maha-strategies",
+      "topic": "context-budgeting",
+      "routeRole": "architecture",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_1730f46729e7507504a87eb7",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_1730f46729e7507504a87eb7",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_1730f46729e7507504a87eb7",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_1730f46729e7507504a87eb7",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/definition"
+        },
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 18,
+      "candidateId": "cand_501bc5c18c3e6037bc2f8ddb",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/controls",
+      "siteId": "maha-strategies",
+      "topic": "context-budgeting",
+      "routeRole": "controls",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_1730f46729e7507504a87eb7",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_1730f46729e7507504a87eb7",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_1730f46729e7507504a87eb7",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_1730f46729e7507504a87eb7",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/context-budgeting/definition"
+        },
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 19,
+      "candidateId": "cand_56311b11be2d35905203e3ad",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/endpoint-substitution-defense/threats",
+      "siteId": "maha-strategies",
+      "topic": "endpoint-substitution-defense",
+      "routeRole": "threats",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_41f8d80fdc904e177523f915",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_41f8d80fdc904e177523f915",
+        "resolution": "tranche-two-candidate",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/endpoint-substitution-defense/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_41f8d80fdc904e177523f915",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_41f8d80fdc904e177523f915",
+          "resolution": "tranche-two-candidate",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/endpoint-substitution-defense/definition"
+        },
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 20,
+      "candidateId": "cand_5f75c387d49a705e210e237f",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/machine-commerce-entitlement/definition",
+      "siteId": "maha-strategies",
+      "topic": "machine-commerce-entitlement",
+      "routeRole": "definition",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "nodeId": "cand_5f75c387d49a705e210e237f",
+        "resolution": "self-definition",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/machine-commerce-entitlement/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 21,
+      "candidateId": "cand_1df9a0d82a30c77236c214af",
+      "url": "https://research.mahastrategies.com/federation/research/research-release/relationships",
+      "siteId": "maha-research",
+      "topic": "research-release",
+      "routeRole": "relationships",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "dependsOn": "cand_65e220fb78705ffad954bb99",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_65e220fb78705ffad954bb99",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://research.mahastrategies.com/federation/research/research-release/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        },
+        {
+          "dependsOn": "cand_65e220fb78705ffad954bb99",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_65e220fb78705ffad954bb99",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/research-release/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 22,
+      "candidateId": "cand_66a9e2bdca41371777370b8a",
+      "url": "https://research.mahastrategies.com/federation/research/source-version/fixture",
+      "siteId": "maha-research",
+      "topic": "source-version",
+      "routeRole": "fixture",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "dependsOn": "cand_537d9c76727c863d29982cc7",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_537d9c76727c863d29982cc7",
+        "resolution": "tranche-two-candidate",
+        "url": "https://research.mahastrategies.com/federation/research/source-version/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        },
+        {
+          "dependsOn": "cand_537d9c76727c863d29982cc7",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_537d9c76727c863d29982cc7",
+          "resolution": "tranche-two-candidate",
+          "url": "https://research.mahastrategies.com/federation/research/source-version/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 23,
+      "candidateId": "cand_263d251a7e65204ce3eae1a7",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition",
+      "siteId": "maha-os",
+      "topic": "on-device-inference",
+      "routeRole": "definition",
+      "canonicalOwner": "maha-os",
+      "definitionDependency": {
+        "nodeId": "cand_263d251a7e65204ce3eae1a7",
+        "resolution": "self-definition",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_671d652918d62414c37d751d",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_671d652918d62414c37d751d",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_671d652918d62414c37d751d",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_671d652918d62414c37d751d",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 24,
+      "candidateId": "cand_0fc2ece30235e82106b7d75d",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/operator-guide",
+      "siteId": "maha-os",
+      "topic": "on-device-inference",
+      "routeRole": "operator-guide",
+      "canonicalOwner": "maha-os",
+      "definitionDependency": {
+        "dependsOn": "cand_263d251a7e65204ce3eae1a7",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_263d251a7e65204ce3eae1a7",
+        "resolution": "tranche-two-candidate",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_671d652918d62414c37d751d",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_671d652918d62414c37d751d",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_263d251a7e65204ce3eae1a7",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_263d251a7e65204ce3eae1a7",
+          "resolution": "tranche-two-candidate",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition"
+        },
+        {
+          "dependsOn": "cand_671d652918d62414c37d751d",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_671d652918d62414c37d751d",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 25,
+      "candidateId": "cand_5949b30ed697d2606dbdce0a",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/architecture",
+      "siteId": "maha-strategies",
+      "topic": "failure-recovery",
+      "routeRole": "architecture",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_6e59fad8478a7efbfa9f88af",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_6e59fad8478a7efbfa9f88af",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        },
+        {
+          "dependsOn": "cand_6e59fad8478a7efbfa9f88af",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_6e59fad8478a7efbfa9f88af",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 26,
+      "candidateId": "cand_31b7dabe923fc44a99337460",
+      "url": "https://www.mayonemaharajan.com/concepts/public-reason/definition",
+      "siteId": "mayone-maharajan",
+      "topic": "public-reason",
+      "routeRole": "definition",
+      "canonicalOwner": "mayone-maharajan",
+      "definitionDependency": {
+        "nodeId": "cand_31b7dabe923fc44a99337460",
+        "resolution": "self-definition",
+        "url": "https://www.mayonemaharajan.com/concepts/public-reason/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_6e5cae25a74731057505dc27",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_6e5cae25a74731057505dc27",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_6e5cae25a74731057505dc27",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_6e5cae25a74731057505dc27",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 27,
+      "candidateId": "cand_757660327e81854886c9df90",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/commercialization",
+      "siteId": "maha-strategies",
+      "topic": "metered-evidence-retrieval",
+      "routeRole": "commercialization",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_03783f0a589f183ebb951043",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_03783f0a589f183ebb951043",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_03783f0a589f183ebb951043",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_03783f0a589f183ebb951043",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/definition"
+        },
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 28,
+      "candidateId": "cand_784b1995902a5db299a0b086",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/failure-mode",
+      "siteId": "maha-os",
+      "topic": "offline-operation",
+      "routeRole": "failure-mode",
+      "canonicalOwner": "maha-os",
+      "definitionDependency": {
+        "dependsOn": "cand_6c7d279e19fcb92f76df94e2",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_6c7d279e19fcb92f76df94e2",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_671d652918d62414c37d751d",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_671d652918d62414c37d751d",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_671d652918d62414c37d751d",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_671d652918d62414c37d751d",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition"
+        },
+        {
+          "dependsOn": "cand_6c7d279e19fcb92f76df94e2",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_6c7d279e19fcb92f76df94e2",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/offline-operation/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 29,
+      "candidateId": "cand_0a1d37ad506fe9b0fdf91a0e",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/commercialization",
+      "siteId": "maha-strategies",
+      "topic": "credential-rotation",
+      "routeRole": "commercialization",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_7b558066ec71b18a21f4187f",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_7b558066ec71b18a21f4187f",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        },
+        {
+          "dependsOn": "cand_7b558066ec71b18a21f4187f",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_7b558066ec71b18a21f4187f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 30,
+      "candidateId": "cand_7c75d81360d848d32b0b98c4",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/architecture",
+      "siteId": "maha-strategies",
+      "topic": "metered-evidence-retrieval",
+      "routeRole": "architecture",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_03783f0a589f183ebb951043",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_03783f0a589f183ebb951043",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_03783f0a589f183ebb951043",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_03783f0a589f183ebb951043",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/definition"
+        },
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 31,
+      "candidateId": "cand_8417eeb5a3fcd86a3a83b691",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/template",
+      "siteId": "agentic-publishing",
+      "topic": "human-review",
+      "routeRole": "template",
+      "canonicalOwner": "agentic-publishing",
+      "definitionDependency": {
+        "dependsOn": "cand_3310484656228e54e0023e11",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_3310484656228e54e0023e11",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "observed_43f63ec17ea0bf8650dd06e1",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "observed_43f63ec17ea0bf8650dd06e1",
+          "resolution": "observed-route",
+          "url": "https://publish.mahastrategies.com/docs/release-manifests"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3310484656228e54e0023e11",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_3310484656228e54e0023e11",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/human-review/definition"
+        },
+        {
+          "dependsOn": "observed_43f63ec17ea0bf8650dd06e1",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "observed_43f63ec17ea0bf8650dd06e1",
+          "resolution": "observed-route",
+          "url": "https://publish.mahastrategies.com/docs/release-manifests"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 32,
+      "candidateId": "cand_3da392861d21f340880aee17",
+      "url": "https://policy.mahastrategies.com/policy/data-protection/comparison",
+      "siteId": "maha-policy",
+      "topic": "data-protection",
+      "routeRole": "comparison",
+      "canonicalOwner": "maha-policy",
+      "definitionDependency": {
+        "dependsOn": "cand_87e00e29d6f2b677865680f5",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_87e00e29d6f2b677865680f5",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://policy.mahastrategies.com/policy/data-protection/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        },
+        {
+          "dependsOn": "cand_87e00e29d6f2b677865680f5",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_87e00e29d6f2b677865680f5",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/data-protection/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 33,
+      "candidateId": "cand_6a8c5ccad4d0aba769630f73",
+      "url": "https://policy.mahastrategies.com/policy/data-protection/current-law",
+      "siteId": "maha-policy",
+      "topic": "data-protection",
+      "routeRole": "current-law",
+      "canonicalOwner": "maha-policy",
+      "definitionDependency": {
+        "dependsOn": "cand_87e00e29d6f2b677865680f5",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_87e00e29d6f2b677865680f5",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://policy.mahastrategies.com/policy/data-protection/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        },
+        {
+          "dependsOn": "cand_87e00e29d6f2b677865680f5",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_87e00e29d6f2b677865680f5",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/data-protection/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 34,
+      "candidateId": "cand_894175e0b31eeb9201e2db71",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/implementation",
+      "siteId": "maha-strategies",
+      "topic": "identity-bound-agents",
+      "routeRole": "implementation",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_63800114df58212bf1827623",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_63800114df58212bf1827623",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+      },
+      "ownerDependencies": [],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 35,
+      "candidateId": "cand_8995fa6b7a13d8d0caaa72db",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/failure-mode",
+      "siteId": "maha-os",
+      "topic": "on-device-inference",
+      "routeRole": "failure-mode",
+      "canonicalOwner": "maha-os",
+      "definitionDependency": {
+        "dependsOn": "cand_263d251a7e65204ce3eae1a7",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_263d251a7e65204ce3eae1a7",
+        "resolution": "tranche-two-candidate",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_671d652918d62414c37d751d",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_671d652918d62414c37d751d",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_263d251a7e65204ce3eae1a7",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_263d251a7e65204ce3eae1a7",
+          "resolution": "tranche-two-candidate",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/on-device-inference/definition"
+        },
+        {
+          "dependsOn": "cand_671d652918d62414c37d751d",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_671d652918d62414c37d751d",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 36,
+      "candidateId": "cand_8c6726b7ff136346e7b78c91",
+      "url": "https://policy.mahastrategies.com/policy/data-protection/implementation",
+      "siteId": "maha-policy",
+      "topic": "data-protection",
+      "routeRole": "implementation",
+      "canonicalOwner": "maha-policy",
+      "definitionDependency": {
+        "dependsOn": "cand_87e00e29d6f2b677865680f5",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_87e00e29d6f2b677865680f5",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://policy.mahastrategies.com/policy/data-protection/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        },
+        {
+          "dependsOn": "cand_87e00e29d6f2b677865680f5",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_87e00e29d6f2b677865680f5",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/data-protection/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 37,
+      "candidateId": "cand_8fce42b97cdeb9ab2446d8aa",
+      "url": "https://www.mayonemaharajan.com/concepts/public-reason/relationship",
+      "siteId": "mayone-maharajan",
+      "topic": "public-reason",
+      "routeRole": "relationship",
+      "canonicalOwner": "mayone-maharajan",
+      "definitionDependency": {
+        "dependsOn": "cand_31b7dabe923fc44a99337460",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_31b7dabe923fc44a99337460",
+        "resolution": "tranche-two-candidate",
+        "url": "https://www.mayonemaharajan.com/concepts/public-reason/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_6e5cae25a74731057505dc27",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_6e5cae25a74731057505dc27",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_31b7dabe923fc44a99337460",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_31b7dabe923fc44a99337460",
+          "resolution": "tranche-two-candidate",
+          "url": "https://www.mayonemaharajan.com/concepts/public-reason/definition"
+        },
+        {
+          "dependsOn": "cand_6e5cae25a74731057505dc27",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_6e5cae25a74731057505dc27",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 38,
+      "candidateId": "cand_9749d38dea6640be6196afef",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/endpoint-substitution-defense/implementation",
+      "siteId": "maha-strategies",
+      "topic": "endpoint-substitution-defense",
+      "routeRole": "implementation",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_41f8d80fdc904e177523f915",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_41f8d80fdc904e177523f915",
+        "resolution": "tranche-two-candidate",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/endpoint-substitution-defense/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_41f8d80fdc904e177523f915",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_41f8d80fdc904e177523f915",
+          "resolution": "tranche-two-candidate",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/endpoint-substitution-defense/definition"
+        },
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 39,
+      "candidateId": "cand_9793f8aea3334c5eb5313107",
+      "url": "https://research.mahastrategies.com/federation/research/uncertainty/failure-mode",
+      "siteId": "maha-research",
+      "topic": "uncertainty",
+      "routeRole": "failure-mode",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "dependsOn": "cand_43a69974e1c3c11878b470f9",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_43a69974e1c3c11878b470f9",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://research.mahastrategies.com/federation/research/uncertainty/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        },
+        {
+          "dependsOn": "cand_43a69974e1c3c11878b470f9",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_43a69974e1c3c11878b470f9",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/uncertainty/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 40,
+      "candidateId": "cand_98da6e0ee462652e0277613f",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/enterprise-mcp-gateway/verification",
+      "siteId": "maha-strategies",
+      "topic": "enterprise-mcp-gateway",
+      "routeRole": "verification",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "nodeId": "observed:maha-strategies:enterprise-mcp-gateway",
+        "resolution": "observed-local-definition",
+        "url": "https://www.mahastrategies.com/enterprise-mcp-gateway"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        },
+        {
+          "dependsOn": "observed_f49191b958cd7a95bf6df1fe",
+          "reason": "observed-local-topic-definition-already-precedes-application",
+          "nodeId": "observed_f49191b958cd7a95bf6df1fe",
+          "resolution": "observed-route",
+          "url": "https://www.mahastrategies.com/enterprise-mcp-gateway"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 41,
+      "candidateId": "cand_a171638fd36c45db3153ab2f",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/capability-scoped-tokens/definition",
+      "siteId": "maha-strategies",
+      "topic": "capability-scoped-tokens",
+      "routeRole": "definition",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "nodeId": "cand_a171638fd36c45db3153ab2f",
+        "resolution": "self-definition",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/capability-scoped-tokens/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 42,
+      "candidateId": "cand_00097effc59b6b9de67fe54f",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/capability-scoped-tokens/threats",
+      "siteId": "maha-strategies",
+      "topic": "capability-scoped-tokens",
+      "routeRole": "threats",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_a171638fd36c45db3153ab2f",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_a171638fd36c45db3153ab2f",
+        "resolution": "tranche-two-candidate",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/capability-scoped-tokens/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        },
+        {
+          "dependsOn": "cand_a171638fd36c45db3153ab2f",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_a171638fd36c45db3153ab2f",
+          "resolution": "tranche-two-candidate",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/capability-scoped-tokens/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 43,
+      "candidateId": "cand_07b0aad23f4c4368c0932659",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/capability-scoped-tokens/implementation",
+      "siteId": "maha-strategies",
+      "topic": "capability-scoped-tokens",
+      "routeRole": "implementation",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_a171638fd36c45db3153ab2f",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_a171638fd36c45db3153ab2f",
+        "resolution": "tranche-two-candidate",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/capability-scoped-tokens/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        },
+        {
+          "dependsOn": "cand_a171638fd36c45db3153ab2f",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_a171638fd36c45db3153ab2f",
+          "resolution": "tranche-two-candidate",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/capability-scoped-tokens/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 44,
+      "candidateId": "cand_a7603f4f4e1f0948c574c52d",
+      "url": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/definition",
+      "siteId": "mayone-maharajan",
+      "topic": "cosmic-recursion",
+      "routeRole": "definition",
+      "canonicalOwner": "mayone-maharajan",
+      "definitionDependency": {
+        "nodeId": "cand_a7603f4f4e1f0948c574c52d",
+        "resolution": "self-definition",
+        "url": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_6e5cae25a74731057505dc27",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_6e5cae25a74731057505dc27",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_6e5cae25a74731057505dc27",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_6e5cae25a74731057505dc27",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 45,
+      "candidateId": "cand_3062f2ecc529be26d6b28874",
+      "url": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/relationship",
+      "siteId": "mayone-maharajan",
+      "topic": "cosmic-recursion",
+      "routeRole": "relationship",
+      "canonicalOwner": "mayone-maharajan",
+      "definitionDependency": {
+        "dependsOn": "cand_a7603f4f4e1f0948c574c52d",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_a7603f4f4e1f0948c574c52d",
+        "resolution": "tranche-two-candidate",
+        "url": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_6e5cae25a74731057505dc27",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_6e5cae25a74731057505dc27",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_6e5cae25a74731057505dc27",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_6e5cae25a74731057505dc27",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition"
+        },
+        {
+          "dependsOn": "cand_a7603f4f4e1f0948c574c52d",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_a7603f4f4e1f0948c574c52d",
+          "resolution": "tranche-two-candidate",
+          "url": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 46,
+      "candidateId": "cand_4f9959397f06dadaa4f00d0f",
+      "url": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/development",
+      "siteId": "mayone-maharajan",
+      "topic": "cosmic-recursion",
+      "routeRole": "development",
+      "canonicalOwner": "mayone-maharajan",
+      "definitionDependency": {
+        "dependsOn": "cand_a7603f4f4e1f0948c574c52d",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_a7603f4f4e1f0948c574c52d",
+        "resolution": "tranche-two-candidate",
+        "url": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_6e5cae25a74731057505dc27",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_6e5cae25a74731057505dc27",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_6e5cae25a74731057505dc27",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_6e5cae25a74731057505dc27",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mayonemaharajan.com/concepts/governed-autonomy/definition"
+        },
+        {
+          "dependsOn": "cand_a7603f4f4e1f0948c574c52d",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_a7603f4f4e1f0948c574c52d",
+          "resolution": "tranche-two-candidate",
+          "url": "https://www.mayonemaharajan.com/concepts/cosmic-recursion/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 47,
+      "candidateId": "cand_189c6fd8957f4c6065c84e58",
+      "url": "https://policy.mahastrategies.com/policy/public-trust/uncertainty",
+      "siteId": "maha-policy",
+      "topic": "public-trust",
+      "routeRole": "uncertainty",
+      "canonicalOwner": "maha-policy",
+      "definitionDependency": {
+        "dependsOn": "cand_ae6d71c78288fa970517965b",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_ae6d71c78288fa970517965b",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://policy.mahastrategies.com/policy/public-trust/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        },
+        {
+          "dependsOn": "cand_ae6d71c78288fa970517965b",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_ae6d71c78288fa970517965b",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/public-trust/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 48,
+      "candidateId": "cand_71b04787eb4bc6979708e1b6",
+      "url": "https://policy.mahastrategies.com/policy/public-trust/sources",
+      "siteId": "maha-policy",
+      "topic": "public-trust",
+      "routeRole": "sources",
+      "canonicalOwner": "maha-policy",
+      "definitionDependency": {
+        "dependsOn": "cand_ae6d71c78288fa970517965b",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_ae6d71c78288fa970517965b",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://policy.mahastrategies.com/policy/public-trust/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        },
+        {
+          "dependsOn": "cand_ae6d71c78288fa970517965b",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_ae6d71c78288fa970517965b",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/public-trust/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 49,
+      "candidateId": "cand_814fad6ad42cd28a69924adf",
+      "url": "https://policy.mahastrategies.com/policy/public-trust/mechanisms",
+      "siteId": "maha-policy",
+      "topic": "public-trust",
+      "routeRole": "mechanisms",
+      "canonicalOwner": "maha-policy",
+      "definitionDependency": {
+        "dependsOn": "cand_ae6d71c78288fa970517965b",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_ae6d71c78288fa970517965b",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://policy.mahastrategies.com/policy/public-trust/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        },
+        {
+          "dependsOn": "cand_ae6d71c78288fa970517965b",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_ae6d71c78288fa970517965b",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/public-trust/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 50,
+      "candidateId": "cand_b0625906e210bafb279b7669",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/template",
+      "siteId": "agentic-publishing",
+      "topic": "machine-readable-article",
+      "routeRole": "template",
+      "canonicalOwner": "agentic-publishing",
+      "definitionDependency": {
+        "dependsOn": "cand_48485c2639eca0b2fb4d9852",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_48485c2639eca0b2fb4d9852",
+        "resolution": "observed-canonical-replacement",
+        "url": "https://publish.mahastrategies.com/docs/machine-readability"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "observed_43f63ec17ea0bf8650dd06e1",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "observed_43f63ec17ea0bf8650dd06e1",
+          "resolution": "observed-route",
+          "url": "https://publish.mahastrategies.com/docs/release-manifests"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_48485c2639eca0b2fb4d9852",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_48485c2639eca0b2fb4d9852",
+          "resolution": "observed-canonical-replacement",
+          "url": "https://publish.mahastrategies.com/docs/machine-readability"
+        },
+        {
+          "dependsOn": "observed_43f63ec17ea0bf8650dd06e1",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "observed_43f63ec17ea0bf8650dd06e1",
+          "resolution": "observed-route",
+          "url": "https://publish.mahastrategies.com/docs/release-manifests"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": "The existing Publish machine-readability owner route was identified but its body was not available for inspection."
+    },
+    {
+      "cohortOrder": 51,
+      "candidateId": "cand_b0c4e38dc9e936921296cfde",
+      "url": "https://research.mahastrategies.com/federation/research/units/definition",
+      "siteId": "maha-research",
+      "topic": "units",
+      "routeRole": "definition",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "nodeId": "cand_b0c4e38dc9e936921296cfde",
+        "resolution": "self-definition",
+        "url": "https://research.mahastrategies.com/federation/research/units/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 52,
+      "candidateId": "cand_08079f666a41a36780e095f6",
+      "url": "https://research.mahastrategies.com/federation/research/units/fixture",
+      "siteId": "maha-research",
+      "topic": "units",
+      "routeRole": "fixture",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "dependsOn": "cand_b0c4e38dc9e936921296cfde",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_b0c4e38dc9e936921296cfde",
+        "resolution": "tranche-two-candidate",
+        "url": "https://research.mahastrategies.com/federation/research/units/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        },
+        {
+          "dependsOn": "cand_b0c4e38dc9e936921296cfde",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_b0c4e38dc9e936921296cfde",
+          "resolution": "tranche-two-candidate",
+          "url": "https://research.mahastrategies.com/federation/research/units/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 53,
+      "candidateId": "cand_2ff0e71aa26465112036daaa",
+      "url": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/definition",
+      "siteId": "mayon-rajan",
+      "topic": "infrastructure-resilience",
+      "routeRole": "definition",
+      "canonicalOwner": "mayon-rajan",
+      "definitionDependency": {
+        "nodeId": "cand_2ff0e71aa26465112036daaa",
+        "resolution": "self-definition",
+        "url": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_b278a387341dd14ef01c0a2c",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_b278a387341dd14ef01c0a2c",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_b278a387341dd14ef01c0a2c",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_b278a387341dd14ef01c0a2c",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 54,
+      "candidateId": "cand_5eedf7642252330cb10edc4b",
+      "url": "https://mayonrajan.com/mayon-volcano/official-alerts/definition",
+      "siteId": "mayon-rajan",
+      "topic": "official-alerts",
+      "routeRole": "definition",
+      "canonicalOwner": "mayon-rajan",
+      "definitionDependency": {
+        "nodeId": "cand_5eedf7642252330cb10edc4b",
+        "resolution": "self-definition",
+        "url": "https://mayonrajan.com/mayon-volcano/official-alerts/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_b278a387341dd14ef01c0a2c",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_b278a387341dd14ef01c0a2c",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_b278a387341dd14ef01c0a2c",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_b278a387341dd14ef01c0a2c",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 55,
+      "candidateId": "cand_b86babf5135f9a573d02e5ae",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/controls",
+      "siteId": "maha-strategies",
+      "topic": "failure-recovery",
+      "routeRole": "controls",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_6e59fad8478a7efbfa9f88af",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_6e59fad8478a7efbfa9f88af",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        },
+        {
+          "dependsOn": "cand_6e59fad8478a7efbfa9f88af",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_6e59fad8478a7efbfa9f88af",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 56,
+      "candidateId": "cand_ba845b90e84d225764a52037",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/tenant-isolation/threats",
+      "siteId": "maha-strategies",
+      "topic": "tenant-isolation",
+      "routeRole": "threats",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_3461e3f8da83e0663f56783e",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_3461e3f8da83e0663f56783e",
+        "resolution": "tranche-two-candidate",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/tenant-isolation/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3461e3f8da83e0663f56783e",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_3461e3f8da83e0663f56783e",
+          "resolution": "tranche-two-candidate",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/tenant-isolation/definition"
+        },
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 57,
+      "candidateId": "cand_44988268bb2174534e0c6e10",
+      "url": "https://policy.mahastrategies.com/policy/ai-agent-accountability/evidence",
+      "siteId": "maha-policy",
+      "topic": "ai-agent-accountability",
+      "routeRole": "evidence",
+      "canonicalOwner": "maha-policy",
+      "definitionDependency": {
+        "dependsOn": "cand_c37c01d3b8d59b6c853e991b",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_c37c01d3b8d59b6c853e991b",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://policy.mahastrategies.com/policy/ai-agent-accountability/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        },
+        {
+          "dependsOn": "cand_c37c01d3b8d59b6c853e991b",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_c37c01d3b8d59b6c853e991b",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/ai-agent-accountability/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 58,
+      "candidateId": "cand_6bc20205fface3c8abbc18a1",
+      "url": "https://policy.mahastrategies.com/policy/ai-agent-accountability/current-law",
+      "siteId": "maha-policy",
+      "topic": "ai-agent-accountability",
+      "routeRole": "current-law",
+      "canonicalOwner": "maha-policy",
+      "definitionDependency": {
+        "dependsOn": "cand_c37c01d3b8d59b6c853e991b",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_c37c01d3b8d59b6c853e991b",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://policy.mahastrategies.com/policy/ai-agent-accountability/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        },
+        {
+          "dependsOn": "cand_c37c01d3b8d59b6c853e991b",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_c37c01d3b8d59b6c853e991b",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/ai-agent-accountability/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 59,
+      "candidateId": "cand_97575df313413803ac0e5e9b",
+      "url": "https://policy.mahastrategies.com/policy/ai-agent-accountability/implementation",
+      "siteId": "maha-policy",
+      "topic": "ai-agent-accountability",
+      "routeRole": "implementation",
+      "canonicalOwner": "maha-policy",
+      "definitionDependency": {
+        "dependsOn": "cand_c37c01d3b8d59b6c853e991b",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_c37c01d3b8d59b6c853e991b",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://policy.mahastrategies.com/policy/ai-agent-accountability/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        },
+        {
+          "dependsOn": "cand_c37c01d3b8d59b6c853e991b",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_c37c01d3b8d59b6c853e991b",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/ai-agent-accountability/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 60,
+      "candidateId": "cand_bc5a0ea8194ff59854b272c7",
+      "url": "https://policy.mahastrategies.com/policy/ai-agent-accountability/comparison",
+      "siteId": "maha-policy",
+      "topic": "ai-agent-accountability",
+      "routeRole": "comparison",
+      "canonicalOwner": "maha-policy",
+      "definitionDependency": {
+        "dependsOn": "cand_c37c01d3b8d59b6c853e991b",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_c37c01d3b8d59b6c853e991b",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://policy.mahastrategies.com/policy/ai-agent-accountability/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        },
+        {
+          "dependsOn": "cand_c37c01d3b8d59b6c853e991b",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_c37c01d3b8d59b6c853e991b",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/ai-agent-accountability/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 61,
+      "candidateId": "cand_c3a77af757b83b8091ba426e",
+      "url": "https://research.mahastrategies.com/federation/research/software-environment/fixture",
+      "siteId": "maha-research",
+      "topic": "software-environment",
+      "routeRole": "fixture",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "dependsOn": "cand_4bfdfd9ce5a0da51ddf57cb0",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_4bfdfd9ce5a0da51ddf57cb0",
+        "resolution": "tranche-two-candidate",
+        "url": "https://research.mahastrategies.com/federation/research/software-environment/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        },
+        {
+          "dependsOn": "cand_4bfdfd9ce5a0da51ddf57cb0",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_4bfdfd9ce5a0da51ddf57cb0",
+          "resolution": "tranche-two-candidate",
+          "url": "https://research.mahastrategies.com/federation/research/software-environment/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 62,
+      "candidateId": "cand_c5399f674f04e49c17d824f2",
+      "url": "https://policy.mahastrategies.com/policy/automated-decision-governance/definition",
+      "siteId": "maha-policy",
+      "topic": "automated-decision-governance",
+      "routeRole": "definition",
+      "canonicalOwner": "maha-policy",
+      "definitionDependency": {
+        "nodeId": "cand_c5399f674f04e49c17d824f2",
+        "resolution": "self-definition",
+        "url": "https://policy.mahastrategies.com/policy/automated-decision-governance/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 63,
+      "candidateId": "cand_c556ba48e279ed12c01701d8",
+      "url": "https://research.mahastrategies.com/federation/research/theorem-statement/relationships",
+      "siteId": "maha-research",
+      "topic": "theorem-statement",
+      "routeRole": "relationships",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "dependsOn": "cand_0145d36c049f02ae159ea987",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_0145d36c049f02ae159ea987",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://research.mahastrategies.com/federation/research/theorem-statement/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_0145d36c049f02ae159ea987",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_0145d36c049f02ae159ea987",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/theorem-statement/definition"
+        },
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 64,
+      "candidateId": "cand_c6513de286daaca52d677bd9",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/agentic-query-letter/machine-interface",
+      "siteId": "agentic-publishing",
+      "topic": "agentic-query-letter",
+      "routeRole": "machine-interface",
+      "canonicalOwner": "agentic-publishing",
+      "definitionDependency": {
+        "dependsOn": "cand_3a7cc1c4dca92c985618384d",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_3a7cc1c4dca92c985618384d",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://publish.mahastrategies.com/agentic-publishing/agentic-query-letter/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "observed_43f63ec17ea0bf8650dd06e1",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "observed_43f63ec17ea0bf8650dd06e1",
+          "resolution": "observed-route",
+          "url": "https://publish.mahastrategies.com/docs/release-manifests"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3a7cc1c4dca92c985618384d",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_3a7cc1c4dca92c985618384d",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/agentic-query-letter/definition"
+        },
+        {
+          "dependsOn": "observed_43f63ec17ea0bf8650dd06e1",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "observed_43f63ec17ea0bf8650dd06e1",
+          "resolution": "observed-route",
+          "url": "https://publish.mahastrategies.com/docs/release-manifests"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 65,
+      "candidateId": "cand_c834e0da8233234c23b40e58",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/architecture",
+      "siteId": "maha-strategies",
+      "topic": "credential-rotation",
+      "routeRole": "architecture",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_7b558066ec71b18a21f4187f",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_7b558066ec71b18a21f4187f",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        },
+        {
+          "dependsOn": "cand_7b558066ec71b18a21f4187f",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_7b558066ec71b18a21f4187f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 66,
+      "candidateId": "cand_c8b98032f22fc91b51dac6be",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/machine-readable-article/example",
+      "siteId": "agentic-publishing",
+      "topic": "machine-readable-article",
+      "routeRole": "example",
+      "canonicalOwner": "agentic-publishing",
+      "definitionDependency": {
+        "dependsOn": "cand_48485c2639eca0b2fb4d9852",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_48485c2639eca0b2fb4d9852",
+        "resolution": "observed-canonical-replacement",
+        "url": "https://publish.mahastrategies.com/docs/machine-readability"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "observed_43f63ec17ea0bf8650dd06e1",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "observed_43f63ec17ea0bf8650dd06e1",
+          "resolution": "observed-route",
+          "url": "https://publish.mahastrategies.com/docs/release-manifests"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_48485c2639eca0b2fb4d9852",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_48485c2639eca0b2fb4d9852",
+          "resolution": "observed-canonical-replacement",
+          "url": "https://publish.mahastrategies.com/docs/machine-readability"
+        },
+        {
+          "dependsOn": "observed_43f63ec17ea0bf8650dd06e1",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "observed_43f63ec17ea0bf8650dd06e1",
+          "resolution": "observed-route",
+          "url": "https://publish.mahastrategies.com/docs/release-manifests"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": "The existing Publish machine-readability owner route was identified but its body was not available for inspection."
+    },
+    {
+      "cohortOrder": 67,
+      "candidateId": "cand_a8b6bff27aa2fd238700eea6",
+      "url": "https://research.mahastrategies.com/federation/research/calculation-inputs/protocol",
+      "siteId": "maha-research",
+      "topic": "calculation-inputs",
+      "routeRole": "protocol",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "dependsOn": "cand_cb21435abc94c118b0073ad9",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_cb21435abc94c118b0073ad9",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://research.mahastrategies.com/federation/research/calculation-inputs/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        },
+        {
+          "dependsOn": "cand_cb21435abc94c118b0073ad9",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_cb21435abc94c118b0073ad9",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/calculation-inputs/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 68,
+      "candidateId": "cand_cc3ead8654d9a3e0a9269d0b",
+      "url": "https://research.mahastrategies.com/federation/research/uncertainty/method",
+      "siteId": "maha-research",
+      "topic": "uncertainty",
+      "routeRole": "method",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "dependsOn": "cand_43a69974e1c3c11878b470f9",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_43a69974e1c3c11878b470f9",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://research.mahastrategies.com/federation/research/uncertainty/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        },
+        {
+          "dependsOn": "cand_43a69974e1c3c11878b470f9",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_43a69974e1c3c11878b470f9",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/uncertainty/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 69,
+      "candidateId": "cand_cc5e3966d5ae31e5565245bb",
+      "url": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/limits",
+      "siteId": "mayon-rajan",
+      "topic": "infrastructure-resilience",
+      "routeRole": "limits",
+      "canonicalOwner": "mayon-rajan",
+      "definitionDependency": {
+        "dependsOn": "cand_2ff0e71aa26465112036daaa",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_2ff0e71aa26465112036daaa",
+        "resolution": "tranche-two-candidate",
+        "url": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_b278a387341dd14ef01c0a2c",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_b278a387341dd14ef01c0a2c",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_2ff0e71aa26465112036daaa",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_2ff0e71aa26465112036daaa",
+          "resolution": "tranche-two-candidate",
+          "url": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/definition"
+        },
+        {
+          "dependsOn": "cand_b278a387341dd14ef01c0a2c",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_b278a387341dd14ef01c0a2c",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 70,
+      "candidateId": "cand_c8c9a9b63b8028c5b81ad25d",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/template",
+      "siteId": "agentic-publishing",
+      "topic": "structured-abstract",
+      "routeRole": "template",
+      "canonicalOwner": "agentic-publishing",
+      "definitionDependency": {
+        "dependsOn": "cand_ccfd0d1e38ae45c195c492a5",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_ccfd0d1e38ae45c195c492a5",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "observed_43f63ec17ea0bf8650dd06e1",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "observed_43f63ec17ea0bf8650dd06e1",
+          "resolution": "observed-route",
+          "url": "https://publish.mahastrategies.com/docs/release-manifests"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_ccfd0d1e38ae45c195c492a5",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_ccfd0d1e38ae45c195c492a5",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/structured-abstract/definition"
+        },
+        {
+          "dependsOn": "observed_43f63ec17ea0bf8650dd06e1",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "observed_43f63ec17ea0bf8650dd06e1",
+          "resolution": "observed-route",
+          "url": "https://publish.mahastrategies.com/docs/release-manifests"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 71,
+      "candidateId": "cand_d1d3fd263f69666c3b186b6d",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/controls",
+      "siteId": "maha-strategies",
+      "topic": "credential-rotation",
+      "routeRole": "controls",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_7b558066ec71b18a21f4187f",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_7b558066ec71b18a21f4187f",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        },
+        {
+          "dependsOn": "cand_7b558066ec71b18a21f4187f",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_7b558066ec71b18a21f4187f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/credential-rotation/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 72,
+      "candidateId": "cand_d2a0f476d92c2f48b582c26e",
+      "url": "https://research.mahastrategies.com/federation/research/proof-status/definition",
+      "siteId": "maha-research",
+      "topic": "proof-status",
+      "routeRole": "definition",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "nodeId": "cand_d2a0f476d92c2f48b582c26e",
+        "resolution": "self-definition",
+        "url": "https://research.mahastrategies.com/federation/research/proof-status/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 73,
+      "candidateId": "cand_8cfbea68c750e754268eb658",
+      "url": "https://research.mahastrategies.com/federation/research/proof-status/fixture",
+      "siteId": "maha-research",
+      "topic": "proof-status",
+      "routeRole": "fixture",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "dependsOn": "cand_d2a0f476d92c2f48b582c26e",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_d2a0f476d92c2f48b582c26e",
+        "resolution": "tranche-two-candidate",
+        "url": "https://research.mahastrategies.com/federation/research/proof-status/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        },
+        {
+          "dependsOn": "cand_d2a0f476d92c2f48b582c26e",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_d2a0f476d92c2f48b582c26e",
+          "resolution": "tranche-two-candidate",
+          "url": "https://research.mahastrategies.com/federation/research/proof-status/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 74,
+      "candidateId": "cand_d621c8e727d8c75e4c60b42e",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/tenant-isolation/implementation",
+      "siteId": "maha-strategies",
+      "topic": "tenant-isolation",
+      "routeRole": "implementation",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_3461e3f8da83e0663f56783e",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_3461e3f8da83e0663f56783e",
+        "resolution": "tranche-two-candidate",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/tenant-isolation/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3461e3f8da83e0663f56783e",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_3461e3f8da83e0663f56783e",
+          "resolution": "tranche-two-candidate",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/tenant-isolation/definition"
+        },
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 75,
+      "candidateId": "cand_d7faba500961cacce4fe481f",
+      "url": "https://research.mahastrategies.com/federation/research/propagation/failure-mode",
+      "siteId": "maha-research",
+      "topic": "propagation",
+      "routeRole": "failure-mode",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "dependsOn": "cand_30afc974780ef67ee4b6bb13",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_30afc974780ef67ee4b6bb13",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://research.mahastrategies.com/federation/research/propagation/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_30afc974780ef67ee4b6bb13",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_30afc974780ef67ee4b6bb13",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/propagation/definition"
+        },
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 76,
+      "candidateId": "cand_d8f3be79c92fdef2c025ec1e",
+      "url": "https://research.mahastrategies.com/federation/research/calculation-inputs/relationships",
+      "siteId": "maha-research",
+      "topic": "calculation-inputs",
+      "routeRole": "relationships",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "dependsOn": "cand_cb21435abc94c118b0073ad9",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_cb21435abc94c118b0073ad9",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://research.mahastrategies.com/federation/research/calculation-inputs/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        },
+        {
+          "dependsOn": "cand_cb21435abc94c118b0073ad9",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_cb21435abc94c118b0073ad9",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/calculation-inputs/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 77,
+      "candidateId": "cand_d98b6bacc48fba6c93f7e094",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/controls",
+      "siteId": "maha-strategies",
+      "topic": "tool-authorization",
+      "routeRole": "controls",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_20da33096b4bf0cd8817d93d",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_20da33096b4bf0cd8817d93d",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_20da33096b4bf0cd8817d93d",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_20da33096b4bf0cd8817d93d",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/definition"
+        },
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 78,
+      "candidateId": "cand_b06ab3b594ffb67a02cea1cd",
+      "url": "https://policy.mahastrategies.com/policy/copyright-and-training-data/implementation",
+      "siteId": "maha-policy",
+      "topic": "copyright-and-training-data",
+      "routeRole": "implementation",
+      "canonicalOwner": "maha-policy",
+      "definitionDependency": {
+        "dependsOn": "cand_e244e094ea6f604e4a49cefe",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_e244e094ea6f604e4a49cefe",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://policy.mahastrategies.com/policy/copyright-and-training-data/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        },
+        {
+          "dependsOn": "cand_e244e094ea6f604e4a49cefe",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_e244e094ea6f604e4a49cefe",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/copyright-and-training-data/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 79,
+      "candidateId": "cand_cd093c6d98bdb1a1486e1242",
+      "url": "https://policy.mahastrategies.com/policy/copyright-and-training-data/comparison",
+      "siteId": "maha-policy",
+      "topic": "copyright-and-training-data",
+      "routeRole": "comparison",
+      "canonicalOwner": "maha-policy",
+      "definitionDependency": {
+        "dependsOn": "cand_e244e094ea6f604e4a49cefe",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_e244e094ea6f604e4a49cefe",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://policy.mahastrategies.com/policy/copyright-and-training-data/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        },
+        {
+          "dependsOn": "cand_e244e094ea6f604e4a49cefe",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_e244e094ea6f604e4a49cefe",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/copyright-and-training-data/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 80,
+      "candidateId": "cand_d03b6ed47d8107efa00456dc",
+      "url": "https://policy.mahastrategies.com/policy/copyright-and-training-data/current-law",
+      "siteId": "maha-policy",
+      "topic": "copyright-and-training-data",
+      "routeRole": "current-law",
+      "canonicalOwner": "maha-policy",
+      "definitionDependency": {
+        "dependsOn": "cand_e244e094ea6f604e4a49cefe",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_e244e094ea6f604e4a49cefe",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://policy.mahastrategies.com/policy/copyright-and-training-data/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        },
+        {
+          "dependsOn": "cand_e244e094ea6f604e4a49cefe",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_e244e094ea6f604e4a49cefe",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/copyright-and-training-data/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 81,
+      "candidateId": "cand_6aa7a4ff09688cd539af4d73",
+      "url": "https://policy.mahastrategies.com/policy/human-oversight/implementation",
+      "siteId": "maha-policy",
+      "topic": "human-oversight",
+      "routeRole": "implementation",
+      "canonicalOwner": "maha-policy",
+      "definitionDependency": {
+        "dependsOn": "cand_e8311d5e4e5e06264006aa68",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_e8311d5e4e5e06264006aa68",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://policy.mahastrategies.com/policy/human-oversight/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        },
+        {
+          "dependsOn": "cand_e8311d5e4e5e06264006aa68",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_e8311d5e4e5e06264006aa68",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/human-oversight/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 82,
+      "candidateId": "cand_c579ea086a31d922613a297a",
+      "url": "https://policy.mahastrategies.com/policy/human-oversight/comparison",
+      "siteId": "maha-policy",
+      "topic": "human-oversight",
+      "routeRole": "comparison",
+      "canonicalOwner": "maha-policy",
+      "definitionDependency": {
+        "dependsOn": "cand_e8311d5e4e5e06264006aa68",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_e8311d5e4e5e06264006aa68",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://policy.mahastrategies.com/policy/human-oversight/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        },
+        {
+          "dependsOn": "cand_e8311d5e4e5e06264006aa68",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_e8311d5e4e5e06264006aa68",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/human-oversight/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 83,
+      "candidateId": "cand_dd2b44a9a3d1cc1d34c0f9a8",
+      "url": "https://policy.mahastrategies.com/policy/human-oversight/current-law",
+      "siteId": "maha-policy",
+      "topic": "human-oversight",
+      "routeRole": "current-law",
+      "canonicalOwner": "maha-policy",
+      "definitionDependency": {
+        "dependsOn": "cand_e8311d5e4e5e06264006aa68",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_e8311d5e4e5e06264006aa68",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://policy.mahastrategies.com/policy/human-oversight/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        },
+        {
+          "dependsOn": "cand_e8311d5e4e5e06264006aa68",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_e8311d5e4e5e06264006aa68",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/human-oversight/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 84,
+      "candidateId": "cand_e90241ac0b6efd4cd012cff6",
+      "url": "https://policy.mahastrategies.com/policy/public-trust/comparison",
+      "siteId": "maha-policy",
+      "topic": "public-trust",
+      "routeRole": "comparison",
+      "canonicalOwner": "maha-policy",
+      "definitionDependency": {
+        "dependsOn": "cand_ae6d71c78288fa970517965b",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_ae6d71c78288fa970517965b",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://policy.mahastrategies.com/policy/public-trust/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_1937134519716bbd2730b72f",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_1937134519716bbd2730b72f",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/tool-governance/definition"
+        },
+        {
+          "dependsOn": "cand_ae6d71c78288fa970517965b",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_ae6d71c78288fa970517965b",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://policy.mahastrategies.com/policy/public-trust/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 85,
+      "candidateId": "cand_e9a6c1e5ae85a014fe8dab60",
+      "url": "https://research.mahastrategies.com/federation/research/propagation/method",
+      "siteId": "maha-research",
+      "topic": "propagation",
+      "routeRole": "method",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "dependsOn": "cand_30afc974780ef67ee4b6bb13",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_30afc974780ef67ee4b6bb13",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://research.mahastrategies.com/federation/research/propagation/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_30afc974780ef67ee4b6bb13",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_30afc974780ef67ee4b6bb13",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/propagation/definition"
+        },
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 86,
+      "candidateId": "cand_ea9ea7da882f2eb14604f1df",
+      "url": "https://research.mahastrategies.com/federation/research/uncertainty/machine-record",
+      "siteId": "maha-research",
+      "topic": "uncertainty",
+      "routeRole": "machine-record",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "dependsOn": "cand_43a69974e1c3c11878b470f9",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_43a69974e1c3c11878b470f9",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://research.mahastrategies.com/federation/research/uncertainty/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        },
+        {
+          "dependsOn": "cand_43a69974e1c3c11878b470f9",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_43a69974e1c3c11878b470f9",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/uncertainty/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 87,
+      "candidateId": "cand_ecff0e1d07982edf497cd776",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/architecture",
+      "siteId": "maha-strategies",
+      "topic": "tool-authorization",
+      "routeRole": "architecture",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_20da33096b4bf0cd8817d93d",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_20da33096b4bf0cd8817d93d",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_20da33096b4bf0cd8817d93d",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_20da33096b4bf0cd8817d93d",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/tool-authorization/definition"
+        },
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 88,
+      "candidateId": "cand_ed31a1988d83179a77beec49",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/agentic-query-letter/template",
+      "siteId": "agentic-publishing",
+      "topic": "agentic-query-letter",
+      "routeRole": "template",
+      "canonicalOwner": "agentic-publishing",
+      "definitionDependency": {
+        "dependsOn": "cand_3a7cc1c4dca92c985618384d",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_3a7cc1c4dca92c985618384d",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://publish.mahastrategies.com/agentic-publishing/agentic-query-letter/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "observed_43f63ec17ea0bf8650dd06e1",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "observed_43f63ec17ea0bf8650dd06e1",
+          "resolution": "observed-route",
+          "url": "https://publish.mahastrategies.com/docs/release-manifests"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3a7cc1c4dca92c985618384d",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_3a7cc1c4dca92c985618384d",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://publish.mahastrategies.com/agentic-publishing/agentic-query-letter/definition"
+        },
+        {
+          "dependsOn": "observed_43f63ec17ea0bf8650dd06e1",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "observed_43f63ec17ea0bf8650dd06e1",
+          "resolution": "observed-route",
+          "url": "https://publish.mahastrategies.com/docs/release-manifests"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 89,
+      "candidateId": "cand_387cd287f34262405b9be745",
+      "url": "https://research.mahastrategies.com/federation/research/literature-conflict/relationships",
+      "siteId": "maha-research",
+      "topic": "literature-conflict",
+      "routeRole": "relationships",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "dependsOn": "cand_ed61e762fa0ec776b64ca043",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_ed61e762fa0ec776b64ca043",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://research.mahastrategies.com/federation/research/literature-conflict/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        },
+        {
+          "dependsOn": "cand_ed61e762fa0ec776b64ca043",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_ed61e762fa0ec776b64ca043",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/literature-conflict/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 90,
+      "candidateId": "cand_edda69105a975d84215ad8ab",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/policy",
+      "siteId": "agentic-publishing",
+      "topic": "release-manifest",
+      "routeRole": "policy",
+      "canonicalOwner": "agentic-publishing",
+      "definitionDependency": {
+        "nodeId": "observed:agentic-publishing:release-manifest",
+        "resolution": "observed-local-definition",
+        "url": "https://publish.mahastrategies.com/docs/release-manifests"
+      },
+      "ownerDependencies": [],
+      "graphEdges": [
+        {
+          "dependsOn": "observed_43f63ec17ea0bf8650dd06e1",
+          "reason": "observed-local-topic-definition-already-precedes-application",
+          "nodeId": "observed_43f63ec17ea0bf8650dd06e1",
+          "resolution": "observed-route",
+          "url": "https://publish.mahastrategies.com/docs/release-manifests"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": "The existing Publish release-manifest owner route was identified but its body was not available for inspection."
+    },
+    {
+      "cohortOrder": 91,
+      "candidateId": "cand_f0c682db65aed0113f08f6a9",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/controls",
+      "siteId": "maha-strategies",
+      "topic": "metered-evidence-retrieval",
+      "routeRole": "controls",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_03783f0a589f183ebb951043",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_03783f0a589f183ebb951043",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_03783f0a589f183ebb951043",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_03783f0a589f183ebb951043",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/metered-evidence-retrieval/definition"
+        },
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 92,
+      "candidateId": "cand_f189698720a3e4d0dfd92d33",
+      "url": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/official-sources",
+      "siteId": "mayon-rajan",
+      "topic": "infrastructure-resilience",
+      "routeRole": "official-sources",
+      "canonicalOwner": "mayon-rajan",
+      "definitionDependency": {
+        "dependsOn": "cand_2ff0e71aa26465112036daaa",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_2ff0e71aa26465112036daaa",
+        "resolution": "tranche-two-candidate",
+        "url": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_b278a387341dd14ef01c0a2c",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_b278a387341dd14ef01c0a2c",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_2ff0e71aa26465112036daaa",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_2ff0e71aa26465112036daaa",
+          "resolution": "tranche-two-candidate",
+          "url": "https://mayonrajan.com/mayon-volcano/infrastructure-resilience/definition"
+        },
+        {
+          "dependsOn": "cand_b278a387341dd14ef01c0a2c",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_b278a387341dd14ef01c0a2c",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 93,
+      "candidateId": "cand_f2e452a99e390ddae8b1001f",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition",
+      "siteId": "maha-os",
+      "topic": "device-identity",
+      "routeRole": "definition",
+      "canonicalOwner": "maha-os",
+      "definitionDependency": {
+        "nodeId": "cand_f2e452a99e390ddae8b1001f",
+        "resolution": "self-definition",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_671d652918d62414c37d751d",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_671d652918d62414c37d751d",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_671d652918d62414c37d751d",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_671d652918d62414c37d751d",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 94,
+      "candidateId": "cand_9f41b4ed6746ae6e048f417f",
+      "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/operator-guide",
+      "siteId": "maha-os",
+      "topic": "device-identity",
+      "routeRole": "operator-guide",
+      "canonicalOwner": "maha-os",
+      "definitionDependency": {
+        "dependsOn": "cand_f2e452a99e390ddae8b1001f",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_f2e452a99e390ddae8b1001f",
+        "resolution": "tranche-two-candidate",
+        "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_671d652918d62414c37d751d",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_671d652918d62414c37d751d",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_671d652918d62414c37d751d",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_671d652918d62414c37d751d",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/health-data-consent/definition"
+        },
+        {
+          "dependsOn": "cand_f2e452a99e390ddae8b1001f",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_f2e452a99e390ddae8b1001f",
+          "resolution": "tranche-two-candidate",
+          "url": "https://www.maha-os.com/knowledge/private-machine-systems/device-identity/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 95,
+      "candidateId": "cand_c4b724215d89cb156c11faa7",
+      "url": "https://research.mahastrategies.com/federation/research/rights-basis/fixture",
+      "siteId": "maha-research",
+      "topic": "rights-basis",
+      "routeRole": "fixture",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": {
+        "dependsOn": "cand_f40a8ffd0e5eda5b8f404d14",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_f40a8ffd0e5eda5b8f404d14",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://research.mahastrategies.com/federation/research/rights-basis/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        },
+        {
+          "dependsOn": "cand_f40a8ffd0e5eda5b8f404d14",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_f40a8ffd0e5eda5b8f404d14",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/rights-basis/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 96,
+      "candidateId": "cand_ec51046262d16ae33f68402b",
+      "url": "https://www.mahastrategies.com/clearing/evidence-workflows/rights-basis/workflow",
+      "siteId": "maha-strategies",
+      "topic": "rights-basis",
+      "routeRole": "workflow",
+      "canonicalOwner": "maha-research",
+      "definitionDependency": null,
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_3dbf6da0286dd76c2ea339a6",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_3dbf6da0286dd76c2ea339a6",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/source-identity/definition"
+        },
+        {
+          "dependsOn": "cand_f40a8ffd0e5eda5b8f404d14",
+          "reason": "canonical-owner-topic-definition-first",
+          "nodeId": "cand_f40a8ffd0e5eda5b8f404d14",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://research.mahastrategies.com/federation/research/rights-basis/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 97,
+      "candidateId": "cand_f6409ea20cfc51496e3a61d8",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/commercialization",
+      "siteId": "maha-strategies",
+      "topic": "failure-recovery",
+      "routeRole": "commercialization",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_6e59fad8478a7efbfa9f88af",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_6e59fad8478a7efbfa9f88af",
+        "resolution": "tranche-one-prerequisite",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        },
+        {
+          "dependsOn": "cand_6e59fad8478a7efbfa9f88af",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_6e59fad8478a7efbfa9f88af",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/failure-recovery/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 98,
+      "candidateId": "cand_f805090b4bbcaa508d1215a0",
+      "url": "https://publish.mahastrategies.com/agentic-publishing/release-manifest/workflow",
+      "siteId": "agentic-publishing",
+      "topic": "release-manifest",
+      "routeRole": "workflow",
+      "canonicalOwner": "agentic-publishing",
+      "definitionDependency": {
+        "nodeId": "observed:agentic-publishing:release-manifest",
+        "resolution": "observed-local-definition",
+        "url": "https://publish.mahastrategies.com/docs/release-manifests"
+      },
+      "ownerDependencies": [],
+      "graphEdges": [
+        {
+          "dependsOn": "observed_43f63ec17ea0bf8650dd06e1",
+          "reason": "observed-local-topic-definition-already-precedes-application",
+          "nodeId": "observed_43f63ec17ea0bf8650dd06e1",
+          "resolution": "observed-route",
+          "url": "https://publish.mahastrategies.com/docs/release-manifests"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": "The existing Publish release-manifest owner route was identified but its body was not available for inspection."
+    },
+    {
+      "cohortOrder": 99,
+      "candidateId": "cand_f8e337ad1934c31c65dcea4d",
+      "url": "https://mayonrajan.com/mayon-volcano/official-alerts/limits",
+      "siteId": "mayon-rajan",
+      "topic": "official-alerts",
+      "routeRole": "limits",
+      "canonicalOwner": "mayon-rajan",
+      "definitionDependency": {
+        "dependsOn": "cand_5eedf7642252330cb10edc4b",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_5eedf7642252330cb10edc4b",
+        "resolution": "tranche-two-candidate",
+        "url": "https://mayonrajan.com/mayon-volcano/official-alerts/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_b278a387341dd14ef01c0a2c",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_b278a387341dd14ef01c0a2c",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_5eedf7642252330cb10edc4b",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_5eedf7642252330cb10edc4b",
+          "resolution": "tranche-two-candidate",
+          "url": "https://mayonrajan.com/mayon-volcano/official-alerts/definition"
+        },
+        {
+          "dependsOn": "cand_b278a387341dd14ef01c0a2c",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_b278a387341dd14ef01c0a2c",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://mayonrajan.com/mayon-volcano/hazard-zones/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    },
+    {
+      "cohortOrder": 100,
+      "candidateId": "cand_fc84174a23763a79823ac9a5",
+      "url": "https://www.mahastrategies.com/clearing/agent-governance/machine-commerce-entitlement/implementation",
+      "siteId": "maha-strategies",
+      "topic": "machine-commerce-entitlement",
+      "routeRole": "implementation",
+      "canonicalOwner": "maha-strategies",
+      "definitionDependency": {
+        "dependsOn": "cand_5f75c387d49a705e210e237f",
+        "reason": "local-topic-definition-first",
+        "nodeId": "cand_5f75c387d49a705e210e237f",
+        "resolution": "tranche-two-candidate",
+        "url": "https://www.mahastrategies.com/clearing/agent-governance/machine-commerce-entitlement/definition"
+      },
+      "ownerDependencies": [
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "graphEdges": [
+        {
+          "dependsOn": "cand_5f75c387d49a705e210e237f",
+          "reason": "local-topic-definition-first",
+          "nodeId": "cand_5f75c387d49a705e210e237f",
+          "resolution": "tranche-two-candidate",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/machine-commerce-entitlement/definition"
+        },
+        {
+          "dependsOn": "cand_63800114df58212bf1827623",
+          "reason": "canonical-family-owner-definition-first",
+          "nodeId": "cand_63800114df58212bf1827623",
+          "resolution": "tranche-one-prerequisite",
+          "url": "https://www.mahastrategies.com/clearing/agent-governance/identity-bound-agents/definition"
+        }
+      ],
+      "dependencyValid": true,
+      "bodyInspectionCaveat": null
+    }
+  ],
+  "provenanceDigest": "sha256:580da8f09f4ecf78f0283bd0791104bb08cd5599f92b96cf0953516621c452ac"
+}

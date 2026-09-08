@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "maha-federation-gap-closure-fixtures/3.0",
+  "frozenOn": "2026-09-07",
+  "syntheticOnly": true,
+  "executions": [
+    {
+      "fixtureId": "checked-integer-arithmetic",
+      "result": {
+        "result": "42",
+        "exact": true
+      },
+      "expected": {
+        "result": "42",
+        "exact": true
+      },
+      "refusalCases": [
+        "invalid-limit",
+        "input-out-of-range",
+        "result-out-of-range"
+      ]
+    },
+    {
+      "fixtureId": "quarter-turn-reference-frame",
+      "result": {
+        "x": "-4",
+        "y": "3",
+        "normalizedQuarterTurns": 1
+      },
+      "expected": {
+        "x": "-4",
+        "y": "3",
+        "normalizedQuarterTurns": 1
+      },
+      "refusalCases": [
+        "quarter-turn-not-integer"
+      ]
+    },
+    {
+      "fixtureId": "randomized-mean-contrast",
+      "result": {
+        "numerator": "12",
+        "denominator": "4",
+        "interpretation": "randomized-sample-mean-contrast"
+      },
+      "expected": {
+        "numerator": "12",
+        "denominator": "4",
+        "interpretation": "randomized-sample-mean-contrast"
+      },
+      "refusalCases": [
+        "random-assignment-not-declared",
+        "empty-arm"
+      ]
+    },
+    {
+      "fixtureId": "locator-verification",
+      "result": {
+        "verified": true,
+        "locatorDigest": "sha256:3fab8ea25077147b7008ca80483a86d20b457714f0516940b99248cbe47258a7"
+      },
+      "expected": {
+        "verified": true
+      },
+      "refusalCases": [
+        "sourceId",
+        "sourceRevision",
+        "kind",
+        "value",
+        "empty"
+      ]
+    },
+    {
+      "fixtureId": "version-relationship",
+      "result": {
+        "verified": true,
+        "transition": "supersedes"
+      },
+      "expected": {
+        "verified": true,
+        "transition": "supersedes"
+      },
+      "refusalCases": [
+        "initial-has-predecessor",
+        "predecessor-object-mismatch",
+        "predecessor-digest-mismatch",
+        "revision-unchanged"
+      ]
+    },
+    {
+      "fixtureId": "audit-export",
+      "result": {
+        "entries": [
+          {
+            "eventId": "e1",
+            "eventType": "delivered",
+            "subjectDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "occurredAt": "2026-09-07T00:00:01Z"
+          },
+          {
+            "eventId": "e2",
+            "eventType": "acknowledged",
+            "subjectDigest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "occurredAt": "2026-09-07T00:00:02Z"
+          }
+        ],
+        "exportDigest": "sha256:e07f17e17c513f7e491a2a1197fb55a3521c4d34c21674741e5dd04b79da0442",
+        "containsSubmittedContent": false
+      },
+      "expected": {
+        "eventIds": [
+          "e1",
+          "e2"
+        ],
+        "containsSubmittedContent": false
+      },
+      "refusalCases": [
+        "duplicate-event",
+        "subject-digest-invalid",
+        "occurred-at-invalid"
+      ]
+    }
+  ],
+  "boundary": "Fixtures prove only exact bounded mechanics. They do not create empirical authority, transfer review, or establish a machine rule outside their executable input contract.",
+  "provenanceDigest": "sha256:b6d146f18c9bc80dc2df8f80271e6f1557ce6bd40a3cb1df20a999c04673e0df"
+}

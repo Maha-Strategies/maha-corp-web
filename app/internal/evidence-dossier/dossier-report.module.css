@@ -43,6 +43,6 @@
   .noPrint { display: none !important; }
   .claim, .draftBanner { break-inside: avoid; }
   .h2 { break-after: avoid; }
-  a[href]::after { content: ' (' attr(href) ')'; font-size: 0.7em; word-break: break-all; }
+  .page a[href]::after { content: ' (' attr(href) ')'; font-size: 0.7em; word-break: break-all; }
   @page { margin: 18mm; }
 }

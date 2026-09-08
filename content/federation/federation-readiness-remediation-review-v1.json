@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "maha-federation-readiness-remediation-review/1.0",
+  "reviewedOn": "2026-09-06",
+  "upstreamClaudeDeterminationsDigest": "sha256:aa9f73c2e993b75ff7af17f3d79b29855aa496b74af05cd9711f8ad26c5c8387",
+  "conclusion": "accept-five-Claude-promotions-with-recorded-narrowing-and-promote-health-permission-record-with-narrowed-operational-scope",
+  "counts": {
+    "ClaudePromotionsReviewed": 5,
+    "ClaudePromotionsAccepted": 5,
+    "healthPrerequisitesResolved": 1,
+    "downstreamMahaOsPagesCleared": 11
+  },
+  "boundaries": [
+    "No public route or active binding changed.",
+    "Health-data permission is not presented as universal legal consent or HIPAA authorization.",
+    "Commercial pages do not claim customer outcomes, savings, recovery, or production results."
+  ],
+  "provenanceDigest": "sha256:53783ad9fb676cadf8a2eb7a5b14767e99dd35213cdd58bda05f2b8f038b7c77"
+}

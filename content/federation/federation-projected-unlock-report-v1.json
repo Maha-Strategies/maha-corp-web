@@ -1,0 +1,474 @@
+{
+  "schemaVersion": "maha-federation-projected-unlock-report/1.0",
+  "frozenOn": "2026-09-07",
+  "boundExactlyTo": {
+    "dependencyGraph": "sha256:e675ac24f4eaa484cea62614111af78981575e7d2e46be1f2212f62ee7bae17e",
+    "unifiedReadinessLedger": "sha256:bf5769e51b4b69b358805e5050c548be11482380c7fb38905ce7263c4348a5ee"
+  },
+  "question": "If each unresolved prerequisite were accepted, which unresolved candidates would stop being held?",
+  "derivation": "The prerequisite cohort is every node with at least one incoming edge whose state is neither evidence-ready nor live-published, computed from the graph and the ledger at generation time. No figure in this artifact is written into the generator, so a changed graph or ledger changes the report rather than dating it.",
+  "counts": {
+    "unresolvedPrerequisitesWithDependents": 39,
+    "totalWouldBecomeAssessable": 173,
+    "totalStillHeld": 0,
+    "evidenceReadyInLedger": 1426
+  },
+  "assessableIsNotReady": "Assessable and evidence-ready are different measures and are reported separately. A candidate becomes assessable when nothing blocks it from being reviewed; it becomes evidence-ready only when its own sources have been inspected and a decision recorded. No sum of these two numbers is meaningful.",
+  "projections": [
+    {
+      "prerequisiteId": "cand_179532c8e9ca588df1721a70",
+      "prerequisitePath": "/concepts/machine-civilization/definition",
+      "wouldBecomeAssessable": [
+        "/concepts/machine-civilization/relationship",
+        "/concepts/machine-civilization/development"
+      ],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "cand_31b7dabe923fc44a99337460",
+      "prerequisitePath": "/concepts/public-reason/definition",
+      "wouldBecomeAssessable": [
+        "/concepts/public-reason/argument",
+        "/concepts/public-reason/application",
+        "/concepts/public-reason/relationship",
+        "/concepts/public-reason/critique",
+        "/concepts/public-reason/development",
+        "/concepts/public-reason/origin",
+        "/concepts/public-reason/limits"
+      ],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "cand_3a7cc1c4dca92c985618384d",
+      "prerequisitePath": "/agentic-publishing/agentic-query-letter/definition",
+      "wouldBecomeAssessable": [
+        "/agentic-publishing/agentic-query-letter/failure-mode",
+        "/agentic-publishing/agentic-query-letter/example",
+        "/agentic-publishing/agentic-query-letter/policy",
+        "/agentic-publishing/agentic-query-letter/workflow",
+        "/agentic-publishing/agentic-query-letter/machine-interface",
+        "/agentic-publishing/agentic-query-letter/template",
+        "/agentic-publishing/agentic-query-letter/governance"
+      ],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "cand_671d652918d62414c37d751d",
+      "prerequisitePath": "/knowledge/private-machine-systems/health-data-consent/definition",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "cand_ae1fa1cb99b9e8599597db24",
+      "prerequisitePath": "/knowledge/religion/mythology",
+      "wouldBecomeAssessable": [
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/soma/epithet-identity",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/agni/comparison-boundary",
+        "/knowledge/religion/mythology/norse-germanic/frigg/reception-boundary",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/devi/comparison-boundary",
+        "/knowledge/religion/mythology/mesopotamian/enlil/source-text",
+        "/knowledge/religion/mythology/greek-roman/aphrodite-venus/epithet-and-cult",
+        "/knowledge/religion/mythology/greek-roman/poseidon-neptune/source-identity",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/krishna/comparison-boundary",
+        "/knowledge/religion/mythology/egyptian/ra/reception-and-comparison",
+        "/knowledge/religion/mythology/mesopotamian/gilgamesh/city-and-cult",
+        "/knowledge/religion/mythology/norse-germanic/loki/reception-boundary",
+        "/knowledge/religion/mythology/egyptian/ra/source-text",
+        "/knowledge/religion/mythology/greek-roman/ares-mars/source-identity",
+        "/knowledge/religion/mythology/mesopotamian/tammuz-dumuzi/source-text",
+        "/knowledge/religion/mythology/mesopotamian/enki-ea/source-text",
+        "/knowledge/religion/mythology/egyptian/hathor/cult-and-place",
+        "/knowledge/religion/mythology/chinese/guanyin/reception-boundary",
+        "/knowledge/religion/mythology/norse-germanic/odin/reception-boundary",
+        "/knowledge/religion/mythology/mesopotamian/sin-nanna/source-text",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/varuna/epithet-identity",
+        "/knowledge/religion/mythology/greek-roman/hermes-mercury/epithet-and-cult",
+        "/knowledge/religion/mythology/greek-roman/demeter-ceres/source-identity",
+        "/knowledge/religion/mythology/greek-roman/athena-minerva/epithet-and-cult",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/soma/epic-puranic-reception",
+        "/knowledge/religion/mythology/mesoamerican/maya-maize-god/colonial-reception-boundary",
+        "/knowledge/religion/mythology/norse-germanic/hel/reception-boundary",
+        "/knowledge/religion/mythology/egyptian/isis/source-text",
+        "/knowledge/religion/mythology/mesoamerican/maya-maize-god/source-identity",
+        "/knowledge/religion/mythology/mesoamerican/tlaloc/colonial-reception-boundary",
+        "/knowledge/religion/mythology/egyptian/thoth/source-text",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/krishna/epic-puranic-reception",
+        "/knowledge/religion/mythology/egyptian/isis/cult-and-place",
+        "/knowledge/religion/mythology/chinese/jade-emperor/source-lineage",
+        "/knowledge/religion/mythology/mesopotamian/inanna-ishtar/reception-and-comparison",
+        "/knowledge/religion/mythology/greek-roman/zeus-jupiter/source-identity",
+        "/knowledge/religion/mythology/egyptian/seth/reception-and-comparison",
+        "/knowledge/religion/mythology/mesopotamian/gilgamesh/reception-and-comparison",
+        "/knowledge/religion/mythology/mesopotamian/ereshkigal/source-text",
+        "/knowledge/religion/mythology/greek-roman/hera-juno/source-identity",
+        "/knowledge/religion/mythology/mesopotamian/enki-ea/reception-and-comparison",
+        "/knowledge/religion/mythology/greek-roman/ares-mars/epithet-and-cult",
+        "/knowledge/religion/mythology/egyptian/anubis/source-text",
+        "/knowledge/religion/mythology/chinese/nuwa/source-lineage",
+        "/knowledge/religion/mythology/greek-roman/hera-juno/reception-and-comparison",
+        "/knowledge/religion/mythology/greek-roman/aphrodite-venus/reception-and-comparison",
+        "/knowledge/religion/mythology/egyptian/ra/cult-and-place",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/indra/comparison-boundary",
+        "/knowledge/religion/mythology/mesopotamian/tammuz-dumuzi/city-and-cult",
+        "/knowledge/religion/mythology/norse-germanic/baldr/reception-boundary",
+        "/knowledge/religion/mythology/egyptian/isis/reception-and-comparison",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/vishnu/epithet-identity",
+        "/knowledge/religion/mythology/egyptian/horus/source-text",
+        "/knowledge/religion/mythology/egyptian/osiris/source-text",
+        "/knowledge/religion/mythology/mesopotamian/shamash-utu/reception-and-comparison",
+        "/knowledge/religion/mythology/egyptian/hathor/reception-and-comparison",
+        "/knowledge/religion/mythology/registry",
+        "/knowledge/religion/mythology/chinese/queen-mother-of-the-west/reception-boundary",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/varuna/comparison-boundary",
+        "/knowledge/religion/mythology/greek-roman/artemis-diana/epithet-and-cult",
+        "/knowledge/religion/mythology/mesopotamian/tiamat/source-text",
+        "/knowledge/religion/mythology/mesopotamian/sin-nanna/reception-and-comparison",
+        "/knowledge/religion/mythology/greek-roman/hermes-mercury/reception-and-comparison",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/rudra-shiva/epic-puranic-reception",
+        "/knowledge/religion/mythology/mesopotamian/ashur/city-and-cult",
+        "/knowledge/religion/mythology/greek-roman/apollo/epithet-and-cult",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/varuna/epic-puranic-reception",
+        "/knowledge/religion/mythology/greek-roman/demeter-ceres/epithet-and-cult",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/vishnu/comparison-boundary",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/rudra-shiva/epithet-identity",
+        "/knowledge/religion/mythology/greek-roman/hades-pluto/epithet-and-cult",
+        "/knowledge/religion/mythology/greek-roman/zeus-jupiter/reception-and-comparison",
+        "/knowledge/religion/mythology/mesopotamian/nergal/source-text",
+        "/knowledge/religion/mythology/mesopotamian/gilgamesh/source-text",
+        "/knowledge/religion/mythology/greek-roman/dionysus-bacchus/reception-and-comparison",
+        "/knowledge/religion/mythology/greek-roman/artemis-diana/source-identity",
+        "/knowledge/religion/mythology/norse-germanic/odin/eddic-source",
+        "/knowledge/religion/mythology/mesopotamian/marduk/source-text",
+        "/knowledge/religion/mythology/greek-roman/dionysus-bacchus/source-identity",
+        "/knowledge/religion/mythology/egyptian/anubis/cult-and-place",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/krishna/vedic-text",
+        "/knowledge/religion/mythology/chinese/shangdi/source-lineage",
+        "/knowledge/religion/mythology/egyptian/seth/source-text",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/devi/epithet-identity",
+        "/knowledge/religion/mythology/chinese/tian/source-lineage",
+        "/knowledge/religion/mythology/mesopotamian/enlil/reception-and-comparison",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/indra/epithet-identity",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/rudra-shiva/comparison-boundary",
+        "/knowledge/religion/mythology/mesopotamian/ashur/reception-and-comparison",
+        "/knowledge/religion/mythology/chinese/jade-emperor/reception-boundary",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/vishnu/epic-puranic-reception",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/agni/epic-puranic-reception",
+        "/knowledge/religion/mythology/greek-roman/athena-minerva/reception-and-comparison",
+        "/knowledge/religion/mythology/greek-roman/poseidon-neptune/reception-and-comparison",
+        "/knowledge/religion/mythology/african-source-rights-pilots/asante-nyame-source-boundaries/source-and-rights-boundary",
+        "/knowledge/religion/mythology/chinese/queen-mother-of-the-west/source-lineage",
+        "/knowledge/religion/mythology/greek-roman/hades-pluto/reception-and-comparison",
+        "/knowledge/religion/mythology/greek-roman/poseidon-neptune/epithet-and-cult",
+        "/knowledge/religion/mythology/japanese/izanagi-izanami/cult-and-reception",
+        "/knowledge/religion/mythology/mesopotamian/marduk/reception-and-comparison",
+        "/knowledge/religion/mythology/egyptian/horus/cult-and-place",
+        "/knowledge/religion/mythology/norse-germanic/tyr/reception-boundary",
+        "/knowledge/religion/mythology/greek-roman/artemis-diana/reception-and-comparison",
+        "/knowledge/religion/mythology/egyptian/hathor/source-text",
+        "/knowledge/religion/mythology/greek-roman/dionysus-bacchus/epithet-and-cult",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/devi/epic-puranic-reception",
+        "/knowledge/religion/mythology/norse-germanic/freyja/eddic-source",
+        "/knowledge/religion/mythology/chinese/nezha/reception-boundary",
+        "/knowledge/religion/mythology/greek-roman/zeus-jupiter/epithet-and-cult",
+        "/knowledge/religion/mythology/norse-germanic/thor/eddic-source",
+        "/knowledge/religion/mythology/greek-roman/ares-mars/reception-and-comparison",
+        "/knowledge/religion/mythology/chinese/guanyin/source-lineage",
+        "/knowledge/religion/mythology/mesopotamian/tiamat/reception-and-comparison",
+        "/knowledge/religion/mythology/egyptian/anubis/reception-and-comparison",
+        "/knowledge/religion/mythology/african-source-rights-pilots/ancient-kush-religion-source-boundaries/source-and-rights-boundary",
+        "/knowledge/religion/mythology/egyptian/horus/reception-and-comparison",
+        "/knowledge/religion/mythology/comparative-methodology/cult-title-versus-personal-name/method",
+        "/knowledge/religion/mythology/norse-germanic/njord/reception-boundary",
+        "/knowledge/religion/mythology/norse-germanic/freyja/reception-boundary",
+        "/knowledge/religion/mythology/chinese/shangdi/reception-boundary",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/krishna/epithet-identity",
+        "/knowledge/religion/mythology/greek-roman/demeter-ceres/reception-and-comparison",
+        "/knowledge/religion/mythology/greek-roman/athena-minerva/source-identity",
+        "/knowledge/religion/mythology/egyptian/seth/cult-and-place",
+        "/knowledge/religion/mythology/norse-germanic/thor/reception-boundary",
+        "/knowledge/religion/mythology/egyptian/osiris/cult-and-place",
+        "/knowledge/religion/mythology/mesopotamian/inanna-ishtar/source-text",
+        "/knowledge/religion/mythology/greek-roman/aphrodite-venus/source-identity",
+        "/knowledge/religion/mythology/norse-germanic/freyr/reception-boundary",
+        "/knowledge/religion/mythology/greek-roman/apollo/source-identity",
+        "/knowledge/religion/mythology/greek-roman/hades-pluto/source-identity",
+        "/knowledge/religion/mythology/mesopotamian/nergal/reception-and-comparison",
+        "/knowledge/religion/mythology/comparative-methodology/primary-text-versus-later-commentary/method",
+        "/knowledge/religion/mythology/comparative-methodology/translation-versus-identity/method",
+        "/knowledge/religion/mythology/greek-roman/apollo/reception-and-comparison",
+        "/knowledge/religion/mythology/mesopotamian/shamash-utu/source-text",
+        "/knowledge/religion/mythology/mesopotamian/ereshkigal/reception-and-comparison",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/soma/comparison-boundary",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/indra/epic-puranic-reception",
+        "/knowledge/religion/mythology/greek-roman/hera-juno/epithet-and-cult",
+        "/knowledge/religion/mythology/sanskrit-vedic-epic-puranic/agni/epithet-identity",
+        "/knowledge/religion/mythology/chinese/fuxi/reception-boundary",
+        "/knowledge/religion/mythology/comparative-methodology/colonial-syncretism-records/method",
+        "/knowledge/religion/mythology/greek-roman/hermes-mercury/source-identity",
+        "/knowledge/religion/mythology/chinese/tian/reception-boundary",
+        "/knowledge/religion/mythology/african-source-rights-pilots/dahomey-vodun-source-boundaries/source-and-rights-boundary",
+        "/knowledge/religion/mythology/chinese/fuxi/source-lineage",
+        "/knowledge/religion/mythology/mesopotamian/tammuz-dumuzi/reception-and-comparison",
+        "/knowledge/religion/mythology/chinese/nezha/source-lineage",
+        "/knowledge/religion/mythology/african-source-rights-pilots/yoruba-orisha-source-boundaries/source-and-rights-boundary",
+        "/knowledge/religion/mythology/chinese/nuwa/reception-boundary"
+      ],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_0b7648f7af124a80ae28a32a",
+      "prerequisitePath": "maha-research:dimensional-analysis (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_169082f43019d77233e99139",
+      "prerequisitePath": "maha-research:interval-bounds (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_1a4f8d97bd23b9a9059bb093",
+      "prerequisitePath": "maha-research:correction-and-retraction (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_1d513f38b0e022589a49c05a",
+      "prerequisitePath": "maha-research:numerical-stability (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_290a8f0542020764235ae7a8",
+      "prerequisitePath": "maha-research:unsupported-inference (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_2f5a6a8ae6b917bbe213c82a",
+      "prerequisitePath": "maha-research:uncertainty-recording (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_37c3007f5bbc6b5cbcd6939b",
+      "prerequisitePath": "maha-research:conflicting-literature (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_401381072a52c9a18b6d3dfe",
+      "prerequisitePath": "maha-research:runtime-witness-receipts (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_4c5719d66d3cab87b2afe651",
+      "prerequisitePath": "maha-research:internal-review (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_512123f9a59cf97d85e7b292",
+      "prerequisitePath": "agentic-publishing:editorial-review (definition exists in neither the route map nor the graph objects)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_5b72c597eb70594b02a74d68",
+      "prerequisitePath": "maha-research:version-relationship (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_6815c74c1b340d4e96875a9a",
+      "prerequisitePath": "maha-research:interpolation (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_6988a855fa927ec3d578f439",
+      "prerequisitePath": "maha-research:privacy-boundary (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_8f5f53cbebb4b264adb31452",
+      "prerequisitePath": "maha-research:audit-export (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_9a5b8cf492025e11eee6068e",
+      "prerequisitePath": "maha-research:reference-frame-conversion (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_9bee7744d41289fe62671f96",
+      "prerequisitePath": "maha-research:calculation-receipts (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_a3152de782f2eef6c1b7a6d7",
+      "prerequisitePath": "maha-research:reproducibility-fixtures (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_a5f578399628ce8dc5f4dc01",
+      "prerequisitePath": "maha-research:formal-verification (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_a6a87432eb7361a5f854eb37",
+      "prerequisitePath": "maha-research:causal-inference (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_a8dbcb746c8017d3df5f6dd0",
+      "prerequisitePath": "maha-research:evidence-dossiers (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_b2c0706b52ec034fed39f37c",
+      "prerequisitePath": "maha-research:source-recovery (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_c9322a8ae5b97fc820f63ba3",
+      "prerequisitePath": "maha-research:root-finding (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_cad78b30a0560899e61879fd",
+      "prerequisitePath": "maha-research:delivery-acknowledgement (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_d264fcc97cca689a366010c1",
+      "prerequisitePath": "maha-research:cryptographic-commitments (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_d5f2230acc93cc06948f789d",
+      "prerequisitePath": "maha-research:locator-verification (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_dabd80ce3c8fa6f1abbf34a4",
+      "prerequisitePath": "maha-research:optimization (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_dc4bf7dafde1883281d8b281",
+      "prerequisitePath": "maha-research:deterministic-arithmetic (canonical graph object, no route)",
+      "wouldBecomeAssessable": [
+        "/clearing/deterministic-computation/deterministic-arithmetic/uncertainty",
+        "/clearing/deterministic-computation/deterministic-arithmetic/worked-example",
+        "/clearing/deterministic-computation/deterministic-arithmetic/machine-interface",
+        "/clearing/deterministic-computation/deterministic-arithmetic/reproducibility"
+      ],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_dfa4daebdc8ee24dc7491355",
+      "prerequisitePath": "maha-research:canonical-release (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_e788d18a6d88113347e9a97f",
+      "prerequisitePath": "maha-research:error-budgets (canonical graph object, no route)",
+      "wouldBecomeAssessable": [
+        "/clearing/deterministic-computation/error-budgets/uncertainty"
+      ],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_ef8fd38edc93d2275b8eaa96",
+      "prerequisitePath": "maha-research:claim-intake (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_f1399a20ef5e4d90c96eab7d",
+      "prerequisitePath": "agentic-publishing:machine-readable-article (definition exists in neither the route map nor the graph objects)",
+      "wouldBecomeAssessable": [
+        "/agentic-publishing/machine-readable-article/template",
+        "/agentic-publishing/machine-readable-article/example"
+      ],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_f207fbeb9a017f4a090262f5",
+      "prerequisitePath": "maha-research:passage-support (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_fd842151b2bf801962735480",
+      "prerequisitePath": "maha-research:numerical-integration (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    },
+    {
+      "prerequisiteId": "missing_fe57147502b50bc2d5e45148",
+      "prerequisitePath": "maha-research:licensed-retrieval (canonical graph object, no route)",
+      "wouldBecomeAssessable": [],
+      "stillHeldByOtherPrerequisites": [],
+      "boundary": "Assessable, not ready. Every prerequisite being satisfied removes the dependency hold; the candidate still needs its own sources inspected before any readiness claim."
+    }
+  ],
+  "boundary": "Nothing here is a readiness claim. A candidate that would become assessable still needs its own sources inspected and its own review recorded. These counts must never be added to an evidence-ready total.",
+  "provenanceDigest": "sha256:d3c2efec3951560d6e5750f055bb8c83ae31c2fe40bd8b603f87e8d8cedfa885"
+}

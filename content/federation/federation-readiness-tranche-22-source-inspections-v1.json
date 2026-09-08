@@ -1,0 +1,497 @@
+{
+  "schemaVersion": "maha-federation-readiness-tranche-22-sources/1.0",
+  "inspectedOn": "2026-09-07",
+  "counts": {
+    "inspections": 34
+  },
+  "inspections": [
+    {
+      "sourceId": "src-causal-what-if",
+      "identity": "Causal Inference: What If",
+      "locator": "Chapter 1, p. 12, “A definition of causal effect”",
+      "rightsBasis": "reference-only",
+      "scope": "Defines causal effects as contrasts under alternative treatments in a target population and distinguishes causal from associational quantities.",
+      "boundary": "Does not establish identification for a particular dataset, the validity of a causal model, or an effect estimate.",
+      "roles": [
+        "definition"
+      ],
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "src-iers-reference-frames",
+      "identity": "IERS Conventions (2010), Chapter 5",
+      "locator": "Chapter 5, transformation between the ITRS and GCRS",
+      "rightsBasis": "reference-only",
+      "scope": "Specifies the sequence and quantities used to transform between terrestrial and celestial reference systems.",
+      "boundary": "Does not establish that a software implementation uses the correct epoch, Earth-orientation parameters, units, or convention version.",
+      "roles": [
+        "definition"
+      ],
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-audit-export",
+      "identity": "lib/federation/readiness-tranche-22.ts",
+      "locator": "lib/federation/readiness-tranche-22.ts — compileAuditExport",
+      "roles": [
+        "verification"
+      ],
+      "scope": "Sorts append-only metadata events, rejects duplicates and malformed digests or times, and binds the export to one digest.",
+      "boundary": "The export contains metadata and fingerprints only; it does not prove completeness against an external system or include submitted content.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-checked-arithmetic",
+      "identity": "lib/federation/readiness-tranche-22.ts",
+      "locator": "lib/federation/readiness-tranche-22.ts — checkedIntegerArithmetic",
+      "roles": [
+        "machine-interface",
+        "reproducibility",
+        "worked-example",
+        "uncertainty"
+      ],
+      "scope": "Performs bounded exact integer addition, subtraction, or multiplication and refuses inputs or results outside the declared absolute limit.",
+      "boundary": "Exact integer arithmetic has no rounding uncertainty inside the bound; it does not establish measurement uncertainty, floating-point behavior, or model validity.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-conflict-search",
+      "identity": "lib/federation/readiness-tranche-21.ts",
+      "locator": "lib/federation/readiness-tranche-21.ts — classifyLiterature",
+      "roles": [
+        "relationships",
+        "definition",
+        "source-contract"
+      ],
+      "scope": "Compares located observations only after claim, population, and outcome scopes match.",
+      "boundary": "Directional disagreement does not adjudicate study quality or truth.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-context-compression-offer",
+      "identity": "lib/agentic-commerce.ts",
+      "locator": "lib/agentic-commerce.ts — contextCompressionX402Capability",
+      "roles": [
+        "commercialization"
+      ],
+      "scope": "Publishes a payable bounded context-compression capability with an exact endpoint and x402 terms.",
+      "boundary": "The offer covers transient context compression only; it does not commercialize general memory governance, durable tasks, delegation, or failure recovery.",
+      "rightsBasis": "project-owned-commercial-contract-reference",
+      "kind": "commercial-contract",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-context-pack",
+      "identity": "lib/context-compiler.ts",
+      "locator": "lib/context-compiler.ts — parseContextPackRequest and compileContextPack",
+      "roles": [
+        "policy",
+        "governance",
+        "workflow",
+        "failure-mode"
+      ],
+      "scope": "Validates bounded context inputs and deterministically compiles a source-attributed context pack under an explicit budget.",
+      "boundary": "Selection and retention do not validate source truth, relevance outside the request, legal compliance, or downstream model behavior.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-doj-antitrust",
+      "identity": "U.S. Department of Justice Antitrust Division",
+      "locator": "https://www.justice.gov/atr/antitrust-laws-and-you — statutes; https://www.justice.gov/atr/merger-guidelines/overview — 2023 Merger Guidelines",
+      "roles": [
+        "implementation",
+        "uncertainty"
+      ],
+      "scope": "Describes US federal antitrust enforcement authorities and the analytical framework used in merger review.",
+      "boundary": "Guidelines identify enforcement analysis, not guaranteed outcomes, universal law, or an executable adjudication rule.",
+      "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-equation-locator",
+      "identity": "lib/federation/readiness-tranche-22.ts",
+      "locator": "lib/federation/readiness-tranche-22.ts — verifyLocator",
+      "roles": [
+        "machine-record",
+        "failure-mode"
+      ],
+      "scope": "Uses the exact locator contract with equation as a distinct locator kind and fails on kind or value substitution.",
+      "boundary": "Equation identity does not validate transcription, symbols, assumptions, or arithmetic.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-eu-interoperability",
+      "identity": "Regulation (EU) 2024/903 and European Interoperability Framework",
+      "locator": "https://interoperable-europe.ec.europa.eu/Interoperable-Europe-Act-Regulation — Articles 1–6; https://interoperable-europe.ec.europa.eu/collection/iopeu-monitoring/european-interoperability-framework-detail — layers and recommendations",
+      "roles": [
+        "evidence",
+        "sources",
+        "tradeoffs"
+      ],
+      "scope": "Defines legal, organizational, semantic, and technical interoperability and records assessment, reuse, governance, and implementation tradeoffs.",
+      "boundary": "EU public-sector law and guidance do not establish a universal private-sector machine rule or prove outcomes.",
+      "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-evidence-act",
+      "identity": "Foundations for Evidence-Based Policymaking Act of 2018",
+      "locator": "https://www.congress.gov/115/statute/STATUTE-132/STATUTE-132-Pg5529.pdf — Title I federal evidence-building activities and Titles II–III data access and confidentiality",
+      "roles": [
+        "current-law",
+        "definition"
+      ],
+      "scope": "Establishes US federal evaluation, evidence-building, data governance, and confidentiality duties.",
+      "boundary": "This is US federal law; it neither mandates one scientific method nor creates an executable decision rule for arbitrary claims.",
+      "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-formal-proof-contract",
+      "identity": "packages/maha-lean-bridge/src/verifier.ts",
+      "locator": "packages/maha-lean-bridge/src/verifier.ts — verifyAttachments",
+      "roles": [
+        "method",
+        "definition",
+        "protocol",
+        "relationships"
+      ],
+      "scope": "Defines and verifies a machine-checked theorem attachment against a pinned manifest, source, claim, and toolchain.",
+      "boundary": "A formal definition or checked deduction does not establish empirical truth or source support.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-gao-evidence-policy",
+      "identity": "U.S. Government Accountability Office GAO-23-105460",
+      "locator": "https://www.gao.gov/products/gao-23-105460 — 13 practices across planning, assessing/building, using evidence, and learning",
+      "roles": [
+        "evidence",
+        "tradeoffs"
+      ],
+      "scope": "Describes evidence-building and use practices, evidence types, implementation actions, and observed limits in US federal agencies.",
+      "boundary": "This is US federal management guidance and audit synthesis, not a universal hierarchy of evidence or proof that a policy works.",
+      "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-government-mirror",
+      "identity": "lib/source-recovery.ts",
+      "locator": "lib/source-recovery.ts — recoveryRequests and compileRecoveryPackets",
+      "roles": [
+        "machine-record"
+      ],
+      "scope": "Represents a government-host recovery route while preserving identity, version, access, and inspection as separate states.",
+      "boundary": "Government hosting does not make a document authoritative for every claim or establish version equivalence.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-locator-verifier",
+      "identity": "lib/federation/readiness-tranche-22.ts",
+      "locator": "lib/federation/readiness-tranche-22.ts — verifyLocator",
+      "roles": [
+        "workflow",
+        "verification",
+        "failure-modes"
+      ],
+      "scope": "Verifies exact equality of source identity, revision, locator kind, and locator value and returns a digest.",
+      "boundary": "A matching locator proves identity of the declaration, not that the passage exists, was inspected, or supports a claim.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-metadata-boundary",
+      "identity": "lib/evidence-preflight-contract.ts",
+      "locator": "lib/evidence-preflight-contract.ts — EvidencePreflightClaimAssessment and evidenceStatus",
+      "roles": [
+        "machine-record",
+        "failure-mode"
+      ],
+      "scope": "Distinguishes metadata-only evidence from located user-supplied excerpts and blocks it before source inspection.",
+      "boundary": "Metadata identifies a possible source; it is non-explanatory and does not support a claim.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-nasem-reproducibility",
+      "identity": "National Academies Reproducibility and Replicability in Science",
+      "locator": "https://nap.nationalacademies.org/resource/25303/R%26R.pdf — definitions and recommendations",
+      "roles": [
+        "evidence",
+        "tradeoffs"
+      ],
+      "scope": "Separates computational reproducibility from replicability and records why contrary results require contextual assessment rather than automatic reversal.",
+      "boundary": "The report does not rank every study design or decide a specific policy question.",
+      "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-nist-assurance",
+      "identity": "NIST CSRC assurance-case glossary",
+      "locator": "https://csrc.nist.gov/glossary/term/assurance_case — definition and source documents",
+      "roles": [
+        "mechanisms",
+        "implementation"
+      ],
+      "scope": "Defines an assurance case as an auditable argument supported by evidence and explicit assumptions.",
+      "boundary": "A definition does not establish current law or adequacy of a particular assurance case.",
+      "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-nist-incident",
+      "identity": "NIST AI 600-1 and NIST SP 800-171r3",
+      "locator": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf — MAP 5.1; https://nvlpubs.nist.gov/nistpubs/SpecialPublications/800-171r3/NIST.SP.800-171r3.html — 03.06.01–03.06.03",
+      "roles": [
+        "definition",
+        "sources"
+      ],
+      "scope": "Describes incident inputs, tracking, response, testing, reporting, and organizational assignment.",
+      "boundary": "Voluntary AI guidance and cybersecurity controls do not establish one universal mandatory incident regime.",
+      "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-oecd-dpi",
+      "identity": "OECD Digital Public Infrastructure for Digital Governments",
+      "locator": "https://www.oecd.org/en/publications/digital-public-infrastructure-for-digital-governments_ff525dc8-en.html — definition, components, safeguards, and implementation considerations",
+      "roles": [
+        "implementation"
+      ],
+      "scope": "Describes shared digital systems, implementation conditions, governance, safeguards, and interoperability considerations.",
+      "boundary": "An OECD policy paper is not current law and does not create an executable machine rule.",
+      "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+      "kind": "official-authority",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-passage-locator",
+      "identity": "lib/federation/readiness-tranche-22.ts",
+      "locator": "lib/federation/readiness-tranche-22.ts — verifyLocator",
+      "roles": [
+        "method",
+        "definition",
+        "protocol"
+      ],
+      "scope": "Defines and verifies source, revision, locator kind, and exact locator value as one bound assertion.",
+      "boundary": "It does not establish passage existence, inspection, or claim support.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-preflight-inference",
+      "identity": "lib/evidence-preflight.ts",
+      "locator": "lib/evidence-preflight.ts — compileEvidencePreflight",
+      "roles": [
+        "failure-mode"
+      ],
+      "scope": "Flags bounded lexical signals for unsupported causal, universal, certainty, and safety inference.",
+      "boundary": "A lexical signal is a review prompt, not a semantic verdict.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-preflight-scope",
+      "identity": "lib/evidence-preflight.ts",
+      "locator": "lib/evidence-preflight.ts — compileEvidencePreflight",
+      "roles": [
+        "relationships"
+      ],
+      "scope": "Records bounded-language and lexical-coverage signals between one claim and one supplied excerpt.",
+      "boundary": "Lexical overlap is structural preflight, not proof of semantic support or source truth.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-qiskit-adapter",
+      "identity": "packages/maha-witness/src/maha_witness/adapters.py",
+      "locator": "packages/maha-witness/src/maha_witness/adapters.py — qiskit_metadata",
+      "roles": [
+        "fixture",
+        "protocol"
+      ],
+      "scope": "Captures bounded Qiskit circuit, backend, shot, seed, and runtime metadata under the witness contract.",
+      "boundary": "A receipt does not establish quantum advantage, hardware fidelity, or scientific validity.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-quarter-turn-frame",
+      "identity": "lib/federation/readiness-tranche-22.ts",
+      "locator": "lib/federation/readiness-tranche-22.ts — rotateCartesianQuarterTurns",
+      "roles": [
+        "machine-interface",
+        "reproducibility",
+        "worked-example"
+      ],
+      "scope": "Performs exact Cartesian rotations in integer quarter turns with a normalized transform identifier.",
+      "boundary": "This is a synthetic two-dimensional orthogonal transform, not an Earth-orientation, celestial, geodetic, epoch, or uncertainty service.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-randomized-contrast",
+      "identity": "lib/federation/readiness-tranche-22.ts",
+      "locator": "lib/federation/readiness-tranche-22.ts — randomizedMeanContrast",
+      "roles": [
+        "machine-interface",
+        "reproducibility",
+        "worked-example"
+      ],
+      "scope": "Computes the exact sample-mean contrast for two declared randomized synthetic arms.",
+      "boundary": "Randomization is caller-declared; this fixture does not verify assignment, estimate population effects, handle attrition, or justify transportability.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-recovery-depth",
+      "identity": "lib/source-recovery.ts",
+      "locator": "lib/source-recovery.ts — validateObservation and compileRecoveryPackets",
+      "roles": [
+        "machine-record",
+        "source-contract",
+        "method"
+      ],
+      "scope": "Preserves access, inspection, identity, and exact-locator states without upgrading abstract-only access to full-text inspection.",
+      "boundary": "An abstract can establish subject and metadata at most; it cannot support section-specific or detailed claims.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-recovery-fulltext",
+      "identity": "lib/source-recovery.ts",
+      "locator": "lib/source-recovery.ts — validateObservation and compileRecoveryPackets",
+      "roles": [
+        "relationships",
+        "source-contract",
+        "protocol"
+      ],
+      "scope": "Requires a content-inspected observation and exact locator before a recovery packet can describe full-text evidence.",
+      "boundary": "Full-text access alone does not prove relevance, rights, claim support, or correctness.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-release-manifest",
+      "identity": "lib/epistemic-release.ts",
+      "locator": "lib/epistemic-release.ts — parseEpistemicReleaseRequest and releaseReadiness and buildEpistemicCanonicalRelease",
+      "roles": [
+        "failure-mode",
+        "template",
+        "machine-interface",
+        "example",
+        "governance",
+        "policy",
+        "workflow"
+      ],
+      "scope": "Defines, validates, evaluates, and compiles an exact-target canonical release with scoped approvals and separate release authority.",
+      "boundary": "The release manifest records governance and provenance; it does not establish empirical truth, independent review, or source correctness.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-reproducibility-registry",
+      "identity": "lib/evidence-workflow-examples.ts",
+      "locator": "lib/evidence-workflow-examples.ts — EVIDENCE_WORKFLOW_PUBLIC_REGISTRY and EVIDENCE_WORKFLOW_REGISTRY_DIGEST",
+      "roles": [
+        "method",
+        "source-contract",
+        "relationships",
+        "protocol"
+      ],
+      "scope": "Publishes synthetic inputs, outputs, refusals, checks, and one digest-bound workflow registry.",
+      "boundary": "Synthetic conformance is not independent scientific reproduction.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-slurm-adapter",
+      "identity": "packages/maha-witness/src/maha_witness/adapters.py",
+      "locator": "packages/maha-witness/src/maha_witness/adapters.py — slurm_metadata",
+      "roles": [
+        "machine-record"
+      ],
+      "scope": "Captures bounded SLURM runtime metadata into the witness receipt contract.",
+      "boundary": "Recorded scheduler metadata does not prove workload correctness or cluster configuration completeness.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-version-verifier",
+      "identity": "lib/federation/readiness-tranche-22.ts",
+      "locator": "lib/federation/readiness-tranche-22.ts — verifyVersionRelationship",
+      "roles": [
+        "verification"
+      ],
+      "scope": "Verifies an initial or superseding transition against exact object and predecessor revision digests.",
+      "boundary": "A valid transition establishes lineage consistency, not semantic equivalence, evidence quality, or review inheritance.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-versioned-release",
+      "identity": "lib/epistemic-release.ts",
+      "locator": "lib/epistemic-release.ts — epistemicReleaseStatus and activeEpistemicReleases",
+      "roles": [
+        "definition"
+      ],
+      "scope": "Distinguishes active, superseded, and withdrawn release states over exact targets.",
+      "boundary": "Release lineage is not a universal publishing-version ontology and does not establish equivalence between manuscripts and versions of record.",
+      "rightsBasis": "project-owned-reference-only",
+      "kind": "local-implementation",
+      "passageStored": false
+    },
+    {
+      "sourceId": "t22-wipo-ip",
+      "identity": "WIPO Revised Issues Paper on IP Policy and AI",
+      "locator": "https://www.wipo.int/meetings/en/doc_details.jsp?doc_id=499504 — issue taxonomy and policy questions",
+      "roles": [
+        "definition",
+        "sources"
+      ],
+      "scope": "Identifies IP domains, mechanisms, and unresolved AI-related policy questions.",
+      "boundary": "An issues paper is not jurisdiction-specific law, legal advice, or a final WIPO position.",
+      "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+      "kind": "official-authority",
+      "passageStored": false
+    }
+  ],
+  "privacyBoundary": "Only identity, locator, rights, scope, and boundary metadata are retained; no passages, submissions, credentials, or reviewer identities.",
+  "provenanceDigest": "sha256:23c5f0f518ab6f55fe190aa9310dde46cd5e12dc8d2eeca5350c2fadcb2b8fc4"
+}
