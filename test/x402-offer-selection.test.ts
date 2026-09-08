@@ -35,6 +35,60 @@ const base = (over: Partial<OfferSelectionInput> = {}): OfferSelectionInput => (
   ...over,
 })
 
+test('every offer publishes request requirements and response fields from its own schema', () => {
+  const document = buildOfferSelectionDocument()
+  const entries = document.offers as Array<Record<string, unknown>>
+  for (const offer of payableOffers()) {
+    const entry = entries.find((item) => item.offerId === offer.id)!
+    assert.deepEqual(entry.requiredInputFields, offer.discovery.inputSchema.required ?? [], offer.id)
+    assert.deepEqual(entry.requestExample, offer.discovery.input, offer.id)
+    assert.deepEqual(entry.responseFields, Object.keys(offer.discovery.outputSchema.properties as object), offer.id)
+    const links = entry.links as Record<string, string>
+    assert.equal(links.declaration, `https://www.mahastrategies.com/api/discovery/x402-offers/${offer.id}`)
+    assert.equal(links.openapi, 'https://www.mahastrategies.com/api/docs/openapi')
+  }
+})
+
+test('new offers need no hand-written selection entry to expose their request contract', () => {
+  const offer: X402Offer = {
+    ...CONTEXT_COMPRESSION_OFFER, id: 'future-offer', path: '/api/v1/future-offer',
+    discovery: {
+      ...CONTEXT_COMPRESSION_OFFER.discovery,
+      input: { subject: 'synthetic' },
+      inputSchema: { type: 'object', properties: { subject: { type: 'string' } }, required: ['subject'] },
+    },
+  }
+  const entry = (buildOfferSelectionDocument([offer]).offers as Array<Record<string, unknown>>)[0]
+  assert.deepEqual(entry.requiredInputFields, ['subject'])
+  assert.deepEqual(entry.requestExample, { subject: 'synthetic' })
+  assert.equal((entry.links as Record<string, string>).declaration, 'https://www.mahastrategies.com/api/discovery/x402-offers/future-offer')
+})
+
+test('job offers expose their distinct hash preimages and idempotency-key source', () => {
+  const entries = buildOfferSelectionDocument().offers as Array<Record<string, unknown>>
+  for (const offer of payableOffers()) {
+    const entry = entries.find((item) => item.offerId === offer.id)!
+    assert.deepEqual(entry.requiredHeaders, offer.discovery.requiredHeaders ?? {}, offer.id)
+    if (offer.requiresIdempotency) {
+      assert.equal((entry.idempotency as Record<string, string>).keySource, 'clientRequestId')
+      assert.equal((entry.idempotency as Record<string, string>).keyHeader, 'x-maha-idempotency-key')
+      assert.ok((entry.requiredHeaders as Record<string, unknown>)['x-maha-input-hash'], offer.id)
+    } else {
+      assert.equal(entry.idempotency, undefined, offer.id)
+    }
+  }
+})
+
+test('editing a guide example or header instructions cannot mutate a payable declaration', () => {
+  const offer = MPS_AUTONOMOUS_AUDIT_OFFER
+  const before = structuredClone(offer.discovery)
+  const entry = (buildOfferSelectionDocument([offer]).offers as Array<Record<string, unknown>>)[0]
+  ;(entry.requestExample as Record<string, unknown>).text = 'changed'
+  ;(entry.requiredHeaders as Record<string, { preimage: string }>)['x-maha-input-hash'].preimage = 'changed'
+  ;(entry.requiredInputFields as string[]).push('unexpected')
+  assert.deepEqual(offer.discovery, before)
+})
+
 // --- The public route ------------------------------------------------------
 
 test('the public route answers 200 with valid JSON', async () => {

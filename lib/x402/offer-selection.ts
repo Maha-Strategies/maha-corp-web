@@ -399,7 +399,7 @@ const OFFER_LINKS: Record<string, Record<string, string>> = {
   },
 }
 
-const OFFER_FIT: Record<string, { fit: string[]; nonFit: string[]; requiredInputFields: string[]; producedEvidence: string[] }> = {
+const OFFER_FIT: Record<string, { fit: string[]; nonFit: string[]; producedEvidence: string[] }> = {
   [COMPRESSION_ID]: {
     fit: [
       'Token-budgeted passage selection against an explicit budget.',
@@ -413,7 +413,6 @@ const OFFER_FIT: Record<string, { fit: string[]; nonFit: string[]; requiredInput
       'You need to measure whether specific facts survived compilation.',
       'You need source-coverage or retention percentages for a release decision.',
     ],
-    requiredInputFields: ['task', 'tokenBudget', 'documents'],
     producedEvidence: [
       'context pack with included passages and per-source provenance',
       'originalEstimatedTokens, compiledEstimatedTokens, tokensSaved',
@@ -435,7 +434,6 @@ const OFFER_FIT: Record<string, { fit: string[]; nonFit: string[]; requiredInput
       'You want passage compression or context-pack compilation, which are the other two offers.',
       'Your passage exceeds 6000 characters, or your request exceeds the 32 KiB ceiling.',
     ],
-    requiredInputFields: ['clientRequestId', 'text'],
     producedEvidence: [
       'per-claim provenance status (VERIFIED, SOURCED, BOUNDARY, ILLUSTRATIVE, UNVERIFIED)',
       'a rationale and a suggested action per claim',
@@ -456,7 +454,6 @@ const OFFER_FIT: Record<string, { fit: string[]; nonFit: string[]; requiredInput
       'You only need a compiled pack and will not read the measurements.',
       'You expect a judgement about whether the evidence is true, rather than whether it survived selection.',
     ],
-    requiredInputFields: ['clientRequestId', 'task', 'tokenBudget', 'documents', 'requiredEvidence'],
     producedEvidence: [
       'everything Context Compression returns, plus:',
       'per-span retention results for 1-32 caller-labelled evidence spans',
@@ -502,7 +499,21 @@ function offerEntry(offer: X402Offer): Record<string, unknown> {
       ...(offer.id === MPS_ID ? { maxPassageCharacters: MPS_MAX_PASSAGE_CHARACTERS } : {}),
     },
     requiresIdempotency: offer.requiresIdempotency,
-    requiredInputFields: fit?.requiredInputFields ?? [],
+    // Request facts come from the same contract as the payable declaration.
+    // New products must not silently appear to accept an empty request just
+    // because they have no hand-written selection guidance yet.
+    requiredInputFields: [...(offer.discovery.inputSchema.required as string[] | undefined ?? [])],
+    requestExample: structuredClone(offer.discovery.input),
+    requiredHeaders: structuredClone(offer.discovery.requiredHeaders ?? {}),
+    ...(offer.requiresIdempotency ? {
+      idempotency: {
+        keyHeader: 'x-maha-idempotency-key',
+        keySource: 'clientRequestId',
+        inputHashHeader: 'x-maha-input-hash',
+        note: 'Use the per-offer requiredHeaders instructions for the input hash. Preserve the key and input for retries.',
+      },
+    } : {}),
+    responseFields: Object.keys(offer.discovery.outputSchema.properties as Record<string, unknown> | undefined ?? {}),
     producedEvidence: fit?.producedEvidence ?? [],
     fitConditions: fit?.fit ?? [],
     nonFitConditions: fit?.nonFit ?? [],
@@ -520,7 +531,11 @@ function offerEntry(offer: X402Offer): Record<string, unknown> {
         // Not a stage of the compression pipeline. Presenting it as one would
         // invite an agent to chain into a $0.10 model call it never asked for.
         : { successor: null, predecessor: null, standalone: true },
-    links: OFFER_LINKS[offer.id] ?? {},
+    links: {
+      ...OFFER_LINKS[offer.id],
+      openapi: `${SITE_ORIGIN}/api/docs/openapi`,
+      declaration: `${SITE_ORIGIN}/api/discovery/x402-offers/${offer.id}`,
+    },
   }
 }
 
