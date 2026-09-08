@@ -53,6 +53,13 @@ test('partitions route ownership exactly across seven hosts', () => {
   }
 })
 
+test('policy host ownership does not capture legacy Maha Strategies policy pages', () => {
+  assert.equal(federationCanonicalHostForPath('/policy/agent-identity/comparison'), 'policy.mahastrategies.com')
+  assert.equal(federationCanonicalHostForPath('/policy/agent-identity/uncertainty/'), 'policy.mahastrategies.com')
+  assert.equal(federationCanonicalHostForPath('/policy/nutrient-density-standard/paying-for-nutrition'), null)
+  assert.equal(federationHostAllowsPath('www.mahastrategies.com', '/policy/nutrient-density-standard/paying-for-nutrition'), true)
+})
+
 test('the frozen observed corpus plus active releases remains exactly 4,000 routes', () => {
   const baseline = read(resolve(root, 'content/federation/federation-route-baseline-v1.json'))
   const index = read(resolve(publicDir, 'federation-public-route-index-v1.json'))
