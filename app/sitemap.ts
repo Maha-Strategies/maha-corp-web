@@ -38,6 +38,7 @@ import { EXACTZK_EVIDENCE_PATH, EXACTZK_RELEASE_DATE, KNOWLEDGE_INTEGRATIONS_PAT
 import { EPISTEMIC_CLEARING_PAGES } from '@/lib/epistemic-clearing-batch-one'
 import { federationObservedSitemapRows, federationSitemapRows, mergeFederationSitemapRows } from '@/lib/federation-publication'
 import { FEDERATION_CANONICAL_HOSTS, normalizedRequestHost } from '@/lib/federation-host-routing'
+import { policyFrontDoorSitemapRows } from '@/lib/policy-front-door'
 
 /*
  * The sitemap reads active canonical releases from the database, so it must be
@@ -51,7 +52,11 @@ export const dynamic = 'force-dynamic'
 export async function currentHostSitemap(): Promise<MetadataRoute.Sitemap> {
   const requestHost = normalizedRequestHost((await headers()).get('host'))
   if (FEDERATION_CANONICAL_HOSTS.includes(requestHost as (typeof FEDERATION_CANONICAL_HOSTS)[number]) && requestHost !== 'www.mahastrategies.com') {
-    return mergeFederationSitemapRows(federationObservedSitemapRows(requestHost), federationSitemapRows(requestHost))
+    return mergeFederationSitemapRows(
+      federationObservedSitemapRows(requestHost),
+      federationSitemapRows(requestHost),
+      requestHost === 'policy.mahastrategies.com' ? policyFrontDoorSitemapRows() : [],
+    )
   }
   const baseUrl = MAHA_SITE_URL
   

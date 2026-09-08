@@ -44,7 +44,7 @@ test('every route belongs to one declared visual system', () => {
     groups.paper += 1
     const source = readFileSync(path, 'utf8')
     const ownsBoundary = source.includes('evidence-page')
-    const delegatesBoundary = /<(?:ResearchBriefServicePage|EvidenceGuide|ContextCompilerPlayground|EpistemicClearingGuidePage)\b|\brenderFederationPage\(/.test(source)
+    const delegatesBoundary = /<(?:ResearchBriefServicePage|EvidenceGuide|ContextCompilerPlayground|EpistemicClearingGuidePage|PolicyFrontDoor)\b|\b(?:PolicyDiscoveryPage|renderFederationPage)\b/.test(source)
     if (!ownsBoundary && !delegatesBoundary) missingPaperBoundary.push(file)
   }
 
@@ -75,7 +75,9 @@ test('every route belongs to one declared visual system', () => {
   // directly rather than delegating to a shared renderer.
   // paper 114 -> 122: eight federation route families delegate to the shared
   // evidence-page renderer and therefore introduce no second visual system.
-  assert.deepEqual(groups, { paper: 122, apps: 6, books: 41, docs: 1, knowledge: 70, intelligence: 2, operator: 32, internal: 1 })
+  // paper 122 -> 124: the Policy front door and its dynamic discovery index
+  // both own the existing evidence-page visual boundary.
+  assert.deepEqual(groups, { paper: 124, apps: 6, books: 41, docs: 1, knowledge: 70, intelligence: 2, operator: 32, internal: 1 })
 })
 
 test('Apps, Books, Docs, Knowledge, and Intelligence own bounded cyber-light overlays', () => {

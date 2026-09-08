@@ -1,11 +1,16 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import ThemeToggle from '@/components/ThemeToggle';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const isPolicyHost = useSyncExternalStore(
+    () => () => undefined,
+    () => window.location.hostname === 'policy.mahastrategies.com',
+    () => false,
+  );
 
   const toggleMenu = () => setIsOpen((open) => !open);
 
@@ -30,7 +35,15 @@ export default function Navbar() {
     return () => window.removeEventListener('keydown', closeOnEscape);
   }, []);
 
-  const primaryLinks = [
+  const primaryLinks = isPolicyHost ? [
+    { name: 'Definitions', href: '/discover/definitions' },
+    { name: 'Current Law', href: '/discover/current-law' },
+    { name: 'Mechanisms', href: '/discover/mechanisms' },
+    { name: 'Implementation', href: '/discover/implementation' },
+    { name: 'Machine Rules', href: '/discover/machine-rules' },
+    { name: 'Evidence', href: '/discover/evidence' },
+    { name: 'Trade-offs', href: '/discover/tradeoffs-and-uncertainty' },
+  ] : [
     { name: 'Evidence Audit', href: '/evidence-audit' },
     { name: 'Intelligence', href: '/intelligence' },
     { name: 'Knowledge', href: '/knowledge' },
@@ -43,7 +56,16 @@ export default function Navbar() {
     { name: 'Contact', href: '/contact' },
   ];
 
-  const exploreLinks = [
+  const exploreLinks = isPolicyHost ? [
+    { name: 'AI Accountability', href: '/policy/ai-agent-accountability/definition' },
+    { name: 'Agent Governance', href: '/policy/automated-decision-governance/definition' },
+    { name: 'Evidence Policy', href: '/policy/scientific-evidence-policy/definition' },
+    { name: 'Agent Identity', href: '/policy/agent-identity/definition' },
+    { name: 'Auditability', href: '/policy/auditability/definition' },
+    { name: 'Standards', href: '/policy/standards-and-conformity/definition' },
+    { name: 'Privacy', href: '/policy/data-protection/definition' },
+    { name: 'Semiconductor Policy', href: '/policy/semiconductor-policy/definition' },
+  ] : [
     { name: 'Tools & API', href: '/tools' },
     { name: 'Developer Infrastructure', href: '/developers' },
     { name: 'About Maha', href: '/about' },
@@ -76,12 +98,12 @@ export default function Navbar() {
         <div className="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
           
           {/* Logo */}
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="font-editorial z-50 text-base font-semibold tracking-[0.08em] uppercase text-[var(--chrome-text)] transition-opacity hover:opacity-65"
             onClick={() => setIsOpen(false)}
           >
-            Maha Strategies
+            {isPolicyHost ? 'Maha Policy' : 'Maha Strategies'}
           </Link>
 
           {/* Desktop Navigation */}
@@ -99,8 +121,8 @@ export default function Navbar() {
                     {link.name}
                   </Link>
                 ))}
-                <a href="https://publish.mahastrategies.com" target="_blank" rel="noopener noreferrer" className="block px-3 py-2 text-[var(--chrome-muted)] hover:text-[var(--chrome-text)] hover:bg-[var(--chrome-hover)] transition-colors">
-                  Publishing Node ↗
+                <a href={isPolicyHost ? 'https://www.mahastrategies.com' : 'https://publish.mahastrategies.com'} target="_blank" rel="noopener noreferrer" className="block px-3 py-2 text-[var(--chrome-muted)] hover:text-[var(--chrome-text)] hover:bg-[var(--chrome-hover)] transition-colors">
+                  {isPolicyHost ? 'Maha Strategies ↗' : 'Publishing Node ↗'}
                 </a>
               </div>
             </details>
@@ -147,14 +169,14 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
-            <a 
-              href="https://publish.mahastrategies.com" 
+            <a
+              href={isPolicyHost ? 'https://www.mahastrategies.com' : 'https://publish.mahastrategies.com'}
               target="_blank" 
               rel="noopener noreferrer" 
               onClick={toggleMenu}
               className="hover:text-[var(--chrome-text)] transition-colors text-[var(--chrome-muted)] border-b border-[var(--chrome-border)] pb-4 flex justify-between items-center"
             >
-              <span>Publishing Node</span>
+              <span>{isPolicyHost ? 'Maha Strategies' : 'Publishing Node'}</span>
               <span>↗</span>
             </a>
           </div>

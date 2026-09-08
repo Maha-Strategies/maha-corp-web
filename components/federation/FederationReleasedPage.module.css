@@ -4,6 +4,11 @@
   padding: 5rem 0 7rem;
 }
 
+.propertyNav { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; margin-bottom: 4rem; padding-bottom: 1rem; border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent); }
+.propertyNav div { display: flex; flex-wrap: wrap; gap: .75rem 1.25rem; }
+.propertyNav a { font-family: var(--font-geist-mono), monospace; font-size: .7rem; letter-spacing: .09em; text-transform: uppercase; }
+.propertyBrand { font-family: var(--font-newsreader), serif !important; font-size: 1rem !important; font-weight: 650; letter-spacing: .04em !important; }
+
 .eyebrow, .release, .sectionKind {
   font-family: var(--font-geist-mono), monospace;
   letter-spacing: .1em;
@@ -28,6 +33,7 @@
 
 @media (max-width: 760px) {
   .main { padding-top: 3rem; }
+  .propertyNav { align-items: flex-start; flex-direction: column; margin-bottom: 2.5rem; }
   .grid { grid-template-columns: 1fr; gap: 1rem; }
   .aside { position: static; }
 }

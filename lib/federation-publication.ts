@@ -11,6 +11,7 @@ import routeBaseline from '@/content/federation/federation-route-baseline-v1.jso
 import { digest } from '@/lib/federation/readiness-tranche-22'
 import { provenanceDigest } from '@/lib/evidence-dossier/digest'
 import type { MetadataRoute } from 'next'
+import { POLICY_DISCOVERY_GROUPS, POLICY_SITE_URL } from '@/lib/policy-front-door'
 
 export type FederationSource = {
   sourceId: string
@@ -138,5 +139,8 @@ export function mergeFederationSitemapRows(...groups: MetadataRoute.Sitemap[]): 
 export function federationLlmsManifest(host: string): string {
   const rows = federationPagesForHost(host)
   if (!rows.length) return ''
-  return ['# Maha federated evidence pages', '', `Canonical host: https://${host}`, `Active exact-revision releases: ${rows.length}`, '', ...rows.map((page) => `- [${page.title}](${page.canonicalUrl}) — ${page.directAnswer}`), ''].join('\n')
+  const discovery = host === 'policy.mahastrategies.com'
+    ? ['', '## Discovery', '', `- [Maha Policy](${POLICY_SITE_URL})`, ...POLICY_DISCOVERY_GROUPS.map((group) => `- [${group.label}](${POLICY_SITE_URL}/discover/${group.slug}) — ${group.description}`)]
+    : []
+  return ['# Maha federated evidence pages', '', `Canonical host: https://${host}`, `Active exact-revision releases: ${rows.length}`, ...discovery, '', ...rows.map((page) => `- [${page.title}](${page.canonicalUrl}) — ${page.directAnswer}`), ''].join('\n')
 }
