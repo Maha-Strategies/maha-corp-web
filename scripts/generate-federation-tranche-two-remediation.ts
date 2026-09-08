@@ -8,8 +8,10 @@
  *
  *   node --experimental-strip-types scripts/generate-federation-tranche-two-remediation.ts
  *
- * TRANCHE_2_DIR points at the worktree holding the Tranche 2 artifacts, which
- * are uncommitted work owned by another agent. They are read, never written.
+ * TRANCHE_2_DIR may point at an alternate review workspace. By default the
+ * generator reads the committed Tranche 2 artifacts in this repository so a
+ * clean CI checkout regenerates the committed result rather than an
+ * environment-dependent fallback.
  */
 import { createHash } from 'node:crypto'
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
@@ -20,7 +22,7 @@ import {
   type Determination, type Inspection,
 } from '../lib/federation-tranche-two-remediation.ts'
 
-const TRANCHE_2_DIR = process.env.TRANCHE_2_DIR ?? '/private/tmp/maha-federation-4000/content/federation'
+const TRANCHE_2_DIR = process.env.TRANCHE_2_DIR ?? 'content/federation'
 const OUT = 'content/federation'
 const OBSERVED = '2026-09-05'
 const digest = (body: string) => `sha256:${createHash('sha256').update(body, 'utf8').digest('hex')}`
