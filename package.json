@@ -72,6 +72,8 @@
     "recipe:context-compiler:live": "node --experimental-strip-types scripts/run-context-compiler-agent-recipe.ts --live",
     "recipe:bazaar-payment": "node --experimental-strip-types scripts/run-bazaar-discovery-payment-recipe.ts",
     "x402:doctor": "node --experimental-strip-types scripts/x402-doctor.ts",
+    "verify:x402-buyer-delivery": "node --experimental-strip-types scripts/check-x402-buyer-delivery.ts",
+    "demo:certen-evidence": "node --experimental-strip-types scripts/run-certen-synthetic-example.ts",
     "x402:conformance": "node --experimental-strip-types scripts/run-x402-conformance-corpus.ts",
     "generate:x402-public-evidence": "node --experimental-strip-types scripts/generate-x402-public-evidence.ts",
     "verify:x402-public-evidence": "node --experimental-strip-types scripts/verify-x402-public-evidence.ts",
