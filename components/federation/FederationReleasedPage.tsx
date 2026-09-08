@@ -11,8 +11,17 @@ export default function FederationReleasedPage({ page }: { page: PublishedFedera
   return (
     <main className={styles.main}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
+      {page.siteId === 'maha-policy' && <nav className={styles.propertyNav} aria-label="Maha Policy">
+        <Link href="https://policy.mahastrategies.com/" className={styles.propertyBrand}>Maha Policy</Link>
+        <div>
+          <Link href="https://policy.mahastrategies.com/discover/definitions">Definitions</Link>
+          <Link href="https://policy.mahastrategies.com/discover/current-law">Current law</Link>
+          <Link href="https://policy.mahastrategies.com/discover/evidence">Evidence</Link>
+          <Link href="https://policy.mahastrategies.com/discover/implementation">Implementation</Link>
+        </div>
+      </nav>}
       <header>
-        <p className={styles.eyebrow}>{page.siteId.replaceAll('-', ' ')} · governed federation</p>
+        <p className={styles.eyebrow}>{page.siteId === 'maha-policy' ? 'Maha Policy' : page.siteId.replaceAll('-', ' ')} · governed federation</p>
         <h1 className={styles.title}>{page.title}</h1>
         <p className={styles.answer}>{page.directAnswer}</p>
         <p className={styles.release}>Active canonical release · {page.release.releaseId} · exact revision {page.contentDigest}</p>

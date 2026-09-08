@@ -1,11 +1,14 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import Image from 'next/image'
+import { headers } from 'next/headers'
 import { TrackedLink } from '@/components/ConversionTracker'
+import PolicyFrontDoor, { policyFrontDoorMetadata } from '@/components/policy/PolicyFrontDoor'
+import { normalizedRequestHost } from '@/lib/federation-host-routing'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 
-export const metadata: Metadata = {
+const corporateMetadata: Metadata = {
   title: 'Governed Infrastructure for AI and Machine Commerce | Maha Strategies',
   description: 'Maha Strategies governs the path from evidence and context to agent action, payment, delivery, and audit-ready proof.',
   alternates: { canonical: '/' },
@@ -40,7 +43,17 @@ const serviceJsonLd = {
   offers: { '@type': 'Offer', price: '2500', priceCurrency: 'USD', availability: 'https://schema.org/InStock', url: `${SITE_URL}/consulting` },
 }
 
-export default function CorporateHomepage() {
+export async function generateMetadata(): Promise<Metadata> {
+  const host = normalizedRequestHost((await headers()).get('host'))
+  return host === 'policy.mahastrategies.com' ? policyFrontDoorMetadata : corporateMetadata
+}
+
+export default async function SiteHomepage() {
+  const host = normalizedRequestHost((await headers()).get('host'))
+  return host === 'policy.mahastrategies.com' ? <PolicyFrontDoor /> : <CorporateHomepage />
+}
+
+function CorporateHomepage() {
   return (
     <main className="evidence-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />

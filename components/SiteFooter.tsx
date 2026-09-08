@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { useSyncExternalStore } from 'react'
 
 const developerLinks = [
   { href: '/developers', label: 'Developer infrastructure' },
@@ -24,6 +25,23 @@ const companyLinks = [
 ] as const
 
 export default function SiteFooter() {
+  const isPolicyHost = useSyncExternalStore(
+    () => () => undefined,
+    () => window.location.hostname === 'policy.mahastrategies.com',
+    () => false,
+  )
+
+  if (isPolicyHost) return (
+    <footer data-theme="paper" className="site-chrome border-t border-[var(--chrome-border)] bg-[var(--chrome-surface)] px-6 py-10 text-[var(--chrome-muted)]">
+      <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-3">
+        <div><p className="font-editorial text-lg font-semibold text-[var(--chrome-text)]">Maha Policy</p><p className="mt-4 max-w-sm text-sm leading-6">Source-bounded policy intelligence. Informational, not legal advice; proposals remain distinct from enacted law.</p></div>
+        <nav aria-label="Policy discovery footer links"><p className="font-mono text-[10px] uppercase tracking-widest text-[var(--chrome-text)]">Discover</p><ul className="mt-4 space-y-3 text-sm"><li><Link href="/discover/definitions">Definitions</Link></li><li><Link href="/discover/current-law">Current law</Link></li><li><Link href="/discover/evidence">Evidence</Link></li><li><Link href="/discover/tradeoffs-and-uncertainty">Trade-offs &amp; uncertainty</Link></li></ul></nav>
+        <nav aria-label="Policy services footer links"><p className="font-mono text-[10px] uppercase tracking-widest text-[var(--chrome-text)]">Evidence services</p><ul className="mt-4 space-y-3 text-sm"><li><a href="https://www.mahastrategies.com/tools/evidence-preflight">Free Evidence Preflight</a></li><li><a href="https://www.mahastrategies.com/mps/preflight">$49 Document Preflight</a></li><li><a href="https://www.mahastrategies.com/evidence-audit">$250 Verified Evidence Dossier</a></li></ul></nav>
+      </div>
+      <p className="mx-auto mt-10 max-w-6xl border-t border-[var(--chrome-border)] pt-6 font-mono text-[10px] uppercase tracking-widest">© {new Date().getFullYear()} Maha Strategies LLC · Maha Policy</p>
+    </footer>
+  )
+
   return (
     <footer data-theme="paper" className="site-chrome border-t border-[var(--chrome-border)] bg-[var(--chrome-surface)] px-6 py-10 text-[var(--chrome-muted)]">
       <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-3">
