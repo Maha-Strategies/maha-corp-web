@@ -3,6 +3,7 @@ import { MICRO_MAX_REQUEST_BYTES, microPath, type MicroProductId } from './micro
 import { buildMicroProduct } from './micro-products.ts'
 import { MICRO_OFFERS } from './micro-offers.ts'
 import { resolveX402 } from './gateway.ts'
+import { readPaymentSignature } from './protocol.ts'
 import { releaseHeldSlot } from './slot.ts'
 import { discoverySourceFrom, recordOfferUsage } from './offer-telemetry.ts'
 import { microExecutionAllowed } from './micro-release.ts'
@@ -82,6 +83,38 @@ export function microHandlers(id: MicroProductId, dependencies: Dependencies = {
       if (request.headers.has('authorization') || request.headers.has('x-api-key')) return failure('enterprise_credentials_not_accepted', 400)
       // Configuration cannot enable any product outside the reviewed release cohort.
       if (!microExecutionAllowed(id, environment)) return failure('offer_not_published', 503)
+
+      const settle = async (): Promise<Awaited<ReturnType<typeof resolveX402>> | Response> => {
+        try { return await resolve(request) }
+        catch { return failure('payment_outcome_unknown_check_settlement_before_repaying', 503) }
+      }
+      const challenged = async (outcome: Extract<Awaited<ReturnType<typeof resolveX402>>, { kind: 'challenge' }>) => {
+        await recordSafely(request, 'challenge', 402)
+        return response(outcome.body, 402, { 'PAYMENT-REQUIRED': outcome.header })
+      }
+
+      // An unpaid request is answered with the payment challenge before the body
+      // is read, and before Content-Type is judged.
+      //
+      // These validated first, so a caller with no payment got 400
+      // invalid_or_unsupported_micro_input and never saw a price. A Bazaar
+      // crawler probes with a minimal body precisely because it does not know
+      // the input shape yet, so all five published microproducts were
+      // undiscoverable while the manifest declared them payable -- and each
+      // probe ran a full product build for a result nobody could buy.
+      if (!readPaymentSignature(request.headers)) {
+        const unpaid = await settle()
+        if (unpaid instanceof Response) return unpaid
+        if (unpaid.kind === 'not_applicable') return failure('offer_not_enabled', 503)
+        if (unpaid.kind === 'challenge') return challenged(unpaid)
+        if (unpaid.kind === 'refused') return response({ error: { code: unpaid.code } }, unpaid.status,
+          unpaid.retryAfterSeconds ? { 'Retry-After': String(unpaid.retryAfterSeconds) } : {})
+        // A settled outcome with no presented signature cannot be attributed to
+        // this request; release the slot and refuse rather than deliver.
+        await bestEffort(() => release(unpaid.slot))
+        return failure('payment_outcome_unknown_check_settlement_before_repaying', 503)
+      }
+
       if (!/^application\/json(?:\s*;|$)/i.test(request.headers.get('content-type') ?? '')) return failure('unsupported_media_type', 415)
       if (request.headers.has('content-encoding') && request.headers.get('content-encoding') !== 'identity') return failure('content_encoding_not_supported', 415)
       let prepared: Awaited<ReturnType<typeof buildMicroProduct>>
@@ -91,14 +124,11 @@ export function microHandlers(id: MicroProductId, dependencies: Dependencies = {
         return failure(reason === 'payload_too_large' ? 'payload_too_large' : 'invalid_or_unsupported_micro_input', reason === 'payload_too_large' ? 413 : reason === 'body_timeout' ? 408 : 400)
       }
       // All deterministic failures above happen before settlement. No result is released unpaid.
-      let outcome: Awaited<ReturnType<typeof resolveX402>>
-      try { outcome = await resolve(request) }
-      catch { return failure('payment_outcome_unknown_check_settlement_before_repaying', 503) }
+      const resolved = await settle()
+      if (resolved instanceof Response) return resolved
+      const outcome = resolved
       if (outcome.kind === 'not_applicable') return failure('offer_not_enabled', 503)
-      if (outcome.kind === 'challenge') {
-        await recordSafely(request, 'challenge', 402)
-        return response(outcome.body, 402, { 'PAYMENT-REQUIRED': outcome.header })
-      }
+      if (outcome.kind === 'challenge') return challenged(outcome)
       if (outcome.kind === 'refused') return response({ error: { code: outcome.code } }, outcome.status, outcome.retryAfterSeconds ? { 'Retry-After': String(outcome.retryAfterSeconds) } : {})
       try {
         const delivered = response(prepared, 200, { 'PAYMENT-RESPONSE': outcome.header })
