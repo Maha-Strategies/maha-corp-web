@@ -185,6 +185,18 @@ test('public agent discovery identifies live capabilities and the scoped Context
     'release-bound-evidence-packet',
     'tiruvaymoli-context-packet',
     'astrology-experiment-plan-check',
+    'unit-uncertainty-conversion',
+    'exact-linear-system',
+    'bracketed-polynomial-root',
+    'covariance-uncertainty',
+    'divine-name-disambiguation',
+    'edition-verse-resolution',
+    'reception-lineage-retrieval',
+    'policy-version-comparison',
+    'control-evidence-gaps',
+    'mcp-contract-compatibility',
+    'tool-permission-diff',
+    'publication-bundle-consistency',
   ]
   assert.deepEqual(offers.technicalCapabilities.map((capability) => capability.id), expected)
   assert.deepEqual(card.capabilities.map((capability) => capability.id), expected)

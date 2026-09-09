@@ -1,7 +1,9 @@
 import type { MicroProductId } from './micro-contracts.ts'
+import { NEXT_SAMPLES } from './micro-next-samples.ts'
 const hash = (c: string) => `sha256:${c.repeat(64)}`
 const locator = { sourceId: 'synthetic-source', sourceRevision: hash('1'), kind: 'section', value: '3.2' }
 export const MICRO_SAMPLE_INPUTS: Record<MicroProductId, Record<string, unknown>> = {
+  ...NEXT_SAMPLES,
   'citation-binding-check': { dataClass: 'synthetic', bindings: [{ expected: locator, observed: { ...locator } }] },
   'revision-lineage-check': { dataClass: 'synthetic', previous: { objectId: 'synthetic-record', revisionDigest: hash('1'), predecessorDigest: null, relation: 'initial' }, next: { objectId: 'synthetic-record', revisionDigest: hash('2'), predecessorDigest: hash('1'), relation: 'supersedes' } },
   'audit-export-normalizer': { dataClass: 'synthetic', events: [{ eventId: 'event-2', eventType: 'checked', subjectDigest: hash('2'), occurredAt: '2026-09-09T10:00:01.000Z' }, { eventId: 'event-1', eventType: 'received', subjectDigest: hash('1'), occurredAt: '2026-09-09T10:00:00.000Z' }] },

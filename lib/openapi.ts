@@ -106,7 +106,7 @@ export const openApiDocument = {
   },
   servers: [{ url: 'https://www.mahastrategies.com' }],
   tags: [
-    { name: 'x402 Microproducts', description: 'Ten bounded local implementations; all withheld from Preview and Production payment.' },
+    { name: 'x402 Microproducts', description: 'Bounded local implementations; all withheld from Preview and Production payment.' },
     { name: 'Agentic Commerce', description: 'Read-only offer and transaction-policy discovery for agents.' },
     { name: 'x402 Conformance', description: 'Factual protocol and Bazaar discovery observations without trust, security, or uptime scoring.' },
     { name: 'MPS Audit', description: 'Prepaid claim-level provenance audits.' },

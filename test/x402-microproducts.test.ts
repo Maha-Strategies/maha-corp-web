@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { MICRO_IDS, MICRO_INPUT_SCHEMAS, MICRO_MAX_REQUEST_BYTES, MICRO_MAX_RESPONSE_BYTES, MICRO_PRODUCTS, microPath, schemaAccepts } from '../lib/x402/micro-contracts.ts'
 import { MICRO_OFFERS } from '../lib/x402/micro-offers.ts'
+import { NEXT_IDS, NEXT_PRODUCTS } from '../lib/x402/micro-next-contracts.ts'
 import { MICRO_SAMPLE_INPUTS } from '../lib/x402/micro-samples.ts'
 import { buildMicroProduct, microDigest, canonicalMicro, verifyMicroProduct } from '../lib/x402/micro-products.ts'
 import { projectReleasePacket, type ReleaseCorpus } from '../lib/x402/micro-corpus.ts'
@@ -28,6 +29,7 @@ for (const id of MICRO_IDS) {
     assert.deepEqual(validate(input, offer.discovery.inputSchema), [])
     const result = await buildMicroProduct(id, input)
     assert.deepEqual(validate(result, offer.discovery.outputSchema), [])
+    assert.ok(validate({ ...result, amountBaseUnits: offer.amount === '5000' ? '10000' : '5000' }, offer.discovery.outputSchema).length > 0)
     assert.deepEqual(result, offer.discovery.output)
     assert.deepEqual(await buildMicroProduct(id, Object.fromEntries(Object.entries(input).reverse())), result)
     assert.ok(await verifyMicroProduct(id, input, result))
@@ -52,11 +54,14 @@ for (const id of MICRO_IDS) {
   })
 }
 
-test('prices are five half-cent and five one-cent offers, no existing product repriced', () => {
+test('first ten retain prices and twelve additions use only approved price bands', () => {
   const half = ['citation-binding-check', 'revision-lineage-check', 'dimensional-consistency-check', 'exact-interpolation-receipt', 'tiruvaymoli-context-packet']
-  assert.equal(MICRO_IDS.length, 10)
-  assert.equal(new Set(MICRO_IDS.map(microPath)).size, 10)
-  for (const o of MICRO_OFFERS) assert.equal(o.amount, half.includes(o.id) ? '5000' : '10000')
+  assert.equal(MICRO_IDS.length, 22)
+  assert.equal(new Set(MICRO_IDS.map(microPath)).size, 22)
+  const original = MICRO_OFFERS.filter(o => !NEXT_IDS.includes(o.id as keyof typeof NEXT_PRODUCTS))
+  assert.equal(original.length, 10)
+  for (const o of original) assert.equal(o.amount, half.includes(o.id) ? '5000' : '10000')
+  for (const id of NEXT_IDS) assert.ok(['5000', '10000'].includes(MICRO_OFFERS.find(o => o.id === id)!.amount))
 })
 
 test('citations expose exact mismatch dimensions, never passage support', async () => {

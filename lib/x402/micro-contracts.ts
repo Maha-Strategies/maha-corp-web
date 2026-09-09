@@ -1,4 +1,5 @@
 /** Public declarations only. Never import corpus files or operational secrets here. */
+import { NEXT_PRODUCTS, nextInputSchemas } from './micro-next-contracts.ts'
 export const MICRO_VERSION = 'maha-microproducts/0.1' as const
 export const MICRO_MAX_REQUEST_BYTES = 32768
 export const MICRO_MAX_RESPONSE_BYTES = 65536
@@ -13,28 +14,15 @@ export const MICRO_PRODUCTS = {
   'release-bound-evidence-packet': { amount: '10000', title: 'Release-Bound Evidence Packet', description: 'Deliver public source metadata and exact release bindings for one supported federation article at caller-pinned revisions. Uses the deployed repository snapshot, not a live registry probe. No private review material, full source text or expert certification.' },
   'tiruvaymoli-context-packet': { amount: '5000', title: 'Tiruvaymoli Passage Context Packet', description: 'Deliver one supported atlas unit as structured edition metadata, poetic context, bounded answers and links at a pinned registry digest. Public pages remain free. No translation full text, redistribution license, historical or theological certification.' },
   'astrology-experiment-plan-check': { amount: '10000', title: 'Astrology Experiment-Plan Check', description: 'Check one structured public or synthetic low-stakes experiment plan for timing, comparator, outcome and analysis declarations. Returns deficiencies and an integrity receipt. No registration, trusted timestamp, prediction, power analysis or scientific validation.' },
+  ...NEXT_PRODUCTS,
 } as const
 export type MicroProductId = keyof typeof MICRO_PRODUCTS
 export const MICRO_IDS = Object.keys(MICRO_PRODUCTS) as MicroProductId[]
 export const microPath = (id: MicroProductId) => `/api/v1/micro/${id}`
 export const isMicroProduct = (value: string): value is MicroProductId => Object.hasOwn(MICRO_PRODUCTS, value)
 
-/** Deliberately small JSON-Schema subset, shared by discovery and runtime. */
-export type MicroSchema = {
-  type?: 'object' | 'array' | 'string' | 'integer' | 'boolean' | 'null'
-  properties?: Record<string, MicroSchema>; required?: string[]; additionalProperties?: false
-  items?: MicroSchema; minItems?: number; maxItems?: number
-  minLength?: number; maxLength?: number; pattern?: string
-  minimum?: number; maximum?: number; enum?: readonly (string | boolean)[]; oneOf?: MicroSchema[]
-}
-export const objectSchema = (properties: Record<string, MicroSchema>): MicroSchema => ({ type: 'object', properties, required: Object.keys(properties), additionalProperties: false })
-export const arraySchema = (items: MicroSchema, minItems: number, maxItems: number): MicroSchema => ({ type: 'array', items, minItems, maxItems })
-export const textSchema = (maxLength = 160): MicroSchema => ({ type: 'string', minLength: 1, maxLength, pattern: '^[^\\u0000-\\u001f\\u007f]+$' })
-export const enumSchema = (...values: string[]): MicroSchema => ({ type: 'string', enum: values })
-export const ID_SCHEMA: MicroSchema = { type: 'string', pattern: '^[A-Za-z0-9][A-Za-z0-9._:-]{0,79}$', maxLength: 80 }
-export const HASH_SCHEMA: MicroSchema = { type: 'string', pattern: '^sha256:[a-f0-9]{64}$', maxLength: 71 }
-export const INTEGER_SCHEMA: MicroSchema = { type: 'string', pattern: '^(0|-?[1-9][0-9]{0,17})$', maxLength: 19 }
-export const UTC_SCHEMA: MicroSchema = { type: 'string', pattern: '^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$', maxLength: 24 }
+import { objectSchema, arraySchema, textSchema, enumSchema, ID_SCHEMA, HASH_SCHEMA, INTEGER_SCHEMA, UTC_SCHEMA, type MicroSchema } from './micro-schema.ts'
+export { objectSchema, arraySchema, textSchema, enumSchema, ID_SCHEMA, HASH_SCHEMA, INTEGER_SCHEMA, UTC_SCHEMA, schemaAccepts, type MicroSchema } from './micro-schema.ts'
 const nullHash: MicroSchema = { oneOf: [HASH_SCHEMA, { type: 'null' }] }
 const locator = objectSchema({ sourceId: ID_SCHEMA, sourceRevision: HASH_SCHEMA, kind: enumSchema('page', 'section', 'figure', 'table', 'equation'), value: textSchema() })
 const node = objectSchema({ objectId: ID_SCHEMA, revisionDigest: HASH_SCHEMA, predecessorDigest: nullHash, relation: enumSchema('initial', 'supersedes') })
@@ -44,6 +32,7 @@ const observation = objectSchema({ observationId: ID_SCHEMA, normalizedClaimId: 
 const envelope = (properties: Record<string, MicroSchema>) => objectSchema({ dataClass: enumSchema('public', 'synthetic'), ...properties })
 
 export const MICRO_INPUT_SCHEMAS: Record<MicroProductId, MicroSchema> = {
+  ...nextInputSchemas(),
   'citation-binding-check': envelope({ bindings: arraySchema(objectSchema({ expected: locator, observed: locator }), 1, 20) }),
   'revision-lineage-check': envelope({ previous: { oneOf: [node, { type: 'null' }] }, next: node }),
   'audit-export-normalizer': envelope({ events: arraySchema(event, 1, 100) }),
@@ -64,24 +53,6 @@ export const MICRO_INPUT_SCHEMAS: Record<MicroProductId, MicroSchema> = {
   }),
 }
 
-export function schemaAccepts(schema: MicroSchema, value: unknown, depth = 0): boolean {
-  if (depth > 16) return false
-  if (schema.oneOf) return schema.oneOf.filter(s => schemaAccepts(s, value, depth + 1)).length === 1
-  if (schema.enum && !schema.enum.includes(value as string)) return false
-  switch (schema.type) {
-    case 'null': return value === null
-    case 'boolean': return typeof value === 'boolean'
-    case 'string': return typeof value === 'string' && Array.from(value).length >= (schema.minLength ?? 0) && Array.from(value).length <= (schema.maxLength ?? 100000) && (!schema.pattern || new RegExp(schema.pattern, 'u').test(value))
-    case 'integer': return typeof value === 'number' && Number.isSafeInteger(value) && value >= (schema.minimum ?? Number.MIN_SAFE_INTEGER) && value <= (schema.maximum ?? Number.MAX_SAFE_INTEGER)
-    case 'array': return Array.isArray(value) && value.length >= (schema.minItems ?? 0) && value.length <= (schema.maxItems ?? 1000) && value.every(v => schemaAccepts(schema.items!, v, depth + 1))
-    case 'object': {
-      if (!value || typeof value !== 'object' || Array.isArray(value)) return false
-      const v = value as Record<string, unknown>, properties = schema.properties ?? {}
-      return Object.keys(v).every(k => Object.hasOwn(properties, k)) && (schema.required ?? []).every(k => Object.hasOwn(v, k)) && Object.entries(v).every(([k, x]) => schemaAccepts(properties[k], x, depth + 1))
-    }
-    default: return false
-  }
-}
 
 export const MICRO_BOUNDARIES = [
   'Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.',

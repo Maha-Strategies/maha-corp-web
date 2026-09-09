@@ -18,4 +18,4 @@ for (const [name, field, paymentField] of [['agent-card', 'capabilities', 'payme
   if (process.argv.includes('--write')) writeFileSync(path, after)
   else if (before !== after) throw new Error(`microproduct-discovery-stale:${name}`)
 }
-console.log('Ten withheld declarations synchronized locally; payable scope unchanged. No network or deployment.')
+console.log(`${MICRO_OFFERS.length} withheld declarations synchronized locally; payable scope unchanged. No network or deployment.`)

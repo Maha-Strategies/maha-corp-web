@@ -3,6 +3,8 @@ import { combineDimensions, linearInterpolate, trapezoidIntegral, type Dimension
 import { compileAuditExport, verifyVersionRelationship, type VersionNode } from '../federation/readiness-tranche-22.ts'
 import { MICRO_BOUNDARIES, MICRO_INPUT_SCHEMAS, MICRO_MAX_REQUEST_BYTES, MICRO_MAX_RESPONSE_BYTES, MICRO_PRODUCTS, MICRO_VERSION, schemaAccepts, type MicroProductId } from './micro-contracts.ts'
 import { microOutputSchema } from './micro-output-schemas.ts'
+import { isNextProduct } from './micro-next-contracts.ts'
+import { buildNextProduct } from './micro-next-products.ts'
 
 type Row = Record<string, unknown>
 const compareText = (a: string, b: string) => a < b ? -1 : a > b ? 1 : 0
@@ -118,7 +120,7 @@ export async function buildMicroProduct(id: MicroProductId, supplied: unknown, c
   const input = parseMicroInput(id, supplied)
   let result: Row
   try {
-    const core = coreResult(id, input)
+    const core = isNextProduct(id) ? await buildNextProduct(id, input) : coreResult(id, input)
     if (core) result = core
     else {
       const provider = corpus ?? await import('./micro-corpus.ts')
