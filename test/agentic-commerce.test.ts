@@ -174,6 +174,17 @@ test('public agent discovery identifies live capabilities and the scoped Context
     'gpu-tensor-network',
     'gpu-geometric-registration',
     'enterprise-mcp-gateway',
+    // Locally implemented contracts are discoverable only as withheld, never payable.
+    'citation-binding-check',
+    'revision-lineage-check',
+    'audit-export-normalizer',
+    'dimensional-consistency-check',
+    'exact-interpolation-receipt',
+    'sampled-series-integration',
+    'evidence-conflict-comparator',
+    'release-bound-evidence-packet',
+    'tiruvaymoli-context-packet',
+    'astrology-experiment-plan-check',
   ]
   assert.deepEqual(offers.technicalCapabilities.map((capability) => capability.id), expected)
   assert.deepEqual(card.capabilities.map((capability) => capability.id), expected)

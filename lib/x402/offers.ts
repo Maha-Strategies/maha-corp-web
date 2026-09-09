@@ -32,6 +32,7 @@ import {
 import { bookSectionDiscovery } from './book-section-product.ts'
 import { bookEditionDiscovery } from './book-edition-product.ts'
 import { CELESTIAL_OFFERS } from './celestial-offers.ts'
+import { MICRO_OFFERS } from './micro-offers.ts'
 
 export const USDC_DECIMALS = 6
 
@@ -441,6 +442,7 @@ export const X402_OFFERS: readonly X402Offer[] = Object.freeze([
   IMAGINED_LIFE_EDITION_OFFER,
   VOLCANIC_ENGINE_EDITION_OFFER,
   ...CELESTIAL_OFFERS,
+  ...MICRO_OFFERS,
 ])
 
 /**

@@ -1,0 +1,389 @@
+{
+  "version": "maha-microproducts/0.1",
+  "basis": "local-synthetic-and-public-corpus-examples; no payments or deployment",
+  "outputs": {
+    "citation-binding-check": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "citation-binding-check",
+      "amountBaseUnits": "5000",
+      "inputDigest": "sha256:5cc2143afd39282519b449f878539adfef4ba365215969c6aa7eb44104382eb3",
+      "result": {
+        "allMatch": true,
+        "checks": [
+          {
+            "index": 0,
+            "matches": true,
+            "mismatches": [],
+            "expectedDigest": "sha256:c4af4e4909bff246132e05e85a4ca943e25ff51788e09e8aa45cfee5cf5761c5",
+            "observedDigest": "sha256:c4af4e4909bff246132e05e85a4ca943e25ff51788e09e8aa45cfee5cf5761c5"
+          }
+        ],
+        "passageInspected": false,
+        "claimSupportVerified": false
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:0588cc6395240546fe23b1a8aef29faa41e8ae7310b643247187790b0aa0431b"
+    },
+    "revision-lineage-check": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "revision-lineage-check",
+      "amountBaseUnits": "5000",
+      "inputDigest": "sha256:a0d448573b576480ba201b23b238731f3de684255d071511c8cbbe2df8d85cde",
+      "result": {
+        "consistent": true,
+        "transition": "supersedes",
+        "issues": [],
+        "reviewInherited": false,
+        "authenticityVerified": false
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:07d6b29e16046d9370e9ddfe1480d97f95bc32c8e675ab052ad5d4d1747ef961"
+    },
+    "audit-export-normalizer": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "audit-export-normalizer",
+      "amountBaseUnits": "10000",
+      "inputDigest": "sha256:2dcd0caa0ecc193884234f13d8797c7574d6a1e2d7d54de284455a9764c7f769",
+      "result": {
+        "events": [
+          {
+            "eventId": "event-1",
+            "eventType": "received",
+            "subjectDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+            "occurredAt": "2026-09-09T10:00:00.000Z"
+          },
+          {
+            "eventId": "event-2",
+            "eventType": "checked",
+            "subjectDigest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+            "occurredAt": "2026-09-09T10:00:01.000Z"
+          }
+        ],
+        "exportDigest": "sha256:863b592c1639b958d8c14c728cb845c6913b6e2725f7ff40d0b665813679a0b7",
+        "completenessVerified": false,
+        "eventOccurrenceVerified": false
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:d19552d2392c46f99ca97feff5ced4a1e56f8f2ab676da0ddfcdd997614e39a7"
+    },
+    "dimensional-consistency-check": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "dimensional-consistency-check",
+      "amountBaseUnits": "5000",
+      "inputDigest": "sha256:fad55ea4d7d4c89caa0cdfba62526f31e6abd83cd191b62db37d5195f2a746e1",
+      "result": {
+        "dimensionOrder": [
+          "length",
+          "mass",
+          "time",
+          "electric-current",
+          "temperature",
+          "amount-of-substance",
+          "luminous-intensity"
+        ],
+        "actual": [
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "expected": [
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "consistent": true,
+        "unitsConverted": false,
+        "formulaValidated": false
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:0615c9b6273e7c39534cd2d7ff6cf4a5314cbfb3501749e658e50de5877d65a5"
+    },
+    "exact-interpolation-receipt": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "exact-interpolation-receipt",
+      "amountBaseUnits": "5000",
+      "inputDigest": "sha256:31e0972aa1571096c38948d5d21ec63207f4877b2a1e8a5110086a922ffc11eb",
+      "result": {
+        "numerator": "5",
+        "denominator": "2",
+        "method": "two-node-linear-interpolation",
+        "xUnit": "s",
+        "yUnit": "m",
+        "resultUnit": "m",
+        "unitBasis": "caller-declared; not converted or independently validated",
+        "arithmetic": "exact-rational",
+        "approximationError": "not-estimated",
+        "measurementUncertainty": "not-estimated"
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:f955466f7705112f56ff9f8adc7c74e99e7b4082df43dd73e2f6a68e5379cabc"
+    },
+    "sampled-series-integration": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "sampled-series-integration",
+      "amountBaseUnits": "10000",
+      "inputDigest": "sha256:c35a69ee7d709d94b6c116ca5b6d8c5598e91997443b619b757b690d49879d0c",
+      "result": {
+        "numerator": "3",
+        "denominator": "1",
+        "method": "composite-trapezoidal-rule",
+        "xUnit": "s",
+        "yUnit": "m/s",
+        "resultUnit": "s * m/s",
+        "unitBasis": "caller-declared; not converted or independently validated",
+        "arithmetic": "exact-rational",
+        "approximationError": "not-estimated",
+        "measurementUncertainty": "not-estimated"
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:361cfe37064180d67eed9a63157387c8c2f1b54cc5d959d3f357cc0a31a233b6"
+    },
+    "evidence-conflict-comparator": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "evidence-conflict-comparator",
+      "amountBaseUnits": "10000",
+      "inputDigest": "sha256:4e1dd2ba409e4d86b9ae70804019592e6415b26270d0a177dc37a6d55c563314",
+      "result": {
+        "state": "conflict-observed",
+        "supporting": [
+          "obs-1"
+        ],
+        "opposing": [
+          "obs-2"
+        ],
+        "mixed": [],
+        "excluded": [],
+        "labelsIndependentlyVerified": false,
+        "consensusEstablished": false
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:7049716e8a450f407278092e88eea5f1a18b680931ccac681f1b8b018e875cf0"
+    },
+    "release-bound-evidence-packet": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "release-bound-evidence-packet",
+      "amountBaseUnits": "10000",
+      "inputDigest": "sha256:71f7c6ce910e8fc93d682ffcd3d36122d34410ed2ff16ad4ede51f7a0e94e4db",
+      "result": {
+        "canonicalUrl": "https://policy.mahastrategies.com/policy/assurance-cases/definition",
+        "title": "Assurance Cases — Definition",
+        "contentDigest": "sha256:6e76356affec2fa3aa97a80acdb26201290743c724c140bd473ca4b290e5d5b0",
+        "release": {
+          "releaseId": "fedrelease_cd1bf1efd06c1bcd9ac45af52115d202",
+          "releaseDigest": "sha256:9db3d81aef6e54eeadefde596bcf1920a3f4448a45d697db3e47b7089d89c009",
+          "status": "active"
+        },
+        "review": {
+          "exactRevisionReviewed": true,
+          "basis": "recorded-repository-review-state; reviewer tier not supplied by this projection",
+          "expertReviewClaimed": false
+        },
+        "sourceSnapshot": "deployed-repository; not live external-registry observation",
+        "sources": [
+          {
+            "sourceId": "t21-nist-assurance",
+            "title": "t21-nist-assurance",
+            "url": "https://csrc.nist.gov/glossary/term/assurance_case",
+            "locator": "https://csrc.nist.gov/glossary/term/assurance_case — definition, source documents, assumptions and evidence",
+            "scope": "Defines an assurance case as an auditable argument supported by evidence and explicit assumptions.",
+            "boundary": "The glossary does not establish current law, adequacy of a particular case, or superiority over an audit or certification.",
+            "rightsBasis": "official-public-reference; quote-free metadata and paraphrase only",
+            "inspectionDepth": "reviewed-locator"
+          }
+        ],
+        "inspectionPerformedThisCall": false,
+        "redistributionRightsGranted": false
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:3b128dcabfe6d3a1dcd63596aa07c36f19772f3f17fcaa8a8d2e8c5d6a402a36"
+    },
+    "tiruvaymoli-context-packet": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "tiruvaymoli-context-packet",
+      "amountBaseUnits": "5000",
+      "inputDigest": "sha256:c183ccb0dd6e98e7a8b3244b0d3c3a3137ea14f300d2842278d922ca48666290",
+      "result": {
+        "canonicalUrl": "https://www.mahastrategies.com/knowledge/religion/tiruvaymoli/knowledge-and-unknowability-2791-2801",
+        "registryDigest": "sha256:98f42d289673bcd6e8c4499377fc1599d8e3f62a416cf4ced02ecbb4f3f98274",
+        "title": "Knowledge and unknowability in Tiruvāymoḻi 2791–2801",
+        "passageRange": "2791–2801",
+        "voice": "A first-person devotional speaker repeatedly addresses the heart and ends with a verse attributing the unit to Saḍagopan.",
+        "place": "No single terrestrial place controls this unit; any cosmic, domestic, or natural setting remains part of the translated poetic scene.",
+        "devotionalContext": "The unit develops knowledge given after ignorance; omnipresence through elemental and cosmic imagery; paired assertions that resist a single descriptive category within a translated devotional-poetic frame.",
+        "names": [
+          "Nānmuhan",
+          "Saḍagopan"
+        ],
+        "identityRelationship": "Nānmuhan, Saḍagopan are indexed as names or related figures occurring in this unit. Co-occurrence does not make them context-free synonyms; identity is asserted only where the translated passage itself relates them.",
+        "notEstablished": "The passage does not provide an empirical theory of consciousness, a philosophical proof of monism, or a license to erase differences among the divine figures it names.",
+        "editions": [
+          {
+            "sourceId": "project-madurai-divya-prabandham-part-4",
+            "title": "Nālāyira Divya Prabandham, Part 4: English translation",
+            "publisher": "Project Madurai; translated by Kausalya Hart",
+            "url": "https://www.projectmadurai.org/pm_etexts/utf8/pmuni0624_eng.html",
+            "version": "Project Madurai English translation containing pāsurams 2971–4000 and Tiruvāymoḻi 2791–3892",
+            "frame": "primary-text-in-translation",
+            "inspectedLocator": "Edition header and Tiruvāymoḻi pāsurams 2791–3298, read as forty-six complete numbered units",
+            "rightsBasis": "Project Madurai permits free distribution with its header intact; these pages paraphrase and link rather than reproduce the translation",
+            "boundary": "A named translation establishes the translator’s rendering. It is not the untranslated Tamil, a critical apparatus, a historical chronicle, or external verification of the poem’s theological claims."
+          },
+          {
+            "sourceId": "reddy-2011-tamil-bhakti-context",
+            "title": "The Giver of the Worn Garland: Krishnadevaraya’s Āmuktamālyada",
+            "publisher": "University of California, Berkeley eScholarship",
+            "url": "https://escholarship.org/content/qt9v6585kp/qt9v6585kp.pdf",
+            "version": "PhD dissertation, 2011, open institutional repository copy",
+            "frame": "attributed-scholarship",
+            "inspectedLocator": "pp. 25–26, 30, 33–46, and 88–93: Tamil bhakti, Āḻvārs, Nammāḻvār, temple localization, and akam/tiṇai literary continuity",
+            "rightsBasis": "Open institutional repository copy; paraphrase with page-level attribution",
+            "boundary": "The dissertation supplies scholarly interpretation, not a primary witness. Literary continuity does not prove an unchanged cult, identity, institution, or chronology."
+          }
+        ],
+        "answers": [
+          {
+            "question": "How does the opening unit hold knowledge and unknowability together?",
+            "answer": "In Kausalya Hart’s translation, the opening unit begins with ignorance removed and knowledge given, then repeatedly describes a reality that exceeds ordinary categories: form and formlessness, existence and non-existence, motion and stillness, world and indwelling presence. The unit therefore stages knowledge as devotional orientation without claiming that the divine nature has been exhausted by description."
+          },
+          {
+            "question": "Which divine names occur in Tiruvāymoḻi 2791–2801?",
+            "answer": "The named translation uses Nānmuhan, Saḍagopan in this unit. These are occurrence-level forms; the list is not a claim that every name is interchangeable in every text."
+          },
+          {
+            "question": "What poetic voice is used in Tiruvāymoḻi 2791–2801?",
+            "answer": "A first-person devotional speaker repeatedly addresses the heart and ends with a verse attributing the unit to Saḍagopan."
+          },
+          {
+            "question": "What themes organize Tiruvāymoḻi 2791–2801?",
+            "answer": "knowledge given after ignorance; omnipresence through elemental and cosmic imagery; paired assertions that resist a single descriptive category. Each description is bounded to this translated unit."
+          },
+          {
+            "question": "What does Tiruvāymoḻi 2791–2801 not establish?",
+            "answer": "The passage does not provide an empirical theory of consciousness, a philosophical proof of monism, or a license to erase differences among the divine figures it names."
+          }
+        ],
+        "relatedUrls": [
+          "https://www.mahastrategies.com/knowledge/religion/mayon/who-is-mayon",
+          "https://www.mahastrategies.com/knowledge/religion/mayon/mayon-and-tirumal",
+          "https://www.mahastrategies.com/knowledge/religion/mayon/mayon-and-krishna",
+          "https://www.mahastrategies.com/knowledge/religion/mayon/mayon-and-vishnu",
+          "https://www.mahastrategies.com/knowledge/religion/mayon/mayon-names-mal-tirumal-netiyon",
+          "https://www.mahastrategies.com/knowledge/religion/tamil-classical-traditions/who-are-the-alvars",
+          "https://www.mahastrategies.com/knowledge/religion/tamil-classical-traditions/nammalvar-and-the-tiruvaymoli",
+          "https://www.mahastrategies.com/knowledge/religion/tamil-classical-traditions/tamil-divine-name-families",
+          "https://www.mahastrategies.com/knowledge/religion/tamil-source-atlas/narayana-occurrence-map",
+          "https://www.mahastrategies.com/knowledge/religion/tamil-source-atlas/narayana-in-the-later-tamil-corpus"
+        ],
+        "limitations": [
+          "The page describes a named English translation; it does not claim that its wording is identical to the Tamil source text or every other translation.",
+          "A theological claim made by a poetic speaker is evidence about the poem’s discourse, not independent empirical or historical verification.",
+          "One numbered unit cannot establish the whole theology, chronology, performance history, or reception of the Tiruvāymoḻi."
+        ],
+        "sourceTextIncluded": false,
+        "redistributionRightsGranted": false,
+        "expertReviewClaimed": false
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:da1dce30ad5663d3b4b65badee0bddeb421a9601c6ac731022116eae9344f9ee"
+    },
+    "astrology-experiment-plan-check": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "astrology-experiment-plan-check",
+      "amountBaseUnits": "10000",
+      "inputDigest": "sha256:ad68ff5337f833b8117aac34da5833a972784a5a1db827b58dba0289f1ec5cc1",
+      "result": {
+        "state": "declarations-complete",
+        "issues": [],
+        "assessedAgainst": "maha-structured-low-stakes-plan/0.1",
+        "registered": false,
+        "trustedTimestamp": false,
+        "conventionVerified": false,
+        "randomizationVerified": false,
+        "powerAssessed": false,
+        "predictionValidated": false,
+        "note": "Times, predictor, convention and plan digest are caller declarations. This is not admission to the private hypothesis registry."
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:349b74878c5bd7f2b67705a65c1412fa92f6576251b3dc5ec2bc0864e1de5b05"
+    }
+  },
+  "digest": "sha256:f165bd5516f5499f0dd58fc27c08e901c3a7c5af266941f314b5dbcb4fbd9ca3"
+}

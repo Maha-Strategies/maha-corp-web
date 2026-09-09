@@ -593,6 +593,356 @@
         "Input and result digests are private response fields, not anonymization. Keep this receipt private when inputs could identify someone.",
         "Unsigned digests verify integrity against a trusted copy, not origin, settlement, delivery to another buyer, or scientific predictive validity."
       ]
+    },
+    {
+      "id": "citation-binding-check",
+      "status": "withheld",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/micro/citation-binding-check",
+      "method": "POST",
+      "payment": null,
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/citation-binding-check#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/citation-binding-check#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:9718ff787a54f9ab5bff2e9e429002a360ba00df30480a758e16b60fdd6bad36",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 32768,
+        "concurrencyCap": 4,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "This service does not persist request/result bodies or their digests. No stored-result recovery. Payment binds the resource; the integrity receipt binds the actual input. Do not send confidential data or place input in URLs or payment metadata."
+      },
+      "capabilityBoundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Compare up to 20 declared source identities, revisions and locators. Returns exact mismatches and an integrity receipt. Does not fetch sources, establish passage existence or verify claim support."
+      ]
+    },
+    {
+      "id": "revision-lineage-check",
+      "status": "withheld",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/micro/revision-lineage-check",
+      "method": "POST",
+      "payment": null,
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/revision-lineage-check#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/revision-lineage-check#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:5dd2c766a095c1c4e85dd97bbef1b0bed1a4f30e2e8c0bdb03420944ad3d9a40",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 32768,
+        "concurrencyCap": 4,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "This service does not persist request/result bodies or their digests. No stored-result recovery. Payment binds the resource; the integrity receipt binds the actual input. Do not send confidential data or place input in URLs or payment metadata."
+      },
+      "capabilityBoundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Check one initial or superseding revision transition against a declared predecessor. Returns lineage inconsistencies and an integrity receipt. Does not establish authenticity, semantic equivalence or inherited review approval."
+      ]
+    },
+    {
+      "id": "audit-export-normalizer",
+      "status": "withheld",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/micro/audit-export-normalizer",
+      "method": "POST",
+      "payment": null,
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/audit-export-normalizer#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/audit-export-normalizer#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:758a15b76826cf0bf2a217cbb1a2d4b4e8c69ce63a38074eaa3ce225742d094e",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 32768,
+        "concurrencyCap": 4,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "This service does not persist request/result bodies or their digests. No stored-result recovery. Payment binds the resource; the integrity receipt binds the actual input. Do not send confidential data or place input in URLs or payment metadata."
+      },
+      "capabilityBoundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Normalize up to 100 metadata events into deterministic order, rejecting duplicate identifiers and malformed times or digests. Does not prove event occurrence, provenance or completeness against an external system."
+      ]
+    },
+    {
+      "id": "dimensional-consistency-check",
+      "status": "withheld",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/micro/dimensional-consistency-check",
+      "method": "POST",
+      "payment": null,
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/dimensional-consistency-check#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/dimensional-consistency-check#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:edef6878a83bc5c8a5dbb5593cb09f7dbbfbee749b54653da745bdbe9e15735c",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 32768,
+        "concurrencyCap": 4,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "This service does not persist request/result bodies or their digests. No stored-result recovery. Payment binds the resource; the integrity receipt binds the actual input. Do not send confidential data or place input in URLs or payment metadata."
+      },
+      "capabilityBoundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Multiply or divide two seven-component SI dimension vectors and compare with the expected output dimension. No unit conversion, formula validation, scale-factor inference or physical-model certification."
+      ]
+    },
+    {
+      "id": "exact-interpolation-receipt",
+      "status": "withheld",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/micro/exact-interpolation-receipt",
+      "method": "POST",
+      "payment": null,
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/exact-interpolation-receipt#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/exact-interpolation-receipt#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:8fd2de7cafb4d45a25dcd1404c41bbb2f2313839657aa22d6dfaaedf92d4e102",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 32768,
+        "concurrencyCap": 4,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "This service does not persist request/result bodies or their digests. No stored-result recovery. Payment binds the resource; the integrity receipt binds the actual input. Do not send confidential data or place input in URLs or payment metadata."
+      },
+      "capabilityBoundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Interpolate between two integer-coordinate points with exact rational arithmetic and an integrity receipt. Refuses extrapolation and repeated nodes. Does not estimate measurement error or validate the interpolation model."
+      ]
+    },
+    {
+      "id": "sampled-series-integration",
+      "status": "withheld",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/micro/sampled-series-integration",
+      "method": "POST",
+      "payment": null,
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/sampled-series-integration#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/sampled-series-integration#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:d39522427c63fd13a67837eba29104b61104d571682b6ba6d7d165fe85cf7d1b",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 32768,
+        "concurrencyCap": 4,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "This service does not persist request/result bodies or their digests. No stored-result recovery. Payment binds the resource; the integrity receipt binds the actual input. Do not send confidential data or place input in URLs or payment metadata."
+      },
+      "capabilityBoundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Apply the composite trapezoidal rule to 2-128 equally spaced integer samples. Returns an exact rational arithmetic result, declared units and an integrity receipt. No quadrature-error estimate or claim of an exact underlying integral."
+      ]
+    },
+    {
+      "id": "evidence-conflict-comparator",
+      "status": "withheld",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/micro/evidence-conflict-comparator",
+      "method": "POST",
+      "payment": null,
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/evidence-conflict-comparator#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/evidence-conflict-comparator#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:2f1d5cab29cea58527252a42a09ad74c688acdccaae3112bbeba6764400b338c",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 32768,
+        "concurrencyCap": 4,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "This service does not persist request/result bodies or their digests. No stored-result recovery. Payment binds the resource; the integrity receipt binds the actual input. Do not send confidential data or place input in URLs or payment metadata."
+      },
+      "capabilityBoundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Compare 2-20 caller-labelled observations of one claim, population and outcome. Returns opposing directions and explicitly excluded observations. No literature search, source inspection, consensus judgment or factual verification."
+      ]
+    },
+    {
+      "id": "release-bound-evidence-packet",
+      "status": "withheld",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/micro/release-bound-evidence-packet",
+      "method": "POST",
+      "payment": null,
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/release-bound-evidence-packet#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/release-bound-evidence-packet#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:b072d62a8d234887b9e1a6e91144e091edc5914e3dd0eaa54fbc4cdf505b429b",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 32768,
+        "concurrencyCap": 4,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "This service does not persist request/result bodies or their digests. No stored-result recovery. Payment binds the resource; the integrity receipt binds the actual input. Do not send confidential data or place input in URLs or payment metadata."
+      },
+      "capabilityBoundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Deliver public source metadata and exact release bindings for one supported federation article at caller-pinned revisions. Uses the deployed repository snapshot, not a live registry probe. No private review material, full source text or expert certification."
+      ]
+    },
+    {
+      "id": "tiruvaymoli-context-packet",
+      "status": "withheld",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/micro/tiruvaymoli-context-packet",
+      "method": "POST",
+      "payment": null,
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/tiruvaymoli-context-packet#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/tiruvaymoli-context-packet#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:b868e537e5cb7c4730ced7464af0638584b115d7efdaaa4e10cefc9877c151d3",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 32768,
+        "concurrencyCap": 4,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "This service does not persist request/result bodies or their digests. No stored-result recovery. Payment binds the resource; the integrity receipt binds the actual input. Do not send confidential data or place input in URLs or payment metadata."
+      },
+      "capabilityBoundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Deliver one supported atlas unit as structured edition metadata, poetic context, bounded answers and links at a pinned registry digest. Public pages remain free. No translation full text, redistribution license, historical or theological certification."
+      ]
+    },
+    {
+      "id": "astrology-experiment-plan-check",
+      "status": "withheld",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/micro/astrology-experiment-plan-check",
+      "method": "POST",
+      "payment": null,
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/astrology-experiment-plan-check#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/astrology-experiment-plan-check#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:df2e6b0d07919c8fd4ea3be5eab70de069700910aac57044092a8c75347461e1",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 32768,
+        "concurrencyCap": 4,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "This service does not persist request/result bodies or their digests. No stored-result recovery. Payment binds the resource; the integrity receipt binds the actual input. Do not send confidential data or place input in URLs or payment metadata."
+      },
+      "capabilityBoundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Check one structured public or synthetic low-stakes experiment plan for timing, comparator, outcome and analysis declarations. Returns deficiencies and an integrity receipt. No registration, trusted timestamp, prediction, power analysis or scientific validation."
+      ]
     }
   ],
   "evidence": {

@@ -320,6 +320,206 @@
       "status": "available_for_tenant_onboarding",
       "endpoint": "https://www.mahastrategies.com/api/v1/mcp/gateway/{serverId}",
       "contract": "https://www.mahastrategies.com/mcp-gateway-contract.json"
+    },
+    {
+      "id": "citation-binding-check",
+      "status": "withheld",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/citation-binding-check",
+      "method": "POST",
+      "description": "Compare up to 20 declared source identities, revisions and locators. Returns exact mismatches and an integrity receipt. Does not fetch sources, establish passage existence or verify claim support.",
+      "payableNow": false,
+      "blockedBy": [
+        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "5000",
+        "assetSymbol": "USDC",
+        "autonomous": false,
+        "payableNow": false
+      }
+    },
+    {
+      "id": "revision-lineage-check",
+      "status": "withheld",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/revision-lineage-check",
+      "method": "POST",
+      "description": "Check one initial or superseding revision transition against a declared predecessor. Returns lineage inconsistencies and an integrity receipt. Does not establish authenticity, semantic equivalence or inherited review approval.",
+      "payableNow": false,
+      "blockedBy": [
+        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "5000",
+        "assetSymbol": "USDC",
+        "autonomous": false,
+        "payableNow": false
+      }
+    },
+    {
+      "id": "audit-export-normalizer",
+      "status": "withheld",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/audit-export-normalizer",
+      "method": "POST",
+      "description": "Normalize up to 100 metadata events into deterministic order, rejecting duplicate identifiers and malformed times or digests. Does not prove event occurrence, provenance or completeness against an external system.",
+      "payableNow": false,
+      "blockedBy": [
+        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "10000",
+        "assetSymbol": "USDC",
+        "autonomous": false,
+        "payableNow": false
+      }
+    },
+    {
+      "id": "dimensional-consistency-check",
+      "status": "withheld",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/dimensional-consistency-check",
+      "method": "POST",
+      "description": "Multiply or divide two seven-component SI dimension vectors and compare with the expected output dimension. No unit conversion, formula validation, scale-factor inference or physical-model certification.",
+      "payableNow": false,
+      "blockedBy": [
+        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "5000",
+        "assetSymbol": "USDC",
+        "autonomous": false,
+        "payableNow": false
+      }
+    },
+    {
+      "id": "exact-interpolation-receipt",
+      "status": "withheld",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/exact-interpolation-receipt",
+      "method": "POST",
+      "description": "Interpolate between two integer-coordinate points with exact rational arithmetic and an integrity receipt. Refuses extrapolation and repeated nodes. Does not estimate measurement error or validate the interpolation model.",
+      "payableNow": false,
+      "blockedBy": [
+        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "5000",
+        "assetSymbol": "USDC",
+        "autonomous": false,
+        "payableNow": false
+      }
+    },
+    {
+      "id": "sampled-series-integration",
+      "status": "withheld",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/sampled-series-integration",
+      "method": "POST",
+      "description": "Apply the composite trapezoidal rule to 2-128 equally spaced integer samples. Returns an exact rational arithmetic result, declared units and an integrity receipt. No quadrature-error estimate or claim of an exact underlying integral.",
+      "payableNow": false,
+      "blockedBy": [
+        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "10000",
+        "assetSymbol": "USDC",
+        "autonomous": false,
+        "payableNow": false
+      }
+    },
+    {
+      "id": "evidence-conflict-comparator",
+      "status": "withheld",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/evidence-conflict-comparator",
+      "method": "POST",
+      "description": "Compare 2-20 caller-labelled observations of one claim, population and outcome. Returns opposing directions and explicitly excluded observations. No literature search, source inspection, consensus judgment or factual verification.",
+      "payableNow": false,
+      "blockedBy": [
+        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "10000",
+        "assetSymbol": "USDC",
+        "autonomous": false,
+        "payableNow": false
+      }
+    },
+    {
+      "id": "release-bound-evidence-packet",
+      "status": "withheld",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/release-bound-evidence-packet",
+      "method": "POST",
+      "description": "Deliver public source metadata and exact release bindings for one supported federation article at caller-pinned revisions. Uses the deployed repository snapshot, not a live registry probe. No private review material, full source text or expert certification.",
+      "payableNow": false,
+      "blockedBy": [
+        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "10000",
+        "assetSymbol": "USDC",
+        "autonomous": false,
+        "payableNow": false
+      }
+    },
+    {
+      "id": "tiruvaymoli-context-packet",
+      "status": "withheld",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/tiruvaymoli-context-packet",
+      "method": "POST",
+      "description": "Deliver one supported atlas unit as structured edition metadata, poetic context, bounded answers and links at a pinned registry digest. Public pages remain free. No translation full text, redistribution license, historical or theological certification.",
+      "payableNow": false,
+      "blockedBy": [
+        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "5000",
+        "assetSymbol": "USDC",
+        "autonomous": false,
+        "payableNow": false
+      }
+    },
+    {
+      "id": "astrology-experiment-plan-check",
+      "status": "withheld",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/astrology-experiment-plan-check",
+      "method": "POST",
+      "description": "Check one structured public or synthetic low-stakes experiment plan for timing, comparator, outcome and analysis declarations. Returns deficiencies and an integrity receipt. No registration, trusted timestamp, prediction, power analysis or scientific validation.",
+      "payableNow": false,
+      "blockedBy": [
+        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "10000",
+        "assetSymbol": "USDC",
+        "autonomous": false,
+        "payableNow": false
+      }
     }
   ],
   "terms": {

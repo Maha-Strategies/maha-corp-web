@@ -1,4 +1,7 @@
+import { MICRO_IDS, microPath } from './x402/micro-contracts.ts'
+
 export const SELF_MANAGED_KEY_ROUTES = new Set([
+  ...MICRO_IDS.map(microPath),
   '/api/v1/keys/generate',
   '/api/v1/keys/balance',
   '/api/v1/keys/checkout',
