@@ -16,6 +16,8 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
+    "test:x402-celestial": "node --experimental-strip-types --test test/x402-celestial-products.test.ts test/x402-celestial-payment.test.ts",
+    "benchmark:x402-celestial": "node --experimental-strip-types scripts/benchmark-celestial-x402.ts",
     "verify:navigator-client-bundle": "node --experimental-strip-types scripts/verify-navigator-client-bundle.ts",
     "compile:evidence-dossier-package": "node --experimental-strip-types scripts/compile-evidence-dossier-package.ts",
     "rehearse:evidence-dossier": "node --experimental-strip-types scripts/generate-semiconductor-dossier-rehearsal.ts",

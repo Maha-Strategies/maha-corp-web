@@ -1,7 +1,7 @@
 {
   "schema": "https://www.mahastrategies.com/schemas/agent-offers/v0.2",
   "version": "0.2.3",
-  "updatedAt": "2026-08-08T00:00:00.000Z",
+  "updatedAt": "2026-09-09T00:00:00.000Z",
   "provider": {
     "name": "Maha Strategies LLC",
     "url": "https://www.mahastrategies.com",
@@ -22,7 +22,10 @@
       "book-section-the-imagined-life",
       "book-section-the-volcanic-engine",
       "book-edition-the-imagined-life",
-      "book-edition-the-volcanic-engine"
+      "book-edition-the-volcanic-engine",
+      "celestial-position-snapshot",
+      "celestial-chart-evidence",
+      "celestial-vimshottari-timing"
     ],
     "offerSelectionGuide": "https://www.mahastrategies.com/.well-known/maha/offer-selection.json",
     "humanConfirmationScope": [
@@ -30,7 +33,7 @@
       "research-inquiries",
       "enterprise-onboarding"
     ],
-    "bindingCommitment": "Eleven bounded machine products accept autonomous x402 payment on Base Mainnet under their published terms. A live PAYMENT-REQUIRED challenge is the only proof an offer can be bought. Idempotent model-backed jobs validate request identity and input hashes before settlement and are resumable without another payment. The book-section products sell exact section retrieval; the complete-edition products sell one complete structured delivery with a non-exclusive internal machine-use licence. The public web editions remain free, and no book offer transfers copyright or grants redistribution, resale, or model-training rights. The GPU optimization capabilities are not x402 products. Stripe products require purchaser confirmation, and custom research or enterprise engagements require human scope review.",
+    "bindingCommitment": "Fourteen bounded machine products accept autonomous x402 payment on Base Mainnet under their published terms. A live PAYMENT-REQUIRED challenge is the only proof an offer can be bought. Idempotent model-backed jobs validate request identity and input hashes before settlement and are resumable without another payment. The book-section products sell exact section retrieval; the complete-edition products sell one complete structured delivery with a non-exclusive internal machine-use licence. The public web editions remain free, and no book offer transfers copyright or grants redistribution, resale, or model-training rights. The GPU optimization capabilities are not x402 products. Stripe products require purchaser confirmation, and custom research or enterprise engagements require human scope review.",
     "describedNotPayable": []
   },
   "credentialPolicy": {
@@ -59,6 +62,60 @@
     "registry": "https://mps.mahastrategies.com/v1/records"
   },
   "technicalCapabilities": [
+    {
+      "id": "celestial-position-snapshot",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/calculations/positions",
+      "method": "POST",
+      "description": "Calculate seven classical-body geocentric longitudes at one UTC instant in Tropical and versioned Lahiri Sidereal frames. Includes explicit conventions and a deterministic integrity receipt. Public or synthetic inputs only. No interpretations, forecasts, LLM calls, or predictive certification. Bodies and receipt digests are not stored.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "10000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "celestial-chart-evidence",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/calculations/chart",
+      "method": "POST",
+      "description": "Calculate one UTC chart with Tropical and Lahiri Sidereal positions, Sidereal whole-sign houses, mean nodes, geometric aspects and panchanga. Includes numerical limitations and a deterministic integrity receipt. Public or synthetic inputs only. No forecasting narrative, LLM calls or predictive certification. Bodies and receipt digests are not stored.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "50000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "celestial-vimshottari-timing",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/calculations/vimshottari",
+      "method": "POST",
+      "description": "Calculate Vimshottari birth balance, nine mahadashas and nine antardashas of the active mahadasha at one reference instant. Uses actual nakshatra stay time and a 365.2425-day year. Includes conventions and deterministic receipt. Public or synthetic inputs only. No event prediction, interpretation or LLM calls. Bodies and receipt digests are not stored.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "100000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
     {
       "id": "context-compression",
       "name": "Context Compression",
@@ -95,8 +152,19 @@
       "endpoint": "https://www.mahastrategies.com/api/v1/context/budget-ladder",
       "method": "POST",
       "methodBoundary": "Exactly five deterministic extractive Context Packs at five caller-declared ascending budgets. No model inference, source acquisition, claim verification, completeness guarantee, or answer-quality assessment.",
-      "retention": { "sourceTextStored": false, "compiledContextStored": false },
-      "machinePayment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "asset": "USDC", "amount": "5000", "displayAmount": "0.005 USDC", "payableNow": true },
+      "retention": {
+        "sourceTextStored": false,
+        "compiledContextStored": false
+      },
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "amount": "5000",
+        "displayAmount": "0.005 USDC",
+        "payableNow": true
+      },
       "payableNow": true
     },
     {
@@ -132,8 +200,20 @@
       "endpoint": "https://www.mahastrategies.com/api/v1/context/evidence-matrix",
       "method": "POST",
       "methodBoundary": "Five exact-span retention evaluations across five caller-declared budgets. Retention is not truth, factual accuracy, answer quality, legal compliance, or hallucination prevention.",
-      "retention": { "sourceTextStored": false, "compiledContextStored": false, "requiredEvidenceTextStored": false },
-      "machinePayment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "asset": "USDC", "amount": "50000", "displayAmount": "0.05 USDC", "payableNow": true },
+      "retention": {
+        "sourceTextStored": false,
+        "compiledContextStored": false,
+        "requiredEvidenceTextStored": false
+      },
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "amount": "50000",
+        "displayAmount": "0.05 USDC",
+        "payableNow": true
+      },
       "payableNow": true
     },
     {
@@ -171,8 +251,20 @@
       "endpoint": "https://www.mahastrategies.com/api/v1/context/governed-verification",
       "method": "POST",
       "methodBoundary": "One machine-generated context-control evidence packet with exact-span retention, policy and budget observations, integrity hashes, and a deterministic receipt. Not factual or compliance certification, human judgment, or proof of downstream behavior.",
-      "retention": { "sourceTextStored": false, "compiledContextStored": false, "requiredEvidenceTextStored": false },
-      "machinePayment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "asset": "USDC", "amount": "500000", "displayAmount": "0.50 USDC", "payableNow": true },
+      "retention": {
+        "sourceTextStored": false,
+        "compiledContextStored": false,
+        "requiredEvidenceTextStored": false
+      },
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "amount": "500000",
+        "displayAmount": "0.50 USDC",
+        "payableNow": true
+      },
       "payableNow": true
     },
     {
@@ -212,9 +304,23 @@
       "endpoint": "https://www.mahastrategies.com/api/v1/books/the-imagined-life/section",
       "method": "POST",
       "methodBoundary": "Returns one exact, already-published section of The Imagined Life with edition metadata, a content commitment, and a deterministic receipt. Payment purchases structured machine delivery, not exclusive access, copyright, analysis, factual certification, or a recommendation.",
-      "inputBounds": { "sectionId": "one published section slug", "maxRequestBytes": 1024 },
-      "retention": { "requestStored": false, "deliveredSectionStored": false },
-      "machinePayment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "asset": "USDC", "amount": "5000", "displayAmount": "0.005 USDC", "payableNow": true },
+      "inputBounds": {
+        "sectionId": "one published section slug",
+        "maxRequestBytes": 1024
+      },
+      "retention": {
+        "requestStored": false,
+        "deliveredSectionStored": false
+      },
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "amount": "5000",
+        "displayAmount": "0.005 USDC",
+        "payableNow": true
+      },
       "payableNow": true
     },
     {
@@ -223,9 +329,23 @@
       "endpoint": "https://www.mahastrategies.com/api/v1/books/the-volcanic-engine/section",
       "method": "POST",
       "methodBoundary": "Returns one exact, already-published section of The Volcanic Engine with edition metadata, a content commitment, and a deterministic receipt. Payment purchases structured machine delivery, not exclusive access, copyright, analysis, factual certification, or a recommendation.",
-      "inputBounds": { "sectionId": "one published section slug", "maxRequestBytes": 1024 },
-      "retention": { "requestStored": false, "deliveredSectionStored": false },
-      "machinePayment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "asset": "USDC", "amount": "5000", "displayAmount": "0.005 USDC", "payableNow": true },
+      "inputBounds": {
+        "sectionId": "one published section slug",
+        "maxRequestBytes": 1024
+      },
+      "retention": {
+        "requestStored": false,
+        "deliveredSectionStored": false
+      },
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "amount": "5000",
+        "displayAmount": "0.005 USDC",
+        "payableNow": true
+      },
       "payableNow": true
     },
     {
@@ -234,9 +354,23 @@
       "endpoint": "https://www.mahastrategies.com/api/v1/books/the-imagined-life/edition",
       "method": "POST",
       "methodBoundary": "Returns the complete normalized Markdown edition of The Imagined Life with an ordered section manifest, per-section and whole-edition SHA-256 commitments, and a deterministic receipt. Purchase grants non-exclusive personal or internal machine use; it does not grant redistribution, resale, model-training rights, or copyright ownership.",
-      "inputBounds": { "body": "empty JSON object", "maxRequestBytes": 1024 },
-      "retention": { "requestStored": false, "deliveredEditionStored": false },
-      "machinePayment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "asset": "USDC", "amount": "2990000", "displayAmount": "2.99 USDC", "payableNow": true },
+      "inputBounds": {
+        "body": "empty JSON object",
+        "maxRequestBytes": 1024
+      },
+      "retention": {
+        "requestStored": false,
+        "deliveredEditionStored": false
+      },
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "amount": "2990000",
+        "displayAmount": "2.99 USDC",
+        "payableNow": true
+      },
       "payableNow": true
     },
     {
@@ -245,9 +379,23 @@
       "endpoint": "https://www.mahastrategies.com/api/v1/books/the-volcanic-engine/edition",
       "method": "POST",
       "methodBoundary": "Returns the complete normalized Markdown edition of The Volcanic Engine with an ordered section manifest, per-section and whole-edition SHA-256 commitments, and a deterministic receipt. Purchase grants non-exclusive personal or internal machine use; it does not grant redistribution, resale, model-training rights, or copyright ownership.",
-      "inputBounds": { "body": "empty JSON object", "maxRequestBytes": 1024 },
-      "retention": { "requestStored": false, "deliveredEditionStored": false },
-      "machinePayment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "asset": "USDC", "amount": "2990000", "displayAmount": "2.99 USDC", "payableNow": true },
+      "inputBounds": {
+        "body": "empty JSON object",
+        "maxRequestBytes": 1024
+      },
+      "retention": {
+        "requestStored": false,
+        "deliveredEditionStored": false
+      },
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "amount": "2990000",
+        "displayAmount": "2.99 USDC",
+        "payableNow": true
+      },
       "payableNow": true
     },
     {
@@ -367,7 +515,7 @@
         "Any deadline, known constraints, and relevant context."
       ],
       "deliverables": [
-        "A 2\u20133 page decision-ready memo.",
+        "A 2–3 page decision-ready memo.",
         "Key evidence and links to public or authorized sources used.",
         "Explicit assumptions, material uncertainty, and decision implications."
       ],
@@ -407,7 +555,7 @@
         "Known constraints, required sources, and timing."
       ],
       "deliverables": [
-        "A 10\u201315 page research synthesis for decision-makers.",
+        "A 10–15 page research synthesis for decision-makers.",
         "An evidence layer with MPS claim-status tags and linked citations.",
         "One revision round."
       ],

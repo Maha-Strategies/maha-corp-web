@@ -12,6 +12,11 @@ export const SELF_MANAGED_KEY_ROUTES = new Set([
   // Removing this entry does not fail loudly: every callback would 401 and
   // every job would silently expire at its deadline.
   '/api/v1/jobs/webhook',
+  // These exact routes own their x402 boundary. Enterprise keys are rejected
+  // there before any credit consumption; GET is free contract discovery.
+  '/api/v1/calculations/positions',
+  '/api/v1/calculations/chart',
+  '/api/v1/calculations/vimshottari',
 ])
 
 /**

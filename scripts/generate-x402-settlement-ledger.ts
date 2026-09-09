@@ -19,7 +19,7 @@ import { createPublicClient, http, parseAbiItem } from 'viem'
 import { base } from 'viem/chains'
 
 import { BASE_USDC, MAHA_PAYEE, OPERATOR_WALLETS } from '../lib/x402/discovery-payment-recipe.ts'
-import { X402_OFFERS } from '../lib/x402/offers.ts'
+import { payableOffers } from '../lib/x402/offers.ts'
 import { buildLedger, type OfferPrice } from '../lib/x402/settlement-ledger.ts'
 
 const OUT = 'content/x402/settlement-ledger.json'
@@ -75,7 +75,7 @@ for (let from = earliest; from <= latest; from += CHUNK + BigInt(1)) {
 }
 
 /** Block timestamps, fetched only for rows that will be displayed. */
-const priced = new Set(X402_OFFERS.map((o) => BigInt(o.amount)))
+const priced = new Set(payableOffers().map((o) => BigInt(o.amount)))
 const blocks = [...new Set(rows.filter((r) => priced.has(r.amountBaseUnits)).map((r) => r.blockNumber))]
 const timestamps = new Map<bigint, string>()
 for (const blockNumber of blocks) {
@@ -84,7 +84,7 @@ for (const blockNumber of blocks) {
 }
 for (const row of rows) row.timestampUtc = timestamps.get(row.blockNumber) ?? null
 
-const offers: OfferPrice[] = X402_OFFERS.map((o) => ({
+const offers: OfferPrice[] = payableOffers().map((o) => ({
   id: o.id,
   // serviceName is shared across offers from one service, so two products both
   // read as "Maha Context Compiler". The id distinguishes them. Known acronyms

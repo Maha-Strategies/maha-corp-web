@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "configurationAsOf": "2026-09-06",
+  "configurationAsOf": "2026-09-09",
   "provider": {
     "name": "Maha Strategies LLC",
     "url": "https://www.mahastrategies.com"
@@ -460,6 +460,138 @@
         "Does not grant redistribution, resale, republication, model-training rights, or copyright ownership.",
         "No editorial analysis, factual certification, source verification, recommendation, or model inference is included.",
         "The complete edition is delivered in the paid response; a later request is a separate purchase."
+      ]
+    },
+    {
+      "id": "celestial-position-snapshot",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/calculations/positions",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "10000",
+        "displayAmount": "0.010000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/celestial-position-snapshot#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/celestial-position-snapshot#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:09f72b200352ba6fc03aa809af8c84d610b22cc92b65749547a45b09bc50c878",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 2048,
+        "concurrencyCap": 4,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "Request bodies, result bodies and their digests are not persisted by this service. Birth data must not be put in URLs or payment metadata. v0.1 accepts public or synthetic inputs only. Save the returned payload locally; this stateless service has no stored result recovery after network loss."
+      },
+      "capabilityBoundaries": [
+        "Calculation and convention evidence only; no forecasting narrative, interpretation, recommendation, or predictive certification.",
+        "Frames are returned separately, never averaged. Lahiri is this versioned implementation, not a claim of exact Swiss equivalence.",
+        "Conformance is bounded to a reference corpus, not a global accuracy guarantee. Classifications near boundaries are sensitive to input and numerical uncertainty.",
+        "Motion labels use a 24-hour difference, not exact station times. No event-window solver is included.",
+        "Timing includes the first nine mahadashas and the nine antardashas of the active mahadasha at one reference instant; not every subperiod in a date range.",
+        "Input and result digests are private response fields, not anonymization. Keep this receipt private when inputs could identify someone.",
+        "Unsigned digests verify integrity against a trusted copy, not origin, settlement, delivery to another buyer, or scientific predictive validity."
+      ]
+    },
+    {
+      "id": "celestial-chart-evidence",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/calculations/chart",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "50000",
+        "displayAmount": "0.050000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/celestial-chart-evidence#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/celestial-chart-evidence#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:1561f570ac03072c3a2141a66ae70d79f8a4f008e1bb8521ac810927290a4093",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 2048,
+        "concurrencyCap": 4,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "Request bodies, result bodies and their digests are not persisted by this service. Birth data must not be put in URLs or payment metadata. v0.1 accepts public or synthetic inputs only. Save the returned payload locally; this stateless service has no stored result recovery after network loss."
+      },
+      "capabilityBoundaries": [
+        "Calculation and convention evidence only; no forecasting narrative, interpretation, recommendation, or predictive certification.",
+        "Frames are returned separately, never averaged. Lahiri is this versioned implementation, not a claim of exact Swiss equivalence.",
+        "Conformance is bounded to a reference corpus, not a global accuracy guarantee. Classifications near boundaries are sensitive to input and numerical uncertainty.",
+        "Motion labels use a 24-hour difference, not exact station times. No event-window solver is included.",
+        "Timing includes the first nine mahadashas and the nine antardashas of the active mahadasha at one reference instant; not every subperiod in a date range.",
+        "Input and result digests are private response fields, not anonymization. Keep this receipt private when inputs could identify someone.",
+        "Unsigned digests verify integrity against a trusted copy, not origin, settlement, delivery to another buyer, or scientific predictive validity."
+      ]
+    },
+    {
+      "id": "celestial-vimshottari-timing",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/calculations/vimshottari",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "100000",
+        "displayAmount": "0.100000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/celestial-vimshottari-timing#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/celestial-vimshottari-timing#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:83f3d3172472796741b4e4a05da65442dc0b9209e553531fc45af8fc0a2daf05",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 2048,
+        "concurrencyCap": 4,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "Request bodies, result bodies and their digests are not persisted by this service. Birth data must not be put in URLs or payment metadata. v0.1 accepts public or synthetic inputs only. Save the returned payload locally; this stateless service has no stored result recovery after network loss."
+      },
+      "capabilityBoundaries": [
+        "Calculation and convention evidence only; no forecasting narrative, interpretation, recommendation, or predictive certification.",
+        "Frames are returned separately, never averaged. Lahiri is this versioned implementation, not a claim of exact Swiss equivalence.",
+        "Conformance is bounded to a reference corpus, not a global accuracy guarantee. Classifications near boundaries are sensitive to input and numerical uncertainty.",
+        "Motion labels use a 24-hour difference, not exact station times. No event-window solver is included.",
+        "Timing includes the first nine mahadashas and the nine antardashas of the active mahadasha at one reference instant; not every subperiod in a date range.",
+        "Input and result digests are private response fields, not anonymization. Keep this receipt private when inputs could identify someone.",
+        "Unsigned digests verify integrity against a trusted copy, not origin, settlement, delivery to another buyer, or scientific predictive validity."
       ]
     }
   ],

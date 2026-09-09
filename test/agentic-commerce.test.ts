@@ -135,7 +135,7 @@ test('public agent discovery identifies live capabilities and the scoped Context
       payment?: { protocol: string; version: number; network: string; amount: string; assetSymbol: string; autonomous: boolean }
     }>
   }
-  assert.equal(offers.updatedAt, '2026-08-08T00:00:00.000Z')
+  assert.equal(offers.updatedAt, '2026-09-09T00:00:00.000Z')
   assert.equal(offers.transactionPolicy.autonomousPaymentSupported, true)
   // Only what is payable today. Deep Context is in preview and the MPS audit
   // an agent that reads this list must be able to act on it without checking
@@ -154,6 +154,9 @@ test('public agent discovery identifies live capabilities and the scoped Context
     X402_OFFERS.filter((offer) => offer.status !== 'available').map((offer) => offer.id).sort(),
   )
   const expected = [
+    'celestial-position-snapshot',
+    'celestial-chart-evidence',
+    'celestial-vimshottari-timing',
     'context-compression',
     'context-budget-ladder',
     'deep-context-evaluation',

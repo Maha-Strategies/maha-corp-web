@@ -1,7 +1,7 @@
 import { createPublicClient, http, parseAbiItem } from 'viem'
 import { base } from 'viem/chains'
 import { BASE_USDC, MAHA_PAYEE, OPERATOR_WALLETS } from './discovery-payment-recipe.ts'
-import { X402_OFFERS } from './offers.ts'
+import { payableOffers } from './offers.ts'
 import { buildLedger, type SettlementLedger } from './settlement-ledger.ts'
 
 export type Transfer = { payer: string; amountBaseUnits: bigint; blockNumber: bigint; transactionHash: string; logIndex: number }
@@ -47,7 +47,7 @@ export function baseSettlementReader(options: { timeout?: number; retryCount?: n
 export function ledgerFromRows(rows: Parameters<typeof buildLedger>[0]['settlements'], fromBlock: bigint, toBlock: bigint, observedAt: string) {
   return buildLedger({ settlements: rows, fromBlock, toBlock, observedAt,
     operatorWallets: [...OPERATOR_WALLETS, MAHA_PAYEE],
-    offers: X402_OFFERS.map((offer) => ({ id: offer.id, title: offer.id.split('-').map((word) => word[0].toUpperCase() + word.slice(1)).join(' '), amountBaseUnits: BigInt(offer.amount) })),
+    offers: payableOffers().map((offer) => ({ id: offer.id, title: offer.id.split('-').map((word) => word[0].toUpperCase() + word.slice(1)).join(' '), amountBaseUnits: BigInt(offer.amount) })),
   })
 }
 

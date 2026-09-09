@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto'
 import { bazaarResourceServerExtension, declareDiscoveryExtension, validateDiscoveryExtension } from '@x402/extensions/bazaar'
 import { offerById } from './offers.ts'
+import { isCelestialProduct, verifyCelestialProduct } from './celestial-products.ts'
 
 export const bytesDigest = (bytes: Uint8Array | string): string =>
   `sha256:${createHash('sha256').update(bytes).digest('hex')}`
@@ -105,6 +106,9 @@ export function checkBuyerDelivery(input: {
     state = 'pending'; return report()
   }
   if (!validate(response)) problems.push('response_schema_mismatch')
+  // Calculation receipts additionally support a local deterministic replay.
+  // This is not an independent proof of receipt by a remote buyer.
+  if (isCelestialProduct(offer.id) && !verifyCelestialProduct(offer.id, request, response)) problems.push('calculation_receipt_or_recomputation_mismatch')
   if (offer.id === 'mps-autonomous-audit' && (response.status !== 'completed' || !object(response.audit))) problems.push('audit_not_completed')
   if (offer.id === 'research-intake-evidence-pack') {
     const progress = response.progress
