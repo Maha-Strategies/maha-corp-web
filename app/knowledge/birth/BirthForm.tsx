@@ -223,6 +223,23 @@ function ChartStructure({ report }: { report: BirthReport }) {
         ) : <p className="mt-4 text-sm text-zinc-500">No relationship falls inside the declared aspect orbs.</p>}
       </div>
 
+      <div className="mt-8 border-l-[3px] border-amber-700/70 bg-amber-950/10 p-5">
+        <div className="flex flex-wrap items-baseline justify-between gap-3">
+          <p className={LABEL}>Modern outer planets · outside the classical chart</p>
+          <span className="border border-amber-700/40 bg-amber-500/10 px-2 py-1 font-mono text-[9px] uppercase tracking-widest text-amber-300">Not grahas</span>
+        </div>
+        <p className="mt-3 max-w-3xl text-xs leading-5 text-zinc-400">Uranus, Neptune and Pluto are computed from the same ephemeris and shown for reference. They take no part in the chart above: they occupy no house, rule no sign, form none of the listed aspects, and never enter the Vimśottarī sequence. Their positions are also outside the public-authority conformance corpus, which fixes reference longitudes for the seven classical grahas only.</p>
+        <div className="mt-4 grid gap-2 sm:grid-cols-3">
+          {chart.modernPoints.map((point) => (
+            <div key={point.name} className="border border-zinc-800 bg-black/30 px-4 py-3">
+              <p className="text-sm text-white">{point.name}</p>
+              <p className="mt-1 text-xs text-zinc-400">{point.sidereal.sign} {compactDegrees(point.sidereal.degreeInSign)}</p>
+              <p className="mt-1 font-mono text-[10px] text-zinc-600">{point.motion}{point.nakshatra ? ` · ${point.nakshatra.name}` : ''}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <details className="mt-8 border-t border-zinc-800 pt-5">
         <summary className="cursor-pointer font-mono text-[10px] uppercase tracking-widest text-zinc-400">All twelve house rulers and occupants</summary>
         <div className="mt-4 overflow-x-auto">
