@@ -65,6 +65,9 @@ test('every route belongs to one declared visual system', () => {
   // 68 -> 70: federation mythology and religion source-guide families inherit Knowledge.
   // The developer clearing family delegates to the shared bounded guide renderer,
   // moving paper 112 -> 113 without introducing another visual system.
+  // paper 113 -> 114: /context-control, the dedicated landing page for the
+  // context-control evidence assessment. It owns the paper boundary directly
+  // rather than delegating, so no new renderer or visual system is introduced.
   // join the Knowledge group and its bounded cyber-light overlay. books 38 -> 41 arrives with the
   // eighth open book; the KDP maintenance boundary removes two reader routes,
   // and the two approved reader FAQ routes restore the group to 41. Every other
@@ -77,7 +80,10 @@ test('every route belongs to one declared visual system', () => {
   // evidence-page renderer and therefore introduce no second visual system.
   // paper 122 -> 124: the Policy front door and its dynamic discovery index
   // both own the existing evidence-page visual boundary.
-  assert.deepEqual(groups, { paper: 124, apps: 6, books: 41, docs: 1, knowledge: 70, intelligence: 2, operator: 32, internal: 1 })
+  // paper 124 -> 125: /context-control, the dedicated landing page for the
+  // context-control evidence assessment. It owns the paper boundary directly
+  // rather than delegating, so no new renderer or visual system is introduced.
+  assert.deepEqual(groups, { paper: 125, apps: 6, books: 41, docs: 1, knowledge: 70, intelligence: 2, operator: 32, internal: 1 })
 })
 
 test('Apps, Books, Docs, Knowledge, and Intelligence own bounded cyber-light overlays', () => {

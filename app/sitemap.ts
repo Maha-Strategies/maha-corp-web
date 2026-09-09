@@ -206,6 +206,7 @@ export async function currentHostSitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/navigator`, lastModified: new Date('2026-08-09') },
     { url: `${baseUrl}/developers`, lastModified: new Date('2026-08-06') },
     { url: `${baseUrl}/pricing`, lastModified: new Date('2026-08-23') },
+    { url: `${baseUrl}/context-control`, lastModified: new Date('2026-09-09') },
     { url: `${baseUrl}/terms`, lastModified: new Date('2026-08-27') },
     { url: `${baseUrl}/terms/physical-goods`, lastModified: new Date('2026-08-27') },
     { url: `${baseUrl}/agent-infrastructure-compatibility-pack`, lastModified: new Date('2026-08-11') },
