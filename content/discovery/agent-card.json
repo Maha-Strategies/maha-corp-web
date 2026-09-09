@@ -1,7 +1,7 @@
 {
   "schema": "https://www.mahastrategies.com/schemas/inbound-agent-card/v0.2",
   "version": "0.2.3",
-  "updatedAt": "2026-08-08T00:00:00.000Z",
+  "updatedAt": "2026-09-09T00:00:00.000Z",
   "name": "Maha Strategies Inbound Gatekeeper",
   "url": "https://www.mahastrategies.com/inbound",
   "submissionEndpoint": "https://www.mahastrategies.com/api/inbound-submissions",
@@ -20,6 +20,60 @@
     "description": "Machine-readable Maha offer selection guide: which x402 offer to call, or neither."
   },
   "capabilities": [
+    {
+      "id": "celestial-position-snapshot",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/calculations/positions",
+      "method": "POST",
+      "description": "Calculate seven classical-body geocentric longitudes at one UTC instant in Tropical and versioned Lahiri Sidereal frames. Includes explicit conventions and a deterministic integrity receipt. Public or synthetic inputs only. No interpretations, forecasts, LLM calls, or predictive certification. Bodies and receipt digests are not stored.",
+      "payableNow": true,
+      "blockedBy": [],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "10000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "celestial-chart-evidence",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/calculations/chart",
+      "method": "POST",
+      "description": "Calculate one UTC chart with Tropical and Lahiri Sidereal positions, Sidereal whole-sign houses, mean nodes, geometric aspects and panchanga. Includes numerical limitations and a deterministic integrity receipt. Public or synthetic inputs only. No forecasting narrative, LLM calls or predictive certification. Bodies and receipt digests are not stored.",
+      "payableNow": true,
+      "blockedBy": [],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "50000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "celestial-vimshottari-timing",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/calculations/vimshottari",
+      "method": "POST",
+      "description": "Calculate Vimshottari birth balance, nine mahadashas and nine antardashas of the active mahadasha at one reference instant. Uses actual nakshatra stay time and a 365.2425-day year. Includes conventions and deterministic receipt. Public or synthetic inputs only. No event prediction, interpretation or LLM calls. Bodies and receipt digests are not stored.",
+      "payableNow": true,
+      "blockedBy": [],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "100000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
     {
       "id": "context-compression",
       "status": "available_with_api_key_or_x402",
@@ -42,7 +96,14 @@
       "status": "available_for_autonomous_payment",
       "endpoint": "https://www.mahastrategies.com/api/v1/context/budget-ladder",
       "provides": "five deterministic source-linked Context Packs at five ascending token budgets",
-      "payment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "amount": "5000", "assetSymbol": "USDC", "autonomous": true },
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "5000",
+        "assetSymbol": "USDC",
+        "autonomous": true
+      },
       "payableNow": true,
       "retention": "Request and response bodies are not stored."
     },
@@ -72,7 +133,14 @@
       "status": "available_for_autonomous_payment",
       "endpoint": "https://www.mahastrategies.com/api/v1/context/evidence-matrix",
       "provides": "five exact-span evidence-retention evaluations and a budget frontier",
-      "payment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "amount": "50000", "assetSymbol": "USDC", "autonomous": true },
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "50000",
+        "assetSymbol": "USDC",
+        "autonomous": true
+      },
       "payableNow": true,
       "retention": "Documents, evidence spans, compiled packs, and response bodies are not stored."
     },
@@ -104,7 +172,14 @@
       "status": "available_for_autonomous_payment",
       "endpoint": "https://www.mahastrategies.com/api/v1/context/governed-verification",
       "provides": "a machine-readable context-control evidence packet with policy, budget, integrity, and receipt fields",
-      "payment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "amount": "500000", "assetSymbol": "USDC", "autonomous": true },
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "500000",
+        "assetSymbol": "USDC",
+        "autonomous": true
+      },
       "payableNow": true,
       "retention": "Documents, evidence spans, compiled packs, and response bodies are not stored."
     },
@@ -139,8 +214,21 @@
       "status": "available_for_autonomous_payment",
       "endpoint": "https://www.mahastrategies.com/api/v1/books/the-imagined-life/section",
       "provides": "one exact machine-readable section of The Imagined Life with integrity metadata and a deterministic receipt",
-      "notProvided": ["exclusive access", "copyright transfer", "editorial analysis", "factual certification", "recommendation"],
-      "payment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "amount": "5000", "assetSymbol": "USDC", "autonomous": true },
+      "notProvided": [
+        "exclusive access",
+        "copyright transfer",
+        "editorial analysis",
+        "factual certification",
+        "recommendation"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "5000",
+        "assetSymbol": "USDC",
+        "autonomous": true
+      },
       "payableNow": true,
       "retention": "The request and delivered section are returned transiently and are not stored by this endpoint."
     },
@@ -149,8 +237,21 @@
       "status": "available_for_autonomous_payment",
       "endpoint": "https://www.mahastrategies.com/api/v1/books/the-volcanic-engine/section",
       "provides": "one exact machine-readable section of The Volcanic Engine with integrity metadata and a deterministic receipt",
-      "notProvided": ["exclusive access", "copyright transfer", "editorial analysis", "factual certification", "recommendation"],
-      "payment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "amount": "5000", "assetSymbol": "USDC", "autonomous": true },
+      "notProvided": [
+        "exclusive access",
+        "copyright transfer",
+        "editorial analysis",
+        "factual certification",
+        "recommendation"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "5000",
+        "assetSymbol": "USDC",
+        "autonomous": true
+      },
       "payableNow": true,
       "retention": "The request and delivered section are returned transiently and are not stored by this endpoint."
     },
@@ -159,8 +260,23 @@
       "status": "available_for_autonomous_payment",
       "endpoint": "https://www.mahastrategies.com/api/v1/books/the-imagined-life/edition",
       "provides": "the complete normalized Markdown edition of The Imagined Life with an ordered section manifest and deterministic receipt",
-      "notProvided": ["exclusive access", "redistribution or resale rights", "model-training rights", "copyright transfer", "editorial analysis", "factual certification", "recommendation"],
-      "payment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "amount": "2990000", "assetSymbol": "USDC", "autonomous": true },
+      "notProvided": [
+        "exclusive access",
+        "redistribution or resale rights",
+        "model-training rights",
+        "copyright transfer",
+        "editorial analysis",
+        "factual certification",
+        "recommendation"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "2990000",
+        "assetSymbol": "USDC",
+        "autonomous": true
+      },
       "payableNow": true,
       "retention": "The request and complete delivered edition are returned transiently and are not stored by this endpoint."
     },
@@ -169,8 +285,23 @@
       "status": "available_for_autonomous_payment",
       "endpoint": "https://www.mahastrategies.com/api/v1/books/the-volcanic-engine/edition",
       "provides": "the complete normalized Markdown edition of The Volcanic Engine with an ordered section manifest and deterministic receipt",
-      "notProvided": ["exclusive access", "redistribution or resale rights", "model-training rights", "copyright transfer", "editorial analysis", "factual certification", "recommendation"],
-      "payment": { "protocol": "x402", "version": 2, "network": "eip155:8453", "amount": "2990000", "assetSymbol": "USDC", "autonomous": true },
+      "notProvided": [
+        "exclusive access",
+        "redistribution or resale rights",
+        "model-training rights",
+        "copyright transfer",
+        "editorial analysis",
+        "factual certification",
+        "recommendation"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "2990000",
+        "assetSymbol": "USDC",
+        "autonomous": true
+      },
       "payableNow": true,
       "retention": "The request and complete delivered edition are returned transiently and are not stored by this endpoint."
     },

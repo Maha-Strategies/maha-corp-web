@@ -108,7 +108,10 @@ test('only routes that actually release their slot can be priced', () => {
     assert.equal(releasesSlot(offer.method, offer.path), true, `${offer.id} must be in the slot-release allowlist`)
   }
   for (const offer of X402_OFFERS.filter((candidate) => candidate.status !== 'available')) {
-    assert.equal(releasesSlot(offer.method, offer.path), false, `${offer.id} is not implemented and must not be in the slot-release allowlist`)
+    // Implementation and publication are different gates. The calculation
+    // handlers release slots but remain withheld until preview/release review.
+    const implementedWithheld = ['celestial-position-snapshot', 'celestial-chart-evidence', 'celestial-vimshottari-timing'].includes(offer.id)
+    assert.equal(releasesSlot(offer.method, offer.path), implementedWithheld, `${offer.id} slot-release implementation`)
   }
   // The allowlist is exact, so a listed route does not vouch for its children.
   assert.equal(releasesSlot('POST', '/api/v1/mps/audit/audit_abc'), false)

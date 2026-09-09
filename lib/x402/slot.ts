@@ -89,6 +89,10 @@ export const SLOT_RELEASING_ROUTES = [
   'POST /api/v1/books/the-volcanic-engine/section',
   'POST /api/v1/books/the-imagined-life/edition',
   'POST /api/v1/books/the-volcanic-engine/edition',
+  // Route-owned payment gate releases the returned slot in finally.
+  'POST /api/v1/calculations/positions',
+  'POST /api/v1/calculations/chart',
+  'POST /api/v1/calculations/vimshottari',
 ] as const
 
 /**

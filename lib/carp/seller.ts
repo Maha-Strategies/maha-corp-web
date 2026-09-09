@@ -18,6 +18,7 @@ import {
   type X402Offer,
 } from '../x402/offers.ts'
 import { configuredIdentity, MAHA_CARP_DID_URL, MAHA_CARP_SAD_URL, MAHA_CARP_URL } from './identity.ts'
+import { CELESTIAL_OFFERS } from '../x402/celestial-offers.ts'
 
 export const CARP_SELLER_ROLE_URL = 'https://www.mahastrategies.com/.well-known/carp/seller-role.json'
 export const MAHA_CARP_SELLER_URL = 'https://www.mahastrategies.com/.well-known/carp/seller.json'
@@ -126,6 +127,15 @@ const DIGITAL_OFFER_SPECS = Object.freeze([
     deliveryDeadlineSeconds: 30,
     termsUrl: `${SITE_URL}/books/the-volcanic-engine`,
   },
+  ...CELESTIAL_OFFERS.map(offer => ({
+    offeringRef: `maha:${offer.id}:v0.1`,
+    title: offer.serviceName + ' — ' + offer.id.replace('celestial-', '').replaceAll('-', ' '),
+    amount: (Number(offer.amount) / 1_000_000).toFixed(2),
+    offer,
+    estimatedSeconds: 5,
+    deliveryDeadlineSeconds: 30,
+    termsUrl: `${SITE_URL}${offer.path}`,
+  })),
 ] as const)
 
 type DigitalOfferSpec = (typeof DIGITAL_OFFER_SPECS)[number]
@@ -490,6 +500,9 @@ function containsAnyTokenPhrase(terms: string, candidates: readonly string[]) {
 function enquiryMatchesDigital(offeringRef: string, terms: string) {
   if (!terms) return true
   if (containsAnyTokenPhrase(terms, ['digital', 'ai', 'machine payable', 'x402'])) return true
+  if (offeringRef.startsWith('maha:celestial-')) {
+    return containsAnyTokenPhrase(terms, ['astronomy', 'celestial', 'tropical', 'sidereal', 'lahiri', 'vimshottari', 'panchanga', 'chart calculation'])
+  }
   if (offeringRef === 'maha:context-compression:v1') {
     return containsAnyTokenPhrase(terms, ['compression', 'compress', 'token budget', 'context pack', 'deduplicate', 'rag context'])
   }

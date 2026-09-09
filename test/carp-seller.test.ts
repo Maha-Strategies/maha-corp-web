@@ -49,7 +49,7 @@ test('the public Seller role mirrors the adopted upstream v0.2 contract', () => 
   assert.deepEqual(role.fulfillmentDescriptor.modes, ['physical', 'digital', 'hybrid'])
 })
 
-test('the Maha seller maps all eleven payable products to the adopted digital offering shape', () => {
+test('the Maha seller maps all fourteen payable products to the adopted digital offering shape', () => {
   assert.equal(mahaCarpSellerProfile.schemaVersion, '0.1.3')
   assert.equal(mahaCarpSellerProfile.roleContract, CABEZON_SELLER_ROLE_URL)
   assert.equal(mahaCarpSellerProfile.roleMirror, CARP_SELLER_ROLE_URL)
@@ -80,7 +80,7 @@ test('the Maha seller maps all eleven payable products to the adopted digital of
     ['maha:book-edition:the-imagined-life:v0.1', '2.99', IMAGINED_LIFE_EDITION_OFFER],
     ['maha:book-edition:the-volcanic-engine:v0.1', '2.99', VOLCANIC_ENGINE_EDITION_OFFER],
   ] as const
-  assert.equal(MAHA_CARP_DIGITAL_OFFERS.length, 11)
+  assert.equal(MAHA_CARP_DIGITAL_OFFERS.length, 14)
   for (const [offeringRef, amount, x402] of expected) {
     const offer = MAHA_CARP_DIGITAL_OFFERS.find((candidate) => candidate.offeringRef === offeringRef)
     assert.ok(offer)
@@ -111,7 +111,7 @@ test('enquiry returns the canonical offering array for compatible needs', () => 
   assert.ok('result' in matched)
   assert.deepEqual(
     (matched as { result: Array<{ offeringRef: string }> }).result.map((offer) => offer.offeringRef),
-    MAHA_CARP_DIGITAL_OFFERS.map((offer) => offer.offeringRef),
+    MAHA_CARP_DIGITAL_OFFERS.filter((offer) => !offer.offeringRef.startsWith('maha:celestial-')).map((offer) => offer.offeringRef),
   )
 
   const unrelated = handleCarpSellerRequest({

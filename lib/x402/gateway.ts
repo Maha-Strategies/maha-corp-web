@@ -1,5 +1,5 @@
 import { priceFor, requirementFor, x402Config, type X402Config } from './config.ts'
-import { acquireSlot } from './concurrency.ts'
+import { acquireSlot, releaseSlot, type SlotResult } from './concurrency.ts'
 import { createFacilitator } from './facilitator.ts'
 import {
   PAYMENT_REQUIRED_HEADER,
@@ -51,6 +51,7 @@ type Dependencies = {
   facilitator?: PaymentFacilitator
   ledger?: Parameters<typeof createReplayGuard>[0] | null
   acquire?: typeof acquireSlot
+  release?: typeof releaseSlot
   confirmOnChain?: SettlementConfirmer
   /** Test seam for the pre-settlement idempotency store. */
   admissionLedger?: Parameters<typeof createAdmissionGuard>[1]
@@ -160,16 +161,36 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
     admissionGuard = guard
   }
 
-  const accepted = await acceptPayment({
+  // The bounded, synchronous calculation offers reserve capacity before any
+  // settlement. They do not persist input-bound jobs for paid retry recovery.
+  // Keep the existing job-backed/legacy offer path unchanged.
+  const acquire = dependencies.acquire ?? acquireSlot
+  const release = dependencies.release ?? releaseSlot
+  const reserveFirst = ['celestial-position-snapshot', 'celestial-chart-evidence', 'celestial-vimshottari-timing'].includes(resource.offerId)
+  let reserved: SlotResult | undefined
+  if (reserveFirst) {
+    reserved = await acquire(resource.offerId, resource.concurrencyCap, config.slotTtlSeconds)
+    if (!reserved.admitted) return {
+      kind: 'refused', status: 429, code: 'resource_at_capacity',
+      message: 'Capacity is unavailable. No payment was settled; retry with the same authorization.',
+      retryAfterSeconds: Math.min(config.slotTtlSeconds, 60),
+    }
+  }
+  let accepted: Awaited<ReturnType<typeof acceptPayment>>
+  try { accepted = await acceptPayment({
     payment: parsed.payment,
     requirements: [requirement],
     facilitator,
     replayGuard: createReplayGuard(ledger, { network: config.caip2Network, asset: config.asset, resource: resourceUrl }, requirement),
     confirmOnChain: dependencies.confirmOnChain ?? confirmerFor(config, requirement),
     ...(admissionGuard ? { admissionGuard } : {}),
-  })
+  }) } catch (error) {
+    if (reserved) await release(resource.offerId, reserved.token ?? '')
+    throw error
+  }
 
   if (!accepted.ok) {
+    if (reserved) await release(resource.offerId, reserved.token ?? '')
     // Checked before the reason-string match below, which is a broad pattern
     // that must not be given the chance to read a chain contradiction as a
     // replay. The two call for opposite responses.
@@ -196,12 +217,10 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
     return challenge(requirement, resourceInfo, extensions, accepted.reason)
   }
 
-  // Capacity is checked only after payment is settled and recorded. Checking
-  // first would let an unpaid caller probe how loaded a resource is.
-  const acquire = dependencies.acquire ?? acquireSlot
+  // Legacy offers acquire after settlement; calculations reuse their reservation.
   // Keyed by offer id rather than by path, so two offers sharing a path prefix
   // hold separate capacity pools and neither can starve the other.
-  const slot = await acquire(resource.offerId, resource.concurrencyCap, config.slotTtlSeconds)
+  const slot = reserved ?? await acquire(resource.offerId, resource.concurrencyCap, config.slotTtlSeconds)
   if (!slot.admitted) {
     return {
       kind: 'refused',

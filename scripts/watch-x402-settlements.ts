@@ -21,7 +21,7 @@ import { createPublicClient, formatUnits, http, parseAbiItem } from 'viem'
 import { base } from 'viem/chains'
 
 import { BASE_USDC, MAHA_PAYEE, OPERATOR_WALLETS } from '../lib/x402/discovery-payment-recipe.ts'
-import { X402_OFFERS } from '../lib/x402/offers.ts'
+import { payableOffers } from '../lib/x402/offers.ts'
 import { buildSettlementWatch, describeWatch, type Settlement } from '../lib/x402/settlement-watch.ts'
 
 /**
@@ -29,7 +29,7 @@ import { buildSettlementWatch, describeWatch, type Settlement } from '../lib/x40
  * new offer is counted the day it is published rather than the day someone
  * remembers to widen a constant.
  */
-const PUBLISHED_PRICES = [...new Set(X402_OFFERS.map((offer) => BigInt(offer.amount)))].sort((a, b) => (a < b ? -1 : 1))
+const PUBLISHED_PRICES = [...new Set(payableOffers().map((offer) => BigInt(offer.amount)))].sort((a, b) => (a < b ? -1 : 1))
 
 const TRANSFER = parseAbiItem('event Transfer(address indexed from, address indexed to, uint256 value)')
 /** Public RPCs reject wide ranges; this is the largest most accept. */

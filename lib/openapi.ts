@@ -7,6 +7,7 @@ import {
   GOVERNED_CONTEXT_VERIFICATION_DISCOVERY,
 } from './x402/context-product-offer-schemas.ts'
 import { RESEARCH_INTAKE_EVIDENCE_PACK_DISCOVERY } from './x402/offer-schemas.ts'
+import { CELESTIAL_OFFERS } from './x402/celestial-offers.ts'
 import {
   IMAGINED_LIFE_EDITION_OFFER,
   IMAGINED_LIFE_SECTION_OFFER,
@@ -123,6 +124,26 @@ export const openApiDocument = {
     { name: 'Governed Workflow', description: 'Read-only evaluation prototype over a synthetic document-approval workflow. Stateless, metadata-only, and performs no side effect.' },
   ],
   paths: {
+    ...Object.fromEntries(CELESTIAL_OFFERS.map(offer => [offer.path, {
+      get: { tags: ['Maha Celestial Evidence'], operationId: `describe-${offer.id}`, security: [], summary: 'Free calculation contract discovery',
+        responses: { '200': { description: 'Status, limits, conventions and synthetic examples; no calculation performed.' }, '400': { description: 'Query parameters are not accepted.' } } },
+      post: { tags: ['Maha Celestial Evidence'], operationId: offer.id, security: [], summary: `${offer.serviceName} (${offer.status})`,
+        description: `${offer.description} x402-only: API keys are rejected without consuming enterprise credits. Save the returned payload; no stored-result recovery after network loss.`,
+        'x-maha-status': offer.status, 'x-maha-payable-in-production': offer.availability.payableInProduction,
+        'x-maha-price-base-units': offer.amount, 'x-maha-max-request-bytes': offer.maxRequestBytes,
+        requestBody: { required: true, content: { 'application/json': { schema: offer.discovery.inputSchema, example: offer.discovery.input } } },
+        responses: {
+          '200': { description: 'Paid calculation payload with unsigned deterministic integrity receipt.', content: { 'application/json': { schema: offer.discovery.outputSchema } },
+            headers: { 'PAYMENT-RESPONSE': { schema: { type: 'string' }, description: 'Separate x402 settlement response.' } } },
+          '400': { description: 'Invalid input, query parameters or unsupported enterprise credential; no charge.' },
+          '402': { description: 'x402 payment challenge, not a delivered calculation.', headers: { 'PAYMENT-REQUIRED': { schema: { type: 'string' } } } },
+          '409': { description: 'Payment already used.' }, '413': { description: 'Body exceeds 2,048 bytes.' },
+          '415': { description: 'Requires application/json.' }, '422': { description: 'Calculation unavailable for input; no charge.' },
+          '429': { description: 'Capacity unavailable; inspect payment status before retry.' },
+          '502': { description: 'Settlement contradicted by chain.' }, '503': { description: 'Offer withheld, disabled or payment infrastructure unavailable.' },
+        },
+      },
+    }])),
     '/api/v1/celestial/reports': {
       post: { tags: ['Maha Celestial Evidence'], operationId: 'createCelestialReport', summary: 'Compile a versioned individual or corporate celestial report', security: [{ credential: [] }], description: 'Requires a consent-record digest and explicit retention policy. Saved reports are tenant-isolated and application-encrypted. Interpretive provenance is not evidence of predictive validity.', requestBody: { required: true, content: { 'application/json': { schema: { $ref: '#/components/schemas/CelestialReportRequest' } } } }, responses: { '201': { description: 'Completed report and reproducibility bundle.' }, '400': errorResponse('Invalid report input, consent, retention, or pack.'), '403': errorResponse('Organization role lacks report creation permission.'), '409': errorResponse('Idempotency key conflicts with another request.'), '422': errorResponse('Credential retention policy conflicts with the request.') } },
     },
