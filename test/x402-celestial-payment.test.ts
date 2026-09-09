@@ -85,6 +85,32 @@ test('payment rejection, missing ledger, duplicate and chain contradiction never
   }
 })
 
+/**
+ * A crawler probes with a minimal body because it does not yet know the input
+ * shape. These three offers validated first, so an unpaid probe got 400
+ * invalid_calculation_input and never saw a price -- which is why they were
+ * undiscoverable in the Bazaar while the public manifest declared them active.
+ * An unpaid request must be told the price whatever it sent.
+ */
+test('an unpaid request is challenged before its body or media type is judged', async () => {
+  for (const offer of CELESTIAL_OFFERS) {
+    const f = fixture(offer)
+    for (const probe of [
+      f.request({}),
+      f.request({ dataClass: 'nonsense' }),
+      f.request(undefined, { 'Content-Type': 'text/plain' }),
+      new Request('https://www.mahastrategies.com' + offer.path, { method: 'POST', body: 'not json' }),
+    ]) {
+      const result = await f.handlers.POST(probe)
+      assert.equal(result.status, 402, `${offer.id} must answer an unpaid probe with a price`)
+      assert.ok(result.headers.get('PAYMENT-REQUIRED'), `${offer.id} challenge carries payment requirements`)
+    }
+    // Nothing was charged, and no calculation ran, to answer a probe.
+    assert.equal(f.calls.settle, 0)
+    assert.equal(f.calls.verify, 0)
+  }
+})
+
 test('privacy and billing: query strings, enterprise keys and invalid inputs are rejected before payment', async () => {
   const f = fixture()
   const signed = { 'PAYMENT-SIGNATURE': await f.signature() }

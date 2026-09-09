@@ -62,30 +62,65 @@ export function celestialHandlers(id: CelestialProductId, dependencies: Dependen
       // Do not send this key through tenant credit billing, even with a payment.
       if (request.headers.has('authorization') || request.headers.has('x-api-key')) return failure('use_enterprise_celestial_endpoint_for_api_keys', 400)
       if (offer.status !== 'available' && !['preview', 'test', 'development'].includes(environment ?? '')) return failure('offer_not_published', 503)
+
+      const settle = async (): Promise<Awaited<ReturnType<typeof resolveX402>> | Response> => {
+        try { return await resolve(request) }
+        catch {
+          // Do not echo SDK exceptions, raw headers or payloads. A thrown
+          // payment operation has an unknown outcome; never tell the buyer to
+          // re-pay.
+          return failure('payment_outcome_unavailable_check_before_retry', 503)
+        }
+      }
+      const challenged = async (outcome: Extract<Awaited<ReturnType<typeof resolveX402>>, { kind: 'challenge' }>) => {
+        await record({ offerId: id, eventKind: 'challenge', status: 402, discoverySource: discoverySourceFrom(request.headers) })
+        return response(outcome.body, 402, { 'PAYMENT-REQUIRED': outcome.header })
+      }
+
+      // An unpaid request is answered with the payment challenge before the
+      // body is read at all.
+      //
+      // These three offers used to validate first, so a caller with no payment
+      // got 400 invalid_calculation_input and never saw a price. That is how a
+      // Bazaar crawler probes -- it POSTs a minimal body precisely because it
+      // does not know the input shape yet -- so the offers were undiscoverable
+      // despite being published, payable and declared active in the public
+      // manifest. The other offers are challenged by the proxy gate before
+      // their handler runs; these resolve payment themselves and so must do it
+      // in the same order.
+      //
+      // Media type and body are not checked here. Payment is required whatever
+      // the caller sent, and a crawler that omits Content-Type should still be
+      // told the price rather than handed a 415.
+      if (!readPaymentSignature(request.headers)) {
+        const unpaid = await settle()
+        if (unpaid instanceof Response) return unpaid
+        if (unpaid.kind === 'not_applicable') return failure('offer_not_enabled', 503)
+        if (unpaid.kind === 'challenge') return challenged(unpaid)
+        if (unpaid.kind === 'refused') return response({ error: { code: unpaid.code, message: unpaid.message } }, unpaid.status,
+          unpaid.retryAfterSeconds ? { 'Retry-After': String(unpaid.retryAfterSeconds) } : {})
+        // A settled outcome without a presented signature cannot be attributed
+        // to this request; refuse rather than release a result.
+        await release(unpaid.slot)
+        return failure('payment_outcome_unavailable_check_before_retry', 503)
+      }
+
       if (!/^application\/json(?:\s*;|$)/i.test(request.headers.get('content-type') ?? '')) return failure('unsupported_media_type', 415)
       let input: ReturnType<typeof parseCalculationInput>
       try { input = parseCalculationInput(id, await readInput(request)) }
       catch (error) { return failure(error instanceof Error && error.message === 'payload_too_large' ? 'payload_too_large' : 'invalid_calculation_input', error instanceof Error && error.message === 'payload_too_large' ? 413 : 400) }
 
-      // Compute only for a presented payment, before settlement, to catch all
-      // deterministic core failures without charging. No result is released yet.
+      // Compute before settlement, to catch every deterministic core failure
+      // without charging. No result is released yet.
       let product: ReturnType<typeof buildCelestialProduct> | undefined
-      if (readPaymentSignature(request.headers)) {
-        try { product = buildCelestialProduct(id, input) }
-        catch { return failure('calculation_unavailable_for_input', 422) }
-      }
-      let outcome: Awaited<ReturnType<typeof resolveX402>>
-      try { outcome = await resolve(request) }
-      catch {
-        // Do not echo SDK exceptions, raw headers or payloads. A thrown payment
-        // operation has an unknown outcome; never tell the buyer to re-pay.
-        return failure('payment_outcome_unavailable_check_before_retry', 503)
-      }
+      try { product = buildCelestialProduct(id, input) }
+      catch { return failure('calculation_unavailable_for_input', 422) }
+
+      const resolved = await settle()
+      if (resolved instanceof Response) return resolved
+      const outcome = resolved
       if (outcome.kind === 'not_applicable') return failure('offer_not_enabled', 503)
-      if (outcome.kind === 'challenge') {
-        await record({ offerId: id, eventKind: 'challenge', status: 402, discoverySource: discoverySourceFrom(request.headers) })
-        return response(outcome.body, 402, { 'PAYMENT-REQUIRED': outcome.header })
-      }
+      if (outcome.kind === 'challenge') return challenged(outcome)
       if (outcome.kind === 'refused') return response({ error: { code: outcome.code, message: outcome.message } }, outcome.status,
         outcome.retryAfterSeconds ? { 'Retry-After': String(outcome.retryAfterSeconds) } : {})
       try {
