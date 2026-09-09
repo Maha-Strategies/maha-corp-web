@@ -352,11 +352,13 @@ const machineBookOffer = (input: {
   path: string
   title: string
   bookId: 'the-imagined-life' | 'the-volcanic-engine'
+  /** Per title: the settlement ledger attributes a payment by its amount. */
+  amount: string
 }): X402Offer => ({
   id: input.id,
   method: 'POST',
   path: input.path,
-  amount: '5000',
+  amount: input.amount,
   description: `Retrieve one exact section of ${input.title} as machine-readable Markdown with ordered edition metadata, byte and word counts, SHA-256 content commitment, and deterministic receipt. The public web edition remains free. Payment purchases structured delivery, not exclusivity, copyright, analysis, factual certification, or a recommendation. Request and response bodies are not stored.`,
   concurrencyCap: 8,
   serviceName: `Maha Books — ${input.title}`,
@@ -384,11 +386,13 @@ const machineBookEditionOffer = (input: {
   path: string
   title: string
   bookId: 'the-imagined-life' | 'the-volcanic-engine'
+  /** Per title: the settlement ledger attributes a payment by its amount. */
+  amount: string
 }): X402Offer => ({
   id: input.id,
   method: 'POST',
   path: input.path,
-  amount: '2990000',
+  amount: input.amount,
   description: `Purchase the complete machine-readable edition of ${input.title} as normalized Markdown with an ordered section manifest, per-section and whole-edition SHA-256 commitments, and a deterministic receipt. Includes non-exclusive personal or internal machine use; no redistribution, resale, model-training rights, copyright transfer, analysis, factual certification, or recommendation. The public web edition remains free.`,
   concurrencyCap: 4,
   serviceName: `Maha Books — ${input.title} complete edition`,
@@ -414,19 +418,19 @@ const machineBookEditionOffer = (input: {
 })
 
 export const IMAGINED_LIFE_SECTION_OFFER = machineBookOffer({
-  id: 'book-section-the-imagined-life', path: '/api/v1/books/the-imagined-life/section', title: 'The Imagined Life', bookId: 'the-imagined-life',
+  id: 'book-section-the-imagined-life', path: '/api/v1/books/the-imagined-life/section', title: 'The Imagined Life', bookId: 'the-imagined-life', amount: '5001',
 })
 
 export const VOLCANIC_ENGINE_SECTION_OFFER = machineBookOffer({
-  id: 'book-section-the-volcanic-engine', path: '/api/v1/books/the-volcanic-engine/section', title: 'The Volcanic Engine', bookId: 'the-volcanic-engine',
+  id: 'book-section-the-volcanic-engine', path: '/api/v1/books/the-volcanic-engine/section', title: 'The Volcanic Engine', bookId: 'the-volcanic-engine', amount: '5002',
 })
 
 export const IMAGINED_LIFE_EDITION_OFFER = machineBookEditionOffer({
-  id: 'book-edition-the-imagined-life', path: '/api/v1/books/the-imagined-life/edition', title: 'The Imagined Life', bookId: 'the-imagined-life',
+  id: 'book-edition-the-imagined-life', path: '/api/v1/books/the-imagined-life/edition', title: 'The Imagined Life', bookId: 'the-imagined-life', amount: '2990000',
 })
 
 export const VOLCANIC_ENGINE_EDITION_OFFER = machineBookEditionOffer({
-  id: 'book-edition-the-volcanic-engine', path: '/api/v1/books/the-volcanic-engine/edition', title: 'The Volcanic Engine', bookId: 'the-volcanic-engine',
+  id: 'book-edition-the-volcanic-engine', path: '/api/v1/books/the-volcanic-engine/edition', title: 'The Volcanic Engine', bookId: 'the-volcanic-engine', amount: '2990001',
 })
 
 export const X402_OFFERS: readonly X402Offer[] = Object.freeze([
@@ -452,6 +456,37 @@ export const X402_OFFERS: readonly X402Offer[] = Object.freeze([
  * crawls reads as an unstable vendor -- but must not be handed to an
  * autonomous agent as something it can pay for today.
  */
+/**
+ * Every payable offer settles at a distinct amount.
+ *
+ * The public settlement ledger reads USDC Transfer logs and nothing else, which
+ * is what lets a reader recompute it from the chain without trusting us. The
+ * chain records payer, amount and recipient, so the amount is the only product
+ * discriminator there is, and a shared one makes a payment unattributable.
+ *
+ * The catalog had reached nineteen payable offers across eight amounts: seven
+ * at $0.005 and three at $0.01, the latter including deep-context-evaluation,
+ * whose four external settlements were about to stop being attributed. Eleven
+ * offers moved by one to eleven base units -- at most $0.000011, so no price
+ * tier changed -- and the product with sales or the longest standing kept the
+ * round amount.
+ *
+ * Withheld offers are deliberately not checked. They share amounts freely and
+ * cost nothing while unpublished, because the ledger only indexes payable
+ * offers. Publishing one throws here until it is given an unused amount, which
+ * is the moment its price is being chosen anyway.
+ */
+function assertDistinctPayableAmounts(): void {
+  const amounts = X402_OFFERS.filter((offer) => offer.availability.payableInProduction).map((offer) => offer.amount)
+  const duplicated = [...new Set(amounts.filter((amount, index) => amounts.indexOf(amount) !== index))]
+  if (duplicated.length > 0) {
+    throw new Error(
+      `Payable x402 offers must settle at distinct amounts; the settlement ledger attributes a payment by amount. Duplicated: ${duplicated.join(', ')}`,
+    )
+  }
+}
+assertDistinctPayableAmounts()
+
 export function payableOffers(): readonly X402Offer[] {
   return X402_OFFERS.filter((offer) => offer.status === 'available')
 }

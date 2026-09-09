@@ -61,8 +61,20 @@ test('first ten retain prices and twelve additions use only approved price bands
   assert.equal(new Set(MICRO_IDS.map(microPath)).size, 22)
   const original = MICRO_OFFERS.filter(o => !NEXT_IDS.includes(o.id as keyof typeof NEXT_PRODUCTS))
   assert.equal(original.length, 10)
-  for (const o of original) assert.equal(o.amount, half.includes(o.id) ? '5000' : '10000')
-  for (const id of NEXT_IDS) assert.ok(['5000', '10000'].includes(MICRO_OFFERS.find(o => o.id === id)!.amount))
+  // Two approved bands. A settled amount may carry a small per-product offset
+  // so the ledger can attribute a payment, so the band is the amount floored to
+  // its tier rather than the amount itself.
+  const band = (amount: string) => String(Math.floor(Number(amount) / 1000) * 1000)
+  const offset = (amount: string) => Number(amount) - Number(band(amount))
+  for (const o of original) {
+    assert.equal(band(o.amount), half.includes(o.id) ? '5000' : '10000', `${o.id}: price band`)
+    assert.ok(offset(o.amount) < 100, `${o.id}: an attribution offset stays inside its band`)
+  }
+  for (const id of NEXT_IDS) {
+    const amount = MICRO_OFFERS.find(o => o.id === id)!.amount
+    assert.ok(['5000', '10000'].includes(band(amount)), `${id}: price band`)
+    assert.ok(offset(amount) < 100, `${id}: an attribution offset stays inside its band`)
+  }
 })
 
 test('citations expose exact mismatch dimensions, never passage support', async () => {

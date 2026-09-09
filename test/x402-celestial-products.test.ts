@@ -10,7 +10,9 @@ import { bytesDigest, createBuyerCapture, checkBuyerDelivery } from '../lib/x402
 import { summarizeCalculationDemand } from '../lib/x402/celestial-demand.ts'
 
 test('discovery: synthetic examples and outputs conform; three explicitly promoted prices', () => {
-  assert.deepEqual(CELESTIAL_OFFERS.map(o => o.amount), ['10000', '50000', '100000'])
+  // One base unit above the tier; $0.01, $0.05 and $0.10 belong to
+  // deep-context-evaluation, evidence-retention-matrix and mps-autonomous-audit.
+  assert.deepEqual(CELESTIAL_OFFERS.map(o => o.amount), ['10001', '50001', '100001'])
   for (const offer of CELESTIAL_OFFERS) {
     assert.deepEqual(validate(offer.discovery.input, offer.discovery.inputSchema), [])
     assert.deepEqual(validate(offer.discovery.output, offer.discovery.outputSchema), [])
@@ -73,16 +75,16 @@ test('buyer delivery: pinned byte capture and embedded calculation receipt are c
 
 test('demand: exclude operator and publisher-funded canaries, pending records, conflicts and price-only attribution', () => {
   const wallet = '0x' + '1'.repeat(40), operator = '0x' + '2'.repeat(40)
-  const base = { payer: wallet, resource: 'https://www.mahastrategies.com/api/v1/calculations/positions', amount: '10000', status: 'confirmed' as const }
+  const base = { payer: wallet, resource: 'https://www.mahastrategies.com/api/v1/calculations/positions', amount: '10001', status: 'confirmed' as const }
   const tx = (n: number) => '0x' + n.toString(16).padStart(64, '0')
   const report = summarizeCalculationDemand([
     { ...base, transaction: tx(1) }, { ...base, transaction: tx(1) }, { ...base, transaction: tx(2) },
     { ...base, transaction: tx(3), payer: operator }, { ...base, transaction: tx(4) },
     { ...base, transaction: tx(5), status: 'unconfirmed' }, { ...base, transaction: tx(6), resource: '' },
-    { ...base, transaction: tx(7) }, { ...base, transaction: tx(7), amount: '50000' },
+    { ...base, transaction: tx(7) }, { ...base, transaction: tx(7), amount: '50001' },
   ], { operatorWallets: [operator], publisherFundedTransactions: [tx(4)] })
   assert.deepEqual(report.byOffer[0], { offerId: 'celestial-position-snapshot', externalSettlements: 2,
-    externalWallets: 1, repeatExternalWallets: 1, externalAmountBaseUnits: '20000', publisherFundedCanaries: 2 })
+    externalWallets: 1, repeatExternalWallets: 1, externalAmountBaseUnits: '20002', publisherFundedCanaries: 2 })
   assert.equal(report.excludedRecords, 3)
 })
 
