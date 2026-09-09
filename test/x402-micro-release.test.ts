@@ -7,6 +7,7 @@ import { CELESTIAL_OFFERS } from '../lib/x402/celestial-offers.ts'
 import { assertCanaryRequirement, TARGETS, CONFIRMATION } from '../scripts/run-micro-five-indexing-canaries.ts'
 import { BASE_NETWORK, BASE_USDC, MAHA_PAYEE } from '../lib/x402/discovery-payment-recipe.ts'
 import { readFileSync } from 'node:fs'
+import { x402Config } from '../lib/x402/config.ts'
 
 test('exactly five authorized microproducts, totaling 30000 base units, are released', () => {
   assert.deepEqual([...RELEASED_MICRO_IDS].sort(), ['audit-export-normalizer', 'citation-binding-check', 'divine-name-disambiguation', 'revision-lineage-check', 'unit-uncertainty-conversion'])
@@ -49,4 +50,19 @@ test('indexing purchases bind all payment terms to exactly the five new offers',
   assert.match(script, /GITHUB_RUN_ATTEMPT !== '1'/)
   assert.match(script, /customerDemand: false, organicDemand: false/)
   assert.doesNotMatch(script, /CELESTIAL_OFFERS|160000|verifyCelestialProduct/)
+})
+
+test('five-product opt-in preserves existing configuration and refuses implicit enablement', () => {
+  const env = { X402_ENABLED: 'true', X402_FACILITATOR_URL: 'https://facilitator.example/x402', X402_PAY_TO: MAHA_PAYEE,
+    X402_ASSET: BASE_USDC, X402_NETWORK: BASE_NETWORK, X402_RESOURCES: JSON.stringify([{ method: 'POST', path: '/api/v1/compress' }]) }
+  const before = x402Config(env)!, after = x402Config({ ...env, X402_MICRO_FIVE_ENABLED: 'true' })!
+  assert.deepEqual(after.resources.slice(0, 1), before.resources)
+  assert.equal(after.resources.length, 6)
+  assert.deepEqual(after.resources.slice(1).map(r => r.offerId).sort(), [...RELEASED_MICRO_IDS].sort())
+  for (const value of ['false', '1', 'TRUE', ' true ']) assert.deepEqual(x402Config({ ...env, X402_MICRO_FIVE_ENABLED: value })!.resources, before.resources)
+  const existing = { ...env, X402_RESOURCES: JSON.stringify([{ method: 'POST', path: '/api/v1/compress' }, { method: 'POST', path: '/api/v1/micro/citation-binding-check' }]) }
+  assert.equal(x402Config({ ...existing, X402_MICRO_FIVE_ENABLED: 'true' })!.resources.length, 6)
+  assert.throws(() => x402Config({ ...env, X402_RESOURCES: 'not-json', X402_MICRO_FIVE_ENABLED: 'true' }))
+  assert.throws(() => x402Config({ ...env, X402_RESOURCES: '[]', X402_MICRO_FIVE_ENABLED: 'true' }))
+  assert.equal(x402Config({ ...env, X402_ENABLED: 'false', X402_MICRO_FIVE_ENABLED: 'true' }), null)
 })

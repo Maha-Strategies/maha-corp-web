@@ -3,6 +3,7 @@ import { rpcUrlFor } from './chain.ts'
 import { releasesSlot } from './slot.ts'
 import { catalogMismatches, offerFor } from './offers.ts'
 import type { CdpApiCredentials } from './cdp-auth.ts'
+import { RELEASED_MICRO_IDS } from './micro-release.ts'
 
 // Everything here is off unless X402_ENABLED is exactly 'true'. The flag is
 // checked before any other configuration is read, so an incomplete or
@@ -136,6 +137,13 @@ export function x402Config(environment: Environment = process.env): X402Config |
   const catalogContradictions: string[] = []
   const resources = parseResources(environment.X402_RESOURCES, catalogContradictions)
   if (resources.length === 0) throw new Error('X402_RESOURCES must define at least one priced resource.')
+  // Separate additive opt-in: preserve the existing sensitive resource binding verbatim.
+  // This never enables withheld products or repairs malformed existing configuration.
+  if (environment.X402_MICRO_FIVE_ENABLED === 'true') {
+    const extra = RELEASED_MICRO_IDS.filter(id => !resources.some(r => r.offerId === id))
+      .map(id => ({ method: 'POST', path: `/api/v1/micro/${id}` }))
+    resources.push(...parseResources(JSON.stringify(extra), catalogContradictions))
+  }
   for (const contradiction of catalogContradictions) {
     console.error('x402 deployment configuration contradicts the public offer catalog:', contradiction)
   }

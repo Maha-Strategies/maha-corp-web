@@ -28,6 +28,11 @@ This is an internal product-contract review, not legal or independent expert rev
 
 An explicit shared allowlist controls catalog status and runtime admission. Unknown
 environments refuse; an accidental X402_RESOURCES entry cannot promote the other 17.
+The separate X402_MICRO_FIVE_ENABLED=true opt-in appends only the five reviewed
+paths to parsed existing configuration, without replacing the sensitive
+X402_RESOURCES value. It requires an existing valid, enabled x402 configuration;
+an invalid or empty original resource list still refuses. Existing entries and
+contradictions are preserved; the opt-in cannot enable any other product.
 Exact price, request/output schemas, negative results, replay refusal, privacy,
 pre-settlement input validation, and deterministic receipts remain mandatory.
 Save paid responses: no stored-result recovery exists. A lost response or uncertain
