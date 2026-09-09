@@ -75,6 +75,23 @@ export type X402Offer = {
   /** Smallest indivisible unit of USDC. 1000 = $0.001. */
   amount: string
   /**
+   * Amounts this offer previously settled at, oldest first.
+   *
+   * The public settlement ledger reads USDC Transfer logs and attributes a
+   * payment by its amount, because that is all the chain records. An offer that
+   * changes price therefore orphans every settlement made at the old one: they
+   * stop matching a published amount and drop out of the ledger entirely.
+   *
+   * Declaring the superseded amount here keeps that history attributable. It
+   * does not republish the old price -- `amount` alone is what a buyer is
+   * charged, and discovery, the manifests and the payment challenge all read
+   * `amount`.
+   *
+   * A superseded amount stays reserved for this offer: no other offer may adopt
+   * it, or a historical settlement would become ambiguous between them.
+   */
+  supersededAmounts?: readonly string[]
+  /**
    * Published description. Bounded at 480 characters *and* 480 UTF-8 bytes by
    * the CDP facilitator; see MAX_RESOURCE_DESCRIPTION_CHARS in discovery.ts for
    * why that ceiling exists and what happens when it is exceeded.
