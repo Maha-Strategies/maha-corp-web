@@ -16,9 +16,11 @@ import { validate } from './helpers/json-schema.ts'
 
 const sha = (value: string) => `sha256:${createHash('sha256').update(value, 'utf8').digest('hex')}`
 
-test('both book offers are exact $0.005 deterministic section resources', () => {
-  assert.equal(IMAGINED_LIFE_SECTION_OFFER.amount, '5000')
-  assert.equal(VOLCANIC_ENGINE_SECTION_OFFER.amount, '5000')
+test('both book offers are $0.005-tier section resources at distinct settled amounts', () => {
+  // One base unit apart: the settlement ledger attributes a payment by its
+  // amount, and a shared price left both titles unmeasurable.
+  assert.equal(IMAGINED_LIFE_SECTION_OFFER.amount, '5001')
+  assert.equal(VOLCANIC_ENGINE_SECTION_OFFER.amount, '5002')
   assert.equal(offerFor('POST', '/api/v1/books/the-imagined-life/section'), IMAGINED_LIFE_SECTION_OFFER)
   assert.equal(offerFor('POST', '/api/v1/books/the-volcanic-engine/section'), VOLCANIC_ENGINE_SECTION_OFFER)
   assert.equal(offerFor('GET', '/api/v1/books/the-imagined-life/section'), undefined)
@@ -70,9 +72,9 @@ test('unknown books, sections and fields fail closed', () => {
   assert.throws(() => buildBookSectionReceipt('the-imagined-life', { sectionId: 'introduction', extra: true }), /Only sectionId/)
 })
 
-test('both complete-edition offers are exact $2.99 resources beside the section offers', () => {
+test('both complete-edition offers are $2.99-tier resources at distinct settled amounts', () => {
   assert.equal(IMAGINED_LIFE_EDITION_OFFER.amount, '2990000')
-  assert.equal(VOLCANIC_ENGINE_EDITION_OFFER.amount, '2990000')
+  assert.equal(VOLCANIC_ENGINE_EDITION_OFFER.amount, '2990001')
   assert.equal(offerFor('POST', '/api/v1/books/the-imagined-life/edition'), IMAGINED_LIFE_EDITION_OFFER)
   assert.equal(offerFor('POST', '/api/v1/books/the-volcanic-engine/edition'), VOLCANIC_ENGINE_EDITION_OFFER)
   assert.equal(offerFor('GET', '/api/v1/books/the-volcanic-engine/edition'), undefined)

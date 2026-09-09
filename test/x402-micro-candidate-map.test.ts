@@ -22,9 +22,29 @@ test('freeze enumerates sixty original candidates and refuses to overwrite the o
   const again = spawnSync(process.execPath, ['--experimental-strip-types', 'scripts/freeze-micro-candidates.ts', '--create'], { cwd: root })
   assert.notEqual(again.status, 0)
   assert.equal(read('content/discovery/micro-candidate-freeze-v1.json'), before)
+  // Offers repriced so the settlement ledger can attribute a payment by its
+  // amount. The chain records only payer, amount and recipient, so a shared
+  // amount makes a payment unattributable; deep-context-evaluation's four
+  // external settlements were about to become ambiguous. Each moved by one to
+  // eleven base units and stayed inside its price tier. Naming them keeps the
+  // freeze a guard: any other amount drift still fails here.
+  const repricedForAttribution = new Map([
+    ['book-section-the-imagined-life', '5001'], ['book-section-the-volcanic-engine', '5002'],
+    ['book-edition-the-volcanic-engine', '2990001'], ['celestial-position-snapshot', '10001'],
+    ['celestial-chart-evidence', '50001'], ['celestial-vimshottari-timing', '100001'],
+    ['citation-binding-check', '5003'], ['revision-lineage-check', '5004'],
+    ['audit-export-normalizer', '10002'], ['unit-uncertainty-conversion', '5008'],
+    ['divine-name-disambiguation', '5011'],
+  ])
   for (const prior of freeze.existingOffers) {
     const current = X402_OFFERS.find(o => o.id === prior.id)!
-    for (const key of ['path', 'amount', 'description'] as const) assert.equal(current[key], prior[key], `${prior.id}:${key}`)
+    for (const key of ['path', 'description'] as const) assert.equal(current[key], prior[key], `${prior.id}:${key}`)
+    const expectedAmount = repricedForAttribution.get(prior.id) ?? prior.amount
+    assert.equal(current.amount, expectedAmount, `${prior.id}:amount`)
+    if (repricedForAttribution.has(prior.id)) {
+      const moved = BigInt(current.amount) - BigInt(prior.amount)
+      assert.ok(moved > BigInt(0) && moved < BigInt(100), `${prior.id}: a reprice must stay inside its tier`)
+    }
     // Freeze is immutable history. Only the three explicitly promoted original ten may change status.
     const promoted = ['citation-binding-check', 'revision-lineage-check', 'audit-export-normalizer'].includes(prior.id)
     assert.equal(current.status, promoted ? 'available' : prior.status, `${prior.id}:status`)

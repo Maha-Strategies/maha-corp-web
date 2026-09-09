@@ -37,7 +37,14 @@ export type LedgerEntry = {
   amountBaseUnits: string
   amountUsdc: string
   /** The offer whose published price this transfer matches, if any. */
-  product: { id: string; title: string; priceUsdc: string } | null
+  product: {
+    id: string
+    title: string
+    /** The product's current price, which a superseded settlement will not equal. */
+    priceUsdc: string
+    /** Set when this settlement was made at a price the product has since left. */
+    settledAtSupersededPrice?: true
+  } | null
   explorerUrl: string
 }
 
@@ -50,7 +57,23 @@ export type LedgerSummary = {
   /** External wallets that paid at more than one published price. */
   crossProductWallets: number
   externalValueUsdc: string
-  byProduct: { id: string; title: string; priceUsdc: string; settlements: number; externalSettlements: number; attributionAmbiguous?: true }[]
+  byProduct: {
+    id: string
+    title: string
+    priceUsdc: string
+    /** Prices this product has left, when it has changed price. */
+    supersededPricesUsdc?: string[]
+    settlements: number
+    externalSettlements: number
+    /** The current price is shared, so none of these counts can be trusted. */
+    attributionAmbiguous?: true
+    /**
+     * A price this product has left is also claimed by another offer, so the
+     * part of its history settled at that amount is unattributable. The counts
+     * remain exact for everything settled at the current price.
+     */
+    supersededPriceAmbiguous?: true
+  }[]
 }
 
 export type SettlementLedger = {
@@ -115,7 +138,23 @@ export function truncateAddress(address: string): string {
   return a.length <= 12 ? a : `${a.slice(0, 6)}…${a.slice(-4)}`
 }
 
-export type OfferPrice = { id: string; title: string; amountBaseUnits: bigint }
+export type OfferPrice = {
+  id: string
+  title: string
+  /** What the product settles at now. */
+  amountBaseUnits: bigint
+  /**
+   * Amounts this product used to settle at.
+   *
+   * A product's price can change, and the chain keeps every settlement made at
+   * the old one. Attributing by the current amount alone would drop that
+   * history: raising the context compiler from $0.001 to $0.002 would have
+   * removed fifteen settlements, eight of them external, from a ledger that had
+   * twenty-six, because a transfer at a no-longer-published price stopped
+   * matching any offer and fell out of the priced set entirely.
+   */
+  supersededAmountsBaseUnits?: readonly bigint[]
+}
 
 export function buildLedger(input: {
   settlements: readonly { payer: string; amountBaseUnits: bigint; blockNumber: bigint; transactionHash: string; timestampUtc?: string | null; logIndex?: number }[]
@@ -138,10 +177,11 @@ export function buildLedger(input: {
    * Misattributed revenue is worse than unattributed revenue, so a shared price
    * resolves to null and the row shows the amount without naming a product.
    */
+  const amountsOf = (o: OfferPrice) => [...new Set([o.amountBaseUnits, ...(o.supersededAmountsBaseUnits ?? [])])]
   const priceCounts = new Map<bigint, number>()
-  for (const o of input.offers) priceCounts.set(o.amountBaseUnits, (priceCounts.get(o.amountBaseUnits) ?? 0) + 1)
-  const byPrice = new Map(
-    input.offers.filter((o) => priceCounts.get(o.amountBaseUnits) === 1).map((o) => [o.amountBaseUnits, o]))
+  for (const o of input.offers) for (const a of amountsOf(o)) priceCounts.set(a, (priceCounts.get(a) ?? 0) + 1)
+  const byPrice = new Map<bigint, OfferPrice>()
+  for (const o of input.offers) for (const a of amountsOf(o)) if (priceCounts.get(a) === 1) byPrice.set(a, o)
   const ambiguousPrices = [...priceCounts].filter(([, n]) => n > 1).map(([price]) => price)
 
   const entries: LedgerEntry[] = input.settlements.map((s) => {
@@ -157,12 +197,23 @@ export function buildLedger(input: {
       payerRole: (operators.has(payer) ? 'maha-canary-test' : 'external-machine-agent') as LedgerEntry['payerRole'],
       amountBaseUnits: s.amountBaseUnits.toString(),
       amountUsdc: formatUsdc(s.amountBaseUnits),
-      product: offer ? { id: offer.id, title: offer.title, priceUsdc: formatUsdc(offer.amountBaseUnits) } : null,
+      product: offer
+        ? {
+            id: offer.id,
+            title: offer.title,
+            priceUsdc: formatUsdc(offer.amountBaseUnits),
+            // Flagged, because the row would otherwise show a current price
+            // beside an amount that no longer equals it and read as an error.
+            ...((offer.supersededAmountsBaseUnits ?? []).includes(s.amountBaseUnits)
+              ? { settledAtSupersededPrice: true as const }
+              : {}),
+          }
+        : null,
       explorerUrl: `${explorerBase}${s.transactionHash}`,
     }
   }).sort((a, b) => (BigInt(b.blockNumber) > BigInt(a.blockNumber) ? 1 : BigInt(b.blockNumber) < BigInt(a.blockNumber) ? -1 : a.transactionHash.localeCompare(b.transactionHash) || (a.logIndex ?? -1) - (b.logIndex ?? -1)))
 
-  const pricedAmounts = new Set(input.offers.map((o) => o.amountBaseUnits))
+  const pricedAmounts = new Set(input.offers.flatMap(amountsOf))
   const isPriced = (e: LedgerEntry) => pricedAmounts.has(BigInt(e.amountBaseUnits))
   const external = entries.filter((e) => e.payerRole === 'external-machine-agent' && isPriced(e))
   const walletPrices = new Map<string, Set<string>>()
@@ -179,6 +230,17 @@ export function buildLedger(input: {
       id: offer.id,
       title: offer.title,
       priceUsdc: formatUsdc(offer.amountBaseUnits),
+      ...((offer.supersededAmountsBaseUnits ?? []).length > 0
+        ? { supersededPricesUsdc: amountsOf(offer).filter((a) => a !== offer.amountBaseUnits).map(formatUsdc) }
+        : {}),
+      // A contested *historical* amount is reported separately from a contested
+      // current one. Flagging the whole product ambiguous would be an
+      // overstatement and would zero counts that are attributed correctly:
+      // sales at the current price are still exact. What is lost is the part of
+      // the history settled at an amount another offer also claims.
+      ...(!ambiguous && (offer.supersededAmountsBaseUnits ?? []).some((a) => ambiguousPrices.includes(a))
+        ? { supersededPriceAmbiguous: true as const }
+        : {}),
       settlements: all.length,
       externalSettlements: all.filter((e) => e.payerRole === 'external-machine-agent').length,
       // Set when another offer publishes the same price, so a reader is told

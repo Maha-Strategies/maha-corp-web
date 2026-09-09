@@ -94,3 +94,93 @@ test('the committed snapshot matches the contract', () => {
     assert.match(e.transactionHash, /^0x[0-9a-f]{64}$/)
   }
 })
+
+/* -- historical prices ------------------------------------------------------
+ *
+ * A product's price can change, and the chain keeps every settlement made at
+ * the old one. Attributing by the current amount alone silently discards that
+ * history. These cover the case the approved context-compiler step-up creates:
+ * $0.001 to $0.002 once the facilitator's free settlement tier ends.
+ */
+
+test('a settlement at a superseded price still belongs to its product', () => {
+  const steppedUp: OfferPrice[] = [
+    { id: 'a', title: 'A', amountBaseUnits: BigInt(2_000), supersededAmountsBaseUnits: [BigInt(1_000)] },
+    { id: 'b', title: 'B', amountBaseUnits: BigInt(10_000) },
+  ]
+  const l = build([s('0xpayer', BigInt(1_000), '0xold'), s('0xpayer', BigInt(2_000), '0xnew', 2)], steppedUp)
+
+  assert.equal(l.summary.totalSettlements, 2, 'the old price is still a settlement')
+  assert.equal(l.summary.externalSettlements, 2)
+  const a = l.summary.byProduct.find((p) => p.id === 'a')!
+  assert.equal(a.settlements, 2, 'both sides of the price change belong to A')
+  assert.equal(a.externalSettlements, 2)
+
+  // The row settled at the old price says so, rather than showing a current
+  // price beside an amount that no longer equals it.
+  const old = l.entries.find((e) => e.transactionHash === '0xold')!
+  const now = l.entries.find((e) => e.transactionHash === '0xnew')!
+  assert.equal(old.product?.id, 'a')
+  assert.equal(old.product?.settledAtSupersededPrice, true)
+  assert.equal(now.product?.settledAtSupersededPrice, undefined)
+  assert.equal(a.priceUsdc, formatUsdc(BigInt(2_000)), 'the product lists its current price')
+  assert.deepEqual(a.supersededPricesUsdc, [formatUsdc(BigInt(1_000))])
+})
+
+test('the same wallet buying across a price change is one buyer, not two products', () => {
+  const steppedUp: OfferPrice[] = [
+    { id: 'a', title: 'A', amountBaseUnits: BigInt(2_000), supersededAmountsBaseUnits: [BigInt(1_000)] },
+  ]
+  const l = build([s('0xrepeat', BigInt(1_000), '0x1'), s('0xrepeat', BigInt(2_000), '0x2', 2)], steppedUp)
+
+  assert.equal(l.summary.externalWallets, 1)
+  assert.equal(l.summary.repeatExternalWallets, 1, 'buying before and after a rise is a repeat purchase')
+  // crossProductWallets counts distinct prices paid, so a price change must not
+  // make one product look like two.
+  assert.equal(l.summary.byProduct.find((p) => p.id === 'a')!.settlements, 2)
+})
+
+test('a superseded amount another product still publishes is ambiguous, not misattributed', () => {
+  // The old price must stay reserved. If a second offer adopts it, a historical
+  // settlement could belong to either, and guessing would misattribute revenue.
+  const reused: OfferPrice[] = [
+    { id: 'a', title: 'A', amountBaseUnits: BigInt(2_000), supersededAmountsBaseUnits: [BigInt(1_000)] },
+    { id: 'b', title: 'B', amountBaseUnits: BigInt(1_000) },
+  ]
+  const l = build([s('0xpayer', BigInt(1_000), '0x1')], reused)
+  assert.equal(l.entries[0].product, null, 'a reused historical amount names no product')
+  assert.equal(l.summary.totalSettlements, 1, 'it is still a sale')
+  const [a, b] = ['a', 'b'].map((id) => l.summary.byProduct.find((p) => p.id === id)!)
+  // B publishes the contested amount now, so its counts are untrustworthy.
+  assert.equal(b.attributionAmbiguous, true)
+  // A only held it historically. Its current-price sales are still exact, so it
+  // is not blanket-ambiguous -- but the contested slice of its history is
+  // reported rather than passed over in silence.
+  assert.equal(a.attributionAmbiguous, undefined)
+  assert.equal(a.supersededPriceAmbiguous, true)
+  assert.equal(a.settlements, 0, 'the contested historical settlement is not counted for A')
+})
+
+test('an offer whose current and superseded amounts coincide is not self-ambiguous', () => {
+  // Declaring the amount an offer already charges is redundant rather than a
+  // collision; deduplicating per offer keeps it attributable.
+  const redundant: OfferPrice[] = [
+    { id: 'a', title: 'A', amountBaseUnits: BigInt(1_000), supersededAmountsBaseUnits: [BigInt(1_000)] },
+  ]
+  const l = build([s('0xpayer', BigInt(1_000), '0x1')], redundant)
+  assert.equal(l.entries[0].product?.id, 'a')
+  assert.equal(l.summary.byProduct[0].attributionAmbiguous, undefined)
+})
+
+test('the real catalog reaches the ledger with its price history intact', async () => {
+  const { payableOffers } = await import('../lib/x402/offers.ts')
+  for (const offer of payableOffers()) {
+    for (const superseded of offer.supersededAmounts ?? []) {
+      assert.notEqual(superseded, offer.amount, `${offer.id} lists its current amount as superseded`)
+      const claimants = payableOffers().filter((other) =>
+        other.amount === superseded || (other.supersededAmounts ?? []).includes(superseded))
+      assert.equal(claimants.length, 1,
+        `${superseded} is claimed by ${claimants.map((o) => o.id).join(', ')}; a superseded amount stays reserved`)
+    }
+  }
+})

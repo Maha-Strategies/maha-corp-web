@@ -89,9 +89,17 @@ test('invalid inputs and unsupported corpus selectors refuse before a payment is
     assert.equal(r.status, 400); assert.equal(f.calls.resolve, 0)
     assert.ok(!(await r.text()).includes('private-input-marker'))
   }
-  const f = fixture(MICRO_OFFERS.find(o => o.id === 'release-bound-evidence-packet'))
-  assert.equal((await f.handlers.POST(f.request({ ...MICRO_OFFERS.find(o => o.id === 'release-bound-evidence-packet')!.discovery.input, expectedContentDigest: 'sha256:' + '0'.repeat(64) }))).status, 400)
-  assert.equal(f.calls.resolve, 0)
+  const packet = MICRO_OFFERS.find(o => o.id === 'release-bound-evidence-packet')!
+  const g = fixture(packet)
+  const unresolvable = { ...packet.discovery.input, expectedContentDigest: 'sha256:' + '0'.repeat(64) }
+  // Paid: the selector is checked and refused before settlement, so an input we
+  // cannot serve is never charged for.
+  assert.equal((await g.handlers.POST(g.request(unresolvable, { 'PAYMENT-SIGNATURE': 'synthetic' }))).status, 400)
+  assert.equal(g.calls.settle, 0)
+  // Unpaid: the price comes first. The body is not read at all, so a selector
+  // that cannot resolve is not even reached.
+  assert.equal((await g.handlers.POST(g.request(unresolvable))).status, 402)
+  assert.equal(g.calls.settle, 0)
 })
 
 test('one signed authorization cannot buy two responses, even under concurrent replay', async () => {
@@ -152,16 +160,31 @@ test('method, queries, enterprise keys and spoofed internal payment headers cann
   assert.equal((await f.handlers.OPTIONS()).status, 204)
 })
 
-test('oversized streamed bodies, malformed UTF-8, compressed and non-JSON bodies refuse unpaid', async () => {
+test('oversized, malformed, compressed and non-JSON bodies are refused before settlement when paid, and priced when not', async () => {
   const f = fixture(), url = 'https://www.mahastrategies.com' + MICRO_OFFERS[0].path
-  assert.equal((await f.handlers.POST(f.request({ padding: 'x'.repeat(MICRO_MAX_REQUEST_BYTES) }))).status, 413)
-  const stream = new ReadableStream<Uint8Array>({ start(controller) { controller.enqueue(new Uint8Array(MICRO_MAX_REQUEST_BYTES + 1)); controller.close() } })
-  const streamed = new Request(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: stream, duplex: 'half' } as RequestInit)
-  assert.equal((await f.handlers.POST(streamed)).status, 413)
-  assert.equal((await f.handlers.POST(new Request(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: new Uint8Array([0xff, 0xff]) }))).status, 400)
-  assert.equal((await f.handlers.POST(f.request(undefined, { 'Content-Type': 'text/plain' }))).status, 415)
-  assert.equal((await f.handlers.POST(f.request(undefined, { 'Content-Encoding': 'gzip' }))).status, 415)
-  assert.equal(f.calls.resolve, 0)
+  const signed = { 'PAYMENT-SIGNATURE': 'synthetic' }
+  const streamOf = (bytes: number) => new ReadableStream<Uint8Array>({
+    start(controller) { controller.enqueue(new Uint8Array(bytes)); controller.close() },
+  })
+  const raw = (body: BodyInit, headers: Record<string, string>) =>
+    new Request(url, { method: 'POST', headers, body, duplex: 'half' } as RequestInit)
+
+  // Paid: every deterministic body failure is caught before settlement, so a
+  // request we cannot serve is never charged for.
+  assert.equal((await f.handlers.POST(f.request({ padding: 'x'.repeat(MICRO_MAX_REQUEST_BYTES) }, signed))).status, 413)
+  assert.equal((await f.handlers.POST(raw(streamOf(MICRO_MAX_REQUEST_BYTES + 1), { 'Content-Type': 'application/json', ...signed }))).status, 413)
+  assert.equal((await f.handlers.POST(raw(new Uint8Array([0xff, 0xff]), { 'Content-Type': 'application/json', ...signed }))).status, 400)
+  assert.equal((await f.handlers.POST(f.request(undefined, { 'Content-Type': 'text/plain', ...signed }))).status, 415)
+  assert.equal((await f.handlers.POST(f.request(undefined, { 'Content-Encoding': 'gzip', ...signed }))).status, 415)
+  assert.equal(f.calls.settle, 0, 'a body we refuse is never settled')
+
+  // Unpaid: the challenge comes first and the body is never read, which is less
+  // work than refusing it -- an oversized unpaid probe costs one 402.
+  const g = fixture()
+  assert.equal((await g.handlers.POST(g.request({ padding: 'x'.repeat(MICRO_MAX_REQUEST_BYTES) }))).status, 402)
+  assert.equal((await g.handlers.POST(raw(streamOf(MICRO_MAX_REQUEST_BYTES + 1), { 'Content-Type': 'application/json' }))).status, 402)
+  assert.equal((await g.handlers.POST(g.request(undefined, { 'Content-Type': 'text/plain' }))).status, 402)
+  assert.equal(g.calls.settle, 0)
 })
 
 test('local pre-payment work cap refuses the fifth concurrent operation before settlement', async () => {
@@ -175,12 +198,16 @@ test('local pre-payment work cap refuses the fifth concurrent operation before s
   assert.equal((await handlers.POST(f.request())).status, 503)
 })
 
-test('a body that never ends times out before payment and releases local work capacity', async () => {
+test('a body that never ends times out before settlement and releases local work capacity', async () => {
   const f = fixture()
   let cancelled = false
   const body = new ReadableStream<Uint8Array>({ cancel() { cancelled = true } })
   const request = new Request('https://www.mahastrategies.com' + MICRO_OFFERS[0].path, {
-    method: 'POST', headers: { 'Content-Type': 'application/json' }, body,
+    // Paid, because an unpaid request is now answered with the challenge before
+    // the body is read at all -- a never-ending unpaid body costs one 402 and
+    // no read, which is the cheaper outcome. The timeout still has to hold for
+    // a caller who has presented payment.
+    method: 'POST', headers: { 'Content-Type': 'application/json', 'PAYMENT-SIGNATURE': 'synthetic' }, body,
     duplex: 'half',
   } as RequestInit)
   const result = await f.handlers.POST(request)

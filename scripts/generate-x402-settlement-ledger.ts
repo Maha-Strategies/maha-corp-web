@@ -75,7 +75,10 @@ for (let from = earliest; from <= latest; from += CHUNK + BigInt(1)) {
 }
 
 /** Block timestamps, fetched only for rows that will be displayed. */
-const priced = new Set(payableOffers().map((o) => BigInt(o.amount)))
+// Current and superseded amounts both. A settlement made at a price the offer
+// has since left is still that offer's settlement, and filtering on the current
+// amount alone would drop it before the ledger ever saw it.
+const priced = new Set(payableOffers().flatMap((o) => [o.amount, ...(o.supersededAmounts ?? [])]).map(BigInt))
 const blocks = [...new Set(rows.filter((r) => priced.has(r.amountBaseUnits)).map((r) => r.blockNumber))]
 const timestamps = new Map<bigint, string>()
 for (const blockNumber of blocks) {
@@ -86,6 +89,7 @@ for (const row of rows) row.timestampUtc = timestamps.get(row.blockNumber) ?? nu
 
 const offers: OfferPrice[] = payableOffers().map((o) => ({
   id: o.id,
+  ...(o.supersededAmounts?.length ? { supersededAmountsBaseUnits: o.supersededAmounts.map(BigInt) } : {}),
   // serviceName is shared across offers from one service, so two products both
   // read as "Maha Context Compiler". The id distinguishes them. Known acronyms
   // are upper-cased, because "Mps Autonomous Audit" on a public page reads as
