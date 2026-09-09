@@ -133,7 +133,7 @@ const DIGITAL_OFFER_SPECS = Object.freeze([
     amount: (Number(offer.amount) / 1_000_000).toFixed(2),
     offer,
     estimatedSeconds: 5,
-    deliveryDeadlineSeconds: 30,
+    deliveryDeadlineSeconds: 90,
     termsUrl: `${SITE_URL}${offer.path}`,
   })),
 ] as const)
