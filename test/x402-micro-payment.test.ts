@@ -59,7 +59,7 @@ for (const offer of MICRO_OFFERS) {
     const f = fixture(offer)
     const get = await f.handlers.GET(new Request('https://www.mahastrategies.com' + offer.path))
     assert.equal(get.status, 200); assert.equal(f.calls.resolve, 0)
-    assert.equal((await get.json()).offer.status, 'withheld')
+    assert.equal((await get.json()).offer.status, offer.status)
     const signature = await f.signature()
     const paid = await f.handlers.POST(f.request(undefined, { 'PAYMENT-SIGNATURE': signature }))
     assert.equal(paid.status, 200)
@@ -72,11 +72,12 @@ for (const offer of MICRO_OFFERS) {
     const stored = JSON.stringify([f.calls.rpc, f.calls.usage])
     for (const field of ['inputDigest', 'receiptDigest', 'assessedAtUtc', 'bindings', 'sourceRevision', 'expectedRegistryDigest', 'expectedContentDigest', 'planDigest']) assert.ok(!stored.includes(field), field)
   })
-  test(`${offer.id}: Production and Preview remain disabled before any payment resolution`, async () => {
+  test(`${offer.id}: deployment gate admits only the reviewed cohort; unknown environments refuse`, async () => {
     for (const environment of ['production', 'preview', 'unknown']) {
       const f = fixture(offer, { environment })
       const r = await f.handlers.POST(f.request())
-      assert.equal(r.status, 503); assert.equal(f.calls.resolve, 0); assert.equal(f.calls.settle, 0)
+      const enabled = offer.availability.payableInProduction && environment !== 'unknown'
+      assert.equal(r.status, enabled ? 402 : 503); assert.equal(f.calls.resolve, enabled ? 1 : 0); assert.equal(f.calls.settle, 0)
     }
   })
 }

@@ -323,62 +323,56 @@
     },
     {
       "id": "citation-binding-check",
-      "status": "withheld",
+      "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/citation-binding-check",
       "method": "POST",
       "description": "Compare up to 20 declared source identities, revisions and locators. Returns exact mismatches and an integrity receipt. Does not fetch sources, establish passage existence or verify claim support.",
-      "payableNow": false,
-      "blockedBy": [
-        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
-      ],
+      "payableNow": true,
+      "blockedBy": [],
       "payment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
         "amount": "5000",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "payableNow": false
+        "autonomous": true,
+        "payableNow": true
       }
     },
     {
       "id": "revision-lineage-check",
-      "status": "withheld",
+      "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/revision-lineage-check",
       "method": "POST",
       "description": "Check one initial or superseding revision transition against a declared predecessor. Returns lineage inconsistencies and an integrity receipt. Does not establish authenticity, semantic equivalence or inherited review approval.",
-      "payableNow": false,
-      "blockedBy": [
-        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
-      ],
+      "payableNow": true,
+      "blockedBy": [],
       "payment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
         "amount": "5000",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "payableNow": false
+        "autonomous": true,
+        "payableNow": true
       }
     },
     {
       "id": "audit-export-normalizer",
-      "status": "withheld",
+      "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/audit-export-normalizer",
       "method": "POST",
       "description": "Normalize up to 100 metadata events into deterministic order, rejecting duplicate identifiers and malformed times or digests. Does not prove event occurrence, provenance or completeness against an external system.",
-      "payableNow": false,
-      "blockedBy": [
-        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
-      ],
+      "payableNow": true,
+      "blockedBy": [],
       "payment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
         "amount": "10000",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "payableNow": false
+        "autonomous": true,
+        "payableNow": true
       }
     },
     {
@@ -389,7 +383,7 @@
       "description": "Multiply or divide two seven-component SI dimension vectors and compare with the expected output dimension. No unit conversion, formula validation, scale-factor inference or physical-model certification.",
       "payableNow": false,
       "blockedBy": [
-        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+        "Outside the owner-authorized five-product release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",
@@ -409,7 +403,7 @@
       "description": "Interpolate between two integer-coordinate points with exact rational arithmetic and an integrity receipt. Refuses extrapolation and repeated nodes. Does not estimate measurement error or validate the interpolation model.",
       "payableNow": false,
       "blockedBy": [
-        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+        "Outside the owner-authorized five-product release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",
@@ -429,7 +423,7 @@
       "description": "Apply the composite trapezoidal rule to 2-128 equally spaced integer samples. Returns an exact rational arithmetic result, declared units and an integrity receipt. No quadrature-error estimate or claim of an exact underlying integral.",
       "payableNow": false,
       "blockedBy": [
-        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+        "Outside the owner-authorized five-product release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",
@@ -449,7 +443,7 @@
       "description": "Compare 2-20 caller-labelled observations of one claim, population and outcome. Returns opposing directions and explicitly excluded observations. No literature search, source inspection, consensus judgment or factual verification.",
       "payableNow": false,
       "blockedBy": [
-        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+        "Outside the owner-authorized five-product release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",
@@ -469,7 +463,7 @@
       "description": "Deliver public source metadata and exact release bindings for one supported federation article at caller-pinned revisions. Uses the deployed repository snapshot, not a live registry probe. No private review material, full source text or expert certification.",
       "payableNow": false,
       "blockedBy": [
-        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+        "Outside the owner-authorized five-product release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",
@@ -489,7 +483,7 @@
       "description": "Deliver one supported atlas unit as structured edition metadata, poetic context, bounded answers and links at a pinned registry digest. Public pages remain free. No translation full text, redistribution license, historical or theological certification.",
       "payableNow": false,
       "blockedBy": [
-        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+        "Outside the owner-authorized five-product release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",
@@ -509,7 +503,7 @@
       "description": "Check one structured public or synthetic low-stakes experiment plan for timing, comparator, outcome and analysis declarations. Returns deficiencies and an integrity receipt. No registration, trusted timestamp, prediction, power analysis or scientific validation.",
       "payableNow": false,
       "blockedBy": [
-        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+        "Outside the owner-authorized five-product release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",
@@ -523,22 +517,20 @@
     },
     {
       "id": "unit-uncertainty-conversion",
-      "status": "withheld",
+      "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/unit-uncertainty-conversion",
       "method": "POST",
       "description": "Convert one decimal measurement and standard uncertainty between explicitly supported length, mass, time or temperature units. Exact rational scale/offset arithmetic; no unit guessing, physical validation or expanded uncertainty.",
-      "payableNow": false,
-      "blockedBy": [
-        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
-      ],
+      "payableNow": true,
+      "blockedBy": [],
       "payment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
         "amount": "5000",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "payableNow": false
+        "autonomous": true,
+        "payableNow": true
       }
     },
     {
@@ -549,7 +541,7 @@
       "description": "Solve a 1-8 variable rational linear system with rank, pivots, particular solution and null-space basis. Distinguishes unique, inconsistent and underdetermined systems. Not a floating-point conditioning or physical-model assessment.",
       "payableNow": false,
       "blockedBy": [
-        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+        "Outside the owner-authorized five-product release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",
@@ -569,7 +561,7 @@
       "description": "Bisect a degree 1-8 rational polynomial over a sign-changing rational bracket, with a maximum of 64 iterations. Returns a certified bracket or exact rational root. No arbitrary code, all-roots or uniqueness claim.",
       "payableNow": false,
       "blockedBy": [
-        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+        "Outside the owner-authorized five-product release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",
@@ -589,7 +581,7 @@
       "description": "Evaluate c-transpose C c for 1-8 declared sensitivities and an exactly symmetric positive-semidefinite covariance matrix. Returns exact variance and a rational square-root enclosure. First-order model only; no empirical covariance validation.",
       "payableNow": false,
       "blockedBy": [
-        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+        "Outside the owner-authorized five-product release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",
@@ -603,22 +595,20 @@
     },
     {
       "id": "divine-name-disambiguation",
-      "status": "withheld",
+      "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/divine-name-disambiguation",
       "method": "POST",
       "description": "Resolve an exact supported Tamil divine-name spelling into source-scoped relationship records at a pinned registry. Ambiguity and name coincidence remain explicit. No fuzzy universal synonymy, full source text or theological certification.",
-      "payableNow": false,
-      "blockedBy": [
-        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
-      ],
+      "payableNow": true,
+      "blockedBy": [],
       "payment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
         "amount": "5000",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "payableNow": false
+        "autonomous": true,
+        "payableNow": true
       }
     },
     {
@@ -629,7 +619,7 @@
       "description": "Resolve one printed pasuram number to its complete unit in the pinned Project Madurai/Hart atlas. Edition-specific, with exact unit locator. No conversion between numbering systems, translation reproduction or occurrence claims about a single verse.",
       "payableNow": false,
       "blockedBy": [
-        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+        "Outside the owner-authorized five-product release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",
@@ -649,7 +639,7 @@
       "description": "Retrieve one supported reception comparison with separate source frames and exact locators from the pinned public atlas. No inferred ancestry, uninterrupted transmission, universal identity or source full text.",
       "payableNow": false,
       "blockedBy": [
-        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+        "Outside the owner-authorized five-product release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",
@@ -669,7 +659,7 @@
       "description": "Compare up to 40 caller-supplied policy clauses per version by stable ID, text and scope. Reports added, removed and changed clauses. Checks declared chronology, not legal effect, applicability or compliance.",
       "payableNow": false,
       "blockedBy": [
-        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+        "Outside the owner-authorized five-product release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",
@@ -689,7 +679,7 @@
       "description": "Compare up to 40 declared policy/control requirements with revision- and scope-bound evidence descriptors. Reports missing, stale and rejected evidence. Does not inspect evidence content, evaluate control effectiveness or certify compliance.",
       "payableNow": false,
       "blockedBy": [
-        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+        "Outside the owner-authorized five-product release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",
@@ -709,7 +699,7 @@
       "description": "Compare required tool names and exact pinned input/output schema digests against a declared MCP server snapshot. Checks protocol version and transport. Not a network probe, general schema-subtyping proof or official conformance certificate.",
       "payableNow": false,
       "blockedBy": [
-        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+        "Outside the owner-authorized five-product release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",
@@ -729,7 +719,7 @@
       "description": "Compare two explicit allow-only permission sets by tool, action and exact resource identifier. Reports additions, removals and wildcard additions. Does not resolve IAM inheritance, wildcard containment or authorize execution.",
       "payableNow": false,
       "blockedBy": [
-        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+        "Outside the owner-authorized five-product release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",
@@ -749,7 +739,7 @@
       "description": "Compare 2-8 declared article, registry and API views against one canonical URL, content digest, release digest and source-set digest. Reports stale, withdrawn and substituted views. No live fetch, release promotion or semantic content verification.",
       "payableNow": false,
       "blockedBy": [
-        "Local implementation only; owner publication approval, Preview verification and paid canaries outstanding."
+        "Outside the owner-authorized five-product release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",

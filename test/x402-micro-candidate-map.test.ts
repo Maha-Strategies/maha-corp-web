@@ -24,7 +24,10 @@ test('freeze enumerates sixty original candidates and refuses to overwrite the o
   assert.equal(read('content/discovery/micro-candidate-freeze-v1.json'), before)
   for (const prior of freeze.existingOffers) {
     const current = X402_OFFERS.find(o => o.id === prior.id)!
-    for (const key of ['path', 'amount', 'description', 'status'] as const) assert.equal(current[key], prior[key], `${prior.id}:${key}`)
+    for (const key of ['path', 'amount', 'description'] as const) assert.equal(current[key], prior[key], `${prior.id}:${key}`)
+    // Freeze is immutable history. Only the three explicitly promoted original ten may change status.
+    const promoted = ['citation-binding-check', 'revision-lineage-check', 'audit-export-normalizer'].includes(prior.id)
+    assert.equal(current.status, promoted ? 'available' : prior.status, `${prior.id}:status`)
   }
 })
 
@@ -71,8 +74,8 @@ test('public runtime does not import private selection, cost observations or fro
     assert.doesNotMatch(read(path), /micro60-selection|micro-next12-cost-observation|micro-candidate-freeze/)
   }
   for (const path of ['public/.well-known/x402-public-manifest.json', 'content/discovery/agent-card.json', 'content/discovery/agent-offers.json', 'content/discovery/microproduct-examples.json']) assert.doesNotMatch(read(path), /cpuMicros|cappedWorkloadP95Ms|costObservationDigest|NEVER-EXPOSE/)
-  // Every public route factory is still hard-blocked outside local test/development.
-  assert.match(read('lib/x402/micro-route.ts'), /\['test', 'development'\]\.includes/)
+  // The shared factory must enforce the reviewed allowlist, independent of payment configuration.
+  assert.match(read('lib/x402/micro-route.ts'), /if \(!microExecutionAllowed\(id, environment\)\)/)
 })
 
 test('entrypoint import order cannot resurrect the earlier schema/catalog initialization cycle', () => {

@@ -5,6 +5,7 @@ import { MICRO_OFFERS } from './micro-offers.ts'
 import { resolveX402 } from './gateway.ts'
 import { releaseHeldSlot } from './slot.ts'
 import { discoverySourceFrom, recordOfferUsage } from './offer-telemetry.ts'
+import { microExecutionAllowed } from './micro-release.ts'
 
 type Dependencies = {
   environment?: string
@@ -66,7 +67,9 @@ export function microHandlers(id: MicroProductId, dependencies: Dependencies = {
     GET: async (request: Request) => {
       const url = new URL(request.url)
       if (url.pathname !== microPath(id) || url.search) return failure('invalid_discovery_url', 400)
-      return response({ offer, execution: 'Withheld; local development and injected tests only. GET returns a free contract and example, not caller-specific execution.' }, 200)
+      return response({ offer, execution: offer.availability.payableInProduction
+        ? 'POST requires x402 payment and enabled deployment configuration. GET returns a free contract and example, not caller-specific execution.'
+        : 'Withheld; local development and injected tests only. GET returns a free contract and example, not caller-specific execution.' }, 200)
     },
     OPTIONS: async () => new Response(null, { status: 204, headers: { ...API_CORS_HEADERS, Allow: 'GET, POST, OPTIONS', 'Cache-Control': 'no-store' } }),
     POST: async (request: Request): Promise<Response> => {
@@ -77,8 +80,8 @@ export function microHandlers(id: MicroProductId, dependencies: Dependencies = {
       const url = new URL(request.url)
       if (request.method !== 'POST' || url.pathname !== microPath(id) || url.search) return failure('method_or_route_mismatch', 400)
       if (request.headers.has('authorization') || request.headers.has('x-api-key')) return failure('enterprise_credentials_not_accepted', 400)
-      // Even accidental X402_RESOURCES configuration cannot enable Preview or Production settlement.
-      if (!['test', 'development'].includes(environment ?? '')) return failure('offer_not_published', 503)
+      // Configuration cannot enable any product outside the reviewed release cohort.
+      if (!microExecutionAllowed(id, environment)) return failure('offer_not_published', 503)
       if (!/^application\/json(?:\s*;|$)/i.test(request.headers.get('content-type') ?? '')) return failure('unsupported_media_type', 415)
       if (request.headers.has('content-encoding') && request.headers.get('content-encoding') !== 'identity') return failure('content_encoding_not_supported', 415)
       let prepared: Awaited<ReturnType<typeof buildMicroProduct>>

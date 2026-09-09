@@ -13,6 +13,7 @@ import { payableOffers } from '../lib/x402/offers.ts'
 import { validate } from './helpers/json-schema.ts'
 import { apiProxyGate } from '../lib/api-proxy-policy.ts'
 import { releasesSlot } from '../lib/x402/slot.ts'
+import { isReleasedMicro } from '../lib/x402/micro-release.ts'
 
 const sample = (id: keyof typeof MICRO_PRODUCTS) => structuredClone(MICRO_SAMPLE_INPUTS[id])
 const root = new URL('../', import.meta.url)
@@ -22,9 +23,9 @@ const hash = (c: string) => `sha256:${c.repeat(64)}`
 for (const id of MICRO_IDS) {
   test(`${id}: deterministic, independent-schema-valid example and recomputation`, async () => {
     const offer = MICRO_OFFERS.find(o => o.id === id)!, input = sample(id)
-    assert.equal(offer.status, 'withheld')
-    assert.equal(offer.availability.payableInProduction, false)
-    assert.ok(!payableOffers().some(o => o.id === id))
+    assert.equal(offer.status, isReleasedMicro(id) ? 'available' : 'withheld')
+    assert.equal(offer.availability.payableInProduction, isReleasedMicro(id))
+    assert.equal(payableOffers().some(o => o.id === id), isReleasedMicro(id))
     assert.equal(Buffer.byteLength(offer.description) <= 480, true)
     assert.deepEqual(validate(input, offer.discovery.inputSchema), [])
     const result = await buildMicroProduct(id, input)

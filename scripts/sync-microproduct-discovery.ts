@@ -10,12 +10,12 @@ for (const [name, field, paymentField] of [['agent-card', 'capabilities', 'payme
   const retained = body[field].filter((entry: { id: string }) => !isMicroProduct(entry.id))
   body[field] = [...retained, ...MICRO_OFFERS.map(o => ({
     id: o.id, status: o.status, endpoint: `https://www.mahastrategies.com${o.path}`, method: o.method,
-    description: o.description, payableNow: false, blockedBy: o.availability.blockedBy,
-    [paymentField]: { protocol: 'x402', version: 2, network: 'eip155:8453', amount: o.amount, assetSymbol: 'USDC', autonomous: false, payableNow: false },
+    description: o.description, payableNow: o.availability.payableInProduction, blockedBy: o.availability.blockedBy,
+    [paymentField]: { protocol: 'x402', version: 2, network: 'eip155:8453', amount: o.amount, assetSymbol: 'USDC', autonomous: o.availability.payableInProduction, payableNow: o.availability.payableInProduction },
   }))]
-  if (name === 'agent-offers') body.transactionPolicy.describedNotPayable = [...body.transactionPolicy.describedNotPayable.filter((id: string) => !isMicroProduct(id)), ...MICRO_OFFERS.map(o => o.id)]
+  if (name === 'agent-offers') body.transactionPolicy.describedNotPayable = [...body.transactionPolicy.describedNotPayable.filter((id: string) => !isMicroProduct(id)), ...MICRO_OFFERS.filter(o => !o.availability.payableInProduction).map(o => o.id)]
   const after = JSON.stringify(body, null, 2) + '\n'
   if (process.argv.includes('--write')) writeFileSync(path, after)
   else if (before !== after) throw new Error(`microproduct-discovery-stale:${name}`)
 }
-console.log(`${MICRO_OFFERS.length} withheld declarations synchronized locally; payable scope unchanged. No network or deployment.`)
+console.log(`${MICRO_OFFERS.filter(o => o.availability.payableInProduction).length} released and ${MICRO_OFFERS.filter(o => !o.availability.payableInProduction).length} withheld microproduct declarations synchronized. No network or deployment.`)

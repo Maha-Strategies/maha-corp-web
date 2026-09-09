@@ -596,10 +596,19 @@
     },
     {
       "id": "citation-binding-check",
-      "status": "withheld",
+      "status": "active",
       "canonicalResource": "https://www.mahastrategies.com/api/v1/micro/citation-binding-check",
       "method": "POST",
-      "payment": null,
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "5000",
+        "displayAmount": "0.005000 USDC"
+      },
       "schemas": {
         "input": "https://www.mahastrategies.com/api/discovery/x402-offers/citation-binding-check#input",
         "output": "https://www.mahastrategies.com/api/discovery/x402-offers/citation-binding-check#output"
@@ -631,10 +640,19 @@
     },
     {
       "id": "revision-lineage-check",
-      "status": "withheld",
+      "status": "active",
       "canonicalResource": "https://www.mahastrategies.com/api/v1/micro/revision-lineage-check",
       "method": "POST",
-      "payment": null,
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "5000",
+        "displayAmount": "0.005000 USDC"
+      },
       "schemas": {
         "input": "https://www.mahastrategies.com/api/discovery/x402-offers/revision-lineage-check#input",
         "output": "https://www.mahastrategies.com/api/discovery/x402-offers/revision-lineage-check#output"
@@ -666,10 +684,19 @@
     },
     {
       "id": "audit-export-normalizer",
-      "status": "withheld",
+      "status": "active",
       "canonicalResource": "https://www.mahastrategies.com/api/v1/micro/audit-export-normalizer",
       "method": "POST",
-      "payment": null,
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "10000",
+        "displayAmount": "0.010000 USDC"
+      },
       "schemas": {
         "input": "https://www.mahastrategies.com/api/discovery/x402-offers/audit-export-normalizer#input",
         "output": "https://www.mahastrategies.com/api/discovery/x402-offers/audit-export-normalizer#output"
@@ -946,10 +973,19 @@
     },
     {
       "id": "unit-uncertainty-conversion",
-      "status": "withheld",
+      "status": "active",
       "canonicalResource": "https://www.mahastrategies.com/api/v1/micro/unit-uncertainty-conversion",
       "method": "POST",
-      "payment": null,
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "5000",
+        "displayAmount": "0.005000 USDC"
+      },
       "schemas": {
         "input": "https://www.mahastrategies.com/api/discovery/x402-offers/unit-uncertainty-conversion#input",
         "output": "https://www.mahastrategies.com/api/discovery/x402-offers/unit-uncertainty-conversion#output"
@@ -1086,10 +1122,19 @@
     },
     {
       "id": "divine-name-disambiguation",
-      "status": "withheld",
+      "status": "active",
       "canonicalResource": "https://www.mahastrategies.com/api/v1/micro/divine-name-disambiguation",
       "method": "POST",
-      "payment": null,
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "5000",
+        "displayAmount": "0.005000 USDC"
+      },
       "schemas": {
         "input": "https://www.mahastrategies.com/api/discovery/x402-offers/divine-name-disambiguation#input",
         "output": "https://www.mahastrategies.com/api/discovery/x402-offers/divine-name-disambiguation#output"
