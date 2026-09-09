@@ -8,6 +8,7 @@ import {
 } from './x402/context-product-offer-schemas.ts'
 import { RESEARCH_INTAKE_EVIDENCE_PACK_DISCOVERY } from './x402/offer-schemas.ts'
 import { CELESTIAL_OFFERS } from './x402/celestial-offers.ts'
+import { MICRO_OPENAPI_PATHS } from './x402/micro-openapi.ts'
 import {
   IMAGINED_LIFE_EDITION_OFFER,
   IMAGINED_LIFE_SECTION_OFFER,
@@ -105,6 +106,7 @@ export const openApiDocument = {
   },
   servers: [{ url: 'https://www.mahastrategies.com' }],
   tags: [
+    { name: 'x402 Microproducts', description: 'Bounded local implementations; all withheld from Preview and Production payment.' },
     { name: 'Agentic Commerce', description: 'Read-only offer and transaction-policy discovery for agents.' },
     { name: 'x402 Conformance', description: 'Factual protocol and Bazaar discovery observations without trust, security, or uptime scoring.' },
     { name: 'MPS Audit', description: 'Prepaid claim-level provenance audits.' },
@@ -124,6 +126,7 @@ export const openApiDocument = {
     { name: 'Governed Workflow', description: 'Read-only evaluation prototype over a synthetic document-approval workflow. Stateless, metadata-only, and performs no side effect.' },
   ],
   paths: {
+    ...MICRO_OPENAPI_PATHS,
     ...Object.fromEntries(CELESTIAL_OFFERS.map(offer => [offer.path, {
       get: { tags: ['Maha Celestial Evidence'], operationId: `describe-${offer.id}`, security: [], summary: 'Free calculation contract discovery',
         responses: { '200': { description: 'Status, limits, conventions and synthetic examples; no calculation performed.' }, '400': { description: 'Query parameters are not accepted.' } } },

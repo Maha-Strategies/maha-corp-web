@@ -15,6 +15,7 @@ import {
 import { MAX_RESOURCE_DESCRIPTION_BYTES, MAX_RESOURCE_DESCRIPTION_CHARS } from '../lib/x402/discovery.ts'
 import { priceFor, x402Config, type X402Config } from '../lib/x402/config.ts'
 import { releasesSlot } from '../lib/x402/slot.ts'
+import { isMicroProduct } from '../lib/x402/micro-contracts.ts'
 import { validate } from './helpers/json-schema.ts'
 
 const DISCOVERY_DIR = join(import.meta.dirname, '..', 'content', 'discovery')
@@ -110,7 +111,7 @@ test('only routes that actually release their slot can be priced', () => {
   for (const offer of X402_OFFERS.filter((candidate) => candidate.status !== 'available')) {
     // Implementation and publication are different gates. The calculation
     // handlers release slots but remain withheld until preview/release review.
-    const implementedWithheld = ['celestial-position-snapshot', 'celestial-chart-evidence', 'celestial-vimshottari-timing'].includes(offer.id)
+    const implementedWithheld = isMicroProduct(offer.id) || ['celestial-position-snapshot', 'celestial-chart-evidence', 'celestial-vimshottari-timing'].includes(offer.id)
     assert.equal(releasesSlot(offer.method, offer.path), implementedWithheld, `${offer.id} slot-release implementation`)
   }
   // The allowlist is exact, so a listed route does not vouch for its children.

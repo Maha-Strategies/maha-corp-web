@@ -1,0 +1,658 @@
+{
+  "version": "micro-candidate-freeze/1",
+  "baseCommit": "c06fd549",
+  "selectionPerformed": false,
+  "candidates": [
+    {
+      "candidateId": "micro60-01",
+      "family": "scientific",
+      "title": "Unit conversion with uncertainty",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-02",
+      "family": "scientific",
+      "title": "Covariance-aware uncertainty propagation",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-03",
+      "family": "scientific",
+      "title": "Weighted calibration fit",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-04",
+      "family": "scientific",
+      "title": "Measurement compatibility check",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-05",
+      "family": "scientific",
+      "title": "Significant-figure reporting",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-06",
+      "family": "scientific",
+      "title": "Missing-data diagnostics",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-07",
+      "family": "scientific",
+      "title": "Sampling/Nyquist check",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-08",
+      "family": "scientific",
+      "title": "Coordinate-frame transformation",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-09",
+      "family": "scientific",
+      "title": "Bounded spectral analysis",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-10",
+      "family": "scientific",
+      "title": "Numerical convergence assessment",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-11",
+      "family": "mathematics",
+      "title": "Exact linear-system solver",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-12",
+      "family": "mathematics",
+      "title": "Matrix rank and null-space certificate",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-13",
+      "family": "mathematics",
+      "title": "Polynomial factorization",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-14",
+      "family": "mathematics",
+      "title": "Polynomial identity check",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-15",
+      "family": "mathematics",
+      "title": "Rational-expression simplification with excluded values",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-16",
+      "family": "mathematics",
+      "title": "Bracketed root-finding receipt",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-17",
+      "family": "mathematics",
+      "title": "Interval-bound evaluation",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-18",
+      "family": "mathematics",
+      "title": "Finite probability calculation",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-19",
+      "family": "mathematics",
+      "title": "Graph connectivity/path analysis",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-20",
+      "family": "mathematics",
+      "title": "Bounded linear-program solution with feasibility checks",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-21",
+      "family": "religion",
+      "title": "Divine-name disambiguation",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-22",
+      "family": "religion",
+      "title": "Edition-specific verse-reference resolution",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-23",
+      "family": "religion",
+      "title": "Cross-edition passage alignment",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-24",
+      "family": "religion",
+      "title": "Translation-variant comparison",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-25",
+      "family": "religion",
+      "title": "Divine-epithet concordance",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-26",
+      "family": "religion",
+      "title": "Landscape-deity relationship lookup",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-27",
+      "family": "religion",
+      "title": "Place-name disambiguation",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-28",
+      "family": "religion",
+      "title": "Primary-text versus commentary attribution",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-29",
+      "family": "religion",
+      "title": "Documented reception-lineage retrieval",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-30",
+      "family": "religion",
+      "title": "Cross-tradition comparison with explicit relationship types",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-31",
+      "family": "policy",
+      "title": "Version-pinned policy-clause retrieval",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-32",
+      "family": "policy",
+      "title": "Policy-version change comparison",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-33",
+      "family": "policy",
+      "title": "Obligation-to-control mapping",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-34",
+      "family": "policy",
+      "title": "Jurisdiction/date applicability triage",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-35",
+      "family": "policy",
+      "title": "Control-evidence gap analysis",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-36",
+      "family": "policy",
+      "title": "Responsibility-assignment consistency",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-37",
+      "family": "policy",
+      "title": "Policy-exception validation",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-38",
+      "family": "policy",
+      "title": "Declared data-flow boundary checks",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-39",
+      "family": "policy",
+      "title": "Standard-to-standard control crosswalks",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-40",
+      "family": "policy",
+      "title": "Policy-as-code evaluation against approved rules",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-41",
+      "family": "astronomy",
+      "title": "Time-scale conversion",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-42",
+      "family": "astronomy",
+      "title": "Julian-date conversion",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-43",
+      "family": "astronomy",
+      "title": "Celestial-coordinate transformation",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-44",
+      "family": "astronomy",
+      "title": "Angular-separation calculation",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-45",
+      "family": "astronomy",
+      "title": "Proper-motion propagation",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-46",
+      "family": "astronomy",
+      "title": "Altitude/azimuth conversion",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-47",
+      "family": "astronomy",
+      "title": "Observing-window calculation",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-48",
+      "family": "astronomy",
+      "title": "Uncertainty-aware positional crossmatching",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-49",
+      "family": "astronomy",
+      "title": "Calendar/reference-convention comparison",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-50",
+      "family": "astronomy",
+      "title": "Bounded statistical evaluation of a previously frozen experiment",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-51",
+      "family": "infrastructure",
+      "title": "MCP contract compatibility",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-52",
+      "family": "infrastructure",
+      "title": "Tool-argument validation",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-53",
+      "family": "infrastructure",
+      "title": "Permission-change analysis",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-54",
+      "family": "infrastructure",
+      "title": "Workflow dependency validation",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-55",
+      "family": "infrastructure",
+      "title": "Provenance-graph integrity",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-56",
+      "family": "infrastructure",
+      "title": "Entity resolution across Maha properties",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-57",
+      "family": "infrastructure",
+      "title": "Claim-to-citation coverage",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-58",
+      "family": "infrastructure",
+      "title": "Citation-style conversion preserving locators",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-59",
+      "family": "infrastructure",
+      "title": "Machine-license scope matching",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    },
+    {
+      "candidateId": "micro60-60",
+      "family": "infrastructure",
+      "title": "Publication-bundle consistency across article, registry and API",
+      "demand": null,
+      "demandBasis": "not-measured",
+      "cloudCost": null
+    }
+  ],
+  "existingOffers": [
+    {
+      "id": "context-compression",
+      "path": "/api/v1/compress",
+      "amount": "1000",
+      "description": "Compress long documents and RAG inputs into token-budgeted, deduplicated context packs with source-linked provenance. Returns original and compiled token counts, so the saving is verifiable. Net-positive above N = fee / (r x p) tokens: r your reduction, p your input price. Extractive and budget-bound, so check includedPassages before relying on it. Ranks Latin, Cyrillic, Greek, Arabic and CJK; CJK coarser (bigrams). Not for tabular or heavily-structured payloads.",
+      "status": "available"
+    },
+    {
+      "id": "context-budget-ladder",
+      "path": "/api/v1/context/budget-ladder",
+      "amount": "5000",
+      "description": "Compile the same supplied documents at exactly five ascending token budgets. Returns five source-linked extractive Context Packs, a compact comparison table, stable hashes, and a deterministic receipt digest. Price basis: five $0.001 compilations. No model inference, source acquisition, claim verification, completeness guarantee, or answer-quality assessment. Request and result bodies are not stored.",
+      "status": "available"
+    },
+    {
+      "id": "deep-context-evaluation",
+      "path": "/api/v1/compress/evaluate",
+      "amount": "10000",
+      "description": "Compile 1-8 documents into a token-budgeted context pack, then measure exact retention of 1-32 caller-labelled evidence spans. Returns the pack, source-linked passages, input and output hashes, original and compiled token estimates, tokensSaved, source coverage, and requiredEvidenceRetentionPercent. Retention is exact span matching only: not accuracy, answer quality, verification, or hallucination prevention. Extractive and budget-bound. Request content is not stored.",
+      "status": "available"
+    },
+    {
+      "id": "evidence-retention-matrix",
+      "path": "/api/v1/context/evidence-matrix",
+      "amount": "50000",
+      "description": "Evaluate exact retention of 1-32 caller-labelled evidence spans at exactly five ascending token budgets. Returns five source-linked Context Packs, per-run retention metrics, an evidence frontier, stable hashes, and a deterministic receipt digest. Price basis: five $0.01 evaluations. Retention is not truth, accuracy, answer quality, legal compliance, or hallucination prevention. Bodies are not stored.",
+      "status": "available"
+    },
+    {
+      "id": "mps-autonomous-audit",
+      "path": "/api/v1/mps/audit",
+      "amount": "100000",
+      "description": "Automated claim triage for a nonfiction passage under the Maha Provenance Standard v0.1. Each substantive claim returns a provenance status (VERIFIED, SOURCED, BOUNDARY, ILLUSTRATIVE, UNVERIFIED), a rationale, and a suggested action. Model-assigned triage: not factual certification, legal advice, or human verification, and must be checked before publication. Passage limit 6000 characters. The full passage is not stored; results keep short verbatim claim excerpts.",
+      "status": "available"
+    },
+    {
+      "id": "governed-context-verification-pack",
+      "path": "/api/v1/context/governed-verification",
+      "amount": "500000",
+      "description": "Produce one machine-readable context-control evidence packet from caller-supplied documents and exact evidence spans: compiled Context Pack, retention results, policy and budget observations, integrity hashes, boundaries, and deterministic receipt digest. A machine-generated preflight, not factual or compliance certification, new research, human judgment, or proof of downstream model behavior. Bodies are not stored.",
+      "status": "available"
+    },
+    {
+      "id": "research-intake-evidence-pack",
+      "path": "/api/v1/research/intake",
+      "amount": "1000000",
+      "description": "Machine-generated intake packet for one question and 1-10 supplied source sections. Returns one MPS triage per section, an ordered manifest, claim inventory, citation gaps, potential conflicts, unresolved questions, proposed human-research scope, and deterministic digests. Fixed $1 capacity price: up to ten $0.10 section audits. Not a research brief, new research, factual certification, human judgment, or a recommendation.",
+      "status": "available"
+    },
+    {
+      "id": "book-section-the-imagined-life",
+      "path": "/api/v1/books/the-imagined-life/section",
+      "amount": "5000",
+      "description": "Retrieve one exact section of The Imagined Life as machine-readable Markdown with ordered edition metadata, byte and word counts, SHA-256 content commitment, and deterministic receipt. The public web edition remains free. Payment purchases structured delivery, not exclusivity, copyright, analysis, factual certification, or a recommendation. Request and response bodies are not stored.",
+      "status": "available"
+    },
+    {
+      "id": "book-section-the-volcanic-engine",
+      "path": "/api/v1/books/the-volcanic-engine/section",
+      "amount": "5000",
+      "description": "Retrieve one exact section of The Volcanic Engine as machine-readable Markdown with ordered edition metadata, byte and word counts, SHA-256 content commitment, and deterministic receipt. The public web edition remains free. Payment purchases structured delivery, not exclusivity, copyright, analysis, factual certification, or a recommendation. Request and response bodies are not stored.",
+      "status": "available"
+    },
+    {
+      "id": "book-edition-the-imagined-life",
+      "path": "/api/v1/books/the-imagined-life/edition",
+      "amount": "2990000",
+      "description": "Purchase the complete machine-readable edition of The Imagined Life as normalized Markdown with an ordered section manifest, per-section and whole-edition SHA-256 commitments, and a deterministic receipt. Includes non-exclusive personal or internal machine use; no redistribution, resale, model-training rights, copyright transfer, analysis, factual certification, or recommendation. The public web edition remains free.",
+      "status": "available"
+    },
+    {
+      "id": "book-edition-the-volcanic-engine",
+      "path": "/api/v1/books/the-volcanic-engine/edition",
+      "amount": "2990000",
+      "description": "Purchase the complete machine-readable edition of The Volcanic Engine as normalized Markdown with an ordered section manifest, per-section and whole-edition SHA-256 commitments, and a deterministic receipt. Includes non-exclusive personal or internal machine use; no redistribution, resale, model-training rights, copyright transfer, analysis, factual certification, or recommendation. The public web edition remains free.",
+      "status": "available"
+    },
+    {
+      "id": "celestial-position-snapshot",
+      "path": "/api/v1/calculations/positions",
+      "amount": "10000",
+      "description": "Calculate seven classical-body geocentric longitudes at one UTC instant in Tropical and versioned Lahiri Sidereal frames. Includes explicit conventions and a deterministic integrity receipt. Public or synthetic inputs only. No interpretations, forecasts, LLM calls, or predictive certification. Bodies and receipt digests are not stored.",
+      "status": "available"
+    },
+    {
+      "id": "celestial-chart-evidence",
+      "path": "/api/v1/calculations/chart",
+      "amount": "50000",
+      "description": "Calculate one UTC chart with Tropical and Lahiri Sidereal positions, Sidereal whole-sign houses, mean nodes, geometric aspects and panchanga. Includes numerical limitations and a deterministic integrity receipt. Public or synthetic inputs only. No forecasting narrative, LLM calls or predictive certification. Bodies and receipt digests are not stored.",
+      "status": "available"
+    },
+    {
+      "id": "celestial-vimshottari-timing",
+      "path": "/api/v1/calculations/vimshottari",
+      "amount": "100000",
+      "description": "Calculate Vimshottari birth balance, nine mahadashas and nine antardashas of the active mahadasha at one reference instant. Uses actual nakshatra stay time and a 365.2425-day year. Includes conventions and deterministic receipt. Public or synthetic inputs only. No event prediction, interpretation or LLM calls. Bodies and receipt digests are not stored.",
+      "status": "available"
+    },
+    {
+      "id": "citation-binding-check",
+      "path": "/api/v1/micro/citation-binding-check",
+      "amount": "5000",
+      "description": "Compare up to 20 declared source identities, revisions and locators. Returns exact mismatches and an integrity receipt. Does not fetch sources, establish passage existence or verify claim support.",
+      "status": "withheld"
+    },
+    {
+      "id": "revision-lineage-check",
+      "path": "/api/v1/micro/revision-lineage-check",
+      "amount": "5000",
+      "description": "Check one initial or superseding revision transition against a declared predecessor. Returns lineage inconsistencies and an integrity receipt. Does not establish authenticity, semantic equivalence or inherited review approval.",
+      "status": "withheld"
+    },
+    {
+      "id": "audit-export-normalizer",
+      "path": "/api/v1/micro/audit-export-normalizer",
+      "amount": "10000",
+      "description": "Normalize up to 100 metadata events into deterministic order, rejecting duplicate identifiers and malformed times or digests. Does not prove event occurrence, provenance or completeness against an external system.",
+      "status": "withheld"
+    },
+    {
+      "id": "dimensional-consistency-check",
+      "path": "/api/v1/micro/dimensional-consistency-check",
+      "amount": "5000",
+      "description": "Multiply or divide two seven-component SI dimension vectors and compare with the expected output dimension. No unit conversion, formula validation, scale-factor inference or physical-model certification.",
+      "status": "withheld"
+    },
+    {
+      "id": "exact-interpolation-receipt",
+      "path": "/api/v1/micro/exact-interpolation-receipt",
+      "amount": "5000",
+      "description": "Interpolate between two integer-coordinate points with exact rational arithmetic and an integrity receipt. Refuses extrapolation and repeated nodes. Does not estimate measurement error or validate the interpolation model.",
+      "status": "withheld"
+    },
+    {
+      "id": "sampled-series-integration",
+      "path": "/api/v1/micro/sampled-series-integration",
+      "amount": "10000",
+      "description": "Apply the composite trapezoidal rule to 2-128 equally spaced integer samples. Returns an exact rational arithmetic result, declared units and an integrity receipt. No quadrature-error estimate or claim of an exact underlying integral.",
+      "status": "withheld"
+    },
+    {
+      "id": "evidence-conflict-comparator",
+      "path": "/api/v1/micro/evidence-conflict-comparator",
+      "amount": "10000",
+      "description": "Compare 2-20 caller-labelled observations of one claim, population and outcome. Returns opposing directions and explicitly excluded observations. No literature search, source inspection, consensus judgment or factual verification.",
+      "status": "withheld"
+    },
+    {
+      "id": "release-bound-evidence-packet",
+      "path": "/api/v1/micro/release-bound-evidence-packet",
+      "amount": "10000",
+      "description": "Deliver public source metadata and exact release bindings for one supported federation article at caller-pinned revisions. Uses the deployed repository snapshot, not a live registry probe. No private review material, full source text or expert certification.",
+      "status": "withheld"
+    },
+    {
+      "id": "tiruvaymoli-context-packet",
+      "path": "/api/v1/micro/tiruvaymoli-context-packet",
+      "amount": "5000",
+      "description": "Deliver one supported atlas unit as structured edition metadata, poetic context, bounded answers and links at a pinned registry digest. Public pages remain free. No translation full text, redistribution license, historical or theological certification.",
+      "status": "withheld"
+    },
+    {
+      "id": "astrology-experiment-plan-check",
+      "path": "/api/v1/micro/astrology-experiment-plan-check",
+      "amount": "10000",
+      "description": "Check one structured public or synthetic low-stakes experiment plan for timing, comparator, outcome and analysis declarations. Returns deficiencies and an integrity receipt. No registration, trusted timestamp, prediction, power analysis or scientific validation.",
+      "status": "withheld"
+    }
+  ],
+  "digest": "sha256:0234c15fb8fffb24dc99a2a5d15d7eab833857f04156bed5b9460aade69db55c"
+}

@@ -1,4 +1,5 @@
 import { releaseSlot } from './concurrency.ts'
+import { MICRO_IDS, microPath } from './micro-contracts.ts'
 
 // The capacity slot is acquired in proxy.ts, but proxy.ts cannot release it.
 //
@@ -73,6 +74,7 @@ export function withSlotRelease<Args extends unknown[]>(
  * or by carrying the token through to whatever observes the work finish.
  */
 export const SLOT_RELEASING_ROUTES = [
+  ...MICRO_IDS.map(id => `POST ${microPath(id)}`),
   'POST /api/v1/compress',
   // Wrapped in withSlotRelease, whose `finally` frees the slot on success,
   // on validation failure, and on a thrown handler alike.

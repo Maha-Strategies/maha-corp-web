@@ -1,0 +1,42 @@
+name: Five microproduct publisher-funded indexing canaries
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 'One run only: PUBLISHER_FUNDED_MICRO_FIVE_ONCE_MAX_0_03_USDC'
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: production-x402-bazaar-canary
+  cancel-in-progress: false
+jobs:
+  index:
+    if: github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: production-x402-canary
+    env:
+      BASE_RPC_URL: ${{ vars.BASE_RPC_URL }}
+      MICRO_CANARY_OUTPUT_PATH: ${{ github.workspace }}/micro-five-indexing-canary.json
+      MICRO_CANARY_CONFIRMATION: ${{ inputs.confirmation }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Purchase five synthetic results once; never repay for index lag
+        env:
+          X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
+        run: node --experimental-strip-types scripts/run-micro-five-indexing-canaries.ts
+      - name: Preserve sanitized evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: micro-five-indexing-canary-${{ github.run_id }}
+          path: ${{ env.MICRO_CANARY_OUTPUT_PATH }}
+          if-no-files-found: error
+          retention-days: 90

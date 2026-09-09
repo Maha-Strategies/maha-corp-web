@@ -2,6 +2,8 @@ import { createHash } from 'node:crypto'
 import { bazaarResourceServerExtension, declareDiscoveryExtension, validateDiscoveryExtension } from '@x402/extensions/bazaar'
 import { offerById } from './offers.ts'
 import { isCelestialProduct, verifyCelestialProduct } from './celestial-products.ts'
+import { isMicroProduct } from './micro-contracts.ts'
+import { microDigest } from './micro-products.ts'
 
 export const bytesDigest = (bytes: Uint8Array | string): string =>
   `sha256:${createHash('sha256').update(bytes).digest('hex')}`
@@ -109,6 +111,12 @@ export function checkBuyerDelivery(input: {
   // Calculation receipts additionally support a local deterministic replay.
   // This is not an independent proof of receipt by a remote buyer.
   if (isCelestialProduct(offer.id) && !verifyCelestialProduct(offer.id, request, response)) problems.push('calculation_receipt_or_recomputation_mismatch')
+  // The synchronous capture checker binds bytes/request/receipt. The separate
+  // async verifyMicroProduct API additionally recomputes corpus-backed results.
+  if (isMicroProduct(offer.id)) {
+    const unsigned = Object.fromEntries(Object.entries(response).filter(([key]) => key !== 'receiptDigest'))
+    if (response.inputDigest !== microDigest(request) || response.receiptDigest !== microDigest(unsigned)) problems.push('micro_input_or_receipt_digest_mismatch')
+  }
   if (offer.id === 'mps-autonomous-audit' && (response.status !== 'completed' || !object(response.audit))) problems.push('audit_not_completed')
   if (offer.id === 'research-intake-evidence-pack') {
     const progress = response.progress
