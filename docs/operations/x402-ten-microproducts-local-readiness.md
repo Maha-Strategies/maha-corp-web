@@ -89,10 +89,24 @@ wrong-offer payments, concurrent replay, malformed/stale inputs, capacity exhaus
 settlement ambiguity, cleanup/telemetry errors and losing the delivered body.
 
 First full-suite run: 4,483 tests, 4,452 passed, 31 failed. Two genuine integration
-gaps (discovery expectations and OpenAPI coverage) were corrected; the rest involved
-sandbox-blocked local server/PostgreSQL setup and two clean-worktree guards. Final
-clean-worktree verification results are recorded below when available. No assertion
-was disabled to bypass the environment failures.
+gaps (discovery expectations and OpenAPI coverage) were corrected; other failures
+involved local server/PostgreSQL setup and two clean-worktree guards. No assertion
+was disabled to bypass these failures.
+
+Final clean-worktree run, after three additional adversarial tests: **4,486 tests;
+4,477 passed, 9 failed**. All nine failures are existing PostgreSQL integration
+fixtures stopping at `initdb`. A separate disposable diagnostic reproduced
+`could not create shared memory segment: No space left on device` / `shmget` before
+any repository migration ran. PostgreSQL identifies this as shared-memory capacity,
+not disk exhaustion. No shared-memory segments or unrelated processes were removed;
+the full suite is **not** claimed green. Rerun those nine tests once the host's
+PostgreSQL shared-memory capacity is available.
+
+All **66 new microproduct tests passed**. Typecheck passed; scoped lint has zero
+warnings/errors, and repository-wide lint has zero errors with 25 warnings in
+untouched files. Examples and withheld discovery metadata regenerate byte-identically.
+There has been no production bundle/served-output inspection: that requires the
+owner's separate build authorization.
 
 Local example benchmark (31 calls per product, no provider/DB/network): warm p95
 below 0.2 ms for the eight non-corpus operations, about 27 ms for the release packet
