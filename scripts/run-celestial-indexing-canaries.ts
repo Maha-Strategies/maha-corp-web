@@ -50,7 +50,7 @@ async function run() {
   if (!rpcUrl) throw new Error('base_rpc_required')
   const client = createPublicClient({ chain: base, transport: http(rpcUrl) })
   const balance = await client.readContract({ address: BASE_USDC as Address, abi: parseAbi(['function balanceOf(address) view returns (uint256)']), functionName: 'balanceOf', args: [account.address] })
-  if (balance < 160000n) throw new Error('insufficient_balance_for_authorized_plan')
+  if (balance < BigInt(160000)) throw new Error('insufficient_balance_for_authorized_plan')
   const evidence = { version: 'maha-celestial-indexing-canary/0.1', classification: 'publisher-funded-indexing-canary',
     customerDemand: false, organicDemand: false, maximumAuthorizedBaseUnits: '160000', confirmedBaseUnits: '0',
     buyer: account.address, payee: MAHA_PAYEE, startedAt: new Date().toISOString(), state: 'running', steps: [] as Step[] }
