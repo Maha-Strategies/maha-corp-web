@@ -9,10 +9,13 @@
 
 import { SiderealTime } from 'astronomy-engine'
 
-import { CLASSICAL_BODIES, classicalEclipticLongitude, type ClassicalBody } from './local-fact-bundle.ts'
+import {
+  CLASSICAL_BODIES, MODERN_BODIES, classicalEclipticLongitude, modernEclipticLongitude,
+  type ClassicalBody, type ModernBody,
+} from './local-fact-bundle.ts'
 import { NAKSHATRA_NAMES, lahiriAyanamsa } from './panchanga.ts'
 
-export const NATAL_CHART_VERSION = 'natal-chart/0.2' as const
+export const NATAL_CHART_VERSION = 'natal-chart/0.3' as const
 
 export const ZODIAC_SIGNS = [
   'Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo',
@@ -21,6 +24,13 @@ export const ZODIAC_SIGNS = [
 
 export type ZodiacSign = typeof ZODIAC_SIGNS[number]
 export type ChartPointName = 'Ascendant' | ClassicalBody | 'Rahu' | 'Ketu'
+/**
+ * Kept out of ChartPointName on purpose. Everything typed by ChartPointName --
+ * placements, house occupants, aspect pairs, rulership -- is a classical
+ * structure, and the compiler is what stops an outer planet from drifting into
+ * one of them later.
+ */
+export type ModernPointName = ModernBody
 export type ChartMotion = 'direct' | 'retrograde' | 'stationary' | 'not-applicable'
 export type NatalAspectName = 'conjunction' | 'sextile' | 'square' | 'trine' | 'opposition'
 
@@ -74,6 +84,15 @@ export interface NatalChartPoint {
   method: string
 }
 
+/**
+ * Same computed shape as a classical placement, different name type and a
+ * different provenance claim. Not a NatalChartPoint, so it cannot be pushed
+ * into `placements` by accident.
+ */
+export interface NatalModernPoint extends Omit<NatalChartPoint, 'name'> {
+  name: ModernPointName
+}
+
 export interface NatalChart {
   version: typeof NATAL_CHART_VERSION
   instantUtc: string
@@ -85,6 +104,12 @@ export interface NatalChart {
   houses: NatalHouse[]
   aspects: NatalAspect[]
   nodalAxis: NodalAxis
+  /**
+   * Reported alongside the chart, never folded into it. These do not appear in
+   * `placements`, do not occupy houses, do not rule signs, form no aspects
+   * here, and take no part in Vimśottarī.
+   */
+  modernPoints: NatalModernPoint[]
   methodology: string[]
 }
 
@@ -224,15 +249,15 @@ export function meanNodeLongitude(instant: Date): number {
   return normalize(125.04452 - 1934.136261 * centuries + 0.0020708 * centuries ** 2 + centuries ** 3 / 450_000)
 }
 
-function point(
-  name: ChartPointName,
+function point<Name extends ChartPointName | ModernPointName>(
+  name: Name,
   tropicalLongitude: number,
   ayanamsa: number,
   ascendantSidereal: number,
   motion: ChartMotion,
   dailyMotionDegrees: number | null,
   method: string,
-): NatalChartPoint {
+): Omit<NatalChartPoint, 'name'> & { name: Name } {
   const siderealLongitude = normalize(tropicalLongitude - ayanamsa)
   return {
     name,
@@ -290,6 +315,24 @@ export function computeNatalChart(input: NatalChartInput): NatalChart {
   )
 
   const placements = [...classical, rahu, ketu]
+
+  /**
+   * Computed after `placements` is closed, and never spread into it. Motion is
+   * derived the same way as a classical body so retrograde reads correctly --
+   * these three are retrograde for roughly forty per cent of each year, so a
+   * chart that omitted motion would be misleading rather than merely sparse.
+   */
+  const modernPoints: NatalModernPoint[] = MODERN_BODIES.map((body) => {
+    const longitude = modernEclipticLongitude(body, instant)
+    const nextDay = modernEclipticLongitude(body, new Date(instant.getTime() + DAY_MS))
+    const dailyMotionDegrees = signedDifference(nextDay, longitude)
+    const motion: ChartMotion = Math.abs(dailyMotionDegrees) < 1e-4 ? 'stationary' : dailyMotionDegrees < 0 ? 'retrograde' : 'direct'
+    return point(
+      body, longitude, ayanamsa, ascendantSidereal, motion, dailyMotionDegrees,
+      'Apparent geocentric ecliptic longitude of date from astronomy-engine 2.1.19. Not covered by the public-authority conformance corpus, which fixes JPL Horizons reference longitudes for the seven classical grahas only.',
+    )
+  })
+
   const houses = computeHouses(ascendant, placements)
   const aspects = computeAspects([ascendant, ...placements])
   const nodalAxis: NodalAxis = {
@@ -310,6 +353,7 @@ export function computeNatalChart(input: NatalChartInput): NatalChart {
     houses,
     aspects,
     nodalAxis,
+    modernPoints,
     methodology: [
       'Tropical positions use the true equinox of date; Lahiri sidereal positions subtract the stated ayanāṁśa.',
       'Houses are whole-sign houses counted from the Lahiri-sidereal ascendant sign.',
@@ -317,6 +361,8 @@ export function computeNatalChart(input: NatalChartInput): NatalChart {
       'House rulers use the traditional seven-planet rulership scheme; nodes do not rule signs in this calculation.',
       'Displayed aspects are geometric classifications using declared maximum orbs: conjunction 8°, sextile 4°, square 6°, trine 6°, opposition 8°. Orb choices are conventions and vary by tradition.',
       'Signs, houses, nakṣatras, and pādas are chart classifications, not evidence that interpretations predict outcomes.',
+      'Uranus, Neptune, and Pluto are reported in modernPoints as a separate modern set. They are not grahas: they do not occupy houses, rule signs, form the listed aspects, or enter the Vimśottarī sequence, and no classical rule in this calculation reads them.',
+      'Modern-point longitudes come from the same astronomy-engine release as the classical bodies but are outside the public-authority conformance corpus, which fixes JPL Horizons reference longitudes for the seven classical grahas only.',
     ],
   }
 }
