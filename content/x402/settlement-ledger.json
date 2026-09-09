@@ -1,19 +1,19 @@
 {
   "schemaVersion": "maha-x402-settlement-ledger/1.0",
-  "contentDigest": "sha256:245ed18b566cb40f6881976129bb8d1da17bfe0a723a1b55fc12e77e361f0e68",
+  "contentDigest": "sha256:207be24acadfa672a4515ac062d4946f9959518d2e41fd9406bff5d530cd73d4",
   "network": "Base Mainnet",
   "protocol": "HTTP 402 v2 · Base USDC",
-  "observedAt": "2026-09-06T11:48:10.986Z",
+  "observedAt": "2026-09-09T02:29:58.214Z",
   "scannedFromBlock": "48360877",
-  "scannedToBlock": "50952877",
+  "scannedToBlock": "51065249",
   "summary": {
-    "totalSettlements": 22,
-    "externalSettlements": 11,
-    "canarySettlements": 11,
-    "externalWallets": 6,
+    "totalSettlements": 26,
+    "externalSettlements": 12,
+    "canarySettlements": 14,
+    "externalWallets": 7,
     "repeatExternalWallets": 2,
     "crossProductWallets": 1,
-    "externalValueUsdc": "0.047",
+    "externalValueUsdc": "0.048",
     "byProduct": [
       {
         "id": "book-edition-the-imagined-life",
@@ -59,8 +59,8 @@
         "id": "context-compression",
         "title": "Context Compression",
         "priceUsdc": "0.001",
-        "settlements": 14,
-        "externalSettlements": 7
+        "settlements": 15,
+        "externalSettlements": 8
       },
       {
         "id": "deep-context-evaluation",
@@ -73,7 +73,7 @@
         "id": "evidence-retention-matrix",
         "title": "Evidence Retention Matrix",
         "priceUsdc": "0.05",
-        "settlements": 0,
+        "settlements": 1,
         "externalSettlements": 0
       },
       {
@@ -85,9 +85,9 @@
       },
       {
         "id": "mps-autonomous-audit",
-        "title": "MPS Autonomous Audit",
+        "title": "Mps Autonomous Audit",
         "priceUsdc": "0.1",
-        "settlements": 1,
+        "settlements": 2,
         "externalSettlements": 0
       },
       {
@@ -100,6 +100,70 @@
     ]
   },
   "entries": [
+    {
+      "transactionHash": "0xbd646db65145af2b8516da67b5e069791a79671e809c0373308221d9b1b8d6d0",
+      "logIndex": 873,
+      "blockNumber": "51059728",
+      "timestampUtc": "2026-09-08T23:06:43.000Z",
+      "payer": "0xe3badbd4f38214b9eae528a1a5398f6678f63fb3",
+      "payerDisplay": "0xe3ba…3fb3",
+      "payerRole": "external-machine-agent",
+      "amountBaseUnits": "1000",
+      "amountUsdc": "0.001",
+      "product": {
+        "id": "context-compression",
+        "title": "Context Compression",
+        "priceUsdc": "0.001"
+      },
+      "explorerUrl": "https://basescan.org/tx/0xbd646db65145af2b8516da67b5e069791a79671e809c0373308221d9b1b8d6d0"
+    },
+    {
+      "transactionHash": "0x5d3888675869d8620d6af60c11fbc415286f1ea3f403fa33f50b6428c473b688",
+      "logIndex": 376,
+      "blockNumber": "50986203",
+      "timestampUtc": "2026-09-07T06:15:53.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "100000",
+      "amountUsdc": "0.1",
+      "product": {
+        "id": "mps-autonomous-audit",
+        "title": "Mps Autonomous Audit",
+        "priceUsdc": "0.1"
+      },
+      "explorerUrl": "https://basescan.org/tx/0x5d3888675869d8620d6af60c11fbc415286f1ea3f403fa33f50b6428c473b688"
+    },
+    {
+      "transactionHash": "0x7749d183813d9ce8f252d96067e6852336ef938fccd8379b6bfaa37ebd22c584",
+      "logIndex": 406,
+      "blockNumber": "50985247",
+      "timestampUtc": "2026-09-07T05:44:01.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "50000",
+      "amountUsdc": "0.05",
+      "product": {
+        "id": "evidence-retention-matrix",
+        "title": "Evidence Retention Matrix",
+        "priceUsdc": "0.05"
+      },
+      "explorerUrl": "https://basescan.org/tx/0x7749d183813d9ce8f252d96067e6852336ef938fccd8379b6bfaa37ebd22c584"
+    },
+    {
+      "transactionHash": "0xf30b3a941a4dab1bec9287a1414e8c7a7a5a39e82d9473939514f820ec295a17",
+      "logIndex": 48,
+      "blockNumber": "50954389",
+      "timestampUtc": "2026-09-06T12:35:25.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "5000",
+      "amountUsdc": "0.005",
+      "product": null,
+      "explorerUrl": "https://basescan.org/tx/0xf30b3a941a4dab1bec9287a1414e8c7a7a5a39e82d9473939514f820ec295a17"
+    },
     {
       "transactionHash": "0x15f9651128725440f888bc98ea203196cf55acffcf963623496c5b338bcc5c37",
       "blockNumber": "50952235",
@@ -311,7 +375,7 @@
       "amountUsdc": "0.1",
       "product": {
         "id": "mps-autonomous-audit",
-        "title": "MPS Autonomous Audit",
+        "title": "Mps Autonomous Audit",
         "priceUsdc": "0.1"
       },
       "explorerUrl": "https://basescan.org/tx/0x1c6cf823546de43b33b79974bfe2309d44a11fcf7d15a833b755fc05b4e1b0c4"
@@ -446,7 +510,7 @@
     }
   ],
   "boundaries": [
-    "Settlement is not delivery. These rows establish discovery, a call, and a transfer at a published price. They do not establish that any buyer received or accepted a correct deliverable; that would require internal response telemetry.",
+    "Settlement is not delivery. These rows establish USDC transfers; price matches alone do not prove a particular endpoint was called, how it was discovered, or whether a buyer received or accepted the payload. Product attribution is inferred from price where unambiguous.",
     "Operator-controlled wallets are labelled and excluded from every external figure. Canary traffic converts by construction and is not demand.",
     "Counts cover the scanned block range only. A payer whose settlements straddle the range boundary reads as fewer settlements than they made.",
     "Counterparty addresses are truncated by convention. The full address is one click away on the block explorer; nothing here is concealed."

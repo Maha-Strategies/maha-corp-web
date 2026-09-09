@@ -9,6 +9,10 @@
   "ignoreCommand": "node scripts/vercel-should-build.cjs",
   "crons": [
     {
+      "path": "/api/cron/x402-settlements",
+      "schedule": "17 * * * *"
+    },
+    {
       "path": "/api/cron/inbound-digest",
       "schedule": "0 13 * * *"
     },

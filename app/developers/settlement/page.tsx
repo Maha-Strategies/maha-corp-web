@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 
 import { MAHA_SITE_URL } from '@/lib/entity'
-import type { SettlementLedger } from '@/lib/x402/settlement-ledger'
-import ledger from '@/content/x402/settlement-ledger.json' with { type: 'json' }
+import { connection } from 'next/server'
+import { readPublicSettlementLedger } from '@/lib/x402/settlement-live-store'
+import { SettlementAutoRefresh } from './auto-refresh'
 
 const title = 'Autonomous Settlement & Verification Ledger | Maha Strategies'
 const description =
@@ -15,8 +16,6 @@ export const metadata: Metadata = {
   openGraph: { type: 'website', url: `${MAHA_SITE_URL}/developers/settlement`, title, description },
 }
 
-const record = ledger as unknown as SettlementLedger
-
 /**
  * A cumulative ledger rather than a live ticker, deliberately.
  *
@@ -28,33 +27,45 @@ const record = ledger as unknown as SettlementLedger
  * written into the markup, because a headline typed by hand becomes a claim the
  * moment the chain moves past it.
  */
-export default function SettlementLedgerPage() {
+export default async function SettlementLedgerPage() {
+  await connection()
+  const snapshot = await readPublicSettlementLedger()
+  const record = snapshot.ledger
   const s = record.summary
   const observed = new Date(record.observedAt)
   const cards: { label: string; value: string; note: string }[] = [
     { label: 'Settled protocol', value: record.protocol, note: record.network },
     { label: 'Verified settlements', value: `${s.totalSettlements}`, note: `${s.externalSettlements} external · ${s.canarySettlements} operator canary` },
-    { label: 'External agent wallets', value: `${s.externalWallets}`, note: `${s.externalValueUsdc} USDC settled externally` },
+    { label: 'External wallets', value: `${s.externalWallets}`, note: `${s.externalValueUsdc} USDC settled externally` },
     {
       label: 'Returning buyers',
       value: `${s.repeatExternalWallets}`,
       note: s.crossProductWallets > 0
-        ? `${s.crossProductWallets} returned for a different product`
+        ? `${s.crossProductWallets} paid at more than one published price`
         : 'No cross-product repeat recorded',
     },
   ]
 
   return (
     <main className="evidence-page mx-auto max-w-5xl px-6 py-16">
+      <SettlementAutoRefresh />
       <p className="evidence-kicker">Base Mainnet · HTTP 402 v2</p>
       <h1 className="evidence-section-title mt-3 text-3xl">Autonomous Settlement &amp; Verification Ledger</h1>
       <p className="mt-4 max-w-3xl text-[var(--text-secondary)]">
-        Every settlement below is a USDC transfer into the Maha payee at a price this site publishes. The rows are
+        The rows below show USDC transfers into the Maha payee; summary figures count transfers matching published prices. The rows are
         the record; the figures above them are computed from the rows, so nothing here can be asserted without also
         being checkable.
       </p>
       <p className="mt-4 font-mono text-xs uppercase tracking-[0.22em] text-[var(--text-tertiary)]">
         Observed {observed.toISOString().slice(0, 16).replace('T', ' ')} UTC · blocks {record.scannedFromBlock}–{record.scannedToBlock}
+      </p>
+      <p className="mt-3 text-sm text-[var(--text-secondary)]" data-settlement-source={snapshot.source}>
+        Scheduled refresh: hourly, at 17 minutes past the hour. This view checks for saved updates every five minutes while visible. Finalized Base blocks only; this is not a real-time feed.
+        {' '}{snapshot.source === 'bundled_fallback'
+          ? 'Live snapshot unavailable; showing the dated deployment fallback.'
+          : snapshot.stale ? 'Refresh is overdue; showing the last successful snapshot.'
+            : !snapshot.caughtUp ? 'Catching up with chain history; more blocks remain to be scanned.'
+              : 'The latest scheduled scan is current.'}
       </p>
 
       <section className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -89,7 +100,7 @@ export default function SettlementLedgerPage() {
         </table>
         {s.byProduct.some((p) => p.attributionAmbiguous) ? (
           <p className="mt-3 text-xs text-[var(--text-tertiary)]">
-            Two offers publish the same price, so a transfer cannot be attributed to one of them from chain data
+            Multiple offers publish the same price, so a transfer cannot be attributed to one of them from chain data
             alone. Those rows are reported as unattributable rather than assigned.
           </p>
         ) : null}
@@ -101,18 +112,18 @@ export default function SettlementLedgerPage() {
           <thead>
             <tr className="border-b border-[var(--border-default)] text-left font-mono text-xs uppercase tracking-[0.18em]">
               <th className="pb-2">Timestamp (UTC)</th><th className="pb-2">Service</th>
-              <th className="pb-2">Payer agent</th><th className="pb-2">Amount</th><th className="pb-2">Proof</th>
+              <th className="pb-2">Payer wallet</th><th className="pb-2">Amount</th><th className="pb-2">Proof</th>
             </tr>
           </thead>
           <tbody>
             {record.entries.filter((e) => e.product !== null || e.amountUsdc !== '0').map((entry) => (
-              <tr key={entry.transactionHash} className="border-b border-[var(--border-subtle)]">
+              <tr key={`${entry.transactionHash}:${entry.logIndex ?? 'legacy'}`} className="border-b border-[var(--border-subtle)]">
                 <td className="py-2 font-mono text-xs">{entry.timestampUtc?.slice(0, 19).replace('T', ' ') ?? '—'}</td>
                 <td className="py-2">{entry.product?.title ?? 'Unattributed amount'}</td>
                 <td className="py-2">
                   <span className="font-mono text-xs">{entry.payerDisplay}</span>
                   <span className="ml-2 rounded px-2 py-0.5 text-[10px] uppercase tracking-wider border border-[var(--border-default)]">
-                    {entry.payerRole === 'maha-canary-test' ? 'Maha canary test' : 'External machine agent'}
+                    {entry.payerRole === 'maha-canary-test' ? 'Maha operator wallet' : 'External wallet'}
                   </span>
                 </td>
                 <td className="py-2 font-mono">{entry.amountUsdc} USDC</td>

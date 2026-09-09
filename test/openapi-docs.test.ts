@@ -162,6 +162,8 @@ const PRIVATE_ROUTES = new Set([
   '/api/cron/job-reclaim',
   '/api/cron/market-scout',
   '/api/cron/x402-observatory',
+  // Production CRON_SECRET-authenticated snapshot refresh, not a buyer API.
+  '/api/cron/x402-settlements',
   '/api/cron/utility-upload-cleanup',
   '/api/cron/celestial-webhooks',
   '/api/cron/celestial-retention',
