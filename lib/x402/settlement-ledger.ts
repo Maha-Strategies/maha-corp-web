@@ -17,14 +17,16 @@
  * traffic converts by construction and is not demand; a ledger that blended
  * them would overstate the only number a reader cares about.
  *
- * Settlement is not delivery. On-chain evidence establishes discovery, a call,
- * and a transfer at a published price. It does not establish that any buyer
+ * Settlement is not delivery. On-chain evidence establishes a transfer, not
+ * discovery or an endpoint call. It does not establish that any buyer
  * received a correct deliverable — that would need internal response telemetry.
  * The distinction is carried in the type, so a renderer cannot present one as
  * the other by omission.
  */
 
 export type LedgerEntry = {
+  /** Transfer log identity; absent only in older bundled snapshots. */
+  logIndex?: number
   /** Full hash, for the explorer link. Addresses are truncated for display. */
   transactionHash: string
   blockNumber: string
@@ -116,7 +118,7 @@ export function truncateAddress(address: string): string {
 export type OfferPrice = { id: string; title: string; amountBaseUnits: bigint }
 
 export function buildLedger(input: {
-  settlements: readonly { payer: string; amountBaseUnits: bigint; blockNumber: bigint; transactionHash: string; timestampUtc?: string | null }[]
+  settlements: readonly { payer: string; amountBaseUnits: bigint; blockNumber: bigint; transactionHash: string; timestampUtc?: string | null; logIndex?: number }[]
   operatorWallets: readonly string[]
   offers: readonly OfferPrice[]
   observedAt: string
@@ -147,6 +149,7 @@ export function buildLedger(input: {
     const offer = byPrice.get(s.amountBaseUnits)
     return {
       transactionHash: s.transactionHash,
+      ...(s.logIndex === undefined ? {} : { logIndex: s.logIndex }),
       blockNumber: s.blockNumber.toString(),
       timestampUtc: s.timestampUtc ?? null,
       payer,
@@ -157,7 +160,7 @@ export function buildLedger(input: {
       product: offer ? { id: offer.id, title: offer.title, priceUsdc: formatUsdc(offer.amountBaseUnits) } : null,
       explorerUrl: `${explorerBase}${s.transactionHash}`,
     }
-  }).sort((a, b) => (BigInt(b.blockNumber) > BigInt(a.blockNumber) ? 1 : BigInt(b.blockNumber) < BigInt(a.blockNumber) ? -1 : a.transactionHash.localeCompare(b.transactionHash)))
+  }).sort((a, b) => (BigInt(b.blockNumber) > BigInt(a.blockNumber) ? 1 : BigInt(b.blockNumber) < BigInt(a.blockNumber) ? -1 : a.transactionHash.localeCompare(b.transactionHash) || (a.logIndex ?? -1) - (b.logIndex ?? -1)))
 
   const pricedAmounts = new Set(input.offers.map((o) => o.amountBaseUnits))
   const isPriced = (e: LedgerEntry) => pricedAmounts.has(BigInt(e.amountBaseUnits))
@@ -208,7 +211,7 @@ export function buildLedger(input: {
     summary,
     entries,
     boundaries: [
-      'Settlement is not delivery. These rows establish discovery, a call, and a transfer at a published price. They do not establish that any buyer received or accepted a correct deliverable; that would require internal response telemetry.',
+      'Settlement is not delivery. These rows establish USDC transfers; price matches alone do not prove a particular endpoint was called, how it was discovered, or whether a buyer received or accepted the payload. Product attribution is inferred from price where unambiguous.',
       'Operator-controlled wallets are labelled and excluded from every external figure. Canary traffic converts by construction and is not demand.',
       'Counts cover the scanned block range only. A payer whose settlements straddle the range boundary reads as fewer settlements than they made.',
       'Counterparty addresses are truncated by convention. The full address is one click away on the block explorer; nothing here is concealed.',
