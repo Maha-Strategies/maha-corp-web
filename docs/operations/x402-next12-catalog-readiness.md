@@ -126,3 +126,30 @@ even if an operator accidentally adds them to payment resource configuration.
 
 No claim of production bundle privacy, Vercel readiness or Bazaar indexing is made from
 local source and response tests.
+
+## Final local verification
+
+Implementation commit: `3fc36428`, branch `codex/x402-catalog-next12`.
+
+- Full suite: **4,553 tests; 4,544 passed, nine failed**. All nine are the same existing
+  PostgreSQL integration fixtures failing at local `initdb`, before their migrations.
+  The preceding batch's isolated diagnostic identified host shared-memory exhaustion.
+  No system resources were deleted or tests weakened to bypass that problem. The
+  complete suite is not claimed green.
+- All **133 microproduct tests passed**, covering both batches, the frozen map,
+  selection and cost bindings. This expansion adds 67 tests relative to the first batch.
+- Typecheck passed. Scoped lint has zero warnings/errors. Repository-wide lint reports
+  zero errors and 25 warnings in untouched files.
+- Two regeneration/check rounds preserved examples, original freeze, the 60-row review
+  and both retained cost observations. Schema/catalog entrypoint import-order tests pass.
+- Measured capped-fixture p95 spans **0.087–4.053 ms**; response sizes **1,276–6,645 bytes**.
+  These exclude provider, database and Vercel infrastructure costs. No cloud-margin claim.
+- The thirteen original numerical/semantic tests and the generic payment tests include
+  exact prices, wrong-offer/price refusal, withheld Preview/Production, lost-body replay,
+  capacity reservation, malformed/oversized input and pre-settlement compute refusal.
+- No new dependency, public article route, canonical release, payment resource activation,
+  Git push, Vercel build/deploy or Bazaar registration occurred. Private selection/cost
+  artifacts are not imported by runtime or published in generated public manifests.
+
+Next development options are the 40 deferred candidates or scope extensions identified
+in the ledger; publication remains a separate, explicitly authorized step.
