@@ -1,7 +1,7 @@
 {
   "version": "micro60-selection/1",
   "freezeDigest": "sha256:0234c15fb8fffb24dc99a2a5d15d7eab833857f04156bed5b9460aade69db55c",
-  "costObservationDigest": "sha256:6076934e77d27c23977fefeeb1af3e20b0b28b64b79e2b9c5daa4459fed2bb68",
+  "costObservationDigest": "sha256:920eefd93ab62d2eb6cac1ac715aefa0d73fc33990a70337c18afcf597af083b",
   "method": "Manual semantic task comparison. Utility 2=bounded public corpus lookup, 3=demonstrated transformation/check fixture. Evidence 2=existing attributed corpus or narrow protocol snapshot; 3=independently checked arithmetic/structural rules. Cost 3<=5ms, 2<=25ms, 1<=100ms capped-fixture p95. Score 4U+4E+2C.",
   "qualification": "Twelve evidence-ready, locally measured shortlist entries; not a global ranking over unimplemented candidates. Unmeasured candidates retain null scores. Demonstrated fixture utility is not customer demand or revenue. Cloud cost remains unknown.",
   "comparedFiles": [
@@ -11,11 +11,11 @@
     },
     {
       "path": "lib/x402/celestial-products.ts",
-      "digest": "sha256:b47ef2790effab95f0135fe29b704efffee34f4d3d856f5925427850d7542571"
+      "digest": "sha256:895127334f1412b1a8766a19e5169351d38c01890c442275c41b59adb54b6bde"
     },
     {
       "path": "lib/x402/offers.ts",
-      "digest": "sha256:6f6db569eb1c092277d7bf6251ccd13f2dd5ab3b10ebaf21156223feb5c2dbcb"
+      "digest": "sha256:28ba35bdd0eb3d821e7ac936feb4893df8e6a0242faf7a91c5f4bbe631661296"
     },
     {
       "path": "lib/agent-infrastructure-compatibility-pack.ts",
@@ -23,7 +23,7 @@
     },
     {
       "path": "lib/openapi.ts",
-      "digest": "sha256:3b4a492899a827689f67db36c8d560e047f0489fe81646bf291e22c864cfd636"
+      "digest": "sha256:52bfd1a4975ad35bd929b70d60385a2d345856ec0d669629194787e858f6aa11"
     }
   ],
   "selected": [
@@ -67,15 +67,15 @@
       "costObservation": {
         "id": "unit-uncertainty-conversion",
         "calls": 32,
-        "coldMs": 0.5134999999999934,
-        "cappedWorkloadP95Ms": 0.1760409999999979,
-        "cappedWorkloadMaxMs": 0.359375,
-        "cpuMicros": 3539,
+        "coldMs": 0.545499999999997,
+        "cappedWorkloadP95Ms": 0.15029200000000031,
+        "cappedWorkloadMaxMs": 0.25099999999999767,
+        "cpuMicros": 2959,
         "requestBytes": 147,
         "responseBytes": 1427,
         "providerCalls": 0,
         "cloudCostUsd": null,
-        "implementationDigest": "sha256:39913f894a3b013d004f123e24d0e35f15557bf141d4256968e39e477904e313"
+        "implementationDigest": "sha256:55c3588bc8b0a315dac5da25f15d476e3ddc5be4248502de49e8da1417bcbcaa"
       },
       "cloudCostUsd": null
     },
@@ -105,15 +105,15 @@
       "costObservation": {
         "id": "covariance-uncertainty",
         "calls": 32,
-        "coldMs": 0.16566599999998743,
-        "cappedWorkloadP95Ms": 0.5221250000000168,
-        "cappedWorkloadMaxMs": 0.5742079999999987,
-        "cpuMicros": 16273,
+        "coldMs": 0.17233299999998053,
+        "cappedWorkloadP95Ms": 0.5298329999999964,
+        "cappedWorkloadMaxMs": 0.5305829999999787,
+        "cpuMicros": 15992,
         "requestBytes": 571,
         "responseBytes": 1488,
         "providerCalls": 0,
         "cloudCostUsd": null,
-        "implementationDigest": "sha256:39913f894a3b013d004f123e24d0e35f15557bf141d4256968e39e477904e313"
+        "implementationDigest": "sha256:55c3588bc8b0a315dac5da25f15d476e3ddc5be4248502de49e8da1417bcbcaa"
       },
       "cloudCostUsd": null
     },
@@ -295,15 +295,15 @@
       "costObservation": {
         "id": "exact-linear-system",
         "calls": 32,
-        "coldMs": 0.24912500000000648,
-        "cappedWorkloadP95Ms": 4.062374999999989,
-        "cappedWorkloadMaxMs": 4.27687499999999,
-        "cpuMicros": 125459,
+        "coldMs": 0.24404200000000742,
+        "cappedWorkloadP95Ms": 3.90866699999998,
+        "cappedWorkloadMaxMs": 3.9795840000000027,
+        "cpuMicros": 123018,
         "requestBytes": 534,
         "responseBytes": 2467,
         "providerCalls": 0,
         "cloudCostUsd": null,
-        "implementationDigest": "sha256:39913f894a3b013d004f123e24d0e35f15557bf141d4256968e39e477904e313"
+        "implementationDigest": "sha256:55c3588bc8b0a315dac5da25f15d476e3ddc5be4248502de49e8da1417bcbcaa"
       },
       "cloudCostUsd": null
     },
@@ -409,15 +409,15 @@
       "costObservation": {
         "id": "bracketed-polynomial-root",
         "calls": 32,
-        "coldMs": 0.2661669999999958,
-        "cappedWorkloadP95Ms": 4.150040999999987,
-        "cappedWorkloadMaxMs": 4.167957999999999,
-        "cpuMicros": 126155,
+        "coldMs": 0.19029199999999946,
+        "cappedWorkloadP95Ms": 4.016458999999998,
+        "cappedWorkloadMaxMs": 4.017291,
+        "cpuMicros": 123716,
         "requestBytes": 165,
         "responseBytes": 1390,
         "providerCalls": 0,
         "cloudCostUsd": null,
-        "implementationDigest": "sha256:39913f894a3b013d004f123e24d0e35f15557bf141d4256968e39e477904e313"
+        "implementationDigest": "sha256:55c3588bc8b0a315dac5da25f15d476e3ddc5be4248502de49e8da1417bcbcaa"
       },
       "cloudCostUsd": null
     },
@@ -523,15 +523,15 @@
       "costObservation": {
         "id": "divine-name-disambiguation",
         "calls": 32,
-        "coldMs": 21.274208000000044,
-        "cappedWorkloadP95Ms": 1.050457999999992,
-        "cappedWorkloadMaxMs": 1.3874580000000378,
-        "cpuMicros": 31830,
+        "coldMs": 22.48670900000002,
+        "cappedWorkloadP95Ms": 0.8899159999999711,
+        "cappedWorkloadMaxMs": 1.2189159999999788,
+        "cpuMicros": 29834,
         "requestBytes": 136,
-        "responseBytes": 2396,
+        "responseBytes": 2397,
         "providerCalls": 0,
         "cloudCostUsd": null,
-        "implementationDigest": "sha256:39913f894a3b013d004f123e24d0e35f15557bf141d4256968e39e477904e313"
+        "implementationDigest": "sha256:55c3588bc8b0a315dac5da25f15d476e3ddc5be4248502de49e8da1417bcbcaa"
       },
       "cloudCostUsd": null
     },
@@ -561,15 +561,15 @@
       "costObservation": {
         "id": "edition-verse-resolution",
         "calls": 32,
-        "coldMs": 1.756750000000011,
-        "cappedWorkloadP95Ms": 1.748625000000004,
-        "cappedWorkloadMaxMs": 1.7867499999999836,
-        "cpuMicros": 51831,
+        "coldMs": 1.7938329999999496,
+        "cappedWorkloadP95Ms": 2.1085840000000076,
+        "cappedWorkloadMaxMs": 3.2374169999999935,
+        "cpuMicros": 54239,
         "requestBytes": 190,
         "responseBytes": 1579,
         "providerCalls": 0,
         "cloudCostUsd": null,
-        "implementationDigest": "sha256:39913f894a3b013d004f123e24d0e35f15557bf141d4256968e39e477904e313"
+        "implementationDigest": "sha256:55c3588bc8b0a315dac5da25f15d476e3ddc5be4248502de49e8da1417bcbcaa"
       },
       "cloudCostUsd": null
     },
@@ -713,15 +713,15 @@
       "costObservation": {
         "id": "reception-lineage-retrieval",
         "calls": 32,
-        "coldMs": 2.2654999999999745,
-        "cappedWorkloadP95Ms": 2.298416999999972,
-        "cappedWorkloadMaxMs": 2.3412500000000023,
-        "cpuMicros": 67554,
+        "coldMs": 2.353666999999973,
+        "cappedWorkloadP95Ms": 2.347082999999998,
+        "cappedWorkloadMaxMs": 2.706834000000015,
+        "cpuMicros": 69462,
         "requestBytes": 167,
         "responseBytes": 3994,
         "providerCalls": 0,
         "cloudCostUsd": null,
-        "implementationDigest": "sha256:39913f894a3b013d004f123e24d0e35f15557bf141d4256968e39e477904e313"
+        "implementationDigest": "sha256:55c3588bc8b0a315dac5da25f15d476e3ddc5be4248502de49e8da1417bcbcaa"
       },
       "cloudCostUsd": null
     },
@@ -789,15 +789,15 @@
       "costObservation": {
         "id": "policy-version-comparison",
         "calls": 32,
-        "coldMs": 0.20641700000004448,
-        "cappedWorkloadP95Ms": 0.3850840000000062,
-        "cappedWorkloadMaxMs": 0.4474999999999909,
-        "cpuMicros": 16784,
+        "coldMs": 0.24704099999996743,
+        "cappedWorkloadP95Ms": 0.49370900000002393,
+        "cappedWorkloadMaxMs": 0.6482499999999618,
+        "cpuMicros": 18352,
         "requestBytes": 15172,
         "responseBytes": 3127,
         "providerCalls": 0,
         "cloudCostUsd": null,
-        "implementationDigest": "sha256:39913f894a3b013d004f123e24d0e35f15557bf141d4256968e39e477904e313"
+        "implementationDigest": "sha256:55c3588bc8b0a315dac5da25f15d476e3ddc5be4248502de49e8da1417bcbcaa"
       },
       "cloudCostUsd": null
     },
@@ -865,15 +865,15 @@
       "costObservation": {
         "id": "control-evidence-gaps",
         "calls": 32,
-        "coldMs": 0.12279100000000653,
-        "cappedWorkloadP95Ms": 0.4987090000000194,
-        "cappedWorkloadMaxMs": 0.5376660000000015,
-        "cpuMicros": 25781,
+        "coldMs": 0.11633399999999483,
+        "cappedWorkloadP95Ms": 0.5390830000000051,
+        "cappedWorkloadMaxMs": 0.6118749999999977,
+        "cpuMicros": 24809,
         "requestBytes": 26024,
         "responseBytes": 5504,
         "providerCalls": 0,
         "cloudCostUsd": null,
-        "implementationDigest": "sha256:39913f894a3b013d004f123e24d0e35f15557bf141d4256968e39e477904e313"
+        "implementationDigest": "sha256:55c3588bc8b0a315dac5da25f15d476e3ddc5be4248502de49e8da1417bcbcaa"
       },
       "cloudCostUsd": null
     },
@@ -1188,15 +1188,15 @@
       "costObservation": {
         "id": "mcp-contract-compatibility",
         "calls": 32,
-        "coldMs": 0.05079200000000128,
-        "cappedWorkloadP95Ms": 0.2310420000000022,
-        "cappedWorkloadMaxMs": 0.26587500000005093,
-        "cpuMicros": 6157,
+        "coldMs": 0.0564160000000129,
+        "cappedWorkloadP95Ms": 0.19099999999991724,
+        "cappedWorkloadMaxMs": 0.2222079999999096,
+        "cpuMicros": 7787,
         "requestBytes": 12632,
         "responseBytes": 1276,
         "providerCalls": 0,
         "cloudCostUsd": null,
-        "implementationDigest": "sha256:39913f894a3b013d004f123e24d0e35f15557bf141d4256968e39e477904e313"
+        "implementationDigest": "sha256:55c3588bc8b0a315dac5da25f15d476e3ddc5be4248502de49e8da1417bcbcaa"
       },
       "cloudCostUsd": null
     },
@@ -1245,15 +1245,15 @@
       "costObservation": {
         "id": "tool-permission-diff",
         "calls": 32,
-        "coldMs": 0.11983299999997143,
-        "cappedWorkloadP95Ms": 1.2897500000000264,
-        "cappedWorkloadMaxMs": 1.304625000000101,
-        "cpuMicros": 36132,
+        "coldMs": 0.12316599999996924,
+        "cappedWorkloadP95Ms": 1.267959000000019,
+        "cappedWorkloadMaxMs": 1.3337920000000167,
+        "cpuMicros": 40740,
         "requestBytes": 5506,
         "responseBytes": 6645,
         "providerCalls": 0,
         "cloudCostUsd": null,
-        "implementationDigest": "sha256:39913f894a3b013d004f123e24d0e35f15557bf141d4256968e39e477904e313"
+        "implementationDigest": "sha256:55c3588bc8b0a315dac5da25f15d476e3ddc5be4248502de49e8da1417bcbcaa"
       },
       "cloudCostUsd": null
     },
@@ -1397,18 +1397,18 @@
       "costObservation": {
         "id": "publication-bundle-consistency",
         "calls": 32,
-        "coldMs": 0.1857909999999947,
-        "cappedWorkloadP95Ms": 0.10162500000001273,
-        "cappedWorkloadMaxMs": 0.2215840000000071,
-        "cpuMicros": 2177,
+        "coldMs": 0.1839589999999589,
+        "cappedWorkloadP95Ms": 0.09633300000007239,
+        "cappedWorkloadMaxMs": 0.12550000000010186,
+        "cpuMicros": 2102,
         "requestBytes": 3584,
         "responseBytes": 1495,
         "providerCalls": 0,
         "cloudCostUsd": null,
-        "implementationDigest": "sha256:39913f894a3b013d004f123e24d0e35f15557bf141d4256968e39e477904e313"
+        "implementationDigest": "sha256:55c3588bc8b0a315dac5da25f15d476e3ddc5be4248502de49e8da1417bcbcaa"
       },
       "cloudCostUsd": null
     }
   ],
-  "digest": "sha256:0f91b5296182b20233806fc354ff2f3d95421ed18e41d02fb203e79650b50636"
+  "digest": "sha256:5325f4ab34e5bf9110a564cbe7fa1668c4aa7885a090a4c87bfb43d259d1c3d4"
 }
