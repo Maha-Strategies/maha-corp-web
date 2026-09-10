@@ -110,7 +110,7 @@ test('one expected settlement plus one unexpected from the same address is not a
   assert.equal(report.totals.repeatExternalPayers, 0)
   assert.equal(report.externalPayers[0].settlements, 1)
   assert.equal(report.externalPayers[0].repeat, false)
-  assert.equal(report.externalPayers[0].totalBaseUnits, '1000')
+  assert.equal(report.externalPayers[0].totalBaseUnits, String(EXPECTED_PRICE_BASE_UNITS))
   assert.ok(report.notable.some((event) => event.kind === 'first_external_settlement'))
   assert.equal(report.notable.some((event) => event.kind === 'repeat_external_settlement'), false)
   assert.ok(report.notable.some((event) => event.kind === 'unexpected_amount'))
@@ -172,8 +172,8 @@ test('totals in USDC base units survive round-tripping as strings', () => {
   // bigint does not survive JSON, and a silently truncated total would
   // understate revenue in the evidence artifact.
   const report = watch([settlement(EXTERNAL, 10), settlement(EXTERNAL, 20)])
-  assert.equal(report.externalPayers[0].totalBaseUnits, '2000')
-  assert.equal(JSON.parse(JSON.stringify(report)).externalPayers[0].totalBaseUnits, '2000')
+  assert.equal(report.externalPayers[0].totalBaseUnits, String(EXPECTED_PRICE_BASE_UNITS * BigInt(2)))
+  assert.equal(JSON.parse(JSON.stringify(report)).externalPayers[0].totalBaseUnits, String(EXPECTED_PRICE_BASE_UNITS * BigInt(2)))
 })
 
 test('a settlement at any published price is a sale, not an unexpected amount', () => {

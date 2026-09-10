@@ -2,7 +2,7 @@
 
 The scheduled workflow protects the Context Compiler from Bazaar's 30-day
 settlement inactivity removal rule without manufacturing routine call volume.
-It checks Coinbase merchant discovery twice a week and settles one $0.001 call
+It checks Coinbase merchant discovery twice a week and settles one $0.002 call
 only when the latest recorded settlement is at least 21 days old. Any real
 customer settlement resets the same clock and suppresses the canary.
 
@@ -35,7 +35,7 @@ Workflow: `.github/workflows/production-x402-canary.yml`
 
 - Schedule: Monday and Thursday at 04:17 UTC.
 - Payment threshold: 21 days since Bazaar's `quality.lastCalledAt`.
-- Payment ceiling: exactly 1,000 USDC base units ($0.001).
+- Payment ceiling: exactly 2,000 USDC base units ($0.002).
 - Concurrency: one non-cancelling run.
 - Evidence: sanitized JSON artifact retained for 90 days.
 - Failure notification: deduplicated GitHub issue labeled `x402-canary`.
@@ -77,7 +77,7 @@ means the canary did not run. Fix the canary rather than paying by hand.
 Recent settlement activity protects the listing from inactivity removal but
 does not prove that Bazaar indexed the current discovery declaration. When the
 read-only drift workflow reports a mismatch, manually dispatch this workflow
-with **force_refresh** enabled. That authorizes exactly one 0.001 USDC call even
+with **force_refresh** enabled. That authorizes exactly one 0.002 USDC call even
 inside the 21-day window. Every existing buyer, endpoint, payee, network,
 asset, price, balance, one-signature, response, and receipt guard still applies.
 

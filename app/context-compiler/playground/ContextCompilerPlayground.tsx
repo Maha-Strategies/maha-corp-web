@@ -56,7 +56,11 @@ type PaymentState = 'idle' | 'connecting' | 'signing' | 'settling' | 'settled' |
 const BASE_CHAIN_ID = 8453
 const BASE_CHAIN_HEX = '0x2105'
 const MODEL_PRICE_DEFAULT = 3
-const X402_FEE_USD = 0.001
+// Must equal CONTEXT_COMPRESSION_OFFER.amount. Not imported from the catalogue
+// because this is a client component and the catalogue is large; a test asserts
+// the two agree. Every fee string below is derived from this one constant so
+// the pay button can never name a different price from the one charged.
+const X402_FEE_USD = 0.002
 
 function injectedProvider(): EthereumProvider | null {
   return (window as Window & { ethereum?: EthereumProvider }).ethereum ?? null
@@ -177,7 +181,7 @@ export default function ContextCompilerPlayground() {
         chainId: BASE_CHAIN_ID,
         onPaymentRequired: () => {
           setPaymentState('signing')
-          setPaymentMessage('Confirm the 0.001 USDC authorization in your wallet. No approval transaction is required.')
+          setPaymentMessage(`Confirm the ${X402_FEE_USD.toFixed(3)} USDC authorization in your wallet. No approval transaction is required.`)
         },
         signTypedData: async (typed) => {
           const signature = await provider.request({
@@ -243,7 +247,7 @@ export default function ContextCompilerPlayground() {
             <Metric label="Estimated reduction" value={`${data.result.metrics.estimatedReductionPercent}%`} detail={`${number(data.result.metrics.originalEstimatedTokens)} → ${number(data.result.metrics.compiledEstimatedTokens)} model-neutral tokens`} />
             <Metric label="Source coverage" value={`${data.result.metrics.sourceCoveragePercent}%`} detail={`${data.result.sources.filter((source) => source.includedPassageIds.length > 0).length} of ${data.result.metrics.sourceCount} sources contributed evidence`} />
             <Metric label="Tokens avoided" value={number(economics.saved)} detail="Estimated input tokens omitted from the downstream prompt" />
-            <Metric label="Gross savings / fee" value={`${economics.multiple.toFixed(1)}×`} detail={`At $${modelPrice.toFixed(2)}/1M input tokens versus the $0.001 x402 fee`} />
+            <Metric label="Gross savings / fee" value={`${economics.multiple.toFixed(1)}×`} detail={`At $${modelPrice.toFixed(2)}/1M input tokens versus the $${X402_FEE_USD.toFixed(3)} x402 fee`} />
           </section>
 
           <section className="mt-6 grid gap-6 xl:grid-cols-2" aria-labelledby="comparison-heading">
@@ -291,7 +295,7 @@ export default function ContextCompilerPlayground() {
               </label>
               <dl className="mt-6 grid gap-4 sm:grid-cols-3">
                 <Economic label="Gross input cost avoided" value={`$${economics.gross.toFixed(4)}`} />
-                <Economic label="x402 fee" value="$0.0010" />
+                <Economic label="x402 fee" value={`$${X402_FEE_USD.toFixed(4)}`} />
                 <Economic label="Net projected saving" value={`${economics.net < 0 ? '-' : ''}$${Math.abs(economics.net).toFixed(4)}`} />
               </dl>
               <p className="mt-5 text-xs leading-5 text-[var(--text-muted)]">Projection covers one downstream model call and input tokens only. Provider tokenization, cache pricing, output costs, and answer quality are not included.</p>
@@ -299,8 +303,8 @@ export default function ContextCompilerPlayground() {
             <article className="border border-amber-900/70 bg-amber-950/10 p-5 sm:p-7">
               <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--status-boundary)]">Optional live settlement</p>
               <h2 className="mt-2 text-2xl text-[var(--text-primary)]">Pay once on Base</h2>
-              <p className="mt-4 text-sm leading-6 text-[var(--text-secondary)]">This repeats the visible workload against the production x402 endpoint. It will request exactly 0.001 USDC after showing the terms in your wallet.</p>
-              <button type="button" onClick={() => void payAndCompile()} disabled={['connecting', 'signing', 'settling'].includes(paymentState)} className="mt-6 w-full border border-amber-600 px-5 py-3 font-mono text-xs uppercase tracking-widest text-[var(--status-boundary)] hover:bg-amber-950/40 disabled:cursor-wait disabled:opacity-50">Pay $0.001 and compile</button>
+              <p className="mt-4 text-sm leading-6 text-[var(--text-secondary)]">This repeats the visible workload against the production x402 endpoint. It will request exactly {X402_FEE_USD.toFixed(3)} USDC after showing the terms in your wallet.</p>
+              <button type="button" onClick={() => void payAndCompile()} disabled={['connecting', 'signing', 'settling'].includes(paymentState)} className="mt-6 w-full border border-amber-600 px-5 py-3 font-mono text-xs uppercase tracking-widest text-[var(--status-boundary)] hover:bg-amber-950/40 disabled:cursor-wait disabled:opacity-50">{`Pay $${X402_FEE_USD.toFixed(3)} and compile`}</button>
               {paymentMessage && <p role="status" className={`mt-4 text-sm leading-6 ${paymentState === 'error' ? 'text-red-300' : paymentState === 'settled' ? 'text-[var(--status-verified)]' : 'text-[var(--text-secondary)]'}`}>{paymentMessage}</p>}
               {transaction && <a className="mt-3 block break-all font-mono text-[10px] text-[var(--status-sourced)] underline" href={`https://basescan.org/tx/${transaction}`} target="_blank" rel="noopener noreferrer">View transaction {transaction} ↗</a>}
             </article>

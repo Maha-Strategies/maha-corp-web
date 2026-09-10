@@ -4,7 +4,7 @@ import ContextCompilerPlayground from './ContextCompilerPlayground'
 
 export const metadata: Metadata = {
   title: 'Try the Context Compiler | Zero-install Playground',
-  description: 'Compile a real four-document workload, inspect retained passages and provenance, estimate model cost avoided, and optionally settle one $0.001 x402 call.',
+  description: 'Compile a real four-document workload, inspect retained passages and provenance, estimate model cost avoided, and optionally settle one $0.002 x402 call.',
   alternates: { canonical: '/context-compiler/playground' },
   openGraph: {
     title: 'Try the Maha Context Compiler',

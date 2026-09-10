@@ -21,14 +21,21 @@ export const BASE_USDC = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
  */
 export const OPERATOR_WALLETS = ['0x7b7ff44288fADe4A1829abA2584DFCeB952146f2'] as const
 export const CANARY_BUYER = OPERATOR_WALLETS[0]
-export const EXPECTED_PRICE_BASE_UNITS = BigInt(1_000)
+/**
+ * The exact price this recipe expects to pay. Stepped from 1_000 when
+ * context-compression moved to $0.002: at $0.001 the facilitator fee was the
+ * entire price. The recipe refuses any other amount on purpose -- a buyer that
+ * silently pays a changed price is the failure this guard exists to prevent --
+ * so this constant and the catalogue must move together.
+ */
+export const EXPECTED_PRICE_BASE_UNITS = BigInt(2_000)
 export const SPEND_CEILING_BASE_UNITS = BigInt(5_000)
 
 export const BAZAAR_DISCOVERY_QUERY =
   'compress documents to an LLM token budget while preserving source-linked citations'
 /**
  * The recipe's own ceiling, which is a buyer policy rather than a site-wide
- * one: this recipe buys the $0.001 Context Compression offer and refuses
+ * one: this recipe buys the $0.002 Context Compression offer and refuses
  * anything dearer.
  *
  * It therefore also filters out Deep Context Evaluation at $0.01. That is

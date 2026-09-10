@@ -5,7 +5,7 @@ const SITE_URL = 'https://www.mahastrategies.com'
 const PAGE_PATH = '/recipes/bazaar-discovery-to-payment'
 const SOURCE_URL = 'https://github.com/Maha-Strategies/maha-corp-web/blob/main/scripts/run-bazaar-discovery-payment-recipe.ts'
 const title = 'Bazaar Discovery-to-Payment Agent Recipe | Maha Strategies'
-const description = 'Run an x402 v2 buyer that discovers Maha in Coinbase Bazaar, inspects JSON Schema, enforces a $0.005 ceiling, pays $0.001, verifies settlement, and consumes the Context Pack.'
+const description = 'Run an x402 v2 buyer that discovers Maha in Coinbase Bazaar, inspects JSON Schema, enforces a $0.005 ceiling, pays $0.002, verifies settlement, and consumes the Context Pack.'
 
 export const metadata: Metadata = {
   title,
@@ -63,7 +63,7 @@ export default function BazaarDiscoveryToPaymentRecipePage() {
             <span>Executable x402 v2 buyer</span><span>Base Mainnet</span>
           </p>
           <h1 className="evidence-title evidence-title--product">Discover. Constrain. Pay. Verify. Use.</h1>
-          <p className="evidence-lede mt-7">One runnable agent recipe goes from Coinbase Bazaar discovery to a source-linked Maha Context Pack. It supports CDP Server Wallets and plain Viem accounts, and it will not sign if the live terms exceed <span className="font-mono">$0.005</span> or differ from the expected <span className="font-mono">$0.001</span> purchase.</p>
+          <p className="evidence-lede mt-7">One runnable agent recipe goes from Coinbase Bazaar discovery to a source-linked Maha Context Pack. It supports CDP Server Wallets and plain Viem accounts, and it will not sign if the live terms exceed <span className="font-mono">$0.005</span> or differ from the expected <span className="font-mono">$0.002</span> purchase.</p>
         </header>
 
         <section className="evidence-section" aria-label="Recipe gates">

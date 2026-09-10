@@ -23,7 +23,8 @@ test('the recipe accepts only the expected payment below its hard ceiling', () =
   assert.ok(EXPECTED_PRICE_BASE_UNITS < SPEND_CEILING_BASE_UNITS)
   assert.doesNotThrow(() => assertSpendPolicy(requirement))
   assert.throws(() => assertSpendPolicy({ ...requirement, amount: String(SPEND_CEILING_BASE_UNITS + BigInt(1)) }), /per-call ceiling/)
-  assert.throws(() => assertSpendPolicy({ ...requirement, amount: '2000' }), /expects exactly/)
+  // Any amount other than the published one, under the ceiling, is still refused.
+  assert.throws(() => assertSpendPolicy({ ...requirement, amount: String(EXPECTED_PRICE_BASE_UNITS + BigInt(1_000)) }), /expects exactly/)
   assert.throws(() => assertSpendPolicy({ ...requirement, payTo: '0x0000000000000000000000000000000000000000' }), /payee is not allowlisted/)
 })
 

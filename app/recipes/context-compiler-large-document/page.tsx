@@ -7,7 +7,7 @@ const SITE_URL = 'https://www.mahastrategies.com'
 const PAGE_PATH = '/recipes/context-compiler-large-document'
 const SOURCE_URL = 'https://github.com/Maha-Strategies/maha-corp-web/blob/main/scripts/run-context-compiler-agent-recipe.ts'
 const title = 'Large-Document Context Compression Agent Recipe | Maha Strategies'
-const description = 'Reproduce a 106 KB Context Compiler workload, measure BPE token reduction and source coverage, and compare the result with the $0.001 x402 fee.'
+const description = 'Reproduce a 106 KB Context Compiler workload, measure BPE token reduction and source coverage, and compare the result with the x402 fee in force when it was measured.'
 
 export const metadata: Metadata = {
   title,
@@ -55,7 +55,7 @@ export default function ContextCompilerLargeDocumentRecipePage() {
             <span>Executable agent recipe</span><span>Measured workload</span>
           </p>
           <h1 className="evidence-title evidence-title--product">Compress four real chapters before the model call.</h1>
-          <p className="evidence-lede mt-7">This checked-in recipe compiles four complete, published Maha Strategies book chapters for one comparative-analysis task. It reports real BPE token counts, the API&apos;s source-coverage metric, and input-token economics against the production <span className="font-mono">0.001 USDC</span> x402 fee.</p>
+          <p className="evidence-lede mt-7">This checked-in recipe compiles four complete, published Maha Strategies book chapters for one comparative-analysis task. It reports real BPE token counts, the API&apos;s source-coverage metric, and input-token economics against the <span className="font-mono">0.001 USDC</span> x402 fee in force when this was measured. The offer is now $0.002; the recipe has not been re-run.</p>
         </header>
 
         <section className="evidence-section" aria-label="Measured recipe results">
