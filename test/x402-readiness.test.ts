@@ -56,7 +56,7 @@ test('a configuration that contradicts the catalog fails readiness', async () =>
   assert.equal(report.state, 'unavailable')
   const contradiction = check(report, 'x402.catalog.agreement')
   assert.equal(contradiction?.state, 'fail')
-  assert.match(contradiction!.detail ?? '', /prices POST \/api\/v1\/compress at 5 but the catalog publishes 2000/)
+  assert.match(contradiction!.detail ?? '', /prices POST \/api\/v1\/compress at 5 but the catalog publishes 1000/)
 })
 
 test('missing tables fail readiness rather than surfacing as a paid 503', async () => {

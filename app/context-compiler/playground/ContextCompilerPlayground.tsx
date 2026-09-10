@@ -60,7 +60,7 @@ const MODEL_PRICE_DEFAULT = 3
 // because this is a client component and the catalogue is large; a test asserts
 // the two agree. Every fee string below is derived from this one constant so
 // the pay button can never name a different price from the one charged.
-const X402_FEE_USD = 0.002
+const X402_FEE_USD = 0.001
 
 function injectedProvider(): EthereumProvider | null {
   return (window as Window & { ethereum?: EthereumProvider }).ethereum ?? null

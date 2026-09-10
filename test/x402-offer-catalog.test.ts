@@ -42,7 +42,7 @@ test('each offer is published at exactly its intended price', () => {
   // Written as literals rather than derived from the catalog. A test that
   // reads the same constant it is checking passes whatever the constant
   // becomes, which is precisely the drift this file exists to catch.
-  assert.equal(CONTEXT_COMPRESSION_OFFER.amount, '2000')
+  assert.equal(CONTEXT_COMPRESSION_OFFER.amount, '1000')
   assert.equal(DEEP_CONTEXT_EVALUATION_OFFER.amount, '10000')
   assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.amount, '250000')
   const ladder = X402_OFFERS.find((offer) => offer.id === 'context-budget-ladder')
@@ -55,7 +55,7 @@ test('each offer is published at exactly its intended price', () => {
   assert.equal(intake?.amount, '1000000')
 
   // And the runtime charges those amounts, not merely publishes them.
-  assert.equal(priceFor('POST', '/api/v1/compress', config())?.amount, '2000')
+  assert.equal(priceFor('POST', '/api/v1/compress', config())?.amount, '1000')
   assert.equal(priceFor('POST', '/api/v1/compress/evaluate', config())?.amount, '10000')
   assert.equal(priceFor('POST', '/api/v1/mps/audit', config())?.amount, '250000')
 })
@@ -64,7 +64,7 @@ test('the entry offer contract is unchanged', () => {
   // This offer has settled payments against it. A price, path, or schema
   // change here is a breaking change to a live product, not a refactor.
   assert.equal(CONTEXT_COMPRESSION_OFFER.path, '/api/v1/compress')
-  assert.equal(CONTEXT_COMPRESSION_OFFER.amount, '2000')
+  assert.equal(CONTEXT_COMPRESSION_OFFER.amount, '1000')
   assert.equal(CONTEXT_COMPRESSION_OFFER.concurrencyCap, 8)
   const required = CONTEXT_COMPRESSION_OFFER.discovery.inputSchema.required as string[]
   assert.deepEqual(required, ['clientRequestId', 'task', 'tokenBudget', 'documents'])
@@ -305,10 +305,10 @@ test('readiness fails when the deployment variable contradicts the catalog', () 
     { method: 'POST', path: '/api/v1/compress', amount: '9999', description: CONTEXT_COMPRESSION_OFFER.description, concurrencyCap: 8 },
   ])
   assert.equal(problems.length, 1)
-  assert.match(problems[0]!, /prices POST \/api\/v1\/compress at 9999 but the catalog publishes 2000/)
+  assert.match(problems[0]!, /prices POST \/api\/v1\/compress at 9999 but the catalog publishes 1000/)
 
   assert.deepEqual(catalogMismatches([
-    { method: 'POST', path: '/api/v1/compress', amount: '2000', description: CONTEXT_COMPRESSION_OFFER.description, concurrencyCap: 8 },
+    { method: 'POST', path: '/api/v1/compress', amount: '1000', description: CONTEXT_COMPRESSION_OFFER.description, concurrencyCap: 8 },
   ]), [])
 
   assert.match(
@@ -325,7 +325,7 @@ test('a contradicting deployment still serves the catalog price, never the varia
     ...ENV,
     X402_RESOURCES: JSON.stringify([{ method: 'POST', path: '/api/v1/compress', amount: '5', description: 'cheap', concurrencyCap: 99 }]),
   }) as X402Config
-  assert.equal(drifted.resources[0]!.amount, '2000')
+  assert.equal(drifted.resources[0]!.amount, '1000')
   assert.equal(drifted.resources[0]!.description, CONTEXT_COMPRESSION_OFFER.description)
   assert.equal(drifted.resources[0]!.concurrencyCap, 8)
   assert.equal(drifted.catalogContradictions.length, 3)

@@ -162,7 +162,7 @@ test('an unpaid request to a priced path is challenged', async () => {
   assert.equal(outcome.status, 402)
   const decoded = JSON.parse(Buffer.from(outcome.header, 'base64').toString('utf8'))
   assert.equal(decoded.x402Version, 2)
-  assert.equal(decoded.accepts[0].amount, '2000')
+  assert.equal(decoded.accepts[0].amount, '1000')
   assert.equal(decoded.resource.url, 'https://www.mahastrategies.com/api/v1/compress')
   assert.equal(decoded.resource.serviceName, 'Maha Context Compiler')
   assert.equal(decoded.extensions.bazaar.info.input.method, 'POST')
@@ -192,7 +192,7 @@ test('the price charged is an exact method and path match', () => {
   // Under the old longest-prefix rule it matched /api/v1/compress and would
   // have been sold for $0.001 -- and the 402 would have quoted that price, so
   // the payer would have done nothing wrong.
-  assert.equal(priceFor('POST', '/api/v1/compress', config())?.amount, '2000')
+  assert.equal(priceFor('POST', '/api/v1/compress', config())?.amount, '1000')
   assert.equal(priceFor('POST', '/api/v1/compress/evaluate', config())?.amount, '10000')
 
   // A sub-path of a priced route is not priced by inheritance.
@@ -259,7 +259,7 @@ test('each path is priced to the facilitator at its own rate', async () => {
   await resolveX402(request('/api/v1/compress', { 'PAYMENT-SIGNATURE': await signatureFor('/api/v1/compress') }), {
     config: config(), facilitator: facilitator(seen), ledger: ledger('claimed'), acquire,
   })
-  assert.deepEqual(seen, ['10000', '2000'])
+  assert.deepEqual(seen, ['10000', '1000'])
 })
 
 test('a payment the facilitator rejects is challenged again rather than served', async () => {

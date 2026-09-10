@@ -138,11 +138,11 @@ test('published terms are the catalog terms, not a second hand-maintained copy',
   }
 })
 
-test('the two published prices are exactly 2000 and 10000 base units', () => {
+test('the two published prices are exactly 1000 and 10000 base units', () => {
   // Compression stepped 1000 -> 2000: at $0.001 the facilitator fee is the
   // whole price. Deep Context Evaluation is unchanged; it has external demand
   // at 10000 and moving it would forfeit the signal.
-  assert.equal(CONTEXT_COMPRESSION_OFFER.amount, '2000')
+  assert.equal(CONTEXT_COMPRESSION_OFFER.amount, '1000')
   assert.equal(DEEP_CONTEXT_EVALUATION_OFFER.amount, '10000')
 })
 
@@ -152,7 +152,7 @@ test('compilation without measurement selects the cheaper offer', () => {
   const decision = selectMahaOffer(base({ needsDeduplication: true, needsCitationTraceability: true }))
   assert.equal(decision.decision, 'select')
   assert.deepEqual(decision.selectedOfferIds, [COMPRESSION])
-  assert.equal(decision.estimatedOfferCostBaseUnits, '2000')
+  assert.equal(decision.estimatedOfferCostBaseUnits, '1000')
 })
 
 test('any measurement need selects Deep Context Evaluation', () => {
@@ -166,7 +166,7 @@ test('any measurement need selects Deep Context Evaluation', () => {
 // --- Boundaries ------------------------------------------------------------
 
 test('a ceiling exactly equal to the price authorizes it', () => {
-  assert.equal(selectMahaOffer(base({ maximumPriceBaseUnits: '2000' })).decision, 'select')
+  assert.equal(selectMahaOffer(base({ maximumPriceBaseUnits: '1000' })).decision, 'select')
   assert.equal(
     selectMahaOffer(base({ objective: 'evaluate-context-quality', maximumPriceBaseUnits: '10000' })).decision,
     'select',
@@ -174,7 +174,7 @@ test('a ceiling exactly equal to the price authorizes it', () => {
 })
 
 test('one base unit under the price rejects', () => {
-  assert.equal(selectMahaOffer(base({ maximumPriceBaseUnits: '1999' })).decision, 'reject')
+  assert.equal(selectMahaOffer(base({ maximumPriceBaseUnits: '999' })).decision, 'reject')
   assert.equal(
     selectMahaOffer(base({ objective: 'evaluate-context-quality', maximumPriceBaseUnits: '9999' })).decision,
     'reject',
@@ -192,15 +192,15 @@ test('a 5000 base-unit ceiling cannot authorize Deep Context Evaluation, and nev
   )
 })
 
-test('a 20000 base-unit ceiling authorizes the two-stage sequence at exactly 12000 base units', () => {
+test('a 20000 base-unit ceiling authorizes the two-stage sequence at exactly 11000 base units', () => {
   const decision = selectMahaOffer(base({ objective: 'compile-and-evaluate', maximumPriceBaseUnits: '20000' }))
   assert.equal(decision.decision, 'sequence')
   assert.deepEqual(decision.selectedOfferIds, [COMPRESSION, DEEP])
-  assert.equal(decision.estimatedOfferCostBaseUnits, '12000')
+  assert.equal(decision.estimatedOfferCostBaseUnits, '11000')
 })
 
 test('the sequence is rejected when its total exceeds the ceiling, even though stage one fits', () => {
-  const decision = selectMahaOffer(base({ objective: 'compile-and-evaluate', maximumPriceBaseUnits: '11999' }))
+  const decision = selectMahaOffer(base({ objective: 'compile-and-evaluate', maximumPriceBaseUnits: '10999' }))
   assert.equal(decision.decision, 'reject')
   assert.deepEqual(decision.selectedOfferIds, [], 'a partial sequence is not a cheaper sequence')
 })
@@ -422,11 +422,8 @@ test('the rewrite that gives the guide its canonical URL exists', async () => {
  * refresh. This change is documentation, and documentation must not cost
  * $0.001 to publish.
  */
-// Re-pinned when context-compression stepped 1000 -> 2000. Deep Context
-// Evaluation's price did not change, so its digest must not have either --
-// that is what makes this guard worth keeping.
 const PINNED_DIGESTS: Record<string, string> = {
-  [COMPRESSION]: 'sha256:273644f5e72492eefd85d7b1f132d245139f2fed408ec0255d3d329b154f8fc7',
+  [COMPRESSION]: 'sha256:3ad1b8bc5580c06a96f11438129a3e8425b1ad76607e9fd81e49d265ae32e359',
   [DEEP]: 'sha256:300c3e7541695b50233f6b5623c977a607acaabafd33e6959ed07078c5361fae',
 }
 

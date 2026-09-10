@@ -11,7 +11,7 @@ still requires the canonical endpoint to return its declared 402 challenge.
 
 | Offer | Method and path | Amount | Payable today |
 | --- | --- | --- | --- |
-| `context-compression` | `POST /api/v1/compress` | 2000 (`$0.002`) | yes — Production |
+| `context-compression` | `POST /api/v1/compress` | 1000 (`$0.001`) | yes — Production |
 | `deep-context-evaluation` | `POST /api/v1/compress/evaluate` | 10000 (`$0.01`) | yes — Production |
 | `mps-autonomous-audit` | `POST /api/v1/mps/audit` | 250000 (`$0.25`) | yes — Production |
 
@@ -52,7 +52,7 @@ guide](https://www.mahastrategies.com/.well-known/maha/offer-selection.json),
 generated from the same catalog. It is deliberately not part of the payable
 declaration: adding a documentation link there would re-digest the declaration,
 which invalidates the Bazaar listing and costs a settlement to refresh. A
-selection contract is documentation, and documentation must not cost $0.002 to
+selection contract is documentation, and documentation must not cost $0.001 to
 publish.
 
 Compaction only ever loosens a schema, so the inline form never rejects a

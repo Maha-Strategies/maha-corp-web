@@ -24,7 +24,7 @@ const COMPRESSION_URL = 'https://www.mahastrategies.com/api/v1/compress'
 const EVALUATE_URL = 'https://www.mahastrategies.com/api/v1/compress/evaluate'
 
 test('the Context Compiler publishes valid, callable Bazaar metadata', async () => {
-  const extensions = await discoveryExtensionsFor(compression, COMPRESSION_URL, requirement('2000'))
+  const extensions = await discoveryExtensionsFor(compression, COMPRESSION_URL, requirement('1000'))
   assert.ok(extensions?.bazaar)
   assert.deepEqual(validateDiscoveryExtensionSpec(extensions!.bazaar as never), { valid: true })
   assert.deepEqual(validateDiscoveryExtension(extensions!.bazaar as never), { valid: true })
@@ -53,15 +53,15 @@ test('the catalog metadata identifies the service for semantic search', () => {
 })
 
 test('an offer with no catalog entry is not advertised with an invented schema', async () => {
-  assert.equal(await discoveryExtensionsFor({ ...compression, offerId: 'not-an-offer' }, COMPRESSION_URL, requirement('2000')), undefined)
+  assert.equal(await discoveryExtensionsFor({ ...compression, offerId: 'not-an-offer' }, COMPRESSION_URL, requirement('1000')), undefined)
 })
 
 test('the validated declaration is reused on the warm unpaid path', async () => {
   // Rebuilding and re-validating the full schema on every unpaid probe adds
   // work to the exact 402 path catalogs measure.
   assert.equal(
-    await discoveryExtensionsFor(compression, COMPRESSION_URL, requirement('2000')),
-    await discoveryExtensionsFor(compression, COMPRESSION_URL, requirement('2000')),
+    await discoveryExtensionsFor(compression, COMPRESSION_URL, requirement('1000')),
+    await discoveryExtensionsFor(compression, COMPRESSION_URL, requirement('1000')),
   )
 })
 
@@ -74,7 +74,7 @@ test('an incomplete declaration is never cached in place of a complete one', asy
   const partial = await discoveryExtensionsFor(compression, COMPRESSION_URL)
   assert.equal(partial?.['declaration-integrity'], undefined)
 
-  const complete = await discoveryExtensionsFor(compression, COMPRESSION_URL, requirement('2000'))
+  const complete = await discoveryExtensionsFor(compression, COMPRESSION_URL, requirement('1000'))
   assert.ok(complete?.['declaration-integrity'], 'the cache must not have been poisoned by the partial build')
 })
 
@@ -87,7 +87,7 @@ test('each offer gets its own declaration rather than the first one probed', asy
   // another.
   resetDiscoveryCache()
   const deep = await discoveryExtensionsFor(priced(DEEP_CONTEXT_EVALUATION_OFFER), EVALUATE_URL, requirement('10000'))
-  const entry = await discoveryExtensionsFor(compression, COMPRESSION_URL, requirement('2000'))
+  const entry = await discoveryExtensionsFor(compression, COMPRESSION_URL, requirement('1000'))
 
   const deepBazaar = deep!.bazaar as { info: { input: { body: Record<string, unknown> } } }
   const entryBazaar = entry!.bazaar as { info: { input: { body: Record<string, unknown> } } }
@@ -100,7 +100,7 @@ test('each offer gets its own declaration rather than the first one probed', asy
   assert.equal(deepOffer.offerId, 'deep-context-evaluation')
   assert.equal(deepOffer.amount, '10000')
   assert.equal(entryOffer.offerId, 'context-compression')
-  assert.equal(entryOffer.amount, '2000')
+  assert.equal(entryOffer.amount, '1000')
 })
 
 test('the offer extension names the chain the requirement actually uses', async () => {
@@ -109,11 +109,11 @@ test('the offer extension names the chain the requirement actually uses', async 
   // payment on a chain the accepts array beside it does not accept, and the
   // buyer would build a correct payload for the wrong network.
   resetDiscoveryCache()
-  const sepolia = { ...requirement('2000'), network: 'eip155:84532' as const }
+  const sepolia = { ...requirement('1000'), network: 'eip155:84532' as const }
   const extensions = await discoveryExtensionsFor(compression, COMPRESSION_URL, sepolia)
   assert.equal((extensions!['maha-offer'] as { network: string }).network, 'eip155:84532')
 
   resetDiscoveryCache()
-  const mainnet = await discoveryExtensionsFor(compression, COMPRESSION_URL, requirement('2000'))
+  const mainnet = await discoveryExtensionsFor(compression, COMPRESSION_URL, requirement('1000'))
   assert.equal((mainnet!['maha-offer'] as { network: string }).network, 'eip155:8453')
 })

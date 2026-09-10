@@ -29,8 +29,8 @@
         "network": "eip155:8453",
         "asset": "USDC",
         "assetDecimals": 6,
-        "amountBaseUnits": "2000",
-        "displayAmount": "0.002000 USDC"
+        "amountBaseUnits": "1000",
+        "displayAmount": "0.001000 USDC"
       },
       "schemas": {
         "input": "https://www.mahastrategies.com/api/discovery/x402-offers/context-compression#input",
@@ -38,7 +38,7 @@
       },
       "configurationDigest": {
         "algorithm": "sha256",
-        "digest": "sha256:70aa25368effca59d9872e1b75622f5b712bf14d59be701304f1d74913ba2b93",
+        "digest": "sha256:c064d367309bac16d4cf8b295584ec8dcbff07ebc59bb743f9e68609c8d27091",
         "schemaVersion": "1.0.0"
       },
       "limits": {

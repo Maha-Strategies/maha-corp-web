@@ -148,12 +148,13 @@ export const CONTEXT_COMPRESSION_OFFER: X402Offer = {
   id: 'context-compression',
   method: 'POST',
   path: '/api/v1/compress',
-  // Raised from '1000'. At $0.001 the $0.001 facilitator fee is the entire
-  // price: a 0% gross margin at any volume, and the only price on the board
-  // that cost alone condemns. The fifteen settlements already made at '1000'
-  // stay attributable through supersededAmounts.
-  amount: '2000',
-  supersededAmounts: ['1000'],
+  // Held at '1000' by the owner. The $0.001 facilitator fee would take this to
+  // a 0% gross margin, but that fee starts at 1,000 transactions and the whole
+  // catalogue has settled 26, so the step-up is roughly three years out at the
+  // current rate. It is also the only offer with sustained external demand and
+  // the only listing on the Bazaar that is already correct, so leaving it costs
+  // nothing to index. Step it up before the fee threshold, not now.
+  amount: '1000',
   description:
     'Compress long documents and RAG inputs into token-budgeted, deduplicated context packs with source-linked provenance. '
     + 'Returns original and compiled token counts, so the saving is verifiable. '
@@ -307,7 +308,7 @@ export const MPS_AUTONOMOUS_AUDIT_OFFER: X402Offer = {
 
 export const CONTEXT_BUDGET_LADDER_OFFER: X402Offer = {
   id: 'context-budget-ladder', method: 'POST', path: '/api/v1/context/budget-ladder', amount: '12000',
-  description: 'Compile the same supplied documents at exactly five ascending token budgets. Returns five source-linked extractive Context Packs, a compact comparison table, stable hashes, and a deterministic receipt digest. Price basis: five $0.002 compilations plus the comparison table and receipt. No model inference, source acquisition, claim verification, completeness guarantee, or answer-quality assessment. Request and result bodies are not stored.',
+  description: 'Compile the same supplied documents at exactly five ascending token budgets. Returns five source-linked extractive Context Packs, a compact comparison table, stable hashes, and a deterministic receipt digest. Price basis: five compiler runs, the comparison table and the receipt digest. No model inference, source acquisition, claim verification, completeness guarantee, or answer-quality assessment. Request and result bodies are not stored.',
   concurrencyCap: 3, serviceName: 'Maha Context Budget Ladder', tags: ['ai', 'context', 'budget', 'provenance', 'x402'],
   status: 'available', availability: { payableInProduction: true, blockedBy: [] }, requiresIdempotency: false, maxRequestBytes: 450_000,
   capabilityBoundaries: ['Exactly five deterministic compilations at caller-declared budgets.', 'Extractive selection only; no claim verification, model inference, completeness guarantee, or answer-quality assessment.'],

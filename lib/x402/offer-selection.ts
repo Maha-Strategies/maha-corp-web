@@ -561,7 +561,7 @@ export const OFFER_SELECTION_EXAMPLES: ReadonlyArray<{
       network: BASE_MAINNET_CAIP2,
       asset: BASE_USDC,
     },
-    expected: { decision: 'select', selectedOfferIds: [COMPRESSION_ID], estimatedOfferCostBaseUnits: '2000' },
+    expected: { decision: 'select', selectedOfferIds: [COMPRESSION_ID], estimatedOfferCostBaseUnits: '1000' },
     note: 'Compilation only. 1000 base units sits inside a 5000 ceiling.',
   },
   {
@@ -643,7 +643,7 @@ export const OFFER_SELECTION_EXAMPLES: ReadonlyArray<{
       network: BASE_MAINNET_CAIP2,
       asset: BASE_USDC,
     },
-    expected: { decision: 'sequence', selectedOfferIds: [COMPRESSION_ID, DEEP_ID], estimatedOfferCostBaseUnits: '12000' },
+    expected: { decision: 'sequence', selectedOfferIds: [COMPRESSION_ID, DEEP_ID], estimatedOfferCostBaseUnits: '11000' },
     note: '1000 + 10000 = 11000 base units (displays as $0.011), inside a 20000 ceiling.',
   },
 ])

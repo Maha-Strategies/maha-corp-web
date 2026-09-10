@@ -38,7 +38,7 @@ test('freeze enumerates sixty original candidates and refuses to overwrite the o
   //
   // Naming them keeps the freeze a guard: any other amount drift still fails here.
   const repricedForAttribution = new Map([
-    ['context-compression', '2000'], ['revision-lineage-check', '6000'],
+    ['revision-lineage-check', '6000'],
     ['context-budget-ladder', '12000'], ['citation-binding-check', '16000'],
     ['audit-export-normalizer', '18000'], ['celestial-position-snapshot', '20000'],
     ['book-section-the-imagined-life', '25000'], ['book-section-the-volcanic-engine', '30000'],
@@ -50,13 +50,14 @@ test('freeze enumerates sixty original candidates and refuses to overwrite the o
     const current = X402_OFFERS.find(o => o.id === prior.id)!
     assert.equal(current.path, prior.path, `${prior.id}:path`)
     if (prior.id === 'context-budget-ladder') {
-      // The one permitted description change. This offer publishes its price as
-      // a derivation -- five compilations of context-compression -- so stepping
-      // that offer from $0.001 to $0.002 makes the frozen sentence false. The
-      // guard stays tight: everything outside the price-basis sentence must be
-      // byte-identical, and the new basis must name the new compilation price.
-      const basis = /Price basis: five \$[\d.]+ compilations[^.]*\./
-      assert.match(current.description, /Price basis: five \$0\.002 compilations plus the comparison table and receipt\./)
+      // The one permitted description change. This offer used to publish its
+      // price as a strict derivation -- five $0.001 compilations -- and is no
+      // longer one: it sits on its own rung so every payable pair stays two
+      // facilitator fees apart. The sentence now states what the buyer receives
+      // rather than a multiple it would fail. Everything outside that one
+      // sentence must still be byte-identical.
+      const basis = /Price basis: five (?:\$[\d.]+ compilations|compiler runs, the comparison table and the receipt digest)\./
+      assert.match(current.description, /Price basis: five compiler runs, the comparison table and the receipt digest\./)
       assert.equal(current.description.replace(basis, ''), prior.description.replace(basis, ''),
         `${prior.id}: only the price basis may differ`)
     } else {
