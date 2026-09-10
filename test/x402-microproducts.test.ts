@@ -55,25 +55,31 @@ for (const id of MICRO_IDS) {
   })
 }
 
-test('first ten retain prices and twelve additions use only approved price bands', () => {
-  const half = ['citation-binding-check', 'revision-lineage-check', 'dimensional-consistency-check', 'exact-interpolation-receipt', 'tiruvaymoli-context-packet']
+test('withheld products keep the two approved bands; released products hold their own rungs', () => {
   assert.equal(MICRO_IDS.length, 22)
   assert.equal(new Set(MICRO_IDS.map(microPath)).size, 22)
   const original = MICRO_OFFERS.filter(o => !NEXT_IDS.includes(o.id as keyof typeof NEXT_PRODUCTS))
   assert.equal(original.length, 10)
-  // Two approved bands. A settled amount may carry a small per-product offset
-  // so the ledger can attribute a payment, so the band is the amount floored to
-  // its tier rather than the amount itself.
+
+  // Withheld products are not payable, so the ledger never indexes them and
+  // they are free to share the two approved bands. Publishing one requires an
+  // unused amount, which assertDistinctPayableAmounts() enforces at load.
   const band = (amount: string) => String(Math.floor(Number(amount) / 1000) * 1000)
-  const offset = (amount: string) => Number(amount) - Number(band(amount))
-  for (const o of original) {
-    assert.equal(band(o.amount), half.includes(o.id) ? '5000' : '10000', `${o.id}: price band`)
-    assert.ok(offset(o.amount) < 100, `${o.id}: an attribution offset stays inside its band`)
+  for (const o of MICRO_OFFERS.filter(o => !o.availability.payableInProduction)) {
+    assert.ok(['5000', '10000'].includes(band(o.amount)), `${o.id}: withheld price band`)
+    assert.equal(Number(o.amount) % 1000, 0, `${o.id}: withheld amounts stay on a round band`)
   }
-  for (const id of NEXT_IDS) {
-    const amount = MICRO_OFFERS.find(o => o.id === id)!.amount
-    assert.ok(['5000', '10000'].includes(band(amount)), `${id}: price band`)
-    assert.ok(offset(amount) < 100, `${id}: an attribution offset stays inside its band`)
+
+  // Released products no longer sit in a shared band with a sub-100 attribution
+  // offset. Each holds its own rung, separated from every other payable amount
+  // by at least twice the facilitator fee, so no fee-scale perturbation can
+  // alias one product's settlement onto another's.
+  const released = MICRO_OFFERS.filter(o => o.availability.payableInProduction)
+  assert.deepEqual(released.map(o => o.amount).sort((a, b) => Number(a) - Number(b)),
+    ['6000', '8000', '14000', '16000', '18000'])
+  const payable = payableOffers().map(o => BigInt(o.amount)).sort((a, b) => (a < b ? -1 : 1))
+  for (let i = 1; i < payable.length; i += 1) {
+    assert.ok(payable[i] - payable[i - 1] >= BigInt(2000), 'every payable pair stays at least two fees apart')
   }
 })
 

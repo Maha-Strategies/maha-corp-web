@@ -148,9 +148,12 @@ export const CONTEXT_COMPRESSION_OFFER: X402Offer = {
   id: 'context-compression',
   method: 'POST',
   path: '/api/v1/compress',
-  // Unchanged, and deliberately so. This contract has settled payments against
-  // it; a price or schema change here is a breaking change to a live product.
-  amount: '1000',
+  // Raised from '1000'. At $0.001 the $0.001 facilitator fee is the entire
+  // price: a 0% gross margin at any volume, and the only price on the board
+  // that cost alone condemns. The fifteen settlements already made at '1000'
+  // stay attributable through supersededAmounts.
+  amount: '2000',
+  supersededAmounts: ['1000'],
   description:
     'Compress long documents and RAG inputs into token-budgeted, deduplicated context packs with source-linked provenance. '
     + 'Returns original and compiled token counts, so the saving is verifiable. '
@@ -232,7 +235,11 @@ export const MPS_AUTONOMOUS_AUDIT_OFFER: X402Offer = {
   id: 'mps-autonomous-audit',
   method: 'POST',
   path: '/api/v1/mps/audit',
-  amount: '100000',
+  // Raised from '100000'. This and the intake pack are the only offers with a
+  // real marginal cost (~$0.04-$0.06 a call, bounded in pricing/unit-costs.md),
+  // and it was priced below five deterministic offers that cost nothing to run.
+  amount: '250000',
+  supersededAmounts: ['100000'],
   // "Triage" rather than "audit" in the buyer-facing sentence, because the
   // statuses are model-assigned and the word audit implies an assurance
   // engagement this is not.
@@ -299,8 +306,8 @@ export const MPS_AUTONOMOUS_AUDIT_OFFER: X402Offer = {
 }
 
 export const CONTEXT_BUDGET_LADDER_OFFER: X402Offer = {
-  id: 'context-budget-ladder', method: 'POST', path: '/api/v1/context/budget-ladder', amount: '5000',
-  description: 'Compile the same supplied documents at exactly five ascending token budgets. Returns five source-linked extractive Context Packs, a compact comparison table, stable hashes, and a deterministic receipt digest. Price basis: five $0.001 compilations. No model inference, source acquisition, claim verification, completeness guarantee, or answer-quality assessment. Request and result bodies are not stored.',
+  id: 'context-budget-ladder', method: 'POST', path: '/api/v1/context/budget-ladder', amount: '12000',
+  description: 'Compile the same supplied documents at exactly five ascending token budgets. Returns five source-linked extractive Context Packs, a compact comparison table, stable hashes, and a deterministic receipt digest. Price basis: five $0.002 compilations plus the comparison table and receipt. No model inference, source acquisition, claim verification, completeness guarantee, or answer-quality assessment. Request and result bodies are not stored.',
   concurrencyCap: 3, serviceName: 'Maha Context Budget Ladder', tags: ['ai', 'context', 'budget', 'provenance', 'x402'],
   status: 'available', availability: { payableInProduction: true, blockedBy: [] }, requiresIdempotency: false, maxRequestBytes: 450_000,
   capabilityBoundaries: ['Exactly five deterministic compilations at caller-declared budgets.', 'Extractive selection only; no claim verification, model inference, completeness guarantee, or answer-quality assessment.'],
@@ -435,19 +442,19 @@ const machineBookEditionOffer = (input: {
 })
 
 export const IMAGINED_LIFE_SECTION_OFFER = machineBookOffer({
-  id: 'book-section-the-imagined-life', path: '/api/v1/books/the-imagined-life/section', title: 'The Imagined Life', bookId: 'the-imagined-life', amount: '5001',
+  id: 'book-section-the-imagined-life', path: '/api/v1/books/the-imagined-life/section', title: 'The Imagined Life', bookId: 'the-imagined-life', amount: '25000',
 })
 
 export const VOLCANIC_ENGINE_SECTION_OFFER = machineBookOffer({
-  id: 'book-section-the-volcanic-engine', path: '/api/v1/books/the-volcanic-engine/section', title: 'The Volcanic Engine', bookId: 'the-volcanic-engine', amount: '5002',
+  id: 'book-section-the-volcanic-engine', path: '/api/v1/books/the-volcanic-engine/section', title: 'The Volcanic Engine', bookId: 'the-volcanic-engine', amount: '30000',
 })
 
 export const IMAGINED_LIFE_EDITION_OFFER = machineBookEditionOffer({
-  id: 'book-edition-the-imagined-life', path: '/api/v1/books/the-imagined-life/edition', title: 'The Imagined Life', bookId: 'the-imagined-life', amount: '2990000',
+  id: 'book-edition-the-imagined-life', path: '/api/v1/books/the-imagined-life/edition', title: 'The Imagined Life', bookId: 'the-imagined-life', amount: '3000000',
 })
 
 export const VOLCANIC_ENGINE_EDITION_OFFER = machineBookEditionOffer({
-  id: 'book-edition-the-volcanic-engine', path: '/api/v1/books/the-volcanic-engine/edition', title: 'The Volcanic Engine', bookId: 'the-volcanic-engine', amount: '2990001',
+  id: 'book-edition-the-volcanic-engine', path: '/api/v1/books/the-volcanic-engine/edition', title: 'The Volcanic Engine', bookId: 'the-volcanic-engine', amount: '3500000',
 })
 
 export const X402_OFFERS: readonly X402Offer[] = Object.freeze([

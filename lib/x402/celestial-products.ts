@@ -6,9 +6,9 @@ import { computePanchanga, lahiriAyanamsa, PANCHANGA_VERSION } from '../panchang
 
 export const CELESTIAL_PRODUCT_VERSION = 'maha-celestial-calculations/0.1'
 export const CELESTIAL_PRODUCTS = {
-  'celestial-position-snapshot': { path: '/api/v1/calculations/positions', amount: '10001' },
-  'celestial-chart-evidence': { path: '/api/v1/calculations/chart', amount: '50001' },
-  'celestial-vimshottari-timing': { path: '/api/v1/calculations/vimshottari', amount: '100001' },
+  'celestial-position-snapshot': { path: '/api/v1/calculations/positions', amount: '20000' },
+  'celestial-chart-evidence': { path: '/api/v1/calculations/chart', amount: '60000' },
+  'celestial-vimshottari-timing': { path: '/api/v1/calculations/vimshottari', amount: '120000' },
 } as const
 export type CelestialProductId = keyof typeof CELESTIAL_PRODUCTS
 export const CELESTIAL_MAX_REQUEST_BYTES = 2048

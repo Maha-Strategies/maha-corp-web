@@ -16,11 +16,14 @@ import { validate } from './helpers/json-schema.ts'
 
 const sha = (value: string) => `sha256:${createHash('sha256').update(value, 'utf8').digest('hex')}`
 
-test('both book offers are $0.005-tier section resources at distinct settled amounts', () => {
-  // One base unit apart: the settlement ledger attributes a payment by its
-  // amount, and a shared price left both titles unmeasurable.
-  assert.equal(IMAGINED_LIFE_SECTION_OFFER.amount, '5001')
-  assert.equal(VOLCANIC_ENGINE_SECTION_OFFER.amount, '5002')
+test('both book offers are section resources at widely separated settled amounts', () => {
+  // The settlement ledger attributes a payment by its amount, so the two
+  // titles need distinct prices. They were one base unit apart, which is
+  // distinct on-chain but indistinguishable to a reader and a thousand times
+  // finer than the facilitator fee; the ladder now separates every pair by at
+  // least 2000 base units. The Volcanic Engine delivers the larger section.
+  assert.equal(IMAGINED_LIFE_SECTION_OFFER.amount, '25000')
+  assert.equal(VOLCANIC_ENGINE_SECTION_OFFER.amount, '30000')
   assert.equal(offerFor('POST', '/api/v1/books/the-imagined-life/section'), IMAGINED_LIFE_SECTION_OFFER)
   assert.equal(offerFor('POST', '/api/v1/books/the-volcanic-engine/section'), VOLCANIC_ENGINE_SECTION_OFFER)
   assert.equal(offerFor('GET', '/api/v1/books/the-imagined-life/section'), undefined)
@@ -72,9 +75,11 @@ test('unknown books, sections and fields fail closed', () => {
   assert.throws(() => buildBookSectionReceipt('the-imagined-life', { sectionId: 'introduction', extra: true }), /Only sectionId/)
 })
 
-test('both complete-edition offers are $2.99-tier resources at distinct settled amounts', () => {
-  assert.equal(IMAGINED_LIFE_EDITION_OFFER.amount, '2990000')
-  assert.equal(VOLCANIC_ENGINE_EDITION_OFFER.amount, '2990001')
+test('both complete-edition offers are $3-tier resources at widely separated settled amounts', () => {
+  // The Volcanic Engine edition delivers 428 KB against The Imagined Life's
+  // 337 KB, so it is priced above it rather than one base unit away.
+  assert.equal(IMAGINED_LIFE_EDITION_OFFER.amount, '3000000')
+  assert.equal(VOLCANIC_ENGINE_EDITION_OFFER.amount, '3500000')
   assert.equal(offerFor('POST', '/api/v1/books/the-imagined-life/edition'), IMAGINED_LIFE_EDITION_OFFER)
   assert.equal(offerFor('POST', '/api/v1/books/the-volcanic-engine/edition'), VOLCANIC_ENGINE_EDITION_OFFER)
   assert.equal(offerFor('GET', '/api/v1/books/the-volcanic-engine/edition'), undefined)

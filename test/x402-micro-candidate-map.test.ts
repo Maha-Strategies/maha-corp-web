@@ -22,28 +22,51 @@ test('freeze enumerates sixty original candidates and refuses to overwrite the o
   const again = spawnSync(process.execPath, ['--experimental-strip-types', 'scripts/freeze-micro-candidates.ts', '--create'], { cwd: root })
   assert.notEqual(again.status, 0)
   assert.equal(read('content/discovery/micro-candidate-freeze-v1.json'), before)
-  // Offers repriced so the settlement ledger can attribute a payment by its
-  // amount. The chain records only payer, amount and recipient, so a shared
-  // amount makes a payment unattributable; deep-context-evaluation's four
-  // external settlements were about to become ambiguous. Each moved by one to
-  // eleven base units and stayed inside its price tier. Naming them keeps the
-  // freeze a guard: any other amount drift still fails here.
+  // Offers repriced twice since the freeze. First for attribution: the chain
+  // records only payer, amount and recipient, so a shared amount makes a
+  // payment unattributable, and deep-context-evaluation's four external
+  // settlements were about to become ambiguous. That pass moved eleven offers
+  // by one to eleven base units.
+  //
+  // Then for separation. Those one-unit offsets attributed on-chain but were
+  // unreadable on an invoice and a thousand times finer than the $0.001
+  // facilitator fee, so a fee-scale perturbation could alias one product onto
+  // another. Every payable pair is now at least 2000 base units apart, and
+  // every move was upward: with seventeen of nineteen offers having never
+  // recorded a sale, raising a never-sold price forgoes nothing observable
+  // while cutting one forgoes margin on sales that may yet come.
+  //
+  // Naming them keeps the freeze a guard: any other amount drift still fails here.
   const repricedForAttribution = new Map([
-    ['book-section-the-imagined-life', '5001'], ['book-section-the-volcanic-engine', '5002'],
-    ['book-edition-the-volcanic-engine', '2990001'], ['celestial-position-snapshot', '10001'],
-    ['celestial-chart-evidence', '50001'], ['celestial-vimshottari-timing', '100001'],
-    ['citation-binding-check', '5003'], ['revision-lineage-check', '5004'],
-    ['audit-export-normalizer', '10002'], ['unit-uncertainty-conversion', '5008'],
-    ['divine-name-disambiguation', '5011'],
+    ['context-compression', '2000'], ['revision-lineage-check', '6000'],
+    ['context-budget-ladder', '12000'], ['citation-binding-check', '16000'],
+    ['audit-export-normalizer', '18000'], ['celestial-position-snapshot', '20000'],
+    ['book-section-the-imagined-life', '25000'], ['book-section-the-volcanic-engine', '30000'],
+    ['celestial-chart-evidence', '60000'], ['celestial-vimshottari-timing', '120000'],
+    ['mps-autonomous-audit', '250000'], ['book-edition-the-imagined-life', '3000000'],
+    ['book-edition-the-volcanic-engine', '3500000'],
   ])
   for (const prior of freeze.existingOffers) {
     const current = X402_OFFERS.find(o => o.id === prior.id)!
-    for (const key of ['path', 'description'] as const) assert.equal(current[key], prior[key], `${prior.id}:${key}`)
+    assert.equal(current.path, prior.path, `${prior.id}:path`)
+    if (prior.id === 'context-budget-ladder') {
+      // The one permitted description change. This offer publishes its price as
+      // a derivation -- five compilations of context-compression -- so stepping
+      // that offer from $0.001 to $0.002 makes the frozen sentence false. The
+      // guard stays tight: everything outside the price-basis sentence must be
+      // byte-identical, and the new basis must name the new compilation price.
+      const basis = /Price basis: five \$[\d.]+ compilations[^.]*\./
+      assert.match(current.description, /Price basis: five \$0\.002 compilations plus the comparison table and receipt\./)
+      assert.equal(current.description.replace(basis, ''), prior.description.replace(basis, ''),
+        `${prior.id}: only the price basis may differ`)
+    } else {
+      assert.equal(current.description, prior.description, `${prior.id}:description`)
+    }
     const expectedAmount = repricedForAttribution.get(prior.id) ?? prior.amount
     assert.equal(current.amount, expectedAmount, `${prior.id}:amount`)
     if (repricedForAttribution.has(prior.id)) {
       const moved = BigInt(current.amount) - BigInt(prior.amount)
-      assert.ok(moved > BigInt(0) && moved < BigInt(100), `${prior.id}: a reprice must stay inside its tier`)
+      assert.ok(moved > BigInt(0), `${prior.id}: no published price is cut without a recorded reason`)
     }
     // Freeze is immutable history. Only the three explicitly promoted original ten may change status.
     const promoted = ['citation-binding-check', 'revision-lineage-check', 'audit-export-normalizer'].includes(prior.id)

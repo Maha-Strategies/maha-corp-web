@@ -561,7 +561,7 @@ export const OFFER_SELECTION_EXAMPLES: ReadonlyArray<{
       network: BASE_MAINNET_CAIP2,
       asset: BASE_USDC,
     },
-    expected: { decision: 'select', selectedOfferIds: [COMPRESSION_ID], estimatedOfferCostBaseUnits: '1000' },
+    expected: { decision: 'select', selectedOfferIds: [COMPRESSION_ID], estimatedOfferCostBaseUnits: '2000' },
     note: 'Compilation only. 1000 base units sits inside a 5000 ceiling.',
   },
   {
@@ -580,17 +580,17 @@ export const OFFER_SELECTION_EXAMPLES: ReadonlyArray<{
   },
   {
     requiresOfferId: MPS_ID,
-    name: 'Editorial claim triage, ceiling 100000 base units ($0.10)',
+    name: 'Editorial claim triage, ceiling 250000 base units ($0.25)',
     input: {
       objective: 'claim-provenance-triage',
       estimatedInputBytes: 4_200,
       inputEncoding: 'utf8-text',
-      maximumPriceBaseUnits: '100000',
+      maximumPriceBaseUnits: '250000',
       network: BASE_MAINNET_CAIP2,
       asset: BASE_USDC,
     },
-    expected: { decision: 'select', selectedOfferIds: [MPS_ID], estimatedOfferCostBaseUnits: '100000' },
-    note: 'Only the MPS audit assigns provenance statuses. 100000 base units is exactly the ceiling, which authorizes it.',
+    expected: { decision: 'select', selectedOfferIds: [MPS_ID], estimatedOfferCostBaseUnits: '250000' },
+    note: 'Only the MPS audit assigns provenance statuses. 250000 base units is exactly the ceiling, which authorizes it.',
   },
   {
     requiresOfferId: MPS_ID,
@@ -643,7 +643,7 @@ export const OFFER_SELECTION_EXAMPLES: ReadonlyArray<{
       network: BASE_MAINNET_CAIP2,
       asset: BASE_USDC,
     },
-    expected: { decision: 'sequence', selectedOfferIds: [COMPRESSION_ID, DEEP_ID], estimatedOfferCostBaseUnits: '11000' },
+    expected: { decision: 'sequence', selectedOfferIds: [COMPRESSION_ID, DEEP_ID], estimatedOfferCostBaseUnits: '12000' },
     note: '1000 + 10000 = 11000 base units (displays as $0.011), inside a 20000 ceiling.',
   },
 ])

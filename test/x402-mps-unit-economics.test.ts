@@ -23,9 +23,12 @@ import { MAX_AUDIT_ATTEMPTS, MAX_AUDIT_PASSAGE_CHARS } from '../lib/x402/mps-aud
 // price. This is a test rather than a doc because a loss-making offer does not
 // announce itself; it looks like traffic.
 
-test('the offer is priced at ten cents', () => {
-  assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.amount, '100000')
-  assert.equal(CONSERVATIVE_CASE().priceUsd, 0.1)
+test('the offer is priced at twenty-five cents', () => {
+  // Raised from 100000. This and the intake pack are the only offers with a
+  // real marginal cost, and it was priced below five deterministic offers that
+  // cost essentially nothing to serve.
+  assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.amount, '250000')
+  assert.equal(CONSERVATIVE_CASE().priceUsd, 0.25)
 })
 
 test('0.5 tokens per character is the expected case, not a worst case', () => {
@@ -139,23 +142,26 @@ test('the minimum safe price is reported, so a loss-making offer is never shippe
   assert.ok(Number(underpriced.minimumSafeAmountBaseUnits) > 10_000)
 })
 
-test('the 32 KB figure is the body limit, not the model input, and is priced anyway', () => {
-  // The brief asked for worst case "at the current 32 KB input". The passage
-  // validator rejects anything over 6,000 characters with a 413 before a model
-  // client is constructed, so 32 KB cannot reach the model. The hypothetical is
-  // computed so that raising the cap is a decision with a number attached.
+test('the 32 KB figure is the body limit, not the model input, and is now covered', () => {
+  // The passage validator rejects anything over 6,000 characters with a 413
+  // before a model client is constructed, so 32 KB cannot reach the model. The
+  // hypothetical is computed so that raising the cap is a decision with a
+  // number attached.
   const hypothetical = HYPOTHETICAL_32KB()
   assert.ok(hypothetical.totalCostUsd > CONSERVATIVE_CASE().totalCostUsd)
 
-  // Under honest assumptions this is not merely thin, it is loss-making: a
-  // 32 KB high-entropy passage costs about $0.19 to serve for $0.10. The
-  // earlier calculation showed it as narrowly profitable, and it showed that
-  // only because it priced tokens at half their worst rate. The 6,000-char cap
-  // is doing real commercial work, not just protecting latency.
-  assert.equal(hypothetical.covered, false)
-  assert.ok(hypothetical.marginUsd < 0, `margin was ${hypothetical.marginUsd}`)
+  // At $0.10 this case was loss-making -- about $0.19 of cost against $0.10 of
+  // revenue -- and the 6,000-character cap was doing commercial work, not just
+  // protecting latency. At $0.25 it is covered, with roughly 25% margin. That
+  // is a real consequence of the reprice: raising the passage cap is now a
+  // latency and answer-quality decision rather than a solvency one. It is not
+  // an argument for raising it, and the cap stays where it is.
+  assert.equal(hypothetical.covered, true)
+  assert.ok(hypothetical.marginUsd > 0, `margin was ${hypothetical.marginUsd}`)
+  assert.ok(hypothetical.marginPercent < CONSERVATIVE_CASE().marginPercent,
+    'a 32 KB passage still earns materially less than one inside the cap')
   assert.ok(
-    Number(hypothetical.minimumSafeAmountBaseUnits) > Number(MPS_AUTONOMOUS_AUDIT_OFFER.amount),
-    'raising the passage cap to the body limit would require repricing the offer',
+    Number(hypothetical.minimumSafeAmountBaseUnits) < Number(MPS_AUTONOMOUS_AUDIT_OFFER.amount),
+    'the published price now clears the worst case the body limit could admit',
   )
 })
