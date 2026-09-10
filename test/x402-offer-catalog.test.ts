@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict'
+import { EXPECTED_PRICE_BASE_UNITS } from '../lib/x402/discovery-payment-recipe.ts'
+import { openApiDocument } from '../lib/openapi.ts'
 import test from 'node:test'
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
@@ -42,12 +44,12 @@ test('each offer is published at exactly its intended price', () => {
   // becomes, which is precisely the drift this file exists to catch.
   assert.equal(CONTEXT_COMPRESSION_OFFER.amount, '1000')
   assert.equal(DEEP_CONTEXT_EVALUATION_OFFER.amount, '10000')
-  assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.amount, '100000')
+  assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.amount, '250000')
   const ladder = X402_OFFERS.find((offer) => offer.id === 'context-budget-ladder')
   const matrix = X402_OFFERS.find((offer) => offer.id === 'evidence-retention-matrix')
   const governed = X402_OFFERS.find((offer) => offer.id === 'governed-context-verification-pack')
   const intake = X402_OFFERS.find((offer) => offer.id === 'research-intake-evidence-pack')
-  assert.equal(ladder?.amount, '5000')
+  assert.equal(ladder?.amount, '12000')
   assert.equal(matrix?.amount, '50000')
   assert.equal(governed?.amount, '500000')
   assert.equal(intake?.amount, '1000000')
@@ -55,7 +57,7 @@ test('each offer is published at exactly its intended price', () => {
   // And the runtime charges those amounts, not merely publishes them.
   assert.equal(priceFor('POST', '/api/v1/compress', config())?.amount, '1000')
   assert.equal(priceFor('POST', '/api/v1/compress/evaluate', config())?.amount, '10000')
-  assert.equal(priceFor('POST', '/api/v1/mps/audit', config())?.amount, '100000')
+  assert.equal(priceFor('POST', '/api/v1/mps/audit', config())?.amount, '250000')
 })
 
 test('the entry offer contract is unchanged', () => {
@@ -327,4 +329,65 @@ test('a contradicting deployment still serves the catalog price, never the varia
   assert.equal(drifted.resources[0]!.description, CONTEXT_COMPRESSION_OFFER.description)
   assert.equal(drifted.resources[0]!.concurrencyCap, 8)
   assert.equal(drifted.catalogContradictions.length, 3)
+})
+
+// --- Prices declared outside the catalogue ---------------------------------
+
+/**
+ * Three surfaces state a price in their own words rather than reading it from
+ * the catalogue: the public OpenAPI spec, the buyer recipe's refusal guard, and
+ * the playground's pay button. All three drifted silently before this test
+ * existed -- the spec was quoting 5000 for both book sections after they had
+ * moved to 5001 and 5002, and the playground offered to "Pay $0.001" against an
+ * endpoint that had been repriced. A price a buyer is shown and a price they
+ * are charged must not be able to disagree.
+ */
+test('every price stated outside the catalogue matches the catalogue', () => {
+  const amountOf = (id: string) => {
+    const offer = X402_OFFERS.find((candidate) => candidate.id === id)
+    assert.ok(offer, `unknown offer ${id}`)
+    return offer.amount
+  }
+
+  // 1. The OpenAPI 402 descriptions.
+  const routeOffer: Record<string, string> = {
+    '/api/v1/compress': 'context-compression',
+    '/api/v1/compress/evaluate': 'deep-context-evaluation',
+    '/api/v1/context/budget-ladder': 'context-budget-ladder',
+    '/api/v1/context/evidence-matrix': 'evidence-retention-matrix',
+    '/api/v1/context/governed-verification': 'governed-context-verification-pack',
+    '/api/v1/research/intake': 'research-intake-evidence-pack',
+    '/api/v1/books/the-imagined-life/section': 'book-section-the-imagined-life',
+    '/api/v1/books/the-volcanic-engine/section': 'book-section-the-volcanic-engine',
+    '/api/v1/books/the-imagined-life/edition': 'book-edition-the-imagined-life',
+    '/api/v1/books/the-volcanic-engine/edition': 'book-edition-the-volcanic-engine',
+    '/api/v1/mps/audit': 'mps-autonomous-audit',
+  }
+  let checked = 0
+  for (const [route, offerId] of Object.entries(routeOffer)) {
+    const described = JSON.stringify((openApiDocument.paths as Record<string, unknown>)[route])
+    assert.ok(described, `openapi is missing ${route}`)
+    for (const stated of described.matchAll(/payment challenge for (\d+) USDC base units/g)) {
+      assert.equal(stated[1], amountOf(offerId), `${route}: openapi states a price the catalogue does not charge`)
+      checked += 1
+    }
+    for (const stated of described.matchAll(/priced at ([\d.]+) USDC/g)) {
+      assert.equal(Number(stated[1]), Number(amountOf(offerId)) / 1e6, `${route}: openapi prose price disagrees with the catalogue`)
+      checked += 1
+    }
+  }
+  assert.ok(checked >= 11, `expected at least 11 stated prices, checked ${checked}`)
+
+  // 2. The buyer recipe refuses anything but the exact published price.
+  assert.equal(EXPECTED_PRICE_BASE_UNITS, BigInt(amountOf('context-compression')))
+
+  // 3. The playground's pay button. Read as source because it is a client
+  // component and importing the catalogue there would ship it to the browser.
+  const playground = readFileSync('app/context-compiler/playground/ContextCompilerPlayground.tsx', 'utf8')
+  const fee = playground.match(/const X402_FEE_USD = ([\d.]+)/)
+  assert.ok(fee, 'the playground no longer declares X402_FEE_USD')
+  assert.equal(Number(fee[1]), Number(amountOf('context-compression')) / 1e6,
+    'the playground would name a different price from the one the endpoint charges')
+  assert.doesNotMatch(playground.replace(/const X402_FEE_USD = [\d.]+/, ''), /\$?0\.001\d* USDC|\$0\.001\b/,
+    'a hardcoded fee string survives in the playground; derive it from X402_FEE_USD')
 })

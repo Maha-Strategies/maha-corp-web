@@ -47,7 +47,20 @@ export function baseSettlementReader(options: { timeout?: number; retryCount?: n
 export function ledgerFromRows(rows: Parameters<typeof buildLedger>[0]['settlements'], fromBlock: bigint, toBlock: bigint, observedAt: string) {
   return buildLedger({ settlements: rows, fromBlock, toBlock, observedAt,
     operatorWallets: [...OPERATOR_WALLETS, MAHA_PAYEE],
-    offers: payableOffers().map((offer) => ({ id: offer.id, title: offer.id.split('-').map((word) => word[0].toUpperCase() + word.slice(1)).join(' '), amountBaseUnits: BigInt(offer.amount) })),
+    // Superseded amounts must travel with the offer. The hourly cron rebuilds
+    // the public ledger from chain logs alone, so an offer that has been
+    // repriced stops matching its own historical settlements unless the old
+    // amounts come too -- which would silently drop them from the published
+    // totals. scripts/generate-x402-settlement-ledger.ts already passes these;
+    // this path did not, and the two disagreed the moment a price moved.
+    offers: payableOffers().map((offer) => ({
+      id: offer.id,
+      title: offer.id.split('-').map((word) => word[0].toUpperCase() + word.slice(1)).join(' '),
+      amountBaseUnits: BigInt(offer.amount),
+      ...(offer.supersededAmounts?.length
+        ? { supersededAmountsBaseUnits: offer.supersededAmounts.map((amount) => BigInt(amount)) }
+        : {}),
+    })),
   })
 }
 

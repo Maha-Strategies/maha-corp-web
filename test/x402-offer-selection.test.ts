@@ -139,6 +139,9 @@ test('published terms are the catalog terms, not a second hand-maintained copy',
 })
 
 test('the two published prices are exactly 1000 and 10000 base units', () => {
+  // Compression stepped 1000 -> 2000: at $0.001 the facilitator fee is the
+  // whole price. Deep Context Evaluation is unchanged; it has external demand
+  // at 10000 and moving it would forfeit the signal.
   assert.equal(CONTEXT_COMPRESSION_OFFER.amount, '1000')
   assert.equal(DEEP_CONTEXT_EVALUATION_OFFER.amount, '10000')
 })
@@ -302,17 +305,17 @@ test('a withheld offer never reaches the published document either', () => {
 // --- MPS audit selection ---------------------------------------------------
 
 test('claim triage selects the MPS audit and nothing else', () => {
-  const decision = selectMahaOffer(base({ objective: 'claim-provenance-triage', maximumPriceBaseUnits: '100000' }))
+  const decision = selectMahaOffer(base({ objective: 'claim-provenance-triage', maximumPriceBaseUnits: '250000' }))
   assert.equal(decision.decision, 'select')
   assert.deepEqual(decision.selectedOfferIds, [MPS])
-  assert.equal(decision.estimatedOfferCostBaseUnits, '100000')
+  assert.equal(decision.estimatedOfferCostBaseUnits, '250000')
   assert.equal(decision.estimatedOfferCostBaseUnits, MPS_AUTONOMOUS_AUDIT_OFFER.amount)
 })
 
 test('a compression request never falls through into the $0.10 model call', () => {
   // The expensive misroute. Triage is reachable only by asking for it.
   for (const objective of ['compile-context-pack', 'evaluate-context-quality', 'compile-and-evaluate', 'other'] as const) {
-    const decision = selectMahaOffer(base({ objective, maximumPriceBaseUnits: '100000' }))
+    const decision = selectMahaOffer(base({ objective, maximumPriceBaseUnits: '250000' }))
     assert.ok(!decision.selectedOfferIds.includes(MPS), `${objective} must not select the MPS audit`)
   }
 })
@@ -324,13 +327,13 @@ test('MPS over budget rejects and never substitutes a compression offer', () => 
   assert.ok(decision.warnings.some((w) => /provenance statuses/i.test(w)))
 })
 
-test('the MPS boundary is exact at 100000 base units', () => {
-  assert.equal(selectMahaOffer(base({ objective: 'claim-provenance-triage', maximumPriceBaseUnits: '100000' })).decision, 'select')
+test('the MPS boundary is exact at 250000 base units', () => {
+  assert.equal(selectMahaOffer(base({ objective: 'claim-provenance-triage', maximumPriceBaseUnits: '250000' })).decision, 'select')
   assert.equal(selectMahaOffer(base({ objective: 'claim-provenance-triage', maximumPriceBaseUnits: '99999' })).decision, 'reject')
 })
 
 test('a passage over 6000 characters rejects before payment', () => {
-  const over = { objective: 'claim-provenance-triage' as const, estimatedInputBytes: MPS_MAX_PASSAGE_CHARACTERS + 1, maximumPriceBaseUnits: '100000' }
+  const over = { objective: 'claim-provenance-triage' as const, estimatedInputBytes: MPS_MAX_PASSAGE_CHARACTERS + 1, maximumPriceBaseUnits: '250000' }
   assert.equal(selectMahaOffer(base(over)).decision, 'reject')
   assert.equal(selectMahaOffer(base({ ...over, estimatedInputBytes: MPS_MAX_PASSAGE_CHARACTERS })).decision, 'select')
 })
@@ -339,7 +342,7 @@ test('the published MPS entry preserves the contract exactly', () => {
   const entry = (buildOfferSelectionDocument().offers as Array<Record<string, unknown>>)
     .find((o) => o.offerId === MPS)!
   assert.ok(entry)
-  assert.equal((entry.price as { baseUnits: string }).baseUnits, '100000')
+  assert.equal((entry.price as { baseUnits: string }).baseUnits, '250000')
   assert.equal(entry.resource, 'https://www.mahastrategies.com/api/v1/mps/audit')
   assert.equal(entry.method, 'POST')
   assert.equal(entry.network, BASE_MAINNET_CAIP2)

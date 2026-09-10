@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { readFileSync } from 'node:fs'
 import { CELESTIAL_OFFERS } from '../lib/x402/celestial-offers.ts'
-import { buildCelestialProduct, calculationDigest, parseCalculationInput, SYNTHETIC_CALCULATION_INPUTS, verifyCelestialProduct, type CelestialProductId } from '../lib/x402/celestial-products.ts'
+import { buildCelestialProduct, calculationDigest, CELESTIAL_PRODUCTS, parseCalculationInput, SYNTHETIC_CALCULATION_INPUTS, verifyCelestialProduct, type CelestialProductId } from '../lib/x402/celestial-products.ts'
 import { apiProxyGate } from '../lib/api-proxy-policy.ts'
 import { payableOffers } from '../lib/x402/offers.ts'
 import { validate } from './helpers/json-schema.ts'
@@ -10,9 +10,10 @@ import { bytesDigest, createBuyerCapture, checkBuyerDelivery } from '../lib/x402
 import { summarizeCalculationDemand } from '../lib/x402/celestial-demand.ts'
 
 test('discovery: synthetic examples and outputs conform; three explicitly promoted prices', () => {
-  // One base unit above the tier; $0.01, $0.05 and $0.10 belong to
-  // deep-context-evaluation, evidence-retention-matrix and mps-autonomous-audit.
-  assert.deepEqual(CELESTIAL_OFFERS.map(o => o.amount), ['10001', '50001', '100001'])
+  // Own rungs rather than one base unit above a neighbour's tier. Every pair of
+  // payable amounts is now at least 2000 base units apart, twice the
+  // facilitator fee, so no fee-scale perturbation can alias one onto another.
+  assert.deepEqual(CELESTIAL_OFFERS.map(o => o.amount), ['20000', '60000', '120000'])
   for (const offer of CELESTIAL_OFFERS) {
     assert.deepEqual(validate(offer.discovery.input, offer.discovery.inputSchema), [])
     assert.deepEqual(validate(offer.discovery.output, offer.discovery.outputSchema), [])
@@ -75,16 +76,20 @@ test('buyer delivery: pinned byte capture and embedded calculation receipt are c
 
 test('demand: exclude operator and publisher-funded canaries, pending records, conflicts and price-only attribution', () => {
   const wallet = '0x' + '1'.repeat(40), operator = '0x' + '2'.repeat(40)
-  const base = { payer: wallet, resource: 'https://www.mahastrategies.com/api/v1/calculations/positions', amount: '10001', status: 'confirmed' as const }
+  // Amounts come from the catalog so a reprice cannot silently make this
+  // fixture stop matching the offer it is meant to exercise.
+  const positions = CELESTIAL_PRODUCTS['celestial-position-snapshot'].amount
+  const chart = CELESTIAL_PRODUCTS['celestial-chart-evidence'].amount
+  const base = { payer: wallet, resource: 'https://www.mahastrategies.com/api/v1/calculations/positions', amount: positions, status: 'confirmed' as const }
   const tx = (n: number) => '0x' + n.toString(16).padStart(64, '0')
   const report = summarizeCalculationDemand([
     { ...base, transaction: tx(1) }, { ...base, transaction: tx(1) }, { ...base, transaction: tx(2) },
     { ...base, transaction: tx(3), payer: operator }, { ...base, transaction: tx(4) },
     { ...base, transaction: tx(5), status: 'unconfirmed' }, { ...base, transaction: tx(6), resource: '' },
-    { ...base, transaction: tx(7) }, { ...base, transaction: tx(7), amount: '50001' },
+    { ...base, transaction: tx(7) }, { ...base, transaction: tx(7), amount: chart },
   ], { operatorWallets: [operator], publisherFundedTransactions: [tx(4)] })
   assert.deepEqual(report.byOffer[0], { offerId: 'celestial-position-snapshot', externalSettlements: 2,
-    externalWallets: 1, repeatExternalWallets: 1, externalAmountBaseUnits: '20002', publisherFundedCanaries: 2 })
+    externalWallets: 1, repeatExternalWallets: 1, externalAmountBaseUnits: String(BigInt(positions) * BigInt(2)), publisherFundedCanaries: 2 })
   assert.equal(report.excludedRecords, 3)
 })
 

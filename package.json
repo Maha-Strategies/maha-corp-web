@@ -132,6 +132,7 @@
     "build:x402-buyer-policy": "npm --prefix packages/x402-buyer-policy run build",
     "build:wasm-kernel": "npm --prefix packages/wasm-kernel run build",
     "pack:x402-buyer-policy": "npm --prefix packages/x402-buyer-policy run pack:dry-run",
+    "refresh:bazaar-listings": "node --experimental-strip-types scripts/run-bazaar-listing-refresh.ts",
     "canary:cabezon:private": "node --experimental-strip-types scripts/run-cabezon-preview-lifecycle-canary.ts",
     "canary:cabezon:preview": "node --experimental-strip-types scripts/run-cabezon-preview-remote-canary.ts",
     "canary:cabezon-mcp-federation:preview": "node --experimental-strip-types scripts/run-cabezon-mcp-federation-canary.ts",

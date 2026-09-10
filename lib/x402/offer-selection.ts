@@ -580,17 +580,17 @@ export const OFFER_SELECTION_EXAMPLES: ReadonlyArray<{
   },
   {
     requiresOfferId: MPS_ID,
-    name: 'Editorial claim triage, ceiling 100000 base units ($0.10)',
+    name: 'Editorial claim triage, ceiling 250000 base units ($0.25)',
     input: {
       objective: 'claim-provenance-triage',
       estimatedInputBytes: 4_200,
       inputEncoding: 'utf8-text',
-      maximumPriceBaseUnits: '100000',
+      maximumPriceBaseUnits: '250000',
       network: BASE_MAINNET_CAIP2,
       asset: BASE_USDC,
     },
-    expected: { decision: 'select', selectedOfferIds: [MPS_ID], estimatedOfferCostBaseUnits: '100000' },
-    note: 'Only the MPS audit assigns provenance statuses. 100000 base units is exactly the ceiling, which authorizes it.',
+    expected: { decision: 'select', selectedOfferIds: [MPS_ID], estimatedOfferCostBaseUnits: '250000' },
+    note: 'Only the MPS audit assigns provenance statuses. 250000 base units is exactly the ceiling, which authorizes it.',
   },
   {
     requiresOfferId: MPS_ID,

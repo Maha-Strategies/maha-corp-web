@@ -22,7 +22,7 @@ mcp.required = { ...server, tools }; mcp.offered = { ...server, tools }
 Object.assign(workloads['tool-permission-diff'], { before: Array.from({ length: 50 }, (_, i) => ({ tool: `tool-${i}`, action: 'read', resource: `old-${i}` })), after: Array.from({ length: 50 }, (_, i) => ({ tool: `tool-${i}`, action: 'read', resource: `new-${i}` })) })
 const bundle = workloads['publication-bundle-consistency'], views = bundle.views as object[]
 bundle.views = Array.from({ length: 8 }, (_, i) => ({ ...views[i % 3], viewId: `view-${i}` }))
-const args = process.argv.slice(2), target = resolve(root, 'content/discovery/micro-next12-cost-observation-v2.json')
+const args = process.argv.slice(2), target = resolve(root, 'content/discovery/micro-next12-cost-observation-v3.json')
 if (args.length !== 1 || !['--capture', '--check'].includes(args[0])) throw new Error('Use --capture once or --check. No build/network mode.')
 if (args[0] === '--check') {
   const { digest, ...record } = JSON.parse(readFileSync(target, 'utf8'))
@@ -37,7 +37,7 @@ if (args[0] === '--check') {
     const usage = process.cpuUsage(cpu); times.sort((a, b) => a - b)
     observations.push({ id, calls: 32, coldMs, cappedWorkloadP95Ms: times[29], cappedWorkloadMaxMs: times[30], cpuMicros: usage.user + usage.system, requestBytes: Buffer.byteLength(JSON.stringify(workloads[id])), responseBytes, providerCalls: 0, cloudCostUsd: null, implementationDigest })
   }
-  const body = { version: 'micro-next12-cost-observation/2', supersedes: 'micro-next12-cost-observation-v1.json', revisionReason: 'Bind the shared schema and corpus modules; recapture after exact per-offer output-price schema strengthening.', basis: 'local-process; capped high-size fixtures, not an exhaustive worst-case proof or Vercel bill', observedAt: new Date().toISOString(), implementationFiles, implementationDigest, workloadsDigest: microDigest(workloads), nodeVersion: process.version, observations }
+  const body = { version: 'micro-next12-cost-observation/3', supersedes: 'micro-next12-cost-observation-v2.json', revisionReason: 'Recapture after the price ladder. A micro receipt embeds amountBaseUnits, so repricing changes response bytes and the implementation digest covers the contracts file that holds the amounts; v2 measured a catalogue that no longer exists.', basis: 'local-process; capped high-size fixtures, not an exhaustive worst-case proof or Vercel bill', observedAt: new Date().toISOString(), implementationFiles, implementationDigest, workloadsDigest: microDigest(workloads), nodeVersion: process.version, observations }
   writeFileSync(target, JSON.stringify({ ...body, digest: microDigest(body) }, null, 2) + '\n', { flag: 'wx' })
 }
 console.log('Twelve local cost observations checked; cloud cost and demand remain unknown.')

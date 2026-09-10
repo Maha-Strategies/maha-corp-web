@@ -4,7 +4,7 @@ import { microDigest } from '../lib/x402/micro-products.ts'
 import { NEXT_PRODUCTS } from '../lib/x402/micro-next-contracts.ts'
 
 const root = resolve(import.meta.dirname, '..'), read = (p: string) => JSON.parse(readFileSync(resolve(root, p), 'utf8'))
-const freeze = read('content/discovery/micro-candidate-freeze-v1.json'), costs = read('content/discovery/micro-next12-cost-observation-v2.json')
+const freeze = read('content/discovery/micro-candidate-freeze-v1.json'), costs = read('content/discovery/micro-next12-cost-observation-v3.json')
 const omitDigest = (o: object) => Object.fromEntries(Object.entries(o).filter(([k]) => k !== 'digest'))
 if (microDigest(omitDigest(freeze)) !== freeze.digest || microDigest(omitDigest(costs)) !== costs.digest) throw new Error('unbound-input')
 // Every candidate receives an explicit semantic adjudication, not URL/token similarity.

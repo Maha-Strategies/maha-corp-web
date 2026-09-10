@@ -21,6 +21,12 @@ export const BASE_USDC = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
  */
 export const OPERATOR_WALLETS = ['0x7b7ff44288fADe4A1829abA2584DFCeB952146f2'] as const
 export const CANARY_BUYER = OPERATOR_WALLETS[0]
+/**
+ * The exact price this recipe expects to pay. The recipe refuses any other
+ * amount on purpose -- a buyer that silently pays a changed price is the
+ * failure this guard exists to prevent -- so this constant and the catalogue
+ * must move together. A test asserts they agree.
+ */
 export const EXPECTED_PRICE_BASE_UNITS = BigInt(1_000)
 export const SPEND_CEILING_BASE_UNITS = BigInt(5_000)
 

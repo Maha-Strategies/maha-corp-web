@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { MICRO_OFFERS } from '../lib/x402/micro-offers.ts'
+import { payableOffers } from '../lib/x402/offers.ts'
 import { microExecutionAllowed, RELEASED_MICRO_IDS } from '../lib/x402/micro-release.ts'
 import { MICRO_OPENAPI_PATHS } from '../lib/x402/micro-openapi.ts'
 import { CELESTIAL_OFFERS } from '../lib/x402/celestial-offers.ts'
@@ -9,16 +10,22 @@ import { BASE_NETWORK, BASE_USDC, MAHA_PAYEE } from '../lib/x402/discovery-payme
 import { readFileSync } from 'node:fs'
 import { x402Config } from '../lib/x402/config.ts'
 
-test('exactly five authorized microproducts, at the 30000-base-unit tier, are released', () => {
+test('exactly five authorized microproducts are released, at widely separated amounts', () => {
   assert.deepEqual([...RELEASED_MICRO_IDS].sort(), ['audit-export-normalizer', 'citation-binding-check', 'divine-name-disambiguation', 'revision-lineage-check', 'unit-uncertainty-conversion'])
   const released = MICRO_OFFERS.filter(o => o.availability.payableInProduction)
   assert.deepEqual(released.map(o => o.id).sort(), [...RELEASED_MICRO_IDS].sort())
-  // Four at the $0.005 tier and one at $0.01. The settled amounts carry
-  // per-product offsets so the ledger can attribute a payment by its amount, so
-  // the total is the tier plus those offsets rather than a round 30000.
+  // The cohort was first published at the $0.005/$0.01 tiers separated by
+  // one-to-eleven base-unit offsets, which attributes on-chain but is
+  // unreadable and a thousand times finer than the facilitator fee. Each
+  // product now holds its own rung. The invariant that matters is the
+  // separation, not the total: the ledger attributes a payment by its amount,
+  // so any two amounts closer than a fee apart are one perturbation away from
+  // being indistinguishable.
   const total = released.reduce((n, o) => n + BigInt(o.amount), BigInt(0))
-  assert.equal(total, BigInt(30028))
-  assert.ok(total - BigInt(30000) < BigInt(100), 'every offset stays under one hundredth of a cent')
+  assert.equal(total, BigInt(62000))
+  const amounts = [...payableOffers()].map(o => BigInt(o.amount)).sort((a, b) => (a < b ? -1 : 1))
+  const gaps = amounts.slice(1).map((a, i) => a - amounts[i])
+  assert.ok(gaps.every(g => g >= BigInt(2000)), 'every payable pair stays at least twice the facilitator fee apart')
   assert.equal(MICRO_OFFERS.filter(o => o.status === 'withheld').length, 17)
   for (const offer of MICRO_OFFERS) {
     const allowed = released.includes(offer)
@@ -32,13 +39,12 @@ test('exactly five authorized microproducts, at the 30000-base-unit tier, are re
 })
 
 test('three existing celestial offers keep their price tier at distinct settled amounts', () => {
-  // One base unit above the tier. $0.01, $0.05 and $0.10 belong to
-  // deep-context-evaluation, evidence-retention-matrix and mps-autonomous-audit,
-  // and the settlement ledger attributes a payment by its amount:
-  // deep-context-evaluation has four external settlements that a shared price
-  // would have made unattributable.
+  // Own rungs rather than one base unit above a neighbour's tier. The
+  // settlement ledger attributes a payment by its amount, and
+  // deep-context-evaluation has four external settlements that a shared or
+  // near-shared price would have made unattributable.
   assert.deepEqual(CELESTIAL_OFFERS.map(o => [o.id, o.amount]), [
-    ['celestial-position-snapshot', '10001'], ['celestial-chart-evidence', '50001'], ['celestial-vimshottari-timing', '100001'],
+    ['celestial-position-snapshot', '20000'], ['celestial-chart-evidence', '60000'], ['celestial-vimshottari-timing', '120000'],
   ])
   assert.ok(CELESTIAL_OFFERS.every(o => o.availability.payableInProduction))
 })

@@ -32,7 +32,7 @@
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "10001",
+        "amount": "20000",
         "assetSymbol": "USDC",
         "autonomous": true,
         "payableNow": true
@@ -50,7 +50,7 @@
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "50001",
+        "amount": "60000",
         "assetSymbol": "USDC",
         "autonomous": true,
         "payableNow": true
@@ -68,7 +68,7 @@
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "100001",
+        "amount": "120000",
         "assetSymbol": "USDC",
         "autonomous": true,
         "payableNow": true
@@ -100,7 +100,7 @@
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "5000",
+        "amount": "12000",
         "assetSymbol": "USDC",
         "autonomous": true
       },
@@ -159,7 +159,7 @@
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "100000",
+        "amount": "250000",
         "assetSymbol": "USDC",
         "autonomous": true,
         "note": "Payable autonomously over x402 v2 on Base Mainnet. Requires an idempotency key and an input hash over the text field; request identity, JSON body and hash are checked before settlement. A replayed request returns the job already paid for rather than charging twice. Retrieval and resume at the retrieval endpoint are free."
@@ -225,7 +225,7 @@
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "5001",
+        "amount": "25000",
         "assetSymbol": "USDC",
         "autonomous": true
       },
@@ -248,7 +248,7 @@
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "5002",
+        "amount": "30000",
         "assetSymbol": "USDC",
         "autonomous": true
       },
@@ -273,7 +273,7 @@
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "2990000",
+        "amount": "3000000",
         "assetSymbol": "USDC",
         "autonomous": true
       },
@@ -298,7 +298,7 @@
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "2990001",
+        "amount": "3500000",
         "assetSymbol": "USDC",
         "autonomous": true
       },
@@ -333,7 +333,7 @@
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "5003",
+        "amount": "16000",
         "assetSymbol": "USDC",
         "autonomous": true,
         "payableNow": true
@@ -351,7 +351,7 @@
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "5004",
+        "amount": "6000",
         "assetSymbol": "USDC",
         "autonomous": true,
         "payableNow": true
@@ -369,7 +369,7 @@
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "10002",
+        "amount": "18000",
         "assetSymbol": "USDC",
         "autonomous": true,
         "payableNow": true
@@ -527,7 +527,7 @@
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "5008",
+        "amount": "8000",
         "assetSymbol": "USDC",
         "autonomous": true,
         "payableNow": true
@@ -605,7 +605,7 @@
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "5011",
+        "amount": "14000",
         "assetSymbol": "USDC",
         "autonomous": true,
         "payableNow": true

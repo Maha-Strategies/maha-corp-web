@@ -170,7 +170,7 @@ test('the MPS retrieval path self-authenticates instead of demanding a key or a 
 
   // The priced parent keeps its 402: the prefix must not swallow it.
   assert.equal(apiProxyGate('/api/v1/mps/audit', 'POST', true), 'protected')
-  assert.equal(priceFor('POST', '/api/v1/mps/audit', config())?.amount, '100000')
+  assert.equal(priceFor('POST', '/api/v1/mps/audit', config())?.amount, '250000')
 })
 
 // --- 10. Wrong terms are rejected -------------------------------------------
