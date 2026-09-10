@@ -10,7 +10,7 @@ import { X402_OFFERS } from '../lib/x402/offers.ts'
 const root = resolve(import.meta.dirname, '..'), read = (path: string) => readFileSync(resolve(root, path), 'utf8')
 const freeze = JSON.parse(read('content/discovery/micro-candidate-freeze-v1.json'))
 const selection = JSON.parse(read('content/discovery/micro60-selection-v1.json'))
-const costs = JSON.parse(read('content/discovery/micro-next12-cost-observation-v3.json'))
+const costs = JSON.parse(read('content/discovery/micro-next12-cost-observation-v4.json'))
 const unsigned = (o: object) => Object.fromEntries(Object.entries(o).filter(([k]) => k !== 'digest'))
 
 test('freeze enumerates sixty original candidates and refuses to overwrite the original 24-offer baseline', () => {
@@ -107,7 +107,7 @@ test('selected scores require actual bounded local observations, not zero-cost g
 })
 
 test('map and examples regenerate deterministically; profiled implementation remains bound', () => {
-  const files = ['content/discovery/micro-candidate-freeze-v1.json', 'content/discovery/micro60-selection-v1.json', 'content/discovery/micro-next12-cost-observation-v1.json', 'content/discovery/micro-next12-cost-observation-v2.json', 'content/discovery/micro-next12-cost-observation-v3.json', 'content/discovery/microproduct-examples.json']
+  const files = ['content/discovery/micro-candidate-freeze-v1.json', 'content/discovery/micro60-selection-v1.json', 'content/discovery/micro-next12-cost-observation-v1.json', 'content/discovery/micro-next12-cost-observation-v2.json', 'content/discovery/micro-next12-cost-observation-v3.json', 'content/discovery/micro-next12-cost-observation-v4.json', 'content/discovery/microproduct-examples.json']
   const before = files.map(read)
   for (let i = 0; i < 2; i++) for (const script of ['freeze-micro-candidates', 'profile-next12', 'review-micro-candidates', 'generate-microproduct-examples', 'sync-microproduct-discovery']) execFileSync(process.execPath, ['--experimental-strip-types', `scripts/${script}.ts`, '--check'], { cwd: root })
   assert.deepEqual(files.map(read), before)

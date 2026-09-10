@@ -30,7 +30,17 @@
       "revision-lineage-check",
       "audit-export-normalizer",
       "unit-uncertainty-conversion",
-      "divine-name-disambiguation"
+      "exact-linear-system",
+      "bracketed-polynomial-root",
+      "covariance-uncertainty",
+      "divine-name-disambiguation",
+      "edition-verse-resolution",
+      "reception-lineage-retrieval",
+      "policy-version-comparison",
+      "control-evidence-gaps",
+      "mcp-contract-compatibility",
+      "tool-permission-diff",
+      "publication-bundle-consistency"
     ],
     "offerSelectionGuide": "https://www.mahastrategies.com/.well-known/maha/offer-selection.json",
     "humanConfirmationScope": [
@@ -46,17 +56,7 @@
       "evidence-conflict-comparator",
       "release-bound-evidence-packet",
       "tiruvaymoli-context-packet",
-      "astrology-experiment-plan-check",
-      "exact-linear-system",
-      "bracketed-polynomial-root",
-      "covariance-uncertainty",
-      "edition-verse-resolution",
-      "reception-lineage-retrieval",
-      "policy-version-comparison",
-      "control-evidence-gaps",
-      "mcp-contract-compatibility",
-      "tool-permission-diff",
-      "publication-bundle-consistency"
+      "astrology-experiment-plan-check"
     ]
   },
   "credentialPolicy": {
@@ -672,62 +672,56 @@
     },
     {
       "id": "exact-linear-system",
-      "status": "withheld",
+      "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/exact-linear-system",
       "method": "POST",
       "description": "Solve a 1-8 variable rational linear system with rank, pivots, particular solution and null-space basis. Distinguishes unique, inconsistent and underdetermined systems. Not a floating-point conditioning or physical-model assessment.",
-      "payableNow": false,
-      "blockedBy": [
-        "Outside the owner-authorized five-product release; settlement remains disabled."
-      ],
+      "payableNow": true,
+      "blockedBy": [],
       "machinePayment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "5000",
+        "amount": "34000",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "payableNow": false
+        "autonomous": true,
+        "payableNow": true
       }
     },
     {
       "id": "bracketed-polynomial-root",
-      "status": "withheld",
+      "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/bracketed-polynomial-root",
       "method": "POST",
       "description": "Bisect a degree 1-8 rational polynomial over a sign-changing rational bracket, with a maximum of 64 iterations. Returns a certified bracket or exact rational root. No arbitrary code, all-roots or uniqueness claim.",
-      "payableNow": false,
-      "blockedBy": [
-        "Outside the owner-authorized five-product release; settlement remains disabled."
-      ],
+      "payableNow": true,
+      "blockedBy": [],
       "machinePayment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "5000",
+        "amount": "32000",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "payableNow": false
+        "autonomous": true,
+        "payableNow": true
       }
     },
     {
       "id": "covariance-uncertainty",
-      "status": "withheld",
+      "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/covariance-uncertainty",
       "method": "POST",
       "description": "Evaluate c-transpose C c for 1-8 declared sensitivities and an exactly symmetric positive-semidefinite covariance matrix. Returns exact variance and a rational square-root enclosure. First-order model only; no empirical covariance validation.",
-      "payableNow": false,
-      "blockedBy": [
-        "Outside the owner-authorized five-product release; settlement remains disabled."
-      ],
+      "payableNow": true,
+      "blockedBy": [],
       "machinePayment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "10000",
+        "amount": "27000",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "payableNow": false
+        "autonomous": true,
+        "payableNow": true
       }
     },
     {
@@ -750,142 +744,128 @@
     },
     {
       "id": "edition-verse-resolution",
-      "status": "withheld",
+      "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/edition-verse-resolution",
       "method": "POST",
       "description": "Resolve one printed pasuram number to its complete unit in the pinned Project Madurai/Hart atlas. Edition-specific, with exact unit locator. No conversion between numbering systems, translation reproduction or occurrence claims about a single verse.",
-      "payableNow": false,
-      "blockedBy": [
-        "Outside the owner-authorized five-product release; settlement remains disabled."
-      ],
+      "payableNow": true,
+      "blockedBy": [],
       "machinePayment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "5000",
+        "amount": "36000",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "payableNow": false
+        "autonomous": true,
+        "payableNow": true
       }
     },
     {
       "id": "reception-lineage-retrieval",
-      "status": "withheld",
+      "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/reception-lineage-retrieval",
       "method": "POST",
       "description": "Retrieve one supported reception comparison with separate source frames and exact locators from the pinned public atlas. No inferred ancestry, uninterrupted transmission, universal identity or source full text.",
-      "payableNow": false,
-      "blockedBy": [
-        "Outside the owner-authorized five-product release; settlement remains disabled."
-      ],
+      "payableNow": true,
+      "blockedBy": [],
       "machinePayment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "10000",
+        "amount": "38000",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "payableNow": false
+        "autonomous": true,
+        "payableNow": true
       }
     },
     {
       "id": "policy-version-comparison",
-      "status": "withheld",
+      "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/policy-version-comparison",
       "method": "POST",
       "description": "Compare up to 40 caller-supplied policy clauses per version by stable ID, text and scope. Reports added, removed and changed clauses. Checks declared chronology, not legal effect, applicability or compliance.",
-      "payableNow": false,
-      "blockedBy": [
-        "Outside the owner-authorized five-product release; settlement remains disabled."
-      ],
+      "payableNow": true,
+      "blockedBy": [],
       "machinePayment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "10000",
+        "amount": "44000",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "payableNow": false
+        "autonomous": true,
+        "payableNow": true
       }
     },
     {
       "id": "control-evidence-gaps",
-      "status": "withheld",
+      "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/control-evidence-gaps",
       "method": "POST",
       "description": "Compare up to 40 declared policy/control requirements with revision- and scope-bound evidence descriptors. Reports missing, stale and rejected evidence. Does not inspect evidence content, evaluate control effectiveness or certify compliance.",
-      "payableNow": false,
-      "blockedBy": [
-        "Outside the owner-authorized five-product release; settlement remains disabled."
-      ],
+      "payableNow": true,
+      "blockedBy": [],
       "machinePayment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "10000",
+        "amount": "46000",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "payableNow": false
+        "autonomous": true,
+        "payableNow": true
       }
     },
     {
       "id": "mcp-contract-compatibility",
-      "status": "withheld",
+      "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/mcp-contract-compatibility",
       "method": "POST",
       "description": "Compare required tool names and exact pinned input/output schema digests against a declared MCP server snapshot. Checks protocol version and transport. Not a network probe, general schema-subtyping proof or official conformance certificate.",
-      "payableNow": false,
-      "blockedBy": [
-        "Outside the owner-authorized five-product release; settlement remains disabled."
-      ],
+      "payableNow": true,
+      "blockedBy": [],
       "machinePayment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "5000",
+        "amount": "40000",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "payableNow": false
+        "autonomous": true,
+        "payableNow": true
       }
     },
     {
       "id": "tool-permission-diff",
-      "status": "withheld",
+      "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/tool-permission-diff",
       "method": "POST",
       "description": "Compare two explicit allow-only permission sets by tool, action and exact resource identifier. Reports additions, removals and wildcard additions. Does not resolve IAM inheritance, wildcard containment or authorize execution.",
-      "payableNow": false,
-      "blockedBy": [
-        "Outside the owner-authorized five-product release; settlement remains disabled."
-      ],
+      "payableNow": true,
+      "blockedBy": [],
       "machinePayment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "5000",
+        "amount": "42000",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "payableNow": false
+        "autonomous": true,
+        "payableNow": true
       }
     },
     {
       "id": "publication-bundle-consistency",
-      "status": "withheld",
+      "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/publication-bundle-consistency",
       "method": "POST",
       "description": "Compare 2-8 declared article, registry and API views against one canonical URL, content digest, release digest and source-set digest. Reports stale, withdrawn and substituted views. No live fetch, release promotion or semantic content verification.",
-      "payableNow": false,
-      "blockedBy": [
-        "Outside the owner-authorized five-product release; settlement remains disabled."
-      ],
+      "payableNow": true,
+      "blockedBy": [],
       "machinePayment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "10000",
+        "amount": "22000",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "payableNow": false
+        "autonomous": true,
+        "payableNow": true
       }
     }
   ],
