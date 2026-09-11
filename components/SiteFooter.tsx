@@ -19,6 +19,7 @@ const companyLinks = [
   { href: '/intelligence', label: 'Intelligence' },
   { href: '/tools', label: 'Tools & API' },
   { href: '/navigator', label: 'Maha Navigator' },
+  { href: '/directory', label: 'All 4,000 routes' },
   { href: '/mps/preflight', label: 'MPS Preflight' },
   { href: '/about', label: 'About Maha' },
   { href: '/contact', label: 'Contact' },

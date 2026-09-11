@@ -39,6 +39,8 @@ import { EPISTEMIC_CLEARING_PAGES } from '@/lib/epistemic-clearing-batch-one'
 import { federationObservedSitemapRows, federationSitemapRows, mergeFederationSitemapRows } from '@/lib/federation-publication'
 import { FEDERATION_CANONICAL_HOSTS, normalizedRequestHost } from '@/lib/federation-host-routing'
 import { policyFrontDoorSitemapRows } from '@/lib/policy-front-door'
+import { MYTHOLOGY_PATH, mythologyTraditions } from '@/lib/mythology-navigation'
+import { SITE_DIRECTORY_PATH } from '@/lib/site-directory'
 
 /*
  * The sitemap reads active canonical releases from the database, so it must be
@@ -81,6 +83,9 @@ export async function currentHostSitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/doctrine` },
     { url: `${baseUrl}/research` },
     { url: `${baseUrl}/knowledge`, lastModified: new Date(CELESTIAL_FACT_RELEASE_DATE) },
+    { url: `${baseUrl}${SITE_DIRECTORY_PATH}` },
+    { url: `${baseUrl}${MYTHOLOGY_PATH}` },
+    ...mythologyTraditions().map((tradition) => ({ url: `${baseUrl}${tradition.path}` })),
     { url: `${baseUrl}${KNOWLEDGE_INTEGRATIONS_PATH}`, lastModified: new Date(EXACTZK_RELEASE_DATE) },
     { url: `${baseUrl}${EXACTZK_EVIDENCE_PATH}`, lastModified: new Date(EXACTZK_RELEASE_DATE) },
     { url: `${baseUrl}${NSGOODS_PREFLIGHT_V3_EVIDENCE_PATH}`, lastModified: new Date(NSGOODS_PREFLIGHT_V3_RELEASE_DATE) },

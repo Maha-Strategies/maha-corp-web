@@ -108,6 +108,33 @@ const byHost = Map.groupBy(pages, (page) => page.canonicalHost)
 
 export const FEDERATION_PUBLISHED_PAGES = Object.freeze([...pages].sort((a, b) => a.canonicalUrl.localeCompare(b.canonicalUrl)))
 
+export type FederationDirectoryProperty = {
+  siteId: string
+  canonicalHost: string
+  urls: readonly string[]
+}
+
+export function federationDirectoryProperties(): readonly FederationDirectoryProperty[] {
+  const observed = new Map(
+    routeBaseline.observedProperties.map((property) => [
+      property.canonicalHost,
+      { siteId: property.siteId, canonicalHost: property.canonicalHost, urls: new Set(property.routes) },
+    ]),
+  )
+  for (const page of FEDERATION_PUBLISHED_PAGES) {
+    const property = observed.get(page.canonicalHost) ?? {
+      siteId: page.siteId,
+      canonicalHost: page.canonicalHost,
+      urls: new Set<string>(),
+    }
+    property.urls.add(page.canonicalUrl)
+    observed.set(page.canonicalHost, property)
+  }
+  return [...observed.values()]
+    .map((property) => ({ ...property, urls: [...property.urls].sort((a, b) => a.localeCompare(b)) }))
+    .sort((a, b) => a.canonicalHost.localeCompare(b.canonicalHost))
+}
+
 export function getFederationPublishedPage(path: string): PublishedFederationPage | null {
   return byPath.get(path) ?? null
 }

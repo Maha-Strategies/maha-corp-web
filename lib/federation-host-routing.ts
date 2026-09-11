@@ -31,6 +31,7 @@ function isFederatedPolicyPath(pathname: string): boolean {
 }
 
 export function federationCanonicalHostForPath(pathname: string): string | null {
+  if (pathname === '/directory' || pathname === '/knowledge/religion/mythology') return EXACT_HOSTS.strategies
   if (/^\/discover\/(definitions|current-law|mechanisms|implementation|machine-rules|evidence|tradeoffs-and-uncertainty)\/?$/.test(pathname)) return EXACT_HOSTS.policy
   if (pathname.startsWith('/agentic-publishing/')) return EXACT_HOSTS.publish
   if (pathname.startsWith('/federation/research/')) return EXACT_HOSTS.research

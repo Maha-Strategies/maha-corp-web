@@ -17,10 +17,10 @@ export async function proxy(request: NextRequest, event: NextFetchEvent) {
   const { pathname } = request.nextUrl
   const federationHost = federationCanonicalHostForPath(pathname)
   const requestHost = normalizedRequestHost(request.headers.get('host'))
-  const policyPreviewInspection = federationHost === 'policy.mahastrategies.com'
+  const federationPreviewInspection = federationHost !== null
     && process.env.VERCEL_ENV === 'preview'
     && (requestHost === '127.0.0.1' || requestHost === 'localhost' || requestHost.endsWith('.vercel.app'))
-  if (federationHost && !policyPreviewInspection && !federationHostAllowsPath(request.headers.get('host'), pathname)) {
+  if (federationHost && !federationPreviewInspection && !federationHostAllowsPath(request.headers.get('host'), pathname)) {
     return NextResponse.json({ error: 'Not found.' }, { status: 404, headers: { 'Cache-Control': 'no-store' } })
   }
   const privateBoundary = privateDeploymentPathDecision(pathname, process.env.ORCHESTRATION_DEPLOYMENT_MODE)
