@@ -54,8 +54,10 @@ test('all Knowledge pages inherit one bounded cyber-light layout', () => {
   // and evidence-workflow hubs and quality-gated dynamic routes were added;
   // six finite epistemic-clearing route families inherit this same layout;
   // Batch 2 adds mathematics, astronomy, and typed cross-domain clearing;
-  // the federation release adds two religion route families under this layout.
-  assert.equal(routes.length, 70)
+  // the federation release adds two religion route families under this layout;
+  // the mythology collection and dynamic tradition hub add two more while
+  // retaining the same bounded visual system.
+  assert.equal(routes.length, 72)
   assert.match(layout, /data-visual-system="cyber-light"/)
   assert.match(layout, /data-visual-scope="knowledge"/)
   assert.match(layout, /knowledge-cyber-light\.module\.css/)

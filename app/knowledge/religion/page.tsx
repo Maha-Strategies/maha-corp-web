@@ -7,6 +7,7 @@ import { TAMIL_CLASSICAL_PATH } from '@/lib/tamil-classical-traditions'
 import { TIRUVAYMOLI_ATLAS_PATH } from '@/lib/tiruvaymoli-passage-atlas'
 import { TAMIL_SOURCE_ATLAS_PATH } from '@/lib/tamil-source-atlas'
 import { clearingGuidesForLane } from '@/lib/epistemic-clearing-batch-one'
+import { MYTHOLOGY_PATH, mythologyTraditions } from '@/lib/mythology-navigation'
 import {
   RELIGION_CATEGORIES,
   RELIGION_COMPARISONS,
@@ -31,6 +32,7 @@ export const metadata: Metadata = {
 }
 
 export default function ReligionKnowledgePage() {
+  const mythology = mythologyTraditions()
   const jsonLd = {
     '@context': 'https://schema.org', '@type': 'CollectionPage',
     name: 'Religion and contemplative traditions', description: metadata.description,
@@ -68,6 +70,14 @@ export default function ReligionKnowledgePage() {
           <div className="mt-3 flex flex-wrap items-end justify-between gap-5">
             <div className="max-w-3xl"><h2 className="text-3xl font-semibold text-white">Classical Tamil religion and reception</h2><p className="mt-3 text-sm leading-6 text-zinc-400">Continue from Māyōṉ into the wider landscape-deity stanza, Paripāṭal subject and music records, occurrence-level divine epithets, and later Āḻvār reception.</p></div>
             <Link href={TAMIL_CLASSICAL_PATH} className="font-mono text-[10px] uppercase tracking-widest text-amber-300 hover:text-white">Explore the cluster →</Link>
+          </div>
+        </section>
+
+        <section className="mt-6 border border-violet-800/60 bg-violet-950/10 p-7">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-violet-300">Cross-tradition mythology</p>
+          <div className="mt-3 flex flex-wrap items-end justify-between gap-5">
+            <div className="max-w-3xl"><h2 className="text-3xl font-semibold text-white">Mythology by tradition and subject</h2><p className="mt-3 text-sm leading-6 text-zinc-400">Navigate {mythology.reduce((sum, item) => sum + item.pageCount, 0)} source-bounded articles across {mythology.length} traditions, with source identity, reception, and comparison kept distinct.</p></div>
+            <Link href={MYTHOLOGY_PATH} className="font-mono text-[10px] uppercase tracking-widest text-violet-300 hover:text-white">Open mythology →</Link>
           </div>
         </section>
 

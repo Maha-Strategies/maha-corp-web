@@ -9,7 +9,18 @@ import { federationCanonicalHostForPath, federationHostAllowsPath } from '../lib
 const root = resolve(import.meta.dirname, '..')
 const publicDir = resolve(root, 'content/federation/public')
 const implementationDir = resolve(root, 'content/federation/implementations')
-const read = (path: string) => JSON.parse(readFileSync(path, 'utf8'))
+const read = (path: string) => {
+  let lastError: unknown
+  for (let attempt = 0; attempt < 20; attempt += 1) {
+    try {
+      return JSON.parse(readFileSync(path, 'utf8'))
+    } catch (error) {
+      lastError = error
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 10)
+    }
+  }
+  throw lastError
+}
 const unsigned = (value: Record<string, unknown>, key: string) => Object.fromEntries(Object.entries(value).filter(([name]) => name !== key))
 const manifestNames = readdirSync(implementationDir).filter((name) => /-pages-v2\.json$/.test(name)).sort()
 

@@ -37,6 +37,7 @@ import {
 } from '@/lib/religion-knowledge'
 import { NEUROMORPHIC_COMPARISONS, NEUROMORPHIC_CONCEPTS, NEUROMORPHIC_PATH, NEUROMORPHIC_VERSION } from '@/lib/neuromorphic-biocomputing'
 import { EPISTEMIC_DOMAINS, EPISTEMIC_SYSTEM_PATH, PUBLIC_EPISTEMIC_RECORDS } from '@/lib/epistemic-pilots'
+import { MYTHOLOGY_PATH, mythologyTraditions } from '@/lib/mythology-navigation'
 import {
   EXACTZK_EVIDENCE,
   EXACTZK_EVIDENCE_PATH,
@@ -61,6 +62,7 @@ export const metadata: Metadata = {
 const kindOrder = ['domain', 'process', 'material', 'equipment', 'concept'] as const
 
 export default function KnowledgePage() {
+  const mythology = mythologyTraditions()
   const sortedArticles = [...KNOWLEDGE_ARTICLES].sort((a, b) => {
     const firstStage = Math.min(...a.stageIds.map((id) => SEMICONDUCTOR_STAGE_META[id].order))
     const secondStage = Math.min(...b.stageIds.map((id) => SEMICONDUCTOR_STAGE_META[id].order))
@@ -237,6 +239,12 @@ export default function KnowledgePage() {
               <p className="mt-3 text-sm leading-6 text-zinc-400">Textual authority, translation, historical evidence, lived practice, theology, first-person experience, and empirical claims kept in their proper evidentiary frames.</p>
               <p className="mt-4 border-l border-rose-700/60 pl-3 text-xs leading-5 text-rose-200">The system documents and compares claims. It does not rank traditions or certify sacred and metaphysical propositions.</p>
               <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-teal-300">Inspect {RELIGION_CONCEPTS.length} methods · {RELIGION_COMPARISONS.length} comparisons →</p>
+            </Link>
+            <Link href={MYTHOLOGY_PATH} className="group border border-violet-900/60 bg-violet-950/10 p-6 transition-colors hover:border-violet-400">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-violet-300">Comparative source layer</p>
+              <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-violet-200">Mythology traditions</h2>
+              <p className="mt-3 text-sm leading-6 text-zinc-400">Source identity, divine names, cult and epithet evidence, reception, and bounded comparison organized without forcing equivalence.</p>
+              <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-violet-300">Explore {mythology.length} traditions · {mythology.reduce((sum, item) => sum + item.pageCount, 0)} articles →</p>
             </Link>
             <Link href={NEUROMORPHIC_PATH} className="group border border-lime-900/60 bg-lime-950/10 p-6 transition-colors hover:border-lime-400">
               <p className="font-mono text-[10px] uppercase tracking-widest text-lime-300">Substrate-aware technical layer · {NEUROMORPHIC_VERSION}</p>

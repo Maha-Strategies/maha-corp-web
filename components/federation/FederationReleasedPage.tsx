@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { PublishedFederationPage } from '@/lib/federation-publication'
+import { MYTHOLOGY_PATH, mythologySubjectSiblings } from '@/lib/mythology-navigation'
 import styles from './FederationReleasedPage.module.css'
 
 function safeJsonLd(value: unknown) {
@@ -8,6 +9,7 @@ function safeJsonLd(value: unknown) {
 
 export default function FederationReleasedPage({ page }: { page: PublishedFederationPage }) {
   const jsonLd = { ...page.structuredData, headline: page.title, url: page.canonicalUrl, mainEntity: page.boundedAnswers.map((item) => ({ '@type': 'Question', name: item.question, acceptedAnswer: { '@type': 'Answer', text: item.answer } })) }
+  const mythologySiblings = mythologySubjectSiblings(page.path)
   return (
     <main className={styles.main}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
@@ -42,6 +44,11 @@ export default function FederationReleasedPage({ page }: { page: PublishedFedera
           </section>
         </article>
         <aside className={styles.aside}>
+          {mythologySiblings.length > 0 && <div className={styles.card}>
+            <h2>Read the complete subject</h2>
+            <p><Link href={MYTHOLOGY_PATH}>All mythology traditions</Link></p>
+            <ul className={styles.list}>{mythologySiblings.map((sibling) => <li key={sibling.path}><Link href={sibling.path} aria-current={sibling.path === page.path ? 'page' : undefined}>{sibling.title}</Link></li>)}</ul>
+          </div>}
           <div className={styles.card}>
             <h2>Evidence</h2>
             {page.sources.map((source) => (

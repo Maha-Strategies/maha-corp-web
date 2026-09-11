@@ -79,6 +79,6 @@ test('host routing, metadata, and Policy chrome are explicit and private artifac
   assert.match(source, /CollectionPage/)
   assert.match(source, /Not legal advice|not legal advice/)
   assert.match(source, /policyFrontDoorMetadata/)
-  assert.match(source, /policyPreviewInspection/)
+  assert.match(source, /federationPreviewInspection/)
   for (const forbidden of ['reviewerIdentity', 'customerSubmission', 'credentialValue', 'sourceExcerpt', 'fullText', 'audit corpus']) assert.doesNotMatch(source, new RegExp(forbidden, 'i'), forbidden)
 })
