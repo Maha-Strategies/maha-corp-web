@@ -5,6 +5,19 @@ built or any paid call was authorized. The verifier is offline: it reads only
 archived public artifacts and performs no request, payment, transaction or
 production mutation.
 
+## Provider re-issue
+
+After the first paid canary response was lost before persistence, NSGoods
+provided a no-charge, freshly signed envelope for the same declared subject.
+Maha preserves the exact 3,673 provider bytes at
+`fixtures/x402-composite-preflight-v3/reissues/preflight_v3_reissue_pf_be2a8c76d0e7dcc7.json`
+and the bounded verification result at
+`public/artifacts/integrations/nsgoods-preflight-v3-reissue-validation-2026-09-03.json`.
+
+The re-issue verifies offline against the pinned v3 schema and signer authority.
+It is not the lost original response, contains no settlement evidence, required
+no payment, and is not a paid live-implementation canary.
+
 ## Pinned boundary
 
 The archive under `fixtures/x402-composite-preflight-v3/` contains the

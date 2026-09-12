@@ -1,0 +1,55 @@
+{
+  "auditKind": "provider-reissued-signed-envelope-offline-verification",
+  "auditedAt": "2026-09-04T06:27:12Z",
+  "authorizedCompositeSigner": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c",
+  "boundary": {
+    "assertsCurrentOrFutureStatus": false,
+    "assertsOriginalPaidResponseContents": false,
+    "credentialsUsed": false,
+    "downloadedArtifactModified": false,
+    "isPaidLiveImplementationCanary": false,
+    "liveEndpointInvoked": false,
+    "networkCallsMadeByVerifier": 0,
+    "note": "This proves that the preserved re-issued envelope conforms to the pinned preflight_v3 schema and that its component and envelope signatures verify under the pinned signer authority. It does not reconstruct the lost original response, prove payment settlement, or constitute a paid live-canary result.",
+    "originalPaidResponseBytesAvailable": false,
+    "paymentsMade": 0,
+    "providerSuppliedReissue": true,
+    "reissueLabelOutsideSignedEnvelope": true,
+    "settlementEvidenceIncluded": false
+  },
+  "classification": "external-integration-evidence",
+  "commercialBoundary": "This is offline interoperability evidence, not a customer engagement, certification, endorsement or authorization to transact.",
+  "provider": "NSGoods",
+  "requestId": "pf_be2a8c76d0e7dcc7",
+  "requestTime": "2026-09-03T14:41:44.337825+00:00",
+  "schemaVersion": "preflight_v3",
+  "sourceArtifact": {
+    "repositoryPath": "fixtures/x402-composite-preflight-v3/reissues/preflight_v3_reissue_pf_be2a8c76d0e7dcc7.json",
+    "sha256": "01f3e1f8a6dd85f5a68b41f330591f42067d382ef9cf74d26f75790661c50f8f",
+    "sizeBytes": 3673
+  },
+  "status": "passed",
+  "subject": {
+    "address": "0xec84c1cd6602bbe387bc8e6f0d3c062f2762de28",
+    "chain": "eip155:8453",
+    "role": "payee"
+  },
+  "type": "ExternalIntegrationEnvelopeValidation",
+  "verification": {
+    "componentSignatures": 3,
+    "componentsEvaluated": 3,
+    "countChecks": 1,
+    "envelopeSignatures": 1,
+    "pinnedOfflineFixtureAuditPassed": true,
+    "schemaValidated": true,
+    "sequentialObservationSpreadMs": 66,
+    "signerAuthorizationVerifiedAgainstPinnedManifest": true,
+    "subjectAndRoleMatched": true,
+    "subjectChecks": 3,
+    "trustReasonCodes": [
+      "insufficient_data"
+    ],
+    "trustVerdict": "NO_DATA"
+  },
+  "version": "1"
+}
