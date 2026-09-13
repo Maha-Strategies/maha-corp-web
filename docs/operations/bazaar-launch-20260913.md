@@ -1,6 +1,9 @@
 # Bazaar launch: 23 approved resources
 
-Status: prepared locally; deployment and paid indexing are not established by this document.
+Status: pricing and discovery copy deployed via PR #433. All 23 live declarations,
+unsigned payment challenges and CDP validations passed. The first publisher-funded
+payment ($.006) settled and its revised Bazaar listing was observed at
+2026-09-13T06:37:50Z. The remaining 22 are a separate, reconciled continuation.
 
 Owner approval: finalize narrow-utility prices, improve all 23 listings and focus
 promotion on four workflows. Exclude all offers at $1 or above. Wallet funding
@@ -43,13 +46,15 @@ Company profitability also requires covering maintenance and owner time.
    Never deploy an older checkout or unrelated dirty changes. Reconcile enabled
    X402_RESOURCES descriptions/prices with the catalog without adding endpoints.
 2. Run the plan without credentials:
-   `node --experimental-strip-types scripts/run-bazaar-listing-refresh.ts --phase=launch --plan`
+   `node --experimental-strip-types scripts/run-bazaar-listing-refresh.ts --phase=launch-remaining --plan`
 3. Check all live declarations and unsigned challenges; validate each resource
    with CDP. The execution preflight refuses a stale production declaration or
    a rejected validation before accessing a signing key.
-4. Bind authorization to the exact plan digest, 23 IDs, descriptions, schemas,
+4. Bind authorization to the exact remaining plan digest, 22 IDs, descriptions, schemas,
    sample requests, network, seller and total. Signing credentials belong only
-   in the existing reviewer-protected environment, never chat or shell history.
+   in the existing main-branch-restricted environment, never chat or shell history.
+   That environment has no required human reviewer; manual dispatch and the exact
+   confirmation are the approval gates. Do not describe it as reviewer-protected.
 5. Preserve a unique evidence file. An existing file must not be overwritten.
    Before any rerun reconcile all prior transaction hashes and uncertain attempts;
    changing the output filename is NOT permission to repeat payments.
@@ -58,8 +63,16 @@ Company profitability also requires covering maintenance and owner time.
 7. Read Bazaar back for price AND metadata, not just successful payment. Index
    processing may lag. Stop and diagnose rejection; never pay again for lag.
 
-The old `--phase=all` still means eight offers. Use explicit `--phase=launch`.
-This named cohort refreshes descriptions even if a price already matches.
+The old `--phase=all` still means eight offers. Original `--phase=launch` execution
+is now blocked to prevent repaying the first offer. Use `--phase=launch-remaining`
+for the remaining 22, exactly $1.274; it rechecks the first receipt and index
+before any signing. These descriptions refresh even if a price already matches.
+First transaction:
+`0x181377b88f3c37c80675c2a1c13e61a6864d73fa47e278e794d6ec1d1a5e6c67`.
+Its index was not visible within the initial one-minute window but subsequently
+appeared without another payment. Continuation rows are observed briefly and
+any pending listings must be reconciled read-only. Never rerun the entire
+continuation after a partial or successful paid run.
 No messages, community posts, artificial demand claims or automatic recurring
 payments are authorized by this technical release.
 

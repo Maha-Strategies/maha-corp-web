@@ -2,7 +2,15 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { payableOffers } from '../lib/x402/offers.ts'
 import { BAZAAR_LAUNCH_IDS, BAZAAR_PREVIOUS_AMOUNTS } from '../lib/x402/bazaar-launch.ts'
-import { selected } from '../scripts/run-bazaar-listing-refresh.ts'
+import { selected, COMPLETED_LAUNCH_PAYMENT } from '../scripts/run-bazaar-listing-refresh.ts'
+
+test('reconciled continuation excludes the settled purchase and caps the remaining spend', () => {
+  const remaining = selected('launch-remaining')
+  assert.equal(remaining.length, 22)
+  assert.ok(remaining.every(o => o.id !== COMPLETED_LAUNCH_PAYMENT.offerId))
+  assert.equal(remaining.reduce((s, o) => s + BigInt(o.amount), BigInt(0)), BigInt(1_274_000))
+  assert.equal(BigInt(COMPLETED_LAUNCH_PAYMENT.amount) + BigInt(1_274_000), BigInt(1_280_000))
+})
 
 test('approved launch is exactly 23 offers, all below one dollar, total 1.28 USDC', () => {
   const cohort = selected('launch')
