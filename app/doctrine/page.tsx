@@ -141,6 +141,8 @@ export default function DoctrinePage() {
           </a>
         </section>
       </div>
+      <div className="evidence-container"><CollectionNavigation parent="/doctrine" /></div>
     </main>
   )
 }
+import { CollectionNavigation } from '@/components/CollectionNavigation'

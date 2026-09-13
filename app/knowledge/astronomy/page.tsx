@@ -119,6 +119,8 @@ export default function AstronomyKnowledgePage() {
           </div>
         </div>
       </section>
+      <div className="evidence-container"><CollectionNavigation parent="/knowledge/astronomy" /></div>
     </main>
   )
 }
+import { CollectionNavigation } from '@/components/CollectionNavigation'

@@ -120,6 +120,8 @@ export default function KnowledgeIntegrationsPage() {
           <div className="mt-7 grid gap-4 md:grid-cols-2">{crossDomainClearingGuides.map((guide) => <Link key={guide.path} href={guide.path} className="group border border-zinc-800 bg-zinc-950/60 p-5 hover:border-violet-500/60"><p className="font-mono text-[9px] uppercase tracking-widest text-violet-300">Method-only bridge</p><h3 className="mt-3 font-semibold text-white group-hover:text-violet-200">{guide.title}</h3><p className="mt-3 text-sm leading-6 text-zinc-500">{guide.question}</p></Link>)}</div>
         </div>
       </section>
+      <div className="evidence-container"><CollectionNavigation parent="/knowledge/integrations" /></div>
     </main>
   )
 }
+import { CollectionNavigation } from '@/components/CollectionNavigation'

@@ -92,6 +92,7 @@ export default function DevelopersPage() {
 
         <section className="evidence-section" aria-labelledby="implementation-guides"><p className="evidence-kicker">Evidence-grounded guides</p><h2 id="implementation-guides" className="evidence-section-title mt-4">Start from measured behavior and runnable controls.</h2><div className="mt-8 grid gap-4 md:grid-cols-2"><Guide href="/guides/context-compression-vs-conversation-summarization" title="Context compression vs. conversation summarization" detail="Choose by evidence and state-preservation requirements." /><Guide href="/guides/preserve-citations-reducing-llm-context" title="Preserve citations while reducing LLM context" detail="Validate source and passage identities after selection." /><Guide href="/guides/crewai-context-compression-provenance" title="CrewAI context compression with provenance" detail="Use the published Python adapter in a bounded research agent." /><Guide href="/guides/mcp-gateway-vs-direct-server" title="MCP gateway vs. direct server connections" detail="Compare destination, policy, credential, containment, and audit controls." /></div></section>
       </div>
+      <div className="evidence-container"><CollectionNavigation parent="/developers" /></div>
     </main>
   )
 }
@@ -107,3 +108,4 @@ function Boundary({ name, children }: { name: string; children: ReactNode }) {
 function Guide({ href, title, detail }: { href: string; title: string; detail: string }) {
   return <Link href={href} className="evidence-card"><span className="evidence-card-title text-lg">{title}</span><span className="evidence-card-copy mt-2 block">{detail}</span></Link>
 }
+import { CollectionNavigation } from '@/components/CollectionNavigation'

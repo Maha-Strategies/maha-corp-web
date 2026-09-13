@@ -183,6 +183,8 @@ export default function AstrologyTraditionsPage() {
           <Link href={ASTRONOMY_KNOWLEDGE_PATH} className="border border-zinc-700 px-4 py-3 text-zinc-200 hover:border-violet-400 hover:text-violet-300">Astronomy knowledge</Link>
         </section>
       </div>
+      <div className="evidence-container"><CollectionNavigation parent="/knowledge/astrology" /></div>
     </main>
   )
 }
+import { CollectionNavigation } from '@/components/CollectionNavigation'

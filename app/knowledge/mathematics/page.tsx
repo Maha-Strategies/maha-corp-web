@@ -97,6 +97,8 @@ export default function MathematicsKnowledgePage() {
           )
         })}
       </div>
+      <div className="evidence-container"><CollectionNavigation parent="/knowledge/mathematics" /></div>
     </main>
   )
 }
+import { CollectionNavigation } from '@/components/CollectionNavigation'
