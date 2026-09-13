@@ -14,6 +14,7 @@
  * Read-only. No credentials, no wallet, nothing it can spend.
  */
 import { appendFileSync, existsSync, readFileSync, writeFileSync } from 'node:fs'
+import { OPERATOR_SETTLEMENT_RECEIPTS } from '../lib/x402/operator-settlement-receipts.ts'
 
 import { createPublicClient, http, parseAbiItem } from 'viem'
 import { base } from 'viem/chains'
@@ -101,6 +102,7 @@ const offers: OfferPrice[] = payableOffers().map((o) => ({
 const ledger = buildLedger({
   settlements: rows,
   operatorWallets: OPERATOR_WALLETS,
+  operatorReceipts: OPERATOR_SETTLEMENT_RECEIPTS,
   offers,
   observedAt: new Date().toISOString(),
   fromBlock: earliest,

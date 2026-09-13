@@ -119,7 +119,14 @@ export default async function SettlementLedgerPage() {
             {record.entries.filter((e) => e.product !== null || e.amountUsdc !== '0').map((entry) => (
               <tr key={`${entry.transactionHash}:${entry.logIndex ?? 'legacy'}`} className="border-b border-[var(--border-subtle)]">
                 <td className="py-2 font-mono text-xs">{entry.timestampUtc?.slice(0, 19).replace('T', ' ') ?? '—'}</td>
-                <td className="py-2">{entry.product?.title ?? 'Unattributed amount'}</td>
+                <td className="py-2">
+                  {entry.product?.title ?? 'Unattributed amount'}
+                  {entry.product?.attributedBy === 'operator-receipt' ? (
+                    <span className="ml-2 text-[10px] uppercase tracking-wider text-[var(--text-secondary)]" title="Attributed from our own canary receipt, not from the amount. Not recomputable from the chain alone.">
+                      from canary receipt
+                    </span>
+                  ) : null}
+                </td>
                 <td className="py-2">
                   <span className="font-mono text-xs">{entry.payerDisplay}</span>
                   <span className="ml-2 rounded px-2 py-0.5 text-[10px] uppercase tracking-wider border border-[var(--border-default)]">

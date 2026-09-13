@@ -44,6 +44,11 @@ export type LedgerEntry = {
     priceUsdc: string
     /** Set when this settlement was made at a price the product has since left. */
     settledAtSupersededPrice?: true
+    /**
+     * Set when the product comes from a first-party receipt for an operator
+     * payment rather than from the settled amount. Absent means amount-matched.
+     */
+    attributedBy?: 'operator-receipt'
   } | null
   explorerUrl: string
 }
@@ -99,6 +104,8 @@ export type SettlementLedger = {
 }
 
 import { createHash } from 'node:crypto'
+
+import type { OperatorSettlementReceipt } from './operator-settlement-receipts.ts'
 
 const USDC_DECIMALS = 6
 
@@ -164,6 +171,8 @@ export function buildLedger(input: {
   fromBlock: bigint
   toBlock: bigint
   explorerBase?: string
+  /** See lib/x402/operator-settlement-receipts.ts. Operator payments only. */
+  operatorReceipts?: readonly OperatorSettlementReceipt[]
 }): SettlementLedger {
   const explorerBase = input.explorerBase ?? 'https://basescan.org/tx/'
   const operators = new Set(input.operatorWallets.map((w) => w.toLowerCase()))
@@ -184,9 +193,25 @@ export function buildLedger(input: {
   for (const o of input.offers) for (const a of amountsOf(o)) if (priceCounts.get(a) === 1) byPrice.set(a, o)
   const ambiguousPrices = [...priceCounts].filter(([, n]) => n > 1).map(([price]) => price)
 
+  const offersById = new Map(input.offers.map((o) => [o.id, o]))
+  const receipts = new Map<string, OperatorSettlementReceipt>()
+  for (const r of input.operatorReceipts ?? []) {
+    const hash = r.transactionHash.toLowerCase()
+    if (receipts.has(hash)) throw new Error(`operator_receipt_duplicated:${hash}`)
+    if (!offersById.has(r.offerId)) throw new Error(`operator_receipt_unknown_offer:${r.offerId}`)
+    receipts.set(hash, r)
+  }
+
   const entries: LedgerEntry[] = input.settlements.map((s) => {
     const payer = s.payer.toLowerCase()
-    const offer = byPrice.get(s.amountBaseUnits)
+    const receipt = receipts.get(s.transactionHash.toLowerCase())
+    if (receipt) {
+      // A receipt that disagrees with the chain is a bad receipt, not a reason
+      // to move revenue. Fail the build rather than publish either version.
+      if (!operators.has(payer)) throw new Error(`operator_receipt_for_external_payer:${s.transactionHash}`)
+      if (BigInt(receipt.amountBaseUnits) !== s.amountBaseUnits) throw new Error(`operator_receipt_amount_mismatch:${s.transactionHash}`)
+    }
+    const offer = receipt ? offersById.get(receipt.offerId) : byPrice.get(s.amountBaseUnits)
     return {
       transactionHash: s.transactionHash,
       ...(s.logIndex === undefined ? {} : { logIndex: s.logIndex }),
@@ -204,9 +229,10 @@ export function buildLedger(input: {
             priceUsdc: formatUsdc(offer.amountBaseUnits),
             // Flagged, because the row would otherwise show a current price
             // beside an amount that no longer equals it and read as an error.
-            ...((offer.supersededAmountsBaseUnits ?? []).includes(s.amountBaseUnits)
+            ...((receipt ? s.amountBaseUnits !== offer.amountBaseUnits : (offer.supersededAmountsBaseUnits ?? []).includes(s.amountBaseUnits))
               ? { settledAtSupersededPrice: true as const }
               : {}),
+            ...(receipt ? { attributedBy: 'operator-receipt' as const } : {}),
           }
         : null,
       explorerUrl: `${explorerBase}${s.transactionHash}`,
@@ -214,7 +240,7 @@ export function buildLedger(input: {
   }).sort((a, b) => (BigInt(b.blockNumber) > BigInt(a.blockNumber) ? 1 : BigInt(b.blockNumber) < BigInt(a.blockNumber) ? -1 : a.transactionHash.localeCompare(b.transactionHash) || (a.logIndex ?? -1) - (b.logIndex ?? -1)))
 
   const pricedAmounts = new Set(input.offers.flatMap(amountsOf))
-  const isPriced = (e: LedgerEntry) => pricedAmounts.has(BigInt(e.amountBaseUnits))
+  const isPriced = (e: LedgerEntry) => e.product?.attributedBy === 'operator-receipt' || pricedAmounts.has(BigInt(e.amountBaseUnits))
   const external = entries.filter((e) => e.payerRole === 'external-machine-agent' && isPriced(e))
   const walletPrices = new Map<string, Set<string>>()
   const walletCounts = new Map<string, number>()
@@ -275,6 +301,7 @@ export function buildLedger(input: {
     boundaries: [
       'Settlement is not delivery. These rows establish USDC transfers; price matches alone do not prove a particular endpoint was called, how it was discovered, or whether a buyer received or accepted the payload. Product attribution is inferred from price where unambiguous.',
       'Operator-controlled wallets are labelled and excluded from every external figure. Canary traffic converts by construction and is not demand.',
+      'A small number of operator payments made while two offers shared a price are attributed from our own canary receipts rather than from the amount, and are marked as such. Those rows are the one part of this ledger that cannot be recomputed from the chain alone. No external payment is ever attributed this way.',
       'Counts cover the scanned block range only. A payer whose settlements straddle the range boundary reads as fewer settlements than they made.',
       'Counterparty addresses are truncated by convention. The full address is one click away on the block explorer; nothing here is concealed.',
     ],

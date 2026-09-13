@@ -2,6 +2,7 @@ import { createPublicClient, http, parseAbiItem } from 'viem'
 import { base } from 'viem/chains'
 import { BASE_USDC, MAHA_PAYEE, OPERATOR_WALLETS } from './discovery-payment-recipe.ts'
 import { payableOffers } from './offers.ts'
+import { OPERATOR_SETTLEMENT_RECEIPTS } from './operator-settlement-receipts.ts'
 import { buildLedger, type SettlementLedger } from './settlement-ledger.ts'
 
 export type Transfer = { payer: string; amountBaseUnits: bigint; blockNumber: bigint; transactionHash: string; logIndex: number }
@@ -47,6 +48,7 @@ export function baseSettlementReader(options: { timeout?: number; retryCount?: n
 export function ledgerFromRows(rows: Parameters<typeof buildLedger>[0]['settlements'], fromBlock: bigint, toBlock: bigint, observedAt: string) {
   return buildLedger({ settlements: rows, fromBlock, toBlock, observedAt,
     operatorWallets: [...OPERATOR_WALLETS, MAHA_PAYEE],
+    operatorReceipts: OPERATOR_SETTLEMENT_RECEIPTS,
     // Superseded amounts must travel with the offer. The hourly cron rebuilds
     // the public ledger from chain logs alone, so an offer that has been
     // repriced stops matching its own historical settlements unless the old

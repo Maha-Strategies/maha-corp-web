@@ -184,3 +184,81 @@ test('the real catalog reaches the ledger with its price history intact', async 
     }
   }
 })
+
+// --- Operator receipts ------------------------------------------------------
+
+const withReceipts = (settlements: Parameters<typeof buildLedger>[0]['settlements'],
+  operatorReceipts: Parameters<typeof buildLedger>[0]['operatorReceipts'], offers = OFFERS) =>
+  buildLedger({ settlements, operatorWallets: ['0xcanary'], offers, operatorReceipts,
+    observedAt: '2026-09-06T00:00:00.000Z', fromBlock: BigInt(1), toBlock: BigInt(9) })
+
+test('a receipt moves an operator payment off the product that shares its amount', () => {
+  // The canary paid 10000 for C while B also charged 10000. By amount alone it
+  // lands on B; the receipt says C, and B stops being credited with it.
+  const offers: OfferPrice[] = [...OFFERS, { id: 'c', title: 'C', amountBaseUnits: BigInt(20_000) }]
+  const rows = [s('0xcanary', BigInt(10_000), '0xCANARY'), s('0xbuyer', BigInt(10_000), '0xbuyer')]
+  const plain = withReceipts(rows, [], offers)
+  assert.equal(plain.entries.find((e) => e.transactionHash === '0xCANARY')?.product?.id, 'b')
+
+  const fixed = withReceipts(rows, [{ transactionHash: '0xcanary', offerId: 'c', amountBaseUnits: '10000', source: 'test' }], offers)
+  const canary = fixed.entries.find((e) => e.transactionHash === '0xCANARY')!
+  assert.equal(canary.product?.id, 'c', 'the hash match is case-insensitive')
+  assert.equal(canary.product?.attributedBy, 'operator-receipt')
+  assert.equal(canary.product?.settledAtSupersededPrice, true, 'C charges 20000 now, so 10000 is a price it has left')
+  const b = fixed.summary.byProduct.find((p) => p.id === 'b')!
+  const c = fixed.summary.byProduct.find((p) => p.id === 'c')!
+  assert.deepEqual([b.settlements, b.externalSettlements], [1, 1], 'B keeps its external buyer and loses the canary')
+  assert.deepEqual([c.settlements, c.externalSettlements], [1, 0])
+})
+
+test('a receipt attributes an operator payment at an amount nothing charges any more', () => {
+  const rows = [s('0xcanary', BigInt(5_000), '0x5')]
+  assert.equal(withReceipts(rows, []).entries[0].product, null)
+  const l = withReceipts(rows, [{ transactionHash: '0x5', offerId: 'a', amountBaseUnits: '5000', source: 'test' }])
+  assert.equal(l.entries[0].product?.id, 'a')
+  // It is a real operator settlement for a named product, so it counts.
+  assert.equal(l.summary.canarySettlements, 1)
+  assert.equal(l.summary.totalSettlements, 1)
+})
+
+test('receipts never touch external figures, and cannot be applied to an external payer', () => {
+  const rows = [s('0xcanary', BigInt(1_000), '0x1'), s('0xbuyer', BigInt(1_000), '0x2'), s('0xbuyer', BigInt(10_000), '0x3')]
+  const receipt = { transactionHash: '0x1', offerId: 'b', amountBaseUnits: '1000', source: 'test' }
+  const plain = withReceipts(rows, []).summary
+  const fixed = withReceipts(rows, [receipt]).summary
+  for (const key of ['externalSettlements', 'externalWallets', 'repeatExternalWallets', 'crossProductWallets', 'externalValueUsdc'] as const) {
+    assert.equal(fixed[key], plain[key], key)
+  }
+  // We hold no receipt for what someone else bought. Naming one is a data error.
+  assert.throws(() => withReceipts(rows, [{ ...receipt, transactionHash: '0x2' }]), /operator_receipt_for_external_payer/)
+})
+
+test('a receipt that disagrees with the chain or the catalogue fails the build', () => {
+  const rows = [s('0xcanary', BigInt(1_000), '0x1')]
+  const receipt = { transactionHash: '0x1', offerId: 'a', amountBaseUnits: '1000', source: 'test' }
+  assert.throws(() => withReceipts(rows, [{ ...receipt, amountBaseUnits: '1001' }]), /operator_receipt_amount_mismatch/)
+  assert.throws(() => withReceipts(rows, [{ ...receipt, offerId: 'missing' }]), /operator_receipt_unknown_offer/)
+  assert.throws(() => withReceipts(rows, [receipt, { ...receipt, transactionHash: '0X1' }]), /operator_receipt_duplicated/)
+})
+
+test('the committed receipts name real offers and the evidence they came from', async () => {
+  const { OPERATOR_SETTLEMENT_RECEIPTS } = await import('../lib/x402/operator-settlement-receipts.ts')
+  const { X402_OFFERS } = await import('../lib/x402/offers.ts')
+  const ids = new Set(X402_OFFERS.map((o) => o.id))
+  assert.equal(OPERATOR_SETTLEMENT_RECEIPTS.length, 8)
+  assert.equal(new Set(OPERATOR_SETTLEMENT_RECEIPTS.map((r) => r.transactionHash.toLowerCase())).size, 8)
+  for (const r of OPERATOR_SETTLEMENT_RECEIPTS) {
+    assert.match(r.transactionHash, /^0x[0-9a-f]{64}$/)
+    assert.ok(ids.has(r.offerId), `${r.offerId} is in the catalogue`)
+    assert.match(r.amountBaseUnits, /^[1-9]\d*$/)
+    assert.match(r.source, /GitHub Actions run \d+, artifact [a-z0-9-]+/)
+  }
+})
+
+test('both ledger builders apply the receipts', () => {
+  // The hourly cron and the manual generator must attribute identically, or
+  // the public page changes depending on which one ran last.
+  for (const file of ['lib/x402/settlement-refresh.ts', 'scripts/generate-x402-settlement-ledger.ts']) {
+    assert.match(readFileSync(file, 'utf8'), /operatorReceipts: OPERATOR_SETTLEMENT_RECEIPTS/, file)
+  }
+})
