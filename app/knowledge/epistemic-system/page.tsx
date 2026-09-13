@@ -208,6 +208,8 @@ export default function EpistemicSystemPage() {
   └─ llms.txt orientation link`}</code></pre>
         </section>
       </div>
+      <div className="evidence-container"><CollectionNavigation parent="/knowledge/epistemic-system" /></div>
     </main>
   )
 }
+import { CollectionNavigation } from '@/components/CollectionNavigation'

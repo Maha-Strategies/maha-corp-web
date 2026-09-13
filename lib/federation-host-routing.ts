@@ -1,3 +1,5 @@
+import { isCollectionHub } from './collection-hub-paths.ts'
+
 const EXACT_HOSTS = {
   publish: 'publish.mahastrategies.com',
   research: 'research.mahastrategies.com',
@@ -31,6 +33,7 @@ function isFederatedPolicyPath(pathname: string): boolean {
 }
 
 export function federationCanonicalHostForPath(pathname: string): string | null {
+  if (isCollectionHub(pathname)) return EXACT_HOSTS.strategies
   if (pathname === '/directory' || pathname === '/knowledge/religion/mythology') return EXACT_HOSTS.strategies
   if (/^\/discover\/(definitions|current-law|mechanisms|implementation|machine-rules|evidence|tradeoffs-and-uncertainty)\/?$/.test(pathname)) return EXACT_HOSTS.policy
   if (pathname.startsWith('/agentic-publishing/')) return EXACT_HOSTS.publish

@@ -8,6 +8,7 @@ import { metersAtProxy, recordContextCompilerUsage } from '@/lib/context-compile
 import { discoverySourceFrom, offerChallengeFor, recordOfferUsage } from '@/lib/x402/offer-telemetry'
 import { privateDeploymentPathDecision } from '@/lib/workflows/deployment-boundary'
 import { federationCanonicalHostForPath, federationHostAllowsPath, normalizedRequestHost } from '@/lib/federation-host-routing'
+import { COLLECTION_INTERNAL_PATH } from '@/lib/collection-hub-paths'
 
 function json(body: unknown, status: number, headers: HeadersInit = {}) {
   return NextResponse.json(body, { status, headers: { ...API_CORS_HEADERS, ...headers } })
@@ -15,6 +16,9 @@ function json(body: unknown, status: number, headers: HeadersInit = {}) {
 
 export async function proxy(request: NextRequest, event: NextFetchEvent) {
   const { pathname } = request.nextUrl
+  if (pathname === COLLECTION_INTERNAL_PATH || pathname.startsWith(COLLECTION_INTERNAL_PATH + '/')) {
+    return NextResponse.json({ error: 'Not found.' }, { status: 404 })
+  }
   const federationHost = federationCanonicalHostForPath(pathname)
   const requestHost = normalizedRequestHost(request.headers.get('host'))
   const federationPreviewInspection = federationHost !== null

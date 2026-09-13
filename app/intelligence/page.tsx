@@ -477,6 +477,8 @@ export default function IntelligenceGrid() {
         </div>
 
       </div>
+      <div className="evidence-container"><CollectionNavigation parent="/intelligence" /></div>
     </main>
   );
 }
+import { CollectionNavigation } from '@/components/CollectionNavigation'

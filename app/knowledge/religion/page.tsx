@@ -121,6 +121,8 @@ export default function ReligionKnowledgePage() {
 
         <section className="mt-14 border-t border-zinc-800 pt-8"><div className="flex flex-wrap items-center justify-between gap-4"><div><h2 className="text-2xl font-semibold text-white">Machine-readable methodology</h2><p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-500">The registry publishes every concept, comparison, source boundary, and mathematical bridge without participant data or claims about individual belief.</p></div><a href={RELIGION_REGISTRY_PATH} className="border border-teal-700 px-4 py-3 font-mono text-[10px] uppercase tracking-widest text-teal-300 hover:bg-teal-300 hover:text-black">Open JSON registry →</a></div></section>
       </div>
+      <div className="evidence-container"><CollectionNavigation parent="/knowledge/religion" /></div>
     </main>
   )
 }
+import { CollectionNavigation } from '@/components/CollectionNavigation'

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { CollectionParentLink } from '@/components/CollectionNavigation'
 import type { PublishedFederationPage } from '@/lib/federation-publication'
 import { MYTHOLOGY_PATH, mythologySubjectSiblings } from '@/lib/mythology-navigation'
 import styles from './FederationReleasedPage.module.css'
@@ -12,6 +13,7 @@ export default function FederationReleasedPage({ page }: { page: PublishedFedera
   const mythologySiblings = mythologySubjectSiblings(page.path)
   return (
     <main className={styles.main}>
+      {page.canonicalHost === 'www.mahastrategies.com' && <CollectionParentLink path={page.path} />}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
       {page.siteId === 'maha-policy' && <nav className={styles.propertyNav} aria-label="Maha Policy">
         <Link href="https://policy.mahastrategies.com/" className={styles.propertyBrand}>Maha Policy</Link>

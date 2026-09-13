@@ -388,6 +388,8 @@ export default function KnowledgePage() {
           </div>
         </div>
       </section>
+      <div className="evidence-container"><CollectionNavigation parent="/knowledge" /></div>
     </main>
   )
 }
+import { CollectionNavigation } from '@/components/CollectionNavigation'

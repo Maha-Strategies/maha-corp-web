@@ -82,5 +82,7 @@ export function EpistemicClearingGuidePage({ guide }: { guide: ClearingGuide }) 
         </aside>
       </div>
     </div>
-  </main>
+      <CollectionParentLink path={guide.path} />
+    </main>
 }
+import { CollectionParentLink } from '@/components/CollectionNavigation'

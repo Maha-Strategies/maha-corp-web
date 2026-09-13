@@ -86,7 +86,8 @@ test('every route belongs to one declared visual system', () => {
   // paper 125 -> 126: the complete federation directory. knowledge 70 -> 72:
   // the mythology collection and its dynamic tradition hub. All three reuse
   // established visual systems rather than creating another one.
-  assert.deepEqual(groups, { paper: 126, apps: 6, books: 41, docs: 1, knowledge: 72, intelligence: 2, operator: 32, internal: 1 })
+  // One shared paper renderer serves all 180 collection hubs.
+  assert.deepEqual(groups, { paper: 127, apps: 6, books: 41, docs: 1, knowledge: 72, intelligence: 2, operator: 32, internal: 1 })
 })
 
 test('Apps, Books, Docs, Knowledge, and Intelligence own bounded cyber-light overlays', () => {

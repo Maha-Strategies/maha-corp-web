@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import { withSentryConfig } from '@sentry/nextjs'
+import { COLLECTION_HUB_PATHS, COLLECTION_INTERNAL_PATH } from './lib/collection-hub-paths'
 
 const nextConfig: NextConfig = {
   // The customer-owned container uses Next's minimal standalone server. Maha's
@@ -14,6 +15,9 @@ const nextConfig: NextConfig = {
   // until a real CARP identity and directory membership exist.
   async rewrites() {
     return [
+      // Exact, path-only rewrites preserve article routes and avoid network
+      // proxying. Host and direct-internal-path checks run first in proxy.ts.
+      ...COLLECTION_HUB_PATHS.map(source => ({ source, destination: COLLECTION_INTERNAL_PATH + source })),
       { source: '/.well-known/agent.json', destination: '/api/discovery/agent-card' },
       { source: '/agent-offers.json', destination: '/api/discovery/agent-offers' },
       { source: '/llm-context/agentic-commerce.md', destination: '/api/discovery/agent-context' },

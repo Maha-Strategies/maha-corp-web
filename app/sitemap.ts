@@ -41,6 +41,7 @@ import { FEDERATION_CANONICAL_HOSTS, normalizedRequestHost } from '@/lib/federat
 import { policyFrontDoorSitemapRows } from '@/lib/policy-front-door'
 import { MYTHOLOGY_PATH, mythologyTraditions } from '@/lib/mythology-navigation'
 import { SITE_DIRECTORY_PATH } from '@/lib/site-directory'
+import { COLLECTION_HUB_PATHS } from '@/lib/collection-hub-paths'
 
 /*
  * The sitemap reads active canonical releases from the database, so it must be
@@ -84,6 +85,7 @@ export async function currentHostSitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/research` },
     { url: `${baseUrl}/knowledge`, lastModified: new Date(CELESTIAL_FACT_RELEASE_DATE) },
     { url: `${baseUrl}${SITE_DIRECTORY_PATH}` },
+    ...COLLECTION_HUB_PATHS.map(path => ({ url: `${baseUrl}${path}` })),
     { url: `${baseUrl}${MYTHOLOGY_PATH}` },
     ...mythologyTraditions().map((tradition) => ({ url: `${baseUrl}${tradition.path}` })),
     { url: `${baseUrl}${KNOWLEDGE_INTEGRATIONS_PATH}`, lastModified: new Date(EXACTZK_RELEASE_DATE) },
