@@ -49,7 +49,7 @@ const ORIGIN = 'https://www.mahastrategies.com'
  */
 export const PHASES = { 1: [0, 5], 2: [5, 8] } as const
 export type Phase = keyof typeof PHASES
-type RefreshPhase = Phase | 'all' | 'launch' | 'launch-remaining'
+type RefreshPhase = Phase | 'all' | 'launch' | 'launch-remaining' | 'launch-final-two'
 
 // Reconciled publisher-funded payment from run 34742771329. Never repay it.
 export const COMPLETED_LAUNCH_PAYMENT = {
@@ -83,6 +83,11 @@ export function rankedOffers(): X402Offer[] {
 
 export function selected(phase: RefreshPhase): X402Offer[] {
   const ranked = rankedOffers()
+  if (phase === 'launch-final-two') {
+    const cohort = ranked.filter(o => ['mps-autonomous-audit', 'governed-context-verification-pack'].includes(o.id))
+    if (cohort.length !== 2 || cohort.reduce((n, o) => n + BigInt(o.amount), BigInt(0)) !== BigInt(750_000)) throw new Error('final_two_cohort_changed')
+    return cohort
+  }
   if (phase === 'launch' || phase === 'launch-remaining') {
     const cohort = ranked.filter(o => BAZAAR_LAUNCH_IDS.includes(o.id))
     if (cohort.length !== 23 || cohort.some(o => BigInt(o.amount) >= BigInt(1_000_000))) throw new Error('launch_cohort_changed')
@@ -124,7 +129,7 @@ async function plan(phase: RefreshPhase): Promise<{ rows: Row[]; payable: Row[];
       amountUsdc: usdc(offer.amount),
       listedBaseUnits,
       action: !inPhase.has(offer.id) ? 'skip_not_in_selected_phase'
-        : correct && phase !== 'launch' && phase !== 'launch-remaining' ? 'skip_listing_already_correct'
+        : correct && !String(phase).startsWith('launch') ? 'skip_listing_already_correct'
         : 'pay',
     }
   })
@@ -137,6 +142,7 @@ async function plan(phase: RefreshPhase): Promise<{ rows: Row[]; payable: Row[];
   const digest = createHash('sha256').update(JSON.stringify(payable.map(row => ({ ...row,
     description: payableOffers().find(o => o.id === row.offerId)!.description,
     discovery: payableOffers().find(o => o.id === row.offerId)!.discovery,
+    request: refreshRequest(payableOffers().find(o => o.id === row.offerId)!),
   })))).digest('hex')
   const confirmation = `BAZAAR_LISTING_REFRESH_PHASE_${String(phase).toUpperCase()}_${payable.length}_OFFERS_MAX_${usdc(String(totalBaseUnits)).replace('.', '_')}_USDC_${digest}`
   return { rows, payable, totalBaseUnits, confirmation }
@@ -187,14 +193,28 @@ async function indexedAt(path: string, expected: string): Promise<boolean> {
   return Boolean(offer && row?.description === offer.description)
 }
 
+/** The MPS admission hash covers only the normalized passage, not its envelope. */
+export function refreshRequest(offer: X402Offer): { body: Record<string, unknown>; headers: Record<string, string> } {
+  const body = { ...offer.discovery.input }
+  const headers: Record<string, string> = { 'content-type': 'application/json', 'x-maha-discovery-source': 'publisher-funded-listing-refresh' }
+  if (offer.requiresIdempotency) {
+    if (offer.id !== 'mps-autonomous-audit' || typeof body.text !== 'string' || !body.text.trim()) throw new Error('unsupported_refresh_admission_contract')
+    body.text = body.text.trim()
+    body.clientRequestId = 'bazaar_launch_20260913_mps_final'
+    headers['x-maha-idempotency-key'] = String(body.clientRequestId)
+    headers['x-maha-input-hash'] = `sha256:${createHash('sha256').update(body.text as string, 'utf8').digest('hex')}`
+  }
+  return { body, headers }
+}
+
 async function execute(phase: RefreshPhase): Promise<void> {
   // The original launch already made a payment. Use the reconciled remainder.
-  if (phase === 'launch') throw new Error('original_launch_already_attempted_use_reconciled_remainder')
+  if (phase === 'launch' || phase === 'launch-remaining') throw new Error('original_launch_already_attempted_use_reconciled_final_two')
   const p = await plan(phase)
   printPlan(phase, p)
   if (p.payable.length === 0) return
 
-  if (phase === 'launch-remaining') {
+  if (phase === 'launch-final-two') {
     const prior = payableOffers().find(o => o.id === COMPLETED_LAUNCH_PAYMENT.offerId)!
     if (prior.amount !== COMPLETED_LAUNCH_PAYMENT.amount || !await indexedAt(prior.path, prior.amount)) throw new Error('prior_launch_listing_not_reconciled')
     const rpcUrl = rpcUrlFor(BASE_NETWORK, process.env.BASE_RPC_URL)
@@ -253,7 +273,8 @@ async function execute(phase: RefreshPhase): Promise<void> {
     customerDemand: false,
     organicDemand: false,
     phase: String(phase),
-    priorPayment: phase === 'launch-remaining' ? COMPLETED_LAUNCH_PAYMENT : null,
+    priorPayment: phase === 'launch-final-two' ? COMPLETED_LAUNCH_PAYMENT : null,
+    priorContinuationRun: phase === 'launch-final-two' ? '34743800710:20 settlements,524000 units; MPS refused before settlement' : null,
     confirmation: p.confirmation,
     maximumAuthorizedBaseUnits: String(p.totalBaseUnits),
     confirmedBaseUnits: '0',
@@ -302,11 +323,12 @@ async function execute(phase: RefreshPhase): Promise<void> {
       })
 
       // Never automatically retry a paid request, including a lost response.
+      const request = refreshRequest(offer)
       const response = await paidFetch(ORIGIN + row.path, {
         method: 'POST',
         signal: AbortSignal.timeout(120_000),
-        headers: { 'content-type': 'application/json', 'x-maha-discovery-source': 'publisher-funded-listing-refresh' },
-        body: JSON.stringify(offer.discovery.input),
+        headers: request.headers,
+        body: JSON.stringify(request.body),
       })
       if (challenges !== 1 || signatures !== 1) throw new Error('unexpected_payment_flow')
       if (response.x402?.receipt) {
@@ -332,7 +354,7 @@ async function execute(phase: RefreshPhase): Promise<void> {
       await save()
 
       // Read-only observation. Index lag never triggers another payment.
-      for (let observation = 0; observation < (phase === 'launch-remaining' ? 1 : 4); observation += 1) {
+      for (let observation = 0; observation < (String(phase).startsWith('launch') ? 1 : 4); observation += 1) {
         await new Promise((resolve) => setTimeout(resolve, 15_000))
         if (await indexedAt(row.path, row.amountBaseUnits)) {
           step.listingCorrectedTo = row.amountBaseUnits
@@ -358,10 +380,10 @@ async function execute(phase: RefreshPhase): Promise<void> {
 
 async function run(): Promise<void> {
   const args = process.argv.slice(2)
-  const unknown = args.filter((a) => !/^--(plan|execute|phase=(1|2|all|launch|launch-remaining))$/.test(a))
+  const unknown = args.filter((a) => !/^--(plan|execute|phase=(1|2|all|launch|launch-remaining|launch-final-two))$/.test(a))
   if (unknown.length) throw new Error(`unsupported_arguments: ${unknown.join(' ')}`)
   const phaseArg = args.find((a) => a.startsWith('--phase='))?.slice('--phase='.length) ?? '1'
-  const phase = (phaseArg === 'all' || phaseArg === 'launch' || phaseArg === 'launch-remaining' ? phaseArg : Number(phaseArg) as Phase)
+  const phase = (phaseArg === 'all' || phaseArg === 'launch' || phaseArg === 'launch-remaining' || phaseArg === 'launch-final-two' ? phaseArg : Number(phaseArg) as Phase)
   if (args.includes('--execute')) return execute(phase)
   printPlan(phase, await plan(phase))
 }

@@ -3,11 +3,11 @@ on:
   workflow_dispatch:
     inputs:
       confirmation:
-        description: Exact current remaining-22 plan confirmation (including SHA-256)
+        description: Exact current final-two plan confirmation (including SHA-256)
         required: true
         type: string
       execute:
-        description: Pay the reconciled remaining 22 (false prints a read-only plan)
+        description: Pay only MPS and governed pack, max0.75USDC (false prints a read-only plan)
         required: true
         default: false
         type: boolean
@@ -39,10 +39,10 @@ jobs:
         if: inputs.execute
         env:
           X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
-        run: node --experimental-strip-types scripts/run-bazaar-listing-refresh.ts --phase=launch-remaining --execute
+        run: node --experimental-strip-types scripts/run-bazaar-listing-refresh.ts --phase=launch-final-two --execute
       - name: Read-only remaining plan
         if: ${{ !inputs.execute }}
-        run: node --experimental-strip-types scripts/run-bazaar-listing-refresh.ts --phase=launch-remaining --plan
+        run: node --experimental-strip-types scripts/run-bazaar-listing-refresh.ts --phase=launch-final-two --plan
       - name: Preserve sanitized payment evidence even on failure
         if: always()
         uses: actions/upload-artifact@v7
