@@ -1,78 +1,176 @@
 {
   "schemaVersion": "maha-x402-settlement-ledger/1.0",
-  "contentDigest": "sha256:207be24acadfa672a4515ac062d4946f9959518d2e41fd9406bff5d530cd73d4",
+  "contentDigest": "sha256:ffe91a2cbd8e619941027426ef12f71c22195cbfa9a640b534db746e82e2bead",
   "network": "Base Mainnet",
   "protocol": "HTTP 402 v2 · Base USDC",
-  "observedAt": "2026-09-09T02:29:58.214Z",
+  "observedAt": "2026-09-13T09:41:15.414Z",
   "scannedFromBlock": "48360877",
-  "scannedToBlock": "51065249",
+  "scannedToBlock": "51251122",
   "summary": {
-    "totalSettlements": 26,
-    "externalSettlements": 12,
-    "canarySettlements": 14,
-    "externalWallets": 7,
+    "totalSettlements": 54,
+    "externalSettlements": 14,
+    "canarySettlements": 40,
+    "externalWallets": 9,
     "repeatExternalWallets": 2,
     "crossProductWallets": 1,
-    "externalValueUsdc": "0.048",
+    "externalValueUsdc": "0.05",
     "byProduct": [
+      {
+        "id": "audit-export-normalizer",
+        "title": "Audit Export Normalizer",
+        "priceUsdc": "0.018",
+        "settlements": 1,
+        "externalSettlements": 0
+      },
       {
         "id": "book-edition-the-imagined-life",
         "title": "Book Edition The Imagined Life",
-        "priceUsdc": "2.99",
+        "priceUsdc": "3",
         "settlements": 0,
-        "externalSettlements": 0,
-        "attributionAmbiguous": true
+        "externalSettlements": 0
       },
       {
         "id": "book-edition-the-volcanic-engine",
         "title": "Book Edition The Volcanic Engine",
-        "priceUsdc": "2.99",
+        "priceUsdc": "3.5",
         "settlements": 0,
-        "externalSettlements": 0,
-        "attributionAmbiguous": true
+        "externalSettlements": 0
       },
       {
         "id": "book-section-the-imagined-life",
         "title": "Book Section The Imagined Life",
-        "priceUsdc": "0.005",
-        "settlements": 0,
-        "externalSettlements": 0,
-        "attributionAmbiguous": true
+        "priceUsdc": "0.025",
+        "settlements": 1,
+        "externalSettlements": 0
       },
       {
         "id": "book-section-the-volcanic-engine",
         "title": "Book Section The Volcanic Engine",
-        "priceUsdc": "0.005",
-        "settlements": 0,
-        "externalSettlements": 0,
-        "attributionAmbiguous": true
+        "priceUsdc": "0.03",
+        "settlements": 1,
+        "externalSettlements": 0
+      },
+      {
+        "id": "bracketed-polynomial-root",
+        "title": "Bracketed Polynomial Root",
+        "priceUsdc": "0.009",
+        "supersededPricesUsdc": [
+          "0.032"
+        ],
+        "settlements": 1,
+        "externalSettlements": 0
+      },
+      {
+        "id": "celestial-chart-evidence",
+        "title": "Celestial Chart Evidence",
+        "priceUsdc": "0.06",
+        "settlements": 1,
+        "externalSettlements": 0
+      },
+      {
+        "id": "celestial-position-snapshot",
+        "title": "Celestial Position Snapshot",
+        "priceUsdc": "0.02",
+        "settlements": 1,
+        "externalSettlements": 0
+      },
+      {
+        "id": "celestial-result-compatibility",
+        "title": "Celestial Result Compatibility",
+        "priceUsdc": "0.007",
+        "settlements": 1,
+        "externalSettlements": 0
+      },
+      {
+        "id": "celestial-vimshottari-timing",
+        "title": "Celestial Vimshottari Timing",
+        "priceUsdc": "0.12",
+        "settlements": 1,
+        "externalSettlements": 0
+      },
+      {
+        "id": "citation-binding-check",
+        "title": "Citation Binding Check",
+        "priceUsdc": "0.016",
+        "settlements": 1,
+        "externalSettlements": 0
       },
       {
         "id": "context-budget-ladder",
         "title": "Context Budget Ladder",
-        "priceUsdc": "0.005",
-        "settlements": 0,
-        "externalSettlements": 0,
-        "attributionAmbiguous": true
+        "priceUsdc": "0.012",
+        "settlements": 1,
+        "externalSettlements": 0
       },
       {
         "id": "context-compression",
         "title": "Context Compression",
         "priceUsdc": "0.001",
-        "settlements": 15,
-        "externalSettlements": 8
+        "settlements": 17,
+        "externalSettlements": 10
+      },
+      {
+        "id": "control-evidence-gaps",
+        "title": "Control Evidence Gaps",
+        "priceUsdc": "0.019",
+        "supersededPricesUsdc": [
+          "0.046"
+        ],
+        "settlements": 1,
+        "externalSettlements": 0
+      },
+      {
+        "id": "covariance-uncertainty",
+        "title": "Covariance Uncertainty",
+        "priceUsdc": "0.013",
+        "supersededPricesUsdc": [
+          "0.027"
+        ],
+        "settlements": 1,
+        "externalSettlements": 0
       },
       {
         "id": "deep-context-evaluation",
         "title": "Deep Context Evaluation",
         "priceUsdc": "0.01",
-        "settlements": 5,
+        "settlements": 7,
         "externalSettlements": 4
+      },
+      {
+        "id": "divine-name-disambiguation",
+        "title": "Divine Name Disambiguation",
+        "priceUsdc": "0.014",
+        "settlements": 1,
+        "externalSettlements": 0
+      },
+      {
+        "id": "edition-verse-resolution",
+        "title": "Edition Verse Resolution",
+        "priceUsdc": "0.036",
+        "settlements": 1,
+        "externalSettlements": 0
+      },
+      {
+        "id": "evidence-frame-compatibility",
+        "title": "Evidence Frame Compatibility",
+        "priceUsdc": "0.0105",
+        "settlements": 1,
+        "externalSettlements": 0
       },
       {
         "id": "evidence-retention-matrix",
         "title": "Evidence Retention Matrix",
         "priceUsdc": "0.05",
+        "settlements": 2,
+        "externalSettlements": 0
+      },
+      {
+        "id": "exact-linear-system",
+        "title": "Exact Linear System",
+        "priceUsdc": "0.011",
+        "supersededPricesUsdc": [
+          "0.034"
+        ],
         "settlements": 1,
         "externalSettlements": 0
       },
@@ -80,14 +178,51 @@
         "id": "governed-context-verification-pack",
         "title": "Governed Context Verification Pack",
         "priceUsdc": "0.5",
-        "settlements": 0,
+        "settlements": 1,
+        "externalSettlements": 0
+      },
+      {
+        "id": "mcp-contract-compatibility",
+        "title": "Mcp Contract Compatibility",
+        "priceUsdc": "0.015",
+        "supersededPricesUsdc": [
+          "0.04"
+        ],
+        "settlements": 1,
         "externalSettlements": 0
       },
       {
         "id": "mps-autonomous-audit",
         "title": "Mps Autonomous Audit",
-        "priceUsdc": "0.1",
-        "settlements": 2,
+        "priceUsdc": "0.25",
+        "supersededPricesUsdc": [
+          "0.1"
+        ],
+        "settlements": 4,
+        "externalSettlements": 0
+      },
+      {
+        "id": "policy-version-comparison",
+        "title": "Policy Version Comparison",
+        "priceUsdc": "0.017",
+        "supersededPricesUsdc": [
+          "0.044"
+        ],
+        "settlements": 1,
+        "externalSettlements": 0
+      },
+      {
+        "id": "publication-bundle-consistency",
+        "title": "Publication Bundle Consistency",
+        "priceUsdc": "0.022",
+        "settlements": 1,
+        "externalSettlements": 0
+      },
+      {
+        "id": "reception-lineage-retrieval",
+        "title": "Reception Lineage Retrieval",
+        "priceUsdc": "0.038",
+        "settlements": 1,
         "externalSettlements": 0
       },
       {
@@ -96,10 +231,614 @@
         "priceUsdc": "1",
         "settlements": 0,
         "externalSettlements": 0
+      },
+      {
+        "id": "revision-lineage-check",
+        "title": "Revision Lineage Check",
+        "priceUsdc": "0.006",
+        "settlements": 1,
+        "externalSettlements": 0
+      },
+      {
+        "id": "tool-permission-diff",
+        "title": "Tool Permission Diff",
+        "priceUsdc": "0.021",
+        "supersededPricesUsdc": [
+          "0.042"
+        ],
+        "settlements": 1,
+        "externalSettlements": 0
+      },
+      {
+        "id": "unit-uncertainty-conversion",
+        "title": "Unit Uncertainty Conversion",
+        "priceUsdc": "0.008",
+        "settlements": 1,
+        "externalSettlements": 0
       }
     ]
   },
   "entries": [
+    {
+      "transactionHash": "0xd8b45eb3814bb54a636ae204456a59626140623b6a2779c00563eef28869d4cf",
+      "logIndex": 265,
+      "blockNumber": "51250686",
+      "timestampUtc": "2026-09-13T09:11:59.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "10500",
+      "amountUsdc": "0.0105",
+      "product": {
+        "id": "evidence-frame-compatibility",
+        "title": "Evidence Frame Compatibility",
+        "priceUsdc": "0.0105"
+      },
+      "explorerUrl": "https://basescan.org/tx/0xd8b45eb3814bb54a636ae204456a59626140623b6a2779c00563eef28869d4cf"
+    },
+    {
+      "transactionHash": "0x59f8ec8a10585533ffd01f916526ae94ae27e851d4017a3bd7f65b92b56c38d4",
+      "logIndex": 186,
+      "blockNumber": "51250655",
+      "timestampUtc": "2026-09-13T09:10:57.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "7000",
+      "amountUsdc": "0.007",
+      "product": {
+        "id": "celestial-result-compatibility",
+        "title": "Celestial Result Compatibility",
+        "priceUsdc": "0.007"
+      },
+      "explorerUrl": "https://basescan.org/tx/0x59f8ec8a10585533ffd01f916526ae94ae27e851d4017a3bd7f65b92b56c38d4"
+    },
+    {
+      "transactionHash": "0x5677d76f33388a11ce36380ffc82bd5717c9c76953d348bcb0ba6c4b1c6d56a0",
+      "logIndex": 371,
+      "blockNumber": "51247349",
+      "timestampUtc": "2026-09-13T07:20:45.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "500000",
+      "amountUsdc": "0.5",
+      "product": {
+        "id": "governed-context-verification-pack",
+        "title": "Governed Context Verification Pack",
+        "priceUsdc": "0.5"
+      },
+      "explorerUrl": "https://basescan.org/tx/0x5677d76f33388a11ce36380ffc82bd5717c9c76953d348bcb0ba6c4b1c6d56a0"
+    },
+    {
+      "transactionHash": "0xe9cd800f84c29d0a7396bd7298d1129b855343c153e37e6cf1ac9a169a3e8d14",
+      "logIndex": 224,
+      "blockNumber": "51247337",
+      "timestampUtc": "2026-09-13T07:20:21.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "250000",
+      "amountUsdc": "0.25",
+      "product": {
+        "id": "mps-autonomous-audit",
+        "title": "Mps Autonomous Audit",
+        "priceUsdc": "0.25"
+      },
+      "explorerUrl": "https://basescan.org/tx/0xe9cd800f84c29d0a7396bd7298d1129b855343c153e37e6cf1ac9a169a3e8d14"
+    },
+    {
+      "transactionHash": "0xb10f7c0a8c02581351e396b49e34bd594521c9fe72eb58b36d262105951a71dd",
+      "logIndex": 223,
+      "blockNumber": "51246676",
+      "timestampUtc": "2026-09-13T06:58:19.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "120000",
+      "amountUsdc": "0.12",
+      "product": {
+        "id": "celestial-vimshottari-timing",
+        "title": "Celestial Vimshottari Timing",
+        "priceUsdc": "0.12"
+      },
+      "explorerUrl": "https://basescan.org/tx/0xb10f7c0a8c02581351e396b49e34bd594521c9fe72eb58b36d262105951a71dd"
+    },
+    {
+      "transactionHash": "0x77ac6a143075487fbb8e5732b570f4e3853dcb53695cc2a3c0568f28e4caaff8",
+      "logIndex": 434,
+      "blockNumber": "51246667",
+      "timestampUtc": "2026-09-13T06:58:01.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "60000",
+      "amountUsdc": "0.06",
+      "product": {
+        "id": "celestial-chart-evidence",
+        "title": "Celestial Chart Evidence",
+        "priceUsdc": "0.06"
+      },
+      "explorerUrl": "https://basescan.org/tx/0x77ac6a143075487fbb8e5732b570f4e3853dcb53695cc2a3c0568f28e4caaff8"
+    },
+    {
+      "transactionHash": "0x6ec8f19eba1126fabe6c783047b96b407d76f6b382c1c8e5bbecc3d5e64f8de8",
+      "logIndex": 93,
+      "blockNumber": "51246659",
+      "timestampUtc": "2026-09-13T06:57:45.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "38000",
+      "amountUsdc": "0.038",
+      "product": {
+        "id": "reception-lineage-retrieval",
+        "title": "Reception Lineage Retrieval",
+        "priceUsdc": "0.038"
+      },
+      "explorerUrl": "https://basescan.org/tx/0x6ec8f19eba1126fabe6c783047b96b407d76f6b382c1c8e5bbecc3d5e64f8de8"
+    },
+    {
+      "transactionHash": "0x710311a2327b0be570092dd3a6472d456758100538f2b7f2401e4a3a01420eec",
+      "logIndex": 380,
+      "blockNumber": "51246650",
+      "timestampUtc": "2026-09-13T06:57:27.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "36000",
+      "amountUsdc": "0.036",
+      "product": {
+        "id": "edition-verse-resolution",
+        "title": "Edition Verse Resolution",
+        "priceUsdc": "0.036"
+      },
+      "explorerUrl": "https://basescan.org/tx/0x710311a2327b0be570092dd3a6472d456758100538f2b7f2401e4a3a01420eec"
+    },
+    {
+      "transactionHash": "0x832f0697b5fb225e40bb9c7c46a7fedfdf6f9d96c529959a984f5eef207586aa",
+      "logIndex": 122,
+      "blockNumber": "51246641",
+      "timestampUtc": "2026-09-13T06:57:09.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "30000",
+      "amountUsdc": "0.03",
+      "product": {
+        "id": "book-section-the-volcanic-engine",
+        "title": "Book Section The Volcanic Engine",
+        "priceUsdc": "0.03"
+      },
+      "explorerUrl": "https://basescan.org/tx/0x832f0697b5fb225e40bb9c7c46a7fedfdf6f9d96c529959a984f5eef207586aa"
+    },
+    {
+      "transactionHash": "0x4964a76d6553fdf7f23086b1f4629565690600a5cca37410757ce77b2c5e0dba",
+      "logIndex": 407,
+      "blockNumber": "51246631",
+      "timestampUtc": "2026-09-13T06:56:49.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "25000",
+      "amountUsdc": "0.025",
+      "product": {
+        "id": "book-section-the-imagined-life",
+        "title": "Book Section The Imagined Life",
+        "priceUsdc": "0.025"
+      },
+      "explorerUrl": "https://basescan.org/tx/0x4964a76d6553fdf7f23086b1f4629565690600a5cca37410757ce77b2c5e0dba"
+    },
+    {
+      "transactionHash": "0x30c8a2a2d4147e011c7babfd91cb1cef265fddfc20748704a647534f95b7bffb",
+      "logIndex": 377,
+      "blockNumber": "51246623",
+      "timestampUtc": "2026-09-13T06:56:33.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "22000",
+      "amountUsdc": "0.022",
+      "product": {
+        "id": "publication-bundle-consistency",
+        "title": "Publication Bundle Consistency",
+        "priceUsdc": "0.022"
+      },
+      "explorerUrl": "https://basescan.org/tx/0x30c8a2a2d4147e011c7babfd91cb1cef265fddfc20748704a647534f95b7bffb"
+    },
+    {
+      "transactionHash": "0x8330e907a55833de4af847b7483a2561ce204cdf698559978cf22208250b609e",
+      "logIndex": 294,
+      "blockNumber": "51246614",
+      "timestampUtc": "2026-09-13T06:56:15.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "21000",
+      "amountUsdc": "0.021",
+      "product": {
+        "id": "tool-permission-diff",
+        "title": "Tool Permission Diff",
+        "priceUsdc": "0.021"
+      },
+      "explorerUrl": "https://basescan.org/tx/0x8330e907a55833de4af847b7483a2561ce204cdf698559978cf22208250b609e"
+    },
+    {
+      "transactionHash": "0xb84010969ae64aebbf6761230d8ef0393954f55fa69a4ea7907c7ee743ae21f9",
+      "logIndex": 218,
+      "blockNumber": "51246606",
+      "timestampUtc": "2026-09-13T06:55:59.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "20000",
+      "amountUsdc": "0.02",
+      "product": {
+        "id": "celestial-position-snapshot",
+        "title": "Celestial Position Snapshot",
+        "priceUsdc": "0.02"
+      },
+      "explorerUrl": "https://basescan.org/tx/0xb84010969ae64aebbf6761230d8ef0393954f55fa69a4ea7907c7ee743ae21f9"
+    },
+    {
+      "transactionHash": "0x5a02d35ad812f4845a056f6a78f217150604a4fe28c801d1439666b5b9c0a614",
+      "logIndex": 280,
+      "blockNumber": "51246597",
+      "timestampUtc": "2026-09-13T06:55:41.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "19000",
+      "amountUsdc": "0.019",
+      "product": {
+        "id": "control-evidence-gaps",
+        "title": "Control Evidence Gaps",
+        "priceUsdc": "0.019"
+      },
+      "explorerUrl": "https://basescan.org/tx/0x5a02d35ad812f4845a056f6a78f217150604a4fe28c801d1439666b5b9c0a614"
+    },
+    {
+      "transactionHash": "0x948d49f81b4aaf909c176e7f3ad3be9d0bda9eec9af37a2c5773f702eb4e3502",
+      "logIndex": 268,
+      "blockNumber": "51246589",
+      "timestampUtc": "2026-09-13T06:55:25.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "18000",
+      "amountUsdc": "0.018",
+      "product": {
+        "id": "audit-export-normalizer",
+        "title": "Audit Export Normalizer",
+        "priceUsdc": "0.018"
+      },
+      "explorerUrl": "https://basescan.org/tx/0x948d49f81b4aaf909c176e7f3ad3be9d0bda9eec9af37a2c5773f702eb4e3502"
+    },
+    {
+      "transactionHash": "0xc82bb1cfd3fea9cbd3abfd4e3cf994da573eb757ff25f632a555a50a073075e1",
+      "logIndex": 614,
+      "blockNumber": "51246580",
+      "timestampUtc": "2026-09-13T06:55:07.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "17000",
+      "amountUsdc": "0.017",
+      "product": {
+        "id": "policy-version-comparison",
+        "title": "Policy Version Comparison",
+        "priceUsdc": "0.017"
+      },
+      "explorerUrl": "https://basescan.org/tx/0xc82bb1cfd3fea9cbd3abfd4e3cf994da573eb757ff25f632a555a50a073075e1"
+    },
+    {
+      "transactionHash": "0xd2cdd483264032f6613efdcc8bc07eccb1d292ce886ea98ef28f3da9e11ad542",
+      "logIndex": 201,
+      "blockNumber": "51246572",
+      "timestampUtc": "2026-09-13T06:54:51.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "16000",
+      "amountUsdc": "0.016",
+      "product": {
+        "id": "citation-binding-check",
+        "title": "Citation Binding Check",
+        "priceUsdc": "0.016"
+      },
+      "explorerUrl": "https://basescan.org/tx/0xd2cdd483264032f6613efdcc8bc07eccb1d292ce886ea98ef28f3da9e11ad542"
+    },
+    {
+      "transactionHash": "0xf1930d5084641c979e6d7688f9d07eee6a4b4a64f67c7a2760ce6ed919e8a9b0",
+      "logIndex": 131,
+      "blockNumber": "51246563",
+      "timestampUtc": "2026-09-13T06:54:33.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "15000",
+      "amountUsdc": "0.015",
+      "product": {
+        "id": "mcp-contract-compatibility",
+        "title": "Mcp Contract Compatibility",
+        "priceUsdc": "0.015"
+      },
+      "explorerUrl": "https://basescan.org/tx/0xf1930d5084641c979e6d7688f9d07eee6a4b4a64f67c7a2760ce6ed919e8a9b0"
+    },
+    {
+      "transactionHash": "0x44ffab033e52bd5735bf2af45510b6304aed28c6d25f42b4fc47193893f33577",
+      "logIndex": 352,
+      "blockNumber": "51246554",
+      "timestampUtc": "2026-09-13T06:54:15.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "14000",
+      "amountUsdc": "0.014",
+      "product": {
+        "id": "divine-name-disambiguation",
+        "title": "Divine Name Disambiguation",
+        "priceUsdc": "0.014"
+      },
+      "explorerUrl": "https://basescan.org/tx/0x44ffab033e52bd5735bf2af45510b6304aed28c6d25f42b4fc47193893f33577"
+    },
+    {
+      "transactionHash": "0xe116456c6e7fb0cd94f1041dd42e19d674af1d30672c254ffab1f0d4205351a9",
+      "logIndex": 109,
+      "blockNumber": "51246546",
+      "timestampUtc": "2026-09-13T06:53:59.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "13000",
+      "amountUsdc": "0.013",
+      "product": {
+        "id": "covariance-uncertainty",
+        "title": "Covariance Uncertainty",
+        "priceUsdc": "0.013"
+      },
+      "explorerUrl": "https://basescan.org/tx/0xe116456c6e7fb0cd94f1041dd42e19d674af1d30672c254ffab1f0d4205351a9"
+    },
+    {
+      "transactionHash": "0xe9975fe430d2a1bf7ebc73fd35ac700d1d786eeded7657307ed12dae88c4c85a",
+      "logIndex": 1777,
+      "blockNumber": "51246534",
+      "timestampUtc": "2026-09-13T06:53:35.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "12000",
+      "amountUsdc": "0.012",
+      "product": {
+        "id": "context-budget-ladder",
+        "title": "Context Budget Ladder",
+        "priceUsdc": "0.012"
+      },
+      "explorerUrl": "https://basescan.org/tx/0xe9975fe430d2a1bf7ebc73fd35ac700d1d786eeded7657307ed12dae88c4c85a"
+    },
+    {
+      "transactionHash": "0xd39124ac27a0dd2a373856cb5aaa070c427ecff89528909f865e8a1f6108a116",
+      "logIndex": 265,
+      "blockNumber": "51246525",
+      "timestampUtc": "2026-09-13T06:53:17.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "11000",
+      "amountUsdc": "0.011",
+      "product": {
+        "id": "exact-linear-system",
+        "title": "Exact Linear System",
+        "priceUsdc": "0.011"
+      },
+      "explorerUrl": "https://basescan.org/tx/0xd39124ac27a0dd2a373856cb5aaa070c427ecff89528909f865e8a1f6108a116"
+    },
+    {
+      "transactionHash": "0x508e6e2b20dc176dba5e7e245d3c7690a57e73a4c85d0fc78d82555c00871150",
+      "logIndex": 632,
+      "blockNumber": "51246516",
+      "timestampUtc": "2026-09-13T06:52:59.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "9000",
+      "amountUsdc": "0.009",
+      "product": {
+        "id": "bracketed-polynomial-root",
+        "title": "Bracketed Polynomial Root",
+        "priceUsdc": "0.009"
+      },
+      "explorerUrl": "https://basescan.org/tx/0x508e6e2b20dc176dba5e7e245d3c7690a57e73a4c85d0fc78d82555c00871150"
+    },
+    {
+      "transactionHash": "0xa5f77b56307ff01c90aa95c2eb38e429d6e0134910482814284789ce85332318",
+      "logIndex": 364,
+      "blockNumber": "51246508",
+      "timestampUtc": "2026-09-13T06:52:43.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "8000",
+      "amountUsdc": "0.008",
+      "product": {
+        "id": "unit-uncertainty-conversion",
+        "title": "Unit Uncertainty Conversion",
+        "priceUsdc": "0.008"
+      },
+      "explorerUrl": "https://basescan.org/tx/0xa5f77b56307ff01c90aa95c2eb38e429d6e0134910482814284789ce85332318"
+    },
+    {
+      "transactionHash": "0x181377b88f3c37c80675c2a1c13e61a6864d73fa47e278e794d6ec1d1a5e6c67",
+      "logIndex": 136,
+      "blockNumber": "51245766",
+      "timestampUtc": "2026-09-13T06:27:59.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "6000",
+      "amountUsdc": "0.006",
+      "product": {
+        "id": "revision-lineage-check",
+        "title": "Revision Lineage Check",
+        "priceUsdc": "0.006"
+      },
+      "explorerUrl": "https://basescan.org/tx/0x181377b88f3c37c80675c2a1c13e61a6864d73fa47e278e794d6ec1d1a5e6c67"
+    },
+    {
+      "transactionHash": "0x0bef8897bd07628b5da62507e2bbb5ff8be07814c8f5e31dd2f1cb30e571e281",
+      "logIndex": 304,
+      "blockNumber": "51155311",
+      "timestampUtc": "2026-09-11T04:12:49.000Z",
+      "payer": "0x2ebe788c488689795c3b61b38b9f0a209b2a89d3",
+      "payerDisplay": "0x2ebe…89d3",
+      "payerRole": "external-machine-agent",
+      "amountBaseUnits": "1000",
+      "amountUsdc": "0.001",
+      "product": {
+        "id": "context-compression",
+        "title": "Context Compression",
+        "priceUsdc": "0.001"
+      },
+      "explorerUrl": "https://basescan.org/tx/0x0bef8897bd07628b5da62507e2bbb5ff8be07814c8f5e31dd2f1cb30e571e281"
+    },
+    {
+      "transactionHash": "0x97e73890685d20040af77c7fba832ca380ec9c189443fd4dfeef12054d784cc1",
+      "logIndex": 435,
+      "blockNumber": "51079127",
+      "timestampUtc": "2026-09-09T09:53:21.000Z",
+      "payer": "0x94aa52201cb118d7158f95cd8dcb7f02a38a02be",
+      "payerDisplay": "0x94aa…02be",
+      "payerRole": "external-machine-agent",
+      "amountBaseUnits": "1000",
+      "amountUsdc": "0.001",
+      "product": {
+        "id": "context-compression",
+        "title": "Context Compression",
+        "priceUsdc": "0.001"
+      },
+      "explorerUrl": "https://basescan.org/tx/0x97e73890685d20040af77c7fba832ca380ec9c189443fd4dfeef12054d784cc1"
+    },
+    {
+      "transactionHash": "0xe8d7e743f73d57748ec5bf5bd8e330f43f508f86e1bd4db0fc0f3f0b972dc78e",
+      "logIndex": 452,
+      "blockNumber": "51075263",
+      "timestampUtc": "2026-09-09T07:44:33.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "5000",
+      "amountUsdc": "0.005",
+      "product": null,
+      "explorerUrl": "https://basescan.org/tx/0xe8d7e743f73d57748ec5bf5bd8e330f43f508f86e1bd4db0fc0f3f0b972dc78e"
+    },
+    {
+      "transactionHash": "0x66ccb22e8470fd42b042133ff0a0ea46c5c299afc899aa8c238d37eca7483256",
+      "logIndex": 53,
+      "blockNumber": "51075232",
+      "timestampUtc": "2026-09-09T07:43:31.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "5000",
+      "amountUsdc": "0.005",
+      "product": null,
+      "explorerUrl": "https://basescan.org/tx/0x66ccb22e8470fd42b042133ff0a0ea46c5c299afc899aa8c238d37eca7483256"
+    },
+    {
+      "transactionHash": "0x2bc914612596e5f16ddac127809ffa2579ade68edb7214d7dfd6a6a65da20fc2",
+      "logIndex": 547,
+      "blockNumber": "51075200",
+      "timestampUtc": "2026-09-09T07:42:27.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "10000",
+      "amountUsdc": "0.01",
+      "product": {
+        "id": "deep-context-evaluation",
+        "title": "Deep Context Evaluation",
+        "priceUsdc": "0.01"
+      },
+      "explorerUrl": "https://basescan.org/tx/0x2bc914612596e5f16ddac127809ffa2579ade68edb7214d7dfd6a6a65da20fc2"
+    },
+    {
+      "transactionHash": "0xcdffb2621f19a9fe99daf507ca27b7a67f707457e2dd2cc20010f40216b29f32",
+      "logIndex": 324,
+      "blockNumber": "51075169",
+      "timestampUtc": "2026-09-09T07:41:25.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "5000",
+      "amountUsdc": "0.005",
+      "product": null,
+      "explorerUrl": "https://basescan.org/tx/0xcdffb2621f19a9fe99daf507ca27b7a67f707457e2dd2cc20010f40216b29f32"
+    },
+    {
+      "transactionHash": "0x0532c0942c8956969389d0033dfed95a43f091f92d799ffa017b5239ab087182",
+      "logIndex": 534,
+      "blockNumber": "51075160",
+      "timestampUtc": "2026-09-09T07:41:07.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "5000",
+      "amountUsdc": "0.005",
+      "product": null,
+      "explorerUrl": "https://basescan.org/tx/0x0532c0942c8956969389d0033dfed95a43f091f92d799ffa017b5239ab087182"
+    },
+    {
+      "transactionHash": "0x2e460512119a3876ce14b8a9bcd0c942946beef47bdcef8f8600287a41e38ff6",
+      "logIndex": 943,
+      "blockNumber": "51070008",
+      "timestampUtc": "2026-09-09T04:49:23.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "100000",
+      "amountUsdc": "0.1",
+      "product": {
+        "id": "mps-autonomous-audit",
+        "title": "Mps Autonomous Audit",
+        "priceUsdc": "0.25",
+        "settledAtSupersededPrice": true
+      },
+      "explorerUrl": "https://basescan.org/tx/0x2e460512119a3876ce14b8a9bcd0c942946beef47bdcef8f8600287a41e38ff6"
+    },
+    {
+      "transactionHash": "0x998ccc152d35ba944c36265a9310fb27e92456e2db9ecfa6c4545a6f0a385332",
+      "logIndex": 535,
+      "blockNumber": "51069977",
+      "timestampUtc": "2026-09-09T04:48:21.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "50000",
+      "amountUsdc": "0.05",
+      "product": {
+        "id": "evidence-retention-matrix",
+        "title": "Evidence Retention Matrix",
+        "priceUsdc": "0.05"
+      },
+      "explorerUrl": "https://basescan.org/tx/0x998ccc152d35ba944c36265a9310fb27e92456e2db9ecfa6c4545a6f0a385332"
+    },
+    {
+      "transactionHash": "0x037a133a7ce6e0ccd9fe8059b27c344a4cd3a5efac56a5c5a26e7baba23a107c",
+      "logIndex": 415,
+      "blockNumber": "51069946",
+      "timestampUtc": "2026-09-09T04:47:19.000Z",
+      "payer": "0x7b7ff44288fade4a1829aba2584dfceb952146f2",
+      "payerDisplay": "0x7b7f…46f2",
+      "payerRole": "maha-canary-test",
+      "amountBaseUnits": "10000",
+      "amountUsdc": "0.01",
+      "product": {
+        "id": "deep-context-evaluation",
+        "title": "Deep Context Evaluation",
+        "priceUsdc": "0.01"
+      },
+      "explorerUrl": "https://basescan.org/tx/0x037a133a7ce6e0ccd9fe8059b27c344a4cd3a5efac56a5c5a26e7baba23a107c"
+    },
     {
       "transactionHash": "0xbd646db65145af2b8516da67b5e069791a79671e809c0373308221d9b1b8d6d0",
       "logIndex": 873,
@@ -130,7 +869,8 @@
       "product": {
         "id": "mps-autonomous-audit",
         "title": "Mps Autonomous Audit",
-        "priceUsdc": "0.1"
+        "priceUsdc": "0.25",
+        "settledAtSupersededPrice": true
       },
       "explorerUrl": "https://basescan.org/tx/0x5d3888675869d8620d6af60c11fbc415286f1ea3f403fa33f50b6428c473b688"
     },
@@ -376,7 +1116,8 @@
       "product": {
         "id": "mps-autonomous-audit",
         "title": "Mps Autonomous Audit",
-        "priceUsdc": "0.1"
+        "priceUsdc": "0.25",
+        "settledAtSupersededPrice": true
       },
       "explorerUrl": "https://basescan.org/tx/0x1c6cf823546de43b33b79974bfe2309d44a11fcf7d15a833b755fc05b4e1b0c4"
     },
