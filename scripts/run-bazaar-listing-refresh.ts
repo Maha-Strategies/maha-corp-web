@@ -332,7 +332,7 @@ async function execute(phase: RefreshPhase): Promise<void> {
       await save()
 
       // Read-only observation. Index lag never triggers another payment.
-      for (let observation = 0; observation < 4; observation += 1) {
+      for (let observation = 0; observation < (phase === 'launch-remaining' ? 1 : 4); observation += 1) {
         await new Promise((resolve) => setTimeout(resolve, 15_000))
         if (await indexedAt(row.path, row.amountBaseUnits)) {
           step.listingCorrectedTo = row.amountBaseUnits
