@@ -3,9 +3,14 @@ on:
   workflow_dispatch:
     inputs:
       confirmation:
-        description: Exact current launch plan confirmation (including SHA-256)
+        description: Exact current remaining-22 plan confirmation (including SHA-256)
         required: true
         type: string
+      execute:
+        description: Pay the reconciled remaining 22 (false prints a read-only plan)
+        required: true
+        default: false
+        type: boolean
 permissions:
   contents: read
 concurrency:
@@ -31,9 +36,13 @@ jobs:
       - name: Test the approved cohort and payment boundary
         run: node --experimental-strip-types --test test/x402-bazaar-launch.test.ts test/x402-bazaar-listing-refresh.test.ts
       - name: Refresh once; do not rerun to chase index lag
+        if: inputs.execute
         env:
           X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
-        run: node --experimental-strip-types scripts/run-bazaar-listing-refresh.ts --phase=launch --execute
+        run: node --experimental-strip-types scripts/run-bazaar-listing-refresh.ts --phase=launch-remaining --execute
+      - name: Read-only remaining plan
+        if: ${{ !inputs.execute }}
+        run: node --experimental-strip-types scripts/run-bazaar-listing-refresh.ts --phase=launch-remaining --plan
       - name: Preserve sanitized payment evidence even on failure
         if: always()
         uses: actions/upload-artifact@v7

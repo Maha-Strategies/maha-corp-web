@@ -49,6 +49,14 @@ const ORIGIN = 'https://www.mahastrategies.com'
  */
 export const PHASES = { 1: [0, 5], 2: [5, 8] } as const
 export type Phase = keyof typeof PHASES
+type RefreshPhase = Phase | 'all' | 'launch' | 'launch-remaining'
+
+// Reconciled publisher-funded payment from run 34742771329. Never repay it.
+export const COMPLETED_LAUNCH_PAYMENT = {
+  offerId: 'revision-lineage-check',
+  amount: '6000',
+  transaction: '0x181377b88f3c37c80675c2a1c13e61a6864d73fa47e278e794d6ec1d1a5e6c67',
+} as const
 
 export type Row = {
   offerId: string
@@ -73,12 +81,12 @@ export function rankedOffers(): X402Offer[] {
   return [...payableOffers()].sort((a, b) => Number(a.amount) - Number(b.amount))
 }
 
-export function selected(phase: Phase | 'all' | 'launch'): X402Offer[] {
+export function selected(phase: RefreshPhase): X402Offer[] {
   const ranked = rankedOffers()
-  if (phase === 'launch') {
+  if (phase === 'launch' || phase === 'launch-remaining') {
     const cohort = ranked.filter(o => BAZAAR_LAUNCH_IDS.includes(o.id))
     if (cohort.length !== 23 || cohort.some(o => BigInt(o.amount) >= BigInt(1_000_000))) throw new Error('launch_cohort_changed')
-    return cohort
+    return phase === 'launch-remaining' ? cohort.filter(o => o.id !== COMPLETED_LAUNCH_PAYMENT.offerId) : cohort
   }
   if (phase === 'all') return ranked.slice(PHASES[1][0], PHASES[2][1])
   const [from, to] = PHASES[phase]
@@ -103,7 +111,7 @@ async function listedAmounts(): Promise<Map<string, string>> {
   return map
 }
 
-async function plan(phase: Phase | 'all' | 'launch'): Promise<{ rows: Row[]; payable: Row[]; totalBaseUnits: bigint; confirmation: string }> {
+async function plan(phase: RefreshPhase): Promise<{ rows: Row[]; payable: Row[]; totalBaseUnits: bigint; confirmation: string }> {
   const listed = await listedAmounts()
   const inPhase = new Set(selected(phase).map((o) => o.id))
   const rows: Row[] = rankedOffers().map((offer) => {
@@ -116,13 +124,14 @@ async function plan(phase: Phase | 'all' | 'launch'): Promise<{ rows: Row[]; pay
       amountUsdc: usdc(offer.amount),
       listedBaseUnits,
       action: !inPhase.has(offer.id) ? 'skip_not_in_selected_phase'
-        : correct && phase !== 'launch' ? 'skip_listing_already_correct'
+        : correct && phase !== 'launch' && phase !== 'launch-remaining' ? 'skip_listing_already_correct'
         : 'pay',
     }
   })
   const payable = rows.filter((r) => r.action === 'pay')
   const totalBaseUnits = payable.reduce((n, r) => n + BigInt(r.amountBaseUnits), BigInt(0))
   if (totalBaseUnits > BigInt(5_000_000)) throw new Error('owner_five_usdc_ceiling_exceeded')
+  if (phase === 'launch-remaining' && (payable.length !== 22 || totalBaseUnits !== BigInt(1_274_000))) throw new Error('remaining_launch_budget_changed')
   // The confirmation names the phase, the offer count and the exact total, so
   // an authorization cannot survive the plan changing underneath it.
   const digest = createHash('sha256').update(JSON.stringify(payable.map(row => ({ ...row,
@@ -133,7 +142,7 @@ async function plan(phase: Phase | 'all' | 'launch'): Promise<{ rows: Row[]; pay
   return { rows, payable, totalBaseUnits, confirmation }
 }
 
-function printPlan(phase: Phase | 'all' | 'launch', p: Awaited<ReturnType<typeof plan>>): void {
+function printPlan(phase: RefreshPhase, p: Awaited<ReturnType<typeof plan>>): void {
   console.log(`\nBazaar listing refresh -- phase ${phase}\n`)
   console.log(`  ${'offer'.padEnd(38)}${'price'.padStart(10)}${'listed'.padStart(10)}   action`)
   for (const row of p.rows) {
@@ -178,10 +187,24 @@ async function indexedAt(path: string, expected: string): Promise<boolean> {
   return Boolean(offer && row?.description === offer.description)
 }
 
-async function execute(phase: Phase | 'all' | 'launch'): Promise<void> {
+async function execute(phase: RefreshPhase): Promise<void> {
+  // The original launch already made a payment. Use the reconciled remainder.
+  if (phase === 'launch') throw new Error('original_launch_already_attempted_use_reconciled_remainder')
   const p = await plan(phase)
   printPlan(phase, p)
   if (p.payable.length === 0) return
+
+  if (phase === 'launch-remaining') {
+    const prior = payableOffers().find(o => o.id === COMPLETED_LAUNCH_PAYMENT.offerId)!
+    if (prior.amount !== COMPLETED_LAUNCH_PAYMENT.amount || !await indexedAt(prior.path, prior.amount)) throw new Error('prior_launch_listing_not_reconciled')
+    const rpcUrl = rpcUrlFor(BASE_NETWORK, process.env.BASE_RPC_URL)
+    if (!rpcUrl) throw new Error('base_rpc_required')
+    const chain = await confirmSettlement({ rpcUrl, caip2Network: BASE_NETWORK,
+      transaction: COMPLETED_LAUNCH_PAYMENT.transaction, asset: BASE_USDC,
+      payer: CANARY_BUYER, payTo: MAHA_PAYEE, minAmount: prior.amount,
+      attempts: 1, retryDelayMs: 0, requestTimeoutMs: 10000 })
+    if (chain.status !== 'confirmed' || chain.amount !== prior.amount) throw new Error('prior_launch_payment_not_reconciled')
+  }
 
   // Validate the entire release before reading any signing key. A local price
   // change is not evidence that Production is serving that price or metadata.
@@ -230,6 +253,7 @@ async function execute(phase: Phase | 'all' | 'launch'): Promise<void> {
     customerDemand: false,
     organicDemand: false,
     phase: String(phase),
+    priorPayment: phase === 'launch-remaining' ? COMPLETED_LAUNCH_PAYMENT : null,
     confirmation: p.confirmation,
     maximumAuthorizedBaseUnits: String(p.totalBaseUnits),
     confirmedBaseUnits: '0',
@@ -318,9 +342,8 @@ async function execute(phase: Phase | 'all' | 'launch'): Promise<void> {
       }
       await save()
       console.log(`  ${step.state === 'settled_and_listing_corrected' ? '✓' : '·'} ${row.offerId} -> ${row.amountBaseUnits} (${step.state})`)
-      if (phase === 'launch' && evidence.steps.length === 1 && !step.listingCorrectedTo) {
-        throw new Error('first_launch_settlement_pending_index_stop_without_repayment')
-      }
+      // The first launch payment has already demonstrated eventual indexing.
+      // Pending rows remain unpaid-once; observe later without resubmitting.
     }
     evidence.state = evidence.steps.every((s) => s.listingCorrectedTo) ? 'complete' : 'settled_pending_listing_update'
     await save()
@@ -335,10 +358,10 @@ async function execute(phase: Phase | 'all' | 'launch'): Promise<void> {
 
 async function run(): Promise<void> {
   const args = process.argv.slice(2)
-  const unknown = args.filter((a) => !/^--(plan|execute|phase=(1|2|all|launch))$/.test(a))
+  const unknown = args.filter((a) => !/^--(plan|execute|phase=(1|2|all|launch|launch-remaining))$/.test(a))
   if (unknown.length) throw new Error(`unsupported_arguments: ${unknown.join(' ')}`)
   const phaseArg = args.find((a) => a.startsWith('--phase='))?.slice('--phase='.length) ?? '1'
-  const phase = (phaseArg === 'all' || phaseArg === 'launch' ? phaseArg : Number(phaseArg) as Phase)
+  const phase = (phaseArg === 'all' || phaseArg === 'launch' || phaseArg === 'launch-remaining' ? phaseArg : Number(phaseArg) as Phase)
   if (args.includes('--execute')) return execute(phase)
   printPlan(phase, await plan(phase))
 }
