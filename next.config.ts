@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 import { withSentryConfig } from '@sentry/nextjs'
-import { COLLECTION_HUB_PATHS, COLLECTION_INTERNAL_PATH } from './lib/collection-hub-paths'
+import { COLLECTION_HUB_PATHS, COLLECTION_INTERNAL_PATH } from './lib/collection-hub-paths.ts'
 
 const nextConfig: NextConfig = {
   // The customer-owned container uses Next's minimal standalone server. Maha's
