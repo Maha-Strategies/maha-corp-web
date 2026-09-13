@@ -424,7 +424,7 @@
     "exact-linear-system": {
       "version": "maha-microproducts/0.1",
       "offerId": "exact-linear-system",
-      "amountBaseUnits": "34000",
+      "amountBaseUnits": "11000",
       "inputDigest": "sha256:ce85c2d89d174bce2a7c9dfa608e93e4e1ec251f4ff2a8b4a41e6b13ca03af57",
       "result": {
         "state": "unique",
@@ -456,12 +456,12 @@
         "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
         "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
       ],
-      "receiptDigest": "sha256:d8be7ffffbcfb626821a4e67382e86a7edcaa3f0b25f5f12a728fd41373da7ec"
+      "receiptDigest": "sha256:edf602f2b3f9a58f790d8014c11c47726d79a645e1030828d66853aaedbcb677"
     },
     "bracketed-polynomial-root": {
       "version": "maha-microproducts/0.1",
       "offerId": "bracketed-polynomial-root",
-      "amountBaseUnits": "32000",
+      "amountBaseUnits": "9000",
       "inputDigest": "sha256:9c7a77d17f180516b1a50bfa14c2a07c341c7998bb5f9e0e27acb6134550e50a",
       "result": {
         "state": "tolerance-reached",
@@ -487,12 +487,12 @@
         "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
         "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
       ],
-      "receiptDigest": "sha256:166569b789e9d2b6eaaf5f23c0f46011de40e09e44ea8db1c682b7fe11c3c984"
+      "receiptDigest": "sha256:59a1bfd270d4c21109a44d722b4ef5782ff3454c7dcb8634e317e4b30515e255"
     },
     "covariance-uncertainty": {
       "version": "maha-microproducts/0.1",
       "offerId": "covariance-uncertainty",
-      "amountBaseUnits": "27000",
+      "amountBaseUnits": "13000",
       "inputDigest": "sha256:96cce62ef3f856719b0572691394b65e6702d277e2b63694e2338dd9b75fde36",
       "result": {
         "variance": {
@@ -522,7 +522,7 @@
         "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
         "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
       ],
-      "receiptDigest": "sha256:1f1c92c0a209cb041acd8ba0eaaa676c3c42615292efc50ef3c76f28014a42d6"
+      "receiptDigest": "sha256:eccd881b26d295578f95ecf0c2319f2173453391bb68a138185a50a5f104326e"
     },
     "divine-name-disambiguation": {
       "version": "maha-microproducts/0.1",
@@ -653,7 +653,7 @@
     "policy-version-comparison": {
       "version": "maha-microproducts/0.1",
       "offerId": "policy-version-comparison",
-      "amountBaseUnits": "44000",
+      "amountBaseUnits": "17000",
       "inputDigest": "sha256:7b79acb2a65dfb30f4c116e2c4e5b4d132e30dbeb6c0205acffe42c5753c528c",
       "result": {
         "policyId": "example-policy",
@@ -679,12 +679,12 @@
         "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
         "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
       ],
-      "receiptDigest": "sha256:fcd9cc2d06c142e3bf3d8a52fb4831fa2f18df6b78f1c1d8c2c8a91c09f310c4"
+      "receiptDigest": "sha256:d30406e9a7aec34b69314254146b7865961e2d935684e8b9c1a1a9179997a1a2"
     },
     "control-evidence-gaps": {
       "version": "maha-microproducts/0.1",
       "offerId": "control-evidence-gaps",
-      "amountBaseUnits": "46000",
+      "amountBaseUnits": "19000",
       "inputDigest": "sha256:6eab11a65e456cce6f4cff983b63de98276aeeeed4977aca1abfa388cdd74abb",
       "result": {
         "policyDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
@@ -710,12 +710,12 @@
         "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
         "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
       ],
-      "receiptDigest": "sha256:ec7e6da2bfcb1ecd90fe94d523907d507cb6334623951b3bab23f1c44063eb3c"
+      "receiptDigest": "sha256:a021f1dc478a65db93c1ddef47ff5d2ec12c06dde9838798e90dff6495c86711"
     },
     "mcp-contract-compatibility": {
       "version": "maha-microproducts/0.1",
       "offerId": "mcp-contract-compatibility",
-      "amountBaseUnits": "40000",
+      "amountBaseUnits": "15000",
       "inputDigest": "sha256:62ba542a540b2a83661913e97fc2e8284f205d8b66c5061e378412114796e516",
       "result": {
         "state": "exact-declarations-compatible",
@@ -732,12 +732,12 @@
         "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
         "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
       ],
-      "receiptDigest": "sha256:e0a1331c2c2703a3852b072db958a1a234c55c0571fbeec0cefe7119898ac3f5"
+      "receiptDigest": "sha256:51539eec28d290dde605fc356a75d2bf2acba2948858abce332d11d0d214d501"
     },
     "tool-permission-diff": {
       "version": "maha-microproducts/0.1",
       "offerId": "tool-permission-diff",
-      "amountBaseUnits": "42000",
+      "amountBaseUnits": "21000",
       "inputDigest": "sha256:1f32d39d3ccd205fb32fda243d7fbf9974016d93752fd2c9a3131ff11c678623",
       "result": {
         "added": [
@@ -771,7 +771,7 @@
         "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
         "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
       ],
-      "receiptDigest": "sha256:ca2258cfbafff93e63648d8e997165c440a690f438551028e7279c600380fffa"
+      "receiptDigest": "sha256:014b323b46aa62cf7e2648d30c831e4ac71dd0be56b81ad9d2e536a1ac069a89"
     },
     "publication-bundle-consistency": {
       "version": "maha-microproducts/0.1",
@@ -809,5 +809,5 @@
       "receiptDigest": "sha256:6ea9740918515a09f2c183d638847f186e0d89c414533e6802ab43cb3823e61e"
     }
   },
-  "digest": "sha256:279d352f2b9b20f357e43b5ea3bcf7d9b118e21877ba3d0422fa632c9caceb6d"
+  "digest": "sha256:72cfc7123f03f4336263355871d32643592355da3c323f18b357bc47da120048"
 }

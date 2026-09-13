@@ -10,7 +10,7 @@ import { X402_OFFERS } from '../lib/x402/offers.ts'
 const root = resolve(import.meta.dirname, '..'), read = (path: string) => readFileSync(resolve(root, path), 'utf8')
 const freeze = JSON.parse(read('content/discovery/micro-candidate-freeze-v1.json'))
 const selection = JSON.parse(read('content/discovery/micro60-selection-v1.json'))
-const costs = JSON.parse(read('content/discovery/micro-next12-cost-observation-v4.json'))
+const costs = JSON.parse(read('content/discovery/micro-next12-cost-observation-v5.json'))
 const unsigned = (o: object) => Object.fromEntries(Object.entries(o).filter(([k]) => k !== 'digest'))
 
 test('freeze enumerates sixty original candidates and refuses to overwrite the original 24-offer baseline', () => {
@@ -49,7 +49,9 @@ test('freeze enumerates sixty original candidates and refuses to overwrite the o
   for (const prior of freeze.existingOffers) {
     const current = X402_OFFERS.find(o => o.id === prior.id)!
     assert.equal(current.path, prior.path, `${prior.id}:path`)
-    if (prior.id === 'context-budget-ladder') {
+    if (BAZAAR_LAUNCH_COPY[prior.id]) {
+      assert.equal(current.description, BAZAAR_LAUNCH_COPY[prior.id], `${prior.id}: owner-approved launch copy`)
+    } else if (prior.id === 'context-budget-ladder') {
       // The one permitted description change. This offer used to publish its
       // price as a strict derivation -- five $0.001 compilations -- and is no
       // longer one: it sits on its own rung so every payable pair stays two
@@ -107,7 +109,7 @@ test('selected scores require actual bounded local observations, not zero-cost g
 })
 
 test('map and examples regenerate deterministically; profiled implementation remains bound', () => {
-  const files = ['content/discovery/micro-candidate-freeze-v1.json', 'content/discovery/micro60-selection-v1.json', 'content/discovery/micro-next12-cost-observation-v1.json', 'content/discovery/micro-next12-cost-observation-v2.json', 'content/discovery/micro-next12-cost-observation-v3.json', 'content/discovery/micro-next12-cost-observation-v4.json', 'content/discovery/microproduct-examples.json']
+  const files = ['content/discovery/micro-candidate-freeze-v1.json', 'content/discovery/micro60-selection-v1.json', 'content/discovery/micro-next12-cost-observation-v1.json', 'content/discovery/micro-next12-cost-observation-v2.json', 'content/discovery/micro-next12-cost-observation-v3.json', 'content/discovery/micro-next12-cost-observation-v5.json', 'content/discovery/microproduct-examples.json']
   const before = files.map(read)
   for (let i = 0; i < 2; i++) for (const script of ['freeze-micro-candidates', 'profile-next12', 'review-micro-candidates', 'generate-microproduct-examples', 'sync-microproduct-discovery']) execFileSync(process.execPath, ['--experimental-strip-types', `scripts/${script}.ts`, '--check'], { cwd: root })
   assert.deepEqual(files.map(read), before)
@@ -125,3 +127,4 @@ test('public runtime does not import private selection, cost observations or fro
 test('entrypoint import order cannot resurrect the earlier schema/catalog initialization cycle', () => {
   for (const path of ['micro-contracts', 'micro-next-contracts', 'micro-next-products', 'micro-products']) execFileSync(process.execPath, ['--experimental-strip-types', '-e', `await import('./lib/x402/${path}.ts')`], { cwd: root })
 })
+import { BAZAAR_LAUNCH_COPY } from '../lib/x402/bazaar-launch.ts'

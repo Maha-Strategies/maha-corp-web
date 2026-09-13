@@ -1,0 +1,44 @@
+name: Approved Bazaar launch refresh
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: Exact current launch plan confirmation (including SHA-256)
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: production-x402-bazaar-canary
+  cancel-in-progress: false
+jobs:
+  refresh:
+    if: github.run_attempt == 1
+    environment: production-x402-canary
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      BASE_RPC_URL: ${{ vars.BASE_RPC_URL }}
+      BAZAAR_REFRESH_CONFIRMATION: ${{ inputs.confirmation }}
+      BAZAAR_REFRESH_OUTPUT_PATH: ${{ github.workspace }}/bazaar-launch-evidence.json
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Test the approved cohort and payment boundary
+        run: node --experimental-strip-types --test test/x402-bazaar-launch.test.ts test/x402-bazaar-listing-refresh.test.ts
+      - name: Refresh once; do not rerun to chase index lag
+        env:
+          X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
+        run: node --experimental-strip-types scripts/run-bazaar-listing-refresh.ts --phase=launch --execute
+      - name: Preserve sanitized payment evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: bazaar-launch-${{ github.run_id }}
+          path: ${{ env.BAZAAR_REFRESH_OUTPUT_PATH }}
+          if-no-files-found: warn
+          retention-days: 90

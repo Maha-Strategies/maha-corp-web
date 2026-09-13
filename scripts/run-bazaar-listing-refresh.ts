@@ -31,6 +31,7 @@ import { privateKeyToAccount } from 'viem/accounts'
 import { base } from 'viem/chains'
 
 import { payableOffers, type X402Offer } from '../lib/x402/offers.ts'
+import { BAZAAR_LAUNCH_IDS } from '../lib/x402/bazaar-launch.ts'
 import { createPaidFetch, type PaymentRequirement } from '../lib/x402/client.ts'
 import {
   BASE_NETWORK, BASE_USDC, BAZAAR_MERCHANT_URL, CANARY_BUYER, MAHA_PAYEE,
@@ -72,8 +73,13 @@ export function rankedOffers(): X402Offer[] {
   return [...payableOffers()].sort((a, b) => Number(a.amount) - Number(b.amount))
 }
 
-export function selected(phase: Phase | 'all'): X402Offer[] {
+export function selected(phase: Phase | 'all' | 'launch'): X402Offer[] {
   const ranked = rankedOffers()
+  if (phase === 'launch') {
+    const cohort = ranked.filter(o => BAZAAR_LAUNCH_IDS.includes(o.id))
+    if (cohort.length !== 23 || cohort.some(o => BigInt(o.amount) >= BigInt(1_000_000))) throw new Error('launch_cohort_changed')
+    return cohort
+  }
   if (phase === 'all') return ranked.slice(PHASES[1][0], PHASES[2][1])
   const [from, to] = PHASES[phase]
   return ranked.slice(from, to)
@@ -97,7 +103,7 @@ async function listedAmounts(): Promise<Map<string, string>> {
   return map
 }
 
-async function plan(phase: Phase | 'all'): Promise<{ rows: Row[]; payable: Row[]; totalBaseUnits: bigint; confirmation: string }> {
+async function plan(phase: Phase | 'all' | 'launch'): Promise<{ rows: Row[]; payable: Row[]; totalBaseUnits: bigint; confirmation: string }> {
   const listed = await listedAmounts()
   const inPhase = new Set(selected(phase).map((o) => o.id))
   const rows: Row[] = rankedOffers().map((offer) => {
@@ -110,19 +116,24 @@ async function plan(phase: Phase | 'all'): Promise<{ rows: Row[]; payable: Row[]
       amountUsdc: usdc(offer.amount),
       listedBaseUnits,
       action: !inPhase.has(offer.id) ? 'skip_not_in_selected_phase'
-        : correct ? 'skip_listing_already_correct'
+        : correct && phase !== 'launch' ? 'skip_listing_already_correct'
         : 'pay',
     }
   })
   const payable = rows.filter((r) => r.action === 'pay')
   const totalBaseUnits = payable.reduce((n, r) => n + BigInt(r.amountBaseUnits), BigInt(0))
+  if (totalBaseUnits > BigInt(5_000_000)) throw new Error('owner_five_usdc_ceiling_exceeded')
   // The confirmation names the phase, the offer count and the exact total, so
   // an authorization cannot survive the plan changing underneath it.
-  const confirmation = `BAZAAR_LISTING_REFRESH_PHASE_${String(phase).toUpperCase()}_${payable.length}_OFFERS_MAX_${usdc(String(totalBaseUnits)).replace('.', '_')}_USDC`
+  const digest = createHash('sha256').update(JSON.stringify(payable.map(row => ({ ...row,
+    description: payableOffers().find(o => o.id === row.offerId)!.description,
+    discovery: payableOffers().find(o => o.id === row.offerId)!.discovery,
+  })))).digest('hex')
+  const confirmation = `BAZAAR_LISTING_REFRESH_PHASE_${String(phase).toUpperCase()}_${payable.length}_OFFERS_MAX_${usdc(String(totalBaseUnits)).replace('.', '_')}_USDC_${digest}`
   return { rows, payable, totalBaseUnits, confirmation }
 }
 
-function printPlan(phase: Phase | 'all', p: Awaited<ReturnType<typeof plan>>): void {
+function printPlan(phase: Phase | 'all' | 'launch', p: Awaited<ReturnType<typeof plan>>): void {
   console.log(`\nBazaar listing refresh -- phase ${phase}\n`)
   console.log(`  ${'offer'.padEnd(38)}${'price'.padStart(10)}${'listed'.padStart(10)}   action`)
   for (const row of p.rows) {
@@ -158,13 +169,39 @@ export function assertRefreshRequirement(requirement: PaymentRequirement, row: R
 
 async function indexedAt(path: string, expected: string): Promise<boolean> {
   const listed = await listedAmounts().catch(() => new Map<string, string>())
-  return listed.get(path) === expected
+  if (listed.get(path) !== expected) return false
+  const response = await fetch(`${BAZAAR_MERCHANT_URL}?payTo=${MAHA_PAYEE}&limit=100`, { signal: AbortSignal.timeout(20_000) })
+  if (!response.ok) return false
+  const data = await response.json() as { resources?: BazaarResource[] }
+  const row = data.resources?.find(r => r.resource === ORIGIN + path)
+  const offer = payableOffers().find(o => o.path === path)
+  return Boolean(offer && row?.description === offer.description)
 }
 
-async function execute(phase: Phase | 'all'): Promise<void> {
+async function execute(phase: Phase | 'all' | 'launch'): Promise<void> {
   const p = await plan(phase)
   printPlan(phase, p)
   if (p.payable.length === 0) return
+
+  // Validate the entire release before reading any signing key. A local price
+  // change is not evidence that Production is serving that price or metadata.
+  for (const row of p.payable) {
+    const offer = payableOffers().find(o => o.id === row.offerId)!
+    const declaration = await fetch(`${ORIGIN}/api/discovery/x402-offers/${row.offerId}`, { signal: AbortSignal.timeout(20_000) })
+    if (!declaration.ok) throw new Error(`production_declaration_unavailable:${row.offerId}`)
+    const live = await declaration.json() as { description?: string; payment?: { amount?: string }; status?: string }
+    if (live.description !== offer.description || live.payment?.amount !== row.amountBaseUnits || live.status !== 'available') {
+      throw new Error(`production_release_not_deployed:${row.offerId}`)
+    }
+    const validation = await fetch('https://api.cdp.coinbase.com/platform/v2/x402/validate', {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ resource: ORIGIN + row.path, method: 'POST' }), signal: AbortSignal.timeout(30_000),
+    })
+    const result = await validation.json() as { valid?: boolean; simulation?: { outcome?: string } }
+    if (!validation.ok || result.valid !== true || result.simulation?.outcome !== 'accepted') {
+      throw new Error(`bazaar_validation_not_accepted:${row.offerId}`)
+    }
+  }
 
   if (process.env.BAZAAR_REFRESH_CONFIRMATION !== p.confirmation) {
     throw new Error(`confirmation_required_and_must_match_the_current_plan: ${p.confirmation}`)
@@ -203,7 +240,8 @@ async function execute(phase: Phase | 'all'): Promise<void> {
     steps: [] as Step[],
   }
   const save = () => writeFile(outputPath, JSON.stringify(evidence, null, 2) + '\n', { mode: 0o600 })
-  await save()
+  // Refuse to overwrite prior evidence, including an uncertain paid attempt.
+  await writeFile(outputPath, JSON.stringify(evidence, null, 2) + '\n', { mode: 0o600, flag: 'wx' })
 
   try {
     for (const row of p.payable) {
@@ -280,6 +318,9 @@ async function execute(phase: Phase | 'all'): Promise<void> {
       }
       await save()
       console.log(`  ${step.state === 'settled_and_listing_corrected' ? '✓' : '·'} ${row.offerId} -> ${row.amountBaseUnits} (${step.state})`)
+      if (phase === 'launch' && evidence.steps.length === 1 && !step.listingCorrectedTo) {
+        throw new Error('first_launch_settlement_pending_index_stop_without_repayment')
+      }
     }
     evidence.state = evidence.steps.every((s) => s.listingCorrectedTo) ? 'complete' : 'settled_pending_listing_update'
     await save()
@@ -294,10 +335,10 @@ async function execute(phase: Phase | 'all'): Promise<void> {
 
 async function run(): Promise<void> {
   const args = process.argv.slice(2)
-  const unknown = args.filter((a) => !/^--(plan|execute|phase=(1|2|all))$/.test(a))
+  const unknown = args.filter((a) => !/^--(plan|execute|phase=(1|2|all|launch))$/.test(a))
   if (unknown.length) throw new Error(`unsupported_arguments: ${unknown.join(' ')}`)
   const phaseArg = args.find((a) => a.startsWith('--phase='))?.slice('--phase='.length) ?? '1'
-  const phase = (phaseArg === 'all' ? 'all' : Number(phaseArg) as Phase)
+  const phase = (phaseArg === 'all' || phaseArg === 'launch' ? phaseArg : Number(phaseArg) as Phase)
   if (args.includes('--execute')) return execute(phase)
   printPlan(phase, await plan(phase))
 }
