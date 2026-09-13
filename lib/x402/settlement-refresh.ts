@@ -12,7 +12,10 @@ export type SettlementReader = {
 }
 
 export const RECHECK_BLOCKS = BigInt(128)
-export const SCAN_CHUNK = BigInt(9000)
+// Base's public RPC rejects eth_getLogs ranges above 2,000 blocks. Keep this
+// bound explicit so both the hourly refresh and its tests exercise the public
+// provider contract instead of depending on a private endpoint's wider limit.
+export const SCAN_CHUNK = BigInt(2000)
 export const MAX_SCAN_BLOCKS = SCAN_CHUNK * BigInt(12)
 
 export function baseSettlementReader(options: { timeout?: number; retryCount?: number } = {}): SettlementReader {

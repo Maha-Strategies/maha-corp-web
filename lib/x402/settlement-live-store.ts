@@ -2,7 +2,8 @@ import { randomUUID } from 'node:crypto'
 import { getRedis } from '../redis.ts'
 import { scopedRedisKey } from '../redis-namespace.ts'
 import seed from '../../content/x402/settlement-ledger.json' with { type: 'json' }
-import type { SettlementLedger } from './settlement-ledger.ts'
+import { buildLedger, type SettlementLedger } from './settlement-ledger.ts'
+import { OPERATOR_WALLETS, MAHA_PAYEE } from './discovery-payment-recipe.ts'
 import { baseSettlementReader, ledgerFromRows, refreshSettlementLedger, type SettlementReader } from './settlement-refresh.ts'
 
 export type LiveSnapshot = { schemaVersion: 'maha-live-settlements/1.0'; ledger: SettlementLedger; caughtUp: boolean; finalizedBlock: string }
@@ -51,22 +52,41 @@ export function validLiveSnapshot(value: LiveSnapshot | null): value is LiveSnap
     seen.add(key)
     return { ...row, amountBaseUnits: BigInt(row.amountBaseUnits), blockNumber: BigInt(row.blockNumber) }
   })
-  const rebuilt = ledgerFromRows(rows, BigInt(value.ledger.scannedFromBlock), BigInt(value.ledger.scannedToBlock), value.ledger.observedAt)
+  // Validate against the catalogue recorded at scan time. A newly published
+  // offer must not turn intact saved chain history into an invalid snapshot.
+  const units = (price: string) => {
+    if (!/^\d+(?:\.\d{1,6})?$/.test(price)) throw new Error('invalid_saved_price')
+    const [whole, fraction = ''] = price.split('.')
+    return BigInt(whole) * BigInt(1000000) + BigInt(fraction.padEnd(6, '0'))
+  }
+  const offers = value.ledger.summary.byProduct.map(offer => ({
+    id: offer.id, title: offer.title, amountBaseUnits: units(offer.priceUsdc),
+    ...(offer.supersededPricesUsdc ? { supersededAmountsBaseUnits: offer.supersededPricesUsdc.map(units) } : {}),
+  }))
+  if (new Set(offers.map(offer => offer.id)).size !== offers.length) return false
+  const rebuilt = buildLedger({ settlements: rows, offers, operatorWallets: [...OPERATOR_WALLETS, MAHA_PAYEE],
+    fromBlock: BigInt(value.ledger.scannedFromBlock), toBlock: BigInt(value.ledger.scannedToBlock), observedAt: value.ledger.observedAt })
   return rebuilt.contentDigest === value.ledger.contentDigest
     && JSON.stringify(rebuilt.summary) === JSON.stringify(value.ledger.summary)
     && JSON.stringify(rebuilt.entries) === JSON.stringify(value.ledger.entries)
   } catch { return false }
 }
 
+/** Current catalogue labels, same observed transfers and scan date; no RPC or saved-state write. */
+export function currentCatalogueLedger(ledger: SettlementLedger) {
+  return ledgerFromRows(ledger.entries.map(row => ({ ...row, amountBaseUnits: BigInt(row.amountBaseUnits), blockNumber: BigInt(row.blockNumber) })),
+    BigInt(ledger.scannedFromBlock), BigInt(ledger.scannedToBlock), ledger.observedAt)
+}
+
 export async function readPublicSettlementLedger(store?: Pick<SettlementStore, 'read'>, now = new Date()) {
   try {
     const value = await (store ?? settlementStore()).read()
     if (validLiveSnapshot(value) && BigInt(value.ledger.scannedToBlock) >= BigInt(bundledLedger.scannedToBlock)) return {
-      ledger: value.ledger, source: 'scheduled_snapshot' as const, caughtUp: value.caughtUp,
+      ledger: currentCatalogueLedger(value.ledger), source: 'scheduled_snapshot' as const, caughtUp: value.caughtUp,
       stale: now.getTime() - Date.parse(value.ledger.observedAt) > 2 * 60 * 60 * 1000,
     }
   } catch { /* Preserve the bundled record without disguising its age. */ }
-  return { ledger: bundledLedger, source: 'bundled_fallback' as const, caughtUp: false, stale: true }
+  return { ledger: currentCatalogueLedger(bundledLedger), source: 'bundled_fallback' as const, caughtUp: false, stale: true }
 }
 
 export async function refreshStoredSettlements(store: SettlementStore, reader: SettlementReader = baseSettlementReader(), now = new Date()) {
