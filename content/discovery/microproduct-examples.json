@@ -807,7 +807,235 @@
         "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
       ],
       "receiptDigest": "sha256:6ea9740918515a09f2c183d638847f186e0d89c414533e6802ab43cb3823e61e"
+    },
+    "celestial-result-compatibility": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "celestial-result-compatibility",
+      "amountBaseUnits": "7000",
+      "inputDigest": "sha256:7546529067a0d6a32bff8ba7bf106c0a71660ecce1647994be93ccddfcaac630",
+      "result": {
+        "ruleSetVersion": "maha-celestial-compatibility/0.1-draft",
+        "ruleSetDigest": "sha256:02e730dbd88d0219b54f64d66fd48b5db03c6ca9a51e2fa4bdc85047137d8884",
+        "state": "incompatible-declared-conventions",
+        "fields": [
+          {
+            "field": "resultKind",
+            "left": "body-position",
+            "right": "body-position",
+            "state": "match",
+            "ruleId": "C-DECLARED"
+          },
+          {
+            "field": "targetBody",
+            "left": "moon",
+            "right": "moon",
+            "state": "match",
+            "ruleId": "C-DECLARED"
+          },
+          {
+            "field": "timeScale",
+            "left": "TT",
+            "right": "TT",
+            "state": "match",
+            "ruleId": "C-DECLARED"
+          },
+          {
+            "field": "origin",
+            "left": "geocentric",
+            "right": "geocentric",
+            "state": "match",
+            "ruleId": "C-DECLARED"
+          },
+          {
+            "field": "coordinateFrame",
+            "left": "ecliptic",
+            "right": "ecliptic",
+            "state": "match",
+            "ruleId": "C-DECLARED"
+          },
+          {
+            "field": "frameEpoch",
+            "left": "of-date",
+            "right": "of-date",
+            "state": "match",
+            "ruleId": "C-DECLARED"
+          },
+          {
+            "field": "precessionNutation",
+            "left": "iau-2006-2000a",
+            "right": "iau-2006-2000a",
+            "state": "match",
+            "ruleId": "C-DECLARED"
+          },
+          {
+            "field": "zodiac",
+            "left": "sidereal",
+            "right": "tropical",
+            "state": "different",
+            "ruleId": "C-DECLARED"
+          },
+          {
+            "field": "positionConvention",
+            "left": "apparent",
+            "right": "apparent",
+            "state": "match",
+            "ruleId": "C-DECLARED"
+          },
+          {
+            "field": "nodeConvention",
+            "left": "not-applicable",
+            "right": "not-applicable",
+            "state": "match",
+            "ruleId": "C-DECLARED"
+          },
+          {
+            "field": "houseSystem",
+            "left": "not-applicable",
+            "right": "not-applicable",
+            "state": "match",
+            "ruleId": "C-DECLARED"
+          },
+          {
+            "field": "julianDay",
+            "left": "2461296.5",
+            "right": "2461296.5",
+            "state": "match",
+            "ruleId": "C-DECIMAL"
+          },
+          {
+            "field": "observer.longitudeDeg",
+            "left": null,
+            "right": null,
+            "state": "not-applicable",
+            "ruleId": "C-DECIMAL"
+          },
+          {
+            "field": "observer.latitudeDeg",
+            "left": null,
+            "right": null,
+            "state": "not-applicable",
+            "ruleId": "C-DECIMAL"
+          },
+          {
+            "field": "observer.heightMeters",
+            "left": null,
+            "right": null,
+            "state": "not-applicable",
+            "ruleId": "C-DECIMAL"
+          },
+          {
+            "field": "observer.datum",
+            "left": null,
+            "right": null,
+            "state": "not-applicable",
+            "ruleId": "C-DECLARED"
+          },
+          {
+            "field": "observer.latitudeType",
+            "left": null,
+            "right": null,
+            "state": "not-applicable",
+            "ruleId": "C-DECLARED"
+          },
+          {
+            "field": "observer.heightReference",
+            "left": null,
+            "right": null,
+            "state": "not-applicable",
+            "ruleId": "C-DECLARED"
+          },
+          {
+            "field": "ayanamsa.modelId",
+            "left": "lahiri",
+            "right": null,
+            "state": "missing-or-unsupported",
+            "ruleId": "C-DECLARED"
+          },
+          {
+            "field": "ayanamsa.definitionVersion",
+            "left": "caller-pinned-v1",
+            "right": null,
+            "state": "missing-or-unsupported",
+            "ruleId": "C-DECLARED"
+          }
+        ],
+        "issues": [
+          {
+            "ruleId": "C-DECLARED",
+            "field": "zodiac",
+            "explanation": "The declared values differ; no conversion or equivalence mapping was attempted.",
+            "neededNext": "Reconcile this convention explicitly before comparing calculated values."
+          },
+          {
+            "ruleId": "C-DECLARED",
+            "field": "ayanamsa.modelId",
+            "explanation": "A required declaration is missing or outside the supported vocabulary.",
+            "neededNext": "Supply both explicit declarations using this rule-set vocabulary; do not infer a default."
+          },
+          {
+            "ruleId": "C-DECLARED",
+            "field": "ayanamsa.definitionVersion",
+            "explanation": "A required declaration is missing or outside the supported vocabulary.",
+            "neededNext": "Supply both explicit declarations using this rule-set vocabulary; do not infer a default."
+          }
+        ],
+        "missingPrerequisites": [
+          "right.ayanamsa.definitionVersion",
+          "right.ayanamsa.modelId"
+        ],
+        "calculationsVerified": false,
+        "conventionsInferred": false,
+        "conversionPerformed": false,
+        "predictionValidated": false
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:4b33405846302d93a20004925c25b3b76ca1dbe9fe2c1a921a9c4cdc1fdc4858"
+    },
+    "evidence-frame-compatibility": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "evidence-frame-compatibility",
+      "amountBaseUnits": "10500",
+      "inputDigest": "sha256:f6a1dcb8b6015739ad7dcb0148763855fad0420be6325a3ff05cb0bfeb403d69",
+      "result": {
+        "ruleSetVersion": "maha-evidence-frame-compatibility/0.1-draft",
+        "ruleSetDigest": "sha256:ec91e5ae269ac370ad9e6fabf1cbf5e5fa7f12452f256a461cc318b05b4c56c9",
+        "pairs": [
+          {
+            "index": 0,
+            "pairId": "synthetic-vendor-performance",
+            "state": "frame-transfer-not-justified",
+            "issues": [
+              {
+                "ruleId": "E-VENDOR-NOT-INDEPENDENT",
+                "field": "evidenceType",
+                "explanation": "A vendor brochure is not independent performance evidence.",
+                "neededNext": "Independent measurements of the same system, version, conditions and outcome."
+              }
+            ],
+            "matchedRuleId": "E-VENDOR-NOT-INDEPENDENT"
+          }
+        ],
+        "arbitraryProseRead": false,
+        "sourcesInspected": false,
+        "assertionsVerified": false
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:40d7020503e81e9fe9515f9d14cd50926197217c7dc928fc88af15ef213e80f9"
     }
   },
-  "digest": "sha256:72cfc7123f03f4336263355871d32643592355da3c323f18b357bc47da120048"
+  "digest": "sha256:10a5c75b639daec7352ecc3ddd7d04f3ad3b2457e7f7f03a89f879276bbf5353"
 }

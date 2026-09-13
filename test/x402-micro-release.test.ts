@@ -35,7 +35,7 @@ test('exactly fifteen authorized microproducts are released, at widely separated
   const amounts = [...payableOffers()].map(o => BigInt(o.amount)).sort((a, b) => (a < b ? -1 : 1))
   const gaps = amounts.slice(1).map((a, i) => a - amounts[i])
   assert.ok(gaps.every(g => g > BigInt(0)), 'every payable amount remains distinct')
-  assert.equal(MICRO_OFFERS.filter(o => o.status === 'withheld').length, 7)
+  assert.equal(MICRO_OFFERS.filter(o => o.status === 'withheld').length, 9)
   for (const offer of MICRO_OFFERS) {
     const allowed = released.includes(offer)
     assert.equal(microExecutionAllowed(offer.id, 'production'), allowed)

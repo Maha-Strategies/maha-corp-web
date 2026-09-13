@@ -388,7 +388,7 @@
       "description": "Multiply or divide two seven-component SI dimension vectors and compare with the expected output dimension. No unit conversion, formula validation, scale-factor inference or physical-model certification.",
       "payableNow": false,
       "blockedBy": [
-        "Outside the owner-authorized five-product release; settlement remains disabled."
+        "Outside the owner-authorized release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",
@@ -408,7 +408,7 @@
       "description": "Interpolate between two integer-coordinate points with exact rational arithmetic and an integrity receipt. Refuses extrapolation and repeated nodes. Does not estimate measurement error or validate the interpolation model.",
       "payableNow": false,
       "blockedBy": [
-        "Outside the owner-authorized five-product release; settlement remains disabled."
+        "Outside the owner-authorized release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",
@@ -428,7 +428,7 @@
       "description": "Apply the composite trapezoidal rule to 2-128 equally spaced integer samples. Returns an exact rational arithmetic result, declared units and an integrity receipt. No quadrature-error estimate or claim of an exact underlying integral.",
       "payableNow": false,
       "blockedBy": [
-        "Outside the owner-authorized five-product release; settlement remains disabled."
+        "Outside the owner-authorized release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",
@@ -448,7 +448,7 @@
       "description": "Compare 2-20 caller-labelled observations of one claim, population and outcome. Returns opposing directions and explicitly excluded observations. No literature search, source inspection, consensus judgment or factual verification.",
       "payableNow": false,
       "blockedBy": [
-        "Outside the owner-authorized five-product release; settlement remains disabled."
+        "Outside the owner-authorized release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",
@@ -468,7 +468,7 @@
       "description": "Deliver public source metadata and exact release bindings for one supported federation article at caller-pinned revisions. Uses the deployed repository snapshot, not a live registry probe. No private review material, full source text or expert certification.",
       "payableNow": false,
       "blockedBy": [
-        "Outside the owner-authorized five-product release; settlement remains disabled."
+        "Outside the owner-authorized release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",
@@ -488,7 +488,7 @@
       "description": "Deliver one supported atlas unit as structured edition metadata, poetic context, bounded answers and links at a pinned registry digest. Public pages remain free. No translation full text, redistribution license, historical or theological certification.",
       "payableNow": false,
       "blockedBy": [
-        "Outside the owner-authorized five-product release; settlement remains disabled."
+        "Outside the owner-authorized release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",
@@ -508,7 +508,7 @@
       "description": "Check one structured public or synthetic low-stakes experiment plan for timing, comparator, outcome and analysis declarations. Returns deficiencies and an integrity receipt. No registration, trusted timestamp, prediction, power analysis or scientific validation.",
       "payableNow": false,
       "blockedBy": [
-        "Outside the owner-authorized five-product release; settlement remains disabled."
+        "Outside the owner-authorized release; settlement remains disabled."
       ],
       "payment": {
         "protocol": "x402",
@@ -734,6 +734,46 @@
         "assetSymbol": "USDC",
         "autonomous": true,
         "payableNow": true
+      }
+    },
+    {
+      "id": "celestial-result-compatibility",
+      "status": "withheld",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/celestial-result-compatibility",
+      "method": "POST",
+      "description": "Compare two structured celestial result declarations using versioned rules. Reports mismatched conventions and missing prerequisites. No inferred settings, time/frame conversion, calculation verification or predictive validation. Proposed price; release pending.",
+      "payableNow": false,
+      "blockedBy": [
+        "Exact price and draft rule-set release approval pending; settlement disabled."
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "7000",
+        "assetSymbol": "USDC",
+        "autonomous": false,
+        "payableNow": false
+      }
+    },
+    {
+      "id": "evidence-frame-compatibility",
+      "status": "withheld",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/evidence-frame-compatibility",
+      "method": "POST",
+      "description": "Check up to ten declared claim-evidence relationships against a finite, versioned rule set. Reports unsupported frame transfers and missing information. Unknown combinations remain unresolved. No prose interpretation, source inspection or truth certification. Proposed price; release pending.",
+      "payableNow": false,
+      "blockedBy": [
+        "Exact price and draft rule-set release approval pending; settlement disabled."
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "10500",
+        "assetSymbol": "USDC",
+        "autonomous": false,
+        "payableNow": false
       }
     }
   ],

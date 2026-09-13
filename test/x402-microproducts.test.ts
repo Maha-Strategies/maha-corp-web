@@ -14,6 +14,7 @@ import { validate } from './helpers/json-schema.ts'
 import { apiProxyGate } from '../lib/api-proxy-policy.ts'
 import { releasesSlot } from '../lib/x402/slot.ts'
 import { isReleasedMicro } from '../lib/x402/micro-release.ts'
+import { isCompatibilityProduct } from '../lib/x402/compatibility-contracts.ts'
 
 const sample = (id: keyof typeof MICRO_PRODUCTS) => structuredClone(MICRO_SAMPLE_INPUTS[id])
 const root = new URL('../', import.meta.url)
@@ -56,16 +57,16 @@ for (const id of MICRO_IDS) {
 }
 
 test('withheld products keep the two approved bands; released products hold their own rungs', () => {
-  assert.equal(MICRO_IDS.length, 22)
-  assert.equal(new Set(MICRO_IDS.map(microPath)).size, 22)
-  const original = MICRO_OFFERS.filter(o => !NEXT_IDS.includes(o.id as keyof typeof NEXT_PRODUCTS))
+  assert.equal(MICRO_IDS.length, 24)
+  assert.equal(new Set(MICRO_IDS.map(microPath)).size, 24)
+  const original = MICRO_OFFERS.filter(o => !NEXT_IDS.includes(o.id as keyof typeof NEXT_PRODUCTS) && !isCompatibilityProduct(o.id))
   assert.equal(original.length, 10)
 
   // Withheld products are not payable, so the ledger never indexes them and
   // they are free to share the two approved bands. Publishing one requires an
   // unused amount, which assertDistinctPayableAmounts() enforces at load.
   const band = (amount: string) => String(Math.floor(Number(amount) / 1000) * 1000)
-  for (const o of MICRO_OFFERS.filter(o => !o.availability.payableInProduction)) {
+  for (const o of MICRO_OFFERS.filter(o => !o.availability.payableInProduction && !isCompatibilityProduct(o.id))) {
     assert.ok(['5000', '10000'].includes(band(o.amount)), `${o.id}: withheld price band`)
     assert.equal(Number(o.amount) % 1000, 0, `${o.id}: withheld amounts stay on a round band`)
   }
