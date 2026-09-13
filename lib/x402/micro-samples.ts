@@ -1,8 +1,10 @@
 import type { MicroProductId } from './micro-contracts.ts'
 import { NEXT_SAMPLES } from './micro-next-samples.ts'
+import { COMPATIBILITY_SAMPLES } from './compatibility-contracts.ts'
 const hash = (c: string) => `sha256:${c.repeat(64)}`
 const locator = { sourceId: 'synthetic-source', sourceRevision: hash('1'), kind: 'section', value: '3.2' }
 export const MICRO_SAMPLE_INPUTS: Record<MicroProductId, Record<string, unknown>> = {
+  ...COMPATIBILITY_SAMPLES,
   ...NEXT_SAMPLES,
   'citation-binding-check': { dataClass: 'synthetic', bindings: [{ expected: locator, observed: { ...locator } }] },
   'revision-lineage-check': { dataClass: 'synthetic', previous: { objectId: 'synthetic-record', revisionDigest: hash('1'), predecessorDigest: null, relation: 'initial' }, next: { objectId: 'synthetic-record', revisionDigest: hash('2'), predecessorDigest: hash('1'), relation: 'supersedes' } },

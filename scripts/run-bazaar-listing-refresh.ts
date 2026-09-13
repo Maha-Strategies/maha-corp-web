@@ -32,6 +32,8 @@ import { base } from 'viem/chains'
 
 import { payableOffers, type X402Offer } from '../lib/x402/offers.ts'
 import { BAZAAR_LAUNCH_IDS } from '../lib/x402/bazaar-launch.ts'
+import { COMPATIBILITY_IDS, isCompatibilityProduct } from '../lib/x402/compatibility-contracts.ts'
+import { verifyMicroProduct } from '../lib/x402/micro-products.ts'
 import { createPaidFetch, type PaymentRequirement } from '../lib/x402/client.ts'
 import {
   BASE_NETWORK, BASE_USDC, BAZAAR_MERCHANT_URL, CANARY_BUYER, MAHA_PAYEE,
@@ -49,7 +51,7 @@ const ORIGIN = 'https://www.mahastrategies.com'
  */
 export const PHASES = { 1: [0, 5], 2: [5, 8] } as const
 export type Phase = keyof typeof PHASES
-type RefreshPhase = Phase | 'all' | 'launch' | 'launch-remaining' | 'launch-final-two'
+type RefreshPhase = Phase | 'all' | 'launch' | 'launch-remaining' | 'launch-final-two' | 'compatibility'
 
 // Reconciled publisher-funded payment from run 34742771329. Never repay it.
 export const COMPLETED_LAUNCH_PAYMENT = {
@@ -72,6 +74,7 @@ type Step = Row & {
   transaction?: string
   blockNumber?: number
   responseSha256?: string
+  responseVerified?: boolean
   listingCorrectedTo?: string
 }
 
@@ -83,6 +86,11 @@ export function rankedOffers(): X402Offer[] {
 
 export function selected(phase: RefreshPhase): X402Offer[] {
   const ranked = rankedOffers()
+  if (phase === 'compatibility') {
+    const cohort = COMPATIBILITY_IDS.map(id => ranked.find(o => o.id === id))
+    if (cohort.length !== 2 || cohort[0]?.amount !== '7000' || cohort[1]?.amount !== '10500') throw new Error('compatibility_cohort_changed')
+    return cohort as X402Offer[]
+  }
   if (phase === 'launch-final-two') {
     const cohort = ranked.filter(o => ['mps-autonomous-audit', 'governed-context-verification-pack'].includes(o.id))
     if (cohort.length !== 2 || cohort.reduce((n, o) => n + BigInt(o.amount), BigInt(0)) !== BigInt(750_000)) throw new Error('final_two_cohort_changed')
@@ -209,7 +217,7 @@ export function refreshRequest(offer: X402Offer): { body: Record<string, unknown
 
 async function execute(phase: RefreshPhase): Promise<void> {
   // The original launch already made a payment. Use the reconciled remainder.
-  if (phase === 'launch' || phase === 'launch-remaining') throw new Error('original_launch_already_attempted_use_reconciled_final_two')
+  if (String(phase).startsWith('launch')) throw new Error('original_23_launch_settled_do_not_repay')
   const p = await plan(phase)
   printPlan(phase, p)
   if (p.payable.length === 0) return
@@ -341,6 +349,11 @@ async function execute(phase: RefreshPhase): Promise<void> {
       if (response.status >= 400 || !step.transaction) throw new Error(`paid_delivery_not_confirmed:${row.offerId}`)
       const bytes = new Uint8Array(await response.arrayBuffer())
       step.responseSha256 = createHash('sha256').update(bytes).digest('hex')
+      if (isCompatibilityProduct(offer.id)) {
+        step.responseVerified = response.status === 200 && await verifyMicroProduct(offer.id, request.body, JSON.parse(new TextDecoder().decode(bytes)))
+        await save()
+        if (!step.responseVerified) throw new Error('compatibility_delivery_verification_failed')
+      }
 
       const chain = await confirmSettlement({
         rpcUrl, caip2Network: BASE_NETWORK, transaction: step.transaction, asset: BASE_USDC,
@@ -380,10 +393,10 @@ async function execute(phase: RefreshPhase): Promise<void> {
 
 async function run(): Promise<void> {
   const args = process.argv.slice(2)
-  const unknown = args.filter((a) => !/^--(plan|execute|phase=(1|2|all|launch|launch-remaining|launch-final-two))$/.test(a))
+  const unknown = args.filter((a) => !/^--(plan|execute|phase=(1|2|all|launch|launch-remaining|launch-final-two|compatibility))$/.test(a))
   if (unknown.length) throw new Error(`unsupported_arguments: ${unknown.join(' ')}`)
   const phaseArg = args.find((a) => a.startsWith('--phase='))?.slice('--phase='.length) ?? '1'
-  const phase = (phaseArg === 'all' || phaseArg === 'launch' || phaseArg === 'launch-remaining' || phaseArg === 'launch-final-two' ? phaseArg : Number(phaseArg) as Phase)
+  const phase = (phaseArg === 'all' || phaseArg === 'launch' || phaseArg === 'launch-remaining' || phaseArg === 'launch-final-two' || phaseArg === 'compatibility' ? phaseArg : Number(phaseArg) as Phase)
   if (args.includes('--execute')) return execute(phase)
   printPlan(phase, await plan(phase))
 }

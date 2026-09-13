@@ -37,7 +37,7 @@ const alwaysChallenge = (async () => ({
 const inert = { record: async () => {}, release: async () => {}, environment: 'test' }
 
 function handlersFor(offer: X402Offer) {
-  if (offer.id.startsWith('celestial-')) {
+  if (['celestial-position-snapshot', 'celestial-chart-evidence', 'celestial-vimshottari-timing'].includes(offer.id)) {
     return celestialHandlers(offer.id as CelestialProductId, { ...inert, resolve: alwaysChallenge })
   }
   return microHandlers(offer.id as MicroProductId, { ...inert, resolve: alwaysChallenge })
