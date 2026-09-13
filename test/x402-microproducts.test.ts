@@ -77,7 +77,7 @@ test('withheld products keep the two approved bands; released products hold thei
   // alias one product's settlement onto another's.
   const released = MICRO_OFFERS.filter(o => o.availability.payableInProduction)
   assert.deepEqual(released.map(o => o.amount).sort((a, b) => Number(a) - Number(b)),
-    ['6000', '8000', '9000', '11000', '13000', '14000', '15000', '16000', '17000',
+    ['6000', '7000', '8000', '9000', '10500', '11000', '13000', '14000', '15000', '16000', '17000',
       '18000', '19000', '21000', '22000', '36000', '38000'])
   const payable = payableOffers().map(o => BigInt(o.amount)).sort((a, b) => (a < b ? -1 : 1))
   for (let i = 1; i < payable.length; i += 1) {

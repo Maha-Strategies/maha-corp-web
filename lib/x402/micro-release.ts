@@ -24,6 +24,9 @@ export const RELEASED_MICRO_IDS = [
   'tool-permission-diff',
   'policy-version-comparison',
   'control-evidence-gaps',
+  // Separately approved on 2026-09-13; prior launch/payment cohorts stay fixed.
+  'celestial-result-compatibility',
+  'evidence-frame-compatibility',
 ] as const
 
 export function isReleasedMicro(id: string): boolean {

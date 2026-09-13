@@ -1501,17 +1501,26 @@
     },
     {
       "id": "celestial-result-compatibility",
-      "status": "withheld",
+      "status": "active",
       "canonicalResource": "https://www.mahastrategies.com/api/v1/micro/celestial-result-compatibility",
       "method": "POST",
-      "payment": null,
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "7000",
+        "displayAmount": "0.007000 USDC"
+      },
       "schemas": {
         "input": "https://www.mahastrategies.com/api/discovery/x402-offers/celestial-result-compatibility#input",
         "output": "https://www.mahastrategies.com/api/discovery/x402-offers/celestial-result-compatibility#output"
       },
       "configurationDigest": {
         "algorithm": "sha256",
-        "digest": "sha256:f544affbb45ce47e1d02a648943a13342686f28b916ce9ceedd27c77cf93fd84",
+        "digest": "sha256:6dabd07c7c38038efbb32f26d12487ae9c1abb2b468cea2d26912255ecf2e24a",
         "schemaVersion": "1.0.0"
       },
       "limits": {
@@ -1531,22 +1540,31 @@
         "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
         "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
         "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
-        "Compare two structured celestial result declarations using versioned rules. Reports mismatched conventions and missing prerequisites. No inferred settings, time/frame conversion, calculation verification or predictive validation. Proposed price; release pending."
+        "Compare two structured celestial result declarations using versioned rules. Reports mismatched conventions and missing prerequisites. No inferred settings, time/frame conversion, calculation verification or predictive validation."
       ]
     },
     {
       "id": "evidence-frame-compatibility",
-      "status": "withheld",
+      "status": "active",
       "canonicalResource": "https://www.mahastrategies.com/api/v1/micro/evidence-frame-compatibility",
       "method": "POST",
-      "payment": null,
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "10500",
+        "displayAmount": "0.010500 USDC"
+      },
       "schemas": {
         "input": "https://www.mahastrategies.com/api/discovery/x402-offers/evidence-frame-compatibility#input",
         "output": "https://www.mahastrategies.com/api/discovery/x402-offers/evidence-frame-compatibility#output"
       },
       "configurationDigest": {
         "algorithm": "sha256",
-        "digest": "sha256:4fecc979425911edcc78686b611344fbf2198cc0b8f34bbc2de7fe53c12b648b",
+        "digest": "sha256:9d5aac4e54200ff750313bd38d3eb808a9be82515eb62aa945760aa1380d52e6",
         "schemaVersion": "1.0.0"
       },
       "limits": {
@@ -1566,7 +1584,7 @@
         "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
         "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
         "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
-        "Check up to ten declared claim-evidence relationships against a finite, versioned rule set. Reports unsupported frame transfers and missing information. Unknown combinations remain unresolved. No prose interpretation, source inspection or truth certification. Proposed price; release pending."
+        "Check up to ten declared claim-evidence relationships against a finite, versioned rule set. Reports unsupported frame transfers and missing information. Unknown combinations remain unresolved. No prose interpretation, source inspection or truth certification."
       ]
     }
   ],

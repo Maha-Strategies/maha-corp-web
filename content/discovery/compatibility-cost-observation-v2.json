@@ -1,0 +1,100 @@
+{
+  "measuredAt": "2026-09-13T08:16:39.749Z",
+  "node": "v26.5.0",
+  "platform": "darwin",
+  "arch": "arm64",
+  "implementationDigest": "sha256:15429e54a16fc190b82edaeb5ae44f42e0bed59e095b4eb86cb2649f13f22978",
+  "workloadsDigest": "sha256:9c574f3e14782389f01082d0134121f1658d5ecae3cb0c785267c50da47d94f0",
+  "basis": "local-process-end-to-end-build-including-validation-and-receipt; selected-bounded-cases-not-exhaustive-worst-case",
+  "networkCalls": 0,
+  "providerCalls": 0,
+  "payments": 0,
+  "proposedAmountsBaseUnits": {
+    "celestial-result-compatibility": "7000",
+    "evidence-frame-compatibility": "10500"
+  },
+  "peakProcessRssBytes": 128122880,
+  "memoryBasis": "whole-process-high-water-mark-not-per-invocation-memory",
+  "cloudCostMeasured": false,
+  "externalDemandMeasured": false,
+  "results": [
+    {
+      "product": "celestial-result-compatibility",
+      "case": "complete-topocentric",
+      "callsMeasured": 1000,
+      "firstMs": 0.9813749999999999,
+      "p50Ms": 0.07879200000000708,
+      "p95Ms": 0.12354200000000048,
+      "p99Ms": 0.1548750000000041,
+      "maxMs": 0.22758300000000986,
+      "cpuMicrosecondsPerCall": 126.828,
+      "requestBytes": 1204,
+      "responseBytes": 3605
+    },
+    {
+      "product": "celestial-result-compatibility",
+      "case": "all-prerequisites-missing",
+      "callsMeasured": 1000,
+      "firstMs": 0.20074999999999932,
+      "p50Ms": 0.08491699999999014,
+      "p95Ms": 0.12666699999999764,
+      "p99Ms": 0.13791700000001583,
+      "maxMs": 0.3921670000000006,
+      "cpuMicrosecondsPerCall": 113.9,
+      "requestBytes": 46,
+      "responseBytes": 6873
+    },
+    {
+      "product": "celestial-result-compatibility",
+      "case": "many-differences",
+      "callsMeasured": 1000,
+      "firstMs": 0.14416700000001015,
+      "p50Ms": 0.09829200000001492,
+      "p95Ms": 0.14108300000003737,
+      "p99Ms": 0.14920799999998735,
+      "maxMs": 0.18912499999999,
+      "cpuMicrosecondsPerCall": 118.047,
+      "requestBytes": 1172,
+      "responseBytes": 5960
+    },
+    {
+      "product": "evidence-frame-compatibility",
+      "case": "ten-positive-long-metadata",
+      "callsMeasured": 1000,
+      "firstMs": 1.010708999999963,
+      "p50Ms": 0.1505409999999756,
+      "p95Ms": 0.1974169999999731,
+      "p99Ms": 0.2140410000000088,
+      "maxMs": 0.2410419999999931,
+      "cpuMicrosecondsPerCall": 167.331,
+      "requestBytes": 9055,
+      "responseBytes": 5045
+    },
+    {
+      "product": "evidence-frame-compatibility",
+      "case": "ten-missing",
+      "callsMeasured": 1000,
+      "firstMs": 0.336749999999995,
+      "p50Ms": 0.2724999999999227,
+      "p95Ms": 0.6970420000000104,
+      "p99Ms": 1.4067499999999882,
+      "maxMs": 13.993249999999989,
+      "cpuMicrosecondsPerCall": 333.666,
+      "requestBytes": 65,
+      "responseBytes": 19725
+    },
+    {
+      "product": "evidence-frame-compatibility",
+      "case": "ten-failed-and-missing",
+      "callsMeasured": 1000,
+      "firstMs": 0.42345799999998235,
+      "p50Ms": 0.2912090000000944,
+      "p95Ms": 0.7766670000000886,
+      "p99Ms": 0.9152910000000247,
+      "maxMs": 1.1695839999999862,
+      "cpuMicrosecondsPerCall": 412.042,
+      "requestBytes": 965,
+      "responseBytes": 21565
+    }
+  ]
+}

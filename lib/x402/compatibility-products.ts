@@ -7,7 +7,7 @@ const text = (v: unknown): string | null => typeof v === 'string' && v.trim() &&
 const get = (r: Row, path: string): unknown => path.split('.').reduce<unknown>((v, k) => v && typeof v === 'object' ? (v as Row)[k] : undefined, r)
 const issue = (ruleId: string, field: string, explanation: string, neededNext: string): Issue => ({ ruleId, field, explanation, neededNext })
 export const CELESTIAL_RULE_SET = {
-  version: 'maha-celestial-compatibility/0.1-draft', vocabulary: CELESTIAL_VOCABULARY,
+  version: 'maha-celestial-compatibility/0.1', vocabulary: CELESTIAL_VOCABULARY,
   numericBounds: { julianDay: [0, 5000000], longitudeDeg: [-180, 180], latitudeDeg: [-90, 90], heightMeters: [-12000, 100000] },
   observerProfile: { datum: 'WGS84', latitudeType: 'geodetic', heightReference: 'ellipsoidal' },
   ayanamsaProfile: 'Exact caller-pinned modelId and definitionVersion, not independently resolved or verified.',
@@ -88,7 +88,7 @@ export function celestialCompatibility(input: Row): Row {
 }
 
 export const EVIDENCE_RULE_SET = {
-  version: 'maha-evidence-frame-compatibility/0.1-draft',
+  version: 'maha-evidence-frame-compatibility/0.1',
   allow: [
     { id: 'E-PERFORMANCE', claim: 'independent-performance', evidence: 'empirical-measurement', roles: ['independent-evaluator'], next: 'Independent measurements of the declared system, version, conditions and outcome.' },
     { id: 'E-WORDING', claim: 'original-wording', evidence: 'primary-text', roles: ['primary-text'], next: 'Located primary wording in the exact declared edition.' },

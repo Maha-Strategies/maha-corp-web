@@ -1,9 +1,9 @@
 import { objectSchema as o, arraySchema as a, textSchema as s, enumSchema as e, HASH_SCHEMA, type MicroSchema } from './micro-schema.ts'
 
-/** Provisional amounts only. Both offers remain outside RELEASED_MICRO_IDS. */
+/** Owner-approved distinct settlement amounts, 2026-09-13. */
 export const COMPATIBILITY_PRODUCTS = {
-  'celestial-result-compatibility': { amount: '7000', title: 'Celestial Result Compatibility Check', description: 'Compare two structured celestial result declarations using versioned rules. Reports mismatched conventions and missing prerequisites. No inferred settings, time/frame conversion, calculation verification or predictive validation. Proposed price; release pending.' },
-  'evidence-frame-compatibility': { amount: '10500', title: 'Evidence-Frame Compatibility Check', description: 'Check up to ten declared claim-evidence relationships against a finite, versioned rule set. Reports unsupported frame transfers and missing information. Unknown combinations remain unresolved. No prose interpretation, source inspection or truth certification. Proposed price; release pending.' },
+  'celestial-result-compatibility': { amount: '7000', title: 'Celestial Result Compatibility Check', description: 'Compare two structured celestial result declarations using versioned rules. Reports mismatched conventions and missing prerequisites. No inferred settings, time/frame conversion, calculation verification or predictive validation.' },
+  'evidence-frame-compatibility': { amount: '10500', title: 'Evidence-Frame Compatibility Check', description: 'Check up to ten declared claim-evidence relationships against a finite, versioned rule set. Reports unsupported frame transfers and missing information. Unknown combinations remain unresolved. No prose interpretation, source inspection or truth certification.' },
 } as const
 export type CompatibilityId = keyof typeof COMPATIBILITY_PRODUCTS
 export const COMPATIBILITY_IDS = Object.keys(COMPATIBILITY_PRODUCTS) as CompatibilityId[]

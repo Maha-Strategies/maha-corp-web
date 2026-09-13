@@ -738,42 +738,38 @@
     },
     {
       "id": "celestial-result-compatibility",
-      "status": "withheld",
+      "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/celestial-result-compatibility",
       "method": "POST",
-      "description": "Compare two structured celestial result declarations using versioned rules. Reports mismatched conventions and missing prerequisites. No inferred settings, time/frame conversion, calculation verification or predictive validation. Proposed price; release pending.",
-      "payableNow": false,
-      "blockedBy": [
-        "Exact price and draft rule-set release approval pending; settlement disabled."
-      ],
+      "description": "Compare two structured celestial result declarations using versioned rules. Reports mismatched conventions and missing prerequisites. No inferred settings, time/frame conversion, calculation verification or predictive validation.",
+      "payableNow": true,
+      "blockedBy": [],
       "payment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
         "amount": "7000",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "payableNow": false
+        "autonomous": true,
+        "payableNow": true
       }
     },
     {
       "id": "evidence-frame-compatibility",
-      "status": "withheld",
+      "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/evidence-frame-compatibility",
       "method": "POST",
-      "description": "Check up to ten declared claim-evidence relationships against a finite, versioned rule set. Reports unsupported frame transfers and missing information. Unknown combinations remain unresolved. No prose interpretation, source inspection or truth certification. Proposed price; release pending.",
-      "payableNow": false,
-      "blockedBy": [
-        "Exact price and draft rule-set release approval pending; settlement disabled."
-      ],
+      "description": "Check up to ten declared claim-evidence relationships against a finite, versioned rule set. Reports unsupported frame transfers and missing information. Unknown combinations remain unresolved. No prose interpretation, source inspection or truth certification.",
+      "payableNow": true,
+      "blockedBy": [],
       "payment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
         "amount": "10500",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "payableNow": false
+        "autonomous": true,
+        "payableNow": true
       }
     }
   ],

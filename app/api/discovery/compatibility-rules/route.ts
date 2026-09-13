@@ -3,7 +3,7 @@ import { microDigest } from '@/lib/x402/micro-products'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 export function GET() {
-  return Response.json({ status: 'draft-review-and-price-approval-pending', paymentEnabled: false,
+  return Response.json({ status: 'owner-approved-release', paymentRequiresLiveConfiguration: true,
     celestial: { ...CELESTIAL_RULE_SET, digest: microDigest(CELESTIAL_RULE_SET) },
     evidence: { ...EVIDENCE_RULE_SET, digest: microDigest(EVIDENCE_RULE_SET) },
     boundary: 'Checks on caller declarations, not source truth, calculation correctness or expert review.' },

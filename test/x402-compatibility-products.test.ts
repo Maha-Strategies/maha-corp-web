@@ -135,17 +135,17 @@ test('bounded batch, strict input and receipt integrity', async () => {
   await assert.rejects(buildMicroProduct('evidence-frame-compatibility', { dataClass: 'private', pairs }))
 })
 
-test('unapproved offers cannot charge in production and do not widen prior cohorts', async () => {
-  assert.equal(payableOffers().length, 29)
+test('approved offers have distinct prices and invalid signed inputs cannot settle', async () => {
+  assert.equal(payableOffers().length, 31)
   for (const id of COMPATIBILITY_IDS) {
     const offer = MICRO_OFFERS.find(o => o.id === id)!
-    assert.equal(offer.status, 'withheld')
-    assert.equal(offer.availability.payableInProduction, false)
-    assert.equal(payableOffers().some(o => o.amount === COMPATIBILITY_PRODUCTS[id].amount || o.supersededAmounts?.includes(COMPATIBILITY_PRODUCTS[id].amount)), false)
+    assert.equal(offer.status, 'available')
+    assert.equal(offer.availability.payableInProduction, true)
+    assert.equal(payableOffers().some(o => o.id !== id && (o.amount === COMPATIBILITY_PRODUCTS[id].amount || o.supersededAmounts?.includes(COMPATIBILITY_PRODUCTS[id].amount))), false)
     let payments = 0
     const handlers = microHandlers(id, { environment: 'production', resolve: async () => { payments++; throw new Error('must not reach settlement') } })
-    const response = await handlers.POST(new Request('https://www.mahastrategies.com' + offer.path, { method: 'POST', body: '{}' }))
-    assert.equal(response.status, 503)
+    const response = await handlers.POST(new Request('https://www.mahastrategies.com' + offer.path, { method: 'POST', headers: { 'content-type': 'application/json', 'payment-signature': 'synthetic-invalid-input-test' }, body: '{}' }))
+    assert.equal(response.status, 400)
     assert.equal(payments, 0)
   }
 })

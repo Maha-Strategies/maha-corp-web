@@ -814,8 +814,8 @@
       "amountBaseUnits": "7000",
       "inputDigest": "sha256:7546529067a0d6a32bff8ba7bf106c0a71660ecce1647994be93ccddfcaac630",
       "result": {
-        "ruleSetVersion": "maha-celestial-compatibility/0.1-draft",
-        "ruleSetDigest": "sha256:02e730dbd88d0219b54f64d66fd48b5db03c6ca9a51e2fa4bdc85047137d8884",
+        "ruleSetVersion": "maha-celestial-compatibility/0.1",
+        "ruleSetDigest": "sha256:9f02cfb0c869d04a38fa636801fa24bf287112c09b01e1b922cf93f762d55fa9",
         "state": "incompatible-declared-conventions",
         "fields": [
           {
@@ -996,7 +996,7 @@
         "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
         "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
       ],
-      "receiptDigest": "sha256:4b33405846302d93a20004925c25b3b76ca1dbe9fe2c1a921a9c4cdc1fdc4858"
+      "receiptDigest": "sha256:f2e95218b275776bca2a2a39919c38a81d22e54e825d02f2951e9b47301faae9"
     },
     "evidence-frame-compatibility": {
       "version": "maha-microproducts/0.1",
@@ -1004,8 +1004,8 @@
       "amountBaseUnits": "10500",
       "inputDigest": "sha256:f6a1dcb8b6015739ad7dcb0148763855fad0420be6325a3ff05cb0bfeb403d69",
       "result": {
-        "ruleSetVersion": "maha-evidence-frame-compatibility/0.1-draft",
-        "ruleSetDigest": "sha256:ec91e5ae269ac370ad9e6fabf1cbf5e5fa7f12452f256a461cc318b05b4c56c9",
+        "ruleSetVersion": "maha-evidence-frame-compatibility/0.1",
+        "ruleSetDigest": "sha256:4ddb7fa3765025f360e265da0ce813b12218a72d171ad4d517b1c7ba13c424bb",
         "pairs": [
           {
             "index": 0,
@@ -1034,8 +1034,8 @@
         "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
         "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
       ],
-      "receiptDigest": "sha256:40d7020503e81e9fe9515f9d14cd50926197217c7dc928fc88af15ef213e80f9"
+      "receiptDigest": "sha256:5802494f41e3a859b80f21e1e3e29ebdc7372e899f5bc3f8bd8f28686a73ca14"
     }
   },
-  "digest": "sha256:10a5c75b639daec7352ecc3ddd7d04f3ad3b2457e7f7f03a89f879276bbf5353"
+  "digest": "sha256:9f55da7bcb8d7ef31f427e303a336b4b66492935af3edfbc77e72228ac380394"
 }

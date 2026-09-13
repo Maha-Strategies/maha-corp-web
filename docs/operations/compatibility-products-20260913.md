@@ -1,5 +1,17 @@
 # Two compatibility products: local review package
 
+## Approved release update — 2026-09-13
+
+Owner approved both bounded rule sets and exact amounts: celestial 7000 USDC
+base units ($0.007), evidence-frame 10500 ($0.0105). Release rules are version
+0.1. The separate compatibility indexing workflow authorizes at most two
+purchases totaling $0.0175. The original 23 purchases must not be repeated.
+Local release verification and deployment/indexing evidence are tracked separately;
+approval and local tests are not evidence of production deployment or indexing.
+Benchmark v2 records the released implementation; v1 is preserved as history.
+
+## Historical pre-approval review
+
 Status: implemented locally, not deployed, not enabled for payment, not indexed.
 Worktree: `/private/tmp/maha-compatibility-products`; branch `codex/compatibility-products`.
 Existing main-workspace page and settlement edits were not modified.

@@ -28,5 +28,5 @@ const report = { measuredAt: new Date().toISOString(), node: process.version, pl
   proposedAmountsBaseUnits: Object.fromEntries(Object.entries(COMPATIBILITY_PRODUCTS).map(([id, p]) => [id, p.amount])),
   peakProcessRssBytes: process.resourceUsage().maxRSS * 1024, memoryBasis: 'whole-process-high-water-mark-not-per-invocation-memory',
   cloudCostMeasured: false, externalDemandMeasured: false, results }
-if (process.argv.includes('--write')) writeFileSync(new URL('../content/discovery/compatibility-cost-observation-v1.json', import.meta.url), JSON.stringify(report, null, 2) + '\n')
+if (process.argv.includes('--write')) writeFileSync(new URL('../content/discovery/compatibility-cost-observation-v2.json', import.meta.url), JSON.stringify(report, null, 2) + '\n')
 console.log(JSON.stringify(report, null, 2))
