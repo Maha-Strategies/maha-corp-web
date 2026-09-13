@@ -275,6 +275,13 @@ export const openApiDocument = {
         responses: { '200': { description: 'Complete offer declaration.', content: { 'application/json': { schema: { type: 'object', required: ['offerId', 'resource', 'payment', 'status', 'contract'], properties: { offerId: { type: 'string' }, metadataVersion: { type: 'string' }, declarationUrl: { type: 'string', format: 'uri' }, resource: { type: 'object' }, description: { type: 'string' }, payment: { type: 'object' }, status: { type: 'string', enum: ['available', 'preview', 'withheld'] }, availability: { type: 'object' }, maxRequestBytes: { type: 'integer' }, capabilityBoundaries: { type: 'array', items: { type: 'string' } }, retention: { type: 'object' }, contract: { type: 'object' } } } } } }, '404': errorResponse('No such x402 offer.') },
       },
     },
+    '/api/discovery/compatibility-rules': {
+      get: {
+        tags: ['Maha SDK'], operationId: 'getCompatibilityRules', summary: 'Free versioned compatibility rule sets and integrity digests', security: [{}],
+        description: 'Public, unpaid rules for celestial declaration comparison and evidence-frame checks. Describes bounded checks on caller declarations, not source truth, calculation correctness or expert review. Release approval does not establish live payment configuration.',
+        responses: { '200': { description: 'Published rule versions, vocabularies, rule metadata and digests.', content: { 'application/json': { schema: { type: 'object', required: ['status', 'paymentRequiresLiveConfiguration', 'celestial', 'evidence', 'boundary'], properties: { status: { type: 'string', const: 'owner-approved-release' }, paymentRequiresLiveConfiguration: { type: 'boolean', const: true }, celestial: { type: 'object' }, evidence: { type: 'object' }, boundary: { type: 'string' } } } } } } },
+      },
+    },
     '/api/discovery/offer-selection': {
       get: {
         tags: ['Maha SDK'], operationId: 'getOfferSelectionGuide', summary: 'Machine-readable Maha offer selection guide', security: [{}],
