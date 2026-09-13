@@ -18,6 +18,7 @@
 // private deployment state are excluded by construction.
 
 import type { OfferDiscoveryContract } from './offer-schemas.ts'
+import { BAZAAR_LAUNCH_COPY, BAZAAR_PREVIOUS_AMOUNTS } from './bazaar-launch.ts'
 import {
   CONTEXT_COMPRESSION_DISCOVERY,
   DEEP_CONTEXT_EVALUATION_DISCOVERY,
@@ -472,7 +473,14 @@ export const X402_OFFERS: readonly X402Offer[] = Object.freeze([
   VOLCANIC_ENGINE_EDITION_OFFER,
   ...CELESTIAL_OFFERS,
   ...MICRO_OFFERS,
-])
+].map(offer => {
+  // Decorate once at catalog initialization, preserving exported offer identity.
+  if (BAZAAR_LAUNCH_COPY[offer.id]) offer.description = BAZAAR_LAUNCH_COPY[offer.id]
+  if (BAZAAR_PREVIOUS_AMOUNTS[offer.id]) offer.supersededAmounts = [
+    ...(offer.supersededAmounts ?? []), ...BAZAAR_PREVIOUS_AMOUNTS[offer.id],
+  ]
+  return offer
+}))
 
 /**
  * The offers Production discovery may present as callable payment contracts.

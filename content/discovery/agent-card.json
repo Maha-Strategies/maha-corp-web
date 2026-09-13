@@ -25,7 +25,7 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/calculations/positions",
       "method": "POST",
-      "description": "Calculate seven classical-body geocentric longitudes at one UTC instant in Tropical and versioned Lahiri Sidereal frames. Includes explicit conventions and a deterministic integrity receipt. Public or synthetic inputs only. No interpretations, forecasts, LLM calls, or predictive certification. Bodies and receipt digests are not stored.",
+      "description": "Build an astronomy or astrology tool with seven classical-body geocentric longitudes at one UTC instant, Tropical and versioned Lahiri Sidereal frames, conventions and a deterministic receipt. Public or synthetic inputs only. No interpretations, forecasts or predictive certification. Request and result bodies are not stored.",
       "payableNow": true,
       "blockedBy": [],
       "payment": {
@@ -43,7 +43,7 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/calculations/chart",
       "method": "POST",
-      "description": "Calculate one UTC chart with Tropical and Lahiri Sidereal positions, Sidereal whole-sign houses, mean nodes, geometric aspects and panchanga. Includes numerical limitations and a deterministic integrity receipt. Public or synthetic inputs only. No forecasting narrative, LLM calls or predictive certification. Bodies and receipt digests are not stored.",
+      "description": "Build a reproducible chart view: Tropical and Lahiri Sidereal positions, Sidereal whole-sign houses, mean nodes, geometric aspects and panchanga for one UTC chart. Includes limitations and a deterministic receipt. Public or synthetic inputs only. No interpretation, forecast or predictive certification; bodies are not stored.",
       "payableNow": true,
       "blockedBy": [],
       "payment": {
@@ -61,7 +61,7 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/calculations/vimshottari",
       "method": "POST",
-      "description": "Calculate Vimshottari birth balance, nine mahadashas and nine antardashas of the active mahadasha at one reference instant. Uses actual nakshatra stay time and a 365.2425-day year. Includes conventions and deterministic receipt. Public or synthetic inputs only. No event prediction, interpretation or LLM calls. Bodies and receipt digests are not stored.",
+      "description": "Build a Vimshottari timing display with birth balance, nine mahadashas and nine antardashas of the active mahadasha at a reference instant. Uses actual nakshatra stay time and a 365.2425-day year; includes conventions and receipt. Public or synthetic inputs only. No event prediction or interpretation; bodies are not stored.",
       "payableNow": true,
       "blockedBy": [],
       "payment": {
@@ -105,7 +105,8 @@
         "autonomous": true
       },
       "payableNow": true,
-      "retention": "Request and response bodies are not stored."
+      "retention": "Request and response bodies are not stored.",
+      "description": "Choose a context budget before an agent run. Compare five extractive compilation budgets with token estimates and source coverage. Price basis: five compiler runs, the comparison table and the receipt digest. Uses caller-supplied documents; no answer generation, factual verification or guaranteed token-billing savings."
     },
     {
       "id": "deep-context-evaluation",
@@ -165,7 +166,8 @@
         "note": "Payable autonomously over x402 v2 on Base Mainnet. Requires an idempotency key and an input hash over the text field; request identity, JSON body and hash are checked before settlement. A replayed request returns the job already paid for rather than charging twice. Retrieval and resume at the retrieval endpoint are free."
       },
       "payableNow": true,
-      "retention": "The complete submitted passage is not retained. Results retain short verbatim claim excerpts, classifications, rationales, hashes, and operational metadata."
+      "retention": "The complete submitted passage is not retained. Results retain short verbatim claim excerpts, classifications, rationales, hashes, and operational metadata.",
+      "description": "Review a passage for Maha Principle epistemic classifications with a model-backed audit, not factual certification, legal advice, or human verification. Save the job reference and retrieve the completed result; job acceptance is not delivery. Short input excerpts may be retained in the result."
     },
     {
       "id": "governed-context-verification-pack",
@@ -181,7 +183,8 @@
         "autonomous": true
       },
       "payableNow": true,
-      "retention": "Documents, evidence spans, compiled packs, and response bodies are not stored."
+      "retention": "Documents, evidence spans, compiled packs, and response bodies are not stored.",
+      "description": "Prepare an inspectable context-selection evidence pack from caller-supplied documents and labelled spans. Combines budget comparisons, retention checks and policy-bound receipts. Verification concerns the declared workflow, not factual truth, answer quality or legal compliance."
     },
     {
       "id": "research-intake-evidence-pack",
@@ -230,7 +233,8 @@
         "autonomous": true
       },
       "payableNow": true,
-      "retention": "The request and delivered section are returned transiently and are not stored by this endpoint."
+      "retention": "The request and delivered section are returned transiently and are not stored by this endpoint.",
+      "description": "Read one supported section of The Imagined Life as machine-readable licensed prose with edition and section identity. For agents researching this specific book. Not the complete edition, a general book search or permission to redistribute the work."
     },
     {
       "id": "book-section-the-volcanic-engine",
@@ -253,7 +257,8 @@
         "autonomous": true
       },
       "payableNow": true,
-      "retention": "The request and delivered section are returned transiently and are not stored by this endpoint."
+      "retention": "The request and delivered section are returned transiently and are not stored by this endpoint.",
+      "description": "Read one supported section of The Volcanic Engine as machine-readable licensed prose with edition and section identity. For agents researching this specific book. Not the complete edition, a general book search or permission to redistribute the work."
     },
     {
       "id": "book-edition-the-imagined-life",
@@ -326,7 +331,7 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/citation-binding-check",
       "method": "POST",
-      "description": "Compare up to 20 declared source identities, revisions and locators. Returns exact mismatches and an integrity receipt. Does not fetch sources, establish passage existence or verify claim support.",
+      "description": "Check citation metadata before an evidence review. Compare up to 20 declared source identities, revisions and locators; return exact mismatches and an integrity receipt. No source retrieval, passage-existence check or claim-support verification.",
       "payableNow": true,
       "blockedBy": [],
       "payment": {
@@ -344,7 +349,7 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/revision-lineage-check",
       "method": "POST",
-      "description": "Check one initial or superseding revision transition against a declared predecessor. Returns lineage inconsistencies and an integrity receipt. Does not establish authenticity, semantic equivalence or inherited review approval.",
+      "description": "Check a revision handoff before reusing evidence. Compare one initial or superseding transition with its declared predecessor; return lineage inconsistencies and an integrity receipt. Does not establish authenticity, semantic equivalence or inherited review approval.",
       "payableNow": true,
       "blockedBy": [],
       "payment": {
@@ -362,7 +367,7 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/audit-export-normalizer",
       "method": "POST",
-      "description": "Normalize up to 100 metadata events into deterministic order, rejecting duplicate identifiers and malformed times or digests. Does not prove event occurrence, provenance or completeness against an external system.",
+      "description": "Prepare an audit-event export for deterministic comparison. Normalize up to 100 metadata events and reject duplicate IDs, malformed times or digests. Does not prove events occurred or establish provenance or completeness against an external system.",
       "payableNow": true,
       "blockedBy": [],
       "payment": {
@@ -520,7 +525,7 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/unit-uncertainty-conversion",
       "method": "POST",
-      "description": "Convert one decimal measurement and standard uncertainty between explicitly supported length, mass, time or temperature units. Exact rational scale/offset arithmetic; no unit guessing, physical validation or expanded uncertainty.",
+      "description": "Convert a measurement without losing declared uncertainty: one decimal value and standard uncertainty across supported length, mass, time or temperature units using exact rational scale/offset arithmetic. No unit guessing, physical validation or expanded uncertainty.",
       "payableNow": true,
       "blockedBy": [],
       "payment": {
@@ -538,14 +543,14 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/exact-linear-system",
       "method": "POST",
-      "description": "Solve a 1-8 variable rational linear system with rank, pivots, particular solution and null-space basis. Distinguishes unique, inconsistent and underdetermined systems. Not a floating-point conditioning or physical-model assessment.",
+      "description": "Get an inspectable exact solution to a 1-8 variable rational linear system. Returns rank, pivots, particular solution and null space; distinguishes unique, inconsistent and underdetermined systems. No floating-point conditioning or physical-model assessment.",
       "payableNow": true,
       "blockedBy": [],
       "payment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "34000",
+        "amount": "11000",
         "assetSymbol": "USDC",
         "autonomous": true,
         "payableNow": true
@@ -556,14 +561,14 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/bracketed-polynomial-root",
       "method": "POST",
-      "description": "Bisect a degree 1-8 rational polynomial over a sign-changing rational bracket, with a maximum of 64 iterations. Returns a certified bracket or exact rational root. No arbitrary code, all-roots or uniqueness claim.",
+      "description": "Get a checked rational bracket for a degree 1-8 polynomial root. Bisect a sign-changing rational bracket for at most 64 iterations; return a certified bracket or exact rational root. No arbitrary code, all-roots or uniqueness claim.",
       "payableNow": true,
       "blockedBy": [],
       "payment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "32000",
+        "amount": "9000",
         "assetSymbol": "USDC",
         "autonomous": true,
         "payableNow": true
@@ -574,14 +579,14 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/covariance-uncertainty",
       "method": "POST",
-      "description": "Evaluate c-transpose C c for 1-8 declared sensitivities and an exactly symmetric positive-semidefinite covariance matrix. Returns exact variance and a rational square-root enclosure. First-order model only; no empirical covariance validation.",
+      "description": "Propagate declared correlated measurement uncertainty for 1-8 sensitivities using c-transpose C c. Requires exact symmetric positive-semidefinite covariance; returns exact variance and a rational square-root enclosure. First-order only; no empirical covariance validation.",
       "payableNow": true,
       "blockedBy": [],
       "payment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "27000",
+        "amount": "13000",
         "assetSymbol": "USDC",
         "autonomous": true,
         "payableNow": true
@@ -592,7 +597,7 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/divine-name-disambiguation",
       "method": "POST",
-      "description": "Resolve an exact supported Tamil divine-name spelling into source-scoped relationship records at a pinned registry. Ambiguity and name coincidence remain explicit. No fuzzy universal synonymy, full source text or theological certification.",
+      "description": "Resolve an exact supported Tamil divine-name spelling to source-scoped records in a pinned registry. Keeps ambiguity and name coincidence explicit. No fuzzy universal synonym search, full source text or theological certification.",
       "payableNow": true,
       "blockedBy": [],
       "payment": {
@@ -610,7 +615,7 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/edition-verse-resolution",
       "method": "POST",
-      "description": "Resolve one printed pasuram number to its complete unit in the pinned Project Madurai/Hart atlas. Edition-specific, with exact unit locator. No conversion between numbering systems, translation reproduction or occurrence claims about a single verse.",
+      "description": "Locate a printed pasuram reference in the pinned Project Madurai/Hart atlas. Resolves one supported number to its complete unit and exact edition-specific locator. No cross-edition renumbering, translation reproduction or single-verse occurrence claim.",
       "payableNow": true,
       "blockedBy": [],
       "payment": {
@@ -628,7 +633,7 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/reception-lineage-retrieval",
       "method": "POST",
-      "description": "Retrieve one supported reception comparison with separate source frames and exact locators from the pinned public atlas. No inferred ancestry, uninterrupted transmission, universal identity or source full text.",
+      "description": "Research one supported Tamil reception comparison with separate source frames and exact locators from the pinned public atlas. No inferred ancestry, uninterrupted transmission, universal identity or full source text.",
       "payableNow": true,
       "blockedBy": [],
       "payment": {
@@ -646,14 +651,14 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/policy-version-comparison",
       "method": "POST",
-      "description": "Compare up to 40 caller-supplied policy clauses per version by stable ID, text and scope. Reports added, removed and changed clauses. Checks declared chronology, not legal effect, applicability or compliance.",
+      "description": "Review a structured policy revision before release. Compare up to 40 caller-supplied clauses per version by stable ID, text and scope; report additions, removals and changes. Checks declared chronology, not legal effect, applicability or compliance.",
       "payableNow": true,
       "blockedBy": [],
       "payment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "44000",
+        "amount": "17000",
         "assetSymbol": "USDC",
         "autonomous": true,
         "payableNow": true
@@ -664,14 +669,14 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/control-evidence-gaps",
       "method": "POST",
-      "description": "Compare up to 40 declared policy/control requirements with revision- and scope-bound evidence descriptors. Reports missing, stale and rejected evidence. Does not inspect evidence content, evaluate control effectiveness or certify compliance.",
+      "description": "Find missing or stale declared evidence before a governance review. Compare up to 40 control requirements with revision- and scope-bound evidence descriptors. Does not inspect evidence contents, evaluate control effectiveness or certify compliance.",
       "payableNow": true,
       "blockedBy": [],
       "payment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "46000",
+        "amount": "19000",
         "assetSymbol": "USDC",
         "autonomous": true,
         "payableNow": true
@@ -682,14 +687,14 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/mcp-contract-compatibility",
       "method": "POST",
-      "description": "Compare required tool names and exact pinned input/output schema digests against a declared MCP server snapshot. Checks protocol version and transport. Not a network probe, general schema-subtyping proof or official conformance certificate.",
+      "description": "Check declared MCP tool contracts before an upgrade. Compare required names and exact input/output schema digests with a supplied server snapshot, protocol version and transport. No server contact, semantic schema-subtyping proof or official conformance certification.",
       "payableNow": true,
       "blockedBy": [],
       "payment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "40000",
+        "amount": "15000",
         "assetSymbol": "USDC",
         "autonomous": true,
         "payableNow": true
@@ -700,14 +705,14 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/tool-permission-diff",
       "method": "POST",
-      "description": "Compare two explicit allow-only permission sets by tool, action and exact resource identifier. Reports additions, removals and wildcard additions. Does not resolve IAM inheritance, wildcard containment or authorize execution.",
+      "description": "Review permission changes before an agent release. Compare two explicit allow-only sets by tool, action and exact resource; report additions, removals and wildcard additions. Does not resolve IAM inheritance or wildcard containment, or authorize execution.",
       "payableNow": true,
       "blockedBy": [],
       "payment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "42000",
+        "amount": "21000",
         "assetSymbol": "USDC",
         "autonomous": true,
         "payableNow": true
@@ -718,7 +723,7 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/publication-bundle-consistency",
       "method": "POST",
-      "description": "Compare 2-8 declared article, registry and API views against one canonical URL, content digest, release digest and source-set digest. Reports stale, withdrawn and substituted views. No live fetch, release promotion or semantic content verification.",
+      "description": "Check declared publication views before release. Compare 2-8 article, registry and API views against canonical URL, content, release and source-set digests; flag stale, withdrawn or substituted views. No live fetch, release promotion or semantic content verification.",
       "payableNow": true,
       "blockedBy": [],
       "payment": {
