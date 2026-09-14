@@ -1,0 +1,33 @@
+{
+  "id": "trace_demo_001",
+  "schema_version": "1.1",
+  "source": "agent_architecture",
+  "created_at": "2026-09-02T00:00:00.000Z",
+  "runtime": { "name": "agent_architecture" },
+  "adapter": { "name": "agent_architecture_trace_export", "version": "1.0" },
+  "metadata": {
+    "session_id": "session_demo_001",
+    "actor": { "id": "agent:research-demo", "role": "researcher" },
+    "retrieval": {
+      "context_present": true,
+      "context_sha256": "08f7e5fe271c3bf2db65095385c097e771bc5635cc2a84da2a0df9500d56944b"
+    }
+  },
+  "raw_artifact_ref": null,
+  "messages": [
+    {
+      "role": "user",
+      "content": "Prepare a bounded, synthetic supplier comparison.",
+      "tool_calls": [],
+      "metadata": { "session_id": "session_demo_001" }
+    },
+    {
+      "role": "assistant",
+      "content": "The comparison was completed inside the declared evidence and authority boundaries.",
+      "tool_calls": [],
+      "metadata": { "retrieved_context": "Synthetic context only.", "trace_event_count": 0 }
+    }
+  ],
+  "normalized_trace_sha256": "e44189cd6e82d106fac57c4989f8d6cdb4176b509d57476930abde9e15dd4c2b",
+  "raw_trace_sha256": "e44189cd6e82d106fac57c4989f8d6cdb4176b509d57476930abde9e15dd4c2b"
+}
