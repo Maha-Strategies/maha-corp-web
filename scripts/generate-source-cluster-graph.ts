@@ -2,9 +2,7 @@ import { createHash } from 'node:crypto'
 import { mkdirSync, writeFileSync } from 'node:fs'
 
 import { canonicalJson } from '../lib/evidence-dossier/digest.ts'
-import { EPISTEMIC_RECORDS } from '../lib/epistemic-pilots.ts'
-import { REPAIRED_REVISION_CANARY_RECORDS } from '../lib/repaired-revision-canary-targets.ts'
-import { alignmentBlockers, alignmentFor } from '../lib/frontier-source-alignment.ts'
+import { alignmentBlockers } from '../lib/frontier-source-alignment.ts'
 import { isPilotAlignmentClear, pilotAlignmentFor } from '../lib/pilot-source-alignment.ts'
 import inventory from '../content/source-first/source-inventory.json' with { type: 'json' }
 import projection from '../content/review/exact-revision-projection.json' with { type: 'json' }
@@ -29,7 +27,6 @@ import batch12b from '../content/batch-12b/source-investigations.json' with { ty
 const digest = (value: unknown) => `sha256:${createHash('sha256').update(canonicalJson(value), 'utf8').digest('hex')}`
 const active = observation.releases.filter((entry) => entry.status === 'active')
 const releasedIds = new Set(active.map((entry) => entry.recordId))
-const records = new Map([...EPISTEMIC_RECORDS, ...REPAIRED_REVISION_CANARY_RECORDS].map((record) => [record.id, record]))
 const clear = (id: string) => pilotAlignmentFor(id) ? isPilotAlignmentClear(id) : alignmentBlockers(id).length === 0
 
 const reviewState = new Map((projection.projections as { recordId: string; classification: string }[])
