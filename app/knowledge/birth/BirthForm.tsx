@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import InspectableReading from './InspectableReading'
 import { useActionState, useEffect, useMemo, useRef, useState } from 'react'
 
 import { BIRTH_PLACES, birthPlaceKey, findBirthPlace } from '@/lib/birth-places'
@@ -511,6 +512,7 @@ function Report({ report }: { report: BirthReport }) {
       </section>
 
       <ChartSummary report={report} />
+      <InspectableReading report={report} />
       <ChartStructure report={report} />
       <TimingSection report={report} />
       <HistoricalCalibrationSection report={report} />
@@ -551,7 +553,10 @@ function Report({ report }: { report: BirthReport }) {
 }
 
 export default function BirthForm() {
-  const [state, formAction, pending] = useActionState<BirthActionState, FormData>(computeBirthReport, { status: 'idle' })
+  const [state, formAction, pending] = useActionState<BirthActionState, FormData>(
+    async (_previous, formData) => computeBirthReport({ status: 'idle' }, formData),
+    { status: 'idle' },
+  )
   const resultRef = useRef<HTMLDivElement>(null)
 
   // Held in state rather than left to defaultValue, so a rejected submission
@@ -751,6 +756,11 @@ export default function BirthForm() {
             <span className={LABEL}>Timing moment (UTC)</span>
             <input suppressHydrationWarning required type="datetime-local" name="timingInstantUtc" value={timingInstantUtc} onInput={(event) => setTimingInstantUtc(event.currentTarget.value)} className={FIELD} />
             <span className="text-xs leading-5 text-zinc-600">Defaults to now. Change it to inspect a past milestone or future timing window; the submitted value is interpreted explicitly as UTC.</span>
+          </label>
+          <label className="flex flex-col gap-2 sm:col-span-2">
+            <span className={LABEL}>Birth-time uncertainty (± minutes)</span>
+            <input required type="number" name="birthTimeUncertaintyMinutes" min="0" max="120" step="any" defaultValue="0" className={FIELD} aria-describedby="birth-uncertainty-help" />
+            <span id="birth-uncertainty-help" className="text-sm leading-6 text-zinc-300">Choose 0 only if treating the recorded minute as exact. Otherwise we show sampled D1/D9 alternatives and withhold unconditional traditional interpretation.</span>
           </label>
         </div>
 

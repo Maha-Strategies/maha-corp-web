@@ -63,6 +63,7 @@ test('every route belongs to one declared visual system', () => {
   // 62 -> 65: the first three finite epistemic-clearing families inherit the Knowledge overlay.
   // 65 -> 68: Batch 2 adds mathematics, astronomy, and cross-domain clearing families.
   // 68 -> 70: federation mythology and religion source-guide families inherit Knowledge.
+  // 70 -> 71: the Jyotisha reader guide uses the existing Knowledge overlay.
   // The developer clearing family delegates to the shared bounded guide renderer,
   // moving paper 112 -> 113 without introducing another visual system.
   // paper 113 -> 114: /context-control, the dedicated landing page for the
@@ -88,7 +89,8 @@ test('every route belongs to one declared visual system', () => {
   // established visual systems rather than creating another one.
   // One shared paper renderer serves all 180 collection hubs.
   // /tools/compatibility-checks adds one free explanation page using the paper boundary.
-  assert.deepEqual(groups, { paper: 128, apps: 6, books: 41, docs: 1, knowledge: 72, intelligence: 2, operator: 32, internal: 1 })
+  // The Jyotisha reader guide adds one Knowledge route: 72 -> 73.
+  assert.deepEqual(groups, { paper: 128, apps: 6, books: 41, docs: 1, knowledge: 73, intelligence: 2, operator: 32, internal: 1 })
 })
 
 test('Apps, Books, Docs, Knowledge, and Intelligence own bounded cyber-light overlays', () => {

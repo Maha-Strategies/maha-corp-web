@@ -167,7 +167,8 @@ export async function currentHostSitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(page.preparedOn),
     })),
     { url: `${baseUrl}/knowledge/muhurta`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
-    { url: `${baseUrl}/knowledge/birth`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
+    { url: `${baseUrl}/knowledge/birth`, lastModified: new Date('2026-09-14') },
+    { url: `${baseUrl}/knowledge/astrology/reading-guide`, lastModified: new Date('2026-09-14') },
     { url: `${baseUrl}/knowledge/corporate`, lastModified: new Date(CELESTIAL_GUIDE_RELEASE_DATE) },
     { url: `${baseUrl}/reports/celestial`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
     ...CELESTIAL_GUIDE_LIST.map((guide) => ({
