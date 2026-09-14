@@ -15,6 +15,7 @@ import {
   VOLCANIC_ENGINE_SECTION_OFFER,
   VOLCANIC_ENGINE_EDITION_OFFER,
   USDC_DECIMALS,
+  X402_OFFERS,
   type X402Offer,
 } from '../x402/offers.ts'
 import { configuredIdentity, MAHA_CARP_DID_URL, MAHA_CARP_SAD_URL, MAHA_CARP_URL } from './identity.ts'
@@ -27,11 +28,10 @@ export const CABEZON_SELLER_ROLE_URL = 'https://raw.githubusercontent.com/bitsan
 const SITE_URL = 'https://www.mahastrategies.com'
 const identity = configuredIdentity()
 
-const DIGITAL_OFFER_SPECS = Object.freeze([
+const LEGACY_DIGITAL_METADATA = Object.freeze([
   {
     offeringRef: 'maha:context-compression:v1',
     title: 'Context Compression',
-    amount: '0.001',
     offer: CONTEXT_COMPRESSION_OFFER,
     estimatedSeconds: 15,
     deliveryDeadlineSeconds: 60,
@@ -40,7 +40,6 @@ const DIGITAL_OFFER_SPECS = Object.freeze([
   {
     offeringRef: 'maha:context-budget-ladder:v1',
     title: 'Context Budget Ladder',
-    amount: '0.005',
     offer: CONTEXT_BUDGET_LADDER_OFFER,
     estimatedSeconds: 30,
     deliveryDeadlineSeconds: 90,
@@ -49,7 +48,6 @@ const DIGITAL_OFFER_SPECS = Object.freeze([
   {
     offeringRef: 'maha:deep-context-evaluation:v1',
     title: 'Deep Context Evaluation',
-    amount: '0.01',
     offer: DEEP_CONTEXT_EVALUATION_OFFER,
     estimatedSeconds: 60,
     deliveryDeadlineSeconds: 120,
@@ -58,7 +56,6 @@ const DIGITAL_OFFER_SPECS = Object.freeze([
   {
     offeringRef: 'maha:evidence-retention-matrix:v1',
     title: 'Evidence Retention Matrix',
-    amount: '0.05',
     offer: EVIDENCE_RETENTION_MATRIX_OFFER,
     estimatedSeconds: 60,
     deliveryDeadlineSeconds: 120,
@@ -67,7 +64,6 @@ const DIGITAL_OFFER_SPECS = Object.freeze([
   {
     offeringRef: 'maha:mps-autonomous-audit:v1',
     title: 'MPS Automated Claim Triage',
-    amount: '0.10',
     offer: MPS_AUTONOMOUS_AUDIT_OFFER,
     estimatedSeconds: 90,
     deliveryDeadlineSeconds: 180,
@@ -76,7 +72,6 @@ const DIGITAL_OFFER_SPECS = Object.freeze([
   {
     offeringRef: 'maha:governed-context-verification-pack:v1',
     title: 'Governed Context Verification Pack',
-    amount: '0.50',
     offer: GOVERNED_CONTEXT_VERIFICATION_OFFER,
     estimatedSeconds: 60,
     deliveryDeadlineSeconds: 120,
@@ -85,7 +80,6 @@ const DIGITAL_OFFER_SPECS = Object.freeze([
   {
     offeringRef: 'maha:research-intake-evidence-pack:v1',
     title: 'Research Intake Evidence Pack',
-    amount: '1.00',
     offer: RESEARCH_INTAKE_EVIDENCE_PACK_OFFER,
     estimatedSeconds: 180,
     deliveryDeadlineSeconds: 300,
@@ -94,7 +88,6 @@ const DIGITAL_OFFER_SPECS = Object.freeze([
   {
     offeringRef: 'maha:book-section:the-imagined-life:v0.1',
     title: 'The Imagined Life — machine-readable section',
-    amount: '0.005',
     offer: IMAGINED_LIFE_SECTION_OFFER,
     estimatedSeconds: 5,
     deliveryDeadlineSeconds: 30,
@@ -103,7 +96,6 @@ const DIGITAL_OFFER_SPECS = Object.freeze([
   {
     offeringRef: 'maha:book-section:the-volcanic-engine:v0.1',
     title: 'The Volcanic Engine — machine-readable section',
-    amount: '0.005',
     offer: VOLCANIC_ENGINE_SECTION_OFFER,
     estimatedSeconds: 5,
     deliveryDeadlineSeconds: 30,
@@ -112,7 +104,6 @@ const DIGITAL_OFFER_SPECS = Object.freeze([
   {
     offeringRef: 'maha:book-edition:the-imagined-life:v0.1',
     title: 'The Imagined Life — complete machine-readable edition',
-    amount: '2.99',
     offer: IMAGINED_LIFE_EDITION_OFFER,
     estimatedSeconds: 10,
     deliveryDeadlineSeconds: 30,
@@ -121,7 +112,6 @@ const DIGITAL_OFFER_SPECS = Object.freeze([
   {
     offeringRef: 'maha:book-edition:the-volcanic-engine:v0.1',
     title: 'The Volcanic Engine — complete machine-readable edition',
-    amount: '2.99',
     offer: VOLCANIC_ENGINE_EDITION_OFFER,
     estimatedSeconds: 10,
     deliveryDeadlineSeconds: 30,
@@ -130,13 +120,36 @@ const DIGITAL_OFFER_SPECS = Object.freeze([
   ...CELESTIAL_OFFERS.map(offer => ({
     offeringRef: `maha:${offer.id}:v0.1`,
     title: offer.serviceName + ' — ' + offer.id.replace('celestial-', '').replaceAll('-', ' '),
-    amount: (Number(offer.amount) / 1_000_000).toFixed(2),
     offer,
     estimatedSeconds: 5,
     deliveryDeadlineSeconds: 90,
     termsUrl: `${SITE_URL}${offer.path}`,
   })),
 ] as const)
+
+/** Exact USDC conversion; never round sub-cent products or use float division. */
+export function usdcDisplayAmount(baseUnits: string): string {
+  if (!/^[0-9]+$/.test(baseUnits)) throw new Error('Invalid USDC base-unit amount')
+  const n = BigInt(baseUnits), scale = BigInt(10) ** BigInt(USDC_DECIMALS)
+  const fraction = (n % scale).toString().padStart(USDC_DECIMALS, '0').replace(/0+$/, '')
+  return `${n / scale}.${fraction.padEnd(2, '0')}`
+}
+
+// Membership in this list comes from the released catalogue, not a second
+// manually maintained inventory. Keep legacy offeringRef values stable.
+const DIGITAL_OFFER_SPECS = Object.freeze(X402_OFFERS
+  .filter(offer => offer.status === 'available' && offer.availability.payableInProduction && offer.availability.blockedBy.length === 0)
+  .map(offer => {
+    const legacy = LEGACY_DIGITAL_METADATA.find(spec => spec.offer.id === offer.id)
+    return {
+      offeringRef: legacy?.offeringRef ?? `maha:${offer.id}:v1`,
+      title: legacy?.title ?? offer.serviceName,
+      estimatedSeconds: legacy?.estimatedSeconds ?? 5,
+      deliveryDeadlineSeconds: legacy?.deliveryDeadlineSeconds ?? 90,
+      termsUrl: legacy?.termsUrl ?? `${SITE_URL}/api/discovery/x402-offers/${offer.id}`,
+      offer, amount: usdcDisplayAmount(offer.amount),
+    }
+  }))
 
 type DigitalOfferSpec = (typeof DIGITAL_OFFER_SPECS)[number]
 
@@ -152,10 +165,13 @@ function cabezonDigitalOffer(spec: DigitalOfferSpec) {
   const offer: X402Offer = spec.offer
   return {
     offeringRef: spec.offeringRef,
+    offerId: offer.id,
     kind: 'digital' as const,
     title: spec.title,
     descrip: offer.description,
-    tags: [...offer.tags, 'digital-fulfillment', 'x402'],
+    tags: [...new Set([...offer.tags, 'digital-fulfillment', 'x402'])],
+    availability: offer.availability,
+    paymentNote: 'Published terms only. Obtain the live x402 challenge before authorizing payment; catalogue discovery is free.',
     status: offer.status,
     price: {
       amount: spec.amount,
@@ -363,7 +379,7 @@ type NormalizedPurchase = {
 }
 
 export const mahaCarpSellerProfile = Object.freeze({
-  schemaVersion: '0.1.3',
+  schemaVersion: '0.1.4',
   sellerId: 'maha-strategies',
   name: 'Maha Strategies LLC',
   description: 'Governed infrastructure, machine-payable utilities, and bounded agent-commerce pilots.',
@@ -500,6 +516,10 @@ function containsAnyTokenPhrase(terms: string, candidates: readonly string[]) {
 function enquiryMatchesDigital(offeringRef: string, terms: string) {
   if (!terms) return true
   if (containsAnyTokenPhrase(terms, ['digital', 'ai', 'machine payable', 'x402'])) return true
+  const spec = digitalOfferForRef(offeringRef)
+  if (spec && !LEGACY_DIGITAL_METADATA.some(legacy => legacy.offeringRef === offeringRef)) {
+    return containsAnyTokenPhrase(terms, [spec.offer.id.replaceAll('-', ' '), spec.title, ...spec.offer.tags])
+  }
   if (offeringRef.startsWith('maha:celestial-')) {
     return containsAnyTokenPhrase(terms, ['astronomy', 'celestial', 'tropical', 'sidereal', 'lahiri', 'vimshottari', 'panchanga', 'chart calculation'])
   }
