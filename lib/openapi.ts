@@ -126,6 +126,29 @@ export const openApiDocument = {
     { name: 'Governed Workflow', description: 'Read-only evaluation prototype over a synthetic document-approval workflow. Stateless, metadata-only, and performs no side effect.' },
   ],
   paths: {
+    '/api/discovery/carp/catalog': {
+      get: {
+        tags: ['Agentic Commerce'], operationId: 'getCarpSellerCatalogue',
+        summary: 'Read the free CABEZON seller product catalogue', security: [],
+        description: 'Array of released digital products and separate enquiry-only physical listings. Digital display prices derive from published x402 base-unit amounts; the live payment challenge remains authoritative. Reading this catalogue creates no order or payment.',
+        responses: {
+          '200': {
+            description: 'Seller offerings, also available under offers in the CARP seller profile.',
+            content: { 'application/json': { schema: {
+              type: 'array', items: {
+                type: 'object', required: ['offeringRef', 'kind', 'title', 'descrip', 'status', 'price', 'directSettlement'],
+                properties: {
+                  offeringRef: { type: 'string' }, kind: { type: 'string', enum: ['digital', 'physical'] },
+                  title: { type: 'string' }, descrip: { type: 'string' }, status: { type: 'string' },
+                  price: { type: ['object', 'null'], description: 'USDC display amount and network for digital offers; null for physical RFQs.' },
+                  directSettlement: { type: ['object', 'null'], description: 'Published x402 route and exact base-unit terms; null for physical RFQs.' },
+                },
+              },
+            } } },
+          },
+        },
+      },
+    },
     ...MICRO_OPENAPI_PATHS,
     ...Object.fromEntries(CELESTIAL_OFFERS.map(offer => [offer.path, {
       get: { tags: ['Maha Celestial Evidence'], operationId: `describe-${offer.id}`, security: [], summary: 'Free calculation contract discovery',
