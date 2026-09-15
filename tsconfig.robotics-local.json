@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "incremental": false },
+  "include": ["lib/robotics-knowledge.ts", "lib/robotics-evidence.ts", "app/knowledge/robotics/**/*.tsx", "test/robotics-local.test.ts", "scripts/robotics-simulation.ts", "scripts/robotics-map.ts"],
+  "exclude": ["node_modules"]
+}
