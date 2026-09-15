@@ -1,7 +1,8 @@
 import { parseContextPackRequest } from '../context-compiler.ts'
 import { parseContextEvaluationRequest } from '../context-pack-evaluator.ts'
 import { parseDeepContextRequest } from '../deep-context-evaluation.ts'
-import { parseBookEditionRequest, parseBookSectionRequest } from './book-request.ts'
+import { parseBookEditionRequest } from './book-request.ts'
+import { resolveBookSectionRequest } from './book-section-product.ts'
 import { parseContextBudgetLadderInput, parseEvidenceRetentionMatrixInput } from './context-product-family.ts'
 import type { X402Offer } from './offers.ts'
 
@@ -29,8 +30,11 @@ const CONTRACTS: Readonly<Record<string, (value: unknown) => unknown>> = {
   'context-budget-ladder': parseContextBudgetLadderInput,
   'evidence-retention-matrix': parseEvidenceRetentionMatrixInput,
   'governed-context-verification-pack': parseContextEvaluationRequest,
-  'book-section-the-imagined-life': parseBookSectionRequest,
-  'book-section-the-volcanic-engine': parseBookSectionRequest,
+  // The builder's own resolver: shape, machine book and the edition's section
+  // lookup. The discovery examples already load these editions when offers.ts
+  // is imported, so this adds no new data to the proxy.
+  'book-section-the-imagined-life': (value) => resolveBookSectionRequest('the-imagined-life', value),
+  'book-section-the-volcanic-engine': (value) => resolveBookSectionRequest('the-volcanic-engine', value),
   'book-edition-the-imagined-life': parseBookEditionRequest,
   'book-edition-the-volcanic-engine': parseBookEditionRequest,
 }

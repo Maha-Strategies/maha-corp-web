@@ -1,10 +1,9 @@
 /**
  * Request shapes for the machine book offers, with no book data imported.
  *
- * The receipt builders call these first, and the x402 gateway calls them
- * before settlement, so both apply one contract. Whether a well-formed
- * sectionId names a published section needs the edition itself and is still
- * decided by the builder.
+ * Section existence is not decided here: resolveBookSectionRequest in
+ * book-section-product.ts adds the edition's own section lookup to this shape
+ * check, and both the builder and the pre-settlement gateway call that.
  */
 export function parseBookSectionRequest(input: unknown): { sectionId: string } {
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Request must be a JSON object.')
