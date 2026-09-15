@@ -3,12 +3,11 @@ import test from 'node:test'
 
 import { isVendorAuthored } from '../lib/uplift/vendor-authorship.ts'
 import { execFileSync } from 'node:child_process'
-import { readFileSync, writeFileSync, rmSync } from 'node:fs'
+import { writeFileSync, rmSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { tmpdir } from 'node:os'
 
 import { fingerprintFile, intake, type IntakeSubmission } from '../lib/local-evidence-intake.ts'
-import { gradeEvidence, type InspectionAttestation } from '../lib/legacy-evidence-levels.ts'
 import reuse from '../content/evidence-batch-7/reuse-audit.json' with { type: 'json' }
 import artifacts from '../content/evidence-batch-7/acquisition-and-governance.json' with { type: 'json' }
 import report from '../content/legacy-uplift/uplift-report.json' with { type: 'json' }
