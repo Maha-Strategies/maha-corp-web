@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs'
 import { ledgerFromRows, refreshSettlementLedger, MAX_SCAN_BLOCKS, SCAN_CHUNK, type SettlementReader, type Transfer } from '../lib/x402/settlement-refresh.ts'
 import { bundledLedger, readPublicSettlementLedger, refreshStoredSettlements, validLiveSnapshot, type LiveSnapshot, type SettlementStore } from '../lib/x402/settlement-live-store.ts'
 import { buildLedger } from '../lib/x402/settlement-ledger.ts'
+import { OPERATOR_SETTLEMENT_RECEIPTS } from '../lib/x402/operator-settlement-receipts.ts'
 import { payableOffers } from '../lib/x402/offers.ts'
 import { OPERATOR_WALLETS, MAHA_PAYEE } from '../lib/x402/discovery-payment-recipe.ts'
 
@@ -45,7 +46,8 @@ test('page shows transactions, not the available-product catalogue', () => {
   const page = readFileSync('app/developers/settlement/page.tsx', 'utf8')
   assert.doesNotMatch(page, /s\.byProduct|By product/)
   assert.match(page, /record\.entries\.filter/)
-  assert.match(page, /Service \(price-inferred\)/)
+  assert.match(page, /Service \(how attributed\)/)
+  assert.match(page, /attributionNote\(entry, titles\)/)
   assert.match(page, /<SettlementAutoRefresh/)
 })
 test('deployment wires hourly authenticated production-only refresh and request-time page reads', () => {
@@ -133,4 +135,71 @@ test('a newer bundled cursor can seed an older valid persisted snapshot', async 
   assert.equal((await readPublicSettlementLedger(m.store)).source, 'bundled_fallback')
   await refreshStoredSettlements(m.store, reader(BigInt(bundledLedger.scannedToBlock) + BigInt(1)), now)
   assert.ok(BigInt(m.value()!.ledger.scannedToBlock) > BigInt(bundledLedger.scannedToBlock))
+})
+
+// --- Receipt-aware snapshots ------------------------------------------------
+
+const canaryReceipt = OPERATOR_SETTLEMENT_RECEIPTS.find((r) => r.offerId === 'audit-export-normalizer')!
+const bundledRows = () => bundledLedger.entries.map((e) => ({ ...e, amountBaseUnits: BigInt(e.amountBaseUnits), blockNumber: BigInt(e.blockNumber) }))
+const catalogue = () => payableOffers().map((o) => ({ id: o.id, title: o.id.split('-').map((w) => w[0].toUpperCase() + w.slice(1)).join(' '), amountBaseUnits: BigInt(o.amount),
+  ...(o.supersededAmounts?.length ? { supersededAmountsBaseUnits: o.supersededAmounts.map(BigInt) } : {}) }))
+const snapshotOf = (ledger: ReturnType<typeof buildLedger>): LiveSnapshot => ({ schemaVersion: 'maha-live-settlements/1.0', ledger, caughtUp: true, finalizedBlock: ledger.scannedToBlock })
+const legacySnapshot = () => snapshotOf(buildLedger({ settlements: bundledRows(), offers: catalogue(), operatorWallets: [...OPERATOR_WALLETS, MAHA_PAYEE],
+  observedAt: now.toISOString(), fromBlock: BigInt(bundledLedger.scannedFromBlock), toBlock: BigInt(bundledLedger.scannedToBlock) }))
+
+test('a 1.0 snapshot saved before receipts still validates, and the public view applies the committed receipts', async () => {
+  const saved = legacySnapshot()
+  assert.equal(saved.ledger.schemaVersion, 'maha-x402-settlement-ledger/1.0')
+  assert.ok(validLiveSnapshot(saved), 'rejecting it would stop the hourly refresh at invalid_saved_snapshot')
+  const row = (ledger: ReturnType<typeof buildLedger>) => ledger.entries.find((e) => e.transactionHash.toLowerCase() === canaryReceipt.transactionHash)!
+  assert.equal(row(saved.ledger).product?.id, 'deep-context-evaluation', 'the saved record keeps its amount-only attribution')
+  const view = await readPublicSettlementLedger({ read: async () => saved }, now)
+  assert.equal(view.source, 'scheduled_snapshot')
+  assert.equal(row(view.ledger).product?.id, 'audit-export-normalizer')
+  assert.deepEqual(row(view.ledger).attribution, { method: 'operator-receipt', amountIndicates: 'deep-context-evaluation', receiptSource: canaryReceipt.source })
+})
+
+test('refreshing from a saved 1.0 snapshot publishes a valid receipt-aware 1.1 snapshot', async () => {
+  const m = memory(legacySnapshot())
+  await refreshStoredSettlements(m.store, reader(BigInt(bundledLedger.scannedToBlock) + BigInt(10)), now)
+  const next = m.value()!
+  assert.equal(next.ledger.schemaVersion, 'maha-x402-settlement-ledger/1.1')
+  assert.ok(validLiveSnapshot(next))
+  assert.equal(next.ledger.summary.receiptAttributedSettlements, 8)
+  assert.deepEqual(next.ledger.attribution?.issues, [])
+})
+
+test('a tampered attribution, receipt or policy invalidates a 1.1 snapshot and the page falls back', async () => {
+  const m = memory()
+  await refreshStoredSettlements(m.store, reader(BigInt(bundledLedger.scannedToBlock) + BigInt(10)), now)
+  const good = m.value()!
+  const index = good.ledger.entries.findIndex((e) => e.attribution?.method === 'operator-receipt')
+  const mutations: Array<[string, (v: LiveSnapshot) => void]> = [
+    ['row product', (v) => { v.ledger.entries[index].product!.id = 'deep-context-evaluation' }],
+    ['row provenance', (v) => { v.ledger.entries[index].attribution!.method = 'amount-match' }],
+    ['recorded receipt offer', (v) => { v.ledger.attribution!.receipts[0].offerId = 'mps-autonomous-audit' }],
+    ['malformed receipt', (v) => { (v.ledger.attribution!.receipts[0] as unknown as Record<string, unknown>).activity = 'customer' }],
+    ['dropped attribution block', (v) => { delete v.ledger.attribution }],
+    ['1.0 label on a 1.1 body', (v) => { v.ledger.schemaVersion = 'maha-x402-settlement-ledger/1.0' }],
+  ]
+  for (const [label, mutate] of mutations) {
+    const bad = structuredClone(good)
+    mutate(bad)
+    assert.equal(validLiveSnapshot(bad), false, label)
+    assert.equal((await readPublicSettlementLedger({ read: async () => bad }, now)).source, 'bundled_fallback', label)
+  }
+})
+
+test('receipts recorded in a saved snapshot never reach the public page; the committed receipts do', async () => {
+  // A snapshot rebuilt consistently around a forged receipt is internally
+  // valid, so validation alone cannot catch it. The read path reprojects rows
+  // with the committed receipts, so the forgery changes nothing visible.
+  const forged = snapshotOf(buildLedger({ settlements: bundledRows(), offers: catalogue(), operatorWallets: [...OPERATOR_WALLETS, MAHA_PAYEE],
+    observedAt: now.toISOString(), fromBlock: BigInt(bundledLedger.scannedFromBlock), toBlock: BigInt(bundledLedger.scannedToBlock),
+    operatorReceipts: [{ ...canaryReceipt, offerId: 'mps-autonomous-audit', amountBaseUnits: '10000' }] }))
+  assert.ok(validLiveSnapshot(forged))
+  const view = await readPublicSettlementLedger({ read: async () => forged }, now)
+  const row = view.ledger.entries.find((e) => e.transactionHash.toLowerCase() === canaryReceipt.transactionHash)!
+  assert.equal(row.product?.id, 'audit-export-normalizer')
+  assert.deepEqual(view.ledger.attribution?.receipts.map((r) => r.offerId).sort(), OPERATOR_SETTLEMENT_RECEIPTS.map((r) => r.offerId).sort())
 })
