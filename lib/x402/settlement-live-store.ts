@@ -5,6 +5,7 @@ import seed from '../../content/x402/settlement-ledger.json' with { type: 'json'
 import { buildLedger, type SettlementLedger } from './settlement-ledger.ts'
 import { OPERATOR_WALLETS, MAHA_PAYEE } from './discovery-payment-recipe.ts'
 import { baseSettlementReader, ledgerFromRows, refreshSettlementLedger, type SettlementReader } from './settlement-refresh.ts'
+import { isOperatorSettlementReceipt, type OperatorSettlementReceipt } from './operator-settlement-receipts.ts'
 
 export type LiveSnapshot = { schemaVersion: 'maha-live-settlements/1.0'; ledger: SettlementLedger; caughtUp: boolean; finalizedBlock: string }
 export const SNAPSHOT_KEY = 'x402:settlement-ledger:live:v1'
@@ -30,10 +31,21 @@ export function settlementStore(): SettlementStore {
   }
 }
 
+/**
+ * A saved snapshot is untrusted until rebuilding it from its own rows, its own
+ * scan-time catalogue and its own recorded receipts reproduces it exactly.
+ *
+ * Both ledger versions validate. A 1.0 snapshot, saved before receipts
+ * existed, rebuilds by amount alone; rejecting it would stop the hourly refresh
+ * at invalid_saved_snapshot. A 1.1 snapshot rebuilds with the receipts it
+ * records. Neither version's recorded receipts reach the public page: the read
+ * path reprojects the rows with the committed receipts (currentCatalogueLedger).
+ */
 export function validLiveSnapshot(value: LiveSnapshot | null): value is LiveSnapshot {
   try {
+  const version = value?.ledger?.schemaVersion
   if (!(value && value.schemaVersion === 'maha-live-settlements/1.0' && typeof value.caughtUp === 'boolean'
-    && /^\d+$/.test(value.finalizedBlock) && value.ledger?.schemaVersion === 'maha-x402-settlement-ledger/1.0'
+    && /^\d+$/.test(value.finalizedBlock) && (version === 'maha-x402-settlement-ledger/1.0' || version === 'maha-x402-settlement-ledger/1.1')
     && Array.isArray(value.ledger.entries) && value.ledger.summary && /^\d+$/.test(value.ledger.scannedToBlock)
     && /^\d+$/.test(value.ledger.scannedFromBlock)
     && BigInt(value.ledger.scannedToBlock) >= BigInt(value.ledger.scannedFromBlock)
@@ -64,11 +76,20 @@ export function validLiveSnapshot(value: LiveSnapshot | null): value is LiveSnap
     ...(offer.supersededPricesUsdc ? { supersededAmountsBaseUnits: offer.supersededPricesUsdc.map(units) } : {}),
   }))
   if (new Set(offers.map(offer => offer.id)).size !== offers.length) return false
+  let operatorReceipts: OperatorSettlementReceipt[] | undefined
+  if (version === 'maha-x402-settlement-ledger/1.1') {
+    const receipts = value.ledger.attribution?.receipts
+    if (!Array.isArray(receipts) || !receipts.every(isOperatorSettlementReceipt)) return false
+    operatorReceipts = receipts
+  } else if (value.ledger.attribution !== undefined) return false
   const rebuilt = buildLedger({ settlements: rows, offers, operatorWallets: [...OPERATOR_WALLETS, MAHA_PAYEE],
-    fromBlock: BigInt(value.ledger.scannedFromBlock), toBlock: BigInt(value.ledger.scannedToBlock), observedAt: value.ledger.observedAt })
-  return rebuilt.contentDigest === value.ledger.contentDigest
+    fromBlock: BigInt(value.ledger.scannedFromBlock), toBlock: BigInt(value.ledger.scannedToBlock), observedAt: value.ledger.observedAt,
+    ...(version === 'maha-x402-settlement-ledger/1.1' ? { operatorReceipts } : {}) })
+  return rebuilt.schemaVersion === version
+    && rebuilt.contentDigest === value.ledger.contentDigest
     && JSON.stringify(rebuilt.summary) === JSON.stringify(value.ledger.summary)
     && JSON.stringify(rebuilt.entries) === JSON.stringify(value.ledger.entries)
+    && JSON.stringify(rebuilt.attribution) === JSON.stringify(value.ledger.attribution)
   } catch { return false }
 }
 

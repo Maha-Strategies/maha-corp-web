@@ -37,3 +37,44 @@ Only known operator wallets are excluded from external figures. A wallet is not
 a unique customer; price-matched transfers do not prove discovery, an exact
 endpoint, payload delivery, or acceptance. Unknown operator addresses must be
 classified before treating them as demand.
+
+## Operator receipts (ledger schema 1.1)
+
+A Transfer log carries payer, amount and recipient, so the ledger names a
+product by amount. That misattributed eight of our own canary payments made on
+2026-09-09 while offers shared prices: three celestial launches and
+`audit-export-normalizer` were credited to Deep Context Evaluation, the
+evidence matrix and the MPS audit, and four 5000-unit micro payments were not
+counted.
+
+`lib/x402/operator-settlement-receipts.ts` records those eight purchases from
+the canary evidence files (runs 34312284707 and 34325055311). Each receipt also
+names the catalogue commit where the offer published that price; a test reads
+that commit. Both builders (the hourly refresh and the manual generator) apply
+them.
+
+- A receipt binds only when there is exactly one receipt for the transaction,
+  exactly one Transfer log in it, an operator payer, an offer in the catalogue
+  and the settled amount. Otherwise the row is **unattributed** and the reason
+  is recorded (`receipt_duplicated`, `receipt_for_external_payer`,
+  `receipt_multiple_transfer_logs`, `receipt_unknown_offer`,
+  `receipt_amount_mismatch`). Conflicting evidence is never resolved by
+  choosing the amount match instead.
+- Every 1.1 row carries `attribution`: the method (`amount-match`,
+  `operator-receipt`, `unattributed`), what the amount alone indicates, and the
+  receipt source. The page shows "Our test purchase · from canary receipt ·
+  amount alone: …", so the correction stays visible.
+- Receipts never change `payerRole`. All eight remain operator test payments,
+  excluded from external settlements, wallets, repeat and cross-product figures
+  and external value; those figures are identical with and without receipts.
+- `summary.receiptAttributedSettlements` counts receipt rows. The four
+  5000-unit payments now count as operator settlements (+4), and Deep Context
+  Evaluation, the matrix and the MPS audit lose 2, 1 and 1 operator rows.
+
+Snapshots: a 1.1 ledger records the receipts it was built with, and validation
+rebuilds it from those. A 1.0 snapshot saved before receipts existed still
+validates by amount alone, so the hourly refresh does not stop at
+`invalid_saved_snapshot`; its next run publishes 1.1. The public page always
+reprojects saved rows with the committed receipts, so receipts stored in Redis
+cannot change what readers see. The bundled fallback
+`content/x402/settlement-ledger.json` is left as its original 1.0 observation.

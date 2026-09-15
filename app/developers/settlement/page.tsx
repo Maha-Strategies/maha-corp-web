@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { MAHA_SITE_URL } from '@/lib/entity'
 import { connection } from 'next/server'
 import { readPublicSettlementLedger } from '@/lib/x402/settlement-live-store'
+import type { LedgerEntry } from '@/lib/x402/settlement-ledger'
 import { SettlementAutoRefresh } from './auto-refresh'
 
 const title = 'Autonomous Settlement & Verification Ledger | Maha Strategies'
@@ -14,6 +15,22 @@ export const metadata: Metadata = {
   description,
   alternates: { canonical: '/developers/settlement' },
   openGraph: { type: 'website', url: `${MAHA_SITE_URL}/developers/settlement`, title, description },
+}
+
+/**
+ * The provenance under each service name. A receipt row also says what the
+ * amount alone would have indicated, so the correction is visible rather than
+ * silently replacing the old attribution.
+ */
+function attributionNote(entry: LedgerEntry, titles: Map<string, string>): string {
+  const a = entry.attribution
+  if (!a) return entry.product ? 'Inferred from price' : 'No unique price match'
+  if (a.method === 'operator-receipt') {
+    const byAmount = a.amountAmbiguous ? 'more than one product' : a.amountIndicates ? titles.get(a.amountIndicates) ?? a.amountIndicates : 'no product'
+    return `Our test purchase · from canary receipt · amount alone: ${byAmount}`
+  }
+  if (a.issue) return 'Unattributed · receipt evidence did not bind'
+  return a.method === 'amount-match' ? 'Inferred from price' : 'No unique price match'
 }
 
 /**
@@ -32,10 +49,12 @@ export default async function SettlementLedgerPage() {
   const snapshot = await readPublicSettlementLedger()
   const record = snapshot.ledger
   const s = record.summary
+  // Names for the 'amount alone' note only; the catalogue itself is not rendered.
+  const titles = new Map(record.summary.byProduct.map((p) => [p.id, p.title]))
   const observed = new Date(record.observedAt)
   const cards: { label: string; value: string; note: string }[] = [
     { label: 'Settled protocol', value: record.protocol, note: record.network },
-    { label: 'Price-matched transfers', value: `${s.totalSettlements}`, note: `${s.externalSettlements} external · ${s.canarySettlements} operator canary` },
+    { label: 'Counted transfers', value: `${s.totalSettlements}`, note: `${s.externalSettlements} external · ${s.canarySettlements} operator test${s.receiptAttributedSettlements ? ` (${s.receiptAttributedSettlements} from test receipts)` : ''}` },
     { label: 'External wallets', value: `${s.externalWallets}`, note: `${s.externalValueUsdc} USDC settled externally` },
     {
       label: 'Returning external wallets',
@@ -52,7 +71,7 @@ export default async function SettlementLedgerPage() {
       <p className="evidence-kicker">Base Mainnet · HTTP 402 v2</p>
       <h1 className="evidence-section-title mt-3 text-3xl">Autonomous Settlement &amp; Verification Ledger</h1>
       <p className="mt-4 max-w-3xl text-[var(--text-secondary)]">
-        The rows below show USDC transfers into the Maha payee; summary figures count transfers matching published prices. The rows are
+        The rows below show USDC transfers into the Maha payee; summary figures count transfers matching published prices, plus our own test payments identified by their canary receipts. The rows are
         the record; the figures above them are computed from the rows, so nothing here can be asserted without also
         being checkable.
       </p>
@@ -83,7 +102,7 @@ export default async function SettlementLedgerPage() {
         <table className="mt-4 w-full text-sm">
           <thead>
             <tr className="border-b border-[var(--border-default)] text-left font-mono text-xs uppercase tracking-[0.18em]">
-              <th className="pb-2">Timestamp (UTC)</th><th className="pb-2">Service (price-inferred)</th>
+              <th className="pb-2">Timestamp (UTC)</th><th className="pb-2">Service (how attributed)</th>
               <th className="pb-2">Payer wallet</th><th className="pb-2">Amount</th><th className="pb-2">Proof</th>
             </tr>
           </thead>
@@ -91,7 +110,12 @@ export default async function SettlementLedgerPage() {
             {record.entries.filter((e) => e.product !== null || e.amountUsdc !== '0').map((entry) => (
               <tr key={`${entry.transactionHash}:${entry.logIndex ?? 'legacy'}`} className="border-b border-[var(--border-subtle)]">
                 <td className="py-2 font-mono text-xs">{entry.timestampUtc?.slice(0, 19).replace('T', ' ') ?? '—'}</td>
-                <td className="py-2">{entry.product?.title ?? 'Unknown — amount does not uniquely identify a product'}</td>
+                <td className="py-2">
+                  {entry.product?.title ?? 'Unknown — amount does not uniquely identify a product'}
+                  <span className="mt-0.5 block text-[10px] uppercase tracking-wider text-[var(--text-tertiary)]" data-attribution={entry.attribution?.method ?? 'amount-match'}>
+                    {attributionNote(entry, titles)}
+                  </span>
+                </td>
                 <td className="py-2">
                   <span className="font-mono text-xs">{entry.payerDisplay}</span>
                   <span className="ml-2 rounded px-2 py-0.5 text-[10px] uppercase tracking-wider border border-[var(--border-default)]">
