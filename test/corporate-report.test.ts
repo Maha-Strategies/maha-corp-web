@@ -54,6 +54,15 @@ test('the same evidenced event produces the same report identity', () => {
   assert.equal(first.inputSha256, second.inputSha256)
 })
 
+test('agreeing samples do not authorize house applications over an uncertain interval', () => {
+  const report = buildCorporateReport({ ...BASE_INPUT, timeConfidence: 'recorded-minute', uncertaintyMinutes: 1 })
+  assert.equal(report.timeSensitivity.intervalStabilityProven, false)
+  assert.equal(report.timeSensitivity.organizationHouseApplicationsAllowed, false)
+  assert.deepEqual(report.organizationFramework.houses, [])
+  assert.equal(report.interpretation.status, 'withheld')
+  assert.equal(report.interpretation.refusal?.stage, 'time-uncertainty')
+})
+
 test('house applications fail closed when a date-only event changes geometry', () => {
   const report = buildCorporateReport({
     ...BASE_INPUT,

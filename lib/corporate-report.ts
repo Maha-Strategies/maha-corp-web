@@ -15,7 +15,7 @@ import { computeNatalChart, type NatalChart, type NatalHouse } from './natal-cha
 import { computePanchanga, type Panchanga } from './panchanga.ts'
 import { ZonedTimeError, zonedWallTimeToUtc, type CivilTimeFold } from './zoned-time.ts'
 
-export const CORPORATE_REPORT_VERSION = 'corporate-mundane-report/0.1' as const
+export const CORPORATE_REPORT_VERSION = 'corporate-mundane-report/0.2' as const
 export const CORPORATE_LOCATION_POLICY_VERSION = 'corporate-event-location-policy/0.1' as const
 export const CORPORATE_SIGNIFICATOR_POLICY_VERSION = 'maha-jyotisha-corporate-foundation/0.1' as const
 
@@ -160,7 +160,8 @@ export interface CorporateReport {
   panchanga: Panchanga
   formationChart: NatalChart
   timeSensitivity: {
-    status: 'point-in-time' | 'stable-across-declared-window' | 'unstable-across-declared-window'
+    status: 'point-in-time' | 'sampled-stable-interval-unproven' | 'unstable-across-declared-window'
+    intervalStabilityProven: false
     ascendantSignStable: boolean
     wholeSignHousesStable: boolean
     panchangaLimbsChanged: string[]
@@ -368,16 +369,20 @@ export function buildCorporateReport(input: CorporateReportInput): CorporateRepo
     ...changedPanchangaLimbs(startPanchanga, panchanga),
     ...changedPanchangaLimbs(panchanga, endPanchanga),
   ])]
-  const allowed = ascendantSignStable && wholeSignHousesStable
+  const samplesAgree = ascendantSignStable && wholeSignHousesStable
+  const allowed = uncertaintyMinutes === 0
   const timeStatus = uncertaintyMinutes === 0
     ? 'point-in-time'
-    : allowed ? 'stable-across-declared-window' : 'unstable-across-declared-window'
+    : samplesAgree ? 'sampled-stable-interval-unproven' : 'unstable-across-declared-window'
 
   const factBundle = buildLocalFactBundle({ instant: resolved.instant, latitudeDegrees: latitude, longitudeDegrees: longitude, elevationMeters })
   const tradition = getAstrologyTradition('vedic-jyotisha')
   let interpretation: CorporateInterpretationResult
   const legalFormationEvent = input.eventType === 'filing-accepted' || input.eventType === 'certificate-issued'
   try {
+    if (uncertaintyMinutes > 0) {
+      throw new CompilerRefusal('time-uncertainty', 'Interpretation requires a stable condition over the declared time interval. Three samples do not establish that stability.')
+    }
     if (!legalFormationEvent) {
       throw new CompilerRefusal(
         'event-scope',
@@ -450,13 +455,16 @@ export function buildCorporateReport(input: CorporateReportInput): CorporateRepo
     formationChart: chart,
     timeSensitivity: {
       status: timeStatus,
+      intervalStabilityProven: false,
       ascendantSignStable,
       wholeSignHousesStable,
       panchangaLimbsChanged,
       organizationHouseApplicationsAllowed: allowed,
       explanation: allowed
-        ? 'The sampled endpoints preserve the sidereal ascendant sign and every whole-sign placement across the declared time window.'
-        : 'The declared time window changes the ascendant or a whole-sign placement. Organization-house applications are withheld; the representative chart remains visible only as a calculation at the entered time.',
+        ? 'The caller declared an exact event time. House geometry describes that instant; accuracy of the event evidence is a separate question.'
+        : samplesAgree
+          ? 'The three sampled charts agree, but stability throughout the interval is unproven. Organization-house applications are withheld.'
+          : 'The sampled charts differ in ascendant or whole-sign placement. Organization-house applications are withheld; the representative chart remains a calculation at the entered time.',
     },
     organizationFramework: {
       version: CORPORATE_SIGNIFICATOR_POLICY_VERSION,
