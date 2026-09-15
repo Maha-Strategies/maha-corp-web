@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Maha Context Pack request",
-  "description": "Compile task-specific, source-linked context. Source text and compiled context are processed transiently and not retained in the service ledger. Accepted by POST /api/context-packs and POST /api/v1/compress. Request limit: 450,000 bytes for x402 callers and standard API keys, 1,050,000 bytes for enterprise API keys. An x402 payment settles before the body is validated, so validate against this schema before paying.",
+  "description": "Compile task-specific, source-linked context. Source text and compiled context are processed transiently and not retained in the service ledger. Accepted by POST /api/context-packs and POST /api/v1/compress. Request limit: 450,000 bytes for x402 callers and standard API keys, 1,050,000 bytes for enterprise API keys. An x402 request is validated against this contract before its payment settles, so a rejected body is not charged.",
   "type": "object",
   "required": [
     "clientRequestId",

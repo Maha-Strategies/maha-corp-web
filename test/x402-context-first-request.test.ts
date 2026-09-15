@@ -12,6 +12,7 @@ import { OFFER_EXTENSION } from '../lib/x402/discovery.ts'
 import { BASE_USDC, MAHA_PAYEE } from '../lib/x402/discovery-payment-recipe.ts'
 import { resolveX402 } from '../lib/x402/gateway.ts'
 import { buildOfferSelectionDocument } from '../lib/x402/offer-selection.ts'
+import { hasPreSettlementBodyContract } from '../lib/x402/pre-settlement-body.ts'
 import { CONTEXT_COMPRESSION_OFFER, DEEP_CONTEXT_EVALUATION_OFFER, type X402Offer } from '../lib/x402/offers.ts'
 import { validate } from './helpers/json-schema.ts'
 
@@ -198,7 +199,8 @@ test('the full declaration is served free, outside the payment proxy', () => {
   const route = read('app/api/discovery/x402-offers/[offerId]/route.ts')
   assert.match(route, /export async function GET/)
   const proxy = read('proxy.ts')
-  assert.match(proxy, /if \(!pathname\.startsWith\('\/api\/v1\/'\)\) return NextResponse\.next\(\)/)
+  // Outside /api/v1 the proxy only removes proxy-asserted headers; it never prices.
+  assert.match(proxy, /if \(!pathname\.startsWith\('\/api\/v1\/'\)\) return forward\(request\)/)
 })
 
 // ---------------------------------------------------------------------------
@@ -238,7 +240,7 @@ test('the 402 quotes the configured recipient, so declaration and configuration 
 // 4. Malformed input: what an unpaid caller learns, and what a paid one does
 // ---------------------------------------------------------------------------
 
-test('an unpaid malformed body receives the same 402 as a valid one: nothing is validated before payment', async () => {
+test('an unpaid malformed body receives the same 402 as a valid one: an unsigned body is never read', async () => {
   for (const { offer } of CASES) {
     const valid = await unpaidChallenge(offer, JSON.stringify(offer.discovery.input))
     for (const malformed of ['', '{', '{"not":"a request"}', JSON.stringify({ ...offer.discovery.input, tokenBudget: 1 })]) {
@@ -248,18 +250,18 @@ test('an unpaid malformed body receives the same 402 as a valid one: nothing is 
   }
 })
 
-test('neither context offer claims its body before settlement, so a malformed paid request is charged', () => {
-  // Documenting the current ordering, not endorsing it. Offers with
-  // requiresIdempotency validate the body before settlement
-  // (lib/x402/admission-body.ts), and micro and celestial offers reserve and
-  // parse first. These two do neither, and their routes validate afterwards.
-  for (const { offer } of CASES) assert.equal(offer.requiresIdempotency, false, offer.id)
-  const gateway = read('lib/x402/gateway.ts')
-  assert.match(gateway, /if \(offer\?\.requiresIdempotency\) \{/)
-  assert.match(gateway, /const reserveFirst = isMicroProduct\(resource\.offerId\) \|\| \['celestial-position-snapshot'/)
-  for (const route of ['app/api/v1/compress/route.ts', 'app/api/v1/compress/evaluate/route.ts']) {
-    assert.match(read(route), /code: 'invalid_request'/, `${route} rejects after admission`)
+test('both context offers validate a signed body before settlement, so a malformed paid request is not charged', () => {
+  // Behaviour, with zero verify/settle/claim/slot calls, is proven in
+  // test/x402-pre-settlement-body.test.ts. This pins the wiring.
+  for (const { offer } of CASES) {
+    assert.equal(offer.requiresIdempotency, false, offer.id)
+    assert.equal(hasPreSettlementBodyContract(offer.id), true, offer.id)
   }
+  const gateway = read('lib/x402/gateway.ts')
+  const check = gateway.indexOf('await validatePreSettlementBody(request, offer)')
+  assert.ok(check > 0, 'the gateway runs the body contract')
+  assert.ok(check < gateway.indexOf('const reserveFirst ='), 'before capacity is reserved')
+  assert.ok(check < gateway.indexOf('accepted = await acceptPayment('), 'before verification and settlement')
 })
 
 test('validation messages name the field and limit, and disclose nothing private', () => {
@@ -288,12 +290,12 @@ test('validation messages name the field and limit, and disclose nothing private
   }
 })
 
-test('the Bazaar recipe page warns about validation after settlement and states catalogue prices', () => {
+test('the Bazaar recipe page says a rejected body is not charged and states catalogue prices', () => {
   const page = read('app/recipes/bazaar-discovery-to-payment/page.tsx')
   const usd = (offer: X402Offer) => `$${(Number(offer.amount) / 1e6).toString()}`
   assert.match(page, new RegExp(`pays \\${usd(CONTEXT_COMPRESSION_OFFER)}`), 'Context Compiler price')
   assert.match(page, new RegExp(`Deep Context Evaluation costs \\${usd(DEEP_CONTEXT_EVALUATION_OFFER)}`), 'Deep Context Evaluation price')
-  assert.match(page, /the payment settles before the request body is validated/)
+  assert.match(page, /the request body is validated before the payment settles/)
   for (const { offer } of CASES) assert.ok(page.includes(`/api/discovery/x402-offers/${offer.id}`), `links the free ${offer.id} declaration`)
   // The heading counts the gates the page actually lists.
   const gates = [...page.matchAll(/^  \['(\d)', '/gm)].map((match) => Number(match[1]))

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Maha Context Pack evaluation request",
-  "description": "Evaluates whether caller-declared exact evidence spans survive deterministic Context Pack compilation. Source, evidence and compiled context text are processed transiently and not retained in the ledger. Retention is exact span matching only: it is not factual accuracy, answer quality or verification. Accepted by POST /api/context-pack-evaluations (128,000 bytes) and by the Deep Context Evaluation x402 offer at POST /api/v1/compress/evaluate (1,050,000 bytes). An x402 payment settles before the body is validated, so validate against this schema before paying.",
+  "description": "Evaluates whether caller-declared exact evidence spans survive deterministic Context Pack compilation. Source, evidence and compiled context text are processed transiently and not retained in the ledger. Retention is exact span matching only: it is not factual accuracy, answer quality or verification. Accepted by POST /api/context-pack-evaluations (128,000 bytes) and by the Deep Context Evaluation x402 offer at POST /api/v1/compress/evaluate (1,050,000 bytes). An x402 request is validated against this contract before its payment settles, so a rejected body is not charged.",
   "type": "object",
   "required": [
     "clientRequestId",

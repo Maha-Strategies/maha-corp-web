@@ -5,6 +5,7 @@ import { priceFor, requirementFor, x402Config, x402Enabled, type X402Config } fr
 import { resolveX402 } from '../lib/x402/gateway.ts'
 import type { PaymentFacilitator } from '../lib/x402/protocol.ts'
 import { discoveryExtensionsFor, resourceInfoFor } from '../lib/x402/discovery.ts'
+import { CONTEXT_COMPRESSION_DISCOVERY, DEEP_CONTEXT_EVALUATION_DISCOVERY } from '../lib/x402/offer-schemas.ts'
 
 // Two real catalog offers, one nested under the other's path. That nesting is
 // the point: it is the shape that prefix matching priced wrongly.
@@ -24,8 +25,21 @@ const ENV = {
 
 const config = () => x402Config(ENV) as X402Config
 
-const request = (path: string, headers: Record<string, string> = {}, method = 'POST') =>
-  new Request(`https://www.mahastrategies.com${path}`, { headers, method })
+// A paid request carries the body its route accepts, because every priced
+// route now validates that body before settlement.
+const BODIES: Record<string, unknown> = {
+  '/api/v1/compress': CONTEXT_COMPRESSION_DISCOVERY.input,
+  '/api/v1/compress/evaluate': DEEP_CONTEXT_EVALUATION_DISCOVERY.input,
+}
+
+const request = (path: string, headers: Record<string, string> = {}, method = 'POST') => {
+  const body = method === 'POST' ? BODIES[path] : undefined
+  return new Request(`https://www.mahastrategies.com${path}`, {
+    method,
+    headers: body ? { 'content-type': 'application/json', ...headers } : headers,
+    ...(body ? { body: JSON.stringify(body) } : {}),
+  })
+}
 
 const encode = (value: unknown) => Buffer.from(JSON.stringify(value), 'utf8').toString('base64')
 /**

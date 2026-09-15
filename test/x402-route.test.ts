@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import test, { afterEach, beforeEach } from 'node:test'
 import { discoveryExtensionsFor, resourceInfoFor } from '../lib/x402/discovery.ts'
+import { CONTEXT_COMPRESSION_DISCOVERY } from '../lib/x402/offer-schemas.ts'
 
 // End to end with every outbound dependency stubbed at the network boundary
 // rather than injected: the facilitator's HTTP shape, the Supabase RPC that
@@ -9,9 +10,9 @@ import { discoveryExtensionsFor, resourceInfoFor } from '../lib/x402/discovery.t
 // only breaks once the pieces are wired together -- a response field read under
 // the wrong name, a slot token acquired and then dropped, a flag read too early.
 //
-// proxy.ts itself cannot be imported here: it resolves `next/server` and `@/`
-// aliases that only exist inside the Next build. Its whole contribution beyond
-// routing is paidRequestHeaders(), which is asserted directly.
+// proxy.ts is not imported here; its paid forwarding, header stripping and
+// pre-settlement refusals are executed in test/proxy-asserted-headers.test.ts
+// through the alias hooks in test/helpers/next-aliases.ts.
 
 const ORIGINAL_FETCH = globalThis.fetch
 const ORIGINAL_ENV = { ...process.env }
@@ -105,8 +106,16 @@ const SIGNATURE = async () => encode({
   extensions: await discoveryExtensionsFor(priced, resourceUrl),
 })
 
+// The body the compression route accepts. Priced routes validate it before
+// settlement, so a paid request without it is refused and never settled.
+const COMPRESSION_BODY = JSON.stringify(CONTEXT_COMPRESSION_DISCOVERY.input)
+
 function post(path: string, headers: Record<string, string> = {}) {
-  return new Request(`https://www.mahastrategies.com${path}`, { method: 'POST', headers })
+  return new Request(`https://www.mahastrategies.com${path}`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', ...headers },
+    body: COMPRESSION_BODY,
+  })
 }
 
 test('with the flag off nothing is read, called, or emitted', async () => {

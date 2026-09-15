@@ -9,6 +9,7 @@ import {
 } from '../open-book-editions.ts'
 import type { JsonSchema, OfferDiscoveryContract } from './offer-schemas.ts'
 import type { MachineBookId } from './book-section-product.ts'
+import { parseBookEditionRequest } from './book-request.ts'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 const SHA = '^sha256:[a-f0-9]{64}$'
@@ -19,11 +20,6 @@ function digest(value: string): string {
 
 function countWords(value: string): number {
   return value.trim() ? value.trim().split(/\s+/).length : 0
-}
-
-function validateInput(input: unknown): void {
-  if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Request must be an empty JSON object.')
-  if (Object.keys(input as Record<string, unknown>).length !== 0) throw new Error('This edition has no request parameters; send {}.')
 }
 
 function sectionManifest(book: OpenBookEdition) {
@@ -42,7 +38,7 @@ function sectionManifest(book: OpenBookEdition) {
 }
 
 export function buildBookEditionReceipt(bookId: MachineBookId, input: unknown) {
-  validateInput(input)
+  parseBookEditionRequest(input)
   const book = getOpenBookEdition(bookId)
   if (!book) throw new Error('Book is not available.')
   const content = readOpenBookManuscript(book)
