@@ -83,6 +83,43 @@ const underfunded: PaymentFacilitator = {
 const ledger = (result: string) => ({ rpc: async () => ({ data: result, error: null }) })
 const acquire = async () => ({ admitted: true, active: 1, token: 'slot-token' })
 
+test('a compiler price step-up rechallenges an old signature without verifying or settling it', async () => {
+  const oldSignature = await signatureFor('/api/v1/compress')
+  const raised = config()
+  raised.resources = raised.resources.map((entry) => entry.path === '/api/v1/compress'
+    ? { ...entry, amount: '2000' } : entry)
+  const calls: string[] = []
+  const forbidden: PaymentFacilitator = {
+    verify: async () => { calls.push('verify'); throw new Error('must not verify stale terms') },
+    settle: async () => { calls.push('settle'); throw new Error('must not settle stale terms') },
+  }
+  const outcome = await resolveX402(request('/api/v1/compress', { 'PAYMENT-SIGNATURE': oldSignature }), {
+    config: raised, facilitator: forbidden, ledger: ledger('claimed'), acquire,
+  })
+  assert.equal(outcome.kind, 'challenge')
+  assert.deepEqual(calls, [])
+  if (outcome.kind !== 'challenge') return
+  const next = JSON.parse(Buffer.from(outcome.header, 'base64').toString('utf8'))
+  assert.equal(next.accepts[0].amount, '2000')
+  assert.equal(next.extensions['maha-offer'].amount, '2000')
+  // A buyer must explicitly sign the replacement challenge. No automatic
+  // payment retry or signature reuse is performed by the server.
+  const payment = encode({
+    x402Version: 2, resource: next.resource, accepted: next.accepts[0],
+    payload: { signature: '0x' }, extensions: next.extensions,
+  })
+  const seen: string[] = []
+  const paid = await resolveX402(request('/api/v1/compress', { 'PAYMENT-SIGNATURE': payment }), {
+    config: raised, facilitator: facilitator(seen), ledger: ledger('claimed'), acquire,
+    confirmOnChain: async () => ({ status: 'confirmed' }),
+  })
+  assert.equal(paid.kind, 'paid')
+  if (paid.kind === 'paid') assert.equal(paid.amountPaid, '2000')
+  assert.deepEqual(seen, ['2000'])
+  assert.equal(priceFor('POST', '/api/v1/compress/evaluate', raised)?.amount, '10000')
+  assert.equal(config().resources[0].amount, '1000', 'production catalog remains unchanged')
+})
+
 test('the flag alone decides whether any of this is live', () => {
   assert.equal(x402Enabled({ X402_ENABLED: 'true' }), true)
   for (const value of ['false', 'TRUE', '1', 'yes', '', undefined]) {

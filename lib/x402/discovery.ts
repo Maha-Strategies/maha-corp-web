@@ -139,10 +139,10 @@ export async function discoveryExtensionsFor(
   const offer = offerById(resource.offerId)
   if (!offer) return undefined
 
-  // Keyed by offer and by resource URL. The same offer is served from Preview
-  // and Production under different origins, and the canonical resource URL is
-  // covered by the declaration digest, so one cache entry cannot serve both.
-  const cacheKey = `${offer.id} ${resourceUrl}`
+  // Payment terms are part of the digest. A warm process must not reuse a
+  // declaration after a price, recipient, asset or network change. A request
+  // without requirements must never receive a cached complete declaration.
+  const cacheKey = JSON.stringify([offer.id, resourceUrl, resource.amount, requirement ?? null])
   const cached = declarationCache.get(cacheKey)
   if (cached) return cached
 
@@ -190,7 +190,7 @@ export async function discoveryExtensionsFor(
     offerId: offer.id,
     method: offer.method,
     canonicalResource: resourceUrl,
-    amount: offer.amount,
+    amount: requirement?.amount ?? resource.amount,
     asset: 'USDC',
     assetDecimals: USDC_DECIMALS,
     network: requirement?.network ?? BASE_MAINNET_CAIP2,

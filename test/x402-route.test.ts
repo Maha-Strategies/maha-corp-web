@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import test, { afterEach, beforeEach } from 'node:test'
 import { discoveryExtensionsFor, resourceInfoFor } from '../lib/x402/discovery.ts'
 import { CONTEXT_COMPRESSION_DISCOVERY } from '../lib/x402/offer-schemas.ts'
+import type { PaymentRequirement } from '../lib/x402/protocol.ts'
 
 // End to end with every outbound dependency stubbed at the network boundary
 // rather than injected: the facilitator's HTTP shape, the Supabase RPC that
@@ -95,15 +96,16 @@ const gateway = () => import('../lib/x402/gateway.ts')
 const encode = (value: unknown) => Buffer.from(JSON.stringify(value), 'utf8').toString('base64')
 const priced = { offerId: 'context-compression', method: 'POST' as const, path: '/api/v1/compress', amount: '1000', description: 'One compression', concurrencyCap: 8 }
 const resourceUrl = 'https://www.mahastrategies.com/api/v1/compress'
+const accepted: PaymentRequirement = {
+  scheme: 'exact', network: 'eip155:8453', amount: '1000', payTo: '0xSettlement',
+  maxTimeoutSeconds: 60, asset: '0xUSDC', extra: { name: 'USD Coin', version: '2' },
+}
 const SIGNATURE = async () => encode({
   x402Version: 2,
   resource: resourceInfoFor(priced, resourceUrl),
-  accepted: {
-    scheme: 'exact', network: 'eip155:8453', amount: '1000', payTo: '0xSettlement',
-    maxTimeoutSeconds: 60, asset: '0xUSDC', extra: { name: 'USD Coin', version: '2' },
-  },
+  accepted,
   payload: { signature: '0xsigned' },
-  extensions: await discoveryExtensionsFor(priced, resourceUrl),
+  extensions: await discoveryExtensionsFor(priced, resourceUrl, accepted),
 })
 
 // The body the compression route accepts. Priced routes validate it before
