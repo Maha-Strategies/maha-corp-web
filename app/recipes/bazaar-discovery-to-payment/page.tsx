@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 const flow = [
   ['1', 'Search Bazaar', 'Use semantic search filtered on Base Mainnet, the exact USDC contract address 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913, exact-payment, and maxUsdPrice=0.005. The asset filter takes a contract address: a bare symbol such as "usdc" matches nothing and returns an empty page rather than an error. If the asynchronous semantic index has not refreshed, use Bazaar merchant discovery as the exact indexed fallback.'],
-  ['2', 'Inspect the contract', 'Read the discovered input example plus input and output JSON Schemas. Refuse missing or malformed discovery metadata. To decide which offer to call in the first place, read the machine-readable Maha offer selection guide at /.well-known/maha/offer-selection.json.'],
+  ['2', 'Inspect the contract', 'Read the discovered input example plus input and output JSON Schemas, and validate the exact body you will send against the complete schema at /api/discovery/x402-offers/context-compression, which is free. Refuse missing or malformed discovery metadata. To decide which offer to call in the first place, read the machine-readable Maha offer selection guide at /.well-known/maha/offer-selection.json.'],
   ['3', 'Apply policy before signing', 'Require Base Mainnet, native Base USDC, the published Maha payee, exactly 1,000 base units, and a hard ceiling of 5,000 base units.'],
   ['4', 'Pay once', 'Load either a plain Viem account or a named CDP Server Wallet only after discovery and policy checks pass. Re-check the live 402 terms before producing a signature.'],
   ['5', 'Verify settlement', 'Require PAYMENT-RESPONSE success, a Base transaction hash, the expected network, and the signing wallet as payer.'],
@@ -45,7 +45,7 @@ export default function BazaarDiscoveryToPaymentRecipePage() {
     headline: title,
     description,
     datePublished: '2026-08-08',
-    dateModified: '2026-08-08',
+    dateModified: '2026-09-15',
     url: `${SITE_URL}${PAGE_PATH}`,
     author: { '@type': 'Organization', name: 'Maha Strategies LLC', url: SITE_URL },
     about: [
@@ -68,7 +68,7 @@ export default function BazaarDiscoveryToPaymentRecipePage() {
 
         <section className="evidence-section" aria-label="Recipe gates">
           <p className="evidence-kicker">The gates</p>
-          <h2 className="evidence-section-title mt-4">Five checks before anything is signed.</h2>
+          <h2 className="evidence-section-title mt-4">Six gates. Nothing is signed until the first three pass.</h2>
           <div className="mt-9 grid gap-4 md:grid-cols-2">
             {flow.map(([number, heading, body]) => (
               <article key={number} className="evidence-card">
@@ -112,6 +112,8 @@ export default function BazaarDiscoveryToPaymentRecipePage() {
             <li><strong className="text-[var(--text-primary)]">One paid retry:</strong> the buyer answers one 402 once; it does not loop wallet prompts.</li>
             <li><strong className="text-[var(--text-primary)]">Discovery fallback:</strong> semantic results can lag settlement metadata. Bazaar merchant discovery provides the deterministic indexed fallback.</li>
             <li><strong className="text-[var(--text-primary)]">Receipt verification:</strong> the recipe verifies the signed response metadata. The transaction link is printed for independent Base explorer inspection.</li>
+            <li><strong className="text-[var(--text-primary)]">Validate before paying:</strong> the payment settles before the request body is validated. A body that breaks the schema — a duplicate document id, a budget outside 64–16,000, more than eight documents — is charged and returns 400 with the field named. The recipe sends the discovered example with a fresh clientRequestId, which is valid.</li>
+            <li><strong className="text-[var(--text-primary)]">One offer:</strong> this recipe buys the Context Compiler only. Deep Context Evaluation costs $0.01, above the recipe’s $0.005 ceiling, and also requires a requiredEvidence array of exact spans; its contract is at /api/discovery/x402-offers/deep-context-evaluation.</li>
             <li><strong className="text-[var(--text-primary)]">Context boundary:</strong> source coverage means sources represented in selected passages, not guaranteed fact retention or downstream answer correctness.</li>
           </ul>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
