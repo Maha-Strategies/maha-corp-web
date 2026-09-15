@@ -1,6 +1,3 @@
-import { existsSync } from 'node:fs'
-import { join } from 'node:path'
-
 /**
  * The Context-Control Evidence Assessment offer, as data.
  *
@@ -16,10 +13,6 @@ export const REQUIRED_PUBLIC_ARTIFACTS = [
   'public/security/context-control-security-boundary.pdf',
   'public/benchmarks/mcrb-1/dense/results.json',
 ] as const
-
-export function missingPublicArtifacts(root = join(import.meta.dirname, '..', '..')): string[] {
-  return REQUIRED_PUBLIC_ARTIFACTS.filter((path) => !existsSync(join(root, path)))
-}
 
 export const ASSESSMENT_TIERS = [
   {

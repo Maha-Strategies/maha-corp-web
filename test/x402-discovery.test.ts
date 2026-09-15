@@ -7,6 +7,7 @@ import { CONTEXT_COMPILER_DESCRIPTION, discoveryExtensionsFor, resourceInfoFor }
 
 import { CONTEXT_COMPRESSION_OFFER, DEEP_CONTEXT_EVALUATION_OFFER } from '../lib/x402/offers.ts'
 import { resetDiscoveryCache } from '../lib/x402/discovery.ts'
+import { declarationDigest } from '../lib/x402/declaration-digest.ts'
 import type { PaymentRequirement } from '../lib/x402/protocol.ts'
 
 const requirement = (amount: string): PaymentRequirement => ({
@@ -22,6 +23,32 @@ const priced = (offer: { id: string; method: 'POST'; path: string; amount: strin
 const compression = priced(CONTEXT_COMPRESSION_OFFER)
 const COMPRESSION_URL = 'https://www.mahastrategies.com/api/v1/compress'
 const EVALUATE_URL = 'https://www.mahastrategies.com/api/v1/compress/evaluate'
+
+test('warm declarations track every payment term, including the compiler price step-up', async () => {
+  resetDiscoveryCache()
+  const terms = [
+    requirement('1000'), requirement('2000'),
+    { ...requirement('2000'), payTo: '0xNewRecipient' },
+    { ...requirement('2000'), network: 'eip155:84532' as const },
+    { ...requirement('2000'), asset: '0xOtherAsset' },
+    { ...requirement('2000'), maxTimeoutSeconds: 30 },
+    { ...requirement('2000'), extra: { name: 'Other Token', version: '3' } },
+  ]
+  const digests = new Set<string>()
+  for (const accepts of terms) {
+    const resource = { ...compression, amount: accepts.amount }
+    const extensions = await discoveryExtensionsFor(resource, COMPRESSION_URL, accepts)
+    const integrity = extensions!['declaration-integrity'] as { declarationDigest: string }
+    assert.equal((extensions!['maha-offer'] as { amount: string }).amount, accepts.amount)
+    assert.equal(integrity.declarationDigest, await declarationDigest({
+      x402Version: 2, resource: resourceInfoFor(resource, COMPRESSION_URL), accepts: [accepts], extensions,
+    }))
+    digests.add(integrity.declarationDigest)
+  }
+  assert.equal(digests.size, terms.length)
+  const partial = await discoveryExtensionsFor(compression, COMPRESSION_URL)
+  assert.equal(partial!['declaration-integrity'], undefined, 'a partial request must not borrow cached payment terms')
+})
 
 test('the Context Compiler publishes valid, callable Bazaar metadata', async () => {
   const extensions = await discoveryExtensionsFor(compression, COMPRESSION_URL, requirement('1000'))

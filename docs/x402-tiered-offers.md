@@ -85,6 +85,30 @@ declared hash against the real body, so the header cannot lie.
 Payers of an idempotent offer must send `x-maha-idempotency-key` (equal to
 `clientRequestId`) and `x-maha-input-hash`.
 
+## Body validation before settlement
+
+Until 2026-09-15 the stateless proxy-priced offers (Context Compiler, Deep
+Context Evaluation, the three context-family products and the four machine book
+offers) verified and settled a signed request before their route rejected a
+wrong media type, an oversized body or an invalid field. The caller paid for a
+400, 413 or 415.
+
+`lib/x402/pre-settlement-body.ts` now applies each route's own parser, byte
+limit and media-type rule to a clone of the body after the payment context
+matches and before capacity, verification, the replay claim or settlement. A
+refusal says `No payment was taken.` and leaves the authorization spendable.
+Unsigned requests are still challenged without their body being read, so the
+discovery 402 is unchanged. One rule remains after settlement: a well-formed
+book `sectionId` that names no published section, because deciding it needs the
+edition content, which the proxy does not load.
+
+The proxy also removes client-sent copies of the headers only it may assert
+(key id, tenant, tier, retention, credits, access mode, payment and slot
+headers; `lib/proxy-request-headers.ts`) before forwarding any request. A paid
+caller could previously send `x-maha-api-key-tier: enterprise` to raise the
+compiler's byte limit, and a keyed caller `x-maha-access-mode: x402` to skip
+metered billing.
+
 Recovery no longer depends on a secret held only in a response. The retrieval
 credential is derived from `X402_RETRIEVAL_TOKEN_SECRET` and the audit id, so it
 is recomputable on any instance and re-issued on the free idempotent replay. If

@@ -26,6 +26,7 @@ import {
   validRetrievalToken,
 } from '../lib/x402/mps-audit-job.ts'
 import { auditInputHash } from '../lib/mps-audit-engine.ts'
+import { CONTEXT_COMPRESSION_DISCOVERY, DEEP_CONTEXT_EVALUATION_DISCOVERY } from '../lib/x402/offer-schemas.ts'
 
 const ROOT = join(import.meta.dirname, '..')
 
@@ -62,12 +63,20 @@ async function signatureFor(path: string, overrides: { accepted?: Record<string,
 const MPS_TEXT = 'A published report says the pilot reduced manual review time by twenty percent.'
 const MPS_REQUEST_ID = 'req_behaviour_0001'
 
+// Every priced route validates its body before settlement, so a paid request
+// carries the body its route accepts: the published discovery example.
+const BODIES: Record<string, unknown> = {
+  '/api/v1/mps/audit': { clientRequestId: MPS_REQUEST_ID, text: MPS_TEXT },
+  '/api/v1/compress': CONTEXT_COMPRESSION_DISCOVERY.input,
+  '/api/v1/compress/evaluate': DEEP_CONTEXT_EVALUATION_DISCOVERY.input,
+}
+
 const post = (path: string, headers: Record<string, string> = {}) => {
-  const isMps = path === '/api/v1/mps/audit'
+  const body = BODIES[path]
   return new Request(`https://www.mahastrategies.com${path}`, {
     method: 'POST',
-    headers: isMps ? { 'content-type': 'application/json', ...headers } : headers,
-    ...(isMps ? { body: JSON.stringify({ clientRequestId: MPS_REQUEST_ID, text: MPS_TEXT }) } : {}),
+    headers: body ? { 'content-type': 'application/json', ...headers } : headers,
+    ...(body ? { body: JSON.stringify(body) } : {}),
   })
 }
 

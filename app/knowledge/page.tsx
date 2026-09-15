@@ -206,6 +206,12 @@ export default function KnowledgePage() {
             <div className={styles.spectrumRule} aria-hidden="true" />
           </div>
           <div className={`${styles.domainGrid} mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3`}>
+            <Link href="/knowledge/robotics" className="group border border-cyan-900/60 bg-cyan-950/10 p-6 transition-colors hover:border-cyan-400">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">Robotics evidence · editorial guides</p>
+              <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-cyan-200">Robotics and human assistance</h2>
+              <p className="mt-3 text-sm leading-6 text-zinc-400">Task evaluation, reproducible evidence, data provenance and governance for useful robotics. Simulation evidence is not physical safety validation.</p>
+              <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-cyan-300">Explore 40 guides, specifications and examples →</p>
+            </Link>
             <Link href={SEMICONDUCTOR_PROCESS_MAP_PATH} className="group border border-zinc-800 bg-zinc-950/60 p-6 transition-colors hover:border-cyan-500/50">
               <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">Technical knowledge system</p>
               <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-cyan-200">Semiconductor manufacturing</h2>

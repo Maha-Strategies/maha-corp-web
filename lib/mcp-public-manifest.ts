@@ -3,7 +3,7 @@ import {
   MCP_SERVER_NAME,
   MCP_SERVER_VERSION,
   MCP_TOOLS,
-} from './maha-mcp/index.ts'
+} from './maha-mcp/public-contract.ts'
 import {
   MPS_PREFLIGHT_MCP_PROTOCOL_VERSION,
   MPS_PREFLIGHT_MCP_SERVER,

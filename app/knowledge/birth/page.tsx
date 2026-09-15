@@ -9,8 +9,8 @@ import BirthForm from './BirthForm'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'Birth chart report | Maha Strategies',
-  description: 'A reproducible Vedic birth-chart and timing map with whole-sign houses, Vimśottarī periods, transit geometry, historical calibration, pañcāṅga, and source-bound tradition notes.',
+  title: 'Free Vedic Birth Chart & D1/D9 Report | Maha Strategies',
+  description: 'Calculate a Lahiri D1 and Navamsa D9 chart with dasha periods, transit snapshots and source-linked educational reflections. Private by default; no account needed.',
   alternates: { canonical: '/knowledge/birth' },
   robots: { index: true, follow: true },
 }
@@ -27,11 +27,17 @@ export default function BirthPage() {
 
         <header className="mt-10 border-b border-zinc-800 pb-10">
           <p className="font-mono text-[10px] uppercase tracking-widest text-violet-300">{BIRTH_REPORT_VERSION}</p>
-          <h1 className="mt-6 text-4xl font-bold tracking-tight text-white sm:text-6xl">Birth chart report</h1>
+          <h1 className="mt-6 text-4xl font-bold tracking-tight text-white sm:text-6xl">Free Vedic birth chart and D1/D9 report</h1>
           <p className="mt-6 max-w-3xl font-serif text-lg leading-8 text-zinc-400">
-            Your complete chart and timing map before interpretation: natal structure, Vimśottarī period dates, transit-to-natal geometry, and optional evidence-bounded historical calibration in Lahiri sidereal, with source-bound tradition notes visibly separate from calculations and conventions.
+            Generate a private D1/D9 chart, timing map and educational Jyotiṣa report. Explore source-linked relationship and work reflections, current periods and upcoming position snapshots. Calculations, historical vocabulary and Maha’s modern reflection prompts remain visibly separate.
           </p>
         </header>
+
+        <section aria-label="Getting started" className="mt-8 space-y-3 text-sm leading-7 text-zinc-300">
+          <p>No account or payment is needed for the basic report. Enter a birth date, local time and place; check the resolved time zone before computing. Shared service limits apply.</p>
+          <p>You receive planetary placements, Navamsa positions, Vimśottarī periods and educational relationship and work reflections. This is not a marriage prediction or a substitute for an expert consultation.</p>
+          <Link href="/knowledge/astrology/reading-guide" className="text-violet-300 underline underline-offset-4 focus-visible:outline">See a synthetic example and learn how to read the report →</Link>
+        </section>
 
         <BirthForm />
 
@@ -45,7 +51,7 @@ export default function BirthPage() {
               <strong className="text-white">Everything built on top of it is unvalidated tradition.</strong> Each rule below is recorded as documented doctrine from a named source. There is no evidence that any of it predicts anything about a person, and the schema this layer uses cannot express such a claim.
             </p>
             <p>
-              <strong className="text-white">This is not a personality reading, and it cannot become one.</strong> The rules a natal reading normally consists of — appearance, character, health, length of life — are withheld by report policy, because each maps to a prohibited use. You will see them listed as withheld rather than quietly absent.
+              <strong className="text-white">Educational interpretation is not a prediction about you.</strong> The new profile is internally reviewed, not expert-reviewed. It offers optional reflection rather than assigning personality or identifying a future spouse. Health, lifespan and guaranteed-event claims remain withheld. The separate practitioner-reviewed rule gates have not been relaxed.
             </p>
           </div>
         </section>
@@ -61,7 +67,7 @@ export default function BirthPage() {
         <section className="mt-8 border border-zinc-800 bg-zinc-950/40 p-6">
           <h2 className="font-mono text-[10px] uppercase tracking-widest text-zinc-400">Your inputs</h2>
           <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-500">
-            Birth details are submitted by POST, so they do not appear in the URL, in browser history, or in referrer headers. They are used to compute the report in the request and are not stored or written to a log. The report shows only derived values and digests.
+            Birth details are submitted by POST, not in a URL. The report is computed per request; this feature does not save birth details or reports. The visible report includes sensitive derived information, so do not share its screen or download unless you intend to. Optional location search sends place text to a geocoding service. Service capacity counters contain no birth details.
           </p>
         </section>
 

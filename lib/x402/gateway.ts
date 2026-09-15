@@ -23,6 +23,7 @@ import { SLOT_RESOURCE_HEADER, SLOT_TOKEN_HEADER } from './slot.ts'
 import { discoveryExtensionsFor, resourceInfoFor } from './discovery.ts'
 import { createAdmissionGuard, readAdmissionClaim } from './admission.ts'
 import { validateAdmissionBody } from './admission-body.ts'
+import { validatePreSettlementBody } from './pre-settlement-body.ts'
 import { offerById } from './offers.ts'
 
 // Decides what happens to a request that carries no API key: a challenge, a
@@ -160,6 +161,15 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
       return { kind: 'refused', status: 503, code: 'x402_ledger_unavailable', message: 'Idempotency cannot be guaranteed right now, so no payment was taken. Retry shortly.' }
     }
     admissionGuard = guard
+  } else if (offer) {
+    // Every other proxy-priced route rejects a wrong media type, an oversized
+    // body or an invalid field from its handler, which runs only after
+    // settlement. Apply that same contract to a clone now, so a rejected body
+    // costs the caller nothing: no verify, no settle, no replay claim and no
+    // capacity slot. Unsigned requests never reach this line and still receive
+    // the discovery challenge without their body being read.
+    const bodyDecision = await validatePreSettlementBody(request, offer)
+    if (!bodyDecision.ok) return { kind: 'refused', ...bodyDecision }
   }
 
   // The bounded, synchronous calculation offers reserve capacity before any

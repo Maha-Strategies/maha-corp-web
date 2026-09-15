@@ -26,12 +26,15 @@ import {
 import { buildLocalFactBundle } from './local-fact-bundle.ts'
 import { computeNatalChart, type NatalChart } from './natal-chart.ts'
 import { computeNatalTiming, type NatalTiming } from './natal-timing.ts'
+import { buildNatalFoundation, type NatalFoundation } from './natal-foundation.ts'
+import { buildInspectableJyotisha, type InspectableJyotisha } from './inspectable-jyotisha.ts'
 import { computePanchanga, type Panchanga } from './panchanga.ts'
 import { ZonedTimeError, zonedWallTimeToUtc, type CivilTimeFold } from './zoned-time.ts'
 
-export const BIRTH_REPORT_VERSION = 'birth-report/0.5' as const
+export const BIRTH_REPORT_VERSION = 'birth-report/0.6' as const
 
 export interface BirthInput {
+  birthTimeUncertaintyMinutes?: number
   /** `YYYY-MM-DD` local to the birth place. */
   date: string
   /** `HH:MM`, 24-hour, local to the birth place. */
@@ -81,6 +84,8 @@ export interface RenderedTraditionReport {
 }
 
 export interface BirthReport {
+  foundation: NatalFoundation
+  reading: InspectableJyotisha
   version: typeof BIRTH_REPORT_VERSION
   instantUtc: string
   utcOffset: string
@@ -149,8 +154,20 @@ function compileFor(factBundle: ReturnType<typeof buildLocalFactBundle>, traditi
 }
 
 export function buildBirthReport(input: BirthInput): BirthReport {
-  const latitude = Number(input.latitudeDegrees)
-  const longitude = Number(input.longitudeDegrees)
+  // Shared by the visitor action and API: neither transport may normalize an
+  // impossible date or silently choose one of two daylight-saving occurrences.
+  const calendarDate = new Date(`${input.date}T00:00:00.000Z`)
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(input.date) || !Number.isFinite(calendarDate.getTime())
+    || calendarDate.toISOString().slice(0, 10) !== input.date
+    || calendarDate.getUTCFullYear() < 1800 || calendarDate.getUTCFullYear() > 2100) {
+    throw new BirthInputError('Enter a real YYYY-MM-DD calendar date between 1800 and 2100.')
+  }
+  const uncertainty = input.birthTimeUncertaintyMinutes ?? 0
+  if (typeof uncertainty !== 'number' || !Number.isFinite(uncertainty) || uncertainty < 0 || uncertainty > 120) {
+    throw new BirthInputError('Time uncertainty must be between 0 and 120 minutes.')
+  }
+  const latitude = input.latitudeDegrees
+  const longitude = input.longitudeDegrees
   if (!Number.isFinite(latitude) || latitude < -90 || latitude > 90) throw new BirthInputError('Latitude must be a number between -90 and 90.')
   if (!Number.isFinite(longitude) || longitude < -180 || longitude > 180) throw new BirthInputError('Longitude must be a number between -180 and 180.')
 
@@ -158,16 +175,27 @@ export function buildBirthReport(input: BirthInput): BirthReport {
   try {
     resolved = zonedWallTimeToUtc(input.date, input.time, input.timeZone)
   } catch (error) {
-    throw error instanceof ZonedTimeError ? new BirthInputError(error.message) : error
+    throw error instanceof ZonedTimeError ? new BirthInputError('Check the local time and IANA time zone.') : error
+  }
+
+  if (resolved.nonexistent) throw new BirthInputError('That local time did not exist because the clocks moved forward. Check the recorded time.')
+  if (resolved.fold !== 'unambiguous') throw new BirthInputError('That local time occurred twice. Resolve which UTC instant was recorded and submit it using UTC; do not guess an occurrence.')
+  if (input.timingInstantUtc !== undefined && !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/.test(input.timingInstantUtc)) {
+    throw new BirthInputError('Timing moment must include an explicit UTC Z suffix.')
   }
 
   const elevationMeters = Number.isFinite(Number(input.elevationMeters)) ? Number(input.elevationMeters) : 0
   const panchanga = computePanchanga({ instant: resolved.instant, latitudeDegrees: latitude, longitudeDegrees: longitude, elevationMeters })
   const factBundle = buildLocalFactBundle({ instant: resolved.instant, latitudeDegrees: latitude, longitudeDegrees: longitude, elevationMeters })
   const natalChart = computeNatalChart({ instant: resolved.instant, latitudeDegrees: latitude, longitudeDegrees: longitude })
-  const timingInstant = input.timingInstantUtc ? new Date(input.timingInstantUtc) : resolved.instant
+  const timingInstant = input.timingInstantUtc ? new Date(input.timingInstantUtc) : new Date(resolved.instant.getTime() + uncertainty * 60000)
   if (!Number.isFinite(timingInstant.getTime())) throw new BirthInputError('Timing moment must be a valid UTC date and time.')
-  if (timingInstant < resolved.instant) throw new BirthInputError('Timing moment cannot precede the birth instant.')
+  if (timingInstant.getTime() < resolved.instant.getTime() + uncertainty * 60000) {
+    throw new BirthInputError('Timing moment cannot precede the end of the birth-time uncertainty range.')
+  }
+  if (input.timingInstantUtc && timingInstant.toISOString().slice(0, 19) !== input.timingInstantUtc.slice(0, 19)) {
+    throw new BirthInputError('Timing moment must be a real UTC calendar date and time.')
+  }
   const timing = computeNatalTiming({
     natalChart,
     birthInstant: resolved.instant,
@@ -175,6 +203,8 @@ export function buildBirthReport(input: BirthInput): BirthReport {
     latitudeDegrees: latitude,
     longitudeDegrees: longitude,
   })
+  const foundation = buildNatalFoundation({ instant: resolved.instant, latitudeDegrees: latitude, longitudeDegrees: longitude }, uncertainty, timingInstant)
+  const reading = buildInspectableJyotisha(foundation, { latitudeDegrees: latitude, longitudeDegrees: longitude })
   let historicalCalibration: HistoricalCalibration | null = null
   if (input.historicalMilestones?.length) {
     try {
@@ -193,6 +223,8 @@ export function buildBirthReport(input: BirthInput): BirthReport {
   }
 
   return {
+    foundation,
+    reading,
     version: BIRTH_REPORT_VERSION,
     instantUtc: resolved.instant.toISOString(),
     utcOffset: resolved.utcOffset,
@@ -209,7 +241,9 @@ export function buildBirthReport(input: BirthInput): BirthReport {
     traditions: [
       compileFor(factBundle, 'vedic-jyotisha', 'natal'),
       compileFor(factBundle, 'hellenistic-ptolemaic', 'natal'),
-    ],
+    ].map(tradition => uncertainty === 0 ? tradition : { ...tradition, modules: [],
+      withheld: [...tradition.withheld, ...tradition.modules.map(module => ({ ruleId: module.ruleId,
+        technique: module.heading, reason: 'birth-time-uncertainty', detail: 'Full interval stability is unproved; nominal interpretation withheld.' }))] }),
     uncertainLimbs: panchanga.uncertainLimbs,
   }
 }
