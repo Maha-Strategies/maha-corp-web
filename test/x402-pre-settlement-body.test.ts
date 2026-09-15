@@ -5,7 +5,8 @@ import test from 'node:test'
 import { compileContextPack, maxContextPackBytes, parseContextPackRequest } from '../lib/context-compiler.ts'
 import { MAX_X402_EVALUATION_BYTES, buildDeepContextEvaluation, parseDeepContextRequest } from '../lib/deep-context-evaluation.ts'
 import { buildBookEditionReceipt } from '../lib/x402/book-edition-product.ts'
-import { buildBookSectionReceipt } from '../lib/x402/book-section-product.ts'
+import { MACHINE_BOOK_IDS, buildBookSectionReceipt, resolveBookSectionRequest, type MachineBookId } from '../lib/x402/book-section-product.ts'
+import { getOpenBookEdition } from '../lib/open-book-editions.ts'
 import { priceFor, requirementFor, x402Config, type X402Config } from '../lib/x402/config.ts'
 import {
   buildContextBudgetLadder,
@@ -121,14 +122,51 @@ test('the gateway rejects exactly the bodies execution rejects, for every regist
   }
 })
 
-test('the one body rule that needs book data is still decided after settlement, and is named here', async () => {
-  // A well-formed slug that is not a published section passes the shape check
-  // and is refused by the builder. Every other book rejection is pre-settlement.
-  for (const offer of REGISTERED.filter((entry) => entry.id.startsWith('book-section-'))) {
-    const body = { sectionId: 'no-such-section-anywhere' }
-    assert.deepEqual(await validatePreSettlementBody(jsonRequest(offer, JSON.stringify(body)), offer), { ok: true })
-    assert.throws(() => EXECUTION[offer.id](body), /Unknown sectionId/)
+// ---------------------------------------------------------------------------
+// Book sections: existence is decided by the edition's own lookup, before payment
+// ---------------------------------------------------------------------------
+
+const SECTION_OFFERS = REGISTERED.filter((entry) => entry.id.startsWith('book-section-'))
+const bookOf = (offer: X402Offer) => offer.id.replace('book-section-', '') as MachineBookId
+const slugsOf = (bookId: string) => getOpenBookEdition(bookId)!.sections.map((section) => section.slug)
+
+test('every published section of each machine book is admitted and executes', async () => {
+  assert.equal(SECTION_OFFERS.length, MACHINE_BOOK_IDS.length)
+  for (const offer of SECTION_OFFERS) {
+    const slugs = slugsOf(bookOf(offer))
+    assert.ok(slugs.length > 0)
+    for (const sectionId of slugs) {
+      const body = { sectionId }
+      assert.deepEqual(await validatePreSettlementBody(jsonRequest(offer, JSON.stringify(body)), offer), { ok: true }, `${offer.id}: ${sectionId}`)
+      assert.equal((EXECUTION[offer.id](body) as { section: { id: string } }).section.id, sectionId)
+    }
   }
+})
+
+test('a well-formed sectionId the edition does not publish is refused before payment', async () => {
+  const otherBookOnly = (bookId: string) => MACHINE_BOOK_IDS.filter((id) => id !== bookId).flatMap(slugsOf).filter((slug) => !slugsOf(bookId).includes(slug))
+  const nonMachineBook = slugsOf('the-cosmic-recursion').filter((slug) => !MACHINE_BOOK_IDS.flatMap(slugsOf).includes(slug))
+  for (const offer of SECTION_OFFERS) {
+    const bookId = bookOf(offer)
+    const cases = [
+      ['nonexistent section', 'no-such-section-anywhere'],
+      ['section of the other machine book', otherBookOnly(bookId)[0]],
+      ['section of a book with no machine offer', nonMachineBook[0]],
+    ] as const
+    for (const [label, sectionId] of cases) {
+      assert.ok(sectionId, `${offer.id}: fixture for ${label}`)
+      const body = { sectionId }
+      const decision = await validatePreSettlementBody(jsonRequest(offer, JSON.stringify(body)), offer)
+      assert.deepEqual(decision, { ok: false, status: 400, code: 'invalid_request', message: 'Unknown sectionId for this edition. No payment was taken.' }, `${offer.id}: ${label}`)
+      assert.throws(() => EXECUTION[offer.id](body), /Unknown sectionId for this edition\./, `${offer.id}: ${label} is also refused by execution`)
+    }
+  }
+})
+
+test('the resolver refuses a book that has no machine offer, even for its own published section', () => {
+  const [sectionId] = slugsOf('the-cosmic-recursion')
+  assert.throws(() => resolveBookSectionRequest('the-cosmic-recursion' as MachineBookId, { sectionId }), /Book is not available\./)
+  assert.throws(() => buildBookSectionReceipt('the-cosmic-recursion' as MachineBookId, { sectionId }), /Book is not available\./)
 })
 
 test('media type, size and JSON syntax follow each route handler', async () => {
@@ -225,6 +263,31 @@ test('a signed request with a rejected body is refused before verification, sett
       }
       assert.deepEqual(calls, { verify: 0, settle: 0, claim: 0, acquire: 0, release: 0 }, `${offer.id}: ${label} touched payment state`)
     }
+  }
+})
+
+test('a signed request for an unpublished or cross-book section settles nothing, and the same authorization then pays', async () => {
+  for (const offer of SECTION_OFFERS) {
+    const bookId = bookOf(offer)
+    const signature = await signatureFor(offer)
+    const foreign = MACHINE_BOOK_IDS.filter((id) => id !== bookId).flatMap(slugsOf).find((slug) => !slugsOf(bookId).includes(slug))!
+    const { calls, dependencies } = spies()
+    for (const sectionId of ['no-such-section-anywhere', foreign]) {
+      const outcome = await resolveX402(new Request(`${ORIGIN}${offer.path}`, {
+        method: 'POST', headers: { 'PAYMENT-SIGNATURE': signature, 'content-type': 'application/json' }, body: JSON.stringify({ sectionId }),
+      }), dependencies)
+      assert.equal(outcome.kind, 'refused', `${offer.id}: ${sectionId}`)
+      if (outcome.kind === 'refused') {
+        assert.deepEqual([outcome.status, outcome.code, outcome.message], [400, 'invalid_request', 'Unknown sectionId for this edition. No payment was taken.'])
+      }
+      assert.deepEqual(calls, { verify: 0, settle: 0, claim: 0, acquire: 0, release: 0 }, `${offer.id}: ${sectionId} touched payment state`)
+    }
+    const valid = slugsOf(bookId).at(-1)!
+    const paid = await resolveX402(new Request(`${ORIGIN}${offer.path}`, {
+      method: 'POST', headers: { 'PAYMENT-SIGNATURE': signature, 'content-type': 'application/json' }, body: JSON.stringify({ sectionId: valid }),
+    }), dependencies)
+    assert.equal(paid.kind, 'paid', `${offer.id}: ${valid}`)
+    assert.deepEqual({ verify: calls.verify, settle: calls.settle, acquire: calls.acquire }, { verify: 1, settle: 1, acquire: 1 })
   }
 })
 

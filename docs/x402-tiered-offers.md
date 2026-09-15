@@ -98,9 +98,12 @@ limit and media-type rule to a clone of the body after the payment context
 matches and before capacity, verification, the replay claim or settlement. A
 refusal says `No payment was taken.` and leaves the authorization spendable.
 Unsigned requests are still challenged without their body being read, so the
-discovery 402 is unchanged. One rule remains after settlement: a well-formed
-book `sectionId` that names no published section, because deciding it needs the
-edition content, which the proxy does not load.
+discovery 402 is unchanged. Book sections use the builder's own resolver
+(`resolveBookSectionRequest`), so a well-formed `sectionId` that the edition
+cannot reconstruct is refused before payment too (closed 2026-09-15; the first
+release left it post-settlement on the mistaken belief that the proxy did not
+load edition content — `offers.ts` already builds each book's discovery
+example from the manuscript at import).
 
 The proxy also removes client-sent copies of the headers only it may assert
 (key id, tenant, tier, retention, credits, access mode, payment and slot

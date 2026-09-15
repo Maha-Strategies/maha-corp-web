@@ -19,14 +19,28 @@ function countWords(value: string): number {
   return value.trim() ? value.trim().split(/\s+/).length : 0
 }
 
-export function buildBookSectionReceipt(bookId: MachineBookId, input: unknown) {
+/**
+ * Resolves a section request against the published edition, or throws.
+ *
+ * This is the whole caller-dependent contract of a section purchase: the
+ * request shape, the machine book, and a section that the edition's own lookup
+ * can reconstruct. The receipt builder calls it, and the x402 gateway calls it
+ * before settlement (lib/x402/pre-settlement-body.ts), so a sectionId that
+ * would be refused here is never charged.
+ */
+export function resolveBookSectionRequest(bookId: MachineBookId, input: unknown) {
   const record = parseBookSectionRequest(input)
-
+  if (!(MACHINE_BOOK_IDS as readonly string[]).includes(bookId)) throw new Error('Book is not available.')
   const book = getOpenBookEdition(bookId)
   if (!book) throw new Error('Book is not available.')
   const selected = getOpenBookSection(book, record.sectionId)
   if (!selected) throw new Error('Unknown sectionId for this edition.')
-  const sectionIndex = book.sections.findIndex((section) => section.slug === record.sectionId)
+  return { book, selected }
+}
+
+export function buildBookSectionReceipt(bookId: MachineBookId, input: unknown) {
+  const { book, selected } = resolveBookSectionRequest(bookId, input)
+  const sectionIndex = book.sections.findIndex((section) => section.slug === selected.section.slug)
   const contentSha256 = digest(selected.markdown)
   const request = { bookId, sectionId: selected.section.slug }
   const responseWithoutReceipt = {
