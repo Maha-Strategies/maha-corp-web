@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto'
 import { canonicalJson } from '../evidence-dossier/digest.ts'
 import { getOpenBookEdition, getOpenBookSection, type OpenBookEdition } from '../open-book-editions.ts'
 import type { JsonSchema, OfferDiscoveryContract } from './offer-schemas.ts'
+import { parseBookSectionRequest } from './book-request.ts'
 
 export const MACHINE_BOOK_IDS = ['the-imagined-life', 'the-volcanic-engine'] as const
 export type MachineBookId = (typeof MACHINE_BOOK_IDS)[number]
@@ -19,12 +20,7 @@ function countWords(value: string): number {
 }
 
 export function buildBookSectionReceipt(bookId: MachineBookId, input: unknown) {
-  if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Request must be a JSON object.')
-  const record = input as Record<string, unknown>
-  if (Object.keys(record).some((key) => key !== 'sectionId')) throw new Error('Only sectionId is accepted.')
-  if (typeof record.sectionId !== 'string' || !/^[a-z0-9][a-z0-9-]{0,79}$/.test(record.sectionId)) {
-    throw new Error('sectionId must be a published section slug.')
-  }
+  const record = parseBookSectionRequest(input)
 
   const book = getOpenBookEdition(bookId)
   if (!book) throw new Error('Book is not available.')

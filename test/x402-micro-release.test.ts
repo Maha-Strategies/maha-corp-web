@@ -10,14 +10,14 @@ import { BASE_NETWORK, BASE_USDC, MAHA_PAYEE } from '../lib/x402/discovery-payme
 import { readFileSync } from 'node:fs'
 import { x402Config } from '../lib/x402/config.ts'
 
-test('exactly fifteen authorized microproducts are released, at widely separated amounts', () => {
+test('exactly seventeen authorized microproducts are released at distinct amounts', () => {
   // Extended from five on 2026-09-10. The ten added are exactly the withheld
   // offers the candidate review selected and micro-next12-cost-observation
   // profiled; the seven the review did not select stay withheld.
   assert.deepEqual([...RELEASED_MICRO_IDS].sort(), [
-    'audit-export-normalizer', 'bracketed-polynomial-root', 'citation-binding-check',
+    'audit-export-normalizer', 'bracketed-polynomial-root', 'celestial-result-compatibility', 'citation-binding-check',
     'control-evidence-gaps', 'covariance-uncertainty', 'divine-name-disambiguation',
-    'edition-verse-resolution', 'exact-linear-system', 'mcp-contract-compatibility',
+    'edition-verse-resolution', 'evidence-frame-compatibility', 'exact-linear-system', 'mcp-contract-compatibility',
     'policy-version-comparison', 'publication-bundle-consistency', 'reception-lineage-retrieval',
     'revision-lineage-check', 'tool-permission-diff', 'unit-uncertainty-conversion',
   ])
@@ -31,7 +31,7 @@ test('exactly fifteen authorized microproducts are released, at widely separated
   // so any two amounts closer than a fee apart are one perturbation away from
   // being indistinguishable.
   const total = released.reduce((n, o) => n + BigInt(o.amount), BigInt(0))
-  assert.equal(total, BigInt(263000))
+  assert.equal(total, BigInt(280500))
   const amounts = [...payableOffers()].map(o => BigInt(o.amount)).sort((a, b) => (a < b ? -1 : 1))
   const gaps = amounts.slice(1).map((a, i) => a - amounts[i])
   assert.ok(gaps.every(g => g > BigInt(0)), 'every payable amount remains distinct')

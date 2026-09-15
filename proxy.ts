@@ -9,9 +9,17 @@ import { discoverySourceFrom, offerChallengeFor, recordOfferUsage } from '@/lib/
 import { privateDeploymentPathDecision } from '@/lib/workflows/deployment-boundary'
 import { federationCanonicalHostForPath, federationHostAllowsPath, normalizedRequestHost } from '@/lib/federation-host-routing'
 import { COLLECTION_INTERNAL_PATH } from '@/lib/collection-hub-paths'
+import { carriesProxyAssertedHeader, forwardedRequestHeaders } from '@/lib/proxy-request-headers'
 
 function json(body: unknown, status: number, headers: HeadersInit = {}) {
   return NextResponse.json(body, { status, headers: { ...API_CORS_HEADERS, ...headers } })
+}
+
+// Passes the request on unchanged unless the client sent a header that only
+// this proxy may assert (lib/proxy-request-headers.ts); those are removed.
+function forward(request: NextRequest, headers?: HeadersInit) {
+  if (!carriesProxyAssertedHeader(request.headers)) return NextResponse.next(headers ? { headers } : undefined)
+  return NextResponse.next({ request: { headers: forwardedRequestHeaders(request.headers) }, ...(headers ? { headers } : {}) })
 }
 
 export async function proxy(request: NextRequest, event: NextFetchEvent) {
@@ -30,10 +38,10 @@ export async function proxy(request: NextRequest, event: NextFetchEvent) {
   const privateBoundary = privateDeploymentPathDecision(pathname, process.env.ORCHESTRATION_DEPLOYMENT_MODE)
   if (privateBoundary === 'redirect_console') return NextResponse.redirect(new URL('/admin/orchestration', request.url))
   if (privateBoundary === 'deny') return NextResponse.json({ error: 'Not found.' }, { status: 404, headers: { 'Cache-Control': 'no-store' } })
-  if (!pathname.startsWith('/api/v1/')) return NextResponse.next()
+  if (!pathname.startsWith('/api/v1/')) return forward(request)
   const gate = apiProxyGate(pathname, request.method, apiKeyServiceConfigured())
   if (gate === 'preflight') return new NextResponse(null, { status: 204, headers: API_CORS_HEADERS })
-  if (gate === 'self_managed') return NextResponse.next({ headers: API_CORS_HEADERS })
+  if (gate === 'self_managed') return forward(request, API_CORS_HEADERS)
   if (gate === 'unavailable') return json({ error: { code: 'api_key_service_unavailable', message: 'API authorization is temporarily unavailable.' } }, apiAccessStatus('unavailable'))
   const key = bearerApiKey(request)
 
@@ -91,8 +99,7 @@ export async function proxy(request: NextRequest, event: NextFetchEvent) {
       // there is no hook that fires when the handler it forwards to finishes —
       // so the token goes downstream and whoever observes the work end releases
       // it. See lib/x402/slot.ts.
-      const paidHeaders = new Headers(request.headers)
-      for (const [name, value] of Object.entries(paidRequestHeaders(outcome))) paidHeaders.set(name, value)
+      const paidHeaders = forwardedRequestHeaders(request.headers, paidRequestHeaders(outcome))
       return NextResponse.next({
         request: { headers: paidHeaders },
         headers: { ...API_CORS_HEADERS, [X402_HEADERS.response]: outcome.header },
@@ -108,6 +115,13 @@ export async function proxy(request: NextRequest, event: NextFetchEvent) {
   if (access.kind !== 'authorized') return json({ error: { code: 'api_key_service_unavailable', message: 'API authorization is temporarily unavailable.' } }, apiAccessStatus('unavailable'))
   if (access.remainingCredits < 1_000) event.waitUntil(maybeCreateTenantAutoTopup({ tenantId: access.tenantId, remainingCredits: access.remainingCredits }).then(() => undefined))
   event.waitUntil(maybeSendLowCreditAlert({ tenantId: access.tenantId, remainingCredits: access.remainingCredits }).then(() => undefined))
-  const headers = new Headers(request.headers); headers.set('x-maha-api-key-id', access.keyId); headers.set('x-maha-tenant-id', access.tenantId); headers.set('x-maha-api-key-tier', access.tier); headers.set('x-maha-zero-data-retention', String(access.zeroDataRetention)); headers.set('x-maha-credits-remaining', String(access.remainingCredits)); return NextResponse.next({ request: { headers }, headers: API_CORS_HEADERS })
+  const headers = forwardedRequestHeaders(request.headers, {
+    'x-maha-api-key-id': access.keyId,
+    'x-maha-tenant-id': access.tenantId,
+    'x-maha-api-key-tier': access.tier,
+    'x-maha-zero-data-retention': String(access.zeroDataRetention),
+    'x-maha-credits-remaining': String(access.remainingCredits),
+  })
+  return NextResponse.next({ request: { headers }, headers: API_CORS_HEADERS })
 }
 export const config = { matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'] }

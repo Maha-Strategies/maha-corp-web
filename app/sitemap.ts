@@ -20,6 +20,7 @@ import { ASTROLOGY_ANSWER_GRAPH_DATE, ASTROLOGY_ANSWER_GRAPH_PATH, ASTROLOGY_ANS
 import { ASTROLOGY_WORKFLOW_DATE, ASTROLOGY_WORKFLOW_PATH, ASTROLOGY_WORKFLOW_PROTOCOLS, ASTROLOGY_WORKFLOW_REGISTRY_PATH, astrologyWorkflowPath } from '@/lib/astrology-workflow-protocols'
 import { EVIDENCE_WORKFLOW_DATE, EVIDENCE_WORKFLOW_EXAMPLES, EVIDENCE_WORKFLOW_PATH, EVIDENCE_WORKFLOW_REGISTRY_PATH, evidenceWorkflowPath } from '@/lib/evidence-workflow-examples'
 import { MATHEMATICAL_CONCEPTS, MATHEMATICS_KNOWLEDGE_PATH, MATHEMATICS_KNOWLEDGE_RELEASE_DATE, mathematicsConceptPath } from '@/lib/mathematics-knowledge'
+import { ROBOTICS_PATH, ROBOTICS_RELEASE_DATE, roboticsCandidateMap } from '@/lib/robotics-knowledge'
 import { RELIGION_COMPARISONS, RELIGION_COMPARISONS_PATH, RELIGION_CONCEPTS, RELIGION_KNOWLEDGE_PATH, RELIGION_KNOWLEDGE_RELEASE_DATE, religionComparisonPath, religionConceptPath } from '@/lib/religion-knowledge'
 import { MAYON_KNOWLEDGE_DATE, MAYON_KNOWLEDGE_PATH } from '@/lib/mayon-knowledge'
 import { MAYON_ANSWER_REGISTRY_PATH, MAYON_TOPICS, mayonTopicPath } from '@/lib/mayon-topics'
@@ -98,6 +99,8 @@ export async function currentHostSitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}${mathematicsConceptPath(concept)}`,
       lastModified: new Date(MATHEMATICS_KNOWLEDGE_RELEASE_DATE),
     })),
+    { url: `${baseUrl}${ROBOTICS_PATH}`, lastModified: new Date(ROBOTICS_RELEASE_DATE) },
+    ...roboticsCandidateMap().map((topic) => ({ url: `${baseUrl}${ROBOTICS_PATH}/${topic.slug}`, lastModified: new Date(ROBOTICS_RELEASE_DATE) })),
     { url: `${baseUrl}${RELIGION_KNOWLEDGE_PATH}`, lastModified: new Date(RELIGION_KNOWLEDGE_RELEASE_DATE) },
     { url: `${baseUrl}${MAYON_KNOWLEDGE_PATH}`, lastModified: new Date(MAYON_KNOWLEDGE_DATE) },
     { url: `${baseUrl}${MAYON_ANSWER_REGISTRY_PATH}`, lastModified: new Date(MAYON_KNOWLEDGE_DATE) },
@@ -167,7 +170,8 @@ export async function currentHostSitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(page.preparedOn),
     })),
     { url: `${baseUrl}/knowledge/muhurta`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
-    { url: `${baseUrl}/knowledge/birth`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
+    { url: `${baseUrl}/knowledge/birth`, lastModified: new Date('2026-09-14') },
+    { url: `${baseUrl}/knowledge/astrology/reading-guide`, lastModified: new Date('2026-09-14') },
     { url: `${baseUrl}/knowledge/corporate`, lastModified: new Date(CELESTIAL_GUIDE_RELEASE_DATE) },
     { url: `${baseUrl}/reports/celestial`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
     ...CELESTIAL_GUIDE_LIST.map((guide) => ({

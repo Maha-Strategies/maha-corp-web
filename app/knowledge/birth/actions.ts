@@ -2,6 +2,7 @@
 
 import { BirthInputError, buildBirthReport, type BirthReport } from '@/lib/birth-report'
 import type { HistoricalMilestoneInput } from '@/lib/historical-calibration'
+import { consumeReadingCapacity } from '@/lib/jyotisha-capacity'
 
 export type BirthActionState =
   | { status: 'idle' }
@@ -17,6 +18,15 @@ export type BirthActionState =
  */
 export async function computeBirthReport(_previous: BirthActionState, formData: FormData): Promise<BirthActionState> {
   try {
+    const capacity = await consumeReadingCapacity()
+    if (capacity !== 'accepted') return { status: 'error', message: capacity === 'limited'
+      ? 'The free reading service has reached its shared capacity. Please try again later.'
+      : 'The reading service is temporarily unavailable. No report was generated.' }
+    // Number(null) and Number('') are zero, not supplied coordinates.
+    for (const key of ['latitude', 'longitude']) {
+      const value = formData.get(key)
+      if (typeof value !== 'string' || !value.trim()) throw new BirthInputError('Latitude and longitude are required.')
+    }
     const timingMoment = String(formData.get('timingInstantUtc') ?? '')
     const milestonePayload = String(formData.get('historicalMilestones') ?? '[]')
     if (milestonePayload.length > 50_000) throw new BirthInputError('Historical milestone data is too large.')
@@ -32,6 +42,7 @@ export async function computeBirthReport(_previous: BirthActionState, formData: 
       date: String(formData.get('date') ?? ''),
       time: String(formData.get('time') ?? ''),
       timeZone: String(formData.get('timeZone') ?? ''),
+      birthTimeUncertaintyMinutes: Number(formData.get('birthTimeUncertaintyMinutes') ?? 0),
       latitudeDegrees: Number(formData.get('latitude')),
       longitudeDegrees: Number(formData.get('longitude')),
       elevationMeters: formData.get('elevation') === '' ? undefined : Number(formData.get('elevation')),

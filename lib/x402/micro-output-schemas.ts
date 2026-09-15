@@ -1,10 +1,12 @@
 import { arraySchema as arr, objectSchema as obj, textSchema as str, enumSchema as en, HASH_SCHEMA as hash, UTC_SCHEMA, ID_SCHEMA, MICRO_PRODUCTS, type MicroSchema, type MicroProductId } from './micro-contracts.ts'
 import { nextResultSchemas } from './micro-next-contracts.ts'
+import { COMPATIBILITY_RESULT_SCHEMAS } from './compatibility-contracts.ts'
 const bool: MicroSchema = { type: 'boolean' }, no: MicroSchema = { type: 'boolean', enum: [false] }
 const strings = arr(str(4000), 0, 128)
 const source = obj({ sourceId: str(), title: str(1000), url: { oneOf: [str(4096), { type: 'null' }] }, locator: str(4096), scope: str(8000), boundary: str(8000), rightsBasis: str(4000), inspectionDepth: str() })
 const rational = obj({ numerator: { type: 'string', pattern: '^-?[0-9]+$', maxLength: 80 }, denominator: { type: 'string', pattern: '^[1-9][0-9]*$', maxLength: 80 }, method: en('two-node-linear-interpolation', 'composite-trapezoidal-rule'), xUnit: str(32), yUnit: str(32), resultUnit: str(70), unitBasis: str(), arithmetic: en('exact-rational'), approximationError: en('not-estimated'), measurementUncertainty: en('not-estimated') })
 export const MICRO_RESULT_SCHEMAS: Record<MicroProductId, MicroSchema> = {
+  ...COMPATIBILITY_RESULT_SCHEMAS,
   ...nextResultSchemas(),
   'citation-binding-check': obj({ allMatch: bool, checks: arr(obj({ index: { type: 'integer', minimum: 0, maximum: 19 }, matches: bool, mismatches: arr(en('sourceId', 'sourceRevision', 'kind', 'value'), 0, 4), expectedDigest: hash, observedDigest: hash }), 1, 20), passageInspected: no, claimSupportVerified: no }),
   'revision-lineage-check': obj({ consistent: bool, transition: en('initial', 'supersedes'), issues: strings, reviewInherited: no, authenticityVerified: no }),

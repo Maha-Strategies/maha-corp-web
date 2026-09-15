@@ -33,7 +33,7 @@ function recapture(value: ReturnType<typeof fixture>) {
 
 test('all declared products have repeatable offline payload checks, not live delivery claims', () => {
   // Fourteen existing offers plus twenty-two explicitly withheld microproducts.
-  assert.equal(X402_OFFERS.length, 36)
+  assert.equal(X402_OFFERS.length, 38)
   for (const offer of X402_OFFERS) {
     const value = fixture(offer.id)
     const first = checkBuyerDelivery(value)

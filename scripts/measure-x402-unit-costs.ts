@@ -129,7 +129,7 @@ async function invoke(id: string, input: unknown): Promise<unknown> {
   if (id === 'context-budget-ladder') return buildContextBudgetLadder(clone(input))
   if (id === 'evidence-retention-matrix') return buildEvidenceRetentionMatrix(clone(input))
   if (id === 'governed-context-verification-pack') return buildGovernedContextVerificationPack(clone(input))
-  if (id.startsWith('celestial-')) return buildCelestialProduct(id as never, clone(input))
+  if (['celestial-position-snapshot', 'celestial-chart-evidence', 'celestial-vimshottari-timing'].includes(id)) return buildCelestialProduct(id as never, clone(input))
   if (id === 'book-section-the-imagined-life') return buildBookSectionReceipt('the-imagined-life', clone(input))
   if (id === 'book-section-the-volcanic-engine') return buildBookSectionReceipt('the-volcanic-engine', clone(input))
   if (id === 'book-edition-the-imagined-life') return buildBookEditionReceipt('the-imagined-life', clone(input))

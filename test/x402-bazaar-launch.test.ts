@@ -2,7 +2,27 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { payableOffers } from '../lib/x402/offers.ts'
 import { BAZAAR_LAUNCH_IDS, BAZAAR_PREVIOUS_AMOUNTS } from '../lib/x402/bazaar-launch.ts'
-import { selected, COMPLETED_LAUNCH_PAYMENT } from '../scripts/run-bazaar-listing-refresh.ts'
+import { selected, COMPLETED_LAUNCH_PAYMENT, refreshRequest } from '../scripts/run-bazaar-listing-refresh.ts'
+import { createHash } from 'node:crypto'
+import { readAdmissionClaim } from '../lib/x402/admission.ts'
+import { validateAdmissionBody } from '../lib/x402/admission-body.ts'
+
+test('final two exclude all21 paid offers and supply server-valid MPS admission headers', async () => {
+  const final = selected('launch-final-two')
+  assert.deepEqual(final.map(o => o.id), ['mps-autonomous-audit', 'governed-context-verification-pack'])
+  assert.equal(final.reduce((n, o) => n + BigInt(o.amount), BigInt(0)), BigInt(750000))
+  const offer = final[0]
+  const prepared = refreshRequest(offer)
+  const request = new Request('https://www.mahastrategies.com' + offer.path, { method: 'POST', headers: prepared.headers, body: JSON.stringify(prepared.body) })
+  const claim = readAdmissionClaim(request.headers, offer, request.url)
+  assert.ok(claim.ok)
+  assert.deepEqual(await validateAdmissionBody(request, offer, claim.claim), { ok: true })
+  assert.equal(prepared.headers['x-maha-idempotency-key'], prepared.body.clientRequestId)
+  assert.notEqual(prepared.headers['x-maha-input-hash'], `sha256:${createHash('sha256').update(JSON.stringify(prepared.body)).digest('hex')}`)
+  const wrong = { ...claim.claim, inputHash: 'sha256:' + '0'.repeat(64) }
+  assert.equal((await validateAdmissionBody(request, offer, wrong)).ok, false)
+  assert.equal(refreshRequest(final[1]).headers['x-maha-input-hash'], undefined)
+})
 
 test('reconciled continuation excludes the settled purchase and caps the remaining spend', () => {
   const remaining = selected('launch-remaining')

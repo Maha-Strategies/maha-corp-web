@@ -4,6 +4,7 @@ import { MICRO_BOUNDARIES, MICRO_IDS, MICRO_INPUT_SCHEMAS, MICRO_MAX_REQUEST_BYT
 import { microOutputSchema } from './micro-output-schemas.ts'
 import { MICRO_SAMPLE_INPUTS } from './micro-samples.ts'
 import { isReleasedMicro } from './micro-release.ts'
+import { isCompatibilityProduct } from './compatibility-contracts.ts'
 import { BAZAAR_LAUNCH_COPY } from './bazaar-launch.ts'
 
 /** Only the explicit owner-authorized cohort can be configured for settlement. */
@@ -12,7 +13,7 @@ export const MICRO_OFFERS: readonly X402Offer[] = MICRO_IDS.map(id => ({
   description: BAZAAR_LAUNCH_COPY[id] ?? MICRO_PRODUCTS[id].description, concurrencyCap: 4,
   serviceName: MICRO_PRODUCTS[id].title, tags: ['bounded-computation', 'evidence', 'deterministic', 'microproduct'],
   status: isReleasedMicro(id) ? 'available' : 'withheld',
-  availability: { payableInProduction: isReleasedMicro(id), blockedBy: isReleasedMicro(id) ? [] : ['Outside the owner-authorized five-product release; settlement remains disabled.'] },
+  availability: { payableInProduction: isReleasedMicro(id), blockedBy: isReleasedMicro(id) ? [] : [isCompatibilityProduct(id) ? 'Exact price and draft rule-set release approval pending; settlement disabled.' : 'Outside the owner-authorized release; settlement remains disabled.'] },
   requiresIdempotency: false, maxRequestBytes: MICRO_MAX_REQUEST_BYTES,
   capabilityBoundaries: [...MICRO_BOUNDARIES, MICRO_PRODUCTS[id].description],
   retention: { fullSourceTextStored: false, verbatimExcerptsRetained: false,

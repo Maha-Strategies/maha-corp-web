@@ -1,5 +1,6 @@
 /** Public declarations only. Never import corpus files or operational secrets here. */
 import { NEXT_PRODUCTS, nextInputSchemas } from './micro-next-contracts.ts'
+import { COMPATIBILITY_PRODUCTS, COMPATIBILITY_INPUT_SCHEMAS } from './compatibility-contracts.ts'
 export const MICRO_VERSION = 'maha-microproducts/0.1' as const
 export const MICRO_MAX_REQUEST_BYTES = 32768
 export const MICRO_MAX_RESPONSE_BYTES = 65536
@@ -15,6 +16,7 @@ export const MICRO_PRODUCTS = {
   'tiruvaymoli-context-packet': { amount: '5000', title: 'Tiruvaymoli Passage Context Packet', description: 'Deliver one supported atlas unit as structured edition metadata, poetic context, bounded answers and links at a pinned registry digest. Public pages remain free. No translation full text, redistribution license, historical or theological certification.' },
   'astrology-experiment-plan-check': { amount: '10000', title: 'Astrology Experiment-Plan Check', description: 'Check one structured public or synthetic low-stakes experiment plan for timing, comparator, outcome and analysis declarations. Returns deficiencies and an integrity receipt. No registration, trusted timestamp, prediction, power analysis or scientific validation.' },
   ...NEXT_PRODUCTS,
+  ...COMPATIBILITY_PRODUCTS,
 } as const
 export type MicroProductId = keyof typeof MICRO_PRODUCTS
 export const MICRO_IDS = Object.keys(MICRO_PRODUCTS) as MicroProductId[]
@@ -32,6 +34,7 @@ const observation = objectSchema({ observationId: ID_SCHEMA, normalizedClaimId: 
 const envelope = (properties: Record<string, MicroSchema>) => objectSchema({ dataClass: enumSchema('public', 'synthetic'), ...properties })
 
 export const MICRO_INPUT_SCHEMAS: Record<MicroProductId, MicroSchema> = {
+  ...COMPATIBILITY_INPUT_SCHEMAS,
   ...nextInputSchemas(),
   'citation-binding-check': envelope({ bindings: arraySchema(objectSchema({ expected: locator, observed: locator }), 1, 20) }),
   'revision-lineage-check': envelope({ previous: { oneOf: [node, { type: 'null' }] }, next: node }),

@@ -1,0 +1,53 @@
+name: Approved compatibility indexing
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: Exact compatibility plan confirmation including digest
+        required: true
+        type: string
+      execute:
+        description: One purchase per new product, maximum 0.0175 USDC; no old offers
+        required: true
+        default: false
+        type: boolean
+permissions:
+  contents: read
+concurrency:
+  group: production-x402-bazaar-canary
+  cancel-in-progress: false
+jobs:
+  index:
+    if: github.run_attempt == 1 && github.ref == 'refs/heads/main'
+    environment: production-x402-canary
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      BASE_RPC_URL: ${{ vars.BASE_RPC_URL }}
+      BAZAAR_REFRESH_CONFIRMATION: ${{ inputs.confirmation }}
+      BAZAAR_REFRESH_OUTPUT_PATH: ${{ github.workspace }}/compatibility-index-evidence.json
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verify scope and payment boundary
+        run: node --experimental-strip-types --test test/x402-compatibility-products.test.ts test/x402-compatibility-index.test.ts test/x402-bazaar-listing-refresh.test.ts
+      - name: One bounded purchase each; never retry payment for indexing lag
+        if: inputs.execute
+        env:
+          X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
+        run: node --experimental-strip-types scripts/run-bazaar-listing-refresh.ts --phase=compatibility --execute
+      - name: Read-only plan
+        if: ${{ !inputs.execute }}
+        run: node --experimental-strip-types scripts/run-bazaar-listing-refresh.ts --phase=compatibility --plan
+      - name: Preserve sanitized evidence on success or failure
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: compatibility-index-${{ github.run_id }}
+          path: ${{ env.BAZAAR_REFRESH_OUTPUT_PATH }}
+          if-no-files-found: warn
+          retention-days: 90

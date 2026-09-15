@@ -5,6 +5,8 @@ import { MICRO_BOUNDARIES, MICRO_INPUT_SCHEMAS, MICRO_MAX_REQUEST_BYTES, MICRO_M
 import { microOutputSchema } from './micro-output-schemas.ts'
 import { isNextProduct } from './micro-next-contracts.ts'
 import { buildNextProduct } from './micro-next-products.ts'
+import { isCompatibilityProduct } from './compatibility-contracts.ts'
+import { buildCompatibilityProduct } from './compatibility-products.ts'
 
 type Row = Record<string, unknown>
 const compareText = (a: string, b: string) => a < b ? -1 : a > b ? 1 : 0
@@ -120,7 +122,7 @@ export async function buildMicroProduct(id: MicroProductId, supplied: unknown, c
   const input = parseMicroInput(id, supplied)
   let result: Row
   try {
-    const core = isNextProduct(id) ? await buildNextProduct(id, input) : coreResult(id, input)
+    const core = isCompatibilityProduct(id) ? buildCompatibilityProduct(id, input) : isNextProduct(id) ? await buildNextProduct(id, input) : coreResult(id, input)
     if (core) result = core
     else {
       const provider = corpus ?? await import('./micro-corpus.ts')

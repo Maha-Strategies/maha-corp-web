@@ -10,8 +10,8 @@ import {
   FOUNDING_PARTNER,
   POSITIONING,
   REQUIRED_PUBLIC_ARTIFACTS,
-  missingPublicArtifacts,
 } from '../lib/commercial/context-control-assessment-offer.ts'
+import { missingPublicArtifacts } from '../lib/commercial/context-control-assessment-evidence.ts'
 
 const ROOT = join(import.meta.dirname, '..')
 const page = () => readFileSync(join(ROOT, 'app/pricing/page.tsx'), 'utf8')

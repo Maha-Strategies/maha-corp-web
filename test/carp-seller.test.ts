@@ -16,6 +16,7 @@ import {
   SAMLEY_CINNAMON_TEA_RFQ_OFFER,
   handleCarpSellerRequest,
   mahaCarpSellerProfile,
+  usdcDisplayAmount,
 } from '../lib/carp/seller.ts'
 import { approvedCarpPeer, THRIVBE } from '../lib/carp/gateway.ts'
 import {
@@ -37,6 +38,7 @@ import {
   RESEARCH_INTAKE_EVIDENCE_PACK_OFFER,
   VOLCANIC_ENGINE_SECTION_OFFER,
   VOLCANIC_ENGINE_EDITION_OFFER,
+  X402_OFFERS,
 } from '../lib/x402/offers.ts'
 
 const role = JSON.parse(await readFile(new URL('../content/discovery/carp-seller-role.json', import.meta.url), 'utf8'))
@@ -49,8 +51,8 @@ test('the public Seller role mirrors the adopted upstream v0.2 contract', () => 
   assert.deepEqual(role.fulfillmentDescriptor.modes, ['physical', 'digital', 'hybrid'])
 })
 
-test('the Maha seller maps all fourteen payable products to the adopted digital offering shape', () => {
-  assert.equal(mahaCarpSellerProfile.schemaVersion, '0.1.3')
+test('the Maha seller maps the full released catalogue to the adopted digital offering shape', () => {
+  assert.equal(mahaCarpSellerProfile.schemaVersion, '0.1.4')
   assert.equal(mahaCarpSellerProfile.roleContract, CABEZON_SELLER_ROLE_URL)
   assert.equal(mahaCarpSellerProfile.roleMirror, CARP_SELLER_ROLE_URL)
   assert.equal(mahaCarpSellerProfile.membership.status, 'confirmed_cabezon_seller_directory')
@@ -80,13 +82,13 @@ test('the Maha seller maps all fourteen payable products to the adopted digital 
     ['maha:book-edition:the-imagined-life:v0.1', '2.99', IMAGINED_LIFE_EDITION_OFFER],
     ['maha:book-edition:the-volcanic-engine:v0.1', '2.99', VOLCANIC_ENGINE_EDITION_OFFER],
   ] as const
-  assert.equal(MAHA_CARP_DIGITAL_OFFERS.length, 14)
-  for (const [offeringRef, amount, x402] of expected) {
+  assert.equal(MAHA_CARP_DIGITAL_OFFERS.length, X402_OFFERS.filter(o => o.status === 'available' && o.availability.payableInProduction && o.availability.blockedBy.length === 0).length)
+  for (const [offeringRef, , x402] of expected) {
     const offer = MAHA_CARP_DIGITAL_OFFERS.find((candidate) => candidate.offeringRef === offeringRef)
     assert.ok(offer)
     assert.equal(offer.kind, 'digital')
     assert.equal(offer.status, x402.status)
-    assert.equal(offer.price.amount, amount)
+    assert.equal(offer.price.amount, usdcDisplayAmount(x402.amount))
     assert.equal(offer.directSettlement.amountBaseUnits, x402.amount)
     assert.equal(offer.directSettlement.resource, `https://www.mahastrategies.com${x402.path}`)
     assert.equal(offer.directSettlement.idempotencyRequired, x402.requiresIdempotency)
@@ -111,7 +113,7 @@ test('enquiry returns the canonical offering array for compatible needs', () => 
   assert.ok('result' in matched)
   assert.deepEqual(
     (matched as { result: Array<{ offeringRef: string }> }).result.map((offer) => offer.offeringRef),
-    MAHA_CARP_DIGITAL_OFFERS.filter((offer) => !offer.offeringRef.startsWith('maha:celestial-')).map((offer) => offer.offeringRef),
+    MAHA_CARP_DIGITAL_OFFERS.filter((offer) => !offer.directSettlement.resource.includes('/calculations/')).map((offer) => offer.offeringRef),
   )
 
   const unrelated = handleCarpSellerRequest({

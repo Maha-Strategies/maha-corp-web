@@ -5,6 +5,18 @@ unsigned payment challenges and CDP validations passed. The first publisher-fund
 payment ($.006) settled and its revised Bazaar listing was observed at
 2026-09-13T06:37:50Z. The remaining 22 are a separate, reconciled continuation.
 
+Update after run34743800710:20 further settlements confirmed for $0.524.
+Total21 purchases,$0.530. MPS was refused before settlement because the refresh
+client omitted admission headers; governed pack was not attempted. Buyer balance
+4.927272USDC at2026-09-13T07:06:25Z exactly reconciles to those21 payments.
+The server returns this refusal before calling acceptPayment. Do not repay21.
+`launch-remaining` execution is now blocked. The only executable launch phase is
+`launch-final-two`: MPS$.25 and governed pack$.50, total$.75. MPS uses a stable
+request key and SHA256 of the normalized text field alone, verified against the
+server's own admission-body validator in tests. Read-only planning remains the
+default; exact confirmation also binds request headers and body. Earlier
+remaining-22 instructions below describe the completed attempt, not a rerun plan.
+
 Owner approval: finalize narrow-utility prices, improve all 23 listings and focus
 promotion on four workflows. Exclude all offers at $1 or above. Wallet funding
 does not authorize expanding beyond this cohort. Absolute payment ceiling $5;

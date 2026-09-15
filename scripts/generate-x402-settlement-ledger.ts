@@ -25,7 +25,8 @@ import { buildLedger, type OfferPrice } from '../lib/x402/settlement-ledger.ts'
 
 const OUT = 'content/x402/settlement-ledger.json'
 const TRANSFER = parseAbiItem('event Transfer(address indexed from, address indexed to, uint256 value)')
-const CHUNK = BigInt(9_000)
+// Base's public RPC currently limits eth_getLogs to 2,000 blocks per request.
+const CHUNK = BigInt(2_000)
 const BLOCKS_PER_DAY = BigInt(43_200)
 
 const flag = (name: string, fallback: string) => {

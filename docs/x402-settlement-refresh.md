@@ -1,12 +1,17 @@
 # Automatic public settlement ledger
 
+Local September 13 update: `/developers/settlement` is a transaction ledger, not a product catalogue. The zero-sale product table is removed. Every available offer and declared historical price feeds scheduled classification automatically; positive unmatched transfers remain visible without a product guess. Amount matching is not proof of an endpoint call or delivery.
+
+Saved snapshots validate against their recorded catalogue before being reprojected against the current catalogue for display. This prevents a catalogue addition from rejecting intact saved history and stopping the worker. Reprojection does not change the observed date or scanned block range and never runs a chain scan. Digest/summary/row tampering still refuses. No production refresh, build or deployment was executed for this local update.
+
 Production runs `/api/cron/x402-settlements` hourly at minute 17 UTC. It requires
 the existing `CRON_SECRET` bearer token and rejects non-production environments.
 The job only reads finalized Base USDC Transfer logs to Maha's payee. It cannot
 sign transactions, spend funds, or invoke a model.
 
 An incremental cursor and 128-block overlap preserve cumulative history without
-rescanning 60 days every hour. Each invocation scans at most 108,000 blocks;
+rescanning 60 days every hour. Each invocation scans at most 24,000 blocks in
+2,000-block requests, matching Base's public `eth_getLogs` limit;
 backlogs catch up across runs. Logs are identified by transaction hash and log
 index. Failed scans do not publish partial results or advance the saved cursor.
 

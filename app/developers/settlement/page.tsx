@@ -35,14 +35,14 @@ export default async function SettlementLedgerPage() {
   const observed = new Date(record.observedAt)
   const cards: { label: string; value: string; note: string }[] = [
     { label: 'Settled protocol', value: record.protocol, note: record.network },
-    { label: 'Verified settlements', value: `${s.totalSettlements}`, note: `${s.externalSettlements} external · ${s.canarySettlements} operator canary` },
+    { label: 'Price-matched transfers', value: `${s.totalSettlements}`, note: `${s.externalSettlements} external · ${s.canarySettlements} operator canary` },
     { label: 'External wallets', value: `${s.externalWallets}`, note: `${s.externalValueUsdc} USDC settled externally` },
     {
-      label: 'Returning buyers',
+      label: 'Returning external wallets',
       value: `${s.repeatExternalWallets}`,
       note: s.crossProductWallets > 0
         ? `${s.crossProductWallets} paid at more than one published price`
-        : 'No cross-product repeat recorded',
+        : 'No multi-price repeat recorded',
     },
   ]
 
@@ -78,40 +78,12 @@ export default async function SettlementLedgerPage() {
         ))}
       </section>
 
-      <section className="evidence-card mt-8">
-        <h2 className="evidence-section-title text-xl">By product</h2>
-        <table className="mt-4 w-full text-sm">
-          <thead>
-            <tr className="border-b border-[var(--border-default)] text-left font-mono text-xs uppercase tracking-[0.18em]">
-              <th className="pb-2">Product</th><th className="pb-2">Price</th>
-              <th className="pb-2">External</th><th className="pb-2">Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {s.byProduct.map((p) => (
-              <tr key={p.id} className="border-b border-[var(--border-subtle)]">
-                <td className="py-2">{p.title}</td>
-                <td className="py-2 font-mono">{p.priceUsdc} USDC</td>
-                <td className="py-2">{p.attributionAmbiguous ? 'unattributable' : p.externalSettlements}</td>
-                <td className="py-2">{p.attributionAmbiguous ? '—' : p.settlements}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {s.byProduct.some((p) => p.attributionAmbiguous) ? (
-          <p className="mt-3 text-xs text-[var(--text-tertiary)]">
-            Multiple offers publish the same price, so a transfer cannot be attributed to one of them from chain data
-            alone. Those rows are reported as unattributable rather than assigned.
-          </p>
-        ) : null}
-      </section>
-
       <section className="evidence-card mt-8 overflow-x-auto">
         <h2 className="evidence-section-title text-xl">Settlements</h2>
         <table className="mt-4 w-full text-sm">
           <thead>
             <tr className="border-b border-[var(--border-default)] text-left font-mono text-xs uppercase tracking-[0.18em]">
-              <th className="pb-2">Timestamp (UTC)</th><th className="pb-2">Service</th>
+              <th className="pb-2">Timestamp (UTC)</th><th className="pb-2">Service (price-inferred)</th>
               <th className="pb-2">Payer wallet</th><th className="pb-2">Amount</th><th className="pb-2">Proof</th>
             </tr>
           </thead>
@@ -119,14 +91,7 @@ export default async function SettlementLedgerPage() {
             {record.entries.filter((e) => e.product !== null || e.amountUsdc !== '0').map((entry) => (
               <tr key={`${entry.transactionHash}:${entry.logIndex ?? 'legacy'}`} className="border-b border-[var(--border-subtle)]">
                 <td className="py-2 font-mono text-xs">{entry.timestampUtc?.slice(0, 19).replace('T', ' ') ?? '—'}</td>
-                <td className="py-2">
-                  {entry.product?.title ?? 'Unattributed amount'}
-                  {entry.product?.attributedBy === 'operator-receipt' ? (
-                    <span className="ml-2 text-[10px] uppercase tracking-wider text-[var(--text-secondary)]" title="Attributed from our own canary receipt, not from the amount. Not recomputable from the chain alone.">
-                      from canary receipt
-                    </span>
-                  ) : null}
-                </td>
+                <td className="py-2">{entry.product?.title ?? 'Unknown — amount does not uniquely identify a product'}</td>
                 <td className="py-2">
                   <span className="font-mono text-xs">{entry.payerDisplay}</span>
                   <span className="ml-2 rounded px-2 py-0.5 text-[10px] uppercase tracking-wider border border-[var(--border-default)]">
@@ -136,7 +101,7 @@ export default async function SettlementLedgerPage() {
                 <td className="py-2 font-mono">{entry.amountUsdc} USDC</td>
                 <td className="py-2">
                   <a href={entry.explorerUrl} rel="noreferrer noopener" target="_blank" className="underline">
-                    Receipt ↗
+                    Transfer proof ↗
                   </a>
                 </td>
               </tr>

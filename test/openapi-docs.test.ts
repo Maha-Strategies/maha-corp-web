@@ -199,6 +199,11 @@ const PRIVATE_ROUTES = new Set([
   // Unpublished Vibes-Coded target. It remains out of Maha's public OpenAPI
   // contract until Mayone authorizes publication of the separate SKU.
   '/api/v1/seller-endpoints/governed-context-verification-pack/call',
+  // Educational Jyotisha reader. The token-protected pilot is not a customer
+  // API; the anonymous basic route backs /knowledge/birth, answers no-store and
+  // noindex, and stays out of the public REST contract until separately approved.
+  '/api/v1/interpretations/jyotisha',
+  '/api/v1/interpretations/jyotisha/basic',
 ])
 
 function routePathsOnDisk(dir: string, prefix: string): string[] {

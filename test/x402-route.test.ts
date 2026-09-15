@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict'
 import test, { afterEach, beforeEach } from 'node:test'
 import { discoveryExtensionsFor, resourceInfoFor } from '../lib/x402/discovery.ts'
+import { CONTEXT_COMPRESSION_DISCOVERY } from '../lib/x402/offer-schemas.ts'
+import type { PaymentRequirement } from '../lib/x402/protocol.ts'
 
 // End to end with every outbound dependency stubbed at the network boundary
 // rather than injected: the facilitator's HTTP shape, the Supabase RPC that
@@ -9,9 +11,9 @@ import { discoveryExtensionsFor, resourceInfoFor } from '../lib/x402/discovery.t
 // only breaks once the pieces are wired together -- a response field read under
 // the wrong name, a slot token acquired and then dropped, a flag read too early.
 //
-// proxy.ts itself cannot be imported here: it resolves `next/server` and `@/`
-// aliases that only exist inside the Next build. Its whole contribution beyond
-// routing is paidRequestHeaders(), which is asserted directly.
+// proxy.ts is not imported here; its paid forwarding, header stripping and
+// pre-settlement refusals are executed in test/proxy-asserted-headers.test.ts
+// through the alias hooks in test/helpers/next-aliases.ts.
 
 const ORIGINAL_FETCH = globalThis.fetch
 const ORIGINAL_ENV = { ...process.env }
@@ -94,19 +96,28 @@ const gateway = () => import('../lib/x402/gateway.ts')
 const encode = (value: unknown) => Buffer.from(JSON.stringify(value), 'utf8').toString('base64')
 const priced = { offerId: 'context-compression', method: 'POST' as const, path: '/api/v1/compress', amount: '1000', description: 'One compression', concurrencyCap: 8 }
 const resourceUrl = 'https://www.mahastrategies.com/api/v1/compress'
+const accepted: PaymentRequirement = {
+  scheme: 'exact', network: 'eip155:8453', amount: '1000', payTo: '0xSettlement',
+  maxTimeoutSeconds: 60, asset: '0xUSDC', extra: { name: 'USD Coin', version: '2' },
+}
 const SIGNATURE = async () => encode({
   x402Version: 2,
   resource: resourceInfoFor(priced, resourceUrl),
-  accepted: {
-    scheme: 'exact', network: 'eip155:8453', amount: '1000', payTo: '0xSettlement',
-    maxTimeoutSeconds: 60, asset: '0xUSDC', extra: { name: 'USD Coin', version: '2' },
-  },
+  accepted,
   payload: { signature: '0xsigned' },
-  extensions: await discoveryExtensionsFor(priced, resourceUrl),
+  extensions: await discoveryExtensionsFor(priced, resourceUrl, accepted),
 })
 
+// The body the compression route accepts. Priced routes validate it before
+// settlement, so a paid request without it is refused and never settled.
+const COMPRESSION_BODY = JSON.stringify(CONTEXT_COMPRESSION_DISCOVERY.input)
+
 function post(path: string, headers: Record<string, string> = {}) {
-  return new Request(`https://www.mahastrategies.com${path}`, { method: 'POST', headers })
+  return new Request(`https://www.mahastrategies.com${path}`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', ...headers },
+    body: COMPRESSION_BODY,
+  })
 }
 
 test('with the flag off nothing is read, called, or emitted', async () => {

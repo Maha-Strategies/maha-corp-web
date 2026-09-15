@@ -64,6 +64,15 @@ export default function AstrologyTraditionsPage() {
           </p>
         </header>
 
+        <section aria-label="Try the birth chart report" className="mt-10 border border-violet-800 p-6">
+          <h2 className="text-2xl font-semibold text-white">Calculate your chart and inspect the explanation</h2>
+          <p className="mt-3 text-sm leading-7">The free reader combines Lahiri D1 and Navamsa D9 placements, periods and transit snapshots with source-linked educational reflections. Internally reviewed, not expert-reviewed; no guaranteed events or spouse identification.</p>
+          <div className="mt-4 flex flex-wrap gap-5 text-violet-300">
+            <Link href="/knowledge/birth" className="underline focus-visible:outline">Generate a free birth chart report</Link>
+            <Link href="/knowledge/astrology/reading-guide" className="underline focus-visible:outline">Read the example and interpretation guide</Link>
+          </div>
+        </section>
+
         <section className="mt-12 border-l-2 border-rose-500 bg-rose-950/10 p-6">
           <h2 className="font-mono text-[10px] uppercase tracking-widest text-rose-300">The epistemic boundary</h2>
           <p className="mt-3 max-w-3xl font-serif text-lg leading-8 text-zinc-200">

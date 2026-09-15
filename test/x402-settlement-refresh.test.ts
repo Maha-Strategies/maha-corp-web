@@ -1,14 +1,53 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { readFileSync } from 'node:fs'
-import { ledgerFromRows, refreshSettlementLedger, MAX_SCAN_BLOCKS, type SettlementReader, type Transfer } from '../lib/x402/settlement-refresh.ts'
+import { ledgerFromRows, refreshSettlementLedger, MAX_SCAN_BLOCKS, SCAN_CHUNK, type SettlementReader, type Transfer } from '../lib/x402/settlement-refresh.ts'
 import { bundledLedger, readPublicSettlementLedger, refreshStoredSettlements, validLiveSnapshot, type LiveSnapshot, type SettlementStore } from '../lib/x402/settlement-live-store.ts'
+import { buildLedger } from '../lib/x402/settlement-ledger.ts'
+import { payableOffers } from '../lib/x402/offers.ts'
+import { OPERATOR_WALLETS, MAHA_PAYEE } from '../lib/x402/discovery-payment-recipe.ts'
 
 const now = new Date('2026-09-09T03:00:00Z')
 const row = (block: bigint, index = 0): Transfer => ({ payer: `0x${'a'.repeat(40)}`, amountBaseUnits: BigInt(1000), blockNumber: block, transactionHash: `0x${'b'.repeat(64)}`, logIndex: index })
 const reader = (head: bigint, rows: Transfer[] = []): SettlementReader => ({ finalizedBlock: async () => head,
   transfers: async (from, to) => rows.filter(r => r.blockNumber >= from && r.blockNumber <= to), timestamp: async () => now.toISOString() })
 const empty = () => ledgerFromRows([], BigInt(1), BigInt(500), now.toISOString())
+
+test('old catalogue snapshots validate and reproject without losing observed history', async () => {
+  const block = BigInt(bundledLedger.scannedToBlock) + BigInt(1)
+  const offer = payableOffers().at(-1)!
+  const ledger = buildLedger({ settlements: [{ ...row(block), amountBaseUnits: BigInt(offer.amount) }],
+    offers: [], operatorWallets: [...OPERATOR_WALLETS, MAHA_PAYEE], observedAt: now.toISOString(), fromBlock: BigInt(1), toBlock: block })
+  const saved: LiveSnapshot = { schemaVersion: 'maha-live-settlements/1.0', ledger, caughtUp: true, finalizedBlock: String(block) }
+  assert.ok(validLiveSnapshot(saved))
+  const publicView = await readPublicSettlementLedger({ read: async () => saved }, now)
+  assert.equal(publicView.source, 'scheduled_snapshot')
+  assert.equal(publicView.ledger.entries[0].product?.id, offer.id)
+  assert.equal(publicView.ledger.observedAt, now.toISOString())
+  assert.equal(publicView.ledger.scannedToBlock, String(block))
+  assert.equal(saved.ledger.entries[0].product, null)
+  const tampered = structuredClone(saved)
+  tampered.ledger.entries[0].amountBaseUnits = '999'
+  assert.equal(validLiveSnapshot(tampered), false)
+})
+
+test('scheduled scanner includes every available product and declared historical price', () => {
+  const ledger = ledgerFromRows([], BigInt(1), BigInt(500), now.toISOString())
+  assert.deepEqual(ledger.summary.byProduct.map(o => o.id).sort(), payableOffers().map(o => o.id).sort())
+  for (const offer of payableOffers()) for (const amount of offer.supersededAmounts ?? []) {
+    const result = ledgerFromRows([{ ...row(BigInt(100)), amountBaseUnits: BigInt(amount) }], BigInt(1), BigInt(500), now.toISOString())
+    assert.equal(result.entries[0].product?.id, offer.id)
+    assert.equal(result.summary.totalSettlements, 1)
+  }
+})
+
+test('page shows transactions, not the available-product catalogue', () => {
+  const page = readFileSync('app/developers/settlement/page.tsx', 'utf8')
+  assert.doesNotMatch(page, /s\.byProduct|By product/)
+  assert.match(page, /record\.entries\.filter/)
+  assert.match(page, /Service \(price-inferred\)/)
+  assert.match(page, /<SettlementAutoRefresh/)
+})
 test('deployment wires hourly authenticated production-only refresh and request-time page reads', () => {
   const config = JSON.parse(readFileSync('vercel.json', 'utf8'))
   assert.equal(config.crons.filter((c: { path: string }) => c.path === '/api/cron/x402-settlements').length, 1)
@@ -39,6 +78,18 @@ test('bounded catchup advances only through completely scanned ranges', async ()
   const result = await refreshSettlementLedger(empty(), reader(BigInt(999999)), now)
   assert.equal(result.ledger.scannedToBlock, String(BigInt(500) - BigInt(128) + MAX_SCAN_BLOCKS - BigInt(1)))
   assert.equal(result.caughtUp, false)
+})
+test('every public-RPC log request stays within the Base 2,000-block limit', async () => {
+  assert.equal(SCAN_CHUNK, BigInt(2000))
+  const ranges: Array<[bigint, bigint]> = []
+  const bounded: SettlementReader = {
+    finalizedBlock: async () => BigInt(6500),
+    transfers: async (from, to) => { ranges.push([from, to]); return [] },
+    timestamp: async () => now.toISOString(),
+  }
+  await refreshSettlementLedger(empty(), bounded, now)
+  assert.ok(ranges.length > 1)
+  for (const [from, to] of ranges) assert.ok(to - from + BigInt(1) <= BigInt(2000))
 })
 test('failed RPC, invalid logs and timestamps reject instead of advancing', async () => {
   await assert.rejects(refreshSettlementLedger(empty(), { ...reader(BigInt(600)), transfers: async () => { throw Error('rpc') } }), /rpc/)
