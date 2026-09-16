@@ -27,6 +27,7 @@ const studies = [
     ],
     boundary: 'It is not a live warning, monitoring, forecast, evacuation, or location-specific decision system. Interior features and hazard corridors are explanatory inferences and teaching overlays. Current conditions and instructions belong to PHIVOLCS and local authorities.',
     links: [
+      { label: 'Open the Mayon hub', href: '/mayon', external: false },
       { label: 'Open the Mayon experience ↗', href: 'https://mayonrajan.com', external: true },
       { label: 'Read methods and data ↗', href: 'https://mayonrajan.com/methods/', external: true },
       { label: 'Open the Teacher Kit ↗', href: 'https://mayonrajan.com/teachers/', external: true },

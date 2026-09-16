@@ -17,9 +17,9 @@ export const metadata: Metadata = {
 
 const relatedProducts = [
   {
-    label: 'Maya',
+    label: 'Mayon Volcano',
     description: 'A free, true-scale interactive field trip through Mayon Volcano, its geology, and history.',
-    href: '/apps/mayon',
+    href: '/mayon',
     cta: 'Explore this app →',
   },
   {

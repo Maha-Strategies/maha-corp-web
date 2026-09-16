@@ -94,7 +94,7 @@ test('the Mayon dossier is canonical, reciprocal, crawlable and machine-discover
   const [page, religionHub, volcanoApp, volcanoProject, sitemap] = await Promise.all([
     readFile(new URL('app/knowledge/religion/mayon/page.tsx', root), 'utf8'),
     readFile(new URL('app/knowledge/religion/page.tsx', root), 'utf8'),
-    readFile(new URL('app/apps/mayon/page.tsx', root), 'utf8'),
+    readFile(new URL('app/mayon/page.tsx', root), 'utf8'),
     readFile(new URL('app/projects/mayon/page.tsx', root), 'utf8'),
     readFile(new URL('app/sitemap.ts', root), 'utf8'),
   ])

@@ -1,7 +1,7 @@
 export const APP_STORE_LINKS = {
   mayon: {
     web: 'https://mayonrajan.com',
-    ios: 'https://apps.apple.com/pt/app/mayon/id6794775508',
+    ios: 'https://apps.apple.com/au/app/mayon/id6794775508',
     android: 'https://play.google.com/store/apps/details?id=com.mayon.app',
   },
   mahaOs: {

@@ -38,6 +38,14 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        // The Mayon app documentation is consolidated into the hub at /mayon.
+        // Exact source on purpose: /apps/mayon/privacy is a separate legal
+        // page and must keep resolving. `permanent: true` is Next's 308.
+        source: '/apps/mayon',
+        destination: '/mayon',
+        permanent: true,
+      },
+      {
         source: '/research/chronobiological-entrainment-endocrine-homeostasis',
         destination: 'https://research.mahastrategies.com/papers/chronobiological-entrainment',
         permanent: true, // 301

@@ -44,6 +44,16 @@ import { MYTHOLOGY_PATH, mythologyTraditions } from '@/lib/mythology-navigation'
 import { SITE_DIRECTORY_PATH } from '@/lib/site-directory'
 import { COLLECTION_HUB_PATHS } from '@/lib/collection-hub-paths'
 
+/**
+ * Routes that now permanently redirect elsewhere.
+ *
+ * The federation route baseline is an observation of what was public when it
+ * was recorded, and it keeps that record intact. A sitemap is a list of
+ * canonical URLs, so a redirected one is removed here rather than edited out
+ * of the observation. See next.config.ts for the redirect itself.
+ */
+const CONSOLIDATED_ROUTES = new Set([`${MAHA_SITE_URL}/apps/mayon`])
+
 /*
  * The sitemap reads active canonical releases from the database, so it must be
  * rendered per request. A sitemap Route Handler is cached by default unless it
@@ -207,7 +217,7 @@ export async function currentHostSitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/case-studies`, lastModified: new Date('2026-07-26') },
     { url: `${baseUrl}/projects/mayon`, lastModified: new Date('2026-07-24') },
     { url: `${baseUrl}/apps`, lastModified: new Date('2026-07-26') },
-    { url: `${baseUrl}/apps/mayon`, lastModified: new Date('2026-07-26') },
+    { url: `${baseUrl}/mayon`, lastModified: new Date('2026-09-16') },
     { url: `${baseUrl}/apps/mayon/privacy`, lastModified: new Date('2026-07-25') },
     { url: `${baseUrl}/apps/maha-os`, lastModified: new Date('2026-07-26') },
     { url: `${baseUrl}/apps/the-engine`, lastModified: new Date('2026-07-26') },
@@ -569,7 +579,7 @@ export async function currentHostSitemap(): Promise<MetadataRoute.Sitemap> {
     [...publicStaticPages, ...sourceReferencePages, ...knowledgePages, ...astronomyKnowledgePages, ...astrologyTraditionPages, ...knowledgeSupplierPages, ...unfinishedSpeciesReader, ...otherOpenBookReaders, ...canonicalReleasePages, ...published.map((publication) => ({ url: `${baseUrl}/insights/${publication.slug}`, lastModified: new Date(publication.updated_at) }))],
     federationObservedSitemapRows('www.mahastrategies.com'),
     federationSitemapRows('www.mahastrategies.com'),
-  )
+  ).filter((row) => !CONSOLIDATED_ROUTES.has(String(row.url)))
 }
 
 export default currentHostSitemap

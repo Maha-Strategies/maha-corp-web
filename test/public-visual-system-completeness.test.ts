@@ -91,7 +91,9 @@ test('every route belongs to one declared visual system', () => {
   // /tools/compatibility-checks adds one free explanation page using the paper boundary.
   // The Jyotisha reader guide adds one Knowledge route: 72 -> 73.
   // The robotics hub and its topic route inherit the Knowledge overlay: 73 -> 75.
-  assert.deepEqual(groups, { paper: 128, apps: 6, books: 41, docs: 1, knowledge: 75, intelligence: 2, operator: 32, internal: 1 })
+  // apps 6 -> 5 and paper 128 -> 129: /apps/mayon is consolidated into the
+  // /mayon hub, which owns the paper boundary directly.
+  assert.deepEqual(groups, { paper: 129, apps: 5, books: 41, docs: 1, knowledge: 75, intelligence: 2, operator: 32, internal: 1 })
 })
 
 test('Apps, Books, Docs, Knowledge, and Intelligence own bounded cyber-light overlays', () => {
