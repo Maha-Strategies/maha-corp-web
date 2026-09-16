@@ -9,7 +9,7 @@ const root = new URL('../', import.meta.url)
 test('the shared registry contains every live app destination', () => {
   assert.deepEqual(APP_STORE_LINKS.mayon, {
     web: 'https://mayonrajan.com',
-    ios: 'https://apps.apple.com/pt/app/mayon/id6794775508',
+    ios: 'https://apps.apple.com/au/app/mayon/id6794775508',
     android: 'https://play.google.com/store/apps/details?id=com.mayon.app',
   })
   assert.equal(APP_STORE_LINKS.dreamEngine.ios, 'https://apps.apple.com/us/app/the-engine-imagined-life/id6793837872')
@@ -18,8 +18,10 @@ test('the shared registry contains every live app destination', () => {
 
 test('the apps hub and product pages consume shared links without stale release copy', async () => {
   const [hub, mayon, engine, mahaOs, software, cases] = await Promise.all([
-    'app/apps/page.tsx', 'app/apps/mayon/page.tsx', 'app/apps/the-engine/page.tsx', 'app/apps/maha-os/page.tsx', 'app/software/page.tsx', 'app/case-studies/page.tsx',
+    'app/apps/page.tsx', 'lib/mayon-hub.ts', 'app/apps/the-engine/page.tsx', 'app/apps/maha-os/page.tsx', 'app/software/page.tsx', 'app/case-studies/page.tsx',
   ].map((path) => readFile(new URL(path, root), 'utf8')))
+  // The Mayon hub reads its destinations from lib/mayon-hub.ts, which is the
+  // one module allowed to read APP_STORE_LINKS for that product.
   for (const page of [hub, mayon, engine, mahaOs, software]) assert.match(page, /APP_STORE_LINKS/)
   assert.doesNotMatch(`${hub}\n${engine}\n${cases}`, /release is in preparation|mobile releases in preparation/i)
   assert.match(hub, /Available now on iOS and Android/)

@@ -33,7 +33,7 @@ export default function AppsPage() {
               <h2 className="evidence-card-title mt-2">Mayon</h2>
               <p className="evidence-card-copy mt-3">A free, true-scale exploration of Mayon Volcano for learners, educators, and curious visitors. It combines terrain, historical chapters, and clearly bounded hazard scenarios.</p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Link href="/apps/mayon" className="evidence-action evidence-action--secondary">Read documentation</Link>
+                <Link href="/mayon" className="evidence-action evidence-action--secondary">Open the Mayon hub</Link>
                 <a href={APP_STORE_LINKS.mayon.ios} className="evidence-link" target="_blank" rel="noreferrer">Download for iOS</a>
                 <a href={APP_STORE_LINKS.mayon.android} className="evidence-link" target="_blank" rel="noreferrer">Get it for Android</a>
                 <a href={APP_STORE_LINKS.mayon.web} className="evidence-link" target="_blank" rel="noreferrer">Open the web experience</a>
