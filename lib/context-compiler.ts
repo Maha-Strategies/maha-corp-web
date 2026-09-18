@@ -117,7 +117,7 @@ export type ContextPackRequest = {
   budgetMode?: BudgetMode
 }
 
-type Passage = { sourceId: string; sourceTitle: string; index: number; text: string; hash: string; estimatedTokens: number; score: number; terms: string[] }
+export type ContextCompilerPassage = { sourceId: string; sourceTitle: string; index: number; text: string; hash: string; estimatedTokens: number; score: number; terms: string[] }
 
 function object(value: unknown): Record<string, unknown> | null {
   return typeof value === 'object' && value !== null && !Array.isArray(value) ? value as Record<string, unknown> : null
@@ -197,7 +197,7 @@ export function parseContextPackRequest(value: unknown): ContextPackRequest {
   return { clientRequestId: singleLine(body.clientRequestId, 'clientRequestId', 8, 120), task, tokenBudget: body.tokenBudget, documents, provenance, scoring, budgetMode }
 }
 
-function normalize(value: string): string {
+export function normalizeContextSource(value: string): string {
   return value.replace(/\r\n?/g, '\n').replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n').trim()
 }
 
@@ -280,8 +280,8 @@ function keywords(task: string): Set<string> {
   return new Set(tokenize(task).filter((word) => !STOPWORDS.has(word)))
 }
 
-function splitPassages(sourceId: string, sourceTitle: string, value: string): Passage[] {
-  const passages = normalize(value).split(/\n{2,}/).flatMap((paragraph) => {
+export function splitContextSourcePassages(sourceId: string, sourceTitle: string, value: string): ContextCompilerPassage[] {
+  const passages = normalizeContextSource(value).split(/\n{2,}/).flatMap((paragraph) => {
     // Long paragraphs are bounded so a single unranked block cannot consume a pack.
     if (paragraph.length <= 1_600) return [paragraph]
     return paragraph.match(/[^.!?]+[.!?]+(?:\s|$)|.{1,1200}(?:\s|$)/g) ?? [paragraph]
@@ -298,7 +298,7 @@ function splitPassages(sourceId: string, sourceTitle: string, value: string): Pa
 /** Positional preference, kept only to break exact ties deterministically. */
 const positionBonus = (index: number) => Math.max(0, 2 - Math.floor(index / 8))
 
-function scoreKeyword(passages: Passage[], terms: Set<string>): void {
+function scoreKeyword(passages: ContextCompilerPassage[], terms: Set<string>): void {
   for (const passage of passages) {
     const words = new Set(passage.terms)
     const matches = [...terms].filter((term) => words.has(term)).length
@@ -314,7 +314,7 @@ function scoreKeyword(passages: Passage[], terms: Set<string>): void {
  * and worthless in another. That is the property the keyword scorer lacks and
  * the reason it dilutes at scale.
  */
-function scoreBm25(passages: Passage[], terms: Set<string>): void {
+function scoreBm25(passages: ContextCompilerPassage[], terms: Set<string>): void {
   const K1 = 1.5
   const B = 0.75
   const total = passages.length
@@ -357,13 +357,13 @@ export function compileContextPack(input: ContextPackRequest) {
     ? Math.max(1, Math.floor(input.tokenBudget * GUARANTEED_BUDGET_FACTOR))
     : input.tokenBudget
   const terms = keywords(input.task)
-  const allPassages = input.documents.flatMap((document) => splitPassages(document.id, document.title ?? document.id, document.text))
+  const allPassages = input.documents.flatMap((document) => splitContextSourcePassages(document.id, document.title ?? document.id, document.text))
   if ((input.scoring ?? 'bm25') === 'bm25') scoreBm25(allPassages, terms)
   else scoreKeyword(allPassages, terms)
   const seen = new Set<string>()
   const unique = allPassages.filter((passage) => { if (seen.has(passage.hash)) return false; seen.add(passage.hash); return true })
   const ranked = [...unique].sort((left, right) => right.score - left.score || left.sourceId.localeCompare(right.sourceId) || left.index - right.index)
-  const selected: Passage[] = []
+  const selected: ContextCompilerPassage[] = []
   let used = 0
   for (const passage of ranked) {
     if (passage.estimatedTokens > budget - used && selected.length > 0) continue
@@ -372,10 +372,10 @@ export function compileContextPack(input: ContextPackRequest) {
     used += passage.estimatedTokens
     if (used >= budget) break
   }
-  const originalText = input.documents.map((document) => normalize(document.text)).join('\n\n')
+  const originalText = input.documents.map((document) => normalizeContextSource(document.text)).join('\n\n')
   const provenance: ProvenanceStyle = input.provenance ?? 'full'
-  function renderContext(passages: Passage[]) {
-    const label = (passage: Passage) => {
+  function renderContext(passages: ContextCompilerPassage[]) {
+    const label = (passage: ContextCompilerPassage) => {
       if (provenance === 'none') return passage.text
       // Compact keeps a citable handle and drops the title, which is repeated
       // identically on every passage from the same source and is the bulk of
@@ -400,7 +400,7 @@ export function compileContextPack(input: ContextPackRequest) {
   const sourceManifest = input.documents.map((document) => {
     const sourcePassages = allPassages.filter((passage) => passage.sourceId === document.id)
     const included = selected.filter((passage) => passage.sourceId === document.id)
-    return { sourceId: document.id, title: document.title ?? document.id, sourceHash: sha256(normalize(document.text)), originalEstimatedTokens: estimateTokens(normalize(document.text)), passageCount: sourcePassages.length, includedPassageIds: included.map((passage) => `${passage.sourceId}:${passage.index}`), includedEstimatedTokens: included.reduce((total, passage) => total + passage.estimatedTokens, 0) }
+    return { sourceId: document.id, title: document.title ?? document.id, sourceHash: sha256(normalizeContextSource(document.text)), originalEstimatedTokens: estimateTokens(normalizeContextSource(document.text)), passageCount: sourcePassages.length, includedPassageIds: included.map((passage) => `${passage.sourceId}:${passage.index}`), includedEstimatedTokens: included.reduce((total, passage) => total + passage.estimatedTokens, 0) }
   })
   const originalEstimatedTokens = estimateTokens(originalText)
   const compiledEstimatedTokens = estimateTokens(markdown)
@@ -435,7 +435,7 @@ export function compileContextPack(input: ContextPackRequest) {
       hallucinationPreventionGuaranteed: false as const,
       tokenCountType: 'model_neutral_estimate' as const,
     },
-    inputHash: sha256(JSON.stringify({ task: input.task, tokenBudget: input.tokenBudget, documents: input.documents.map((document) => ({ id: document.id, title: document.title, hash: sha256(normalize(document.text)) })) })),
+    inputHash: sha256(JSON.stringify({ task: input.task, tokenBudget: input.tokenBudget, documents: input.documents.map((document) => ({ id: document.id, title: document.title, hash: sha256(normalizeContextSource(document.text)) })) })),
     outputHash: sha256(markdown),
   }
 }
