@@ -36,6 +36,8 @@ import {
   RELIGION_KNOWLEDGE_VERSION,
 } from '@/lib/religion-knowledge'
 import { NEUROMORPHIC_COMPARISONS, NEUROMORPHIC_CONCEPTS, NEUROMORPHIC_PATH, NEUROMORPHIC_VERSION } from '@/lib/neuromorphic-biocomputing'
+import { NANO_ARTICLES, NANO_PATH, NANO_SOURCES, NANO_VERSION } from '@/lib/nanotechnology-knowledge'
+import { PHYSICAL_AI_ARTICLES, PHYSICAL_AI_PATH, PHYSICAL_AI_SOURCES, PHYSICAL_AI_VERSION } from '@/lib/physical-ai-knowledge'
 import { EPISTEMIC_DOMAINS, EPISTEMIC_SYSTEM_PATH, PUBLIC_EPISTEMIC_RECORDS } from '@/lib/epistemic-pilots'
 import { MYTHOLOGY_PATH, mythologyTraditions } from '@/lib/mythology-navigation'
 import {
@@ -211,6 +213,20 @@ export default function KnowledgePage() {
               <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-cyan-200">Robotics and human assistance</h2>
               <p className="mt-3 text-sm leading-6 text-zinc-400">Task evaluation, reproducible evidence, data provenance and governance for useful robotics. Simulation evidence is not physical safety validation.</p>
               <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-cyan-300">Explore 40 guides, specifications and examples →</p>
+            </Link>
+            <Link href={PHYSICAL_AI_PATH} className="group border border-sky-900/60 bg-sky-950/10 p-6 transition-colors hover:border-sky-400">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-sky-300">Learning and control layer · {PHYSICAL_AI_VERSION}</p>
+              <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-sky-200">Physical AI</h2>
+              <p className="mt-3 text-sm leading-6 text-zinc-400">World models, vision-language-action policies, learning from demonstration, domain randomization, uncertainty and runtime monitoring — with what each reported result establishes stated plainly.</p>
+              <p className="mt-4 border-l border-rose-700/60 pl-3 text-xs leading-5 text-rose-200">We operate no robot and replicate no benchmark. Hardware, safety and evidence intake stay in the robotics section.</p>
+              <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-sky-300">Read {PHYSICAL_AI_ARTICLES.length} explanations · {Object.keys(PHYSICAL_AI_SOURCES).length} sources →</p>
+            </Link>
+            <Link href={NANO_PATH} className="group border border-amber-900/60 bg-amber-950/10 p-6 transition-colors hover:border-amber-400">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-amber-300">Materials evidence layer · {NANO_VERSION}</p>
+              <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-amber-200">Nanotechnology</h2>
+              <p className="mt-3 text-sm leading-6 text-zinc-400">What the nanoscale actually changes, what each characterisation method can and cannot see, how to report size with uncertainty, and how to read a supplier’s datasheet.</p>
+              <p className="mt-4 border-l border-rose-700/60 pl-3 text-xs leading-5 text-rose-200">Regulatory status is not a safety finding, and geometry is not toxicology. We run no laboratory and test no material.</p>
+              <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-amber-300">Read {NANO_ARTICLES.length} explanations · {Object.keys(NANO_SOURCES).length} sources →</p>
             </Link>
             <Link href={SEMICONDUCTOR_PROCESS_MAP_PATH} className="group border border-zinc-800 bg-zinc-950/60 p-6 transition-colors hover:border-cyan-500/50">
               <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">Technical knowledge system</p>

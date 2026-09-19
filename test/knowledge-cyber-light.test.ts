@@ -57,8 +57,9 @@ test('all Knowledge pages inherit one bounded cyber-light layout', () => {
   // the federation release adds two religion route families under this layout;
   // the mythology collection and dynamic tradition hub add two more while
   // retaining the same bounded visual system. The Jyotisha reading guide adds one;
-  // the robotics hub and its topic route add two.
-  assert.equal(routes.length, 75)
+  // the robotics hub and its topic route add two; the nanotechnology and
+  // physical-AI hubs and their topic routes add four more.
+  assert.equal(routes.length, 79)
   assert.match(layout, /data-visual-system="cyber-light"/)
   assert.match(layout, /data-visual-scope="knowledge"/)
   assert.match(layout, /knowledge-cyber-light\.module\.css/)
