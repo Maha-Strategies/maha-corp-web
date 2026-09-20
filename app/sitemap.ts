@@ -22,6 +22,9 @@ import { EVIDENCE_WORKFLOW_DATE, EVIDENCE_WORKFLOW_EXAMPLES, EVIDENCE_WORKFLOW_P
 import { MATHEMATICAL_CONCEPTS, MATHEMATICS_KNOWLEDGE_PATH, MATHEMATICS_KNOWLEDGE_RELEASE_DATE, mathematicsConceptPath } from '@/lib/mathematics-knowledge'
 import { ROBOTICS_PATH, ROBOTICS_RELEASE_DATE, roboticsCandidateMap } from '@/lib/robotics-knowledge'
 import { CALDERA_PATH } from '@/lib/caldera-concept'
+import { POLICY_DRAFTS } from '@/lib/policy-expansion-drafts'
+import { POLICY_METHODS } from '@/lib/policy-expansion-map'
+import { POLICY_REVIEW_DATE, policyDraftPublished } from '@/lib/policy-expansion-types'
 import { NANO_ARTICLES, NANO_PATH, NANO_RELEASE_DATE } from '@/lib/nanotechnology-knowledge'
 import { PHYSICAL_AI_ARTICLES, PHYSICAL_AI_PATH, PHYSICAL_AI_RELEASE_DATE } from '@/lib/physical-ai-knowledge'
 import { RELIGION_COMPARISONS, RELIGION_COMPARISONS_PATH, RELIGION_CONCEPTS, RELIGION_KNOWLEDGE_PATH, RELIGION_KNOWLEDGE_RELEASE_DATE, religionComparisonPath, religionConceptPath } from '@/lib/religion-knowledge'
@@ -113,6 +116,17 @@ export async function currentHostSitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(MATHEMATICS_KNOWLEDGE_RELEASE_DATE),
     })),
     { url: `${baseUrl}${CALDERA_PATH}`, lastModified: new Date('2026-09-19') },
+    // Only published options briefs. The four on evidence holds are absent by
+    // construction, so a stale baseline can never be advertised for indexing.
+    { url: `${baseUrl}/policy/questions`, lastModified: new Date(POLICY_REVIEW_DATE) },
+    ...POLICY_DRAFTS.filter(policyDraftPublished).map((draft) => ({
+      url: `${baseUrl}/policy/questions/${draft.slug}`,
+      lastModified: new Date(POLICY_REVIEW_DATE),
+    })),
+    ...POLICY_METHODS.map((method) => ({
+      url: `${baseUrl}/policy/methodology/${method.slug}`,
+      lastModified: new Date(POLICY_REVIEW_DATE),
+    })),
     { url: `${baseUrl}${ROBOTICS_PATH}`, lastModified: new Date(ROBOTICS_RELEASE_DATE) },
     ...roboticsCandidateMap().map((topic) => ({ url: `${baseUrl}${ROBOTICS_PATH}/${topic.slug}`, lastModified: new Date(ROBOTICS_RELEASE_DATE) })),
     { url: `${baseUrl}${PHYSICAL_AI_PATH}`, lastModified: new Date(PHYSICAL_AI_RELEASE_DATE) },

@@ -1,0 +1,3022 @@
+{
+  "schemaVersion": "maha-policy-questions/1.0",
+  "frozenAt": "2026-09-19",
+  "mainEntranceCountedSeparately": "/policy",
+  "publicationApproved": false,
+  "ownership": {
+    "main": "Citizen-facing questions and attributed proposals.",
+    "policy": "Technical definitions, instruments and implementation evidence. Link; do not clone."
+  },
+  "areas": [
+    {
+      "id": "domestic",
+      "label": "Life in America",
+      "description": "Living costs, public services, rights and opportunity.",
+      "proposedUrl": "/policy/areas/domestic",
+      "readerQuestion": "What questions are covered in Life in America?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "living-costs",
+        "housing",
+        "healthcare",
+        "food-agriculture",
+        "fiscal-policy",
+        "education",
+        "immigration",
+        "energy",
+        "infrastructure",
+        "public-safety",
+        "democracy",
+        "families"
+      ],
+      "evidenceRequirements": "Aggregate reviewed children only; do not add independent factual claims.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "foreign",
+      "label": "America and the world",
+      "description": "US choices about diplomacy, security, trade and humanitarian action.",
+      "proposedUrl": "/policy/areas/foreign",
+      "readerQuestion": "What questions are covered in America and the world?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "diplomacy",
+        "defense",
+        "trade",
+        "humanitarian"
+      ],
+      "evidenceRequirements": "Aggregate reviewed children only; do not add independent factual claims.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "geopolitics",
+      "label": "Understanding global power",
+      "description": "Regional analysis, competing interests and uncertainty—not one policy for every country.",
+      "proposedUrl": "/policy/areas/geopolitics",
+      "readerQuestion": "What questions are covered in Understanding global power?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "china-indo-pacific",
+        "europe-eurasia",
+        "mena",
+        "global-regions"
+      ],
+      "evidenceRequirements": "Aggregate reviewed children only; do not add independent factual claims.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "technology",
+      "label": "AI, technology and the future",
+      "description": "Accountability, work, infrastructure and security.",
+      "proposedUrl": "/policy/areas/technology",
+      "readerQuestion": "What questions are covered in AI, technology and the future?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "ai-rights",
+        "ai-work",
+        "compute-chips",
+        "frontier-security"
+      ],
+      "evidenceRequirements": "Aggregate reviewed children only; do not add independent factual claims.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    }
+  ],
+  "issues": [
+    {
+      "id": "living-costs",
+      "area": "domestic",
+      "title": "Cost of living, jobs and wages",
+      "questions": [
+        "Why can prices remain high when inflation slows?",
+        "Which policies could raise real wages without reducing access to work?",
+        "How should competition policy address household costs?",
+        "How should job quality be measured beyond the unemployment rate?"
+      ],
+      "evidence": "BLS CPI/CPS and BEA price/income definitions; labor-market and competition studies with causal limits.",
+      "adjacent": [],
+      "boundary": "Owns economy-wide prices and wages, not sector-specific housing or healthcare mechanisms.",
+      "proposedUrl": "/policy/issues/living-costs",
+      "readerQuestion": "What are the choices and trade-offs for Cost of living, jobs and wages?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "living-costs-q1",
+        "living-costs-q2",
+        "living-costs-q3",
+        "living-costs-q4"
+      ],
+      "evidenceRequirements": "BLS CPI/CPS and BEA price/income definitions; labor-market and competition studies with causal limits.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "housing",
+      "area": "domestic",
+      "title": "Housing and homelessness",
+      "questions": [
+        "How would you make housing more affordable?",
+        "What should government do for people experiencing homelessness?",
+        "How should housing growth and displacement protections fit together?",
+        "When do housing subsidies help renters rather than raise rents?"
+      ],
+      "evidence": "HUD research, current local vacancy/rent/homelessness data, zoning authority and housing-program evaluations.",
+      "adjacent": [],
+      "boundary": "Affordability, homelessness response, displacement and subsidy incidence are separate decisions.",
+      "proposedUrl": "/policy/issues/housing",
+      "readerQuestion": "What are the choices and trade-offs for Housing and homelessness?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "housing-q1",
+        "housing-q2",
+        "housing-q3",
+        "housing-q4"
+      ],
+      "evidenceRequirements": "HUD research, current local vacancy/rent/homelessness data, zoning authority and housing-program evaluations.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "healthcare",
+      "area": "domestic",
+      "title": "Healthcare",
+      "questions": [
+        "How would you reduce healthcare costs?",
+        "How should coverage expansion be compared with other health priorities?",
+        "What would improve rural and underserved access to care?",
+        "How should mental-health care be integrated with other services?"
+      ],
+      "evidence": "CMS accounts and program law; access/outcome data; independent payment and coverage evaluations.",
+      "adjacent": [],
+      "boundary": "Separate spending, insurance coverage, physical access and mental-health integration.",
+      "proposedUrl": "/policy/issues/healthcare",
+      "readerQuestion": "What are the choices and trade-offs for Healthcare?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "healthcare-q1",
+        "healthcare-q2",
+        "healthcare-q3",
+        "healthcare-q4"
+      ],
+      "evidenceRequirements": "CMS accounts and program law; access/outcome data; independent payment and coverage evaluations.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "food-agriculture",
+      "area": "domestic",
+      "title": "Food, agriculture and public health",
+      "questions": [
+        "How would you improve food quality without making groceries less affordable?",
+        "How should a nutrient-based producer incentive be measured and audited?",
+        "When should another country’s chemical restriction trigger US review?",
+        "How should farm resilience and ecological restoration be funded?"
+      ],
+      "evidence": "USDA prices/programs, nutrition research, FDA/EPA substance-specific decisions and budget scoring.",
+      "adjacent": [
+        "/policy/nutrient-density-standard",
+        "/policy/chemical-reciprocity-act",
+        "/policy/soil-restoration-corps"
+      ],
+      "boundary": "First question is a consumer-facing options synthesis; measurement, chemical safety and restoration require distinct instruments.",
+      "proposedUrl": "/policy/issues/food-agriculture",
+      "readerQuestion": "What are the choices and trade-offs for Food, agriculture and public health?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "food-agriculture-q1",
+        "food-agriculture-q2",
+        "food-agriculture-q3",
+        "food-agriculture-q4"
+      ],
+      "evidenceRequirements": "USDA prices/programs, nutrition research, FDA/EPA substance-specific decisions and budget scoring.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "fiscal-policy",
+      "area": "domestic",
+      "title": "Taxes, spending and debt",
+      "questions": [
+        "What would you do about federal spending and debt?",
+        "How should tax changes be evaluated across households?",
+        "Which public investments warrant borrowing?",
+        "How should ineffective spending be identified without cutting useful services?"
+      ],
+      "evidence": "Dated CBO/JCT/GAO estimates; revenue and appropriation statutes; distributional assumptions.",
+      "adjacent": [],
+      "boundary": "Owns fiscal accounting, not sector outcomes merely because they require funding.",
+      "proposedUrl": "/policy/issues/fiscal-policy",
+      "readerQuestion": "What are the choices and trade-offs for Taxes, spending and debt?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "fiscal-policy-q1",
+        "fiscal-policy-q2",
+        "fiscal-policy-q3",
+        "fiscal-policy-q4"
+      ],
+      "evidenceRequirements": "Dated CBO/JCT/GAO estimates; revenue and appropriation statutes; distributional assumptions.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "education",
+      "area": "domestic",
+      "title": "Education, skills and research",
+      "questions": [
+        "How would you improve schools and pathways into skilled work?",
+        "How should federal support for research be allocated?",
+        "What would make postsecondary education more affordable?",
+        "How should schools evaluate learning without teaching only to a test?"
+      ],
+      "evidence": "ED/NCES data, education statutes, DOL apprenticeship records and original learning evaluations.",
+      "adjacent": [],
+      "boundary": "General learning and skills belong here; AI-specific displacement belongs to ai-work.",
+      "proposedUrl": "/policy/issues/education",
+      "readerQuestion": "What are the choices and trade-offs for Education, skills and research?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "education-q1",
+        "education-q2",
+        "education-q3",
+        "education-q4"
+      ],
+      "evidenceRequirements": "ED/NCES data, education statutes, DOL apprenticeship records and original learning evaluations.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "immigration",
+      "area": "domestic",
+      "title": "Immigration and borders",
+      "questions": [
+        "How would you approach border enforcement, asylum and legal immigration?",
+        "How should legal migration pathways respond to labor and family needs?",
+        "What would make immigration adjudication faster and fairer?",
+        "How should receiving communities be supported?"
+      ],
+      "evidence": "US Code, current regulations and injunctions, USCIS/EOIR/CBP data with definitions and dates.",
+      "adjacent": [],
+      "boundary": "Admission, protection, adjudication and local reception are different authorities and services.",
+      "proposedUrl": "/policy/issues/immigration",
+      "readerQuestion": "What are the choices and trade-offs for Immigration and borders?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "immigration-q1",
+        "immigration-q2",
+        "immigration-q3",
+        "immigration-q4"
+      ],
+      "evidenceRequirements": "US Code, current regulations and injunctions, USCIS/EOIR/CBP data with definitions and dates.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "energy",
+      "area": "domestic",
+      "title": "Energy, climate and environment",
+      "questions": [
+        "How would you deliver reliable, affordable energy?",
+        "How should climate adaptation projects be prioritized?",
+        "How should environmental permitting balance speed and protection?",
+        "What would protect water, air and ecosystems effectively?"
+      ],
+      "evidence": "EIA/FERC/EPA data and rules; system reliability, environmental and project-cost studies.",
+      "adjacent": [
+        "/policy/soil-restoration-corps"
+      ],
+      "boundary": "National/regional energy systems here; compute-specific load allocation under compute-chips.",
+      "proposedUrl": "/policy/issues/energy",
+      "readerQuestion": "What are the choices and trade-offs for Energy, climate and environment?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "energy-q1",
+        "energy-q2",
+        "energy-q3",
+        "energy-q4"
+      ],
+      "evidenceRequirements": "EIA/FERC/EPA data and rules; system reliability, environmental and project-cost studies.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "infrastructure",
+      "area": "domestic",
+      "title": "Infrastructure and transportation",
+      "questions": [
+        "Which infrastructure repairs should come first?",
+        "How should transportation funding balance access, safety and cost?",
+        "What would reduce infrastructure delivery delays and overruns?",
+        "How should broadband access and resilience be assessed?"
+      ],
+      "evidence": "DOT/FCC/GAO data, asset condition, accessibility, procurement authority and lifecycle costs.",
+      "adjacent": [],
+      "boundary": "Public asset delivery, not a duplicate of the electricity portfolio question.",
+      "proposedUrl": "/policy/issues/infrastructure",
+      "readerQuestion": "What are the choices and trade-offs for Infrastructure and transportation?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "infrastructure-q1",
+        "infrastructure-q2",
+        "infrastructure-q3",
+        "infrastructure-q4"
+      ],
+      "evidenceRequirements": "DOT/FCC/GAO data, asset condition, accessibility, procurement authority and lifecycle costs.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "public-safety",
+      "area": "domestic",
+      "title": "Crime, justice and public safety",
+      "questions": [
+        "How would you reduce crime while protecting civil liberties?",
+        "How should pretrial detention and release be evaluated?",
+        "What helps people return successfully after incarceration?",
+        "When should non-police responders handle a crisis?"
+      ],
+      "evidence": "BJS/NIJ data, original intervention research and current constitutional/state-law safeguards.",
+      "adjacent": [],
+      "boundary": "Crime intervention differs from broader democratic accountability and AI-specific harms.",
+      "proposedUrl": "/policy/issues/public-safety",
+      "readerQuestion": "What are the choices and trade-offs for Crime, justice and public safety?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "public-safety-q1",
+        "public-safety-q2",
+        "public-safety-q3",
+        "public-safety-q4"
+      ],
+      "evidenceRequirements": "BJS/NIJ data, original intervention research and current constitutional/state-law safeguards.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "democracy",
+      "area": "domestic",
+      "title": "Civil rights, democracy and government accountability",
+      "questions": [
+        "How should voting access and election integrity be protected together?",
+        "What would make government decisions more transparent and contestable?",
+        "When should local governments exceed national standards?",
+        "How should civil-rights enforcement be evaluated?"
+      ],
+      "evidence": "Constitution, election/civil-rights statutes and cases; official audits; local preemption analysis.",
+      "adjacent": [
+        "/policy/community-sovereignty-compact"
+      ],
+      "boundary": "Local autonomy must be assessed against rights and preemption, not treated as a blanket exemption.",
+      "proposedUrl": "/policy/issues/democracy",
+      "readerQuestion": "What are the choices and trade-offs for Civil rights, democracy and government accountability?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "democracy-q1",
+        "democracy-q2",
+        "democracy-q3",
+        "democracy-q4"
+      ],
+      "evidenceRequirements": "Constitution, election/civil-rights statutes and cases; official audits; local preemption analysis.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "families",
+      "area": "domestic",
+      "title": "Families, disability, retirement and veterans",
+      "questions": [
+        "How should care responsibilities and paid work fit together?",
+        "What would improve independent living and disability access?",
+        "How should retirement security be sustained fairly?",
+        "What would improve veterans’ access to benefits and care?"
+      ],
+      "evidence": "SSA/VA/ACL/DOL program data and governing statutes; separate populations and distributional effects.",
+      "adjacent": [],
+      "boundary": "These are four distinct questions; grouping does not imply shared needs or one benefit policy.",
+      "proposedUrl": "/policy/issues/families",
+      "readerQuestion": "What are the choices and trade-offs for Families, disability, retirement and veterans?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "families-q1",
+        "families-q2",
+        "families-q3",
+        "families-q4"
+      ],
+      "evidenceRequirements": "SSA/VA/ACL/DOL program data and governing statutes; separate populations and distributional effects.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "diplomacy",
+      "area": "foreign",
+      "title": "Diplomacy, alliances and international institutions",
+      "questions": [
+        "What should US alliances achieve and how should they be evaluated?",
+        "When is diplomacy with an adversary useful?",
+        "How should the United States work with international institutions?",
+        "How should treaty commitments be made and reviewed?"
+      ],
+      "evidence": "Treaty texts, State Department primary records, constitutional authority and dated diplomatic outcomes.",
+      "adjacent": [],
+      "boundary": "US choices and institutions, not descriptions of what every regional actor wants.",
+      "proposedUrl": "/policy/issues/diplomacy",
+      "readerQuestion": "What are the choices and trade-offs for Diplomacy, alliances and international institutions?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "diplomacy-q1",
+        "diplomacy-q2",
+        "diplomacy-q3",
+        "diplomacy-q4"
+      ],
+      "evidenceRequirements": "Treaty texts, State Department primary records, constitutional authority and dated diplomatic outcomes.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "defense",
+      "area": "foreign",
+      "title": "Defense, deterrence and war powers",
+      "questions": [
+        "When should the United States use military force?",
+        "How should defense spending be tied to strategy?",
+        "What makes deterrence credible without unnecessary escalation?",
+        "How should Congress oversee continuing military operations?"
+      ],
+      "evidence": "Constitution, War Powers Resolution, actual authorizations, CRS/GAO and international-law sources.",
+      "adjacent": [],
+      "boundary": "Legal authority, strategy, procurement and oversight are separately evaluated.",
+      "proposedUrl": "/policy/issues/defense",
+      "readerQuestion": "What are the choices and trade-offs for Defense, deterrence and war powers?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "defense-q1",
+        "defense-q2",
+        "defense-q3",
+        "defense-q4"
+      ],
+      "evidenceRequirements": "Constitution, War Powers Resolution, actual authorizations, CRS/GAO and international-law sources.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "trade",
+      "area": "foreign",
+      "title": "Trade, sanctions and development",
+      "questions": [
+        "When do tariffs serve a defensible public objective?",
+        "How should sanctions be tested for effectiveness and civilian harm?",
+        "What should development assistance achieve?",
+        "How should trade resilience be balanced with lower prices?"
+      ],
+      "evidence": "Current trade/sanctions instruments, CBO/USITC evaluations, aid outcomes and counterfactuals.",
+      "adjacent": [],
+      "boundary": "Cross-country instruments here; China-specific application depends on these foundations.",
+      "proposedUrl": "/policy/issues/trade",
+      "readerQuestion": "What are the choices and trade-offs for Trade, sanctions and development?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "trade-q1",
+        "trade-q2",
+        "trade-q3",
+        "trade-q4"
+      ],
+      "evidenceRequirements": "Current trade/sanctions instruments, CBO/USITC evaluations, aid outcomes and counterfactuals.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "humanitarian",
+      "area": "foreign",
+      "title": "Conflict prevention, humanitarian response and human rights",
+      "questions": [
+        "What should trigger a US humanitarian response?",
+        "How should conflict prevention be compared with crisis response?",
+        "How should aid reach civilians without strengthening abusive actors?",
+        "How should human-rights concerns influence foreign policy?"
+      ],
+      "evidence": "UN/ICRC primary documentation, humanitarian law, aid audits and context-specific evaluations.",
+      "adjacent": [],
+      "boundary": "Humanitarian need does not itself authorize military force.",
+      "proposedUrl": "/policy/issues/humanitarian",
+      "readerQuestion": "What are the choices and trade-offs for Conflict prevention, humanitarian response and human rights?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "humanitarian-q1",
+        "humanitarian-q2",
+        "humanitarian-q3",
+        "humanitarian-q4"
+      ],
+      "evidenceRequirements": "UN/ICRC primary documentation, humanitarian law, aid audits and context-specific evaluations.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "china-indo-pacific",
+      "area": "geopolitics",
+      "title": "China and the Indo-Pacific",
+      "questions": [
+        "How should America compete and cooperate with China?",
+        "What interests do Indo-Pacific partners hold that differ from US priorities?",
+        "How should Taiwan-related escalation risks be explained?",
+        "Which Indo-Pacific supply dependencies are genuinely difficult to replace?"
+      ],
+      "evidence": "Current CRS/official instruments, regional governments’ primary statements and verified trade dependencies.",
+      "adjacent": [],
+      "boundary": "Distinguish analysis of regional interests from proposed US action; no ancestry-based inference.",
+      "proposedUrl": "/policy/issues/china-indo-pacific",
+      "readerQuestion": "What are the choices and trade-offs for China and the Indo-Pacific?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "china-indo-pacific-q1",
+        "china-indo-pacific-q2",
+        "china-indo-pacific-q3",
+        "china-indo-pacific-q4"
+      ],
+      "evidenceRequirements": "Current CRS/official instruments, regional governments’ primary statements and verified trade dependencies.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "europe-eurasia",
+      "area": "geopolitics",
+      "title": "Europe, Russia and Eurasia",
+      "questions": [
+        "How do European security priorities differ across countries?",
+        "What would make a negotiated conflict settlement durable?",
+        "How do energy dependencies shape European and Eurasian choices?",
+        "How should competing accounts of regional security be tested?"
+      ],
+      "evidence": "Dated treaty/official statements, verified conflict facts, energy statistics and explicit uncertainty.",
+      "adjacent": [],
+      "boundary": "Do not aggregate Europe, Russia and Eurasia into a single actor or policy preference.",
+      "proposedUrl": "/policy/issues/europe-eurasia",
+      "readerQuestion": "What are the choices and trade-offs for Europe, Russia and Eurasia?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "europe-eurasia-q1",
+        "europe-eurasia-q2",
+        "europe-eurasia-q3",
+        "europe-eurasia-q4"
+      ],
+      "evidenceRequirements": "Dated treaty/official statements, verified conflict facts, energy statistics and explicit uncertainty.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "mena",
+      "area": "geopolitics",
+      "title": "Middle East and North Africa",
+      "questions": [
+        "How do regional governments’ security interests differ?",
+        "What evidence is needed to assess civilian harm in a regional conflict?",
+        "How do water, food and energy pressures interact in specific countries?",
+        "How should competing regional diplomatic initiatives be compared?"
+      ],
+      "evidence": "Country-specific primary records, humanitarian monitoring, trade/resource data and attribution limits.",
+      "adjacent": [],
+      "boundary": "No presumed common religious, ethnic or national position; specific conflict claims need current verification.",
+      "proposedUrl": "/policy/issues/mena",
+      "readerQuestion": "What are the choices and trade-offs for Middle East and North Africa?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "mena-q1",
+        "mena-q2",
+        "mena-q3",
+        "mena-q4"
+      ],
+      "evidenceRequirements": "Country-specific primary records, humanitarian monitoring, trade/resource data and attribution limits.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "global-regions",
+      "area": "geopolitics",
+      "title": "South Asia, Africa and the Americas",
+      "questions": [
+        "How do South Asian countries balance development and strategic autonomy?",
+        "How should African regional initiatives be understood on their own terms?",
+        "How do countries in the Americas assess US economic and security policy?",
+        "How should cross-regional comparisons avoid erasing local differences?"
+      ],
+      "evidence": "Named countries and regional institutions’ primary records; comparable dated indicators and scope limits.",
+      "adjacent": [],
+      "boundary": "Navigation grouping only: each question requires country-specific analysis, not a single regional prescription.",
+      "proposedUrl": "/policy/issues/global-regions",
+      "readerQuestion": "What are the choices and trade-offs for South Asia, Africa and the Americas?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "global-regions-q1",
+        "global-regions-q2",
+        "global-regions-q3",
+        "global-regions-q4"
+      ],
+      "evidenceRequirements": "Named countries and regional institutions’ primary records; comparable dated indicators and scope limits.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "ai-rights",
+      "area": "technology",
+      "title": "AI accountability and civil liberties",
+      "questions": [
+        "Who should be accountable when an AI system causes harm?",
+        "When should a person be able to challenge an automated decision?",
+        "What limits should apply to AI-enabled surveillance?",
+        "How should deceptive digital design be regulated?"
+      ],
+      "evidence": "Sector-specific law and cases; GAO/NIST frameworks labelled nonbinding where applicable; incident evidence.",
+      "adjacent": [
+        "/policy/algorithmic-transparency-act",
+        "https://policy.mahastrategies.com/policy/ai-agent-accountability/definition",
+        "https://policy.mahastrategies.com/policy/data-protection/definition"
+      ],
+      "boundary": "Citizen options and remedies here; technical accountability definitions remain on Policy subdomain.",
+      "proposedUrl": "/policy/issues/ai-rights",
+      "readerQuestion": "What are the choices and trade-offs for AI accountability and civil liberties?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "ai-rights-q1",
+        "ai-rights-q2",
+        "ai-rights-q3",
+        "ai-rights-q4"
+      ],
+      "evidenceRequirements": "Sector-specific law and cases; GAO/NIST frameworks labelled nonbinding where applicable; incident evidence.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "ai-work",
+      "area": "technology",
+      "title": "Work, education and the public sector",
+      "questions": [
+        "What should happen when AI eliminates or changes jobs?",
+        "When should schools use AI tools?",
+        "How should government procure and evaluate AI systems?",
+        "How should workers share in gains from AI-assisted work?"
+      ],
+      "evidence": "BLS labor evidence, original evaluations, procurement/education/labor statutes and outcome measures.",
+      "adjacent": [
+        "https://policy.mahastrategies.com/policy/automated-decision-governance/definition"
+      ],
+      "boundary": "AI-specific adoption and workforce effects, not a duplicate general schools or wages page.",
+      "proposedUrl": "/policy/issues/ai-work",
+      "readerQuestion": "What are the choices and trade-offs for Work, education and the public sector?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "ai-work-q1",
+        "ai-work-q2",
+        "ai-work-q3",
+        "ai-work-q4"
+      ],
+      "evidenceRequirements": "BLS labor evidence, original evaluations, procurement/education/labor statutes and outcome measures.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "compute-chips",
+      "area": "technology",
+      "title": "Compute, chips, energy and competition",
+      "questions": [
+        "When is public support for chip manufacturing justified?",
+        "Who should pay for grid expansion serving data centers?",
+        "How should access to compute be balanced with competition?",
+        "How should semiconductor supply-chain resilience be measured?"
+      ],
+      "evidence": "CHIPS/program law, GAO award evidence, FERC/state tariffs, competition and supply-chain data.",
+      "adjacent": [
+        "https://policy.mahastrategies.com/policy/semiconductor-policy/definition"
+      ],
+      "boundary": "Citizen-facing industrial choices; technical definitions and equipment explanations stay with their owners.",
+      "proposedUrl": "/policy/issues/compute-chips",
+      "readerQuestion": "What are the choices and trade-offs for Compute, chips, energy and competition?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "compute-chips-q1",
+        "compute-chips-q2",
+        "compute-chips-q3",
+        "compute-chips-q4"
+      ],
+      "evidenceRequirements": "CHIPS/program law, GAO award evidence, FERC/state tariffs, competition and supply-chain data.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "frontier-security",
+      "area": "technology",
+      "title": "Frontier AI, cybersecurity, robotics and national security",
+      "questions": [
+        "What evidence should trigger additional frontier-AI safeguards?",
+        "How should cybersecurity duties be assigned across suppliers and operators?",
+        "What should be required before robots work around people?",
+        "How should national-security AI claims be scrutinized?"
+      ],
+      "evidence": "NIST/CISA primary standards, executable evaluation evidence, robotics safety scope and actual law.",
+      "adjacent": [
+        "https://policy.mahastrategies.com/policy/standards-and-conformity/definition"
+      ],
+      "boundary": "No blanket equivalence between model tests, cyber controls, physical robot safety and military assurance.",
+      "proposedUrl": "/policy/issues/frontier-security",
+      "readerQuestion": "What are the choices and trade-offs for Frontier AI, cybersecurity, robotics and national security?",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [
+        "frontier-security-q1",
+        "frontier-security-q2",
+        "frontier-security-q3",
+        "frontier-security-q4"
+      ],
+      "evidenceRequirements": "NIST/CISA primary standards, executable evaluation evidence, robotics safety scope and actual law.",
+      "status": "local-entrance-section-only",
+      "searchDemand": "unknown"
+    }
+  ],
+  "questions": [
+    {
+      "id": "living-costs-q1",
+      "kind": "question",
+      "issue": "living-costs",
+      "area": "domestic",
+      "readerQuestion": "Why can prices remain high when inflation slows?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/why-can-prices-remain-high-when-inflation-slows",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Owns economy-wide prices and wages, not sector-specific housing or healthcare mechanisms.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "BLS CPI/CPS and BEA price/income definitions; labor-market and competition studies with causal limits.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "living-costs-q2",
+      "kind": "question",
+      "issue": "living-costs",
+      "area": "domestic",
+      "readerQuestion": "Which policies could raise real wages without reducing access to work?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/which-policies-could-raise-real-wages-without-reducing-access-to-work",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Owns economy-wide prices and wages, not sector-specific housing or healthcare mechanisms.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "BLS CPI/CPS and BEA price/income definitions; labor-market and competition studies with causal limits.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "living-costs-q3",
+      "kind": "question",
+      "issue": "living-costs",
+      "area": "domestic",
+      "readerQuestion": "How should competition policy address household costs?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-competition-policy-address-household-costs",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Owns economy-wide prices and wages, not sector-specific housing or healthcare mechanisms.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "BLS CPI/CPS and BEA price/income definitions; labor-market and competition studies with causal limits.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "living-costs-q4",
+      "kind": "question",
+      "issue": "living-costs",
+      "area": "domestic",
+      "readerQuestion": "How should job quality be measured beyond the unemployment rate?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-job-quality-be-measured-beyond-the-unemployment-rate",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Owns economy-wide prices and wages, not sector-specific housing or healthcare mechanisms.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "BLS CPI/CPS and BEA price/income definitions; labor-market and competition studies with causal limits.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "housing-q1",
+      "kind": "question",
+      "issue": "housing",
+      "area": "domestic",
+      "readerQuestion": "How would you make housing more affordable?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/housing-affordability",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Affordability, homelessness response, displacement and subsidy incidence are separate decisions.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "HUD research, current local vacancy/rent/homelessness data, zoning authority and housing-program evaluations.",
+      "status": "options-brief",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "housing-q2",
+      "kind": "question",
+      "issue": "housing",
+      "area": "domestic",
+      "readerQuestion": "What should government do for people experiencing homelessness?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/what-should-government-do-for-people-experiencing-homelessness",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Affordability, homelessness response, displacement and subsidy incidence are separate decisions.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "HUD research, current local vacancy/rent/homelessness data, zoning authority and housing-program evaluations.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "housing-q3",
+      "kind": "question",
+      "issue": "housing",
+      "area": "domestic",
+      "readerQuestion": "How should housing growth and displacement protections fit together?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-housing-growth-and-displacement-protections-fit-together",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Affordability, homelessness response, displacement and subsidy incidence are separate decisions.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "HUD research, current local vacancy/rent/homelessness data, zoning authority and housing-program evaluations.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "housing-q4",
+      "kind": "question",
+      "issue": "housing",
+      "area": "domestic",
+      "readerQuestion": "When do housing subsidies help renters rather than raise rents?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/when-do-housing-subsidies-help-renters-rather-than-raise-rents",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Affordability, homelessness response, displacement and subsidy incidence are separate decisions.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "HUD research, current local vacancy/rent/homelessness data, zoning authority and housing-program evaluations.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "healthcare-q1",
+      "kind": "question",
+      "issue": "healthcare",
+      "area": "domestic",
+      "readerQuestion": "How would you reduce healthcare costs?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/healthcare-costs",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Separate spending, insurance coverage, physical access and mental-health integration.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "CMS accounts and program law; access/outcome data; independent payment and coverage evaluations.",
+      "status": "options-brief",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "healthcare-q2",
+      "kind": "question",
+      "issue": "healthcare",
+      "area": "domestic",
+      "readerQuestion": "How should coverage expansion be compared with other health priorities?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-coverage-expansion-be-compared-with-other-health-priorities",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Separate spending, insurance coverage, physical access and mental-health integration.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "CMS accounts and program law; access/outcome data; independent payment and coverage evaluations.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "healthcare-q3",
+      "kind": "question",
+      "issue": "healthcare",
+      "area": "domestic",
+      "readerQuestion": "What would improve rural and underserved access to care?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/what-would-improve-rural-and-underserved-access-to-care",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Separate spending, insurance coverage, physical access and mental-health integration.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "CMS accounts and program law; access/outcome data; independent payment and coverage evaluations.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "healthcare-q4",
+      "kind": "question",
+      "issue": "healthcare",
+      "area": "domestic",
+      "readerQuestion": "How should mental-health care be integrated with other services?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-mental-health-care-be-integrated-with-other-services",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Separate spending, insurance coverage, physical access and mental-health integration.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "CMS accounts and program law; access/outcome data; independent payment and coverage evaluations.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "food-agriculture-q1",
+      "kind": "question",
+      "issue": "food-agriculture",
+      "area": "domestic",
+      "readerQuestion": "How would you improve food quality without making groceries less affordable?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/food-quality-affordability",
+      "existingEquivalent": null,
+      "comparableExisting": [
+        "/policy/nutrient-density-standard",
+        "/policy/chemical-reciprocity-act",
+        "/policy/soil-restoration-corps"
+      ],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "First question is a consumer-facing options synthesis; measurement, chemical safety and restoration require distinct instruments.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "USDA prices/programs, nutrition research, FDA/EPA substance-specific decisions and budget scoring.",
+      "status": "options-brief",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "food-agriculture-q2",
+      "kind": "question",
+      "issue": "food-agriculture",
+      "area": "domestic",
+      "readerQuestion": "How should a nutrient-based producer incentive be measured and audited?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/nutrient-density-standard",
+      "existingEquivalent": "/policy/nutrient-density-standard",
+      "comparableExisting": [
+        "/policy/nutrient-density-standard",
+        "/policy/chemical-reciprocity-act",
+        "/policy/soil-restoration-corps"
+      ],
+      "treatment": "revise-existing",
+      "semanticDecision": "Do not create a duplicate: revise and link the existing proposal, with fresh review.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "USDA prices/programs, nutrition research, FDA/EPA substance-specific decisions and budget scoring.",
+      "status": "existing-needs-review",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "food-agriculture-q3",
+      "kind": "question",
+      "issue": "food-agriculture",
+      "area": "domestic",
+      "readerQuestion": "When should another country’s chemical restriction trigger US review?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/chemical-reciprocity-act",
+      "existingEquivalent": "/policy/chemical-reciprocity-act",
+      "comparableExisting": [
+        "/policy/nutrient-density-standard",
+        "/policy/chemical-reciprocity-act",
+        "/policy/soil-restoration-corps"
+      ],
+      "treatment": "revise-existing",
+      "semanticDecision": "Do not create a duplicate: revise and link the existing proposal, with fresh review.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "USDA prices/programs, nutrition research, FDA/EPA substance-specific decisions and budget scoring.",
+      "status": "existing-needs-review",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "food-agriculture-q4",
+      "kind": "question",
+      "issue": "food-agriculture",
+      "area": "domestic",
+      "readerQuestion": "How should farm resilience and ecological restoration be funded?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/soil-restoration-corps",
+      "existingEquivalent": "/policy/soil-restoration-corps",
+      "comparableExisting": [
+        "/policy/nutrient-density-standard",
+        "/policy/chemical-reciprocity-act",
+        "/policy/soil-restoration-corps"
+      ],
+      "treatment": "revise-existing",
+      "semanticDecision": "Do not create a duplicate: revise and link the existing proposal, with fresh review.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "USDA prices/programs, nutrition research, FDA/EPA substance-specific decisions and budget scoring.",
+      "status": "existing-needs-review",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "fiscal-policy-q1",
+      "kind": "question",
+      "issue": "fiscal-policy",
+      "area": "domestic",
+      "readerQuestion": "What would you do about federal spending and debt?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/federal-spending-debt",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Owns fiscal accounting, not sector outcomes merely because they require funding.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Dated CBO/JCT/GAO estimates; revenue and appropriation statutes; distributional assumptions.",
+      "status": "options-brief",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "fiscal-policy-q2",
+      "kind": "question",
+      "issue": "fiscal-policy",
+      "area": "domestic",
+      "readerQuestion": "How should tax changes be evaluated across households?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-tax-changes-be-evaluated-across-households",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Owns fiscal accounting, not sector outcomes merely because they require funding.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Dated CBO/JCT/GAO estimates; revenue and appropriation statutes; distributional assumptions.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "fiscal-policy-q3",
+      "kind": "question",
+      "issue": "fiscal-policy",
+      "area": "domestic",
+      "readerQuestion": "Which public investments warrant borrowing?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/which-public-investments-warrant-borrowing",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Owns fiscal accounting, not sector outcomes merely because they require funding.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Dated CBO/JCT/GAO estimates; revenue and appropriation statutes; distributional assumptions.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "fiscal-policy-q4",
+      "kind": "question",
+      "issue": "fiscal-policy",
+      "area": "domestic",
+      "readerQuestion": "How should ineffective spending be identified without cutting useful services?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-ineffective-spending-be-identified-without-cutting-useful-services",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Owns fiscal accounting, not sector outcomes merely because they require funding.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Dated CBO/JCT/GAO estimates; revenue and appropriation statutes; distributional assumptions.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "education-q1",
+      "kind": "question",
+      "issue": "education",
+      "area": "domestic",
+      "readerQuestion": "How would you improve schools and pathways into skilled work?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/schools-skilled-work",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "General learning and skills belong here; AI-specific displacement belongs to ai-work.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "ED/NCES data, education statutes, DOL apprenticeship records and original learning evaluations.",
+      "status": "options-brief",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "education-q2",
+      "kind": "question",
+      "issue": "education",
+      "area": "domestic",
+      "readerQuestion": "How should federal support for research be allocated?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-federal-support-for-research-be-allocated",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "General learning and skills belong here; AI-specific displacement belongs to ai-work.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "ED/NCES data, education statutes, DOL apprenticeship records and original learning evaluations.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "education-q3",
+      "kind": "question",
+      "issue": "education",
+      "area": "domestic",
+      "readerQuestion": "What would make postsecondary education more affordable?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/what-would-make-postsecondary-education-more-affordable",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "General learning and skills belong here; AI-specific displacement belongs to ai-work.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "ED/NCES data, education statutes, DOL apprenticeship records and original learning evaluations.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "education-q4",
+      "kind": "question",
+      "issue": "education",
+      "area": "domestic",
+      "readerQuestion": "How should schools evaluate learning without teaching only to a test?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-schools-evaluate-learning-without-teaching-only-to-a-test",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "General learning and skills belong here; AI-specific displacement belongs to ai-work.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "ED/NCES data, education statutes, DOL apprenticeship records and original learning evaluations.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "immigration-q1",
+      "kind": "question",
+      "issue": "immigration",
+      "area": "domestic",
+      "readerQuestion": "How would you approach border enforcement, asylum and legal immigration?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/borders-asylum-immigration",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Admission, protection, adjudication and local reception are different authorities and services.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "US Code, current regulations and injunctions, USCIS/EOIR/CBP data with definitions and dates.",
+      "status": "revise-current-baseline",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "immigration-q2",
+      "kind": "question",
+      "issue": "immigration",
+      "area": "domestic",
+      "readerQuestion": "How should legal migration pathways respond to labor and family needs?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-legal-migration-pathways-respond-to-labor-and-family-needs",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Admission, protection, adjudication and local reception are different authorities and services.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "US Code, current regulations and injunctions, USCIS/EOIR/CBP data with definitions and dates.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "immigration-q3",
+      "kind": "question",
+      "issue": "immigration",
+      "area": "domestic",
+      "readerQuestion": "What would make immigration adjudication faster and fairer?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/what-would-make-immigration-adjudication-faster-and-fairer",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Admission, protection, adjudication and local reception are different authorities and services.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "US Code, current regulations and injunctions, USCIS/EOIR/CBP data with definitions and dates.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "immigration-q4",
+      "kind": "question",
+      "issue": "immigration",
+      "area": "domestic",
+      "readerQuestion": "How should receiving communities be supported?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-receiving-communities-be-supported",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Admission, protection, adjudication and local reception are different authorities and services.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "US Code, current regulations and injunctions, USCIS/EOIR/CBP data with definitions and dates.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "energy-q1",
+      "kind": "question",
+      "issue": "energy",
+      "area": "domestic",
+      "readerQuestion": "How would you deliver reliable, affordable energy?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/reliable-affordable-energy",
+      "existingEquivalent": null,
+      "comparableExisting": [
+        "/policy/soil-restoration-corps"
+      ],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "National/regional energy systems here; compute-specific load allocation under compute-chips.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "EIA/FERC/EPA data and rules; system reliability, environmental and project-cost studies.",
+      "status": "options-brief",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "energy-q2",
+      "kind": "question",
+      "issue": "energy",
+      "area": "domestic",
+      "readerQuestion": "How should climate adaptation projects be prioritized?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-climate-adaptation-projects-be-prioritized",
+      "existingEquivalent": null,
+      "comparableExisting": [
+        "/policy/soil-restoration-corps"
+      ],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "National/regional energy systems here; compute-specific load allocation under compute-chips.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "EIA/FERC/EPA data and rules; system reliability, environmental and project-cost studies.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "energy-q3",
+      "kind": "question",
+      "issue": "energy",
+      "area": "domestic",
+      "readerQuestion": "How should environmental permitting balance speed and protection?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-environmental-permitting-balance-speed-and-protection",
+      "existingEquivalent": null,
+      "comparableExisting": [
+        "/policy/soil-restoration-corps"
+      ],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "National/regional energy systems here; compute-specific load allocation under compute-chips.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "EIA/FERC/EPA data and rules; system reliability, environmental and project-cost studies.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "energy-q4",
+      "kind": "question",
+      "issue": "energy",
+      "area": "domestic",
+      "readerQuestion": "What would protect water, air and ecosystems effectively?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/what-would-protect-water-air-and-ecosystems-effectively",
+      "existingEquivalent": null,
+      "comparableExisting": [
+        "/policy/soil-restoration-corps"
+      ],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "National/regional energy systems here; compute-specific load allocation under compute-chips.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "EIA/FERC/EPA data and rules; system reliability, environmental and project-cost studies.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "infrastructure-q1",
+      "kind": "question",
+      "issue": "infrastructure",
+      "area": "domestic",
+      "readerQuestion": "Which infrastructure repairs should come first?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/which-infrastructure-repairs-should-come-first",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Public asset delivery, not a duplicate of the electricity portfolio question.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "DOT/FCC/GAO data, asset condition, accessibility, procurement authority and lifecycle costs.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "infrastructure-q2",
+      "kind": "question",
+      "issue": "infrastructure",
+      "area": "domestic",
+      "readerQuestion": "How should transportation funding balance access, safety and cost?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-transportation-funding-balance-access-safety-and-cost",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Public asset delivery, not a duplicate of the electricity portfolio question.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "DOT/FCC/GAO data, asset condition, accessibility, procurement authority and lifecycle costs.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "infrastructure-q3",
+      "kind": "question",
+      "issue": "infrastructure",
+      "area": "domestic",
+      "readerQuestion": "What would reduce infrastructure delivery delays and overruns?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/what-would-reduce-infrastructure-delivery-delays-and-overruns",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Public asset delivery, not a duplicate of the electricity portfolio question.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "DOT/FCC/GAO data, asset condition, accessibility, procurement authority and lifecycle costs.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "infrastructure-q4",
+      "kind": "question",
+      "issue": "infrastructure",
+      "area": "domestic",
+      "readerQuestion": "How should broadband access and resilience be assessed?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-broadband-access-and-resilience-be-assessed",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Public asset delivery, not a duplicate of the electricity portfolio question.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "DOT/FCC/GAO data, asset condition, accessibility, procurement authority and lifecycle costs.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "public-safety-q1",
+      "kind": "question",
+      "issue": "public-safety",
+      "area": "domestic",
+      "readerQuestion": "How would you reduce crime while protecting civil liberties?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/crime-civil-liberties",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Crime intervention differs from broader democratic accountability and AI-specific harms.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "BJS/NIJ data, original intervention research and current constitutional/state-law safeguards.",
+      "status": "revise-current-baseline",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "public-safety-q2",
+      "kind": "question",
+      "issue": "public-safety",
+      "area": "domestic",
+      "readerQuestion": "How should pretrial detention and release be evaluated?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-pretrial-detention-and-release-be-evaluated",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Crime intervention differs from broader democratic accountability and AI-specific harms.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "BJS/NIJ data, original intervention research and current constitutional/state-law safeguards.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "public-safety-q3",
+      "kind": "question",
+      "issue": "public-safety",
+      "area": "domestic",
+      "readerQuestion": "What helps people return successfully after incarceration?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/what-helps-people-return-successfully-after-incarceration",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Crime intervention differs from broader democratic accountability and AI-specific harms.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "BJS/NIJ data, original intervention research and current constitutional/state-law safeguards.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "public-safety-q4",
+      "kind": "question",
+      "issue": "public-safety",
+      "area": "domestic",
+      "readerQuestion": "When should non-police responders handle a crisis?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/when-should-non-police-responders-handle-a-crisis",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Crime intervention differs from broader democratic accountability and AI-specific harms.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "BJS/NIJ data, original intervention research and current constitutional/state-law safeguards.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "democracy-q1",
+      "kind": "question",
+      "issue": "democracy",
+      "area": "domestic",
+      "readerQuestion": "How should voting access and election integrity be protected together?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-voting-access-and-election-integrity-be-protected-together",
+      "existingEquivalent": null,
+      "comparableExisting": [
+        "/policy/community-sovereignty-compact"
+      ],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Local autonomy must be assessed against rights and preemption, not treated as a blanket exemption.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Constitution, election/civil-rights statutes and cases; official audits; local preemption analysis.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "democracy-q2",
+      "kind": "question",
+      "issue": "democracy",
+      "area": "domestic",
+      "readerQuestion": "What would make government decisions more transparent and contestable?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/what-would-make-government-decisions-more-transparent-and-contestable",
+      "existingEquivalent": null,
+      "comparableExisting": [
+        "/policy/community-sovereignty-compact"
+      ],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Local autonomy must be assessed against rights and preemption, not treated as a blanket exemption.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Constitution, election/civil-rights statutes and cases; official audits; local preemption analysis.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "democracy-q3",
+      "kind": "question",
+      "issue": "democracy",
+      "area": "domestic",
+      "readerQuestion": "When should local governments exceed national standards?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/community-sovereignty-compact",
+      "existingEquivalent": "/policy/community-sovereignty-compact",
+      "comparableExisting": [
+        "/policy/community-sovereignty-compact"
+      ],
+      "treatment": "revise-existing",
+      "semanticDecision": "Do not create a duplicate: revise and link the existing proposal, with fresh review.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Constitution, election/civil-rights statutes and cases; official audits; local preemption analysis.",
+      "status": "existing-needs-review",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "democracy-q4",
+      "kind": "question",
+      "issue": "democracy",
+      "area": "domestic",
+      "readerQuestion": "How should civil-rights enforcement be evaluated?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-civil-rights-enforcement-be-evaluated",
+      "existingEquivalent": null,
+      "comparableExisting": [
+        "/policy/community-sovereignty-compact"
+      ],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Local autonomy must be assessed against rights and preemption, not treated as a blanket exemption.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Constitution, election/civil-rights statutes and cases; official audits; local preemption analysis.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "families-q1",
+      "kind": "question",
+      "issue": "families",
+      "area": "domestic",
+      "readerQuestion": "How should care responsibilities and paid work fit together?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-care-responsibilities-and-paid-work-fit-together",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "These are four distinct questions; grouping does not imply shared needs or one benefit policy.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "SSA/VA/ACL/DOL program data and governing statutes; separate populations and distributional effects.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "families-q2",
+      "kind": "question",
+      "issue": "families",
+      "area": "domestic",
+      "readerQuestion": "What would improve independent living and disability access?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/what-would-improve-independent-living-and-disability-access",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "These are four distinct questions; grouping does not imply shared needs or one benefit policy.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "SSA/VA/ACL/DOL program data and governing statutes; separate populations and distributional effects.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "families-q3",
+      "kind": "question",
+      "issue": "families",
+      "area": "domestic",
+      "readerQuestion": "How should retirement security be sustained fairly?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-retirement-security-be-sustained-fairly",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "These are four distinct questions; grouping does not imply shared needs or one benefit policy.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "SSA/VA/ACL/DOL program data and governing statutes; separate populations and distributional effects.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "families-q4",
+      "kind": "question",
+      "issue": "families",
+      "area": "domestic",
+      "readerQuestion": "What would improve veterans’ access to benefits and care?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/what-would-improve-veterans-access-to-benefits-and-care",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "These are four distinct questions; grouping does not imply shared needs or one benefit policy.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "SSA/VA/ACL/DOL program data and governing statutes; separate populations and distributional effects.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "diplomacy-q1",
+      "kind": "question",
+      "issue": "diplomacy",
+      "area": "foreign",
+      "readerQuestion": "What should US alliances achieve and how should they be evaluated?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/what-should-us-alliances-achieve-and-how-should-they-be-evaluated",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "US choices and institutions, not descriptions of what every regional actor wants.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Treaty texts, State Department primary records, constitutional authority and dated diplomatic outcomes.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "diplomacy-q2",
+      "kind": "question",
+      "issue": "diplomacy",
+      "area": "foreign",
+      "readerQuestion": "When is diplomacy with an adversary useful?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/when-is-diplomacy-with-an-adversary-useful",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "US choices and institutions, not descriptions of what every regional actor wants.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Treaty texts, State Department primary records, constitutional authority and dated diplomatic outcomes.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "diplomacy-q3",
+      "kind": "question",
+      "issue": "diplomacy",
+      "area": "foreign",
+      "readerQuestion": "How should the United States work with international institutions?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-the-united-states-work-with-international-institutions",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "US choices and institutions, not descriptions of what every regional actor wants.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Treaty texts, State Department primary records, constitutional authority and dated diplomatic outcomes.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "diplomacy-q4",
+      "kind": "question",
+      "issue": "diplomacy",
+      "area": "foreign",
+      "readerQuestion": "How should treaty commitments be made and reviewed?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-treaty-commitments-be-made-and-reviewed",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "US choices and institutions, not descriptions of what every regional actor wants.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Treaty texts, State Department primary records, constitutional authority and dated diplomatic outcomes.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "defense-q1",
+      "kind": "question",
+      "issue": "defense",
+      "area": "foreign",
+      "readerQuestion": "When should the United States use military force?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/use-of-military-force",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Legal authority, strategy, procurement and oversight are separately evaluated.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Constitution, War Powers Resolution, actual authorizations, CRS/GAO and international-law sources.",
+      "status": "revise-current-baseline",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "defense-q2",
+      "kind": "question",
+      "issue": "defense",
+      "area": "foreign",
+      "readerQuestion": "How should defense spending be tied to strategy?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-defense-spending-be-tied-to-strategy",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Legal authority, strategy, procurement and oversight are separately evaluated.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Constitution, War Powers Resolution, actual authorizations, CRS/GAO and international-law sources.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "defense-q3",
+      "kind": "question",
+      "issue": "defense",
+      "area": "foreign",
+      "readerQuestion": "What makes deterrence credible without unnecessary escalation?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/what-makes-deterrence-credible-without-unnecessary-escalation",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Legal authority, strategy, procurement and oversight are separately evaluated.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Constitution, War Powers Resolution, actual authorizations, CRS/GAO and international-law sources.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "defense-q4",
+      "kind": "question",
+      "issue": "defense",
+      "area": "foreign",
+      "readerQuestion": "How should Congress oversee continuing military operations?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-congress-oversee-continuing-military-operations",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Legal authority, strategy, procurement and oversight are separately evaluated.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Constitution, War Powers Resolution, actual authorizations, CRS/GAO and international-law sources.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "trade-q1",
+      "kind": "question",
+      "issue": "trade",
+      "area": "foreign",
+      "readerQuestion": "When do tariffs serve a defensible public objective?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/when-do-tariffs-serve-a-defensible-public-objective",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Cross-country instruments here; China-specific application depends on these foundations.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Current trade/sanctions instruments, CBO/USITC evaluations, aid outcomes and counterfactuals.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "trade-q2",
+      "kind": "question",
+      "issue": "trade",
+      "area": "foreign",
+      "readerQuestion": "How should sanctions be tested for effectiveness and civilian harm?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-sanctions-be-tested-for-effectiveness-and-civilian-harm",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Cross-country instruments here; China-specific application depends on these foundations.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Current trade/sanctions instruments, CBO/USITC evaluations, aid outcomes and counterfactuals.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "trade-q3",
+      "kind": "question",
+      "issue": "trade",
+      "area": "foreign",
+      "readerQuestion": "What should development assistance achieve?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/what-should-development-assistance-achieve",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Cross-country instruments here; China-specific application depends on these foundations.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Current trade/sanctions instruments, CBO/USITC evaluations, aid outcomes and counterfactuals.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "trade-q4",
+      "kind": "question",
+      "issue": "trade",
+      "area": "foreign",
+      "readerQuestion": "How should trade resilience be balanced with lower prices?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-trade-resilience-be-balanced-with-lower-prices",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Cross-country instruments here; China-specific application depends on these foundations.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Current trade/sanctions instruments, CBO/USITC evaluations, aid outcomes and counterfactuals.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "humanitarian-q1",
+      "kind": "question",
+      "issue": "humanitarian",
+      "area": "foreign",
+      "readerQuestion": "What should trigger a US humanitarian response?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/what-should-trigger-a-us-humanitarian-response",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Humanitarian need does not itself authorize military force.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "UN/ICRC primary documentation, humanitarian law, aid audits and context-specific evaluations.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "humanitarian-q2",
+      "kind": "question",
+      "issue": "humanitarian",
+      "area": "foreign",
+      "readerQuestion": "How should conflict prevention be compared with crisis response?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-conflict-prevention-be-compared-with-crisis-response",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Humanitarian need does not itself authorize military force.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "UN/ICRC primary documentation, humanitarian law, aid audits and context-specific evaluations.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "humanitarian-q3",
+      "kind": "question",
+      "issue": "humanitarian",
+      "area": "foreign",
+      "readerQuestion": "How should aid reach civilians without strengthening abusive actors?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-aid-reach-civilians-without-strengthening-abusive-actors",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Humanitarian need does not itself authorize military force.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "UN/ICRC primary documentation, humanitarian law, aid audits and context-specific evaluations.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "humanitarian-q4",
+      "kind": "question",
+      "issue": "humanitarian",
+      "area": "foreign",
+      "readerQuestion": "How should human-rights concerns influence foreign policy?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-human-rights-concerns-influence-foreign-policy",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Humanitarian need does not itself authorize military force.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "UN/ICRC primary documentation, humanitarian law, aid audits and context-specific evaluations.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "china-indo-pacific-q1",
+      "kind": "question",
+      "issue": "china-indo-pacific",
+      "area": "geopolitics",
+      "readerQuestion": "How should America compete and cooperate with China?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/china-competition-cooperation",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Distinguish analysis of regional interests from proposed US action; no ancestry-based inference.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Current CRS/official instruments, regional governments’ primary statements and verified trade dependencies.",
+      "status": "revise-current-baseline",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "china-indo-pacific-q2",
+      "kind": "question",
+      "issue": "china-indo-pacific",
+      "area": "geopolitics",
+      "readerQuestion": "What interests do Indo-Pacific partners hold that differ from US priorities?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/what-interests-do-indo-pacific-partners-hold-that-differ-from-us-priorities",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Distinguish analysis of regional interests from proposed US action; no ancestry-based inference.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Current CRS/official instruments, regional governments’ primary statements and verified trade dependencies.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "china-indo-pacific-q3",
+      "kind": "question",
+      "issue": "china-indo-pacific",
+      "area": "geopolitics",
+      "readerQuestion": "How should Taiwan-related escalation risks be explained?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-taiwan-related-escalation-risks-be-explained",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Distinguish analysis of regional interests from proposed US action; no ancestry-based inference.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Current CRS/official instruments, regional governments’ primary statements and verified trade dependencies.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "china-indo-pacific-q4",
+      "kind": "question",
+      "issue": "china-indo-pacific",
+      "area": "geopolitics",
+      "readerQuestion": "Which Indo-Pacific supply dependencies are genuinely difficult to replace?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/which-indo-pacific-supply-dependencies-are-genuinely-difficult-to-replace",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Distinguish analysis of regional interests from proposed US action; no ancestry-based inference.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Current CRS/official instruments, regional governments’ primary statements and verified trade dependencies.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "europe-eurasia-q1",
+      "kind": "question",
+      "issue": "europe-eurasia",
+      "area": "geopolitics",
+      "readerQuestion": "How do European security priorities differ across countries?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-do-european-security-priorities-differ-across-countries",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Do not aggregate Europe, Russia and Eurasia into a single actor or policy preference.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Dated treaty/official statements, verified conflict facts, energy statistics and explicit uncertainty.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "europe-eurasia-q2",
+      "kind": "question",
+      "issue": "europe-eurasia",
+      "area": "geopolitics",
+      "readerQuestion": "What would make a negotiated conflict settlement durable?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/what-would-make-a-negotiated-conflict-settlement-durable",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Do not aggregate Europe, Russia and Eurasia into a single actor or policy preference.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Dated treaty/official statements, verified conflict facts, energy statistics and explicit uncertainty.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "europe-eurasia-q3",
+      "kind": "question",
+      "issue": "europe-eurasia",
+      "area": "geopolitics",
+      "readerQuestion": "How do energy dependencies shape European and Eurasian choices?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-do-energy-dependencies-shape-european-and-eurasian-choices",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Do not aggregate Europe, Russia and Eurasia into a single actor or policy preference.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Dated treaty/official statements, verified conflict facts, energy statistics and explicit uncertainty.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "europe-eurasia-q4",
+      "kind": "question",
+      "issue": "europe-eurasia",
+      "area": "geopolitics",
+      "readerQuestion": "How should competing accounts of regional security be tested?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-competing-accounts-of-regional-security-be-tested",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Do not aggregate Europe, Russia and Eurasia into a single actor or policy preference.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Dated treaty/official statements, verified conflict facts, energy statistics and explicit uncertainty.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "mena-q1",
+      "kind": "question",
+      "issue": "mena",
+      "area": "geopolitics",
+      "readerQuestion": "How do regional governments’ security interests differ?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-do-regional-governments-security-interests-differ",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "No presumed common religious, ethnic or national position; specific conflict claims need current verification.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Country-specific primary records, humanitarian monitoring, trade/resource data and attribution limits.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "mena-q2",
+      "kind": "question",
+      "issue": "mena",
+      "area": "geopolitics",
+      "readerQuestion": "What evidence is needed to assess civilian harm in a regional conflict?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/what-evidence-is-needed-to-assess-civilian-harm-in-a-regional-conflict",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "No presumed common religious, ethnic or national position; specific conflict claims need current verification.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Country-specific primary records, humanitarian monitoring, trade/resource data and attribution limits.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "mena-q3",
+      "kind": "question",
+      "issue": "mena",
+      "area": "geopolitics",
+      "readerQuestion": "How do water, food and energy pressures interact in specific countries?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-do-water-food-and-energy-pressures-interact-in-specific-countries",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "No presumed common religious, ethnic or national position; specific conflict claims need current verification.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Country-specific primary records, humanitarian monitoring, trade/resource data and attribution limits.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "mena-q4",
+      "kind": "question",
+      "issue": "mena",
+      "area": "geopolitics",
+      "readerQuestion": "How should competing regional diplomatic initiatives be compared?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-competing-regional-diplomatic-initiatives-be-compared",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "No presumed common religious, ethnic or national position; specific conflict claims need current verification.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Country-specific primary records, humanitarian monitoring, trade/resource data and attribution limits.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "global-regions-q1",
+      "kind": "question",
+      "issue": "global-regions",
+      "area": "geopolitics",
+      "readerQuestion": "How do South Asian countries balance development and strategic autonomy?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-do-south-asian-countries-balance-development-and-strategic-autonomy",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Navigation grouping only: each question requires country-specific analysis, not a single regional prescription.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Named countries and regional institutions’ primary records; comparable dated indicators and scope limits.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "global-regions-q2",
+      "kind": "question",
+      "issue": "global-regions",
+      "area": "geopolitics",
+      "readerQuestion": "How should African regional initiatives be understood on their own terms?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-african-regional-initiatives-be-understood-on-their-own-terms",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Navigation grouping only: each question requires country-specific analysis, not a single regional prescription.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Named countries and regional institutions’ primary records; comparable dated indicators and scope limits.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "global-regions-q3",
+      "kind": "question",
+      "issue": "global-regions",
+      "area": "geopolitics",
+      "readerQuestion": "How do countries in the Americas assess US economic and security policy?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-do-countries-in-the-americas-assess-us-economic-and-security-policy",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Navigation grouping only: each question requires country-specific analysis, not a single regional prescription.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Named countries and regional institutions’ primary records; comparable dated indicators and scope limits.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "global-regions-q4",
+      "kind": "question",
+      "issue": "global-regions",
+      "area": "geopolitics",
+      "readerQuestion": "How should cross-regional comparisons avoid erasing local differences?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-cross-regional-comparisons-avoid-erasing-local-differences",
+      "existingEquivalent": null,
+      "comparableExisting": [],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Navigation grouping only: each question requires country-specific analysis, not a single regional prescription.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions"
+      ],
+      "evidenceRequirements": "Named countries and regional institutions’ primary records; comparable dated indicators and scope limits.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "ai-rights-q1",
+      "kind": "question",
+      "issue": "ai-rights",
+      "area": "technology",
+      "readerQuestion": "Who should be accountable when an AI system causes harm?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/ai-accountability",
+      "existingEquivalent": null,
+      "comparableExisting": [
+        "/policy/algorithmic-transparency-act",
+        "https://policy.mahastrategies.com/policy/ai-agent-accountability/definition",
+        "https://policy.mahastrategies.com/policy/data-protection/definition"
+      ],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Citizen options and remedies here; technical accountability definitions remain on Policy subdomain.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions",
+        "https://policy.mahastrategies.com/policy/ai-agent-accountability/definition",
+        "https://policy.mahastrategies.com/policy/data-protection/definition"
+      ],
+      "evidenceRequirements": "Sector-specific law and cases; GAO/NIST frameworks labelled nonbinding where applicable; incident evidence.",
+      "status": "options-brief",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "ai-rights-q2",
+      "kind": "question",
+      "issue": "ai-rights",
+      "area": "technology",
+      "readerQuestion": "When should a person be able to challenge an automated decision?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/when-should-a-person-be-able-to-challenge-an-automated-decision",
+      "existingEquivalent": null,
+      "comparableExisting": [
+        "/policy/algorithmic-transparency-act",
+        "https://policy.mahastrategies.com/policy/ai-agent-accountability/definition",
+        "https://policy.mahastrategies.com/policy/data-protection/definition"
+      ],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Citizen options and remedies here; technical accountability definitions remain on Policy subdomain.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions",
+        "https://policy.mahastrategies.com/policy/ai-agent-accountability/definition",
+        "https://policy.mahastrategies.com/policy/data-protection/definition"
+      ],
+      "evidenceRequirements": "Sector-specific law and cases; GAO/NIST frameworks labelled nonbinding where applicable; incident evidence.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "ai-rights-q3",
+      "kind": "question",
+      "issue": "ai-rights",
+      "area": "technology",
+      "readerQuestion": "What limits should apply to AI-enabled surveillance?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/what-limits-should-apply-to-ai-enabled-surveillance",
+      "existingEquivalent": null,
+      "comparableExisting": [
+        "/policy/algorithmic-transparency-act",
+        "https://policy.mahastrategies.com/policy/ai-agent-accountability/definition",
+        "https://policy.mahastrategies.com/policy/data-protection/definition"
+      ],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Citizen options and remedies here; technical accountability definitions remain on Policy subdomain.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions",
+        "https://policy.mahastrategies.com/policy/ai-agent-accountability/definition",
+        "https://policy.mahastrategies.com/policy/data-protection/definition"
+      ],
+      "evidenceRequirements": "Sector-specific law and cases; GAO/NIST frameworks labelled nonbinding where applicable; incident evidence.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "ai-rights-q4",
+      "kind": "question",
+      "issue": "ai-rights",
+      "area": "technology",
+      "readerQuestion": "How should deceptive digital design be regulated?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/algorithmic-transparency-act",
+      "existingEquivalent": "/policy/algorithmic-transparency-act",
+      "comparableExisting": [
+        "/policy/algorithmic-transparency-act",
+        "https://policy.mahastrategies.com/policy/ai-agent-accountability/definition",
+        "https://policy.mahastrategies.com/policy/data-protection/definition"
+      ],
+      "treatment": "revise-existing",
+      "semanticDecision": "Do not create a duplicate: revise and link the existing proposal, with fresh review.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions",
+        "https://policy.mahastrategies.com/policy/ai-agent-accountability/definition",
+        "https://policy.mahastrategies.com/policy/data-protection/definition"
+      ],
+      "evidenceRequirements": "Sector-specific law and cases; GAO/NIST frameworks labelled nonbinding where applicable; incident evidence.",
+      "status": "existing-needs-review",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "ai-work-q1",
+      "kind": "question",
+      "issue": "ai-work",
+      "area": "technology",
+      "readerQuestion": "What should happen when AI eliminates or changes jobs?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/ai-jobs",
+      "existingEquivalent": null,
+      "comparableExisting": [
+        "https://policy.mahastrategies.com/policy/automated-decision-governance/definition"
+      ],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "AI-specific adoption and workforce effects, not a duplicate general schools or wages page.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions",
+        "https://policy.mahastrategies.com/policy/automated-decision-governance/definition"
+      ],
+      "evidenceRequirements": "BLS labor evidence, original evaluations, procurement/education/labor statutes and outcome measures.",
+      "status": "options-brief",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "ai-work-q2",
+      "kind": "question",
+      "issue": "ai-work",
+      "area": "technology",
+      "readerQuestion": "When should schools use AI tools?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/when-should-schools-use-ai-tools",
+      "existingEquivalent": null,
+      "comparableExisting": [
+        "https://policy.mahastrategies.com/policy/automated-decision-governance/definition"
+      ],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "AI-specific adoption and workforce effects, not a duplicate general schools or wages page.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions",
+        "https://policy.mahastrategies.com/policy/automated-decision-governance/definition"
+      ],
+      "evidenceRequirements": "BLS labor evidence, original evaluations, procurement/education/labor statutes and outcome measures.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "ai-work-q3",
+      "kind": "question",
+      "issue": "ai-work",
+      "area": "technology",
+      "readerQuestion": "How should government procure and evaluate AI systems?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-government-procure-and-evaluate-ai-systems",
+      "existingEquivalent": null,
+      "comparableExisting": [
+        "https://policy.mahastrategies.com/policy/automated-decision-governance/definition"
+      ],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "AI-specific adoption and workforce effects, not a duplicate general schools or wages page.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions",
+        "https://policy.mahastrategies.com/policy/automated-decision-governance/definition"
+      ],
+      "evidenceRequirements": "BLS labor evidence, original evaluations, procurement/education/labor statutes and outcome measures.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "ai-work-q4",
+      "kind": "question",
+      "issue": "ai-work",
+      "area": "technology",
+      "readerQuestion": "How should workers share in gains from AI-assisted work?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-workers-share-in-gains-from-ai-assisted-work",
+      "existingEquivalent": null,
+      "comparableExisting": [
+        "https://policy.mahastrategies.com/policy/automated-decision-governance/definition"
+      ],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "AI-specific adoption and workforce effects, not a duplicate general schools or wages page.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions",
+        "https://policy.mahastrategies.com/policy/automated-decision-governance/definition"
+      ],
+      "evidenceRequirements": "BLS labor evidence, original evaluations, procurement/education/labor statutes and outcome measures.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "compute-chips-q1",
+      "kind": "question",
+      "issue": "compute-chips",
+      "area": "technology",
+      "readerQuestion": "When is public support for chip manufacturing justified?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/when-is-public-support-for-chip-manufacturing-justified",
+      "existingEquivalent": null,
+      "comparableExisting": [
+        "https://policy.mahastrategies.com/policy/semiconductor-policy/definition"
+      ],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Citizen-facing industrial choices; technical definitions and equipment explanations stay with their owners.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions",
+        "https://policy.mahastrategies.com/policy/semiconductor-policy/definition"
+      ],
+      "evidenceRequirements": "CHIPS/program law, GAO award evidence, FERC/state tariffs, competition and supply-chain data.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "compute-chips-q2",
+      "kind": "question",
+      "issue": "compute-chips",
+      "area": "technology",
+      "readerQuestion": "Who should pay for grid expansion serving data centers?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/who-should-pay-for-grid-expansion-serving-data-centers",
+      "existingEquivalent": null,
+      "comparableExisting": [
+        "https://policy.mahastrategies.com/policy/semiconductor-policy/definition"
+      ],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Citizen-facing industrial choices; technical definitions and equipment explanations stay with their owners.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions",
+        "https://policy.mahastrategies.com/policy/semiconductor-policy/definition"
+      ],
+      "evidenceRequirements": "CHIPS/program law, GAO award evidence, FERC/state tariffs, competition and supply-chain data.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "compute-chips-q3",
+      "kind": "question",
+      "issue": "compute-chips",
+      "area": "technology",
+      "readerQuestion": "How should access to compute be balanced with competition?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-access-to-compute-be-balanced-with-competition",
+      "existingEquivalent": null,
+      "comparableExisting": [
+        "https://policy.mahastrategies.com/policy/semiconductor-policy/definition"
+      ],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Citizen-facing industrial choices; technical definitions and equipment explanations stay with their owners.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions",
+        "https://policy.mahastrategies.com/policy/semiconductor-policy/definition"
+      ],
+      "evidenceRequirements": "CHIPS/program law, GAO award evidence, FERC/state tariffs, competition and supply-chain data.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "compute-chips-q4",
+      "kind": "question",
+      "issue": "compute-chips",
+      "area": "technology",
+      "readerQuestion": "How should semiconductor supply-chain resilience be measured?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-semiconductor-supply-chain-resilience-be-measured",
+      "existingEquivalent": null,
+      "comparableExisting": [
+        "https://policy.mahastrategies.com/policy/semiconductor-policy/definition"
+      ],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "Citizen-facing industrial choices; technical definitions and equipment explanations stay with their owners.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions",
+        "https://policy.mahastrategies.com/policy/semiconductor-policy/definition"
+      ],
+      "evidenceRequirements": "CHIPS/program law, GAO award evidence, FERC/state tariffs, competition and supply-chain data.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "frontier-security-q1",
+      "kind": "question",
+      "issue": "frontier-security",
+      "area": "technology",
+      "readerQuestion": "What evidence should trigger additional frontier-AI safeguards?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/what-evidence-should-trigger-additional-frontier-ai-safeguards",
+      "existingEquivalent": null,
+      "comparableExisting": [
+        "https://policy.mahastrategies.com/policy/standards-and-conformity/definition"
+      ],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "No blanket equivalence between model tests, cyber controls, physical robot safety and military assurance.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions",
+        "https://policy.mahastrategies.com/policy/standards-and-conformity/definition"
+      ],
+      "evidenceRequirements": "NIST/CISA primary standards, executable evaluation evidence, robotics safety scope and actual law.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "frontier-security-q2",
+      "kind": "question",
+      "issue": "frontier-security",
+      "area": "technology",
+      "readerQuestion": "How should cybersecurity duties be assigned across suppliers and operators?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-cybersecurity-duties-be-assigned-across-suppliers-and-operators",
+      "existingEquivalent": null,
+      "comparableExisting": [
+        "https://policy.mahastrategies.com/policy/standards-and-conformity/definition"
+      ],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "No blanket equivalence between model tests, cyber controls, physical robot safety and military assurance.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions",
+        "https://policy.mahastrategies.com/policy/standards-and-conformity/definition"
+      ],
+      "evidenceRequirements": "NIST/CISA primary standards, executable evaluation evidence, robotics safety scope and actual law.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "frontier-security-q3",
+      "kind": "question",
+      "issue": "frontier-security",
+      "area": "technology",
+      "readerQuestion": "What should be required before robots work around people?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/what-should-be-required-before-robots-work-around-people",
+      "existingEquivalent": null,
+      "comparableExisting": [
+        "https://policy.mahastrategies.com/policy/standards-and-conformity/definition"
+      ],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "No blanket equivalence between model tests, cyber controls, physical robot safety and military assurance.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions",
+        "https://policy.mahastrategies.com/policy/standards-and-conformity/definition"
+      ],
+      "evidenceRequirements": "NIST/CISA primary standards, executable evaluation evidence, robotics safety scope and actual law.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    },
+    {
+      "id": "frontier-security-q4",
+      "kind": "question",
+      "issue": "frontier-security",
+      "area": "technology",
+      "readerQuestion": "How should national-security AI claims be scrutinized?",
+      "proposedOwner": "www.mahastrategies.com",
+      "proposedUrl": "/policy/questions/how-should-national-security-ai-claims-be-scrutinized",
+      "existingEquivalent": null,
+      "comparableExisting": [
+        "https://policy.mahastrategies.com/policy/standards-and-conformity/definition"
+      ],
+      "treatment": "new-bounded-answer",
+      "semanticDecision": "No blanket equivalence between model tests, cyber controls, physical robot safety and military assurance.",
+      "dependencies": [
+        "/policy/methodology/sources-and-evidence",
+        "/policy/methodology/costs-and-distribution",
+        "/policy/methodology/authority-and-implementation",
+        "/policy/methodology/corrections-and-positions",
+        "https://policy.mahastrategies.com/policy/standards-and-conformity/definition"
+      ],
+      "evidenceRequirements": "NIST/CISA primary standards, executable evaluation evidence, robotics safety scope and actual law.",
+      "status": "candidate-not-researched",
+      "searchDemand": "unknown"
+    }
+  ],
+  "methodologies": [
+    {
+      "slug": "sources-and-evidence",
+      "readerQuestion": "How we use sources and assess evidence",
+      "proposedUrl": "/policy/methodology/sources-and-evidence",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [],
+      "evidenceRequirements": "Describe the actual local review process; no expert-review claim.",
+      "status": "local-draft",
+      "searchDemand": "unknown"
+    },
+    {
+      "slug": "costs-and-distribution",
+      "readerQuestion": "How we assess costs and distributional effects",
+      "proposedUrl": "/policy/methodology/costs-and-distribution",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [],
+      "evidenceRequirements": "Describe the actual local review process; no expert-review claim.",
+      "status": "local-draft",
+      "searchDemand": "unknown"
+    },
+    {
+      "slug": "authority-and-implementation",
+      "readerQuestion": "Who has authority to implement a policy",
+      "proposedUrl": "/policy/methodology/authority-and-implementation",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [],
+      "evidenceRequirements": "Describe the actual local review process; no expert-review claim.",
+      "status": "local-draft",
+      "searchDemand": "unknown"
+    },
+    {
+      "slug": "corrections-and-positions",
+      "readerQuestion": "Corrections, review dates and position changes",
+      "proposedUrl": "/policy/methodology/corrections-and-positions",
+      "proposedOwner": "www.mahastrategies.com",
+      "existingEquivalent": null,
+      "dependencies": [],
+      "evidenceRequirements": "Describe the actual local review process; no expert-review claim.",
+      "status": "local-draft",
+      "searchDemand": "unknown"
+    }
+  ],
+  "counts": {
+    "areas": 4,
+    "issues": 24,
+    "questions": 96,
+    "methodologies": 4,
+    "planningSlots": 128,
+    "reusedQuestionUrls": 5,
+    "localAnswerDrafts": 12
+  },
+  "freezeDigest": "50802fc9d3380b66020f2547aab3dd4098c8f663109ca3fca2b0be89659dba71"
+}
