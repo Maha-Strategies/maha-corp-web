@@ -96,7 +96,9 @@ test('every route belongs to one declared visual system', () => {
   // knowledge 75 -> 79: the nanotechnology and physical-AI hubs and their two
   // topic routes. Both render through the shared EvidenceArticle component and
   // inherit the Knowledge overlay, adding no visual system of their own.
-  assert.deepEqual(groups, { paper: 129, apps: 5, books: 41, docs: 1, knowledge: 79, intelligence: 2, operator: 32, internal: 1 })
+  // paper 129 -> 130: /caldera, a concept page for a future headquarters.
+  // It owns the paper boundary directly and introduces no new renderer.
+  assert.deepEqual(groups, { paper: 130, apps: 5, books: 41, docs: 1, knowledge: 79, intelligence: 2, operator: 32, internal: 1 })
 })
 
 test('Apps, Books, Docs, Knowledge, and Intelligence own bounded cyber-light overlays', () => {
