@@ -174,6 +174,10 @@ test('public agent discovery identifies live capabilities and the scoped Context
     'gpu-tensor-network',
     'gpu-geometric-registration',
     'enterprise-mcp-gateway',
+    // Described, never payable: withheld pending agreed terms and owner
+    // authorization. payableNow false, absent from autonomousPaymentScope.
+    // Position is the generator's: non-microproduct entries precede them.
+    'cabezon-buyer-brief-pack',
     // Locally implemented contracts are discoverable only as withheld, never payable.
     'citation-binding-check',
     'revision-lineage-check',
