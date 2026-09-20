@@ -8,6 +8,7 @@
   },
   "ignoreCommand": "node scripts/vercel-should-build.cjs",
   "crons": [
+    {"path":"/api/cron/buyer-brief-notifications","schedule":"*/5 * * * *"},
     {
       "path": "/api/cron/x402-settlements",
       "schedule": "17 * * * *"

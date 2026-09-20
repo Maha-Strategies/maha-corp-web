@@ -1,6 +1,9 @@
 import { MICRO_IDS, microPath } from './x402/micro-contracts.ts'
 
 export const SELF_MANAGED_KEY_ROUTES = new Set([
+  '/api/v1/cabezon/buyer-brief',
+  '/api/v1/cabezon/buyer-brief/retrieve',
+  '/api/v1/cabezon/buyer-brief/support',
   // Basic is free and owns an atomic capacity limit. Pilot owns its dedicated
   // bearer. Exempt only these exact paths; never a broad interpretation prefix.
   '/api/v1/interpretations/jyotisha/basic',

@@ -1,0 +1,31 @@
+name: Buyer-Brief release checks
+on:
+  push:
+    branches: [codex/buyer-brief-production]
+  pull_request:
+    paths: ['lib/x402/buyer-brief*', 'supabase/migrations/20260920090000_buyer_brief_notifications.sql', 'scripts/test-buyer-brief-postgres.ts']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: synthetic-test-only
+          POSTGRES_DB: buyer_brief_test
+        ports: ['5432:5432']
+        options: --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node --experimental-strip-types scripts/test-buyer-brief-postgres.ts
+        env:
+          BUYER_BRIEF_TEST_DATABASE_URL: postgresql://postgres:synthetic-test-only@localhost:5432/buyer_brief_test
+      - run: node --experimental-strip-types --test test/buyer-brief*.test.ts test/x402-gateway.test.ts test/x402-discovery.test.ts
