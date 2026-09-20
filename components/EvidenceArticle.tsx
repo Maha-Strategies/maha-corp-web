@@ -13,6 +13,8 @@ export type EvidenceSource = {
   url: string
   locator: string
   inspected: string
+  /** Short verbatim phrase a reader can search the source for. */
+  anchor?: string
   claim: string
   boundary: string
   rights: string
@@ -102,10 +104,16 @@ export function EvidenceArticle({ article, sources, sectionPath, sectionLabel, t
                   <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">{source.claim}</p>
                   <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">Boundary: {source.boundary}</p>
                   <details className="mt-2">
-                    <summary className="cursor-pointer text-xs uppercase tracking-widest text-[var(--text-muted)]">Locator and reuse basis</summary>
+                    <summary className="cursor-pointer text-xs uppercase tracking-widest text-[var(--text-muted)]">Locator, anchor and reuse basis</summary>
                     <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
                       Read at: {source.locator}. Inspected {source.inspected}. {source.rights}
                     </p>
+                    {source.anchor ? (
+                      <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
+                        Verify by searching the source for: <q className="italic">{source.anchor}</q>. If that phrase is not
+                        there, or does not carry the meaning stated above, this citation is wrong and we want to know.
+                      </p>
+                    ) : null}
                   </details>
                 </li>
               ))}

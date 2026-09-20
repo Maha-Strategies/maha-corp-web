@@ -22,6 +22,14 @@ export type PhysicalAiSource = {
   url: string
   locator: string
   inspected: string
+  /**
+   * A short verbatim phrase from the cited passage. It is the verification
+   * handle: a reviewer can search the source for this string and see whether
+   * the passage says what the claim says it says. Tests can check that an
+   * anchor is present and short; only a person re-reading the source can
+   * confirm it is there.
+   */
+  anchor: string
   claim: string
   boundary: string
   rights: string
@@ -33,6 +41,7 @@ export const PHYSICAL_AI_SOURCES = {
     url: 'https://arxiv.org/abs/1011.0686',
     locator: 'Abstract; §1 Introduction',
     inspected: '2026-09-19',
+    anchor: 'good performance under the distribution of observations it induces',
     claim: 'A policy trained on an expert’s demonstrations encounters, at execution time, the distribution of observations that its own actions induce; the paper’s iterative approach targets good performance under that induced distribution rather than under the expert’s.',
     boundary: 'A learning-theoretic result with its own assumptions and benchmark experiments. It does not establish that any particular robot policy is safe, nor how much data a given task needs.',
     rights: 'Original paraphrase and link to the open preprint; no figures, tables or text reproduced.',
@@ -42,6 +51,7 @@ export const PHYSICAL_AI_SOURCES = {
     url: 'https://arxiv.org/abs/1703.06907',
     locator: '§III-A Domain randomization',
     inspected: '2026-09-19',
+    anchor: 'position, orientation, and field of view of the camera',
     claim: 'The method randomises stated aspects of the simulated scene during training — number and shape of distractor objects, object positions and textures, table, floor, skybox and robot textures, camera position, orientation and field of view, lighting, and image noise — so that the real world appears to the model as one more variation.',
     boundary: 'The paper demonstrates transfer for its own task and setup, with a fixed table height and an uncalibrated monocular camera. Randomising a list of parameters is not evidence that any other task transfers.',
     rights: 'Original paraphrase and link to the open preprint.',
@@ -51,6 +61,7 @@ export const PHYSICAL_AI_SOURCES = {
     url: 'https://arxiv.org/abs/1803.10122',
     locator: '§4.4 Transfer policy to actual environment; surrounding discussion of model imperfections',
     inspected: '2026-09-19',
+    anchor: 'the tradeoff between realism and exploitability',
     claim: 'A controller can be trained inside a learned generative model of an environment and then transferred back; the authors discuss how an agent can exploit imperfections of that learned model, and use a temperature parameter to make the imagined environment harder to exploit.',
     boundary: 'The environments are video games. Nothing in the paper concerns physical contact, hardware safety, or a robot acting among people.',
     rights: 'Original paraphrase and link to the open preprint.',
@@ -60,6 +71,7 @@ export const PHYSICAL_AI_SOURCES = {
     url: 'https://arxiv.org/abs/2406.09246',
     locator: 'Abstract; §1 Introduction',
     inspected: '2026-09-19',
+    anchor: 'outperforming closed models such as RT-2-X (55B) by 16.5%',
     claim: 'A vision-language-action model couples a pretrained vision-language backbone to robot action outputs; OpenVLA is a 7B-parameter open model trained on 970k real robot demonstrations, reported by its authors to exceed a 55B closed model by 16.5 percentage points of absolute task success across 29 tasks and several embodiments.',
     boundary: 'Those are the authors’ own reported results on their evaluation suites and embodiments. They are not an independent replication, and success rates on 29 tasks do not describe behaviour in an unseen setting.',
     rights: 'Original paraphrase and link to the open preprint; reported figures attributed to the authors.',
@@ -69,6 +81,7 @@ export const PHYSICAL_AI_SOURCES = {
     url: 'https://arxiv.org/abs/1612.01474',
     locator: 'Abstract; §1 Introduction',
     inspected: '2026-09-19',
+    anchor: 'express higher uncertainty on out-of-distribution examples',
     claim: 'The authors report that an ensemble of independently trained networks produces uncertainty estimates competitive with approximate Bayesian methods, and expresses higher uncertainty on out-of-distribution test examples.',
     boundary: 'Classification and regression benchmarks, not robot control. Higher uncertainty on out-of-distribution inputs is a reported tendency, not a detector with a guaranteed operating point.',
     rights: 'Original paraphrase and link to the open preprint.',
@@ -78,6 +91,7 @@ export const PHYSICAL_AI_SOURCES = {
     url: 'https://arxiv.org/abs/1910.10897',
     locator: 'Abstract; §1 Introduction',
     inspected: '2026-09-19',
+    anchor: 'even with as few as ten distinct training tasks',
     claim: 'The benchmark provides 50 distinct simulated manipulation tasks; the authors report that while individual tasks and their variations can be learned, the algorithms they evaluated struggled to learn several tasks at once, even with as few as ten training tasks.',
     boundary: 'Simulated manipulation with the benchmark’s own object models and reward structure. A score here is not a statement about a physical robot.',
     rights: 'Original paraphrase and link to the open preprint.',
@@ -85,10 +99,11 @@ export const PHYSICAL_AI_SOURCES = {
   risk: {
     title: 'NIST AI Risk Management Framework',
     url: 'https://www.nist.gov/itl/ai-risk-management-framework',
-    locator: 'Overview of the AI RMF',
-    inspected: '2026-09-19',
-    claim: 'NIST publishes the framework for voluntary use, to help incorporate trustworthiness considerations across the design, development, use and evaluation of AI products and services.',
-    boundary: 'Voluntary guidance. Following it certifies nothing, and it contains no robot-specific acceptance criterion.',
+    locator: 'Overview of the AI RMF — the framework’s own purpose statement',
+    inspected: '2026-09-20',
+    anchor: 'intended for voluntary use',
+    claim: 'NIST states that the AI Risk Management Framework is intended for voluntary use and to improve the ability to incorporate trustworthiness considerations into the design, development, use and evaluation of AI products, services and systems.',
+    boundary: 'Voluntary guidance, and following it certifies nothing. The framework is general-purpose rather than prescriptive for a domain: NIST has issued companion profiles for other sectors, but there is no robot-specific profile and no acceptance criterion for a physical machine anywhere in it.',
     rights: 'Original paraphrase and link only.',
   },
   estimation: {
@@ -96,6 +111,7 @@ export const PHYSICAL_AI_SOURCES = {
     url: 'https://www.cs.utexas.edu/~pstone/Courses/393Rfall15/readings/Welch+Bishop-TR-95.pdf',
     locator: '§1 The Discrete Kalman Filter — “The Computational Origins of the Filter” and the discussion of equation (1.8); the time-update / measurement-update cycle',
     inspected: '2026-09-20',
+    anchor: 'the gain K weights the residual more heavily',
     claim: 'The filter alternates a time update that projects the state forward to produce an a priori estimate with a measurement update that corrects it into an a posteriori estimate, weighting the two by a gain computed from the process-noise covariance Q and the measurement-noise covariance R. The document states that as R approaches zero the gain weights the residual more heavily, with the limit of the gain equal to the inverse of the measurement matrix, and that as the a priori error covariance approaches zero the gain weights the residual less heavily, with the limit equal to zero — equivalently, the measurement is trusted more as R falls and less as the prediction becomes confident.',
     boundary: 'A tutorial on a linear estimator under assumed Gaussian noise with known Q and R. It does not tell you the real noise of any sensor, does not cover the nonlinear or non-Gaussian case beyond an introduction, and offers no guarantee about a robot that uses it.',
     rights: 'Paraphrase and link to the publicly posted technical report; equations and text not reproduced.',
@@ -105,6 +121,7 @@ export const PHYSICAL_AI_SOURCES = {
     url: 'https://arxiv.org/abs/1606.06565',
     locator: 'Abstract; §3 Avoiding Negative Side Effects; §4 Avoiding Reward Hacking',
     inspected: '2026-09-20',
+    anchor: 'the robot may think the office is clean if it simply closes its eyes',
     claim: 'The paper frames accidents as unintended and harmful behaviour arising from poor design, and separates five problems, two of which come from having the wrong objective function: negative side effects and reward hacking. Its running cleaning-robot example illustrates both — an agent rewarded for moving a box may knock over a vase in its path because the objective expresses indifference to everything it does not mention, and an agent rewarded for how few messes it sees can satisfy that objective by closing its eyes. It further describes reward hacking through Goodhart’s law (rewarding a correlate such as bleach consumption invites overuse), feedback loops, and wireheading, where an agent tampers with the sensor that reports its score.',
     boundary: 'A research agenda that names failure modes and proposes directions. It is not a result about any deployed system, provides no detector for these failures, and does not establish how often they occur in practice.',
     rights: 'Paraphrase and link to the open preprint; short attributed wording only.',
@@ -114,6 +131,7 @@ export const PHYSICAL_AI_SOURCES = {
     url: 'https://arxiv.org/abs/2307.15818',
     locator: 'Abstract; §1 Introduction',
     inspected: '2026-09-20',
+    anchor: '6k evaluation trials',
     claim: 'The authors express robot actions as text tokens and co-fine-tune a pretrained vision-language model on robot trajectory data together with internet-scale vision-language tasks such as visual question answering. They report improved generalisation to novel objects, the ability to follow commands absent from the robot training data, and rudimentary reasoning such as selecting the smallest or largest object or identifying a suitable implement, evaluated over some 6,000 trials.',
     boundary: 'The authors’ own reported results on their own robots and evaluation set. The abstract gives capabilities rather than a headline success-rate figure, no independent replication is cited, and emergent behaviour on chosen probes is not a guarantee of behaviour elsewhere.',
     rights: 'Paraphrase and link to the open preprint; no figures or tables reproduced.',
@@ -123,6 +141,7 @@ export const PHYSICAL_AI_SOURCES = {
     url: 'https://arxiv.org/abs/2304.13705',
     locator: 'Abstract; project description of the teleoperation setup',
     inspected: '2026-09-20',
+    anchor: '80-90% success',
     claim: 'The authors describe a low-cost bimanual teleoperation setup used to collect human demonstrations, and Action Chunking with Transformers, an algorithm that learns a generative model over action sequences rather than single actions, motivated by compounding policy error and non-stationary human demonstration. They report learning six fine manipulation tasks — including opening a translucent condiment cup and slotting a battery — at 80–90% success from around ten minutes of demonstrations in total.',
     boundary: 'The authors’ own reported results on their own hardware and task set. Ten minutes of demonstration sufficing for six chosen tasks is not a general data requirement, and no safety, durability or unattended-operation claim follows from it.',
     rights: 'Paraphrase and link to the open preprint; no figures or tables reproduced.',

@@ -27,6 +27,14 @@ export type NanoSource = {
   locator: string
   /** The date the page or section was opened and read. */
   inspected: string
+  /**
+   * A short verbatim phrase from the cited passage. It is the verification
+   * handle: a reviewer can search the source for this string and see whether
+   * the passage says what the claim says it says. Tests can check that an
+   * anchor is present and short; only a person re-reading the source can
+   * confirm it is there.
+   */
+  anchor: string
   /** What that passage establishes, in Maha's words. */
   claim: string
   /** What it does not establish. */
@@ -40,6 +48,7 @@ export const NANO_SOURCES = {
     url: 'https://www.nano.gov/about-nanotechnology',
     locator: 'About Nanotechnology, opening paragraph; “How small is nano?”',
     inspected: '2026-09-19',
+    anchor: 'dimensions between approximately 1 and 100 nanometers',
     claim: 'The NNI describes nanotechnology as understanding and control of matter at dimensions of approximately 1 to 100 nanometres, and states that matter can show physical, chemical and biological properties at that scale that differ from bulk material, single atoms and molecules.',
     boundary: 'A programme definition and orientation page. It does not establish any particular material’s properties, performance or safety.',
     rights: 'Original paraphrase and link only; no government text reproduced beyond short attributed wording.',
@@ -49,8 +58,29 @@ export const NANO_SOURCES = {
     url: 'https://www.cdc.gov/niosh/docs/2009-125/pdfs/2009-125.pdf',
     locator: '§4.1 Nano-objects and §4.2 Ultrafine Particles, p. 8; §8.3.5 Respirators, pp. 43–44',
     inspected: '2026-09-20',
-    claim: 'NIOSH reports the ISO/TS 27687:2008 definition of a nano-object as material with one, two or three external dimensions in the range of approximately 1–100 nm, with nanoplate, nanofibre (nanotube hollow, nanorod solid) and nanoparticle as the subcategories by how many dimensions are nanoscale; it distinguishes engineered nanoparticles from incidental ultrafine particles while noting it is unclear whether that source-based distinction is justified for safety purposes; and it states that there are currently no specific exposure limits in the United States for airborne exposures to engineered nanomaterials, that limits for larger particles of similar composition may not be health-protective at the nanoscale, and that nanoparticles may be more biologically reactive than larger particles of similar chemical composition.',
-    boundary: 'Guidance for managing workplace risk, not a toxicological finding about any specific material and not a regulation. The absence of an exposure limit is neither permission nor evidence of safety, and reading this does not substitute for qualified occupational-health practice.',
+    anchor: 'one, two, or three external dimensions in the size range from approximately 1–100 nm',
+    claim: 'NIOSH reports the ISO/TS 27687:2008 definition of a nano-object as material with one, two or three external dimensions in the range of approximately 1–100 nm, with nanoplate, nanofibre (nanotube hollow, nanorod solid) and nanoparticle as the subcategories by how many dimensions are nanoscale; it distinguishes engineered nanoparticles from incidental ultrafine particles while noting it is unclear whether that source-based distinction is justified for safety purposes; and it states that limits set for larger particles of similar chemical composition may not be health-protective at the nanoscale — its example being that the OSHA permissible exposure limit for graphite may not be a safe limit for carbon nanotubes — and that nanoparticles may be more biologically reactive than larger particles of similar composition.',
+    boundary: 'Guidance for managing workplace risk, not a toxicological finding about any specific material and not a regulation, and reading it does not substitute for qualified occupational-health practice. Critically, it is a 2009 document: its statement that no specific US exposure limits then existed for airborne engineered nanomaterials describes 2009 and has since been overtaken by NIOSH’s own recommended exposure limits for titanium dioxide (2011) and carbon nanotubes and nanofibres (2013). This section cites it only for the definitions and the size-versus-composition reasoning, never for the current state of exposure limits.',
+    rights: 'Public-domain federal document; paraphrased with short attributed wording and linked, not reproduced.',
+  },
+  tio2: {
+    title: 'NIOSH Current Intelligence Bulletin 63 — Occupational Exposure to Titanium Dioxide (DHHS/NIOSH 2011-160)',
+    url: 'https://www.cdc.gov/niosh/docs/2011-160/pdfs/2011-160.pdf',
+    locator: 'Executive summary, p. iii',
+    inspected: '2026-09-20',
+    anchor: '2.4 mg/m3 for fine TiO2 and 0.3 mg/m3 for ultrafine',
+    claim: 'NIOSH recommends exposure limits of 2.4 mg/m³ for fine titanium dioxide and 0.3 mg/m³ for ultrafine, including engineered nanoscale, titanium dioxide, as time-weighted average concentrations for up to 10 hours per day during a 40-hour work week. It determined that ultrafine titanium dioxide is a potential occupational carcinogen while there were insufficient data to classify fine titanium dioxide as one, and set separate limits for the two size fractions of the same chemical.',
+    boundary: 'A recommended limit, not an enforceable standard, and it addresses occupational inhalation exposure only — NIOSH states its conclusions should not be inferred to pertain to non-occupational exposures. It concerns titanium dioxide and no other material.',
+    rights: 'Public-domain federal document; paraphrased with short attributed wording and linked, not reproduced.',
+  },
+  cnt: {
+    title: 'NIOSH Current Intelligence Bulletin 65 — Occupational Exposure to Carbon Nanotubes and Nanofibers (DHHS/NIOSH 2013-145)',
+    url: 'https://www.cdc.gov/niosh/publications/numbered/2013-145.html',
+    locator: 'Publication summary — recommended exposure limit',
+    inspected: '2026-09-20',
+    anchor: '1 µg/m3 elemental carbon as a respirable mass',
+    claim: 'NIOSH recommends an exposure limit of 1 µg/m³ of elemental carbon as a respirable mass 8-hour time-weighted average concentration for carbon nanotubes and nanofibres, published in 2013.',
+    boundary: 'A recommended limit, not an enforceable standard. NIOSH notes residual risk remains at the limit and that uncertainty persists about chronic effects, including whether some types of carbon nanotube may be carcinogenic, so the figure is a control target rather than a demonstrated safe level.',
     rights: 'Public-domain federal document; paraphrased with short attributed wording and linked, not reproduced.',
   },
   epa: {
@@ -58,6 +88,7 @@ export const NANO_SOURCES = {
     url: 'https://www.epa.gov/reviewing-new-chemicals-under-toxic-substances-control-act-tsca/control-nanoscale-materials-under',
     locator: 'Nanoscale Materials; Regulatory Approach; Information gathering rule; Reporting under the rule',
     inspected: '2026-09-19',
+    anchor: 'regarded as “chemical substances” under the Toxic Substances Control Act',
     claim: 'EPA treats many nanoscale materials as chemical substances under TSCA, notes that the same substance at the nanoscale may behave differently, and describes a regulatory approach that includes an information-gathering reporting rule and premanufacture notification for new nanoscale materials.',
     boundary: 'Reporting or review under TSCA is a regulatory process, not a finding that a material is safe, effective or approved for a use.',
     rights: 'Original paraphrase and link only.',
@@ -67,6 +98,7 @@ export const NANO_SOURCES = {
     url: 'https://www.fda.gov/science-research/nanotechnology-programs-fda/nanotechnology-guidance-documents',
     locator: 'List of guidance documents, including “Considering Whether an FDA-Regulated Product Involves the Application of Nanotechnology”, “Safety of Nanomaterials in Cosmetic Products”, and “Drug Products, Including Biological Products, that Contain Nanomaterials” — each listed as final guidance',
     inspected: '2026-09-20',
+    anchor: 'Considering Whether an FDA-Regulated Product Involves the Application of Nanotechnology',
     claim: 'FDA publishes product-category guidance on whether a regulated product involves nanotechnology and on nanomaterials in cosmetics and drug products, rather than a single approval pathway for “nanotechnology”.',
     boundary: 'Guidance describes FDA’s current thinking for sponsors. It is not a product approval, a clinical finding, or a statement that any marketed nanomaterial product is safe or effective.',
     rights: 'Original paraphrase and link only; guidance documents are not reproduced here.',
@@ -76,6 +108,7 @@ export const NANO_SOURCES = {
     url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC8533425/',
     locator: 'Introduction; “Types of Coronas and the Biological Identity of NPs”; “Impact on the Physico-Chemical Characteristics”; “Drug Targeting and Cellular Uptake in the Biological Milieu”',
     inspected: '2026-09-20',
+    anchor: 'an NP–protein complex called protein corona',
     claim: 'Nanoparticles entering a biological medium rapidly adsorb proteins, forming a corona that the cell encounters instead of the engineered surface — a biological identity distinct from the synthetic one. Composition depends on particle size, shape, surface charge and surface chemistry as well as the medium, and adsorption is time-dependent, abundant proteins arriving first and being displaced by higher-affinity ones. The review distinguishes a tightly bound hard corona, whose exchange time exceeds cellular uptake, from a loosely bound soft corona that exchanges freely, and reports that ligand-functionalised particles can have their targeting function cloaked by the corona and lose targeting potential.',
     boundary: 'A review of reported findings, largely in serum and cell-culture systems. It does not establish the corona composition for any particular product, nor predict a clinical outcome, and it is not evidence that any nanomedicine is safe or effective.',
     rights: 'Open-access review; paraphrased and linked, with short attributed wording only.',
@@ -85,6 +118,7 @@ export const NANO_SOURCES = {
     url: 'https://arxiv.org/abs/1710.01376',
     locator: 'Abstract; §1 Introduction',
     inspected: '2026-09-20',
+    anchor: 'finite-depth square-well effective mass approximation',
     claim: 'The authors propose an analytical expression for the size-dependent bandgap of colloidal semiconductor nanocrystals within a finite-depth square-well effective-mass approximation, intended to hold in the strong-confinement regime where the conventional effective-mass model fails, and use it to recover a particle size distribution from optical absorbance and photoluminescence spectra, validated against microscopy.',
     boundary: 'A model fitted and validated for the authors’ own CdTe system. It does not certify any instrument or supplier, and an optically inferred size distribution remains a model-dependent inference, not a direct measurement.',
     rights: 'Paraphrase and link to the open preprint; no figures or text reproduced.',
@@ -94,6 +128,7 @@ export const NANO_SOURCES = {
     url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12430070/',
     locator: '§1 Introduction; §2 Gas Sensing Mechanism; §3.1.2 Defects Generation',
     inspected: '2026-09-20',
+    anchor: 'a standardized approach for assessing gas selectivity is lacking',
     claim: 'Chemiresistive sensing works through non-specific surface chemistry — for n-type semiconductors, adsorbed oxygen species and redox reactions with the analyte — so different gases can act on the same sites, and the review states such sensors struggle to detect target gases selectively in mixtures because of cross-sensitivity. It reports that excessive defects can increase noise, cause baseline drift and reduce carrier mobility, that humidity is a persistent interferent, and that a standardised approach for assessing selectivity is lacking, leaving response-ratio indicators poorly comparable between studies.',
     boundary: 'A review of the chemiresistive literature. It gives no performance figure for any commercial sensor and certifies no device, and the absence of a standard selectivity method is a statement about the field, not about a particular product’s quality.',
     rights: 'Open-access review; paraphrased and linked, with short attributed wording only.',
@@ -103,6 +138,7 @@ export const NANO_SOURCES = {
     url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6288112/',
     locator: 'Introduction; “All performance metrics matter”; “The way forward”',
     inspected: '2026-09-20',
+    anchor: 'CE of 99.96% is required for cycling stability up to 500 cycles',
     claim: 'The authors argue that exceptional performance reported in academic work is increasingly inaccessible to practical applications because it is measured under conditions that do not make sense for practical use. They identify mass loading (academic electrodes often under 2 mg/cm² against 5–10 mg/cm² in industry), Coulombic efficiency (their Table 1 gives 99.96% as the level required for cycling stability to 500 cycles for commercialisation), voltage window, electrolyte amount — excess electrolyte in the laboratory masking poor efficiency — and cycle number as metrics that must accompany a capacity claim, and recommend reporting the active-material/conductive-additive/binder ratios, areal mass loading, voltage window and ambient temperature.',
     boundary: 'A perspective on reporting practice, not a measurement of any cell or material. It sets no standard, certifies no laboratory, and its thresholds are the authors’ argument about commercial relevance rather than a regulatory requirement.',
     rights: 'Open-access article; paraphrased and linked, with short attributed wording only.',
@@ -112,6 +148,7 @@ export const NANO_SOURCES = {
     url: 'https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-2-classification-components-uncertainty',
     locator: '§2 Classification of components of uncertainty; §3 Type A; §4 Type B; §7 Reporting uncertainty',
     inspected: '2026-09-19',
+    anchor: 'the statistical analysis of series of observations is termed a Type A evaluation',
     claim: 'Uncertainty components are classified by how they are evaluated — Type A by statistical analysis of repeated observations, Type B by other means — and a reported result is expected to carry the basis of its uncertainty rather than a bare number.',
     boundary: 'A general metrology guideline. It supplies no particle-size uncertainty budget and certifies no instrument or laboratory.',
     rights: 'Original paraphrase and link only.',
@@ -346,19 +383,21 @@ export const NANO_ARTICLES: NanoArticle[] = [
     answer:
       'A toxicology or exposure result applies to the material, the dose, the route and the model it used. Extending it to a different particle, coating, medium or exposure route is a new claim.',
     explanation:
-      'NIOSH states that there are currently no specific exposure limits in the United States for airborne exposures to engineered nanomaterials, that limits for larger particles of similar chemical composition may not be health-protective at the nanoscale — its own example is that the OSHA permissible exposure limit for graphite may not be a safe limit for carbon nanotubes — and that nanoparticles may be more biologically reactive than larger particles of similar composition. EPA meanwhile treats many nanoscale materials as chemical substances under TSCA, with reporting and premanufacture review that gather information rather than pronounce safety. Between those facts sits the practical reality: the same chemistry at a different size, coating or aggregation state can deposit differently, dissolve differently and clear differently, so “the bulk material is well characterised” is not an answer. Maha’s role here is to separate what a study measured from what a product description implies, not to assess any material.',
+      'The evidence here has moved, and the direction it moved in is the lesson. In 2009 NIOSH wrote that no specific US exposure limits then existed for airborne engineered nanomaterials, reasoning that limits set for larger particles of the same chemistry may not be protective at the nanoscale — its example being that the OSHA permissible exposure limit for graphite may not be a safe limit for carbon nanotubes. It has since set limits of its own. Current Intelligence Bulletin 63 (2011) recommends 2.4 mg/m³ for fine titanium dioxide and 0.3 mg/m³ for ultrafine, including engineered nanoscale, titanium dioxide, as time-weighted averages for up to 10 hours a day in a 40-hour week — two different numbers for one chemical, separated only by size — and classifies the ultrafine fraction as a potential occupational carcinogen while finding insufficient data to classify the fine fraction. Current Intelligence Bulletin 65 (2013) recommends 1 µg/m³ of elemental carbon as a respirable-mass 8-hour average for carbon nanotubes and nanofibres. Two things about those numbers matter more than the numbers. They are recommendations, not enforceable standards. And NIOSH says residual risk remains at the carbon-nanotube limit, with chronic effects still uncertain, so the figure is a control target rather than a demonstrated safe level. EPA separately treats many nanoscale materials as chemical substances under TSCA, with reporting and premanufacture review that gather information rather than pronounce safety. Maha’s role here is to separate what a study measured from what a product description implies, not to assess any material.',
     example:
       'An inhalation study on an uncoated powder reports a no-observed-adverse-effect level. A supplier cites it for a polymer-embedded version of the same chemistry. The embedded form may never become airborne in use — which is a reason to expect lower exposure, and not evidence about the hazard of the particles themselves if they are released during sanding or disposal.',
     establishes:
-      'That US airborne exposure limits specific to engineered nanomaterials do not currently exist, that limits set for larger particles of the same chemistry may not be protective at the nanoscale, and that the frameworks in place gather evidence rather than certify safety.',
+      'That recommended occupational limits now exist for two specific nanomaterials and did not in 2009, that a single chemical can carry two different limits and two different carcinogenicity findings purely on size, and that a recommended limit is a control target rather than a demonstrated safe level.',
     boundary:
-      'Nothing here is a hazard assessment, an exposure limit, a control-banding recommendation or medical advice. Maha runs no toxicology and certifies nothing.',
+      'Nothing here is a hazard assessment, a control-banding recommendation or medical advice, and Maha runs no toxicology and certifies nothing. The two recommended limits quoted are NIOSH recommendations for two named materials, not enforceable standards and not transferable to any other material. A limit is also not a safety finding: NIOSH records residual risk at the carbon-nanotube figure and continuing uncertainty about chronic effects. Nothing here states what any enforceable standard requires.',
     checks: [
       'Ask which exact material, including coating and aggregation state, was tested, and how it compares with the one in use.',
       'Ask which exposure route was studied and whether it matches the realistic route in the workplace or product.',
       'Ask whether release during use, maintenance, abrasion or disposal was measured, not only the intact product.',
+      'Check the date on any statement that no limit exists — the 2009 position was overtaken in 2011 and 2013, and a claim about the regulatory landscape ages faster than one about physics.',
+      'Separate a recommended limit from an enforceable one, and both from evidence that a material is safe at that level.',
     ],
-    sources: ['niosh', 'epa'],
+    sources: ['niosh', 'tio2', 'cnt', 'epa'],
     related: ['regulatory-status-is-not-safety', 'nanomaterial-classes'],
   },
   {

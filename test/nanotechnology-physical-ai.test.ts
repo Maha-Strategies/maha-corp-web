@@ -17,7 +17,7 @@ const SECTIONS = [
 ] as const
 
 /** The shape both sections' source registries share. */
-type SourceRecord = { title: string; url: string; locator: string; inspected: string; claim: string; boundary: string; rights: string }
+type SourceRecord = { title: string; url: string; locator: string; inspected: string; anchor: string; claim: string; boundary: string; rights: string }
 
 const read = (relative: string) => readFileSync(new URL(`../${relative}`, import.meta.url), 'utf8')
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/
@@ -245,4 +245,21 @@ test('a reported result is attributed, never stated as fact about the world', ()
   for (const article of PHYSICAL_AI_ARTICLES.filter((a) => /\d+(\.\d+)?\s*(%|percentage points)/.test(a.explanation))) {
     assert.match(article.boundary, /authors|own|report/i, `${article.slug}: figure without an ownership boundary`)
   }
+})
+
+test('every source records a short verbatim anchor from the passage it cites', () => {
+  // The anchor is the verification handle, not proof of anything by itself:
+  // a test can only check that one is present, short enough to be fair
+  // quotation, and plausibly drawn from the claim. Confirming the phrase
+  // actually appears in the source requires a person re-reading the source.
+  const all: Record<string, SourceRecord> = { ...PHYSICAL_AI_SOURCES, ...NANO_SOURCES }
+  for (const [id, source] of Object.entries(all)) {
+    assert.ok(source.anchor && source.anchor.trim().length > 0, `${id}: no anchor phrase recorded`)
+    const words = source.anchor.trim().split(/\s+/).length
+    assert.ok(words <= 15, `${id}: anchor is ${words} words; keep quotation short`)
+  }
+  // Anchors must be distinct: the same phrase against two sources would mean
+  // at least one of them was not actually read.
+  const anchors = Object.values(all).map((source) => source.anchor.toLowerCase())
+  assert.equal(new Set(anchors).size, anchors.length, 'two sources share an anchor phrase')
 })

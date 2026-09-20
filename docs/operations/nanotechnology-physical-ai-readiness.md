@@ -29,7 +29,7 @@ that ground (below).
 | Blocked on an uninspected source | 4 | 2 | 6 |
 | Declined as duplicative | 3 | 4 | 7 |
 | Sent back for revision | 0 | 2 | 2 |
-| Sources inspected | 9 | 11 | 20 |
+| Sources inspected | 11 | 11 | 22 |
 | Routes | 2 (hub + `[slug]`) | 2 (hub + `[slug]`) | 4 |
 
 All eight previously evidence-ready candidates were completed on 2026-09-20, each against a source
@@ -43,39 +43,85 @@ available locally, and no demand figure was invented.
 ## Source-to-claim review of commit 0c47b91f
 
 Every source record in the original commit was re-opened and checked against the claim recorded
-with it. Ten of twelve verified exactly, including the specifics most costly to get wrong:
-OpenVLA's 7B parameters, 970k demonstrations, RT-2-X at 55B and the 16.5-point gap across 29 tasks;
-Meta-World's 50 tasks and its "as few as ten distinct training tasks"; the seven enumerated
-randomisation categories in Tobin §III-A with the fixed table height and uncalibrated camera;
-Ha and Schmidhuber's temperature parameter and the adversarial dream policy; the NNI's 1–100 nm
-wording; EPA's TSCA reporting rule and premanufacture notification; and NIST TN 1297's Type A and
-Type B definitions.
+with it. **Ten of the twelve verified on 2026-09-20; the two that did not are itemised below and
+both are now resolved**, so all twenty sources in the section have been checked.
 
-Two defects were found and fixed:
+Verified exactly, including the specifics most costly to get wrong: OpenVLA's 7B parameters, 970k
+demonstrations, RT-2-X at 55B and the 16.5-point gap across 29 tasks; Meta-World's 50 tasks and its
+"as few as ten distinct training tasks"; the seven enumerated randomisation categories in Tobin
+§III-A with the fixed table height and uncalibrated camera; Ha and Schmidhuber's temperature
+parameter and the adversarial dream policy; the NNI's 1–100 nm wording; EPA's TSCA reporting rule
+and premanufacture notification; NIST TN 1297's Type A and Type B definitions; and DAgger's induced
+distribution.
 
-1. **A fabricated inspection.** The `osha` source recorded an inspection of
+### The two not covered by that count
+
+1. **`osha` — a fabricated inspection.** The record claimed an inspection of
    `osha.gov/nanotechnology` dated 2026-09-19 with a specific claim about engineered-nanomaterial
-   definitions and permissible exposure limits. That page could not be read today — OSHA's CDN
-   returns 403 to both a plain fetch and a real browser — and the prior session's own fetch log
-   records status `000` for it, meaning no content was ever retrieved. The claim was therefore not
-   supported by an inspection. The source has been **removed** and replaced with NIOSH
-   *Approaches to Safe Nanotechnology* (DHHS/NIOSH 2009-125), read at §4.1, §4.2 and §8.3.5, which
-   covers the same ground with better support: the ISO/TS 27687:2008 nano-object taxonomy, and the
-   statement that no specific US exposure limits exist for airborne engineered nanomaterials while
-   limits for larger particles of the same chemistry may not be health-protective. The three
-   articles that cited OSHA were rewritten against the new source.
-2. **A wrong locator detail.** The FDA entry described the drug-products guidance as draft; it is
-   listed as final. Corrected, and the inspection re-dated.
+   definitions and permissible exposure limits. The page could not be read on 2026-09-20 — OSHA's
+   CDN returns 403 to both a plain fetch and a real headless browser — and the prior session's own
+   fetch log records status `000` for that URL, meaning no content was ever retrieved. The claim
+   had no inspection behind it. **Resolution: the source was removed**, not hedged, and replaced by
+   NIOSH *Approaches to Safe Nanotechnology* (DHHS/NIOSH 2009-125), read at §4.1, §4.2 and §8.3.5
+   from the PDF. The three articles that cited OSHA were rewritten against it. Dependent claims
+   audited: `what-nanoscale-means` (definition range), `nanomaterial-classes` (class taxonomy),
+   `exposure-and-safety-evidence` (exposure-limit framing) — all three rewritten.
+2. **`risk` — never verified.** The NIST AI Risk Management Framework record was carried from the
+   first commit without being re-opened; it was simply missed in the first pass and was not among
+   the ten. **Resolution: verified on 2026-09-20.** The page states the framework is "intended for
+   voluntary use and to improve the ability to incorporate trustworthiness considerations into the
+   design, development, use, and evaluation of AI products, services, and systems", which matches
+   the recorded claim. The boundary was sharpened: NIST has issued companion profiles for other
+   sectors, but there is no robot-specific profile and no acceptance criterion for a physical
+   machine. Dependent claim audited: `runtime-monitoring-and-fallback`, whose `establishes` already
+   said only "that a recognised public framework exists for organising these questions" — narrow
+   enough to stand, and left unchanged.
 
-Four author attributions written on 2026-09-20 were also wrong on first draft and were corrected
-after checking each paper's author list: the bandgap paper is Ferreira et al. (not Segets), the
-battery comment is Lin, Liu, Ai and Liang in *Nature Communications* 2018 (not Cao, Li and Liu),
-the protein-corona review is Akhter et al. in *Biomedicines* 2021, and the chemiresistive review is
-Liu et al. in *Nanomaterials* 2025.
+### A third defect: historical scope
 
-A new test pins the verified figures. If anyone edits OpenVLA's 16.5 points, Meta-World's ten
-training tasks, ALOHA's 80–90% over six tasks, RT-2's ~6,000 trials or the battery paper's
-99.96%/500-cycle and 2 vs 5–10 mg/cm² figures, the test fails rather than absorbing the change.
+The replacement NIOSH document is from **2009**, and its statement that no specific US exposure
+limits then existed for airborne engineered nanomaterials was being presented as the current
+position. It is not. NIOSH has since issued recommended exposure limits of its own:
+
+- **CIB 63 (2011)** — 2.4 mg/m³ for fine TiO₂ and 0.3 mg/m³ for ultrafine, including engineered
+  nanoscale, TiO₂, as TWA concentrations for up to 10 hours a day in a 40-hour week; ultrafine TiO₂
+  classified a potential occupational carcinogen, fine TiO₂ with insufficient data to classify.
+  Read from the PDF at the executive summary, p. iii.
+- **CIB 65 (2013)** — 1 µg/m³ elemental carbon as a respirable-mass 8-hour TWA for carbon nanotubes
+  and nanofibres.
+
+Both were added as sources and `exposure-and-safety-evidence` was rewritten around the history,
+which makes a better article than the flat claim did: one chemical carries two different limits and
+two different carcinogenicity findings purely on size, and both limits are *recommendations*, not
+enforceable standards, with NIOSH recording residual risk at the carbon-nanotube figure. The 2009
+document's boundary now states its own date and says this section cites it for definitions and
+reasoning only, never for the current state of exposure limits. A new reader check was added:
+"Check the date on any statement that no limit exists."
+
+An intermediate search result also offered 7 µg/m³ for carbon nanotubes — the 2010 *proposed* REL,
+superseded by 1 µg/m³ in the final 2013 bulletin. Going to the primary document is what caught it.
+
+### Attribution errors in the same day's new work
+
+Four author attributions were wrong on first draft and were corrected against each paper's author
+list before commit: the bandgap paper is Ferreira et al. (not Segets), the battery comment is Lin,
+Liu, Ai and Liang in *Nature Communications* 2018 (not Cao, Li and Liu), the protein-corona review
+is Akhter et al. in *Biomedicines* 2021, and the chemiresistive review is Liu et al. in
+*Nanomaterials* 2025.
+
+### What the tests do and do not prove
+
+Two tests were added. One pins every figure verified on 2026-09-20; the other requires each source
+to carry a short verbatim `anchor` phrase from the passage it cites, checks the phrase is fifteen
+words or fewer, and checks no two sources share one.
+
+**Neither test proves a source was inspected, and neither proves a source supports the claim made
+from it.** They are drift guards: they stop a number or a citation changing silently, and they stop
+an anchor going missing. The anchor is a *verification handle*, not verification — its value is that
+a reviewer can search the source for that exact phrase and see for themselves. That handle is now
+published: every article renders it under "Locator, anchor and reuse basis", with an invitation to
+report a citation where the phrase is absent or does not carry the stated meaning. Only a person
+re-reading the source closes the loop, and this document should not be read as claiming otherwise.
 
 ## Evidence standard applied
 
@@ -86,30 +132,23 @@ performance figures are attributed to the authors who reported them; none has be
 Where an article proposes a method rather than reporting a finding about the world, it carries no
 source and says so in its own words.
 
-### Nanotechnology source packets
+### Source packets
 
-| Key | Source | Read at | Inspected | Reuse basis |
-|---|---|---|---|---|
-| `nni` | National Nanotechnology Initiative — About Nanotechnology | About Nanotechnology, opening paragraph; "How small is nano?" | 2026-09-19 | Original paraphrase and link only |
-| `osha` | OSHA — Nanotechnology (Safety and Health Topics) | Overview; Standards | 2026-09-19 | Original paraphrase and link only |
-| `epa` | EPA — Control of Nanoscale Materials under TSCA | Nanoscale Materials; Regulatory Approach; Information gathering rule; Reporting under the rule | 2026-09-19 | Original paraphrase and link only |
-| `fda` | FDA — Nanotechnology Guidance Documents | Guidance list, including the product-application, cosmetics and draft drug-product guidances | 2026-09-19 | Original paraphrase and link only; guidances not reproduced |
-| `uncertainty` | NIST Technical Note 1297 | §2 classification; §3 Type A; §4 Type B; §7 reporting | 2026-09-19 | Original paraphrase and link only |
+The full registry — title, URL, locator, inspection date, verbatim anchor, what the passage
+establishes, what it does not, and the reuse basis — lives in `lib/nanotechnology-knowledge.ts`
+(11 sources) and `lib/physical-ai-knowledge.ts` (11 sources), and every field is rendered on the
+articles that cite it. A test asserts that every listed source is actually cited by an article, so
+an unearned citation cannot sit unused in the registry.
 
-### Physical AI source packets
+Government and standards sources: NNI, NIOSH 2009-125, NIOSH CIB 63, NIOSH CIB 65, EPA (TSCA), FDA,
+NIST TN 1297, NIST AI RMF. Open-access literature: DAgger, Tobin domain randomization, Ha and
+Schmidhuber, OpenVLA, RT-2, Deep Ensembles, Meta-World, ALOHA/ACT, Welch and Bishop, Concrete
+Problems in AI Safety, the protein-corona review, the bandgap paper, the chemiresistive selectivity
+review, and the battery-metrics comment.
 
-| Key | Source | Read at | Inspected | Reuse basis |
-|---|---|---|---|---|
-| `imitation` | Ross, Gordon and Bagnell — DAgger | Abstract; §1 | 2026-09-19 | Paraphrase and link to the open preprint |
-| `randomization` | Tobin et al. — Domain Randomization | §III-A | 2026-09-19 | Paraphrase and link to the open preprint |
-| `worldmodel` | Ha and Schmidhuber — World Models | §4.4 and surrounding discussion of model imperfections | 2026-09-19 | Paraphrase and link to the open preprint |
-| `vla` | Kim et al. — OpenVLA | Abstract; §1 | 2026-09-19 | Paraphrase and link; reported figures attributed to the authors |
-| `uncertainty` | Lakshminarayanan et al. — Deep Ensembles | Abstract; §1 | 2026-09-19 | Paraphrase and link to the open preprint |
-| `benchmark` | Yu et al. — Meta-World | Abstract; §1 | 2026-09-19 | Paraphrase and link to the open preprint |
-| `risk` | NIST AI Risk Management Framework | Overview of the AI RMF | 2026-09-19 | Original paraphrase and link only |
-
-A test asserts that every listed source is actually cited by an article, so an unearned citation
-cannot sit in the registry unused.
+Reported performance figures are attributed to the authors who reported them; none has been
+replicated here. Where an article proposes a method rather than reporting a finding about the
+world, it carries no source and says so in its own words.
 
 ## Candidates not implemented, and why
 
@@ -223,6 +262,41 @@ boundary, checks and source locators appear in the served markup, that every int
 Cross-links added: the robotics hub now links both new sections and states that it keeps ownership
 of hardware, evidence intake and safety; the neuromorphic hub links both; both new hubs link back
 to robotics, to each other and to the relevant existing sections.
+
+## Reconciliation with the primary checkout
+
+Measured on 2026-09-20 rather than assumed. `origin/main` is at `ec076e2f`; this branch is based on
+it with zero commits behind, so there is nothing to merge in.
+
+The primary checkout sits on `feat/context-control-and-outer-planets`, which has **diverged** from
+main, with a large set of uncommitted changes. This branch touches three of those files:
+`app/knowledge/page.tsx`, `app/sitemap.ts` and `test/public-visual-system-completeness.test.ts`.
+
+A three-way merge was simulated in a throwaway worktree — the primary checkout was never written
+to, and its three files are byte-for-byte as they were found.
+
+1. **Merging `origin/main` into the uncommitted state conflicts today, independently of this
+   work**: `app/knowledge/page.tsx` and `test/public-visual-system-completeness.test.ts` each
+   conflict, `app/sitemap.ts` merges cleanly.
+2. Both conflicts are one line. `app/knowledge/page.tsx`: the robotics card kicker, local
+   "Robotics evidence · local editorial draft" against main's "· editorial guides" — main's is now
+   the accurate label, since robotics is published. The test: a `knowledge: 71` route pin against
+   main's `knowledge: 75`. Main supersedes both.
+3. **Nothing unique is lost.** The one piece of original documentation in the uncommitted set — the
+   comment "// 70 -> 71: the Jyotisha reader guide uses the existing Knowledge overlay." — is
+   already present verbatim in main at line 66, and the sitemap's two astrology lines are already in
+   main at lines 183–184.
+4. **This branch then merges with zero conflicts** on top of that resolution, and the combined tree
+   passes the section tests and both route tripwires (24 tests, 24 pass).
+
+So the conflict cost of this work is nil; the conflict that exists is between the primary
+checkout and main, and it predates this branch. The remaining ~180 uncommitted files are untouched
+by this branch entirely, and resolving the three is the checkout owner's call, not this branch's.
+
+Separately: the primary checkout gained 23 new untracked x402 *buyer-brief* files during this
+session, from concurrent work in the shared repository. None originates here — zero of them appear
+in this branch's commits. Noted only because it confirms the checkout is live and must not be
+written to.
 
 ## Verification run locally
 
