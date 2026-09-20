@@ -250,21 +250,25 @@ is a pre-existing local limitation unrelated to this work.
 
 ## Remaining checks that need authorization
 
-One consolidated check remains, covering both commits at once.
+### Production-build verification — done 2026-09-20, authorised by the user
 
-**Production-build verification of all 33 articles and both hubs.** Everything above was verified
-against a local dev server. The dev server can mask problems that only appear in a production
-build — stale cached imports, and the static-generation behaviour of `dynamicParams = false`, which
-is exactly what makes an unpublished slug 404. The check is:
+The one outstanding check has been run. `next build` in the worktree succeeded with no warnings and
+no errors, generating 3,700 static pages. Both hubs build as static routes (`○`) and both article
+routes prerender as SSG (`●`), which is what `dynamicParams = false` is there to produce.
 
-```
-npx next build && npx next start -p 3117
-node --experimental-strip-types scripts/verify-nano-physical-ai-render.cjs http://localhost:3117
-```
+Against `next start` on the built output:
 
-This is a local build only. It runs on this machine, pushes nothing, deploys nothing, triggers no
-Vercel build and writes to no database. It needs authorization because the brief said no production
-build without one.
+| Check | Result |
+|---|---|
+| `scripts/verify-nano-physical-ai-render.cjs` | All served-output checks passed across 33 articles, 2 hubs, the knowledge index, the homepage and the sitemap — bodies, source locators, boundary statements, every internal link 200, an unpublished slug 404, every route in the sitemap. |
+| Rendering at 375 px and 1440 px | No horizontal overflow and no element past the viewport on either width, across both hubs, four of the new articles, and two control pages. |
+| Contrast | Headings 14.16:1, body copy 5.30:1 — both above WCAG AA. |
+| Keyboard | Every link in `main` focusable, focus rings from the global `:focus-visible` rule. |
 
-Publication is a separate decision and is not being requested here: nothing has been pushed, and
-opening a PR would trigger CI.
+This closes the gap the dev-server verification left. It was a local build only: nothing was
+pushed, deployed, sent to Vercel, or written to any database.
+
+### Still not done, and not requested
+
+Publication. Nothing has been pushed and no PR has been opened — opening one triggers CI, which is
+a build on someone else's infrastructure, and that decision is the user's.
