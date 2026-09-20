@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.0.0",
+  "classification": "invited_assisted_discovery_to_purchase_test",
+  "runId": null,
+  "startedAt": null,
+  "discovery": {"status": "not_run", "source": null, "recordHash": null},
+  "identity": {"status": "not_run", "trustPinRef": null, "revocationCheckedAt": null},
+  "reputation": {"status": "not_run", "recordRef": null},
+  "liveness": {"status": "not_run", "httpStatus": null},
+  "packOrder": {"orderId": null, "productVersion": null, "termsHash": null, "sourceManifestHash": null},
+  "quote": {"status": "not_run", "amountBaseUnits": null, "resource": null, "hash": null},
+  "authorization": {"status": "not_given", "approvalRef": null},
+  "settlement": {"status": "not_run", "transaction": null, "independentChainCheckRef": null},
+  "delivery": {"status": "not_run", "archiveHash": null},
+  "outputChecks": {"status": "not_run", "evidenceRef": null},
+  "acceptance": {"status": "not_requested", "buyerResponseRef": null},
+  "reportSignature": null,
+  "publicationApproved": false,
+  "organicDemandEvidence": false
+}

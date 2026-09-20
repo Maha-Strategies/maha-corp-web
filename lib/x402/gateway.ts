@@ -177,7 +177,7 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
   // Keep the existing job-backed/legacy offer path unchanged.
   const acquire = dependencies.acquire ?? acquireSlot
   const release = dependencies.release ?? releaseSlot
-  const reserveFirst = isMicroProduct(resource.offerId) || ['celestial-position-snapshot', 'celestial-chart-evidence', 'celestial-vimshottari-timing'].includes(resource.offerId)
+  const reserveFirst = isMicroProduct(resource.offerId) || ['cabezon-buyer-brief-pack', 'celestial-position-snapshot', 'celestial-chart-evidence', 'celestial-vimshottari-timing'].includes(resource.offerId)
   let reserved: SlotResult | undefined
   if (reserveFirst) {
     reserved = await acquire(resource.offerId, resource.concurrencyCap, config.slotTtlSeconds)

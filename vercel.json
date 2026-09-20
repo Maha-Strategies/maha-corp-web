@@ -43,6 +43,10 @@
     {
       "path": "/api/cron/computational-witness-retention",
       "schedule": "45 4 * * *"
+    },
+    {
+      "path": "/api/cron/buyer-brief-notifications",
+      "schedule": "*/5 * * * *"
     }
   ]
 }
