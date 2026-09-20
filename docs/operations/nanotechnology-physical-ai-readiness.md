@@ -1,6 +1,6 @@
 # Nanotechnology and Physical AI — candidate map, evidence packets and readiness ledger
 
-Prepared 2026-09-19. Local work only: nothing in this record was pushed, deployed or built on Vercel,
+Prepared 2026-09-19, revised 2026-09-20 after a source-to-claim review. Local work only: nothing in this record was pushed, deployed or built on Vercel,
 and no production database was touched.
 
 ## What these sections are
@@ -24,16 +24,58 @@ that ground (below).
 | | Nanotechnology | Physical AI | Total |
 |---|---|---|---|
 | Candidates proposed | 24 | 24 | 48 |
-| Implemented (published) | 13 | 12 | 25 |
-| Evidence-ready, not implemented | 4 | 4 | 8 |
+| Implemented (published) | 17 | 16 | **33** |
+| Evidence-ready, not implemented | 0 | 0 | 0 |
 | Blocked on an uninspected source | 4 | 2 | 6 |
 | Declined as duplicative | 3 | 4 | 7 |
 | Sent back for revision | 0 | 2 | 2 |
-| Sources inspected | 5 | 7 | 12 |
-| Routes added | 2 (hub + `[slug]`) | 2 (hub + `[slug]`) | 4 |
+| Sources inspected | 9 | 11 | 20 |
+| Routes | 2 (hub + `[slug]`) | 2 (hub + `[slug]`) | 4 |
+
+All eight previously evidence-ready candidates were completed on 2026-09-20, each against a source
+opened and read that day. No candidate now sits in `evidence-ready`: what remains is blocked on a
+source that could not be read, duplicative of a route that already owns the subject, or sent back
+for revision on editorial grounds.
 
 Search demand is recorded as `unknown` for all 48 candidates. No Search Console export was
 available locally, and no demand figure was invented.
+
+## Source-to-claim review of commit 0c47b91f
+
+Every source record in the original commit was re-opened and checked against the claim recorded
+with it. Ten of twelve verified exactly, including the specifics most costly to get wrong:
+OpenVLA's 7B parameters, 970k demonstrations, RT-2-X at 55B and the 16.5-point gap across 29 tasks;
+Meta-World's 50 tasks and its "as few as ten distinct training tasks"; the seven enumerated
+randomisation categories in Tobin §III-A with the fixed table height and uncalibrated camera;
+Ha and Schmidhuber's temperature parameter and the adversarial dream policy; the NNI's 1–100 nm
+wording; EPA's TSCA reporting rule and premanufacture notification; and NIST TN 1297's Type A and
+Type B definitions.
+
+Two defects were found and fixed:
+
+1. **A fabricated inspection.** The `osha` source recorded an inspection of
+   `osha.gov/nanotechnology` dated 2026-09-19 with a specific claim about engineered-nanomaterial
+   definitions and permissible exposure limits. That page could not be read today — OSHA's CDN
+   returns 403 to both a plain fetch and a real browser — and the prior session's own fetch log
+   records status `000` for it, meaning no content was ever retrieved. The claim was therefore not
+   supported by an inspection. The source has been **removed** and replaced with NIOSH
+   *Approaches to Safe Nanotechnology* (DHHS/NIOSH 2009-125), read at §4.1, §4.2 and §8.3.5, which
+   covers the same ground with better support: the ISO/TS 27687:2008 nano-object taxonomy, and the
+   statement that no specific US exposure limits exist for airborne engineered nanomaterials while
+   limits for larger particles of the same chemistry may not be health-protective. The three
+   articles that cited OSHA were rewritten against the new source.
+2. **A wrong locator detail.** The FDA entry described the drug-products guidance as draft; it is
+   listed as final. Corrected, and the inspection re-dated.
+
+Four author attributions written on 2026-09-20 were also wrong on first draft and were corrected
+after checking each paper's author list: the bandgap paper is Ferreira et al. (not Segets), the
+battery comment is Lin, Liu, Ai and Liang in *Nature Communications* 2018 (not Cao, Li and Liu),
+the protein-corona review is Akhter et al. in *Biomedicines* 2021, and the chemiresistive review is
+Liu et al. in *Nanomaterials* 2025.
+
+A new test pins the verified figures. If anyone edits OpenVLA's 16.5 points, Meta-World's ten
+training tasks, ALOHA's 80–90% over six tasks, RT-2's ~6,000 trials or the battery paper's
+99.96%/500-cycle and 2 vs 5–10 mg/cm² figures, the test fails rather than absorbing the change.
 
 ## Evidence standard applied
 
@@ -71,57 +113,59 @@ cannot sit in the registry unused.
 
 ## Candidates not implemented, and why
 
-### Nanotechnology
+### Blocked on a source that could not be read
 
-**Blocked on a source that was not read** (citing them unread would breach the evidence standard):
+Citing an unread source is the failure this section exists to prevent, so these stay unpublished.
 
-- `electron-microscopy-artifacts` — needs a microscopy standards or instrument-documentation source
-  read at section depth; none inspected.
-- `light-scattering-weighting` — requires an ISO 22412-class source; the standard is paywalled and
-  was not read.
-- `environmental-fate` — needs an OECD or EPA fate document read at section depth; OECD pages
-  refused automated access.
-- `standards-landscape` — core vocabulary and method standards are paywalled.
+- `electron-microscopy-artifacts` (nano) — needs a microscopy standards or instrument-documentation
+  source at section depth; none inspected.
+- `light-scattering-weighting` (nano) — requires an ISO 22412-class standard; paywalled.
+- `environmental-fate` (nano) — needs an OECD or EPA fate document at section depth; OECD refused
+  automated access.
+- `standards-landscape` (nano) — core vocabulary and method standards are paywalled.
+- `contact-rich-manipulation` (physical AI) — needs a contact-dynamics or force-control paper read
+  at passage depth.
+- `locomotion-evaluation` (physical AI) — deferred rather than summarised second-hand.
 
-**Evidence-ready but not implemented** (structure is settled; each needs its own inspected source):
+### Declined as duplicative
 
-- `surface-functionalisation` — mechanism is covered inside `structure-property-claims`.
-- `quantum-confinement` — needs a primary optical-physics source inspected at passage depth.
-- `nano-sensing` — overlaps neuromorphic sensors; needs an explicit ownership split first.
-- `energy-storage-claims` — blocked on an inspected electrochemistry reporting source.
-
-**Declined as duplicative**:
-
-- `nano-in-electronics` → `/knowledge/suppliers` and the semiconductor process map.
-- `memristive-devices` → `/knowledge/neuromorphic-biocomputing`.
-- `medical-nanomaterials` → folded into
-  `/knowledge/nanotechnology/regulatory-status-is-not-safety`, rather than given its own route,
-  to avoid implying clinical coverage Maha does not have.
-
-### Physical AI
-
-**Blocked**: `contact-rich-manipulation` (needs a contact-dynamics or force-control paper inspected
-at passage depth); `locomotion-evaluation` (deferred rather than summarised second-hand).
-
-**Evidence-ready**: `state-estimation-and-filtering` (the fixture uses a trivial estimator only);
-`reward-specification` (partly covered by `world-models`); `foundation-model-fine-tuning` (needs a
-second inspected source so the page does not rest on one paper); `teleoperation-interfaces`
-(argued inside `learning-from-demonstration`).
-
-**Declined as duplicative — robotics already owns these**:
-
+- `nano-in-electronics` → `/knowledge/suppliers` and the semiconductor process map
+- `memristive-devices` → `/knowledge/neuromorphic-biocomputing`
+- `medical-nanomaterials` → folded into `/knowledge/nanotechnology/regulatory-status-is-not-safety`
 - `sensor-calibration` → `/knowledge/robotics/calibration-records`
 - `time-synchronisation` → `/knowledge/robotics/sensor-time-alignment`
 - `execution-evidence` → `/knowledge/robotics/evidence-package`
-- `human-robot-interaction` → `/knowledge/robotics/human-robot-handoff` and
-  `accessibility-evaluation`
+- `human-robot-interaction` → `/knowledge/robotics/human-robot-handoff` and `accessibility-evaluation`
 
-**Sent back for revision**: `multimodal-perception` (the draft framing overlapped
-`perception-action-loops` without adding a distinct question); `energy-and-compute-budgets` (would
-need measured figures Maha does not have, and would otherwise restate vendor specifications).
-
-A test resolves each duplicative note against the App Router tree, so a candidate cannot be waved
+A test resolves each of these notes against the App Router tree, so a candidate cannot be waved
 away by naming a route that does not exist.
+
+### Sent back for revision
+
+- `multimodal-perception` — the draft framing overlapped `perception-action-loops` without adding a
+  distinct question.
+- `energy-and-compute-budgets` — would need measured figures Maha does not have, and would
+  otherwise restate vendor specifications.
+
+### The eight completed on 2026-09-20
+
+Each was blocked only on a dedicated source. Each now has one, opened and read at the locator in
+its record.
+
+| Article | Source inspected | What it added |
+|---|---|---|
+| `surface-functionalisation` | Akhter et al., protein corona review (*Biomedicines* 2021) | Hard/soft corona, biological vs synthetic identity, targeting ligands cloaked |
+| `quantum-confinement` | Ferreira et al., size-dependent bandgap (arXiv 1710.01376) | Confinement as a real size effect; what an optically inferred size assumes |
+| `nano-sensing` | Liu et al., chemiresistive selectivity review (*Nanomaterials* 2025) | Sensitivity and selectivity from one mechanism; no standard selectivity method |
+| `energy-storage-claims` | Lin, Liu, Ai and Liang (*Nature Communications* 2018) | The reporting items a capacity figure must carry |
+| `state-estimation-and-filtering` | Welch and Bishop, TR 95-041 | Predict/correct weighting; a filter's confidence is not a check on it |
+| `reward-specification` | Amodei et al., Concrete Problems in AI Safety | Named misspecification mechanisms, with the cleaning-robot examples |
+| `foundation-model-fine-tuning` | Brohan et al., RT-2 (plus OpenVLA) | What web pretraining transfers, and what it does not |
+| `teleoperation-interfaces` | Zhao, Kumar, Levine and Finn, ALOHA/ACT | The collection interface as part of the dataset |
+
+The `nano-sensing` ownership question is now settled rather than deferred: surface transduction and
+its evidence problems belong here, event-driven encoding and computation to
+`/knowledge/neuromorphic-biocomputing`, and the article links there.
 
 ## The two executable examples
 
@@ -186,29 +230,41 @@ to robotics, to each other and to the relevant existing sections.
 |---|---|
 | `tsc --noEmit` | No new errors. The 13 pre-existing `RouteContext` errors come from Next-generated route types that only exist after a build, and none is in a file touched here. |
 | `eslint` on all new and changed files | Clean. |
-| `test/nanotechnology-physical-ai.test.ts` | 12 tests pass. |
+| `test/nanotechnology-physical-ai.test.ts` | 14 tests pass, including the new figure-verification tripwire. |
 | `test/nanoscale-geometry.test.ts` | 7 tests pass. |
 | `test/physical-ai-loop.test.ts` | 8 tests pass. |
 | `test/public-visual-system-completeness.test.ts` | Passes; knowledge route count repinned 75 → 79. |
 | `test/knowledge-cyber-light.test.ts` | Passes; route count repinned 75 → 79. |
-| `scripts/verify-nano-physical-ai-render.cjs` against a local dev server | All served-output checks pass across 25 articles, 2 hubs, the index, the homepage and the sitemap. |
+| `scripts/verify-nano-physical-ai-render.cjs` against a local dev server | All served-output checks pass across **33 articles**, 2 hubs, the index, the homepage and the sitemap. |
 | Neighbouring suites (sitemap hygiene, sitewide route reachability, sitemap canonical freshness, knowledge data, robotics, neuromorphic, theme contrast, colour scheme, machine-readable registry) plus the three new files | 88 tests, 88 pass, 0 fail. |
 | Rendering at 375 px and 1440 px in headless Chrome | No horizontal overflow on either width across both hubs, four sampled articles and two control pages; no element extends past the viewport. Heading contrast 14.16:1, body copy 5.30:1 — both above WCAG AA. Every link in `main` is keyboard-focusable, with focus rings from the global `:focus-visible` rule. |
 
-The tests found four real defects in the data, all fixed here rather than papered over: a candidate
-marked `implemented` that had no article (`medical-nanomaterials`), two duplicative candidates whose
-notes named no resolvable owning route, and an article with only one onward link.
+The tests found four defects in the data on 2026-09-19, all fixed rather than papered over: a
+candidate marked `implemented` with no article (`medical-nanomaterials`), two duplicative candidates
+whose notes named no resolvable owning route, and an article with only one onward link. The
+2026-09-20 source review found two more — the fabricated OSHA inspection and the FDA draft/final
+error — plus four wrong author attributions in the same day's new work. All are fixed above.
 
 Postgres-backed tests in the wider suite fail in this environment because `initdb` cannot run. That
 is a pre-existing local limitation unrelated to this work.
 
 ## Remaining checks that need authorization
 
-- **Production build verification.** The brief forbids a production or Vercel build, so rendering
-  was verified against a local dev server rather than `next build` output. A dev server can mask
-  problems that only appear in a production build (stale cached imports, static-generation
-  behaviour for `dynamicParams = false`). Re-running
-  `node --experimental-strip-types scripts/verify-nano-physical-ai-render.cjs <url>` against a
-  production build is the outstanding check, and needs authorization before it is run.
-- **Publication itself.** Nothing here has been pushed, deployed or released. Opening a PR would
-  trigger CI, which is a build; that decision is the user's.
+One consolidated check remains, covering both commits at once.
+
+**Production-build verification of all 33 articles and both hubs.** Everything above was verified
+against a local dev server. The dev server can mask problems that only appear in a production
+build — stale cached imports, and the static-generation behaviour of `dynamicParams = false`, which
+is exactly what makes an unpublished slug 404. The check is:
+
+```
+npx next build && npx next start -p 3117
+node --experimental-strip-types scripts/verify-nano-physical-ai-render.cjs http://localhost:3117
+```
+
+This is a local build only. It runs on this machine, pushes nothing, deploys nothing, triggers no
+Vercel build and writes to no database. It needs authorization because the brief said no production
+build without one.
+
+Publication is a separate decision and is not being requested here: nothing has been pushed, and
+opening a PR would trigger CI.

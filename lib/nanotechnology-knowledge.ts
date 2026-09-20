@@ -44,14 +44,14 @@ export const NANO_SOURCES = {
     boundary: 'A programme definition and orientation page. It does not establish any particular material’s properties, performance or safety.',
     rights: 'Original paraphrase and link only; no government text reproduced beyond short attributed wording.',
   },
-  osha: {
-    title: 'OSHA — Nanotechnology (Safety and Health Topics)',
-    url: 'https://www.osha.gov/nanotechnology',
-    locator: 'Overview; Standards',
-    inspected: '2026-09-19',
-    claim: 'OSHA defines engineered nanomaterials as materials purposefully manufactured, synthesised or manipulated to have at least one dimension in roughly the 1–100 nm range with properties determined by that size, and frames the topic around worker safety and existing standards rather than a nanomaterial-specific permissible exposure limit.',
-    boundary: 'An overview page. It is not an exposure assessment for a specific material, workplace or task, and reading it does not substitute for occupational-health expertise.',
-    rights: 'Original paraphrase and link only.',
+  niosh: {
+    title: 'NIOSH — Approaches to Safe Nanotechnology: Managing the Health and Safety Concerns Associated with Engineered Nanomaterials (DHHS/NIOSH 2009-125)',
+    url: 'https://www.cdc.gov/niosh/docs/2009-125/pdfs/2009-125.pdf',
+    locator: '§4.1 Nano-objects and §4.2 Ultrafine Particles, p. 8; §8.3.5 Respirators, pp. 43–44',
+    inspected: '2026-09-20',
+    claim: 'NIOSH reports the ISO/TS 27687:2008 definition of a nano-object as material with one, two or three external dimensions in the range of approximately 1–100 nm, with nanoplate, nanofibre (nanotube hollow, nanorod solid) and nanoparticle as the subcategories by how many dimensions are nanoscale; it distinguishes engineered nanoparticles from incidental ultrafine particles while noting it is unclear whether that source-based distinction is justified for safety purposes; and it states that there are currently no specific exposure limits in the United States for airborne exposures to engineered nanomaterials, that limits for larger particles of similar composition may not be health-protective at the nanoscale, and that nanoparticles may be more biologically reactive than larger particles of similar chemical composition.',
+    boundary: 'Guidance for managing workplace risk, not a toxicological finding about any specific material and not a regulation. The absence of an exposure limit is neither permission nor evidence of safety, and reading this does not substitute for qualified occupational-health practice.',
+    rights: 'Public-domain federal document; paraphrased with short attributed wording and linked, not reproduced.',
   },
   epa: {
     title: 'EPA — Control of Nanoscale Materials under the Toxic Substances Control Act',
@@ -65,11 +65,47 @@ export const NANO_SOURCES = {
   fda: {
     title: 'FDA — Nanotechnology Guidance Documents',
     url: 'https://www.fda.gov/science-research/nanotechnology-programs-fda/nanotechnology-guidance-documents',
-    locator: 'List of guidance documents, including “Considering Whether an FDA-Regulated Product Involves the Application of Nanotechnology”, “Safety of Nanomaterials in Cosmetic Products”, and the draft guidance on drug products containing nanomaterials',
-    inspected: '2026-09-19',
+    locator: 'List of guidance documents, including “Considering Whether an FDA-Regulated Product Involves the Application of Nanotechnology”, “Safety of Nanomaterials in Cosmetic Products”, and “Drug Products, Including Biological Products, that Contain Nanomaterials” — each listed as final guidance',
+    inspected: '2026-09-20',
     claim: 'FDA publishes product-category guidance on whether a regulated product involves nanotechnology and on nanomaterials in cosmetics and drug products, rather than a single approval pathway for “nanotechnology”.',
     boundary: 'Guidance describes FDA’s current thinking for sponsors. It is not a product approval, a clinical finding, or a statement that any marketed nanomaterial product is safe or effective.',
     rights: 'Original paraphrase and link only; guidance documents are not reproduced here.',
+  },
+  corona: {
+    title: 'Akhter et al. — Impact of Protein Corona on the Biological Identity of Nanomedicine: Understanding the Fate of Nanomaterials in the Biological Milieu (Biomedicines, 2021)',
+    url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC8533425/',
+    locator: 'Introduction; “Types of Coronas and the Biological Identity of NPs”; “Impact on the Physico-Chemical Characteristics”; “Drug Targeting and Cellular Uptake in the Biological Milieu”',
+    inspected: '2026-09-20',
+    claim: 'Nanoparticles entering a biological medium rapidly adsorb proteins, forming a corona that the cell encounters instead of the engineered surface — a biological identity distinct from the synthetic one. Composition depends on particle size, shape, surface charge and surface chemistry as well as the medium, and adsorption is time-dependent, abundant proteins arriving first and being displaced by higher-affinity ones. The review distinguishes a tightly bound hard corona, whose exchange time exceeds cellular uptake, from a loosely bound soft corona that exchanges freely, and reports that ligand-functionalised particles can have their targeting function cloaked by the corona and lose targeting potential.',
+    boundary: 'A review of reported findings, largely in serum and cell-culture systems. It does not establish the corona composition for any particular product, nor predict a clinical outcome, and it is not evidence that any nanomedicine is safe or effective.',
+    rights: 'Open-access review; paraphrased and linked, with short attributed wording only.',
+  },
+  confinement: {
+    title: 'Ferreira et al. — Size-dependent bandgap and particle size distribution of colloidal semiconductor nanocrystals',
+    url: 'https://arxiv.org/abs/1710.01376',
+    locator: 'Abstract; §1 Introduction',
+    inspected: '2026-09-20',
+    claim: 'The authors propose an analytical expression for the size-dependent bandgap of colloidal semiconductor nanocrystals within a finite-depth square-well effective-mass approximation, intended to hold in the strong-confinement regime where the conventional effective-mass model fails, and use it to recover a particle size distribution from optical absorbance and photoluminescence spectra, validated against microscopy.',
+    boundary: 'A model fitted and validated for the authors’ own CdTe system. It does not certify any instrument or supplier, and an optically inferred size distribution remains a model-dependent inference, not a direct measurement.',
+    rights: 'Paraphrase and link to the open preprint; no figures or text reproduced.',
+  },
+  sensing: {
+    title: 'Liu et al. — Advancements and Strategies for Selectivity Enhancement in Chemiresistive Gas Sensors (Nanomaterials, 2025)',
+    url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12430070/',
+    locator: '§1 Introduction; §2 Gas Sensing Mechanism; §3.1.2 Defects Generation',
+    inspected: '2026-09-20',
+    claim: 'Chemiresistive sensing works through non-specific surface chemistry — for n-type semiconductors, adsorbed oxygen species and redox reactions with the analyte — so different gases can act on the same sites, and the review states such sensors struggle to detect target gases selectively in mixtures because of cross-sensitivity. It reports that excessive defects can increase noise, cause baseline drift and reduce carrier mobility, that humidity is a persistent interferent, and that a standardised approach for assessing selectivity is lacking, leaving response-ratio indicators poorly comparable between studies.',
+    boundary: 'A review of the chemiresistive literature. It gives no performance figure for any commercial sensor and certifies no device, and the absence of a standard selectivity method is a statement about the field, not about a particular product’s quality.',
+    rights: 'Open-access review; paraphrased and linked, with short attributed wording only.',
+  },
+  storage: {
+    title: 'Lin, Liu, Ai and Liang — Aligning academia and industry for unified battery performance metrics (Nature Communications, 2018)',
+    url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6288112/',
+    locator: 'Introduction; “All performance metrics matter”; “The way forward”',
+    inspected: '2026-09-20',
+    claim: 'The authors argue that exceptional performance reported in academic work is increasingly inaccessible to practical applications because it is measured under conditions that do not make sense for practical use. They identify mass loading (academic electrodes often under 2 mg/cm² against 5–10 mg/cm² in industry), Coulombic efficiency (their Table 1 gives 99.96% as the level required for cycling stability to 500 cycles for commercialisation), voltage window, electrolyte amount — excess electrolyte in the laboratory masking poor efficiency — and cycle number as metrics that must accompany a capacity claim, and recommend reporting the active-material/conductive-additive/binder ratios, areal mass loading, voltage window and ambient temperature.',
+    boundary: 'A perspective on reporting practice, not a measurement of any cell or material. It sets no standard, certifies no laboratory, and its thresholds are the authors’ argument about commercial relevance rather than a regulatory requirement.',
+    rights: 'Open-access article; paraphrased and linked, with short attributed wording only.',
   },
   uncertainty: {
     title: 'NIST Technical Note 1297 — Guidelines for Evaluating and Expressing Uncertainty',
@@ -112,11 +148,11 @@ export const NANO_ARTICLES: NanoArticle[] = [
     answer:
       'The nanoscale is conventionally about 1 to 100 nanometres. That range is an agreed boundary for programmes and regulation, not a physical threshold where new behaviour switches on.',
     explanation:
-      'The NNI describes nanotechnology as understanding and control of matter at roughly 1–100 nm, where matter can behave differently from the same substance in bulk. OSHA uses a similar range to define an engineered nanomaterial, adding the requirement that the material was purposefully made or manipulated to have that dimension. EPA treats many such materials as ordinary chemical substances under TSCA that may nevertheless behave differently at that scale. The three definitions agree on the number and differ in purpose: describing a research field, scoping worker protection, and deciding what has to be reported. A material at 120 nm is not exempt from the physics; it is outside a definition.',
+      'The NNI describes nanotechnology as understanding and control of matter at roughly 1–100 nm, where matter can behave differently from the same substance in bulk. NIOSH reports the same range from ISO/TS 27687:2008, which defines a nano-object by how many of its external dimensions fall in it. EPA treats many such materials as ordinary chemical substances under TSCA that may nevertheless behave differently at that scale. The three agree on the number and differ in purpose: describing a research field, scoping worker protection, and deciding what has to be reported. A material at 120 nm is not exempt from the physics; it is outside a definition.',
     example:
       'A pigment supplier states that its particles are “nano-free” because the median diameter is 180 nm. A median says nothing about the tail of the distribution. The question worth asking is what fraction of particles falls below 100 nm and by which measurement method, not whether one summary number clears the line.',
     establishes:
-      'That 1–100 nm is the working range used by the US nanotechnology programme, the occupational-safety regulator and the chemical regulator, each for its own purpose.',
+      'That 1–100 nm is the working range used by the US nanotechnology programme, the ISO terminology NIOSH reports for worker protection, and the chemical regulator, each for its own purpose.',
     boundary:
       'No definition establishes that a material in that range is hazardous, novel or useful. Size ranges scope a conversation; they do not predict behaviour.',
     checks: [
@@ -124,7 +160,7 @@ export const NANO_ARTICLES: NanoArticle[] = [
       'Ask for the size distribution and the measurement method, not only a median or a nominal value.',
       'Ask whether the material was engineered to that size or simply happens to contain a fraction of it.',
     ],
-    sources: ['nni', 'osha', 'epa'],
+    sources: ['nni', 'niosh', 'epa'],
     related: ['surface-area-to-volume', 'characterisation-what-each-method-sees', 'regulatory-status-is-not-safety'],
   },
   {
@@ -154,7 +190,7 @@ export const NANO_ARTICLES: NanoArticle[] = [
     answer:
       'Grouping materials as particles, tubes, sheets or dots organises a conversation about geometry and synthesis. It does not let you transfer a property, a hazard or a performance result from one member of the group to another.',
     explanation:
-      'A useful first cut is dimensionality: roughly isotropic particles and dots; one long axis, as in tubes and wires; and sheets one or a few layers thick. Dimensionality predicts some things well — how a material disperses, how it packs, how anisotropic its electrical or mechanical response can be. It predicts chemistry poorly. Two carbon nanotube samples can share a class label and differ in length distribution, residual catalyst metal, defect density and surface functionalisation, and those differences drive both performance and biological interaction. Maha’s position is that a class label belongs in the description of a sample, never in its evidence.',
+      'The standard cut is dimensionality, and NIOSH reports it from ISO/TS 27687:2008: a nanoplate has one external dimension at the nanoscale, a nanofibre two — a nanotube being a hollow nanofibre and a nanorod a solid one — and a nanoparticle all three. That maps onto the familiar vocabulary of sheets, tubes and wires, and dots. Dimensionality predicts some things well — how a material disperses, how it packs, how anisotropic its electrical or mechanical response can be. It predicts chemistry poorly. Two carbon nanotube samples can share a class label and differ in length distribution, residual catalyst metal, defect density and surface functionalisation, and those differences drive both performance and biological interaction. Maha’s position is that a class label belongs in the description of a sample, never in its evidence.',
     example:
       'A supplier’s datasheet lists “multi-walled carbon nanotubes, >95% purity”. Purity with respect to what — amorphous carbon, catalyst residue, or both? Two samples that both satisfy that line can differ by an order of magnitude in residual iron, which is exactly the variable an oxidation-catalysis or toxicology reviewer needs.',
     establishes:
@@ -166,7 +202,7 @@ export const NANO_ARTICLES: NanoArticle[] = [
       'Ask what the impurity limit refers to and how it was determined.',
       'When a result is transferred between two materials in the same class, ask what makes them equivalent for that particular mechanism.',
     ],
-    sources: ['nni', 'osha'],
+    sources: ['nni', 'niosh'],
     related: ['structure-property-claims', 'batch-to-batch-variability', 'vendor-claim-checks'],
   },
   {
@@ -310,11 +346,11 @@ export const NANO_ARTICLES: NanoArticle[] = [
     answer:
       'A toxicology or exposure result applies to the material, the dose, the route and the model it used. Extending it to a different particle, coating, medium or exposure route is a new claim.',
     explanation:
-      'OSHA frames engineered nanomaterials as a worker-protection topic addressed through existing standards and controls rather than a single nanomaterial exposure limit. EPA treats many nanoscale materials as chemical substances under TSCA, with reporting and premanufacture review that gather information rather than pronounce safety. Between those two facts sits the practical reality: the same chemistry at a different size, coating or aggregation state can deposit differently, dissolve differently and clear differently, so “the bulk material is well characterised” is not an answer. Maha’s role here is to separate what a study measured from what a product description implies, not to assess any material.',
+      'NIOSH states that there are currently no specific exposure limits in the United States for airborne exposures to engineered nanomaterials, that limits for larger particles of similar chemical composition may not be health-protective at the nanoscale — its own example is that the OSHA permissible exposure limit for graphite may not be a safe limit for carbon nanotubes — and that nanoparticles may be more biologically reactive than larger particles of similar composition. EPA meanwhile treats many nanoscale materials as chemical substances under TSCA, with reporting and premanufacture review that gather information rather than pronounce safety. Between those facts sits the practical reality: the same chemistry at a different size, coating or aggregation state can deposit differently, dissolve differently and clear differently, so “the bulk material is well characterised” is not an answer. Maha’s role here is to separate what a study measured from what a product description implies, not to assess any material.',
     example:
       'An inhalation study on an uncoated powder reports a no-observed-adverse-effect level. A supplier cites it for a polymer-embedded version of the same chemistry. The embedded form may never become airborne in use — which is a reason to expect lower exposure, and not evidence about the hazard of the particles themselves if they are released during sanding or disposal.',
     establishes:
-      'That regulators treat nanoscale materials through existing chemical and workplace frameworks, and that those frameworks gather evidence rather than certify safety.',
+      'That US airborne exposure limits specific to engineered nanomaterials do not currently exist, that limits set for larger particles of the same chemistry may not be protective at the nanoscale, and that the frameworks in place gather evidence rather than certify safety.',
     boundary:
       'Nothing here is a hazard assessment, an exposure limit, a control-banding recommendation or medical advice. Maha runs no toxicology and certifies nothing.',
     checks: [
@@ -322,7 +358,7 @@ export const NANO_ARTICLES: NanoArticle[] = [
       'Ask which exposure route was studied and whether it matches the realistic route in the workplace or product.',
       'Ask whether release during use, maintenance, abrasion or disposal was measured, not only the intact product.',
     ],
-    sources: ['osha', 'epa'],
+    sources: ['niosh', 'epa'],
     related: ['regulatory-status-is-not-safety', 'nanomaterial-classes'],
   },
   {
@@ -388,6 +424,101 @@ export const NANO_ARTICLES: NanoArticle[] = [
     sources: [],
     related: ['surface-area-to-volume', 'characterisation-what-each-method-sees'],
   },
+  {
+    slug: 'surface-functionalisation',
+    title: 'What a coating changes, and why the surface is usually the variable that moved',
+    answer:
+      'A ligand or coating changes what the outside of a particle is, which is what solvents, cells and other particles actually meet. In a biological medium the engineered surface is quickly covered by adsorbed proteins, so the particle acquires a second identity the designer did not specify.',
+    explanation:
+      'Functionalisation is normally introduced as a way to control dispersion, stability and targeting, and it does all of those things. But the review by Akhter and colleagues describes what happens next in a biological medium: proteins adsorb rapidly and form a corona, and the cell encounters that corona rather than the surface that was designed. The composition depends on size, shape, surface charge and surface chemistry as well as the medium, and it evolves in time — abundant proteins arrive first and are displaced by higher-affinity ones. The review separates a tightly bound hard corona, whose exchange time exceeds the cellular uptake it competes with, from a loosely bound soft corona that exchanges freely. The consequence it reports for engineered targeting is blunt: the functional characteristics of ligated particles can be cloaked, and they may lose their targeting potential. Maha’s point for a reader comparing two samples is narrower and applies outside biology too — when a coating changes, the surface chemistry, the effective size and the aggregation behaviour usually change with it, so a comparison that varies coating alongside size has varied at least two things.',
+    example:
+      'Two batches of the same core material are compared, one bare and one ligand-functionalised, and the functionalised batch performs better in a cell assay. That result is consistent with the ligand working as intended, and equally consistent with a different corona forming, a different effective hydrodynamic size, and a different aggregation state. Nothing in the comparison separates them.',
+    establishes:
+      'That the engineered surface is not necessarily the surface that acts, that corona composition is governed by properties the designer does control, and that a targeting ligand can be functionally hidden by what adsorbs on top of it.',
+    boundary:
+      'A review of reported findings, mostly in serum and cell-culture systems. It does not tell you the corona for any particular product, does not predict a clinical result, and is not evidence that any nanomedicine works or is safe. Outside biology the corona mechanism does not apply, though the confounding of coating with size and aggregation still does.',
+    checks: [
+      'Ask whether the coating was the only thing that changed between the samples being compared, and how that was established.',
+      'Ask what medium the particles were measured in, and whether size was measured in that medium or in a clean solvent.',
+      'For a targeting claim, ask what evidence exists that the ligand is still exposed and functional after exposure to the biological medium.',
+      'Treat “functionalised” as a description of an intended synthesis step, not as a measurement of the surface that resulted.',
+    ],
+    sources: ['corona'],
+    related: ['structure-property-claims', 'batch-to-batch-variability', 'characterisation-what-each-method-sees'],
+    crossLinks: [
+      { path: '/knowledge/nanotechnology/regulatory-status-is-not-safety', label: 'Why a regulatory filing about such a product is not a safety finding' },
+    ],
+  },
+  {
+    slug: 'quantum-confinement',
+    title: 'Quantum confinement: a real size effect, and what an optical size measurement assumes',
+    answer:
+      'Confinement is one of the few places where making a semiconductor smaller changes a property for a well-understood physical reason rather than by changing surface area. The band gap widens as the crystal shrinks, which is why a size change shows up as a colour change.',
+    explanation:
+      'When a semiconductor crystal becomes comparable to or smaller than the natural extent of its electron–hole pair, the available energy levels are set partly by the size of the box rather than by the bulk material alone, and the gap between them widens as the box shrinks. Ferreira and colleagues give an analytical expression for that size-dependent gap within a finite-depth square-well effective-mass approximation, written to remain usable in the strong-confinement regime where the conventional effective-mass treatment fails. The part worth carrying into evaluation is what they do with it: because the relationship runs both ways, they invert it to recover a particle size distribution from absorbance and photoluminescence spectra, checked against microscopy. That is a genuine measurement route, and it is also a model-dependent one. An optically inferred size rests on the expression chosen, on the assumed shape, and on the assumption that the optical response comes from the particles you think it does.',
+    example:
+      'A supplier quotes a quantum dot diameter derived from the absorption peak. The number may be sound, but it is an inference through a confinement model, not a direct observation of a particle. A microscopy distribution on the same sample would be a different kind of evidence, and the two can legitimately disagree where the model is strained.',
+    establishes:
+      'That the size dependence of the band gap is a real, modelled physical effect rather than a marketing gloss, and that an optical size can be derived from it with stated assumptions and validated against microscopy.',
+    boundary:
+      'The model was fitted and validated for the authors’ own CdTe system. It certifies no instrument and no supplier, and it does not extend to arbitrary materials, shapes or aggregation states. Confinement explains an optical shift; it says nothing about reactivity, stability or safety.',
+    checks: [
+      'Ask whether a quoted size was measured directly or inferred from a spectrum, and which expression was used.',
+      'Ask whether the inferred distribution was ever checked against a direct imaging method on the same sample.',
+      'Be suspicious of a confinement explanation applied to a material or size range where the crystal is far larger than the relevant excitonic scale.',
+      'Separate the claim “the colour shifted” from the claim “we know the size”, which requires the model in between.',
+    ],
+    sources: ['confinement'],
+    related: ['characterisation-what-each-method-sees', 'reporting-size-with-uncertainty', 'structure-property-claims'],
+  },
+  {
+    slug: 'nano-sensing',
+    title: 'Nanomaterial sensors: high sensitivity is the easy half, selectivity is the hard half',
+    answer:
+      'A large, reactive surface makes a nanomaterial an excellent transducer, which is why sensitivity figures are easy to produce. The same non-specific surface chemistry is why the response is rarely specific to one analyte.',
+    explanation:
+      'A chemiresistive sensor reports a change in electrical resistance when something adsorbs on its surface. The review of selectivity in these devices describes the mechanism for n-type semiconductors as adsorbed oxygen species undergoing redox reactions with the gas, which makes the limitation structural rather than incidental: different gases act on the same sites, so the device measures “something adsorbed and transferred charge”, not “this analyte is present”. The review states plainly that such sensors struggle to detect target gases selectively in mixtures because of cross-sensitivity. It also reports that excessive defect engineering — often the route to higher sensitivity — can increase noise, cause baseline drift and reduce carrier mobility, and that humidity remains a persistent interferent. The finding a reader should carry away is the one about the literature itself: a standardised approach for assessing selectivity is lacking, so response-ratio indicators are poorly comparable between studies. This section covers the transduction and the evidence question. Event-driven and neuromorphic sensing, where the interesting part is how the signal is encoded and computed rather than how the surface responds, belongs to the neuromorphic section.',
+    example:
+      'A device is reported with a detection limit in the parts-per-billion range for a target gas. The figure may be exactly right in dry air against that gas alone, and tell you very little about a humid room containing several reducing gases — a condition the review says there is no standard way to test.',
+    establishes:
+      'That the sensitivity of a nanomaterial sensor and its selectivity come from the same mechanism and trade against each other, and that cross-study selectivity comparisons rest on no agreed method.',
+    boundary:
+      'A review of the chemiresistive literature. It reports no performance figure for any commercial sensor, certifies no device, and the absence of a standard method is a statement about the field rather than a criticism of any particular product.',
+    checks: [
+      'Ask what else was in the gas stream during the reported measurement, and at what humidity.',
+      'Ask how selectivity was quantified, and against which interferents — then ask whether another paper’s number was computed the same way.',
+      'Ask for baseline drift over the intended deployment period, not just a response curve.',
+      'Treat a detection limit measured against a single analyte in dry air as a ceiling, not an operating specification.',
+    ],
+    sources: ['sensing'],
+    related: ['structure-property-claims', 'vendor-claim-checks', 'batch-to-batch-variability'],
+    crossLinks: [
+      { path: '/knowledge/neuromorphic-biocomputing', label: 'Neuromorphic and biocomputing: event-driven sensing and in-memory computation' },
+    ],
+  },
+  {
+    slug: 'energy-storage-claims',
+    title: 'Reading an energy-storage claim: the numbers that must travel with a capacity',
+    answer:
+      'A capacity or energy-density figure means nothing on its own. It is a measurement made under conditions, and the conditions are what decide whether it has any bearing on a practical cell.',
+    explanation:
+      'Lin, Liu, Ai and Liang argue that the exceptional performance reported in academic work is increasingly inaccessible to practical applications, because it is measured under conditions that do not make sense for practical use. They name what has to be reported alongside a capacity. Mass loading comes first: academic electrodes are often under 2 mg/cm² where industry needs 5–10 mg/cm², and a thin electrode flatters almost every other number. Coulombic efficiency is the second — their Table 1 gives 99.96% as the efficiency required for cycling stability to 500 cycles for commercialisation, which turns a figure that looks like a rounding detail into the thing that decides cycle life. Electrolyte amount matters because an excess of it in the laboratory masks poor efficiency. Voltage window and cycle number complete the set. Their recommendation is a reporting list: the ratios among active material, conductive additive and binder, the areal mass loading, the voltage window and the ambient temperature. Maha adds no threshold of its own and measures no cell; what this page offers is the question set.',
+    example:
+      'A material is announced with a capacity several times that of a conventional electrode. If the electrode was thin, the electrolyte plentiful, the window wide and the test short, every one of those choices pushed the number up, and none of them is disclosed in the headline.',
+    establishes:
+      'That an energy-storage claim is only interpretable with its measurement conditions attached, and that specific reporting items — mass loading, Coulombic efficiency, electrolyte amount, voltage window, cycle number — have been identified in the literature as the ones that decide practical relevance.',
+    boundary:
+      'A perspective on reporting practice, not a measurement of any cell or material, and not a standard. Its thresholds are the authors’ argument about commercial relevance, not a regulatory requirement, and nothing here evaluates any product or predicts how any cell will perform.',
+    checks: [
+      'Ask for areal mass loading in mg/cm², and compare it with the 5–10 mg/cm² the authors associate with industrial practice.',
+      'Ask for Coulombic efficiency to enough decimal places to be meaningful, and for the cycle count it was sustained over.',
+      'Ask how much electrolyte was used relative to the active material.',
+      'Ask for the voltage window and the temperature, and check whether a comparison across papers holds them equal.',
+      'Treat a capacity quoted without any of these as an unfinished measurement rather than a result.',
+    ],
+    sources: ['storage'],
+    related: ['scale-up-constraints', 'vendor-claim-checks', 'structure-property-claims'],
+  },
 ]
 
 export type CandidateStatus = 'implemented' | 'evidence-ready' | 'revise' | 'blocked' | 'duplicative'
@@ -406,7 +537,7 @@ export type NanoCandidate = {
 
 /**
  * The candidate map. A planning ceiling of 24, not a publication quota: the
- * twelve implemented articles are the ones whose sources were actually read.
+ * seventeen implemented articles are the ones whose sources were actually read.
  */
 export const NANO_CANDIDATES: NanoCandidate[] = [
   { slug: 'what-nanoscale-means', question: 'What does nanoscale actually mean?', audience: 'Newcomer, procurement, journalist', contribution: 'Reconciles three official definitions and explains why the boundary is a convention', status: 'implemented', demand: 'unknown' },
@@ -418,18 +549,18 @@ export const NANO_CANDIDATES: NanoCandidate[] = [
   { slug: 'batch-to-batch-variability', question: 'Does one batch generalise?', audience: 'Reviewer, buyer', contribution: 'Batch identity as part of the evidence record', status: 'implemented', demand: 'unknown' },
   { slug: 'structure-property-claims', question: 'When does a structure–property claim hold?', audience: 'Researcher', contribution: 'Confounded synthesis series and the controls that separate variables', status: 'implemented', demand: 'unknown' },
   { slug: 'scale-up-constraints', question: 'Why does scale-up change the material?', audience: 'Developer, investor', contribution: 'Names the process variables that set distributions', status: 'implemented', demand: 'unknown' },
-  { slug: 'exposure-and-safety-evidence', question: 'What does a safety study establish?', audience: 'Employer, reviewer', contribution: 'Scope boundaries of exposure evidence, sourced to OSHA and EPA framing', status: 'implemented', demand: 'unknown' },
+  { slug: 'exposure-and-safety-evidence', question: 'What does a safety study establish?', audience: 'Employer, reviewer', contribution: 'Scope boundaries of exposure evidence, sourced to NIOSH and EPA framing', status: 'implemented', demand: 'unknown' },
   { slug: 'regulatory-status-is-not-safety', question: 'Does regulatory status mean it is safe or approved?', audience: 'Buyer, journalist', contribution: 'Separates process from finding; keeps medical claims in their own tier', status: 'implemented', demand: 'unknown' },
   { slug: 'vendor-claim-checks', question: 'How do I read a datasheet claim?', audience: 'Buyer', contribution: 'A traceability reading method with an open-questions output', status: 'implemented', demand: 'unknown' },
   { slug: 'surface-area-example', question: 'Can I check a surface-area claim myself?', audience: 'Developer, student', contribution: 'Runnable, unit-aware calculator with refusals and counterexamples', status: 'implemented', demand: 'unknown' },
   { slug: 'electron-microscopy-artifacts', question: 'What artefacts does electron microscopy introduce?', audience: 'Researcher', contribution: 'Beam damage, drying and coating artefacts as an evidence problem', status: 'blocked', note: 'Needs a microscopy standards or instrument-documentation source read at section depth; none inspected yet.', demand: 'unknown' },
   { slug: 'light-scattering-weighting', question: 'Why does DLS over-report large particles?', audience: 'Reviewer', contribution: 'Intensity weighting and its consequences for specification compliance', status: 'blocked', note: 'Requires an ISO 22412-class source; the standard is paywalled and was not read.', demand: 'unknown' },
-  { slug: 'surface-functionalisation', question: 'What does a coating change?', audience: 'Developer', contribution: 'Ligands and coatings as the variable that usually moves with size', status: 'evidence-ready', note: 'Mechanism is covered inside structure-property-claims; a separate page needs a dedicated source.', demand: 'unknown' },
-  { slug: 'quantum-confinement', question: 'Why does colour change with dot size?', audience: 'Student', contribution: 'Confinement as a genuine size-dependent physical effect', status: 'evidence-ready', note: 'Drafted mentally but not implemented: needs a primary optical-physics source inspected at passage depth.', demand: 'unknown' },
+  { slug: 'surface-functionalisation', question: 'What does a coating change?', audience: 'Developer', contribution: 'Ligands and coatings as the variable that usually moves with size; the protein corona as a second, unspecified identity', status: 'implemented', demand: 'unknown' },
+  { slug: 'quantum-confinement', question: 'Why does colour change with dot size?', audience: 'Student', contribution: 'Confinement as a genuine size-dependent physical effect, and what an optically inferred size assumes', status: 'implemented', demand: 'unknown' },
   { slug: 'nano-in-electronics', question: 'Where do nanomaterials appear in electronics?', audience: 'Developer', contribution: 'Applications framing', status: 'duplicative', note: 'Owned by /knowledge/suppliers and the semiconductor process map; link instead of restating.', demand: 'unknown' },
   { slug: 'memristive-devices', question: 'How do nanoscale memory devices compute?', audience: 'Developer', contribution: 'Device physics for in-memory computing', status: 'duplicative', note: 'Owned by /knowledge/neuromorphic-biocomputing (in-memory and memristive computing).', demand: 'unknown' },
-  { slug: 'nano-sensing', question: 'How do nanomaterial sensors work?', audience: 'Developer', contribution: 'Sensing applications', status: 'evidence-ready', note: 'Overlaps neuromorphic sensors; needs an explicit ownership split before implementation.', demand: 'unknown' },
-  { slug: 'energy-storage-claims', question: 'How should I read a battery-material claim?', audience: 'Investor, buyer', contribution: 'Cell-level versus material-level evidence', status: 'evidence-ready', note: 'Ready in structure, blocked on an inspected electrochemistry reporting source.', demand: 'unknown' },
+  { slug: 'nano-sensing', question: 'How do nanomaterial sensors work?', audience: 'Developer', contribution: 'Transduction and the selectivity trade-off; ownership split settled — surface transduction here, event-driven encoding in /knowledge/neuromorphic-biocomputing', status: 'implemented', demand: 'unknown' },
+  { slug: 'energy-storage-claims', question: 'How do I read a battery or supercapacitor claim?', audience: 'Buyer, reviewer', contribution: 'The reporting items that must accompany a capacity figure', status: 'implemented', demand: 'unknown' },
   { slug: 'environmental-fate', question: 'What happens to these materials in the environment?', audience: 'Employer, policy reader', contribution: 'Fate and transformation as separate from hazard', status: 'blocked', note: 'Needs an OECD or EPA fate document read at section depth; OECD pages refused automated access.', demand: 'unknown' },
   { slug: 'standards-landscape', question: 'Which standards apply?', audience: 'Reviewer', contribution: 'What ISO/ASTM nanotechnology standards cover', status: 'blocked', note: 'Core vocabulary and method standards are paywalled; citing them unread would breach the evidence rule.', demand: 'unknown' },
   { slug: 'medical-nanomaterials', question: 'What about medical uses?', audience: 'General reader', contribution: 'Laboratory versus clinical versus approved', status: 'duplicative', note: 'Folded into /knowledge/nanotechnology/regulatory-status-is-not-safety rather than given its own route, to avoid implying clinical coverage Maha does not have.', demand: 'unknown' },

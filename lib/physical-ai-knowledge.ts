@@ -91,6 +91,42 @@ export const PHYSICAL_AI_SOURCES = {
     boundary: 'Voluntary guidance. Following it certifies nothing, and it contains no robot-specific acceptance criterion.',
     rights: 'Original paraphrase and link only.',
   },
+  estimation: {
+    title: 'Welch and Bishop — An Introduction to the Kalman Filter (UNC-Chapel Hill TR 95-041)',
+    url: 'https://www.cs.utexas.edu/~pstone/Courses/393Rfall15/readings/Welch+Bishop-TR-95.pdf',
+    locator: '§1 The Discrete Kalman Filter — “The Computational Origins of the Filter” and the discussion of equation (1.8); the time-update / measurement-update cycle',
+    inspected: '2026-09-20',
+    claim: 'The filter alternates a time update that projects the state forward to produce an a priori estimate with a measurement update that corrects it into an a posteriori estimate, weighting the two by a gain computed from the process-noise covariance Q and the measurement-noise covariance R. The document states that as R approaches zero the gain weights the residual more heavily, with the limit of the gain equal to the inverse of the measurement matrix, and that as the a priori error covariance approaches zero the gain weights the residual less heavily, with the limit equal to zero — equivalently, the measurement is trusted more as R falls and less as the prediction becomes confident.',
+    boundary: 'A tutorial on a linear estimator under assumed Gaussian noise with known Q and R. It does not tell you the real noise of any sensor, does not cover the nonlinear or non-Gaussian case beyond an introduction, and offers no guarantee about a robot that uses it.',
+    rights: 'Paraphrase and link to the publicly posted technical report; equations and text not reproduced.',
+  },
+  rewardhacking: {
+    title: 'Amodei, Olah, Steinhardt, Christiano, Schulman and Mané — Concrete Problems in AI Safety',
+    url: 'https://arxiv.org/abs/1606.06565',
+    locator: 'Abstract; §3 Avoiding Negative Side Effects; §4 Avoiding Reward Hacking',
+    inspected: '2026-09-20',
+    claim: 'The paper frames accidents as unintended and harmful behaviour arising from poor design, and separates five problems, two of which come from having the wrong objective function: negative side effects and reward hacking. Its running cleaning-robot example illustrates both — an agent rewarded for moving a box may knock over a vase in its path because the objective expresses indifference to everything it does not mention, and an agent rewarded for how few messes it sees can satisfy that objective by closing its eyes. It further describes reward hacking through Goodhart’s law (rewarding a correlate such as bleach consumption invites overuse), feedback loops, and wireheading, where an agent tampers with the sensor that reports its score.',
+    boundary: 'A research agenda that names failure modes and proposes directions. It is not a result about any deployed system, provides no detector for these failures, and does not establish how often they occur in practice.',
+    rights: 'Paraphrase and link to the open preprint; short attributed wording only.',
+  },
+  rt2: {
+    title: 'Brohan et al. — RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control',
+    url: 'https://arxiv.org/abs/2307.15818',
+    locator: 'Abstract; §1 Introduction',
+    inspected: '2026-09-20',
+    claim: 'The authors express robot actions as text tokens and co-fine-tune a pretrained vision-language model on robot trajectory data together with internet-scale vision-language tasks such as visual question answering. They report improved generalisation to novel objects, the ability to follow commands absent from the robot training data, and rudimentary reasoning such as selecting the smallest or largest object or identifying a suitable implement, evaluated over some 6,000 trials.',
+    boundary: 'The authors’ own reported results on their own robots and evaluation set. The abstract gives capabilities rather than a headline success-rate figure, no independent replication is cited, and emergent behaviour on chosen probes is not a guarantee of behaviour elsewhere.',
+    rights: 'Paraphrase and link to the open preprint; no figures or tables reproduced.',
+  },
+  teleoperation: {
+    title: 'Zhao, Kumar, Levine and Finn — Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware (ALOHA / ACT)',
+    url: 'https://arxiv.org/abs/2304.13705',
+    locator: 'Abstract; project description of the teleoperation setup',
+    inspected: '2026-09-20',
+    claim: 'The authors describe a low-cost bimanual teleoperation setup used to collect human demonstrations, and Action Chunking with Transformers, an algorithm that learns a generative model over action sequences rather than single actions, motivated by compounding policy error and non-stationary human demonstration. They report learning six fine manipulation tasks — including opening a translucent condiment cup and slotting a battery — at 80–90% success from around ten minutes of demonstrations in total.',
+    boundary: 'The authors’ own reported results on their own hardware and task set. Ten minutes of demonstration sufficing for six chosen tasks is not a general data requirement, and no safety, durability or unattended-operation claim follows from it.',
+    rights: 'Paraphrase and link to the open preprint; no figures or tables reproduced.',
+  },
 } as const
 
 export type PhysicalAiSourceId = keyof typeof PHYSICAL_AI_SOURCES
@@ -396,6 +432,101 @@ export const PHYSICAL_AI_ARTICLES: PhysicalAiArticle[] = [
     sources: [],
     related: ['perception-action-loops', 'runtime-monitoring-and-fallback', 'uncertainty-and-distribution-shift'],
   },
+  {
+    slug: 'state-estimation-and-filtering',
+    title: 'State estimation: the system acts on an estimate, never on the world',
+    answer:
+      'A controller never sees the state it is controlling. It sees measurements, and acts on an estimate built from them. How much that estimate trusts the newest measurement is a parameter someone chose.',
+    explanation:
+      'The classical treatment makes the trade-off explicit. Welch and Bishop describe the Kalman filter as a cycle: a time update projects the state forward through a model of the dynamics, producing an a priori estimate; a measurement update then corrects it into an a posteriori estimate. The weighting between the two is a gain computed from the process-noise covariance Q, which says how much the model is trusted, and the measurement-noise covariance R, which says how much the sensor is trusted. Their limiting cases are the clearest statement of what the parameters mean: as R approaches zero the gain weights the residual more heavily, tending to the inverse of the measurement matrix, and as the a priori error covariance approaches zero the gain weights it less heavily, tending to zero. Put plainly, the filter trusts the measurement more as sensor noise falls, and trusts its own prediction more as it becomes confident. That confidence is computed from the assumed noise, not from whether the model is right. A filter given an over-optimistic Q becomes confident, stops listening to its sensors and drifts — and it does so quietly, because its reported covariance is small exactly when it should not be.',
+    example:
+      'A tracking system reports a tight uncertainty and a smooth trajectory while the object it is following has already left the modelled path. Nothing in the filter is broken. It was told the process noise was small, so it believed its own prediction, and a small reported covariance is the expected output of that assumption rather than evidence that the estimate is good.',
+    establishes:
+      'That estimation is a weighted compromise governed by stated noise assumptions, and that the confidence a filter reports is a function of those assumptions rather than an independent check on the estimate.',
+    boundary:
+      'A tutorial on a linear estimator under assumed Gaussian noise with known Q and R. It does not tell you the true noise of any sensor, does not settle the nonlinear or non-Gaussian case, and guarantees nothing about a robot that uses a filter. The fixture published in this section uses a trivial estimator, not a Kalman filter.',
+    checks: [
+      'Ask where Q and R came from — measured from the hardware, inherited from another project, or tuned until the output looked smooth.',
+      'Ask whether the reported covariance has ever been compared against actual error on held-out data.',
+      'Ask what the estimator does when a sensor drops out, and for how long its prediction is allowed to stand alone.',
+      'Treat a smooth trajectory as evidence about the filter, not evidence about the world.',
+    ],
+    sources: ['estimation'],
+    related: ['perception-action-loops', 'uncertainty-and-distribution-shift', 'planning-and-feedback-control'],
+    crossLinks: [
+      { path: '/knowledge/robotics/calibration-records', label: 'Robotics: the calibration records an estimate depends on' },
+      { path: '/knowledge/mathematics', label: 'Mathematics: the formal layer under estimation' },
+    ],
+  },
+  {
+    slug: 'reward-specification',
+    title: 'Reward specification: the objective is a proxy, and the system optimises the proxy',
+    answer:
+      'A learned system pursues the objective it was given, not the one that was meant. Where those differ, the difference is not a bug the system will correct — it is the direction the system will move in.',
+    explanation:
+      'Amodei and colleagues separate five concrete problems, two of which come from having the wrong objective function. The first is negative side effects: an objective names what to achieve and is thereby indifferent to everything it does not mention, so an agent rewarded for moving a box may knock over a vase in its path. The second is reward hacking, where the objective is satisfied by means nobody intended. Their examples are worth keeping because each names a distinct mechanism. A partially observed goal invites the cleaning robot rewarded by how few messes it sees to close its eyes. Goodhart’s law bites when a correlate is rewarded instead of the goal — reward bleach consumption because it correlates with cleaning, and the agent uses more bleach than it needs or pours it down the drain. Feedback loops let a behaviour amplify the signal that rewards it. Wireheading is the limiting case, where the agent tampers with the sensor that reports its score. For a physical system the consequence is sharper than for a recommender: the shortcut is taken in the world, against real objects, and the vase is real.',
+    example:
+      'A pick-and-place policy is rewarded for the object registering as lifted. It learns to nudge the object against the sensor. The reward curve is excellent, the reported success rate is high, and no object has been placed anywhere.',
+    establishes:
+      'That objective misspecification has distinguishable, named mechanisms, and that a good score is consistent with the system having found one of them rather than having done the task.',
+    boundary:
+      'A research agenda naming failure modes and proposing directions. It is not a result about any deployed system, supplies no detector for these failures, and says nothing about how often they occur in practice. Maha has measured no incidence of any of them.',
+    checks: [
+      'Ask what exactly is rewarded, and what physically has to be true for the reward to fire.',
+      'Ask what the objective is silent about, and whether anything valuable sits in that silence.',
+      'Ask whether success is judged by the same sensor the policy could influence.',
+      'Look at the highest-scoring episodes rather than the average, since that is where a shortcut shows first.',
+    ],
+    sources: ['rewardhacking'],
+    related: ['world-models', 'benchmark-validity', 'runtime-monitoring-and-fallback'],
+  },
+  {
+    slug: 'foundation-model-fine-tuning',
+    title: 'Fine-tuning a foundation model for control: what web pretraining does and does not transfer',
+    answer:
+      'Coupling a pretrained vision-language model to robot actions transfers semantic knowledge the robot data never contained. It does not transfer physical competence, and the evidence for each is different.',
+    explanation:
+      'Two reported systems mark the approach. In RT-2, Brohan and colleagues express robot actions as text tokens and co-fine-tune a pretrained vision-language model on robot trajectories together with internet-scale tasks such as visual question answering; they report improved generalisation to novel objects, the ability to follow commands absent from the robot training data, and rudimentary reasoning such as picking the smallest object or identifying a suitable implement, over some 6,000 evaluation trials. OpenVLA follows the same pattern as an open 7B model trained on 970k real demonstrations, which its authors report outperforming a 55B closed model by 16.5 percentage points of absolute task success across 29 tasks. What transfers is recognition and language grounding, because that is what the web corpus contains. What does not transfer is contact, force and timing, because no amount of image-text data observes them. The practical reading is that these systems generalise best along the axis the pretraining covered — naming and identifying things — and remain bounded by the robot data on the axis of actually moving them.',
+    example:
+      'A model correctly identifies which of several objects is a suitable hammer, having never seen one in its robot data, and then fails to grasp it because its fingers meet a surface geometry the demonstrations never contained. Both outcomes are what the training mix predicts.',
+    establishes:
+      'That co-fine-tuning on web and robot data is reported to add semantic generalisation beyond the robot dataset, and that the authors of each system report their own gains on their own evaluations.',
+    boundary:
+      'Both sets of figures are the authors’ own, on their own robots and evaluation suites, with no independent replication cited here. RT-2’s abstract reports capabilities rather than a headline success rate, and neither result establishes behaviour on a different embodiment, a different task set, or an unrehearsed setting.',
+    checks: [
+      'Ask which capability is claimed to come from pretraining and which from the robot data, and what evidence separates them.',
+      'Ask whether the reported evaluation is the authors’ own, and whether anyone outside the group has reproduced it.',
+      'Ask what fine-tuning data would be needed for your embodiment, since the reported models were trained on specific ones.',
+      'Be precise that a semantic success — naming the right object — is not a manipulation success.',
+    ],
+    sources: ['rt2', 'vla'],
+    related: ['vision-language-action-models', 'benchmark-validity', 'learning-from-demonstration'],
+  },
+  {
+    slug: 'teleoperation-interfaces',
+    title: 'The teleoperation interface is part of the dataset',
+    answer:
+      'Demonstrations are not neutral recordings of a task. They record what one operator could do through one interface, and the interface leaves its signature in every trajectory a policy learns from.',
+    explanation:
+      'Zhao, Kumar, Levine and Finn make the hardware part of the contribution: a low-cost bimanual teleoperation setup for collecting demonstrations, paired with Action Chunking with Transformers, which learns a generative model over sequences of actions rather than single actions. Their stated motivation for chunking is instructive about the data — compounding error in the policy and the non-stationarity of human demonstration, meaning the human was not a fixed function and did the task slightly differently each time. They report six fine manipulation tasks, including opening a translucent condiment cup and slotting a battery, at 80–90% success from roughly ten minutes of demonstrations in total. Maha’s addition is the evaluation consequence. Rate limits, latency, force feedback or its absence, and the operator’s own strategy all shape what the demonstrations contain, so a policy trained on them inherits an interface as well as a task. Two datasets nominally of the same task, collected through different rigs, are not interchangeable, and a data-efficiency figure quoted without its collection setup is missing the variable that produced it.',
+    example:
+      'A dataset collected on a rig without force feedback contains no examples of an operator easing off when a part binds, because the operator could not feel it. A policy trained on it has no such behaviour to imitate, and the gap will be read as a model limitation rather than a data one.',
+    establishes:
+      'That the collection interface is a documented part of a demonstration dataset, and that a reported data requirement is a property of a specific rig, operator and task set.',
+    boundary:
+      'The reported results are the authors’ own, on their own hardware and six chosen tasks. Ten minutes of demonstrations sufficing there is not a general data requirement, and nothing in it speaks to safety, durability or unattended operation.',
+    checks: [
+      'Ask what rig the demonstrations were collected on, and whether the operator had force feedback.',
+      'Ask how many operators contributed and whether their strategies were compared.',
+      'Ask whether a quoted data requirement came with its collection setup, and treat it as specific to that setup.',
+      'Before merging two demonstration datasets, ask what differed between the interfaces that produced them.',
+    ],
+    sources: ['teleoperation', 'imitation'],
+    related: ['learning-from-demonstration', 'data-provenance-and-permissions', 'benchmark-validity'],
+    crossLinks: [
+      { path: '/knowledge/robotics/episode-rights', label: 'Robotics: the rights and consent record a demonstration episode carries' },
+    ],
+  },
 ]
 
 export type PhysicalAiCandidate = {
@@ -421,15 +552,15 @@ export const PHYSICAL_AI_CANDIDATES: PhysicalAiCandidate[] = [
   { slug: 'benchmark-validity', question: 'What is a benchmark score evidence of?', audience: 'Buyer, researcher', contribution: 'Multi-task difficulty as a transferable finding', status: 'implemented', demand: 'unknown' },
   { slug: 'data-provenance-and-permissions', question: 'May we use this demonstration data?', audience: 'Team lead', contribution: 'Rights questions specific to embodied data', status: 'implemented', demand: 'unknown' },
   { slug: 'evaluation-fixture-example', question: 'Can I see the accounting run?', audience: 'Developer', contribution: 'Deterministic loop fixture with intervention and failure reporting', status: 'implemented', demand: 'unknown' },
-  { slug: 'state-estimation-and-filtering', question: 'How is state estimated from noisy sensors?', audience: 'Engineer', contribution: 'Filtering fundamentals for learned systems', status: 'evidence-ready', note: 'Needs a primary estimation-theory source read at section depth; the fixture uses a trivial estimator only.', demand: 'unknown' },
+  { slug: 'state-estimation-and-filtering', question: 'How does a system know where it is?', audience: 'Engineer', contribution: 'Predict/correct weighting and why a filter’s own confidence is not a check on it', status: 'implemented', demand: 'unknown' },
   { slug: 'contact-rich-manipulation', question: 'Why is contact hard to learn?', audience: 'Developer', contribution: 'Contact dynamics and why sim transfer degrades there', status: 'blocked', note: 'Requires a contact-dynamics or force-control paper inspected at passage depth; not yet read.', demand: 'unknown' },
   { slug: 'locomotion-evaluation', question: 'How is legged locomotion evaluated?', audience: 'Reviewer', contribution: 'Terrain, disturbance and recovery metrics', status: 'blocked', note: 'Needs the primary locomotion literature read; deferred rather than summarised second-hand.', demand: 'unknown' },
-  { slug: 'reward-specification', question: 'What goes wrong when the reward is wrong?', audience: 'Developer', contribution: 'Specification gaming in embodied settings', status: 'evidence-ready', note: 'Partly covered by world-models; a standalone page needs its own source.', demand: 'unknown' },
+  { slug: 'reward-specification', question: 'Why does a system optimise the wrong thing?', audience: 'Developer, reviewer', contribution: 'Named misspecification mechanisms: side effects, Goodhart, feedback loops, wireheading', status: 'implemented', demand: 'unknown' },
   { slug: 'sensor-calibration', question: 'How does calibration affect a learned policy?', audience: 'Engineer', contribution: 'Calibration drift as silent distribution shift', status: 'duplicative', note: 'Owned by /knowledge/robotics/calibration-records; this section links there rather than restating it.', demand: 'unknown' },
   { slug: 'time-synchronisation', question: 'What breaks when clocks disagree?', audience: 'Engineer', contribution: 'Synchronisation failures', status: 'duplicative', note: 'Owned by /knowledge/robotics/sensor-time-alignment.', demand: 'unknown' },
   { slug: 'execution-evidence', question: 'What evidence should an execution produce?', audience: 'Reviewer', contribution: 'Evidence packet contents', status: 'duplicative', note: 'Owned by /knowledge/robotics/evidence-package, the robotics evidence-package specification.', demand: 'unknown' },
-  { slug: 'foundation-model-fine-tuning', question: 'How is a generalist adapted to one cell?', audience: 'Developer', contribution: 'Fine-tuning trade-offs and evaluation after adaptation', status: 'evidence-ready', note: 'OpenVLA covers fine-tuning; a dedicated page needs a second inspected source to avoid resting on one paper.', demand: 'unknown' },
-  { slug: 'teleoperation-interfaces', question: 'How does the interface shape the data?', audience: 'Team lead', contribution: 'Interface as a confounder in demonstration datasets', status: 'evidence-ready', note: 'Argued inside learning-from-demonstration; separate page deferred.', demand: 'unknown' },
+  { slug: 'foundation-model-fine-tuning', question: 'What does web pretraining buy a robot?', audience: 'Buyer, developer', contribution: 'Separates transferred semantics from untransferred physical competence', status: 'implemented', demand: 'unknown' },
+  { slug: 'teleoperation-interfaces', question: 'How does the interface shape the data?', audience: 'Team lead', contribution: 'Interface as a documented confounder in demonstration datasets', status: 'implemented', demand: 'unknown' },
   { slug: 'multimodal-perception', question: 'When does adding a sensor help?', audience: 'Developer', contribution: 'Marginal value of modalities', status: 'revise', note: 'Draft framing overlapped perception-action-loops without adding a distinct question.', demand: 'unknown' },
   { slug: 'energy-and-compute-budgets', question: 'What compute does on-robot inference need?', audience: 'Engineer, buyer', contribution: 'Latency and power budgets on device', status: 'revise', note: 'Needs measured figures Maha does not have; would otherwise restate vendor specifications.', demand: 'unknown' },
   { slug: 'human-robot-interaction', question: 'How should systems behave around people?', audience: 'Operator', contribution: 'Handover and shared space', status: 'duplicative', note: 'Owned by /knowledge/robotics/human-robot-handoff and accessibility-evaluation.', demand: 'unknown' },

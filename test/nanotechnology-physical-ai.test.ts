@@ -16,6 +16,9 @@ const SECTIONS = [
   { name: 'physical-ai', path: PHYSICAL_AI_PATH, articles: PHYSICAL_AI_ARTICLES, sources: PHYSICAL_AI_SOURCES, candidates: PHYSICAL_AI_CANDIDATES },
 ] as const
 
+/** The shape both sections' source registries share. */
+type SourceRecord = { title: string; url: string; locator: string; inspected: string; claim: string; boundary: string; rights: string }
+
 const read = (relative: string) => readFileSync(new URL(`../${relative}`, import.meta.url), 'utf8')
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/
 
@@ -44,7 +47,7 @@ test('every cited source resolves and records where it was read', () => {
     const cited = new Set<string>()
     for (const article of section.articles) {
       for (const id of article.sources) {
-        const source = (section.sources as Record<string, (typeof section.sources)[keyof typeof section.sources]>)[id]
+        const source: SourceRecord | undefined = (section.sources as Record<string, SourceRecord>)[id]
         assert.ok(source, `${section.name}/${article.slug}: unknown source id ${id}`)
         assert.ok(source.locator.trim().length > 0, `${id}: no locator`)
         assert.match(source.inspected, ISO_DATE, `${id}: inspection date is not a date`)
@@ -199,5 +202,47 @@ test('neither section claims a capability, approval or result it does not have',
   assert.match(physicalProse, /reported|their own/i)
   for (const article of [...NANO_ARTICLES, ...PHYSICAL_AI_ARTICLES]) {
     assert.ok(article.boundary.trim().length > 40, `${article.slug}: boundary is too thin to be a real limit`)
+  }
+})
+
+test('figures quoted from a source match what that source actually says', () => {
+  // Each entry was verified against the source on the date in its record.
+  // If someone edits one of these numbers, the edit has to be re-verified
+  // rather than absorbed silently.
+  const verified: [keyof typeof PHYSICAL_AI_SOURCES | keyof typeof NANO_SOURCES, string[]][] = [
+    ['vla', ['7B', '970k', '55B', '16.5', '29 tasks']],
+    ['benchmark', ['50 distinct', 'ten training tasks']],
+    ['teleoperation', ['six fine manipulation tasks', '80–90%', 'ten minutes']],
+    ['rt2', ['6,000']],
+    ['storage', ['2 mg/cm²', '5–10 mg/cm²', '99.96%', '500 cycles']],
+  ]
+  const all: Record<string, { claim: string }> = { ...PHYSICAL_AI_SOURCES, ...NANO_SOURCES }
+  for (const [id, figures] of verified) {
+    const source = all[id]
+    assert.ok(source, `source ${id} was removed; its figures were verified and cannot silently disappear`)
+    for (const figure of figures) {
+      assert.ok(source.claim.includes(figure), `${id}: the verified figure "${figure}" is no longer in the claim`)
+    }
+  }
+})
+
+test('a reported result is attributed, never stated as fact about the world', () => {
+  const all: Record<string, { claim: string; boundary: string; inspected: string }> = { ...PHYSICAL_AI_SOURCES, ...NANO_SOURCES }
+  const today = '2026-12-31'
+  for (const [id, source] of Object.entries(all)) {
+    assert.ok(source.inspected <= today, `${id}: inspected in the future`)
+    // Any claim carrying a performance figure must name whose result it is.
+    if (/\d+(\.\d+)?\s*(%|percentage points)/.test(source.claim)) {
+      assert.match(
+        source.claim,
+        /report|authors|their|argue|states|gives/i,
+        `${id}: a percentage is stated without saying who reported it`,
+      )
+    }
+  }
+  // Every article citing a performance figure must also carry a boundary that
+  // says the figure is the original authors', not a Maha finding.
+  for (const article of PHYSICAL_AI_ARTICLES.filter((a) => /\d+(\.\d+)?\s*(%|percentage points)/.test(a.explanation))) {
+    assert.match(article.boundary, /authors|own|report/i, `${article.slug}: figure without an ownership boundary`)
   }
 })

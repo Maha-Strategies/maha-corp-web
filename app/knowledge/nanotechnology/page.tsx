@@ -6,7 +6,7 @@ import { NANO_ARTICLES, NANO_CANDIDATES, NANO_PATH, NANO_RELEASE_DATE, NANO_SOUR
 
 const title = 'Nanotechnology: evidence and evaluation | Maha Strategies'
 const description =
-  'How nanoscale materials are made, measured and claimed — and how to judge the evidence. Twelve sourced explanations and a runnable surface-area calculation, from a publisher that makes no materials and certifies nothing.'
+  'How nanoscale materials are made, measured and claimed — and how to judge the evidence. Seventeen sourced explanations and a runnable surface-area calculation, from a publisher that makes no materials and certifies nothing.'
 
 export const metadata: Metadata = {
   title,

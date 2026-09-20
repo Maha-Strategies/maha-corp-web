@@ -12,7 +12,7 @@ import {
 
 const title = 'Physical AI: learned systems that act | Maha Strategies'
 const description =
-  'What physical AI means, how world models, vision-language-action policies and demonstration learning actually work, and what their reported results establish. Twelve sourced explanations and a runnable perception–action fixture.'
+  'What physical AI means, how world models, vision-language-action policies and demonstration learning actually work, and what their reported results establish. Sixteen sourced explanations and a runnable perception–action fixture.'
 
 export const metadata: Metadata = {
   title,
