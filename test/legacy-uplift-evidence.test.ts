@@ -8,7 +8,7 @@ import {
   EVIDENCE_LEVELS, FORBIDDEN_BOUNDARY_SOURCES, assertNotBoundarySubstitute,
   gradeEvidence, type InspectionAttestation,
 } from '../lib/legacy-evidence-levels.ts'
-import { boundaryDerivedNegativeSpace, compileUplift, type LegacyPageInput } from '../lib/legacy-knowledge-uplift.ts'
+import { boundaryDerivedNegativeSpace, type LegacyPageInput } from '../lib/legacy-knowledge-uplift.ts'
 import { summariseFamily } from '../lib/legacy-index-summary.ts'
 import { upliftFor } from '../lib/legacy-uplift-runtime.ts'
 import attestations from '../content/legacy-uplift/inspection-attestations.json' with { type: 'json' }
