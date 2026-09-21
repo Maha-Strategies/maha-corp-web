@@ -1,6 +1,9 @@
 # Free purchase and recovery client
 
 This directory is the **unpaid purchasing interface**, not the paid Buyer-Brief archive.
+The initial archive was inadvertently published in repository history. Removing it
+from current files does not retract historical copies. Purchases remain withheld;
+this guide is not an activation notice or a claim that the old edition is exclusive.
 It never obtains or stores a private key. Octopus must provide its own wallet signer.
 Do not treat running the local tests or reading the contract as authorization to pay.
 

@@ -167,6 +167,17 @@ const PRIVATE_ROUTES = new Set([
   '/api/cron/utility-upload-cleanup',
   '/api/cron/celestial-webhooks',
   '/api/cron/celestial-retention',
+  // CRON_SECRET-authenticated seller notification dispatch for the buyer-brief
+  // outbox. Not a buyer-callable API: it drains a private table and emails the
+  // fixed seller address.
+  '/api/cron/buyer-brief-notifications',
+  // The buyer-brief contract is published as withheld: described in the x402
+  // manifest, not purchasable. Keep its three routes out of the public REST
+  // spec until the offer is promoted to available, at which point they should
+  // be documented rather than listed here.
+  '/api/v1/cabezon/buyer-brief',
+  '/api/v1/cabezon/buyer-brief/retrieve',
+  '/api/v1/cabezon/buyer-brief/support',
   // Tenant witness receipt retention is a private scheduled maintenance route
   // authenticated by CRON_SECRET, not a customer-callable REST operation.
   '/api/cron/computational-witness-retention',
