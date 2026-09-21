@@ -13,6 +13,7 @@ import {
 } from './x402/offer-schemas.ts'
 import { CELESTIAL_OFFERS } from './x402/celestial-offers.ts'
 import { MICRO_OPENAPI_PATHS } from './x402/micro-openapi.ts'
+import { BUYER_BRIEF_OPENAPI_PATHS } from './x402/buyer-brief-openapi.ts'
 import {
   IMAGINED_LIFE_EDITION_OFFER,
   IMAGINED_LIFE_SECTION_OFFER,
@@ -113,6 +114,7 @@ export const openApiDocument = {
     { name: 'x402 Microproducts', description: 'Bounded local implementations; all withheld from Preview and Production payment.' },
     { name: 'Agentic Commerce', description: 'Read-only offer and transaction-policy discovery for agents.' },
     { name: 'x402 Conformance', description: 'Factual protocol and Bazaar discovery observations without trust, security, or uptime scoring.' },
+    { name: 'Buyer-Brief', description: 'Prepared archive purchase, recovery and seller support. Check the live activation gate before paying.' },
     { name: 'MPS Audit', description: 'Prepaid claim-level provenance audits.' },
     { name: 'Checkout', description: 'Self-service credit purchase.' },
     { name: 'Webhooks', description: 'Stripe payment confirmation (called by Stripe, documented for transparency).' },
@@ -130,6 +132,7 @@ export const openApiDocument = {
     { name: 'Governed Workflow', description: 'Read-only evaluation prototype over a synthetic document-approval workflow. Stateless, metadata-only, and performs no side effect.' },
   ],
   paths: {
+    ...BUYER_BRIEF_OPENAPI_PATHS,
     '/api/discovery/carp/catalog': {
       get: {
         tags: ['Agentic Commerce'], operationId: 'getCarpSellerCatalogue',
