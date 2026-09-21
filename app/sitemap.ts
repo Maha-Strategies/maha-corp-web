@@ -21,6 +21,7 @@ import { ASTROLOGY_WORKFLOW_DATE, ASTROLOGY_WORKFLOW_PATH, ASTROLOGY_WORKFLOW_PR
 import { EVIDENCE_WORKFLOW_DATE, EVIDENCE_WORKFLOW_EXAMPLES, EVIDENCE_WORKFLOW_PATH, EVIDENCE_WORKFLOW_REGISTRY_PATH, evidenceWorkflowPath } from '@/lib/evidence-workflow-examples'
 import { MATHEMATICAL_CONCEPTS, MATHEMATICS_KNOWLEDGE_PATH, MATHEMATICS_KNOWLEDGE_RELEASE_DATE, mathematicsConceptPath } from '@/lib/mathematics-knowledge'
 import { ROBOTICS_PATH, ROBOTICS_RELEASE_DATE, roboticsCandidateMap } from '@/lib/robotics-knowledge'
+import { CALDERA_PATH } from '@/lib/caldera-concept'
 import { NANO_ARTICLES, NANO_PATH, NANO_RELEASE_DATE } from '@/lib/nanotechnology-knowledge'
 import { PHYSICAL_AI_ARTICLES, PHYSICAL_AI_PATH, PHYSICAL_AI_RELEASE_DATE } from '@/lib/physical-ai-knowledge'
 import { RELIGION_COMPARISONS, RELIGION_COMPARISONS_PATH, RELIGION_CONCEPTS, RELIGION_KNOWLEDGE_PATH, RELIGION_KNOWLEDGE_RELEASE_DATE, religionComparisonPath, religionConceptPath } from '@/lib/religion-knowledge'
@@ -111,6 +112,7 @@ export async function currentHostSitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}${mathematicsConceptPath(concept)}`,
       lastModified: new Date(MATHEMATICS_KNOWLEDGE_RELEASE_DATE),
     })),
+    { url: `${baseUrl}${CALDERA_PATH}`, lastModified: new Date('2026-09-19') },
     { url: `${baseUrl}${ROBOTICS_PATH}`, lastModified: new Date(ROBOTICS_RELEASE_DATE) },
     ...roboticsCandidateMap().map((topic) => ({ url: `${baseUrl}${ROBOTICS_PATH}/${topic.slug}`, lastModified: new Date(ROBOTICS_RELEASE_DATE) })),
     { url: `${baseUrl}${PHYSICAL_AI_PATH}`, lastModified: new Date(PHYSICAL_AI_RELEASE_DATE) },
