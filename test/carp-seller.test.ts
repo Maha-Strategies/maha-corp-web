@@ -535,7 +535,7 @@ test('Maha DID and SAD are derived from and signed by the same secp256k1 identit
   assert.equal(sad.publicKey.value, publicKey)
   assert.equal(verifySignedAgentDescriptor(sad), true)
   assert.equal(sad.proof.canonicalization, 'RFC8785')
-  assert.equal(sad.sequence, 2)
+  assert.equal(sad.sequence, 3)
   assert.match(sad.descrip, /physical-goods enquiries/)
   assert.match(sad.descrip, /enquiry-only/)
 })

@@ -20,6 +20,7 @@ import {
 } from '../x402/offers.ts'
 import { configuredIdentity, MAHA_CARP_DID_URL, MAHA_CARP_SAD_URL, MAHA_CARP_URL } from './identity.ts'
 import { CELESTIAL_OFFERS } from '../x402/celestial-offers.ts'
+import { BUYER_BRIEF_ID, BUYER_BRIEF_VERSION } from '../x402/buyer-brief-contract.ts'
 
 export const CARP_SELLER_ROLE_URL = 'https://www.mahastrategies.com/.well-known/carp/seller-role.json'
 export const MAHA_CARP_SELLER_URL = 'https://www.mahastrategies.com/.well-known/carp/seller.json'
@@ -142,7 +143,7 @@ const DIGITAL_OFFER_SPECS = Object.freeze(X402_OFFERS
   .map(offer => {
     const legacy = LEGACY_DIGITAL_METADATA.find(spec => spec.offer.id === offer.id)
     return {
-      offeringRef: legacy?.offeringRef ?? `maha:${offer.id}:v1`,
+      offeringRef: legacy?.offeringRef ?? `maha:${offer.id}:v${offer.id === BUYER_BRIEF_ID ? BUYER_BRIEF_VERSION : '1'}`,
       title: legacy?.title ?? offer.serviceName,
       estimatedSeconds: legacy?.estimatedSeconds ?? 5,
       deliveryDeadlineSeconds: legacy?.deliveryDeadlineSeconds ?? 90,

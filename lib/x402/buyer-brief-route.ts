@@ -3,6 +3,7 @@ import { BUYER_BRIEF_PATH, BUYER_BRIEF_RESOURCE, BUYER_BRIEF_TERMS, BUYER_BRIEF_
 import { authorizeBriefRecovery, briefDelivery, findPaidBrief, loadBriefBundle } from './buyer-brief-delivery.ts'
 import { resolveX402 } from './gateway.ts'
 import { releaseHeldSlot } from './slot.ts'
+import { readPaymentSignature } from './protocol.ts'
 import { buyerBriefNotificationsReady, enqueueBriefNotice } from './buyer-brief-notifications.ts'
 const headers={'Cache-Control':'no-store','Referrer-Policy':'no-referrer','X-Content-Type-Options':'nosniff'}
 const json=(body:unknown,status=200,extra:Record<string,string>={})=>Response.json(body,{status,headers:{...headers,...extra}})
@@ -32,6 +33,18 @@ export function buyerBriefHandlers(d:Dependencies={}) {
       const url=new URL(request.url)
       if(url.origin!=='https://www.mahastrategies.com' || url.pathname!==BUYER_BRIEF_PATH || url.search || request.method!=='POST')return fail('resource_mismatch',400)
       if(request.headers.has('authorization')||request.headers.has('x-api-key'))return fail('x402_only_no_api_credits',400)
+      // Discovery requests have no order schema yet. Quote before reading their
+      // body; signed requests still pass every order/artifact check below.
+      if(!readPaymentSignature(request.headers)){
+        try{
+          await load()
+          const outcome=await resolve(request)
+          if(outcome.kind==='challenge')return json(outcome.body,402,{'PAYMENT-REQUIRED':outcome.header})
+          if(outcome.kind==='refused')return fail(outcome.code,outcome.status)
+          if(outcome.kind==='paid')await release(outcome.slot)
+          return fail('unsigned_request_cannot_deliver',503)
+        }catch{return fail('quote_unavailable_no_payment',503)}
+      }
       let order,bundle
       try {
         order=parseBriefOrder(await readBody(request));bundle=await load()

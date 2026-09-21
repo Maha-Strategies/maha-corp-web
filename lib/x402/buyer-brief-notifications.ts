@@ -47,7 +47,7 @@ export async function deliverBriefNotices() {
     claim:async()=>{const {data,error}=await ledger.rpc('claim_buyer_brief_notifications');if(error)throw new Error('notification_claim_failed');return(data??[]) as BriefNotice[]},
     send:async(email,idempotencyKey)=>{
       const r=await fetch('https://api.resend.com/emails',{method:'POST',redirect:'error',signal:AbortSignal.timeout(10000),headers:{Authorization:`Bearer ${key}`,'Content-Type':'application/json','Idempotency-Key':idempotencyKey},body:JSON.stringify({from,...email})})
-      if(!r.ok)throw new Error('email_provider_refused')
+      if(!r.ok){console.error('[BUYER_BRIEF_EMAIL_PROVIDER_REFUSED]',r.status);throw new Error('email_provider_refused')}
       const result=await r.json();if(typeof result.id!=='string')throw new Error('email_provider_missing_id');return result.id
     },
     finish:async(event,providerId)=>{

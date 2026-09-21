@@ -1589,10 +1589,19 @@
     },
     {
       "id": "cabezon-buyer-brief-pack",
-      "status": "withheld",
+      "status": "active",
       "canonicalResource": "https://www.mahastrategies.com/api/v1/cabezon/buyer-brief",
       "method": "POST",
-      "payment": null,
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "20000000",
+        "displayAmount": "20.000000 USDC"
+      },
       "schemas": {
         "input": "https://www.mahastrategies.com/api/discovery/x402-offers/cabezon-buyer-brief-pack#input",
         "output": "https://www.mahastrategies.com/api/discovery/x402-offers/cabezon-buyer-brief-pack#output"
