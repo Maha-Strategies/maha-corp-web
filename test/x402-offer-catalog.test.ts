@@ -113,7 +113,7 @@ test('only routes that actually release their slot can be priced', () => {
   for (const offer of X402_OFFERS.filter((candidate) => candidate.status !== 'available')) {
     // Implementation and publication are different gates. The calculation
     // handlers release slots but remain withheld until preview/release review.
-    const implementedWithheld = isMicroProduct(offer.id) || ['celestial-position-snapshot', 'celestial-chart-evidence', 'celestial-vimshottari-timing'].includes(offer.id)
+    const implementedWithheld = isMicroProduct(offer.id) || ['celestial-position-snapshot', 'celestial-chart-evidence', 'celestial-vimshottari-timing', 'cabezon-buyer-brief-pack'].includes(offer.id)
     assert.equal(releasesSlot(offer.method, offer.path), implementedWithheld, `${offer.id} slot-release implementation`)
   }
   // The allowlist is exact, so a listed route does not vouch for its children.

@@ -3,6 +3,7 @@ import { parseMpsAuditJobRequest } from '../mps-audit-jobs.ts'
 import { parseResearchIntakeInput, researchIntakeInputHash } from '../research-intake-evidence-pack.ts'
 import type { AdmissionClaim } from './admission.ts'
 import type { X402Offer } from './offers.ts'
+import { BUYER_BRIEF_ID, briefOrderHash, parseBriefOrder } from './buyer-brief-contract.ts'
 
 export type AdmissionBodyDecision =
   | { ok: true }
@@ -23,7 +24,7 @@ export async function validateAdmissionBody(
   offer: X402Offer,
   claim: AdmissionClaim,
 ): Promise<AdmissionBodyDecision> {
-  if (!['mps-autonomous-audit', 'research-intake-evidence-pack'].includes(offer.id)) return { ok: true }
+  if (!['mps-autonomous-audit', 'research-intake-evidence-pack', BUYER_BRIEF_ID].includes(offer.id)) return { ok: true }
 
   if (!request.headers.get('content-type')?.toLowerCase().startsWith('application/json')) {
     return { ok: false, status: 415, code: 'unsupported_media_type', message: 'Content-Type must be application/json. No payment was taken.' }
@@ -42,6 +43,13 @@ export async function validateAdmissionBody(
 
   try {
     const parsed = JSON.parse(raw)
+    if (offer.id === BUYER_BRIEF_ID) {
+      const order = parseBriefOrder(parsed)
+      if (order.clientRequestId !== claim.idempotencyKey || briefOrderHash(order) !== claim.inputHash) {
+        return { ok: false, status: 409, code: 'order_binding_mismatch', message: 'Order body does not match admission headers. No payment was taken.' }
+      }
+      return { ok: true }
+    }
     const body = offer.id === 'mps-autonomous-audit'
       ? parseMpsAuditJobRequest(parsed)
       : parseResearchIntakeInput(parsed)

@@ -52,6 +52,7 @@
     ],
     "bindingCommitment": "Fourteen bounded machine products accept autonomous x402 payment on Base Mainnet under their published terms. A live PAYMENT-REQUIRED challenge is the only proof an offer can be bought. Idempotent model-backed jobs validate request identity and input hashes before settlement and are resumable without another payment. The book-section products sell exact section retrieval; the complete-edition products sell one complete structured delivery with a non-exclusive internal machine-use licence. The public web editions remain free, and no book offer transfers copyright or grants redistribution, resale, or model-training rights. The GPU optimization capabilities are not x402 products. Stripe products require purchaser confirmation, and custom research or enterprise engagements require human scope review.",
     "describedNotPayable": [
+      "cabezon-buyer-brief-pack",
       "dimensional-consistency-check",
       "exact-interpolation-receipt",
       "sampled-series-integration",
@@ -464,6 +465,26 @@
       "capability": "Tenant-scoped upstream inventory, explicit method and tool allowlists, and privacy-preserving gateway audit records.",
       "methodBoundary": "The canonical v1 gateway proxies JSON MCP messages to registered public HTTPS upstreams, encrypts configured bearer or HMAC upstream credentials, and requires explicit tool approval. It does not yet support private-network upstreams, upstream OAuth exchange, SSE streaming, or browser-originated calls.",
       "acquisition": "Enterprise onboarding requires human scope and security review. This manifest cannot authorize a connection or a charge."
+    },
+    {
+      "id": "cabezon-buyer-brief-pack",
+      "status": "withheld",
+      "endpoint": "https://www.mahastrategies.com/api/v1/cabezon/buyer-brief",
+      "method": "POST",
+      "description": "Prepared CABEZON Buyer-Brief Pack: source-linked service guide, guarded runnable example, public-source snapshots and JSON evidence manifest. Assisted seller-authored pilot for one service; not independent endorsement. Version-bound archive delivery with secret-bound recovery without repayment. Activation requires agreed terms and verified deployment.",
+      "payableNow": false,
+      "blockedBy": [
+        "Activation requires agreed terms, verified deployment and owner authorization; settlement remains disabled."
+      ],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "20000000",
+        "assetSymbol": "USDC",
+        "autonomous": false,
+        "payableNow": false
+      }
     },
     {
       "id": "citation-binding-check",

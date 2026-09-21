@@ -15,7 +15,13 @@ function fixture(id = 'context-compression', status = 200) {
   let output = offer.discovery.output
   if (id.startsWith('book-edition-')) output = buildBookEditionReceipt(id.endsWith('the-imagined-life') ? 'the-imagined-life' : 'the-volcanic-engine', {})
   if (id.startsWith('book-section-')) output = buildBookSectionReceipt(id.endsWith('the-imagined-life') ? 'the-imagined-life' : 'the-volcanic-engine', offer.discovery.input)
-  const requestBytes = Buffer.from(JSON.stringify(offer.discovery.input))
+  let input = offer.discovery.input
+  if (id === 'cabezon-buyer-brief-pack') {
+    const bytes = Buffer.from('synthetic buyer-brief fixture')
+    input = {...input, bundleHash: bytesDigest(bytes)}
+    output = {...output, clientRequestId: input.clientRequestId, orderId: input.clientRequestId, archive: {base64: bytes.toString('base64'), sha256: bytesDigest(bytes), bytes: bytes.length}}
+  }
+  const requestBytes = Buffer.from(JSON.stringify(input))
   const responseBytes = Buffer.from(JSON.stringify(output))
   const capture = createBuyerCapture({ provenance: 'synthetic', offerId: id, method: offer.method, resourcePath: offer.path, httpStatus: status }, requestBytes, responseBytes)
   const captureBytes = Buffer.from(JSON.stringify(capture))
@@ -32,8 +38,11 @@ function recapture(value: ReturnType<typeof fixture>) {
 }
 
 test('all declared products have repeatable offline payload checks, not live delivery claims', () => {
-  // Fourteen existing offers plus twenty-two explicitly withheld microproducts.
-  assert.equal(X402_OFFERS.length, 38)
+  // Existing catalogue plus the explicitly withheld buyer-brief contract.
+  // 37 -> 39 on reconciliation onto main: the catalogue gained two offers
+  // between this branch's original base and current main, and this count is a
+  // tripwire on the catalogue, not on the buyer-brief work.
+  assert.equal(X402_OFFERS.length, 39)
   for (const offer of X402_OFFERS) {
     const value = fixture(offer.id)
     const first = checkBuyerDelivery(value)

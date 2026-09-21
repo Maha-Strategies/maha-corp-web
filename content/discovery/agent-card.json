@@ -327,6 +327,26 @@
       "contract": "https://www.mahastrategies.com/mcp-gateway-contract.json"
     },
     {
+      "id": "cabezon-buyer-brief-pack",
+      "status": "withheld",
+      "endpoint": "https://www.mahastrategies.com/api/v1/cabezon/buyer-brief",
+      "method": "POST",
+      "description": "Prepared CABEZON Buyer-Brief Pack: source-linked service guide, guarded runnable example, public-source snapshots and JSON evidence manifest. Assisted seller-authored pilot for one service; not independent endorsement. Version-bound archive delivery with secret-bound recovery without repayment. Activation requires agreed terms and verified deployment.",
+      "payableNow": false,
+      "blockedBy": [
+        "Activation requires agreed terms, verified deployment and owner authorization; settlement remains disabled."
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "20000000",
+        "assetSymbol": "USDC",
+        "autonomous": false,
+        "payableNow": false
+      }
+    },
+    {
       "id": "citation-binding-check",
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/citation-binding-check",

@@ -3,6 +3,10 @@ import { withSentryConfig } from '@sentry/nextjs'
 import { COLLECTION_HUB_PATHS, COLLECTION_INTERNAL_PATH } from './lib/collection-hub-paths.ts'
 
 const nextConfig: NextConfig = {
+  outputFileTracingIncludes: {
+    '/api/v1/cabezon/buyer-brief': ['./content/buyer-brief/bundle.json'],
+    '/api/v1/cabezon/buyer-brief/retrieve': ['./content/buyer-brief/bundle.json'],
+  },
   // The customer-owned container uses Next's minimal standalone server. Maha's
   // Vercel builds leave this unset and retain the platform adapter.
   output: process.env.MAHA_STANDALONE_BUILD === 'true' ? 'standalone' : undefined,

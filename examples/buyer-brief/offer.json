@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "1.0.0",
+  "productId": "cabezon-buyer-brief-pack",
+  "productVersion": "review-1",
+  "title": "CABEZON Buyer-Brief Pack",
+  "price": {"currency": "USDC", "amountBaseUnits": "20000000", "network": "eip155:8453"},
+  "purchaseEnabled": false,
+  "purchaseResource": null,
+  "retrievalResource": null,
+  "scope": {"selectedService": "deep-context-evaluation", "maximumPublicSources": 5, "maximumSourceBytes": 250000, "correctionPasses": 1, "assisted": true},
+  "activationGates": ["buyer accepts frozen input scope and terms", "order-bound 20 USDC quote deployed and verified", "payment-to-order binding and replay protection tested", "retrieval without repayment tested", "delivery and refund responsibilities agreed", "buyer separately authorizes payment"],
+  "independentEndorsement": false,
+  "paidExecutionVerified": false
+}

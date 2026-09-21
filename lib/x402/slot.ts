@@ -74,6 +74,7 @@ export function withSlotRelease<Args extends unknown[]>(
  * or by carrying the token through to whatever observes the work finish.
  */
 export const SLOT_RELEASING_ROUTES = [
+  'POST /api/v1/cabezon/buyer-brief',
   ...MICRO_IDS.map(id => `POST ${microPath(id)}`),
   'POST /api/v1/compress',
   // Wrapped in withSlotRelease, whose `finally` frees the slot on success,

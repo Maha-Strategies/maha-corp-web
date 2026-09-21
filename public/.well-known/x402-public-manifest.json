@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "configurationAsOf": "2026-09-13",
+  "configurationAsOf": "2026-09-20",
   "provider": {
     "name": "Maha Strategies LLC",
     "url": "https://www.mahastrategies.com"
@@ -1585,6 +1585,38 @@
         "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
         "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
         "Check up to ten declared claim-evidence relationships against a finite, versioned rule set. Reports unsupported frame transfers and missing information. Unknown combinations remain unresolved. No prose interpretation, source inspection or truth certification."
+      ]
+    },
+    {
+      "id": "cabezon-buyer-brief-pack",
+      "status": "withheld",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/cabezon/buyer-brief",
+      "method": "POST",
+      "payment": null,
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/cabezon-buyer-brief-pack#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/cabezon-buyer-brief-pack#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:507da5d87a14eece07f74bbd5797452fa78d9d97155ed81cc1da9de99958976d",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 2048,
+        "concurrencyCap": 2,
+        "requiresIdempotency": true
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "Order metadata is held in the existing payment admission ledger. The raw recovery secret is not persisted; the prepared public-source artifact is retained for recovery."
+      },
+      "capabilityBoundaries": [
+        "Prepared seller-authored artifact; no customized live analysis.",
+        "No accuracy certification, independent endorsement, video or later paid API calls.",
+        "Payment, archive delivery and buyer acceptance are separate.",
+        "Keep the 32-byte recovery secret private; its possession plus matching paid order grants archive recovery."
       ]
     }
   ],

@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {"target":"ES2022","incremental":false},
+  "include": ["next-env.d.ts","app/api/cron/buyer-brief-notifications/route.ts","app/api/v1/cabezon/buyer-brief/**/*.ts","lib/x402/buyer-brief-*.ts","examples/buyer-brief/*.ts","scripts/package-buyer-brief.ts","test/buyer-brief*.test.ts"],
+  "exclude": ["node_modules"]
+}
