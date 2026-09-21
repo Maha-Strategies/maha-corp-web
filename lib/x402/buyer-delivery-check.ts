@@ -99,7 +99,7 @@ export function checkBuyerDelivery(input: {
     return validateDiscoveryExtension(enriched).valid
   }
   if (!validate()) problems.push('request_schema_mismatch')
-  if ('clientRequestId' in request && response.clientRequestId !== request.clientRequestId) problems.push('request_id_mismatch')
+  if ('clientRequestId' in request && (offer.id === 'cabezon-buyer-brief-pack' ? response.orderId : response.clientRequestId) !== request.clientRequestId) problems.push('request_id_mismatch')
   if ('offerId' in response && response.offerId !== offer.id) problems.push('response_offer_mismatch')
   if (response.exampleOnly === true) problems.push('discovery_example_not_deliverable')
   if (response.status === 'failed') problems.push('job_failed')
@@ -108,6 +108,15 @@ export function checkBuyerDelivery(input: {
     state = 'pending'; return report()
   }
   if (!validate(response)) problems.push('response_schema_mismatch')
+  if (offer.id === 'cabezon-buyer-brief-pack') {
+    const archive = response.archive
+    if (response.productId !== offer.id || response.version !== request.version || response.orderId !== request.clientRequestId
+      || !object(archive) || typeof archive.base64 !== 'string' || archive.base64.length > 2800000
+      || bytesDigest(Buffer.from(archive.base64, 'base64')) !== request.bundleHash
+      || archive.sha256 !== request.bundleHash || Buffer.from(archive.base64, 'base64').length !== archive.bytes) {
+      problems.push('buyer_brief_archive_or_order_mismatch')
+    }
+  }
   // Calculation receipts additionally support a local deterministic replay.
   // This is not an independent proof of receipt by a remote buyer.
   if (isCelestialProduct(offer.id) && !verifyCelestialProduct(offer.id, request, response)) problems.push('calculation_receipt_or_recomputation_mismatch')
