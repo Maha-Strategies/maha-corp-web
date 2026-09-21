@@ -4,7 +4,7 @@ export const BUYER_BRIEF_OFFER: X402Offer = {
   id: BUYER_BRIEF_ID, method:'POST', path:BUYER_BRIEF_PATH, amount:BUYER_BRIEF_AMOUNT,
   description:'Prepared CABEZON Buyer-Brief Pack: new CABEZON acceptance exercise, approval-change and omission checks, incident/recovery runbook, dated public-source snapshots and acceptance report. Assisted seller-authored pilot for one service; not independent endorsement. Version-bound archive delivery with secret-bound recovery without repayment. Activation requires agreed terms and verified deployment.',
   serviceName:'Maha CABEZON Buyer-Brief Pack', tags:['cabezon','buyer-runbook','evidence','x402'], concurrencyCap:2,
-  status:'withheld', availability:{payableInProduction:false,blockedBy:['Production deployment and payment/retrieval verification pending','Buyer scope and commercial terms agreement pending']},
+  status:'available', availability:{payableInProduction:true,blockedBy:[]},
   requiresIdempotency:true, maxRequestBytes:2048,
   capabilityBoundaries:['Prepared seller-authored artifact; no customized live analysis.','No accuracy certification, independent endorsement, video or later paid API calls.','Payment, archive delivery and buyer acceptance are separate.','Keep the 32-byte recovery secret private; its possession plus matching paid order grants archive recovery.'],
   retention:{fullSourceTextStored:false,verbatimExcerptsRetained:false,retainedFields:['payer','order ID','input hash','resource','amount','payment transaction','settlement state'],note:'Order metadata is held in the existing payment admission ledger. The raw recovery secret is not persisted; the prepared public-source artifact is retained for recovery.'},

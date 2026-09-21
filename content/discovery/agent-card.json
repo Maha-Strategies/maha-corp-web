@@ -328,23 +328,20 @@
     },
     {
       "id": "cabezon-buyer-brief-pack",
-      "status": "withheld",
+      "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/cabezon/buyer-brief",
       "method": "POST",
       "description": "Prepared CABEZON Buyer-Brief Pack: new CABEZON acceptance exercise, approval-change and omission checks, incident/recovery runbook, dated public-source snapshots and acceptance report. Assisted seller-authored pilot for one service; not independent endorsement. Version-bound archive delivery with secret-bound recovery without repayment. Activation requires agreed terms and verified deployment.",
-      "payableNow": false,
-      "blockedBy": [
-        "Production deployment and payment/retrieval verification pending",
-        "Buyer scope and commercial terms agreement pending"
-      ],
+      "payableNow": true,
+      "blockedBy": [],
       "payment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
         "amount": "20000000",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "payableNow": false
+        "autonomous": true,
+        "payableNow": true
       }
     },
     {
