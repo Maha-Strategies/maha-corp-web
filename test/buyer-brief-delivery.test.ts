@@ -8,8 +8,8 @@ import { authorizeBriefRecovery, loadBriefBundle } from '../lib/x402/buyer-brief
 import { validateAdmissionBody } from '../lib/x402/admission-body.ts'
 import { apiProxyGate } from '../lib/api-proxy-policy.ts'
 const bytes=Buffer.from('synthetic archive, not a real sale')
-const bundle={version:'1.0.0',filename:'test.tar.gz',sha256:briefHash(bytes),bytes:bytes.length,base64:bytes.toString('base64'),sourceManifestHash:briefHash('sources')}
-const order=()=>({clientRequestId:'octopus-test-0001',version:'1.0.0',bundleHash:bundle.sha256,termsHash:BUYER_BRIEF_TERMS_HASH,recoverySecret:randomBytes(32).toString('hex')})
+const bundle={version:'2.0.0',filename:'test.tar.gz',sha256:briefHash(bytes),bytes:bytes.length,base64:bytes.toString('base64'),sourceManifestHash:briefHash('sources')}
+const order=()=>({clientRequestId:'octopus-test-0001',version:'2.0.0',bundleHash:bundle.sha256,termsHash:BUYER_BRIEF_TERMS_HASH,recoverySecret:randomBytes(32).toString('hex')})
 const transaction='0x'+'a'.repeat(64)
 const payer='0x'+'1'.repeat(40)
 const row=(o:ReturnType<typeof order>)=>({state:'settled',payment_transaction:transaction,input_hash:briefOrderHash(o),resource:BUYER_BRIEF_RESOURCE,amount:'20000000'})

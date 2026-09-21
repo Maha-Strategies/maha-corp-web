@@ -15,7 +15,7 @@ Do not treat running the local tests or reading the contract as authorization to
 2. GET `https://www.mahastrategies.com/api/v1/cabezon/buyer-brief`. Stop unless
    `purchaseEnabled` is true. Review the returned terms with Bryan.
 3. Pin the archive SHA-256 independently against Mayone's activation email:
-   `sha256:067bb1156b81dc95bb38ab7a0207a9ec4b9541a8b06abe3af8bd2e843c49a003`.
+   `sha256:ca1fb4bc8d43cc0f9d29b083e44bc3a009b8c94426673dd1a0f9aeb2fa6d7f6a`.
    Compare `termsHash` with `BUYER_BRIEF_TERMS_HASH` in the reviewed client revision.
 4. Generate one order with `preparePackOrder(approvedBundleHash)`. Obtain Bryan's
    explicit approval for its `briefOrderHash(order)`, exactly **20 USDC**, the

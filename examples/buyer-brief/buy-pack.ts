@@ -7,7 +7,7 @@ export const ASSET = '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913'
 import { BUYER_BRIEF_RESOURCE, BUYER_BRIEF_TERMS_HASH, briefHash, briefOrderHash, parseBriefOrder, type BriefOrder } from '../../lib/x402/buyer-brief-contract.ts'
 
 export function preparePackOrder(bundleHash:string):BriefOrder {
-  return parseBriefOrder({clientRequestId:'octopus-'+randomUUID(),version:'1.0.0',bundleHash,termsHash:BUYER_BRIEF_TERMS_HASH,recoverySecret:randomBytes(32).toString('hex')})
+  return parseBriefOrder({clientRequestId:'octopus-'+randomUUID(),version:'2.0.0',bundleHash,termsHash:BUYER_BRIEF_TERMS_HASH,recoverySecret:randomBytes(32).toString('hex')})
 }
 export function validatePackDelivery(value:unknown,order:BriefOrder) {
   const v=value as {productId:string;version:string;orderId:string;transaction:string;archive:{base64:string;sha256:string;bytes:number}}

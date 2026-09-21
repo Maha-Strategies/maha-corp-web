@@ -27,7 +27,7 @@ test('provider failure remains retryable; retries use stable idempotency key',as
 test('unacknowledged provider acceptance propagates rather than silently losing event',async()=>{
   await assert.rejects(dispatchBriefNotices({claim:async()=>[event],send:async()=> 'mail-123',finish:async()=>{throw Error('database down')}}))
 })
-const order=()=>({clientRequestId:'test-order-123',version:'1.0.0',bundleHash:briefHash('archive'),termsHash:BUYER_BRIEF_TERMS_HASH,recoverySecret:randomBytes(32).toString('hex')})
+const order=()=>({clientRequestId:'test-order-123',version:'2.0.0',bundleHash:briefHash('archive'),termsHash:BUYER_BRIEF_TERMS_HASH,recoverySecret:randomBytes(32).toString('hex')})
 const req=(body:unknown)=>new Request(BUYER_BRIEF_RESOURCE+'/support',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
 test('missing notification readiness prevents payment',async()=>{
   const h=buyerBriefHandlers({enabled:true,notificationsReady:async()=>false,resolve:async()=>{assert.fail('no settlement')}})
