@@ -70,9 +70,9 @@ test('gateway admission independently checks body binding',async()=>{
   assert.deepEqual(await validateAdmissionBody(request(o),BUYER_BRIEF_OFFER,claim),{ok:true})
   assert.equal((await validateAdmissionBody(request(o),BUYER_BRIEF_OFFER,{...claim,inputHash:briefHash('wrong')})).ok,false)
 })
-test('exact self-managed paths only; generated artifact bytes pass integrity check',async()=>{
+test('exact self-managed paths only',async()=>{
   assert.equal(apiProxyGate('/api/v1/cabezon/buyer-brief','POST',true),'self_managed')
   assert.equal(apiProxyGate('/api/v1/cabezon/buyer-brief/retrieve','POST',true),'self_managed')
   assert.equal(apiProxyGate('/api/v1/cabezon/buyer-brief/other','POST',true),'protected')
-  const real=await loadBriefBundle();assert.ok(real.bytes>0)
+  assert.equal(apiProxyGate('/api/v1/cabezon/buyer-brief/support','POST',true),'self_managed')
 })

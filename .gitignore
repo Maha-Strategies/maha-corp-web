@@ -71,6 +71,16 @@ yarn-error.log*
 
 # vercel
 .vercel
+/content/buyer-brief/
+# Paid authoring material belongs in private storage, never this public repo.
+/examples/buyer-brief/BUYER-BRIEF.md
+/examples/buyer-brief/RUNBOOK.md
+/examples/buyer-brief/offer.json
+/examples/buyer-brief/purchase.ts
+/examples/buyer-brief/run-report.template.json
+/examples/buyer-brief/run.ts
+/scripts/package-buyer-brief.ts
+/test/buyer-brief.test.ts
 
 # typescript
 *.tsbuildinfo

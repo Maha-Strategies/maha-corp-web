@@ -2,7 +2,8 @@ import assert from 'node:assert/strict'
 import { randomBytes, randomUUID } from 'node:crypto'
 import { open, readFile } from 'node:fs/promises'
 import { createPaidFetch, type TypedDataSigner } from '../../lib/x402/client.ts'
-import { PAYEE, ASSET } from '../context-growth/workflow.ts'
+export const PAYEE = '0xec84c1cd6602bbe387bc8e6f0d3c062f2762de28'
+export const ASSET = '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913'
 import { BUYER_BRIEF_RESOURCE, BUYER_BRIEF_TERMS_HASH, briefHash, briefOrderHash, parseBriefOrder, type BriefOrder } from '../../lib/x402/buyer-brief-contract.ts'
 
 export function preparePackOrder(bundleHash:string):BriefOrder {

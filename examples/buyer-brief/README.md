@@ -1,38 +1,91 @@
-# CABEZON Buyer-Brief Pack — review release 1
+# Free purchase and recovery client
 
-Prepared by Maha Strategies for the invited Octopus demonstration. This is an assisted seller-authored package, not an independent endorsement or an organic-demand result.
+This directory is the **unpaid purchasing interface**, not the paid Buyer-Brief archive.
+The initial archive was inadvertently published in repository history. Removing it
+from current files does not retract historical copies. Purchases remain withheld;
+this guide is not an activation notice or a claim that the old edition is exclusive.
+It never obtains or stores a private key. Octopus must provide its own wallet signer.
+Do not treat running the local tests or reading the contract as authorization to pay.
 
-**The proposed $20 package purchase is disabled.** This archive is ready for technical and scope review. It is not a deployed $20 offer, an invoice, or permission to transfer funds. `offer.json` lists the outstanding activation gates. Do not pay $20 to the evaluation endpoint: that is a different product.
+## Before signing
 
-## What this pack gives Octopus
+1. Discover Maha through the CABEZON directory and record the actual identity and
+   reputation checks performed. An unavailable check is not a pass. Those checks
+   do not authorize spending or guarantee the contents of the pack.
+2. GET `https://www.mahastrategies.com/api/v1/cabezon/buyer-brief`. Stop unless
+   `purchaseEnabled` is true. Review the returned terms with Bryan.
+3. Pin the archive SHA-256 independently against Mayone's activation email:
+   `sha256:067bb1156b81dc95bb38ab7a0207a9ec4b9541a8b06abe3af8bd2e843c49a003`.
+   Compare `termsHash` with `BUYER_BRIEF_TERMS_HASH` in the reviewed client revision.
+4. Generate one order with `preparePackOrder(approvedBundleHash)`. Obtain Bryan's
+   explicit approval for its `briefOrderHash(order)`, exactly **20 USDC**, the
+   resource, recipient, terms, expiry and one purchase attempt. No extra fees,
+   further evaluation calls, approvals, swaps, bridges or direct transfers are authorized.
 
-- A source-linked buyer brief (`BUYER-BRIEF.md`).
-- A bounded discovery, authorization and delivery runbook (`RUNBOOK.md`).
-- A complete synthetic Deep Context Evaluation request, an expected local result and a deliberately insufficient-budget negative control.
-- A one-call purchase adapter with exact quote checks, a request-bound approval and a durable attempt lock. There is deliberately no paid CLI command or bundled wallet.
-- Saved public source bytes, acquisition times and SHA-256 hashes; a machine-readable offer, brief and run-report template.
+## Local safety tests
 
-Node.js 22.18+ or 24+; no npm install:
+From the repository root, with Node.js 24 or later:
 
 ```sh
-node --experimental-strip-types --test test/buyer-brief.test.ts
-node --experimental-strip-types examples/buyer-brief/run.ts local
-node --experimental-strip-types examples/buyer-brief/run.ts request
-node --experimental-strip-types examples/buyer-brief/run.ts quote
+node --experimental-strip-types --test test/buyer-brief-pack-client.test.ts
 ```
 
-`local` and tests use no network. `quote` sends only the synthetic request, without payment headers, and stops unless the returned terms match the pinned 0.01 USDC evaluation offer. No mode signs or spends. A fresh quote is required at purchase; saved source snapshots are historical observations.
+These tests use synthetic responses and signatures. They make no payments and
+do not demonstrate live settlement.
 
-The importable `purchaseEvaluation` in `purchase.ts` takes a caller-controlled signer and an independently approved request digest/expiry. It buys only the example's 0.01 USDC evaluation, not this $20 pack. Using it requires separate authorization. Keep its lock in durable storage shared by all processes for this order; it is not a distributed wallet spending-policy service. Never delete the lock and retry after an ambiguous outcome.
+## Buyer-controlled integration
 
-Run `node --experimental-strip-types examples/buyer-brief/run.ts verify` to verify package file hashes. The separately communicated archive SHA-256 is the external integrity pin: a manifest inside an archive alone is not authenticity evidence.
+Import `preparePackOrder`, `purchasePack` and `recoverPack` from `buy-pack.ts`;
+import `briefOrderHash` from `../../lib/x402/buyer-brief-contract.ts`.
+Connect `signTypedData` to Octopus's existing secure wallet interface. Do not
+send credentials to Maha or put them in this repository.
 
-## Proposed commercial scope — agreement required
+```ts
+const order = preparePackOrder(approvedBundleHash)
+// Pause here for Bryan's approval of this exact hash and the terms.
+const inputHash = briefOrderHash(order)
+const result = await purchasePack({
+  order,
+  address: octopusWalletAddress,
+  signTypedData: octopusWalletSignTypedData,
+  statePath: privateDurableOrderStatePath,
+  approval: {
+    reference: bryanApprovalReference,
+    inputHash,
+    amountBaseUnits: '20000000',
+    expiresAt: bryanApprovedExpiryISO,
+  },
+})
+// Save result.archiveBytes privately, then inspect before extracting/running.
+```
 
-20 USDC covers one seller-authored pack for one selected Maha service, using at most five agreed public source snapshots and at most 250,000 UTF-8 source-text bytes in total. No private data, live buyer documents, video, independent security audit, open-ended integration or subsequent API purchases. One correction pass for errors against those frozen sources, requested within seven calendar days of delivery.
+The placeholders above belong to the buyer's wallet application; this is not a
+standalone CLI with an embedded wallet. The helper verifies the unsigned 402
+before signing: Base chain 8453, native USDC
+`0x833589fcd6edb6e08f4c7c32d4f71b54bda02913`, amount 20,000,000 base units,
+Maha recipient `0xec84c1cd6602bbe387bc8e6f0d3c062f2762de28`, exact resource,
+and a bounded authorization lifetime. It saves a mode-0600, exclusive-create
+recovery file **before** signing and refuses another attempt using that path.
 
-Proposed delivery: the prepared archive immediately in the paid API response, with secret-bound retrieval without repayment if the response is lost. Acceptance checks are in RUNBOOK.md. Seller-approved remedy: restore access or correct covered defects within two business days; otherwise refund the 20 USDC purchase price after order verification. Wallet/network fees and refund destination verification must be expressly agreed before activation. Contact: mayone@mahastrategies.com. Maha has approved this remedy; Bryan has not yet accepted the purchase terms.
+An error or timeout after signing is an unknown outcome, not permission to retry
+payment. Keep the saved state. Call `recoverPack(privateDurableOrderStatePath)`:
+it sends no payment authorization and asks for no new signature. If recovery
+fails, contact `mayone@mahastrategies.com` with the order ID. Never email the
+recovery secret, state file, payment signature or private key.
 
-For support, `requestPackSupport(statePath, kind)` in `buy-pack.ts` submits a free authenticated ticket. Kind is `delivery_problem`, `correction_requested`, or `refund_requested`. It uses the saved private order locally and never requests a payment. A queued ticket is not confirmation of email delivery or refund execution. Email any details to Mayone with the order ID only; never email the recovery secret. Seller notices cover recorded purchases and these issues; the pack normally needs no manual fulfillment.
+`requestPackSupport(statePath, kind)` accepts `delivery_problem`,
+`correction_requested` or `refund_requested`. A queued ticket is not a delivered
+email or completed refund. Email Mayone if acknowledgement is unavailable.
 
-The $20 checkout must bind an order to the exact product/version, source manifest and delivery terms, support retrieval without repayment, and separate settlement, delivery and acceptance. None of those production capabilities is claimed by this review archive.
+## Acceptance and evidence
+
+Verify the returned archive bytes against the independently pinned hash and
+inspect archive paths before extraction. Check the manifest and run its local
+synthetic tests. Record separately: discovery, identity/reputation observations,
+human authorization, payment receipt, independently checked chain transfer,
+verified archive delivery, and Bryan's acceptance. Do not include private state
+or payment signatures in a public or signed report.
+
+Classify this as an **invited, assisted, real-payment test** if Bryan proceeds.
+It is not evidence of unprompted demand or repeat real-work use. Later paid API
+calls inside the pack require their own approval; they are not included in $20.

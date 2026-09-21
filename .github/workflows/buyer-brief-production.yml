@@ -1,0 +1,34 @@
+name: Buyer-Brief private production artifact
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        type: choice
+        options: [inspect, prepare, notification-test]
+        default: inspect
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: buyer-brief-production
+  cancel-in-progress: false
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: production-database
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node --experimental-strip-types scripts/prepare-buyer-brief-production.ts
+        env:
+          BUYER_BRIEF_OPERATION: ${{ inputs.operation }}
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          BUYER_BRIEF_ARTIFACT_1: ${{ secrets.BUYER_BRIEF_ARTIFACT_1 }}
+          BUYER_BRIEF_ARTIFACT_2: ${{ secrets.BUYER_BRIEF_ARTIFACT_2 }}
+          BUYER_BRIEF_ARTIFACT_3: ${{ secrets.BUYER_BRIEF_ARTIFACT_3 }}
+          BUYER_BRIEF_ARTIFACT_4: ${{ secrets.BUYER_BRIEF_ARTIFACT_4 }}

@@ -99,7 +99,7 @@ export function checkBuyerDelivery(input: {
     return validateDiscoveryExtension(enriched).valid
   }
   if (!validate()) problems.push('request_schema_mismatch')
-  if ('clientRequestId' in request && response.clientRequestId !== request.clientRequestId) problems.push('request_id_mismatch')
+  if ('clientRequestId' in request && (offer.id === 'cabezon-buyer-brief-pack' ? response.orderId : response.clientRequestId) !== request.clientRequestId) problems.push('request_id_mismatch')
   if ('offerId' in response && response.offerId !== offer.id) problems.push('response_offer_mismatch')
   if (response.exampleOnly === true) problems.push('discovery_example_not_deliverable')
   if (response.status === 'failed') problems.push('job_failed')

@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
+import { randomBytes } from 'node:crypto'
+import { briefOrderHash, parseBriefOrder } from '../lib/x402/buyer-brief-contract.ts'
 
 import { priceFor, requirementFor, x402Config, type X402Config } from '../lib/x402/config.ts'
 import { resolveX402 } from '../lib/x402/gateway.ts'
@@ -10,7 +12,6 @@ import { buildTypedData, createPaidFetch, encodePaymentSignature } from '../lib/
 import { parsePaymentHeader, matchesPaymentContext, PAYMENT_REQUIRED_HEADER, PAYMENT_SIGNATURE_HEADER } from '../lib/x402/protocol.ts'
 import { auditInputHash } from '../lib/mps-audit-engine.ts'
 import { parseResearchIntakeInput, researchIntakeInputHash } from '../lib/research-intake-evidence-pack.ts'
-import { BUYER_BRIEF_ID, briefOrderHash } from '../lib/x402/buyer-brief-contract.ts'
 import type { X402Offer } from '../lib/x402/offers.ts'
 
 // The interoperability regression this file exists to prevent.
@@ -84,23 +85,20 @@ function serverBackedFetch(capture: { header?: string }) {
 
 /** Drives the shipped client end to end and returns the header it produced. */
 function requestForOffer(offer: X402Offer): { body: string; headers: Record<string, string> } {
-  const input = offer.discovery.input
+  const input = offer.id === 'cabezon-buyer-brief-pack'
+    ? { ...offer.discovery.input, recoverySecret: randomBytes(32).toString('hex') }
+    : offer.discovery.input
   const clientRequestId = String(input.clientRequestId ?? IDEMPOTENT['x-maha-idempotency-key'])
   const headers: Record<string, string> = { 'content-type': 'application/json' }
-  // The buyer-brief discovery example carries a placeholder where the buyer's
-  // own recovery secret goes, because publishing a real one would hand over
-  // archive recovery. Substitute a throwaway secret so the generic harness can
-  // exercise the offer at all; the hash must then be the order hash.
-  const body = offer.id === BUYER_BRIEF_ID ? { ...input, recoverySecret: 'a1b2c3d4'.repeat(8) } : input
   if (offer.requiresIdempotency) {
     headers['x-maha-idempotency-key'] = clientRequestId
-    headers['x-maha-input-hash'] = offer.id === BUYER_BRIEF_ID
-      ? briefOrderHash(body as Parameters<typeof briefOrderHash>[0])
+    headers['x-maha-input-hash'] = offer.id === 'cabezon-buyer-brief-pack'
+      ? briefOrderHash(parseBriefOrder(input))
       : offer.id === 'research-intake-evidence-pack'
-        ? researchIntakeInputHash(parseResearchIntakeInput(input))
-        : auditInputHash(String(input.text))
+      ? researchIntakeInputHash(parseResearchIntakeInput(input))
+      : auditInputHash(String(input.text))
   }
-  return { body: JSON.stringify(body), headers }
+  return { body: JSON.stringify(input), headers }
 }
 
 async function headerFromRealClient(offer: X402Offer): Promise<string> {

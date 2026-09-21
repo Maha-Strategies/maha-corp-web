@@ -181,6 +181,8 @@ const PRIVATE_ROUTES = new Set([
   // Tenant witness receipt retention is a private scheduled maintenance route
   // authenticated by CRON_SECRET, not a customer-callable REST operation.
   '/api/cron/computational-witness-retention',
+  // Seller-only outbox dispatcher, authenticated by CRON_SECRET.
+  '/api/cron/buyer-brief-notifications',
   '/api/conversion-events',
   '/api/cron/utility-upload-cleanup',
   '/api/mps-audits/[auditId]',

@@ -136,6 +136,10 @@ export function x402Config(environment: Environment = process.env): X402Config |
 
   const catalogContradictions: string[] = []
   const resources = parseResources(environment.X402_RESOURCES, catalogContradictions)
+  // Add this exact offer without replacing the existing sensitive resource list.
+  if(environment.X402_BUYER_BRIEF_ENABLED==='true' && !resources.some(r=>r.offerId==='cabezon-buyer-brief-pack')) {
+    resources.push(...parseResources(JSON.stringify([{method:'POST',path:'/api/v1/cabezon/buyer-brief'}]),catalogContradictions))
+  }
   if (resources.length === 0) throw new Error('X402_RESOURCES must define at least one priced resource.')
   // Separate additive opt-in: preserve the existing sensitive resource binding verbatim.
   // This never enables withheld products or repairs malformed existing configuration.

@@ -45,10 +45,8 @@ export async function validateAdmissionBody(
     const parsed = JSON.parse(raw)
     if (offer.id === BUYER_BRIEF_ID) {
       const order = parseBriefOrder(parsed)
-      if (order.clientRequestId !== claim.idempotencyKey || briefOrderHash(order) !== claim.inputHash) {
-        return { ok: false, status: 409, code: 'order_binding_mismatch', message: 'Order body does not match admission headers. No payment was taken.' }
-      }
-      return { ok: true }
+      if (order.clientRequestId !== claim.idempotencyKey || briefOrderHash(order) !== claim.inputHash) return {ok:false,status:409,code:'order_binding_mismatch',message:'Order does not match admission headers. No payment was taken.'}
+      return {ok:true}
     }
     const body = offer.id === 'mps-autonomous-audit'
       ? parseMpsAuditJobRequest(parsed)

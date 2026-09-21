@@ -1,12 +1,14 @@
-import { readFile } from 'node:fs/promises'
-import { join } from 'node:path'
 import { createAgentInquiryLedger } from '../agent-inquiry-ledger.ts'
 import { briefHash, briefOrderHash, BUYER_BRIEF_AMOUNT, BUYER_BRIEF_ID, BUYER_BRIEF_RESOURCE, BUYER_BRIEF_VERSION, type BriefOrder } from './buyer-brief-contract.ts'
 export type BriefBundle = { version:string; filename:string; sha256:string; bytes:number; base64:string; sourceManifestHash:string }
 export async function loadBriefBundle(): Promise<BriefBundle> {
-  const b = JSON.parse(await readFile(join(process.cwd(),'content/buyer-brief/bundle.json'),'utf8')) as BriefBundle
+  const ledger=createAgentInquiryLedger()
+  if(!ledger)throw new Error('artifact_store_unavailable')
+  const {data,error}=await ledger.storage.from('buyer-brief-private').download('v1/067bb1156b81dc95bb38ab7a0207a9ec4b9541a8b06abe3af8bd2e843c49a003.json')
+  if(error||!data||data.size>2800000)throw new Error('artifact_store_unavailable')
+  const b = JSON.parse(await data.text()) as BriefBundle
   const bytes=Buffer.from(b.base64,'base64')
-  if (b.version !== BUYER_BRIEF_VERSION || bytes.length !== b.bytes || briefHash(bytes)!==b.sha256 || b.bytes>2000000) throw new Error('bundle_integrity_failure')
+  if (b.version !== BUYER_BRIEF_VERSION || bytes.length !== b.bytes || briefHash(bytes)!==b.sha256 || b.sha256!=='sha256:067bb1156b81dc95bb38ab7a0207a9ec4b9541a8b06abe3af8bd2e843c49a003' || b.bytes>2000000) throw new Error('bundle_integrity_failure')
   return b
 }
 export type PaidBriefRecord = {state:string;payment_transaction:string|null;input_hash:string;resource:string;amount:string|number}

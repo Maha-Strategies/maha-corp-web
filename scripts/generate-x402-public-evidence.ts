@@ -24,7 +24,7 @@ const DIMENSIONS_SOURCE = 'content/x402/conformance-dimensions.json'
 // configuration changes, not on every run. A value that moved on each build
 // would be a build timestamp wearing a configuration label, and would make
 // "as of" impossible to reason about.
-const CONFIGURATION_AS_OF = '2026-09-20'
+const CONFIGURATION_AS_OF = '2026-09-21'
 
 const manifest = buildPublicManifest(CONFIGURATION_AS_OF)
 const forbiddenInManifest = findForbiddenInManifest(manifest)
@@ -40,8 +40,6 @@ const dimensions = JSON.parse(readFileSync(DIMENSIONS_SOURCE, 'utf8')) as {
 
 const conformance = {
   schemaVersion: '1.0.0' as const,
-  // Retain the historical conformance evidence date: adding a withheld offer
-  // is not a fresh protocol-conformance run for the recorded subject.
   configurationAsOf: '2026-09-13',
   subject: dimensions.subject,
   verdicts: {

@@ -13,14 +13,14 @@ import { buildBookSectionReceipt } from '../lib/x402/book-section-product.ts'
 function fixture(id = 'context-compression', status = 200) {
   const offer = offerById(id)!
   let output = offer.discovery.output
-  if (id.startsWith('book-edition-')) output = buildBookEditionReceipt(id.endsWith('the-imagined-life') ? 'the-imagined-life' : 'the-volcanic-engine', {})
-  if (id.startsWith('book-section-')) output = buildBookSectionReceipt(id.endsWith('the-imagined-life') ? 'the-imagined-life' : 'the-volcanic-engine', offer.discovery.input)
   let input = offer.discovery.input
   if (id === 'cabezon-buyer-brief-pack') {
     const bytes = Buffer.from('synthetic buyer-brief fixture')
-    input = {...input, bundleHash: bytesDigest(bytes)}
-    output = {...output, clientRequestId: input.clientRequestId, orderId: input.clientRequestId, archive: {base64: bytes.toString('base64'), sha256: bytesDigest(bytes), bytes: bytes.length}}
+    input = { ...input, bundleHash: bytesDigest(bytes) }
+    output = { ...output, orderId: input.clientRequestId, archive: { base64: bytes.toString('base64'), sha256: bytesDigest(bytes), bytes: bytes.length } }
   }
+  if (id.startsWith('book-edition-')) output = buildBookEditionReceipt(id.endsWith('the-imagined-life') ? 'the-imagined-life' : 'the-volcanic-engine', {})
+  if (id.startsWith('book-section-')) output = buildBookSectionReceipt(id.endsWith('the-imagined-life') ? 'the-imagined-life' : 'the-volcanic-engine', offer.discovery.input)
   const requestBytes = Buffer.from(JSON.stringify(input))
   const responseBytes = Buffer.from(JSON.stringify(output))
   const capture = createBuyerCapture({ provenance: 'synthetic', offerId: id, method: offer.method, resourcePath: offer.path, httpStatus: status }, requestBytes, responseBytes)
@@ -38,10 +38,6 @@ function recapture(value: ReturnType<typeof fixture>) {
 }
 
 test('all declared products have repeatable offline payload checks, not live delivery claims', () => {
-  // Existing catalogue plus the explicitly withheld buyer-brief contract.
-  // 37 -> 39 on reconciliation onto main: the catalogue gained two offers
-  // between this branch's original base and current main, and this count is a
-  // tripwire on the catalogue, not on the buyer-brief work.
   assert.equal(X402_OFFERS.length, 39)
   for (const offer of X402_OFFERS) {
     const value = fixture(offer.id)
@@ -51,6 +47,16 @@ test('all declared products have repeatable offline payload checks, not live del
     assert.equal(first.settlement, 'not_checked')
     assert.deepEqual(checkBuyerDelivery(value), first)
     assert.equal('retrievalToken' in first, false)
+  }
+})
+
+test('Buyer-Brief archive mutations fail even with a newly pinned capture', () => {
+  for (const field of ['base64', 'sha256', 'bytes']) {
+    const value = fixture('cabezon-buyer-brief-pack')
+    const body = JSON.parse(value.responseBytes.toString())
+    body.archive[field] = field === 'bytes' ? 999 : 'changed'
+    value.responseBytes = Buffer.from(JSON.stringify(body))
+    assert.ok(checkBuyerDelivery(recapture(value)).problems.includes('buyer_brief_archive_or_order_mismatch'))
   }
 })
 

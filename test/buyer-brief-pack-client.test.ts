@@ -5,7 +5,7 @@ import { join } from 'node:path'
 import { tmpdir } from 'node:os'
 import { preparePackOrder,purchasePack,recoverPack,validatePackDelivery } from '../examples/buyer-brief/buy-pack.ts'
 import { briefHash,briefOrderHash,BUYER_BRIEF_RESOURCE,BUYER_BRIEF_TERMS_HASH } from '../lib/x402/buyer-brief-contract.ts'
-import { PAYEE,ASSET } from '../examples/context-growth/workflow.ts'
+import { PAYEE,ASSET } from '../examples/buyer-brief/buy-pack.ts'
 const bytes=Buffer.from('synthetic bundle');const order=preparePackOrder(briefHash(bytes));const tx='0x'+'a'.repeat(64)
 const delivery={productId:'cabezon-buyer-brief-pack',version:'1.0.0',orderId:order.clientRequestId,transaction:tx,archive:{base64:bytes.toString('base64'),sha256:briefHash(bytes),bytes:bytes.length}}
 const terms={scheme:'exact',network:'eip155:8453',amount:'20000000',asset:ASSET,payTo:PAYEE,maxTimeoutSeconds:60,extra:{name:'USD Coin',version:'2'}}
