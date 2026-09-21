@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "maha-policy-readiness/1.0",
+  "asOf": "2026-09-19",
+  "counts": {
+    "answerDrafts": 12,
+    "optionsBriefsForReview": 8,
+    "currentBaselineHolds": 4,
+    "sourcePackets": 15,
+    "publicationApproved": 0
+  },
+  "answers": [
+    {
+      "slug": "housing-affordability",
+      "state": "options-brief",
+      "position": "draft option",
+      "costs": "uncosted",
+      "sources": [
+        "hud-zoning",
+        "constitution"
+      ],
+      "gaps": [
+        "No selected locality, current local housing dataset or scored funding package.",
+        "Inspect original studies before claiming a causal effect size."
+      ],
+      "publicationApproved": false
+    },
+    {
+      "slug": "healthcare-costs",
+      "state": "options-brief",
+      "position": "draft option",
+      "costs": "uncosted",
+      "sources": [
+        "cms-spending",
+        "constitution"
+      ],
+      "gaps": [
+        "No service-specific causal study, payment-authority analysis or budget score yet."
+      ],
+      "publicationApproved": false
+    },
+    {
+      "slug": "food-quality-affordability",
+      "state": "options-brief",
+      "position": "draft option",
+      "costs": "uncosted",
+      "sources": [
+        "ers-food",
+        "constitution"
+      ],
+      "gaps": [
+        "Nutrition measure, health-effect evidence and statutory funding analysis not completed."
+      ],
+      "publicationApproved": false
+    },
+    {
+      "slug": "federal-spending-debt",
+      "state": "options-brief",
+      "position": "undecided",
+      "costs": "uncosted",
+      "sources": [
+        "cbo-outlook",
+        "constitution"
+      ],
+      "gaps": [
+        "No approved tax/benefit choices or independent score; full tariff update not inspected."
+      ],
+      "publicationApproved": false
+    },
+    {
+      "slug": "borders-asylum-immigration",
+      "state": "revise-current-baseline",
+      "position": "undecided",
+      "costs": "uncosted",
+      "sources": [
+        "asylum-statute",
+        "constitution"
+      ],
+      "gaps": [
+        "Current regulations, executive measures, injunctions and agency caseloads remain unverified. Publication held."
+      ],
+      "publicationApproved": false
+    },
+    {
+      "slug": "schools-skilled-work",
+      "state": "options-brief",
+      "position": "draft option",
+      "costs": "uncosted",
+      "sources": [
+        "ed-role",
+        "dol-apprenticeship"
+      ],
+      "gaps": [
+        "Local baseline, impact studies, employer commitments and financing not established."
+      ],
+      "publicationApproved": false
+    },
+    {
+      "slug": "reliable-affordable-energy",
+      "state": "options-brief",
+      "position": "draft option",
+      "costs": "uncosted",
+      "sources": [
+        "ferc-role"
+      ],
+      "gaps": [
+        "No portfolio model, current project-rule review or cost allocation proposal."
+      ],
+      "publicationApproved": false
+    },
+    {
+      "slug": "crime-civil-liberties",
+      "state": "revise-current-baseline",
+      "position": "draft option",
+      "costs": "uncosted",
+      "sources": [
+        "nij-hotspots"
+      ],
+      "gaps": [
+        "Recent original studies, local baseline and legal safeguards need inspection. Publication held."
+      ],
+      "publicationApproved": false
+    },
+    {
+      "slug": "use-of-military-force",
+      "state": "revise-current-baseline",
+      "position": "undecided",
+      "costs": "uncosted",
+      "sources": [
+        "constitution",
+        "war-powers"
+      ],
+      "gaps": [
+        "Current authorizations, constitutional case law and international-law analysis not completed. Publication held for any operational recommendation."
+      ],
+      "publicationApproved": false
+    },
+    {
+      "slug": "china-competition-cooperation",
+      "state": "revise-current-baseline",
+      "position": "undecided",
+      "costs": "uncosted",
+      "sources": [
+        "crs-china-historical",
+        "constitution"
+      ],
+      "gaps": [
+        "Current tariffs, export controls, diplomacy and Taiwan-related instruments remain unverified. Publication held."
+      ],
+      "publicationApproved": false
+    },
+    {
+      "slug": "ai-jobs",
+      "state": "options-brief",
+      "position": "draft option",
+      "costs": "uncosted",
+      "sources": [
+        "bls-ai"
+      ],
+      "gaps": [
+        "No worker cohort, impact evaluation or scored benefit design.",
+        "Maha’s commercial interest in AI infrastructure must remain disclosed."
+      ],
+      "publicationApproved": false
+    },
+    {
+      "slug": "ai-accountability",
+      "state": "options-brief",
+      "position": "draft option",
+      "costs": "uncosted",
+      "sources": [
+        "gao-ai",
+        "nist-ai"
+      ],
+      "gaps": [
+        "No jurisdiction-specific liability survey or legal opinion.",
+        "Maha’s evidence/governance services create a disclosed commercial interest."
+      ],
+      "publicationApproved": false
+    }
+  ],
+  "reviewBasis": "AI-assisted drafting and source inspection; no independent expert/legal/budget review or personal position approval.",
+  "evidenceDigest": "71bd2ff97257d821c2463d03691d1b96171c1d58ba282d57a710381a550b37ad",
+  "draftsDigest": "1d90333a74c343266c58c1a8e5db46db7ebfcde0191b23952982be3b7f9cae4d"
+}

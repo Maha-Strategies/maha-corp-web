@@ -188,6 +188,17 @@ export default function PolicyNode() {
         </section>
 
         <section className="evidence-section">
+          <p className="evidence-copy mb-4">
+            Separately from this doctrine, an options library compares approaches to eight everyday questions —
+            housing, healthcare, food, federal spending, schools, energy, AI and jobs, and AI accountability — without
+            selecting one. None of those briefs is an approved Maha position.
+          </p>
+          <Link href="/policy/questions" className="evidence-link">
+            Policy questions: an options library &#8599;
+          </Link>
+        </section>
+
+        <section className="evidence-section">
           <p className="evidence-copy mb-4">This doctrine draws on the analysis in our intelligence briefs and protocols.</p>
           <div className="flex flex-wrap gap-4">
             <Link href="/intelligence" className="evidence-link">
