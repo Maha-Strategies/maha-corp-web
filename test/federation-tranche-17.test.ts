@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
-import { readFileSync } from 'node:fs'
+import { readFileSync, mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join, dirname, resolve } from 'node:path'
 import { test } from 'node:test'
 
 const F = 'content/federation'
@@ -249,16 +251,33 @@ test('property shortfalls are recorded rather than absorbed', () => {
 
 /* -- determinism and privacy ----------------------------------------------- */
 
-test('artifacts and report regenerate byte-identically', () => {
+test('committed artifacts and report regenerate byte-identically in an isolated snapshot', () => {
   const paths = [
     'cohort', 'decisions', 'dependency-validation', 'dependency-remediation',
     'page-specifications', 'readiness', 'semantic-validation', 'source-inspections',
   ].map((n) => `${F}/federation-tranche-17-${n}-v1.json`)
-  const before = [...paths.map((p) => readFileSync(p, 'utf8')), report]
-  execFileSync('node', ['--experimental-strip-types', 'scripts/generate-federation-tranche-17.ts'], { stdio: 'ignore' })
-  const after = [...paths.map((p) => readFileSync(p, 'utf8')),
-    readFileSync('docs/operations/federation-tranche-17-readiness.md', 'utf8')]
-  assert.deepEqual(after, before)
+  const reportPath = 'docs/operations/federation-tranche-17-readiness.md'
+  // Other tests rewrite prior fixtures concurrently. A copy can catch a
+  // truncated file, so pin the inputs while exercising the current generator.
+  const revision = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim()
+  const fixtures = new Set([...paths, reportPath,
+    `${F}/federation-route-candidates-v2.json`, `${F}/federation-candidate-lineage-v2.json`,
+    `${F}/federation-tranche-16-dependency-validation-v1.json`,
+    ...priorCohorts.flatMap(t => [`${F}/federation-tranche-${t}-cohort-v1.json`, `${F}/federation-tranche-${t}-source-inspections-v1.json`]),
+  ])
+  const tracked = new Set(execFileSync('git', ['ls-tree', '-r', '--name-only', revision], { encoding: 'utf8' }).trim().split('\n'))
+  const root = mkdtempSync(join(tmpdir(), 'tranche17-repro-'))
+  try {
+    for (const path of fixtures) {
+      if (!tracked.has(path)) continue
+      mkdirSync(dirname(join(root, path)), { recursive: true })
+      writeFileSync(join(root, path), execFileSync('git', ['show', `${revision}:${path}`], { maxBuffer: 16000000 }))
+    }
+    const before = [...paths, reportPath].map(p => readFileSync(join(root, p), 'utf8'))
+    execFileSync(process.execPath, ['--experimental-strip-types', resolve('scripts/generate-federation-tranche-17.ts')], { cwd: root, stdio: 'ignore' })
+    const after = [...paths, reportPath].map(p => readFileSync(join(root, p), 'utf8'))
+    assert.deepEqual(after, before)
+  } finally { rmSync(root, { recursive: true, force: true }) }
 })
 
 test('no credential, private passage or review rationale enters the artifacts', () => {
