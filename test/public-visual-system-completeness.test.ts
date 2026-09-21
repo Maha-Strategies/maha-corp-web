@@ -44,7 +44,9 @@ test('every route belongs to one declared visual system', () => {
     groups.paper += 1
     const source = readFileSync(path, 'utf8')
     const ownsBoundary = source.includes('evidence-page')
-    const delegatesBoundary = /<(?:ResearchBriefServicePage|EvidenceGuide|ContextCompilerPlayground|EpistemicClearingGuidePage|PolicyFrontDoor)\b|\b(?:PolicyDiscoveryPage|renderFederationPage)\b/.test(source)
+    // The policy options library owns its boundary through PolicyReader.module.css,
+    // the same way PolicyFrontDoor and PolicyDiscoveryPage already do.
+    const delegatesBoundary = /<(?:ResearchBriefServicePage|EvidenceGuide|ContextCompilerPlayground|EpistemicClearingGuidePage|PolicyFrontDoor|PolicyExpansionEntrance|PolicyAnswerReader|PolicyMethodReader)\b|\b(?:PolicyDiscoveryPage|renderFederationPage)\b/.test(source)
     if (!ownsBoundary && !delegatesBoundary) missingPaperBoundary.push(file)
   }
 
@@ -98,7 +100,10 @@ test('every route belongs to one declared visual system', () => {
   // inherit the Knowledge overlay, adding no visual system of their own.
   // paper 129 -> 130: /caldera, a concept page for a future headquarters.
   // It owns the paper boundary directly and introduces no new renderer.
-  assert.deepEqual(groups, { paper: 130, apps: 5, books: 41, docs: 1, knowledge: 79, intelligence: 2, operator: 32, internal: 1 })
+  // paper 130 -> 133: the policy options library — its own entrance plus the
+  // question and methodology routes. All three delegate their boundary to the
+  // policy reader, introducing no new visual system.
+  assert.deepEqual(groups, { paper: 133, apps: 5, books: 41, docs: 1, knowledge: 79, intelligence: 2, operator: 32, internal: 1 })
 })
 
 test('Apps, Books, Docs, Knowledge, and Intelligence own bounded cyber-light overlays', () => {

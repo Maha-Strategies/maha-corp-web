@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "incremental": false },
+  "include": ["next-env.d.ts", "lib/policy-expansion-*.ts", "components/policy/PolicyExpansionReader.tsx", "components/policy/PolicyQuestionSearch.tsx", "app/policy/questions/**/*.tsx", "app/policy/methodology/**/*.tsx", "app/policy/page.tsx", "test/policy-expansion.test.ts", "scripts/policy-expansion-artifacts.ts"],
+  "exclude": ["node_modules"]
+}
