@@ -4,7 +4,7 @@ on:
     inputs:
       operation:
         type: choice
-        options: [inspect, prepare, notification-test]
+        options: [inspect, prepare, notification-test, delivery-test]
         default: inspect
         required: true
 permissions:

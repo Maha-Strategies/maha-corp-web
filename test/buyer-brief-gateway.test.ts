@@ -7,8 +7,8 @@ import { BUYER_BRIEF_RESOURCE, BUYER_BRIEF_TERMS_HASH, briefHash, briefOrderHash
 import { x402Config } from '../lib/x402/config.ts'
 import { resolveX402 } from '../lib/x402/gateway.ts'
 const payer='0x'+'1'.repeat(40), tx='0x'+'2'.repeat(64)
-const bytes=Buffer.from('test'), bundle={version:'1.0.0',filename:'test.tar.gz',sha256:briefHash(bytes),bytes:4,base64:bytes.toString('base64'),sourceManifestHash:briefHash('sources')}
-const order={clientRequestId:'octopus-gateway-test',version:'1.0.0',bundleHash:bundle.sha256,termsHash:BUYER_BRIEF_TERMS_HASH,recoverySecret:randomBytes(32).toString('hex')}
+const bytes=Buffer.from('test'), bundle={version:'2.0.0',filename:'test.tar.gz',sha256:briefHash(bytes),bytes:4,base64:bytes.toString('base64'),sourceManifestHash:briefHash('sources')}
+const order={clientRequestId:'octopus-gateway-test',version:'2.0.0',bundleHash:bundle.sha256,termsHash:BUYER_BRIEF_TERMS_HASH,recoverySecret:randomBytes(32).toString('hex')}
 test('real gateway: order admission settles once; replay returns same artifact; capacity refuses before settlement',async()=>{
   const config=x402Config({X402_ENABLED:'true',X402_FACILITATOR_URL:'https://facilitator.example',X402_PAY_TO:'0x'+'3'.repeat(40),X402_ASSET:'0x'+'4'.repeat(40),X402_NETWORK:'base',X402_RESOURCES:JSON.stringify([{method:'POST',path:BUYER_BRIEF_OFFER.path}])})!
   let settlements=0,paid=false,capacity=true
