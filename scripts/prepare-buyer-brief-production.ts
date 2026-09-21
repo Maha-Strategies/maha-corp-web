@@ -47,7 +47,7 @@ if(mode==='delivery-test'){
   const tx='0x'+'0'.repeat(64),payer='0x'+'0'.repeat(40)
   let gatewayCalls=0
   const h=buyerBriefHandlers({enabled:true,notificationsReady:async()=>true,load:async()=>bundle,release:async()=>{},resolve:(async()=>{gatewayCalls++;return {kind:'paid',payer,transaction:tx,header:'synthetic',slot:null}}) as never,find:async()=>({state:'settled',payment_transaction:tx,input_hash:briefOrderHash(order),resource:BUYER_BRIEF_RESOURCE,amount:'20000000'})})
-  const paid=await h.POST(new Request(BUYER_BRIEF_RESOURCE,{method:'POST',headers:{'content-type':'application/json','x-maha-idempotency-key':order.clientRequestId,'x-maha-input-hash':briefOrderHash(order)},body:JSON.stringify(order)}))
+  const paid=await h.POST(new Request(BUYER_BRIEF_RESOURCE,{method:'POST',headers:{'content-type':'application/json','payment-signature':'synthetic-not-a-real-authorization','x-maha-idempotency-key':order.clientRequestId,'x-maha-input-hash':briefOrderHash(order)},body:JSON.stringify(order)}))
   assert.equal(paid.status,200);const delivered=await paid.json();assert.ok(delivered.archive.base64===bundle.base64,'Delivered bytes differ')
   const recover=(o:typeof order)=>h.RETRIEVE(new Request(BUYER_BRIEF_RESOURCE+'/retrieve',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({payer,order:o})}))
   const recovered=await recover(order);assert.equal(recovered.status,200);assert.ok((await recovered.json()).archive.base64===bundle.base64,'Recovered bytes differ')

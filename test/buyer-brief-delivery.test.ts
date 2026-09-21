@@ -13,7 +13,7 @@ const order=()=>({clientRequestId:'octopus-test-0001',version:'2.0.0',bundleHash
 const transaction='0x'+'a'.repeat(64)
 const payer='0x'+'1'.repeat(40)
 const row=(o:ReturnType<typeof order>)=>({state:'settled',payment_transaction:transaction,input_hash:briefOrderHash(o),resource:BUYER_BRIEF_RESOURCE,amount:'20000000'})
-const request=(o:ReturnType<typeof order>,extra:Record<string,string>={})=>new Request(BUYER_BRIEF_RESOURCE,{method:'POST',headers:{'content-type':'application/json','x-maha-idempotency-key':o.clientRequestId,'x-maha-input-hash':briefOrderHash(o),...extra},body:JSON.stringify(o)})
+const request=(o:ReturnType<typeof order>,extra:Record<string,string>={})=>new Request(BUYER_BRIEF_RESOURCE,{method:'POST',headers:{'content-type':'application/json','payment-signature':'synthetic-signed-path-test','x-maha-idempotency-key':o.clientRequestId,'x-maha-input-hash':briefOrderHash(o),...extra},body:JSON.stringify(o)})
 test('withheld by default; GET discloses pins but not archive bytes',async()=>{
   const h=buyerBriefHandlers({load:async()=>bundle,enabled:false,resolve:async()=>{assert.fail('must not resolve')}})
   assert.equal((await h.POST(request(order()))).status,503)
@@ -36,7 +36,7 @@ test('changed artifact, bad headers, extra fields and oversized input reject bef
   assert.equal((await h.POST(request({...o,bundleHash:briefHash('different')}))).status,409)
   assert.equal((await h.POST(request(o,{'x-maha-input-hash':briefHash('wrong')}))).status,409)
   for(const raw of [JSON.stringify({...o,extra:true}),'x'.repeat(2049)]) {
-    const r=await h.POST(new Request(BUYER_BRIEF_RESOURCE,{method:'POST',headers:{'content-type':'application/json'},body:raw}))
+    const r=await h.POST(new Request(BUYER_BRIEF_RESOURCE,{method:'POST',headers:{'content-type':'application/json','payment-signature':'synthetic-invalid-order'},body:raw}))
     assert.ok([400,413].includes(r.status))
   }
   assert.equal(calls,0)

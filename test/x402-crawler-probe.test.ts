@@ -4,6 +4,8 @@ import { test } from 'node:test'
 import { apiProxyGate } from '../lib/api-proxy-policy.ts'
 import { celestialHandlers } from '../lib/x402/celestial-route.ts'
 import { microHandlers } from '../lib/x402/micro-route.ts'
+import { buyerBriefHandlers } from '../lib/x402/buyer-brief-route.ts'
+import { briefHash, BUYER_BRIEF_VERSION } from '../lib/x402/buyer-brief-contract.ts'
 import { payableOffers, type X402Offer } from '../lib/x402/offers.ts'
 import type { CelestialProductId } from '../lib/x402/celestial-products.ts'
 import type { MicroProductId } from '../lib/x402/micro-contracts.ts'
@@ -37,6 +39,11 @@ const alwaysChallenge = (async () => ({
 const inert = { record: async () => {}, release: async () => {}, environment: 'test' }
 
 function handlersFor(offer: X402Offer) {
+  if(offer.id==='cabezon-buyer-brief-pack'){
+    const bytes=Buffer.from('synthetic crawler fixture')
+    const h=buyerBriefHandlers({enabled:true,notificationsReady:async()=>true,resolve:alwaysChallenge,load:async()=>({version:BUYER_BRIEF_VERSION,filename:'synthetic.tar.gz',sha256:briefHash(bytes),bytes:bytes.length,base64:bytes.toString('base64'),sourceManifestHash:briefHash('synthetic')})})
+    return {POST:h.POST,GET:async(_request:Request)=>h.GET()}
+  }
   if (['celestial-position-snapshot', 'celestial-chart-evidence', 'celestial-vimshottari-timing'].includes(offer.id)) {
     return celestialHandlers(offer.id as CelestialProductId, { ...inert, resolve: alwaysChallenge })
   }
@@ -94,7 +101,7 @@ test('every payable offer answers an unpaid crawler probe with a payment challen
 test('every self-managed payable offer belongs to a handler family this check drives', () => {
   for (const offer of payableOffers()) {
     if (apiProxyGate(offer.path, 'POST', true) !== 'self_managed') continue
-    assert.ok(offer.id.startsWith('celestial-') || offer.path.startsWith('/api/v1/micro/'),
+    assert.ok(offer.id==='cabezon-buyer-brief-pack' || offer.id.startsWith('celestial-') || offer.path.startsWith('/api/v1/micro/'),
       `${offer.id}: no handler family is mapped, so its probe behaviour is untested`)
   }
 })
