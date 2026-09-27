@@ -1,8 +1,9 @@
+import KnowledgeHub from '@/components/knowledge/KnowledgeHub'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { MAHA_ORGANIZATION_ID, MAHA_SITE_URL } from '@/lib/entity'
-import { NANO_ARTICLES, NANO_CANDIDATES, NANO_PATH, NANO_RELEASE_DATE, NANO_SOURCES } from '@/lib/nanotechnology-knowledge'
+import { NANO_ARTICLES, NANO_PATH, NANO_RELEASE_DATE, NANO_SOURCES } from '@/lib/nanotechnology-knowledge'
 
 const title = 'Nanotechnology: evidence and evaluation | Maha Strategies'
 const description =
@@ -32,58 +33,11 @@ const jsonLd = {
   })),
 }
 
-export default function NanotechnologyHub() {
-  const implemented = NANO_CANDIDATES.filter((candidate) => candidate.status === 'implemented').length
-  return (
-    <main className="evidence-page">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
-      <article className="evidence-container evidence-container--narrow">
-        <nav aria-label="Breadcrumb" className="text-sm">
-          <Link className="evidence-link" href="/knowledge">Knowledge</Link>
-          <span aria-hidden="true"> / </span>Nanotechnology
-        </nav>
 
-        <header className="mt-6">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--status-sourced)]">[ Evidence and evaluation · not a laboratory ]</p>
-          <h1 className="mt-4 text-4xl font-light leading-tight tracking-tight text-[var(--text-primary)] sm:text-5xl">Nanotechnology</h1>
-          <p className="mt-6 text-xl leading-relaxed text-[var(--text-secondary)]">
-            Small things behave differently, and that fact is used to sell a great deal. These pages explain the mechanisms that are
-            real, show what a measurement of a nanomaterial actually measures, and give you the questions that separate a result from
-            a claim about it.
-          </p>
-          <p className="mt-5 leading-relaxed text-[var(--text-secondary)]">
-            Maha Strategies makes no materials, runs no synthesis or characterisation, and certifies nothing. What we publish is
-            explanation, method and the sources we read, each with the passage we read it at.
-          </p>
-        </header>
-
-        <section className="mt-12" aria-labelledby="start">
-          <h2 id="start" className="evidence-section-title text-xl">Start here</h2>
-          <ul className="mt-4 list-none space-y-3 p-0">
-            {['what-nanoscale-means', 'surface-area-to-volume', 'vendor-claim-checks'].map((slug) => {
-              const article = NANO_ARTICLES.find((entry) => entry.slug === slug)!
-              return (
-                <li key={slug}>
-                  <Link className="evidence-link" href={`${NANO_PATH}/${slug}`}>{article.title}</Link>
-                  <p className="mt-1 text-sm leading-relaxed text-[var(--text-secondary)]">{article.answer}</p>
-                </li>
-              )
-            })}
-          </ul>
-        </section>
-
-        <section className="mt-12" aria-labelledby="all-articles">
-          <h2 id="all-articles" className="evidence-section-title text-xl">All {implemented} explanations</h2>
-          <ul className="mt-4 list-none space-y-5 p-0">
-            {NANO_ARTICLES.map((article) => (
-              <li key={article.slug} className="border-l border-[var(--border-strong)] pl-4">
-                <Link className="evidence-link" href={`${NANO_PATH}/${article.slug}`}>{article.title}</Link>
-                <p className="mt-1 text-sm leading-relaxed text-[var(--text-secondary)]">{article.answer}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
-
+const groups = [["foundations","Nanoscale foundations",["what-nanoscale-means","surface-area-to-volume","nanomaterial-classes","quantum-confinement"]],["making-measuring","Making and measuring",["top-down-and-bottom-up","characterisation-what-each-method-sees","reporting-size-with-uncertainty","batch-to-batch-variability","scale-up-constraints"]],["applications","Properties and applications",["structure-property-claims","surface-functionalisation","nano-sensing","energy-storage-claims"]],["evaluation","Evidence and evaluation",["exposure-and-safety-evidence","regulatory-status-is-not-safety","vendor-claim-checks","surface-area-example"]]]
+export default function Hub() {
+ const card = (slug: string) => { const a = NANO_ARTICLES.find(a => a.slug === slug)!; return { href: `${NANO_PATH}/${slug}`, title: a.title, description: a.answer, label: 'Source-linked explanation' } }
+ return <><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} /><KnowledgeHub title="Nanotechnology" breadcrumb="Nanotechnology" eyebrow="Evidence and evaluation" introduction="Explore nanoscale materials through their mechanisms, measurements and evidence. Start with a question, then follow a connected topic group." boundary="Maha makes no materials and certifies nothing. These guides are not safety assessments, exposure limits or medical advice." groups={groups.map(([id, title, slugs]) => ({ id: id as string, title: title as string, description: 'Explore the questions, methods and boundaries below.', cards: (slugs as string[]).map(card) }))} featured={["what-nanoscale-means","surface-area-example","vendor-claim-checks"].map(card)} related={[["/knowledge/physical-ai","Physical AI"],["/knowledge/robotics","Robotics"],["/knowledge/computational-architecture","Computational Architecture"]].map(([href, title]) => ({ href, title, description: 'Continue into this connected knowledge domain.' }))}>
         <section className="mt-12" aria-labelledby="run-it">
           <h2 id="run-it" className="evidence-section-title text-xl">Run the arithmetic yourself</h2>
           <p className="mt-4 leading-relaxed text-[var(--text-secondary)]">
@@ -126,7 +80,7 @@ export default function NanotechnologyHub() {
             to the relevant agency; workplace exposure belongs to qualified occupational-health practice.
           </p>
         </section>
-      </article>
-    </main>
-  )
+
+<p>We run no synthesis or characterisation laboratory and provide no materials certification.</p>
+</KnowledgeHub></>
 }

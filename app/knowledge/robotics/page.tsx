@@ -1,19 +1,34 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ROBOTICS_PATH, roboticsCandidateMap } from '@/lib/robotics-knowledge'
-
+import KnowledgeHub from '@/components/knowledge/KnowledgeHub'
+import { ROBOTICS_PATH, ROBOTICS_ARTICLES, roboticsCandidateMap } from '@/lib/robotics-knowledge'
 const TITLE = 'Robotics evidence and evaluation'
 const DESCRIPTION = 'Forty guides and examples for robot task evaluation, provenance, human assistance and governance.'
 const CANONICAL = `https://www.mahastrategies.com${ROBOTICS_PATH}`
 export const metadata: Metadata = { title: `${TITLE} | Maha Strategies`, description: DESCRIPTION, alternates: { canonical: CANONICAL }, openGraph: { type: 'website', title: TITLE, description: DESCRIPTION, url: CANONICAL, siteName: 'Maha Strategies' } }
+const clusters = [
+  { id: 'foundations', title: 'Foundations', description: 'Define capability, tasks, perception and control before interpreting a demonstration.' },
+  { id: 'evaluation', title: 'Evaluation', description: 'Choose benchmarks and keep failures, interventions and conditions visible.' },
+  { id: 'provenance', title: 'Provenance and data', description: 'Trace data, versions and observations without overstating what a record proves.' },
+  { id: 'assistance', title: 'Human assistance', description: 'Evaluate useful tasks and preserve the role of human support.' },
+  { id: 'governance', title: 'Governance', description: 'Make permissions, accountability and release boundaries explicit.' },
+  { id: 'examples', title: 'Specifications and examples', description: 'Inspect bounded contracts and a reproducible synthetic experiment.' },
+]
 export default function RoboticsHub() {
-  return <main className="mx-auto max-w-4xl space-y-8 px-6 py-12">
-    <nav aria-label="Breadcrumb"><Link href="/knowledge" prefetch={false}>Knowledge</Link> / Robotics</nav>
-    <header><p>Evidence-engineering guides · automated editorial preparation, not expert review</p><h1 className="text-3xl font-semibold">Robotics evidence and evaluation</h1></header>
-    <p>What did a robot accomplish, under which conditions, with how much assistance—and what can another team actually verify? These guides develop evidence infrastructure for answering those questions. Humanoid shape alone is not proof of useful capability.</p>
-    <p>Forty topic pages cover foundations, evaluation, provenance, assistance, governance and worked examples. This is an evidence-engineering collection, not a safety assessment, certification service or hardware benchmark. The ROS and LeRobot walkthroughs are specifications, not operational adapters.</p>
-    <section><h2 className="text-2xl font-semibold">Start with a question</h2><ul className="list-disc space-y-3 pl-6"><li><a className="underline" href={`${ROBOTICS_PATH}/assistive-task-selection`}>Would this task actually help someone?</a></li><li><a className="underline" href={`${ROBOTICS_PATH}/benchmark-selection`}>What should we evaluate before trusting a demonstration?</a></li><li><a className="underline" href={`${ROBOTICS_PATH}/pick-place-example`}>What can a reproducible evidence check establish?</a></li></ul></section>
-    {Object.entries({ foundations: 'Foundations · 8 pages', evaluation: 'Evaluation · 10 pages', provenance: 'Provenance and data · 8 pages', assistance: 'Human assistance · 6 pages', governance: 'Governance · 4 pages', examples: 'Specifications and examples · 4 pages' }).map(([group, label]) => <section key={group} id={group}><h2 className="text-2xl font-semibold">{label}</h2><ul className="list-disc space-y-3 pl-6">{roboticsCandidateMap().filter(a => a.group === group).map(a => <li key={a.slug}><a className="underline" href={`${ROBOTICS_PATH}/${a.slug}`}>{a.title}</a></li>)}</ul></section>)}
-    <section><h2 className="text-2xl font-semibold">Relationship to the wider knowledge system</h2><p>Use <Link className="underline" href="/knowledge/mathematics" prefetch={false}>mathematics</Link> for formal foundations and <Link className="underline" href="/governed-workflow" prefetch={false}>governed workflows</Link> for the broader evidence boundary. Robotics applies those ideas to task observations; it does not turn a consistency check into physical approval.</p><p>For the learned models behind these systems—world models, vision-language-action policies, demonstration learning, domain randomization and runtime monitoring—see <Link className="underline" href="/knowledge/physical-ai" prefetch={false}>physical AI</Link>. That section explains method and reads published results; this one keeps the hardware, evidence intake and safety boundaries. For the materials layer beneath sensors and actuators, see <Link className="underline" href="/knowledge/nanotechnology" prefetch={false}>nanotechnology</Link>.</p><p>Sources are linked with exact section locators. Workflows are Maha proposals; examples are synthetic unless explicitly stated otherwise. Search demand has not been measured for this collection.</p></section>
-  </main>
+  const candidates = roboticsCandidateMap()
+  const cards = candidates.map(c => ({ href: `${ROBOTICS_PATH}/${c.slug}`, title: c.title, description: ROBOTICS_ARTICLES.find(a => a.slug === c.slug)?.answer ?? (c.slug === 'pick-place-example' ? 'Inspect a deterministic grid-world experiment. Simulation is not a hardware test.' : 'Inspect the required fields, replay contract and limits of an evidence package.'), label: c.status === 'local-prototype' ? 'Synthetic prototype' : 'Editorial guide' }))
+  return <KnowledgeHub title="Robotics evidence and evaluation" breadcrumb="Robotics" eyebrow="Tasks · observations · human assistance"
+    introduction="What did a robot accomplish, under which conditions, with how much assistance—and what can another team actually verify?"
+    boundary="Automated editorial preparation, not expert review. Simulation evidence is not physical safety validation; ROS and LeRobot walkthroughs are specifications, not operational adapters."
+    groups={clusters.map(g => ({ ...g, cards: cards.filter((_, i) => candidates[i].group === g.id) }))}
+    featured={['assistive-task-selection', 'benchmark-selection', 'pick-place-example'].map(slug => cards.find(c => c.href === `${ROBOTICS_PATH}/${slug}`)!)}
+    related={[
+      { href: '/knowledge/physical-ai', title: 'Physical AI', description: 'Explore learned models, training and control.' },
+      { href: '/knowledge/nanotechnology', title: 'Nanotechnology', description: 'Inspect materials and measurement evidence.' },
+      { href: '/knowledge/computational-architecture', title: 'Computational Architecture', description: 'Connect physical systems to building models and reproducible design evidence.' },
+      { href: '/knowledge/mathematics', title: 'Mathematics', description: 'Explore the formal foundations behind calculations and evaluations.' },
+      { href: '/governed-workflow', title: 'Governed workflows', description: 'Keep execution evidence separate from permission and substantive correctness.' },
+    ]}>
+      <section><h2>How the domains connect</h2><p><Link href="/knowledge/physical-ai" prefetch={false}>Physical AI</Link> covers learned models and control. Robotics retains hardware evaluation and safety boundaries. <Link href="/knowledge/nanotechnology" prefetch={false}>Nanotechnology</Link> covers the materials and measurement layer beneath sensors and actuators.</p></section>
+    </KnowledgeHub>
 }

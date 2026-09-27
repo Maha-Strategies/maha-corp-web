@@ -1,10 +1,10 @@
+import KnowledgeHub from '@/components/knowledge/KnowledgeHub'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { MAHA_ORGANIZATION_ID, MAHA_SITE_URL } from '@/lib/entity'
 import {
   PHYSICAL_AI_ARTICLES,
-  PHYSICAL_AI_CANDIDATES,
   PHYSICAL_AI_PATH,
   PHYSICAL_AI_RELEASE_DATE,
   PHYSICAL_AI_SOURCES,
@@ -38,60 +38,11 @@ const jsonLd = {
   })),
 }
 
-export default function PhysicalAiHub() {
-  const implemented = PHYSICAL_AI_CANDIDATES.filter((candidate) => candidate.status === 'implemented').length
-  return (
-    <main className="evidence-page">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
-      <article className="evidence-container evidence-container--narrow">
-        <nav aria-label="Breadcrumb" className="text-sm">
-          <Link className="evidence-link" href="/knowledge">Knowledge</Link>
-          <span aria-hidden="true"> / </span>Physical AI
-        </nav>
 
-        <header className="mt-6">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--status-sourced)]">[ Evidence and evaluation · no robots operated here ]</p>
-          <h1 className="mt-4 text-4xl font-light leading-tight tracking-tight text-[var(--text-primary)] sm:text-5xl">Physical AI</h1>
-          <p className="mt-6 text-xl leading-relaxed text-[var(--text-secondary)]">
-            Learned models are being asked to act in the physical world, where the system’s own actions decide what it sees next and a
-            mistake has consequences. These pages explain the methods — world models, vision-language-action policies, learning from
-            demonstration, domain randomization, uncertainty and monitoring — and say plainly what each published result establishes.
-          </p>
-          <p className="mt-5 leading-relaxed text-[var(--text-secondary)]">
-            This section is the learning and modelling companion to{' '}
-            <Link className="evidence-link" href="/knowledge/robotics">robotics evidence and evaluation</Link>, which owns the
-            hardware, the evidence records and the safety boundaries. Where a subject belongs to both, robotics keeps the evidence
-            record and these pages link to it rather than publishing a second version.
-          </p>
-        </header>
-
-        <section className="mt-12" aria-labelledby="start">
-          <h2 id="start" className="evidence-section-title text-xl">Start here</h2>
-          <ul className="mt-4 list-none space-y-3 p-0">
-            {['what-physical-ai-means', 'perception-action-loops', 'vision-language-action-models'].map((slug) => {
-              const article = PHYSICAL_AI_ARTICLES.find((entry) => entry.slug === slug)!
-              return (
-                <li key={slug}>
-                  <Link className="evidence-link" href={`${PHYSICAL_AI_PATH}/${slug}`}>{article.title}</Link>
-                  <p className="mt-1 text-sm leading-relaxed text-[var(--text-secondary)]">{article.answer}</p>
-                </li>
-              )
-            })}
-          </ul>
-        </section>
-
-        <section className="mt-12" aria-labelledby="all-articles">
-          <h2 id="all-articles" className="evidence-section-title text-xl">All {implemented} explanations</h2>
-          <ul className="mt-4 list-none space-y-5 p-0">
-            {PHYSICAL_AI_ARTICLES.map((article) => (
-              <li key={article.slug} className="border-l border-[var(--border-strong)] pl-4">
-                <Link className="evidence-link" href={`${PHYSICAL_AI_PATH}/${article.slug}`}>{article.title}</Link>
-                <p className="mt-1 text-sm leading-relaxed text-[var(--text-secondary)]">{article.answer}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
-
+const groups = [["foundations","Embodied foundations",["what-physical-ai-means","perception-action-loops","world-models","state-estimation-and-filtering"]],["learning","Learning and demonstrations",["vision-language-action-models","learning-from-demonstration","simulation-and-domain-randomization","foundation-model-fine-tuning","teleoperation-interfaces"]],["control","Control and uncertainty",["planning-and-feedback-control","uncertainty-and-distribution-shift","runtime-monitoring-and-fallback","reward-specification"]],["evaluation","Evaluation and evidence",["benchmark-validity","data-provenance-and-permissions","evaluation-fixture-example"]]]
+export default function Hub() {
+ const card = (slug: string) => { const a = PHYSICAL_AI_ARTICLES.find(a => a.slug === slug)!; return { href: `${PHYSICAL_AI_PATH}/${slug}`, title: a.title, description: a.answer, label: 'Source-linked explanation' } }
+ return <><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} /><KnowledgeHub title="Physical AI" breadcrumb="Physical AI" eyebrow="Evidence and evaluation" introduction="Understand learned systems that act: their models, training, control loops and evaluation boundaries." boundary="Published results belong to their authors and evaluation conditions. Maha has not replicated these studies, operates no robot and endorses no vendor." groups={groups.map(([id, title, slugs]) => ({ id: id as string, title: title as string, description: 'Explore the questions, methods and boundaries below.', cards: (slugs as string[]).map(card) }))} featured={["what-physical-ai-means","world-models","evaluation-fixture-example"].map(card)} related={[["/knowledge/robotics","Robotics"],["/knowledge/nanotechnology","Nanotechnology"],["/knowledge/mathematics","Mathematics"]].map(([href, title]) => ({ href, title, description: 'Continue into this connected knowledge domain.' }))}>
         <section className="mt-12" aria-labelledby="run-it">
           <h2 id="run-it" className="evidence-section-title text-xl">Run the fixture yourself</h2>
           <p className="mt-4 leading-relaxed text-[var(--text-secondary)]">
@@ -134,7 +85,6 @@ node --experimental-strip-types scripts/physical-ai-loop.ts counterexamples`}
             as such. Maha has replicated none of them, operates no robot, and endorses no system or vendor.
           </p>
         </section>
-      </article>
-    </main>
-  )
+
+</KnowledgeHub></>
 }

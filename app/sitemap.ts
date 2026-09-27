@@ -5,6 +5,7 @@ import { getPublicContentPublicationSitemapRows } from '@/lib/public-content-pub
 import { unfinishedSpeciesSections } from '@/lib/unfinished-species'
 import { openBookEditions } from '@/lib/open-book-editions'
 import { KNOWLEDGE_ARTICLES, knowledgeArticlePath } from '@/lib/knowledge-data'
+import { ARCHITECTURE_DATE, ARCHITECTURE_PATH, architectureArticles } from '@/lib/computational-architecture'
 import { SEMICONDUCTOR_PROCESS_MAP_DATE, SEMICONDUCTOR_PROCESS_MAP_PATH } from '@/lib/semiconductor-process-map'
 import { BRIEFS } from '@/lib/briefs-data'
 import { KNOWLEDGE_SUPPLIERS, knowledgeSupplierPath } from '@/lib/knowledge-process-profiles'
@@ -87,6 +88,7 @@ export async function currentHostSitemap(): Promise<MetadataRoute.Sitemap> {
     .map((slug) => ({ url: `${baseUrl}${SOURCE_ROUTE_PREFIX}/${slug}` }))
 
   const staticPages: MetadataRoute.Sitemap = [
+    ...[ARCHITECTURE_PATH, ...architectureArticles.map(a => `${ARCHITECTURE_PATH}/${a.slug}`)].map(path => ({ url: `${baseUrl}${path}`, lastModified: new Date(ARCHITECTURE_DATE) })),
     // EXISTING CORE NODES
     { url: `${baseUrl}` },
     { url: `${baseUrl}/consulting` },

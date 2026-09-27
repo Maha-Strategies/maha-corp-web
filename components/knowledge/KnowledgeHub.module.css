@@ -1,0 +1,40 @@
+.hub {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 2.5rem clamp(1rem, 4vw, 3rem) 4rem;
+  color: var(--knowledge-cyber-copy, #34463f);
+  line-height: 1.65;
+}
+.breadcrumb { font-size: .875rem; margin-bottom: 2.5rem; }
+.breadcrumb a, .back { text-decoration: underline; text-underline-offset: .25em; }
+.hero { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); gap: 2.5rem; align-items: start; }
+.hero h1 { font-size: clamp(2rem, 4.5vw, 3.75rem); line-height: 1.08; letter-spacing: -.035em; font-weight: 750; color: var(--knowledge-cyber-ink, #13211c); margin: 1rem 0; overflow-wrap: anywhere; }
+.eyebrow { font-family: var(--font-geist-mono), monospace; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--knowledge-cyber-blue, #235fa4); }
+.introduction { max-width: 48rem; font-size: 1.125rem; }
+.summary { padding: 1.5rem; border: 1px solid var(--knowledge-cyber-line-strong, #8b9ebc); background: var(--knowledge-cyber-panel, #f7f9fc); box-shadow: 4px 4px 0 var(--knowledge-cyber-shadow, #d9e1ed); }
+.count { font-size: 2.5rem; font-weight: 700; line-height: 1.3; margin: .75rem 0; color: var(--knowledge-cyber-ink, #13211c); }
+.count span { font-size: 1rem; font-weight: 400; }
+.boundary { border-left: 3px solid var(--knowledge-cyber-amber, #865600); padding-left: 1rem; margin-top: 1rem; font-size: .875rem; }
+.jump { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--knowledge-cyber-line-strong, #8b9ebc); }
+.jump a { display: inline-flex; align-items: center; gap: .75rem; min-height: 44px; padding: .5rem 1rem; border: 1px solid var(--knowledge-cyber-line-strong, #8b9ebc); background: var(--knowledge-cyber-panel, #f7f9fc); font-size: .875rem; text-decoration: none; }
+.jump span { font-variant-numeric: tabular-nums; font-weight: 700; }
+.section { margin-top: 3rem; scroll-margin-top: 6rem; }
+.sectionHeading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .5rem 1rem; border-bottom: 2px solid var(--knowledge-cyber-line-strong, #8b9ebc); padding-bottom: .75rem; }
+.sectionHeading h2 { font-size: 1.6rem; font-weight: 650; line-height: 1.25; }
+.sectionHeading p { font-size: .875rem; color: var(--knowledge-cyber-muted, #4d6158); }
+.groupDescription { max-width: 50rem; margin-top: 1rem; }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; margin: 1.5rem 0 0; padding: 0; list-style: none; }
+.grid > li { min-width: 0; display: flex; }
+.card { --accent: var(--knowledge-cyber-cyan, #0b6675); display: flex; flex-direction: column; width: 100%; padding: 1.5rem; border: 1px solid var(--knowledge-cyber-line-strong, #8b9ebc); border-top: 3px solid var(--accent); background: var(--knowledge-cyber-panel, #f7f9fc); box-shadow: 4px 4px 0 var(--knowledge-cyber-shadow, #d9e1ed); text-decoration: none; overflow-wrap: anywhere; transition: box-shadow 150ms ease; }
+.grid > li:nth-child(3n + 2) .card { --accent: var(--knowledge-cyber-blue, #235fa4); }
+.grid > li:nth-child(3n) .card { --accent: var(--knowledge-cyber-violet, #6746a8); }
+.card h3 { font-size: 1.2rem; font-weight: 650; line-height: 1.35; margin: .5rem 0 .75rem; color: var(--knowledge-cyber-ink, #13211c); }
+.description { font-size: .95rem; margin: 0 0 1.5rem; }
+.action { display: flex; justify-content: space-between; gap: 1rem; margin-top: auto; font-size: .875rem; font-weight: 650; color: var(--accent); }
+.card:hover { box-shadow: 6px 6px 0 var(--knowledge-cyber-shadow, #d9e1ed); }
+.card:hover h3 { text-decoration: underline; text-underline-offset: .2em; }
+.hub a:focus-visible { outline: 3px solid var(--knowledge-cyber-blue, #235fa4); outline-offset: 4px; }
+.back { display: inline-block; padding: .75rem 0; margin-top: 2.5rem; }
+@media (max-width: 1050px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px) { .hero, .grid { grid-template-columns: minmax(0, 1fr); } .hero { gap: 1.5rem; } .card { padding: 1.25rem; } }
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } }
