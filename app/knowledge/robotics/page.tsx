@@ -2,7 +2,10 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import KnowledgeHub from '@/components/knowledge/KnowledgeHub'
 import { ROBOTICS_PATH, ROBOTICS_ARTICLES, roboticsCandidateMap } from '@/lib/robotics-knowledge'
-export const metadata: Metadata = { title: 'Robotics evidence and evaluation | Maha Strategies', description: 'Forty guides and examples for robot task evaluation, provenance, human assistance and governance.', alternates: { canonical: 'https://www.mahastrategies.com/knowledge/robotics' } }
+const TITLE = 'Robotics evidence and evaluation'
+const DESCRIPTION = 'Forty guides and examples for robot task evaluation, provenance, human assistance and governance.'
+const CANONICAL = `https://www.mahastrategies.com${ROBOTICS_PATH}`
+export const metadata: Metadata = { title: `${TITLE} | Maha Strategies`, description: DESCRIPTION, alternates: { canonical: CANONICAL }, openGraph: { type: 'website', title: TITLE, description: DESCRIPTION, url: CANONICAL, siteName: 'Maha Strategies' } }
 const clusters = [
   { id: 'foundations', title: 'Foundations', description: 'Define capability, tasks, perception and control before interpreting a demonstration.' },
   { id: 'evaluation', title: 'Evaluation', description: 'Choose benchmarks and keep failures, interventions and conditions visible.' },
