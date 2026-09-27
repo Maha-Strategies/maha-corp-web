@@ -150,7 +150,7 @@ export default function KnowledgePage() {
           <p className={styles.indexKicker}>[ Phase 2 // Evidence architecture // Source to strategy ]</p>
           <div className="mt-8 grid gap-10 lg:grid-cols-[1.6fr_1fr] lg:items-end">
             <div>
-              <h1 className={`${styles.indexTitle} max-w-4xl text-white`}>Understand the machinery beneath the brief.</h1>
+              <h1 className={`${styles.indexTitle} max-w-4xl text-white`}>Explore connected knowledge.</h1>
               <p className={`${styles.indexLede} mt-6 max-w-3xl text-zinc-400`}>Knowledge separates source-governed facts from domain explanations and strategic analysis. Every technical claim carries a citation or an explicit analytical boundary; every article can link back to the immutable facts and Intelligence decisions it supports.</p>
               <Link href={SEMICONDUCTOR_PROCESS_MAP_PATH} className={`${styles.indexAction} ${styles.indexActionPrimary} mt-8`}>
                 Explore the complete {getProcessMapStepCount()}-node semiconductor process map →
@@ -201,13 +201,19 @@ export default function KnowledgePage() {
         </div>
       </section>
 
-      <section className="border-b border-zinc-900 px-6 py-14 sm:px-12">
+      <section id="knowledge-domains" className="scroll-mt-24 border-b border-zinc-900 px-6 py-14 sm:px-12">
         <div className="mx-auto max-w-6xl">
           <div className={styles.domainHeadingRow}>
             <p className={styles.domainHeading}>Knowledge domains</p>
             <div className={styles.spectrumRule} aria-hidden="true" />
           </div>
           <div className={`${styles.domainGrid} mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3`}>
+            <Link href="/knowledge/computational-architecture" className="group border border-cyan-900/60 bg-cyan-950/10 p-6 transition-colors hover:border-cyan-400">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">Building models and evidence</p>
+              <h2 className="mt-4 text-2xl font-semibold text-white">Computational Architecture</h2>
+              <p className="mt-3 text-sm leading-6 text-zinc-400">Explore design assumptions, simulation boundaries and a browser-local building-area checker.</p>
+              <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-cyan-300">Explore 12 guides and examples →</p>
+            </Link>
             <Link href="/knowledge/robotics" className="group border border-cyan-900/60 bg-cyan-950/10 p-6 transition-colors hover:border-cyan-400">
               <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">Robotics evidence · editorial guides</p>
               <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-cyan-200">Robotics and human assistance</h2>

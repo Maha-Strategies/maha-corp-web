@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "incremental": false },
+  "include": ["lib/computational-architecture.ts", "lib/architecture-program.ts", "app/knowledge/computational-architecture/**/*.tsx", "test/computational-architecture.test.ts"],
+  "exclude": ["node_modules"]
+}
