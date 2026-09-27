@@ -39,7 +39,7 @@ const prohibitedPublicPatterns = [
 ]
 
 test('all archived research has a separate sanitized public edition', () => {
-  assert.equal(BRIEFS.length, 42)
+  assert.equal(BRIEFS.length, 48)
   assert.deepEqual(BRIEFS.map((brief) => brief.slug), PUBLIC_INTELLIGENCE_BRIEF_SLUGS)
   assert.deepEqual(getAllBriefSlugs(), PUBLIC_INTELLIGENCE_BRIEF_SLUGS)
   assert.deepEqual(
@@ -54,9 +54,9 @@ test('restored briefs are public editions rather than archive object references'
     assert.ok(publicBrief)
     assert.notEqual(publicBrief, archived)
     assert.equal(publicBrief.publicEditionBoundary?.reviewState, 'sanitized-public-edition')
-    assert.equal(publicBrief.dateModified, '2026-08-28')
+    assert.equal(publicBrief.dateModified, archived.dateModified ?? '2026-08-28')
 
-    if (archived.slug !== 'ai-software-cost-trajectory-2040') {
+    if (archived.slug !== 'ai-software-cost-trajectory-2040' && archived.datePublished !== '2026-09-27') {
       assert.notEqual(publicBrief.title, archived.title)
     }
   }

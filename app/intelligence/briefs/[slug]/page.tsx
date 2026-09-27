@@ -240,6 +240,19 @@ export default async function BriefPage(
               <SectionBody key={i} section={section} />
             ))}
 
+            {brief.sources && brief.sources.length > 0 && (
+              <section aria-label="Sources" className="mt-10">
+                <h2 className={`${styles.sectionHeading} not-prose`}>Sources and further reading</h2>
+                <ul>
+                  {brief.sources.map((source) => (
+                    <li key={source.url}>
+                      <a href={source.url} className={styles.quietLink} rel="noreferrer">{source.title}</a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
             {brief.protocolPatch && (
               <div className={`${styles.statusPanel} ${styles.statusPanelUnverified} my-8 not-prose`}>
                 <h4 className={styles.panelLabel}>{brief.protocolPatch.title}</h4>
