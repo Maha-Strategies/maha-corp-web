@@ -1,3 +1,5 @@
+import { SEPTEMBER_2026_BRIEFS } from './intelligence-september-2026.ts'
+
 // lib/briefs-data.ts
 // SINGLE SOURCE OF TRUTH for the internal intelligence archive and its
 // separately derived, confidentiality-scrubbed public editions.
@@ -44,6 +46,7 @@ export interface Brief {
   dateModified?: string;
   intro?: string;
   sections: BriefSection[];
+  sources?: { title: string; url: string }[];
   protocolPatch?: ProtocolPatch;
   publicEditionBoundary?: {
     reviewState: 'sanitized-public-edition';
@@ -53,6 +56,7 @@ export interface Brief {
 }
 
 const ALL_BRIEFS: Brief[] = [
+  ...SEPTEMBER_2026_BRIEFS,
   {
     slug: 'sea-semiconductor-manufacturing-hedge',
     title: 'Manufacturing Power Semiconductors in SEA as a China-Risk Hedge',
@@ -2370,7 +2374,7 @@ function createPublicEdition(brief: Brief): Brief {
     intro: scrubOptionalText(brief.intro),
     sections: brief.sections.map(sanitizeSection),
     protocolPatch,
-    dateModified: '2026-08-28',
+    dateModified: brief.dateModified ?? '2026-08-28',
     publicEditionBoundary: {
       reviewState: 'sanitized-public-edition',
       note: 'This generalized public research edition does not reproduce engagement-specific source material.',
@@ -2379,7 +2383,7 @@ function createPublicEdition(brief: Brief): Brief {
   }
 }
 
-const PREVIOUSLY_REVIEWED_PUBLIC_SLUGS = new Set(['ai-software-cost-trajectory-2040'])
+const PREVIOUSLY_REVIEWED_PUBLIC_SLUGS = new Set(['ai-software-cost-trajectory-2040', ...SEPTEMBER_2026_BRIEFS.map((brief) => brief.slug)])
 
 // Fail closed for future archive additions. A record enters the public projection
 // only after receiving either an explicit sanitized title or a prior review marker.

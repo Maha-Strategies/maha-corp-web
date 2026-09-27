@@ -1,4 +1,5 @@
 import React from 'react';
+import { SEPTEMBER_2026_BRIEFS } from '@/lib/intelligence-september-2026';
 import Link from 'next/link';
 import { TrackedLink } from '@/components/ConversionTracker';
 import { BRIEFS as PUBLIC_BRIEFS } from '@/lib/briefs-data';
@@ -24,6 +25,14 @@ interface BriefData {
 }
 
 const ALL_BRIEF_CARDS: BriefData[] = [
+  ...SEPTEMBER_2026_BRIEFS.map((brief): BriefData => ({
+    group: 'HARDWARE & INFRASTRUCTURE',
+    category: brief.kicker,
+    status: brief.status,
+    title: brief.title,
+    description: brief.description,
+    href: `/intelligence/briefs/${brief.slug}`,
+  })),
   // --- MACRO & SYSTEMS ---
   {
     group: 'MACRO & SYSTEMS',
