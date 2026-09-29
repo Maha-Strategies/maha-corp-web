@@ -17,6 +17,8 @@ import { ASTROLOGY_ANSWER_GRAPH_PATH, ASTROLOGY_ANSWER_GRAPH_REGISTRY_PATH, ASTR
 import { ASTROLOGY_WORKFLOW_PATH, ASTROLOGY_WORKFLOW_PROTOCOLS, ASTROLOGY_WORKFLOW_REGISTRY_PATH, astrologyWorkflowPath } from './astrology-workflow-protocols.ts'
 import { EVIDENCE_WORKFLOW_EXAMPLES, EVIDENCE_WORKFLOW_PATH, EVIDENCE_WORKFLOW_REGISTRY_PATH, evidenceWorkflowPath } from './evidence-workflow-examples.ts'
 import { EPISTEMIC_CLEARING_PAGES } from './epistemic-clearing-batch-one.ts'
+import { MAHA_DESCRIPTOR, MAHA_SITE_URL } from './entity.ts'
+import { COMPANY_BOUNDARIES, COMPANY_DIRECTION, COMPANY_PORTFOLIO_PATH, COMPANY_PROFILE_PATH, COMPANY_PROFILE_SCHEMA_PATH } from './company-profile.ts'
 
 const RESEARCH_URL = 'https://research.mahastrategies.com'
 
@@ -56,6 +58,15 @@ export function buildLlmsManifest(
     '# Maha Strategies Machine-Readable Index',
     '',
     '> Public orientation index for Maha knowledge, evidence, APIs, MCP tools, and commercial discovery. Status labels and publication boundaries are material: an indexed draft, source-available package, or unreviewed record must not be treated as canonical, hosted, or validated.',
+    '',
+    '## Company and technology development',
+    MAHA_DESCRIPTOR,
+    COMPANY_DIRECTION,
+    `- Company and founder: ${MAHA_SITE_URL}/about`,
+    `- Technology portfolio and research maturity: ${MAHA_SITE_URL}${COMPANY_PORTFOLIO_PATH}`,
+    `- Company profile JSON: ${MAHA_SITE_URL}${COMPANY_PROFILE_PATH}`,
+    `- Company profile schema: ${MAHA_SITE_URL}${COMPANY_PROFILE_SCHEMA_PATH}`,
+    ...COMPANY_BOUNDARIES.map((boundary) => `- ${boundary}`),
     '',
     '## Claim index',
     ...claims.flatMap((claim) => [`- ${claim.title} [${claim.status}]`, `  ${claim.summary}`, `  URL: ${RESEARCH_URL}/claims/${claim.claim_id}`, `  Citations: ${claim.sources.join('; ')}`, `  Tags: ${claim.tags.join(', ')}`]),

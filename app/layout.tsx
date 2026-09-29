@@ -3,7 +3,7 @@ import { Geist, Geist_Mono, Newsreader } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import RouteThemeBoundary from "@/components/RouteThemeBoundary";
 import SiteFooter from "@/components/SiteFooter";
-import { mahaEntityGraphJsonLd } from '@/lib/entity';
+import { MAHA_DESCRIPTION, mahaEntityGraphJsonLd } from '@/lib/entity';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -37,13 +37,13 @@ const colorSchemeBootstrap = `(() => {
 })();`;
 
 export const metadata: Metadata = {
-  title: 'Maha Strategies | Verified Research Briefs',
-  description: 'Decision-ready research and independent analysis from Maha Strategies.',
+  title: 'Maha Strategies | Technology Development, Research and Publishing',
+  description: MAHA_DESCRIPTION,
   metadataBase: new URL('https://www.mahastrategies.com'),
   alternates: { canonical: '/' },
   openGraph: {
-    title: 'Maha Strategies | Verified Research Briefs',
-    description: 'Decision-ready research and independent analysis from Maha Strategies.',
+    title: 'Maha Strategies | Technology Development, Research and Publishing',
+    description: MAHA_DESCRIPTION,
     url: 'https://www.mahastrategies.com',
     siteName: 'Maha Strategies',
     images: [
@@ -59,8 +59,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Maha Strategies | Verified Research Briefs',
-    description: 'Decision-ready research and independent analysis from Maha Strategies.',
+    title: 'Maha Strategies | Technology Development, Research and Publishing',
+    description: MAHA_DESCRIPTION,
     images: ['/og-master.png'],
   },
   other: {
@@ -86,6 +86,7 @@ export default function RootLayout({
         <link rel="alternate" type="application/atom+xml" title="Maha Strategies — Intelligence & Explainers" href="/feed.xml" />
         <link rel="alternate" type="text/plain" title="Maha Strategies machine-readable site guide" href="/llms.txt" />
         <link rel="alternate" type="application/json" title="Maha Strategies MCP tool manifest" href="/mcp.json" />
+        <link rel="alternate" type="application/json" title="Maha Strategies company and technology profile" href="/company.json" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(mahaEntityGraphJsonLd).replace(/</g, '\\u003c') }}

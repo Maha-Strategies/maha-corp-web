@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "incremental": false },
+  "include": ["lib/entity.ts", "lib/company-profile.ts", "app/company.json/route.ts", "app/about/technology/page.tsx", "app/about/page.tsx"],
+  "exclude": ["node_modules"]
+}

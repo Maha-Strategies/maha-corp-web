@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://www.mahastrategies.com/schemas/company-profile-1.0.json",
+  "title": "Maha Strategies public company profile",
+  "description": "A company-authored description, not proof of scientific validation, service availability or customer adoption. Status vocabularies are descriptive and are not technology-readiness certifications.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schemaVersion", "asOf", "canonicalPage", "organization", "description", "direction", "boundaries", "areas", "activities", "knowledgeFields", "discovery"],
+  "properties": {
+    "$schema": { "const": "https://www.mahastrategies.com/schemas/company-profile-1.0.json" },
+    "schemaVersion": { "const": "1.0.0" },
+    "asOf": { "type": "string", "format": "date" },
+    "canonicalPage": { "const": "https://www.mahastrategies.com/about/technology" },
+    "organization": { "type": "object", "required": ["@type", "@id", "name", "url", "description"], "properties": { "@type": { "const": "Organization" }, "@id": { "const": "https://www.mahastrategies.com/#organization" }, "name": { "const": "Maha Strategies LLC" }, "url": { "const": "https://www.mahastrategies.com" }, "description": { "type": "string", "minLength": 1 } } },
+    "description": { "type": "string", "minLength": 1 },
+    "direction": { "type": "string", "minLength": 1 },
+    "boundaries": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "areas": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["id", "name", "description"], "properties": { "id": { "enum": ["software", "research", "publishing"] }, "name": { "type": "string", "minLength": 1 }, "description": { "type": "string", "minLength": 1 } } } },
+    "activities": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["id", "name", "area", "status", "summary", "boundary", "url", "links"], "properties": {
+      "id": { "type": "string", "pattern": "^[a-z0-9-]+$" }, "name": { "type": "string", "minLength": 1 },
+      "area": { "enum": ["software", "research", "publishing"] },
+      "status": { "enum": ["software-and-evaluation", "internal-simulation", "exploratory-research", "publishing-and-education"] },
+      "summary": { "type": "string", "minLength": 1 }, "boundary": { "type": "string", "minLength": 1 },
+      "url": { "type": "string", "format": "uri" }, "links": { "type": "array", "items": { "type": "string", "format": "uri" } }
+    } } },
+    "knowledgeFields": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["id", "name", "state", "currentWork", "possibleDirection", "url"], "properties": {
+      "id": { "type": "string", "pattern": "^[a-z0-9-]+$" }, "name": { "type": "string", "minLength": 1 },
+      "state": { "enum": ["knowledge-assets", "implemented-software", "documented-simulation", "exploratory-direction"] },
+      "currentWork": { "type": "string", "minLength": 1 }, "possibleDirection": { "type": "string", "minLength": 1 }, "url": { "type": "string", "format": "uri" }
+    } } },
+    "discovery": { "type": "object", "additionalProperties": false, "required": ["company", "knowledge", "siteGuide", "registry", "contact"], "properties": {
+      "company": { "type": "string", "format": "uri" }, "knowledge": { "type": "string", "format": "uri" }, "siteGuide": { "type": "string", "format": "uri" }, "registry": { "type": "string", "format": "uri" }, "contact": { "type": "string", "format": "uri" }
+    } }
+  }
+}
