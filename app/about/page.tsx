@@ -10,10 +10,11 @@ import {
   mahaRelatedProjectsJsonLd,
   mayoneMahaRajanJsonLd,
 } from '@/lib/entity'
+import { COMPANY_DIRECTION, COMPANY_PORTFOLIO_PATH, COMPANY_PROFILE_PATH } from '@/lib/company-profile'
 
 export const metadata: Metadata = {
   title: 'About Maha Strategies LLC',
-  description: `${MAHA_DESCRIPTOR} Research on systemic sovereignty across semiconductor supply chains, software and on-device AI, and human attention.`,
+  description: `${MAHA_DESCRIPTOR} Context software, evidence workflows, educational products and bounded technology research.`,
   alternates: { canonical: '/about' },
   openGraph: {
     title: 'About Maha Strategies LLC',
@@ -64,8 +65,13 @@ export default function AboutPage() {
       <div className="evidence-container">
         <header className="border-t border-[var(--border-default)] pt-5">
           <p className="evidence-kicker">[ Entity profile · Maha Strategies LLC ]</p>
-          <h1 className="evidence-title evidence-title--product">Research for systems that can remain autonomous.</h1>
-          <p className="evidence-lede mt-7">Maha Strategies LLC is an independent research, publishing, and technology-architecture organization. Its work spans semiconductor supply chains, software, and on-device AI, and the <Link className="evidence-link" href="/mps">evidence standards</Link> that make AI-assisted research reviewable.</p>
+          <h1 className="evidence-title evidence-title--product">Software, research and technology development.</h1>
+          <p className="evidence-lede mt-7">{MAHA_DESCRIPTOR}</p>
+          <p className="evidence-copy mt-5">{COMPANY_DIRECTION}</p>
+          <div className="mt-6 flex flex-wrap gap-5">
+            <Link className="evidence-link" href={COMPANY_PORTFOLIO_PATH}>Technology and research portfolio</Link>
+            <a className="evidence-link" href={COMPANY_PROFILE_PATH}>Machine-readable company profile</a>
+          </div>
         </header>
 
         <section className="evidence-section" aria-label="The three-layer research model">

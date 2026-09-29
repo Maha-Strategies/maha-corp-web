@@ -5,19 +5,21 @@ import { headers } from 'next/headers'
 import { TrackedLink } from '@/components/ConversionTracker'
 import PolicyFrontDoor, { policyFrontDoorMetadata } from '@/components/policy/PolicyFrontDoor'
 import { normalizedRequestHost } from '@/lib/federation-host-routing'
+import { MAHA_DESCRIPTOR, MAHA_DESCRIPTION } from '@/lib/entity'
+import { COMPANY_PORTFOLIO_PATH } from '@/lib/company-profile'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 
 const corporateMetadata: Metadata = {
-  title: 'Governed Infrastructure for AI and Machine Commerce | Maha Strategies',
-  description: 'Maha Strategies governs the path from evidence and context to agent action, payment, delivery, and audit-ready proof.',
+  title: 'Technology Development and AI Infrastructure | Maha Strategies',
+  description: MAHA_DESCRIPTION,
   alternates: { canonical: '/' },
   openGraph: {
-    type: 'website', url: SITE_URL, siteName: 'Maha Strategies', title: 'Governed Infrastructure for AI and Machine Commerce | Maha Strategies',
-    description: 'Govern the path from evidence and context to agent action, payment, delivery, and audit-ready proof.',
+    type: 'website', url: SITE_URL, siteName: 'Maha Strategies', title: 'Technology Development and AI Infrastructure | Maha Strategies',
+    description: MAHA_DESCRIPTION,
     images: [{ url: '/og-master.png', width: 1200, height: 630, alt: 'Maha Strategies — Verified Research Briefs' }],
   },
-  twitter: { card: 'summary_large_image', title: 'Governed Infrastructure for AI and Machine Commerce | Maha Strategies', description: 'Govern evidence, context, agent action, payment, delivery, and proof.', images: ['/og-master.png'], creator: '@mayonemaha' },
+  twitter: { card: 'summary_large_image', title: 'Technology Development and AI Infrastructure | Maha Strategies', description: MAHA_DESCRIPTION, images: ['/og-master.png'], creator: '@mayonemaha' },
 }
 
 const capabilities = [
@@ -63,6 +65,7 @@ function CorporateHomepage() {
           <h1 className="evidence-title">Govern the path from evidence to autonomous action.</h1>
           <p className="evidence-lede mt-7">Maha builds infrastructure for AI systems that must reason from traceable context, act within explicit authority, and leave evidence humans can audit.</p>
           <p className="evidence-copy mt-5">One control layer connects evidence and context to policy, approvals, agent execution, payment, delivery, and replay-safe recovery—so autonomy can expand without making accountability disappear.</p>
+          <p className="evidence-copy mt-5">{MAHA_DESCRIPTOR} <Link className="evidence-link" href={COMPANY_PORTFOLIO_PATH}>Explore our software, Physical AI simulations and longer-term research directions.</Link></p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Link href="/developers" className="evidence-action evidence-action--primary">Explore the infrastructure ↗</Link>
             <TrackedLink href="/mps/preflight" event="cta_homepage_mps_preflight" className="evidence-action evidence-action--secondary">Run a private preflight — $49 ↗</TrackedLink>

@@ -7,10 +7,10 @@ export const MAYONE_MAHA_RAJAN_ID = `${MAHA_SITE_URL}/about#mayone-maha-rajan`
  * visible copy and in structured data so that the two never diverge.
  */
 export const MAHA_DESCRIPTOR =
-  'Maha Strategies LLC is an independent research, publishing, and technology-architecture organization.'
+  'Maha Strategies LLC is an independent technology-development, research, and publishing company.'
 
 export const MAHA_DESCRIPTION =
-  'Independent research, publishing, and technology-architecture organization.'
+  'Maha Strategies LLC develops context and evidence software, publishes research and educational products, and explores new technologies through bounded research and simulation.'
 
 /**
  * The single Organization node for Maha Strategies LLC.

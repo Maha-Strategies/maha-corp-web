@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
 import { headers } from 'next/headers'
 import { MAHA_SITE_URL } from '@/lib/entity'
+import { COMPANY_PORTFOLIO_PATH, COMPANY_PROFILE_DATE } from '@/lib/company-profile'
 import { getPublicContentPublicationSitemapRows } from '@/lib/public-content-publications'
 import { unfinishedSpeciesSections } from '@/lib/unfinished-species'
 import { openBookEditions } from '@/lib/open-book-editions'
@@ -264,7 +265,8 @@ export async function currentHostSitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/tools/constraint-studio`, lastModified: new Date('2026-07-27') },
     { url: `${baseUrl}/tools/token-calc`, lastModified: new Date('2026-07-29') },
     { url: `${baseUrl}/utilities/receipts` },
-    { url: `${baseUrl}/about`, lastModified: new Date('2026-07-20') },
+    { url: `${baseUrl}/about`, lastModified: new Date(COMPANY_PROFILE_DATE) },
+    { url: `${baseUrl}${COMPANY_PORTFOLIO_PATH}`, lastModified: new Date(COMPANY_PROFILE_DATE) },
     { url: `${baseUrl}/systemic-sovereignty`, lastModified: new Date('2026-07-20') },
     { url: `${baseUrl}/on-device-ai-vs-cloud`, lastModified: new Date('2026-07-20') },
     { url: `${baseUrl}/audit` }, // ADDED CORE NODE
