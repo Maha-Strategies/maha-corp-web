@@ -104,7 +104,8 @@ test('every route belongs to one declared visual system', () => {
   // question and methodology routes. All three delegate their boundary to the
   // policy reader, introducing no new visual system.
   // 79 -> 81: Computational Architecture hub and finite article template.
-  assert.deepEqual(groups, { paper: 133, apps: 5, books: 41, docs: 1, knowledge: 81, intelligence: 2, operator: 32, internal: 1 })
+  // paper 133 -> 134: /about/technology owns the existing evidence-page boundary.
+  assert.deepEqual(groups, { paper: 134, apps: 5, books: 41, docs: 1, knowledge: 81, intelligence: 2, operator: 32, internal: 1 })
 })
 
 test('Apps, Books, Docs, Knowledge, and Intelligence own bounded cyber-light overlays', () => {
