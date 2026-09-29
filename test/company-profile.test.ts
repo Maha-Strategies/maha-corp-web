@@ -51,12 +51,12 @@ test('custom JSON and standard JSON-LD share names, status and explicit limitati
   assert.ok('itemListElement' in list && list.itemListElement)
   assert.equal(list.numberOfItems, COMPANY_ACTIVITIES.length + COMPANY_KNOWLEDGE_FIELDS.length)
   for (const activity of COMPANY_ACTIVITIES) {
-    const entry = list.itemListElement.find((item) => item.item.name === activity.name)!.item
+    const entry: { creativeWorkStatus: string; description: string } = list.itemListElement.find((item) => item.item.name === activity.name)!.item
     assert.equal(entry.creativeWorkStatus, activity.status)
     assert.ok(entry.description.includes(activity.boundary))
   }
   for (const field of COMPANY_KNOWLEDGE_FIELDS) {
-    const entry = list.itemListElement.find((item) => item.item.name === field.name)!.item
+    const entry: { creativeWorkStatus: string; description: string } = list.itemListElement.find((item) => item.item.name === field.name)!.item
     assert.equal(entry.creativeWorkStatus, field.state)
     assert.ok(entry.description.includes(field.currentWork))
     assert.ok(entry.description.includes(field.possibleDirection))
