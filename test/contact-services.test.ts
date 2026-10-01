@@ -30,7 +30,7 @@ test('partnership migration preserves existing ledger offer allowlists', () => {
   const migration = readFileSync(new URL('../supabase/migrations/20261001090000_allow_partnership_assessment_inbound_offer.sql', import.meta.url), 'utf8')
   for (const table of ['inbound_submissions', 'revenue_opportunities']) {
     const constraint = `${table}_offer_id_check check (offer_id in (`
-    const values = (sql: string) => sql.split(constraint)[1].split('));')[0].match(/'[^']+'/g) ?? []
+    const values = (sql: string): string[] => sql.split(constraint)[1].split('));')[0].match(/'[^']+'/g) ?? []
     assert.deepEqual(values(migration).filter(value => value !== "'partnership-assessment'"), values(previous))
     assert.ok(values(migration).includes("'partnership-assessment'"))
   }
