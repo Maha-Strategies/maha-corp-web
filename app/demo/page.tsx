@@ -59,7 +59,7 @@ export default function DemoPage() {
           <p className="evidence-lede mt-7">Maha governs the path from source material to AI context, agent action, payment, delivery, and audit-ready proof.</p>
           <p className="evidence-copy mt-5">This six-minute demonstration explains what is operational, what has been independently exercised, and where a design partner can help turn bounded infrastructure into a real production workflow.</p>
           <div className="mt-9 flex flex-wrap gap-3">
-            <TrackedLink href="/contact?service=general" event="cta_demo_design_partner" className="evidence-action evidence-action--primary">Discuss a design partnership ↗</TrackedLink>
+            <TrackedLink href="/contact?service=partnership_assessment" event="cta_demo_design_partner" className="evidence-action evidence-action--primary">Discuss a design partnership ↗</TrackedLink>
             <Link href="/developers" className="evidence-action evidence-action--secondary">Inspect the infrastructure ↗</Link>
           </div>
         </header>
@@ -106,7 +106,7 @@ export default function DemoPage() {
               <Metric label="Initial boundary" value="One workflow" detail="Scope and acceptance criteria are agreed before either side commits. Implementation beyond the assessment is separate." />
             </div>
             <p className="mt-6 text-xs leading-6 text-[var(--text-muted)]">{FOUNDING_PARTNER.notADiscount}</p>
-            <div className="mt-7 flex flex-wrap gap-3"><TrackedLink href="/contact?service=general" event="cta_demo_scope_pilot" className="evidence-action evidence-action--primary">Identify a suitable workflow ↗</TrackedLink><Link href="/pricing#assessment-options" className="evidence-action evidence-action--secondary">Read pricing and boundaries ↗</Link></div>
+            <div className="mt-7 flex flex-wrap gap-3"><TrackedLink href="/contact?service=partnership_assessment" event="cta_demo_scope_pilot" className="evidence-action evidence-action--primary">Identify a suitable workflow ↗</TrackedLink><Link href="/pricing#assessment-options" className="evidence-action evidence-action--secondary">Read pricing and boundaries ↗</Link></div>
           </div>
         </section>
 
@@ -114,9 +114,9 @@ export default function DemoPage() {
           <p className="evidence-kicker">Three ways to engage</p>
           <h2 id="ways-to-work" className="evidence-section-title mt-4">Choose the relationship, then define the boundary.</h2>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            <Path title="Design partner" body="Apply the evidence layer to one real workflow and help shape the product through an agreed, paid evaluation." href="/contact?service=general" action="Discuss a workflow" />
+            <Path title="Design partner" body="Apply the evidence layer to one real workflow and help shape the product through an agreed, paid evaluation." href="/contact?service=partnership_assessment" action="Discuss a workflow" />
             <Path title="Distribution partner" body="Bring Maha’s MCP, evidence, and machine-readable delivery surfaces into an existing developer or enterprise channel." href="/enterprise-mcp-gateway" action="Review the gateway" />
-            <Path title="Investor or strategic partner" body="Review the operating evidence, commercial model, and roadmap before a focused conversation with the founder." href="/contact?service=general" action="Contact Maha" />
+            <Path title="Investor or strategic partner" body="Review the operating evidence, commercial model, and roadmap before a focused conversation with the founder." href="/contact?service=partnership_assessment" action="Contact Maha" />
           </div>
         </section>
       </div>

@@ -1,6 +1,9 @@
 import { createHash, randomUUID, timingSafeEqual } from 'node:crypto'
 
 export const REVENUE_OFFERS = {
+  'partnership-assessment': {
+    name: 'Design partnership / workflow assessment', acquisition: 'human_scope_review', href: '/demo',
+  },
   'mps-prepaid-audit-access': {
     name: 'MPS Prepaid Audit API Access', acquisition: 'self_service_checkout', href: '/mps/audit-access',
   },
