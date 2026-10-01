@@ -2,6 +2,8 @@
 -- that receive a qualified website inquiry. This broadens only the explicit
 -- offer allowlists; it grants no payment, publication, or autonomous action.
 
+begin;
+
 alter table public.inbound_submissions
   drop constraint if exists inbound_submissions_offer_id_check;
 
@@ -22,3 +24,5 @@ alter table public.revenue_opportunities
     'rapid-intelligence-brief', 'verified-research-brief', 'partnership-assessment',
     'utility-receipts-to-csv'
   ));
+
+commit;
