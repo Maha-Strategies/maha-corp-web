@@ -12,6 +12,10 @@
  */
 import { writeFileSync } from 'node:fs'
 
+const outArg = process.argv.indexOf('--out')
+const outPath = outArg === -1 ? null : process.argv[outArg + 1]
+if (outArg !== -1 && !outPath) throw new Error('--out requires a path')
+
 import { buildContextBudgetLadder, buildEvidenceRetentionMatrix, buildGovernedContextVerificationPack }
   from '../lib/x402/context-product-family.ts'
 import { buildMicroProduct } from '../lib/x402/micro-products.ts'
@@ -192,8 +196,11 @@ const out = {
   rows,
   skipped,
 }
-writeFileSync('/private/tmp/claude-501/-Users-mayonerajan-Projects-maha-corp-web/b615985c-ba09-4562-b363-1b02f7b91dd9/scratchpad/unit-costs.json',
-  `${JSON.stringify(out, null, 2)}\n`)
+// JSON goes to --out, or to stdout so it can be piped; the summary goes to
+// stderr either way so it never corrupts the JSON.
+const json = `${JSON.stringify(out, null, 2)}\n`
+if (outPath) writeFileSync(outPath, json)
+else process.stdout.write(json)
 
-console.log(`measured ${rows.length} endpoint/payload combinations across ${new Set(rows.map(r => r.id)).size} endpoints`)
-for (const s of skipped) console.log(`  skipped: ${s.id} -- ${s.reason}`)
+console.error(`measured ${rows.length} endpoint/payload combinations across ${new Set(rows.map(r => r.id)).size} endpoints`)
+for (const s of skipped) console.error(`  skipped: ${s.id} -- ${s.reason}`)

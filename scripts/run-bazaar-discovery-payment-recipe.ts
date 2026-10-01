@@ -14,7 +14,6 @@ import {
   MAHA_CONTEXT_RESOURCE,
   MAHA_PAYEE,
   SPEND_CEILING_BASE_UNITS,
-  assertSpendPolicy,
   inspectBazaarContract,
   selectMahaResource,
   verifyPaymentReceipt,

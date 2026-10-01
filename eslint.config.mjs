@@ -22,6 +22,15 @@ const eslintConfig = defineConfig([
       // These pages intentionally contain editorial punctuation in JSX prose.
       "react/no-unescaped-entities": "off",
       "react/jsx-no-comment-textnodes": "off",
+      // A leading underscore marks a binding kept on purpose -- an ignored
+      // parameter or a key destructured only to omit it from a rest object.
+      "@typescript-eslint/no-unused-vars": ["warn", {
+        argsIgnorePattern: "^_",
+        varsIgnorePattern: "^_",
+        caughtErrorsIgnorePattern: "^_",
+        destructuredArrayIgnorePattern: "^_",
+        ignoreRestSiblings: true,
+      }],
     },
   },
 ]);

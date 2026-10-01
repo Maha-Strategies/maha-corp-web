@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
 import { permitRetrieval, registryDigest, type RetrievalAttempt } from '../lib/retrieval-registry.ts'
-import { evaluateFirstParty, gradeAsIndependent, scanFirstPartyText, type FirstPartyDocument } from '../lib/first-party-evidence.ts'
+import { evaluateFirstParty, gradeAsIndependent, type FirstPartyDocument } from '../lib/first-party-evidence.ts'
 import { gradeEvidence, type InspectionAttestation } from '../lib/legacy-evidence-levels.ts'
 import registryFile from '../content/evidence-batch-6/retrieval-registry.json' with { type: 'json' }
 import insp6 from '../content/evidence-batch-6/inspections.json' with { type: 'json' }
