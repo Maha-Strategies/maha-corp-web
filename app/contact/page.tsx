@@ -1,7 +1,9 @@
 "use client"
 
-import React, { FormEvent, useEffect, useRef, useState } from 'react'
+import React, { FormEvent, Suspense, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+import { contactService, OFFER_BY_SERVICE, SERVICE_OPTIONS, type ServiceCode } from '@/lib/contact-services'
 
 import { trackConversion } from '@/components/ConversionTracker'
 import EngagementPath from '@/components/EngagementPath'
@@ -10,39 +12,21 @@ import { postPublicForm } from '@/lib/public-form-client'
 
 const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
 
-const OFFER_BY_SERVICE = {
-  verified_research: 'verified-research-brief',
-  rapid_intelligence: 'rapid-intelligence-brief',
-  mps_evidence_audit: 'mps-evidence-audit',
-  mps_audit: 'mps-evidence-audit',
-  token_request: 'mps-preflight',
-  support: 'mps-preflight',
-  general: 'rapid-intelligence-brief',
-} as const
-
-type ServiceCode = keyof typeof OFFER_BY_SERVICE
-
-const SERVICE_OPTIONS: Array<{ value: ServiceCode; label: string }> = [
-  { value: 'verified_research', label: 'Verified Research Brief — $2,500 / 10 business days' },
-  { value: 'rapid_intelligence', label: 'Rapid Intelligence Brief — from $500 / five business days' },
-  { value: 'mps_evidence_audit', label: 'MPS Evidence Audit — high-stakes document review' },
-  { value: 'mps_audit', label: 'MPS Evidence Audit — manuscript or report' },
-  { value: 'token_request', label: 'Cognitive Gateway Access Token Request' },
-  { value: 'support', label: 'Technical Support / Troubleshooting' },
-  { value: 'general', label: 'General Inquiry' },
-]
-
-function selectedServiceFromLocation(): ServiceCode {
-  if (typeof window === 'undefined') return 'verified_research'
-
-  const service = new URLSearchParams(window.location.search).get('service')
-  return service && service in OFFER_BY_SERVICE ? (service as ServiceCode) : 'verified_research'
+export default function ContactPage() {
+  return <Suspense fallback={<main className="evidence-page"><p className="evidence-copy">Loading inquiry form…</p></main>}><ContactFromQuery /></Suspense>
 }
 
-export default function ContactPage() {
+function ContactFromQuery() {
+  const query = useSearchParams()
+  const service = contactService(query.get('service'))
+  return <ContactForm key={service} initialService={service} />
+}
+
+function ContactForm({ initialService }: { initialService: ServiceCode }) {
   const [state, setState] = useState({ success: false, error: null as string | null })
   const [isPending, setIsPending] = useState(false)
-  const [selectedService, setSelectedService] = useState<ServiceCode>(selectedServiceFromLocation)
+  const [selectedService, setSelectedService] = useState<ServiceCode>(initialService)
+  const isPartnership = selectedService === 'partnership_assessment'
   const [turnstileToken, setTurnstileToken] = useState('')
   const turnstileRef = useRef<TurnstileFieldHandle>(null)
 
@@ -101,18 +85,19 @@ export default function ContactPage() {
           </p>
           <h1 className="evidence-title evidence-title--product mt-6">Start an inquiry</h1>
           <p className="evidence-lede mt-6">
-            Select your objective first. For a Rapid Intelligence Brief or Verified Research Brief, we respond within two
-            business days with a scope—or a clear reason this is not a fit.
+            {isPartnership
+              ? 'Tell us about the workflow you want to assess or the partnership you have in mind. We respond within two business days with a fit check and proposed next steps. Scope and commercial terms are agreed before work begins.'
+              : 'Select your objective first. For a Rapid Intelligence Brief or Verified Research Brief, we respond within two business days with a scope—or a clear reason this is not a fit.'}
           </p>
         </header>
 
         <section className="evidence-section" aria-label="Path and controls">
-          <EngagementPath tone="paper" />
+          <EngagementPath tone="paper" offer={isPartnership ? 'partnership' : 'general'} />
         </section>
 
         <section className="evidence-section" aria-label="Inquiry form">
           <p className="evidence-kicker">01 // Decision intake</p>
-          <h2 className="evidence-section-title mt-4">Tell us what you need decided.</h2>
+          <h2 className="evidence-section-title mt-4">{isPartnership ? 'Tell us about your workflow or partnership.' : 'Tell us what you need decided.'}</h2>
           {state.success ? (
             <div className="evidence-inset mt-7 border border-[var(--status-verified)] bg-[rgba(16,185,129,0.07)]">
               <p className="evidence-kicker text-[var(--status-verified)]">[ INQUIRY RECEIVED ]</p>
@@ -177,7 +162,7 @@ export default function ContactPage() {
 
               <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <label htmlFor="decision" className="block text-xs evidence-card-copy uppercase">Decision to inform</label>
+                  <label htmlFor="decision" className="block text-xs evidence-card-copy uppercase">{isPartnership ? 'Workflow or partnership objective' : 'Decision to inform'}</label>
                   <input
                     type="text"
                     id="decision"
@@ -185,11 +170,11 @@ export default function ContactPage() {
                     required
                     disabled={isPending}
                     className="evidence-input w-full"
-                    placeholder="An investment, vendor, or strategy decision"
+                    placeholder={isPartnership ? 'The workflow to evaluate or partnership to explore' : 'An investment, vendor, or strategy decision'}
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="deadline" className="block text-xs evidence-card-copy uppercase">Decision deadline (optional)</label>
+                  <label htmlFor="deadline" className="block text-xs evidence-card-copy uppercase">{isPartnership ? 'Target timing (optional)' : 'Decision deadline (optional)'}</label>
                   <input
                     type="text"
                     id="deadline"
@@ -247,7 +232,7 @@ export default function ContactPage() {
               </div>
 
               <div className="mt-6 space-y-2">
-                <label htmlFor="message" className="block text-xs evidence-card-copy uppercase">Your question</label>
+                <label htmlFor="message" className="block text-xs evidence-card-copy uppercase">{isPartnership ? 'Workflow and assessment goals' : 'Your question'}</label>
                 <textarea
                   id="message"
                   name="message"
@@ -255,7 +240,7 @@ export default function ContactPage() {
                   required
                   disabled={isPending}
                   className="evidence-input w-full resize-y"
-                  placeholder="What question do you need answered, and what would change if the answer were different?"
+                  placeholder={isPartnership ? 'Describe the workflow, current challenges, and what a successful evaluation or partnership would achieve.' : 'What question do you need answered, and what would change if the answer were different?'}
                 />
               </div>
 

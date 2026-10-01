@@ -1,5 +1,5 @@
 type EngagementPathProps = {
-  offer?: 'rapid' | 'verified' | 'general'
+  offer?: 'rapid' | 'verified' | 'general' | 'partnership'
   className?: string
   /**
    * Which ground this renders on.
@@ -36,6 +36,7 @@ const TONE = {
 } as const
 
 const DELIVERY_COPY = {
+  partnership: 'Receive a fit check and proposed assessment or partnership next steps for your workflow.',
   rapid: 'Receive the agreed concise memo with linked sources, stated assumptions, and decision implications.',
   verified: 'Receive the agreed research brief with linked evidence and explicit provenance treatment for in-scope claims.',
   general: 'Receive a clear reply on fit and the appropriate next step for the question you submitted.',
@@ -49,9 +50,9 @@ const DELIVERY_COPY = {
 export default function EngagementPath({ offer = 'general', className = '', tone = 'operator' }: EngagementPathProps) {
   const t = TONE[tone]
   const steps = [
-    ['01', 'Send the decision', 'Share the question, decision, deadline, and any material constraints.'],
+    ['01', offer === 'partnership' ? 'Share the workflow' : 'Send the decision', offer === 'partnership' ? 'Describe the workflow, evaluation goals, timing, and material constraints.' : 'Share the question, decision, deadline, and any material constraints.'],
     ['02', 'Receive a fit check', 'Within two business days, Maha confirms fit or says plainly if the work is not a match.'],
-    ['03', 'Confirm a written scope', 'Scope, deliverable, timing, and commercial terms are confirmed before research begins.'],
+    ['03', 'Confirm a written scope', offer === 'partnership' ? 'Assessment goals, deliverables, timing, and commercial terms are confirmed before work begins.' : 'Scope, deliverable, timing, and commercial terms are confirmed before research begins.'],
     ['04', 'Receive the agreed work', DELIVERY_COPY[offer]],
   ]
 
@@ -60,7 +61,7 @@ export default function EngagementPath({ offer = 'general', className = '', tone
       <div className={`flex flex-col gap-2 border-b ${t.rule} pb-5 sm:flex-row sm:items-end sm:justify-between`}>
         <div>
           <p className={`font-mono text-[10px] uppercase tracking-widest ${t.eyebrow}`}>[ Clear engagement path ]</p>
-          <h2 id="engagement-path-title" className={t.title}>From inquiry to a defined research engagement.</h2>
+          <h2 id="engagement-path-title" className={t.title}>{offer === 'partnership' ? 'From inquiry to a scoped assessment or partnership.' : 'From inquiry to a defined research engagement.'}</h2>
         </div>
         <p className={`font-mono text-[10px] uppercase tracking-widest ${t.body}`}>Human review at every commitment</p>
       </div>
