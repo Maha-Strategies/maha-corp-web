@@ -1,0 +1,77 @@
+{
+  "schema": "maha.governed-trace-receipt/0.1",
+  "profile": "hawthorn-skillloop-trace-export/1.0",
+  "trace": {
+    "traceId": "trace_demo_001",
+    "sourceSchemaVersion": "1.1",
+    "runtime": "agent_architecture",
+    "adapter": {
+      "name": "agent_architecture_trace_export",
+      "version": "1.0"
+    },
+    "normalizedTraceDigest": "sha256:e44189cd6e82d106fac57c4989f8d6cdb4176b509d57476930abde9e15dd4c2b",
+    "rawTraceDigest": "sha256:e44189cd6e82d106fac57c4989f8d6cdb4176b509d57476930abde9e15dd4c2b"
+  },
+  "layers": {
+    "evidence": {
+      "orderedSourceRecords": [
+        {
+          "order": 0,
+          "recordId": "source:policy:001",
+          "digest": "sha256:1ca85dc9a95174fd36a057072522013280befc38833887b1d49a7782b0c03bca"
+        },
+        {
+          "order": 1,
+          "recordId": "source:supplier:002",
+          "digest": "sha256:bc6cf7bb1b56cccdf79e0dbffd907093c5ff10f6b0836cbcba2210878b29f27a"
+        }
+      ]
+    },
+    "context": {
+      "selectedContextDigest": "sha256:fe7ee4de6dbe3964d9b89f2739a61d12036feb4c2347d30b2669f75a8630adc3",
+      "retrievalPolicyDigest": "sha256:b63833666c127258914ba3f854fdc25ccd8feb21c6d57427e34f996441584723",
+      "budget": {
+        "limitTokens": 1200,
+        "selectedTokens": 742,
+        "held": true
+      }
+    },
+    "authority": {
+      "actorId": "agent:research-demo",
+      "organizationId": "org:synthetic-example",
+      "role": "researcher",
+      "visibilityScope": [
+        "private:synthetic-workspace"
+      ]
+    },
+    "receipt": {
+      "guardrail": {
+        "outcome": "passed",
+        "policyDigest": "sha256:b5df5ce83927f92e28465c4b9c257b492c6172e558eef55cfa32e3fe3fc96f44",
+        "reasonCodes": [
+          "no_sensitive_source_content"
+        ]
+      },
+      "compaction": {
+        "outcome": "applied",
+        "inputDigest": "sha256:89defce06a472d3baaa029ffcd72df6aebc536746f0022408641c70f5114c5d6",
+        "outputDigest": "sha256:b1c6cb9631a499d2284959f5484e496ea9cdcfd93150c6b359513ce1f7505a04",
+        "reasonCodes": [
+          "within_budget"
+        ]
+      },
+      "escalation": {
+        "outcome": "not_required",
+        "reasonCodes": [
+          "read_only_no_side_effects"
+        ]
+      },
+      "lineage": {
+        "checkpointId": "checkpoint:demo:004",
+        "parentTraceId": "trace_demo_000"
+      },
+      "completedAt": "2026-09-02T00:00:04.000Z"
+    }
+  },
+  "receiptDigest": "sha256:724460bae78fbcefc145352c288e9b84fed5407b131f1b504a28e17642945f07"
+}
