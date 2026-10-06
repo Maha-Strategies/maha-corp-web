@@ -1,0 +1,2918 @@
+{
+  "schemaVersion": "maha-context-proof-fixture-v1",
+  "proofContractVersion": 3,
+  "fixtureId": "boundary-n128",
+  "description": "Sanitized synthetic boundary workload with exactly 128 retained passages.",
+  "privacyClassification": "sanitized_synthetic_or_published_source",
+  "normalizationBasis": "normalized_source_v1",
+  "offsetEncoding": "utf8",
+  "offsetRange": "half_open",
+  "hashEncoding": "sha256:<64_lowercase_hex>",
+  "tokenAccounting": {
+    "tokenEstimatorVersion": "maha_model_neutral_v1",
+    "budgetMode": "guaranteed",
+    "declaredTokenBudget": 16000,
+    "compilerSelectionBudget": 11520,
+    "retainedPassageReportedTokens": 2176,
+    "compiledContextReportedTokens": 2193,
+    "reportedTokenArithmeticValid": true,
+    "tokenEstimatorVerified": false,
+    "providerTokenBudgetGuaranteed": false
+  },
+  "proofDecision": {
+    "status": "success",
+    "shouldAttemptProof": true,
+    "retainedPassageCount": 128,
+    "maximumSupportedRetainedPassages": 128,
+    "chargePermitted": true
+  },
+  "compilerCommitments": {
+    "inputHash": "sha256:402ae45a68c5d8606ec441b4a2923387fba174e5b953e57cc436697abb7a2be1",
+    "outputHash": "sha256:ff0ec2c34db5e13eeb20220d633d1b5cd91dc8ada9a0c5019a33b207768bef60",
+    "originalEstimatedTokens": 2176,
+    "compiledEstimatedTokens": 2193,
+    "sourceCoveragePercent": 100,
+    "duplicatePassagesRemoved": 0
+  },
+  "claimBoundaries": {
+    "provesNormalizedSourceHashBinding": true,
+    "provesRetainedPassageByteRangeBinding": true,
+    "provesRetainedSetHashUniqueness": true,
+    "provesSourceCoverageArithmetic": true,
+    "provesReportedTokenArithmetic": true,
+    "provesCandidateSetCompleteness": false,
+    "provesRankingCorrectness": false,
+    "provesTokenEstimatorCorrectness": false,
+    "provesProviderTokenizerCompatibility": false,
+    "provesSemanticCompleteness": false
+  },
+  "privateWitness": {
+    "request": {
+      "task": "Retain every deterministic provenance control record for proof-contract validation.",
+      "tokenBudget": 16000,
+      "documents": [
+        {
+          "id": "boundary-n128-1",
+          "title": "Boundary N128 Source 1",
+          "text": "Control record 001 contains deterministic provenance signal n128-001 for the retained passage boundary test.\n\nControl record 009 contains deterministic provenance signal n128-009 for the retained passage boundary test.\n\nControl record 017 contains deterministic provenance signal n128-017 for the retained passage boundary test.\n\nControl record 025 contains deterministic provenance signal n128-025 for the retained passage boundary test.\n\nControl record 033 contains deterministic provenance signal n128-033 for the retained passage boundary test.\n\nControl record 041 contains deterministic provenance signal n128-041 for the retained passage boundary test.\n\nControl record 049 contains deterministic provenance signal n128-049 for the retained passage boundary test.\n\nControl record 057 contains deterministic provenance signal n128-057 for the retained passage boundary test.\n\nControl record 065 contains deterministic provenance signal n128-065 for the retained passage boundary test.\n\nControl record 073 contains deterministic provenance signal n128-073 for the retained passage boundary test.\n\nControl record 081 contains deterministic provenance signal n128-081 for the retained passage boundary test.\n\nControl record 089 contains deterministic provenance signal n128-089 for the retained passage boundary test.\n\nControl record 097 contains deterministic provenance signal n128-097 for the retained passage boundary test.\n\nControl record 105 contains deterministic provenance signal n128-105 for the retained passage boundary test.\n\nControl record 113 contains deterministic provenance signal n128-113 for the retained passage boundary test.\n\nControl record 121 contains deterministic provenance signal n128-121 for the retained passage boundary test."
+        },
+        {
+          "id": "boundary-n128-2",
+          "title": "Boundary N128 Source 2",
+          "text": "Control record 002 contains deterministic provenance signal n128-002 for the retained passage boundary test.\n\nControl record 010 contains deterministic provenance signal n128-010 for the retained passage boundary test.\n\nControl record 018 contains deterministic provenance signal n128-018 for the retained passage boundary test.\n\nControl record 026 contains deterministic provenance signal n128-026 for the retained passage boundary test.\n\nControl record 034 contains deterministic provenance signal n128-034 for the retained passage boundary test.\n\nControl record 042 contains deterministic provenance signal n128-042 for the retained passage boundary test.\n\nControl record 050 contains deterministic provenance signal n128-050 for the retained passage boundary test.\n\nControl record 058 contains deterministic provenance signal n128-058 for the retained passage boundary test.\n\nControl record 066 contains deterministic provenance signal n128-066 for the retained passage boundary test.\n\nControl record 074 contains deterministic provenance signal n128-074 for the retained passage boundary test.\n\nControl record 082 contains deterministic provenance signal n128-082 for the retained passage boundary test.\n\nControl record 090 contains deterministic provenance signal n128-090 for the retained passage boundary test.\n\nControl record 098 contains deterministic provenance signal n128-098 for the retained passage boundary test.\n\nControl record 106 contains deterministic provenance signal n128-106 for the retained passage boundary test.\n\nControl record 114 contains deterministic provenance signal n128-114 for the retained passage boundary test.\n\nControl record 122 contains deterministic provenance signal n128-122 for the retained passage boundary test."
+        },
+        {
+          "id": "boundary-n128-3",
+          "title": "Boundary N128 Source 3",
+          "text": "Control record 003 contains deterministic provenance signal n128-003 for the retained passage boundary test.\n\nControl record 011 contains deterministic provenance signal n128-011 for the retained passage boundary test.\n\nControl record 019 contains deterministic provenance signal n128-019 for the retained passage boundary test.\n\nControl record 027 contains deterministic provenance signal n128-027 for the retained passage boundary test.\n\nControl record 035 contains deterministic provenance signal n128-035 for the retained passage boundary test.\n\nControl record 043 contains deterministic provenance signal n128-043 for the retained passage boundary test.\n\nControl record 051 contains deterministic provenance signal n128-051 for the retained passage boundary test.\n\nControl record 059 contains deterministic provenance signal n128-059 for the retained passage boundary test.\n\nControl record 067 contains deterministic provenance signal n128-067 for the retained passage boundary test.\n\nControl record 075 contains deterministic provenance signal n128-075 for the retained passage boundary test.\n\nControl record 083 contains deterministic provenance signal n128-083 for the retained passage boundary test.\n\nControl record 091 contains deterministic provenance signal n128-091 for the retained passage boundary test.\n\nControl record 099 contains deterministic provenance signal n128-099 for the retained passage boundary test.\n\nControl record 107 contains deterministic provenance signal n128-107 for the retained passage boundary test.\n\nControl record 115 contains deterministic provenance signal n128-115 for the retained passage boundary test.\n\nControl record 123 contains deterministic provenance signal n128-123 for the retained passage boundary test."
+        },
+        {
+          "id": "boundary-n128-4",
+          "title": "Boundary N128 Source 4",
+          "text": "Control record 004 contains deterministic provenance signal n128-004 for the retained passage boundary test.\n\nControl record 012 contains deterministic provenance signal n128-012 for the retained passage boundary test.\n\nControl record 020 contains deterministic provenance signal n128-020 for the retained passage boundary test.\n\nControl record 028 contains deterministic provenance signal n128-028 for the retained passage boundary test.\n\nControl record 036 contains deterministic provenance signal n128-036 for the retained passage boundary test.\n\nControl record 044 contains deterministic provenance signal n128-044 for the retained passage boundary test.\n\nControl record 052 contains deterministic provenance signal n128-052 for the retained passage boundary test.\n\nControl record 060 contains deterministic provenance signal n128-060 for the retained passage boundary test.\n\nControl record 068 contains deterministic provenance signal n128-068 for the retained passage boundary test.\n\nControl record 076 contains deterministic provenance signal n128-076 for the retained passage boundary test.\n\nControl record 084 contains deterministic provenance signal n128-084 for the retained passage boundary test.\n\nControl record 092 contains deterministic provenance signal n128-092 for the retained passage boundary test.\n\nControl record 100 contains deterministic provenance signal n128-100 for the retained passage boundary test.\n\nControl record 108 contains deterministic provenance signal n128-108 for the retained passage boundary test.\n\nControl record 116 contains deterministic provenance signal n128-116 for the retained passage boundary test.\n\nControl record 124 contains deterministic provenance signal n128-124 for the retained passage boundary test."
+        },
+        {
+          "id": "boundary-n128-5",
+          "title": "Boundary N128 Source 5",
+          "text": "Control record 005 contains deterministic provenance signal n128-005 for the retained passage boundary test.\n\nControl record 013 contains deterministic provenance signal n128-013 for the retained passage boundary test.\n\nControl record 021 contains deterministic provenance signal n128-021 for the retained passage boundary test.\n\nControl record 029 contains deterministic provenance signal n128-029 for the retained passage boundary test.\n\nControl record 037 contains deterministic provenance signal n128-037 for the retained passage boundary test.\n\nControl record 045 contains deterministic provenance signal n128-045 for the retained passage boundary test.\n\nControl record 053 contains deterministic provenance signal n128-053 for the retained passage boundary test.\n\nControl record 061 contains deterministic provenance signal n128-061 for the retained passage boundary test.\n\nControl record 069 contains deterministic provenance signal n128-069 for the retained passage boundary test.\n\nControl record 077 contains deterministic provenance signal n128-077 for the retained passage boundary test.\n\nControl record 085 contains deterministic provenance signal n128-085 for the retained passage boundary test.\n\nControl record 093 contains deterministic provenance signal n128-093 for the retained passage boundary test.\n\nControl record 101 contains deterministic provenance signal n128-101 for the retained passage boundary test.\n\nControl record 109 contains deterministic provenance signal n128-109 for the retained passage boundary test.\n\nControl record 117 contains deterministic provenance signal n128-117 for the retained passage boundary test.\n\nControl record 125 contains deterministic provenance signal n128-125 for the retained passage boundary test."
+        },
+        {
+          "id": "boundary-n128-6",
+          "title": "Boundary N128 Source 6",
+          "text": "Control record 006 contains deterministic provenance signal n128-006 for the retained passage boundary test.\n\nControl record 014 contains deterministic provenance signal n128-014 for the retained passage boundary test.\n\nControl record 022 contains deterministic provenance signal n128-022 for the retained passage boundary test.\n\nControl record 030 contains deterministic provenance signal n128-030 for the retained passage boundary test.\n\nControl record 038 contains deterministic provenance signal n128-038 for the retained passage boundary test.\n\nControl record 046 contains deterministic provenance signal n128-046 for the retained passage boundary test.\n\nControl record 054 contains deterministic provenance signal n128-054 for the retained passage boundary test.\n\nControl record 062 contains deterministic provenance signal n128-062 for the retained passage boundary test.\n\nControl record 070 contains deterministic provenance signal n128-070 for the retained passage boundary test.\n\nControl record 078 contains deterministic provenance signal n128-078 for the retained passage boundary test.\n\nControl record 086 contains deterministic provenance signal n128-086 for the retained passage boundary test.\n\nControl record 094 contains deterministic provenance signal n128-094 for the retained passage boundary test.\n\nControl record 102 contains deterministic provenance signal n128-102 for the retained passage boundary test.\n\nControl record 110 contains deterministic provenance signal n128-110 for the retained passage boundary test.\n\nControl record 118 contains deterministic provenance signal n128-118 for the retained passage boundary test.\n\nControl record 126 contains deterministic provenance signal n128-126 for the retained passage boundary test."
+        },
+        {
+          "id": "boundary-n128-7",
+          "title": "Boundary N128 Source 7",
+          "text": "Control record 007 contains deterministic provenance signal n128-007 for the retained passage boundary test.\n\nControl record 015 contains deterministic provenance signal n128-015 for the retained passage boundary test.\n\nControl record 023 contains deterministic provenance signal n128-023 for the retained passage boundary test.\n\nControl record 031 contains deterministic provenance signal n128-031 for the retained passage boundary test.\n\nControl record 039 contains deterministic provenance signal n128-039 for the retained passage boundary test.\n\nControl record 047 contains deterministic provenance signal n128-047 for the retained passage boundary test.\n\nControl record 055 contains deterministic provenance signal n128-055 for the retained passage boundary test.\n\nControl record 063 contains deterministic provenance signal n128-063 for the retained passage boundary test.\n\nControl record 071 contains deterministic provenance signal n128-071 for the retained passage boundary test.\n\nControl record 079 contains deterministic provenance signal n128-079 for the retained passage boundary test.\n\nControl record 087 contains deterministic provenance signal n128-087 for the retained passage boundary test.\n\nControl record 095 contains deterministic provenance signal n128-095 for the retained passage boundary test.\n\nControl record 103 contains deterministic provenance signal n128-103 for the retained passage boundary test.\n\nControl record 111 contains deterministic provenance signal n128-111 for the retained passage boundary test.\n\nControl record 119 contains deterministic provenance signal n128-119 for the retained passage boundary test.\n\nControl record 127 contains deterministic provenance signal n128-127 for the retained passage boundary test."
+        },
+        {
+          "id": "boundary-n128-8",
+          "title": "Boundary N128 Source 8",
+          "text": "Control record 008 contains deterministic provenance signal n128-008 for the retained passage boundary test.\n\nControl record 016 contains deterministic provenance signal n128-016 for the retained passage boundary test.\n\nControl record 024 contains deterministic provenance signal n128-024 for the retained passage boundary test.\n\nControl record 032 contains deterministic provenance signal n128-032 for the retained passage boundary test.\n\nControl record 040 contains deterministic provenance signal n128-040 for the retained passage boundary test.\n\nControl record 048 contains deterministic provenance signal n128-048 for the retained passage boundary test.\n\nControl record 056 contains deterministic provenance signal n128-056 for the retained passage boundary test.\n\nControl record 064 contains deterministic provenance signal n128-064 for the retained passage boundary test.\n\nControl record 072 contains deterministic provenance signal n128-072 for the retained passage boundary test.\n\nControl record 080 contains deterministic provenance signal n128-080 for the retained passage boundary test.\n\nControl record 088 contains deterministic provenance signal n128-088 for the retained passage boundary test.\n\nControl record 096 contains deterministic provenance signal n128-096 for the retained passage boundary test.\n\nControl record 104 contains deterministic provenance signal n128-104 for the retained passage boundary test.\n\nControl record 112 contains deterministic provenance signal n128-112 for the retained passage boundary test.\n\nControl record 120 contains deterministic provenance signal n128-120 for the retained passage boundary test.\n\nControl record 128 contains deterministic provenance signal n128-128 for the retained passage boundary test."
+        }
+      ],
+      "provenance": "none",
+      "scoring": "bm25",
+      "budgetMode": "guaranteed"
+    },
+    "sources": [
+      {
+        "sourceId": "boundary-n128-1",
+        "title": "Boundary N128 Source 1",
+        "normalizedBytesLen": 1758,
+        "sourceHash": "sha256:d421e180ff7b152ed748d0dfa112f08350f5b817ba2bc6da9f20c9b0535eb66f",
+        "normalizedText": "Control record 001 contains deterministic provenance signal n128-001 for the retained passage boundary test.\n\nControl record 009 contains deterministic provenance signal n128-009 for the retained passage boundary test.\n\nControl record 017 contains deterministic provenance signal n128-017 for the retained passage boundary test.\n\nControl record 025 contains deterministic provenance signal n128-025 for the retained passage boundary test.\n\nControl record 033 contains deterministic provenance signal n128-033 for the retained passage boundary test.\n\nControl record 041 contains deterministic provenance signal n128-041 for the retained passage boundary test.\n\nControl record 049 contains deterministic provenance signal n128-049 for the retained passage boundary test.\n\nControl record 057 contains deterministic provenance signal n128-057 for the retained passage boundary test.\n\nControl record 065 contains deterministic provenance signal n128-065 for the retained passage boundary test.\n\nControl record 073 contains deterministic provenance signal n128-073 for the retained passage boundary test.\n\nControl record 081 contains deterministic provenance signal n128-081 for the retained passage boundary test.\n\nControl record 089 contains deterministic provenance signal n128-089 for the retained passage boundary test.\n\nControl record 097 contains deterministic provenance signal n128-097 for the retained passage boundary test.\n\nControl record 105 contains deterministic provenance signal n128-105 for the retained passage boundary test.\n\nControl record 113 contains deterministic provenance signal n128-113 for the retained passage boundary test.\n\nControl record 121 contains deterministic provenance signal n128-121 for the retained passage boundary test."
+      },
+      {
+        "sourceId": "boundary-n128-2",
+        "title": "Boundary N128 Source 2",
+        "normalizedBytesLen": 1758,
+        "sourceHash": "sha256:e07b75abe85cba0776fc6f390263375c79c8c78e707034f1c87b7bec3e7d87ea",
+        "normalizedText": "Control record 002 contains deterministic provenance signal n128-002 for the retained passage boundary test.\n\nControl record 010 contains deterministic provenance signal n128-010 for the retained passage boundary test.\n\nControl record 018 contains deterministic provenance signal n128-018 for the retained passage boundary test.\n\nControl record 026 contains deterministic provenance signal n128-026 for the retained passage boundary test.\n\nControl record 034 contains deterministic provenance signal n128-034 for the retained passage boundary test.\n\nControl record 042 contains deterministic provenance signal n128-042 for the retained passage boundary test.\n\nControl record 050 contains deterministic provenance signal n128-050 for the retained passage boundary test.\n\nControl record 058 contains deterministic provenance signal n128-058 for the retained passage boundary test.\n\nControl record 066 contains deterministic provenance signal n128-066 for the retained passage boundary test.\n\nControl record 074 contains deterministic provenance signal n128-074 for the retained passage boundary test.\n\nControl record 082 contains deterministic provenance signal n128-082 for the retained passage boundary test.\n\nControl record 090 contains deterministic provenance signal n128-090 for the retained passage boundary test.\n\nControl record 098 contains deterministic provenance signal n128-098 for the retained passage boundary test.\n\nControl record 106 contains deterministic provenance signal n128-106 for the retained passage boundary test.\n\nControl record 114 contains deterministic provenance signal n128-114 for the retained passage boundary test.\n\nControl record 122 contains deterministic provenance signal n128-122 for the retained passage boundary test."
+      },
+      {
+        "sourceId": "boundary-n128-3",
+        "title": "Boundary N128 Source 3",
+        "normalizedBytesLen": 1758,
+        "sourceHash": "sha256:0b4f80426267bf834320bf14916b5bdb859d9abafd7c4bb1d5bf2f7c8b283518",
+        "normalizedText": "Control record 003 contains deterministic provenance signal n128-003 for the retained passage boundary test.\n\nControl record 011 contains deterministic provenance signal n128-011 for the retained passage boundary test.\n\nControl record 019 contains deterministic provenance signal n128-019 for the retained passage boundary test.\n\nControl record 027 contains deterministic provenance signal n128-027 for the retained passage boundary test.\n\nControl record 035 contains deterministic provenance signal n128-035 for the retained passage boundary test.\n\nControl record 043 contains deterministic provenance signal n128-043 for the retained passage boundary test.\n\nControl record 051 contains deterministic provenance signal n128-051 for the retained passage boundary test.\n\nControl record 059 contains deterministic provenance signal n128-059 for the retained passage boundary test.\n\nControl record 067 contains deterministic provenance signal n128-067 for the retained passage boundary test.\n\nControl record 075 contains deterministic provenance signal n128-075 for the retained passage boundary test.\n\nControl record 083 contains deterministic provenance signal n128-083 for the retained passage boundary test.\n\nControl record 091 contains deterministic provenance signal n128-091 for the retained passage boundary test.\n\nControl record 099 contains deterministic provenance signal n128-099 for the retained passage boundary test.\n\nControl record 107 contains deterministic provenance signal n128-107 for the retained passage boundary test.\n\nControl record 115 contains deterministic provenance signal n128-115 for the retained passage boundary test.\n\nControl record 123 contains deterministic provenance signal n128-123 for the retained passage boundary test."
+      },
+      {
+        "sourceId": "boundary-n128-4",
+        "title": "Boundary N128 Source 4",
+        "normalizedBytesLen": 1758,
+        "sourceHash": "sha256:104c40f5a2b22deb7fc6cbb50ba0d14f6744fc141edef02093c8807061547127",
+        "normalizedText": "Control record 004 contains deterministic provenance signal n128-004 for the retained passage boundary test.\n\nControl record 012 contains deterministic provenance signal n128-012 for the retained passage boundary test.\n\nControl record 020 contains deterministic provenance signal n128-020 for the retained passage boundary test.\n\nControl record 028 contains deterministic provenance signal n128-028 for the retained passage boundary test.\n\nControl record 036 contains deterministic provenance signal n128-036 for the retained passage boundary test.\n\nControl record 044 contains deterministic provenance signal n128-044 for the retained passage boundary test.\n\nControl record 052 contains deterministic provenance signal n128-052 for the retained passage boundary test.\n\nControl record 060 contains deterministic provenance signal n128-060 for the retained passage boundary test.\n\nControl record 068 contains deterministic provenance signal n128-068 for the retained passage boundary test.\n\nControl record 076 contains deterministic provenance signal n128-076 for the retained passage boundary test.\n\nControl record 084 contains deterministic provenance signal n128-084 for the retained passage boundary test.\n\nControl record 092 contains deterministic provenance signal n128-092 for the retained passage boundary test.\n\nControl record 100 contains deterministic provenance signal n128-100 for the retained passage boundary test.\n\nControl record 108 contains deterministic provenance signal n128-108 for the retained passage boundary test.\n\nControl record 116 contains deterministic provenance signal n128-116 for the retained passage boundary test.\n\nControl record 124 contains deterministic provenance signal n128-124 for the retained passage boundary test."
+      },
+      {
+        "sourceId": "boundary-n128-5",
+        "title": "Boundary N128 Source 5",
+        "normalizedBytesLen": 1758,
+        "sourceHash": "sha256:3b428d69a9bbdb9826ba202d08d7b149faccc4299a8f20155e1973f167898d37",
+        "normalizedText": "Control record 005 contains deterministic provenance signal n128-005 for the retained passage boundary test.\n\nControl record 013 contains deterministic provenance signal n128-013 for the retained passage boundary test.\n\nControl record 021 contains deterministic provenance signal n128-021 for the retained passage boundary test.\n\nControl record 029 contains deterministic provenance signal n128-029 for the retained passage boundary test.\n\nControl record 037 contains deterministic provenance signal n128-037 for the retained passage boundary test.\n\nControl record 045 contains deterministic provenance signal n128-045 for the retained passage boundary test.\n\nControl record 053 contains deterministic provenance signal n128-053 for the retained passage boundary test.\n\nControl record 061 contains deterministic provenance signal n128-061 for the retained passage boundary test.\n\nControl record 069 contains deterministic provenance signal n128-069 for the retained passage boundary test.\n\nControl record 077 contains deterministic provenance signal n128-077 for the retained passage boundary test.\n\nControl record 085 contains deterministic provenance signal n128-085 for the retained passage boundary test.\n\nControl record 093 contains deterministic provenance signal n128-093 for the retained passage boundary test.\n\nControl record 101 contains deterministic provenance signal n128-101 for the retained passage boundary test.\n\nControl record 109 contains deterministic provenance signal n128-109 for the retained passage boundary test.\n\nControl record 117 contains deterministic provenance signal n128-117 for the retained passage boundary test.\n\nControl record 125 contains deterministic provenance signal n128-125 for the retained passage boundary test."
+      },
+      {
+        "sourceId": "boundary-n128-6",
+        "title": "Boundary N128 Source 6",
+        "normalizedBytesLen": 1758,
+        "sourceHash": "sha256:144c47679a1acf63e9652be4d2abb3a1a6542ee9ddb68358e5d68f06c9a4ecfc",
+        "normalizedText": "Control record 006 contains deterministic provenance signal n128-006 for the retained passage boundary test.\n\nControl record 014 contains deterministic provenance signal n128-014 for the retained passage boundary test.\n\nControl record 022 contains deterministic provenance signal n128-022 for the retained passage boundary test.\n\nControl record 030 contains deterministic provenance signal n128-030 for the retained passage boundary test.\n\nControl record 038 contains deterministic provenance signal n128-038 for the retained passage boundary test.\n\nControl record 046 contains deterministic provenance signal n128-046 for the retained passage boundary test.\n\nControl record 054 contains deterministic provenance signal n128-054 for the retained passage boundary test.\n\nControl record 062 contains deterministic provenance signal n128-062 for the retained passage boundary test.\n\nControl record 070 contains deterministic provenance signal n128-070 for the retained passage boundary test.\n\nControl record 078 contains deterministic provenance signal n128-078 for the retained passage boundary test.\n\nControl record 086 contains deterministic provenance signal n128-086 for the retained passage boundary test.\n\nControl record 094 contains deterministic provenance signal n128-094 for the retained passage boundary test.\n\nControl record 102 contains deterministic provenance signal n128-102 for the retained passage boundary test.\n\nControl record 110 contains deterministic provenance signal n128-110 for the retained passage boundary test.\n\nControl record 118 contains deterministic provenance signal n128-118 for the retained passage boundary test.\n\nControl record 126 contains deterministic provenance signal n128-126 for the retained passage boundary test."
+      },
+      {
+        "sourceId": "boundary-n128-7",
+        "title": "Boundary N128 Source 7",
+        "normalizedBytesLen": 1758,
+        "sourceHash": "sha256:172f36c4c89d1ff3377e7ea0493e65ba5013226a94ef33ab7ab520fa5c904a32",
+        "normalizedText": "Control record 007 contains deterministic provenance signal n128-007 for the retained passage boundary test.\n\nControl record 015 contains deterministic provenance signal n128-015 for the retained passage boundary test.\n\nControl record 023 contains deterministic provenance signal n128-023 for the retained passage boundary test.\n\nControl record 031 contains deterministic provenance signal n128-031 for the retained passage boundary test.\n\nControl record 039 contains deterministic provenance signal n128-039 for the retained passage boundary test.\n\nControl record 047 contains deterministic provenance signal n128-047 for the retained passage boundary test.\n\nControl record 055 contains deterministic provenance signal n128-055 for the retained passage boundary test.\n\nControl record 063 contains deterministic provenance signal n128-063 for the retained passage boundary test.\n\nControl record 071 contains deterministic provenance signal n128-071 for the retained passage boundary test.\n\nControl record 079 contains deterministic provenance signal n128-079 for the retained passage boundary test.\n\nControl record 087 contains deterministic provenance signal n128-087 for the retained passage boundary test.\n\nControl record 095 contains deterministic provenance signal n128-095 for the retained passage boundary test.\n\nControl record 103 contains deterministic provenance signal n128-103 for the retained passage boundary test.\n\nControl record 111 contains deterministic provenance signal n128-111 for the retained passage boundary test.\n\nControl record 119 contains deterministic provenance signal n128-119 for the retained passage boundary test.\n\nControl record 127 contains deterministic provenance signal n128-127 for the retained passage boundary test."
+      },
+      {
+        "sourceId": "boundary-n128-8",
+        "title": "Boundary N128 Source 8",
+        "normalizedBytesLen": 1758,
+        "sourceHash": "sha256:db1465050988a0fb52e4a4c0a0965d4dfa7251f6c3cca577374fa2d453dbec6c",
+        "normalizedText": "Control record 008 contains deterministic provenance signal n128-008 for the retained passage boundary test.\n\nControl record 016 contains deterministic provenance signal n128-016 for the retained passage boundary test.\n\nControl record 024 contains deterministic provenance signal n128-024 for the retained passage boundary test.\n\nControl record 032 contains deterministic provenance signal n128-032 for the retained passage boundary test.\n\nControl record 040 contains deterministic provenance signal n128-040 for the retained passage boundary test.\n\nControl record 048 contains deterministic provenance signal n128-048 for the retained passage boundary test.\n\nControl record 056 contains deterministic provenance signal n128-056 for the retained passage boundary test.\n\nControl record 064 contains deterministic provenance signal n128-064 for the retained passage boundary test.\n\nControl record 072 contains deterministic provenance signal n128-072 for the retained passage boundary test.\n\nControl record 080 contains deterministic provenance signal n128-080 for the retained passage boundary test.\n\nControl record 088 contains deterministic provenance signal n128-088 for the retained passage boundary test.\n\nControl record 096 contains deterministic provenance signal n128-096 for the retained passage boundary test.\n\nControl record 104 contains deterministic provenance signal n128-104 for the retained passage boundary test.\n\nControl record 112 contains deterministic provenance signal n128-112 for the retained passage boundary test.\n\nControl record 120 contains deterministic provenance signal n128-120 for the retained passage boundary test.\n\nControl record 128 contains deterministic provenance signal n128-128 for the retained passage boundary test."
+      }
+    ],
+    "candidatePassages": [
+      {
+        "passageId": "boundary-n128-1:1",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 0,
+        "sourceEndByte": 108,
+        "text": "Control record 001 contains deterministic provenance signal n128-001 for the retained passage boundary test.",
+        "passageHash": "sha256:e94bc956816542dcae50db6cd860505afd4544a3c40f874f7b604fdf975a81c0",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-1:2",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 110,
+        "sourceEndByte": 218,
+        "text": "Control record 009 contains deterministic provenance signal n128-009 for the retained passage boundary test.",
+        "passageHash": "sha256:16431ee3e9caa663534dc71da6210153aa7dca6631244724a523ee7aca2eb4fe",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-1:3",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 220,
+        "sourceEndByte": 328,
+        "text": "Control record 017 contains deterministic provenance signal n128-017 for the retained passage boundary test.",
+        "passageHash": "sha256:46538b9850c89e06ce4dad90b5bc939473f312d96dc3626264e0b6b107cfe879",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-1:4",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 330,
+        "sourceEndByte": 438,
+        "text": "Control record 025 contains deterministic provenance signal n128-025 for the retained passage boundary test.",
+        "passageHash": "sha256:76527c719386038e79fea1c2b8ad807229d81680faa951c3c8a2b30bcc9930d9",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-1:5",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 440,
+        "sourceEndByte": 548,
+        "text": "Control record 033 contains deterministic provenance signal n128-033 for the retained passage boundary test.",
+        "passageHash": "sha256:00d22287e9049e49f18ca6f45206f0a87c6bef87f33d13f2e4ff82df287b8a63",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-1:6",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 550,
+        "sourceEndByte": 658,
+        "text": "Control record 041 contains deterministic provenance signal n128-041 for the retained passage boundary test.",
+        "passageHash": "sha256:a4875256771e02b18b583d6a948a82e90067957f79657eb2bf252e1ab7620a79",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-1:7",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 660,
+        "sourceEndByte": 768,
+        "text": "Control record 049 contains deterministic provenance signal n128-049 for the retained passage boundary test.",
+        "passageHash": "sha256:e902fd13924b189e4e3270a9ad9b64fd7d5ef596ef6e3c9c7604fc79100adcf6",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-1:8",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 770,
+        "sourceEndByte": 878,
+        "text": "Control record 057 contains deterministic provenance signal n128-057 for the retained passage boundary test.",
+        "passageHash": "sha256:ae1877af46ce64e942dd44b81fd1970df1681ac547186ab9dac161662ad546ba",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-1:9",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 880,
+        "sourceEndByte": 988,
+        "text": "Control record 065 contains deterministic provenance signal n128-065 for the retained passage boundary test.",
+        "passageHash": "sha256:d5af01e23c0d21bcc7b7b20a56162cd4aa55354557f91c9657ca501804238e1a",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-1:10",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 990,
+        "sourceEndByte": 1098,
+        "text": "Control record 073 contains deterministic provenance signal n128-073 for the retained passage boundary test.",
+        "passageHash": "sha256:18b4042939821aef618d4959f528e340375f78da9939183d956e58477e781b68",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-1:11",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 1100,
+        "sourceEndByte": 1208,
+        "text": "Control record 081 contains deterministic provenance signal n128-081 for the retained passage boundary test.",
+        "passageHash": "sha256:84f66b10233ba5ebe0df0edc11fdc562b3678e84891944aa4e6a38d80be4591d",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-1:12",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 1210,
+        "sourceEndByte": 1318,
+        "text": "Control record 089 contains deterministic provenance signal n128-089 for the retained passage boundary test.",
+        "passageHash": "sha256:5bb26338964b452ad0fec56301a13c8d7a04df1006ac449891f7f8e6b09e9128",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-1:13",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 1320,
+        "sourceEndByte": 1428,
+        "text": "Control record 097 contains deterministic provenance signal n128-097 for the retained passage boundary test.",
+        "passageHash": "sha256:b6630df0f22cd036ae9c33688e503b1d3d1b819afd8c5bfa521df180aaac86fb",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-1:14",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 1430,
+        "sourceEndByte": 1538,
+        "text": "Control record 105 contains deterministic provenance signal n128-105 for the retained passage boundary test.",
+        "passageHash": "sha256:16220228a7258e54ba2920be83655bc00fbac34710de88b4257e48ec67aa44ca",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-1:15",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 1540,
+        "sourceEndByte": 1648,
+        "text": "Control record 113 contains deterministic provenance signal n128-113 for the retained passage boundary test.",
+        "passageHash": "sha256:63cba7001822bd10cf664153f04dd6625bf9d5e2c4e9fcb2f2dc9ea583de65a1",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-1:16",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 1650,
+        "sourceEndByte": 1758,
+        "text": "Control record 121 contains deterministic provenance signal n128-121 for the retained passage boundary test.",
+        "passageHash": "sha256:dd8918e748ee4ad991f56329e6ebc8a6ed413d6c54ad6b4dfe240b94166bbf24",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-2:1",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 0,
+        "sourceEndByte": 108,
+        "text": "Control record 002 contains deterministic provenance signal n128-002 for the retained passage boundary test.",
+        "passageHash": "sha256:b8f75c1f070cf0638e598f5b3ef2e52fa56acc9d22b86d3de92f4048272b4e8a",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-2:2",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 110,
+        "sourceEndByte": 218,
+        "text": "Control record 010 contains deterministic provenance signal n128-010 for the retained passage boundary test.",
+        "passageHash": "sha256:3c106a5aada2211db336964238347226bc9fcb6d764bed561a08d52620d7d1e0",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-2:3",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 220,
+        "sourceEndByte": 328,
+        "text": "Control record 018 contains deterministic provenance signal n128-018 for the retained passage boundary test.",
+        "passageHash": "sha256:a1c69746e5c0bc8ab6dbbf7742cae0ce5bef7cb636051c75882c970ab117a18b",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-2:4",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 330,
+        "sourceEndByte": 438,
+        "text": "Control record 026 contains deterministic provenance signal n128-026 for the retained passage boundary test.",
+        "passageHash": "sha256:7706fd4a871ba4640541131608c422fb6cb5600d07fa6d40c8e5bb13683d41cb",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-2:5",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 440,
+        "sourceEndByte": 548,
+        "text": "Control record 034 contains deterministic provenance signal n128-034 for the retained passage boundary test.",
+        "passageHash": "sha256:21f3b20b21321dd2707615aede6c94383fd9ffe16e557fb7af65b7727ce98a3e",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-2:6",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 550,
+        "sourceEndByte": 658,
+        "text": "Control record 042 contains deterministic provenance signal n128-042 for the retained passage boundary test.",
+        "passageHash": "sha256:c03ae472ba50ae475e1be2a6080585d631e4f01b5b1f2e2e2d520d738fb26ce9",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-2:7",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 660,
+        "sourceEndByte": 768,
+        "text": "Control record 050 contains deterministic provenance signal n128-050 for the retained passage boundary test.",
+        "passageHash": "sha256:e6f78baf21ee51424b20f3fa07e5a1083425676f8c5f6855172636ea96033a91",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-2:8",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 770,
+        "sourceEndByte": 878,
+        "text": "Control record 058 contains deterministic provenance signal n128-058 for the retained passage boundary test.",
+        "passageHash": "sha256:2f01c2860debd91c1363420af20853516bcadbbd93e16a13d6b4e53c25d2dbe6",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-2:9",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 880,
+        "sourceEndByte": 988,
+        "text": "Control record 066 contains deterministic provenance signal n128-066 for the retained passage boundary test.",
+        "passageHash": "sha256:6f43004d39c744416aeb9598bb6d9a2662dd32117aa8967d34342eb5186eb741",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-2:10",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 990,
+        "sourceEndByte": 1098,
+        "text": "Control record 074 contains deterministic provenance signal n128-074 for the retained passage boundary test.",
+        "passageHash": "sha256:0d85cc52bd7bfe20d420adb3f8e879056001e1e0d534336ef0eae627e882ff58",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-2:11",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 1100,
+        "sourceEndByte": 1208,
+        "text": "Control record 082 contains deterministic provenance signal n128-082 for the retained passage boundary test.",
+        "passageHash": "sha256:495b53a65bb611498caa193fabd2bd7352f7fe8c3809b0b8d335404e397a32d9",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-2:12",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 1210,
+        "sourceEndByte": 1318,
+        "text": "Control record 090 contains deterministic provenance signal n128-090 for the retained passage boundary test.",
+        "passageHash": "sha256:fda04dd02b1702c84a6e739d8a06515a7e89d1d71dee4421008db2b00d6b9a87",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-2:13",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 1320,
+        "sourceEndByte": 1428,
+        "text": "Control record 098 contains deterministic provenance signal n128-098 for the retained passage boundary test.",
+        "passageHash": "sha256:9120c5c1253af7d2c8920974ee3be01003d053e03dfad22db1382bb24e217cfe",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-2:14",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 1430,
+        "sourceEndByte": 1538,
+        "text": "Control record 106 contains deterministic provenance signal n128-106 for the retained passage boundary test.",
+        "passageHash": "sha256:689e58d02beb5800ad7dbd74809e25c33f0dc37f12982f490136635f350d3964",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-2:15",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 1540,
+        "sourceEndByte": 1648,
+        "text": "Control record 114 contains deterministic provenance signal n128-114 for the retained passage boundary test.",
+        "passageHash": "sha256:1b487a63a61d6582081015d445441a1edcc3b1daac5213508c6d4b8bd2fb2cb7",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-2:16",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 1650,
+        "sourceEndByte": 1758,
+        "text": "Control record 122 contains deterministic provenance signal n128-122 for the retained passage boundary test.",
+        "passageHash": "sha256:105f1d2434e429c30def7383c4cacaa5a58df0bc2de8e7ebfdf98b14554b1dfc",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-3:1",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 0,
+        "sourceEndByte": 108,
+        "text": "Control record 003 contains deterministic provenance signal n128-003 for the retained passage boundary test.",
+        "passageHash": "sha256:29b21e347b584049d8f3002021aa8930ea1f5393cb94a2a845de5c03a02f36c9",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-3:2",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 110,
+        "sourceEndByte": 218,
+        "text": "Control record 011 contains deterministic provenance signal n128-011 for the retained passage boundary test.",
+        "passageHash": "sha256:79423f2672eec154d0a87b45d4ca4d5bdead21251e36cc9985cbbe99ac9caaa0",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-3:3",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 220,
+        "sourceEndByte": 328,
+        "text": "Control record 019 contains deterministic provenance signal n128-019 for the retained passage boundary test.",
+        "passageHash": "sha256:e4c26db05f1d1fd373077d78bd840575bc4dd086c81204df30e7ed72b45cf950",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-3:4",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 330,
+        "sourceEndByte": 438,
+        "text": "Control record 027 contains deterministic provenance signal n128-027 for the retained passage boundary test.",
+        "passageHash": "sha256:a94f7f0eb87b0e0b932a8b5ee57ea891c1937695805dae9b7f2a0879799ab53c",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-3:5",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 440,
+        "sourceEndByte": 548,
+        "text": "Control record 035 contains deterministic provenance signal n128-035 for the retained passage boundary test.",
+        "passageHash": "sha256:a21b4c414532c085bbb6c9335e787df30aab4d70d7e5abdf403287cd9e774602",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-3:6",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 550,
+        "sourceEndByte": 658,
+        "text": "Control record 043 contains deterministic provenance signal n128-043 for the retained passage boundary test.",
+        "passageHash": "sha256:4e50ddc039397e9b6f4840d6857e6274f7e940f31cd9d76961dafdbb527f5244",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-3:7",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 660,
+        "sourceEndByte": 768,
+        "text": "Control record 051 contains deterministic provenance signal n128-051 for the retained passage boundary test.",
+        "passageHash": "sha256:3adc02125821c1ac3ad38a85c0650c9863a3602243d1c69e4d53e50808609058",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-3:8",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 770,
+        "sourceEndByte": 878,
+        "text": "Control record 059 contains deterministic provenance signal n128-059 for the retained passage boundary test.",
+        "passageHash": "sha256:989d676b409d0c8ba4acd395ee890b776005e8162c0d9e9c37f464f29ca41a2b",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-3:9",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 880,
+        "sourceEndByte": 988,
+        "text": "Control record 067 contains deterministic provenance signal n128-067 for the retained passage boundary test.",
+        "passageHash": "sha256:e6beb4baa401b9dd4148ae52d42938b818ccde4be8638469a4f87edcad1a5839",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-3:10",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 990,
+        "sourceEndByte": 1098,
+        "text": "Control record 075 contains deterministic provenance signal n128-075 for the retained passage boundary test.",
+        "passageHash": "sha256:eca95a9f9d860c3850a9da369a1ce11bd3ea09c73e4889548b910ead1fd285aa",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-3:11",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 1100,
+        "sourceEndByte": 1208,
+        "text": "Control record 083 contains deterministic provenance signal n128-083 for the retained passage boundary test.",
+        "passageHash": "sha256:129d16511f733446b67c2db9d8c0d9fcad9511b3f41c9f8a6ef0d16f2ca2159c",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-3:12",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 1210,
+        "sourceEndByte": 1318,
+        "text": "Control record 091 contains deterministic provenance signal n128-091 for the retained passage boundary test.",
+        "passageHash": "sha256:7663358be0ddbc911a89a2a8ee46fe79f7dc54ab23bd23f55e0d11cc7ceb963c",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-3:13",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 1320,
+        "sourceEndByte": 1428,
+        "text": "Control record 099 contains deterministic provenance signal n128-099 for the retained passage boundary test.",
+        "passageHash": "sha256:168387127528755c1ef46ff3a2e32d92e7347b6b5a6f1c1e0fb65afd2b073493",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-3:14",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 1430,
+        "sourceEndByte": 1538,
+        "text": "Control record 107 contains deterministic provenance signal n128-107 for the retained passage boundary test.",
+        "passageHash": "sha256:b33e8365ca650108ae0bbdec974d58ec59544f03ddbdc83e754b2d6dc27cffcc",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-3:15",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 1540,
+        "sourceEndByte": 1648,
+        "text": "Control record 115 contains deterministic provenance signal n128-115 for the retained passage boundary test.",
+        "passageHash": "sha256:4efba1e61a6ca3483ebcdf4a2d5935667dc488442683f155e48be38f57063278",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-3:16",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 1650,
+        "sourceEndByte": 1758,
+        "text": "Control record 123 contains deterministic provenance signal n128-123 for the retained passage boundary test.",
+        "passageHash": "sha256:308010d293bcec5baae36d1d4f0a1137c04f9808656cda5af6c8209eef0cbe2b",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-4:1",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 0,
+        "sourceEndByte": 108,
+        "text": "Control record 004 contains deterministic provenance signal n128-004 for the retained passage boundary test.",
+        "passageHash": "sha256:61c1050118d9cf472b5d9000960778f97acbef7faad7d23bd5c9bc7861b0f1c9",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-4:2",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 110,
+        "sourceEndByte": 218,
+        "text": "Control record 012 contains deterministic provenance signal n128-012 for the retained passage boundary test.",
+        "passageHash": "sha256:a21f4ff888f6e1ec230a65e2b01f2dd0224c4affcecc2b7a9cd07a3eb6f50e87",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-4:3",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 220,
+        "sourceEndByte": 328,
+        "text": "Control record 020 contains deterministic provenance signal n128-020 for the retained passage boundary test.",
+        "passageHash": "sha256:00b4cb969fd63adbe20a54381953d8fdf0ff35ceab1ca8fccb55af038145a00f",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-4:4",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 330,
+        "sourceEndByte": 438,
+        "text": "Control record 028 contains deterministic provenance signal n128-028 for the retained passage boundary test.",
+        "passageHash": "sha256:82c34f6d45d42b16d79dfb637875758d21b0f38941972bcf652e30c449e345fe",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-4:5",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 440,
+        "sourceEndByte": 548,
+        "text": "Control record 036 contains deterministic provenance signal n128-036 for the retained passage boundary test.",
+        "passageHash": "sha256:fca104b815b820e3b4182ecb805a89c991bb796c1a6980d55739f14609c6f253",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-4:6",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 550,
+        "sourceEndByte": 658,
+        "text": "Control record 044 contains deterministic provenance signal n128-044 for the retained passage boundary test.",
+        "passageHash": "sha256:2f976e6dd7186aab90aed5ab345fd378162af36f4b9ab9dcab43fde240eaadfe",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-4:7",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 660,
+        "sourceEndByte": 768,
+        "text": "Control record 052 contains deterministic provenance signal n128-052 for the retained passage boundary test.",
+        "passageHash": "sha256:70d7badf4b84c739c85d7118eb350cb18badbb8dbe4294c7db59982876687a1e",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-4:8",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 770,
+        "sourceEndByte": 878,
+        "text": "Control record 060 contains deterministic provenance signal n128-060 for the retained passage boundary test.",
+        "passageHash": "sha256:984b3d528691dc34d44fa79919b04e1d253566bc284f47927646cb731437d88a",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-4:9",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 880,
+        "sourceEndByte": 988,
+        "text": "Control record 068 contains deterministic provenance signal n128-068 for the retained passage boundary test.",
+        "passageHash": "sha256:f49517fb4f96ef9f615b6abf8532a143a9c733812de5b564ebc93751acd84cea",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-4:10",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 990,
+        "sourceEndByte": 1098,
+        "text": "Control record 076 contains deterministic provenance signal n128-076 for the retained passage boundary test.",
+        "passageHash": "sha256:ae831a4a221f6acb2aedbd2111a9c04bf012f8cc2dcbe958d5ba33d044398960",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-4:11",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 1100,
+        "sourceEndByte": 1208,
+        "text": "Control record 084 contains deterministic provenance signal n128-084 for the retained passage boundary test.",
+        "passageHash": "sha256:36c125a1f6df8d39421a156c7d98e3eaa3f3f3903a825dbaa18b177dc608372d",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-4:12",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 1210,
+        "sourceEndByte": 1318,
+        "text": "Control record 092 contains deterministic provenance signal n128-092 for the retained passage boundary test.",
+        "passageHash": "sha256:ff4585121d66627772bc720bd721b0867fedcb4bec9e15c65d81b7ad56910938",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-4:13",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 1320,
+        "sourceEndByte": 1428,
+        "text": "Control record 100 contains deterministic provenance signal n128-100 for the retained passage boundary test.",
+        "passageHash": "sha256:41ba858dab4cae716d32ab1bef1ccca4c2ef7ecf8417cbc85742cb11076f5059",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-4:14",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 1430,
+        "sourceEndByte": 1538,
+        "text": "Control record 108 contains deterministic provenance signal n128-108 for the retained passage boundary test.",
+        "passageHash": "sha256:00d8301e2b24c3f8ad5af9bfd141ecbb79fdfd8821e8be857ad199de2a1fd373",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-4:15",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 1540,
+        "sourceEndByte": 1648,
+        "text": "Control record 116 contains deterministic provenance signal n128-116 for the retained passage boundary test.",
+        "passageHash": "sha256:906d8615ae202dd31ac2fe5477625a8c5ec86d565720c329333594899abe09b2",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-4:16",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 1650,
+        "sourceEndByte": 1758,
+        "text": "Control record 124 contains deterministic provenance signal n128-124 for the retained passage boundary test.",
+        "passageHash": "sha256:982ea946a9bf0421bdaf44bea8d17ee1aa0cbb21956623f0f3543f275a26dcaa",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-5:1",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 0,
+        "sourceEndByte": 108,
+        "text": "Control record 005 contains deterministic provenance signal n128-005 for the retained passage boundary test.",
+        "passageHash": "sha256:0c54bcc9fc662ee5f2cfe44217e6807ca1f7a0b74d07d0ec1bd2f853dbf1f960",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-5:2",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 110,
+        "sourceEndByte": 218,
+        "text": "Control record 013 contains deterministic provenance signal n128-013 for the retained passage boundary test.",
+        "passageHash": "sha256:7cd56f999702db571aadf26b279e0b6322595d2179fd864ffd5edbc22dfc2cf3",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-5:3",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 220,
+        "sourceEndByte": 328,
+        "text": "Control record 021 contains deterministic provenance signal n128-021 for the retained passage boundary test.",
+        "passageHash": "sha256:138a37042d84f3f82a2b9f8d11a240cc2073314191bdb0897e769713bcf78148",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-5:4",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 330,
+        "sourceEndByte": 438,
+        "text": "Control record 029 contains deterministic provenance signal n128-029 for the retained passage boundary test.",
+        "passageHash": "sha256:7e558b3ceb4874b520ca30e5d6663f7d50094002fd1e8c0809539f187ae0d6fe",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-5:5",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 440,
+        "sourceEndByte": 548,
+        "text": "Control record 037 contains deterministic provenance signal n128-037 for the retained passage boundary test.",
+        "passageHash": "sha256:f0415b3e89152a576c8029f26a9da20477c5030acec8b16c9f32e854316d8d88",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-5:6",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 550,
+        "sourceEndByte": 658,
+        "text": "Control record 045 contains deterministic provenance signal n128-045 for the retained passage boundary test.",
+        "passageHash": "sha256:318afaaff40b7c44f2334e134879c445850fb060091dc5e38302b5bcacb52a38",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-5:7",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 660,
+        "sourceEndByte": 768,
+        "text": "Control record 053 contains deterministic provenance signal n128-053 for the retained passage boundary test.",
+        "passageHash": "sha256:35cdebc02326bdbfa9909bacdf5c548e493175edc64ef2755e22b9f0922e1ced",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-5:8",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 770,
+        "sourceEndByte": 878,
+        "text": "Control record 061 contains deterministic provenance signal n128-061 for the retained passage boundary test.",
+        "passageHash": "sha256:b822244e39b7acaee36033180ea74433ce3c2224211ebd92db757cf9104c5b1d",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-5:9",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 880,
+        "sourceEndByte": 988,
+        "text": "Control record 069 contains deterministic provenance signal n128-069 for the retained passage boundary test.",
+        "passageHash": "sha256:965012cf35eff058b7699669855ec24e1be212cba6e34c762041e2beaa0beb73",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-5:10",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 990,
+        "sourceEndByte": 1098,
+        "text": "Control record 077 contains deterministic provenance signal n128-077 for the retained passage boundary test.",
+        "passageHash": "sha256:331265f85723ca5e321423677351ca5189392480e7664785256d9828ff564f99",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-5:11",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 1100,
+        "sourceEndByte": 1208,
+        "text": "Control record 085 contains deterministic provenance signal n128-085 for the retained passage boundary test.",
+        "passageHash": "sha256:3938ab69d6f85d13e5dbb75e6e9416def7a592ed7b5dcbbfb2d7af4a9dfd13ae",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-5:12",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 1210,
+        "sourceEndByte": 1318,
+        "text": "Control record 093 contains deterministic provenance signal n128-093 for the retained passage boundary test.",
+        "passageHash": "sha256:aca9c1466ef27fbf39508ffed8de713d74fdc9a89d7aa6631f9f2cf1daf4e488",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-5:13",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 1320,
+        "sourceEndByte": 1428,
+        "text": "Control record 101 contains deterministic provenance signal n128-101 for the retained passage boundary test.",
+        "passageHash": "sha256:cf82136bde2569c8f0c05dd0e265ddc502f1133474f7a84b78772dd9e42574d7",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-5:14",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 1430,
+        "sourceEndByte": 1538,
+        "text": "Control record 109 contains deterministic provenance signal n128-109 for the retained passage boundary test.",
+        "passageHash": "sha256:3f26edcd619cca8852a506e550b7d0377d3c6a2c9ac8d8befc7670a92d0b878a",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-5:15",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 1540,
+        "sourceEndByte": 1648,
+        "text": "Control record 117 contains deterministic provenance signal n128-117 for the retained passage boundary test.",
+        "passageHash": "sha256:ad6fd42c8490b32cfe001555cb69f80928c6c3931be53179315a4451264080c2",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-5:16",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 1650,
+        "sourceEndByte": 1758,
+        "text": "Control record 125 contains deterministic provenance signal n128-125 for the retained passage boundary test.",
+        "passageHash": "sha256:a393605d06162915dae04e13188670ec7ecbd81fc47480f6bee49b6ed112593c",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-6:1",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 0,
+        "sourceEndByte": 108,
+        "text": "Control record 006 contains deterministic provenance signal n128-006 for the retained passage boundary test.",
+        "passageHash": "sha256:81291dc40eae70c8c7aae6f7c789a5fc7886c51d23ea6f148324cfb3e8f4a970",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-6:2",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 110,
+        "sourceEndByte": 218,
+        "text": "Control record 014 contains deterministic provenance signal n128-014 for the retained passage boundary test.",
+        "passageHash": "sha256:a614276420a5a44f9cba3205aeabcef7967b17b537e05d4e8bd82dd2c1060ca8",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-6:3",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 220,
+        "sourceEndByte": 328,
+        "text": "Control record 022 contains deterministic provenance signal n128-022 for the retained passage boundary test.",
+        "passageHash": "sha256:9af8c5a33b8de1e2d272c61d550827b06ef03e3210f5ee097c04537260611910",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-6:4",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 330,
+        "sourceEndByte": 438,
+        "text": "Control record 030 contains deterministic provenance signal n128-030 for the retained passage boundary test.",
+        "passageHash": "sha256:32143d6681c6bcc0b73f6c19da83e4d43eaeed814f3e98fcb5fa56ed514c26b9",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-6:5",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 440,
+        "sourceEndByte": 548,
+        "text": "Control record 038 contains deterministic provenance signal n128-038 for the retained passage boundary test.",
+        "passageHash": "sha256:c233d85835021bf480a8b73d770ec0e569ccea14b7a8f8ce4cb579a5fb88a4d6",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-6:6",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 550,
+        "sourceEndByte": 658,
+        "text": "Control record 046 contains deterministic provenance signal n128-046 for the retained passage boundary test.",
+        "passageHash": "sha256:3e806c13b5a2ac87600cb9cd9b1ae7ffdc7d73af36bdcf4fede4b8cf562692f2",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-6:7",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 660,
+        "sourceEndByte": 768,
+        "text": "Control record 054 contains deterministic provenance signal n128-054 for the retained passage boundary test.",
+        "passageHash": "sha256:061cba25bcf204b045545969e34dfd8441710573875c2c3fb8749970f94cd03e",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-6:8",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 770,
+        "sourceEndByte": 878,
+        "text": "Control record 062 contains deterministic provenance signal n128-062 for the retained passage boundary test.",
+        "passageHash": "sha256:1bbcc91035cae6ea29b0635ade719c6329b47d8885a9917d3aadb20985b370f1",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-6:9",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 880,
+        "sourceEndByte": 988,
+        "text": "Control record 070 contains deterministic provenance signal n128-070 for the retained passage boundary test.",
+        "passageHash": "sha256:309da0ceaf30c5d3c30d8a7e78a66f15833301b6b240a60640418cb13af54847",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-6:10",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 990,
+        "sourceEndByte": 1098,
+        "text": "Control record 078 contains deterministic provenance signal n128-078 for the retained passage boundary test.",
+        "passageHash": "sha256:c05e8c0fdfbfff5eec566fc69642f05dee210719d6fee33976d3747b7975b9dc",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-6:11",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 1100,
+        "sourceEndByte": 1208,
+        "text": "Control record 086 contains deterministic provenance signal n128-086 for the retained passage boundary test.",
+        "passageHash": "sha256:e91e2cc9a958c2d623e6524d740a0a70f7d0d31fb40c9920623ada3a4b38ae39",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-6:12",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 1210,
+        "sourceEndByte": 1318,
+        "text": "Control record 094 contains deterministic provenance signal n128-094 for the retained passage boundary test.",
+        "passageHash": "sha256:698b45ed1d5a30e4d4d51c480774f1384bf4be0b6d47e94cb103a71a13f1a6c8",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-6:13",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 1320,
+        "sourceEndByte": 1428,
+        "text": "Control record 102 contains deterministic provenance signal n128-102 for the retained passage boundary test.",
+        "passageHash": "sha256:49aeaf65a25d7373d8ffb072fcdceeffec8788f03ace949c71da469eb4034514",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-6:14",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 1430,
+        "sourceEndByte": 1538,
+        "text": "Control record 110 contains deterministic provenance signal n128-110 for the retained passage boundary test.",
+        "passageHash": "sha256:c216323ca00f6c9d2bca0e1855c34d230996d000f1a0767d79f533ad0d9eedd4",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-6:15",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 1540,
+        "sourceEndByte": 1648,
+        "text": "Control record 118 contains deterministic provenance signal n128-118 for the retained passage boundary test.",
+        "passageHash": "sha256:78b94f5a37f19563546e33b89c5ef0d88fb0c33637a514b5e59d853e164696c3",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-6:16",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 1650,
+        "sourceEndByte": 1758,
+        "text": "Control record 126 contains deterministic provenance signal n128-126 for the retained passage boundary test.",
+        "passageHash": "sha256:746734839b8e368fb572f36b5e15567286b44d08153ef6cc53dffcc589c07120",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-7:1",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 0,
+        "sourceEndByte": 108,
+        "text": "Control record 007 contains deterministic provenance signal n128-007 for the retained passage boundary test.",
+        "passageHash": "sha256:fd244572719c1e72630caf573bd13f1b2cc3e3bb04ca3b0a4cbc16bcffdb8187",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-7:2",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 110,
+        "sourceEndByte": 218,
+        "text": "Control record 015 contains deterministic provenance signal n128-015 for the retained passage boundary test.",
+        "passageHash": "sha256:878c23865b453776d50c294924351e50dc03289337aa48596342339c11899bd2",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-7:3",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 220,
+        "sourceEndByte": 328,
+        "text": "Control record 023 contains deterministic provenance signal n128-023 for the retained passage boundary test.",
+        "passageHash": "sha256:c2cbfd731fc36bc3da0f72619dbd73ad2708b0e618e182adc6b8cea393065b70",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-7:4",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 330,
+        "sourceEndByte": 438,
+        "text": "Control record 031 contains deterministic provenance signal n128-031 for the retained passage boundary test.",
+        "passageHash": "sha256:a6fb96080619f3f28c3cbf38682f554dcce6ac61a8af3ec6b80b8bed508a8ad6",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-7:5",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 440,
+        "sourceEndByte": 548,
+        "text": "Control record 039 contains deterministic provenance signal n128-039 for the retained passage boundary test.",
+        "passageHash": "sha256:0b947d56fe3dea00bc9d768d6aaf271e80db1edeed7a25998d60ec69e58025ed",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-7:6",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 550,
+        "sourceEndByte": 658,
+        "text": "Control record 047 contains deterministic provenance signal n128-047 for the retained passage boundary test.",
+        "passageHash": "sha256:19fa79104bbaaeb6bbca957757553896868c87ff4362d60cb2ffafb2b3afc682",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-7:7",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 660,
+        "sourceEndByte": 768,
+        "text": "Control record 055 contains deterministic provenance signal n128-055 for the retained passage boundary test.",
+        "passageHash": "sha256:b90751bc9c3a26e77db29df9deb0f5be50b883f2e475c1e6e8f20f4b7381b373",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-7:8",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 770,
+        "sourceEndByte": 878,
+        "text": "Control record 063 contains deterministic provenance signal n128-063 for the retained passage boundary test.",
+        "passageHash": "sha256:30e4c5e191d5b99edb295b6d4f4e5a81d08e863c6c68fd03aca10a9cfc23ec1f",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-7:9",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 880,
+        "sourceEndByte": 988,
+        "text": "Control record 071 contains deterministic provenance signal n128-071 for the retained passage boundary test.",
+        "passageHash": "sha256:38a76360191e750ef9375f50dbd61b539bb78cb5126b292082f82248e68b63ed",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-7:10",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 990,
+        "sourceEndByte": 1098,
+        "text": "Control record 079 contains deterministic provenance signal n128-079 for the retained passage boundary test.",
+        "passageHash": "sha256:6574acb877e34d1ea8669e895e56e6544315330c07e89cd54ae6b0b891b136e1",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-7:11",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 1100,
+        "sourceEndByte": 1208,
+        "text": "Control record 087 contains deterministic provenance signal n128-087 for the retained passage boundary test.",
+        "passageHash": "sha256:9a45f5037737013e72ee74b95a9c48d8173565bdc4371f70b55c7311c82a4929",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-7:12",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 1210,
+        "sourceEndByte": 1318,
+        "text": "Control record 095 contains deterministic provenance signal n128-095 for the retained passage boundary test.",
+        "passageHash": "sha256:7ba12d55b1f86516b84c1f7f12dd439da376e19ad754ee0c496309589c51f359",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-7:13",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 1320,
+        "sourceEndByte": 1428,
+        "text": "Control record 103 contains deterministic provenance signal n128-103 for the retained passage boundary test.",
+        "passageHash": "sha256:69d17bebd6323c4d2b15a1263263522765711055c0a907b4b9a3c0735617c65a",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-7:14",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 1430,
+        "sourceEndByte": 1538,
+        "text": "Control record 111 contains deterministic provenance signal n128-111 for the retained passage boundary test.",
+        "passageHash": "sha256:6e9d353fa20aefb3789fbb427595639647f10c87962c6ef00a384d0f421461f7",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-7:15",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 1540,
+        "sourceEndByte": 1648,
+        "text": "Control record 119 contains deterministic provenance signal n128-119 for the retained passage boundary test.",
+        "passageHash": "sha256:db140976b328b9a266f22b3b5454167ed853dff2a388581259ee46375b2582e5",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-7:16",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 1650,
+        "sourceEndByte": 1758,
+        "text": "Control record 127 contains deterministic provenance signal n128-127 for the retained passage boundary test.",
+        "passageHash": "sha256:7b1370e0b4fae4e3911fe3499cbcaa1a2d96cd7c258d1fcb674449153f838ac3",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-8:1",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 0,
+        "sourceEndByte": 108,
+        "text": "Control record 008 contains deterministic provenance signal n128-008 for the retained passage boundary test.",
+        "passageHash": "sha256:5921d49a8d17490955bb9876a8fca48745540dc5e43e186a73edeb0f2f2a9d29",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-8:2",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 110,
+        "sourceEndByte": 218,
+        "text": "Control record 016 contains deterministic provenance signal n128-016 for the retained passage boundary test.",
+        "passageHash": "sha256:d8669557ca9faeea32e64bb20ad8a8e63c3dcbe3953f830c83bc1fd5ab883072",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-8:3",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 220,
+        "sourceEndByte": 328,
+        "text": "Control record 024 contains deterministic provenance signal n128-024 for the retained passage boundary test.",
+        "passageHash": "sha256:499a10ee68f993e09924b59ba0745c985dc1fc31f263616719cf3539e3ff547a",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-8:4",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 330,
+        "sourceEndByte": 438,
+        "text": "Control record 032 contains deterministic provenance signal n128-032 for the retained passage boundary test.",
+        "passageHash": "sha256:c72f2c7c6087008a6e15e7613b3b8d32789468a01cc45ad47e1222782a5573b5",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-8:5",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 440,
+        "sourceEndByte": 548,
+        "text": "Control record 040 contains deterministic provenance signal n128-040 for the retained passage boundary test.",
+        "passageHash": "sha256:e49aa189ede0be62e232e48bf8b60097ee669b3fdac3e2449ecd494cde887d3b",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-8:6",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 550,
+        "sourceEndByte": 658,
+        "text": "Control record 048 contains deterministic provenance signal n128-048 for the retained passage boundary test.",
+        "passageHash": "sha256:0cdd31d73b8ae77e3076213cc4645154017d213584be90593d8e9b2818ea8a52",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-8:7",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 660,
+        "sourceEndByte": 768,
+        "text": "Control record 056 contains deterministic provenance signal n128-056 for the retained passage boundary test.",
+        "passageHash": "sha256:6fe7041c9e3caa03ea2d782b0328f263e6404efab00137a71e51e7823bdeaa4a",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-8:8",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 770,
+        "sourceEndByte": 878,
+        "text": "Control record 064 contains deterministic provenance signal n128-064 for the retained passage boundary test.",
+        "passageHash": "sha256:7b3be158cd092b7ea516fbf8036cc787949f35052cf2f5b2a6c134b368092e19",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-8:9",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 880,
+        "sourceEndByte": 988,
+        "text": "Control record 072 contains deterministic provenance signal n128-072 for the retained passage boundary test.",
+        "passageHash": "sha256:97faf6fc2f836655a73dcacffbc92c358befb9301b6cd147d75a765fc05cd954",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-8:10",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 990,
+        "sourceEndByte": 1098,
+        "text": "Control record 080 contains deterministic provenance signal n128-080 for the retained passage boundary test.",
+        "passageHash": "sha256:3ddc1c0209662bf648131764b212d6f83b704908106750683476576a87d2bd79",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-8:11",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 1100,
+        "sourceEndByte": 1208,
+        "text": "Control record 088 contains deterministic provenance signal n128-088 for the retained passage boundary test.",
+        "passageHash": "sha256:512709347fe19a295fd6007e12b92c74f398b03d64a7e0ef9a44d516efcb735d",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-8:12",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 1210,
+        "sourceEndByte": 1318,
+        "text": "Control record 096 contains deterministic provenance signal n128-096 for the retained passage boundary test.",
+        "passageHash": "sha256:764c69dfd9d3d902d77345b13a728c8bf3e1f8eda0829b21e4ea0d6e3b03f27c",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-8:13",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 1320,
+        "sourceEndByte": 1428,
+        "text": "Control record 104 contains deterministic provenance signal n128-104 for the retained passage boundary test.",
+        "passageHash": "sha256:20ed790e7aa5babde27fd003e3390722d433e12f87e13b72d469b967695ca0be",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-8:14",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 1430,
+        "sourceEndByte": 1538,
+        "text": "Control record 112 contains deterministic provenance signal n128-112 for the retained passage boundary test.",
+        "passageHash": "sha256:b8161f995a953d2388d6f3b844e0bfd30c28230de780f1d75dcc688fa07684a9",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-8:15",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 1540,
+        "sourceEndByte": 1648,
+        "text": "Control record 120 contains deterministic provenance signal n128-120 for the retained passage boundary test.",
+        "passageHash": "sha256:1ead7a189e3199839c4440b661ca25afa7b87c6d05c1956cf3402df655d38bf4",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "boundary-n128-8:16",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 1650,
+        "sourceEndByte": 1758,
+        "text": "Control record 128 contains deterministic provenance signal n128-128 for the retained passage boundary test.",
+        "passageHash": "sha256:a9aaf2f57d428f4ec839c02c2da48254439431459837d68971c6bab67c165864",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      }
+    ],
+    "retainedPassageIdsInOutputOrder": [
+      "boundary-n128-1:1",
+      "boundary-n128-1:2",
+      "boundary-n128-1:3",
+      "boundary-n128-1:4",
+      "boundary-n128-1:5",
+      "boundary-n128-1:6",
+      "boundary-n128-1:7",
+      "boundary-n128-1:8",
+      "boundary-n128-2:1",
+      "boundary-n128-2:2",
+      "boundary-n128-2:3",
+      "boundary-n128-2:4",
+      "boundary-n128-2:5",
+      "boundary-n128-2:6",
+      "boundary-n128-2:7",
+      "boundary-n128-2:8",
+      "boundary-n128-3:1",
+      "boundary-n128-3:2",
+      "boundary-n128-3:3",
+      "boundary-n128-3:4",
+      "boundary-n128-3:5",
+      "boundary-n128-3:6",
+      "boundary-n128-3:7",
+      "boundary-n128-3:8",
+      "boundary-n128-4:1",
+      "boundary-n128-4:2",
+      "boundary-n128-4:3",
+      "boundary-n128-4:4",
+      "boundary-n128-4:5",
+      "boundary-n128-4:6",
+      "boundary-n128-4:7",
+      "boundary-n128-4:8",
+      "boundary-n128-5:1",
+      "boundary-n128-5:2",
+      "boundary-n128-5:3",
+      "boundary-n128-5:4",
+      "boundary-n128-5:5",
+      "boundary-n128-5:6",
+      "boundary-n128-5:7",
+      "boundary-n128-5:8",
+      "boundary-n128-6:1",
+      "boundary-n128-6:2",
+      "boundary-n128-6:3",
+      "boundary-n128-6:4",
+      "boundary-n128-6:5",
+      "boundary-n128-6:6",
+      "boundary-n128-6:7",
+      "boundary-n128-6:8",
+      "boundary-n128-7:1",
+      "boundary-n128-7:2",
+      "boundary-n128-7:3",
+      "boundary-n128-7:4",
+      "boundary-n128-7:5",
+      "boundary-n128-7:6",
+      "boundary-n128-7:7",
+      "boundary-n128-7:8",
+      "boundary-n128-8:1",
+      "boundary-n128-8:2",
+      "boundary-n128-8:3",
+      "boundary-n128-8:4",
+      "boundary-n128-8:5",
+      "boundary-n128-8:6",
+      "boundary-n128-8:7",
+      "boundary-n128-8:8",
+      "boundary-n128-1:9",
+      "boundary-n128-1:10",
+      "boundary-n128-1:11",
+      "boundary-n128-1:12",
+      "boundary-n128-1:13",
+      "boundary-n128-1:14",
+      "boundary-n128-1:15",
+      "boundary-n128-1:16",
+      "boundary-n128-2:9",
+      "boundary-n128-2:10",
+      "boundary-n128-2:11",
+      "boundary-n128-2:12",
+      "boundary-n128-2:13",
+      "boundary-n128-2:14",
+      "boundary-n128-2:15",
+      "boundary-n128-2:16",
+      "boundary-n128-3:9",
+      "boundary-n128-3:10",
+      "boundary-n128-3:11",
+      "boundary-n128-3:12",
+      "boundary-n128-3:13",
+      "boundary-n128-3:14",
+      "boundary-n128-3:15",
+      "boundary-n128-3:16",
+      "boundary-n128-4:9",
+      "boundary-n128-4:10",
+      "boundary-n128-4:11",
+      "boundary-n128-4:12",
+      "boundary-n128-4:13",
+      "boundary-n128-4:14",
+      "boundary-n128-4:15",
+      "boundary-n128-4:16",
+      "boundary-n128-5:9",
+      "boundary-n128-5:10",
+      "boundary-n128-5:11",
+      "boundary-n128-5:12",
+      "boundary-n128-5:13",
+      "boundary-n128-5:14",
+      "boundary-n128-5:15",
+      "boundary-n128-5:16",
+      "boundary-n128-6:9",
+      "boundary-n128-6:10",
+      "boundary-n128-6:11",
+      "boundary-n128-6:12",
+      "boundary-n128-6:13",
+      "boundary-n128-6:14",
+      "boundary-n128-6:15",
+      "boundary-n128-6:16",
+      "boundary-n128-7:9",
+      "boundary-n128-7:10",
+      "boundary-n128-7:11",
+      "boundary-n128-7:12",
+      "boundary-n128-7:13",
+      "boundary-n128-7:14",
+      "boundary-n128-7:15",
+      "boundary-n128-7:16",
+      "boundary-n128-8:9",
+      "boundary-n128-8:10",
+      "boundary-n128-8:11",
+      "boundary-n128-8:12",
+      "boundary-n128-8:13",
+      "boundary-n128-8:14",
+      "boundary-n128-8:15",
+      "boundary-n128-8:16"
+    ],
+    "compiledContext": "# Context Pack\n\nTask: Retain every deterministic provenance control record for proof-contract validation.\n\n\n\nControl record 001 contains deterministic provenance signal n128-001 for the retained passage boundary test.\n\nControl record 009 contains deterministic provenance signal n128-009 for the retained passage boundary test.\n\nControl record 017 contains deterministic provenance signal n128-017 for the retained passage boundary test.\n\nControl record 025 contains deterministic provenance signal n128-025 for the retained passage boundary test.\n\nControl record 033 contains deterministic provenance signal n128-033 for the retained passage boundary test.\n\nControl record 041 contains deterministic provenance signal n128-041 for the retained passage boundary test.\n\nControl record 049 contains deterministic provenance signal n128-049 for the retained passage boundary test.\n\nControl record 057 contains deterministic provenance signal n128-057 for the retained passage boundary test.\n\nControl record 002 contains deterministic provenance signal n128-002 for the retained passage boundary test.\n\nControl record 010 contains deterministic provenance signal n128-010 for the retained passage boundary test.\n\nControl record 018 contains deterministic provenance signal n128-018 for the retained passage boundary test.\n\nControl record 026 contains deterministic provenance signal n128-026 for the retained passage boundary test.\n\nControl record 034 contains deterministic provenance signal n128-034 for the retained passage boundary test.\n\nControl record 042 contains deterministic provenance signal n128-042 for the retained passage boundary test.\n\nControl record 050 contains deterministic provenance signal n128-050 for the retained passage boundary test.\n\nControl record 058 contains deterministic provenance signal n128-058 for the retained passage boundary test.\n\nControl record 003 contains deterministic provenance signal n128-003 for the retained passage boundary test.\n\nControl record 011 contains deterministic provenance signal n128-011 for the retained passage boundary test.\n\nControl record 019 contains deterministic provenance signal n128-019 for the retained passage boundary test.\n\nControl record 027 contains deterministic provenance signal n128-027 for the retained passage boundary test.\n\nControl record 035 contains deterministic provenance signal n128-035 for the retained passage boundary test.\n\nControl record 043 contains deterministic provenance signal n128-043 for the retained passage boundary test.\n\nControl record 051 contains deterministic provenance signal n128-051 for the retained passage boundary test.\n\nControl record 059 contains deterministic provenance signal n128-059 for the retained passage boundary test.\n\nControl record 004 contains deterministic provenance signal n128-004 for the retained passage boundary test.\n\nControl record 012 contains deterministic provenance signal n128-012 for the retained passage boundary test.\n\nControl record 020 contains deterministic provenance signal n128-020 for the retained passage boundary test.\n\nControl record 028 contains deterministic provenance signal n128-028 for the retained passage boundary test.\n\nControl record 036 contains deterministic provenance signal n128-036 for the retained passage boundary test.\n\nControl record 044 contains deterministic provenance signal n128-044 for the retained passage boundary test.\n\nControl record 052 contains deterministic provenance signal n128-052 for the retained passage boundary test.\n\nControl record 060 contains deterministic provenance signal n128-060 for the retained passage boundary test.\n\nControl record 005 contains deterministic provenance signal n128-005 for the retained passage boundary test.\n\nControl record 013 contains deterministic provenance signal n128-013 for the retained passage boundary test.\n\nControl record 021 contains deterministic provenance signal n128-021 for the retained passage boundary test.\n\nControl record 029 contains deterministic provenance signal n128-029 for the retained passage boundary test.\n\nControl record 037 contains deterministic provenance signal n128-037 for the retained passage boundary test.\n\nControl record 045 contains deterministic provenance signal n128-045 for the retained passage boundary test.\n\nControl record 053 contains deterministic provenance signal n128-053 for the retained passage boundary test.\n\nControl record 061 contains deterministic provenance signal n128-061 for the retained passage boundary test.\n\nControl record 006 contains deterministic provenance signal n128-006 for the retained passage boundary test.\n\nControl record 014 contains deterministic provenance signal n128-014 for the retained passage boundary test.\n\nControl record 022 contains deterministic provenance signal n128-022 for the retained passage boundary test.\n\nControl record 030 contains deterministic provenance signal n128-030 for the retained passage boundary test.\n\nControl record 038 contains deterministic provenance signal n128-038 for the retained passage boundary test.\n\nControl record 046 contains deterministic provenance signal n128-046 for the retained passage boundary test.\n\nControl record 054 contains deterministic provenance signal n128-054 for the retained passage boundary test.\n\nControl record 062 contains deterministic provenance signal n128-062 for the retained passage boundary test.\n\nControl record 007 contains deterministic provenance signal n128-007 for the retained passage boundary test.\n\nControl record 015 contains deterministic provenance signal n128-015 for the retained passage boundary test.\n\nControl record 023 contains deterministic provenance signal n128-023 for the retained passage boundary test.\n\nControl record 031 contains deterministic provenance signal n128-031 for the retained passage boundary test.\n\nControl record 039 contains deterministic provenance signal n128-039 for the retained passage boundary test.\n\nControl record 047 contains deterministic provenance signal n128-047 for the retained passage boundary test.\n\nControl record 055 contains deterministic provenance signal n128-055 for the retained passage boundary test.\n\nControl record 063 contains deterministic provenance signal n128-063 for the retained passage boundary test.\n\nControl record 008 contains deterministic provenance signal n128-008 for the retained passage boundary test.\n\nControl record 016 contains deterministic provenance signal n128-016 for the retained passage boundary test.\n\nControl record 024 contains deterministic provenance signal n128-024 for the retained passage boundary test.\n\nControl record 032 contains deterministic provenance signal n128-032 for the retained passage boundary test.\n\nControl record 040 contains deterministic provenance signal n128-040 for the retained passage boundary test.\n\nControl record 048 contains deterministic provenance signal n128-048 for the retained passage boundary test.\n\nControl record 056 contains deterministic provenance signal n128-056 for the retained passage boundary test.\n\nControl record 064 contains deterministic provenance signal n128-064 for the retained passage boundary test.\n\nControl record 065 contains deterministic provenance signal n128-065 for the retained passage boundary test.\n\nControl record 073 contains deterministic provenance signal n128-073 for the retained passage boundary test.\n\nControl record 081 contains deterministic provenance signal n128-081 for the retained passage boundary test.\n\nControl record 089 contains deterministic provenance signal n128-089 for the retained passage boundary test.\n\nControl record 097 contains deterministic provenance signal n128-097 for the retained passage boundary test.\n\nControl record 105 contains deterministic provenance signal n128-105 for the retained passage boundary test.\n\nControl record 113 contains deterministic provenance signal n128-113 for the retained passage boundary test.\n\nControl record 121 contains deterministic provenance signal n128-121 for the retained passage boundary test.\n\nControl record 066 contains deterministic provenance signal n128-066 for the retained passage boundary test.\n\nControl record 074 contains deterministic provenance signal n128-074 for the retained passage boundary test.\n\nControl record 082 contains deterministic provenance signal n128-082 for the retained passage boundary test.\n\nControl record 090 contains deterministic provenance signal n128-090 for the retained passage boundary test.\n\nControl record 098 contains deterministic provenance signal n128-098 for the retained passage boundary test.\n\nControl record 106 contains deterministic provenance signal n128-106 for the retained passage boundary test.\n\nControl record 114 contains deterministic provenance signal n128-114 for the retained passage boundary test.\n\nControl record 122 contains deterministic provenance signal n128-122 for the retained passage boundary test.\n\nControl record 067 contains deterministic provenance signal n128-067 for the retained passage boundary test.\n\nControl record 075 contains deterministic provenance signal n128-075 for the retained passage boundary test.\n\nControl record 083 contains deterministic provenance signal n128-083 for the retained passage boundary test.\n\nControl record 091 contains deterministic provenance signal n128-091 for the retained passage boundary test.\n\nControl record 099 contains deterministic provenance signal n128-099 for the retained passage boundary test.\n\nControl record 107 contains deterministic provenance signal n128-107 for the retained passage boundary test.\n\nControl record 115 contains deterministic provenance signal n128-115 for the retained passage boundary test.\n\nControl record 123 contains deterministic provenance signal n128-123 for the retained passage boundary test.\n\nControl record 068 contains deterministic provenance signal n128-068 for the retained passage boundary test.\n\nControl record 076 contains deterministic provenance signal n128-076 for the retained passage boundary test.\n\nControl record 084 contains deterministic provenance signal n128-084 for the retained passage boundary test.\n\nControl record 092 contains deterministic provenance signal n128-092 for the retained passage boundary test.\n\nControl record 100 contains deterministic provenance signal n128-100 for the retained passage boundary test.\n\nControl record 108 contains deterministic provenance signal n128-108 for the retained passage boundary test.\n\nControl record 116 contains deterministic provenance signal n128-116 for the retained passage boundary test.\n\nControl record 124 contains deterministic provenance signal n128-124 for the retained passage boundary test.\n\nControl record 069 contains deterministic provenance signal n128-069 for the retained passage boundary test.\n\nControl record 077 contains deterministic provenance signal n128-077 for the retained passage boundary test.\n\nControl record 085 contains deterministic provenance signal n128-085 for the retained passage boundary test.\n\nControl record 093 contains deterministic provenance signal n128-093 for the retained passage boundary test.\n\nControl record 101 contains deterministic provenance signal n128-101 for the retained passage boundary test.\n\nControl record 109 contains deterministic provenance signal n128-109 for the retained passage boundary test.\n\nControl record 117 contains deterministic provenance signal n128-117 for the retained passage boundary test.\n\nControl record 125 contains deterministic provenance signal n128-125 for the retained passage boundary test.\n\nControl record 070 contains deterministic provenance signal n128-070 for the retained passage boundary test.\n\nControl record 078 contains deterministic provenance signal n128-078 for the retained passage boundary test.\n\nControl record 086 contains deterministic provenance signal n128-086 for the retained passage boundary test.\n\nControl record 094 contains deterministic provenance signal n128-094 for the retained passage boundary test.\n\nControl record 102 contains deterministic provenance signal n128-102 for the retained passage boundary test.\n\nControl record 110 contains deterministic provenance signal n128-110 for the retained passage boundary test.\n\nControl record 118 contains deterministic provenance signal n128-118 for the retained passage boundary test.\n\nControl record 126 contains deterministic provenance signal n128-126 for the retained passage boundary test.\n\nControl record 071 contains deterministic provenance signal n128-071 for the retained passage boundary test.\n\nControl record 079 contains deterministic provenance signal n128-079 for the retained passage boundary test.\n\nControl record 087 contains deterministic provenance signal n128-087 for the retained passage boundary test.\n\nControl record 095 contains deterministic provenance signal n128-095 for the retained passage boundary test.\n\nControl record 103 contains deterministic provenance signal n128-103 for the retained passage boundary test.\n\nControl record 111 contains deterministic provenance signal n128-111 for the retained passage boundary test.\n\nControl record 119 contains deterministic provenance signal n128-119 for the retained passage boundary test.\n\nControl record 127 contains deterministic provenance signal n128-127 for the retained passage boundary test.\n\nControl record 072 contains deterministic provenance signal n128-072 for the retained passage boundary test.\n\nControl record 080 contains deterministic provenance signal n128-080 for the retained passage boundary test.\n\nControl record 088 contains deterministic provenance signal n128-088 for the retained passage boundary test.\n\nControl record 096 contains deterministic provenance signal n128-096 for the retained passage boundary test.\n\nControl record 104 contains deterministic provenance signal n128-104 for the retained passage boundary test.\n\nControl record 112 contains deterministic provenance signal n128-112 for the retained passage boundary test.\n\nControl record 120 contains deterministic provenance signal n128-120 for the retained passage boundary test.\n\nControl record 128 contains deterministic provenance signal n128-128 for the retained passage boundary test."
+  },
+  "expectedPublicValues": {
+    "proofContractVersion": 3,
+    "status": "success",
+    "sources": [
+      {
+        "sourceId": "boundary-n128-1",
+        "sourceHash": "sha256:d421e180ff7b152ed748d0dfa112f08350f5b817ba2bc6da9f20c9b0535eb66f"
+      },
+      {
+        "sourceId": "boundary-n128-2",
+        "sourceHash": "sha256:e07b75abe85cba0776fc6f390263375c79c8c78e707034f1c87b7bec3e7d87ea"
+      },
+      {
+        "sourceId": "boundary-n128-3",
+        "sourceHash": "sha256:0b4f80426267bf834320bf14916b5bdb859d9abafd7c4bb1d5bf2f7c8b283518"
+      },
+      {
+        "sourceId": "boundary-n128-4",
+        "sourceHash": "sha256:104c40f5a2b22deb7fc6cbb50ba0d14f6744fc141edef02093c8807061547127"
+      },
+      {
+        "sourceId": "boundary-n128-5",
+        "sourceHash": "sha256:3b428d69a9bbdb9826ba202d08d7b149faccc4299a8f20155e1973f167898d37"
+      },
+      {
+        "sourceId": "boundary-n128-6",
+        "sourceHash": "sha256:144c47679a1acf63e9652be4d2abb3a1a6542ee9ddb68358e5d68f06c9a4ecfc"
+      },
+      {
+        "sourceId": "boundary-n128-7",
+        "sourceHash": "sha256:172f36c4c89d1ff3377e7ea0493e65ba5013226a94ef33ab7ab520fa5c904a32"
+      },
+      {
+        "sourceId": "boundary-n128-8",
+        "sourceHash": "sha256:db1465050988a0fb52e4a4c0a0965d4dfa7251f6c3cca577374fa2d453dbec6c"
+      }
+    ],
+    "retainedPassages": [
+      {
+        "passageId": "boundary-n128-1:1",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 0,
+        "sourceEndByte": 108,
+        "passageHash": "sha256:e94bc956816542dcae50db6cd860505afd4544a3c40f874f7b604fdf975a81c0"
+      },
+      {
+        "passageId": "boundary-n128-1:2",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 110,
+        "sourceEndByte": 218,
+        "passageHash": "sha256:16431ee3e9caa663534dc71da6210153aa7dca6631244724a523ee7aca2eb4fe"
+      },
+      {
+        "passageId": "boundary-n128-1:3",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 220,
+        "sourceEndByte": 328,
+        "passageHash": "sha256:46538b9850c89e06ce4dad90b5bc939473f312d96dc3626264e0b6b107cfe879"
+      },
+      {
+        "passageId": "boundary-n128-1:4",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 330,
+        "sourceEndByte": 438,
+        "passageHash": "sha256:76527c719386038e79fea1c2b8ad807229d81680faa951c3c8a2b30bcc9930d9"
+      },
+      {
+        "passageId": "boundary-n128-1:5",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 440,
+        "sourceEndByte": 548,
+        "passageHash": "sha256:00d22287e9049e49f18ca6f45206f0a87c6bef87f33d13f2e4ff82df287b8a63"
+      },
+      {
+        "passageId": "boundary-n128-1:6",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 550,
+        "sourceEndByte": 658,
+        "passageHash": "sha256:a4875256771e02b18b583d6a948a82e90067957f79657eb2bf252e1ab7620a79"
+      },
+      {
+        "passageId": "boundary-n128-1:7",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 660,
+        "sourceEndByte": 768,
+        "passageHash": "sha256:e902fd13924b189e4e3270a9ad9b64fd7d5ef596ef6e3c9c7604fc79100adcf6"
+      },
+      {
+        "passageId": "boundary-n128-1:8",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 770,
+        "sourceEndByte": 878,
+        "passageHash": "sha256:ae1877af46ce64e942dd44b81fd1970df1681ac547186ab9dac161662ad546ba"
+      },
+      {
+        "passageId": "boundary-n128-2:1",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 0,
+        "sourceEndByte": 108,
+        "passageHash": "sha256:b8f75c1f070cf0638e598f5b3ef2e52fa56acc9d22b86d3de92f4048272b4e8a"
+      },
+      {
+        "passageId": "boundary-n128-2:2",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 110,
+        "sourceEndByte": 218,
+        "passageHash": "sha256:3c106a5aada2211db336964238347226bc9fcb6d764bed561a08d52620d7d1e0"
+      },
+      {
+        "passageId": "boundary-n128-2:3",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 220,
+        "sourceEndByte": 328,
+        "passageHash": "sha256:a1c69746e5c0bc8ab6dbbf7742cae0ce5bef7cb636051c75882c970ab117a18b"
+      },
+      {
+        "passageId": "boundary-n128-2:4",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 330,
+        "sourceEndByte": 438,
+        "passageHash": "sha256:7706fd4a871ba4640541131608c422fb6cb5600d07fa6d40c8e5bb13683d41cb"
+      },
+      {
+        "passageId": "boundary-n128-2:5",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 440,
+        "sourceEndByte": 548,
+        "passageHash": "sha256:21f3b20b21321dd2707615aede6c94383fd9ffe16e557fb7af65b7727ce98a3e"
+      },
+      {
+        "passageId": "boundary-n128-2:6",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 550,
+        "sourceEndByte": 658,
+        "passageHash": "sha256:c03ae472ba50ae475e1be2a6080585d631e4f01b5b1f2e2e2d520d738fb26ce9"
+      },
+      {
+        "passageId": "boundary-n128-2:7",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 660,
+        "sourceEndByte": 768,
+        "passageHash": "sha256:e6f78baf21ee51424b20f3fa07e5a1083425676f8c5f6855172636ea96033a91"
+      },
+      {
+        "passageId": "boundary-n128-2:8",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 770,
+        "sourceEndByte": 878,
+        "passageHash": "sha256:2f01c2860debd91c1363420af20853516bcadbbd93e16a13d6b4e53c25d2dbe6"
+      },
+      {
+        "passageId": "boundary-n128-3:1",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 0,
+        "sourceEndByte": 108,
+        "passageHash": "sha256:29b21e347b584049d8f3002021aa8930ea1f5393cb94a2a845de5c03a02f36c9"
+      },
+      {
+        "passageId": "boundary-n128-3:2",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 110,
+        "sourceEndByte": 218,
+        "passageHash": "sha256:79423f2672eec154d0a87b45d4ca4d5bdead21251e36cc9985cbbe99ac9caaa0"
+      },
+      {
+        "passageId": "boundary-n128-3:3",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 220,
+        "sourceEndByte": 328,
+        "passageHash": "sha256:e4c26db05f1d1fd373077d78bd840575bc4dd086c81204df30e7ed72b45cf950"
+      },
+      {
+        "passageId": "boundary-n128-3:4",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 330,
+        "sourceEndByte": 438,
+        "passageHash": "sha256:a94f7f0eb87b0e0b932a8b5ee57ea891c1937695805dae9b7f2a0879799ab53c"
+      },
+      {
+        "passageId": "boundary-n128-3:5",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 440,
+        "sourceEndByte": 548,
+        "passageHash": "sha256:a21b4c414532c085bbb6c9335e787df30aab4d70d7e5abdf403287cd9e774602"
+      },
+      {
+        "passageId": "boundary-n128-3:6",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 550,
+        "sourceEndByte": 658,
+        "passageHash": "sha256:4e50ddc039397e9b6f4840d6857e6274f7e940f31cd9d76961dafdbb527f5244"
+      },
+      {
+        "passageId": "boundary-n128-3:7",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 660,
+        "sourceEndByte": 768,
+        "passageHash": "sha256:3adc02125821c1ac3ad38a85c0650c9863a3602243d1c69e4d53e50808609058"
+      },
+      {
+        "passageId": "boundary-n128-3:8",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 770,
+        "sourceEndByte": 878,
+        "passageHash": "sha256:989d676b409d0c8ba4acd395ee890b776005e8162c0d9e9c37f464f29ca41a2b"
+      },
+      {
+        "passageId": "boundary-n128-4:1",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 0,
+        "sourceEndByte": 108,
+        "passageHash": "sha256:61c1050118d9cf472b5d9000960778f97acbef7faad7d23bd5c9bc7861b0f1c9"
+      },
+      {
+        "passageId": "boundary-n128-4:2",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 110,
+        "sourceEndByte": 218,
+        "passageHash": "sha256:a21f4ff888f6e1ec230a65e2b01f2dd0224c4affcecc2b7a9cd07a3eb6f50e87"
+      },
+      {
+        "passageId": "boundary-n128-4:3",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 220,
+        "sourceEndByte": 328,
+        "passageHash": "sha256:00b4cb969fd63adbe20a54381953d8fdf0ff35ceab1ca8fccb55af038145a00f"
+      },
+      {
+        "passageId": "boundary-n128-4:4",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 330,
+        "sourceEndByte": 438,
+        "passageHash": "sha256:82c34f6d45d42b16d79dfb637875758d21b0f38941972bcf652e30c449e345fe"
+      },
+      {
+        "passageId": "boundary-n128-4:5",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 440,
+        "sourceEndByte": 548,
+        "passageHash": "sha256:fca104b815b820e3b4182ecb805a89c991bb796c1a6980d55739f14609c6f253"
+      },
+      {
+        "passageId": "boundary-n128-4:6",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 550,
+        "sourceEndByte": 658,
+        "passageHash": "sha256:2f976e6dd7186aab90aed5ab345fd378162af36f4b9ab9dcab43fde240eaadfe"
+      },
+      {
+        "passageId": "boundary-n128-4:7",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 660,
+        "sourceEndByte": 768,
+        "passageHash": "sha256:70d7badf4b84c739c85d7118eb350cb18badbb8dbe4294c7db59982876687a1e"
+      },
+      {
+        "passageId": "boundary-n128-4:8",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 770,
+        "sourceEndByte": 878,
+        "passageHash": "sha256:984b3d528691dc34d44fa79919b04e1d253566bc284f47927646cb731437d88a"
+      },
+      {
+        "passageId": "boundary-n128-5:1",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 0,
+        "sourceEndByte": 108,
+        "passageHash": "sha256:0c54bcc9fc662ee5f2cfe44217e6807ca1f7a0b74d07d0ec1bd2f853dbf1f960"
+      },
+      {
+        "passageId": "boundary-n128-5:2",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 110,
+        "sourceEndByte": 218,
+        "passageHash": "sha256:7cd56f999702db571aadf26b279e0b6322595d2179fd864ffd5edbc22dfc2cf3"
+      },
+      {
+        "passageId": "boundary-n128-5:3",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 220,
+        "sourceEndByte": 328,
+        "passageHash": "sha256:138a37042d84f3f82a2b9f8d11a240cc2073314191bdb0897e769713bcf78148"
+      },
+      {
+        "passageId": "boundary-n128-5:4",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 330,
+        "sourceEndByte": 438,
+        "passageHash": "sha256:7e558b3ceb4874b520ca30e5d6663f7d50094002fd1e8c0809539f187ae0d6fe"
+      },
+      {
+        "passageId": "boundary-n128-5:5",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 440,
+        "sourceEndByte": 548,
+        "passageHash": "sha256:f0415b3e89152a576c8029f26a9da20477c5030acec8b16c9f32e854316d8d88"
+      },
+      {
+        "passageId": "boundary-n128-5:6",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 550,
+        "sourceEndByte": 658,
+        "passageHash": "sha256:318afaaff40b7c44f2334e134879c445850fb060091dc5e38302b5bcacb52a38"
+      },
+      {
+        "passageId": "boundary-n128-5:7",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 660,
+        "sourceEndByte": 768,
+        "passageHash": "sha256:35cdebc02326bdbfa9909bacdf5c548e493175edc64ef2755e22b9f0922e1ced"
+      },
+      {
+        "passageId": "boundary-n128-5:8",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 770,
+        "sourceEndByte": 878,
+        "passageHash": "sha256:b822244e39b7acaee36033180ea74433ce3c2224211ebd92db757cf9104c5b1d"
+      },
+      {
+        "passageId": "boundary-n128-6:1",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 0,
+        "sourceEndByte": 108,
+        "passageHash": "sha256:81291dc40eae70c8c7aae6f7c789a5fc7886c51d23ea6f148324cfb3e8f4a970"
+      },
+      {
+        "passageId": "boundary-n128-6:2",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 110,
+        "sourceEndByte": 218,
+        "passageHash": "sha256:a614276420a5a44f9cba3205aeabcef7967b17b537e05d4e8bd82dd2c1060ca8"
+      },
+      {
+        "passageId": "boundary-n128-6:3",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 220,
+        "sourceEndByte": 328,
+        "passageHash": "sha256:9af8c5a33b8de1e2d272c61d550827b06ef03e3210f5ee097c04537260611910"
+      },
+      {
+        "passageId": "boundary-n128-6:4",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 330,
+        "sourceEndByte": 438,
+        "passageHash": "sha256:32143d6681c6bcc0b73f6c19da83e4d43eaeed814f3e98fcb5fa56ed514c26b9"
+      },
+      {
+        "passageId": "boundary-n128-6:5",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 440,
+        "sourceEndByte": 548,
+        "passageHash": "sha256:c233d85835021bf480a8b73d770ec0e569ccea14b7a8f8ce4cb579a5fb88a4d6"
+      },
+      {
+        "passageId": "boundary-n128-6:6",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 550,
+        "sourceEndByte": 658,
+        "passageHash": "sha256:3e806c13b5a2ac87600cb9cd9b1ae7ffdc7d73af36bdcf4fede4b8cf562692f2"
+      },
+      {
+        "passageId": "boundary-n128-6:7",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 660,
+        "sourceEndByte": 768,
+        "passageHash": "sha256:061cba25bcf204b045545969e34dfd8441710573875c2c3fb8749970f94cd03e"
+      },
+      {
+        "passageId": "boundary-n128-6:8",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 770,
+        "sourceEndByte": 878,
+        "passageHash": "sha256:1bbcc91035cae6ea29b0635ade719c6329b47d8885a9917d3aadb20985b370f1"
+      },
+      {
+        "passageId": "boundary-n128-7:1",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 0,
+        "sourceEndByte": 108,
+        "passageHash": "sha256:fd244572719c1e72630caf573bd13f1b2cc3e3bb04ca3b0a4cbc16bcffdb8187"
+      },
+      {
+        "passageId": "boundary-n128-7:2",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 110,
+        "sourceEndByte": 218,
+        "passageHash": "sha256:878c23865b453776d50c294924351e50dc03289337aa48596342339c11899bd2"
+      },
+      {
+        "passageId": "boundary-n128-7:3",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 220,
+        "sourceEndByte": 328,
+        "passageHash": "sha256:c2cbfd731fc36bc3da0f72619dbd73ad2708b0e618e182adc6b8cea393065b70"
+      },
+      {
+        "passageId": "boundary-n128-7:4",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 330,
+        "sourceEndByte": 438,
+        "passageHash": "sha256:a6fb96080619f3f28c3cbf38682f554dcce6ac61a8af3ec6b80b8bed508a8ad6"
+      },
+      {
+        "passageId": "boundary-n128-7:5",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 440,
+        "sourceEndByte": 548,
+        "passageHash": "sha256:0b947d56fe3dea00bc9d768d6aaf271e80db1edeed7a25998d60ec69e58025ed"
+      },
+      {
+        "passageId": "boundary-n128-7:6",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 550,
+        "sourceEndByte": 658,
+        "passageHash": "sha256:19fa79104bbaaeb6bbca957757553896868c87ff4362d60cb2ffafb2b3afc682"
+      },
+      {
+        "passageId": "boundary-n128-7:7",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 660,
+        "sourceEndByte": 768,
+        "passageHash": "sha256:b90751bc9c3a26e77db29df9deb0f5be50b883f2e475c1e6e8f20f4b7381b373"
+      },
+      {
+        "passageId": "boundary-n128-7:8",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 770,
+        "sourceEndByte": 878,
+        "passageHash": "sha256:30e4c5e191d5b99edb295b6d4f4e5a81d08e863c6c68fd03aca10a9cfc23ec1f"
+      },
+      {
+        "passageId": "boundary-n128-8:1",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 0,
+        "sourceEndByte": 108,
+        "passageHash": "sha256:5921d49a8d17490955bb9876a8fca48745540dc5e43e186a73edeb0f2f2a9d29"
+      },
+      {
+        "passageId": "boundary-n128-8:2",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 110,
+        "sourceEndByte": 218,
+        "passageHash": "sha256:d8669557ca9faeea32e64bb20ad8a8e63c3dcbe3953f830c83bc1fd5ab883072"
+      },
+      {
+        "passageId": "boundary-n128-8:3",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 220,
+        "sourceEndByte": 328,
+        "passageHash": "sha256:499a10ee68f993e09924b59ba0745c985dc1fc31f263616719cf3539e3ff547a"
+      },
+      {
+        "passageId": "boundary-n128-8:4",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 330,
+        "sourceEndByte": 438,
+        "passageHash": "sha256:c72f2c7c6087008a6e15e7613b3b8d32789468a01cc45ad47e1222782a5573b5"
+      },
+      {
+        "passageId": "boundary-n128-8:5",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 440,
+        "sourceEndByte": 548,
+        "passageHash": "sha256:e49aa189ede0be62e232e48bf8b60097ee669b3fdac3e2449ecd494cde887d3b"
+      },
+      {
+        "passageId": "boundary-n128-8:6",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 550,
+        "sourceEndByte": 658,
+        "passageHash": "sha256:0cdd31d73b8ae77e3076213cc4645154017d213584be90593d8e9b2818ea8a52"
+      },
+      {
+        "passageId": "boundary-n128-8:7",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 660,
+        "sourceEndByte": 768,
+        "passageHash": "sha256:6fe7041c9e3caa03ea2d782b0328f263e6404efab00137a71e51e7823bdeaa4a"
+      },
+      {
+        "passageId": "boundary-n128-8:8",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 770,
+        "sourceEndByte": 878,
+        "passageHash": "sha256:7b3be158cd092b7ea516fbf8036cc787949f35052cf2f5b2a6c134b368092e19"
+      },
+      {
+        "passageId": "boundary-n128-1:9",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 880,
+        "sourceEndByte": 988,
+        "passageHash": "sha256:d5af01e23c0d21bcc7b7b20a56162cd4aa55354557f91c9657ca501804238e1a"
+      },
+      {
+        "passageId": "boundary-n128-1:10",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 990,
+        "sourceEndByte": 1098,
+        "passageHash": "sha256:18b4042939821aef618d4959f528e340375f78da9939183d956e58477e781b68"
+      },
+      {
+        "passageId": "boundary-n128-1:11",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 1100,
+        "sourceEndByte": 1208,
+        "passageHash": "sha256:84f66b10233ba5ebe0df0edc11fdc562b3678e84891944aa4e6a38d80be4591d"
+      },
+      {
+        "passageId": "boundary-n128-1:12",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 1210,
+        "sourceEndByte": 1318,
+        "passageHash": "sha256:5bb26338964b452ad0fec56301a13c8d7a04df1006ac449891f7f8e6b09e9128"
+      },
+      {
+        "passageId": "boundary-n128-1:13",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 1320,
+        "sourceEndByte": 1428,
+        "passageHash": "sha256:b6630df0f22cd036ae9c33688e503b1d3d1b819afd8c5bfa521df180aaac86fb"
+      },
+      {
+        "passageId": "boundary-n128-1:14",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 1430,
+        "sourceEndByte": 1538,
+        "passageHash": "sha256:16220228a7258e54ba2920be83655bc00fbac34710de88b4257e48ec67aa44ca"
+      },
+      {
+        "passageId": "boundary-n128-1:15",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 1540,
+        "sourceEndByte": 1648,
+        "passageHash": "sha256:63cba7001822bd10cf664153f04dd6625bf9d5e2c4e9fcb2f2dc9ea583de65a1"
+      },
+      {
+        "passageId": "boundary-n128-1:16",
+        "sourceId": "boundary-n128-1",
+        "sourceStartByte": 1650,
+        "sourceEndByte": 1758,
+        "passageHash": "sha256:dd8918e748ee4ad991f56329e6ebc8a6ed413d6c54ad6b4dfe240b94166bbf24"
+      },
+      {
+        "passageId": "boundary-n128-2:9",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 880,
+        "sourceEndByte": 988,
+        "passageHash": "sha256:6f43004d39c744416aeb9598bb6d9a2662dd32117aa8967d34342eb5186eb741"
+      },
+      {
+        "passageId": "boundary-n128-2:10",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 990,
+        "sourceEndByte": 1098,
+        "passageHash": "sha256:0d85cc52bd7bfe20d420adb3f8e879056001e1e0d534336ef0eae627e882ff58"
+      },
+      {
+        "passageId": "boundary-n128-2:11",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 1100,
+        "sourceEndByte": 1208,
+        "passageHash": "sha256:495b53a65bb611498caa193fabd2bd7352f7fe8c3809b0b8d335404e397a32d9"
+      },
+      {
+        "passageId": "boundary-n128-2:12",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 1210,
+        "sourceEndByte": 1318,
+        "passageHash": "sha256:fda04dd02b1702c84a6e739d8a06515a7e89d1d71dee4421008db2b00d6b9a87"
+      },
+      {
+        "passageId": "boundary-n128-2:13",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 1320,
+        "sourceEndByte": 1428,
+        "passageHash": "sha256:9120c5c1253af7d2c8920974ee3be01003d053e03dfad22db1382bb24e217cfe"
+      },
+      {
+        "passageId": "boundary-n128-2:14",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 1430,
+        "sourceEndByte": 1538,
+        "passageHash": "sha256:689e58d02beb5800ad7dbd74809e25c33f0dc37f12982f490136635f350d3964"
+      },
+      {
+        "passageId": "boundary-n128-2:15",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 1540,
+        "sourceEndByte": 1648,
+        "passageHash": "sha256:1b487a63a61d6582081015d445441a1edcc3b1daac5213508c6d4b8bd2fb2cb7"
+      },
+      {
+        "passageId": "boundary-n128-2:16",
+        "sourceId": "boundary-n128-2",
+        "sourceStartByte": 1650,
+        "sourceEndByte": 1758,
+        "passageHash": "sha256:105f1d2434e429c30def7383c4cacaa5a58df0bc2de8e7ebfdf98b14554b1dfc"
+      },
+      {
+        "passageId": "boundary-n128-3:9",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 880,
+        "sourceEndByte": 988,
+        "passageHash": "sha256:e6beb4baa401b9dd4148ae52d42938b818ccde4be8638469a4f87edcad1a5839"
+      },
+      {
+        "passageId": "boundary-n128-3:10",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 990,
+        "sourceEndByte": 1098,
+        "passageHash": "sha256:eca95a9f9d860c3850a9da369a1ce11bd3ea09c73e4889548b910ead1fd285aa"
+      },
+      {
+        "passageId": "boundary-n128-3:11",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 1100,
+        "sourceEndByte": 1208,
+        "passageHash": "sha256:129d16511f733446b67c2db9d8c0d9fcad9511b3f41c9f8a6ef0d16f2ca2159c"
+      },
+      {
+        "passageId": "boundary-n128-3:12",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 1210,
+        "sourceEndByte": 1318,
+        "passageHash": "sha256:7663358be0ddbc911a89a2a8ee46fe79f7dc54ab23bd23f55e0d11cc7ceb963c"
+      },
+      {
+        "passageId": "boundary-n128-3:13",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 1320,
+        "sourceEndByte": 1428,
+        "passageHash": "sha256:168387127528755c1ef46ff3a2e32d92e7347b6b5a6f1c1e0fb65afd2b073493"
+      },
+      {
+        "passageId": "boundary-n128-3:14",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 1430,
+        "sourceEndByte": 1538,
+        "passageHash": "sha256:b33e8365ca650108ae0bbdec974d58ec59544f03ddbdc83e754b2d6dc27cffcc"
+      },
+      {
+        "passageId": "boundary-n128-3:15",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 1540,
+        "sourceEndByte": 1648,
+        "passageHash": "sha256:4efba1e61a6ca3483ebcdf4a2d5935667dc488442683f155e48be38f57063278"
+      },
+      {
+        "passageId": "boundary-n128-3:16",
+        "sourceId": "boundary-n128-3",
+        "sourceStartByte": 1650,
+        "sourceEndByte": 1758,
+        "passageHash": "sha256:308010d293bcec5baae36d1d4f0a1137c04f9808656cda5af6c8209eef0cbe2b"
+      },
+      {
+        "passageId": "boundary-n128-4:9",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 880,
+        "sourceEndByte": 988,
+        "passageHash": "sha256:f49517fb4f96ef9f615b6abf8532a143a9c733812de5b564ebc93751acd84cea"
+      },
+      {
+        "passageId": "boundary-n128-4:10",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 990,
+        "sourceEndByte": 1098,
+        "passageHash": "sha256:ae831a4a221f6acb2aedbd2111a9c04bf012f8cc2dcbe958d5ba33d044398960"
+      },
+      {
+        "passageId": "boundary-n128-4:11",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 1100,
+        "sourceEndByte": 1208,
+        "passageHash": "sha256:36c125a1f6df8d39421a156c7d98e3eaa3f3f3903a825dbaa18b177dc608372d"
+      },
+      {
+        "passageId": "boundary-n128-4:12",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 1210,
+        "sourceEndByte": 1318,
+        "passageHash": "sha256:ff4585121d66627772bc720bd721b0867fedcb4bec9e15c65d81b7ad56910938"
+      },
+      {
+        "passageId": "boundary-n128-4:13",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 1320,
+        "sourceEndByte": 1428,
+        "passageHash": "sha256:41ba858dab4cae716d32ab1bef1ccca4c2ef7ecf8417cbc85742cb11076f5059"
+      },
+      {
+        "passageId": "boundary-n128-4:14",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 1430,
+        "sourceEndByte": 1538,
+        "passageHash": "sha256:00d8301e2b24c3f8ad5af9bfd141ecbb79fdfd8821e8be857ad199de2a1fd373"
+      },
+      {
+        "passageId": "boundary-n128-4:15",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 1540,
+        "sourceEndByte": 1648,
+        "passageHash": "sha256:906d8615ae202dd31ac2fe5477625a8c5ec86d565720c329333594899abe09b2"
+      },
+      {
+        "passageId": "boundary-n128-4:16",
+        "sourceId": "boundary-n128-4",
+        "sourceStartByte": 1650,
+        "sourceEndByte": 1758,
+        "passageHash": "sha256:982ea946a9bf0421bdaf44bea8d17ee1aa0cbb21956623f0f3543f275a26dcaa"
+      },
+      {
+        "passageId": "boundary-n128-5:9",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 880,
+        "sourceEndByte": 988,
+        "passageHash": "sha256:965012cf35eff058b7699669855ec24e1be212cba6e34c762041e2beaa0beb73"
+      },
+      {
+        "passageId": "boundary-n128-5:10",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 990,
+        "sourceEndByte": 1098,
+        "passageHash": "sha256:331265f85723ca5e321423677351ca5189392480e7664785256d9828ff564f99"
+      },
+      {
+        "passageId": "boundary-n128-5:11",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 1100,
+        "sourceEndByte": 1208,
+        "passageHash": "sha256:3938ab69d6f85d13e5dbb75e6e9416def7a592ed7b5dcbbfb2d7af4a9dfd13ae"
+      },
+      {
+        "passageId": "boundary-n128-5:12",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 1210,
+        "sourceEndByte": 1318,
+        "passageHash": "sha256:aca9c1466ef27fbf39508ffed8de713d74fdc9a89d7aa6631f9f2cf1daf4e488"
+      },
+      {
+        "passageId": "boundary-n128-5:13",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 1320,
+        "sourceEndByte": 1428,
+        "passageHash": "sha256:cf82136bde2569c8f0c05dd0e265ddc502f1133474f7a84b78772dd9e42574d7"
+      },
+      {
+        "passageId": "boundary-n128-5:14",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 1430,
+        "sourceEndByte": 1538,
+        "passageHash": "sha256:3f26edcd619cca8852a506e550b7d0377d3c6a2c9ac8d8befc7670a92d0b878a"
+      },
+      {
+        "passageId": "boundary-n128-5:15",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 1540,
+        "sourceEndByte": 1648,
+        "passageHash": "sha256:ad6fd42c8490b32cfe001555cb69f80928c6c3931be53179315a4451264080c2"
+      },
+      {
+        "passageId": "boundary-n128-5:16",
+        "sourceId": "boundary-n128-5",
+        "sourceStartByte": 1650,
+        "sourceEndByte": 1758,
+        "passageHash": "sha256:a393605d06162915dae04e13188670ec7ecbd81fc47480f6bee49b6ed112593c"
+      },
+      {
+        "passageId": "boundary-n128-6:9",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 880,
+        "sourceEndByte": 988,
+        "passageHash": "sha256:309da0ceaf30c5d3c30d8a7e78a66f15833301b6b240a60640418cb13af54847"
+      },
+      {
+        "passageId": "boundary-n128-6:10",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 990,
+        "sourceEndByte": 1098,
+        "passageHash": "sha256:c05e8c0fdfbfff5eec566fc69642f05dee210719d6fee33976d3747b7975b9dc"
+      },
+      {
+        "passageId": "boundary-n128-6:11",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 1100,
+        "sourceEndByte": 1208,
+        "passageHash": "sha256:e91e2cc9a958c2d623e6524d740a0a70f7d0d31fb40c9920623ada3a4b38ae39"
+      },
+      {
+        "passageId": "boundary-n128-6:12",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 1210,
+        "sourceEndByte": 1318,
+        "passageHash": "sha256:698b45ed1d5a30e4d4d51c480774f1384bf4be0b6d47e94cb103a71a13f1a6c8"
+      },
+      {
+        "passageId": "boundary-n128-6:13",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 1320,
+        "sourceEndByte": 1428,
+        "passageHash": "sha256:49aeaf65a25d7373d8ffb072fcdceeffec8788f03ace949c71da469eb4034514"
+      },
+      {
+        "passageId": "boundary-n128-6:14",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 1430,
+        "sourceEndByte": 1538,
+        "passageHash": "sha256:c216323ca00f6c9d2bca0e1855c34d230996d000f1a0767d79f533ad0d9eedd4"
+      },
+      {
+        "passageId": "boundary-n128-6:15",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 1540,
+        "sourceEndByte": 1648,
+        "passageHash": "sha256:78b94f5a37f19563546e33b89c5ef0d88fb0c33637a514b5e59d853e164696c3"
+      },
+      {
+        "passageId": "boundary-n128-6:16",
+        "sourceId": "boundary-n128-6",
+        "sourceStartByte": 1650,
+        "sourceEndByte": 1758,
+        "passageHash": "sha256:746734839b8e368fb572f36b5e15567286b44d08153ef6cc53dffcc589c07120"
+      },
+      {
+        "passageId": "boundary-n128-7:9",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 880,
+        "sourceEndByte": 988,
+        "passageHash": "sha256:38a76360191e750ef9375f50dbd61b539bb78cb5126b292082f82248e68b63ed"
+      },
+      {
+        "passageId": "boundary-n128-7:10",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 990,
+        "sourceEndByte": 1098,
+        "passageHash": "sha256:6574acb877e34d1ea8669e895e56e6544315330c07e89cd54ae6b0b891b136e1"
+      },
+      {
+        "passageId": "boundary-n128-7:11",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 1100,
+        "sourceEndByte": 1208,
+        "passageHash": "sha256:9a45f5037737013e72ee74b95a9c48d8173565bdc4371f70b55c7311c82a4929"
+      },
+      {
+        "passageId": "boundary-n128-7:12",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 1210,
+        "sourceEndByte": 1318,
+        "passageHash": "sha256:7ba12d55b1f86516b84c1f7f12dd439da376e19ad754ee0c496309589c51f359"
+      },
+      {
+        "passageId": "boundary-n128-7:13",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 1320,
+        "sourceEndByte": 1428,
+        "passageHash": "sha256:69d17bebd6323c4d2b15a1263263522765711055c0a907b4b9a3c0735617c65a"
+      },
+      {
+        "passageId": "boundary-n128-7:14",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 1430,
+        "sourceEndByte": 1538,
+        "passageHash": "sha256:6e9d353fa20aefb3789fbb427595639647f10c87962c6ef00a384d0f421461f7"
+      },
+      {
+        "passageId": "boundary-n128-7:15",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 1540,
+        "sourceEndByte": 1648,
+        "passageHash": "sha256:db140976b328b9a266f22b3b5454167ed853dff2a388581259ee46375b2582e5"
+      },
+      {
+        "passageId": "boundary-n128-7:16",
+        "sourceId": "boundary-n128-7",
+        "sourceStartByte": 1650,
+        "sourceEndByte": 1758,
+        "passageHash": "sha256:7b1370e0b4fae4e3911fe3499cbcaa1a2d96cd7c258d1fcb674449153f838ac3"
+      },
+      {
+        "passageId": "boundary-n128-8:9",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 880,
+        "sourceEndByte": 988,
+        "passageHash": "sha256:97faf6fc2f836655a73dcacffbc92c358befb9301b6cd147d75a765fc05cd954"
+      },
+      {
+        "passageId": "boundary-n128-8:10",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 990,
+        "sourceEndByte": 1098,
+        "passageHash": "sha256:3ddc1c0209662bf648131764b212d6f83b704908106750683476576a87d2bd79"
+      },
+      {
+        "passageId": "boundary-n128-8:11",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 1100,
+        "sourceEndByte": 1208,
+        "passageHash": "sha256:512709347fe19a295fd6007e12b92c74f398b03d64a7e0ef9a44d516efcb735d"
+      },
+      {
+        "passageId": "boundary-n128-8:12",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 1210,
+        "sourceEndByte": 1318,
+        "passageHash": "sha256:764c69dfd9d3d902d77345b13a728c8bf3e1f8eda0829b21e4ea0d6e3b03f27c"
+      },
+      {
+        "passageId": "boundary-n128-8:13",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 1320,
+        "sourceEndByte": 1428,
+        "passageHash": "sha256:20ed790e7aa5babde27fd003e3390722d433e12f87e13b72d469b967695ca0be"
+      },
+      {
+        "passageId": "boundary-n128-8:14",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 1430,
+        "sourceEndByte": 1538,
+        "passageHash": "sha256:b8161f995a953d2388d6f3b844e0bfd30c28230de780f1d75dcc688fa07684a9"
+      },
+      {
+        "passageId": "boundary-n128-8:15",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 1540,
+        "sourceEndByte": 1648,
+        "passageHash": "sha256:1ead7a189e3199839c4440b661ca25afa7b87c6d05c1956cf3402df655d38bf4"
+      },
+      {
+        "passageId": "boundary-n128-8:16",
+        "sourceId": "boundary-n128-8",
+        "sourceStartByte": 1650,
+        "sourceEndByte": 1758,
+        "passageHash": "sha256:a9aaf2f57d428f4ec839c02c2da48254439431459837d68971c6bab67c165864"
+      }
+    ],
+    "inputHash": "sha256:402ae45a68c5d8606ec441b4a2923387fba174e5b953e57cc436697abb7a2be1",
+    "outputHash": "sha256:ff0ec2c34db5e13eeb20220d633d1b5cd91dc8ada9a0c5019a33b207768bef60",
+    "tokenBudget": 16000,
+    "compilerSelectionBudget": 11520,
+    "retainedPassageReportedTokens": 2176,
+    "compiledContextReportedTokens": 2193,
+    "includedPassageCount": 128,
+    "coverageNumerator": 8,
+    "coverageDenominator": 8,
+    "coveragePercentageBps": 10000,
+    "reportedTokenArithmeticValid": true,
+    "tokenEstimatorVerified": false,
+    "providerTokenBudgetGuaranteed": false,
+    "tokenEstimatorVersion": "maha_model_neutral_v1"
+  },
+  "prototypeCompatibility": {
+    "guestDigestAssessed": "sha256:594ea38106c0f305b1293749b4357c52f6833f594ea66ab706e07b9c056465d0",
+    "verifyingKeyAssessed": "0x005b383d68ba6c851fee4a93b4fefb1abce146318dbb2041dbc1f785a1f24b6d",
+    "compatible": false,
+    "blockers": [
+      "Prototype guest recomputes whitespace token counts; v1 must prove arithmetic over Maha-reported counts without claiming estimator verification.",
+      "Prototype guest derives different inputHash and outputHash values instead of validating Maha production hashes.",
+      "Prototype guest reselects passages in source/offset order; v1 must validate the compiler-retained set without claiming BM25 ranking correctness.",
+      "Prototype guest computes byte coverage; Maha production coverage is the number of represented sources over total sources.",
+      "Prototype guest has no unsupported_passage_count preflight for retained passage counts above 128.",
+      "Prototype public values omit the explicit token-estimator non-claims required by proof contract v3."
+    ]
+  }
+}
