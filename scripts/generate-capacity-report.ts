@@ -2,7 +2,6 @@ import { createHash } from 'node:crypto'
 import { writeFileSync } from 'node:fs'
 
 import { canonicalJson } from '../lib/evidence-dossier/digest.ts'
-import plan from '../content/source-cluster/production-operating-plan.json' with { type: 'json' }
 import preflight from '../content/source-cluster/production-preflight.json' with { type: 'json' }
 
 /**

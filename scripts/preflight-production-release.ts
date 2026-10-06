@@ -111,6 +111,7 @@ const preflight = all.map((row) => {
     sourceBinding: binding ? { sourceId: binding.sourceId, locator: binding.locator } : null,
     attributesChecked: Object.keys(checks).length,
     failedAttributes: failed,
+    ...(reviewerRefusal ? { reviewerRefusal } : {}),
     classification,
     repaired: false,
   }

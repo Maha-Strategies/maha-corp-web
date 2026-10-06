@@ -1,5 +1,3 @@
-import { createHash } from 'node:crypto'
-
 import { epistemicRecordPath } from '../lib/epistemic-publication.ts'
 import { EPISTEMIC_RECORDS } from '../lib/epistemic-pilots.ts'
 import { REPAIRED_REVISION_CANARY_RECORDS } from '../lib/repaired-revision-canary-targets.ts'
