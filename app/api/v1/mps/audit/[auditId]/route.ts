@@ -1,3 +1,4 @@
+import { ANTHROPIC_MESSAGE_SETTINGS } from '@/lib/anthropic-model'
 import Anthropic from '@anthropic-ai/sdk'
 
 import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
@@ -181,7 +182,7 @@ export async function POST(request: Request, context: { params: Promise<{ auditI
   try {
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
     const result = await runMpsAudit(passage, async (prompt) => {
-      const message = await client.messages.create({
+      const message = await client.messages.create({ ...ANTHROPIC_MESSAGE_SETTINGS,
         model: MPS_AUDIT_MODEL,
         max_tokens: 1_500,
         messages: [{ role: 'user', content: prompt }],

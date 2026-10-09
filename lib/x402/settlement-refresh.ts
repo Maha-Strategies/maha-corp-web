@@ -4,6 +4,7 @@ import { BASE_USDC, MAHA_PAYEE, OPERATOR_WALLETS } from './discovery-payment-rec
 import { payableOffers } from './offers.ts'
 import { OPERATOR_SETTLEMENT_RECEIPTS } from './operator-settlement-receipts.ts'
 import { buildLedger, type SettlementLedger } from './settlement-ledger.ts'
+import { RPC_LOG_MAX_BLOCKS, scanRpcLogs } from './rpc-log-scan.ts'
 
 export type Transfer = { payer: string; amountBaseUnits: bigint; blockNumber: bigint; transactionHash: string; logIndex: number }
 export type SettlementReader = {
@@ -13,13 +14,18 @@ export type SettlementReader = {
 }
 
 export const RECHECK_BLOCKS = BigInt(128)
-// Base's public RPC rejects eth_getLogs ranges above 2,000 blocks. Keep this
-// bound explicit so both the hourly refresh and its tests exercise the public
-// provider contract instead of depending on a private endpoint's wider limit.
-export const SCAN_CHUNK = BigInt(2000)
+export const SCAN_CHUNK = RPC_LOG_MAX_BLOCKS
 export const MAX_SCAN_BLOCKS = SCAN_CHUNK * BigInt(12)
 
-export function baseSettlementReader(options: { timeout?: number; retryCount?: number } = {}): SettlementReader {
+export function baseSettlementReader(options: { timeout?: number; retryCount?: number; minLogIntervalMs?: number } = {}): SettlementReader {
+  const interval = options.minLogIntervalMs ?? 0
+  if (!Number.isInteger(interval) || interval < 0 || interval > 10000) throw new Error('invalid_log_pacing')
+  let nextLogAt = 0
+  const pace = async () => {
+    const now = Date.now(), start = Math.max(now, nextLogAt)
+    nextLogAt = start + interval
+    if (start > now) await new Promise(resolve => setTimeout(resolve, start - now))
+  }
   const client = createPublicClient({ chain: base, transport: http(process.env.BASE_RPC_URL?.trim() || 'https://mainnet.base.org', {
     timeout: options.timeout ?? 12000, retryCount: options.retryCount ?? 0,
   }) })
@@ -31,14 +37,20 @@ export function baseSettlementReader(options: { timeout?: number; retryCount?: n
       return block.number
     },
     async transfers(fromBlock, toBlock) {
-      const logs = await client.getLogs({ address: BASE_USDC as `0x${string}`, event,
-        args: { to: MAHA_PAYEE as `0x${string}` }, fromBlock, toBlock, strict: true })
-      return logs.map((log) => {
+      const transfers: Transfer[] = []
+      for await (const log of scanRpcLogs({ fromBlock, toBlock,
+        getLogs: async (fromBlock, toBlock) => {
+          await pace()
+          return client.getLogs({ address: BASE_USDC as `0x${string}`, event,
+            args: { to: MAHA_PAYEE as `0x${string}` }, fromBlock, toBlock, strict: true })
+        },
+      })) {
         if (log.removed || log.blockNumber === null || log.logIndex === null || log.transactionHash === null
           || !log.args.from || log.args.value === undefined) throw new Error('invalid_transfer_log')
-        return { payer: log.args.from, amountBaseUnits: log.args.value, blockNumber: log.blockNumber,
-          transactionHash: log.transactionHash, logIndex: log.logIndex }
-      })
+        transfers.push({ payer: log.args.from, amountBaseUnits: log.args.value, blockNumber: log.blockNumber,
+          transactionHash: log.transactionHash, logIndex: log.logIndex })
+      }
+      return transfers
     },
     async timestamp(blockNumber) {
       const block = await client.getBlock({ blockNumber })

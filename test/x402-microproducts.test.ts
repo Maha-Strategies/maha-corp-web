@@ -1,3 +1,5 @@
+import { isPlanningProduct } from '../lib/x402/micro-planning-contracts.ts'
+import { EVIDENCE_CHECK_IDS } from '../lib/x402/evidence-check-contracts.ts'
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { readFileSync } from 'node:fs'
@@ -57,16 +59,16 @@ for (const id of MICRO_IDS) {
 }
 
 test('withheld products keep the two approved bands; released products hold their own rungs', () => {
-  assert.equal(MICRO_IDS.length, 24)
-  assert.equal(new Set(MICRO_IDS.map(microPath)).size, 24)
-  const original = MICRO_OFFERS.filter(o => !NEXT_IDS.includes(o.id as keyof typeof NEXT_PRODUCTS) && !isCompatibilityProduct(o.id))
+  assert.equal(MICRO_IDS.length, 37)
+  assert.equal(new Set(MICRO_IDS.map(microPath)).size, 37)
+  const original = MICRO_OFFERS.filter(o => !NEXT_IDS.includes(o.id as keyof typeof NEXT_PRODUCTS) && !isCompatibilityProduct(o.id) && !isPlanningProduct(o.id) && !EVIDENCE_CHECK_IDS.some(id => id === o.id))
   assert.equal(original.length, 10)
 
   // Withheld products are not payable, so the ledger never indexes them and
   // they are free to share the two approved bands. Publishing one requires an
   // unused amount, which assertDistinctPayableAmounts() enforces at load.
   const band = (amount: string) => String(Math.floor(Number(amount) / 1000) * 1000)
-  for (const o of MICRO_OFFERS.filter(o => !o.availability.payableInProduction && !isCompatibilityProduct(o.id))) {
+  for (const o of MICRO_OFFERS.filter(o => !o.availability.payableInProduction && !isCompatibilityProduct(o.id) && !isPlanningProduct(o.id))) {
     assert.ok(['5000', '10000'].includes(band(o.amount)), `${o.id}: withheld price band`)
     assert.equal(Number(o.amount) % 1000, 0, `${o.id}: withheld amounts stay on a round band`)
   }
@@ -78,8 +80,8 @@ test('withheld products keep the two approved bands; released products hold thei
   const released = MICRO_OFFERS.filter(o => o.availability.payableInProduction)
   assert.deepEqual(released.map(o => o.amount).sort((a, b) => Number(a) - Number(b)),
     ['6000', '7000', '8000', '9000', '10500', '11000', '13000', '14000', '15000', '16000', '17000',
-      '18000', '19000', '21000', '22000', '36000', '38000'])
-  const payable = payableOffers().map(o => BigInt(o.amount)).sort((a, b) => (a < b ? -1 : 1))
+      '18000', '19000', '21000', '22000', '29000', '36000', '38000', '39000', '41000', '59000', '63000', '70000', '80000', '87000', '90000', '119000', '150000', '160000', '180000'])
+  const payable = payableOffers().filter(o => !o.id.startsWith('book-epub-')).map(o => BigInt(o.amount)).sort((a, b) => (a < b ? -1 : 1))
   for (let i = 1; i < payable.length; i += 1) {
     assert.ok(payable[i] > payable[i - 1], 'current amounts remain distinct; fees are not product identity')
   }

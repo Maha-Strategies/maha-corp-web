@@ -6,12 +6,13 @@ import { MICRO_SAMPLE_INPUTS } from './micro-samples.ts'
 import { isReleasedMicro } from './micro-release.ts'
 import { isCompatibilityProduct } from './compatibility-contracts.ts'
 import { BAZAAR_LAUNCH_COPY } from './bazaar-launch.ts'
+import { isPlanningProduct, PLANNING_TAGS } from './micro-planning-contracts.ts'
 
 /** Only the explicit owner-authorized cohort can be configured for settlement. */
 export const MICRO_OFFERS: readonly X402Offer[] = MICRO_IDS.map(id => ({
   id, method: 'POST', path: microPath(id), amount: MICRO_PRODUCTS[id].amount,
   description: BAZAAR_LAUNCH_COPY[id] ?? MICRO_PRODUCTS[id].description, concurrencyCap: 4,
-  serviceName: MICRO_PRODUCTS[id].title, tags: ['bounded-computation', 'evidence', 'deterministic', 'microproduct'],
+  serviceName: MICRO_PRODUCTS[id].title, tags: ['bounded-computation', 'evidence', 'deterministic', 'microproduct', ...(isPlanningProduct(id) ? PLANNING_TAGS[id] : [])],
   status: isReleasedMicro(id) ? 'available' : 'withheld',
   availability: { payableInProduction: isReleasedMicro(id), blockedBy: isReleasedMicro(id) ? [] : [isCompatibilityProduct(id) ? 'Exact price and draft rule-set release approval pending; settlement disabled.' : 'Outside the owner-authorized release; settlement remains disabled.'] },
   requiresIdempotency: false, maxRequestBytes: MICRO_MAX_REQUEST_BYTES,

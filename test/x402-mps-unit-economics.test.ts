@@ -31,14 +31,14 @@ test('the offer is priced at twenty-five cents', () => {
   assert.equal(CONSERVATIVE_CASE().priceUsd, 0.25)
 })
 
-test('0.5 tokens per character is the expected case, not a worst case', () => {
+test('Sonnet 5.5 estimates include a tokenizer migration allowance', () => {
   // It was previously labelled worst case and it is not. English prose runs
   // ~0.25; dense CJK, minified code and base64 reach roughly one token per
   // character, and the cap is in characters, so nothing prevents it. Pricing
   // off the midpoint while calling it a ceiling understated the true ceiling
   // by half on exactly the inputs that cost most.
-  assert.equal(EXPECTED_TOKENS_PER_CHAR, 0.5)
-  assert.equal(CONSERVATIVE_TOKENS_PER_CHAR, 1.0)
+  assert.equal(EXPECTED_TOKENS_PER_CHAR, 0.65)
+  assert.equal(CONSERVATIVE_TOKENS_PER_CHAR, 1.3)
   assert.ok(CONSERVATIVE_CASE().modelCostUsd > EXPECTED_CASE().modelCostUsd)
 })
 
@@ -56,13 +56,12 @@ test('the model cost is computed from the caps that actually bind', () => {
   // eroding the margin.
   assert.equal(MAX_OUTPUT_TOKENS, 1_500)
   assert.equal(MAX_AUDIT_PASSAGE_CHARS, 6_000)
-  assert.equal(MODEL_PRICING.inputPerMillionUsd, 3)
-  assert.equal(MODEL_PRICING.outputPerMillionUsd, 15)
+  assert.equal(MODEL_PRICING.inputPerMillionUsd, 2)
+  assert.equal(MODEL_PRICING.outputPerMillionUsd, 10)
 
-  // 6,000 characters at one token per character, plus a ~700-token prompt, is
-  // 6,700 input tokens: $0.0201. Output is capped at 1,500: $0.0225.
+  // 8,710 estimated input tokens: $0.01742. 1,500 output tokens: $0.015.
   const worst = CONSERVATIVE_CASE()
-  assert.ok(Math.abs(worst.modelCostUsd - 0.0426) < 0.0005, `model cost was ${worst.modelCostUsd}`)
+  assert.ok(Math.abs(worst.modelCostUsd - 0.03242) < 0.0005, `model cost was ${worst.modelCostUsd}`)
 })
 
 test('the failure allowance prices the no-second-charge promise, not the happy path', () => {

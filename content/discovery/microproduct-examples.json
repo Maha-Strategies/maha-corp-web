@@ -1035,7 +1035,871 @@
         "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
       ],
       "receiptDigest": "sha256:5802494f41e3a859b80f21e1e3e29ebdc7372e899f5bc3f8bd8f28686a73ca14"
+    },
+    "inspection-tolerance-check": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "inspection-tolerance-check",
+      "amountBaseUnits": "29000",
+      "inputDigest": "sha256:a2969fabb5b74a743f89a1d014975bd68dc5a64238519cd5e4dde9deb7fb1cfe",
+      "result": {
+        "method": "inspection-tolerance-check/1",
+        "basis": "synthetic",
+        "rows": [
+          {
+            "id": "within",
+            "status": "pass",
+            "metrics": [
+              {
+                "name": "lowerMm",
+                "value": "1"
+              },
+              {
+                "name": "upperMm",
+                "value": "5"
+              },
+              {
+                "name": "toleranceMm",
+                "value": "5"
+              }
+            ],
+            "relatedIds": []
+          },
+          {
+            "id": "overlap",
+            "status": "hold",
+            "metrics": [
+              {
+                "name": "lowerMm",
+                "value": "3"
+              },
+              {
+                "name": "upperMm",
+                "value": "7"
+              },
+              {
+                "name": "toleranceMm",
+                "value": "5"
+              }
+            ],
+            "relatedIds": []
+          },
+          {
+            "id": "outside",
+            "status": "fail",
+            "metrics": [
+              {
+                "name": "lowerMm",
+                "value": "-10"
+              },
+              {
+                "name": "upperMm",
+                "value": "-6"
+              },
+              {
+                "name": "toleranceMm",
+                "value": "5"
+              }
+            ],
+            "relatedIds": []
+          }
+        ],
+        "totals": [
+          {
+            "name": "passCount",
+            "value": "1"
+          },
+          {
+            "name": "failCount",
+            "value": "1"
+          },
+          {
+            "name": "holdCount",
+            "value": "1"
+          }
+        ],
+        "limitations": [
+          "Inclusive tolerance boundaries; overlapping uncertainty intervals produce hold. Declared intervals are not verified sensor accuracy or statistical confidence intervals."
+        ],
+        "approvalGranted": false
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:75a7781d6940247942e692a3f2ed9edc296c12f1b2ab24217894644c527ec74d"
+    },
+    "inspection-coverage-plan": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "inspection-coverage-plan",
+      "amountBaseUnits": "119000",
+      "inputDigest": "sha256:2bbb35e3858ccbfc1945b580657b3f31496515f9b10defd38379d9321496e4e7",
+      "result": {
+        "method": "inspection-coverage-plan/1",
+        "basis": "synthetic",
+        "rows": [
+          {
+            "id": "near",
+            "status": "covered",
+            "metrics": [
+              {
+                "name": "visibleStationCount",
+                "value": "1"
+              }
+            ],
+            "relatedIds": [
+              "station-1"
+            ]
+          },
+          {
+            "id": "occluded",
+            "status": "uncovered",
+            "metrics": [
+              {
+                "name": "visibleStationCount",
+                "value": "0"
+              }
+            ],
+            "relatedIds": []
+          }
+        ],
+        "totals": [
+          {
+            "name": "targetCount",
+            "value": "2"
+          },
+          {
+            "name": "coveredCount",
+            "value": "1"
+          }
+        ],
+        "limitations": [
+          "Omnidirectional 2D point observations only. Touching an obstacle edge blocks visibility. No 3D geometry, lens model, localization uncertainty or robot motion."
+        ],
+        "approvalGranted": false
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:79ffbb453fa5c2c9e32f75789d1673db6805a6ad96f73f3301adc817ed4b35f1"
+    },
+    "panel-packing-estimate": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "panel-packing-estimate",
+      "amountBaseUnits": "59000",
+      "inputDigest": "sha256:05a1d5c09882757d1182d6e099f86e94c798f2aa87efdf2deacbd4499084d64d",
+      "result": {
+        "method": "panel-packing-estimate/1",
+        "basis": "synthetic",
+        "rows": [
+          {
+            "id": "standard-sheet",
+            "status": "estimated",
+            "metrics": [
+              {
+                "name": "columns",
+                "value": "4"
+              },
+              {
+                "name": "rows",
+                "value": "2"
+              },
+              {
+                "name": "panelsPerSheet",
+                "value": "8"
+              },
+              {
+                "name": "sheets",
+                "value": "4"
+              },
+              {
+                "name": "materialUtilizationRatio",
+                "value": "1875/3721"
+              }
+            ],
+            "relatedIds": []
+          }
+        ],
+        "totals": [],
+        "limitations": [
+          "Identical panels, fixed orientation, kerf only between adjacent panels, edge margin on all sides. Utilization includes unused last-sheet area; no optimality, grain, defects, toolpaths or fabrication approval."
+        ],
+        "approvalGranted": false
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:6e60eee69226d14fac1ee342919e53ed9bb1ac8567e7221bd525a98fd60d0250"
+    },
+    "assembly-schedule-compare": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "assembly-schedule-compare",
+      "amountBaseUnits": "150000",
+      "inputDigest": "sha256:6e2832b5e603403130a1b4c1451cc6ced2e17ddcdcdc3610bfb8414c26a3095c",
+      "result": {
+        "method": "assembly-schedule-compare/1",
+        "basis": "synthetic",
+        "rows": [
+          {
+            "id": "one-crew",
+            "status": "estimated",
+            "metrics": [
+              {
+                "name": "completionMs",
+                "value": "7200000"
+              },
+              {
+                "name": "cumulativeUnitWaitMs",
+                "value": "10800000"
+              },
+              {
+                "name": "craneBusyMs",
+                "value": "2400000"
+              }
+            ],
+            "relatedIds": []
+          },
+          {
+            "id": "two-crews",
+            "status": "estimated",
+            "metrics": [
+              {
+                "name": "completionMs",
+                "value": "5040000"
+              },
+              {
+                "name": "cumulativeUnitWaitMs",
+                "value": "0"
+              },
+              {
+                "name": "craneBusyMs",
+                "value": "2400000"
+              }
+            ],
+            "relatedIds": []
+          }
+        ],
+        "totals": [],
+        "limitations": [
+          "First unit ready at time zero; later units released at fixed intervals. One crane is occupied only during lifting. One crew remains occupied through lift, connection and inspection. No travel, breaks, capacity or safety model; not an optimized schedule."
+        ],
+        "approvalGranted": false
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:3674c1805c6b126a704467b5605eefd25c7747623b10588be10bd6876fb7033b"
+    },
+    "automation-economics-compare": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "automation-economics-compare",
+      "amountBaseUnits": "90000",
+      "inputDigest": "sha256:fb0b3664bb47957512ae3ffe4dd154f09f1e0387355e3d610b244582a844bfd1",
+      "result": {
+        "method": "automation-economics-compare/1",
+        "basis": "synthetic",
+        "rows": [
+          {
+            "id": "small-run",
+            "status": "estimated",
+            "metrics": [
+              {
+                "name": "manualCents",
+                "value": "100000"
+              },
+              {
+                "name": "assistedCents",
+                "value": "110000"
+              },
+              {
+                "name": "savingsCents",
+                "value": "-10000"
+              },
+              {
+                "name": "breakEvenUnits",
+                "value": "125"
+              }
+            ],
+            "relatedIds": []
+          },
+          {
+            "id": "larger-run",
+            "status": "estimated",
+            "metrics": [
+              {
+                "name": "manualCents",
+                "value": "1000000"
+              },
+              {
+                "name": "assistedCents",
+                "value": "650000"
+              },
+              {
+                "name": "savingsCents",
+                "value": "350000"
+              },
+              {
+                "name": "breakEvenUnits",
+                "value": "125"
+              }
+            ],
+            "relatedIds": []
+          }
+        ],
+        "totals": [],
+        "limitations": [
+          "USD nominal declared costs only, without discounting, tax, maintenance, financing or demand assumptions. Break-even means assisted cost is no greater than manual cost; null means no break-even under this linear model."
+        ],
+        "approvalGranted": false
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:0477e6f500d616f85c637714abaf5337854f09ae1c4a729183dc26dabdbe2eab"
+    },
+    "public-spending-review": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "public-spending-review",
+      "amountBaseUnits": "180000",
+      "inputDigest": "sha256:768646020f1b382fddb6648e52cde152abccd4405379c8a8ef8a420741b770eb",
+      "result": {
+        "method": "public-spending-review/1",
+        "basis": "synthetic",
+        "rows": [
+          {
+            "id": "program-2026",
+            "status": "flagged",
+            "metrics": [
+              {
+                "name": "amountCents",
+                "value": "110000"
+              },
+              {
+                "name": "budgetCents",
+                "value": "100000"
+              },
+              {
+                "name": "inconsistentBudget",
+                "value": "0"
+              },
+              {
+                "name": "missingBudget",
+                "value": "0"
+              }
+            ],
+            "relatedIds": [
+              "public-table-row-1",
+              "public-table-row-2"
+            ]
+          },
+          {
+            "id": "payee-a",
+            "status": "flagged",
+            "metrics": [
+              {
+                "name": "amountCents",
+                "value": "70000"
+              },
+              {
+                "name": "concentrationRatio",
+                "value": "7/11"
+              }
+            ],
+            "relatedIds": [
+              "program-2026"
+            ]
+          },
+          {
+            "id": "payee-b",
+            "status": "observed",
+            "metrics": [
+              {
+                "name": "amountCents",
+                "value": "40000"
+              },
+              {
+                "name": "concentrationRatio",
+                "value": "4/11"
+              }
+            ],
+            "relatedIds": [
+              "program-2026"
+            ]
+          }
+        ],
+        "totals": [
+          {
+            "name": "excludedDuplicateRows",
+            "value": "0"
+          },
+          {
+            "name": "acceptedAmountCents",
+            "value": "110000"
+          }
+        ],
+        "limitations": [
+          "Caller defines comparable groups, payee identities, budgets, source bindings and currency consistently. All duplicate-ID rows are excluded, not silently deduplicated. Concentration is a review lead even for small groups; no fraud inference, currency conversion or source verification."
+        ],
+        "approvalGranted": false
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:e5fb0fe49a9a7ed6ccfa16fbae1a8185a46adda61ab35a08b24ce915f231341d"
+    },
+    "campaign-record-reconcile": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "campaign-record-reconcile",
+      "amountBaseUnits": "80000",
+      "inputDigest": "sha256:0315f9f8473655f93166a4f51e53236922b167913b56e2680aa7da648f2e8ac6",
+      "result": {
+        "method": "campaign-record-reconcile/1",
+        "basis": "synthetic",
+        "rows": [
+          {
+            "id": "entry-1",
+            "status": "clear",
+            "metrics": [
+              {
+                "name": "duplicateId",
+                "value": "0"
+              },
+              {
+                "name": "missingDocumentRef",
+                "value": "0"
+              }
+            ],
+            "relatedIds": [
+              "document-1"
+            ]
+          },
+          {
+            "id": "entry-2",
+            "status": "flagged",
+            "metrics": [
+              {
+                "name": "duplicateId",
+                "value": "0"
+              },
+              {
+                "name": "missingDocumentRef",
+                "value": "1"
+              }
+            ],
+            "relatedIds": []
+          }
+        ],
+        "totals": [
+          {
+            "name": "inflowCents",
+            "value": "5000"
+          },
+          {
+            "name": "outflowCents",
+            "value": "2000"
+          },
+          {
+            "name": "expectedClosingCents",
+            "value": "13000"
+          },
+          {
+            "name": "declaredClosingCents",
+            "value": "13000"
+          },
+          {
+            "name": "differenceCents",
+            "value": "0"
+          },
+          {
+            "name": "excludedDuplicateRows",
+            "value": "0"
+          }
+        ],
+        "limitations": [
+          "Public or synthetic, redacted non-personal metadata only. References are declarations, not inspected documents. All duplicate-ID rows are excluded. USD arithmetic is not filing, contribution eligibility, foreign-national analysis, legal compliance or authorization to move funds."
+        ],
+        "approvalGranted": false
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:ace57aa54135885f370bed9ba2736b0bb0c4f7fcdf3b416c8443af3e57ae3592"
+    },
+    "committee-finance-snapshot": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "committee-finance-snapshot",
+      "amountBaseUnits": "70000",
+      "inputDigest": "sha256:dd6ab5d3aad1641580d5471212b88638ba0c517141405b72e5cb8715d42ae521",
+      "result": {
+        "method": "committee-finance-snapshot/1",
+        "basis": "synthetic",
+        "rows": [
+          {
+            "id": "synthetic-period",
+            "status": "observed",
+            "metrics": [
+              {
+                "name": "retrievalAgeMs",
+                "value": "86400000"
+              },
+              {
+                "name": "periodAgeMs",
+                "value": "777600000"
+              },
+              {
+                "name": "retrievalStale",
+                "value": "0"
+              },
+              {
+                "name": "amended",
+                "value": "0"
+              },
+              {
+                "name": "receiptsCents",
+                "value": "5000"
+              },
+              {
+                "name": "disbursementsCents",
+                "value": "2000"
+              },
+              {
+                "name": "endingCashCents",
+                "value": "13000"
+              },
+              {
+                "name": "cashDifferenceCents",
+                "value": "0"
+              }
+            ],
+            "relatedIds": [
+              "synthetic-filing-not-real"
+            ]
+          }
+        ],
+        "totals": [],
+        "limitations": [
+          "Caller-supplied committee aggregates only; source digests and filing IDs are bound by the input receipt but not authenticated. No live OpenFEC retrieval, contributor records, ranking, solicitation or certification of latest/final filings. Snapshots may overlap: never sum them.",
+          "Fresh retrieval does not make an old reporting period current. Cash arithmetic omits adjustments not provided and a mismatch alone does not establish a reporting error."
+        ],
+        "approvalGranted": false
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:c1d2612018b4bb27d72f4e9a4bb32d3a1a1f40bb513c74ce5d07c972efbc8563"
+    },
+    "area-program-check": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "area-program-check",
+      "amountBaseUnits": "39000",
+      "inputDigest": "sha256:d0157deff019a4041b406aec2af740b5cdc268caafef6f0a78ae93b1f2f56b9a",
+      "result": {
+        "method": "area-program-check/1",
+        "basis": "synthetic",
+        "rows": [
+          {
+            "id": "ground",
+            "status": "estimated",
+            "metrics": [
+              {
+                "name": "grossArea",
+                "value": "1000"
+              },
+              {
+                "name": "assignableArea",
+                "value": "750/1"
+              },
+              {
+                "name": "supportArea",
+                "value": "250/1"
+              }
+            ],
+            "relatedIds": []
+          },
+          {
+            "id": "upper",
+            "status": "estimated",
+            "metrics": [
+              {
+                "name": "grossArea",
+                "value": "800"
+              },
+              {
+                "name": "assignableArea",
+                "value": "640/1"
+              },
+              {
+                "name": "supportArea",
+                "value": "160/1"
+              }
+            ],
+            "relatedIds": []
+          }
+        ],
+        "totals": [
+          {
+            "name": "grossArea",
+            "value": "1800"
+          },
+          {
+            "name": "assignableArea",
+            "value": "1390/1"
+          },
+          {
+            "name": "supportArea",
+            "value": "410/1"
+          },
+          {
+            "name": "weightedAssignableRatio",
+            "value": "139/180"
+          }
+        ],
+        "limitations": [
+          "All areas use caller-declared m2; exact fractions are numerator/denominator. Support area is the remainder, not a verified circulation/structure model. No geometry, overlap, zoning, code, accessibility, rentable-area or engineering approval."
+        ],
+        "approvalGranted": false
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:9b9254917d153af7e0780ac02a963ccf396dd7ebff1b1e41a92389864622c46d"
+    },
+    "neural-experiment-metrics": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "neural-experiment-metrics",
+      "amountBaseUnits": "160000",
+      "inputDigest": "sha256:906c9841fd87d250503eae13f77415d572f4568e4f3740fa117dda819535e173",
+      "result": {
+        "method": "neural-experiment-metrics/1",
+        "basis": "synthetic",
+        "rows": [
+          {
+            "id": "left-trial",
+            "status": "hit",
+            "metrics": [
+              {
+                "name": "firstCorrectLatencyMs",
+                "value": "1000"
+              },
+              {
+                "name": "wrongCommandEvents",
+                "value": "0"
+              },
+              {
+                "name": "repeatCorrectEvents",
+                "value": "0"
+              }
+            ],
+            "relatedIds": [
+              "correct-left"
+            ]
+          },
+          {
+            "id": "right-trial",
+            "status": "missed",
+            "metrics": [
+              {
+                "name": "firstCorrectLatencyMs",
+                "value": null
+              },
+              {
+                "name": "wrongCommandEvents",
+                "value": "1"
+              },
+              {
+                "name": "repeatCorrectEvents",
+                "value": "0"
+              }
+            ],
+            "relatedIds": [
+              "wrong-right"
+            ]
+          }
+        ],
+        "totals": [
+          {
+            "name": "restDurationMs",
+            "value": "40000"
+          },
+          {
+            "name": "falseRestEvents",
+            "value": "1"
+          },
+          {
+            "name": "falseRestEventsPerMinute",
+            "value": "3/2"
+          },
+          {
+            "name": "intentionalTrials",
+            "value": "2"
+          },
+          {
+            "name": "missedTrials",
+            "value": "1"
+          },
+          {
+            "name": "missRate",
+            "value": "1/2"
+          },
+          {
+            "name": "wrongCommandEvents",
+            "value": "1"
+          },
+          {
+            "name": "otherIntervalEvents",
+            "value": "0"
+          },
+          {
+            "name": "repeatCorrectEvents",
+            "value": "0"
+          },
+          {
+            "name": "medianFirstCorrectLatencyMs",
+            "value": "1000"
+          }
+        ],
+        "limitations": [
+          "Labels fully partition the recording in half-open intervals [start,end). A hit means at least one matching command; wrong and repeated events remain counted. Zero rest or zero trials yields null rates, never evidence of safety. No raw EEG, participant identifiers, training, clinical validation or live commands."
+        ],
+        "approvalGranted": false
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:7339993efb4f8e043b4daac5d43d8ea5677a2172252555f9ecb272bce603a619"
+    },
+    "evidence-scope-check": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "evidence-scope-check",
+      "amountBaseUnits": "41000",
+      "inputDigest": "sha256:70f000550024f16c7304158da79c43137db2df2bd3eeeb48c87a2d063e772dc5",
+      "result": {
+        "state": "mismatch",
+        "missingDocumentIds": [
+          "amendment"
+        ],
+        "unexpectedDocumentIds": [],
+        "crossTenantDocumentIds": [],
+        "scopeComplete": true,
+        "accessControlEnforced": false,
+        "sourcesVerified": false
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:f23cbdf48fcc74f4e24639587e5957745e431b0b7a1182822980c30d84fc65fe"
+    },
+    "evidence-version-selection-check": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "evidence-version-selection-check",
+      "amountBaseUnits": "63000",
+      "inputDigest": "sha256:4c704f1cedf2a29164c4dec0a945f469bcbd2a8d978e73a318a9e7bbcfe492ca",
+      "result": {
+        "state": "consistent-declarations",
+        "checks": [
+          {
+            "documentId": "document-1",
+            "state": "consistent-declarations",
+            "activeVersionIds": [
+              "v1"
+            ],
+            "selectedVersionIds": [
+              "v1"
+            ],
+            "issues": []
+          }
+        ],
+        "legalEffectVerified": false,
+        "sourcesVerified": false
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:830880bccb22a9714367940f41eb39d60105b310de6e969b1462c3b9add3ea72"
+    },
+    "context-manifest-check": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "context-manifest-check",
+      "amountBaseUnits": "87000",
+      "inputDigest": "sha256:7184d861bba23f1c38946a3129a0bce276d92b1ee2a0ec7b6a0697c4cb05e95e",
+      "result": {
+        "state": "consistent-declarations",
+        "missingPassageIds": [],
+        "unexpectedPassageIds": [],
+        "repeatedPassageIds": [],
+        "substitutedPassageIds": [],
+        "orderingGaps": [],
+        "promptInspected": false,
+        "modelUseVerified": false
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement."
+      ],
+      "receiptDigest": "sha256:2268623bb7911efc630130cd560be81b8e0ef7ed9f599b94867ddec81b7395b9"
     }
   },
-  "digest": "sha256:9f55da7bcb8d7ef31f427e303a336b4b66492935af3edfbc77e72228ac380394"
+  "digest": "sha256:7b8bf2b1c3915f7cb917225d56f0fd96fb0e6fbb215f45249621baccf2a3841e"
 }

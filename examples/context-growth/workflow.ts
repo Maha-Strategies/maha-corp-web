@@ -8,8 +8,6 @@ export const ORIGIN = 'https://www.mahastrategies.com'
 export const PATHS = ['/api/v1/compress', '/api/v1/compress/evaluate'] as const
 export const PAYEE = '0xec84c1cd6602bbe387bc8e6f0d3c062f2762de28'
 export const ASSET = '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913'
-// BigInt() calls rather than literals: the application tsconfig targets
-// ES2017, where BigInt literals are a compile error.
 export const CAPS = [BigInt(1000), BigInt(10000)] as const
 
 // Entirely synthetic. Labels deliberately precede compilation, not selected

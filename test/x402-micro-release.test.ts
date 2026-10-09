@@ -2,19 +2,33 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { MICRO_OFFERS } from '../lib/x402/micro-offers.ts'
 import { payableOffers } from '../lib/x402/offers.ts'
-import { microExecutionAllowed, RELEASED_MICRO_IDS } from '../lib/x402/micro-release.ts'
+import { microExecutionAllowed, RELEASED_MICRO_IDS, EXISTING_RELEASED_MICRO_IDS } from '../lib/x402/micro-release.ts'
 import { MICRO_OPENAPI_PATHS } from '../lib/x402/micro-openapi.ts'
 import { CELESTIAL_OFFERS } from '../lib/x402/celestial-offers.ts'
 import { assertCanaryRequirement, TARGETS, CONFIRMATION } from '../scripts/run-micro-five-indexing-canaries.ts'
 import { BASE_NETWORK, BASE_USDC, MAHA_PAYEE } from '../lib/x402/discovery-payment-recipe.ts'
 import { readFileSync } from 'node:fs'
 import { x402Config } from '../lib/x402/config.ts'
+import { PLANNING_IDS } from '../lib/x402/micro-planning-contracts.ts'
 
-test('exactly seventeen authorized microproducts are released at distinct amounts', () => {
+test('new planning opt-in does not widen the prior production flag or mutate its resource list', () => {
+  const env = { X402_ENABLED: 'true', X402_FACILITATOR_URL: 'https://facilitator.example/x402', X402_PAY_TO: MAHA_PAYEE,
+    X402_ASSET: BASE_USDC, X402_NETWORK: BASE_NETWORK, X402_RESOURCES: JSON.stringify([{ method: 'POST', path: '/api/v1/compress' }]) }
+  const old = x402Config({ ...env, X402_MICRO_FIVE_ENABLED: 'true' })!
+  assert.ok(old.resources.every(r => !PLANNING_IDS.includes(r.offerId as typeof PLANNING_IDS[number])))
+  const next = x402Config({ ...env, X402_MICRO_FIVE_ENABLED: 'true', X402_PLANNING_TEN_ENABLED: 'true' })!
+  assert.deepEqual(next.resources.slice(0, old.resources.length), old.resources)
+  assert.deepEqual(next.resources.slice(old.resources.length).map(r => r.offerId).sort(), [...PLANNING_IDS].sort())
+  for (const value of ['false', 'TRUE', '1', ' true ']) {
+    assert.deepEqual(x402Config({ ...env, X402_MICRO_FIVE_ENABLED: 'true', X402_PLANNING_TEN_ENABLED: value })!.resources, old.resources)
+  }
+})
+
+test('exactly twenty-seven authorized microproducts are released at distinct amounts', () => {
   // Extended from five on 2026-09-10. The ten added are exactly the withheld
   // offers the candidate review selected and micro-next12-cost-observation
   // profiled; the seven the review did not select stay withheld.
-  assert.deepEqual([...RELEASED_MICRO_IDS].sort(), [
+  assert.deepEqual([...EXISTING_RELEASED_MICRO_IDS].sort(), [
     'audit-export-normalizer', 'bracketed-polynomial-root', 'celestial-result-compatibility', 'citation-binding-check',
     'control-evidence-gaps', 'covariance-uncertainty', 'divine-name-disambiguation',
     'edition-verse-resolution', 'evidence-frame-compatibility', 'exact-linear-system', 'mcp-contract-compatibility',
@@ -31,8 +45,8 @@ test('exactly seventeen authorized microproducts are released at distinct amount
   // so any two amounts closer than a fee apart are one perturbation away from
   // being indistinguishable.
   const total = released.reduce((n, o) => n + BigInt(o.amount), BigInt(0))
-  assert.equal(total, BigInt(280500))
-  const amounts = [...payableOffers()].map(o => BigInt(o.amount)).sort((a, b) => (a < b ? -1 : 1))
+  assert.equal(total, BigInt(1447500))
+  const amounts = [...payableOffers()].filter(o => !o.id.startsWith('book-epub-')).map(o => BigInt(o.amount)).sort((a, b) => (a < b ? -1 : 1))
   const gaps = amounts.slice(1).map((a, i) => a - amounts[i])
   assert.ok(gaps.every(g => g > BigInt(0)), 'every payable amount remains distinct')
   assert.equal(MICRO_OFFERS.filter(o => o.status === 'withheld').length, 7)
@@ -92,11 +106,11 @@ test('the microproduct opt-in preserves existing configuration and refuses impli
   const before = x402Config(env)!, after = x402Config({ ...env, X402_MICRO_FIVE_ENABLED: 'true' })!
   assert.deepEqual(after.resources.slice(0, 1), before.resources)
   // One pre-existing resource plus the fifteen released microproducts.
-  assert.equal(after.resources.length, 1 + RELEASED_MICRO_IDS.length)
-  assert.deepEqual(after.resources.slice(1).map(r => r.offerId).sort(), [...RELEASED_MICRO_IDS].sort())
+  assert.equal(after.resources.length, 1 + EXISTING_RELEASED_MICRO_IDS.length)
+  assert.deepEqual(after.resources.slice(1).map(r => r.offerId).sort(), [...EXISTING_RELEASED_MICRO_IDS].sort())
   for (const value of ['false', '1', 'TRUE', ' true ']) assert.deepEqual(x402Config({ ...env, X402_MICRO_FIVE_ENABLED: value })!.resources, before.resources)
   const existing = { ...env, X402_RESOURCES: JSON.stringify([{ method: 'POST', path: '/api/v1/compress' }, { method: 'POST', path: '/api/v1/micro/citation-binding-check' }]) }
-  assert.equal(x402Config({ ...existing, X402_MICRO_FIVE_ENABLED: 'true' })!.resources.length, 1 + RELEASED_MICRO_IDS.length)
+  assert.equal(x402Config({ ...existing, X402_MICRO_FIVE_ENABLED: 'true' })!.resources.length, 1 + EXISTING_RELEASED_MICRO_IDS.length)
   assert.throws(() => x402Config({ ...env, X402_RESOURCES: 'not-json', X402_MICRO_FIVE_ENABLED: 'true' }))
   assert.throws(() => x402Config({ ...env, X402_RESOURCES: '[]', X402_MICRO_FIVE_ENABLED: 'true' }))
   assert.equal(x402Config({ ...env, X402_ENABLED: 'false', X402_MICRO_FIVE_ENABLED: 'true' }), null)

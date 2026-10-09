@@ -4,7 +4,7 @@ import { microDigest } from '../lib/x402/micro-products.ts'
 import { NEXT_PRODUCTS } from '../lib/x402/micro-next-contracts.ts'
 
 const root = resolve(import.meta.dirname, '..'), read = (p: string) => JSON.parse(readFileSync(resolve(root, p), 'utf8'))
-const freeze = read('content/discovery/micro-candidate-freeze-v1.json'), costs = read('content/discovery/micro-next12-cost-observation-v6.json')
+const freeze = read('content/discovery/micro-candidate-freeze-v1.json'), costs = read('content/discovery/micro-next12-cost-observation-v8.json')
 const omitDigest = (o: object) => Object.fromEntries(Object.entries(o).filter(([k]) => k !== 'digest'))
 if (microDigest(omitDigest(freeze)) !== freeze.digest || microDigest(omitDigest(costs)) !== costs.digest) throw new Error('unbound-input')
 // Every candidate receives an explicit semantic adjudication, not URL/token similarity.
@@ -97,12 +97,12 @@ const rows = decisions.map(([number, decision, comparedWith, reason]) => {
 })
 if (rows.length !== 60 || new Set(rows.map(r => r.candidateId)).size !== 60 || rows.filter(r => r.productId).length !== 12) throw new Error('cohort-partition-refused')
 const comparedFiles = ['content/discovery/micro-candidate-freeze-v1.json', 'lib/x402/celestial-products.ts', 'lib/x402/offers.ts', 'lib/agent-infrastructure-compatibility-pack.ts', 'lib/openapi.ts']
-const body = { version: 'micro60-selection/1', freezeDigest: freeze.digest, costObservationDigest: costs.digest,
+const body = { version: 'micro60-selection/3', supersedes: 'micro60-selection-v2.json', freezeDigest: freeze.digest, costObservationDigest: costs.digest,
   method: 'Manual semantic task comparison. Utility 2=bounded public corpus lookup, 3=demonstrated transformation/check fixture. Evidence 2=existing attributed corpus or narrow protocol snapshot; 3=independently checked arithmetic/structural rules. Cost 3<=5ms, 2<=25ms, 1<=100ms capped-fixture p95. Score 4U+4E+2C.',
   qualification: 'Twelve evidence-ready, locally measured shortlist entries; not a global ranking over unimplemented candidates. Unmeasured candidates retain null scores. Demonstrated fixture utility is not customer demand or revenue. Cloud cost remains unknown.',
   comparedFiles: comparedFiles.map(path => ({ path, digest: microDigest(readFileSync(resolve(root, path), 'utf8')) })),
   selected: rows.filter(r => r.productId).sort((a, b) => b.score! - a.score! || a.candidateId.localeCompare(b.candidateId)).map(r => r.productId), rows }
-const target = resolve(root, 'content/discovery/micro60-selection-v1.json'), text = JSON.stringify({ ...body, digest: microDigest(body) }, null, 2) + '\n'
+const target = resolve(root, 'content/discovery/micro60-selection-v3.json'), text = JSON.stringify({ ...body, digest: microDigest(body) }, null, 2) + '\n'
 const args = process.argv.slice(2)
 if (args.length !== 1 || !['--write', '--check'].includes(args[0])) throw new Error('Local --write or --check only')
 if (args[0] === '--write') writeFileSync(target, text)

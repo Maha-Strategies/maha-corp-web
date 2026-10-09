@@ -2,6 +2,8 @@
 
 import { FormEvent, useState } from 'react'
 
+import { browserConversionContext, trackConversion } from '@/components/ConversionTracker'
+
 export default function PreflightCheckout() {
   const [email, setEmail] = useState('')
   const [documentLabel, setDocumentLabel] = useState('')
@@ -15,10 +17,12 @@ export default function PreflightCheckout() {
     try {
       const response = await fetch('/api/mps-preflight/checkout', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, documentLabel }),
+        credentials: 'omit',
+        body: JSON.stringify({ email, documentLabel, ...browserConversionContext() }),
       })
       const data = await response.json() as { checkoutUrl?: string; error?: string }
       if (!response.ok || !data.checkoutUrl) throw new Error(data.error ?? 'Checkout could not start.')
+      trackConversion('cta_mps_document_preflight_checkout_started')
       window.location.assign(data.checkoutUrl)
     } catch (checkoutError) {
       setError(checkoutError instanceof Error ? checkoutError.message : 'Checkout could not start.')

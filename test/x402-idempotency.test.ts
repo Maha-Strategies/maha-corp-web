@@ -60,14 +60,25 @@ function countingFacilitator() {
  * under test is the *sequence* -- claim, then settle -- and a mocked guard
  * would let that sequence be wrong while the test passed.
  */
-function admissionStore() {
+function admissionStore(faults: { marker?: 'returned' | 'thrown'; pending?: boolean; journalRead?: boolean } = {}) {
   const rows = new Map<string, { inputHash: string; resource: string; amount: string; state: string; transaction: string | null }>()
+  const recovery = new Map<string, { state: string; transaction: string | null; payment_id: string; network: string }>()
   const key = (args: Record<string, unknown>) => `${args.p_offer_id}|${args.p_payer}|${args.p_idempotency_key}`
 
   return {
     rows,
+    recovery,
     rpc: async (name: string, args: Record<string, unknown>) => {
       const id = key(args)
+      if (name === 'record_x402_admission_recovery') {
+        if (faults.pending && args.p_state === 'pending') return { data: null, error: { message: 'synthetic pending failure' } }
+        recovery.set(id, { state: String(args.p_state), transaction: args.p_transaction === null ? null : String(args.p_transaction), payment_id: String(args.p_payment_id), network: String(args.p_network) })
+        return { data: null, error: null }
+      }
+      if (name === 'read_x402_admission_recovery') {
+        if (faults.journalRead) return { data: null, error: { message: 'synthetic read failure' } }
+        return { data: recovery.has(id) ? [recovery.get(id)] : [], error: null }
+      }
       if (name === 'reserve_x402_admission') {
         const existing = rows.get(id)
         if (!existing) {
@@ -83,6 +94,8 @@ function admissionStore() {
         return { data: [{ decision: 'proceed', payment_transaction: null }], error: null }
       }
       if (name === 'settle_x402_admission') {
+        if (faults.marker === 'thrown') throw new Error('synthetic marker transport failure')
+        if (faults.marker === 'returned') return { data: null, error: { message: 'synthetic marker failure' } }
         const existing = rows.get(id)
         if (existing) { existing.state = 'settled'; existing.transaction = String(args.p_transaction) }
         return { data: null, error: null }
@@ -127,6 +140,109 @@ const request = async (headers: Record<string, string>, body?: string) => {
 const idempotent = (key: string, inputHash = INPUT_A) => ({ [IDEMPOTENCY_KEY_HEADER]: key, [INPUT_HASH_HEADER]: inputHash })
 const freshLedger = () => ({ rpc: async () => ({ data: 'claimed', error: null }) }) as never
 const acquire = async () => ({ admitted: true, active: 1, token: 'slot-token' })
+
+for (const failure of ['timeout', 'malformed'] as const) {
+  test(`uncertain ${failure} settlement stays locked against a freshly signed retry`, async () => {
+    let calls = 0
+    const store = admissionStore()
+    const facilitator: PaymentFacilitator = {
+      verify: async () => ({ ok: true, payer: '0xAgent' }),
+      settle: async () => {
+        calls += 1
+        if (failure === 'timeout') throw new Error('synthetic lost response after submission')
+        return { ok: false, reason: 'facilitator_settle_missing_transaction' }
+      },
+    }
+    const deps = { config: config(), facilitator, ledger: freshLedger(), acquire, admissionLedger: store }
+    const first = await resolveX402(await request(idempotent(`req_unknown_${failure}`)), deps)
+    const retry = await resolveX402(await request(idempotent(`req_unknown_${failure}`)), deps)
+    assert.equal(first.kind, 'refused')
+    if (first.kind === 'refused') {
+      assert.equal(first.status, 503)
+      assert.equal(first.code, 'settlement_outcome_unknown')
+      assert.match(first.message, /Do not sign or submit another payment/)
+    }
+    assert.equal(retry.kind, 'refused')
+    if (retry.kind === 'refused') assert.equal(retry.status, 409)
+    assert.equal(calls, 1)
+    assert.equal([...store.recovery.values()][0]?.state, 'unknown')
+    assert.equal([...store.rows.values()][0]?.state, 'reserved')
+  })
+}
+
+for (const marker of ['returned', 'thrown'] as const) {
+  test(`${marker} admission marker failure recovers the original transaction from the journal`, async () => {
+    const store = admissionStore({ marker })
+    const { facilitator, settlements } = countingFacilitator()
+    const deps = { config: config(), facilitator, ledger: freshLedger(), acquire, admissionLedger: store }
+    const first = await resolveX402(await request(idempotent(`req_marker_${marker}`)), deps)
+    const retry = await resolveX402(await request(idempotent(`req_marker_${marker}`)), deps)
+    assert.equal(first.kind, 'paid')
+    assert.equal(retry.kind, 'paid')
+    if (retry.kind === 'paid') { assert.equal(retry.transaction, 'tx_1'); assert.equal(retry.replayed, true) }
+    assert.equal(settlements.length, 1)
+    assert.equal([...store.rows.values()][0]?.state, 'reserved')
+    assert.equal([...store.recovery.values()][0]?.state, 'marker_failed')
+  })
+}
+
+test('missing recovery migration refuses before settlement and keeps the reservation locked', async () => {
+  const store = admissionStore({ pending: true })
+  const { facilitator, settlements } = countingFacilitator()
+  const deps = { config: config(), facilitator, ledger: freshLedger(), acquire, admissionLedger: store }
+  const result = await resolveX402(await request(idempotent('req_pending_0001')), deps)
+  assert.equal(result.kind, 'refused')
+  if (result.kind === 'refused') assert.equal(result.status, 503)
+  assert.equal(settlements.length, 0)
+})
+
+test('chain contradiction is durable and cannot become paid on a retry without a chain reader', async () => {
+  const store = admissionStore()
+  const { facilitator, settlements } = countingFacilitator()
+  const deps = { config: config(), facilitator, ledger: freshLedger(), acquire, admissionLedger: store }
+  const first = await resolveX402(await request(idempotent('req_contradict_0001')), {
+    ...deps, confirmOnChain: async () => ({ status: 'contradicted', reason: 'transfer_missing' }),
+  })
+  const retry = await resolveX402(await request(idempotent('req_contradict_0001')), deps)
+  for (const result of [first, retry]) {
+    assert.equal(result.kind, 'refused')
+    if (result.kind === 'refused') assert.equal(result.status, 502)
+  }
+  assert.equal(settlements.length, 1)
+  assert.equal([...store.recovery.values()][0]?.state, 'contradicted')
+})
+
+test('paid recovery independently rechecks the original transaction, never the retry authorization', async () => {
+  const store = admissionStore()
+  const { facilitator, settlements } = countingFacilitator()
+  const deps = { config: config(), facilitator, ledger: freshLedger(), acquire, admissionLedger: store }
+  await resolveX402(await request(idempotent('req_recheck_0001')), deps)
+  const seen: string[] = []
+  const retry = await resolveX402(await request(idempotent('req_recheck_0001')), {
+    ...deps, confirmOnChain: async ({ transaction }) => { seen.push(transaction); return { status: 'contradicted', reason: 'wrong_amount' } },
+  })
+  assert.equal(retry.kind, 'refused')
+  if (retry.kind === 'refused') assert.equal(retry.status, 502)
+  assert.deepEqual(seen, ['tx_1'])
+  assert.equal(settlements.length, 1)
+  assert.equal([...store.recovery.values()][0]?.state, 'contradicted')
+  const later = await resolveX402(await request(idempotent('req_recheck_0001')), deps)
+  assert.equal(later.kind, 'refused')
+  if (later.kind === 'refused') assert.equal(later.status, 502)
+})
+
+test('an unreadable recovery journal refuses without a second settlement', async () => {
+  const faults = { journalRead: false }
+  const store = admissionStore(faults)
+  const { facilitator, settlements } = countingFacilitator()
+  const deps = { config: config(), facilitator, ledger: freshLedger(), acquire, admissionLedger: store }
+  await resolveX402(await request(idempotent('req_readfail_0001')), deps)
+  faults.journalRead = true
+  const retry = await resolveX402(await request(idempotent('req_readfail_0001')), deps)
+  assert.equal(retry.kind, 'refused')
+  if (retry.kind === 'refused') assert.equal(retry.status, 503)
+  assert.equal(settlements.length, 1)
+})
 
 test('the same logical request submitted twice settles exactly once', async () => {
   // The headline integration proof the whole design exists for.
@@ -275,7 +391,7 @@ test('a failed settlement releases the claim so the payer can retry', async () =
   const admissionLedger = admissionStore()
   const failing: PaymentFacilitator = {
     verify: async () => ({ ok: true, payer: '0xAgent' }),
-    settle: async () => ({ ok: false, reason: 'insufficient_funds' }),
+    settle: async () => ({ ok: false, reason: 'insufficient_funds', outcome: 'not_settled' }),
   }
   const refused = await resolveX402(await request(idempotent('req_release_001')), {
     config: config(), facilitator: failing, ledger: freshLedger(), acquire, admissionLedger,

@@ -148,7 +148,8 @@
     "canary:mcp-evidence:private": "node --experimental-strip-types scripts/run-mcp-evidence-private-canary.ts"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.122.0",
+    "@anthropic-ai/sdk": "^0.131.0",
+    "@openai/agents": "^0.18.0",
     "@scalar/api-reference-react": "^0.9.60",
     "@sentry/nextjs": "^10.69.0",
     "@stripe/stripe-js": "^9.12.1",
@@ -168,9 +169,11 @@
     "react-dom": "19.2.8",
     "react-katex": "^3.1.0",
     "resend": "^6.18.1",
-    "stripe": "^22.3.2"
+    "stripe": "^22.3.2",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
+    "@coinbase/agentkit": "^0.10.4",
     "@coinbase/cdp-sdk": "^1.55.0",
     "@modelcontextprotocol/sdk": "^1.29.0",
     "@tailwindcss/postcss": "^4",

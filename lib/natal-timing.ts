@@ -8,7 +8,7 @@
  */
 
 import { computeNatalChart, ZODIAC_SIGNS, type ChartMotion, type ChartPointName, type NatalAspectName, type NatalChart, type ZodiacSign } from './natal-chart.ts'
-import { classicalEclipticLongitude } from './local-fact-bundle.ts'
+import { classicalEclipticLongitude } from './ephemeris.ts'
 import { lahiriAyanamsa } from './panchanga.ts'
 
 export const NATAL_TIMING_VERSION = 'natal-timing/0.1' as const

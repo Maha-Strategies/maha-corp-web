@@ -32,7 +32,7 @@ import { canonicalCelestialFactBundle, validateCelestialFactBundle, type Celesti
 import { computePanchanga, type Panchanga } from './panchanga.ts'
 import { assessRulePublicationReview, type PractitionerReviewRecord } from './practitioner-review.ts'
 
-export const COMPILER_VERSION = 'interpretation-compiler/0.1' as const
+export const COMPILER_VERSION = 'interpretation-compiler/0.2' as const
 
 /**
  * Techniques that may never reach generated output, mapped to the prohibited
@@ -188,6 +188,12 @@ function screenRule(
 
   if (!rule.chartTypes.includes(chartType)) {
     return { included: false, exclusion: { ...base, reason: 'chart-type-mismatch', detail: `Rule applies to ${rule.chartTypes.join(', ')}, not ${chartType}.` } }
+  }
+
+  // Corporate source/inference review is mandatory, not opt-in via an omitted
+  // field. The layered corporate compiler owns new, exact-condition rules.
+  if (chartType === 'corporate' && !rule.sourceBoundCoverage) {
+    return { included: false, exclusion: { ...base, reason: 'practitioner-review-required', detail: 'Corporate rule has no explicit scoped review gate. Use the layered corporate report; absence of a field is not approval.' } }
   }
 
   if (rule.sourceBoundCoverage?.publicationGate === 'practitioner-review-required') {

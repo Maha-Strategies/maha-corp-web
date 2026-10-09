@@ -1,3 +1,4 @@
+import { ANTHROPIC_MODEL, ANTHROPIC_MESSAGE_SETTINGS } from '@/lib/anthropic-model'
 import Anthropic from '@anthropic-ai/sdk'
 
 import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
@@ -9,7 +10,7 @@ export const dynamic = 'force-dynamic'
 export const maxDuration = 30
 
 const MAX_BODY_BYTES = 24_576
-const MODEL = 'claude-sonnet-4-6'
+const MODEL = ANTHROPIC_MODEL
 
 function response(body: object, status = 200) {
   return Response.json(body, { status, headers: { 'Cache-Control': 'no-store' } })
@@ -72,7 +73,7 @@ export async function POST(request: Request) {
   try {
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
     const parsed = await runReceiptParse(text, async (prompt) => {
-      const message = await client.messages.create({
+      const message = await client.messages.create({ ...ANTHROPIC_MESSAGE_SETTINGS,
         model: MODEL,
         max_tokens: 2_000,
         messages: [{ role: 'user', content: prompt }],

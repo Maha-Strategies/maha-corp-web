@@ -87,7 +87,7 @@ export type VerifyResult =
 
 export type SettleResult =
   | { ok: true; payer: string; transaction: string }
-  | { ok: false; reason: string }
+  | { ok: false; reason: string; outcome?: 'not_settled' | 'unknown' }
 
 /** Injectable so the protocol is testable without a facilitator or a network. */
 export type PaymentFacilitator = {
@@ -338,11 +338,14 @@ function matchesDeclarationDigest(
 export type PreSettlementGuard = {
   reserve(context: { payer: string }): Promise<
     | { kind: 'proceed' }
-    | { kind: 'already_paid'; transaction: string }
+    | { kind: 'already_paid'; transaction: string; paymentId?: string; network?: string }
     | { kind: 'in_progress' }
     | { kind: 'conflict' }
+    | { kind: 'contradicted' }
     | { kind: 'unavailable' }>
-  settled(context: { payer: string; transaction: string }): Promise<void>
+  pending?(context: { payer: string; paymentId: string; network: string }): Promise<boolean>
+  reconcile?(context: { payer: string; paymentId: string; network: string; state: 'unknown' | 'not_settled' | 'settled' | 'contradicted' | 'marker_failed'; transaction?: string }): Promise<boolean>
+  settled(context: { payer: string; transaction: string }): Promise<void | boolean>
   released(context: { payer: string }): Promise<void>
 }
 
@@ -399,8 +402,19 @@ export async function acceptPayment(input: {
   // Recovery. Returns the original transaction and never reaches `settle`, so
   // no second payment can be taken for a request that already has one.
   if (admission.kind === 'already_paid') {
+    // The recorded transaction, not a new authorization, must satisfy the
+    // same chain check as a first purchase. Never settle in this branch.
+    const confirmation = await safelyConfirm(input.confirmOnChain, { transaction: admission.transaction, payer: verified.payer })
+    if (confirmation?.status === 'contradicted') {
+      if (admission.paymentId && admission.network) await input.admissionGuard?.reconcile?.({
+        payer: verified.payer, paymentId: admission.paymentId, network: admission.network,
+        state: 'contradicted', transaction: admission.transaction,
+      })
+      return { ok: false, status: 502, reason: 'settlement_contradicted:recovery' }
+    }
     return { ok: true, payer: verified.payer, transaction: admission.transaction, amountPaid: requirement.amount, replayed: true }
   }
+  if (admission.kind === 'contradicted') return { ok: false, status: 502, reason: 'settlement_contradicted:recorded' }
   if (admission.kind === 'conflict') return { ok: false, status: 409, reason: 'idempotency_key_reused_with_different_request' }
   if (admission.kind === 'in_progress') return { ok: false, status: 409, reason: 'request_already_in_progress' }
   if (admission.kind === 'unavailable') return { ok: false, status: 503, reason: 'x402_ledger_unavailable' }
@@ -423,24 +437,37 @@ export async function acceptPayment(input: {
     return { ok: false, status: 409, reason: 'payment_already_used' }
   }
 
-  const settled = await input.facilitator.settle(input.payment, requirement)
+  // The fingerprint is durable before the only operation that can move money.
+  if (input.admissionGuard?.pending && !await input.admissionGuard.pending({ payer: verified.payer, paymentId: id, network: requirement.network })) {
+    return { ok: false, status: 503, reason: 'x402_recovery_journal_unavailable' }
+  }
+  const journal = async (state: 'unknown' | 'not_settled' | 'settled' | 'contradicted' | 'marker_failed', transaction?: string) => {
+    if (input.admissionGuard?.reconcile) await input.admissionGuard.reconcile({ payer: verified.payer, paymentId: id, network: requirement.network, state, transaction })
+  }
+  let settled: SettleResult
+  try { settled = await input.facilitator.settle(input.payment, requirement) }
+  catch { settled = { ok: false, reason: 'facilitator_settle_failed', outcome: 'unknown' } }
   if (!settled.ok) {
-    // Nothing moved, so the claim is released rather than left to go stale and
-    // lock the payer out of their own key for five minutes.
+    // A timeout, malformed response or unclassified rejection is not evidence
+    // of non-payment. Keep both guards claimed and do not issue another 402.
+    if (settled.outcome !== 'not_settled') {
+      await journal('unknown')
+      return { ok: false, status: 503, reason: 'settlement_outcome_unknown' }
+    }
+    await journal('not_settled')
     await input.admissionGuard?.released({ payer: verified.payer })
     return { ok: false, status: 402, reason: settled.reason }
   }
-  await input.admissionGuard?.settled({ payer: verified.payer, transaction: settled.transaction })
 
   // Independent confirmation, where a node is configured. Until this point
   // "settled" means the facilitator said so; this is the only step that checks.
-  const confirmation = input.confirmOnChain
-    ? await input.confirmOnChain({ transaction: settled.transaction, payer: settled.payer })
-    : undefined
+  const confirmation = await safelyConfirm(input.confirmOnChain, { transaction: settled.transaction, payer: settled.payer })
+  await journal(confirmation?.status === 'contradicted' ? 'contradicted' : 'settled', settled.transaction)
 
   // Recorded either way, including when the chain could not be read, so an
   // unconfirmed payment is a row someone can find rather than an assumption.
-  await input.replayGuard.recordSettlement({ paymentId: id, transaction: settled.transaction, confirmation })
+  try { await input.replayGuard.recordSettlement({ paymentId: id, transaction: settled.transaction, confirmation }) }
+  catch { console.error('x402 settlement history write failed; reconcile original authorization', { paymentId: id }) }
 
   // Only an active contradiction withholds. The payer's money has already
   // moved by now, so refusing because a node was unreachable would take
@@ -454,7 +481,16 @@ export async function acceptPayment(input: {
     return { ok: false, status: 502, reason: `settlement_contradicted:${confirmation.reason ?? 'unknown'}` }
   }
 
+  const marked = await input.admissionGuard?.settled({ payer: verified.payer, transaction: settled.transaction })
+  if (marked === false) await journal('marker_failed', settled.transaction)
+
   return { ok: true, payer: settled.payer, transaction: settled.transaction, amountPaid: requirement.amount }
+}
+
+async function safelyConfirm(confirm: SettlementConfirmer | undefined, settlement: { transaction: string; payer: string }) {
+  if (!confirm) return undefined
+  try { return await confirm(settlement) }
+  catch { return { status: 'indeterminate' as const, reason: 'chain_reader_unavailable' } }
 }
 
 /** The base64 challenge for the PAYMENT-REQUIRED header. */

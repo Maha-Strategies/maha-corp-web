@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "incremental": false, "plugins": [] },
+  "include": [
+    "next-env.d.ts",
+    "lib/x402/micro*.ts",
+    "app/api/v1/micro/**/route.ts",
+    "test/x402-micro*.test.ts",
+    "scripts/profile-planning-ten.ts",
+    "scripts/planning-ten-workloads.ts"
+  ],
+  "exclude": ["node_modules", ".next", "packages"]
+}

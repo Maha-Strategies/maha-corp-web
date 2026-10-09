@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "maha-evidence-commercial-readiness-fixture/1.0",
+  "synthetic": true,
+  "customerDataUsed": false,
+  "paymentCollected": false,
+  "lifecycle": {
+    "schemaVersion": "maha-mps-preflight-lifecycle/1.0",
+    "synthetic": true,
+    "orderSha256": "sha256:bb029656f3ef24a4298b62a5f690252d06673f279b79676a2c0af093d2613c6b",
+    "state": "acknowledged",
+    "events": [
+      {
+        "eventId": "mps_event_checkout_0001",
+        "type": "checkout_created",
+        "occurredAt": "2026-09-04T10:00:00Z",
+        "payloadSha256": "sha256:cd5bdfa2333d10b69d4d877735e22f4f15a266754d6c158b373987bb018826fd"
+      },
+      {
+        "eventId": "mps_event_payment_0002",
+        "type": "payment_confirmed",
+        "occurredAt": "2026-09-04T10:01:00Z",
+        "payloadSha256": "sha256:4e86eace4eb12db1f9249fc862d60ec0cb90d0214ccb981bd5309a2fcfba1ef8"
+      },
+      {
+        "eventId": "mps_event_submission_0003",
+        "type": "submission_accepted",
+        "occurredAt": "2026-09-04T10:02:00Z",
+        "payloadSha256": "sha256:cfbc5afd635a23553be89f53c515a5858b0a3dbaa4577a0a9a4a48030a182fba"
+      },
+      {
+        "eventId": "mps_event_processing_0004",
+        "type": "processing_started",
+        "occurredAt": "2026-09-04T10:03:00Z",
+        "payloadSha256": "sha256:9af3507d3f8fab9188ef9dd88eabd2f3d4eca76a49efdd4e41b42d217210a8eb"
+      },
+      {
+        "eventId": "mps_event_delivery_0005",
+        "type": "private_delivery_ready",
+        "occurredAt": "2026-09-04T10:04:00Z",
+        "payloadSha256": "sha256:95fd7d4ddcfb743fa089f281443e9ed34f8da8570f44f39ba103fdb6ae5f6a6e"
+      },
+      {
+        "eventId": "mps_event_ack_0006",
+        "type": "acknowledgement_recorded",
+        "occurredAt": "2026-09-04T10:05:00Z",
+        "payloadSha256": "sha256:de2da25a0d2d8df5d86a52f8fd0e4eee79244567e1d50ed8a0fc7e09ce234b58"
+      }
+    ],
+    "lifecycleSha256": "sha256:374f558118a4abea814ff4218d34914d6a948edf535dc60171897b8a5fb67222"
+  },
+  "proofs": {
+    "orderedStates": [
+      "awaiting_payment",
+      "paid",
+      "submission_accepted",
+      "processing",
+      "delivered",
+      "acknowledged"
+    ],
+    "duplicateWebhook": "idempotent",
+    "replayedSubmission": "idempotent",
+    "processingFailureFinalState": "refunded",
+    "deliveryFailureFinalState": "refunded",
+    "refundFinalStates": [
+      "refunded",
+      "refunded"
+    ],
+    "happyLifecycleFindings": []
+  },
+  "privacy": {
+    "containsClaimContent": false,
+    "containsDocumentContent": false,
+    "containsEmail": false,
+    "containsCredential": false,
+    "durableIdentifiers": [
+      "orderSha256",
+      "payloadSha256",
+      "lifecycleSha256"
+    ]
+  },
+  "artifactSha256": "sha256:95f96ca076df7502add5d1633bf6f2e2f00cc3fb90f07c0832dc4c6fcb105c3b"
+}

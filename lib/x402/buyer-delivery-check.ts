@@ -4,6 +4,8 @@ import { offerById } from './offers.ts'
 import { isCelestialProduct, verifyCelestialProduct } from './celestial-products.ts'
 import { isMicroProduct } from './micro-contracts.ts'
 import { microDigest } from './micro-products.ts'
+import { ebookIdForOffer, ebookArtifacts, ebookBundleHash } from './ebook-contract.ts'
+import { canonicalJson } from '../evidence-dossier/digest.ts'
 
 export const bytesDigest = (bytes: Uint8Array | string): string =>
   `sha256:${createHash('sha256').update(bytes).digest('hex')}`
@@ -99,7 +101,8 @@ export function checkBuyerDelivery(input: {
     return validateDiscoveryExtension(enriched).valid
   }
   if (!validate()) problems.push('request_schema_mismatch')
-  if ('clientRequestId' in request && (offer.id === 'cabezon-buyer-brief-pack' ? response.orderId : response.clientRequestId) !== request.clientRequestId) problems.push('request_id_mismatch')
+  const ebook = ebookIdForOffer(offer.id)
+  if ('clientRequestId' in request && (offer.id === 'cabezon-buyer-brief-pack' || ebook ? response.orderId : response.clientRequestId) !== request.clientRequestId) problems.push('request_id_mismatch')
   if ('offerId' in response && response.offerId !== offer.id) problems.push('response_offer_mismatch')
   if (response.exampleOnly === true) problems.push('discovery_example_not_deliverable')
   if (response.status === 'failed') problems.push('job_failed')
@@ -134,7 +137,25 @@ export function checkBuyerDelivery(input: {
       || progress.sectionCount !== request.sections.length || progress.sectionsCompleted !== request.sections.length) problems.push('intake_not_completed')
   }
   if (offer.id.startsWith('book-section-') && (!object(response.section) || response.section.id !== request.sectionId)) problems.push('section_selection_mismatch')
-  if (offer.id.startsWith('book-') && (!object(response.book)
+  if (ebook) {
+    const artifacts = response.artifacts
+    const manifest = ebookArtifacts(ebook)
+    if (response.productId !== offer.id || response.version !== request.version || response.manifestSha256 !== ebookBundleHash(ebook)
+      || request.artifactHash !== response.manifestSha256 || !Array.isArray(artifacts) || artifacts.length !== manifest.length
+      || artifacts.some((file, i) => !object(file) || typeof file.base64 !== 'string' || file.base64.length > Math.ceil(manifest[i].bytes / 3) * 4
+        || !/^[A-Za-z0-9+/]*={0,2}$/.test(file.base64) || file.sha256 !== manifest[i].sha256
+        || file.filename !== manifest[i].filename || file.mediaType !== manifest[i].mediaType
+        || file.bytes !== manifest[i].bytes || bytesDigest(Buffer.from(file.base64, 'base64')) !== manifest[i].sha256
+        || Buffer.from(file.base64, 'base64').length !== manifest[i].bytes)) problems.push('ebook_artifact_or_manifest_mismatch')
+  }
+  if (offer.id.startsWith('book-section-') && response.editionBasis === 'repository-markdown/1') {
+    const section = response.section
+    const { receiptSha256, ...body } = response
+    if (response.editionDigest !== request.editionDigest || !object(section) || typeof section.content !== 'string'
+      || section.contentSha256 !== bytesDigest(section.content) || section.utf8Bytes !== Buffer.byteLength(section.content)
+      || receiptSha256 !== bytesDigest(canonicalJson(body))) problems.push('licensed_section_commitment_mismatch')
+  }
+  if (offer.id.startsWith('book-') && !ebook && (!object(response.book)
     || response.book.id !== offer.id.replace(/^book-(section|edition)-/, ''))) problems.push('book_selection_mismatch')
   if (!problems.length) state = 'payload_verified'
   return report()

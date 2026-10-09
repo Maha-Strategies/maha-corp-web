@@ -16,7 +16,7 @@ const empty = () => ledgerFromRows([], BigInt(1), BigInt(500), now.toISOString()
 
 test('old catalogue snapshots validate and reproject without losing observed history', async () => {
   const block = BigInt(bundledLedger.scannedToBlock) + BigInt(1)
-  const offer = payableOffers().at(-1)!
+  const offer = payableOffers().find(candidate => payableOffers().filter(o => o.amount === candidate.amount).length === 1)!
   const ledger = buildLedger({ settlements: [{ ...row(block), amountBaseUnits: BigInt(offer.amount) }],
     offers: [], operatorWallets: [...OPERATOR_WALLETS, MAHA_PAYEE], observedAt: now.toISOString(), fromBlock: BigInt(1), toBlock: block })
   const saved: LiveSnapshot = { schemaVersion: 'maha-live-settlements/1.0', ledger, caughtUp: true, finalizedBlock: String(block) }
@@ -81,8 +81,8 @@ test('bounded catchup advances only through completely scanned ranges', async ()
   assert.equal(result.ledger.scannedToBlock, String(BigInt(500) - BigInt(128) + MAX_SCAN_BLOCKS - BigInt(1)))
   assert.equal(result.caughtUp, false)
 })
-test('every public-RPC log request stays within the Base 2,000-block limit', async () => {
-  assert.equal(SCAN_CHUNK, BigInt(2000))
+test('every public-RPC log request stays within the conservative 500-block limit', async () => {
+  assert.equal(SCAN_CHUNK, BigInt(500))
   const ranges: Array<[bigint, bigint]> = []
   const bounded: SettlementReader = {
     finalizedBlock: async () => BigInt(6500),
@@ -91,7 +91,7 @@ test('every public-RPC log request stays within the Base 2,000-block limit', asy
   }
   await refreshSettlementLedger(empty(), bounded, now)
   assert.ok(ranges.length > 1)
-  for (const [from, to] of ranges) assert.ok(to - from + BigInt(1) <= BigInt(2000))
+  for (const [from, to] of ranges) assert.ok(to - from + BigInt(1) <= BigInt(500))
 })
 test('failed RPC, invalid logs and timestamps reject instead of advancing', async () => {
   await assert.rejects(refreshSettlementLedger(empty(), { ...reader(BigInt(600)), transfers: async () => { throw Error('rpc') } }), /rpc/)

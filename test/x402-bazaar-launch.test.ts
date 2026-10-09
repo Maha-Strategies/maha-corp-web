@@ -46,7 +46,10 @@ test('approved launch is exactly 23 offers, all below one dollar, total 1.28 USD
 
 test('old seven prices remain attributable and cannot collide with another current or old price', () => {
   const owners = new Map<string, string>()
-  for (const o of payableOffers()) for (const amount of [o.amount, ...(o.supersededAmounts ?? [])]) {
+  const books = payableOffers().filter(o => o.id.startsWith('book-epub-'))
+  assert.deepEqual(books.map(o => o.id).sort(), ['book-epub-the-maha-principle', 'book-epub-the-orbital-mind'])
+  assert.ok(books.every(o => o.amount === '10000000'))
+  for (const o of payableOffers().filter(o => !o.id.startsWith('book-epub-'))) for (const amount of [o.amount, ...(o.supersededAmounts ?? [])]) {
     assert.ok(!owners.has(amount) || owners.get(amount) === o.id, amount)
     owners.set(amount, o.id)
   }

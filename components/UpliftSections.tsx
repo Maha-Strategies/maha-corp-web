@@ -1,4 +1,5 @@
 import { upliftFor } from '@/lib/legacy-uplift-runtime'
+import { unreadItems } from '@/lib/reader-section-deduplication'
 
 /**
  * Renders the uplift for a legacy page, or nothing.
@@ -7,13 +8,15 @@ import { upliftFor } from '@/lib/legacy-uplift-runtime'
  * is generated, summarised or rephrased, so a section only appears when there
  * was already something behind it.
  */
-export function UpliftSections({ route }: { route: string }) {
+export function UpliftSections({ route, alreadyRendered = [] }: { route: string; alreadyRendered?: readonly string[] }) {
   const uplift = upliftFor(route)
   if (!uplift || uplift.sections.length === 0) return null
+  const sections = uplift.sections.map((section) => ({ ...section, items: unreadItems(section.items, alreadyRendered) })).filter((section) => section.items.length > 0)
+  if (sections.length === 0) return null
 
   return (
     <div className="mt-14 space-y-10 border-t border-zinc-800 pt-12">
-      {uplift.sections.map((section) => (
+      {sections.map((section) => (
         <section key={`${section.dimension}:${section.heading}`}>
           <h2 className="font-mono text-[10px] uppercase tracking-widest text-teal-300">{section.heading}</h2>
           <ul className="mt-4 space-y-3">

@@ -3,7 +3,11 @@ import { rpcUrlFor } from './chain.ts'
 import { releasesSlot } from './slot.ts'
 import { catalogMismatches, offerFor } from './offers.ts'
 import type { CdpApiCredentials } from './cdp-auth.ts'
-import { RELEASED_MICRO_IDS } from './micro-release.ts'
+import { EXISTING_RELEASED_MICRO_IDS } from './micro-release.ts'
+import { PLANNING_IDS } from './micro-planning-contracts.ts'
+import { EBOOK_IDS, ebookOfferId, ebookPath } from './ebook-contract.ts'
+import { LICENSED_SECTION_OFFERS } from './licensed-book-sections.ts'
+import { EVIDENCE_CHECK_IDS } from './evidence-check-contracts.ts'
 
 // Everything here is off unless X402_ENABLED is exactly 'true'. The flag is
 // checked before any other configuration is read, so an incomplete or
@@ -144,8 +148,24 @@ export function x402Config(environment: Environment = process.env): X402Config |
   // Separate additive opt-in: preserve the existing sensitive resource binding verbatim.
   // This never enables withheld products or repairs malformed existing configuration.
   if (environment.X402_MICRO_FIVE_ENABLED === 'true') {
-    const extra = RELEASED_MICRO_IDS.filter(id => !resources.some(r => r.offerId === id))
+    const extra = EXISTING_RELEASED_MICRO_IDS.filter(id => !resources.some(r => r.offerId === id))
       .map(id => ({ method: 'POST', path: `/api/v1/micro/${id}` }))
+    resources.push(...parseResources(JSON.stringify(extra), catalogContradictions))
+  }
+  // Owner-authorized ten-product cohort only. Never rewrite sensitive resources.
+  if (environment.X402_PLANNING_TEN_ENABLED === 'true') {
+    const extra = PLANNING_IDS.filter(id => !resources.some(r => r.offerId === id))
+      .map(id => ({ method: 'POST', path: `/api/v1/micro/${id}` }))
+    resources.push(...parseResources(JSON.stringify(extra), catalogContradictions))
+  }
+  if (environment.X402_CABEZON_EBOOKS_ENABLED === 'true') {
+    const extra = EBOOK_IDS.filter(id => !resources.some(r => r.offerId === ebookOfferId(id)))
+      .map(id => ({ method: 'POST', path: ebookPath(id) }))
+    resources.push(...parseResources(JSON.stringify(extra), catalogContradictions))
+  }
+  if (environment.X402_BOOK_EVIDENCE_FIVE_ENABLED === 'true') {
+    const paths = [...LICENSED_SECTION_OFFERS.map(o => o.path), ...EVIDENCE_CHECK_IDS.map(id => `/api/v1/micro/${id}`)]
+    const extra = paths.filter(path => !resources.some(r => r.path === path)).map(path => ({ method: 'POST', path }))
     resources.push(...parseResources(JSON.stringify(extra), catalogContradictions))
   }
   for (const contradiction of catalogContradictions) {

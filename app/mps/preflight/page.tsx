@@ -2,9 +2,10 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import PreflightCheckout from './PreflightCheckout'
+import { EVIDENCE_COMMERCIAL_OFFERS, EVIDENCE_COMMERCIAL_TERMS_VERSION } from '@/lib/evidence-commercial-offers'
 
 export const metadata: Metadata = {
-  title: 'MPS Preflight | Claim-level audit for a document extract',
+  title: 'MPS Document Preflight | Private claim-level triage',
   description: 'A private, self-service MPS/0.1 claim preflight for nonfiction document extracts. Receive a structured claim map and verification backlog.',
   alternates: { canonical: '/mps/preflight' },
 }
@@ -19,11 +20,11 @@ export default function MpsPreflightPage() {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    name: 'MPS Preflight',
+    name: 'MPS Document Preflight',
     serviceType: 'Automated claim-level provenance review',
     description: 'A private MPS/0.1 claim-level review for a nonfiction document extract of up to about 2,000 words.',
     provider: { '@type': 'Organization', '@id': 'https://www.mahastrategies.com/#organization', name: 'Maha Strategies LLC' },
-    offers: { '@type': 'Offer', price: '49', priceCurrency: 'USD', availability: 'https://schema.org/InStock', url: 'https://www.mahastrategies.com/mps/preflight' },
+    offers: { '@type': 'Offer', price: String(EVIDENCE_COMMERCIAL_OFFERS.mpsDocumentPreflight.priceUsd), priceCurrency: 'USD', availability: 'https://schema.org/InStock', url: 'https://www.mahastrategies.com/mps/preflight' },
   }
 
   return (
@@ -31,9 +32,9 @@ export default function MpsPreflightPage() {
       <div className="evidence-container evidence-container--narrow">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
         <header className="border-t border-[var(--border-default)] pt-5">
-          <p className="evidence-kicker">MPS/0.1 · self-service document review</p>
+          <p className="evidence-kicker">MPS/0.1 · self-service document preflight</p>
           <h1 className="evidence-title evidence-title--product">Know what your draft is asking readers to trust.</h1>
-          <p className="evidence-lede mt-7">MPS Preflight turns a short nonfiction draft into a claim-level map before you publish, circulate, or use it in a decision.</p>
+          <p className="evidence-lede mt-7">MPS Document Preflight turns a short nonfiction draft into a claim-level map before you publish, circulate, or use it in a decision.</p>
           <p className="evidence-copy mt-5">It is automated triage—not a certification or substitute for source-by-source human verification.</p>
           <Link href="/mps" className="evidence-link mt-7 inline-block font-mono text-xs uppercase tracking-widest">← Maha Provenance Standard</Link>
         </header>
@@ -63,6 +64,18 @@ export default function MpsPreflightPage() {
             </dl>
             <PreflightCheckout />
           </aside>
+        </section>
+
+        <section className="evidence-section" aria-labelledby="commercial-terms">
+          <p className="evidence-kicker">Commercial terms · {EVIDENCE_COMMERCIAL_TERMS_VERSION}</p>
+          <h2 id="commercial-terms" className="evidence-section-title mt-4">What happens after checkout.</h2>
+          <dl className="mt-8 grid gap-4 md:grid-cols-2">
+            <div className="evidence-card"><dt className="evidence-kicker">Scope</dt><dd className="evidence-card-copy mt-3">{EVIDENCE_COMMERCIAL_OFFERS.mpsDocumentPreflight.scope}</dd></div>
+            <div className="evidence-card"><dt className="evidence-kicker">Turnaround</dt><dd className="evidence-card-copy mt-3">{EVIDENCE_COMMERCIAL_OFFERS.mpsDocumentPreflight.turnaround}</dd></div>
+            <div className="evidence-card"><dt className="evidence-kicker">Privacy</dt><dd className="evidence-card-copy mt-3">{EVIDENCE_COMMERCIAL_OFFERS.mpsDocumentPreflight.privacy}</dd></div>
+            <div className="evidence-card"><dt className="evidence-kicker">Failure and refund</dt><dd className="evidence-card-copy mt-3">{EVIDENCE_COMMERCIAL_OFFERS.mpsDocumentPreflight.refund}</dd></div>
+          </dl>
+          <p className="evidence-copy mt-6 text-sm">{EVIDENCE_COMMERCIAL_OFFERS.mpsDocumentPreflight.evidenceBoundary}</p>
         </section>
       </div>
     </main>

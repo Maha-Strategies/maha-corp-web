@@ -49,31 +49,49 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    outputs:
+      matrix: ${{ steps.inventory.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - name: Load every active x402 offer from the production manifest
+        id: inventory
+        run: node --experimental-strip-types scripts/x402-discovery-monitor.ts matrix
+      - name: Report inventory failure without asserting listing drift
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITLE="x402 discovery monitoring inventory failed"
+          EXISTING=$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
+          BODY="The public offer inventory could not be loaded or validated. Listing drift has not been established. No payments were made. Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          if [ -n "$EXISTING" ]; then gh issue comment "$EXISTING" --body "$BODY"; else gh issue create --title "$TITLE" --body "$BODY"; fi
   drift:
+    needs: inventory
     runs-on: ubuntu-latest
     timeout-minutes: 8
     strategy:
       # One stale listing must not hide the state of the other.
       fail-fast: false
-      matrix:
-        include:
-          - offer: context-compression
-            name: Context Compression
-            subject: https://www.mahastrategies.com/api/v1/compress
-          - offer: deep-context-evaluation
-            name: Deep Context Evaluation
-            subject: https://www.mahastrategies.com/api/v1/compress/evaluate
+      max-parallel: 4
+      matrix: ${{ fromJSON(needs.inventory.outputs.matrix) }}
     env:
       GH_TOKEN: ${{ github.token }}
       SUBJECT: ${{ matrix.subject }}
       OFFER: ${{ matrix.offer }}
       OFFER_NAME: ${{ matrix.name }}
+      METHOD: ${{ matrix.method }}
       REPORT: ${{ github.workspace }}/x402-doctor-${{ matrix.offer }}.json
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
       - run: npm ci
 
@@ -93,10 +111,17 @@ jobs:
         id: doctor
         run: |
           npm run x402:doctor -- "$SUBJECT" \
-            --method POST \
+            --method "$METHOD" \
             --fail-on-warning \
             --format json \
             --output "$REPORT"
+
+      - name: Classify completed evidence separately from execution failures
+        id: classify
+        if: always()
+        env:
+          DOCTOR_OUTCOME: ${{ steps.doctor.outcome }}
+        run: node --experimental-strip-types scripts/x402-discovery-monitor.ts classify
 
       - name: Upload report
         if: always()
@@ -110,12 +135,14 @@ jobs:
       # has to leave something a person will actually see. Deduplicated by
       # title so a persistent drift does not open one issue per run, and keyed
       # by offer so two drifting listings are two stories.
-      - name: Open or update a drift issue
-        if: failure()
+      - name: Open or update an evidence-specific monitoring issue
+        if: ${{ always() && (steps.classify.outputs.classification != 'clean') }}
+        env:
+          CLASSIFICATION: ${{ steps.classify.outputs.classification || 'monitor_failure' }}
         run: |
-          TITLE="x402 discovery drift: ${OFFER_NAME}"
+          TITLE="x402 discovery ${CLASSIFICATION}: ${OFFER_NAME}"
           EXISTING=$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
-          BODY=$(printf 'The live PAYMENT-REQUIRED declaration for **%s** no longer matches the published Bazaar listing.\n\nEndpoint: %s\n\nAutonomous buyers reading the listing may route on a stale schema, price or description while the endpoint itself is healthy.\n\nRun: %s\n\nRemediation is in docs/production-x402-canary.md — a bounded settlement refreshes the listing, and that stays a deliberate operator action requiring explicit authorization.\n' "$OFFER_NAME" "$SUBJECT" "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID")
+          BODY=$(printf 'Classification: **%s** for **%s**.\n\nEndpoint: %s\n\nOnly drift means a completed comparison found stale metadata. listing_missing means a completed lookup found no listing; probe_failure means the observation could not complete; monitor_failure means the runner or report is incomplete. Other findings require inspection of the report artifact. No paid delivery was tested. No payment was signed or settled. Do not refresh a listing with a payment without explicit spending authorization.\n\nRun: %s\n' "$CLASSIFICATION" "$OFFER_NAME" "$SUBJECT" "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID")
           if [ -n "$EXISTING" ]; then
             gh issue comment "$EXISTING" --body "$BODY"
           else
@@ -126,11 +153,13 @@ jobs:
       # Closes itself when the drift clears, so the issue list stays a list of
       # things that are currently wrong.
       - name: Close the drift issue when clean
-        if: success()
+        if: ${{ always() && steps.classify.outputs.classification == 'clean' }}
         run: |
-          TITLE="x402 discovery drift: ${OFFER_NAME}"
-          EXISTING=$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
-          if [ -n "$EXISTING" ]; then
-            gh issue comment "$EXISTING" --body "Drift cleared: the live declaration and the Bazaar listing now agree."
-            gh issue close "$EXISTING"
-          fi
+          for CLASSIFICATION in drift listing_missing probe_failure contract_failure warning monitor_failure; do
+            TITLE="x402 discovery ${CLASSIFICATION}: ${OFFER_NAME}"
+            EXISTING=$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
+            if [ -n "$EXISTING" ]; then
+              gh issue comment "$EXISTING" --body "Unsigned checks completed: the live declaration and Bazaar listing now agree. Paid delivery was not tested."
+              gh issue close "$EXISTING"
+            fi
+          done

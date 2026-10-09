@@ -1,3 +1,5 @@
+import { SearchPilotNextSteps } from '@/components/SearchPilotNextSteps'
+import { searchClickCopy } from '@/lib/search-click-pilot'
 import Link from 'next/link'
 
 import AuthorityAnswerLinks from '@/app/knowledge/astrology/questions/AuthorityAnswerLinks'
@@ -52,8 +54,8 @@ export default function CalculationReferencePage({ reference }: { reference: Cal
             <span className="border border-cyan-700/60 bg-cyan-950/30 px-2 py-1 text-cyan-300">{reference.category}</span>
             <span className={reference.implementationStatus === 'comparison-only' ? 'text-amber-400' : 'text-emerald-400'}>{statusLabels[reference.implementationStatus]}</span>
           </div>
-          <h1 className="mt-6 text-4xl font-bold tracking-tight text-white sm:text-6xl">{reference.title}</h1>
-          <p className="mt-6 max-w-3xl font-serif text-lg leading-8 text-zinc-300">{reference.description}</p>
+          <h1 className="mt-6 text-4xl font-bold tracking-tight text-white sm:text-6xl">{searchClickCopy(path)?.title ?? reference.title}</h1>
+          <p className="mt-6 max-w-3xl font-serif text-lg leading-8 text-zinc-300">{searchClickCopy(path)?.description ?? reference.description}</p>
           <p className="mt-5 font-mono text-[10px] uppercase tracking-widest text-zinc-600">Calculation contract · released {CALCULATION_REFERENCE_RELEASE_DATE}</p>
         </header>
 
@@ -112,6 +114,6 @@ export default function CalculationReferencePage({ reference }: { reference: Cal
         )}
         <AuthorityAnswerLinks authorityId={`calculation:${reference.slug}`} />
       </article>
-    </main>
+    <SearchPilotNextSteps path={path} /></main>
   )
 }

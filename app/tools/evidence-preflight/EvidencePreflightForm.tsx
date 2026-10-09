@@ -237,6 +237,18 @@ function PreflightResult({ response }: { response: EvidencePreflightApiResponse 
         <p className="evidence-kicker">Not a verified Evidence Dossier</p>
         <p className="evidence-copy mt-3 text-sm">No source was fetched or independently inspected. “Ready” means the submission has enough declared structure to enter a real source-review workflow; it does not mean the claim is supported or true.</p>
       </aside>
+      <section className="mt-8 grid gap-4 border-t border-[var(--border-default)] pt-7 sm:grid-cols-2">
+        <a href="/mps/preflight" onClick={() => trackConversion('cta_evidence_preflight_to_mps_document')} className="evidence-card block">
+          <p className="evidence-kicker">Need a document-wide map? · $49</p>
+          <h3 className="evidence-card-title mt-3">Continue to MPS Document Preflight →</h3>
+          <p className="evidence-card-copy mt-3">Automated private triage for a nonfiction extract. No source inspection or verification is implied.</p>
+        </a>
+        <a href="/evidence-audit#verified-evidence-dossier" onClick={() => trackConversion('cta_evidence_preflight_to_verified_dossier')} className="evidence-card block">
+          <p className="evidence-kicker">Need sources inspected? · $250</p>
+          <h3 className="evidence-card-title mt-3">Request a Verified Evidence Dossier →</h3>
+          <p className="evidence-card-copy mt-3">Qualification first. Scope, lawful access, timing and handling are accepted before payment is enabled.</p>
+        </a>
+      </section>
     </div>
   )
 }

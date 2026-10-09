@@ -251,7 +251,7 @@ export function compileEvidencePreflight(input: EvidencePreflightInput): Evidenc
       state: 'informational',
       purchaseEnabled: false,
       proposedPriceUsd: EVIDENCE_PREFLIGHT_PRICE_USD,
-      scope: 'Proposed future offer: up to 10 bounded claims in a digest-bound JSON-LD and PDF evidence package. Checkout and purchase are disabled in this sprint.',
+      scope: 'Qualification-first offer: up to 10 bounded claims in a digest-bound JSON-LD and PDF evidence package. Scope, lawful source access, timing, handling, and failure terms must be accepted before payment; public checkout remains disabled.',
     },
   }
   return { ...body, resultSha256: provenanceDigest(body) }

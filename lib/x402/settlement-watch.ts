@@ -1,21 +1,7 @@
-// Noticing that someone paid, and whether they came back.
-//
-// The first external settlement was found by looking at a wallet balance and
-// wondering where the money came from. Nothing in the platform reported it. The
-// endpoint watch monitors availability and the Bazaar canary monitors listing
-// freshness; neither notices revenue, and neither would notice the one event
-// the commercial plan actually gates on -- a second payment from a wallet that
-// is not ours.
-//
-// This module is the judgement, not the fetching. It takes settlements and
-// decides what they mean, so the rule that separates a customer from our own
-// canary is testable without a chain.
-//
-// The discipline it exists to enforce: every external figure excludes
-// operator-controlled wallets, always, and says so on the report. Canary
-// traffic converts by construction. Counting it as demand is the easiest lie
-// this platform could tell itself, and the one the infrastructure review warned
-// about by name.
+// Read-only transfer observation, not revenue attribution. Known operator
+// wallets are excluded, but an unknown wallet and a matching price alone do
+// not establish a customer, paid fulfillment or independent demand. Existing
+// settlement-named JSON counters are retained for consumer compatibility.
 
 /** One USDC transfer into the payee address. */
 export type Settlement = {
@@ -44,6 +30,7 @@ export type NotableEvent =
   | { kind: 'unexpected_amount'; payer: string; transactionHash: string; amountBaseUnits: string }
 
 export type WatchReport = {
+  observationKind: 'price_matching_usdc_transfers'
   scannedFromBlock: string
   scannedToBlock: string
   /** Wallets excluded from every external figure below, and why. */
@@ -136,8 +123,8 @@ export function buildSettlementWatch(input: {
         transactionHash: settlements[0]?.transactionHash ?? '',
       })
     }
-    // The decision gate. A second price-matching payment is the first evidence
-    // that the service was worth calling twice; an unexpected amount is not.
+    // A repeat transfer is an investigation signal, not evidence of a buyer,
+    // completed delivery or independent commercial demand.
     if (summary.repeat) {
       notable.push({ kind: 'repeat_external_settlement', payer: summary.payer, settlements: summary.settlements })
     }
@@ -159,6 +146,7 @@ export function buildSettlementWatch(input: {
   }
 
   return {
+    observationKind: 'price_matching_usdc_transfers',
     scannedFromBlock: input.fromBlock.toString(),
     scannedToBlock: input.toBlock.toString(),
     excludedOperatorWallets: [...operators].sort(),
@@ -175,7 +163,9 @@ export function buildSettlementWatch(input: {
       'Counts cover the scanned block range only. Operator-controlled wallets are excluded from every '
       + 'external figure: canary traffic converts by construction and is not demand. External figures '
       + 'count only transfers at the published price; other amounts are reported separately and are not '
-      + 'sales. "Repeat" means two or more price-matching settlements inside this window, so a payer whose '
+      + 'sales. Even price-matching transfers do not establish x402 purchases, paid delivery or independent demand: '
+      + 'join them to server settlement and fulfillment records and distinguish assisted tests before counting revenue. '
+      + '"Repeat" means two or more price-matching transfers inside this window, so a payer whose '
       + 'two payments straddle the window boundary reads as two separate single payments -- widen the range '
       + 'before concluding a buyer did not return.',
   }
@@ -184,7 +174,7 @@ export function buildSettlementWatch(input: {
 /** A one-line summary for a notification body. */
 export function describeWatch(report: WatchReport): string {
   const { externalPayers, repeatExternalPayers, externalSettlements } = report.totals
-  if (externalPayers === 0) return 'No external settlements in the scanned range.'
+  if (externalPayers === 0) return 'No external price-matching transfers in the scanned range.'
   const repeats = repeatExternalPayers > 0 ? `, ${repeatExternalPayers} of them repeat` : ''
-  return `${externalSettlements} external settlement(s) from ${externalPayers} wallet(s)${repeats}.`
+  return `${externalSettlements} external price-matching transfer(s) from ${externalPayers} wallet(s)${repeats}; purchase/delivery unverified.`
 }

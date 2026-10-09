@@ -17,6 +17,22 @@ export const metadata: Metadata = {
 
 const tools = [
   {
+    eyebrow: 'Context Review',
+    title: 'Save tokens and inspect which required evidence survives',
+    body: 'Review sanitized excerpts against source-specific evidence declarations and export a bounded retention report. No model call or wallet payment.',
+    href: '/tools/context-review',
+    action: 'Review context retention',
+    accent: 'cyan',
+  },
+  {
+    eyebrow: 'Workflow Advisor',
+    title: 'Choose a bounded Maha offer before paying',
+    body: 'Map an outcome and constraints to the published offer policy, inspect a valid request example, and review the checks required before any x402 authorization.',
+    href: '/tools/workflow-advisor',
+    action: 'Prepare a workflow plan',
+    accent: 'cyan',
+  },
+  {
     eyebrow: 'Evidence Preflight',
     title: 'Check three claims before commissioning an audit',
     body: 'Assess DOI or URL syntax, exact locators, scope, evidence readiness, inference risk, rights, and access without claiming the supplied material was independently verified.',

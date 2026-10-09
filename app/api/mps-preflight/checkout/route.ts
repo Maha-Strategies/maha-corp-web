@@ -1,5 +1,6 @@
 import { createAccessSecret, createPreflightId, hashSecret, parseCustomerEmail, parseDocumentLabel, reportPath, SITE_URL } from '@/lib/mps-preflight'
 import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
+import { parseCheckoutAttribution, recordCheckoutAttribution } from '@/lib/conversion-measurement-server'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -15,10 +16,12 @@ export async function POST(request: Request) {
 
   let email: string
   let documentLabel: string | null
+  let attribution: ReturnType<typeof parseCheckoutAttribution>
   try {
-    const body = await request.json() as { email?: unknown; documentLabel?: unknown }
+    const body = await request.json() as Record<string, unknown>
     email = parseCustomerEmail(body.email)
     documentLabel = parseDocumentLabel(body.documentLabel)
+    attribution = parseCheckoutAttribution(body)
   } catch (error) {
     return response({ error: error instanceof Error ? error.message : 'Invalid request.' }, 400)
   }
@@ -76,6 +79,15 @@ export async function POST(request: Request) {
     console.error('MPS Preflight checkout session storage failed:', updateError.code)
     return response({ error: 'We could not secure the purchase session.' }, 503)
   }
+
+  const conversion = await recordCheckoutAttribution(ledger, {
+    checkoutReference: orderId,
+    offerId: 'mps-preflight',
+    experimentId: attribution.experimentId,
+    sourcePath: attribution.sourcePath,
+    occurredAt: new Date().toISOString(),
+  })
+  if (conversion.error) console.error('MPS Preflight checkout attribution failed:', conversion.error.code)
 
   return response({ checkoutUrl: stripe.url, reportUrl: reportPath(orderId, access) }, 201)
 }

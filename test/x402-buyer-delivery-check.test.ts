@@ -9,6 +9,7 @@ import { bytesDigest, checkBuyerDelivery, createBuyerCapture } from '../lib/x402
 import { captureResponseBody } from '../lib/x402/canary-response-capture.ts'
 import { buildBookEditionReceipt } from '../lib/x402/book-edition-product.ts'
 import { buildBookSectionReceipt } from '../lib/x402/book-section-product.ts'
+import { buildLicensedSection, LICENSED_SECTION_BOOKS, licensedSectionId } from '../lib/x402/licensed-book-sections.ts'
 
 function fixture(id = 'context-compression', status = 200) {
   const offer = offerById(id)!
@@ -20,7 +21,9 @@ function fixture(id = 'context-compression', status = 200) {
     output = { ...output, orderId: input.clientRequestId, archive: { base64: bytes.toString('base64'), sha256: bytesDigest(bytes), bytes: bytes.length } }
   }
   if (id.startsWith('book-edition-')) output = buildBookEditionReceipt(id.endsWith('the-imagined-life') ? 'the-imagined-life' : 'the-volcanic-engine', {})
-  if (id.startsWith('book-section-')) output = buildBookSectionReceipt(id.endsWith('the-imagined-life') ? 'the-imagined-life' : 'the-volcanic-engine', offer.discovery.input)
+  const licensed = LICENSED_SECTION_BOOKS.find(book => licensedSectionId(book) === id)
+  if (licensed) output = buildLicensedSection(licensed, offer.discovery.input)
+  else if (id.startsWith('book-section-')) output = buildBookSectionReceipt(id.endsWith('the-imagined-life') ? 'the-imagined-life' : 'the-volcanic-engine', offer.discovery.input)
   const requestBytes = Buffer.from(JSON.stringify(input))
   const responseBytes = Buffer.from(JSON.stringify(output))
   const capture = createBuyerCapture({ provenance: 'synthetic', offerId: id, method: offer.method, resourcePath: offer.path, httpStatus: status }, requestBytes, responseBytes)
@@ -38,8 +41,10 @@ function recapture(value: ReturnType<typeof fixture>) {
 }
 
 test('all declared products have repeatable offline payload checks, not live delivery claims', () => {
-  assert.equal(X402_OFFERS.length, 39)
-  for (const offer of X402_OFFERS) {
+  assert.equal(X402_OFFERS.length, 56)
+  // Bundles are tested against actual private pinned files below, not against
+  // advertising placeholders or copyrighted bytes checked into test fixtures.
+  for (const offer of X402_OFFERS.filter(o => !o.id.startsWith('book-epub-'))) {
     const value = fixture(offer.id)
     const first = checkBuyerDelivery(value)
     assert.equal(first.state, 'payload_verified', `${offer.id}: ${first.problems.join(', ')}`)

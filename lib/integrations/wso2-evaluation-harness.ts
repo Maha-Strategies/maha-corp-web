@@ -1,4 +1,5 @@
 import { createHash, randomBytes } from 'node:crypto'
+import { ANTHROPIC_MODEL, ANTHROPIC_PRICING } from '../anthropic-model.ts'
 
 import type { Wso2EvaluationWorkload } from './wso2-evaluation-corpus.ts'
 
@@ -18,12 +19,13 @@ export const WSO2_EVALUATION_PATHS = [
 ] as const
 
 /** Frozen provider boundary shared by the runner and reproduction contract. */
-export const WSO2_EVALUATION_MODEL = 'claude-haiku-4-5-20251001'
-export const WSO2_EVALUATION_TEMPERATURE = 0
+export const WSO2_EVALUATION_MODEL = ANTHROPIC_MODEL
+// Provider default; sampling overrides are not supported by Sonnet 5.5.
+export const WSO2_EVALUATION_TEMPERATURE = 1
 export const WSO2_EVALUATION_MAX_OUTPUT_TOKENS = 220
 export const WSO2_EVALUATION_PRICING = {
-  inputPerMillion: BigInt(1_000_000),
-  outputPerMillion: BigInt(5_000_000),
+  inputPerMillion: BigInt(ANTHROPIC_PRICING.inputPerMillionUsd * 1_000_000),
+  outputPerMillion: BigInt(ANTHROPIC_PRICING.outputPerMillionUsd * 1_000_000),
 }
 
 export type Wso2EvaluationPath = typeof WSO2_EVALUATION_PATHS[number]

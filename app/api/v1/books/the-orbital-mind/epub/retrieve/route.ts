@@ -1,0 +1,5 @@
+import { ebookHandlers } from '@/lib/x402/ebook-route'
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+export const maxDuration = 60
+export const POST = ebookHandlers('the-orbital-mind').RETRIEVE

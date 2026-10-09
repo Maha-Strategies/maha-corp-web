@@ -15,7 +15,7 @@ test('the fixed one-dollar offer clears its explicit conservative margin gate', 
   assert.equal(RESEARCH_INTAKE_MINIMUM_CONSERVATIVE_MARGIN_PERCENT, 30)
   assert.equal(economics.priceUsd, 1)
   assert.equal(economics.sectionCount, 10)
-  assert.ok(Math.abs(economics.marginPercent - 34.7715) < 0.01, `margin was ${economics.marginPercent}`)
+  assert.ok(Math.abs(economics.marginPercent - 49.76155) < 0.01, `margin was ${economics.marginPercent}`)
   assert.equal(economics.promotable, true)
 })
 

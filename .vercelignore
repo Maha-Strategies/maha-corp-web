@@ -1,0 +1,26 @@
+# CLI deployment allowlist excludes local/private review materials and build trees.
+# Approved ebook files are held in the private, hash-pinned delivery store;
+# no paid book asset is uploaded to Vercel source or the public repository.
+.git
+.claude
+.next
+.vercel
+node_modules
+.env*
+.signing
+output
+outputs
+tmp
+docs
+prototypes
+packages/*/node_modules
+packages/*/build*
+packages/*/.signing
+packages/*/android/.gradle
+packages/*/android/app/build
+packages/*/ios/App/build
+*.log
+*.tsbuildinfo
+content/buyer-brief
+content/paid-ebooks
+examples/buyer-brief

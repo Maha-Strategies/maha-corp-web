@@ -1,3 +1,5 @@
+import { SearchPilotNextSteps } from '@/components/SearchPilotNextSteps'
+import { searchClickCopy, searchClickMetadata } from '@/lib/search-click-pilot'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -44,14 +46,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!record) return {}
   const substantial = substantialPageFor(record)
   const path = epistemicRecordPath(record)
-  return {
+  return searchClickMetadata(path, {
     metadataBase: new URL(MAHA_SITE_URL),
     title: substantial?.contract.searchIntent.title ?? `${record.title} | Maha Knowledge`,
     description: substantial?.contract.searchIntent.description ?? record.description,
     alternates: { canonical: path },
     openGraph: { type: 'article', title: substantial?.contract.searchIntent.title ?? record.title, description: substantial?.contract.searchIntent.description ?? record.description, url: `${MAHA_SITE_URL}${path}`, siteName: 'Maha Strategies', images: [] },
     twitter: { card: 'summary', title: substantial?.contract.searchIntent.title ?? record.title, description: substantial?.contract.searchIntent.description ?? record.description, images: [] },
-  }
+  })
 }
 
 export default async function EpistemicRecordPage({ params }: PageProps) {
@@ -98,7 +100,7 @@ export default async function EpistemicRecordPage({ params }: PageProps) {
         <nav aria-label="Breadcrumb" className="evidence-kicker"><Link href="/knowledge" className="evidence-link">Knowledge</Link><span className="px-2">/</span><Link href={`/knowledge/${domain.slug}`} className="evidence-link">{domain.name}</Link><span className="px-2">/</span><span>{record.title}</span></nav>
         <header className="mt-10 max-w-5xl">
           <div className="flex flex-wrap gap-2"><span className="evidence-chip evidence-chip--verified">{record.publication.reviewState}</span><span className="evidence-chip evidence-chip--sourced">{record.recordKind}</span><span className="evidence-chip">{record.schemaVersion}</span></div>
-          <h1 className="evidence-title">{record.title}</h1>
+          <h1 className="evidence-title">{searchClickCopy(path)?.title ?? record.title}</h1>
           <p className="evidence-lede mt-7">{substantial?.contract.directAnswer.text ?? record.summary}</p>
           {substantial && <p className="evidence-kicker mt-5">Substantial reference · {substantial.quality.informationValue.dimensionsCovered} evidence dimensions · {substantial.publicationVersion}</p>}
         </header>
@@ -213,6 +215,6 @@ export default async function EpistemicRecordPage({ params }: PageProps) {
           </aside>
         </div>
       </div>
-    </main>
+    <SearchPilotNextSteps path={path} /></main>
   )
 }

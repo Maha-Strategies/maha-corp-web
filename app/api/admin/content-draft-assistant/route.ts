@@ -1,3 +1,4 @@
+import { ANTHROPIC_MODEL, ANTHROPIC_MESSAGE_SETTINGS } from '@/lib/anthropic-model'
 import Anthropic from '@anthropic-ai/sdk'
 
 import { jsonResponse } from '@/lib/agent-inquiries'
@@ -34,8 +35,8 @@ export async function POST(request: Request) {
 
   try {
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
-    const message = await client.messages.create({
-      model: process.env.CONTENT_DRAFT_ASSISTANT_MODEL ?? 'claude-sonnet-4-6',
+    const message = await client.messages.create({ ...ANTHROPIC_MESSAGE_SETTINGS,
+      model: ANTHROPIC_MODEL,
       max_tokens: 2_500,
       messages: [{ role: 'user', content: contentDraftAssistantPrompt(candidate) }],
     })

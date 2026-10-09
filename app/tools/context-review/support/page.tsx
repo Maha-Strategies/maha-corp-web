@@ -1,0 +1,3 @@
+import Link from 'next/link'
+export const metadata = { title: 'Context Review support | Maha Strategies' }
+export default function Page() { return <main className="evidence-page"><div className="evidence-container"><section className="evidence-section evidence-copy"><Link href="/tools/context-review">← Context Review</Link><h1 className="evidence-title mt-6">Context Review support</h1><p className="mt-6">Contact Maha Strategies LLC at <a href="mailto:mayone@mahastrategies.com">mayone@mahastrategies.com</a>. Describe the issue with a minimal synthetic example. Never send OAuth tokens, credentials, restricted data or private company documents.</p></section></div></main> }

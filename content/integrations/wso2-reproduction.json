@@ -16,7 +16,7 @@
   },
   "gateway": {
     "configurationPath": "content/integrations/wso2-gateway-apis.json",
-    "configurationSha256": "6d02a8593f625e9fe75300fc6c2c5e23fccdf48dc959c8d4dff1a22518b3a0d7",
+    "configurationSha256": "9787a41bec077aaf634c41d6da94ddeb7a031cd3ead465d03cf4f189d091c15b",
     "product": "WSO2 AI Gateway",
     "version": "1.1.0",
     "paths": [
@@ -50,12 +50,12 @@
     ]
   },
   "provider": {
-    "model": "claude-haiku-4-5-20251001",
-    "temperature": 0,
+    "model": "claude-sonnet-5-5",
+    "temperature": 1,
     "maxOutputTokens": 220,
     "pricingAssumptionUsdPerMillionTokens": {
-      "input": "1.000000",
-      "output": "5.000000"
+      "input": "2.000000",
+      "output": "10.000000"
     }
   },
   "execution": {
@@ -79,6 +79,7 @@
     "failurePathEvidenceSha256": "deb70a6fd203c5895269bec23e1e3fe3dfe8afb72c0d892f7f17ab35fab8ee2d"
   },
   "limitations": [
+    "Current execution uses Sonnet 5.5 with default sampling and between-tools thinking. Existing trace and failure artifacts remain historical Haiku evidence, not Sonnet 5.5 measurements; a fresh paid evaluation is required before making new performance claims.",
     "The corpus is synthetic and does not establish performance on a WSO2 customer workload.",
     "Provider token usage is the billing boundary; Maha model-neutral estimates are not provider token counts.",
     "Prompt Compressor findings apply only to the declared WSO2 version and retained-ratio configuration.",

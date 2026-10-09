@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { TrackedLink } from '@/components/ConversionTracker'
 import EvidenceAuditScopeForm from '@/components/EvidenceAuditScopeForm'
 import { EVIDENCE_WORKFLOW_PATH } from '@/lib/evidence-workflow-examples'
+import { EVIDENCE_COMMERCIAL_OFFERS, EVIDENCE_COMMERCIAL_TERMS_VERSION } from '@/lib/evidence-commercial-offers'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 
@@ -72,6 +73,20 @@ export default function EvidenceAuditPage() {
               </article>
             ))}
           </div>
+        </section>
+
+        <section id="verified-evidence-dossier" className="evidence-section scroll-mt-24" aria-labelledby="verified-dossier-title">
+          <p className="evidence-kicker">Verified Evidence Dossier · qualification first · ${EVIDENCE_COMMERCIAL_OFFERS.verifiedEvidenceDossier.priceUsd}</p>
+          <h2 id="verified-dossier-title" className="evidence-section-title mt-4">Source inspection, bounded findings, and a digest-bound delivery.</h2>
+          <p className="evidence-copy mt-5 max-w-4xl">{EVIDENCE_COMMERCIAL_OFFERS.verifiedEvidenceDossier.evidenceBoundary}</p>
+          <dl className="mt-8 grid gap-4 md:grid-cols-2">
+            <div className="evidence-card"><dt className="evidence-kicker">Scope</dt><dd className="evidence-card-copy mt-3">{EVIDENCE_COMMERCIAL_OFFERS.verifiedEvidenceDossier.scope}</dd></div>
+            <div className="evidence-card"><dt className="evidence-kicker">Turnaround</dt><dd className="evidence-card-copy mt-3">{EVIDENCE_COMMERCIAL_OFFERS.verifiedEvidenceDossier.turnaround}</dd></div>
+            <div className="evidence-card"><dt className="evidence-kicker">Privacy</dt><dd className="evidence-card-copy mt-3">{EVIDENCE_COMMERCIAL_OFFERS.verifiedEvidenceDossier.privacy}</dd></div>
+            <div className="evidence-card"><dt className="evidence-kicker">Payment and refund</dt><dd className="evidence-card-copy mt-3">{EVIDENCE_COMMERCIAL_OFFERS.verifiedEvidenceDossier.refund}</dd></div>
+          </dl>
+          <p className="evidence-kicker mt-6 text-[var(--text-muted)]">Terms version {EVIDENCE_COMMERCIAL_TERMS_VERSION} · no public checkout · no payment requested before accepted scope</p>
+          <TrackedLink href="#scope-an-audit" event="cta_verified_evidence_dossier_scope" className="evidence-action evidence-action--primary mt-7">Request dossier scope review ↓</TrackedLink>
         </section>
 
         <section className="evidence-section">

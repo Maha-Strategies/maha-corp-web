@@ -98,6 +98,7 @@ export default function TheUnfinishedSpeciesHub() {
         </header>
 
         <section className="mt-16 max-w-3xl">
+          <Link href="/apps/unfinished-species" className="inline-block mb-7 text-sm text-[var(--status-sourced)]">Explore the Biology × AI Atlas · app v1.0.0 ↗</Link>
           <p className="text-xl sm:text-2xl text-[var(--text-primary)] font-light leading-relaxed mb-6">
             Evolution may be passing from blind natural selection, through the accidental pressures of modernity, toward an era in which intelligence can read and deliberately redesign the conditions that shape it.
           </p>

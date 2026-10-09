@@ -124,8 +124,11 @@ export function compactSchema(schema: Schema, depth = 0): Schema {
  * 400 for a payload our own declaration handed it. Input examples are
  * therefore published verbatim and are small enough to afford that.
  */
-export function compactExample(value: unknown, depth = 0): unknown {
+export function compactExample(value: unknown, depth = 0, schema?: Schema): unknown {
   if (typeof value === 'string') {
+    // Cryptographic commitments are identity, not replaceable prose. Their
+    // authored const values remain in compact schemas and must match exactly.
+    if (schema?.const === value) return value
     return value.length > MAX_EXAMPLE_STRING ? `${value.slice(0, MAX_EXAMPLE_STRING)}…` : value
   }
   if (Array.isArray(value)) {
@@ -136,11 +139,14 @@ export function compactExample(value: unknown, depth = 0): unknown {
     // contract that only exist in this list.
     const scalarList = value.every((item) => typeof item === 'string' && item.length <= 64)
     if (scalarList) return [...value]
-    return value.slice(0, MAX_EXAMPLE_ITEMS).map((item) => compactExample(item, depth + 1))
+    return value.slice(0, MAX_EXAMPLE_ITEMS).map((item) => compactExample(item, depth + 1, isSchema(schema?.items) ? schema.items : undefined))
   }
   if (isSchema(value)) {
     const output: Record<string, unknown> = {}
-    for (const [key, entry] of Object.entries(value)) output[key] = compactExample(entry, depth + 1)
+    for (const [key, entry] of Object.entries(value)) {
+      const properties = isSchema(schema?.properties) ? schema.properties : undefined
+      output[key] = compactExample(entry, depth + 1, isSchema(properties?.[key]) ? properties[key] : undefined)
+    }
     return output
   }
   return value

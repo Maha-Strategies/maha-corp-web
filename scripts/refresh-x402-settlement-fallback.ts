@@ -5,7 +5,7 @@ import { baseSettlementReader, refreshSettlementLedger } from '../lib/x402/settl
 
 let ledger = bundledLedger
 let complete = false
-for (let attempt = 0; attempt < 10; attempt++) {
+for (let attempt = 0; attempt < 1000; attempt++) {
   const result = await refreshSettlementLedger(ledger, baseSettlementReader({ timeout: 30000, retryCount: 2 }))
   ledger = result.ledger
   if (result.caughtUp) { complete = true; break }

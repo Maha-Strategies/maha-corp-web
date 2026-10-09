@@ -5,5 +5,5 @@ export function isPrivateReadingTelemetry(event: {
   const values = [event.request?.url, event.transaction,
     ...(event.breadcrumbs ?? []).flatMap(b => [b.data?.url, b.data?.from, b.data?.to])]
   return values.some(value => typeof value === 'string'
-    && /\/knowledge\/birth(?:[/?#\s]|$)|\/api\/v1\/interpretations\/jyotisha(?:[/?#\s]|$)/.test(value))
+    && /(?:^|\s)(?:https?:\/\/[^/]+)?\/astrology(?:[/?#\s]|$)|\/api\/astrology(?:[/?#\s]|$)|\/knowledge\/(?:birth|corporate)(?:[/?#\s]|$)|\/api\/admin\/corporate-reviews(?:[/?#\s]|$)|\/api\/v1\/interpretations\/jyotisha(?:[/?#\s]|$)/.test(value))
 }

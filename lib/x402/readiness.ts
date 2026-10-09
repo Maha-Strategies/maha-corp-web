@@ -4,6 +4,7 @@ import { X402_OFFERS, offerFor, type X402Offer } from './offers.ts'
 import { MAX_RESOURCE_DESCRIPTION_BYTES, MAX_RESOURCE_DESCRIPTION_CHARS } from './discovery.ts'
 import { createHash } from 'node:crypto'
 import { CONSERVATIVE_RESEARCH_INTAKE_ECONOMICS, RESEARCH_INTAKE_MINIMUM_CONSERVATIVE_MARGIN_PERCENT } from './research-intake-unit-economics.ts'
+import { recoveryHealthFromRows, type RecoveryHealth } from './recovery-health.ts'
 
 /**
  * Identifies the bound database without disclosing it.
@@ -137,6 +138,7 @@ export async function getX402Readiness(options: {
   environment?: Record<string, string | undefined>
   probe?: Probe | null
   functionProbe?: FunctionProbe | null
+  recoveryProbe?: (() => Promise<RecoveryHealth | null>) | null
   /**
    * Overrides the published catalog. Production always uses the real one; this
    * exists so the preview/withheld branches stay covered once no offer happens
@@ -271,7 +273,12 @@ export async function getX402Readiness(options: {
     checks.push({ id: 'x402.storage', state: 'fail', summary: 'The ledger is unreachable, so required tables cannot be verified.' })
   } else {
     for (const offerId of enabledIds) {
-      const required = REQUIRED_RELATIONS[offerId]
+      const baseRequired = REQUIRED_RELATIONS[offerId]
+      const idempotent = catalog.find((offer) => offer.id === offerId)?.requiresIdempotency === true
+      const required = idempotent ? {
+        tables: [...new Set([...(baseRequired?.tables ?? []), 'x402_offer_admissions', 'x402_admission_recovery'])],
+        functions: [...new Set([...(baseRequired?.functions ?? []), 'reserve_x402_admission', 'settle_x402_admission', 'release_x402_admission', 'record_x402_admission_recovery', 'read_x402_admission_recovery', 'x402_admission_recovery_health'])],
+      } : baseRequired
       if (!required) continue
       const missing: string[] = []
       for (const table of required.tables) {
@@ -303,9 +310,28 @@ export async function getX402Readiness(options: {
         : {
             id: `x402.offer.${offerId}.storage`,
             state: 'fail',
-            summary: `${offerId} is enabled but ${missing.length} required table(s) are missing.`,
-            detail: `Unapplied migrations: ${missing.join(', ')}. A payer would settle and then receive a 503.`,
+            summary: `${offerId} is enabled but ${missing.length} required table(s) or function(s) are missing.`,
+            detail: `Missing dependencies: ${missing.join(', ')}. Payment or paid fulfillment prerequisites are unverified; apply the required migrations before release.`,
           })
+    }
+  }
+
+  if (catalog.some((offer) => enabledIds.has(offer.id) && offer.requiresIdempotency)) {
+    const recoveryProbe = options.recoveryProbe !== undefined ? options.recoveryProbe : options.probe !== undefined ? null : async () => {
+      try {
+        const ledger = createAgentInquiryLedger()
+        if (!ledger) return null
+        const { data, error } = await ledger.rpc('x402_admission_recovery_health')
+        return error ? null : recoveryHealthFromRows(data)
+      } catch { return null }
+    }
+    if (recoveryProbe) {
+      const health = await recoveryProbe().catch(() => null)
+      checks.push(health ? {
+        id: 'x402.recovery.health', state: health.state,
+        summary: health.state === 'ok' ? 'No unresolved payment recoveries were observed.' : 'Payment recovery requires operator review; reservations have not been unlocked.',
+        detail: Object.entries(health.counts).map(([state, count]) => `${state}=${count}`).join('; '),
+      } : { id: 'x402.recovery.health', state: 'fail', summary: 'Payment recovery health could not be observed; do not interpret this as zero unresolved payments.' })
     }
   }
 

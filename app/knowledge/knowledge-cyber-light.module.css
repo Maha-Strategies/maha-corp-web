@@ -246,6 +246,11 @@
   transform: translate(-1px, -1px);
 }
 
+.root .domainGrid > a:focus-visible {
+  outline: 3px solid var(--knowledge-cyber-blue);
+  outline-offset: 5px;
+}
+
 .root .domainGrid > a > :last-child {
   margin-top: auto;
   padding-top: 1.5rem;

@@ -81,7 +81,7 @@ type Step = Row & {
 const usdc = (baseUnits: string) => (Number(baseUnits) / 1e6).toFixed(6).replace(/0+$/, '').replace(/\.$/, '')
 
 export function rankedOffers(): X402Offer[] {
-  return [...payableOffers()].sort((a, b) => Number(a.amount) - Number(b.amount))
+  return [...payableOffers()].sort((a, b) => Number(a.amount) - Number(b.amount) || a.id.localeCompare(b.id))
 }
 
 export function selected(phase: RefreshPhase): X402Offer[] {

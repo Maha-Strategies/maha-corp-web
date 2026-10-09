@@ -36,6 +36,28 @@ const nothing = async () => false
 const check = (report: { checks: { id: string; state: string; summary: string; detail?: string }[] }, id: string) =>
   report.checks.find((entry) => entry.id === id)
 
+test('enabled idempotent offers require the recovery journal and both RPCs before release', async () => {
+  const report = await getX402Readiness({
+    environment: { ...BASE, X402_RESOURCES: JSON.stringify([{ method: 'POST', path: MPS_AUTONOMOUS_AUDIT_OFFER.path }]) },
+    probe: async (name) => !['x402_admission_recovery', 'record_x402_admission_recovery', 'read_x402_admission_recovery'].includes(name),
+  })
+  const storage = check(report, 'x402.offer.mps-autonomous-audit.storage')
+  assert.equal(storage?.state, 'fail')
+  assert.match(storage?.detail ?? '', /x402_admission_recovery/)
+  assert.match(storage?.detail ?? '', /record_x402_admission_recovery\(\)/)
+})
+
+test('unresolved recovery and a failed observation reach the readiness monitor without exposing identifiers', async () => {
+  const environment = { ...BASE, X402_RESOURCES: JSON.stringify([{ method: 'POST', path: MPS_AUTONOMOUS_AUDIT_OFFER.path }]) }
+  const counts = { unknown: 1, contradicted: 0, marker_failed: 0, stale_pending: 0, legacy_reserved: 0 }
+  const report = await getX402Readiness({ environment, probe: everything, recoveryProbe: async () => ({ state: 'fail', counts }) })
+  assert.equal(check(report, 'x402.recovery.health')?.state, 'fail')
+  assert.match(check(report, 'x402.recovery.health')?.detail ?? '', /unknown=1/)
+  const unavailable = await getX402Readiness({ environment, probe: everything, recoveryProbe: async () => { throw new Error('synthetic failure') } })
+  assert.equal(check(unavailable, 'x402.recovery.health')?.state, 'fail')
+  assert.match(check(unavailable, 'x402.recovery.health')?.summary ?? '', /could not be observed/)
+})
+
 test('a coherent deployment reports ready', async () => {
   const report = await getX402Readiness({ environment: BASE, probe: everything })
   assert.equal(report.state, 'ready')
@@ -64,8 +86,9 @@ test('missing tables fail readiness rather than surfacing as a paid 503', async 
   assert.equal(report.state, 'unavailable')
   const storage = check(report, 'x402.offer.context-compression.storage')
   assert.equal(storage?.state, 'fail')
-  assert.match(storage!.detail ?? '', /Unapplied migrations/)
-  assert.match(storage!.detail ?? '', /settle and then receive a 503/)
+  assert.match(storage!.detail ?? '', /Missing dependencies/)
+  assert.match(storage!.detail ?? '', /before release/)
+  assert.doesNotMatch(storage!.detail ?? '', /payer would settle/i)
 })
 
 test('an offer enabled for payment but published as withheld fails readiness', async () => {

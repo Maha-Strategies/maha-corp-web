@@ -7,7 +7,6 @@ import {
   WSO2_EVALUATION_MAX_OUTPUT_TOKENS,
   WSO2_EVALUATION_MODEL,
   WSO2_EVALUATION_PRICING,
-  WSO2_EVALUATION_TEMPERATURE,
   assertCheckpointMatches,
   authorizeNextCall,
   buildBlindedAdjudication,
@@ -57,7 +56,6 @@ import {
 
 const MODEL = WSO2_EVALUATION_MODEL
 const PRICING = WSO2_EVALUATION_PRICING
-const TEMPERATURE = WSO2_EVALUATION_TEMPERATURE
 const MAX_OUTPUT_TOKENS = WSO2_EVALUATION_MAX_OUTPUT_TOKENS
 const UPPER_BOUND_OUTPUT_TOKENS = WSO2_EVALUATION_MAX_OUTPUT_TOKENS
 
@@ -149,7 +147,9 @@ type PreparedContext = {
 function baseRequest(workload: Wso2EvaluationWorkload, context: string): Record<string, unknown> {
   return {
     model: MODEL,
-    temperature: TEMPERATURE,
+    // Default sampling only; keep thinking out of the short output budget.
+    thinking: { type: 'between_tools' },
+    output_config: { effort: 'medium' },
     max_tokens: MAX_OUTPUT_TOKENS,
     stream: false,
     messages: [

@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import EvidencePreflightForm from './EvidencePreflightForm'
 import { EVIDENCE_WORKFLOW_PATH } from '@/lib/evidence-workflow-examples'
+import { EVIDENCE_COMMERCIAL_OFFERS } from '@/lib/evidence-commercial-offers'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 const PATH = '/tools/evidence-preflight'
@@ -61,12 +62,22 @@ export default function EvidencePreflightPage() {
           <article className="evidence-inset"><p className="evidence-kicker">Evidence boundary</p><h2 className="evidence-section-title mt-4">Structure is not verification.</h2><p className="evidence-copy mt-4 text-sm">The tool never labels a claim verified. It does not fetch sources, authenticate excerpts, establish rights, detect retractions, compare literature or determine truth. Those require an inspected-source workflow.</p></article>
         </section>
 
+        <section className="evidence-section" aria-labelledby="three-products">
+          <p className="evidence-kicker">Three different products</p>
+          <h2 id="three-products" className="evidence-section-title mt-4">Start with the smallest honest level of assurance.</h2>
+          <div className="mt-8 grid gap-4 lg:grid-cols-3">
+            <article className="evidence-card"><p className="evidence-kicker">Available now · free</p><h3 className="evidence-card-title mt-3">Evidence Preflight</h3><p className="evidence-card-copy mt-3">One to three claims. Deterministic structural triage only; no source is fetched or verified and no submitted content is retained.</p></article>
+            <article className="evidence-card"><p className="evidence-kicker">Self-service · ${EVIDENCE_COMMERCIAL_OFFERS.mpsDocumentPreflight.priceUsd}</p><h3 className="evidence-card-title mt-3">MPS Document Preflight</h3><p className="evidence-card-copy mt-3">A private automated claim map for a nonfiction extract. It identifies verification work but does not inspect primary sources.</p><Link href={EVIDENCE_COMMERCIAL_OFFERS.mpsDocumentPreflight.path} className="evidence-link mt-5 inline-block">Review the paid document preflight →</Link></article>
+            <article className="evidence-card"><p className="evidence-kicker">Qualification first · ${EVIDENCE_COMMERCIAL_OFFERS.verifiedEvidenceDossier.priceUsd}</p><h3 className="evidence-card-title mt-3">Verified Evidence Dossier</h3><p className="evidence-card-copy mt-3">A source-inspection engagement with located findings and digest-bound JSON-LD and PDF. Public checkout remains disabled until scope and delivery are accepted.</p><Link href={EVIDENCE_COMMERCIAL_OFFERS.verifiedEvidenceDossier.path} className="evidence-link mt-5 inline-block">Read the dossier scope →</Link></article>
+          </div>
+        </section>
+
         <EvidencePreflightForm />
 
         <section className="evidence-section" aria-labelledby="future-offer">
           <div className="border border-[var(--border-default)] bg-[var(--surface-paper)] p-7 sm:p-10">
-            <p className="evidence-kicker">Proposed full Evidence Dossier · purchase disabled</p>
-            <div className="mt-5 grid gap-7 lg:grid-cols-[1fr_auto] lg:items-end"><div><h2 id="future-offer" className="evidence-section-title">Up to 10 bounded claims · proposed price $250</h2><p className="evidence-copy mt-4 max-w-3xl text-sm">The proposed offer would compile inspected passages, claim-level findings, limitations and provenance into signed JSON-LD and PDF. It will not open for checkout until privacy, delivery, refund and failure drills pass.</p></div><button type="button" disabled aria-disabled="true" className="evidence-action evidence-action--secondary cursor-not-allowed opacity-50">Purchase unavailable</button></div>
+            <p className="evidence-kicker">Verified Evidence Dossier · qualification first · Purchase unavailable · purchase disabled</p>
+            <div className="mt-5 grid gap-7 lg:grid-cols-[1fr_auto] lg:items-end"><div><h2 id="future-offer" className="evidence-section-title">Up to 10 bounded claims · listed price ${EVIDENCE_COMMERCIAL_OFFERS.verifiedEvidenceDossier.priceUsd}</h2><p className="evidence-copy mt-4 max-w-3xl text-sm">The dossier compiles inspected passages, bounded findings, limitations and provenance into digest-bound JSON-LD and PDF. Turnaround is confirmed after lawful source access and scope are accepted. No payment is requested while public checkout is disabled.</p><Link href={EVIDENCE_COMMERCIAL_OFFERS.verifiedEvidenceDossier.path} className="evidence-link mt-5 inline-block">Request scope review →</Link></div><button type="button" disabled aria-disabled="true" className="evidence-action evidence-action--secondary cursor-not-allowed opacity-60">Purchase unavailable</button></div>
           </div>
         </section>
 

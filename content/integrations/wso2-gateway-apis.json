@@ -16,8 +16,8 @@
   },
   "invariants": {
     "note": "Only the context-processing policy may differ between these three APIs. Model, temperature, output ceiling, task prompt, source documents and citation instructions are supplied identically by the harness, so any measured difference is attributable to the policy and not to the request.",
-    "model": "claude-haiku-4-5-20251001",
-    "temperature": 0,
+    "model": "claude-sonnet-5-5",
+    "temperature": 1,
     "maxOutputTokens": 220,
     "upstream": "https://api.anthropic.com"
   },

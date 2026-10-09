@@ -162,12 +162,9 @@ export function facilitatorRejectionReason(operation: 'verify' | 'settle', error
  * runtime that blocks the egress, and a facilitator returning HTML instead of
  * JSON all look identical from the log line.
  *
- * So two things happen here. The error is unwrapped down its `cause` chain,
- * which is where `fetch` puts the real reason. Then, because the SDK has
- * already discarded the response, the same endpoint is called again with a
- * plain fetch purely to record what it actually answers -- status,
- * content-type, and the first of the body. That second call verifies nothing
- * and settles nothing; it exists to turn "Error" into a fact.
+ * Verification may be probed again because it cannot move money. Settlement
+ * must NEVER be probed by reposting a signed authorization. An ambiguous
+ * settlement needs read-only reconciliation, not another settlement attempt.
  *
  * Bodies and stacks are logged only when X402_FACILITATOR_DIAGNOSTICS is
  * 'true'. A facilitator's error text is not a field we control, and this runs
@@ -213,6 +210,11 @@ async function reportFailure(
     errorChain: chain,
     ...(verbose && error instanceof Error ? { stack: error.stack?.split('\n').slice(0, 8) } : {}),
   }))
+
+  if (operation === 'settle') {
+    diagnostic.transport = 'Settlement outcome unknown; signed diagnostic retry suppressed.'
+    return { body: null, diagnostic }
+  }
 
   // What does that endpoint actually answer? The SDK threw the response away.
   try {
@@ -269,10 +271,11 @@ async function reportFailure(
  * returns `invalid_payload` because its nonce is already on-chain, together
  * with the transaction hash that consumed it.
  *
- * This is the only failed response that can be recovered as a settlement. The
- * transaction is still independently checked against Base immediately after
- * this function returns; a wrong token, payer, recipient, or amount remains a
- * contradiction and the resource is withheld.
+ * Offline parser retained for operator evidence/tests, not called by the live
+ * settlement adapter. Never submit another signed settle request to obtain
+ * this response. A parsed transaction is only a candidate for reconciliation;
+ * independent token, payer, recipient, amount and authorization checks are
+ * required before changing a reservation or releasing a resource.
  */
 export function recoverSubmittedSettlement(
   response: unknown,
@@ -343,16 +346,6 @@ export function createFacilitator(config: FacilitatorConfig): PaymentFacilitator
       // A facilitator that is unreachable or erroring must never read as a
       // successful payment.
       const { body: probe, diagnostic } = await reportFailure(operation, error, config, payment, requirement)
-      if (operation === 'settle') {
-        const recovered = recoverSubmittedSettlement(probe, payment, requirement)
-        if (recovered) {
-          console.warn('x402 facilitator settlement recovered from on-chain nonce', JSON.stringify({
-            network: requirement.network,
-            transaction: recovered.transaction,
-          }))
-          return { kind: 'response', response: { success: true, payer: recovered.payer, transaction: recovered.transaction } }
-        }
-      }
       // The SDK threw before it could hand back a typed rejection, but the
       // probe reached the same endpoint and got a real verdict. That verdict
       // is the truth of the matter and outranks the generic failure code.
@@ -375,8 +368,10 @@ export function createFacilitator(config: FacilitatorConfig): PaymentFacilitator
     },
     async settle(payment, requirement): Promise<SettleResult> {
       const result = await call('settle', payment, requirement)
-      if (result.kind === 'rejection') return failure(result.reason)
-      if (result.kind === 'transport-failure') return failure('facilitator_settle_failed')
+      // Even a typed error can describe an authorization already submitted.
+      // No generic reason string proves that money did not move.
+      if (result.kind === 'rejection') return { ok: false, reason: result.reason, outcome: 'unknown' }
+      if (result.kind === 'transport-failure') return { ok: false, reason: 'facilitator_settle_failed', outcome: 'unknown' }
       return readResponse('settle', result.response)
     },
   }

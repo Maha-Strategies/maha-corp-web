@@ -72,6 +72,7 @@ yarn-error.log*
 # vercel
 .vercel
 /content/buyer-brief/
+/content/paid-ebooks/
 # Paid authoring material belongs in private storage, never this public repo.
 /examples/buyer-brief/BUYER-BRIEF.md
 /examples/buyer-brief/RUNBOOK.md
@@ -97,3 +98,9 @@ interop/**/synthetic-evidence.json
 # frozen conformance vectors are tracked; binaries are built for tests/package.
 /packages/wasm-kernel/dist/*.wasm
 /packages/wasm-kernel/dist/*.wat
+
+# Private mobile upload signing material
+.signing/
+
+# Author-owned paid reading edition: never upload as a public repo asset.
+/output/pdf/The_Orbital_Mind_print_updated.pdf

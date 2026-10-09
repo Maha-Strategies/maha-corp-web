@@ -42,7 +42,9 @@ test('every offer publishes request requirements and response fields from its ow
     const entry = entries.find((item) => item.offerId === offer.id)!
     assert.deepEqual(entry.requiredInputFields, offer.discovery.inputSchema.required ?? [], offer.id)
     assert.deepEqual(entry.requestExample, offer.discovery.input, offer.id)
-    assert.deepEqual(entry.responseFields, Object.keys(offer.discovery.outputSchema.properties as object), offer.id)
+    const schema = offer.discovery.outputSchema
+    const variants = schema.oneOf as Array<{ properties?: object }> | undefined
+    assert.deepEqual(entry.responseFields, [...new Set([...Object.keys(schema.properties as object ?? {}), ...(variants ?? []).flatMap(v => Object.keys(v.properties ?? {}))])], offer.id)
     const links = entry.links as Record<string, string>
     assert.equal(links.declaration, `https://www.mahastrategies.com/api/discovery/x402-offers/${offer.id}`)
     assert.equal(links.openapi, 'https://www.mahastrategies.com/api/docs/openapi')

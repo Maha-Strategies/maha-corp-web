@@ -22,6 +22,295 @@
   },
   "capabilities": [
     {
+      "id": "gpu-tensor-network",
+      "status": "available_with_provisioned_api_key",
+      "endpoint": "https://www.mahastrategies.com/api/v1/jobs/tensor-network"
+    },
+    {
+      "id": "gpu-geometric-registration",
+      "status": "available_with_provisioned_api_key",
+      "endpoint": "https://www.mahastrategies.com/api/v1/jobs/geometric-registration"
+    },
+    {
+      "id": "enterprise-mcp-gateway",
+      "status": "available_for_tenant_onboarding",
+      "endpoint": "https://www.mahastrategies.com/api/v1/mcp/gateway/{serverId}",
+      "contract": "https://www.mahastrategies.com/mcp-gateway-contract.json"
+    },
+    {
+      "id": "context-compression",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/compress",
+      "benchmark": "https://www.mahastrategies.com/benchmarks/context-retention",
+      "executableRecipe": "https://www.mahastrategies.com/recipes/context-compiler-large-document",
+      "discoveryPaymentRecipe": "https://www.mahastrategies.com/recipes/bazaar-discovery-to-payment",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "1000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      },
+      "payableNow": true,
+      "method": "POST",
+      "description": "Compress long documents and RAG inputs into token-budgeted, deduplicated context packs with source-linked provenance. Returns original and compiled token counts, so the saving is verifiable. Net-positive above N = fee / (r x p) tokens: r your reduction, p your input price. Extractive and budget-bound, so check includedPassages before relying on it. Ranks Latin, Cyrillic, Greek, Arabic and CJK; CJK coarser (bigrams). Not for tabular or heavily-structured payloads.",
+      "blockedBy": []
+    },
+    {
+      "id": "context-budget-ladder",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/context/budget-ladder",
+      "provides": "five deterministic source-linked Context Packs at five ascending token budgets",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "12000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      },
+      "payableNow": true,
+      "retention": "Request and response bodies are not stored.",
+      "description": "Choose a context budget before an agent run. Compare five extractive compilation budgets with token estimates and source coverage. Price basis: five compiler runs, the comparison table and the receipt digest. Uses caller-supplied documents; no answer generation, factual verification or guaranteed token-billing savings.",
+      "method": "POST",
+      "blockedBy": []
+    },
+    {
+      "id": "deep-context-evaluation",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/compress/evaluate",
+      "measures": "exact retention of caller-labelled required-evidence spans",
+      "notMeasured": [
+        "factual accuracy",
+        "answer quality",
+        "verification",
+        "hallucination prevention"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "10000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      },
+      "payableNow": true,
+      "method": "POST",
+      "description": "Compile 1-8 documents into a token-budgeted context pack, then measure exact retention of 1-32 caller-labelled evidence spans. Returns the pack, source-linked passages, input and output hashes, original and compiled token estimates, tokensSaved, source coverage, and requiredEvidenceRetentionPercent. Retention is exact span matching only: not accuracy, answer quality, verification, or hallucination prevention. Extractive and budget-bound. Request content is not stored.",
+      "blockedBy": []
+    },
+    {
+      "id": "evidence-retention-matrix",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/context/evidence-matrix",
+      "provides": "five exact-span evidence-retention evaluations and a budget frontier",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "50000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      },
+      "payableNow": true,
+      "retention": "Documents, evidence spans, compiled packs, and response bodies are not stored.",
+      "method": "POST",
+      "description": "Evaluate exact retention of 1-32 caller-labelled evidence spans at exactly five ascending token budgets. Returns five source-linked Context Packs, per-run retention metrics, an evidence frontier, stable hashes, and a deterministic receipt digest. Price basis: five $0.01 evaluations. Retention is not truth, accuracy, answer quality, legal compliance, or hallucination prevention. Bodies are not stored.",
+      "blockedBy": []
+    },
+    {
+      "id": "mps-autonomous-audit",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/mps/audit",
+      "retrievalEndpoint": "https://www.mahastrategies.com/api/v1/mps/audit/{auditId}",
+      "provides": "automated claim triage with provenance statuses",
+      "notProvided": [
+        "factual certification",
+        "legal advice",
+        "human verification"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "250000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      },
+      "payableNow": true,
+      "retention": "The complete submitted passage is not retained. Results retain short verbatim claim excerpts, classifications, rationales, hashes, and operational metadata.",
+      "description": "Review a passage for Maha Principle epistemic classifications with a model-backed audit, not factual certification, legal advice, or human verification. Save the job reference and retrieve the completed result; job acceptance is not delivery. Short input excerpts may be retained in the result.",
+      "method": "POST",
+      "blockedBy": []
+    },
+    {
+      "id": "governed-context-verification-pack",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/context/governed-verification",
+      "provides": "a machine-readable context-control evidence packet with policy, budget, integrity, and receipt fields",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "500000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      },
+      "payableNow": true,
+      "retention": "Documents, evidence spans, compiled packs, and response bodies are not stored.",
+      "description": "Prepare an inspectable context-selection evidence pack from caller-supplied documents and labelled spans. Combines budget comparisons, retention checks and policy-bound receipts. Verification concerns the declared workflow, not factual truth, answer quality or legal compliance.",
+      "method": "POST",
+      "blockedBy": []
+    },
+    {
+      "id": "research-intake-evidence-pack",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/research/intake",
+      "retrievalEndpoint": "https://www.mahastrategies.com/api/v1/research/intake/{packId}",
+      "provides": "machine-generated research intake evidence packet for one question and up to ten supplied source sections",
+      "notProvided": [
+        "research brief",
+        "new research or source acquisition",
+        "factual certification",
+        "human judgment",
+        "recommendation"
+      ],
+      "sourceHandling": "Only public or synthetic, non-sensitive source sections are accepted. The request must explicitly authorize transmission of those sections to Anthropic for processing.",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "1000000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      },
+      "payableNow": true,
+      "retention": "Complete supplied sections are transmitted to Anthropic for processing but are not retained by Maha. Results retain the question, supplied source and section identifiers, optional intake metadata, short verbatim claim excerpts, classifications, digests, and operational metadata.",
+      "method": "POST",
+      "description": "Machine-generated intake packet for one question and 1-10 supplied source sections. Returns one MPS triage per section, an ordered manifest, claim inventory, citation gaps, potential conflicts, unresolved questions, proposed human-research scope, and deterministic digests. Fixed $1 capacity price: up to ten $0.10 section audits. Not a research brief, new research, factual certification, human judgment, or a recommendation.",
+      "blockedBy": []
+    },
+    {
+      "id": "book-section-the-imagined-life",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/books/the-imagined-life/section",
+      "provides": "one exact machine-readable section of The Imagined Life with integrity metadata and a deterministic receipt",
+      "notProvided": [
+        "exclusive access",
+        "copyright transfer",
+        "editorial analysis",
+        "factual certification",
+        "recommendation"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "25000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      },
+      "payableNow": true,
+      "retention": "The request and delivered section are returned transiently and are not stored by this endpoint.",
+      "description": "Read one supported section of The Imagined Life as machine-readable licensed prose with edition and section identity. For agents researching this specific book. Not the complete edition, a general book search or permission to redistribute the work.",
+      "method": "POST",
+      "blockedBy": []
+    },
+    {
+      "id": "book-section-the-volcanic-engine",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/books/the-volcanic-engine/section",
+      "provides": "one exact machine-readable section of The Volcanic Engine with integrity metadata and a deterministic receipt",
+      "notProvided": [
+        "exclusive access",
+        "copyright transfer",
+        "editorial analysis",
+        "factual certification",
+        "recommendation"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "30000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      },
+      "payableNow": true,
+      "retention": "The request and delivered section are returned transiently and are not stored by this endpoint.",
+      "description": "Read one supported section of The Volcanic Engine as machine-readable licensed prose with edition and section identity. For agents researching this specific book. Not the complete edition, a general book search or permission to redistribute the work.",
+      "method": "POST",
+      "blockedBy": []
+    },
+    {
+      "id": "book-edition-the-imagined-life",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/books/the-imagined-life/edition",
+      "provides": "the complete normalized Markdown edition of The Imagined Life with an ordered section manifest and deterministic receipt",
+      "notProvided": [
+        "exclusive access",
+        "redistribution or resale rights",
+        "model-training rights",
+        "copyright transfer",
+        "editorial analysis",
+        "factual certification",
+        "recommendation"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "3000000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      },
+      "payableNow": true,
+      "retention": "The request and complete delivered edition are returned transiently and are not stored by this endpoint.",
+      "method": "POST",
+      "description": "Purchase the complete machine-readable edition of The Imagined Life as normalized Markdown with an ordered section manifest, per-section and whole-edition SHA-256 commitments, and a deterministic receipt. Includes non-exclusive personal or internal machine use; no redistribution, resale, model-training rights, copyright transfer, analysis, factual certification, or recommendation. The public web edition remains free.",
+      "blockedBy": []
+    },
+    {
+      "id": "book-edition-the-volcanic-engine",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/books/the-volcanic-engine/edition",
+      "provides": "the complete normalized Markdown edition of The Volcanic Engine with an ordered section manifest and deterministic receipt",
+      "notProvided": [
+        "exclusive access",
+        "redistribution or resale rights",
+        "model-training rights",
+        "copyright transfer",
+        "editorial analysis",
+        "factual certification",
+        "recommendation"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "3500000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      },
+      "payableNow": true,
+      "retention": "The request and complete delivered edition are returned transiently and are not stored by this endpoint.",
+      "method": "POST",
+      "description": "Purchase the complete machine-readable edition of The Volcanic Engine as normalized Markdown with an ordered section manifest, per-section and whole-edition SHA-256 commitments, and a deterministic receipt. Includes non-exclusive personal or internal machine use; no redistribution, resale, model-training rights, copyright transfer, analysis, factual certification, or recommendation. The public web edition remains free.",
+      "blockedBy": []
+    },
+    {
       "id": "celestial-position-snapshot",
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/calculations/positions",
@@ -76,258 +365,6 @@
       }
     },
     {
-      "id": "context-compression",
-      "status": "available_with_api_key_or_x402",
-      "endpoint": "https://www.mahastrategies.com/api/v1/compress",
-      "benchmark": "https://www.mahastrategies.com/benchmarks/context-retention",
-      "executableRecipe": "https://www.mahastrategies.com/recipes/context-compiler-large-document",
-      "discoveryPaymentRecipe": "https://www.mahastrategies.com/recipes/bazaar-discovery-to-payment",
-      "payment": {
-        "protocol": "x402",
-        "version": 2,
-        "network": "eip155:8453",
-        "amount": "1000",
-        "assetSymbol": "USDC",
-        "autonomous": true
-      },
-      "payableNow": true
-    },
-    {
-      "id": "context-budget-ladder",
-      "status": "available_for_autonomous_payment",
-      "endpoint": "https://www.mahastrategies.com/api/v1/context/budget-ladder",
-      "provides": "five deterministic source-linked Context Packs at five ascending token budgets",
-      "payment": {
-        "protocol": "x402",
-        "version": 2,
-        "network": "eip155:8453",
-        "amount": "12000",
-        "assetSymbol": "USDC",
-        "autonomous": true
-      },
-      "payableNow": true,
-      "retention": "Request and response bodies are not stored.",
-      "description": "Choose a context budget before an agent run. Compare five extractive compilation budgets with token estimates and source coverage. Price basis: five compiler runs, the comparison table and the receipt digest. Uses caller-supplied documents; no answer generation, factual verification or guaranteed token-billing savings."
-    },
-    {
-      "id": "deep-context-evaluation",
-      "status": "available_with_api_key_or_x402",
-      "endpoint": "https://www.mahastrategies.com/api/v1/compress/evaluate",
-      "measures": "exact retention of caller-labelled required-evidence spans",
-      "notMeasured": [
-        "factual accuracy",
-        "answer quality",
-        "verification",
-        "hallucination prevention"
-      ],
-      "payment": {
-        "protocol": "x402",
-        "version": 2,
-        "network": "eip155:8453",
-        "amount": "10000",
-        "assetSymbol": "USDC",
-        "autonomous": true
-      },
-      "payableNow": true
-    },
-    {
-      "id": "evidence-retention-matrix",
-      "status": "available_for_autonomous_payment",
-      "endpoint": "https://www.mahastrategies.com/api/v1/context/evidence-matrix",
-      "provides": "five exact-span evidence-retention evaluations and a budget frontier",
-      "payment": {
-        "protocol": "x402",
-        "version": 2,
-        "network": "eip155:8453",
-        "amount": "50000",
-        "assetSymbol": "USDC",
-        "autonomous": true
-      },
-      "payableNow": true,
-      "retention": "Documents, evidence spans, compiled packs, and response bodies are not stored."
-    },
-    {
-      "id": "mps-autonomous-audit",
-      "status": "available_for_autonomous_payment",
-      "endpoint": "https://www.mahastrategies.com/api/v1/mps/audit",
-      "retrievalEndpoint": "https://www.mahastrategies.com/api/v1/mps/audit/{auditId}",
-      "provides": "automated claim triage with provenance statuses",
-      "notProvided": [
-        "factual certification",
-        "legal advice",
-        "human verification"
-      ],
-      "payment": {
-        "protocol": "x402",
-        "version": 2,
-        "network": "eip155:8453",
-        "amount": "250000",
-        "assetSymbol": "USDC",
-        "autonomous": true,
-        "note": "Payable autonomously over x402 v2 on Base Mainnet. Requires an idempotency key and an input hash over the text field; request identity, JSON body and hash are checked before settlement. A replayed request returns the job already paid for rather than charging twice. Retrieval and resume at the retrieval endpoint are free."
-      },
-      "payableNow": true,
-      "retention": "The complete submitted passage is not retained. Results retain short verbatim claim excerpts, classifications, rationales, hashes, and operational metadata.",
-      "description": "Review a passage for Maha Principle epistemic classifications with a model-backed audit, not factual certification, legal advice, or human verification. Save the job reference and retrieve the completed result; job acceptance is not delivery. Short input excerpts may be retained in the result."
-    },
-    {
-      "id": "governed-context-verification-pack",
-      "status": "available_for_autonomous_payment",
-      "endpoint": "https://www.mahastrategies.com/api/v1/context/governed-verification",
-      "provides": "a machine-readable context-control evidence packet with policy, budget, integrity, and receipt fields",
-      "payment": {
-        "protocol": "x402",
-        "version": 2,
-        "network": "eip155:8453",
-        "amount": "500000",
-        "assetSymbol": "USDC",
-        "autonomous": true
-      },
-      "payableNow": true,
-      "retention": "Documents, evidence spans, compiled packs, and response bodies are not stored.",
-      "description": "Prepare an inspectable context-selection evidence pack from caller-supplied documents and labelled spans. Combines budget comparisons, retention checks and policy-bound receipts. Verification concerns the declared workflow, not factual truth, answer quality or legal compliance."
-    },
-    {
-      "id": "research-intake-evidence-pack",
-      "status": "available_for_autonomous_payment",
-      "endpoint": "https://www.mahastrategies.com/api/v1/research/intake",
-      "retrievalEndpoint": "https://www.mahastrategies.com/api/v1/research/intake/{packId}",
-      "provides": "machine-generated research intake evidence packet for one question and up to ten supplied source sections",
-      "notProvided": [
-        "research brief",
-        "new research or source acquisition",
-        "factual certification",
-        "human judgment",
-        "recommendation"
-      ],
-      "sourceHandling": "Only public or synthetic, non-sensitive source sections are accepted. The request must explicitly authorize transmission of those sections to Anthropic for processing.",
-      "payment": {
-        "protocol": "x402",
-        "version": 2,
-        "network": "eip155:8453",
-        "amount": "1000000",
-        "assetSymbol": "USDC",
-        "autonomous": true,
-        "note": "Payable autonomously over x402 v2 on Base Mainnet. Completed section audits are checkpointed and never rerun when a sibling section fails."
-      },
-      "payableNow": true,
-      "retention": "Complete supplied sections are transmitted to Anthropic for processing but are not retained by Maha. Results retain the question, supplied source and section identifiers, optional intake metadata, short verbatim claim excerpts, classifications, digests, and operational metadata."
-    },
-    {
-      "id": "book-section-the-imagined-life",
-      "status": "available_for_autonomous_payment",
-      "endpoint": "https://www.mahastrategies.com/api/v1/books/the-imagined-life/section",
-      "provides": "one exact machine-readable section of The Imagined Life with integrity metadata and a deterministic receipt",
-      "notProvided": [
-        "exclusive access",
-        "copyright transfer",
-        "editorial analysis",
-        "factual certification",
-        "recommendation"
-      ],
-      "payment": {
-        "protocol": "x402",
-        "version": 2,
-        "network": "eip155:8453",
-        "amount": "25000",
-        "assetSymbol": "USDC",
-        "autonomous": true
-      },
-      "payableNow": true,
-      "retention": "The request and delivered section are returned transiently and are not stored by this endpoint.",
-      "description": "Read one supported section of The Imagined Life as machine-readable licensed prose with edition and section identity. For agents researching this specific book. Not the complete edition, a general book search or permission to redistribute the work."
-    },
-    {
-      "id": "book-section-the-volcanic-engine",
-      "status": "available_for_autonomous_payment",
-      "endpoint": "https://www.mahastrategies.com/api/v1/books/the-volcanic-engine/section",
-      "provides": "one exact machine-readable section of The Volcanic Engine with integrity metadata and a deterministic receipt",
-      "notProvided": [
-        "exclusive access",
-        "copyright transfer",
-        "editorial analysis",
-        "factual certification",
-        "recommendation"
-      ],
-      "payment": {
-        "protocol": "x402",
-        "version": 2,
-        "network": "eip155:8453",
-        "amount": "30000",
-        "assetSymbol": "USDC",
-        "autonomous": true
-      },
-      "payableNow": true,
-      "retention": "The request and delivered section are returned transiently and are not stored by this endpoint.",
-      "description": "Read one supported section of The Volcanic Engine as machine-readable licensed prose with edition and section identity. For agents researching this specific book. Not the complete edition, a general book search or permission to redistribute the work."
-    },
-    {
-      "id": "book-edition-the-imagined-life",
-      "status": "available_for_autonomous_payment",
-      "endpoint": "https://www.mahastrategies.com/api/v1/books/the-imagined-life/edition",
-      "provides": "the complete normalized Markdown edition of The Imagined Life with an ordered section manifest and deterministic receipt",
-      "notProvided": [
-        "exclusive access",
-        "redistribution or resale rights",
-        "model-training rights",
-        "copyright transfer",
-        "editorial analysis",
-        "factual certification",
-        "recommendation"
-      ],
-      "payment": {
-        "protocol": "x402",
-        "version": 2,
-        "network": "eip155:8453",
-        "amount": "3000000",
-        "assetSymbol": "USDC",
-        "autonomous": true
-      },
-      "payableNow": true,
-      "retention": "The request and complete delivered edition are returned transiently and are not stored by this endpoint."
-    },
-    {
-      "id": "book-edition-the-volcanic-engine",
-      "status": "available_for_autonomous_payment",
-      "endpoint": "https://www.mahastrategies.com/api/v1/books/the-volcanic-engine/edition",
-      "provides": "the complete normalized Markdown edition of The Volcanic Engine with an ordered section manifest and deterministic receipt",
-      "notProvided": [
-        "exclusive access",
-        "redistribution or resale rights",
-        "model-training rights",
-        "copyright transfer",
-        "editorial analysis",
-        "factual certification",
-        "recommendation"
-      ],
-      "payment": {
-        "protocol": "x402",
-        "version": 2,
-        "network": "eip155:8453",
-        "amount": "3500000",
-        "assetSymbol": "USDC",
-        "autonomous": true
-      },
-      "payableNow": true,
-      "retention": "The request and complete delivered edition are returned transiently and are not stored by this endpoint."
-    },
-    {
-      "id": "gpu-tensor-network",
-      "status": "available_with_provisioned_api_key",
-      "endpoint": "https://www.mahastrategies.com/api/v1/jobs/tensor-network"
-    },
-    {
-      "id": "gpu-geometric-registration",
-      "status": "available_with_provisioned_api_key",
-      "endpoint": "https://www.mahastrategies.com/api/v1/jobs/geometric-registration"
-    },
-    {
-      "id": "enterprise-mcp-gateway",
-      "status": "available_for_tenant_onboarding",
-      "endpoint": "https://www.mahastrategies.com/api/v1/mcp/gateway/{serverId}",
-      "contract": "https://www.mahastrategies.com/mcp-gateway-contract.json"
-    },
-    {
       "id": "cabezon-buyer-brief-pack",
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/cabezon/buyer-brief",
@@ -340,6 +377,78 @@
         "version": 2,
         "network": "eip155:8453",
         "amount": "20000000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "book-epub-the-maha-principle",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/books/the-maha-principle/epub",
+      "method": "POST",
+      "description": "Purchase The Maha Principle, EPUB + print PDF for 10 USDC. A book on human flourishing, strategy and humane governance. Includes the author’s medical disclaimer; not medical advice or a validated treatment. Version-pinned files delivered inline with SHA-256 digests. Personal/internal use only; no redistribution, resale or training rights. Recover a paid order with its private secret; never repay automatically.",
+      "payableNow": true,
+      "blockedBy": [],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "10000000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "book-epub-the-orbital-mind",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/books/the-orbital-mind/epub",
+      "method": "POST",
+      "description": "Purchase The Orbital Mind, EPUB + print PDF for 10 USDC. A book using orbital dynamics as a framework for attention, agency, limits and integration. Metaphor and conjecture are not established psychological or medical findings. Version-pinned files delivered inline with SHA-256 digests. Personal/internal use only; no redistribution, resale or training rights. Recover a paid order with its private secret; never repay automatically.",
+      "payableNow": true,
+      "blockedBy": [],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "10000000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "book-section-the-maha-principle",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/books/the-maha-principle/section",
+      "method": "POST",
+      "description": "Purchase one pinned Markdown section of The Maha Principle with edition identity, word/byte counts and SHA-256 integrity receipt. Choose a section and confirm the edition digest before paying. Not an EPUB/PDF bundle, medical advice or factual certification. Personal/internal use only; no redistribution, resale, training rights or copyright transfer. No stored-result recovery.",
+      "payableNow": true,
+      "blockedBy": [],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "31000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "book-section-the-orbital-mind",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/books/the-orbital-mind/section",
+      "method": "POST",
+      "description": "Purchase one pinned Markdown section of The Orbital Mind with edition identity, word/byte counts and SHA-256 integrity receipt. Choose a section and confirm the edition digest before paying. Not an EPUB/PDF bundle, medical advice or factual certification. Personal/internal use only; no redistribution, resale, training rights or copyright transfer. No stored-result recovery.",
+      "payableNow": true,
+      "blockedBy": [],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "33000",
         "assetSymbol": "USDC",
         "autonomous": true,
         "payableNow": true
@@ -786,6 +895,240 @@
         "version": 2,
         "network": "eip155:8453",
         "amount": "10500",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "inspection-tolerance-check",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/inspection-tolerance-check",
+      "method": "POST",
+      "description": "Classify up to 100 declared measurement intervals against tolerances as pass, fail or hold. Integer millimetres; uncertainty is an absolute interval half-width, not a confidence level. No sensor verification or engineering approval.",
+      "payableNow": true,
+      "blockedBy": [],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "29000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "inspection-coverage-plan",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/inspection-coverage-plan",
+      "method": "POST",
+      "description": "Compare up to 16 declared observation stations against 64 targets and 16 rectangular obstacles in a bounded 2D scene. Returns visible targets and uncovered IDs. No camera optics, 3D visibility, robot motion or physical inspection claim.",
+      "payableNow": true,
+      "blockedBy": [],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "119000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "panel-packing-estimate",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/panel-packing-estimate",
+      "method": "POST",
+      "description": "Compare up to 20 homogeneous rectangular-panel scenarios with fixed orientation, edge margin and kerf. Returns row/column capacity, sheet count and material utilization. Not mixed nesting, toolpaths, optimal packing or fabrication approval.",
+      "payableNow": true,
+      "blockedBy": [],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "59000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "assembly-schedule-compare",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/assembly-schedule-compare",
+      "method": "POST",
+      "description": "Simulate up to 10 sequential assembly scenarios of 100 identical units using one shared crane and declared crews. Factory releases, lift and connection durations are explicit. No lift-capacity, structural, site-safety or optimized scheduling approval.",
+      "payableNow": true,
+      "blockedBy": [],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "150000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "automation-economics-compare",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/automation-economics-compare",
+      "method": "POST",
+      "description": "Compare up to 20 automation scenarios using declared setup cost, per-unit costs and volumes. Exact cents, savings and break-even counts; no currency conversion, demand forecast, investment advice or independently measured costs.",
+      "payableNow": true,
+      "blockedBy": [],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "90000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "public-spending-review",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/public-spending-review",
+      "method": "POST",
+      "description": "Review up to 80 public or synthetic spending records for duplicate IDs, inconsistent budgets, budget overruns and declared payee concentration. Duplicate-ID rows are excluded from totals. Flags are review leads, not fraud or legality findings.",
+      "payableNow": true,
+      "blockedBy": [],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "180000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "campaign-record-reconcile",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/campaign-record-reconcile",
+      "method": "POST",
+      "description": "Reconcile up to 80 committee-aggregate or non-personal organizational public/synthetic campaign ledger entries against declared opening and closing balances. Flags duplicate IDs and missing document references. Individual-contributor records are prohibited, including hashed or redacted records. Caller must attest authorized commercial use. No contribution intake, payment execution, filing or legal compliance verdict.",
+      "payableNow": true,
+      "blockedBy": [],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "80000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "committee-finance-snapshot",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/committee-finance-snapshot",
+      "method": "POST",
+      "description": "Compare up to 12 caller-supplied public committee-level totals and filing references at a declared assessment time. Preserves unknown totals, flags stale or amended snapshots and checks cash arithmetic. Caller must attest authorized commercial use and no individual-contributor information. No live FEC fetch, donor data, legal verdict or final-filing certification.",
+      "payableNow": true,
+      "blockedBy": [],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "70000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "area-program-check",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/area-program-check",
+      "method": "POST",
+      "description": "Check up to 80 declared floor areas and assignable ratios, returning exact assignable/support-area totals. Uses one declared area unit and basis-point ratios. No geometry, zoning, code compliance, rentable-area or structural certification.",
+      "payableNow": true,
+      "blockedBy": [],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "39000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "neural-experiment-metrics",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/neural-experiment-metrics",
+      "method": "POST",
+      "description": "Score up to 64 labelled time intervals and 128 command events: rest false activations, missed trials, wrong commands and first-correct response times. Public or synthetic event metadata only. No raw EEG, participant identifiers, live control, diagnosis or human-enhancement claim.",
+      "payableNow": true,
+      "blockedBy": [],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "160000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "evidence-scope-check",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/evidence-scope-check",
+      "method": "POST",
+      "description": "Compare up to 80 expected and 80 observed document descriptors against one declared tenant and scope. Flags missing, unexpected and cross-tenant documents; incomplete scope stays undetermined. Public/synthetic metadata only. Not access-control enforcement, corpus completeness or legal verification.",
+      "payableNow": true,
+      "blockedBy": [],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "41000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "evidence-version-selection-check",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/evidence-version-selection-check",
+      "method": "POST",
+      "description": "Check selected versions of up to 40 declared documents against up to 100 effective-date records at one assessment time. Flags inactive, unknown and missing selections; overlapping active versions remain ambiguous. Public/synthetic metadata only. No inferred amendment graph, legal effect or source validation.",
+      "payableNow": true,
+      "blockedBy": [],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "63000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "context-manifest-check",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/context-manifest-check",
+      "method": "POST",
+      "description": "Compare up to 128 expected passage bindings with up to 128 retained descriptors by passage ID, parent document, version hash and chunk hash. Flags omissions, substitutions, repeats and ordering gaps. Public/synthetic metadata only; does not inspect prompts or prove what a model saw or used.",
+      "payableNow": true,
+      "blockedBy": [],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "87000",
         "assetSymbol": "USDC",
         "autonomous": true,
         "payableNow": true

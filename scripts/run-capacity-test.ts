@@ -2,6 +2,7 @@ import nextEnv from '@next/env'
 import { writeFile } from 'node:fs/promises'
 
 import { capacityConfiguration, capacityFailures, capacityReport, capacityScenarios, type CapacityScenario } from '../lib/capacity-slo.ts'
+import { capacityPreflight } from '../lib/capacity-preflight.ts'
 
 nextEnv.loadEnvConfig(process.cwd())
 
@@ -13,6 +14,16 @@ const environment = {
 }
 const configuration = capacityConfiguration(environment)
 const scenarios = capacityScenarios(environment, configuration.profile)
+const outputPath = process.env.CAPACITY_OUTPUT_PATH?.trim() || 'capacity-report.json'
+const preflight = await capacityPreflight({ baseUrl: configuration.baseUrl, scenarios, timeoutMs: configuration.timeoutMs })
+const preflightFailures = preflight.filter((probe) => probe.failure).map((probe) => `${probe.name}: HTTP ${probe.status || 'unavailable'}: ${probe.failure}`)
+if (preflightFailures.length) {
+  const blocked = { schema: 'maha.capacity-report.v1', generatedAt: new Date().toISOString(), targetOrigin: configuration.baseUrl,
+    production: configuration.production, profile: configuration.profile, state: 'blocked', preflight, reports: [], failures: preflightFailures }
+  await writeFile(outputPath, `${JSON.stringify(blocked, null, 2)}\n`, { mode: 0o600 })
+  console.log(JSON.stringify(blocked, null, 2))
+  throw new Error('Capacity run blocked by readiness preflight; no load batches were started.')
+}
 
 async function batch(scenario: CapacityScenario, requests: number) {
   const latencies: number[] = []
@@ -53,8 +64,8 @@ const output = {
   schema: 'maha.capacity-report.v1', generatedAt: new Date().toISOString(), targetOrigin: configuration.baseUrl,
   production: configuration.production, profile: configuration.profile, requestsPerScenario: configuration.requestsPerScenario,
   concurrency: configuration.concurrency, timeoutMs: configuration.timeoutMs, thresholds: configuration.thresholds,
-  warmupRequestsPerScenario: configuration.concurrency, state: failures.length ? 'failed' : 'passed', reports, failures,
+  warmupRequestsPerScenario: configuration.concurrency, state: failures.length ? 'failed' : 'passed', preflight, reports, failures,
 }
-await writeFile(process.env.CAPACITY_OUTPUT_PATH?.trim() || 'capacity-report.json', `${JSON.stringify(output, null, 2)}\n`, { mode: 0o600 })
+await writeFile(outputPath, `${JSON.stringify(output, null, 2)}\n`, { mode: 0o600 })
 console.log(JSON.stringify({ state: output.state, profile: output.profile, reports: reports.map(({ name, requests, successRate, throughputPerSecond, latencyMs, warmup }) => ({ name, requests, successRate, throughputPerSecond, latencyMs, warmup })), failures }, null, 2))
 if (failures.length) throw new Error(`Capacity acceptance failed: ${failures.join('; ')}.`)

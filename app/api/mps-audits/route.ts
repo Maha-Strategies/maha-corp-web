@@ -1,3 +1,4 @@
+import { ANTHROPIC_MODEL, ANTHROPIC_MESSAGE_SETTINGS } from '@/lib/anthropic-model'
 import Anthropic from '@anthropic-ai/sdk'
 
 import { authorizeClientCapability, bearerToken } from '@/lib/agent-client-credentials'
@@ -19,7 +20,7 @@ export const dynamic = 'force-dynamic'
 export const maxDuration = 30
 
 const MAX_BODY_BYTES = 32_768
-const MODEL = 'claude-sonnet-4-6'
+const MODEL = ANTHROPIC_MODEL
 
 type StoredAudit = {
   public_id: string
@@ -175,7 +176,7 @@ export async function POST(request: Request) {
   try {
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
     const result = await runMpsAudit(input.passage, async (prompt) => {
-      const message = await client.messages.create({
+      const message = await client.messages.create({ ...ANTHROPIC_MESSAGE_SETTINGS,
         model: MODEL,
         max_tokens: 1_500,
         messages: [{ role: 'user', content: prompt }],

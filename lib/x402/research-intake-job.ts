@@ -1,9 +1,10 @@
+import { ANTHROPIC_MODEL } from '../anthropic-model.ts'
 import { createHash, createHmac, randomUUID, timingSafeEqual } from 'node:crypto'
 
 import { RESEARCH_INTAKE_EVIDENCE_PACK_OFFER } from './offers.ts'
 import type { MpsAuditResult } from '../mps-audit-engine.ts'
 
-export const RESEARCH_INTAKE_MODEL = 'claude-sonnet-4-6'
+export const RESEARCH_INTAKE_MODEL = ANTHROPIC_MODEL
 export const MAX_RESEARCH_INTAKE_ATTEMPTS = 3
 
 export type StoredResearchIntakeJob = {

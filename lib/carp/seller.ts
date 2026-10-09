@@ -21,6 +21,7 @@ import {
 import { configuredIdentity, MAHA_CARP_DID_URL, MAHA_CARP_SAD_URL, MAHA_CARP_URL } from './identity.ts'
 import { CELESTIAL_OFFERS } from '../x402/celestial-offers.ts'
 import { BUYER_BRIEF_ID, BUYER_BRIEF_VERSION } from '../x402/buyer-brief-contract.ts'
+import { EBOOKS, EBOOK_VERSION, ebookFormatLabel, ebookIdForOffer, ebookPath } from '../x402/ebook-contract.ts'
 
 export const CARP_SELLER_ROLE_URL = 'https://www.mahastrategies.com/.well-known/carp/seller-role.json'
 export const MAHA_CARP_SELLER_URL = 'https://www.mahastrategies.com/.well-known/carp/seller.json'
@@ -142,12 +143,13 @@ const DIGITAL_OFFER_SPECS = Object.freeze(X402_OFFERS
   .filter(offer => offer.status === 'available' && offer.availability.payableInProduction && offer.availability.blockedBy.length === 0)
   .map(offer => {
     const legacy = LEGACY_DIGITAL_METADATA.find(spec => spec.offer.id === offer.id)
+    const ebookId = ebookIdForOffer(offer.id)
     return {
-      offeringRef: legacy?.offeringRef ?? `maha:${offer.id}:v${offer.id === BUYER_BRIEF_ID ? BUYER_BRIEF_VERSION : '1'}`,
-      title: legacy?.title ?? offer.serviceName,
+      offeringRef: ebookId ? `maha:ebook:${ebookId}:v${EBOOK_VERSION}` : legacy?.offeringRef ?? `maha:${offer.id}:v${offer.id === BUYER_BRIEF_ID ? BUYER_BRIEF_VERSION : '1'}`,
+      title: ebookId ? `${EBOOKS[ebookId].title} — ${ebookFormatLabel(ebookId)}` : legacy?.title ?? offer.serviceName,
       estimatedSeconds: legacy?.estimatedSeconds ?? 5,
       deliveryDeadlineSeconds: legacy?.deliveryDeadlineSeconds ?? 90,
-      termsUrl: legacy?.termsUrl ?? `${SITE_URL}/api/discovery/x402-offers/${offer.id}`,
+      termsUrl: ebookId ? SITE_URL + ebookPath(ebookId) : legacy?.termsUrl ?? `${SITE_URL}/api/discovery/x402-offers/${offer.id}`,
       offer, amount: usdcDisplayAmount(offer.amount),
     }
   }))

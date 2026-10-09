@@ -148,7 +148,7 @@ test('an empty window says nobody paid rather than nothing at all', () => {
   const report = watch([])
   assert.equal(report.totals.externalSettlements, 0)
   assert.equal(report.notable.length, 0)
-  assert.equal(describeWatch(report), 'No external settlements in the scanned range.')
+  assert.equal(describeWatch(report), 'No external price-matching transfers in the scanned range.')
 })
 
 test('every report states the window it is bound by', () => {

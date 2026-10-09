@@ -16,12 +16,13 @@ name: x402 settlement watch
 on:
   schedule:
     - cron: '23 6,18 * * *'
+    - cron: '43 * * * *'
   workflow_dispatch:
     inputs:
       days:
         description: Days of chain history to scan (1-90)
         required: false
-        default: '30'
+        default: '2'
         type: string
 
 permissions:
@@ -36,7 +37,43 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  ledger-health:
+    # Lightweight independent freshness check: no RPC scan, install or build.
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - name: Check public settlement ledger
+        id: health
+        run: node --experimental-strip-types scripts/check-x402-settlement-health.ts
+      - name: Maintain ledger freshness incident
+        if: ${{ always() && !cancelled() }}
+        uses: actions/github-script@v8
+        env:
+          HEALTH_OUTCOME: ${{ steps.health.outcome }}
+        with:
+          script: |
+            const label = 'x402-ledger-health';
+            const failed = process.env.HEALTH_OUTCOME !== 'success';
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              ...context.repo, state: 'open', labels: label, per_page: 100,
+            });
+            const issue = issues.find(item => !item.pull_request);
+            const run = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            if (failed && !issue) {
+              try { await github.rest.issues.createLabel({ ...context.repo, name: label, color: 'D93F0B' }); }
+              catch (error) { if (error.status !== 422) throw error; }
+              await github.rest.issues.create({ ...context.repo, title: 'Public settlement ledger freshness check failed', labels: [label],
+                body: `The ledger is stale, incomplete, unavailable or using its fallback. Preserve the last successful snapshot; do not count missing results as zero payments.\n\n${run}` });
+            } else if (!failed && issue) {
+              await github.rest.issues.createComment({ ...context.repo, issue_number: issue.number, body: `Fresh, caught-up ledger verified. ${run}` });
+              await github.rest.issues.update({ ...context.repo, issue_number: issue.number, state: 'closed', state_reason: 'completed' });
+            }
   watch:
+    if: ${{ github.event_name != 'schedule' || github.event.schedule != '43 * * * *' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
@@ -50,21 +87,22 @@ jobs:
           cache: npm
       - run: npm ci
 
+      - name: Verify public ledger freshness
+        id: health
+        if: always()
+        run: node --experimental-strip-types scripts/check-x402-settlement-health.ts
+
       - name: Scan Base for settlements
         id: watch
+        if: ${{ !cancelled() }}
         run: |
           set -o pipefail
           node --experimental-strip-types scripts/watch-x402-settlements.ts \
-            --days "${{ inputs.days || '30' }}" 2>&1 | tee "$RUNNER_TEMP/settlement-watch.log"
+            --days "${{ inputs.days || '2' }}" 2>&1 | tee "$RUNNER_TEMP/settlement-watch.log"
 
-      # The public ledger at /developers/settlement renders this snapshot. It is
-      # refreshed here rather than on a Vercel cron because the artifact is a
-      # committed file, and a serverless function cannot commit one.
-      - name: Refresh the public settlement ledger
-        id: ledger
-        run: |
-          node --experimental-strip-types scripts/generate-x402-settlement-ledger.ts \
-            --days "${{ inputs.days || '60' }}"
+      # Production publishes cumulative snapshots through its hourly Redis
+      # worker. This independent watch scans a recent window only; never replace
+      # cumulative history with a rolling-window artifact or trigger a build.
 
       - name: Upload settlement evidence
         if: always()
@@ -73,14 +111,39 @@ jobs:
           name: x402-settlement-watch-${{ github.run_id }}
           path: |
             ${{ env.X402_WATCH_OUTPUT_PATH }}
-            content/x402/settlement-ledger.json
+            ${{ runner.temp }}/settlement-watch.log
           if-no-files-found: warn
           retention-days: 90
+
+      - name: Open or resolve settlement monitoring incident
+        if: ${{ always() && !cancelled() }}
+        uses: actions/github-script@v8
+        env:
+          HEALTH_OUTCOME: ${{ steps.health.outcome }}
+          WATCH_OUTCOME: ${{ steps.watch.outcome }}
+        with:
+          script: |
+            const label = 'x402-settlement-monitoring';
+            const failed = process.env.HEALTH_OUTCOME !== 'success' || process.env.WATCH_OUTCOME !== 'success';
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              ...context.repo, state: 'open', labels: label, per_page: 100,
+            });
+            const issue = issues.find(item => !item.pull_request);
+            const run = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const body = `Settlement monitoring requires attention. Public ledger check: ${process.env.HEALTH_OUTCOME}; recent Base scan: ${process.env.WATCH_OUTCOME}.\n\nPreserve the previous snapshot. Do not interpret missing scan results as no payments.\n\nRun: ${run}`;
+            if (failed && !issue) {
+              try { await github.rest.issues.createLabel({ ...context.repo, name: label, color: 'D93F0B' }); }
+              catch (error) { if (error.status !== 422) throw error; }
+              await github.rest.issues.create({ ...context.repo, title: 'Settlement monitoring degraded', labels: [label], body });
+            } else if (!failed && issue) {
+              await github.rest.issues.createComment({ ...context.repo, issue_number: issue.number, body: `Both checks recovered. ${run}` });
+              await github.rest.issues.update({ ...context.repo, issue_number: issue.number, state: 'closed', state_reason: 'completed' });
+            }
 
       # One issue, updated, rather than a new one per run. A repeat buyer is the
       # decision gate for pricing, so it should arrive as a durable record
       # somebody can act on, not as a line in a log nobody reads.
-      - name: Record a repeat buyer
+      - name: Record repeat transfers for attribution review
         if: ${{ steps.watch.outputs.repeat_buyer == 'true' }}
         env:
           GH_TOKEN: ${{ github.token }}
@@ -88,11 +151,11 @@ jobs:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           set -euo pipefail
-          body=$(printf 'A wallet that is not the canary has settled more than once.\n\n%s\n\nThis is the demand-validation gate from the commercial plan: repeat external settlements are the evidence required before changing price or adding a paid resource.\n\nCanary traffic is excluded from every figure. Full breakdown in the run evidence artifact.\n\nRun: %s' "$SUMMARY" "$RUN_URL")
+          body=$(printf 'A wallet outside the known operator list has sent more than one price-matching USDC transfer.\n\n%s\n\nThis does not establish x402 purchases, successful delivery or independent demand. Match server settlement and fulfillment records and identify assisted tests before counting revenue or making pricing decisions.\n\nKnown operator traffic is excluded. Full breakdown in the run evidence artifact.\n\nRun: %s' "$SUMMARY" "$RUN_URL")
           existing=$(gh issue list --label x402-repeat-buyer --state open --limit 1 --json number --jq '.[0].number // empty')
           if [ -n "$existing" ]; then
             gh issue comment "$existing" --body "$body"
           else
             gh label create x402-repeat-buyer --color 0E8A16 --description "External wallet settled more than once" 2>/dev/null || true
-            gh issue create --title "Repeat external x402 buyer" --label x402-repeat-buyer --body "$body"
+            gh issue create --title "Repeat external transfers — purchase attribution unverified" --label x402-repeat-buyer --body "$body"
           fi

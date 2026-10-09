@@ -35,6 +35,13 @@ import { bookEditionDiscovery } from './book-edition-product.ts'
 import { CELESTIAL_OFFERS } from './celestial-offers.ts'
 import { MICRO_OFFERS } from './micro-offers.ts'
 import { BUYER_BRIEF_OFFER } from './buyer-brief-offer.ts'
+import { EBOOK_OFFERS } from './ebook-offers.ts'
+import { EBOOK_AMOUNT } from './ebook-contract.ts'
+import { LICENSED_SECTION_OFFERS } from './licensed-book-sections.ts'
+import { EVIDENCE_CHECK_IDS } from './evidence-check-contracts.ts'
+import { PLANNING_IDS } from './micro-planning-contracts.ts'
+import { assertUniqueCohortPrices } from './micro-price-policy.ts'
+import { OPERATOR_SETTLEMENT_RECEIPTS } from './operator-settlement-receipts.ts'
 
 export const USDC_DECIMALS = 6
 
@@ -475,6 +482,8 @@ export const X402_OFFERS: readonly X402Offer[] = Object.freeze([
   ...CELESTIAL_OFFERS,
   ...MICRO_OFFERS,
   BUYER_BRIEF_OFFER,
+  ...EBOOK_OFFERS,
+  ...LICENSED_SECTION_OFFERS,
 ].map(offer => {
   // Decorate once at catalog initialization, preserving exported offer identity.
   if (BAZAAR_LAUNCH_COPY[offer.id]) offer.description = BAZAAR_LAUNCH_COPY[offer.id]
@@ -492,7 +501,10 @@ export const X402_OFFERS: readonly X402Offer[] = Object.freeze([
  * autonomous agent as something it can pay for today.
  */
 /**
- * Every payable offer settles at a distinct amount.
+ * Payable API offers settle at distinct amounts. The two author-approved ebook
+ * bundles are the sole exception: both cost exactly 10 USDC. The public ledger
+ * already treats shared prices as unattributed, never guessing which title sold.
+ * Ebook order records separately bind each purchase to an exact resource.
  *
  * The public settlement ledger reads USDC Transfer logs and nothing else, which
  * is what lets a reader recompute it from the chain without trusting us. The
@@ -512,8 +524,11 @@ export const X402_OFFERS: readonly X402Offer[] = Object.freeze([
  * is the moment its price is being chosen anyway.
  */
 function assertDistinctPayableAmounts(): void {
-  const amounts = X402_OFFERS.filter((offer) => offer.availability.payableInProduction).map((offer) => offer.amount)
+  const payable = X402_OFFERS.filter((offer) => offer.availability.payableInProduction)
+  const amounts = payable.map((offer) => offer.amount)
+  const ebookIds = new Set(EBOOK_OFFERS.map(offer => offer.id))
   const duplicated = [...new Set(amounts.filter((amount, index) => amounts.indexOf(amount) !== index))]
+    .filter(amount => amount !== EBOOK_AMOUNT || payable.filter(offer => offer.amount === amount).some(offer => !ebookIds.has(offer.id)))
   if (duplicated.length > 0) {
     throw new Error(
       `Payable x402 offers must settle at distinct amounts; the settlement ledger attributes a payment by amount. Duplicated: ${duplicated.join(', ')}`,
@@ -521,6 +536,11 @@ function assertDistinctPayableAmounts(): void {
   }
 }
 assertDistinctPayableAmounts()
+// Reserve these ten prices before release, including other withheld offers and
+// known published operator prices. Do not add abandoned, unpublished proposals
+// to supersededAmounts: that would rewrite attribution of real settlements.
+assertUniqueCohortPrices(X402_OFFERS, PLANNING_IDS, OPERATOR_SETTLEMENT_RECEIPTS.map(r => ({ id: r.offerId, amount: r.amountBaseUnits })))
+assertUniqueCohortPrices(X402_OFFERS, [...EVIDENCE_CHECK_IDS, ...LICENSED_SECTION_OFFERS.map(o => o.id)], OPERATOR_SETTLEMENT_RECEIPTS.map(r => ({ id: r.offerId, amount: r.amountBaseUnits })))
 
 export function payableOffers(): readonly X402Offer[] {
   return X402_OFFERS.filter((offer) => offer.status === 'available')

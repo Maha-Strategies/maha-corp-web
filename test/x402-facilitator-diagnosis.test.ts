@@ -59,6 +59,21 @@ function withFetch(handler: (url: string) => Response | Promise<Response> | neve
 const json = (status: number, body: unknown) =>
   new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json' } })
 
+for (const failure of ['http', 'transport'] as const) {
+  test(`settlement ${failure} failure does not send a second signed settlement for diagnosis`, async () => {
+    const facilitator = createFacilitator({ url: 'https://facilitator.example' })
+    const calls = await withFetch(() => {
+      if (failure === 'transport') throw new Error('synthetic connection lost')
+      return json(502, { error: 'upstream response lost' })
+    }, async () => {
+      const result = await facilitator.settle(payment, requirement)
+      assert.equal(result.ok, false)
+      if (!result.ok) assert.equal(result.outcome, 'unknown')
+    })
+    assert.equal(calls, 1, 'diagnosing a settlement must not submit another payment')
+  })
+}
+
 // ---------------------------------------------------------------------------
 // Signer recovery
 // ---------------------------------------------------------------------------

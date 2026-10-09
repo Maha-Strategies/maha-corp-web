@@ -1,5 +1,9 @@
 @plugin "@tailwindcss/typography";
-@import "tailwindcss";
+/* Scan web sources explicitly; mobile builds and generated datasets can stall extraction. */
+@import "tailwindcss" source(none);
+@source "./";
+@source "../components";
+@source "../lib";
 
 .navigator-label {
   display: block;

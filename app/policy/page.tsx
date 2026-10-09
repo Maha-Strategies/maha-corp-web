@@ -1,10 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
 import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
+import { PolicyExpansionEntrance } from '@/components/policy/PolicyExpansionReader'
+import { POLICY_DRAFT_ROBOTS, policyDraftsAvailable } from '@/lib/policy-expansion-types'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 
 export const metadata = {
+  ...(policyDraftsAvailable(process.env.NODE_ENV) ? { robots: POLICY_DRAFT_ROBOTS } : {}),
   metadataBase: new URL(SITE_URL),
   title: 'Policy & Statecraft | Maha Strategies Think Tank',
   description:
@@ -83,6 +86,7 @@ const legislativeSeeds = [
 ]
 
 export default function PolicyNode() {
+  if (policyDraftsAvailable(process.env.NODE_ENV)) return <PolicyExpansionEntrance />
   const articleLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',

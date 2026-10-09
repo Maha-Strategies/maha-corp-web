@@ -1,3 +1,4 @@
+import { ANTHROPIC_MODEL, ANTHROPIC_MESSAGE_SETTINGS } from '@/lib/anthropic-model'
 import Anthropic from '@anthropic-ai/sdk'
 
 import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
@@ -9,7 +10,7 @@ export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 export const maxDuration = 30
 
-const MODEL = 'claude-sonnet-4-6'
+const MODEL = ANTHROPIC_MODEL
 const PROTOCOL_VERSIONS = new Set(['2025-03-26', '2025-06-18', '2025-11-25'])
 
 type JsonRpcId = string | number | null
@@ -81,7 +82,7 @@ async function callPreflight(request: Request, value: unknown) {
   try {
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
     const audit = await runMpsAudit(clean, async (prompt) => {
-      const message = await client.messages.create({ model: MODEL, max_tokens: 1_500, messages: [{ role: 'user', content: prompt }] })
+      const message = await client.messages.create({ ...ANTHROPIC_MESSAGE_SETTINGS, model: MODEL, max_tokens: 1_500, messages: [{ role: 'user', content: prompt }] })
       return message.content.map((block) => block.type === 'text' ? block.text : '').join('\n')
     })
     await recordEvent(ledger, visitorHash, 'completed', clean.length, 'mcp', audit.claims.length)

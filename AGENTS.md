@@ -1,9 +1,13 @@
 <!-- BEGIN:nextjs-agent-rules -->
-# STOP: This is NOT standard Next.js
 
-Do not rely on your existing training data for Next.js conventions, file structures, or APIs—there are major breaking changes in this codebase.
+# This is NOT the Next.js you know
 
-**Mandatory Steps:**
-- You MUST read the relevant documentation in `node_modules/next/dist/docs/` before writing a single line of code.
-- You MUST heed all deprecation notices.
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
 <!-- END:nextjs-agent-rules -->
+
+# Deployment budget approval
+
+The user's explicit approval is required before using Vercel build credits. This includes preview builds, production builds, redeployments, and Git pushes or other actions that would trigger an automatic Vercel build. Local builds and tests may proceed without using Vercel credits. Do not treat approval of local implementation as deployment approval.

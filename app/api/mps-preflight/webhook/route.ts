@@ -3,6 +3,7 @@ import { createHmac, timingSafeEqual } from 'node:crypto'
 import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
 import { reconciliationFailure, reconcileRevenuePayment, reconcileRevenueRefund } from '@/lib/revenue-reconciliation'
 import { stripeWebhookPayloadHash, validStripeEventId } from '@/lib/mps-credits'
+import { recordVerifiedCheckoutConversion } from '@/lib/conversion-measurement-server'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -88,5 +89,11 @@ export async function POST(request: Request) {
   })
   const reconciliationError = reconciliationFailure(reconciliation)
   if (reconciliationError) return reconciliationError
+  const measurement = await recordVerifiedCheckoutConversion(ledger, {
+    checkoutReference: orderId,
+    offerId: 'mps-preflight',
+    occurredAt: new Date().toISOString(),
+  })
+  if (measurement.error) console.error('MPS Preflight paid conversion measurement failed:', measurement.error.code)
   return Response.json({ received: true })
 }

@@ -1,3 +1,4 @@
+import { ANTHROPIC_MODEL } from './anthropic-model.ts'
 import { createHash, randomBytes, randomUUID, timingSafeEqual } from 'node:crypto'
 
 import type { MpsAuditClaim, MpsAuditResult } from './mps-audit-engine'
@@ -5,7 +6,7 @@ import type { MpsAuditClaim, MpsAuditResult } from './mps-audit-engine'
 export const PREFLIGHT_PRICE_USD = 49
 export const PREFLIGHT_MAX_CHARS = 12_000
 export const PREFLIGHT_MAX_CHUNKS = 2
-export const PREFLIGHT_MODEL = 'claude-sonnet-4-6'
+export const PREFLIGHT_MODEL = ANTHROPIC_MODEL
 export const SITE_URL = 'https://www.mahastrategies.com'
 
 export type PreflightStatus = 'awaiting_payment' | 'paid' | 'processing' | 'completed' | 'failed'
@@ -20,8 +21,11 @@ export type StoredPreflight = {
   stripe_checkout_session_id: string | null
   input_hash: string | null
   report: MpsAuditResult | null
+  report_sha256: string | null
   failure_code: string | null
   delivery_status: DeliveryStatus
+  acknowledgement_sha256: string | null
+  acknowledged_at: string | null
   created_at: string
   completed_at: string | null
 }

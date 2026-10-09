@@ -61,6 +61,7 @@ test('every proxy-priced offer without an admission claim has a pre-settlement b
   const expected = X402_OFFERS
     .filter((offer) => !offer.requiresIdempotency)
     .filter((offer) => !offer.path.startsWith('/api/v1/micro/') && !offer.path.startsWith('/api/v1/calculations/'))
+    .filter((offer) => !['book-section-the-maha-principle', 'book-section-the-orbital-mind'].includes(offer.id)) // Dedicated handlers validate the pinned edition before settlement.
     .map((offer) => offer.id)
     .sort()
   assert.deepEqual(REGISTERED.map((offer) => offer.id).sort(), expected)

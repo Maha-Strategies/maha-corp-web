@@ -29,6 +29,12 @@ export default function AppsPage() {
         <section className="evidence-section">
           <div className="grid gap-6">
             <article className="evidence-card">
+              <p className="evidence-kicker">[ Biology × AI · Version 1.0.0 ]</p>
+              <h2 className="evidence-card-title mt-2">Unfinished Species Atlas</h2>
+              <p className="evidence-card-copy mt-3">Explore source-linked biology and AI briefs, read the complete book, ask the companion, and follow a proposed research program. Established findings, inference, and speculation stay visible.</p>
+              <Link href="/apps/unfinished-species" className="evidence-action evidence-action--secondary mt-6">Open the Atlas →</Link>
+            </article>
+            <article className="evidence-card">
               <p className="evidence-kicker">[ Educational volcano explorer ]</p>
               <h2 className="evidence-card-title mt-2">Mayon</h2>
               <p className="evidence-card-copy mt-3">A free, true-scale exploration of Mayon Volcano for learners, educators, and curious visitors. It combines terrain, historical chapters, and clearly bounded hazard scenarios.</p>

@@ -1,3 +1,4 @@
+import { searchClickMetadata } from '@/lib/search-click-pilot'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
@@ -22,13 +23,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const reference = getCalculationReference(slug)
   if (!reference) return {}
   const path = calculationReferencePath(reference)
-  return {
+  return searchClickMetadata(path, {
     metadataBase: new URL(SITE_URL),
     title: `${reference.title} | Maha Celestial`,
     description: reference.description,
     alternates: { canonical: path },
     openGraph: { type: 'article', title: reference.title, description: reference.description, url: `${SITE_URL}${path}`, siteName: 'Maha Celestial' },
-  }
+  })
 }
 
 export default async function CalculationReferenceRoute({ params }: PageProps) {

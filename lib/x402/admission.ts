@@ -20,16 +20,19 @@ export const INPUT_HASH_HEADER = 'x-maha-input-hash'
 export type AdmissionDecision =
   | { kind: 'proceed' }
   /** Settled before. Reuse the recorded transaction; do not settle again. */
-  | { kind: 'already_paid'; transaction: string }
+  | { kind: 'already_paid'; transaction: string; paymentId?: string; network?: string }
   /** Another request holds the claim. Refused before anything settles. */
   | { kind: 'in_progress' }
   /** The key was reused with different input, resource or price. */
   | { kind: 'conflict' }
+  | { kind: 'contradicted' }
   | { kind: 'unavailable' }
 
 export type AdmissionGuard = {
   reserve(context: { payer: string }): Promise<AdmissionDecision>
-  settled(context: { payer: string; transaction: string }): Promise<void>
+  pending(context: { payer: string; paymentId: string; network: string }): Promise<boolean>
+  reconcile(context: { payer: string; paymentId: string; network: string; state: 'unknown' | 'not_settled' | 'settled' | 'contradicted' | 'marker_failed'; transaction?: string }): Promise<boolean>
+  settled(context: { payer: string; transaction: string }): Promise<boolean>
   released(context: { payer: string }): Promise<void>
 }
 
@@ -84,6 +87,20 @@ export function createAdmissionGuard(claim: AdmissionClaim, ledger?: Ledger | nu
   const client = ledger !== undefined ? ledger : createAgentInquiryLedger() as unknown as Ledger | null
   if (!client) return null
 
+  const recordRecovery: AdmissionGuard['reconcile'] = async (context) => {
+    try {
+      const { error } = await client.rpc('record_x402_admission_recovery', {
+        p_offer_id: claim.offerId, p_payer: context.payer, p_idempotency_key: claim.idempotencyKey,
+        p_input_hash: claim.inputHash, p_resource: claim.resource, p_amount: claim.amount,
+        p_payment_id: context.paymentId, p_network: context.network, p_state: context.state,
+        p_transaction: context.transaction ?? null,
+      })
+      if (!error) return true
+    } catch { /* Keep the original reservation fail-closed. */ }
+    console.error('x402 recovery journal write failed; operator reconciliation required', { offerId: claim.offerId, paymentId: context.paymentId, state: context.state })
+    return false
+  }
+
   return {
     async reserve({ payer }) {
       try {
@@ -101,6 +118,19 @@ export function createAdmissionGuard(claim: AdmissionClaim, ledger?: Ledger | nu
         const decision = typeof row?.decision === 'string' ? row.decision : ''
         const transaction = typeof row?.payment_transaction === 'string' ? row.payment_transaction : ''
 
+        if (decision === 'already_paid' || decision === 'in_progress') {
+          const recovery = await client.rpc('read_x402_admission_recovery', {
+            p_offer_id: claim.offerId, p_payer: payer, p_idempotency_key: claim.idempotencyKey,
+            p_input_hash: claim.inputHash, p_resource: claim.resource, p_amount: claim.amount,
+          })
+          if (recovery.error) return { kind: 'unavailable' }
+          const entry = (Array.isArray(recovery.data) ? recovery.data[0] : recovery.data) as Record<string, unknown> | null
+          if (entry?.state === 'contradicted') return { kind: 'contradicted' }
+          if ((entry?.state === 'settled' || entry?.state === 'marker_failed') && typeof entry.transaction === 'string' && entry.transaction) {
+            return { kind: 'already_paid', transaction: entry.transaction,
+              ...(typeof entry.payment_id === 'string' && typeof entry.network === 'string' ? { paymentId: entry.payment_id, network: entry.network } : {}) }
+          }
+        }
         if (decision === 'proceed') return { kind: 'proceed' }
         if (decision === 'already_paid' && transaction) return { kind: 'already_paid', transaction }
         // A settled row with no recorded transaction is a torn write. Treating
@@ -116,14 +146,28 @@ export function createAdmissionGuard(claim: AdmissionClaim, ledger?: Ledger | nu
       }
     },
 
+    async pending(context) {
+      // Same journal RPC, but pending is written BEFORE the signed settlement.
+      try {
+        const { error } = await client.rpc('record_x402_admission_recovery', {
+          p_offer_id: claim.offerId, p_payer: context.payer, p_idempotency_key: claim.idempotencyKey,
+          p_input_hash: claim.inputHash, p_resource: claim.resource, p_amount: claim.amount,
+          p_payment_id: context.paymentId, p_network: context.network, p_state: 'pending', p_transaction: null,
+        })
+        return !error
+      } catch { return false }
+    },
+    reconcile: recordRecovery,
+
     async settled({ payer, transaction }) {
       try {
-        await client.rpc('settle_x402_admission', {
+        const { error } = await client.rpc('settle_x402_admission', {
           p_offer_id: claim.offerId,
           p_payer: payer,
           p_idempotency_key: claim.idempotencyKey,
           p_transaction: transaction,
         })
+        if (!error) return true
       } catch {
         // The payment is real whether or not this row records it. Losing the
         // marker means every later retry remains in-progress for operator
@@ -131,6 +175,8 @@ export function createAdmissionGuard(claim: AdmissionClaim, ledger?: Ledger | nu
         // retaking an uncertain claim could charge the payer twice. Throwing here
         // would fail a request the payer has already paid for.
       }
+      console.error('x402 admission marker failed; recover from journal', { offerId: claim.offerId, transaction })
+      return false
     },
 
     async released({ payer }) {

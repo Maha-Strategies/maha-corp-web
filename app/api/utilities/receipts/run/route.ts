@@ -1,3 +1,4 @@
+import { ANTHROPIC_MODEL, ANTHROPIC_MESSAGE_SETTINGS } from '@/lib/anthropic-model'
 import Anthropic from '@anthropic-ai/sdk'
 
 import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
@@ -15,7 +16,7 @@ export const dynamic = 'force-dynamic'
 export const maxDuration = 60
 
 const MAX_BODY_BYTES = 262_144
-const MODEL = 'claude-sonnet-4-6'
+const MODEL = ANTHROPIC_MODEL
 
 function response(body: object, status = 200) {
   return Response.json(body, { status, headers: { 'Cache-Control': 'no-store' } })
@@ -136,7 +137,7 @@ export async function POST(request: Request) {
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
     const textOf = (message: Anthropic.Message) => message.content.map((block) => (block.type === 'text' ? block.text : '')).join('\n')
     const parseImage = async (image: DraftImage): Promise<ParsedReceipt> => {
-      const message = await client.messages.create({
+      const message = await client.messages.create({ ...ANTHROPIC_MESSAGE_SETTINGS,
         model: MODEL, max_tokens: 2_000,
         messages: [{ role: 'user', content: [
           { type: 'image', source: { type: 'base64', media_type: image.contentType, data: image.dataBase64 } },
@@ -146,7 +147,7 @@ export async function POST(request: Request) {
       return parseReceiptResponse(textOf(message))
     }
     const parseText = (text: string): Promise<ParsedReceipt> => runReceiptParse(text, async (prompt) => {
-      const message = await client.messages.create({ model: MODEL, max_tokens: 2_000, messages: [{ role: 'user', content: prompt }] })
+      const message = await client.messages.create({ ...ANTHROPIC_MESSAGE_SETTINGS, model: MODEL, max_tokens: 2_000, messages: [{ role: 'user', content: prompt }] })
       return textOf(message)
     })
 

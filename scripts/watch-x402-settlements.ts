@@ -23,17 +23,16 @@ import { base } from 'viem/chains'
 import { BASE_USDC, MAHA_PAYEE, OPERATOR_WALLETS } from '../lib/x402/discovery-payment-recipe.ts'
 import { payableOffers } from '../lib/x402/offers.ts'
 import { buildSettlementWatch, describeWatch, type Settlement } from '../lib/x402/settlement-watch.ts'
+import { scanRpcLogs } from '../lib/x402/rpc-log-scan.ts'
 
 /**
  * The prices a customer can legitimately pay, taken from the offer catalog so a
  * new offer is counted the day it is published rather than the day someone
  * remembers to widen a constant.
  */
-const PUBLISHED_PRICES = [...new Set(payableOffers().map((offer) => BigInt(offer.amount)))].sort((a, b) => (a < b ? -1 : 1))
+const PUBLISHED_PRICES = [...new Set(payableOffers().flatMap((offer) => [offer.amount, ...(offer.supersededAmounts ?? [])]).map(BigInt))].sort((a, b) => (a < b ? -1 : 1))
 
 const TRANSFER = parseAbiItem('event Transfer(address indexed from, address indexed to, uint256 value)')
-/** Public RPCs reject wide ranges; this is the largest most accept. */
-const CHUNK = BigInt(9_000)
 /** Base produces a block roughly every two seconds. */
 const BLOCKS_PER_DAY = BigInt(43_200)
 
@@ -42,7 +41,7 @@ function argument(flag: string, fallback: string): string {
   return index >= 0 && process.argv[index + 1] ? process.argv[index + 1] : fallback
 }
 
-const days = Math.max(1, Math.min(90, Number(argument('--days', '30')) || 30))
+const days = Math.max(1, Math.min(90, Number(argument('--days', '2')) || 2))
 const reported = argument('--reported', '').split(',').map((value) => value.trim()).filter(Boolean)
 
 const client = createPublicClient({
@@ -50,46 +49,27 @@ const client = createPublicClient({
   transport: http(process.env.BASE_RPC_URL?.trim() || undefined),
 })
 
-/**
- * One chunk, with a bounded retry.
- *
- * A public endpoint refusing a single range should not lose the whole scan and
- * report zero settlements, because zero is indistinguishable from "nobody paid"
- * and that is the reading this tool exists to get right. A range that will not
- * load after three attempts throws rather than being skipped silently.
- */
-async function logsFor(fromBlock: bigint, toBlock: bigint) {
-  let lastError: unknown
-  for (let attempt = 0; attempt < 3; attempt += 1) {
-    try {
-      return await client.getLogs({ address: BASE_USDC as `0x${string}`, event: TRANSFER, args: { to: MAHA_PAYEE as `0x${string}` }, fromBlock, toBlock })
-    } catch (error) {
-      lastError = error
-      await new Promise((resolve) => setTimeout(resolve, 400 * (attempt + 1)))
-    }
-  }
-  throw new Error(`Could not read blocks ${fromBlock}-${toBlock}: ${lastError instanceof Error ? lastError.message : 'unknown'}`)
-}
-
-const latest = await client.getBlockNumber()
+const finalized = await client.getBlock({ blockTag: 'finalized' })
+if (finalized.number === null) throw new Error('finalized_block_unavailable')
+const latest = finalized.number
 const earliest = latest > BLOCKS_PER_DAY * BigInt(days) ? latest - BLOCKS_PER_DAY * BigInt(days) : BigInt(0)
 
 const settlements: Settlement[] = []
-for (let from = earliest; from <= latest; from += CHUNK + BigInt(1)) {
-  const to = from + CHUNK > latest ? latest : from + CHUNK
-  for (const log of await logsFor(from, to)) {
-    settlements.push({
-      payer: log.args.from as string,
-      amountBaseUnits: log.args.value as bigint,
-      blockNumber: log.blockNumber,
-      transactionHash: log.transactionHash,
-    })
-  }
+for await (const log of scanRpcLogs({
+  fromBlock: earliest, toBlock: latest,
+  getLogs: (fromBlock, toBlock) => client.getLogs({ address: BASE_USDC as `0x${string}`, event: TRANSFER, args: { to: MAHA_PAYEE as `0x${string}` }, fromBlock, toBlock }),
+})) {
+  settlements.push({
+    payer: log.args.from as string,
+    amountBaseUnits: log.args.value as bigint,
+    blockNumber: log.blockNumber,
+    transactionHash: log.transactionHash,
+  })
 }
 
 const report = buildSettlementWatch({
   settlements,
-  operatorWallets: [...OPERATOR_WALLETS],
+  operatorWallets: [...OPERATOR_WALLETS, MAHA_PAYEE],
   // Every published price, derived from the catalog rather than pinned. The
   // canary's buyer-policy ceiling is not the definition of a sale.
   expectedAmountsBaseUnits: PUBLISHED_PRICES,
@@ -101,7 +81,7 @@ const report = buildSettlementWatch({
 const usd = (baseUnits: string) => `${formatUnits(BigInt(baseUnits), 6)} USDC`
 
 console.log(`\nx402 settlement watch — last ${days} days (blocks ${earliest}–${latest})\n`)
-console.log(`  external settlements : ${report.totals.externalSettlements}`)
+console.log(`  external matching transfers : ${report.totals.externalSettlements}`)
 console.log(`  external payers      : ${report.totals.externalPayers}`)
 console.log(`  repeat payers        : ${report.totals.repeatExternalPayers}`)
 console.log(`  canary settlements   : ${report.totals.canarySettlements}  (excluded from every figure above)`)
@@ -117,7 +97,7 @@ if (report.notable.length > 0) {
   console.log('\n  notable:')
   for (const event of report.notable) {
     if (event.kind === 'repeat_external_settlement') {
-      console.log(`    REPEAT BUYER — ${event.payer} settled ${event.settlements} times. This is the demand-validation gate.`)
+      console.log(`    REPEAT TRANSFER — ${event.payer} sent ${event.settlements} price-matching transfers. Purchase, delivery and independent demand are unverified.`)
     } else if (event.kind === 'first_external_settlement') {
       console.log(`    NEW EXTERNAL PAYER — ${event.payer} (${event.transactionHash})`)
     } else {

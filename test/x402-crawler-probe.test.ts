@@ -6,6 +6,11 @@ import { celestialHandlers } from '../lib/x402/celestial-route.ts'
 import { microHandlers } from '../lib/x402/micro-route.ts'
 import { buyerBriefHandlers } from '../lib/x402/buyer-brief-route.ts'
 import { briefHash, BUYER_BRIEF_VERSION } from '../lib/x402/buyer-brief-contract.ts'
+import { ebookHandlers } from '../lib/x402/ebook-route.ts'
+import { ebookIdForOffer } from '../lib/x402/ebook-contract.ts'
+import { loadEbook } from '../lib/x402/ebook-delivery.ts'
+import { licensedSectionHandlers } from '../lib/x402/licensed-book-section-route.ts'
+import { LICENSED_SECTION_BOOKS, licensedSectionId } from '../lib/x402/licensed-book-sections.ts'
 import { payableOffers, type X402Offer } from '../lib/x402/offers.ts'
 import type { CelestialProductId } from '../lib/x402/celestial-products.ts'
 import type { MicroProductId } from '../lib/x402/micro-contracts.ts'
@@ -39,6 +44,10 @@ const alwaysChallenge = (async () => ({
 const inert = { record: async () => {}, release: async () => {}, environment: 'test' }
 
 function handlersFor(offer: X402Offer) {
+  const ebook = ebookIdForOffer(offer.id)
+  if (ebook) { const h = ebookHandlers(ebook, { enabled: true, load: loadEbook, resolve: alwaysChallenge, ...inert }); return { POST: h.POST, GET: async (_request: Request) => h.GET() } }
+  const section = LICENSED_SECTION_BOOKS.find(book => licensedSectionId(book) === offer.id)
+  if (section) return licensedSectionHandlers(section, { ...inert, resolve: alwaysChallenge })
   if(offer.id==='cabezon-buyer-brief-pack'){
     const bytes=Buffer.from('synthetic crawler fixture')
     const h=buyerBriefHandlers({enabled:true,notificationsReady:async()=>true,resolve:alwaysChallenge,load:async()=>({version:BUYER_BRIEF_VERSION,filename:'synthetic.tar.gz',sha256:briefHash(bytes),bytes:bytes.length,base64:bytes.toString('base64'),sourceManifestHash:briefHash('synthetic')})})
@@ -101,7 +110,7 @@ test('every payable offer answers an unpaid crawler probe with a payment challen
 test('every self-managed payable offer belongs to a handler family this check drives', () => {
   for (const offer of payableOffers()) {
     if (apiProxyGate(offer.path, 'POST', true) !== 'self_managed') continue
-    assert.ok(offer.id==='cabezon-buyer-brief-pack' || offer.id.startsWith('celestial-') || offer.path.startsWith('/api/v1/micro/'),
+    assert.ok(ebookIdForOffer(offer.id) || LICENSED_SECTION_BOOKS.some(book => licensedSectionId(book) === offer.id) || offer.id==='cabezon-buyer-brief-pack' || offer.id.startsWith('celestial-') || offer.path.startsWith('/api/v1/micro/'),
       `${offer.id}: no handler family is mapped, so its probe behaviour is untested`)
   }
 })

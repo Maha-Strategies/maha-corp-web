@@ -1,6 +1,14 @@
 import { MICRO_IDS, microPath } from './x402/micro-contracts.ts'
+import { EBOOK_IDS, ebookPath } from './x402/ebook-contract.ts'
 
 export const SELF_MANAGED_KEY_ROUTES = new Set([
+  '/api/astrology/chat',
+  '/api/astrology/platform',
+  '/api/astrology/auth',
+  '/api/astrology/mobile',
+  '/api/astrology/mobile-billing-webhook',
+  '/api/astrology/webhook',
+  ...EBOOK_IDS.flatMap(id => [ebookPath(id), ebookPath(id) + '/retrieve']),
   '/api/v1/cabezon/buyer-brief',
   '/api/v1/cabezon/buyer-brief/retrieve',
   '/api/v1/cabezon/buyer-brief/support',
@@ -25,6 +33,8 @@ export const SELF_MANAGED_KEY_ROUTES = new Set([
   // These exact routes own their x402 boundary. Enterprise keys are rejected
   // there before any credit consumption; GET is free contract discovery.
   '/api/v1/calculations/positions',
+  '/api/v1/books/the-maha-principle/section',
+  '/api/v1/books/the-orbital-mind/section',
   '/api/v1/calculations/chart',
   '/api/v1/calculations/vimshottari',
 ])
@@ -73,7 +83,7 @@ export const API_CORS_HEADERS = {
   // Server-side agents do not exercise CORS, so omitting these can pass every
   // settlement test while making the same public endpoint unusable in a web
   // agent or zero-install playground.
-  'Access-Control-Allow-Headers': 'Authorization, Content-Type, PAYMENT-SIGNATURE',
+  'Access-Control-Allow-Headers': 'Authorization, Content-Type, PAYMENT-SIGNATURE, X-Maha-Idempotency-Key, X-Maha-Input-Hash',
   'Access-Control-Expose-Headers': 'PAYMENT-REQUIRED, PAYMENT-RESPONSE, Retry-After, Server-Timing',
   'Access-Control-Max-Age': '86400',
 }

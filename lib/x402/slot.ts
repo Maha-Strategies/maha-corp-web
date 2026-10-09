@@ -1,5 +1,6 @@
 import { releaseSlot } from './concurrency.ts'
 import { MICRO_IDS, microPath } from './micro-contracts.ts'
+import { EBOOK_IDS, ebookPath } from './ebook-contract.ts'
 
 // The capacity slot is acquired in proxy.ts, but proxy.ts cannot release it.
 //
@@ -74,6 +75,7 @@ export function withSlotRelease<Args extends unknown[]>(
  * or by carrying the token through to whatever observes the work finish.
  */
 export const SLOT_RELEASING_ROUTES = [
+  ...EBOOK_IDS.map(id => `POST ${ebookPath(id)}`),
   'POST /api/v1/cabezon/buyer-brief',
   ...MICRO_IDS.map(id => `POST ${microPath(id)}`),
   'POST /api/v1/compress',
@@ -90,6 +92,8 @@ export const SLOT_RELEASING_ROUTES = [
   'POST /api/v1/research/intake',
   'POST /api/v1/books/the-imagined-life/section',
   'POST /api/v1/books/the-volcanic-engine/section',
+  'POST /api/v1/books/the-maha-principle/section',
+  'POST /api/v1/books/the-orbital-mind/section',
   'POST /api/v1/books/the-imagined-life/edition',
   'POST /api/v1/books/the-volcanic-engine/edition',
   // Route-owned payment gate releases the returned slot in finally.

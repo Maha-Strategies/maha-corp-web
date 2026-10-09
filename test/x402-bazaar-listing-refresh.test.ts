@@ -10,7 +10,7 @@ test('phases follow the ladder rather than a pinned list', () => {
   const ranked = rankedOffers()
   assert.equal(ranked.length, payableOffers().length)
   for (let i = 1; i < ranked.length; i += 1) {
-    assert.ok(Number(ranked[i].amount) > Number(ranked[i - 1].amount), 'ranked strictly by price')
+    assert.ok(Number(ranked[i].amount) >= Number(ranked[i - 1].amount), 'ranked by price; two approved ebook bundles share 10 USDC')
   }
   const one = selected(1).map((o) => o.id)
   const two = selected(2).map((o) => o.id)

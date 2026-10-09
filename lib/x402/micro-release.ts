@@ -8,7 +8,11 @@
  * review did not select stay withheld -- publishing those would override a
  * review decision rather than act on one.
  */
-export const RELEASED_MICRO_IDS = [
+import { PLANNING_IDS } from './micro-planning-contracts.ts'
+import { EVIDENCE_CHECK_IDS } from './evidence-check-contracts.ts'
+
+// Keep the prior production opt-in fixed; new products require a separate flag.
+export const EXISTING_RELEASED_MICRO_IDS = [
   'citation-binding-check',
   'revision-lineage-check',
   'audit-export-normalizer',
@@ -28,6 +32,8 @@ export const RELEASED_MICRO_IDS = [
   'celestial-result-compatibility',
   'evidence-frame-compatibility',
 ] as const
+
+export const RELEASED_MICRO_IDS = [...EXISTING_RELEASED_MICRO_IDS, ...PLANNING_IDS, ...EVIDENCE_CHECK_IDS] as const
 
 export function isReleasedMicro(id: string): boolean {
   return (RELEASED_MICRO_IDS as readonly string[]).includes(id)

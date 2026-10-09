@@ -9,7 +9,7 @@ import {
 } from '../lib/corporate-report.ts'
 
 const BASE_INPUT: CorporateReportInput = {
-  organizationName: 'Maha Strategies LLC',
+  organizationName: 'Synthetic Test Organization',
   eventType: 'filing-accepted',
   date: '2025-12-17',
   time: '12:00',
@@ -59,8 +59,9 @@ test('agreeing samples do not authorize house applications over an uncertain int
   assert.equal(report.timeSensitivity.intervalStabilityProven, false)
   assert.equal(report.timeSensitivity.organizationHouseApplicationsAllowed, false)
   assert.deepEqual(report.organizationFramework.houses, [])
-  assert.equal(report.interpretation.status, 'withheld')
-  assert.equal(report.interpretation.refusal?.stage, 'time-uncertainty')
+  assert.equal(report.interpretation.status, 'partial')
+  assert.ok(report.interpretation.exclusions.some(e => e.reasons.includes('factor-uncertain')))
+  assert.equal(report.layers.status, 'report-available')
 })
 
 test('house applications fail closed when a date-only event changes geometry', () => {
@@ -119,12 +120,30 @@ test('corporate output explicitly refuses financial, legal, and guaranteed outco
   assert.match(refusals, /legal formation/i)
 })
 
-test('unreviewed source-bound corporate interpretation is visibly withheld', () => {
+test('self-declared evidence retains calculations without fabricating interpretation approval', () => {
   const report = buildCorporateReport(BASE_INPUT)
   assert.equal(report.interpretation.chartType, 'corporate')
-  assert.equal(report.interpretation.status, 'withheld')
-  assert.equal(report.interpretation.refusal?.stage, 'compose')
-  assert.ok(report.interpretation.refusal?.issues.some((issue) => issue.includes('awaiting-review')))
+  assert.equal(report.interpretation.status, 'partial')
+  assert.equal(report.interpretation.refusal, null)
+  assert.equal(report.interpretation.modules.length, 0)
+  assert.ok(report.layers.calculated.facts.length > 0)
+  assert.ok(report.interpretation.exclusions.every(e => e.reasons.includes('missing-review') && e.reasons.includes('unverified-event')))
+})
+
+test('synthetic minute precision does not pretend certificate authentication', async () => {
+  const { SYNTHETIC_MINUTE_FORMATION } = await import('./fixtures/synthetic-corporate-formation.ts')
+  const report = buildCorporateReport(SYNTHETIC_MINUTE_FORMATION)
+  assert.equal(report.subjectType, 'organization')
+  assert.equal(report.organizationName, 'Synthetic minute-precision organization')
+  assert.equal(report.formationEvent.type, 'certificate-issued')
+  assert.equal(report.jurisdiction.countryCode, 'US')
+  assert.equal(report.formationChart.ascendant.sidereal.sign, 'Sagittarius')
+  assert.equal(report.interpretation.status, 'partial')
+  assert.equal(report.layers.eventReview.status, 'unverified')
+  assert.equal(report.formationEvent.confidence, 'recorded-minute')
+  assert.equal(report.timeSensitivity.organizationHouseApplicationsAllowed, false)
+  assert.equal(report.organizationFramework.houses.length, 0)
+  assert.ok(report.layers.calculated.facts.some(f => f.point === 'Rahu' && f.sign.state === 'proven-stable'))
 })
 
 test('a legal-formation source rule is not generalized to other corporate events', () => {
@@ -133,9 +152,9 @@ test('a legal-formation source rule is not generalized to other corporate events
     eventType: 'first-commercial-transaction',
     locationBasis: 'transaction-location',
   })
-  assert.equal(report.interpretation.status, 'withheld')
-  assert.equal(report.interpretation.refusal?.stage, 'event-scope')
-  assert.match(report.interpretation.refusal?.message ?? '', /not generalized/i)
+  assert.equal(report.interpretation.status, 'partial')
+  assert.equal(report.interpretation.modules.length, 0)
+  assert.ok(report.interpretation.exclusions.every(e => e.reasons.includes('event-scope')))
 })
 
 test('the public corporate form uses organization-event language and shows every required boundary', async () => {

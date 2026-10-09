@@ -14,6 +14,8 @@ import {
 import { CELESTIAL_OFFERS } from './x402/celestial-offers.ts'
 import { MICRO_OPENAPI_PATHS } from './x402/micro-openapi.ts'
 import { BUYER_BRIEF_OPENAPI_PATHS } from './x402/buyer-brief-openapi.ts'
+import { EBOOK_OPENAPI_PATHS } from './x402/ebook-openapi.ts'
+import { LICENSED_SECTION_OPENAPI_PATHS } from './x402/licensed-book-section-openapi.ts'
 import {
   IMAGINED_LIFE_EDITION_OFFER,
   IMAGINED_LIFE_SECTION_OFFER,
@@ -132,7 +134,24 @@ export const openApiDocument = {
     { name: 'Governed Workflow', description: 'Read-only evaluation prototype over a synthetic document-approval workflow. Stateless, metadata-only, and performs no side effect.' },
   ],
   paths: {
+    '/api/health/x402-settlements': {
+      get: {
+        tags: ['Agentic Commerce'], operationId: 'getSettlementLedgerHealth', security: [],
+        summary: 'Read settlement snapshot freshness without triggering a scan',
+        description: 'Read-only operational evidence. Healthy requires a fresh, caught-up saved snapshot. A fallback or stale snapshot returns 503; missing data is not zero transactions.',
+        responses: {
+          '200': { description: 'Fresh, caught-up saved ledger.', content: { 'application/json': { schema: { type: 'object', required: ['status', 'source', 'stale', 'caughtUp', 'observedAt', 'scannedFromBlock', 'scannedToBlock'], properties: {
+            status: { type: 'string', enum: ['healthy', 'degraded'] }, source: { type: 'string', enum: ['scheduled_snapshot', 'bundled_fallback'] },
+            stale: { type: 'boolean' }, caughtUp: { type: 'boolean' }, observedAt: { type: 'string', format: 'date-time' },
+            scannedFromBlock: { type: 'string', pattern: '^[0-9]+$' }, scannedToBlock: { type: 'string', pattern: '^[0-9]+$' },
+          } } } } },
+          '503': { description: 'Snapshot is stale, incomplete or falling back; preserve the last successful observation.' },
+        },
+      },
+    },
     ...BUYER_BRIEF_OPENAPI_PATHS,
+    ...EBOOK_OPENAPI_PATHS,
+    ...LICENSED_SECTION_OPENAPI_PATHS,
     '/api/discovery/carp/catalog': {
       get: {
         tags: ['Agentic Commerce'], operationId: 'getCarpSellerCatalogue',

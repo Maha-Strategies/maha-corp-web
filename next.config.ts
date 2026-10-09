@@ -1,8 +1,28 @@
 import type { NextConfig } from "next";
 import { withSentryConfig } from '@sentry/nextjs'
 import { COLLECTION_HUB_PATHS, COLLECTION_INTERNAL_PATH } from './lib/collection-hub-paths.ts'
+import { existsSync } from 'node:fs'
+import { resolve } from 'node:path'
+import { EBOOK_IDS, ebookArtifacts } from './lib/x402/ebook-contract.ts'
+
+// An enabled book release must never be built without its private assets.
+// CLI uploads include them only in server functions, never public/ or Git.
+if (process.env.X402_CABEZON_EBOOKS_ENABLED === 'true' && process.env.X402_EBOOK_STORAGE !== 'private') {
+  for (const id of EBOOK_IDS) for (const file of ebookArtifacts(id)) {
+    if (!existsSync(resolve('content/paid-ebooks', file.filename))) throw new Error('Enabled ebook release is missing private assets; deployment refused.')
+  }
+}
 
 const nextConfig: NextConfig = {
+  outputFileTracingIncludes: {
+    '/api/v1/books/the-maha-principle/section': ['./content/books/the-maha-principle/*.md'],
+    '/api/v1/books/the-orbital-mind/section': ['./content/books/the-orbital-mind/*.md'],
+    '/api/astrology/platform': ['./lib/dossier/executive-astrology-dossier.typ'],
+    '/api/v1/books/the-maha-principle/epub': ['./content/paid-ebooks/The-Maha-Principle.epub', './content/paid-ebooks/The-Maha-Principle-print.pdf'],
+    '/api/v1/books/the-maha-principle/epub/retrieve': ['./content/paid-ebooks/The-Maha-Principle.epub', './content/paid-ebooks/The-Maha-Principle-print.pdf'],
+    '/api/v1/books/the-orbital-mind/epub': ['./content/paid-ebooks/The-Orbital-Mind.epub', './content/paid-ebooks/The-Orbital-Mind-print.pdf'],
+    '/api/v1/books/the-orbital-mind/epub/retrieve': ['./content/paid-ebooks/The-Orbital-Mind.epub', './content/paid-ebooks/The-Orbital-Mind-print.pdf'],
+  },
   // The customer-owned container uses Next's minimal standalone server. Maha's
   // Vercel builds leave this unset and retain the platform adapter.
   output: process.env.MAHA_STANDALONE_BUILD === 'true' ? 'standalone' : undefined,

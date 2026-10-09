@@ -1,9 +1,11 @@
+import { ANTHROPIC_MESSAGE_SETTINGS } from '@/lib/anthropic-model'
 import Anthropic from '@anthropic-ai/sdk'
 import { Resend } from 'resend'
 
 import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
 import { auditInputHash, MpsAuditError, runMpsAudit } from '@/lib/mps-audit-engine'
 import { mergePreflightAudits, parsePreflightText, PREFLIGHT_MODEL, reportPath, secretMatches, splitPreflightText, type StoredPreflight, validPreflightId } from '@/lib/mps-preflight'
+import { mpsPreflightReportSha256 } from '@/lib/mps-preflight-lifecycle'
 import { reconciliationFailure, reconcileRevenueDelivery } from '@/lib/revenue-reconciliation'
 
 export const runtime = 'nodejs'
@@ -19,7 +21,7 @@ async function loadOrder(orderId: string): Promise<{ order: StoredPreflight | nu
   if (!ledger) return { order: null, unavailable: true }
   const { data, error } = await ledger
     .from('mps_preflight_orders')
-    .select('public_id, access_hash, customer_email, document_label, status, stripe_checkout_session_id, input_hash, report, failure_code, delivery_status, created_at, completed_at')
+    .select('public_id, access_hash, customer_email, document_label, status, stripe_checkout_session_id, input_hash, report, report_sha256, failure_code, delivery_status, acknowledgement_sha256, acknowledged_at, created_at, completed_at')
     .eq('public_id', orderId)
     .maybeSingle()
   return { order: data as StoredPreflight | null, unavailable: Boolean(error) }
@@ -76,7 +78,7 @@ export async function POST(request: Request) {
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
     const chunks = splitPreflightText(text)
     const audits = await Promise.all(chunks.map((chunk) => runMpsAudit(chunk, async (prompt) => {
-      const message = await client.messages.create({
+      const message = await client.messages.create({ ...ANTHROPIC_MESSAGE_SETTINGS,
         model: PREFLIGHT_MODEL,
         max_tokens: 1_800,
         messages: [{ role: 'user', content: prompt }],
@@ -84,9 +86,10 @@ export async function POST(request: Request) {
       return message.content.map((block) => block.type === 'text' ? block.text : '').join('\n')
     })))
     const report = mergePreflightAudits(text, audits)
+    const reportSha256 = mpsPreflightReportSha256(report)
     const { error: completeError } = await ledger
       .from('mps_preflight_orders')
-      .update({ status: 'completed', report, completed_at: new Date().toISOString() })
+      .update({ status: 'completed', report, report_sha256: reportSha256, completed_at: new Date().toISOString() })
       .eq('public_id', orderId)
     if (completeError) throw new Error('ledger_completion_failed')
     const reconciliationError = await reconcileCompletedPreflight(orderId)
@@ -105,7 +108,7 @@ export async function POST(request: Request) {
     } else {
       await ledger.from('mps_preflight_orders').update({ delivery_status: 'not_configured' }).eq('public_id', orderId)
     }
-    return response({ status: 'completed', reportUrl: reportPath(orderId, access), sourceTextStored: false }, 201)
+    return response({ status: 'completed', reportUrl: reportPath(orderId, access), reportSha256, sourceTextStored: false }, 201)
   } catch (error) {
     const failureCode = error instanceof MpsAuditError ? 'invalid_model_response' : 'preflight_unavailable'
     await ledger.from('mps_preflight_orders').update({

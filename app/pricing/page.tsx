@@ -190,7 +190,8 @@ export default function PricingPage() {
         <section className="evidence-section" aria-labelledby="metered-apis">
           <p className="evidence-kicker">Machine-payable APIs</p>
           <h2 id="metered-apis" className="evidence-section-title mt-4">Exact prices for the routes payable now.</h2>
-          <p className="evidence-copy mt-5">These are the only x402 contracts this page presents as payable. The live HTTP 402 challenge remains authoritative before a wallet signs.</p>
+          <p className="evidence-copy mt-5">These are released x402 contracts; deployment configuration may still gate payment. The live HTTP 402 challenge remains authoritative before a wallet signs.</p>
+          <Link href="/developers/x402-products" className="evidence-action evidence-action--primary mt-6">Browse all x402 products, prices and recorded usage ↗</Link>
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             {payableOffers().map((offer) => <article key={offer.id} className="evidence-card flex min-h-full flex-col"><p className="evidence-kicker">x402 · Base · USDC</p><h3 className="evidence-card-title mt-3">{offer.serviceName}</h3><p className="mt-4 font-mono text-2xl font-semibold text-[var(--text-primary)]">{offerPriceUsd(offer)} / call</p><p className="evidence-card-copy mt-4 flex-1">{offer.description}</p><p className="mt-5 break-all font-mono text-[10px] text-[var(--text-muted)]">POST {offer.path}</p></article>)}
           </div>

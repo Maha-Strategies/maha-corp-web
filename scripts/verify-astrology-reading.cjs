@@ -1,0 +1,62 @@
+/* eslint-disable @typescript-eslint/no-require-imports -- Local browser verification. */
+const assert = require('node:assert/strict')
+const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright')
+const base = process.env.ASTROLOGY_LOCAL_URL || 'http://localhost:3138'
+if (!/^http:\/\/(?:localhost|127\.0\.0\.1):\d+$/.test(base)) throw new Error('Local preview only')
+
+;(async () => {
+  const browser = await chromium.launch({ headless: true, channel: 'chrome' })
+  try {
+    const page = await browser.newPage({ viewport: { width: 1440, height: 1100 } })
+    const errors = []
+    page.on('pageerror', error => errors.push(error.message))
+    await page.goto(`${base}/astrology`, { waitUntil: 'networkidle', timeout: 120000 })
+    await page.getByRole('button', { name: 'Reading', exact: true }).click()
+    await page.getByRole('heading', { name: 'Your overall reading.' }).waitFor()
+    await page.getByRole('heading', { name: 'Values & direction', exact: true }).waitFor()
+    assert.equal(await page.getByRole('heading', { name: 'Relationships & connection', exact: true }).count(), 0)
+    assert.equal(await page.getByRole('heading', { name: 'Work & vocation', exact: true }).count(), 0)
+    await page.getByRole('heading', { name: 'One focus for this week' }).waitFor()
+    await page.getByLabel('Choose an area').selectOption('Mercury')
+    await page.getByText('Choose a conversation or decision that feels unclear.', { exact: false }).waitFor()
+    const values = page.locator('article').filter({ has: page.getByRole('heading', { name: 'Values & direction', exact: true }) })
+    await values.getByText('Chart factors & source', { exact: true }).click()
+    await values.getByRole('link', { name: /Bṛhat Jātaka/ }).waitFor()
+    await page.getByRole('button', { name: 'Work', exact: true }).click()
+    await page.getByRole('heading', { name: 'Work & vocation', exact: true }).waitFor()
+    await page.getByRole('button', { name: 'Relationships', exact: true }).click()
+    await page.getByRole('heading', { name: 'Relationships & connection', exact: true }).waitFor()
+    await page.getByRole('button', { name: 'Overall', exact: true }).click()
+    const more = page.getByText('Explore effort, learning, enjoyment & boundaries', { exact: true })
+    await more.click()
+    await page.getByRole('heading', { name: 'Boundaries & commitments', exact: true }).waitFor()
+    const effort = page.locator('article').filter({ has: page.getByRole('heading', { name: 'Effort & initiative', exact: true }) })
+    await effort.getByRole('button', { name: /Use this as my focus/ }).click()
+    assert.equal(await page.getByLabel('Choose an area').inputValue(), 'Mars')
+    await page.getByText('Pick one task that needs movement.', { exact: false }).waitFor()
+    await more.click()
+    await page.screenshot({ path: '/private/tmp/maha-general-reading-desktop.png', fullPage: true })
+    for (const width of [1440, 375]) {
+      await page.setViewportSize({ width, height: 1000 })
+      const layout = await page.evaluate(() => ({ client: document.documentElement.clientWidth, scroll: document.documentElement.scrollWidth }))
+      assert.ok(layout.scroll <= layout.client, JSON.stringify({ width, ...layout }))
+    }
+    await page.screenshot({ path: '/private/tmp/maha-general-reading-mobile.png', fullPage: true })
+    await page.getByLabel('Birth date', { exact: true }).fill('2000-01-01')
+    await page.getByLabel('Birth time', { exact: true }).fill('12:00')
+    await page.getByLabel('Uncertainty (± min)', { exact: true }).fill('1')
+    await page.getByRole('button', { name: 'Explore my chart' }).click()
+    await page.getByRole('heading', { name: 'Your chart, ready to explore.' }).waitFor({ timeout: 60000 })
+    await page.getByText('Birth-time uncertainty: ±1 minutes', { exact: true }).waitFor()
+    assert.equal(await page.getByLabel('Choose an area').count(), 0)
+    assert.equal(await page.getByRole('button', { name: /Use this as my focus/ }).count(), 0)
+    for (const name of ['Values & direction', 'Mind & everyday responses', 'Communication & clarity']) {
+      const card = page.locator('article').filter({ has: page.getByRole('heading', { name, exact: true }) })
+      assert.match(await card.locator('blockquote').innerText(), /Reflection withheld/)
+    }
+    await page.getByRole('button', { name: 'Relationships', exact: true }).click()
+    assert.match(await page.locator('blockquote').innerText(), /Reflection withheld/)
+    assert.deepEqual(errors, [])
+    console.log(JSON.stringify({ browserErrors: errors, checks: 'general default, source trace, optional topics, practical focus, desktop/mobile layout, uncertain-time withholding' }))
+  } finally { await browser.close() }
+})().catch(error => { console.error(error); process.exitCode = 1 })

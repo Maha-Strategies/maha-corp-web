@@ -177,7 +177,7 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
   // Keep the existing job-backed/legacy offer path unchanged.
   const acquire = dependencies.acquire ?? acquireSlot
   const release = dependencies.release ?? releaseSlot
-  const reserveFirst = isMicroProduct(resource.offerId) || ['cabezon-buyer-brief-pack', 'celestial-position-snapshot', 'celestial-chart-evidence', 'celestial-vimshottari-timing'].includes(resource.offerId)
+  const reserveFirst = isMicroProduct(resource.offerId) || resource.offerId.startsWith('book-epub-') || ['cabezon-buyer-brief-pack', 'celestial-position-snapshot', 'celestial-chart-evidence', 'celestial-vimshottari-timing'].includes(resource.offerId)
   let reserved: SlotResult | undefined
   if (reserveFirst) {
     reserved = await acquire(resource.offerId, resource.concurrencyCap, config.slotTtlSeconds)
@@ -202,6 +202,10 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
 
   if (!accepted.ok) {
     if (reserved) await release(resource.offerId, reserved.token ?? '')
+    if (accepted.reason === 'settlement_outcome_unknown') {
+      return { kind: 'refused', status: 503, code: 'settlement_outcome_unknown',
+        message: 'The payment outcome is unknown and the original reservation remains locked. Do not sign or submit another payment; contact the seller for reconciliation.' }
+    }
     // Checked before the reason-string match below, which is a broad pattern
     // that must not be given the chance to read a chain contradiction as a
     // replay. The two call for opposite responses.

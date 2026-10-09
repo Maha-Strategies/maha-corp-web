@@ -3,19 +3,19 @@
  *
  * This is intentionally not a natal report with a company name substituted
  * for a person. It records an organization event, its evidence and uncertainty,
- * then applies a versioned corporate significator policy only when the declared
- * event-time window leaves the relevant whole-sign geometry stable.
+ * then separates calculated factors from reviewed traditional rules and approved
+ * Maha analogies. Stability is assessed per factor; samples alone are not proof.
  */
 
 import { ASTROLOGY_PROHIBITED_USES, getAstrologyTradition } from './astrology-traditions.ts'
 import { digestOf } from './celestial-hypotheses/canonical.ts'
-import { CompilerRefusal, compileReport, type RuleExclusion } from './interpretation-compiler.ts'
+import { compileCorporateLayers, type CorporateLayers, type CorporateTrust } from './corporate-synthesis.ts'
 import { buildLocalFactBundle } from './local-fact-bundle.ts'
 import { computeNatalChart, type NatalChart, type NatalHouse } from './natal-chart.ts'
 import { computePanchanga, type Panchanga } from './panchanga.ts'
 import { ZonedTimeError, zonedWallTimeToUtc, type CivilTimeFold } from './zoned-time.ts'
 
-export const CORPORATE_REPORT_VERSION = 'corporate-mundane-report/0.2' as const
+export const CORPORATE_REPORT_VERSION = 'corporate-mundane-report/0.4' as const
 export const CORPORATE_LOCATION_POLICY_VERSION = 'corporate-event-location-policy/0.1' as const
 export const CORPORATE_SIGNIFICATOR_POLICY_VERSION = 'maha-jyotisha-corporate-foundation/0.1' as const
 
@@ -70,6 +70,7 @@ export interface EvidenceAttachmentDigest {
 }
 
 export interface CorporateReportInput {
+  timingReferenceUtc?: string
   organizationName: string
   eventType: FormationEventType
   date: string
@@ -110,9 +111,9 @@ export interface CorporateInterpretationResult {
   traditionId: 'vedic-jyotisha'
   traditionName: string
   chartType: 'corporate'
-  status: 'compiled' | 'withheld'
-  modules: { ruleId: string; heading: string; paragraph: string; boundary: string; passageIds: string[] }[]
-  exclusions: RuleExclusion[]
+  status: 'compiled' | 'partial' | 'withheld'
+  modules: CorporateLayers['traditional']['modules']
+  exclusions: CorporateLayers['traditional']['exclusions']
   refusal: { stage: string; message: string; issues: string[] } | null
   reportId: string | null
   inputSha256: string | null
@@ -180,6 +181,7 @@ export interface CorporateReport {
     boundary: string
   }
   interpretation: CorporateInterpretationResult
+  layers: CorporateLayers
   factBundleId: string
   inputSha256: string
   refusals: string[]
@@ -305,7 +307,7 @@ function houseDomain(house: NatalHouse): CorporateHouseDomain {
   }
 }
 
-export function buildCorporateReport(input: CorporateReportInput): CorporateReport {
+export function buildCorporateReport(input: CorporateReportInput, trust: CorporateTrust = {}): CorporateReport {
   const organizationName = bounded(input.organizationName, 'Organization name', 160)
   if (!FORMATION_EVENT_TYPES.includes(input.eventType)) throw new CorporateReportInputError('Formation event type is not supported.')
   if (!EVENT_TIME_CONFIDENCE_LEVELS.includes(input.timeConfidence)) throw new CorporateReportInputError('Event-time confidence is not supported.')
@@ -377,31 +379,13 @@ export function buildCorporateReport(input: CorporateReportInput): CorporateRepo
 
   const factBundle = buildLocalFactBundle({ instant: resolved.instant, latitudeDegrees: latitude, longitudeDegrees: longitude, elevationMeters })
   const tradition = getAstrologyTradition('vedic-jyotisha')
-  let interpretation: CorporateInterpretationResult
-  const legalFormationEvent = input.eventType === 'filing-accepted' || input.eventType === 'certificate-issued'
-  try {
-    if (uncertaintyMinutes > 0) {
-      throw new CompilerRefusal('time-uncertainty', 'Interpretation requires a stable condition over the declared time interval. Three samples do not establish that stability.')
-    }
-    if (!legalFormationEvent) {
-      throw new CompilerRefusal(
-        'event-scope',
-        'The current source-bound corporate rule is limited to legal formation. It is not generalized to this event type.',
-        [`${input.eventType} requires its own sourced and reviewed corporate rule before interpretation.`],
-      )
-    }
-    const compiled = compileReport({ factBundle, traditionId: 'vedic-jyotisha', chartType: 'corporate' })
-    interpretation = {
-      traditionId: 'vedic-jyotisha', traditionName: compiled.traditionName, chartType: 'corporate', status: 'compiled',
-      modules: compiled.modules.map((module) => ({ ruleId: module.ruleId, heading: module.heading, paragraph: module.paragraph, boundary: module.boundary, passageIds: module.passageIds })),
-      exclusions: compiled.exclusions, refusal: null, reportId: compiled.reportId, inputSha256: compiled.provenance.inputSha256,
-    }
-  } catch (error) {
-    if (!(error instanceof CompilerRefusal)) throw error
-    interpretation = {
-      traditionId: 'vedic-jyotisha', traditionName: tradition?.name ?? 'Vedic (Jyotiṣa)', chartType: 'corporate', status: 'withheld',
-      modules: [], exclusions: [], refusal: { stage: error.stage, message: error.message, issues: error.issues }, reportId: null, inputSha256: null,
-    }
+  const layers = compileCorporateLayers(input, chart, possibleStart, possibleEnd, trust)
+  const modules = [...layers.traditional.modules, ...layers.mahaReflective.modules]
+  const interpretation: CorporateInterpretationResult = {
+    traditionId: 'vedic-jyotisha', traditionName: tradition?.name ?? 'Vedic (Jyotiṣa)', chartType: 'corporate',
+    status: modules.length ? 'compiled' : 'partial', modules,
+    exclusions: [...layers.traditional.exclusions, ...layers.mahaReflective.exclusions], refusal: null,
+    reportId: `corpinterp_${layers.reportDigest.slice(7, 27)}`, inputSha256: layers.reportDigest,
   }
 
   const normalizedInput = {
@@ -413,6 +397,7 @@ export function buildCorporateReport(input: CorporateReportInput): CorporateRepo
     evidenceKind: input.evidenceKind, evidenceReference, evidenceAttachment: evidenceAttachment ?? null,
     locationPolicyVersion: CORPORATE_LOCATION_POLICY_VERSION,
     significatorPolicyVersion: CORPORATE_SIGNIFICATOR_POLICY_VERSION,
+    interpretationDigest: layers.reportDigest,
   }
   const inputSha256 = digestOf(normalizedInput)
 
@@ -475,9 +460,10 @@ export function buildCorporateReport(input: CorporateReportInput): CorporateRepo
       eventFocusHouses: EVENT_FOCUS_HOUSES[input.eventType],
       houses: allowed ? chart.houses.map(houseDomain) : [],
       significators: SIGNIFICATORS,
-      boundary: 'These organization domains and significators are a versioned Maha synthesis under a named Jyotiṣa convention. They are not classical consensus, empirical findings, or predictions. Empty house applications mean the declared event-time window did not support stable house geometry.',
+      boundary: 'These organization domains and significators are an unreviewed mapping glossary, not approved interpretations, classical consensus, empirical findings, or predictions. Empty legacy house applications mean continuous interval stability was not established; consult the factor-specific calculation layer.',
     },
     interpretation,
+    layers,
     factBundleId: factBundle.bundleId,
     inputSha256,
     refusals: [...CORPORATE_REFUSALS, ...ASTROLOGY_PROHIBITED_USES],

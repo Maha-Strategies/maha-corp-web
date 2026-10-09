@@ -1,3 +1,4 @@
+import { ANTHROPIC_MODEL, ANTHROPIC_MESSAGE_SETTINGS } from '@/lib/anthropic-model'
 import Anthropic from '@anthropic-ai/sdk'
 
 import { jsonResponse } from '@/lib/agent-inquiries'
@@ -53,7 +54,7 @@ export async function POST(request: Request) {
   if (sources.length < 3) return unavailable('The read-only research step did not find three independent, dated sources. Refine the question or add sources manually.', 422)
   try {
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
-    const message = await client.messages.create({ model: process.env.CONTENT_CANDIDATE_ASSISTANT_MODEL ?? 'claude-sonnet-4-6', max_tokens: 2_000, messages: [{ role: 'user', content: contentCandidateAssistantPrompt({ ...input, sources }) }] })
+    const message = await client.messages.create({ ...ANTHROPIC_MESSAGE_SETTINGS, model: ANTHROPIC_MODEL, max_tokens: 2_000, messages: [{ role: 'user', content: contentCandidateAssistantPrompt({ ...input, sources }) }] })
     const responseText = message.content.map((block) => block.type === 'text' ? block.text : '').join('\n').trim()
     const unfenced = responseText.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim()
     const start = unfenced.indexOf('{'); const end = unfenced.lastIndexOf('}')

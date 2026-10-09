@@ -25,6 +25,7 @@ const capabilities = [
 ] as const
 
 const integrations = [
+  { title: 'x402 product catalogue', body: 'Browse categorized machine products, fixed USDC batch prices, schemas and release boundaries.', href: '/developers/x402-products', action: 'Browse products and prices', external: false },
   { title: 'TypeScript SDK', body: 'Zero-dependency client for Node.js, Bun, Deno, browsers, and Edge runtimes.', href: 'https://www.npmjs.com/package/@mahastrategies/sdk', action: 'Install @mahastrategies/sdk', external: true },
   { title: 'Python SDK', body: 'Python client with optional LangChain and CrewAI adapters.', href: 'https://pypi.org/project/maha-sdk/', action: 'Install maha-sdk', external: true },
   { title: 'OpenAPI 3.1', body: 'Machine-readable endpoint, schema, authentication, and error contracts.', href: '/api/docs/openapi', action: 'Open the API contract', external: false },

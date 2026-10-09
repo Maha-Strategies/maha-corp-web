@@ -1,3 +1,4 @@
+import { ANTHROPIC_MESSAGE_SETTINGS } from '../anthropic-model.ts'
 import Anthropic from '@anthropic-ai/sdk'
 
 import { createAgentInquiryLedger } from '../agent-inquiry-ledger.ts'
@@ -46,7 +47,7 @@ export async function executeResearchIntakeSections(options: {
   try {
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
     const audits = await auditResearchIntakeSections(input, async (prompt) => {
-      const message = await client.messages.create({
+      const message = await client.messages.create({ ...ANTHROPIC_MESSAGE_SETTINGS,
         model: RESEARCH_INTAKE_MODEL,
         max_tokens: 1_500,
         messages: [{ role: 'user', content: prompt }],

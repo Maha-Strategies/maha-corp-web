@@ -1,3 +1,5 @@
+import { searchClickCopy, searchClickMetadata } from '@/lib/search-click-pilot'
+import { SearchPilotNextSteps } from '@/components/SearchPilotNextSteps'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
@@ -13,16 +15,16 @@ const ragPaper = {
   authors: ['Patrick Lewis', 'Ethan Perez', 'Aleksandra Piktus', 'Fabio Petroni', 'Vladimir Karpukhin', 'Naman Goyal', 'Heinrich Küttler', 'Mike Lewis', 'Wen-tau Yih', 'Tim Rocktäschel', 'Sebastian Riedel', 'Douwe Kiela'],
 }
 
-export const metadata: Metadata = {
+export const metadata: Metadata = searchClickMetadata(path, {
   title,
   description,
   alternates: { canonical: path },
   openGraph: { type: 'article', url: `https://www.mahastrategies.com${path}`, siteName: 'Maha Strategies', title, description },
   twitter: { card: 'summary_large_image', title, description },
-}
+})
 
 export default function RetrievalAugmentedGenerationLewis2020Page() {
-  return <EvidenceGuide path={path} eyebrow="Paper reference and implementation guide" title={title} summary={description} published="2026-08-09" about={['Retrieval-augmented generation', 'Knowledge-intensive natural language processing', 'Dense Passage Retrieval', 'RAG system design']} citations={[ragPaper]} backHref="/context-compiler" backLabel="Context Compiler">
+  return <EvidenceGuide path={path} eyebrow="Paper reference and implementation guide" title={searchClickCopy(path)?.title ?? title} summary={searchClickCopy(path)?.description ?? description} published="2026-08-09" about={['Retrieval-augmented generation', 'Knowledge-intensive natural language processing', 'Dense Passage Retrieval', 'RAG system design']} citations={[ragPaper]} backHref="/context-compiler" backLabel="Context Compiler">
     <section className="evidence-section evidence-inset">
       <h2 className="evidence-card-title">Key takeaway</h2>
       <p className="evidence-copy mt-4">Lewis et al. introduced retrieval-augmented generation (RAG) as a way to pair a pretrained sequence-to-sequence model with a large, external collection of text. Instead of relying only on information encoded in model parameters, the system retrieves relevant passages and conditions generation on them.</p>
@@ -61,5 +63,6 @@ export default function RetrievalAugmentedGenerationLewis2020Page() {
       <p className="evidence-copy mt-4">RAG quality depends on what reaches the model. Maha&apos;s public benchmark tests whether an extractive context-selection process retains independently annotated evidence under a fixed token budget; it does not score answer truthfulness or claim to reproduce the paper&apos;s results.</p>
       <div className="mt-6 flex flex-wrap gap-4"><Link href="/guides/preserve-citations-reducing-llm-context" className="text-[var(--text-primary)] underline underline-offset-4">Preserve citations in RAG context</Link><Link href="/guides/context-compression-vs-conversation-summarization" className="text-[var(--text-primary)] underline underline-offset-4">Choose compression or summarization</Link><Link href="/benchmarks/context-retention" className="text-[var(--text-primary)] underline underline-offset-4">Review the context-retention benchmark</Link></div>
     </section>
+    <SearchPilotNextSteps path={path} />
   </EvidenceGuide>
 }

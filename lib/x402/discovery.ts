@@ -155,7 +155,7 @@ export async function discoveryExtensionsFor(
     input: offer.discovery.input,
     inputSchema: compactSchema(offer.discovery.inputSchema),
     output: {
-      example: compactExample(offer.discovery.output) as Record<string, unknown>,
+      example: compactExample(offer.discovery.output, 0, offer.discovery.outputSchema) as Record<string, unknown>,
       schema: compactSchema(offer.discovery.outputSchema),
     },
   })

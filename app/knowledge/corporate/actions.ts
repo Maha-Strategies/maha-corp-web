@@ -1,6 +1,7 @@
 'use server'
 
 import { createHash } from 'node:crypto'
+import { createCorporateReviewStore, readCorporateTrust } from '@/lib/corporate-review-service'
 
 import {
   CorporateReportInputError,
@@ -17,14 +18,14 @@ export type CorporateActionState =
   | { status: 'ok'; report: CorporateReport }
   | { status: 'error'; message: string }
 
-const MAX_EVIDENCE_BYTES = 5 * 1024 * 1024
+const MAX_EVIDENCE_BYTES = 500_000
 
 export async function computeCorporateReport(_previous: CorporateActionState, formData: FormData): Promise<CorporateActionState> {
   try {
     const fileValue = formData.get('evidenceFile')
     let evidenceAttachment
     if (fileValue instanceof File && fileValue.size > 0) {
-      if (fileValue.size > MAX_EVIDENCE_BYTES) throw new CorporateReportInputError('Evidence attachment must be 5 MB or smaller.')
+      if (fileValue.size > MAX_EVIDENCE_BYTES) throw new CorporateReportInputError('Evidence attachment must be 500 KB or smaller.')
       const bytes = Buffer.from(await fileValue.arrayBuffer())
       evidenceAttachment = {
         filename: fileValue.name.replace(/[\u0000-\u001f\u007f]/g, '').slice(0, 180) || 'evidence-file',
@@ -34,7 +35,8 @@ export async function computeCorporateReport(_previous: CorporateActionState, fo
       }
     }
 
-    const report = buildCorporateReport({
+    const input = {
+      timingReferenceUtc: formData.get('timingDate') ? `${String(formData.get('timingDate'))}T12:00:00Z` : undefined,
       organizationName: String(formData.get('organizationName') ?? ''),
       eventType: String(formData.get('eventType') ?? '') as FormationEventType,
       date: String(formData.get('date') ?? ''),
@@ -55,7 +57,14 @@ export async function computeCorporateReport(_previous: CorporateActionState, fo
       evidenceKind: String(formData.get('evidenceKind') ?? '') as CorporateEvidenceKind,
       evidenceReference: String(formData.get('evidenceReference') ?? ''),
       evidenceAttachment,
-    })
+    }
+    // Validate before storage access. Review objects never come from FormData.
+    const baseline = buildCorporateReport(input)
+    const privateGrant = String(formData.get('privateVerificationReceipt') ?? '')
+    const store = process.env.CORPORATE_REVIEWS_ENABLED === 'true' ? createCorporateReviewStore() : null
+    if (privateGrant && !store) return { status: 'error', message: 'Private verification is not configured. Remove the receipt to get an unverified calculation report.' }
+    const trust = await readCorporateTrust(input, privateGrant, store)
+    const report = store ? buildCorporateReport(input, trust) : baseline
     return { status: 'ok', report }
   } catch (error) {
     if (error instanceof CorporateReportInputError) return { status: 'error', message: error.message }

@@ -1,4 +1,5 @@
 import { MAX_AUDIT_ATTEMPTS, MAX_AUDIT_PASSAGE_CHARS, MPS_AUDIT_MODEL } from './mps-audit-job.ts'
+import { ANTHROPIC_PRICING } from '../anthropic-model.ts'
 import { MPS_AUTONOMOUS_AUDIT_OFFER, USDC_DECIMALS } from './offers.ts'
 
 // Worst-case variable cost of one paid MPS audit, computed rather than asserted.
@@ -19,8 +20,7 @@ import { MPS_AUTONOMOUS_AUDIT_OFFER, USDC_DECIMALS } from './offers.ts'
 /** Anthropic list price for the audit model, USD per million tokens. */
 export const MODEL_PRICING = {
   model: MPS_AUDIT_MODEL,
-  inputPerMillionUsd: 3,
-  outputPerMillionUsd: 15,
+  ...ANTHROPIC_PRICING,
 } as const
 
 /** The route's `max_tokens`. An audit cannot bill more output than this. */
@@ -41,11 +41,13 @@ export const MAX_OUTPUT_TOKENS = 1_500
  * conservative case is what it must survive, and it is the one the promotion
  * gate is judged against.
  */
-export const EXPECTED_TOKENS_PER_CHAR = 0.5
-export const CONSERVATIVE_TOKENS_PER_CHAR = 1.0
+// Migration allowance: Sonnet 5.5's tokenizer uses approximately 30% more
+// tokens than 4.6. These remain estimates, not provider-token-count ceilings.
+export const EXPECTED_TOKENS_PER_CHAR = 0.65
+export const CONSERVATIVE_TOKENS_PER_CHAR = 1.3
 
-/** The audit prompt template, measured once at MAX. Rounded up. */
-export const PROMPT_TEMPLATE_TOKENS = 700
+/** Previous 700-token framing estimate plus a 30% migration allowance. */
+export const PROMPT_TEMPLATE_TOKENS = 910
 
 export type CostBreakdown = {
   label: string

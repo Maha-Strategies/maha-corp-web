@@ -3,6 +3,7 @@ import test from 'node:test'
 import { execFileSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
+import ts from 'typescript'
 
 import { UPLIFT_DIMENSIONS, compileUplift, citableSources, type LegacyPageInput } from '../lib/legacy-knowledge-uplift.ts'
 import { upliftFor, upliftedRoutes } from '../lib/legacy-uplift-runtime.ts'
@@ -156,18 +157,40 @@ test('every rendered item traces to a dimension in the contract', () => {
 
 /* -------------------------------------------------------------- boundaries --- */
 
+function canonicalTargets(source: string): string[] {
+  const file = ts.createSourceFile('page.tsx', source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX)
+  const targets: string[] = []
+  function visit(node: ts.Node) {
+    if (ts.isPropertyAssignment(node) && node.name.getText(file) === 'canonical') targets.push(node.initializer.getText(file))
+    ts.forEachChild(node, visit)
+  }
+  visit(file)
+  return targets
+}
+
+test('canonical tripwire measures targets, not adjacent title edits', () => {
+  const before = "return { title: 'Before', alternates: { canonical: path } }"
+  assert.deepEqual(canonicalTargets(before), canonicalTargets("return decorate(path, { title: 'After', alternates: { canonical: path } })"))
+  assert.notDeepEqual(canonicalTargets(before), canonicalTargets("return { alternates: { canonical: '/wrong' } }"))
+  assert.notDeepEqual(canonicalTargets(before), canonicalTargets('return {}'))
+})
+
 test('no existing route or canonical URL changed', () => {
   // New, separately reviewed route files are outside this legacy-uplift invariant.
   // Restrict the comparison to modified files so a newly added route cannot be
   // mistaken for a mutation of one of the 167 legacy routes audited here.
   const diff = execFileSync('git', ['diff', '--diff-filter=M', '--unified=0', 'origin/main', '--', 'app/'], { cwd: ROOT, encoding: 'utf8' })
+  const checkedCanonicals = new Set<string>()
   let changedFile = ''
   for (const line of diff.split('\n')) {
     if (line.startsWith('+++ b/')) changedFile = line.slice(6)
     if (!/^[+-][^+-]/.test(line)) continue
     const isKdpTakedown = changedFile.startsWith('app/books/the-maha-principle/')
-    assert.ok(isKdpTakedown || !/alternates:\s*\{\s*canonical/.test(line) || /UpliftSections|upliftRoute|NSGOODS_PREFLIGHT_V3_EVIDENCE_PATH|TAMIL_CLASSICAL_PATH|MAYON_KNOWLEDGE_PATH/.test(line),
-      `canonical must not change: ${line.slice(0, 80)}`)
+    if (!isKdpTakedown && !checkedCanonicals.has(changedFile)) {
+      const before = execFileSync('git', ['show', `origin/main:${changedFile}`], { cwd: ROOT, encoding: 'utf8' })
+      assert.deepEqual(canonicalTargets(readFileSync(resolve(ROOT, changedFile), 'utf8')), canonicalTargets(before), `canonical targets must not change: ${changedFile}`)
+      checkedCanonicals.add(changedFile)
+    }
     assert.ok(isKdpTakedown || !/generateStaticParams|dynamicParams =/.test(line) || /UpliftSections|upliftRoute|TAMIL_CLASSICAL_TOPICS|MAYON_TOPICS/.test(line),
       `route generation must not change: ${line.slice(0, 80)}`)
   }

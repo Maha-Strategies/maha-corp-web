@@ -513,7 +513,10 @@ function offerEntry(offer: X402Offer): Record<string, unknown> {
         note: 'Use the per-offer requiredHeaders instructions for the input hash. Preserve the key and input for retries.',
       },
     } : {}),
-    responseFields: Object.keys(offer.discovery.outputSchema.properties as Record<string, unknown> | undefined ?? {}),
+    responseFields: [...new Set([
+      ...Object.keys(offer.discovery.outputSchema.properties as Record<string, unknown> | undefined ?? {}),
+      ...((offer.discovery.outputSchema.oneOf as Array<{ properties?: Record<string, unknown> }> | undefined) ?? []).flatMap(variant => Object.keys(variant.properties ?? {})),
+    ])],
     producedEvidence: fit?.producedEvidence ?? [],
     fitConditions: fit?.fit ?? [],
     nonFitConditions: fit?.nonFit ?? [],

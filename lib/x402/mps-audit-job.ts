@@ -1,3 +1,4 @@
+import { ANTHROPIC_MODEL } from '../anthropic-model.ts'
 import { createHash, createHmac, randomBytes, randomUUID, timingSafeEqual } from 'node:crypto'
 
 import type { MpsAuditResult } from '../mps-audit-engine.ts'
@@ -12,7 +13,7 @@ import { MPS_AUTONOMOUS_AUDIT_OFFER } from './offers.ts'
 // a token comparison that leaks timing, an id that is treated as a capability,
 // or a resume path that lets one payment fund unlimited model calls.
 
-export const MPS_AUDIT_MODEL = 'claude-sonnet-4-6'
+export const MPS_AUDIT_MODEL = ANTHROPIC_MODEL
 
 /** Matches the engine's own cap; the model never sees more than this. */
 export const MAX_AUDIT_PASSAGE_CHARS = 6_000

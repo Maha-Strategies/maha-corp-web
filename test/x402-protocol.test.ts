@@ -53,6 +53,23 @@ function guard_(seen: Set<string> = new Set()): ReplayGuard {
   }
 }
 
+test('a settlement-history transport error does not turn a paid response into a server failure', async () => {
+  const result = await acceptPayment({ payment: payment(), requirements: [requirement()], facilitator: facilitator(),
+    replayGuard: { claim: async () => 'claimed', recordSettlement: async () => { throw new Error('synthetic ledger transport failure') } },
+  })
+  assert.equal(result.ok, true)
+})
+
+test('an unavailable chain reader is recorded as indeterminate without requesting another payment', async () => {
+  let confirmation: unknown
+  const result = await acceptPayment({ payment: payment(), requirements: [requirement()], facilitator: facilitator(),
+    replayGuard: { claim: async () => 'claimed', recordSettlement: async (record) => { confirmation = record.confirmation } },
+    confirmOnChain: async () => { throw new Error('synthetic node failure') },
+  })
+  assert.equal(result.ok, true)
+  assert.deepEqual(confirmation, { status: 'indeterminate', reason: 'chain_reader_unavailable' })
+})
+
 test('a challenge states the terms an agent needs to pay', () => {
   const body = buildPaymentRequired([requirement()], resource, 'Payment required for this audit.')
   assert.equal(body.x402Version, 2)

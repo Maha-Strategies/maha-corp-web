@@ -251,6 +251,7 @@ export async function currentHostSitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/tools/evidence-preflight`, lastModified: new Date('2026-08-30') },
     { url: `${baseUrl}/navigator`, lastModified: new Date('2026-08-09') },
     { url: `${baseUrl}/developers`, lastModified: new Date('2026-08-06') },
+    { url: `${baseUrl}/developers/x402-products`, lastModified: new Date('2026-10-09') },
     { url: `${baseUrl}/pricing`, lastModified: new Date('2026-08-23') },
     { url: `${baseUrl}/context-control`, lastModified: new Date('2026-09-09') },
     { url: `${baseUrl}/terms`, lastModified: new Date('2026-08-27') },

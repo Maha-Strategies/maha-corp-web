@@ -4,6 +4,7 @@ import { parseResearchIntakeInput, researchIntakeInputHash } from '../research-i
 import type { AdmissionClaim } from './admission.ts'
 import type { X402Offer } from './offers.ts'
 import { BUYER_BRIEF_ID, briefOrderHash, parseBriefOrder } from './buyer-brief-contract.ts'
+import { ebookIdForOffer, ebookOrderHash, parseEbookOrder } from './ebook-contract.ts'
 
 export type AdmissionBodyDecision =
   | { ok: true }
@@ -24,7 +25,8 @@ export async function validateAdmissionBody(
   offer: X402Offer,
   claim: AdmissionClaim,
 ): Promise<AdmissionBodyDecision> {
-  if (!['mps-autonomous-audit', 'research-intake-evidence-pack', BUYER_BRIEF_ID].includes(offer.id)) return { ok: true }
+  const ebookId = ebookIdForOffer(offer.id)
+  if (!ebookId && !['mps-autonomous-audit', 'research-intake-evidence-pack', BUYER_BRIEF_ID].includes(offer.id)) return { ok: true }
 
   if (!request.headers.get('content-type')?.toLowerCase().startsWith('application/json')) {
     return { ok: false, status: 415, code: 'unsupported_media_type', message: 'Content-Type must be application/json. No payment was taken.' }
@@ -43,6 +45,13 @@ export async function validateAdmissionBody(
 
   try {
     const parsed = JSON.parse(raw)
+    if (ebookId) {
+      const order = parseEbookOrder(ebookId, parsed)
+      if (order.clientRequestId !== claim.idempotencyKey || ebookOrderHash(ebookId, order) !== claim.inputHash) return {
+        ok: false, status: 409, code: 'order_binding_mismatch', message: 'Ebook order does not match admission headers. No payment was taken.',
+      }
+      return { ok: true }
+    }
     if (offer.id === BUYER_BRIEF_ID) {
       const order = parseBriefOrder(parsed)
       if (order.clientRequestId !== claim.idempotencyKey || briefOrderHash(order) !== claim.inputHash) return {ok:false,status:409,code:'order_binding_mismatch',message:'Order does not match admission headers. No payment was taken.'}

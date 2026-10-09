@@ -1,3 +1,5 @@
+import { SearchPilotNextSteps } from '@/components/SearchPilotNextSteps'
+import { searchClickCopy, searchClickMetadata } from '@/lib/search-click-pilot'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
@@ -18,7 +20,7 @@ import { RELIGION_KNOWLEDGE_PATH } from '@/lib/religion-knowledge'
 import { TAMIL_CLASSICAL_PATH } from '@/lib/tamil-classical-traditions'
 import { TAMIL_SOURCE_ATLAS_PATH } from '@/lib/tamil-source-atlas'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = searchClickMetadata(MAYON_KNOWLEDGE_PATH, {
   metadataBase: new URL(SITE_URL),
   title: 'Māyōṉ (Mayon): Early Tamil Sources and Connections | Maha Strategies',
   description: 'A source-bound guide to Māyōṉ in early Tamil literature, the mullai landscape, Tirumāl, Vishnu, Krishna, Balarama, and the limits of each identification.',
@@ -30,7 +32,7 @@ export const metadata: Metadata = {
     url: `${SITE_URL}${MAYON_KNOWLEDGE_PATH}`,
     siteName: 'Maha Strategies',
   },
-}
+})
 
 const relationshipLabels = {
   'name-used-in-the-same-cultic-complex': 'Cultic-name relation',
@@ -74,7 +76,7 @@ export default function MayonPage() {
 
         <header className="mt-10 border-b border-zinc-800 pb-10">
           <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-teal-300">Early Tamil source dossier · {MAYON_KNOWLEDGE_VERSION}</p>
-          <h1 className="mt-6 max-w-5xl text-4xl font-semibold tracking-tight text-white sm:text-6xl">Māyōṉ: begin with the Tamil texts, then type every connection.</h1>
+          <h1 className="mt-6 max-w-5xl text-4xl font-semibold tracking-tight text-white sm:text-6xl">{searchClickCopy(MAYON_KNOWLEDGE_PATH)?.title ?? 'Māyōṉ: begin with the Tamil texts, then type every connection.'}</h1>
           <p className="mt-6 max-w-3xl font-serif text-lg leading-8 text-zinc-300">Māyōṉ is an early Tamil divine name directly attested in the Tolkāppiyam’s landscape system. Later and denser Tirumāl material shares names, attributes, and narratives with Vishnu, Krishna, Narayana, and Balarama traditions—but those relations must be dated and sourced rather than collapsed into a timeless equation.</p>
         </header>
 
@@ -181,6 +183,6 @@ export default function MayonPage() {
 
         <section className="mt-16 border-t border-zinc-800 pt-9"><Link href={RELIGION_KNOWLEDGE_PATH} className="font-mono text-[10px] uppercase tracking-widest text-teal-300 hover:text-white">Return to religion methodology →</Link></section>
       </div>
-    </main>
+    <SearchPilotNextSteps path={MAYON_KNOWLEDGE_PATH} /></main>
   )
 }

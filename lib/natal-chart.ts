@@ -12,7 +12,7 @@ import { SiderealTime } from 'astronomy-engine'
 import {
   CLASSICAL_BODIES, MODERN_BODIES, classicalEclipticLongitude, modernEclipticLongitude,
   type ClassicalBody, type ModernBody,
-} from './local-fact-bundle.ts'
+} from './ephemeris.ts'
 import { NAKSHATRA_NAMES, lahiriAyanamsa } from './panchanga.ts'
 
 export const NATAL_CHART_VERSION = 'natal-chart/0.3' as const

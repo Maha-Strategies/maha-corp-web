@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 
 import { MAHA_SITE_URL } from '@/lib/entity'
 import { connection } from 'next/server'
@@ -70,6 +71,7 @@ export default async function SettlementLedgerPage() {
       <SettlementAutoRefresh />
       <p className="evidence-kicker">Base Mainnet · HTTP 402 v2</p>
       <h1 className="evidence-section-title mt-3 text-3xl">Autonomous Settlement &amp; Verification Ledger</h1>
+      <p className="mt-4"><Link href="/developers/x402-products" className="evidence-link">Browse all x402 products by category and price ↗</Link></p>
       <p className="mt-4 max-w-3xl text-[var(--text-secondary)]">
         The rows below show USDC transfers into the Maha payee; summary figures count transfers matching published prices, plus our own test payments identified by their canary receipts. The rows are
         the record; the figures above them are computed from the rows, so nothing here can be asserted without also
