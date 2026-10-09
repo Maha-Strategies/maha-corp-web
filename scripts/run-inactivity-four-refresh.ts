@@ -13,6 +13,8 @@ import { canonicalJson } from '../lib/evidence-dossier/digest.ts'
 import { auditInputHash, parseMpsAuditResponse } from '../lib/mps-audit-engine.ts'
 
 export const CONFIRMATION = 'PUBLISHER_FUNDED_INACTIVITY_FOUR_ONCE_MAX_0_93_USDC_20261009'
+export const CONTINUATION_CONFIRMATION = 'RECONCILED_REMAINING_THREE_ONCE_MAX_0_68_USDC_20261009'
+export const PRIOR_MPS_TRANSACTION = '0x39e02e046c769edaf9bec80e81428218b4a05a543b5561d3129522f4854d9549'
 export const TARGETS = [
   { id: 'mps-autonomous-audit', path: '/api/v1/mps/audit', amount: '250000' },
   { id: 'governed-context-verification-pack', path: '/api/v1/context/governed-verification', amount: '500000' },
@@ -21,14 +23,14 @@ export const TARGETS = [
 ] as const
 type Target = typeof TARGETS[number]
 const ORIGIN = 'https://www.mahastrategies.com'
-const CAP = 930000n
+const CAP = BigInt(930000)
 const SYNTHETIC_PASSAGE = 'Soil microbial diversity has declined sharply across intensively farmed land. A 2019 meta-analysis attributed most of the loss to tillage frequency. Studies show that cover cropping restores diversity within three seasons, though the mechanism remains an open question.'
 type Step = { offerId: string; resource: string; amount: string; state: string; lastCalledAt?: string;
   transaction?: string; blockNumber?: number; responseSha256?: string; deliveryVerified?: boolean; auditId?: string }
 
-export function assertAuthorization(confirmation: string | undefined, attempt: string | undefined) {
-  if (confirmation !== CONFIRMATION || attempt !== '1') throw new Error('exact_confirmation_and_first_attempt_required')
-  if (TARGETS.reduce((sum, t) => sum + BigInt(t.amount), 0n) !== CAP) throw new Error('approved_cohort_changed')
+export function assertAuthorization(confirmation: string | undefined, attempt: string | undefined, remainingThree = false) {
+  if (confirmation !== (remainingThree ? CONTINUATION_CONFIRMATION : CONFIRMATION) || attempt !== '1') throw new Error('exact_confirmation_and_first_attempt_required')
+  if (TARGETS.reduce((sum, t) => sum + BigInt(t.amount), BigInt(0)) !== CAP) throw new Error('approved_cohort_changed')
 }
 export function assertTerms(challenge: PaymentChallenge, target: Target) {
   const t = challenge.accepts?.[0]
@@ -81,15 +83,24 @@ async function merchant() {
 }
 async function run() {
   const pay = process.argv.slice(2).includes('--pay')
-  if (process.argv.slice(2).some(a => a !== '--pay')) throw new Error('unsupported_argument')
-  assertAuthorization(process.env.INACTIVITY_FOUR_CONFIRMATION, process.env.GITHUB_RUN_ATTEMPT)
+  const remainingThree = process.argv.slice(2).includes('--remaining-three')
+  if (process.argv.slice(2).some(a => a !== '--pay' && a !== '--remaining-three')) throw new Error('unsupported_argument')
+  assertAuthorization(process.env.INACTIVITY_FOUR_CONFIRMATION, process.env.GITHUB_RUN_ATTEMPT, remainingThree)
+  const rpcUrl = process.env.BASE_RPC_URL || 'https://mainnet.base.org'
+  // The first run settled MPS, then stopped at an unavailable receipt RPC.
+  // Reconcile that exact transfer before exposing the key. Never buy MPS again.
+  const prior = remainingThree ? await confirmSettlement({ rpcUrl, caip2Network: BASE_NETWORK,
+    transaction: PRIOR_MPS_TRANSACTION, asset: BASE_USDC, payer: CANARY_BUYER, payTo: MAHA_PAYEE,
+    minAmount: TARGETS[0].amount, attempts: 3, requestTimeoutMs: 10000 }) : null
+  if (remainingThree && (prior?.status !== 'confirmed' || prior.amount !== TARGETS[0].amount)) throw new Error('prior_payment_reconciliation_required')
   const runId = process.env.GITHUB_RUN_ID ?? ''
   const output = process.env.INACTIVITY_FOUR_OUTPUT_PATH
   if (!output) throw new Error('evidence_path_required')
   const listing = await merchant()
   const evidence = { classification: 'publisher-funded-listing-refresh', customerDemand: false, organicDemand: false,
     runId, startedAt: new Date().toISOString(), maximumAuthorizedBaseUnits: String(CAP), confirmedBaseUnits: '0',
-    signedBaseUnits: '0', state: 'preflight', buyer: CANARY_BUYER, payee: MAHA_PAYEE, steps: [] as Step[] }
+    signedBaseUnits: remainingThree ? TARGETS[0].amount : '0', state: 'preflight', buyer: CANARY_BUYER, payee: MAHA_PAYEE, steps: [] as Step[] }
+  if (prior?.status === 'confirmed') evidence.confirmedBaseUnits = prior.amount
   // An existing artifact may represent an uncertain payment. Never overwrite it.
   await writeFile(output, JSON.stringify(evidence, null, 2), { flag: 'wx', mode: 0o600 })
   const save = () => writeFile(output, JSON.stringify(evidence, null, 2) + '\n', { mode: 0o600 })
@@ -101,6 +112,12 @@ async function run() {
     const step: Step = { offerId: target.id, resource: ORIGIN + target.path, amount: target.amount,
       lastCalledAt: row!.quality!.lastCalledAt, state: 'not_attempted' }
     evidence.steps.push(step)
+    if (remainingThree && target.id === 'mps-autonomous-audit') {
+      step.state = 'prior_settlement_reconciled_no_repayment'
+      step.transaction = PRIOR_MPS_TRANSACTION
+      if (prior?.status === 'confirmed') step.blockNumber = prior.blockNumber
+      continue
+    }
     if (Date.now() - last < 23 * 86400000) { step.state = 'skipped_recent_settlement'; continue }
     const req = requestFor(target, runId)
     const r = await fetch(step.resource, { ...req, signal: AbortSignal.timeout(20000) })
@@ -124,11 +141,10 @@ async function run() {
   if (!key || !/^0x[0-9a-f]{64}$/i.test(key)) throw new Error('dedicated_buyer_unavailable')
   const account = privateKeyToAccount(key as `0x${string}`)
   if (account.address.toLowerCase() !== CANARY_BUYER.toLowerCase()) throw new Error('unexpected_buyer')
-  const rpcUrl = process.env.BASE_RPC_URL || 'https://base-rpc.publicnode.com'
   const publicClient = createPublicClient({ chain: base, transport: http(rpcUrl) })
   const balance = await publicClient.readContract({ address: BASE_USDC as `0x${string}`, abi: parseAbi(['function balanceOf(address) view returns (uint256)']), functionName: 'balanceOf', args: [account.address] })
-  const needed = pending.reduce((sum, t) => sum + BigInt(t.amount), 0n)
-  if (balance < needed || needed > CAP) throw new Error('insufficient_balance_or_cap_exceeded')
+  const needed = pending.reduce((sum, t) => sum + BigInt(t.amount), BigInt(0))
+  if (balance < needed || needed + BigInt(evidence.signedBaseUnits) > CAP) throw new Error('insufficient_balance_or_cap_exceeded')
   try {
     for (const target of pending) {
       const step = evidence.steps.find(s => s.offerId === target.id)!
@@ -154,7 +170,7 @@ async function run() {
       step.state = 'receipt_received_delivery_unverified'
       await save()
       const chain = await confirmSettlement({ rpcUrl, caip2Network: BASE_NETWORK, transaction: step.transaction,
-        asset: BASE_USDC, payer: account.address, payTo: MAHA_PAYEE, minAmount: target.amount, attempts: 12, retryDelayMs: 2500, requestTimeoutMs: 4000 })
+        asset: BASE_USDC, payer: account.address, payTo: MAHA_PAYEE, minAmount: target.amount, attempts: 6, retryDelayMs: 2500, requestTimeoutMs: 10000 })
       if (chain.status !== 'confirmed' || chain.amount !== target.amount) throw new Error('exact_settlement_unconfirmed')
       step.blockNumber = chain.blockNumber
       evidence.confirmedBaseUnits = String(BigInt(evidence.confirmedBaseUnits) + BigInt(target.amount))
@@ -174,12 +190,12 @@ async function run() {
     evidence.state = 'paid_once_delivery_verified_bazaar_refresh_pending'
     const current = await merchant()
     for (const step of evidence.steps) {
-      if (!step.transaction) continue
+      if (!step.transaction || step.state === 'prior_settlement_reconciled_no_repayment') continue
       const row = current.find(r => r.resource === step.resource)
       if (Date.parse(row?.quality?.lastCalledAt ?? '') >= Date.parse(evidence.startedAt) - 5000
         && row?.accepts?.some(a => a.amount === step.amount)) step.state = 'settled_delivery_verified_bazaar_refreshed'
     }
-    if (evidence.steps.every(s => s.state === 'skipped_recent_settlement' || s.state === 'settled_delivery_verified_bazaar_refreshed')) evidence.state = 'complete'
+    if (evidence.steps.every(s => s.state === 'skipped_recent_settlement' || s.state === 'prior_settlement_reconciled_no_repayment' || s.state === 'settled_delivery_verified_bazaar_refreshed')) evidence.state = 'complete'
     await save()
     console.log(JSON.stringify(evidence))
   } catch (error) {

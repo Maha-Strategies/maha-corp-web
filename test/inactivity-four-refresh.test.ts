@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { CONFIRMATION, TARGETS, assertAuthorization, assertTerms, requestFor, verifyDelivery } from '../scripts/run-inactivity-four-refresh.ts'
+import { CONFIRMATION, CONTINUATION_CONFIRMATION, PRIOR_MPS_TRANSACTION, TARGETS, assertAuthorization, assertTerms, requestFor, verifyDelivery } from '../scripts/run-inactivity-four-refresh.ts'
 import { BASE_NETWORK, BASE_USDC, MAHA_PAYEE } from '../lib/x402/discovery-payment-recipe.ts'
 import { buildGovernedContextVerificationPack } from '../lib/x402/context-product-family.ts'
 import { buildCelestialProduct } from '../lib/x402/celestial-products.ts'
@@ -8,10 +8,18 @@ import { auditInputHash } from '../lib/mps-audit-engine.ts'
 
 test('only the approved four targets and 0.93 USDC are authorized', () => {
   assert.equal(TARGETS.length, 4)
-  assert.equal(TARGETS.reduce((n, t) => n + BigInt(t.amount), 0n), 930000n)
+  assert.equal(TARGETS.reduce((n, t) => n + BigInt(t.amount), BigInt(0)), BigInt(930000))
   assertAuthorization(CONFIRMATION, '1')
   assert.throws(() => assertAuthorization(CONFIRMATION, '2'))
   assert.throws(() => assertAuthorization(undefined, '1'))
+})
+test('the reconciled continuation authorizes only 0.68 additional USDC, never a second MPS payment', () => {
+  assertAuthorization(CONTINUATION_CONFIRMATION, '1', true)
+  assert.throws(() => assertAuthorization(CONFIRMATION, '1', true))
+  assert.throws(() => assertAuthorization(CONTINUATION_CONFIRMATION, '1'))
+  assert.throws(() => assertAuthorization(CONTINUATION_CONFIRMATION, '2', true))
+  assert.equal(TARGETS.slice(1).reduce((n, t) => n + BigInt(t.amount), BigInt(0)), BigInt(680000))
+  assert.equal(PRIOR_MPS_TRANSACTION, '0x39e02e046c769edaf9bec80e81428218b4a05a543b5561d3129522f4854d9549')
 })
 test('every term is pinned, including network, destination, price and token domain', () => {
   for (const target of TARGETS) {

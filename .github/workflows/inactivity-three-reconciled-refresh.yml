@@ -1,0 +1,51 @@
+name: Reconciled remaining three inactive products refresh
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: RECONCILED_REMAINING_THREE_ONCE_MAX_0_68_USDC_20261009
+        required: true
+        type: string
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: production-x402-bazaar-canary
+  cancel-in-progress: false
+jobs:
+  refresh:
+    if: github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: production-x402-canary
+    env:
+      BASE_RPC_URL: https://mainnet.base.org
+      INACTIVITY_FOUR_CONFIRMATION: ${{ inputs.confirmation }}
+      INACTIVITY_FOUR_OUTPUT_PATH: ${{ github.workspace }}/inactivity-three-reconciled-refresh.json
+    steps:
+      - uses: actions/checkout@v7
+      - name: Refuse any second continuation dispatch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/actions/workflows/inactivity-three-reconciled-refresh.yml/runs?per_page=100" \
+            | jq -e --argjson current "$GITHUB_RUN_ID" 'all(.workflow_runs[]; .id == $current)'
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm install --global npm@11.17.0
+      - run: npm ci
+      - run: node --experimental-strip-types --test test/inactivity-four-refresh.test.ts
+      - name: Verify prior MPS payment and pay only the three unattempted targets
+        env:
+          X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
+        run: node --experimental-strip-types scripts/run-inactivity-four-refresh.ts --remaining-three --pay
+      - name: Preserve sanitized evidence, including uncertain outcomes
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: inactivity-three-reconciled-refresh-${{ github.run_id }}
+          path: ${{ env.INACTIVITY_FOUR_OUTPUT_PATH }}
+          if-no-files-found: warn
+          retention-days: 90
