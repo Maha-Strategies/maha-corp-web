@@ -21,7 +21,7 @@ import {
 import { configuredIdentity, MAHA_CARP_DID_URL, MAHA_CARP_SAD_URL, MAHA_CARP_URL } from './identity.ts'
 import { CELESTIAL_OFFERS } from '../x402/celestial-offers.ts'
 import { BUYER_BRIEF_ID, BUYER_BRIEF_VERSION } from '../x402/buyer-brief-contract.ts'
-import { EBOOKS, EBOOK_VERSION, ebookFormatLabel, ebookIdForOffer, ebookPath } from '../x402/ebook-contract.ts'
+import { EBOOKS, EBOOK_VERSION, ebookArtifacts, ebookBundleHash, ebookFormatLabel, ebookIdForOffer, ebookPath } from '../x402/ebook-contract.ts'
 
 export const CARP_SELLER_ROLE_URL = 'https://www.mahastrategies.com/.well-known/carp/seller-role.json'
 export const MAHA_CARP_SELLER_URL = 'https://www.mahastrategies.com/.well-known/carp/seller.json'
@@ -166,6 +166,7 @@ function digitalOfferForId(value: unknown): DigitalOfferSpec | null {
 
 function cabezonDigitalOffer(spec: DigitalOfferSpec) {
   const offer: X402Offer = spec.offer
+  const ebookId = ebookIdForOffer(offer.id)
   return {
     offeringRef: spec.offeringRef,
     offerId: offer.id,
@@ -204,6 +205,13 @@ function cabezonDigitalOffer(spec: DigitalOfferSpec) {
     capabilityBoundaries: [...offer.capabilityBoundaries],
     retention: offer.retention,
     termsUrl: spec.termsUrl,
+    ...(ebookId ? { ebookBundle: {
+      version: EBOOK_VERSION, includedFormats: ['EPUB', 'PDF'], formatChoiceRequired: false,
+      manuscriptEdition: ebookId === 'the-orbital-mind' ? 'Revised V3' : 'October 7 EPUB',
+      manifestSha256: ebookBundleHash(ebookId), artifacts: ebookArtifacts(ebookId),
+      delivery: 'Both complete files are included in the same 10 USDC purchase. Decode each inline base64 artifact and verify its SHA-256 digest.',
+      recoveryResource: `${SITE_URL}${ebookPath(ebookId)}/retrieve`,
+    } } : {}),
   }
 }
 
@@ -521,7 +529,8 @@ function enquiryMatchesDigital(offeringRef: string, terms: string) {
   if (containsAnyTokenPhrase(terms, ['digital', 'ai', 'machine payable', 'x402'])) return true
   const spec = digitalOfferForRef(offeringRef)
   if (spec && !LEGACY_DIGITAL_METADATA.some(legacy => legacy.offeringRef === offeringRef)) {
-    return containsAnyTokenPhrase(terms, [spec.offer.id.replaceAll('-', ' '), spec.title, ...spec.offer.tags])
+    const ebookId = ebookIdForOffer(spec.offer.id)
+    return containsAnyTokenPhrase(terms, [spec.offer.id.replaceAll('-', ' '), spec.title, ...(ebookId ? [EBOOKS[ebookId].title] : []), ...spec.offer.tags])
   }
   if (offeringRef.startsWith('maha:celestial-')) {
     return containsAnyTokenPhrase(terms, ['astronomy', 'celestial', 'tropical', 'sidereal', 'lahiri', 'vimshottari', 'panchanga', 'chart calculation'])

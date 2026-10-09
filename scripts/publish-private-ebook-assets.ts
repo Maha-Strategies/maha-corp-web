@@ -1,13 +1,13 @@
 import { readFileSync } from 'node:fs'
 import { createClient } from '@supabase/supabase-js'
-import { EBOOK_IDS, ebookArtifacts } from '../lib/x402/ebook-contract.ts'
+import { EBOOK_IDS, EBOOK_VERSIONS, ebookArtifacts } from '../lib/x402/ebook-contract.ts'
 import { loadEbook, validateEbookPayload, EBOOK_STORAGE_BUCKET, ebookStoragePath } from '../lib/x402/ebook-delivery.ts'
 const args = process.argv.slice(2)
 if (args.length !== 2 || args[0] !== '--keys') throw new Error('Explicit production key-file path required; credentials are never printed.')
 const keys = JSON.parse(readFileSync(args[1], 'utf8')) as Array<{ name: string; api_key: string }>
 const key = keys.find(k => k.name === 'service_role')?.api_key
 if (!key) throw new Error('Production credential unavailable.')
-const bundles = await Promise.all(EBOOK_IDS.map(async id => ({ id, bytes: await loadEbook(id), manifest: ebookArtifacts(id) })))
+const bundles = await Promise.all(EBOOK_VERSIONS.flatMap(version => EBOOK_IDS.map(async id => ({ id, version, bytes: await loadEbook(id, version), manifest: ebookArtifacts(id, version) }))))
 const client = createClient('https://uhwuullakihgszxhiygz.supabase.co', key, { auth: { persistSession: false, autoRefreshToken: false } })
 const before = await client.storage.listBuckets()
 if (before.error) throw new Error('Cannot verify existing bucket configuration.')
@@ -33,6 +33,6 @@ for (const bundle of bundles) {
     const publicProbe = await fetch(`https://uhwuullakihgszxhiygz.supabase.co/storage/v1/object/public/${EBOOK_STORAGE_BUCKET}/${path}`, { redirect: 'error', signal: AbortSignal.timeout(10000) })
     if (publicProbe.ok) throw new Error('Private asset was anonymously accessible; release refused.')
   }
-  validateEbookPayload(bundle.id, downloaded)
-  console.log(JSON.stringify({ bookId: bundle.id, files: bundle.manifest.length, privateReadBackIntegrity: true, publicAccessDenied: true }))
+  validateEbookPayload(bundle.id, downloaded, bundle.version)
+  console.log(JSON.stringify({ bookId: bundle.id, version: bundle.version, files: bundle.manifest.length, privateReadBackIntegrity: true, publicAccessDenied: true }))
 }

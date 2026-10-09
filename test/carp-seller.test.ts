@@ -113,7 +113,7 @@ test('enquiry returns the canonical offering array for compatible needs', () => 
   assert.ok('result' in matched)
   assert.deepEqual(
     (matched as { result: Array<{ offeringRef: string }> }).result.map((offer) => offer.offeringRef),
-    MAHA_CARP_DIGITAL_OFFERS.filter((offer) => !offer.directSettlement.resource.includes('/calculations/')).map((offer) => offer.offeringRef),
+    MAHA_CARP_DIGITAL_OFFERS.filter((offer) => !offer.directSettlement.resource.includes('/calculations/') && !['book-epub-the-maha-principle', 'book-epub-the-orbital-mind', 'book-section-the-maha-principle', 'book-section-the-orbital-mind'].includes(offer.offerId)).map((offer) => offer.offeringRef),
   )
 
   const unrelated = handleCarpSellerRequest({

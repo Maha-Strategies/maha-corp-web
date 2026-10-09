@@ -5,7 +5,7 @@ export const EBOOK_OFFERS: readonly X402Offer[] = Object.freeze(EBOOK_IDS.map<X4
   id: ebookOfferId(id), method: 'POST' as const, path: ebookPath(id), amount: EBOOK_AMOUNT,
   description: `Purchase ${EBOOKS[id].title}, ${ebookFormatLabel(id)} for 10 USDC. ${EBOOKS[id].description} Version-pinned files delivered inline with SHA-256 digests. Personal/internal use only; no redistribution, resale or training rights. Recover a paid order with its private secret; never repay automatically.`,
   serviceName: `Maha Books — ${EBOOKS[id].title} (${ebookFormatLabel(id)})`,
-  tags: ['books', 'ebook', 'epub', 'cabezon', 'digital-fulfillment', 'x402'],
+  tags: ['books', 'ebook', 'epub', 'pdf', 'cabezon', 'digital-fulfillment', 'x402'],
   status: 'available' as const, availability: { payableInProduction: true, blockedBy: [] },
   concurrencyCap: 2, requiresIdempotency: true, maxRequestBytes: 2048,
   capabilityBoundaries: [

@@ -19,9 +19,9 @@ const nextConfig: NextConfig = {
     '/api/v1/books/the-orbital-mind/section': ['./content/books/the-orbital-mind/*.md'],
     '/api/astrology/platform': ['./lib/dossier/executive-astrology-dossier.typ'],
     '/api/v1/books/the-maha-principle/epub': ['./content/paid-ebooks/The-Maha-Principle.epub', './content/paid-ebooks/The-Maha-Principle-print.pdf'],
-    '/api/v1/books/the-maha-principle/epub/retrieve': ['./content/paid-ebooks/The-Maha-Principle.epub', './content/paid-ebooks/The-Maha-Principle-print.pdf'],
+    '/api/v1/books/the-maha-principle/epub/retrieve': ['./content/paid-ebooks/The-Maha-Principle.epub', './content/paid-ebooks/The-Maha-Principle-print.pdf', './content/paid-ebooks/archive/*/The-Maha-Principle*'],
     '/api/v1/books/the-orbital-mind/epub': ['./content/paid-ebooks/The-Orbital-Mind.epub', './content/paid-ebooks/The-Orbital-Mind-print.pdf'],
-    '/api/v1/books/the-orbital-mind/epub/retrieve': ['./content/paid-ebooks/The-Orbital-Mind.epub', './content/paid-ebooks/The-Orbital-Mind-print.pdf'],
+    '/api/v1/books/the-orbital-mind/epub/retrieve': ['./content/paid-ebooks/The-Orbital-Mind.epub', './content/paid-ebooks/The-Orbital-Mind-print.pdf', './content/paid-ebooks/archive/*/The-Orbital-Mind*'],
   },
   // The customer-owned container uses Next's minimal standalone server. Maha's
   // Vercel builds leave this unset and retain the platform adapter.

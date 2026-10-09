@@ -30,6 +30,7 @@ export const mahaServiceMenu = Object.freeze([
       inputSchema: offer.discovery.inputSchema,
       'http-response': { status: '402 Payment Required', contenttype: 'application/json', content: 'An unpaid valid request returns the authoritative x402 quote. Only sign after separate budget approval. Job acceptance is not completed delivery.' },
       capabilityBoundaries: product.capabilityBoundaries,
+      ...(product.ebookBundle ? { ebookBundle: product.ebookBundle } : {}),
     }
   }),
 ])

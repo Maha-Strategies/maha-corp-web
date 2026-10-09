@@ -29,7 +29,8 @@ test('both bundles now declare EPUB plus PDF, with distinct commitments', () => 
     assert.notEqual(ebookBundleHash(id), artifacts[0].sha256)
   }
   assert.match(EBOOKS['the-orbital-mind'].pdf.editionNote, /aligned to the author-selected EPUB/)
-  assert.match(EBOOKS['the-orbital-mind'].pdf.editionNote, /no bibliographic entries/)
+  assert.match(EBOOKS['the-orbital-mind'].pdf.editionNote, /appendices A-F, including A Guide to the Sources/)
+  assert.match(EBOOKS['the-maha-principle'].pdf.editionNote, /appendices A-J, and Notes and References/)
 })
 
 test('discovery describes the same two-file bundle, not a free web edition', () => {

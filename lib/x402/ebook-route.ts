@@ -1,4 +1,4 @@
-import { EBOOK_ORIGIN, EBOOKS, EBOOK_VERSION, ebookArtifacts, ebookBundleHash, ebookPath, ebookOfferId, ebookOrderHash, ebookTerms, ebookTermsHash, parseEbookOrder, type EbookId } from './ebook-contract.ts'
+import { EBOOK_ORIGIN, EBOOKS, EBOOK_VERSION, ebookArtifacts, ebookBundleHash, ebookPath, ebookOfferId, ebookOrderHash, ebookTerms, ebookTermsHash, parseEbookOrder, parseEbookRecoveryOrder, type EbookId } from './ebook-contract.ts'
 import { EBOOK_OFFERS } from './ebook-offers.ts'
 import { authorizeEbookRecovery, ebookDelivery, findPaidEbook, loadEbook, validateEbookPayload } from './ebook-delivery.ts'
 import { resolveX402 } from './gateway.ts'
@@ -99,10 +99,10 @@ export function ebookHandlers(id: EbookId, d: Dependencies = {}) {
       try {
         const v = await readBody(request)
         if (!v || typeof v !== 'object' || Array.isArray(v) || Object.keys(v).sort().join(',') !== 'order,payer' || typeof v.payer !== 'string' || !/^0x[0-9a-fA-F]{40}$/.test(v.payer)) return fail('retrieval_request_invalid', 400)
-        const order = parseEbookOrder(id, v.order)
+        const order = parseEbookRecoveryOrder(id, v.order)
         const row = await (d.find ?? findPaidEbook)(id, v.payer.toLowerCase(), order.clientRequestId)
         const transaction = authorizeEbookRecovery(id, order, row)
-        return json(ebookDelivery(id, order, await load(id), transaction, true))
+        return json(ebookDelivery(id, order, await load(id, order.version), transaction, true))
       } catch { return fail('recovery_unavailable_contact_seller_do_not_repay', 404) }
     },
     OPTIONS: () => new Response(null, { status: 204, headers: { ...headers, Allow: 'GET, POST, OPTIONS' } }),
