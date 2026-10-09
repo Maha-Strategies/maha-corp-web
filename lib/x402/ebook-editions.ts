@@ -26,7 +26,7 @@ export const EBOOKS_V1: Readonly<Record<EbookId, EbookBook>> = {
   },
 }
 
-export const EBOOKS_CURRENT: Readonly<Record<EbookId, EbookBook>> = {
+export const EBOOKS_V1_1: Readonly<Record<EbookId, EbookBook>> = {
   'the-maha-principle': {
     ...EBOOKS_V1['the-maha-principle'],
     pdf: { filename: 'The-Maha-Principle-print.pdf', bytes: 1362197,
@@ -39,5 +39,16 @@ export const EBOOKS_CURRENT: Readonly<Record<EbookId, EbookBook>> = {
     pdf: { filename: 'The-Orbital-Mind-print.pdf', bytes: 1784212,
       sha256: 'sha256:38fa735a3b2ca9015865b4755f03c76ccc504e4ec505a92c14d59caf7f266fa6',
       editionNote: 'Revised V3 EPUB and October 2026 reading PDF aligned to the author-selected EPUB, with linked contents, bookmarks and appendices A-F, including A Guide to the Sources. Typography and pagination differ; manuscript prose is preserved.' },
+  },
+}
+
+// The artwork revision preserves the approved EPUB and the other title's files.
+export const EBOOKS_CURRENT: Readonly<Record<EbookId, EbookBook>> = {
+  ...EBOOKS_V1_1,
+  'the-maha-principle': {
+    ...EBOOKS_V1_1['the-maha-principle'],
+    pdf: { filename: 'The-Maha-Principle-print.pdf', bytes: 1355839,
+      sha256: 'sha256:703e19222acd9e160efecf73b860184c7283ea8a952830269b08d43409c2645d',
+      editionNote: 'October 2026 reading PDF with the revised gold-tree cover, architectural roots and water reflection, aligned to the approved EPUB manuscript. Includes the two-line dedication to Claire, linked contents, bookmarks, the medical disclaimer, appendices A-J, and Notes and References. Typography and pagination differ; manuscript prose is preserved.' },
   },
 }

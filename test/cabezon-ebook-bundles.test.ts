@@ -33,6 +33,25 @@ test('both bundles now declare EPUB plus PDF, with distinct commitments', () => 
   assert.match(EBOOKS['the-maha-principle'].pdf.editionNote, /appendices A-J, and Notes and References/)
 })
 
+test('the artwork release changes only The Maha Principle PDF from the 1.1.0 bundles', () => {
+  const changed: string[] = []
+  for(const id of EBOOK_IDS) {
+    const before=ebookArtifacts(id,'1.1.0'), current=ebookArtifacts(id)
+    assert.equal(current.length,before.length)
+    for(let i=0;i<current.length;i++) {
+      assert.equal(current[i].filename,before[i].filename)
+      assert.equal(current[i].mediaType,before[i].mediaType)
+      if(JSON.stringify(current[i])!==JSON.stringify(before[i])) changed.push(id+':'+current[i].filename)
+    }
+  }
+  assert.deepEqual(changed,['the-maha-principle:The-Maha-Principle-print.pdf'])
+  const pdf=EBOOKS['the-maha-principle'].pdf
+  assert.equal(pdf.bytes,1355839)
+  assert.equal(pdf.sha256,'sha256:703e19222acd9e160efecf73b860184c7283ea8a952830269b08d43409c2645d')
+  assert.equal(ebookBundleHash('the-orbital-mind'),ebookBundleHash('the-orbital-mind','1.1.0'))
+  assert.notEqual(ebookBundleHash('the-maha-principle'),ebookBundleHash('the-maha-principle','1.1.0'))
+})
+
 test('discovery describes the same two-file bundle, not a free web edition', () => {
   for (const id of EBOOK_IDS) {
     const offer = EBOOK_OFFERS.find(offer => offer.id === ebookOfferId(id))!

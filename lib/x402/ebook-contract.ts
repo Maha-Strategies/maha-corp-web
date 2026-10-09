@@ -1,15 +1,16 @@
 import { createHash } from 'node:crypto'
-import { EBOOKS_CURRENT, EBOOKS_V1, type EbookId } from './ebook-editions.ts'
+import { EBOOKS_CURRENT, EBOOKS_V1, EBOOKS_V1_1, type EbookId } from './ebook-editions.ts'
 export type { EbookId } from './ebook-editions.ts'
 
 export const EBOOK_ORIGIN = 'https://www.mahastrategies.com'
 export const EBOOK_AMOUNT = '10000000'
-export const EBOOK_VERSION = '1.1.0'
+export const EBOOK_VERSION = '1.2.0'
 export const EBOOKS = EBOOKS_CURRENT
-export const EBOOK_VERSIONS = ['1.0.0', EBOOK_VERSION] as const
+export const EBOOK_VERSIONS = ['1.0.0', '1.1.0', EBOOK_VERSION] as const
 export function ebookBooksForVersion(version: string = EBOOK_VERSION) {
   if (version === EBOOK_VERSION) return EBOOKS
   if (version === '1.0.0') return EBOOKS_V1
+  if (version === '1.1.0') return EBOOKS_V1_1
   throw new Error('ebook_version_unavailable')
 }
 export const EBOOK_IDS = Object.keys(EBOOKS) as EbookId[]
