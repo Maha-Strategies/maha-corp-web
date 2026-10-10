@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "incremental": false, "plugins": [] },
+  "include": [
+    "next-env.d.ts",
+    "lib/x402/settlement-*.ts",
+    "lib/x402/rpc-log-scan.ts",
+    "app/api/cron/x402-settlements/route.ts",
+    "scripts/backfill-x402-settlements.ts",
+    "scripts/watch-x402-settlements.ts",
+    "test/x402-settlement-*.test.ts",
+    "test/rpc-log-scan.test.ts"
+  ],
+  "exclude": ["node_modules", ".next", "packages"]
+}

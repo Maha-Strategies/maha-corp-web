@@ -13,7 +13,7 @@ if (process.env.VERCEL_ENV !== 'production' || process.env.MAHA_SETTLEMENT_BACKF
   throw new Error('Explicit production backfill acknowledgment required.')
 }
 const result = await backfillSettlements({
-  store: settlementStore(), reader: baseSettlementReader({ timeout: 15000, minLogIntervalMs: 1500 }),
+  store: settlementStore(), reader: baseSettlementReader({ timeout: 15000, minRpcIntervalMs: 500 }),
   backup: async previous => writeFile(backup, JSON.stringify(previous, null, 2) + '\n', { flag: 'wx', mode: 0o600 }),
   progress: (cursor, target) => console.log(JSON.stringify({ scannedToBlock: cursor, target })),
 })

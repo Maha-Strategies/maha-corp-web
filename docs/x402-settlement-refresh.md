@@ -10,8 +10,9 @@ The job only reads finalized Base USDC Transfer logs to Maha's payee. It cannot
 sign transactions, spend funds, or invoke a model.
 
 An incremental cursor and 128-block overlap preserve cumulative history without
-rescanning 60 days every hour. Each invocation scans at most 24,000 blocks in
-2,000-block requests, matching Base's public `eth_getLogs` limit;
+rescanning 60 days every hour. Each invocation scans at most 6,000 blocks in
+500-block requests, counted inclusively, with adaptive splitting if a provider
+requires smaller ranges;
 backlogs catch up across runs. Logs are identified by transaction hash and log
 index. Failed scans do not publish partial results or advance the saved cursor.
 
@@ -37,6 +38,40 @@ Only known operator wallets are excluded from external figures. A wallet is not
 a unique customer; price-matched transfers do not prove discovery, an exact
 endpoint, payload delivery, or acceptance. Unknown operator addresses must be
 classified before treating them as demand.
+
+## RPC recovery and offline backfill
+
+Production requires `BASE_RPC_URL` pointing at a working **Base Mainnet** RPC.
+Do not silently fall back to the throttled public endpoint. The reader checks
+chain ID 8453 and serializes every RPC call, including head and timestamp reads,
+with a 350ms minimum start interval. Range-limit errors can reduce chunk size;
+rate-limit errors use bounded backoff instead of recursively amplifying requests.
+Cron diagnostics are allowlisted categories only; provider URLs/access keys are
+never logged. A failed read still preserves the previous snapshot and cursor.
+
+Use the existing Coinbase Developer Platform Node endpoint where available,
+without creating signing credentials or purchasing another service. Store the
+URL as a server-only Vercel production variable and a GitHub repository secret
+`BASE_RPC_URL`. The independent watch prefers that secret over the legacy
+repository variable. Changing a Vercel variable requires an approved deployment
+before the hourly worker uses it; Redis backfill itself needs no website build.
+
+For an explicitly authorized repair, load the production Redis namespace and
+credentials plus the configured RPC URL, then run:
+
+```sh
+VERCEL_ENV=production MAHA_SETTLEMENT_BACKFILL_APPROVED=yes node --experimental-strip-types scripts/backfill-x402-settlements.ts --backup=/private/tmp/settlement-before-repair-UNIQUE.json
+```
+
+The offline reader paces all requests at 500ms. It pins one finalized head,
+scans every intervening range outside the short publication lock, validates the
+completed ledger, saves a new private backup, then publishes once only if the
+saved base has not changed. Incomplete scans, backup failures, concurrent changes
+and lock expiry cannot overwrite the saved snapshot. Cross-check expected canary
+hashes, amounts and operator classification against the recovered rows. Never
+repeat payments to repair an accounting display or count operator indexing as
+external demand. Verify `/api/health/x402-settlements` and the transaction page
+after publication, then test the approved production worker separately.
 
 ## Operator receipts (ledger schema 1.1)
 

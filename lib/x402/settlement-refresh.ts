@@ -5,6 +5,7 @@ import { payableOffers } from './offers.ts'
 import { OPERATOR_SETTLEMENT_RECEIPTS } from './operator-settlement-receipts.ts'
 import { buildLedger, type SettlementLedger } from './settlement-ledger.ts'
 import { RPC_LOG_MAX_BLOCKS, scanRpcLogs } from './rpc-log-scan.ts'
+import { settlementRefreshFailure, settlementRpcQueue, settlementRpcUrl } from './settlement-rpc.ts'
 
 export type Transfer = { payer: string; amountBaseUnits: bigint; blockNumber: bigint; transactionHash: string; logIndex: number }
 export type SettlementReader = {
@@ -17,33 +18,32 @@ export const RECHECK_BLOCKS = BigInt(128)
 export const SCAN_CHUNK = RPC_LOG_MAX_BLOCKS
 export const MAX_SCAN_BLOCKS = SCAN_CHUNK * BigInt(12)
 
-export function baseSettlementReader(options: { timeout?: number; retryCount?: number; minLogIntervalMs?: number } = {}): SettlementReader {
-  const interval = options.minLogIntervalMs ?? 0
-  if (!Number.isInteger(interval) || interval < 0 || interval > 10000) throw new Error('invalid_log_pacing')
-  let nextLogAt = 0
-  const pace = async () => {
-    const now = Date.now(), start = Math.max(now, nextLogAt)
-    nextLogAt = start + interval
-    if (start > now) await new Promise(resolve => setTimeout(resolve, start - now))
-  }
-  const client = createPublicClient({ chain: base, transport: http(process.env.BASE_RPC_URL?.trim() || 'https://mainnet.base.org', {
+export function baseSettlementReader(options: { timeout?: number; retryCount?: number; minRpcIntervalMs?: number; minLogIntervalMs?: number } = {}): SettlementReader {
+  // Retain the offline CLI's old option, but apply it to all reads, not just logs.
+  const queue = settlementRpcQueue(options.minRpcIntervalMs ?? options.minLogIntervalMs ?? 350)
+  const read = <T>(request: () => Promise<T>) => queue(request).catch((error: unknown) => {
+    throw new Error(`settlement_rpc_${settlementRefreshFailure(error)}`)
+  })
+  const client = createPublicClient({ chain: base, transport: http(settlementRpcUrl(), {
     timeout: options.timeout ?? 12000, retryCount: options.retryCount ?? 0,
   }) })
   const event = parseAbiItem('event Transfer(address indexed from, address indexed to, uint256 value)')
+  let checkedChain: Promise<void> | undefined
   return {
     async finalizedBlock() {
-      const block = await client.getBlock({ blockTag: 'finalized' })
+      checkedChain ??= read(() => client.getChainId()).then(chainId => {
+        if (chainId !== base.id) throw new Error('settlement_rpc_chain_mismatch')
+      }).catch(error => { checkedChain = undefined; throw error })
+      await checkedChain
+      const block = await read(() => client.getBlock({ blockTag: 'finalized' }))
       if (block.number === null) throw new Error('finalized_block_unavailable')
       return block.number
     },
     async transfers(fromBlock, toBlock) {
       const transfers: Transfer[] = []
       for await (const log of scanRpcLogs({ fromBlock, toBlock,
-        getLogs: async (fromBlock, toBlock) => {
-          await pace()
-          return client.getLogs({ address: BASE_USDC as `0x${string}`, event,
-            args: { to: MAHA_PAYEE as `0x${string}` }, fromBlock, toBlock, strict: true })
-        },
+        getLogs: (fromBlock, toBlock) => read(() => client.getLogs({ address: BASE_USDC as `0x${string}`, event,
+          args: { to: MAHA_PAYEE as `0x${string}` }, fromBlock, toBlock, strict: true })),
       })) {
         if (log.removed || log.blockNumber === null || log.logIndex === null || log.transactionHash === null
           || !log.args.from || log.args.value === undefined) throw new Error('invalid_transfer_log')
@@ -53,7 +53,7 @@ export function baseSettlementReader(options: { timeout?: number; retryCount?: n
       return transfers
     },
     async timestamp(blockNumber) {
-      const block = await client.getBlock({ blockNumber })
+      const block = await read(() => client.getBlock({ blockNumber }))
       return new Date(Number(block.timestamp) * 1000).toISOString()
     },
   }

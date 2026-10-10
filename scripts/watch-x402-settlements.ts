@@ -3,9 +3,9 @@
  *
  *   node --experimental-strip-types scripts/watch-x402-settlements.ts [--days 30]
  *
- * Reads USDC Transfer logs into the payee on Base Mainnet. No credentials, no
- * database, no wallet: it holds nothing and can spend nothing, which is why it
- * can run anywhere on a schedule without a secret to leak.
+ * Reads USDC Transfer logs into the payee on Base Mainnet using a read-only
+ * RPC endpoint. No database or signing key; it cannot spend. Keep a managed
+ * endpoint's access key in BASE_RPC_URL, never in output artifacts.
  *
  * Stateless by design. Rather than remembering which payers it has seen, it
  * rescans a window and recomputes the whole picture, so a lost state file
@@ -17,13 +17,12 @@
  * alert fires once rather than on every scheduled run.
  */
 
-import { createPublicClient, formatUnits, http, parseAbiItem } from 'viem'
-import { base } from 'viem/chains'
+import { formatUnits } from 'viem'
 
-import { BASE_USDC, MAHA_PAYEE, OPERATOR_WALLETS } from '../lib/x402/discovery-payment-recipe.ts'
+import { MAHA_PAYEE, OPERATOR_WALLETS } from '../lib/x402/discovery-payment-recipe.ts'
 import { payableOffers } from '../lib/x402/offers.ts'
 import { buildSettlementWatch, describeWatch, type Settlement } from '../lib/x402/settlement-watch.ts'
-import { scanRpcLogs } from '../lib/x402/rpc-log-scan.ts'
+import { baseSettlementReader } from '../lib/x402/settlement-refresh.ts'
 
 /**
  * The prices a customer can legitimately pay, taken from the offer catalog so a
@@ -32,7 +31,6 @@ import { scanRpcLogs } from '../lib/x402/rpc-log-scan.ts'
  */
 const PUBLISHED_PRICES = [...new Set(payableOffers().flatMap((offer) => [offer.amount, ...(offer.supersededAmounts ?? [])]).map(BigInt))].sort((a, b) => (a < b ? -1 : 1))
 
-const TRANSFER = parseAbiItem('event Transfer(address indexed from, address indexed to, uint256 value)')
 /** Base produces a block roughly every two seconds. */
 const BLOCKS_PER_DAY = BigInt(43_200)
 
@@ -44,28 +42,11 @@ function argument(flag: string, fallback: string): string {
 const days = Math.max(1, Math.min(90, Number(argument('--days', '2')) || 2))
 const reported = argument('--reported', '').split(',').map((value) => value.trim()).filter(Boolean)
 
-const client = createPublicClient({
-  chain: base,
-  transport: http(process.env.BASE_RPC_URL?.trim() || undefined),
-})
-
-const finalized = await client.getBlock({ blockTag: 'finalized' })
-if (finalized.number === null) throw new Error('finalized_block_unavailable')
-const latest = finalized.number
+const reader = baseSettlementReader()
+const latest = await reader.finalizedBlock()
 const earliest = latest > BLOCKS_PER_DAY * BigInt(days) ? latest - BLOCKS_PER_DAY * BigInt(days) : BigInt(0)
 
-const settlements: Settlement[] = []
-for await (const log of scanRpcLogs({
-  fromBlock: earliest, toBlock: latest,
-  getLogs: (fromBlock, toBlock) => client.getLogs({ address: BASE_USDC as `0x${string}`, event: TRANSFER, args: { to: MAHA_PAYEE as `0x${string}` }, fromBlock, toBlock }),
-})) {
-  settlements.push({
-    payer: log.args.from as string,
-    amountBaseUnits: log.args.value as bigint,
-    blockNumber: log.blockNumber,
-    transactionHash: log.transactionHash,
-  })
-}
+const settlements: Settlement[] = await reader.transfers(earliest, latest)
 
 const report = buildSettlementWatch({
   settlements,
