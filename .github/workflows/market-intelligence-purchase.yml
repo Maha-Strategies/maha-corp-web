@@ -1,0 +1,51 @@
+name: One-time external x402 market intelligence purchase
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 'BUY_MARKET_DATASET_REPORT_ONCE_0_05125_USDC'
+        required: true
+        type: string
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: production-x402-bazaar-canary
+  cancel-in-progress: false
+jobs:
+  buy:
+    if: github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: production-x402-canary
+    env:
+      BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
+      MARKET_PURCHASE_CONFIRMATION: ${{ inputs.confirmation }}
+    steps:
+      - name: Refuse prior dispatches or broader consent
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$MARKET_PURCHASE_CONFIRMATION" = 'BUY_MARKET_DATASET_REPORT_ONCE_0_05125_USDC'
+          PRIOR=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/market-intelligence-purchase.yml/runs?event=workflow_dispatch&per_page=100" --jq "[.workflow_runs[] | select(.id != ($GITHUB_RUN_ID | tonumber))] | length")
+          test "$PRIOR" = 0
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Test the purchase allowlist without wallet access
+        run: node --experimental-strip-types --test test/x402-market-purchase.test.ts
+      - name: Purchase each approved result exactly once
+        env:
+          X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
+        run: MARKET_PURCHASE_OUTPUT_DIR="$RUNNER_TEMP/market-intelligence" node --experimental-strip-types scripts/buy-x402-market-intelligence.ts --pay
+      - name: Preserve results and sanitized payment evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: market-intelligence-${{ github.run_id }}
+          path: ${{ runner.temp }}/market-intelligence
+          if-no-files-found: warn
+          retention-days: 90
