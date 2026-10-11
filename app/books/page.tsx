@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { BOOK_PUBLICATIONS } from '@/lib/book-publications'
 import type { Metadata } from 'next'
 
 const SITE_URL = 'https://www.mahastrategies.com'
@@ -6,13 +7,13 @@ const SITE_URL = 'https://www.mahastrategies.com'
 export const metadata: Metadata = {
   title: 'Books & Essays | Maha Strategies',
   description:
-    'Open web editions by Mayone Maha Rajan on artificial intelligence, self-regulation, evolution, dreaming, relationship, planetary systems, and the human future.',
+    'Published ebooks and paperbacks, open web editions, and companion essays by Mayone Maha Rajan on human flourishing, psychology, dreaming, and the human future.',
   alternates: { canonical: '/books' },
   openGraph: {
     type: 'website',
     url: `${SITE_URL}/books`,
     title: 'Books & Essays | Maha Strategies',
-    description: 'Seven complete open web editions by Mayone Maha Rajan, with guides and essays.',
+    description: 'Published ebook and paperback details alongside seven complete open web editions, guides, and essays by Mayone Maha Rajan.',
     images: [{ url: '/og-master.png', width: 1200, height: 630, alt: 'Books & Essays — Maha Strategies' }],
   },
   twitter: {
@@ -105,6 +106,14 @@ export default function BooksPage() {
             Each open edition includes the complete manuscript, stable chapter links, and companion essays where available.
           </p>
         </header>
+
+        <section className="evidence-section" aria-label="Published books">
+          <h2 className="evidence-card-title">Ebook and paperback publications</h2>
+          <p className="evidence-copy mt-4">Retail editions of The Maha Principle, The Orbital Mind, and The Imagined Life are published or progressing through retailer review. Find descriptions, ISBNs, edition status, and companion resources.</p>
+          <ul className="mt-6 space-y-3">
+            {BOOK_PUBLICATIONS.map((book) => <li key={book.slug}><Link href={`/books/publications#${book.slug}`} className="evidence-link">{book.title}: {book.subtitle} ↗</Link></li>)}
+          </ul>
+        </section>
 
         <section className="evidence-section" aria-label="Open web editions">
           <div className="mt-8 grid gap-5 md:grid-cols-2">

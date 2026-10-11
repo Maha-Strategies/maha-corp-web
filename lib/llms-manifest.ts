@@ -1,3 +1,4 @@
+import { bookPublicationLlmsLines } from './book-publications.ts'
 import type { MpsClaim } from '../scripts/expand-graph.ts'
 
 import {
@@ -161,6 +162,7 @@ export function buildLlmsManifest(
     '- Durable factory queue submission and canonical release are separate admin operations. MCP tool arguments never accept credentials and cannot enqueue or publish.',
     '- No manifest entry grants authority to deploy infrastructure, spend funds, contact people, or publish canonical knowledge.',
     '',
+    ...bookPublicationLlmsLines(),
     '## Open research editions',
     '- Books and essays index: https://www.mahastrategies.com/books',
     '- The Cosmic Recursion — complete open web edition: https://www.mahastrategies.com/books/the-cosmic-recursion',

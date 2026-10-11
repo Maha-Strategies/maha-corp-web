@@ -1,3 +1,4 @@
+import { BOOK_PUBLICATIONS_DATE, BOOK_PUBLICATIONS_PATH } from '@/lib/book-publications'
 import { MetadataRoute } from 'next'
 import { headers } from 'next/headers'
 import { MAHA_SITE_URL } from '@/lib/entity'
@@ -294,7 +295,8 @@ export async function currentHostSitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/mps/preflight`, lastModified: new Date('2026-07-16') },
     { url: `${baseUrl}/mps/preflight/example`, lastModified: new Date('2026-07-27') },
     { url: `${baseUrl}/overclock`, lastModified: new Date('2026-07-16') },
-    { url: `${baseUrl}/books`, lastModified: new Date('2026-09-02') },
+    { url: `${baseUrl}/books`, lastModified: new Date(BOOK_PUBLICATIONS_DATE) },
+    { url: `${baseUrl}${BOOK_PUBLICATIONS_PATH}`, lastModified: new Date(BOOK_PUBLICATIONS_DATE) },
     { url: `${baseUrl}/books/mcp-access`, lastModified: new Date('2026-07-20') },
     { url: `${baseUrl}/books/the-borrowed-light`, lastModified: new Date('2026-07-28') },
     { url: `${baseUrl}/books/the-borrowed-light/m-theory-faq`, lastModified: new Date('2026-07-28') },
@@ -305,7 +307,7 @@ export async function currentHostSitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/books/the-synthetic-self/ai-is-a-mirror`, lastModified: new Date('2026-07-16') },
     { url: `${baseUrl}/books/the-synthetic-self/the-learning-machine`, lastModified: new Date('2026-07-16') },
     { url: `${baseUrl}/books/the-synthetic-self/how-large-language-models-learn`, lastModified: new Date('2026-07-16') },
-    { url: `${baseUrl}/books/the-orbital-mind`, lastModified: new Date('2026-07-16') },
+    { url: `${baseUrl}/books/the-orbital-mind`, lastModified: new Date(BOOK_PUBLICATIONS_DATE) },
     { url: `${baseUrl}/books/the-orbital-mind/the-map-is-not-the-mind`, lastModified: new Date('2026-07-16') },
     { url: `${baseUrl}/books/the-orbital-mind/the-governing-center`, lastModified: new Date('2026-07-16') },
     { url: `${baseUrl}/books/the-orbital-mind/what-is-executive-function`, lastModified: new Date('2026-07-16') },
@@ -313,7 +315,7 @@ export async function currentHostSitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/books/the-unfinished-species/the-blind-watchmaker-opens-his-eyes`, lastModified: new Date('2026-07-16') },
     { url: `${baseUrl}/books/the-unfinished-species/the-algorithm`, lastModified: new Date('2026-07-16') },
     { url: `${baseUrl}/books/the-unfinished-species/what-is-natural-selection`, lastModified: new Date('2026-07-16') },
-    { url: `${baseUrl}/books/the-imagined-life`, lastModified: new Date('2026-07-16') },
+    { url: `${baseUrl}/books/the-imagined-life`, lastModified: new Date(BOOK_PUBLICATIONS_DATE) },
     { url: `${baseUrl}/books/the-imagined-life/the-faculty-of-the-possible`, lastModified: new Date('2026-07-16') },
     { url: `${baseUrl}/books/the-imagined-life/what-happens-when-you-sleep`, lastModified: new Date('2026-07-16') },
     { url: `${baseUrl}/books/the-imagined-life/sleep-stages-explained`, lastModified: new Date('2026-07-22') },

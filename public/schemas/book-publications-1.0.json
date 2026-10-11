@@ -1,0 +1,239 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://www.mahastrategies.com/schemas/book-publications-1.0.json",
+  "title": "Maha Strategies published book catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://"
+    },
+    "catalogVersion": {
+      "const": "1.0.0"
+    },
+    "asOf": {
+      "type": "string",
+      "format": "date"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://"
+    },
+    "humanReadableUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://"
+    },
+    "publicationBoundary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rightsBoundary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "books": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "slug": {
+            "enum": [
+              "the-maha-principle",
+              "the-orbital-mind",
+              "the-imagined-life"
+            ]
+          },
+          "workId": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "subtitle": {
+            "type": "string",
+            "minLength": 1
+          },
+          "author": {
+            "const": "Mayone Maha Rajan"
+          },
+          "language": {
+            "const": "en"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "subjects": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "evidenceBoundary": {
+            "type": "string",
+            "minLength": 1
+          },
+          "informationUrl": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://"
+          },
+          "editions": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "platform": {
+                  "enum": [
+                    "Amazon",
+                    "Draft2Digital"
+                  ]
+                },
+                "format": {
+                  "enum": [
+                    "ebook",
+                    "paperback"
+                  ]
+                },
+                "status": {
+                  "enum": [
+                    "live",
+                    "published",
+                    "publishing",
+                    "in_review",
+                    "preparing_manuscript"
+                  ]
+                },
+                "statusLabel": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "statusBasis": {
+                  "const": "publisher_dashboard"
+                },
+                "statusAsOf": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "isbn": {
+                  "type": "string",
+                  "pattern": "^97[89][0-9]{10}$"
+                },
+                "asin": {
+                  "type": "string",
+                  "pattern": "^[A-Z0-9]{10}$"
+                },
+                "url": {
+                  "type": "string",
+                  "format": "uri",
+                  "pattern": "^https://"
+                },
+                "imprint": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "id",
+                "platform",
+                "format",
+                "status",
+                "statusLabel",
+                "statusBasis",
+                "statusAsOf"
+              ]
+            }
+          },
+          "relatedResources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "url": {
+                  "type": "string",
+                  "format": "uri",
+                  "pattern": "^https://"
+                },
+                "relationship": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "title",
+                "url",
+                "relationship"
+              ]
+            }
+          },
+          "openWebEdition": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https://"
+              },
+              "firstPublished": {
+                "type": "string",
+                "format": "date"
+              }
+            },
+            "required": [
+              "url",
+              "firstPublished"
+            ]
+          }
+        },
+        "required": [
+          "slug",
+          "workId",
+          "title",
+          "subtitle",
+          "author",
+          "language",
+          "description",
+          "subjects",
+          "evidenceBoundary",
+          "informationUrl",
+          "editions",
+          "relatedResources"
+        ]
+      }
+    }
+  },
+  "required": [
+    "$schema",
+    "catalogVersion",
+    "asOf",
+    "url",
+    "humanReadableUrl",
+    "publicationBoundary",
+    "rightsBoundary",
+    "books"
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "$schema": "https://www.mahastrategies.com/maha-machine-readable-registry.schema.json",
-  "registryVersion": "1.4.0",
-  "asOf": "2026-09-29",
+  "registryVersion": "1.5.0",
+  "asOf": "2026-10-11",
   "provider": {
     "name": "Maha Strategies LLC",
     "url": "https://www.mahastrategies.com"
@@ -17,14 +17,37 @@
   },
   "resources": [
     {
+      "id": "book-publications",
+      "kind": "catalog",
+      "name": "Published books and edition status",
+      "status": "available",
+      "url": "https://www.mahastrategies.com/books/publications.json",
+      "machineReadable": true,
+      "evidence": [
+        "https://www.mahastrategies.com/books/publications",
+        "https://www.mahastrategies.com/books/the-orbital-mind",
+        "https://www.mahastrategies.com/books/the-imagined-life"
+      ],
+      "schemas": [
+        "https://www.mahastrategies.com/schemas/book-publications-1.0.json"
+      ],
+      "evidenceBoundary": "Author-maintained descriptions and dated publisher-dashboard publication status for The Maha Principle, The Orbital Mind and The Imagined Life. Pending submissions are not live retail availability; companion working papers are not peer-reviewed validation of the books.",
+      "commercialBoundary": "Retail editions are all rights reserved. Catalog entries and links grant no reproduction rights or authority to buy, pay, or fulfill a manuscript. Open web editions are distinct resources."
+    },
+    {
       "id": "company-technology-profile",
       "kind": "catalog",
       "name": "Maha Strategies company and technology portfolio",
       "status": "available",
       "url": "https://www.mahastrategies.com/company.json",
       "machineReadable": true,
-      "evidence": ["https://www.mahastrategies.com/about", "https://www.mahastrategies.com/about/technology"],
-      "schemas": ["https://www.mahastrategies.com/schemas/company-profile-1.0.json"],
+      "evidence": [
+        "https://www.mahastrategies.com/about",
+        "https://www.mahastrategies.com/about/technology"
+      ],
+      "schemas": [
+        "https://www.mahastrategies.com/schemas/company-profile-1.0.json"
+      ],
       "evidenceBoundary": "Company-authored identity, activity and research-direction descriptions with their own asOf date. Implemented software, internal simulation, knowledge assets and exploratory directions are separate; listing does not establish scientific validation or deployment readiness.",
       "commercialBoundary": "Research directions are not product offers, purchase authorization, customer relationships or partnership commitments."
     },

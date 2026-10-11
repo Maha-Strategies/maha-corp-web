@@ -2,7 +2,8 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import BookChapterList from '@/components/BookChapterList'
 import BookReaderPaths from '@/components/BookReaderPaths'
-import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
+import BookPublicationDetails from '@/components/BookPublicationDetails'
+import { BOOK_PUBLICATIONS, bookPublicationJsonLd } from '@/lib/book-publications'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 
@@ -27,22 +28,8 @@ export const metadata: Metadata = {
   },
 }
 
-const bookJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Book',
-  '@id': `${SITE_URL}/books/the-orbital-mind#book`,
-  name: 'The Orbital Mind',
-  alternativeHeadline: 'The Astrophysics of the Self',
-  description: 'A systems psychology of attention, desire, agency, limit, imagination, and integration.',
-  url: `${SITE_URL}/books/the-orbital-mind`,
-  author: { '@type': 'Person', name: 'Mayone Maha Rajan' },
-  publisher: { '@id': MAHA_ORGANIZATION_ID },
-  bookFormat: 'https://schema.org/EBook',
-  isAccessibleForFree: true,
-  inLanguage: 'en',
-  datePublished: '2026-07-16',
-  potentialAction: { '@type': 'ReadAction', target: `${SITE_URL}/books/the-orbital-mind` },
-}
+const publication = BOOK_PUBLICATIONS.find((book) => book.slug === 'the-orbital-mind')!
+const bookJsonLd = bookPublicationJsonLd(publication)
 
 const parts = [
   {
@@ -80,7 +67,7 @@ const parts = [
 export default function TheOrbitalMindHub() {
   return (
     <main className="evidence-page">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(bookJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(bookJsonLd).replace(/</g, '\\u003c') }} />
       <article className="evidence-container evidence-container--narrow">
         <header className="max-w-3xl border-l border-indigo-500 pl-6 sm:pl-8">
           <p className="font-mono text-xs text-[var(--status-sourced)] tracking-widest uppercase mb-5">
@@ -96,6 +83,8 @@ export default function TheOrbitalMindHub() {
             By Mayone Maha Rajan
           </p>
         </header>
+
+        <BookPublicationDetails book={publication} />
 
         <section className="mt-16 max-w-3xl">
           <p className="text-xl sm:text-2xl text-[var(--text-primary)] font-light leading-relaxed mb-6">
