@@ -9,7 +9,7 @@ function quote() {
     maxTimeoutSeconds: 300, extra: { name: 'USD Coin', version: '2' } }] }
 }
 test('fixed two-product batch is smaller than the user cap', () => {
-  assert.equal(MARKET_PURCHASES.reduce((sum, p) => sum + BigInt(p.amount), 0n), MARKET_BATCH_CAP)
+  assert.equal(MARKET_PURCHASES.reduce((sum, p) => sum + BigInt(p.amount), BigInt(0)), MARKET_BATCH_CAP)
   assert.ok(MARKET_BATCH_CAP < USER_SPEND_CAP)
 })
 test('only the approved exact v1 contract is accepted', () => {
@@ -30,8 +30,8 @@ test('typed authorization pins token, chain, buyer, payee, amount and lifetime',
   assert.equal(typed.domain.verifyingContract, MARKET_ASSET)
   assert.equal(typed.message.from, MARKET_BUYER)
   assert.equal(typed.message.to, MARKET_PAYEE)
-  assert.equal(typed.message.value, 20000n)
-  assert.equal(typed.message.validBefore, 1800000300n)
+  assert.equal(typed.message.value, BigInt(20000))
+  assert.equal(typed.message.validBefore, BigInt(1800000300))
   assert.throws(() => marketTypedData(MARKET_PURCHASES[1], '0x11', 1800000000))
 })
 test('partial or malformed results never count as useful delivery', () => {

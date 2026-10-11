@@ -7,8 +7,8 @@ export const MARKET_PURCHASES = [
   { id: 'dataset', url: `${MARKET_ORIGIN}/dataset`, amount: '31250' },
   { id: 'report', url: `${MARKET_ORIGIN}/report`, amount: '20000' },
 ] as const
-export const MARKET_BATCH_CAP = 51250n
-export const USER_SPEND_CAP = 1000000n
+export const MARKET_BATCH_CAP = BigInt(51250)
+export const USER_SPEND_CAP = BigInt(1000000)
 
 export type MarketPurchase = typeof MARKET_PURCHASES[number]
 export type MarketRequirement = {

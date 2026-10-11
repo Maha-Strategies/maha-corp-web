@@ -10,6 +10,7 @@ import { X402_VERSION, type PaymentRequirement, type ResourceInfo } from './prot
 import { BASE_MAINNET_CAIP2, CONTEXT_COMPRESSION_OFFER, USDC_DECIMALS, offerById } from './offers.ts'
 import { DECLARATION_DIGEST_EXTENSION, createDeclarationDigestExtension } from './declaration-digest.ts'
 import { compactExample, compactSchema } from './declaration-compaction.ts'
+import { bazaarServiceNameForOffer, bazaarTagsForOffer } from './bazaar-service-name.ts'
 
 /** Extension namespace for Maha's own commerce metadata. */
 export const OFFER_EXTENSION = 'maha-offer'
@@ -18,7 +19,7 @@ export const OFFER_EXTENSION = 'maha-offer'
  * Bumped whenever any published offer's declaration changes. A catalog uses it
  * with the declaration digest to tell a re-index from a genuine revision.
  */
-export const OFFER_METADATA_VERSION = '2026-08-10'
+export const OFFER_METADATA_VERSION = '2026-10-11'
 
 /** Where the complete, uncompacted declaration for an offer is published. */
 export function declarationUrl(origin: string, offerId: string): string {
@@ -109,7 +110,7 @@ export function resourceInfoFor(resource: PricedResource, resourceUrl: string): 
     description: boundDescription(offer?.description ?? resource.description),
     mimeType: 'application/json',
     ...(offer
-      ? { serviceName: offer.serviceName, tags: [...offer.tags], iconUrl: ICON_URL }
+      ? { serviceName: bazaarServiceNameForOffer(offer), tags: bazaarTagsForOffer(offer), iconUrl: ICON_URL }
       : {}),
   }
 }

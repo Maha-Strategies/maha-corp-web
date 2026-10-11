@@ -48,7 +48,7 @@ try {
     const balance = await chain.readContract({ address: MARKET_ASSET as `0x${string}`,
       abi: parseAbi(['function balanceOf(address) view returns (uint256)']), functionName: 'balanceOf', args: [account.address] })
     if (balance < MARKET_BATCH_CAP) throw new Error('Insufficient buyer USDC.')
-    let authorized = 0n
+    let authorized = BigInt(0)
     for (const [index, purchase] of MARKET_PURCHASES.entries()) {
       const entry = journal.purchases[index]
       authorized += BigInt(purchase.amount)
