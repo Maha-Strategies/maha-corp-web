@@ -1,32 +1,42 @@
 import { writeFile } from 'node:fs/promises'
-import Ajv from 'ajv'
+import Ajv, { type AnySchemaObject, type ErrorObject } from 'ajv'
 import { assessOfferInactivity, findBazaarResource } from '../lib/x402/bazaar-inactivity.ts'
 import { BAZAAR_MERCHANT_URL, MAHA_PAYEE, type BazaarResource } from '../lib/x402/discovery-payment-recipe.ts'
+import type { X402PublicManifest } from '../lib/x402/public-manifest.ts'
+import type { PaymentRequiredBody } from '../lib/x402/protocol.ts'
+
+type Declaration = { contract?: Partial<Record<'input' | 'output', { schema: AnySchemaObject; example: unknown }>>; payment?: { amount: string } }
+type AuditRow = {
+  offerId: string; error?: string; resource?: string; unsignedStatus?: number; declarationStatus?: number
+  schemaChecks?: { side: string; valid: boolean; reason?: string; errors?: ErrorObject[] | null }[]
+  challengeMatches?: boolean; liveAmountBaseUnits?: string | null; declarationPriceMatches?: boolean
+  bazaarIndexed?: boolean; bazaarPriceMatches?: boolean | null; inactivity?: ReturnType<typeof assessOfferInactivity>
+}
 
 // Public diagnostic only: no credentials, signed authorizations or settlement.
 const origin = 'https://www.mahastrategies.com'
 const ajv = new Ajv({ strict: false, validateFormats: false, allErrors: true })
-async function request(url: string, method = 'GET') {
+async function request<T = unknown>(url: string, method = 'GET') {
   const parsed = new URL(url)
   if (parsed.origin !== origin && !(parsed.origin === 'https://api.cdp.coinbase.com' && parsed.pathname === new URL(BAZAAR_MERCHANT_URL).pathname && method === 'GET')) {
     throw new Error('Public audit refuses an unexpected destination')
   }
   const response = await fetch(url, { method, redirect: 'error', signal: AbortSignal.timeout(25_000),
     ...(method === 'POST' ? { headers: { 'content-type': 'application/json' }, body: '{}' } : {}) })
-  const body = await response.json()
+  const body = await response.json() as T
   return { response, body }
 }
 const checkedAt = new Date().toISOString()
-const manifestResult = await request(`${origin}/.well-known/x402-public-manifest.json`)
+const manifestResult = await request<X402PublicManifest>(`${origin}/.well-known/x402-public-manifest.json`)
 if (!manifestResult.response.ok) throw new Error('Manifest unavailable')
-const offers = manifestResult.body.offers.filter((offer: any) => offer.status === 'active' && offer.payment?.protocol === 'x402')
+const offers = manifestResult.body.offers.filter(offer => offer.status === 'active' && offer.payment?.protocol === 'x402')
 const resources: BazaarResource[] = []
 for (let offset = 0; offset < 1_000; offset += 100) {
   const url = new URL(BAZAAR_MERCHANT_URL)
   url.searchParams.set('payTo', MAHA_PAYEE)
   url.searchParams.set('limit', '100')
   url.searchParams.set('offset', String(offset))
-  const result = await request(url.href)
+  const result = await request<{ resources?: BazaarResource[]; items?: BazaarResource[] }>(url.href)
   if (!result.response.ok) throw new Error(`Bazaar merchant lookup failed: ${result.response.status}`)
   const page = result.body.resources ?? result.body.items
   if (!Array.isArray(page)) throw new Error('Unrecognized Bazaar pagination payload')
@@ -34,21 +44,21 @@ for (let offset = 0; offset < 1_000; offset += 100) {
   if (page.length < 100) break
   if (offset === 900) throw new Error('Bazaar pagination exceeds audit safety bound')
 }
-const rows: any[] = []
+const rows: AuditRow[] = []
 // Two concurrent unsigned probes, preserving report order.
 for (let index = 0; index < offers.length; index += 2) {
-  const pair = await Promise.all(offers.slice(index, index + 2).map(async (offer: any) => {
+  const pair = await Promise.all(offers.slice(index, index + 2).map(async (offer): Promise<AuditRow> => {
     try {
       const declarationUrl = new URL(offer.schemas.input)
       declarationUrl.hash = ''
       const [{ response, body }, declaration] = await Promise.all([
-        request(offer.canonicalResource, 'POST'), request(declarationUrl.href),
+        request(offer.canonicalResource, 'POST'), request<Declaration>(declarationUrl.href),
       ])
       const encoded = response.headers.get('payment-required')
-      const challenge = encoded ? JSON.parse(Buffer.from(encoded, 'base64').toString('utf8')) : null
-      const terms = challenge?.accepts?.find((term: any) => term.scheme === 'exact' && term.network === 'eip155:8453')
+      const challenge = encoded ? JSON.parse(Buffer.from(encoded, 'base64').toString('utf8')) as PaymentRequiredBody : null
+      const terms = challenge?.accepts?.find(term => term.scheme === 'exact' && term.network === 'eip155:8453')
       const metadata = declaration.body
-      const schemaChecks = ['input', 'output'].map((side) => {
+      const schemaChecks = (['input', 'output'] as const).map((side) => {
         const contract = metadata.contract?.[side]
         if (!contract?.schema || contract.example === undefined) return { side, valid: false, reason: 'schema or example missing' }
         const validate = ajv.compile(contract.schema)
@@ -59,7 +69,7 @@ for (let index = 0; index < offers.length; index += 2) {
         declarationStatus: declaration.response.status, schemaChecks,
         challengeMatches: response.status === 402 && challenge?.x402Version === 2
           && challenge?.resource?.url === offer.canonicalResource
-          && terms?.amount === offer.payment.amountBaseUnits
+          && terms?.amount === offer.payment?.amountBaseUnits
           && terms?.payTo?.toLowerCase() === MAHA_PAYEE.toLowerCase()
           && terms?.asset?.toLowerCase() === '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913'
           && JSON.stringify(body) === JSON.stringify(challenge),
@@ -82,7 +92,7 @@ const outputIndex = process.argv.indexOf('--output')
 if (outputIndex >= 0) await writeFile(process.argv[outputIndex + 1], `${JSON.stringify(report, null, 2)}\n`)
 console.log(JSON.stringify({ checkedAt, offers: rows.length,
   quotesMatching: rows.filter((row) => row.challengeMatches).length,
-  schemaExamplesValid: rows.filter((row) => row.schemaChecks?.every((check: any) => check.valid)).length,
+  schemaExamplesValid: rows.filter((row) => row.schemaChecks?.every(check => check.valid)).length,
   indexed: rows.filter((row) => row.bazaarIndexed).length,
   missing: rows.filter((row) => row.bazaarIndexed === false).map((row) => row.offerId),
   errors: rows.filter((row) => row.error),

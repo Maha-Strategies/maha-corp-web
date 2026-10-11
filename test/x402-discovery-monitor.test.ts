@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import test from 'node:test'
-import { classifyDiscoveryReport, discoveryMonitorMatrix } from '../lib/x402/discovery-monitor.ts'
+import { classifyDiscoveryReport, discoveryMonitorMatrix, MAX_MONITORED_X402_OFFERS } from '../lib/x402/discovery-monitor.ts'
 import { recoveryHealthFromRows, RECOVERY_HEALTH_STATES } from '../lib/x402/recovery-health.ts'
+import type { X402PublicManifest } from '../lib/x402/public-manifest.ts'
 
 const subject = 'https://www.mahastrategies.com/api/v1/compress'
 const offer = { id: 'context-compression', status: 'active', method: 'POST', canonicalResource: subject, payment: { protocol: 'x402' } }
@@ -13,17 +14,23 @@ const finding = (ruleId: string, level = 'warning') => ({ ruleId, level, message
 test('monitor inventories every active x402 offer, excluding previews and other payment rails', () => {
   const result = discoveryMonitorMatrix({ offers: [offer, { ...offer, id: 'preview', status: 'preview' }, { ...offer, id: 'other', payment: { protocol: 'stripe' } }] })
   assert.deepEqual(result.include, [{ offer: offer.id, name: 'Context Compression', subject, method: 'POST' }])
-  const manifest = JSON.parse(readFileSync(new URL('../public/.well-known/x402-public-manifest.json', import.meta.url), 'utf8'))
-  assert.equal(discoveryMonitorMatrix(manifest).include.length, manifest.offers.filter((row: any) => row.status === 'active' && row.payment?.protocol === 'x402').length)
+  const manifest = JSON.parse(readFileSync(new URL('../public/.well-known/x402-public-manifest.json', import.meta.url), 'utf8')) as X402PublicManifest
+  assert.equal(discoveryMonitorMatrix(manifest).include.length, manifest.offers.filter(row => row.status === 'active' && row.payment?.protocol === 'x402').length)
+  assert.equal(discoveryMonitorMatrix(manifest).include.length, 105)
   assert.ok(discoveryMonitorMatrix(manifest).include.length > 2)
 })
 
 test('monitor refuses malformed, empty, duplicate, shell-unsafe or off-origin inventory', () => {
   for (const offers of [[], [offer, offer], [{ ...offer, id: 'bad\nkey' }], [{ ...offer, canonicalResource: 'https://evil.invalid/api/v1/test' }],
-    [{ ...offer, method: 'DELETE' }], [{ ...offer, canonicalResource: `${subject}?secret=anything` }], Array.from({ length: 101 }, (_, n) => ({ ...offer, id: `offer-${n}`, canonicalResource: `${subject}/${n}` }))]) {
+    [{ ...offer, method: 'DELETE' }], [{ ...offer, canonicalResource: `${subject}?secret=anything` }], Array.from({ length: MAX_MONITORED_X402_OFFERS + 1 }, (_, n) => ({ ...offer, id: `offer-${n}`, canonicalResource: `${subject}/${n}` }))]) {
     assert.throws(() => discoveryMonitorMatrix({ offers }))
   }
   assert.throws(() => discoveryMonitorMatrix(null))
+})
+
+test('monitor remains bounded while covering a catalogue beyond one Bazaar page', () => {
+  const offers = Array.from({ length: MAX_MONITORED_X402_OFFERS }, (_, n) => ({ ...offer, id: `offer-${n}`, canonicalResource: `${subject}/${n}` }))
+  assert.equal(discoveryMonitorMatrix({ offers }).include.length, MAX_MONITORED_X402_OFFERS)
 })
 
 test('only a completed successful comparison can close monitoring incidents', () => {

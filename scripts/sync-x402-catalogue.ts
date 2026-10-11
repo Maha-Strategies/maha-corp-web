@@ -6,8 +6,8 @@ if (args.length !== 1 || !['--write', '--check'].includes(args[0])) throw new Er
 const offers = [...X402_OFFERS.filter(o => !isMicroProduct(o.id)), ...X402_OFFERS.filter(o => isMicroProduct(o.id))]
 for (const [name, field, paymentField] of [['agent-card', 'capabilities', 'payment'], ['agent-offers', 'technicalCapabilities', 'machinePayment']] as const) {
   const path = `content/discovery/${name}.json`, before = readFileSync(path, 'utf8'), body = JSON.parse(before)
-  const existing = body[field] as Record<string, any>[]
-  const kept = existing.filter(row => !offers.some(o => o.id === row.id) && row[paymentField]?.protocol !== 'x402')
+  const existing = body[field] as Record<string, unknown>[]
+  const kept = existing.filter(row => !offers.some(o => o.id === row.id) && (row[paymentField] as { protocol?: unknown } | undefined)?.protocol !== 'x402')
   body[field] = [...kept, ...offers.map(o => ({
     ...existing.find(row => row.id === o.id), id: o.id, status: o.status, endpoint: `https://www.mahastrategies.com${o.path}`, method: o.method,
     description: o.description, payableNow: o.availability.payableInProduction, blockedBy: o.availability.blockedBy,

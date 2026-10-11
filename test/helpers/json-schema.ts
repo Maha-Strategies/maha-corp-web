@@ -9,19 +9,18 @@
 //
 // Supports: type, const, enum, required, properties, additionalProperties:false,
 // items, minItems/maxItems, minLength/maxLength, minimum/maximum, pattern,
-// oneOf.
-// Anything else in a schema is ignored rather than silently treated as passing
-// -- see `unsupportedKeywords`, which fails loudly if the catalog starts using
-// a keyword this cannot check.
+// oneOf, anyOf, allOf and boolean schemas.
+// Unsupported keywords fail loudly rather than silently passing if the
+// catalog starts using a keyword this cannot check.
 
 const SUPPORTED = new Set([
   'type', 'const', 'enum', 'required', 'properties', 'additionalProperties',
   'items', 'minItems', 'maxItems', 'minLength', 'maxLength', 'minimum',
   'maximum', 'pattern', 'description', 'default', 'title',
-  'oneOf',
+  'oneOf', 'anyOf', 'allOf',
 ])
 
-type Schema = Record<string, unknown>
+type Schema = Record<string, unknown> | boolean
 
 function typeOf(value: unknown): string {
   if (value === null) return 'null'
@@ -39,6 +38,7 @@ function matchesType(value: unknown, expected: string): boolean {
 
 /** Returns a list of human-readable problems; empty means valid. */
 export function validate(value: unknown, schema: Schema, path = '$'): string[] {
+  if (typeof schema === 'boolean') return schema ? [] : [`${path}: false schema rejects this value`]
   const problems: string[] = []
 
   for (const keyword of Object.keys(schema)) {
@@ -46,8 +46,20 @@ export function validate(value: unknown, schema: Schema, path = '$'): string[] {
   }
 
   if (Array.isArray(schema.oneOf)) {
-    const matching = schema.oneOf.filter((candidate) => candidate && typeof candidate === 'object' && validate(value, candidate as Schema, path).length === 0)
+    const matching = schema.oneOf.filter((candidate) => isSchema(candidate) && validate(value, candidate, path).length === 0)
     if (matching.length !== 1) problems.push(`${path}: expected exactly one oneOf branch to match, got ${matching.length}`)
+  }
+
+  if (Array.isArray(schema.anyOf)) {
+    const matching = schema.anyOf.filter((candidate) => isSchema(candidate) && validate(value, candidate, path).length === 0)
+    if (matching.length === 0) problems.push(`${path}: expected at least one anyOf branch to match`)
+  }
+
+  if (Array.isArray(schema.allOf)) {
+    schema.allOf.forEach((candidate, index) => {
+      if (!isSchema(candidate)) problems.push(`${path}: invalid allOf branch ${index}`)
+      else problems.push(...validate(value, candidate, path))
+    })
   }
 
   if ('const' in schema && JSON.stringify(value) !== JSON.stringify(schema.const)) {
@@ -119,4 +131,8 @@ export function validate(value: unknown, schema: Schema, path = '$'): string[] {
   }
 
   return problems
+}
+
+function isSchema(value: unknown): value is Schema {
+  return typeof value === 'boolean' || (value !== null && typeof value === 'object' && !Array.isArray(value))
 }

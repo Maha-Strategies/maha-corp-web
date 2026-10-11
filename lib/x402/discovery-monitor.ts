@@ -1,6 +1,9 @@
 import type { DoctorReport } from './doctor.ts'
 
 const ORIGIN = 'https://www.mahastrategies.com'
+// Covers all 105 released offers, including the five deliberately unindexed
+// higher-priced products, without allowing unbounded workflow matrices.
+export const MAX_MONITORED_X402_OFFERS = 128
 export type MonitorOffer = { offer: string; name: string; subject: string; method: 'GET' | 'POST' }
 
 /** Public manifest only. Fail on malformed/empty inventory rather than silently losing coverage. */
@@ -24,7 +27,7 @@ export function discoveryMonitorMatrix(manifest: unknown): { include: MonitorOff
     const name = row.id === 'context-compression' ? 'Context Compression' : row.id === 'deep-context-evaluation' ? 'Deep Context Evaluation' : row.id
     include.push({ offer: row.id, name, subject: url.href, method: row.method })
   }
-  if (!include.length || include.length > 100) throw new Error('Offer inventory outside monitor safety bounds')
+  if (!include.length || include.length > MAX_MONITORED_X402_OFFERS) throw new Error('Offer inventory outside monitor safety bounds')
   return { include }
 }
 

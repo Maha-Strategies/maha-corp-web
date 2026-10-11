@@ -136,7 +136,7 @@ test('bounded batch, strict input and receipt integrity', async () => {
 })
 
 test('approved offers have distinct prices and invalid signed inputs cannot settle', async () => {
-  assert.equal(payableOffers().length, 49) // Includes ten planning products, two ebook bundles and five new book/evidence endpoints.
+  assert.equal(payableOffers().length, 105) // The original 49 plus the 56-product expansion; five higher-priced offers are deliberately not indexed.
   for (const id of COMPATIBILITY_IDS) {
     const offer = MICRO_OFFERS.find(o => o.id === id)!
     assert.equal(offer.status, 'available')

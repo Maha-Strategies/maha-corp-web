@@ -59,9 +59,21 @@ function isSchema(value: unknown): value is Schema {
  */
 export function compactSchema(schema: Schema, depth = 0): Schema {
   const output: Schema = {}
+  const combinations: Schema[] = []
 
   for (const [keyword, value] of Object.entries(schema)) {
     if (DROPPED_KEYWORDS.has(keyword)) continue
+
+    // Composition branches describe the same instance, not a deeper object.
+    // Otherwise oneOf would retain the full paid-result schema in a header.
+    // Broaden oneOf to anyOf: after lossy compaction two originally exclusive
+    // branches can overlap, which must not reject a valid full-schema example.
+    // Keep independent sibling constraints conjunctive rather than overwriting
+    // an authored anyOf/allOf when oneOf is loosened.
+    if (['oneOf', 'anyOf', 'allOf'].includes(keyword) && Array.isArray(value)) {
+      combinations.push({ [keyword === 'oneOf' ? 'anyOf' : keyword]: value.map(branch => isSchema(branch) ? compactSchema(branch, depth) : branch) })
+      continue
+    }
 
     // Non-scalar response examples are deliberately reduced to one item.
     // A fixed-cardinality full schema (for example, the five-run ladder)
@@ -103,6 +115,9 @@ export function compactSchema(schema: Schema, depth = 0): Schema {
 
     output[keyword] = value
   }
+
+  if (combinations.length === 1) Object.assign(output, combinations[0])
+  else if (combinations.length > 1) output.allOf = combinations
 
   // A collapsed object must not keep requiring fields it no longer describes,
   // and must not forbid the ones it dropped.

@@ -10,6 +10,8 @@ import { captureResponseBody } from '../lib/x402/canary-response-capture.ts'
 import { buildBookEditionReceipt } from '../lib/x402/book-edition-product.ts'
 import { buildBookSectionReceipt } from '../lib/x402/book-section-product.ts'
 import { buildLicensedSection, LICENSED_SECTION_BOOKS, licensedSectionId } from '../lib/x402/licensed-book-sections.ts'
+import { isMicroProduct } from '../lib/x402/micro-contracts.ts'
+import { buildMicroProduct } from '../lib/x402/micro-products.ts'
 
 function fixture(id = 'context-compression', status = 200) {
   const offer = offerById(id)!
@@ -40,12 +42,16 @@ function recapture(value: ReturnType<typeof fixture>) {
   return value
 }
 
-test('all declared products have repeatable offline payload checks, not live delivery claims', () => {
-  assert.equal(X402_OFFERS.length, 56)
+test('all declared products have repeatable offline payload checks, not live delivery claims', async () => {
+  assert.equal(X402_OFFERS.length, 107)
   // Bundles are tested against actual private pinned files below, not against
   // advertising placeholders or copyrighted bytes checked into test fixtures.
   for (const offer of X402_OFFERS.filter(o => !o.id.startsWith('book-epub-'))) {
     const value = fixture(offer.id)
+    if (isMicroProduct(offer.id)) {
+      value.responseBytes = Buffer.from(JSON.stringify(await buildMicroProduct(offer.id, offer.discovery.input)))
+      recapture(value)
+    }
     const first = checkBuyerDelivery(value)
     assert.equal(first.state, 'payload_verified', `${offer.id}: ${first.problems.join(', ')}`)
     assert.equal(first.provenance, 'synthetic')
@@ -53,6 +59,17 @@ test('all declared products have repeatable offline payload checks, not live del
     assert.deepEqual(checkBuyerDelivery(value), first)
     assert.equal('retrievalToken' in first, false)
   }
+})
+
+test('book reading packs use the micro receipt contract, never a legacy book-edition envelope', async () => {
+  const id = 'book-reading-pack-the-maha-principle'
+  const value = fixture(id)
+  assert.equal(checkBuyerDelivery(value).state, 'rejected', 'free discovery is not a delivered reading pack')
+  const output = await buildMicroProduct(id, offerById(id)!.discovery.input)
+  value.responseBytes = Buffer.from(JSON.stringify(output))
+  assert.equal(checkBuyerDelivery(recapture(value)).state, 'payload_verified')
+  value.responseBytes = Buffer.from(JSON.stringify({ ...output, productId: 'another-product' }))
+  assert.equal(checkBuyerDelivery(recapture(value)).state, 'rejected')
 })
 
 test('Buyer-Brief archive mutations fail even with a newly pinned capture', () => {

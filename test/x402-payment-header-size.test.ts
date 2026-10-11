@@ -8,12 +8,53 @@ import { priceFor, requirementFor, x402Config, type X402Config } from '../lib/x4
 import { resolveX402 } from '../lib/x402/gateway.ts'
 import { discoveryExtensionsFor, resourceInfoFor } from '../lib/x402/discovery.ts'
 import { X402_OFFERS } from '../lib/x402/offers.ts'
-import { PAYMENT_HEADER_BUDGET, PAYMENT_HEADER_LIMIT } from '../lib/x402/declaration-compaction.ts'
+import { compactSchema, PAYMENT_HEADER_BUDGET, PAYMENT_HEADER_LIMIT } from '../lib/x402/declaration-compaction.ts'
 import { buildTypedData, createPaidFetch, encodePaymentSignature } from '../lib/x402/client.ts'
 import { parsePaymentHeader, matchesPaymentContext, PAYMENT_REQUIRED_HEADER, PAYMENT_SIGNATURE_HEADER } from '../lib/x402/protocol.ts'
 import { auditInputHash } from '../lib/mps-audit-engine.ts'
 import { parseResearchIntakeInput, researchIntakeInputHash } from '../lib/research-intake-evidence-pack.ts'
 import type { X402Offer } from '../lib/x402/offers.ts'
+import { validate } from './helpers/json-schema.ts'
+
+test('lossy union compaction cannot reject valid payloads when branches overlap', () => {
+  const full = {
+    type: 'object', required: ['result'], properties: {
+      result: { oneOf: [
+        { type: 'object', required: ['preview'], additionalProperties: false, properties: { preview: { const: true } } },
+        { type: 'object', required: ['licensed'], additionalProperties: false, properties: { licensed: { const: true } } },
+      ] },
+    },
+  }
+  const before = structuredClone(full)
+  const compacted = compactSchema(full)
+  for (const result of [{ preview: true }, { licensed: true }]) {
+    assert.deepEqual(validate({ result }, full), [])
+    assert.deepEqual(validate({ result }, compacted), [])
+  }
+  assert.deepEqual(full, before, 'the hosted endpoint contract must remain unchanged')
+  assert.ok(JSON.stringify(compacted).length < JSON.stringify(full).length)
+})
+
+test('sibling composition constraints remain conjunctive after compaction', () => {
+  const full = {
+    type: 'number',
+    oneOf: [{ enum: [2, 4] }, { const: 6 }],
+    anyOf: [{ minimum: 4 }],
+    allOf: [{ maximum: 5 }],
+  }
+  const compacted = compactSchema(full)
+  assert.deepEqual(validate(4, full), [])
+  assert.deepEqual(validate(4, compacted), [])
+  for (const value of [2, 6, 8, '4']) assert.ok(validate(value, compacted).length > 0, `${value}: sibling constraint was dropped`)
+})
+
+test('independent composition checker enforces all branches and exclusivity', () => {
+  assert.deepEqual(validate(1, { anyOf: [false, { const: 1 }] }), [])
+  assert.ok(validate(2, { anyOf: [false, { const: 1 }] }).length > 0)
+  assert.deepEqual(validate(1, { allOf: [true, { const: 1 }] }), [])
+  assert.ok(validate(1, { allOf: [false, { const: 1 }] }).length > 0)
+  assert.ok(validate(1, { oneOf: [true, { const: 1 }] }).length > 0)
+})
 
 // The interoperability regression this file exists to prevent.
 //

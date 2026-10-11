@@ -155,7 +155,7 @@ export function checkBuyerDelivery(input: {
       || section.contentSha256 !== bytesDigest(section.content) || section.utf8Bytes !== Buffer.byteLength(section.content)
       || receiptSha256 !== bytesDigest(canonicalJson(body))) problems.push('licensed_section_commitment_mismatch')
   }
-  if (offer.id.startsWith('book-') && !ebook && (!object(response.book)
+  if (offer.id.startsWith('book-') && !ebook && !isMicroProduct(offer.id) && (!object(response.book)
     || response.book.id !== offer.id.replace(/^book-(section|edition)-/, ''))) problems.push('book_selection_mismatch')
   if (!problems.length) state = 'payload_verified'
   return report()
