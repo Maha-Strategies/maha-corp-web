@@ -41,3 +41,17 @@ test('catalogues over 100 are paginated without asserting absence after a change
     assert.match(productIndexLabel(partial, '/not-observed'), /unknown/)
   } finally { globalThis.fetch = original }
 })
+test('Bazaar paid-call counts and missing quality metrics remain distinct', () => {
+  const snapshot = parseProductIndex({ payTo: MAHA_PAYEE,
+    resources: [{ resource: url, serviceName: 'Compiler', quality: { l30DaysTotalCalls: 4, l30DaysUniquePayers: 4, lastCalledAt: at } },
+      { resource: url + '-pending' }], pagination: { total: 2, offset: 0 } }, at)
+  assert.equal(snapshot.listings?.[url].calls30d, 4)
+  assert.equal(snapshot.listings?.[url + '-pending'].calls30d, null)
+  assert.equal(snapshot.listings?.[url + '-pending'].serviceName, null)
+})
+test('invalid quality metrics and future timestamps never become valid activity', () => {
+  const snapshot = parseProductIndex({ payTo: MAHA_PAYEE, resources: [{ resource: url,
+    quality: { l30DaysTotalCalls: -1, l30DaysUniquePayers: 1.5, lastCalledAt: '2027-01-01T00:00:00Z' } }], pagination: { total: 1, offset: 0 } }, at)
+  assert.deepEqual(snapshot.listings?.[url], { serviceName: null, calls30d: null, payers30d: null, lastCalledAt: null })
+  assert.throws(() => parseProductIndex({ payTo: MAHA_PAYEE, resources: [{ resource: url }, { resource: url }], pagination: { total: 2, offset: 0 } }, at))
+})
