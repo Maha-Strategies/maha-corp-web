@@ -17,6 +17,7 @@ import { apiProxyGate } from '../lib/api-proxy-policy.ts'
 import { releasesSlot } from '../lib/x402/slot.ts'
 import { isReleasedMicro } from '../lib/x402/micro-release.ts'
 import { isCompatibilityProduct } from '../lib/x402/compatibility-contracts.ts'
+import { isExpansionProduct, expansionPaidContent, EXPANSION_IDS, EXPANSION_INDEXING_IDS } from '../lib/x402/expansion-registry.ts'
 
 const sample = (id: keyof typeof MICRO_PRODUCTS) => structuredClone(MICRO_SAMPLE_INPUTS[id])
 const root = new URL('../', import.meta.url)
@@ -34,7 +35,8 @@ for (const id of MICRO_IDS) {
     const result = await buildMicroProduct(id, input)
     assert.deepEqual(validate(result, offer.discovery.outputSchema), [])
     assert.ok(validate({ ...result, amountBaseUnits: offer.amount === '5000' ? '10000' : '5000' }, offer.discovery.outputSchema).length > 0)
-    assert.deepEqual(result, offer.discovery.output)
+    if (expansionPaidContent(id)) assert.equal((offer.discovery.output as { exampleOnly: boolean }).exampleOnly, true)
+    else assert.deepEqual(result, offer.discovery.output)
     assert.deepEqual(await buildMicroProduct(id, Object.fromEntries(Object.entries(input).reverse())), result)
     assert.ok(await verifyMicroProduct(id, input, result))
     const forged = structuredClone(result)
@@ -59,9 +61,9 @@ for (const id of MICRO_IDS) {
 }
 
 test('withheld products keep the two approved bands; released products hold their own rungs', () => {
-  assert.equal(MICRO_IDS.length, 37)
-  assert.equal(new Set(MICRO_IDS.map(microPath)).size, 37)
-  const original = MICRO_OFFERS.filter(o => !NEXT_IDS.includes(o.id as keyof typeof NEXT_PRODUCTS) && !isCompatibilityProduct(o.id) && !isPlanningProduct(o.id) && !EVIDENCE_CHECK_IDS.some(id => id === o.id))
+  assert.equal(MICRO_IDS.length, 37 + EXPANSION_IDS.length)
+  assert.equal(new Set(MICRO_IDS.map(microPath)).size, MICRO_IDS.length)
+  const original = MICRO_OFFERS.filter(o => !isExpansionProduct(o.id) && !NEXT_IDS.includes(o.id as keyof typeof NEXT_PRODUCTS) && !isCompatibilityProduct(o.id) && !isPlanningProduct(o.id) && !EVIDENCE_CHECK_IDS.some(id => id === o.id))
   assert.equal(original.length, 10)
 
   // Withheld products are not payable, so the ledger never indexes them and
@@ -77,7 +79,7 @@ test('withheld products keep the two approved bands; released products hold thei
   // offset. Each holds its own rung, separated from every other payable amount
   // by at least twice the facilitator fee, so no fee-scale perturbation can
   // alias one product's settlement onto another's.
-  const released = MICRO_OFFERS.filter(o => o.availability.payableInProduction)
+  const released = MICRO_OFFERS.filter(o => o.availability.payableInProduction && !(EXPANSION_INDEXING_IDS as readonly string[]).includes(o.id))
   assert.deepEqual(released.map(o => o.amount).sort((a, b) => Number(a) - Number(b)),
     ['6000', '7000', '8000', '9000', '10500', '11000', '13000', '14000', '15000', '16000', '17000',
       '18000', '19000', '21000', '22000', '29000', '36000', '38000', '39000', '41000', '59000', '63000', '70000', '80000', '87000', '90000', '119000', '150000', '160000', '180000'])

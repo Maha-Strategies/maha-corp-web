@@ -1,0 +1,42 @@
+name: Fifty-six product publisher-funded indexing
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 'One run only: PUBLISHER_FUNDED_EXPANSION_56_ONCE_MAX_2_7355_USDC'
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: production-x402-bazaar-canary
+  cancel-in-progress: false
+jobs:
+  index:
+    if: github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    environment: production-x402-canary
+    env:
+      BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
+      EXPANSION_CANARY_OUTPUT_PATH: ${{ github.workspace }}/expansion-indexing-evidence.json
+      EXPANSION_CANARY_CONFIRMATION: ${{ inputs.confirmation }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Check contracts and buy each approved result at most once
+        env:
+          X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
+        run: node --experimental-strip-types scripts/run-expansion-indexing.ts --pay
+      - name: Preserve sanitized payment and delivery evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: expansion-56-indexing-${{ github.run_id }}
+          path: ${{ env.EXPANSION_CANARY_OUTPUT_PATH }}
+          if-no-files-found: error
+          retention-days: 90

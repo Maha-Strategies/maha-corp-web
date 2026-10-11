@@ -15,6 +15,9 @@ if (process.env.X402_CABEZON_EBOOKS_ENABLED === 'true' && process.env.X402_EBOOK
 
 const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
+    // Shared microproduct contracts read pinned local book metadata; licensed
+    // paid packs need the original Markdown in their private server bundle.
+    '/api/v1/micro/*': ['./content/books/the-maha-principle/*.md', './content/books/the-orbital-mind/*.md', './content/books/the-volcanic-engine/The-Volcanic-Engine-Introduction.md'],
     '/api/v1/books/the-maha-principle/section': ['./content/books/the-maha-principle/*.md'],
     '/api/v1/books/the-orbital-mind/section': ['./content/books/the-orbital-mind/*.md'],
     '/api/astrology/platform': ['./lib/dossier/executive-astrology-dossier.typ'],

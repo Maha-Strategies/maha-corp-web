@@ -34,6 +34,11 @@
       "citation-binding-check",
       "revision-lineage-check",
       "audit-export-normalizer",
+      "dimensional-consistency-check",
+      "exact-interpolation-receipt",
+      "sampled-series-integration",
+      "evidence-conflict-comparator",
+      "astrology-experiment-plan-check",
       "unit-uncertainty-conversion",
       "exact-linear-system",
       "bracketed-polynomial-root",
@@ -60,7 +65,58 @@
       "neural-experiment-metrics",
       "evidence-scope-check",
       "evidence-version-selection-check",
-      "context-manifest-check"
+      "context-manifest-check",
+      "passage-hash-validation",
+      "claim-citation-coverage",
+      "citation-locator-conversion",
+      "provenance-graph-integrity",
+      "retrieval-recovery-regression",
+      "paper-cluster-retrieval-comparison",
+      "packing-displacement-analysis",
+      "evidence-budget-allocation",
+      "source-coverage-drift",
+      "exact-quote-alignment",
+      "extraction-consistency",
+      "reproducibility-manifest-builder",
+      "tool-argument-validation",
+      "workflow-dependency-validation",
+      "buyer-spending-policy-check",
+      "signed-receipt-verification",
+      "x402-challenge-sanity",
+      "settlement-delivery-reconciliation",
+      "idempotency-trace-audit",
+      "machine-license-permission-match",
+      "toy-grid-path-dry-run",
+      "digital-twin-config-diff",
+      "weighted-calibration-fit",
+      "sampling-aliasing-check",
+      "assembly-critical-path",
+      "manufacturing-yield-sensitivity",
+      "inspection-station-selection",
+      "material-cut-list-consolidation",
+      "feature-distribution-drift",
+      "intention-threshold-sweep",
+      "dwell-release-comparison",
+      "synthetic-artifact-test-pack",
+      "confidence-calibration-report",
+      "fictional-decision-debrief",
+      "spatial-adjacency-check",
+      "experiment-plan-completeness",
+      "partnership-milestone-review",
+      "research-opportunity-comparison",
+      "evidence-brief-export",
+      "public-amendment-lineage",
+      "spending-variance-bridge",
+      "transparency-hash-chain-verification",
+      "public-filing-amendment-resolver",
+      "angular-separation-batch",
+      "observing-window-planner",
+      "terrain-profile-arithmetic",
+      "volcano-concept-evidence-pack",
+      "edition-locator-alignment",
+      "manuscript-release-diff",
+      "cross-book-concept-pack",
+      "book-reading-pack-the-maha-principle"
     ],
     "offerSelectionGuide": "https://www.mahastrategies.com/.well-known/maha/offer-selection.json",
     "humanConfirmationScope": [
@@ -70,13 +126,8 @@
     ],
     "bindingCommitment": "Only a matching live PAYMENT-REQUIRED challenge proves an endpoint is enabled. Prices, licences and limitations are product-specific. Book sections sell one pinned Markdown section; the two 10 USDC bundles deliver their pinned EPUB and PDF files. Neither permits redistribution, resale or model training. Payment, delivery, indexing and customer acceptance are distinct. Idempotent paid jobs and ebook bundles support their declared recovery contracts; never repay automatically after an uncertain outcome. Stripe purchases and custom engagements require human confirmation.",
     "describedNotPayable": [
-      "dimensional-consistency-check",
-      "exact-interpolation-receipt",
-      "sampled-series-integration",
-      "evidence-conflict-comparator",
       "release-bound-evidence-packet",
-      "tiruvaymoli-context-packet",
-      "astrology-experiment-plan-check"
+      "tiruvaymoli-context-packet"
     ]
   },
   "credentialPolicy": {
@@ -640,82 +691,74 @@
     },
     {
       "id": "dimensional-consistency-check",
-      "status": "withheld",
+      "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/dimensional-consistency-check",
       "method": "POST",
       "description": "Multiply or divide two seven-component SI dimension vectors and compare with the expected output dimension. No unit conversion, formula validation, scale-factor inference or physical-model certification.",
-      "payableNow": false,
-      "blockedBy": [
-        "Outside the owner-authorized release; settlement remains disabled."
-      ],
+      "payableNow": true,
+      "blockedBy": [],
       "machinePayment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "5000",
+        "amount": "9500",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "payableNow": false
+        "autonomous": true,
+        "payableNow": true
       }
     },
     {
       "id": "exact-interpolation-receipt",
-      "status": "withheld",
+      "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/exact-interpolation-receipt",
       "method": "POST",
       "description": "Interpolate between two integer-coordinate points with exact rational arithmetic and an integrity receipt. Refuses extrapolation and repeated nodes. Does not estimate measurement error or validate the interpolation model.",
-      "payableNow": false,
-      "blockedBy": [
-        "Outside the owner-authorized release; settlement remains disabled."
-      ],
+      "payableNow": true,
+      "blockedBy": [],
       "machinePayment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "5000",
+        "amount": "11500",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "payableNow": false
+        "autonomous": true,
+        "payableNow": true
       }
     },
     {
       "id": "sampled-series-integration",
-      "status": "withheld",
+      "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/sampled-series-integration",
       "method": "POST",
       "description": "Apply the composite trapezoidal rule to 2-128 equally spaced integer samples. Returns an exact rational arithmetic result, declared units and an integrity receipt. No quadrature-error estimate or claim of an exact underlying integral.",
-      "payableNow": false,
-      "blockedBy": [
-        "Outside the owner-authorized release; settlement remains disabled."
-      ],
+      "payableNow": true,
+      "blockedBy": [],
       "machinePayment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "10000",
+        "amount": "18500",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "payableNow": false
+        "autonomous": true,
+        "payableNow": true
       }
     },
     {
       "id": "evidence-conflict-comparator",
-      "status": "withheld",
+      "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/evidence-conflict-comparator",
       "method": "POST",
       "description": "Compare 2-20 caller-labelled observations of one claim, population and outcome. Returns opposing directions and explicitly excluded observations. No literature search, source inspection, consensus judgment or factual verification.",
-      "payableNow": false,
-      "blockedBy": [
-        "Outside the owner-authorized release; settlement remains disabled."
-      ],
+      "payableNow": true,
+      "blockedBy": [],
       "machinePayment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "10000",
+        "amount": "21500",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "payableNow": false
+        "autonomous": true,
+        "payableNow": true
       }
     },
     {
@@ -760,22 +803,20 @@
     },
     {
       "id": "astrology-experiment-plan-check",
-      "status": "withheld",
+      "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/astrology-experiment-plan-check",
       "method": "POST",
       "description": "Check one structured public or synthetic low-stakes experiment plan for timing, comparator, outcome and analysis declarations. Returns deficiencies and an integrity receipt. No registration, trusted timestamp, prediction, power analysis or scientific validation.",
-      "payableNow": false,
-      "blockedBy": [
-        "Outside the owner-authorized release; settlement remains disabled."
-      ],
+      "payableNow": true,
+      "blockedBy": [],
       "machinePayment": {
         "protocol": "x402",
         "version": 2,
         "network": "eip155:8453",
-        "amount": "10000",
+        "amount": "48500",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "payableNow": false
+        "autonomous": true,
+        "payableNow": true
       }
     },
     {
@@ -1259,6 +1300,924 @@
         "version": 2,
         "network": "eip155:8453",
         "amount": "87000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "passage-hash-validation",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/passage-hash-validation",
+      "method": "POST",
+      "description": "Validate exact UTF-8 SHA-256 hashes for up to 64 public or synthetic passages. No Unicode normalization, source authentication, or semantic validation.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "4000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "claim-citation-coverage",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/claim-citation-coverage",
+      "method": "POST",
+      "description": "Check declared citation coverage of up to 64 claims against bounded source and locator inventories. Reject duplicate IDs and dangling references. Coverage is structural, not proof that a source supports a claim.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "23000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "citation-locator-conversion",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/citation-locator-conversion",
+      "method": "POST",
+      "description": "Convert half-open UTF-8 byte, UTF-16 code-unit, or Unicode code-point spans into all three units for supplied text. Reject offsets inside a code point. No PDF parsing, page inference, or external source lookup.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "24000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "provenance-graph-integrity",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/provenance-graph-integrity",
+      "method": "POST",
+      "description": "Inspect a declared dependency graph of up to 64 nodes and 128 edges: exact cycle membership, source-root reachability, and deterministic graph digest. Duplicate edges and dangling references are rejected. Hash declarations are not authenticated.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "32500",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "retrieval-recovery-regression",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/retrieval-recovery-regression",
+      "method": "POST",
+      "description": "Compare complete, partial, and missed evidence recovery on one matched, hash-frozen cohort of up to 64 questions and papers. Report paired transitions and a caller-declared complete-recovery drop threshold. Descriptive evidence-ID overlap, not answer quality or causal inference.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "74000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "paper-cluster-retrieval-comparison",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/paper-cluster-retrieval-comparison",
+      "method": "POST",
+      "description": "Compare paired frozen-cohort recovery with seeded whole-paper cluster resampling (100–2000 replicates, 2–64 papers, 64 questions). Report a descriptive percentile interval for question-weighted complete-recovery delta. No question-level bootstrap, significance test, or population guarantee.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "144000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "packing-displacement-analysis",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/packing-displacement-analysis",
+      "method": "POST",
+      "description": "Compare strict rank-prefix packing with rank-order greedy-fit and score-density greedy-fit for up to 64 passages under a 1–2048 token budget. Report evidence displacement and optional observed selection violations. Uses declared integer costs/scores; no tokenization or causal attribution.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "78000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "evidence-budget-allocation",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/evidence-budget-allocation",
+      "method": "POST",
+      "description": "Find an exact 0/1 maximum-declared-value allocation for up to 64 evidence items and a 0–4096 integer token budget. Deterministic ID-based tie handling; items are indivisible. Optimality applies only to the additive caller-declared values, not relevance or answer quality.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "28000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "source-coverage-drift",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/source-coverage-drift",
+      "method": "POST",
+      "description": "Compare source coverage on exactly the same declared record cohort across two snapshots. Report per-record gained/lost sources, per-source count changes, and global coverage drift. Reject unknown sources or missing/duplicate records. Coverage does not establish source quality.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "44500",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "exact-quote-alignment",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/exact-quote-alignment",
+      "method": "POST",
+      "description": "Check exact quotes at declared code-point offsets and enumerate overlapping exact occurrences in supplied text (first 32 offsets, complete count). Unicode/case/whitespace are not normalized. A matching quote does not establish factual or contextual support.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "26000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "extraction-consistency",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/extraction-consistency",
+      "method": "POST",
+      "description": "Compare up to 64 total extracted spans from at most 16 labeled tools against exact code-point slices of supplied source text and declared UTF-8 hashes. Group identical source spans to expose text disagreements. No OCR/PDF execution, normalization, or completeness claim.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "46500",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "reproducibility-manifest-builder",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/reproducibility-manifest-builder",
+      "method": "POST",
+      "description": "Build a stable hashed manifest of bounded public/synthetic artifact contents, declared dependencies, algorithm version, seed, and parameters. Verify declared content hashes; reject duplicate/dangling dependencies and cycles. No artifact fetching, execution replay, signing, or authenticity guarantee.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "64000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "tool-argument-validation",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/tool-argument-validation",
+      "method": "POST",
+      "description": "Check up to 32 JSON argument values against a closed, declared scalar tool contract: types, required fields, code-point length and exact safe-integer bounds. Rounded fractions/underflow are not integers. Returns unknown fields and mismatches. No remote references, arbitrary patterns, tool execution or MCP conformance certification.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "4500",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "workflow-dependency-validation",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/workflow-dependency-validation",
+      "method": "POST",
+      "description": "Check up to 64 workflow steps for duplicate IDs, missing dependencies and cycles. Returns a deterministic topological order only when valid. No scheduling, tool execution, access approval or guarantee that the workflow will succeed.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "27500",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "buyer-spending-policy-check",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/buyer-spending-policy-check",
+      "method": "POST",
+      "description": "Compare up to 64 proposed Base-USDC calls with a declared total budget, per-call cap, allowed payees and human-approval requirement. Returns policy mismatches and exact arithmetic totals. Does not authorize, sign or execute payments; caller approval labels are not verified.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "35000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "signed-receipt-verification",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/signed-receipt-verification",
+      "method": "POST",
+      "description": "Verify one Ed25519 signature over up to 8,000 characters of exact UTF-8 receipt text using a supplied 32-byte public key. Returns cryptographic validity and message hash. Does not establish issuer identity, trusted time, licensing or the truth of the receipt. No private keys accepted.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "12500",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "x402-challenge-sanity",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/x402-challenge-sanity",
+      "method": "POST",
+      "description": "Inspect one supplied x402-v2 exact-payment challenge against an explicit expected HTTPS resource, EVM CAIP-2 network, asset, payee and maximum price. Checks both URL declarations, structure and payment-policy fields only; no live probe, payment, facilitator verification or server-authenticity claim.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "3500",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "settlement-delivery-reconciliation",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/settlement-delivery-reconciliation",
+      "method": "POST",
+      "description": "Match up to 64 settlements with 64 delivery receipts, including 128 distinct request IDs. Reports missing/contradictory records, duplicate IDs and reused transaction references. Exact settled total includes only unique settlement IDs/transactions, independent of delivery matches. No chain fetch, proof of buyer receipt or fulfilled-sales claim.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "54000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "idempotency-trace-audit",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/idempotency-trace-audit",
+      "method": "POST",
+      "description": "Inspect up to 80 declared attempt records for nonce reuse across intents, changed inputs under one idempotency key, duplicate settlements and ambiguous outcomes. No raw payloads or credentials; no live state access, automatic retry or payment authorization.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "52000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "machine-license-permission-match",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/machine-license-permission-match",
+      "method": "POST",
+      "description": "Compare up to 32 requested uses with an explicit machine-readable license policy for reading, internal use, redistribution, resale or training. Unknown policies remain undetermined. Does not interpret legal prose, verify ownership, grant rights or provide a legal-compliance verdict.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "14500",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "toy-grid-path-dry-run",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/toy-grid-path-dry-run",
+      "method": "POST",
+      "description": "Deterministic four-neighbor BFS on a grid of at most 24×24 cells. Returns a shortest obstacle-free route or an explicit unreachable/step-limit result. Toy discrete geometry only; no hardware, collision certification or physical feasibility claim.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "34500",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "digital-twin-config-diff",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/digital-twin-config-diff",
+      "method": "POST",
+      "description": "Compare up to eight declared records per version, converting length units and comparing properties, XYZ poses and wrapped yaw against separate length/angle/ratio tolerances. Reports additions, removals, unit changes and incompatible dimensions. Not field certification.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "15500",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "weighted-calibration-fit",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/weighted-calibration-fit",
+      "method": "POST",
+      "description": "Fit y = intercept + slope*x to 2–64 declared pairs using positive weights and exact rational normal equations. Returns residuals and weighted SSE rounded to 12 decimal places, plus finite float64 RMSE. Rejects degenerate X values; weights are not verified uncertainties. Not field certification.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "26500",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "sampling-aliasing-check",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/sampling-aliasing-check",
+      "method": "POST",
+      "description": "Check a declared bandwidth and up to 16 tones against the strict Nyquist inequality, with equality reported separately. Computes folded tone frequencies exactly. Assumes uniform sampling, bandlimited input and no jitter; does not verify filters, acquisition hardware or real signal bandwidth.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "6500",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "assembly-critical-path",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/assembly-critical-path",
+      "method": "POST",
+      "description": "Compute earliest/latest starts and finishes and slack on a declared DAG of at most 48 tasks. Rejects cycles and unknown dependencies. Reports peak overlap of declared unit resource claims at the earliest schedule; does not optimize a resource-constrained schedule or verify physical resources.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "57000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "manufacturing-yield-sensitivity",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/manufacturing-yield-sensitivity",
+      "method": "POST",
+      "description": "Exact rational expected-yield and cost arithmetic for up to 16 scenarios and 12 sequential conditional reject rates. All batch units incur unit cost; rejected units incur an additional penalty. Reports differences from the first scenario and undefined cost per good unit at zero yield. Declared assumptions, not a production forecast.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "49000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "inspection-station-selection",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/inspection-station-selection",
+      "method": "POST",
+      "description": "Exact minimum-cost set cover over at most 12 stations and 16 declared requirements. Enumerates at most 4,095 nonempty subsets; breaks equal costs by station count then sorted keys. Reports infeasible coverage explicitly. Coverage and costs are caller declarations, not field verification.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "118000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "material-cut-list-consolidation",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/material-cut-list-consolidation",
+      "method": "POST",
+      "description": "Consolidate up to 128 cut rows by material and exact converted length in metres, summing integer quantities and total lengths without floating-point arithmetic. Supports mm/cm/m and four material classes. No kerf, stock nesting, waste optimization or fabrication certification.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "22500",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "feature-distribution-drift",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/feature-distribution-drift",
+      "method": "POST",
+      "description": "Compare up to 24 public/synthetic feature summaries: mean differences, reference-standardized shifts and variance ratios. Explicitly flags zero reference variance. Counts and variance convention are declared, not verified; not a distribution test or clinical inference. No raw EEG, participant identifiers or full participant signals.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "43000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "intention-threshold-sweep",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/intention-threshold-sweep",
+      "method": "POST",
+      "description": "Replay up to 24 declared thresholds over at most 512 labelled scores in contiguous half-open trials. Reports rest rising-edge false events, rest active time, intention misses and first-active latency. State carries across trials; scores are held to the next sample. Held-out status is declared, not verified. No automatic selection or live control.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "73000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "dwell-release-comparison",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/dwell-release-comparison",
+      "method": "POST",
+      "description": "Paired finite-state replay of onset/dwell and hysteretic release settings over at most 512 labelled offline scores. Timers and state carry across contiguous trials. At equal timestamps score changes precede timers; no event fires at the final endpoint. Reports paired false-event, miss and latency metrics. No hardware or live control.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "96000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "synthetic-artifact-test-pack",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/synthetic-artifact-test-pack",
+      "method": "POST",
+      "description": "Generate 16–256 original synthetic sine/noise samples with seeded LCG noise and declared nonoverlapping blink-like pulses, single-sample spikes or dropouts. Returns artifact labels in arbitrary synthetic units. Toy test data only, not physiological simulation or third-party research data; no participant signals.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "53000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "confidence-calibration-report",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/confidence-calibration-report",
+      "method": "POST",
+      "description": "Compute binary Brier score and count-weighted ECE for up to 256 declared held-out score/outcome pairs. Supports probability or percent scores, normalized to probabilities. Equal-width bins use exact rational boundaries: lower inclusive, upper exclusive, final bin includes 1. Empty bins report null means/gaps. No clinical validity claim.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "47000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "fictional-decision-debrief",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/fictional-decision-debrief",
+      "method": "POST",
+      "description": "Evaluate up to 64 explicitly fictional strategy/game choices against caller-declared integer utilities. Reports best declared actions, chosen utility, regret and observed-minus-declared error. No hindsight counterfactual outcome inference, financial advice, real-world intelligence assessment or strategy fitness claim.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "45000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "spatial-adjacency-check",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/spatial-adjacency-check",
+      "method": "POST",
+      "description": "Compare bounded room requirements with supplied topology; report unknown and contradictory declarations, not architectural approval.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "29500",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "experiment-plan-completeness",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/experiment-plan-completeness",
+      "method": "POST",
+      "description": "Check presence of baseline, primary measure, acceptance threshold and bounded stopping rule; no efficacy or statistical validation.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "37000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "partnership-milestone-review",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/partnership-milestone-review",
+      "method": "POST",
+      "description": "Review dependency cycles, declared evidence and completion prerequisites; no partner verification or evidence entailment.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "61000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "research-opportunity-comparison",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/research-opportunity-comparison",
+      "method": "POST",
+      "description": "Deterministic supplied-score ranking and one-criterion-at-a-time additive weight sensitivity, not research prediction.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "69000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "evidence-brief-export",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/evidence-brief-export",
+      "method": "POST",
+      "description": "Export caller-supplied public/synthetic plans and results as closed JSON and escaped plain-text Markdown with exact declared source references.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "109000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "public-amendment-lineage",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/public-amendment-lineage",
+      "method": "POST",
+      "description": "Map nonpersonal public revision IDs, declared field changes and effective dates; no legal effect or contract interpretation.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "56000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "spending-variance-bridge",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/spending-variance-bridge",
+      "method": "POST",
+      "description": "Exact integer-minor-unit period arithmetic with unknown propagation; never treat missing amounts as zero.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "55000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "transparency-hash-chain-verification",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/transparency-hash-chain-verification",
+      "method": "POST",
+      "description": "Verify a bounded civic-ledger-1 public organizational decision suffix against declared checkpoints, including expected-head truncation detection. No Merkle proof or anchor.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "38500",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "public-filing-amendment-resolver",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/public-filing-amendment-resolver",
+      "method": "POST",
+      "description": "Resolve declared committee-level filing IDs, duplicates and amendment chains only with explicit commercial authorization and no individual contributor information.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "58000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "angular-separation-batch",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/angular-separation-batch",
+      "method": "POST",
+      "description": "Great-circle angles for bounded caller-supplied right ascension and declination pairs in integer microdegrees; no ephemeris lookup.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "8500",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "observing-window-planner",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/observing-window-planner",
+      "method": "POST",
+      "description": "Deterministic approximate GMST geometry at supplied UTC samples, site and frozen equatorial positions; no refraction, weather, live data or continuous visibility claims.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "92000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "terrain-profile-arithmetic",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/terrain-profile-arithmetic",
+      "method": "POST",
+      "description": "Compute exact rises/runs and rounded slopes from bounded caller samples in millimetres. Not live volcanic hazard analysis.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "65000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "volcano-concept-evidence-pack",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/volcano-concept-evidence-pack",
+      "method": "POST",
+      "description": "Package allowlisted current original Maha repository paragraphs or explicitly licensed original microcontent, with exact edition/section citations; no official hazard forecast.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "89000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "edition-locator-alignment",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/edition-locator-alignment",
+      "method": "POST",
+      "description": "Align authorized declared edition locators for a supported Maha book, with unmapped and ambiguous states. No arbitrary PDF parsing or inferred textual equivalence.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "67000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "manuscript-release-diff",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/manuscript-release-diff",
+      "method": "POST",
+      "description": "Exact full-release and section hashes plus deterministic bounded line changes for explicitly licensed original Maha section versions; no semantic equivalence claim.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "83000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "cross-book-concept-pack",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/cross-book-concept-pack",
+      "method": "POST",
+      "description": "Package current original Maha repository microexcerpts or licensed original microtext with caller-declared cross-book links; authorial metaphor, not clinical truth.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "139000",
+        "assetSymbol": "USDC",
+        "autonomous": true,
+        "payableNow": true
+      }
+    },
+    {
+      "id": "book-reading-pack-the-maha-principle",
+      "status": "available",
+      "endpoint": "https://www.mahastrategies.com/api/v1/micro/book-reading-pack-the-maha-principle",
+      "method": "POST",
+      "description": "Purchase 1-3 complete selected Markdown sections of The Maha Principle in your reading order, pinned to the current edition digest. Maximum combined text 48,000 UTF-8 bytes. Includes per-section and pack integrity hashes; no EPUB/PDF, redistribution, resale, training rights, factual certification or personalized medical advice.",
+      "payableNow": true,
+      "blockedBy": [],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "91000",
         "assetSymbol": "USDC",
         "autonomous": true,
         "payableNow": true

@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { parseProductIndex, productIndexLabel } from '../lib/x402/product-index.ts'
+import { parseProductIndex, productIndexLabel, readProductIndex } from '../lib/x402/product-index.ts'
 import { MAHA_PAYEE } from '../lib/x402/discovery-payment-recipe.ts'
 const at = '2026-10-09T00:00:00Z'
 const url = 'https://www.mahastrategies.com/api/v1/example'
@@ -17,4 +17,27 @@ test('incomplete or unavailable lookups cannot assert absence', () => {
 test('wrong merchant or malformed payload is rejected, not shown as empty', () => {
   assert.throws(() => parseProductIndex({ resources: [] }, at))
   assert.throws(() => parseProductIndex({ payTo: '0xwrong', resources: [], pagination: { total: 0, offset: 0 } }, at))
+})
+test('catalogues over 100 are paginated without asserting absence after a changed or failed page', async () => {
+  const original = globalThis.fetch
+  const rows = Array.from({ length: 101 }, (_, i) => ({ resource: `https://www.mahastrategies.com/api/v1/example-${i}` }))
+  try {
+    const offsets: number[] = []
+    globalThis.fetch = async input => {
+      const offset = Number(new URL(String(input)).searchParams.get('offset'))
+      offsets.push(offset)
+      return Response.json({ payTo: MAHA_PAYEE, resources: rows.slice(offset, offset + 100), pagination: { total: 101, offset } })
+    }
+    const snapshot = await readProductIndex()
+    assert.equal(snapshot.complete, true); assert.equal(snapshot.resources.length, 101)
+    assert.deepEqual(offsets, [0, 100])
+    globalThis.fetch = async input => {
+      const offset = Number(new URL(String(input)).searchParams.get('offset'))
+      if (offset) throw new Error('second-page-unavailable')
+      return Response.json({ payTo: MAHA_PAYEE, resources: rows.slice(0, 100), pagination: { total: 101, offset: 0 } })
+    }
+    const partial = await readProductIndex()
+    assert.equal(partial.complete, false); assert.equal(partial.resources.length, 100)
+    assert.match(productIndexLabel(partial, '/not-observed'), /unknown/)
+  } finally { globalThis.fetch = original }
 })

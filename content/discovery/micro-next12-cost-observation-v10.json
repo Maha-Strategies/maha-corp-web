@@ -1,0 +1,299 @@
+{
+  "version": "micro-next12-cost-observation/10",
+  "supersedes": "micro-next12-cost-observation-v9.json",
+  "revisionReason": "Rebind the unchanged twelve-product workloads after shared registry typing, offer typing, physical category and research/book-server fixes. Preserve v1-v9 as immutable history. Per-file hashes expose the binding scope; expansion products are not profiled by this record.",
+  "basis": "local-process; one example and 31 capped high-size fixture repetitions per product, not an exhaustive worst-case proof, cloud billing or Vercel bill. Wall-clock timings are sensitive to uncontrolled host load and scheduling; no causal attribution to contention or guaranteed 100 ms latency.",
+  "observedAt": "2026-10-11T08:21:18.369Z",
+  "implementationFiles": [
+    "lib/x402/micro-next-contracts.ts",
+    "lib/x402/micro-next-numerics.ts",
+    "lib/x402/micro-next-products.ts",
+    "lib/x402/micro-next-religion.ts",
+    "lib/x402/micro-next-samples.ts",
+    "lib/x402/micro-products.ts",
+    "lib/x402/micro-contracts.ts",
+    "lib/x402/micro-output-schemas.ts",
+    "lib/x402/micro-schema.ts",
+    "lib/mayon-knowledge.ts",
+    "lib/mayon-topics.ts",
+    "lib/tiruvaymoli-passage-atlas.ts",
+    "lib/tamil-source-atlas.ts",
+    "lib/x402/expansion-registry.ts",
+    "lib/x402/expansion-evidence.ts",
+    "lib/x402/expansion-commerce.ts",
+    "lib/x402/expansion-physical-neural.ts",
+    "lib/x402/expansion-research-content.ts",
+    "lib/x402/expansion-book-pack.ts",
+    "lib/x402/micro-offers.ts",
+    "lib/x402/micro-release.ts",
+    "lib/x402/micro-price-policy.ts",
+    "lib/x402/offers.ts",
+    "scripts/profile-next12.ts"
+  ],
+  "implementationFileDigests": [
+    {
+      "path": "lib/x402/micro-next-contracts.ts",
+      "contentDigest": "sha256:1bc056e4bf9ae148ada4a2400dcb27aa9882ce12837336167061c22a3e239340"
+    },
+    {
+      "path": "lib/x402/micro-next-numerics.ts",
+      "contentDigest": "sha256:48e578ae97361c2232ba4fc85a17c71018b0208f98a17585e4cbddde2c8155f1"
+    },
+    {
+      "path": "lib/x402/micro-next-products.ts",
+      "contentDigest": "sha256:ec199e2f82e533177cf562a3e20b26d0ae81dcf844df141816a2bb8a0aafb0cc"
+    },
+    {
+      "path": "lib/x402/micro-next-religion.ts",
+      "contentDigest": "sha256:fe63185f782c41bcc1536665c2864a53dffab32e95d01f36be878deb961f614e"
+    },
+    {
+      "path": "lib/x402/micro-next-samples.ts",
+      "contentDigest": "sha256:801d1db4304b0ffd36c5cc6e658a7a3e33f359ae3076223f4e08fa78dcc32ab7"
+    },
+    {
+      "path": "lib/x402/micro-products.ts",
+      "contentDigest": "sha256:6cce067ed55d8640b2286b63751f5a1fdbc332fe7a3a63ef550ee88815e8d6e3"
+    },
+    {
+      "path": "lib/x402/micro-contracts.ts",
+      "contentDigest": "sha256:d578c158287d95e92d38a3c4759edd2f849926f6c036455f2f8e34249b92ceef"
+    },
+    {
+      "path": "lib/x402/micro-output-schemas.ts",
+      "contentDigest": "sha256:0ea70b14e8eb25c8360b591dd7261d065c81a6788fb6268424c3b415f8d49920"
+    },
+    {
+      "path": "lib/x402/micro-schema.ts",
+      "contentDigest": "sha256:96eb3a443b852566f36a6e3597b043ffce4b2a7255835363be48f0b07244fe4f"
+    },
+    {
+      "path": "lib/mayon-knowledge.ts",
+      "contentDigest": "sha256:dce5fff7b8fcd15532c212ed5c439d24da12ec4581cc30765e7c221afafbb6f2"
+    },
+    {
+      "path": "lib/mayon-topics.ts",
+      "contentDigest": "sha256:3d6126d3fa7e8e1e6fc431e10b1407b2b3e9d914c45f1147441f24df18c82748"
+    },
+    {
+      "path": "lib/tiruvaymoli-passage-atlas.ts",
+      "contentDigest": "sha256:8230f10feeb0de689b9520214b459b9271a3d139806a78ceafdd1476325e026d"
+    },
+    {
+      "path": "lib/tamil-source-atlas.ts",
+      "contentDigest": "sha256:c296aaaf6bed2d2a7a4d47be45c0defc5c18bd14f2797219502f3bcdee4ed892"
+    },
+    {
+      "path": "lib/x402/expansion-registry.ts",
+      "contentDigest": "sha256:62a94101129b96584d51abbf4af6bce233670b8bbe0124a721611a526e2509d6"
+    },
+    {
+      "path": "lib/x402/expansion-evidence.ts",
+      "contentDigest": "sha256:e0a89aef9b56f87717433b29b213a0f4a0a049573220f74e34136f11c87ffc1a"
+    },
+    {
+      "path": "lib/x402/expansion-commerce.ts",
+      "contentDigest": "sha256:a8c59e72a026bd2ec67bb9b683bf60094b8ddbc71833252207a2247e9f4933ba"
+    },
+    {
+      "path": "lib/x402/expansion-physical-neural.ts",
+      "contentDigest": "sha256:b1bd0450dc07114d51ae653a1233acc15edbd335112e9d00a3aaec8a5d6c0149"
+    },
+    {
+      "path": "lib/x402/expansion-research-content.ts",
+      "contentDigest": "sha256:042a145b1071bc6c159548dd8569c5b721ca94cb265302d171c86cd49da935d5"
+    },
+    {
+      "path": "lib/x402/expansion-book-pack.ts",
+      "contentDigest": "sha256:34248811c5680dd3dcfe561fdfdbc96825cd013a08fb654f9d0d46d6e98d76e6"
+    },
+    {
+      "path": "lib/x402/micro-offers.ts",
+      "contentDigest": "sha256:497347059f629a6d5f3023b5f2ec6f0eeada3ec2202fbd5252e129c21ab9482d"
+    },
+    {
+      "path": "lib/x402/micro-release.ts",
+      "contentDigest": "sha256:831579497aa7e9ec10ea6eacd0d4ffd7bfc01cf3a17f64be9a3a5e35ed910437"
+    },
+    {
+      "path": "lib/x402/micro-price-policy.ts",
+      "contentDigest": "sha256:f77c82962ebd15e5986527412ebe15805a76823bd156787adbf51cf8c4ce194e"
+    },
+    {
+      "path": "lib/x402/offers.ts",
+      "contentDigest": "sha256:f75dc6b6115eb7ff631743d65b1abcd69d6007a12d9973f76844c9523cf8dd47"
+    },
+    {
+      "path": "scripts/profile-next12.ts",
+      "contentDigest": "sha256:5a38b12e1e258b10ce1e379545ab4af0a2a5e39938ec69ee9b099412889e6523"
+    }
+  ],
+  "implementationDigest": "sha256:e7c16b5496483e30164080de78c5713a6492b4464e1becc20c988eb30f51c15a",
+  "workloadsDigest": "sha256:f687debf2cc98916615f306ce9f2274c3d5312b4c823649d6c127778e04374f9",
+  "nodeVersion": "v26.5.0",
+  "observations": [
+    {
+      "id": "unit-uncertainty-conversion",
+      "calls": 32,
+      "coldMs": 0.9684999999999775,
+      "cappedWorkloadP95Ms": 0.21004100000001813,
+      "cappedWorkloadMaxMs": 0.26200000000000045,
+      "cpuMicros": 7754,
+      "requestBytes": 147,
+      "responseBytes": 1427,
+      "providerCalls": 0,
+      "cloudCostUsd": null,
+      "implementationDigest": "sha256:e7c16b5496483e30164080de78c5713a6492b4464e1becc20c988eb30f51c15a"
+    },
+    {
+      "id": "exact-linear-system",
+      "calls": 32,
+      "coldMs": 0.4787910000000011,
+      "cappedWorkloadP95Ms": 10.739832999999976,
+      "cappedWorkloadMaxMs": 11.311624999999992,
+      "cpuMicros": 273559,
+      "requestBytes": 534,
+      "responseBytes": 2468,
+      "providerCalls": 0,
+      "cloudCostUsd": null,
+      "implementationDigest": "sha256:e7c16b5496483e30164080de78c5713a6492b4464e1becc20c988eb30f51c15a"
+    },
+    {
+      "id": "bracketed-polynomial-root",
+      "calls": 32,
+      "coldMs": 0.44445799999999736,
+      "cappedWorkloadP95Ms": 9.896250000000009,
+      "cappedWorkloadMaxMs": 9.91783399999997,
+      "cpuMicros": 271365,
+      "requestBytes": 165,
+      "responseBytes": 1390,
+      "providerCalls": 0,
+      "cloudCostUsd": null,
+      "implementationDigest": "sha256:e7c16b5496483e30164080de78c5713a6492b4464e1becc20c988eb30f51c15a"
+    },
+    {
+      "id": "covariance-uncertainty",
+      "calls": 32,
+      "coldMs": 0.6059159999999792,
+      "cappedWorkloadP95Ms": 1.4430409999999938,
+      "cappedWorkloadMaxMs": 1.5426250000000437,
+      "cpuMicros": 38814,
+      "requestBytes": 571,
+      "responseBytes": 1488,
+      "providerCalls": 0,
+      "cloudCostUsd": null,
+      "implementationDigest": "sha256:e7c16b5496483e30164080de78c5713a6492b4464e1becc20c988eb30f51c15a"
+    },
+    {
+      "id": "divine-name-disambiguation",
+      "calls": 32,
+      "coldMs": 43.89675,
+      "cappedWorkloadP95Ms": 1.8167499999999563,
+      "cappedWorkloadMaxMs": 2.2029999999999745,
+      "cpuMicros": 54358,
+      "requestBytes": 136,
+      "responseBytes": 2397,
+      "providerCalls": 0,
+      "cloudCostUsd": null,
+      "implementationDigest": "sha256:e7c16b5496483e30164080de78c5713a6492b4464e1becc20c988eb30f51c15a"
+    },
+    {
+      "id": "edition-verse-resolution",
+      "calls": 32,
+      "coldMs": 3.526666999999975,
+      "cappedWorkloadP95Ms": 3.6937500000000227,
+      "cappedWorkloadMaxMs": 3.7668750000000273,
+      "cpuMicros": 103559,
+      "requestBytes": 190,
+      "responseBytes": 1580,
+      "providerCalls": 0,
+      "cloudCostUsd": null,
+      "implementationDigest": "sha256:e7c16b5496483e30164080de78c5713a6492b4464e1becc20c988eb30f51c15a"
+    },
+    {
+      "id": "reception-lineage-retrieval",
+      "calls": 32,
+      "coldMs": 4.5069579999999405,
+      "cappedWorkloadP95Ms": 4.8125,
+      "cappedWorkloadMaxMs": 5.13820799999985,
+      "cpuMicros": 139135,
+      "requestBytes": 167,
+      "responseBytes": 3994,
+      "providerCalls": 0,
+      "cloudCostUsd": null,
+      "implementationDigest": "sha256:e7c16b5496483e30164080de78c5713a6492b4464e1becc20c988eb30f51c15a"
+    },
+    {
+      "id": "policy-version-comparison",
+      "calls": 32,
+      "coldMs": 0.44554199999993216,
+      "cappedWorkloadP95Ms": 0.8744159999998828,
+      "cappedWorkloadMaxMs": 1.0532080000000406,
+      "cpuMicros": 37430,
+      "requestBytes": 15172,
+      "responseBytes": 3127,
+      "providerCalls": 0,
+      "cloudCostUsd": null,
+      "implementationDigest": "sha256:e7c16b5496483e30164080de78c5713a6492b4464e1becc20c988eb30f51c15a"
+    },
+    {
+      "id": "control-evidence-gaps",
+      "calls": 32,
+      "coldMs": 0.25633399999992434,
+      "cappedWorkloadP95Ms": 1.4375410000000102,
+      "cappedWorkloadMaxMs": 1.4409590000000208,
+      "cpuMicros": 61653,
+      "requestBytes": 26024,
+      "responseBytes": 5504,
+      "providerCalls": 0,
+      "cloudCostUsd": null,
+      "implementationDigest": "sha256:e7c16b5496483e30164080de78c5713a6492b4464e1becc20c988eb30f51c15a"
+    },
+    {
+      "id": "mcp-contract-compatibility",
+      "calls": 32,
+      "coldMs": 0.14970900000002985,
+      "cappedWorkloadP95Ms": 0.5024160000000393,
+      "cappedWorkloadMaxMs": 0.5622090000001663,
+      "cpuMicros": 14078,
+      "requestBytes": 12632,
+      "responseBytes": 1277,
+      "providerCalls": 0,
+      "cloudCostUsd": null,
+      "implementationDigest": "sha256:e7c16b5496483e30164080de78c5713a6492b4464e1becc20c988eb30f51c15a"
+    },
+    {
+      "id": "tool-permission-diff",
+      "calls": 32,
+      "coldMs": 0.2725409999998192,
+      "cappedWorkloadP95Ms": 5.932457999999997,
+      "cappedWorkloadMaxMs": 6.354708000000073,
+      "cpuMicros": 105578,
+      "requestBytes": 5506,
+      "responseBytes": 6646,
+      "providerCalls": 0,
+      "cloudCostUsd": null,
+      "implementationDigest": "sha256:e7c16b5496483e30164080de78c5713a6492b4464e1becc20c988eb30f51c15a"
+    },
+    {
+      "id": "publication-bundle-consistency",
+      "calls": 32,
+      "coldMs": 0.7507499999999254,
+      "cappedWorkloadP95Ms": 0.19966699999986304,
+      "cappedWorkloadMaxMs": 0.2750410000001011,
+      "cpuMicros": 4651,
+      "requestBytes": 3584,
+      "responseBytes": 1495,
+      "providerCalls": 0,
+      "cloudCostUsd": null,
+      "implementationDigest": "sha256:e7c16b5496483e30164080de78c5713a6492b4464e1becc20c988eb30f51c15a"
+    }
+  ],
+  "remoteCalls": 0,
+  "deploymentBuilds": 0,
+  "paymentAttempts": 0,
+  "indexingPurchases": 0,
+  "cloudBillingMeasured": false,
+  "exhaustiveWorstCaseProof": false,
+  "digest": "sha256:7eebb08733dacf74d9a3f63d3fd183561e444ef84743d1724730f387a5a2719c"
+}

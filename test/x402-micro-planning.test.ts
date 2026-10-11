@@ -51,11 +51,21 @@ test('ten authorized batch prices are explicit and require a recognized environm
 
 test('the build list binds prices, bounded measurements and current code without enabling deployment', () => {
   execFileSync(process.execPath, ['--experimental-strip-types', 'scripts/profile-planning-ten.ts', '--check'], { cwd: new URL('../', import.meta.url) })
-  const { digest, ...record } = JSON.parse(readFileSync(new URL('../content/discovery/micro-planning-build-list-v4.json', import.meta.url), 'utf8'))
+  const { digest, ...record } = JSON.parse(readFileSync(new URL('../content/discovery/micro-planning-build-list-v6.json', import.meta.url), 'utf8'))
+  const previous = JSON.parse(readFileSync(new URL('../content/discovery/micro-planning-build-list-v5.json', import.meta.url), 'utf8'))
   assert.equal(digest, microDigest(record)); assert.deepEqual(record.buildList.map((r: { id: string }) => r.id), PLANNING_IDS)
+  assert.equal(record.version, 'micro-planning-build-list/6'); assert.equal(record.supersedes, 'micro-planning-build-list-v5.json')
+  assert.equal(record.workloadsDigest, previous.workloadsDigest); assert.deepEqual(record.buildList, previous.buildList)
+  assert.equal(record.implementationDigest, microDigest(record.implementationFiles.map((path: string) => ({ path, digest: microDigest(readFileSync(new URL('../' + path, import.meta.url), 'utf8')) }))))
+  assert.deepEqual(record.implementationFileDigests, record.implementationFiles.map((path: string) => ({ path, digest: microDigest(readFileSync(new URL('../' + path, import.meta.url), 'utf8')) })))
+  for (const path of ['lib/x402/expansion-registry.ts', 'lib/x402/expansion-evidence.ts', 'lib/x402/expansion-commerce.ts', 'lib/x402/expansion-physical-neural.ts', 'lib/x402/expansion-research-content.ts', 'lib/x402/expansion-book-pack.ts']) assert.ok(record.implementationFiles.includes(path), path)
   assert.equal(record.deploymentHeld, true); assert.equal(record.remoteCalls, 0); assert.equal(record.indexingPurchases, 0)
+  assert.equal(record.deploymentBuilds, 0); assert.equal(record.paymentAttempts, 0)
+  assert.equal(record.cloudBillingMeasured, false); assert.equal(record.exhaustiveWorstCaseProof, false)
+  assert.match(record.basis, /not an exhaustive worst-case proof.*cloud billing/)
   assert.equal(record.buildList.reduce((n: number, r: { amountBaseUnits: string }) => n + Number(r.amountBaseUnits), 0), 976000)
-  for (const o of record.observations) { assert.equal(o.calls, 32); assert.equal(o.cloudCostUsd, null); assert.ok(o.requestBytes <= 32768 && o.responseBytes <= 65536) }
+  assert.equal(record.observations.length, PLANNING_IDS.length)
+  for (const o of record.observations) { assert.equal(o.calls, 32); assert.equal(o.cloudCostUsd, null); assert.equal(o.providerCalls, 0); assert.ok(o.requestBytes <= 32768 && o.responseBytes <= 65536); assert.ok(o.cappedFixtureP95Ms >= 0 && o.cappedFixtureP95Ms <= o.cappedFixtureMaxMs) }
 })
 
 test('every capped synthetic fixture produces a schema-valid result within byte limits', async () => {

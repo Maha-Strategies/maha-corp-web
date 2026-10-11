@@ -1,17 +1,50 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { readFileSync } from 'node:fs'
+import { createHash } from 'node:crypto'
 import { execFileSync, spawnSync } from 'node:child_process'
 import { resolve } from 'node:path'
 import { microDigest } from '../lib/x402/micro-products.ts'
 import { NEXT_IDS } from '../lib/x402/micro-next-contracts.ts'
 import { X402_OFFERS } from '../lib/x402/offers.ts'
+import { EXPANSION_IDS, EXPANSION_UTILITY_IDS } from '../lib/x402/expansion-registry.ts'
 
 const root = resolve(import.meta.dirname, '..'), read = (path: string) => readFileSync(resolve(root, path), 'utf8')
 const freeze = JSON.parse(read('content/discovery/micro-candidate-freeze-v1.json'))
-const selection = JSON.parse(read('content/discovery/micro60-selection-v3.json'))
-const costs = JSON.parse(read('content/discovery/micro-next12-cost-observation-v8.json'))
+const selection = JSON.parse(read('content/discovery/micro60-selection-v5.json'))
+const costs = JSON.parse(read('content/discovery/micro-next12-cost-observation-v10.json'))
 const unsigned = (o: object) => Object.fromEntries(Object.entries(o).filter(([k]) => k !== 'digest'))
+// Owner approval permits exactly these formerly withheld status/price changes;
+// it does not authorize rewriting the original 24-offer frozen snapshot.
+const OWNER_APPROVED_PROMOTIONS = new Map([
+  ['dimensional-consistency-check', '9500'], ['exact-interpolation-receipt', '11500'],
+  ['sampled-series-integration', '18500'], ['evidence-conflict-comparator', '21500'],
+  ['astrology-experiment-plan-check', '48500'],
+])
+const expansionImplementationFiles = ['lib/x402/expansion-registry.ts', 'lib/x402/expansion-evidence.ts', 'lib/x402/expansion-commerce.ts', 'lib/x402/expansion-physical-neural.ts', 'lib/x402/expansion-research-content.ts', 'lib/x402/expansion-book-pack.ts']
+// Raw byte hashes recorded before this scoped recapture. Historical records do
+// not need to match current code; neither their bodies nor formatting may change.
+const HISTORICAL_ARTIFACT_SHA256: Record<string, string> = {
+  'content/discovery/micro-next12-cost-observation-v1.json': '2278a9eee5f41c63e4ffbf03a5703ee7039eff8d41da5b98629ec9a86eb08303',
+  'content/discovery/micro-next12-cost-observation-v2.json': '49c32a8c1649f17919a885a5b6293b81e5c05d7e2c7589a0590680e83b61764d',
+  'content/discovery/micro-next12-cost-observation-v3.json': 'ccfb1eaf1f08df4b692ebf14c9682e66d2d94ef05fcffd680722f3763579334b',
+  'content/discovery/micro-next12-cost-observation-v4.json': '4e6452cb486b9c8218a454c9908ad00412f38575c639279398cf15df12eb6398',
+  'content/discovery/micro-next12-cost-observation-v5.json': '331a5c58e142fdefdbe0a4512f053d39c43cee5cf3d31d4680d2ba25929951d1',
+  'content/discovery/micro-next12-cost-observation-v6.json': 'c0c45d62d2f3131c22edf1d3732a2ac072926052e869b2c4d9e89c13d891e5f6',
+  'content/discovery/micro-next12-cost-observation-v7.json': '7597a01558266a70d2231fdf3a886250ca6331e94dc47d316b1a846e3f6e2eba',
+  'content/discovery/micro-next12-cost-observation-v8.json': '2935f85c2d5dd74fb37719d34a600fa0e44a7085a0692514752ac2ba2cde446b',
+  'content/discovery/micro-planning-build-list-v1.json': 'bd9b1893f1d6ae007731b5c42763769c9ae5d785258675ddaea30d14cbdfccca',
+  'content/discovery/micro-planning-build-list-v2.json': 'b8c8a902c0bbac6ebf99444bcccd90b009417d0f92355f1155a8bf59244e7c05',
+  'content/discovery/micro-planning-build-list-v3.json': 'b048b69d8b5d98a617e46a7845cda63ddbe1e0c2e4076d72d765da6852cb3745',
+  'content/discovery/micro-planning-build-list-v4.json': 'bdb5160429e77bb0c2a342969adb5d9e733e845d33d0849bbc8939daafd0542f',
+  'content/discovery/micro60-selection-v1.json': '4f9d54c6483f43b394d4dbb70b2f81206fb21b2e22750d4e6a8228be565dc57b',
+  'content/discovery/micro60-selection-v2.json': '1359730356f45014eb157c9a85fb34ecb73f595b8f407aff74d5587ef1842480',
+  'content/discovery/micro60-selection-v3.json': '59349bc4e9b6adb1dd2205593884c83ffbabeeb50cc7250725e100d664f7d47e',
+  'content/discovery/micro-candidate-freeze-v1.json': '02dcd34b1298b91384c5c4b218efaf0b274924410445004cdda6a4daeb9bbc32',
+  'content/discovery/micro-next12-cost-observation-v9.json': 'cbc30e66e70428ef6181c81baf2ac307045b3f9631db41db05623218b4e94e37',
+  'content/discovery/micro-planning-build-list-v5.json': '8d45757dce6e9df862b17ce07a3938a636e92c817b230390fb99b5f1ebf29693',
+  'content/discovery/micro60-selection-v4.json': '8308247aa607ab0df9b6db358a653df5f3d6d50bf1e1433f86ea1bfcf0dea654',
+}
 
 test('freeze enumerates sixty original candidates and refuses to overwrite the original 24-offer baseline', () => {
   assert.equal(freeze.candidates.length, 60)
@@ -65,15 +98,29 @@ test('freeze enumerates sixty original candidates and refuses to overwrite the o
     } else {
       assert.equal(current.description, prior.description, `${prior.id}:description`)
     }
-    const expectedAmount = repricedForAttribution.get(prior.id) ?? prior.amount
+    const expectedAmount = OWNER_APPROVED_PROMOTIONS.get(prior.id) ?? repricedForAttribution.get(prior.id) ?? prior.amount
     assert.equal(current.amount, expectedAmount, `${prior.id}:amount`)
-    if (repricedForAttribution.has(prior.id)) {
+    if (repricedForAttribution.has(prior.id) || OWNER_APPROVED_PROMOTIONS.has(prior.id)) {
       const moved = BigInt(current.amount) - BigInt(prior.amount)
       assert.ok(moved > BigInt(0), `${prior.id}: no published price is cut without a recorded reason`)
     }
-    // Freeze is immutable history. Only the three explicitly promoted original ten may change status.
-    const promoted = ['citation-binding-check', 'revision-lineage-check', 'audit-export-normalizer'].includes(prior.id)
+    // Freeze stays immutable: only the original three plus the five explicitly
+    // owner-approved promotions may change status. Other drift still fails.
+    const promoted = ['citation-binding-check', 'revision-lineage-check', 'audit-export-normalizer'].includes(prior.id) || OWNER_APPROVED_PROMOTIONS.has(prior.id)
     assert.equal(current.status, promoted ? 'available' : prior.status, `${prior.id}:status`)
+  }
+})
+
+test('expanded integration contains 51 new products and exactly five owner-approved promotions', () => {
+  assert.equal(EXPANSION_IDS.length, 51)
+  assert.deepEqual([...EXPANSION_UTILITY_IDS].sort(), [...OWNER_APPROVED_PROMOTIONS.keys()].sort())
+  for (const [id, amount] of OWNER_APPROVED_PROMOTIONS) {
+    const historical = freeze.existingOffers.find((o: { id: string }) => o.id === id)
+    const current = X402_OFFERS.find(o => o.id === id)!
+    assert.equal(historical.status, 'withheld'); assert.equal(current.status, 'available')
+    assert.equal(current.amount, amount)
+    assert.equal(current.availability.payableInProduction, true)
+    assert.equal(current.path, historical.path); assert.equal(current.description, historical.description)
   }
 })
 
@@ -96,23 +143,53 @@ test('sixty semantic decisions partition honestly; merged entries name a retaine
 
 test('selected scores require actual bounded local observations, not zero-cost guesses for unmeasured products', () => {
   assert.equal(costs.digest, microDigest(unsigned(costs)))
+  assert.equal(costs.version, 'micro-next12-cost-observation/10')
+  assert.equal(costs.supersedes, 'micro-next12-cost-observation-v9.json')
+  assert.equal(selection.version, 'micro60-selection/5'); assert.equal(selection.supersedes, 'micro60-selection-v4.json')
+  assert.equal(costs.workloadsDigest, JSON.parse(read('content/discovery/micro-next12-cost-observation-v9.json')).workloadsDigest)
+  assert.equal(costs.cloudBillingMeasured, false); assert.equal(costs.exhaustiveWorstCaseProof, false)
+  assert.equal(costs.remoteCalls, 0); assert.equal(costs.deploymentBuilds, 0); assert.equal(costs.paymentAttempts, 0); assert.equal(costs.indexingPurchases, 0)
+  assert.match(costs.basis, /not an exhaustive worst-case proof.*cloud billing/)
+  assert.match(selection.qualification, /not a current ranking.*expanded catalogue/)
+  assert.equal(costs.implementationDigest, microDigest(costs.implementationFiles.map((path: string) => ({ path, contentDigest: microDigest(read(path)) }))))
+  assert.deepEqual(costs.implementationFileDigests, costs.implementationFiles.map((path: string) => ({ path, contentDigest: microDigest(read(path)) })))
+  for (const path of expansionImplementationFiles) assert.ok(costs.implementationFiles.includes(path), path)
   for (const id of NEXT_IDS) {
     const row = selection.rows.find((r: { productId: string }) => r.productId === id), observation = costs.observations.find((r: { id: string }) => r.id === id)
     assert.equal(observation.calls, 32)
     assert.equal(observation.providerCalls, 0)
     assert.equal(observation.cloudCostUsd, null)
     assert.ok(observation.requestBytes <= 32768 && observation.responseBytes <= 65536)
-    assert.ok(observation.cappedWorkloadP95Ms >= 0 && observation.cappedWorkloadP95Ms <= 100)
+    // Assert persisted measurements, not a live elapsed-time SLA under a
+    // concurrently running full suite or build. The review's bound stays 100 ms.
+    assert.ok(Number.isFinite(observation.cappedWorkloadP95Ms) && observation.cappedWorkloadP95Ms >= 0 && observation.cappedWorkloadP95Ms <= 100, `${id}: captured local p95 ${observation.cappedWorkloadP95Ms} ms exceeds the 100 ms selection bound`)
+    assert.ok(Number.isFinite(observation.cappedWorkloadMaxMs) && observation.cappedWorkloadP95Ms <= observation.cappedWorkloadMaxMs)
     assert.equal(row.score, row.utilityScore * 4 + row.evidenceScore * 4 + row.localCostScore * 2)
     assert.ok(row.evidencePacket.locator && row.evidencePacket.rights && row.evidencePacket.boundary)
   }
 })
 
 test('map and examples regenerate deterministically; profiled implementation remains bound', () => {
-  const files = ['content/discovery/micro-candidate-freeze-v1.json', 'content/discovery/micro60-selection-v1.json', 'content/discovery/micro-next12-cost-observation-v1.json', 'content/discovery/micro-next12-cost-observation-v2.json', 'content/discovery/micro-next12-cost-observation-v3.json', 'content/discovery/micro-next12-cost-observation-v4.json', 'content/discovery/micro-next12-cost-observation-v5.json', 'content/discovery/micro-next12-cost-observation-v6.json', 'content/discovery/micro-next12-cost-observation-v7.json', 'content/discovery/micro60-selection-v2.json', 'content/discovery/microproduct-examples.json']
+  const files = [...Object.keys(HISTORICAL_ARTIFACT_SHA256), 'content/discovery/micro-next12-cost-observation-v10.json', 'content/discovery/micro-planning-build-list-v6.json', 'content/discovery/micro60-selection-v5.json', 'content/discovery/microproduct-examples.json']
   const before = files.map(read)
   for (let i = 0; i < 2; i++) for (const script of ['freeze-micro-candidates', 'profile-next12', 'review-micro-candidates', 'generate-microproduct-examples', 'sync-microproduct-discovery']) execFileSync(process.execPath, ['--experimental-strip-types', `scripts/${script}.ts`, '--check'], { cwd: root })
   assert.deepEqual(files.map(read), before)
+})
+
+test('fresh versioned records cannot be recaptured or overwritten; every historical artifact stays byte-identical', () => {
+  const files = [...Object.keys(HISTORICAL_ARTIFACT_SHA256), 'content/discovery/micro-next12-cost-observation-v10.json', 'content/discovery/micro-planning-build-list-v6.json', 'content/discovery/micro60-selection-v5.json']
+  const before = files.map(read)
+  for (const [script, arg] of [['profile-next12', '--capture'], ['profile-planning-ten', '--capture'], ['review-micro-candidates', '--write']]) {
+    const attempt = spawnSync(process.execPath, ['--experimental-strip-types', `scripts/${script}.ts`, arg], { cwd: root })
+    assert.notEqual(attempt.status, 0)
+    assert.match(attempt.stderr.toString(), /immutable-profile-already-exists|EEXIST/)
+  }
+  assert.deepEqual(files.map(read), before)
+  for (const [path, expected] of Object.entries(HISTORICAL_ARTIFACT_SHA256)) {
+    assert.equal(createHash('sha256').update(read(path)).digest('hex'), expected, `${path}: immutable bytes`)
+    const record = JSON.parse(read(path))
+    assert.equal(record.digest, microDigest(unsigned(record)), `${path}: immutable digest`)
+  }
 })
 
 test('public runtime does not import private selection, cost observations or frozen candidates', () => {

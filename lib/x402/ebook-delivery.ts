@@ -52,8 +52,10 @@ export async function loadEbook(id: EbookId, version: string = EBOOK_VERSION): P
     return validateEbookPayload(id, await Promise.all(manifest.map(downloadPrivateEbook)), version)
   }
   const files = await Promise.all(manifest.map(async file => {
-    const directory = version === EBOOK_VERSION ? 'content/paid-ebooks' : `content/paid-ebooks/archive/${version}`
-    try { return await readFile(resolve(process.cwd(), directory, file.filename)) }
+    const path = version === EBOOK_VERSION
+      ? resolve(process.cwd(), 'content/paid-ebooks', file.filename)
+      : resolve(process.cwd(), 'content/paid-ebooks/archive', version, file.filename)
+    try { return await readFile(path) }
     catch (error) {
       // An invalid local file fails integrity checks; only a missing packaged
       // asset may use the pinned private store. Never return a public URL.

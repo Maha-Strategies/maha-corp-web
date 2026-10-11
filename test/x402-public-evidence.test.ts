@@ -68,13 +68,20 @@ test('the manifest asserts configuration and refuses to assert behaviour', () =>
  * a keyword scan over the prose would flag its own disclaimers.
  */
 test('no offer entry carries an invented liveness or reputation field', () => {
-  const offers = JSON.stringify(manifest().offers).toLowerCase()
+  // Check field names, not disclaimer prose or service names such as
+  // settlement reconciliation. Descriptions may truthfully deny these claims.
+  const keys = new Set<string>()
+  const visit = (value: unknown) => {
+    if (Array.isArray(value)) { value.forEach(visit); return }
+    if (value && typeof value === 'object') for (const [key, child] of Object.entries(value)) { keys.add(key.toLowerCase()); visit(child) }
+  }
+  visit(manifest().offers)
   for (const invented of [
     'uptime', 'availability', 'trustscore', 'trust_score', 'reputation',
     'settlements', 'settlementcount', 'payerhistory', 'payers', 'lastseen',
     'indexed', 'listed', 'healthy', 'online',
   ]) {
-    assert.ok(!offers.includes(invented), `an offer entry carries "${invented}"`)
+    assert.ok(!keys.has(invented), `an offer entry carries "${invented}"`)
   }
 })
 

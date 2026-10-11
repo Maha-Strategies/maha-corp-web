@@ -7,12 +7,13 @@ import { isReleasedMicro } from './micro-release.ts'
 import { isCompatibilityProduct } from './compatibility-contracts.ts'
 import { BAZAAR_LAUNCH_COPY } from './bazaar-launch.ts'
 import { isPlanningProduct, PLANNING_TAGS } from './micro-planning-contracts.ts'
+import { isExpansionProduct, EXPANSION_SPECS, expansionPaidContent, CONTRACT_ONLY_EXAMPLE, CONTRACT_ONLY_SCHEMA } from './expansion-registry.ts'
 
 /** Only the explicit owner-authorized cohort can be configured for settlement. */
 export const MICRO_OFFERS: readonly X402Offer[] = MICRO_IDS.map(id => ({
   id, method: 'POST', path: microPath(id), amount: MICRO_PRODUCTS[id].amount,
   description: BAZAAR_LAUNCH_COPY[id] ?? MICRO_PRODUCTS[id].description, concurrencyCap: 4,
-  serviceName: MICRO_PRODUCTS[id].title, tags: ['bounded-computation', 'evidence', 'deterministic', 'microproduct', ...(isPlanningProduct(id) ? PLANNING_TAGS[id] : [])],
+  serviceName: MICRO_PRODUCTS[id].title, tags: ['bounded-computation', 'evidence', 'deterministic', 'microproduct', ...(isPlanningProduct(id) ? PLANNING_TAGS[id] : []), ...(isExpansionProduct(id) ? ['expansion-20261011', EXPANSION_SPECS[id].category] : [])],
   status: isReleasedMicro(id) ? 'available' : 'withheld',
   availability: { payableInProduction: isReleasedMicro(id), blockedBy: isReleasedMicro(id) ? [] : [isCompatibilityProduct(id) ? 'Exact price and draft rule-set release approval pending; settlement disabled.' : 'Outside the owner-authorized release; settlement remains disabled.'] },
   requiresIdempotency: false, maxRequestBytes: MICRO_MAX_REQUEST_BYTES,
@@ -20,5 +21,5 @@ export const MICRO_OFFERS: readonly X402Offer[] = MICRO_IDS.map(id => ({
   retention: { fullSourceTextStored: false, verbatimExcerptsRetained: false,
     retainedFields: ['payment transaction', 'payer wallet', 'fixed offer URL', 'amount', 'settlement status', 'coarse invocation counts'],
     note: 'This service does not persist request/result bodies or their digests. No stored-result recovery. Payment binds the resource; the integrity receipt binds the actual input. Do not send confidential data or place input in URLs or payment metadata.' },
-  discovery: { input: MICRO_SAMPLE_INPUTS[id], inputSchema: MICRO_INPUT_SCHEMAS[id], output: examples.outputs[id], outputSchema: microOutputSchema(id) },
+  discovery: { input: MICRO_SAMPLE_INPUTS[id], inputSchema: MICRO_INPUT_SCHEMAS[id], output: expansionPaidContent(id) ? CONTRACT_ONLY_EXAMPLE : (examples.outputs as Record<string, Record<string, unknown>>)[id], outputSchema: expansionPaidContent(id) ? { oneOf: [CONTRACT_ONLY_SCHEMA, microOutputSchema(id)] } : microOutputSchema(id) },
 }))

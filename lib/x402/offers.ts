@@ -42,6 +42,7 @@ import { EVIDENCE_CHECK_IDS } from './evidence-check-contracts.ts'
 import { PLANNING_IDS } from './micro-planning-contracts.ts'
 import { assertUniqueCohortPrices } from './micro-price-policy.ts'
 import { OPERATOR_SETTLEMENT_RECEIPTS } from './operator-settlement-receipts.ts'
+import { EXPANSION_INDEXING_IDS } from './expansion-registry.ts'
 
 export const USDC_DECIMALS = 6
 
@@ -541,6 +542,7 @@ assertDistinctPayableAmounts()
 // to supersededAmounts: that would rewrite attribution of real settlements.
 assertUniqueCohortPrices(X402_OFFERS, PLANNING_IDS, OPERATOR_SETTLEMENT_RECEIPTS.map(r => ({ id: r.offerId, amount: r.amountBaseUnits })))
 assertUniqueCohortPrices(X402_OFFERS, [...EVIDENCE_CHECK_IDS, ...LICENSED_SECTION_OFFERS.map(o => o.id)], OPERATOR_SETTLEMENT_RECEIPTS.map(r => ({ id: r.offerId, amount: r.amountBaseUnits })))
+assertUniqueCohortPrices(X402_OFFERS, EXPANSION_INDEXING_IDS, OPERATOR_SETTLEMENT_RECEIPTS.map(r => ({ id: r.offerId, amount: r.amountBaseUnits })))
 
 export function payableOffers(): readonly X402Offer[] {
   return X402_OFFERS.filter((offer) => offer.status === 'available')

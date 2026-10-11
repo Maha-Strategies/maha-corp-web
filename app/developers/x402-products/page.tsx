@@ -23,6 +23,7 @@ export default async function X402ProductsPage() {
   const settled = new Map(snapshot.ledger.summary.byProduct.map(p => [p.id, p]))
   const categories = categorizedProducts()
   const available = X402_OFFERS.filter(o => o.status === 'available').length
+  const indexed = X402_OFFERS.filter(o => index.resources.includes('https://www.mahastrategies.com' + o.path)).length
   return <main className="evidence-page"><div className="evidence-container">
     <SettlementAutoRefresh />
     <header className="max-w-4xl">
@@ -33,7 +34,7 @@ export default async function X402ProductsPage() {
       <p className="evidence-copy mt-4">Only a valid 402 challenge confirms that a released route is enabled for payment. Catalogue availability does not confirm Bazaar indexing. Never repay automatically after an uncertain outcome.</p>
       <p className="evidence-copy mt-4">Usage counts are recorded successful route invocations, not unique buyers or purchases. Retries can count again; free examples and unpaid 402 challenges are not successful calls. Metering is best-effort and historical coverage may be incomplete. Declared operator traffic is self-reported, not verified customer attribution.</p>
       <p className="evidence-copy mt-3">{usage.available ? `Usage meter: ${usage.firstObservedAt ? `${usage.firstObservedAt} through ${usage.lastObservedAt}` : 'no events recorded'}.` : 'Usage meter unavailable — call counts are unknown, not zero.'} Settlement snapshot: {snapshot.ledger.observedAt} ({snapshot.source === 'bundled_fallback' ? 'dated fallback' : snapshot.stale ? 'refresh overdue' : 'saved scan'}). Refreshes while visible every five minutes.</p>
-      <p className="evidence-copy mt-3">Bazaar merchant lookup: {index.checkedAt}. Presence is observed catalogue membership, not proof of matching metadata, search rank, organic discovery or customer demand.</p>
+      <p className="evidence-copy mt-3">Bazaar merchant lookup: {index.checkedAt}. {index.available ? `${indexed} declared product URLs observed${index.complete ? ' in a complete lookup' : ' in an incomplete lookup'}.` : 'Lookup unavailable; indexed count is unknown.'} Presence is observed catalogue membership, not proof of matching metadata, search rank, organic discovery or customer demand.</p>
       <div className="mt-6 flex flex-wrap gap-4"><Link className="evidence-link" href="/developers/settlement">Live settlement ledger ↗</Link><Link className="evidence-link" href="/api/docs/openapi">API schemas ↗</Link><Link className="evidence-link" href="/developers">Developer hub ↗</Link></div>
     </header>
     <nav aria-label="Product categories" className="my-8 flex flex-wrap gap-3">{categories.filter(c => c.offers.length).map(c => <a key={c.id} href={`#${c.id}`} className="evidence-link">{c.title} ({c.offers.length})</a>)}</nav>

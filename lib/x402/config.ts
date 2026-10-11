@@ -8,6 +8,7 @@ import { PLANNING_IDS } from './micro-planning-contracts.ts'
 import { EBOOK_IDS, ebookOfferId, ebookPath } from './ebook-contract.ts'
 import { LICENSED_SECTION_OFFERS } from './licensed-book-sections.ts'
 import { EVIDENCE_CHECK_IDS } from './evidence-check-contracts.ts'
+import { EXPANSION_INDEXING_IDS } from './expansion-registry.ts'
 
 // Everything here is off unless X402_ENABLED is exactly 'true'. The flag is
 // checked before any other configuration is read, so an incomplete or
@@ -166,6 +167,12 @@ export function x402Config(environment: Environment = process.env): X402Config |
   if (environment.X402_BOOK_EVIDENCE_FIVE_ENABLED === 'true') {
     const paths = [...LICENSED_SECTION_OFFERS.map(o => o.path), ...EVIDENCE_CHECK_IDS.map(id => `/api/v1/micro/${id}`)]
     const extra = paths.filter(path => !resources.some(r => r.path === path)).map(path => ({ method: 'POST', path }))
+    resources.push(...parseResources(JSON.stringify(extra), catalogContradictions))
+  }
+  // Owner-approved expansion plus five low-priced substitutes, separately enabled.
+  if (environment.X402_EXPANSION_56_ENABLED === 'true') {
+    const extra = EXPANSION_INDEXING_IDS.filter(id => !resources.some(r => r.offerId === id))
+      .map(id => ({ method: 'POST', path: `/api/v1/micro/${id}` }))
     resources.push(...parseResources(JSON.stringify(extra), catalogContradictions))
   }
   for (const contradiction of catalogContradictions) {

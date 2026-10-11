@@ -3,6 +3,7 @@ import { NEXT_PRODUCTS, nextInputSchemas } from './micro-next-contracts.ts'
 import { COMPATIBILITY_PRODUCTS, COMPATIBILITY_INPUT_SCHEMAS } from './compatibility-contracts.ts'
 import { PLANNING_PRODUCTS, planningInputSchemas } from './micro-planning-contracts.ts'
 import { EVIDENCE_CHECK_PRODUCTS, EVIDENCE_CHECK_INPUT_SCHEMAS } from './evidence-check-contracts.ts'
+import { EXPANSION_PRODUCTS, EXPANSION_INPUT_SCHEMAS } from './expansion-registry.ts'
 export const MICRO_VERSION = 'maha-microproducts/0.1' as const
 export const MICRO_MAX_REQUEST_BYTES = 32768
 export const MICRO_MAX_RESPONSE_BYTES = 65536
@@ -10,17 +11,18 @@ export const MICRO_PRODUCTS = {
   'citation-binding-check': { amount: '16000', title: 'Citation Binding Check', description: 'Compare up to 20 declared source identities, revisions and locators. Returns exact mismatches and an integrity receipt. Does not fetch sources, establish passage existence or verify claim support.' },
   'revision-lineage-check': { amount: '6000', title: 'Revision Lineage Check', description: 'Check one initial or superseding revision transition against a declared predecessor. Returns lineage inconsistencies and an integrity receipt. Does not establish authenticity, semantic equivalence or inherited review approval.' },
   'audit-export-normalizer': { amount: '18000', title: 'Audit Export Normalizer', description: 'Normalize up to 100 metadata events into deterministic order, rejecting duplicate identifiers and malformed times or digests. Does not prove event occurrence, provenance or completeness against an external system.' },
-  'dimensional-consistency-check': { amount: '5000', title: 'Dimensional Consistency Check', description: 'Multiply or divide two seven-component SI dimension vectors and compare with the expected output dimension. No unit conversion, formula validation, scale-factor inference or physical-model certification.' },
-  'exact-interpolation-receipt': { amount: '5000', title: 'Exact Interpolation Receipt', description: 'Interpolate between two integer-coordinate points with exact rational arithmetic and an integrity receipt. Refuses extrapolation and repeated nodes. Does not estimate measurement error or validate the interpolation model.' },
-  'sampled-series-integration': { amount: '10000', title: 'Sampled-Series Integration', description: 'Apply the composite trapezoidal rule to 2-128 equally spaced integer samples. Returns an exact rational arithmetic result, declared units and an integrity receipt. No quadrature-error estimate or claim of an exact underlying integral.' },
-  'evidence-conflict-comparator': { amount: '10000', title: 'Evidence Conflict Comparator', description: 'Compare 2-20 caller-labelled observations of one claim, population and outcome. Returns opposing directions and explicitly excluded observations. No literature search, source inspection, consensus judgment or factual verification.' },
+  'dimensional-consistency-check': { amount: '9500', title: 'Dimensional Consistency Check', description: 'Multiply or divide two seven-component SI dimension vectors and compare with the expected output dimension. No unit conversion, formula validation, scale-factor inference or physical-model certification.' },
+  'exact-interpolation-receipt': { amount: '11500', title: 'Exact Interpolation Receipt', description: 'Interpolate between two integer-coordinate points with exact rational arithmetic and an integrity receipt. Refuses extrapolation and repeated nodes. Does not estimate measurement error or validate the interpolation model.' },
+  'sampled-series-integration': { amount: '18500', title: 'Sampled-Series Integration', description: 'Apply the composite trapezoidal rule to 2-128 equally spaced integer samples. Returns an exact rational arithmetic result, declared units and an integrity receipt. No quadrature-error estimate or claim of an exact underlying integral.' },
+  'evidence-conflict-comparator': { amount: '21500', title: 'Evidence Conflict Comparator', description: 'Compare 2-20 caller-labelled observations of one claim, population and outcome. Returns opposing directions and explicitly excluded observations. No literature search, source inspection, consensus judgment or factual verification.' },
   'release-bound-evidence-packet': { amount: '10000', title: 'Release-Bound Evidence Packet', description: 'Deliver public source metadata and exact release bindings for one supported federation article at caller-pinned revisions. Uses the deployed repository snapshot, not a live registry probe. No private review material, full source text or expert certification.' },
   'tiruvaymoli-context-packet': { amount: '5000', title: 'Tiruvaymoli Passage Context Packet', description: 'Deliver one supported atlas unit as structured edition metadata, poetic context, bounded answers and links at a pinned registry digest. Public pages remain free. No translation full text, redistribution license, historical or theological certification.' },
-  'astrology-experiment-plan-check': { amount: '10000', title: 'Astrology Experiment-Plan Check', description: 'Check one structured public or synthetic low-stakes experiment plan for timing, comparator, outcome and analysis declarations. Returns deficiencies and an integrity receipt. No registration, trusted timestamp, prediction, power analysis or scientific validation.' },
+  'astrology-experiment-plan-check': { amount: '48500', title: 'Astrology Experiment-Plan Check', description: 'Check one structured public or synthetic low-stakes experiment plan for timing, comparator, outcome and analysis declarations. Returns deficiencies and an integrity receipt. No registration, trusted timestamp, prediction, power analysis or scientific validation.' },
   ...NEXT_PRODUCTS,
   ...COMPATIBILITY_PRODUCTS,
   ...PLANNING_PRODUCTS,
   ...EVIDENCE_CHECK_PRODUCTS,
+  ...EXPANSION_PRODUCTS,
 } as const
 export type MicroProductId = keyof typeof MICRO_PRODUCTS
 export const MICRO_IDS = Object.keys(MICRO_PRODUCTS) as MicroProductId[]
@@ -42,6 +44,7 @@ export const MICRO_INPUT_SCHEMAS: Record<MicroProductId, MicroSchema> = {
   ...nextInputSchemas(),
   ...planningInputSchemas(),
   ...EVIDENCE_CHECK_INPUT_SCHEMAS,
+  ...EXPANSION_INPUT_SCHEMAS,
   'citation-binding-check': envelope({ bindings: arraySchema(objectSchema({ expected: locator, observed: locator }), 1, 20) }),
   'revision-lineage-check': envelope({ previous: { oneOf: [node, { type: 'null' }] }, next: node }),
   'audit-export-normalizer': envelope({ events: arraySchema(event, 1, 100) }),

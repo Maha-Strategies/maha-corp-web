@@ -10,6 +10,7 @@ import { BASE_NETWORK, BASE_USDC, MAHA_PAYEE } from '../lib/x402/discovery-payme
 import { readFileSync } from 'node:fs'
 import { x402Config } from '../lib/x402/config.ts'
 import { PLANNING_IDS } from '../lib/x402/micro-planning-contracts.ts'
+import { EXPANSION_INDEXING_IDS, EXPANSION_MAX_SERVICE_BASE_UNITS } from '../lib/x402/expansion-registry.ts'
 
 test('new planning opt-in does not widen the prior production flag or mutate its resource list', () => {
   const env = { X402_ENABLED: 'true', X402_FACILITATOR_URL: 'https://facilitator.example/x402', X402_PAY_TO: MAHA_PAYEE,
@@ -24,7 +25,7 @@ test('new planning opt-in does not widen the prior production flag or mutate its
   }
 })
 
-test('exactly twenty-seven authorized microproducts are released at distinct amounts', () => {
+test('authorized microproduct cohorts are released at distinct amounts without widening historical flags', () => {
   // Extended from five on 2026-09-10. The ten added are exactly the withheld
   // offers the candidate review selected and micro-next12-cost-observation
   // profiled; the seven the review did not select stay withheld.
@@ -45,11 +46,12 @@ test('exactly twenty-seven authorized microproducts are released at distinct amo
   // so any two amounts closer than a fee apart are one perturbation away from
   // being indistinguishable.
   const total = released.reduce((n, o) => n + BigInt(o.amount), BigInt(0))
-  assert.equal(total, BigInt(1447500))
+  assert.equal(total, BigInt(1447500) + BigInt(EXPANSION_MAX_SERVICE_BASE_UNITS))
+  assert.equal(released.length, 30 + EXPANSION_INDEXING_IDS.length)
   const amounts = [...payableOffers()].filter(o => !o.id.startsWith('book-epub-')).map(o => BigInt(o.amount)).sort((a, b) => (a < b ? -1 : 1))
   const gaps = amounts.slice(1).map((a, i) => a - amounts[i])
   assert.ok(gaps.every(g => g > BigInt(0)), 'every payable amount remains distinct')
-  assert.equal(MICRO_OFFERS.filter(o => o.status === 'withheld').length, 7)
+  assert.equal(MICRO_OFFERS.filter(o => o.status === 'withheld').length, 2)
   for (const offer of MICRO_OFFERS) {
     const allowed = released.includes(offer)
     assert.equal(microExecutionAllowed(offer.id, 'production'), allowed)
