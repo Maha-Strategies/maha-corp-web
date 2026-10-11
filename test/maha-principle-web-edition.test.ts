@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import { existsSync, readFileSync } from 'node:fs'
 import test from 'node:test'
+import { BOOK_PUBLICATIONS } from '../lib/book-publications.ts'
 
 import { getOpenBookSection, openBookEditions, readOpenBookManuscript } from '../lib/open-book-editions.ts'
 
@@ -40,7 +41,14 @@ test('the manuscript is retained while the public web edition is unavailable', (
   assert.doesNotMatch(maintenance, /OpenBook|readOpenBook|complete (?:free )?(?:web )?edition/i)
   assert.equal(existsSync(new URL('app/books/the-maha-principle/read/page.tsx', root)), false)
   assert.equal(existsSync(new URL('app/books/the-maha-principle/read/[section]/page.tsx', root)), false)
-  assert.doesNotMatch(index, /The Maha Principle/)
+  // Retail publication metadata is public; the complete web manuscript remains unavailable.
+  const openEditionList = index.match(/const books = \[([\s\S]*?)^\]/m)?.[1]
+  assert.ok(openEditionList, 'The open-edition list must be inspectable')
+  assert.doesNotMatch(openEditionList, /The Maha Principle/)
+  assert.doesNotMatch(index, /books\/the-maha-principle\/read/)
+  const publication = BOOK_PUBLICATIONS.find((entry) => entry.slug === 'the-maha-principle')
+  assert.ok(publication)
+  assert.equal(publication.openWebEdition, undefined)
   assert.match(index, /Seven works/)
   assert.match(sitemap, /books\/the-maha-principle\/reader-faq/)
   assert.doesNotMatch(sitemap, /books\/the-maha-principle\/read(?:\/|[\x27\x22`])/)
