@@ -75,7 +75,7 @@ export default async function X402ProductsPage() {
         <p className="evidence-card-copy mt-3 text-xs">{!s ? 'Attributed transfer count unknown: product absent from this snapshot.' : s.attributionAmbiguous ? 'Settlement count unknown: the price is shared by more than one product.' : `${s.settlements} attributed transfers (${s.externalSettlements} external, ${s.settlements - s.externalSettlements} operator). Price matches are inference, not proof of an API call or delivery.`}</p>
         {!o.availability.payableInProduction && <p className="evidence-card-copy mt-3">{o.availability.blockedBy.join(' · ')}</p>}
         <a className="evidence-link mt-4 inline-block" href={`/api/docs/openapi#${encodeURIComponent(o.path)}`}>Inspect contract in OpenAPI ↗</a>
-        {o.tags.includes('microproduct') && <a className="evidence-link mt-4 ml-4 inline-block" href={o.path}>Free example and contract ↗</a>}
+        {(o.tags.includes('microproduct') || o.tags.includes('demand-20261012')) && <a className="evidence-link mt-4 ml-4 inline-block" href={o.path}>Free example and contract ↗</a>}
         {o.tags.includes('licensed-sections') && <a className="evidence-link mt-4 ml-4 inline-block" href={o.path}>Section catalogue and edition digest ↗</a>}
         <p className="evidence-card-copy mt-3 text-xs">{o.retention.note}</p>
       </article>})}</div>

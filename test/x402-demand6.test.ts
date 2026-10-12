@@ -10,7 +10,7 @@ import { buildDemandProduct, demandDigest, inspectQuote, quoteHistoryReport } fr
 import { createPublicReader, publicIPv4, publicTargetUrl, type PublicRead } from '../lib/x402/demand6/public-fetch.ts'
 import { extractedPublicText, extractiveBrief, quoteLocations, textHash } from '../lib/x402/demand6/sources.ts'
 import { fixtureDependencies, FIXTURE_NOW, FIXTURE_HISTORY, fixtureQuote } from '../lib/x402/demand6/fixtures.ts'
-import { demand6Handlers } from '../lib/x402/demand6/route.ts'
+import { demand6Handlers as createDemand6Handlers } from '../lib/x402/demand6/route.ts'
 import { demandPurchaseHeaders, demandPurchaseTypedData, readDemandAuthorization } from '../lib/x402/demand6/purchase.ts'
 import { memoryDemandStore, type DemandStore } from '../lib/x402/demand6/store.ts'
 import { DECLARED_PAYMENT_NETWORKS, usdcNetwork } from '../lib/x402/networks.ts'
@@ -29,6 +29,9 @@ const origin = 'https://www.mahastrategies.com'
 const resource = origin + '/api/v1/compress'
 const sourceUrl = origin + '/tools/context-review'
 const sample = (id: Demand6Id) => ({ ...DEMAND6_SAMPLES[id], dataClass: 'synthetic' })
+const demand6Handlers = (id: Demand6Id, dependencies: Parameters<typeof createDemand6Handlers>[1] = {}) => createDemand6Handlers(id, {
+  acquirePreparation: async () => ({ admitted: true, active: 1, token: 'mock-preparation' }), releasePreparation: async () => {}, ...dependencies,
+})
 for (const id of DEMAND6_IDS) {
   test(`${id}: reproducible synthetic result, independently valid schemas and integrity bindings`, async () => {
     const offer = DEMAND6_OFFERS.find(offer => offer.id === id)!, value = sample(id)
@@ -44,22 +47,23 @@ for (const id of DEMAND6_IDS) {
     for (const input of [{ ...sample(id), dataClass: 'private' }, { ...sample(id), unexpected: 'not admitted' }, {}]) {
       await assert.rejects(buildDemandProduct(id, input, fixtureDependencies))
     }
-    const handler = demand6Handlers(id, { environment: 'production', resolve: async () => { throw Error('must not settle') }, build: async () => { throw Error('must not build') } })
+    const handler = demand6Handlers(id, { environment: 'production', enabled: false, resolve: async () => { throw Error('must not settle') }, build: async () => { throw Error('must not build') } })
     assert.equal((await handler.POST(new Request(origin + demand6Path(id), { method: 'POST' }))).status, 503)
     assert.equal((await handler.GET(new Request(origin + demand6Path(id)))).status, 200)
     assert.equal(apiProxyGate(demand6Path(id), 'POST', true), 'self_managed')
   })
 }
-test('six unique price reservations do not change the 155 existing payable offers', () => {
-  assert.equal(payableOffers().length, 155)
+test('six unique owner-approved releases preserve the existing 155 payable offers', () => {
+  assert.equal(payableOffers().filter(offer => !DEMAND6_IDS.includes(offer.id as Demand6Id)).length, 155)
+  assert.equal(payableOffers().length, 161)
   assert.equal(new Set(DEMAND6_IDS.map(id => DEMAND6_PRODUCTS[id].amount)).size, 6)
   for (const offer of DEMAND6_OFFERS) {
-    assert.equal(offer.status, 'withheld'); assert.equal(offer.availability.payableInProduction, false)
+    assert.equal(offer.status, 'available'); assert.equal(offer.availability.payableInProduction, true)
     assert.ok(offer.description.length <= 480 && Buffer.byteLength(offer.description) <= 480)
     assert.equal(X402_OFFERS.filter(other => other.id !== offer.id && [other.amount, ...(other.supersededAmounts ?? [])].includes(offer.amount)).length, 0)
   }
 })
-test('all six OpenAPI contracts have declared tags, exact schemas and nonpayable status', () => {
+test('all six OpenAPI contracts have declared tags, exact schemas and released status', () => {
   const paths = openApiDocument.paths as unknown as Record<string, { get: { tags: string[] }; post: {
     tags: string[]; 'x-maha-payable-in-production': boolean; requestBody: { content: { 'application/json': { schema: unknown } } } } }>
   const tags = new Set<string>(openApiDocument.tags.map(tag => tag.name))
@@ -67,7 +71,7 @@ test('all six OpenAPI contracts have declared tags, exact schemas and nonpayable
     const path = paths[offer.path]
     assert.ok(path)
     for (const tag of [...path.get.tags, ...path.post.tags]) assert.ok(tags.has(tag))
-    assert.equal(path.post['x-maha-payable-in-production'], false)
+    assert.equal(path.post['x-maha-payable-in-production'], true)
     assert.deepEqual(path.post.requestBody.content['application/json'].schema, offer.discovery.inputSchema)
   }
 })
@@ -273,6 +277,38 @@ test('unfundable or unverifiable authorizations cannot start live work or settle
   assert.equal((await demand6Handlers(id, { ...base, verify: async () => false }).POST(intent.request())).status, 400)
   assert.equal((await demand6Handlers(id, { ...base, verify: async () => { throw Error('provider unavailable') } }).POST(intent.request())).status, 503)
   assert.equal(builds, 0); assert.equal(settles, 0)
+})
+test('shared preparation capacity refuses before facilitator checks or public work and releases on failure', async () => {
+  const id = 'csv-import-preflight', intent = await purchase(id)
+  let verified = 0, released = 0
+  const base = { environment: 'test', now: () => FIXTURE_NOW, store: memoryDemandStore(),
+    verify: async () => { verified++; return false }, record: async () => {}, releasePreparation: async () => { released++ } }
+  const denied = demand6Handlers(id, { ...base, acquirePreparation: async () => ({ admitted: false, active: 2 }) })
+  assert.equal((await denied.POST(intent.request())).status, 429); assert.equal(verified, 0)
+  const thrown = demand6Handlers(id, { ...base, acquirePreparation: async () => { throw Error('store unavailable') } })
+  assert.equal((await thrown.POST(intent.request())).status, 503); assert.equal(verified, 0)
+  const refusal = demand6Handlers(id, base)
+  assert.equal((await refusal.POST(intent.request())).status, 400); assert.equal(verified, 1); assert.equal(released, 1)
+})
+test('production needs explicit cohort enablement and preview never takes payment', async () => {
+  const id = 'csv-import-preflight'
+  for (const [environment, enabled] of [['production', false], ['preview', true]] as const) {
+    const handler = demand6Handlers(id, { environment, enabled, resolve: async () => { throw Error('must not settle') } })
+    assert.equal((await handler.POST(new Request(origin + demand6Path(id), { method: 'POST' }))).status, 503)
+  }
+  const handler = demand6Handlers(id, { environment: 'production', enabled: true,
+    resolve: async () => ({ kind: 'challenge', status: 402, header: 'mock-quote', body: {} }), record: async () => {} })
+  assert.equal((await handler.POST(new Request(origin + demand6Path(id), { method: 'POST' }))).status, 402)
+})
+test('cohort enablement adds exactly six resources without rewriting existing bindings', () => {
+  const definition = usdcNetwork('eip155:8453')
+  const environment = { X402_ENABLED: 'true', X402_FACILITATOR_URL: 'https://facilitator.example/x402',
+    X402_PAY_TO: MAHA_PAYEE, X402_ASSET: definition.asset, X402_NETWORK: 'base',
+    X402_RESOURCES: JSON.stringify([{ method: 'POST', path: '/api/v1/compress' }]) }
+  const before = x402Config(environment)!, after = x402Config({ ...environment, X402_DEMAND6_ENABLED: 'true' })!
+  assert.deepEqual(after.resources[0], before.resources[0])
+  assert.deepEqual(after.resources.slice(1).map(resource => resource.offerId), DEMAND6_IDS)
+  assert.equal(after.catalogContradictions.length, 0)
 })
 test('paid recovery accepts an expired original authorization, but not expired retention', async () => {
   const id = 'csv-import-preflight', intent = await purchase(id)

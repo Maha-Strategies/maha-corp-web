@@ -1,14 +1,18 @@
 # Six demand inspired x402 products local readiness
 
-All six products are implemented locally and remain withheld from payment and
-indexing. Their proposed prices are reserved without changing the 155 existing
-active offers. Research briefs use exact source excerpts, not a language model.
+The owner approved publication and indexing on 12 October 2026. All six contracts
+are now declared released, with exact prices and the separate runtime flag
+`X402_DEMAND6_ENABLED=true`. Production build and paid indexing verification are
+pending at this source snapshot. The 155 existing active offers are preserved.
+Research briefs use exact source excerpts, not a language model.
 This implementation does not establish customer demand or measured profitability.
 
 The work is in `/private/tmp/maha-base-arbitrum-science50`, on
 `codex/x402-observability-demand-20261012`, following local commit `05c55483`.
-The primary workspace and its unrelated changes are preserved. No deployment,
-Git push, paid indexing, production settlement or model spending was performed.
+The primary workspace and its unrelated changes are preserved. The approved
+release includes the preceding catalogue/monitoring repairs in commit `05c55483`.
+One focused build and one Base purchase per new product are planned; the total
+service-payment cap is 0.4629 USDC, with no automatic repayments or model spending.
 
 ## Products and prices
 
@@ -16,7 +20,7 @@ Each exact POST path is `/api/v1/demand/` followed by the identifier below.
 GET describes the contract and an original synthetic example; it does not run
 the service over supplied input. Prices are USDC, with six decimal places.
 
-| Product identifier | Proposed price | Service and principal limit |
+| Product identifier | Price USDC | Service and principal limit |
 | --- | ---: | --- |
 | `csv-import-preflight` | 0.0135 | Parse up to 500 CSV records against declared columns and scalar types; report quoting, header, shape and formula-prefix findings. No cell execution, repair or PII detection. |
 | `live-x402-payment-preflight` | 0.0349 | Read one approved public endpoint's unpaid challenge; check Base and Arbitrum native-USDC terms against the declared payee and cap. A quote does not establish settlement or delivery. |
@@ -66,14 +70,16 @@ anonymization. Never submit private records, passwords or payment credentials.
 Requests are capped at 32 KiB with a five-second streaming deadline. CSV fields
 are capped at 1,000 characters and 64 columns. Findings are capped at 300, with
 truncation explicitly reported. Results are capped at 64 KiB. Each offer has a
-four-request local work limit per worker and a configured two-slot distributed
-settlement capacity limit. Distributed preparation rate/cost limits still need
-production review; the settlement limit does not itself bound all upstream work.
+four-request local work limit per worker, a two-slot distributed preparation
+limit before facilitator verification/public reads, and a separate two-slot
+settlement capacity limit. Preparation slots expire after 90 seconds and release
+in the handler's cleanup. Future volume and real costs still require measurement.
 
 Input, result and receipt digests bind the product and implementation version.
 They are unsigned integrity hashes, not authenticity, factual correctness,
 trusted time or buyer-delivery proof. Discovery records, OpenAPI schemas and
-the public manifest describe these offers as nonpayable.
+the public manifest describe these offers as released. A live 402 quote, not the
+manifest alone, establishes deployment enablement.
 
 ## Payment and recovery
 
@@ -82,7 +88,7 @@ support smart-contract-wallet signatures. The route validates the signed payer,
 asset, payee, amount, resource, timing and body commitment before preparation.
 Fresh work also requires facilitator verification without settlement. Supported
 negative findings are results; unavailable or unsupported work is refused before
-payment. Production and preview routes currently refuse before either step.
+payment. Production requires explicit cohort enablement; preview remains disabled.
 
 Before signing, the buyer must privately save the exact JSON input, input hash,
 random 32-byte recovery secret and original signed authorization. The EIP-3009
@@ -110,27 +116,34 @@ must not be promised in that case.
 
 ## Verification
 
-The 62 focused tests passed, including strict schemas, exact quote locations,
+The 73 product and indexing tests passed, including strict schemas, exact quote locations,
 CSV/GTIN checks, SSRF boundaries, source-rights checks, 12 mocked paid/recovery
 flows and 12 integrations through the real gateway code on Base and Arbitrum.
 The latter mock facilitator, ledger, chain confirmation and capacity services;
 they are not mainnet settlements. Recovery expiry, receipt corruption, lock loss,
 input tampering and oversized bodies also passed.
 
-The broader 15-file catalogue, challenge, gateway, settlement, multichain and
-science regression run passed all 661 tests, with no failures or skips. The
-separate monitoring and market-analysis run passed all 66 tests. TypeScript and
-scoped ESLint passed. All six local HTTP GETs returned contracts, OPTIONS returned
-204, and unpaid execution
-returned 503 because payment enablement is withheld. Synthetic examples
+The separate catalogue, challenge, gateway, settlement, multichain and science
+regression run passed all 599 tests, with no failures or skips. TypeScript and
+scoped ESLint passed. Before activation, all six local HTTP GETs returned
+contracts, OPTIONS returned 204, and unpaid execution returned 503. Synthetic examples
 regenerated byte-identically and static discovery synchronization passed.
+
+The real production Redis store passed an isolated synthetic round trip,
+owner-checked locking and expiry check (86,399 seconds remaining). Only exact,
+unpredictable task-owned keys were touched and removed. No customer record or
+payment was accessed. The indexing workflow validates every unpaid challenge
+before exposing the signer; checks stable nonces against the token contract;
+persists original authorizations in authenticated encrypted recovery capsules;
+and stops the batch on any uncertain settlement or delivery. Publisher-funded
+payments are operator activity, never customer revenue or organic demand.
 
 Two legacy documentation checks still fail outside the six-product suite:
 `openapi-docs.test.ts` omits the existing `/api/admin/civic-ai-safety` route from
 its documented/private list, and `agentic-commerce.test.ts` uses an old capability
 list that already disagrees with the prior 160-capability manifest. These checks
 were not bypassed or rewritten to conceal the mismatch. New OpenAPI operations
-have declared tags, exact schemas and explicit nonpayable status; structural
+have declared tags, exact schemas and explicit release status; structural
 OpenAPI validation passes. The entire repository suite is not claimed green.
 
 Unpaid public checks used the pinned reader. Two Context Compiler observations
@@ -138,7 +151,9 @@ were saved at `2026-10-12T08:43:18.524Z`; both offered valid 0.001-USDC quotes o
 Base and Arbitrum. They are closely spaced samples, not uptime or customer calls.
 At `2026-10-12T08:55:18.370Z`, the extractive brief returned exact Context Review
 prose, excluded form/example text and recorded zero model calls. No payment,
-signing key, facilitator settlement or production-store write was involved.
+signing key or facilitator settlement was involved. Two additional unpaid quote
+observations were collected at `2026-10-12T09:35:14.662Z`, bringing stored history
+to four observations without asserting continuous uptime.
 
 Run from the checkout above:
 
@@ -153,18 +168,18 @@ npm run typecheck
 `collect-demand6-quote-history.ts --collect` command makes two unpaid public
 observations and updates the local history artifact; no schedule was activated.
 
-## Requirements before release
+## Launch checks and operating limits
 
 1. Review approved provider/source coverage, reuse rights, expected utility and
    price economics. General web research or arbitrary endpoint testing is not
    part of this version's approved registry.
-2. Verify real Redis retention, locking, expiry, receipt evidence and the
-   facilitator/chain boundaries in an authorized release test. Measure worst-case
-   latency and abuse costs; add appropriate distributed preparation controls.
-3. Review production status and exact resource enablement separately. Existing
-   release flags cannot silently publish these six withheld offers.
-4. Obtain approval before a Vercel build or a push that could trigger one. Inspect
-   served schemas, contracts and secret handling after the authorized build.
-5. Obtain a separate paid-canary/indexing budget and delivery-loss support policy.
-   Verify listing, quote, settlement and delivery as separate stages; do not
-   count operator indexing payments as customer revenue or organic growth.
+2. Verify served schemas and native-USDC quotes on both networks after the one
+   authorized build. Mainnet indexing uses Base only; no Arbitrum payment is approved.
+3. Run `demand6-indexing.yml` once with its exact confirmation. Verify all six
+   receipts, exact chain transfers, delivered hashes and retained results, then
+   perform a complete paginated Bazaar lookup. Stop on uncertainty; do not repay.
+4. Keep listing, quote, settlement and delivery separate. Pending index metrics
+   are not zero calls; operator indexing activity is not customer growth.
+5. Preserve encrypted recovery capsules and the dedicated key for operator-led
+   recovery. Investigate missing delivery before considering a new payment;
+   any later build, paid refresh or expansion needs its own authorization.

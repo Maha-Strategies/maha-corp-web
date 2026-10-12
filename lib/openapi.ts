@@ -114,7 +114,7 @@ export const openApiDocument = {
   },
   servers: [{ url: 'https://www.mahastrategies.com' }],
   tags: [
-    { name: 'x402 Demand Products', description: 'Bounded CSV, catalogue, public quote and source checks; locally implemented and withheld from production payment.' },
+    { name: 'x402 Demand Products', description: 'Bounded CSV, catalogue, public quote and source checks with explicit source coverage and input-bound recovery.' },
     { name: 'x402 Microproducts', description: 'Bounded local implementations; all withheld from Preview and Production payment.' },
     { name: 'Agentic Commerce', description: 'Read-only offer and transaction-policy discovery for agents.' },
     { name: 'x402 Conformance', description: 'Factual protocol and Bazaar discovery observations without trust, security, or uptime scoring.' },

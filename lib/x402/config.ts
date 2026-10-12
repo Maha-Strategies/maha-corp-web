@@ -10,6 +10,7 @@ import { LICENSED_SECTION_OFFERS } from './licensed-book-sections.ts'
 import { EVIDENCE_CHECK_IDS } from './evidence-check-contracts.ts'
 import { EXPANSION_INDEXING_IDS } from './expansion-registry.ts'
 import { SCIENCE_IDS } from './science/contracts.ts'
+import { DEMAND6_IDS, demand6Path } from './demand6/contracts.ts'
 import { USDC_NETWORKS, networkRpc, type PaymentNetworkConfig } from './networks.ts'
 
 // Everything here is off unless X402_ENABLED is exactly 'true'. The flag is
@@ -183,6 +184,11 @@ export function x402Config(environment: Environment = process.env): X402Config |
   }
   if (environment.X402_SCIENCE50_ENABLED === 'true') {
     const extra = SCIENCE_IDS.filter(id => !resources.some(r => r.offerId === id)).map(id => ({ method: 'POST', path: `/api/v1/micro/${id}` }))
+    resources.push(...parseResources(JSON.stringify(extra), catalogContradictions))
+  }
+  if (environment.X402_DEMAND6_ENABLED === 'true') {
+    const extra = DEMAND6_IDS.filter(id => !resources.some(r => r.offerId === id))
+      .map(id => ({ method: 'POST', path: demand6Path(id) }))
     resources.push(...parseResources(JSON.stringify(extra), catalogContradictions))
   }
 

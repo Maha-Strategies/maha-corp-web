@@ -7,6 +7,7 @@ export const PRODUCT_CATEGORIES = [
   { id: 'chemistry', title: 'Chemistry research utilities' },
   { id: 'materials', title: 'Materials science utilities' },
   { id: 'context', title: 'Context and evidence services' },
+  { id: 'data-diagnostics', title: 'Data quality and live diagnostics' },
   { id: 'physical-ai', title: 'Physical AI and manufacturing planning' },
   { id: 'public-finance', title: 'Public finance checks' },
   { id: 'architecture', title: 'Architectural planning' },
@@ -21,6 +22,7 @@ export const PRODUCT_CATEGORIES = [
 export type ProductCategoryId = typeof PRODUCT_CATEGORIES[number]['id']
 
 export function categoryForOffer(offer: X402Offer): ProductCategoryId {
+  if (offer.tags.includes('demand-20261012')) return offer.id.includes('research') || offer.id.includes('citation') ? 'research' : 'data-diagnostics'
   for (const category of ['quantum', 'biology', 'chemistry', 'materials'] as const) if (offer.tags.includes(category)) return category
   if (isExpansionProduct(offer.id)) return EXPANSION_SPECS[offer.id].category as ProductCategoryId
   if (['evidence-scope-check', 'evidence-version-selection-check', 'context-manifest-check'].includes(offer.id)) return 'context'

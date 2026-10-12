@@ -1,0 +1,46 @@
+name: Six demand product publisher-funded indexing
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 'One Base purchase per product; PUBLISHER_FUNDED_DEMAND6_ONCE_MAX_0_4629_USDC'
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: production-x402-bazaar-canary
+  cancel-in-progress: false
+jobs:
+  index:
+    if: github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: production-x402-canary
+    env:
+      BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
+      DEMAND6_CANARY_OUTPUT_PATH: ${{ github.workspace }}/demand6-indexing-evidence.json
+      DEMAND6_CANARY_CONFIRMATION: ${{ inputs.confirmation }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Check all unpaid challenges before signer access
+        run: node --experimental-strip-types scripts/run-demand6-indexing.ts
+      - name: One original authorization per product without repayments
+        env:
+          X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
+        run: node --experimental-strip-types scripts/run-demand6-indexing.ts --pay
+      - name: Retain sanitized evidence and encrypted recovery capsules
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: demand6-indexing-${{ github.run_id }}
+          path: |
+            ${{ env.DEMAND6_CANARY_OUTPUT_PATH }}
+            ${{ env.DEMAND6_CANARY_OUTPUT_PATH }}.recovery-encrypted.json
+          if-no-files-found: warn
+          retention-days: 90

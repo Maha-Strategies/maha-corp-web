@@ -8,16 +8,16 @@ for (const [name, field, paymentField] of [['agent-card', 'capabilities', 'payme
   const path = resolve(import.meta.dirname, `../content/discovery/${name}.json`), before = readFileSync(path, 'utf8'), body = JSON.parse(before)
   body[field] = [...body[field].filter((entry: { id: string }) => !isDemand6(entry.id)), ...DEMAND6_OFFERS.map(offer => ({
     id: offer.id, status: offer.status, endpoint: 'https://www.mahastrategies.com' + offer.path, method: offer.method,
-    description: offer.description, payableNow: false, blockedBy: offer.availability.blockedBy,
+    description: offer.description, payableNow: true, blockedBy: offer.availability.blockedBy,
     [paymentField]: { protocol: 'x402', version: 2, network: 'eip155:8453', networks: DECLARED_PAYMENT_NETWORKS,
-      amount: offer.amount, assetSymbol: 'USDC', autonomous: false, payableNow: false },
+      amount: offer.amount, assetSymbol: 'USDC', autonomous: true, payableNow: true },
   }))]
   if (name === 'agent-offers') {
-    body.transactionPolicy.autonomousPaymentScope = body.transactionPolicy.autonomousPaymentScope.filter((id: string) => !isDemand6(id))
-    body.transactionPolicy.describedNotPayable = [...body.transactionPolicy.describedNotPayable.filter((id: string) => !isDemand6(id)), ...DEMAND6_OFFERS.map(offer => offer.id)]
+    body.transactionPolicy.autonomousPaymentScope = [...body.transactionPolicy.autonomousPaymentScope.filter((id: string) => !isDemand6(id)), ...DEMAND6_OFFERS.map(offer => offer.id)]
+    body.transactionPolicy.describedNotPayable = body.transactionPolicy.describedNotPayable.filter((id: string) => !isDemand6(id))
   }
   const after = JSON.stringify(body, null, 2) + '\n'
   if (process.argv.includes('--write')) writeFileSync(path, after)
   else if (before !== after) throw new Error('demand6_discovery_stale')
 }
-console.log('Six locally implemented, nonpayable demand products synchronized. No activation, network or payment.')
+console.log('Six owner-approved released demand contracts synchronized. Runtime flag and live quotes remain separate checks. No network or payment.')

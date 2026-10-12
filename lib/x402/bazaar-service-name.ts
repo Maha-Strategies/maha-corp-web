@@ -2,6 +2,8 @@ import { isValidServiceName, sanitizeTags } from '@x402/extensions/bazaar'
 
 /** Human-facing catalogue titles stay intact; Bazaar requires 1-32 printable ASCII characters. */
 export const BAZAAR_SERVICE_NAMES: Readonly<Record<string, string>> = Object.freeze({
+  'live-x402-payment-preflight': 'Live x402 Payment Preflight',
+  'source-bound-research-microbrief': 'Source Bound Research Microbrief',
   'quantum-architecture-requirements': 'Qubit Architecture Requirements',
   'biology-accession-version-check': 'Biological Accession Versions',
   'biology-qpcr-relative-expression': 'qPCR Relative Expression',

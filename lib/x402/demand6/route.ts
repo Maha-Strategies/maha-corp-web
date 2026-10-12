@@ -1,4 +1,6 @@
 import { randomUUID } from 'node:crypto'
+import { acquireSlot, releaseSlot, type SlotResult } from '../concurrency.ts'
+import { DEMAND6_SOURCE_REGISTRY } from './sources.ts'
 import { API_CORS_HEADERS } from '../../api-proxy-policy.ts'
 import { resolveX402 } from '../gateway.ts'
 import { readPaymentSignature } from '../protocol.ts'
@@ -13,7 +15,8 @@ import { buildDemandProduct, demandDigest } from './products.ts'
 import { readDemandAuthorization } from './purchase.ts'
 import { redisDemandStore, demandStoreKey, type DemandStore, type PreparedRecord } from './store.ts'
 type Dependencies = { resolve?: typeof resolveX402; verify?: typeof verifyDemandBeforeWork; build?: typeof buildDemandProduct; record?: typeof recordOfferUsage;
-  release?: typeof releaseHeldSlot; store?: DemandStore; environment?: string; now?: () => number }
+  release?: typeof releaseHeldSlot; store?: DemandStore; environment?: string; enabled?: boolean; now?: () => number;
+  acquirePreparation?: typeof acquireSlot; releasePreparation?: typeof releaseSlot }
 const json = (body: unknown, status: number, headers: Record<string, string> = {}) => Response.json(body, { status, headers: {
   ...API_CORS_HEADERS, 'Cache-Control': 'no-store', 'Referrer-Policy': 'no-referrer', 'X-Content-Type-Options': 'nosniff',
   'Access-Control-Expose-Headers': API_CORS_HEADERS['Access-Control-Expose-Headers'] + ', X-Maha-Result-Retained, X-Maha-Payment-Replayed', ...headers } })
@@ -31,13 +34,17 @@ export function demand6Handlers(id: Demand6Id, dependencies: Dependencies = {}) 
   const store = dependencies.store ?? redisDemandStore(), now = dependencies.now ?? Date.now
   const record = dependencies.record ?? recordOfferUsage
   const environment = dependencies.environment ?? process.env.VERCEL_ENV ?? process.env.NODE_ENV
+  const enabled = dependencies.enabled ?? process.env.X402_DEMAND6_ENABLED === 'true'
+  const acquirePreparation = dependencies.acquirePreparation ?? acquireSlot, releasePreparation = dependencies.releasePreparation ?? releaseSlot
   let active = 0
   const recordResponse = (request: Request, eventKind: 'challenge' | 'invocation', status: number) => bestEffort(() => record({ offerId: id, eventKind, status, discoverySource: discoverySourceFrom(request.headers) }))
   return {
     GET: async (request: Request) => {
       const url = new URL(request.url)
       if (url.pathname !== demand6Path(id) || url.search) return failure('invalid_discovery_url', 400)
-      return json({ offer, execution: 'Local implementation only; production settlement is withheld until release approval.',
+      return json({ offer, execution: enabled ? 'Released bounded service. A valid unpaid 402 quote confirms deployment enablement, not settlement or delivery.' : 'Declared release; payment is disabled in this deployment.',
+        approvedTargets: { endpointScope: 'Exact released Maha x402 resource URLs only; no arbitrary third-party providers.',
+          sourceUrls: DEMAND6_SOURCE_REGISTRY.map(source => source.url), historyResource: 'https://www.mahastrategies.com/api/v1/compress' },
         examples: 'Outputs are generated from original synthetic fixtures, not real availability or customer evidence.',
         recovery: 'Save the exact input, private purchase headers and signed authorization before submitting. Retry that same authorization for a retained paid result within 24 hours; never automatically create a replacement payment.' }, 200)
     },
@@ -45,12 +52,13 @@ export function demand6Handlers(id: Demand6Id, dependencies: Dependencies = {}) 
     POST: async (request: Request) => {
       if (active >= 4) return failure('local_work_capacity', 429)
       active++
-      let key: string | undefined, lockToken: string | undefined
+      let key: string | undefined, lockToken: string | undefined, preparation: SlotResult | undefined
+      const preparationResource = 'demand6-preparation:' + id
       try {
         const url = new URL(request.url)
         if (url.pathname !== demand6Path(id) || url.search || request.method !== 'POST') return failure('invalid_route', 400)
         if (request.headers.has('authorization') || request.headers.has('x-api-key')) return failure('enterprise_credentials_not_accepted', 400)
-        if (!['development', 'test'].includes(environment ?? '') && offer.status !== 'available') return failure('offer_not_published', 503)
+        if (!['development', 'test'].includes(environment ?? '') && (offer.status !== 'available' || !enabled || environment !== 'production')) return failure('offer_not_enabled', 503)
         if (!readPaymentSignature(request.headers)) {
           let outcome: Awaited<ReturnType<typeof resolveX402>>
           try { outcome = await resolve(request) } catch { return failure('payment_unavailable', 503) }
@@ -85,6 +93,9 @@ export function demand6Handlers(id: Demand6Id, dependencies: Dependencies = {}) 
         }
         if (binding.validBeforeMs <= now() || binding.validAfterMs >= now() || binding.validBeforeMs - now() > 300000) return failure('authorization_not_current_no_payment', 400)
         if (!saved) {
+          try { preparation = await acquirePreparation(preparationResource, 2, 90) }
+          catch { return failure('preparation_capacity_unavailable_no_payment', 503) }
+          if (!preparation.admitted) return failure('preparation_capacity_unavailable_no_payment', 429)
           try {
             if (!await verify(new Request(request.url, { method: 'POST', headers: request.headers, body: JSON.stringify(input) }))) return failure('payment_verification_refused_no_work_or_payment', 400)
           } catch { return failure('payment_verification_unavailable_no_work_or_payment', 503) }
@@ -109,6 +120,7 @@ export function demand6Handlers(id: Demand6Id, dependencies: Dependencies = {}) 
           return json(saved.product, 200, { 'PAYMENT-RESPONSE': outcome.header, 'X-Maha-Result-Retained': String(retained), 'X-Maha-Payment-Replayed': String(outcome.replayed ?? false) })
         } finally { await bestEffort(() => release(outcome.slot)) }
       } finally {
+        if (preparation?.admitted && preparation.token) await bestEffort(() => releasePreparation(preparationResource, preparation!.token!))
         if (key && lockToken) await bestEffort(() => store.unlock(key!, lockToken!))
         active--
       }

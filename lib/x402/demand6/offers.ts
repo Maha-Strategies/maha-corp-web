@@ -5,17 +5,25 @@ import { DEMAND6_IDS, DEMAND6_PRODUCTS, DEMAND6_INPUTS, DEMAND6_SAMPLES, DEMAND6
 import examplesJSON from '../../../content/x402/demand6/examples.json' with { type: 'json' }
 const examples = examplesJSON as Record<Demand6Id, Record<string, unknown>>
 const jsonSchema = (schema: z.ZodType) => { const result = z.toJSONSchema(schema); delete result.$schema; return result }
+const TASK_TAGS: Record<Demand6Id, string[]> = {
+  'csv-import-preflight': ['csv-validation', 'data-quality', 'import-preflight'],
+  'product-catalogue-preflight': ['catalogue-validation', 'sku-validation', 'gtin'],
+  'live-x402-payment-preflight': ['payment-path-check', 'endpoint-reliability', 'usdc'],
+  'x402-quote-change-report': ['quote-history', 'endpoint-reliability', 'payment-diagnostics'],
+  'live-citation-recheck': ['citation-check', 'exact-quotes', 'source-evidence'],
+  'source-bound-research-microbrief': ['research-brief', 'extractive-research', 'source-evidence'],
+}
 export const DEMAND6_OFFERS: readonly X402Offer[] = DEMAND6_IDS.map(id => ({
   id, method: 'POST', path: demand6Path(id), amount: DEMAND6_PRODUCTS[id].amount,
   serviceName: DEMAND6_PRODUCTS[id].title, description: DEMAND6_PRODUCTS[id].description, concurrencyCap: 2,
-  tags: ['demand-20261012', 'bounded', 'x402', ...(id.includes('csv') || id.includes('catalogue') ? ['data-validation'] : id.includes('research') || id.includes('citation') ? ['research', 'source-evidence'] : ['payment-diagnostics'])],
-  status: 'withheld', availability: { payableInProduction: false, blockedBy: ['Implemented locally; release, enabled configuration and paid indexing require separate owner approval.'] },
+  tags: ['demand-20261012', ...TASK_TAGS[id], 'x402'],
+  status: 'available', availability: { payableInProduction: true, blockedBy: [] },
   requiresIdempotency: false, maxRequestBytes: DEMAND6_MAX_REQUEST_BYTES,
   capabilityBoundaries: ['Approved public targets and reviewed source rights only. No private-input detection, credentials, redirects, IPv6 or browser/PDF execution.',
     'Version 1 accepts native-USDC EOA authorizations on Base or Arbitrum only; smart-contract-wallet signatures are not supported.',
     'Quote checks do not establish settlement or delivery. Stored samples are not continuous uptime or independent demand.',
     'Extractive research only: no model calls, semantic contradiction detection, factual certification or completeness guarantee.',
-    'Malformed, unsupported, unavailable or unretainable work is refused before settlement. A supported negative finding is a result, not approval.',
+    'Malformed input, unsupported, unavailable or unretainable work is refused before settlement. A supported negative finding is a result, not approval.',
     'Original synthetic discovery examples are not live observations. Do not put private data in this public/synthetic service.'],
   retention: { fullSourceTextStored: false, verbatimExcerptsRetained: id === 'source-bound-research-microbrief' || id === 'live-citation-recheck',
     retainedFields: ['prepared result up to 64 KiB', 'input hash', 'canonical payment fingerprint', 'payer', 'network', 'creation timestamp', 'settlement receipt'],

@@ -8659,17 +8659,36 @@
     },
     {
       "id": "csv-import-preflight",
-      "status": "withheld",
+      "status": "active",
       "canonicalResource": "https://www.mahastrategies.com/api/v1/demand/csv-import-preflight",
       "method": "POST",
-      "payment": null,
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "networks": [
+          {
+            "network": "eip155:8453",
+            "assetContract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+          },
+          {
+            "network": "eip155:42161",
+            "assetContract": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"
+          }
+        ],
+        "amountBaseUnits": "13500",
+        "displayAmount": "0.013500 USDC"
+      },
       "schemas": {
         "input": "https://www.mahastrategies.com/api/discovery/x402-offers/csv-import-preflight#input",
         "output": "https://www.mahastrategies.com/api/discovery/x402-offers/csv-import-preflight#output"
       },
       "configurationDigest": {
         "algorithm": "sha256",
-        "digest": "sha256:02159ae52bc3268330ca0c80bff610cd7240c4c16bf48ac01c3ddd9f952bba96",
+        "digest": "sha256:4f90a4e60837c93fa7a2c89c79f514a2e048d8084d68bdc3a03d3e5809458bf0",
         "schemaVersion": "1.0.0"
       },
       "limits": {
@@ -8687,23 +8706,42 @@
         "Version 1 accepts native-USDC EOA authorizations on Base or Arbitrum only; smart-contract-wallet signatures are not supported.",
         "Quote checks do not establish settlement or delivery. Stored samples are not continuous uptime or independent demand.",
         "Extractive research only: no model calls, semantic contradiction detection, factual certification or completeness guarantee.",
-        "Malformed, unsupported, unavailable or unretainable work is refused before settlement. A supported negative finding is a result, not approval.",
+        "Malformed input, unsupported, unavailable or unretainable work is refused before settlement. A supported negative finding is a result, not approval.",
         "Original synthetic discovery examples are not live observations. Do not put private data in this public/synthetic service."
       ]
     },
     {
       "id": "live-x402-payment-preflight",
-      "status": "withheld",
+      "status": "active",
       "canonicalResource": "https://www.mahastrategies.com/api/v1/demand/live-x402-payment-preflight",
       "method": "POST",
-      "payment": null,
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "networks": [
+          {
+            "network": "eip155:8453",
+            "assetContract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+          },
+          {
+            "network": "eip155:42161",
+            "assetContract": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"
+          }
+        ],
+        "amountBaseUnits": "34900",
+        "displayAmount": "0.034900 USDC"
+      },
       "schemas": {
         "input": "https://www.mahastrategies.com/api/discovery/x402-offers/live-x402-payment-preflight#input",
         "output": "https://www.mahastrategies.com/api/discovery/x402-offers/live-x402-payment-preflight#output"
       },
       "configurationDigest": {
         "algorithm": "sha256",
-        "digest": "sha256:170bcb2a1ac32d6abf14a676490d1eb4651c92908edf5cd10ce9082c523572bf",
+        "digest": "sha256:144c9065b2a7ed97be425d0beb980013539a8f97ea72a4b4ecfb9352c68f68f9",
         "schemaVersion": "1.0.0"
       },
       "limits": {
@@ -8721,23 +8759,42 @@
         "Version 1 accepts native-USDC EOA authorizations on Base or Arbitrum only; smart-contract-wallet signatures are not supported.",
         "Quote checks do not establish settlement or delivery. Stored samples are not continuous uptime or independent demand.",
         "Extractive research only: no model calls, semantic contradiction detection, factual certification or completeness guarantee.",
-        "Malformed, unsupported, unavailable or unretainable work is refused before settlement. A supported negative finding is a result, not approval.",
+        "Malformed input, unsupported, unavailable or unretainable work is refused before settlement. A supported negative finding is a result, not approval.",
         "Original synthetic discovery examples are not live observations. Do not put private data in this public/synthetic service."
       ]
     },
     {
       "id": "x402-quote-change-report",
-      "status": "withheld",
+      "status": "active",
       "canonicalResource": "https://www.mahastrategies.com/api/v1/demand/x402-quote-change-report",
       "method": "POST",
-      "payment": null,
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "networks": [
+          {
+            "network": "eip155:8453",
+            "assetContract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+          },
+          {
+            "network": "eip155:42161",
+            "assetContract": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"
+          }
+        ],
+        "amountBaseUnits": "62000",
+        "displayAmount": "0.062000 USDC"
+      },
       "schemas": {
         "input": "https://www.mahastrategies.com/api/discovery/x402-offers/x402-quote-change-report#input",
         "output": "https://www.mahastrategies.com/api/discovery/x402-offers/x402-quote-change-report#output"
       },
       "configurationDigest": {
         "algorithm": "sha256",
-        "digest": "sha256:b62a488b4a223f1696156ac7caa906c2c815fa839e604c3ab461ce5d2fafe270",
+        "digest": "sha256:bd641a62bdc71fca5053105a5d6848595f25e4131684b84193e5d6c177227e4f",
         "schemaVersion": "1.0.0"
       },
       "limits": {
@@ -8755,23 +8812,42 @@
         "Version 1 accepts native-USDC EOA authorizations on Base or Arbitrum only; smart-contract-wallet signatures are not supported.",
         "Quote checks do not establish settlement or delivery. Stored samples are not continuous uptime or independent demand.",
         "Extractive research only: no model calls, semantic contradiction detection, factual certification or completeness guarantee.",
-        "Malformed, unsupported, unavailable or unretainable work is refused before settlement. A supported negative finding is a result, not approval.",
+        "Malformed input, unsupported, unavailable or unretainable work is refused before settlement. A supported negative finding is a result, not approval.",
         "Original synthetic discovery examples are not live observations. Do not put private data in this public/synthetic service."
       ]
     },
     {
       "id": "product-catalogue-preflight",
-      "status": "withheld",
+      "status": "active",
       "canonicalResource": "https://www.mahastrategies.com/api/v1/demand/product-catalogue-preflight",
       "method": "POST",
-      "payment": null,
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "networks": [
+          {
+            "network": "eip155:8453",
+            "assetContract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+          },
+          {
+            "network": "eip155:42161",
+            "assetContract": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"
+          }
+        ],
+        "amountBaseUnits": "24500",
+        "displayAmount": "0.024500 USDC"
+      },
       "schemas": {
         "input": "https://www.mahastrategies.com/api/discovery/x402-offers/product-catalogue-preflight#input",
         "output": "https://www.mahastrategies.com/api/discovery/x402-offers/product-catalogue-preflight#output"
       },
       "configurationDigest": {
         "algorithm": "sha256",
-        "digest": "sha256:733e2655bb88d9833fdccb72f78dc0df9e8b15bb590543164c5019b7b57519fc",
+        "digest": "sha256:8accea3fb14c0111b65b4f550583a67fa289598eb14ab8db08fb17fe8cee9e9b",
         "schemaVersion": "1.0.0"
       },
       "limits": {
@@ -8789,23 +8865,42 @@
         "Version 1 accepts native-USDC EOA authorizations on Base or Arbitrum only; smart-contract-wallet signatures are not supported.",
         "Quote checks do not establish settlement or delivery. Stored samples are not continuous uptime or independent demand.",
         "Extractive research only: no model calls, semantic contradiction detection, factual certification or completeness guarantee.",
-        "Malformed, unsupported, unavailable or unretainable work is refused before settlement. A supported negative finding is a result, not approval.",
+        "Malformed input, unsupported, unavailable or unretainable work is refused before settlement. A supported negative finding is a result, not approval.",
         "Original synthetic discovery examples are not live observations. Do not put private data in this public/synthetic service."
       ]
     },
     {
       "id": "live-citation-recheck",
-      "status": "withheld",
+      "status": "active",
       "canonicalResource": "https://www.mahastrategies.com/api/v1/demand/live-citation-recheck",
       "method": "POST",
-      "payment": null,
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "networks": [
+          {
+            "network": "eip155:8453",
+            "assetContract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+          },
+          {
+            "network": "eip155:42161",
+            "assetContract": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"
+          }
+        ],
+        "amountBaseUnits": "88000",
+        "displayAmount": "0.088000 USDC"
+      },
       "schemas": {
         "input": "https://www.mahastrategies.com/api/discovery/x402-offers/live-citation-recheck#input",
         "output": "https://www.mahastrategies.com/api/discovery/x402-offers/live-citation-recheck#output"
       },
       "configurationDigest": {
         "algorithm": "sha256",
-        "digest": "sha256:7d20567d9f64add93a92b7abbd819ab4d49381f2e14e63cf9b01ba8be31183db",
+        "digest": "sha256:bf62b000cffa4e0893f8ad757609513fd73f3ba16688967814da189479043873",
         "schemaVersion": "1.0.0"
       },
       "limits": {
@@ -8823,23 +8918,42 @@
         "Version 1 accepts native-USDC EOA authorizations on Base or Arbitrum only; smart-contract-wallet signatures are not supported.",
         "Quote checks do not establish settlement or delivery. Stored samples are not continuous uptime or independent demand.",
         "Extractive research only: no model calls, semantic contradiction detection, factual certification or completeness guarantee.",
-        "Malformed, unsupported, unavailable or unretainable work is refused before settlement. A supported negative finding is a result, not approval.",
+        "Malformed input, unsupported, unavailable or unretainable work is refused before settlement. A supported negative finding is a result, not approval.",
         "Original synthetic discovery examples are not live observations. Do not put private data in this public/synthetic service."
       ]
     },
     {
       "id": "source-bound-research-microbrief",
-      "status": "withheld",
+      "status": "active",
       "canonicalResource": "https://www.mahastrategies.com/api/v1/demand/source-bound-research-microbrief",
       "method": "POST",
-      "payment": null,
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "networks": [
+          {
+            "network": "eip155:8453",
+            "assetContract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+          },
+          {
+            "network": "eip155:42161",
+            "assetContract": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"
+          }
+        ],
+        "amountBaseUnits": "240000",
+        "displayAmount": "0.240000 USDC"
+      },
       "schemas": {
         "input": "https://www.mahastrategies.com/api/discovery/x402-offers/source-bound-research-microbrief#input",
         "output": "https://www.mahastrategies.com/api/discovery/x402-offers/source-bound-research-microbrief#output"
       },
       "configurationDigest": {
         "algorithm": "sha256",
-        "digest": "sha256:b3c823774c08238a361f5408f22964160a063d611d75ba5af32b8b533abc41a2",
+        "digest": "sha256:b51b3aa80ba8c9a9f622f976928f99877a65fb48b9bd06ee0d65568443676aab",
         "schemaVersion": "1.0.0"
       },
       "limits": {
@@ -8857,7 +8971,7 @@
         "Version 1 accepts native-USDC EOA authorizations on Base or Arbitrum only; smart-contract-wallet signatures are not supported.",
         "Quote checks do not establish settlement or delivery. Stored samples are not continuous uptime or independent demand.",
         "Extractive research only: no model calls, semantic contradiction detection, factual certification or completeness guarantee.",
-        "Malformed, unsupported, unavailable or unretainable work is refused before settlement. A supported negative finding is a result, not approval.",
+        "Malformed input, unsupported, unavailable or unretainable work is refused before settlement. A supported negative finding is a result, not approval.",
         "Original synthetic discovery examples are not live observations. Do not put private data in this public/synthetic service."
       ]
     }
