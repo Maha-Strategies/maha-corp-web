@@ -66,5 +66,7 @@ test('vercel.json wires the command and still builds main', () => {
   const config = JSON.parse(readFileSync('vercel.json', 'utf8'))
   assert.equal(config.ignoreCommand, 'node scripts/vercel-should-build.cjs')
   assert.equal(config.git.deploymentEnabled.main, true, 'main must keep deploying')
+  assert.equal(config.git.deploymentEnabled['**'], false, 'globstar must block slash-containing feature branches')
+  assert.equal(config.git.deploymentEnabled['*'], undefined, 'single star alone leaves codex/ branches unspecified and enabled')
   assert.ok(Array.isArray(config.crons) && config.crons.length > 0, 'the cron schedule must survive the edit')
 })

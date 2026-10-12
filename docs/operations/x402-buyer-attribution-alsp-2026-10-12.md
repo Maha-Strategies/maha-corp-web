@@ -90,7 +90,7 @@ ContextIQ's free Inspector was given only the public CSV endpoint URL. It read G
 
 ## Release Boundary
 
-The user approved migration `20261012120000` and one focused production build on 12 October, plus temporary access for the exact reviewed workflow branch with the reviewer gate intact. The migration and deployment are pending verification. No additional live paid call or wallet-key access is authorized. Prices, nonce binding, the settlement schedule and unrelated local work are unchanged. New support/attribution recording cannot withhold a paid response if accounting is unavailable.
+The user approved migration `20261012120000` and one focused production build on 12 October, plus temporary access for the exact reviewed workflow branch with the reviewer gate intact. The protected dry-run and single apply passed; the temporary permission was removed and main-only access verified. Deployment remains pending. No additional live paid call or wallet-key access is authorized. Prices, nonce binding, the settlement schedule and unrelated local work are unchanged. New support/attribution recording cannot withhold a paid response if accounting is unavailable.
 
 ## Verification and Communications
 
