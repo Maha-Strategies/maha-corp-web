@@ -26,8 +26,8 @@
     "version": "maha-demand6/1.0.0",
     "productId": "live-x402-payment-preflight",
     "inputHash": "sha256:f7939781fcb75d5934b6b1e57fab7973742c70482e254ab338644bf423ac4e68",
-    "resultHash": "sha256:902d833fa3a16cd2b546ea2e30e34d0700d67905ad6d778d226a51fe98c5d35e",
-    "receiptDigest": "sha256:a4738c7dee75db2c9a17de1e65b969c624ec21adde68f445b1d97b3d55c6ace6",
+    "resultHash": "sha256:1197ea4138a6d0ed889c1333b75f15ad14ba59ed1d9a6c811f8c654c95ac661c",
+    "receiptDigest": "sha256:f3f14c4bd8369ac1dea4842c131e719ab9908b681b22af4d81dd3a1e956b89ec",
     "result": {
       "observation": {
         "resource": "https://www.mahastrategies.com/api/v1/compress",
@@ -35,7 +35,7 @@
         "responseStatus": 402,
         "durationMs": 20,
         "challengeState": "observed",
-        "challengeDigest": "sha256:2e3c2e86639945575fa369af54f340405c259551bf3f2fc8e80280f0801cdc48",
+        "challengeDigest": "sha256:743af9b98c837bd1dd33327595b2eba4a3323c0ab8e5186bdb5218a030ac99e9",
         "schemaDigest": "sha256:996dfe72b52d6610106b64cf47bc4d22123c1dc8370a91608cc3b699f91db570",
         "schemaState": "present_not_validated",
         "networks": [
@@ -47,6 +47,12 @@
           },
           {
             "network": "eip155:42161",
+            "state": "valid_quote",
+            "amountBaseUnits": "1000",
+            "reasons": []
+          },
+          {
+            "network": "eip155:137",
             "state": "valid_quote",
             "amountBaseUnits": "1000",
             "reasons": []
@@ -70,8 +76,8 @@
     "version": "maha-demand6/1.0.0",
     "productId": "x402-quote-change-report",
     "inputHash": "sha256:113e14f2cce0f0cd560d6e147b6042e6918b55e91853378523f163a7fc8fc6e7",
-    "resultHash": "sha256:38aaa246331b3e63e088df53a789ef4d7acac7ccc3800f46098d4cfbf8d70489",
-    "receiptDigest": "sha256:4cf9aef36f0f438b3a79e4f2fe37e9b4568c2949e98b75c1b9a4957c4e95e514",
+    "resultHash": "sha256:cd3ca0cb8680c7c920de481f77fdde432f984b22821e6d2ce7792182a8770d55",
+    "receiptDigest": "sha256:319b42f1a67cd2a4d7fcf2cf0d4f5b5154a3f9b6d5e7289a782c16108cd9b63b",
     "result": {
       "resource": "https://www.mahastrategies.com/api/v1/compress",
       "snapshotAt": "2026-10-12T12:00:00.000Z",
@@ -89,7 +95,7 @@
         "responseStatus": 402,
         "durationMs": 20,
         "challengeState": "observed",
-        "challengeDigest": "sha256:2e3c2e86639945575fa369af54f340405c259551bf3f2fc8e80280f0801cdc48",
+        "challengeDigest": "sha256:743af9b98c837bd1dd33327595b2eba4a3323c0ab8e5186bdb5218a030ac99e9",
         "schemaDigest": "sha256:996dfe72b52d6610106b64cf47bc4d22123c1dc8370a91608cc3b699f91db570",
         "schemaState": "present_not_validated",
         "networks": [
@@ -101,6 +107,12 @@
           },
           {
             "network": "eip155:42161",
+            "state": "valid_quote",
+            "amountBaseUnits": "1000",
+            "reasons": []
+          },
+          {
+            "network": "eip155:137",
             "state": "valid_quote",
             "amountBaseUnits": "1000",
             "reasons": []
@@ -113,7 +125,7 @@
         "responseStatus": 402,
         "durationMs": 20,
         "challengeState": "observed",
-        "challengeDigest": "sha256:37519b3729b5f03af3846163611d66740c8aca0cb1e426dfe248c3986ee7c4e5",
+        "challengeDigest": "sha256:990108feb0870a05136019834328253075f9e38ab8cd29c88b514ac8978fc69a",
         "schemaDigest": "sha256:996dfe72b52d6610106b64cf47bc4d22123c1dc8370a91608cc3b699f91db570",
         "schemaState": "present_not_validated",
         "networks": [
@@ -125,6 +137,12 @@
           },
           {
             "network": "eip155:42161",
+            "state": "valid_quote",
+            "amountBaseUnits": "2000",
+            "reasons": []
+          },
+          {
+            "network": "eip155:137",
             "state": "valid_quote",
             "amountBaseUnits": "2000",
             "reasons": []

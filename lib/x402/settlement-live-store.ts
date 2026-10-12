@@ -6,7 +6,7 @@ import { buildLedger, type SettlementLedger } from './settlement-ledger.ts'
 import { OPERATOR_WALLETS, MAHA_PAYEE } from './discovery-payment-recipe.ts'
 import { baseSettlementReader, evmSettlementReader, ledgerFromRows, refreshSettlementLedger, type SettlementReader } from './settlement-refresh.ts'
 import { isOperatorSettlementReceipt, type OperatorSettlementReceipt } from './operator-settlement-receipts.ts'
-import { settlementNetworks, type UsdcNetwork } from './networks.ts'
+import { ADDITIONAL_NETWORK_CONFIGURATION, settlementNetworks, type UsdcNetwork } from './networks.ts'
 import { combineSettlementLedgers } from './settlement-multichain.ts'
 import { settlementRefreshFailure } from './settlement-rpc.ts'
 
@@ -118,8 +118,9 @@ export async function readPublicSettlementLedger(store?: Pick<SettlementStore, '
 
 export function networkSeed(network: UsdcNetwork): SettlementLedger {
   if (network === 'eip155:8453') return bundledLedger
-  const from = process.env.X402_ARBITRUM_FROM_BLOCK?.trim()
-  if (!from || !/^[1-9]\d*$/.test(from)) throw new Error('arbitrum_start_block_required')
+  const activation = ADDITIONAL_NETWORK_CONFIGURATION[network]
+  const from = process.env[activation.fromBlock]?.trim()
+  if (!from || !/^[1-9]\d*$/.test(from)) throw new Error(activation.missingSeed)
   return ledgerFromRows([], BigInt(from), BigInt(from), '1970-01-01T00:00:00.000Z', network)
 }
 

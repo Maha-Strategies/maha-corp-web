@@ -8,15 +8,22 @@ if (process.argv.slice(2).some(x => !['--write', '--check'].includes(x))) throw 
 for (const [name, field, paymentField] of [['agent-card', 'capabilities', 'payment'], ['agent-offers', 'technicalCapabilities', 'machinePayment']] as const) {
   const path = resolve(import.meta.dirname, `../content/discovery/${name}.json`)
   const before = readFileSync(path, 'utf8'), body = JSON.parse(before)
-  const retained = body[field].filter((entry: { id: string }) => !isMicroProduct(entry.id))
-  body[field] = [...retained, ...MICRO_OFFERS.map(o => ({
+  const updates = MICRO_OFFERS.map(o => ({
     id: o.id, status: o.status, endpoint: `https://www.mahastrategies.com${o.path}`, method: o.method,
     description: o.description, payableNow: o.availability.payableInProduction, blockedBy: o.availability.blockedBy,
     [paymentField]: { protocol: 'x402', version: 2, network: 'eip155:8453', networks: DECLARED_PAYMENT_NETWORKS, amount: o.amount, assetSymbol: 'USDC', autonomous: o.availability.payableInProduction, payableNow: o.availability.payableInProduction },
-  }))]
+  }))
+  // Independent cohorts must not reorder each other's already-valid entries.
+  const byId = new Map(updates.map(entry => [entry.id, entry]))
+  const existing = body[field].filter((entry: { id: string }) => !isMicroProduct(entry.id) || byId.has(entry.id))
+  const present = new Set(existing.map((entry: { id: string }) => entry.id))
+  body[field] = [...existing.map((entry: { id: string }) => byId.get(entry.id) ?? entry), ...updates.filter(entry => !present.has(entry.id))]
   if (name === 'agent-offers') {
-    body.transactionPolicy.autonomousPaymentScope = [...body.transactionPolicy.autonomousPaymentScope.filter((id: string) => !isMicroProduct(id)), ...MICRO_OFFERS.filter(o => o.availability.payableInProduction).map(o => o.id)]
-    body.transactionPolicy.describedNotPayable = [...body.transactionPolicy.describedNotPayable.filter((id: string) => !isMicroProduct(id)), ...MICRO_OFFERS.filter(o => !o.availability.payableInProduction).map(o => o.id)]
+    for (const [key, payable] of [['autonomousPaymentScope', true], ['describedNotPayable', false]] as const) {
+      const wanted = MICRO_OFFERS.filter(o => o.availability.payableInProduction === payable).map(o => o.id)
+      const retained = body.transactionPolicy[key].filter((id: string) => !isMicroProduct(id) || wanted.includes(id))
+      body.transactionPolicy[key] = [...retained, ...wanted.filter(id => !retained.includes(id))]
+    }
   }
   const after = JSON.stringify(body, null, 2) + '\n'
   if (process.argv.includes('--write')) writeFileSync(path, after)

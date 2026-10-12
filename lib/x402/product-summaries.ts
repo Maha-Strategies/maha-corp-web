@@ -4,7 +4,7 @@ import { SCIENCE_PRODUCTS } from './science/contracts.ts'
 /** Plain-language catalogue copy; the payment contract remains in offer.description. */
 export const PRODUCT_SUMMARIES: Readonly<Record<string, string>> = Object.freeze({
   'csv-import-preflight': 'Checks bounded CSV records for quoting, column, type and formula-prefix problems without executing cells or guaranteeing a successful import.',
-  'live-x402-payment-preflight': 'Fetches an approved endpoint and checks its Base and Arbitrum quotes against declared terms, without making a payment or proving delivery.',
+  'live-x402-payment-preflight': 'Fetches an approved endpoint and checks its Base, Arbitrum and Polygon quotes against declared terms, without making a payment or proving delivery. A network may not be offered.',
   'x402-quote-change-report': 'Compares stored quote and schema observations, showing changes, dates and sampling gaps without claiming continuous uptime.',
   'product-catalogue-preflight': 'Flags duplicate SKUs, price and declared-currency problems and invalid GTIN checksums, without certifying identifier ownership or marketplace approval.',
   'live-citation-recheck': 'Revisits approved public prose to locate exact quotations and check declared text hashes, without verifying factual support.',

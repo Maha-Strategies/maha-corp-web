@@ -1,0 +1,125 @@
+{
+  "sourceCommit": "17609ef4c2e7f90e7e18a26d56ffe0affab9bc14",
+  "classification": "synthetic_legacy_results_not_live_observations",
+  "products": {
+    "live-x402-payment-preflight": {
+      "version": "maha-demand6/1.0.0",
+      "productId": "live-x402-payment-preflight",
+      "inputHash": "sha256:f7939781fcb75d5934b6b1e57fab7973742c70482e254ab338644bf423ac4e68",
+      "resultHash": "sha256:902d833fa3a16cd2b546ea2e30e34d0700d67905ad6d778d226a51fe98c5d35e",
+      "receiptDigest": "sha256:a4738c7dee75db2c9a17de1e65b969c624ec21adde68f445b1d97b3d55c6ace6",
+      "result": {
+        "observation": {
+          "resource": "https://www.mahastrategies.com/api/v1/compress",
+          "observedAt": "2026-10-12T12:00:00.000Z",
+          "responseStatus": 402,
+          "durationMs": 20,
+          "challengeState": "observed",
+          "challengeDigest": "sha256:2e3c2e86639945575fa369af54f340405c259551bf3f2fc8e80280f0801cdc48",
+          "schemaDigest": "sha256:996dfe72b52d6610106b64cf47bc4d22123c1dc8370a91608cc3b699f91db570",
+          "schemaState": "present_not_validated",
+          "networks": [
+            {
+              "network": "eip155:8453",
+              "state": "valid_quote",
+              "amountBaseUnits": "1000",
+              "reasons": []
+            },
+            {
+              "network": "eip155:42161",
+              "state": "valid_quote",
+              "amountBaseUnits": "1000",
+              "reasons": []
+            }
+          ]
+        },
+        "allRequiredQuotesValid": true,
+        "paymentsMade": 0,
+        "deliveryTested": false
+      },
+      "limitations": [
+        "Public or synthetic input only. Caller labels do not detect sensitive data.",
+        "No payment is made to an observed provider. A valid challenge is not settlement, execution, delivery or a security clearance.",
+        "Approved targets only; no credentials, redirects, IP-literal targets, private DNS or IPv6 connections. New sources require a reviewed reuse basis.",
+        "Static prose extraction excludes forms, code, navigation and scripts. No JavaScript, PDFs or browser visibility checks. Quotes use extracted-text code points, not raw HTML offsets.",
+        "No model calls, semantic contradiction detection, factual certification or completeness guarantee.",
+        "Prepared result retention is bounded to 24 hours; save the result and original authorization. Missing recovery or unknown payment outcomes need operator review, never automatic repayment."
+      ]
+    },
+    "x402-quote-change-report": {
+      "version": "maha-demand6/1.0.0",
+      "productId": "x402-quote-change-report",
+      "inputHash": "sha256:113e14f2cce0f0cd560d6e147b6042e6918b55e91853378523f163a7fc8fc6e7",
+      "resultHash": "sha256:38aaa246331b3e63e088df53a789ef4d7acac7ccc3800f46098d4cfbf8d70489",
+      "receiptDigest": "sha256:4cf9aef36f0f438b3a79e4f2fe37e9b4568c2949e98b75c1b9a4957c4e95e514",
+      "result": {
+        "resource": "https://www.mahastrategies.com/api/v1/compress",
+        "snapshotAt": "2026-10-12T12:00:00.000Z",
+        "snapshotAgeSeconds": 0,
+        "sampleCount": 2,
+        "maximumGapSeconds": 86400,
+        "reachabilityChanges": 0,
+        "quoteChanges": 1,
+        "schemaChanges": 0,
+        "unknownComparisons": 0,
+        "continuousUptimeEstablished": false,
+        "first": {
+          "resource": "https://www.mahastrategies.com/api/v1/compress",
+          "observedAt": "2026-10-11T12:00:00.000Z",
+          "responseStatus": 402,
+          "durationMs": 20,
+          "challengeState": "observed",
+          "challengeDigest": "sha256:2e3c2e86639945575fa369af54f340405c259551bf3f2fc8e80280f0801cdc48",
+          "schemaDigest": "sha256:996dfe72b52d6610106b64cf47bc4d22123c1dc8370a91608cc3b699f91db570",
+          "schemaState": "present_not_validated",
+          "networks": [
+            {
+              "network": "eip155:8453",
+              "state": "valid_quote",
+              "amountBaseUnits": "1000",
+              "reasons": []
+            },
+            {
+              "network": "eip155:42161",
+              "state": "valid_quote",
+              "amountBaseUnits": "1000",
+              "reasons": []
+            }
+          ]
+        },
+        "last": {
+          "resource": "https://www.mahastrategies.com/api/v1/compress",
+          "observedAt": "2026-10-12T12:00:00.000Z",
+          "responseStatus": 402,
+          "durationMs": 20,
+          "challengeState": "observed",
+          "challengeDigest": "sha256:37519b3729b5f03af3846163611d66740c8aca0cb1e426dfe248c3986ee7c4e5",
+          "schemaDigest": "sha256:996dfe72b52d6610106b64cf47bc4d22123c1dc8370a91608cc3b699f91db570",
+          "schemaState": "present_not_validated",
+          "networks": [
+            {
+              "network": "eip155:8453",
+              "state": "valid_quote",
+              "amountBaseUnits": "2000",
+              "reasons": []
+            },
+            {
+              "network": "eip155:42161",
+              "state": "valid_quote",
+              "amountBaseUnits": "2000",
+              "reasons": []
+            }
+          ]
+        }
+      },
+      "limitations": [
+        "Public or synthetic input only. Caller labels do not detect sensitive data.",
+        "No payment is made to an observed provider. A valid challenge is not settlement, execution, delivery or a security clearance.",
+        "Approved targets only; no credentials, redirects, IP-literal targets, private DNS or IPv6 connections. New sources require a reviewed reuse basis.",
+        "Static prose extraction excludes forms, code, navigation and scripts. No JavaScript, PDFs or browser visibility checks. Quotes use extracted-text code points, not raw HTML offsets.",
+        "No model calls, semantic contradiction detection, factual certification or completeness guarantee.",
+        "Prepared result retention is bounded to 24 hours; save the result and original authorization. Missing recovery or unknown payment outcomes need operator review, never automatic repayment."
+      ]
+    }
+  }
+}

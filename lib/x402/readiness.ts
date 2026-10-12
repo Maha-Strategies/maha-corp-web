@@ -139,6 +139,8 @@ export async function getX402Readiness(options: {
   probe?: Probe | null
   functionProbe?: FunctionProbe | null
   recoveryProbe?: (() => Promise<RecoveryHealth | null>) | null
+  /** Read-only schema attestation; never applies or repairs a migration. */
+  polygonSchemaProbe?: (() => Promise<boolean | null>) | null
   /**
    * Overrides the published catalog. Production always uses the real one; this
    * exists so the preview/withheld branches stay covered once no offer happens
@@ -223,6 +225,22 @@ export async function getX402Readiness(options: {
         summary: 'No chain RPC is configured, so settlements are taken on the facilitator\'s word.',
         detail: 'Repeat-buyer analytics will report these as unconfirmed rather than as purchases.',
       })
+
+  if (config.paymentNetworks?.some(option => option.network === 'eip155:137')) {
+    const probePolygon = options.polygonSchemaProbe ?? (options.probe !== undefined ? null : async () => {
+      try {
+        const ledger = createAgentInquiryLedger()
+        if (!ledger) return null
+        const { data, error } = await ledger.rpc('x402_polygon_attribution_ready')
+        return error || typeof data !== 'boolean' ? null : data
+      } catch { return null }
+    })
+    const schemaReady = probePolygon ? await probePolygon().catch(() => null) : null
+    checks.push(schemaReady === true
+      ? { id: 'x402.polygon.attribution', state: 'ok', summary: 'The additive Polygon attribution migration and private-table access controls are verified.' }
+      : { id: 'x402.polygon.attribution', state: 'fail', summary: 'Polygon attribution prerequisites are unverified. Do not activate or promote Polygon payment quotes.',
+          detail: 'Verify the new Polygon migration and x402_polygon_attribution_ready(); do not rerun the prior attribution migration.' })
+  }
 
   // --- Offer enabled but unavailable ----------------------------------------
   for (const offer of catalog) {

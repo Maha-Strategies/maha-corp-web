@@ -1,5 +1,5 @@
 import { createPublicClient, http, parseAbiItem } from 'viem'
-import { base, arbitrum } from 'viem/chains'
+import { base, arbitrum, polygon } from 'viem/chains'
 import { MAHA_PAYEE, OPERATOR_WALLETS } from './discovery-payment-recipe.ts'
 import { payableOffers } from './offers.ts'
 import { OPERATOR_SETTLEMENT_RECEIPTS } from './operator-settlement-receipts.ts'
@@ -29,7 +29,7 @@ export function baseSettlementReader(options: { timeout?: number; retryCount?: n
 }
 
 export function evmSettlementReader(network: UsdcNetwork, options: { timeout?: number; retryCount?: number; minRpcIntervalMs?: number; minLogIntervalMs?: number } = {}): SettlementReader {
-  const definition = usdcNetwork(network), chain = network === 'eip155:8453' ? base : arbitrum
+  const definition = usdcNetwork(network), chain = { 'eip155:8453': base, 'eip155:42161': arbitrum, 'eip155:137': polygon }[network]
   // Retain the offline CLI's old option, but apply it to all reads, not just logs.
   const queue = settlementRpcQueue(options.minRpcIntervalMs ?? options.minLogIntervalMs ?? 350)
   const read = <T>(request: () => Promise<T>) => queue(request).catch((error: unknown) => {

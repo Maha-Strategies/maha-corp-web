@@ -259,6 +259,10 @@ export function matchRequirement(payment: PaymentPayload, requirements: PaymentR
     requirement.asset.toLowerCase() === payment.accepted.asset.toLowerCase() &&
     requirement.amount === payment.accepted.amount &&
     requirement.payTo.toLowerCase() === payment.accepted.payTo.toLowerCase() &&
+    // Domain fields are signing terms, not optional buyer annotations. Compare
+    // them when the seller declares them; preserve legacy domain-free terms.
+    (requirement.extra?.name === undefined || requirement.extra.name === payment.accepted.extra?.name) &&
+    (requirement.extra?.version === undefined || requirement.extra.version === payment.accepted.extra?.version) &&
     requirement.maxTimeoutSeconds === payment.accepted.maxTimeoutSeconds) ?? null
 }
 

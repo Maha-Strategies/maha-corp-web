@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto'
 import { createAgentInquiryLedger } from '../agent-inquiry-ledger.ts'
 import { OPERATOR_WALLETS, MAHA_PAYEE } from './discovery-payment-recipe.ts'
+import { USDC_NETWORKS } from './networks.ts'
 
 export const DISCOVERY_SOURCES = ['bazaar', 'maha_canary', 'direct', 'reddit', 'alsp', 'nohumans', 'tanod', 'nsgoods', 'unknown'] as const
 export type ClaimedDiscoverySource = typeof DISCOVERY_SOURCES[number]
@@ -22,7 +23,7 @@ type Ledger = { rpc(name: string, args: Record<string, unknown>): PromiseLike<{ 
 export async function recordPurchaseAttribution(input: PurchaseAttribution, injected?: Ledger | null) {
   try {
     if (!/^[a-z0-9-]{1,80}$/.test(input.offerId) || !/^[\da-f]{64}$/.test(input.paymentId)
-      || !/^0x[\da-f]{40}$/i.test(input.payer) || !['eip155:8453', 'eip155:42161'].includes(input.network)
+      || !/^0x[\da-f]{40}$/i.test(input.payer) || !Object.hasOwn(USDC_NETWORKS, input.network)
       || !/^[1-9]\d{0,8}$/.test(input.amount) || !['unknown', 'confirmed'].includes(input.settlement)
       || (input.settlement === 'confirmed' && !/^0x[\da-f]{64}$/i.test(input.transaction ?? ''))
       || (input.settlement === 'unknown' && (input.transaction !== null || input.responsePrepared))) return
@@ -48,7 +49,7 @@ export function summarizePurchaseAttribution(rows: readonly AttributionRow[]) {
   for (const row of rows) {
     const key = row.network + ':' + row.payment_id
     if (seen.has(key) || !/^[a-z0-9-]{1,80}$/.test(row.offer_id) || !/^[\da-f]{64}$/.test(row.payment_id) || !/^[\da-f]{64}$/.test(row.payer_key)
-      || !['eip155:8453', 'eip155:42161'].includes(row.network) || !['confirmed', 'unknown'].includes(row.settlement_state)
+      || !Object.hasOwn(USDC_NETWORKS, row.network) || !['confirmed', 'unknown'].includes(row.settlement_state)
       || typeof row.response_prepared !== 'boolean' || typeof row.operator_activity !== 'boolean'
       || (row.settlement_state === 'unknown' && row.response_prepared)) throw new Error('invalid_attribution_snapshot')
     seen.add(key)

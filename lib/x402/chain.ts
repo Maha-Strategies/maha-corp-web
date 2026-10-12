@@ -21,6 +21,7 @@ export const DEFAULT_RPC_URLS: Record<string, string> = {
   'eip155:8453': 'https://mainnet.base.org',
   'eip155:84532': 'https://sepolia.base.org',
   'eip155:42161': 'https://arb1.arbitrum.io/rpc',
+  'eip155:137': 'https://polygon-bor-rpc.publicnode.com',
 }
 
 export type ChainConfirmation =

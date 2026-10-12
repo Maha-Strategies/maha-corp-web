@@ -25,7 +25,7 @@ export function combineSettlementLedgers(ledgers: SettlementLedger[]): Settlemen
     externalValueUsdc: formatUsdc(external.reduce((total, row) => total + BigInt(row.amountBaseUnits), BigInt(0))),
     byProduct: [...offers.values()].sort((a, b) => a.id.localeCompare(b.id)), receiptAttributedSettlements: sum('receiptAttributedSettlements') }
   const observedAt = ledgers.map(ledger => ledger.observedAt).sort()[0]
-  return { ...ledgers[0], caip2Network: undefined, schemaVersion: 'maha-x402-settlement-ledger/2.0-view', network: 'Base Mainnet + Arbitrum One', protocol: 'HTTP 402 v2 · native USDC',
+  return { ...ledgers[0], caip2Network: undefined, schemaVersion: 'maha-x402-settlement-ledger/2.0-view', network: ledgers.map(ledger => ledger.network).join(' + '), protocol: 'HTTP 402 v2 · native USDC',
     contentDigest: 'sha256:' + createHash('sha256').update(JSON.stringify({ entries, summary })).digest('hex'),
     // Block ranges are not comparable across chains; inspect the per-network view.
     scannedFromBlock: '0', scannedToBlock: '0', observedAt, entries, summary, attribution: undefined,

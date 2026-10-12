@@ -20,7 +20,7 @@ export const DEMAND6_OFFERS: readonly X402Offer[] = DEMAND6_IDS.map(id => ({
   status: 'available', availability: { payableInProduction: true, blockedBy: [] },
   requiresIdempotency: false, maxRequestBytes: DEMAND6_MAX_REQUEST_BYTES,
   capabilityBoundaries: ['Approved public targets and reviewed source rights only. No private-input detection, credentials, redirects, IPv6 or browser/PDF execution.',
-    'Version 1 accepts native-USDC EOA authorizations on Base or Arbitrum only; smart-contract-wallet signatures are not supported.',
+    'Native-USDC EOA authorizations only, on networks offered by the live quote. Polygon needs explicit activation and its attribution migration. Smart-contract-wallet signatures are not supported.',
     'Quote checks do not establish settlement or delivery. Stored samples are not continuous uptime or independent demand.',
     'Extractive research only: no model calls, semantic contradiction detection, factual certification or completeness guarantee.',
     'Malformed input, unsupported, unavailable or unretainable work is refused before settlement. A supported negative finding is a result, not approval.',

@@ -24,6 +24,8 @@
  * the other by omission.
  */
 
+import { usdcNetwork } from './networks.ts'
+
 export type LedgerEntry = {
   /** Absent in legacy Base snapshots; explicit in multichain views. */
   caip2Network?: string
@@ -227,8 +229,9 @@ export function buildLedger(input: {
   operatorReceipts?: readonly OperatorSettlementReceipt[]
 }): SettlementLedger {
   const network = input.caip2Network ?? 'eip155:8453'
-  if (!['eip155:8453', 'eip155:42161'].includes(network)) throw new Error('unsupported_ledger_network')
-  const explorerBase = input.explorerBase ?? (network === 'eip155:42161' ? 'https://arbiscan.io/tx/' : 'https://basescan.org/tx/')
+  let definition: ReturnType<typeof usdcNetwork>
+  try { definition = usdcNetwork(network) } catch { throw new Error('unsupported_ledger_network') }
+  const explorerBase = input.explorerBase ?? definition.explorer
   const operators = new Set(input.operatorWallets.map((w) => w.toLowerCase()))
   /**
    * Price to product, and the prices that cannot identify one.
@@ -296,7 +299,7 @@ export function buildLedger(input: {
         }
       : undefined
     return {
-      ...(network === 'eip155:42161' ? { caip2Network: network } : {}),
+      ...(network !== 'eip155:8453' ? { caip2Network: network } : {}),
       transactionHash: s.transactionHash,
       ...(s.logIndex === undefined ? {} : { logIndex: s.logIndex }),
       blockNumber: s.blockNumber.toString(),
@@ -391,11 +394,11 @@ export function buildLedger(input: {
     : undefined
 
   return {
-    ...(network === 'eip155:42161' ? { caip2Network: network } : {}),
+    ...(network !== 'eip155:8453' ? { caip2Network: network } : {}),
     schemaVersion: receiptAware ? 'maha-x402-settlement-ledger/1.1' : 'maha-x402-settlement-ledger/1.0',
     contentDigest: receiptAware ? contentDigestOf(entries, summary, attribution) : contentDigestOf(entries, summary),
-    network: network === 'eip155:42161' ? 'Arbitrum One' : 'Base Mainnet',
-    protocol: network === 'eip155:42161' ? 'HTTP 402 v2 · Arbitrum USDC' : 'HTTP 402 v2 · Base USDC',
+    network: definition.name,
+    protocol: `HTTP 402 v2 · ${network === 'eip155:8453' ? 'Base' : network === 'eip155:42161' ? 'Arbitrum' : 'Polygon'} USDC`,
     observedAt: input.observedAt,
     scannedFromBlock: input.fromBlock.toString(),
     scannedToBlock: input.toBlock.toString(),

@@ -6,7 +6,7 @@ export const DEMAND6_MAX_RESPONSE_BYTES = 65536
 export const DEMAND6_RETAIN_SECONDS = 86400
 export const DEMAND6_PRODUCTS = {
   'csv-import-preflight': { amount: '13500', title: 'CSV Import Preflight', description: 'Check up to 500 supplied CSV records for quoting, column counts, duplicate headers, spreadsheet-formula prefixes and caller-declared scalar types. Return bounded row/column findings and input integrity hashes. No cell execution, automatic repair, PII detection or import-success guarantee.' },
-  'live-x402-payment-preflight': { amount: '34900', title: 'Live x402 Payment-Path Preflight', description: 'Fetch one approved public endpoint without payment. Inspect Base and Arbitrum native-USDC quotes against caller-declared payee and spending caps, plus bounded discovery-schema observations and latency. No signing, settlement test, paid delivery, uptime guarantee or safety clearance.' },
+  'live-x402-payment-preflight': { amount: '34900', title: 'Live x402 Payment-Path Preflight', description: 'Fetch one approved public endpoint without payment. Inspect Base, Arbitrum and Polygon native-USDC quotes against caller-declared payee and spending caps, plus bounded discovery-schema observations and latency. A known network may not be offered. No signing, settlement test, paid delivery, uptime guarantee or safety clearance.' },
   'x402-quote-change-report': { amount: '62000', title: 'x402 Quote-Change Report', description: 'Compare stored, dated unpaid observations of one approved endpoint. Report quote, network, schema and reachability changes with sample counts, largest sampling gap and snapshot age. Sparse observations are not continuous uptime, customer calls, settlement or delivery evidence.' },
   'product-catalogue-preflight': { amount: '24500', title: 'Product Catalogue Preflight', description: 'Check up to 250 supplied product records for duplicate SKUs, nonpositive or malformed decimal prices, currency-code shape, and optional GTIN check digits. Return bounded row-level findings. No registry lookup, identifier ownership check, automatic repair or marketplace approval guarantee.' },
   'live-citation-recheck': { amount: '88000', title: 'Live Citation Recheck', description: 'Revisit up to three approved, rights-reviewed public text sources. Check exact quoted passages in versioned extracted text, compare declared prior text hashes and return bounded locators, retrieval times and hashes. No paywall bypass, PDF/JavaScript execution, factual certification or completeness guarantee.' },
@@ -27,19 +27,21 @@ export const DEMAND6_INPUTS = {
     columns: z.array(z.object({ name: text(80), type: z.enum(['string', 'integer', 'number', 'boolean', 'date']), required: z.boolean() }).strict()).min(1).max(64) }).strict(),
   'product-catalogue-preflight': z.object({ ...common, expectedCurrency: z.string().regex(/^[A-Z]{3}$/).nullable(), products: z.array(z.object({ sku: text(80), price: z.string().max(24), currency: z.string().max(8), gtin: z.string().max(20).nullable() }).strict()).min(1).max(250) }).strict(),
   'live-x402-payment-preflight': z.object({ ...common, resource, expectedPayee: z.string().regex(/^0x[0-9a-fA-F]{40}$/),
-    maximumAmountBaseUnits: z.string().regex(/^[1-9][0-9]{0,8}$/), requiredNetworks: z.array(z.enum(['eip155:8453', 'eip155:42161'])).min(1).max(2) }).strict(),
+    maximumAmountBaseUnits: z.string().regex(/^[1-9][0-9]{0,8}$/), requiredNetworks: z.array(z.enum(['eip155:8453', 'eip155:42161', 'eip155:137'])).min(1).max(3) }).strict(),
   'x402-quote-change-report': z.object({ ...common, resource, fromUtc: stamp, toUtc: stamp }).strict(),
   'live-citation-recheck': z.object({ ...common, citations: z.array(z.object({ sourceId: text(80), url: resource,
     quote: text(400), previousTextHash: hash.nullable() }).strict()).min(1).max(3) }).strict(),
   'source-bound-research-microbrief': z.object({ ...common, question: text(300), sources: z.array(z.object({ sourceId: text(80), url: resource }).strict()).min(1).max(3) }).strict(),
 } as const
 const no = z.literal(false)
-const network = z.object({ network: z.enum(['eip155:8453', 'eip155:42161']), state: z.enum(['valid_quote', 'invalid_quote', 'not_offered', 'unknown']),
+const network = z.object({ network: z.enum(['eip155:8453', 'eip155:42161', 'eip155:137']), state: z.enum(['valid_quote', 'invalid_quote', 'not_offered', 'unknown']),
   amountBaseUnits: z.string().nullable(), reasons: z.array(text(80)).max(16) }).strict()
 export const quoteObservationSchema = z.object({ resource, observedAt: stamp, responseStatus: z.number().int().min(100).max(599).nullable(),
   durationMs: z.number().int().min(0).max(30000), challengeState: z.enum(['observed', 'unavailable', 'not_402', 'malformed']),
   challengeDigest: hash.nullable(), schemaDigest: hash.nullable(), schemaState: z.enum(['present_not_validated', 'absent', 'unknown']),
-  networks: z.array(network).length(2) }).strict()
+  // Historical two-network observations and retained results remain readable.
+  networks: z.array(network).min(2).max(3).refine(rows => new Set(rows.map(row => row.network)).size === rows.length
+    && rows.some(row => row.network === 'eip155:8453') && rows.some(row => row.network === 'eip155:42161'), 'unique_network_observations_required') }).strict()
 const sourceObservation = z.object({ sourceId: text(80), url: resource, retrievedAt: stamp, rawBytesHash: hash, extractedTextHash: hash,
   extraction: z.literal('maha-public-text/1.0'), rightsBasis: text(160) }).strict()
 const citation = z.object({ sourceId: text(80), quote: text(400), startCodePoint: z.number().int().min(0), endCodePoint: z.number().int().min(1), quoteHash: hash }).strict()

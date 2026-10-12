@@ -21,6 +21,7 @@ export const NETWORK_CHAIN_IDS: Record<string, number> = {
   'eip155:84532': 84532,
   'eip155:8453': 8453,
   'eip155:42161': 42161,
+  'eip155:137': 137,
 }
 
 export type PaymentRequirement = {

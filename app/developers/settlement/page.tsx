@@ -5,6 +5,7 @@ import { MAHA_SITE_URL } from '@/lib/entity'
 import { connection } from 'next/server'
 import { readPublicSettlementLedger } from '@/lib/x402/settlement-live-store'
 import type { LedgerEntry } from '@/lib/x402/settlement-ledger'
+import { usdcNetwork } from '@/lib/x402/networks'
 import { SettlementAutoRefresh } from './auto-refresh'
 
 const title = 'Autonomous Settlement & Verification Ledger | Maha Strategies'
@@ -117,7 +118,7 @@ export default async function SettlementLedgerPage() {
           <tbody>
             {record.entries.filter((e) => e.product !== null || e.amountUsdc !== '0').map((entry) => (
               <tr key={`${entry.caip2Network ?? 'eip155:8453'}:${entry.transactionHash}:${entry.logIndex ?? 'legacy'}`} className="border-b border-[var(--border-subtle)]">
-                <td className="py-2 text-xs">{entry.caip2Network === 'eip155:42161' ? 'Arbitrum' : 'Base'}</td>
+                <td className="py-2 text-xs">{usdcNetwork(entry.caip2Network ?? 'eip155:8453').name}</td>
                 <td className="py-2 font-mono text-xs">{entry.timestampUtc?.slice(0, 19).replace('T', ' ') ?? '—'}</td>
                 <td className="py-2">
                   {entry.product?.title ?? 'Unknown — amount does not uniquely identify a product'}

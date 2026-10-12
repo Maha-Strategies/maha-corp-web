@@ -10,7 +10,7 @@ import { microDigest, verifyMicroProduct } from '../lib/x402/micro-products.ts'
 import { microPurchaseHeaders } from '../lib/x402/micro-purchase.ts'
 import { MICRO_RECOVERY_MODE_HEADER, MICRO_RECOVERY_PAYER_HEADER } from '../lib/x402/micro-recovery-contract.ts'
 import { createPaidFetch, decodeChallenge, decodeReceipt, type PaymentChallenge } from '../lib/x402/client.ts'
-import { USDC_NETWORKS } from '../lib/x402/networks.ts'
+import { USDC_NETWORKS, DECLARED_PAYMENT_NETWORKS } from '../lib/x402/networks.ts'
 import { CANARY_BUYER, MAHA_PAYEE, verifyPaymentReceipt } from '../lib/x402/discovery-payment-recipe.ts'
 import { confirmSettlement, rpcUrlFor } from '../lib/x402/chain.ts'
 import { readProductIndex } from '../lib/x402/product-index.ts'
@@ -31,8 +31,11 @@ export function assertSciencePlan() {
   }
 }
 export function assertScienceChallenge(c: PaymentChallenge, t: typeof TARGETS[number]) {
-  if(c.x402Version!==2 || c.resource.url!==ORIGIN+t.path || c.accepts.length!==2 || new Set(c.accepts.map(r=>r.network)).size!==2) throw Error('challenge_resource_or_networks_changed')
-  for(const network of [B,A] as const) {
+  if(c.x402Version!==2 || c.resource.url!==ORIGIN+t.path || c.accepts.length<2 || c.accepts.length>DECLARED_PAYMENT_NETWORKS.length
+    || new Set(c.accepts.map(r=>r.network)).size!==c.accepts.length || c.accepts.some(r=>!DECLARED_PAYMENT_NETWORKS.includes(r.network as typeof DECLARED_PAYMENT_NETWORKS[number]))) throw Error('challenge_resource_or_networks_changed')
+  // Original Base-only spend authorization is unchanged. The optional third
+  // quote is validated, never selected for this already-funded historical batch.
+  for(const network of DECLARED_PAYMENT_NETWORKS.filter(n=>n===B||n===A||c.accepts.some(r=>r.network===n))) {
     const r=c.accepts.find(r=>r.network===network), d=USDC_NETWORKS[network]
     if(!r || r.scheme!=='exact' || r.amount!==t.amount || r.payTo.toLowerCase()!==MAHA_PAYEE || r.asset.toLowerCase()!==d.asset.toLowerCase()
       ||r.extra?.name!==d.domain.name||r.extra?.version!==d.domain.version||r.maxTimeoutSeconds!==60) throw Error('challenge_price_asset_or_payee_changed')

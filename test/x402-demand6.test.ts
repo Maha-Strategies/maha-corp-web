@@ -104,7 +104,7 @@ test('GTIN leading zeros and valid lengths work; malformed identifiers and feed 
 })
 test('network quotes, schema presence, settlement and paid delivery stay separate', () => {
   const quote = inspectQuote(resource, fixtureQuote(), MAHA_PAYEE, '2000', new Date(FIXTURE_NOW).toISOString())
-  assert.deepEqual(quote.networks.map(row => row.state), ['valid_quote', 'valid_quote'])
+  assert.deepEqual(quote.networks.map(row => row.state), DECLARED_PAYMENT_NETWORKS.map(() => 'valid_quote'))
   assert.equal(quote.schemaState, 'present_not_validated')
   const wrong = fixtureQuote(), challenge = JSON.parse(Buffer.from(wrong.headers['payment-required'], 'base64').toString())
   challenge.accepts[1].asset = challenge.accepts[0].asset
@@ -388,6 +388,7 @@ for (const id of DEMAND6_IDS) for (const network of DECLARED_PAYMENT_NETWORKS) {
     const intent = await purchase(id, network), definition = usdcNetwork('eip155:8453')
     const config = x402Config({ X402_ENABLED: 'true', X402_FACILITATOR_URL: 'https://facilitator.example/x402',
       X402_PAY_TO: MAHA_PAYEE, X402_ASSET: definition.asset, X402_NETWORK: 'base', X402_ARBITRUM_ENABLED: 'true', X402_ARBITRUM_FROM_BLOCK: '1',
+      X402_POLYGON_ENABLED: 'true', X402_POLYGON_FROM_BLOCK: '1', X402_POLYGON_SCHEMA_READY: 'true',
       X402_RESOURCES: JSON.stringify([{ method: 'POST', path: demand6Path(id) }]) })!
     const resource = config.resources[0], requirements = requirementsFor(resource, origin + demand6Path(id), config)
     const parsed = JSON.parse(Buffer.from(intent.headers['PAYMENT-SIGNATURE'], 'base64').toString())

@@ -3,7 +3,8 @@ import { test } from 'node:test'
 import { readFileSync } from 'node:fs'
 import { createServer } from 'node:http'
 import { settlementRefreshFailure, settlementRpcQueue, settlementRpcUrl } from '../lib/x402/settlement-rpc.ts'
-import { baseSettlementReader } from '../lib/x402/settlement-refresh.ts'
+import { evmSettlementReader } from '../lib/x402/settlement-refresh.ts'
+import { USDC_NETWORKS, type UsdcNetwork } from '../lib/x402/networks.ts'
 
 test('all concurrent RPC reads are serialized and paced, including retry after failure', async () => {
   let now = 0, active = 0, peak = 0
@@ -47,13 +48,15 @@ test('diagnostics classify nested errors without exposing a provider credential'
   }
 })
 
-test('Base reader checks chain identity once and rejects a wrong-network endpoint', async () => {
+for (const network of Object.keys(USDC_NETWORKS) as UsdcNetwork[]) test(`${USDC_NETWORKS[network].name} reader checks chain identity once and rejects a wrong-network endpoint`, async () => {
   const methods: string[] = []
-  let chain = '0x2105'
+  const definition = USDC_NETWORKS[network]
+  let chain = `0x${definition.chainId.toString(16)}`
   let throttled = false
   const server = createServer(async (request, response) => {
     let raw = ''; for await (const chunk of request) raw += chunk
     const body = JSON.parse(raw); methods.push(body.method)
+    if (body.method === 'eth_getLogs') assert.equal(body.params[0].address.toLowerCase(), definition.asset.toLowerCase())
     const result = body.method === 'eth_chainId' ? chain : body.method === 'eth_getLogs' ? [] : { number: '0x64', timestamp: '0x6553f100' }
     response.setHeader('Content-Type', 'application/json')
     response.end(JSON.stringify(throttled
@@ -62,26 +65,26 @@ test('Base reader checks chain identity once and rejects a wrong-network endpoin
   })
   await new Promise<void>(resolve => server.listen(0, '127.0.0.1', resolve))
   const address = server.address() as { port: number }
-  const originalUrl = process.env.BASE_RPC_URL, originalEnv = process.env.VERCEL_ENV
+  const originalUrl = process.env[definition.rpcEnvironment], originalEnv = process.env.VERCEL_ENV
   try {
-    process.env.BASE_RPC_URL = `http://127.0.0.1:${address.port}`; process.env.VERCEL_ENV = 'development'
-    const reader = baseSettlementReader({ minRpcIntervalMs: 0 })
+    process.env[definition.rpcEnvironment] = `http://127.0.0.1:${address.port}`; process.env.VERCEL_ENV = 'development'
+    const reader = evmSettlementReader(network, { minRpcIntervalMs: 0 })
     assert.equal(await reader.finalizedBlock(), BigInt(100))
     assert.equal(await reader.finalizedBlock(), BigInt(100))
     assert.equal(await reader.timestamp(BigInt(100)), '2023-11-14T22:13:20.000Z')
     assert.deepEqual(await reader.transfers(BigInt(1), BigInt(100)), [])
     assert.deepEqual(methods, ['eth_chainId', 'eth_getBlockByNumber', 'eth_getBlockByNumber', 'eth_getBlockByNumber', 'eth_getLogs'])
     chain = '0x1'
-    await assert.rejects(baseSettlementReader({ minRpcIntervalMs: 0 }).finalizedBlock(), /chain_mismatch/)
+    await assert.rejects(evmSettlementReader(network, { minRpcIntervalMs: 0 }).finalizedBlock(), /chain_mismatch/)
     assert.equal(methods.at(-1), 'eth_chainId')
     throttled = true
-    await assert.rejects(baseSettlementReader({ minRpcIntervalMs: 0 }).finalizedBlock(), error => {
+    await assert.rejects(evmSettlementReader(network, { minRpcIntervalMs: 0 }).finalizedBlock(), error => {
       assert.equal((error as Error).message, 'settlement_rpc_rate_limited')
       assert.doesNotMatch((error as Error).stack ?? '', /private-key|provider\.example/)
       return true
     })
   } finally {
-    if (originalUrl === undefined) delete process.env.BASE_RPC_URL; else process.env.BASE_RPC_URL = originalUrl
+    if (originalUrl === undefined) delete process.env[definition.rpcEnvironment]; else process.env[definition.rpcEnvironment] = originalUrl
     if (originalEnv === undefined) delete process.env.VERCEL_ENV; else process.env.VERCEL_ENV = originalEnv
     await new Promise<void>(resolve => server.close(() => resolve()))
   }
@@ -97,7 +100,10 @@ test('scheduled publisher and independent watch use safe configured RPC reads', 
   assert.match(workflow, /VERCEL_ENV: production/)
   const watch = readFileSync('scripts/watch-x402-settlements.ts', 'utf8')
   assert.match(watch, /evmSettlementReader\(network\)/)
-  assert.match(workflow, /network: eip155:42161/)
+  assert.match(workflow, /"network":"eip155:42161"/)
+  assert.match(workflow, /vars\.X402_POLYGON_ENABLED == 'true'/)
+  assert.match(workflow, /"network":"eip155:137"/)
+  assert.match(workflow, /secrets\.POLYGON_RPC_URL \|\| vars\.POLYGON_RPC_URL/)
   assert.match(workflow, /fail-fast: false/)
   assert.doesNotMatch(watch, /createPublicClient|client\.getLogs/)
 })

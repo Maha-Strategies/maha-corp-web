@@ -40,6 +40,8 @@ jobs:
     # Lightweight independent freshness check: no RPC scan, install or build.
     runs-on: ubuntu-latest
     timeout-minutes: 3
+    env:
+      X402_POLYGON_ENABLED: ${{ vars.X402_POLYGON_ENABLED || 'false' }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -77,16 +79,14 @@ jobs:
     timeout-minutes: 25
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - network: eip155:8453
-            name: base
-          - network: eip155:42161
-            name: arbitrum
+      # Polygon is independently monitored only after its reviewed activation.
+      matrix: ${{ fromJSON(vars.X402_POLYGON_ENABLED == 'true' && '{"include":[{"network":"eip155:8453","name":"base"},{"network":"eip155:42161","name":"arbitrum"},{"network":"eip155:137","name":"polygon"}]}' || '{"include":[{"network":"eip155:8453","name":"base"},{"network":"eip155:42161","name":"arbitrum"}]}') }}
     env:
       BASE_RPC_URL: ${{ secrets.BASE_RPC_URL || vars.BASE_RPC_URL }}
       VERCEL_ENV: production
       ARBITRUM_RPC_URL: https://arb1.arbitrum.io/rpc
+      POLYGON_RPC_URL: ${{ secrets.POLYGON_RPC_URL || vars.POLYGON_RPC_URL }}
+      X402_POLYGON_ENABLED: ${{ vars.X402_POLYGON_ENABLED || 'false' }}
       X402_WATCH_OUTPUT_PATH: ${{ github.workspace }}/x402-settlement-watch-${{ matrix.name }}.json
     steps:
       - uses: actions/checkout@v7
@@ -141,7 +141,7 @@ jobs:
             });
             const issue = issues.find(item => !item.pull_request);
             const run = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
-            const body = `Settlement monitoring requires attention. Public ledger check: ${process.env.HEALTH_OUTCOME}; recent Base scan: ${process.env.WATCH_OUTCOME}.\n\nPreserve the previous snapshot. Do not interpret missing scan results as no payments.\n\nRun: ${run}`;
+            const body = `Settlement monitoring requires attention. Public ledger check: ${process.env.HEALTH_OUTCOME}; recent ${process.env.NETWORK_NAME} scan: ${process.env.WATCH_OUTCOME}.\n\nPreserve the previous snapshot. Do not interpret missing scan results as no payments.\n\nRun: ${run}`;
             if (failed && !issue) {
               try { await github.rest.issues.createLabel({ ...context.repo, name: label, color: 'D93F0B' }); }
               catch (error) { if (error.status !== 422) throw error; }

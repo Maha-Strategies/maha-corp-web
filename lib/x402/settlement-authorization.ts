@@ -1,5 +1,5 @@
 import { createPublicClient, decodeEventLog, http, parseAbiItem, toEventSelector } from 'viem'
-import { base, arbitrum } from 'viem/chains'
+import { base, arbitrum, polygon } from 'viem/chains'
 import { MAHA_PAYEE, OPERATOR_WALLETS } from './discovery-payment-recipe.ts'
 import { usdcNetwork, type UsdcNetwork } from './networks.ts'
 import { settlementRpcQueue, settlementRpcUrl } from './settlement-rpc.ts'
@@ -53,7 +53,7 @@ export function classifyTransferMechanism(row: ObservedTransfer, receipt: Receip
 
 export function settlementReceiptReader(network: UsdcNetwork) {
   const definition = usdcNetwork(network)
-  const client = createPublicClient({ chain: network === 'eip155:8453' ? base : arbitrum,
+  const client = createPublicClient({ chain: { 'eip155:8453': base, 'eip155:42161': arbitrum, 'eip155:137': polygon }[network],
     transport: http(settlementRpcUrl(process.env, network), { timeout: 12000, retryCount: 0 }) })
   const read = settlementRpcQueue(350)
   let chainCheck: Promise<void> | undefined

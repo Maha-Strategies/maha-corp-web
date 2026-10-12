@@ -16,13 +16,20 @@ test('the immutable approved batch contains fifty unique resources within the se
   assert.equal(CAP.toString(), '3577000')
   assert.equal(TARGETS.length, 50)
   assert.match(CONFIRMATION, /ONCE_MAX_3_577_USDC$/)
-  for (const t of TARGETS) assert.doesNotThrow(() => assertScienceChallenge(challenge(t), t))
+  for (const t of TARGETS) {
+    assert.doesNotThrow(() => assertScienceChallenge(challenge(t), t))
+    const legacy = challenge(t); legacy.accepts = legacy.accepts.filter(term => term.network !== 'eip155:137')
+    assert.doesNotThrow(() => assertScienceChallenge(legacy, t))
+  }
 })
 test('indexing preflight refuses changed prices, chains, assets, payees and timeouts', () => {
   const t = TARGETS[0]
   for (const mutate of [
     (c: PaymentChallenge) => { c.resource.url += '?other=1' },
-    (c: PaymentChallenge) => { c.accepts.pop() },
+    (c: PaymentChallenge) => { c.accepts.splice(1, 1) },
+    (c: PaymentChallenge) => { c.accepts[2].network = 'eip155:1' },
+    (c: PaymentChallenge) => { c.accepts[2].asset = c.accepts[0].asset },
+    (c: PaymentChallenge) => { c.accepts[2].amount = '1' },
     (c: PaymentChallenge) => { c.accepts[1].network = c.accepts[0].network },
     (c: PaymentChallenge) => { c.accepts[0].amount = '1' },
     (c: PaymentChallenge) => { c.accepts[1].asset = '0x' + '0'.repeat(40) },

@@ -11,7 +11,7 @@ import { EVIDENCE_CHECK_IDS } from './evidence-check-contracts.ts'
 import { EXPANSION_INDEXING_IDS } from './expansion-registry.ts'
 import { SCIENCE_IDS } from './science/contracts.ts'
 import { DEMAND6_IDS, demand6Path } from './demand6/contracts.ts'
-import { USDC_NETWORKS, networkRpc, type PaymentNetworkConfig } from './networks.ts'
+import { USDC_NETWORKS, ADDITIONAL_NETWORK_CONFIGURATION, networkRpc, type PaymentNetworkConfig } from './networks.ts'
 
 // Everything here is off unless X402_ENABLED is exactly 'true'. The flag is
 // checked before any other configuration is read, so an incomplete or
@@ -101,6 +101,8 @@ const NETWORKS: Record<string, X402Network> = {
   'eip155:84532': 'eip155:84532',
   arbitrum: 'eip155:42161',
   'eip155:42161': 'eip155:42161',
+  polygon: 'eip155:137',
+  'eip155:137': 'eip155:137',
   solana: 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
   'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp': 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
 }
@@ -129,6 +131,7 @@ export function x402Config(environment: Environment = process.env): X402Config |
   }
   const network = NETWORKS[networkName]
   if (!network) throw new Error(`X402_NETWORK must be one of: ${Object.keys(NETWORKS).join(', ')}`)
+  if (network === 'eip155:137') throw new Error('Polygon is additive: keep X402_NETWORK on Base and use X402_POLYGON_ENABLED after its prerequisites pass.')
 
   let url: URL
   try { url = new URL(facilitatorUrl) } catch { throw new Error('X402_FACILITATOR_URL must be an absolute URL.') }
@@ -200,15 +203,21 @@ export function x402Config(environment: Environment = process.env): X402Config |
   const primary: PaymentNetworkConfig = {
     network, payTo, asset,
     assetEip712: { name: environment.X402_ASSET_EIP712_NAME?.trim() || 'USD Coin', version: environment.X402_ASSET_EIP712_VERSION?.trim() || '2' },
-    chainRpcUrl: rpcUrlFor(network, environment.X402_CHAIN_RPC_URL || (network === 'eip155:8453' ? environment.BASE_RPC_URL : network === 'eip155:42161' ? environment.ARBITRUM_RPC_URL : undefined)),
+    chainRpcUrl: rpcUrlFor(network, environment.X402_CHAIN_RPC_URL || (network === 'eip155:8453' ? environment.BASE_RPC_URL : network === 'eip155:42161' ? environment.ARBITRUM_RPC_URL : network === 'eip155:137' ? environment.POLYGON_RPC_URL : undefined)),
   }
   const paymentNetworks = [primary]
-  if (environment.X402_ARBITRUM_ENABLED === 'true') {
-    if (!/^[1-9]\d*$/.test(environment.X402_ARBITRUM_FROM_BLOCK?.trim() ?? '')) throw new Error('X402_ARBITRUM_FROM_BLOCK is required before advertising Arbitrum payments.')
-    const base = USDC_NETWORKS['eip155:8453'], arb = USDC_NETWORKS['eip155:42161']
+  for (const secondary of Object.keys(ADDITIONAL_NETWORK_CONFIGURATION) as (keyof typeof ADDITIONAL_NETWORK_CONFIGURATION)[]) {
+    const activation = ADDITIONAL_NETWORK_CONFIGURATION[secondary]
+    if (environment[activation.enabled] !== 'true') continue
+    if (!/^[1-9]\d*$/.test(environment[activation.fromBlock]?.trim() ?? '')) throw new Error(`${activation.fromBlock} is required before advertising additional-chain payments.`)
+    const base = USDC_NETWORKS['eip155:8453'], definition = USDC_NETWORKS[secondary]
     if (network !== 'eip155:8453' || asset.toLowerCase() !== base.asset.toLowerCase() || !/^0x[\da-f]{40}$/i.test(payTo)
-      || primary.assetEip712.name !== base.domain.name || primary.assetEip712.version !== base.domain.version) throw new Error('Base + Arbitrum requires native USDC and its correct domain.')
-    paymentNetworks.push({ network: 'eip155:42161', asset: arb.asset, payTo, assetEip712: { ...arb.domain }, chainRpcUrl: networkRpc('eip155:42161', environment) })
+      || primary.assetEip712.name !== base.domain.name || primary.assetEip712.version !== base.domain.version) throw new Error('Additional EVM networks require native USDC and its correct domain on Base.')
+    if (secondary === 'eip155:137') {
+      if (environment.X402_POLYGON_SCHEMA_READY !== 'true') throw new Error('X402_POLYGON_SCHEMA_READY is required after verifying the additive Polygon attribution migration.')
+      if (environment.VERCEL_ENV === 'production' && !environment.POLYGON_RPC_URL?.trim()) throw new Error('POLYGON_RPC_URL is required before advertising Polygon payments in production.')
+    }
+    paymentNetworks.push({ network: secondary, asset: definition.asset, payTo, assetEip712: { ...definition.domain }, chainRpcUrl: networkRpc(secondary, environment) })
   }
   return {
     paymentNetworks,

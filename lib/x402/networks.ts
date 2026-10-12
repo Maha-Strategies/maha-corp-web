@@ -14,10 +14,21 @@ export const USDC_NETWORKS = {
     rpcUrl: 'https://arb1.arbitrum.io/rpc', rpcEnvironment: 'ARBITRUM_RPC_URL',
     explorer: 'https://arbiscan.io/tx/', domain: { name: 'USD Coin', version: '2' },
   },
+  'eip155:137': {
+    name: 'Polygon PoS', chainId: 137,
+    // Circle-issued native USDC, not the bridged USDC.e contract.
+    asset: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359',
+    rpcUrl: 'https://polygon-bor-rpc.publicnode.com', rpcEnvironment: 'POLYGON_RPC_URL',
+    explorer: 'https://polygonscan.com/tx/', domain: { name: 'USD Coin', version: '2' },
+  },
 } as const
 export type UsdcNetwork = keyof typeof USDC_NETWORKS
 /** Approved public configuration, not an assertion of deployment liveness. */
-export const DECLARED_PAYMENT_NETWORKS: UsdcNetwork[] = ['eip155:8453', 'eip155:42161']
+export const DECLARED_PAYMENT_NETWORKS: UsdcNetwork[] = ['eip155:8453', 'eip155:42161', 'eip155:137']
+export const ADDITIONAL_NETWORK_CONFIGURATION = {
+  'eip155:42161': { enabled: 'X402_ARBITRUM_ENABLED', fromBlock: 'X402_ARBITRUM_FROM_BLOCK', missingSeed: 'arbitrum_start_block_required' },
+  'eip155:137': { enabled: 'X402_POLYGON_ENABLED', fromBlock: 'X402_POLYGON_FROM_BLOCK', missingSeed: 'polygon_start_block_required' },
+} as const
 export type PaymentNetworkConfig = {
   network: X402Network; payTo: string; asset: string
   assetEip712: { name: string; version: string }; chainRpcUrl: string | null
@@ -33,5 +44,6 @@ export function networkRpc(network: UsdcNetwork, environment: Record<string, str
   return value
 }
 export function settlementNetworks(environment: Record<string, string | undefined> = process.env): UsdcNetwork[] {
-  return environment.X402_ARBITRUM_ENABLED === 'true' ? ['eip155:8453', 'eip155:42161'] : ['eip155:8453']
+  return ['eip155:8453', ...(Object.keys(ADDITIONAL_NETWORK_CONFIGURATION) as (keyof typeof ADDITIONAL_NETWORK_CONFIGURATION)[])
+    .filter(network => environment[ADDITIONAL_NETWORK_CONFIGURATION[network].enabled] === 'true')]
 }

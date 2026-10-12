@@ -9,7 +9,7 @@ import { DISCOVERY_PROBLEM_COPY } from '../lib/x402/discovery-problem-copy.ts'
 import { MICRO_PRODUCTS } from '../lib/x402/micro-contracts.ts'
 import { compareCatalogueSnapshots, observeProduct } from '../lib/x402/product-observations.ts'
 import { summarizeProductUsage, unavailableUsage } from '../lib/x402/product-usage.ts'
-import { usdcNetwork, DECLARED_PAYMENT_NETWORKS } from '../lib/x402/networks.ts'
+import { usdcNetwork, DECLARED_PAYMENT_NETWORKS, type UsdcNetwork } from '../lib/x402/networks.ts'
 import { TRANSFER_EVENT, AUTHORIZATION_EVENT, classifyTransferMechanism, inspectTransferEvidence,
   type ObservedTransfer, type ReceiptEvidence } from '../lib/x402/settlement-authorization.ts'
 import { DEMAND_FEED_URL, readFreeTanodQuery, readFreeTanodDomain, readFreeTanodHistory,
@@ -93,10 +93,10 @@ function quote(mutator?: (challenge: MutableQuote) => void) {
   mutator?.(challenge)
   return new Response('', { status: 402, headers: { 'PAYMENT-REQUIRED': Buffer.from(JSON.stringify(challenge)).toString('base64') } })
 }
-test('listing, quotes on both chains, and unobserved delivery remain independent', async () => {
+test('listing, quotes on declared chains, and unobserved delivery remain independent', async () => {
   const report = await observeProduct(offer, index, quote(), unavailableUsage())
   assert.equal(report.listing.state, 'observed')
-  assert.deepEqual(report.payability.networks.map(row => row.status), ['valid_quote', 'valid_quote'])
+  assert.deepEqual(report.payability.networks.map(row => row.status), DECLARED_PAYMENT_NETWORKS.map(() => 'valid_quote'))
   assert.equal(report.payability.settlementTestPerformed, false)
   assert.equal(report.delivery.state, 'unknown'); assert.equal(report.delivery.successfulResponses, null)
   assert.equal(report.delivery.buyerReceiptProven, false); assert.equal(report.automaticRefreshPayments, false)
@@ -107,7 +107,8 @@ test('wrong assets, prices, domains and missing chains cannot be called payable'
     (c: MutableQuote) => { c.accepts[1].amount = '999' },
     (c: MutableQuote) => { c.accepts[1].extra = { name: 'USDC', version: '1' } },
   ]) assert.equal((await observeProduct(offer, index, quote(mutate))).payability.networks[1].status, 'invalid_quote')
-  assert.equal((await observeProduct(offer, index, quote(c => c.accepts.pop()))).payability.networks[1].status, 'not_offered')
+  assert.equal((await observeProduct(offer, index, quote(c => c.accepts.splice(1, 1)))).payability.networks[1].status, 'not_offered')
+  assert.equal((await observeProduct(offer, index, quote(c => c.accepts.pop()))).payability.networks[2].status, 'not_offered')
   assert.equal((await observeProduct(offer, index, null)).payability.networks[0].status, 'unknown')
 })
 test('only complete ordered snapshots report catalogue changes; absence never authorizes payment', () => {
@@ -144,14 +145,14 @@ test('recorded server success is not proof of buyer delivery; empty meters are n
 const payer = '0x1111111111111111111111111111111111111111', other = '0x2222222222222222222222222222222222222222'
 const hash = ('0x' + 'ab'.repeat(32)) as `0x${string}`, nonce = ('0x' + 'cd'.repeat(32)) as `0x${string}`
 const row: ObservedTransfer = { payer, amountBaseUnits: BigInt(3500), blockNumber: BigInt(100), transactionHash: hash, logIndex: 2 }
-function receipt(network: 'eip155:8453' | 'eip155:42161' = 'eip155:8453', authorizer: `0x${string}` = payer): ReceiptEvidence {
+function receipt(network: UsdcNetwork = 'eip155:8453', authorizer: `0x${string}` = payer): ReceiptEvidence {
   return { transactionHash: hash, blockNumber: BigInt(100), status: 'success', logs: [
     { address: usdcNetwork(network).asset, topics: encodeEventTopics({ abi: [AUTHORIZATION_EVENT], eventName: 'AuthorizationUsed', args: { authorizer, nonce } }) as string[], data: '0x', logIndex: 1 },
     { address: usdcNetwork(network).asset, topics: encodeEventTopics({ abi: [TRANSFER_EVENT], eventName: 'Transfer', args: { from: payer, to: MAHA_PAYEE } }) as string[],
       data: encodeAbiParameters([{ type: 'uint256' }], [BigInt(3500)]), logIndex: 2 },
   ] }
 }
-test('native USDC Transfer plus matching AuthorizationUsed is EIP-3009-style on either chain', () => {
+test('native USDC Transfer plus matching AuthorizationUsed is EIP-3009-style on each declared chain', () => {
   for (const network of DECLARED_PAYMENT_NETWORKS) assert.equal(classifyTransferMechanism(row, receipt(network), network).kind, 'eip3009_style')
 })
 test('wrong payer/contract authorization does not turn a plain transfer into x402', () => {

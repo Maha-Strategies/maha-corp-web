@@ -6,14 +6,19 @@ import { DECLARED_PAYMENT_NETWORKS } from '../lib/x402/networks.ts'
 if (process.argv.slice(2).some(arg => !['--write', '--check'].includes(arg))) throw new Error('Only local --write or --check is supported.')
 for (const [name, field, paymentField] of [['agent-card', 'capabilities', 'payment'], ['agent-offers', 'technicalCapabilities', 'machinePayment']] as const) {
   const path = resolve(import.meta.dirname, `../content/discovery/${name}.json`), before = readFileSync(path, 'utf8'), body = JSON.parse(before)
-  body[field] = [...body[field].filter((entry: { id: string }) => !isDemand6(entry.id)), ...DEMAND6_OFFERS.map(offer => ({
+  const updates = DEMAND6_OFFERS.map(offer => ({
     id: offer.id, status: offer.status, endpoint: 'https://www.mahastrategies.com' + offer.path, method: offer.method,
     description: offer.description, payableNow: true, blockedBy: offer.availability.blockedBy,
     [paymentField]: { protocol: 'x402', version: 2, network: 'eip155:8453', networks: DECLARED_PAYMENT_NETWORKS,
       amount: offer.amount, assetSymbol: 'USDC', autonomous: true, payableNow: true },
-  }))]
+  }))
+  const byId = new Map(updates.map(entry => [entry.id, entry]))
+  const existing = body[field].filter((entry: { id: string }) => !isDemand6(entry.id) || byId.has(entry.id))
+  const present = new Set(existing.map((entry: { id: string }) => entry.id))
+  body[field] = [...existing.map((entry: { id: string }) => byId.get(entry.id) ?? entry), ...updates.filter(entry => !present.has(entry.id))]
   if (name === 'agent-offers') {
-    body.transactionPolicy.autonomousPaymentScope = [...body.transactionPolicy.autonomousPaymentScope.filter((id: string) => !isDemand6(id)), ...DEMAND6_OFFERS.map(offer => offer.id)]
+    const wanted = DEMAND6_OFFERS.map(offer => offer.id), retained = body.transactionPolicy.autonomousPaymentScope
+    body.transactionPolicy.autonomousPaymentScope = [...retained, ...wanted.filter(id => !retained.includes(id))]
     body.transactionPolicy.describedNotPayable = body.transactionPolicy.describedNotPayable.filter((id: string) => !isDemand6(id))
   }
   const after = JSON.stringify(body, null, 2) + '\n'

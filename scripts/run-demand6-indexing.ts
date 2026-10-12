@@ -9,7 +9,7 @@ import { DEMAND6_PRODUCTS, demandResultSchema, type Demand6Id } from '../lib/x40
 import { demandDigest, buildDemandProduct } from '../lib/x402/demand6/products.ts'
 import { demandPurchaseHeaders, demandPurchaseNonce, demandPurchaseTypedData } from '../lib/x402/demand6/purchase.ts'
 import { decodeChallenge, decodeReceipt, encodePaymentSignature, type PaymentChallenge } from '../lib/x402/client.ts'
-import { USDC_NETWORKS } from '../lib/x402/networks.ts'
+import { USDC_NETWORKS, DECLARED_PAYMENT_NETWORKS } from '../lib/x402/networks.ts'
 import { CANARY_BUYER, MAHA_PAYEE, verifyPaymentReceipt } from '../lib/x402/discovery-payment-recipe.ts'
 import { confirmSettlement, rpcUrlFor } from '../lib/x402/chain.ts'
 import { readProductIndex } from '../lib/x402/product-index.ts'
@@ -24,8 +24,12 @@ export function assertDemandPlan() {
   for (const target of TARGETS) if (target.amount !== DEMAND6_PRODUCTS[target.id].amount) throw Error('approved_demand_price_changed')
 }
 export function assertDemandChallenge(challenge: PaymentChallenge, target: typeof TARGETS[number]) {
-  if (challenge.x402Version !== 2 || challenge.resource.url !== ORIGIN + target.path || challenge.accepts.length !== 2) throw Error('challenge_boundary_changed')
-  for (const network of ['eip155:8453', 'eip155:42161'] as const) {
+  if (challenge.x402Version !== 2 || challenge.resource.url !== ORIGIN + target.path || ![2, 3].includes(challenge.accepts.length)
+    || challenge.accepts.some(term => !DECLARED_PAYMENT_NETWORKS.includes(term.network as keyof typeof USDC_NETWORKS))
+    || new Set(challenge.accepts.map(term => term.network)).size !== challenge.accepts.length) throw Error('challenge_boundary_changed')
+  // Existing Base-funded plans still work before Polygon activation. If the
+  // quote adds Polygon, validate its terms without authorizing another payment.
+  for (const network of DECLARED_PAYMENT_NETWORKS.filter(network => network !== 'eip155:137' || challenge.accepts.some(term => term.network === network))) {
     const terms = challenge.accepts.filter(row => row.network === network), expected = USDC_NETWORKS[network], term = terms[0]
     if (terms.length !== 1 || term.scheme !== 'exact' || term.amount !== target.amount || term.asset.toLowerCase() !== expected.asset.toLowerCase()
       || term.payTo.toLowerCase() !== MAHA_PAYEE.toLowerCase() || term.extra?.name !== expected.domain.name || term.extra.version !== expected.domain.version
