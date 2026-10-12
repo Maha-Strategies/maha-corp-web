@@ -1,5 +1,6 @@
 import { createAgentInquiryLedger } from '../agent-inquiry-ledger.ts'
 import { offerFor, type X402Offer } from './offers.ts'
+import { DISCOVERY_SOURCES, explicitDiscoverySource, type ClaimedDiscoverySource } from './discovery-attribution.ts'
 
 // Records that an x402 offer was probed or invoked, and nothing about what was
 // in the request. The routes answer sourceTextStored:false and that stays
@@ -23,18 +24,20 @@ export type OfferEventKind = 'challenge' | 'invocation'
  * unrecognised is `unknown`, which is honest, rather than being retained
  * verbatim in the hope of classifying it later.
  */
-export type DiscoverySource = 'bazaar' | 'maha_canary' | 'direct' | 'unknown'
+export type DiscoverySource = ClaimedDiscoverySource
 
-const ALLOWED_SOURCES: readonly DiscoverySource[] = ['bazaar', 'maha_canary', 'direct', 'unknown']
+const ALLOWED_SOURCES: readonly DiscoverySource[] = DISCOVERY_SOURCES
 
 /**
- * Classifies a request into one of four buckets without retaining the evidence.
+ * Classifies a request into a fixed source bucket without retaining raw evidence.
  *
  * Matching is deliberately narrow. A broad substring match on "bot" or "agent"
  * would classify most of the internet as one thing, and the resulting series
  * would look precise while meaning nothing.
  */
 export function discoverySourceFrom(headers: Headers): DiscoverySource {
+  const declared = explicitDiscoverySource(headers)
+  if (declared !== undefined) return declared
   const agent = (headers.get('user-agent') ?? '').toLowerCase()
   if (agent.includes('maha-canary')) return 'maha_canary'
   if (agent.includes('x402-bazaar') || agent.includes('bazaar-crawler')) return 'bazaar'
@@ -46,8 +49,8 @@ export function discoverySourceFrom(headers: Headers): DiscoverySource {
   if (referrer) {
     try {
       const host = new URL(referrer).hostname.toLowerCase()
-      if (host.endsWith('bazaar.x402.org') || host.endsWith('x402.org')) return 'bazaar'
-      if (host.endsWith('mahastrategies.com')) return 'direct'
+      if (host === 'x402.org' || host.endsWith('.x402.org')) return 'bazaar'
+      if (host === 'mahastrategies.com' || host.endsWith('.mahastrategies.com')) return 'direct'
     } catch {
       // An unparseable referrer is not evidence of anything.
     }

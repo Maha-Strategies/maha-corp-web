@@ -6,6 +6,7 @@ import { resolveX402 } from '../gateway.ts'
 import { readPaymentSignature } from '../protocol.ts'
 import { releaseHeldSlot } from '../slot.ts'
 import { recordOfferUsage, discoverySourceFrom } from '../offer-telemetry.ts'
+import { recordPurchaseAttribution, claimedDiscoverySource } from '../discovery-attribution.ts'
 import { readMicroBody } from '../micro-body.ts'
 import { decodeReceipt } from '../client.ts'
 import { verifyDemandBeforeWork } from './preverify.ts'
@@ -15,6 +16,7 @@ import { buildDemandProduct, demandDigest } from './products.ts'
 import { readDemandAuthorization } from './purchase.ts'
 import { redisDemandStore, demandStoreKey, type DemandStore, type PreparedRecord } from './store.ts'
 type Dependencies = { resolve?: typeof resolveX402; verify?: typeof verifyDemandBeforeWork; build?: typeof buildDemandProduct; record?: typeof recordOfferUsage;
+  recordPurchase?: typeof recordPurchaseAttribution;
   release?: typeof releaseHeldSlot; store?: DemandStore; environment?: string; enabled?: boolean; now?: () => number;
   acquirePreparation?: typeof acquireSlot; releasePreparation?: typeof releaseSlot }
 const json = (body: unknown, status: number, headers: Record<string, string> = {}) => Response.json(body, { status, headers: {
@@ -33,6 +35,7 @@ export function demand6Handlers(id: Demand6Id, dependencies: Dependencies = {}) 
   const verify = dependencies.verify ?? verifyDemandBeforeWork
   const store = dependencies.store ?? redisDemandStore(), now = dependencies.now ?? Date.now
   const record = dependencies.record ?? recordOfferUsage
+  const recordPurchase = dependencies.recordPurchase ?? recordPurchaseAttribution
   const environment = dependencies.environment ?? process.env.VERCEL_ENV ?? process.env.NODE_ENV
   const enabled = dependencies.enabled ?? process.env.X402_DEMAND6_ENABLED === 'true'
   const acquirePreparation = dependencies.acquirePreparation ?? acquireSlot, releasePreparation = dependencies.releasePreparation ?? releaseSlot
@@ -46,6 +49,9 @@ export function demand6Handlers(id: Demand6Id, dependencies: Dependencies = {}) 
         approvedTargets: { endpointScope: 'Exact released Maha x402 resource URLs only; no arbitrary third-party providers.',
           sourceUrls: DEMAND6_SOURCE_REGISTRY.map(source => source.url), historyResource: 'https://www.mahastrategies.com/api/v1/compress' },
         examples: 'Outputs are generated from original synthetic fixtures, not real availability or customer evidence.',
+        buyerGuide: 'https://www.mahastrategies.com/developers/x402-buyer',
+        privacy: 'https://www.mahastrategies.com/developers/x402-privacy',
+        discoveryAttribution: { optionalHeader: 'X-Maha-Discovery-Source', evidence: 'self_reported', purchaseRetentionDays: 90 },
         recovery: 'Save the exact input, private purchase headers and signed authorization before submitting. Retry that same authorization for a retained paid result within 24 hours; never automatically create a replacement payment.' }, 200)
     },
     OPTIONS: async () => new Response(null, { status: 204, headers: { ...API_CORS_HEADERS, Allow: 'GET, POST, OPTIONS' } }),
@@ -87,6 +93,9 @@ export function demand6Handlers(id: Demand6Id, dependencies: Dependencies = {}) 
               const receipt = decodeReceipt(saved.receiptHeader ?? null)
               if (!saved.receiptHeader || !receipt?.success || receipt.network !== binding.network || receipt.payer?.toLowerCase() !== binding.payer || !/^0x[\da-f]{64}$/i.test(receipt.transaction ?? '')) throw new Error()
               await recordResponse(request, 'invocation', 200)
+              await bestEffort(() => recordPurchase({ offerId: id, ...binding, amount: offer.amount,
+                transaction: receipt.transaction!, source: claimedDiscoverySource(saved!.discoverySource),
+                settlement: 'confirmed', responsePrepared: true, replayed: true }))
               return json(validated, 200, { 'PAYMENT-RESPONSE': saved.receiptHeader, 'X-Maha-Payment-Replayed': 'true', 'X-Maha-Result-Retained': 'true' })
             }
           } catch { return failure('purchase_evidence_invalid_operator_review_do_not_repay', 409) }
@@ -102,14 +111,18 @@ export function demand6Handlers(id: Demand6Id, dependencies: Dependencies = {}) 
           let prepared: Awaited<ReturnType<typeof buildDemandProduct>>
           try { prepared = await build(id, input) }
           catch { return failure('bounded_work_unavailable_no_payment', 422) }
-          saved = { inputHash: binding.inputHash, payer: binding.payer, network: binding.network, createdAt: now(), product: prepared, state: 'prepared' }
+          saved = { inputHash: binding.inputHash, payer: binding.payer, network: binding.network, createdAt: now(), product: prepared, state: 'prepared', discoverySource: discoverySourceFrom(request.headers) }
           try { await store.put(key, saved) } catch { return failure('result_retention_unavailable_no_payment', 503) }
         } else if (now() - saved.createdAt > 300000) return failure('prepared_result_stale_operator_review_do_not_repay', 409)
         try { if (!await store.owns(key, lockToken)) return failure('purchase_lock_expired_no_payment', 503) }
         catch { return failure('purchase_lock_unavailable_no_payment', 503) }
         let outcome: Awaited<ReturnType<typeof resolveX402>>
         try { outcome = await resolve(new Request(request.url, { method: 'POST', headers: request.headers, body: JSON.stringify(input) })) }
-        catch { return failure('payment_outcome_unknown_check_before_repaying', 503) }
+        catch {
+          await bestEffort(() => recordPurchase({ offerId: id, ...binding, amount: offer.amount, transaction: null,
+            source: claimedDiscoverySource(saved.discoverySource), settlement: 'unknown', responsePrepared: false, replayed: false }))
+          return failure('payment_outcome_unknown_check_before_repaying', 503)
+        }
         if (outcome.kind === 'challenge') { await recordResponse(request, 'challenge', 402); return json(outcome.body, 402, { 'PAYMENT-REQUIRED': outcome.header }) }
         if (outcome.kind !== 'paid') return failure(outcome.kind === 'refused' ? outcome.code : 'offer_not_enabled', outcome.kind === 'refused' ? outcome.status : 503)
         try {
@@ -117,6 +130,8 @@ export function demand6Handlers(id: Demand6Id, dependencies: Dependencies = {}) 
           let retained = true
           try { await store.put(key, { ...saved, state: 'paid', receiptHeader: outcome.header }) } catch { retained = false }
           await recordResponse(request, 'invocation', 200)
+          await bestEffort(() => recordPurchase({ offerId: id, ...binding, amount: offer.amount, transaction: outcome.transaction,
+            source: claimedDiscoverySource(saved.discoverySource), settlement: 'confirmed', responsePrepared: true, replayed: Boolean(outcome.replayed) }))
           return json(saved.product, 200, { 'PAYMENT-RESPONSE': outcome.header, 'X-Maha-Result-Retained': String(retained), 'X-Maha-Payment-Replayed': String(outcome.replayed ?? false) })
         } finally { await bestEffort(() => release(outcome.slot)) }
       } finally {

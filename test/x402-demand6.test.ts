@@ -24,12 +24,14 @@ import { x402Config, requirementsFor } from '../lib/x402/config.ts'
 import { discoveryExtensionsFor, resourceInfoFor } from '../lib/x402/discovery.ts'
 import { MICRO_MAX_REQUEST_BYTES } from '../lib/x402/micro-contracts.ts'
 import { DEMAND6_MAX_REQUEST_BYTES } from '../lib/x402/demand6/contracts.ts'
+import type { PurchaseAttribution } from '../lib/x402/discovery-attribution.ts'
 import { openApiDocument } from '../lib/openapi.ts'
 const origin = 'https://www.mahastrategies.com'
 const resource = origin + '/api/v1/compress'
 const sourceUrl = origin + '/tools/context-review'
 const sample = (id: Demand6Id) => ({ ...DEMAND6_SAMPLES[id], dataClass: 'synthetic' })
 const demand6Handlers = (id: Demand6Id, dependencies: Parameters<typeof createDemand6Handlers>[1] = {}) => createDemand6Handlers(id, {
+  recordPurchase: async () => {},
   acquirePreparation: async () => ({ admitted: true, active: 1, token: 'mock-preparation' }), releasePreparation: async () => {}, ...dependencies,
 })
 for (const id of DEMAND6_IDS) {
@@ -267,6 +269,21 @@ test('same underlying nonce is not a new purchase when unsigned payment metadata
   parsed.accepted.extra.untrustedAdditionalField = 'does-not-change-the-signed-authorization'
   const changed = await readDemandAuthorization(id, intent.input, new Headers({ ...intent.headers, 'PAYMENT-SIGNATURE': Buffer.from(JSON.stringify(parsed)).toString('base64') }))
   assert.equal(initial.paymentId, changed.paymentId)
+})
+test('purchase attribution pins the first source and identifies recovery without another settlement', async () => {
+  const id = 'csv-import-preflight', intent = await purchase(id)
+  const observations: PurchaseAttribution[] = []
+  const handler = demand6Handlers(id, { environment:'test',now:()=>FIXTURE_NOW,store:memoryDemandStore(),verify:async()=>true,
+    build:(id,input)=>buildDemandProduct(id,input,fixtureDependencies),record:async()=>{},release:async()=>{},
+    recordPurchase:async input=>{observations.push(input)},
+    resolve:async()=>paidFixture(intent.network,DEMAND6_PRODUCTS[id].amount,intent.receiptHeader) })
+  const first=intent.request();first.headers.set('X-Maha-Discovery-Source','alsp')
+  assert.equal((await handler.POST(first)).status,200)
+  const recovery=intent.request();recovery.headers.set('X-Maha-Discovery-Source','reddit')
+  assert.equal((await handler.POST(recovery)).status,200)
+  assert.deepEqual(observations.map(row=>row.source),['alsp','alsp'])
+  assert.deepEqual(observations.map(row=>row.replayed),[false,true])
+  assert.equal(observations[0].paymentId,observations[1].paymentId)
 })
 test('unfundable or unverifiable authorizations cannot start live work or settle', async () => {
   const id = 'live-x402-payment-preflight', intent = await purchase(id)

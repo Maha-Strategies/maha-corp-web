@@ -26,8 +26,8 @@ export const DEMAND6_OFFERS: readonly X402Offer[] = DEMAND6_IDS.map(id => ({
     'Malformed input, unsupported, unavailable or unretainable work is refused before settlement. A supported negative finding is a result, not approval.',
     'Original synthetic discovery examples are not live observations. Do not put private data in this public/synthetic service.'],
   retention: { fullSourceTextStored: false, verbatimExcerptsRetained: id === 'source-bound-research-microbrief' || id === 'live-citation-recheck',
-    retainedFields: ['prepared result up to 64 KiB', 'input hash', 'canonical payment fingerprint', 'payer', 'network', 'creation timestamp', 'settlement receipt'],
-    note: 'Prepared results are retained for at most 24 hours for input-bound same-authorization recovery. Source bodies, CSV cells, raw payment signatures and raw recovery secrets are not stored. Short source quotations may be retained in results. Hashes are not anonymization.' },
+    retainedFields: ['prepared result up to 64 KiB', 'input hash', 'canonical payment fingerprint', 'payer', 'network', 'creation timestamp', 'settlement receipt', 'allowlisted discovery label'],
+    note: 'Prepared results are retained for at most 24 hours for input-bound same-authorization recovery. Source bodies, CSV cells, raw payment signatures and raw recovery secrets are not stored. Short source quotations may be retained in results. Separate private purchase attribution has a 90-day active window and scheduled cleanup; financial/replay ledgers have independent retention. Hashes are not anonymization. See /developers/x402-privacy.' },
   discovery: { input: { ...DEMAND6_SAMPLES[id], dataClass: 'synthetic' }, inputSchema: jsonSchema(DEMAND6_INPUTS[id]),
     output: examples[id], outputSchema: jsonSchema(demandResultSchema(id)), requiredHeaders: {
       'X-Maha-Input-Hash': { algorithm: 'sha256', preimage: 'RFC 8785 canonical JSON of the exact request body', format: 'sha256:<64 lowercase hex>', notes: 'The body and nonce binding are checked before work or settlement.' },

@@ -1,4 +1,5 @@
 import { createAgentInquiryLedger } from '../agent-inquiry-ledger.ts'
+import { DISCOVERY_SOURCES, type ClaimedDiscoverySource } from './discovery-attribution.ts'
 
 export type UsageRow = {
   offer_id: string; event_kind: string; status_class: string; discovery_source: string
@@ -23,7 +24,7 @@ export function summarizeProductUsage(rows: readonly UsageRow[], offerIds: reado
     if (!products[row.offer_id]) continue
     if (!Number.isSafeInteger(row.event_count) || row.event_count < 0
       || !['challenge', 'invocation'].includes(row.event_kind) || !['2xx', '4xx', '5xx'].includes(row.status_class)
-      || !['bazaar', 'maha_canary', 'direct', 'unknown'].includes(row.discovery_source)
+      || !DISCOVERY_SOURCES.includes(row.discovery_source as ClaimedDiscoverySource)
       || !Number.isFinite(Date.parse(row.first_observed_at)) || !Number.isFinite(Date.parse(row.last_observed_at))
       || Date.parse(row.first_observed_at) > Date.parse(row.last_observed_at)) throw new Error('invalid_usage_snapshot')
     const p = products[row.offer_id]

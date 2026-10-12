@@ -91,6 +91,7 @@ next-env.d.ts
 *.sql
 !supabase/migrations/*.sql
 !supabase/seed.sql
+!test/fixtures/x402-attribution-assertions.sql
 interop/**/*-evidence.json
 interop/**/synthetic-evidence.json
 

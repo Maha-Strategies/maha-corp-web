@@ -1,8 +1,9 @@
 import { getRedis } from '../../redis.ts'
 import { scopedRedisKey } from '../../redis-namespace.ts'
 import { DEMAND6_RETAIN_SECONDS, type Demand6Id } from './contracts.ts'
+import type { ClaimedDiscoverySource } from '../discovery-attribution.ts'
 export type PreparedRecord = { inputHash: string; payer: string; network: string; createdAt: number; product: unknown;
-  state: 'prepared' | 'paid'; receiptHeader?: string }
+  state: 'prepared' | 'paid'; receiptHeader?: string; discoverySource?: ClaimedDiscoverySource }
 export type DemandStore = { get(key: string): Promise<PreparedRecord | null>; put(key: string, value: PreparedRecord): Promise<void>;
   lock(key: string, token: string): Promise<boolean>; owns(key: string, token: string): Promise<boolean>; unlock(key: string, token: string): Promise<void> }
 export const demandStoreKey = (id: Demand6Id, paymentId: string) => {
