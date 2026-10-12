@@ -56,6 +56,12 @@ on:
 permissions:
   contents: read
 
+# Explicit bash includes -o pipefail; otherwise `node ... | tee` can hide
+# a failed health check or migration command behind tee's successful exit.
+defaults:
+  run:
+    shell: bash
+
 # Deliberately NOT the production-recovery group used by rollback. An emergency
 # deployment rollback must never be queued behind a database job. Schema and
 # deployment state are recovered independently.
