@@ -52,7 +52,7 @@ jobs:
         run: node --experimental-strip-types scripts/check-x402-settlement-health.ts
       - name: Maintain ledger freshness incident
         if: ${{ always() && !cancelled() }}
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         env:
           HEALTH_OUTCOME: ${{ steps.health.outcome }}
         with:
@@ -127,7 +127,7 @@ jobs:
 
       - name: Open or resolve settlement monitoring incident
         if: ${{ always() && !cancelled() }}
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         env:
           HEALTH_OUTCOME: ${{ steps.health.outcome }}
           WATCH_OUTCOME: ${{ steps.watch.outcome }}
